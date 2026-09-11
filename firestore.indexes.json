@@ -1,0 +1,116 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "roster",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "studentId",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attempts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "processed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "receivedAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attempts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "receivedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attempts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "receivedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "statStates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "unitId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "version",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "attempts",
+      "fieldPath": "answers",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "chunks",
+      "fieldPath": "questions",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "reports",
+      "fieldPath": "modes",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "statStates",
+      "fieldPath": "questions",
+      "indexes": []
+    }
+  ]
+}

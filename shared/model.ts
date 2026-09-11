@@ -1,0 +1,276 @@
+export type Mode = 'quiz' | 'flashcard' | 'review';
+export type Phase = 'before' | 'during' | 'after';
+export interface Question {
+  id: string;
+  text: string;
+  options: { id: string; text: string }[];
+  answer: string;
+  explanation: string;
+  concept?: string;
+  image?: string;
+  socratic?: {
+    concept?: string;
+    misconception?: string;
+    hint1?: string;
+    hint2?: string;
+    hint3?: string;
+  };
+  remedialUrl?: string;
+}
+export interface Activity {
+  id: string;
+  title: string;
+  type: 'html' | 'youtube' | 'link' | 'quiz';
+  phase: Phase;
+  url: string;
+  start?: number;
+  end?: number;
+  description: string;
+}
+export interface Unit {
+  id: string;
+  title: string;
+  description: string;
+  required: boolean;
+  threshold: number;
+  opensAt: string;
+  dueAt: string;
+  bankVersion: string;
+  activities: Activity[];
+}
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  term: string;
+  classIds: string[];
+  units: Unit[];
+  sheetsUrl: string;
+  publishedAt?: number;
+  classOverrides?: Record<
+    string,
+    Record<string, Partial<Pick<Unit, 'threshold' | 'required' | 'opensAt' | 'dueAt'>>>
+  >;
+}
+export interface Profile {
+  uid: string;
+  email: string;
+  name: string;
+  studentId: string;
+  classId: string;
+  teacher: boolean;
+  enabled: boolean;
+}
+export interface Roster {
+  email: string;
+  name: string;
+  studentId: string;
+  classId: string;
+  enabled: boolean;
+}
+export interface Answer {
+  questionId: string;
+  selected: string;
+  correct: boolean;
+  seconds: number;
+}
+export interface Attempt {
+  id: string;
+  courseId: string;
+  unitId: string;
+  version: string;
+  mode: Mode;
+  answers: Answer[];
+  score: number;
+  full: boolean;
+  clientAt: number;
+  duration: number;
+  receivedAt?: number;
+  uid?: string;
+  classId?: string;
+  processed?: boolean;
+}
+export interface Progress {
+  units: Record<
+    string,
+    { best: number; attempts: number; updatedAt: number; wrong?: Record<string, string[]> }
+  >;
+  activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
+}
+export interface Stat {
+  students: number;
+  wrong: number;
+  options: Record<string, number>;
+  reviewStudents: number;
+  reviewWrong: number;
+  reviews: number;
+}
+export interface Report {
+  id: string;
+  unitId: string;
+  version: string;
+  classId: string;
+  updatedAt: number;
+  modes: Record<string, Record<string, Stat>>;
+}
+export const emptyProgress = (): Progress => ({ units: {}, activities: {} });
+export function forClass(course: Course, classId: string): Course {
+  return {
+    ...course,
+    units: course.units.map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
+  };
+}
+export const phases: Record<Phase, string> = {
+  before: '課前準備',
+  during: '課堂學習',
+  after: '課後練習',
+};
+export const modes: Record<Mode, string> = {
+  quiz: '一般測驗',
+  flashcard: '閃卡作答',
+  review: '錯題複習',
+};
+export function complete(unit: Unit, p: Progress) {
+  return (p.units[unit.id]?.best ?? -1) >= unit.threshold;
+}
+export function completion(course: Course, p: Progress) {
+  const units = course.units.filter((u) => u.required);
+  return { done: units.filter((u) => complete(u, p)).length, total: units.length };
+}
+export function safeId(s: string) {
+  return /^[a-zA-Z0-9_-]{1,100}$/.test(s);
+}
+export function youtubeId(raw: string) {
+  try {
+    const u = new URL(raw);
+    let id = '';
+    if (u.hostname === 'youtu.be') id = u.pathname.slice(1);
+    else if (['youtube.com', 'www.youtube.com', 'm.youtube.com'].includes(u.hostname)) {
+      id =
+        u.searchParams.get('v') ||
+        (/^\/(shorts|embed)\//.test(u.pathname) ? u.pathname.split('/')[2] : '');
+    }
+    return /^[\w-]{11}$/.test(id) ? id : null;
+  } catch {
+    return null;
+  }
+}
+export function validateQuestions(qs: Question[]) {
+  const errors: string[] = [];
+  const ids = new Set<string>();
+  if (!qs.length || qs.length > 100) errors.push('每個单元需 1–100 題；更多題目請拆分單元。');
+  qs.forEach((q, i) => {
+    if (!safeId(q.id) || ids.has(q.id)) errors.push(`第 ${i + 1} 題 ID 無效或重複`);
+    ids.add(q.id);
+    if (!q.text || !Array.isArray(q.options) || q.options.length < 2 || q.options.length > 8)
+      errors.push(`第 ${i + 1} 題題幹或選項不完整`);
+    else if (
+      new Set(q.options.map((o) => o.id)).size !== q.options.length ||
+      q.options.some((o) => !safeId(o.id) || !o.text) ||
+      !q.options.some((o) => o.id === q.answer)
+    )
+      errors.push(`第 ${i + 1} 題選項 ID 或正解無效`);
+  });
+  return errors;
+}
+export function validateRoster(rows: Roster[]) {
+  const errors: string[] = [];
+  const emails = new Set<string>(),
+    ids = new Set<string>();
+  rows.forEach((r, i) => {
+    if (
+      !/^[^@\s]+@ctcn\.edu\.tw$/.test(r.email) ||
+      !r.name ||
+      !safeId(r.studentId) ||
+      !safeId(r.classId)
+    )
+      errors.push(`第 ${i + 1} 列：信箱、姓名、學號或班級不完整`);
+    if (emails.has(r.email) || ids.has(r.studentId)) errors.push(`第 ${i + 1} 列：信箱或學號重複`);
+    emails.add(r.email);
+    ids.add(r.studentId);
+  });
+  return errors;
+}
+export function grade(
+  qs: Question[],
+  selections: Record<string, string>,
+  times: Record<string, number>,
+): Answer[] {
+  return qs.map((q) => ({
+    questionId: q.id,
+    selected: selections[q.id] || '',
+    correct: selections[q.id] === q.answer,
+    seconds: times[q.id] || 0,
+  }));
+}
+export function applyAttempt(p: Progress, a: Attempt): Progress {
+  if (a.mode === 'review') return p;
+  const old = p.units[a.unitId];
+  const wrong = {
+    ...old?.wrong,
+    [a.version]: [
+      ...new Set([
+        ...(old?.wrong?.[a.version] || []),
+        ...a.answers.filter((x) => !x.correct).map((x) => x.questionId),
+      ]),
+    ],
+  };
+  return {
+    ...p,
+    units: {
+      ...p.units,
+      [a.unitId]: {
+        best: a.full ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
+        attempts: (old?.attempts || 0) + 1,
+        wrong,
+        updatedAt: a.receivedAt || a.clientAt,
+      },
+    },
+  };
+}
+export interface Seen {
+  first: Partial<Record<Mode | 'all', Answer>>;
+  review?: Answer;
+}
+export function aggregate(modesMap: Report['modes'], seen: Record<string, Seen>, a: Attempt) {
+  for (const answer of a.answers) {
+    const s = (seen[answer.questionId] ??= { first: {} });
+    seen[answer.questionId] = s;
+    for (const mode of [a.mode, 'all']) {
+      const map = (modesMap[mode] ??= {});
+      modesMap[mode] = map;
+      const stat = (map[answer.questionId] ??= {
+        students: 0,
+        wrong: 0,
+        options: {},
+        reviewStudents: 0,
+        reviewWrong: 0,
+        reviews: 0,
+      });
+      map[answer.questionId] = stat;
+      if (a.mode === 'review') {
+        stat.reviews++;
+        if (!s.review) stat.reviewStudents++;
+        stat.reviewWrong += (answer.correct ? 0 : 1) - (s.review && !s.review.correct ? 1 : 0);
+      } else if (!s.first[mode as Mode | 'all']) {
+        stat.students++;
+        stat.wrong += answer.correct ? 0 : 1;
+        stat.options[answer.selected || 'unanswered'] =
+          (stat.options[answer.selected || 'unanswered'] || 0) + 1;
+        s.first[mode as Mode | 'all'] = answer;
+      }
+    }
+    if (a.mode === 'review') s.review = answer;
+  }
+}
+
+// GitHub Pages 及其自訂網域皆接受；不接受程式碼、資料或含帳密的網址。
+export function materialUrl(value: unknown): string | null {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === 'https:' && !url.username && !url.password ? url.href : null;
+  } catch {
+    return null;
+  }
+}

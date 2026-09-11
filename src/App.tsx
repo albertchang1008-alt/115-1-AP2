@@ -1,0 +1,2278 @@
+import { useEffect, useState } from 'react';
+import {
+  LayoutDashboard,
+  BookOpen,
+  Users,
+  ChartNoAxesCombined,
+  Settings,
+  Eye,
+  Plus,
+  ArrowUpRight,
+  GraduationCap,
+  LogOut,
+  FileChartColumn,
+  CheckCircle2,
+  PanelLeftClose,
+  Search,
+  Upload,
+  RefreshCw,
+  Download,
+  ChevronRight,
+  Monitor,
+  Tablet,
+  Smartphone,
+  ArrowLeft,
+  Layers,
+} from 'lucide-react';
+import Papa from 'papaparse';
+import { VERSION } from '../shared/version';
+import {
+  materialUrl,
+  Course,
+  Unit,
+  Activity,
+  Profile,
+  Question,
+  Report,
+  Roster,
+  Progress,
+  completion,
+  complete,
+  emptyProgress,
+  validateQuestions,
+  validateRoster,
+  phases,
+  modes,
+  youtubeId,
+  forClass,
+} from '../shared/model';
+import {
+  API,
+  cloud,
+  configured,
+  projectId,
+  login,
+  logout,
+  watchAuth,
+  auth,
+  memoryApi,
+  previewApi,
+  cachedBank,
+} from './service';
+import Student from './Student';
+const tabs = [
+  ['overview', '教學總覽', LayoutDashboard],
+  ['courses', '課程與教材', BookOpen],
+  ['bank', '題庫管理', Layers],
+  ['roster', '班級名冊', Users],
+  ['completion', '完成度看板', CheckCircle2],
+  ['analysis', '題目分析', ChartNoAxesCombined],
+  ['reports', '報表與結算', FileChartColumn],
+  ['settings', '平台設定', Settings],
+] as const;
+function download(name: string, data: any[]) {
+  const csv =
+    '\ufeff' +
+    Papa.unparse(
+      data.map((row) =>
+        Object.fromEntries(
+          Object.entries(row).map(([k, v]) => [
+            k,
+            typeof v === 'string' && /^[=+@\-\t\r]/.test(v) ? "'" + v : v,
+          ]),
+        ),
+      ),
+    );
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+const uid = () => crypto.randomUUID();
+const makeUnit = (): Unit => ({
+  id: uid(),
+  title: '新單元',
+  description: '',
+  required: true,
+  threshold: 80,
+  opensAt: '',
+  dueAt: '',
+  bankVersion: '',
+  activities: [],
+});
+const makeCourse = (): Course => ({
+  id: uid(),
+  title: '新課程',
+  description: '',
+  term: '115 學年度第 1 學期',
+  classIds: ['class-a'],
+  units: [makeUnit()],
+  sheetsUrl: '',
+});
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="field">
+      <span>{label}</span>
+      {children}
+    </label>
+  );
+}
+function ClassOverrides({
+  course,
+  unit,
+  onChange,
+}: {
+  course: Course;
+  unit: Unit;
+  onChange: (v: Course['classOverrides']) => void;
+}) {
+  const [cl, setCl] = useState(course.classIds[0] || '');
+  const value = course.classOverrides?.[cl]?.[unit.id] || {};
+  function change(p: any) {
+    onChange({
+      ...course.classOverrides,
+      [cl]: { ...course.classOverrides?.[cl], [unit.id]: { ...value, ...p } },
+    });
+  }
+  return (
+    <details>
+      <summary>各班級的門檻與開放安排</summary>
+      <p className="muted">未設定時沿用單元共用值，教材內容保持共用。</p>
+      <Field label="設定班級">
+        <select value={cl} onChange={(e) => setCl(e.target.value)}>
+          {course.classIds.map((c) => (
+            <option key={c}>{c}</option>
+          ))}
+        </select>
+      </Field>
+      <div className="formgrid">
+        <Field label="此班達標分數">
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={value.threshold ?? unit.threshold}
+            onChange={(e) => change({ threshold: Number(e.target.value) })}
+          />
+        </Field>
+        <Field label="此班開放時間">
+          <input
+            type="datetime-local"
+            value={value.opensAt ?? unit.opensAt}
+            onChange={(e) => change({ opensAt: e.target.value })}
+          />
+        </Field>
+        <Field label="此班完成期限">
+          <input
+            type="datetime-local"
+            value={value.dueAt ?? unit.dueAt}
+            onChange={(e) => change({ dueAt: e.target.value })}
+          />
+        </Field>
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={value.required ?? unit.required}
+            onChange={(e) => change({ required: e.target.checked })}
+          />
+          此班列為必做
+        </label>
+      </div>
+      <button
+        onClick={() => {
+          const next = structuredClone(course.classOverrides || {});
+          if (next[cl]) delete next[cl][unit.id];
+          onChange(next);
+        }}
+      >
+        恢復共用設定
+      </button>
+    </details>
+  );
+}
+function Empty({ title, detail }: { title: string; detail: string }) {
+  return (
+    <div className="empty">
+      <BookOpen size={32} />
+      <h3>{title}</h3>
+      <p>{detail}</p>
+    </div>
+  );
+}
+export default function App() {
+  const [api, setApi] = useState<API>(cloud),
+    [profile, setProfile] = useState<Profile | null>(null),
+    [courses, setCourses] = useState<Course[]>([]),
+    [courseId, setCourseId] = useState(''),
+    [tab, setTab] = useState(location.hash.slice(1) || 'overview'),
+    [error, setError] = useState(''),
+    [toast, setToast] = useState(''),
+    [loading, setLoading] = useState(false),
+    [mobile, setMobile] = useState(false);
+  const [preview, setPreview] = useState<{
+      api: API;
+      course: Course;
+      unit?: string;
+      activity?: string;
+      draft: boolean;
+    } | null>(null),
+    [previewClass, setPreviewClass] = useState(''),
+    [width, setWidth] = useState('desktop'),
+    [sim, setSim] = useState('none'),
+    [previewKey, setPreviewKey] = useState(0);
+  const course = courses.find((c) => c.id === courseId) || courses[0];
+  function notify(s: string) {
+    setToast(s);
+  }
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(''), 7000);
+    return () => clearTimeout(t);
+  }, [toast]);
+  async function boot(service = api) {
+    setLoading(true);
+    setError('');
+    try {
+      const data = await service.call('bootstrap');
+      setProfile(data.profile);
+      setCourses(data.courses);
+      setCourseId((old) => old || data.courses[0]?.id || '');
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    if (api.preview) {
+      void boot(api);
+      return;
+    }
+    return watchAuth(() => {
+      if (auth?.currentUser) void boot(cloud);
+      else setProfile(null);
+    });
+  }, [api]);
+  useEffect(() => {
+    const fn = () => setTab(location.hash.slice(1) || 'overview');
+    window.addEventListener('hashchange', fn);
+    return () => window.removeEventListener('hashchange', fn);
+  }, []);
+  function nav(t: string) {
+    location.hash = t;
+    setTab(t);
+    setMobile(false);
+  }
+  useEffect(() => {
+    const context = (document as any).modelContext;
+    if (!context?.registerTool || !profile?.teacher) return;
+    const controller = new AbortController();
+    const tool = {
+      name: 'navigate_teacher_workspace',
+      description: '切換教師後台目前頁面；不發布或修改課程。',
+      inputSchema: {
+        type: 'object',
+        properties: { page: { type: 'string', enum: tabs.map((t) => t[0]) } },
+        required: ['page'],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: false },
+      execute: async (input: any) => {
+        if (!input || Object.keys(input).length !== 1 || !tabs.some((t) => t[0] === input.page))
+          throw Error('無效的後台頁面');
+        nav(input.page);
+        return { page: input.page };
+      },
+    };
+    try {
+      Promise.resolve(context.registerTool(tool, { signal: controller.signal })).catch(() => {});
+    } catch {}
+    return () => controller.abort();
+  }, [profile?.uid]);
+  async function save(c: Course) {
+    await api.call('saveCourse', { course: c });
+    setCourses((old) =>
+      old.some((x) => x.id === c.id) ? old.map((x) => (x.id === c.id ? c : x)) : [...old, c],
+    );
+    setCourseId(c.id);
+  }
+  async function openPreview(c: Course, draft = true, unit?: string, activity?: string) {
+    try {
+      let chosen = c;
+      if (draft) await save(c);
+      else if (api.preview) chosen = await api.call('getPublished', { courseId: c.id });
+      else chosen = await api.call('getPublished', { courseId: c.id });
+      setPreviewClass(chosen.classIds[0]);
+      setPreview({
+        api: await previewApi(api, chosen, draft),
+        course: chosen,
+        unit,
+        activity,
+        draft,
+      });
+      setPreviewKey((k) => k + 1);
+      setSim('none');
+    } catch (e) {
+      notify((e as Error).message);
+    }
+  }
+  if (!profile)
+    return (
+      <div className="login">
+        <div className="login-art">
+          <div className="brand">
+            <GraduationCap />
+            課序<span>COURSE SPACE</span>
+          </div>
+          <h1>
+            讓每一次練習，
+            <br />
+            看得見進步。
+          </h1>
+          <p>
+            課程、教材、作答與學習歷程，
+            <br />
+            從同一個入口開始。
+          </p>
+          <div className="login-foot">
+            LEARN · PRACTICE · REFLECT <span>v{VERSION}</span>
+          </div>
+        </div>
+        <div className="login-form">
+          <span className="eyebrow">WELCOME BACK</span>
+          <h2>進入你的學習空間</h2>
+          <p>
+            學生請使用學校 Google 帳號。
+            <br />
+            教師登入後將進入教學後台。
+          </p>
+          {!configured && (
+            <div className="notice">
+              尚未連接新的 Firebase 專案。可先進入操作示例，所有資料僅留在本次頁面。
+            </div>
+          )}
+          {error && (
+            <p className="error" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            className="primary loginbutton"
+            disabled={!configured || loading}
+            onClick={() => {
+              setError('');
+              login().catch((e) => setError(e.message));
+            }}
+          >
+            {loading ? '登入中…' : '使用 Google 帳號登入'}
+            <ArrowUpRight size={18} />
+          </button>
+          <p className="muted">@ctcn.edu.tw · 需列入課程名冊</p>
+          <button className="linkbutton" onClick={() => setApi(memoryApi())}>
+            查看操作示例（不連接正式資料） →
+          </button>
+        </div>
+      </div>
+    );
+  if (preview)
+    return (
+      <div className="preview-shell">
+        <div className="previewbar">
+          <button onClick={() => setPreview(null)}>
+            <ArrowLeft size={16} />
+            返回教師後台
+          </button>
+          <strong>
+            <Eye size={17} />
+            教師預覽，不計入紀錄
+          </strong>
+          <span className="badge">{preview.draft ? '目前草稿' : '已發布版本'}</span>
+          <select
+            aria-label="預覽班級"
+            value={previewClass}
+            onChange={(e) => {
+              setPreviewClass(e.target.value);
+              setPreviewKey((k) => k + 1);
+            }}
+          >
+            {preview.course.classIds.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <select aria-label="模擬進度" value={sim} onChange={(e) => setSim(e.target.value)}>
+            <option value="none">尚未開始</option>
+            <option value="learning">學習中</option>
+            <option value="complete">已完成</option>
+          </select>
+          <div className="segmented">
+            {[
+              ['desktop', Monitor],
+              ['tablet', Tablet],
+              ['mobile', Smartphone],
+            ].map(([v, Icon]: any) => (
+              <button
+                aria-label={v}
+                key={v}
+                className={width === v ? 'active' : ''}
+                onClick={() => setWidth(v)}
+              >
+                <Icon size={17} />
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={async () => {
+              setPreview({ ...preview, api: await previewApi(api, preview.course, preview.draft) });
+              setPreviewKey((k) => k + 1);
+              setSim('none');
+            }}
+          >
+            重設
+          </button>
+        </div>
+        <div className={'previewdevice ' + width}>
+          <Student
+            key={previewKey}
+            api={preview.api}
+            course={forClass(preview.course, previewClass)}
+            classLabel={previewClass}
+            uid="preview-user"
+            preview
+            initialUnit={preview.unit}
+            initialActivity={preview.activity}
+            sim={sim}
+            notify={notify}
+          />
+        </div>
+        {toast && (
+          <div className="toast" role="status">
+            {toast}
+            <button onClick={() => setToast('')}>×</button>
+          </div>
+        )}
+      </div>
+    );
+  if (!profile.teacher)
+    return (
+      <>
+        <div className="student-nav">
+          <div className="brand">
+            <GraduationCap />
+            課序
+          </div>
+          <select
+            aria-label="選擇課程"
+            value={course?.id || ''}
+            onChange={(e) => setCourseId(e.target.value)}
+          >
+            {courses.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.title}
+              </option>
+            ))}
+          </select>
+          <span>
+            {profile.name} · {profile.classId}
+          </span>
+          <button onClick={() => logout()}>登出</button>
+          <small>v{VERSION}</small>
+        </div>
+        {course ? (
+          <Student
+            key={course.id}
+            api={api}
+            course={course}
+            classLabel={profile.classId}
+            uid={profile.uid}
+            notify={notify}
+          />
+        ) : (
+          <Empty title="尚無已發布課程" detail="教師發布課程後，就會出現在這裡。" />
+        )}
+        {toast && <div className="toast">{toast}</div>}
+      </>
+    );
+  return (
+    <div className="app">
+      <aside className={mobile ? 'sidebar open' : 'sidebar'}>
+        <div className="brand">
+          <GraduationCap size={28} />
+          <div>
+            課序<small>教師工作空間</small>
+          </div>
+        </div>
+        <div className="workspace-label">TEACHING WORKSPACE</div>
+        <nav>
+          {tabs.map(([id, label, Icon]) => (
+            <button className={tab === id ? 'active' : ''} key={id} onClick={() => nav(id)}>
+              <Icon size={19} />
+              {label}
+              {tab === id && <ChevronRight size={14} />}
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar-bottom">
+          <div className="avatar">師</div>
+          <div>
+            <strong>{api.preview ? '操作示例' : profile.name}</strong>
+            <small>
+              {api.preview ? '本次頁面暫存' : '教師帳號'} · v{VERSION}
+            </small>
+          </div>
+          <button
+            aria-label="登出"
+            onClick={() => {
+              if (api.preview) {
+                setApi(cloud);
+                setProfile(null);
+                setCourses([]);
+              } else void logout();
+            }}
+          >
+            <LogOut size={17} />
+          </button>
+        </div>
+      </aside>
+      <main>
+        <div className="topbar">
+          <button
+            className="mobile-toggle"
+            aria-label="切換選單"
+            onClick={() => setMobile(!mobile)}
+          >
+            <PanelLeftClose />
+          </button>
+          <div className="breadcrumb">
+            教師後台 <ChevronRight size={14} />{' '}
+            <b>{tabs.find((t) => t[0] === tab)?.[1] || '教學總覽'}</b>
+          </div>
+          <div className="top-actions">
+            <span className="statuschip">{api.preview ? '操作示例 · 無正式資料' : '已登入'}</span>
+            {tab !== 'courses' && (
+              <button disabled={!course} onClick={() => course && openPreview(course)}>
+                <Eye size={17} />
+                預覽前台
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="workspace">
+          {api.preview && (
+            <div className="demo-banner">
+              這是操作示例：課程編輯、作答與報表只保留在本次頁面，重新整理即清除。
+            </div>
+          )}
+          <div className="contextrow">
+            <span>{course?.term || '新增你的第一門課程'}</span>
+            <select
+              aria-label="目前課程"
+              value={course?.id || ''}
+              onChange={(e) => setCourseId(e.target.value)}
+            >
+              {courses.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          {tab === 'courses' ? (
+            <CourseEditor
+              key={course?.id || 'new'}
+              course={course}
+              api={api}
+              save={save}
+              preview={openPreview}
+              notify={notify}
+              newCourse={() => {
+                const c = makeCourse();
+                setCourses([...courses, c]);
+                setCourseId(c.id);
+              }}
+            />
+          ) : !course ? (
+            <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
+          ) : tab === 'bank' ? (
+            <Bank course={course} api={api} save={save} notify={notify} />
+          ) : tab === 'roster' ? (
+            <RosterPage course={course} api={api} notify={notify} />
+          ) : tab === 'completion' ? (
+            <CompletionPage course={course} api={api} notify={notify} />
+          ) : tab === 'analysis' ? (
+            <Analysis course={course} api={api} notify={notify} />
+          ) : tab === 'reports' ? (
+            <ReportsPage course={course} api={api} notify={notify} />
+          ) : tab === 'settings' ? (
+            <SettingsPage course={course} api={api} notify={notify} />
+          ) : (
+            <Overview course={course} api={api} notify={notify} navigate={nav} />
+          )}
+        </div>
+      </main>
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+          <button onClick={() => setToast('')}>×</button>
+        </div>
+      )}
+    </div>
+  );
+}
+function Overview({
+  course,
+  api,
+  notify,
+  navigate,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+  navigate: (s: string) => void;
+}) {
+  const [report, setReport] = useState<Report[]>([]),
+    [time, setTime] = useState<number | null>(null);
+  useEffect(() => {
+    api
+      .call('getReports', { courseId: course.id, classId: course.classIds[0] })
+      .then((r) => {
+        setReport(r.rows);
+        setTime(r.job?.updatedAt || null);
+      })
+      .catch((e) => notify(e.message));
+  }, [course.id, api]);
+  const weak = report
+    .flatMap((r) => Object.entries(r.modes.all || {}).map(([id, s]) => ({ id, ...s })))
+    .filter((s) => s.students > 0)
+    .sort((a, b) => b.wrong / b.students - a.wrong / a.students)
+    .slice(0, 3);
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">TEACHING OVERVIEW</span>
+          <h1>今天，從學習現況開始。</h1>
+          <p>安排下一步教學，也看見每一次練習的進展。</p>
+        </div>
+        <button className="primary" onClick={() => navigate('courses')}>
+          <Plus size={17} />
+          安排學習活動
+        </button>
+      </header>
+      <div className="metricgrid">
+        <Metric title="課程單元" value={course.units.length} note="依課前・課中・課後安排" />
+        <Metric
+          title="必做單元"
+          value={course.units.filter((u) => u.required).length}
+          note="供平常分數完成度採計"
+        />
+        <Metric
+          title="學習活動"
+          value={course.units.reduce((n, u) => n + u.activities.length, 0)}
+          note="教材參與獨立記錄"
+        />
+        <Metric title="授課班級" value={course.classIds.length} note="名冊限制與班級權限" />
+      </div>
+      <div className="overviewgrid">
+        <section className="panel">
+          <div className="sectionhead">
+            <div>
+              <span className="eyebrow">COURSE PATH</span>
+              <h2>課程進行安排</h2>
+            </div>
+            <button className="linkbutton" onClick={() => navigate('courses')}>
+              管理課程 ↗
+            </button>
+          </div>
+          {course.units.map((u, i) => (
+            <div className="timeline" key={u.id}>
+              <span className="timeline-no">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{u.title}</h3>
+                <p>
+                  {u.activities.length} 項活動 · 達標 {u.threshold} 分
+                  {u.dueAt ? ' · ' + new Date(u.dueAt).toLocaleDateString() : ''}
+                </p>
+              </div>
+              <span className={'badge ' + (u.bankVersion ? 'green' : '')}>
+                {u.bankVersion ? '題庫已連接' : '待設定題庫'}
+              </span>
+            </div>
+          ))}
+        </section>
+        <section className="panel darkpanel">
+          <span className="eyebrow">TEACHING INSIGHTS</span>
+          <h2>值得再講一次的題目</h2>
+          <p className="muted">
+            {course.classIds[0]} · {time ? new Date(time).toLocaleString() : '尚未產生統計'}
+          </p>
+          {weak.length ? (
+            weak.map((q) => (
+              <div className="weak" key={q.id}>
+                <span>{q.id}</span>
+                <strong>
+                  {Math.round((q.wrong / q.students) * 100)}%<small>首次答錯</small>
+                </strong>
+              </div>
+            ))
+          ) : (
+            <p className="insight-empty">
+              有學生作答並更新報表後，
+              <br />
+              這裡會呈現共同的困難。
+            </p>
+          )}
+          <button onClick={() => navigate('analysis')}>
+            查看題目分析 <ArrowUpRight size={17} />
+          </button>
+        </section>
+      </div>
+      <section className="quickgrid">
+        {[
+          ['completion', '確認誰還沒完成', '依班級查看待完成單元與學生'],
+          ['roster', '管理本學期名冊', '匯入學校信箱並安排班級'],
+          ['reports', '準備平常分數', '保存完成度結算快照'],
+        ].map(([id, title, detail]) => (
+          <button key={id} onClick={() => navigate(id)}>
+            <h3>
+              {title} <ArrowUpRight size={18} />
+            </h3>
+            <p>{detail}</p>
+          </button>
+        ))}
+      </section>
+    </>
+  );
+}
+function Metric({ title, value, note }: { title: string; value: number | string; note: string }) {
+  return (
+    <div className="metric">
+      <span>{title}</span>
+      <strong>{value}</strong>
+      <small>{note}</small>
+    </div>
+  );
+}
+function CourseEditor({
+  course,
+  api,
+  save,
+  preview,
+  notify,
+  newCourse,
+}: {
+  course?: Course;
+  api: API;
+  save: (c: Course) => Promise<void>;
+  preview: (c: Course, draft?: boolean, u?: string, a?: string) => void;
+  notify: (s: string) => void;
+  newCourse: () => void;
+}) {
+  const [c, setC] = useState<Course>(structuredClone(course || makeCourse())),
+    [idx, setIdx] = useState(0),
+    [busy, setBusy] = useState(false);
+  const u = c.units[idx];
+  function patchUnit(p: Partial<Unit>) {
+    setC({ ...c, units: c.units.map((x, i) => (i === idx ? { ...x, ...p } : x)) });
+  }
+  async function action(publish = false) {
+    setBusy(true);
+    try {
+      await save(c);
+      if (publish) await api.call('publishCourse', { courseId: c.id });
+      notify(publish ? '課程已發布' : '草稿已保存');
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  function patchActivity(i: number, p: Partial<Activity>) {
+    patchUnit({ activities: u.activities.map((a, j) => (j === i ? { ...a, ...p } : a)) });
+  }
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">COURSE STUDIO</span>
+          <h1>課程與教材</h1>
+          <p>編輯草稿，預覽學生看到的內容，再發布。</p>
+        </div>
+        <div className="actions">
+          <button onClick={newCourse}>
+            <Plus size={16} />
+            新增課程
+          </button>
+          <button disabled={busy} onClick={() => action()}>
+            保存草稿
+          </button>
+          <button className="primary" disabled={busy} onClick={() => action(true)}>
+            發布課程
+          </button>
+        </div>
+      </header>
+      <section className="panel">
+        <div className="formgrid">
+          <Field label="課程名稱">
+            <input value={c.title} onChange={(e) => setC({ ...c, title: e.target.value })} />
+          </Field>
+          <Field label="學期">
+            <input value={c.term} onChange={(e) => setC({ ...c, term: e.target.value })} />
+          </Field>
+          <Field label="班級 ID（逗號分隔）">
+            <input
+              value={c.classIds.join(',')}
+              onChange={(e) =>
+                setC({
+                  ...c,
+                  classIds: e.target.value
+                    .split(',')
+                    .map((x) => x.trim())
+                    .filter(Boolean),
+                })
+              }
+            />
+          </Field>
+          <Field label="課程說明">
+            <input
+              value={c.description}
+              onChange={(e) => setC({ ...c, description: e.target.value })}
+            />
+          </Field>
+        </div>
+        <div className="actions">
+          <button onClick={() => preview(c, true)}>
+            <Eye size={16} />
+            保存並預覽草稿
+          </button>
+          <button onClick={() => preview(c, false)}>預覽已發布版本</button>
+        </div>
+      </section>
+      <div className="editorgrid">
+        <aside className="panel unitmenu">
+          <div className="sectionhead">
+            <h3>單元安排</h3>
+            <button
+              aria-label="新增單元"
+              onClick={() => {
+                setC({ ...c, units: [...c.units, makeUnit()] });
+                setIdx(c.units.length);
+              }}
+            >
+              <Plus size={17} />
+            </button>
+          </div>
+          {c.units.map((unit, i) => (
+            <button className={idx === i ? 'selected' : ''} key={unit.id} onClick={() => setIdx(i)}>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              {unit.title}
+            </button>
+          ))}
+        </aside>
+        {u && (
+          <section className="panel">
+            <div className="sectionhead">
+              <h2>單元設定</h2>
+              <button onClick={() => preview(c, true, u.id)}>
+                <Eye size={16} />
+                預覽單元
+              </button>
+            </div>
+            <div className="formgrid">
+              <Field label="單元名稱">
+                <input value={u.title} onChange={(e) => patchUnit({ title: e.target.value })} />
+              </Field>
+              <Field label="達標分數">
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={u.threshold}
+                  onChange={(e) => patchUnit({ threshold: Number(e.target.value) })}
+                />
+              </Field>
+              <Field label="開放時間">
+                <input
+                  type="datetime-local"
+                  value={u.opensAt}
+                  onChange={(e) => patchUnit({ opensAt: e.target.value })}
+                />
+              </Field>
+              <Field label="完成期限（逾期仍可練習）">
+                <input
+                  type="datetime-local"
+                  value={u.dueAt}
+                  onChange={(e) => patchUnit({ dueAt: e.target.value })}
+                />
+              </Field>
+            </div>
+            <Field label="單元說明">
+              <textarea
+                value={u.description}
+                onChange={(e) => patchUnit({ description: e.target.value })}
+              />
+            </Field>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={u.required}
+                onChange={(e) => patchUnit({ required: e.target.checked })}
+              />
+              列為平常分數的必做單元
+            </label>
+            <div className="actions">
+              <button
+                disabled={idx === 0}
+                onClick={() => {
+                  const units = [...c.units];
+                  [units[idx - 1], units[idx]] = [units[idx], units[idx - 1]];
+                  setC({ ...c, units });
+                  setIdx(idx - 1);
+                }}
+              >
+                單元上移
+              </button>
+              <span className="muted">ID：{u.id}</span>
+            </div>
+            <ClassOverrides
+              course={c}
+              unit={u}
+              onChange={(classOverrides) => setC({ ...c, classOverrides })}
+            />
+            <hr />
+            <div className="sectionhead">
+              <h2>學習活動</h2>
+              <button
+                onClick={() =>
+                  patchUnit({
+                    activities: [
+                      ...u.activities,
+                      {
+                        id: uid(),
+                        title: '新活動',
+                        type: 'youtube',
+                        phase: 'before',
+                        url: '',
+                        description: '',
+                      },
+                    ],
+                  })
+                }
+              >
+                <Plus size={16} />
+                新增活動
+              </button>
+            </div>
+            {u.activities.map((a, i) => (
+              <details className="activityeditor" key={a.id} open>
+                <summary>
+                  {phases[a.phase]} · {a.title}
+                </summary>
+                <div className="formgrid">
+                  <Field label="活動名稱">
+                    <input
+                      value={a.title}
+                      onChange={(e) => patchActivity(i, { title: e.target.value })}
+                    />
+                  </Field>
+                  <Field label="階段">
+                    <select
+                      value={a.phase}
+                      onChange={(e) => patchActivity(i, { phase: e.target.value as any })}
+                    >
+                      {Object.entries(phases).map(([k, v]) => (
+                        <option key={k} value={k}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field label="類型">
+                    <select
+                      value={a.type}
+                      onChange={(e) => patchActivity(i, { type: e.target.value as any })}
+                    >
+                      <option value="youtube">YouTube 影片</option>
+                      <option value="html">互動 HTML 教材</option>
+                      <option value="link">外部教材</option>
+                      <option value="quiz">單元題庫練習</option>
+                    </select>
+                  </Field>
+                  {a.type !== 'quiz' && a.type !== 'html' && (
+                    <Field label="教材連結">
+                      <input
+                        type="url"
+                        value={a.url}
+                        onChange={(e) => patchActivity(i, { url: e.target.value })}
+                      />
+                    </Field>
+                  )}
+                </div>
+                {a.type === 'youtube' && (
+                  <>
+                    <div className="formgrid">
+                      <Field label="開始秒數">
+                        <input
+                          type="number"
+                          min="0"
+                          value={a.start ?? 0}
+                          onChange={(e) => patchActivity(i, { start: Number(e.target.value) })}
+                        />
+                      </Field>
+                      <Field label="結束秒數（留白播放至結束）">
+                        <input
+                          type="number"
+                          min="1"
+                          value={a.end ?? ''}
+                          onChange={(e) =>
+                            patchActivity(i, {
+                              end: e.target.value ? Number(e.target.value) : undefined,
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    {a.url && (
+                      <p className={youtubeId(a.url) ? 'success' : 'error'}>
+                        {youtubeId(a.url) ? '已辨識 YouTube 影片' : '請貼上單支影片的有效連結'}
+                      </p>
+                    )}
+                  </>
+                )}
+                {a.type === 'html' && (
+                  <Field label="GitHub Pages 教材網址">
+                    <input
+                      type="url"
+                      value={a.url || ''}
+                      placeholder="https://帳號.github.io/教材庫/chapter/index.html"
+                      onChange={(e) => patchActivity(i, { url: e.target.value })}
+                    />
+                    <p className="muted">
+                      先將 HTML、CSS、圖片與腳本發布至 GitHub
+                      Pages，再貼上教材入口網址。教材網址可公開存取。
+                    </p>
+                    {a.url && !materialUrl(a.url) && (
+                      <p className="error">請填入有效的 HTTPS 網址</p>
+                    )}
+                  </Field>
+                )}
+                <Field label="學習說明">
+                  <textarea
+                    value={a.description}
+                    onChange={(e) => patchActivity(i, { description: e.target.value })}
+                  />
+                </Field>
+                <div className="actions">
+                  <button onClick={() => preview(c, true, u.id, a.id)}>
+                    <Eye size={16} />
+                    預覽活動
+                  </button>
+                  <button
+                    disabled={i === 0}
+                    onClick={() => {
+                      const arr = [...u.activities];
+                      [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+                      patchUnit({ activities: arr });
+                    }}
+                  >
+                    上移
+                  </button>
+                  <button
+                    onClick={() =>
+                      patchUnit({ activities: u.activities.filter((x) => x.id !== a.id) })
+                    }
+                  >
+                    從草稿移除
+                  </button>
+                </div>
+              </details>
+            ))}
+          </section>
+        )}
+      </div>
+    </>
+  );
+}
+function Bank({
+  course,
+  api,
+  save,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  save: (c: Course) => Promise<void>;
+  notify: (s: string) => void;
+}) {
+  const [unitId, setUnit] = useState(course.units[0]?.id || ''),
+    [questions, setQuestions] = useState<Question[]>([]),
+    [input, setInput] = useState(''),
+    [errors, setErrors] = useState<string[]>([]),
+    [search, setSearch] = useState(''),
+    [busy, setBusy] = useState(false),
+    [sheet, setSheet] = useState(course.sheetsUrl),
+    [version, setVersion] = useState('');
+  const unit = course.units.find((u) => u.id === unitId);
+  async function load() {
+    if (!unit?.bankVersion) return;
+    setBusy(true);
+    try {
+      setQuestions(await cachedBank(api, course.id, unitId, unit.bankVersion));
+      setErrors([]);
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  function validate(text: string) {
+    try {
+      const parsed = JSON.parse(text);
+      const qs = Array.isArray(parsed) ? parsed : parsed.questions;
+      const errs = validateQuestions(qs);
+      setErrors(errs);
+      if (!errs.length) setQuestions(qs);
+    } catch {
+      setErrors(['JSON 格式無效，請使用提供的題庫格式。']);
+    }
+  }
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">QUESTION BANK</span>
+          <h1>題庫管理</h1>
+          <p>Google Sheets 維護原始題目，發布版本後連接至單元。</p>
+        </div>
+      </header>
+      <section className="panel">
+        <div className="formgrid">
+          <Field label="Google Sheets 題庫連結">
+            <input value={sheet} onChange={(e) => setSheet(e.target.value)} />
+          </Field>
+          <Field label="單元">
+            <select
+              value={unitId}
+              onChange={(e) => {
+                setUnit(e.target.value);
+                setQuestions([]);
+              }}
+            >
+              {course.units.map((u) => (
+                <option key={u.id} value={u.id}>
+                  {u.title}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+        <div className="actions">
+          <button
+            onClick={() =>
+              save({ ...course, sheetsUrl: sheet })
+                .then(() => notify('連結已保存'))
+                .catch((e) => notify(e.message))
+            }
+          >
+            保存連結
+          </button>
+          {/^https:\/\/docs.google.com\/spreadsheets\//.test(sheet) && (
+            <a className="button" href={sheet} target="_blank" rel="noreferrer">
+              開啟 Sheets ↗
+            </a>
+          )}
+          <button disabled={busy || !unit?.bankVersion} onClick={load}>
+            讀取已連接版本
+          </button>
+          <span className="badge">{unit?.bankVersion || '未連接題庫'}</span>
+        </div>
+        <details>
+          <summary>連接 Apps Script 已發布的版本</summary>
+          <Field label="同步結果中的版本 ID">
+            <input value={version} onChange={(e) => setVersion(e.target.value)} />
+          </Field>
+          <button
+            disabled={!version}
+            onClick={async () => {
+              try {
+                await api.call('getBank', { courseId: course.id, unitId, version, draft: true });
+                await save({
+                  ...course,
+                  units: course.units.map((u) =>
+                    u.id === unitId ? { ...u, bankVersion: version } : u,
+                  ),
+                });
+                notify('題庫版本已連接至草稿');
+              } catch (e) {
+                notify((e as Error).message);
+              }
+            }}
+          >
+            驗證並連接
+          </button>
+        </details>
+        <details>
+          <summary>JSON 同步預覽／初次匯入</summary>
+          <p className="muted">此入口用於檢查及發布匯出資料；後續仍以 Sheets 為主要編輯來源。</p>
+          <input
+            aria-label="匯入題庫 JSON"
+            type="file"
+            accept=".json"
+            onChange={async (e) => {
+              const text = await e.target.files?.[0]?.text();
+              if (text) {
+                setInput(text);
+                validate(text);
+              }
+            }}
+          />
+          <textarea
+            aria-label="題庫 JSON"
+            className="codeinput"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder='[{"id":"q1","text":"題幹","options":[{"id":"a","text":"選項 A"},{"id":"b","text":"選項 B"}],"answer":"a","explanation":"解析"}]'
+          />
+          <div className="actions">
+            <button onClick={() => validate(input)}>檢查資料</button>
+            <button
+              className="primary"
+              disabled={!questions.length || errors.length > 0 || busy}
+              onClick={async () => {
+                setBusy(true);
+                try {
+                  const r = await api.call('publishQuestions', {
+                    courseId: course.id,
+                    unitId,
+                    questions,
+                  });
+                  await save({
+                    ...course,
+                    units: course.units.map((u) =>
+                      u.id === unitId ? { ...u, bankVersion: r.version } : u,
+                    ),
+                  });
+                  notify(`已發布 ${r.count} 題，已連接草稿；發布課程後學生可見`);
+                } catch (e) {
+                  notify((e as Error).message);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              發布並連接草稿
+            </button>
+          </div>
+        </details>
+        {errors.map((e) => (
+          <p className="error" key={e}>
+            {e}
+          </p>
+        ))}
+      </section>
+      <section className="panel">
+        <div className="sectionhead">
+          <h2>
+            題目預覽 <span className="badge">{questions.length} 題</span>
+          </h2>
+          <div className="search">
+            <Search size={16} />
+            <input
+              aria-label="搜尋題目"
+              placeholder="搜尋題目、ID 或知識點"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
+        {questions
+          .filter((q) => `${q.id} ${q.text} ${q.concept}`.includes(search))
+          .map((q) => (
+            <details key={q.id}>
+              <summary>
+                <span className="badge">{q.id}</span> {q.text}
+              </summary>
+              {q.options.map((o) => (
+                <p key={o.id}>
+                  {o.id === q.answer ? '✓' : '○'} {o.text}
+                </p>
+              ))}
+              <p className="feedback">{q.explanation}</p>
+            </details>
+          ))}
+        {!questions.length && (
+          <Empty title="尚未載入題目" detail="選擇單元讀取版本，或匯入新的題庫資料。" />
+        )}
+      </section>
+    </>
+  );
+}
+function RosterPage({
+  course,
+  api,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+}) {
+  const [cl, setCl] = useState(course.classIds[0]),
+    [rows, setRows] = useState<Roster[]>([]),
+    [next, setNext] = useState<string | null>(null),
+    [imports, setImports] = useState<Roster[]>([]),
+    [errors, setErrors] = useState<string[]>([]),
+    [busy, setBusy] = useState(false);
+  async function load(more = false) {
+    setBusy(true);
+    try {
+      const r = await api.call('getRoster', {
+        courseId: course.id,
+        classId: cl,
+        after: more ? next : '',
+      });
+      setRows(more ? [...rows, ...r.rows] : r.rows);
+      setNext(r.next);
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">CLASS ROSTER</span>
+          <h1>班級名冊</h1>
+          <p>完整學校信箱對應學生，不開放自行認領學號。</p>
+        </div>
+        <button
+          onClick={() =>
+            download('名冊範本.csv', [
+              {
+                email: 'student@ctcn.edu.tw',
+                name: '請替換姓名',
+                studentId: 'S001',
+                classId: cl,
+                enabled: true,
+              },
+            ])
+          }
+        >
+          <Download size={16} />
+          下載範本
+        </button>
+      </header>
+      <section className="panel">
+        <div className="toolbar">
+          <select
+            aria-label="班級"
+            value={cl}
+            onChange={(e) => {
+              setCl(e.target.value);
+              setRows([]);
+              setNext(null);
+            }}
+          >
+            {course.classIds.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <button disabled={busy} onClick={() => load()}>
+            <RefreshCw size={16} />
+            讀取名冊
+          </button>
+          <label className="button">
+            <Upload size={16} />
+            匯入 CSV
+            <input
+              hidden
+              type="file"
+              accept=".csv"
+              onChange={async (e) => {
+                const text = await e.target.files?.[0]?.text();
+                if (!text) return;
+                const parsed = Papa.parse<any>(text, { header: true, skipEmptyLines: true });
+                const r = parsed.data.map((x) => ({
+                  email: String(x.email || '')
+                    .trim()
+                    .toLowerCase(),
+                  name: String(x.name || '').trim(),
+                  studentId: String(x.studentId || '').trim(),
+                  classId: String(x.classId || '').trim(),
+                  enabled: !['false', '0'].includes(String(x.enabled)),
+                }));
+                setImports(r);
+                setErrors([
+                  ...parsed.errors.map((e) => e.message),
+                  ...validateRoster(r),
+                  ...(r.length > 200 ? ['每次最多 200 人'] : []),
+                ]);
+              }}
+            />
+          </label>
+        </div>
+        {imports.length > 0 && (
+          <div className="notice">
+            <strong>匯入預覽：{imports.length} 人</strong>
+            {errors.map((e, i) => (
+              <p className="error" key={i}>
+                {e}
+              </p>
+            ))}
+            <RosterTable rows={imports} />
+            <button
+              disabled={busy || errors.length > 0}
+              className="primary"
+              onClick={async () => {
+                setBusy(true);
+                try {
+                  await api.call('importRoster', { rows: imports });
+                  setImports([]);
+                  notify('名冊已匯入');
+                  await load();
+                } catch (e) {
+                  notify((e as Error).message);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              確認匯入
+            </button>
+            <button onClick={() => setImports([])}>取消</button>
+          </div>
+        )}
+        <RosterTable
+          rows={rows}
+          action={(r) => (
+            <button
+              onClick={async () => {
+                try {
+                  await api.call('importRoster', { rows: [{ ...r, enabled: !r.enabled }] });
+                  setRows(
+                    rows.map((x) => (x.email === r.email ? { ...x, enabled: !x.enabled } : x)),
+                  );
+                } catch (e) {
+                  notify((e as Error).message);
+                }
+              }}
+            >
+              {r.enabled ? '停用' : '啟用'}
+            </button>
+          )}
+        />
+        {!rows.length && <Empty title="尚未載入名冊" detail="請讀取班級名冊，或匯入本學期學生。" />}
+        {next && <button onClick={() => load(true)}>載入更多</button>}
+      </section>
+    </>
+  );
+}
+function RosterTable({
+  rows,
+  action,
+}: {
+  rows: Roster[];
+  action?: (r: Roster) => React.ReactNode;
+}) {
+  return (
+    <div className="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>學生</th>
+            <th>學號</th>
+            <th>班級</th>
+            <th>學校信箱</th>
+            <th>狀態</th>
+            {action && <th>管理</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={r.email + i}>
+              <td>{r.name}</td>
+              <td>{r.studentId}</td>
+              <td>{r.classId}</td>
+              <td>{r.email}</td>
+              <td>
+                <span className={'badge ' + (r.enabled ? 'green' : '')}>
+                  {r.enabled ? '啟用' : '停用'}
+                </span>
+              </td>
+              {action && <td>{action(r)}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+function CompletionPage({
+  course,
+  api,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+}) {
+  const [cl, setCl] = useState(course.classIds[0]),
+    [rows, setRows] = useState<any[]>([]),
+    [next, setNext] = useState<string | null>(null),
+    [search, setSearch] = useState(''),
+    [student, setStudent] = useState<any>(null),
+    [busy, setBusy] = useState(false);
+  async function load(more = false) {
+    setBusy(true);
+    try {
+      const r = await api.call('getCompletion', {
+        courseId: course.id,
+        classId: cl,
+        after: more ? next : '',
+      });
+      setRows(more ? [...rows, ...r.rows] : r.rows);
+      setNext(r.next);
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  const filtered = rows.filter((r) => `${r.name} ${r.studentId}`.includes(search));
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">LEARNING PROGRESS</span>
+          <h1>完成度看板</h1>
+          <p>個人進度隨交卷更新；本頁按更新讀取，與分析報表獨立。</p>
+        </div>
+        <button
+          disabled={!rows.length}
+          onClick={() =>
+            download(
+              '完成度.csv',
+              filtered.map((r) => {
+                const n = completion(forClass(course, cl), r.progress);
+                return {
+                  姓名: r.name,
+                  學號: r.studentId,
+                  班級: cl,
+                  已完成: n.done,
+                  應完成: n.total,
+                  待完成: forClass(course, cl)
+                    .units.filter((u) => u.required && !complete(u, r.progress))
+                    .map((u) => u.title)
+                    .join('、'),
+                };
+              }),
+            )
+          }
+        >
+          <Download size={16} />
+          匯出已載入名單
+        </button>
+      </header>
+      <section className="panel">
+        <div className="toolbar">
+          <select
+            aria-label="班級"
+            value={cl}
+            onChange={(e) => {
+              setCl(e.target.value);
+              setRows([]);
+            }}
+          >
+            {course.classIds.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <button disabled={busy} onClick={() => load()}>
+            <RefreshCw size={16} />
+            更新完成度
+          </button>
+          <input
+            aria-label="搜尋學生"
+            placeholder="搜尋已載入學生"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>學生</th>
+                <th>學號</th>
+                <th>單元完成度</th>
+                <th>尚待完成</th>
+                <th>紀錄</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r) => {
+                const p = r.progress as Progress,
+                  n = completion(forClass(course, cl), p);
+                return (
+                  <tr key={r.email}>
+                    <td>
+                      {r.name}
+                      <small className="block">{r.enabled ? '' : '帳號停用'}</small>
+                    </td>
+                    <td>{r.studentId}</td>
+                    <td>
+                      <div className="tableprogress">
+                        <span>
+                          {n.done} / {n.total}
+                        </span>
+                        <div className="progressline">
+                          <div style={{ width: `${n.total ? (n.done / n.total) * 100 : 0}%` }} />
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {forClass(course, cl)
+                        .units.filter((u) => u.required && !complete(u, p))
+                        .map((u) => u.title)
+                        .join('、') || '—'}
+                    </td>
+                    <td>
+                      <button onClick={() => setStudent(r)}>查看</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {!rows.length && (
+          <Empty title="選擇班級並更新完成度" detail="包含尚未作答學生；沒有成績不視為零分。" />
+        )}
+        {next && <button onClick={() => load(true)}>載入更多學生</button>}
+      </section>
+      {student && (
+        <StudentDetail
+          course={forClass(course, cl)}
+          api={api}
+          student={student}
+          close={() => setStudent(null)}
+          notify={notify}
+        />
+      )}
+    </>
+  );
+}
+function StudentDetail({
+  course,
+  api,
+  student,
+  close,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  student: any;
+  close: () => void;
+  notify: (s: string) => void;
+}) {
+  const [rows, setRows] = useState<any[]>([]),
+    [next, setNext] = useState<any>(null);
+  async function load(more = false) {
+    if (!student.uid) return;
+    try {
+      const r = await api.call('getHistory', {
+        courseId: course.id,
+        classId: student.classId,
+        uid: student.uid,
+        after: more ? next : null,
+      });
+      setRows(more ? [...rows, ...r.rows] : r.rows);
+      setNext(r.next);
+    } catch (e) {
+      notify((e as Error).message);
+    }
+  }
+  return (
+    <div className="modalshade">
+      <section className="modal wide">
+        <div className="sectionhead">
+          <div>
+            <span className="eyebrow">STUDENT PROFILE</span>
+            <h2>{student.name}</h2>
+            <p>
+              {student.studentId} · {student.classId}
+            </p>
+          </div>
+          <button onClick={close}>關閉</button>
+        </div>
+        {course.units.map((u) => (
+          <div className="timeline" key={u.id}>
+            <div>
+              <h3>{u.title}</h3>
+              <p>
+                最高有效分數：
+                {(student.progress.units[u.id]?.best ?? -1) < 0
+                  ? '尚無'
+                  : student.progress.units[u.id].best}{' '}
+                · 練習 {student.progress.units[u.id]?.attempts || 0} 次
+              </p>
+            </div>
+            <span className="badge">{complete(u, student.progress) ? '已達標' : '待完成'}</span>
+          </div>
+        ))}
+        <h3>活動參與</h3>
+        {Object.entries(student.progress.activities || {}).length ? (
+          Object.entries(student.progress.activities).map(([k, v]: any) => (
+            <p key={k}>
+              {course.units
+                .flatMap((u) =>
+                  u.activities.map((a) => ({ key: u.id + '_' + a.id, title: a.title })),
+                )
+                .find((a) => a.key === k)?.title || k}
+              ：{v.completed ? '已完成參與' : '學習中'}
+            </p>
+          ))
+        ) : (
+          <p className="muted">尚無活動參與紀錄</p>
+        )}
+        <button disabled={!student.uid} onClick={() => load()}>
+          讀取最近 20 組作答
+        </button>
+        {!student.uid && <p>學生尚未登入。</p>}
+        {rows.map((a) => (
+          <details key={a.id}>
+            <summary>
+              {new Date(a.receivedAt).toLocaleString()} · {modes[a.mode as keyof typeof modes]} ·{' '}
+              {a.score} 分
+            </summary>
+            {a.answers.map((r: any) => (
+              <p key={r.questionId}>
+                {r.questionId} · 選 {r.selected || '未作答'} · {r.correct ? '答對' : '答錯'}
+              </p>
+            ))}
+          </details>
+        ))}
+        {next && <button onClick={() => load(true)}>載入更多</button>}
+      </section>
+    </div>
+  );
+}
+function Analysis({
+  course,
+  api,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+}) {
+  const [detail, setDetail] = useState<any>(null),
+    [cl, setCl] = useState(course.classIds[0]),
+    [reports, setReports] = useState<Report[]>([]),
+    [next, setNext] = useState<string | null>(null),
+    [mode, setMode] = useState('all'),
+    [unit, setUnit] = useState('all'),
+    [busy, setBusy] = useState(false),
+    [time, setTime] = useState<number | null>(null);
+  async function load(more = false) {
+    try {
+      const r = await api.call('getReports', {
+        courseId: course.id,
+        classId: cl,
+        after: more ? next : '',
+      });
+      setReports(more ? [...reports, ...r.rows] : r.rows);
+      setNext(r.next);
+      setTime(r.job?.updatedAt || null);
+    } catch (e) {
+      notify((e as Error).message);
+    }
+  }
+  async function update() {
+    setBusy(true);
+    try {
+      let count = 0;
+      for (let i = 0; i < 100; i++) {
+        const r = await api.call('updateReports', { courseId: course.id });
+        count += r.processed || 0;
+        if (!r.hasMore) {
+          notify(`報表已更新，處理 ${count} 組新紀錄`);
+          break;
+        }
+        if (i === 99) notify('本輪已處理 2,000 組，請再次更新以繼續。');
+      }
+      await load();
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  useEffect(() => {
+    void load();
+  }, [course.id, cl]);
+  const rows = reports
+    .filter((r) => unit === 'all' || r.unitId === unit)
+    .flatMap((r) =>
+      Object.entries(r.modes[mode] || {}).map(([id, s]) => ({
+        ...s,
+        id,
+        unitId: r.unitId,
+        version: r.version,
+      })),
+    )
+    .sort(
+      (a, b) => (b.students ? b.wrong / b.students : 0) - (a.students ? a.wrong / a.students : 0),
+    );
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">QUESTION INSIGHTS</span>
+          <h1>哪些題目，需要再講一次？</h1>
+          <p>首次作答與複習分開看，讓重複練習不扭曲原始理解。</p>
+        </div>
+        <button className="primary" disabled={busy} onClick={update}>
+          <RefreshCw size={17} />
+          {busy ? '增量彙整中…' : '更新至最新'}
+        </button>
+      </header>
+      <section className="panel">
+        <div className="toolbar">
+          <select
+            aria-label="班級"
+            value={cl}
+            onChange={(e) => {
+              setCl(e.target.value);
+              setReports([]);
+            }}
+          >
+            {course.classIds.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <select aria-label="單元" value={unit} onChange={(e) => setUnit(e.target.value)}>
+            <option value="all">全部已載入單元</option>
+            {course.units.map((u) => (
+              <option key={u.id} value={u.id}>
+                {u.title}
+              </option>
+            ))}
+          </select>
+          <select aria-label="作答模式" value={mode} onChange={(e) => setMode(e.target.value)}>
+            <option value="all">測驗＋閃卡（學生去重）</option>
+            <option value="quiz">一般測驗</option>
+            <option value="flashcard">閃卡</option>
+            <option value="review">錯題複習</option>
+          </select>
+          <button
+            onClick={() =>
+              download(
+                '題目分析.csv',
+                rows.map((r) => ({
+                  題目: r.id,
+                  版本: r.version,
+                  首次作答人數: r.students,
+                  首次答錯人數: r.wrong,
+                  複習人數: r.reviewStudents,
+                  最近複習仍錯: r.reviewWrong,
+                  複習次數: r.reviews,
+                })),
+              )
+            }
+          >
+            <Download size={16} />
+            匯出
+          </button>
+        </div>
+        <p className="muted">
+          最後彙整：{time ? new Date(time).toLocaleString() : '尚未彙整'} ·
+          開啟報表只讀摘要，不重算歷史紀錄。
+        </p>
+        <div className="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>題目／版本</th>
+                <th>單元</th>
+                <th>首次錯誤率</th>
+                <th>作答人數</th>
+                <th>複習後仍錯</th>
+                <th>選項分布</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.id + r.version + r.unitId}>
+                  <td>
+                    <button className="linkbutton" onClick={() => setDetail(r)}>
+                      {r.id}
+                    </button>
+                    <small className="block">{r.version}</small>
+                  </td>
+                  <td>{course.units.find((u) => u.id === r.unitId)?.title || r.unitId}</td>
+                  <td>
+                    <span className="error-rate">
+                      {r.students ? Math.round((r.wrong / r.students) * 100) + '%' : '—'}
+                    </span>
+                  </td>
+                  <td>{r.students} 人</td>
+                  <td>
+                    {r.reviewStudents ? `${r.reviewWrong} / ${r.reviewStudents} 人` : '尚無複習'}
+                  </td>
+                  <td>
+                    <details>
+                      <summary>查看</summary>
+                      {Object.entries(r.options).map(([o, n]) => (
+                        <p key={o}>
+                          {o === 'unanswered' ? '未作答' : o}：{n} 人
+                        </p>
+                      ))}
+                    </details>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!rows.length && (
+          <Empty
+            title="尚無此條件的分析資料"
+            detail="有作答後按「更新至最新」，只會處理新增紀錄。"
+          />
+        )}
+        {next && <button onClick={() => load(true)}>載入更多摘要</button>}
+      </section>
+      {detail && (
+        <QuestionDetail
+          course={course}
+          api={api}
+          cl={cl}
+          item={detail}
+          close={() => setDetail(null)}
+          notify={notify}
+        />
+      )}
+    </>
+  );
+}
+function ReportsPage({
+  course,
+  api,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+}) {
+  const [cl, setCl] = useState(course.classIds[0]),
+    [list, setList] = useState<any[]>([]),
+    [busy, setBusy] = useState(false);
+  async function load() {
+    try {
+      setList((await api.call('getSnapshots', { courseId: course.id })).rows);
+    } catch (e) {
+      notify((e as Error).message);
+    }
+  }
+  useEffect(() => {
+    void load();
+  }, [course.id]);
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">REPORTS & SNAPSHOTS</span>
+          <h1>保留每次評分的依據</h1>
+          <p>結算快照固定課程門檻與當次讀取結果，不受日後新增單元影響。</p>
+        </div>
+      </header>
+      <section className="panel">
+        <h2>完成度結算快照</h2>
+        <p>快照依批次取得學生進度，完成時保留採集起訖時間。請在評分截止後結算。</p>
+        <div className="toolbar">
+          <select aria-label="結算班級" value={cl} onChange={(e) => setCl(e.target.value)}>
+            {course.classIds.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <button
+            className="primary"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              try {
+                const snapshotId = uid();
+                for (let i = 0; i < 100; i++) {
+                  const r = await api.call('createSnapshot', {
+                    courseId: course.id,
+                    classId: cl,
+                    snapshotId,
+                  });
+                  if (r.done) break;
+                }
+                await load();
+                notify('快照處理完成，請確認狀態後匯出');
+              } catch (e) {
+                notify((e as Error).message);
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            建立新快照
+          </button>
+          <button onClick={load}>重新讀取</button>
+        </div>
+        <div className="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>建立時間</th>
+                <th>班級</th>
+                <th>狀態</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map((s) => (
+                <tr key={s.id}>
+                  <td>{new Date(s.createdAt).toLocaleString()}</td>
+                  <td>{s.classId || cl}</td>
+                  <td>{s.status === 'complete' ? '完成' : '處理中'}</td>
+                  <td>
+                    {s.status !== 'complete' ? (
+                      <button
+                        onClick={async () => {
+                          try {
+                            await api.call('createSnapshot', {
+                              courseId: course.id,
+                              classId: s.classId,
+                              snapshotId: s.id,
+                            });
+                            await load();
+                          } catch (e) {
+                            notify((e as Error).message);
+                          }
+                        }}
+                      >
+                        接續處理
+                      </button>
+                    ) : (
+                      <button
+                        onClick={async () => {
+                          try {
+                            let rows: any[] = [],
+                              after = null,
+                              meta: any;
+                            do {
+                              const r: any = await api.call('getSnapshots', {
+                                courseId: course.id,
+                                snapshotId: s.id,
+                                after,
+                              });
+                              rows.push(...r.rows);
+                              after = r.next;
+                              meta = r.meta || s;
+                            } while (after);
+                            download(
+                              '完成度結算.csv',
+                              rows.map((r) => {
+                                const c = meta.course || course,
+                                  n = completion(c, r.progress);
+                                return {
+                                  姓名: r.name,
+                                  學號: r.studentId,
+                                  班級: r.classId,
+                                  已完成: n.done,
+                                  應完成: n.total,
+                                  完成率: n.total
+                                    ? Math.round((n.done / n.total) * 100) + '%'
+                                    : '不適用',
+                                  結算時間: new Date(s.createdAt).toLocaleString(),
+                                };
+                              }),
+                            );
+                          } catch (e) {
+                            notify((e as Error).message);
+                          }
+                        }}
+                      >
+                        匯出 CSV
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!list.length && (
+          <Empty title="尚未建立結算快照" detail="完成度用於平常分數時，在此保存當次採計依據。" />
+        )}
+      </section>
+    </>
+  );
+}
+function SettingsPage({
+  course,
+  api,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  notify: (s: string) => void;
+}) {
+  return (
+    <>
+      <header className="pageheading">
+        <div>
+          <span className="eyebrow">PLATFORM SETTINGS</span>
+          <h1>平台設定</h1>
+          <p>連接狀態、報表更新方式與發布版本。</p>
+        </div>
+        <span className="badge green">v{VERSION}</span>
+      </header>
+      <section className="panel">
+        <h2>資料連接</h2>
+        <dl>
+          <dt>執行模式</dt>
+          <dd>{api.preview ? '操作示例（暫存）' : '正式 Firebase 連接'}</dd>
+          <dt>Firebase 專案</dt>
+          <dd>{api.preview ? '未使用' : projectId}</dd>
+          <dt>學生登入網域</dt>
+          <dd>@ctcn.edu.tw</dd>
+          <dt>平台版本</dt>
+          <dd>{VERSION}</dd>
+          <dt>判分方式</dt>
+          <dd>前端即時判分，整組提交</dd>
+        </dl>
+      </section>
+      <section className="panel">
+        <h2>教師報表更新</h2>
+        <p>預設只在按「更新至最新」時增量彙整。可啟用每日凌晨 03:00 自動處理。</p>
+        <div className="actions">
+          <button
+            onClick={() =>
+              api
+                .call('setSchedule', { courseId: course.id, enabled: true })
+                .then(() => notify('已啟用每日自動彙整'))
+                .catch((e) => notify(e.message))
+            }
+          >
+            啟用每日彙整
+          </button>
+          <button
+            onClick={() =>
+              api
+                .call('setSchedule', { courseId: course.id, enabled: false })
+                .then(() => notify('已改為按需彙整'))
+                .catch((e) => notify(e.message))
+            }
+          >
+            僅按需彙整
+          </button>
+        </div>
+        <p className="muted">不影響學生交卷後的即時完成度。</p>
+      </section>
+    </>
+  );
+}
+function QuestionDetail({
+  course,
+  api,
+  cl,
+  item,
+  close,
+  notify,
+}: {
+  course: Course;
+  api: API;
+  cl: string;
+  item: any;
+  close: () => void;
+  notify: (s: string) => void;
+}) {
+  const [q, setQ] = useState<Question | null>(null),
+    [rows, setRows] = useState<any[]>([]),
+    [next, setNext] = useState<string | null>(null),
+    [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    api
+      .call('getBank', {
+        courseId: course.id,
+        unitId: item.unitId,
+        version: item.version,
+        draft: true,
+      })
+      .then((r) => setQ(r.questions.find((q: Question) => q.id === item.id) || null))
+      .catch((e) => notify(e.message));
+  }, [item.id]);
+  async function load(more = false) {
+    try {
+      const r = await api.call('questionStudents', {
+        courseId: course.id,
+        classId: cl,
+        unitId: item.unitId,
+        version: item.version,
+        questionId: item.id,
+        after: more ? next : '',
+      });
+      setRows(more ? [...rows, ...r.rows] : r.rows);
+      setNext(r.next);
+      setLoaded(true);
+    } catch (e) {
+      notify((e as Error).message);
+    }
+  }
+  return (
+    <div className="modalshade">
+      <section className="modal wide">
+        <div className="sectionhead">
+          <div>
+            <span className="eyebrow">QUESTION DETAIL</span>
+            <h2>{item.id}</h2>
+          </div>
+          <button onClick={close}>關閉</button>
+        </div>
+        {q ? (
+          <>
+            <h3>{q.text}</h3>
+            {q.options.map((o) => (
+              <div className="timeline" key={o.id}>
+                <span className={'badge ' + (o.id === q.answer ? 'green' : '')}>
+                  {o.id.toUpperCase()}
+                </span>
+                <div>{o.text}</div>
+                <span>{item.options[o.id] || 0} 人</span>
+              </div>
+            ))}
+            <p className="feedback">{q.explanation}</p>
+          </>
+        ) : (
+          <p>讀取題目中…</p>
+        )}
+        <h3>相關學生</h3>
+        <p className="muted">需要時才讀取學生明細，每次最多查詢 30 份學生題目狀態。</p>
+        <button onClick={() => load()}>讀取學生名單</button>
+        {rows.map((r) => (
+          <div className="timeline" key={r.uid}>
+            <div>
+              <h3>
+                {r.name} · {r.studentId}
+              </h3>
+              <p>
+                首次：{r.first?.all ? (r.first.all.correct ? '答對' : '答錯') : '尚無'} · 最新複習：
+                {r.review ? (r.review.correct ? '答對' : '仍錯') : '尚無'}
+              </p>
+            </div>
+          </div>
+        ))}
+        {loaded && !rows.length && <p>此頁沒有此題的學生作答。</p>}
+        {next && <button onClick={() => load(true)}>載入更多</button>}
+      </section>
+    </div>
+  );
+}
