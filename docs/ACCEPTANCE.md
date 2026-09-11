@@ -2,6 +2,14 @@
 
 ## 自動驗證
 
+### 1.1.0 部署（2026-09-11）
+
+- 本機 Node 22 完整 `npm run check` 通過：16 項測試、版本一致性 1.1.0、vite 前端打包（1605 modules）、後端編譯載入 29 個函式。
+- `firebase deploy --only functions:platform,firestore` 回報 Deploy complete：新建 migrateRoster、archiveCourse、saveLearningEvents、getLearningDiagnostics 四個函式，其餘 25 個更新成功，函式總數 21 → 29，全部為 asia-east1、Node 22、第 2 代；Firestore 索引與規則發布成功（新增 enrollments 課程／班級／學號複合索引）。
+- commit 79e8e2c 推送至 main，GitHub Actions「Publish course platform」第 5 次執行成功，GitHub Pages 已更新。
+- 線上頁面 https://albertchang1008-alt.github.io/115-1-AP2/ 檢查：標示 v1.1.0、色系切換已出現、未顯示「尚未連接 Firebase」提示（代表 CI 的 VITE_FIREBASE_* 變數已設定、正式設定生效）、登入按鈕可用、主控台無錯誤。
+- 前端與後端已上線，但實際教學流程（學生 Google 登入、名冊、題庫、互動教材事件、報表正確性）仍待以真實資料端到端驗收，見下方待驗證清單。
+
 ### 1.1.0 本機驗證（2026-09-11）
 
 - 版本一致性檢查通過，全平台標示 1.1.0。
@@ -10,7 +18,7 @@
 - 修正 tests/material.test.ts 未跟上 HtmlMaterial 新增的 api／courseId／unitId／uid 必填 props；未修正前 `npm run build` 與 GitHub Actions 的 `npm run check` 都會失敗。
 - 新功能已確認接線：ClassManager／NewCourse 於教師後台、Diagnostics 於課程頁、ThemePicker 於進入點、QuestionContent 於學生與預覽、LearningBridge 於 HtmlMaterial；後端 saveLearningEvents 以事件 ID 在交易內去重，getLearningDiagnostics 檢查班級歸屬。
 - 本次未執行 vite 前端打包（驗證環境與 macOS node_modules 的原生套件平台不符），需在本機或 CI 補跑完整 `npm run check`。
-- 本次未執行雲端部署，也未變更任何線上資料；線上仍為 1.0.4。
+- 本機驗證階段未執行雲端部署；部署結果見上方 1.1.0 部署段落。
 - 待辦建議：diagnostics 文件的 summary 欄位尚未加入索引排除設定，與 attempts.answers 的既有作法不一致，節點與題目數量成長時會增加索引成本。
 
 
