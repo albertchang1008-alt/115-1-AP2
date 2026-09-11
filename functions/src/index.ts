@@ -199,6 +199,11 @@ export const publishCourse = onCall(options, async (req) => {
   await db.doc(`courses/${course.id}`).update({ published });
   return published;
 });
+export const deleteCourse = onCall(options, async (req) => {
+  await access(req, req.data.courseId, true);
+  await db.doc(`courses/${id(req.data.courseId)}`).delete();
+  return { ok: true };
+});
 export const importRoster = onCall(options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');

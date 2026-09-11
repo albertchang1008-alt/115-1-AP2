@@ -23,6 +23,7 @@ import {
   Smartphone,
   ArrowLeft,
   Layers,
+  Trash2,
 } from 'lucide-react';
 import Papa from 'papaparse';
 import { VERSION } from '../shared/version';
@@ -598,6 +599,19 @@ export default function App() {
                 setCourses([...courses, c]);
                 setCourseId(c.id);
               }}
+              deleteCourse={async () => {
+                if (!course) return;
+                if (!confirm(`確定要刪除課程「${course.title}」嗎？此操作無法復原。`)) return;
+                try {
+                  await api.call('deleteCourse', { courseId: course.id });
+                  const rest = courses.filter((x) => x.id !== course.id);
+                  setCourses(rest);
+                  setCourseId(rest[0]?.id || '');
+                  notify('課程已刪除');
+                } catch (e) {
+                  notify((e as Error).message);
+                }
+              }}
             />
           ) : !course ? (
             <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
@@ -768,6 +782,7 @@ function CourseEditor({
   preview,
   notify,
   newCourse,
+  deleteCourse,
 }: {
   course?: Course;
   api: API;
@@ -775,6 +790,7 @@ function CourseEditor({
   preview: (c: Course, draft?: boolean, u?: string, a?: string) => void;
   notify: (s: string) => void;
   newCourse: () => void;
+  deleteCourse: () => void;
 }) {
   const [c, setC] = useState<Course>(structuredClone(course || makeCourse())),
     [idx, setIdx] = useState(0),
@@ -816,6 +832,10 @@ function CourseEditor({
           </button>
           <button className="primary" disabled={busy} onClick={() => action(true)}>
             發布課程
+          </button>
+          <button disabled={busy || !course} onClick={deleteCourse}>
+            <Trash2 size={16} />
+            刪除課程
           </button>
         </div>
       </header>

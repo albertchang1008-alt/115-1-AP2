@@ -7,6 +7,7 @@ const expected = [
   'bootstrap',
   'saveCourse',
   'publishCourse',
+  'deleteCourse',
   'importRoster',
   'getRoster',
   'getPublished',
