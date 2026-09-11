@@ -21,6 +21,7 @@ import {
   validateQuestions,
   validateRoster,
   safeId,
+  safeCode,
   applyAttempt,
   aggregate,
   youtubeId,
@@ -40,6 +41,11 @@ function fail(message: string): never {
 }
 function id(v: unknown) {
   if (typeof v !== 'string' || !safeId(v)) fail('識別碼格式錯誤');
+  return v as string;
+}
+// 教師自訂代碼（課程、單元、班級）允許中文。
+function code(v: unknown) {
+  if (typeof v !== 'string' || !safeCode(v)) fail('代碼格式錯誤，可用中文、英數字、- 或 _，不能有空白');
   return v as string;
 }
 function size(data: unknown, max = 300000) {
@@ -67,11 +73,11 @@ async function identity(req: any) {
   return { uid: req.auth.uid, email: String(t.email).toLowerCase(), teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true } as any;
 }
 function enrollmentRef(courseId: string, email: string) {
-  return db.doc(`enrollments/${id(courseId)}__${email}`);
+  return db.doc(`enrollments/${code(courseId)}__${email}`);
 }
 async function access(req: any, courseId: string, teacherOnly = false) {
   const p = await identity(req);
-  const doc = await db.doc(`courses/${id(courseId)}`).get();
+  const doc = await db.doc(`courses/${code(courseId)}`).get();
   if (!doc.exists) fail('課程不存在');
   const c = doc.data()!;
   if (p.teacher) {
@@ -117,17 +123,17 @@ export const saveCourse = onCall(options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const course = req.data.course as Course;
-  id(course.id);
+  code(course.id);
   size(course);
   if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
     fail('請填寫課程與學期，最多 50 班、50 單元');
   if (new Set(course.classIds).size !== course.classIds.length) fail('班級代碼重複');
-  course.classIds.forEach(id);
+  course.classIds.forEach((cl) => code(cl));
   for (const [cl, units] of Object.entries(course.classUnits || {}))
     if (!course.classIds.includes(cl) || !Array.isArray(units) || new Set(units).size !== units.length || units.some((u) => !course.units.some((unit) => unit.id === u))) fail('班級適用單元設定無效');
   const unitIds = new Set();
   for (const u of course.units) {
-    id(u.id);
+    code(u.id);
     if (unitIds.has(u.id)) fail('單元 ID 重複');
     unitIds.add(u.id);
     if (
@@ -229,7 +235,7 @@ export const publishCourse = onCall(options, async (req) => {
 });
 export const deleteCourse = onCall(options, async (req) => {
   await access(req, req.data.courseId, true);
-  await db.doc(`courses/${id(req.data.courseId)}`).delete();
+  await db.doc(`courses/${code(req.data.courseId)}`).delete();
   return { ok: true };
 });
 async function writeEnrollments(uid: string, courseId: string, rows: Roster[], migrating = false) {
@@ -238,7 +244,7 @@ async function writeEnrollments(uid: string, courseId: string, rows: Roster[], m
   let updated = 0;
   for (let i = 0; i < rows.length; i += 100) {
     updated += await db.runTransaction(async (tx) => {
-      const course = await tx.get(db.doc(`courses/${id(courseId)}`));
+      const course = await tx.get(db.doc(`courses/${code(courseId)}`));
       if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
       if (!migrating && course.data()?.rosterVersion !== 2) fail('請先在班級名冊預覽並轉換舊名冊');
       const batch = rows.slice(i, i + 100);
@@ -300,7 +306,7 @@ function rosterQuery(courseId: string, c: any) {
 }
 export const getRoster = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
-  const classId = id(req.data.classId);
+  const classId = code(req.data.classId);
   if (!c.classIds.includes(classId)) fail('班級不屬於課程');
   const snap = await rosterQuery(req.data.courseId, c)
     .where('classId', '==', classId)
@@ -323,7 +329,7 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   if (errors.length) fail(errors.join('\n'));
   size(questions, 600000);
   const version = createHash('sha256').update(JSON.stringify(questions)).digest('hex').slice(0, 20);
-  const key = `${id(courseId)}_${id(unitId)}_${version}`;
+  const key = `${code(courseId)}_${code(unitId)}_${version}`;
   const ref = db.doc(`banks/${key}`);
   if (!(await ref.get()).exists) {
     const batch = db.batch();
@@ -369,7 +375,7 @@ export const sheetsPublish = onRequest({ ...options, secrets: [syncSecret] }, as
       res.status(403).json({ error: 'unauthorized' });
       return;
     }
-    const allowed = await db.doc(`syncAllowlist/${id(req.body.courseId)}`).get();
+    const allowed = await db.doc(`syncAllowlist/${code(req.body.courseId)}`).get();
     if (!allowed.exists || allowed.data()?.enabled !== true) fail('課程尚未授權 Sheets 同步');
     const result = await publishBank(req.body.courseId, req.body.unitId, req.body.questions);
     res.json({ ...result, platformVersion: VERSION });
@@ -388,7 +394,7 @@ export const getBank = onCall(options, async (req) => {
   )
     fail('無法讀取此版本');
   const ref = db.doc(
-    `banks/${id(req.data.courseId)}_${id(req.data.unitId)}_${id(req.data.version)}`,
+    `banks/${code(req.data.courseId)}_${code(req.data.unitId)}_${id(req.data.version)}`,
   );
   const manifest = await ref.get();
   if (!manifest.exists) fail('題庫未發布');
@@ -411,7 +417,7 @@ export const submitAttempt = onCall(options, async (req) => {
   const a = req.data?.attempt as Attempt;
   if (!a || typeof a !== 'object' || Array.isArray(a)) fail('作答格式錯誤');
   id(a.id);
-  id(a.unitId);
+  code(a.unitId);
   id(a.version);
   size(a, 80000);
   const { p, c } = await access(req, a.courseId);
@@ -498,7 +504,7 @@ export const saveActivity = onCall(options, async (req) => {
       uid: p.uid,
       classId: p.classId,
       activities: {
-        [`${id(unitId)}_${id(activityId)}`]: { position, completed, updatedAt: Date.now() },
+        [`${code(unitId)}_${id(activityId)}`]: { position, completed, updatedAt: Date.now() },
       },
     },
     { merge: true },
@@ -509,7 +515,7 @@ export const getHistory = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   let q = db
     .collection(`courses/${req.data.courseId}/attempts`)
-    .where('classId', '==', p.teacher ? id(req.data.classId) : p.classId);
+    .where('classId', '==', p.teacher ? code(req.data.classId) : p.classId);
   if (p.teacher && !c.classIds.includes(req.data.classId)) fail('班級不屬於課程');
   if (!p.teacher || req.data.uid) q = q.where('uid', '==', p.teacher ? id(req.data.uid) : p.uid);
   q = q.orderBy('receivedAt', 'desc').orderBy('__name__', 'desc');
@@ -752,7 +758,7 @@ export const questionStudents = onCall(options, async (req) => {
   let q = db
     .collection(`courses/${req.data.courseId}/statStates`)
     .where('classId', '==', req.data.classId)
-    .where('unitId', '==', id(req.data.unitId))
+    .where('unitId', '==', code(req.data.unitId))
     .where('version', '==', id(req.data.version))
     .orderBy('__name__');
   if (req.data.after) q = q.startAfter(req.data.after);
@@ -907,7 +913,7 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
 export const saveLearningEvents = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   if (p.teacher) fail('教師預覽不寫入正式診斷');
-  const unitId = id(req.data.unitId), activityId = id(req.data.activityId);
+  const unitId = code(req.data.unitId), activityId = id(req.data.activityId);
   const unit = forClass(c.published, p.classId).units.find((u) => u.id === unitId);
   const activity = unit?.activities.find((a) => a.id === activityId);
   if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || Date.parse(unit!.opensAt) > Date.now()) fail('互動教材未開放');

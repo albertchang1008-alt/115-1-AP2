@@ -1,4 +1,4 @@
-import { Question, Roster, safeId, validateQuestions, validateRoster } from './model';
+import { Question, Roster, safeCode, validateQuestions, validateRoster } from './model';
 export function column(headers: string[], names: string[]) {
   const normalized = headers.map((h) => String(h).replace(/\s/g, '').toLowerCase());
   return names.map((n) => normalized.indexOf(n.replace(/\s/g, '').toLowerCase())).find((i) => i >= 0) ?? -1;
@@ -14,7 +14,7 @@ export function parseRosterSheet(rows: unknown[][]): Roster[] {
   const result = rows.slice(1).filter((row) => row.some((v) => String(v ?? '').trim())).map((row, i) => {
     const get = reader(headers, row);
     const courseId = get('課程代碼', '課程', 'courseId');
-    if (!safeId(courseId)) throw Error(`名冊第 ${i + 2} 列課程代碼無效`);
+    if (!safeCode(courseId)) throw Error(`名冊第 ${i + 2} 列課程代碼無效`);
     const enabled = get('啟用', 'enabled').toLowerCase();
     if (enabled && !['true', 'false', '1', '0', '是', '否'].includes(enabled)) throw Error(`名冊第 ${i + 2} 列啟用值無效`);
     return { courseId, classId: get('班級代碼', '班級', 'classId'), studentId: get('學號', 'studentId'), name: get('姓名', 'name'), email: get('學校信箱', 'Gmail', 'email', '信箱').toLowerCase(), enabled: !['false', '0', '否'].includes(enabled) };
@@ -25,7 +25,7 @@ export function parseRosterSheet(rows: unknown[][]): Roster[] {
   return result;
 }
 export function parseBankSheet(rows: unknown[][], unitId: string) {
-  if (!safeId(unitId)) throw Error('分頁名稱須為單元代碼');
+  if (!safeCode(unitId)) throw Error('分頁名稱須為單元代碼');
   if (rows.length < 2) throw Error('分頁沒有題目資料');
   const headers = rows[0].map(String);
   for (const aliases of [['課程代碼', '課程', 'courseId', 'course'], ['題目ID', 'id', '題號'], ['問題', 'text', '題幹', 'question'], ['解答', '答案', 'answer']])
@@ -36,7 +36,7 @@ export function parseBankSheet(rows: unknown[][], unitId: string) {
     if (!row.some((v) => String(v ?? '').trim())) { previousImage = ''; return; }
     const get = reader(headers, row);
     const courseId = get('課程代碼', '課程', 'courseId', 'course');
-    if (!safeId(courseId)) throw Error(`第 ${i + 2} 列課程代碼無效`);
+    if (!safeCode(courseId)) throw Error(`第 ${i + 2} 列課程代碼無效`);
     const type = get('題型', 'questionType', 'type').toLowerCase();
     if (type && !['圖片', 'image', '單選', 'single'].includes(type)) throw Error(`第 ${i + 2} 列題型無效`);
     const isImage = ['圖片', 'image'].includes(type);

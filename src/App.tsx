@@ -49,7 +49,7 @@ import {
   modes,
   youtubeId,
   forClass,
-  safeId,
+  safeCode,
 } from '../shared/model';
 import {
   API,
@@ -915,10 +915,10 @@ function CourseEditor({
               aria-label="新增單元"
               onClick={() => {
                 const id = prompt(
-                  '請輸入單元代碼（英數字、-、_，之後對應 Google Sheet 分頁名稱，建立後無法更改）',
+                  '請輸入單元代碼（可用中文、英數字、-、_，不能有空白；之後對應 Google Sheet 分頁名稱，建立後無法更改）',
                 )?.trim();
                 if (!id) return;
-                if (!safeId(id)) return notify('代碼格式錯誤，只能使用英數字、- 或 _');
+                if (!safeCode(id)) return notify('代碼格式錯誤，可用中文、英數字、- 或 _，不能有空白');
                 if (c.units.some((x) => x.id === id)) return notify('代碼已存在');
                 setC({ ...c, units: [...c.units, { ...makeUnit(), id }] });
                 setIdx(c.units.length);
@@ -1000,7 +1000,7 @@ function CourseEditor({
                 單元上移
               </button>
               <button disabled={idx === c.units.length - 1} onClick={() => { const units = [...c.units]; [units[idx], units[idx + 1]] = [units[idx + 1], units[idx]]; setC({ ...c, units }); setIdx(idx + 1); }}>單元下移</button>
-              <button onClick={() => { const code = prompt('新單元代碼')?.trim(); if (!code) return; if (!safeId(code) || c.units.some((u) => u.id === code)) return notify('單元代碼無效或重複'); setC({ ...c, units: [...c.units, { ...structuredClone(u), id: code, title: u.title + '（複本）', bankVersion: '' }] }); setIdx(c.units.length); }}>複製單元</button>
+              <button onClick={() => { const code = prompt('新單元代碼')?.trim(); if (!code) return; if (!safeCode(code) || c.units.some((u) => u.id === code)) return notify('單元代碼無效或重複'); setC({ ...c, units: [...c.units, { ...structuredClone(u), id: code, title: u.title + '（複本）', bankVersion: '' }] }); setIdx(c.units.length); }}>複製單元</button>
               <button onClick={() => { if (!confirm('從草稿移除此單元？歷史題庫與紀錄保留。')) return; const classUnits = Object.fromEntries(Object.entries(c.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== u.id)])); const classOverrides = structuredClone(c.classOverrides || {}); Object.values(classOverrides).forEach((settings) => delete settings[u.id]); setC({ ...c, units: c.units.filter((unit) => unit.id !== u.id), classUnits, classOverrides }); setIdx(Math.max(0, idx - 1)); }}>移除單元</button>
               <span className="muted">ID：{u.id}</span>
             </div>

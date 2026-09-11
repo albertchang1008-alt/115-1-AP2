@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { forClass, completion } from '../shared/model';
+import { forClass, completion, safeCode } from '../shared/model';
 import { sampleCourse } from '../src/service';
 import { parseBankSheet, parseRosterSheet } from '../shared/sheets';
 import { emptyLearning, reduceLearning } from '../shared/learning';
@@ -27,4 +27,19 @@ test('重玩不覆蓋首次錯誤，通關不改變首次結果', () => {
   s = reduceLearning(s, [{ id:'b',type:'answer',questionId:'q1',correct:true }, { id:'c',type:'completed' }]);
   assert.equal(s.completed, true); assert.equal(s.answers.q1.firstCorrect, false); assert.equal(s.answers.q1.attempts, 2);
   assert.throws(() => reduceLearning(s, [{ id:'d',type:'time',seconds:5000 }]));
+});
+test('課程、單元、班級代碼可用中文，仍拒絕空白與符號', () => {
+  for (const v of ['護525', '解剖生理115-1', 'anatomy_1', '護理一甲']) assert.ok(safeCode(v), v);
+  for (const v of ['', '護 525', '護/525', '護.525', '護525！', 'a'.repeat(51)]) assert.ok(!safeCode(v), v);
+  const rows = parseRosterSheet([
+    ['課程代碼', '班級代碼', '學號', '姓名', '學校信箱', '啟用'],
+    ['解剖生理', '護525', '001', '學生', 'student@ctcn.edu.tw', 'TRUE'],
+  ]);
+  assert.equal(rows[0].classId, '護525');
+  assert.equal(rows[0].courseId, '解剖生理');
+  const groups = parseBankSheet([
+    ['課程代碼', '題目ID', '題型', '問題', '選項A', '選項B', '解答'],
+    ['解剖生理', 'q1', '單選', '細胞膜的主要成分？', '磷脂質', '澱粉', 'A'],
+  ], '第一章細胞');
+  assert.equal(groups.get('解剖生理')!.length, 1);
 });

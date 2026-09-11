@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { Course, safeId, forClass } from '../shared/model';
+import { Course, safeCode, forClass } from '../shared/model';
 export function NewCourse({ source, close, create }: { source?: Course; close: () => void; create: (c: Course) => Promise<void> }) {
   const [code, setCode] = useState(''), [title, setTitle] = useState(source ? source.title + '（複本）' : ''), [term, setTerm] = useState(source?.term || '115 學年度第 1 學期'), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   return <div className="modalshade"><form className="modal" onSubmit={async (e) => {
     e.preventDefault(); setError('');
-    if (!safeId(code.trim()) || !title.trim() || !term.trim()) return setError('請填寫課程名稱、學期及英數字課程代碼');
+    if (!safeCode(code.trim()) || !title.trim() || !term.trim()) return setError('請填寫課程名稱、學期及課程代碼（可用中文、英數字、- 或 _，不能有空白）');
     setBusy(true);
     try { await create({ id: code.trim(), title: title.trim(), term: term.trim(), description: source?.description || '', classIds: [], classNames: {}, classUnits: {}, sheetsUrl: '', units: source ? source.units.map((u) => ({ ...structuredClone(u), bankVersion: '' })) : [] }); close(); }
     catch (e) { setError((e as Error).message); } finally { setBusy(false); }
-  }}><h2>{source ? '複製課程架構' : '建立課程'}</h2><label className="field">課程名稱<input autoFocus required value={title} onChange={(e) => setTitle(e.target.value)} /></label><label className="field">課程代碼<input required value={code} onChange={(e) => setCode(e.target.value)} placeholder="例如 anatomy-115-1" /></label><label className="field">學期<input required value={term} onChange={(e) => setTerm(e.target.value)} /></label><p>建立後再新增班級及安排單元。代碼建立後固定，用來對應 Google Sheet。</p>{source && <p>複製單元與教材；新課程的名冊及題庫請重新同步，歷史作答不會複製。</p>}{error && <p role="alert" className="error">{error}</p>}<div className="actions"><button disabled={busy} type="submit">{busy ? '保存中…' : '建立並保存'}</button><button disabled={busy} type="button" onClick={close}>取消</button></div></form></div>;
+  }}><h2>{source ? '複製課程架構' : '建立課程'}</h2><label className="field">課程名稱<input autoFocus required value={title} onChange={(e) => setTitle(e.target.value)} /></label><label className="field">課程代碼<input required value={code} onChange={(e) => setCode(e.target.value)} placeholder="例如 anatomy-115-1 或 解剖生理115-1" /></label><label className="field">學期<input required value={term} onChange={(e) => setTerm(e.target.value)} /></label><p>建立後再新增班級及安排單元。代碼建立後固定，用來對應 Google Sheet。</p>{source && <p>複製單元與教材；新課程的名冊及題庫請重新同步，歷史作答不會複製。</p>}{error && <p role="alert" className="error">{error}</p>}<div className="actions"><button disabled={busy} type="submit">{busy ? '保存中…' : '建立並保存'}</button><button disabled={busy} type="button" onClick={close}>取消</button></div></form></div>;
 }
 export function ClassManager({ course, change }: { course: Course; change: (c: Course) => void }) {
   const [code, setCode] = useState(''), [name, setName] = useState(''), [error, setError] = useState('');
   const update = (cl: string, ids: string[]) => change({ ...course, classUnits: { ...course.classUnits, [cl]: ids } });
-  return <section className="panel"><h2>課程班級與適用單元</h2><div className="formgrid"><label className="field">班級名稱<input value={name} onChange={(e) => setName(e.target.value)} placeholder="護理一甲" /></label><label className="field">班級代碼<input value={code} onChange={(e) => setCode(e.target.value)} placeholder="N1A" /></label></div><button type="button" onClick={() => {
-    const cl = code.trim(); if (!safeId(cl) || !name.trim()) return setError('請填寫名稱與英數字班級代碼');
+  return <section className="panel"><h2>課程班級與適用單元</h2><div className="formgrid"><label className="field">班級名稱<input value={name} onChange={(e) => setName(e.target.value)} placeholder="護理一甲" /></label><label className="field">班級代碼<input value={code} onChange={(e) => setCode(e.target.value)} placeholder="護525 或 N1A" /></label></div><button type="button" onClick={() => {
+    const cl = code.trim(); if (!safeCode(cl) || !name.trim()) return setError('請填寫名稱與班級代碼（可用中文、英數字、- 或 _，不能有空白）');
     if (course.classIds.includes(cl)) return setError('本課程已有此班級代碼');
     change({ ...course, classIds: [...course.classIds, cl], classNames: { ...course.classNames, [cl]: name.trim() }, classUnits: { ...course.classUnits, [cl]: course.units.map((u) => u.id) } }); setCode(''); setName(''); setError('');
   }}>新增班級</button>{error && <p className="error">{error}</p>}{course.classIds.map((cl) => {

@@ -152,6 +152,10 @@ export function completion(course: Course, p: Progress) {
 export function safeId(s: string) {
   return /^[a-zA-Z0-9_-]{1,100}$/.test(s);
 }
+// 教師自訂的課程、單元、班級代碼：允許中文，不允許空白與標點。
+export function safeCode(s: string) {
+  return /^[-a-zA-Z0-9_\u3400-\u4dbf\u4e00-\u9fff]{1,50}$/.test(s);
+}
 export function youtubeId(raw: string) {
   try {
     const u = new URL(raw);
@@ -198,7 +202,7 @@ export function validateRoster(rows: Roster[]) {
       !/^[^@\s]+@ctcn\.edu\.tw$/.test(r.email) ||
       !r.name ||
       !safeId(r.studentId) ||
-      !safeId(r.classId)
+      !safeCode(r.classId)
     )
       errors.push(`第 ${i + 1} 列：信箱、姓名、學號或班級不完整`);
     const scope = r.courseId || '';
