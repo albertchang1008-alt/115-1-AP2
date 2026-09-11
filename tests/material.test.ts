@@ -4,6 +4,7 @@ import { materialUrl } from '../shared/model';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { HtmlMaterial } from '../src/Player';
+import type { API } from '../src/service';
 
 test('教材接受 Pages 子路徑、自訂網域與版本參數，拒絕非 HTTPS 與帳密網址', () => {
   for (const url of [
@@ -37,7 +38,14 @@ test('學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈�
   };
   const render = (url: string) =>
     renderToStaticMarkup(
-      createElement(HtmlMaterial, { activity: { ...activity, url }, onSave: () => {} }),
+      createElement(HtmlMaterial, {
+        api: {} as API,
+        courseId: 'course-1',
+        unitId: 'unit-1',
+        uid: 'student-1',
+        activity: { ...activity, url },
+        onSave: () => {},
+      }),
     );
   const html = render(activity.url);
   assert.ok(html.includes(`src="${activity.url}"`));

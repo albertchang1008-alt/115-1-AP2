@@ -1,3 +1,5 @@
+import { parseRosterSheet, parseBankSheet } from '../../shared/sheets';
+import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
@@ -8,6 +10,7 @@ import { VERSION } from '../../shared/version';
 import {
   materialUrl as validMaterialUrl,
   Course,
+  Unit,
   Attempt,
   Report,
   Seen,
@@ -61,10 +64,10 @@ async function identity(req: any) {
     !String(t.email).endsWith('@ctcn.edu.tw')
   )
     throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
-  const doc = await db.doc(`roster/${t.email}`).get();
-  if (!doc.exists || !doc.data()?.enabled)
-    throw new HttpsError('permission-denied', '尚未列入名冊或帳號已停用，請聯絡教師');
-  return { ...doc.data(), uid: req.auth.uid, email: t.email, teacher: false } as any;
+  return { uid: req.auth.uid, email: String(t.email).toLowerCase(), teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true } as any;
+}
+function enrollmentRef(courseId: string, email: string) {
+  return db.doc(`enrollments/${id(courseId)}__${email}`);
 }
 async function access(req: any, courseId: string, teacherOnly = false) {
   const p = await identity(req);
@@ -72,36 +75,43 @@ async function access(req: any, courseId: string, teacherOnly = false) {
   if (!doc.exists) fail('課程不存在');
   const c = doc.data()!;
   if (p.teacher) {
-    if (!c.teacherIds?.includes(p.uid))
-      throw new HttpsError('permission-denied', '未獲授權管理此課程');
-  } else if (teacherOnly || !c.classIds?.includes(p.classId))
-    throw new HttpsError('permission-denied', '不屬於此課程');
+    if (!c.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權管理此課程');
+    c.classIds = [...new Set([...(c.draft?.classIds || []), ...(c.published?.classIds || [])])];
+  } else {
+    if (teacherOnly || c.archived || !c.published) throw new HttpsError('permission-denied', '課程未開放');
+    const member = c.rosterVersion === 2
+      ? await enrollmentRef(courseId, p.email).get()
+      : await db.doc(`roster/${p.email}`).get();
+    if (!member.exists || !member.data()?.enabled || !c.published.classIds.includes(member.data()?.classId))
+      throw new HttpsError('permission-denied', '未列入此課程的啟用班級名冊');
+    Object.assign(p, member.data());
+  }
   return { p, c };
-}
-async function ownsClass(uid: string, classId: string) {
-  const c = await db.doc(`classes/${id(classId)}`).get();
-  if (c.exists && !c.data()?.teacherIds?.includes(uid))
-    throw new HttpsError('permission-denied', '班級由其他教師管理');
-  return c;
 }
 export const bootstrap = onCall(options, async (req) => {
   const p = await identity(req);
   await db.doc(`profiles/${p.uid}`).set(p);
-  const snap = await db
-    .collection('courses')
-    .where(p.teacher ? 'teacherIds' : 'classIds', 'array-contains', p.teacher ? p.uid : p.classId)
-    .limit(100)
-    .get();
-  return {
-    profile: p,
-    courses: snap.docs
-      .filter((d) => p.teacher || d.data().published)
-      .map((d) => ({
-        ...(p.teacher ? d.data().draft : forClass(d.data().published, p.classId)),
-        id: d.id,
-      })),
-    version: VERSION,
-  };
+  if (p.teacher) {
+    const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), version: VERSION };
+  }
+  const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
+  const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
+  const legacy = await db.doc(`roster/${p.email}`).get();
+  if (legacy.data()?.enabled) {
+    const courses = await db.collection('courses').where('classIds', 'array-contains', legacy.data()!.classId).limit(100).get();
+    courses.docs.filter((d) => d.data().rosterVersion !== 2).forEach((d) => ids.add(d.id));
+  }
+  const courses = [];
+  for (const courseId of ids) {
+    try {
+      const { p: student, c } = await access(req, courseId);
+      courses.push({ ...forClass(c.published, student.classId), id: courseId, enrollmentClassId: student.classId });
+    } catch (e) {
+      if (!(e instanceof HttpsError)) throw e;
+    }
+  }
+  return { profile: p, courses, version: VERSION };
 });
 export const saveCourse = onCall(options, async (req) => {
   const p = await identity(req);
@@ -109,9 +119,12 @@ export const saveCourse = onCall(options, async (req) => {
   const course = req.data.course as Course;
   id(course.id);
   size(course);
-  if (!course.title?.trim() || !course.term || !course.classIds?.length || course.units.length > 50)
-    fail('請填寫課程、學期及班級（最多 50 單元）');
-  for (const cl of course.classIds) await ownsClass(p.uid, cl);
+  if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
+    fail('請填寫課程與學期，最多 50 班、50 單元');
+  if (new Set(course.classIds).size !== course.classIds.length) fail('班級代碼重複');
+  course.classIds.forEach(id);
+  for (const [cl, units] of Object.entries(course.classUnits || {}))
+    if (!course.classIds.includes(cl) || !Array.isArray(units) || new Set(units).size !== units.length || units.some((u) => !course.units.some((unit) => unit.id === u))) fail('班級適用單元設定無效');
   const unitIds = new Set();
   for (const u of course.units) {
     id(u.id);
@@ -143,6 +156,9 @@ export const saveCourse = onCall(options, async (req) => {
           (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))
       )
         fail('YouTube 連結或片段時間無效');
+      if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
+      if (a.materialVersion) id(a.materialVersion);
+      for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
       if (a.type === 'html' && a.url && !validMaterialUrl(a.url))
         fail('教材網址需使用有效 HTTPS 網址');
       if (a.type === 'link' && !/^https:\/\//.test(a.url)) fail('教材連結需使用 HTTPS');
@@ -175,7 +191,8 @@ export const saveCourse = onCall(options, async (req) => {
       {
         draft: course,
         teacherIds: old.data()?.teacherIds || [p.uid],
-        classIds: course.classIds,
+        classIds: old.data()?.published?.classIds || [],
+        rosterVersion: old.exists ? old.data()?.rosterVersion || 1 : 2,
         updatedAt: Date.now(),
       },
       { merge: true },
@@ -186,8 +203,13 @@ export const saveCourse = onCall(options, async (req) => {
 export const publishCourse = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const course = c.draft as Course;
-  for (const u of course.units) {
-    if (u.required && !u.bankVersion) fail(`${u.title} 尚未指定題庫`);
+  if (!course.classIds.length || !course.units.length) fail('發布前請建立班級與單元');
+  for (const cl of course.classIds) {
+    if (!forClass(course, cl).units.length) fail(`班級 ${cl} 尚未勾選單元`);
+  }
+  const usedUnits = course.units.filter((u) => course.classIds.some((cl) => forClass(course, cl).units.some((x) => x.id === u.id)));
+  for (const u of usedUnits) {
+    if (course.classIds.some((cl) => forClass(course, cl).units.some((x) => x.id === u.id && x.required)) && !u.bankVersion) fail(`${u.title} 尚未指定題庫`);
     if (u.bankVersion) {
       const b = await db.doc(`banks/${course.id}_${u.id}_${id(u.bankVersion)}`).get();
       if (!b.exists) fail('題庫版本不存在');
@@ -196,7 +218,13 @@ export const publishCourse = onCall(options, async (req) => {
       if (a.type === 'html' && !validMaterialUrl(a.url)) fail(`${a.title} 尚未提供有效教材網址`);
   }
   const published = { ...course, publishedAt: Date.now() };
-  await db.doc(`courses/${course.id}`).update({ published });
+  await db.runTransaction(async (tx) => {
+    const ref = db.doc(`courses/${course.id}`);
+    const fresh = await tx.get(ref);
+    if (!fresh.data()?.teacherIds?.includes(req.auth!.uid)) fail('未獲授權');
+    if (JSON.stringify(fresh.data()?.draft) !== JSON.stringify(course)) fail('草稿剛被更新，請重新載入後發布');
+    tx.update(ref, { published, classIds: course.classIds });
+  });
   return published;
 });
 export const deleteCourse = onCall(options, async (req) => {
@@ -204,50 +232,77 @@ export const deleteCourse = onCall(options, async (req) => {
   await db.doc(`courses/${id(req.data.courseId)}`).delete();
   return { ok: true };
 });
+async function writeEnrollments(uid: string, courseId: string, rows: Roster[], migrating = false) {
+  const errors = validateRoster(rows);
+  if (errors.length) fail(errors.join('；'));
+  let updated = 0;
+  for (let i = 0; i < rows.length; i += 100) {
+    updated += await db.runTransaction(async (tx) => {
+      const course = await tx.get(db.doc(`courses/${id(courseId)}`));
+      if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+      if (!migrating && course.data()?.rosterVersion !== 2) fail('請先在班級名冊預覽並轉換舊名冊');
+      const batch = rows.slice(i, i + 100);
+      const originals = [];
+      for (const row of batch) {
+        if (!course.data()?.draft?.classIds.includes(row.classId)) fail('班級尚未建立並保存：' + row.classId);
+        const ref = enrollmentRef(courseId, row.email);
+        const old = await tx.get(ref);
+        const key = db.doc(`courses/${courseId}/studentIds/${id(row.studentId)}`);
+        const existing = await tx.get(key);
+        if (existing.exists && existing.data()!.email !== row.email) fail('此課程學號已屬於其他信箱：' + row.studentId);
+        const oldKey = old.exists && old.data()!.studentId !== row.studentId ? db.doc(`courses/${courseId}/studentIds/${id(old.data()!.studentId)}`) : null;
+        const oldKeySnap = oldKey ? await tx.get(oldKey) : null;
+        originals.push({ row, ref, old, key, existing, oldKey, oldKeySnap });
+      }
+      let count = 0;
+      for (const { row, ref, old, key, existing, oldKey, oldKeySnap } of originals) {
+        if (migrating && old.exists) continue;
+        const value = { ...row, courseId };
+        if (!old.exists || Object.entries(value).some(([k, v]) => old.data()![k] !== v)) { tx.set(ref, value); count++; }
+        if (!existing.exists) tx.set(key, { email: row.email });
+        if (oldKey && oldKeySnap?.data()?.email === row.email) tx.delete(oldKey);
+      }
+      return count;
+    });
+  }
+  return { count: rows.length, updated, changed: updated > 0 };
+}
 export const importRoster = onCall(options, async (req) => {
-  const p = await identity(req);
-  if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+  const { p } = await access(req, req.data.courseId, true);
   const rows = req.data.rows as Roster[];
   if (!Array.isArray(rows) || !rows.length || rows.length > 200) fail('每次匯入 1–200 人');
-  const errors = validateRoster(rows);
-  if (errors.length) fail(errors.join('\n'));
-  const classIds = [...new Set(rows.map((r) => r.classId))];
-  if (classIds.length > 50) fail('每次最多 50 個班級');
-  await db.runTransaction(async (tx) => {
-    const classes = new Map();
-    const originals = new Map();
-    for (const cl of classIds) classes.set(cl, await tx.get(db.doc(`classes/${cl}`)));
-    for (const r of rows) {
-      const old = await tx.get(db.doc(`roster/${r.email}`));
-      originals.set(r.email, old);
-      if (old.exists && !classes.has(old.data()!.classId))
-        classes.set(old.data()!.classId, await tx.get(db.doc(`classes/${old.data()!.classId}`)));
-      const key = await tx.get(db.doc(`studentIds/${r.studentId}`));
-      if (key.exists && key.data()!.email !== r.email) fail('學號已屬於另一個信箱：' + r.studentId);
-    }
-    for (const c of classes.values()) {
-      if (c.exists && !c.data().teacherIds?.includes(p.uid))
-        throw new HttpsError('permission-denied', '無權修改此班級名冊');
-    }
-    for (const cl of classIds)
-      tx.set(
-        db.doc(`classes/${cl}`),
-        { teacherIds: FieldValue.arrayUnion(p.uid) },
-        { merge: true },
-      );
-    for (const r of rows) {
-      tx.set(db.doc(`roster/${r.email}`), r);
-      tx.set(db.doc(`studentIds/${r.studentId}`), { email: r.email });
-    }
-  });
-  return { count: rows.length };
+  return writeEnrollments(p.uid, req.data.courseId, rows.map((r) => ({ ...r, courseId: req.data.courseId })));
 });
+export const migrateRoster = onCall(options, async (req) => {
+  const { p, c } = await access(req, req.data.courseId, true);
+  if (c.rosterVersion === 2) return { done: true, count: 0, rows: [] };
+  const rows: Roster[] = [];
+  for (const cl of c.draft.classIds) {
+    const owner = await db.doc(`classes/${cl}`).get();
+    if (owner.exists && !owner.data()?.teacherIds?.includes(p.uid)) fail('無權轉換舊班級：' + cl);
+    const snap = await db.collection('roster').where('classId', '==', cl).limit(1001).get();
+    if (snap.size > 1000 || rows.length + snap.size > 3000) fail('舊名冊過大，請先分批整理');
+    rows.push(...snap.docs.map((d) => ({ ...d.data(), courseId: req.data.courseId }) as Roster));
+  }
+  if (req.data.apply === true) {
+    await writeEnrollments(p.uid, req.data.courseId, rows, true);
+    await db.doc(`courses/${req.data.courseId}`).update({ rosterVersion: 2 });
+  }
+  return { done: req.data.apply === true, count: rows.length, rows: rows.slice(0, 20) };
+});
+export const archiveCourse = onCall(options, async (req) => {
+  await access(req, req.data.courseId, true);
+  await db.doc(`courses/${req.data.courseId}`).update({ archived: req.data.archived === true });
+  return { ok: true };
+});
+function rosterQuery(courseId: string, c: any) {
+  return c.rosterVersion === 2 ? db.collection('enrollments').where('courseId', '==', courseId) : db.collection('roster');
+}
 export const getRoster = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const classId = id(req.data.classId);
   if (!c.classIds.includes(classId)) fail('班級不屬於課程');
-  const snap = await db
-    .collection('roster')
+  const snap = await rosterQuery(req.data.courseId, c)
     .where('classId', '==', classId)
     .orderBy('studentId')
     .startAfter(req.data.after || '')
@@ -292,7 +347,8 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   return { version, count: questions.length };
 }
 export const publishQuestions = onCall(options, async (req) => {
-  await access(req, req.data.courseId, true);
+  const { c } = await access(req, req.data.courseId, true);
+  if (!c.draft?.units?.some((u: Unit) => u.id === req.data.unitId)) fail('請先建立並保存單元');
   return publishBank(req.data.courseId, req.data.unitId, req.data.questions);
 });
 export const sheetsPublish = onRequest({ ...options, secrets: [syncSecret] }, async (req, res) => {
@@ -323,7 +379,7 @@ export const sheetsPublish = onRequest({ ...options, secrets: [syncSecret] }, as
 });
 export const getBank = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
-  const source = p.teacher && req.data.draft ? c.draft : c.published;
+  const source = p.teacher ? (req.data.draft ? c.draft : c.published) : forClass(c.published, p.classId);
   if (
     !source?.units.some(
       (u: any) => u.id === req.data.unitId && u.bankVersion === req.data.version,
@@ -434,6 +490,8 @@ export const saveActivity = onCall(options, async (req) => {
     typeof completed !== 'boolean'
   )
     fail('活動資料無效');
+  const activity = u.activities.find((a: any) => a.id === activityId);
+  if (activity?.tracking === 'interactive') fail('互動教材需由事件回報通關');
   const ref = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
   await ref.set(
     {
@@ -584,15 +642,15 @@ export const dailyReports = onSchedule(
 );
 export const getCompletion = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
-  if (!c.classIds.includes(req.data.classId)) fail('班級不存在');
-  const roster = await db
-    .collection('roster')
+  if (!c.published) fail('請先發布課程再查看完成度');
+  if (!c.published.classIds.includes(req.data.classId)) fail('班級不存在');
+  const roster = await rosterQuery(req.data.courseId, c)
     .where('classId', '==', req.data.classId)
     .orderBy('studentId')
     .startAfter(req.data.after || '')
     .limit(50)
     .get();
-  const emails = roster.docs.map((d) => d.id);
+  const emails = roster.docs.map((d) => d.data().email);
   const profiles = [];
   for (let i = 0; i < emails.length; i += 30) {
     const s = await db
@@ -604,7 +662,7 @@ export const getCompletion = onCall(options, async (req) => {
   const byEmail = new Map(profiles.map((d) => [d.data().email, d.id]));
   const rows = await Promise.all(
     roster.docs.map(async (d) => {
-      const uid = byEmail.get(d.id);
+      const uid = byEmail.get(d.data().email);
       return {
         ...d.data(),
         uid: uid || null,
@@ -615,11 +673,12 @@ export const getCompletion = onCall(options, async (req) => {
       };
     }),
   );
-  return { rows, next: roster.size === 50 ? roster.docs.at(-1)!.data().studentId : null };
+  return { course: c.published, rows, next: roster.size === 50 ? roster.docs.at(-1)!.data().studentId : null };
 });
 export const createSnapshot = onCall(options, async (req) => {
   const { c, p } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不存在');
+  if (!c.published) fail('請先發布課程再結算');
   const sid = id(req.data.snapshotId);
   const ref = db.doc(`courses/${req.data.courseId}/snapshots/${sid}`);
   if (!(await ref.get()).exists)
@@ -632,8 +691,7 @@ export const createSnapshot = onCall(options, async (req) => {
     });
   const meta = (await ref.get()).data()!;
   if (meta.classId !== req.data.classId || meta.status === 'complete') return { done: true };
-  const roster = await db
-    .collection('roster')
+  const roster = await rosterQuery(req.data.courseId, c)
     .where('classId', '==', meta.classId)
     .orderBy('studentId')
     .startAfter(meta.cursor || '')
@@ -641,7 +699,7 @@ export const createSnapshot = onCall(options, async (req) => {
     .get();
   const rows: any[] = [];
   for (const r of roster.docs) {
-    const users = await db.collection('profiles').where('email', '==', r.id).limit(1).get();
+    const users = await db.collection('profiles').where('email', '==', r.data().email).limit(1).get();
     const uid = users.docs[0]?.id;
     rows.push({
       ...r.data(),
@@ -720,7 +778,7 @@ async function metadataToken(scope: string) {
   const res = await fetch(
     'http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token?scopes=' +
       encodeURIComponent(scope),
-    { headers: { 'Metadata-Flavor': 'Google' } },
+    { headers: { 'Metadata-Flavor': 'Google' }, signal: AbortSignal.timeout(15000) },
   );
   if (!res.ok) fail('無法取得 Google 服務帳戶權杖');
   const data = (await res.json()) as { access_token: string };
@@ -729,151 +787,61 @@ async function metadataToken(scope: string) {
 async function sheetsGet(sheetId: string, path: string, token: string): Promise<any> {
   const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}${path}`, {
     headers: { Authorization: `Bearer ${token}` },
+    signal: AbortSignal.timeout(30000),
   });
-  if (!res.ok) fail('讀取 Google Sheet 失敗：' + (await res.text()));
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    const detail = body?.error?.message || `HTTP ${res.status}`;
+    if (res.status === 403) fail('Google Sheet 讀取遭拒：請確認 Sheets API 已啟用，且已分享給此函式的執行服務帳戶。' + detail);
+    if (res.status === 404) fail('找不到 Google Sheet：請確認網址及執行服務帳戶的檢視權限。');
+    fail('讀取 Google Sheet 失敗：' + detail);
+  }
   return res.json();
 }
-function sheetCol(headers: string[], names: string[]) {
-  for (const n of names) {
-    const i = headers.indexOf(n);
-    if (i >= 0) return i;
-  }
-  return -1;
+async function readSheetRows(sheetId: string, token: string, title: string) {
+  const range = "'" + title.replace(/'/g, "''") + "'";
+  const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent(range), token);
+  return (data.values || []) as unknown[][];
 }
 async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
-  const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent('名冊'), token);
-  const rows: string[][] = data.values || [];
-  if (rows.length < 2) return { count: 0, changed: false };
-  const headers = rows[0].map((h) => String(h || '').trim());
-  const cClass = sheetCol(headers, ['班級', 'classId']);
-  const cStudentId = sheetCol(headers, ['學號', 'studentId']);
-  const cName = sheetCol(headers, ['姓名', 'name']);
-  const cEmail = sheetCol(headers, ['Gmail', 'gmail', 'Email', 'email', '信箱']);
-  if (cClass < 0 || cStudentId < 0 || cName < 0 || cEmail < 0)
-    fail('名冊分頁缺少班級、學號、姓名或 Gmail 欄位');
-  const students: Roster[] = rows
-    .slice(1)
-    .map((r) => ({
-      classId: String(r[cClass] || '').trim(),
-      studentId: String(r[cStudentId] || '').trim(),
-      name: String(r[cName] || '').trim(),
-      email: String(r[cEmail] || '')
-        .trim()
-        .toLowerCase(),
-      enabled: true,
-    }))
-    .filter((s) => s.email || s.studentId);
-  if (students.length > 3000) fail('名冊筆數過多，請分批處理');
-  const errors = validateRoster(students);
-  if (errors.length) fail('名冊格式錯誤：' + errors.slice(0, 5).join('；'));
-  const hash = createHash('sha256').update(JSON.stringify(students)).digest('hex');
-  const statusRef = db.doc('sync/status');
-  const status = await statusRef.get();
-  if (status.data()?.rosterHash === hash) return { count: students.length, changed: false };
-  const classIds = [...new Set(students.map((s) => s.classId))];
-  const classSnaps = await Promise.all(classIds.map((cl) => db.doc(`classes/${cl}`).get()));
-  classSnaps.forEach((snap, i) => {
-    if (snap.exists && !snap.data()?.teacherIds?.includes(p.uid))
-      fail('班級由其他教師管理：' + classIds[i]);
-  });
-  for (let i = 0; i < classIds.length; i += 400) {
-    const batch = db.batch();
-    for (const cl of classIds.slice(i, i + 400))
-      batch.set(db.doc(`classes/${cl}`), { teacherIds: FieldValue.arrayUnion(p.uid) }, { merge: true });
-    await batch.commit();
+  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'));
+  const results = [];
+  for (const courseId of new Set(students.map((s) => s.courseId!))) {
+    try { results.push({ courseId, ...await writeEnrollments(p.uid, courseId, students.filter((s) => s.courseId === courseId)) }); }
+    catch (e) { results.push({ courseId, error: (e as Error).message + '；先前批次可能已保存，可修正後重試' }); }
   }
-  for (let i = 0; i < students.length; i += 400) {
-    const batch = db.batch();
-    for (const s of students.slice(i, i + 400)) {
-      batch.set(db.doc(`roster/${s.email}`), s);
-      batch.set(db.doc(`studentIds/${s.studentId}`), { email: s.email });
-    }
-    await batch.commit();
-  }
-  await statusRef.set(
-    { rosterHash: hash, rosterCount: students.length, rosterSyncedAt: Date.now() },
-    { merge: true },
-  );
-  return { count: students.length, changed: true };
+  return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
 }
-function parseSheetQuestionRow(headers: string[], row: string[]): Question {
-  const get = (name: string) => {
-    const i = headers.indexOf(name);
-    return i >= 0 ? String(row[i] || '').trim() : '';
-  };
-  const options = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    .filter((k) => get(k))
-    .map((k) => ({ id: k, text: get(k) }));
-  return {
-    id: get('id'),
-    text: get('text'),
-    options,
-    answer: get('answer').toLowerCase(),
-    explanation: get('explanation'),
-    concept: get('concept'),
-    image: get('image'),
-    socratic: {
-      concept: get('socraticConcept'),
-      misconception: get('socraticMisconception'),
-      hint1: get('socraticHint1'),
-      hint2: get('socraticHint2'),
-      hint3: get('socraticHint3'),
-    },
-    remedialUrl: get('remedialUrl'),
-  };
-}
-async function syncBankTabFromSheet(sheetId: string, token: string, unitId: string) {
-  const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent(unitId), token);
-  const rows: string[][] = data.values || [];
-  if (rows.length < 2) return null;
-  const headers = rows[0].map((h) => String(h || '').trim());
-  const cCourse = sheetCol(headers, ['課程', 'course', 'courseId']);
-  const cId = sheetCol(headers, ['id']);
-  if (cCourse < 0 || cId < 0) return null;
-  const groups = new Map<string, string[][]>();
-  for (const r of rows.slice(1)) {
-    const courseId = String(r[cCourse] || '').trim();
-    if (!courseId || !String(r[cId] || '').trim()) continue;
-    if (!groups.has(courseId)) groups.set(courseId, []);
-    groups.get(courseId)!.push(r);
-  }
-  const results: any[] = [];
-  for (const [courseId, qrows] of groups) {
+async function syncBankTabFromSheet(sheetId: string, token: string, unitId: string, uid: string) {
+  const groups = parseBankSheet(await readSheetRows(sheetId, token, unitId), unitId);
+  const results = [];
+  for (const [courseId, questions] of groups) {
     try {
-      if (!safeId(courseId)) throw new Error('課程代碼格式錯誤');
-      const courseSnap = await db.doc(`courses/${courseId}`).get();
-      if (!courseSnap.exists) throw new Error('課程不存在：' + courseId);
-      const questions = qrows.map((r) => parseSheetQuestionRow(headers, r));
-      const errs = validateQuestions(questions);
-      if (errs.length) throw new Error(errs.join('；'));
-      const r = await publishBank(courseId, unitId, questions);
+      const ref = db.doc(`courses/${courseId}`);
+      const course = await ref.get();
+      if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+      if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
+      const result = await publishBank(courseId, unitId, questions);
       await db.runTransaction(async (tx) => {
-        const snap = await tx.get(db.doc(`courses/${courseId}`));
-        if (!snap.exists) return;
-        const draft = snap.data()!.draft as Course;
-        const unit = draft?.units?.find((u) => u.id === unitId);
-        if (!unit || unit.bankVersion === r.version) return;
-        tx.update(snap.ref, {
-          draft: {
-            ...draft,
-            units: draft.units.map((u) => (u.id === unitId ? { ...u, bankVersion: r.version } : u)),
-          },
-        });
+        const current = await tx.get(ref);
+        const draft = current.data()?.draft as Course;
+        if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
+        if (draft.units.find((u) => u.id === unitId)?.bankVersion !== result.version)
+          tx.update(ref, { draft: { ...draft, units: draft.units.map((u) => u.id === unitId ? { ...u, bankVersion: result.version } : u) } });
       });
-      results.push({ courseId, unitId, version: r.version, count: r.count });
-    } catch (e) {
-      results.push({ courseId, unitId, error: (e as Error).message });
-    }
+      results.push({ courseId, unitId, ...result });
+    } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
   }
   return results;
 }
 export const saveSheetConfig = onCall(options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
-  const sheetId = String(req.data?.sheetId || '').trim();
+  const raw = String(req.data?.sheetId || '').trim();
+  const sheetId = raw.match(/^https:\/\/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/)?.[1] || raw;
   if (!/^[a-zA-Z0-9_-]{10,80}$/.test(sheetId)) fail('Google Sheet ID 格式錯誤');
   await db.doc('sync/config').set({ sheetId, updatedBy: p.uid, updatedAt: Date.now() }, { merge: true });
-  return { ok: true };
+  return { ok: true, sheetId };
 });
 export const getSyncStatus = onCall(options, async (req) => {
   const p = await identity(req);
@@ -888,26 +856,85 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
   const sheetId = configSnap.data()?.sheetId;
   if (!sheetId) fail('尚未設定 Google Sheet ID');
   const statusRef = db.doc('sync/status');
+  const runId = randomUUID();
   await db.runTransaction(async (tx) => {
     const s = await tx.get(statusRef);
-    if (s.data()?.syncing) fail('已有同步正在執行，請稍後再試');
-    tx.set(statusRef, { syncing: true }, { merge: true });
+    if (s.data()?.syncing && s.data()?.leaseUntil > Date.now())
+      fail('已有同步正在執行，請稍後再試');
+    tx.set(statusRef, { syncing: true, runId, leaseUntil: Date.now() + 360000 }, { merge: true });
   });
+  async function finish(result: Record<string, unknown>) {
+    await db.runTransaction(async (tx) => {
+      const current = await tx.get(statusRef);
+      if (current.data()?.runId === runId)
+        tx.set(statusRef, { ...result, syncing: false, leaseUntil: 0 }, { merge: true });
+    });
+  }
   try {
     const token = await metadataToken('https://www.googleapis.com/auth/spreadsheets.readonly');
     const meta = await sheetsGet(sheetId, '?fields=sheets.properties.title', token);
     const titles: string[] = (meta.sheets || []).map((s: any) => s.properties.title);
-    const roster = titles.includes('名冊') ? await syncRosterFromSheet(sheetId, token, p) : null;
+    let roster: any;
+    try {
+      roster = titles.includes('名冊')
+        ? await syncRosterFromSheet(sheetId, token, p)
+        : { error: '找不到「名冊」分頁，未同步名單' };
+    } catch (e) {
+      roster = { error: (e as Error).message + '；較早批次可能已寫入，修正後可重試' };
+    }
     const banks: any[] = [];
     for (const title of titles) {
       if (title === '名冊') continue;
-      const r = await syncBankTabFromSheet(sheetId, token, title);
-      if (r) banks.push(...r);
+      try {
+        const r = await syncBankTabFromSheet(sheetId, token, title, p.uid);
+        banks.push(...r);
+      } catch (e) {
+        banks.push({ unitId: title, error: (e as Error).message });
+      }
     }
-    await statusRef.set({ syncing: false, lastSyncedAt: Date.now() }, { merge: true });
-    return { roster, banks };
+    const hasErrors = !!roster?.error || banks.some((bank) => bank.error);
+    const lastSyncedAt = Date.now();
+    const result = { roster, banks, hasErrors, lastSyncedAt };
+    await finish({ lastSyncedAt, lastResult: result, lastError: '' });
+    return result;
   } catch (e) {
-    await statusRef.set({ syncing: false }, { merge: true });
-    throw e;
+    await finish({ lastError: (e as Error).message });
+    if (e instanceof HttpsError) throw e;
+    fail('同步失敗：' + (e as Error).message);
   }
+});
+
+export const saveLearningEvents = onCall(options, async (req) => {
+  const { p, c } = await access(req, req.data.courseId);
+  if (p.teacher) fail('教師預覽不寫入正式診斷');
+  const unitId = id(req.data.unitId), activityId = id(req.data.activityId);
+  const unit = forClass(c.published, p.classId).units.find((u) => u.id === unitId);
+  const activity = unit?.activities.find((a) => a.id === activityId);
+  if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || Date.parse(unit!.opensAt) > Date.now()) fail('互動教材未開放');
+  const version = id(req.data.materialVersion);
+  if (version !== (activity.materialVersion || 'v1')) fail('教材版本已更新，請重新開啟教材');
+  const events = req.data.events as LearningEvent[];
+  if (!Array.isArray(events) || !events.length || events.length > 30 || new Set(events.map((e) => e.id)).size !== events.length) fail('事件批次無效');
+  size(events, 20000);
+  const ref = db.doc(`courses/${req.data.courseId}/diagnostics/${p.uid}_${unitId}_${activityId}_${version}`);
+  const eventRefs = events.map((e) => ref.collection('events').doc(id(e.id)));
+  const progressRef = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
+  return db.runTransaction(async (tx) => {
+    const current = await tx.get(ref);
+    const stored = await Promise.all(eventRefs.map((r) => tx.get(r)));
+    const fresh = events.filter((_, i) => !stored[i].exists);
+    const summary = reduceLearning(current.data()?.summary || emptyLearning(), fresh);
+    if (fresh.length) {
+      tx.set(ref, { uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId, activityId, materialVersion: version, nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1, summary, updatedAt: Date.now() });
+      events.forEach((e, i) => { if (!stored[i].exists) tx.create(eventRefs[i], { ...e, receivedAt: Date.now() }); });
+      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activities: { [`${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
+    }
+    return { accepted: events.map((e) => e.id), summary };
+  });
+});
+export const getLearningDiagnostics = onCall(options, async (req) => {
+  const { c } = await access(req, req.data.courseId, true);
+  if (!c.classIds.includes(req.data.classId)) fail('班級不屬於課程');
+  const snap = await db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', req.data.classId).orderBy('__name__').startAfter(req.data.after || '').limit(50).get();
+  return { rows: snap.docs.map((d) => ({ ...d.data(), id: d.id })), next: snap.size === 50 ? snap.docs.at(-1)!.id : null };
 });

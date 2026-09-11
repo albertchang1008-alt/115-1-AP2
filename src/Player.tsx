@@ -1,3 +1,5 @@
+import { API } from './service';
+import { learningBridge } from './LearningBridge';
 import { useEffect, useRef, useState } from 'react';
 import { Activity, youtubeId, materialUrl } from '../shared/model';
 let ytReady: Promise<void> | null = null;
@@ -86,18 +88,41 @@ export function Youtube({
       <a className="textlink" href={activity.url} target="_blank" rel="noreferrer">
         前往 YouTube ↗
       </a>
-      <p className="muted">播放進度在暫停或結束時保存。外站觀看不會自動標記完成。</p>
+      <p className="muted">選看補充影片，不影響完成度或成績。暫停時保存播放位置，方便下次接續。</p>
     </>
   );
 }
 export function HtmlMaterial({
   activity,
   onSave,
+  api, courseId, unitId, uid,
 }: {
+  api: API; courseId: string; unitId: string; uid: string;
   activity: Activity;
   onSave: (position: number, completed: boolean) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
+  const session = useRef(crypto.randomUUID());
+  const [status, setStatus] = useState('');
+  const interactive = activity.tracking === 'interactive';
+  const init = () => frame.current?.contentWindow?.postMessage({ type: 'init', protocolVersion: 1, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', sessionId: session.current }, '*');
+  useEffect(() => {
+    if (!interactive) return;
+    const bridge = learningBridge(api, { courseId, unitId, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', uid }, setStatus, () => onSave(1, true));
+    const handler = async (event: MessageEvent) => {
+      if (event.source !== frame.current?.contentWindow || !event.data) return;
+      const d = event.data;
+      if (d.type === 'ready') { init(); return; }
+      if (d.protocolVersion !== 1 || d.sessionId !== session.current || d.activityId !== activity.id || d.materialVersion !== (activity.materialVersion || 'v1')) return;
+      if (d.type !== 'learning-events') return;
+      try {
+        const accepted = await bridge.receive(d.events);
+        frame.current?.contentWindow?.postMessage({ type: 'learning-ack', sessionId: session.current, accepted }, '*');
+      } catch (e) { setStatus((e as Error).message); }
+    };
+    window.addEventListener('message', handler);
+    return () => { bridge.close(); window.removeEventListener('message', handler); };
+  }, [api, courseId, unitId, activity.id, activity.url, activity.materialVersion, interactive, uid]);
   const url = materialUrl(activity.url);
   const error = url ? '' : '教師尚未提供有效的 HTTPS 教材網址';
   const save = useRef(onSave);
@@ -105,6 +130,7 @@ export function HtmlMaterial({
   useEffect(() => {
     let last = 0;
     const fn = (event: MessageEvent) => {
+      if (interactive) return;
       if (
         event.source !== frame.current?.contentWindow ||
         !event.data ||
@@ -124,7 +150,7 @@ export function HtmlMaterial({
     };
     window.addEventListener('message', fn);
     return () => window.removeEventListener('message', fn);
-  }, [activity.id]);
+  }, [activity.id, interactive]);
   return (
     <>
       {error ? (
@@ -138,19 +164,14 @@ export function HtmlMaterial({
           title={activity.title}
           sandbox="allow-scripts"
           referrerPolicy="no-referrer"
-          onLoad={() =>
-            frame.current?.contentWindow?.postMessage(
-              { type: 'init', activityId: activity.id },
-              '*',
-            )
-          }
+          onLoad={init}
         />
       ) : (
         <p>正在取得教材…</p>
       )}
-      <button disabled={!url} onClick={() => onSave(0, true)}>
-        確認已閱讀
-      </button>
+      {!interactive && <button disabled={!url} onClick={() => onSave(0, true)}>確認已閱讀</button>}
+      {interactive && <p>此活動會保存探索與作答歷程，供教師調整教學；通關成就與診斷分開記錄。</p>}
+      {status && <p role="status">{status}</p>}
       <p className="muted">此紀錄表示參與教材，不影響單元達標分數。</p>
     </>
   );

@@ -8,6 +8,9 @@ export interface Question {
   explanation: string;
   concept?: string;
   image?: string;
+  questionType?: 'single' | 'image';
+  lectureTitle?: string;
+  lectureUrl?: string;
   socratic?: {
     concept?: string;
     misconception?: string;
@@ -26,6 +29,10 @@ export interface Activity {
   start?: number;
   end?: number;
   description: string;
+  tracking?: 'reading' | 'interactive';
+  materialVersion?: string;
+  nodeTotal?: number;
+  questionTotal?: number;
 }
 export interface Unit {
   id: string;
@@ -44,6 +51,10 @@ export interface Course {
   description: string;
   term: string;
   classIds: string[];
+  classNames?: Record<string, string>;
+  classUnits?: Record<string, string[]>;
+  enrollmentClassId?: string;
+  archived?: boolean;
   units: Unit[];
   sheetsUrl: string;
   publishedAt?: number;
@@ -67,6 +78,7 @@ export interface Roster {
   studentId: string;
   classId: string;
   enabled: boolean;
+  courseId?: string;
 }
 export interface Answer {
   questionId: string;
@@ -117,7 +129,7 @@ export const emptyProgress = (): Progress => ({ units: {}, activities: {} });
 export function forClass(course: Course, classId: string): Course {
   return {
     ...course,
-    units: course.units.map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
+    units: course.units.filter((u) => !course.classUnits?.[classId] || course.classUnits[classId].includes(u.id)).map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
   };
 }
 export const phases: Record<Phase, string> = {
@@ -158,8 +170,12 @@ export function youtubeId(raw: string) {
 export function validateQuestions(qs: Question[]) {
   const errors: string[] = [];
   const ids = new Set<string>();
+  if (!Array.isArray(qs)) return ['題庫必須是陣列'];
   if (!qs.length || qs.length > 100) errors.push('每個单元需 1–100 題；更多題目請拆分單元。');
   qs.forEach((q, i) => {
+    if (!q || typeof q !== 'object') { errors.push(`第 ${i + 1} 題格式無效`); return; }
+    if (q.questionType === 'image' && !q.image) errors.push(`第 ${i + 1} 題缺少圖片`);
+    if (q.image && !materialUrl(q.image)) errors.push(`第 ${i + 1} 題圖片需為 HTTPS 網址`);
     if (!safeId(q.id) || ids.has(q.id)) errors.push(`第 ${i + 1} 題 ID 無效或重複`);
     ids.add(q.id);
     if (!q.text || !Array.isArray(q.options) || q.options.length < 2 || q.options.length > 8)
@@ -185,9 +201,10 @@ export function validateRoster(rows: Roster[]) {
       !safeId(r.classId)
     )
       errors.push(`第 ${i + 1} 列：信箱、姓名、學號或班級不完整`);
-    if (emails.has(r.email) || ids.has(r.studentId)) errors.push(`第 ${i + 1} 列：信箱或學號重複`);
-    emails.add(r.email);
-    ids.add(r.studentId);
+    const scope = r.courseId || '';
+    if (emails.has(scope + ':' + r.email) || ids.has(scope + ':' + r.studentId)) errors.push(`第 ${i + 1} 列：信箱或學號重複`);
+    emails.add(scope + ':' + r.email);
+    ids.add(scope + ':' + r.studentId);
   });
   return errors;
 }

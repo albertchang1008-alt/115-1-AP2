@@ -1432,3 +1432,36 @@ dd {
     max-width: none;
   }
 }
+
+/* Shared palette: images retain their own colors. */
+:root { --surface: #fff; --page: #f3f6f8; --ink: #213846; --soft: #edf5fa; }
+:root[data-theme='forest'] { --blue: #17654e; --nav: #13382e; --accent: #d4b259; --soft: #e7f3ed; }
+:root[data-theme='violet'] { --blue: #7041b4; --nav: #2c2043; --accent: #e0b556; --soft: #f1ebfa; }
+:root[data-theme='night'] { color-scheme: dark; --blue: #85bcff; --nav: #101923; --accent: #e4c37a; --surface: #1d2b38; --page: #121c26; --ink: #ecf2f8; --soft: #293e50; --line: #465b6d; --muted: #b9c9d7; }
+html, body { background: var(--page); color: var(--ink); }
+.theme-picker { position: fixed; right: 14px; bottom: 12px; z-index: 120; display: flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 2px 12px #0002; font-size: 14px; }
+.theme-picker select { width: auto; padding: 4px; }
+.panel, .modal, .class-card, .explanations section { background: var(--surface); color: var(--ink); }
+input, select, textarea, button, .button { color: var(--ink); background-color: var(--surface); border-color: var(--line); }
+button.primary, .button.primary { background: var(--blue); color: #fff; }
+:root[data-theme='night'] button.primary { color: #101923; }
+button:hover, .button:hover, .notice, .feedback, .explanations details { background-color: var(--soft); color: var(--ink); }
+.class-card { margin: 16px 0; border: 1px solid var(--line); padding: 16px; border-radius: 12px; }
+.unit-checks { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 8px; padding: 12px 0; }
+.explanations { display: grid; gap: 14px; text-align: left; }
+.explanations section { border: 1px solid var(--line); padding: 14px; border-radius: 10px; }
+.explanations details { padding: 10px; border-radius: 8px; margin-top: 6px; }
+.preserve-lines { white-space: pre-wrap; }
+.image-button { display: block; width: 100%; background: transparent; border: 0; padding: 0; }
+.image-modal { max-width: 95vw; max-height: 95vh; overflow: auto; background: var(--surface); padding: 15px; }
+.image-modal img { display: block; max-width: 100%; margin: 10px auto; }
+.diagnostic-chart { display: block; width: min(100%, 650px); height: auto; margin: 15px auto; }
+:root[data-theme='night'] :is(.workspace,.main,.student,.student-nav,.login,.login-form,.reviewanswers,.contextrow,.toolbar,.pageheading,.previewbar,.question-card,.options button,.unitcard,.activitycard) { background-color: var(--page); color: var(--ink); }
+:root[data-theme='night'] :is(h1,h2,h3,h4,label,td,th,summary,.metric strong,.field span) { color: var(--ink); }
+:root[data-theme='night'] :is(.muted,small,.metric small) { color: var(--muted); }
+:root[data-theme='night'] .options button.correct { background: #184a37; color: #bff5d7; }
+:root[data-theme='night'] .options button.incorrect { background: #542d34; color: #ffd4d9; }
+:root[data-theme='night'] .error { color: #ffb4b4; }
+:root[data-theme='night'] .success { color: #a3e4bd; }
+body { padding-bottom: 60px; }
+@media(max-width:600px) { .theme-picker { right: 8px; bottom: 8px; } .class-card { padding: 10px; } .modal { max-height: 90vh; overflow: auto; } .unit-checks { grid-template-columns: 1fr; } }

@@ -1,3 +1,6 @@
+import { NewCourse, ClassManager } from './CourseSetup';
+import { QuestionImage, Explanations } from './QuestionContent';
+import Diagnostics from './Diagnostics';
 import { useEffect, useState } from 'react';
 import {
   LayoutDashboard,
@@ -71,6 +74,7 @@ const tabs = [
   ['analysis', '題目分析', ChartNoAxesCombined],
   ['reports', '報表與結算', FileChartColumn],
   ['settings', '平台設定', Settings],
+  ['diagnostics', '教材診斷', ChartNoAxesCombined],
 ] as const;
 function download(name: string, data: any[]) {
   const csv =
@@ -110,7 +114,7 @@ const makeCourse = (): Course => ({
   description: '',
   term: '115 學年度第 1 學期',
   classIds: ['class-a'],
-  units: [makeUnit()],
+  units: [],
   sheetsUrl: '',
 });
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -212,7 +216,13 @@ export default function App() {
     [error, setError] = useState(''),
     [toast, setToast] = useState(''),
     [loading, setLoading] = useState(false),
-    [mobile, setMobile] = useState(false);
+    [mobile, setMobile] = useState(false),
+    [deleting, setDeleting] = useState(false),
+    [unsavedIds, setUnsavedIds] = useState<Set<string>>(new Set()),
+    [creating, setCreating] = useState(false),
+    [copySource, setCopySource] = useState<Course | undefined>(),
+    [dirty, setDirty] = useState(false),
+    [termFilter, setTermFilter] = useState('');
   const [preview, setPreview] = useState<{
       api: API;
       course: Course;
@@ -263,6 +273,8 @@ export default function App() {
     return () => window.removeEventListener('hashchange', fn);
   }, []);
   function nav(t: string) {
+    if (dirty && !confirm('有尚未保存的編輯，確定離開？')) return;
+    setDirty(false);
     location.hash = t;
     setTab(t);
     setMobile(false);
@@ -299,6 +311,8 @@ export default function App() {
       old.some((x) => x.id === c.id) ? old.map((x) => (x.id === c.id ? c : x)) : [...old, c],
     );
     setCourseId(c.id);
+    setDirty(false);
+    setUnsavedIds((old) => { const next = new Set(old); next.delete(c.id); return next; });
   }
   async function openPreview(c: Course, draft = true, unit?: string, activity?: string) {
     try {
@@ -467,7 +481,7 @@ export default function App() {
           <select
             aria-label="選擇課程"
             value={course?.id || ''}
-            onChange={(e) => setCourseId(e.target.value)}
+            onChange={(e) => { if (!dirty || confirm('有尚未保存的編輯，確定切換課程？')) { setDirty(false); setCourseId(e.target.value); } }}
           >
             {courses.map((c) => (
               <option key={c.id} value={c.id}>
@@ -476,7 +490,7 @@ export default function App() {
             ))}
           </select>
           <span>
-            {profile.name} · {profile.classId}
+            {profile.name} · {course?.classNames?.[course.enrollmentClassId || ''] || course?.enrollmentClassId}
           </span>
           <button onClick={() => logout()}>登出</button>
           <small>v{VERSION}</small>
@@ -486,7 +500,7 @@ export default function App() {
             key={course.id}
             api={api}
             course={course}
-            classLabel={profile.classId}
+            classLabel={course.classNames?.[course.enrollmentClassId || ''] || course.enrollmentClassId || ''}
             uid={profile.uid}
             notify={notify}
           />
@@ -567,15 +581,15 @@ export default function App() {
             </div>
           )}
           <div className="contextrow">
-            <span>{course?.term || '新增你的第一門課程'}</span>
+            <label>學期<select aria-label="篩選學期" value={termFilter} onChange={(e) => setTermFilter(e.target.value)}><option value="">全部學期</option>{[...new Set(courses.map((c) => c.term))].map((term) => <option key={term}>{term}</option>)}</select></label>
             <select
               aria-label="目前課程"
               value={course?.id || ''}
-              onChange={(e) => setCourseId(e.target.value)}
+              onChange={(e) => { if (!dirty || confirm('有尚未保存的編輯，確定切換課程？')) { setDirty(false); setCourseId(e.target.value); } }}
             >
-              {courses.map((c) => (
+              {courses.filter((c) => !termFilter || c.term === termFilter || c.id === course?.id).map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.title}
+                  {c.title}{c.archived ? '（已封存）' : ''}
                 </option>
               ))}
             </select>
@@ -584,54 +598,65 @@ export default function App() {
             <CourseEditor
               key={course?.id || 'new'}
               course={course}
+              deleting={deleting}
               api={api}
               save={save}
               preview={openPreview}
               notify={notify}
-              newCourse={() => {
-                const id = prompt(
-                  '請輸入課程代碼（英數字、-、_，之後會用於 Google Sheet 的課程欄位，建立後無法更改）',
-                );
-                if (!id) return;
-                if (!safeId(id)) return notify('代碼格式錯誤，只能使用英數字、- 或 _');
-                if (courses.some((x) => x.id === id)) return notify('代碼已存在');
-                const c = { ...makeCourse(), id };
-                setCourses([...courses, c]);
-                setCourseId(c.id);
+              onPublished={(published) => setCourses((old) => old.map((c) => c.id === published.id ? published : c))}
+              onDirty={setDirty}
+              newCourse={() => { if (!dirty || confirm('有尚未保存的編輯，確定新增課程？')) { setCopySource(undefined); setCreating(true); } }}
+              copyCourse={() => { setCopySource(course); setCreating(true); }}
+              archiveCourse={async () => {
+                if (!course || !confirm(course.archived ? '重新開放此課程？' : '封存後學生不再能開啟課程，紀錄保留。確定封存？')) return;
+                try { await api.call('archiveCourse', { courseId: course.id, archived: !course.archived }); await boot(); } catch (e) { notify((e as Error).message); }
               }}
               deleteCourse={async () => {
-                if (!course) return;
+                if (!course || deleting) return;
                 if (!confirm(`確定要刪除課程「${course.title}」嗎？此操作無法復原。`)) return;
+                setDeleting(true);
                 try {
-                  await api.call('deleteCourse', { courseId: course.id });
+                  if (!unsavedIds.has(course.id)) await api.call('deleteCourse', { courseId: course.id });
                   const rest = courses.filter((x) => x.id !== course.id);
                   setCourses(rest);
+                  setUnsavedIds((old) => { const next = new Set(old); next.delete(course.id); return next; });
                   setCourseId(rest[0]?.id || '');
                   notify('課程已刪除');
                 } catch (e) {
                   notify((e as Error).message);
+                } finally {
+                  setDeleting(false);
                 }
               }}
             />
+          ) : tab === 'settings' ? (
+            <SettingsPage course={course} api={api} notify={notify} onSynced={async () => {
+              const data = await api.call('bootstrap');
+              setCourses(data.courses);
+            }} />
+          ) : tab === 'diagnostics' && course ? (
+            <Diagnostics key={course.id} course={course} api={api} notify={notify} />
           ) : !course ? (
             <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
           ) : tab === 'bank' ? (
-            <Bank course={course} api={api} save={save} notify={notify} />
+            <Bank key={course.id} course={course} api={api} save={save} notify={notify} />
           ) : tab === 'roster' ? (
-            <RosterPage course={course} api={api} notify={notify} />
+            <RosterPage key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'completion' ? (
-            <CompletionPage course={course} api={api} notify={notify} />
+            <CompletionPage key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'analysis' ? (
-            <Analysis course={course} api={api} notify={notify} />
+            <Analysis key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'reports' ? (
-            <ReportsPage course={course} api={api} notify={notify} />
-          ) : tab === 'settings' ? (
-            <SettingsPage course={course} api={api} notify={notify} />
+            <ReportsPage key={course.id} course={course} api={api} notify={notify} />
           ) : (
-            <Overview course={course} api={api} notify={notify} navigate={nav} />
+            <Overview key={course.id} course={course} api={api} notify={notify} navigate={nav} />
           )}
         </div>
       </main>
+      {creating && <NewCourse source={copySource} close={() => setCreating(false)} create={async (c) => {
+        if (courses.some((x) => x.id === c.id)) throw Error('課程代碼已存在');
+        await save(c); nav('courses');
+      }} />}
       {toast && (
         <div className="toast" role="status">
           {toast}
@@ -652,17 +677,18 @@ function Overview({
   notify: (s: string) => void;
   navigate: (s: string) => void;
 }) {
+  const [overviewClass, setOverviewClass] = useState(course.classIds[0] || '');
   const [report, setReport] = useState<Report[]>([]),
     [time, setTime] = useState<number | null>(null);
   useEffect(() => {
     api
-      .call('getReports', { courseId: course.id, classId: course.classIds[0] })
+      .call('getReports', { courseId: course.id, classId: overviewClass })
       .then((r) => {
         setReport(r.rows);
         setTime(r.job?.updatedAt || null);
       })
       .catch((e) => notify(e.message));
-  }, [course.id, api]);
+  }, [course.id, api, overviewClass]);
   const weak = report
     .flatMap((r) => Object.entries(r.modes.all || {}).map(([id, s]) => ({ id, ...s })))
     .filter((s) => s.students > 0)
@@ -726,7 +752,7 @@ function Overview({
           <span className="eyebrow">TEACHING INSIGHTS</span>
           <h2>值得再講一次的題目</h2>
           <p className="muted">
-            {course.classIds[0]} · {time ? new Date(time).toLocaleString() : '尚未產生統計'}
+            <select aria-label="總覽班級" value={overviewClass} onChange={(e) => setOverviewClass(e.target.value)}>{course.classIds.map((cl) => <option key={cl} value={cl}>{course.classNames?.[cl] || cl}</option>)}</select> · {time ? new Date(time).toLocaleString() : '尚未產生統計'}
           </p>
           {weak.length ? (
             weak.map((q) => (
@@ -783,6 +809,11 @@ function CourseEditor({
   notify,
   newCourse,
   deleteCourse,
+  deleting,
+  onDirty,
+  onPublished,
+  copyCourse,
+  archiveCourse,
 }: {
   course?: Course;
   api: API;
@@ -790,11 +821,21 @@ function CourseEditor({
   preview: (c: Course, draft?: boolean, u?: string, a?: string) => void;
   notify: (s: string) => void;
   newCourse: () => void;
-  deleteCourse: () => void;
+  deleteCourse: () => Promise<void>;
+  deleting: boolean;
+  onDirty: (dirty: boolean) => void;
+  onPublished: (course: Course) => void;
+  copyCourse: () => void;
+  archiveCourse: () => Promise<void>;
 }) {
   const [c, setC] = useState<Course>(structuredClone(course || makeCourse())),
-    [idx, setIdx] = useState(0),
-    [busy, setBusy] = useState(false);
+    [idx, setIdx] = useState(0), [busy, setBusy] = useState(false);
+  const isDirty = JSON.stringify(c) !== JSON.stringify(course);
+  useEffect(() => { onDirty(!!course && isDirty); return () => onDirty(false); }, [isDirty, course]);
+  useEffect(() => {
+    const warn = (e: BeforeUnloadEvent) => { if (isDirty && course) { e.preventDefault(); e.returnValue = ''; } };
+    window.addEventListener('beforeunload', warn); return () => window.removeEventListener('beforeunload', warn);
+  }, [isDirty, course]);
   const u = c.units[idx];
   function patchUnit(p: Partial<Unit>) {
     setC({ ...c, units: c.units.map((x, i) => (i === idx ? { ...x, ...p } : x)) });
@@ -803,7 +844,7 @@ function CourseEditor({
     setBusy(true);
     try {
       await save(c);
-      if (publish) await api.call('publishCourse', { courseId: c.id });
+      if (publish) { const result = await api.call<Course>('publishCourse', { courseId: c.id }); setC(result); onPublished(result); }
       notify(publish ? '課程已發布' : '草稿已保存');
     } catch (e) {
       notify((e as Error).message);
@@ -814,26 +855,28 @@ function CourseEditor({
   function patchActivity(i: number, p: Partial<Activity>) {
     patchUnit({ activities: u.activities.map((a, j) => (j === i ? { ...a, ...p } : a)) });
   }
+  if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再新增單元並保存草稿。" /><button onClick={newCourse}>新增課程</button></section>;
   return (
     <>
       <header className="pageheading">
         <div>
           <span className="eyebrow">COURSE STUDIO</span>
           <h1>課程與教材</h1>
-          <p>編輯草稿，預覽學生看到的內容，再發布。</p>
+          <p>{isDirty ? '尚未保存' : '草稿已保存'} · {course?.publishedAt ? '已有發布版本，草稿變更須重新發布' : '尚未發布'}{course?.archived ? ' · 已封存' : ''}</p>
         </div>
         <div className="actions">
           <button onClick={newCourse}>
             <Plus size={16} />
             新增課程
           </button>
-          <button disabled={busy} onClick={() => action()}>
+          <button disabled={busy || deleting} onClick={() => action()}>
             保存草稿
           </button>
-          <button className="primary" disabled={busy} onClick={() => action(true)}>
+          <button className="primary" disabled={busy || deleting} onClick={() => action(true)}>
             發布課程
           </button>
-          <button disabled={busy || !course} onClick={deleteCourse}>
+          <button onClick={copyCourse} disabled={busy}>複製課程</button><button onClick={archiveCourse} disabled={busy}>{course?.archived ? '取消封存' : '封存課程'}</button>
+          <button disabled={busy || deleting || !course} onClick={deleteCourse}>
             <Trash2 size={16} />
             刪除課程
           </button>
@@ -846,20 +889,6 @@ function CourseEditor({
           </Field>
           <Field label="學期">
             <input value={c.term} onChange={(e) => setC({ ...c, term: e.target.value })} />
-          </Field>
-          <Field label="班級 ID（逗號分隔）">
-            <input
-              value={c.classIds.join(',')}
-              onChange={(e) =>
-                setC({
-                  ...c,
-                  classIds: e.target.value
-                    .split(',')
-                    .map((x) => x.trim())
-                    .filter(Boolean),
-                })
-              }
-            />
           </Field>
           <Field label="課程說明">
             <input
@@ -877,6 +906,7 @@ function CourseEditor({
           <button onClick={() => preview(c, false)}>預覽已發布版本</button>
         </div>
       </section>
+      <ClassManager course={c} change={setC} />
       <div className="editorgrid">
         <aside className="panel unitmenu">
           <div className="sectionhead">
@@ -886,7 +916,7 @@ function CourseEditor({
               onClick={() => {
                 const id = prompt(
                   '請輸入單元代碼（英數字、-、_，之後對應 Google Sheet 分頁名稱，建立後無法更改）',
-                );
+                )?.trim();
                 if (!id) return;
                 if (!safeId(id)) return notify('代碼格式錯誤，只能使用英數字、- 或 _');
                 if (c.units.some((x) => x.id === id)) return notify('代碼已存在');
@@ -904,6 +934,7 @@ function CourseEditor({
             </button>
           ))}
         </aside>
+        {!u && <Empty title="尚未建立單元" detail="按單元安排旁的＋，輸入與 Google Sheet 分頁相同的單元代碼。" />}
         {u && (
           <section className="panel">
             <div className="sectionhead">
@@ -913,6 +944,7 @@ function CourseEditor({
                 預覽單元
               </button>
             </div>
+            <p className="muted">單元代碼（Sheet 分頁名稱）：{u.id}</p>
             <div className="formgrid">
               <Field label="單元名稱">
                 <input value={u.title} onChange={(e) => patchUnit({ title: e.target.value })} />
@@ -967,9 +999,13 @@ function CourseEditor({
               >
                 單元上移
               </button>
+              <button disabled={idx === c.units.length - 1} onClick={() => { const units = [...c.units]; [units[idx], units[idx + 1]] = [units[idx + 1], units[idx]]; setC({ ...c, units }); setIdx(idx + 1); }}>單元下移</button>
+              <button onClick={() => { const code = prompt('新單元代碼')?.trim(); if (!code) return; if (!safeId(code) || c.units.some((u) => u.id === code)) return notify('單元代碼無效或重複'); setC({ ...c, units: [...c.units, { ...structuredClone(u), id: code, title: u.title + '（複本）', bankVersion: '' }] }); setIdx(c.units.length); }}>複製單元</button>
+              <button onClick={() => { if (!confirm('從草稿移除此單元？歷史題庫與紀錄保留。')) return; const classUnits = Object.fromEntries(Object.entries(c.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== u.id)])); const classOverrides = structuredClone(c.classOverrides || {}); Object.values(classOverrides).forEach((settings) => delete settings[u.id]); setC({ ...c, units: c.units.filter((unit) => unit.id !== u.id), classUnits, classOverrides }); setIdx(Math.max(0, idx - 1)); }}>移除單元</button>
               <span className="muted">ID：{u.id}</span>
             </div>
             <ClassOverrides
+              key={c.classIds.join(',') + u.id}
               course={c}
               unit={u}
               onChange={(classOverrides) => setC({ ...c, classOverrides })}
@@ -1091,6 +1127,8 @@ function CourseEditor({
                     )}
                   </Field>
                 )}
+                {a.type === 'html' && <div className="formgrid"><Field label="教材紀錄方式"><select value={a.tracking || 'reading'} onChange={(e) => patchActivity(i, { tracking: e.target.value as 'reading' | 'interactive' })}><option value="reading">一般閱讀</option><option value="interactive">闖關與學習診斷（需串接）</option></select></Field><Field label="教材版本"><input value={a.materialVersion || 'v1'} onChange={(e) => patchActivity(i, { materialVersion: e.target.value })} /></Field><Field label="探索節點總數"><input type="number" min="0" max="500" value={a.nodeTotal || 0} onChange={(e) => patchActivity(i, { nodeTotal: Number(e.target.value) })} /></Field><Field label="闖關題目總數"><input type="number" min="0" max="500" value={a.questionTotal || 0} onChange={(e) => patchActivity(i, { questionTotal: Number(e.target.value) })} /></Field></div>}
+                {a.type === 'youtube' && <p className="muted">選看補充教材：不影響完成度或成績，播放位置可保存。</p>}
                 <Field label="學習說明">
                   <textarea
                     value={a.description}
@@ -1177,12 +1215,12 @@ function Bank({
         <div>
           <span className="eyebrow">QUESTION BANK</span>
           <h1>題庫管理</h1>
-          <p>Google Sheets 維護原始題目，發布版本後連接至單元。</p>
+          <p>到「平台設定」同步 Google Sheet，題庫會自動連接至草稿；檢查後再發布課程。</p>
         </div>
       </header>
       <section className="panel">
         <div className="formgrid">
-          <Field label="Google Sheets 題庫連結">
+          <Field label="課程參考連結（不會變更平台同步來源）">
             <input value={sheet} onChange={(e) => setSheet(e.target.value)} />
           </Field>
           <Field label="單元">
@@ -1191,6 +1229,9 @@ function Bank({
               onChange={(e) => {
                 setUnit(e.target.value);
                 setQuestions([]);
+                setInput('');
+                setErrors([]);
+                setVersion('');
               }}
             >
               {course.units.map((u) => (
@@ -1265,14 +1306,14 @@ function Bank({
             aria-label="題庫 JSON"
             className="codeinput"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => { setInput(e.target.value); setQuestions([]); setErrors([]); }}
             placeholder='[{"id":"q1","text":"題幹","options":[{"id":"a","text":"選項 A"},{"id":"b","text":"選項 B"}],"answer":"a","explanation":"解析"}]'
           />
           <div className="actions">
             <button onClick={() => validate(input)}>檢查資料</button>
             <button
               className="primary"
-              disabled={!questions.length || errors.length > 0 || busy}
+              disabled={!unit || !questions.length || errors.length > 0 || busy}
               onClick={async () => {
                 setBusy(true);
                 try {
@@ -1332,7 +1373,7 @@ function Bank({
                   {o.id === q.answer ? '✓' : '○'} {o.text}
                 </p>
               ))}
-              <p className="feedback">{q.explanation}</p>
+              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} />
             </details>
           ))}
         {!questions.length && (
@@ -1351,6 +1392,7 @@ function RosterPage({
   api: API;
   notify: (s: string) => void;
 }) {
+  const [search, setSearch] = useState(''), [migration, setMigration] = useState<any>(null);
   const [cl, setCl] = useState(course.classIds[0]),
     [rows, setRows] = useState<Roster[]>([]),
     [next, setNext] = useState<string | null>(null),
@@ -1402,6 +1444,7 @@ function RosterPage({
         <div className="toolbar">
           <select
             aria-label="班級"
+            disabled={busy}
             value={cl}
             onChange={(e) => {
               setCl(e.target.value);
@@ -1429,12 +1472,13 @@ function RosterPage({
                 if (!text) return;
                 const parsed = Papa.parse<any>(text, { header: true, skipEmptyLines: true });
                 const r = parsed.data.map((x) => ({
-                  email: String(x.email || '')
+                  courseId: course.id,
+                  email: String(x.email || x['學校信箱'] || x['Gmail'] || '')
                     .trim()
                     .toLowerCase(),
-                  name: String(x.name || '').trim(),
-                  studentId: String(x.studentId || '').trim(),
-                  classId: String(x.classId || '').trim(),
+                  name: String(x.name || x['姓名'] || '').trim(),
+                  studentId: String(x.studentId || x['學號'] || '').trim(),
+                  classId: String(x.classId || x['班級代碼'] || x['班級'] || '').trim(),
                   enabled: !['false', '0'].includes(String(x.enabled)),
                 }));
                 setImports(r);
@@ -1462,7 +1506,7 @@ function RosterPage({
               onClick={async () => {
                 setBusy(true);
                 try {
-                  await api.call('importRoster', { rows: imports });
+                  await api.call('importRoster', { courseId: course.id, rows: imports });
                   setImports([]);
                   notify('名冊已匯入');
                   await load();
@@ -1478,13 +1522,21 @@ function RosterPage({
             <button onClick={() => setImports([])}>取消</button>
           </div>
         )}
+        <label className="field">搜尋已載入名冊<input value={search} onChange={(e) => setSearch(e.target.value)} /></label>
+        <button onClick={async () => { try { const r = await api.call('migrateRoster', { courseId: course.id }); setMigration(r); if (r.done) notify('此課程已使用新版名冊'); } catch (e) { notify((e as Error).message); } }}>預覽舊名冊轉換</button>
+        {migration && !migration.done && <section className="notice"><p>共 {migration.count} 人，預覽前 20 人；原始名冊保留。</p><RosterTable rows={migration.rows} /><button disabled={busy} onClick={async () => { setBusy(true); try { await api.call('migrateRoster', { courseId: course.id, apply: true }); setMigration(null); notify('已轉成課程內名冊'); await load(); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }}>確認轉換此課程名冊</button></section>}
         <RosterTable
-          rows={rows}
+          rows={rows.filter((r) => `${r.name} ${r.email} ${r.studentId}`.includes(search))}
           action={(r) => (
-            <button
+            <div className="actions"><button onClick={async () => {
+              const name = prompt('學生姓名', r.name); if (name === null) return;
+              const studentId = prompt('學號', r.studentId); if (studentId === null) return;
+              const classId = prompt('此課程的班級代碼（轉班會改變本課程入口，历史作答保留原班級）', r.classId); if (classId === null) return;
+              try { await api.call('importRoster', { courseId: course.id, rows: [{ ...r, name: name.trim(), studentId: studentId.trim(), classId: classId.trim() }] }); await load(); } catch (e) { notify((e as Error).message); }
+            }}>編輯／轉班</button><button
               onClick={async () => {
                 try {
-                  await api.call('importRoster', { rows: [{ ...r, enabled: !r.enabled }] });
+                  await api.call('importRoster', { courseId: course.id, rows: [{ ...r, enabled: !r.enabled }] });
                   setRows(
                     rows.map((x) => (x.email === r.email ? { ...x, enabled: !x.enabled } : x)),
                   );
@@ -1494,7 +1546,7 @@ function RosterPage({
               }}
             >
               {r.enabled ? '停用' : '啟用'}
-            </button>
+            </button></div>
           )}
         />
         {!rows.length && <Empty title="尚未載入名冊" detail="請讀取班級名冊，或匯入本學期學生。" />}
@@ -1552,6 +1604,7 @@ function CompletionPage({
   api: API;
   notify: (s: string) => void;
 }) {
+  const [publishedCourse, setPublishedCourse] = useState(course);
   const [cl, setCl] = useState(course.classIds[0]),
     [rows, setRows] = useState<any[]>([]),
     [next, setNext] = useState<string | null>(null),
@@ -1566,6 +1619,7 @@ function CompletionPage({
         classId: cl,
         after: more ? next : '',
       });
+      if (r.course) setPublishedCourse(r.course);
       setRows(more ? [...rows, ...r.rows] : r.rows);
       setNext(r.next);
     } catch (e) {
@@ -1589,14 +1643,14 @@ function CompletionPage({
             download(
               '完成度.csv',
               filtered.map((r) => {
-                const n = completion(forClass(course, cl), r.progress);
+                const n = completion(forClass(publishedCourse, cl), r.progress);
                 return {
                   姓名: r.name,
                   學號: r.studentId,
                   班級: cl,
                   已完成: n.done,
                   應完成: n.total,
-                  待完成: forClass(course, cl)
+                  待完成: forClass(publishedCourse, cl)
                     .units.filter((u) => u.required && !complete(u, r.progress))
                     .map((u) => u.title)
                     .join('、'),
@@ -1613,10 +1667,13 @@ function CompletionPage({
         <div className="toolbar">
           <select
             aria-label="班級"
+            disabled={busy}
             value={cl}
             onChange={(e) => {
               setCl(e.target.value);
               setRows([]);
+              setNext(null);
+              setStudent(null);
             }}
           >
             {course.classIds.map((c) => (
@@ -1648,7 +1705,7 @@ function CompletionPage({
             <tbody>
               {filtered.map((r) => {
                 const p = r.progress as Progress,
-                  n = completion(forClass(course, cl), p);
+                  n = completion(forClass(publishedCourse, cl), p);
                 return (
                   <tr key={r.email}>
                     <td>
@@ -1667,7 +1724,7 @@ function CompletionPage({
                       </div>
                     </td>
                     <td>
-                      {forClass(course, cl)
+                      {forClass(publishedCourse, cl)
                         .units.filter((u) => u.required && !complete(u, p))
                         .map((u) => u.title)
                         .join('、') || '—'}
@@ -1688,7 +1745,7 @@ function CompletionPage({
       </section>
       {student && (
         <StudentDetail
-          course={forClass(course, cl)}
+          course={forClass(publishedCourse, cl)}
           api={api}
           student={student}
           close={() => setStudent(null)}
@@ -1877,6 +1934,7 @@ function Analysis({
         <div className="toolbar">
           <select
             aria-label="班級"
+            disabled={busy}
             value={cl}
             onChange={(e) => {
               setCl(e.target.value);
@@ -2154,10 +2212,12 @@ function SettingsPage({
   course,
   api,
   notify,
+  onSynced,
 }: {
-  course: Course;
+  course?: Course;
   api: API;
   notify: (s: string) => void;
+  onSynced: () => Promise<void>;
 }) {
   const [sheetId, setSheetId] = useState(''),
     [syncStatus, setSyncStatus] = useState<any>(null),
@@ -2170,8 +2230,9 @@ function SettingsPage({
       .then((r: any) => {
         setSheetId(r.sheetId || '');
         setSyncStatus(r.status);
+        setSyncResult(r.status?.lastResult || null);
       })
-      .catch(() => {});
+      .catch((e) => notify('無法讀取同步設定：' + (e as Error).message));
   }, [api]);
   return (
     <>
@@ -2201,7 +2262,7 @@ function SettingsPage({
       <section className="panel">
         <h2>Google Sheet 同步</h2>
         <p className="muted">
-          一份 Sheet 管理所有課程：「名冊」分頁固定存放班級、學號、姓名、Gmail；其餘分頁對應單元代碼，內含「課程」欄位標明歸屬課程。分頁需先用檢視權限分享給
+          一份 Sheet 管理所有課程：「名冊」分頁存放課程代碼、班級代碼、學號、姓名、學校信箱、啟用；其餘分頁對應單元代碼，內含「課程」欄位標明歸屬課程。分頁需先用檢視權限分享給
           Cloud Functions 的執行服務帳戶。
         </p>
         <div className="formgrid">
@@ -2209,17 +2270,18 @@ function SettingsPage({
             <input
               value={sheetId}
               onChange={(e) => setSheetId(e.target.value)}
-              placeholder="試算表網址中 /d/ 與 /edit 之間那一段"
+              placeholder="貼上 Google Sheet 完整網址或 ID"
             />
           </Field>
         </div>
         <div className="actions">
           <button
-            disabled={syncBusy || !sheetId}
+            disabled={api.preview || syncBusy || !sheetId}
             onClick={async () => {
               setSyncBusy(true);
               try {
-                await api.call('saveSheetConfig', { sheetId });
+                const saved = await api.call('saveSheetConfig', { sheetId });
+                setSheetId(saved.sheetId);
                 notify('已保存 Sheet 設定');
               } catch (e) {
                 notify((e as Error).message);
@@ -2232,15 +2294,23 @@ function SettingsPage({
           </button>
           <button
             className="primary"
-            disabled={syncBusy || !sheetId}
+            disabled={api.preview || syncBusy || !sheetId}
             onClick={async () => {
               setSyncBusy(true);
               setSyncResult(null);
               try {
+                const saved = await api.call('saveSheetConfig', { sheetId });
+                setSheetId(saved.sheetId);
                 const r = await api.call<any>('syncSheet');
                 setSyncResult(r);
-                setSyncStatus((s: any) => ({ ...s, lastSyncedAt: Date.now() }));
-                notify('同步完成');
+                setSyncStatus((s: any) => ({ ...s, lastSyncedAt: r.lastSyncedAt }));
+                try {
+                  await onSynced();
+                } catch {
+                  notify('同步結果已保存，但課程重新載入失敗；請重新整理頁面後再編輯課程');
+                  return;
+                }
+                notify(r.hasErrors ? '同步有未完成項目，請查看下方原因' : '同步完成，題庫已更新至草稿；請檢查後發布課程');
               } catch (e) {
                 notify((e as Error).message);
               } finally {
@@ -2258,13 +2328,14 @@ function SettingsPage({
         {syncResult && (
           <div className="notice">
             {syncResult.roster && (
-              <p>
+              <p className={syncResult.roster.error ? 'error' : ''}>
                 名冊：
-                {syncResult.roster.changed
+                {syncResult.roster.error || (syncResult.roster.changed
                   ? `已更新，共 ${syncResult.roster.count} 人`
-                  : '內容未變更，已跳過寫入'}
+                  : syncResult.roster.count ? `內容一致，共 ${syncResult.roster.count} 人，未重複寫入` : '名冊沒有資料，未變更現有名單')}
               </p>
             )}
+            {syncResult.roster?.results?.map((r: any) => <p key={r.courseId} className={r.error ? 'error' : 'success'}>{r.courseId} 名冊：{r.error || `${r.count} 人，更新 ${r.updated} 人`}</p>)}
             {syncResult.banks?.map((b: any, i: number) => (
               <p className={b.error ? 'error' : 'success'} key={i}>
                 {b.unitId} · {b.courseId}：{b.error || `已連接版本 ${b.version}（${b.count} 題）`}
@@ -2278,12 +2349,14 @@ function SettingsPage({
       </section>
       <section className="panel">
         <h2>教師報表更新</h2>
+        {!course && <p>建立課程後即可設定報表更新。</p>}
         <p>預設只在按「更新至最新」時增量彙整。可啟用每日凌晨 03:00 自動處理。</p>
         <div className="actions">
           <button
+            disabled={!course}
             onClick={() =>
               api
-                .call('setSchedule', { courseId: course.id, enabled: true })
+                .call('setSchedule', { courseId: course?.id, enabled: true })
                 .then(() => notify('已啟用每日自動彙整'))
                 .catch((e) => notify(e.message))
             }
@@ -2291,9 +2364,10 @@ function SettingsPage({
             啟用每日彙整
           </button>
           <button
+            disabled={!course}
             onClick={() =>
               api
-                .call('setSchedule', { courseId: course.id, enabled: false })
+                .call('setSchedule', { courseId: course?.id, enabled: false })
                 .then(() => notify('已改為按需彙整'))
                 .catch((e) => notify(e.message))
             }
@@ -2328,7 +2402,7 @@ function QuestionDetail({
   useEffect(() => {
     api
       .call('getBank', {
-        courseId: course.id,
+        courseId: course?.id,
         unitId: item.unitId,
         version: item.version,
         draft: true,
@@ -2339,7 +2413,7 @@ function QuestionDetail({
   async function load(more = false) {
     try {
       const r = await api.call('questionStudents', {
-        courseId: course.id,
+        courseId: course?.id,
         classId: cl,
         unitId: item.unitId,
         version: item.version,

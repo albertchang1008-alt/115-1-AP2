@@ -1,3 +1,4 @@
+import { QuestionImage, Explanations } from './QuestionContent';
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -173,7 +174,7 @@ export default function Student({
     const old = pRef.current.activities[key];
     const done = completed || old?.completed || false;
     try {
-      await api.call('saveActivity', {
+      if (activity.tracking !== 'interactive') await api.call('saveActivity', {
         courseId: course.id,
         unitId: unit.id,
         activityId: activity.id,
@@ -325,7 +326,8 @@ export default function Student({
                       >
                         {a.type === 'youtube' ? <Play size={17} /> : <BookOpen size={17} />}
                         <span>{a.title}</span>
-                        {progress.activities[unit.id + '_' + a.id]?.completed && (
+                        {a.type === 'youtube' && <span className="badge">選看</span>}
+                        {a.type !== 'youtube' && progress.activities[unit.id + '_' + a.id]?.completed && (
                           <CheckCircle2 size={16} />
                         )}
                       </button>
@@ -369,7 +371,7 @@ export default function Student({
                       onSave={saveActivity}
                     />
                   ) : activity.type === 'html' ? (
-                    <HtmlMaterial activity={activity} onSave={saveActivity} />
+                    <HtmlMaterial activity={activity} onSave={saveActivity} api={api} courseId={course.id} unitId={unit.id} uid={uid} />
                   ) : activity.type === 'link' ? (
                     <>
                       <a
@@ -545,8 +547,7 @@ function Quiz({
                 {result.answers[j].correct ? '✓' : '✕'} {q.text}
               </summary>
               <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
-              <p>{q.explanation}</p>
-              <Socratic q={q} />
+              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} />
             </details>
           ))}
         </div>
@@ -575,7 +576,7 @@ function Quiz({
         QUESTION {String(i + 1).padStart(2, '0')} / {questions.length}
       </span>
       <h2>{q.text}</h2>
-      {q.image && <img className="questionimage" src={q.image} alt="題目附圖" />}
+      <QuestionImage key={q.image} url={q.image} />
       <div className="options">
         {q.options.map((o, j) => (
           <button
@@ -602,8 +603,7 @@ function Quiz({
         <div className="feedback">
           <h3>{selections[q.id] === q.answer ? '答對了' : '再理解一次'}</h3>
           <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
-          <p>{q.explanation}</p>
-          <Socratic q={q} />
+          <Explanations q={q} />
         </div>
       )}
       <div className="sectionhead">

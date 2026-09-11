@@ -55,7 +55,7 @@ export const cloud: API = {
   preview: false,
   async call<T>(name: string, data = {}) {
     if (!functions) throw Error('尚未設定 Firebase');
-    return (await httpsCallable<any, T>(functions, name)(data)).data;
+    return (await httpsCallable<any, T>(functions, name, { timeout: name === 'syncSheet' ? 330000 : 70000 })(data)).data;
   },
 };
 export const sampleQuestions: Question[] = [
@@ -148,6 +148,9 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
     seen = new Map<string, Record<string, Seen>>();
   let roster: any[] = [],
     snapshots: any[] = [];
+  const courseMap = new Map<string, Course>([[draft.id, draft]]);
+  const publishedMap = new Map<string, Course>([[published.id, published]]);
+  const rosterMap = new Map<string, any[]>();
   const profile: Profile = {
     uid: 'preview-user',
     email: 'preview@ctcn.edu.tw',
@@ -161,17 +164,28 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
     preview: true,
     async call<T>(name: string, d: any = {}) {
       let result: any = { ok: true };
+      if (d.courseId && courseMap.has(d.courseId)) { draft = courseMap.get(d.courseId)!; published = publishedMap.get(d.courseId) || draft; roster = rosterMap.get(d.courseId) || []; }
       switch (name) {
         case 'bootstrap':
-          result = { profile, courses: [draft] };
+          result = { profile, courses: [...courseMap.values()] };
           break;
         case 'saveCourse':
           draft = structuredClone(d.course);
+          courseMap.set(draft.id, draft);
           break;
         case 'publishCourse':
-          published = structuredClone(draft);
+          published = { ...structuredClone(draft), publishedAt: Date.now() };
+          publishedMap.set(draft.id, published);
           result = published;
           break;
+        case 'deleteCourse':
+          courseMap.delete(d.courseId); publishedMap.delete(d.courseId); rosterMap.delete(d.courseId); break;
+        case 'archiveCourse':
+          courseMap.set(d.courseId, { ...draft, archived: d.archived }); break;
+        case 'migrateRoster':
+          result = { done: true, rows: [], count: 0 }; break;
+        case 'getLearningDiagnostics':
+          result = { rows: [], next: null }; break;
         case 'getPublished':
           result = published;
           break;
@@ -217,13 +231,14 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           result = { rows: [...attempts].reverse(), next: null };
           break;
         case 'importRoster':
-          roster = d.rows;
+          for (const row of d.rows) roster = [...roster.filter((old) => old.email !== row.email), row];
+          rosterMap.set(d.courseId, roster);
           break;
         case 'getRoster':
-          result = { rows: roster, next: null };
+          result = { rows: roster.filter((r) => r.classId === d.classId), next: null };
           break;
         case 'getCompletion':
-          result = { rows: roster.map((r) => ({ ...r, progress: emptyProgress() })), next: null };
+          result = { course: published, rows: roster.filter((r) => r.classId === d.classId).map((r) => ({ ...r, progress: emptyProgress() })), next: null };
           break;
         case 'updateReports':
           for (const a of attempts.filter((a) => !a.processed)) {
