@@ -1,6 +1,6 @@
 # 課序｜課程平台
 
-目前版本：1.0.4
+目前版本：1.0.5
 
 新平台獨立於舊題庫系統。GitHub Pages 提供 React 前端，Firebase 提供身分、權限、整組紀錄、個人完成度及增量報表。未設定 Firebase 時，只能進入清楚標示的操作示例；示例資料僅在本次頁面記憶體中。
 
@@ -122,23 +122,15 @@ GitHub Variables 修改後必須重新執行 workflow，前端才會帶入新設
 
 ### 6. 建立課程並連接正式資料
 
-1. 教師登入後建立課程、班級 ID 與單元，保存草稿。
-2. 在「班級名冊」下載範本、填入真實學校信箱並匯入；先使用少量測試學生驗證。
-3. 新 Google Sheet 放入 `apps-script/Code.gs` 與 `apps-script/version.gs`，設定 Script Properties：
-
-| 設定 | 來源 |
-|---|---|
-| `PUBLISH_ENDPOINT` | Firebase 部署後的 `sheetsPublish` HTTPS URL |
-| `SHEETS_SYNC_KEY` | 第 3 步設定的同一個同步密鑰 |
-| `COURSE_ID` | Firestore `courses` 中對應課程的文件 ID |
-| `UNIT_ID` | 教師後台單元設定顯示的 ID |
-
-4. 在 Firestore Console 建立 `syncAllowlist/{COURSE_ID}`，填入布林欄位 `enabled: true`，授權該課程的 Sheets 同步。
-5. 從 Sheet 的「課序題庫」選單發布，將回傳的版本 ID 貼到後台「題庫管理」，驗證並連接草稿。
+1. 教師登入後建立課程，輸入自訂課程代碼（英數字、`-`、`_`，建立後不可更改）；單元同樣輸入自訂代碼。這兩組代碼之後會直接對應 Google Sheet 的內容。保存草稿。
+2. 建立一份 Google Sheet 供所有課程共用：開一個「名冊」分頁，欄位為班級、學號、姓名、Gmail；每個單元各開一個分頁，分頁名稱就是單元代碼，欄位除題目本身外要有「課程」欄，填入對應的課程代碼。
+3. 啟用 Google Cloud 專案的 Sheets API，並把這份 Sheet 以「檢視者」權限分享給 Cloud Functions 的執行服務帳戶（到 Google Cloud Console → Cloud Functions（或 Cloud Run）任一函式的設定頁查詢「執行階段服務帳戶」）。
+4. 在教師後台「平台設定」貼上這份 Sheet 的 ID（試算表網址中 `/d/` 與 `/edit` 之間那一段），保存後按「立即同步」。名冊沒有變動時會直接跳過寫入；題庫沿用既有版本雜湊，內容沒改也不會重新產生版本。
+5. 同步結果會列出每個（課程、單元）配對是否成功連接題庫版本；有錯誤（例如課程代碼打錯、格式不符）會個別列出，不影響其他單元。
 6. 將 HTML 教材發布到 GitHub Pages，於活動填入 HTTPS 教材入口網址，填入 YouTube 連結與需要的起訖秒數。
 7. 用「保存並預覽草稿」檢查教材、一般測驗與閃卡；確認後按「發布課程」，學生才看得到。
 
-題庫欄位、GitHub Pages 教材發布方式與 Emulator 詳細說明見 [部署與初始化](docs/DEPLOYMENT.md)。
+題庫欄位、GitHub Pages 教材發布方式、Emulator 詳細說明，以及每課程各自的 Apps Script 備用發布流程，見 [部署與初始化](docs/DEPLOYMENT.md)。
 
 ### 7. 上線檢查與日後更新
 

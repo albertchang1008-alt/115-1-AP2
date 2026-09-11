@@ -45,6 +45,7 @@ import {
   modes,
   youtubeId,
   forClass,
+  safeId,
 } from '../shared/model';
 import {
   API,
@@ -587,7 +588,13 @@ export default function App() {
               preview={openPreview}
               notify={notify}
               newCourse={() => {
-                const c = makeCourse();
+                const id = prompt(
+                  '請輸入課程代碼（英數字、-、_，之後會用於 Google Sheet 的課程欄位，建立後無法更改）',
+                );
+                if (!id) return;
+                if (!safeId(id)) return notify('代碼格式錯誤，只能使用英數字、- 或 _');
+                if (courses.some((x) => x.id === id)) return notify('代碼已存在');
+                const c = { ...makeCourse(), id };
                 setCourses([...courses, c]);
                 setCourseId(c.id);
               }}
@@ -841,6 +848,7 @@ function CourseEditor({
             />
           </Field>
         </div>
+        <p className="muted">課程代碼：{c.id}</p>
         <div className="actions">
           <button onClick={() => preview(c, true)}>
             <Eye size={16} />
@@ -856,7 +864,13 @@ function CourseEditor({
             <button
               aria-label="新增單元"
               onClick={() => {
-                setC({ ...c, units: [...c.units, makeUnit()] });
+                const id = prompt(
+                  '請輸入單元代碼（英數字、-、_，之後對應 Google Sheet 分頁名稱，建立後無法更改）',
+                );
+                if (!id) return;
+                if (!safeId(id)) return notify('代碼格式錯誤，只能使用英數字、- 或 _');
+                if (c.units.some((x) => x.id === id)) return notify('代碼已存在');
+                setC({ ...c, units: [...c.units, { ...makeUnit(), id }] });
                 setIdx(c.units.length);
               }}
             >
@@ -2125,6 +2139,20 @@ function SettingsPage({
   api: API;
   notify: (s: string) => void;
 }) {
+  const [sheetId, setSheetId] = useState(''),
+    [syncStatus, setSyncStatus] = useState<any>(null),
+    [syncBusy, setSyncBusy] = useState(false),
+    [syncResult, setSyncResult] = useState<any>(null);
+  useEffect(() => {
+    if (api.preview) return;
+    api
+      .call('getSyncStatus')
+      .then((r: any) => {
+        setSheetId(r.sheetId || '');
+        setSyncStatus(r.status);
+      })
+      .catch(() => {});
+  }, [api]);
   return (
     <>
       <header className="pageheading">
@@ -2149,6 +2177,84 @@ function SettingsPage({
           <dt>判分方式</dt>
           <dd>前端即時判分，整組提交</dd>
         </dl>
+      </section>
+      <section className="panel">
+        <h2>Google Sheet 同步</h2>
+        <p className="muted">
+          一份 Sheet 管理所有課程：「名冊」分頁固定存放班級、學號、姓名、Gmail；其餘分頁對應單元代碼，內含「課程」欄位標明歸屬課程。分頁需先用檢視權限分享給
+          Cloud Functions 的執行服務帳戶。
+        </p>
+        <div className="formgrid">
+          <Field label="Google Sheet ID">
+            <input
+              value={sheetId}
+              onChange={(e) => setSheetId(e.target.value)}
+              placeholder="試算表網址中 /d/ 與 /edit 之間那一段"
+            />
+          </Field>
+        </div>
+        <div className="actions">
+          <button
+            disabled={syncBusy || !sheetId}
+            onClick={async () => {
+              setSyncBusy(true);
+              try {
+                await api.call('saveSheetConfig', { sheetId });
+                notify('已保存 Sheet 設定');
+              } catch (e) {
+                notify((e as Error).message);
+              } finally {
+                setSyncBusy(false);
+              }
+            }}
+          >
+            保存 Sheet ID
+          </button>
+          <button
+            className="primary"
+            disabled={syncBusy || !sheetId}
+            onClick={async () => {
+              setSyncBusy(true);
+              setSyncResult(null);
+              try {
+                const r = await api.call<any>('syncSheet');
+                setSyncResult(r);
+                setSyncStatus((s: any) => ({ ...s, lastSyncedAt: Date.now() }));
+                notify('同步完成');
+              } catch (e) {
+                notify((e as Error).message);
+              } finally {
+                setSyncBusy(false);
+              }
+            }}
+          >
+            <RefreshCw size={16} />
+            立即同步
+          </button>
+        </div>
+        {syncStatus?.lastSyncedAt && (
+          <p className="muted">上次同步：{new Date(syncStatus.lastSyncedAt).toLocaleString()}</p>
+        )}
+        {syncResult && (
+          <div className="notice">
+            {syncResult.roster && (
+              <p>
+                名冊：
+                {syncResult.roster.changed
+                  ? `已更新，共 ${syncResult.roster.count} 人`
+                  : '內容未變更，已跳過寫入'}
+              </p>
+            )}
+            {syncResult.banks?.map((b: any, i: number) => (
+              <p className={b.error ? 'error' : 'success'} key={i}>
+                {b.unitId} · {b.courseId}：{b.error || `已連接版本 ${b.version}（${b.count} 題）`}
+              </p>
+            ))}
+            {!syncResult.banks?.length && !syncResult.roster && (
+              <p className="muted">這次同步沒有讀到「名冊」分頁或任何題庫分頁的資料。</p>
+            )}
+          </div>
+        )}
       </section>
       <section className="panel">
         <h2>教師報表更新</h2>

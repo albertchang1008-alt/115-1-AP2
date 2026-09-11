@@ -710,3 +710,199 @@ export const questionStudents = onCall(options, async (req) => {
   }
   return { rows, next: docs.size === 30 ? docs.docs.at(-1)!.id : null };
 });
+
+async function metadataToken(scope: string) {
+  const res = await fetch(
+    'http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token?scopes=' +
+      encodeURIComponent(scope),
+    { headers: { 'Metadata-Flavor': 'Google' } },
+  );
+  if (!res.ok) fail('無法取得 Google 服務帳戶權杖');
+  const data = (await res.json()) as { access_token: string };
+  return data.access_token;
+}
+async function sheetsGet(sheetId: string, path: string, token: string): Promise<any> {
+  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}${path}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) fail('讀取 Google Sheet 失敗：' + (await res.text()));
+  return res.json();
+}
+function sheetCol(headers: string[], names: string[]) {
+  for (const n of names) {
+    const i = headers.indexOf(n);
+    if (i >= 0) return i;
+  }
+  return -1;
+}
+async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
+  const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent('名冊'), token);
+  const rows: string[][] = data.values || [];
+  if (rows.length < 2) return { count: 0, changed: false };
+  const headers = rows[0].map((h) => String(h || '').trim());
+  const cClass = sheetCol(headers, ['班級', 'classId']);
+  const cStudentId = sheetCol(headers, ['學號', 'studentId']);
+  const cName = sheetCol(headers, ['姓名', 'name']);
+  const cEmail = sheetCol(headers, ['Gmail', 'gmail', 'Email', 'email', '信箱']);
+  if (cClass < 0 || cStudentId < 0 || cName < 0 || cEmail < 0)
+    fail('名冊分頁缺少班級、學號、姓名或 Gmail 欄位');
+  const students: Roster[] = rows
+    .slice(1)
+    .map((r) => ({
+      classId: String(r[cClass] || '').trim(),
+      studentId: String(r[cStudentId] || '').trim(),
+      name: String(r[cName] || '').trim(),
+      email: String(r[cEmail] || '')
+        .trim()
+        .toLowerCase(),
+      enabled: true,
+    }))
+    .filter((s) => s.email || s.studentId);
+  if (students.length > 3000) fail('名冊筆數過多，請分批處理');
+  const errors = validateRoster(students);
+  if (errors.length) fail('名冊格式錯誤：' + errors.slice(0, 5).join('；'));
+  const hash = createHash('sha256').update(JSON.stringify(students)).digest('hex');
+  const statusRef = db.doc('sync/status');
+  const status = await statusRef.get();
+  if (status.data()?.rosterHash === hash) return { count: students.length, changed: false };
+  const classIds = [...new Set(students.map((s) => s.classId))];
+  const classSnaps = await Promise.all(classIds.map((cl) => db.doc(`classes/${cl}`).get()));
+  classSnaps.forEach((snap, i) => {
+    if (snap.exists && !snap.data()?.teacherIds?.includes(p.uid))
+      fail('班級由其他教師管理：' + classIds[i]);
+  });
+  for (let i = 0; i < classIds.length; i += 400) {
+    const batch = db.batch();
+    for (const cl of classIds.slice(i, i + 400))
+      batch.set(db.doc(`classes/${cl}`), { teacherIds: FieldValue.arrayUnion(p.uid) }, { merge: true });
+    await batch.commit();
+  }
+  for (let i = 0; i < students.length; i += 400) {
+    const batch = db.batch();
+    for (const s of students.slice(i, i + 400)) {
+      batch.set(db.doc(`roster/${s.email}`), s);
+      batch.set(db.doc(`studentIds/${s.studentId}`), { email: s.email });
+    }
+    await batch.commit();
+  }
+  await statusRef.set(
+    { rosterHash: hash, rosterCount: students.length, rosterSyncedAt: Date.now() },
+    { merge: true },
+  );
+  return { count: students.length, changed: true };
+}
+function parseSheetQuestionRow(headers: string[], row: string[]): Question {
+  const get = (name: string) => {
+    const i = headers.indexOf(name);
+    return i >= 0 ? String(row[i] || '').trim() : '';
+  };
+  const options = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    .filter((k) => get(k))
+    .map((k) => ({ id: k, text: get(k) }));
+  return {
+    id: get('id'),
+    text: get('text'),
+    options,
+    answer: get('answer').toLowerCase(),
+    explanation: get('explanation'),
+    concept: get('concept'),
+    image: get('image'),
+    socratic: {
+      concept: get('socraticConcept'),
+      misconception: get('socraticMisconception'),
+      hint1: get('socraticHint1'),
+      hint2: get('socraticHint2'),
+      hint3: get('socraticHint3'),
+    },
+    remedialUrl: get('remedialUrl'),
+  };
+}
+async function syncBankTabFromSheet(sheetId: string, token: string, unitId: string) {
+  const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent(unitId), token);
+  const rows: string[][] = data.values || [];
+  if (rows.length < 2) return null;
+  const headers = rows[0].map((h) => String(h || '').trim());
+  const cCourse = sheetCol(headers, ['課程', 'course', 'courseId']);
+  const cId = sheetCol(headers, ['id']);
+  if (cCourse < 0 || cId < 0) return null;
+  const groups = new Map<string, string[][]>();
+  for (const r of rows.slice(1)) {
+    const courseId = String(r[cCourse] || '').trim();
+    if (!courseId || !String(r[cId] || '').trim()) continue;
+    if (!groups.has(courseId)) groups.set(courseId, []);
+    groups.get(courseId)!.push(r);
+  }
+  const results: any[] = [];
+  for (const [courseId, qrows] of groups) {
+    try {
+      if (!safeId(courseId)) throw new Error('課程代碼格式錯誤');
+      const courseSnap = await db.doc(`courses/${courseId}`).get();
+      if (!courseSnap.exists) throw new Error('課程不存在：' + courseId);
+      const questions = qrows.map((r) => parseSheetQuestionRow(headers, r));
+      const errs = validateQuestions(questions);
+      if (errs.length) throw new Error(errs.join('；'));
+      const r = await publishBank(courseId, unitId, questions);
+      await db.runTransaction(async (tx) => {
+        const snap = await tx.get(db.doc(`courses/${courseId}`));
+        if (!snap.exists) return;
+        const draft = snap.data()!.draft as Course;
+        const unit = draft?.units?.find((u) => u.id === unitId);
+        if (!unit || unit.bankVersion === r.version) return;
+        tx.update(snap.ref, {
+          draft: {
+            ...draft,
+            units: draft.units.map((u) => (u.id === unitId ? { ...u, bankVersion: r.version } : u)),
+          },
+        });
+      });
+      results.push({ courseId, unitId, version: r.version, count: r.count });
+    } catch (e) {
+      results.push({ courseId, unitId, error: (e as Error).message });
+    }
+  }
+  return results;
+}
+export const saveSheetConfig = onCall(options, async (req) => {
+  const p = await identity(req);
+  if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+  const sheetId = String(req.data?.sheetId || '').trim();
+  if (!/^[a-zA-Z0-9_-]{10,80}$/.test(sheetId)) fail('Google Sheet ID 格式錯誤');
+  await db.doc('sync/config').set({ sheetId, updatedBy: p.uid, updatedAt: Date.now() }, { merge: true });
+  return { ok: true };
+});
+export const getSyncStatus = onCall(options, async (req) => {
+  const p = await identity(req);
+  if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+  const [config, status] = await Promise.all([db.doc('sync/config').get(), db.doc('sync/status').get()]);
+  return { sheetId: config.data()?.sheetId || '', status: status.data() || null };
+});
+export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
+  const p = await identity(req);
+  if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+  const configSnap = await db.doc('sync/config').get();
+  const sheetId = configSnap.data()?.sheetId;
+  if (!sheetId) fail('尚未設定 Google Sheet ID');
+  const statusRef = db.doc('sync/status');
+  await db.runTransaction(async (tx) => {
+    const s = await tx.get(statusRef);
+    if (s.data()?.syncing) fail('已有同步正在執行，請稍後再試');
+    tx.set(statusRef, { syncing: true }, { merge: true });
+  });
+  try {
+    const token = await metadataToken('https://www.googleapis.com/auth/spreadsheets.readonly');
+    const meta = await sheetsGet(sheetId, '?fields=sheets.properties.title', token);
+    const titles: string[] = (meta.sheets || []).map((s: any) => s.properties.title);
+    const roster = titles.includes('名冊') ? await syncRosterFromSheet(sheetId, token, p) : null;
+    const banks: any[] = [];
+    for (const title of titles) {
+      if (title === '名冊') continue;
+      const r = await syncBankTabFromSheet(sheetId, token, title);
+      if (r) banks.push(...r);
+    }
+    await statusRef.set({ syncing: false, lastSyncedAt: Date.now() }, { merge: true });
+    return { roster, banks };
+  } catch (e) {
+    await statusRef.set({ syncing: false }, { merge: true });
+    throw e;
+  }
+});

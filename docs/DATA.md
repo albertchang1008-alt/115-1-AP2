@@ -13,6 +13,7 @@
 - courses/{id}/jobs/aggregate：交易序列化及上次增量更新時間。
 - courses/{id}/snapshots/{id}/rows/{studentId}：完成度結算；metadata 固定單元與門檻。
 - HTML 活動使用 `activity.url` 保存 GitHub Pages HTTPS 入口；教材檔案不寫入 Firebase。
+- sync/config：Google Sheet 同步設定（sheetId）；sync/status：同步狀態（rosterHash、lastSyncedAt、syncing 鎖）。
 
 Firestore 客戶端規則全部拒絕；callable 內以 Google token、即時名冊及課程權限驗證。bootstrap 的 profiles 寫入用於教師名冊／UID 對應，非判分。
 

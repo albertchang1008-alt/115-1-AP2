@@ -25,6 +25,9 @@ const expected = [
   'createSnapshot',
   'getSnapshots',
   'questionStudents',
+  'saveSheetConfig',
+  'getSyncStatus',
+  'syncSheet',
 ];
 for (const name of expected) {
   if (typeof handlers[name] !== 'function') throw new Error(`缺少後端入口：${name}`);

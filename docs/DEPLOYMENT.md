@@ -51,17 +51,21 @@ firebase deploy --only functions,firestore --project NEW_PROJECT_ID
 
 Firebase 後端部署與 Pages 發布分別進行。避免公開新版頁面時仍使用不相容舊後端；先部署相容後端、檢查、再發布前端。
 
-## 5. Sheets 題庫
+## 5. Google Sheet 同步（主要方式）
 
-建立新 Sheet，欄位：`id,text,a,b,c,d,answer,explanation,concept,image`，正解為小寫選項 ID。每工作表對應一單元，最多 100 題，超過拆單元。
+一份 Google Sheet 管理所有課程。開一個固定名稱「名冊」的分頁，欄位為班級、學號、姓名、Gmail；其餘每個分頁對應一個單元，分頁名稱即為單元代碼（教師在後台建立單元時自訂），欄位為 `課程,id,text,a,b,c,d,answer,explanation,concept,image`（`課程` 填課程代碼，其餘同舊格式，正解為小寫選項 ID；可選欄位另有 `socraticConcept/socraticMisconception/socraticHint1~3/remedialUrl`）。每分頁最多 100 題，超過就拆到不同課程或另建單元代碼。
 
-貼入 `apps-script/Code.gs` 與 `version.gs`。Script Properties 設定：
+前置設定（僅需一次）：
 
-- PUBLISH_ENDPOINT：部署回傳的 sheetsPublish HTTPS URL。
-- SHEETS_SYNC_KEY：與 Firebase secret 相同。
-- COURSE_ID、UNIT_ID：從教師後台及課程設定取得。
+1. 到 Google Cloud Console 啟用「Google Sheets API」。
+2. 找到 Cloud Functions（Cloud Run）目前使用的「執行階段服務帳戶」email（任一函式的設定頁可查）。
+3. 把這份 Google Sheet 用「檢視者」權限分享給該 email。
 
-在 Firestore Console 建立 `syncAllowlist/{courseId}`，內容 `{enabled:true}`，僅授權此課程使用同步。Sheet 選單檢查並發布後，將版本 ID 貼到教師後台的題庫管理，驗證、連接草稿、發布課程。未改變內容則不重複上傳。
+之後在教師後台「平台設定」貼上 Sheet ID（試算表網址 `/d/` 與 `/edit` 之間那段）、保存，按「立即同步」即可。名冊採整份內容雜湊比對，未變動時完全跳過讀寫；題庫沿用 `publishBank` 的內容雜湊分版，未變動的單元不會重新產生版本，有新版本時會自動更新對應課程草稿的題庫連接。同步結果會列出每個（課程、單元）是否成功，個別錯誤不會擋住其他單元繼續同步。
+
+## 5b. 舊版：單一課程 Apps Script 發布（備用）
+
+仍可使用 `apps-script/Code.gs` 搭配 `version.gs`：為單一課程／單元各自建立 Google Sheet，在 Script Properties 設定 `PUBLISH_ENDPOINT`、`SHEETS_SYNC_KEY`、`COURSE_ID`、`UNIT_ID`，並在 Firestore Console 建立 `syncAllowlist/{courseId}` 授權該課程使用同步；發布後把版本 ID 貼到教師後台的題庫管理連接草稿。這條路徑需要維護 `SHEETS_SYNC_KEY`，且每個課程／單元要各自設定 Script Properties，一般情況建議改用上面的 Google Sheet 同步。
 
 ## 6. GitHub Pages 教材
 
