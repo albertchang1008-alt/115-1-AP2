@@ -1375,7 +1375,7 @@ function Bank({
                   {o.id === q.answer ? '✓' : '○'} {o.text}
                 </p>
               ))}
-              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} />
+              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} audience="teacher" />
             </details>
           ))}
         {!questions.length && (
