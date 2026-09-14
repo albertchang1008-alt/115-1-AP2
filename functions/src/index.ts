@@ -826,11 +826,30 @@ async function readSheetRows(sheetId: string, token: string, title: string) {
   const data = await sheetsGet(sheetId, '/values/' + encodeURIComponent(range), token);
   return (data.values || []) as unknown[][];
 }
-async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
-  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'), await testStudents());
+async function ensureRosterClasses(uid: string, courseId: string, classIds: string[]) {
+  if (!classIds.length) return;
+  const ref = db.doc(`courses/${courseId}`);
+  await db.runTransaction(async (tx) => {
+    const current = await tx.get(ref);
+    if (!current.exists) fail('課程不存在，請先在課程與教材建立課程：' + courseId);
+    if (!current.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+    const draft = current.data()?.draft as Course;
+    const nextClassIds = [...new Set([...(draft.classIds || []), ...classIds])];
+    if (nextClassIds.length !== draft.classIds.length) tx.update(ref, { draft: { ...draft, classIds: nextClassIds } });
+  });
+}
+async function syncRosterFromSheet(sheetId: string, token: string, p: any, titles: string[], courseIds: string[]) {
+  const rosterTitle = ['班級名冊', '名冊'].find((title) => titles.includes(title));
+  if (!rosterTitle) throw Error('找不到「班級名冊」分頁');
+  const fallbackCourseId = courseIds.length === 1 ? courseIds[0] : '';
+  const students = parseRosterSheet(await readSheetRows(sheetId, token, rosterTitle), await testStudents(), fallbackCourseId);
   const results = [];
   for (const courseId of new Set(students.map((s) => s.courseId!))) {
-    try { results.push({ courseId, ...await writeEnrollments(p.uid, courseId, students.filter((s) => s.courseId === courseId)) }); }
+    try {
+      const rows = students.filter((s) => s.courseId === courseId);
+      await ensureRosterClasses(p.uid, courseId, [...new Set(rows.map((row) => row.classId))]);
+      results.push({ courseId, ...await writeEnrollments(p.uid, courseId, rows) });
+    }
     catch (e) { results.push({ courseId, error: (e as Error).message + '；先前批次可能已保存，可修正後重試' }); }
   }
   return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
@@ -846,7 +865,9 @@ function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion
 }
 // 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
 export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
-  const groups = parseBankSheet(rows, tabTitle);
+  // 題庫分頁名稱就是課程代碼；正式題庫表內不再重複填課程代碼。
+  // 第二個參數保留作沒有「次單元」欄的舊格式 fallback，避免既有 Sheet 失效。
+  const groups = parseBankSheet(rows, tabTitle, tabTitle);
   const results: any[] = [];
   for (const [courseId, units] of groups) {
     const ref = db.doc(`courses/${courseId}`);
@@ -895,6 +916,21 @@ export const getSyncStatus = onCall(options, async (req) => {
   const [config, status] = await Promise.all([db.doc('sync/config').get(), db.doc('sync/status').get()]);
   return { sheetId: config.data()?.sheetId || '', status: status.data() || null };
 });
+export const syncRoster = onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
+  const p = await identity(req);
+  if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+  const sheetId = (await db.doc('sync/config').get()).data()?.sheetId;
+  if (!sheetId) fail('尚未設定 Google Sheet ID');
+  const token = await metadataToken('https://www.googleapis.com/auth/spreadsheets.readonly');
+  const meta = await sheetsGet(sheetId, '?fields=sheets.properties.title', token);
+  const titles: string[] = (meta.sheets || []).map((s: any) => s.properties.title);
+  const managedCourses = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
+  const courseIds = managedCourses.docs.map((course) => course.id).filter((courseId) => titles.includes(courseId));
+  const roster = await syncRosterFromSheet(sheetId, token, p, titles, courseIds);
+  const lastSyncedAt = Date.now();
+  await db.doc('sync/status').set({ lastRosterSyncedAt: lastSyncedAt, lastRosterResult: roster }, { merge: true });
+  return { roster, hasErrors: !!roster.error, lastSyncedAt };
+});
 export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
@@ -920,30 +956,26 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
     const token = await metadataToken('https://www.googleapis.com/auth/spreadsheets.readonly');
     const meta = await sheetsGet(sheetId, '?fields=sheets.properties.title', token);
     const titles: string[] = (meta.sheets || []).map((s: any) => s.properties.title);
-    let roster: any;
-    try {
-      roster = titles.includes('名冊')
-        ? await syncRosterFromSheet(sheetId, token, p)
-        : { error: '找不到「名冊」分頁，未同步名單' };
-    } catch (e) {
-      roster = { error: (e as Error).message + '；較早批次可能已寫入，修正後可重試' };
-    }
     const banks: any[] = [];
-    for (const title of titles) {
-      if (title === '名冊') continue;
+    // 只把「名稱剛好等於我可管理課程代碼」的分頁當作題庫；例如 115-1-AP2。
+    // 題庫ext、說明頁、雙向細目表等即使欄位相似，也不會被誤同步。
+    const managedCourses = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
+    for (const title of titles.filter((name) => managedCourses.docs.some((course) => course.id === name))) {
       try {
         const rows = await readSheetRows(sheetId, token, title);
-        // 附表（例如雙向細目表、教師覆核清單、使用說明）沒有題庫必填欄，靜默略過，不算同步錯誤。
-        if (!looksLikeBankSheet(rows)) continue;
+        if (!looksLikeBankSheet(rows)) {
+          banks.push({ courseId: title, error: `課程分頁「${title}」缺少題庫必要欄位` });
+          continue;
+        }
         const r = await syncBankTabFromSheet(rows, title, p.uid);
         banks.push(...r);
       } catch (e) {
         banks.push({ unitId: title, error: (e as Error).message });
       }
     }
-    const hasErrors = !!roster?.error || banks.some((bank) => bank.error);
+    const hasErrors = banks.some((bank) => bank.error);
     const lastSyncedAt = Date.now();
-    const result = { roster, banks, hasErrors, lastSyncedAt };
+    const result = { banks, hasErrors, lastSyncedAt };
     await finish({ lastSyncedAt, lastResult: result, lastError: '' });
     return result;
   } catch (e) {

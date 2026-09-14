@@ -2266,7 +2266,7 @@ function SettingsPage({
       <section className="panel">
         <h2>Google Sheet 同步</h2>
         <p className="muted">
-          一份 Sheet 管理所有課程：「名冊」分頁存放課程代碼、班級代碼、學號、姓名、學校信箱、啟用；其餘分頁對應單元代碼，內含「課程」欄位標明歸屬課程。分頁需先用檢視權限分享給
+          每門課的題庫分頁名稱必須等於課程代碼（例如 115-1-AP2），分頁內依「單元／次單元」整理題目。「班級名冊」分頁使用授課班級、學號、姓名、Gmail 欄位，按「同步班級名冊」才會讀取。分頁需先用檢視權限分享給
           Cloud Functions 的執行服務帳戶。
         </p>
         <div className="formgrid">
@@ -2323,7 +2323,29 @@ function SettingsPage({
             }}
           >
             <RefreshCw size={16} />
-            立即同步
+            同步題庫
+          </button>
+          <button
+            disabled={api.preview || syncBusy || !sheetId}
+            onClick={async () => {
+              setSyncBusy(true);
+              setSyncResult(null);
+              try {
+                const saved = await api.call('saveSheetConfig', { sheetId });
+                setSheetId(saved.sheetId);
+                const r = await api.call<any>('syncRoster');
+                setSyncResult(r);
+                try { await onSynced(); } catch { notify('名冊已同步，但課程重新載入失敗；請重新整理頁面'); return; }
+                notify(r.hasErrors ? '名冊同步有未完成項目，請查看下方原因' : '班級名冊同步完成');
+              } catch (e) {
+                notify((e as Error).message);
+              } finally {
+                setSyncBusy(false);
+              }
+            }}
+          >
+            <Users size={16} />
+            同步班級名冊
           </button>
         </div>
         {syncStatus?.lastSyncedAt && (
@@ -2346,7 +2368,7 @@ function SettingsPage({
               </p>
             ))}
             {!syncResult.banks?.length && !syncResult.roster && (
-              <p className="muted">這次同步沒有讀到「名冊」分頁或任何題庫分頁的資料。</p>
+              <p className="muted">這次同步沒有讀到班級名冊或任何以課程代碼命名的題庫分頁。</p>
             )}
           </div>
         )}

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { forClass, completion, safeCode, validateRoster } from '../shared/model';
 import { sampleCourse } from '../src/service';
-import { parseBankSheet, parseRosterSheet } from '../shared/sheets';
+import { looksLikeBankSheet, parseBankSheet, parseRosterSheet } from '../shared/sheets';
 import { emptyLearning, reduceLearning } from '../shared/learning';
 test('班級可明確取消全部單元，必做與提供分開，來源不被更改', () => {
   const course = sampleCourse(); course.classUnits = { a: [], b: [course.units[0].id] };
@@ -35,6 +35,19 @@ test('單一分頁可依「次單元」拆成多個題庫，「單元」欄只�
   // 啟用＝FALSE 的列直接略過，不進題庫
   assert.equal(course.get('白血球')!.questions.length, 1);
 });
+test('課程代碼分頁可讀正式題庫欄位，不要求每列重複課程代碼', () => {
+  const rows = [
+    ['題庫', '序號', '題目ID', '單元', '次單元', '題目', '正確答案文字', '原始答案字母(僅對照)', '選項A', '選項B', '③對答案'],
+    ['Q1', '7', '2543795', '心臟', '心動週期與心音', '第一心音由何者產生？', '房室瓣關閉', 'B', '半月瓣關閉', '房室瓣關閉', '答案是房室瓣關閉。'],
+  ];
+  assert.ok(looksLikeBankSheet(rows));
+  const groups = parseBankSheet(rows, '115-1-AP2', '115-1-AP2');
+  const q = groups.get('115-1-AP2')!.get('心動週期與心音')!.questions[0];
+  assert.equal(q.id, '2543795');
+  assert.equal(q.answer, 'b');
+  assert.equal(q.order, 7);
+  assert.equal(q.socratic?.decide, '答案是房室瓣關閉。');
+});
 test('同一次單元的「單元」欄填了不同值要報錯', () => {
   const rows = [
     ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'],
@@ -55,6 +68,13 @@ test('同一學生可以跨課程，單一課程不能重複歸屬兩班', () =>
   const row = ['a','A','001','學生','student@ctcn.edu.tw','TRUE'];
   assert.equal(parseRosterSheet([headers, row, ['b', ...row.slice(1)]]).length, 2);
   assert.throws(() => parseRosterSheet([headers, row, ['a','B',...row.slice(2)]]));
+});
+test('班級名冊可由單一課程分頁推得課程代碼與授課班級', () => {
+  const rows = parseRosterSheet([
+    ['授課班級', '學號', '姓名', 'Gmail'],
+    ['護525', '001', '學生甲', 'student@ctcn.edu.tw'],
+  ], [], '115-1-AP2');
+  assert.deepEqual(rows[0], { courseId: '115-1-AP2', classId: '護525', studentId: '001', name: '學生甲', email: 'student@ctcn.edu.tw', enabled: true });
 });
 test('重玩不覆蓋首次錯誤，通關不改變首次結果', () => {
   let s = reduceLearning(emptyLearning(), [{ id:'a',type:'answer',questionId:'q1',correct:false }]);

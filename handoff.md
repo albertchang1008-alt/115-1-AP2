@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：**1.2.0 已正式上線，含「同步自動建立單元」修正也已部署**。
+目前版本：1.2.0（已正式上線；本機另有待部署的 Sheet 匯入規則修正）。
 `feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。
 後端 Functions：2026-09-14 部署過兩次——Codex 那次（29 個函式）之後，又加了「同步時次單元不存在就自動建立單元」的修正（commit `f6137c5`），使用者在自己電腦的 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91` 部署成功（29 個函式全部 Successful update operation，Deploy complete!）。**這個修正現在已經在正式環境生效。**
 本機 `main` 還有 2 個 commit 尚未推上 GitHub（`bd03201` FillCourseAndUnit.gs 修正、`f6137c5` 自動建單元），Functions 已經部署但 GitHub 上的原始碼還沒同步——下一個接手的人／agent 看到 `origin/main` 時要注意這個落差，程式碼實際跑的版本比 GitHub 上看到的新。使用者需要用 GitHub Desktop 推送這 2 個 commit 補上。
@@ -40,7 +40,7 @@
 12.（1.2.0）選項每次都重新洗牌，不固定順序，避免學生背 ABCD 位置。
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
 14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④與最後預設收合的「傳統解析」，不顯示⑤追溯原子卡；教師可看①～⑤，傳統解析直接展開。現行程式的蘇格拉底式各段仍為 details 收合，尚未實作教師各段全部展開。
-15.（2026-09-14 新增）同步時次單元若不存在，`syncBankTabFromSheet` 會自動建立單元（id＝次單元、title＝次單元文字、group＝單元欄），不再要求老師先手動在後台逐一建立——這是使用者實測後明確要求的行為（「應該是依 google sheet 上的題庫分頁建立題庫，單元和次單元都依上面標的」），不是我方自行擴大範圍。課程本身仍必須先手動建立（title／term／teacherIds 沒有合理預設值）。新單元不會自動加進既有班級的適用單元，仍要到班級名冊手動勾選。
+15.（2026-09-15）題庫同步以**課程代碼分頁名稱**辨識來源：例如課程代碼 `115-1-AP2` 就只讀同名分頁；不再掃描所有看起來像題庫的工作表，`題庫ext` 等輔助分頁會略過。題庫與名冊各有獨立按鈕，只有按鈕才讀取對應分頁；每次皆為增量同步，未變更內容不重複寫入。正式題庫分頁的每列不必填課程代碼，`單元` 是顯示分組，`次單元` 是可練習、計完成度並各自發布版本的題庫單位。課程本身仍必須先手動建立，且分頁名稱須與它的代碼完全相同。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
@@ -151,6 +151,14 @@
   GitHub——Functions 已經是新版，但 GitHub 上的原始碼還停在舊版，兩邊不
   同步。需要使用者用 GitHub Desktop 推送補上，避免下次有人對照 GitHub 上的
   程式碼時搞錯正式環境實際在跑什麼。
+
+## Codex Sheet 分頁同步修正（2026-09-15，待部署）
+
+- 使用者將規則定為「課程代碼即題庫分頁名稱」：`115-1-AP2` 分頁同步至 `courses/115-1-AP2`；系統僅處理目前教師有權管理且名稱完全相符的分頁。其他工作表（包含 `題庫ext`）都不再嘗試匯入。
+- 已由使用者提供的公開 Sheet `115-1-AP2課程平台` 核對正式欄位：`題庫`（Q1/Q2）、`序號`、`題目ID`、`單元`、`次單元`、`題目`、`正確答案文字`、`原始答案字母(僅對照)`、選項 A-D、解析與五段解析等。`shared/sheets.ts` 已相容這些欄名；正確答案文字可直接對應選項，`序號` 作穩定題序，`③對答案` 會對應蘇格拉底式第 ③ 段。
+- 改動檔案：`functions/src/index.ts`、`shared/sheets.ts`、`src/App.tsx`、`tests/platform.test.ts`。新增正式格式解析測試；完整驗證通過：前端／共用 27 項、Functions 編譯與 29 個入口、Functions 5 項測試。前端 Vite 建置也通過。
+- 使用者已將正式題庫分頁改名為 `115-1-AP2`、名冊分頁改名為 `班級名冊`（2026-09-15）。本輪新增 `syncRoster` callable 與後台「同步班級名冊」按鈕；一般「同步題庫」不再讀名冊。班級名冊欄位為 `授課班級／學號／姓名／Gmail`，在同一份 Sheet 僅有一個對應課程分頁時會以該分頁名稱作課程代碼，並自動新增名冊中出現的班級代碼。名冊與題庫都比對既有內容做增量同步：無變動不重複寫入、不新建題庫版本。
+- 驗證已更新且全數通過：前端／共用 28 項、Functions 編譯與 29 個入口、Functions 5 項測試、前端 Vite 正式建置。Git 現況：`main` 與 `origin/main` 同在 `dca8a5a`，但本輪 5 個檔案（`functions/src/index.ts`、`shared/sheets.ts`、`src/App.tsx`、`tests/platform.test.ts`、`handoff.md`）尚未提交，因此 GitHub 尚未包含此功能。尚未部署；下一步是先建立提交並由使用者在 GitHub Desktop Push origin，再在含 Firebase 登入憑證的本機 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91`。需確認平台中已存在同代碼且教師可管理的課程。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 

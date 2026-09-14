@@ -6,18 +6,22 @@ export function column(headers: string[], names: string[]) {
 function reader(headers: string[], row: unknown[]) {
   return (...names: string[]) => String(row[column(headers, names)] ?? '').trim();
 }
-export function parseRosterSheet(rows: unknown[][], testEmails: readonly string[] = []): Roster[] {
+// 課程代碼通常由題庫分頁名稱推得；單一課程 Sheet 的「班級名冊」不必逐列重複它。
+export function parseRosterSheet(rows: unknown[][], testEmails: readonly string[] = [], fallbackCourseId = ''): Roster[] {
   if (!rows.length) throw Error('名冊分頁沒有欄位');
+  if (fallbackCourseId && !safeCode(fallbackCourseId)) throw Error('名冊對應的課程代碼無效');
   const headers = rows[0].map(String);
-  for (const aliases of [['課程代碼', '課程', 'courseId'], ['班級代碼', '班級', 'classId'], ['學號', 'studentId'], ['姓名', 'name'], ['學校信箱', 'Gmail', 'email', '信箱']])
+  const required = [['班級代碼', '班級', '授課班級', 'classId'], ['學號', 'studentId'], ['姓名', 'name'], ['學校信箱', 'Gmail', 'email', '信箱']];
+  if (!fallbackCourseId) required.unshift(['課程代碼', '課程', 'courseId']);
+  for (const aliases of required)
     if (column(headers, aliases) < 0) throw Error('名冊缺少欄位：' + aliases[0]);
   const result = rows.slice(1).filter((row) => row.some((v) => String(v ?? '').trim())).map((row, i) => {
     const get = reader(headers, row);
-    const courseId = get('課程代碼', '課程', 'courseId');
+    const courseId = get('課程代碼', '課程', 'courseId') || fallbackCourseId;
     if (!safeCode(courseId)) throw Error(`名冊第 ${i + 2} 列課程代碼無效`);
     const enabled = get('啟用', 'enabled').toLowerCase();
     if (enabled && !['true', 'false', '1', '0', '是', '否'].includes(enabled)) throw Error(`名冊第 ${i + 2} 列啟用值無效`);
-    return { courseId, classId: get('班級代碼', '班級', 'classId'), studentId: get('學號', 'studentId'), name: get('姓名', 'name'), email: get('學校信箱', 'Gmail', 'email', '信箱').toLowerCase(), enabled: !['false', '0', '否'].includes(enabled) };
+    return { courseId, classId: get('班級代碼', '班級', '授課班級', 'classId'), studentId: get('學號', 'studentId'), name: get('姓名', 'name'), email: get('學校信箱', 'Gmail', 'email', '信箱').toLowerCase(), enabled: !['false', '0', '否'].includes(enabled) };
   });
   const errors = validateRoster(result, testEmails);
   if (errors.length) throw Error(errors.slice(0, 10).join('；'));
@@ -35,26 +39,27 @@ export interface UnitGroup {
 }
 // courseId -> 次單元代碼(=unitId) -> 該次單元的分組與題目。
 export type BankGroups = Map<string, Map<string, UnitGroup>>;
-// 分頁掃描白名單用：粗略判斷這個分頁是不是題庫（有沒有四個必填欄），不是就靜默略過，
-// 不要每次同步都對「雙向細目表」「教師覆核清單」這類附表報錯。
+// 粗略判斷這個分頁是不是題庫。課程代碼由分頁名稱提供時，表內不必重複放課程欄；
+// 正式題庫總表也使用「題目」及「正確答案文字」，須與舊版「問題／解答」相容。
 export function looksLikeBankSheet(rows: unknown[][]): boolean {
   if (!rows.length) return false;
   const headers = rows[0].map(String);
-  return [['課程代碼', '課程', 'courseId', 'course'], ['題目ID', 'id', '題號'], ['問題', 'text', '題幹', 'question'], ['解答', '答案', 'answer']]
+  return [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['解答', '答案', '正確答案文字', '正確答案', 'answer']]
     .every((aliases) => column(headers, aliases) >= 0);
 }
-export function parseBankSheet(rows: unknown[][], fallbackUnitId: string): BankGroups {
+export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallbackCourseId = ''): BankGroups {
   if (!safeCode(fallbackUnitId)) throw Error('分頁名稱須為單元代碼');
+  if (fallbackCourseId && !safeCode(fallbackCourseId)) throw Error('分頁名稱須為課程代碼');
   if (rows.length < 2) throw Error('分頁沒有題目資料');
   const headers = rows[0].map(String);
-  for (const aliases of [['課程代碼', '課程', 'courseId', 'course'], ['題目ID', 'id', '題號'], ['問題', 'text', '題幹', 'question'], ['解答', '答案', 'answer']])
+  for (const aliases of [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['解答', '答案', '正確答案文字', '正確答案', 'answer']])
     if (column(headers, aliases) < 0) throw Error('缺少欄位：' + aliases[0]);
   const groups: BankGroups = new Map();
   let previousCourse = '', previousUnit = '', previousImage = '';
   rows.slice(1).forEach((row, i) => {
     if (!row.some((v) => String(v ?? '').trim())) { previousImage = ''; return; }
     const get = reader(headers, row);
-    const courseId = get('課程代碼', '課程', 'courseId', 'course');
+    const courseId = get('課程代碼', '課程', 'courseId', 'course') || fallbackCourseId;
     if (!safeCode(courseId)) throw Error(`第 ${i + 2} 列課程代碼無效`);
     const unitId = get('次單元', 'unitId', 'unit') || fallbackUnitId;
     if (!safeCode(unitId)) throw Error(`第 ${i + 2} 列次單元代碼無效`);
@@ -71,7 +76,7 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string): BankG
     previousUnit = unitId;
     previousImage = isImage ? image : '';
     const options = 'abcdefgh'.split('').map((id) => ({ id, text: get('選項' + id.toUpperCase(), id, 'option' + id.toUpperCase(), '選項' + (id.charCodeAt(0) - 96)) })).filter((o) => o.text);
-    const rawAnswer = get('解答', '答案', 'answer', '正確答案', 'ans');
+    const rawAnswer = get('解答', '答案', '正確答案文字', '正確答案', 'answer', 'ans');
     let answer = rawAnswer.replace(/^[（(]|[）)]$/g, '').toLowerCase();
     if (/^[1-8]$/.test(answer)) answer = 'abcdefgh'[Number(answer) - 1];
     if (!options.some((o) => o.id === answer)) {
@@ -79,11 +84,11 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string): BankG
       if (matching.length !== 1) throw Error(`第 ${i + 2} 列解答無法唯一對應選項`);
       answer = matching[0].id;
     }
-    const orderRaw = get('題序', 'order');
+    const orderRaw = get('題序', '序號', 'order');
     if (orderRaw && !Number.isFinite(Number(orderRaw))) throw Error(`第 ${i + 2} 列題序必須是數字或留白`);
     const order = orderRaw ? Number(orderRaw) : undefined;
     const question: Question = {
-      id: get('題目ID', 'id', '題號'), text: get('問題', 'text', '題幹', 'question'), options, answer,
+      id: get('題目ID', 'id', '題號'), text: get('問題', '題目', 'text', '題幹', 'question'), options, answer,
       questionType: isImage || image ? 'image' : 'single', image, ...(order === undefined ? {} : { order }),
       explanation: get('傳統解析', '解析', 'explanation'), concept: get('concept', '知識點'),
       socratic: {
@@ -94,7 +99,7 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string): BankG
         hint3: get('③推回答案', '推回答案', '提示3', 'socraticHint3', 'hint3'),
         keyword: get('①先想關鍵字', 'socraticKeyword', 'keyword'),
         chain: get('②提問鏈', 'socraticChain', 'chain'),
-        decide: get('③回頭選答案', 'socraticDecide', 'decide'),
+        decide: get('③回頭選答案', '③對答案', 'socraticDecide', 'decide'),
         memory: get('④一句話記憶', 'socraticMemory', 'memory'),
         trace: cleanTrace(get('⑤追溯原子卡', 'socraticTrace', 'trace')),
       },
