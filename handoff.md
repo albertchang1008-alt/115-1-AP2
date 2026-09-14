@@ -19,8 +19,8 @@
 
 ---
 
-目前版本：1.2.0（`feature/1.2.0-bank-import` 已上傳 GitHub；`main` 仍為 1.1.2）。
-後端 Functions 已部署，待將分支合併進 `main` 觸發前端發布。
+目前版本：**1.2.0 已正式上線**。`feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。後端 Functions 已部署（Codex 於同日完成，29 個函式，asia-east1）。
+本機 `main` 目前又比 `origin/main` 多 1 個未推送的 commit（見下方「Claude 接手狀態」），是這次新加的自動建單元修正，還沒部署也還沒推上 GitHub。
 
 ## 固定決策
 
@@ -38,6 +38,7 @@
 12.（1.2.0）選項每次都重新洗牌，不固定順序，避免學生背 ABCD 位置。
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
 14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④與最後預設收合的「傳統解析」，不顯示⑤追溯原子卡；教師可看①～⑤，傳統解析直接展開。現行程式的蘇格拉底式各段仍為 details 收合，尚未實作教師各段全部展開。
+15.（2026-09-14 新增）同步時次單元若不存在，`syncBankTabFromSheet` 會自動建立單元（id＝次單元、title＝次單元文字、group＝單元欄），不再要求老師先手動在後台逐一建立——這是使用者實測後明確要求的行為（「應該是依 google sheet 上的題庫分頁建立題庫，單元和次單元都依上面標的」），不是我方自行擴大範圍。課程本身仍必須先手動建立（title／term／teacherIds 沒有合理預設值）。新單元不會自動加進既有班級的適用單元，仍要到班級名冊手動勾選。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
@@ -74,16 +75,29 @@
 - 同考點抽題去重、題目作廢並重算分數——刻意排除在 1.2.0 之外，見建議書第
   5.4、5.5 節
 
-## Git 與部署現況（2026-09-14）
+## Git 與部署現況（2026-09-14，Claude 更新）
 
-- `feature/1.2.0-bank-import`：已透過 GitHub Desktop 發布到 GitHub；本機最新 HEAD 為 `fa660a8`，尚未合併到 `main`。
-- 本機 `main` 領先 `origin/main` 1 個 commit（`1.1.2：新增測試學生帳號白名單`），
-  這個是更早以前就沒推的，跟本次 1.2.0 工作無關，一併記錄避免被誤會
-- 部署機制：push 到 `main` 會觸發 `.github/workflows/pages.yml` 自動重建並
-  上線前端網站；後端 Firebase Cloud Functions **不會自動部署**，要手動
-  `npx firebase-tools deploy --only functions`
-- Firebase CLI 可存取 `ap2-7ed91`。2026-09-14 已直接部署 Functions：原始碼上傳成功，29 個 Node.js 22 函式均已更新到 `asia-east1`，並以 `functions:list` 唯讀確認。GitHub HTTPS 的命令列寫入憑證仍缺失，但 GitHub Desktop 可正常發布分支。
-- `scripts/deploy.sh` 已修正為先預檢、測試與分支備份，再部署 Functions，最後快轉推送遠端 main。由於命令列 GitHub 憑證阻塞，本次採 GitHub Desktop 發布分支、CLI 部署 Functions 的等價順序；待以 Desktop 合併分支並推送 main，Pages 才會開始發布。
+- `main` 已合併 1.2.0（PR #1，見上方「目前版本」），Pages 已成功重新發布，
+  Functions 已部署。這是**目前正式上線的狀態**。
+- 本機 `main` 現在比 `origin/main` 多 2 個未推送的 commit：
+  1. `修正 FillCourseAndUnit.gs：課程代碼欄完全不存在時也要能補上`——純手動
+     工具腳本，不影響前端 build 或 Functions 部署，沒有正式環境風險，可以
+     隨時單獨推送，不需要重新部署 Functions。
+  2.（待這次改動完成後會再新增一個）`syncBankTabFromSheet` 自動建立缺少的
+     單元——**這個有動到 Cloud Functions 程式碼，推送 main 前端會自動重發
+     沒問題，但要讓行為真的生效，必須額外重新
+     `npx firebase-tools deploy --only functions` 一次**，光 push/合併不會
+     讓新的 Functions 邏輯上線。
+- 本機用 `git push origin main` 會失敗（`fatal: could not read Username for
+  'https://github.com'`）——這台 device_bash 的沙箱沒有存 GitHub 的 HTTPS
+  寫入憑證，跟 Codex 遇到的狀況一樣。目前確認可行的推送方式是使用者自己在
+  電腦上開 **GitHub Desktop**，選 `main`，會看到待推送的 commit，按
+  「Push origin」。
+- Firebase CLI（`npx firebase-tools`）在這台裝置上**可以**部署（不受上面
+  GitHub 憑證問題影響，用的是不同的登入），2026-09-14 已用它成功部署過一次
+  Functions；下一次需要部署時可以直接用，或透過 `scripts/deploy.sh`（會先
+  跑測試、備份分支，再部署 Functions，最後嘗試快轉推送 main——但 main 推送
+  那一步一樣會卡在 GitHub 憑證，需要使用者用 Desktop 補推）。
 
 ## Codex 接手狀態（2026-09-14）
 
@@ -99,9 +113,41 @@
 - 下一步：教師端大單元分組視覺與真實 Sheet 資料補齊仍待處理。原先列為 1.2.0 範圍外的同考點去重、作廢重算不擅自加入。
 - 先前實驗性 Codex 上下文管理設定請求僅完成當時的能力檢查，未確認寫入或執行期生效；與本次平台修復分開處理，不宣稱已開啟。
 
+## Claude 接手狀態（2026-09-14，晚）
+
+- 起因：使用者實際照著平台介面操作同步，發現「請先建立並保存單元」這條規則
+  很不順手，明確要求「應該是依 google sheet 上的題庫分頁建立題庫，單元和
+  次單元都依上面標的」。
+- 改動 `functions/src/index.ts` 的 `syncBankTabFromSheet`：次單元在課程草稿
+  裡不存在時自動建立（id＝次單元、title＝次單元、group＝單元欄），不再
+  fail；並把 `syncBankTabFromSheet` 從模組內部函式改成具名 export，方便
+  測試直接呼叫（不是 onCall，Firebase 部署不會把它當成雲端函式）。課程本身
+  仍必須已存在才會同步（否則報「課程不存在，請先在課程與教材建立課程」），
+  這點刻意沒有放寬——title/term/teacherIds 沒有合理預設值。
+- 新增 `functions/tests/sync-auto-unit.test.cjs`：4 個情境（自動建立新單元
+  且欄位正確、已存在單元只更新版本與分組不重複新增、課程不存在明確報錯、
+  非授權教師報錯且不寫入），都是用實際 `syncBankTabFromSheet` 配合記憶體
+  Firestore mock，不連線正式資料庫。
+- 驗證：本機（雲端沙箱）重新同步了 Codex 那輪修改後的完整檔案（之前我的
+  沙箱副本是舊的，缺少他們新增的 `functions/scripts/*.cjs`、
+  `scripts/version.mjs` 等檔案，已補齊）。`npm test`（前端/共用邏輯）
+  26/26、`npm --prefix functions run build`（tsc＋29 個入口載入）通過、
+  `npm --prefix functions test`（含新舊兩個測試檔）5＋1＝6 項全過。前端
+  `vite build` 在這個雲端沙箱副本裡因為原本就沒有同步 `index.html` 等靜態
+  檔案而失敗，這是沙箱副本本來就有的限制，不是這次改動造成的，不用理它。
+- Git：commit 已建立在本機 `main` 上（訊息含「syncBankTabFromSheet 自動
+  建立缺少的單元」），但沒有 push——這台裝置沒有 GitHub HTTPS 寫入憑證。
+  **這個改動還沒部署到 Firebase，正式環境目前還是走舊邏輯（單元不存在會
+  報錯）。**
+- 下一步：使用者用 GitHub Desktop 推送 `main`（同時會帶上 FillCourseAndUnit
+  的修正），前端會自動重新發布；接著要另外執行一次
+  `npx firebase-tools deploy --only functions`（或 `scripts/deploy.sh`）
+  才會讓新的自動建單元邏輯真的在正式環境生效。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- 使用者已授權正式部署；後端已完成。下一步用 GitHub Desktop 對 `feature/1.2.0-bank-import` 建立 Pull Request 並合併到 `main`，再確認 GitHub Actions 的 Pages 發布成功。
+- **需要使用者動作才能讓「自動建單元」生效**：GitHub Desktop 推送 `main`
+  （2 個待推 commit）＋ 手動跑一次 Functions 部署，見上方「Claude 接手狀態」。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

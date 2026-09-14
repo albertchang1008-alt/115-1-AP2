@@ -835,7 +835,17 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
   }
   return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
 }
-async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
+// 次單元在課程草稿裡不存在時，直接依 Sheet 資料建立一個新單元（id=次單元、
+// title=次單元、group=單元），不再要求老師先手動在後台逐一建立——教師仍需
+// 先建立課程本身（title／term／teacherIds 等沒有合理預設值，不會自動生成），
+// 但單元本身純粹是內容分組，跟著 Sheet 走比較符合「Sheet 是主要編輯來源」的設計。
+// 新單元不會自動加進任何既有班級的 classUnits（跟手動建立單元時的行為一致），
+// 老師仍要到班級名冊勾選才會對學生開放。
+function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion: string): Unit {
+  return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, activities: [], ...(group ? { group } : {}) };
+}
+// 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
+export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
   const groups = parseBankSheet(rows, tabTitle);
   const results: any[] = [];
   for (const [courseId, units] of groups) {
@@ -843,25 +853,28 @@ async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: st
     for (const [unitId, { group, questions }] of units) {
       try {
         const course = await ref.get();
+        if (!course.exists) fail('課程不存在，請先在課程與教材建立課程：' + courseId);
         if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
-        if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
         const result = await publishBank(courseId, unitId, questions);
+        let created = false;
         await db.runTransaction(async (tx) => {
           const current = await tx.get(ref);
           const draft = current.data()?.draft as Course;
-          if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
-          const target = draft.units.find((u) => u.id === unitId)!;
-          if (target.bankVersion !== result.version || (group && target.group !== group))
-            tx.update(ref, {
-              draft: {
-                ...draft,
-                units: draft.units.map((u) =>
-                  u.id === unitId ? { ...u, bankVersion: result.version, ...(group ? { group } : {}) } : u,
-                ),
-              },
-            });
+          if (!current.data()?.teacherIds?.includes(uid)) fail('課程權限已變更');
+          const existing = draft.units.find((u) => u.id === unitId);
+          created = !existing;
+          if (existing && existing.bankVersion === result.version && (!group || existing.group === group)) return; // 沒有變動，不寫入
+          const nextUnit = existing
+            ? { ...existing, bankVersion: result.version, ...(group ? { group } : {}) }
+            : newUnitFromSheet(unitId, group, result.version);
+          tx.update(ref, {
+            draft: {
+              ...draft,
+              units: existing ? draft.units.map((u) => (u.id === unitId ? nextUnit : u)) : [...draft.units, nextUnit],
+            },
+          });
         });
-        results.push({ courseId, unitId, group, ...result });
+        results.push({ courseId, unitId, group, created, ...result });
       } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
     }
   }
