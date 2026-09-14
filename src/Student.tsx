@@ -22,6 +22,8 @@ import {
   phases,
   modes,
   grade,
+  shuffle,
+  orderForPractice,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -123,7 +125,7 @@ export default function Student({
       setBusy(false);
     }
   }
-  async function start(m: Mode, sample = false) {
+  async function start(m: Mode, practiceCount?: number) {
     if (!unit?.bankVersion) {
       notify('此單元尚未發布題庫');
       return;
@@ -138,14 +140,20 @@ export default function Student({
           notify('目前沒有此題庫版本的歷史錯題。');
           return;
         }
+        qs = shuffle(qs);
+      } else if (practiceCount) {
+        // 抽題練習：不計分、不計完成度。已考過的題目自然排到後面（仿 v1.9），不是每次重置重洗。
+        const attemptedIds = new Set(Object.keys(progress.attempted?.[unit.id] || {}));
+        qs = orderForPractice(qs, attemptedIds).slice(0, Math.min(practiceCount, qs.length));
+      } else {
+        qs = shuffle(qs); // 完整測驗：出全部題目，只洗牌不減量
       }
-      if (sample) qs = qs.slice(0, Math.max(1, Math.floor(qs.length / 2)));
       if (!qs.length) {
         notify('題庫沒有可用題目');
         return;
       }
-      setFull(!sample && m !== 'review');
-      qs = shuffle(qs).map((q) => ({ ...q, options: shuffle(q.options) }));
+      setFull(!practiceCount && m !== 'review');
+      qs = qs.map((q) => ({ ...q, options: shuffle(q.options) }));
       setQuestions(qs);
       setMode(m);
       setTaking(true);
@@ -248,41 +256,46 @@ export default function Student({
               <span>{ratio.total ? Math.round((ratio.done / ratio.total) * 100) : 0}%</span>
             </div>
           </div>
-          <div className="unitgrid">
-            {course.units.map((u, i) => {
-              const locked = !!u.opensAt && Date.parse(u.opensAt) > Date.now();
-              return (
-                <button
-                  className="unitcard"
-                  key={u.id}
-                  disabled={locked}
-                  onClick={() => {
-                    setUnitId(u.id);
-                    setActivityId('');
-                  }}
-                >
-                  <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
-                  <div>
-                    <span className={'badge ' + (complete(u, progress) ? 'green' : '')}>
-                      {complete(u, progress)
-                        ? '已達標'
-                        : locked
-                          ? '尚未開放'
-                          : u.required
-                            ? '必做單元'
-                            : '選修活動'}
-                    </span>
-                    <h3>{u.title}</h3>
-                    <p>{u.description}</p>
-                    <footer>
-                      {u.activities.length} 項活動 · 達標 {u.threshold} 分{' '}
-                      <ChevronRight size={16} />
-                    </footer>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          {groupUnits(course.units).map(([group, units]) => (
+            <div className="unit-group" key={group || '__ungrouped'}>
+              {group && <h3 className="unit-group-title">{group}</h3>}
+              <div className="unitgrid">
+                {units.map(([u, i]) => {
+                  const locked = !!u.opensAt && Date.parse(u.opensAt) > Date.now();
+                  return (
+                    <button
+                      className="unitcard"
+                      key={u.id}
+                      disabled={locked}
+                      onClick={() => {
+                        setUnitId(u.id);
+                        setActivityId('');
+                      }}
+                    >
+                      <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <span className={'badge ' + (complete(u, progress) ? 'green' : '')}>
+                          {complete(u, progress)
+                            ? '已達標'
+                            : locked
+                              ? '尚未開放'
+                              : u.required
+                                ? '必做單元'
+                                : '選修活動'}
+                        </span>
+                        <h3>{u.title}</h3>
+                        <p>{u.description}</p>
+                        <footer>
+                          {u.activities.length} 項活動 · 達標 {u.threshold} 分{' '}
+                          <ChevronRight size={16} />
+                        </footer>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </>
       ) : (
         <>
@@ -344,9 +357,14 @@ export default function Student({
                   <RotateCcw size={17} />
                   完整閃卡
                 </button>
-                <button disabled={busy} onClick={() => start('quiz', true)}>
-                  抽題練習（不計完成度）
-                </button>
+                <div className="practice-picker">
+                  <span className="muted">抽題練習（不計完成度，未考過的題目優先出現）：</span>
+                  {[10, 20, 30].map((n) => (
+                    <button key={n} disabled={busy} onClick={() => start('quiz', n)}>
+                      抽 {n} 題
+                    </button>
+                  ))}
+                </div>
                 <button disabled={busy} onClick={() => start('review')}>
                   錯題複習
                 </button>
@@ -645,13 +663,21 @@ function Quiz({
   );
 }
 
-function shuffle<T>(items: T[]): T[] {
-  const a = [...items];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+// 依「單元」大分類分組顯示；沒有任何次單元設了 group 時回傳單一未分組區塊，維持原本平鋪外觀。
+function groupUnits(units: Unit[]): [string, [Unit, number][]][] {
+  const indexed = units.map((u, i) => [u, i] as [Unit, number]);
+  if (!units.some((u) => u.group)) return [['', indexed]];
+  const order: string[] = [];
+  const map = new Map<string, [Unit, number][]>();
+  for (const [u, i] of indexed) {
+    const key = u.group || '未分類';
+    if (!map.has(key)) {
+      map.set(key, []);
+      order.push(key);
+    }
+    map.get(key)!.push([u, i]);
   }
-  return a;
+  return order.map((key) => [key, map.get(key)!]);
 }
 function Socratic({ q }: { q: Question }) {
   return (

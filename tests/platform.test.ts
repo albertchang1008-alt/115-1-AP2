@@ -13,8 +13,42 @@ test('班級可明確取消全部單元，必做與提供分開，來源不被�
 });
 test('v1.9 中文雙解析、圖片及空白選項保持正解代碼', () => {
   const groups = parseBankSheet([['課程代碼','題目ID','題型','問題','選項A','選項B','選項C','解答','解析','核心概念','① 先看題幹','圖片網址'],['anatomy','q1','圖片','問題','甲','','丙','C','完整解析','概念','線索','https://example.com/a.png']], 'unit01');
-  const q = groups.get('anatomy')![0]; assert.equal(q.answer, 'c'); assert.equal(q.options[1].id, 'c'); assert.equal(q.socratic?.hint1, '線索'); assert.equal(q.questionType, 'image');
+  const q = groups.get('anatomy')!.get('unit01')!.questions[0]; assert.equal(q.answer, 'c'); assert.equal(q.options[1].id, 'c'); assert.equal(q.socratic?.hint1, '線索'); assert.equal(q.questionType, 'image');
   assert.throws(() => parseBankSheet([['課程代碼','題目ID','問題','解答'],['a','q','','A']], 'unit01'));
+});
+test('單一分頁可依「次單元」拆成多個題庫，「單元」欄只是分組標籤', () => {
+  const rows = [
+    ['課程代碼', '題目ID', '單元', '次單元', '題序', '問題', '選項A', '選項B', '解答', '啟用'],
+    ['ap2', 'q1', '血液', '紅血球', '2', '問題一', '甲', '乙', 'A', ''],
+    ['ap2', 'q2', '血液', '紅血球', '1', '問題二', '甲', '乙', 'B', ''],
+    ['ap2', 'q3', '血液', '白血球', '', '問題三', '甲', '乙', 'A', ''],
+    ['ap2', 'q4', '', '白血球', '', '問題四', '甲', '乙', 'A', 'FALSE'],
+  ];
+  const groups = parseBankSheet(rows, '題庫');
+  const course = groups.get('ap2')!;
+  assert.deepEqual([...course.keys()].sort(), ['白血球', '紅血球']);
+  assert.equal(course.get('紅血球')!.group, '血液');
+  assert.equal(course.get('紅血球')!.questions.length, 2);
+  assert.equal(course.get('紅血球')!.questions[0].order, 2);
+  // 白血球第二列「單元」欄空白，沿用第一列已填的「血液」，不算衝突
+  assert.equal(course.get('白血球')!.group, '血液');
+  // 啟用＝FALSE 的列直接略過，不進題庫
+  assert.equal(course.get('白血球')!.questions.length, 1);
+});
+test('同一次單元的「單元」欄填了不同值要報錯', () => {
+  const rows = [
+    ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'],
+    ['ap2', 'q1', '血液', '紅血球', '問題一', '甲', '乙', 'A'],
+    ['ap2', 'q2', '心臟', '紅血球', '問題二', '甲', '乙', 'A'],
+  ];
+  assert.throws(() => parseBankSheet(rows, '題庫'), /同時出現在單元/);
+});
+test('沒有「次單元」欄時，退回用分頁名當單元（向後相容）', () => {
+  const groups = parseBankSheet([
+    ['課程代碼', '題目ID', '問題', '選項A', '選項B', '解答'],
+    ['ap2', 'q1', '問題一', '甲', '乙', 'A'],
+  ], 'unit01');
+  assert.equal(groups.get('ap2')!.get('unit01')!.questions.length, 1);
 });
 test('同一學生可以跨課程，單一課程不能重複歸屬兩班', () => {
   const headers = ['課程代碼','班級代碼','學號','姓名','學校信箱','啟用'];
@@ -41,7 +75,7 @@ test('課程、單元、班級代碼可用中文，仍拒絕空白與符號', ()
     ['課程代碼', '題目ID', '題型', '問題', '選項A', '選項B', '解答'],
     ['解剖生理', 'q1', '單選', '細胞膜的主要成分？', '磷脂質', '澱粉', 'A'],
   ], '第一章細胞');
-  assert.equal(groups.get('解剖生理')!.length, 1);
+  assert.equal(groups.get('解剖生理')!.get('第一章細胞')!.questions.length, 1);
 });
 test('測試帳號需在白名單內才通過名冊驗證，預設仍只收學校信箱', () => {
   const row = { courseId: 'a', classId: 'A', studentId: 'T001', name: '測試學生', email: 'tester@example.com', enabled: true };

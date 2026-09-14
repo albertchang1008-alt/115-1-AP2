@@ -1,4 +1,4 @@
-import { parseRosterSheet, parseBankSheet } from '../../shared/sheets';
+import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
@@ -340,29 +340,33 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   const errors = validateQuestions(questions);
   if (errors.length) fail(errors.join('\n'));
   size(questions, 600000);
-  const version = createHash('sha256').update(JSON.stringify(questions)).digest('hex').slice(0, 20);
+  // 依「題序、題目ID」穩定排序後才算雜湊，Sheet 上拖動列順序不會產生新版本，只有內容真的變了才會。
+  const sorted = [...questions].sort(
+    (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity) || a.id.localeCompare(b.id),
+  );
+  const version = createHash('sha256').update(JSON.stringify(sorted)).digest('hex').slice(0, 20);
   const key = `${code(courseId)}_${code(unitId)}_${version}`;
   const ref = db.doc(`banks/${key}`);
   if (!(await ref.get()).exists) {
     const batch = db.batch();
     const chunks = [];
-    for (let i = 0; i < questions.length; i += 20) {
+    for (let i = 0; i < sorted.length; i += 20) {
       const chunk = String(i / 20);
       chunks.push(chunk);
-      batch.set(ref.collection('chunks').doc(chunk), { questions: questions.slice(i, i + 20) });
+      batch.set(ref.collection('chunks').doc(chunk), { questions: sorted.slice(i, i + 20) });
     }
     batch.set(ref, {
       courseId,
       unitId,
       version,
       chunks,
-      count: questions.length,
-      questionOptions: Object.fromEntries(questions.map((q) => [q.id, q.options.map((o) => o.id)])),
+      count: sorted.length,
+      questionOptions: Object.fromEntries(sorted.map((q) => [q.id, q.options.map((o) => o.id)])),
       createdAt: Date.now(),
     });
     await batch.commit();
   }
-  return { version, count: questions.length };
+  return { version, count: sorted.length };
 }
 export const publishQuestions = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -830,25 +834,35 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
   }
   return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
 }
-async function syncBankTabFromSheet(sheetId: string, token: string, unitId: string, uid: string) {
-  const groups = parseBankSheet(await readSheetRows(sheetId, token, unitId), unitId);
-  const results = [];
-  for (const [courseId, questions] of groups) {
-    try {
-      const ref = db.doc(`courses/${courseId}`);
-      const course = await ref.get();
-      if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
-      if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
-      const result = await publishBank(courseId, unitId, questions);
-      await db.runTransaction(async (tx) => {
-        const current = await tx.get(ref);
-        const draft = current.data()?.draft as Course;
-        if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
-        if (draft.units.find((u) => u.id === unitId)?.bankVersion !== result.version)
-          tx.update(ref, { draft: { ...draft, units: draft.units.map((u) => u.id === unitId ? { ...u, bankVersion: result.version } : u) } });
-      });
-      results.push({ courseId, unitId, ...result });
-    } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
+async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
+  const groups = parseBankSheet(rows, tabTitle);
+  const results: any[] = [];
+  for (const [courseId, units] of groups) {
+    const ref = db.doc(`courses/${courseId}`);
+    for (const [unitId, { group, questions }] of units) {
+      try {
+        const course = await ref.get();
+        if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+        if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
+        const result = await publishBank(courseId, unitId, questions);
+        await db.runTransaction(async (tx) => {
+          const current = await tx.get(ref);
+          const draft = current.data()?.draft as Course;
+          if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
+          const target = draft.units.find((u) => u.id === unitId)!;
+          if (target.bankVersion !== result.version || (group && target.group !== group))
+            tx.update(ref, {
+              draft: {
+                ...draft,
+                units: draft.units.map((u) =>
+                  u.id === unitId ? { ...u, bankVersion: result.version, ...(group ? { group } : {}) } : u,
+                ),
+              },
+            });
+        });
+        results.push({ courseId, unitId, group, ...result });
+      } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
+    }
   }
   return results;
 }
@@ -904,7 +918,10 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
     for (const title of titles) {
       if (title === '名冊') continue;
       try {
-        const r = await syncBankTabFromSheet(sheetId, token, title, p.uid);
+        const rows = await readSheetRows(sheetId, token, title);
+        // 附表（例如雙向細目表、教師覆核清單、使用說明）沒有題庫必填欄，靜默略過，不算同步錯誤。
+        if (!looksLikeBankSheet(rows)) continue;
+        const r = await syncBankTabFromSheet(rows, title, p.uid);
         banks.push(...r);
       } catch (e) {
         banks.push({ unitId: title, error: (e as Error).message });
