@@ -21,7 +21,7 @@
 
 目前版本：1.2.3（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
-後端 Functions：截至 2026-09-14 深夜，確認已部署到正式環境的最新邏輯是「同步時次單元不存在就自動建立單元」（commit `f6137c5`）。**1.2.1／1.2.2 新增的 `syncRoster` callable（同步班級名冊用）目前狀態不明——handoff 沒有記錄使用者在這之後有再跑過一次 `firebase deploy --only functions`，而使用者實測回報「班級名冊」同步後仍是空的，很可能就是因為 `syncRoster` 這個新函式還沒真的部署上去。下一步請使用者在自己電腦的 Terminal 執行一次 `npx firebase-tools deploy --only functions --project ap2-7ed91`，確認部署清單裡有 `syncRoster`。**
+後端 Functions：**已於 2026-09-15 確認部署完成**。使用者在自己電腦 Terminal 跑了兩次 `npx firebase-tools deploy --only functions --project ap2-7ed91`：第一次 `syncRoster` 顯示「Successful **create** operation」（證實先前真的不存在，是「班級名冊」同步出現 internal 錯誤的根本原因）；第二次（對應 1.2.3 版本）29 個函式全部 Successful update operation，Deploy complete!。**目前正式環境已經是最新的 29 個函式，含 syncRoster／syncSheet／自動建單元等全部邏輯。**
 本輪（1.2.3）只改前端顯示邏輯，沒有動到 Cloud Functions 或資料結構，不需要另外部署 Functions；只需要 push 到 GitHub 讓 Pages 重新發布即可生效。
 
 ## 固定決策
@@ -203,14 +203,14 @@
   用公開 GitHub Actions API 驗證先前 push 的 Pages workflow 是否成功
   （這個雲端沙箱這次連 `api.github.com` 被 proxy 擋下），麻煩使用者自行
   到 GitHub 網頁的 Actions 分頁確認。
+- 已完成（2026-09-15 這輪之內）：
+  1. Functions 部署（見上方，syncRoster 已確認存在且成功部署）。
+  2. GitHub Desktop 推送——使用者截圖確認前端已顯示 v1.2.3（左下角版本
+     號），代表 push 與 GitHub Pages 重新發布都已成功，不用再等確認。
 - 還沒做／需要使用者確認：
-  1. 到自己電腦 Terminal 跑一次 `npx firebase-tools deploy --only
-     functions --project ap2-7ed91`，確認部署清單裡有 `syncRoster`，再到
-     平台「班級名冊」頁按「同步班級名冊」測試是否真的能讀進學生名單。
-  2. 用 GitHub Desktop 推送本機 `main`（含這次 1.2.3 的 commit），並到
-     GitHub Actions 確認「Publish course platform」跑成功，前端才會真的
-     用上新的顯示邏輯。
-  3.「一般測驗作答中就直接看到正解」這個改動幅度不小，等使用者實際用過
+  1. 在「同步班級名冊」按鈕重新測試（Functions 剛部署完，理論上不會再
+     出現 internal 錯誤了，但還沒拿到使用者這次實測的截圖確認）。
+  2.「一般測驗作答中就直接看到正解」這個改動幅度不小，等使用者實際用過
      幾次之後，如果覺得跟原本設計的初衷（避免用測驗當練習、想留一點防
      偷看）衝突，隨時可以再要求改回「交卷後才顯示」，只需要把
      `Student.tsx` 的 `choose()` 改回原本 `if (mode !== 'quiz')` 的判斷
@@ -218,10 +218,9 @@
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- **用 GitHub Desktop 推送本機 `main`**（見上方「Claude 接手狀態」），讓
-  GitHub 上的原始碼跟本機一致，Pages 才會重新發布 1.2.3。
-- **確認／重新部署 Functions**，確認 `syncRoster` 真的在正式環境（見上方
-  「目前版本」段落），再測試「同步班級名冊」。
+- **實測確認**：Functions 已部署（含 syncRoster）、GitHub 已推送、Pages
+  已發布 v1.2.3（前端截圖確認過版本號），麻煩在「班級名冊」頁重新按一次
+  「同步班級名冊」，確認不再出現 internal 錯誤、名單真的同步進來。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定
