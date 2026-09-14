@@ -1,6 +1,14 @@
 # 開發紀錄
 
-目前版本：1.2.3
+目前版本：1.2.4
+
+## 1.2.4 — 修正「同步班級名冊」未攔截例外導致 internal/500（2026-09-15）
+
+- 使用者實測回報：按「同步班級名冊」出現「internal」錯誤；補上先前漏部署的 `syncRoster` 並重新部署後，改成瀏覽器 Console 顯示 `Failed to load resource...status of 500`。
+- 根因：`syncRosterFromSheet` 呼叫 `parseRosterSheet` 時，若名冊分頁格式或內容不合法（缺欄位、信箱或學號重複等）會丟出一般 `Error`；`syncRoster` 這個 onCall 沒有 try/catch 接住，整個函式以未處理例外結束，Firebase 只回傳籠統的 `internal`／HTTP 500，看不到真正原因。
+- 修正：`syncRosterFromSheet` 改用 `try/catch` 包住 `parseRosterSheet` 呼叫，轉成 `fail()`（`HttpsError`），前端才能顯示具體的中文錯誤訊息；找不到「班級名冊」分頁時也改用 `fail()` 而不是直接 `throw Error`。
+- 驗證：`npm --prefix functions run build`（tsc＋29 個入口載入）與 `npm --prefix functions test`（5 項）皆通過；未新增針對這個 try/catch 的獨立測試（`syncRosterFromSheet` 會呼叫 Google Sheets API，直接測試需額外 mock `fetch`，超出這次修正的風險/效益，已在 handoff.md 記錄）。
+- 下一步：部署後麻煩使用者重新按「同步班級名冊」，這次應該會看到具體錯誤訊息而不是 internal；再依訊息內容判斷是 Sheet 欄位還是資料格式的問題。
 
 ## 1.2.3 — 解析改名為「引導式解析」，答案與解析一律直接顯示（2026-09-15）
 

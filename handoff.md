@@ -19,10 +19,10 @@
 
 ---
 
-目前版本：1.2.3（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
+目前版本：1.2.4（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
-後端 Functions：**已於 2026-09-15 確認部署完成**。使用者在自己電腦 Terminal 跑了兩次 `npx firebase-tools deploy --only functions --project ap2-7ed91`：第一次 `syncRoster` 顯示「Successful **create** operation」（證實先前真的不存在，是「班級名冊」同步出現 internal 錯誤的根本原因）；第二次（對應 1.2.3 版本）29 個函式全部 Successful update operation，Deploy complete!。**目前正式環境已經是最新的 29 個函式，含 syncRoster／syncSheet／自動建單元等全部邏輯。**
-本輪（1.2.3）只改前端顯示邏輯，沒有動到 Cloud Functions 或資料結構，不需要另外部署 Functions；只需要 push 到 GitHub 讓 Pages 重新發布即可生效。
+後端 Functions：**這輪（1.2.4）又動到 Cloud Functions 程式碼，部署清單裡 1.2.3 那次的 `syncRoster` 還沒有修正這次的例外處理問題，需要使用者再部署一次才會生效**（見下方「Claude 接手狀態（2026-09-15，第二輪）」）。1.2.3 那次的部署（`syncRoster` 從無到有＋29 個函式）已確認成功，是基礎；1.2.4 只是在同一個函式裡補上錯誤處理，不影響其他函式。
+本輪（1.2.4）改動 `functions/src/index.ts`（`syncRosterFromSheet` 的例外處理），**需要使用者重新執行一次 `npx firebase-tools deploy --only functions --project ap2-7ed91` 才會生效**；前端沒有變更，不需要重新 push 就能讓後端修正生效（但這次 commit 本身仍需要 push，才會讓 GitHub 上的原始碼跟本機一致）。
 
 ## 固定決策
 
@@ -208,19 +208,69 @@
   2. GitHub Desktop 推送——使用者截圖確認前端已顯示 v1.2.3（左下角版本
      號），代表 push 與 GitHub Pages 重新發布都已成功，不用再等確認。
 - 還沒做／需要使用者確認：
-  1. 在「同步班級名冊」按鈕重新測試（Functions 剛部署完，理論上不會再
-     出現 internal 錯誤了，但還沒拿到使用者這次實測的截圖確認）。
+  1. ~~在「同步班級名冊」按鈕重新測試~~ ——使用者實測後回報：錯誤從
+     「internal」變成 Console 出現 `Failed to load resource: the server
+     responded with a status of 500 ()`（見下方 1.2.4 段落，已找到原因並
+     修正，但還沒重新部署）。
   2.「一般測驗作答中就直接看到正解」這個改動幅度不小，等使用者實際用過
      幾次之後，如果覺得跟原本設計的初衷（避免用測驗當練習、想留一點防
      偷看）衝突，隨時可以再要求改回「交卷後才顯示」，只需要把
      `Student.tsx` 的 `choose()` 改回原本 `if (mode !== 'quiz')` 的判斷
      即可，不是不能回頭的決定。
 
+## Claude 接手狀態（2026-09-15，第二輪：修正 syncRoster 500 錯誤）
+
+- 起因：上一輪部署完 `syncRoster` 後，使用者點「同步班級名冊」，錯誤從
+  「internal」變成 Chrome DevTools Console 顯示
+  `Failed to load resource: the server responded with a status of 500 ()`
+  （針對 `syncRoster` 這個 callable）。截圖只看得到瀏覽器端的通用錯誤，
+  看不到後端真正原因，所以直接讀 `functions/src/index.ts` 找根因。
+- 根因：`syncRosterFromSheet()` 裡呼叫 `parseRosterSheet(...)` 沒有包
+  try/catch；這個函式在名冊格式或內容不合法時（例如缺欄位、Email 或學號
+  重複、格式不符）會丟一般 `Error`，不是這個 repo 慣用的 `fail()`
+  （`HttpsError('failed-precondition', ...)`）。Firebase Functions v2 的
+  `onCall` 遇到「沒被接住的例外」只會讓前端看到通用的 internal／HTTP 500，
+  真正的錯誤訊息會被吞掉——這跟同一個檔案裡 `syncSheet` 的錯誤處理方式不
+  一致（`syncSheet` 有妥善用 `fail()` 包起來）。「找不到班級名冊分頁」那個
+  檢查也是類似狀況，原本用 `fail(...)` 但沒有讓 TypeScript 知道會中斷執行
+  的地方需要留意（已一併確認沒問題）。
+- 修正：把 `parseRosterSheet(...)` 的呼叫包進 try/catch，例外訊息轉成
+  `fail('名冊格式錯誤：' + (e as Error).message)`，讓前端能看到「名冊格式
+  錯誤：xxx」這種具體訊息，而不是不明的 internal/500。**這個修正還沒解決
+  「名冊到底哪裡不合法」這個問題本身**——只是讓下次同步失敗時，錯誤訊息
+  會變成可讀的中文，我們才能根據那個訊息知道要修資料還是修程式。
+- 改動檔案：只有 `functions/src/index.ts`（`syncRosterFromSheet` 函式）。
+- 驗證：`functions/` 底下 `npm run build` 編譯乾淨（29 個函式都能載入）；
+  `npm test` 5/5 通過（`bank-boundary.test.cjs`＋`sync-auto-unit.test.cjs`，
+  這兩個測試沒有直接打到 `syncRosterFromSheet`，所以這次沒有新增專門測試
+  這個修正的案例——如果之後知道使用者名冊格式問題的具體樣態，建議之後幫
+  這個路徑補一個回歸測試）。
+- 版本：`VERSION` 由 1.2.3 升到 **1.2.4**，`node scripts/version.mjs` 已
+  同步所有版本檔案（`package.json`、`functions/package.json`、對應
+  `package-lock.json`、`shared/version.ts`、`apps-script/version.gs`、
+  `public/version.json`、`README.md`），`DEVELOPMENT_LOG.md` 已新增 1.2.4
+  條目，`node scripts/version.mjs --check` 通過。
+- **這輪跟 1.2.0～1.2.3 不一樣：這次動到 `functions/src/index.ts`，前端
+  完全沒改。** 也就是說：
+  1. 使用者仍需要用 GitHub Desktop 推送這個新 commit（跟前幾輪一樣），
+     但即使不 push、不等 GitHub Pages 重新發布，光是「重新部署 Functions」
+     就能讓修正生效（因為前端程式碼沒變，UI 版本號不會變成 1.2.4）。
+  2. **使用者需要在自己電腦 Terminal 再跑一次
+     `npx firebase-tools deploy --only functions --project ap2-7ed91`**，
+     這個修正才會真正上線。部署完再點一次「同步班級名冊」，這次如果還
+     是失敗，Console／畫面上應該會出現具體的中文錯誤訊息（例如「名冊格式
+     錯誤：...」），那則訊息就是下一步要修的真正線索，麻煩使用者連同
+     訊息內容回報，才能繼續往下查。
+  3. Git：改動已在本機 `main` commit（見下方 `git log`），**尚未推上
+     GitHub**。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- **實測確認**：Functions 已部署（含 syncRoster）、GitHub 已推送、Pages
-  已發布 v1.2.3（前端截圖確認過版本號），麻煩在「班級名冊」頁重新按一次
-  「同步班級名冊」，確認不再出現 internal 錯誤、名單真的同步進來。
+- **實測確認（1.2.4）**：等這次改動 push 到 GitHub 且 Functions 重新部署
+  （`npx firebase-tools deploy --only functions --project ap2-7ed91`）後，
+  麻煩在「班級名冊」頁重新按一次「同步班級名冊」。這次如果還是失敗，畫面
+  或 Console 應該會出現具體的中文錯誤訊息（不會再是 internal／500），麻煩
+  把訊息內容回報，才能判斷是名冊資料格式問題還是程式問題。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

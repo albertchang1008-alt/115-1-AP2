@@ -840,9 +840,17 @@ async function ensureRosterClasses(uid: string, courseId: string, classIds: stri
 }
 async function syncRosterFromSheet(sheetId: string, token: string, p: any, titles: string[], courseIds: string[]) {
   const rosterTitle = ['班級名冊', '名冊'].find((title) => titles.includes(title));
-  if (!rosterTitle) throw Error('找不到「班級名冊」分頁');
+  if (!rosterTitle) fail('找不到「班級名冊」分頁');
   const fallbackCourseId = courseIds.length === 1 ? courseIds[0] : '';
-  const students = parseRosterSheet(await readSheetRows(sheetId, token, rosterTitle), await testStudents(), fallbackCourseId);
+  // parseRosterSheet 對整份名冊格式／內容不合法時會丟一般 Error（例如缺欄位、信箱或學號重複、
+  // 格式不符），這裡原本沒接住，會讓整個 onCall 以未處理例外結束、前端只看到不明的
+  // internal/500，看不到真正原因。改用 fail() 轉成 HttpsError，前端才讀得到具體錯誤訊息。
+  let students;
+  try {
+    students = parseRosterSheet(await readSheetRows(sheetId, token, rosterTitle), await testStudents(), fallbackCourseId);
+  } catch (e) {
+    fail('名冊格式錯誤：' + (e as Error).message);
+  }
   const results = [];
   for (const courseId of new Set(students.map((s) => s.courseId!))) {
     try {
