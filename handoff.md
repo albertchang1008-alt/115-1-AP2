@@ -85,7 +85,7 @@
   `npx firebase-tools deploy --only functions`
 - 這台電腦的 Firebase CLI **尚未登入**（`npx firebase-tools login:list` 顯示
   無帳號），要先手動跑過一次 `npx firebase-tools login` 才能部署 Functions
-- `scripts/deploy.sh` 已修正；本次實際執行的 Firebase 專案驗證與完整 `npm run check` 均通過，但停止於功能分支備份推送。GitHub HTTPS 憑證先指向已刪除的暫存 gh；移除後 macOS Keychain 仍無 GitHub 寫入憑證，SSH 連線埠 22 也逾時。因此 Functions、origin/main 與 GitHub Pages 均未變更。完成 GitHub HTTPS token／Keychain 登入後，在乾淨工作區重跑腳本即可；腳本固定目標 ap2-7ed91，先部署 Functions 成功才快轉推送同一 commit 到 origin/main，不切換或改動本機 main。Pages 是否上線須另外確認 Actions。
+- `scripts/deploy.sh` 已修正；本次實際執行及重試的 Firebase 專案驗證與完整 `npm run check` 均通過，但都停止於功能分支備份推送。GitHub HTTPS 憑證先指向已刪除的暫存 gh；移除後 macOS Keychain 仍無 GitHub 寫入憑證，SSH 連線埠 22 也逾時。因此 Functions、origin/main 與 GitHub Pages 均未變更。完成 GitHub HTTPS token／Keychain 登入後，在乾淨工作區重跑腳本即可；腳本固定目標 ap2-7ed91，先部署 Functions 成功才快轉推送同一 commit 到 origin/main，不切換或改動本機 main。Pages 是否上線須另外確認 Actions。
 
 ## Codex 接手狀態（2026-09-14）
 
