@@ -85,7 +85,7 @@
   `npx firebase-tools deploy --only functions`
 - 這台電腦的 Firebase CLI **尚未登入**（`npx firebase-tools login:list` 顯示
   無帳號），要先手動跑過一次 `npx firebase-tools login` 才能部署 Functions
-- `scripts/deploy.sh` 已修正，尚未執行正式部署：先以 Firebase projects:list 驗證憑證與專案可見性，固定目標 ap2-7ed91；檢查乾淨的功能分支已包含本機及遠端 main，確認後依 lockfile 安裝並執行 check，備份分支、部署 Functions 成功後才快轉推送同一 commit 到 origin/main。不切換分支或改動本機 main；若 main 分歧須先自行整合。憑證預檢不保證所有部署 IAM 權限；後端部分成功或 main 推送失敗會明示未完成，不自動回滾。Pages 是否上線須另外確認 Actions。
+- `scripts/deploy.sh` 已修正；本次實際執行的 Firebase 專案驗證與完整 `npm run check` 均通過，但停止於功能分支備份推送。GitHub HTTPS 憑證先指向已刪除的暫存 gh；移除後 macOS Keychain 仍無 GitHub 寫入憑證，SSH 連線埠 22 也逾時。因此 Functions、origin/main 與 GitHub Pages 均未變更。完成 GitHub HTTPS token／Keychain 登入後，在乾淨工作區重跑腳本即可；腳本固定目標 ap2-7ed91，先部署 Functions 成功才快轉推送同一 commit 到 origin/main，不切換或改動本機 main。Pages 是否上線須另外確認 Actions。
 
 ## Codex 接手狀態（2026-09-14）
 
@@ -97,12 +97,13 @@
 - 完整檢查通過，無需未改動就反覆重跑；驗證範圍不包含真實 Google Sheet、Firebase Emulator 或正式端到端流程。
 - 工作區原有未追蹤 `Claude outputs/`，本輪未讀取或更動；不應未確認就加入提交。
 - 部署腳本修正已完成；`bash -n scripts/deploy.sh` 與 `node --test scripts/deploy.test.cjs` 通過。10 個情境使用暫存 Git 倉庫及模擬 npm／Firebase，涵蓋成功順序、取消、憑證／專案失敗、髒工作區、detached HEAD、main 分歧、測試／後端／main 推送失敗；未連線雲端，未重跑無關的平台完整測試。
+- 本次已提交 `5aa4f37`（題庫接軌與安全部署腳本）。實際部署驗證重跑完整檢查：26 項前端／共用測試、前端建置、29 個後端入口、1 項 callable 整合測試皆通過；阻塞原因只在 GitHub 寫入身分，未開始 Functions 部署。既有 `Claude outputs/` 已僅加入本機 `.git/info/exclude`，未刪除、未提交。
 - 下一步：教師端大單元分組視覺與真實 Sheet 資料補齊仍待處理。原先列為 1.2.0 範圍外的同考點去重、作廢重算不擅自加入。
 - 先前實驗性 Codex 上下文管理設定請求僅完成當時的能力檢查，未確認寫入或執行期生效；與本次平台修復分開處理，不宣稱已開啟。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- 正式上線尚未授權；部署腳本已修正，待整理並提交工作區、確認 Firebase 憑證及後端向下相容性，再經使用者明確同意才 push／合併／部署。
+- 使用者已授權正式部署；待 GitHub 寫入憑證恢復後重跑 `bash scripts/deploy.sh`。不需另行合併，腳本會以已驗證提交快轉推送遠端 main。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定
