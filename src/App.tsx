@@ -1270,17 +1270,18 @@ function Bank({
         {questions
           .filter((q) => `${q.id} ${q.text} ${q.concept}`.includes(search))
           .map((q) => (
-            <details key={q.id}>
-              <summary>
+            // 2026-09-15 起：教師預覽不用 <details> 收合，題目、正解、解析直接全部展開顯示，不用點。
+            <div className="questionpreview" key={q.id}>
+              <h3>
                 <span className="badge">{q.id}</span> {q.text}
-              </summary>
+              </h3>
               {q.options.map((o) => (
                 <p key={o.id}>
                   {o.id === q.answer ? '✓' : '○'} {o.text}
                 </p>
               ))}
               <QuestionImage key={q.image} url={q.image} /><Explanations q={q} audience="teacher" />
-            </details>
+            </div>
           ))}
         {!questions.length && (
           <Empty title="尚未載入題目" detail="同步題庫後，選擇次單元讀取已連接版本。" />

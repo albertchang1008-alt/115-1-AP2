@@ -19,10 +19,10 @@
 
 ---
 
-目前版本：1.2.2（本機待發布；正式環境目前為 1.2.1）。
-`feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。
-後端 Functions：2026-09-14 部署過兩次——Codex 那次（29 個函式）之後，又加了「同步時次單元不存在就自動建立單元」的修正（commit `f6137c5`），使用者在自己電腦的 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91` 部署成功（29 個函式全部 Successful update operation，Deploy complete!）。**這個修正現在已經在正式環境生效。**
-本機 `main` 還有 2 個 commit 尚未推上 GitHub（`bd03201` FillCourseAndUnit.gs 修正、`f6137c5` 自動建單元），Functions 已經部署但 GitHub 上的原始碼還沒同步——下一個接手的人／agent 看到 `origin/main` 時要注意這個落差，程式碼實際跑的版本比 GitHub 上看到的新。使用者需要用 GitHub Desktop 推送這 2 個 commit 補上。
+目前版本：1.2.3（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
+2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
+後端 Functions：截至 2026-09-14 深夜，確認已部署到正式環境的最新邏輯是「同步時次單元不存在就自動建立單元」（commit `f6137c5`）。**1.2.1／1.2.2 新增的 `syncRoster` callable（同步班級名冊用）目前狀態不明——handoff 沒有記錄使用者在這之後有再跑過一次 `firebase deploy --only functions`，而使用者實測回報「班級名冊」同步後仍是空的，很可能就是因為 `syncRoster` 這個新函式還沒真的部署上去。下一步請使用者在自己電腦的 Terminal 執行一次 `npx firebase-tools deploy --only functions --project ap2-7ed91`，確認部署清單裡有 `syncRoster`。**
+本輪（1.2.3）只改前端顯示邏輯，沒有動到 Cloud Functions 或資料結構，不需要另外部署 Functions；只需要 push 到 GitHub 讓 Pages 重新發布即可生效。
 
 ## 固定決策
 
@@ -39,7 +39,7 @@
 11.（1.2.0）抽題練習題數由學生自選（比照 v1.9：10/20/30/全部），只有「全部題目」算入完成度；已作答過的題目自然排到後面（`Progress.attempted`，跨題庫版本保留，不是「輪完重洗」的循環機制）。「完整測驗才算完成度」這條規則本身**不改**，維持跟 1.1.2 以前及 v1.9 一致。
 12.（1.2.0）選項每次都重新洗牌，不固定順序，避免學生背 ABCD 位置。
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
-14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④與最後預設收合的「傳統解析」，不顯示⑤追溯原子卡；教師可看①～⑤，傳統解析直接展開。現行程式的蘇格拉底式各段仍為 details 收合，尚未實作教師各段全部展開。
+14.（1.2.0，2026-09-15 更新）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④，教師另外多看⑤追溯原子卡（教師備課用的溯源資訊，學生端不顯示）。**2026-09-15 起：不論傳統解析或①～⑤這五段，在所有畫面（一般測驗作答中、閃卡、錯題複習、交卷後複習、教師題庫預覽）一律直接展開顯示，不再用 `<details>` 收合、不需要點擊**——這是使用者明確要求「一次給到位」，連一般測驗作答中也要立即看到正解與解析，刻意放棄先前「作答中不能偷看答案」的防呆設計；如果之後要恢復，需要另外討論。這段解析原本叫「蘇格拉底式解析」，同一天改名為「引導式解析」（只改畫面標籤，`socratic.*` 欄位鍵名與 Sheet 匯入欄位名稱都不變）。
 15.（2026-09-15）題庫同步以**課程代碼分頁名稱**辨識來源：例如課程代碼 `115-1-AP2` 就只讀同名分頁；不再掃描所有看起來像題庫的工作表，`題庫ext` 等輔助分頁會略過。「同步題庫」固定放在**題庫管理**頁，「同步班級名冊」固定放在**班級名冊**頁，只有按鈕才讀取對應分頁；每次皆為增量同步，未變更內容不重複寫入。兩頁不保留 CSV／JSON 或舊名冊轉換等手動資料入口。正式題庫分頁的每列不必填課程代碼，`單元` 是顯示分組，`次單元` 是可練習、計完成度並各自發布版本的題庫單位。課程本身仍必須先手動建立，且分頁名稱須與它的代碼完全相同。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
@@ -160,10 +160,68 @@
 - 使用者已將正式題庫分頁改名為 `115-1-AP2`、名冊分頁改名為 `班級名冊`（2026-09-15）。本輪新增 `syncRoster` callable 與後台「同步班級名冊」按鈕；一般「同步題庫」不再讀名冊。班級名冊欄位為 `授課班級／學號／姓名／Gmail`，在同一份 Sheet 僅有一個對應課程分頁時會以該分頁名稱作課程代碼，並自動新增名冊中出現的班級代碼。名冊與題庫都比對既有內容做增量同步：無變動不重複寫入、不新建題庫版本。
 - GitHub 已發布 `1.2.1`（commit `6da1c46`），但使用者截圖確認同步按鈕仍錯放在「平台設定」，題庫／名冊頁仍是舊手動匯入介面。`1.2.2` 已將「同步題庫」移至題庫管理、將「同步班級名冊」移至班級名冊，並移除兩頁的 JSON／CSV／舊名冊轉換入口；平台設定只保留 Sheet ID。此修正將以本機 `main` 的新提交待推送。本輪驗證已通過：前端／共用 28 項、Functions 5 項測試、Functions TypeScript 編譯與 29 個入口載入、Vite production build；版本一致性檢查也通過。下一步是用 GitHub Desktop Push origin，確認 Pages workflow 成功；Functions 同步 callable 仍必須在含 Firebase 登入憑證的本機 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91`。需確認平台中已存在同代碼且教師可管理的課程。
 
+## Claude 接手狀態（2026-09-15）
+
+- 起因：使用者實際操作「題庫管理」「班級名冊」頁面，回報兩頁都「沒功用」；
+  來回用截圖排查後確認**題庫同步其實已經成功**（15 個次單元、含正確題庫
+  版本，教師端下拉選單與「讀取已連接版本」都正常）——真正還沒確認能動的
+  只剩「班級名冊」同步，最可能原因是 1.2.1／1.2.2 新增的 `syncRoster`
+  callable 還沒部署到正式 Functions（見上方「目前版本」段落，這點還沒能
+  實際驗證，需要使用者跑一次部署確認）。
+- 排查途中使用者臨時提出新需求（截圖題目預覽的「蘇格拉底式解析」畫面）：
+  1. 「蘇格拉底式解析」改名為「引導式解析」。
+  2. 引導式解析與傳統解析都不要用點擊展開，「一次給到位」。
+  3. 使用者明確選擇最大範圍：**所有畫面都要改，包括一般測驗（quiz）作答
+     中也要立刻顯示正解與解析**（用 AskUserQuestion 確認過，使用者清楚
+     知道這會讓學生作答時就直接看到正解，仍選擇這個選項）。
+- 改動（純前端，未動到 Cloud Functions 或資料結構）：
+  - `src/QuestionContent.tsx`：`Explanations` 元件改名標籤、移除所有
+    `<details>`／`<summary>`，一律用 `<section>`／`<div className=
+    "explanationstep">` 直接展開；`socratic.*` 欄位鍵名不變。
+  - `src/Student.tsx`：`choose()` 移除 `mode !== 'quiz'` 判斷，不分模式選
+    了就鎖定並顯示解析；交卷後的 `reviewanswers` 列表移除逐題
+    `<details>` 收合，正解與解析直接顯示。
+  - `src/App.tsx`：教師「題庫管理」頁的「題目預覽」列表同樣移除
+    `<details>` 收合。
+  - `src/style.css`：補上原本 `<details>` 提供的分隔線／間距／淺色底
+    （新增 `.reviewanswer`、`.questionpreview`、`.explanationstep` 規則，
+    亮／暗色主題都有對應樣式）。
+  - `docs/QUESTION_BANK_PLAN.md`、`handoff.md` 固定決策 14：同步更新用詞
+    與行為說明，並記錄這是刻意放棄「作答中防偷看答案」設計換來的體驗。
+- 驗證：`npm test`（前端／共用邏輯）28/28 全過；`npx tsc -b` 無錯誤。這個
+  雲端沙箱副本沒有 `index.html` 等靜態檔案，`vite build` 本來就會失敗，
+  是既有限制不是這次改動造成的（前幾輪交接都有記錄）。未動 Functions，
+  不需要重新部署 Functions；`npm --prefix functions test` 這輪未重跑
+  （沒有改動 functions/ 底下任何檔案）。
+- 版本：`VERSION` 由 1.2.2 升到 **1.2.3**，`node scripts/version.mjs`
+  已同步 `package.json`、`functions/package.json`、對應 `package-lock.json`、
+  `shared/version.ts`、`apps-script/version.gs`、`public/version.json`、
+  `README.md`、`DEVELOPMENT_LOG.md`、`handoff.md`；`node scripts/
+  version.mjs --check` 通過。`DEVELOPMENT_LOG.md` 已新增 1.2.3 條目。
+- Git：改動已 commit 在本機 `main` 上，commit hash 見下方最新一次 `git
+  log`；**尚未推上 GitHub**，需要使用者用 GitHub Desktop 推送。這次沒能
+  用公開 GitHub Actions API 驗證先前 push 的 Pages workflow 是否成功
+  （這個雲端沙箱這次連 `api.github.com` 被 proxy 擋下），麻煩使用者自行
+  到 GitHub 網頁的 Actions 分頁確認。
+- 還沒做／需要使用者確認：
+  1. 到自己電腦 Terminal 跑一次 `npx firebase-tools deploy --only
+     functions --project ap2-7ed91`，確認部署清單裡有 `syncRoster`，再到
+     平台「班級名冊」頁按「同步班級名冊」測試是否真的能讀進學生名單。
+  2. 用 GitHub Desktop 推送本機 `main`（含這次 1.2.3 的 commit），並到
+     GitHub Actions 確認「Publish course platform」跑成功，前端才會真的
+     用上新的顯示邏輯。
+  3.「一般測驗作答中就直接看到正解」這個改動幅度不小，等使用者實際用過
+     幾次之後，如果覺得跟原本設計的初衷（避免用測驗當練習、想留一點防
+     偷看）衝突，隨時可以再要求改回「交卷後才顯示」，只需要把
+     `Student.tsx` 的 `choose()` 改回原本 `if (mode !== 'quiz')` 的判斷
+     即可，不是不能回頭的決定。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- 「自動建單元」已部署生效（見上方）；還缺**用 GitHub Desktop 推送 main 的
-  2 個本機 commit**，讓 GitHub 上的原始碼跟正式環境一致。
+- **用 GitHub Desktop 推送本機 `main`**（見上方「Claude 接手狀態」），讓
+  GitHub 上的原始碼跟本機一致，Pages 才會重新發布 1.2.3。
+- **確認／重新部署 Functions**，確認 `syncRoster` 真的在正式環境（見上方
+  「目前版本」段落），再測試「同步班級名冊」。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

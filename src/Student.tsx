@@ -535,7 +535,9 @@ function Quiz({
     if (result || locked[q.id]) return;
     setSelections((s) => ({ ...s, [q.id]: value }));
     setTimes((t) => ({ ...t, [q.id]: Math.round((Date.now() - qStart.current) / 1000) }));
-    if (mode !== 'quiz') setLocked((l) => ({ ...l, [q.id]: true }));
+    // 2026-09-15 起：不分模式，選了答案就立刻鎖定並顯示正解與解析——包含一般測驗（quiz）
+    // 作答中也是，使用者明確要求答案和解析不用等交卷、不用點就能一次看到。
+    setLocked((l) => ({ ...l, [q.id]: true }));
   }
   function move(n: number) {
     setI(n);
@@ -560,13 +562,14 @@ function Quiz({
         </button>
         <div className="reviewanswers">
           {questions.map((q, j) => (
-            <details key={q.id}>
-              <summary>
+            // 2026-09-15 起：不用 <details> 收合，交卷後每一題的正解與解析直接顯示，不用點。
+            <div className="reviewanswer" key={q.id}>
+              <h3>
                 {result.answers[j].correct ? '✓' : '✕'} {q.text}
-              </summary>
+              </h3>
               <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
               <QuestionImage key={q.image} url={q.image} /><Explanations q={q} />
-            </details>
+            </div>
           ))}
         </div>
       </section>
