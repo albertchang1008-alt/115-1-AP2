@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>課後全面統整｜血液</title>
+<style>
+:root{
+  --bg:#faf8f7;--card:#fff;--ink:#1b1718;--dim:#6b6260;--line:#e6dfdd;
+  --accent:#a3242c;--accent-soft:#fdeced;--ok:#1d7a4f;--ok-soft:#e7f5ee;
+  --c1:#a3242c;--c2:#2b6ca3;--c3:#7a4fa3;--c4:#1d7a4f;--c5:#8a5a00;
+  --shadow:0 1px 2px rgba(27,23,24,.06),0 4px 14px rgba(27,23,24,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#171415;--card:#211d1e;--ink:#f2eceb;--dim:#a89f9d;--line:#352f30;
+  --accent:#e8848a;--accent-soft:#3a2124;--ok:#7ddcaa;--ok-soft:#172f23;
+  --c1:#e8848a;--c2:#86b9e6;--c3:#c3a0e0;--c4:#7ddcaa;--c5:#e8bd6d;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Helvetica Neue",sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:940px;margin:0 auto;padding:20px 16px 64px}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+h1{font-size:clamp(22px,5vw,30px);margin:.2em 0 .3em}
+.lede{color:var(--dim);font-size:15px;margin:0 0 18px}
+nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);margin:0 -16px;padding:9px 16px;border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs{display:flex;gap:6px;max-width:940px;margin:0 auto;width:max-content;min-width:100%}
+.tab{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;
+  font:inherit;font-size:14px;color:var(--dim);cursor:pointer;white-space:nowrap}
+.tab[aria-selected=true]{background:var(--accent);border-color:transparent;color:#fff;font-weight:650}
+.panel{display:none;margin-top:26px}
+.panel.on{display:block}
+h2{font-size:19px;margin:0 0 4px}
+.hint{color:var(--dim);font-size:13.5px;margin:0 0 16px}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);padding:16px}
+.stack>*+*{margin-top:12px}
+svg{display:block;max-width:100%;height:auto}
+.seg{cursor:pointer;transition:opacity .2s}
+.seg:hover{opacity:.82}
+.svglbl{font:600 12px -apple-system,"PingFang TC",sans-serif;fill:#fff}
+.svgsub{font:500 10.5px -apple-system,"PingFang TC",sans-serif;fill:rgba(255,255,255,.85)}
+.detail{margin-top:14px;padding:14px;border-radius:11px;background:var(--accent-soft);font-size:14.5px;
+  line-height:1.7;min-height:60px}
+.detail b{color:var(--accent)}
+.detail .src{display:block;margin-top:8px;font-size:12px;color:var(--dim)}
+.mapwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mnode{cursor:pointer}
+.mnode circle{transition:.2s}
+.mnode:hover circle{stroke-width:3}
+.mnode text{font:600 11px -apple-system,"PingFang TC",sans-serif;fill:var(--ink);pointer-events:none}
+.link{stroke:var(--line);stroke-width:1.5}
+.search{width:100%;border:1px solid var(--line);background:var(--card);border-radius:11px;
+  padding:11px 14px;font:inherit;color:inherit;margin-bottom:12px}
+.search:focus{outline:2px solid var(--accent);outline-offset:1px}
+.topic{border-top:1px solid var(--line);padding:12px 2px;display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.topic:first-child{border-top:0}
+.topic:hover{background:var(--accent-soft)}
+.dot{flex:none;width:9px;height:9px;border-radius:99px;margin-top:8px}
+.topic .t{font-weight:650;font-size:15px}
+.topic .d{color:var(--dim);font-size:13.5px;line-height:1.6}
+.topic .p{margin-left:auto;font-size:11.5px;color:var(--dim);white-space:nowrap;padding-top:3px}
+.flow{border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);padding:16px;margin-bottom:12px}
+.flow h3{margin:0 0 3px;font-size:16px}
+.flow .src{font-size:12px;color:var(--dim);margin:0 0 13px}
+.fstep{border-left:2px solid var(--line);padding:0 0 14px 16px;position:relative;opacity:.35;transition:.3s}
+.fstep:last-child{padding-bottom:0}
+.fstep.on{opacity:1;border-color:var(--accent)}
+.fstep::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:99px;
+  background:var(--line)}
+.fstep.on::before{background:var(--accent)}
+.fstep b{display:block;font-size:15px}
+.fstep span{font-size:14px;color:var(--dim)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:13px;
+  overflow:hidden;background:var(--card);box-shadow:var(--shadow);margin-bottom:12px}
+.pair .side{padding:14px}
+.pair .side:first-child{border-right:1px solid var(--line)}
+.pair .side h4{margin:0 0 6px;font-size:15px;color:var(--accent)}
+.pair .side p{margin:0;font-size:14px;color:var(--dim);line-height:1.65}
+.pair .key{grid-column:1/-1;border-top:1px solid var(--line);background:var(--accent-soft);
+  padding:11px 14px;font-size:13.5px;line-height:1.65}
+@media (max-width:520px){.pair{grid-template-columns:1fr}.pair .side:first-child{border-right:0;border-bottom:1px solid var(--line)}}
+.stages{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.stage{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 13px;font-size:13.5px;
+  color:var(--dim);cursor:pointer;font:inherit;font-size:13.5px}
+.stage.cleared{background:var(--ok-soft);border-color:transparent;color:var(--ok);font-weight:650}
+.stage[aria-current=true]{border-color:var(--accent);color:var(--accent);font-weight:650}
+.qnum{font-size:12.5px;color:var(--accent);font-weight:700;letter-spacing:.05em}
+.qtext{font-size:16.5px;font-weight:650;margin:6px 0 14px;line-height:1.6}
+.opts{display:grid;gap:8px}
+.opt{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 13px;font:inherit;
+  color:inherit;text-align:left;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt:disabled{cursor:default;opacity:.85}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:650}
+.opt.wrong{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.fb{margin-top:13px;padding:12px 13px;border-radius:10px;font-size:14px;display:none;line-height:1.65}
+.fb.show{display:block}.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.no{background:var(--accent-soft);color:var(--accent)}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:650;cursor:pointer}
+.btn.ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.qfoot{display:flex;align-items:center;gap:12px;margin-top:15px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.badge{border:1px dashed var(--line);border-radius:12px;padding:10px 14px;text-align:center;opacity:.4;font-size:13px}
+.badge.got{opacity:1;border-style:solid;border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:650}
+.badge .ic{font-size:22px;display:block;line-height:1.3}
+.done{text-align:center;padding:28px 16px}
+.done .big{font-size:44px;line-height:1}
+.done h3{margin:10px 0 6px;font-size:21px}
+.done p{color:var(--dim);margin:0 0 16px;font-size:14.5px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">課後全面統整</div>
+<h1>血液</h1>
+<p class="lede">課上完了，這裡把散落的片段接起來：組成、機轉、比較、考點。點得越多，看得越完整。</p>
+
+<nav><div class="tabs" id="tabs"></div></nav>
+
+<div class="panel on" id="p0">
+  <h2>血液全景</h2>
+  <p class="hint">點任一段看它的數字與功能。</p>
+  <div class="card">
+    <svg viewBox="0 0 700 240" role="img" aria-label="血液組成圖">
+      <text x="0" y="16" font-size="12.5" fill="currentColor" opacity=".6">全血 100%（約佔體重 8%）</text>
+      <g class="seg" data-n="plasma"><rect x="0" y="26" width="385" height="54" rx="8" fill="var(--c5)"/>
+        <text class="svglbl" x="16" y="48">血漿 55%</text><text class="svgsub" x="16" y="66">92% 水 ＋ 8% 溶質</text></g>
+      <g class="seg" data-n="formed-elements"><rect x="393" y="26" width="307" height="54" rx="8" fill="var(--c1)"/>
+        <text class="svglbl" x="409" y="48">定形成分 45%</text><text class="svgsub" x="409" y="66">＝血比容 Hct</text></g>
+      <line x1="393" y1="84" x2="393" y2="100" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="700" y1="84" x2="700" y2="100" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="393" y1="100" x2="700" y2="100" stroke="var(--line)" stroke-width="1.5"/>
+      <g class="seg" data-n="red-blood-cell"><rect x="393" y="110" width="200" height="46" rx="8" fill="var(--c1)" opacity=".88"/>
+        <text class="svglbl" x="407" y="130">紅血球</text><text class="svgsub" x="407" y="147">540/480 萬・120 天</text></g>
+      <g class="seg" data-n="white-blood-cell"><rect x="601" y="110" width="60" height="46" rx="8" fill="var(--c3)"/>
+        <text class="svglbl" x="612" y="130">白</text><text class="svgsub" x="612" y="147">5–9 千</text></g>
+      <g class="seg" data-n="platelet"><rect x="669" y="110" width="31" height="46" rx="8" fill="var(--c2)"/>
+        <text class="svglbl" x="676" y="130">板</text></g>
+      <g class="seg" data-n="plasma"><rect x="0" y="110" width="290" height="20" rx="5" fill="var(--c5)" opacity=".75"/>
+        <text class="svgsub" x="10" y="124">水 92%</text></g>
+      <g class="seg" data-n="plasma"><rect x="296" y="110" width="89" height="20" rx="5" fill="var(--c5)" opacity=".45"/>
+        <text class="svgsub" x="304" y="124">溶質 8%</text></g>
+      <text x="0" y="152" font-size="11.5" fill="currentColor" opacity=".55">血漿蛋白：白蛋白 55%・球蛋白 38%・纖維蛋白原 7%</text>
+      <text x="0" y="186" font-size="12.5" fill="currentColor" opacity=".6">白血球五種（由多到少）</text>
+      <g class="seg" data-n="neutrophil"><rect x="0" y="196" width="228" height="34" rx="7" fill="var(--c3)" opacity=".9"/>
+        <text class="svglbl" x="12" y="217">嗜中性球 60–70%</text></g>
+      <g class="seg" data-n="lymphocyte"><rect x="236" y="196" width="150" height="34" rx="7" fill="var(--c3)" opacity=".72"/>
+        <text class="svglbl" x="248" y="217">淋巴球 20–25%</text></g>
+      <g class="seg" data-n="monocyte"><rect x="394" y="196" width="104" height="34" rx="7" fill="var(--c3)" opacity=".56"/>
+        <text class="svglbl" x="404" y="217">單核 3–8%</text></g>
+      <g class="seg" data-n="eosinophil"><rect x="506" y="196" width="98" height="34" rx="7" fill="var(--c3)" opacity=".42"/>
+        <text class="svglbl" x="516" y="217">嗜酸 2–4%</text></g>
+      <g class="seg" data-n="basophil"><rect x="612" y="196" width="88" height="34" rx="7" fill="var(--c3)" opacity=".3"/>
+        <text class="svglbl" x="620" y="217">嗜鹼 &lt;1%</text></g>
+    </svg>
+    <div class="detail" id="d0">點上面任一段，這裡會顯示重點。</div>
+  </div>
+</div>
+
+<div class="panel" id="p1">
+  <h2>概念地圖</h2>
+  <p class="hint">五個群落：紅血球、白血球與免疫、止血凝血、血型輸血、淋巴。點節點看它在整章的位置。</p>
+  <div class="card"><div class="mapwrap"><svg id="map" viewBox="0 0 700 430" role="img" aria-label="血液概念地圖"></svg></div>
+  <div class="detail" id="d1">點任一節點。</div></div>
+</div>
+
+<div class="panel" id="p2">
+  <h2>主題導航</h2>
+  <p class="hint">全章概念一覽，可搜尋。點開看重點與出處。</p>
+  <input class="search" id="q" placeholder="輸入關鍵字，例如「凝血」「脾臟」「B12」…" autocomplete="off">
+  <div class="card" id="topics"></div>
+  <div class="detail" id="d2">點任一主題。</div>
+</div>
+
+<div class="panel" id="p3">
+  <h2>機轉流程</h2>
+  <p class="hint">逐步點開，看因果怎麼串起來。</p>
+  <div id="flows"></div>
+</div>
+
+<div class="panel" id="p4">
+  <h2>最容易混淆</h2>
+  <p class="hint">這些成對概念每年都在考，而且答錯的人多半是記反方向。</p>
+  <div id="pairs"></div>
+</div>
+
+<div class="panel" id="p5">
+  <h2>闖關測驗</h2>
+  <p class="hint">五關，每關三題。全關通過拿到完整徽章。</p>
+  <div class="stages" id="stages"></div>
+  <div class="card" id="quiz"></div>
+  <div class="badges" id="badges"></div>
+</div>
+
+<footer>
+  內容依《新編生理學》第五章、《新編解剖學》第 10、12 章整理，每個節點對應一張已審知識卡與課本頁碼。
+  <br>課程平台 1.0 互動教材｜blood-post-v1
+</footer>
+</div>
+
+<script src="../course-learning.js"></script>
+<script>
+(function(){
+"use strict";
+var CL = window.CourseLearning || {explore:function(){},answer:function(){},hint:function(){},complete:function(){}};
+var GA4_ID = "";
+function track(n,p){ if(GA4_ID && typeof window.gtag==="function") window.gtag("event",n,Object.assign({unit:"blood",phase:"post"},p||{})); }
+
+var N = {
+ "plasma":{t:"血漿",d:"佔血液 55%，92% 水＋8% 溶質。血漿蛋白：白蛋白 55%（膠體滲透壓）、球蛋白 38%（抗體）、纖維蛋白原 7%（凝血）。",k:"血漿含凝血因子，血清不含——這是兩者的分界。",p:"生理 CH05 p.5-14"},
+ "formed-elements":{t:"定形成分",d:"紅血球、白血球、血小板三大類，約佔 45%（＝血比容）。數量級：紅血球百萬、血小板十萬、白血球千。",k:"三者數量差距極大，別把白血球（千）與紅血球（百萬）記混。",p:"生理 CH05 p.5-4"},
+ "red-blood-cell":{t:"紅血球",d:"無核、雙凹圓盤狀、直徑 7.5 μm，男 540 萬／女 480 萬 每 mm³，壽命 120 天，運送 O₂ 與 CO₂。",k:"無核、有血紅素；白血球剛好相反。",p:"生理 CH05 p.5-6"},
+ "white-blood-cell":{t:"白血球",d:"有核、無血紅素，5,000～9,000 每 mm³。顆粒性：嗜中性、嗜酸性、嗜鹼性；無顆粒性：淋巴球、單核球。",k:"有核無血紅素——與紅血球特徵完全相反。",p:"生理 CH05 p.5-11"},
+ "platelet":{t:"血小板",d:"紅骨髓巨核細胞碎裂而成的細胞碎片，無核，2～4 μm，25～40 萬每 mm³，壽命 5～9 天。",k:"是碎片不是細胞，沒有核。",p:"生理 CH05 p.5-12"},
+ "neutrophil":{t:"嗜中性球",d:"白血球中最多（60～70%），主要功能吞噬，可經滲出作用穿出血管進入組織。",k:"以吞噬為主，別和以免疫為主的淋巴球混淆。",p:"生理 CH05 p.5-11"},
+ "eosinophil":{t:"嗜酸性球",d:"2～4%，吞噬抗原—抗體複合物，釋放抗組織胺物質以解除過敏。",k:"嗜酸性球解除過敏、嗜鹼性球引起過敏，方向相反。",p:"生理 CH05 p.5-12"},
+ "basophil":{t:"嗜鹼性球",d:"數量最少（0.5～1%），含肝素（抗凝）與組織胺（血管擴張、過敏）。",k:"含組織胺引起過敏；與嗜酸性球作用相反。",p:"生理 CH05 p.5-12"},
+ "lymphocyte":{t:"淋巴球",d:"20～25%，在骨髓外還可於淋巴結、胸腺、脾臟製造。B 淋巴球受抗原刺激轉為漿細胞才大量製造抗體。",k:"製造抗體的是漿細胞，不是還沒轉變的 B 細胞。",p:"生理 CH05 p.5-12"},
+ "monocyte":{t:"單核球",d:"3～8%，進入組織後才轉變為巨噬細胞（如肝臟庫佛氏細胞、肺泡吞噬細胞）。",k:"血中叫單核球，進組織才叫巨噬細胞。",p:"生理 CH05 p.5-12"},
+ "hemoglobin":{t:"血紅素",d:"每分子 4 個含鐵血基質，可帶 4 個 O₂；HbA＝α₂β₂ 佔 97.5%；每 100 ml 血約 14～16 g，每克攜 1.34 ml 氧。",k:"血基質含鐵抓氧、血球素是蛋白鏈，兩者功能不同。",p:"生理 CH05 p.5-7"},
+ "erythropoiesis":{t:"紅血球生成",d:"分化末段：正紅血球母細胞→核排出→網狀紅血球→成熟紅血球。原料需鐵、胺基酸、維生素 B12。",k:"缺鐵→缺鐵性貧血；缺 B12→惡性貧血。",p:"生理 CH05 p.5-5"},
+ "erythropoietin":{t:"紅血球生成素",d:"組織缺氧刺激腎臟分泌，隨血循環至紅骨髓，促進幹細胞生成紅血球。",k:"生成素原要轉成生成素才有活性。",p:"生理 CH05 p.5-9"},
+ "hemocytoblast":{t:"血胚細胞",d:"所有血球的共同來源（幹細胞），先分化成五類母細胞，再各自發育成紅血球、顆粒白血球、單核球、淋巴球、血小板。",k:"它是最上游；前紅血球母細胞等五類已是第二層。",p:"解剖 AB-05_10 p.10-3"},
+ "hematopoiesis-site":{t:"造血場所",d:"紅骨髓才造血（頭蓋骨、胸骨、肋骨、長骨）；黃骨髓是脂肪無造血功能。胚胎期卵黃囊、肝、脾、胸腺、淋巴結都參與。",k:"骨髓內 75% 是白血球系細胞，但血中紅血球是白血球的 500 倍——兩個數字方向相反。",p:"解剖 AB-05_10 p.10-3"},
+ "hemostasis":{t:"止血",d:"三步驟合作：血管痙攣→血小板栓塞形成→血液凝固。",k:"止血不等於凝血，凝血只是第三步。",p:"生理 CH05 p.5-15"},
+ "coagulation":{t:"血液凝固",d:"外在徑路由組織受傷啟動、內在徑路由血管受傷啟動，兩者最終匯合。",k:"外在＝組織、內在＝血管，別對調。",p:"生理 CH05 p.5-16"},
+ "coagulation-mechanism":{t:"凝血機制",d:"三階段：凝血酶原致活素→凝血酶→纖維蛋白（疏鬆經因子 XIII 變緊密）。需 Ca²⁺ 與維生素 K。",k:"維生素 K 是合成因子 II、VII、IX、X 所需，不直接參與凝塊。",p:"生理 CH05 p.5-18"},
+ "thrombosis-prevention":{t:"血栓預防",d:"肝素直接抑制凝血；雙香豆素抗維生素 K；EDTA／檸檬酸螯合 Ca²⁺。血栓好發於血流遲緩處。",k:"三種抗凝機制完全不同，別混用。",p:"生理 CH05 p.5-17"},
+ "abo-blood-group":{t:"ABO 血型",d:"凝集原在紅血球、凝集素在血漿。A 有抗 B、B 有抗 A、O 有抗 A 及抗 B、AB 無凝集素。",k:"O 型萬能供血、AB 型萬能受血，角色相反。",p:"生理 CH05 p.5-21"},
+ "rh-blood-group":{t:"Rh 血型",d:"Rh 陽性＝紅血球具 RhD 抗原，D 抗原性最強。Rh 抗體是後天產生，需輸血或懷孕刺激。",k:"ABO 抗體天生就有，Rh 抗體要致敏才有。",p:"生理 CH05 p.5-24"},
+ "cross-matching":{t:"交叉配對",d:"主要配對：捐血者血球＋受血者血漿，凝集就絕對不可輸。次要配對相反。",k:"主次不可對調。",p:"生理 CH05 p.5-23"},
+ "transfusion-reaction":{t:"輸血反應",d:"凝集反應是紅血球聚成團塞住小血管；溶血反應是抗體活化補體破壞紅血球膜，需較高抗體量、較少見。",k:"兩者不是同一件事。",p:"生理 CH05 p.5-23"},
+ "hemolytic-disease-newborn":{t:"新生兒溶血病",d:"母體抗 Rh 抗體破壞胎兒 Rh 陽性紅血球；肝脾代償造血、周邊出現有核紅血球；以 Rh 陰性血換血。",k:"關鍵是 Rh 致敏，不是 ABO 天生抗體；第一胎常無事。",p:"生理 CH05 p.5-26"},
+ "lymph":{t:"淋巴液",d:"血漿→組織間液→進微淋巴管即為淋巴。成分似血漿但蛋白質較少，不含紅血球與血小板。",k:"蛋白質比血漿少，不是多。",p:"生理 CH05 p.5-27"},
+ "lymph-trunk-duct":{t:"胸管與右淋巴管",d:"胸管是體內最粗大的淋巴管，起於第 2 腰椎前乳糜池，收左上半身與整個下半身；右淋巴管只收右側頭頸胸與上肢。",k:"不是左右各半，是四分之三 vs 四分之一。",p:"解剖 AB-05_12 p.12-8"},
+ "spleen":{t:"脾臟",d:"最大的淋巴組織，紅髓白髓；產生 B 淋巴球、吞噬老舊紅血球與血小板、儲血、胚胎期造血。",k:"沒有輸入淋巴管，所以不能過濾淋巴——它過濾的是血液。",p:"解剖 AB-05_12 p.12-6"},
+ "thymus":{t:"胸腺",d:"上縱隔腔、胸骨之後。分泌胸腺素幫助 T 細胞成熟；青春期最大，之後萎縮但仍具功能。",k:"胸腺管 T、脾臟產 B，常被對調。",p:"解剖 AB-05_12 p.12-7"},
+ "lymph-node":{t:"淋巴結",d:"過濾淋巴、製造淋巴球、合成抗體。皮質有淋巴小結與生發中心，髓質有髓索。",k:"分皮質髓質；分紅髓白髓的是脾臟。",p:"解剖 AB-05_12 p.12-5"},
+ "tonsil":{t:"扁桃體",d:"咽扁桃體（單一，鼻咽後壁）、腭扁桃體（成對，扁桃腺炎處）、舌扁桃體（成對，舌基部）。無輸入輸出淋巴管。",k:"由淋巴小結聚集，不是由淋巴結組成。",p:"解剖 AB-05_12 p.12-6"},
+ "specific-immunity":{t:"特異性免疫",d:"體液性（B→抗體）與細胞性（T）。IgG 最多可過胎盤、IgM 最大是初級反應主角、IgA 外分泌、IgE 過敏、IgD 在 B 細胞表面。",k:"IgG「最多」、IgM「最大」，別對調。",p:"生理 CH05 p.5-28"},
+ "nonspecific-immunity":{t:"非特異性免疫",d:"吞噬細胞（嗜中性球、巨噬細胞）、干擾素 α／β／γ、發炎反應。不針對特定抗原、無記憶。",k:"干擾素屬非特異性防禦。",p:"生理 CH05 p.5-28"}
+};
+
+var CLUSTERS = [
+ {c:"var(--c1)", n:"紅血球系", ids:["red-blood-cell","hemoglobin","erythropoiesis","erythropoietin","hemocytoblast","hematopoiesis-site"]},
+ {c:"var(--c3)", n:"白血球與免疫", ids:["white-blood-cell","neutrophil","eosinophil","basophil","lymphocyte","monocyte","specific-immunity","nonspecific-immunity"]},
+ {c:"var(--c2)", n:"止血與凝血", ids:["hemostasis","coagulation","coagulation-mechanism","thrombosis-prevention","platelet"]},
+ {c:"var(--c5)", n:"血型與輸血", ids:["abo-blood-group","rh-blood-group","cross-matching","transfusion-reaction","hemolytic-disease-newborn"]},
+ {c:"var(--c4)", n:"淋巴", ids:["lymph","lymph-node","spleen","thymus","tonsil","lymph-trunk-duct"]}
+];
+
+var FLOWS = [
+ {id:"hemostasis", t:"從受傷到止血", p:"生理 CH05 p.5-15～18", s:[
+  ["血管受傷","血管壁平滑肌立即收縮（血管痙攣），約 30 分鐘；疼痛神經反射＋血小板釋放血清胺"],
+  ["血小板黏附","血小板在受傷處堆疊成疏鬆的血小板栓子"],
+  ["第一階段","外在徑路（組織受傷）與內在徑路（血管受傷）匯合，形成凝血酶原致活素"],
+  ["第二階段","凝血酶原受致活素催化，形成凝血酶"],
+  ["第三階段","纖維蛋白原經凝血酶與 Ca²⁺ 作用成疏鬆纖維蛋白，再經因子 XIII 變緊密"],
+  ["凝塊完成","纖維蛋白網把血球網住，出血停止。全程需 Ca²⁺；維生素 K 則是合成因子 II、VII、IX、X 所必須"]]},
+ {id:"rbc-homeostasis", t:"紅血球的一生", p:"生理 CH05 p.5-5～10", s:[
+  ["組織缺氧","腎臟感受到缺氧，分泌紅血球生成素"],
+  ["骨髓受刺激","生成素隨血液到紅骨髓，刺激幹細胞分化"],
+  ["分化","前紅血球母細胞→嗜鹼性→嗜多色性→正紅血球母細胞"],
+  ["核排出","正紅血球母細胞排出細胞核，成為網狀紅血球"],
+  ["進入循環","網狀紅血球成熟為紅血球，壽命約 120 天"],
+  ["破壞與回收","老化紅血球在脾、肝被破壞；血基質→膽紅素排出，鐵回收再利用"]]},
+ {id:"abo-blood-group", t:"輸血前為什麼要配對", p:"生理 CH05 p.5-21～23", s:[
+  ["抗原在哪","凝集原（抗原）在紅血球膜上，決定血型"],
+  ["抗體在哪","凝集素（抗體）在血漿中，ABO 的是天生就有"],
+  ["血型鑑定","紅血球加抗 A／抗 B 試劑，看凝集反應判型"],
+  ["主要配對","捐血者血球＋受血者血漿。凝集＝絕對不可輸"],
+  ["次要配對","捐血者血漿＋受血者血球。主要不凝集時，少量輸血可用"],
+  ["不配對的後果","凝集反應塞住小血管；嚴重時抗體活化補體造成溶血"]]}
+];
+
+var PAIRS = [
+ {a:"血漿",b:"血清",da:"含纖維蛋白原等凝血因子",db:"凝血後的液體，已不含凝血因子",k:"差別只在有沒有參與凝血的蛋白因子。"},
+ {a:"紅血球",b:"白血球",da:"無核、有血紅素",db:"有核、無血紅素",k:"兩者特徵剛好相反，最常被記反。"},
+ {a:"嗜酸性球",b:"嗜鹼性球",da:"釋放抗組織胺物質，<b>解除</b>過敏",db:"含組織胺，<b>引起</b>過敏（還含肝素抗凝）",k:"對過敏的角色完全相反。"},
+ {a:"外在徑路",b:"內在徑路",da:"由<b>組織</b>受傷啟動",db:"由<b>血管</b>受傷（血液接觸異物）啟動",k:"觸發來源不同，最後匯合到同一條路。"},
+ {a:"O 型",b:"AB 型",da:"無凝集原、有抗 A 抗 B →萬能<b>供血</b>者",db:"有 A、B 凝集原、無凝集素 →萬能<b>受血</b>者",k:"供血看抗原、受血看抗體。"},
+ {a:"ABO 抗體",b:"Rh 抗體",da:"天生就有",db:"後天產生，需輸血或懷孕致敏",k:"所以 Rh 第一胎常無事，第二胎才有風險。"},
+ {a:"淋巴結",b:"脾臟",da:"皮質／髓質；有輸入淋巴管，能<b>過濾淋巴</b>",db:"紅髓／白髓；<b>無</b>輸入淋巴管，過濾的是<b>血液</b>",k:"分區名稱與過濾對象都不同。"},
+ {a:"胸腺",b:"脾臟",da:"分泌胸腺素，幫助 <b>T 細胞</b>成熟",db:"產生 <b>B 淋巴球</b>以製造抗體",k:"T 與 B 的歸屬常被對調。"},
+ {a:"胸管",b:"右淋巴管",da:"收左上半身＋<b>整個下半身</b>，體內最粗大",db:"只收<b>右側</b>頭、頸、胸、上肢",k:"不是左右各半，是 3/4 對 1/4。"},
+ {a:"IgG",b:"IgM",da:"數量<b>最多</b>，可通過胎盤",db:"體積<b>最大</b>，初級免疫反應主角",k:"「最多」與「最大」別對調。"}
+];
+
+var STAGES = [
+ {n:"血液組成", ic:"🩸", qs:[
+  {id:"bp-q01",q:"血比容（Hct）指的是？",o:["血漿佔血液的比例","定形成分佔血液的比例","血紅素佔血液的比例","白血球佔血液的比例"],a:1,w:"血比容就是定形成分所佔的容積比，正常約 45%，其中 99% 以上是紅血球。"},
+  {id:"bp-q02",q:"血漿蛋白中含量最多的是？",o:["球蛋白","纖維蛋白原","白蛋白","凝血酶原"],a:2,w:"白蛋白 55%、球蛋白 38%、纖維蛋白原 7%。白蛋白負責維持膠體滲透壓。"},
+  {id:"bp-q03",q:"血清與血漿的差別在於血清缺少？",o:["白蛋白","凝血因子","電解質","葡萄糖"],a:1,w:"血清是凝血後剩下的液體，纖維蛋白原等凝血因子已經被用掉了。"}]},
+ {n:"紅血球", ic:"🔴", qs:[
+  {id:"bp-q04",q:"「核排出」發生在哪個階段之後？",o:["前紅血球母細胞","嗜鹼性紅血球母細胞","正紅血球母細胞","網狀紅血球"],a:2,w:"正紅血球母細胞排出核之後才成為網狀紅血球，所以網狀紅血球已經無核。"},
+  {id:"bp-q05",q:"紅血球生成素由哪個器官因應缺氧而分泌？",o:["肝臟","腎臟","脾臟","骨髓"],a:1,w:"腎臟感受到組織缺氧就分泌 EPO，作用在紅骨髓促進紅血球生成。"},
+  {id:"bp-q06",q:"老化紅血球的鐵最後會？",o:["隨尿排出","回收再利用","轉成膽紅素","堆積在脾臟"],a:1,w:"血基質變成膽紅素排出，鐵則被回收再利用——兩條路要分清楚。"}]},
+ {n:"白血球與免疫", ic:"🛡️", qs:[
+  {id:"bp-q07",q:"單核球在什麼時候變成巨噬細胞？",o:["在骨髓時","在血液中","進入組織後","受抗原刺激時"],a:2,w:"血中還是單核球，進入組織 24 小時後才變成吞噬細胞。"},
+  {id:"bp-q08",q:"真正大量製造抗體的細胞是？",o:["B 淋巴球","漿細胞","T 淋巴球","巨噬細胞"],a:1,w:"B 淋巴球受抗原刺激後轉變成漿細胞，才是抗體工廠。"},
+  {id:"bp-q09",q:"哪一種抗體能通過胎盤？",o:["IgA","IgM","IgG","IgE"],a:2,w:"IgG 數量最多且能過胎盤；IgM 體積最大、是初級反應主角。"}]},
+ {n:"止血與凝血", ic:"🧬", qs:[
+  {id:"bp-q10",q:"維生素 K 在凝血中的角色是？",o:["直接構成凝塊","合成凝血因子所必須","螯合鈣離子","催化纖維蛋白原"],a:1,w:"維生素 K 是合成因子 II、VII、IX、X 所必須，本身不參與凝塊形成。"},
+  {id:"bp-q11",q:"EDTA 與檸檬酸抗凝的機制是？",o:["抑制凝血酶","抗維生素 K","結合鈣離子","分解纖維蛋白"],a:2,w:"靠螯合 Ca²⁺；肝素是直接抑制凝血、雙香豆素是抗維生素 K，三者機制不同。"},
+  {id:"bp-q12",q:"外在凝血徑路由什麼啟動？",o:["組織受傷","血管受傷","血小板聚集","鈣離子上升"],a:0,w:"外在＝組織受傷，內在＝血管受傷，兩者最後匯合。"}]},
+ {n:"血型與淋巴", ic:"🧭", qs:[
+  {id:"bp-q13",q:"交叉配對的「主要配對」測的是？",o:["捐血者血漿＋受血者血球","捐血者血球＋受血者血漿","兩者血漿","兩者血球"],a:1,w:"主要配對＝捐血者血球對受血者血漿，凝集就絕對不可輸。"},
+  {id:"bp-q14",q:"下列何者「不能」過濾淋巴？",o:["淋巴結","脾臟","胸管沿途的淋巴結","腋淋巴結"],a:1,w:"脾臟沒有輸入淋巴管，過濾的是血液不是淋巴。"},
+  {id:"bp-q15",q:"下肢的淋巴液回流會經過？",o:["右淋巴管","胸管","右鎖骨下靜脈","兩者皆可"],a:1,w:"右淋巴管只收右側頭、頸、胸、上肢；下肢屬於胸管的範圍。"}]}
+];
+
+/* ---------- tabs ---------- */
+var NAMES = ["全景","概念地圖","主題導航","機轉流程","易混淆","闖關"];
+var tabs = document.getElementById("tabs");
+NAMES.forEach(function(n,i){
+  var b=document.createElement("button"); b.className="tab"; b.type="button"; b.textContent=n;
+  b.setAttribute("aria-selected", i===0?"true":"false");
+  b.addEventListener("click",function(){
+    tabs.querySelectorAll(".tab").forEach(function(x,k){x.setAttribute("aria-selected",k===i?"true":"false");});
+    for(var k=0;k<6;k++) document.getElementById("p"+k).classList.toggle("on",k===i);
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+  tabs.appendChild(b);
+});
+
+var seen={};
+function show(id, target){
+  var n=N[id]; if(!n) return;
+  document.getElementById(target).innerHTML =
+    "<b>"+n.t+"</b>　"+n.d+"<br><b>易錯：</b>"+n.k+"<span class='src'>"+n.p+"</span>";
+  if(!seen[id]){ seen[id]=1; CL.explore(id); track("explore",{node:id}); }
+}
+document.querySelectorAll("#p0 .seg").forEach(function(g){
+  g.addEventListener("click",function(){ show(g.dataset.n,"d0"); });
+});
+
+/* ---------- 概念地圖 ---------- */
+var map=document.getElementById("map"), cx=[140,530,150,540,345], cy=[95,95,290,290,195];
+var svgns="http://www.w3.org/2000/svg", frag=document.createDocumentFragment();
+CLUSTERS.forEach(function(cl,ci){
+  var n=cl.ids.length, R=cl.ids.length>6?86:74;
+  cl.ids.forEach(function(id,i){
+    var ang=(i/n)*Math.PI*2-Math.PI/2, x=cx[ci]+Math.cos(ang)*R, y=cy[ci]+Math.sin(ang)*R*0.72;
+    var ln=document.createElementNS(svgns,"line");
+    ln.setAttribute("x1",cx[ci]);ln.setAttribute("y1",cy[ci]);ln.setAttribute("x2",x);ln.setAttribute("y2",y);
+    ln.setAttribute("class","link"); frag.appendChild(ln);
+    var g=document.createElementNS(svgns,"g"); g.setAttribute("class","mnode");
+    var c=document.createElementNS(svgns,"circle");
+    c.setAttribute("cx",x);c.setAttribute("cy",y);c.setAttribute("r",7);
+    c.setAttribute("fill",cl.c);c.setAttribute("stroke",cl.c);c.setAttribute("stroke-opacity",".3");c.setAttribute("stroke-width","1");
+    var t=document.createElementNS(svgns,"text");
+    t.setAttribute("x",x);t.setAttribute("y",y-12);t.setAttribute("text-anchor","middle");
+    t.textContent=(N[id]||{}).t||id;
+    g.appendChild(c);g.appendChild(t);
+    g.addEventListener("click",function(){ show(id,"d1"); });
+    frag.appendChild(g);
+  });
+  var hub=document.createElementNS(svgns,"g"); hub.setAttribute("class","mnode");
+  var hc=document.createElementNS(svgns,"circle");
+  hc.setAttribute("cx",cx[ci]);hc.setAttribute("cy",cy[ci]);hc.setAttribute("r",22);
+  hc.setAttribute("fill",cl.c);hc.setAttribute("fill-opacity",".13");hc.setAttribute("stroke",cl.c);hc.setAttribute("stroke-width","1.5");
+  var ht=document.createElementNS(svgns,"text");
+  ht.setAttribute("x",cx[ci]);ht.setAttribute("y",cy[ci]+4);ht.setAttribute("text-anchor","middle");
+  ht.setAttribute("style","font-size:11.5px;font-weight:700");
+  ht.textContent=cl.n;
+  hub.appendChild(hc);hub.appendChild(ht); frag.appendChild(hub);
+});
+map.appendChild(frag);
+
+/* ---------- 主題導航 ---------- */
+var tbox=document.getElementById("topics"), ids=Object.keys(N);
+function colorOf(id){ for(var i=0;i<CLUSTERS.length;i++) if(CLUSTERS[i].ids.indexOf(id)>=0) return CLUSTERS[i].c; return "var(--dim)"; }
+function renderTopics(f){
+  tbox.innerHTML="";
+  ids.filter(function(id){
+    if(!f) return true;
+    var n=N[id]; return (n.t+n.d+n.k+id).toLowerCase().indexOf(f.toLowerCase())>=0;
+  }).forEach(function(id){
+    var n=N[id], d=document.createElement("div"); d.className="topic";
+    d.innerHTML='<span class="dot" style="background:'+colorOf(id)+'"></span>'+
+      '<span><span class="t">'+n.t+'</span><br><span class="d">'+n.d.slice(0,58)+'…</span></span>'+
+      '<span class="p">'+n.p+'</span>';
+    d.addEventListener("click",function(){ show(id,"d2"); document.getElementById("d2").scrollIntoView({behavior:"smooth",block:"nearest"}); });
+    tbox.appendChild(d);
+  });
+  if(!tbox.children.length) tbox.innerHTML='<div class="topic"><span class="d">找不到符合的主題。</span></div>';
+}
+renderTopics(""); document.getElementById("q").addEventListener("input",function(e){ renderTopics(e.target.value.trim()); });
+
+/* ---------- 機轉流程 ---------- */
+var fw=document.getElementById("flows");
+FLOWS.forEach(function(f){
+  var d=document.createElement("div"); d.className="flow";
+  d.innerHTML='<h3>'+f.t+'</h3><p class="src">'+f.p+'　·　點下一步逐段展開</p><div class="fsteps"></div>'+
+    '<div class="qfoot"><button class="btn ghost" type="button">下一步</button></div>';
+  var host=d.querySelector(".fsteps"), i=0;
+  f.s.forEach(function(s){
+    var e=document.createElement("div"); e.className="fstep";
+    e.innerHTML="<b>"+s[0]+"</b><span>"+s[1]+"</span>"; host.appendChild(e);
+  });
+  var btn=d.querySelector("button");
+  function step(){
+    if(i>=f.s.length) return;
+    host.children[i].classList.add("on"); i++;
+    if(i===f.s.length){ btn.textContent="已完整展開"; btn.disabled=true;
+      if(!seen[f.id]){ seen[f.id]=1; CL.explore(f.id); track("explore",{node:f.id}); } }
+  }
+  btn.addEventListener("click",step); step();
+  fw.appendChild(d);
+});
+
+/* ---------- 易混淆 ---------- */
+var pw=document.getElementById("pairs");
+PAIRS.forEach(function(p,i){
+  var d=document.createElement("div"); d.className="pair";
+  d.innerHTML='<div class="side"><h4>'+p.a+'</h4><p>'+p.da+'</p></div>'+
+              '<div class="side"><h4>'+p.b+'</h4><p>'+p.db+'</p></div>'+
+              '<div class="key">🔑 '+p.k+'</div>';
+  d.addEventListener("click",function(){
+    var id="pair:"+i; if(!seen[id]){ seen[id]=1; CL.explore(id); track("explore",{node:id}); }
+  });
+  pw.appendChild(d);
+});
+
+/* ---------- 闖關 ---------- */
+var si=0, qi=0, ok=0, cleared={}, firstTry={};
+var sbox=document.getElementById("stages"), quiz=document.getElementById("quiz"), bbox=document.getElementById("badges");
+function renderStages(){
+  sbox.innerHTML="";
+  STAGES.forEach(function(s,i){
+    var b=document.createElement("button"); b.className="stage"+(cleared[i]?" cleared":""); b.type="button";
+    b.textContent=(cleared[i]?"✓ ":"")+(i+1)+"　"+s.n;
+    b.setAttribute("aria-current", i===si?"true":"false");
+    b.addEventListener("click",function(){ si=i; qi=0; ok=0; renderStages(); renderQ(); });
+    sbox.appendChild(b);
+  });
+  bbox.innerHTML="";
+  STAGES.forEach(function(s,i){
+    var d=document.createElement("div"); d.className="badge"+(cleared[i]?" got":"");
+    d.innerHTML='<span class="ic">'+s.ic+'</span>'+s.n;
+    bbox.appendChild(d);
+  });
+}
+function renderQ(){
+  var s=STAGES[si], q=s.qs[qi];
+  quiz.innerHTML='<div class="qnum">第 '+(si+1)+' 關 '+s.n+'　·　'+(qi+1)+' ／ '+s.qs.length+'</div>'+
+    '<p class="qtext">'+q.q+'</p><div class="opts"></div><div class="fb" id="fb"></div>'+
+    '<div class="qfoot"><button class="btn" id="next" disabled>下一題</button>'+
+    '<span class="score" style="margin-left:auto;font-size:13px;color:var(--dim)">本關答對 '+ok+' ／ '+qi+'</span></div>';
+  var opts=quiz.querySelector(".opts");
+  q.o.forEach(function(text,i){
+    var b=document.createElement("button"); b.className="opt"; b.type="button"; b.textContent=text;
+    b.addEventListener("click",function(){ pick(i,q,opts); });
+    opts.appendChild(b);
+  });
+  quiz.querySelector("#next").addEventListener("click",function(){
+    qi++;
+    if(qi<s.qs.length) renderQ(); else endStage();
+  });
+}
+function pick(i,q,opts){
+  var right=i===q.a;
+  opts.querySelectorAll(".opt").forEach(function(b,k){
+    b.disabled=true;
+    if(k===q.a) b.classList.add("right"); else if(k===i) b.classList.add("wrong");
+  });
+  if(!firstTry[q.id]){ firstTry[q.id]=1; CL.answer(q.id,right); track("answer",{q:q.id,correct:right}); }
+  if(right) ok++;
+  var fb=quiz.querySelector("#fb");
+  fb.className="fb show "+(right?"ok":"no");
+  fb.textContent=(right?"對。":"再看一次：")+q.w;
+  quiz.querySelector(".score").textContent="本關答對 "+ok+" ／ "+(qi+1);
+  var nx=quiz.querySelector("#next"); nx.disabled=false;
+  nx.textContent=(qi===STAGES[si].qs.length-1)?"結算本關":"下一題";
+}
+function endStage(){
+  var s=STAGES[si], pass=ok===s.qs.length;
+  if(pass) cleared[si]=1;
+  renderStages();
+  var all=STAGES.every(function(_,i){return cleared[i];});
+  if(all){
+    CL.complete(); track("complete",{});
+    quiz.innerHTML='<div class="done"><div class="big">🏅</div><h3>五關全過</h3>'+
+      '<p>整章的骨架你已經走過一遍。考前回來翻「易混淆」那一頁，那些是最容易被扣分的地方。</p>'+
+      '<button class="btn ghost" id="again">重新挑戰</button></div>';
+  } else if(pass){
+    quiz.innerHTML='<div class="done"><div class="big">'+s.ic+'</div><h3>第 '+(si+1)+' 關通過</h3>'+
+      '<p>拿到「'+s.n+'」徽章。繼續下一關。</p><button class="btn" id="again">下一關</button></div>';
+  } else {
+    quiz.innerHTML='<div class="done"><div class="big">📖</div><h3>答對 '+ok+' ／ '+s.qs.length+'</h3>'+
+      '<p>本關要全對才算通過。剛剛錯的地方，回「機轉流程」或「易混淆」看一次再來。</p>'+
+      '<button class="btn" id="again">再挑戰本關</button></div>';
+  }
+  quiz.querySelector("#again").addEventListener("click",function(){
+    if(pass && !all){ var nxt=si; for(var i=0;i<STAGES.length;i++){ if(!cleared[i]){ nxt=i; break; } } si=nxt; }
+    qi=0; ok=0; renderStages(); renderQ();
+  });
+}
+renderStages(); renderQ();
+})();
+</script>
+</body>
+</html>

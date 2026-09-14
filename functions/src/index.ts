@@ -1,4 +1,4 @@
-import { parseRosterSheet, parseBankSheet } from '../../shared/sheets';
+import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
@@ -19,7 +19,9 @@ import {
   Progress,
   emptyProgress,
   validateQuestions,
+  MAX_BANK_QUESTIONS,
   validateRoster,
+  allowedEmail,
   safeId,
   safeCode,
   applyAttempt,
@@ -51,6 +53,17 @@ function code(v: unknown) {
 function size(data: unknown, max = 300000) {
   if (Buffer.byteLength(JSON.stringify(data)) > max) fail('資料過大，請拆分後再提交');
 }
+// 測試帳號白名單：config/testStudents { emails: ["..."] }。清空即立刻失效。
+let testCache = { at: 0, emails: [] as string[] };
+async function testStudents(): Promise<string[]> {
+  if (Date.now() - testCache.at < 60000) return testCache.emails;
+  const raw = (await db.doc('config/testStudents').get()).data()?.emails;
+  const emails = Array.isArray(raw)
+    ? raw.slice(0, 20).map((e: unknown) => String(e).trim().toLowerCase()).filter(Boolean)
+    : [];
+  testCache = { at: Date.now(), emails };
+  return emails;
+}
 async function identity(req: any) {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const t = req.auth.token;
@@ -64,13 +77,13 @@ async function identity(req: any) {
       classId: '',
       enabled: true,
     };
-  if (
-    t.email_verified !== true ||
-    t.firebase?.sign_in_provider !== 'google.com' ||
-    !String(t.email).endsWith('@ctcn.edu.tw')
-  )
+  const email = String(t.email ?? '').trim().toLowerCase();
+  if (t.email_verified !== true || t.firebase?.sign_in_provider !== 'google.com' || !email)
     throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
-  return { uid: req.auth.uid, email: String(t.email).toLowerCase(), teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true } as any;
+  if (!allowedEmail(email, await testStudents()))
+    throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
+  const test = !allowedEmail(email);
+  return { uid: req.auth.uid, email, teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true, test } as any;
 }
 function enrollmentRef(courseId: string, email: string) {
   return db.doc(`enrollments/${code(courseId)}__${email}`);
@@ -99,7 +112,7 @@ export const bootstrap = onCall(options, async (req) => {
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
     const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), version: VERSION };
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
   }
   const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
   const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
@@ -239,7 +252,7 @@ export const deleteCourse = onCall(options, async (req) => {
   return { ok: true };
 });
 async function writeEnrollments(uid: string, courseId: string, rows: Roster[], migrating = false) {
-  const errors = validateRoster(rows);
+  const errors = validateRoster(rows, await testStudents());
   if (errors.length) fail(errors.join('；'));
   let updated = 0;
   for (let i = 0; i < rows.length; i += 100) {
@@ -328,29 +341,33 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   const errors = validateQuestions(questions);
   if (errors.length) fail(errors.join('\n'));
   size(questions, 600000);
-  const version = createHash('sha256').update(JSON.stringify(questions)).digest('hex').slice(0, 20);
+  // 依「題序、題目ID」穩定排序後才算雜湊，Sheet 上拖動列順序不會產生新版本，只有內容真的變了才會。
+  const sorted = [...questions].sort(
+    (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity) || a.id.localeCompare(b.id),
+  );
+  const version = createHash('sha256').update(JSON.stringify(sorted)).digest('hex').slice(0, 20);
   const key = `${code(courseId)}_${code(unitId)}_${version}`;
   const ref = db.doc(`banks/${key}`);
   if (!(await ref.get()).exists) {
     const batch = db.batch();
     const chunks = [];
-    for (let i = 0; i < questions.length; i += 20) {
+    for (let i = 0; i < sorted.length; i += 20) {
       const chunk = String(i / 20);
       chunks.push(chunk);
-      batch.set(ref.collection('chunks').doc(chunk), { questions: questions.slice(i, i + 20) });
+      batch.set(ref.collection('chunks').doc(chunk), { questions: sorted.slice(i, i + 20) });
     }
     batch.set(ref, {
       courseId,
       unitId,
       version,
       chunks,
-      count: questions.length,
-      questionOptions: Object.fromEntries(questions.map((q) => [q.id, q.options.map((o) => o.id)])),
+      count: sorted.length,
+      questionOptions: Object.fromEntries(sorted.map((q) => [q.id, q.options.map((o) => o.id)])),
       createdAt: Date.now(),
     });
     await batch.commit();
   }
-  return { version, count: questions.length };
+  return { version, count: sorted.length };
 }
 export const publishQuestions = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -419,7 +436,7 @@ export const submitAttempt = onCall(options, async (req) => {
   id(a.id);
   code(a.unitId);
   id(a.version);
-  size(a, 80000);
+  size(a, 300000);
   const { p, c } = await access(req, a.courseId);
   if (p.teacher) fail('教師請使用不寫入紀錄的前台預覽');
   const unit =
@@ -431,7 +448,7 @@ export const submitAttempt = onCall(options, async (req) => {
     !['quiz', 'flashcard', 'review'].includes(a.mode) ||
     !Array.isArray(a.answers) ||
     !a.answers.length ||
-    a.answers.length > 100 ||
+    a.answers.length > MAX_BANK_QUESTIONS ||
     new Set(a.answers.map((x) => x.questionId)).size !== a.answers.length ||
     !Number.isFinite(a.duration) ||
     a.duration < 0
@@ -810,7 +827,7 @@ async function readSheetRows(sheetId: string, token: string, title: string) {
   return (data.values || []) as unknown[][];
 }
 async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
-  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'));
+  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'), await testStudents());
   const results = [];
   for (const courseId of new Set(students.map((s) => s.courseId!))) {
     try { results.push({ courseId, ...await writeEnrollments(p.uid, courseId, students.filter((s) => s.courseId === courseId)) }); }
@@ -818,25 +835,35 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
   }
   return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
 }
-async function syncBankTabFromSheet(sheetId: string, token: string, unitId: string, uid: string) {
-  const groups = parseBankSheet(await readSheetRows(sheetId, token, unitId), unitId);
-  const results = [];
-  for (const [courseId, questions] of groups) {
-    try {
-      const ref = db.doc(`courses/${courseId}`);
-      const course = await ref.get();
-      if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
-      if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
-      const result = await publishBank(courseId, unitId, questions);
-      await db.runTransaction(async (tx) => {
-        const current = await tx.get(ref);
-        const draft = current.data()?.draft as Course;
-        if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
-        if (draft.units.find((u) => u.id === unitId)?.bankVersion !== result.version)
-          tx.update(ref, { draft: { ...draft, units: draft.units.map((u) => u.id === unitId ? { ...u, bankVersion: result.version } : u) } });
-      });
-      results.push({ courseId, unitId, ...result });
-    } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
+async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
+  const groups = parseBankSheet(rows, tabTitle);
+  const results: any[] = [];
+  for (const [courseId, units] of groups) {
+    const ref = db.doc(`courses/${courseId}`);
+    for (const [unitId, { group, questions }] of units) {
+      try {
+        const course = await ref.get();
+        if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+        if (!course.data()?.draft?.units.some((u: Unit) => u.id === unitId)) fail('請先建立並保存單元：' + unitId);
+        const result = await publishBank(courseId, unitId, questions);
+        await db.runTransaction(async (tx) => {
+          const current = await tx.get(ref);
+          const draft = current.data()?.draft as Course;
+          if (!current.data()?.teacherIds?.includes(uid) || !draft?.units.some((u) => u.id === unitId)) fail('課程權限或單元已變更');
+          const target = draft.units.find((u) => u.id === unitId)!;
+          if (target.bankVersion !== result.version || (group && target.group !== group))
+            tx.update(ref, {
+              draft: {
+                ...draft,
+                units: draft.units.map((u) =>
+                  u.id === unitId ? { ...u, bankVersion: result.version, ...(group ? { group } : {}) } : u,
+                ),
+              },
+            });
+        });
+        results.push({ courseId, unitId, group, ...result });
+      } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
+    }
   }
   return results;
 }
@@ -892,7 +919,10 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
     for (const title of titles) {
       if (title === '名冊') continue;
       try {
-        const r = await syncBankTabFromSheet(sheetId, token, title, p.uid);
+        const rows = await readSheetRows(sheetId, token, title);
+        // 附表（例如雙向細目表、教師覆核清單、使用說明）沒有題庫必填欄，靜默略過，不算同步錯誤。
+        if (!looksLikeBankSheet(rows)) continue;
+        const r = await syncBankTabFromSheet(rows, title, p.uid);
         banks.push(...r);
       } catch (e) {
         banks.push({ unitId: title, error: (e as Error).message });

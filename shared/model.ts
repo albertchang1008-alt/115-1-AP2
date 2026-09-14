@@ -11,12 +11,20 @@ export interface Question {
   questionType?: 'single' | 'image';
   lectureTitle?: string;
   lectureUrl?: string;
+  order?: number;
   socratic?: {
+    // 舊欄位：1.2.0 以前發布的題庫快照沿用這五個鍵，保留供相容顯示。
     concept?: string;
     misconception?: string;
     hint1?: string;
     hint2?: string;
     hint3?: string;
+    // 新欄位：對應蘇格拉底式解析總表的五段（①～⑤）。
+    keyword?: string;
+    chain?: string;
+    decide?: string;
+    memory?: string;
+    trace?: string;
   };
   remedialUrl?: string;
 }
@@ -44,6 +52,8 @@ export interface Unit {
   dueAt: string;
   bankVersion: string;
   activities: Activity[];
+  // 單元（大分類，例如「血液」）；次單元＝這個 Unit 本身。純顯示用分組，沒有值時平鋪顯示。
+  group?: string;
 }
 export interface Course {
   id: string;
@@ -108,6 +118,8 @@ export interface Progress {
     { best: number; attempts: number; updatedAt: number; wrong?: Record<string, string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
+  // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
+  attempted?: Record<string, Record<string, true>>;
 }
 export interface Stat {
   students: number;
@@ -171,11 +183,12 @@ export function youtubeId(raw: string) {
     return null;
   }
 }
+export const MAX_BANK_QUESTIONS = 500;
 export function validateQuestions(qs: Question[]) {
   const errors: string[] = [];
   const ids = new Set<string>();
   if (!Array.isArray(qs)) return ['題庫必須是陣列'];
-  if (!qs.length || qs.length > 100) errors.push('每個单元需 1–100 題；更多題目請拆分單元。');
+  if (!qs.length || qs.length > MAX_BANK_QUESTIONS) errors.push('每個单元需 1–500 題；更多題目請拆分次單元。');
   qs.forEach((q, i) => {
     if (!q || typeof q !== 'object') { errors.push(`第 ${i + 1} 題格式無效`); return; }
     if (q.questionType === 'image' && !q.image) errors.push(`第 ${i + 1} 題缺少圖片`);
@@ -193,13 +206,20 @@ export function validateQuestions(qs: Question[]) {
   });
   return errors;
 }
-export function validateRoster(rows: Roster[]) {
+// 正式學生一律為學校信箱；測試帳號由後端 config/testStudents 白名單提供。
+const SCHOOL_EMAIL = /^[^@\s]+@ctcn\.edu\.tw$/;
+export function allowedEmail(email: unknown, testEmails: readonly string[] = []) {
+  const value = String(email ?? '').trim().toLowerCase();
+  if (!value) return false;
+  return SCHOOL_EMAIL.test(value) || testEmails.some((e) => String(e).trim().toLowerCase() === value);
+}
+export function validateRoster(rows: Roster[], testEmails: readonly string[] = []) {
   const errors: string[] = [];
   const emails = new Set<string>(),
     ids = new Set<string>();
   rows.forEach((r, i) => {
     if (
-      !/^[^@\s]+@ctcn\.edu\.tw$/.test(r.email) ||
+      !allowedEmail(r.email, testEmails) ||
       !r.name ||
       !safeId(r.studentId) ||
       !safeCode(r.classId)
@@ -247,7 +267,36 @@ export function applyAttempt(p: Progress, a: Attempt): Progress {
         updatedAt: a.receivedAt || a.clientAt,
       },
     },
+    attempted: mergeAttempted(p.attempted, a.unitId, a.answers.map((x) => x.questionId)),
   };
+}
+// 抽題練習「已考過優先」：把這次出現過的題目 ID 併入紀錄，只增不減，不分題庫版本。
+export function mergeAttempted(
+  attempted: Progress['attempted'],
+  unitId: string,
+  questionIds: readonly string[],
+): Progress['attempted'] {
+  const unit = { ...(attempted?.[unitId] || {}) };
+  for (const id of questionIds) unit[id] = true;
+  return { ...attempted, [unitId]: unit };
+}
+export function shuffle<T>(items: T[]): T[] {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+// 抽題練習排序（仿 v1.9 orderQuestionsForQuiz）：未考過的題目洗牌排前面，考過的洗牌排後面；
+// 不是「輪完重洗」——題庫全部考過一輪之後就自然退化成純隨機，不會主動重置。
+export function orderForPractice<T extends { id: string }>(
+  qs: T[],
+  attemptedIds: ReadonlySet<string>,
+): T[] {
+  const unseen = qs.filter((q) => !attemptedIds.has(q.id));
+  const seen = qs.filter((q) => attemptedIds.has(q.id));
+  return [...shuffle(unseen), ...shuffle(seen)];
 }
 export interface Seen {
   first: Partial<Record<Mode | 'all', Answer>>;

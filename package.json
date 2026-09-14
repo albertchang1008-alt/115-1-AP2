@@ -1,6 +1,6 @@
 {
   "name": "course-platform",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "tsx --test tests/*.test.ts",
     "version:sync": "node scripts/version.mjs",
     "version:check": "node scripts/version.mjs --check",
-    "check": "npm test && npm run build && npm --prefix functions run build"
+    "check": "npm test && npm run build && npm --prefix functions run build && npm --prefix functions test"
   },
   "dependencies": {
     "firebase": "^11.0.0",

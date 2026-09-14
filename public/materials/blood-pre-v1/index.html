@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>課前必要記憶｜血液</title>
+<style>
+:root{
+  --bg:#faf8f7; --card:#fff; --ink:#1b1718; --dim:#6b6260; --line:#e6dfdd;
+  --accent:#a3242c; --accent-soft:#fdeced; --ok:#1d7a4f; --ok-soft:#e7f5ee;
+  --warn:#8a5a00; --warn-soft:#fdf3e0; --shadow:0 1px 2px rgba(27,23,24,.06),0 4px 14px rgba(27,23,24,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#171415; --card:#211d1e; --ink:#f2eceb; --dim:#a89f9d; --line:#352f30;
+  --accent:#e8848a; --accent-soft:#3a2124; --ok:#7ddcaa; --ok-soft:#172f23;
+  --warn:#e8bd6d; --warn-soft:#332818; --shadow:0 1px 2px rgba(0,0,0,.4);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Helvetica Neue",sans-serif;
+  -webkit-text-size-adjust:100%}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 64px}
+header{margin-bottom:24px}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+h1{font-size:clamp(22px,5vw,30px);margin:.2em 0 .3em;letter-spacing:-.01em}
+.lede{color:var(--dim);font-size:15px;margin:0}
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:16px -16px 0;padding:10px 16px}
+.bar-in{display:flex;align-items:center;gap:12px;max-width:860px;margin:0 auto}
+.track{flex:1;height:7px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);transition:width .4s ease}
+.bar b{font-variant-numeric:tabular-nums;font-size:13px;color:var(--dim);font-weight:600;white-space:nowrap}
+section{margin-top:34px}
+h2{font-size:19px;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+h2 .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;
+  background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:800;flex:none}
+.hint{color:var(--dim);font-size:13.5px;margin:0 0 14px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.flip{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  perspective:900px;min-height:112px}
+.flip .in{position:relative;width:100%;height:100%;min-height:112px;transition:transform .45s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d}
+.flip[aria-pressed=true] .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:13px;
+  background:var(--card);box-shadow:var(--shadow);padding:13px 14px;display:flex;flex-direction:column;justify-content:center}
+.face.back{transform:rotateY(180deg);background:var(--accent-soft);border-color:transparent}
+.q{font-size:14.5px;color:var(--dim);line-height:1.5}
+.a{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.a small{display:block;font-size:12.5px;font-weight:500;color:var(--dim);margin-top:5px;letter-spacing:0}
+.tap{font-size:11.5px;color:var(--dim);margin-top:auto;padding-top:8px;opacity:.75}
+.tree{border:1px solid var(--line);border-radius:13px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.node{border-top:1px solid var(--line)}
+.tree>.node:first-child{border-top:0}
+.node>button{width:100%;background:none;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  padding:13px 15px;display:flex;align-items:center;gap:10px}
+.node>button:hover{background:var(--accent-soft)}
+.chev{flex:none;width:15px;color:var(--dim);transition:transform .2s}
+.node[open] .chev{transform:rotate(90deg)}
+.node .lbl{font-weight:650}
+.node .sub{color:var(--dim);font-size:13px;font-weight:400;margin-left:auto;text-align:right}
+.kids{display:none;padding:0 15px 14px 40px}
+.node[open] .kids{display:block}
+.kids li{margin:6px 0;font-size:14.5px}
+.kids b{color:var(--accent)}
+.seq{border:1px solid var(--line);border-radius:13px;background:var(--card);box-shadow:var(--shadow);
+  padding:15px;margin-bottom:11px}
+.seq h3{margin:0 0 3px;font-size:15.5px}
+.seq .src{font-size:12px;color:var(--dim);margin:0 0 11px}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.step{border:1px dashed var(--line);border-radius:9px;padding:7px 11px;font-size:14px;color:var(--dim);
+  background:none;cursor:pointer;font-family:inherit;transition:.2s}
+.step.on{border-style:solid;border-color:transparent;background:var(--ok-soft);color:var(--ok);font-weight:650}
+.arrow{color:var(--line);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--card);
+  border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}
+th,td{padding:10px 12px;text-align:left;border-top:1px solid var(--line)}
+thead th{background:var(--accent-soft);color:var(--accent);font-size:13px;border-top:0}
+tbody tr:hover{background:var(--accent-soft)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.quiz{border:1px solid var(--line);border-radius:13px;background:var(--card);box-shadow:var(--shadow);padding:17px}
+.qnum{font-size:12.5px;color:var(--accent);font-weight:700;letter-spacing:.05em}
+.qtext{font-size:16.5px;font-weight:650;margin:6px 0 14px;line-height:1.6}
+.opts{display:grid;gap:8px}
+.opt{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 13px;font:inherit;
+  color:inherit;text-align:left;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt:disabled{cursor:default;opacity:.85}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:650}
+.opt.wrong{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.fb{margin-top:13px;padding:12px 13px;border-radius:10px;font-size:14px;display:none;line-height:1.65}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.no{background:var(--warn-soft);color:var(--warn)}
+.qfoot{display:flex;align-items:center;gap:12px;margin-top:15px}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;
+  font-weight:650;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+.score{margin-left:auto;font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.done{text-align:center;padding:30px 18px}
+.done .big{font-size:44px;line-height:1}
+.done h3{margin:10px 0 6px;font-size:21px}
+.done p{color:var(--dim);margin:0 0 16px;font-size:14.5px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">課前必要記憶</div>
+  <h1>血液</h1>
+  <p class="lede">上課前十分鐘。這裡只放「先記住才聽得懂課」的東西——數值、分類、順序。機轉留到課後那份。</p>
+</header>
+
+<div class="bar"><div class="bar-in">
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <b id="pct">0%</b>
+</div></div>
+
+<section>
+  <h2><span class="n">1</span>核心數值</h2>
+  <p class="hint">點卡片翻面看答案。這些數字考試直接考，先眼熟。</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>血球家族</h2>
+  <p class="hint">分類講錯，後面整章都會錯。點開每一層。</p>
+  <div class="tree" id="tree"></div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>四條必背順序</h2>
+  <p class="hint">依序點出每一步。點錯會回到第一步。</p>
+  <div id="seqs"></div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>ABO 速查</h2>
+  <p class="hint">凝集原在紅血球上，凝集素在血漿裡——這兩個位置先分清楚。</p>
+  <div class="tw"><table>
+    <thead><tr><th>血型</th><th>凝集原（紅血球）</th><th>凝集素（血漿）</th><th>可捐給</th><th>可接受</th></tr></thead>
+    <tbody>
+      <tr><td><b>A</b></td><td>A</td><td>抗 B</td><td>A、AB</td><td>A、O</td></tr>
+      <tr><td><b>B</b></td><td>B</td><td>抗 A</td><td>B、AB</td><td>B、O</td></tr>
+      <tr><td><b>AB</b></td><td>A、B</td><td>無</td><td>AB</td><td>全部（萬能受血者）</td></tr>
+      <tr><td><b>O</b></td><td>無</td><td>抗 A、抗 B</td><td>全部（萬能供血者）</td><td>O</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2><span class="n">5</span>過關自測</h2>
+  <p class="hint">十題全對才算完成。答錯會告訴你錯在哪，然後重來一輪。</p>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<footer>
+  內容依《新編生理學》第五章、《新編解剖學》第 10 章與第 12 章整理，每個記憶點都對應一張已審知識卡。
+  <br>課程平台 1.0 互動教材｜blood-pre-v1
+</footer>
+</div>
+
+<script src="../course-learning.js"></script>
+<script>
+(function(){
+"use strict";
+var CL = window.CourseLearning || {explore:function(){},answer:function(){},hint:function(){},complete:function(){}};
+var GA4_ID = "";                       // 填入後才啟用；只送去識別事件
+function track(name, params){
+  if(!GA4_ID || typeof window.gtag !== "function") return;
+  window.gtag("event", name, Object.assign({unit:"blood", phase:"pre"}, params||{}));
+}
+
+/* ---------- 資料 ---------- */
+var CARDS = [
+  {id:"blood-function",     q:"血液約佔體重多少？",           a:"8%",            s:"男 5～6 L，女 4～5 L"},
+  {id:"blood-composition",  q:"血漿與定形成分的比例？",       a:"55 : 45",       s:"血比容＝定形成分佔比，約 45%"},
+  {id:"plasma",             q:"血漿的水與溶質比例？",         a:"92% 水 ＋ 8% 溶質", s:"蛋白：白蛋白 55%、球蛋白 38%、纖維蛋白原 7%"},
+  {id:"red-blood-cell",     q:"紅血球數目（男／女）？",       a:"540萬 ／ 480萬", s:"每 mm³；男較多因代謝率較高"},
+  {id:"red-blood-cell",     q:"紅血球直徑與壽命？",           a:"7.5 μm ／ 120 天", s:"雙凹圓盤狀、無細胞核"},
+  {id:"hemoglobin",         q:"一個血紅素能帶幾個氧？",       a:"4 個",          s:"4 個含鐵血基質各結合 1 個 O₂"},
+  {id:"hemoglobin",         q:"每 100 ml 血液的血紅素量？",   a:"14～16 g",      s:"每公克 Hb 約攜 1.34 ml 氧"},
+  {id:"white-blood-cell",   q:"白血球總數？",                 a:"5,000～9,000",  s:"每 mm³；有核、無血紅素"},
+  {id:"neutrophil",         q:"哪一種白血球最多？佔比？",     a:"嗜中性球 60～70%", s:"淋巴 20～25%、單核 3～8%、嗜酸 2～4%、嗜鹼 0.5～1%"},
+  {id:"platelet",           q:"血小板數目與壽命？",           a:"25～40 萬 ／ 5～9 天", s:"每 mm³；巨核細胞碎裂而來、無核"},
+  {id:"blood-function",     q:"血液的 pH 與溫度？",           a:"7.35～7.45 ／ 38°C", s:"黏滯性 4.5～5.5（水為 1）"},
+  {id:"lymph-trunk-duct",   q:"胸管起始於哪裡？",             a:"第 2 腰椎前的乳糜池", s:"體內最粗大的淋巴管"}
+];
+
+var TREE = [
+  {id:"formed-elements", lbl:"定形成分（血球）", sub:"三大類", kids:[
+     "<b>紅血球</b>　540/480 萬 ｜ 運送 O₂ 與 CO₂",
+     "<b>白血球</b>　5,000～9,000 ｜ 防禦",
+     "<b>血小板</b>　25～40 萬 ｜ 凝血"]},
+  {id:"granulocyte", lbl:"顆粒白血球", sub:"三成員", kids:[
+     "<b>嗜中性球</b>　60～70%，吞噬作用",
+     "<b>嗜酸性球</b>　2～4%，抗原抗體複合物、<b>釋放</b>抗組織胺",
+     "<b>嗜鹼性球</b>　0.5～1%，含肝素與<b>組織胺</b>（最少）"]},
+  {id:"agranulocyte", lbl:"無顆粒白血球", sub:"兩成員", kids:[
+     "<b>淋巴球</b>　20～25%，免疫（B 轉漿細胞才產抗體）",
+     "<b>單核球</b>　3～8%，<b>進入組織後</b>才變巨噬細胞"]},
+  {id:"plasma", lbl:"血漿蛋白", sub:"三種", kids:[
+     "<b>白蛋白</b>　55%，維持膠體滲透壓",
+     "<b>球蛋白</b>　38%，抗體",
+     "<b>纖維蛋白原</b>　7%，凝血"]},
+  {id:"lymphatic-system-function", lbl:"淋巴組織與器官", sub:"四個", kids:[
+     "<b>淋巴結</b>　過濾淋巴、造淋巴球、合成抗體（皮質／髓質）",
+     "<b>扁桃體</b>　咽、腭、舌三種；<b>無</b>輸入輸出淋巴管",
+     "<b>脾臟</b>　最大淋巴組織，紅髓／白髓；<b>不能過濾淋巴</b>",
+     "<b>胸腺</b>　上縱隔腔，分泌胸腺素助 <b>T 細胞</b>成熟"]}
+];
+
+var SEQS = [
+  {id:"hemostasis", t:"止血三步驟", src:"生理 CH05 p.5-15",
+   steps:["血管痙攣","血小板栓塞形成","血液凝固"]},
+  {id:"coagulation-mechanism", t:"凝血三階段", src:"生理 CH05 p.5-18",
+   steps:["凝血酶原致活素","凝血酶","纖維蛋白"]},
+  {id:"erythropoiesis", t:"紅血球分化末段", src:"生理 CH05 p.5-5",
+   steps:["正紅血球母細胞","核排出","網狀紅血球","成熟紅血球"]},
+  {id:"lymph-circulation", t:"淋巴回流（左側）", src:"生理 CH05 p.5-27",
+   steps:["微淋巴管","淋巴結","乳糜池","胸管","左鎖骨下靜脈"]}
+];
+
+var QUIZ = [
+  {id:"blood-q01", q:"血液約佔體重的多少？", o:["5%","8%","12%","20%"], a:1,
+   why:"血液約佔體重 8%；男性血量 5～6 L、女性 4～5 L。"},
+  {id:"blood-q02", q:"下列哪一項是成熟紅血球的特徵？", o:["有細胞核","含血紅素但無核","有顆粒與分葉核","由巨核細胞碎裂而來"], a:1,
+   why:"紅血球無核、有血紅素；白血球剛好相反（有核、無血紅素）。"},
+  {id:"blood-q03", q:"一個血紅素分子可以攜帶幾個氧分子？", o:["1","2","4","8"], a:2,
+   why:"血紅素有 4 個含鐵血基質，每個結合 1 個 O₂，所以是 4 個。"},
+  {id:"blood-q04", q:"數量最多與最少的白血球分別是？", o:["淋巴球／單核球","嗜中性球／嗜鹼性球","嗜中性球／嗜酸性球","單核球／嗜鹼性球"], a:1,
+   why:"嗜中性球 60～70% 最多，嗜鹼性球 0.5～1% 最少。"},
+  {id:"blood-q05", q:"止血的三個步驟依序是？", o:["血液凝固→血管痙攣→血小板栓塞","血管痙攣→血小板栓塞→血液凝固","血小板栓塞→血管痙攣→血液凝固","血管痙攣→血液凝固→血小板栓塞"], a:1,
+   why:"先痙攣減少出血，再堆血小板栓子，最後纖維蛋白把它織緊。"},
+  {id:"blood-q06", q:"O 型血的人，血漿中有哪些凝集素？", o:["抗 A","抗 B","抗 A 與抗 B","都沒有"], a:2,
+   why:"O 型紅血球無凝集原，血漿同時有抗 A 與抗 B——所以是萬能供血者但只能接受 O 型。"},
+  {id:"blood-q07", q:"血小板的來源是？", o:["血胚細胞直接分裂","巨核細胞的細胞質碎裂","淋巴母細胞","網狀紅血球"], a:1,
+   why:"血小板是紅骨髓中巨核細胞碎裂的細胞碎片，不是完整細胞，也沒有核。"},
+  {id:"blood-q08", q:"關於嗜酸性球與嗜鹼性球，何者正確？", o:["嗜酸性球含組織胺引起過敏","嗜鹼性球釋放抗組織胺解除過敏","嗜鹼性球含肝素與組織胺","兩者功能相同"], a:2,
+   why:"嗜鹼性球含肝素（抗凝）與組織胺（引起過敏）；嗜酸性球則釋放抗組織胺物質解除過敏，方向相反。"},
+  {id:"blood-q09", q:"紅血球生成需要哪些原料？", o:["鐵、胺基酸、維生素 B12","鈣、維生素 K","鈉、鉀","維生素 C、葉黃素"], a:0,
+   why:"缺鐵→缺鐵性貧血，缺 B12→惡性貧血。鈣與維生素 K 是凝血要用的，別放錯。"},
+  {id:"blood-q10", q:"下列哪個器官「不能過濾淋巴」？", o:["淋巴結","脾臟","扁桃體","胸腺"], a:1,
+   why:"脾臟是最大的淋巴組織，但沒有輸入淋巴管，所以過濾的是血液不是淋巴。"}
+];
+
+/* ---------- 進度 ---------- */
+var TOTAL = CARDS.length + TREE.length + SEQS.length + 1;  // +1 = 自測通過
+var seen = {};
+function mark(id){
+  if(seen[id]) return;
+  seen[id] = 1; CL.explore(id); track("explore", {node:id}); draw();
+}
+function draw(){
+  var n = Object.keys(seen).length, p = Math.round(n / TOTAL * 100);
+  document.getElementById("fill").style.width = p + "%";
+  document.getElementById("pct").textContent = p + "%";
+}
+
+/* ---------- 1 數值卡 ---------- */
+var box = document.getElementById("cards");
+CARDS.forEach(function(c, i){
+  var b = document.createElement("button");
+  b.className = "flip"; b.type = "button"; b.setAttribute("aria-pressed","false");
+  b.innerHTML = '<span class="in">' +
+    '<span class="face"><span class="q">' + c.q + '</span><span class="tap">點一下看答案</span></span>' +
+    '<span class="face back"><span class="a">' + c.a + '<small>' + c.s + '</small></span></span></span>';
+  b.addEventListener("click", function(){
+    var on = b.getAttribute("aria-pressed") === "true";
+    b.setAttribute("aria-pressed", on ? "false" : "true");
+    if(!on) mark("card:" + i + ":" + c.id);
+  });
+  box.appendChild(b);
+});
+
+/* ---------- 2 分類樹 ---------- */
+var tr = document.getElementById("tree");
+TREE.forEach(function(n){
+  var d = document.createElement("div");
+  d.className = "node";
+  d.innerHTML = '<button type="button"><span class="chev">▸</span>' +
+    '<span class="lbl">' + n.lbl + '</span><span class="sub">' + n.sub + '</span></button>' +
+    '<ul class="kids">' + n.kids.map(function(k){return "<li>" + k + "</li>";}).join("") + '</ul>';
+  d.querySelector("button").addEventListener("click", function(){
+    var open = d.hasAttribute("open");
+    if(open) d.removeAttribute("open"); else { d.setAttribute("open",""); mark(n.id); }
+  });
+  tr.appendChild(d);
+});
+
+/* ---------- 3 順序 ---------- */
+var sw = document.getElementById("seqs");
+SEQS.forEach(function(s){
+  var wrap = document.createElement("div");
+  wrap.className = "seq";
+  var order = s.steps.map(function(x,i){return i;});
+  for(var i = order.length - 1; i > 0; i--){ var j = Math.floor(Math.random()*(i+1)); var t=order[i]; order[i]=order[j]; order[j]=t; }
+  wrap.innerHTML = '<h3>' + s.t + '</h3><p class="src">' + s.src + '</p><div class="steps"></div>';
+  var row = wrap.querySelector(".steps"), need = 0;
+  order.forEach(function(idx){
+    var btn = document.createElement("button");
+    btn.className = "step"; btn.type = "button"; btn.textContent = s.steps[idx]; btn.dataset.i = idx;
+    btn.addEventListener("click", function(){
+      if(+btn.dataset.i === need){
+        btn.classList.add("on"); btn.disabled = true; need++;
+        if(need === s.steps.length) mark(s.id);
+      } else {
+        need = 0;
+        row.querySelectorAll(".step").forEach(function(x){ x.classList.remove("on"); x.disabled = false; });
+        btn.animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}], {duration:220});
+      }
+    });
+    row.appendChild(btn);
+  });
+  sw.appendChild(wrap);
+});
+
+/* ---------- 5 自測 ---------- */
+var qi = 0, right = 0, firstTry = {}, quiz = document.getElementById("quiz");
+function renderQ(){
+  var q = QUIZ[qi];
+  quiz.innerHTML = '<div class="qnum">第 ' + (qi+1) + ' ／ ' + QUIZ.length + ' 題</div>' +
+    '<p class="qtext">' + q.q + '</p><div class="opts"></div>' +
+    '<div class="fb" id="fb"></div>' +
+    '<div class="qfoot"><button class="btn" id="next" disabled>下一題</button>' +
+    '<span class="score">答對 ' + right + ' ／ ' + qi + '</span></div>';
+  var opts = quiz.querySelector(".opts");
+  q.o.forEach(function(text, i){
+    var b = document.createElement("button");
+    b.className = "opt"; b.type = "button"; b.textContent = text;
+    b.addEventListener("click", function(){ pick(i, q, opts); });
+    opts.appendChild(b);
+  });
+  quiz.querySelector("#next").addEventListener("click", function(){
+    qi++;
+    if(qi < QUIZ.length) renderQ(); else finish();
+  });
+}
+function pick(i, q, opts){
+  var ok = i === q.a;
+  opts.querySelectorAll(".opt").forEach(function(b, k){
+    b.disabled = true;
+    if(k === q.a) b.classList.add("right");
+    else if(k === i) b.classList.add("wrong");
+  });
+  if(!firstTry[q.id]){ firstTry[q.id] = 1; CL.answer(q.id, ok); track("answer", {q:q.id, correct:ok}); }
+  if(ok) right++;
+  var fb = quiz.querySelector("#fb");
+  fb.className = "fb show " + (ok ? "ok" : "no");
+  fb.textContent = (ok ? "對。" : "再看一次：") + q.why;
+  quiz.querySelector(".score").textContent = "答對 " + right + " ／ " + (qi + 1);
+  quiz.querySelector("#next").disabled = false;
+  quiz.querySelector("#next").textContent = (qi === QUIZ.length - 1) ? "看結果" : "下一題";
+}
+function finish(){
+  var perfect = right === QUIZ.length;
+  if(perfect){
+    mark("quiz-passed");
+    CL.complete(); track("complete", {score:right});
+    quiz.innerHTML = '<div class="done"><div class="big">🩸</div><h3>十題全對，課前準備完成</h3>' +
+      '<p>這些是聽課的地基。上完課記得回來做「課後全面統整」那一份。</p>' +
+      '<button class="btn ghost" id="again">再練一次</button></div>';
+  } else {
+    quiz.innerHTML = '<div class="done"><div class="big">📖</div><h3>答對 ' + right + ' ／ ' + QUIZ.length + '</h3>' +
+      '<p>要十題全對才算完成。剛剛答錯的地方回上面的卡片再看一次，然後重來一輪。</p>' +
+      '<button class="btn" id="again">再來一次</button></div>';
+  }
+  quiz.querySelector("#again").addEventListener("click", function(){ qi = 0; right = 0; renderQ(); });
+}
+renderQ(); draw();
+})();
+</script>
+</body>
+</html>

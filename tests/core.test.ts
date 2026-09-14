@@ -6,6 +6,8 @@ import {
   completion,
   emptyProgress,
   grade,
+  mergeAttempted,
+  orderForPractice,
   validateQuestions,
   validateRoster,
   youtubeId,
@@ -112,4 +114,37 @@ test('另一位學生獨立計入首次', () => {
 test('沒有成績不視為零分達標', () => {
   const c = { units: [{ id: 'u', required: true, threshold: 0 }] } as Course;
   assert.deepEqual(completion(c, emptyProgress()), { done: 0, total: 1 });
+});
+test('每單元上限放寬到 500 題', () => {
+  const many = Array.from({ length: 500 }, (_, i) => ({ ...q, id: 'q' + i }));
+  assert.deepEqual(validateQuestions(many), []);
+  assert.ok(validateQuestions([...many, { ...q, id: 'q500' }]).length);
+});
+test('完整測驗與抽題練習都會記錄已考過，複習模式不會', () => {
+  let p = applyAttempt(emptyProgress(), attempt({ score: 80 }));
+  assert.deepEqual(p.attempted?.u, { q1: true });
+  p = emptyProgress();
+  p = applyAttempt(p, attempt({ full: false, score: 0 }));
+  assert.deepEqual(p.attempted?.u, { q1: true });
+  p = emptyProgress();
+  p = applyAttempt(p, attempt({ mode: 'review', score: 0 }));
+  assert.equal(p.attempted, undefined);
+});
+test('mergeAttempted 只增不減，跨題庫版本保留', () => {
+  let attempted = mergeAttempted(undefined, 'u1', ['q1', 'q2']);
+  attempted = mergeAttempted(attempted, 'u1', ['q2', 'q3']);
+  attempted = mergeAttempted(attempted, 'u2', ['q9']);
+  assert.deepEqual(attempted, { u1: { q1: true, q2: true, q3: true }, u2: { q9: true } });
+});
+test('抽題練習排序：未考過的題目一定排在已考過的前面', () => {
+  const qs = Array.from({ length: 20 }, (_, i) => ({ id: 'q' + i }));
+  const attemptedIds = new Set(['q0', 'q1', 'q2', 'q3', 'q4']);
+  for (let trial = 0; trial < 20; trial++) {
+    const ordered = orderForPractice(qs, attemptedIds);
+    assert.equal(ordered.length, qs.length);
+    assert.deepEqual(new Set(ordered.map((q) => q.id)), new Set(qs.map((q) => q.id)));
+    const firstSeenIndex = ordered.findIndex((q) => attemptedIds.has(q.id));
+    const lastUnseenIndex = ordered.map((q) => !attemptedIds.has(q.id)).lastIndexOf(true);
+    assert.ok(firstSeenIndex > lastUnseenIndex, '已考過的題目不應排在未考過的題目前面');
+  }
 });

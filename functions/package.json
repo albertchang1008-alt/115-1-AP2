@@ -1,6 +1,6 @@
 {
   "name": "course-platform-functions",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "main": "lib/functions/src/index.js",
   "engines": {
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "node scripts/check-runtime.cjs && tsc && node scripts/check-entry.cjs",
-    "gcp-build": "node scripts/check-runtime.cjs && node scripts/check-entry.cjs"
+    "gcp-build": "node scripts/check-runtime.cjs && node scripts/check-entry.cjs",
+    "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@google-cloud/firestore": "^9.1.0",
