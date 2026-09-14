@@ -19,8 +19,8 @@
 
 ---
 
-目前版本：1.2.0（`feature/1.2.0-bank-import`；`main` 仍為 1.1.2）。
-尚未合併、尚未部署。本次接手發現並修正發布前缺口，驗證結果見下方。
+目前版本：1.2.0（`feature/1.2.0-bank-import` 已上傳 GitHub；`main` 仍為 1.1.2）。
+後端 Functions 已部署，待將分支合併進 `main` 觸發前端發布。
 
 ## 固定決策
 
@@ -39,7 +39,7 @@
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
 14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④與最後預設收合的「傳統解析」，不顯示⑤追溯原子卡；教師可看①～⑤，傳統解析直接展開。現行程式的蘇格拉底式各段仍為 details 收合，尚未實作教師各段全部展開。
 
-## 1.2.0：題庫接軌（現況：已實作，未合併、未部署）
+## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
 背景與完整設計見 `docs/BANK_IMPORT_PROPOSAL.md`（建議書）與
 `docs/QUESTION_BANK_PLAN.md`（欄位對照與規畫，已更新到 1.2.0）。
@@ -76,20 +76,18 @@
 
 ## Git 與部署現況（2026-09-14）
 
-- `feature/1.2.0-bank-import`：本機分支，領先 `main` 6 個 commit（本機 HEAD `527561c`），**尚未 push 到 GitHub**（origin 上
-  還看不到這個分支）
+- `feature/1.2.0-bank-import`：已透過 GitHub Desktop 發布到 GitHub；本機最新 HEAD 為 `fa660a8`，尚未合併到 `main`。
 - 本機 `main` 領先 `origin/main` 1 個 commit（`1.1.2：新增測試學生帳號白名單`），
   這個是更早以前就沒推的，跟本次 1.2.0 工作無關，一併記錄避免被誤會
 - 部署機制：push 到 `main` 會觸發 `.github/workflows/pages.yml` 自動重建並
   上線前端網站；後端 Firebase Cloud Functions **不會自動部署**，要手動
   `npx firebase-tools deploy --only functions`
-- 這台電腦的 Firebase CLI **尚未登入**（`npx firebase-tools login:list` 顯示
-  無帳號），要先手動跑過一次 `npx firebase-tools login` 才能部署 Functions
-- `scripts/deploy.sh` 已修正；本次實際執行及重試的 Firebase 專案驗證與完整 `npm run check` 均通過，但都停止於功能分支備份推送。GitHub HTTPS 憑證先指向已刪除的暫存 gh；移除後 macOS Keychain 仍無 GitHub 寫入憑證，SSH 連線埠 22 也逾時。因此 Functions、origin/main 與 GitHub Pages 均未變更。完成 GitHub HTTPS token／Keychain 登入後，在乾淨工作區重跑腳本即可；腳本固定目標 ap2-7ed91，先部署 Functions 成功才快轉推送同一 commit 到 origin/main，不切換或改動本機 main。Pages 是否上線須另外確認 Actions。
+- Firebase CLI 可存取 `ap2-7ed91`。2026-09-14 已直接部署 Functions：原始碼上傳成功，29 個 Node.js 22 函式均已更新到 `asia-east1`，並以 `functions:list` 唯讀確認。GitHub HTTPS 的命令列寫入憑證仍缺失，但 GitHub Desktop 可正常發布分支。
+- `scripts/deploy.sh` 已修正為先預檢、測試與分支備份，再部署 Functions，最後快轉推送遠端 main。由於命令列 GitHub 憑證阻塞，本次採 GitHub Desktop 發布分支、CLI 部署 Functions 的等價順序；待以 Desktop 合併分支並推送 main，Pages 才會開始發布。
 
 ## Codex 接手狀態（2026-09-14）
 
-- 分支 `feature/1.2.0-bank-import`，HEAD `527561c`；本次修改尚未 commit，未 push、未合併、未部署。
+- 分支 `feature/1.2.0-bank-import`，HEAD `fa660a8`；已發布到 GitHub、未合併。Functions 已部署，前端尚未發布。
 - 修正交卷仍只接受 100 題的遺漏，與題庫共用 `MAX_BANK_QUESTIONS = 500`；請求大小上限調為 300 KB，容納長題目 ID 的 500 題答案。
 - 修正題序空白被解析成 `order: undefined`，避免 Firestore 拒絕整批寫入；非法題序回報列號。
 - 實際版本檔、套件、README 與開發紀錄原仍為 1.1.2，本輪全部同步 1.2.0。
@@ -97,13 +95,13 @@
 - 完整檢查通過，無需未改動就反覆重跑；驗證範圍不包含真實 Google Sheet、Firebase Emulator 或正式端到端流程。
 - 工作區原有未追蹤 `Claude outputs/`，本輪未讀取或更動；不應未確認就加入提交。
 - 部署腳本修正已完成；`bash -n scripts/deploy.sh` 與 `node --test scripts/deploy.test.cjs` 通過。10 個情境使用暫存 Git 倉庫及模擬 npm／Firebase，涵蓋成功順序、取消、憑證／專案失敗、髒工作區、detached HEAD、main 分歧、測試／後端／main 推送失敗；未連線雲端，未重跑無關的平台完整測試。
-- 本次已提交 `5aa4f37`（題庫接軌與安全部署腳本）。實際部署驗證重跑完整檢查：26 項前端／共用測試、前端建置、29 個後端入口、1 項 callable 整合測試皆通過；阻塞原因只在 GitHub 寫入身分，未開始 Functions 部署。既有 `Claude outputs/` 已僅加入本機 `.git/info/exclude`，未刪除、未提交。
+- 本次已提交 `5aa4f37`（題庫接軌與安全部署腳本）、`4e5a99f`、`fa660a8`（交接紀錄）。實際部署前重跑完整檢查：26 項前端／共用測試、前端建置、29 個後端入口、1 項 callable 整合測試皆通過。Functions 部署後也以清單確認；既有 `Claude outputs/` 僅在本機 `.git/info/exclude` 排除，未刪除、未提交。
 - 下一步：教師端大單元分組視覺與真實 Sheet 資料補齊仍待處理。原先列為 1.2.0 範圍外的同考點去重、作廢重算不擅自加入。
 - 先前實驗性 Codex 上下文管理設定請求僅完成當時的能力檢查，未確認寫入或執行期生效；與本次平台修復分開處理，不宣稱已開啟。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- 使用者已授權正式部署；待 GitHub 寫入憑證恢復後重跑 `bash scripts/deploy.sh`。不需另行合併，腳本會以已驗證提交快轉推送遠端 main。
+- 使用者已授權正式部署；後端已完成。下一步用 GitHub Desktop 對 `feature/1.2.0-bank-import` 建立 Pull Request 並合併到 `main`，再確認 GitHub Actions 的 Pages 發布成功。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定
