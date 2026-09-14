@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.2.0（已正式上線；本機另有待部署的 Sheet 匯入規則修正）。
+目前版本：1.2.1（本機待發布；正式環境目前仍為 1.2.0）。
 `feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。
 後端 Functions：2026-09-14 部署過兩次——Codex 那次（29 個函式）之後，又加了「同步時次單元不存在就自動建立單元」的修正（commit `f6137c5`），使用者在自己電腦的 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91` 部署成功（29 個函式全部 Successful update operation，Deploy complete!）。**這個修正現在已經在正式環境生效。**
 本機 `main` 還有 2 個 commit 尚未推上 GitHub（`bd03201` FillCourseAndUnit.gs 修正、`f6137c5` 自動建單元），Functions 已經部署但 GitHub 上的原始碼還沒同步——下一個接手的人／agent 看到 `origin/main` 時要注意這個落差，程式碼實際跑的版本比 GitHub 上看到的新。使用者需要用 GitHub Desktop 推送這 2 個 commit 補上。
@@ -158,7 +158,7 @@
 - 已由使用者提供的公開 Sheet `115-1-AP2課程平台` 核對正式欄位：`題庫`（Q1/Q2）、`序號`、`題目ID`、`單元`、`次單元`、`題目`、`正確答案文字`、`原始答案字母(僅對照)`、選項 A-D、解析與五段解析等。`shared/sheets.ts` 已相容這些欄名；正確答案文字可直接對應選項，`序號` 作穩定題序，`③對答案` 會對應蘇格拉底式第 ③ 段。
 - 改動檔案：`functions/src/index.ts`、`shared/sheets.ts`、`src/App.tsx`、`tests/platform.test.ts`。新增正式格式解析測試；完整驗證通過：前端／共用 27 項、Functions 編譯與 29 個入口、Functions 5 項測試。前端 Vite 建置也通過。
 - 使用者已將正式題庫分頁改名為 `115-1-AP2`、名冊分頁改名為 `班級名冊`（2026-09-15）。本輪新增 `syncRoster` callable 與後台「同步班級名冊」按鈕；一般「同步題庫」不再讀名冊。班級名冊欄位為 `授課班級／學號／姓名／Gmail`，在同一份 Sheet 僅有一個對應課程分頁時會以該分頁名稱作課程代碼，並自動新增名冊中出現的班級代碼。名冊與題庫都比對既有內容做增量同步：無變動不重複寫入、不新建題庫版本。
-- 驗證已更新且全數通過：前端／共用 28 項、Functions 編譯與 29 個入口、Functions 5 項測試、前端 Vite 正式建置。Git 現況：`main` 與 `origin/main` 同在 `dca8a5a`，但本輪 5 個檔案（`functions/src/index.ts`、`shared/sheets.ts`、`src/App.tsx`、`tests/platform.test.ts`、`handoff.md`）尚未提交，因此 GitHub 尚未包含此功能。尚未部署；下一步是先建立提交並由使用者在 GitHub Desktop Push origin，再在含 Firebase 登入憑證的本機 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91`。需確認平台中已存在同代碼且教師可管理的課程。
+- GitHub 已包含題庫／名冊同步功能提交 `eb85e8e`，但它仍是 1.2.0，且正式 Firebase Functions 尚未部署。2026-09-15 已補升版為 1.2.1，版本檔、README、開發紀錄與交接均已同步；這一版尚未提交或推送。下一步是提交並用 GitHub Desktop Push origin，確認 Pages workflow 成功，再在含 Firebase 登入憑證的本機 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91`。需確認平台中已存在同代碼且教師可管理的課程。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
