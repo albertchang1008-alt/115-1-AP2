@@ -222,7 +222,8 @@ export default function App() {
     [creating, setCreating] = useState(false),
     [copySource, setCopySource] = useState<Course | undefined>(),
     [dirty, setDirty] = useState(false),
-    [termFilter, setTermFilter] = useState('');
+    [termFilter, setTermFilter] = useState(''),
+    [testEmails, setTestEmails] = useState<string[]>([]);
   const [preview, setPreview] = useState<{
       api: API;
       course: Course;
@@ -250,6 +251,7 @@ export default function App() {
       const data = await service.call('bootstrap');
       setProfile(data.profile);
       setCourses(data.courses);
+      setTestEmails(Array.isArray(data.testEmails) ? data.testEmails : []);
       setCourseId((old) => old || data.courses[0]?.id || '');
     } catch (e) {
       setError((e as Error).message);
@@ -641,7 +643,7 @@ export default function App() {
           ) : tab === 'bank' ? (
             <Bank key={course.id} course={course} api={api} save={save} notify={notify} />
           ) : tab === 'roster' ? (
-            <RosterPage key={course.id} course={course} api={api} notify={notify} />
+            <RosterPage key={course.id} course={course} api={api} notify={notify} testEmails={testEmails} />
           ) : tab === 'completion' ? (
             <CompletionPage key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'analysis' ? (
@@ -1387,10 +1389,12 @@ function RosterPage({
   course,
   api,
   notify,
+  testEmails = [],
 }: {
   course: Course;
   api: API;
   notify: (s: string) => void;
+  testEmails?: string[];
 }) {
   const [search, setSearch] = useState(''), [migration, setMigration] = useState<any>(null);
   const [cl, setCl] = useState(course.classIds[0]),
@@ -1484,7 +1488,7 @@ function RosterPage({
                 setImports(r);
                 setErrors([
                   ...parsed.errors.map((e) => e.message),
-                  ...validateRoster(r),
+                  ...validateRoster(r, testEmails),
                   ...(r.length > 200 ? ['每次最多 200 人'] : []),
                 ]);
               }}

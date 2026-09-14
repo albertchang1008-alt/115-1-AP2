@@ -193,13 +193,20 @@ export function validateQuestions(qs: Question[]) {
   });
   return errors;
 }
-export function validateRoster(rows: Roster[]) {
+// 正式學生一律為學校信箱；測試帳號由後端 config/testStudents 白名單提供。
+const SCHOOL_EMAIL = /^[^@\s]+@ctcn\.edu\.tw$/;
+export function allowedEmail(email: unknown, testEmails: readonly string[] = []) {
+  const value = String(email ?? '').trim().toLowerCase();
+  if (!value) return false;
+  return SCHOOL_EMAIL.test(value) || testEmails.some((e) => String(e).trim().toLowerCase() === value);
+}
+export function validateRoster(rows: Roster[], testEmails: readonly string[] = []) {
   const errors: string[] = [];
   const emails = new Set<string>(),
     ids = new Set<string>();
   rows.forEach((r, i) => {
     if (
-      !/^[^@\s]+@ctcn\.edu\.tw$/.test(r.email) ||
+      !allowedEmail(r.email, testEmails) ||
       !r.name ||
       !safeId(r.studentId) ||
       !safeCode(r.classId)

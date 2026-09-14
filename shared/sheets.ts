@@ -6,7 +6,7 @@ export function column(headers: string[], names: string[]) {
 function reader(headers: string[], row: unknown[]) {
   return (...names: string[]) => String(row[column(headers, names)] ?? '').trim();
 }
-export function parseRosterSheet(rows: unknown[][]): Roster[] {
+export function parseRosterSheet(rows: unknown[][], testEmails: readonly string[] = []): Roster[] {
   if (!rows.length) throw Error('名冊分頁沒有欄位');
   const headers = rows[0].map(String);
   for (const aliases of [['課程代碼', '課程', 'courseId'], ['班級代碼', '班級', 'classId'], ['學號', 'studentId'], ['姓名', 'name'], ['學校信箱', 'Gmail', 'email', '信箱']])
@@ -19,7 +19,7 @@ export function parseRosterSheet(rows: unknown[][]): Roster[] {
     if (enabled && !['true', 'false', '1', '0', '是', '否'].includes(enabled)) throw Error(`名冊第 ${i + 2} 列啟用值無效`);
     return { courseId, classId: get('班級代碼', '班級', 'classId'), studentId: get('學號', 'studentId'), name: get('姓名', 'name'), email: get('學校信箱', 'Gmail', 'email', '信箱').toLowerCase(), enabled: !['false', '0', '否'].includes(enabled) };
   });
-  const errors = validateRoster(result);
+  const errors = validateRoster(result, testEmails);
   if (errors.length) throw Error(errors.slice(0, 10).join('；'));
   if (result.length > 3000) throw Error('單次名冊最多 3000 人');
   return result;

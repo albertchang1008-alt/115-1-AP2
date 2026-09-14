@@ -20,6 +20,7 @@ import {
   emptyProgress,
   validateQuestions,
   validateRoster,
+  allowedEmail,
   safeId,
   safeCode,
   applyAttempt,
@@ -51,6 +52,17 @@ function code(v: unknown) {
 function size(data: unknown, max = 300000) {
   if (Buffer.byteLength(JSON.stringify(data)) > max) fail('資料過大，請拆分後再提交');
 }
+// 測試帳號白名單：config/testStudents { emails: ["..."] }。清空即立刻失效。
+let testCache = { at: 0, emails: [] as string[] };
+async function testStudents(): Promise<string[]> {
+  if (Date.now() - testCache.at < 60000) return testCache.emails;
+  const raw = (await db.doc('config/testStudents').get()).data()?.emails;
+  const emails = Array.isArray(raw)
+    ? raw.slice(0, 20).map((e: unknown) => String(e).trim().toLowerCase()).filter(Boolean)
+    : [];
+  testCache = { at: Date.now(), emails };
+  return emails;
+}
 async function identity(req: any) {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const t = req.auth.token;
@@ -64,13 +76,13 @@ async function identity(req: any) {
       classId: '',
       enabled: true,
     };
-  if (
-    t.email_verified !== true ||
-    t.firebase?.sign_in_provider !== 'google.com' ||
-    !String(t.email).endsWith('@ctcn.edu.tw')
-  )
+  const email = String(t.email ?? '').trim().toLowerCase();
+  if (t.email_verified !== true || t.firebase?.sign_in_provider !== 'google.com' || !email)
     throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
-  return { uid: req.auth.uid, email: String(t.email).toLowerCase(), teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true } as any;
+  if (!allowedEmail(email, await testStudents()))
+    throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
+  const test = !allowedEmail(email);
+  return { uid: req.auth.uid, email, teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true, test } as any;
 }
 function enrollmentRef(courseId: string, email: string) {
   return db.doc(`enrollments/${code(courseId)}__${email}`);
@@ -99,7 +111,7 @@ export const bootstrap = onCall(options, async (req) => {
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
     const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), version: VERSION };
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
   }
   const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
   const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
@@ -239,7 +251,7 @@ export const deleteCourse = onCall(options, async (req) => {
   return { ok: true };
 });
 async function writeEnrollments(uid: string, courseId: string, rows: Roster[], migrating = false) {
-  const errors = validateRoster(rows);
+  const errors = validateRoster(rows, await testStudents());
   if (errors.length) fail(errors.join('；'));
   let updated = 0;
   for (let i = 0; i < rows.length; i += 100) {
@@ -810,7 +822,7 @@ async function readSheetRows(sheetId: string, token: string, title: string) {
   return (data.values || []) as unknown[][];
 }
 async function syncRosterFromSheet(sheetId: string, token: string, p: any) {
-  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'));
+  const students = parseRosterSheet(await readSheetRows(sheetId, token, '名冊'), await testStudents());
   const results = [];
   for (const courseId of new Set(students.map((s) => s.courseId!))) {
     try { results.push({ courseId, ...await writeEnrollments(p.uid, courseId, students.filter((s) => s.courseId === courseId)) }); }
