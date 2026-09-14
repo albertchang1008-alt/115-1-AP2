@@ -19,8 +19,10 @@
 
 ---
 
-目前版本：**1.2.0 已正式上線**。`feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。後端 Functions 已部署（Codex 於同日完成，29 個函式，asia-east1）。
-本機 `main` 目前又比 `origin/main` 多 1 個未推送的 commit（見下方「Claude 接手狀態」），是這次新加的自動建單元修正，還沒部署也還沒推上 GitHub。
+目前版本：**1.2.0 已正式上線，含「同步自動建立單元」修正也已部署**。
+`feature/1.2.0-bank-import` 已透過 PR #1 合併進 `main`（合併者：albertchang1008-alt，2026-09-14 22:55 +0800），GitHub Actions「Publish course platform」在合併後的 push 上執行成功（run 34858822150，conclusion: success，2026-09-14T14:56:42Z），前端已重新發布。
+後端 Functions：2026-09-14 部署過兩次——Codex 那次（29 個函式）之後，又加了「同步時次單元不存在就自動建立單元」的修正（commit `f6137c5`），使用者在自己電腦的 Terminal 執行 `npx firebase-tools deploy --only functions --project ap2-7ed91` 部署成功（29 個函式全部 Successful update operation，Deploy complete!）。**這個修正現在已經在正式環境生效。**
+本機 `main` 還有 2 個 commit 尚未推上 GitHub（`bd03201` FillCourseAndUnit.gs 修正、`f6137c5` 自動建單元），Functions 已經部署但 GitHub 上的原始碼還沒同步——下一個接手的人／agent 看到 `origin/main` 時要注意這個落差，程式碼實際跑的版本比 GitHub 上看到的新。使用者需要用 GitHub Desktop 推送這 2 個 commit 補上。
 
 ## 固定決策
 
@@ -135,19 +137,25 @@
   `npm --prefix functions test`（含新舊兩個測試檔）5＋1＝6 項全過。前端
   `vite build` 在這個雲端沙箱副本裡因為原本就沒有同步 `index.html` 等靜態
   檔案而失敗，這是沙箱副本本來就有的限制，不是這次改動造成的，不用理它。
-- Git：commit 已建立在本機 `main` 上（訊息含「syncBankTabFromSheet 自動
-  建立缺少的單元」），但沒有 push——這台裝置沒有 GitHub HTTPS 寫入憑證。
-  **這個改動還沒部署到 Firebase，正式環境目前還是走舊邏輯（單元不存在會
-  報錯）。**
-- 下一步：使用者用 GitHub Desktop 推送 `main`（同時會帶上 FillCourseAndUnit
-  的修正），前端會自動重新發布；接著要另外執行一次
-  `npx firebase-tools deploy --only functions`（或 `scripts/deploy.sh`）
-  才會讓新的自動建單元邏輯真的在正式環境生效。
+- Git：commit 已建立在本機 `main` 上（`f6137c5`），但沒有 push——這台
+  Cowork 沙箱裝置沒有 GitHub HTTPS 寫入憑證，也**沒有 Firebase 登入**（連
+  `firebase login` 本身在這個沙箱裡都連不上驗證伺服器，應該是沙箱網路限制）。
+  這點很重要：**這個沙箱裝置（device_bash）不能拿來部署 Functions**，只能
+  拿來讀寫檔案、跑 git（push 除外）；部署一定要請使用者在他自己電腦「真正
+  的」Terminal 裡執行指令，那邊才有登入過的 Firebase 憑證。
+- 部署已完成：使用者在自己電腦的 Terminal 執行
+  `npx firebase-tools deploy --only functions --project ap2-7ed91`，29 個
+  函式全部 Successful update operation，`Deploy complete!`。**自動建單元的
+  新邏輯已經在正式環境生效**，可以請使用者直接在平台設定重新同步測試。
+- 還沒做：`main` 的 2 個本機 commit（`bd03201`、`f6137c5`）還沒推上
+  GitHub——Functions 已經是新版，但 GitHub 上的原始碼還停在舊版，兩邊不
+  同步。需要使用者用 GitHub Desktop 推送補上，避免下次有人對照 GitHub 上的
+  程式碼時搞錯正式環境實際在跑什麼。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- **需要使用者動作才能讓「自動建單元」生效**：GitHub Desktop 推送 `main`
-  （2 個待推 commit）＋ 手動跑一次 Functions 部署，見上方「Claude 接手狀態」。
+- 「自動建單元」已部署生效（見上方）；還缺**用 GitHub Desktop 推送 main 的
+  2 個本機 commit**，讓 GitHub 上的原始碼跟正式環境一致。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定
