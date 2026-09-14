@@ -19,6 +19,7 @@ import {
   Progress,
   emptyProgress,
   validateQuestions,
+  MAX_BANK_QUESTIONS,
   validateRoster,
   allowedEmail,
   safeId,
@@ -435,7 +436,7 @@ export const submitAttempt = onCall(options, async (req) => {
   id(a.id);
   code(a.unitId);
   id(a.version);
-  size(a, 80000);
+  size(a, 300000);
   const { p, c } = await access(req, a.courseId);
   if (p.teacher) fail('教師請使用不寫入紀錄的前台預覽');
   const unit =
@@ -447,7 +448,7 @@ export const submitAttempt = onCall(options, async (req) => {
     !['quiz', 'flashcard', 'review'].includes(a.mode) ||
     !Array.isArray(a.answers) ||
     !a.answers.length ||
-    a.answers.length > 100 ||
+    a.answers.length > MAX_BANK_QUESTIONS ||
     new Set(a.answers.map((x) => x.questionId)).size !== a.answers.length ||
     !Number.isFinite(a.duration) ||
     a.duration < 0

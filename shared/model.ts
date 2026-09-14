@@ -183,11 +183,12 @@ export function youtubeId(raw: string) {
     return null;
   }
 }
+export const MAX_BANK_QUESTIONS = 500;
 export function validateQuestions(qs: Question[]) {
   const errors: string[] = [];
   const ids = new Set<string>();
   if (!Array.isArray(qs)) return ['題庫必須是陣列'];
-  if (!qs.length || qs.length > 500) errors.push('每個单元需 1–500 題；更多題目請拆分次單元。');
+  if (!qs.length || qs.length > MAX_BANK_QUESTIONS) errors.push('每個单元需 1–500 題；更多題目請拆分次單元。');
   qs.forEach((q, i) => {
     if (!q || typeof q !== 'object') { errors.push(`第 ${i + 1} 題格式無效`); return; }
     if (q.questionType === 'image' && !q.image) errors.push(`第 ${i + 1} 題缺少圖片`);

@@ -84,3 +84,12 @@ test('測試帳號需在白名單內才通過名冊驗證，預設仍只收學�
   assert.equal(validateRoster([{ ...row, email: 'student@ctcn.edu.tw' }]).length, 0);
   assert.equal(validateRoster([{ ...row, email: 'other@example.com' }], ['tester@example.com']).length, 1);
 });
+
+test('題序留白不把 undefined 寫入 Firestore；錯誤題序明確指出列號', () => {
+  const headers = ['課程代碼', '題目ID', '問題', '選項A', '選項B', '解答', '題序'];
+  const row = ['ap2', 'q1', '問題', '甲', '乙', 'A', ''];
+  const q = parseBankSheet([headers, row], 'unit01').get('ap2')!.get('unit01')!.questions[0];
+  assert.equal(Object.hasOwn(q, 'order'), false);
+  assert.deepEqual(q, JSON.parse(JSON.stringify(q)));
+  assert.throws(() => parseBankSheet([headers, [...row.slice(0, -1), '不是數字']], 'unit01'), /第 2 列題序/);
+});

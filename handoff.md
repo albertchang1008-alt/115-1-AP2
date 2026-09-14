@@ -19,9 +19,8 @@
 
 ---
 
-目前版本：`main` 分支仍是 **1.1.2**；**1.2.0 已完成實作，在
-`feature/1.2.0-bank-import` 分支，尚未合併進 main、尚未部署**（見下方「Git 與
-部署現況」）。
+目前版本：1.2.0（`feature/1.2.0-bank-import`；`main` 仍為 1.1.2）。
+尚未合併、尚未部署。本次接手發現並修正發布前缺口，驗證結果見下方。
 
 ## 固定決策
 
@@ -38,7 +37,7 @@
 11.（1.2.0）抽題練習題數由學生自選（比照 v1.9：10/20/30/全部），只有「全部題目」算入完成度；已作答過的題目自然排到後面（`Progress.attempted`，跨題庫版本保留，不是「輪完重洗」的循環機制）。「完整測驗才算完成度」這條規則本身**不改**，維持跟 1.1.2 以前及 v1.9 一致。
 12.（1.2.0）選項每次都重新洗牌，不固定順序，避免學生背 ABCD 位置。
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
-14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生只看得到①②③④，⑤追溯原子卡與「傳統解析」（解析欄）只有教師題目預覽（`audience="teacher"`）看得到全部且不收合；學生端「傳統解析」放最後、預設收合需點開。
+14.（1.2.0）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④與最後預設收合的「傳統解析」，不顯示⑤追溯原子卡；教師可看①～⑤，傳統解析直接展開。現行程式的蘇格拉底式各段仍為 details 收合，尚未實作教師各段全部展開。
 
 ## 1.2.0：題庫接軌（現況：已實作，未合併、未部署）
 
@@ -60,15 +59,13 @@
 - `src/QuestionContent.tsx`：`Explanations` 新增 `audience` 參數，見固定決策 14
 - `apps-script/CreateCourseTemplate.gs`：範本表頭更新為單元/次單元/題序/啟用
   與新解析欄名
-- `tests/core.test.ts`、`tests/platform.test.ts`：對應更新，25/25 通過（雲端
-  沙箱重新 `npm ci` 驗證；device_bash 那台機器的 `npm test` 會因 esbuild
-  darwin/linux 平台不符報錯，是環境問題，跟改動內容無關，不用理它）
+- 本機 2026-09-14 接手驗證：Node 22.23.2、darwin arm64，既有套件可用，未重新安裝。完整 `npm run check` 通過：26 項前端／共用邏輯測試、前後端建置、29 個後端入口載入、1 項後端 callable 整合測試。原本交接所述 esbuild 平台錯誤本輪未重現。
 - 兩個新工具（不是平台程式碼本身，是給教師手動操作用的）：
   - `apps-script/FillCourseAndUnit.gs`：綁在教師正式 Google Sheet 上跑的
     一次性工具，補齊空白的「課程代碼」欄與「單元」欄（依同一次單元已填的
     值自動帶入）
-  - `scripts/deploy.sh`：一鍵上線腳本（本機測試→push→合併main→部署
-    Functions），見下方「Git 與部署現況」
+  - `scripts/deploy.sh`：一鍵上線腳本（憑證／Git 預檢→本機測試→分支備份→
+    Functions→快轉推送遠端 main），見下方「Git 與部署現況」
 
 **還沒做的：**
 
@@ -79,8 +76,7 @@
 
 ## Git 與部署現況（2026-09-14）
 
-- `feature/1.2.0-bank-import`：本機分支，領先 `main` 5 個 commit（3 個
-  1.2.0 功能 commit ＋ 2 個工具 commit），**尚未 push 到 GitHub**（origin 上
+- `feature/1.2.0-bank-import`：本機分支，領先 `main` 6 個 commit（本機 HEAD `527561c`），**尚未 push 到 GitHub**（origin 上
   還看不到這個分支）
 - 本機 `main` 領先 `origin/main` 1 個 commit（`1.1.2：新增測試學生帳號白名單`），
   這個是更早以前就沒推的，跟本次 1.2.0 工作無關，一併記錄避免被誤會
@@ -89,13 +85,24 @@
   `npx firebase-tools deploy --only functions`
 - 這台電腦的 Firebase CLI **尚未登入**（`npx firebase-tools login:list` 顯示
   無帳號），要先手動跑過一次 `npx firebase-tools login` 才能部署 Functions
-- `scripts/deploy.sh` 可以一次跑完「push → 合併進 main → 部署 Functions」，
-  用法見腳本內註解；執行前會有一道確認提示，任一步失敗會停止，避免誤觸
+- `scripts/deploy.sh` 已修正，尚未執行正式部署：先以 Firebase projects:list 驗證憑證與專案可見性，固定目標 ap2-7ed91；檢查乾淨的功能分支已包含本機及遠端 main，確認後依 lockfile 安裝並執行 check，備份分支、部署 Functions 成功後才快轉推送同一 commit 到 origin/main。不切換分支或改動本機 main；若 main 分歧須先自行整合。憑證預檢不保證所有部署 IAM 權限；後端部分成功或 main 推送失敗會明示未完成，不自動回滾。Pages 是否上線須另外確認 Actions。
+
+## Codex 接手狀態（2026-09-14）
+
+- 分支 `feature/1.2.0-bank-import`，HEAD `527561c`；本次修改尚未 commit，未 push、未合併、未部署。
+- 修正交卷仍只接受 100 題的遺漏，與題庫共用 `MAX_BANK_QUESTIONS = 500`；請求大小上限調為 300 KB，容納長題目 ID 的 500 題答案。
+- 修正題序空白被解析成 `order: undefined`，避免 Firestore 拒絕整批寫入；非法題序回報列號。
+- 實際版本檔、套件、README 與開發紀錄原仍為 1.1.2，本輪全部同步 1.2.0。
+- 新增 `functions/tests/bank-boundary.test.cjs`：使用實際 callable 配合記憶體資料庫測試 500 題發布、完整交卷、列重排維持版本、重送去重、501 題拒絕；不連線正式資料庫。已接入 `npm run check`。
+- 完整檢查通過，無需未改動就反覆重跑；驗證範圍不包含真實 Google Sheet、Firebase Emulator 或正式端到端流程。
+- 工作區原有未追蹤 `Claude outputs/`，本輪未讀取或更動；不應未確認就加入提交。
+- 部署腳本修正已完成；`bash -n scripts/deploy.sh` 與 `node --test scripts/deploy.test.cjs` 通過。10 個情境使用暫存 Git 倉庫及模擬 npm／Firebase，涵蓋成功順序、取消、憑證／專案失敗、髒工作區、detached HEAD、main 分歧、測試／後端／main 推送失敗；未連線雲端，未重跑無關的平台完整測試。
+- 下一步：教師端大單元分組視覺與真實 Sheet 資料補齊仍待處理。原先列為 1.2.0 範圍外的同考點去重、作廢重算不擅自加入。
+- 先前實驗性 Codex 上下文管理設定請求僅完成當時的能力檢查，未確認寫入或執行期生效；與本次平台修復分開處理，不宣稱已開啟。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- 決定要不要現在跑 `scripts/deploy.sh` 上線 1.2.0（目前完全還沒推送，安全，
-  隨時可以先看過再決定）
+- 正式上線尚未授權；部署腳本已修正，待整理並提交工作區、確認 Firebase 憑證及後端向下相容性，再經使用者明確同意才 push／合併／部署。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

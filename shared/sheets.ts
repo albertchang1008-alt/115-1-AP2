@@ -80,10 +80,11 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string): BankG
       answer = matching[0].id;
     }
     const orderRaw = get('題序', 'order');
-    const order = orderRaw && Number.isFinite(Number(orderRaw)) ? Number(orderRaw) : undefined;
+    if (orderRaw && !Number.isFinite(Number(orderRaw))) throw Error(`第 ${i + 2} 列題序必須是數字或留白`);
+    const order = orderRaw ? Number(orderRaw) : undefined;
     const question: Question = {
       id: get('題目ID', 'id', '題號'), text: get('問題', 'text', '題幹', 'question'), options, answer,
-      questionType: isImage || image ? 'image' : 'single', image, order,
+      questionType: isImage || image ? 'image' : 'single', image, ...(order === undefined ? {} : { order }),
       explanation: get('傳統解析', '解析', 'explanation'), concept: get('concept', '知識點'),
       socratic: {
         concept: get('核心概念', 'socraticConcept', 'coreConcept'),
