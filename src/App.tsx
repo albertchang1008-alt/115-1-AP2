@@ -43,8 +43,6 @@ import {
   completion,
   complete,
   emptyProgress,
-  validateQuestions,
-  validateRoster,
   phases,
   modes,
   youtubeId,
@@ -632,18 +630,21 @@ export default function App() {
               }}
             />
           ) : tab === 'settings' ? (
-            <SettingsPage course={course} api={api} notify={notify} onSynced={async () => {
-              const data = await api.call('bootstrap');
-              setCourses(data.courses);
-            }} />
+            <SettingsPage course={course} api={api} notify={notify} />
           ) : tab === 'diagnostics' && course ? (
             <Diagnostics key={course.id} course={course} api={api} notify={notify} />
           ) : !course ? (
             <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
           ) : tab === 'bank' ? (
-            <Bank key={course.id} course={course} api={api} save={save} notify={notify} />
+            <Bank key={course.id} course={course} api={api} notify={notify} onSynced={async () => {
+              const data = await api.call('bootstrap');
+              setCourses(data.courses);
+            }} />
           ) : tab === 'roster' ? (
-            <RosterPage key={course.id} course={course} api={api} notify={notify} testEmails={testEmails} />
+            <RosterPage key={course.id} course={course} api={api} notify={notify} onSynced={async () => {
+              const data = await api.call('bootstrap');
+              setCourses(data.courses);
+            }} />
           ) : tab === 'completion' ? (
             <CompletionPage key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'analysis' ? (
@@ -1171,44 +1172,28 @@ function CourseEditor({
 function Bank({
   course,
   api,
-  save,
   notify,
+  onSynced,
 }: {
   course: Course;
   api: API;
-  save: (c: Course) => Promise<void>;
   notify: (s: string) => void;
+  onSynced: () => Promise<void>;
 }) {
   const [unitId, setUnit] = useState(course.units[0]?.id || ''),
     [questions, setQuestions] = useState<Question[]>([]),
-    [input, setInput] = useState(''),
-    [errors, setErrors] = useState<string[]>([]),
     [search, setSearch] = useState(''),
-    [busy, setBusy] = useState(false),
-    [sheet, setSheet] = useState(course.sheetsUrl),
-    [version, setVersion] = useState('');
+    [busy, setBusy] = useState(false);
   const unit = course.units.find((u) => u.id === unitId);
   async function load() {
     if (!unit?.bankVersion) return;
     setBusy(true);
     try {
       setQuestions(await cachedBank(api, course.id, unitId, unit.bankVersion));
-      setErrors([]);
     } catch (e) {
       notify((e as Error).message);
     } finally {
       setBusy(false);
-    }
-  }
-  function validate(text: string) {
-    try {
-      const parsed = JSON.parse(text);
-      const qs = Array.isArray(parsed) ? parsed : parsed.questions;
-      const errs = validateQuestions(qs);
-      setErrors(errs);
-      if (!errs.length) setQuestions(qs);
-    } catch {
-      setErrors(['JSON 格式無效，請使用提供的題庫格式。']);
     }
   }
   return (
@@ -1217,23 +1202,17 @@ function Bank({
         <div>
           <span className="eyebrow">QUESTION BANK</span>
           <h1>題庫管理</h1>
-          <p>到「平台設定」同步 Google Sheet，題庫會自動連接至草稿；檢查後再發布課程。</p>
+          <p>按「同步題庫」讀取與課程代碼同名的 Google Sheet 分頁；單元與次單元依表格欄位增量更新至草稿。</p>
         </div>
       </header>
       <section className="panel">
         <div className="formgrid">
-          <Field label="課程參考連結（不會變更平台同步來源）">
-            <input value={sheet} onChange={(e) => setSheet(e.target.value)} />
-          </Field>
           <Field label="單元">
             <select
               value={unitId}
               onChange={(e) => {
                 setUnit(e.target.value);
                 setQuestions([]);
-                setInput('');
-                setErrors([]);
-                setVersion('');
               }}
             >
               {course.units.map((u) => (
@@ -1246,107 +1225,32 @@ function Bank({
         </div>
         <div className="actions">
           <button
-            onClick={() =>
-              save({ ...course, sheetsUrl: sheet })
-                .then(() => notify('連結已保存'))
-                .catch((e) => notify(e.message))
-            }
+            className="primary"
+            disabled={api.preview || busy}
+            onClick={async () => {
+              setBusy(true);
+              try {
+                const r = await api.call<any>('syncSheet');
+                await onSynced();
+                const mine = (r.banks || []).filter((bank: any) => bank.courseId === course.id);
+                if (mine.some((bank: any) => bank.error)) notify('題庫同步有未完成項目，請檢查同步結果');
+                else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}；請檢查後發布課程`);
+                else notify(`找不到與課程代碼「${course.id}」同名的題庫分頁`);
+              } catch (e) {
+                notify((e as Error).message);
+              } finally {
+                setBusy(false);
+              }
+            }}
           >
-            保存連結
+            <RefreshCw size={16} />
+            同步題庫
           </button>
-          {/^https:\/\/docs.google.com\/spreadsheets\//.test(sheet) && (
-            <a className="button" href={sheet} target="_blank" rel="noreferrer">
-              開啟 Sheets ↗
-            </a>
-          )}
           <button disabled={busy || !unit?.bankVersion} onClick={load}>
             讀取已連接版本
           </button>
           <span className="badge">{unit?.bankVersion || '未連接題庫'}</span>
         </div>
-        <details>
-          <summary>連接 Apps Script 已發布的版本</summary>
-          <Field label="同步結果中的版本 ID">
-            <input value={version} onChange={(e) => setVersion(e.target.value)} />
-          </Field>
-          <button
-            disabled={!version}
-            onClick={async () => {
-              try {
-                await api.call('getBank', { courseId: course.id, unitId, version, draft: true });
-                await save({
-                  ...course,
-                  units: course.units.map((u) =>
-                    u.id === unitId ? { ...u, bankVersion: version } : u,
-                  ),
-                });
-                notify('題庫版本已連接至草稿');
-              } catch (e) {
-                notify((e as Error).message);
-              }
-            }}
-          >
-            驗證並連接
-          </button>
-        </details>
-        <details>
-          <summary>JSON 同步預覽／初次匯入</summary>
-          <p className="muted">此入口用於檢查及發布匯出資料；後續仍以 Sheets 為主要編輯來源。</p>
-          <input
-            aria-label="匯入題庫 JSON"
-            type="file"
-            accept=".json"
-            onChange={async (e) => {
-              const text = await e.target.files?.[0]?.text();
-              if (text) {
-                setInput(text);
-                validate(text);
-              }
-            }}
-          />
-          <textarea
-            aria-label="題庫 JSON"
-            className="codeinput"
-            value={input}
-            onChange={(e) => { setInput(e.target.value); setQuestions([]); setErrors([]); }}
-            placeholder='[{"id":"q1","text":"題幹","options":[{"id":"a","text":"選項 A"},{"id":"b","text":"選項 B"}],"answer":"a","explanation":"解析"}]'
-          />
-          <div className="actions">
-            <button onClick={() => validate(input)}>檢查資料</button>
-            <button
-              className="primary"
-              disabled={!unit || !questions.length || errors.length > 0 || busy}
-              onClick={async () => {
-                setBusy(true);
-                try {
-                  const r = await api.call('publishQuestions', {
-                    courseId: course.id,
-                    unitId,
-                    questions,
-                  });
-                  await save({
-                    ...course,
-                    units: course.units.map((u) =>
-                      u.id === unitId ? { ...u, bankVersion: r.version } : u,
-                    ),
-                  });
-                  notify(`已發布 ${r.count} 題，已連接草稿；發布課程後學生可見`);
-                } catch (e) {
-                  notify((e as Error).message);
-                } finally {
-                  setBusy(false);
-                }
-              }}
-            >
-              發布並連接草稿
-            </button>
-          </div>
-        </details>
-        {errors.map((e) => (
-          <p className="error" key={e}>
-            {e}
-          </p>
-        ))}
       </section>
       <section className="panel">
         <div className="sectionhead">
@@ -1379,7 +1283,7 @@ function Bank({
             </details>
           ))}
         {!questions.length && (
-          <Empty title="尚未載入題目" detail="選擇單元讀取版本，或匯入新的題庫資料。" />
+          <Empty title="尚未載入題目" detail="同步題庫後，選擇次單元讀取已連接版本。" />
         )}
       </section>
     </>
@@ -1389,19 +1293,17 @@ function RosterPage({
   course,
   api,
   notify,
-  testEmails = [],
+  onSynced,
 }: {
   course: Course;
   api: API;
   notify: (s: string) => void;
-  testEmails?: string[];
+  onSynced: () => Promise<void>;
 }) {
-  const [search, setSearch] = useState(''), [migration, setMigration] = useState<any>(null);
+  const [search, setSearch] = useState('');
   const [cl, setCl] = useState(course.classIds[0]),
     [rows, setRows] = useState<Roster[]>([]),
     [next, setNext] = useState<string | null>(null),
-    [imports, setImports] = useState<Roster[]>([]),
-    [errors, setErrors] = useState<string[]>([]),
     [busy, setBusy] = useState(false);
   async function load(more = false) {
     setBusy(true);
@@ -1425,23 +1327,32 @@ function RosterPage({
         <div>
           <span className="eyebrow">CLASS ROSTER</span>
           <h1>班級名冊</h1>
-          <p>完整學校信箱對應學生，不開放自行認領學號。</p>
+          <p>名冊以 Google Sheet 的「班級名冊」分頁為唯一來源；按同步後才會增量更新。</p>
         </div>
         <button
-          onClick={() =>
-            download('名冊範本.csv', [
-              {
-                email: 'student@ctcn.edu.tw',
-                name: '請替換姓名',
-                studentId: 'S001',
-                classId: cl,
-                enabled: true,
-              },
-            ])
-          }
+          className="primary"
+          disabled={api.preview || busy}
+          onClick={async () => {
+            setBusy(true);
+            try {
+              const r = await api.call<any>('syncRoster');
+              await onSynced();
+              if (r.roster?.error) notify(`班級名冊同步未完成：${r.roster.error}`);
+              else {
+                const updated = (r.roster?.results || []).reduce((total: number, result: any) => total + (result.updated || 0), 0);
+                notify(r.roster?.changed ? `班級名冊同步完成：已更新 ${updated} 人` : `班級名冊內容一致，共 ${r.roster?.count || 0} 人，未重複寫入`);
+              }
+              setRows([]);
+              setNext(null);
+            } catch (e) {
+              notify((e as Error).message);
+            } finally {
+              setBusy(false);
+            }
+          }}
         >
-          <Download size={16} />
-          下載範本
+          <RefreshCw size={16} />
+          同步班級名冊
         </button>
       </header>
       <section className="panel">
@@ -1464,96 +1375,10 @@ function RosterPage({
             <RefreshCw size={16} />
             讀取名冊
           </button>
-          <label className="button">
-            <Upload size={16} />
-            匯入 CSV
-            <input
-              hidden
-              type="file"
-              accept=".csv"
-              onChange={async (e) => {
-                const text = await e.target.files?.[0]?.text();
-                if (!text) return;
-                const parsed = Papa.parse<any>(text, { header: true, skipEmptyLines: true });
-                const r = parsed.data.map((x) => ({
-                  courseId: course.id,
-                  email: String(x.email || x['學校信箱'] || x['Gmail'] || '')
-                    .trim()
-                    .toLowerCase(),
-                  name: String(x.name || x['姓名'] || '').trim(),
-                  studentId: String(x.studentId || x['學號'] || '').trim(),
-                  classId: String(x.classId || x['班級代碼'] || x['班級'] || '').trim(),
-                  enabled: !['false', '0'].includes(String(x.enabled)),
-                }));
-                setImports(r);
-                setErrors([
-                  ...parsed.errors.map((e) => e.message),
-                  ...validateRoster(r, testEmails),
-                  ...(r.length > 200 ? ['每次最多 200 人'] : []),
-                ]);
-              }}
-            />
-          </label>
         </div>
-        {imports.length > 0 && (
-          <div className="notice">
-            <strong>匯入預覽：{imports.length} 人</strong>
-            {errors.map((e, i) => (
-              <p className="error" key={i}>
-                {e}
-              </p>
-            ))}
-            <RosterTable rows={imports} />
-            <button
-              disabled={busy || errors.length > 0}
-              className="primary"
-              onClick={async () => {
-                setBusy(true);
-                try {
-                  await api.call('importRoster', { courseId: course.id, rows: imports });
-                  setImports([]);
-                  notify('名冊已匯入');
-                  await load();
-                } catch (e) {
-                  notify((e as Error).message);
-                } finally {
-                  setBusy(false);
-                }
-              }}
-            >
-              確認匯入
-            </button>
-            <button onClick={() => setImports([])}>取消</button>
-          </div>
-        )}
         <label className="field">搜尋已載入名冊<input value={search} onChange={(e) => setSearch(e.target.value)} /></label>
-        <button onClick={async () => { try { const r = await api.call('migrateRoster', { courseId: course.id }); setMigration(r); if (r.done) notify('此課程已使用新版名冊'); } catch (e) { notify((e as Error).message); } }}>預覽舊名冊轉換</button>
-        {migration && !migration.done && <section className="notice"><p>共 {migration.count} 人，預覽前 20 人；原始名冊保留。</p><RosterTable rows={migration.rows} /><button disabled={busy} onClick={async () => { setBusy(true); try { await api.call('migrateRoster', { courseId: course.id, apply: true }); setMigration(null); notify('已轉成課程內名冊'); await load(); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }}>確認轉換此課程名冊</button></section>}
-        <RosterTable
-          rows={rows.filter((r) => `${r.name} ${r.email} ${r.studentId}`.includes(search))}
-          action={(r) => (
-            <div className="actions"><button onClick={async () => {
-              const name = prompt('學生姓名', r.name); if (name === null) return;
-              const studentId = prompt('學號', r.studentId); if (studentId === null) return;
-              const classId = prompt('此課程的班級代碼（轉班會改變本課程入口，历史作答保留原班級）', r.classId); if (classId === null) return;
-              try { await api.call('importRoster', { courseId: course.id, rows: [{ ...r, name: name.trim(), studentId: studentId.trim(), classId: classId.trim() }] }); await load(); } catch (e) { notify((e as Error).message); }
-            }}>編輯／轉班</button><button
-              onClick={async () => {
-                try {
-                  await api.call('importRoster', { courseId: course.id, rows: [{ ...r, enabled: !r.enabled }] });
-                  setRows(
-                    rows.map((x) => (x.email === r.email ? { ...x, enabled: !x.enabled } : x)),
-                  );
-                } catch (e) {
-                  notify((e as Error).message);
-                }
-              }}
-            >
-              {r.enabled ? '停用' : '啟用'}
-            </button></div>
-          )}
-        />
-        {!rows.length && <Empty title="尚未載入名冊" detail="請讀取班級名冊，或匯入本學期學生。" />}
+        <RosterTable rows={rows.filter((r) => `${r.name} ${r.email} ${r.studentId}`.includes(search))} />
+        {!rows.length && <Empty title="尚未載入名冊" detail="請先按「同步班級名冊」，再讀取班級名冊。" />}
         {next && <button onClick={() => load(true)}>載入更多</button>}
       </section>
     </>
@@ -2216,17 +2041,14 @@ function SettingsPage({
   course,
   api,
   notify,
-  onSynced,
 }: {
   course?: Course;
   api: API;
   notify: (s: string) => void;
-  onSynced: () => Promise<void>;
 }) {
   const [sheetId, setSheetId] = useState(''),
     [syncStatus, setSyncStatus] = useState<any>(null),
-    [syncBusy, setSyncBusy] = useState(false),
-    [syncResult, setSyncResult] = useState<any>(null);
+    [syncBusy, setSyncBusy] = useState(false);
   useEffect(() => {
     if (api.preview) return;
     api
@@ -2234,7 +2056,6 @@ function SettingsPage({
       .then((r: any) => {
         setSheetId(r.sheetId || '');
         setSyncStatus(r.status);
-        setSyncResult(r.status?.lastResult || null);
       })
       .catch((e) => notify('無法讀取同步設定：' + (e as Error).message));
   }, [api]);
@@ -2266,7 +2087,7 @@ function SettingsPage({
       <section className="panel">
         <h2>Google Sheet 同步</h2>
         <p className="muted">
-          每門課的題庫分頁名稱必須等於課程代碼（例如 115-1-AP2），分頁內依「單元／次單元」整理題目。「班級名冊」分頁使用授課班級、學號、姓名、Gmail 欄位，按「同步班級名冊」才會讀取。分頁需先用檢視權限分享給
+          每門課的題庫分頁名稱必須等於課程代碼（例如 115-1-AP2），分頁內依「單元／次單元」整理題目。「班級名冊」分頁使用授課班級、學號、姓名、Gmail 欄位。設定完成後，請分別到「題庫管理」與「班級名冊」按同步；分頁需先用檢視權限分享給
           Cloud Functions 的執行服務帳戶。
         </p>
         <div className="formgrid">
@@ -2296,81 +2117,9 @@ function SettingsPage({
           >
             保存 Sheet ID
           </button>
-          <button
-            className="primary"
-            disabled={api.preview || syncBusy || !sheetId}
-            onClick={async () => {
-              setSyncBusy(true);
-              setSyncResult(null);
-              try {
-                const saved = await api.call('saveSheetConfig', { sheetId });
-                setSheetId(saved.sheetId);
-                const r = await api.call<any>('syncSheet');
-                setSyncResult(r);
-                setSyncStatus((s: any) => ({ ...s, lastSyncedAt: r.lastSyncedAt }));
-                try {
-                  await onSynced();
-                } catch {
-                  notify('同步結果已保存，但課程重新載入失敗；請重新整理頁面後再編輯課程');
-                  return;
-                }
-                notify(r.hasErrors ? '同步有未完成項目，請查看下方原因' : '同步完成，題庫已更新至草稿；請檢查後發布課程');
-              } catch (e) {
-                notify((e as Error).message);
-              } finally {
-                setSyncBusy(false);
-              }
-            }}
-          >
-            <RefreshCw size={16} />
-            同步題庫
-          </button>
-          <button
-            disabled={api.preview || syncBusy || !sheetId}
-            onClick={async () => {
-              setSyncBusy(true);
-              setSyncResult(null);
-              try {
-                const saved = await api.call('saveSheetConfig', { sheetId });
-                setSheetId(saved.sheetId);
-                const r = await api.call<any>('syncRoster');
-                setSyncResult(r);
-                try { await onSynced(); } catch { notify('名冊已同步，但課程重新載入失敗；請重新整理頁面'); return; }
-                notify(r.hasErrors ? '名冊同步有未完成項目，請查看下方原因' : '班級名冊同步完成');
-              } catch (e) {
-                notify((e as Error).message);
-              } finally {
-                setSyncBusy(false);
-              }
-            }}
-          >
-            <Users size={16} />
-            同步班級名冊
-          </button>
         </div>
         {syncStatus?.lastSyncedAt && (
           <p className="muted">上次同步：{new Date(syncStatus.lastSyncedAt).toLocaleString()}</p>
-        )}
-        {syncResult && (
-          <div className="notice">
-            {syncResult.roster && (
-              <p className={syncResult.roster.error ? 'error' : ''}>
-                名冊：
-                {syncResult.roster.error || (syncResult.roster.changed
-                  ? `已更新，共 ${syncResult.roster.count} 人`
-                  : syncResult.roster.count ? `內容一致，共 ${syncResult.roster.count} 人，未重複寫入` : '名冊沒有資料，未變更現有名單')}
-              </p>
-            )}
-            {syncResult.roster?.results?.map((r: any) => <p key={r.courseId} className={r.error ? 'error' : 'success'}>{r.courseId} 名冊：{r.error || `${r.count} 人，更新 ${r.updated} 人`}</p>)}
-            {syncResult.banks?.map((b: any, i: number) => (
-              <p className={b.error ? 'error' : 'success'} key={i}>
-                {b.unitId} · {b.courseId}：{b.error || `已連接版本 ${b.version}（${b.count} 題）`}
-              </p>
-            ))}
-            {!syncResult.banks?.length && !syncResult.roster && (
-              <p className="muted">這次同步沒有讀到班級名冊或任何以課程代碼命名的題庫分頁。</p>
-            )}
-          </div>
         )}
       </section>
       <section className="panel">
