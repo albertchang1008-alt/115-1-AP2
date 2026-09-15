@@ -1030,6 +1030,7 @@ dd {
 .options button b {
   font-size: calc(12px * var(--font-scale, 1));
   background: #eaf1f6;
+  color: #304957;
   border-radius: 5px;
   min-width: 30px;
   height: 30px;
@@ -1471,11 +1472,18 @@ button:hover, .button:hover, .notice, .feedback, .explanations details, .explana
 .image-modal { max-width: 95vw; max-height: 95vh; overflow: auto; background: var(--surface); padding: 15px; }
 .image-modal img { display: block; max-width: 100%; margin: 10px auto; }
 .diagnostic-chart { display: block; width: min(100%, 650px); height: auto; margin: 15px auto; }
-:root[data-theme='night'] :is(.workspace,.main,.student,.student-nav,.login,.login-form,.reviewanswers,.contextrow,.toolbar,.pageheading,.previewbar,.question-card,.options button,.unitcard,.activitycard) { background-color: var(--page); color: var(--ink); }
+:root[data-theme='night'] :is(.workspace,.main,.student,.student-nav,.login,.login-form,.reviewanswers,.contextrow,.toolbar,.pageheading,.previewbar,.question-card,.unitcard,.activitycard) { background-color: var(--page); color: var(--ink); }
 :root[data-theme='night'] :is(h1,h2,h3,h4,label,td,th,summary,.metric strong,.field span) { color: var(--ink); }
 :root[data-theme='night'] :is(.muted,small,.metric small) { color: var(--muted); }
-:root[data-theme='night'] .options button.correct { background: #184a37; color: #bff5d7; }
-:root[data-theme='night'] .options button.incorrect { background: #542d34; color: #ffd4d9; }
+/* 2026-09-15：選項按鈕原本跟 .workspace 等整頁區塊共用 var(--page) 當底色，
+   結果跟頁面背景幾乎同色、只剩一條細邊框，使用者反映夜間模式按鍵看不清楚。
+   改成跟其他按鈕一樣用 var(--surface)（比頁面背景亮一階），並且幫「已選擇但
+   還沒揭曉」的 .chosen 狀態補上夜間專屬底色——原本的淺藍底色在夜間會被上面
+   這條規則蓋掉，選了也看不出來。 */
+:root[data-theme='night'] .options button { background-color: var(--surface); color: var(--ink); border-color: var(--line); }
+:root[data-theme='night'] .options button.chosen { background-color: #24425c; border-color: var(--blue); }
+:root[data-theme='night'] .options button.correct { background: #184a37; color: #bff5d7; border-color: #3d9977; }
+:root[data-theme='night'] .options button.incorrect { background: #542d34; color: #ffd4d9; border-color: #c57575; }
 :root[data-theme='night'] .error { color: #ffb4b4; }
 :root[data-theme='night'] .success { color: #a3e4bd; }
 body { padding-bottom: 60px; }

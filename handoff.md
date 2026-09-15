@@ -19,11 +19,11 @@
 
 ---
 
-目前版本：1.2.7（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
+目前版本：1.2.8（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
 `npx firebase-tools deploy --only functions --project ap2-7ed91`** 才會生效。
-**1.2.6／1.2.7（本輪）只改前端**（quiz 模式恢復交卷後才揭曉、傳統解析改回收合、新增字級設定、1.2.7 把色系／字級選單從右下角浮動改到頁面最上方常駐列），完全沒有動到 `functions/`，**不需要再部署一次 Functions**——但 1.2.5 那個 Functions 部署還是要做，兩者是各自獨立的待辦，不要漏掉 1.2.5 那個。1.2.6／1.2.7 只需要 GitHub Desktop push 讓 Pages 重新發布即可生效。
+**1.2.6～1.2.8（本輪）只改前端**（quiz 模式恢復交卷後才揭曉、傳統解析改回收合、新增字級設定、1.2.7 把色系／字級選單從右下角浮動改到頁面最上方常駐列、1.2.8 修正夜間色系選項按鍵對比不足），完全沒有動到 `functions/`，**不需要再部署一次 Functions**——但 1.2.5 那個 Functions 部署還是要做，兩者是各自獨立的待辦，不要漏掉 1.2.5 那個。1.2.6～1.2.8 只需要 GitHub Desktop push 讓 Pages 重新發布即可生效。
 
 ## 固定決策
 
@@ -395,6 +395,36 @@
   讓 GitHub Pages 重新發布即可生效（1.2.5 的 Functions 部署待辦依然沒變，
   還是要記得跑）。
 
+## Claude 接手狀態（2026-09-15，第六輪：修正夜間色系按鍵對比，1.2.8）
+
+- 起因：使用者截圖回報夜間色系下測驗選項按鍵看不清楚，要求改善配色。
+- 根因（`src/style.css`）：`.options button` 原本被歸在
+  `:root[data-theme='night'] :is(.workspace,.student-nav,...,.options
+  button,...)` 這條夜間覆寫規則裡，跟整頁區塊共用 `background-color:
+  var(--page)`——結果選項按鈕背景跟頁面背景幾乎同色，只剩一條細邊框看得
+  出是按鈕。而且這條規則的 CSS 優先順序比 `.options button.chosen` 原本的
+  淺藍底（`#ecf6fe`）更高，導致「已選擇但還沒揭曉」的狀態在夜間模式下
+  背景直接被蓋回跟頁面同色，選了幾乎看不出來。另外 `.options button b`
+  （選項字母徽章）沒有指定文字顏色，夜間模式下徽章背景維持淺色、文字卻
+  跟著父層變淺色，字母幾乎看不見。
+- 修正：
+  - 把 `.options button` 從那條共用的夜間整頁背景規則中移除，改成獨立一條
+    `:root[data-theme='night'] .options button { background-color:
+    var(--surface); border-color: var(--line); }`（跟其他按鈕一致，比頁面
+    背景亮一階，看得出是可點擊的按鈕）。
+  - 新增 `:root[data-theme='night'] .options button.chosen` 夜間專屬底色
+    `#24425c`＋框線 `var(--blue)`，選了但還沒交卷時清楚看得出來。
+  - `.options button b` 補上固定 `color: #304957`（不分色系），讓徽章文字
+    在任何色系底下都看得清楚。
+- 驗證：`npx tsc -b` 無錯誤；`npm test` 28/28（純 CSS 調整）。**這個沙箱
+  沒辦法實際跑起前端看畫面**，對比度是否足夠、選項按鍵是否真的看得清楚，
+  需要使用者部署後在夜間色系下親自確認截圖。
+- 版本：`VERSION` 由 1.2.7 升到 **1.2.8**，`node scripts/version.mjs` 已
+  同步所有版本檔案，`DEVELOPMENT_LOG.md` 已新增 1.2.8 條目。
+- 純前端變更（只動 `src/style.css`），不需要重新部署 Cloud Functions；
+  只需要 GitHub Desktop push 讓 GitHub Pages 重新發布即可生效（1.2.5 的
+  Functions 部署待辦依然沒變，還是要記得跑）。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
 - **實測確認（1.2.5，後端）**：等這次改動 push 到 GitHub 且 Functions
@@ -403,14 +433,16 @@
   網域限制已經拿掉，如果還是失敗，畫面應該會指出是第幾列、哪一類欄位
   問題（學號格式、班級代碼格式、姓名空白等），麻煩把訊息內容回報，才能
   判斷下一步。
-- **實測確認（1.2.6／1.2.7，前端，不需要重新部署 Functions）**：等這次
-  改動 push 到 GitHub、GitHub Pages 重新發布後，麻煩確認四件事：(1) 完整
+- **實測確認（1.2.6～1.2.8，前端，不需要重新部署 Functions）**：等這次
+  改動 push 到 GitHub、GitHub Pages 重新發布後，麻煩確認五件事：(1) 完整
   測驗作答中選了答案後不會立刻看到正解或解析、可以在交卷前改答案，交卷
   後才看得到；(2) 傳統解析預設是收合的，要點「傳統解析」那一行才展開，
   引導式解析仍然是直接展開；(3)「字級」下拉選單切換小／預設／大／特大
   時，畫面文字大小真的有跟著變化；(4)「色系」「字級」選單現在應該貼在
   頁面最上方（不是右下角浮動），捲動頁面時選單會貼齊頂端、不會再蓋住任何
-  文字內容。有任何一項跟預期不同麻煩截圖回報。
+  文字內容；(5) 切到「夜間」色系時，測驗選項按鍵、已選擇的選項、選項
+  字母徽章（A/B/C/D）都看得清楚，不會跟背景糊在一起。有任何一項跟預期
+  不同麻煩截圖回報。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定
