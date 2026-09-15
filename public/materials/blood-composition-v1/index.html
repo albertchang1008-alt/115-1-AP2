@@ -6,7 +6,7 @@
   <title>血液的組成與生理功能｜互動教材</title>
   <style>
     :root{--blue:#2563eb;--blue-soft:#eff6ff;--red:#dc2626;--red-soft:#fef2f2;--amber:#d97706;--amber-soft:#fffbeb;--green:#15803d;--green-soft:#f0fdf4;--ink:#172033;--muted:#64748b;--line:#dbe3ee;--paper:#fff;--page:#f8fafc}
-    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:1100px;margin:auto;padding:20px 16px 40px}header{text-align:center;border-bottom:2px solid var(--line);margin-bottom:24px;padding-bottom:16px}h1{color:var(--red);font-size:clamp(1.7rem,5vw,2.25rem);margin:0}h2{margin:.2rem 0 1rem;font-size:1.25rem}header p,.muted{color:var(--muted);margin:.25rem 0}.modes,.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 24px}button{font:inherit;cursor:pointer}.mode,.filter,.restart{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;color:var(--muted);font-weight:700}.mode[aria-selected=true],.filter[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}.pane{display:none}.pane.active{display:block}.stats,.cards,.flashcards{display:grid;gap:15px}.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:20px}.stat,.card,.flash,.quiz{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px #1720330d}.stat{text-align:center;padding:14px}.stat b{color:var(--blue);display:block;font-size:1.4rem}.stat small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}.card{padding:0;text-align:left;overflow:hidden}.card summary{list-style:none;padding:16px;cursor:pointer}.card summary::-webkit-details-marker{display:none}.card summary b{font-size:1.05rem}.tag{float:right;border-radius:999px;padding:2px 8px;font-size:.75rem;background:var(--blue-soft);color:var(--blue)}.tag.plasma{background:var(--amber-soft);color:var(--amber)}.tag.cell{background:var(--red-soft);color:var(--red)}.card-body{border-top:1px solid var(--line);padding:0 16px 16px}.card-body ul{padding-left:1.2rem;color:var(--muted)}.detail{background:var(--page);border-radius:8px;padding:10px}.flashcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}.flash{min-height:190px;padding:18px;text-align:left}.flash button{width:100%;height:100%;border:0;background:transparent;text-align:left;color:inherit}.flash h3{color:var(--blue);margin:0 0 8px}.flash .back{display:none;color:var(--ink)}.flash.flipped .front{display:none}.flash.flipped .back{display:block}.quiz{max-width:800px;margin:auto;padding:20px}.question{padding:17px 0;border-bottom:1px dashed var(--line)}.question:last-of-type{border:0}.options{display:grid;gap:8px;margin-top:10px}.option{border:1px solid var(--line);background:var(--page);border-radius:8px;padding:10px;text-align:left}.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}.option:disabled{cursor:default}.option.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.option.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);font-weight:700}.feedback{display:none;margin-top:10px;border-left:4px solid var(--blue);background:var(--blue-soft);padding:9px}.feedback.show{display:block}.result{margin-top:16px;padding:15px;border-radius:10px;background:var(--page)}.result.pass{background:var(--green-soft);color:var(--green)}.result.fail{background:var(--amber-soft);color:#92400e}.restart{margin-top:10px;color:var(--blue)}footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px}@media(max-width:420px){.wrap{padding-inline:12px}.mode,.filter{padding:7px 10px;font-size:.9rem}.quiz{padding:14px}}
+    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:1100px;margin:auto;padding:20px 16px 40px}header{text-align:center;border-bottom:2px solid var(--line);margin-bottom:24px;padding-bottom:16px}h1{color:var(--red);font-size:clamp(1.7rem,5vw,2.25rem);margin:0}h2{margin:.2rem 0 1rem;font-size:1.25rem}header p,.muted{color:var(--muted);margin:.25rem 0}.modes,.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 24px}button{font:inherit;cursor:pointer}.mode,.filter,.restart,.next{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;color:var(--muted);font-weight:700}.mode[aria-selected=true],.filter[aria-pressed=true],.next{background:var(--blue);border-color:var(--blue);color:#fff}.pane{display:none}.pane.active{display:block}.stats,.cards,.flashcards{display:grid;gap:15px}.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:20px}.stat,.card,.flash,.quiz{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px #1720330d}.stat{text-align:center;padding:14px}.stat b{color:var(--blue);display:block;font-size:1.4rem}.stat small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}.card{padding:0;text-align:left;overflow:hidden}.card summary{list-style:none;padding:16px;cursor:pointer}.card summary::-webkit-details-marker{display:none}.card summary b{font-size:1.05rem}.tag{float:right;border-radius:999px;padding:2px 8px;font-size:.75rem;background:var(--blue-soft);color:var(--blue)}.tag.plasma{background:var(--amber-soft);color:var(--amber)}.tag.cell{background:var(--red-soft);color:var(--red)}.card-body{border-top:1px solid var(--line);padding:0 16px 16px}.card-body ul{padding-left:1.2rem;color:var(--muted)}.detail{background:var(--page);border-radius:8px;padding:10px}.flashcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}.flash{min-height:190px;padding:18px;text-align:left}.flash button{width:100%;height:100%;border:0;background:transparent;text-align:left;color:inherit}.flash h3{color:var(--blue);margin:0 0 8px}.flash .back{display:none;color:var(--ink)}.flash.flipped .front{display:none}.flash.flipped .back{display:block}.quiz{max-width:800px;margin:auto;padding:20px}.challenge{align-items:center;background:var(--blue-soft);border:1px solid #bfdbfe;border-radius:10px;display:flex;justify-content:space-between;margin:14px 0;padding:9px 12px}.timer{color:var(--blue);font-weight:800}.timer.danger{color:var(--red)}.question{padding:17px 0;border-bottom:1px dashed var(--line)}.question:last-of-type{border:0}.options{display:grid;gap:8px;margin-top:10px}.option{border:1px solid var(--line);background:var(--page);border-radius:8px;padding:10px;text-align:left}.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}.option:disabled{cursor:default}.option.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.option.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);font-weight:700}.feedback{display:none;margin-top:10px;border-left:4px solid var(--blue);background:var(--blue-soft);padding:9px}.feedback.show{display:block}.result{margin-top:16px;padding:15px;border-radius:10px;background:var(--page)}.result.pass{background:var(--green-soft);color:var(--green)}.result.fail{background:var(--amber-soft);color:#92400e}.restart{margin-top:10px;color:var(--blue)}footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px}@media(max-width:420px){.wrap{padding-inline:12px}.mode,.filter{padding:7px 10px;font-size:.9rem}.quiz{padding:14px}}
   </style>
 </head>
 <body>
@@ -30,7 +30,7 @@
     </div>
   </section>
   <section id="flashcards" class="pane"><p class="muted">點選卡片翻面查看重點解析；閃卡不納入探索或答題診斷。</p><div class="flashcards" id="flash-list"></div></section>
-  <section id="quiz" class="pane"><div class="quiz"><h2>CH05 血液生理隨堂測驗</h2><p class="muted">五題全對才通關。</p><div id="quiz-list"></div><div id="quiz-result" aria-live="polite"></div></div></section>
+  <section id="quiz" class="pane"><div class="quiz"><h2>CH05 血液生理限時連勝挑戰</h2><p class="muted">每題 45 秒；情境病例與易混淆陷阱五題連勝，才取得平台通關資格。</p><div class="challenge"><span id="challenge-progress">第 1／5 題・連勝 0 題</span><span id="challenge-timer" class="timer" aria-live="polite">45 秒</span></div><div id="quiz-list"></div><div id="quiz-result" aria-live="polite"></div></div></section>
   <footer>課程平台 1.0 互動教材｜blood-composition-v1</footer>
 </main>
 <script src="../course-learning.js"></script>
@@ -78,39 +78,48 @@
   const flashList = document.querySelector('#flash-list');
   flashcards.forEach(([title, body]) => { const card = document.createElement('article'); card.className = 'flash'; card.innerHTML = `<button type="button" aria-pressed="false"><span class="front"><h3>${title}</h3><p>點選翻面查看重點</p></span><span class="back"><h3>${title}</h3><p>${body}</p></span></button>`; card.querySelector('button').addEventListener('click', (event) => { card.classList.toggle('flipped'); event.currentTarget.setAttribute('aria-pressed', String(card.classList.contains('flipped'))); }); flashList.appendChild(card); });
   const questions = [
-    { id:'blood-composition-q01', text:'下列有關成熟紅血球特徵的敘述，何者不正確？', options:['成熟紅血球為雙凹圓盤狀且不具細胞核','成熟紅血球平均生命期約為 7–9 天','成年男性紅血球數量高於女性','細胞內含血紅素以攜帶 O₂ 與 CO₂'], answer:1, note:'紅血球平均壽命約為 120 天；5–9 天是血小板的壽命。' },
-    { id:'blood-composition-q02', text:'血清不含哪一種參與凝血的蛋白質？', options:['白蛋白','γ-球蛋白','纖維蛋白原','溶菌酶'], answer:2, note:'血漿去除纖維蛋白原等凝血蛋白後即稱為血清。' },
-    { id:'blood-composition-q03', text:'胚胎發育中，哪個器官維持造血的時期最短？', options:['卵黃囊','肝臟','脾臟','紅骨髓'], answer:2, note:'胚胎第 5 個月起脾臟與骨髓開始造血，但脾臟造血很快結束。' },
-    { id:'blood-composition-q04', text:'哪種白血球進入組織約 24 小時後會轉化為巨噬細胞？', options:['嗜中性球','單核球','淋巴球','嗜酸性球'], answer:1, note:'單核球進入組織後轉化為巨噬細胞，例如肝臟的 Kupffer cell。' },
-    { id:'blood-composition-q05', text:'血紅素攜帶氧氣時，氧氣主要與哪個部位結合？', options:['血基質中的鐵原子（Fe）','球蛋白多胜肽鏈','碳酸酐酶','維生素 B₁₂'], answer:0, note:'每個血紅素次單位的含鐵血基質可直接結合氧分子。' }
+    { id:'blood-composition-q01', text:'情境：住在高山的患者血比容升到 65%，雖然攜氧量增加，卻感到心臟負荷變大。最能解釋此現象的是？', options:['血漿膠體滲透壓下降','血液黏滯度上升，唧血阻力增加','白血球轉化為巨噬細胞','纖維蛋白原完全消失'], answer:1, note:'血比容過高會使血液黏滯度大幅上升，增加心臟唧血阻力。' },
+    { id:'blood-composition-q02', text:'情境：檢體未加入抗凝劑，靜置凝固後取得淡黃色上清液。與血漿相比，該液體最關鍵少了什麼？', options:['白蛋白','γ-球蛋白','纖維蛋白原等凝血蛋白','水分'], answer:2, note:'這是血清；它是凝血後的液體，纖維蛋白原等凝血蛋白已被消耗。' },
+    { id:'blood-composition-q03', text:'陷阱題：過敏反應時，哪一組「細胞—主要物質／作用」配對正確？', options:['嗜酸性球—釋放組織胺引發過敏','嗜鹼性球—含肝素與組織胺','嗜中性球—製造抗體','單核球—直接形成纖維蛋白網'], answer:1, note:'嗜鹼性球含肝素與組織胺；嗜酸性球則有抗過敏作用，兩者最容易混淆。' },
+    { id:'blood-composition-q04', text:'情境：傷口的血小板先形成鬆散栓子，之後才使血塊變得穩固。接著最合理的變化是？', options:['纖維蛋白原形成纖維蛋白網','白蛋白轉化為抗體','紅血球重新長出細胞核','血漿完全失去水分'], answer:0, note:'凝血酶促使纖維蛋白原形成纖維蛋白網，強化原本的血小板栓子。' },
+    { id:'blood-composition-q05', text:'陷阱題：關於造血器官演變，下列何者正確？', options:['成人終身主要由脾臟造血','脾臟造血維持時間比肝臟長','成人終身主要由紅骨髓造血','卵黃囊在出生後接替紅骨髓造血'], answer:2, note:'成人由紅骨髓持續造血；胚胎造血依序經過卵黃囊、肝臟、脾臟與骨髓。' }
   ];
-  let answers = new Map(), completed = false;
-  const quizList = document.querySelector('#quiz-list'), result = document.querySelector('#quiz-result');
+  const TIME_LIMIT_SECONDS = 45;
+  let questionIndex = 0, streak = 0, answered = false, completed = false, timer = null, secondsLeft = TIME_LIMIT_SECONDS;
+  const quizList = document.querySelector('#quiz-list'), result = document.querySelector('#quiz-result'), progress = document.querySelector('#challenge-progress'), timerDisplay = document.querySelector('#challenge-timer');
+  function updateChallenge() { progress.textContent = `第 ${questionIndex + 1}／${questions.length} 題・連勝 ${streak} 題`; timerDisplay.textContent = `${secondsLeft} 秒`; timerDisplay.classList.toggle('danger', secondsLeft <= 10); }
+  function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+  function startTimer() { stopTimer(); secondsLeft = TIME_LIMIT_SECONDS; updateChallenge(); timer = setInterval(() => { secondsLeft--; updateChallenge(); if (secondsLeft <= 0) timeout(); }, 1000); }
   function renderQuiz() {
-    quizList.replaceChildren(); result.replaceChildren();
-    questions.forEach((question, index) => {
-      const article = document.createElement('section'); article.className = 'question';
-      article.innerHTML = `<b>${index + 1}. ${question.text}</b><div class="options"></div><div class="feedback"></div>`;
-      const options = article.querySelector('.options'), feedback = article.querySelector('.feedback');
-      question.options.forEach((text, choice) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.textContent = text; button.addEventListener('click', () => choose(question, choice)); options.appendChild(button); });
-      quizList.appendChild(article);
-    });
+    stopTimer(); answered = false; result.replaceChildren(); quizList.replaceChildren();
+    const question = questions[questionIndex], article = document.createElement('section'); article.className = 'question';
+    article.innerHTML = `<b>${questionIndex + 1}. ${question.text}</b><div class="options"></div><div class="feedback"></div>`;
+    const options = article.querySelector('.options');
+    question.options.forEach((text, choice) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.textContent = text; button.addEventListener('click', () => choose(question, choice, article)); options.appendChild(button); });
+    quizList.appendChild(article); startTimer();
   }
-  function choose(question, choice) {
-    if (answers.has(question.id)) return;
-    const correct = choice === question.answer; answers.set(question.id, correct);
-    if (!firstAnswers.has(question.id)) { firstAnswers.add(question.id); CL.answer(question.id, correct); analytics('blood_composition_answer', { question_id: question.id, correct }); }
-    const article = [...quizList.children][questions.indexOf(question)], buttons = article.querySelectorAll('.option'), feedback = article.querySelector('.feedback');
-    buttons.forEach((button, index) => { button.disabled = true; if (index === question.answer) button.classList.add('correct'); else if (index === choice) button.classList.add('wrong'); });
-    feedback.className = 'feedback show'; feedback.textContent = (correct ? '答對。' : '答錯。') + question.note;
-    if (answers.size === questions.length) finish();
+  function recordAnswer(question, correct) { if (!firstAnswers.has(question.id)) { firstAnswers.add(question.id); CL.answer(question.id, correct); analytics('blood_composition_answer', { question_id: question.id, correct }); } }
+  function reveal(article, question, choice, message) {
+    article.querySelectorAll('.option').forEach((button, index) => { button.disabled = true; if (index === question.answer) button.classList.add('correct'); else if (index === choice) button.classList.add('wrong'); });
+    const feedback = article.querySelector('.feedback'); feedback.className = 'feedback show'; feedback.textContent = message + question.note;
   }
-  function finish() {
-    const score = [...answers.values()].filter(Boolean).length, passed = score === questions.length;
-    result.className = `result ${passed ? 'pass' : 'fail'}`;
-    result.innerHTML = `<b>${passed ? '🎉 五題全對，教材通關！' : `本輪答對 ${score}／${questions.length}`}</b><br>${passed ? '通關紀錄已送交平台；探索與首次作答會供教師檢視。' : '通關需要五題全對。閱讀解析後可重新挑戰整輪。'}<br><button class="restart" type="button">${passed ? '重新練習' : '重新挑戰整輪'}</button>`;
+  function choose(question, choice, article) {
+    if (answered) return; answered = true; stopTimer();
+    const correct = choice === question.answer; recordAnswer(question, correct); reveal(article, question, choice, correct ? '答對。' : '答錯。');
+    if (!correct) return finish(false, '連勝中斷；請利用解析再挑戰。');
+    streak++; updateChallenge();
+    if (streak === questions.length) return finish(true);
+    const next = document.createElement('button'); next.type = 'button'; next.className = 'next'; next.textContent = '下一題'; next.addEventListener('click', () => { questionIndex++; renderQuiz(); }); article.appendChild(next);
+  }
+  function timeout() {
+    if (answered) return; answered = true; stopTimer();
+    const question = questions[questionIndex], article = quizList.firstElementChild; reveal(article, question, -1, '時間到。'); finish(false, '本題逾時，連勝中斷。');
+  }
+  function finish(passed, message = '') {
+    stopTimer(); result.className = `result ${passed ? 'pass' : 'fail'}`;
+    result.innerHTML = `<b>${passed ? '🎉 五題限時連勝，教材通關！' : message}</b><br>${passed ? '平台已記錄此互動教材的完成資格。' : '五題都要在限時內答對才可通關。'}<br><button class="restart" type="button">${passed ? '重新練習' : '重新挑戰'}</button>`;
     if (passed && !completed) { completed = true; CL.complete(); analytics('blood_composition_complete'); }
-    result.querySelector('.restart').addEventListener('click', () => { answers = new Map(); renderQuiz(); });
+    result.querySelector('.restart').addEventListener('click', () => { questionIndex = 0; streak = 0; renderQuiz(); });
   }
   renderQuiz();
 })();
