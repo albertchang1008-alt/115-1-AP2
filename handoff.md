@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.3.1。本輪 Codex 新增血液組成互動教材，已提交於本機 `main`（功能 `5cb2303`、本交接更新），目前比 `origin/main` 領先 2 個 commits，尚待使用者以 GitHub Desktop Push origin。1.3.1 是本輪剛完成的內容；1.3.0 是測驗選項拿掉 A/B/C/D 字母徽章。
+目前版本：1.3.2。本輪 Codex 將血液組成互動教材的學生提示精簡為「五題全對才通關」，已提交於本機 `main` 的 `5a5b8cf`；目前比 `origin/main` 領先 3 個 commits，尚待使用者以 GitHub Desktop Push origin。1.3.2 是本輪剛完成的內容；1.3.1 是新增血液組成互動教材。
 本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。既有未追蹤的 `html/` 原始資料夾屬使用者內容，本輪未更動或提交。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
