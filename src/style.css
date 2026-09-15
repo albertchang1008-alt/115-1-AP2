@@ -1027,16 +1027,6 @@ dd {
   font-size: calc(16px * var(--font-scale, 1));
   gap: 15px;
 }
-.options button b {
-  font-size: calc(12px * var(--font-scale, 1));
-  background: #eaf1f6;
-  color: #304957;
-  border-radius: 5px;
-  min-width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-}
 .options button.chosen {
   border-color: #478fb9;
   background: #ecf6fe;

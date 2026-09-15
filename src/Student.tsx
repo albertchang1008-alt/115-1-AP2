@@ -615,7 +615,6 @@ function Quiz({
             disabled={!!locked[q.id]}
             onClick={() => choose(o.id)}
           >
-            <b>{String.fromCharCode(65 + j)}</b>
             {o.text}
           </button>
         ))}
