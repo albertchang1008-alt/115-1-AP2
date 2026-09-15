@@ -82,6 +82,17 @@ test('重玩不覆蓋首次錯誤，通關不改變首次結果', () => {
   assert.equal(s.completed, true); assert.equal(s.answers.q1.firstCorrect, false); assert.equal(s.answers.q1.attempts, 2);
   assert.throws(() => reduceLearning(s, [{ id:'d',type:'time',seconds:5000 }]));
 });
+test('逐圖卡停留時間累計，並保留每題所有嘗試次數', () => {
+  const s = reduceLearning(emptyLearning(), [
+    { id:'node-1', type:'node_time', nodeId:'blood-composition-rbc', seconds:15 },
+    { id:'node-2', type:'node_time', nodeId:'blood-composition-rbc', seconds:9 },
+    { id:'answer-1', type:'answer', questionId:'q1', correct:false },
+    { id:'answer-2', type:'answer', questionId:'q1', correct:true },
+  ]);
+  assert.equal(s.nodeSeconds['blood-composition-rbc'], 24);
+  assert.equal(s.answers.q1.firstCorrect, false);
+  assert.equal(s.answers.q1.attempts, 2);
+});
 test('課程、單元、班級代碼可用中文，仍拒絕空白與符號', () => {
   for (const v of ['護525', '解剖生理115-1', 'anatomy_1', '護理一甲']) assert.ok(safeCode(v), v);
   for (const v of ['', '護 525', '護/525', '護.525', '護525！', 'a'.repeat(51)]) assert.ok(!safeCode(v), v);

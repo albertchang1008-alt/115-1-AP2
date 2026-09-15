@@ -50,6 +50,7 @@
 CourseLearning.explore('stomach');
 CourseLearning.answer('stage1', true); // 每次回答都呼叫，錯誤時傳 false
 CourseLearning.hint('stage1');
+CourseLearning.nodeTime('stomach', 15); // 某知識節點的有效停留秒數（最多 60 秒一批）
 CourseLearning.complete(); // 保留教材原有的星星／徽章／破關畫面
 ```
 

@@ -29,6 +29,7 @@
     explore(nodeId) { add({ type: 'explore', nodeId }); },
     answer(questionId, correct) { add({ type: 'answer', questionId: String(questionId), correct: !!correct }); },
     hint(questionId) { add({ type: 'hint', questionId: String(questionId) }); },
+    nodeTime(nodeId, seconds) { if (Number.isFinite(seconds) && seconds > 0) add({ type: 'node_time', nodeId: String(nodeId), seconds: Math.min(60, Math.floor(seconds)) }); },
     complete() { add({ type: 'completed' }); },
   };
   if (parent !== window) parent.postMessage({ type: 'ready' }, '*');

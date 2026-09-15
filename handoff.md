@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.3.5。本輪 Codex 依教師提供的 GA4 Measurement ID `G-VQVRD53N2N` 啟用血液組成教材的去識別探索／首次答題／通關事件；不傳任何學生身分資料。已提交於本機 `main`，目前比 `origin/main` 領先 8 個 commits，尚待使用者以 GitHub Desktop Push origin。1.3.5 是本輪剛完成的內容；1.3.4 是題序隨機化。
+目前版本：1.3.6。本輪 Codex 完備血液組成教材雙軌：學生端六顆探索星、兩種徽章與通關煙火；教師端逐圖卡有效停留、每題嘗試／重試與 Mastery（探索 40%＋首次答對 60%）。已提交於本機 `main`；請以 GitHub Desktop Push origin，並在使用者本機 Terminal 重新部署 Functions。1.3.6 是本輪剛完成的內容；1.3.5 是啟用 GA4。
 本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。既有未追蹤的 `html/` 原始資料夾屬使用者內容，本輪未更動或提交。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
@@ -48,6 +48,7 @@
 18.（2026-09-15，1.2.9）登入（`src/service.ts` 的 `login()`）呼叫 `signInWithPopup` 時固定帶 `prompt: 'select_account'`，讓 Google 彈窗每次都強制列出帳號選擇畫面，不會因為瀏覽器已有登入狀態就悄悄沿用同一帳號。新增 `switchAccount()`（先 `signOut` 再呼叫 `login()`），並在學生端 `student-nav`、教師端側欄的「登出」按鈕旁新增「切換帳號」（教師端預覽模式不顯示，因為那不是真的 Google 登入狀態）。之後如果要再新增任何登入相關按鈕，沿用 `App.tsx` 裡已有的 `doSwitchAccount()`／`error`／`loading` 這組 state，不要另外重造。
 19.（2026-09-15，1.3.0）測驗選項按鈕不再顯示 A/B/C/D 字母徽章，`src/Student.tsx` 選項清單只渲染選項文字（`<b>{String.fromCharCode(65+j)}</b>` 已移除，對應的 `.options button b` CSS 規則也一併拿掉）。這個元件是 quiz／閃卡／複習／教師預覽共用的同一份，改一處就會套用到所有畫面。注意：固定決策 12「選項每次都重新洗牌，避免學生背 ABCD 位置」講的是選項**順序**洗牌邏輯（`shared/model.ts` 的 shuffle），跟這次拿掉的字母**顯示**標籤是兩件事，洗牌邏輯本身沒有改動、還是照樣每次重排。
 20.（2026-09-15，1.3.1～1.3.5）新增教材 `public/materials/blood-composition-v1/index.html`，是「血液的組成」獨立互動活動，與既有 `blood-pre-v1`／`blood-post-v1` 並存。它以六張資訊卡作探索分母，五題固定 ID（`blood-composition-q01`～`q05`）的首次答案作診斷；五題全對才呼叫 `CourseLearning.complete()`，重做不覆寫首次答案。教師新增 HTML 活動時，網址指向該資料夾的 `index.html`，紀錄方式選「闖關與學習診斷」、版本填 `blood-composition-v1`、探索節點總數 6、闖關題目總數 5。此教材通關只記教材活動完成，不影響題庫完整測驗的單元完成度規則。GA4 已啟用去識別的探索／首次答題／通關事件，絕不可傳姓名、信箱、學號或登入資訊。
+21.（2026-09-15，1.3.6）`LearningEvent` 新增 `node_time`（`nodeId`＋每批 1–60 秒），`LearningSummary.nodeSeconds` 累積逐節點有效停留。SDK 新增 `CourseLearning.nodeTime()`；新教材在單一開啟圖卡中每 15 秒結算、切換／隱藏時結算，閒置超過 60 秒不計。血液組成教材學生端的六顆星來自六張圖卡首次探索，「血液探索家」在六星全得時解鎖，「限時連勝王」在五題限時連勝時解鎖並觸發煙火與 `complete()`。每次重做的作答皆回報，後端保留 `firstCorrect` 同時累積 attempts。教師診斷的 Mastery v1 是探索覆蓋 40%＋首次答對 60%，嘗試／重試與節點停留分開呈現，不作正式成績。**此版需要 GitHub Pages 發布與 `npx firebase-tools deploy --only functions --project ap2-7ed91`，否則新版教材送出的 `node_time` 事件會被舊 Functions 拒絕。**
 21.（2026-09-15）互動教材診斷只能提供教學線索，不能把行為直接判定為「猜題」或「認真」。現有血液教材能看六個探索節點、各題首次對錯、有效前景時間與通關；它刻意只回傳每題第一次作答，所以後台「嘗試」通常不代表重做次數，且尚未回傳提示使用或各節點停留時間。若要更細緻地分析重試與閱讀行為，需另行實作多次作答、提示及節點停留事件，並以中性標籤呈現。
 22.（2026-09-15）GA4 用於去識別的全班／教材趨勢，不傳學生姓名、學號、信箱或可回連名冊的 User-ID；個別學生的教學支持僅在有課程與班級授權的 Firestore 教師診斷頁進行。GA4 目前只送探索、首次答題與通關事件，沒有 `explored_nodes_count`、`first_try_wins`、`total_guess_attempts`、`true_mastery_score` 或 `student_persona` 等彙總／標籤欄位；其中「猜題」與「真正看懂」不得由系統自動判定。
 

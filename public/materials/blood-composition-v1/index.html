@@ -6,12 +6,13 @@
   <title>血液的組成與生理功能｜互動教材</title>
   <style>
     :root{--blue:#2563eb;--blue-soft:#eff6ff;--red:#dc2626;--red-soft:#fef2f2;--amber:#d97706;--amber-soft:#fffbeb;--green:#15803d;--green-soft:#f0fdf4;--ink:#172033;--muted:#64748b;--line:#dbe3ee;--paper:#fff;--page:#f8fafc}
-    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:1100px;margin:auto;padding:20px 16px 40px}header{text-align:center;border-bottom:2px solid var(--line);margin-bottom:24px;padding-bottom:16px}h1{color:var(--red);font-size:clamp(1.7rem,5vw,2.25rem);margin:0}h2{margin:.2rem 0 1rem;font-size:1.25rem}header p,.muted{color:var(--muted);margin:.25rem 0}.modes,.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 24px}button{font:inherit;cursor:pointer}.mode,.filter,.restart,.next{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;color:var(--muted);font-weight:700}.mode[aria-selected=true],.filter[aria-pressed=true],.next{background:var(--blue);border-color:var(--blue);color:#fff}.pane{display:none}.pane.active{display:block}.stats,.cards,.flashcards{display:grid;gap:15px}.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:20px}.stat,.card,.flash,.quiz{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px #1720330d}.stat{text-align:center;padding:14px}.stat b{color:var(--blue);display:block;font-size:1.4rem}.stat small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}.card{padding:0;text-align:left;overflow:hidden}.card summary{list-style:none;padding:16px;cursor:pointer}.card summary::-webkit-details-marker{display:none}.card summary b{font-size:1.05rem}.tag{float:right;border-radius:999px;padding:2px 8px;font-size:.75rem;background:var(--blue-soft);color:var(--blue)}.tag.plasma{background:var(--amber-soft);color:var(--amber)}.tag.cell{background:var(--red-soft);color:var(--red)}.card-body{border-top:1px solid var(--line);padding:0 16px 16px}.card-body ul{padding-left:1.2rem;color:var(--muted)}.detail{background:var(--page);border-radius:8px;padding:10px}.flashcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}.flash{min-height:190px;padding:18px;text-align:left}.flash button{width:100%;height:100%;border:0;background:transparent;text-align:left;color:inherit}.flash h3{color:var(--blue);margin:0 0 8px}.flash .back{display:none;color:var(--ink)}.flash.flipped .front{display:none}.flash.flipped .back{display:block}.quiz{max-width:800px;margin:auto;padding:20px}.challenge{align-items:center;background:var(--blue-soft);border:1px solid #bfdbfe;border-radius:10px;display:flex;justify-content:space-between;margin:14px 0;padding:9px 12px}.timer{color:var(--blue);font-weight:800}.timer.danger{color:var(--red)}.question{padding:17px 0;border-bottom:1px dashed var(--line)}.question:last-of-type{border:0}.options{display:grid;gap:8px;margin-top:10px}.option{border:1px solid var(--line);background:var(--page);border-radius:8px;padding:10px;text-align:left}.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}.option:disabled{cursor:default}.option.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.option.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);font-weight:700}.feedback{display:none;margin-top:10px;border-left:4px solid var(--blue);background:var(--blue-soft);padding:9px}.feedback.show{display:block}.result{margin-top:16px;padding:15px;border-radius:10px;background:var(--page)}.result.pass{background:var(--green-soft);color:var(--green)}.result.fail{background:var(--amber-soft);color:#92400e}.restart{margin-top:10px;color:var(--blue)}footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px}@media(max-width:420px){.wrap{padding-inline:12px}.mode,.filter{padding:7px 10px;font-size:.9rem}.quiz{padding:14px}}
+    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:1100px;margin:auto;padding:20px 16px 40px}header{text-align:center;border-bottom:2px solid var(--line);margin-bottom:18px;padding-bottom:16px}h1{color:var(--red);font-size:clamp(1.7rem,5vw,2.25rem);margin:0}h2{margin:.2rem 0 1rem;font-size:1.25rem}header p,.muted{color:var(--muted);margin:.25rem 0}.gamebar{align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin:0 auto 18px;padding:10px 14px}.stars{letter-spacing:2px}.star{color:#cbd5e1;font-size:1.3rem}.star.earned{color:#f59e0b}.badges{display:flex;gap:7px;flex-wrap:wrap}.badge{border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.82rem;padding:3px 8px}.badge.earned{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.modes,.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 24px}button{font:inherit;cursor:pointer}.mode,.filter,.restart,.next{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;color:var(--muted);font-weight:700}.mode[aria-selected=true],.filter[aria-pressed=true],.next{background:var(--blue);border-color:var(--blue);color:#fff}.pane{display:none}.pane.active{display:block}.stats,.cards,.flashcards{display:grid;gap:15px}.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:20px}.stat,.card,.flash,.quiz{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px #1720330d}.stat{text-align:center;padding:14px}.stat b{color:var(--blue);display:block;font-size:1.4rem}.stat small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}.card{padding:0;text-align:left;overflow:hidden}.card summary{list-style:none;padding:16px;cursor:pointer}.card summary::-webkit-details-marker{display:none}.card summary b{font-size:1.05rem}.tag{float:right;border-radius:999px;padding:2px 8px;font-size:.75rem;background:var(--blue-soft);color:var(--blue)}.tag.plasma{background:var(--amber-soft);color:var(--amber)}.tag.cell{background:var(--red-soft);color:var(--red)}.card-body{border-top:1px solid var(--line);padding:0 16px 16px}.card-body ul{padding-left:1.2rem;color:var(--muted)}.detail{background:var(--page);border-radius:8px;padding:10px}.flashcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}.flash{min-height:190px;padding:18px;text-align:left}.flash button{width:100%;height:100%;border:0;background:transparent;text-align:left;color:inherit}.flash h3{color:var(--blue);margin:0 0 8px}.flash .back{display:none;color:var(--ink)}.flash.flipped .front{display:none}.flash.flipped .back{display:block}.quiz{max-width:800px;margin:auto;padding:20px}.challenge{align-items:center;background:var(--blue-soft);border:1px solid #bfdbfe;border-radius:10px;display:flex;justify-content:space-between;margin:14px 0;padding:9px 12px}.timer{color:var(--blue);font-weight:800}.timer.danger{color:var(--red)}.question{padding:17px 0;border-bottom:1px dashed var(--line)}.question:last-of-type{border:0}.options{display:grid;gap:8px;margin-top:10px}.option{border:1px solid var(--line);background:var(--page);border-radius:8px;padding:10px;text-align:left}.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}.option:disabled{cursor:default}.option.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.option.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);font-weight:700}.feedback{display:none;margin-top:10px;border-left:4px solid var(--blue);background:var(--blue-soft);padding:9px}.feedback.show{display:block}.result{margin-top:16px;padding:15px;border-radius:10px;background:var(--page)}.result.pass{background:var(--green-soft);color:var(--green)}.result.fail{background:var(--amber-soft);color:#92400e}.restart{margin-top:10px;color:var(--blue)}#fireworks{inset:0;pointer-events:none;position:fixed;z-index:20}.burst{animation:burst 1.4s ease-out forwards;font-size:1.5rem;left:50%;position:absolute;top:42%}@keyframes burst{to{opacity:0;transform:translate(var(--x),var(--y)) rotate(540deg)}}footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px}@media(max-width:420px){.wrap{padding-inline:12px}.mode,.filter{padding:7px 10px;font-size:.9rem}.quiz{padding:14px}}
   </style>
 </head>
 <body>
 <main class="wrap">
   <header><h1>血液的組成與生理功能</h1><p>CH05｜互動資訊圖表・記憶閃卡・隨堂測驗</p></header>
+  <section class="gamebar" aria-label="遊戲進度"><div><b>探索星星：</b><span id="stars" class="stars" aria-label="已獲得 0／6 顆星">★★★★★★</span> <span id="star-count">0／6</span></div><div class="badges"><span id="explorer-badge" class="badge">🔒 血液探索家</span><span id="champion-badge" class="badge">🔒 限時連勝王</span></div></section>
   <nav class="modes" aria-label="教材模式">
     <button class="mode" type="button" data-pane="infographic" aria-selected="true">📊 互動資訊圖表</button>
     <button class="mode" type="button" data-pane="flashcards" aria-selected="false">🎴 記憶閃卡</button>
@@ -32,7 +33,7 @@
   <section id="flashcards" class="pane"><p class="muted">點選卡片翻面查看重點解析；閃卡不納入探索或答題診斷。</p><div class="flashcards" id="flash-list"></div></section>
   <section id="quiz" class="pane"><div class="quiz"><h2>CH05 血液生理限時連勝挑戰</h2><p class="muted">每題 45 秒；情境病例與易混淆陷阱五題連勝，才取得平台通關資格。</p><div class="challenge"><span id="challenge-progress">第 1／5 題・連勝 0 題</span><span id="challenge-timer" class="timer" aria-live="polite">45 秒</span></div><div id="quiz-list"></div><div id="quiz-result" aria-live="polite"></div></div></section>
   <footer>課程平台 1.0 互動教材｜blood-composition-v1</footer>
-</main>
+</main><div id="fireworks" aria-hidden="true"></div>
 <script src="../course-learning.js"></script>
 <script>
 (() => {
@@ -53,11 +54,32 @@
     if (!GA4_MEASUREMENT_ID || typeof window.gtag !== 'function') return;
     window.gtag('event', name, Object.assign({ material: 'blood-composition-v1' }, params));
   }
-  const explored = new Set(), firstAnswers = new Set();
+  const explored = new Set(), attempts = new Map(), openNodes = new Map();
+  const stars = document.querySelector('#stars'), starCount = document.querySelector('#star-count'), explorerBadge = document.querySelector('#explorer-badge'), championBadge = document.querySelector('#champion-badge');
+  let lastNodeAction = Date.now();
+  function updateGame() {
+    stars.innerHTML = Array.from({ length: 6 }, (_, index) => `<span class="star ${index < explored.size ? 'earned' : ''}">★</span>`).join('');
+    stars.setAttribute('aria-label', `已獲得 ${explored.size}／6 顆星`); starCount.textContent = `${explored.size}／6`;
+    explorerBadge.classList.toggle('earned', explored.size === 6); explorerBadge.textContent = `${explored.size === 6 ? '🏅' : '🔒'} 血液探索家`;
+    championBadge.classList.toggle('earned', completed); championBadge.textContent = `${completed ? '🏆' : '🔒'} 限時連勝王`;
+  }
+  function flushNodeTime(nodeId) {
+    const started = openNodes.get(nodeId); if (!started) return;
+    const seconds = Math.min(60, Math.floor((Date.now() - started) / 1000)); openNodes.delete(nodeId);
+    if (seconds > 0) { CL.nodeTime(nodeId, seconds); analytics('blood_composition_node_time', { node_id: nodeId, seconds }); }
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach((type) => window.addEventListener(type, () => { lastNodeAction = Date.now(); }, { passive: true }));
   document.querySelectorAll('.card').forEach((card) => card.addEventListener('toggle', () => {
-    if (!card.open || explored.has(card.dataset.node)) return;
-    explored.add(card.dataset.node); CL.explore(card.dataset.node); analytics('blood_composition_explore', { node_id: card.dataset.node });
+    const nodeId = card.dataset.node;
+    if (card.open) {
+      document.querySelectorAll('.card[open]').forEach((other) => { if (other !== card) { flushNodeTime(other.dataset.node); other.open = false; } });
+      openNodes.set(nodeId, Date.now());
+      if (!explored.has(nodeId)) { explored.add(nodeId); CL.explore(nodeId); analytics('blood_composition_explore', { node_id: nodeId }); updateGame(); }
+    } else flushNodeTime(nodeId);
   }));
+  setInterval(() => { if (document.hidden || Date.now() - lastNodeAction >= 60000) return; [...openNodes.keys()].forEach(flushNodeTime); document.querySelectorAll('.card[open]').forEach((card) => openNodes.set(card.dataset.node, Date.now())); }, 15000);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) [...openNodes.keys()].forEach(flushNodeTime); });
+  window.addEventListener('pagehide', () => [...openNodes.keys()].forEach(flushNodeTime));
   document.querySelectorAll('.mode').forEach((button) => button.addEventListener('click', () => {
     document.querySelectorAll('.mode').forEach((item) => item.setAttribute('aria-selected', String(item === button)));
     document.querySelectorAll('.pane').forEach((pane) => pane.classList.toggle('active', pane.id === button.dataset.pane));
@@ -106,7 +128,7 @@
     question.options.forEach((text, choice) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.textContent = text; button.addEventListener('click', () => choose(question, choice, article)); options.appendChild(button); });
     quizList.appendChild(article); startTimer();
   }
-  function recordAnswer(question, correct) { if (!firstAnswers.has(question.id)) { firstAnswers.add(question.id); CL.answer(question.id, correct); analytics('blood_composition_answer', { question_id: question.id, correct }); } }
+  function recordAnswer(question, correct) { const attempt = (attempts.get(question.id) || 0) + 1; attempts.set(question.id, attempt); CL.answer(question.id, correct); analytics('blood_composition_answer', { question_id: question.id, correct, attempt, first_attempt: attempt === 1 }); }
   function reveal(article, question, choice, message) {
     article.querySelectorAll('.option').forEach((button, index) => { button.disabled = true; if (index === question.answer) button.classList.add('correct'); else if (index === choice) button.classList.add('wrong'); });
     const feedback = article.querySelector('.feedback'); feedback.className = 'feedback show'; feedback.textContent = message + question.note;
@@ -126,10 +148,11 @@
   function finish(passed, message = '') {
     stopTimer(); result.className = `result ${passed ? 'pass' : 'fail'}`;
     result.innerHTML = `<b>${passed ? '🎉 五題限時連勝，教材通關！' : message}</b><br>${passed ? '平台已記錄此互動教材的完成資格。' : '五題都要在限時內答對才可通關。'}<br><button class="restart" type="button">${passed ? '重新練習' : '重新挑戰'}</button>`;
-    if (passed && !completed) { completed = true; CL.complete(); analytics('blood_composition_complete'); }
+    if (passed && !completed) { completed = true; updateGame(); CL.complete(); analytics('blood_composition_complete'); fireworks(); }
     result.querySelector('.restart').addEventListener('click', () => { roundQuestions = shuffleQuestions(); questionIndex = 0; streak = 0; renderQuiz(); });
   }
-  renderQuiz();
+  function fireworks() { const host = document.querySelector('#fireworks'); for (let index = 0; index < 24; index++) { const spark = document.createElement('span'); spark.className = 'burst'; spark.textContent = ['✨', '🎉', '⭐'][index % 3]; spark.style.setProperty('--x', `${Math.round((Math.random() - .5) * 720)}px`); spark.style.setProperty('--y', `${Math.round((Math.random() - .5) * 520)}px`); host.appendChild(spark); setTimeout(() => spark.remove(), 1500); } }
+  updateGame(); renderQuiz();
 })();
 </script>
 </body>
