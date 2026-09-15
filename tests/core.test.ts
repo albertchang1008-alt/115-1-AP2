@@ -53,7 +53,10 @@ test('名冊信箱、學號與重複資料檢查', () => {
   const r = { email: 's@ctcn.edu.tw', name: 'S', studentId: 's1', classId: 'a', enabled: true };
   assert.deepEqual(validateRoster([r]), []);
   assert.ok(validateRoster([r, r]).length);
-  assert.ok(validateRoster([{ ...r, email: 's@example.com' }]).length);
+  // 2026-09-15 起不再限制信箱網域（真正把關的是各課程班級名冊），一般網域信箱可直接通過。
+  assert.deepEqual(validateRoster([{ ...r, email: 's@gmail.com' }]), []);
+  // 但仍要求基本信箱格式，不是信箱格式的內容照樣擋下。
+  assert.ok(validateRoster([{ ...r, email: 'not-an-email' }]).length);
 });
 test('題目選項正解與穩定 ID', () => {
   assert.deepEqual(validateQuestions([q]), []);

@@ -19,10 +19,11 @@
 
 ---
 
-目前版本：1.2.4（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
+目前版本：1.2.5（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
-後端 Functions：**這輪（1.2.4）又動到 Cloud Functions 程式碼，部署清單裡 1.2.3 那次的 `syncRoster` 還沒有修正這次的例外處理問題，需要使用者再部署一次才會生效**（見下方「Claude 接手狀態（2026-09-15，第二輪）」）。1.2.3 那次的部署（`syncRoster` 從無到有＋29 個函式）已確認成功，是基礎；1.2.4 只是在同一個函式裡補上錯誤處理，不影響其他函式。
-本輪（1.2.4）改動 `functions/src/index.ts`（`syncRosterFromSheet` 的例外處理），**需要使用者重新執行一次 `npx firebase-tools deploy --only functions --project ap2-7ed91` 才會生效**；前端沒有變更，不需要重新 push 就能讓後端修正生效（但這次 commit 本身仍需要 push，才會讓 GitHub 上的原始碼跟本機一致）。
+後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（本輪，移除信箱網域限制）又動到 `functions/src/index.ts` 與 `shared/model.ts`，還沒部署，需要使用者再跑一次
+`npx firebase-tools deploy --only functions --project ap2-7ed91`** 才會生效（見下方「Claude 接手狀態（2026-09-15，第三輪）」）。
+本輪（1.2.5）只動到後端邏輯（`allowedEmail` 不再限制信箱網域），前端沒有變更，不需要重新 push 就能讓後端修正生效（但這次 commit 本身仍需要用 GitHub Desktop push，才會讓 GitHub 上的原始碼跟本機一致）。
 
 ## 固定決策
 
@@ -263,14 +264,68 @@
      訊息內容回報，才能繼續往下查。
   3. Git：改動已在本機 `main` commit（見下方 `git log`），**尚未推上
      GitHub**。
+- **後續確認**：使用者部署後實測「同步班級名冊」，錯誤已經從不明的
+  internal/500 變成具體訊息「名冊格式錯誤：第 1 列：信箱、姓名、學號或
+  班級不完整」——證實 1.2.4 這個修正本身確實生效、確實有效（原本會被吞掉
+  的錯誤現在看得到了）。往下的真正資料問題見下一輪（1.2.5）。
+
+## Claude 接手狀態（2026-09-15，第三輪：名冊信箱不再限制網域）
+
+- 起因：上一輪的具體錯誤訊息「信箱、姓名、學號或班級不完整」讓使用者發現
+  真正卡住的是信箱網域限制——平台原本寫死只接受 `@ctcn.edu.tw`，但使用者
+  的「班級名冊」分頁欄位其實是 `Gmail`（見固定決策，欄位本來就叫
+  Gmail）。使用者明確要求「把『平台目前只接受學校網域信箱當學生帳號，不
+  接受一般 @gmail.com』取消，反正有名單」——也就是不要再限制信箱網域，
+  因為真正能不能用某堂課，本來就是由該課程自己的班級名冊（enrollments）
+  決定，不是信箱網域。
+- 確認影響範圍後才動手：`functions/src/index.ts` 的 `access()` 在學生走
+  非教師路徑時，一定會另外查 `enrollments/{courseId}__{email}`（或舊版
+  `roster/{email}`），要 `enabled` 且 `classId` 在該課程已發布班級中才准
+  進去（見 `access()` 第 99-107 行）。也就是說：就算信箱網域限制拿掉，
+  沒被同步進班級名冊、沒被啟用的信箱依然完全進不去任何課程——移除網域
+  限制不會打開一個沒有名單把關的後門，只是不再多一層「網域一定要是
+  @ctcn.edu.tw」的限制。
+- 改動：
+  - `shared/model.ts`：`allowedEmail()` 移除 `@ctcn.edu.tw` 網域檢查
+    （原本的 `SCHOOL_EMAIL` 正規表達式），改成只檢查「像不像一個信箱」
+    （`EMAIL_FORMAT`，要有 `@` 和網域），一般 `@gmail.com` 等信箱现在可以
+    通過。`testEmails`／`config/testStudents` 白名單參數維持相容，但因為
+    現在任何格式正確的信箱都會過，這個白名單實質上不再是唯一能放行非
+    校方信箱的管道了（不影響既有呼叫方式，只是意義變淡）。
+  - `functions/src/index.ts`：`identity()` 裡兩句錯誤訊息「請使用已驗證的
+    學校 Google 帳號」改成「請使用已驗證的 Google 帳號」／「信箱格式無效」，
+    避免文字仍暗示網域限制、誤導使用者。
+  - `tests/core.test.ts`、`tests/platform.test.ts`：更新對應測試——原本
+    斷言「非學校信箱會被拒絕」的兩個測試案例，改成斷言「一般信箱會通過、
+    但格式不對（例如缺 `@`）仍會被擋下」，反映新的預期行為，不是被規避的
+    失敗測試。
+- 驗證：根目錄 `npx tsc -b` 無錯誤；`npm test`（前端／共用邏輯）28/28 全
+  過（含上述兩個更新過的案例）；`functions/` 底下 `npm run build`（29 個
+  函式）與 `npm test`（5/5）皆通過。
+- 版本：`VERSION` 由 1.2.4 升到 **1.2.5**，`node scripts/version.mjs` 已
+  同步所有版本檔案，`DEVELOPMENT_LOG.md` 已新增 1.2.5 條目，
+  `node scripts/version.mjs --check` 通過。
+- **這輪跟 1.2.4 一樣，只動到 `functions/src/index.ts` 與共用的
+  `shared/model.ts`（`shared/` 同時被前端與後端引用，但前端目前沒有任何
+  地方呼叫 `allowedEmail`，只有 `functions/src/index.ts` 用它），沒有動
+  UI，前端版本號不會變成 1.2.5，但 Firestore/Functions 的行為改了。**
+  1. 使用者需要用 GitHub Desktop 推送這個新 commit。
+  2. **使用者需要在自己電腦 Terminal 再跑一次
+     `npx firebase-tools deploy --only functions --project ap2-7ed91`**，
+     這個放寬信箱網域的修正才會生效。
+  3. 部署後預期：使用者的「班級名冊」分頁裡如果 Gmail／學號／姓名／班級
+     四欄都填好格式正確（尤其學號只能半形英數字/底線/連字號、班級代碼
+     不能有空白或斜線等符號），這次應該就能真的同步成功；如果還有欄位
+     不符合格式，畫面會顯示具體是第幾列、什麼問題（1.2.4 那次修正的
+     效果），麻煩使用者把訊息回報以便繼續排查。
 
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
-- **實測確認（1.2.4）**：等這次改動 push 到 GitHub 且 Functions 重新部署
+- **實測確認（1.2.5）**：等這次改動 push 到 GitHub 且 Functions 重新部署
   （`npx firebase-tools deploy --only functions --project ap2-7ed91`）後，
-  麻煩在「班級名冊」頁重新按一次「同步班級名冊」。這次如果還是失敗，畫面
-  或 Console 應該會出現具體的中文錯誤訊息（不會再是 internal／500），麻煩
-  把訊息內容回報，才能判斷是名冊資料格式問題還是程式問題。
+  麻煩在「班級名冊」頁重新按一次「同步班級名冊」。信箱網域限制已經拿掉，
+  如果還是失敗，畫面應該會指出是第幾列、哪一類欄位問題（學號格式、班級
+  代碼格式、姓名空白等），麻煩把訊息內容回報，才能判斷下一步。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

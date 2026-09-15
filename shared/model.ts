@@ -206,12 +206,16 @@ export function validateQuestions(qs: Question[]) {
   });
   return errors;
 }
-// 正式學生一律為學校信箱；測試帳號由後端 config/testStudents 白名單提供。
-const SCHOOL_EMAIL = /^[^@\s]+@ctcn\.edu\.tw$/;
+// 2026-09-15（使用者要求）：學生登入與名冊比對不再限制信箱網域（原本只接受
+// @ctcn.edu.tw，一般 @gmail.com 會被拒絕）。真正的存取控管是每堂課各自的班級
+// 名冊（enrollments，見 functions/src/index.ts 的 access()）——不在名冊裡的信箱
+// 一樣進不去任何課程，所以這裡放寬網域限制不會讓沒登記的人看到課程內容。
+// 仍保留基本信箱格式檢查，避免名冊誤填非信箱內容（例如整欄空白或打錯字）。
+const EMAIL_FORMAT = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 export function allowedEmail(email: unknown, testEmails: readonly string[] = []) {
   const value = String(email ?? '').trim().toLowerCase();
   if (!value) return false;
-  return SCHOOL_EMAIL.test(value) || testEmails.some((e) => String(e).trim().toLowerCase() === value);
+  return EMAIL_FORMAT.test(value) || testEmails.some((e) => String(e).trim().toLowerCase() === value);
 }
 export function validateRoster(rows: Roster[], testEmails: readonly string[] = []) {
   const errors: string[] = [];

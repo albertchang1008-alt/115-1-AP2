@@ -97,12 +97,11 @@ test('課程、單元、班級代碼可用中文，仍拒絕空白與符號', ()
   ], '第一章細胞');
   assert.equal(groups.get('解剖生理')!.get('第一章細胞')!.questions.length, 1);
 });
-test('測試帳號需在白名單內才通過名冊驗證，預設仍只收學校信箱', () => {
+test('2026-09-15 起名冊信箱不再限制網域，但仍要求基本格式', () => {
   const row = { courseId: 'a', classId: 'A', studentId: 'T001', name: '測試學生', email: 'tester@example.com', enabled: true };
-  assert.equal(validateRoster([row]).length, 1);
-  assert.equal(validateRoster([row], ['Tester@Example.com ']).length, 0);
+  assert.equal(validateRoster([row]).length, 0);
   assert.equal(validateRoster([{ ...row, email: 'student@ctcn.edu.tw' }]).length, 0);
-  assert.equal(validateRoster([{ ...row, email: 'other@example.com' }], ['tester@example.com']).length, 1);
+  assert.equal(validateRoster([{ ...row, email: 'not-an-email' }]).length, 1);
 });
 
 test('題序留白不把 undefined 寫入 Firestore；錯誤題序明確指出列號', () => {

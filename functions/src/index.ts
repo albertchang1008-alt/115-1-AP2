@@ -79,9 +79,11 @@ async function identity(req: any) {
     };
   const email = String(t.email ?? '').trim().toLowerCase();
   if (t.email_verified !== true || t.firebase?.sign_in_provider !== 'google.com' || !email)
-    throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
+    throw new HttpsError('permission-denied', '請使用已驗證的 Google 帳號');
+  // 2026-09-15 起不再限制信箱網域（見 shared/model.ts 的 allowedEmail 註解）；
+  // 這裡只是基本格式檢查，真正能不能進課程由 access() 比對班級名冊決定。
   if (!allowedEmail(email, await testStudents()))
-    throw new HttpsError('permission-denied', '請使用已驗證的學校 Google 帳號');
+    throw new HttpsError('permission-denied', '信箱格式無效');
   const test = !allowedEmail(email);
   return { uid: req.auth.uid, email, teacher: false, name: t.name || '', studentId: '', classId: '', enabled: true, test } as any;
 }
