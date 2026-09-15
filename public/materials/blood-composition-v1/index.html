@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>血液的組成與生理功能｜互動教材</title>
+  <style>
+    :root{--blue:#2563eb;--blue-soft:#eff6ff;--red:#dc2626;--red-soft:#fef2f2;--amber:#d97706;--amber-soft:#fffbeb;--green:#15803d;--green-soft:#f0fdf4;--ink:#172033;--muted:#64748b;--line:#dbe3ee;--paper:#fff;--page:#f8fafc}
+    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:1100px;margin:auto;padding:20px 16px 40px}header{text-align:center;border-bottom:2px solid var(--line);margin-bottom:24px;padding-bottom:16px}h1{color:var(--red);font-size:clamp(1.7rem,5vw,2.25rem);margin:0}h2{margin:.2rem 0 1rem;font-size:1.25rem}header p,.muted{color:var(--muted);margin:.25rem 0}.modes,.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 24px}button{font:inherit;cursor:pointer}.mode,.filter,.restart{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;color:var(--muted);font-weight:700}.mode[aria-selected=true],.filter[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}.pane{display:none}.pane.active{display:block}.stats,.cards,.flashcards{display:grid;gap:15px}.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:20px}.stat,.card,.flash,.quiz{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px #1720330d}.stat{text-align:center;padding:14px}.stat b{color:var(--blue);display:block;font-size:1.4rem}.stat small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}.card{padding:0;text-align:left;overflow:hidden}.card summary{list-style:none;padding:16px;cursor:pointer}.card summary::-webkit-details-marker{display:none}.card summary b{font-size:1.05rem}.tag{float:right;border-radius:999px;padding:2px 8px;font-size:.75rem;background:var(--blue-soft);color:var(--blue)}.tag.plasma{background:var(--amber-soft);color:var(--amber)}.tag.cell{background:var(--red-soft);color:var(--red)}.card-body{border-top:1px solid var(--line);padding:0 16px 16px}.card-body ul{padding-left:1.2rem;color:var(--muted)}.detail{background:var(--page);border-radius:8px;padding:10px}.flashcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}.flash{min-height:190px;padding:18px;text-align:left}.flash button{width:100%;height:100%;border:0;background:transparent;text-align:left;color:inherit}.flash h3{color:var(--blue);margin:0 0 8px}.flash .back{display:none;color:var(--ink)}.flash.flipped .front{display:none}.flash.flipped .back{display:block}.quiz{max-width:800px;margin:auto;padding:20px}.question{padding:17px 0;border-bottom:1px dashed var(--line)}.question:last-of-type{border:0}.options{display:grid;gap:8px;margin-top:10px}.option{border:1px solid var(--line);background:var(--page);border-radius:8px;padding:10px;text-align:left}.option:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}.option:disabled{cursor:default}.option.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:700}.option.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);font-weight:700}.feedback{display:none;margin-top:10px;border-left:4px solid var(--blue);background:var(--blue-soft);padding:9px}.feedback.show{display:block}.result{margin-top:16px;padding:15px;border-radius:10px;background:var(--page)}.result.pass{background:var(--green-soft);color:var(--green)}.result.fail{background:var(--amber-soft);color:#92400e}.restart{margin-top:10px;color:var(--blue)}footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px}@media(max-width:420px){.wrap{padding-inline:12px}.mode,.filter{padding:7px 10px;font-size:.9rem}.quiz{padding:14px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header><h1>血液的組成與生理功能</h1><p>CH05｜互動資訊圖表・記憶閃卡・隨堂測驗</p></header>
+  <nav class="modes" aria-label="教材模式">
+    <button class="mode" type="button" data-pane="infographic" aria-selected="true">📊 互動資訊圖表</button>
+    <button class="mode" type="button" data-pane="flashcards" aria-selected="false">🎴 記憶閃卡</button>
+    <button class="mode" type="button" data-pane="quiz" aria-selected="false">📝 隨堂測驗</button>
+  </nav>
+  <section id="infographic" class="pane active">
+    <div class="stats"><div class="stat"><b>8%</b><small>血液占體重比例</small></div><div class="stat"><b>55% / 45%</b><small>血漿 vs 定形成分</small></div><div class="stat"><b>7.35–7.45</b><small>正常酸鹼值（pH）</small></div><div class="stat"><b>120 天</b><small>成熟紅血球平均壽命</small></div></div>
+    <div class="filters" aria-label="主題篩選"><button class="filter" type="button" data-filter="all" aria-pressed="true">全部</button><button class="filter" type="button" data-filter="general" aria-pressed="false">物理特性</button><button class="filter" type="button" data-filter="plasma" aria-pressed="false">血漿</button><button class="filter" type="button" data-filter="cell" aria-pressed="false">定形成分</button><button class="filter" type="button" data-filter="hematopoiesis" aria-pressed="false">造血</button></div>
+    <div class="cards">
+      <details class="card" data-node="blood-composition-physical" data-category="general"><summary><span class="tag">物理特性</span><b>血液的物理特性與總量</b><br><span class="muted">成年男性約 5–6 L，女性約 4–5 L。</span></summary><div class="card-body"><ul><li>全血黏度為水的 4.5–5.5 倍；比重 1.056–1.059。</li><li>滲透壓 290–300 mOsm/L；溫度約 38°C。</li><li>血比容升至 60–70% 時，黏滯度會顯著增加心臟唧血阻力。</li></ul><p class="detail"><b>臨床意義：</b>血液黏度主要受血比容影響；高山居民血比容偏高以提升攜氧量。</p></div></details>
+      <details class="card" data-node="blood-composition-plasma" data-category="plasma"><summary><span class="tag plasma">血漿 55%</span><b>血漿成分</b><br><span class="muted">92% 水分與 8% 溶質，包含蛋白質與電解質。</span></summary><div class="card-body"><ul><li>白蛋白約 60%，主導血漿膠體滲透壓。</li><li>球蛋白約 35%，γ-球蛋白與免疫有關。</li><li>纖維蛋白原約 5%，參與血液凝固。</li></ul><p class="detail"><b>血漿 vs 血清：</b>血清是凝血後的液體，缺少纖維蛋白原等凝血蛋白。</p></div></details>
+      <details class="card" data-node="blood-composition-rbc" data-category="cell"><summary><span class="tag cell">定形成分</span><b>紅血球（RBC）</b><br><span class="muted">成熟後無核、雙凹圓盤狀，平均壽命約 120 天。</span></summary><div class="card-body"><ul><li>男性約 540 萬/mm³，女性約 480 萬/mm³。</li><li>血紅素由含鐵血基質與球蛋白鏈組成。</li><li>攜帶 O₂ 與部分 CO₂。</li></ul><p class="detail"><b>恆定：</b>缺氧促腎臟分泌 EPO 刺激紅骨髓；老化紅血球在脾、肝被分解，鐵可回收。</p></div></details>
+      <details class="card" data-node="blood-composition-wbc" data-category="cell"><summary><span class="tag cell">定形成分</span><b>白血球（WBC）</b><br><span class="muted">具核、無血紅素，負責免疫防禦。</span></summary><div class="card-body"><ul><li>數量約 5,000–9,000/mm³。</li><li>顆粒性包含嗜中性、嗜酸性與嗜鹼性球。</li><li>無顆粒性包含單核球與淋巴球。</li></ul><p class="detail"><b>重點：</b>單核球進入組織約 24 小時會轉成巨噬細胞；B 細胞可轉成漿細胞製造抗體。</p></div></details>
+      <details class="card" data-node="blood-composition-platelets" data-category="cell"><summary><span class="tag cell">定形成分</span><b>血小板</b><br><span class="muted">巨核細胞碎片，無核，數量約 25–40 萬/mm³。</span></summary><div class="card-body"><ul><li>壽命約 5–9 天。</li><li>黏附、聚集形成初步血小板栓子。</li><li>與纖維蛋白網共同形成止血凝塊。</li></ul><p class="detail"><b>止血：</b>凝血酶催化纖維蛋白原形成纖維蛋白，強化血小板形成的栓子。</p></div></details>
+      <details class="card" data-node="blood-composition-hematopoiesis" data-category="hematopoiesis"><summary><span class="tag">造血機制</span><b>造血器官演變</b><br><span class="muted">所有血球起源於骨髓未分化幹細胞。</span></summary><div class="card-body"><ul><li>胚胎第 3–8 週：卵黃囊造血。</li><li>第 8 週至出生：肝臟接替造血。</li><li>第 5 個月起：脾臟與骨髓造血。</li><li>成人：終身由紅骨髓負責造血。</li></ul><p class="detail"><b>易錯：</b>脾臟造血維持時間最短；成人紅骨髓是主要造血器官。</p></div></details>
+    </div>
+  </section>
+  <section id="flashcards" class="pane"><p class="muted">點選卡片翻面查看重點解析；閃卡不納入探索或答題診斷。</p><div class="flashcards" id="flash-list"></div></section>
+  <section id="quiz" class="pane"><div class="quiz"><h2>CH05 血液生理隨堂測驗</h2><p class="muted">五題全對才通關。首次作答會保存為學習診斷；重新挑戰不會覆寫首次結果。</p><div id="quiz-list"></div><div id="quiz-result" aria-live="polite"></div></div></section>
+  <footer>課程平台 1.0 互動教材｜blood-composition-v1</footer>
+</main>
+<script src="../course-learning.js"></script>
+<script>
+(() => {
+  const CL = window.CourseLearning || { explore(){}, answer(){}, hint(){}, complete(){} };
+  // 留白時不載入 GA4。提供 G-XXXXXXXXXX 後才會動態載入並送出無識別事件。
+  const GA4_MEASUREMENT_ID = '';
+  function initAnalytics() {
+    if (!/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date()); window.gtag('config', GA4_MEASUREMENT_ID);
+    const script = document.createElement('script'); script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_MEASUREMENT_ID);
+    document.head.appendChild(script);
+  }
+  initAnalytics();
+  function analytics(name, params = {}) {
+    if (!GA4_MEASUREMENT_ID || typeof window.gtag !== 'function') return;
+    window.gtag('event', name, Object.assign({ material: 'blood-composition-v1' }, params));
+  }
+  const explored = new Set(), firstAnswers = new Set();
+  document.querySelectorAll('.card').forEach((card) => card.addEventListener('toggle', () => {
+    if (!card.open || explored.has(card.dataset.node)) return;
+    explored.add(card.dataset.node); CL.explore(card.dataset.node); analytics('blood_composition_explore', { node_id: card.dataset.node });
+  }));
+  document.querySelectorAll('.mode').forEach((button) => button.addEventListener('click', () => {
+    document.querySelectorAll('.mode').forEach((item) => item.setAttribute('aria-selected', String(item === button)));
+    document.querySelectorAll('.pane').forEach((pane) => pane.classList.toggle('active', pane.id === button.dataset.pane));
+  }));
+  document.querySelectorAll('.filter').forEach((button) => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    document.querySelectorAll('.filter').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+    document.querySelectorAll('.card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
+  }));
+  const flashcards = [
+    ['血比容（Hct）','定形成分占全血的容積百分比；男性約 47%、女性約 42%，平均約 45%。'],
+    ['血漿 vs 血清','血漿含纖維蛋白原等凝血因子；血清是凝血後去除這些蛋白的液體。'],
+    ['紅血球生命週期','壽命約 120 天；老化後在脾、肝由巨噬細胞分解，鐵回收再利用。'],
+    ['嗜鹼性球','含肝素與組織胺；肝素抗凝，組織胺引起局部血管擴張與過敏反應。'],
+    ['胚胎造血順序','卵黃囊 → 肝臟 → 脾臟與骨髓 → 成人紅骨髓。'],
+    ['惡性貧血','缺乏內在因子使維生素 B₁₂ 吸收不良，可能形成巨母紅血球。']
+  ];
+  const flashList = document.querySelector('#flash-list');
+  flashcards.forEach(([title, body]) => { const card = document.createElement('article'); card.className = 'flash'; card.innerHTML = `<button type="button" aria-pressed="false"><span class="front"><h3>${title}</h3><p>點選翻面查看重點</p></span><span class="back"><h3>${title}</h3><p>${body}</p></span></button>`; card.querySelector('button').addEventListener('click', (event) => { card.classList.toggle('flipped'); event.currentTarget.setAttribute('aria-pressed', String(card.classList.contains('flipped'))); }); flashList.appendChild(card); });
+  const questions = [
+    { id:'blood-composition-q01', text:'下列有關成熟紅血球特徵的敘述，何者不正確？', options:['成熟紅血球為雙凹圓盤狀且不具細胞核','成熟紅血球平均生命期約為 7–9 天','成年男性紅血球數量高於女性','細胞內含血紅素以攜帶 O₂ 與 CO₂'], answer:1, note:'紅血球平均壽命約為 120 天；5–9 天是血小板的壽命。' },
+    { id:'blood-composition-q02', text:'血清不含哪一種參與凝血的蛋白質？', options:['白蛋白','γ-球蛋白','纖維蛋白原','溶菌酶'], answer:2, note:'血漿去除纖維蛋白原等凝血蛋白後即稱為血清。' },
+    { id:'blood-composition-q03', text:'胚胎發育中，哪個器官維持造血的時期最短？', options:['卵黃囊','肝臟','脾臟','紅骨髓'], answer:2, note:'胚胎第 5 個月起脾臟與骨髓開始造血，但脾臟造血很快結束。' },
+    { id:'blood-composition-q04', text:'哪種白血球進入組織約 24 小時後會轉化為巨噬細胞？', options:['嗜中性球','單核球','淋巴球','嗜酸性球'], answer:1, note:'單核球進入組織後轉化為巨噬細胞，例如肝臟的 Kupffer cell。' },
+    { id:'blood-composition-q05', text:'血紅素攜帶氧氣時，氧氣主要與哪個部位結合？', options:['血基質中的鐵原子（Fe）','球蛋白多胜肽鏈','碳酸酐酶','維生素 B₁₂'], answer:0, note:'每個血紅素次單位的含鐵血基質可直接結合氧分子。' }
+  ];
+  let answers = new Map(), completed = false;
+  const quizList = document.querySelector('#quiz-list'), result = document.querySelector('#quiz-result');
+  function renderQuiz() {
+    quizList.replaceChildren(); result.replaceChildren();
+    questions.forEach((question, index) => {
+      const article = document.createElement('section'); article.className = 'question';
+      article.innerHTML = `<b>${index + 1}. ${question.text}</b><div class="options"></div><div class="feedback"></div>`;
+      const options = article.querySelector('.options'), feedback = article.querySelector('.feedback');
+      question.options.forEach((text, choice) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.textContent = text; button.addEventListener('click', () => choose(question, choice)); options.appendChild(button); });
+      quizList.appendChild(article);
+    });
+  }
+  function choose(question, choice) {
+    if (answers.has(question.id)) return;
+    const correct = choice === question.answer; answers.set(question.id, correct);
+    if (!firstAnswers.has(question.id)) { firstAnswers.add(question.id); CL.answer(question.id, correct); analytics('blood_composition_answer', { question_id: question.id, correct }); }
+    const article = [...quizList.children][questions.indexOf(question)], buttons = article.querySelectorAll('.option'), feedback = article.querySelector('.feedback');
+    buttons.forEach((button, index) => { button.disabled = true; if (index === question.answer) button.classList.add('correct'); else if (index === choice) button.classList.add('wrong'); });
+    feedback.className = 'feedback show'; feedback.textContent = (correct ? '答對。' : '答錯。') + question.note;
+    if (answers.size === questions.length) finish();
+  }
+  function finish() {
+    const score = [...answers.values()].filter(Boolean).length, passed = score === questions.length;
+    result.className = `result ${passed ? 'pass' : 'fail'}`;
+    result.innerHTML = `<b>${passed ? '🎉 五題全對，教材通關！' : `本輪答對 ${score}／${questions.length}`}</b><br>${passed ? '通關紀錄已送交平台；探索與首次作答會供教師檢視。' : '通關需要五題全對。閱讀解析後可重新挑戰整輪。'}<br><button class="restart" type="button">${passed ? '重新練習' : '重新挑戰整輪'}</button>`;
+    if (passed && !completed) { completed = true; CL.complete(); analytics('blood_composition_complete'); }
+    result.querySelector('.restart').addEventListener('click', () => { answers = new Map(); renderQuiz(); });
+  }
+  renderQuiz();
+})();
+</script>
+</body>
+</html>

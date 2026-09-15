@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { materialUrl } from '../shared/model';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -54,4 +55,14 @@ test('學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈�
   const invalid = render('javascript:alert(1)');
   assert.ok(!invalid.includes('<iframe'));
   assert.ok(invalid.includes('disabled=""'));
+});
+
+test('血液組成教材使用 SDK、固定診斷分母與滿分通關', async () => {
+  const html = await readFile(new URL('../public/materials/blood-composition-v1/index.html', import.meta.url), 'utf8');
+  assert.match(html, /<script src="\.\.\/course-learning\.js"><\/script>/);
+  assert.equal((html.match(/data-node="blood-composition-/g) || []).length, 6);
+  assert.equal((html.match(/id:'blood-composition-q0/g) || []).length, 5);
+  assert.match(html, /score === questions\.length/);
+  assert.match(html, /CL\.complete\(\)/);
+  assert.match(html, /const GA4_MEASUREMENT_ID = ''/);
 });

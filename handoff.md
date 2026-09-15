@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.3.0（本機 `main` 最新，本輪 Claude 剛做完，尚待推送）。1.3.0 是本輪剛完成的內容（測驗選項拿掉 A/B/C/D 字母徽章），1.2.9 是上一輪。
+目前版本：1.3.1（本機 `main` 最新，本輪 Codex 新增血液組成互動教材，尚待提交與推送）。1.3.1 是本輪剛完成的內容；1.3.0 是測驗選項拿掉 A/B/C/D 字母徽章。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
 `npx firebase-tools deploy --only functions --project ap2-7ed91`** 才會生效。
@@ -46,6 +46,7 @@
 17.（2026-09-15，1.2.6／1.2.7）全平台文字大小可由使用者自行調整：「字級」下拉選單（小／預設／大／特大），比照既有「色系」選單的做法，用 CSS 變數 `--font-scale` 搭配 `localStorage`（key `course-font-scale`）記住偏好，教師後台與學生端共用同一個設定。`src/style.css` 所有 `font-size` 都要寫成 `calc(Npx * var(--font-scale, 1))` 的形式，之後新增樣式規則也要照這個寫法，不要再寫死 `font-size: Npx`，否則新文字不會跟著縮放。**位置（1.2.7 更新）：色系／字級選單不是各自 `position: fixed` 浮動在右下角了，而是一起放進 `.prefs-bar`（`position: sticky; top: 0;`）常駐列，固定在頁面最上方、貼齊頂端捲動**——1.2.6 版本用 fixed 右下角會蓋住頁面內容（使用者截圖回報蓋住「抽10題」文字），1.2.7 改成這樣解決。
 18.（2026-09-15，1.2.9）登入（`src/service.ts` 的 `login()`）呼叫 `signInWithPopup` 時固定帶 `prompt: 'select_account'`，讓 Google 彈窗每次都強制列出帳號選擇畫面，不會因為瀏覽器已有登入狀態就悄悄沿用同一帳號。新增 `switchAccount()`（先 `signOut` 再呼叫 `login()`），並在學生端 `student-nav`、教師端側欄的「登出」按鈕旁新增「切換帳號」（教師端預覽模式不顯示，因為那不是真的 Google 登入狀態）。之後如果要再新增任何登入相關按鈕，沿用 `App.tsx` 裡已有的 `doSwitchAccount()`／`error`／`loading` 這組 state，不要另外重造。
 19.（2026-09-15，1.3.0）測驗選項按鈕不再顯示 A/B/C/D 字母徽章，`src/Student.tsx` 選項清單只渲染選項文字（`<b>{String.fromCharCode(65+j)}</b>` 已移除，對應的 `.options button b` CSS 規則也一併拿掉）。這個元件是 quiz／閃卡／複習／教師預覽共用的同一份，改一處就會套用到所有畫面。注意：固定決策 12「選項每次都重新洗牌，避免學生背 ABCD 位置」講的是選項**順序**洗牌邏輯（`shared/model.ts` 的 shuffle），跟這次拿掉的字母**顯示**標籤是兩件事，洗牌邏輯本身沒有改動、還是照樣每次重排。
+20.（2026-09-15，1.3.1）新增教材 `public/materials/blood-composition-v1/index.html`，是「血液的組成」獨立互動活動，與既有 `blood-pre-v1`／`blood-post-v1` 並存。它以六張資訊卡作探索分母，五題固定 ID（`blood-composition-q01`～`q05`）的首次答案作診斷；五題全對才呼叫 `CourseLearning.complete()`，重做不覆寫首次答案。教師新增 HTML 活動時，網址指向該資料夾的 `index.html`，紀錄方式選「闖關與學習診斷」、版本填 `blood-composition-v1`、探索節點總數 6、闖關題目總數 5。此教材通關只記教材活動完成，不影響題庫完整測驗的單元完成度規則。教材內的 `GA4_MEASUREMENT_ID` 目前刻意為空，因此不會載入或傳送 GA4；收到教師提供的有效 `G-...` Measurement ID 後才可啟用去識別的探索／答題／通關事件，絕不可傳姓名、信箱、學號或登入資訊。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
