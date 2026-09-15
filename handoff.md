@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.3.7。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。已提交前端與 Functions 程式前須以 GitHub Desktop Push origin，並在使用者本機 Terminal 重新部署 Functions。
+目前版本：1.3.7。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；本機 `main` 仍比 GitHub 多 17 個提交，終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。**
 本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。既有未追蹤的 `html/` 原始資料夾屬使用者內容，本輪未更動或提交。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
