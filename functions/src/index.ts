@@ -159,6 +159,7 @@ export const saveCourse = onCall(options, async (req) => {
       u.activities.length > 30
     )
       fail('單元設定無效');
+    if (u.research && typeof u.research.enabled !== 'boolean') fail('研究資料設定無效');
     const activityIds = new Set();
     for (const a of u.activities) {
       id(a.id);
@@ -529,6 +530,62 @@ export const saveActivity = onCall(options, async (req) => {
     { merge: true },
   );
   return { ok: true };
+});
+// 題庫解析研究資料：僅在授權課程保存粗粒度曝光／展開／停留；不影響成績與完成度。
+export const saveExplanationResearchEvents = onCall(options, async (req) => {
+  const { p, c } = await access(req, req.data.courseId);
+  if (p.teacher) fail('教師預覽不寫入研究資料');
+  const unitId = code(req.data.unitId), version = id(req.data.version);
+  const unit = forClass(c.published, p.classId).units.find((u: Unit) => u.id === unitId);
+  if (!unit || !unit.bankVersion || unit.bankVersion !== version || unit.research?.enabled === false || Date.parse(unit.opensAt) > Date.now()) fail('研究資料活動未開放');
+  const events = req.data.events;
+  if (!Array.isArray(events) || !events.length || events.length > 30 || new Set(events.map((e: any) => e?.id)).size !== events.length) fail('研究資料事件無效');
+  for (const e of events) {
+    if (!e || typeof e !== 'object' || !safeId(e.id) || !safeId(e.questionId) || !safeId(e.attemptId) || !['guided', 'traditional'].includes(e.format) || !['exposed', 'opened', 'closed'].includes(e.action) || !Number.isFinite(e.clientAt) || (e.seconds !== undefined && (!Number.isFinite(e.seconds) || e.seconds < 1 || e.seconds > 600))) fail('研究資料事件格式錯誤');
+  }
+  const root = db.doc(`courses/${req.data.courseId}/research/${p.uid}_${unitId}_${version}`);
+  const refs = events.map((e: any) => root.collection('events').doc(e.id));
+  return db.runTransaction(async (tx) => {
+    const [current, ...stored] = await Promise.all([tx.get(root), ...refs.map((r) => tx.get(r))]);
+    const fresh = events.filter((_: any, i: number) => !stored[i].exists);
+    const summary = current.data()?.summary || { guidedExposures: 0, guidedSeconds: 0, traditionalOpens: 0, traditionalSeconds: 0, events: 0, questions: {} };
+    summary.questions ||= {};
+    for (const e of fresh) {
+      summary.events++;
+      const question = summary.questions[e.questionId] ||= { guidedExposures: 0, guidedSeconds: 0, traditionalOpens: 0, traditionalSeconds: 0, lastAt: 0 };
+      question.lastAt = Date.now();
+      if (e.format === 'guided' && e.action === 'exposed') { summary.guidedExposures++; summary.guidedSeconds += e.seconds || 0; }
+      if (e.format === 'traditional' && e.action === 'opened') summary.traditionalOpens++;
+      if (e.format === 'traditional' && e.action === 'closed') summary.traditionalSeconds += e.seconds || 0;
+      if (e.format === 'guided' && e.action === 'exposed') { question.guidedExposures++; question.guidedSeconds += e.seconds || 0; }
+      if (e.format === 'traditional' && e.action === 'opened') question.traditionalOpens++;
+      if (e.format === 'traditional' && e.action === 'closed') question.traditionalSeconds += e.seconds || 0;
+    }
+    if (fresh.length) {
+      tx.set(root, { uid: p.uid, classId: p.classId, name: p.name, studentId: p.studentId, unitId, version, summary, updatedAt: Date.now() }, { merge: true });
+      fresh.forEach((e: any, i: number) => tx.create(refs[events.indexOf(e)], { ...e, receivedAt: Date.now() }));
+    }
+    return { accepted: fresh.map((e: any) => e.id), summary };
+  });
+});
+export const getExplanationResearchEvidence = onCall(options, async (req) => {
+  const { c } = await access(req, req.data.courseId, true);
+  const classId = code(req.data.classId), unitId = code(req.data.unitId);
+  if (!c.classIds.includes(classId)) fail('班級不屬於課程');
+  const snap = await db.collection(`courses/${req.data.courseId}/research`).where('classId', '==', classId).limit(500).get();
+  const rows: any[] = snap.docs.map((d) => ({ ...d.data(), id: d.id })).filter((r: any) => r.unitId === unitId);
+  const attempts = await db.collection(`courses/${req.data.courseId}/attempts`).where('classId', '==', classId).limit(2000).get();
+  const byStudent = new Map<string, any[]>();
+  attempts.docs.forEach((d) => { const a = d.data(); if (a.unitId === unitId && a.version === rows.find((r: any) => r.uid === a.uid)?.version) (byStudent.get(a.uid) || (byStudent.set(a.uid, []), byStudent.get(a.uid)!)).push(a); });
+  return { rows: rows.map((r: any) => {
+    let laterAttempts = 0, laterWrong = 0, recovered = 0;
+    for (const [questionId, evidence] of Object.entries(r.summary?.questions || {}) as any) {
+      const after = (byStudent.get(r.uid) || []).flatMap((a) => (a.answers || []).filter((x: any) => x.questionId === questionId && a.receivedAt?.toMillis?.() > evidence.lastAt));
+      laterAttempts += after.length; laterWrong += after.filter((x: any) => !x.correct).length;
+      if (after.some((x: any) => x.correct)) recovered++;
+    }
+    return { ...r, followUp: { laterAttempts, laterWrong, recurrenceRate: laterAttempts ? Math.round(laterWrong / laterAttempts * 100) : null, recovered } };
+  }) };
 });
 export const getHistory = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);

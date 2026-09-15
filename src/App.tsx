@@ -1,6 +1,7 @@
 import { NewCourse, ClassManager } from './CourseSetup';
 import { QuestionImage, Explanations } from './QuestionContent';
 import Diagnostics from './Diagnostics';
+import ResearchEvidence from './ResearchEvidence';
 import { useEffect, useState } from 'react';
 import {
   LayoutDashboard,
@@ -74,6 +75,7 @@ const tabs = [
   ['reports', '報表與結算', FileChartColumn],
   ['settings', '平台設定', Settings],
   ['diagnostics', '教材診斷', ChartNoAxesCombined],
+  ['research', '解析研究資料', FileChartColumn],
 ] as const;
 function download(name: string, data: any[]) {
   const csv =
@@ -651,6 +653,8 @@ export default function App() {
             <SettingsPage course={course} api={api} notify={notify} />
           ) : tab === 'diagnostics' && course ? (
             <Diagnostics key={course.id} course={course} api={api} notify={notify} />
+          ) : tab === 'research' && course ? (
+            <ResearchEvidence key={course.id} course={course} api={api} notify={notify} />
           ) : !course ? (
             <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
           ) : tab === 'bank' ? (
@@ -1007,6 +1011,10 @@ function CourseEditor({
                 onChange={(e) => patchUnit({ required: e.target.checked })}
               />
               列為平常分數的必做單元
+            </label>
+            <label className="check">
+              <input type="checkbox" checked={u.research?.enabled !== false} onChange={(e) => patchUnit({ research: { enabled: e.target.checked } })} />
+              蒐集解析研究資料（預設開啟；不影響成績或完成資格）
             </label>
             <div className="actions">
               <button

@@ -52,8 +52,19 @@ export interface Unit {
   dueAt: string;
   bankVersion: string;
   activities: Activity[];
+  // 研究資料模式預設開啟；教師可逐單元關閉，與成績／完成資格分離。
+  research?: { enabled: boolean };
   // 單元（大分類，例如「血液」）；次單元＝這個 Unit 本身。純顯示用分組，沒有值時平鋪顯示。
   group?: string;
+}
+export interface ExplanationResearchEvent {
+  id: string;
+  questionId: string;
+  format: 'guided' | 'traditional';
+  action: 'exposed' | 'opened' | 'closed';
+  seconds?: number;
+  attemptId: string;
+  clientAt: number;
 }
 export interface Course {
   id: string;

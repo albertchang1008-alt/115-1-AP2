@@ -16,6 +16,7 @@ import {
   Progress,
   Mode,
   Attempt,
+  ExplanationResearchEvent,
   emptyProgress,
   completion,
   complete,
@@ -200,6 +201,11 @@ export default function Student({
       notify('參與紀錄未同步：' + (e as Error).message);
     }
   }
+  async function saveResearch(events: ExplanationResearchEvent[]) {
+    if (preview || !unit || unit.research?.enabled === false || !events.length) return;
+    try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
+    catch (e) { notify('研究資料未同步：' + (e as Error).message); }
+  }
   if (taking && unit)
     return (
       <Quiz
@@ -209,6 +215,8 @@ export default function Student({
         course={course}
         unit={unit}
         onSubmit={submit}
+        researchEnabled={unit.research?.enabled !== false}
+        onResearch={saveResearch}
         onClose={() => setTaking(false)}
       />
     );
@@ -464,6 +472,8 @@ function Quiz({
   course,
   unit,
   onSubmit,
+  researchEnabled,
+  onResearch,
   onClose,
 }: {
   questions: Question[];
@@ -472,6 +482,8 @@ function Quiz({
   course: Course;
   unit: Unit;
   onSubmit: (a: Attempt) => Promise<string>;
+  researchEnabled: boolean;
+  onResearch: (events: ExplanationResearchEvent[]) => Promise<void>;
   onClose: () => void;
 }) {
   const [i, setI] = useState(0),
@@ -488,6 +500,10 @@ function Quiz({
     attemptId = useRef(crypto.randomUUID()),
     submitted = useRef(false);
   const q = questions[i];
+  function research(questionId: string, value: Omit<ExplanationResearchEvent, 'id' | 'questionId' | 'attemptId' | 'clientAt'>) {
+    if (!researchEnabled) return;
+    void onResearch([{ ...value, id: crypto.randomUUID(), questionId, attemptId: attemptId.current, clientAt: Date.now() }]);
+  }
   const latest = useRef({ selections, times });
   latest.current = { selections, times };
   async function finish() {
@@ -568,7 +584,7 @@ function Quiz({
                 {result.answers[j].correct ? '✓' : '✕'} {q.text}
               </h3>
               <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
-              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} />
+              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} onResearch={(v) => research(q.id, v)} />
             </div>
           ))}
         </div>
