@@ -38,7 +38,7 @@
 (() => {
   const CL = window.CourseLearning || { explore(){}, answer(){}, hint(){}, complete(){} };
   // 留白時不載入 GA4。提供 G-XXXXXXXXXX 後才會動態載入並送出無識別事件。
-  const GA4_MEASUREMENT_ID = '';
+  const GA4_MEASUREMENT_ID = 'G-VQVRD53N2N';
   function initAnalytics() {
     if (!/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) return;
     window.dataLayer = window.dataLayer || [];
