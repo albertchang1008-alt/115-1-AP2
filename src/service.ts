@@ -42,10 +42,22 @@ export function watchAuth(fn: () => void) {
 }
 export async function login() {
   if (!auth) throw Error('尚未設定 Firebase');
-  await signInWithPopup(auth, new GoogleAuthProvider());
+  // 2026-09-15：強制帶 prompt=select_account，讓 Google 彈窗每次都列出帳號選擇畫面
+  // （含「使用其他帳戶」），不會因為瀏覽器已有登入狀態就悄悄用同一個帳號登入。
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+  await signInWithPopup(auth, provider);
 }
 export async function logout() {
   if (auth) await signOut(auth);
+}
+// 2026-09-15：使用者反映登入後 Firebase 會記住這個瀏覽器的帳號，找不到地方切換。
+// 這裡先登出目前的 session，再呼叫（已強制 select_account 的）login() 重新彈出
+// 帳號選擇視窗，讓「登出＋重新登入」變成一次點擊即可完成。
+export async function switchAccount() {
+  if (!auth) throw Error('尚未設定 Firebase');
+  await signOut(auth);
+  await login();
 }
 export interface API {
   call<T = any>(name: string, data?: any): Promise<T>;

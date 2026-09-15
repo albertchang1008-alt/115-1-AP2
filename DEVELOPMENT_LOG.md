@@ -1,6 +1,30 @@
 # 開發紀錄
 
-目前版本：1.2.8
+目前版本：1.2.9
+
+## 1.2.9 — 登入新增「切換 Google 帳號」（2026-09-15）
+
+- 使用者反映：登入時找不到地方切換 Google 帳號。
+- 根因：`login()`（`src/service.ts`）呼叫 `signInWithPopup` 時沒有帶
+  `prompt` 參數，加上 Firebase Auth 預設會把登入狀態記在瀏覽器
+  （`onAuthStateChanged`），所以已登入過的瀏覽器下次打開網站會直接跳過
+  登入頁；就算回到登入頁重新點按鈕，Google 彈窗也可能因為瀏覽器裡已有
+  有效登入狀態而悄悄用同一帳號完成登入，不會跳出帳號選擇畫面。
+- 修正：
+  - `src/service.ts`：`login()` 改成帶
+    `provider.setCustomParameters({ prompt: 'select_account' })`，讓
+    Google 彈窗每次都強制列出帳號選擇畫面（含「使用其他帳戶」）。新增
+    `switchAccount()`：先 `signOut` 再呼叫 `login()`，把「登出＋重新
+    選帳號」合併成一次呼叫。
+  - `src/App.tsx`：學生端 `student-nav` 與教師端側欄的「登出」按鈕旁
+    新增「切換帳號」（教師端為圖示按鈕，預覽模式不顯示，因為那不是真的
+    Google 登入狀態），呼叫新的 `doSwitchAccount()`（沿用既有
+    `error`/`loading` state，失敗時錯誤訊息會顯示在切回的登入頁）；
+    登入頁按鈕下方補一行提示文字，說明登入時會列出瀏覽器裡的帳號。
+- 驗證：`npx tsc -b` 無錯誤；`npm test` 28/28。Google OAuth 彈窗的實際
+  帳號選擇畫面與切換後是否正確登入不同身份，這個沙箱無法用真實瀏覽器
+  測試，需要使用者部署後親自確認。
+- 純前端變更，不需要重新部署 Functions。
 
 ## 1.2.8 — 修正夜間色系按鍵對比不足（2026-09-15）
 

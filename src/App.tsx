@@ -56,6 +56,7 @@ import {
   projectId,
   login,
   logout,
+  switchAccount,
   watchAuth,
   auth,
   memoryApi,
@@ -237,6 +238,13 @@ export default function App() {
   function notify(s: string) {
     setToast(s);
   }
+  function doSwitchAccount() {
+    setError('');
+    setLoading(true);
+    switchAccount()
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  }
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(''), 7000);
@@ -386,6 +394,7 @@ export default function App() {
             <ArrowUpRight size={18} />
           </button>
           <p className="muted">@ctcn.edu.tw · 需列入課程名冊</p>
+          <p className="muted">登入時會列出瀏覽器中的 Google 帳號，可選擇其他帳戶</p>
           <button className="linkbutton" onClick={() => setApi(memoryApi())}>
             查看操作示例（不連接正式資料） →
           </button>
@@ -492,6 +501,10 @@ export default function App() {
           <span>
             {profile.name} · {course?.classNames?.[course.enrollmentClassId || ''] || course?.enrollmentClassId}
           </span>
+          <button onClick={doSwitchAccount}>
+            <RefreshCw size={15} />
+            切換帳號
+          </button>
           <button onClick={() => logout()}>登出</button>
           <small>v{VERSION}</small>
         </div>
@@ -537,6 +550,11 @@ export default function App() {
               {api.preview ? '本次頁面暫存' : '教師帳號'} · v{VERSION}
             </small>
           </div>
+          {!api.preview && (
+            <button aria-label="切換帳號" onClick={doSwitchAccount}>
+              <RefreshCw size={17} />
+            </button>
+          )}
           <button
             aria-label="登出"
             onClick={() => {
