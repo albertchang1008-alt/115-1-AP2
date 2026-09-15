@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血液的組成與生理功能 - 互動圖表與測驗 Flashcards</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.2rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Navigation Mode Selector */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); }
+        .mode-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Stats Dashboard */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+        .stat-card { background: var(--card-bg); padding: 18px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.7rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+        /* Filter Tabs */
+        .filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px; }
+        .tab-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.2s; color: var(--text-muted); }
+        .tab-btn.active, .tab-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Interactive Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .node-card { background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .node-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        
+        .card-header { padding: 16px 20px; background: #fafafa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        
+        .badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; }
+        .bg-plasma { background: var(--warning-light); color: var(--warning); }
+        .bg-cell { background: var(--danger-light); color: var(--danger); }
+        .bg-general { background: var(--primary-light); color: var(--primary); }
+
+        .card-body { padding: 20px; }
+        .card-summary { font-weight: 600; color: #334155; margin-bottom: 12px; font-size: 0.95rem; }
+        .features-list { list-style: none; margin-bottom: 12px; }
+        .features-list li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; padding-left: 16px; position: relative; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 0; }
+        
+        .detail-pane { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); background: #f8fafc; padding: 14px; border-radius: 8px; font-size: 0.88rem; color: #334155; }
+        .node-card.open .detail-pane { display: block; }
+        .toggle-hint { font-size: 0.8rem; color: var(--primary); font-weight: 700; text-align: right; margin-top: 8px; }
+
+        /* Flashcard Styles */
+        .flashcards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .flashcard { perspective: 1000px; height: 220px; cursor: pointer; }
+        .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+        
+        .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .flashcard-front { background: var(--card-bg); color: var(--text-main); }
+        .flashcard-front h3 { font-size: 1.25rem; color: var(--primary); margin-bottom: 8px; }
+        .flashcard-front p { font-size: 0.85rem; color: var(--text-muted); }
+        
+        .flashcard-back { background: var(--primary); color: white; transform: rotateY(180deg); text-align: left; align-items: flex-start; justify-content: flex-start; }
+        .flashcard-back h4 { font-size: 1.05rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.3); width: 100%; padding-bottom: 4px; }
+        .flashcard-back p { font-size: 0.88rem; line-height: 1.5; opacity: 0.95; }
+
+        /* Quiz Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 800px; margin: 0 auto; }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .quiz-score { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        
+        .question-card { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+        .question-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; color: var(--text-main); }
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #f8fafc; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; }
+        .option-btn:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); }
+        
+        .option-btn.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; }
+        .option-btn.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; }
+
+        .explanation-box { display: none; margin-top: 12px; padding: 12px 16px; background: #f1f5f9; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--primary); }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>血液的組成與生理功能學習中心</h1>
+        <p>生理學 CH05 資訊圖表 • 記憶閃卡 • 隨堂測驗</p>
+    </header>
+
+    <!-- Navigation Modes -->
+    <div class="mode-selector">
+        <button class="mode-btn active" onclick="switchMode('infographic')">📊 互動資訊圖表</button>
+        <button class="mode-btn" onclick="switchMode('flashcards')">🎴 記憶閃卡 (Flashcards)</button>
+        <button class="mode-btn" onclick="switchMode('quiz')">📝 隨堂測驗 (Quiz)</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="infographic-pane" class="section-pane active">
+        <!-- Stats Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="val">8%</div>
+                <div class="label">血液占體重比例</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">55% / 45%</div>
+                <div class="label">血漿 vs 定形成分比例</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">7.35 ~ 7.45</div>
+                <div class="label">正常酸鹼值 (pH)</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">120 天</div>
+                <div class="label">成熟紅血球平均壽命</div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="tab-btn active" onclick="filterCategory('all')">全部核心主題</button>
+            <button class="tab-btn" onclick="filterCategory('general')">血液物理特性</button>
+            <button class="tab-btn" onclick="filterCategory('plasma')">血漿成分 (55%)</button>
+            <button class="tab-btn" onclick="filterCategory('cell')">定形成分 (45%)</button>
+            <button class="tab-btn" onclick="filterCategory('hematopoiesis')">造血與臨床意義</button>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <div class="node-card" data-category="general" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">血液的物理特性與總量</div>
+                    <span class="badge bg-general">物理特性</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">血液為流經脈管之紅色體液，成年男性約 5-6L，女性約 4-5L。</div>
+                    <ul class="features-list">
+                        <li>全血黏度為水的 4.5~5.5 倍；比重 1.056~1.059。</li>
+                        <li>滲透壓 290~300 mOsm/L；溫度維持於 38°C。</li>
+                        <li>動脈血呈鮮紅色，靜脈血呈暗紅色（肺血管例外）。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        血液黏度主要受血比容（Hct）影響。高山居民血比容較高，可提升攜氧量；但若血比容增至 60%~70%，血液黏滯度大幅上升，會顯著增加心臟唧血阻力。
+                    </div>
+                </div>
+            </div>
+
+            <div class="node-card" data-category="plasma" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">血漿成分 (Plasma)</div>
+                    <span class="badge bg-plasma">血漿 55%</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">占全血量 55%，由 92% 水分與 8% 溶質（蛋白質、電解質）所組成。</div>
+                    <ul class="features-list">
+                        <li>白蛋白 (60%)：主導血漿膠體滲透壓。</li>
+                        <li>球蛋白 (35%)：包含 α, β, γ 球蛋白（γ-球蛋白為免疫抗體）。</li>
+                        <li>纖維蛋白原 (5%)：參與血液凝固。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>血漿 vs 血清差異：</strong><br>
+                        加抗凝劑離心後上層黃色液體為「血漿」；無抗凝劑靜置凝固後析出的黃色液體為「血清」（即去除纖維蛋白原等凝血蛋白後的血漿）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="node-card" data-category="cell" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">紅血球 (Erythrocytes / RBC)</div>
+                    <span class="badge bg-cell">定形成分</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">成熟後無核雙凹圓盤狀，男性 540萬/mm³，女性 480萬/mm³。</div>
+                    <ul class="features-list">
+                        <li>直徑 7.5 µm，平均壽命約 120 天。</li>
+                        <li>含血紅素 (Hb)：含鐵原子血基質與血球素多胜肽鏈。</li>
+                        <li>功能：攜帶 O₂（每克 Hb 帶 1.34 ml O₂）與 23% CO₂。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>紅血球恆定與代謝：</strong><br>
+                        組織缺氧刺激腎臟釋放紅血球生成因子，促使紅血球生成素原轉化為 Erythropoietin (EPO) 刺激紅骨髓造血。老化紅血球於脾臟被巨噬細胞分解，血基質轉化為膽紅素隨膽汁排出。
+                    </div>
+                </div>
+            </div>
+
+            <div class="node-card" data-category="cell" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">白血球 (Leucocytes / WBC)</div>
+                    <span class="badge bg-cell">定形成分</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">具細胞核且無血紅素，數量 5,000~9,000/mm³，主導免疫防禦。</div>
+                    <ul class="features-list">
+                        <li>顆粒性：嗜中性球（數量最多、滲出吞噬）、嗜酸性球（抗過敏）、嗜鹼性球（含肝素/組織胺）。</li>
+                        <li>無顆粒性：單核球（轉化為巨噬細胞）、淋巴球（B/T 細胞）。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>生理功能細節：</strong><br>
+                        單核球進入組織 24 小時後轉化為巨噬細胞（如肝臟庫佛氏細胞 Kupffer cell）；B 淋巴球受刺激可轉化為漿細胞製造相對應抗體。
+                    </div>
+                </div>
+            </div>
+
+            <div class="node-card" data-category="cell" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">血小板 (Platelets)</div>
+                    <span class="badge bg-cell">定形成分</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">巨核細胞碎片形成，無核，數量 25~40萬/mm³，壽命 5~9 天。</div>
+                    <ul class="features-list">
+                        <li>直徑 2~4 µm，主要功能為止血與引發凝血反應。</li>
+                        <li>與纖維蛋白形成止血凝塊。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>止血機制：</strong><br>
+                        血小板黏附形成疏鬆栓子後，促使凝血酶原轉化為凝血酶，催化血漿纖維蛋白原形成不溶性纖維蛋白網，強化為緊密凝塊。
+                    </div>
+                </div>
+            </div>
+
+            <div class="node-card" data-category="hematopoiesis" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">造血器官演變 (Hematopoiesis)</div>
+                    <span class="badge bg-general">造血機制</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-summary">所有血球起源於骨髓未分化幹細胞（Hemocytoblast）。</div>
+                    <ul class="features-list">
+                        <li>胚胎第 3~8 週：卵黃囊造血。</li>
+                        <li>胚胎第 8 週至出生：肝臟接替造血。</li>
+                        <li>胚胎第 5 個月起：脾臟與骨髓造血（脾臟造血維持最短）。</li>
+                        <li>成人：終身由紅骨髓負責造血。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane">
+                        <strong>骨髓生成特點：</strong><br>
+                        成人骨髓中 75% 細胞製造白血球，25% 製造紅血球與血小板；但血液中紅血球數為白血球的 500 倍，反映白血球壽命較短。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: FLASHCARDS -->
+    <div id="flashcards-pane" class="section-pane">
+        <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted);">💡 點擊閃卡即可翻面查看重點解析</p>
+        <div class="flashcards-container">
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>血比容 (Hematocrit; Hct)</h3>
+                        <p>點擊翻轉查看定義與正常值 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>核心定義與數據</h4>
+                        <p><strong>定義：</strong>定形成分（血球與血小板）在全血中所占的容積百分比。<br><strong>正常值：</strong>男性約 47%，女性約 42%（正常平均 45%）。貧血時可降至 15%，紅血球增多症可達 65%。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>血漿 vs 血清</h3>
+                        <p>點擊翻轉查看主要差別 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>主要區別</h4>
+                        <p><strong>血漿 (Plasma)：</strong>加抗凝劑離心後析出，占全血 55%，含有纖維蛋白原等凝血因子。<br><strong>血清 (Serum)：</strong>未加抗凝劑靜置凝固後析出，即「去除凝血蛋白質（如纖維蛋白原）後的血漿」。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>紅血球生命週期與器官</h3>
+                        <p>點擊翻轉查看壽命與破壞地點 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>壽命與破壞機制</h4>
+                        <p><strong>壽命：</strong>約 120 天。<br><strong>破壞：</strong>老化的紅血球在脾臟與肝臟被巨噬細胞吞噬分解。血基質轉化為膽紅素由肝臟排至膽汁，鐵與白蛋白則被再利用。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>嗜鹼性球 (Basophils) 特徵</h3>
+                        <p>點擊翻轉查看內含物質與功能 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>核心物質與作用</h4>
+                        <p><strong>肝素 (Heparin)：</strong>天然抗凝血劑，可防止血管內血塊形成。<br><strong>組織胺 (Histamine)：</strong>引發局部血管擴張與過敏反應。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>胚胎造血器官順序</h3>
+                        <p>點擊翻轉查看發展時間軸 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>發育演變時間軸</h4>
+                        <p>1. <strong>第 3~8 週：</strong>卵黃囊<br>2. <strong>第 8 週至出生：</strong>肝臟<br>3. <strong>第 5 個月起：</strong>脾臟與骨髓（脾臟造血維持最短）<br>4. <strong>成人：</strong>終身由紅骨髓造血。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>惡性貧血 (Pernicious Anemia)</h3>
+                        <p>點擊翻轉查看病因與型態 👆</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h4>致病機轉</h4>
+                        <p><strong>病因：</strong>缺乏內在因子導致維生素 B₁₂ 吸收不良。<br><strong>型態特徵：</strong>紅血球母細胞無法正常分裂使體積變大，形成「巨母紅血球」（Megaloblast）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: QUIZ -->
+    <div id="quiz-pane" class="section-pane">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>CH05 血液生理隨堂測驗</h2>
+                <div class="quiz-score">得分: <span id="score-val">0</span> / 5</div>
+            </div>
+
+            <!-- Q1 -->
+            <div class="question-card" data-correct="1">
+                <div class="question-title">1. 下列有關成熟紅血球特徵的敘述，何者「不正確」？</div>
+                <ul class="options-list">
+                    <li class="option-btn" onclick="checkAnswer(this, 0)">A. 成熟紅血球為雙凹圓盤狀且不具細胞核</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 1)">B. 成熟紅血球平均生命期約為 7~9 天</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 2)">C. 成年男性紅血球數量高於女性</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 3)">D. 細胞內含有血紅素以攜帶 O₂ 與 CO₂</li>
+                </ul>
+                <div class="explanation-box">解析：紅血球平均壽命約為 120 天；5~9 天為血小板的壽命。</div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-card" data-correct="2">
+                <div class="question-title">2. 「血漿」與「血清」的主要差異，在於血清不含有下列哪一種參與凝血的蛋白質？</div>
+                <ul class="options-list">
+                    <li class="option-btn" onclick="checkAnswer(this, 0)">A. 白蛋白 (Albumin)</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 1)">B. γ-球蛋白 (Globulin)</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 2)">C. 纖維蛋白原 (Fibrinogen)</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 3)">D. 溶菌酶</li>
+                </ul>
+                <div class="explanation-box">解析：血漿去除參與凝血的蛋白質（主要是纖維蛋白原）後即稱為血清。</div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-card" data-correct="2">
+                <div class="question-title">3. 在胚胎發育過程中，下列哪一個器官維持造血功能的時期「最短」？</div>
+                <ul class="options-list">
+                    <li class="option-btn" onclick="checkAnswer(this, 0)">A. 卵黃囊</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 1)">B. 肝臟</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 2)">C. 脾臟</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 3)">D. 紅骨髓</li>
+                </ul>
+                <div class="explanation-box">解析：胚胎發育第 5 個月起脾臟與骨髓開始造血，但脾臟造血功能很快結束，是維持造血時間最短的器官。</div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-card" data-correct="1">
+                <div class="question-title">4. 哪一種白血球在離開血液進入組織 24 小時後，會轉化為強效的巨噬細胞（如肝臟 Kupffer cell）？</div>
+                <ul class="options-list">
+                    <li class="option-btn" onclick="checkAnswer(this, 0)">A. 嗜中性球</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 1)">B. 單核球</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 2)">C. 淋巴球</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 3)">D. 嗜酸性球</li>
+                </ul>
+                <div class="explanation-box">解析：單核球由骨髓進入血液後，進入組織 24 小時即轉化為具有大吞噬作用的巨噬細胞。</div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-card" data-correct="0">
+                <div class="question-title">5. 血紅素分子攜帶氧氣時，氧氣主要與其結構中的哪一個核心部位相結合？</div>
+                <ul class="options-list">
+                    <li class="option-btn" onclick="checkAnswer(this, 0)">A. 血基質中的鐵原子 (Fe)</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 1)">B. 球蛋白多胜肽鏈</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 2)">C. 碳酸酐酶</li>
+                    <li class="option-btn" onclick="checkAnswer(this, 3)">D. 維生素 B₁₂</li>
+                </ul>
+                <div class="explanation-box">解析：每個血紅素次單位含有一個含鐵原子的血基質，氧分子直接與鐵原子結合形成氧合血紅素。</div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 1151生理解剖 - CH05 血液的組成單一檔案學習網頁</p>
+    </footer>
+</div>
+
+<script>
+    let score = 0;
+
+    function switchMode(mode) {
+        const btns = document.querySelectorAll('.mode-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const panes = document.querySelectorAll('.section-pane');
+        panes.forEach(p => p.classList.remove('active'));
+        document.getElementById(mode + '-pane').classList.add('active');
+    }
+
+    function toggleCard(card) {
+        card.classList.toggle('open');
+        const hint = card.querySelector('.toggle-hint');
+        if (card.classList.contains('open')) {
+            hint.textContent = '點擊收合詳細說明 ▲';
+        } else {
+            hint.textContent = '點擊展開詳細說明 ▼';
+        }
+    }
+
+    function filterCategory(category) {
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const cards = document.querySelectorAll('#infographic-pane .node-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function checkAnswer(btn, selectedIndex) {
+        const qCard = btn.closest('.question-card');
+        const correctIndex = parseInt(qCard.dataset.correct);
+        const options = qCard.querySelectorAll('.option-btn');
+        const expBox = qCard.querySelector('.explanation-box');
+
+        // Prevent double answers
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+
+        if (selectedIndex === correctIndex) {
+            btn.classList.add('correct');
+            score += 1;
+            document.getElementById('score-val').textContent = score;
+        } else {
+            btn.classList.add('wrong');
+            options[correctIndex].classList.add('correct');
+        }
+
+        expBox.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
