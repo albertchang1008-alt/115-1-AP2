@@ -562,7 +562,7 @@ export const saveExplanationResearchEvents = onCall(options, async (req) => {
       if (e.format === 'traditional' && e.action === 'closed') question.traditionalSeconds += e.seconds || 0;
     }
     if (fresh.length) {
-      tx.set(root, { uid: p.uid, classId: p.classId, name: p.name, studentId: p.studentId, unitId, version, summary, updatedAt: Date.now() }, { merge: true });
+      tx.set(root, { uid: p.uid, classId: p.classId, name: p.name, studentId: p.studentId, unitId, version, summary, startedAt: current.data()?.startedAt || Date.now(), updatedAt: Date.now() }, { merge: true });
       fresh.forEach((e: any, i: number) => tx.create(refs[events.indexOf(e)], { ...e, receivedAt: Date.now() }));
     }
     return { accepted: fresh.map((e: any) => e.id), summary };
@@ -575,6 +575,9 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
   const snap = await db.collection(`courses/${req.data.courseId}/research`).where('classId', '==', classId).limit(500).get();
   const rows: any[] = snap.docs.map((d) => ({ ...d.data(), id: d.id })).filter((r: any) => r.unitId === unitId);
   const attempts = await db.collection(`courses/${req.data.courseId}/attempts`).where('classId', '==', classId).limit(2000).get();
+  const diagnostics = await db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', classId).limit(500).get();
+  const htmlByStudent = new Map<string, any[]>();
+  diagnostics.docs.forEach((d) => { const x = d.data(); if (x.unitId === unitId) (htmlByStudent.get(x.uid) || (htmlByStudent.set(x.uid, []), htmlByStudent.get(x.uid)!)).push(x); });
   const byStudent = new Map<string, any[]>();
   attempts.docs.forEach((d) => { const a = d.data(); if (a.unitId === unitId && a.version === rows.find((r: any) => r.uid === a.uid)?.version) (byStudent.get(a.uid) || (byStudent.set(a.uid, []), byStudent.get(a.uid)!)).push(a); });
   return { rows: rows.map((r: any) => {
@@ -584,7 +587,9 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
       laterAttempts += after.length; laterWrong += after.filter((x: any) => !x.correct).length;
       if (after.some((x: any) => x.correct)) recovered++;
     }
-    return { ...r, followUp: { laterAttempts, laterWrong, recurrenceRate: laterAttempts ? Math.round(laterWrong / laterAttempts * 100) : null, recovered } };
+    const htmlRows = htmlByStudent.get(r.uid) || [];
+    const html = htmlRows.reduce((total: any, x: any) => ({ activities: total.activities + 1, nodes: total.nodes + (x.summary?.nodes?.length || 0), nodeTotal: total.nodeTotal + (x.nodeTotal || 0), firstCorrect: total.firstCorrect + Object.values(x.summary?.answers || {}).filter((q: any) => q.firstCorrect).length, questionTotal: total.questionTotal + (x.questionTotal || 0), activeSeconds: total.activeSeconds + (x.summary?.activeSeconds || 0), completed: total.completed || !!x.summary?.completed }), { activities: 0, nodes: 0, nodeTotal: 0, firstCorrect: 0, questionTotal: 0, activeSeconds: 0, completed: false });
+    return { ...r, html, followUp: { laterAttempts, laterWrong, recurrenceRate: laterAttempts ? Math.round(laterWrong / laterAttempts * 100) : null, recovered } };
   }) };
 });
 export const getHistory = onCall(options, async (req) => {
