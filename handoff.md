@@ -19,7 +19,7 @@
 
 ---
 
-目前版本：1.3.5。本輪 Codex 依教師提供的 GA4 Measurement ID `G-VQVRD53N2N` 啟用血液組成教材的去識別探索／首次答題／通關事件；不傳任何學生身分資料。已提交於本機 `main`，目前比 `origin/main` 領先 7 個 commits，尚待使用者以 GitHub Desktop Push origin。1.3.5 是本輪剛完成的內容；1.3.4 是題序隨機化。
+目前版本：1.3.5。本輪 Codex 依教師提供的 GA4 Measurement ID `G-VQVRD53N2N` 啟用血液組成教材的去識別探索／首次答題／通關事件；不傳任何學生身分資料。已提交於本機 `main`，目前比 `origin/main` 領先 8 個 commits，尚待使用者以 GitHub Desktop Push origin。1.3.5 是本輪剛完成的內容；1.3.4 是題序隨機化。
 本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。既有未追蹤的 `html/` 原始資料夾屬使用者內容，本輪未更動或提交。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
@@ -49,6 +49,7 @@
 19.（2026-09-15，1.3.0）測驗選項按鈕不再顯示 A/B/C/D 字母徽章，`src/Student.tsx` 選項清單只渲染選項文字（`<b>{String.fromCharCode(65+j)}</b>` 已移除，對應的 `.options button b` CSS 規則也一併拿掉）。這個元件是 quiz／閃卡／複習／教師預覽共用的同一份，改一處就會套用到所有畫面。注意：固定決策 12「選項每次都重新洗牌，避免學生背 ABCD 位置」講的是選項**順序**洗牌邏輯（`shared/model.ts` 的 shuffle），跟這次拿掉的字母**顯示**標籤是兩件事，洗牌邏輯本身沒有改動、還是照樣每次重排。
 20.（2026-09-15，1.3.1～1.3.5）新增教材 `public/materials/blood-composition-v1/index.html`，是「血液的組成」獨立互動活動，與既有 `blood-pre-v1`／`blood-post-v1` 並存。它以六張資訊卡作探索分母，五題固定 ID（`blood-composition-q01`～`q05`）的首次答案作診斷；五題全對才呼叫 `CourseLearning.complete()`，重做不覆寫首次答案。教師新增 HTML 活動時，網址指向該資料夾的 `index.html`，紀錄方式選「闖關與學習診斷」、版本填 `blood-composition-v1`、探索節點總數 6、闖關題目總數 5。此教材通關只記教材活動完成，不影響題庫完整測驗的單元完成度規則。GA4 已啟用去識別的探索／首次答題／通關事件，絕不可傳姓名、信箱、學號或登入資訊。
 21.（2026-09-15）互動教材診斷只能提供教學線索，不能把行為直接判定為「猜題」或「認真」。現有血液教材能看六個探索節點、各題首次對錯、有效前景時間與通關；它刻意只回傳每題第一次作答，所以後台「嘗試」通常不代表重做次數，且尚未回傳提示使用或各節點停留時間。若要更細緻地分析重試與閱讀行為，需另行實作多次作答、提示及節點停留事件，並以中性標籤呈現。
+22.（2026-09-15）GA4 用於去識別的全班／教材趨勢，不傳學生姓名、學號、信箱或可回連名冊的 User-ID；個別學生的教學支持僅在有課程與班級授權的 Firestore 教師診斷頁進行。GA4 目前只送探索、首次答題與通關事件，沒有 `explored_nodes_count`、`first_try_wins`、`total_guess_attempts`、`true_mastery_score` 或 `student_persona` 等彙總／標籤欄位；其中「猜題」與「真正看懂」不得由系統自動判定。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
