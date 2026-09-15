@@ -1450,10 +1450,11 @@ dd {
 :root[data-theme='violet'] { --blue: #7041b4; --nav: #2c2043; --accent: #e0b556; --soft: #f1ebfa; }
 :root[data-theme='night'] { color-scheme: dark; --blue: #85bcff; --nav: #101923; --accent: #e4c37a; --surface: #1d2b38; --page: #121c26; --ink: #ecf2f8; --soft: #293e50; --line: #465b6d; --muted: #b9c9d7; }
 html, body { background: var(--page); color: var(--ink); }
-.theme-picker { position: fixed; right: 14px; bottom: 12px; z-index: 120; display: flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 2px 12px #0002; font-size: calc(14px * var(--font-scale, 1)); }
-.theme-picker select { width: auto; padding: 4px; }
-.fontsize-picker { position: fixed; right: 14px; bottom: 56px; z-index: 120; display: flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 2px 12px #0002; font-size: calc(14px * var(--font-scale, 1)); }
-.fontsize-picker select { width: auto; padding: 4px; }
+/* 2026-09-15：色系／字級選單從右下角浮動改到頁面最上方一條常駐列，
+   position: sticky 讓它固定在頂端但不用 fixed 蓋住捲動中的內容。 */
+.prefs-bar { position: sticky; top: 0; z-index: 130; display: flex; justify-content: flex-end; gap: 8px; padding: 6px 14px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.theme-picker, .fontsize-picker { display: flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--page); font-size: calc(14px * var(--font-scale, 1)); }
+.theme-picker select, .fontsize-picker select { width: auto; padding: 4px; }
 .panel, .modal, .class-card, .explanations section { background: var(--surface); color: var(--ink); }
 input, select, textarea, button, .button { color: var(--ink); background-color: var(--surface); border-color: var(--line); }
 button.primary, .button.primary { background: var(--blue); color: #fff; }
@@ -1478,4 +1479,4 @@ button:hover, .button:hover, .notice, .feedback, .explanations details, .explana
 :root[data-theme='night'] .error { color: #ffb4b4; }
 :root[data-theme='night'] .success { color: #a3e4bd; }
 body { padding-bottom: 60px; }
-@media(max-width:600px) { .theme-picker { right: 8px; bottom: 8px; } .fontsize-picker { right: 8px; bottom: 48px; } .class-card { padding: 10px; } .modal { max-height: 90vh; overflow: auto; } .unit-checks { grid-template-columns: 1fr; } }
+@media(max-width:600px) { .prefs-bar { padding: 6px 8px; gap: 6px; flex-wrap: wrap; } .class-card { padding: 10px; } .modal { max-height: 90vh; overflow: auto; } .unit-checks { grid-template-columns: 1fr; } }

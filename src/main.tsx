@@ -6,6 +6,6 @@ import FontSizePicker from './FontSizePicker';
 import './style.css';
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemePicker /><FontSizePicker /><App />
+    <div className="prefs-bar"><ThemePicker /><FontSizePicker /></div><App />
   </React.StrictMode>,
 );

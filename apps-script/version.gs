@@ -1,1 +1,1 @@
-var PLATFORM_VERSION = '1.2.6';
+var PLATFORM_VERSION = '1.2.7';
