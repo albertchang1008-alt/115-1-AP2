@@ -63,6 +63,8 @@ test('血液組成教材使用 SDK、固定診斷分母與滿分通關', async (
   assert.equal((html.match(/data-node="blood-composition-/g) || []).length, 6);
   assert.equal((html.match(/id:'blood-composition-q0/g) || []).length, 5);
   assert.match(html, /const TIME_LIMIT_SECONDS = 45/);
+  assert.match(html, /function shuffleQuestions\(\)/);
+  assert.match(html, /roundQuestions = shuffleQuestions\(\)/);
   assert.match(html, /streak === questions\.length/);
   assert.match(html, /CL\.complete\(\)/);
   assert.match(html, /const GA4_MEASUREMENT_ID = ''/);

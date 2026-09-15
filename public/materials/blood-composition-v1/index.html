@@ -85,14 +85,22 @@
     { id:'blood-composition-q05', text:'陷阱題：關於造血器官演變，下列何者正確？', options:['成人終身主要由脾臟造血','脾臟造血維持時間比肝臟長','成人終身主要由紅骨髓造血','卵黃囊在出生後接替紅骨髓造血'], answer:2, note:'成人由紅骨髓持續造血；胚胎造血依序經過卵黃囊、肝臟、脾臟與骨髓。' }
   ];
   const TIME_LIMIT_SECONDS = 45;
-  let questionIndex = 0, streak = 0, answered = false, completed = false, timer = null, secondsLeft = TIME_LIMIT_SECONDS;
+  function shuffleQuestions() {
+    const shuffled = [...questions];
+    for (let index = shuffled.length - 1; index > 0; index--) {
+      const pick = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[pick]] = [shuffled[pick], shuffled[index]];
+    }
+    return shuffled;
+  }
+  let roundQuestions = shuffleQuestions(), questionIndex = 0, streak = 0, answered = false, completed = false, timer = null, secondsLeft = TIME_LIMIT_SECONDS;
   const quizList = document.querySelector('#quiz-list'), result = document.querySelector('#quiz-result'), progress = document.querySelector('#challenge-progress'), timerDisplay = document.querySelector('#challenge-timer');
   function updateChallenge() { progress.textContent = `第 ${questionIndex + 1}／${questions.length} 題・連勝 ${streak} 題`; timerDisplay.textContent = `${secondsLeft} 秒`; timerDisplay.classList.toggle('danger', secondsLeft <= 10); }
   function stopTimer() { if (timer) clearInterval(timer); timer = null; }
   function startTimer() { stopTimer(); secondsLeft = TIME_LIMIT_SECONDS; updateChallenge(); timer = setInterval(() => { secondsLeft--; updateChallenge(); if (secondsLeft <= 0) timeout(); }, 1000); }
   function renderQuiz() {
     stopTimer(); answered = false; result.replaceChildren(); quizList.replaceChildren();
-    const question = questions[questionIndex], article = document.createElement('section'); article.className = 'question';
+    const question = roundQuestions[questionIndex], article = document.createElement('section'); article.className = 'question';
     article.innerHTML = `<b>${questionIndex + 1}. ${question.text}</b><div class="options"></div><div class="feedback"></div>`;
     const options = article.querySelector('.options');
     question.options.forEach((text, choice) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.textContent = text; button.addEventListener('click', () => choose(question, choice, article)); options.appendChild(button); });
@@ -113,13 +121,13 @@
   }
   function timeout() {
     if (answered) return; answered = true; stopTimer();
-    const question = questions[questionIndex], article = quizList.firstElementChild; reveal(article, question, -1, '時間到。'); finish(false, '本題逾時，連勝中斷。');
+    const question = roundQuestions[questionIndex], article = quizList.firstElementChild; reveal(article, question, -1, '時間到。'); finish(false, '本題逾時，連勝中斷。');
   }
   function finish(passed, message = '') {
     stopTimer(); result.className = `result ${passed ? 'pass' : 'fail'}`;
     result.innerHTML = `<b>${passed ? '🎉 五題限時連勝，教材通關！' : message}</b><br>${passed ? '平台已記錄此互動教材的完成資格。' : '五題都要在限時內答對才可通關。'}<br><button class="restart" type="button">${passed ? '重新練習' : '重新挑戰'}</button>`;
     if (passed && !completed) { completed = true; CL.complete(); analytics('blood_composition_complete'); }
-    result.querySelector('.restart').addEventListener('click', () => { questionIndex = 0; streak = 0; renderQuiz(); });
+    result.querySelector('.restart').addEventListener('click', () => { roundQuestions = shuffleQuestions(); questionIndex = 0; streak = 0; renderQuiz(); });
   }
   renderQuiz();
 })();
