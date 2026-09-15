@@ -535,9 +535,9 @@ function Quiz({
     if (result || locked[q.id]) return;
     setSelections((s) => ({ ...s, [q.id]: value }));
     setTimes((t) => ({ ...t, [q.id]: Math.round((Date.now() - qStart.current) / 1000) }));
-    // 2026-09-15 起：不分模式，選了答案就立刻鎖定並顯示正解與解析——包含一般測驗（quiz）
-    // 作答中也是，使用者明確要求答案和解析不用等交卷、不用點就能一次看到。
-    setLocked((l) => ({ ...l, [q.id]: true }));
+    // 2026-09-15（第二次調整）：quiz 模式（完整測驗／抽題練習）恢復成交卷後才揭曉正解與解析，
+    // 作答中不鎖定、可以改答案——不然跟閃卡沒有差別。閃卡／複習模式維持選了就立刻鎖定並顯示。
+    if (mode !== 'quiz') setLocked((l) => ({ ...l, [q.id]: true }));
   }
   function move(n: number) {
     setI(n);

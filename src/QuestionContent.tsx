@@ -21,9 +21,9 @@ export function Explanations({ q, audience = 'student' }: { q: Question; audienc
   ];
   if (forTeacher) slots.push(['⑤ 追溯原子卡', s?.trace || s?.misconception]);
   const items = slots.filter(([, value]) => value);
-  // 2026-09-15 起：不論引導式解析或傳統解析，一律直接展開顯示，不用 <details> 收合、不需要
-  // 點擊——使用者明確要求答案與解析要「一次給到位」，連一般測驗作答中也是（見 Student.tsx
-  // 的 choose()：不分模式，選了就鎖定並顯示這個元件）。學生／教師唯一的差異只剩⑤追溯原子卡。
-  const explanation = q.explanation && <section><h3>傳統解析</h3><p className="preserve-lines">{q.explanation}</p></section>;
+  // 2026-09-15 起：引導式解析一律直接展開顯示，不用點擊——使用者明確要求「一次給到位」。
+  // 傳統解析（2026-09-15 第二次調整）改回預設收合，要點 <summary> 才展開，避免跟引導式解析
+  // 混在一起、也避免完整測驗作答中一眼看到完整正解說明。學生／教師唯一的差異只剩⑤追溯原子卡。
+  const explanation = q.explanation && <details><summary>傳統解析</summary><p className="preserve-lines">{q.explanation}</p></details>;
   return <div className="explanations">{items.length > 0 && <section><h3>引導式解析</h3>{items.map(([label, value]) => <div className="explanationstep" key={label}><h4>{label}</h4><p className="preserve-lines">{value}</p></div>)}</section>}{explanation}{q.lectureUrl && materialUrl(q.lectureUrl) && <a href={q.lectureUrl} target="_blank" rel="noreferrer">{q.lectureTitle || '查看講義'} ↗</a>}{q.remedialUrl && materialUrl(q.remedialUrl) && <a href={q.remedialUrl} target="_blank" rel="noreferrer">查看補強教材 ↗</a>}{!q.explanation && !items.length && <p>此題尚未提供解析。</p>}</div>;
 }

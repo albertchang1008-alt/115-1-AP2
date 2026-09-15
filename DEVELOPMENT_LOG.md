@@ -1,6 +1,15 @@
 # 開發紀錄
 
-目前版本：1.2.5
+目前版本：1.2.6
+
+## 1.2.6 — 完整測驗恢復交卷後才揭曉、傳統解析改回收合、新增字級設定（2026-09-15）
+
+- 使用者實測 1.2.3 的「一次給到位」後回報：完整測驗作答中就能逐題看到正解與解析，跟閃卡沒有差別，這樣不對；同時希望傳統解析預設收合、要點才展開（引導式解析維持直接展開）。
+- `src/Student.tsx`：`choose()` 改回 `if (mode !== 'quiz') setLocked(...)`——quiz 模式（完整測驗／抽題練習）作答中不鎖定、不揭曉，交卷後才看得到；閃卡／複習模式不受影響，維持選了就立刻看到。
+- `src/QuestionContent.tsx`：`Explanations` 的傳統解析改用 `<details><summary>傳統解析</summary>...</details>`，預設收合；引導式解析維持不用點擊、直接展開。
+- 新增使用者要求的字級設定：`src/style.css` 所有 `font-size: Npx` 改成 `font-size: calc(Npx * var(--font-scale, 1))`（含一處 `clamp()`），`:root` 新增 `--font-scale: 1`；新增 `src/FontSizePicker.tsx`（比照 `ThemePicker.tsx`，`localStorage` key `course-font-scale`，小／預設／大／特大四檔），`src/main.tsx` 掛載，`.fontsize-picker` 樣式放在色系選單正上方。
+- 驗證：`npx tsc -b` 無錯誤；`npm test` 28/28（quiz 鎖定邏輯與 Explanations 元件本身沒有被單元測試覆蓋，屬 React 元件行為，需人工/部署後驗證）。
+- 純前端變更，未動到 Cloud Functions 或資料結構，不需要重新部署 Functions，push 後 GitHub Pages 重新發布即可生效。
 
 ## 1.2.5 — 名冊信箱不再限制網域，一般 Gmail 也可通過（2026-09-15）
 
