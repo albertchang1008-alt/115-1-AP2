@@ -90,6 +90,10 @@
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
         .quiz-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
         .quiz-score-badge { font-size: 1.05rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 16px; border-radius: 20px; }
+        .quiz-layer { margin:22px 0; padding:20px; border:1px solid var(--border); border-radius:12px; background:#fafafa; }
+        .quiz-layer.locked { opacity:.55; background:#f1f5f9; }
+        .layer-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
+        .layer-heading h3 { font-size:1.08rem; margin:0; }.layer-progress { padding:4px 10px; border-radius:14px; background:var(--primary-light); color:var(--primary); font-size:.82rem; font-weight:700; white-space:nowrap; }.layer-description { color:var(--text-muted); font-size:.9rem; margin-bottom:14px; }.foundation-feedback { display:none; margin-top:14px; padding:12px; border-left:4px solid var(--primary); border-radius:8px; background:var(--primary-light); color:#334155; font-size:.9rem; }.foundation-feedback.success { border-left-color:var(--success); background:var(--success-light); }.next-foundation-btn { margin-top:12px; padding:10px 14px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-weight:700; cursor:pointer; }
         
         .question-card { margin-bottom: 24px; padding: 20px; border-radius: 12px; border: 1px solid var(--border); background: #fafafa; }
         .question-title { font-size: 1.02rem; font-weight: 700; margin-bottom: 14px; color: var(--text-main); line-height: 1.5; }
@@ -294,13 +298,9 @@
     <!-- SECTION 2: QUIZ -->
     <div id="quiz-pane" class="section-pane" role="tabpanel" aria-labelledby="tab-quiz">
         <div class="quiz-container">
-            <div class="quiz-header">
-                <div class="quiz-title">氣體運送與紅血球病變隨堂診斷</div>
-                <div class="quiz-score-badge">已完成 <span id="answered-count">0</span>/5 題 | 當前得分: <span id="score-val">0</span>/5</div>
-            </div>
-
-            <!-- Question Mount Point -->
-            <div id="questions-wrapper"></div>
+            <div class="quiz-header"><div class="quiz-title">兩階段隨堂診斷</div></div>
+            <section class="quiz-layer" aria-labelledby="foundation-title"><div class="layer-heading"><h3 id="foundation-title">第一關｜先備知識建構</h3><span id="foundation-progress" class="layer-progress">0 / 6</span></div><p class="layer-description">先建立紅血球、氣體運送與貧血的基礎概念；答對才前往下一題。</p><div id="foundation-wrapper"></div></section>
+            <section id="case-layer" class="quiz-layer locked" aria-labelledby="case-title" aria-disabled="true"><div class="layer-heading"><h3 id="case-title">第二關｜實務病例應用</h3><span id="case-progress" class="layer-progress">尚未解鎖</span></div><p id="case-description" class="layer-description">完成第一關 6 題後，才會解鎖病例挑戰。</p><div id="questions-wrapper"></div></section>
 
             <!-- Pass / Fail Banners -->
             <div id="pass-banner" class="result-banner pass" aria-live="polite">
@@ -332,9 +332,9 @@
         'blood-gas-transport-node-05',
         'blood-gas-transport-node-06'
     ];
-    const QUESTIONS = [
+    const CASE_QUESTIONS = [
         {
-            id: 'blood-gas-transport-q01',
+            id: 'blood-gas-transport-case-q01',
             title: '【臨床病例】一位 32 歲女性患者，長期經血量過多，近來常感頭暈與疲倦。血液檢查顯示 Hb 為 8.5 g/dl，MCV 為 72 fl（正常約 87 fl），MCH 為 21 pg（正常約 29 pg）。請問最可能引發此血球型態與生理異常的原因為何？',
             options: [
                 { text: '鐵質攝取不足或慢性失血導致血紅素合成障礙之缺鐵性貧血', correct: true },
@@ -345,7 +345,7 @@
             explanation: '解析：慢性失血或鐵質缺乏會影響血紅素（Hb）合成，導致小紅血球（MCV < 80 fl）及淺色紅血球（MCH < 25 pg）之缺鐵性貧血。'
         },
         {
-            id: 'blood-gas-transport-q02',
+            id: 'blood-gas-transport-case-q02',
             title: '【生理機制】細胞代謝產生的二氧化碳（CO₂）進入血液後進行運送。關於二氧化碳在紅血球與血漿中的轉化與運送途徑，下列何者正確？',
             options: [
                 { text: '約 70% 的 CO₂ 在紅血球內經碳酸酐酶（CA）催化生成 H₂CO₃，再解離為 HCO₃⁻ 進入血漿運送', correct: true },
@@ -356,7 +356,7 @@
             explanation: '解析：CO₂ 運送三大途徑：70% 經紅血球內碳酸酐酶（CA，反應加速 250 倍）轉化為 HCO₃⁻ 於血漿運送；23% 與血紅素球蛋白結合；7% 溶於血漿。'
         },
         {
-            id: 'blood-gas-transport-q03',
+            id: 'blood-gas-transport-case-q03',
             title: '【臨床病例】一位 65 歲男性因萎縮性胃炎導致胃壁細胞嚴重受損，長期無法有效吸收維生素 B12。血液抹片顯示紅血球母細胞無法正常分裂，體積異常膨大。請問下列敘述何者最符合該患者之病理生理特徵？',
             options: [
                 { text: '缺乏胃壁細胞分泌之內在因子（Intrinsic Factor），引發巨母紅血球之惡性貧血', correct: true },
@@ -367,7 +367,7 @@
             explanation: '解析：胃壁細胞分泌內在因子（Intrinsic Factor），結合維生素 B12 促進迴腸吸收。缺乏內在因子會影響 DNA 合成與細胞分裂，使紅血球形成巨母紅血球（惡性貧血）。'
         },
         {
-            id: 'blood-gas-transport-q04',
+            id: 'blood-gas-transport-case-q04',
             title: '【生理調節】運動員至海拔 3,500 公尺之高山進行移地訓練，環境處於低氧狀態。請問其體內啟動紅血球生成以代償低氧之機轉為何？',
             options: [
                 { text: '組織缺氧刺激腎臟釋放紅血球生成因子，使血漿 EPO 原轉化為 EPO 刺激骨髓造血', correct: true },
@@ -378,7 +378,7 @@
             explanation: '解析：組織缺氧刺激腎臟釋放紅血球生成因子，將血漿中的紅血球生成素原轉化為 EPO，EPO 作用於紅骨髓刺激幹細胞分化生成紅血球。'
         },
         {
-            id: 'blood-gas-transport-q05',
+            id: 'blood-gas-transport-case-q05',
             title: '【遺傳與結構病變】鐮刀型貧血（Sickle-cell Anemia）屬於體染色體隱性遺傳疾病，患者在低氧環境下紅血球會扭曲成鐮刀狀並易脆破裂。請問引發此疾病之分子缺陷為何？',
             options: [
                 { text: '血紅素 β 鏈第 6 位之麩胺酸（Glutamic acid）突變置換為纈胺酸（Valine）', correct: true },
@@ -390,13 +390,22 @@
         }
     ];
 
+    const FOUNDATION_QUESTIONS = [
+        {id:'blood-gas-transport-foundation-q01',title:'成熟紅血球主要依靠哪一種分子攜帶氧氣？',options:[{text:'血紅素',correct:true},{text:'白蛋白',correct:false},{text:'纖維蛋白原',correct:false},{text:'膽紅素',correct:false}],explanation:'血紅素的含鐵血基質可與氧氣可逆結合。'},
+        {id:'blood-gas-transport-foundation-q02',title:'大部分氧氣在血液中以何種形式運送？',options:[{text:'與血紅素結合',correct:true},{text:'直接溶於血漿',correct:false},{text:'轉成碳酸氫根',correct:false},{text:'附著在白血球上',correct:false}],explanation:'超過 98% 的氧氣與血紅素結合。'},
+        {id:'blood-gas-transport-foundation-q03',title:'約 70% 的二氧化碳主要以何種形式運送？',options:[{text:'碳酸氫根 HCO₃⁻',correct:true},{text:'與 Fe²⁺ 結合',correct:false},{text:'直接溶於血漿',correct:false},{text:'氧合血紅素',correct:false}],explanation:'紅血球內的碳酸酐酶協助 CO₂ 轉為 HCO₃⁻。'},
+        {id:'blood-gas-transport-foundation-q04',title:'組織缺氧時，哪個器官分泌 EPO 以刺激造血？',options:[{text:'腎臟',correct:true},{text:'脾臟',correct:false},{text:'肺臟',correct:false},{text:'胃',correct:false}],explanation:'腎臟感受低氧後以 EPO 刺激紅骨髓造血。'},
+        {id:'blood-gas-transport-foundation-q05',title:'缺鐵性貧血常見的紅血球型態是？',options:[{text:'小紅血球、淺色紅血球',correct:true},{text:'巨母紅血球',correct:false},{text:'鐮刀狀紅血球',correct:false},{text:'正常大小但無血紅素',correct:false}],explanation:'鐵不足使血紅素合成受阻，形成小且顏色較淺的紅血球。'},
+        {id:'blood-gas-transport-foundation-q06',title:'維生素 B₁₂ 吸收不良最容易造成哪一種貧血？',options:[{text:'巨母紅血球性貧血',correct:true},{text:'缺鐵性貧血',correct:false},{text:'鐮刀型貧血',correct:false},{text:'蠶豆症溶血',correct:false}],explanation:'B₁₂ 缺乏會影響 DNA 合成與細胞分裂，形成巨母紅血球。'}
+    ];
+
     // Tracking state
     const exploredNodes = new Set();
     let currentlyExpandedNodeId = null;
     let expandedStartTime = 0;
     let timerInterval = null;
 
-    let currentQuestions = [];
+    let currentQuestions = [], foundationIndex = 0, currentFoundationQuestion = null;
     let score = 0;
     let answeredCount = 0;
     let hasCompleted = false;
@@ -548,12 +557,19 @@
         });
     }
 
-    // Render Quiz with Shuffle
+    function reportAnswer(id, correct) { if (window.CourseLearning && window.CourseLearning.answer) window.CourseLearning.answer(id, correct); }
+    function renderFoundation() {
+        const host=document.getElementById('foundation-wrapper'); document.getElementById('foundation-progress').textContent=`${foundationIndex} / ${FOUNDATION_QUESTIONS.length}`;
+        if(foundationIndex===FOUNDATION_QUESTIONS.length){host.innerHTML='<div class="foundation-feedback success" style="display:block">✓ 先備知識已完成，病例挑戰已解鎖。</div>';document.getElementById('case-layer').classList.remove('locked');document.getElementById('case-layer').setAttribute('aria-disabled','false');renderQuiz();return;}
+        currentFoundationQuestion={...FOUNDATION_QUESTIONS[foundationIndex],shuffledOptions:shuffleArray(FOUNDATION_QUESTIONS[foundationIndex].options)};
+        host.innerHTML=`<div class="question-card"><div class="question-title">${foundationIndex+1}. ${currentFoundationQuestion.title}</div><ul class="options-list">${currentFoundationQuestion.shuffledOptions.map((o,i)=>`<li><button type="button" class="option-btn" data-foundation="${i}">${o.text}</button></li>`).join('')}</ul><div class="foundation-feedback" id="foundation-feedback"></div></div>`;
+        host.querySelectorAll('[data-foundation]').forEach(b=>b.addEventListener('click',()=>{const o=currentFoundationQuestion.shuffledOptions[Number(b.dataset.foundation)];reportAnswer(currentFoundationQuestion.id,o.correct);const f=document.getElementById('foundation-feedback');if(!o.correct){b.disabled=true;b.classList.add('wrong');f.style.display='block';f.textContent='再看一次：'+currentFoundationQuestion.explanation;return;}host.querySelectorAll('[data-foundation]').forEach(x=>x.disabled=true);b.classList.add('correct');foundationIndex++;f.style.display='block';f.classList.add('success');f.innerHTML=`答對了。${currentFoundationQuestion.explanation}<br><button type="button" class="next-foundation-btn">${foundationIndex===FOUNDATION_QUESTIONS.length?'解鎖病例挑戰':'下一題 →'}</button>`;f.querySelector('button').addEventListener('click',renderFoundation);}));
+    }
+    // Render case quiz with Shuffle
     function renderQuiz() {
         score = 0;
         answeredCount = 0;
-        document.getElementById('score-val').textContent = '0';
-        document.getElementById('answered-count').textContent = '0';
+        document.getElementById('case-progress').textContent = `0 / ${CASE_QUESTIONS.length}`;
         
         const passBanner = document.getElementById('pass-banner');
         const failBanner = document.getElementById('fail-banner');
@@ -561,7 +577,7 @@
         failBanner.style.display = 'none';
 
         // Shuffle questions & options
-        currentQuestions = shuffleArray(QUESTIONS).map(q => ({
+        currentQuestions = shuffleArray(CASE_QUESTIONS).map(q => ({
             ...q,
             shuffledOptions: shuffleArray(q.options)
         }));
@@ -603,9 +619,7 @@
         const isCorrect = selectedOpt.correct;
 
         // SDK: Report Answer
-        if (window.CourseLearning && window.CourseLearning.answer) {
-            window.CourseLearning.answer(qData.id, isCorrect);
-        }
+        reportAnswer(qData.id, isCorrect);
 
         const qCard = btn.closest('.question-card');
         const options = qCard.querySelectorAll('.option-btn');
@@ -617,7 +631,6 @@
         if (isCorrect) {
             btn.classList.add('correct');
             score += 1;
-            document.getElementById('score-val').textContent = score;
         } else {
             btn.classList.add('wrong');
             // Highlight correct option
@@ -630,10 +643,10 @@
 
         expBox.style.display = 'block';
         answeredCount += 1;
-        document.getElementById('answered-count').textContent = answeredCount;
+        document.getElementById('case-progress').textContent = `${answeredCount} / ${CASE_QUESTIONS.length}`;
 
         // Check overall completion
-        if (answeredCount === 5) {
+        if (answeredCount === CASE_QUESTIONS.length) {
             setTimeout(() => {
                 if (score === 5) {
                     document.getElementById('pass-banner').style.display = 'block';
@@ -673,7 +686,7 @@
 
     // Initialize Quiz on Load
     document.addEventListener('DOMContentLoaded', () => {
-        renderQuiz();
+        renderFoundation();
     });
 </script>
 
