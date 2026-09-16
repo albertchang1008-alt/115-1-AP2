@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>115學年度解剖生理學與實驗（2）｜課程資訊圖卡</title>
+  <style>
+    :root { --ink:#1e3447; --blue:#2e6086; --teal:#3c8c8a; --coral:#c95d4b; --paper:#fffaf0; --line:#d7c7ae; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:#e8e0d1; font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; color:var(--ink); }
+    main { width:min(100%, 1080px); min-height:1350px; padding:54px; position:relative; overflow:hidden; background:linear-gradient(90deg,rgba(255,250,240,.96),rgba(255,250,240,.89)),url("background.png") center/cover; }
+    .eyebrow { display:inline-block; margin:0 0 12px; padding:7px 14px; border-radius:999px; background:var(--blue); color:white; font-size:18px; font-weight:800; letter-spacing:.08em; }
+    h1 { margin:0; max-width:710px; font-size:48px; line-height:1.2; letter-spacing:.03em; }
+    .lead { max-width:700px; margin:18px 0 34px; font-size:22px; line-height:1.65; font-weight:600; }
+    .section-title { margin:0 0 14px; font-size:25px; font-weight:900; letter-spacing:.04em; }
+    .timeline { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-bottom:34px; }
+    .milestone { min-height:164px; padding:14px 12px; border:1.5px solid var(--line); border-radius:18px; background:rgba(255,255,255,.86); box-shadow:0 4px 12px rgba(44,57,67,.08); }
+    .week { display:block; margin-bottom:9px; color:var(--coral); font-size:22px; font-weight:900; }
+    .milestone p { margin:0; font-size:16px; line-height:1.52; font-weight:700; }
+    .grid { display:grid; grid-template-columns:1.15fr .85fr; gap:20px; }
+    .learning-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0 0 26px; }
+    .learning-item { min-height:136px; padding:17px; border-left:5px solid var(--teal); border-radius:16px; background:rgba(232,245,242,.88); font-size:17px; font-weight:700; line-height:1.55; }
+    .learning-item strong { display:block; margin-bottom:7px; color:#176360; font-size:19px; }
+    .course-table { width:100%; margin:0 0 26px; overflow:hidden; border:1.5px solid var(--line); border-radius:18px; background:rgba(255,255,255,.88); }
+    .course-row { display:grid; grid-template-columns:110px 1fr 150px; gap:14px; align-items:center; padding:13px 17px; border-bottom:1px solid #ded3c1; font-size:17px; line-height:1.5; }
+    .course-row:last-child { border-bottom:0; }
+    .course-row strong { color:var(--coral); }
+    .course-row span:last-child { color:#496976; font-weight:800; }
+    .rules { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:0 0 26px; }
+    .rule { padding:18px; border-radius:17px; background:rgba(255,255,255,.88); border:1.5px solid var(--line); font-size:16px; line-height:1.6; font-weight:700; }
+    .rule strong { display:block; margin-bottom:5px; color:var(--blue); font-size:19px; }
+    .online { margin:0 0 26px; padding:22px; border-radius:21px; background:rgba(255,244,221,.92); border:1.5px solid #e4be7f; }
+    .online ul { display:grid; grid-template-columns:repeat(2,1fr); gap:10px 24px; margin:12px 0 0; padding:0; list-style:none; font-size:17px; font-weight:700; line-height:1.55; }
+    .online li::before { content:'✓'; margin-right:8px; color:#b97024; font-weight:900; }
+    .panel { padding:24px; border:1.5px solid var(--line); border-radius:24px; background:rgba(255,255,255,.88); box-shadow:0 6px 18px rgba(44,57,67,.08); }
+    .grade { display:flex; gap:14px; align-items:center; margin:16px 0 20px; }
+    .grade > div { flex:1; padding:16px 10px; border-radius:16px; text-align:center; color:white; font-size:20px; font-weight:900; }
+    .regular { background:var(--teal); } .mid { background:var(--blue); } .final { background:var(--coral); }
+    table { width:100%; border-collapse:collapse; font-size:16px; }
+    th,td { padding:10px 6px; border-bottom:1px solid #ded3c1; text-align:left; } th { color:#526b79; font-size:14px; } td:not(:first-child), th:not(:first-child) { text-align:center; }
+    .visit { margin-top:16px; padding:14px; border-radius:15px; background:#e9f3f1; font-size:17px; line-height:1.6; font-weight:700; }
+    .warning { margin-top:20px; padding:22px 24px; border:2px solid #d8963f; border-radius:20px; background:#fff1c8; font-size:20px; line-height:1.65; font-weight:800; }
+    .warning strong { color:#8b4c11; }
+    .source { margin:22px 0 0; color:#58707c; font-size:14px; line-height:1.5; }
+    .start-quiz { display:inline-flex; align-items:center; justify-content:center; margin-top:22px; padding:15px 24px; border:0; border-radius:14px; background:var(--blue); color:white; cursor:pointer; font:inherit; font-size:19px; font-weight:900; }
+    .start-quiz:hover, .start-quiz:focus-visible { background:#204d70; outline:3px solid #9ec5df; outline-offset:3px; }
+    .quiz { margin-top:28px; padding:28px; border:2px solid #9bc9c5; border-radius:24px; background:rgba(242,251,249,.94); }
+    .quiz-intro { margin:0 0 18px; font-size:17px; font-weight:700; line-height:1.6; }
+    .quiz-progress { margin:0 0 12px; color:#537078; font-size:15px; font-weight:800; }
+    .question { margin:0; font-size:23px; line-height:1.5; }
+    .choices { display:grid; gap:10px; margin:20px 0; }
+    .choice { width:100%; padding:14px 16px; border:2px solid #bdd7d4; border-radius:14px; background:white; color:var(--ink); cursor:pointer; font:inherit; font-size:18px; font-weight:700; line-height:1.45; text-align:left; transition:.16s ease; }
+    .choice:hover, .choice:focus-visible { border-color:var(--blue); outline:none; transform:translateY(-1px); }
+    .choice.correct { border-color:#33856f; background:#dff4e9; color:#155a48; }
+    .choice.incorrect { border-color:#c75a4b; background:#fde7e2; color:#84372f; }
+    .choice:disabled { cursor:default; transform:none; }
+    .feedback { min-height:28px; margin:8px 0 0; font-size:17px; font-weight:700; line-height:1.6; }
+    .quiz-controls { display:flex; gap:12px; align-items:center; margin-top:18px; }
+    .quiz-button { padding:12px 18px; border:0; border-radius:12px; background:var(--blue); color:white; cursor:pointer; font:inherit; font-size:17px; font-weight:800; }
+    .quiz-button:hover, .quiz-button:focus-visible { background:#204d70; outline:3px solid #9ec5df; outline-offset:2px; }
+    .quiz-button:disabled { opacity:.45; cursor:not-allowed; }
+    .result { padding:18px; border-radius:15px; background:white; font-size:19px; font-weight:800; line-height:1.6; }
+    .result strong { color:var(--teal); }
+    .quiz { position:fixed; inset:0; z-index:20; display:none; width:100%; min-height:100vh; margin:0; overflow-y:auto; border:0; border-radius:0; background:#f2fbf9; }
+    .quiz.active { display:block; }
+    .quiz-inner { width:min(100%, 820px); margin:0 auto; padding:54px 32px 70px; }
+    .quiz-topbar { display:flex; justify-content:space-between; gap:18px; align-items:center; margin-bottom:28px; }
+    .quiz-topbar .section-title { margin:0; }
+    .return-button { padding:10px 14px; border:1.5px solid #7caeaa; border-radius:10px; background:white; color:var(--ink); cursor:pointer; font:inherit; font-size:16px; font-weight:800; }
+    .return-button:hover, .return-button:focus-visible { border-color:var(--blue); outline:3px solid #c6e0dd; outline-offset:2px; }
+    body.quiz-mode { overflow:hidden; }
+    @media (max-width:760px) { main{padding:30px 20px;min-height:auto} h1{font-size:36px}.timeline,.learning-grid,.rules{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.milestone{min-height:118px}.lead{font-size:19px}.warning{font-size:18px}.quiz-inner{padding:30px 20px 50px}.question{font-size:20px}.choice{font-size:17px}.course-row{grid-template-columns:1fr;gap:4px}.online ul{grid-template-columns:1fr}.quiz-topbar{align-items:flex-start;flex-direction:column} }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">115學年度｜課程總覽</p>
+    <h1>解剖生理學與實驗（2）</h1>
+    <p class="lead">護理科五專二年級。理解人體如何運作、為什麼能維持恆定，並把課本知識連到實驗、參訪與後續內外科護理學。</p>
+
+    <h2 class="section-title">這學期要學會什麼</h2>
+    <section class="learning-grid" aria-label="學習重點">
+      <article class="learning-item"><strong>構造與功能</strong>認識人體各系統的構造與功能。</article>
+      <article class="learning-item"><strong>生理機轉</strong>理解生理機轉與人體恆定。</article>
+      <article class="learning-item"><strong>銜接護理</strong>為內外科護理學等後續課程奠定基礎。</article>
+      <article class="learning-item"><strong>實際觀察</strong>透過實驗與參訪，把知識連到觀察。</article>
+    </section>
+
+    <h2 class="section-title">四個學習階段，對應四次考試</h2>
+    <section class="course-table" aria-label="學習階段與考試範圍">
+      <div class="course-row"><strong>第一階段</strong><span>心臟、血液、血管、淋巴</span><span>小期中考｜第 5 週・10/12（一）</span></div>
+      <div class="course-row"><strong>第二階段</strong><span>呼吸、泌尿、體液</span><span>期中考｜第 9 週・11/9–11/13</span></div>
+      <div class="course-row"><strong>第三階段</strong><span>消化系統、營養素消化與吸收</span><span>小期末考｜第 14 週・12/14（一）</span></div>
+      <div class="course-row"><strong>第四階段</strong><span>內分泌、生殖</span><span>期末考｜第 17 週・1/4–1/8</span></div>
+    </section>
+
+    <h2 class="section-title">學期重要節點</h2>
+    <section class="timeline" aria-label="學期重要節點">
+      <article class="milestone"><span class="week">第 5 週</span><p>小期中考<br>血壓測量相關實驗</p></article>
+      <article class="milestone"><span class="week">第 9 週</span><p>期中考週<br>兩校區分別命題</p></article>
+      <article class="milestone"><span class="week">第 10 週</span><p>國防醫學院<br>大體參訪</p></article>
+      <article class="milestone"><span class="week">第 12 週</span><p>尿液／腎功能<br>相關實驗</p></article>
+      <article class="milestone"><span class="week">第 14 週</span><p>小期末考<br>兩校區同一份試卷</p></article>
+      <article class="milestone"><span class="week">第 17 週</span><p>期末考週</p></article>
+      <article class="milestone"><span class="week">第 18 週</span><p>學期實驗<br>總台評量</p></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2 class="section-title">總成績比例</h2>
+        <div class="grade" aria-label="平時成績百分之四十、期中成績百分之三十、期末成績百分之三十">
+          <div class="regular">平時<br>40%</div><div class="mid">期中<br>30%</div><div class="final">期末<br>30%</div>
+        </div>
+        <table>
+          <thead><tr><th>平時成績項目</th><th>一般情況</th><th>符合免參訪規定者</th></tr></thead>
+          <tbody>
+            <tr><td>課堂小考與作業</td><td>20%</td><td>20%</td></tr>
+            <tr><td>數位學習網線上小考</td><td>10%</td><td>15%</td></tr>
+            <tr><td>課堂表現與出席</td><td>5%</td><td>5%</td></tr>
+            <tr><td>大體參訪心得報告</td><td>5%</td><td>0%</td></tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="panel">
+        <h2 class="section-title">大體參訪時程</h2>
+        <div class="visit">第一梯次<br><strong>12/04（星期五・下午場）</strong></div>
+        <div class="visit">第二梯次<br><strong>12/05（星期六・上午場）</strong></div>
+        <p class="source">此為更新後日期；請以新公告安排個人行程，集合與相關安排依教師後續通知。</p>
+      </article>
+    </section>
+
+    <h2 class="section-title">課堂與數位學習規範</h2>
+    <section class="rules" aria-label="課堂規範">
+      <article class="rule"><strong>帶兩本課本</strong>每次上課都要帶新編生理學與新編解剖學；未帶課本會扣課堂分數。</article>
+      <article class="rule"><strong>手機與課堂秩序</strong>手機僅依教師指示用於測驗與學習。未使用時，放桌上顯眼處、螢幕向下、鏡頭向上。</article>
+      <article class="rule"><strong>出席與查詢</strong>每節課點名。請定期在數位學習網課程專區查看個人成績與出缺席紀錄。</article>
+      <article class="rule"><strong>坐姿與飲食</strong>上課坐好，不用手撐頭。可飲食但不得影響他人，禁止泡麵、臭豆腐等氣味明顯的食物。</article>
+    </section>
+    <section class="online" aria-labelledby="online-title">
+      <h2 class="section-title" id="online-title">數位學習網線上小考</h2>
+      <ul>
+        <li>Q1–Q8，共 8 次。</li><li>每次 25 題，自題庫隨機抽題。</li>
+        <li>開放期間不限次數重複作答。</li><li>採最高分，截止後匯出並列入平時成績。</li>
+        <li>截止：Q1–Q2 10/12、Q3–Q4 11/13、Q5–Q6 12/14、Q7–Q8 1/8，均為中午 12:00。</li><li>四次大考有 60–70% 題目出自線上小考題庫。</li>
+      </ul>
+    </section>
+
+    <aside class="warning"><strong>不及格判定規則：</strong>四次考試平均小於 40 分，且該校區 PR 小於 33 者，學期成績不得及格。</aside>
+    <button class="start-quiz" id="start-quiz" type="button">開始課程理解驗收（10 題・100 分）</button>
+  </main>
+  <section class="quiz" id="quiz-screen" aria-labelledby="quiz-title" aria-hidden="true">
+    <div class="quiz-inner">
+      <div class="quiz-topbar">
+        <h2 class="section-title" id="quiz-title">課程理解驗收｜10 題・總分 100</h2>
+        <button class="return-button" id="leave-quiz" type="button">返回圖卡</button>
+      </div>
+      <p class="quiz-intro">每題 10 分；逐題送出後立即顯示依據，完成 10 題即可查看總分。</p>
+      <p class="quiz-progress" id="quiz-progress" aria-live="polite"></p>
+      <div id="quiz-card"></div>
+      <div class="quiz-controls"><button class="quiz-button" id="next-question" type="button" disabled>下一題</button></div>
+    </div>
+  </section>
+  <script src="../course-learning.js"></script>
+  <script>
+    (() => {
+      const questions = [
+        {
+          id: 'course-orientation-q01',
+          prompt: '本課程的學習重點，最符合下列哪一項？',
+          choices: ['只記住各器官的中文名稱', '能說明人體「如何運作」與「為什麼」', '只完成線上小考即可', '只練習實驗操作，不需要理解機轉'],
+          correct: 1,
+          explanation: '課程以理解構造、功能與生理機轉為主軸，並要求能說明如何運作與為什麼。'
+        },
+        {
+          id: 'course-orientation-q02',
+          prompt: '第二階段的內容與對應考試，哪一組正確？',
+          choices: ['心臟、血液、血管、淋巴；小期中考', '呼吸、泌尿、體液；期中考', '消化系統、營養素消化與吸收；期末考', '內分泌、生殖；小期末考'],
+          correct: 1,
+          explanation: '第二階段為呼吸、泌尿、體液，對應第 9 週的期中考。'
+        },
+        {
+          id: 'course-orientation-q03',
+          prompt: '每次上課應攜帶的課本為何？',
+          choices: ['只帶新編生理學', '只帶新編解剖學', '新編生理學與新編解剖學兩本', '任何一本護理學課本即可'],
+          correct: 2,
+          explanation: '每次上課都會依進度交替使用生理學與解剖學，因此兩本都要帶；未帶會扣課堂分數。'
+        },
+        {
+          id: 'course-orientation-q04',
+          prompt: '手機未使用時，符合課堂規範的放置方式是？',
+          choices: ['放入書包並關機', '拿在手上以便回覆訊息', '放在桌上顯眼處，螢幕向下、鏡頭向上', '任意放置，只要沒有聲音即可'],
+          correct: 2,
+          explanation: '手機只有在教師指示下用於測驗與學習；未使用時應放在桌上顯眼處，螢幕向下、鏡頭向上。'
+        },
+        {
+          id: 'course-orientation-q05',
+          prompt: '四次考試與平時成績在學期總成績中的合計比例為何？',
+          choices: ['四次考試 40%，平時成績 60%', '四次考試 50%，平時成績 50%', '四次考試 60%，平時成績 40%', '四次考試 70%，平時成績 30%'],
+          correct: 2,
+          explanation: '期中成績 30% 加期末成績 30%，四次考試合計 60%；平時成績合計 40%。'
+        },
+        {
+          id: 'course-orientation-q06',
+          prompt: '下列何者正確描述數位學習網線上小考？',
+          choices: ['Q1–Q8 共 8 次，每次 25 題，開放期間可重複作答並採最高分', 'Q1–Q8 共 8 次，每次 10 題，只能作答一次', '只在期末前進行一次，不列入平時成績', '每次固定題目，不從題庫隨機抽題'],
+          correct: 0,
+          explanation: '線上小考共 Q1–Q8 八次，每次自題庫隨機抽 25 題，開放期間不限次數，採最高分。'
+        },
+        {
+          id: 'course-orientation-q07',
+          prompt: '下列哪一種情況，同時符合學期不予及格的兩項條件？',
+          choices: ['四次考試平均 39 分，PR 值 32', '四次考試平均 40 分，PR 值 32', '四次考試平均 39 分，PR 值 33', '四次考試平均 41 分，PR 值 30'],
+          correct: 0,
+          explanation: '必須同時是四次考試平均小於 40 分，且以校區計算的 PR 小於 33；只有第一種情況同時符合。'
+        },
+        {
+          id: 'course-orientation-q08',
+          prompt: '符合免參訪規定者，平時成績會如何調整？',
+          choices: ['大體參訪心得 5% 改列為缺考', '心得報告的 5% 轉入線上小考，線上小考占 15%', '課堂表現與出席由 5% 改為 10%', '四次考試從 60% 改為 55%'],
+          correct: 1,
+          explanation: '符合免參訪規定者，心得報告占比為 0%，原本的 5% 轉入線上小考，因此線上小考占 15%。'
+        },
+        {
+          id: 'course-orientation-q09',
+          prompt: '更新後，大體參訪第一梯次的正確安排是？',
+          choices: ['12/04（星期五）下午場', '12/04（星期五）上午場', '12/05（星期六）下午場', '11/20（星期五）下午場'],
+          correct: 0,
+          explanation: '更新公告將第一梯次排為 12/04（星期五）下午場；第二梯次為 12/05（星期六）上午場。'
+        },
+        {
+          id: 'course-orientation-q10',
+          prompt: '所有線上小考的截止時間，正確的是？',
+          choices: ['截止日當天上午 8:00', '截止日當天中午 12:00', '截止日當天晚上 12:00', '每次由學生自行設定'],
+          correct: 1,
+          explanation: 'Q1–Q8 都在各自截止日的中午 12:00 截止，請在截止前完成作答。'
+        }
+      ];
+      const progress = document.querySelector('#quiz-progress');
+      const card = document.querySelector('#quiz-card');
+      const next = document.querySelector('#next-question');
+      const screen = document.querySelector('#quiz-screen');
+      const start = document.querySelector('#start-quiz');
+      const leave = document.querySelector('#leave-quiz');
+      let index = 0;
+      let score = 0;
+      let answered = false;
+
+      const shuffle = (items) => items.map((item) => ({ item, order: Math.random() })).sort((a, b) => a.order - b.order).map(({ item }) => item);
+      function renderQuestion() {
+        answered = false;
+        next.disabled = true;
+        const q = questions[index];
+        progress.textContent = `第 ${index + 1}／${questions.length} 題｜每題 10 分`;
+        const choices = shuffle(q.choices.map((text, originalIndex) => ({ text, originalIndex })));
+        card.innerHTML = `<p class="question">${q.prompt}</p><div class="choices" role="group" aria-label="第 ${index + 1} 題選項"></div><p class="feedback" aria-live="polite"></p>`;
+        const choicesEl = card.querySelector('.choices');
+        const feedback = card.querySelector('.feedback');
+        choices.forEach(({ text, originalIndex }) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'choice';
+          button.textContent = text;
+          button.addEventListener('click', () => {
+            if (answered) return;
+            answered = true;
+            const isCorrect = originalIndex === q.correct;
+            if (window.CourseLearning?.answer) window.CourseLearning.answer(q.id, isCorrect);
+            if (isCorrect) score += 1;
+            [...choicesEl.querySelectorAll('button')].forEach((choice) => {
+              choice.disabled = true;
+              if (choice.textContent === q.choices[q.correct]) choice.classList.add('correct');
+            });
+            if (!isCorrect) button.classList.add('incorrect');
+            feedback.textContent = `${isCorrect ? '答對。' : '這題需要再確認。'} ${q.explanation}`;
+            next.disabled = false;
+            next.textContent = index === questions.length - 1 ? '查看結果' : '下一題';
+          });
+          choicesEl.appendChild(button);
+        });
+      }
+      function renderResult() {
+        progress.textContent = '完成';
+        const understood = score === questions.length;
+        if (understood && window.CourseLearning?.complete) window.CourseLearning.complete();
+        card.innerHTML = `<div class="result"><strong>本次得分 ${score * 10}／100 分（答對 ${score}／${questions.length} 題）。</strong><br>${understood ? '你已正確掌握本頁的課程內容、規範、時程與評量方式。' : '請依各題解析回看圖卡後再重作；10 題全對才代表已完成本頁資訊的理解驗收。'}</div>`;
+        next.disabled = false;
+        next.textContent = '重新驗收';
+      }
+      next.addEventListener('click', () => {
+        if (!answered && index < questions.length) return;
+        if (index === questions.length - 1 && answered) { index = questions.length; renderResult(); return; }
+        if (index === questions.length) { index = 0; score = 0; renderQuestion(); return; }
+        index += 1;
+        renderQuestion();
+      });
+      start.addEventListener('click', () => {
+        if (window.CourseLearning?.explore) window.CourseLearning.explore('course-orientation-overview');
+        index = 0;
+        score = 0;
+        screen.classList.add('active');
+        screen.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('quiz-mode');
+        renderQuestion();
+        screen.querySelector('.return-button').focus();
+      });
+      leave.addEventListener('click', () => {
+        screen.classList.remove('active');
+        screen.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('quiz-mode');
+        start.focus();
+      });
+      renderQuestion();
+    })();
+  </script>
+</body>
+</html>

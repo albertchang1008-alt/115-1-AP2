@@ -65,10 +65,35 @@ test('血液組成教材使用 SDK、固定診斷分母與滿分通關', async (
   assert.match(html, /const TIME_LIMIT_SECONDS = 45/);
   assert.match(html, /function shuffleQuestions\(\)/);
   assert.match(html, /roundQuestions = shuffleQuestions\(\)/);
-  assert.match(html, /streak === questions\.length/);
+  assert.match(html, /streak === caseQuestions\.length/);
   assert.match(html, /CL\.complete\(\)/);
   assert.match(html, /const GA4_MEASUREMENT_ID = 'G-VQVRD53N2N'/);
   assert.match(html, /CL\.nodeTime\(nodeId, seconds\)/);
   assert.match(html, /血液探索家/);
   assert.match(html, /function fireworks\(\)/);
+});
+
+test('課程介紹圖卡以十題全對作為教材完成條件', async () => {
+  const html = await readFile(new URL('../public/materials/course-orientation-v1/index.html', import.meta.url), 'utf8');
+  assert.match(html, /url\("background\.png"\)/);
+  assert.match(html, /<script src="\.\.\/course-learning\.js"><\/script>/);
+  assert.equal((html.match(/id: 'course-orientation-q\d\d'/g) || []).length, 10);
+  assert.match(html, /CourseLearning\.answer\(q\.id, isCorrect\)/);
+  assert.match(html, /score === questions\.length/);
+  assert.match(html, /CourseLearning\.complete\(\)/);
+});
+
+test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async () => {
+  const cases = [
+    ['hemostasis-mechanisms-v1', 'hemostasis-mechanisms', 'hemostasis', 6],
+    ['blood-gas-transport-v1', 'blood-gas-transport', 'blood-gas-transport', 6],
+  ] as const;
+  for (const [version, nodePrefix, questionPrefix, expectedNodes] of cases) {
+    const html = await readFile(new URL(`../public/materials/${version}/index.html`, import.meta.url), 'utf8');
+    assert.match(html, /course-learning\.js/);
+    assert.equal((html.match(new RegExp(`data-node-id="${nodePrefix}-node-\\d\\d"`, 'g')) || []).length, expectedNodes);
+    assert.equal((html.match(new RegExp(`id:\\s*'${questionPrefix}-foundation-q\\d\\d'`, 'g')) || []).length, 6);
+    assert.equal((html.match(new RegExp(`id:\\s*'${questionPrefix}-case-q\\d\\d'`, 'g')) || []).length, 5);
+    assert.match(html, /CourseLearning\.complete/);
+  }
 });
