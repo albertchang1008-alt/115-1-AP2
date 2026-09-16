@@ -81,6 +81,10 @@ test('課程介紹圖卡以十題全對作為教材完成條件', async () => {
   assert.match(html, /CourseLearning\.answer\(q\.id, isCorrect\)/);
   assert.match(html, /score === questions\.length/);
   assert.match(html, /CourseLearning\.complete\(\)/);
+  assert.equal((html.match(/data-node-id="course-orientation-[\w-]+"/g) || []).length, 8);
+  assert.match(html, /IntersectionObserver/);
+  assert.match(html, /CourseLearning\.explore\?\.\(nodeId\)/);
+  assert.match(html, /CourseLearning\.nodeTime\?\.\(nodeId, seconds\)/);
 });
 
 test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async () => {

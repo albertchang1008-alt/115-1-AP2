@@ -19,7 +19,8 @@
 
 ---
 
-目前版本：1.3.7。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；本機 `main` 仍比 GitHub 多 17 個提交，終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。**
+目前版本：1.3.8。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；本機 `main` 仍比 GitHub 多 17 個提交，終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。**
+2026-09-16（第九輪，1.3.8）：修正先前誤判——`course-orientation-v1`（課程簡介圖卡）其實已接上 `course-learning.js`，並非完全沒有追蹤；把它的探索節點從 1 個整頁節點拆成 8 個，改用 `IntersectionObserver` 捲動偵測，保留原本長條捲動版面。詳見下方「第九輪」小節。
 2026-09-16：依使用者提供的 YouTube〈115學年度解剖生理學與實驗2 課程介紹〉製作未發布的課程資訊圖卡草稿：`html/115學年度解剖生理學與實驗2_課程介紹資訊圖卡.html`，並附同名背景 PNG。內容逐段核對影片投影片，含第 5／9／10／12／14／17／18 週節點、40/30/30 成績結構、一般／彈性平時評量與不及格規則。**使用者後續提供「大體參訪時間更新」公告，已以此覆蓋影片中的舊時程：第一梯次 12/04（週五）下午、第二梯次 12/05（週六）上午。**同頁新增 6 題本機課程理解驗收（選項每輪洗牌、逐題解析、完成後顯示分數；不計正式成績，也尚未串接平台資料）。因這是課程介紹而非已定義的正式互動教材，尚未放進 `public/materials/`、未建立版本或活動設定、未提交。HTML 關鍵資料檢查、內嵌測驗 JavaScript 語法與 `git diff --check` 已通過；本機 `file://` 預覽被 browser security policy 阻擋，未繞過限制。工作樹另有使用者既存未追蹤的 `html/止血機制與凝血病理.html`，不得納入此草稿。
 2026-09-16（後續更新）：使用者提供《課程內容、課堂規範與評量方式》PDF 與 ZUVIo 單選題 CSV 範本。已將圖卡以 PDF 的正式內容擴充／校正：四階段考試範圍與日期、學習目標、兩本課本、手機／出席規範、Q1–Q8 線上小考與截止時間、免參訪評量調整；測驗改為 10 題、每題 10 分、總分 100 分。另產生可直接匯入的 Big5 編碼題本 `html/115學年度解剖生理學與實驗2_ZUVIo題本.csv`，沿用範本前五欄、每題 4 個選項與正解索引。已驗證 HTML 10 題與測驗 JavaScript 語法、CSV 10 題／100 分／欄位／正解索引、以及 `git diff --check`；仍在 `main` 的未追蹤草稿，未提交、推送或部署。PDF 視覺檢視使用 Poppler 轉圖，僅讀取原始檔、不變更 PDF。
 2026-09-16（最新圖卡互動調整）：使用者要求移除圖卡可見的資訊來源文字；「課程理解驗收」改為按「開始」後全螢幕獨立顯示，背景圖卡完全被遮蔽，僅保留題目、選項、進度、返回與下一題控制。使用者明確指定不及格條件題採嚴格的「四次考試平均 < 40 分且 PR < 33」：已同步改掉圖卡規則、HTML 第 7 題與 Big5 ZUVIo CSV 第 7 題（正解為 39 分／PR 32）。這與 PDF 原文的 `≤ 40`／`≤ 33` 不同，後續如再修正需以教師最新明確指示為準。
@@ -517,6 +518,77 @@
   Functions；只需要 GitHub Desktop push 讓 GitHub Pages 重新發布即可
   生效（1.2.5 的 Functions 部署待辦依然沒變，還是要記得跑）。
 
+## Claude 接手狀態（2026-09-16，第九輪：課程簡介圖卡拆分探索節點，1.3.8）
+
+- 起因：使用者填「課程簡介」活動的教師後台表單時問「探索節點總數」「闖關題目
+  總數」怎麼填。我一開始用 `WebFetch` 抓正式網址，誤判這份教材完全沒有接上
+  平台的學習追蹤協定，因而建議把「教材紀錄方式」改回「一般閱讀」——**這個
+  判斷後來證實是錯的**，`WebFetch` 抓到的可能是舊快取或部署還沒跑完。直接
+  查本機檔案才發現 `public/materials/course-orientation-v1/index.html` 早就
+  引用共用的 `public/materials/course-learning.js`，10 題測驗每題都會呼叫
+  `CourseLearning.answer(q.id, isCorrect)`、10 題全對時呼叫
+  `CourseLearning.complete()`——這部分本來就是對的，不需要改回「一般閱讀」。
+- 唯一真正的落差：探索節點只有 1 個「整頁」節點（點「開始課程理解驗收」時
+  才送一次 `explore('course-orientation-overview')`），比另外兩份教材
+  （`hemostasis-mechanisms-v1`、`blood-gas-transport-v1`，都拆成 6 個節點＋
+  `nodeTime` 停留秒數）明顯簡略。已用 `AskUserQuestion` 跟使用者確認範圍只做
+  課程簡介這一份（不動 `blood-composition-v1`／`blood-pre-v1`／
+  `blood-post-v1`），節點偵測方式用捲動偵測（不是改成點選式概念圖）。
+- 修正（`public/materials/course-orientation-v1/index.html`）：
+  - 依版面實際的 8 個內容區塊，各自加上 `data-node-id`：
+    `course-orientation-highlights`（這學期要學會什麼）、`-stages`（四階段
+    考試）、`-timeline`（學期重要節點）、`-grading`（總成績比例）、
+    `-visit`（大體參訪時程）、`-rules`（課堂與數位學習規範）、
+    `-online-quiz`（數位學習網線上小考）、`-failing-rule`（不及格判定）。
+    成績比例與參訪時程原本同在一個 `<section class="grid">` 裡的兩個
+    `<article class="panel">`，改成各自標記才能分開偵測。
+  - 新增一段獨立的 `<script>`（`course-learning.js` 引用之後、原本測驗
+    `<script>` 之前）：建立 `IntersectionObserver`（threshold 0.4）觀察 8 個
+    節點，第一次進入畫面呼叫一次 `CourseLearning.explore(nodeId)`（用
+    `Set` 防止捲動來回重複呼叫），並用進出邊界累計每個節點的可見秒數，
+    離開或 `visibilitychange` 隱藏時呼叫 `CourseLearning.nodeTime(nodeId,
+    seconds)`（秒數上限由 `course-learning.js` 內部處理，呼叫端不用另外
+    clamp）。
+  - 移除原本掛在「開始課程理解驗收」按鈕 click handler 上的
+    `explore('course-orientation-overview')` 整頁節點呼叫。
+  - 沒有改 `course-learning.js`、`shared/learning.ts` 或測驗作答／完成的
+    邏輯。**附帶確認**：先前懷疑的 `node_time` 事件型別（`validEvent()`
+    不認得 `'node_time'`）其實已經在 1.3.6（`shared/learning.ts` 新增
+    `nodeSeconds` 欄位那次）修掉了，目前 `validEvent()`／`reduceLearning()`
+    都已支援 `node_time`，不是本輪要處理的問題，這裡只是記錄一下這個先前
+    在探索過程中懷疑、後來發現已經修好的疑點，避免下一個 agent 重複懷疑。
+- 連帶更新：
+  - `public/materials/README.md`：`course-orientation-v1` 那一列的驗收設定
+    改成「8 個學習節點；10 題；10 題全對才送出完成」，跟另外兩份教材的寫法
+    一致。
+  - `tests/material.test.ts`：既有「課程介紹圖卡以十題全對作為教材完成
+    條件」測試新增 4 條斷言（8 個 `data-node-id`、`IntersectionObserver`、
+    `CourseLearning.explore?.(nodeId)`、`CourseLearning.nodeTime?.(nodeId,
+    seconds)`），確認新版節點拆分邏輯有留在檔案裡。
+- 驗證：`npx tsc -b` 無錯誤。**本機這個 device shell（Linux VM）的
+  `node_modules/esbuild` 是替 darwin-arm64（macOS）裝的，跟這個 VM 的
+  linux-arm64 不符，`npm test`／`npm run build` 在這裡會直接因為 esbuild
+  原生執行檔架構不符而中止**（`tsx --test` 底層用 esbuild）——這不是這次
+  改動造成的，是這個殼層本身的既有環境問題。因為沒辦法在這裡完整跑
+  `npm test`，改用 Python 把 `tests/material.test.ts` 這次新增的每一條
+  斷言直接對 `course-orientation-v1/index.html` 的實際內容跑一次 regex，
+  全部符合預期；`grep` 過其他測試檔沒有引用 `course-orientation` 相關內容
+  會被這次改動影響。**麻煩使用者之後有機會在自己的 Mac 終端機（node_modules
+  架構正確）跑一次 `npm test`／`npm run check` 做最終確認**，理論上應該會
+  過，但這次沒能在這個沙箱裡親自驗證完整測試套件。
+- 教師後台表單要手動調整（不是程式碼異動，使用者自己在後台操作）：
+  「探索節點總數」1 → 8、「闖關題目總數」0 → 10（原本就填錯，跟實際 10 題
+  不符）。改完兩個欄位記得先「保存草稿」再「發布課程」。
+- 這次只改前端靜態教材檔案（`public/materials/` 底下）與測試／文件，沒有動
+  `functions/`、`src/`、`shared/`，不需要重新部署 Cloud Functions；只需要
+  GitHub Desktop push 讓 GitHub Pages 重新發布即可生效（1.2.5 的 Functions
+  部署待辦依然沒變，還是要記得跑）。
+- 版本：`VERSION` 由 1.3.7 升到 **1.3.8**，`node scripts/version.mjs` 已
+  同步所有版本檔案（`package.json`／`functions/package.json`／鎖檔／
+  `shared/version.ts`／`apps-script/version.gs`／`public/version.json`／
+  README／DEVELOPMENT_LOG／handoff 的「目前版本」字樣），`node
+  scripts/version.mjs --check` 已確認一致。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
 - **實測確認（1.2.5，後端）**：等這次改動 push 到 GitHub 且 Functions
@@ -539,6 +611,17 @@
   帳號能正確切換身份登入；(7) 測驗選項按鈕上原本的 A/B/C/D 字母徽章已經
   拿掉，只顯示選項文字，按鈕版面看起來正常、沒有跑版。有任何一項跟預期
   不同麻煩截圖回報。
+- **實測確認（1.3.8，課程簡介圖卡探索節點，前端，不需要重新部署
+  Functions）**：先在教師後台把「課程簡介」活動的「探索節點總數」改成 8、
+  「闖關題目總數」改成 10，保存草稿並發布課程；等這次改動 push 到
+  GitHub、GitHub Pages 重新發布後，用學生帳號打開「課程簡介」這個活動，
+  實際從頭捲到尾捲過全部 8 個區塊（學習重點、四階段考試、學期節點、總
+  成績比例、大體參訪時程、課堂規範、線上小考、不及格判定），再到教師
+  後台「教材診斷」頁確認：(1) 該學生的探索節點數有隨著捲動逐步累積到
+  8（不是一次跳到 8）；(2) 完成 10 題測驗後通關狀態顯示正常，跟拆節點前
+  一樣。另外請找機會在正確架構的終端機（例如使用者自己的 Mac）跑一次
+  `npm test`／`npm run check`，因為這次沒辦法在雲端沙箱裡完整跑過測試
+  套件（見上方第九輪說明），麻煩確認 28 項以上測試全過。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

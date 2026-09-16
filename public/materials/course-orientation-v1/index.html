@@ -79,7 +79,7 @@
     <p class="lead">護理科五專二年級。理解人體如何運作、為什麼能維持恆定，並把課本知識連到實驗、參訪與後續內外科護理學。</p>
 
     <h2 class="section-title">這學期要學會什麼</h2>
-    <section class="learning-grid" aria-label="學習重點">
+    <section class="learning-grid" aria-label="學習重點" data-node-id="course-orientation-highlights">
       <article class="learning-item"><strong>構造與功能</strong>認識人體各系統的構造與功能。</article>
       <article class="learning-item"><strong>生理機轉</strong>理解生理機轉與人體恆定。</article>
       <article class="learning-item"><strong>銜接護理</strong>為內外科護理學等後續課程奠定基礎。</article>
@@ -87,7 +87,7 @@
     </section>
 
     <h2 class="section-title">四個學習階段，對應四次考試</h2>
-    <section class="course-table" aria-label="學習階段與考試範圍">
+    <section class="course-table" aria-label="學習階段與考試範圍" data-node-id="course-orientation-stages">
       <div class="course-row"><strong>第一階段</strong><span>心臟、血液、血管、淋巴</span><span>小期中考｜第 5 週・10/12（一）</span></div>
       <div class="course-row"><strong>第二階段</strong><span>呼吸、泌尿、體液</span><span>期中考｜第 9 週・11/9–11/13</span></div>
       <div class="course-row"><strong>第三階段</strong><span>消化系統、營養素消化與吸收</span><span>小期末考｜第 14 週・12/14（一）</span></div>
@@ -95,7 +95,7 @@
     </section>
 
     <h2 class="section-title">學期重要節點</h2>
-    <section class="timeline" aria-label="學期重要節點">
+    <section class="timeline" aria-label="學期重要節點" data-node-id="course-orientation-timeline">
       <article class="milestone"><span class="week">第 5 週</span><p>小期中考<br>血壓測量相關實驗</p></article>
       <article class="milestone"><span class="week">第 9 週</span><p>期中考週<br>兩校區分別命題</p></article>
       <article class="milestone"><span class="week">第 10 週</span><p>國防醫學院<br>大體參訪</p></article>
@@ -106,7 +106,7 @@
     </section>
 
     <section class="grid">
-      <article class="panel">
+      <article class="panel" data-node-id="course-orientation-grading">
         <h2 class="section-title">總成績比例</h2>
         <div class="grade" aria-label="平時成績百分之四十、期中成績百分之三十、期末成績百分之三十">
           <div class="regular">平時<br>40%</div><div class="mid">期中<br>30%</div><div class="final">期末<br>30%</div>
@@ -121,7 +121,7 @@
           </tbody>
         </table>
       </article>
-      <article class="panel">
+      <article class="panel" data-node-id="course-orientation-visit">
         <h2 class="section-title">大體參訪時程</h2>
         <div class="visit">第一梯次<br><strong>12/04（星期五・下午場）</strong></div>
         <div class="visit">第二梯次<br><strong>12/05（星期六・上午場）</strong></div>
@@ -130,13 +130,13 @@
     </section>
 
     <h2 class="section-title">課堂與數位學習規範</h2>
-    <section class="rules" aria-label="課堂規範">
+    <section class="rules" aria-label="課堂規範" data-node-id="course-orientation-rules">
       <article class="rule"><strong>帶兩本課本</strong>每次上課都要帶新編生理學與新編解剖學；未帶課本會扣課堂分數。</article>
       <article class="rule"><strong>手機與課堂秩序</strong>手機僅依教師指示用於測驗與學習。未使用時，放桌上顯眼處、螢幕向下、鏡頭向上。</article>
       <article class="rule"><strong>出席與查詢</strong>每節課點名。請定期在數位學習網課程專區查看個人成績與出缺席紀錄。</article>
       <article class="rule"><strong>坐姿與飲食</strong>上課坐好，不用手撐頭。可飲食但不得影響他人，禁止泡麵、臭豆腐等氣味明顯的食物。</article>
     </section>
-    <section class="online" aria-labelledby="online-title">
+    <section class="online" aria-labelledby="online-title" data-node-id="course-orientation-online-quiz">
       <h2 class="section-title" id="online-title">數位學習網線上小考</h2>
       <ul>
         <li>Q1–Q8，共 8 次。</li><li>每次 25 題，自題庫隨機抽題。</li>
@@ -145,7 +145,7 @@
       </ul>
     </section>
 
-    <aside class="warning"><strong>不及格判定規則：</strong>四次考試平均小於 40 分，且該校區 PR 小於 33 者，學期成績不得及格。</aside>
+    <aside class="warning" data-node-id="course-orientation-failing-rule"><strong>不及格判定規則：</strong>四次考試平均小於 40 分，且該校區 PR 小於 33 者，學期成績不得及格。</aside>
     <button class="start-quiz" id="start-quiz" type="button">開始課程理解驗收（10 題・100 分）</button>
   </main>
   <section class="quiz" id="quiz-screen" aria-labelledby="quiz-title" aria-hidden="true">
@@ -161,6 +161,44 @@
     </div>
   </section>
   <script src="../course-learning.js"></script>
+  <script>
+    (() => {
+      if (!window.CourseLearning) return;
+      const nodes = document.querySelectorAll('[data-node-id]');
+      const seen = new Set();
+      const enteredAt = new Map();
+      const flush = (nodeId, now) => {
+        const start = enteredAt.get(nodeId);
+        if (start == null) return;
+        enteredAt.delete(nodeId);
+        const seconds = (now - start) / 1000;
+        if (seconds > 0) window.CourseLearning.nodeTime?.(nodeId, seconds);
+      };
+      const observer = new IntersectionObserver((entries) => {
+        const now = performance.now();
+        entries.forEach((entry) => {
+          const nodeId = entry.target.dataset.nodeId;
+          if (!nodeId) return;
+          if (entry.isIntersecting) {
+            if (!seen.has(nodeId)) {
+              seen.add(nodeId);
+              window.CourseLearning.explore?.(nodeId);
+            }
+            if (!enteredAt.has(nodeId)) enteredAt.set(nodeId, now);
+          } else {
+            flush(nodeId, now);
+          }
+        });
+      }, { threshold: 0.4 });
+      nodes.forEach((node) => observer.observe(node));
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          const now = performance.now();
+          enteredAt.forEach((_, nodeId) => flush(nodeId, now));
+        }
+      });
+    })();
+  </script>
   <script>
     (() => {
       const questions = [
@@ -294,7 +332,6 @@
         renderQuestion();
       });
       start.addEventListener('click', () => {
-        if (window.CourseLearning?.explore) window.CourseLearning.explore('course-orientation-overview');
         index = 0;
         score = 0;
         screen.classList.add('active');

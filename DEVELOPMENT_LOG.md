@@ -1,6 +1,14 @@
 # 開發紀錄
 
-目前版本：1.3.7
+目前版本：1.3.8
+
+## 1.3.8 — 課程簡介圖卡拆分探索節點（2026-09-16）
+
+- 修正先前誤判：`course-orientation-v1` 其實已接上 `course-learning.js`（10 題作答／全對完成事件皆已存在），並非完全沒有追蹤，故不建議改回「一般閱讀」。
+- 探索節點由 1 個整頁節點拆成 8 個（`course-orientation-highlights`／`-stages`／`-timeline`／`-grading`／`-visit`／`-rules`／`-online-quiz`／`-failing-rule`），比照 `hemostasis-mechanisms-v1` 已用過的 `CourseLearning.explore`／`nodeTime`，改用 `IntersectionObserver`（threshold 0.4）偵測捲動進度，保留原本長條捲動版面，不改成點選式概念圖。
+- 移除原本掛在「開始課程理解驗收」按鈕上的整頁 `explore('course-orientation-overview')` 呼叫；測驗作答與全對完成事件不變。
+- `public/materials/README.md` 更新該教材的驗收設定為「8 個學習節點；10 題；10 題全對才送出完成」；`tests/material.test.ts` 新增對應斷言（8 個 `data-node-id`、`IntersectionObserver`、`explore`／`nodeTime` 呼叫）。
+- 教師後台表單需手動調整：「探索節點總數」1→8、「闖關題目總數」0→10（原本就填錯），改完需重新保存草稿並發布課程。
 
 ## 1.3.7 — 題庫解析研究資料（2026-09-15）
 
