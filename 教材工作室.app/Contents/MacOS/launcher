@@ -1,0 +1,33 @@
+#!/bin/bash
+# 教材工作室的無終端機啟動器。這個執行檔是被 macOS 的 LaunchServices 直接呼叫
+# （雙擊 App 圖示時），不是透過 Terminal.app，所以不會跳出終端機視窗。
+#
+# 這個檔案本身在 教材工作室.app/Contents/MacOS/ 底下，往上三層就是專案根目錄。
+DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+
+# GUI App 啟動時拿到的 PATH 通常很精簡（只有 /usr/bin:/bin 這種），補上常見的 Node
+# 安裝位置，並嘗試載入使用者的 shell 設定檔（nvm 之類的工具常常是在這裡加 PATH），
+# 盡量比照平常在終端機裡能找到 node/npm 的環境。找不到就跳出提示，不要靜靜失敗。
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+for rc in "$HOME/.zprofile" "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.profile"; do
+  [ -f "$rc" ] && source "$rc" >/dev/null 2>&1
+done
+
+cd "$DIR" 2>/dev/null || {
+  osascript -e 'display dialog "找不到專案資料夾，教材工作室無法啟動。" buttons {"好"} default button 1 with icon caution' >/dev/null 2>&1
+  exit 1
+}
+
+if ! command -v npm >/dev/null 2>&1; then
+  osascript -e 'display dialog "找不到 npm，可能是 Node.js 沒安裝，或跟這個 App 抓到的系統路徑不一樣。請改雙擊「教材工作室.command」，它會開終端機顯示詳細錯誤訊息。" buttons {"好"} default button 1 with icon caution' >/dev/null 2>&1
+  exit 1
+fi
+
+# 背景啟動伺服器；準備好之後，伺服器本身（materials-studio.mjs）會自動開瀏覽器分頁。
+nohup npm run materials:studio > /tmp/materials-studio-app.log 2>&1 &
+
+sleep 3
+code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5183/ 2>/dev/null)"
+if [ "$code" != "200" ]; then
+  osascript -e 'display dialog "教材工作室好像還沒成功啟動（也可能只是比較慢，晚幾秒再檢查瀏覽器）。如果一直沒反應，請改雙擊「教材工作室.command」查看詳細錯誤訊息。" buttons {"好"} default button 1 with icon caution' >/dev/null 2>&1
+fi

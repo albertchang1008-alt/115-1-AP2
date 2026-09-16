@@ -1,6 +1,23 @@
 # 開發紀錄
 
-目前版本：1.3.11
+目前版本：1.3.12
+
+## 1.3.12 — 教材工作室新增真正無終端機的 App（2026-09-16）
+
+- 使用者不想在啟動教材工作室時看到終端機視窗（連雙擊 `.command` 自動跳出的都不想看到），
+  新增手工打包的 `教材工作室.app`（`Contents/Info.plist` ＋ `Contents/MacOS/launcher`
+  shell script，`LSUIElement` 設為 true）：雙擊後由 macOS LaunchServices 直接執行，
+  不經過 Terminal.app，完全不會有終端機視窗。啟動器會補上常見的 Node 安裝路徑
+  （Homebrew／`/usr/local/bin`）並嘗試載入使用者的 shell 設定檔（涵蓋 nvm 之類的
+  PATH 設定方式），找不到 `npm` 或啟動 3 秒後還沒回應，會用 `osascript display dialog`
+  跳出原生提示，不會靜靜地毫無反應；成功的話一樣由伺服器本身（既有的
+  `materials-studio.mjs`）自動開瀏覽器分頁。
+- `public/materials/README.md` 的「新增教材」說明改成以雙擊 `教材工作室.app` 為首選，
+  並提醒第一次雙擊可能會遇到 macOS「無法驗證開發者」的警告（需要在 Finder 按住
+  Control 點一下、選「打開」繞過一次）；`教材工作室.command`（會開終端機視窗）保留
+  作為除錯用的備用方式，找不到 Node 或 App 沒反應時可以改用它看實際錯誤訊息。
+- 純新增一個本機啟動用的 App 打包／文件更新，不影響 `functions/`，不需要重新部署
+  Cloud Functions。
 
 ## 1.3.11 — 教材工作室新增雙擊啟動器（2026-09-16）
 
