@@ -1,0 +1,684 @@
+
+血液氣體運送與病變
+<!--
+部署方式：
+1. 存成 index.html
+2. 放到 public/materials/blood-gas-transport-v1/index.html
+3. 教師後台新增 HTML 活動：
+   - 紀錄方式：闖關與學習診斷
+   - 教材版本：blood-gas-transport-v1
+   - 探索節點總數：6
+   - 闖關題目總數：5
+-->
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血液氣體運送與紅血球病變 - 互動資訊圖表與隨堂診斷</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Navigation Modes */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; role: tablist; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 0.95rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Stats Dashboard */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+        .stat-card { background: var(--card-bg); padding: 18px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+        /* Filter Tabs */
+        .filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px; }
+        .tab-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.2s; color: var(--text-muted); font-size: 0.9rem; }
+        .tab-btn.active, .tab-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Interactive Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .node-card { background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+        .node-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        
+        .node-card-header { width: 100%; text-align: left; padding: 16px 20px; background: #fafafa; border: none; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        
+        .badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; }
+        .bg-gas { background: var(--primary-light); color: var(--primary); }
+        .bg-homeo { background: var(--warning-light); color: var(--warning); }
+        .bg-anemia { background: var(--danger-light); color: var(--danger); }
+
+        .card-body { padding: 20px; }
+        .card-summary { font-weight: 600; color: #334155; margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; }
+        .features-list { list-style: none; margin-bottom: 12px; }
+        .features-list li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; padding-left: 16px; position: relative; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 0; }
+        
+        .detail-pane { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); background: #f8fafc; padding: 14px; border-radius: 8px; font-size: 0.88rem; color: #334155; line-height: 1.6; }
+        .node-card.open .detail-pane { display: block; }
+        .toggle-hint { font-size: 0.8rem; color: var(--primary); font-weight: 700; text-align: right; margin-top: 8px; }
+
+        /* Quiz Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .quiz-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
+        .quiz-score-badge { font-size: 1.05rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 16px; border-radius: 20px; }
+        
+        .question-card { margin-bottom: 24px; padding: 20px; border-radius: 12px; border: 1px solid var(--border); background: #fafafa; }
+        .question-title { font-size: 1.02rem; font-weight: 700; margin-bottom: 14px; color: var(--text-main); line-height: 1.5; }
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; cursor: pointer; font-size: 0.92rem; transition: all 0.2s; color: var(--text-main); line-height: 1.4; width: 100%; }
+        .option-btn:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        
+        .option-btn.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; }
+        .option-btn.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; }
+
+        .explanation-box { display: none; margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        /* Quiz Result & Retry Banners */
+        .result-banner { display: none; padding: 20px; border-radius: 12px; text-align: center; margin-top: 24px; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); }
+        .result-banner h3 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 800; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        .retry-btn { background: var(--danger); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+        .retry-btn:hover { background: #b91c1c; }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>血液氣體運送與紅血球病變資訊圖表</h1>
+        <p>生理學 CH05 核心知識互動地圖與情境隨堂診斷</p>
+    </header>
+
+    <!-- Navigation Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" role="tab" id="tab-infographic" aria-selected="true" aria-controls="infographic-pane" onclick="switchMode('infographic', event)">📊 互動圖表與知識節點</button>
+        <button type="button" class="mode-btn" role="tab" id="tab-quiz" aria-selected="false" aria-controls="quiz-pane" onclick="switchMode('quiz', event)">📝 隨堂診斷 (5題實務病例題)</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="infographic-pane" class="section-pane active" role="tabpanel" aria-labelledby="tab-infographic">
+        <!-- Stats Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="val">1.34 ml</div>
+                <div class="label">每克血紅素攜氧量</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">70%</div>
+                <div class="label">CO₂ 經 HCO₃⁻ 運送比例</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">250 倍</div>
+                <div class="label">碳酸酐酶 (CA) 催化加速</div>
+            </div>
+            <div class="stat-card">
+                <div class="val">120 天</div>
+                <div class="label">成熟紅血球平均壽命</div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" role="toolbar" aria-label="主題篩選">
+            <button type="button" class="tab-btn active" aria-pressed="true" onclick="filterCategory('all', event)">全部知識節點</button>
+            <button type="button" class="tab-btn" aria-pressed="false" onclick="filterCategory('gas', event)">氣體運送與機制</button>
+            <button type="button" class="tab-btn" aria-pressed="false" onclick="filterCategory('homeostasis', event)">生成與恆定調節</button>
+            <button type="button" class="tab-btn" aria-pressed="false" onclick="filterCategory('anemia', event)">貧血與臨床病變</button>
+        </div>
+
+        <!-- Cards Grid (6 Fixed Nodes) -->
+        <div class="cards-grid">
+            
+            <!-- Node 1 -->
+            <div class="node-card" id="card-blood-gas-transport-node-01" data-category="gas" data-node-id="blood-gas-transport-node-01">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-01" onclick="toggleCard('blood-gas-transport-node-01', event)">
+                    <span class="card-title">1. 紅血球結構與血紅素分子</span>
+                    <span class="badge bg-gas">氣體運送</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">成熟紅血球呈雙凹圓盤狀，無細胞核，充滿分子量 64 kDa 的血紅素（Hb），為體內氣體運送的核心載體。</div>
+                    <ul class="features-list">
+                        <li>數量與尺寸：男性約 540萬/mm³，女性約 480萬/mm³；直徑約 7.5 µm。</li>
+                        <li>血紅素結構：4 個次單位（常見 HbA 為 α₂β₂），每個次單位含 1 個血基質（含 Fe²⁺）及血球素多胜肽鏈。</li>
+                        <li>正常濃度：每 100 ml 血液含 14~16 g 血紅素（男性 16 g/dl，女性 14 g/dl）。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-01">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        雙凹圓盤結構可提供最大的表面積/容積比，利於氣體擴散，且具高度變形能力以擠過管徑約 7 µm 的微血管。若血紅素合成不足或結構異常，將直接削弱血液攜氧能力。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="node-card" id="card-blood-gas-transport-node-02" data-category="gas" data-node-id="blood-gas-transport-node-02">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-02" onclick="toggleCard('blood-gas-transport-node-02', event)">
+                    <span class="card-title">2. 氧氣運送與結合機制</span>
+                    <span class="badge bg-gas">氣體運送</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">血液中 98.5% 以上的氧氣與血紅素的亞鐵離子（Fe²⁺）可逆結合形成氧合血紅素，極少數（1.5%）物理溶解於血漿。</div>
+                    <ul class="features-list">
+                        <li>攜氧容量：每克血紅素可帶 1.34 ml O₂，每 100 ml 血液最高可攜帶約 20 ml O₂。</li>
+                        <li>可逆結合：通過肺泡高氧壓區時 Fe²⁺ 結合 O₂；流經組織低氧環境時，氧分子解離並擴散至細胞。</li>
+                        <li>分子反應：1 個血紅素分子含有 4 個 Fe²⁺，最多可結合 4 個 O₂。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-02">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        一氧化碳（CO）對血紅素的結合力為氧氣的 200 倍以上，一旦吸入會搶占 Fe²⁺ 結合位並阻止氧氣釋放，引發致命性組織缺氧與 CO 中毒。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Node 3 -->
+            <div class="node-card" id="card-blood-gas-transport-node-03" data-category="gas" data-node-id="blood-gas-transport-node-03">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-03" onclick="toggleCard('blood-gas-transport-node-03', event)">
+                    <span class="card-title">3. 二氧化碳運送的三途徑</span>
+                    <span class="badge bg-gas">氣體運送</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">細胞代謝產生的 CO₂ 進入血液後，透過轉化為碳酸氫根（70%）、與血球素結合（23%）及血漿溶解（7%）運回肺臟。</div>
+                    <ul class="features-list">
+                        <li>碳酸氫根 (70%)：於紅血球內經碳酸酐酶（CA）催化與水反應生成 H₂CO₃，再解離為 HCO₃⁻ 進入血漿。</li>
+                        <li>碳醯胺基血紅素 (23%)：CO₂ 直接與血紅素的球蛋白胺基結合（HbNHCOOH），不占用 Fe²⁺。</li>
+                        <li>血漿溶解 (7%)：直接溶解於血漿液體中。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-03">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        紅血球內的碳酸酐酶（CA）可將 CO₂ 與 H₂O 的反應速度加快 250 倍，是維持人體血液酸鹼值（pH 7.35~7.45）恆定與快速排除廢氣的關鍵酵素。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Node 4 -->
+            <div class="node-card" id="card-blood-gas-transport-node-04" data-category="homeostasis" data-node-id="blood-gas-transport-node-04">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-04" onclick="toggleCard('blood-gas-transport-node-04', event)">
+                    <span class="card-title">4. 紅血球生成與恆定調節</span>
+                    <span class="badge bg-homeo">恆定調節</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">成人紅血球壽命約 120 天，由紅骨髓終身造血；組織缺氧會刺激腎臟啟動 EPO 體液調節。</div>
+                    <ul class="features-list">
+                        <li>恆定機制：組織缺氧刺激腎臟釋放紅血球生成因子，促使血漿 EPO 原轉化為 EPO 刺激骨髓造血。</li>
+                        <li>造血演變：胚胎 3-8 週（卵黃囊）、8 週至出生（肝臟）、5 個月起（脾與骨髓）、成人（紅骨髓）。</li>
+                        <li>破壞與代謝：老化的紅血球在脾/肝被吞噬，鐵與白蛋白被回收，血基質轉為膽紅素隨膽汁/糞尿排出。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-04">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        慢性腎臟病患者因 EPO 分泌不足常併發「腎性貧血」；高山居民或長期有氧訓練者因組織長期低氧，經代償反應可使血比容（Hct）升至 50% 以上。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Node 5 -->
+            <div class="node-card" id="card-blood-gas-transport-node-05" data-category="anemia" data-node-id="blood-gas-transport-node-05">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-05" onclick="toggleCard('blood-gas-transport-node-05', event)">
+                    <span class="card-title">5. 遺傳性與結構異常貧血</span>
+                    <span class="badge bg-anemia">貧血病變</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">基因突變導致血紅素胜肽鏈結構異常或酵素缺乏，使紅血球壽命縮短或易脆破裂，引發溶血性貧血。</div>
+                    <ul class="features-list">
+                        <li>鐮刀型貧血：β 鏈第 6 位麩胺酸突變為纈胺酸形成異常 HbS，低氧下呈鐮刀狀且易脆破裂。</li>
+                        <li>地中海型貧血：基因突變致胜肽鏈缺失，分為 α 型（α 鏈缺失，輕微）與 β 型（β 鏈缺失，嚴重）。</li>
+                        <li>蠶豆症：缺乏 G-6-PD 酵素，接觸強氧化劑（如蠶豆、萘丸）時引發急性溶血。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-05">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        鐮刀型貧血與地中海型貧血皆為遺傳性疾病。異常紅血球通過脾臟狹窄微血管時極易破裂溶血，造成黃疸、脾腫大與嚴重貧血。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Node 6 -->
+            <div class="node-card" id="card-blood-gas-transport-node-06" data-category="anemia" data-node-id="blood-gas-transport-node-06">
+                <button type="button" class="node-card-header" aria-expanded="false" aria-controls="detail-blood-gas-transport-node-06" onclick="toggleCard('blood-gas-transport-node-06', event)">
+                    <span class="card-title">6. 營養缺乏與微小/巨母紅血球貧血</span>
+                    <span class="badge bg-anemia">貧血病變</span>
+                </button>
+                <div class="card-body">
+                    <div class="card-summary">製造血紅素或 DNA 分裂所需的原料（鐵質、維生素 B₁₂、葉酸）缺乏時，會干擾成熟過程造成貧血。</div>
+                    <ul class="features-list">
+                        <li>缺鐵性貧血：因慢性失血或鐵攝取不足，呈現小紅血球（MCV < 80 fl）與淺色紅血球（MCH < 25 pg）。</li>
+                        <li>惡性貧血：缺乏胃壁細胞分泌之內在因子使維生素 B₁₂ 吸收不良，紅血球母細胞無法分裂形成「巨母紅血球」。</li>
+                        <li>血比容變化：正常血比容約 45%，嚴重貧血者可降至 15%。</li>
+                    </ul>
+                    <div class="toggle-hint">點擊展開詳細說明 ▼</div>
+                    <div class="detail-pane" id="detail-blood-gas-transport-node-06">
+                        <strong>生理機制與臨床意義：</strong><br>
+                        缺鐵性貧血可補充口服鐵劑改善；全胃切除或萎縮性胃炎患者因缺乏內在因子致惡性貧血，必須定期肌肉注射維生素 B₁₂，否則將造成不可逆的神經病變。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="quiz-pane" class="section-pane" role="tabpanel" aria-labelledby="tab-quiz">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <div class="quiz-title">氣體運送與紅血球病變隨堂診斷</div>
+                <div class="quiz-score-badge">已完成 <span id="answered-count">0</span>/5 題 | 當前得分: <span id="score-val">0</span>/5</div>
+            </div>
+
+            <!-- Question Mount Point -->
+            <div id="questions-wrapper"></div>
+
+            <!-- Pass / Fail Banners -->
+            <div id="pass-banner" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜通關！</h3>
+                <p>您已 5 題全對，完美掌握【氣體運送與紅血球病變】的核心生理與臨床觀念！</p>
+            </div>
+
+            <div id="fail-banner" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p>當前得分：<span id="final-score">0</span> / 5。平台要求必須 5 題全對才可算作通關，請複習上方圖表節點後重試！</p>
+                <button type="button" class="retry-btn" onclick="resetAndShuffleQuiz()">🔄 重新挑戰 (重洗題目與選項)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 1151生理解剖 - CH05 血液氣體運送與病變單一檔案數位教材</p>
+    </footer>
+</div>
+
+<script>
+    const MATERIAL_VERSION = 'blood-gas-transport-v1';
+    const NODE_IDS = [
+        'blood-gas-transport-node-01',
+        'blood-gas-transport-node-02',
+        'blood-gas-transport-node-03',
+        'blood-gas-transport-node-04',
+        'blood-gas-transport-node-05',
+        'blood-gas-transport-node-06'
+    ];
+    const QUESTIONS = [
+        {
+            id: 'blood-gas-transport-q01',
+            title: '【臨床病例】一位 32 歲女性患者，長期經血量過多，近來常感頭暈與疲倦。血液檢查顯示 Hb 為 8.5 g/dl，MCV 為 72 fl（正常約 87 fl），MCH 為 21 pg（正常約 29 pg）。請問最可能引發此血球型態與生理異常的原因為何？',
+            options: [
+                { text: '鐵質攝取不足或慢性失血導致血紅素合成障礙之缺鐵性貧血', correct: true },
+                { text: '胃切除致缺乏內在因子使維生素 B12 吸收不良之惡性貧血', correct: false },
+                { text: '基因突變使血紅素 β 鏈第 6 位麩胺酸置換為纈胺酸之鐮刀型貧血', correct: false },
+                { text: '紅血球缺乏 G-6-PD 酵素受到強氧化劑刺激引發之急性溶血', correct: false }
+            ],
+            explanation: '解析：慢性失血或鐵質缺乏會影響血紅素（Hb）合成，導致小紅血球（MCV < 80 fl）及淺色紅血球（MCH < 25 pg）之缺鐵性貧血。'
+        },
+        {
+            id: 'blood-gas-transport-q02',
+            title: '【生理機制】細胞代謝產生的二氧化碳（CO₂）進入血液後進行運送。關於二氧化碳在紅血球與血漿中的轉化與運送途徑，下列何者正確？',
+            options: [
+                { text: '約 70% 的 CO₂ 在紅血球內經碳酸酐酶（CA）催化生成 H₂CO₃，再解離為 HCO₃⁻ 進入血漿運送', correct: true },
+                { text: '約 70% 的 CO₂ 直接與血紅素血基質中的亞鐵離子（Fe²⁺）結合進行運送', correct: false },
+                { text: '絕大部分 CO₂ 以氣體分子狀態直接溶解於血漿中運送', correct: false },
+                { text: '碳酸酐酶（CA）主要存在於血漿中，用於減緩 CO₂ 與水的反應速率', correct: false }
+            ],
+            explanation: '解析：CO₂ 運送三大途徑：70% 經紅血球內碳酸酐酶（CA，反應加速 250 倍）轉化為 HCO₃⁻ 於血漿運送；23% 與血紅素球蛋白結合；7% 溶於血漿。'
+        },
+        {
+            id: 'blood-gas-transport-q03',
+            title: '【臨床病例】一位 65 歲男性因萎縮性胃炎導致胃壁細胞嚴重受損，長期無法有效吸收維生素 B12。血液抹片顯示紅血球母細胞無法正常分裂，體積異常膨大。請問下列敘述何者最符合該患者之病理生理特徵？',
+            options: [
+                { text: '缺乏胃壁細胞分泌之內在因子（Intrinsic Factor），引發巨母紅血球之惡性貧血', correct: true },
+                { text: '腎臟受損無法分泌紅血球生成素（EPO），導致骨髓幹細胞停止分化', correct: false },
+                { text: '脾臟功能過度亢進，加速破壞正常形狀之紅血球', correct: false },
+                { text: '基因突變造成血紅素 α 胜肽鏈合成缺失引發地中海型貧血', correct: false }
+            ],
+            explanation: '解析：胃壁細胞分泌內在因子（Intrinsic Factor），結合維生素 B12 促進迴腸吸收。缺乏內在因子會影響 DNA 合成與細胞分裂，使紅血球形成巨母紅血球（惡性貧血）。'
+        },
+        {
+            id: 'blood-gas-transport-q04',
+            title: '【生理調節】運動員至海拔 3,500 公尺之高山進行移地訓練，環境處於低氧狀態。請問其體內啟動紅血球生成以代償低氧之機轉為何？',
+            options: [
+                { text: '組織缺氧刺激腎臟釋放紅血球生成因子，使血漿 EPO 原轉化為 EPO 刺激骨髓造血', correct: true },
+                { text: '低氧刺激脾臟釋放儲存之膽紅素，直接轉化為紅血球', correct: false },
+                { text: '低氧刺激肝臟合成大量白蛋白，增加血漿膠體滲透壓', correct: false },
+                { text: '肺泡低氧刺激碳酸酐酶活性下降，使氧合血紅素解離曲線左移', correct: false }
+            ],
+            explanation: '解析：組織缺氧刺激腎臟釋放紅血球生成因子，將血漿中的紅血球生成素原轉化為 EPO，EPO 作用於紅骨髓刺激幹細胞分化生成紅血球。'
+        },
+        {
+            id: 'blood-gas-transport-q05',
+            title: '【遺傳與結構病變】鐮刀型貧血（Sickle-cell Anemia）屬於體染色體隱性遺傳疾病，患者在低氧環境下紅血球會扭曲成鐮刀狀並易脆破裂。請問引發此疾病之分子缺陷為何？',
+            options: [
+                { text: '血紅素 β 鏈第 6 位之麩胺酸（Glutamic acid）突變置換為纈胺酸（Valine）', correct: true },
+                { text: '血紅素 α 鏈第 6 位之纈胺酸（Valine）突變置換為麩胺酸（Glutamic acid）', correct: false },
+                { text: '血基質中之亞鐵離子（Fe²⁺）被銅離子置換', correct: false },
+                { text: '紅血球內缺乏丙酮酸激酶導致 ATP 無法生成', correct: false }
+            ],
+            explanation: '解析：鐮刀型貧血係點突變導致血紅素 β 鏈第 6 位之親水性麩胺酸置換為疏水性纈胺酸，形成異常 HbS。在低氧下 HbS 結晶形成長條沉澱，使紅血球變形為鐮刀狀。'
+        }
+    ];
+
+    // Tracking state
+    const exploredNodes = new Set();
+    let currentlyExpandedNodeId = null;
+    let expandedStartTime = 0;
+    let timerInterval = null;
+
+    let currentQuestions = [];
+    let score = 0;
+    let answeredCount = 0;
+    let hasCompleted = false;
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // Time tracking handlers
+    function sendNodeTime(nodeId, seconds) {
+        const clamped = Math.min(60, Math.max(1, seconds));
+        if (window.CourseLearning && window.CourseLearning.nodeTime) {
+            window.CourseLearning.nodeTime(nodeId, clamped);
+        }
+    }
+
+    function flushNodeTime() {
+        if (currentlyExpandedNodeId && expandedStartTime > 0) {
+            const now = Date.now();
+            const durationSeconds = Math.floor((now - expandedStartTime) / 1000);
+            if (durationSeconds >= 1) {
+                sendNodeTime(currentlyExpandedNodeId, durationSeconds);
+            }
+            expandedStartTime = 0;
+        }
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    function startNodeTimer(nodeId) {
+        flushNodeTime();
+        currentlyExpandedNodeId = nodeId;
+        expandedStartTime = Date.now();
+
+        timerInterval = setInterval(() => {
+            if (document.visibilityState === 'visible' && currentlyExpandedNodeId) {
+                const now = Date.now();
+                const durationSeconds = Math.floor((now - expandedStartTime) / 1000);
+                if (durationSeconds >= 1) {
+                    sendNodeTime(currentlyExpandedNodeId, durationSeconds);
+                    expandedStartTime = now;
+                }
+            }
+        }, 15000);
+    }
+
+    // Interactive Node Expand/Collapse
+    function toggleCard(nodeId, evt) {
+        if (evt) evt.stopPropagation();
+
+        const card = document.getElementById('card-' + nodeId);
+        if (!card) return;
+
+        const isCurrentlyOpen = card.classList.contains('open');
+        
+        // Flush active node timer before toggling
+        flushNodeTime();
+
+        // Close all cards
+        document.querySelectorAll('.node-card').forEach(c => {
+            c.classList.remove('open');
+            const btn = c.querySelector('.node-card-header');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            const hint = c.querySelector('.toggle-hint');
+            if (hint) hint.textContent = '點擊展開詳細說明 ▼';
+        });
+
+        if (!isCurrentlyOpen) {
+            card.classList.add('open');
+            const btn = card.querySelector('.node-card-header');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+            const hint = card.querySelector('.toggle-hint');
+            if (hint) hint.textContent = '點擊收合詳細說明 ▲';
+
+            // SDK: Explore Event (Once per node)
+            if (!exploredNodes.has(nodeId)) {
+                exploredNodes.add(nodeId);
+                if (window.CourseLearning && window.CourseLearning.explore) {
+                    window.CourseLearning.explore(nodeId);
+                }
+            }
+
+            // Start Timer
+            startNodeTimer(nodeId);
+        } else {
+            currentlyExpandedNodeId = null;
+        }
+    }
+
+    // Navigation Mode Switch
+    function switchMode(mode, evt) {
+        flushNodeTime();
+        currentlyExpandedNodeId = null;
+
+        const btns = document.querySelectorAll('.mode-btn');
+        btns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+        });
+
+        const targetBtn = evt ? evt.currentTarget : document.getElementById('tab-' + mode);
+        if (targetBtn) {
+            targetBtn.classList.add('active');
+            targetBtn.setAttribute('aria-selected', 'true');
+        }
+
+        const panes = document.querySelectorAll('.section-pane');
+        panes.forEach(p => p.classList.remove('active'));
+        document.getElementById(mode + '-pane').classList.add('active');
+    }
+
+    // Filter Categories
+    function filterCategory(category, evt) {
+        flushNodeTime();
+        currentlyExpandedNodeId = null;
+
+        const buttons = document.querySelectorAll('.filter-tabs .tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+        });
+
+        if (evt && evt.currentTarget) {
+            evt.currentTarget.classList.add('active');
+            evt.currentTarget.setAttribute('aria-pressed', 'true');
+        }
+
+        const cards = document.querySelectorAll('#infographic-pane .node-card');
+        cards.forEach(card => {
+            card.classList.remove('open');
+            const btn = card.querySelector('.node-card-header');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            const hint = card.querySelector('.toggle-hint');
+            if (hint) hint.textContent = '點擊展開詳細說明 ▼';
+
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Render Quiz with Shuffle
+    function renderQuiz() {
+        score = 0;
+        answeredCount = 0;
+        document.getElementById('score-val').textContent = '0';
+        document.getElementById('answered-count').textContent = '0';
+        
+        const passBanner = document.getElementById('pass-banner');
+        const failBanner = document.getElementById('fail-banner');
+        passBanner.style.display = 'none';
+        failBanner.style.display = 'none';
+
+        // Shuffle questions & options
+        currentQuestions = shuffleArray(QUESTIONS).map(q => ({
+            ...q,
+            shuffledOptions: shuffleArray(q.options)
+        }));
+
+        const wrapper = document.getElementById('questions-wrapper');
+        wrapper.innerHTML = '';
+
+        currentQuestions.forEach((q, qIndex) => {
+            const qCard = document.createElement('div');
+            qCard.className = 'question-card';
+            qCard.dataset.questionIndex = qIndex;
+
+            let optionsHTML = '';
+            q.shuffledOptions.forEach((opt, optIndex) => {
+                optionsHTML += `
+                    <li>
+                        <button type="button" class="option-btn" onclick="handleSelectOption(this, ${qIndex}, ${optIndex}, event)">
+                            ${opt.text}
+                        </button>
+                    </li>
+                `;
+            });
+
+            qCard.innerHTML = `
+                <div class="question-title">${qIndex + 1}. ${q.title}</div>
+                <ul class="options-list">${optionsHTML}</ul>
+                <div class="explanation-box">${q.explanation}</div>
+            `;
+            wrapper.appendChild(qCard);
+        });
+    }
+
+    // Answer Selection Handler
+    function handleSelectOption(btn, qIndex, optionIndex, evt) {
+        if (evt) evt.stopPropagation();
+
+        const qData = currentQuestions[qIndex];
+        const selectedOpt = qData.shuffledOptions[optionIndex];
+        const isCorrect = selectedOpt.correct;
+
+        // SDK: Report Answer
+        if (window.CourseLearning && window.CourseLearning.answer) {
+            window.CourseLearning.answer(qData.id, isCorrect);
+        }
+
+        const qCard = btn.closest('.question-card');
+        const options = qCard.querySelectorAll('.option-btn');
+        const expBox = qCard.querySelector('.explanation-box');
+
+        // Disable options in this question
+        options.forEach(opt => opt.setAttribute('disabled', 'true'));
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            score += 1;
+            document.getElementById('score-val').textContent = score;
+        } else {
+            btn.classList.add('wrong');
+            // Highlight correct option
+            options.forEach((optBtn, idx) => {
+                if (qData.shuffledOptions[idx].correct) {
+                    optBtn.classList.add('correct');
+                }
+            });
+        }
+
+        expBox.style.display = 'block';
+        answeredCount += 1;
+        document.getElementById('answered-count').textContent = answeredCount;
+
+        // Check overall completion
+        if (answeredCount === 5) {
+            setTimeout(() => {
+                if (score === 5) {
+                    document.getElementById('pass-banner').style.display = 'block';
+                    // SDK: Complete Event (Only once)
+                    if (!hasCompleted) {
+                        hasCompleted = true;
+                        if (window.CourseLearning && window.CourseLearning.complete) {
+                            window.CourseLearning.complete();
+                        }
+                    }
+                } else {
+                    document.getElementById('final-score').textContent = score;
+                    document.getElementById('fail-banner').style.display = 'block';
+                }
+            }, 300);
+        }
+    }
+
+    function resetAndShuffleQuiz() {
+        renderQuiz();
+        const quizPane = document.getElementById('quiz-pane');
+        window.scrollTo({ top: quizPane.offsetTop - 20, behavior: 'smooth' });
+    }
+
+    // Page Visibility Change Listener
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') {
+            flushNodeTime();
+        } else if (currentlyExpandedNodeId) {
+            expandedStartTime = Date.now();
+        }
+    });
+
+    window.addEventListener('beforeunload', () => {
+        flushNodeTime();
+    });
+
+    // Initialize Quiz on Load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderQuiz();
+    });
+</script>
+
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+</body>
+</html>
+儲存的回覆僅供檢視
+Gemini Notebook 提供的資訊未必正確，請查證回覆內容。
