@@ -31,6 +31,46 @@
     hint(questionId) { add({ type: 'hint', questionId: String(questionId) }); },
     nodeTime(nodeId, seconds) { if (Number.isFinite(seconds) && seconds > 0) add({ type: 'node_time', nodeId: String(nodeId), seconds: Math.min(60, Math.floor(seconds)) }); },
     complete() { add({ type: 'completed' }); },
+    // 給長條捲動版面的教材用：幫內容區塊加 data-node-id，呼叫一次這個方法即可自動用
+    // IntersectionObserver 偵測捲動進度，不用每份教材各自重寫一次觀察器邏輯。
+    // 節點第一次進入畫面時送一次 explore(nodeId)；離開畫面或分頁被隱藏時，把這段
+    // 可見期間累積的秒數送一次 nodeTime(nodeId, seconds)（上限由 nodeTime 內部處理）。
+    trackScrollNodes(selector = '[data-node-id]', threshold = 0.4) {
+      const nodes = document.querySelectorAll(selector);
+      const seen = new Set();
+      const enteredAt = new Map();
+      const flush = (nodeId, now) => {
+        const start = enteredAt.get(nodeId);
+        if (start == null) return;
+        enteredAt.delete(nodeId);
+        const seconds = (now - start) / 1000;
+        if (seconds > 0) this.nodeTime(nodeId, seconds);
+      };
+      const observer = new IntersectionObserver((entries) => {
+        const now = performance.now();
+        entries.forEach((entry) => {
+          const nodeId = entry.target.dataset.nodeId;
+          if (!nodeId) return;
+          if (entry.isIntersecting) {
+            if (!seen.has(nodeId)) {
+              seen.add(nodeId);
+              this.explore(nodeId);
+            }
+            if (!enteredAt.has(nodeId)) enteredAt.set(nodeId, now);
+          } else {
+            flush(nodeId, now);
+          }
+        });
+      }, { threshold });
+      nodes.forEach((node) => observer.observe(node));
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          const now = performance.now();
+          enteredAt.forEach((_, nodeId) => flush(nodeId, now));
+        }
+      });
+      return observer;
+    },
   };
   if (parent !== window) parent.postMessage({ type: 'ready' }, '*');
 })();

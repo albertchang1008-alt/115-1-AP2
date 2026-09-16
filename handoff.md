@@ -19,8 +19,9 @@
 
 ---
 
-目前版本：1.3.8。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。（2026-09-16 復查：`git rev-list --left-right --count origin/main...main` 目前是 0 1，代表本機只比 GitHub 多這次 1.3.8 這 1 個新 commit，先前「多 17 個提交」的說法已經過期，是在這之間的某輪已經 push 過大部分積壓的緣故。）**
+目前版本：1.3.9。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。（2026-09-16 復查：`git rev-list --left-right --count origin/main...main` 目前是 0 1，代表本機只比 GitHub 多這次 1.3.8 這 1 個新 commit，先前「多 17 個提交」的說法已經過期，是在這之間的某輪已經 push 過大部分積壓的緣故。）**
 2026-09-16（第九輪，1.3.8）：修正先前誤判——`course-orientation-v1`（課程簡介圖卡）其實已接上 `course-learning.js`，並非完全沒有追蹤；把它的探索節點從 1 個整頁節點拆成 8 個，改用 `IntersectionObserver` 捲動偵測，保留原本長條捲動版面。詳見下方「第九輪」小節。
+2026-09-16（第十輪，1.3.9）：使用者想要「把已經建好的資訊圖表自動化匯入」，查證後發現目前 6 份教材其實都已經接好追蹤（不是想像中的積壓件），於是把心力改放在建立可重用工具：新增 `shared/materials.ts`（教材目錄唯一資料來源）、`scripts/materials.mjs`（`npm run materials:audit`／`materials:sync`，稽核＋重新產生 README）、`course-learning.js` 新增共用的 `trackScrollNodes()`、教師後台「教材版本」改成下拉選單自動帶出節點／題目數。順便核對出 `blood-composition-v1` 題目總數應為 11（不是 5）、補上 `blood-pre-v1`（22 節點／10 題）與 `blood-post-v1`（43 節點／15 題）的登記與測試。詳見下方「第十輪」小節。
 2026-09-16：依使用者提供的 YouTube〈115學年度解剖生理學與實驗2 課程介紹〉製作未發布的課程資訊圖卡草稿：`html/115學年度解剖生理學與實驗2_課程介紹資訊圖卡.html`，並附同名背景 PNG。內容逐段核對影片投影片，含第 5／9／10／12／14／17／18 週節點、40/30/30 成績結構、一般／彈性平時評量與不及格規則。**使用者後續提供「大體參訪時間更新」公告，已以此覆蓋影片中的舊時程：第一梯次 12/04（週五）下午、第二梯次 12/05（週六）上午。**同頁新增 6 題本機課程理解驗收（選項每輪洗牌、逐題解析、完成後顯示分數；不計正式成績，也尚未串接平台資料）。因這是課程介紹而非已定義的正式互動教材，尚未放進 `public/materials/`、未建立版本或活動設定、未提交。HTML 關鍵資料檢查、內嵌測驗 JavaScript 語法與 `git diff --check` 已通過；本機 `file://` 預覽被 browser security policy 阻擋，未繞過限制。工作樹另有使用者既存未追蹤的 `html/止血機制與凝血病理.html`，不得納入此草稿。
 2026-09-16（後續更新）：使用者提供《課程內容、課堂規範與評量方式》PDF 與 ZUVIo 單選題 CSV 範本。已將圖卡以 PDF 的正式內容擴充／校正：四階段考試範圍與日期、學習目標、兩本課本、手機／出席規範、Q1–Q8 線上小考與截止時間、免參訪評量調整；測驗改為 10 題、每題 10 分、總分 100 分。另產生可直接匯入的 Big5 編碼題本 `html/115學年度解剖生理學與實驗2_ZUVIo題本.csv`，沿用範本前五欄、每題 4 個選項與正解索引。已驗證 HTML 10 題與測驗 JavaScript 語法、CSV 10 題／100 分／欄位／正解索引、以及 `git diff --check`；仍在 `main` 的未追蹤草稿，未提交、推送或部署。PDF 視覺檢視使用 Poppler 轉圖，僅讀取原始檔、不變更 PDF。
 2026-09-16（最新圖卡互動調整）：使用者要求移除圖卡可見的資訊來源文字；「課程理解驗收」改為按「開始」後全螢幕獨立顯示，背景圖卡完全被遮蔽，僅保留題目、選項、進度、返回與下一題控制。使用者明確指定不及格條件題採嚴格的「四次考試平均 < 40 分且 PR < 33」：已同步改掉圖卡規則、HTML 第 7 題與 Big5 ZUVIo CSV 第 7 題（正解為 39 分／PR 32）。這與 PDF 原文的 `≤ 40`／`≤ 33` 不同，後續如再修正需以教師最新明確指示為準。
@@ -589,6 +590,81 @@
   README／DEVELOPMENT_LOG／handoff 的「目前版本」字樣），`node
   scripts/version.mjs --check` 已確認一致。
 
+## Claude 接手狀態（2026-09-16，第十輪：教材匯入自動化，1.3.9）
+
+- 起因：使用者說「想建立一個腳本，或是有其它的方案，自動化把已經建好的資訊圖表
+  匯入」。先用 `AskUserQuestion` 釐清：(1) 要自動化「檔案端整合」跟「教師後台活動
+  設定」兩段；(2) 原本猜 `blood-composition-v1`／`blood-pre-v1`／`blood-post-v1`
+  是還沒接好追蹤的候選——**查證後發現這個猜測是錯的**，這三份其實都已經完整接上
+  `course-learning.js`（用 `const CL = window.CourseLearning` 別名寫法），
+  `html/` 資料夾的 4 份草稿也都已經有對應正式版本，目前真的沒有已建好但還沒匯入
+  的圖卡。確認方向：先建可重用工具，以後有新圖卡直接套用；並順便補上
+  `blood-pre-v1`／`blood-post-v1` 原本完全沒有的靜態測試。
+- 新增 `shared/materials.ts`：`MATERIAL_CATALOG` 常數，每筆教材記 `label`／
+  `tracking`／`nodeTotal`／`questionTotal`／選填的 `note`（完成規則說明，不是每份
+  教材都適用「X 題全對才完成」，例如止血機制／血液氣體運送／血液的組成這三份是
+  「先備知識題（解鎖用）＋限時連勝題（通關用）」兩層，通關只看連勝那幾題全對，跟
+  `questionTotal`（診斷分母）不是同一件事，這種情況刻意不加 note，避免文件講錯）。
+  `public/materials/README.md`、`src/App.tsx` 教師後台表單都改成從這裡讀。
+- 新增 `scripts/materials.mjs`（`npm run materials:audit`／`npm run materials:sync`，
+  用 Node 的 `--experimental-strip-types` 直接 `import` `shared/materials.ts`，不是
+  逐行規則解析）：
+  - `audit`：掃每份教材的 `index.html`，檢查有沒有接 `course-learning.js`、有沒有
+    呼叫 `.complete()`；節點數偵測分三層（`data-node-id` 屬性 → `data-node` 屬性
+    → 字面 `.explore('固定字串')` 呼叫），偵測不到就老實印「無法自動偵測」，不會
+    亂猜；題目數用比較寬鬆但目前 6 份教材都準的規則（抓 `id: '...'` 裡結尾像
+    `...q12` 的相異字串）。
+  - `sync-catalog`：依 `shared/materials.ts` 重新產生 README 的「正式教材版本」
+    表格，並印出跟 `audit` 偵測結果不一致的地方（只提醒，不會自動覆寫
+    `shared/materials.ts`，避免誤判蓋掉人工核對過的正確數字）。
+  - 實際跑過一次，6 份教材全部核對一致，過程中順便發現並修正
+    `blood-composition-v1` 的題目總數其實是 **11**（先備知識 6 題＋病例限時連勝
+    5 題，兩層都會呼叫 `CL.answer()`），不是原本以為的 5（README 先前完全沒填
+    實際數字，寫「既有正式版本」，這不算修正錯誤，是第一次補上正確數字）。
+  - `blood-pre-v1`（22 節點／10 題）、`blood-post-v1`（43 節點／15 題）這兩份的
+    節點數，`audit` 值測不到（節點 id 是用變數或陣列迴圈組出來的，不是固定屬性），
+    是人工讀程式碼核對出來的，`shared/materials.ts` 對應條目的註解裡寫了怎麼算的
+    （`blood-pre-v1` 用教材自己內部的 `TOTAL = CARDS.length + TREE.length +
+    SEQS.length + 1` 常數互相對照；`blood-post-v1` 沒有這種內部常數，是用
+    Python 腳本精準數過 `N` 物件的 32 個 key、`FLOWS`／`PAIRS` 陣列筆數）。
+- `public/materials/course-learning.js` 新增 `CourseLearning.trackScrollNodes
+  (selector = '[data-node-id]', threshold = 0.4)`：把上一輪（1.3.8）幫
+  `course-orientation-v1` 寫的那段 `IntersectionObserver` 邏輯抽成共用方法，
+  以後長條捲動型的新教材只要加 `data-node-id` 屬性、呼叫一行
+  `CourseLearning.trackScrollNodes()`，不用再自己刻一次觀察器。
+  `course-orientation-v1/index.html` 已經改成呼叫這個共用方法（行為不變，純粹
+  去重複），`tests/material.test.ts` 對應斷言也跟著改成檢查這個呼叫，並新增一則
+  驗證 `trackScrollNodes` 本身邏輯的測試。點選式概念圖教材（止血機制、血液氣體
+  運送）跟卡片展開型教材（血液的組成、血液前後測）的現有寫法都沒有動到，它們的
+  `explore`／`answer`／`nodeTime` 呼叫綁在點擊／展開事件上，不是捲動，用不到也
+  不需要這個新方法。
+- 教師後台（`src/App.tsx`）：「教材版本」欄位從自由文字 `<input>` 改成
+  `<select>`，選項來自 `MATERIAL_CATALOG`（顯示「說明（slug）」），選定後一次
+  透過 `patchActivity` 帶入 `materialVersion`／`tracking`／`nodeTotal`／
+  `questionTotal` 四個欄位；下面「探索節點總數」「闖關題目總數」數字輸入框保留、
+  仍可手動覆寫（不鎖死教師想調整分母的彈性），只是預設值不再是容易忘記填或打錯
+  的 0；目錄裡沒有的教材保留「其他／自訂教材版本」選項，切回原本的自由文字輸入。
+- `tests/material.test.ts` 新增兩則涵蓋（`blood-pre-v1`、`blood-post-v1` 原本
+  完全沒有靜態測試，跟其他 4 份教材不一致，這次補齊），並修正
+  `blood-pre-v1` 那則一開始寫錯的正規表示式（`CARDS` 陣列跟 `QUIZ` 陣列的物件都有
+  `q:` 欄位，一開始沒切開陣列範圍直接對整份檔案數，會把兩邊混在一起數成 22 筆；
+  改成先用 `var CARDS`／`var TREE`／`var SEQS`／`var QUIZ` 這幾個標記切出各自的
+  文字範圍再數，驗證後正確）。
+- 驗證：`npx tsc -b` 全程無錯誤（跑了好幾次，每個階段改完都跑一次）；
+  `npm run materials:audit`／`npm run materials:sync` 實際執行過，輸出符合預期、
+  README 表格重新產生後跟人工核對的數字一致。**這個沙箱一樣因為 esbuild 架構不符
+  沒辦法跑 `npm test`**（既有環境限制，見上一輪說明），這次額外寫了一段 Python
+  腳本，把 `tests/material.test.ts` 新增／修改的每一條斷言直接對實際 HTML／JS
+  檔案內容跑一次，全部通過，包含發現並修正 `blood-pre-v1` 那則測試一開始寫錯的
+  地方。**麻煩使用者之後有機會在自己電腦跑一次 `npm test`／`npm run check` 做
+  最終確認**，理論上應該全過。
+- 這次全部是前端靜態檔案／腳本／文件變更（`public/materials/`、`shared/`、
+  `scripts/`、`src/App.tsx`、`tests/`），沒有動 `functions/`，不需要重新部署
+  Cloud Functions；只需要 GitHub Desktop push 讓 GitHub Pages 重新發布即可生效
+  （1.2.5 的 Functions 部署待辦依然沒變，還是要記得跑）。
+- 版本：`VERSION` 由 1.3.8 升到 **1.3.9**，`node scripts/version.mjs` 已同步所有
+  版本檔案，`node scripts/version.mjs --check` 已確認一致。
+
 ## 下一步需要的外部輸入（教師／使用者要做的事，不是程式問題）
 
 - **實測確認（1.2.5，後端）**：等這次改動 push 到 GitHub 且 Functions
@@ -622,6 +698,16 @@
   一樣。另外請找機會在正確架構的終端機（例如使用者自己的 Mac）跑一次
   `npm test`／`npm run check`，因為這次沒辦法在雲端沙箱裡完整跑過測試
   套件（見上方第九輪說明），麻煩確認 28 項以上測試全過。
+- **實測確認（1.3.9，教材匯入自動化，前端，不需要重新部署 Functions）**：等
+  這次改動 push 到 GitHub、GitHub Pages 重新發布後，麻煩到教師後台任一課程的
+  「學習活動」編輯畫面，把某個 HTML 活動的「教材版本」下拉選單切換看看，確認：
+  (1) 選單裡列得出目前 6 份教材（課程簡介、止血機制、血液氣體運送、血液的組成、
+  血液前測、血液後測）；(2) 選定後「探索節點總數」「闖關題目總數」有正確自動帶出
+  （例如選課程簡介應該變成 8／10）；(3) 這兩個數字欄位選完之後仍然可以手動改；
+  (4) 選「其他／自訂教材版本」時會出現文字輸入框，可以打自訂字串。另外如果之後
+  想幫其他教材（例如 `blood-composition-v1` 之外的其他血液單元教材）核對節點與
+  題目數，可以請下一位 agent 跑 `npm run materials:audit` 看報告，不用再手動
+  `grep` 逐份檢查。
 - 正式 Google Sheet《115-1-AP2課程平台》：課程代碼欄全空、單元欄 65% 空白、
   名冊是空的——可以用 `apps-script/FillCourseAndUnit.gs` 批次補課程代碼與
   單元欄，但「從沒填過單元的次單元」該歸哪一類，仍要人工決定

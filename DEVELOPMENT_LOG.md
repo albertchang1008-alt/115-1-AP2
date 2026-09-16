@@ -1,6 +1,36 @@
 # 開發紀錄
 
-目前版本：1.3.8
+目前版本：1.3.9
+
+## 1.3.9 — 教材匯入自動化：稽核腳本＋教材目錄＋後台下拉選單（2026-09-16）
+
+- 新增 `shared/materials.ts`：教材目錄唯一資料來源（MATERIAL_CATALOG），列出每份教材的
+  說明、追蹤模式、探索節點總數、闖關題目總數，`public/materials/README.md` 的表格與
+  教師後台表單都從這裡讀，不再各自維護一份容易兜不起來的數字。
+- 新增 `scripts/materials.mjs`（`npm run materials:audit` / `npm run materials:sync`）：
+  audit 掃描每份教材，偵測是否接好 course-learning.js、是否呼叫 complete()、嘗試偵測
+  節點數與題目數（偵測不到會老實說「無法自動偵測」，不會亂猜）；sync-catalog 依
+  `shared/materials.ts` 重新產生 README 的「正式教材版本」表格，並列出跟 audit 結果
+  不一致的地方供人工核對。
+- `public/materials/course-learning.js` 新增可重用方法 `CourseLearning.trackScrollNodes()`，
+  把「用 IntersectionObserver 偵測捲動進度、進節點送 explore、離開送 nodeTime」這段
+  邏輯抽成共用方法；`course-orientation-v1/index.html` 改成呼叫這個共用方法，不再自己
+  內嵌一份幾乎一樣的觀察器程式碼。
+- 教師後台（`src/App.tsx`）：「教材版本」原本是自由文字輸入，改成下拉選單，列出
+  `MATERIAL_CATALOG` 裡登記的教材；選定後一次帶出「教材紀錄方式」「探索節點總數」
+  「闖關題目總數」，下面兩個數字欄位仍可手動覆寫，不鎖死彈性；目錄外的自訂教材版本
+  保留「其他／自訂」選項切回文字輸入。
+- 用稽核腳本重新核對 6 份既有教材，順便修正兩個先前沒人記錄過的數字：
+  `blood-composition-v1` 的題目總數其實是 11（先備知識 6 題＋病例限時連勝 5 題兩層，
+  README 先前完全沒填數字，不算修正錯誤）；新增 `blood-pre-v1`（22 節點／10 題）、
+  `blood-post-v1`（43 節點／15 題）兩份教材的登記——這兩份節點 id 是用變數／陣列組
+  出來的，稽核腳本值測不到，數字是人工讀程式碼核對，並在 `shared/materials.ts` 的
+  註解裡寫清楚怎麼算的。
+- `tests/material.test.ts`：course-orientation-v1 的斷言改成檢查
+  `trackScrollNodes()` 呼叫（取代原本檢查內嵌 IntersectionObserver 程式碼的斷言）；
+  新增一則驗證 `trackScrollNodes` 本身的測試；新增 `blood-pre-v1`／`blood-post-v1`
+  兩份教材原本完全沒有涵蓋的靜態測試。
+- 純前端／腳本／文件變更，不影響 `functions/`，不需要重新部署 Cloud Functions。
 
 ## 1.3.8 — 課程簡介圖卡拆分探索節點（2026-09-16）
 

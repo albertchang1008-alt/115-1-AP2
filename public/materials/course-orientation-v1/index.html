@@ -163,40 +163,8 @@
   <script src="../course-learning.js"></script>
   <script>
     (() => {
-      if (!window.CourseLearning) return;
-      const nodes = document.querySelectorAll('[data-node-id]');
-      const seen = new Set();
-      const enteredAt = new Map();
-      const flush = (nodeId, now) => {
-        const start = enteredAt.get(nodeId);
-        if (start == null) return;
-        enteredAt.delete(nodeId);
-        const seconds = (now - start) / 1000;
-        if (seconds > 0) window.CourseLearning.nodeTime?.(nodeId, seconds);
-      };
-      const observer = new IntersectionObserver((entries) => {
-        const now = performance.now();
-        entries.forEach((entry) => {
-          const nodeId = entry.target.dataset.nodeId;
-          if (!nodeId) return;
-          if (entry.isIntersecting) {
-            if (!seen.has(nodeId)) {
-              seen.add(nodeId);
-              window.CourseLearning.explore?.(nodeId);
-            }
-            if (!enteredAt.has(nodeId)) enteredAt.set(nodeId, now);
-          } else {
-            flush(nodeId, now);
-          }
-        });
-      }, { threshold: 0.4 });
-      nodes.forEach((node) => observer.observe(node));
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-          const now = performance.now();
-          enteredAt.forEach((_, nodeId) => flush(nodeId, now));
-        }
-      });
+      // 捲動節點追蹤已抽成共用方法，見 course-learning.js 的 CourseLearning.trackScrollNodes()。
+      window.CourseLearning?.trackScrollNodes?.();
     })();
   </script>
   <script>

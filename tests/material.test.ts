@@ -82,9 +82,16 @@ test('課程介紹圖卡以十題全對作為教材完成條件', async () => {
   assert.match(html, /score === questions\.length/);
   assert.match(html, /CourseLearning\.complete\(\)/);
   assert.equal((html.match(/data-node-id="course-orientation-[\w-]+"/g) || []).length, 8);
-  assert.match(html, /IntersectionObserver/);
-  assert.match(html, /CourseLearning\.explore\?\.\(nodeId\)/);
-  assert.match(html, /CourseLearning\.nodeTime\?\.\(nodeId, seconds\)/);
+  // 捲動節點追蹤已改用 course-learning.js 的共用方法，不再自己刻 IntersectionObserver。
+  assert.match(html, /CourseLearning\?\.trackScrollNodes\?\.\(\)/);
+});
+
+test('course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤方法', async () => {
+  const js = await readFile(new URL('../public/materials/course-learning.js', import.meta.url), 'utf8');
+  assert.match(js, /trackScrollNodes\(selector = '\[data-node-id\]', threshold = 0\.4\)/);
+  assert.match(js, /new IntersectionObserver/);
+  assert.match(js, /this\.explore\(nodeId\)/);
+  assert.match(js, /this\.nodeTime\(nodeId, seconds\)/);
 });
 
 test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async () => {
@@ -100,4 +107,40 @@ test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async
     assert.equal((html.match(new RegExp(`id:\\s*'${questionPrefix}-case-q\\d\\d'`, 'g')) || []).length, 5);
     assert.match(html, /CourseLearning\.complete/);
   }
+});
+
+test('血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤', async () => {
+  const html = await readFile(new URL('../public/materials/blood-pre-v1/index.html', import.meta.url), 'utf8');
+  assert.match(html, /course-learning\.js/);
+  assert.match(html, /var CL = window\.CourseLearning/);
+  // 節點 id 是用 CARDS／TREE／SEQS 三個陣列＋變數組出來的，不是固定屬性，見
+  // shared/materials.ts 裡這份教材的註解；這裡改成驗證三個陣列本身的長度，
+  // 跟教材自己的 `TOTAL = CARDS.length + TREE.length + SEQS.length + 1` 對得上。
+  // CARDS 跟 QUIZ 的物件都有 `q:` 欄位，所以先各自切出陣列區塊的文字範圍再數，
+  // 不能直接對整份檔案數 `q:` 出現次數，否則兩個陣列的筆數會混在一起。
+  const cardsBlock = html.slice(html.indexOf('var CARDS'), html.indexOf('var TREE'));
+  const treeBlock = html.slice(html.indexOf('var TREE'), html.indexOf('var SEQS'));
+  const seqsBlock = html.slice(html.indexOf('var SEQS'), html.indexOf('var QUIZ'));
+  const quizBlock = html.slice(html.indexOf('var QUIZ'));
+  assert.equal((cardsBlock.match(/\{id:"[\w-]+",/g) || []).length, 12);
+  assert.equal((treeBlock.match(/\{id:"[\w-]+",\s*lbl:/g) || []).length, 5);
+  assert.equal((seqsBlock.match(/\{id:"[\w-]+",\s*t:"[^"]+",\s*src:/g) || []).length, 4);
+  assert.equal((quizBlock.match(/\{id:"blood-q\d\d"/g) || []).length, 10);
+  assert.match(html, /CL\.complete\(\)/);
+  assert.match(html, /perfect = right === QUIZ\.length/);
+});
+
+test('血液單元後測（blood-post-v1）保有五關闖關與 CL 別名追蹤', async () => {
+  const html = await readFile(new URL('../public/materials/blood-post-v1/index.html', import.meta.url), 'utf8');
+  assert.match(html, /course-learning\.js/);
+  assert.match(html, /var CL = window\.CourseLearning/);
+  // 節點 id 來自 N 物件的 key＋FLOWS／PAIRS 陣列，不是固定屬性，見
+  // shared/materials.ts 裡這份教材的註解；這裡驗證 N 物件的相異 key 數量
+  // （用「換行後貼齊左邊的字串 key:{」這個排版規則抓，跟教材原始碼的排版風格綁在一起，
+  // 如果之後重新排版這個物件，這條斷言要跟著調整抓取規則)。
+  assert.equal((html.match(/\n\s*"[\w-]+":\{/g) || []).length, 32);
+  assert.equal((html.match(/\{a:"[^"]+",b:/g) || []).length, 10);
+  assert.equal((html.match(/\{id:"bp-q\d\d"/g) || []).length, 15);
+  assert.match(html, /CL\.complete\(\)/);
+  assert.match(html, /var all=STAGES\.every/);
 });

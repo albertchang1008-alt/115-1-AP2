@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import Papa from 'papaparse';
 import { VERSION } from '../shared/version';
+import { MATERIAL_CATALOG } from '../shared/materials';
 import {
   materialUrl,
   Course,
@@ -1156,7 +1157,49 @@ function CourseEditor({
                     )}
                   </Field>
                 )}
-                {a.type === 'html' && <div className="formgrid"><Field label="教材紀錄方式"><select value={a.tracking || 'reading'} onChange={(e) => patchActivity(i, { tracking: e.target.value as 'reading' | 'interactive' })}><option value="reading">一般閱讀</option><option value="interactive">闖關與學習診斷（需串接）</option></select></Field><Field label="教材版本"><input value={a.materialVersion || 'v1'} onChange={(e) => patchActivity(i, { materialVersion: e.target.value })} /></Field><Field label="探索節點總數"><input type="number" min="0" max="500" value={a.nodeTotal || 0} onChange={(e) => patchActivity(i, { nodeTotal: Number(e.target.value) })} /></Field><Field label="闖關題目總數"><input type="number" min="0" max="500" value={a.questionTotal || 0} onChange={(e) => patchActivity(i, { questionTotal: Number(e.target.value) })} /></Field></div>}
+                {a.type === 'html' && (() => {
+                  const known = a.materialVersion ? MATERIAL_CATALOG[a.materialVersion] : undefined;
+                  const materialSelectValue = known ? a.materialVersion! : '__custom__';
+                  return (
+                    <div className="formgrid">
+                      <Field label="教材紀錄方式">
+                        <select value={a.tracking || 'reading'} onChange={(e) => patchActivity(i, { tracking: e.target.value as 'reading' | 'interactive' })}>
+                          <option value="reading">一般閱讀</option>
+                          <option value="interactive">闖關與學習診斷（需串接）</option>
+                        </select>
+                      </Field>
+                      <Field label="教材版本">
+                        <select
+                          value={materialSelectValue}
+                          onChange={(e) => {
+                            const slug = e.target.value;
+                            if (slug === '__custom__') { patchActivity(i, { materialVersion: '' }); return; }
+                            const entry = MATERIAL_CATALOG[slug];
+                            patchActivity(i, { materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal });
+                          }}
+                        >
+                          <option value="__custom__">其他／自訂教材版本</option>
+                          {Object.entries(MATERIAL_CATALOG).map(([slug, entry]) => (
+                            <option key={slug} value={slug}>{entry.label}（{slug}）</option>
+                          ))}
+                        </select>
+                        {materialSelectValue === '__custom__' && (
+                          <input
+                            value={a.materialVersion || ''}
+                            placeholder="教材版本字串，例如 v1"
+                            onChange={(e) => patchActivity(i, { materialVersion: e.target.value })}
+                          />
+                        )}
+                      </Field>
+                      <Field label="探索節點總數">
+                        <input type="number" min="0" max="500" value={a.nodeTotal || 0} onChange={(e) => patchActivity(i, { nodeTotal: Number(e.target.value) })} />
+                      </Field>
+                      <Field label="闖關題目總數">
+                        <input type="number" min="0" max="500" value={a.questionTotal || 0} onChange={(e) => patchActivity(i, { questionTotal: Number(e.target.value) })} />
+                      </Field>
+                    </div>
+                  );
+                })()}
                 {a.type === 'youtube' && <p className="muted">選看補充教材：不影響完成度或成績，播放位置可保存。</p>}
                 <Field label="學習說明">
                   <textarea
