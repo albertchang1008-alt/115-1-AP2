@@ -20,7 +20,7 @@
 ---
 
 目前版本：1.3.7。本輪新增題庫「解析研究資料」：每個單元預設蒐集引導式解析曝光、傳統解析展開與粗粒度停留，教師可逐單元關閉；教師後台新增「解析研究資料」頁。資料與成績、完成資格分開，不能以停留／展開判定理解或專注。**2026-09-15 已成功部署 Functions 至 `ap2-7ed91`，含解析研究資料與 HTML→題庫串接端點；本機 `main` 仍比 GitHub 多 17 個提交，終端機缺 GitHub HTTPS 憑證，請以 GitHub Desktop 按 Push origin 觸發 Pages。**
-本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。既有未追蹤的 `html/` 原始資料夾屬使用者內容，本輪未更動或提交。
+本輪驗證已通過：`npm test` 29/29、`npm run build`（含版本一致性、TypeScript 與 Vite production build）、`git diff --check`。未部署 Functions（沒有後端變更）。待 Pages 發布後，教師須新增 HTML 活動，使用 `blood-composition-v1/index.html`、互動診斷模式、版本 `blood-composition-v1`、節點 6、題目 5，並以真實學生帳號完成一次 iframe 端到端事件驗收。`html/` 原始資料夾屬使用者內容；2026-09-16 依使用者明確要求，已修改其中未追蹤的 `止血機制與凝血病理.html`，但未納入 Git 或部署。
 2026-09-15 這一輪之前，`origin/main` 已經跟本機同步到 `fcd38b2`（1.2.2：同步按鈕搬到題庫管理／班級名冊頁），git 比對顯示 0 個落差（雙向皆 0），代表 GitHub Desktop 已經推送過；但這次沒能像先前那樣用公開 GitHub Actions API 驗證 Pages workflow 是否跑成功——這個雲端沙箱這次呼叫 `api.github.com` 被 proxy 擋下（回傳「GitHub access to this repository is not enabled for this session」），麻煩使用者自行到 GitHub 的 Actions 分頁確認「Publish course platform」是綠燈。
 後端 Functions：**1.2.4 已部署且確認生效**（使用者實測「同步班級名冊」看到具體的「名冊格式錯誤：...」訊息，取代了原本的 internal/500，證實修正有效）。**1.2.5（移除信箱網域限制）還沒部署，需要使用者再跑一次
 `npx firebase-tools deploy --only functions --project ap2-7ed91`** 才會生效。
@@ -63,6 +63,7 @@
 32.（2026-09-15）NotebookLM 產生新互動 HTML 時使用平台串接提示模板：教材以 `https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js` 載入公開 SDK，不傳學生身分或 GA4；固定英數字節點／題目 ID、首次展開探索、前景有效節點停留、每次作答與全對才通關。產物放於 `public/materials/<material-version>/index.html`，教師後台再填相同教材版本及實際節點／題目分母。
 33.（2026-09-16，待實作）檢視 NotebookLM 產生的 `html/血液氣體運送.html` 與 `html/止血機制與凝血病理.html`，兩者的「點擊展開詳細說明 ▼」都是不能互動的 `<div>`，實際切換事件只綁在卡片標題 `.node-card-header`；造成提示文字與可點區域不一致。下輪應將提示改為同一個可操作的 `<button>`（或把它納入唯一的標題按鈕），由 JavaScript 以 `aria-expanded` 驅動文字與箭頭，不再寫入 `textContent` 覆蓋節點；並改用 `addEventListener` 取代 inline `onclick`，驗證滑鼠、鍵盤、觸控、篩選後與 iframe 事件各只送一次探索。
 34.（2026-09-16，待實作）五專學生版本的互動 HTML 要加強具教學功能的圖像，而非裝飾圖：每個核心節點至少有一張標示關係／流程／部位的圖解，展開後再提供放大圖與「圖像→名詞→機制→臨床情境」的短說明。血液氣體運送優先使用紅血球－肺泡－組織的氧／二氧化碳流向圖、Hb 結合示意與貧血比較；止血優先使用血管受傷到血小板栓、凝血網、纖溶的時間流程圖與內外在路徑匯流圖。需先確認可合法使用的圖片來源或由教師提供圖檔；平台記錄仍只記節點探索／有效停留，不把圖片點擊當作理解證據。
+35.（2026-09-16）止血教材第一版圖像化已在使用者原始檔 `html/止血機制與凝血病理.html` 實作：加入六步可點式 SVG 流程圖（血管痙攣、血小板栓、內外在路徑匯流、纖維蛋白網、抗凝調控、纖溶），各圖卡會捲動並展開對應知識節點；六張卡的假提示文字已改為原生 `button.detail-toggle`，以 `aria-expanded` 與 CSS 切換展開／收合字樣，並在 `DOMContentLoaded` 使用 `addEventListener` 綁定。首次展開、節點停留與 SDK 事件邏輯保留。已通過內嵌 JavaScript 語法、六個流程按鈕／六個展開按鈕數量與 `git diff --check` 檢查；browser automation 因 `file://` 安全政策無法讀取本機頁面，仍需使用者實機預覽。此檔仍未追蹤；若決定正式發布，須先複製為 `public/materials/hemostasis-mechanisms-v1/index.html` 再納入版本控制與部署。
 
 ## 1.2.0：題庫接軌（現況：已實作，後端已部署，待合併前端）
 
