@@ -1,6 +1,25 @@
 # 開發紀錄
 
-目前版本：1.3.9
+目前版本：1.3.10
+
+## 1.3.10 — 教材工作室：本機網頁介面匯入新教材（2026-09-16）
+
+- 新增 `npm run materials:studio`（`scripts/materials-studio.mjs` ＋
+  `scripts/materials-studio.html`）：本機限定的小型網頁工具，取代「手動下指令、手動改
+  檔案」的流程。啟動後用瀏覽器打開 `http://127.0.0.1:5183/`，畫面上依序：貼上教材
+  HTML 程式碼＋填代號與標題、即時 iframe 預覽 → ①匯入（寫入
+  `public/materials/<slug>/index.html`） → ②執行稽核（沿用既有 `materials:audit`
+  邏輯，偵測節點數／題目數並帶入可編輯欄位） → ③寫入教材目錄（沿用既有
+  `materials:sync` 邏輯，更新 `shared/materials.ts` 與 `public/materials/README.md`）。
+  畫面下方「現有教材清單」可以個別移除檔案／目錄項目，貼錯、匯錯了能整個重來。
+- `scripts/materials.mjs` 的核心函式（`auditOne`、`loadCatalog`、`renderReadmeTable`、
+  `syncCatalog` 等）改成 `export`，並新增 `upsertCatalogEntry()`／
+  `removeCatalogEntry()` 兩個給工作室重用的函式；CLI 既有的
+  `materials:audit`／`materials:sync` 指令行為完全不變。
+- 這個工具只在本機執行（綁定 127.0.0.1，不對外開放），不會被打進 `npm run build` 的
+  部署產物，也不會執行任何 git 指令——寫完檔案後仍需要使用者自己用 GitHub Desktop
+  確認變更並 push。
+- 純腳本／文件變更，不影響 `functions/`，不需要重新部署 Cloud Functions。
 
 ## 1.3.9 — 教材匯入自動化：稽核腳本＋教材目錄＋後台下拉選單（2026-09-16）
 

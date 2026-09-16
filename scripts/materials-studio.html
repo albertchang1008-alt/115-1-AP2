@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>教材工作室</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 0; padding: 24px; background: #f6f7f9; color: #1c1f24; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .hint { color: #6b7280; font-size: 13px; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px; margin-bottom: 18px; max-width: 920px; }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+  label { display: block; font-size: 13px; color: #374151; margin-bottom: 4px; margin-top: 10px; }
+  input[type=text], textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 6px; }
+  textarea { min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; resize: vertical; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .row > div { flex: 1; min-width: 220px; }
+  .preview-wrap { margin-top: 10px; }
+  iframe { width: 100%; height: 360px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; }
+  button { font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; cursor: pointer; }
+  button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.primary:disabled { background: #93c5fd; border-color: #93c5fd; cursor: not-allowed; }
+  button.danger { background: #fff; border-color: #ef4444; color: #b91c1c; }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btnrow { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
+  .msg { margin-top: 10px; padding: 8px 10px; border-radius: 6px; font-size: 13px; white-space: pre-wrap; }
+  .msg.ok { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .msg.err { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+  .msg.info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 920px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #f0f1f3; }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 10px; margin-right: 4px; }
+  .tag.yes { background: #ecfdf5; color: #047857; }
+  .tag.no { background: #fef2f2; color: #b91c1c; }
+  .step { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #e5e7eb; color: #374151; text-align: center; line-height: 20px; font-size: 12px; margin-right: 6px; }
+</style>
+</head>
+<body>
+  <h1>教材工作室</h1>
+  <p class="hint">只在這台電腦上運作，不會連上網路、也不會執行任何 git 指令。做完記得自己開 GitHub Desktop 確認變更並 push。</p>
+
+  <div class="card">
+    <h2><span class="step">1</span>貼上教材、匯入檔案</h2>
+    <div class="row">
+      <div>
+        <label>教材代號（英數字＋連字號，例如 xxx-v1；會變成資料夾名稱，建立後不要再改）</label>
+        <input type="text" id="slug" placeholder="xxx-v1" />
+      </div>
+      <div>
+        <label>教材標題（中文說明，會顯示在下拉選單與 README）</label>
+        <input type="text" id="title" placeholder="例如：血液的組成圖卡" />
+      </div>
+    </div>
+    <label>教材 HTML 程式碼</label>
+    <textarea id="code" placeholder="貼上完整的 index.html 內容…"></textarea>
+    <div class="btnrow">
+      <button id="btnPreview">更新預覽</button>
+      <button id="btnImport" class="primary">①匯入教材檔案</button>
+    </div>
+    <div id="msgImport"></div>
+    <div class="preview-wrap">
+      <iframe id="preview" title="教材預覽" sandbox="allow-scripts"></iframe>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="step">2</span>執行稽核</h2>
+    <div class="btnrow">
+      <button id="btnAudit" disabled>②執行稽核</button>
+      <span id="activeSlugLabel" class="hint"></span>
+    </div>
+    <div id="msgAudit"></div>
+    <div class="row" id="auditFields" style="display:none;">
+      <div>
+        <label>探索節點總數</label>
+        <input type="text" id="nodeTotal" inputmode="numeric" />
+      </div>
+      <div>
+        <label>闖關題目總數</label>
+        <input type="text" id="questionTotal" inputmode="numeric" />
+      </div>
+      <div>
+        <label>完成條件補充說明（選填，只有「全部題目都要答對才算完成」這類情況才需要填）</label>
+        <input type="text" id="note" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="step">3</span>寫入教材目錄</h2>
+    <div class="btnrow">
+      <button id="btnCatalog" class="primary" disabled>③寫入教材目錄</button>
+      <button id="btnReset">清空表單，開始下一份</button>
+    </div>
+    <div id="msgCatalog"></div>
+  </div>
+
+  <div class="card">
+    <h2>現有教材清單</h2>
+    <div id="msgList"></div>
+    <table id="listTable">
+      <thead><tr><th>代號</th><th>標題</th><th>檔案</th><th>目錄</th><th>節點／題目</th><th></th></tr></thead>
+      <tbody id="listBody"></tbody>
+    </table>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  let activeSlug = null;
+
+  function showMsg(el, type, text) {
+    el.innerHTML = text ? `<div class="msg ${type}">${text.replace(/</g, '&lt;')}</div>` : '';
+  }
+
+  async function api(method, path, body) {
+    const res = await fetch(path, {
+      method,
+      headers: body ? { 'Content-Type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const err = new Error(data.error || `伺服器錯誤（${res.status}）`);
+      err.data = data;
+      throw err;
+    }
+    return data;
+  }
+
+  function updatePreview() {
+    $('preview').srcdoc = $('code').value;
+  }
+  $('btnPreview').addEventListener('click', updatePreview);
+  $('code').addEventListener('change', updatePreview);
+
+  async function refreshList() {
+    try {
+      const { items } = await api('GET', '/api/list');
+      $('listBody').innerHTML = items.map((it) => `
+        <tr>
+          <td>${it.slug}</td>
+          <td>${it.label ?? '<span class="hint">（未列入目錄）</span>'}</td>
+          <td>${it.hasFile ? '<span class="tag yes">有</span>' : '<span class="tag no">無</span>'}</td>
+          <td>${it.inCatalog ? '<span class="tag yes">已列入</span>' : '<span class="tag no">未列入</span>'}</td>
+          <td>${it.inCatalog ? `${it.nodeTotal} 節點／${it.questionTotal} 題` : ''}</td>
+          <td><button class="danger" data-remove="${it.slug}">移除</button></td>
+        </tr>`).join('');
+      $('listBody').querySelectorAll('[data-remove]').forEach((btn) => {
+        btn.addEventListener('click', () => onRemove(btn.dataset.remove));
+      });
+    } catch (e) {
+      showMsg($('msgList'), 'err', '清單讀取失敗：' + e.message);
+    }
+  }
+
+  async function onRemove(slug) {
+    const removeFile = confirm(`確定要移除「${slug}」的教材檔案（public/materials/${slug}/）嗎？`);
+    const removeCatalogFlag = confirm(`確定要移除「${slug}」在教材目錄（shared/materials.ts）裡的登錄嗎？`);
+    if (!removeFile && !removeCatalogFlag) return;
+    try {
+      await api('POST', '/api/remove', { slug, removeFile, removeCatalog: removeCatalogFlag });
+      showMsg($('msgList'), 'ok', `已移除「${slug}」（檔案：${removeFile ? '已刪除' : '保留'}；目錄：${removeCatalogFlag ? '已刪除' : '保留'}）`);
+      if (slug === activeSlug) {
+        activeSlug = null;
+        $('btnAudit').disabled = true;
+        $('btnCatalog').disabled = true;
+        $('activeSlugLabel').textContent = '';
+      }
+      refreshList();
+    } catch (e) {
+      showMsg($('msgList'), 'err', '移除失敗：' + e.message);
+    }
+  }
+
+  async function doImport(slug, code, overwrite) {
+    const data = await api('POST', '/api/import', { slug, code, overwrite });
+    activeSlug = slug;
+    showMsg($('msgImport'), 'ok', `已匯入：${data.path}${data.overwritten ? '（已覆蓋原檔案）' : ''}`);
+    $('slug').disabled = true;
+    $('btnAudit').disabled = false;
+    $('activeSlugLabel').textContent = `目前作業中的教材代號：${slug}`;
+    refreshList();
+  }
+
+  $('btnImport').addEventListener('click', async () => {
+    const slug = $('slug').value.trim();
+    const code = $('code').value;
+    if (!slug) { showMsg($('msgImport'), 'err', '請先填教材代號'); return; }
+    if (!code.trim()) { showMsg($('msgImport'), 'err', '請先貼上教材的 HTML 程式碼'); return; }
+    updatePreview();
+    try {
+      await doImport(slug, code, false);
+    } catch (e) {
+      if (e.data && e.data.needsOverwriteConfirm) {
+        if (confirm(e.data.error + '\n\n要覆蓋既有檔案嗎？')) {
+          try { await doImport(slug, code, true); } catch (e2) { showMsg($('msgImport'), 'err', e2.message); }
+        }
+      } else {
+        showMsg($('msgImport'), 'err', e.message);
+      }
+    }
+  });
+
+  $('btnAudit').addEventListener('click', async () => {
+    if (!activeSlug) return;
+    try {
+      const r = await api('GET', `/api/audit?slug=${encodeURIComponent(activeSlug)}`);
+      const lines = [];
+      lines.push(`course-learning.js：${r.hasScript ? '有引用' : '⚠️ 沒有引用，請檢查教材程式碼'}`);
+      lines.push(`.complete()：${r.hasComplete ? '有呼叫' : '⚠️ 沒有呼叫，請檢查教材程式碼'}`);
+      lines.push(`節點數：${r.nodeTotal ?? '無法自動偵測'}${r.nodeTotal != null ? '（信心：' + r.nodeConfidence + '）' : ''}${r.nodeNote ? '\n  ' + r.nodeNote : ''}`);
+      lines.push(`題目數：${r.questionTotal ?? '無法自動偵測'}`);
+      showMsg($('msgAudit'), (r.hasScript && r.hasComplete) ? 'ok' : 'info', lines.join('\n'));
+      $('auditFields').style.display = '';
+      $('nodeTotal').value = r.nodeTotal ?? '';
+      $('questionTotal').value = r.questionTotal ?? '';
+      $('btnCatalog').disabled = false;
+    } catch (e) {
+      showMsg($('msgAudit'), 'err', e.message);
+    }
+  });
+
+  $('btnCatalog').addEventListener('click', async () => {
+    if (!activeSlug) return;
+    const label = $('title').value.trim();
+    const nodeTotal = Number($('nodeTotal').value);
+    const questionTotal = Number($('questionTotal').value);
+    const note = $('note').value.trim();
+    if (!label) { showMsg($('msgCatalog'), 'err', '請先填教材標題'); return; }
+    if (!Number.isFinite(nodeTotal) || !Number.isFinite(questionTotal)) {
+      showMsg($('msgCatalog'), 'err', '節點數／題目數要先確認，不能是空的（無法自動偵測的要自己讀程式碼核對後填入）');
+      return;
+    }
+    try {
+      await api('POST', '/api/catalog', { slug: activeSlug, label, nodeTotal, questionTotal, note: note || undefined });
+      showMsg($('msgCatalog'), 'ok', `已寫入 shared/materials.ts 並更新 public/materials/README.md（教材代號：${activeSlug}）`);
+      refreshList();
+    } catch (e) {
+      showMsg($('msgCatalog'), 'err', e.message);
+    }
+  });
+
+  $('btnReset').addEventListener('click', () => {
+    activeSlug = null;
+    $('slug').value = ''; $('slug').disabled = false;
+    $('title').value = '';
+    $('code').value = '';
+    $('note').value = '';
+    $('nodeTotal').value = ''; $('questionTotal').value = '';
+    $('preview').srcdoc = '';
+    $('auditFields').style.display = 'none';
+    $('btnAudit').disabled = true;
+    $('btnCatalog').disabled = true;
+    $('activeSlugLabel').textContent = '';
+    showMsg($('msgImport'), '', '');
+    showMsg($('msgAudit'), '', '');
+    showMsg($('msgCatalog'), '', '');
+  });
+
+  refreshList();
+})();
+</script>
+</body>
+</html>

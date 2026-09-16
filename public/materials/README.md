@@ -6,6 +6,13 @@ GitHub Pages 發布後，將該 HTML 的 HTTPS 網址填入教師後台的 HTML 
 
 完整步驟見專案的 `docs/DEPLOYMENT.md`。
 
+## 新增教材
+
+推薦用本機工具 `npm run materials:studio`：啟動後瀏覽器打開
+`http://127.0.0.1:5183/`，照畫面上①匯入②稽核③寫入教材目錄的順序操作，中途可預覽，貼錯或匯錯了可以在畫面下方的教材清單移除重來。這個工具只在本機執行，不會執行任何 git 指令，跑完仍要自己用 GitHub Desktop 確認變更並 push。
+
+也可以手動下指令：`npm run materials:audit`（稽核既有教材，偵測節點數／題目數）、`npm run materials:sync`（依 `shared/materials.ts` 重新產生下面的表格）。
+
 ## 正式教材版本
 
 | 教材版本 | 正式教材位置 | 驗收設定 |

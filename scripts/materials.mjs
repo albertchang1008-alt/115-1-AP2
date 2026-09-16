@@ -18,17 +18,21 @@
 // sync-catalog：讀 shared/materials.ts 的 MATERIAL_CATALOG，重新產生
 // public/materials/README.md 的「正式教材版本」表格，並印出跟 audit 偵測結果不一致
 // 的地方供人工核對（不會自動覆寫 MATERIAL_CATALOG，只提醒差異）。
+//
+// 這個檔案的函式都有 export，是給 scripts/materials-studio.mjs（本機網頁版教材工作室，
+// `npm run materials:studio`）重用的——那邊的匯入／稽核／寫入目錄／移除功能，底層邏輯
+// 跟這裡的 CLI 是同一份，不是另外複製一份規則。
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const MATERIALS_DIR = path.join(ROOT, 'public/materials');
-const CATALOG_PATH = path.join(ROOT, 'shared/materials.ts');
-const README_PATH = path.join(ROOT, 'public/materials/README.md');
+export const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const MATERIALS_DIR = path.join(ROOT, 'public/materials');
+export const CATALOG_PATH = path.join(ROOT, 'shared/materials.ts');
+export const README_PATH = path.join(ROOT, 'public/materials/README.md');
 
-function listMaterialSlugs() {
+export function listMaterialSlugs() {
   return fs
     .readdirSync(MATERIALS_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
@@ -36,7 +40,7 @@ function listMaterialSlugs() {
     .sort();
 }
 
-function auditOne(slug) {
+export function auditOne(slug) {
   const htmlPath = path.join(MATERIALS_DIR, slug, 'index.html');
   if (!fs.existsSync(htmlPath)) return { slug, error: '找不到 index.html' };
   const html = fs.readFileSync(htmlPath, 'utf8');
@@ -68,7 +72,7 @@ function auditOne(slug) {
   return { slug, hasScript, hasComplete, nodeTotal, nodeConfidence, nodeNote, questionTotal, questionIds };
 }
 
-function audit() {
+export function audit() {
   const results = listMaterialSlugs().map(auditOne);
   for (const r of results) {
     console.log(`\n■ ${r.slug}`);
@@ -81,16 +85,22 @@ function audit() {
   return results;
 }
 
-async function loadCatalog() {
-  const mod = await import(pathToFileUrl(CATALOG_PATH));
-  return mod.MATERIAL_CATALOG;
-}
-
-function pathToFileUrl(p) {
+export function pathToFileUrl(p) {
   return new URL('file://' + path.resolve(p));
 }
 
-function renderReadmeTable(catalog) {
+export async function loadCatalog() {
+  // 用查詢字串幫每次 import 產生不同的模組快取鍵，避免長時間執行的行程（例如
+  // materials-studio.mjs 的伺服器）在同一個 process 裡重複 import 同一個檔案時，
+  // Node 的 ES module 快取回傳寫入前的舊內容——這個問題在純 CLI（每次執行都是新
+  // process）不會出現，是這次幫教材工作室測試時才抓到的。
+  const url = pathToFileUrl(CATALOG_PATH);
+  url.searchParams.set('t', `${Date.now()}-${Math.random()}`);
+  const mod = await import(url);
+  return mod.MATERIAL_CATALOG;
+}
+
+export function renderReadmeTable(catalog) {
   const lines = [
     '| 教材版本 | 正式教材位置 | 驗收設定 |',
     '| --- | --- | --- |',
@@ -105,7 +115,7 @@ function renderReadmeTable(catalog) {
   return lines.join('\n');
 }
 
-async function syncCatalog() {
+export async function syncCatalog() {
   const catalog = await loadCatalog();
   const readme = fs.readFileSync(README_PATH, 'utf8');
   const tableRe = /\| 教材版本 \| 正式教材位置 \| 驗收設定 \|\n\| --- \| --- \| --- \|\n(?:\|.*\|\n?)*/;
@@ -132,12 +142,57 @@ async function syncCatalog() {
   }
 }
 
-const cmd = process.argv[2];
-if (cmd === 'audit') {
-  audit();
-} else if (cmd === 'sync-catalog') {
-  await syncCatalog();
-} else {
-  console.error('用法：node --experimental-strip-types scripts/materials.mjs <audit|sync-catalog>');
-  process.exitCode = 1;
+function catalogEntryLine(slug, entry) {
+  const noteStr = entry.note ? `, note: ${JSON.stringify(entry.note)}` : '';
+  return `  '${slug}': { label: ${JSON.stringify(entry.label)}, tracking: 'interactive', nodeTotal: ${entry.nodeTotal}, questionTotal: ${entry.questionTotal}${noteStr} },`;
+}
+
+// 給教材工作室（materials-studio.mjs）用：在 shared/materials.ts 裡新增或取代一筆
+// 教材目錄項目。已存在同代號就整行取代，不存在就插在 MATERIAL_CATALOG 結尾的 `};`
+// 之前。只動這一行，不動其他手寫的註解與排版。
+export function upsertCatalogEntry(slug, entry) {
+  const src = fs.readFileSync(CATALOG_PATH, 'utf8');
+  const lineRe = new RegExp(`^ {2}'${slug}':\\s*\\{[^\\n]*\\},\\s*$`, 'm');
+  const newLine = catalogEntryLine(slug, entry);
+  let newSrc;
+  if (lineRe.test(src)) {
+    newSrc = src.replace(lineRe, newLine);
+  } else {
+    const closeRe = /\n\};\s*$/;
+    if (!closeRe.test(src)) {
+      throw new Error('shared/materials.ts 格式跟預期不同，找不到 MATERIAL_CATALOG 的結尾，沒有寫入');
+    }
+    newSrc = src.replace(closeRe, `\n${newLine}\n};\n`);
+  }
+  fs.writeFileSync(CATALOG_PATH, newSrc);
+}
+
+// 給教材工作室用：移除 shared/materials.ts 裡指定代號那一行。回傳是否真的有刪到。
+export function removeCatalogEntry(slug) {
+  const src = fs.readFileSync(CATALOG_PATH, 'utf8');
+  const lineRe = new RegExp(`^ {2}'${slug}':\\s*\\{[^\\n]*\\},\\n`, 'm');
+  if (!lineRe.test(src)) return false;
+  fs.writeFileSync(CATALOG_PATH, src.replace(lineRe, ''));
+  return true;
+}
+
+function isMainModule() {
+  if (!process.argv[1]) return false;
+  try {
+    return import.meta.url === pathToFileUrl(process.argv[1]).href;
+  } catch {
+    return false;
+  }
+}
+
+if (isMainModule()) {
+  const cmd = process.argv[2];
+  if (cmd === 'audit') {
+    audit();
+  } else if (cmd === 'sync-catalog') {
+    await syncCatalog();
+  } else {
+    console.error('用法：node --experimental-strip-types scripts/materials.mjs <audit|sync-catalog>');
+    process.exitCode = 1;
+  }
 }
