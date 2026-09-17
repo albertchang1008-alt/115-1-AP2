@@ -1001,6 +1001,20 @@ dd {
   background: white;
   margin-bottom: 20px;
 }
+.unit-tabs { display:flex; gap:6px; overflow-x:auto; margin:16px 0; border-bottom:1px solid var(--line); }
+.unit-tabs button { min-height:44px; white-space:nowrap; border:0; background:transparent; border-bottom:3px solid transparent; }
+.unit-tabs button.active { border-bottom-color:var(--accent); color:var(--accent); font-weight:700; }
+.unit-tabs small { display:block; font-size:.75rem; }
+.activitycards,.practice-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+.activitycard { text-align:left; min-height:130px; display:block; padding:16px; }
+.activitycard h3 { margin:8px 0; }.activitycard footer { display:flex; gap:6px; align-items:center; margin-top:12px; }
+.reading-page { position:fixed; inset:0; z-index:20; background:var(--page); display:grid; grid-template-rows:48px minmax(0,1fr); overflow:hidden; }
+.reading-page > header { height:48px; display:flex; align-items:center; gap:12px; padding:0 12px; border-bottom:1px solid var(--line); }
+.reading-page > header strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+.reading-body { min-height:0; overflow:auto; padding:0; }.reading-body > :not(.material) { margin:20px; }
+.reading-body .material { width:100%; height:100%; min-height:calc(100dvh - 48px); border:0; display:block; }
+.quiz { position:fixed; z-index:20; inset:0; overflow:auto; background:var(--page); padding:20px max(16px, env(safe-area-inset-right)) calc(88px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+.quiz > .sectionhead:last-of-type { position:fixed; bottom:0; left:0; right:0; padding:12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:var(--page); border-top:1px solid var(--line); }
 .textlink {
   color: #2778aa;
   font-size: calc(14px * var(--font-scale, 1));

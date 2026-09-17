@@ -30,6 +30,7 @@ import {
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
+import { parseStudentRoute } from './studentRoute';
 type Props = {
   api: API;
   course: Course;
@@ -64,9 +65,14 @@ export default function Student({
     [next, setNext] = useState<any>(null),
     [historyOpen, setHistoryOpen] = useState(false),
     [archiveOpen, setArchiveOpen] = useState(false),
+    [outstandingAll, setOutstandingAll] = useState(false),
+    [exitRequested, setExitRequested] = useState(false),
+    [tab, setTab] = useState<'pre' | 'class' | 'post' | 'practice'>('pre'),
     [queueCount, setQueueCount] = useState(preview ? 0 : pending(uid).length);
   const pRef = useRef(progress);
+  const takingRef = useRef(taking);
   pRef.current = progress;
+  takingRef.current = taking;
   const unit = course.units.find((u) => u.id === unitId);
   const activity = unit?.activities.find((a) => a.id === activityId);
   const ratio = completion(course, progress);
@@ -79,20 +85,22 @@ export default function Student({
   useEffect(() => {
     if (preview) return;
     const read = () => {
-      const hash = location.hash.replace(/^#/, '');
-      const base = `/course/${encodeURIComponent(course.id)}`;
-      if (!hash.startsWith(base)) return;
-      const rest = hash.slice(base.length);
-      const match = rest.match(/^\/unit\/([^/?#]+)(?:\/activity\/([^/?#]+))?/);
-      if (!match) { setUnitId(''); setActivityId(''); setTaking(false); return; }
-      const nextUnit = decodeURIComponent(match[1]);
-      const nextActivity = match[2] ? decodeURIComponent(match[2]) : '';
+      const parsed = parseStudentRoute(location.hash, course.id);
+      if (!parsed) { if (location.hash) { route(); notify('此單元目前未開放'); } return; }
+      if (takingRef.current && !['quiz', 'flashcard', 'review'].includes(parsed.kind)) { setExitRequested(true); return; }
+      if (parsed.kind === 'home') { setUnitId(''); setActivityId(''); setTaking(false); return; }
+      const nextUnit = parsed.unitId;
+      const nextActivity = parsed.kind === 'activity' ? parsed.activityId : '';
       const allowed = course.units.find((u) => u.id === nextUnit);
       if (!allowed) { route(); notify('此單元目前未開放'); return; }
       setUnitId(nextUnit);
       setActivityId(nextActivity);
+      if (parsed.kind === 'unit') setTab(location.hash.includes('?tab=') ? parsed.tab : defaultTab(allowed, pRef.current));
+      if (parsed.kind === 'quiz') void start('quiz', parsed.mode === 'draw' ? parsed.count : undefined, allowed);
+      else if (parsed.kind === 'flashcard') void start('flashcard', undefined, allowed);
+      else if (parsed.kind === 'review') void start('review', undefined, allowed);
       // 作答路由由 start() 載入題庫後開啟；不要讓 hashchange 把剛開啟的全螢幕作答關掉。
-      if (!/\/(quiz|flashcard|review)(?:[/?]|$)/.test(rest)) setTaking(false);
+      if (!['quiz', 'flashcard', 'review'].includes(parsed.kind)) setTaking(false);
     };
     if (!location.hash) route();
     read();
@@ -158,16 +166,16 @@ export default function Student({
       setBusy(false);
     }
   }
-  async function start(m: Mode, practiceCount?: number) {
-    if (!unit?.bankVersion) {
+  async function start(m: Mode, practiceCount?: number, target = unit) {
+    if (!target?.bankVersion) {
       notify('此單元尚未發布題庫');
       return;
     }
     setBusy(true);
     try {
-      let qs = await cachedBank(api, course.id, unit.id, unit.bankVersion);
+      let qs = await cachedBank(api, course.id, target.id, target.bankVersion);
       if (m === 'review') {
-        const wrong = new Set<string>(progress.units[unit.id]?.wrong?.[unit.bankVersion] || []);
+        const wrong = new Set<string>(progress.units[target.id]?.wrong?.[target.bankVersion] || []);
         qs = qs.filter((q) => wrong.has(q.id));
         if (!qs.length) {
           notify('目前沒有此題庫版本的歷史錯題。');
@@ -176,7 +184,7 @@ export default function Student({
         qs = shuffle(qs);
       } else if (practiceCount) {
         // 抽題練習：不計分、不計完成度。已考過的題目自然排到後面（仿 v1.9），不是每次重置重洗。
-        const attemptedIds = new Set(Object.keys(progress.attempted?.[unit.id] || {}));
+        const attemptedIds = new Set(Object.keys(progress.attempted?.[target.id] || {}));
         qs = orderForPractice(qs, attemptedIds).slice(0, Math.min(practiceCount, qs.length));
       } else {
         qs = shuffle(qs); // 完整測驗：出全部題目，只洗牌不減量
@@ -238,6 +246,8 @@ export default function Student({
     try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
     catch (e) { notify('研究資料未同步：' + (e as Error).message); }
   }
+  if (activity && unit)
+    return <ReadingPage course={course} unit={unit} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} />;
   if (taking && unit)
     return (
       <Quiz
@@ -249,7 +259,8 @@ export default function Student({
         onSubmit={submit}
         researchEnabled={unit.research?.enabled !== false}
         onResearch={saveResearch}
-        onClose={() => setTaking(false)}
+        forceLeave={exitRequested}
+        onClose={() => { setTaking(false); setExitRequested(false); if (/\/(quiz|flashcard|review)(?:\?|$)/.test(location.hash)) route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`); else setTimeout(() => dispatchEvent(new HashChangeEvent('hashchange')), 0); }}
       />
     );
   return (
@@ -297,7 +308,7 @@ export default function Student({
               <span>{ratio.total ? Math.round((ratio.done / ratio.total) * 100) : 0}%</span>
             </div>
           </div>
-          <section className="panel"><h2>還沒完成</h2>{currentUnits.filter((u) => u.required && !complete(u, progress)).length ? <ul>{currentUnits.filter((u) => u.required && !complete(u, progress)).slice(0, 5).map((u) => { const state = unitCompletion(u, progress); return <li key={u.id}><button onClick={() => route(`/unit/${encodeURIComponent(u.id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `完整測驗未達標（${progress.units[u.id]?.best ?? 0} / ${u.threshold} 分）` : '尚有必做活動未完成'}｜{u.group || '未分類'}／{u.title}</button></li>; })}</ul> : <p>目前學習的內容都完成了。</p>}</section>
+          <section className="panel"><h2>還沒完成</h2>{currentUnits.filter((u) => u.required && !complete(u, progress)).length ? <><ul>{currentUnits.filter((u) => u.required && !complete(u, progress)).slice(0, outstandingAll ? undefined : 5).map((u) => { const state = unitCompletion(u, progress); return <li key={u.id}><button onClick={() => route(`/unit/${encodeURIComponent(u.id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `完整測驗未達標（${progress.units[u.id]?.best ?? 0} / ${u.threshold} 分）` : '尚有必做活動未完成'}｜{u.group || '未分類'}／{u.title}</button></li>; })}</ul>{!outstandingAll && currentUnits.filter((u) => u.required && !complete(u, progress)).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentUnits.filter((u) => u.required && !complete(u, progress)).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
           {currentUnits.length ? groupUnits(currentUnits).map(([group, units]) => (
             <div className="unit-group" key={group || '__ungrouped'}>
               {group && <h3 className="unit-group-title">{group}</h3>}
@@ -366,97 +377,18 @@ export default function Student({
               </span>
             )}
           </div>
-          <div className="learning-layout">
-            <div className="activitylist">
-              {Object.entries(phases).map(([phase, title]) => (
-                <section key={phase}>
-                  <h3>{title}</h3>
-                  {unit.activities
-                    .filter((a) => a.phase === phase)
-                    .map((a) => (
-                      <button
-                        className={activityId === a.id ? 'selected' : ''}
-                        key={a.id}
-                        onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)}
-                      >
-                        {a.type === 'youtube' ? <Play size={17} /> : <BookOpen size={17} />}
-                        <span>{a.title}</span>
-                        {a.type === 'youtube' && <span className="badge">選看</span>}
-                        {a.type !== 'youtube' && progress.activities[unit.id + '_' + a.id]?.completed && (
-                          <CheckCircle2 size={16} />
-                        )}
-                      </button>
-                    ))}
-                </section>
-              ))}
-              <section>
-                <h3>練習與複習</h3>
-                <button disabled={busy} onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=full`); void start('quiz'); }}>
-                  <BookOpen size={17} />
-                  完整測驗
-                </button>
-                <button disabled={busy} onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/flashcard`); void start('flashcard'); }}>
-                  <RotateCcw size={17} />
-                  完整閃卡
-                </button>
-                <div className="practice-picker">
-                  <span className="muted">抽題練習（不計完成度，未考過的題目優先出現）：</span>
-                  {[10, 20, 30].map((n) => (
-                    <button key={n} disabled={busy} onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=draw&n=${n}`); void start('quiz', n); }}>
-                      抽 {n} 題
-                    </button>
-                  ))}
-                </div>
-                <button disabled={busy} onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/review`); void start('review'); }}>
-                  錯題複習
-                </button>
-              </section>
-            </div>
-            <section className="panel activitycontent">
-              {!activity ? (
-                <div className="empty">
-                  <BookOpen />
-                  <h2>選擇一項學習活動</h2>
-                  <p>先完成課前準備，再進行練習。</p>
-                </div>
-              ) : (
-                <>
-                  <span className="eyebrow">{phases[activity.phase]}</span>
-                  <h2>{activity.title}</h2>
-                  <p>{activity.description}</p>
-                  {activity.type === 'youtube' ? (
-                    <Youtube
-                      activity={activity}
-                      position={progress.activities[unit.id + '_' + activity.id]?.position || 0}
-                      onSave={saveActivity}
-                    />
-                  ) : activity.type === 'html' ? (
-                    <HtmlMaterial activity={activity} onSave={saveActivity} api={api} courseId={course.id} unitId={unit.id} uid={uid} />
-                  ) : activity.type === 'link' ? (
-                    <>
-                      <a
-                        className="button primary"
-                        href={activity.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={() => saveActivity(0, false)}
-                      >
-                        開啟教材 ↗
-                      </a>
-                      <button onClick={() => saveActivity(0, true)}>確認已閱讀</button>
-                    </>
-                  ) : (
-                    <div className="actions">
-                      <button className="primary" onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=full`); void start('quiz'); }}>
-                        開始測驗
-                      </button>
-                      <button onClick={() => { route(`/unit/${encodeURIComponent(unit.id)}/flashcard`); void start('flashcard'); }}>開始閃卡</button>
-                    </div>
-                  )}
-                </>
-              )}
-            </section>
+          <div className="unit-tabs" role="tablist" aria-label="學習階段">
+            {([['pre', '課前', 'before'], ['class', '課堂', 'during'], ['post', '課後', 'after'], ['practice', '練習', 'practice']] as const).map(([id, label, phase]) => {
+              const rows = phase === 'practice' ? [] : unit.activities.filter((a) => a.phase === phase);
+              const required = rows.filter((a) => isRequiredActivity(a));
+              const undone = required.filter((a) => !progress.activities[`${unit.id}_${a.id}`]?.completed).length;
+              return <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); route(`/unit/${encodeURIComponent(unit.id)}?tab=${id}`); }}>{label} <small>{id === 'practice' ? '練習' : undone ? `${undone} 待完成` : required.length ? '✓ 完成' : rows.length ? `${rows.length} 項` : '暫無'}</small></button>;
+            })}
           </div>
+          <section className="activitycards" role="tabpanel">
+            {tab === 'practice' ? <PracticeCards unit={unit} progress={progress} busy={busy} start={start} route={route} /> : unit.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} unit={unit} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
+            {tab !== 'practice' && !unit.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
+          </section>
         </>
       )}
       {historyOpen && (
@@ -499,6 +431,32 @@ export default function Student({
     </div>
   );
 }
+function phaseTab(phase: string) { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
+function tabPhase(tab: string) { return tab === 'pre' ? 'before' : tab === 'class' ? 'during' : 'after'; }
+function isRequiredActivity(a: any) { return (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link'; }
+export function defaultTab(unit: Unit, progress: Progress): 'pre' | 'class' | 'post' | 'practice' {
+  const stages = [['before', 'pre'], ['during', 'class'], ['after', 'post']] as const;
+  const unfinished = stages.find(([phase]) => unit.activities.some((a) => a.phase === phase && isRequiredActivity(a) && !progress.activities[`${unit.id}_${a.id}`]?.completed));
+  if (unfinished) return unfinished[1];
+  const populated = stages.find(([phase]) => unit.activities.some((a) => a.phase === phase));
+  return populated ? populated[1] : 'practice';
+}
+function ActivityCard({ unit, activity, progress, onOpen }: { unit: Unit; activity: any; progress: Progress; onOpen: () => void }) {
+  const done = !!progress.activities[`${unit.id}_${activity.id}`]?.completed;
+  const label = activity.type === 'youtube' ? '選看' : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
+  const state = activity.type === 'youtube' ? (progress.activities[`${unit.id}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
+  return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${label}，${state}`}><span className="badge">{label}</span><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
+}
+function PracticeCards({ unit, progress, busy, start, route }: { unit: Unit; progress: Progress; busy: boolean; start: (m: Mode, n?: number) => Promise<void>; route: (path: string) => void }) {
+  const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n); };
+  const wrong = progress.units[unit.id]?.wrong?.[unit.bankVersion]?.length || 0;
+  return <div className="practice-cards"><button className="activitycard" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}><span className="badge">計入成績</span><h3>完整測驗</h3><p>完整作答後取歷次最高有效成績。</p></button><button className="activitycard" disabled={busy} onClick={() => go('flashcard', '/flashcard')}><span className="badge">計入成績</span><h3>完整閃卡</h3><p>完整作答後取歷次最高有效成績。</p></button><div className="activitycard"><span className="badge">僅供練習</span><h3>隨機抽題</h3>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>抽 {n} 題</button>)}</div><button className="activitycard" disabled={busy || !wrong} onClick={() => go('review', '/review')}><span className="badge">僅供練習</span><h3>錯題複習</h3><p>{wrong ? `${wrong} 題錯題` : '目前沒有錯題'}</p></button></div>;
+}
+function ReadingPage({ course, unit, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
+  const root = useRef<HTMLElement>(null); const [canFullscreen, setCanFullscreen] = useState(false);
+  useEffect(() => setCanFullscreen(!!document.fullscreenEnabled && !!root.current?.requestFullscreen), []);
+  return <main className="reading-page" ref={root as any}><header><button aria-label="離開閱讀" onClick={onBack}><ArrowLeft size={18} /></button><strong>{activity.title}</strong>{canFullscreen && <button aria-label="全螢幕閱讀" onClick={() => root.current?.requestFullscreen()}>全螢幕</button>}</header><section className="reading-body">{activity.type === 'html' ? <HtmlMaterial activity={activity} onSave={onSave} api={api} courseId={course.id} unitId={unit.id} uid={uid} /> : activity.type === 'youtube' ? <Youtube activity={activity} position={progress.activities[`${unit.id}_${activity.id}`]?.position || 0} onSave={onSave} /> : <><h1>{activity.title}</h1><p>{activity.description}</p><a className="button primary" href={activity.url} target="_blank" rel="noreferrer" onClick={() => onSave(0, false)}>開啟連結 ↗</a><button onClick={() => onSave(0, true)}>確認已閱讀</button></>}</section></main>;
+}
 function Quiz({
   questions,
   full,
@@ -509,6 +467,7 @@ function Quiz({
   researchEnabled,
   onResearch,
   onClose,
+  forceLeave = false,
 }: {
   questions: Question[];
   full: boolean;
@@ -519,6 +478,7 @@ function Quiz({
   researchEnabled: boolean;
   onResearch: (events: ExplanationResearchEvent[]) => Promise<void>;
   onClose: () => void;
+  forceLeave?: boolean;
 }) {
   const [i, setI] = useState(0),
     [selections, setSelections] = useState<Record<string, string>>({}),
@@ -534,6 +494,7 @@ function Quiz({
     attemptId = useRef(crypto.randomUUID()),
     submitted = useRef(false);
   const q = questions[i];
+  useEffect(() => { if (forceLeave && !result) setLeave(true); }, [forceLeave, result]);
   function research(questionId: string, value: Omit<ExplanationResearchEvent, 'id' | 'questionId' | 'attemptId' | 'clientAt'>) {
     if (!researchEnabled) return;
     void onResearch([{ ...value, id: crypto.randomUUID(), questionId, attemptId: attemptId.current, clientAt: Date.now() }]);
@@ -587,7 +548,7 @@ function Quiz({
     setTimes((t) => ({ ...t, [q.id]: Math.round((Date.now() - qStart.current) / 1000) }));
     // 2026-09-15（第二次調整）：quiz 模式（完整測驗／抽題練習）恢復成交卷後才揭曉正解與解析，
     // 作答中不鎖定、可以改答案——不然跟閃卡沒有差別。閃卡／複習模式維持選了就立刻鎖定並顯示。
-    if (mode !== 'quiz') setLocked((l) => ({ ...l, [q.id]: true }));
+    if (mode !== 'quiz' || !full) setLocked((l) => ({ ...l, [q.id]: true }));
   }
   function move(n: number) {
     setI(n);
@@ -652,6 +613,8 @@ function Quiz({
         {q.options.map((o, j) => (
           <button
             key={o.id}
+            role="radio"
+            aria-checked={selections[q.id] === o.id}
             className={
               (selections[q.id] === o.id ? 'chosen ' : '') +
               (locked[q.id]
@@ -684,7 +647,7 @@ function Quiz({
         {i < questions.length - 1 ? (
           <button
             className="primary"
-            disabled={mode !== 'quiz' && !locked[q.id]}
+            disabled={(mode !== 'quiz' || !full) && !locked[q.id]}
             onClick={() => move(i + 1)}
           >
             下一題
@@ -692,7 +655,7 @@ function Quiz({
         ) : (
           <button
             className="primary"
-            disabled={mode !== 'quiz' && Object.keys(locked).length < questions.length}
+            disabled={(mode !== 'quiz' || !full) && Object.keys(locked).length < questions.length}
             onClick={finish}
           >
             完成並提交
