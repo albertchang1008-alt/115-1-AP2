@@ -20,6 +20,7 @@
 ---
 
 目前版本：1.3.0。2026-09-18 已完成學生端 UI 改版 1.3.0 第二階段：`src/Student.tsx` 增加課前／課堂／課後／練習 hash 分頁、活動卡與完成文字、100dvh 獨立閱讀頁、完整／抽題／閃卡／錯題共用作答外框；新增 `src/studentRoute.ts` 統一解析／還原 hash，作答中的瀏覽器返回先顯示離開確認。第一階段的可見性、完成度第 2 版與後端重新批改均保留；本輪測試另確認竄改前端 correct/score 不影響伺服器成績。`npm run check` 已通過（前端 43、後端 5）；第二階段本機 commit 已建立（以 `git log -1` 取得目前 hash），未 push、未 deploy。規格檔 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 仍是使用者未追蹤檔案，不納入提交；下一步由教師部署 Functions 與推送 Pages。
+2026-09-18（第五版工作阻塞）：使用者要求依第五版 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 與 `docs/FIREBASE_USAGE_SUPPLEMENT_1.3.0.md` 實作錯題清單、答案表與 Firebase 用量文件；實際工作樹中的主規格仍為第四版（無 5.6／5.7／7.8／測試 19–25），且補充規格檔不存在。因這會決定錯題資料結構與既有已發布題庫答案表的相容方式，未改程式，等待使用者提供正確檔案或路徑。
 2026-09-18（第二階段最終驗證）：後端測試總數已增至 6（含「區域 transaction 不複製 draft 其他內容」靜態防護），前端測試 43；完整 `npm run check` 已通過。第二階段本機 commit 已建立，未 push、未部署。
 2026-09-18（第二版規格調查，未改程式／未 commit）：`docs/STUDENT_UI_REDESIGN_1.3.0.md` 已提供；按其第 11 節先核對後，**第 2 項不成立**：`createSnapshot()` 把課程適用次單元與各學生 progress 寫入 `courses/{courseId}/snapshots/{snapshotId}`，匯出時仍以當下 `completion()` 重算，完成度新規則會使舊快照的匯出結果改變；**第 3 項亦不成立**：Unit 內嵌在 `courses/{courseId}` 的 `draft` 與 `published`，學生只讀 published，單改 draft 不會即時生效。已依使用者規則停下，尚待教師決定：是否接受 `setUnitVisibility` 原子同步更新 draft＋published（不重發題庫／不按一般流程重新發布），及舊結算快照應固定既有規則／重算／只允許新快照採新規則。先前確認的 SDK 0 秒 `node_time` 缺陷仍有效（`public/materials/course-learning.js` 的 `nodeTime()`）；修正為取整後 0 不送即可。指定規格檔目前是未追蹤使用者檔案，勿在本次 commit 納入，除非教師另行確認。
 2026-09-16（第九輪，1.3.8）：修正先前誤判——`course-orientation-v1`（課程簡介圖卡）其實已接上 `course-learning.js`，並非完全沒有追蹤；把它的探索節點從 1 個整頁節點拆成 8 個，改用 `IntersectionObserver` 捲動偵測，保留原本長條捲動版面。詳見下方「第九輪」小節。
