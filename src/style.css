@@ -119,6 +119,10 @@ small {
   color: var(--muted);
   font-size: calc(13px * var(--font-scale, 1));
 }
+.progress-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.progress-row { display: flex; gap: 8px; align-items: center; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--line, #dbe5ea); }
+.progress-row span { min-width: 0; }
+@media (max-width: 767px) { .progress-board { grid-template-columns: 1fr; } .progress-row { flex-wrap: wrap; } }
 .eyebrow {
   font-size: calc(11px * var(--font-scale, 1));
   font-weight: 700;

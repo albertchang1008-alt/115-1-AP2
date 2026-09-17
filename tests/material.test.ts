@@ -92,6 +92,8 @@ test('course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤�
   assert.match(js, /new IntersectionObserver/);
   assert.match(js, /this\.explore\(nodeId\)/);
   assert.match(js, /this\.nodeTime\(nodeId, seconds\)/);
+  assert.match(js, /Number\.isFinite\(seconds\)/);
+  assert.match(js, /whole > 0/);
 });
 
 test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async () => {

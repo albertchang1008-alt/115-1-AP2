@@ -28,6 +28,9 @@ import {
   aggregate,
   youtubeId,
   forClass,
+  CURRENT_COMPLETION_FORMULA_VERSION,
+  UnitVisibility,
+  unitVisibility,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -52,6 +55,23 @@ function code(v: unknown) {
 }
 function size(data: unknown, max = 300000) {
   if (Buffer.byteLength(JSON.stringify(data)) > max) fail('資料過大，請拆分後再提交');
+}
+function cleanLabel(value: unknown, max = 30) {
+  const text = String(value ?? '').replace(/[\u0000-\u001f\u007f]/g, '').trim();
+  if (text.length > max) fail(`文字最多 ${max} 字`);
+  return text;
+}
+function visibility(value: unknown): UnitVisibility {
+  if (!['hidden', 'current', 'archived'].includes(String(value))) fail('區域設定無效');
+  return value as UnitVisibility;
+}
+function patchVisibility(unit: Unit, next: UnitVisibility, label: string, at: number): Unit {
+  if (next === 'archived') return { ...unit, visibility: next, archiveLabel: label || undefined, archivedAt: at, visibilityUpdatedAt: at };
+  return { ...unit, visibility: next, archiveLabel: undefined, archivedAt: undefined, visibilityUpdatedAt: at };
+}
+function visibleProgress(progress: Progress, course: Course) {
+  const ids = new Set(course.units.map((u) => u.id));
+  return { ...progress, units: Object.fromEntries(Object.entries(progress.units || {}).filter(([id]) => ids.has(id))), activities: Object.fromEntries(Object.entries(progress.activities || {}).filter(([key]) => ids.has(key.split('_')[0]))), attempted: Object.fromEntries(Object.entries(progress.attempted || {}).filter(([id]) => ids.has(id))) } as Progress;
 }
 // 測試帳號白名單：config/testStudents { emails: ["..."] }。清空即立刻失效。
 let testCache = { at: 0, emails: [] as string[] };
@@ -160,6 +180,9 @@ export const saveCourse = onCall(options, async (req) => {
     )
       fail('單元設定無效');
     if (u.research && typeof u.research.enabled !== 'boolean') fail('研究資料設定無效');
+    if (u.visibility !== undefined) visibility(u.visibility);
+    if (u.archiveLabel !== undefined) cleanLabel(u.archiveLabel);
+    if (u.visibility === 'archived' && u.archivedAt !== undefined && (!Number.isFinite(u.archivedAt) || u.archivedAt < 0)) fail('封存時間無效');
     const activityIds = new Set();
     for (const a of u.activities) {
       id(a.id);
@@ -248,6 +271,40 @@ export const publishCourse = onCall(options, async (req) => {
     tx.update(ref, { published, classIds: course.classIds });
   });
   return published;
+});
+async function updateVisibility(req: any, unitIds: string[], next: UnitVisibility, archiveLabel: string, action: string) {
+  const { p } = await access(req, req.data.courseId, true);
+  const ref = db.doc(`courses/${code(req.data.courseId)}`), at = Date.now();
+  return db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref), data = snap.data();
+    if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權');
+    const draft = data.draft as Course, published = data.published as Course | undefined;
+    const ids = [...new Set(unitIds.map(code))];
+    if (!ids.length || ids.length > 200 || ids.some((id) => !draft.units.some((u) => u.id === id))) fail('次單元設定無效');
+    const before = Object.fromEntries(ids.map((id) => [id, unitVisibility(draft.units.find((u) => u.id === id)!)]));
+    const update = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => ids.includes(u.id) ? patchVisibility(u, next, archiveLabel, at) : u) });
+    tx.update(ref, { draft: update(draft), ...(published ? { published: update(published) } : {}) });
+    tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action, unitIds: ids, from: before, to: next, archiveLabel });
+    return { units: ids, visibility: next, archiveLabel };
+  });
+}
+export const setUnitVisibility = onCall(options, async (req) => updateVisibility(req, req.data.unitIds || [], visibility(req.data.visibility), cleanLabel(req.data.archiveLabel), 'move'));
+export const endCurrentExam = onCall(options, async (req) => {
+  const { c } = await access(req, req.data.courseId, true);
+  const current = ((c.draft as Course).units || []).filter((u) => unitVisibility(u) === 'current').map((u) => u.id);
+  if (!current.length) fail('目前沒有可結束的單元');
+  return updateVisibility(req, current, 'archived', cleanLabel(req.data.archiveLabel), 'endExam');
+});
+export const renameArchiveLabel = onCall(options, async (req) => {
+  const { p } = await access(req, req.data.courseId, true); const from = cleanLabel(req.data.from), to = cleanLabel(req.data.to);
+  if (!from || !to) fail('請填寫歷史標籤');
+  const ref = db.doc(`courses/${code(req.data.courseId)}`);
+  return db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); const change = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => u.visibility === 'archived' && u.archiveLabel === from ? { ...u, archiveLabel: to, visibilityUpdatedAt: Date.now() } : u) }); tx.update(ref, { draft: change(data.draft), ...(data.published ? { published: change(data.published) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'renameLabel', from, to }); return { ok: true }; });
+});
+export const setStudentNotice = onCall(options, async (req) => {
+  const { p } = await access(req, req.data.courseId, true); const text = cleanLabel(req.data.text, 60), ref = db.doc(`courses/${code(req.data.courseId)}`);
+  await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { draft: { ...data.draft, studentNotice: text || undefined }, ...(data.published ? { published: { ...data.published, studentNotice: text || undefined } } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
+  return { text };
 });
 export const deleteCourse = onCall(options, async (req) => {
   await access(req, req.data.courseId, true);
@@ -424,13 +481,14 @@ export const getBank = onCall(options, async (req) => {
   return { questions: docs.flatMap((d) => d.data()?.questions || []) };
 });
 export const getProgress = onCall(options, async (req) => {
-  const { p } = await access(req, req.data.courseId);
+  const { p, c } = await access(req, req.data.courseId);
   const uid = req.data.uid || p.uid;
   if (uid !== p.uid && !p.teacher) throw new HttpsError('permission-denied', '無法讀取他人進度');
-  return (
+  const progress = (
     (await db.doc(`courses/${req.data.courseId}/progress/${id(uid)}`).get()).data() ||
     emptyProgress()
   );
+  return p.teacher ? progress : visibleProgress(progress as Progress, forClass(c.published, p.classId));
 });
 export const submitAttempt = onCall(options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
@@ -476,6 +534,10 @@ export const submitAttempt = onCall(options, async (req) => {
     )
       fail('題目或選項不屬於本次題庫');
   }
+  const chunks = await Promise.all(bank.data()!.chunks.map((ch: string) => db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}/chunks/${ch}`).get()));
+  const answersById = new Map(chunks.flatMap((d) => d.data()?.questions || []).map((q: Question) => [q.id, q.answer]));
+  // 前端傳來的 score／correct 僅供相容，絕不採用；一律以不可變題庫快照的正解重批。
+  a.answers = a.answers.map((r) => ({ ...r, correct: answersById.get(r.questionId) === r.selected }));
   a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
   a.score = Math.round((a.answers.filter((x) => x.correct).length / a.answers.length) * 100);
   const ref = db.doc(`courses/${a.courseId}/attempts/${a.id}`),
@@ -606,8 +668,10 @@ export const getHistory = onCall(options, async (req) => {
       req.data.after.id,
     );
   const snap = await q.limit(20).get();
+  const visible = !p.teacher ? new Set(forClass(c.published, p.classId).units.map((u) => u.id)) : null;
+  const rows = snap.docs.map((d) => ({ ...d.data(), receivedAt: d.data().receivedAt.toMillis() }) as any).filter((a: any) => !visible || visible.has(a.unitId));
   return {
-    rows: snap.docs.map((d) => ({ ...d.data(), receivedAt: d.data().receivedAt.toMillis() })),
+    rows,
     next:
       snap.size === 20
         ? {
@@ -774,6 +838,7 @@ export const createSnapshot = onCall(options, async (req) => {
       createdBy: p.uid,
       createdAt: Date.now(),
       course: forClass(c.published || c.draft, req.data.classId),
+      completionFormulaVersion: CURRENT_COMPLETION_FORMULA_VERSION,
       status: 'preparing',
     });
   const meta = (await ref.get()).data()!;
@@ -933,7 +998,7 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any, title
 // 新單元不會自動加進任何既有班級的 classUnits（跟手動建立單元時的行為一致），
 // 老師仍要到班級名冊勾選才會對學生開放。
 function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion: string): Unit {
-  return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, activities: [], ...(group ? { group } : {}) };
+  return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, activities: [], visibility: 'hidden', ...(group ? { group } : {}) };
 }
 // 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
 export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {

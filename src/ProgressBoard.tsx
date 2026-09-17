@@ -1,0 +1,15 @@
+import { useState } from 'react';
+import { Course, Unit, unitVisibility } from '../shared/model';
+import { API } from './service';
+
+const zones = [['hidden', '尚未開放'], ['current', '目前學習'], ['archived', '已考完']] as const;
+function grouped(units: Unit[]) {
+  const map = new Map<string, Unit[]>();
+  units.forEach((u) => { const key = u.group || '未分類'; map.set(key, [...(map.get(key) || []), u]); });
+  return [...map];
+}
+export default function ProgressBoard({ course, api, notify, changed }: { course: Course; api: API; notify: (s: string) => void; changed: () => Promise<void> }) {
+  const [busy, setBusy] = useState(false), [notice, setNotice] = useState(course.studentNotice || ''), [label, setLabel] = useState('');
+  async function run(name: string, data: any) { setBusy(true); try { await api.call(name, { courseId: course.id, ...data }); await changed(); notify('學習進度已更新'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }
+  return <><header className="pageheading"><div><span className="eyebrow">LEARNING FLOW</span><h1>學習進度</h1><p>區域變更立即同步至已發布課程，不改題庫版本或其他草稿內容。</p></div></header><section className="panel"><label className="field">學生首頁提示<textarea maxLength={60} value={notice} onChange={(e) => setNotice(e.target.value)} /></label><button disabled={busy} onClick={() => run('setStudentNotice', { text: notice })}>儲存提示</button></section><section className="panel"><div className="toolbar"><label>本次考試歷史標籤<input maxLength={30} value={label} onChange={(e) => setLabel(e.target.value)} placeholder="例如 第一次期中考" /></label><button disabled={busy || !course.units.some((u) => unitVisibility(u) === 'current')} onClick={() => { if (confirm('將目前學習的所有次單元移至已考完？')) void run('endCurrentExam', { archiveLabel: label }); }}>本次考試結束</button></div></section><div className="progress-board">{zones.map(([zone, title]) => { const units = course.units.filter((u) => unitVisibility(u) === zone); return <section className="panel" key={zone}><h2>{title}（{units.length}）</h2>{grouped(units).map(([group, rows]) => <details open key={group}><summary>{group} · {rows.length} 個次單元</summary>{rows.map((u) => <div className="progress-row" key={u.id}><span>{u.title}</span>{zone === 'archived' && <small>{u.archiveLabel || '其他'}</small>}<select aria-label={`${u.title} 移到`} value="" disabled={busy} onChange={(e) => { if (e.target.value) void run('setUnitVisibility', { unitIds: [u.id], visibility: e.target.value, archiveLabel: e.target.value === 'archived' ? label : '' }); }}><option value="">移到…</option>{zones.filter(([v]) => v !== zone).map(([v, text]) => <option key={v} value={v}>{text}</option>)}</select></div>)}</details>)}{!units.length && <p className="muted">此區目前沒有次單元。</p>}</section>; })}</div></>;
+}

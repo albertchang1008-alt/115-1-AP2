@@ -15,6 +15,9 @@ import {
   Report,
   Seen,
   Course,
+  CURRENT_COMPLETION_FORMULA_VERSION,
+  forClass,
+  unitVisibility,
 } from '../shared/model';
 const q = {
   id: 'q1',
@@ -116,7 +119,33 @@ test('另一位學生獨立計入首次', () => {
 });
 test('沒有成績不視為零分達標', () => {
   const c = { units: [{ id: 'u', required: true, threshold: 0 }] } as Course;
-  assert.deepEqual(completion(c, emptyProgress()), { done: 0, total: 1 });
+  assert.deepEqual(completion(c, emptyProgress(), 1), { done: 0, total: 1 });
+});
+test('第二版完成度同時要求達標、互動教材與外部連結', () => {
+  const unit: any = { id: 'u', required: true, threshold: 80, bankVersion: 'v', activities: [{ id: 'html', type: 'html', tracking: 'interactive' }, { id: 'link', type: 'link' }] };
+  let p: any = { units: { u: { best: 90 } }, activities: {} };
+  assert.equal(completion({ units: [unit] } as Course, p).done, 0);
+  p.activities.u_html = { completed: true }; assert.equal(completion({ units: [unit] } as Course, p).done, 0);
+  p.activities.u_link = { completed: true }; assert.equal(completion({ units: [unit] } as Course, p).done, 1);
+  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 2);
+});
+test('hidden 與逐班未勾選皆不會進入學生課程', () => {
+  const c: any = { classUnits: { a: ['shown', 'hidden'] }, units: [{ id: 'shown' }, { id: 'hidden', visibility: 'hidden' }, { id: 'other' }] };
+  assert.deepEqual(forClass(c, 'a').units.map((u: any) => u.id), ['shown']);
+});
+test('缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照', () => {
+  const unit: any = { id: 'u', required: true, threshold: 80, bankVersion: 'v', activities: [{ id: 'link', type: 'link' }] };
+  const p: any = { units: { u: { best: 80 } }, activities: {} };
+  assert.equal(unitVisibility(unit), 'current');
+  assert.deepEqual(completion({ units: [unit] } as Course, p, 1), { done: 1, total: 1 });
+  assert.deepEqual(completion({ units: [unit] } as Course, p, 2), { done: 0, total: 1 });
+  assert.deepEqual(completion({ units: [{ ...unit, id: 'optional', required: false }] } as Course, p, 2), { done: 0, total: 0 });
+});
+test('v2 沒有題庫時只要求互動教材與連結，只有選看時不列入分母', () => {
+  const base: any = { id: 'u', required: true, threshold: 80, activities: [{ id: 'video', type: 'youtube' }, { id: 'interactive', type: 'html', tracking: 'interactive' }] };
+  assert.deepEqual(completion({ units: [base] } as Course, { units: {}, activities: {} }), { done: 0, total: 1 });
+  assert.deepEqual(completion({ units: [base] } as Course, { units: {}, activities: { u_interactive: { completed: true, position: 0, updatedAt: 1 } } }), { done: 1, total: 1 });
+  assert.deepEqual(completion({ units: [{ ...base, activities: [{ id: 'video', type: 'youtube' }] }] } as Course, { units: {}, activities: {} }), { done: 0, total: 0 });
 });
 test('每單元上限放寬到 500 題', () => {
   const many = Array.from({ length: 500 }, (_, i) => ({ ...q, id: 'q' + i }));

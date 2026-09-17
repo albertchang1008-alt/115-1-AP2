@@ -281,10 +281,27 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
             createdAt: Date.now(),
             status: 'complete',
             course: published,
+            completionFormulaVersion: 2,
             rows: roster.map((r) => ({ ...r, progress: emptyProgress() })),
           });
           result = { done: true };
           break;
+        case 'setUnitVisibility': {
+          const ids = new Set(d.unitIds || []);
+          const patch = (course: Course) => ({ ...course, units: course.units.map((u) => !ids.has(u.id) ? u : { ...u, visibility: d.visibility, archiveLabel: d.visibility === 'archived' ? (d.archiveLabel || undefined) : undefined, archivedAt: d.visibility === 'archived' ? Date.now() : undefined, visibilityUpdatedAt: Date.now() }) });
+          draft = patch(draft); published = patch(published); courseMap.set(draft.id, draft); publishedMap.set(published.id, published);
+          break;
+        }
+        case 'endCurrentExam': {
+          const unitIds = draft.units.filter((u) => (u.visibility || 'current') === 'current').map((u) => u.id);
+          if (!unitIds.length) throw Error('目前沒有可結束的單元');
+          const ids = new Set(unitIds);
+          const patch = (course: Course) => ({ ...course, units: course.units.map((u) => !ids.has(u.id) ? u : { ...u, visibility: 'archived' as const, archiveLabel: d.archiveLabel || undefined, archivedAt: Date.now(), visibilityUpdatedAt: Date.now() }) });
+          draft = patch(draft); published = patch(published); courseMap.set(draft.id, draft); publishedMap.set(published.id, published);
+          break;
+        }
+        case 'setStudentNotice':
+          draft = { ...draft, studentNotice: d.text || undefined }; published = { ...published, studentNotice: d.text || undefined }; courseMap.set(draft.id, draft); publishedMap.set(published.id, published); break;
         case 'getSnapshots':
           result = d.snapshotId
             ? { rows: snapshots.find((s) => s.id === d.snapshotId)?.rows || [], next: null }

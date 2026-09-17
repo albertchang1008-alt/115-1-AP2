@@ -2,6 +2,7 @@ import { NewCourse, ClassManager } from './CourseSetup';
 import { QuestionImage, Explanations } from './QuestionContent';
 import Diagnostics from './Diagnostics';
 import ResearchEvidence from './ResearchEvidence';
+import ProgressBoard from './ProgressBoard';
 import { useEffect, useState } from 'react';
 import {
   LayoutDashboard,
@@ -72,6 +73,7 @@ const tabs = [
   ['bank', '題庫管理', Layers],
   ['roster', '班級名冊', Users],
   ['completion', '完成度看板', CheckCircle2],
+  ['progress', '學習進度', LayoutDashboard],
   ['analysis', '題目分析', ChartNoAxesCombined],
   ['reports', '報表與結算', FileChartColumn],
   ['settings', '平台設定', Settings],
@@ -670,6 +672,8 @@ export default function App() {
             }} />
           ) : tab === 'completion' ? (
             <CompletionPage key={course.id} course={course} api={api} notify={notify} />
+          ) : tab === 'progress' ? (
+            <ProgressBoard key={course.id} course={course} api={api} notify={notify} changed={async () => { const data = await api.call('bootstrap'); setCourses(data.courses); }} />
           ) : tab === 'analysis' ? (
             <Analysis key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'reports' ? (
@@ -2024,6 +2028,7 @@ function ReportsPage({
                 <th>建立時間</th>
                 <th>班級</th>
                 <th>狀態</th>
+                <th>完成度規則</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -2033,6 +2038,7 @@ function ReportsPage({
                   <td>{new Date(s.createdAt).toLocaleString()}</td>
                   <td>{s.classId || cl}</td>
                   <td>{s.status === 'complete' ? '完成' : '處理中'}</td>
+                  <td>第 {s.completionFormulaVersion || 1} 版</td>
                   <td>
                     {s.status !== 'complete' ? (
                       <button
@@ -2072,7 +2078,8 @@ function ReportsPage({
                               '完成度結算.csv',
                               rows.map((r) => {
                                 const c = meta.course || course,
-                                  n = completion(c, r.progress);
+                                  formulaVersion = meta.completionFormulaVersion || 1,
+                                  n = completion(c, r.progress, formulaVersion);
                                 return {
                                   姓名: r.name,
                                   學號: r.studentId,
@@ -2082,6 +2089,7 @@ function ReportsPage({
                                   完成率: n.total
                                     ? Math.round((n.done / n.total) * 100) + '%'
                                     : '不適用',
+                                  完成度規則: `第 ${formulaVersion} 版`,
                                   結算時間: new Date(s.createdAt).toLocaleString(),
                                 };
                               }),

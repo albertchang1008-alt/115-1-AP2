@@ -29,7 +29,7 @@
     explore(nodeId) { add({ type: 'explore', nodeId }); },
     answer(questionId, correct) { add({ type: 'answer', questionId: String(questionId), correct: !!correct }); },
     hint(questionId) { add({ type: 'hint', questionId: String(questionId) }); },
-    nodeTime(nodeId, seconds) { if (Number.isFinite(seconds) && seconds > 0) add({ type: 'node_time', nodeId: String(nodeId), seconds: Math.min(60, Math.floor(seconds)) }); },
+    nodeTime(nodeId, seconds) { if (!Number.isFinite(seconds)) return; const whole = Math.min(60, Math.floor(seconds)); if (whole > 0) add({ type: 'node_time', nodeId: String(nodeId), seconds: whole }); },
     complete() { add({ type: 'completed' }); },
     // 給長條捲動版面的教材用：幫內容區塊加 data-node-id，呼叫一次這個方法即可自動用
     // IntersectionObserver 偵測捲動進度，不用每份教材各自重寫一次觀察器邏輯。

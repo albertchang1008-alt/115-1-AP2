@@ -56,6 +56,7 @@ test('次單元在課程草稿裡不存在時，同步會自動建立單元（�
     assert.equal(unit.group, '血液', '單元欄應該寫進 Unit.group 純作分組顯示');
     assert.equal(unit.bankVersion, results[0].version);
     assert.equal(unit.required, true);
+    assert.equal(unit.visibility, 'hidden', 'Sheet 新增的次單元必須先由教師看板開放');
     assert.equal(course.draft.classIds.length, 0, '不應該動到既有的班級設定');
   } finally { ctx.restore(); }
 });
@@ -79,6 +80,7 @@ test('次單元已存在時，再次同步只更新版本與分組，不重複�
     assert.equal(unit.required, false);
     assert.equal(unit.group, '心臟', '單元欄應該更新既有單元的分組');
     assert.equal(unit.bankVersion, results[0].version);
+    assert.equal(unit.visibility, undefined, '既有次單元的區域設定不可被同步覆寫');
   } finally { ctx.restore(); }
 });
 

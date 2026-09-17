@@ -31,6 +31,10 @@ const expected = [
   'syncSheet',
   'migrateRoster',
   'archiveCourse',
+  'setUnitVisibility',
+  'endCurrentExam',
+  'renameArchiveLabel',
+  'setStudentNotice',
   'saveLearningEvents',
   'getLearningDiagnostics',
 ];

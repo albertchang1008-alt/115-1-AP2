@@ -1,5 +1,7 @@
 export type Mode = 'quiz' | 'flashcard' | 'review';
 export type Phase = 'before' | 'during' | 'after';
+export type UnitVisibility = 'hidden' | 'current' | 'archived';
+export const CURRENT_COMPLETION_FORMULA_VERSION = 2;
 export interface Question {
   id: string;
   text: string;
@@ -56,6 +58,10 @@ export interface Unit {
   research?: { enabled: boolean };
   // 單元（大分類，例如「血液」）；次單元＝這個 Unit 本身。純顯示用分組，沒有值時平鋪顯示。
   group?: string;
+  visibility?: UnitVisibility;
+  archiveLabel?: string;
+  archivedAt?: number;
+  visibilityUpdatedAt?: number;
 }
 export interface ExplanationResearchEvent {
   id: string;
@@ -83,6 +89,7 @@ export interface Course {
     string,
     Record<string, Partial<Pick<Unit, 'threshold' | 'required' | 'opensAt' | 'dueAt'>>>
   >;
+  studentNotice?: string;
 }
 export interface Profile {
   uid: string;
@@ -149,10 +156,11 @@ export interface Report {
   modes: Record<string, Record<string, Stat>>;
 }
 export const emptyProgress = (): Progress => ({ units: {}, activities: {} });
+export function unitVisibility(unit: Unit): UnitVisibility { return unit.visibility || 'current'; }
 export function forClass(course: Course, classId: string): Course {
   return {
     ...course,
-    units: course.units.filter((u) => !course.classUnits?.[classId] || course.classUnits[classId].includes(u.id)).map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
+    units: course.units.filter((u) => unitVisibility(u) !== 'hidden' && (!course.classUnits?.[classId] || course.classUnits[classId].includes(u.id))).map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
   };
 }
 export const phases: Record<Phase, string> = {
@@ -165,12 +173,24 @@ export const modes: Record<Mode, string> = {
   flashcard: '閃卡作答',
   review: '錯題複習',
 };
-export function complete(unit: Unit, p: Progress) {
-  return (p.units[unit.id]?.best ?? -1) >= unit.threshold;
+export function requiredActivities(unit: Unit) {
+  return (unit.activities || []).filter((a) => (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link');
 }
-export function completion(course: Course, p: Progress) {
-  const units = course.units.filter((u) => u.required);
-  return { done: units.filter((u) => complete(u, p)).length, total: units.length };
+export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  const required = requiredActivities(unit), hasBank = !!unit.bankVersion;
+  const eligible = formulaVersion === 1 ? unit.required : unit.required && (hasBank || required.length > 0);
+  const scoreDone = !hasBank || (p.units[unit.id]?.best ?? -1) >= unit.threshold;
+  const activitiesDone = required.every((a) => p.activities[unit.id + '_' + a.id]?.completed);
+  const completedActivities = required.filter((a) => p.activities[unit.id + '_' + a.id]?.completed).length;
+  const done = formulaVersion === 1 ? (p.units[unit.id]?.best ?? -1) >= unit.threshold : scoreDone && activitiesDone;
+  return { eligible, done, hasBank, scoreDone, activitiesDone, completedActivities, totalRequired: required.length + (hasBank ? 1 : 0) };
+}
+export function complete(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  return unitCompletion(unit, p, formulaVersion).done;
+}
+export function completion(course: Course, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  const units = course.units.filter((u) => unitCompletion(u, p, formulaVersion).eligible);
+  return { done: units.filter((u) => complete(u, p, formulaVersion)).length, total: units.length };
 }
 export function safeId(s: string) {
   return /^[a-zA-Z0-9_-]{1,100}$/.test(s);
