@@ -138,6 +138,8 @@ test('錯題閃卡與首頁排列採純前端資料，沒有額外 callable', as
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /wrongCardIds\(progress/);
   assert.match(source, /閃卡不會寫入資料/);
+  assert.match(source, /if \(!counts\[range\]\) setRange\(counts\['7d'\] \? '7d' : 'all'\)/, '7 天沒有題目要自動選全部');
+  assert.match(source, /setQs\(\(x\) => \[\.\.\.x\.slice/, '再看一次只調整本輪卡片佇列');
   assert.ok(source.indexOf('還沒完成') < source.indexOf('unitgrid'), '待辦位於單元清單之前');
   assert.match(source, /currentUnits\.filter/);
   assert.doesNotMatch(source, /start\('review'/);
