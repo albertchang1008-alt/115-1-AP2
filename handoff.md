@@ -19,7 +19,24 @@
 
 ---
 
-2026-09-18（1.3.1 教師後台單元結構重整，分支 `feature/1.3.1-unit-tree`）：教師反映後台單元／次單元混亂。根因：`parseBankSheet` 在「次單元」空白時用分頁名稱（＝課程代碼 `115-1-AP2`）當單元代碼，產生假單元 `115-1-AP2`（group=115-1課程簡介）；另有代碼 `血液成分與血漿` 的單元被改名為「課程簡介」，所以血液底下出現課程簡介。已修：次單元空白改用「單元」當代碼；教師端單元清單改分組樹（`unitTree()`，shared/model.ts）、班級改對照表（`src/CourseSetup.tsx` ClassManager）、單元設定顯示不一致提醒（`unitWarning()`，App.tsx）。**新固定決策 40：Sheet 決定單元／次單元結構與代碼；次單元空白時單元本身就是一節；後台名稱若與 Sheet 不同會標示提醒。** `npm run check` 在乾淨 linux 複本通過（前端 58、Functions 8；使用者機器的 node_modules 是 darwin 版，VM 內無法直接跑）。本機 commit 於此分支，未合併 main、未 push、未部署。**上線步驟**：①教師同意後部署 `functions:platform:syncSheet`；②合併並 push main 發布前端；③後台按「同步題庫」，會新建單元「115-1課程簡介」；④在課程與教材移除舊的 `115-1-AP2` 單元（有「!」提醒）、把「課程簡介（代碼 血液成分與血漿）」按「改回 Sheet 名稱」或依教師意思處理；⑤在對照表重新勾選各班適用單元並發布課程。注意：若已有學生在舊 `115-1-AP2` 單元作答，進度不會自動搬到新單元代碼。
+2026-09-18（1.3.1 教師後台單元結構重整，分支 `feature/1.3.1-unit-tree`）：教師反映後台單元／次單元混亂。根因：`parseBankSheet` 在「次單元」空白時用分頁名稱（＝課程代碼 `115-1-AP2`）當單元代碼，產生假單元 `115-1-AP2`（group=115-1課程簡介）；另有代碼 `血液成分與血漿` 的單元被改名為「課程簡介」，所以血液底下出現課程簡介。已修：次單元空白改用「單元」當代碼；教師端單元清單改分組樹（`unitTree()`，shared/model.ts）、班級改對照表（`src/CourseSetup.tsx` ClassManager）、單元設定顯示不一致提醒（`unitWarning()`，App.tsx）。**新固定決策 40：Sheet 決定單元／次單元結構與代碼；次單元空白時單元本身就是一節；後台名稱若與 Sheet 不同會標示提醒。** `npm run check` 在乾淨 linux 複本通過（前端 58、Functions 8；使用者機器的 node_modules 是 darwin 版，VM 內無法直接跑）。本機 commit 於此分支，未合併 main、未 push、未部署。**上線步驟**：①教師同意後部署 `functions:platform:syncSheet`；②合併並 push main 發布前端；③後台按「同步題庫」，會新建單元「115-1課程簡介」；④在課程與教材移除舊的 `115-1-AP2` 單元（有「!」提醒）、把「課程簡介（代碼 血液成分與血漿）」按「改回 Sheet 名稱」或依教師意思處理；⑤在對照表重新勾選各班適用單元並發布課程。教師已確認：學期初尚無學生作答，舊 `115-1-AP2` 單元可直接移除，不需搬移進度。
+
+### 交給 Codex 執行的 1.3.1 上線任務（教師已同意，Claude 之後驗收）
+
+教師明確授權 Codex 執行以下步驟；每一步做完都寫進本檔，失敗就停下記錄原因，不要自行改走其他路。
+
+1. `git checkout feature/1.3.1-unit-tree`，確認最新 commit 含「1.3.1 教師後台單元樹」；跑 `npm run check`，必須全部通過（前端 58、Functions 8）。
+2. 部署同步函式：`npx firebase-tools deploy --only functions:platform:syncSheet --project ap2-7ed91`。記錄 CLI 是否出現 Deploy complete。
+3. 把分支合併進 `main`（快轉或一般 merge，不可 force），`git push origin main`，觸發 GitHub Pages；記錄 main 的 commit hash。之後確認 GitHub Actions「Publish course platform」成功，且 `https://albertchang1008-alt.github.io/115-1-AP2/version.json` 顯示 1.3.1。
+4. 以下需教師在正式後台操作（Codex 只寫操作說明，不代為點擊，除非教師另外要求）：題庫管理→同步題庫；課程與教材→移除 `115-1-AP2` 單元（有「!」提醒）；「課程簡介（代碼 血液成分與血漿）」按「改回 Sheet 名稱」；在「班級與適用單元」對照表重新勾選各班單元；保存草稿並發布課程。
+5. 不要修改 Google Sheet、不要動其他 Functions、不要變更 Firestore 資料。完成後在本檔記錄：部署結果、main commit、Pages 版本，並標註「待 Claude 驗收」。
+
+### Claude 驗收清單（Codex 完成後）
+
+- main 包含 `51a81d3` 之後的 1.3.1 變更，無額外未說明的改動；`npm run check` 通過。
+- 正式站 version.json＝1.3.1；教師後台單元安排為分組樹、班級為對照表。
+- 同步後「115-1課程簡介」為獨立單元，不再出現在「血液」下，也不再產生 `115-1-AP2` 單元。
+- 各班學生端只看到勾選的單元。
 
 2026-09-18（本日收工紀錄）：今日的 1.3.0 工作已結案記錄。學生端完成首頁／次單元分頁／全螢幕作答與閱讀／顯示設定／綜合練習與純錯題閃卡；後端完成 hidden 防線、完成度版本、後端批改、錯題資料相容與題庫私有答案表；教師端完成版面回歸、平台設定可見性、單元整組移動與題庫同步診斷。題庫欄位最終契約為「正確答案代碼」唯一正式來源（A–H 或 1–8），「Zuvio解答」只供教師自行出題且絕不入庫。正式環境已成功更新 `platform:syncSheet`（asia-east1）；GitHub Pages 尚未推送。最後完整檢查為 `npm run check` 通過（前端 57、Functions 8）。真實 Emulator 的混合交卷 rollback 驗證仍因環境缺 Java Runtime 未能執行；其餘無未提交工作樹變更。本機目前在 `main`，最近程式 commit `cf9f8ea`，部署紀錄 commit `710e35d`。
 
