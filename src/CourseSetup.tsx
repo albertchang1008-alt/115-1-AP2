@@ -6,7 +6,7 @@ export function NewCourse({ source, close, create }: { source?: Course; close: (
     e.preventDefault(); setError('');
     if (!safeCode(code.trim()) || !title.trim() || !term.trim()) return setError('請填寫課程名稱、學期及課程代碼（可用中文、英數字、- 或 _，不能有空白）');
     setBusy(true);
-    try { await create({ id: code.trim(), title: title.trim(), term: term.trim(), description: source?.description || '', classIds: [], classNames: {}, classUnits: {}, sheetsUrl: '', units: source ? source.units.map((u) => ({ ...structuredClone(u), bankVersion: '' })) : [] }); close(); }
+    try { await create({ id: code.trim(), title: title.trim(), term: term.trim(), description: source?.description || '', classIds: [], classNames: {}, classUnits: {}, sheetsUrl: '', units: source ? source.units.map((u) => ({ ...structuredClone(u), bankVersion: '', questionCount: 0 })) : [], ...(source ? { chapters: structuredClone(source.chapters || {}), chapterOrder: [...(source.chapterOrder || [])] } : {}) }); close(); }
     catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   }}><h2>{source ? '複製課程架構' : '建立課程'}</h2><label className="field">課程名稱<input autoFocus required value={title} onChange={(e) => setTitle(e.target.value)} /></label><label className="field">課程代碼<input required value={code} onChange={(e) => setCode(e.target.value)} placeholder="例如 anatomy-115-1 或 解剖生理115-1" /></label><label className="field">學期<input required value={term} onChange={(e) => setTerm(e.target.value)} /></label><p>建立後再新增班級及安排單元。代碼建立後固定，用來對應 Google Sheet。</p>{source && <p>複製單元與教材；新課程的名冊及題庫請重新同步，歷史作答不會複製。</p>}{error && <p role="alert" className="error">{error}</p>}<div className="actions"><button disabled={busy} type="submit">{busy ? '保存中…' : '建立並保存'}</button><button disabled={busy} type="button" onClick={close}>取消</button></div></form></div>;
 }
@@ -40,9 +40,9 @@ export function ClassManager({ course, change }: { course: Course; change: (c: C
   };
   const removeClass = (cl: string) => {
     if (!confirm(`從草稿移除「${course.classNames?.[cl] || cl}」？發布前學生權限不變，既有名冊與紀錄會保留。`)) return;
-    const classUnits = { ...course.classUnits }, classNames = { ...course.classNames }, classOverrides = { ...course.classOverrides };
-    delete classUnits[cl]; delete classNames[cl]; delete classOverrides[cl];
-    change({ ...course, classIds: course.classIds.filter((c) => c !== cl), classUnits, classNames, classOverrides });
+    const classUnits = { ...course.classUnits }, classNames = { ...course.classNames }, classOverrides = { ...course.classOverrides }, chapterOverrides = { ...course.chapterOverrides };
+    delete classUnits[cl]; delete classNames[cl]; delete classOverrides[cl]; delete chapterOverrides[cl];
+    change({ ...course, classIds: course.classIds.filter((c) => c !== cl), classUnits, classNames, classOverrides, chapterOverrides });
   };
   const allIds = course.units.map((u) => u.id);
   return <section className="panel">

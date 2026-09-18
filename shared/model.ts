@@ -53,6 +53,7 @@ export interface Unit {
   opensAt: string;
   dueAt: string;
   bankVersion: string;
+  questionCount?: number;
   activities: Activity[];
   // 研究資料模式預設開啟；教師可逐單元關閉，與成績／完成資格分離。
   research?: { enabled: boolean };
@@ -103,6 +104,8 @@ export interface Course {
   chapters?: Record<string, Chapter>;
   chapterOverrides?: Record<string, Record<string, Partial<Pick<Chapter, 'threshold' | 'required' | 'opensAt' | 'dueAt'>>>>;
   chapterOrder?: string[];
+  /** 最近一次題庫同步偵測到、已不在 Sheet 的舊題目分類；只供教師確認清理。 */
+  staleUnits?: string[];
   studentNotice?: string;
 }
 export interface Profile {
@@ -207,10 +210,13 @@ export function orderedChapters(course: Course) {
 export function chapterActivityKey(name: string, activityId: string) { return `chapter:${name}_${activityId}`; }
 export function forClass(course: Course, classId: string): Course {
   const chapters = chaptersOf(course);
+  const visibleUnits = course.units.filter((u) => unitVisibility(u) !== 'hidden' && (!course.classUnits?.[classId] || course.classUnits[classId].includes(u.id)));
+  const visibleChapterNames = new Set(visibleUnits.map(chapterName));
   return {
     ...course,
-    chapters: Object.fromEntries(Object.entries(chapters).map(([name, chapter]) => [name, { ...chapter, ...course.chapterOverrides?.[classId]?.[name] }])),
-    units: course.units.filter((u) => unitVisibility(u) !== 'hidden' && (!course.classUnits?.[classId] || course.classUnits[classId].includes(u.id))).map((u) => {
+    chapters: Object.fromEntries(Object.entries(chapters).filter(([name]) => visibleChapterNames.has(name)).map(([name, chapter]) => [name, { ...chapter, ...course.chapterOverrides?.[classId]?.[name] }])),
+    chapterOrder: (course.chapterOrder || []).filter((name) => visibleChapterNames.has(name)),
+    units: visibleUnits.map((u) => {
       const chapter = { ...chapters[chapterName(u)], ...course.chapterOverrides?.[classId]?.[chapterName(u)] };
       return { ...u, required: chapter.required, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
     }),

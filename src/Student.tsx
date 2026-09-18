@@ -31,6 +31,12 @@ import {
   orderForPractice,
   wrongEntries,
   wrongCardIds,
+  Chapter,
+  chaptersOf,
+  orderedChapters,
+  chapterName,
+  chapterCompletion,
+  chapterActivityKey,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -80,12 +86,30 @@ export default function Student({
   pRef.current = progress;
   takingRef.current = taking;
   const unit = course.units.find((u) => u.id === unitId);
-  const activity = unit?.activities.find((a) => a.id === activityId);
+  const selectedChapterName = unit ? chapterName(unit) : '';
+  const chapter = selectedChapterName ? chaptersOf(course)[selectedChapterName] : undefined;
+  const chapterUnits = selectedChapterName ? course.units.filter((u) => chapterName(u) === selectedChapterName) : [];
+  const activity = chapter?.activities.find((a) => a.id === activityId);
   const ratio = completion(course, progress);
   const currentUnits = course.units.filter((u) => unitVisibility(u) === 'current');
   const archivedUnits = course.units.filter((u) => unitVisibility(u) === 'archived');
+  const currentChapters = orderedChapters(course).filter(({ units }) => units.some((u) => unitVisibility(u) === 'current'));
+  const archivedChapters = orderedChapters(course).filter(({ units }) => units.length > 0 && units.every((u) => unitVisibility(u) === 'archived'));
   const route = (path = '') => {
-    if (preview) return;
+    if (preview) {
+      if (!path) { setUnitId(''); setActivityId(''); setTaking(false); return; }
+      const parsed = parseStudentRoute(`#/course/${encodeURIComponent(course.id)}${path}`, course.id);
+      if (!parsed) return;
+      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.count}`); setTaking(false); return; }
+      if (parsed.kind === 'home') { setUnitId(''); setActivityId(''); setTaking(false); return; }
+      const nextUnit = course.units.find((u) => u.id === parsed.unitId);
+      if (!nextUnit) return;
+      setUnitId(nextUnit.id);
+      setActivityId(parsed.kind === 'activity' ? parsed.activityId : parsed.kind === 'wrongcards' ? '__wrongcards' : '');
+      if (parsed.kind === 'unit') setTab(parsed.tab || defaultTab(chaptersOf(course)[chapterName(nextUnit)], pRef.current, `chapter:${chapterName(nextUnit)}`));
+      if (!['quiz', 'flashcard'].includes(parsed.kind)) setTaking(false);
+      return;
+    }
     location.hash = `#/course/${encodeURIComponent(course.id)}${path}`;
   };
   useEffect(() => {
@@ -102,7 +126,7 @@ export default function Student({
       if (!allowed) { route(); notify('此單元目前未開放'); return; }
       setUnitId(nextUnit);
       setActivityId(nextActivity);
-      if (parsed.kind === 'unit') setTab(location.hash.includes('?tab=') ? parsed.tab : defaultTab(allowed, pRef.current));
+      if (parsed.kind === 'unit') setTab(location.hash.includes('?tab=') ? parsed.tab : defaultTab(chaptersOf(course)[chapterName(allowed)], pRef.current, `chapter:${chapterName(allowed)}`));
       if (parsed.kind === 'quiz') void start('quiz', parsed.mode === 'draw' ? parsed.count : undefined, allowed);
       else if (parsed.kind === 'flashcard') void start('flashcard', undefined, allowed);
       // 作答路由由 start() 載入題庫後開啟；不要讓 hashchange 把剛開啟的全螢幕作答關掉。
@@ -216,14 +240,15 @@ export default function Student({
     }
   }
   async function saveActivity(position: number, completed: boolean) {
-    if (!unit || !activity) return;
-    const key = unit.id + '_' + activity.id;
+    if (!unit || !chapter || !activity) return;
+    const key = chapterActivityKey(selectedChapterName, activity.id);
     const old = pRef.current.activities[key];
     const done = completed || old?.completed || false;
     try {
       if (activity.tracking !== 'interactive') await api.call('saveActivity', {
         courseId: course.id,
         unitId: unit.id,
+        chapterName: selectedChapterName,
         activityId: activity.id,
         position,
         completed: done,
@@ -246,8 +271,8 @@ export default function Student({
   }
   if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice api={api} course={course} progress={progress} count={Number(activityId.slice(8))} onBack={() => route()} notify={notify} /></>;
   if (unit && activityId === '__wrongcards') return <><StudentSettings /><WrongCards api={api} course={course} unit={unit} progress={progress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} /></>;
-  if (activity && unit)
-    return <><StudentSettings /><ReadingPage course={course} unit={unit} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
+  if (activity && unit && chapter)
+    return <><StudentSettings /><ReadingPage course={course} unit={unit} chapterName={selectedChapterName} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
   if (taking && unit)
     return (<><StudentSettings /><Quiz
         questions={questions}
@@ -271,8 +296,8 @@ export default function Student({
       </div>
       <header className="pageheading">
         <div>
-          <h1>{unit ? unit.title : course.title}</h1>
-          <p>{unit ? unit.description : course.description}</p>
+          <h1>{chapter ? chapter.title : course.title}</h1>
+          <p>{chapter ? chapter.description : course.description}</p>
         </div>
         <button onClick={() => loadHistory()} disabled={busy}>
           <Clock size={17} />
@@ -306,52 +331,44 @@ export default function Student({
               <span>{ratio.total ? Math.round((ratio.done / ratio.total) * 100) : 0}%</span>
             </div>
           </div>
-          <section className="panel"><h2>還沒完成</h2>{currentUnits.filter((u) => u.required && !complete(u, progress)).length ? <><ul>{currentUnits.filter((u) => u.required && !complete(u, progress)).slice(0, outstandingAll ? undefined : 5).map((u) => { const state = unitCompletion(u, progress); return <li key={u.id}><button onClick={() => route(`/unit/${encodeURIComponent(u.id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `完整測驗未達標（${progress.units[u.id]?.best ?? 0} / ${u.threshold} 分）` : '尚有必做活動未完成'}｜{u.group || '未分類'}／{u.title}</button></li>; })}</ul>{!outstandingAll && currentUnits.filter((u) => u.required && !complete(u, progress)).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentUnits.filter((u) => u.required && !complete(u, progress)).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
+          <section className="panel"><h2>還沒完成</h2>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length ? <><ul>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).slice(0, outstandingAll ? undefined : 5).map(({ name, chapter, units }) => { const state = chapterCompletion(course, name, progress); return <li key={name}><button onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `尚有題目分類未達 ${chapter.threshold} 分` : '尚有必做活動未完成'}｜{chapter.title}</button></li>; })}</ul>{!outstandingAll && currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
           {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards?range=7d`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
           {currentUnits.length > 0 && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
-          {currentUnits.length ? groupUnits(currentUnits).map(([group, units]) => (
-            <div className="unit-group" key={group || '__ungrouped'}>
-              {group && <h3 className="unit-group-title">{group}</h3>}
-              <div className="unitgrid">
-                {units.map(([u, i]) => {
-                  const locked = !!u.opensAt && Date.parse(u.opensAt) > Date.now();
+          {currentChapters.length ? <div className="unitgrid">{currentChapters.map(({ name, chapter, units }, i) => {
+                  const locked = !!chapter.opensAt && Date.parse(chapter.opensAt) > Date.now();
+                  const state = chapterCompletion(course, name, progress);
                   return (
                     <button
                       className="unitcard"
-                      key={u.id}
+                      key={name}
                       disabled={locked}
-                      onClick={() => {
-                        route(`/unit/${encodeURIComponent(u.id)}?tab=pre`);
-                      }}
+                      onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=pre`)}
                     >
                       <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
                       <div>
-                        <span className={'badge ' + (complete(u, progress) ? 'green' : '')}>
-                          {complete(u, progress)
+                        <span className={'badge ' + (state.done ? 'green' : '')}>
+                          {state.done
                             ? '已達標'
                             : locked
                               ? '尚未開放'
-                              : u.required
+                              : chapter.required
                                 ? '必做單元'
                                 : '選修活動'}
                         </span>
-                        <h3>{u.title}</h3>
-                        <p>{u.description}</p>
+                        <h3>{chapter.title}</h3>
+                        <p>{chapter.description}</p>
                         <footer>
-                          {u.activities.length} 項活動 · 達標 {u.threshold} 分{' '}
+                          已達標分類 {units.filter((u) => !u.bankVersion || (progress.units[u.id]?.best ?? -1) >= chapter.threshold).length} / {units.length} · 活動 {state.completedActivities} / {chapter.activities.length}{' '}
                           <ChevronRight size={16} />
                         </footer>
                       </div>
                     </button>
                   );
-                })}
-              </div>
-            </div>
-          )) : null}
+                })}</div> : null}
           {!currentUnits.length && <section className="panel empty"><h2>老師尚未開放新的單元</h2></section>}
-          {!!archivedUnits.length && <details className="panel" open={archiveOpen} onToggle={(e) => setArchiveOpen((e.target as HTMLDetailsElement).open)}><summary>已考完的單元（{archivedUnits.length}）</summary>{groupUnits(archivedUnits).map(([group, units]) => <div className="unit-group" key={group || '__archived'}>{group && <h3 className="unit-group-title">{group}</h3>}<div className="unitgrid">{units.map(([u, i]) => <button className="unitcard" key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}?tab=pre`)}><span className="unitnumber">{String(i + 1).padStart(2, '0')}</span><div><span className={'badge ' + (complete(u, progress) ? 'green' : '')}>{complete(u, progress) ? '已完成' : '尚未完成'}</span><h3>{u.title}</h3><p>{u.archiveLabel || '其他'}</p></div></button>)}</div></div>)}</details>}
+          {!!archivedChapters.length && <details className="panel" open={archiveOpen} onToggle={(e) => setArchiveOpen((e.target as HTMLDetailsElement).open)}><summary>已考完的單元（{archivedChapters.length}）</summary><div className="unitgrid">{archivedChapters.map(({ name, chapter, units }, i) => { const state = chapterCompletion(course, name, progress); return <button className="unitcard" key={name} onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=pre`)}><span className="unitnumber">{String(i + 1).padStart(2, '0')}</span><div><span className={'badge ' + (state.done ? 'green' : '')}>{state.done ? '已完成' : '尚未完成'}</span><h3>{chapter.title}</h3><p>{units[0]?.archiveLabel || '其他'}</p></div></button>; })}</div></details>}
         </>
-      ) : (
+      ) : chapter ? (
         <>
           <button
             className="back"
@@ -362,35 +379,28 @@ export default function Student({
             <ArrowLeft size={16} />
             返回課程
           </button>
-          <div className="unit-meta">
-            <span>
-              最高有效成績：
-              {(progress.units[unit.id]?.best ?? -1) < 0
-                ? '尚無'
-                : progress.units[unit.id].best + ' 分'}
-            </span>
-            <span>達標門檻 {unit.threshold} 分</span>
-            {unit.dueAt && (
+          <div className="unit-meta"><span>已達標分類 {chapterUnits.filter((u) => !u.bankVersion || (progress.units[u.id]?.best ?? -1) >= chapter.threshold).length} / {chapterUnits.length}</span><span>達標門檻 {chapter.threshold} 分</span>
+            {chapter.dueAt && (
               <span>
-                期限 {new Date(unit.dueAt).toLocaleDateString()}
-                {Date.parse(unit.dueAt) < Date.now() ? ' · 已逾期，仍可練習' : ''}
+                期限 {new Date(chapter.dueAt).toLocaleDateString()}
+                {Date.parse(chapter.dueAt) < Date.now() ? ' · 已逾期，仍可練習' : ''}
               </span>
             )}
           </div>
           <div className="unit-tabs" role="tablist" aria-label="學習階段">
             {([['pre', '課前', 'before'], ['class', '課堂', 'during'], ['post', '課後', 'after'], ['practice', '練習', 'practice']] as const).map(([id, label, phase]) => {
-              const rows = phase === 'practice' ? [] : unit.activities.filter((a) => a.phase === phase);
+              const rows = phase === 'practice' ? [] : chapter.activities.filter((a) => a.phase === phase);
               const required = rows.filter((a) => isRequiredActivity(a));
-              const undone = required.filter((a) => !progress.activities[`${unit.id}_${a.id}`]?.completed).length;
+              const undone = required.filter((a) => !progress.activities[chapterActivityKey(selectedChapterName, a.id)]?.completed).length;
               return <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); route(`/unit/${encodeURIComponent(unit.id)}?tab=${id}`); }}>{label} <small>{id === 'practice' ? '練習' : undone ? `${undone} 待完成` : required.length ? '✓ 完成' : rows.length ? `${rows.length} 項` : '暫無'}</small></button>;
             })}
           </div>
           <section className="activitycards" role="tabpanel">
-            {tab === 'practice' ? <PracticeCards unit={unit} progress={progress} busy={busy} start={start} route={route} /> : unit.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} unit={unit} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
-            {tab !== 'practice' && !unit.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
+            {tab === 'practice' ? <>{chapterUnits.map((classification) => <div className="panel" key={classification.id}><h2>{classification.title}</h2><p className="muted">題目分類 · 最高成績 {progress.units[classification.id]?.best ?? 0} / 門檻 {chapter.threshold}</p><PracticeCards unit={classification} progress={progress} busy={busy} start={start} route={route} /></div>)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
+            {tab !== 'practice' && !chapter.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
           </section>
         </>
-      )}
+      ) : null}
       {historyOpen && (
         <div className="modalshade">
           <section className="modal wide">
@@ -441,28 +451,30 @@ function StudentSettings() {
 function phaseTab(phase: string) { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
 function tabPhase(tab: string) { return tab === 'pre' ? 'before' : tab === 'class' ? 'during' : 'after'; }
 function isRequiredActivity(a: any) { return (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link'; }
-export function defaultTab(unit: Unit, progress: Progress): 'pre' | 'class' | 'post' | 'practice' {
+export function defaultTab(unit: Pick<Unit | Chapter, 'activities'>, progress: Progress, ownerId = (unit as Unit).id || ''): 'pre' | 'class' | 'post' | 'practice' {
   const stages = [['before', 'pre'], ['during', 'class'], ['after', 'post']] as const;
-  const unfinished = stages.find(([phase]) => unit.activities.some((a) => a.phase === phase && isRequiredActivity(a) && !progress.activities[`${unit.id}_${a.id}`]?.completed));
+  const activityKey = (id: string) => ownerId.startsWith('chapter:') ? `${ownerId}_${id}` : `${ownerId}_${id}`;
+  const unfinished = stages.find(([phase]) => unit.activities.some((a) => a.phase === phase && isRequiredActivity(a) && !progress.activities[activityKey(a.id)]?.completed));
   if (unfinished) return unfinished[1];
   const populated = stages.find(([phase]) => unit.activities.some((a) => a.phase === phase));
   return populated ? populated[1] : 'practice';
 }
-function ActivityCard({ unit, activity, progress, onOpen }: { unit: Unit; activity: any; progress: Progress; onOpen: () => void }) {
-  const done = !!progress.activities[`${unit.id}_${activity.id}`]?.completed;
+function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: string; activity: any; progress: Progress; onOpen: () => void }) {
+  const done = !!progress.activities[`${ownerKey}_${activity.id}`]?.completed;
   const label = activity.type === 'youtube' ? '選看' : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
-  const state = activity.type === 'youtube' ? (progress.activities[`${unit.id}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
+  const state = activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
   return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${label}，${state}`}><span className="badge">{label}</span><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
-function PracticeCards({ unit, progress, busy, start, route }: { unit: Unit; progress: Progress; busy: boolean; start: (m: Mode, n?: number) => Promise<void>; route: (path: string) => void }) {
-  const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n); };
+function PracticeCards({ unit, progress, busy, start, route }: { unit: Unit; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
+  const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
   return <div className="practice-cards"><button className="activitycard" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}><span className="badge">計入成績</span><h3>完整測驗</h3><p>完整作答後取歷次最高有效成績。</p></button><button className="activitycard" disabled={busy} onClick={() => go('flashcard', '/flashcard')}><span className="badge">計入成績</span><h3>完整閃卡</h3><p>完整作答後取歷次最高有效成績。</p></button><div className="activitycard"><span className="badge">僅供練習</span><h3>隨機抽題</h3>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>抽 {n} 題</button>)}</div><button className="activitycard" disabled={!wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}><span className="badge">僅供複習</span><h3>錯題閃卡</h3><p>{wrong ? `${wrong} 題錯題` : '目前沒有錯題'}</p></button></div>;
 }
-function ReadingPage({ course, unit, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
+function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; chapterName: string; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
   const root = useRef<HTMLElement>(null); const [canFullscreen, setCanFullscreen] = useState(false);
   useEffect(() => setCanFullscreen(!!document.fullscreenEnabled && !!root.current?.requestFullscreen), []);
-  return <main className="reading-page" ref={root as any}><header><button aria-label="離開閱讀" onClick={onBack}><ArrowLeft size={18} /></button><strong>{activity.title}</strong>{canFullscreen && <button aria-label="全螢幕閱讀" onClick={() => root.current?.requestFullscreen()}>全螢幕</button>}</header><section className="reading-body">{activity.type === 'html' ? <HtmlMaterial activity={activity} onSave={onSave} api={api} courseId={course.id} unitId={unit.id} uid={uid} /> : activity.type === 'youtube' ? <Youtube activity={activity} position={progress.activities[`${unit.id}_${activity.id}`]?.position || 0} onSave={onSave} /> : <><h1>{activity.title}</h1><p>{activity.description}</p><a className="button primary" href={activity.url} target="_blank" rel="noreferrer" onClick={() => onSave(0, false)}>開啟連結 ↗</a><button onClick={() => onSave(0, true)}>確認已閱讀</button></>}</section></main>;
+  const key = chapterActivityKey(chapterName, activity.id);
+  return <main className="reading-page" ref={root as any}><header><button aria-label="離開閱讀" onClick={onBack}><ArrowLeft size={18} /></button><strong>{activity.title}</strong>{canFullscreen && <button aria-label="全螢幕閱讀" onClick={() => root.current?.requestFullscreen()}>全螢幕</button>}</header><section className="reading-body">{activity.type === 'html' ? <HtmlMaterial activity={activity} onSave={onSave} api={api} courseId={course.id} unitId={unit.id} chapterName={chapterName} uid={uid} /> : activity.type === 'youtube' ? <Youtube activity={activity} position={progress.activities[key]?.position || 0} onSave={onSave} /> : <><h1>{activity.title}</h1><p>{activity.description}</p><a className="button primary" href={activity.url} target="_blank" rel="noreferrer" onClick={() => onSave(0, false)}>開啟連結 ↗</a><button onClick={() => onSave(0, true)}>確認已閱讀</button></>}</section></main>;
 }
 function WrongCards({ api, course, unit, progress, onBack }: { api: API; course: Course; unit: Unit; progress: Progress; onBack: () => void }) {
   const [range, setRange] = useState<'24h' | '7d' | 'all'>('7d'), [qs, setQs] = useState<Question[]>([]), [i, setI] = useState(0), [flipped, setFlipped] = useState(false), [seen, setSeen] = useState(0);

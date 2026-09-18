@@ -117,3 +117,34 @@ test('以課程分頁同步時，表內舊課程代碼不可指向另一門課',
     assert.equal(ctx.data.get('courses/ap2').draft.units.length, 0, '不得留下跨課程的題庫或單元寫入');
   } finally { ctx.restore(); }
 });
+
+test('版本未變仍會補建 Chapter，之後的新單元會 append 到 chapterOrder', async () => {
+  const ctx = withMemoryDb();
+  try {
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
+    const first = [headers, ['ap2', 'q1', '血液', '紅血球', '題目一', '甲', '乙', 'A']];
+    ctx.data.set('courses/ap2', { teacherIds: ['teacher'], draft: { id: 'ap2', classIds: [], units: [] } });
+    const initial = await handlers.syncBankTabFromSheet(first, '題庫', 'teacher');
+    const saved = ctx.data.get('courses/ap2');
+    saved.draft.chapters = {};
+    saved.draft.chapterOrder = [];
+    ctx.data.set('courses/ap2', saved);
+    await handlers.syncBankTabFromSheet(first, '題庫', 'teacher');
+    assert.ok(ctx.data.get('courses/ap2').draft.chapters['血液'], '同版題庫仍須補建 Chapter');
+    const next = [headers, ['ap2', 'q1', '血液', '紅血球', '題目一', '甲', '乙', 'A'], ['ap2', 'q2', '心臟', '心音', '題目二', '甲', '乙', 'B']];
+    await handlers.syncBankTabFromSheet(next, '題庫', 'teacher');
+    assert.deepEqual(ctx.data.get('courses/ap2').draft.chapterOrder, ['血液', '心臟']);
+    assert.equal(initial[0].error, undefined);
+  } finally { ctx.restore(); }
+});
+
+test('同步把 Sheet 已移除的分類保存為 staleUnits，供教師 UI 確認清理', async () => {
+  const ctx = withMemoryDb();
+  try {
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
+    ctx.data.set('courses/ap2', { teacherIds: ['teacher'], draft: { id: 'ap2', classIds: [], units: [{ id: '舊分類', title: '舊分類', group: '舊單元', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'old', activities: [] }] } });
+    const result = await handlers.syncBankTabFromSheet([headers, ['ap2', 'q1', '血液', '紅血球', '題目', '甲', '乙', 'A']], '題庫', 'teacher');
+    assert.deepEqual(result[0].staleUnits, ['舊分類']);
+    assert.deepEqual(ctx.data.get('courses/ap2').draft.staleUnits, ['舊分類']);
+  } finally { ctx.restore(); }
+});

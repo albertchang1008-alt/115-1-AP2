@@ -111,7 +111,7 @@ export const sampleQuestions: Question[] = [
   },
 ];
 export function sampleCourse(): Course {
-  return {
+  const course: Course = {
     id: 'example-course',
     title: '課程平台・操作示例',
     description: '這份範例僅供操作介面，不是正式課程或學生資料。',
@@ -149,6 +149,11 @@ export function sampleCourse(): Course {
       },
     ],
   };
+  course.units[0].group = '平台導覽';
+  course.chapters = { 平台導覽: { title: '平台導覽', description: course.units[0].description, required: true, threshold: 80, opensAt: '', dueAt: '', activities: structuredClone(course.units[0].activities), research: { enabled: true } } };
+  course.chapterOrder = ['平台導覽'];
+  course.units[0].activities = [];
+  return course;
 }
 export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQuestions): API {
   let draft = structuredClone(initial),
@@ -235,7 +240,7 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           result = { progress };
           break;
         case 'saveActivity':
-          progress.activities[d.unitId + '_' + d.activityId] = {
+          progress.activities[(d.chapterName ? `chapter:${d.chapterName}` : d.unitId) + '_' + d.activityId] = {
             position: d.position,
             completed: d.completed,
             updatedAt: Date.now(),

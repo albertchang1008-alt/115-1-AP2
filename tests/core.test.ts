@@ -145,6 +145,10 @@ test('舊資料由第一個題目分類推導 Chapter，班級覆寫套用至所
   assert.equal(shown.units[0].threshold, 90); assert.equal(shown.units[1].threshold, 90);
   assert.equal(shown.units[0].required, false); assert.equal(shown.units[1].required, false);
 });
+test('教師修改 Chapter 開放時間後，該班每個題目分類都套用相同時間', () => {
+  const course: any = { units: [{ id: 'a', title: 'A', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }, { id: 'b', title: 'B', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }], chapters: { 血液: { title: '血液', description: '', required: true, threshold: 85, opensAt: '2026-10-01T08:00', dueAt: '', activities: [] } } };
+  assert.deepEqual(forClass(course, 'A').units.map((u) => u.opensAt), ['2026-10-01T08:00', '2026-10-01T08:00']);
+});
 test('hidden 與逐班未勾選皆不會進入學生課程', () => {
   const c: any = { classUnits: { a: ['shown', 'hidden'] }, units: [{ id: 'shown' }, { id: 'hidden', visibility: 'hidden' }, { id: 'other' }] };
   assert.deepEqual(forClass(c, 'a').units.map((u: any) => u.id), ['shown']);

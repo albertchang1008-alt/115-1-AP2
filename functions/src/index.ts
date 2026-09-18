@@ -74,7 +74,11 @@ function patchVisibility(unit: Unit, next: UnitVisibility, label: string, at: nu
 }
 function visibleProgress(progress: Progress, course: Course) {
   const ids = new Set(course.units.map((u) => u.id));
-  return { ...progress, units: Object.fromEntries(Object.entries(progress.units || {}).filter(([id]) => ids.has(id))), activities: Object.fromEntries(Object.entries(progress.activities || {}).filter(([key]) => ids.has(key.split('_')[0]))), attempted: Object.fromEntries(Object.entries(progress.attempted || {}).filter(([id]) => ids.has(id))) } as Progress;
+  const chapterPrefixes = new Set(course.units.map((u) => `chapter:${chapterName(u)}_`));
+  const activityVisible = (key: string) => key.startsWith('chapter:')
+    ? [...chapterPrefixes].some((prefix) => key.startsWith(prefix))
+    : ids.has(key.split('_')[0]);
+  return { ...progress, units: Object.fromEntries(Object.entries(progress.units || {}).filter(([id]) => ids.has(id))), activities: Object.fromEntries(Object.entries(progress.activities || {}).filter(([key]) => activityVisible(key))), attempted: Object.fromEntries(Object.entries(progress.attempted || {}).filter(([id]) => ids.has(id))) } as Progress;
 }
 // 測試帳號白名單：config/testStudents { emails: ["..."] }。清空即立刻失效。
 let testCache = { at: 0, emails: [] as string[] };
@@ -210,6 +214,36 @@ export const saveCourse = onCall(options, async (req) => {
       if (a.type === 'html' && a.url && !validMaterialUrl(a.url))
         fail('教材網址需使用有效 HTTPS 網址');
       if (a.type === 'link' && !/^https:\/\//.test(a.url)) fail('教材連結需使用 HTTPS');
+    }
+  }
+  if (course.chapters !== undefined && (!course.chapters || Array.isArray(course.chapters) || typeof course.chapters !== 'object')) fail('單元設定無效');
+  const chapters = chaptersOf(course);
+  for (const [name, chapter] of Object.entries(chapters)) {
+    if (!name.trim() || !chapter.title?.trim() || !Number.isFinite(chapter.threshold) || chapter.threshold < 0 || chapter.threshold > 100 || !Array.isArray(chapter.activities) || chapter.activities.length > 30) fail('單元設定無效');
+    if (chapter.research && typeof chapter.research.enabled !== 'boolean') fail('研究資料設定無效');
+    const activityIds = new Set<string>();
+    for (const a of chapter.activities) {
+      id(a.id);
+      if (activityIds.has(a.id)) fail('活動 ID 重複');
+      activityIds.add(a.id);
+      if (!a.title?.trim() || !['before', 'during', 'after'].includes(a.phase) || !['html', 'youtube', 'link', 'quiz'].includes(a.type)) fail('活動類型錯誤');
+      if (a.type === 'youtube' && (!youtubeId(a.url) || !Number.isFinite(a.start || 0) || (a.start || 0) < 0 || (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))) fail('YouTube 連結或片段時間無效');
+      if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
+      if (a.materialVersion) id(a.materialVersion);
+      for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
+      if (a.type === 'html' && a.url && !validMaterialUrl(a.url)) fail('教材網址需使用有效 HTTPS 網址');
+      if (a.type === 'link' && !/^https:\/\//.test(a.url)) fail('教材連結需使用 HTTPS');
+    }
+  }
+  if (course.chapterOrder !== undefined && (!Array.isArray(course.chapterOrder) || course.chapterOrder.some((name) => typeof name !== 'string' || !chapters[name]) || new Set(course.chapterOrder).size !== course.chapterOrder.length)) fail('單元順序設定無效');
+  for (const [cl, overrides] of Object.entries(course.chapterOverrides || {})) {
+    if (!course.classIds.includes(cl) || !overrides || Array.isArray(overrides) || typeof overrides !== 'object') fail('班級單元設定無效');
+    for (const [name, settings] of Object.entries(overrides)) {
+      if (!chapters[name] || !settings || Array.isArray(settings) || Object.keys(settings).some((k) => !['threshold', 'required', 'opensAt', 'dueAt'].includes(k))) fail('班級單元設定無效');
+      if (settings.threshold !== undefined && (!Number.isFinite(settings.threshold) || settings.threshold < 0 || settings.threshold > 100)) fail('班級達標門檻無效');
+      if (settings.required !== undefined && typeof settings.required !== 'boolean') fail('班級必做設定無效');
+      if (settings.opensAt !== undefined && typeof settings.opensAt !== 'string') fail('班級開放時間無效');
+      if (settings.dueAt !== undefined && typeof settings.dueAt !== 'string') fail('班級期限無效');
     }
   }
   for (const cl of Object.keys(course.classOverrides || {})) {
@@ -701,8 +735,9 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
   const rows: any[] = snap.docs.map((d) => ({ ...d.data(), id: d.id })).filter((r: any) => r.unitId === unitId);
   const attempts = await db.collection(`courses/${req.data.courseId}/attempts`).where('classId', '==', classId).limit(2000).get();
   const diagnostics = await db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', classId).limit(500).get();
+  const researchChapter = chapterName((c.published as Course).units.find((u) => u.id === unitId) || ({ id: unitId, title: unitId } as Unit));
   const htmlByStudent = new Map<string, any[]>();
-  diagnostics.docs.forEach((d) => { const x = d.data(); if (x.unitId === unitId) (htmlByStudent.get(x.uid) || (htmlByStudent.set(x.uid, []), htmlByStudent.get(x.uid)!)).push(x); });
+  diagnostics.docs.forEach((d) => { const x = d.data(); if (x.unitId === unitId || x.chapterName === researchChapter) (htmlByStudent.get(x.uid) || (htmlByStudent.set(x.uid, []), htmlByStudent.get(x.uid)!)).push(x); });
   const byStudent = new Map<string, any[]>();
   attempts.docs.forEach((d) => { const a = d.data(); if (a.unitId === unitId && a.version === rows.find((r: any) => r.uid === a.uid)?.version) (byStudent.get(a.uid) || (byStudent.set(a.uid, []), byStudent.get(a.uid)!)).push(a); });
   return { rows: rows.map((r: any) => {
@@ -1060,8 +1095,8 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any, title
 // 但單元本身純粹是內容分組，跟著 Sheet 走比較符合「Sheet 是主要編輯來源」的設計。
 // 新單元不會自動加進任何既有班級的 classUnits（跟手動建立單元時的行為一致），
 // 老師仍要到班級名冊勾選才會對學生開放。
-function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion: string): Unit {
-  return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, activities: [], visibility: 'hidden', ...(group ? { group } : {}) };
+function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion: string, questionCount = 0): Unit {
+  return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, questionCount, activities: [], visibility: 'hidden', ...(group ? { group } : {}) };
 }
 // 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
 export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string, expectedCourseId?: string) {
@@ -1091,10 +1126,9 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
           if (!current.data()?.teacherIds?.includes(uid)) fail('課程權限已變更');
           const existing = draft.units.find((u) => u.id === unitId);
           created = !existing;
-          if (existing && existing.bankVersion === result.version && (!group || existing.group === group)) return; // 沒有變動，不寫入
           const nextUnit = existing
-            ? { ...existing, bankVersion: result.version, ...(group ? { group } : {}) }
-            : newUnitFromSheet(unitId, group, result.version);
+            ? { ...existing, bankVersion: result.version, questionCount: result.count, ...(group ? { group } : {}) }
+            : newUnitFromSheet(unitId, group, result.version, result.count);
           const chapterKey = group || unitId;
           const chapters = draft.chapters || {};
           // Sheet 第一次帶來某個單元時，同步建立最小 Chapter；既有教師設定絕不覆蓋。
@@ -1102,11 +1136,16 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
             ...chapters,
             [chapterKey]: { title: chapterKey, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] },
           };
+          const chapterOrder = [...(draft.chapterOrder || Object.keys(chapters))];
+          if (!chapterOrder.includes(chapterKey)) chapterOrder.push(chapterKey);
+          const unitChanged = !existing || existing.bankVersion !== result.version || existing.questionCount !== result.count || (!!group && existing.group !== group);
+          const chapterChanged = !chapters[chapterKey] || !draft.chapterOrder?.includes(chapterKey);
+          if (!unitChanged && !chapterChanged) return;
           tx.update(ref, {
             draft: {
               ...draft,
               chapters: nextChapters,
-              chapterOrder: draft.chapterOrder?.length ? draft.chapterOrder : Object.keys(nextChapters),
+              chapterOrder,
               units: existing ? draft.units.map((u) => (u.id === unitId ? nextUnit : u)) : [...draft.units, nextUnit],
             },
           });
@@ -1117,10 +1156,15 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
   }
   // 不自動刪除資料：只回報 Sheet 已不再對應的題目分類，讓教師在後台確認後清理。
   for (const courseId of groups.keys()) {
-    const draft = (await db.doc(`courses/${courseId}`).get()).data()?.draft as Course | undefined;
+    const courseRef = db.doc(`courses/${courseId}`);
+    const draft = (await courseRef.get()).data()?.draft as Course | undefined;
     const sheetUnitIds = new Set(groups.get(courseId)?.keys() || []);
     const staleUnits = (draft?.units || []).filter((u) => !sheetUnitIds.has(u.id)).map((u) => u.id);
     if (staleUnits.length) results.forEach((result) => { if (result.courseId === courseId) result.staleUnits = staleUnits; });
+    if (draft) await db.runTransaction(async (tx) => {
+      const current = await tx.get(courseRef), currentDraft = current.data()?.draft as Course;
+      tx.update(courseRef, { draft: { ...currentDraft, staleUnits } });
+    });
   }
   return results;
 }
@@ -1224,15 +1268,20 @@ export const saveLearningEvents = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   if (p.teacher) fail('教師預覽不寫入正式診斷');
   const unitId = code(req.data.unitId), activityId = id(req.data.activityId);
-  const unit = forClass(c.published, p.classId).units.find((u) => u.id === unitId);
-  const activity = unit?.activities.find((a) => a.id === activityId);
-  if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || Date.parse(unit!.opensAt) > Date.now()) fail('互動教材未開放');
+  const studentCourse = forClass(c.published, p.classId);
+  const unit = studentCourse.units.find((u) => u.id === unitId);
+  const requestedChapter = typeof req.data.chapterName === 'string' ? req.data.chapterName : '';
+  const chapter = requestedChapter ? chaptersOf(studentCourse)[requestedChapter] : undefined;
+  const activity = (chapter?.activities || unit?.activities || []).find((a) => a.id === activityId);
+  const opensAt = chapter?.opensAt || unit?.opensAt || '';
+  if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || Date.parse(opensAt) > Date.now()) fail('互動教材未開放');
   const version = id(req.data.materialVersion);
   if (version !== (activity.materialVersion || 'v1')) fail('教材版本已更新，請重新開啟教材');
   const events = req.data.events as LearningEvent[];
   if (!Array.isArray(events) || !events.length || events.length > 30 || new Set(events.map((e) => e.id)).size !== events.length) fail('事件批次無效');
   size(events, 20000);
-  const ref = db.doc(`courses/${req.data.courseId}/diagnostics/${p.uid}_${unitId}_${activityId}_${version}`);
+  const owner = chapter ? `chapter-${encodeURIComponent(requestedChapter)}` : unitId;
+  const ref = db.doc(`courses/${req.data.courseId}/diagnostics/${p.uid}_${owner}_${activityId}_${version}`);
   const eventRefs = events.map((e) => ref.collection('events').doc(id(e.id)));
   const progressRef = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
   return db.runTransaction(async (tx) => {
@@ -1241,9 +1290,9 @@ export const saveLearningEvents = onCall(options, async (req) => {
     const fresh = events.filter((_, i) => !stored[i].exists);
     const summary = reduceLearning(current.data()?.summary || emptyLearning(), fresh);
     if (fresh.length) {
-      tx.set(ref, { uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId, activityId, materialVersion: version, nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1, summary, updatedAt: Date.now() });
+      tx.set(ref, { uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId, ...(chapter ? { chapterName: requestedChapter } : {}), activityId, materialVersion: version, nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1, summary, updatedAt: Date.now() });
       events.forEach((e, i) => { if (!stored[i].exists) tx.create(eventRefs[i], { ...e, receivedAt: Date.now() }); });
-      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activities: { [`${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
+      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
     }
     return { accepted: events.map((e) => e.id), summary };
   });

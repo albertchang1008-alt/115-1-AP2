@@ -48,6 +48,44 @@ test('教師偏好列不作為 app grid 的子節點', async () => {
   assert.match(source, /<div className="app">\s*<aside/);
   assert.match(css, /\.prefs-bar \{ position: fixed/);
 });
+test('教師課程編輯器以 Chapter 編輯並提供題目分類唯讀與舊資料清理', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const editor = source.slice(source.indexOf('function CourseEditor('), source.indexOf('function Bank('));
+  assert.match(editor, /orderedChapters\(draft\)/, '左側只依 Chapter 排列');
+  assert.match(editor, /chapterOrder: order/, '上下移要寫入 chapterOrder');
+  assert.match(editor, /ChapterOverrides/, '各班覆寫寫入 chapterOverrides');
+  assert.match(editor, /changeChapter\(\{ activities:/, '活動寫入 Chapter');
+  assert.match(editor, /題目分類（來自 Sheet 次單元）/);
+  assert.match(editor, /以下活動掛在舊的題目分類上，請搬到單元/);
+  assert.match(editor, /Sheet 已無對應的舊題目分類/);
+  assert.match(editor, /全部移除/);
+});
+test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  assert.match(source, /currentChapters = orderedChapters\(course\)/);
+  assert.match(source, /chapterCompletion\(course, name, progress\)/);
+  assert.match(source, /已達標分類/);
+  assert.match(source, /chapter\.activities\.filter/);
+  assert.match(source, /chapterUnits\.map\(\(classification\)/);
+  assert.match(source, /題目分類 · 最高成績/);
+  assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
+  assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
+});
+test('教師總覽的單元、必做、活動與達標門檻讀取 Chapter', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const overview = source.slice(source.indexOf('function Overview('), source.indexOf('function Metric('));
+  assert.match(overview, /const chapters = orderedChapters\(course\)/);
+  assert.match(overview, /chapter\.activities\.length/);
+  assert.match(overview, /chapter\.threshold/);
+  assert.doesNotMatch(overview, /course\.units\.reduce\(\(n, u\) => n \+ u\.activities/);
+});
+test('Chapter 互動教材把 chapterName 傳到 LearningBridge 與後端', async () => {
+  const [player, bridge] = await Promise.all([readFile(new URL('../src/Player.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/LearningBridge.ts', import.meta.url), 'utf8')]);
+  assert.match(player, /chapterName\?: string/);
+  assert.match(player, /learningBridge\(api, \{ courseId, unitId, \.\.\.\(chapterName/);
+  assert.match(bridge, /chapterName\?: string/);
+  assert.match(bridge, /chapterName \? `chapter:/);
+});
 test('學習進度看板只可整組移動同一單元的題目分類', async () => {
   const source = await readFile(new URL('../src/ProgressBoard.tsx', import.meta.url), 'utf8');
   assert.match(source, /整個單元移到/);

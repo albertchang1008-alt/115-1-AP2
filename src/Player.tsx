@@ -95,9 +95,9 @@ export function Youtube({
 export function HtmlMaterial({
   activity,
   onSave,
-  api, courseId, unitId, uid,
+  api, courseId, unitId, chapterName, uid,
 }: {
-  api: API; courseId: string; unitId: string; uid: string;
+  api: API; courseId: string; unitId: string; chapterName?: string; uid: string;
   activity: Activity;
   onSave: (position: number, completed: boolean) => void;
 }) {
@@ -108,7 +108,7 @@ export function HtmlMaterial({
   const init = () => frame.current?.contentWindow?.postMessage({ type: 'init', protocolVersion: 1, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', sessionId: session.current }, '*');
   useEffect(() => {
     if (!interactive) return;
-    const bridge = learningBridge(api, { courseId, unitId, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', uid }, setStatus, () => onSave(1, true));
+    const bridge = learningBridge(api, { courseId, unitId, ...(chapterName ? { chapterName } : {}), activityId: activity.id, materialVersion: activity.materialVersion || 'v1', uid }, setStatus, () => onSave(1, true));
     const handler = async (event: MessageEvent) => {
       if (event.source !== frame.current?.contentWindow || !event.data) return;
       const d = event.data;
@@ -122,7 +122,7 @@ export function HtmlMaterial({
     };
     window.addEventListener('message', handler);
     return () => { bridge.close(); window.removeEventListener('message', handler); };
-  }, [api, courseId, unitId, activity.id, activity.url, activity.materialVersion, interactive, uid]);
+  }, [api, courseId, unitId, chapterName, activity.id, activity.url, activity.materialVersion, interactive, uid]);
   const url = materialUrl(activity.url);
   const error = url ? '' : '教師尚未提供有效的 HTTPS 教材網址';
   const save = useRef(onSave);

@@ -1,8 +1,8 @@
 import { API } from './service';
 import { LearningEvent, validEvent } from '../shared/learning';
 // One authenticated student's pending events; no identity is passed into the iframe.
-export function learningBridge(api: API, context: { courseId: string; unitId: string; activityId: string; materialVersion: string; uid: string }, changed: (message: string) => void, completed: () => void) {
-  const key = `learning-v1:${context.uid}:${context.courseId}:${context.unitId}:${context.activityId}:${context.materialVersion}`;
+export function learningBridge(api: API, context: { courseId: string; unitId: string; chapterName?: string; activityId: string; materialVersion: string; uid: string }, changed: (message: string) => void, completed: () => void) {
+  const key = `learning-v1:${context.uid}:${context.courseId}:${context.chapterName ? `chapter:${context.chapterName}` : context.unitId}:${context.activityId}:${context.materialVersion}`;
   let queue: LearningEvent[] = [], sending = false, active = true, errorShown = false;
   const showStorageError = () => {
     if (!errorShown && active) changed('學習紀錄暫時無法儲存');

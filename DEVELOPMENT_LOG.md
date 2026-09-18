@@ -8,6 +8,9 @@
 - 完成度公式升為 v3：每個必做 Chapter 的所有已發布題目分類須達標，且其必做活動完成，才計一個完成單元；v1/v2 結算快照仍沿用舊公式。
 - 題庫同步為新 Sheet 單元建立預設 Chapter，並回傳 `staleUnits` 供教師確認清理；班級對照表與學習進度看板以單元整組展開／移動。
 - 綜合練習在 Functions 端強制只接受 `visibility: current` 且已開放的分類；hidden、archived 或未開放任一 attempt 都會在寫入前拒絕整批。
+- Claude 首次驗收退回的 9 項已補齊：教師課程編輯器與總覽、學生首頁／單元頁、班級覆寫、Chapter 活動進度／互動教材事件，均改以 Chapter 為單元層。教師預覽的 Chapter 卡也可在不改寫正式 hash 路由的情況下開啟內容頁。
+- `saveCourse` 新增 Chapter、順序與班級覆寫驗證；`visibleProgress`、`saveLearningEvents` 與教師診斷／研究查詢保留並識別 Chapter 活動鍵。
+- 題庫同步即使版本未變也會補齊 Chapter，新單元追加至 `chapterOrder`，並在草稿保存 `staleUnits`；課程與教材頁提供黃色舊分類提示、全部移除與舊活動搬移操作。
 
 ## 1.3.1 — 教師後台單元結構重整（2026-09-18）
 

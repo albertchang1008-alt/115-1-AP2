@@ -31,6 +31,17 @@ test('綜合練習在伺服器端拒絕 hidden、archived 與尚未開放的題�
   assert.match(mixed, /Date\.parse\(unit\.opensAt\) > Date\.now\(\)/, '尚未開放的分類不可提交');
   assert.match(mixed, /return db\.runTransaction/, '驗證失敗前不應寫入部分 mixed attempts');
 });
+test('Chapter 進度、互動教材與課程驗證都有伺服器端防線', () => {
+  const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
+  assert.match(source, /chapterPrefixes/, 'visibleProgress 要保留學生可見 Chapter 活動鍵');
+  assert.match(source, /requestedChapter/, '互動教材事件要接受 chapterName');
+  assert.match(source, /chapterActivityKey/, '互動教材通關要寫 chapter 活動鍵');
+  const save = source.slice(source.indexOf('exports.saveCourse = (0'), source.indexOf('exports.publishCourse = (0'));
+  assert.match(save, /chapterOrder/);
+  assert.match(save, /chapterOverrides/);
+  assert.match(save, /chapter\.activities/);
+  assert.match(save, /單元順序設定無效/);
+});
 test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量拒絕', async () => {
   const db = getFirestore();
   const originals = { doc: db.doc, batch: db.batch, runTransaction: db.runTransaction };

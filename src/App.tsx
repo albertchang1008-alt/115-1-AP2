@@ -38,6 +38,7 @@ import {
   Course,
   Unit,
   Activity,
+  Chapter,
   Profile,
   Question,
   Report,
@@ -53,6 +54,9 @@ import {
   safeCode,
   unitTree,
   isTabFallbackUnit,
+  chaptersOf,
+  orderedChapters,
+  chapterName,
 } from '../shared/model';
 import {
   API,
@@ -205,6 +209,16 @@ function ClassOverrides({
       </button>
     </details>
   );
+}
+function ChapterOverrides({ course, name, chapter, onChange }: { course: Course; name: string; chapter: Chapter; onChange: (v: Course['chapterOverrides']) => void }) {
+  const [cl, setCl] = useState(course.classIds[0] || '');
+  const value = course.chapterOverrides?.[cl]?.[name] || {};
+  const change = (patch: any) => onChange({ ...course.chapterOverrides, [cl]: { ...course.chapterOverrides?.[cl], [name]: { ...value, ...patch } } });
+  return <details><summary>各班級的門檻與開放安排</summary><p className="muted">未設定時沿用單元共用值，教材內容保持共用。</p>
+    <Field label="設定班級"><select value={cl} onChange={(e) => setCl(e.target.value)}>{course.classIds.map((id) => <option key={id} value={id}>{course.classNames?.[id] || id}</option>)}</select></Field>
+    {cl && <div className="formgrid"><Field label="此班達標分數"><input type="number" min="0" max="100" value={value.threshold ?? chapter.threshold} onChange={(e) => change({ threshold: Number(e.target.value) })} /></Field><Field label="此班開放時間"><input type="datetime-local" value={value.opensAt ?? chapter.opensAt} onChange={(e) => change({ opensAt: e.target.value })} /></Field><Field label="此班完成期限"><input type="datetime-local" value={value.dueAt ?? chapter.dueAt} onChange={(e) => change({ dueAt: e.target.value })} /></Field><label className="check"><input type="checkbox" checked={value.required ?? chapter.required} onChange={(e) => change({ required: e.target.checked })} />此班列為必做</label></div>}
+    <button disabled={!cl} onClick={() => { const next = structuredClone(course.chapterOverrides || {}); if (next[cl]) delete next[cl][name]; onChange(next); }}>恢復共用設定</button>
+  </details>;
 }
 function Empty({ title, detail }: { title: string; detail: string }) {
   return (
@@ -735,6 +749,7 @@ function Overview({
     .filter((s) => s.students > 0)
     .sort((a, b) => b.wrong / b.students - a.wrong / a.students)
     .slice(0, 3);
+  const chapters = orderedChapters(course);
   return (
     <>
       <header className="pageheading">
@@ -749,15 +764,15 @@ function Overview({
         </button>
       </header>
       <div className="metricgrid">
-        <Metric title="課程單元" value={course.units.length} note="依課前・課中・課後安排" />
+        <Metric title="課程單元" value={chapters.length} note="依課前・課中・課後安排" />
         <Metric
           title="必做單元"
-          value={course.units.filter((u) => u.required).length}
+          value={chapters.filter(({ chapter }) => chapter.required).length}
           note="供平常分數完成度採計"
         />
         <Metric
           title="學習活動"
-          value={course.units.reduce((n, u) => n + u.activities.length, 0)}
+          value={chapters.reduce((n, row) => n + row.chapter.activities.length, 0)}
           note="教材參與獨立記錄"
         />
         <Metric title="授課班級" value={course.classIds.length} note="名冊限制與班級權限" />
@@ -773,18 +788,18 @@ function Overview({
               管理課程 ↗
             </button>
           </div>
-          {course.units.map((u, i) => (
-            <div className="timeline" key={u.id}>
+          {chapters.map(({ name, chapter, units }, i) => (
+            <div className="timeline" key={name}>
               <span className="timeline-no">{String(i + 1).padStart(2, '0')}</span>
               <div>
-                <h3>{u.title}</h3>
+                <h3>{chapter.title}</h3>
                 <p>
-                  {u.activities.length} 項活動 · 達標 {u.threshold} 分
-                  {u.dueAt ? ' · ' + new Date(u.dueAt).toLocaleDateString() : ''}
+                  {chapter.activities.length} 項活動 · {units.length} 個分類 · 達標 {chapter.threshold} 分
+                  {chapter.dueAt ? ' · ' + new Date(chapter.dueAt).toLocaleDateString() : ''}
                 </p>
               </div>
-              <span className={'badge ' + (u.bankVersion ? 'green' : '')}>
-                {u.bankVersion ? '題庫已連接' : '待設定題庫'}
+              <span className={'badge ' + (units.every((u) => u.bankVersion) ? 'green' : '')}>
+                {units.every((u) => u.bankVersion) ? '題庫已連接' : '待設定題庫'}
               </span>
             </div>
           ))}
@@ -847,7 +862,7 @@ function unitWarning(course: Course, unit: Unit) {
   if (unit.title !== unit.id) return `後台顯示名稱「${unit.title}」和 Sheet 裡的次單元「${unit.id}」不一致，容易對不上。`;
   return '';
 }
-function CourseEditor({
+function LegacyCourseEditor({
   course,
   api,
   save,
@@ -1270,6 +1285,42 @@ function CourseEditor({
       </div>
     </>
   );
+}
+function CourseEditor(props: Parameters<typeof LegacyCourseEditor>[0]) {
+  const { course, api, save, preview, notify, newCourse, deleteCourse, deleting, onDirty, onPublished, copyCourse, archiveCourse } = props;
+  const [draft, setDraft] = useState<Course>(structuredClone(course || makeCourse()));
+  const [selected, setSelected] = useState('');
+  const [busy, setBusy] = useState(false);
+  useEffect(() => { const next = structuredClone(course || makeCourse()); setDraft(next); setSelected(orderedChapters(next)[0]?.name || ''); }, [course?.id]);
+  const isDirty = !!course && JSON.stringify(draft) !== JSON.stringify(course);
+  useEffect(() => { onDirty(isDirty); return () => onDirty(false); }, [isDirty]);
+  const rows = orderedChapters(draft), row = rows.find((item) => item.name === selected) || rows[0];
+  const name = row?.name || '', chapter = row?.chapter, units = row?.units || [];
+  const materialize = (source = draft) => source.chapters ? source : { ...source, chapters: chaptersOf(source), chapterOrder: orderedChapters(source).map((item) => item.name) };
+  const changeChapter = (patch: Partial<Chapter>) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
+  const changeActivity = (index: number, patch: Partial<Activity>) => changeChapter({ activities: chapter!.activities.map((a, i) => i === index ? { ...a, ...patch } : a) });
+  const act = async (publish = false) => { setBusy(true); try { const ready = materialize(); await save(ready); if (publish) { const result = await api.call<Course>('publishCourse', { courseId: ready.id }); setDraft(result); onPublished(result); } notify(publish ? '課程已發布' : '草稿已保存'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
+  const move = (offset: number) => { const order = rows.map((item) => item.name), at = order.indexOf(name), to = at + offset; if (to < 0 || to >= order.length) return; [order[at], order[to]] = [order[to], order[at]]; setDraft({ ...materialize(), chapterOrder: order }); };
+  const removeStale = () => { const stale = draft.staleUnits || []; if (!stale.length || !confirm(`確定移除以下舊題目分類？\n${stale.join('\n')}`)) return; const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => !stale.includes(id))])); setDraft({ ...draft, units: draft.units.filter((u) => !stale.includes(u.id)), classUnits, staleUnits: [] }); };
+  const moveLegacyActivity = (unitId: string, activity: Activity) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], activities: [...chaptersOf(base)[name].activities, activity] } }, units: base.units.map((u) => u.id === unitId ? { ...u, activities: u.activities.filter((a) => a.id !== activity.id) } : u) }); };
+  if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再同步 Google Sheet 建立單元。" /><button onClick={newCourse}>新增課程</button></section>;
+  return <>
+    <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · Chapter 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy} onClick={() => act(true)}>發布課程</button></div></header>
+    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
+    <ClassManager course={draft} change={setDraft} />
+    {!!draft.staleUnits?.length && <div className="notice warning"><strong>Sheet 已無對應的舊題目分類</strong><p>{draft.staleUnits.join('、')}</p><button onClick={removeStale}>全部移除</button></div>}
+    <div className="editorgrid"><aside className="panel unitmenu"><div className="sectionhead"><h3>單元安排</h3></div>{rows.map(({ name: key, chapter: item, units: children }) => <button key={key} className={'unit-leaf top' + (name === key ? ' selected' : '')} onClick={() => setSelected(key)}><strong>{item.title}</strong><span className="muted">{children.length} 個分類、{children.reduce((n, u) => n + (u.questionCount || 0), 0)} 題</span></button>)}</aside>
+      {!chapter ? <Empty title="尚未有單元" detail="請先到題庫管理同步 Google Sheet。" /> : <section className="panel"><div className="sectionhead"><h2>單元設定</h2><button onClick={() => preview(materialize(), true, units[0]?.id)}>預覽單元</button></div>
+        {units.some((u) => u.activities.length) && <div className="notice warning"><strong>以下活動掛在舊的題目分類上，請搬到單元</strong>{units.flatMap((u) => u.activities.map((a) => <div className="sectionhead" key={`${u.id}_${a.id}`}><span>{u.title}／{a.title}</span><button onClick={() => moveLegacyActivity(u.id, a)}>搬到此單元</button></div>))}</div>}
+        <div className="formgrid"><Field label="單元名稱"><input value={chapter.title} onChange={(e) => changeChapter({ title: e.target.value })} /></Field><Field label="達標分數"><input type="number" min="0" max="100" value={chapter.threshold} onChange={(e) => changeChapter({ threshold: Number(e.target.value) })} /></Field><Field label="開放時間"><input type="datetime-local" value={chapter.opensAt} onChange={(e) => changeChapter({ opensAt: e.target.value })} /></Field><Field label="完成期限"><input type="datetime-local" value={chapter.dueAt} onChange={(e) => changeChapter({ dueAt: e.target.value })} /></Field></div>
+        <Field label="單元說明"><textarea value={chapter.description} onChange={(e) => changeChapter({ description: e.target.value })} /></Field><label className="check"><input type="checkbox" checked={chapter.required} onChange={(e) => changeChapter({ required: e.target.checked })} />列為平常分數的必做單元</label><label className="check"><input type="checkbox" checked={chapter.research?.enabled !== false} onChange={(e) => changeChapter({ research: { enabled: e.target.checked } })} />蒐集解析研究資料</label>
+        <div className="actions"><button disabled={rows[0]?.name === name} onClick={() => move(-1)}>上移</button><button disabled={rows.at(-1)?.name === name} onClick={() => move(1)}>下移</button></div><ChapterOverrides course={draft} name={name} chapter={chapter} onChange={(chapterOverrides) => setDraft({ ...draft, chapterOverrides })} />
+        <hr /><div className="sectionhead"><h2>學習活動</h2><button onClick={() => changeChapter({ activities: [...chapter.activities, { id: uid(), title: '新活動', type: 'youtube', phase: 'before', url: '', description: '' }] })}><Plus size={16} />新增活動</button></div>
+        {chapter.activities.map((a, index) => <details className="activityeditor" key={a.id} open><summary>{phases[a.phase]} · {a.title}</summary><div className="formgrid"><Field label="活動名稱"><input value={a.title} onChange={(e) => changeActivity(index, { title: e.target.value })} /></Field><Field label="階段"><select value={a.phase} onChange={(e) => changeActivity(index, { phase: e.target.value as any })}>{Object.entries(phases).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></Field><Field label="類型"><select value={a.type} onChange={(e) => changeActivity(index, { type: e.target.value as any })}>{['html','youtube','link','quiz'].map((type) => <option key={type}>{type}</option>)}</select></Field><Field label="網址"><input value={a.url} onChange={(e) => changeActivity(index, { url: e.target.value })} /></Field><Field label="說明"><input value={a.description} onChange={(e) => changeActivity(index, { description: e.target.value })} /></Field>{a.type === 'html' && <><Field label="教材紀錄方式"><select value={a.tracking || 'reading'} onChange={(e) => changeActivity(index, { tracking: e.target.value as any })}><option value="reading">一般閱讀</option><option value="interactive">闖關與學習診斷</option></select></Field><Field label="教材版本"><input value={a.materialVersion || ''} onChange={(e) => changeActivity(index, { materialVersion: e.target.value })} /></Field></>}</div><div className="actions"><button onClick={() => preview(materialize(), true, units[0]?.id, a.id)}>預覽活動</button><button onClick={() => changeChapter({ activities: chapter.activities.filter((x) => x.id !== a.id) })}>從草稿移除</button></div></details>)}
+        <hr /><h2>題目分類（來自 Sheet 次單元）</h2><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}
+      </section>}
+    </div>
+  </>;
 }
 function Bank({
   course,
