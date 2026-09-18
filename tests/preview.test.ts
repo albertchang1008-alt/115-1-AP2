@@ -97,10 +97,40 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /chapterCompletion\(course, name, progress\)/);
   assert.match(source, /已達標分類/);
   assert.match(source, /chapter\.activities\.filter/);
-  assert.match(source, /chapterUnits\.map\(\(classification\)/);
-  assert.match(source, /題目分類 · 最高成績/);
+  assert.match(source, /chapterUnits\.map\(\(classification\) => <PracticeRow/);
+  assert.match(source, /最高分 \{best\} \/ 門檻 \{threshold\}/);
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
+});
+test('練習分頁每個題目分類是一列並保留四種入口', async () => {
+  const [source, css] = await Promise.all([
+    readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../src/style.css', import.meta.url), 'utf8'),
+  ]);
+  const row = source.slice(source.indexOf('function PracticeRow('), source.indexOf('function ReadingPage('));
+  assert.match(source, /className=\{tab === 'practice' \? 'practice-list' : 'activitycards'\}/);
+  assert.equal((source.match(/完整測驗與完整閃卡計入最高成績/g) || []).length, 1);
+  assert.match(row, /className="practice-row"/);
+  assert.match(row, />完整測驗<\/button>/);
+  assert.match(row, />完整閃卡<\/button>/);
+  assert.match(row, /\[10, 20, 30\]\.map/);
+  assert.match(row, /`\/quiz\?mode=draw&n=\$\{n\}`/);
+  assert.match(row, /wrongcards\?range=7d/);
+  assert.match(row, /disabled=\{busy \|\| !wrong\}/);
+  assert.match(row, /badge green/);
+  assert.doesNotMatch(source, /function PracticeCards/);
+  assert.match(css, /\.practice-row \{ display:grid/);
+});
+test('教師單元與班級對照表使用精確中文文案', async () => {
+  const [app, setup] = await Promise.all([
+    readFile(new URL('../src/App.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../src/CourseSetup.tsx', import.meta.url), 'utf8'),
+  ]);
+  const editor = app.slice(app.indexOf('function CourseEditor('), app.indexOf('function Bank('));
+  assert.match(editor, /\u00b7 單元設定/);
+  assert.doesNotMatch(editor, /Chapter 單元設定/);
+  assert.match(setup, /全部（\{allIds\.length\} 個分類）/);
+  assert.doesNotMatch(setup, /全部（\{allIds\.length\} 節）/);
 });
 test('教師總覽的單元、必做、活動與達標門檻讀取 Chapter', async () => {
   const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');

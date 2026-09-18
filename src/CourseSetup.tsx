@@ -60,7 +60,7 @@ export function ClassManager({ course, change }: { course: Course; change: (c: C
         <div className="class-head"><strong>{course.classNames?.[cl] || cl}</strong>{course.classNames?.[cl] && course.classNames[cl] !== cl && <span className="muted">{cl}</span>}</div>
         <div className="class-head-actions"><button type="button" onClick={() => renameClass(cl)}>改名</button><button type="button" onClick={() => removeClass(cl)}>移除</button></div>
       </th>)}</tr>
-      <tr className="matrix-all"><th scope="row">全部（{allIds.length} 節）</th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, allIds)} label={`${cl} 全部`} onChange={(on) => setMany(cl, allIds, on)} /> <span className="muted">{selectedOf(cl).filter((id) => allIds.includes(id)).length}</span></td>)}</tr></thead>
+      <tr className="matrix-all"><th scope="row">全部（{allIds.length} 個分類）</th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, allIds)} label={`${cl} 全部`} onChange={(on) => setMany(cl, allIds, on)} /> <span className="muted">{selectedOf(cl).filter((id) => allIds.includes(id)).length}</span></td>)}</tr></thead>
       <tbody>{chapters.map(({ name, units }) => { const ids = units.map((u) => u.id); return <tr key={name} className="matrix-group"><th scope="row">{name} <span className="muted">· {ids.length} 個分類</span></th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, ids)} label={`${cl} ${name}`} onChange={(on) => setMany(cl, ids, on)} /></td>)}</tr>; })}</tbody>
     </table></div>}
     <p className="muted">未勾選的單元，該班學生看不到、也不計分。開放時間、期限與必做請在下方單元設定調整。</p>

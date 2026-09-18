@@ -1028,9 +1028,22 @@ dd {
 .unit-tabs button { min-height:44px; white-space:nowrap; border:0; background:transparent; border-bottom:3px solid transparent; }
 .unit-tabs button.active { border-bottom-color:var(--accent); color:var(--accent); font-weight:700; }
 .unit-tabs small { display:block; font-size:.75rem; }
-.activitycards,.practice-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+.activitycards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
 .activitycard { text-align:left; min-height:130px; display:block; padding:16px; }
 .activitycard h3 { margin:8px 0; }.activitycard footer { display:flex; gap:6px; align-items:center; margin-top:12px; }
+.practice-list { display:grid; gap:8px; }
+.practice-note { margin:0 0 4px; }
+.practice-row { display:grid; grid-template-columns:minmax(150px,1.4fr) minmax(170px,1fr) max-content max-content max-content max-content; grid-template-areas:"title score full flash draw wrong"; align-items:center; gap:8px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:white; }
+.practice-row-title { grid-area:title; min-width:0; display:flex; flex-direction:column; }
+.practice-row-title strong { overflow:hidden; text-overflow:ellipsis; }
+.practice-row-score { grid-area:score; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+.practice-full { grid-area:full; }.practice-flash { grid-area:flash; }.practice-wrong { grid-area:wrong; }
+.practice-draw { grid-area:draw; display:flex; align-items:center; gap:4px; white-space:nowrap; }
+.practice-draw > span { color:var(--muted); }
+.practice-row button { min-height:38px; padding:7px 10px; white-space:nowrap; }
+@media (max-width: 850px) {
+  .practice-row { grid-template-columns:minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"title score score score" "full flash draw wrong"; overflow-x:auto; }
+}
 .reading-page { position:fixed; inset:0; z-index:20; background:var(--page); display:grid; grid-template-rows:48px minmax(0,1fr); overflow:hidden; }
 .reading-page > header { height:48px; display:flex; align-items:center; gap:12px; padding:0 12px; border-bottom:1px solid var(--line); }
 .reading-page > header strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
@@ -1504,7 +1517,7 @@ button:hover, .button:hover, .notice, .feedback, .explanations details, .explana
 .image-modal { max-width: 95vw; max-height: 95vh; overflow: auto; background: var(--surface); padding: 15px; }
 .image-modal img { display: block; max-width: 100%; margin: 10px auto; }
 .diagnostic-chart { display: block; width: min(100%, 650px); height: auto; margin: 15px auto; }
-:root[data-theme='night'] :is(.workspace,.main,.student,.student-nav,.login,.login-form,.reviewanswers,.contextrow,.toolbar,.pageheading,.previewbar,.question-card,.unitcard,.activitycard) { background-color: var(--page); color: var(--ink); }
+:root[data-theme='night'] :is(.workspace,.main,.student,.student-nav,.login,.login-form,.reviewanswers,.contextrow,.toolbar,.pageheading,.previewbar,.question-card,.unitcard,.activitycard,.practice-row) { background-color: var(--page); color: var(--ink); }
 :root[data-theme='night'] :is(h1,h2,h3,h4,label,td,th,summary,.metric strong,.field span) { color: var(--ink); }
 :root[data-theme='night'] :is(.muted,small,.metric small) { color: var(--muted); }
 /* 2026-09-15：選項按鈕原本跟 .workspace 等整頁區塊共用 var(--page) 當底色，

@@ -395,8 +395,8 @@ export default function Student({
               return <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); route(`/unit/${encodeURIComponent(unit.id)}?tab=${id}`); }}>{label} <small>{id === 'practice' ? '練習' : undone ? `${undone} 待完成` : required.length ? '✓ 完成' : rows.length ? `${rows.length} 項` : '暫無'}</small></button>;
             })}
           </div>
-          <section className="activitycards" role="tabpanel">
-            {tab === 'practice' ? <>{chapterUnits.map((classification) => <div className="panel" key={classification.id}><h2>{classification.title}</h2><p className="muted">題目分類 · 最高成績 {progress.units[classification.id]?.best ?? 0} / 門檻 {chapter.threshold}</p><PracticeCards unit={classification} progress={progress} busy={busy} start={start} route={route} /></div>)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
+          <section className={tab === 'practice' ? 'practice-list' : 'activitycards'} role="tabpanel">
+            {tab === 'practice' ? <><p className="muted practice-note">完整測驗與完整閃卡計入最高成績；抽題與錯題僅供練習，不影響完成度。</p>{chapterUnits.map((classification) => <PracticeRow key={classification.id} unit={classification} threshold={chapter.threshold} progress={progress} busy={busy} start={start} route={route} />)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
             {tab !== 'practice' && !chapter.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
           </section>
         </>
@@ -465,10 +465,19 @@ function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: stri
   const state = activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
   return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${label}，${state}`}><span className="badge">{label}</span><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
-function PracticeCards({ unit, progress, busy, start, route }: { unit: Unit; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
+function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
-  return <div className="practice-cards"><button className="activitycard" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}><span className="badge">計入成績</span><h3>完整測驗</h3><p>完整作答後取歷次最高有效成績。</p></button><button className="activitycard" disabled={busy} onClick={() => go('flashcard', '/flashcard')}><span className="badge">計入成績</span><h3>完整閃卡</h3><p>完整作答後取歷次最高有效成績。</p></button><div className="activitycard"><span className="badge">僅供練習</span><h3>隨機抽題</h3>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>抽 {n} 題</button>)}</div><button className="activitycard" disabled={!wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}><span className="badge">僅供複習</span><h3>錯題閃卡</h3><p>{wrong ? `${wrong} 題錯題` : '目前沒有錯題'}</p></button></div>;
+  const best = progress.units[unit.id]?.best ?? 0;
+  const passed = best >= threshold;
+  return <div className="practice-row">
+    <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">題目分類</span></div>
+    <div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">已達標</span>}</div>
+    <button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>完整測驗</button>
+    <button className="practice-flash" disabled={busy} onClick={() => go('flashcard', '/flashcard')}>完整閃卡</button>
+    <div className="practice-draw" aria-label="抽題題數"><span>抽題</span>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>{n} 題</button>)}</div>
+    <button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button>
+  </div>;
 }
 function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; chapterName: string; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
   const root = useRef<HTMLElement>(null); const [canFullscreen, setCanFullscreen] = useState(false);
