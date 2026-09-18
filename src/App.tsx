@@ -36,7 +36,6 @@ import { MATERIAL_CATALOG } from '../shared/materials';
 import {
   materialUrl,
   Course,
-  Unit,
   Activity,
   Chapter,
   Profile,
@@ -51,9 +50,6 @@ import {
   modes,
   youtubeId,
   forClass,
-  safeCode,
-  unitTree,
-  isTabFallbackUnit,
   chaptersOf,
   orderedChapters,
   chapterName,
@@ -109,17 +105,6 @@ function download(name: string, data: any[]) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 const uid = () => crypto.randomUUID();
-const makeUnit = (): Unit => ({
-  id: uid(),
-  title: '新單元',
-  description: '',
-  required: true,
-  threshold: 80,
-  opensAt: '',
-  dueAt: '',
-  bankVersion: '',
-  activities: [],
-});
 const makeCourse = (): Course => ({
   id: uid(),
   title: '新課程',
@@ -135,79 +120,6 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
       <span>{label}</span>
       {children}
     </label>
-  );
-}
-function ClassOverrides({
-  course,
-  unit,
-  onChange,
-}: {
-  course: Course;
-  unit: Unit;
-  onChange: (v: Course['classOverrides']) => void;
-}) {
-  const [cl, setCl] = useState(course.classIds[0] || '');
-  const value = course.classOverrides?.[cl]?.[unit.id] || {};
-  function change(p: any) {
-    onChange({
-      ...course.classOverrides,
-      [cl]: { ...course.classOverrides?.[cl], [unit.id]: { ...value, ...p } },
-    });
-  }
-  return (
-    <details>
-      <summary>各班級的門檻與開放安排</summary>
-      <p className="muted">未設定時沿用單元共用值，教材內容保持共用。</p>
-      <Field label="設定班級">
-        <select value={cl} onChange={(e) => setCl(e.target.value)}>
-          {course.classIds.map((c) => (
-            <option key={c}>{c}</option>
-          ))}
-        </select>
-      </Field>
-      <div className="formgrid">
-        <Field label="此班達標分數">
-          <input
-            type="number"
-            min="0"
-            max="100"
-            value={value.threshold ?? unit.threshold}
-            onChange={(e) => change({ threshold: Number(e.target.value) })}
-          />
-        </Field>
-        <Field label="此班開放時間">
-          <input
-            type="datetime-local"
-            value={value.opensAt ?? unit.opensAt}
-            onChange={(e) => change({ opensAt: e.target.value })}
-          />
-        </Field>
-        <Field label="此班完成期限">
-          <input
-            type="datetime-local"
-            value={value.dueAt ?? unit.dueAt}
-            onChange={(e) => change({ dueAt: e.target.value })}
-          />
-        </Field>
-        <label className="check">
-          <input
-            type="checkbox"
-            checked={value.required ?? unit.required}
-            onChange={(e) => change({ required: e.target.checked })}
-          />
-          此班列為必做
-        </label>
-      </div>
-      <button
-        onClick={() => {
-          const next = structuredClone(course.classOverrides || {});
-          if (next[cl]) delete next[cl][unit.id];
-          onChange(next);
-        }}
-      >
-        恢復共用設定
-      </button>
-    </details>
   );
 }
 function ChapterOverrides({ course, name, chapter, onChange }: { course: Course; name: string; chapter: Chapter; onChange: (v: Course['chapterOverrides']) => void }) {
@@ -857,30 +769,96 @@ function Metric({ title, value, note }: { title: string; value: number | string;
     </div>
   );
 }
-function unitWarning(course: Course, unit: Unit) {
-  if (isTabFallbackUnit(course, unit)) return '這個單元是舊版匯入時把「次單元空白」的題目誤建出來的（代碼等於課程代碼）。重新同步題庫後，題目會歸到正確的單元，這個可以移除。';
-  if (unit.title !== unit.id) return `後台顯示名稱「${unit.title}」和 Sheet 裡的次單元「${unit.id}」不一致，容易對不上。`;
-  return '';
-}
-function LegacyCourseEditor({
-  course,
-  api,
-  save,
-  preview,
-  notify,
-  newCourse,
-  deleteCourse,
-  deleting,
-  onDirty,
-  onPublished,
-  copyCourse,
-  archiveCourse,
+function ChapterActivityEditor({
+  activity,
+  onChange,
+  onPreview,
+  onRemove,
 }: {
+  activity: Activity;
+  onChange: (patch: Partial<Activity>) => void;
+  onPreview: () => void;
+  onRemove: () => void;
+}) {
+  const knownMaterial = activity.materialVersion ? MATERIAL_CATALOG[activity.materialVersion] : undefined;
+  const materialSelectValue = knownMaterial ? activity.materialVersion! : '__custom__';
+  return (
+    <details className="activityeditor" open>
+      <summary>{phases[activity.phase]} · {activity.title}</summary>
+      <div className="formgrid">
+        <Field label="活動名稱">
+          <input value={activity.title} onChange={(e) => onChange({ title: e.target.value })} />
+        </Field>
+        <Field label="階段">
+          <select value={activity.phase} onChange={(e) => onChange({ phase: e.target.value as Activity['phase'] })}>
+            {Object.entries(phases).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+          </select>
+        </Field>
+        <Field label="類型">
+          <select value={activity.type} onChange={(e) => onChange({ type: e.target.value as Activity['type'] })}>
+            <option value="youtube">YouTube 影片</option>
+            <option value="html">互動 HTML 教材</option>
+            <option value="link">外部教材</option>
+          </select>
+        </Field>
+        <Field label={activity.type === 'html' ? 'GitHub Pages 教材網址' : '教材連結'}>
+          <input type="url" value={activity.url || ''} onChange={(e) => onChange({ url: e.target.value })} />
+        </Field>
+      </div>
+      {activity.type === 'youtube' && <>
+        <div className="formgrid">
+          <Field label="YouTube 開始秒數">
+            <input type="number" min="0" value={activity.start ?? 0} onChange={(e) => onChange({ start: Number(e.target.value) })} />
+          </Field>
+          <Field label="YouTube 結束秒數（留白播放至結束）">
+            <input type="number" min="1" value={activity.end ?? ''} onChange={(e) => onChange({ end: e.target.value ? Number(e.target.value) : undefined })} />
+          </Field>
+        </div>
+        {activity.url && <p className={youtubeId(activity.url) ? 'success' : 'error'}>{youtubeId(activity.url) ? '已辨識 YouTube 影片' : '請貼上單支影片的有效連結'}</p>}
+        <p className="muted">選看補充教材：不影響完成度或成績，播放位置可保存。</p>
+      </>}
+      {activity.type === 'html' && <>
+        {activity.url && !materialUrl(activity.url) && <p className="error">請填入有效的 HTTPS 網址</p>}
+        <div className="formgrid">
+          <Field label="教材紀錄方式">
+            <select value={activity.tracking || 'reading'} onChange={(e) => onChange({ tracking: e.target.value as 'reading' | 'interactive' })}>
+              <option value="reading">一般閱讀</option>
+              <option value="interactive">闖關與學習診斷（需串接）</option>
+            </select>
+          </Field>
+          <Field label="教材版本">
+            <select value={materialSelectValue} onChange={(e) => {
+              const slug = e.target.value;
+              if (slug === '__custom__') { onChange({ materialVersion: '' }); return; }
+              const entry = MATERIAL_CATALOG[slug];
+              onChange({ materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal });
+            }}>
+              <option value="__custom__">其他／自訂教材版本</option>
+              {Object.entries(MATERIAL_CATALOG).map(([slug, entry]) => <option key={slug} value={slug}>{entry.label}（{slug}）</option>)}
+            </select>
+            {materialSelectValue === '__custom__' && <input value={activity.materialVersion || ''} placeholder="教材版本字串，例如 v1" onChange={(e) => onChange({ materialVersion: e.target.value })} />}
+          </Field>
+          <Field label="探索節點總數">
+            <input type="number" min="0" max="500" value={activity.nodeTotal || 0} onChange={(e) => onChange({ nodeTotal: Number(e.target.value) })} />
+          </Field>
+          <Field label="闖關題目總數">
+            <input type="number" min="0" max="500" value={activity.questionTotal || 0} onChange={(e) => onChange({ questionTotal: Number(e.target.value) })} />
+          </Field>
+        </div>
+      </>}
+      <Field label="學習說明">
+        <textarea value={activity.description} onChange={(e) => onChange({ description: e.target.value })} />
+      </Field>
+      <div className="actions"><button onClick={onPreview}><Eye size={16} />預覽活動</button><button onClick={onRemove}>從草稿移除</button></div>
+    </details>
+  );
+}
+type CourseEditorProps = {
   course?: Course;
   api: API;
-  save: (c: Course) => Promise<void>;
-  preview: (c: Course, draft?: boolean, u?: string, a?: string) => void;
-  notify: (s: string) => void;
+  save: (course: Course) => Promise<void>;
+  preview: (course: Course, draft?: boolean, unitId?: string, activityId?: string) => void;
+  notify: (message: string) => void;
   newCourse: () => void;
   deleteCourse: () => Promise<void>;
   deleting: boolean;
@@ -888,405 +866,8 @@ function LegacyCourseEditor({
   onPublished: (course: Course) => void;
   copyCourse: () => void;
   archiveCourse: () => Promise<void>;
-}) {
-  const [c, setC] = useState<Course>(structuredClone(course || makeCourse())),
-    [idx, setIdx] = useState(0), [busy, setBusy] = useState(false);
-  const isDirty = JSON.stringify(c) !== JSON.stringify(course);
-  useEffect(() => { onDirty(!!course && isDirty); return () => onDirty(false); }, [isDirty, course]);
-  useEffect(() => {
-    const warn = (e: BeforeUnloadEvent) => { if (isDirty && course) { e.preventDefault(); e.returnValue = ''; } };
-    window.addEventListener('beforeunload', warn); return () => window.removeEventListener('beforeunload', warn);
-  }, [isDirty, course]);
-  const u = c.units[idx];
-  function patchUnit(p: Partial<Unit>) {
-    setC({ ...c, units: c.units.map((x, i) => (i === idx ? { ...x, ...p } : x)) });
-  }
-  async function action(publish = false) {
-    setBusy(true);
-    try {
-      await save(c);
-      if (publish) { const result = await api.call<Course>('publishCourse', { courseId: c.id }); setC(result); onPublished(result); }
-      notify(publish ? '課程已發布' : '草稿已保存');
-    } catch (e) {
-      notify((e as Error).message);
-    } finally {
-      setBusy(false);
-    }
-  }
-  function patchActivity(i: number, p: Partial<Activity>) {
-    patchUnit({ activities: u.activities.map((a, j) => (j === i ? { ...a, ...p } : a)) });
-  }
-  if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再新增單元並保存草稿。" /><button onClick={newCourse}>新增課程</button></section>;
-  return (
-    <>
-      <header className="pageheading">
-        <div>
-          <span className="eyebrow">COURSE STUDIO</span>
-          <h1>課程與教材</h1>
-          <p>{isDirty ? '尚未保存' : '草稿已保存'} · {course?.publishedAt ? '已有發布版本，草稿變更須重新發布' : '尚未發布'}{course?.archived ? ' · 已封存' : ''}</p>
-        </div>
-        <div className="actions">
-          <button onClick={newCourse}>
-            <Plus size={16} />
-            新增課程
-          </button>
-          <button disabled={busy || deleting} onClick={() => action()}>
-            保存草稿
-          </button>
-          <button className="primary" disabled={busy || deleting} onClick={() => action(true)}>
-            發布課程
-          </button>
-          <button onClick={copyCourse} disabled={busy}>複製課程</button><button onClick={archiveCourse} disabled={busy}>{course?.archived ? '取消封存' : '封存課程'}</button>
-          <button disabled={busy || deleting || !course} onClick={deleteCourse}>
-            <Trash2 size={16} />
-            刪除課程
-          </button>
-        </div>
-      </header>
-      <section className="panel">
-        <div className="formgrid">
-          <Field label="課程名稱">
-            <input value={c.title} onChange={(e) => setC({ ...c, title: e.target.value })} />
-          </Field>
-          <Field label="學期">
-            <input value={c.term} onChange={(e) => setC({ ...c, term: e.target.value })} />
-          </Field>
-          <Field label="課程說明">
-            <input
-              value={c.description}
-              onChange={(e) => setC({ ...c, description: e.target.value })}
-            />
-          </Field>
-        </div>
-        <p className="muted">課程代碼：{c.id}</p>
-        <div className="actions">
-          <button onClick={() => preview(c, true)}>
-            <Eye size={16} />
-            保存並預覽草稿
-          </button>
-          <button onClick={() => preview(c, false)}>預覽已發布版本</button>
-        </div>
-      </section>
-      <ClassManager course={c} change={setC} />
-      <div className="editorgrid">
-        <aside className="panel unitmenu">
-          <div className="sectionhead">
-            <h3>單元安排</h3>
-            <button
-              aria-label="新增單元"
-              onClick={() => {
-                const id = prompt(
-                  '請輸入單元代碼（可用中文、英數字、-、_，不能有空白；之後對應 Google Sheet 分頁名稱，建立後無法更改）',
-                )?.trim();
-                if (!id) return;
-                if (!safeCode(id)) return notify('代碼格式錯誤，可用中文、英數字、- 或 _，不能有空白');
-                if (c.units.some((x) => x.id === id)) return notify('代碼已存在');
-                setC({ ...c, units: [...c.units, { ...makeUnit(), id }] });
-                setIdx(c.units.length);
-              }}
-            >
-              <Plus size={17} />
-            </button>
-          </div>
-          {unitTree(c.units).map(({ group, items, single }) =>
-            single ? (
-              <button className={'unit-leaf top' + (idx === items[0].index ? ' selected' : '')} key={'g:' + group} onClick={() => setIdx(items[0].index)}>
-                {group}{unitWarning(c, items[0].unit) && <span className="unit-flag" title={unitWarning(c, items[0].unit)}>!</span>}
-              </button>
-            ) : (
-              <details className="unit-branch" key={'g:' + group} open={items.some((it) => it.index === idx) || undefined}>
-                <summary>{group || '未分類'}<span className="muted"> {items.length}</span></summary>
-                {items.map(({ unit, index }) => (
-                  <button className={'unit-leaf' + (idx === index ? ' selected' : '')} key={unit.id} onClick={() => setIdx(index)}>
-                    {unit.title}{unitWarning(c, unit) && <span className="unit-flag" title={unitWarning(c, unit)}>!</span>}
-                  </button>
-                ))}
-              </details>
-            ),
-          )}
-        </aside>
-        {!u && <Empty title="尚未建立單元" detail="按單元安排旁的＋，輸入與 Google Sheet 分頁相同的單元代碼。" />}
-        {u && (
-          <section className="panel">
-            <div className="sectionhead">
-              <h2>單元設定</h2>
-              <button onClick={() => preview(c, true, u.id)}>
-                <Eye size={16} />
-                預覽單元
-              </button>
-            </div>
-            <p className="muted">位置：{u.group ? `${u.group} › ` : ''}{u.title}　·　Sheet 次單元：{u.id}</p>
-            {unitWarning(c, u) && (
-              <div className="notice unit-warning">
-                <p>{unitWarning(c, u)}</p>
-                {isTabFallbackUnit(c, u) ? null : <button onClick={() => patchUnit({ title: u.id })}>改回 Sheet 名稱「{u.id}」</button>}
-              </div>
-            )}
-            <div className="formgrid">
-              <Field label="單元名稱">
-                <input value={u.title} onChange={(e) => patchUnit({ title: e.target.value })} />
-              </Field>
-              <Field label="達標分數">
-                <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  value={u.threshold}
-                  onChange={(e) => patchUnit({ threshold: Number(e.target.value) })}
-                />
-              </Field>
-              <Field label="開放時間">
-                <input
-                  type="datetime-local"
-                  value={u.opensAt}
-                  onChange={(e) => patchUnit({ opensAt: e.target.value })}
-                />
-              </Field>
-              <Field label="完成期限（逾期仍可練習）">
-                <input
-                  type="datetime-local"
-                  value={u.dueAt}
-                  onChange={(e) => patchUnit({ dueAt: e.target.value })}
-                />
-              </Field>
-            </div>
-            <Field label="單元說明">
-              <textarea
-                value={u.description}
-                onChange={(e) => patchUnit({ description: e.target.value })}
-              />
-            </Field>
-            <label className="check">
-              <input
-                type="checkbox"
-                checked={u.required}
-                onChange={(e) => patchUnit({ required: e.target.checked })}
-              />
-              列為平常分數的必做單元
-            </label>
-            <label className="check">
-              <input type="checkbox" checked={u.research?.enabled !== false} onChange={(e) => patchUnit({ research: { enabled: e.target.checked } })} />
-              蒐集解析研究資料（預設開啟；不影響成績或完成資格）
-            </label>
-            <div className="actions">
-              {(() => {
-                // 只在同一個單元（group）內移動，避免跨組交換後畫面看起來沒動。
-                const siblings = c.units.map((x, i) => [x, i] as const).filter(([x]) => (x.group || '') === (u.group || '')).map(([, i]) => i);
-                const pos = siblings.indexOf(idx);
-                const swap = (to: number) => { const units = [...c.units]; [units[idx], units[to]] = [units[to], units[idx]]; setC({ ...c, units }); setIdx(to); };
-                return <>
-                  <button disabled={pos <= 0} onClick={() => swap(siblings[pos - 1])}>上移</button>
-                  <button disabled={pos < 0 || pos >= siblings.length - 1} onClick={() => swap(siblings[pos + 1])}>下移</button>
-                </>;
-              })()}
-              <button onClick={() => { const code = prompt('新單元代碼')?.trim(); if (!code) return; if (!safeCode(code) || c.units.some((u) => u.id === code)) return notify('單元代碼無效或重複'); setC({ ...c, units: [...c.units, { ...structuredClone(u), id: code, title: u.title + '（複本）', bankVersion: '' }] }); setIdx(c.units.length); }}>複製單元</button>
-              <button onClick={() => { if (!confirm('從草稿移除此單元？歷史題庫與紀錄保留。')) return; const classUnits = Object.fromEntries(Object.entries(c.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== u.id)])); const classOverrides = structuredClone(c.classOverrides || {}); Object.values(classOverrides).forEach((settings) => delete settings[u.id]); setC({ ...c, units: c.units.filter((unit) => unit.id !== u.id), classUnits, classOverrides }); setIdx(Math.max(0, idx - 1)); }}>移除單元</button>
-            </div>
-            <ClassOverrides
-              key={c.classIds.join(',') + u.id}
-              course={c}
-              unit={u}
-              onChange={(classOverrides) => setC({ ...c, classOverrides })}
-            />
-            <hr />
-            <div className="sectionhead">
-              <h2>學習活動</h2>
-              <button
-                onClick={() =>
-                  patchUnit({
-                    activities: [
-                      ...u.activities,
-                      {
-                        id: uid(),
-                        title: '新活動',
-                        type: 'youtube',
-                        phase: 'before',
-                        url: '',
-                        description: '',
-                      },
-                    ],
-                  })
-                }
-              >
-                <Plus size={16} />
-                新增活動
-              </button>
-            </div>
-            {u.activities.map((a, i) => (
-              <details className="activityeditor" key={a.id} open>
-                <summary>
-                  {phases[a.phase]} · {a.title}
-                </summary>
-                <div className="formgrid">
-                  <Field label="活動名稱">
-                    <input
-                      value={a.title}
-                      onChange={(e) => patchActivity(i, { title: e.target.value })}
-                    />
-                  </Field>
-                  <Field label="階段">
-                    <select
-                      value={a.phase}
-                      onChange={(e) => patchActivity(i, { phase: e.target.value as any })}
-                    >
-                      {Object.entries(phases).map(([k, v]) => (
-                        <option key={k} value={k}>
-                          {v}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
-                  <Field label="類型">
-                    <select
-                      value={a.type}
-                      onChange={(e) => patchActivity(i, { type: e.target.value as any })}
-                    >
-                      <option value="youtube">YouTube 影片</option>
-                      <option value="html">互動 HTML 教材</option>
-                      <option value="link">外部教材</option>
-                      <option value="quiz">單元題庫練習</option>
-                    </select>
-                  </Field>
-                  {a.type !== 'quiz' && a.type !== 'html' && (
-                    <Field label="教材連結">
-                      <input
-                        type="url"
-                        value={a.url}
-                        onChange={(e) => patchActivity(i, { url: e.target.value })}
-                      />
-                    </Field>
-                  )}
-                </div>
-                {a.type === 'youtube' && (
-                  <>
-                    <div className="formgrid">
-                      <Field label="開始秒數">
-                        <input
-                          type="number"
-                          min="0"
-                          value={a.start ?? 0}
-                          onChange={(e) => patchActivity(i, { start: Number(e.target.value) })}
-                        />
-                      </Field>
-                      <Field label="結束秒數（留白播放至結束）">
-                        <input
-                          type="number"
-                          min="1"
-                          value={a.end ?? ''}
-                          onChange={(e) =>
-                            patchActivity(i, {
-                              end: e.target.value ? Number(e.target.value) : undefined,
-                            })
-                          }
-                        />
-                      </Field>
-                    </div>
-                    {a.url && (
-                      <p className={youtubeId(a.url) ? 'success' : 'error'}>
-                        {youtubeId(a.url) ? '已辨識 YouTube 影片' : '請貼上單支影片的有效連結'}
-                      </p>
-                    )}
-                  </>
-                )}
-                {a.type === 'html' && (
-                  <Field label="GitHub Pages 教材網址">
-                    <input
-                      type="url"
-                      value={a.url || ''}
-                      placeholder="https://帳號.github.io/教材庫/chapter/index.html"
-                      onChange={(e) => patchActivity(i, { url: e.target.value })}
-                    />
-                    <p className="muted">
-                      先將 HTML、CSS、圖片與腳本發布至 GitHub
-                      Pages，再貼上教材入口網址。教材網址可公開存取。
-                    </p>
-                    {a.url && !materialUrl(a.url) && (
-                      <p className="error">請填入有效的 HTTPS 網址</p>
-                    )}
-                  </Field>
-                )}
-                {a.type === 'html' && (() => {
-                  const known = a.materialVersion ? MATERIAL_CATALOG[a.materialVersion] : undefined;
-                  const materialSelectValue = known ? a.materialVersion! : '__custom__';
-                  return (
-                    <div className="formgrid">
-                      <Field label="教材紀錄方式">
-                        <select value={a.tracking || 'reading'} onChange={(e) => patchActivity(i, { tracking: e.target.value as 'reading' | 'interactive' })}>
-                          <option value="reading">一般閱讀</option>
-                          <option value="interactive">闖關與學習診斷（需串接）</option>
-                        </select>
-                      </Field>
-                      <Field label="教材版本">
-                        <select
-                          value={materialSelectValue}
-                          onChange={(e) => {
-                            const slug = e.target.value;
-                            if (slug === '__custom__') { patchActivity(i, { materialVersion: '' }); return; }
-                            const entry = MATERIAL_CATALOG[slug];
-                            patchActivity(i, { materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal });
-                          }}
-                        >
-                          <option value="__custom__">其他／自訂教材版本</option>
-                          {Object.entries(MATERIAL_CATALOG).map(([slug, entry]) => (
-                            <option key={slug} value={slug}>{entry.label}（{slug}）</option>
-                          ))}
-                        </select>
-                        {materialSelectValue === '__custom__' && (
-                          <input
-                            value={a.materialVersion || ''}
-                            placeholder="教材版本字串，例如 v1"
-                            onChange={(e) => patchActivity(i, { materialVersion: e.target.value })}
-                          />
-                        )}
-                      </Field>
-                      <Field label="探索節點總數">
-                        <input type="number" min="0" max="500" value={a.nodeTotal || 0} onChange={(e) => patchActivity(i, { nodeTotal: Number(e.target.value) })} />
-                      </Field>
-                      <Field label="闖關題目總數">
-                        <input type="number" min="0" max="500" value={a.questionTotal || 0} onChange={(e) => patchActivity(i, { questionTotal: Number(e.target.value) })} />
-                      </Field>
-                    </div>
-                  );
-                })()}
-                {a.type === 'youtube' && <p className="muted">選看補充教材：不影響完成度或成績，播放位置可保存。</p>}
-                <Field label="學習說明">
-                  <textarea
-                    value={a.description}
-                    onChange={(e) => patchActivity(i, { description: e.target.value })}
-                  />
-                </Field>
-                <div className="actions">
-                  <button onClick={() => preview(c, true, u.id, a.id)}>
-                    <Eye size={16} />
-                    預覽活動
-                  </button>
-                  <button
-                    disabled={i === 0}
-                    onClick={() => {
-                      const arr = [...u.activities];
-                      [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
-                      patchUnit({ activities: arr });
-                    }}
-                  >
-                    上移
-                  </button>
-                  <button
-                    onClick={() =>
-                      patchUnit({ activities: u.activities.filter((x) => x.id !== a.id) })
-                    }
-                  >
-                    從草稿移除
-                  </button>
-                </div>
-              </details>
-            ))}
-          </section>
-        )}
-      </div>
-    </>
-  );
-}
-function CourseEditor(props: Parameters<typeof LegacyCourseEditor>[0]) {
+};
+function CourseEditor(props: CourseEditorProps) {
   const { course, api, save, preview, notify, newCourse, deleteCourse, deleting, onDirty, onPublished, copyCourse, archiveCourse } = props;
   const [draft, setDraft] = useState<Course>(structuredClone(course || makeCourse()));
   const [selected, setSelected] = useState('');
@@ -1294,6 +875,15 @@ function CourseEditor(props: Parameters<typeof LegacyCourseEditor>[0]) {
   useEffect(() => { const next = structuredClone(course || makeCourse()); setDraft(next); setSelected(orderedChapters(next)[0]?.name || ''); }, [course?.id]);
   const isDirty = !!course && JSON.stringify(draft) !== JSON.stringify(course);
   useEffect(() => { onDirty(isDirty); return () => onDirty(false); }, [isDirty]);
+  useEffect(() => {
+    const warn = (event: BeforeUnloadEvent) => {
+      if (!isDirty) return;
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [isDirty]);
   const rows = orderedChapters(draft), row = rows.find((item) => item.name === selected) || rows[0];
   const name = row?.name || '', chapter = row?.chapter, units = row?.units || [];
   const materialize = (source = draft) => source.chapters ? source : { ...source, chapters: chaptersOf(source), chapterOrder: orderedChapters(source).map((item) => item.name) };
@@ -1316,7 +906,13 @@ function CourseEditor(props: Parameters<typeof LegacyCourseEditor>[0]) {
         <Field label="單元說明"><textarea value={chapter.description} onChange={(e) => changeChapter({ description: e.target.value })} /></Field><label className="check"><input type="checkbox" checked={chapter.required} onChange={(e) => changeChapter({ required: e.target.checked })} />列為平常分數的必做單元</label><label className="check"><input type="checkbox" checked={chapter.research?.enabled !== false} onChange={(e) => changeChapter({ research: { enabled: e.target.checked } })} />蒐集解析研究資料</label>
         <div className="actions"><button disabled={rows[0]?.name === name} onClick={() => move(-1)}>上移</button><button disabled={rows.at(-1)?.name === name} onClick={() => move(1)}>下移</button></div><ChapterOverrides course={draft} name={name} chapter={chapter} onChange={(chapterOverrides) => setDraft({ ...draft, chapterOverrides })} />
         <hr /><div className="sectionhead"><h2>學習活動</h2><button onClick={() => changeChapter({ activities: [...chapter.activities, { id: uid(), title: '新活動', type: 'youtube', phase: 'before', url: '', description: '' }] })}><Plus size={16} />新增活動</button></div>
-        {chapter.activities.map((a, index) => <details className="activityeditor" key={a.id} open><summary>{phases[a.phase]} · {a.title}</summary><div className="formgrid"><Field label="活動名稱"><input value={a.title} onChange={(e) => changeActivity(index, { title: e.target.value })} /></Field><Field label="階段"><select value={a.phase} onChange={(e) => changeActivity(index, { phase: e.target.value as any })}>{Object.entries(phases).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></Field><Field label="類型"><select value={a.type} onChange={(e) => changeActivity(index, { type: e.target.value as any })}>{['html','youtube','link','quiz'].map((type) => <option key={type}>{type}</option>)}</select></Field><Field label="網址"><input value={a.url} onChange={(e) => changeActivity(index, { url: e.target.value })} /></Field><Field label="說明"><input value={a.description} onChange={(e) => changeActivity(index, { description: e.target.value })} /></Field>{a.type === 'html' && <><Field label="教材紀錄方式"><select value={a.tracking || 'reading'} onChange={(e) => changeActivity(index, { tracking: e.target.value as any })}><option value="reading">一般閱讀</option><option value="interactive">闖關與學習診斷</option></select></Field><Field label="教材版本"><input value={a.materialVersion || ''} onChange={(e) => changeActivity(index, { materialVersion: e.target.value })} /></Field></>}</div><div className="actions"><button onClick={() => preview(materialize(), true, units[0]?.id, a.id)}>預覽活動</button><button onClick={() => changeChapter({ activities: chapter.activities.filter((x) => x.id !== a.id) })}>從草稿移除</button></div></details>)}
+        {chapter.activities.map((activity, index) => <ChapterActivityEditor
+          key={activity.id}
+          activity={activity}
+          onChange={(patch) => changeActivity(index, patch)}
+          onPreview={() => preview(materialize(), true, units[0]?.id, activity.id)}
+          onRemove={() => changeChapter({ activities: chapter.activities.filter((item) => item.id !== activity.id) })}
+        />)}
         <hr /><h2>題目分類（來自 Sheet 次單元）</h2><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}
       </section>}
     </div>

@@ -11,6 +11,7 @@
 - Claude 首次驗收退回的 9 項已補齊：教師課程編輯器與總覽、學生首頁／單元頁、班級覆寫、Chapter 活動進度／互動教材事件，均改以 Chapter 為單元層。教師預覽的 Chapter 卡也可在不改寫正式 hash 路由的情況下開啟內容頁。
 - `saveCourse` 新增 Chapter、順序與班級覆寫驗證；`visibleProgress`、`saveLearningEvents` 與教師診斷／研究查詢保留並識別 Chapter 活動鍵。
 - 題庫同步即使版本未變也會補齊 Chapter，新單元追加至 `chapterOrder`，並在草稿保存 `staleUnits`；課程與教材頁提供黃色舊分類提示、全部移除與舊活動搬移操作。
+- 第二次驗收補齊 Chapter 活動編輯器：恢復教材目錄下拉與節點／題目總數自動帶入、YouTube 開始／結束秒數、學習說明；類型改為中文標籤並移除 quiz 選項。新 CourseEditor 恢復未保存的 `beforeunload` 提醒，並刪除已停用的 `LegacyCourseEditor` 及專用 helper/import。
 
 ## 1.3.1 — 教師後台單元結構重整（2026-09-18）
 

@@ -60,6 +60,37 @@ test('教師課程編輯器以 Chapter 編輯並提供題目分類唯讀與舊�
   assert.match(editor, /Sheet 已無對應的舊題目分類/);
   assert.match(editor, /全部移除/);
 });
+test('Chapter 活動編輯器保留完整教材欄位並以中文類型呈現', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const editor = source.slice(source.indexOf('function ChapterActivityEditor('), source.indexOf('type CourseEditorProps'));
+  assert.match(editor, /探索節點總數/);
+  assert.match(editor, /nodeTotal: entry\.nodeTotal/);
+  assert.match(editor, /闖關題目總數/);
+  assert.match(editor, /questionTotal: entry\.questionTotal/);
+  assert.match(editor, /YouTube 開始秒數/);
+  assert.match(editor, /YouTube 結束秒數/);
+  assert.match(editor, /Object\.entries\(MATERIAL_CATALOG\)/);
+  assert.match(editor, /<Field label="學習說明">/);
+  assert.match(editor, /<option value="youtube">YouTube 影片<\/option>/);
+  assert.match(editor, /<option value="html">互動 HTML 教材<\/option>/);
+  assert.match(editor, /<option value="link">外部教材<\/option>/);
+  assert.doesNotMatch(editor, /<option value="quiz">/);
+});
+test('新 CourseEditor 在草稿尚未保存時阻止直接離開', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const editor = source.slice(source.indexOf('function CourseEditor('), source.indexOf('function Bank('));
+  assert.match(editor, /window\.addEventListener\('beforeunload', warn\)/);
+  assert.match(editor, /window\.removeEventListener\('beforeunload', warn\)/);
+  assert.match(editor, /event\.returnValue = ''/);
+});
+test('停用的 LegacyCourseEditor 與專用 helper 已移除', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /LegacyCourseEditor/);
+  assert.doesNotMatch(source, /function unitWarning/);
+  assert.doesNotMatch(source, /function ClassOverrides/);
+  assert.doesNotMatch(source, /const makeUnit/);
+  assert.doesNotMatch(source, /\bsafeCode\b|\bunitTree\b|\bisTabFallbackUnit\b/);
+});
 test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /currentChapters = orderedChapters\(course\)/);
