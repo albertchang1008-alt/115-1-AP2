@@ -1,52 +1,76 @@
-# 1.4.0 單元模型簡化規格（教師 2026-09-18 決定）
+# 1.4.0 單元模型簡化規格（教師 2026-09-18 決定，第二版）
 
 ## 教師的決定
 
-- **次單元只是題目分類**，沒有任何自己的設定。
-- **所有設定、活動、班級安排都在「單元」這一層**。教師可自行在單元裡加活動（HTML 教材、影片、連結）。
+1. **設定與活動都在「單元」這一層**：開放時間、期限、達標分數、必做、班級、學習活動，每個單元只設定一次。
+2. **次單元只是題目分類**，教師不需要替它做任何設定。
+3. **完整測驗以次單元為範圍**（題目比較少）。學生要把單元底下每個次單元的完整測驗都考到達標。
 
-## 新的資料模型
+## 名詞
 
-| Sheet 欄位 | 平台對應 | 說明 |
+| Sheet | 畫面名稱 | 程式內部 |
 |---|---|---|
-| 分頁名稱 | 課程代碼 | 不變 |
-| 單元（E 欄） | `Unit.id`＝`Unit.title` 預設值 | 真正的管理單位：開放時間、期限、達標分數、必做、班級、活動、題庫版本、完成度都以它為單位 |
-| 次單元（F 欄） | `Question.topic`（新欄位，選填） | 只是題目標籤，用來讓學生按主題練習、教師看題數 |
+| 單元（E 欄） | 單元 | 新增 `Chapter`（`Course.chapters`），以單元名稱為 key |
+| 次單元（F 欄） | 題目分類 | 維持現有 `Unit`（`Unit.group`＝所屬單元），題庫版本、作答進度、錯題仍以它為 key |
+| 次單元空白 | 單元本身就是唯一的分類 | 1.3.1 已修：`Unit.id`＝單元名稱 |
 
-- `Unit.group` 不再使用（保留型別欄位讓舊資料可讀，但新同步不寫、畫面不讀）。
-- 單元欄空白的列：沿用舊格式，以分頁名稱當單元代碼（向後相容）。單元欄必填是建議做法。
-- 一個單元＝一份題庫版本（`publishBank(courseId, 單元, 該單元全部題目)`）。
+內部保留 `Unit` 當題庫與進度的單位，是為了**不動題庫發布、後端批改、Progress、錯題、報表**這些已驗證過的資料結構，只在上面加一層單元設定。
 
-## 各畫面行為
+## 資料結構
+
+```ts
+interface Chapter {            // 以單元名稱為 key：Course.chapters[name]
+  title: string;               // 預設＝Sheet 單元名稱
+  description: string;
+  required: boolean;
+  threshold: number;           // 套用到底下每個題目分類的完整測驗
+  opensAt: string;
+  dueAt: string;
+  activities: Activity[];      // 教師自己加的 HTML 教材、影片、連結
+  research?: { enabled: boolean };
+}
+Course.chapters?: Record<string, Chapter>;
+Course.chapterOverrides?: Record<classId, Record<chapterName, { threshold?, opensAt?, dueAt?, required? }>>;
+Course.chapterOrder?: string[]; // 單元顯示順序
+```
+
+- **生效設定**：`forClass()` 產生學生看到的課程時，每個 `Unit` 的 `required/threshold/opensAt/dueAt/research` 一律由所屬 Chapter（＋該班 chapterOverrides）覆寫。Unit 自己的這些欄位保留在資料裡，但畫面不再顯示、不再編輯。
+- 沒有 `chapters` 的舊課程：以 `Unit.group` 自動推出 Chapter，設定取該組第一個 Unit 的值（相容讀取，不改寫舊資料）。
+- 同步建立新題目分類時，若所屬單元還沒有 Chapter，就自動建一個（`required: true, threshold: 80`，沿用現行 `newUnitFromSheet` 預設）。
+
+## 完成度（取代固定決策 10、11 的範圍說明）
+
+- 一個**單元完成**＝底下每個題目分類的完整測驗（或完整閃卡）最高分 ≥ 單元達標分數，**且**單元的必做活動都完成。
+- 課程完成度（`completion()`）改以**單元**為計數單位：分母＝必做且有題庫或必做活動的單元數。
+- 單元活動的進度鍵：`progress.activities['chapter:' + 單元名稱 + '_' + activityId]`，與舊的 `unitId_activityId` 分開，避免單元名稱等於題目分類名稱時撞鍵。
+- 後端 `recordActivity`／完成度相關 callable 要接受 chapter 活動鍵並驗證該活動存在於 published chapter。
+- 完成度公式版本升為 3（`CURRENT_COMPLETION_FORMULA_VERSION`），舊結算快照仍用原版本計算。
+
+## 畫面
 
 ### 教師端「課程與教材」
-- 左側「單元安排」是**平的單元清單**（依 Sheet 第一次出現順序；可上移下移），每列顯示單元名稱與題數。
-- 單元設定：名稱、開放時間、期限、達標分數、必做、研究資料開關、各班覆寫、學習活動——與現在相同，但只出現在單元層。
-- 單元設定頁多一個唯讀區塊「題目分類（來自 Sheet 次單元）」：列出次單元名稱＋題數，不可編輯。
-- 「班級與適用單元」對照表：列＝單元（不再有次單元列），欄＝班級。
+- 左側：**只列單元**（可上移下移），每列顯示「N 個分類、M 題」。
+- 右側單元設定：名稱、說明、開放時間、期限、達標分數、必做、研究資料、各班覆寫、**學習活動**。
+- 下方唯讀區塊「題目分類（來自 Sheet 次單元）」：分類名稱＋題數＋題庫版本，不可編輯；只有舊資料警示（見下）才有按鈕。
+- 「班級與適用單元」對照表：**列＝單元**，打勾代表該班適用此單元底下全部分類（寫入 `classUnits` 時展開成所有分類 ID）。
+- 學習進度看板：以單元為單位移動區域（沿用 1.3.0 的整組移動，移除個別分類移動）。
 
 ### 學生端
-- 單元清單不再分組，直接列單元。
-- **完整測驗／完整閃卡＝該單元全部題目**，達標才算完成（維持「完整作答才計完成度」規則，只是範圍從次單元變單元）。
-- 隨機抽題、錯題閃卡：多一個「範圍」選擇——全部，或某一個次單元（題目分類）。僅供練習，不計分。
-- 題目沒有 topic 時不顯示範圍選擇。
+- 首頁列單元；點進單元看到：單元說明、學習活動、以及「題目分類」清單，每個分類一張卡：完整測驗、完整閃卡（計入完成）、抽題、錯題閃卡（僅練習）。
+- 單元卡片顯示「已達標分類 x / y」與活動完成數。
 
-### 同步（`syncBankTabFromSheet`）
-- 依「單元」分組發布題庫；新單元自動建立（`visibility: 'hidden'`，與現行一致），題目帶 `topic`。
-- 回傳結果加上 `staleUnits`：課程草稿裡存在、但這次 Sheet 沒有對應單元的單元代碼清單（例如舊的「紅血球與血紅素」「115-1-AP2」）。**同步不自動刪除**。
+## 舊結構清理
 
-### 舊結構清理（一次性）
-- 課程與教材頁在有 `staleUnits`（草稿中不在最近一次同步結果內的單元）時，於單元清單上方顯示黃色提示：「以下 N 個是舊結構的單元，Sheet 已沒有對應：…」，附「全部移除」按鈕（confirm 內列出各單元的活動數量，提醒活動要先到新單元重新加入）。
-- 學期初尚無學生作答（教師已確認），不需搬移進度或錯題資料。
+- 1.3.x 時期存在草稿 Unit 上的活動（例如課程簡介 HTML 教材掛在代碼「血液成分與血漿」上）不自動搬。教師後台若偵測到任何 Unit 仍有 `activities`，在該單元設定上方顯示提示：「以下活動掛在舊的題目分類上，請搬到單元」，每個活動一顆「搬到此單元」按鈕（移到 chapter.activities，並從 Unit 移除）。
+- Sheet 已無對應的舊 Unit（同步結果回傳 `staleUnits`）：單元清單上方黃色提示＋「全部移除」按鈕（confirm 列出名單）。同步本身不自動刪除。
+- 教師已確認學期初無學生作答，不需搬移進度。
 
-## 需要改的地方（給實作者）
+## 需要改的地方
 
-- `shared/model.ts`：`Question.topic?: string`；移除／停用 `unitTree` 的分組用途（改成平清單即可）。
-- `shared/sheets.ts`：`parseBankSheet` 以「單元」為分組鍵、「次單元」寫入 `question.topic`；刪除「同一次單元出現在兩個單元要報錯」的規則，改為「同一題目 ID 在同一單元重複要報錯」（沿用 validateQuestions）。
-- `functions/src/index.ts`：`syncBankTabFromSheet`、`newUnitFromSheet`（不再寫 group）、回傳 `staleUnits`；題庫 hash 需包含 topic。
-- `src/App.tsx`／`src/CourseSetup.tsx`：單元清單改平的、對照表去掉次單元列、單元設定加唯讀「題目分類」、舊結構提示。
-- `src/Student.tsx`：移除 `groupUnits` 分組、抽題與錯題閃卡加範圍選擇（依 `question.topic` 過濾）。
-- `src/ProgressBoard.tsx`：「整組移動」功能已無意義，改回單元逐一移動（或保留但以單元為單位）。
-- `apps-script/CreateCourseTemplate.gs`、`docs/QUESTION_BANK_PLAN.md`：欄位說明改為「單元＝管理單位、次單元＝題目分類」。
-- 測試：parser（單元分組、topic、單元空白 fallback）、同步（新建單元、staleUnits、不自動刪除）、學生抽題範圍過濾。
-- `handoff.md` 固定決策 10 需改寫為本規格。
+- `shared/model.ts`：`Chapter`、`Course.chapters/chapterOverrides/chapterOrder`、`chaptersOf(course)`（含舊資料推導）、`forClass()` 套用 chapter 設定、`chapterCompletion()`、`completion()` 改以單元計數（公式 v3）。
+- `functions/src/index.ts`：同步時確保 Chapter 存在、回傳 `staleUnits`；`publishCourse` 一併發布 chapters；活動紀錄接受 chapter 活動鍵；伺服器端完成度與結算改用 v3。
+- `src/App.tsx`、`src/CourseSetup.tsx`：單元清單、單元設定（含活動編輯器，重用現有 Activity 編輯元件）、題目分類唯讀區、對照表列改單元、舊資料提示。
+- `src/Student.tsx`：單元頁（活動＋分類卡）、完成度顯示。
+- `src/ProgressBoard.tsx`、報表／完成度看板：以單元彙總，可展開看各分類分數。
+- 測試：chapter 設定覆寫 Unit、舊資料推導、單元完成度（全部分類達標＋活動）、chapter 活動鍵、對照表展開、同步自動建 Chapter 與 staleUnits、公式 v1/v2 舊快照不變。
+- 文件：`handoff.md` 固定決策 10、11 改寫；`docs/QUESTION_BANK_PLAN.md`、`CreateCourseTemplate.gs` 欄位說明。
