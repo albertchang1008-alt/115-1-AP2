@@ -27,6 +27,12 @@ Claude 在乾淨環境重跑 `npm run check`（前端 67、Functions 12）通過
 - 學生「練習」分頁每個題目分類各一大卡、內含 4 張小卡，血液 5 個分類畫面很長；可改成每分類一列（最高分／完整測驗／閃卡／抽題／錯題）。
 - 教師頁副標殘留英文「Chapter 單元設定」；班級對照表「全部（11 節）」的「節」應改「個分類」。
 
+**教師決定（2026-09-18）：先做精簡版再上線。** 交給 Codex 的 1.4.0 精簡任務：
+1. `src/Student.tsx` 單元頁「練習」分頁：每個題目分類只佔一列（窄螢幕可換行成兩列，但不再是大卡內含 4 張小卡）。一列內容：分類名稱｜最高分／門檻（已達標顯示綠色「已達標」）｜[完整測驗]｜[完整閃卡]｜抽題（一個下拉或分段按鈕：10／20／30 題）｜[錯題 N]（沒有錯題時停用）。按鈕行為與路由完全沿用現有 PracticeCards 的 go()/start()，不改計分或完成度邏輯。「計入成績／僅供練習」的說明改成列表上方一行小字說明一次即可。
+2. 教師頁副標「Chapter 單元設定」改為「單元設定」；班級對照表「全部（N 節）」改為「全部（N 個分類）」。
+3. 補靜態／元件測試：練習分頁每分類一列、含四種入口、無錯題時錯題按鈕停用；兩處文字。`npm run check` 全部通過。
+4. 更新 DEVELOPMENT_LOG.md 與本檔，標示「1.4.0 第四次待 Claude 驗收」附 commit hash。不部署、不合併或推送 main。
+
 上線步驟（需教師明確同意）：部署 `functions:platform:syncSheet` 以及本版有修改的其他 callable（saveCourse、publishCourse、saveActivity、saveLearningEvents、submitMixedAttempts、getExplanationResearchEvidence 等，建議 `--only functions` 整批部署）→ 合併 push main → 確認 version.json＝1.4.0 → 教師同步題庫、清舊分類、搬活動、勾班級、發布。
 
 
