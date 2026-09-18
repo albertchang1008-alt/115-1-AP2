@@ -23,6 +23,8 @@
 
 `npm run check`（前端 69、Functions 12）重跑通過；手機 390px 練習分頁四種入口皆可見可按，桌機維持一列。1.4.0 驗收完成。
 
+**2026-09-18 更新：Codex 額度用完，Claude 接手。** Claude 的執行環境沒有 Firebase 與 GitHub 憑證，且依安全限制無法在教師 Mac 的終端機輸入指令，因此改由教師自行在終端機執行既有一鍵腳本 `bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh`（在 `feature/1.4.0-unit-model` 上執行；腳本會預檢→npm ci／check→備份分支→`deploy --only functions`→快轉推送 main）。執行完把終端機最後幾行貼給 Claude，由 Claude 確認 Pages 版本並更新本檔。
+
 **上線任務（教師明確同意後才執行）**
 1. 確認在 `feature/1.4.0-unit-model`、工作目錄乾淨，再跑一次 `npm run check`。
 2. 部署 Functions：`npx firebase-tools deploy --only functions --project ap2-7ed91`（本版修改多個 callable，需整批）。記錄 CLI 是否出現 Deploy complete；失敗就停下記錄，不要重試超過一次。
