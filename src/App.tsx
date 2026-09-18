@@ -1260,8 +1260,14 @@ function Bank({
   const [unitId, setUnit] = useState(course.units[0]?.id || ''),
     [questions, setQuestions] = useState<Question[]>([]),
     [search, setSearch] = useState(''),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [sheetId, setSheetId] = useState(''),
+    [sheetBusy, setSheetBusy] = useState(false);
   const unit = course.units.find((u) => u.id === unitId);
+  useEffect(() => {
+    if (api.preview) return;
+    void api.call<any>('getSyncStatus').then((r) => setSheetId(r.sheetId || '')).catch((e) => notify('無法讀取同步檔案設定：' + e.message));
+  }, [api]);
   async function load() {
     if (!unit?.bankVersion) return;
     setBusy(true);
@@ -1282,6 +1288,18 @@ function Bank({
           <p>按「同步題庫」讀取與課程代碼同名的 Google Sheet 分頁；單元與次單元依表格欄位增量更新至草稿。</p>
         </div>
       </header>
+      <section className="panel">
+        <h2>同步檔案設定</h2>
+        <p className="muted">貼上 Google Sheet 網址或 ID。題庫分頁名稱必須完全等於課程代碼「{course.id}」。</p>
+        <div className="formgrid">
+          <Field label="Google Sheet 網址或 ID">
+            <input aria-label="Google Sheet 網址或 ID" value={sheetId} onChange={(e) => setSheetId(e.target.value)} placeholder="貼上 Google Sheet 完整網址或 ID" />
+          </Field>
+        </div>
+        <div className="actions">
+          <button disabled={api.preview || sheetBusy || !sheetId} onClick={async () => { setSheetBusy(true); try { const saved = await api.call<any>('saveSheetConfig', { sheetId }); setSheetId(saved.sheetId); notify('已保存同步檔案設定'); } catch (e) { notify((e as Error).message); } finally { setSheetBusy(false); } }}>保存同步檔案設定</button>
+        </div>
+      </section>
       <section className="panel">
         <div className="formgrid">
           <Field label="單元">

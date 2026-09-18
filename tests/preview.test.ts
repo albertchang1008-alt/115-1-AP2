@@ -55,6 +55,14 @@ test('學習進度看板可整組移動同一單元的次單元', async () => {
   assert.match(source, /整組移到…/);
   assert.match(source, /unitIds: \[u\.id\]/, '個別次單元移動仍可用');
 });
+test('題庫管理頁可直接設定同步 Google Sheet 網址', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const bank = source.slice(source.indexOf('function Bank('), source.indexOf('function RosterPage('));
+  assert.match(bank, /同步檔案設定/);
+  assert.match(bank, /Google Sheet 網址或 ID/);
+  assert.match(bank, /saveSheetConfig/);
+  assert.match(bank, /getSyncStatus/);
+});
 test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);
