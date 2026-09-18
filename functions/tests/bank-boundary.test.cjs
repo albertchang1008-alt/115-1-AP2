@@ -12,6 +12,18 @@ test('區域 transaction 只以既有單元為基礎覆寫區域欄位，不複�
   assert.match(source, /published: update\(published\)/);
   assert.doesNotMatch(source, /published:\s*draft/);
 });
+test('答案表是私有批改資料，舊題庫 fallback 與綜合交卷均有防護', () => {
+  const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
+  assert.match(source, /collection\('grading'\)\.doc\('answers'\)/);
+  assert.match(source, /if \(!gradingFallbackWarned\.has\(warningKey\)\)/, '每版本只警告一次');
+  assert.match(source, /answersById\.get\(r\.questionId\) === r\.selected/, '前端 correct 不可參與批改');
+  assert.match(source, /exports\.submitMixedAttempts/, '綜合交卷有專用入口');
+  assert.match(source, /tx\.set\(progressRef/, '混合交卷只寫一次 progress');
+  const mixed = source.slice(source.indexOf('exports.submitMixedAttempts = (0'), source.indexOf('exports.saveActivity = (0'));
+  assert.match(mixed, /return db\.runTransaction/, '所有 mixed 寫入都由同一交易包覆，交易失敗不會提交半套資料');
+  const getBank = source.slice(source.indexOf('exports.getBank'), source.indexOf('exports.getProgress'));
+  assert.doesNotMatch(getBank, /grading/, 'getBank 不可回傳私有答案表');
+});
 test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量拒絕', async () => {
   const db = getFirestore();
   const originals = { doc: db.doc, batch: db.batch, runTransaction: db.runTransaction };

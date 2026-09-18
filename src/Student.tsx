@@ -28,6 +28,7 @@ import {
   shuffle,
   orderForPractice,
   wrongEntries,
+  wrongCardIds,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -456,8 +457,7 @@ function ReadingPage({ course, unit, activity, api, uid, progress, onSave, onBac
 }
 function WrongCards({ api, course, unit, progress, onBack }: { api: API; course: Course; unit: Unit; progress: Progress; onBack: () => void }) {
   const [range, setRange] = useState<'24h' | '7d' | 'all'>('7d'), [qs, setQs] = useState<Question[]>([]), [i, setI] = useState(0), [flipped, setFlipped] = useState(false), [seen, setSeen] = useState(0);
-  const entries = wrongEntries(progress, unit.id, unit.bankVersion); const now = Date.now();
-  const ids = (r: string) => Object.entries(entries).filter(([, x]) => r === 'all' ? true : x.at > 0 && now - x.at <= (r === '24h' ? 86400000 : 604800000)).sort((a,b) => b[1].n-a[1].n || b[1].at-a[1].at).map(([id]) => id);
+  const ids = (r: '24h' | '7d' | 'all') => wrongCardIds(progress, unit.id, unit.bankVersion, r);
   const counts = { '24h': ids('24h').length, '7d': ids('7d').length, all: ids('all').length };
   useEffect(() => { if (!counts[range]) setRange(counts['7d'] ? '7d' : 'all'); }, [counts['24h'], counts['7d'], counts.all, range]);
   useEffect(() => { void cachedBank(api, course.id, unit.id, unit.bankVersion).then((all) => setQs(ids(range).map((id) => all.find((q) => q.id === id)).filter(Boolean) as Question[])); }, [range, unit.id, unit.bankVersion]);

@@ -145,6 +145,14 @@ export function wrongEntries(progress: Progress, unitId: string, version: string
   if (Array.isArray(raw)) return Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }]));
   return raw || {};
 }
+/** 錯題閃卡的前端篩選：舊資料 at:0 只能在「全部」可見。 */
+export function wrongCardIds(progress: Progress, unitId: string, version: string, range: '24h' | '7d' | 'all', now = Date.now()) {
+  const limit = range === '24h' ? 86400000 : 604800000;
+  return Object.entries(wrongEntries(progress, unitId, version))
+    .filter(([, entry]) => range === 'all' || (entry.at > 0 && now - entry.at <= limit))
+    .sort((a, b) => b[1].n - a[1].n || b[1].at - a[1].at)
+    .map(([questionId]) => questionId);
+}
 export interface Stat {
   students: number;
   wrong: number;

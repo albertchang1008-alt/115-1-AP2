@@ -336,12 +336,13 @@ export async function cachedBank(api: API, courseId: string, unitId: string, ver
   if (!api.preview)
     try {
       const raw = JSON.stringify(questions);
-      if (raw.length <= 1024 * 1024) { for (const k of Object.keys(localStorage).filter((k) => k.startsWith(`bank:${auth?.currentUser?.uid || 'preview'}:${courseId}:${unitId}:`) && !k.startsWith(key))) localStorage.removeItem(k); localStorage.setItem(key, raw); localStorage.setItem(key + ':at', String(Date.now())); evictBankCache(); }
+      if (raw.length <= 1024 * 1024) { for (const k of storageKeys().filter((k) => k.startsWith(`bank:${auth?.currentUser?.uid || 'preview'}:${courseId}:${unitId}:`) && k !== key && k !== key + ':at')) localStorage.removeItem(k); localStorage.setItem(key, raw); localStorage.setItem(key + ':at', String(Date.now())); evictBankCache(); }
     } catch {}
   return questions as Question[];
 }
-export function clearBankCache() { try { for (const k of Object.keys(localStorage).filter((k) => k.startsWith('bank:'))) localStorage.removeItem(k); } catch {} }
-function evictBankCache() { try { const keys = Object.keys(localStorage).filter((k) => k.startsWith('bank:') && !k.endsWith(':at')); let size = keys.reduce((n, k) => n + (localStorage.getItem(k)?.length || 0), 0); for (const k of keys.sort((a, b) => Number(localStorage.getItem(a + ':at') || 0) - Number(localStorage.getItem(b + ':at') || 0))) { if (size <= 3 * 1024 * 1024) break; size -= localStorage.getItem(k)?.length || 0; localStorage.removeItem(k); localStorage.removeItem(k + ':at'); } } catch {} }
+function storageKeys() { return Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i)).filter((k): k is string => !!k); }
+export function clearBankCache() { try { for (const k of storageKeys().filter((k) => k.startsWith('bank:'))) localStorage.removeItem(k); } catch {} }
+function evictBankCache() { try { const keys = storageKeys().filter((k) => k.startsWith('bank:') && !k.endsWith(':at')); let size = keys.reduce((n, k) => n + (localStorage.getItem(k)?.length || 0), 0); for (const k of keys.sort((a, b) => Number(localStorage.getItem(a + ':at') || 0) - Number(localStorage.getItem(b + ':at') || 0))) { if (size <= 3 * 1024 * 1024) break; size -= localStorage.getItem(k)?.length || 0; localStorage.removeItem(k); localStorage.removeItem(k + ':at'); } } catch {} }
 export function queueKey(uid: string) {
   return `pending-v1:${uid}`;
 }

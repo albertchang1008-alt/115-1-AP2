@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { memoryApi, previewApi, sampleCourse, sampleQuestions, API } from '../src/service';
+import { memoryApi, previewApi, sampleCourse, sampleQuestions, API, cachedBank, clearBankCache } from '../src/service';
 import { emptyProgress, Attempt } from '../shared/model';
 import { parseStudentRoute } from '../src/studentRoute';
 import { defaultTab } from '../src/Student';
@@ -104,4 +104,38 @@ test('一般錯題索引保留歷史，複習答對不清除', async () => {
   });
   assert.equal((await a.call('getProgress')).units.orientation.wrong['example-v1']['example-1'].n, 1);
   assert.equal((await a.call('getProgress')).units.orientation.best, 0);
+});
+function storage() {
+  const map = new Map<string, string>();
+  return { get length() { return map.size; }, key: (i: number) => [...map.keys()][i] || null, getItem: (k: string) => map.get(k) || null, setItem: (k: string, v: string) => map.set(k, v), removeItem: (k: string) => map.delete(k), clear: () => map.clear() };
+}
+test('題庫快取命中、版本淘汰、毀損與配額失敗都可安全退回', async () => {
+  const old = (globalThis as any).localStorage; const s = storage(); (globalThis as any).localStorage = s;
+  try {
+    let calls = 0; const api: API = { preview: false, async call<T>(name: string) { calls++; assert.equal(name, 'getBank'); return { questions: sampleQuestions } as T; } };
+    await cachedBank(api, 'c', 'u', 'v1'); await cachedBank(api, 'c', 'u', 'v1'); assert.equal(calls, 1, '命中不可呼叫後端');
+    await cachedBank(api, 'c', 'u', 'v2'); assert.equal(calls, 2); assert.equal(s.getItem('bank:preview:c:u:v1'), null, '新版本刪除舊鍵');
+    s.setItem('bank:preview:c:u:v2', '{bad'); await cachedBank(api, 'c', 'u', 'v2'); assert.equal(calls, 3, '毀損快取須退回後端');
+    const broken: any = { ...s, setItem() { throw Error('quota'); } }; (globalThis as any).localStorage = broken;
+    await assert.doesNotReject(cachedBank(api, 'c', 'x', 'v1'));
+    (globalThis as any).localStorage = s; clearBankCache(); assert.equal(s.length, 0, '登出會清除 bank 快取');
+  } finally { (globalThis as any).localStorage = old; }
+});
+test('題庫快取超過 3 MB 時以最後使用時間淘汰', async () => {
+  const old = (globalThis as any).localStorage; const s = storage(); (globalThis as any).localStorage = s;
+  try {
+    s.setItem('bank:preview:c:old1:v', 'x'.repeat(1_600_000)); s.setItem('bank:preview:c:old1:v:at', '1');
+    s.setItem('bank:preview:c:old2:v', 'x'.repeat(1_600_000)); s.setItem('bank:preview:c:old2:v:at', '2');
+    const api: API = { preview: false, async call<T>() { return { questions: sampleQuestions } as T; } };
+    await cachedBank(api, 'c', 'new', 'v');
+    assert.equal(s.getItem('bank:preview:c:old1:v'), null, '最久未使用者先淘汰');
+    assert.ok(s.getItem('bank:preview:c:old2:v'));
+  } finally { (globalThis as any).localStorage = old; }
+});
+test('錯題閃卡與首頁排列採純前端資料，沒有額外 callable', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  assert.match(source, /wrongCardIds\(progress/);
+  assert.match(source, /閃卡不會寫入資料/);
+  assert.ok(source.indexOf('還沒完成') < source.indexOf('unitgrid'), '待辦位於單元清單之前');
+  assert.match(source, /currentUnits\.filter/);
 });
