@@ -1460,9 +1460,9 @@ dd {
 :root[data-theme='violet'] { --blue: #7041b4; --nav: #2c2043; --accent: #e0b556; --soft: #f1ebfa; }
 :root[data-theme='night'] { color-scheme: dark; --blue: #85bcff; --nav: #101923; --accent: #e4c37a; --surface: #1d2b38; --page: #121c26; --ink: #ecf2f8; --soft: #293e50; --line: #465b6d; --muted: #b9c9d7; }
 html, body { background: var(--page); color: var(--ink); }
-/* 2026-09-15：色系／字級選單從右下角浮動改到頁面最上方一條常駐列，
-   position: sticky 讓它固定在頂端但不用 fixed 蓋住捲動中的內容。 */
-.prefs-bar { position: sticky; top: 0; z-index: 130; display: flex; justify-content: flex-end; gap: 8px; padding: 6px 14px; background: var(--surface); border-bottom: 1px solid var(--line); }
+/* 教師端偏好列不參與工作區版面流，避免多出一列把 sidebar／main 推移。 */
+.prefs-bar { position: fixed; top: 8px; right: 14px; z-index: 130; display: flex; gap: 8px; }
+@media (min-width: 1000px) { .app > main .topbar { padding-right: 460px; } }
 .theme-picker, .fontsize-picker { display: flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--page); font-size: calc(14px * var(--font-scale, 1)); }
 .theme-picker select, .fontsize-picker select { width: auto; padding: 4px; }
 .panel, .modal, .class-card, .explanations section { background: var(--surface); color: var(--ink); }
