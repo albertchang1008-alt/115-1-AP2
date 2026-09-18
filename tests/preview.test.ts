@@ -307,3 +307,9 @@ test('錯題閃卡與首頁排列採純前端資料，沒有額外 callable', as
   assert.match(source, /submitMixedAttempts/);
   assert.match(source, /\[\.\.\.shuffle\(wrong\), \.\.\.shuffle\(unseen\), \.\.\.shuffle\(other\)\]/);
 });
+
+test('學習進度看板依課程與教材設定的單元順序排列', async () => {
+  const source = await readFile(new URL('../src/ProgressBoard.tsx', import.meta.url), 'utf8');
+  assert.match(source, /orderedChapters\(course\)/);
+  assert.doesNotMatch(source, /grouped\(units\)/);
+});

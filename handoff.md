@@ -19,6 +19,10 @@
 
 ---
 
+### 1.4.1（2026-09-19，Claude，待推送 main）
+
+教師想調整單元前後次序。單元順序本來就能在「課程與教材」選單元→上移／下移→保存草稿→發布課程調整（寫 `chapterOrder`，學生首頁照此排序）；但「學習進度」看板沒有讀 chapterOrder。已修 `src/ProgressBoard.tsx` 改用 `orderedChapters()`，加測試；`npm run check` 通過（前端 70、Functions 12）。題目分類（次單元）在單元內的順序跟 Sheet 列順序走，目前無後台調整介面。**只需推送前端**：教師在終端機執行 `git -C ~/Documents/ChatGPT/課程平台1.0 push origin feature/1.4.0-unit-model:main`（不需部署 Functions）。
+
 ### ✅ 1.4.0 已上線（2026-09-18）
 
 教師以 `bash scripts/deploy.sh`（zsh＋nvm Node 22.23.2、Firebase CLI 登入 hhchang@ctcn.edu.tw、GitHub 以 albertchang1008-alt 個人權杖）完成：`npm run check` 通過（前端 69、Functions 12）→ 備份分支 → `deploy --only functions` 到 ap2-7ed91，**37 個函式全部 Successful update，Deploy complete** → `origin/main` 快轉 710e35d..e90d57e。Claude 已確認正式站 `version.json` 為 **1.4.0**。本機仍在 `feature/1.4.0-unit-model`（本機 main 未更新，之後可 `git checkout main && git pull`）；本則交接 commit 只在功能分支、未推 main。
@@ -100,7 +104,7 @@ Claude 在乾淨環境重跑 `npm run check`（前端 67、Functions 12）通過
 
 2026-09-18（題庫欄位統一驗證與部署）：教師已自行調整正式 Google Sheet，並以唯讀方式確認 `115-1-AP2` 分頁的 M 欄為「正確答案代碼」，前兩題值皆為 `B`；相鄰 N 欄「Zuvio解答」存在，但平台依既定契約完全忽略、不會寫入資料庫。程式契約在本機 commit `cf9f8ea`，`npm run check` 已通過（前端 57、Functions 8），未 push。教師再次明確授權後，`functions:platform:syncSheet` 已於 2026-09-18 成功部署至 Firebase `ap2-7ed91` 的 asia-east1；CLI 顯示 Successful update operation / Deploy complete。Google Sheet 本輪未由 agent 寫入。
 
-目前版本：1.4.0。2026-09-18 已完成學生端 UI 改版 1.3.0 第二階段：`src/Student.tsx` 增加課前／課堂／課後／練習 hash 分頁、活動卡與完成文字、100dvh 獨立閱讀頁、完整／抽題／閃卡／錯題共用作答外框；新增 `src/studentRoute.ts` 統一解析／還原 hash，作答中的瀏覽器返回先顯示離開確認。第一階段的可見性、完成度第 2 版與後端重新批改均保留；本輪測試另確認竄改前端 correct/score 不影響伺服器成績。`npm run check` 已通過（前端 43、後端 5）；第二階段本機 commit 已建立（以 `git log -1` 取得目前 hash），未 push、未 deploy。規格檔 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 仍是使用者未追蹤檔案，不納入提交；下一步由教師部署 Functions 與推送 Pages。
+目前版本：1.4.1。2026-09-18 已完成學生端 UI 改版 1.3.0 第二階段：`src/Student.tsx` 增加課前／課堂／課後／練習 hash 分頁、活動卡與完成文字、100dvh 獨立閱讀頁、完整／抽題／閃卡／錯題共用作答外框；新增 `src/studentRoute.ts` 統一解析／還原 hash，作答中的瀏覽器返回先顯示離開確認。第一階段的可見性、完成度第 2 版與後端重新批改均保留；本輪測試另確認竄改前端 correct/score 不影響伺服器成績。`npm run check` 已通過（前端 43、後端 5）；第二階段本機 commit 已建立（以 `git log -1` 取得目前 hash），未 push、未 deploy。規格檔 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 仍是使用者未追蹤檔案，不納入提交；下一步由教師部署 Functions 與推送 Pages。
 2026-09-18（第七版，測試補強）：使用者已授權錯題結構與答案表資料變更。`Progress.wrong` 已升為 `{questionId:{n,at}}`，舊陣列相容為 `{n:1,at:0}`、答對移除；新發布題庫建立私有 `grading/answers`，交卷優先讀答案表、舊題庫 fallback chunk 並只警告一次；題庫快取使用 localStorage 版本鍵（1 MB 單筆、3 MB LRU、登出清除）。學生端移除錯題複習作答入口、加入純前端錯題閃卡及首頁錯題／綜合練習入口；`submitMixedAttempts` 以單筆 progress transaction 處理最多 10 個次單元。已補上錯題篩選／排序、快取命中與 LRU、毀損及配額回退、首頁排序、答案表私有性與混合交易邊界測試；`npm run check` 通過（前端 49、Functions 7）。規格原檔仍是使用者未追蹤檔，禁止納入 commit。實機 UI 與真正 Firestore transaction rollback 仍需用 Emulator 或正式測試專案驗收；目前記憶體後端只驗證交易結構，不能模擬 Firestore 的 abort 提交保證。
 2026-09-18（Emulator 原子性驗證受環境阻擋）：`firebase.json` 已有 Firestore Emulator（8080），新增 `functions/scripts/verify-mixed-transaction.cjs`，會先以真實 callable 成功交卷驗證兩次單元的 wrong／attempted，再用真實 Firestore transaction 故意 throw 驗證零殘留。Functions build 與 Firebase CLI 15.30.0 都成功；但 `firebase emulators:exec` 因本機沒有 Java Runtime（`java -version` exit 1）而無法啟動。未安裝任何系統相依、未取得真實 Emulator 結果。Java 可用後執行：`npm --prefix functions run build && npx firebase-tools emulators:exec --only firestore "node functions/scripts/verify-mixed-transaction.cjs"`。規格原檔仍未追蹤，不可納入提交。
 2026-09-18（iPhone 版面修正）：學生全螢幕作答的頂部列原本會隨內容捲走，已改成固定列，含 `aria-label="離開測驗"` 的 ✕、模式／單元名、題號和進度條；底部列加入 safe-area padding。閱讀頁本來就是 48px 固定 grid 頂欄，已在新增測試中確認離開鍵仍可見。全域頂端色系／字級列已從 `main.tsx` 移除；學生改為右上「顯示設定」固定按鈕，開啟底部面板（色系／字級沿用 localStorage）、點遮罩或瀏覽器返回可關，所有首頁／次單元／作答／閱讀都可使用。教師後台保留原 prefs-bar。`npm run check` 通過（前端 50、Functions 7）。規格原檔仍未追蹤，不可納入提交。
