@@ -611,8 +611,9 @@ function Quiz({
           {result.score}
           <small> 分</small>
         </h1>
-        <p>
-          答對 {result.answers.filter((a) => a.correct).length} / {questions.length} 題
+        <p className="result-counts">
+          <span>答對：<b className="count-ok">{result.answers.filter((a) => a.correct).length}</b> 題</span>
+          <span>答錯：<b className="count-bad">{questions.length - result.answers.filter((a) => a.correct).length}</b> 題</span>
         </p>
         <p className="notice">{busy ? '正在保存…' : status}</p>
         <button className="primary" disabled={busy} onClick={onClose}>
@@ -621,11 +622,15 @@ function Quiz({
         <div className="reviewanswers">
           {questions.map((q, j) => (
             // 2026-09-15 起：不用 <details> 收合，交卷後每一題的正解與解析直接顯示，不用點。
-            <div className="reviewanswer" key={q.id}>
-              <h3>
-                {result.answers[j].correct ? '✓' : '✕'} {q.text}
-              </h3>
-              <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
+            <div className={'reviewanswer ' + (result.answers[j].correct ? 'is-ok' : 'is-bad')} key={q.id}>
+              <strong className="review-verdict">{result.answers[j].correct ? '✅ 答對' : '❌ 答錯'}</strong>
+              <h3><span className="review-no">Q{j + 1}.</span> {q.text}</h3>
+              <ul className="review-options">
+                {q.options.map((o) => {
+                  const picked = result.answers[j].selected === o.id, right = o.id === q.answer;
+                  return <li key={o.id} className={right ? 'right' : picked ? 'picked' : ''}>{right ? '✓' : picked ? '✗' : '•'} {o.text}{right && <small>（正確答案）</small>}{picked && !right && <small>（本次選擇）</small>}</li>;
+                })}
+              </ul>
               <QuestionImage key={q.image} url={q.image} /><Explanations q={q} onResearch={(v) => research(q.id, v)} />
             </div>
           ))}

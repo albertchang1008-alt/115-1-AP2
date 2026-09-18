@@ -329,5 +329,13 @@ test('單元學習活動可上移下移，並提供晴空粉色系', async () =>
   const picker = await readFile(new URL('../src/ThemePicker.tsx', import.meta.url), 'utf8');
   const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
   assert.match(picker, /value="blossom">晴空粉/);
-  assert.match(css, /data-theme='blossom'\] \{ --blue: #1f86cf/);
+  assert.match(css, /data-theme='blossom'\] \{ --blue: #0ea5e9/);
+});
+
+test('測驗結果以答對／答錯分色卡逐選項標示正確答案與本次選擇', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  assert.match(source, /'is-ok' : 'is-bad'/);
+  assert.match(source, /（正確答案）/);
+  assert.match(source, /（本次選擇）/);
+  assert.match(source, /count-bad/);
 });

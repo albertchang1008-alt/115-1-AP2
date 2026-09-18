@@ -21,7 +21,7 @@
 
 ### 1.4.1（2026-09-19，Claude，待推送 main）
 
-教師想調整單元前後次序。單元順序本來就能在「課程與教材」選單元→上移／下移→保存草稿→發布課程調整（寫 `chapterOrder`，學生首頁照此排序）；但「學習進度」看板沒有讀 chapterOrder。已修 `src/ProgressBoard.tsx` 改用 `orderedChapters()`，加測試；`npm run check` 通過（前端 70、Functions 12）。另加：選教材版本自動帶入 GitHub Pages 教材網址（`materialPageUrl()` in shared/materials.ts），並有「帶入此網址」按鈕；單元學習活動可上移／下移；新增色系「晴空粉」（`data-theme='blossom'`）。`npm run check` 前端 72、Functions 12。題目分類（次單元）在單元內的順序跟 Sheet 列順序走，目前無後台調整介面。**只需推送前端**：教師在終端機執行 `git -C ~/Documents/ChatGPT/課程平台1.0 push origin feature/1.4.0-unit-model:main`（不需部署 Functions）。
+教師想調整單元前後次序。單元順序本來就能在「課程與教材」選單元→上移／下移→保存草稿→發布課程調整（寫 `chapterOrder`，學生首頁照此排序）；但「學習進度」看板沒有讀 chapterOrder。已修 `src/ProgressBoard.tsx` 改用 `orderedChapters()`，加測試；`npm run check` 通過（前端 70、Functions 12）。另加：選教材版本自動帶入 GitHub Pages 教材網址（`materialPageUrl()` in shared/materials.ts），並有「帶入此網址」按鈕；單元學習活動可上移／下移；新增色系「晴空粉」（`data-theme='blossom'`，比照教師提供的 v1.9 截圖、Tailwind 色票）；測驗結果頁改為答對／答錯分色卡並逐選項標示。`npm run check` 前端 73、Functions 12。題目分類（次單元）在單元內的順序跟 Sheet 列順序走，目前無後台調整介面。**只需推送前端**：教師在終端機執行 `git -C ~/Documents/ChatGPT/課程平台1.0 push origin feature/1.4.0-unit-model:main`（不需部署 Functions）。
 
 ### ✅ 1.4.0 已上線（2026-09-18）
 
