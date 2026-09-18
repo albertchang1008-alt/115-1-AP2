@@ -50,6 +50,7 @@ export async function login() {
 }
 export async function logout() {
   if (auth) await signOut(auth);
+  clearBankCache();
 }
 // 2026-09-15：使用者反映登入後 Firebase 會記住這個瀏覽器的帳號，找不到地方切換。
 // 這裡先登出目前的 session，再呼叫（已強制 select_account 的）login() 重新彈出
@@ -57,6 +58,7 @@ export async function logout() {
 export async function switchAccount() {
   if (!auth) throw Error('尚未設定 Firebase');
   await signOut(auth);
+  clearBankCache();
   await login();
 }
 export interface API {
@@ -326,17 +328,20 @@ export async function cachedBank(api: API, courseId: string, unitId: string, ver
   const key = `bank:${auth?.currentUser?.uid || 'preview'}:${courseId}:${unitId}:${version}`;
   if (!api.preview) {
     try {
-      const cached = sessionStorage.getItem(key);
-      if (cached) return JSON.parse(cached) as Question[];
+      const cached = localStorage.getItem(key);
+      if (cached) { const questions = JSON.parse(cached); if (Array.isArray(questions) && questions.every((q) => q?.id && Array.isArray(q.options) && typeof q.answer === 'string')) { localStorage.setItem(key + ':at', String(Date.now())); return questions as Question[]; } localStorage.removeItem(key); }
     } catch {}
   }
   const { questions } = await api.call('getBank', { courseId, unitId, version });
   if (!api.preview)
     try {
-      sessionStorage.setItem(key, JSON.stringify(questions));
+      const raw = JSON.stringify(questions);
+      if (raw.length <= 1024 * 1024) { for (const k of Object.keys(localStorage).filter((k) => k.startsWith(`bank:${auth?.currentUser?.uid || 'preview'}:${courseId}:${unitId}:`) && !k.startsWith(key))) localStorage.removeItem(k); localStorage.setItem(key, raw); localStorage.setItem(key + ':at', String(Date.now())); evictBankCache(); }
     } catch {}
   return questions as Question[];
 }
+export function clearBankCache() { try { for (const k of Object.keys(localStorage).filter((k) => k.startsWith('bank:'))) localStorage.removeItem(k); } catch {} }
+function evictBankCache() { try { const keys = Object.keys(localStorage).filter((k) => k.startsWith('bank:') && !k.endsWith(':at')); let size = keys.reduce((n, k) => n + (localStorage.getItem(k)?.length || 0), 0); for (const k of keys.sort((a, b) => Number(localStorage.getItem(a + ':at') || 0) - Number(localStorage.getItem(b + ':at') || 0))) { if (size <= 3 * 1024 * 1024) break; size -= localStorage.getItem(k)?.length || 0; localStorage.removeItem(k); localStorage.removeItem(k + ':at'); } } catch {} }
 export function queueKey(uid: string) {
   return `pending-v1:${uid}`;
 }

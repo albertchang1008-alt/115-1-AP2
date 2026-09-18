@@ -129,6 +129,11 @@
       "collectionGroup": "statStates",
       "fieldPath": "questions",
       "indexes": []
+    },
+    {
+      "collectionGroup": "diagnostics",
+      "fieldPath": "summary",
+      "indexes": []
     }
   ]
 }

@@ -425,6 +425,8 @@ async function publishBank(courseId: string, unitId: string, questions: Question
       questionOptions: Object.fromEntries(sorted.map((q) => [q.id, q.options.map((o) => o.id)])),
       createdAt: Date.now(),
     });
+    // 僅供 Cloud Functions 批改；getBank 絕不讀取／回傳此文件。
+    batch.set(ref.collection('grading').doc('answers'), { answers: Object.fromEntries(sorted.map((q) => [q.id, q.answer])), count: sorted.length });
     await batch.commit();
   }
   return { version, count: sorted.length };
@@ -490,6 +492,8 @@ export const getProgress = onCall(options, async (req) => {
   );
   return p.teacher ? progress : visibleProgress(progress as Progress, forClass(c.published, p.classId));
 });
+// 舊題庫發布時尚無私有答案表；同一個版本只記錄一次 fallback，避免監控雜訊。
+const gradingFallbackWarned = new Set<string>();
 export const submitAttempt = onCall(options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const a = req.data?.attempt as Attempt;
@@ -503,7 +507,8 @@ export const submitAttempt = onCall(options, async (req) => {
   const unit =
     c.published && forClass(c.published, p.classId).units.find((u: any) => u.id === a.unitId);
   if (!unit || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放');
-  const bank = await db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}`).get();
+  const bankRef = db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}`);
+  const bank = await bankRef.get();
   if (!bank.exists) fail('題庫版本不存在');
   if (
     !['quiz', 'flashcard', 'review'].includes(a.mode) ||
@@ -534,8 +539,18 @@ export const submitAttempt = onCall(options, async (req) => {
     )
       fail('題目或選項不屬於本次題庫');
   }
-  const chunks = await Promise.all(bank.data()!.chunks.map((ch: string) => db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}/chunks/${ch}`).get()));
-  const answersById = new Map(chunks.flatMap((d) => d.data()?.questions || []).map((q: Question) => [q.id, q.answer]));
+  const grading = await bankRef.collection('grading').doc('answers').get();
+  let answersById: Map<string, string>;
+  if (grading.exists) answersById = new Map(Object.entries(grading.data()!.answers || {}) as [string, string][]);
+  else {
+    const warningKey = `${a.courseId}/${a.unitId}/${a.version}`;
+    if (!gradingFallbackWarned.has(warningKey)) {
+      gradingFallbackWarned.add(warningKey);
+      console.warn(`grading fallback: ${warningKey}`);
+    }
+    const chunks = await Promise.all(bank.data()!.chunks.map((ch: string) => db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}/chunks/${ch}`).get()));
+    answersById = new Map(chunks.flatMap((d) => d.data()?.questions || []).map((q: Question) => [q.id, q.answer]));
+  }
   // 前端傳來的 score／correct 僅供相容，絕不採用；一律以不可變題庫快照的正解重批。
   a.answers = a.answers.map((r) => ({ ...r, correct: answersById.get(r.questionId) === r.selected }));
   a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
@@ -562,6 +577,47 @@ export const submitAttempt = onCall(options, async (req) => {
     tx.create(ref, saved);
     if (a.mode !== 'review') tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
     return { progress: next, duplicate: false };
+  });
+});
+/** 綜合練習只寫一次 progress；每個次單元仍各留一筆不可變作答紀錄。 */
+export const submitMixedAttempts = onCall(options, async (req) => {
+  if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
+  const attempts = req.data?.attempts as Attempt[];
+  if (!Array.isArray(attempts) || !attempts.length || attempts.length > 10) fail('綜合練習格式錯誤');
+  const courseId = attempts[0]?.courseId;
+  if (!attempts.every((a) => a && a.courseId === courseId && a.mode === 'quiz' && a.full === false && Array.isArray(a.answers) && a.answers.length)) fail('綜合練習格式錯誤');
+  const { p, c } = await access(req, courseId);
+  if (p.teacher) fail('預覽不能寫入正式進度');
+  const visible = c.published && forClass(c.published, p.classId).units || [];
+  const prepared = await Promise.all(attempts.map(async (input) => {
+    id(input.id); code(input.unitId); id(input.version); size(input, 300000);
+    const unit = visible.find((u: any) => u.id === input.unitId);
+    if (!unit || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放');
+    const bankRef = db.doc(`banks/${courseId}_${input.unitId}_${input.version}`), bank = await bankRef.get();
+    if (!bank.exists || !Number.isFinite(input.duration) || input.duration < 0 || input.answers.length > MAX_BANK_QUESTIONS) fail('作答格式錯誤');
+    const options = bank.data()!.questionOptions || {};
+    if (new Set(input.answers.map((x) => x.questionId)).size !== input.answers.length) fail('作答格式錯誤');
+    for (const answer of input.answers) if (!options[answer.questionId] || typeof answer.selected !== 'string' || !options[answer.questionId].includes(answer.selected)) fail('題目或選項不屬於本次題庫');
+    const grading = await bankRef.collection('grading').doc('answers').get();
+    let keys: Map<string, string>;
+    if (grading.exists) keys = new Map(Object.entries(grading.data()!.answers || {}) as [string, string][]);
+    else {
+      const warningKey = `${courseId}/${input.unitId}/${input.version}`;
+      if (!gradingFallbackWarned.has(warningKey)) { gradingFallbackWarned.add(warningKey); console.warn(`grading fallback: ${warningKey}`); }
+      const chunks = await Promise.all(bank.data()!.chunks.map((ch: string) => bankRef.collection('chunks').doc(ch).get()));
+      keys = new Map(chunks.flatMap((d) => d.data()?.questions || []).map((q: Question) => [q.id, q.answer]));
+    }
+    const answers = input.answers.map((x) => ({ ...x, correct: keys.get(x.questionId) === x.selected }));
+    return { ...input, answers, score: Math.round(answers.filter((x) => x.correct).length / answers.length * 100), full: false } as Attempt;
+  }));
+  const progressRef = db.doc(`courses/${courseId}/progress/${p.uid}`);
+  return db.runTransaction(async (tx) => {
+    const old = await Promise.all(prepared.map((a) => tx.get(db.doc(`courses/${courseId}/attempts/${a.id}`))));
+    if (old.some((x) => x.exists && x.data()?.uid !== p.uid)) throw new HttpsError('permission-denied', '作答 ID 衝突');
+    const progress = await tx.get(progressRef); let next = (progress.data() || emptyProgress()) as Progress;
+    for (let i = 0; i < prepared.length; i++) if (!old[i].exists) { const a = prepared[i]; next = applyAttempt(next, { ...a, receivedAt: Date.now() }); tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false }); }
+    tx.set(progressRef, { ...next, uid: p.uid, classId: p.classId });
+    return { progress: next };
   });
 });
 export const saveActivity = onCall(options, async (req) => {

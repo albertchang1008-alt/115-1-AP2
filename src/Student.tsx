@@ -27,6 +27,7 @@ import {
   grade,
   shuffle,
   orderForPractice,
+  wrongEntries,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -87,10 +88,11 @@ export default function Student({
     const read = () => {
       const parsed = parseStudentRoute(location.hash, course.id);
       if (!parsed) { if (location.hash) { route(); notify('此單元目前未開放'); } return; }
-      if (takingRef.current && !['quiz', 'flashcard', 'review'].includes(parsed.kind)) { setExitRequested(true); return; }
+      if (takingRef.current && !['quiz', 'flashcard'].includes(parsed.kind)) { setExitRequested(true); return; }
       if (parsed.kind === 'home') { setUnitId(''); setActivityId(''); setTaking(false); return; }
+      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.count}`); setTaking(false); return; }
       const nextUnit = parsed.unitId;
-      const nextActivity = parsed.kind === 'activity' ? parsed.activityId : '';
+      const nextActivity = parsed.kind === 'activity' ? parsed.activityId : parsed.kind === 'wrongcards' ? '__wrongcards' : '';
       const allowed = course.units.find((u) => u.id === nextUnit);
       if (!allowed) { route(); notify('此單元目前未開放'); return; }
       setUnitId(nextUnit);
@@ -98,9 +100,8 @@ export default function Student({
       if (parsed.kind === 'unit') setTab(location.hash.includes('?tab=') ? parsed.tab : defaultTab(allowed, pRef.current));
       if (parsed.kind === 'quiz') void start('quiz', parsed.mode === 'draw' ? parsed.count : undefined, allowed);
       else if (parsed.kind === 'flashcard') void start('flashcard', undefined, allowed);
-      else if (parsed.kind === 'review') void start('review', undefined, allowed);
       // 作答路由由 start() 載入題庫後開啟；不要讓 hashchange 把剛開啟的全螢幕作答關掉。
-      if (!['quiz', 'flashcard', 'review'].includes(parsed.kind)) setTaking(false);
+      if (!['quiz', 'flashcard'].includes(parsed.kind)) setTaking(false);
     };
     if (!location.hash) route();
     read();
@@ -174,15 +175,7 @@ export default function Student({
     setBusy(true);
     try {
       let qs = await cachedBank(api, course.id, target.id, target.bankVersion);
-      if (m === 'review') {
-        const wrong = new Set<string>(progress.units[target.id]?.wrong?.[target.bankVersion] || []);
-        qs = qs.filter((q) => wrong.has(q.id));
-        if (!qs.length) {
-          notify('目前沒有此題庫版本的歷史錯題。');
-          return;
-        }
-        qs = shuffle(qs);
-      } else if (practiceCount) {
+      if (practiceCount) {
         // 抽題練習：不計分、不計完成度。已考過的題目自然排到後面（仿 v1.9），不是每次重置重洗。
         const attemptedIds = new Set(Object.keys(progress.attempted?.[target.id] || {}));
         qs = orderForPractice(qs, attemptedIds).slice(0, Math.min(practiceCount, qs.length));
@@ -193,7 +186,7 @@ export default function Student({
         notify('題庫沒有可用題目');
         return;
       }
-      setFull(!practiceCount && m !== 'review');
+      setFull(!practiceCount);
       qs = qs.map((q) => ({ ...q, options: shuffle(q.options) }));
       setQuestions(qs);
       setMode(m);
@@ -246,6 +239,8 @@ export default function Student({
     try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
     catch (e) { notify('研究資料未同步：' + (e as Error).message); }
   }
+  if (activityId.startsWith('__mixed_')) return <MixedPractice api={api} course={course} progress={progress} count={Number(activityId.slice(8))} onBack={() => route()} notify={notify} />;
+  if (unit && activityId === '__wrongcards') return <WrongCards api={api} course={course} unit={unit} progress={progress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} />;
   if (activity && unit)
     return <ReadingPage course={course} unit={unit} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} />;
   if (taking && unit)
@@ -260,7 +255,7 @@ export default function Student({
         researchEnabled={unit.research?.enabled !== false}
         onResearch={saveResearch}
         forceLeave={exitRequested}
-        onClose={() => { setTaking(false); setExitRequested(false); if (/\/(quiz|flashcard|review)(?:\?|$)/.test(location.hash)) route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`); else setTimeout(() => dispatchEvent(new HashChangeEvent('hashchange')), 0); }}
+        onClose={() => { setTaking(false); setExitRequested(false); if (/\/(quiz|flashcard)(?:\?|$)/.test(location.hash)) route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`); else setTimeout(() => dispatchEvent(new HashChangeEvent('hashchange')), 0); }}
       />
     );
   return (
@@ -309,6 +304,8 @@ export default function Student({
             </div>
           </div>
           <section className="panel"><h2>還沒完成</h2>{currentUnits.filter((u) => u.required && !complete(u, progress)).length ? <><ul>{currentUnits.filter((u) => u.required && !complete(u, progress)).slice(0, outstandingAll ? undefined : 5).map((u) => { const state = unitCompletion(u, progress); return <li key={u.id}><button onClick={() => route(`/unit/${encodeURIComponent(u.id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `完整測驗未達標（${progress.units[u.id]?.best ?? 0} / ${u.threshold} 分）` : '尚有必做活動未完成'}｜{u.group || '未分類'}／{u.title}</button></li>; })}</ul>{!outstandingAll && currentUnits.filter((u) => u.required && !complete(u, progress)).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentUnits.filter((u) => u.required && !complete(u, progress)).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
+          {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards?range=7d`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
+          {currentUnits.length > 0 && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
           {currentUnits.length ? groupUnits(currentUnits).map(([group, units]) => (
             <div className="unit-group" key={group || '__ungrouped'}>
               {group && <h3 className="unit-group-title">{group}</h3>}
@@ -398,7 +395,7 @@ export default function Student({
               <h2>我的學習紀錄</h2>
               <button onClick={() => setHistoryOpen(false)}>關閉</button>
             </div>
-            <p className="muted">每次載入 20 組；錯題複習不計入完成度。</p>
+            <p className="muted">每次載入 20 組；錯題閃卡不會建立作答紀錄。</p>
             {history.length === 0 ? (
               <p className="empty">尚無作答紀錄</p>
             ) : (
@@ -449,13 +446,34 @@ function ActivityCard({ unit, activity, progress, onOpen }: { unit: Unit; activi
 }
 function PracticeCards({ unit, progress, busy, start, route }: { unit: Unit; progress: Progress; busy: boolean; start: (m: Mode, n?: number) => Promise<void>; route: (path: string) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n); };
-  const wrong = progress.units[unit.id]?.wrong?.[unit.bankVersion]?.length || 0;
-  return <div className="practice-cards"><button className="activitycard" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}><span className="badge">計入成績</span><h3>完整測驗</h3><p>完整作答後取歷次最高有效成績。</p></button><button className="activitycard" disabled={busy} onClick={() => go('flashcard', '/flashcard')}><span className="badge">計入成績</span><h3>完整閃卡</h3><p>完整作答後取歷次最高有效成績。</p></button><div className="activitycard"><span className="badge">僅供練習</span><h3>隨機抽題</h3>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>抽 {n} 題</button>)}</div><button className="activitycard" disabled={busy || !wrong} onClick={() => go('review', '/review')}><span className="badge">僅供練習</span><h3>錯題複習</h3><p>{wrong ? `${wrong} 題錯題` : '目前沒有錯題'}</p></button></div>;
+  const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
+  return <div className="practice-cards"><button className="activitycard" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}><span className="badge">計入成績</span><h3>完整測驗</h3><p>完整作答後取歷次最高有效成績。</p></button><button className="activitycard" disabled={busy} onClick={() => go('flashcard', '/flashcard')}><span className="badge">計入成績</span><h3>完整閃卡</h3><p>完整作答後取歷次最高有效成績。</p></button><div className="activitycard"><span className="badge">僅供練習</span><h3>隨機抽題</h3>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>抽 {n} 題</button>)}</div><button className="activitycard" disabled={!wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}><span className="badge">僅供複習</span><h3>錯題閃卡</h3><p>{wrong ? `${wrong} 題錯題` : '目前沒有錯題'}</p></button></div>;
 }
 function ReadingPage({ course, unit, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
   const root = useRef<HTMLElement>(null); const [canFullscreen, setCanFullscreen] = useState(false);
   useEffect(() => setCanFullscreen(!!document.fullscreenEnabled && !!root.current?.requestFullscreen), []);
   return <main className="reading-page" ref={root as any}><header><button aria-label="離開閱讀" onClick={onBack}><ArrowLeft size={18} /></button><strong>{activity.title}</strong>{canFullscreen && <button aria-label="全螢幕閱讀" onClick={() => root.current?.requestFullscreen()}>全螢幕</button>}</header><section className="reading-body">{activity.type === 'html' ? <HtmlMaterial activity={activity} onSave={onSave} api={api} courseId={course.id} unitId={unit.id} uid={uid} /> : activity.type === 'youtube' ? <Youtube activity={activity} position={progress.activities[`${unit.id}_${activity.id}`]?.position || 0} onSave={onSave} /> : <><h1>{activity.title}</h1><p>{activity.description}</p><a className="button primary" href={activity.url} target="_blank" rel="noreferrer" onClick={() => onSave(0, false)}>開啟連結 ↗</a><button onClick={() => onSave(0, true)}>確認已閱讀</button></>}</section></main>;
+}
+function WrongCards({ api, course, unit, progress, onBack }: { api: API; course: Course; unit: Unit; progress: Progress; onBack: () => void }) {
+  const [range, setRange] = useState<'24h' | '7d' | 'all'>('7d'), [qs, setQs] = useState<Question[]>([]), [i, setI] = useState(0), [flipped, setFlipped] = useState(false), [seen, setSeen] = useState(0);
+  const entries = wrongEntries(progress, unit.id, unit.bankVersion); const now = Date.now();
+  const ids = (r: string) => Object.entries(entries).filter(([, x]) => r === 'all' ? true : x.at > 0 && now - x.at <= (r === '24h' ? 86400000 : 604800000)).sort((a,b) => b[1].n-a[1].n || b[1].at-a[1].at).map(([id]) => id);
+  const counts = { '24h': ids('24h').length, '7d': ids('7d').length, all: ids('all').length };
+  useEffect(() => { if (!counts[range]) setRange(counts['7d'] ? '7d' : 'all'); }, [counts['24h'], counts['7d'], counts.all, range]);
+  useEffect(() => { void cachedBank(api, course.id, unit.id, unit.bankVersion).then((all) => setQs(ids(range).map((id) => all.find((q) => q.id === id)).filter(Boolean) as Question[])); }, [range, unit.id, unit.bankVersion]);
+  const q = qs[i];
+  if (!q) return <main className="quiz"><button onClick={onBack}>返回單元</button><h1>{seen ? '本次錯題閃卡已看完' : '目前沒有錯題'}</h1><p>錯題會在完整測驗、完整閃卡、抽題或綜合練習答對時移除。</p></main>;
+  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>錯題閃卡 {i + 1} / {qs.length}</strong></div><label>時間範圍 <select value={range} onChange={(e) => { setRange(e.target.value as any); setI(0); setFlipped(false); }}>{(['24h','7d','all'] as const).map((r) => <option key={r} value={r} disabled={!counts[r]}>{r === '24h' ? '最近 24 小時' : r === '7d' ? '最近 7 天' : '全部'}（{counts[r]}）</option>)}</select></label><article className="panel" onClick={() => setFlipped(true)} aria-label="點選翻到答案"><h2>{q.text}</h2>{flipped && <><p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p><Explanations q={q} /></>}</article><p>閃卡不會寫入資料或改變錯題清單；在測驗或練習中答對才會移除。</p><div className="sectionhead"><button onClick={() => { setSeen((n) => n + 1); setQs((x) => x.filter((_, index) => index !== i)); setI(0); setFlipped(false); }}>我會</button><button onClick={() => { setSeen((n) => n + 1); setQs((x) => [...x.slice(0, i), ...x.slice(i + 1), q]); setI(Math.min(i, Math.max(0, qs.length - 1))); setFlipped(false); }}>再看一次</button></div></main>;
+}
+function MixedPractice({ api, course, progress, count, onBack, notify }: { api: API; course: Course; progress: Progress; count: number; onBack: () => void; notify: (s: string) => void }) {
+  const [rows, setRows] = useState<{ q: Question; unit: Unit }[]>([]), [i, setI] = useState(0), [selected, setSelected] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [done, setDone] = useState(false);
+  useEffect(() => { let active = true; void Promise.all(course.units.filter((u) => unitVisibility(u) === 'current' && u.bankVersion).map(async (unit) => (await cachedBank(api, course.id, unit.id, unit.bankVersion)).map((q) => ({ q, unit })))).then((all) => { if (!active) return; const flat = all.flat(); const wrong = flat.filter(({q,unit}) => !!wrongEntries(progress, unit.id, unit.bankVersion)[q.id]); const unseen = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !progress.attempted?.[unit.id]?.[q.id]); const other = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !!progress.attempted?.[unit.id]?.[q.id]); setRows([...shuffle(wrong), ...shuffle(unseen), ...shuffle(other)].slice(0, Math.min(count, flat.length))); }).catch((e) => notify(e.message)); return () => { active = false; }; }, [api, course.id, count]);
+  const row = rows[i];
+  async function submit() { if (!rows.length || busy) return; setBusy(true); try { const grouped = new Map<Unit, { q: Question; key: string }[]>(); rows.forEach(({ q, unit }) => grouped.set(unit, [...(grouped.get(unit) || []), { q, key: `${unit.id}:${q.id}` }])); const attempts: Attempt[] = [...grouped].map(([unit, qs]) => { const answers = qs.map(({q, key}) => ({ questionId: q.id, selected: selected[key] || '', correct: false, seconds: 0 })); return { id: crypto.randomUUID(), courseId: course.id, unitId: unit.id, version: unit.bankVersion, mode: 'quiz', answers, score: 0, full: false, clientAt: Date.now(), duration: 0 }; }); await api.call('submitMixedAttempts', { attempts }); setDone(true); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }
+  if (!row) return <main className="quiz"><button onClick={onBack}>返回首頁</button><h1>目前沒有可供綜合練習的題目</h1></main>;
+  if (done) return <main className="quiz"><h1>綜合練習已提交</h1><p>錯題與作答紀錄已分別寫回原次單元；不影響最高成績或完成度。</p><button onClick={onBack}>返回首頁</button></main>;
+  const key = `${row.unit.id}:${row.q.id}`;
+  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>綜合練習 {i + 1} / {rows.length}</strong></div><p>{row.unit.title}</p><h2>{row.q.text}</h2><div className="options">{row.q.options.map((o) => <button key={o.id} className={selected[key] === o.id ? 'chosen' : ''} onClick={() => setSelected((x) => ({ ...x, [key]: o.id }))}>{o.text}</button>)}</div><div className="sectionhead"><button disabled={i === 0} onClick={() => setI(i - 1)}>上一題</button>{i < rows.length - 1 ? <button className="primary" onClick={() => setI(i + 1)}>下一題</button> : <button className="primary" disabled={busy} onClick={submit}>完成並提交</button>}</div></main>;
 }
 function Quiz({
   questions,
@@ -567,7 +585,6 @@ function Quiz({
           答對 {result.answers.filter((a) => a.correct).length} / {questions.length} 題
         </p>
         <p className="notice">{busy ? '正在保存…' : status}</p>
-        {mode === 'review' && <p>本次複習不更動正式成績或完成度。</p>}
         <button className="primary" disabled={busy} onClick={onClose}>
           返回單元
         </button>

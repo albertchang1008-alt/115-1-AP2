@@ -133,11 +133,17 @@ export interface Attempt {
 export interface Progress {
   units: Record<
     string,
-    { best: number; attempts: number; updatedAt: number; wrong?: Record<string, string[]> }
+    { best: number; attempts: number; updatedAt: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
   attempted?: Record<string, Record<string, true>>;
+}
+export interface WrongEntry { n: number; at: number; }
+export function wrongEntries(progress: Progress, unitId: string, version: string): Record<string, WrongEntry> {
+  const raw = progress.units[unitId]?.wrong?.[version];
+  if (Array.isArray(raw)) return Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }]));
+  return raw || {};
 }
 export interface Stat {
   students: number;
@@ -282,14 +288,15 @@ export function grade(
 export function applyAttempt(p: Progress, a: Attempt): Progress {
   if (a.mode === 'review') return p;
   const old = p.units[a.unitId];
+  const prior = wrongEntries(p, a.unitId, a.version);
+  const wrongForVersion = { ...prior };
+  for (const answer of a.answers) {
+    if (answer.correct) delete wrongForVersion[answer.questionId];
+    else wrongForVersion[answer.questionId] = { n: (prior[answer.questionId]?.n || 0) + 1, at: a.receivedAt || a.clientAt };
+  }
   const wrong = {
     ...old?.wrong,
-    [a.version]: [
-      ...new Set([
-        ...(old?.wrong?.[a.version] || []),
-        ...a.answers.filter((x) => !x.correct).map((x) => x.questionId),
-      ]),
-    ],
+    [a.version]: wrongForVersion,
   };
   return {
     ...p,

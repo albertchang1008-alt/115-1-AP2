@@ -4,7 +4,8 @@ export type StudentRoute =
   | { kind: 'activity'; unitId: string; activityId: string }
   | { kind: 'quiz'; unitId: string; mode: 'full' | 'draw'; count?: number }
   | { kind: 'flashcard'; unitId: string }
-  | { kind: 'review'; unitId: string };
+  | { kind: 'mixed'; count: number }
+  | { kind: 'wrongcards'; unitId: string; range: '24h' | '7d' | 'all' };
 
 export function parseStudentRoute(hash: string, courseId: string): StudentRoute | null {
   const path = hash.replace(/^#/, '');
@@ -14,6 +15,7 @@ export function parseStudentRoute(hash: string, courseId: string): StudentRoute 
   if (!pathname.startsWith(base + '/')) return null;
   const rest = pathname.slice(base.length);
   const q = new URLSearchParams(rawQuery);
+  if (rest === '/mixed') { const n = Number(q.get('n')); return Number.isInteger(n) && [10, 20, 30, 50].includes(n) ? { kind: 'mixed', count: n } : null; }
   const unit = rest.match(/^\/unit\/([^/]+)$/);
   if (unit) {
     const tab = q.get('tab');
@@ -25,7 +27,7 @@ export function parseStudentRoute(hash: string, courseId: string): StudentRoute 
   if (quiz) { const n = Number(q.get('n')); return { kind: 'quiz', unitId: decodeURIComponent(quiz[1]), mode: q.get('mode') === 'draw' ? 'draw' : 'full', ...(Number.isInteger(n) && n > 0 ? { count: n } : {}) }; }
   const flashcard = rest.match(/^\/unit\/([^/]+)\/flashcard$/);
   if (flashcard) return { kind: 'flashcard', unitId: decodeURIComponent(flashcard[1]) };
-  const review = rest.match(/^\/unit\/([^/]+)\/review$/);
-  if (review) return { kind: 'review', unitId: decodeURIComponent(review[1]) };
+  const wrongcards = rest.match(/^\/unit\/([^/]+)\/wrongcards$/);
+  if (wrongcards) return { kind: 'wrongcards', unitId: decodeURIComponent(wrongcards[1]), range: ['24h', '7d', 'all'].includes(q.get('range') || '') ? q.get('range') as '24h' | '7d' | 'all' : '7d' };
   return null;
 }

@@ -102,8 +102,6 @@ test('一般錯題索引保留歷史，複習答對不清除', async () => {
       answers: [{ ...base.answers[0], correct: true }],
     },
   });
-  assert.deepEqual((await a.call('getProgress')).units.orientation.wrong['example-v1'], [
-    'example-1',
-  ]);
+  assert.equal((await a.call('getProgress')).units.orientation.wrong['example-v1']['example-1'].n, 1);
   assert.equal((await a.call('getProgress')).units.orientation.best, 0);
 });

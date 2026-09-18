@@ -18,6 +18,7 @@ import {
   CURRENT_COMPLETION_FORMULA_VERSION,
   forClass,
   unitVisibility,
+  wrongEntries,
 } from '../shared/model';
 const q = {
   id: 'q1',
@@ -132,6 +133,14 @@ test('第二版完成度同時要求達標、互動教材與外部連結', () =>
 test('hidden 與逐班未勾選皆不會進入學生課程', () => {
   const c: any = { classUnits: { a: ['shown', 'hidden'] }, units: [{ id: 'shown' }, { id: 'hidden', visibility: 'hidden' }, { id: 'other' }] };
   assert.deepEqual(forClass(c, 'a').units.map((u: any) => u.id), ['shown']);
+});
+test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
+  let p: any = { units: { u: { best: 0, attempts: 1, updatedAt: 1, wrong: { v: ['q1'] } } }, activities: {} };
+  assert.deepEqual(wrongEntries(p, 'u', 'v'), { q1: { n: 1, at: 0 } });
+  p = applyAttempt(p, attempt({ version: 'v', clientAt: 10, answers: [{ questionId: 'q1', selected: 'b', correct: false, seconds: 1 }] }));
+  assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 10 });
+  p = applyAttempt(p, attempt({ id: 'clear', version: 'v', clientAt: 11, answers: [{ questionId: 'q1', selected: 'a', correct: true, seconds: 1 }] }));
+  assert.deepEqual(p.units.u.wrong.v, {});
 });
 test('缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照', () => {
   const unit: any = { id: 'u', required: true, threshold: 80, bankVersion: 'v', activities: [{ id: 'link', type: 'link' }] };
