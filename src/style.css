@@ -1044,6 +1044,11 @@ dd {
 @media (max-width: 850px) {
   .practice-row { grid-template-columns:minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"title score score score" "full flash draw wrong"; overflow-x:auto; }
 }
+@media (max-width: 600px) {
+  .practice-row { grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; }
+  .practice-draw { justify-content:space-between; }
+  .practice-draw button { flex:1; }
+}
 .reading-page { position:fixed; inset:0; z-index:20; background:var(--page); display:grid; grid-template-rows:48px minmax(0,1fr); overflow:hidden; }
 .reading-page > header { height:48px; display:flex; align-items:center; gap:12px; padding:0 12px; border-bottom:1px solid var(--line); }
 .reading-page > header strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }

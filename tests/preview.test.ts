@@ -120,6 +120,7 @@ test('練習分頁每個題目分類是一列並保留四種入口', async () =>
   assert.match(row, /badge green/);
   assert.doesNotMatch(source, /function PracticeCards/);
   assert.match(css, /\.practice-row \{ display:grid/);
+  assert.match(css, /@media \(max-width: 600px\) \{\s*\.practice-row \{ grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; \}\s*\.practice-draw \{ justify-content:space-between; \}\s*\.practice-draw button \{ flex:1; \}/);
 });
 test('教師單元與班級對照表使用精確中文文案', async () => {
   const [app, setup] = await Promise.all([
