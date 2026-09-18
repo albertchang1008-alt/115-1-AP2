@@ -63,6 +63,13 @@ test('題庫管理頁可直接設定同步 Google Sheet 網址', async () => {
   assert.match(bank, /saveSheetConfig/);
   assert.match(bank, /getSyncStatus/);
 });
+test('題庫同步找不到分頁時顯示後端實際讀到的分頁名稱', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const bank = source.slice(source.indexOf('function Bank('), source.indexOf('function RosterPage('));
+  assert.match(bank, /sourceCourseId === course\.id/);
+  assert.match(bank, /availableTabs/);
+  assert.match(bank, /平台實際讀到/);
+});
 test('平台設定固定放在側欄底部，不會被長導覽清單推到畫面外', async () => {
   const [app, css] = await Promise.all([
     readFile(new URL('../src/App.tsx', import.meta.url), 'utf8'),

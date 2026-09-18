@@ -105,3 +105,15 @@ test('非該課程授權教師時報錯，不會自動建立單元', async () =>
     assert.equal(ctx.data.get('courses/ap2').draft.units.length, 0);
   } finally { ctx.restore(); }
 });
+
+test('以課程分頁同步時，表內舊課程代碼不可指向另一門課', async () => {
+  const ctx = withMemoryDb();
+  try {
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const rows = [headers, ['other-course', 'q1', '血液', 'u1', '題目一', '甲', '乙', 'A']];
+    ctx.data.set('courses/ap2', { teacherIds: ['teacher'], draft: { id: 'ap2', classIds: [], units: [] } });
+    const results = await handlers.syncBankTabFromSheet(rows, 'ap2', 'teacher', 'ap2');
+    assert.match(results[0].error, /課程代碼.*不一致/);
+    assert.equal(ctx.data.get('courses/ap2').draft.units.length, 0, '不得留下跨課程的題庫或單元寫入');
+  } finally { ctx.restore(); }
+});

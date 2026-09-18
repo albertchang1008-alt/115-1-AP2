@@ -1332,10 +1332,13 @@ function Bank({
               try {
                 const r = await api.call<any>('syncSheet');
                 await onSynced();
-                const mine = (r.banks || []).filter((bank: any) => bank.courseId === course.id);
+                const mine = (r.banks || []).filter((bank: any) => bank.sourceCourseId === course.id || bank.courseId === course.id);
                 if (mine.some((bank: any) => bank.error)) notify('題庫同步有未完成項目，請檢查同步結果');
                 else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}；請檢查後發布課程`);
-                else notify(`找不到與課程代碼「${course.id}」同名的題庫分頁`);
+                else {
+                  const tabs = Array.isArray(r.availableTabs) ? r.availableTabs.map((title: unknown) => JSON.stringify(String(title))).join('、') : '';
+                  notify(`找不到與課程代碼「${course.id}」同名的題庫分頁。平台實際讀到：${tabs || '（未提供分頁清單，請確認雲端 Functions 已更新）'}`);
+                }
               } catch (e) {
                 notify((e as Error).message);
               } finally {

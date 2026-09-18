@@ -1057,11 +1057,18 @@ function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion
   return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, activities: [], visibility: 'hidden', ...(group ? { group } : {}) };
 }
 // 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
-export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string) {
+export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string, expectedCourseId?: string) {
   // 題庫分頁名稱就是課程代碼；正式題庫表內不再重複填課程代碼。
   // 第二個參數保留作沒有「次單元」欄的舊格式 fallback，避免既有 Sheet 失效。
   const groups = parseBankSheet(rows, tabTitle, tabTitle);
   const results: any[] = [];
+  // 同步入口以工作表分頁決定課程。若表內仍保留舊的「課程代碼」欄，不可讓它
+  // 悄悄將同一分頁的題目發布到另一門課。
+  if (expectedCourseId) {
+    const unexpected = [...groups.keys()].filter((courseId) => courseId !== expectedCourseId);
+    if (unexpected.length)
+      return unexpected.map((courseId) => ({ courseId: expectedCourseId, error: `課程分頁「${tabTitle}」內的課程代碼「${courseId}」與分頁對應課程「${expectedCourseId}」不一致` }));
+  }
   for (const [courseId, units] of groups) {
     const ref = db.doc(`courses/${courseId}`);
     for (const [unitId, { group, questions }] of units) {
@@ -1153,22 +1160,34 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
     // 只把「名稱剛好等於我可管理課程代碼」的分頁當作題庫；例如 115-1-AP2。
     // 題庫ext、說明頁、雙向細目表等即使欄位相似，也不會被誤同步。
     const managedCourses = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    for (const title of titles.filter((name) => managedCourses.docs.some((course) => course.id === name))) {
+    const matches = new Map<string, string[]>();
+    for (const title of titles) {
+      // Google Sheets 允許分頁尾端空白而 UI 幾乎看不出來；課程代碼本身不允許空白，
+      // 因此只忽略分頁名稱前後空白，不放寬中間字元或相似字元的比對。
+      const course = managedCourses.docs.find((item) => item.id === title.trim());
+      if (course) matches.set(course.id, [...(matches.get(course.id) || []), title]);
+    }
+    for (const [courseId, matchingTitles] of matches) {
+      if (matchingTitles.length !== 1) {
+        banks.push({ courseId, error: `找到多個對應「${courseId}」的題庫分頁：${matchingTitles.map((title) => JSON.stringify(title)).join('、')}；請保留一個` });
+        continue;
+      }
+      const title = matchingTitles[0];
       try {
         const rows = await readSheetRows(sheetId, token, title);
         if (!looksLikeBankSheet(rows)) {
-          banks.push({ courseId: title, error: `課程分頁「${title}」缺少題庫必要欄位` });
+          banks.push({ courseId, sourceTab: title, error: `課程分頁「${title}」缺少題庫必要欄位` });
           continue;
         }
-        const r = await syncBankTabFromSheet(rows, title, p.uid);
-        banks.push(...r);
+        const r = await syncBankTabFromSheet(rows, title, p.uid, courseId);
+        banks.push(...r.map((bank) => ({ ...bank, sourceTab: title, sourceCourseId: courseId })));
       } catch (e) {
-        banks.push({ unitId: title, error: (e as Error).message });
+        banks.push({ courseId, sourceTab: title, error: (e as Error).message });
       }
     }
     const hasErrors = banks.some((bank) => bank.error);
     const lastSyncedAt = Date.now();
-    const result = { banks, hasErrors, lastSyncedAt };
+    const result = { banks, hasErrors, lastSyncedAt, availableTabs: titles };
     await finish({ lastSyncedAt, lastResult: result, lastError: '' });
     return result;
   } catch (e) {
