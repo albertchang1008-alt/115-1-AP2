@@ -12,6 +12,8 @@ test('學生 hash 路由可解析、保留 tab 並拒絕其他課程或不完整
   assert.deepEqual(parseStudentRoute('#/course/%E8%AA%B2%E7%A8%8B/unit/u/quiz?mode=draw&n=10', '課程'), { kind: 'quiz', unitId: 'u', mode: 'draw', count: 10 });
   assert.equal(parseStudentRoute('#/course/別的課程', '課程'), null);
   assert.equal(parseStudentRoute('#/course/課程/unit/u/unknown', '課程'), null);
+  assert.deepEqual(parseStudentRoute('#/course/%E8%AA%B2%E7%A8%8B/mixed?n=20', '課程'), { kind: 'mixed', count: 20 });
+  assert.equal(parseStudentRoute('#/course/%E8%AA%B2%E7%A8%8B/unit/u/review', '課程'), null, '學生端不再提供錯題複習作答路由');
 });
 test('次單元預設開啟第一個尚有必做活動的標籤，否則第一個有內容標籤', () => {
   const u: any = { id: 'u', activities: [{ id: 'video', phase: 'before', type: 'youtube' }, { id: 'link', phase: 'during', type: 'link' }] };
@@ -138,4 +140,7 @@ test('錯題閃卡與首頁排列採純前端資料，沒有額外 callable', as
   assert.match(source, /閃卡不會寫入資料/);
   assert.ok(source.indexOf('還沒完成') < source.indexOf('unitgrid'), '待辦位於單元清單之前');
   assert.match(source, /currentUnits\.filter/);
+  assert.doesNotMatch(source, /start\('review'/);
+  assert.match(source, /submitMixedAttempts/);
+  assert.match(source, /\[\.\.\.shuffle\(wrong\), \.\.\.shuffle\(unseen\), \.\.\.shuffle\(other\)\]/);
 });
