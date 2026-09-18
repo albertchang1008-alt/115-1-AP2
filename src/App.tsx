@@ -543,7 +543,7 @@ export default function App() {
         </div>
         <div className="workspace-label">TEACHING WORKSPACE</div>
         <nav>
-          {tabs.map(([id, label, Icon]) => (
+          {tabs.filter(([id]) => id !== 'settings').map(([id, label, Icon]) => (
             <button className={tab === id ? 'active' : ''} key={id} onClick={() => nav(id)}>
               <Icon size={19} />
               {label}
@@ -551,6 +551,11 @@ export default function App() {
             </button>
           ))}
         </nav>
+        <button className={'sidebar-settings' + (tab === 'settings' ? ' active' : '')} onClick={() => nav('settings')}>
+          <Settings size={19} />
+          平台設定
+          {tab === 'settings' && <ChevronRight size={14} />}
+        </button>
         <div className="sidebar-bottom">
           <div className="avatar">師</div>
           <div>

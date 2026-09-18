@@ -63,6 +63,16 @@ test('題庫管理頁可直接設定同步 Google Sheet 網址', async () => {
   assert.match(bank, /saveSheetConfig/);
   assert.match(bank, /getSyncStatus/);
 });
+test('平台設定固定放在側欄底部，不會被長導覽清單推到畫面外', async () => {
+  const [app, css] = await Promise.all([
+    readFile(new URL('../src/App.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../src/style.css', import.meta.url), 'utf8'),
+  ]);
+  assert.match(app, /tabs\.filter\(\(\[id\]\) => id !== 'settings'\)/);
+  assert.match(app, /className=\{'sidebar-settings'/);
+  assert.match(css, /nav \{[\s\S]*?overflow-y: auto/);
+  assert.match(css, /\.sidebar-settings \{/);
+});
 test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);
