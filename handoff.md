@@ -19,6 +19,20 @@
 
 ---
 
+### 1.4.0 第四次 Claude 驗收（2026-09-18）：桌機通過，手機需修一處 CSS
+
+`npm run check`（前端 69、Functions 12）重跑通過；桌機練習分頁每分類一列、四種入口、已達標／錯題停用皆正確。**問題：手機寬度（390px）下每列的「抽題 10／20／30」與「錯題」被擠到列外（`.practice-row` 在 ≤850px 設 `overflow-x:auto`，四欄放不下），學生看不到也按不到。** 修法（Claude 已在隔離環境驗證截圖正常）：在 `src/style.css` 850px 規則之後加入：
+
+```css
+@media (max-width: 600px) {
+  .practice-row { grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; }
+  .practice-draw { justify-content:space-between; }
+  .practice-draw button { flex:1; }
+}
+```
+
+並加靜態測試確認此規則存在。完成後標示「1.4.0 第五次待 Claude 驗收」。
+
 ### 1.4.0 第三次 Claude 驗收（2026-09-18）：✅ 功能通過，待教師確認畫面後上線
 
 Claude 在乾淨環境重跑 `npm run check`（前端 67、Functions 12）通過；逐行檢查第二次退回的 9 點與第三次的 3 點（活動編輯器欄位補齊、beforeunload、刪除 LegacyCourseEditor）皆已修正。以 115-1-AP2 結構模擬截圖：教師單元設定、學生首頁（3 個單元、完成度以單元計）、學生單元練習分頁皆正常，無前端錯誤。
