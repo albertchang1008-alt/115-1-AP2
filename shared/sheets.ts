@@ -76,7 +76,10 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallba
     previousUnit = unitId;
     previousImage = isImage ? image : '';
     const options = 'abcdefgh'.split('').map((id) => ({ id, text: get('選項' + id.toUpperCase(), id, 'option' + id.toUpperCase(), '選項' + (id.charCodeAt(0) - 96)) })).filter((o) => o.text);
-    const rawAnswer = get('解答', '答案', '正確答案文字', '正確答案', 'answer', 'ans');
+    // 正式總表以「正確答案文字」為優先；早期匯入列有時只留下原始答案字母，
+    // 在文字答案空白時才向後相容採用它，避免覆蓋已校訂的答案文字。
+    const rawAnswer = get('解答', '答案', '正確答案文字', '正確答案', 'answer', 'ans')
+      || get('原始答案字母(僅對照)', '原始答案字母', 'originalAnswer');
     let answer = rawAnswer.replace(/^[（(]|[）)]$/g, '').toLowerCase();
     if (/^[1-8]$/.test(answer)) answer = 'abcdefgh'[Number(answer) - 1];
     if (!options.some((o) => o.id === answer)) {
