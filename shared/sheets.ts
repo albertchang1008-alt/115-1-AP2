@@ -40,11 +40,11 @@ export interface UnitGroup {
 // courseId -> 次單元代碼(=unitId) -> 該次單元的分組與題目。
 export type BankGroups = Map<string, Map<string, UnitGroup>>;
 // 粗略判斷這個分頁是不是題庫。課程代碼由分頁名稱提供時，表內不必重複放課程欄；
-// 正式題庫總表也使用「題目」及「正確答案文字」，須與舊版「問題／解答」相容。
+// 正式答案一律使用「正確答案代碼」（A–H），不以會隨選項文字改動的文字當答案來源。
 export function looksLikeBankSheet(rows: unknown[][]): boolean {
   if (!rows.length) return false;
   const headers = rows[0].map(String);
-  return [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['解答', '答案', '正確答案文字', '正確答案', 'answer']]
+  return [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['正確答案代碼', 'answerCode']]
     .every((aliases) => column(headers, aliases) >= 0);
 }
 export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallbackCourseId = ''): BankGroups {
@@ -52,7 +52,7 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallba
   if (fallbackCourseId && !safeCode(fallbackCourseId)) throw Error('分頁名稱須為課程代碼');
   if (rows.length < 2) throw Error('分頁沒有題目資料');
   const headers = rows[0].map(String);
-  for (const aliases of [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['解答', '答案', '正確答案文字', '正確答案', 'answer']])
+  for (const aliases of [['題目ID', 'id', '題號'], ['問題', '題目', 'text', '題幹', 'question'], ['正確答案代碼', 'answerCode']])
     if (column(headers, aliases) < 0) throw Error('缺少欄位：' + aliases[0]);
   const groups: BankGroups = new Map();
   let previousCourse = '', previousUnit = '', previousImage = '';
@@ -76,17 +76,11 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallba
     previousUnit = unitId;
     previousImage = isImage ? image : '';
     const options = 'abcdefgh'.split('').map((id) => ({ id, text: get('選項' + id.toUpperCase(), id, 'option' + id.toUpperCase(), '選項' + (id.charCodeAt(0) - 96)) })).filter((o) => o.text);
-    // 正式總表以「正確答案文字」為優先；早期匯入列有時只留下原始答案字母，
-    // 在文字答案空白時才向後相容採用它，避免覆蓋已校訂的答案文字。
-    const rawAnswer = get('解答', '答案', '正確答案文字', '正確答案', 'answer', 'ans')
-      || get('原始答案字母(僅對照)', '原始答案字母', 'originalAnswer');
+    // Zuvio解答僅供匯出 Zuvio 題目，平台不讀取也不保存。
+    const rawAnswer = get('正確答案代碼', 'answerCode');
     let answer = rawAnswer.replace(/^[（(]|[）)]$/g, '').toLowerCase();
     if (/^[1-8]$/.test(answer)) answer = 'abcdefgh'[Number(answer) - 1];
-    if (!options.some((o) => o.id === answer)) {
-      const matching = options.filter((o) => o.text === rawAnswer);
-      if (matching.length !== 1) throw Error(`第 ${i + 2} 列解答無法唯一對應選項`);
-      answer = matching[0].id;
-    }
+    if (!options.some((o) => o.id === answer)) throw Error(`第 ${i + 2} 列正確答案代碼必須對應選項 A–H`);
     const orderRaw = get('題序', '序號', 'order');
     if (orderRaw && !Number.isFinite(Number(orderRaw))) throw Error(`第 ${i + 2} 列題序必須是數字或留白`);
     const order = orderRaw ? Number(orderRaw) : undefined;

@@ -40,7 +40,7 @@ function withMemoryDb() {
 test('次單元在課程草稿裡不存在時，同步會自動建立單元（依單元/次單元欄）', async () => {
   const ctx = withMemoryDb();
   try {
-    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
     const rows = [headers, ['ap2', 'q1', '血液', '紅血球與血紅素', '題目一', '甲', '乙', 'A']];
     ctx.data.set('courses/ap2', { teacherIds: ['teacher'], draft: { id: 'ap2', classIds: [], units: [] } });
 
@@ -64,7 +64,7 @@ test('次單元在課程草稿裡不存在時，同步會自動建立單元（�
 test('次單元已存在時，再次同步只更新版本與分組，不重複新增', async () => {
   const ctx = withMemoryDb();
   try {
-    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
     ctx.data.set('courses/ap2', {
       teacherIds: ['teacher'],
       draft: { id: 'ap2', classIds: ['A'], units: [{ id: 'u1', title: '舊標題', description: '', required: false, threshold: 60, opensAt: '', dueAt: '', bankVersion: 'old', activities: [] }] },
@@ -87,7 +87,7 @@ test('次單元已存在時，再次同步只更新版本與分組，不重複�
 test('課程本身不存在時明確報錯，不會自動建立課程', async () => {
   const ctx = withMemoryDb();
   try {
-    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
     const rows = [headers, ['no-such-course', 'q1', '血液', 'u1', '題目一', '甲', '乙', 'A']];
     const results = await handlers.syncBankTabFromSheet(rows, '題庫', 'teacher');
     assert.match(results[0].error, /課程不存在/);
@@ -97,7 +97,7 @@ test('課程本身不存在時明確報錯，不會自動建立課程', async ()
 test('非該課程授權教師時報錯，不會自動建立單元', async () => {
   const ctx = withMemoryDb();
   try {
-    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
     ctx.data.set('courses/ap2', { teacherIds: ['other-teacher'], draft: { id: 'ap2', classIds: [], units: [] } });
     const rows = [headers, ['ap2', 'q1', '血液', 'u1', '題目一', '甲', '乙', 'A']];
     const results = await handlers.syncBankTabFromSheet(rows, '題庫', 'teacher');
@@ -109,7 +109,7 @@ test('非該課程授權教師時報錯，不會自動建立單元', async () =>
 test('以課程分頁同步時，表內舊課程代碼不可指向另一門課', async () => {
   const ctx = withMemoryDb();
   try {
-    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '解答'];
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
     const rows = [headers, ['other-course', 'q1', '血液', 'u1', '題目一', '甲', '乙', 'A']];
     ctx.data.set('courses/ap2', { teacherIds: ['teacher'], draft: { id: 'ap2', classIds: [], units: [] } });
     const results = await handlers.syncBankTabFromSheet(rows, 'ap2', 'teacher', 'ap2');

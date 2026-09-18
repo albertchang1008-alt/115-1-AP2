@@ -5,7 +5,7 @@
 // 只改你這份 Sheet 的內容（可能新增一欄），不會動到 Firestore、不會觸發同步。
 // 建議跑之前先「檔案 > 建立副本」備份一次，跑完再回來對照。
 //
-// 會處理的分頁：看起來像名冊（有「學號」＋「姓名」欄）或像題庫（有「題目ID」＋「問題」＋「解答」欄）的分頁；
+// 會處理的分頁：看起來像名冊（有「學號」＋「姓名」欄）或像題庫（有「題目ID」＋「問題」＋「正確答案代碼」欄）的分頁；
 // 其他分頁（例如說明頁、雙向細目表）不會被動到。
 //
 // 使用方式：
@@ -30,7 +30,7 @@ const ALIASES = {
   姓名: ['姓名', 'name'],
   題目ID: ['題目ID', 'id', '題號'],
   問題: ['問題', 'text', '題幹', 'question'],
-  解答: ['解答', '答案', 'answer'],
+  正確答案代碼: ['正確答案代碼', 'answerCode'],
 };
 
 function findCol(headers, aliases) {
@@ -57,7 +57,7 @@ function fillCourseAndUnit() {
     const headers = data[0];
 
     const isRoster = findCol(headers, ALIASES.學號) >= 0 && findCol(headers, ALIASES.姓名) >= 0;
-    const isBank = findCol(headers, ALIASES.題目ID) >= 0 && findCol(headers, ALIASES.問題) >= 0 && findCol(headers, ALIASES.解答) >= 0;
+    const isBank = findCol(headers, ALIASES.題目ID) >= 0 && findCol(headers, ALIASES.問題) >= 0 && findCol(headers, ALIASES.正確答案代碼) >= 0;
     if (!isRoster && !isBank) return; // 不是名冊也不是題庫格式的分頁，跳過（例如說明頁、細目表）
 
     plans.push({
@@ -71,7 +71,7 @@ function fillCourseAndUnit() {
   });
 
   if (!plans.length) {
-    ui.alert('這份 Sheet 沒有找到名冊格式（學號＋姓名）或題庫格式（題目ID＋問題＋解答）的分頁，沒有東西可以補。');
+    ui.alert('這份 Sheet 沒有找到名冊格式（學號＋姓名）或題庫格式（題目ID＋問題＋正確答案代碼）的分頁，沒有東西可以補。');
     return;
   }
 

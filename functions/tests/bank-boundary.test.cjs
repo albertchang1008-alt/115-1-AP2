@@ -47,7 +47,7 @@ test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量
     writes.forEach(([path, value]) => data.set(path, value)); return result;
   };
   try {
-    const headers = ['課程代碼','題目ID','問題','選項A','選項B','解答'];
+    const headers = ['課程代碼','題目ID','問題','選項A','選項B','正確答案代碼'];
     const rows = Array.from({ length: 500 }, (_, i) => ['ap2', 'q'.repeat(90) + i, '題目 ' + i, '甲', '乙', 'A']);
     const questions = parseBankSheet([headers, ...rows], 'unit01').get('ap2').get('unit01').questions;
     const course = { id:'ap2', classIds:['A'], units:[{ id:'unit01', opensAt:'', required:true }] };
