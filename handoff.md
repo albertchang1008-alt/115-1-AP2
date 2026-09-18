@@ -19,6 +19,17 @@
 
 ---
 
+### 1.4.0 第五次 Claude 驗收（2026-09-18）：✅ 全部通過，可上線（待教師同意）
+
+`npm run check`（前端 69、Functions 12）重跑通過；手機 390px 練習分頁四種入口皆可見可按，桌機維持一列。1.4.0 驗收完成。
+
+**上線任務（教師明確同意後才執行）**
+1. 確認在 `feature/1.4.0-unit-model`、工作目錄乾淨，再跑一次 `npm run check`。
+2. 部署 Functions：`npx firebase-tools deploy --only functions --project ap2-7ed91`（本版修改多個 callable，需整批）。記錄 CLI 是否出現 Deploy complete；失敗就停下記錄，不要重試超過一次。
+3. 合併到 `main`（不可 force）並 `git push origin main`；確認 GitHub Actions「Publish course platform」成功，且 `https://albertchang1008-alt.github.io/115-1-AP2/version.json` 為 1.4.0。
+4. 不改 Google Sheet、不改 Firestore 資料。完成後在本檔記錄部署結果、main commit、Pages 版本，標示「1.4.0 已上線，待教師後台操作與 Claude 線上驗收」。
+5. 教師後台操作（教師自行）：題庫管理→同步題庫；課程與教材→「全部移除」舊分類、把掛在舊分類上的活動「搬到此單元」、設定各單元開放時間與期限；班級對照表勾選；發布課程。
+
 ### 1.4.0 第四次 Claude 驗收（2026-09-18）：桌機通過，手機需修一處 CSS
 
 `npm run check`（前端 69、Functions 12）重跑通過；桌機練習分頁每分類一列、四種入口、已達標／錯題停用皆正確。**問題：手機寬度（390px）下每列的「抽題 10／20／30」與「錯題」被擠到列外（`.practice-row` 在 ≤850px 設 `overflow-x:auto`，四欄放不下），學生看不到也按不到。** 修法（Claude 已在隔離環境驗證截圖正常）：在 `src/style.css` 850px 規則之後加入：
