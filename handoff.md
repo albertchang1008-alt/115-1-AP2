@@ -19,6 +19,17 @@
 
 ---
 
+### 1.4.0 第三次 Claude 驗收（2026-09-18）：✅ 功能通過，待教師確認畫面後上線
+
+Claude 在乾淨環境重跑 `npm run check`（前端 67、Functions 12）通過；逐行檢查第二次退回的 9 點與第三次的 3 點（活動編輯器欄位補齊、beforeunload、刪除 LegacyCourseEditor）皆已修正。以 115-1-AP2 結構模擬截圖：教師單元設定、學生首頁（3 個單元、完成度以單元計）、學生單元練習分頁皆正常，無前端錯誤。
+
+非阻擋的建議（待教師決定是否先做）：
+- 學生「練習」分頁每個題目分類各一大卡、內含 4 張小卡，血液 5 個分類畫面很長；可改成每分類一列（最高分／完整測驗／閃卡／抽題／錯題）。
+- 教師頁副標殘留英文「Chapter 單元設定」；班級對照表「全部（11 節）」的「節」應改「個分類」。
+
+上線步驟（需教師明確同意）：部署 `functions:platform:syncSheet` 以及本版有修改的其他 callable（saveCourse、publishCourse、saveActivity、saveLearningEvents、submitMixedAttempts、getExplanationResearchEvidence 等，建議 `--only functions` 整批部署）→ 合併 push main → 確認 version.json＝1.4.0 → 教師同步題庫、清舊分類、搬活動、勾班級、發布。
+
+
 2026-09-18（1.3.1 教師後台單元結構重整，分支 `feature/1.3.1-unit-tree`）：教師反映後台單元／次單元混亂。根因：`parseBankSheet` 在「次單元」空白時用分頁名稱（＝課程代碼 `115-1-AP2`）當單元代碼，產生假單元 `115-1-AP2`（group=115-1課程簡介）；另有代碼 `血液成分與血漿` 的單元被改名為「課程簡介」，所以血液底下出現課程簡介。已修：次單元空白改用「單元」當代碼；教師端單元清單改分組樹（`unitTree()`，shared/model.ts）、班級改對照表（`src/CourseSetup.tsx` ClassManager）、單元設定顯示不一致提醒（`unitWarning()`，App.tsx）。**新固定決策 40：Sheet 決定單元／次單元結構與代碼；次單元空白時單元本身就是一節；後台名稱若與 Sheet 不同會標示提醒。** `npm run check` 在乾淨 linux 複本通過（前端 58、Functions 8；使用者機器的 node_modules 是 darwin 版，VM 內無法直接跑）。本機 commit 於此分支，未合併 main、未 push、未部署。**上線步驟**：①教師同意後部署 `functions:platform:syncSheet`；②合併並 push main 發布前端；③後台按「同步題庫」，會新建單元「115-1課程簡介」；④在課程與教材移除舊的 `115-1-AP2` 單元（有「!」提醒）、把「課程簡介（代碼 血液成分與血漿）」按「改回 Sheet 名稱」或依教師意思處理；⑤在對照表重新勾選各班適用單元並發布課程。教師已確認：學期初尚無學生作答，舊 `115-1-AP2` 單元可直接移除，不需搬移進度。
 
 ### ⚠️ 1.3.1 上線任務已取消，改做 1.4.0（教師 2026-09-18 決定）
