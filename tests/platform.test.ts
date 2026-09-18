@@ -53,8 +53,21 @@ test('Zuvio解答不會影響平台使用正確答案代碼', () => {
     ['題庫', '題目ID', '單元', '題目', '正確答案代碼', 'Zuvio解答', '選項A', '選項B'],
     ['', '1', '課程簡介', '題目一', 'B', 'A', '錯誤選項', '正確選項'],
   ];
-  const q = parseBankSheet(rows, '115-1-AP2', '115-1-AP2').get('115-1-AP2')!.get('115-1-AP2')!.questions[0];
+  const q = parseBankSheet(rows, '115-1-AP2', '115-1-AP2').get('115-1-AP2')!.get('課程簡介')!.questions[0];
   assert.equal(q.answer, 'b');
+});
+test('次單元空白時以單元本身當作一節，不再用分頁名稱（課程代碼）補位', () => {
+  const rows = [
+    ['題目ID', '單元', '次單元', '題目', '正確答案代碼', '選項A', '選項B'],
+    ['1', '115-1課程簡介', '', '題目一', 'A', '甲', '乙'],
+    ['2', '115-1課程簡介', '', '題目二', 'B', '甲', '乙'],
+    ['3', '心臟', '心動週期與心音', '題目三', 'A', '甲', '乙'],
+  ];
+  const course = parseBankSheet(rows, '115-1-AP2', '115-1-AP2').get('115-1-AP2')!;
+  assert.deepEqual([...course.keys()], ['115-1課程簡介', '心動週期與心音']);
+  assert.equal(course.get('115-1課程簡介')!.group, '115-1課程簡介');
+  assert.equal(course.get('115-1課程簡介')!.questions.length, 2);
+  assert.ok(!course.has('115-1-AP2'), '不可再產生以課程代碼命名的假單元');
 });
 test('同一次單元的「單元」欄填了不同值要報錯', () => {
   const rows = [

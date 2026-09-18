@@ -61,9 +61,11 @@ export function parseBankSheet(rows: unknown[][], fallbackUnitId: string, fallba
     const get = reader(headers, row);
     const courseId = get('課程代碼', '課程', 'courseId', 'course') || fallbackCourseId;
     if (!safeCode(courseId)) throw Error(`第 ${i + 2} 列課程代碼無效`);
-    const unitId = get('次單元', 'unitId', 'unit') || fallbackUnitId;
-    if (!safeCode(unitId)) throw Error(`第 ${i + 2} 列次單元代碼無效`);
     const rowGroup = get('單元', 'group', '大分類');
+    // 次單元空白時，「單元」本身就是最底層的一節（例如「課程簡介」沒有再細分）。
+    // 只有單元、次單元都空白的舊格式，才退回用分頁名稱當代碼。
+    const unitId = get('次單元', 'unitId', 'unit') || rowGroup || fallbackUnitId;
+    if (!safeCode(unitId)) throw Error(`第 ${i + 2} 列次單元代碼無效（「${unitId}」不可含空白或其他標點）`);
     const enabledRaw = get('啟用', 'enabled').toLowerCase();
     if (enabledRaw && !['true', 'false', '1', '0', '是', '否'].includes(enabledRaw)) throw Error(`第 ${i + 2} 列啟用值無效`);
     if (enabledRaw && ['false', '0', '否'].includes(enabledRaw)) { previousImage = ''; return; }

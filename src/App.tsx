@@ -51,6 +51,8 @@ import {
   youtubeId,
   forClass,
   safeCode,
+  unitTree,
+  isTabFallbackUnit,
 } from '../shared/model';
 import {
   API,
@@ -840,6 +842,11 @@ function Metric({ title, value, note }: { title: string; value: number | string;
     </div>
   );
 }
+function unitWarning(course: Course, unit: Unit) {
+  if (isTabFallbackUnit(course, unit)) return '這個單元是舊版匯入時把「次單元空白」的題目誤建出來的（代碼等於課程代碼）。重新同步題庫後，題目會歸到正確的單元，這個可以移除。';
+  if (unit.title !== unit.id) return `後台顯示名稱「${unit.title}」和 Sheet 裡的次單元「${unit.id}」不一致，容易對不上。`;
+  return '';
+}
 function CourseEditor({
   course,
   api,
@@ -966,12 +973,22 @@ function CourseEditor({
               <Plus size={17} />
             </button>
           </div>
-          {c.units.map((unit, i) => (
-            <button className={idx === i ? 'selected' : ''} key={unit.id} onClick={() => setIdx(i)}>
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              {unit.title}
-            </button>
-          ))}
+          {unitTree(c.units).map(({ group, items, single }) =>
+            single ? (
+              <button className={'unit-leaf top' + (idx === items[0].index ? ' selected' : '')} key={'g:' + group} onClick={() => setIdx(items[0].index)}>
+                {group}{unitWarning(c, items[0].unit) && <span className="unit-flag" title={unitWarning(c, items[0].unit)}>!</span>}
+              </button>
+            ) : (
+              <details className="unit-branch" key={'g:' + group} open={items.some((it) => it.index === idx) || undefined}>
+                <summary>{group || '未分類'}<span className="muted"> {items.length}</span></summary>
+                {items.map(({ unit, index }) => (
+                  <button className={'unit-leaf' + (idx === index ? ' selected' : '')} key={unit.id} onClick={() => setIdx(index)}>
+                    {unit.title}{unitWarning(c, unit) && <span className="unit-flag" title={unitWarning(c, unit)}>!</span>}
+                  </button>
+                ))}
+              </details>
+            ),
+          )}
         </aside>
         {!u && <Empty title="尚未建立單元" detail="按單元安排旁的＋，輸入與 Google Sheet 分頁相同的單元代碼。" />}
         {u && (
@@ -983,7 +1000,13 @@ function CourseEditor({
                 預覽單元
               </button>
             </div>
-            <p className="muted">單元代碼（Sheet 分頁名稱）：{u.id}</p>
+            <p className="muted">位置：{u.group ? `${u.group} › ` : ''}{u.title}　·　Sheet 次單元：{u.id}</p>
+            {unitWarning(c, u) && (
+              <div className="notice unit-warning">
+                <p>{unitWarning(c, u)}</p>
+                {isTabFallbackUnit(c, u) ? null : <button onClick={() => patchUnit({ title: u.id })}>改回 Sheet 名稱「{u.id}」</button>}
+              </div>
+            )}
             <div className="formgrid">
               <Field label="單元名稱">
                 <input value={u.title} onChange={(e) => patchUnit({ title: e.target.value })} />
@@ -1031,21 +1054,18 @@ function CourseEditor({
               蒐集解析研究資料（預設開啟；不影響成績或完成資格）
             </label>
             <div className="actions">
-              <button
-                disabled={idx === 0}
-                onClick={() => {
-                  const units = [...c.units];
-                  [units[idx - 1], units[idx]] = [units[idx], units[idx - 1]];
-                  setC({ ...c, units });
-                  setIdx(idx - 1);
-                }}
-              >
-                單元上移
-              </button>
-              <button disabled={idx === c.units.length - 1} onClick={() => { const units = [...c.units]; [units[idx], units[idx + 1]] = [units[idx + 1], units[idx]]; setC({ ...c, units }); setIdx(idx + 1); }}>單元下移</button>
+              {(() => {
+                // 只在同一個單元（group）內移動，避免跨組交換後畫面看起來沒動。
+                const siblings = c.units.map((x, i) => [x, i] as const).filter(([x]) => (x.group || '') === (u.group || '')).map(([, i]) => i);
+                const pos = siblings.indexOf(idx);
+                const swap = (to: number) => { const units = [...c.units]; [units[idx], units[to]] = [units[to], units[idx]]; setC({ ...c, units }); setIdx(to); };
+                return <>
+                  <button disabled={pos <= 0} onClick={() => swap(siblings[pos - 1])}>上移</button>
+                  <button disabled={pos < 0 || pos >= siblings.length - 1} onClick={() => swap(siblings[pos + 1])}>下移</button>
+                </>;
+              })()}
               <button onClick={() => { const code = prompt('新單元代碼')?.trim(); if (!code) return; if (!safeCode(code) || c.units.some((u) => u.id === code)) return notify('單元代碼無效或重複'); setC({ ...c, units: [...c.units, { ...structuredClone(u), id: code, title: u.title + '（複本）', bankVersion: '' }] }); setIdx(c.units.length); }}>複製單元</button>
               <button onClick={() => { if (!confirm('從草稿移除此單元？歷史題庫與紀錄保留。')) return; const classUnits = Object.fromEntries(Object.entries(c.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== u.id)])); const classOverrides = structuredClone(c.classOverrides || {}); Object.values(classOverrides).forEach((settings) => delete settings[u.id]); setC({ ...c, units: c.units.filter((unit) => unit.id !== u.id), classUnits, classOverrides }); setIdx(Math.max(0, idx - 1)); }}>移除單元</button>
-              <span className="muted">ID：{u.id}</span>
             </div>
             <ClassOverrides
               key={c.classIds.join(',') + u.id}

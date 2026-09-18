@@ -394,3 +394,25 @@ export function materialUrl(value: unknown): string | null {
     return null;
   }
 }
+// 教師後台用的單元樹：依 Unit.group（Sheet「單元」欄）分組，保持第一次出現的順序。
+// 單元沒有細分次單元時（該組只有一個、且名稱等於單元名），畫面上以單一節點呈現。
+export interface UnitTreeItem { unit: Unit; index: number }
+export interface UnitTreeGroup { group: string; items: UnitTreeItem[]; single: boolean }
+export function unitTree(units: Unit[]): UnitTreeGroup[] {
+  const order: string[] = [];
+  const map = new Map<string, UnitTreeItem[]>();
+  units.forEach((unit, index) => {
+    const key = unit.group || '';
+    if (!map.has(key)) { map.set(key, []); order.push(key); }
+    map.get(key)!.push({ unit, index });
+  });
+  return order.map((group) => {
+    const items = map.get(group)!;
+    const only = items.length === 1 ? items[0].unit : undefined;
+    return { group, items, single: !!group && !!only && (only.id === group || only.title === group) };
+  });
+}
+// 找出看起來是舊版匯入錯誤產生的單元：以課程代碼（分頁名稱）當單元代碼。
+export function isTabFallbackUnit(course: Pick<Course, 'id'>, unit: Unit) {
+  return unit.id === course.id;
+}
