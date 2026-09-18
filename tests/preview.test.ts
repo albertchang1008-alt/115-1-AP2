@@ -48,6 +48,13 @@ test('教師偏好列不作為 app grid 的子節點', async () => {
   assert.match(source, /<div className="app">\s*<aside/);
   assert.match(css, /\.prefs-bar \{ position: fixed/);
 });
+test('學習進度看板可整組移動同一單元的次單元', async () => {
+  const source = await readFile(new URL('../src/ProgressBoard.tsx', import.meta.url), 'utf8');
+  assert.match(source, /整個單元移到/);
+  assert.match(source, /unitIds: rows\.map\(\(u\) => u\.id\)/);
+  assert.match(source, /整組移到…/);
+  assert.match(source, /unitIds: \[u\.id\]/, '個別次單元移動仍可用');
+});
 test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);
