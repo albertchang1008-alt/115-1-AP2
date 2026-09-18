@@ -25,7 +25,11 @@
 
 教師看過 1.3.1 後決定簡化：**設定與活動都在單元層；次單元只是題目分類，但完整測驗以次單元為範圍（每個分類都要達標，單元才算完成）**。完整規格見 `docs/UNIT_MODEL_1.4.0.md`。1.3.1 分支的「次單元空白誤用課程代碼」修正與班級對照表仍保留，1.4.0 在 `feature/1.3.1-unit-tree` 之上接著做（可改名為 `feature/1.4.0-unit-model`）。**固定決策 10、11 的「範圍」以該規格為準：題庫、進度、錯題仍以次單元（內部 Unit）為單位，但設定、活動、班級、完成度計數改在單元（Chapter）。**
 
-### 交給 Codex 執行的 1.4.0 任務（教師授權，Claude 之後驗收）
+### 1.4.0 待 Claude 驗收（Codex 已完成，2026-09-18）
+
+分支 `feature/1.4.0-unit-model`，實作 commit `3e88d27`（尚未 push、未合併 main、未部署）。已升版 1.4.0，完成 Chapter 資料模型、v3 完成度、同步自動建 Chapter／回報 staleUnits、班級與看板整組處理，以及綜合練習伺服器端 current／開放中防線。`npm run check` 等效完整檢查已通過：前端 59、Functions 9，前後端建置均成功。**不要部署、不要合併或推送 main、不要改 Google Sheet 或 Firestore 資料，先交 Claude 驗收。**
+
+### 交給 Codex 執行的 1.4.0 任務（已完成）
 
 1. 從 `feature/1.3.1-unit-tree` 建立 `feature/1.4.0-unit-model`，依 `docs/UNIT_MODEL_1.4.0.md` 實作，版本升為 1.4.0（`VERSION`＋`node scripts/version.mjs`）。
 2. 補齊規格列的測試，`npm run check` 全部通過。
@@ -38,7 +42,7 @@
 
 2026-09-18（題庫欄位統一驗證與部署）：教師已自行調整正式 Google Sheet，並以唯讀方式確認 `115-1-AP2` 分頁的 M 欄為「正確答案代碼」，前兩題值皆為 `B`；相鄰 N 欄「Zuvio解答」存在，但平台依既定契約完全忽略、不會寫入資料庫。程式契約在本機 commit `cf9f8ea`，`npm run check` 已通過（前端 57、Functions 8），未 push。教師再次明確授權後，`functions:platform:syncSheet` 已於 2026-09-18 成功部署至 Firebase `ap2-7ed91` 的 asia-east1；CLI 顯示 Successful update operation / Deploy complete。Google Sheet 本輪未由 agent 寫入。
 
-目前版本：1.3.1。2026-09-18 已完成學生端 UI 改版 1.3.0 第二階段：`src/Student.tsx` 增加課前／課堂／課後／練習 hash 分頁、活動卡與完成文字、100dvh 獨立閱讀頁、完整／抽題／閃卡／錯題共用作答外框；新增 `src/studentRoute.ts` 統一解析／還原 hash，作答中的瀏覽器返回先顯示離開確認。第一階段的可見性、完成度第 2 版與後端重新批改均保留；本輪測試另確認竄改前端 correct/score 不影響伺服器成績。`npm run check` 已通過（前端 43、後端 5）；第二階段本機 commit 已建立（以 `git log -1` 取得目前 hash），未 push、未 deploy。規格檔 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 仍是使用者未追蹤檔案，不納入提交；下一步由教師部署 Functions 與推送 Pages。
+目前版本：1.4.0。2026-09-18 已完成學生端 UI 改版 1.3.0 第二階段：`src/Student.tsx` 增加課前／課堂／課後／練習 hash 分頁、活動卡與完成文字、100dvh 獨立閱讀頁、完整／抽題／閃卡／錯題共用作答外框；新增 `src/studentRoute.ts` 統一解析／還原 hash，作答中的瀏覽器返回先顯示離開確認。第一階段的可見性、完成度第 2 版與後端重新批改均保留；本輪測試另確認竄改前端 correct/score 不影響伺服器成績。`npm run check` 已通過（前端 43、後端 5）；第二階段本機 commit 已建立（以 `git log -1` 取得目前 hash），未 push、未 deploy。規格檔 `docs/STUDENT_UI_REDESIGN_1.3.0.md` 仍是使用者未追蹤檔案，不納入提交；下一步由教師部署 Functions 與推送 Pages。
 2026-09-18（第七版，測試補強）：使用者已授權錯題結構與答案表資料變更。`Progress.wrong` 已升為 `{questionId:{n,at}}`，舊陣列相容為 `{n:1,at:0}`、答對移除；新發布題庫建立私有 `grading/answers`，交卷優先讀答案表、舊題庫 fallback chunk 並只警告一次；題庫快取使用 localStorage 版本鍵（1 MB 單筆、3 MB LRU、登出清除）。學生端移除錯題複習作答入口、加入純前端錯題閃卡及首頁錯題／綜合練習入口；`submitMixedAttempts` 以單筆 progress transaction 處理最多 10 個次單元。已補上錯題篩選／排序、快取命中與 LRU、毀損及配額回退、首頁排序、答案表私有性與混合交易邊界測試；`npm run check` 通過（前端 49、Functions 7）。規格原檔仍是使用者未追蹤檔，禁止納入 commit。實機 UI 與真正 Firestore transaction rollback 仍需用 Emulator 或正式測試專案驗收；目前記憶體後端只驗證交易結構，不能模擬 Firestore 的 abort 提交保證。
 2026-09-18（Emulator 原子性驗證受環境阻擋）：`firebase.json` 已有 Firestore Emulator（8080），新增 `functions/scripts/verify-mixed-transaction.cjs`，會先以真實 callable 成功交卷驗證兩次單元的 wrong／attempted，再用真實 Firestore transaction 故意 throw 驗證零殘留。Functions build 與 Firebase CLI 15.30.0 都成功；但 `firebase emulators:exec` 因本機沒有 Java Runtime（`java -version` exit 1）而無法啟動。未安裝任何系統相依、未取得真實 Emulator 結果。Java 可用後執行：`npm --prefix functions run build && npx firebase-tools emulators:exec --only firestore "node functions/scripts/verify-mixed-transaction.cjs"`。規格原檔仍未追蹤，不可納入提交。
 2026-09-18（iPhone 版面修正）：學生全螢幕作答的頂部列原本會隨內容捲走，已改成固定列，含 `aria-label="離開測驗"` 的 ✕、模式／單元名、題號和進度條；底部列加入 safe-area padding。閱讀頁本來就是 48px 固定 grid 頂欄，已在新增測試中確認離開鍵仍可見。全域頂端色系／字級列已從 `main.tsx` 移除；學生改為右上「顯示設定」固定按鈕，開啟底部面板（色系／字級沿用 localStorage）、點遮罩或瀏覽器返回可關，所有首頁／次單元／作答／閱讀都可使用。教師後台保留原 prefs-bar。`npm run check` 通過（前端 50、Functions 7）。規格原檔仍未追蹤，不可納入提交。
@@ -82,8 +86,8 @@
 7. 每次升版同步所有平台版本標示及文件。
 8. 課程／單元／班級代碼一律由教師自訂（建立後不可改），可使用中文、英數字、- 與 _，不可有空白或其他標點，長度上限 50；用於對應 Google Sheet 課程欄位與分頁名稱；名冊同步只會新增/更新，不處理刪除。
 9. 測試學生帳號以 `config/testStudents` 白名單放行，只放寬信箱網域；測試帳號放專屬測試班隔離，測完清空名單。
-10.（1.2.0）單元是真正的兩層結構：單元（`Unit.group`，大分類、純顯示分組）底下有多個次單元（`Unit.id`，真正的題庫單位），比照 v1.9 的科目→章節設計。完整測驗與完成度的範圍是**次單元**，不是單元。
-11.（1.2.0）抽題練習題數由學生自選（比照 v1.9：10/20/30/全部），只有「全部題目」算入完成度；已作答過的題目自然排到後面（`Progress.attempted`，跨題庫版本保留，不是「輪完重洗」的循環機制）。「完整測驗才算完成度」這條規則本身**不改**，維持跟 1.1.2 以前及 v1.9 一致。
+10.（1.4.0）Sheet「單元」是 `Chapter`：設定、活動、班級適用、可見性整組移動與完成度計數均在此層；Sheet「次單元」維持內部 `Unit`：題庫版本、作答進度、錯題及完整測驗範圍均在此層。單元完成必須底下每個已發布次單元的完整測驗或完整閃卡最高分都達 Chapter 門檻，且 Chapter 必做活動完成；課程完成度以必做 Chapter 計數。舊課程讀取時從 `Unit.group` 的第一個分類推導 Chapter，不改寫舊資料。
+11.（1.4.0）抽題練習題數仍由學生自選（10/20/30/全部），已作答題目依 `Progress.attempted` 自然排後；抽題與綜合練習仍不提高最高成績或完成度。只有各題目分類的「完整測驗」或「完整閃卡」可達成其所屬 Chapter 的分數條件；Chapter 活動使用 `progress.activities['chapter:' + 單元名稱 + '_' + activityId]`，與舊 `unitId_activityId` 相容且不撞鍵。
 12.（1.2.0）選項每次都重新洗牌，不固定順序，避免學生背 ABCD 位置。
 13.（1.2.0）蘇格拉底式解析五段改名為 `keyword/chain/decide/memory/trace`，保留舊鍵名（`hint1/hint2/hint3/concept/misconception`）相容層，讀取時新鍵優先、沒值才退回舊鍵——1.2.0 以前發布的題庫快照解析不會消失。
 14.（1.2.0，2026-09-15 兩次更新）`Explanations` 元件依 `audience` 區分學生／教師視角：學生看①～④，教師另外多看⑤追溯原子卡（教師備課用的溯源資訊，學生端不顯示）。這段解析原本叫「蘇格拉底式解析」，2026-09-15 改名為「引導式解析」（只改畫面標籤，`socratic.*` 欄位鍵名與 Sheet 匯入欄位名稱都不變）。**引導式解析①～⑤在所有畫面一律直接展開顯示，不用點擊**——使用者明確要求「一次給到位」。**傳統解析（2026-09-15 第二次調整，1.2.6）改回預設收合、要點 `<summary>` 才展開**（原本 1.2.3 也曾改成直接展開，使用者實測後認為分不清楚跟引導式解析的差別，要求改回收合）。**quiz 模式（完整測驗／抽題練習）作答中不揭曉正解與解析，要交卷後才看得到**（1.2.3 曾一度改成作答中就立刻顯示，使用者實測後發現這樣跟閃卡沒有差別，1.2.6 改回原本設計）；閃卡、複習模式維持選了就立刻鎖定並顯示，不受影響。
