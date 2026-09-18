@@ -8,6 +8,8 @@ import {
   RotateCcw,
   Clock,
   ChevronRight,
+  Settings2,
+  X,
 } from 'lucide-react';
 import {
   Course,
@@ -33,6 +35,8 @@ import {
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
 import { parseStudentRoute } from './studentRoute';
+import ThemePicker from './ThemePicker';
+import FontSizePicker from './FontSizePicker';
 type Props = {
   api: API;
   course: Course;
@@ -240,13 +244,12 @@ export default function Student({
     try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
     catch (e) { notify('研究資料未同步：' + (e as Error).message); }
   }
-  if (activityId.startsWith('__mixed_')) return <MixedPractice api={api} course={course} progress={progress} count={Number(activityId.slice(8))} onBack={() => route()} notify={notify} />;
-  if (unit && activityId === '__wrongcards') return <WrongCards api={api} course={course} unit={unit} progress={progress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} />;
+  if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice api={api} course={course} progress={progress} count={Number(activityId.slice(8))} onBack={() => route()} notify={notify} /></>;
+  if (unit && activityId === '__wrongcards') return <><StudentSettings /><WrongCards api={api} course={course} unit={unit} progress={progress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} /></>;
   if (activity && unit)
-    return <ReadingPage course={course} unit={unit} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} />;
+    return <><StudentSettings /><ReadingPage course={course} unit={unit} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
   if (taking && unit)
-    return (
-      <Quiz
+    return (<><StudentSettings /><Quiz
         questions={questions}
         full={full}
         mode={mode}
@@ -257,10 +260,9 @@ export default function Student({
         onResearch={saveResearch}
         forceLeave={exitRequested}
         onClose={() => { setTaking(false); setExitRequested(false); if (/\/(quiz|flashcard)(?:\?|$)/.test(location.hash)) route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`); else setTimeout(() => dispatchEvent(new HashChangeEvent('hashchange')), 0); }}
-      />
-    );
+      /></>);
   return (
-    <div className="student">
+    <><StudentSettings /><div className="student">
       <div className="student-top">
         <span className="eyebrow">LEARNING SPACE</span>
         <span>
@@ -426,8 +428,15 @@ export default function Student({
           </section>
         </div>
       )}
-    </div>
+    </div></>
   );
+}
+function StudentSettings() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => { const close = () => setOpen(false); addEventListener('popstate', close); return () => removeEventListener('popstate', close); }, []);
+  const show = () => { history.pushState({ studentSettings: true }, ''); setOpen(true); };
+  const close = () => { if (open) history.back(); else setOpen(false); };
+  return <><button className="student-settings-button" aria-label="顯示設定" onClick={show}><Settings2 size={20} /></button>{open && <div className="settings-shade" onClick={close}><section className="settings-sheet" aria-label="顯示設定" onClick={(e) => e.stopPropagation()}><header><strong>顯示設定</strong><button aria-label="關閉顯示設定" onClick={close}><X size={20} /></button></header><ThemePicker /><FontSizePicker /></section></div>}</>;
 }
 function phaseTab(phase: string) { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
 function tabPhase(tab: string) { return tab === 'pre' ? 'before' : tab === 'class' ? 'during' : 'after'; }
@@ -604,14 +613,15 @@ function Quiz({
     );
   return (
     <section className="quiz">
-      <div className="sectionhead">
-        <button onClick={() => setLeave(true)}>
-          <ArrowLeft size={16} />
+      <div className="sectionhead quiz-topbar">
+        <button aria-label="離開測驗" onClick={() => setLeave(true)}>
+          <X size={20} />
           離開
         </button>
         <span>
           {modes[mode]} · {unit.title}
         </span>
+        <span aria-label={`第 ${i + 1} 題，共 ${questions.length} 題`}>{i + 1} / {questions.length}</span>
         <span className="badge">
           {mode === 'quiz'
             ? `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')}`
@@ -656,7 +666,7 @@ function Quiz({
           <Explanations q={q} />
         </div>
       )}
-      <div className="sectionhead">
+      <div className="sectionhead quiz-bottom">
         <button disabled={i === 0} onClick={() => move(i - 1)}>
           上一題
         </button>

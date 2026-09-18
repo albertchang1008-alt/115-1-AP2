@@ -26,6 +26,21 @@ test('完整測驗延後鎖定，抽題與錯題在送出選項後才揭示回�
   assert.match(source, /locked\[q\.id\] &&/);
   assert.match(source, /正確答案：/);
 });
+test('作答與閱讀固定頂部列，並提供學生顯示設定面板', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
+  assert.match(source, /className="sectionhead quiz-topbar"/);
+  assert.match(source, /aria-label="離開測驗"/);
+  assert.match(source, /className="reading-page"/);
+  assert.match(source, /aria-label="離開閱讀"/);
+  assert.match(source, /aria-label="顯示設定"/);
+  assert.match(source, /history\.pushState\(\{ studentSettings: true \}/);
+  assert.match(css, /\.quiz-topbar \{ position:fixed/);
+  assert.match(css, /\.quiz-bottom \{ position:fixed/);
+  assert.match(css, /env\(safe-area-inset-bottom\)/);
+  assert.match(css, /\.reading-page \{ position:fixed/);
+  assert.match(css, /\.settings-sheet/);
+});
 test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);

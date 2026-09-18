@@ -67,6 +67,8 @@ import {
   cachedBank,
 } from './service';
 import Student from './Student';
+import ThemePicker from './ThemePicker';
+import FontSizePicker from './FontSizePicker';
 const tabs = [
   ['overview', '教學總覽', LayoutDashboard],
   ['courses', '課程與教材', BookOpen],
@@ -530,6 +532,7 @@ export default function App() {
     );
   return (
     <div className="app">
+      <div className="prefs-bar"><ThemePicker /><FontSizePicker /></div>
       <aside className={mobile ? 'sidebar open' : 'sidebar'}>
         <div className="brand">
           <GraduationCap size={28} />

@@ -1013,8 +1013,9 @@ dd {
 .reading-page > header strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
 .reading-body { min-height:0; overflow:auto; padding:0; }.reading-body > :not(.material) { margin:20px; }
 .reading-body .material { width:100%; height:100%; min-height:calc(100dvh - 48px); border:0; display:block; }
-.quiz { position:fixed; z-index:20; inset:0; overflow:auto; background:var(--page); padding:20px max(16px, env(safe-area-inset-right)) calc(88px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
-.quiz > .sectionhead:last-of-type { position:fixed; bottom:0; left:0; right:0; padding:12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:var(--page); border-top:1px solid var(--line); }
+.quiz { position:fixed; z-index:20; inset:0; overflow:auto; background:var(--page); padding:76px max(16px, env(safe-area-inset-right)) calc(88px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+.quiz-topbar { position:fixed; z-index:2; top:0; left:0; right:0; min-height:56px; padding:calc(6px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left)); background:var(--page); border-bottom:1px solid var(--line); }
+.quiz-bottom { position:fixed; z-index:2; bottom:0; left:0; right:0; padding:12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:var(--page); border-top:1px solid var(--line); }
 .textlink {
   color: #2778aa;
   font-size: calc(14px * var(--font-scale, 1));
@@ -1022,7 +1023,7 @@ dd {
 .quiz {
   max-width: 830px;
   margin: auto;
-  padding: 40px 30px;
+  padding: 96px 30px calc(88px + env(safe-area-inset-bottom));
 }
 .quiz > .progressline {
   margin: 25px 0 40px;
@@ -1496,3 +1497,8 @@ button:hover, .button:hover, .notice, .feedback, .explanations details, .explana
 :root[data-theme='night'] .success { color: #a3e4bd; }
 body { padding-bottom: 60px; }
 @media(max-width:600px) { .prefs-bar { padding: 6px 8px; gap: 6px; flex-wrap: wrap; } .class-card { padding: 10px; } .modal { max-height: 90vh; overflow: auto; } .unit-checks { grid-template-columns: 1fr; } }
+.student-settings-button { position:fixed; z-index:40; top:calc(8px + env(safe-area-inset-top)); right:max(10px, env(safe-area-inset-right)); min-width:44px; min-height:44px; border-radius:22px; box-shadow:0 2px 10px #0003; }
+.settings-shade { position:fixed; z-index:150; inset:0; background:#0008; display:flex; align-items:end; }
+.settings-sheet { width:100%; background:var(--surface); border-radius:18px 18px 0 0; padding:20px max(16px, env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+.settings-sheet header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.settings-sheet .theme-picker,.settings-sheet .fontsize-picker { margin:10px 0; justify-content:space-between; }
