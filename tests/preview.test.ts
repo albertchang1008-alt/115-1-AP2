@@ -41,6 +41,11 @@ test('作答與閱讀固定頂部列，並提供學生顯示設定面板', async
   assert.match(css, /\.reading-page \{ position:fixed/);
   assert.match(css, /\.settings-sheet/);
 });
+test('教師偏好列不作為 app grid 的子節點', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  assert.match(source, /<>\s*<div className="prefs-bar">/);
+  assert.match(source, /<div className="app">\s*<aside/);
+});
 test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);

@@ -531,8 +531,9 @@ export default function App() {
       </>
     );
   return (
-    <div className="app">
+    <>
       <div className="prefs-bar"><ThemePicker /><FontSizePicker /></div>
+    <div className="app">
       <aside className={mobile ? 'sidebar open' : 'sidebar'}>
         <div className="brand">
           <GraduationCap size={28} />
@@ -696,7 +697,7 @@ export default function App() {
           <button onClick={() => setToast('')}>×</button>
         </div>
       )}
-    </div>
+    </div></>
   );
 }
 function Overview({
