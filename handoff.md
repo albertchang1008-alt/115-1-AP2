@@ -25,28 +25,11 @@
 
 教師看過 1.3.1 後決定簡化：**設定與活動都在單元層；次單元只是題目分類，但完整測驗以次單元為範圍（每個分類都要達標，單元才算完成）**。完整規格見 `docs/UNIT_MODEL_1.4.0.md`。1.3.1 分支的「次單元空白誤用課程代碼」修正與班級對照表仍保留，1.4.0 在 `feature/1.3.1-unit-tree` 之上接著做（可改名為 `feature/1.4.0-unit-model`）。**固定決策 10、11 的「範圍」以該規格為準：題庫、進度、錯題仍以次單元（內部 Unit）為單位，但設定、活動、班級、完成度計數改在單元（Chapter）。**
 
-### 1.4.0 Claude 驗收結果（2026-09-18）：❌ 不通過，退回 Codex 修正
+### 1.4.0 第二次待 Claude 驗收（Codex 已修正，2026-09-18）
 
-`npm run check` 通過（前端 59、Functions 9），資料模型、v3 完成度、同步建 Chapter、綜合練習後端防線方向正確；但**教師看得到、學生用得到的部分沒有做**，而且會造成回歸，不可部署。
+分支 `feature/1.4.0-unit-model`，本次實作 commit `ae0b1ba`。Claude 首次驗收列出的 1–9 項已全數修正：教師編輯器與總覽改讀 Chapter；學生首頁、歷史區與單元頁以 Chapter 呈現；Chapter 開放設定套用所有題目分類；活動進度、互動教材事件與診斷／研究查詢支援 Chapter 鍵；`saveCourse` 驗證 Chapter 相關欄位；舊分類及舊活動有清理／搬移 UI；同步在題庫版本未變時仍補齊 Chapter，並追加 `chapterOrder`。
 
-**必須修正（阻擋上線）**
-1. **教師端「課程與教材」沒改**（`src/App.tsx` CourseEditor 幾乎沒動）：左側仍列次單元、右側仍編輯次單元自己的開放時間／期限／達標／必做／活動。依規格改為：左側只列單元（`orderedChapters`，可上下移，寫 `chapterOrder`）；右側編輯 Chapter 的名稱、說明、開放、期限、達標、必做、研究資料、各班覆寫（`chapterOverrides`）與**學習活動**（重用現有活動編輯器，寫入 `chapters[name].activities`）；下方唯讀「題目分類」列出分類名稱／題數／題庫版本。編輯時若 `course.chapters` 尚無此單元，先由 `chaptersOf()` 推導值建立再寫入。
-2. **回歸：教師的設定會被無聲覆蓋。** `forClass()` 一律以 Chapter 值覆寫 Unit 的 required/threshold/opensAt/dueAt，但教師畫面仍在改 Unit 欄位 → 改了無效。同步自動建立的 Chapter `opensAt: ''` 會讓所有單元立即開放。修正 1 完成後此問題才消失；請加測試：教師改 Chapter 開放時間後，學生端 `forClass` 看到的每個分類都跟著變。
-3. **學生端沒改**（`src/Student.tsx` 未動）：仍把每個次單元當單元，活動讀 `unit.activities`，看不到 Chapter 活動。依規格：首頁列單元（卡片顯示「已達標 x／y 分類」＋活動完成數，完成狀態用 `chapterCompletion`）；單元頁上方為 Chapter 活動（課前／課堂／課後分頁沿用），下方為各題目分類卡（完整測驗、完整閃卡、抽題、錯題閃卡）。歷史區同樣以單元呈現。
-4. **Chapter 活動進度會被伺服器過濾掉**：`functions/src/index.ts` `visibleProgress()` 以 `key.split('_')[0]` 比對 unit id，`chapter:血液_xxx` 永遠被丟棄。改為也接受可見 Chapter 的 `chapter:` 鍵。
-5. **Chapter 互動教材無法記錄事件**：`saveLearningEvents`（約 1225 行）只在 unit.activities 找活動。要能接受 `chapterName`，在 Chapter 找活動、以 Chapter 開放時間判斷；前端 `HtmlMaterial`／`LearningBridge` 一併傳 chapterName。教師端診斷／研究頁以 chapter 活動鍵讀取。
-6. **`saveCourse` 沒驗證 chapters**（約 176–200 行只驗 units）：對 `chapters` 套用與 Unit 相同的規則（標題、threshold 0–100、活動 ≤30、活動 ID 唯一、phase／type／url 檢查）、`chapterOverrides` 型別、`chapterOrder` 為字串陣列。
-7. 規格中的**舊結構清理 UI 沒做**：staleUnits 只出現在 toast。需在課程與教材頁顯示黃色提示＋「全部移除」；Unit 上仍有 activities 時顯示「搬到此單元」。
-
-**次要（一起修）**
-8. `syncBankTabFromSheet`：`chapterOrder` 只在第一次為空時寫入，之後新單元不會加入順序；分類版本未變時提前 return，舊課程永遠不會補建 Chapter。改為每次同步都確保 Chapter 存在並把新單元 append 到 chapterOrder。
-9. 教師總覽（App.tsx 約 760、782 行）活動數與達標分數仍讀 Unit，改讀 Chapter。
-
-**驗收時 Claude 會檢查**：上述 1–9 各有對應測試或畫面；用 115-1-AP2 的模擬資料截圖教師端單元設定、班級對照表、學生首頁與單元頁；`npm run check` 通過。完成後同樣停下，不部署、不合併。
-
-### 1.4.0 待 Claude 驗收（Codex 已完成，2026-09-18）
-
-分支 `feature/1.4.0-unit-model`，實作 commit `3e88d27`（尚未 push、未合併 main、未部署）。已升版 1.4.0，完成 Chapter 資料模型、v3 完成度、同步自動建 Chapter／回報 staleUnits、班級與看板整組處理，以及綜合練習伺服器端 current／開放中防線。`npm run check` 等效完整檢查已通過：前端 59、Functions 9，前後端建置均成功。**不要部署、不要合併或推送 main、不要改 Google Sheet 或 Firestore 資料，先交 Claude 驗收。**
+每項均已有對應測試或畫面驗證；`npm run check` 的等效完整指令已通過：前端 64/64、Functions 12/12，TypeScript、Functions 入口與 Vite production build 均成功。本輪沒有部署、沒有合併或推送 main，也沒有修改 Google Sheet 或 Firestore。**現在停下，交 Claude 第二次驗收。**
 
 ### 交給 Codex 執行的 1.4.0 任務（已完成）
 
