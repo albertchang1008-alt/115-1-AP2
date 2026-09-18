@@ -19,6 +19,14 @@
 
 ---
 
+### ✅ 1.4.0 已上線（2026-09-18）
+
+教師以 `bash scripts/deploy.sh`（zsh＋nvm Node 22.23.2、Firebase CLI 登入 hhchang@ctcn.edu.tw、GitHub 以 albertchang1008-alt 個人權杖）完成：`npm run check` 通過（前端 69、Functions 12）→ 備份分支 → `deploy --only functions` 到 ap2-7ed91，**37 個函式全部 Successful update，Deploy complete** → `origin/main` 快轉 710e35d..e90d57e。Claude 已確認正式站 `version.json` 為 **1.4.0**。本機仍在 `feature/1.4.0-unit-model`（本機 main 未更新，之後可 `git checkout main && git pull`）；本則交接 commit 只在功能分支、未推 main。
+
+部署備忘：Mac 的 bash 找不到 node，須用 `zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 && …'`；Firebase 必須用 **hhchang@ctcn.edu.tw**（albertchang1008@gmail.com 只看得到 ap-neuron）；git 推送需 GitHub 個人權杖（Username 不可有前後空白）。CLI 提示 firebase-functions 版本過舊，非阻擋，日後另行升級。
+
+**待辦：** 教師在後台同步題庫 → 全部移除舊分類（115-1-AP2 等）→ 活動「搬到此單元」→ 設定各單元開放／期限 → 班級對照表勾選 → 發布課程；之後 Claude 做線上驗收。
+
 ### 1.4.0 第五次 Claude 驗收（2026-09-18）：✅ 全部通過，可上線（待教師同意）
 
 `npm run check`（前端 69、Functions 12）重跑通過；手機 390px 練習分頁四種入口皆可見可按，桌機維持一列。1.4.0 驗收完成。
