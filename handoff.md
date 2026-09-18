@@ -25,11 +25,11 @@
 
 教師看過 1.3.1 後決定簡化：**設定與活動都在單元層；次單元只是題目分類，但完整測驗以次單元為範圍（每個分類都要達標，單元才算完成）**。完整規格見 `docs/UNIT_MODEL_1.4.0.md`。1.3.1 分支的「次單元空白誤用課程代碼」修正與班級對照表仍保留，1.4.0 在 `feature/1.3.1-unit-tree` 之上接著做（可改名為 `feature/1.4.0-unit-model`）。**固定決策 10、11 的「範圍」以該規格為準：題庫、進度、錯題仍以次單元（內部 Unit）為單位，但設定、活動、班級、完成度計數改在單元（Chapter）。**
 
-### 1.4.0 第二次待 Claude 驗收（Codex 已修正，2026-09-18）
+### 1.4.0 第三次待 Claude 驗收（Codex 已修正，2026-09-18）
 
-分支 `feature/1.4.0-unit-model`，本次實作 commit `ae0b1ba`。Claude 首次驗收列出的 1–9 項已全數修正：教師編輯器與總覽改讀 Chapter；學生首頁、歷史區與單元頁以 Chapter 呈現；Chapter 開放設定套用所有題目分類；活動進度、互動教材事件與診斷／研究查詢支援 Chapter 鍵；`saveCourse` 驗證 Chapter 相關欄位；舊分類及舊活動有清理／搬移 UI；同步在題庫版本未變時仍補齊 Chapter，並追加 `chapterOrder`。
+分支 `feature/1.4.0-unit-model`，第三次驗收修正實作 commit `0a0acb1`（首次 1–9 項修正為 `ae0b1ba`）。本輪三點已完成：Chapter 活動編輯器恢復探索節點總數、闖關題目總數、YouTube 開始／結束秒數、教材目錄下拉與自動帶入、學習說明，類型使用中文標籤且不再提供 quiz；新 CourseEditor 恢復未保存的 `beforeunload` 離頁提醒；已刪除 `LegacyCourseEditor`、`ClassOverrides`、`unitWarning`、`makeUnit` 及專用 import。
 
-每項均已有對應測試或畫面驗證；`npm run check` 的等效完整指令已通過：前端 64/64、Functions 12/12，TypeScript、Functions 入口與 Vite production build 均成功。本輪沒有部署、沒有合併或推送 main，也沒有修改 Google Sheet 或 Firestore。**現在停下，交 Claude 第二次驗收。**
+三點均有獨立測試；`npm run check` 的等效完整指令已通過：前端 67/67、Functions 12/12，TypeScript、Functions 入口與 Vite production build 均成功。本輪沒有部署、沒有合併或推送 main。**現在停下，交 Claude 第三次驗收。**
 
 ### 交給 Codex 執行的 1.4.0 任務（已完成）
 
