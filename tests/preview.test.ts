@@ -321,3 +321,13 @@ test('選擇教材版本時自動帶入 GitHub Pages 教材網址，並可一鍵
   assert.match(source, /url: materialPageUrl\(slug\)/);
   assert.match(source, /帶入此網址/);
 });
+
+test('單元學習活動可上移下移，並提供晴空粉色系', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  assert.match(source, /onMove=\{\(offset\)/);
+  assert.match(source, /onClick=\{\(\) => onMove\(-1\)\}>上移/);
+  const picker = await readFile(new URL('../src/ThemePicker.tsx', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
+  assert.match(picker, /value="blossom">晴空粉/);
+  assert.match(css, /data-theme='blossom'\] \{ --blue: #2383c7/);
+});

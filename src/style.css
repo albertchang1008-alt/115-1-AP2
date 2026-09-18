@@ -1499,6 +1499,13 @@ dd {
 :root { --surface: #fff; --page: #f3f6f8; --ink: #213846; --soft: #edf5fa; }
 :root[data-theme='forest'] { --blue: #17654e; --nav: #13382e; --accent: #d4b259; --soft: #e7f3ed; }
 :root[data-theme='violet'] { --blue: #7041b4; --nav: #2c2043; --accent: #e0b556; --soft: #f1ebfa; }
+:root[data-theme='blossom'] { --blue: #2383c7; --nav: #1c4f7a; --accent: #d6286f; --soft: #fcecf3; --page: #f8f9fb; --line: #f2dbe5; }
+:root[data-theme='blossom'] :is(.pageheading h1, .student h1) { color: #2383c7; }
+:root[data-theme='blossom'] .badge:not(.green) { background: #fbe4ee; color: #a3184f; }
+:root[data-theme='blossom'] .options button.chosen { border-color: #d6286f; background: #fdf1f6; }
+:root[data-theme='blossom'] .learning-summary { background: linear-gradient(120deg, #1f78b8, #c2255f); }
+:root[data-theme='blossom'] .ring { background: conic-gradient(#ffffff var(--pct), rgba(255,255,255,.28) 0); }
+:root[data-theme='blossom'] .ring span { background: #7a3f86; }
 :root[data-theme='night'] { color-scheme: dark; --blue: #85bcff; --nav: #101923; --accent: #e4c37a; --surface: #1d2b38; --page: #121c26; --ink: #ecf2f8; --soft: #293e50; --line: #465b6d; --muted: #b9c9d7; }
 html, body { background: var(--page); color: var(--ink); }
 /* 教師端偏好列不參與工作區版面流，避免多出一列把 sidebar／main 推移。 */

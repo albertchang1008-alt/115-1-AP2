@@ -774,11 +774,17 @@ function ChapterActivityEditor({
   onChange,
   onPreview,
   onRemove,
+  onMove,
+  first,
+  last,
 }: {
   activity: Activity;
   onChange: (patch: Partial<Activity>) => void;
   onPreview: () => void;
   onRemove: () => void;
+  onMove: (offset: number) => void;
+  first: boolean;
+  last: boolean;
 }) {
   const knownMaterial = activity.materialVersion ? MATERIAL_CATALOG[activity.materialVersion] : undefined;
   const materialSelectValue = knownMaterial ? activity.materialVersion! : '__custom__';
@@ -852,7 +858,7 @@ function ChapterActivityEditor({
       <Field label="學習說明">
         <textarea value={activity.description} onChange={(e) => onChange({ description: e.target.value })} />
       </Field>
-      <div className="actions"><button onClick={onPreview}><Eye size={16} />預覽活動</button><button onClick={onRemove}>從草稿移除</button></div>
+      <div className="actions"><button type="button" disabled={first} onClick={() => onMove(-1)}>上移</button><button type="button" disabled={last} onClick={() => onMove(1)}>下移</button><button onClick={onPreview}><Eye size={16} />預覽活動</button><button onClick={onRemove}>從草稿移除</button></div>
     </details>
   );
 }
@@ -915,6 +921,9 @@ function CourseEditor(props: CourseEditorProps) {
           onChange={(patch) => changeActivity(index, patch)}
           onPreview={() => preview(materialize(), true, units[0]?.id, activity.id)}
           onRemove={() => changeChapter({ activities: chapter.activities.filter((item) => item.id !== activity.id) })}
+          onMove={(offset) => { const list = [...chapter.activities], to = index + offset; if (to < 0 || to >= list.length) return; [list[index], list[to]] = [list[to], list[index]]; changeChapter({ activities: list }); }}
+          first={index === 0}
+          last={index === chapter.activities.length - 1}
         />)}
         <hr /><h2>題目分類（來自 Sheet 次單元）</h2><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}
       </section>}
