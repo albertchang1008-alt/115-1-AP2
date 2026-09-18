@@ -313,3 +313,11 @@ test('學習進度看板依課程與教材設定的單元順序排列', async ()
   assert.match(source, /orderedChapters\(course\)/);
   assert.doesNotMatch(source, /grouped\(units\)/);
 });
+
+test('選擇教材版本時自動帶入 GitHub Pages 教材網址，並可一鍵帶入建議網址', async () => {
+  const { materialPageUrl } = await import('../shared/materials');
+  assert.equal(materialPageUrl('course-orientation-v1'), 'https://albertchang1008-alt.github.io/115-1-AP2/materials/course-orientation-v1/index.html');
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  assert.match(source, /url: materialPageUrl\(slug\)/);
+  assert.match(source, /帶入此網址/);
+});

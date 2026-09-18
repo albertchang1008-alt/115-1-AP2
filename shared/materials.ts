@@ -52,3 +52,9 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   // 固定 data-node-id 屬性），這裡的數字不是腳本自動產生的。
   'blood-post-v1': { label: '血液單元後測（全景地圖、機轉流程、易混淆配對、闖關）', tracking: 'interactive', nodeTotal: 43, questionTotal: 15, note: '5 關（每關 3 題）全部過關才送出完成' },
 };
+
+// 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。
+export const MATERIALS_BASE_URL = 'https://albertchang1008-alt.github.io/115-1-AP2/materials/';
+export function materialPageUrl(slug: string) {
+  return `${MATERIALS_BASE_URL}${slug}/index.html`;
+}

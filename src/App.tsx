@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 import Papa from 'papaparse';
 import { VERSION } from '../shared/version';
-import { MATERIAL_CATALOG } from '../shared/materials';
+import { MATERIAL_CATALOG, MATERIALS_BASE_URL, materialPageUrl } from '../shared/materials';
 import {
   materialUrl,
   Course,
@@ -819,6 +819,7 @@ function ChapterActivityEditor({
       </>}
       {activity.type === 'html' && <>
         {activity.url && !materialUrl(activity.url) && <p className="error">請填入有效的 HTTPS 網址</p>}
+        {knownMaterial && activity.url !== materialPageUrl(activity.materialVersion!) && <p className="muted">建議網址：{materialPageUrl(activity.materialVersion!)} <button type="button" onClick={() => onChange({ url: materialPageUrl(activity.materialVersion!) })}>帶入此網址</button></p>}
         <div className="formgrid">
           <Field label="教材紀錄方式">
             <select value={activity.tracking || 'reading'} onChange={(e) => onChange({ tracking: e.target.value as 'reading' | 'interactive' })}>
@@ -831,7 +832,9 @@ function ChapterActivityEditor({
               const slug = e.target.value;
               if (slug === '__custom__') { onChange({ materialVersion: '' }); return; }
               const entry = MATERIAL_CATALOG[slug];
-              onChange({ materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal });
+              // 網址空白或原本就是自動帶入的平台教材網址時才覆寫；教師自訂的外部網址保留不動。
+              const autoUrl = !activity.url || activity.url.startsWith(MATERIALS_BASE_URL);
+              onChange({ materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal, ...(autoUrl ? { url: materialPageUrl(slug) } : {}) });
             }}>
               <option value="__custom__">其他／自訂教材版本</option>
               {Object.entries(MATERIAL_CATALOG).map(([slug, entry]) => <option key={slug} value={slug}>{entry.label}（{slug}）</option>)}
