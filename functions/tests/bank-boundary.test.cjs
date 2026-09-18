@@ -24,6 +24,13 @@ test('答案表是私有批改資料，舊題庫 fallback 與綜合交卷均有�
   const getBank = source.slice(source.indexOf('exports.getBank'), source.indexOf('exports.getProgress'));
   assert.doesNotMatch(getBank, /grading/, 'getBank 不可回傳私有答案表');
 });
+test('綜合練習在伺服器端拒絕 hidden、archived 與尚未開放的題目分類', () => {
+  const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
+  const mixed = source.slice(source.indexOf('exports.submitMixedAttempts = (0'), source.indexOf('exports.saveActivity = (0'));
+  assert.match(mixed, /unitVisibility\)\(unit\) !== 'current'/, '歷史區與隱藏區不可只靠前端排除');
+  assert.match(mixed, /Date\.parse\(unit\.opensAt\) > Date\.now\(\)/, '尚未開放的分類不可提交');
+  assert.match(mixed, /return db\.runTransaction/, '驗證失敗前不應寫入部分 mixed attempts');
+});
 test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量拒絕', async () => {
   const db = getFirestore();
   const originals = { doc: db.doc, batch: db.batch, runTransaction: db.runTransaction };

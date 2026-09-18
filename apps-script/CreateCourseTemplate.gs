@@ -7,7 +7,7 @@ function createCoursePlatformTemplate() {
   roster.setFrozenRows(1); roster.getRange('A:E').setNumberFormat('@');
   roster.getRange('F2:F1000').setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(['TRUE', 'FALSE'], true).build());
   var bank = file.insertSheet('題庫');
-  // 單元＝大分類（純顯示分組）；次單元＝真正的題庫單位，對應平台 unitId。
+  // 單元＝平台 Chapter：設定、活動、班級與完成度的單位；次單元＝題目分類，對應平台 unitId。
   // 題序：發布前依此欄穩定排序，Sheet 上排序或插入列不會換題庫版本。
   // 啟用：留空或 TRUE 都會出題；FALSE 的列同步時直接略過，不必刪列。
   var headers = ['課程代碼','題目ID','單元','次單元','題序','啟用','題型','問題','選項A','選項B','選項C','選項D','正確答案代碼','Zuvio解答','解析','①先想關鍵字','②提問鏈','③回頭選答案','④一句話記憶','⑤追溯原子卡','圖片網址','講義標題','講義連結','補救資源'];

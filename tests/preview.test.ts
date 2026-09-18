@@ -48,12 +48,12 @@ test('教師偏好列不作為 app grid 的子節點', async () => {
   assert.match(source, /<div className="app">\s*<aside/);
   assert.match(css, /\.prefs-bar \{ position: fixed/);
 });
-test('學習進度看板可整組移動同一單元的次單元', async () => {
+test('學習進度看板只可整組移動同一單元的題目分類', async () => {
   const source = await readFile(new URL('../src/ProgressBoard.tsx', import.meta.url), 'utf8');
   assert.match(source, /整個單元移到/);
   assert.match(source, /unitIds: rows\.map\(\(u\) => u\.id\)/);
   assert.match(source, /整組移到…/);
-  assert.match(source, /unitIds: \[u\.id\]/, '個別次單元移動仍可用');
+  assert.doesNotMatch(source, /unitIds: \[u\.id\]/, '1.4.0 不可個別移動題目分類');
 });
 test('題庫管理頁可直接設定同步 Google Sheet 網址', async () => {
   const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');

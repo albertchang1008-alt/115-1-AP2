@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Course, safeCode, unitTree } from '../shared/model';
+import { Course, safeCode, orderedChapters } from '../shared/model';
 export function NewCourse({ source, close, create }: { source?: Course; close: () => void; create: (c: Course) => Promise<void> }) {
   const [code, setCode] = useState(''), [title, setTitle] = useState(source ? source.title + '（複本）' : ''), [term, setTerm] = useState(source?.term || '115 學年度第 1 學期'), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   return <div className="modalshade"><form className="modal" onSubmit={async (e) => {
@@ -15,10 +15,10 @@ function TriCheck({ state, label, onChange }: { state: 'all' | 'some' | 'none'; 
   useEffect(() => { if (ref.current) ref.current.indeterminate = state === 'some'; }, [state]);
   return <input ref={ref} type="checkbox" aria-label={label} checked={state === 'all'} onChange={(e) => onChange(e.target.checked)} />;
 }
-// 班級 × 單元對照表：每一欄是一個班級，每一列是 Sheet 的單元／次單元，格子打勾＝該班適用。
+// 班級 × 單元對照表：勾一個單元時，儲存其所有題目分類的 ID。
 export function ClassManager({ course, change }: { course: Course; change: (c: Course) => void }) {
   const [code, setCode] = useState(''), [name, setName] = useState(''), [error, setError] = useState('');
-  const tree = unitTree(course.units);
+  const chapters = orderedChapters(course);
   const selectedOf = (cl: string) => course.classUnits?.[cl] || course.units.map((u) => u.id);
   const stateOf = (cl: string, ids: string[]): 'all' | 'some' | 'none' => {
     const sel = selectedOf(cl), n = ids.filter((id) => sel.includes(id)).length;
@@ -47,7 +47,7 @@ export function ClassManager({ course, change }: { course: Course; change: (c: C
   const allIds = course.units.map((u) => u.id);
   return <section className="panel">
     <h2>班級與適用單元</h2>
-    <p className="muted">每一欄是一個班級，打勾代表該班看得到、會計分。單元與次單元的結構來自 Google Sheet。</p>
+    <p className="muted">每一列是一個單元；打勾代表該班看得到底下全部題目分類並會計分。結構來自 Google Sheet。</p>
     <div className="class-add">
       <input aria-label="班級名稱" value={name} onChange={(e) => setName(e.target.value)} placeholder="班級名稱，例如 護理一甲" />
       <input aria-label="班級代碼" value={code} onChange={(e) => setCode(e.target.value)} placeholder="班級代碼，例如 護525" />
@@ -56,19 +56,12 @@ export function ClassManager({ course, change }: { course: Course; change: (c: C
     {error && <p className="error">{error}</p>}
     {!course.classIds.length ? <p className="muted">尚未新增班級。</p> : !course.units.length ? <p className="muted">尚未有單元，請先到題庫管理同步 Google Sheet。</p> :
     <div className="class-matrix-wrap"><table className="class-matrix">
-      <thead><tr><th scope="col">單元／次單元</th>{course.classIds.map((cl) => <th scope="col" key={cl}>
+      <thead><tr><th scope="col">單元</th>{course.classIds.map((cl) => <th scope="col" key={cl}>
         <div className="class-head"><strong>{course.classNames?.[cl] || cl}</strong>{course.classNames?.[cl] && course.classNames[cl] !== cl && <span className="muted">{cl}</span>}</div>
         <div className="class-head-actions"><button type="button" onClick={() => renameClass(cl)}>改名</button><button type="button" onClick={() => removeClass(cl)}>移除</button></div>
       </th>)}</tr>
       <tr className="matrix-all"><th scope="row">全部（{allIds.length} 節）</th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, allIds)} label={`${cl} 全部`} onChange={(on) => setMany(cl, allIds, on)} /> <span className="muted">{selectedOf(cl).filter((id) => allIds.includes(id)).length}</span></td>)}</tr></thead>
-      <tbody>{tree.map(({ group, items, single }) => {
-        const ids = items.map((i) => i.unit.id);
-        if (single) return <tr key={'g:' + group} className="matrix-group"><th scope="row">{group}</th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, ids)} label={`${cl} ${group}`} onChange={(on) => setMany(cl, ids, on)} /></td>)}</tr>;
-        return [
-          <tr key={'g:' + group} className="matrix-group"><th scope="row">{group || '未分類'} <span className="muted">· {items.length} 節</span></th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, ids)} label={`${cl} ${group || '未分類'} 全部`} onChange={(on) => setMany(cl, ids, on)} /></td>)}</tr>,
-          ...items.map(({ unit }) => <tr key={unit.id} className="matrix-unit"><th scope="row">{unit.title}</th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, [unit.id])} label={`${cl} ${unit.title}`} onChange={(on) => setMany(cl, [unit.id], on)} /></td>)}</tr>),
-        ];
-      })}</tbody>
+      <tbody>{chapters.map(({ name, units }) => { const ids = units.map((u) => u.id); return <tr key={name} className="matrix-group"><th scope="row">{name} <span className="muted">· {ids.length} 個分類</span></th>{course.classIds.map((cl) => <td key={cl}><TriCheck state={stateOf(cl, ids)} label={`${cl} ${name}`} onChange={(on) => setMany(cl, ids, on)} /></td>)}</tr>; })}</tbody>
     </table></div>}
     <p className="muted">未勾選的單元，該班學生看不到、也不計分。開放時間、期限與必做請在下方單元設定調整。</p>
   </section>;

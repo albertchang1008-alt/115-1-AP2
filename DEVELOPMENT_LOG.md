@@ -1,6 +1,13 @@
 # 開發紀錄
 
-目前版本：1.3.1
+目前版本：1.4.0
+
+## 1.4.0 — Chapter 單元模型（2026-09-18）
+
+- 新增 `Chapter` 與 `Course.chapters`／`chapterOverrides`／`chapterOrder`：題庫、作答進度與錯題仍由 `Unit`（Sheet 次單元）持有；設定、活動、班級選用與完成度改由 Sheet 單元（Chapter）持有。舊資料在讀取時由同組第一個分類推導，不改寫既有課程。
+- 完成度公式升為 v3：每個必做 Chapter 的所有已發布題目分類須達標，且其必做活動完成，才計一個完成單元；v1/v2 結算快照仍沿用舊公式。
+- 題庫同步為新 Sheet 單元建立預設 Chapter，並回傳 `staleUnits` 供教師確認清理；班級對照表與學習進度看板以單元整組展開／移動。
+- 綜合練習在 Functions 端強制只接受 `visibility: current` 且已開放的分類；hidden、archived 或未開放任一 attempt 都會在寫入前拒絕整批。
 
 ## 1.3.1 — 教師後台單元結構重整（2026-09-18）
 

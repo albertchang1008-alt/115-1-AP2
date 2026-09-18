@@ -1,7 +1,7 @@
 export type Mode = 'quiz' | 'flashcard' | 'review';
 export type Phase = 'before' | 'during' | 'after';
 export type UnitVisibility = 'hidden' | 'current' | 'archived';
-export const CURRENT_COMPLETION_FORMULA_VERSION = 2;
+export const CURRENT_COMPLETION_FORMULA_VERSION = 3;
 export interface Question {
   id: string;
   text: string;
@@ -63,6 +63,17 @@ export interface Unit {
   archivedAt?: number;
   visibilityUpdatedAt?: number;
 }
+/** Sheet 的「單元」：設定、活動及完成度的單位；Unit 只保留題庫分類。 */
+export interface Chapter {
+  title: string;
+  description: string;
+  required: boolean;
+  threshold: number;
+  opensAt: string;
+  dueAt: string;
+  activities: Activity[];
+  research?: { enabled: boolean };
+}
 export interface ExplanationResearchEvent {
   id: string;
   questionId: string;
@@ -89,6 +100,9 @@ export interface Course {
     string,
     Record<string, Partial<Pick<Unit, 'threshold' | 'required' | 'opensAt' | 'dueAt'>>>
   >;
+  chapters?: Record<string, Chapter>;
+  chapterOverrides?: Record<string, Record<string, Partial<Pick<Chapter, 'threshold' | 'required' | 'opensAt' | 'dueAt'>>>>;
+  chapterOrder?: string[];
   studentNotice?: string;
 }
 export interface Profile {
@@ -171,10 +185,35 @@ export interface Report {
 }
 export const emptyProgress = (): Progress => ({ units: {}, activities: {} });
 export function unitVisibility(unit: Unit): UnitVisibility { return unit.visibility || 'current'; }
+export function chapterName(unit: Unit) { return unit.group || unit.title || unit.id; }
+/** 舊課程沒有 chapters 時，從每個群組的第一個分類推導，絕不寫回舊資料。 */
+export function chaptersOf(course: Course): Record<string, Chapter> {
+  const inferred: Record<string, Chapter> = {};
+  for (const unit of course.units || []) {
+    const name = chapterName(unit);
+    if (!inferred[name]) inferred[name] = {
+      title: name, description: unit.description || '', required: unit.required !== false,
+      threshold: unit.threshold ?? 80, opensAt: unit.opensAt || '', dueAt: unit.dueAt || '',
+      activities: unit.activities || [], research: unit.research,
+    };
+  }
+  return { ...inferred, ...(course.chapters || {}) };
+}
+export function orderedChapters(course: Course) {
+  const chapters = chaptersOf(course), seen = new Set<string>();
+  const names = [...(course.chapterOrder || []), ...course.units.map(chapterName)].filter((name) => !!chapters[name] && !seen.has(name) && !!seen.add(name));
+  return names.map((name) => ({ name, chapter: chapters[name], units: course.units.filter((u) => chapterName(u) === name) }));
+}
+export function chapterActivityKey(name: string, activityId: string) { return `chapter:${name}_${activityId}`; }
 export function forClass(course: Course, classId: string): Course {
+  const chapters = chaptersOf(course);
   return {
     ...course,
-    units: course.units.filter((u) => unitVisibility(u) !== 'hidden' && (!course.classUnits?.[classId] || course.classUnits[classId].includes(u.id))).map((u) => ({ ...u, ...course.classOverrides?.[classId]?.[u.id] })),
+    chapters: Object.fromEntries(Object.entries(chapters).map(([name, chapter]) => [name, { ...chapter, ...course.chapterOverrides?.[classId]?.[name] }])),
+    units: course.units.filter((u) => unitVisibility(u) !== 'hidden' && (!course.classUnits?.[classId] || course.classUnits[classId].includes(u.id))).map((u) => {
+      const chapter = { ...chapters[chapterName(u)], ...course.chapterOverrides?.[classId]?.[chapterName(u)] };
+      return { ...u, required: chapter.required, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
+    }),
   };
 }
 export const phases: Record<Phase, string> = {
@@ -187,8 +226,8 @@ export const modes: Record<Mode, string> = {
   flashcard: '閃卡作答',
   review: '錯題複習',
 };
-export function requiredActivities(unit: Unit) {
-  return (unit.activities || []).filter((a) => (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link');
+export function requiredActivities(source: Pick<Unit | Chapter, 'activities'>) {
+  return (source.activities || []).filter((a) => (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link');
 }
 export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   const required = requiredActivities(unit), hasBank = !!unit.bankVersion;
@@ -202,7 +241,23 @@ export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT
 export function complete(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   return unitCompletion(unit, p, formulaVersion).done;
 }
+export function chapterCompletion(course: Course, name: string, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  const chapter = chaptersOf(course)[name];
+  const units = course.units.filter((u) => chapterName(u) === name);
+  if (!chapter) return { eligible: false, done: false, scoreDone: false, activitiesDone: false, completedActivities: 0, totalRequired: 0 };
+  if (formulaVersion < 3) return { ...unitCompletion(units[0] || ({ id: name, ...chapter, bankVersion: '' } as Unit), p, formulaVersion), units };
+  const required = requiredActivities(chapter), hasBank = units.some((u) => !!u.bankVersion);
+  const scoreDone = units.every((u) => !u.bankVersion || (p.units[u.id]?.best ?? -1) >= chapter.threshold);
+  // 尚未升級的舊課程沿用 unitId_activityId；新 Chapter 一律使用 chapter: 前綴避免撞鍵。
+  const completedActivities = required.filter((a) => p.activities[chapterActivityKey(name, a.id)]?.completed || (!course.chapters && p.activities[`${units[0]?.id}_${a.id}`]?.completed)).length;
+  const activitiesDone = completedActivities === required.length;
+  return { eligible: chapter.required && (hasBank || required.length > 0), done: scoreDone && activitiesDone, scoreDone, activitiesDone, completedActivities, totalRequired: required.length + (hasBank ? units.filter((u) => !!u.bankVersion).length : 0), units };
+}
 export function completion(course: Course, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  if (formulaVersion >= 3) {
+    const chapters = orderedChapters(course).map(({ name }) => chapterCompletion(course, name, p, formulaVersion)).filter((x) => x.eligible);
+    return { done: chapters.filter((x) => x.done).length, total: chapters.length };
+  }
   const units = course.units.filter((u) => unitCompletion(u, p, formulaVersion).eligible);
   return { done: units.filter((u) => complete(u, p, formulaVersion)).length, total: units.length };
 }

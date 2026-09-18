@@ -31,6 +31,9 @@ import {
   CURRENT_COMPLETION_FORMULA_VERSION,
   UnitVisibility,
   unitVisibility,
+  chapterName,
+  chaptersOf,
+  chapterActivityKey,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -259,9 +262,9 @@ export const publishCourse = onCall(options, async (req) => {
       const b = await db.doc(`banks/${course.id}_${u.id}_${id(u.bankVersion)}`).get();
       if (!b.exists) fail('題庫版本不存在');
     }
-    for (const a of u.activities)
-      if (a.type === 'html' && !validMaterialUrl(a.url)) fail(`${a.title} 尚未提供有效教材網址`);
   }
+  for (const chapter of Object.values(chaptersOf(course))) for (const a of chapter.activities)
+    if (a.type === 'html' && !validMaterialUrl(a.url)) fail(`${a.title} 尚未提供有效教材網址`);
   const published = { ...course, publishedAt: Date.now() };
   await db.runTransaction(async (tx) => {
     const ref = db.doc(`courses/${course.id}`);
@@ -592,7 +595,8 @@ export const submitMixedAttempts = onCall(options, async (req) => {
   const prepared = await Promise.all(attempts.map(async (input) => {
     id(input.id); code(input.unitId); id(input.version); size(input, 300000);
     const unit = visible.find((u: any) => u.id === input.unitId);
-    if (!unit || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放');
+    // 綜合練習只允許看板「目前」的單元；整批在寫入前驗完，拒絕時不留半套紀錄。
+    if (!unit || unitVisibility(unit) !== 'current' || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放或已移至歷史區');
     const bankRef = db.doc(`banks/${courseId}_${input.unitId}_${input.version}`), bank = await bankRef.get();
     if (!bank.exists || !Number.isFinite(input.duration) || input.duration < 0 || input.answers.length > MAX_BANK_QUESTIONS) fail('作答格式錯誤');
     const options = bank.data()!.questionOptions || {};
@@ -623,18 +627,21 @@ export const submitMixedAttempts = onCall(options, async (req) => {
 export const saveActivity = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   if (p.teacher) fail('預覽不能寫入正式進度');
-  const { unitId, activityId, position, completed } = req.data;
-  const u = c.published && forClass(c.published, p.classId).units.find((x: any) => x.id === unitId);
+  const { unitId, chapterName: requestedChapter, activityId, position, completed } = req.data;
+  const studentCourse = c.published && forClass(c.published, p.classId);
+  const u = studentCourse?.units.find((x: any) => x.id === unitId);
+  const chapter = requestedChapter && studentCourse ? chaptersOf(studentCourse)[String(requestedChapter)] : undefined;
+  const activityOwner: any = chapter || u;
   if (
-    !u ||
-    !u.activities.some((x: any) => x.id === activityId) ||
-    Date.parse(u.opensAt) > Date.now() ||
+    !activityOwner ||
+    !activityOwner.activities.some((x: any) => x.id === activityId) ||
+    Date.parse((chapter || u)!.opensAt) > Date.now() ||
     !Number.isFinite(position) ||
     position < 0 ||
     typeof completed !== 'boolean'
   )
     fail('活動資料無效');
-  const activity = u.activities.find((a: any) => a.id === activityId);
+  const activity = activityOwner.activities.find((a: any) => a.id === activityId);
   if (activity?.tracking === 'interactive') fail('互動教材需由事件回報通關');
   const ref = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
   await ref.set(
@@ -642,7 +649,7 @@ export const saveActivity = onCall(options, async (req) => {
       uid: p.uid,
       classId: p.classId,
       activities: {
-        [`${code(unitId)}_${id(activityId)}`]: { position, completed, updatedAt: Date.now() },
+        [chapter ? chapterActivityKey(String(requestedChapter), id(activityId)) : `${code(unitId)}_${id(activityId)}`]: { position, completed, updatedAt: Date.now() },
       },
     },
     { merge: true },
@@ -1088,9 +1095,18 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
           const nextUnit = existing
             ? { ...existing, bankVersion: result.version, ...(group ? { group } : {}) }
             : newUnitFromSheet(unitId, group, result.version);
+          const chapterKey = group || unitId;
+          const chapters = draft.chapters || {};
+          // Sheet 第一次帶來某個單元時，同步建立最小 Chapter；既有教師設定絕不覆蓋。
+          const nextChapters = chapters[chapterKey] ? chapters : {
+            ...chapters,
+            [chapterKey]: { title: chapterKey, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] },
+          };
           tx.update(ref, {
             draft: {
               ...draft,
+              chapters: nextChapters,
+              chapterOrder: draft.chapterOrder?.length ? draft.chapterOrder : Object.keys(nextChapters),
               units: existing ? draft.units.map((u) => (u.id === unitId ? nextUnit : u)) : [...draft.units, nextUnit],
             },
           });
@@ -1098,6 +1114,13 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
         results.push({ courseId, unitId, group, created, ...result });
       } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
     }
+  }
+  // 不自動刪除資料：只回報 Sheet 已不再對應的題目分類，讓教師在後台確認後清理。
+  for (const courseId of groups.keys()) {
+    const draft = (await db.doc(`courses/${courseId}`).get()).data()?.draft as Course | undefined;
+    const sheetUnitIds = new Set(groups.get(courseId)?.keys() || []);
+    const staleUnits = (draft?.units || []).filter((u) => !sheetUnitIds.has(u.id)).map((u) => u.id);
+    if (staleUnits.length) results.forEach((result) => { if (result.courseId === courseId) result.staleUnits = staleUnits; });
   }
   return results;
 }

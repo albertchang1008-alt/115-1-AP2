@@ -16,6 +16,9 @@ import {
   Seen,
   Course,
   CURRENT_COMPLETION_FORMULA_VERSION,
+  chaptersOf,
+  chapterCompletion,
+  chapterActivityKey,
   forClass,
   unitVisibility,
   wrongEntries,
@@ -123,13 +126,24 @@ test('沒有成績不視為零分達標', () => {
   const c = { units: [{ id: 'u', required: true, threshold: 0 }] } as Course;
   assert.deepEqual(completion(c, emptyProgress(), 1), { done: 0, total: 1 });
 });
-test('第二版完成度同時要求達標、互動教材與外部連結', () => {
+test('第三版完成度以單元計數，所有題目分類達標且單元活動完成才算完成', () => {
   const unit: any = { id: 'u', required: true, threshold: 80, bankVersion: 'v', activities: [{ id: 'html', type: 'html', tracking: 'interactive' }, { id: 'link', type: 'link' }] };
   let p: any = { units: { u: { best: 90 } }, activities: {} };
-  assert.equal(completion({ units: [unit] } as Course, p).done, 0);
-  p.activities.u_html = { completed: true }; assert.equal(completion({ units: [unit] } as Course, p).done, 0);
-  p.activities.u_link = { completed: true }; assert.equal(completion({ units: [unit] } as Course, p).done, 1);
-  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 2);
+  const course: any = { units: [{ ...unit, id: 'u1', group: '血液' }, { ...unit, id: 'u2', group: '血液' }], chapters: { 血液: { title: '血液', required: true, threshold: 80, activities: unit.activities, description: '', opensAt: '', dueAt: '' } } };
+  p = { units: { u1: { best: 90 }, u2: { best: 70 } }, activities: {} };
+  assert.deepEqual(completion(course, p), { done: 0, total: 1 });
+  p.units.u2.best = 90;
+  p.activities[chapterActivityKey('血液', 'html')] = { completed: true };
+  p.activities[chapterActivityKey('血液', 'link')] = { completed: true };
+  assert.deepEqual(completion(course, p), { done: 1, total: 1 });
+  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 3);
+});
+test('舊資料由第一個題目分類推導 Chapter，班級覆寫套用至所有分類', () => {
+  const course: any = { units: [{ id: 'rbc', title: '紅血球', group: '血液', required: true, threshold: 70, opensAt: '', dueAt: '', activities: [] }, { id: 'wbc', title: '白血球', group: '血液', required: false, threshold: 60, opensAt: '', dueAt: '', activities: [] }], chapterOverrides: { A: { 血液: { threshold: 90, required: false } } } };
+  assert.equal(chaptersOf(course).血液.threshold, 70);
+  const shown = forClass(course, 'A');
+  assert.equal(shown.units[0].threshold, 90); assert.equal(shown.units[1].threshold, 90);
+  assert.equal(shown.units[0].required, false); assert.equal(shown.units[1].required, false);
 });
 test('hidden 與逐班未勾選皆不會進入學生課程', () => {
   const c: any = { classUnits: { a: ['shown', 'hidden'] }, units: [{ id: 'shown' }, { id: 'hidden', visibility: 'hidden' }, { id: 'other' }] };

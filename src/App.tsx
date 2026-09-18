@@ -1353,12 +1353,13 @@ function Bank({
                 const r = await api.call<any>('syncSheet');
                 await onSynced();
                 const mine = (r.banks || []).filter((bank: any) => bank.sourceCourseId === course.id || bank.courseId === course.id);
+                const stale = [...new Set(mine.flatMap((bank: any) => bank.staleUnits || []))];
                 if (mine.some((bank: any) => bank.error)) {
                   const errors = mine.filter((bank: any) => bank.error).slice(0, 3)
                     .map((bank: any) => `${bank.unitId || bank.sourceTab || '題庫'}：${bank.error}`).join('；');
                   notify(`題庫同步有未完成項目：${errors}`);
                 }
-                else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}；請檢查後發布課程`);
+                else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}${stale.length ? `；舊題目分類待清理：${stale.join('、')}` : ''}；請檢查後發布課程`);
                 else {
                   const tabs = Array.isArray(r.availableTabs) ? r.availableTabs.map((title: unknown) => JSON.stringify(String(title))).join('、') : '';
                   notify(`找不到與課程代碼「${course.id}」同名的題庫分頁。平台實際讀到：${tabs || '（未提供分頁清單，請確認雲端 Functions 已更新）'}`);
