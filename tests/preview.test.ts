@@ -339,3 +339,10 @@ test('測驗結果以答對／答錯分色卡逐選項標示正確答案與本�
   assert.match(source, /（本次選擇）/);
   assert.match(source, /count-bad/);
 });
+
+test('晴空粉是預設色系，並在開頁時就套用已選色系', async () => {
+  const picker = await readFile(new URL('../src/ThemePicker.tsx', import.meta.url), 'utf8');
+  const main = await readFile(new URL('../src/main.tsx', import.meta.url), 'utf8');
+  assert.match(picker, /DEFAULT_THEME = 'blossom'/);
+  assert.match(main, /applySavedTheme\(\);/);
+});
