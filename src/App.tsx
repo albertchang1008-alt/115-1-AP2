@@ -1333,7 +1333,11 @@ function Bank({
                 const r = await api.call<any>('syncSheet');
                 await onSynced();
                 const mine = (r.banks || []).filter((bank: any) => bank.sourceCourseId === course.id || bank.courseId === course.id);
-                if (mine.some((bank: any) => bank.error)) notify('題庫同步有未完成項目，請檢查同步結果');
+                if (mine.some((bank: any) => bank.error)) {
+                  const errors = mine.filter((bank: any) => bank.error).slice(0, 3)
+                    .map((bank: any) => `${bank.unitId || bank.sourceTab || '題庫'}：${bank.error}`).join('；');
+                  notify(`題庫同步有未完成項目：${errors}`);
+                }
                 else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}；請檢查後發布課程`);
                 else {
                   const tabs = Array.isArray(r.availableTabs) ? r.availableTabs.map((title: unknown) => JSON.stringify(String(title))).join('、') : '';

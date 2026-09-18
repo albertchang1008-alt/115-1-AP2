@@ -70,6 +70,13 @@ test('題庫同步找不到分頁時顯示後端實際讀到的分頁名稱', as
   assert.match(bank, /availableTabs/);
   assert.match(bank, /平台實際讀到/);
 });
+test('題庫同步有驗證錯誤時顯示次單元與實際後端訊息', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const bank = source.slice(source.indexOf('function Bank('), source.indexOf('function RosterPage('));
+  assert.match(bank, /filter\(\(bank: any\) => bank\.error\)\.slice\(0, 3\)/);
+  assert.match(bank, /bank\.unitId \|\| bank\.sourceTab/);
+  assert.match(bank, /題庫同步有未完成項目：\$\{errors\}/);
+});
 test('平台設定固定放在側欄底部，不會被長導覽清單推到畫面外', async () => {
   const [app, css] = await Promise.all([
     readFile(new URL('../src/App.tsx', import.meta.url), 'utf8'),
