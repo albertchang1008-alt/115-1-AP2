@@ -23,7 +23,7 @@
 
 規格：`docs/BLOSSOM_THEME_FIX.md`。前提：db3c2c9（progress 缺 units 的 INTERNAL 修正）須先由教師部署完成，Codex 再開始，避免部署時帶入未驗收的樣式。在 `feature/1.4.0-unit-model` 上接續提交；完成後停下，不部署、不推 main，標示「晴空粉修正待 Claude 驗收」。
 
-**2026-09-19 Codex 追加授權與現況：** 教師改定不從 A／B／C 擇一，而是把原本的晴空粉改為三個可切換方案：A「雲朵晴空」（預設）、B「櫻花藍調」、C「粉霧紫光」。教師另要求單元「各班級的門檻與開放安排」的設定班級新增並預設 `All`；All 的修改／恢復會批次套用／清除所有班級該單元覆寫，個別班級仍可調整。此次因此授權了 `src/ThemePicker.tsx` 與 `src/App.tsx` 的最小行為變更，沒有修改 Functions、Firestore 或 Google Sheet。`npm run check` 通過（前端 80、Functions 13）；尚未部署、合併或推送 main。**晴空粉修正待 Claude 驗收（commit `1e1cf26`）。**
+**2026-09-19 Codex 追加授權與現況：** 教師改定不從 A／B／C 擇一，而是把原本的晴空粉改為三個可切換方案：A「雲朵晴空」（預設）、B「櫻花藍調」、C「粉霧紫光」。教師另要求單元「各班級的門檻與開放安排」的設定班級新增並預設 `All`；All 的修改／恢復會批次套用／清除所有班級該單元覆寫，個別班級仍可調整。此次因此授權了 `src/ThemePicker.tsx` 與 `src/App.tsx` 的最小行為變更，沒有修改 Functions、Firestore 或 Google Sheet。`npm run check` 通過（前端 80、Functions 13）；三方案視覺稿與核定色票已在 `docs/BLOSSOM_THEME_FIX.md`／`docs/blossom-theme-options.png` 記錄（`0eaa3a7`）。尚未部署、合併或推送 main。**晴空粉修正待 Claude 驗收（實作 commit `1e1cf26`）。**
 
 ### 1.4.1 根因已找到（2026-09-19 晚，Claude）：**需部署 Functions**
 
