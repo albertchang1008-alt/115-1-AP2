@@ -19,6 +19,11 @@
 
 ---
 
+### 晴空粉 A/B/C＋All 覆寫：Claude 驗收（2026-09-19）
+
+`npm run check` 重跑通過（前端 80、Functions 13）；只改前端（App.tsx、ThemePicker.tsx、style.css、測試、文件），未動 Functions。A/B/C 三色系實際截圖正常、其他色系不變，**配色通過**。
+**All 覆寫待教師決定**：目前 All 是把同一值寫進「每一班的覆寫」，之後改單元的共用開放時間／門檻，對這些班級不會生效（被覆寫蓋掉）；且 All 模式下欄位顯示的是共用值、不是各班實際值。建議改為：All＝直接修改單元共用設定並清除各班該欄位覆寫。教師決定前不要上線這部分。上線只需推送前端（`git push origin feature/1.4.0-unit-model:main`），不需部署 Functions。
+
 ### 交給 Codex：晴空粉配色修正（2026-09-19，教師發包）
 
 規格：`docs/BLOSSOM_THEME_FIX.md`。前提：db3c2c9（progress 缺 units 的 INTERNAL 修正）須先由教師部署完成，Codex 再開始，避免部署時帶入未驗收的樣式。在 `feature/1.4.0-unit-model` 上接續提交；完成後停下，不部署、不推 main，標示「晴空粉修正待 Claude 驗收」。
