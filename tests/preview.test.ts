@@ -359,14 +359,17 @@ test('三種晴空粉側欄與學生頂部列不用深色底，並為勾選控�
   assert.match(blossom, /input\[type='checkbox'\][\s\S]*accent-color: var\(--blue\)/);
 });
 
-test('單元的班級覆寫預設 All，且 All 會同時套用或恢復所有班級', async () => {
+test('All 編輯 Chapter 共用設定，會清理同欄位覆寫並提示例外班級', async () => {
   const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
   const overrides = source.slice(source.indexOf('function ChapterOverrides'), source.indexOf('function Empty'));
   assert.match(overrides, /const ALL_CLASSES = '__all__'/);
   assert.match(overrides, /useState\(ALL_CLASSES\)/);
   assert.match(overrides, /<option value=\{ALL_CLASSES\}>All<\/option>/);
-  assert.match(overrides, /selectedClasses\.map/);
+  assert.match(overrides, /const value = all \? chapter/);
+  assert.match(overrides, /changeShared\(patch, clear\(Object\.keys\(patch\)\)\)/);
   assert.match(overrides, /selectedClasses\.forEach/);
+  assert.match(overrides, /以下班級另有設定/);
+  assert.match(source, /changeChapterAndOverrides/);
 });
 
 test('重新同步時單筆失敗不會卡住後面的待同步紀錄，並回報原因', async () => {

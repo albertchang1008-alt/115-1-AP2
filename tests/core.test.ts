@@ -150,6 +150,17 @@ test('教師修改 Chapter 開放時間後，該班每個題目分類都套用�
   const course: any = { units: [{ id: 'a', title: 'A', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }, { id: 'b', title: 'B', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }], chapters: { 血液: { title: '血液', description: '', required: true, threshold: 85, opensAt: '2026-10-01T08:00', dueAt: '', activities: [] } } };
   assert.deepEqual(forClass(course, 'A').units.map((u) => u.opensAt), ['2026-10-01T08:00', '2026-10-01T08:00']);
 });
+test('All 修改共用開放時間會清掉同欄位覆寫，單一班覆寫仍優先且可恢復', () => {
+  const chapter: any = { title: '血液', description: '', required: true, threshold: 80, opensAt: '2026-10-01T08:00', dueAt: '', activities: [] };
+  const base: any = { classIds: ['護525', 'N522'], units: [{ id: 'u', title: '血液', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }], chapters: { 血液: chapter }, chapterOverrides: { 護525: { 血液: { opensAt: '2026-09-30T08:00', threshold: 90 } }, N522: { 血液: { opensAt: '2026-09-29T08:00' } } } };
+  const allChanged: any = { ...base, chapters: { 血液: { ...chapter, opensAt: '2026-10-02T08:00' } }, chapterOverrides: { 護525: { 血液: { threshold: 90 } } } };
+  assert.equal(forClass(allChanged, '護525').chapters!.血液.opensAt, '2026-10-02T08:00');
+  assert.equal(forClass(allChanged, 'N522').chapters!.血液.opensAt, '2026-10-02T08:00');
+  assert.equal(forClass(allChanged, '護525').chapters!.血液.threshold, 90, '單一班覆寫仍優先');
+  const restored: any = { ...allChanged, chapterOverrides: {} };
+  assert.deepEqual(restored.chapterOverrides, {});
+  assert.equal(forClass(restored, '護525').chapters!.血液.threshold, 80);
+});
 test('hidden 與逐班未勾選皆不會進入學生課程', () => {
   const c: any = { classUnits: { a: ['shown', 'hidden'] }, units: [{ id: 'shown' }, { id: 'hidden', visibility: 'hidden' }, { id: 'other' }] };
   assert.deepEqual(forClass(c, 'a').units.map((u: any) => u.id), ['shown']);
