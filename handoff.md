@@ -19,6 +19,10 @@
 
 ---
 
+### 1.4.1 追加（2026-09-19，Claude）：修正移動單元 INTERNAL，**需部署 Functions**
+
+教師把「115-1課程簡介」從尚未開放移到目前學習時出現 INTERNAL。原因：`patchVisibility`／`setStudentNotice` 寫入 undefined 欄位，Firestore（未設 ignoreUndefinedProperties）拒絕。已改為省略欄位並加測試（Functions 13 項）。上線：教師以 `zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'` 一次部署 Functions 並推送 main（Firebase 帳號 hhchang@ctcn.edu.tw）。
+
 ### 1.4.1（2026-09-19，Claude，待推送 main）
 
 教師想調整單元前後次序。單元順序本來就能在「課程與教材」選單元→上移／下移→保存草稿→發布課程調整（寫 `chapterOrder`，學生首頁照此排序）；但「學習進度」看板沒有讀 chapterOrder。已修 `src/ProgressBoard.tsx` 改用 `orderedChapters()`，加測試；`npm run check` 通過（前端 70、Functions 12）。另加：選教材版本自動帶入 GitHub Pages 教材網址（`materialPageUrl()` in shared/materials.ts），並有「帶入此網址」按鈕；單元學習活動可上移／下移；新增色系「晴空粉」（`data-theme='blossom'`，比照教師提供的 v1.9 截圖、Tailwind 色票）；測驗結果頁改為答對／答錯分色卡並逐選項標示；**晴空粉為預設色系**（`DEFAULT_THEME`，localStorage 已有選擇者不變），開頁即由 `applySavedTheme()` 套用。`npm run check` 前端 74、Functions 12。題目分類（次單元）在單元內的順序跟 Sheet 列順序走，目前無後台調整介面。**只需推送前端**：教師在終端機執行 `git -C ~/Documents/ChatGPT/課程平台1.0 push origin feature/1.4.0-unit-model:main`（不需部署 Functions）。

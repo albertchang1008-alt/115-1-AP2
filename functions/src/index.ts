@@ -68,9 +68,16 @@ function visibility(value: unknown): UnitVisibility {
   if (!['hidden', 'current', 'archived'].includes(String(value))) fail('區域設定無效');
   return value as UnitVisibility;
 }
-function patchVisibility(unit: Unit, next: UnitVisibility, label: string, at: number): Unit {
-  if (next === 'archived') return { ...unit, visibility: next, archiveLabel: label || undefined, archivedAt: at, visibilityUpdatedAt: at };
-  return { ...unit, visibility: next, archiveLabel: undefined, archivedAt: undefined, visibilityUpdatedAt: at };
+// Firestore 不接受 undefined 欄位值（未開 ignoreUndefinedProperties），要清掉的欄位必須直接省略，
+// 否則從「尚未開放」移到「目前學習」會丟出 INTERNAL。
+export function patchVisibility(unit: Unit, next: UnitVisibility, label: string, at: number): Unit {
+  const { archiveLabel: _label, archivedAt: _at, ...rest } = unit;
+  if (next === 'archived') return { ...rest, visibility: next, ...(label ? { archiveLabel: label } : {}), archivedAt: at, visibilityUpdatedAt: at };
+  return { ...rest, visibility: next, visibilityUpdatedAt: at };
+}
+function withNotice(course: any, text: string) {
+  const { studentNotice: _old, ...rest } = course;
+  return text ? { ...rest, studentNotice: text } : rest;
 }
 function visibleProgress(progress: Progress, course: Course) {
   const ids = new Set(course.units.map((u) => u.id));
@@ -340,7 +347,7 @@ export const renameArchiveLabel = onCall(options, async (req) => {
 });
 export const setStudentNotice = onCall(options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const text = cleanLabel(req.data.text, 60), ref = db.doc(`courses/${code(req.data.courseId)}`);
-  await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { draft: { ...data.draft, studentNotice: text || undefined }, ...(data.published ? { published: { ...data.published, studentNotice: text || undefined } } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
+  await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { draft: withNotice(data.draft, text), ...(data.published ? { published: withNotice(data.published, text) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
   return { text };
 });
 export const deleteCourse = onCall(options, async (req) => {

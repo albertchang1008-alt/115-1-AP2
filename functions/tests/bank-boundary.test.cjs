@@ -8,7 +8,8 @@ const { getFirestore } = require('firebase-admin/firestore');
 const { parseBankSheet } = require('../lib/shared/sheets.js');
 test('區域 transaction 只以既有單元為基礎覆寫區域欄位，不複製其他草稿欄位', () => {
   const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
-  assert.match(source, /return \{ \.\.\.unit, visibility: next, archiveLabel:/);
+  assert.match(source, /const \{ archiveLabel: _label, archivedAt: _at, \.\.\.rest \} = unit;/);
+  assert.match(source, /return \{ \.\.\.rest, visibility: next/);
   assert.match(source, /published: update\(published\)/);
   assert.doesNotMatch(source, /published:\s*draft/);
 });

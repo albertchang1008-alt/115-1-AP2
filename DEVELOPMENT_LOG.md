@@ -4,6 +4,7 @@
 
 ## 1.4.1 — 學習進度看板依單元順序排列（2026-09-19）
 
+- **修正：「尚未開放」的單元無法移到「目前學習」（INTERNAL）。** `patchVisibility` 把 archiveLabel／archivedAt 設成 undefined，Firestore 拒絕 undefined 欄位值；改為直接省略欄位。同步新建的單元預設 hidden，所以第一次開放必定觸發。學生首頁提示清空時的 studentNotice 也有同樣問題，一併修正。需部署 Functions。
 - 學習進度看板原本依題目分類在資料中的先後分組，忽略教師在「課程與教材」以上移／下移設定的單元順序（chapterOrder）；改用 `orderedChapters()`，與學生首頁順序一致。純前端變更，不需部署 Functions。
 - 活動編輯器選擇「教材版本」時，自動帶入 `https://albertchang1008-alt.github.io/115-1-AP2/materials/<版本>/index.html`（網址空白或原本是平台教材網址才覆寫，自訂外部網址保留）；已選版本但網址不同時顯示建議網址與「帶入此網址」按鈕。
 - 單元學習活動新增上移／下移（學生端各階段分頁依此順序顯示）。

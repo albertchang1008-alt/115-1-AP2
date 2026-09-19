@@ -148,3 +148,17 @@ test('同步把 Sheet 已移除的分類保存為 staleUnits，供教師 UI 確�
     assert.deepEqual(ctx.data.get('courses/ap2').draft.staleUnits, ['舊分類']);
   } finally { ctx.restore(); }
 });
+
+test('移動單元區域不會寫入 undefined（Firestore 會拒絕而回 INTERNAL）', () => {
+  const hasUndefined = (o) => Object.values(o).some((v) => v === undefined);
+  const hidden = { id: 'u1', title: 'u1', visibility: 'hidden', activities: [] };
+  const current = handlers.patchVisibility(hidden, 'current', '', 1);
+  assert.equal(current.visibility, 'current');
+  assert.ok(!hasUndefined(current), '移到目前學習時不可帶 undefined 欄位');
+  assert.ok(!('archiveLabel' in current) && !('archivedAt' in current));
+  const archived = handlers.patchVisibility(current, 'archived', '', 2);
+  assert.ok(!hasUndefined(archived), '沒有歷史標籤時直接省略 archiveLabel');
+  assert.equal(archived.archivedAt, 2);
+  const back = handlers.patchVisibility({ ...archived, archiveLabel: '期中' }, 'current', '', 3);
+  assert.ok(!('archiveLabel' in back) && !('archivedAt' in back), '移回目前學習時清掉歷史標籤');
+});
