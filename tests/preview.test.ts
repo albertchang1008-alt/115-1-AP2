@@ -346,3 +346,10 @@ test('晴空粉是預設色系，並在開頁時就套用已選色系', async ()
   assert.match(picker, /DEFAULT_THEME = 'blossom'/);
   assert.match(main, /applySavedTheme\(\);/);
 });
+
+test('重新同步時單筆失敗不會卡住後面的待同步紀錄，並回報原因', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  const sync = source.slice(source.indexOf('async function sync()'), source.indexOf('async function loadHistory('));
+  assert.match(sync, /for \(const a of pending\(uid\)\) \{[\s\S]*try \{[\s\S]*submitAttempt[\s\S]*\} catch \(e\) \{/);
+  assert.match(sync, /組未能保存/);
+});

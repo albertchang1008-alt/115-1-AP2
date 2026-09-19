@@ -167,13 +167,26 @@ export default function Student({
     if (preview) return;
     setBusy(true);
     try {
+      // 逐筆送出；某一筆被拒時不再中斷整批（以前第一筆失敗會卡住後面所有紀錄）。
+      // 被拒的紀錄保留在本機佇列、不刪除，並顯示伺服器給的原因，方便回報。
+      let saved = 0;
+      const errors = new Map<string, number>();
       for (const a of pending(uid)) {
         if (a.courseId !== course.id) continue;
-        const r = await api.call('submitAttempt', { attempt: a });
-        dequeue(uid, a.id);
-        setProgress(r.progress);
+        try {
+          const r = await api.call('submitAttempt', { attempt: a });
+          dequeue(uid, a.id);
+          setProgress(r.progress);
+          saved++;
+        } catch (e) {
+          const msg = (e as Error).message || '未知錯誤';
+          errors.set(msg, (errors.get(msg) || 0) + 1);
+        }
       }
-      notify('待同步紀錄已保存');
+      const failed = [...errors.values()].reduce((n, v) => n + v, 0);
+      notify(failed
+        ? `已保存 ${saved} 組；${failed} 組未能保存：${[...errors].map(([m, n]) => `${m}（${n} 組）`).join('；')}`
+        : `待同步紀錄已保存（${saved} 組）`);
     } catch (e) {
       notify((e as Error).message);
     } finally {
