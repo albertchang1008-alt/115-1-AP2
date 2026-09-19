@@ -19,6 +19,10 @@
 
 ---
 
+### 交給 Codex：晴空粉配色修正（2026-09-19，教師發包）
+
+規格：`docs/BLOSSOM_THEME_FIX.md`。前提：db3c2c9（progress 缺 units 的 INTERNAL 修正）須先由教師部署完成，Codex 再開始，避免部署時帶入未驗收的樣式。在 `feature/1.4.0-unit-model` 上接續提交；完成後停下，不部署、不推 main，標示「晴空粉修正待 Claude 驗收」。
+
 ### 1.4.1 根因已找到（2026-09-19 晚，Claude）：**需部署 Functions**
 
 學生（護525 張家瑄，23 組待同步）按重新同步得到 **INTERNAL**。根因不是時區：她先完成了單元教材，saveActivity 以 merge 建立的 progress 只有 `activities`，沒有 `units`；之後 submitAttempt 的 `applyAttempt` 讀 `p.units[unitId]` 丟 TypeError → INTERNAL。其他同學若先交卷、後開教材則不受影響，所以「別人可以」。修正：`normalizeProgress()`（shared/model.ts）用於 applyAttempt、wrongEntries、submitAttempt（含重送分支）與 submitMixedAttempts；加測試。`npm run check` 前端 78、Functions 13。時區修正仍保留（另一個真實但次要的問題）。
