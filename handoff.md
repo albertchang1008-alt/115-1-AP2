@@ -19,6 +19,10 @@
 
 ---
 
+### ✅ All 共用設定修正：Claude 驗收通過（2026-09-19）
+
+340c39e 逐行檢查：All 模式編輯 Chapter 共用值並清除各班同欄位覆寫（空物件一併移除）、恢復清除全部覆寫、單班模式不變、All 下列出另有設定的班級。`npm run check` 重跑通過（前端 81、Functions 13）。晴空粉 A/B/C＋All 可一起上線：只需推送前端 `git -C ~/Documents/ChatGPT/課程平台1.0 push origin feature/1.4.0-unit-model:main`，不需部署 Functions。
+
 ### All 修正待 Claude 驗收（2026-09-19）
 
 已完成且尚未上線：`ChapterOverrides` 的 All 現在編輯 `chapters[name]` 的單元共用門檻、開放時間、期限與必做，不再複製覆寫到每一班。變更某欄位會從所有班級同一單元覆寫移除該欄位，空覆寫物件會清掉；因此 `forClass()` 對未有其他欄位覆寫的每班都即時讀到新的共用值。All 的「恢復共用設定」清除該單元所有班級覆寫；單一班級模式仍維持只寫該班且優先於共用值。
