@@ -322,13 +322,15 @@ test('選擇教材版本時自動帶入 GitHub Pages 教材網址，並可一鍵
   assert.match(source, /帶入此網址/);
 });
 
-test('單元學習活動可上移下移，並提供晴空粉色系', async () => {
+test('單元學習活動可上移下移，並提供三種晴空粉色系', async () => {
   const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
   assert.match(source, /onMove=\{\(offset\)/);
   assert.match(source, /onClick=\{\(\) => onMove\(-1\)\}>上移/);
   const picker = await readFile(new URL('../src/ThemePicker.tsx', import.meta.url), 'utf8');
   const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
-  assert.match(picker, /value="blossom">晴空粉/);
+  assert.match(picker, /value="blossom">晴空粉 A｜雲朵晴空/);
+  assert.match(picker, /value="blossom-rose">晴空粉 B｜櫻花藍調/);
+  assert.match(picker, /value="blossom-violet">晴空粉 C｜粉霧紫光/);
   assert.match(css, /data-theme='blossom'\] \{ --blue: #0ea5e9/);
 });
 
@@ -340,11 +342,31 @@ test('測驗結果以答對／答錯分色卡逐選項標示正確答案與本�
   assert.match(source, /count-bad/);
 });
 
-test('晴空粉是預設色系，並在開頁時就套用已選色系', async () => {
+test('晴空粉 A 是預設色系，並在開頁時就套用已選色系', async () => {
   const picker = await readFile(new URL('../src/ThemePicker.tsx', import.meta.url), 'utf8');
   const main = await readFile(new URL('../src/main.tsx', import.meta.url), 'utf8');
   assert.match(picker, /DEFAULT_THEME = 'blossom'/);
   assert.match(main, /applySavedTheme\(\);/);
+});
+
+test('三種晴空粉側欄與學生頂部列不用深色底，並為勾選控制項指定主色', async () => {
+  const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
+  const blossom = css.slice(css.indexOf('晴空粉三方案補強：'), css.indexOf(":root[data-theme='night']"));
+  assert.match(blossom, /\.sidebar \{\s*background: #fff;/);
+  assert.match(blossom, /\.student-nav \{\s*background: #fff;/);
+  assert.doesNotMatch(blossom, /\.sidebar[\s\S]{0,120}background: #17394d/);
+  assert.doesNotMatch(blossom, /\.student-nav[\s\S]{0,120}background: #17394d/);
+  assert.match(blossom, /input\[type='checkbox'\][\s\S]*accent-color: var\(--blue\)/);
+});
+
+test('單元的班級覆寫預設 All，且 All 會同時套用或恢復所有班級', async () => {
+  const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const overrides = source.slice(source.indexOf('function ChapterOverrides'), source.indexOf('function Empty'));
+  assert.match(overrides, /const ALL_CLASSES = '__all__'/);
+  assert.match(overrides, /useState\(ALL_CLASSES\)/);
+  assert.match(overrides, /<option value=\{ALL_CLASSES\}>All<\/option>/);
+  assert.match(overrides, /selectedClasses\.map/);
+  assert.match(overrides, /selectedClasses\.forEach/);
 });
 
 test('重新同步時單筆失敗不會卡住後面的待同步紀錄，並回報原因', async () => {

@@ -1514,31 +1514,156 @@ dd {
 .review-options li.right { color:#16a34a; font-weight:700; }
 .review-options li.picked { color:#dc2626; font-weight:700; }
 .review-options small { margin-left:6px; font-weight:700; }
-/* 晴空粉：比照舊版 v1.9 題庫系統（Tailwind 色票）——淺灰底、白卡淡粉框、天藍主色、桃紅小標與膠囊、紫色閃卡、紅綠答題卡 */
+/* 晴空粉三方案：共用明亮留白的元件語言，僅替換主色與強調色。 */
 :root[data-theme='blossom'] { --blue: #0ea5e9; --nav: #0369a1; --accent: #db2777; --soft: #fdf2f8; --page: #f8fafc; --line: #fce7f3; --ink: #1e293b; --muted: #64748b; }
-:root[data-theme='blossom'] :is(.pageheading h1, .student h1) { color: #0284c7; font-weight: 800; }
+/* 晴空粉三方案補強：舊教師／學生元件有早期海軍藍寫死值，僅在此色系覆寫。 */
+:root[data-theme='blossom'] .sidebar {
+  background: #fff;
+  color: #1e293b;
+  border-right: 1px solid #fce7f3;
+}
+:root[data-theme='blossom'] .sidebar .brand,
+:root[data-theme='blossom'] .sidebar-bottom,
+:root[data-theme='blossom'] .sidebar-bottom strong { color: #1e293b; }
+:root[data-theme='blossom'] .sidebar .brand svg { color: #0ea5e9; }
+:root[data-theme='blossom'] :is(.sidebar .brand small, .workspace-label, .sidebar-bottom small) { color: #64748b; }
+:root[data-theme='blossom'] nav button,
+:root[data-theme='blossom'] .sidebar-settings,
+:root[data-theme='blossom'] .sidebar-bottom button {
+  background: transparent;
+  border-color: transparent;
+  color: #475569;
+}
+:root[data-theme='blossom'] :is(nav button:hover, nav button.active, .sidebar-settings:hover, .sidebar-settings.active) {
+  background: #fdf2f8;
+  color: #db2777;
+  box-shadow: inset 3px 0 #db2777;
+}
+:root[data-theme='blossom'] .sidebar-settings { border: 1px solid #fce7f3; }
+:root[data-theme='blossom'] .sidebar-bottom { border-top-color: #fce7f3; }
+:root[data-theme='blossom'] .avatar { background: #f3e8ff; color: #7e22ce; }
+:root[data-theme='blossom'] .student-nav {
+  background: #fff;
+  color: #1e293b;
+  border-bottom: 1px solid #fce7f3;
+}
+:root[data-theme='blossom'] .student-nav .brand { color: #0284c7; }
+:root[data-theme='blossom'] .student-nav :is(select, button) {
+  background: #fff;
+  border-color: #fce7f3;
+  color: #1e293b;
+  border-radius: 16px;
+}
+:root[data-theme='blossom'] .student-nav small { color: #64748b; }
+:root[data-theme='blossom'] :is(input, select, textarea) { accent-color: #0ea5e9; }
+:root[data-theme='blossom'] :is(input, select, textarea):focus {
+  border-color: #0ea5e9;
+  outline: 3px solid #0ea5e933;
+}
+:root[data-theme='blossom'] input[type='checkbox'],
+:root[data-theme='blossom'] input[type='radio'] { accent-color: #0ea5e9; }
+:root[data-theme='blossom'] :is(.notice, .feedback) {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #1e293b;
+}
+:root[data-theme='blossom'] :is(.notice.warning, .warning) {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+:root[data-theme='blossom'] :is(th, .class-matrix thead th) {
+  background: #fff;
+  color: #1e293b;
+  border-color: #fce7f3;
+  font-weight: 700;
+}
+:root[data-theme='blossom'] :is(td, .class-matrix th, .class-matrix td) { border-color: #fce7f3; }
+:root[data-theme='blossom'] .class-matrix th[scope='row'] { color: #1e293b; font-weight: 700; }
+:root[data-theme='blossom'] .class-matrix .matrix-all th,
+:root[data-theme='blossom'] .class-matrix .matrix-all td { background: #fdf2f8; }
+:root[data-theme='blossom'] :is(.metric, .activityeditor, .uploadbox) { background: #fff; border-color: #fce7f3; }
+:root[data-theme='blossom'] .metric:before,
+:root[data-theme='blossom'] .progressline > div { background: #0ea5e9; }
+:root[data-theme='blossom'] .progressline { background: #fce7f3; }
+:root[data-theme='blossom'] :is(.statuschip, .timeline-no, .uploadbox, .feedback, .explanations details, .explanationstep) { background: #f0f9ff; color: #1e293b; }
+:root[data-theme='blossom'] :is(.linkbutton, .textlink, .unitmenu > button.selected, .unitmenu .unit-leaf.selected, .activitylist button.selected) {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+:root[data-theme='blossom'] .darkpanel,
+:root[data-theme='blossom'] .previewbar,
+:root[data-theme='blossom'] .toast {
+  background: #fff;
+  color: #1e293b;
+  border: 1px solid #fce7f3;
+  box-shadow: none;
+}
+:root[data-theme='blossom'] :is(.darkpanel .eyebrow, .darkpanel .muted, .insight-empty, .weak small) { color: #64748b; }
+:root[data-theme='blossom'] .darkpanel button { background: #fdf2f8; border-color: #fce7f3; color: #9d174d; }
+:root[data-theme='blossom'] .weak { border-color: #fce7f3; }
+:root[data-theme='blossom'] .weak strong { color: #db2777; }
+:root[data-theme='blossom'] :is(.preview-shell, .previewdevice) { background: #f8fafc; }
+:root[data-theme='blossom'] :is(.previewbar button, .previewbar select) { background: #fff; color: #1e293b; border-color: #fce7f3; }
+:root[data-theme='blossom'] .segmented button.active { background: #fce7f3; color: #9d174d; }
+:root[data-theme='blossom'] .modalshade { background: #1e293b66; }
+:root[data-theme='blossom'] .login-art { background: #f0f9ff; color: #1e293b; }
+:root[data-theme='blossom'] :is(.login-art .brand span, .login-art > p, .login-foot) { color: #64748b; }
+/* 晴空粉 B｜櫻花藍調：桃紅操作主色、天藍作資訊與進度輔色。 */
+:root[data-theme='blossom-rose'] { --blue: #db2777; --nav: #fff7fb; --accent: #0ea5e9; --soft: #fdf2f8; --page: #fff7fb; --line: #fce7f3; --ink: #1e293b; --muted: #64748b; }
+/* 晴空粉 C｜粉霧紫光：紫色操作主色、桃紅提示、淡天藍作資訊底色。 */
+:root[data-theme='blossom-violet'] { --blue: #7e22ce; --nav: #faf7ff; --accent: #db2777; --soft: #f3e8ff; --page: #faf7ff; --line: #e9d5ff; --ink: #1e293b; --muted: #64748b; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.pageheading h1, .student h1, .learning-summary h2, .quizresult h1) { color: var(--blue); font-weight: 800; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(h2, h3, .options button, button) { font-weight: 700; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal, .reviewanswer) { border-radius: 22px; box-shadow: none; border-color: var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.student .panel h2, .unitcard h3, .practice-row-title strong, .quiz .eyebrow, .learning-summary .eyebrow) { color: var(--accent); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .badge:not(.green) { background: var(--soft); color: var(--blue); border-radius: 999px; }
+:root[data-theme='blossom-rose'] .unitcard .badge:not(.green) { background: #e0f2fe; color: #075985; }
+:root[data-theme='blossom-violet'] .unitcard .badge:not(.green) { background: #fce7f3; color: #9d174d; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .learning-summary { background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 22px; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .ring { background: conic-gradient(var(--accent) var(--pct), var(--soft) 0); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .ring span { background: #fff; color: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .options button { background: #fff; border-color: #e2e8f0; border-radius: 22px; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .options button.chosen { border-color: var(--blue); background: #f0f9ff; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(input, select, textarea) { accent-color: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(input, select, textarea):focus { border-color: var(--blue); outline: 3px solid color-mix(in srgb, var(--blue) 20%, transparent); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(input[type='checkbox'], input[type='radio']) { accent-color: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .sidebar { background: #fff; color: var(--ink); border-right: 1px solid var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.sidebar .brand, .sidebar-bottom, .sidebar-bottom strong) { color: var(--ink); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.sidebar .brand svg, nav button.active, .sidebar-settings.active) { color: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(nav button, .sidebar-settings, .sidebar-bottom button) { background: transparent; border-color: transparent; color: #475569; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(nav button:hover, nav button.active, .sidebar-settings:hover, .sidebar-settings.active) { background: var(--soft); box-shadow: inset 3px 0 var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .sidebar-settings { border: 1px solid var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .sidebar-bottom { border-top-color: var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .avatar { background: var(--soft); color: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .student-nav { background: #fff; color: var(--ink); border-bottom: 1px solid var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .student-nav :is(select, button) { background: #fff; border-color: var(--line); color: var(--ink); border-radius: 16px; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.notice, .feedback) { background: #f0f9ff; border: 1px solid #bae6fd; color: var(--ink); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.notice.warning, .warning) { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(th, .class-matrix thead th) { background: #fff; color: var(--ink); border-color: var(--line); font-weight: 700; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(td, .class-matrix th, .class-matrix td) { border-color: var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .class-matrix th[scope='row'] { color: var(--ink); font-weight: 700; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .class-matrix .matrix-all :is(th, td) { background: var(--soft); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.metric, .activityeditor, .uploadbox) { background: #fff; border-color: var(--line); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.metric:before, .progressline > div) { background: var(--blue); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .progressline { background: var(--soft); }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.darkpanel, .previewbar, .toast) { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .darkpanel button { background: var(--soft); border-color: var(--line); color: var(--blue); }
+/* A 的專屬高亮規則保留舊版晴空粉的天藍／桃紅層級。 */
+:root[data-theme='blossom'] :is(.pageheading h1, .student h1, .learning-summary h2, .quizresult h1) { color: #0284c7; font-weight: 800; }
 :root[data-theme='blossom'] :is(h2, h3, .options button, button) { font-weight: 700; }
-:root[data-theme='blossom'] :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal, .reviewanswer) { border-radius: 22px; box-shadow: none; }
-:root[data-theme='blossom'] :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal) { border: 1px solid #fce7f3; }
-:root[data-theme='blossom'] :is(.student .panel h2, .unitcard h3, .practice-row-title strong, .quiz .eyebrow) { color: #db2777; }
+:root[data-theme='blossom'] :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal, .reviewanswer) { border-radius: 22px; box-shadow: none; border-color: #fce7f3; }
+:root[data-theme='blossom'] :is(.student .panel h2, .unitcard h3, .practice-row-title strong, .quiz .eyebrow, .learning-summary .eyebrow) { color: #db2777; }
 :root[data-theme='blossom'] .badge:not(.green) { background: #fce7f3; color: #9d174d; border-radius: 999px; }
 :root[data-theme='blossom'] .unitcard .badge:not(.green) { background: #f3e8ff; color: #7e22ce; }
 :root[data-theme='blossom'] .learning-summary { background: #fff; color: #1e293b; border: 1px solid #fce7f3; border-radius: 22px; }
-:root[data-theme='blossom'] .learning-summary .eyebrow { color: #db2777; font-weight: 700; }
-:root[data-theme='blossom'] .learning-summary h2 { color: #0ea5e9; font-weight: 800; }
-:root[data-theme='blossom'] :is(.learning-summary h2 small, .learning-summary p) { color: #64748b; }
 :root[data-theme='blossom'] .ring { background: conic-gradient(#db2777 var(--pct), #fce7f3 0); }
 :root[data-theme='blossom'] .ring span { background: #fff; color: #9d174d; }
-:root[data-theme='blossom'] .options button { background: #fff; border: 1px solid #e2e8f0; border-radius: 22px; }
+:root[data-theme='blossom'] .options button { background: #fff; border-color: #e2e8f0; border-radius: 22px; }
 :root[data-theme='blossom'] .options button.chosen { border-color: #0ea5e9; background: #f0f9ff; }
-:root[data-theme='blossom'] :is(button, .button, input, select, textarea) { border-color: #e2e8f0; }
-:root[data-theme='blossom'] :is(button.primary, .button.primary) { background: #0ea5e9; border-color: #0ea5e9; color: #fff; border-radius: 16px; }
-:root[data-theme='blossom'] .progressline div { background: #db2777; }
-:root[data-theme='blossom'] .unit-tabs button.active { color: #db2777; border-bottom-color: #db2777; }
-:root[data-theme='blossom'] .quizresult h1 { color: #0ea5e9; font-weight: 800; }
-:root[data-theme='blossom'] .quizresult > .eyebrow { color: #64748b; }
-:root[data-theme='blossom'] .quizresult > svg { color: #db2777; }
-:root[data-theme='blossom'] .reviewanswer :is(.explanations details, .explanationstep, .explanations section) { background: #fff; border-color: #f1f5f9; }
+:root[data-theme='blossom'] :is(input, select, textarea, input[type='checkbox'], input[type='radio']) { accent-color: #0ea5e9; }
+:root[data-theme='blossom'] .progressline { background: #fce7f3; }
+:root[data-theme='blossom'] .progressline > div { background: #0ea5e9; }
 :root[data-theme='night'] { color-scheme: dark; --blue: #85bcff; --nav: #101923; --accent: #e4c37a; --surface: #1d2b38; --page: #121c26; --ink: #ecf2f8; --soft: #293e50; --line: #465b6d; --muted: #b9c9d7; }
 html, body { background: var(--page); color: var(--ink); }
 /* 教師端偏好列不參與工作區版面流，避免多出一列把 sidebar／main 推移。 */

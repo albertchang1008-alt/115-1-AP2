@@ -123,13 +123,16 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 function ChapterOverrides({ course, name, chapter, onChange }: { course: Course; name: string; chapter: Chapter; onChange: (v: Course['chapterOverrides']) => void }) {
-  const [cl, setCl] = useState(course.classIds[0] || '');
-  const value = course.chapterOverrides?.[cl]?.[name] || {};
-  const change = (patch: any) => onChange({ ...course.chapterOverrides, [cl]: { ...course.chapterOverrides?.[cl], [name]: { ...value, ...patch } } });
-  return <details><summary>各班級的門檻與開放安排</summary><p className="muted">未設定時沿用單元共用值，教材內容保持共用。</p>
-    <Field label="設定班級"><select value={cl} onChange={(e) => setCl(e.target.value)}>{course.classIds.map((id) => <option key={id} value={id}>{course.classNames?.[id] || id}</option>)}</select></Field>
+  const ALL_CLASSES = '__all__';
+  const [cl, setCl] = useState(ALL_CLASSES);
+  const selectedClasses = cl === ALL_CLASSES ? course.classIds : [cl];
+  const value = cl === ALL_CLASSES ? {} : course.chapterOverrides?.[cl]?.[name] || {};
+  const change = (patch: any) => onChange({ ...course.chapterOverrides, ...Object.fromEntries(selectedClasses.map((id) => [id, { ...course.chapterOverrides?.[id], [name]: { ...(course.chapterOverrides?.[id]?.[name] || {}), ...patch } }])) });
+  const restore = () => { const next = structuredClone(course.chapterOverrides || {}); selectedClasses.forEach((id) => { if (next[id]) delete next[id][name]; }); onChange(next); };
+  return <details><summary>各班級的門檻與開放安排</summary><p className="muted">未設定時沿用單元共用值，教材內容保持共用。選擇 All 後，變更會套用到所有班級。</p>
+    <Field label="設定班級"><select value={cl} onChange={(e) => setCl(e.target.value)}><option value={ALL_CLASSES}>All</option>{course.classIds.map((id) => <option key={id} value={id}>{course.classNames?.[id] || id}</option>)}</select></Field>
     {cl && <div className="formgrid"><Field label="此班達標分數"><input type="number" min="0" max="100" value={value.threshold ?? chapter.threshold} onChange={(e) => change({ threshold: Number(e.target.value) })} /></Field><Field label="此班開放時間"><input type="datetime-local" value={value.opensAt ?? chapter.opensAt} onChange={(e) => change({ opensAt: e.target.value })} /></Field><Field label="此班完成期限"><input type="datetime-local" value={value.dueAt ?? chapter.dueAt} onChange={(e) => change({ dueAt: e.target.value })} /></Field><label className="check"><input type="checkbox" checked={value.required ?? chapter.required} onChange={(e) => change({ required: e.target.checked })} />此班列為必做</label></div>}
-    <button disabled={!cl} onClick={() => { const next = structuredClone(course.chapterOverrides || {}); if (next[cl]) delete next[cl][name]; onChange(next); }}>恢復共用設定</button>
+    <button disabled={!selectedClasses.length} onClick={restore}>恢復共用設定</button>
   </details>;
 }
 function Empty({ title, detail }: { title: string; detail: string }) {
