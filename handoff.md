@@ -19,18 +19,13 @@
 
 ---
 
-### 晴空粉 A/B/C＋All 覆寫：Claude 驗收（2026-09-19）
+### All 修正待 Claude 驗收（2026-09-19）
 
-`npm run check` 重跑通過（前端 80、Functions 13）；只改前端（App.tsx、ThemePicker.tsx、style.css、測試、文件），未動 Functions。A/B/C 三色系實際截圖正常、其他色系不變，**配色通過**。
-**教師決定（2026-09-19）：All 改為「修改單元共用設定」。** 交給 Codex 的任務：
-1. `src/App.tsx` `ChapterOverrides`：選 All 時，欄位顯示並編輯 **Chapter 共用值**（threshold／opensAt／dueAt／required），變更時呼叫既有的 changeChapter 寫入 `chapters[name]`，**並從所有班級的 `chapterOverrides[班][name]` 刪除同一欄位**（該班若因此沒有任何欄位，刪掉 `[name]` 這層）。不再把值複製到每一班。
-2. All 模式的「恢復共用設定」：清除所有班級對此單元的全部覆寫（維持現行）。
-3. 單一班級模式維持原行為（只寫該班覆寫）；若某班有覆寫，在 All 模式欄位下方顯示「以下班級另有設定：護525（開放時間）…」提示，讓教師知道哪些班不同。
-4. 單元設定上方原本的共用欄位與 All 模式編輯的是同一份值，兩處應即時一致。
-5. 補測試：All 修改開放時間後，`forClass()` 對每一班都得到新值（即使該班原本有覆寫）；單一班級覆寫仍優先；恢復後覆寫清空。`npm run check` 通過。
-6. 更新 DEVELOPMENT_LOG.md 與本檔，標示「All 修正待 Claude 驗收」附 commit hash。不部署、不推 main。
+已完成且尚未上線：`ChapterOverrides` 的 All 現在編輯 `chapters[name]` 的單元共用門檻、開放時間、期限與必做，不再複製覆寫到每一班。變更某欄位會從所有班級同一單元覆寫移除該欄位，空覆寫物件會清掉；因此 `forClass()` 對未有其他欄位覆寫的每班都即時讀到新的共用值。All 的「恢復共用設定」清除該單元所有班級覆寫；單一班級模式仍維持只寫該班且優先於共用值。
 
-原本的問題說明：目前 All 是把同一值寫進「每一班的覆寫」，之後改單元的共用開放時間／門檻，對這些班級不會生效（被覆寫蓋掉）；且 All 模式下欄位顯示的是共用值、不是各班實際值。建議改為：All＝直接修改單元共用設定並清除各班該欄位覆寫。教師決定前不要上線這部分。上線只需推送前端（`git push origin feature/1.4.0-unit-model:main`），不需部署 Functions。
+All 畫面會列出「以下班級另有設定：班級（欄位）」；其欄位與上方單元共用欄位由同一次草稿更新，保持即時一致。新增測試覆蓋 All 共用值、單班優先與恢復清空。`npm run check` 已通過（前端 81、Functions 13）。未改 Functions、Firestore、Google Sheet；未部署、未合併或推送 main。**All 修正待 Claude 驗收（實作 commit `340c39e`）。**
+
+Claude 驗收時請確認：All 修改任一欄位後，上方單元欄位同步更新、仍有不同覆寫的班級提示正確；選單切至單一班級後，該班覆寫仍能單獨設定；All 的恢復共用設定會移除該單元全部班級覆寫。
 
 ### 交給 Codex：晴空粉配色修正（2026-09-19，教師發包）
 
