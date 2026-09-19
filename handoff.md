@@ -19,9 +19,9 @@
 
 ---
 
-### 1.4.1 緊急修正（2026-09-19 晚，Claude）：**需立即部署 Functions**
+### 1.4.1 緊急修正（2026-09-19 晚，Claude）：✅ 已部署（教師執行 deploy.sh，Deploy complete；origin/main＝bc09e6d，Claude 確認 Pages version.json＝1.4.1）
 
-學生回報「我的學習紀錄：尚無作答紀錄」，畫面有待同步提示。根因：教師在單元設定填了開放時間（datetime-local，無時區），Cloud Functions 以 UTC 解讀，開放後 8 小時內 submitAttempt 一律回「單元尚未開放」，作答只存在學生瀏覽器佇列。修正：`shared/model.ts` 新增 `parseCourseTime()`（無時區字串視為 +08:00），伺服器 submitAttempt／submitMixedAttempts／saveActivity／解析研究／saveLearningEvents 與學生端鎖定顯示改用它。另修完成度看板空白（progress 缺 activities 時丟錯）。`npm run check` 前端 76、Functions 13。部署後請學生重新整理或按「重新同步」，佇列作答會補送。
+學生回報「我的學習紀錄：尚無作答紀錄」，畫面有待同步提示。根因：教師在單元設定填了開放時間（datetime-local，無時區），Cloud Functions 以 UTC 解讀，開放後 8 小時內 submitAttempt 一律回「單元尚未開放」，作答只存在學生瀏覽器佇列。修正：`shared/model.ts` 新增 `parseCourseTime()`（無時區字串視為 +08:00），伺服器 submitAttempt／submitMixedAttempts／saveActivity／解析研究／saveLearningEvents 與學生端鎖定顯示改用它。另修完成度看板空白（progress 缺 activities 時丟錯）。`npm run check` 前端 76、Functions 13。部署後請學生重新整理或按「重新同步」，佇列作答會補送。**注意：時區只解釋開放後 8 小時內的失敗；教師指出同時段其他人可交卷，根因尚未由伺服器紀錄證實。**待辦：請教師執行 `firebase functions:log --only platform:submitAttempt --project ap2-7ed91 -n 50` 取得被拒原因，並確認學生重新同步後紀錄是否出現。
 
 ### 1.4.1 追加（2026-09-19，Claude）：修正移動單元 INTERNAL，**需部署 Functions**
 
