@@ -236,3 +236,11 @@ test('開放時間沒有時區時一律以台灣時間解讀（伺服器是 UTC�
   assert.equal(parseCourseTime('2026-09-19T20:00:00Z'), Date.parse('2026-09-19T20:00:00Z'));
   assert.ok(Number.isNaN(parseCourseTime('')));
 });
+
+test('只有活動紀錄、沒有 units 的 progress 交卷時不會丟錯（修正 INTERNAL）', () => {
+  const onlyActivities = { activities: { 'chapter:115-1課程簡介_a': { position: 1, completed: true, updatedAt: 1 } } } as any;
+  const a: any = { id: 'x', courseId: 'c', unitId: 'u', version: 'v', mode: 'quiz', answers: [{ questionId: 'q1', selected: 'a', correct: false, seconds: 1 }], score: 0, full: true, clientAt: 5, duration: 1 };
+  const next = applyAttempt(onlyActivities, a);
+  assert.equal(next.units.u.attempts, 1);
+  assert.ok(next.activities['chapter:115-1課程簡介_a'].completed, '既有活動進度保留');
+});

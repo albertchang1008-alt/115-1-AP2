@@ -4,6 +4,7 @@
 
 ## 1.4.1 — 學習進度看板依單元順序排列（2026-09-19）
 
+- **根因修正：先開過單元教材的學生，之後每次交卷都回 INTERNAL。** saveActivity 以 merge 建立的 progress 文件只有 activities、沒有 units；`applyAttempt` 讀 `p.units[...]` 丟錯。1.4.0 起教材掛在單元（Chapter）層、學生容易先開教材，故大量觸發（例：護525 張家瑄 23 組卡在本機）。新增 `normalizeProgress()`，submitAttempt／submitMixedAttempts／applyAttempt／wrongEntries 一律先補空物件。需部署 Functions；部署後學生按「重新同步」即補送。
 - **緊急修正：學生交卷被伺服器拒絕（學習紀錄空白、畫面顯示待同步）。** 開放時間是沒有時區的 datetime-local 字串，Cloud Functions 以 UTC 解讀，比台灣晚 8 小時才判定開放，期間 submitAttempt 回「單元尚未開放」。新增 `parseCourseTime()` 一律以 +08:00 解讀，伺服器五處開放判斷與學生端鎖定／逾期顯示改用它。已排隊在學生瀏覽器的作答會在部署後重新送出。
 - **修正：重新同步遇到第一筆被拒就整批中斷。** 學生端「重新同步」改為逐筆送出，被拒的紀錄保留在本機並顯示伺服器原因與筆數，其餘照常保存。
 - **修正：完成度看板整頁空白。** 只交過測驗、從未開過教材的學生，progress 沒有 activities 欄位，單元有必做活動時完成度計算丟錯；`unitCompletion`／`chapterCompletion` 先補空物件。

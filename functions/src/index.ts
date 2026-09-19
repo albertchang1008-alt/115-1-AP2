@@ -35,6 +35,7 @@ import {
   chaptersOf,
   chapterActivityKey,
   parseCourseTime,
+  normalizeProgress,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -606,7 +607,7 @@ export const submitAttempt = onCall(options, async (req) => {
     const [old, progress] = await Promise.all([tx.get(ref), tx.get(pr)]);
     if (old.exists) {
       if (old.data()?.uid !== p.uid) throw new HttpsError('permission-denied', '作答 ID 衝突');
-      return { progress: progress.data() || emptyProgress(), duplicate: true };
+      return { progress: normalizeProgress(progress.data() as Progress), duplicate: true };
     }
     const saved = {
       ...a,
@@ -615,7 +616,7 @@ export const submitAttempt = onCall(options, async (req) => {
       receivedAt: FieldValue.serverTimestamp(),
       processed: false,
     };
-    const next = applyAttempt((progress.data() || emptyProgress()) as Progress, {
+    const next = applyAttempt(normalizeProgress(progress.data() as Progress), {
       ...a,
       receivedAt: Date.now(),
     });
@@ -660,7 +661,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
   return db.runTransaction(async (tx) => {
     const old = await Promise.all(prepared.map((a) => tx.get(db.doc(`courses/${courseId}/attempts/${a.id}`))));
     if (old.some((x) => x.exists && x.data()?.uid !== p.uid)) throw new HttpsError('permission-denied', '作答 ID 衝突');
-    const progress = await tx.get(progressRef); let next = (progress.data() || emptyProgress()) as Progress;
+    const progress = await tx.get(progressRef); let next = normalizeProgress(progress.data() as Progress);
     for (let i = 0; i < prepared.length; i++) if (!old[i].exists) { const a = prepared[i]; next = applyAttempt(next, { ...a, receivedAt: Date.now() }); tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false }); }
     tx.set(progressRef, { ...next, uid: p.uid, classId: p.classId });
     return { progress: next };

@@ -157,8 +157,11 @@ export interface Progress {
   attempted?: Record<string, Record<string, true>>;
 }
 export interface WrongEntry { n: number; at: number; }
+export function normalizeProgress(p: Partial<Progress> | undefined | null): Progress {
+  return { ...(p || {}), units: p?.units || {}, activities: p?.activities || {} } as Progress;
+}
 export function wrongEntries(progress: Progress, unitId: string, version: string): Record<string, WrongEntry> {
-  const raw = progress.units[unitId]?.wrong?.[version];
+  const raw = progress.units?.[unitId]?.wrong?.[version];
   if (Array.isArray(raw)) return Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }]));
   return raw || {};
 }
@@ -368,7 +371,10 @@ export function grade(
   }));
 }
 export function applyAttempt(p: Progress, a: Attempt): Progress {
+  // 先開過教材、還沒交過卷的學生，progress 文件只有 activities（saveActivity 以 merge 建立），沒有 units。
+  // 不補空物件會在讀 p.units[...] 時丟錯，Cloud Function 回 INTERNAL，所有交卷都卡在本機佇列。
   if (a.mode === 'review') return p;
+  p = normalizeProgress(p);
   const old = p.units[a.unitId];
   const prior = wrongEntries(p, a.unitId, a.version);
   const wrongForVersion = { ...prior };
