@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  parseCourseTime,
   aggregate,
   applyAttempt,
   completion,
@@ -220,4 +221,18 @@ test('抽題練習排序：未考過的題目一定排在已考過的前面', ()
     const lastUnseenIndex = ordered.map((q) => !attemptedIds.has(q.id)).lastIndexOf(true);
     assert.ok(firstSeenIndex > lastUnseenIndex, '已考過的題目不應排在未考過的題目前面');
   }
+});
+
+test('progress 缺少 activities／units 欄位時完成度照常計算，不會丟出錯誤', () => {
+  const course: any = { id: 'c', title: '', description: '', term: '', classIds: [], units: [{ id: 'u', title: 'u', group: '血液', description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] }], chapters: { 血液: { title: '血液', description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [{ id: 'a', title: 'a', type: 'link', phase: 'before', url: 'https://x.y', description: '' }] } }, sheetsUrl: '' };
+  assert.doesNotThrow(() => completion(course, { units: { u: { best: 90, attempts: 1, updatedAt: 0 } } } as any));
+  assert.deepEqual(completion(course, { units: { u: { best: 90, attempts: 1, updatedAt: 0 } } } as any), { done: 0, total: 1 });
+  assert.doesNotThrow(() => completion(course, {} as any));
+});
+
+test('開放時間沒有時區時一律以台灣時間解讀（伺服器是 UTC）', () => {
+  assert.equal(parseCourseTime('2026-09-19T20:00'), Date.parse('2026-09-19T12:00:00Z'));
+  assert.equal(parseCourseTime('2026-09-19'), Date.parse('2026-09-18T16:00:00Z'));
+  assert.equal(parseCourseTime('2026-09-19T20:00:00Z'), Date.parse('2026-09-19T20:00:00Z'));
+  assert.ok(Number.isNaN(parseCourseTime('')));
 });

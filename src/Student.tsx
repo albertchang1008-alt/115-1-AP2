@@ -37,6 +37,7 @@ import {
   chapterName,
   chapterCompletion,
   chapterActivityKey,
+  parseCourseTime,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -335,7 +336,7 @@ export default function Student({
           {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards?range=7d`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
           {currentUnits.length > 0 && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
           {currentChapters.length ? <div className="unitgrid">{currentChapters.map(({ name, chapter, units }, i) => {
-                  const locked = !!chapter.opensAt && Date.parse(chapter.opensAt) > Date.now();
+                  const locked = !!chapter.opensAt && parseCourseTime(chapter.opensAt) > Date.now();
                   const state = chapterCompletion(course, name, progress);
                   return (
                     <button
@@ -383,7 +384,7 @@ export default function Student({
             {chapter.dueAt && (
               <span>
                 期限 {new Date(chapter.dueAt).toLocaleDateString()}
-                {Date.parse(chapter.dueAt) < Date.now() ? ' · 已逾期，仍可練習' : ''}
+                {parseCourseTime(chapter.dueAt) < Date.now() ? ' · 已逾期，仍可練習' : ''}
               </span>
             )}
           </div>

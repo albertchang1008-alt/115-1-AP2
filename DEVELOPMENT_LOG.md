@@ -4,6 +4,8 @@
 
 ## 1.4.1 — 學習進度看板依單元順序排列（2026-09-19）
 
+- **緊急修正：學生交卷被伺服器拒絕（學習紀錄空白、畫面顯示待同步）。** 開放時間是沒有時區的 datetime-local 字串，Cloud Functions 以 UTC 解讀，比台灣晚 8 小時才判定開放，期間 submitAttempt 回「單元尚未開放」。新增 `parseCourseTime()` 一律以 +08:00 解讀，伺服器五處開放判斷與學生端鎖定／逾期顯示改用它。已排隊在學生瀏覽器的作答會在部署後重新送出。
+- **修正：完成度看板整頁空白。** 只交過測驗、從未開過教材的學生，progress 沒有 activities 欄位，單元有必做活動時完成度計算丟錯；`unitCompletion`／`chapterCompletion` 先補空物件。
 - **修正：「尚未開放」的單元無法移到「目前學習」（INTERNAL）。** `patchVisibility` 把 archiveLabel／archivedAt 設成 undefined，Firestore 拒絕 undefined 欄位值；改為直接省略欄位。同步新建的單元預設 hidden，所以第一次開放必定觸發。學生首頁提示清空時的 studentNotice 也有同樣問題，一併修正。需部署 Functions。
 - 學習進度看板原本依題目分類在資料中的先後分組，忽略教師在「課程與教材」以上移／下移設定的單元順序（chapterOrder）；改用 `orderedChapters()`，與學生首頁順序一致。純前端變更，不需部署 Functions。
 - 活動編輯器選擇「教材版本」時，自動帶入 `https://albertchang1008-alt.github.io/115-1-AP2/materials/<版本>/index.html`（網址空白或原本是平台教材網址才覆寫，自訂外部網址保留）；已選版本但網址不同時顯示建議網址與「帶入此網址」按鈕。

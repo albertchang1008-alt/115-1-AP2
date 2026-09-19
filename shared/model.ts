@@ -187,6 +187,16 @@ export interface Report {
   modes: Record<string, Record<string, Stat>>;
 }
 export const emptyProgress = (): Progress => ({ units: {}, activities: {} });
+// 後台的開放時間／期限是 <input type="datetime-local"> 的字串（例如 2026-09-19T20:00），沒有時區。
+// 瀏覽器會當台灣時間，但 Cloud Functions 執行環境是 UTC，會晚 8 小時才判定開放 → 交卷被拒。
+// 一律以台灣時間（+08:00）解讀沒有時區的字串；空字串回傳 NaN（視為沒有設定）。
+export function parseCourseTime(value: string | undefined): number {
+  if (!value) return NaN;
+  const v = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(v)) return Date.parse(v + '+08:00');
+  if (/^\d{4}-\d{2}-\d{2}$/.test(v)) return Date.parse(v + 'T00:00:00+08:00');
+  return Date.parse(v);
+}
 export function unitVisibility(unit: Unit): UnitVisibility { return unit.visibility || 'current'; }
 export function chapterName(unit: Unit) { return unit.group || unit.title || unit.id; }
 /** 舊課程沒有 chapters 時，從每個群組的第一個分類推導，絕不寫回舊資料。 */
@@ -236,6 +246,8 @@ export function requiredActivities(source: Pick<Unit | Chapter, 'activities'>) {
   return (source.activities || []).filter((a) => (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link');
 }
 export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  // 只交過測驗的學生，progress 文件可能沒有 activities 欄位；先補空物件避免整頁當掉。
+  p = { ...p, units: p.units || {}, activities: p.activities || {} };
   const required = requiredActivities(unit), hasBank = !!unit.bankVersion;
   const eligible = formulaVersion === 1 ? unit.required : unit.required && (hasBank || required.length > 0);
   const scoreDone = !hasBank || (p.units[unit.id]?.best ?? -1) >= unit.threshold;
@@ -248,6 +260,7 @@ export function complete(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPL
   return unitCompletion(unit, p, formulaVersion).done;
 }
 export function chapterCompletion(course: Course, name: string, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
+  p = { ...p, units: p.units || {}, activities: p.activities || {} };
   const chapter = chaptersOf(course)[name];
   const units = course.units.filter((u) => chapterName(u) === name);
   if (!chapter) return { eligible: false, done: false, scoreDone: false, activitiesDone: false, completedActivities: 0, totalRequired: 0 };

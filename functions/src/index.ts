@@ -34,6 +34,7 @@ import {
   chapterName,
   chaptersOf,
   chapterActivityKey,
+  parseCourseTime,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -550,7 +551,7 @@ export const submitAttempt = onCall(options, async (req) => {
   if (p.teacher) fail('教師請使用不寫入紀錄的前台預覽');
   const unit =
     c.published && forClass(c.published, p.classId).units.find((u: any) => u.id === a.unitId);
-  if (!unit || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放');
+  if (!unit || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放');
   const bankRef = db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}`);
   const bank = await bankRef.get();
   if (!bank.exists) fail('題庫版本不存在');
@@ -637,7 +638,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     id(input.id); code(input.unitId); id(input.version); size(input, 300000);
     const unit = visible.find((u: any) => u.id === input.unitId);
     // 綜合練習只允許看板「目前」的單元；整批在寫入前驗完，拒絕時不留半套紀錄。
-    if (!unit || unitVisibility(unit) !== 'current' || Date.parse(unit.opensAt) > Date.now()) fail('單元尚未開放或已移至歷史區');
+    if (!unit || unitVisibility(unit) !== 'current' || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放或已移至歷史區');
     const bankRef = db.doc(`banks/${courseId}_${input.unitId}_${input.version}`), bank = await bankRef.get();
     if (!bank.exists || !Number.isFinite(input.duration) || input.duration < 0 || input.answers.length > MAX_BANK_QUESTIONS) fail('作答格式錯誤');
     const options = bank.data()!.questionOptions || {};
@@ -676,7 +677,7 @@ export const saveActivity = onCall(options, async (req) => {
   if (
     !activityOwner ||
     !activityOwner.activities.some((x: any) => x.id === activityId) ||
-    Date.parse((chapter || u)!.opensAt) > Date.now() ||
+    parseCourseTime((chapter || u)!.opensAt) > Date.now() ||
     !Number.isFinite(position) ||
     position < 0 ||
     typeof completed !== 'boolean'
@@ -703,7 +704,7 @@ export const saveExplanationResearchEvents = onCall(options, async (req) => {
   if (p.teacher) fail('教師預覽不寫入研究資料');
   const unitId = code(req.data.unitId), version = id(req.data.version);
   const unit = forClass(c.published, p.classId).units.find((u: Unit) => u.id === unitId);
-  if (!unit || !unit.bankVersion || unit.bankVersion !== version || unit.research?.enabled === false || Date.parse(unit.opensAt) > Date.now()) fail('研究資料活動未開放');
+  if (!unit || !unit.bankVersion || unit.bankVersion !== version || unit.research?.enabled === false || parseCourseTime(unit.opensAt) > Date.now()) fail('研究資料活動未開放');
   const events = req.data.events;
   if (!Array.isArray(events) || !events.length || events.length > 30 || new Set(events.map((e: any) => e?.id)).size !== events.length) fail('研究資料事件無效');
   for (const e of events) {
@@ -1281,7 +1282,7 @@ export const saveLearningEvents = onCall(options, async (req) => {
   const chapter = requestedChapter ? chaptersOf(studentCourse)[requestedChapter] : undefined;
   const activity = (chapter?.activities || unit?.activities || []).find((a) => a.id === activityId);
   const opensAt = chapter?.opensAt || unit?.opensAt || '';
-  if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || Date.parse(opensAt) > Date.now()) fail('互動教材未開放');
+  if (!activity || activity.type !== 'html' || activity.tracking !== 'interactive' || parseCourseTime(opensAt) > Date.now()) fail('互動教材未開放');
   const version = id(req.data.materialVersion);
   if (version !== (activity.materialVersion || 'v1')) fail('教材版本已更新，請重新開啟教材');
   const events = req.data.events as LearningEvent[];

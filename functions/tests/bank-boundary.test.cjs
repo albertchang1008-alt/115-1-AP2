@@ -29,7 +29,7 @@ test('綜合練習在伺服器端拒絕 hidden、archived 與尚未開放的題�
   const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
   const mixed = source.slice(source.indexOf('exports.submitMixedAttempts = (0'), source.indexOf('exports.saveActivity = (0'));
   assert.match(mixed, /unitVisibility\)\(unit\) !== 'current'/, '歷史區與隱藏區不可只靠前端排除');
-  assert.match(mixed, /Date\.parse\(unit\.opensAt\) > Date\.now\(\)/, '尚未開放的分類不可提交');
+  assert.match(mixed, /parseCourseTime\)\(unit\.opensAt\) > Date\.now\(\)/, '尚未開放的分類不可提交（以台灣時間判斷）');
   assert.match(mixed, /return db\.runTransaction/, '驗證失敗前不應寫入部分 mixed attempts');
 });
 test('Chapter 進度、互動教材與課程驗證都有伺服器端防線', () => {

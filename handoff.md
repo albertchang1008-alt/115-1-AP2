@@ -19,6 +19,10 @@
 
 ---
 
+### 1.4.1 緊急修正（2026-09-19 晚，Claude）：**需立即部署 Functions**
+
+學生回報「我的學習紀錄：尚無作答紀錄」，畫面有待同步提示。根因：教師在單元設定填了開放時間（datetime-local，無時區），Cloud Functions 以 UTC 解讀，開放後 8 小時內 submitAttempt 一律回「單元尚未開放」，作答只存在學生瀏覽器佇列。修正：`shared/model.ts` 新增 `parseCourseTime()`（無時區字串視為 +08:00），伺服器 submitAttempt／submitMixedAttempts／saveActivity／解析研究／saveLearningEvents 與學生端鎖定顯示改用它。另修完成度看板空白（progress 缺 activities 時丟錯）。`npm run check` 前端 76、Functions 13。部署後請學生重新整理或按「重新同步」，佇列作答會補送。
+
 ### 1.4.1 追加（2026-09-19，Claude）：修正移動單元 INTERNAL，**需部署 Functions**
 
 教師把「115-1課程簡介」從尚未開放移到目前學習時出現 INTERNAL。原因：`patchVisibility`／`setStudentNotice` 寫入 undefined 欄位，Firestore（未設 ignoreUndefinedProperties）拒絕。已改為省略欄位並加測試（Functions 13 項）。上線：教師以 `zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'` 一次部署 Functions 並推送 main（Firebase 帳號 hhchang@ctcn.edu.tw）。
