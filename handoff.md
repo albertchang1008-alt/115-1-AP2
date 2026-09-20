@@ -19,6 +19,10 @@
 
 ---
 
+### 教材診斷 INTERNAL 已修正（2026-09-20，Claude）：**需部署 Functions**
+
+教師在「教材診斷」按更新診斷得到 INTERNAL、清單 0 筆。根因：`getLearningDiagnostics` 對 `orderBy('__name__')` 傳入空字串游標（`startAfter(req.data.after || '')`），Firestore 要求 `__name__` 游標為合法文件 ID，空字串直接丟錯。報表快照列表（`snapshots/{id}/rows`）同一寫法，同樣會壞。已改為只有帶游標時才 `startAfter`。`orderBy('studentId')` 的名冊、完成度分頁不受影響。Functions 14 項測試與 `tsc -b` 通過，與「分類名稱跟隨 Sheet」同一批部署。
+
 ### 「課程簡介」分類名稱錯誤已修正（2026-09-20，Claude）：**需部署 Functions**
 
 教師發現題庫管理次單元選單同時有「課程簡介」（5 題，版本 98c84abdd41582172745，歸在「血液」單元）與「115-1課程簡介」（10 題），同步後沒有出現「舊題目分類待清理」。查證結果：

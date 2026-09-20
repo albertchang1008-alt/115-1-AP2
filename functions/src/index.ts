@@ -986,12 +986,10 @@ export const getSnapshots = onCall(options, async (req) => {
   if (req.data.snapshotId) {
     const root = db.doc(`courses/${req.data.courseId}/snapshots/${id(req.data.snapshotId)}`);
     const meta = await root.get();
-    const rows = await root
-      .collection('rows')
-      .orderBy('__name__')
-      .startAfter(req.data.after || '')
-      .limit(50)
-      .get();
+    // 同上：__name__ 游標不可為空字串。
+    const rowsBase = root.collection('rows').orderBy('__name__');
+    const rowsAfter = String(req.data.after || '');
+    const rows = await (rowsAfter ? rowsBase.startAfter(rowsAfter) : rowsBase).limit(50).get();
     return {
       meta: meta.data(),
       rows: rows.docs.map((d) => d.data()),
@@ -1312,6 +1310,10 @@ export const saveLearningEvents = onCall(options, async (req) => {
 export const getLearningDiagnostics = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不屬於課程');
-  const snap = await db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', req.data.classId).orderBy('__name__').startAfter(req.data.after || '').limit(50).get();
+  // orderBy('__name__') 的 startAfter 必須是合法文件 ID；空字串會被 Firestore 拒絕
+  // 而讓整個呼叫回 INTERNAL，所以第一頁不加游標。
+  const base = db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', req.data.classId).orderBy('__name__');
+  const after = String(req.data.after || '');
+  const snap = await (after ? base.startAfter(after) : base).limit(50).get();
   return { rows: snap.docs.map((d) => ({ ...d.data(), id: d.id })), next: snap.size === 50 ? snap.docs.at(-1)!.id : null };
 });

@@ -2,6 +2,13 @@
 
 目前版本：1.4.1
 
+## 1.4.1 — 教材診斷／快照分頁 INTERNAL（2026-09-20）
+
+- 症狀：教材診斷按「更新診斷」回 INTERNAL，永遠 0 筆。
+- 根因：`getLearningDiagnostics` 以 `orderBy('__name__').startAfter(req.data.after || '')` 查詢，第一頁游標是空字串；Firestore 對 `__name__` 游標要求合法文件 ID，空字串直接丟錯 → INTERNAL。快照列表（`snapshots/{id}/rows`）同樣寫法，同樣會壞。
+- 修正：兩處都改為只有帶游標時才 `startAfter`。其餘 `orderBy('studentId')` 的分頁不受影響（空字串在該欄位合法）。
+- **需部署 Functions**；純後端修正，前端不變。
+
 ## 1.4.1 — 題目分類名稱一律跟隨 Sheet 次單元（2026-09-20）
 
 - 症狀：題庫管理的次單元選單出現「課程簡介」（5 題）與「115-1課程簡介」（10 題）兩筆，Sheet 只有後者，但同步沒有把前者列入 staleUnits。
