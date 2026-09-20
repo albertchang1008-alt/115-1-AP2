@@ -19,13 +19,17 @@
 
 ---
 
-### 調查：題庫管理出現「課程簡介」分類、同步卻沒列為待清理（2026-09-20，Claude，未改程式）
+### 「課程簡介」分類名稱錯誤已修正（2026-09-20，Claude）：**需部署 Functions**
 
 教師發現題庫管理次單元選單同時有「課程簡介」（5 題，版本 98c84abdd41582172745，歸在「血液」單元）與「115-1課程簡介」（10 題），同步後沒有出現「舊題目分類待清理」。查證結果：
 - 正式 Sheet 分頁 `115-1-AP2` 目前有 16 個次單元（含 115-1課程簡介 10 題、血液成分與血漿 5 題），沒有「課程簡介」。
 - 「課程簡介」**不是舊分類**，而是代碼 `血液成分與血漿` 的 Unit，title 還停在 1.3.x 時期被改成的「課程簡介」（見 docs/UNIT_MODEL_1.4.0.md「舊結構清理」：課程簡介 HTML 教材曾掛在代碼「血液成分與血漿」上）。因為 id 仍在 Sheet 裡，所以不會被列入 staleUnits；而 `syncBankTabFromSheet` 更新既有 Unit 時只改 bankVersion／questionCount／group，**從不改 title**，所以舊名稱一直留著。旁證：選單與「血液」單元的題目分類清單都沒有「血液成分與血漿」這一項。
 - 影響：該分類內容是 5 題血漿題，但教師後台與學生端都顯示為「課程簡介」。
-- 建議修正（待教師同意）：同步更新既有 Unit 時一併把 `title` 設為 unitId（Sheet 為唯一來源，後台本就不提供分類改名）；需部署 Functions。暫無後台手動改名途徑。
+- 已修正（教師同意後實作，尚未部署）：`syncBankTabFromSheet` 更新既有 Unit 時一併 `title: unitId`，並把 title 差異納入 `unitChanged`。教師設定（必修、門檻、開放時間、期限、可見性）不動。
+- 測試：`functions/tests/sync-auto-unit.test.cjs` 新增舊名稱覆蓋案例，既有案例預期改為 title 跟隨 Sheet；Functions 14 項通過、`tsc -b` 通過。
+- **前端測試未在本輪執行**：Claude 這次透過連線資料夾在 Linux 容器內操作，`node_modules` 是 macOS 安裝的（esbuild darwin-arm64），`npm test`／`vite build` 無法在該環境執行。請教師在自己的終端機跑一次 `npm run check` 再部署。
+- 上線：`zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'`（Firebase 帳號 hhchang@ctcn.edu.tw）。部署後在題庫管理按一次「同步題庫」，名稱就會改回「血液成分與血漿」，再保存草稿並發布課程。
+- 相關觀察（未處理）：解析研究資料表的「0/未設定」代表該筆診斷紀錄的 `nodeTotal`／`questionTotal` 為 0——學生開啟教材當下，教師後台該活動的「探索節點總數／闖關題目總數」還沒填；分母是寫入時的快照，事後補填不會回溯。
 
 ### ✅ All 共用設定修正：Claude 驗收通過（2026-09-19）
 

@@ -61,7 +61,7 @@ test('次單元在課程草稿裡不存在時，同步會自動建立單元（�
   } finally { ctx.restore(); }
 });
 
-test('次單元已存在時，再次同步只更新版本與分組，不重複新增', async () => {
+test('次單元已存在時，再次同步只更新版本、名稱與分組，不重複新增', async () => {
   const ctx = withMemoryDb();
   try {
     const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
@@ -76,11 +76,31 @@ test('次單元已存在時，再次同步只更新版本與分組，不重複�
     const course = ctx.data.get('courses/ap2');
     assert.equal(course.draft.units.length, 1, '不應該多新增一筆');
     const unit = course.draft.units[0];
-    assert.equal(unit.title, '舊標題', '既有欄位（老師自訂的標題、必修、門檻等）應該保留');
-    assert.equal(unit.required, false);
+    assert.equal(unit.title, 'u1', '分類名稱一律跟著 Sheet 次單元，修掉 1.3.x 留下的舊名稱');
+    assert.equal(unit.required, false, '教師設定的必修、門檻、開放時間等仍保留');
     assert.equal(unit.group, '心臟', '單元欄應該更新既有單元的分組');
     assert.equal(unit.bankVersion, results[0].version);
     assert.equal(unit.visibility, undefined, '既有次單元的區域設定不可被同步覆寫');
+  } finally { ctx.restore(); }
+});
+
+test('1.3.x 留下的舊分類名稱會被 Sheet 次單元覆蓋（課程簡介／血液成分與血漿）', async () => {
+  const ctx = withMemoryDb();
+  try {
+    const headers = ['課程代碼', '題目ID', '單元', '次單元', '問題', '選項A', '選項B', '正確答案代碼'];
+    ctx.data.set('courses/ap2', {
+      teacherIds: ['teacher'],
+      draft: { id: 'ap2', classIds: [], units: [{ id: '血液成分與血漿', title: '課程簡介', group: '血液', required: true, threshold: 80, opensAt: '2026-09-01T08:00', dueAt: '', bankVersion: 'old', activities: [] }] },
+    });
+    const rows = [headers, ['ap2', 'q1', '血液', '血液成分與血漿', '題目一', '甲', '乙', 'A']];
+
+    const results = await handlers.syncBankTabFromSheet(rows, 'ap2', 'teacher', 'ap2');
+    assert.equal(results[0].error, undefined);
+    assert.equal(results[0].staleUnits, undefined, '代碼仍在 Sheet 裡，不該被當成待清理的舊分類');
+    assert.deepEqual(ctx.data.get('courses/ap2').draft.staleUnits, []);
+    const unit = ctx.data.get('courses/ap2').draft.units[0];
+    assert.equal(unit.title, '血液成分與血漿', '顯示名稱改回 Sheet 的次單元');
+    assert.equal(unit.opensAt, '2026-09-01T08:00', '教師設定不受影響');
   } finally { ctx.restore(); }
 });
 

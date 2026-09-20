@@ -1135,8 +1135,11 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
           if (!current.data()?.teacherIds?.includes(uid)) fail('課程權限已變更');
           const existing = draft.units.find((u) => u.id === unitId);
           created = !existing;
+          // 題目分類的名稱一律跟著 Sheet 的次單元欄；後台沒有改名介面，既有 title 若與
+          // 代碼不同，都是 1.3.x 舊結構留下的（例如代碼「血液成分與血漿」被改名為
+          // 「課程簡介」），會讓後台與學生端顯示的分類名稱對不上 Sheet。
           const nextUnit = existing
-            ? { ...existing, bankVersion: result.version, questionCount: result.count, ...(group ? { group } : {}) }
+            ? { ...existing, title: unitId, bankVersion: result.version, questionCount: result.count, ...(group ? { group } : {}) }
             : newUnitFromSheet(unitId, group, result.version, result.count);
           const chapterKey = group || unitId;
           const chapters = draft.chapters || {};
@@ -1147,7 +1150,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
           };
           const chapterOrder = [...(draft.chapterOrder || Object.keys(chapters))];
           if (!chapterOrder.includes(chapterKey)) chapterOrder.push(chapterKey);
-          const unitChanged = !existing || existing.bankVersion !== result.version || existing.questionCount !== result.count || (!!group && existing.group !== group);
+          const unitChanged = !existing || existing.bankVersion !== result.version || existing.questionCount !== result.count || existing.title !== unitId || (!!group && existing.group !== group);
           const chapterChanged = !chapters[chapterKey] || !draft.chapterOrder?.includes(chapterKey);
           if (!unitChanged && !chapterChanged) return;
           tx.update(ref, {
