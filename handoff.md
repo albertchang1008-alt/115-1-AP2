@@ -19,6 +19,12 @@
 
 ---
 
+### ✅ 已部署：分類名稱跟隨 Sheet ＋ 教材診斷 INTERNAL（2026-09-20）
+
+教師執行 `scripts/deploy.sh` 完成：`npm run check` 通過（前端 81、Functions 14）、37 個函式 Successful update、Deploy complete、`origin/main` cbb3d50..fe766c6（Pages Actions 另行確認）。本機仍在 `feature/1.4.0-unit-model`。
+
+部署後教師待辦：題庫管理按「同步題庫」→ 確認分類由「課程簡介」變回「血液成分與血漿」→ 保存草稿 →（若該分類已發布）發布課程；教材診斷頁重新整理再按「更新診斷」確認不再 INTERNAL。
+
 ### 教材診斷 INTERNAL 已修正（2026-09-20，Claude）：**需部署 Functions**
 
 教師在「教材診斷」按更新診斷得到 INTERNAL、清單 0 筆。根因：`getLearningDiagnostics` 對 `orderBy('__name__')` 傳入空字串游標（`startAfter(req.data.after || '')`），Firestore 要求 `__name__` 游標為合法文件 ID，空字串直接丟錯。報表快照列表（`snapshots/{id}/rows`）同一寫法，同樣會壞。已改為只有帶游標時才 `startAfter`。`orderBy('studentId')` 的名冊、完成度分頁不受影響。Functions 14 項測試與 `tsc -b` 通過，與「分類名稱跟隨 Sheet」同一批部署。
