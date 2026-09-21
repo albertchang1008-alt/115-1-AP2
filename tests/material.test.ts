@@ -111,6 +111,25 @@ test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async
   }
 });
 
+test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤', async () => {
+  const cases = [
+    ['../html/心臟構造.html', 'heart-structure'],
+    ['../html/心臟血液供應.html', 'coronary-circulation'],
+    ['../html/紅血球的恆定機制.html', 'rbc-homeostasis'],
+  ] as const;
+  for (const [file, prefix] of cases) {
+    const html = await readFile(new URL(file, import.meta.url), 'utf8');
+    assert.match(html, /情境實驗室/);
+    assert.match(html, /先猜一猜/);
+    assert.match(html, /prefers-reduced-motion/);
+    assert.match(html, /materials\/course-learning\.js/);
+    assert.match(html, new RegExp(`const MATERIAL_ID = '${prefix}'`));
+    assert.equal((html.match(new RegExp(`id: '${prefix}-foundation-q\\d\\d'`, 'g')) || []).length, 6);
+    assert.equal((html.match(new RegExp(`id: '${prefix}-case-q\\d\\d'`, 'g')) || []).length, 5);
+    assert.match(html, /trackComplete\(\)/);
+  }
+});
+
 test('血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤', async () => {
   const html = await readFile(new URL('../public/materials/blood-pre-v1/index.html', import.meta.url), 'utf8');
   assert.match(html, /course-learning\.js/);

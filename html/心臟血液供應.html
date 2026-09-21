@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心臟的血液供應 - 五專解剖生理學互動資訊圖表與隨堂診斷</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --focus-outline: 3px solid #2563eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.1rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Metric Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+
+        /* Navigation Mode Switch */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 1rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Filter Controls */
+        .filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Step Flow Overview Cards */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .flow-nav-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; }
+        .flow-nav-card:hover, .flow-nav-card:focus { transform: translateY(-3px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
+        .flow-nav-card svg { width: 64px; height: 64px; margin-bottom: 8px; }
+        .flow-nav-card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .flow-nav-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; }
+
+        /* Detailed Knowledge Cards Grid */
+        .detail-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
+        .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
+        
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container svg { width: 100%; height: auto; max-height: 180px; }
+
+        .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
+        .bg-artery { background: var(--danger-light); color: var(--danger); }
+        .bg-vein { background: var(--primary-light); color: var(--primary); }
+        .bg-physio { background: var(--warning-light); color: var(--warning); }
+
+        .card-heading { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+        .core-concept { font-size: 0.95rem; font-weight: 600; color: #334155; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-left: 4px solid var(--primary); border-radius: 4px; }
+        
+        .features-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .features-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 18px; position: relative; line-height: 1.4; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 4px; }
+
+        .clinical-box { font-size: 0.88rem; color: #334155; background: #fffdf5; border: 1px solid #fef3c7; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+        .clinical-box strong { color: var(--warning); }
+
+        /* Quiz Section Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .stage-title { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .progress-badge { font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 20px; }
+
+        .quiz-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .question-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; line-height: 1.5; }
+        
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-button { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-main); width: 100%; }
+        .option-button:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .option-button[disabled] { cursor: not-allowed; opacity: 0.6; }
+        .option-button.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; opacity: 1 !important; }
+        .option-button.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; opacity: 1 !important; }
+
+        .hint-box { margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--warning); display: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        .next-btn-container { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .action-btn:hover { background: var(--primary-dark); }
+        .action-btn[disabled] { background: #cbd5e1; cursor: not-allowed; }
+
+        .result-banner { text-align: center; padding: 24px; border-radius: 12px; margin-top: 20px; display: none; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); display: block; }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); display: block; }
+        .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #bfdbfe; border-radius:18px; background:linear-gradient(135deg,#eff6ff 0%,#fff7ed 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; color:var(--primary-dark); }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; align-items:center; }.sim-step { min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.scenario-controls { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:16px; }.scenario-controls strong { margin-right:4px; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.scenario-option[aria-pressed="true"] { background:var(--primary); color:#fff; }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; } @media (max-width:760px) { .sim-steps { grid-template-columns:1fr 28px 1fr; }.sim-arrow { transform:rotate(90deg); }.sim-step { min-height:76px; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>心臟的血液供應 (Coronary Circulation)</h1>
+        <p>解剖生理學：冠狀動脈分支、靜脈回流路徑、舒張期灌流與臨床病理</p>
+    </header>
+
+    <!-- Key Metrics Dashboard -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="val">2 條主幹</div>
+            <div class="label">升主動脈基部發出 LCA / RCA</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">5% 心輸出量</div>
+            <div class="label">約 250 ml/min 冠狀血流量</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">舒張期 (Diastole)</div>
+            <div class="label">心肌獲得血流的主要灌流時機</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">1 個冠狀靜脈竇</div>
+            <div class="label">收集缺氧血直接注入右心房</div>
+        </div>
+    </div>
+
+    <section class="mission-lab" aria-labelledby="coronary-lab-title">
+        <h2 id="coronary-lab-title">🫀 情境實驗室｜抓住心肌灌流時刻</h2>
+        <p>切換心跳時相，觀察心肌內的冠狀血管何時不易、何時最能獲得血流。</p>
+        <div class="sim-steps" aria-label="冠狀循環灌流時相"><div class="sim-step" data-coronary-step="0">心室收縮<span>心肌張力上升</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="1">血管受壓<span>灌流受限</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="2">心室舒張<span>心肌放鬆</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="3">冠狀灌流<span>供氧補回來</span></div></div>
+        <div class="scenario-controls"><strong>心跳時相：</strong><button class="scenario-option" type="button" data-coronary-phase="systole" aria-pressed="true">收縮期</button><button class="scenario-option" type="button" data-coronary-phase="diastole" aria-pressed="false">舒張期</button></div>
+        <div class="scenario-status" id="coronary-lab-status" aria-live="polite"></div>
+        <div class="predict-card"><p>先猜一猜：冠狀動脈主要在何時為心肌補充血液？</p><button class="scenario-option" type="button" data-coronary-answer="wrong">心室收縮期</button><button class="scenario-option" type="button" data-coronary-answer="correct">心室舒張期</button><div class="predict-feedback" id="coronary-predict-feedback" aria-live="polite"></div></div>
+    </section>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
+        <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
+        
+        <!-- Category Filters -->
+        <div class="filter-toolbar" role="toolbar" aria-label="知識分類篩選">
+            <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
+            <button type="button" class="filter-btn" id="filter-artery" aria-pressed="false">冠狀動脈系統</button>
+            <button type="button" class="filter-btn" id="filter-vein" aria-pressed="false">靜脈回流路徑</button>
+            <button type="button" class="filter-btn" id="filter-physio" aria-pressed="false">生理與臨床應用</button>
+        </div>
+
+        <!-- 6 Step Flow Overview Cards -->
+        <div class="flow-grid">
+            <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：升主動脈基部與冠狀動脈開口">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <circle cx="35" cy="45" r="5" fill="#dc2626"/>
+                    <circle cx="65" cy="45" r="5" fill="#dc2626"/>
+                    <path d="M 35 45 Q 20 60 15 75" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <path d="M 65 45 Q 80 60 85 75" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <text x="50" y="30" font-size="8" fill="#991b1b" text-anchor="middle" font-weight="bold">主動脈竇</text>
+                </svg>
+                <h3>1. 冠狀動脈開口</h3>
+                <p>升主動脈基部開口起源</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-02" aria-label="點擊捲動至節點 2：左冠狀動脈及其分支">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 50 20 L 50 40 L 30 75" fill="none" stroke="#dc2626" stroke-width="4"/>
+                    <path d="M 50 40 L 75 60" fill="none" stroke="#dc2626" stroke-width="4"/>
+                    <circle cx="30" cy="75" r="4" fill="#991b1b"/>
+                    <circle cx="75" cy="60" r="4" fill="#991b1b"/>
+                    <text x="25" y="88" font-size="8" fill="#dc2626" font-weight="bold">LAD (前降支)</text>
+                    <text x="75" y="73" font-size="8" fill="#dc2626" font-weight="bold">CX (迴旋枝)</text>
+                </svg>
+                <h3>2. 左冠狀動脈 (LCA)</h3>
+                <p>前室間枝與迴旋枝解剖</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-03" aria-label="點擊捲動至節點 3：右冠狀動脈及其分支">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 50 20 Q 80 30 75 60 T 45 85" fill="none" stroke="#dc2626" stroke-width="4"/>
+                    <path d="M 75 60 L 90 70" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <text x="45" y="96" font-size="8" fill="#dc2626" font-weight="bold">PDA (後降支)</text>
+                    <text x="85" y="82" font-size="8" fill="#dc2626" font-weight="bold">邊緣枝</text>
+                </svg>
+                <h3>3. 右冠狀動脈 (RCA)</h3>
+                <p>後室間枝與邊緣枝解剖</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-04" aria-label="點擊捲動至節點 4：冠狀靜脈系統與冠狀竇">
+                <svg viewBox="0 0 100 100">
+                    <rect x="25" y="30" width="50" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M 15 50 L 25 50" stroke="#2563eb" stroke-width="4"/>
+                    <path d="M 75 50 L 90 50" stroke="#2563eb" stroke-width="4"/>
+                    <text x="50" y="54" font-size="9" fill="#1e40af" text-anchor="middle" font-weight="bold">冠狀靜脈竇</text>
+                    <text x="50" y="85" font-size="8" fill="#2563eb" text-anchor="middle">注入右心房</text>
+                </svg>
+                <h3>4. 冠狀靜脈回流</h3>
+                <p>心大靜脈與冠狀靜脈竇</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-05" aria-label="點擊捲動至節點 5：心肌供血生理與舒張期灌流">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="32" fill="#fffbeb" stroke="#d97706" stroke-width="3"/>
+                    <path d="M 35 50 L 45 60 L 65 40" fill="none" stroke="#16a34a" stroke-width="4"/>
+                    <text x="50" y="28" font-size="8" fill="#d97706" text-anchor="middle" font-weight="bold">心室舒張期</text>
+                    <text x="50" y="78" font-size="8" fill="#16a34a" text-anchor="middle" font-weight="bold">血管開放灌流</text>
+                </svg>
+                <h3>5. 舒張期灌流</h3>
+                <p>心肌舒張期血流灌注生理</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：冠狀動脈硬化與心肌梗塞">
+                <svg viewBox="0 0 100 100">
+                    <rect x="20" y="40" width="60" height="20" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+                    <circle cx="50" cy="50" r="8" fill="#d97706"/>
+                    <line x1="42" y1="42" x2="58" y2="58" stroke="#dc2626" stroke-width="3"/>
+                    <text x="50" y="30" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">斑塊/血栓梗塞</text>
+                </svg>
+                <h3>6. 病理與心肌梗塞</h3>
+                <p>缺血、心絞痛與心肌梗塞</p>
+            </button>
+        </div>
+
+        <!-- Detailed Knowledge Cards Grid -->
+        <div class="detail-cards-grid">
+            
+            <!-- Node 1 Detail -->
+            <div class="detail-card" id="node-card-01" data-category="artery">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Aorta Root -->
+                            <path d="M 120 130 L 120 40 C 120 20 180 20 180 40 L 180 130" fill="none" stroke="#fca5a5" stroke-width="16"/>
+                            <!-- Valve Cusps -->
+                            <path d="M 120 100 Q 135 115 150 100 Q 165 115 180 100" fill="none" stroke="#dc2626" stroke-width="3"/>
+                            <!-- Left Coronary Ostium -->
+                            <circle cx="120" cy="85" r="5" fill="#dc2626"/>
+                            <path d="M 120 85 L 50 85 L 30 110" fill="none" stroke="#dc2626" stroke-width="4" marker-end="url(#arrow)"/>
+                            <text x="45" y="75" font-size="10" fill="#991b1b" font-weight="bold">左冠狀動脈開口 (Left Ostium)</text>
+                            <!-- Right Coronary Ostium -->
+                            <circle cx="180" cy="85" r="5" fill="#dc2626"/>
+                            <path d="M 180 85 L 250 85 L 270 110" fill="none" stroke="#dc2626" stroke-width="4"/>
+                            <text x="255" y="75" font-size="10" fill="#991b1b" font-weight="bold" text-anchor="end">右冠狀動脈開口 (Right Ostium)</text>
+                            <!-- Aorta Label -->
+                            <text x="150" y="30" font-size="11" fill="#7f1d1d" text-anchor="middle" font-weight="bold">升主動脈基部 (Aortic Root)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-artery">冠狀動脈系統</span>
+                <h2 class="card-heading">1. 升主動脈基部與冠狀動脈開口</h2>
+                <div class="core-concept">冠狀動脈為心臟本身的供血系統，左右兩條主幹發源自升主動脈基部的主動脈竇（Aortic sinuses）。</div>
+                <ul class="features-list">
+                    <li><strong>起源位置：</strong>升主動脈基部位於主動脈瓣上方，設有左、右冠狀動脈開口（Coronary ostia）。</li>
+                    <li><strong>體循環第一分支：</strong>左、右冠狀動脈是升主動脈離開心臟後發出的第一對血液分支。</li>
+                    <li><strong>血流分配：</strong>安靜狀態下，冠狀循環血流量約占總心輸出量的 5%（約 250 ml/min）。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理解剖意義：</strong><br>主動脈瓣開啟時（心室收縮期），瓣膜葉片會靠近主動脈壁遮蔽開口；當主動脈瓣關閉（心室舒張期），主動脈回彈的血液充盈主動脈竇，順暢灌入冠狀動脈。
+                </div>
+            </div>
+
+            <!-- Node 2 Detail -->
+            <div class="detail-card" id="node-card-02" data-category="artery">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- LCA Main Trunk -->
+                            <path d="M 100 20 L 150 20 L 150 50" fill="none" stroke="#dc2626" stroke-width="5"/>
+                            <text x="150" y="15" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">左冠狀動脈主幹 (LCA Main)</text>
+                            <!-- Branching point -->
+                            <circle cx="150" cy="50" r="4" fill="#7f1d1d"/>
+                            <!-- LAD Branch -->
+                            <path d="M 150 50 L 90 120" fill="none" stroke="#dc2626" stroke-width="4"/>
+                            <rect x="20" y="105" width="120" height="30" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+                            <text x="80" y="120" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">前室間枝 (LAD)</text>
+                            <text x="80" y="131" font-size="8" fill="#7f1d1d" text-anchor="middle">供應兩心室前壁與中隔前2/3</text>
+                            <!-- CX Branch -->
+                            <path d="M 150 50 L 220 100" fill="none" stroke="#dc2626" stroke-width="4"/>
+                            <rect x="180" y="95" width="115" height="30" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+                            <text x="237" y="110" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">迴旋枝 (Circumflex/CX)</text>
+                            <text x="237" y="121" font-size="8" fill="#7f1d1d" text-anchor="middle">供應左心房與左心室側/後壁</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-artery">冠狀動脈系統</span>
+                <h2 class="card-heading">2. 左冠狀動脈 (LCA) 及其解剖分支</h2>
+                <div class="core-concept">左冠狀動脈（Left Coronary Artery; LCA）走經左心耳與肺動脈幹之間，隨即分為前室間枝與迴旋枝。</div>
+                <ul class="features-list">
+                    <li><strong>前室間枝（LAD / 前降支）：</strong>走在前後心室間溝，供應左、右心室前壁及心室間隔前 2/3 的血液。</li>
+                    <li><strong>迴旋枝（Circumflex branch; CX）：</strong>走在冠狀溝內，繞至心臟後方，供應左心房與左心室外側壁及後壁。</li>
+                    <li><strong>供應主體：</strong>LCA 負責供應心臟絕大部分左心系統（左心室與左心房）的高壓泵血需求。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床重要性（猝死血管）：</strong><br>前室間枝（LAD）是臨床上最常發生冠狀動脈阻塞的部位，因其供應左心室龐大心肌，阻塞易引發嚴重致死性心肌梗塞，故又稱「寡婦製造者（Widow-maker）」。
+                </div>
+            </div>
+
+            <!-- Node 3 Detail -->
+            <div class="detail-card" id="node-card-03" data-category="artery">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- RCA Main Trunk -->
+                            <path d="M 80 20 C 180 20 220 50 200 90 T 130 130" fill="none" stroke="#dc2626" stroke-width="5"/>
+                            <text x="110" y="15" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">右冠狀動脈主幹 (RCA)</text>
+                            <!-- Marginal Branch -->
+                            <path d="M 200 70 L 260 90" fill="none" stroke="#dc2626" stroke-width="3"/>
+                            <rect x="210" y="95" width="85" height="25" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+                            <text x="252" y="111" font-size="9" fill="#991b1b" text-anchor="middle" font-weight="bold">邊緣枝 (Marginal)</text>
+                            <!-- PDA Branch -->
+                            <rect x="70" y="120" width="120" height="25" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+                            <text x="130" y="136" font-size="9" fill="#991b1b" text-anchor="middle" font-weight="bold">後室間枝 (PDA/後降支)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-artery">冠狀動脈系統</span>
+                <h2 class="card-heading">3. 右冠狀動脈 (RCA) 及其解剖分支</h2>
+                <div class="core-concept">右冠狀動脈（Right Coronary Artery; RCA）沿冠狀溝向右向下延伸，主要分支為邊緣枝與後室間枝。</div>
+                <ul class="features-list">
+                    <li><strong>邊緣枝（Marginal branch）：</strong>沿心臟右側下行，主要供應右心室壁的血液。</li>
+                    <li><strong>後室間枝（PDA / 後降支）：</strong>走在後心室間溝，供應兩心室後壁及心室間隔後 1/3。</li>
+                    <li><strong>節律點供血：</strong>約 60% 的人的竇房結（SA node）與 80% 的房室結（AV node）由 RCA 分支供血。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床病理關聯：</strong><br>右冠狀動脈阻塞除引發右心室或後壁心肌梗塞外，常因傳導系統（SA node / AV node）缺血而併發嚴重的「心律不整（Arrhythmia）」或房室傳導阻滯。
+                </div>
+            </div>
+
+            <!-- Node 4 Detail -->
+            <div class="detail-card" id="node-card-04" data-category="vein">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Great Cardiac Vein -->
+                            <path d="M 30 110 L 90 50 L 150 50" fill="none" stroke="#2563eb" stroke-width="4"/>
+                            <text x="50" y="130" font-size="9" fill="#1e40af" font-weight="bold">心大靜脈 (Great)</text>
+                            <!-- Middle Cardiac Vein -->
+                            <path d="M 150 120 L 170 65" fill="none" stroke="#2563eb" stroke-width="3"/>
+                            <text x="150" y="140" font-size="9" fill="#1e40af" font-weight="bold">心中靜脈 (Middle)</text>
+                            <!-- Coronary Sinus -->
+                            <rect x="140" y="35" width="110" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="6"/>
+                            <text x="195" y="54" font-size="11" fill="#1e3a8a" text-anchor="middle" font-weight="bold">冠狀靜脈竇 (Sinus)</text>
+                            <!-- Right Atrium -->
+                            <path d="M 250 50 L 290 50" fill="none" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+                            <circle cx="295" cy="50" r="10" fill="#3b82f6"/>
+                            <text x="295" y="54" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">右房</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-vein">靜脈回流路徑</span>
+                <h2 class="card-heading">4. 冠狀靜脈系統與冠狀靜脈竇</h2>
+                <div class="core-concept">心肌利用後的缺氧血主要由心大靜脈與心中靜脈收集，匯入心臟後方的冠狀靜脈竇，最後直接注入右心房。</div>
+                <ul class="features-list">
+                    <li><strong>心大靜脈（Great cardiac vein）：</strong>走在前心室間溝（與前室間枝伴行），收集心臟前壁缺氧血。</li>
+                    <li><strong>心中靜脈（Middle cardiac vein）：</strong>走在後心室間溝（與後室間枝伴行），收集心臟後壁缺氧血。</li>
+                    <li><strong>冠狀靜脈竇（Coronary sinus）：</strong>位於心臟後方冠狀溝內的大靜脈管，為心肌靜脈血回流右心房的主幹。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>靜脈回流總結：</strong><br>心肌約 85% 的靜脈血經由冠狀靜脈竇注入右心房；少部分極小靜脈（最小心靜脈/Thebesian veins）則直接穿過心壁開口注入各心腔中。
+                </div>
+            </div>
+
+            <!-- Node 5 Detail -->
+            <div class="detail-card" id="node-card-05" data-category="physio">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Systole Diagram -->
+                            <rect x="15" y="15" width="130" height="120" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="8"/>
+                            <text x="80" y="35" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">心室收縮期 (Systole)</text>
+                            <path d="M 40 70 L 120 70" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/>
+                            <line x1="80" y1="55" x2="80" y2="85" stroke="#7f1d1d" stroke-width="3"/>
+                            <text x="80" y="105" font-size="10" fill="#dc2626" text-anchor="middle" font-weight="bold">微血管受壓，血流極低 ✖</text>
+
+                            <!-- Diastole Diagram -->
+                            <rect x="165" y="15" width="130" height="120" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="8"/>
+                            <text x="230" y="35" font-size="11" fill="#14532d" text-anchor="middle" font-weight="bold">心室舒張期 (Diastole)</text>
+                            <circle cx="230" cy="70" r="18" fill="#86efac" stroke="#16a34a" stroke-width="3"/>
+                            <text x="230" y="105" font-size="10" fill="#15803d" text-anchor="middle" font-weight="bold">心肌鬆弛，冠狀血流充沛 ✔</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-physio">生理與臨床應用</span>
+                <h2 class="card-heading">5. 心肌供血生理與舒張期灌流</h2>
+                <div class="core-concept">與全身其他器官不同，左心室心肌的冠狀動脈血流主要發生在「心室舒張期（Diastole）」。</div>
+                <ul class="features-list">
+                    <li><strong>收縮期受壓：</strong>心室收縮時（Systole），強烈收縮的心肌會擠壓貫穿心肌層之微血管，使冠狀血流量驟降。</li>
+                    <li><strong>舒張期灌流：</strong>心室舒張時，心肌鬆弛血管阻力下降，且主動脈壓維持於舒張壓，促使血液大量灌入冠狀動脈。</li>
+                    <li><strong>心跳過速影響：</strong>當心跳過快（Tachycardia）時，心動周期中「舒張期時間縮短最顯著」，會嚴重影響心肌供血。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床生理應用：</strong><br>心肌在安靜時已攝取血流中約 70% 的氧氣（抽氧率極高）。當心肌耗氧量增加時，無法靠提高抽氧率代償，必須「舒張冠狀動脈以增加血流量」。
+                </div>
+            </div>
+
+            <!-- Node 6 Detail -->
+            <div class="detail-card" id="node-card-06" data-category="physio">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Normal Vessel -->
+                            <rect x="20" y="20" width="80" height="35" fill="#fef2f2" stroke="#dc2626" rx="4"/>
+                            <text x="60" y="42" font-size="10" fill="#991b1b" text-anchor="middle">正常暢通</text>
+                            <!-- Angina -->
+                            <rect x="120" y="20" width="80" height="35" fill="#fffbeb" stroke="#d97706" rx="4"/>
+                            <path d="M 120 45 L 200 45" stroke="#d97706" stroke-width="8"/>
+                            <text x="160" y="32" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">狹窄 (心絞痛)</text>
+                            <!-- Infarction -->
+                            <rect x="220" y="20" width="80" height="35" fill="#fef2f2" stroke="#dc2626" rx="4"/>
+                            <circle cx="260" cy="37" r="10" fill="#dc2626"/>
+                            <text x="260" y="30" font-size="8" fill="#fff" text-anchor="middle">阻塞</text>
+                            <!-- Bottom Flow Arrow -->
+                            <path d="M 60 65 L 160 65 L 260 65" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                            <!-- Explanation Box -->
+                            <rect x="20" y="85" width="280" height="50" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="160" y="105" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">動脈粥狀硬化斑塊 → 血管狹窄 (缺血胸痛) → 斑塊破裂血栓 (心肌壞死)</text>
+                            <text x="160" y="122" font-size="9" fill="#dc2626" text-anchor="middle">黃金治療：舌下含服硝酸甘油 (NTG) 或緊急心導管支架置放</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-physio">生理與臨床應用</span>
+                <h2 class="card-heading">6. 冠狀動脈硬化與心肌梗塞</h2>
+                <div class="core-concept">冠狀動脈粥狀硬化會導致血管腔狹窄或完全阻塞，引發心肌缺血性疾病（Ischemic heart disease）。</div>
+                <ul class="features-list">
+                    <li><strong>心絞痛（Angina pectoris）：</strong>冠狀動脈狹窄致心肌供氧不足，於運動或情緒激動時出現壓迫性胸痛。</li>
+                    <li><strong>心肌梗塞（Myocardial Infarction; MI）：</strong>冠狀動脈急性完全阻塞，心肌持續缺血致細胞不可逆壞死。</li>
+                    <li><strong>藥理治療：</strong>舌下含服硝酸甘油（NTG）能釋放 NO 舒張冠狀動脈與全身靜脈，迅速緩解胸痛。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床急救（心導管治療）：</strong><br>急性心肌梗塞發作時需於黃金時間（90 分鐘內）進行緊急心導管氣球擴張術及支架置放（PCI），開通阻塞血管拯救瀕死心肌。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
+        <div class="quiz-container">
+            
+            <!-- STAGE 1: FOUNDATION -->
+            <div id="stage-1-view">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第一關｜先備知識建構</span>
+                    <span class="progress-badge" id="s1-progress-text">第一關｜先備知識建構：1／6</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s1-question-text">載入中...</div>
+                    <div class="options-group" id="s1-options-container"></div>
+                    <div class="hint-box" id="s1-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s1-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- STAGE 2: CASE APPLICATION -->
+            <div id="stage-2-view" style="display: none;">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第二關｜實務病例應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜實務病例應用：1／5</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s2-question-text">載入中...</div>
+                    <div class="options-group" id="s2-options-container"></div>
+                    <div class="hint-box" id="s2-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s2-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- RESULT BANNERS -->
+            <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜完全通關！</h3>
+                <p>您已成功通過「先備知識」與「實務病例」兩階段診斷，完整掌握心臟血液供應解剖與臨床生理！</p>
+                <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
+            </div>
+
+            <div id="result-banner-fail" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p id="fail-message-text">第二關需 5 題全部答對才能通關，請複習資訊圖表後重新挑戰整輪！</p>
+                <button type="button" class="action-btn" id="btn-retry-s2">🔄 重新挑戰第二關 (重洗題目)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 心臟血液供應解剖生理數位教材 - 專為五專生理解剖課程設計</p>
+    </footer>
+</div>
+
+<script>
+    const COURSE_CODE = 'coronary-circulation';
+
+    // 1. Foundation Questions (6 Questions)
+    const FOUNDATION_QUESTIONS = [
+        {
+            id: 'coronary-circulation-foundation-q01',
+            title: '1. 供應心臟本身肌肉養分與氧氣的左、右冠狀動脈開口（Coronary ostia），解剖上部位於何處？',
+            options: ['升主動脈基部的主動脈竇', '肺動脈幹開口處', '左心房後壁內側', '主動脈弓頂部'],
+            answer: 0,
+            hint: '提示：這是升主動脈離開心臟後發出的第一對分支開口。',
+            explanation: '解析：左、右冠狀動脈開口位於升主動脈基部的主動脈瓣上方（主動脈竇 Aortic sinuses）。'
+        },
+        {
+            id: 'coronary-circulation-foundation-q02',
+            title: '2. 左冠狀動脈（LCA）發出的前室間枝（LAD / 前降支），主要負責供應心臟哪些區域的血流？',
+            options: ['右心房與右心室後壁', '左、右心室前壁及心室間隔前 2/3', '僅供應左心房與左心耳', '僅供應心尖部與竇房結'],
+            answer: 1,
+            hint: '提示：該分支走在前心室間溝，負責供應左心室龐大的前壁心肌。',
+            explanation: '解析：前室間枝（LAD）沿前心室間溝下行，供應左、右心室前壁及心室間隔前 2/3 的血液。'
+        },
+        {
+            id: 'coronary-circulation-foundation-q03',
+            title: '3. 關於右冠狀動脈（RCA）的主要解剖分支與供血區域，下列敘述何者正確？',
+            options: ['分支為前室間枝與迴旋枝', '後室間枝（PDA）主要供應兩心室後壁及心室間隔後 1/3', '不供應右心室壁血液', '僅負責左心房的血液供應'],
+            answer: 1,
+            hint: '提示：RCA 發出邊緣枝供應右心室，並發出後室間枝走在後心室間溝。',
+            explanation: '解析：右冠狀動脈（RCA）發出邊緣枝（Marginal branch）供應右心室外側，並發出後室間枝（PDA）供應兩心室後壁及心室間隔後 1/3。'
+        },
+        {
+            id: 'coronary-circulation-foundation-q04',
+            title: '4. 心肌利用後的缺氧血主要由心大靜脈與心中靜脈收集，最後匯集至何處並直接注入右心房？',
+            options: ['上腔靜脈', '下腔靜脈', '冠狀靜脈竇（Coronary sinus）', '肺靜脈'],
+            answer: 2,
+            hint: '提示：位於心臟後方冠狀溝內的一條大靜脈管。',
+            explanation: '解析：心肌絕大部分缺氧血經由心大靜脈與心中靜脈匯入冠狀靜脈竇（Coronary sinus），再直接注入右心房。'
+        },
+        {
+            id: 'coronary-circulation-foundation-q05',
+            title: '5. 與體循環其他器官不同，左心室心肌層獲得冠狀動脈血流灌流的最主要時機發生於心動周期的哪一個時期？',
+            options: ['心室收縮期（Systole）', '心室舒張期（Diastole）', '心房收縮期', '等容收縮期'],
+            answer: 1,
+            hint: '提示：此時期心肌鬆弛血管阻力下降，且主動脈回彈壓力充盈冠狀動脈。',
+            explanation: '解析：心室收縮時心肌強烈擠壓微血管致阻力大；心室舒張期（Diastole）心肌鬆弛，冠狀動脈血流達到最高峰。'
+        },
+        {
+            id: 'coronary-circulation-foundation-q06',
+            title: '6. 當冠狀動脈粥狀硬化導致血管腔狹窄，於運動或情緒激動時引發陣發性胸痛，此臨床症狀稱為？',
+            options: ['心絞痛（Angina pectoris）', '心肌梗塞（Myocardial infarction）', '心包填塞', '主動脈剝離'],
+            answer: 0,
+            hint: '提示：此為心肌暫時性缺血缺氧引起的壓迫性胸痛，尚未造成心肌細胞壞死。',
+            explanation: '解析：冠狀動脈狹窄致心肌供氧不足引發心絞痛（Angina pectoris）；若血管完全阻塞致心肌壞死則為心肌梗塞。'
+        }
+    ];
+
+    // 2. Case Questions (5 Questions)
+    const CASE_QUESTIONS = [
+        {
+            id: 'coronary-circulation-case-q01',
+            title: '1. 【臨床病例】60 歲男性因劇烈胸痛送至急診，心電圖診斷為「急性前壁心肌梗塞」。心導管檢查顯示血管有血栓形成阻塞。請問最可能發生阻塞的是哪一條冠狀動脈分支？',
+            options: ['左冠狀動脈前室間枝（LAD）', '右冠狀動脈後室間枝（PDA）', '右冠狀動脈邊緣枝', '迴旋枝（CX）'],
+            answer: 0,
+            hint: '提示：此分支負責供應左心室前壁，臨床上稱為最常阻塞的「寡婦製造者（Widow-maker）」。',
+            explanation: '解析：左冠狀動脈前室間枝（LAD）供應左心室前壁，是臨床最常發生阻塞並引發前壁心肌梗塞的血管。'
+        },
+        {
+            id: 'coronary-circulation-case-q02',
+            title: '2. 【生理判讀】心跳過速（Tachycardia）患者常容易併發心肌缺血症狀，其生理學原因為何？',
+            options: ['心跳過快使心室舒張期時間顯著縮短，嚴重減少冠狀動脈血流灌注時間', '心跳過快使冠狀動脈血管完全痙攣閉鎖', '心跳過快導致主動脈收縮壓降至零', '心跳過快使血液中紅血球無法攜帶氧氣'],
+            answer: 0,
+            hint: '提示：心肌供血主要發生於舒張期，心動周期縮短時受影響最大的是舒張期。',
+            explanation: '解析：冠狀血流主要發生於心室舒張期。心跳過速時心動周期縮短，其中舒張期時間縮短最為顯著，導致心肌灌流時間不足而引發缺血。'
+        },
+        {
+            id: 'coronary-circulation-case-q03',
+            title: '3. 【臨床急症】一位急性後壁心肌梗塞患者，心導管證實為右冠狀動脈（RCA）完全阻塞，同時出現嚴重的竇房結節律過緩。請問其解剖生理學關聯為何？',
+            options: ['約 60% 人群的竇房結（SA node）血流係由右冠狀動脈分支所供應', '右冠狀動脈直接穿過竇房結內部構造', '右心房收縮力喪失導致神經反射停擺', '心大靜脈阻塞影響了竇房結回流'],
+            answer: 0,
+            hint: '提示：RCA 不僅供應右心室與後壁，亦負責心臟主要傳導節律點的血供。',
+            explanation: '解析：約 60% 人群的竇房結（SA node）及 80% 的房室結（AV node）由右冠狀動脈（RCA）分支供血，故 RCA 阻塞易併發傳導失調與心律不整。'
+        },
+        {
+            id: 'coronary-circulation-case-q04',
+            title: '4. 【解剖構造判讀】護理系學生觀察心臟模型時，發現走在「前心室間溝」有一條靜脈與左冠狀動脈前室間枝伴行。請問這條靜脈名稱為何？',
+            options: ['心大靜脈（Great cardiac vein）', '心中靜脈（Middle cardiac vein）', '心小靜脈（Small cardiac vein）', '冠狀靜脈竇'],
+            answer: 0,
+            hint: '提示：走在前心室間溝收集心臟前壁缺氧血並匯入冠狀靜脈竇。',
+            explanation: '解析：心大靜脈（Great cardiac vein）走在前心室間溝與前室間枝（LAD）伴行；心中靜脈（Middle cardiac vein）則走在後心室間溝與後室間枝伴行。'
+        },
+        {
+            id: 'coronary-circulation-case-q05',
+            title: '5. 【藥理生理應用】心絞痛發作時，患者舌下含服硝酸甘油（Nitroglycerin; NTG）可快速緩解胸痛。請問該藥物改善心肌缺血的主要生理機制為何？',
+            options: ['釋放一氧化氮（NO）舒張冠狀動脈增加血流，並舒張全身靜脈減輕心臟負擔', '直接抑制心肌細胞收縮使心跳停止', '增加血液中血紅素對氧氣的結合力', '阻斷心臟交感神經傳導'],
+            answer: 0,
+            hint: '提示：透過血管平滑肌舒張作用，一方面增加供血，另一方面降低預負荷。',
+            explanation: '解析：硝酸甘油在體內轉化為一氧化氮（NO），能有效舒張冠狀動脈增加心肌供血，同時舒張周邊靜脈減少回心血量，降低心臟後負荷與耗氧量。'
+        }
+    ];
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // STATE VARIABLES
+    const MATERIAL_ID = 'coronary-circulation';
+    const exploredNodes = new Set();
+    function trackExplore(id) { if (window.CourseLearning && window.CourseLearning.explore) window.CourseLearning.explore(id); }
+    function trackAnswer(id, correct) { if (window.CourseLearning && window.CourseLearning.answer) window.CourseLearning.answer(id, correct); }
+    function trackComplete() { if (window.CourseLearning && window.CourseLearning.complete) window.CourseLearning.complete(); }
+    let currentMode = 'info'; // 'info' or 'quiz'
+    
+    // Stage 1 State
+    let s1CurrentIndex = 0;
+    let s1AnsweredCorrect = false;
+
+    // Stage 2 State
+    let s2Questions = [];
+    let s2CurrentIndex = 0;
+    let s2CorrectCount = 0;
+    let s2AnsweredCorrect = false;
+
+    // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mode Switch Buttons
+        const btnModeInfo = document.getElementById('btn-mode-info');
+        const btnModeQuiz = document.getElementById('btn-mode-quiz');
+        const paneInfo = document.getElementById('pane-infographic');
+        const paneQuiz = document.getElementById('pane-quiz');
+
+        btnModeInfo.addEventListener('click', () => {
+            currentMode = 'info';
+            btnModeInfo.classList.add('active');
+            btnModeInfo.setAttribute('aria-selected', 'true');
+            btnModeQuiz.classList.remove('active');
+            btnModeQuiz.setAttribute('aria-selected', 'false');
+            paneInfo.classList.add('active');
+            paneQuiz.classList.remove('active');
+        });
+
+        btnModeQuiz.addEventListener('click', () => {
+            currentMode = 'quiz';
+            btnModeQuiz.classList.add('active');
+            btnModeQuiz.setAttribute('aria-selected', 'true');
+            btnModeInfo.classList.remove('active');
+            btnModeInfo.setAttribute('aria-selected', 'false');
+            paneQuiz.classList.add('active');
+            paneInfo.classList.remove('active');
+        });
+
+        // Filter Toolbar Listener
+        const filterBtns = [
+            { id: 'filter-all', cat: 'all' },
+            { id: 'filter-artery', cat: 'artery' },
+            { id: 'filter-vein', cat: 'vein' },
+            { id: 'filter-physio', cat: 'physio' }
+        ];
+
+        filterBtns.forEach(item => {
+            const btn = document.getElementById(item.id);
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    const el = document.getElementById(b.id);
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+
+                // Filter cards
+                const cards = document.querySelectorAll('.detail-card');
+                cards.forEach(card => {
+                    if (item.cat === 'all' || card.dataset.category === item.cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navigation Flow Cards Smooth Scroll & Focus
+        for (let i = 1; i <= 6; i++) {
+            const flowCard = document.getElementById(`flow-card-node-0${i}`);
+            const targetDetailCard = document.getElementById(`node-card-0${i}`);
+            
+            flowCard.addEventListener('click', () => {
+                const nodeId = `${MATERIAL_ID}-node-0${i}`;
+                if (!exploredNodes.has(nodeId)) { exploredNodes.add(nodeId); trackExplore(nodeId); }
+                // Remove highlight from all
+                document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('focus-card'));
+                
+                // Show card if hidden by filter
+                targetDetailCard.style.display = 'flex';
+
+                // Scroll
+                targetDetailCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                targetDetailCard.classList.add('focus-card');
+            });
+        }
+
+        const setCoronaryPhase = (phase) => {
+            const diastole = phase === 'diastole';
+            document.querySelectorAll('[data-coronary-phase]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.coronaryPhase === phase)));
+            document.querySelectorAll('[data-coronary-step]').forEach((step, index) => step.classList.toggle('active', diastole ? index >= 2 : index <= 1));
+            document.getElementById('coronary-lab-status').innerHTML = diastole ? '<strong>舒張期：</strong>心肌放鬆，原本受壓的冠狀血管重新張開；這是左心室心肌最主要的灌流時機。' : '<strong>收縮期：</strong>左心室心肌收緊，壓迫穿行其中的冠狀血管，因此灌流量相對下降。';
+        };
+        document.querySelectorAll('[data-coronary-phase]').forEach((button) => button.addEventListener('click', () => setCoronaryPhase(button.dataset.coronaryPhase)));
+        document.querySelectorAll('[data-coronary-answer]').forEach((button) => button.addEventListener('click', () => { const correct = button.dataset.coronaryAnswer === 'correct'; document.getElementById('coronary-predict-feedback').textContent = correct ? '答對了：舒張期心肌放鬆，冠狀血流因而增加。' : '再想想：收縮期的心肌張力反而會擠壓冠狀微血管。'; }));
+        setCoronaryPhase('systole');
+
+        // Quiz Stage 1 Setup
+        initStage1();
+
+        // Stage 1 Next Button Listener
+        document.getElementById('s1-next-btn').addEventListener('click', () => {
+            s1CurrentIndex++;
+            if (s1CurrentIndex < FOUNDATION_QUESTIONS.length) {
+                renderStage1Question();
+            } else {
+                // Unlock Stage 2
+                document.getElementById('stage-1-view').style.display = 'none';
+                document.getElementById('stage-2-view').style.display = 'block';
+                initStage2();
+            }
+        });
+
+        // Stage 2 Next Button Listener
+        document.getElementById('s2-next-btn').addEventListener('click', () => {
+            s2CurrentIndex++;
+            if (s2CurrentIndex < s2Questions.length) {
+                renderStage2Question();
+            } else {
+                // Stage 2 Finished -> Check if All 5 Correct
+                document.getElementById('stage-2-view').style.display = 'none';
+                if (s2CorrectCount === 5) {
+                    document.getElementById('result-banner-pass').style.display = 'block';
+                    trackComplete();
+                } else {
+                    document.getElementById('result-banner-fail').style.display = 'block';
+                    document.getElementById('fail-message-text').textContent = `您答對了 ${s2CorrectCount} / 5 題。關卡要求必須 5 題全對才能通關，請重試！`;
+                }
+            }
+        });
+
+        // Restart Full Quiz
+        document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+            document.getElementById('result-banner-pass').style.display = 'none';
+            document.getElementById('stage-1-view').style.display = 'block';
+            document.getElementById('stage-2-view').style.display = 'none';
+            s1CurrentIndex = 0;
+            initStage1();
+        });
+
+        // Retry Stage 2
+        document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            document.getElementById('result-banner-fail').style.display = 'none';
+            document.getElementById('stage-2-view').style.display = 'block';
+            initStage2();
+        });
+    });
+
+    // RENDER STAGE 1
+    function initStage1() {
+        s1CurrentIndex = 0;
+        renderStage1Question();
+    }
+
+    function renderStage1Question() {
+        s1AnsweredCorrect = false;
+        const q = FOUNDATION_QUESTIONS[s1CurrentIndex];
+        
+        document.getElementById('s1-progress-text').textContent = `第一關｜先備知識建構：${s1CurrentIndex + 1}／6`;
+        document.getElementById('s1-question-text').textContent = q.title;
+        
+        const optionsContainer = document.getElementById('s1-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s1-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s1-next-btn');
+        nextBtn.disabled = true;
+
+        q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optText;
+
+            btn.addEventListener('click', () => {
+                if (s1AnsweredCorrect) return;
+                trackAnswer(q.id, optIdx === q.answer);
+
+                if (optIdx === q.answer) {
+                    // Correct
+                    btn.classList.add('correct');
+                    s1AnsweredCorrect = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>核心解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    
+                    // Disable all options
+                    const allOpts = optionsContainer.querySelectorAll('.option-button');
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    // Wrong
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--warning)';
+                    hintBox.innerHTML = `<strong>再試一次！</strong>${q.hint}`;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // RENDER STAGE 2
+    function initStage2() {
+        s2CurrentIndex = 0;
+        s2CorrectCount = 0;
+
+        // Shuffle Stage 2 Questions and Options
+        s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
+            const optionsWithOrigIdx = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+            const shuffledOpts = shuffleArray(optionsWithOrigIdx);
+            return {
+                ...q,
+                shuffledOpts: shuffledOpts
+            };
+        });
+
+        renderStage2Question();
+    }
+
+    function renderStage2Question() {
+        s2AnsweredCorrect = false;
+        const q = s2Questions[s2CurrentIndex];
+
+        document.getElementById('s2-progress-text').textContent = `第二關｜實務病例應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s2-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s2-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s2-next-btn');
+        nextBtn.disabled = true;
+
+        q.shuffledOpts.forEach((optObj) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optObj.text;
+
+            btn.addEventListener('click', () => {
+                if (s2AnsweredCorrect) return;
+                trackAnswer(q.id, optObj.isCorrect);
+
+                const allOpts = optionsContainer.querySelectorAll('.option-button');
+
+                if (optObj.isCorrect) {
+                    btn.classList.add('correct');
+                    s2AnsweredCorrect = true;
+                    s2CorrectCount++;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>答對了！正解解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    btn.classList.add('wrong');
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--danger)';
+                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
+                    
+                    // Highlight the correct one
+                    q.shuffledOpts.forEach((o, i) => {
+                        if (o.isCorrect) {
+                            allOpts[i].classList.add('correct');
+                        }
+                    });
+
+                    allOpts.forEach(b => b.disabled = true);
+                    nextBtn.disabled = false;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+</script>
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+
+</body>
+</html>

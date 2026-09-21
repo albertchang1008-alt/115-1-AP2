@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心臟構造與解剖生理 - 五專互動資訊圖表與兩階段隨堂診斷</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --focus-outline: 3px solid #2563eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.1rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Metric Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+
+        /* Navigation Mode Switch */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 1rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Filter Controls */
+        .filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Step Flow Overview Cards */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .flow-nav-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; }
+        .flow-nav-card:hover, .flow-nav-card:focus { transform: translateY(-3px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
+        .flow-nav-card svg { width: 64px; height: 64px; margin-bottom: 8px; }
+        .flow-nav-card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .flow-nav-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; }
+
+        /* Detailed Knowledge Cards Grid */
+        .detail-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
+        .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
+        
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container svg { width: 100%; height: auto; max-height: 180px; }
+
+        .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
+        .bg-wall { background: var(--primary-light); color: var(--primary); }
+        .bg-chamber { background: var(--danger-light); color: var(--danger); }
+        .bg-conduction { background: var(--warning-light); color: var(--warning); }
+
+        .card-heading { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+        .core-concept { font-size: 0.95rem; font-weight: 600; color: #334155; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-left: 4px solid var(--primary); border-radius: 4px; }
+        
+        .features-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .features-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 18px; position: relative; line-height: 1.4; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 4px; }
+
+        .clinical-box { font-size: 0.88rem; color: #334155; background: #fffdf5; border: 1px solid #fef3c7; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+        .clinical-box strong { color: var(--warning); }
+
+        /* Quiz Section Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .stage-title { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .progress-badge { font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 20px; }
+
+        .quiz-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .question-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; line-height: 1.5; }
+        
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-button { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-main); width: 100%; }
+        .option-button:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .option-button[disabled] { cursor: not-allowed; opacity: 0.6; }
+        .option-button.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; opacity: 1 !important; }
+        .option-button.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; opacity: 1 !important; }
+
+        .hint-box { margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--warning); display: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        .next-btn-container { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .action-btn:hover { background: var(--primary-dark); }
+        .action-btn[disabled] { background: #cbd5e1; cursor: not-allowed; }
+
+        .result-banner { text-align: center; padding: 24px; border-radius: 12px; margin-top: 20px; display: none; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); display: block; }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); display: block; }
+        .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        /* 情境實驗室：以可操作的因果關係取代純裝飾動畫。 */
+        .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #bfdbfe; border-radius:18px; background:linear-gradient(135deg,#eff6ff 0%,#fff7ed 100%); box-shadow:var(--shadow); }
+        .mission-lab h2 { font-size:1.25rem; color:var(--primary-dark); }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }
+        .sim-steps { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; align-items:center; }.sim-step { min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; transition:transform .2s, border-color .2s, background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }
+        .scenario-controls { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:16px; }.scenario-controls strong { margin-right:4px; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.scenario-option[aria-pressed="true"] { background:var(--primary); color:#fff; }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; }
+        @media (max-width:760px) { .sim-steps { grid-template-columns:1fr 28px 1fr; }.sim-arrow { transform:rotate(90deg); }.sim-step { min-height:76px; } }
+        @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>心臟的構造與解剖生理</h1>
+        <p>生理學 CH05 心包膜、心壁、四大腔室、心瓣膜、冠狀循環與傳導系統</p>
+    </header>
+
+    <!-- Key Metrics Dashboard -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="val">250~350 g</div>
+            <div class="label">成人心臟平均重量</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">4 大腔室</div>
+            <div class="label">左/右心房與左/右心室</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">4 組瓣膜</div>
+            <div class="label">防止血液倒流與逆流</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">70~80 次/分</div>
+            <div class="label">竇房結（SA node）自發節律</div>
+        </div>
+    </div>
+
+    <section class="mission-lab" aria-labelledby="heart-lab-title">
+        <h2 id="heart-lab-title">🫀 情境實驗室｜讓血液走對路</h2>
+        <p>切換心室收縮與舒張，觀察瓣膜如何維持單向血流；再先預測下一個步驟。</p>
+        <div class="sim-steps" aria-label="心臟血流與瓣膜機制"><div class="sim-step" data-heart-step="0">心房充盈<span>血液回到心房</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="1">房室瓣開啟<span>流入心室</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="2">心室收縮<span>房室瓣關閉</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="3">半月瓣開啟<span>血液射入動脈</span></div></div>
+        <div class="scenario-controls"><strong>心跳階段：</strong><button class="scenario-option" type="button" data-heart-phase="fill" aria-pressed="true">舒張期・充盈</button><button class="scenario-option" type="button" data-heart-phase="pump" aria-pressed="false">收縮期・射血</button></div>
+        <div class="scenario-status" id="heart-lab-status" aria-live="polite"></div>
+        <div class="predict-card"><p>先猜一猜：心室開始收縮時，哪一組瓣膜必須先關閉？</p><button class="scenario-option" type="button" data-heart-answer="wrong">半月瓣</button><button class="scenario-option" type="button" data-heart-answer="correct">房室瓣</button><div class="predict-feedback" id="heart-predict-feedback" aria-live="polite"></div></div>
+    </section>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
+        <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
+        
+        <!-- Category Filters -->
+        <div class="filter-toolbar" role="toolbar" aria-label="知識分類篩選">
+            <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
+            <button type="button" class="filter-btn" id="filter-wall" aria-pressed="false">心包與心壁</button>
+            <button type="button" class="filter-btn" id="filter-chamber" aria-pressed="false">心腔與瓣膜</button>
+            <button type="button" class="filter-btn" id="filter-conduction" aria-pressed="false">冠狀與傳導</button>
+        </div>
+
+        <!-- 6 Step Flow Overview Cards -->
+        <div class="flow-grid">
+            <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：心包膜層次">
+                <svg viewBox="0 0 100 100">
+                    <rect x="15" y="15" width="70" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <rect x="25" y="25" width="50" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                    <rect x="35" y="35" width="30" height="30" rx="4" fill="#dc2626"/>
+                    <text x="50" y="53" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">心肌</text>
+                </svg>
+                <h3>1. 心包膜層次</h3>
+                <p>外層纖維包、內層雙層漿膜</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-02" aria-label="點擊捲動至節點 2：心臟壁構造">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 20 20 L 80 20 L 80 40 L 20 40 Z" fill="#93c5fd"/>
+                    <path d="M 20 40 L 80 40 L 80 70 L 20 70 Z" fill="#ef4444"/>
+                    <path d="M 20 70 L 80 70 L 80 80 L 20 80 Z" fill="#fca5a5"/>
+                    <text x="50" y="58" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">心肌層最厚</text>
+                </svg>
+                <h3>2. 心臟壁構造</h3>
+                <p>心外膜、心肌層與心內膜</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-03" aria-label="點擊捲動至節點 3：四大心腔">
+                <svg viewBox="0 0 100 100">
+                    <rect x="15" y="15" width="32" height="32" rx="4" fill="#60a5fa"/>
+                    <rect x="53" y="15" width="32" height="32" rx="4" fill="#f87171"/>
+                    <rect x="15" y="53" width="32" height="32" rx="4" fill="#3b82f6"/>
+                    <rect x="53" y="53" width="32" height="32" rx="4" fill="#ef4444"/>
+                    <text x="31" y="35" font-size="10" fill="#fff" text-anchor="middle">右房</text>
+                    <text x="69" y="35" font-size="10" fill="#fff" text-anchor="middle">左房</text>
+                    <text x="31" y="73" font-size="10" fill="#fff" text-anchor="middle">右室</text>
+                    <text x="69" y="73" font-size="10" fill="#fff" text-anchor="middle">左室</text>
+                </svg>
+                <h3>3. 四大心腔</h3>
+                <p>左右心房與心室分工</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-04" aria-label="點擊捲動至節點 4：心臟瓣膜">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="35" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+                    <path d="M 30 40 Q 50 65 70 40" fill="none" stroke="#2563eb" stroke-width="4"/>
+                    <path d="M 50 60 L 50 80" stroke="#dc2626" stroke-width="3" stroke-dasharray="2,2"/>
+                    <text x="50" y="32" font-size="9" fill="#0f172a" text-anchor="middle" font-weight="bold">防止血液逆流</text>
+                </svg>
+                <h3>4. 心臟瓣膜</h3>
+                <p>房室瓣、半月瓣與腱索</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-05" aria-label="點擊捲動至節點 5：冠狀循環">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 50 25 C 20 5 10 45 50 85 C 90 45 80 5 50 25 Z" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/>
+                    <path d="M 45 30 L 30 55 L 25 70" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <path d="M 55 30 L 70 50 L 65 68" fill="none" stroke="#2563eb" stroke-width="3"/>
+                    <text x="50" y="50" font-size="9" fill="#0f172a" text-anchor="middle" font-weight="bold">冠狀動靜脈</text>
+                </svg>
+                <h3>5. 冠狀循環</h3>
+                <p>左右冠狀動脈與冠狀竇</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：傳導系統">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="30" cy="25" r="7" fill="#d97706"/>
+                    <circle cx="45" cy="45" r="6" fill="#d97706"/>
+                    <path d="M 30 25 L 45 45 L 50 65 L 30 80 M 50 65 L 70 80" fill="none" stroke="#d97706" stroke-width="3"/>
+                    <text x="65" y="30" font-size="9" fill="#d97706" font-weight="bold">SA節律點</text>
+                </svg>
+                <h3>6. 傳導系統</h3>
+                <p>竇房結與節律電衝動</p>
+            </button>
+        </div>
+
+        <!-- Detailed Knowledge Cards -->
+        <div class="detail-cards-grid">
+            
+            <!-- Node 1 Detail -->
+            <div class="detail-card" id="node-card-01" data-category="wall">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <!-- Outer Fibrous -->
+                        <rect x="20" y="15" width="280" height="25" fill="#cbd5e1" rx="4"/>
+                        <text x="35" y="32" font-size="12" fill="#0f172a" font-weight="bold">1. 纖維心包 (Fibrous Pericardium) - 防止過度擴張與固定位置</text>
+                        <!-- Serous Parietal -->
+                        <rect x="20" y="45" width="280" height="18" fill="#93c5fd" rx="3"/>
+                        <text x="35" y="58" font-size="11" fill="#1e3a8a">2. 漿膜心包壁層 (Parietal Serous Layer)</text>
+                        <!-- Pericardial Cavity -->
+                        <rect x="20" y="67" width="280" height="22" fill="#eff6ff" stroke="#3b82f6" stroke-dasharray="4,2" rx="3"/>
+                        <text x="160" y="82" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">★ 心包腔 (Pericardial Cavity) 含心包液：減少潤滑摩擦</text>
+                        <!-- Visceral / Epicardium -->
+                        <rect x="20" y="93" width="280" height="18" fill="#fca5a5" rx="3"/>
+                        <text x="35" y="106" font-size="11" fill="#7f1d1d">3. 漿膜心包臟層 / 心外膜 (Epicardium)</text>
+                        <!-- Myocardium -->
+                        <rect x="20" y="115" width="280" height="30" fill="#ef4444" rx="4"/>
+                        <text x="160" y="134" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="bold">4. 心肌層 (Myocardium) - 心臟壁主體</text>
+                    </svg>
+                </div>
+                <span class="card-badge bg-wall">心包與心壁</span>
+                <h2 class="card-heading">1. 心包膜的層次與防護功能</h2>
+                <div class="core-concept">心包膜（Pericardium）雙層結構包圍心臟，外層為堅韌的纖維心包，內層為細緻之漿膜心包，提供固定與減摩防護。</div>
+                <ul class="features-list">
+                    <li><strong>纖維心包：</strong>堅韌結締組織，置於橫膈上，防止心臟過度擴張並固定於縱隔腔。</li>
+                    <li><strong>漿膜心包：</strong>分為壁層（襯於纖維心包內）與臟層（即心外膜，貼於心肌表面）。</li>
+                    <li><strong>心包腔與心包液：</strong>壁層與臟層間之狹窄腔室，含少許心包液，防止心臟搏動摩擦。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床意義（心包膜炎與心包填塞）：</strong><br>若心包膜發炎導致心包腔內大量積液（心包積水），會限制心室舒張充血，引發致命之「心包填塞（Cardiac Tamponade）」。
+                </div>
+            </div>
+
+            <!-- Node 2 Detail -->
+            <div class="detail-card" id="node-card-02" data-category="wall">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Outer -->
+                            <rect x="10" y="10" width="80" height="120" fill="#fca5a5" rx="6"/>
+                            <text x="50" y="65" font-size="11" fill="#7f1d1d" text-anchor="middle" font-weight="bold">心外膜</text>
+                            <text x="50" y="80" font-size="9" fill="#7f1d1d" text-anchor="middle">(Epicardium)</text>
+                            <!-- Middle -->
+                            <rect x="95" y="10" width="110" height="120" fill="#ef4444" rx="6"/>
+                            <text x="150" y="60" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="bold">心肌層</text>
+                            <text x="150" y="75" font-size="10" fill="#ffffff" text-anchor="middle">(Myocardium)</text>
+                            <text x="150" y="92" font-size="9" fill="#fef2f2" text-anchor="middle">最厚/心肌收縮</text>
+                            <!-- Inner -->
+                            <rect x="210" y="10" width="80" height="120" fill="#fee2e2" rx="6"/>
+                            <text x="250" y="65" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">心內膜</text>
+                            <text x="250" y="80" font-size="9" fill="#991b1b" text-anchor="middle">(Endocardium)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-wall">心包與心壁</span>
+                <h2 class="card-heading">2. 心臟壁的三層構造與特徵</h2>
+                <div class="core-concept">心臟壁由外至內分為心外膜、心肌層與心內膜三層，其中心肌層占大部分厚度並主導收縮。</div>
+                <ul class="features-list">
+                    <li><strong>心外膜（Epicardium）：</strong>即漿膜心包的臟層，為透明之單層間皮與結締組織。</li>
+                    <li><strong>心肌層（Myocardium）：</strong>由不隨意、具橫紋與分枝的分支心肌細胞組成，負責心臟強採唧血。</li>
+                    <li><strong>心內膜（Endocardium）：</strong>薄層內皮組織，襯於心腔內表面並覆蓋瓣膜與腱索。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理與病理（心肌厚度）：</strong><br>左心室需要克服全身體循環的高阻力，因此左心室的心肌層厚度約為右心室的 3 倍。高血壓患者常因左心室負荷過重引發「左心室肥大」。
+                </div>
+            </div>
+
+            <!-- Node 3 Detail -->
+            <div class="detail-card" id="node-card-03" data-category="chamber">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <rect x="20" y="10" width="130" height="65" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                        <text x="85" y="32" font-size="12" fill="#1e40af" text-anchor="middle" font-weight="bold">右心房 (RA)</text>
+                        <text x="85" y="50" font-size="9" fill="#1e3a8a" text-anchor="middle">上/下腔靜脈、冠狀竇注入</text>
+
+                        <rect x="170" y="10" width="130" height="65" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="8"/>
+                        <text x="235" y="32" font-size="12" fill="#991b1b" text-anchor="middle" font-weight="bold">左心房 (LA)</text>
+                        <text x="235" y="50" font-size="9" fill="#7f1d1d" text-anchor="middle">4 條肺靜脈注入充氧血</text>
+
+                        <rect x="20" y="85" width="130" height="65" fill="#93c5fd" stroke="#2563eb" stroke-width="2" rx="8"/>
+                        <text x="85" y="107" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="bold">右心室 (RV)</text>
+                        <text x="85" y="125" font-size="9" fill="#1e3a8a" text-anchor="middle">唧血至肺動脈幹 (肺循環)</text>
+
+                        <rect x="170" y="85" width="130" height="65" fill="#fca5a5" stroke="#dc2626" stroke-width="3" rx="8"/>
+                        <text x="235" y="107" font-size="12" fill="#7f1d1d" text-anchor="middle" font-weight="bold">左心室 (LV) - 壁最厚</text>
+                        <text x="235" y="125" font-size="9" fill="#7f1d1d" text-anchor="middle">唧血至主動脈 (體循環)</text>
+                    </svg>
+                </div>
+                <span class="card-badge bg-chamber">心腔與瓣膜</span>
+                <h2 class="card-heading">3. 心臟四大腔室與重要構造</h2>
+                <div class="core-concept">心臟內部以房間隔與心室間隔分為左、右心房及左、右心室，實現體循環與肺循環的完全分流。</div>
+                <ul class="features-list">
+                    <li><strong>右心房（RA）：</strong>接受上腔靜脈、下腔靜脈與冠狀竇之缺氧血；房間隔上有胎兒卵圓孔退化之卵圓窩（Fossa ovalis）。</li>
+                    <li><strong>左心房（LA）：</strong>接受 4 條肺靜脈送回之充氧血；心房外附有狗耳朵狀的心耳（Auricle）。</li>
+                    <li><strong>右與左心室：</strong>心室內壁具肌肉嵴呈心肉柱（Trabeculae carneae）；左心室形成心尖（Apex），壁最厚。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床解剖（心中隔缺損）：</strong><br>若胚胎發育時卵圓孔於出生後未順利閉合，稱為「卵圓孔未閉」；若心室間隔發育不全則稱為「心室中隔缺損（VSD）」，引發左右心血液混雜與心雜音。
+                </div>
+            </div>
+
+            <!-- Node 4 Detail -->
+            <div class="detail-card" id="node-card-04" data-category="chamber">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(15,15)">
+                            <!-- AV Valves -->
+                            <rect x="10" y="10" width="130" height="110" fill="#f8fafc" stroke="#2563eb" stroke-width="2" rx="8"/>
+                            <text x="75" y="30" font-size="12" fill="#1e40af" text-anchor="middle" font-weight="bold">房室瓣 (AV Valves)</text>
+                            <text x="75" y="50" font-size="10" fill="#334155" text-anchor="middle">右房室：三尖瓣</text>
+                            <text x="75" y="68" font-size="10" fill="#334155" text-anchor="middle">左房室：二尖瓣 (僧帽瓣)</text>
+                            <text x="75" y="95" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="bold">具 腱索 與 乳頭肌 拉緊</text>
+
+                            <!-- Semilunar Valves -->
+                            <rect x="155" y="10" width="130" height="110" fill="#f8fafc" stroke="#dc2626" stroke-width="2" rx="8"/>
+                            <text x="220" y="30" font-size="12" fill="#991b1b" text-anchor="middle" font-weight="bold">半月瓣 (Semilunar)</text>
+                            <text x="220" y="50" font-size="10" fill="#334155" text-anchor="middle">右室出口：肺動脈瓣</text>
+                            <text x="220" y="68" font-size="10" fill="#334155" text-anchor="middle">左室出口：主動脈瓣</text>
+                            <text x="220" y="95" font-size="9" fill="#2563eb" text-anchor="middle" font-weight="bold">每組由 3 片半月形瓣葉組成</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-chamber">心腔與瓣膜</span>
+                <h2 class="card-heading">4. 心臟瓣膜與單向流動機制</h2>
+                <div class="core-concept">心臟含有兩組房室瓣與兩組半月瓣，藉由壓力差開啟與關閉，確保血液僅能單向向前流動。</div>
+                <ul class="features-list">
+                    <li><strong>房室瓣（AV Valves）：</strong>三尖瓣（右房室）與二尖瓣/僧帽瓣（左房室），尖端經腱索（Chordae tendineae）連接至乳頭肌（Papillary muscle）。</li>
+                    <li><strong>防止翻轉：</strong>心室收縮時，乳頭肌收縮拉緊腱索，防止房室瓣瓣葉向心房翻轉。</li>
+                    <li><strong>半月瓣（Semilunar Valves）：</strong>位於肺動脈幹及主動脈開口，防止噴出的血液於心室舒張時倒流。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床聽診與病理（心雜音）：</strong><br>心室收縮房室瓣關閉產生「第一心音（S1）」；心室舒張半月瓣關閉產生「第二心音（S2）」。若瓣膜狹窄或關閉不全（如二尖瓣脫垂），血液倒流會產生「心雜音」。
+                </div>
+            </div>
+
+            <!-- Node 5 Detail -->
+            <div class="detail-card" id="node-card-05" data-category="conduction">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- LCA -->
+                            <rect x="10" y="10" width="135" height="110" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="6"/>
+                            <text x="77" y="30" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">左冠狀動脈 (LCA)</text>
+                            <text x="77" y="55" font-size="10" fill="#334155" text-anchor="middle">• 前室間枝 (前降支)</text>
+                            <text x="77" y="72" font-size="10" fill="#334155" text-anchor="middle">• 迴旋枝</text>
+                            <text x="77" y="95" font-size="9" fill="#dc2626" text-anchor="middle">供應左心室與兩心室前壁</text>
+
+                            <!-- RCA -->
+                            <rect x="155" y="10" width="135" height="110" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+                            <text x="222" y="30" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">右冠狀動脈 (RCA)</text>
+                            <text x="222" y="55" font-size="10" fill="#334155" text-anchor="middle">• 後室間動脈</text>
+                            <text x="222" y="72" font-size="10" fill="#334155" text-anchor="middle">• 邊緣動脈</text>
+                            <text x="222" y="95" font-size="9" fill="#2563eb" text-anchor="middle">供應右心房室與心室後壁</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-conduction">冠狀與傳導</span>
+                <h2 class="card-heading">5. 冠狀血管循環與心肌血供</h2>
+                <div class="core-concept">心肌細胞需經由起始於升主動脈基部的左、右冠狀動脈獲得氧氣與養分，缺氧血則匯集至冠狀竇注入右心房。</div>
+                <ul class="features-list">
+                    <li><strong>左冠狀動脈（LCA）：</strong>分為前室間枝（供應兩心室前壁）與迴旋枝（供應左心房與左心室側壁）。</li>
+                    <li><strong>右冠狀動脈（RCA）：</strong>分為後室間動脈（供應兩心室後壁）與邊緣動脈（供應右心室壁）。</li>
+                    <li><strong>靜脈回流：</strong>心大靜脈（與前室間動脈伴行）與心中靜脈收集缺氧血至冠狀竇（Coronary sinus）注入右心房。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床急症（心肌梗塞）：</strong><br>冠狀動脈硬化阻塞會造成心肌缺血壞死，稱為「心肌梗塞（MI）」。其中左冠狀動脈前室間枝是最常發生阻塞的血管（又稱猝死血管）。
+                </div>
+            </div>
+
+            <!-- Node 6 Detail -->
+            <div class="detail-card" id="node-card-06" data-category="conduction">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <!-- Conduction Path -->
+                        <rect x="10" y="20" width="55" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                        <text x="37" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">竇房結</text>
+                        <text x="37" y="50" font-size="8" fill="#b45309" text-anchor="middle">(SA node)</text>
+
+                        <line x1="65" y1="40" x2="85" y2="40" stroke="#d97706" stroke-width="3" stroke-dasharray="3,2"/>
+
+                        <rect x="85" y="20" width="55" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                        <text x="112" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">房室結</text>
+                        <text x="112" y="50" font-size="8" fill="#b45309" text-anchor="middle">(AV node)</text>
+
+                        <line x1="140" y1="40" x2="160" y2="40" stroke="#d97706" stroke-width="3"/>
+
+                        <rect x="160" y="20" width="60" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                        <text x="190" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">房室束</text>
+                        <text x="190" y="50" font-size="8" fill="#b45309" text-anchor="middle">(Bundle of His)</text>
+
+                        <line x1="220" y1="40" x2="240" y2="40" stroke="#d97706" stroke-width="3"/>
+
+                        <rect x="240" y="20" width="70" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                        <text x="275" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">浦金埃氏纖維</text>
+                        <text x="275" y="50" font-size="8" fill="#b45309" text-anchor="middle">(Purkinje)</text>
+
+                        <!-- Bottom Explanation -->
+                        <rect x="10" y="80" width="300" height="65" fill="#fffbeb" stroke="#f59e0b" stroke-width="1" rx="6"/>
+                        <text x="160" y="102" font-size="11" fill="#b45309" text-anchor="middle" font-weight="bold">竇房結 (SA node) 位於右心房上腔靜脈開口下方</text>
+                        <text x="160" y="122" font-size="10" fill="#78350f" text-anchor="middle">每分鐘自發產生 70~80 次動作電位，稱為「節律點 (Pacemaker)」</text>
+                    </svg>
+                </div>
+                <span class="card-badge bg-conduction">冠狀與傳導</span>
+                <h2 class="card-heading">6. 心臟特化自律傳導系統</h2>
+                <div class="core-concept">心臟不需外來神經刺激即可自動節律性收縮，係由特化的心肌細胞組成傳導系統發送衝動。</div>
+                <ul class="features-list">
+                    <li><strong>竇房結（SA node）：</strong>位於右心房壁、上腔靜脈開口下方，為正常心跳的節律點（Pacemaker，70~80次/分）。</li>
+                    <li><strong>傳導途徑：</strong>SA node 興奮 → 雙心房收縮 → 房室結（AV node）去極化 → 房室束（Bundle of His）。</li>
+                    <li><strong>心室去極化：</strong>左/右房室束分枝 → 浦金埃氏纖維（Purkinje fibers）快速傳導，引發兩心室由心尖向上收縮。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>臨床應用（心律不整與人工節律器）：</strong><br>若竇房結功能退化或房室傳導阻滯（AV block），心跳可能過慢，臨床可植入「人工心律調節器（Pacemaker）」以維持正常心輸出量。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
+        <div class="quiz-container">
+            
+            <!-- STAGE 1: FOUNDATION -->
+            <div id="stage-1-view">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第一關｜先備知識建構</span>
+                    <span class="progress-badge" id="s1-progress-text">第一關｜先備知識建構：1／6</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s1-question-text">載入中...</div>
+                    <div class="options-group" id="s1-options-container"></div>
+                    <div class="hint-box" id="s1-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s1-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- STAGE 2: CASE APPLICATION -->
+            <div id="stage-2-view" style="display: none;">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第二關｜實務病例應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜實務病例應用：1／5</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s2-question-text">載入中...</div>
+                    <div class="options-group" id="s2-options-container"></div>
+                    <div class="hint-box" id="s2-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s2-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- RESULT BANNERS -->
+            <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜完全通關！</h3>
+                <p>您已成功通過「先備知識」與「實務病例」兩階段診斷，完整掌握心臟解剖構造與臨床應用！</p>
+                <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
+            </div>
+
+            <div id="result-banner-fail" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p id="fail-message-text">第二關需 5 題全部答對才能通關，請複習資訊圖表後重新挑戰整輪！</p>
+                <button type="button" class="action-btn" id="btn-retry-s2">🔄 重新挑戰第二關 (重洗題目)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 心臟構造解剖生理數位教材 - 專為五專生理解剖課程設計</p>
+    </footer>
+</div>
+
+<script>
+    const COURSE_CODE = 'heart-structure';
+
+    // 1. Foundation Questions (6 Questions)
+    const FOUNDATION_QUESTIONS = [
+        {
+            id: 'heart-structure-foundation-q01',
+            title: '1. 心包膜（Pericardium）的構造中，何者含有心包液能減少心臟跳動時的膜面摩擦？',
+            options: ['纖維心包（Fibrous pericardium）', '心包腔（Pericardial cavity）', '心肌層（Myocardium）', '心內膜（Endocardium）'],
+            answer: 1,
+            hint: '提示：位於漿膜心包壁層與臟層之間的狹窄腔室，內含液體以潤滑膜面。',
+            explanation: '解析：心包腔位於漿膜心包壁層與臟層之間，內含有少許心包液（Pericardial fluid），可防止心臟跳動時產生的膜面摩擦。'
+        },
+        {
+            id: 'heart-structure-foundation-q02',
+            title: '2. 心臟壁的三層構造中，哪一層是由心肌細胞組成、占大部分厚度並負責心臟收縮？',
+            options: ['心外膜（Epicardium）', '心肌層（Myocardium）', '心內膜（Endocardium）', '纖維心包'],
+            answer: 1,
+            hint: '提示：這是心臟壁的中層，由不隨意、具橫紋與分枝的心肌纖維構成。',
+            explanation: '解析：心肌層（Myocardium）構成心臟壁的主體，負責心臟強採收縮以打出血液。'
+        },
+        {
+            id: 'heart-structure-foundation-q03',
+            title: '3. 關於心臟四大腔室的肌肉壁厚度比較，下列何者的心肌層最厚？',
+            options: ['右心房', '左心房', '右心室', '左心室'],
+            answer: 3,
+            hint: '提示：該腔室需要產生足夠壓力將血液打入體循環（主動脈）送到全身。',
+            explanation: '解析：左心室工作量最大、需克服全身體循環的高阻力，因此左心室的心肌層最厚（約為右心室的 3 倍）。'
+        },
+        {
+            id: 'heart-structure-foundation-q04',
+            title: '4. 位於右心房與右心室之間的房室瓣，其構造名稱與防止瓣膜倒翻的附屬構造分別為何？',
+            options: ['二尖瓣；梳狀肌', '三尖瓣；腱索與乳頭肌', '主動脈瓣；心肉柱', '肺動脈瓣；卵圓窩'],
+            answer: 1,
+            hint: '提示：右側房室瓣有三片瓣葉，下端由細索連接至心室壁突出的錐形肌肉。',
+            explanation: '解析：右房室瓣為三尖瓣（Tricuspid valve），其游離端經由腱索（Chordae tendineae）連接至心室壁的乳頭肌（Papillary muscle），防止瓣膜翻入心房。'
+        },
+        {
+            id: 'heart-structure-foundation-q05',
+            title: '5. 供應左心室前壁及心室間隔前 2/3 血液的主要冠狀動脈分枝為何？',
+            options: ['右冠狀動脈後室間動脈', '左冠狀動脈前室間枝（前降支）', '右冠狀動脈邊緣動脈', '迴旋枝'],
+            answer: 1,
+            hint: '提示：這是左冠狀動脈走在前後心室間溝的主要分支。',
+            explanation: '解析：左冠狀動脈（LCA）分支出的前室間枝（Anterior interventricular branch，又稱左前降支 LAD）主要供應兩心室前壁與心室間隔。'
+        },
+        {
+            id: 'heart-structure-foundation-q06',
+            title: '6. 心臟特化傳導系統中，被稱為正常心跳「節律點（Pacemaker）」且位於右心房壁的構造為何？',
+            options: ['房室結（AV node）', '竇房結（SA node）', '希氏束（Bundle of His）', '浦金埃氏纖維（Purkinje fibers）'],
+            answer: 1,
+            hint: '提示：部位於右心房壁、上腔靜脈開口下方，每分鐘可自發產生 70~80 次動作電位。',
+            explanation: '解析：竇房結（Sinoatrial node; SA node）具有最高自發去極化速率（70~80次/分），為心臟正常的節律點。'
+        }
+    ];
+
+    // 2. Case Questions (5 Questions)
+    const CASE_QUESTIONS = [
+        {
+            id: 'heart-structure-case-q01',
+            title: '1. 【臨床病例】一位 55 歲男性因急性胸痛就醫，心電圖診斷為「急性前壁心肌梗塞」。心導管檢查顯示為冠狀動脈阻塞。請問最可能發生阻塞的是哪一條血管？',
+            options: ['左冠狀動脈前室間枝（LAD）', '右冠狀動脈後室間動脈', '心大靜脈', '冠狀靜脈竇'],
+            answer: 0,
+            hint: '提示：前壁心肌梗塞通常涉及供應左心室前壁血流的最關鍵分支（猝死血管）。',
+            explanation: '解析：左冠狀動脈前室間枝（Anterior interventricular branch / LAD）負責供應左心室前壁，其阻塞是引發急性前壁心肌梗塞最常見的原因。'
+        },
+        {
+            id: 'heart-structure-case-q02',
+            title: '2. 【臨床情境】一位 28 歲女性至心臟科聽診，醫師在其心縮期（心室收縮時）於胸骨左緣聽轉到異常的心雜音，診斷為「二尖瓣關閉不全」。請問此病變主要會導致血液向何處逆流？',
+            options: ['由左心室逆流回左心房', '由右心室逆流回右心房', '由主動脈倒流回左心室', '由肺動脈倒流回右心室'],
+            answer: 0,
+            hint: '提示：二尖瓣位於左心房與左心室之間，正常在心室收縮時應關閉。',
+            explanation: '解析：二尖瓣（僧帽瓣）位於左心房與左心室之間。當二尖瓣關閉不全時，心室收縮期的高壓會使血液由左心室逆流回左心房並產生雜音。'
+        },
+        {
+            id: 'heart-structure-case-q03',
+            title: '3. 【急症判讀】一位心包膜炎患者突然出現低血壓、頸靜脈怒張與心音遙遠（Becks triad），經超音波證實為「心包填塞（Cardiac Tamponade）」。請問其主要生理病理機轉為何？',
+            options: ['心包腔內大量積液壓迫心臟，限制心室舒張充血', '心肌層變薄導致收縮力喪失', '冠狀動脈痙攣導致全心缺血', '心內膜細菌感染破壞瓣膜'],
+            answer: 0,
+            hint: '提示：心包腔位於堅韌的纖維心包內，腔內液體過多會限制心臟舒張。',
+            explanation: '解析：心包積水使心包腔內壓力驟升，受限於外層堅韌纖維心包無法擴張，直接壓迫心臟致使心室舒張期無法充血，心輸出量銳減。'
+        },
+        {
+            id: 'heart-structure-case-q04',
+            title: '4. 【心律診斷】一位 72 歲老律失常患者，心電圖顯示竇房結（SA node）衝動完全無法傳導至心室，心室改由房室結（AV node）以每分鐘約 40~50 次的慢速節律維持跳動。請問此狀況屬於何種傳導障礙？',
+            options: ['完全性房室傳導阻滯（Complete AV block）', '竇房結過度興奮', '預激症候群', '右束支傳導阻滯'],
+            answer: 0,
+            hint: '提示：連接心房去極化與心室傳導束（Bundle of His）之間的關鍵交界處傳導中斷。',
+            explanation: '解析：當房室結/房室束發生完全阻滯時，心房的衝動無法傳至心室，心室會啟動下級節律點（如房室結自發 40-50次/分）維持跳動。'
+        },
+        {
+            id: 'heart-structure-case-q05',
+            title: '5. 【生理判讀】長期未控制的高血壓患者，因為體循環主動脈壓力持續偏高，心臟必須付出更大收縮力唧血。多年後心臟超音波最常發現何種解剖結構的代償性改變？',
+            options: ['左心室心肌層代償性肥厚', '右心室心肌層萎縮', '三尖瓣瓣膜纖維化鈣化', '右心房表面積異常擴大'],
+            answer: 0,
+            hint: '提示：克服高體循環壓力主要由打血至主動脈的腔室負責。',
+            explanation: '解析：左心室負責將血液打入高壓的體循環主動脈。長期高血壓會增加左心室後負荷，促使左心室心肌細胞肥大以克服阻力。'
+        }
+    ];
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // STATE VARIABLES
+    const MATERIAL_ID = 'heart-structure';
+    const exploredNodes = new Set();
+    function trackExplore(id) { if (window.CourseLearning && window.CourseLearning.explore) window.CourseLearning.explore(id); }
+    function trackAnswer(id, correct) { if (window.CourseLearning && window.CourseLearning.answer) window.CourseLearning.answer(id, correct); }
+    function trackComplete() { if (window.CourseLearning && window.CourseLearning.complete) window.CourseLearning.complete(); }
+    let currentMode = 'info'; // 'info' or 'quiz'
+    
+    // Stage 1 State
+    let s1CurrentIndex = 0;
+    let s1AnsweredCorrect = false;
+
+    // Stage 2 State
+    let s2Questions = [];
+    let s2CurrentIndex = 0;
+    let s2CorrectCount = 0;
+    let s2AnsweredCorrect = false;
+
+    // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mode Switch Buttons
+        const btnModeInfo = document.getElementById('btn-mode-info');
+        const btnModeQuiz = document.getElementById('btn-mode-quiz');
+        const paneInfo = document.getElementById('pane-infographic');
+        const paneQuiz = document.getElementById('pane-quiz');
+
+        btnModeInfo.addEventListener('click', () => {
+            currentMode = 'info';
+            btnModeInfo.classList.add('active');
+            btnModeInfo.setAttribute('aria-selected', 'true');
+            btnModeQuiz.classList.remove('active');
+            btnModeQuiz.setAttribute('aria-selected', 'false');
+            paneInfo.classList.add('active');
+            paneQuiz.classList.remove('active');
+        });
+
+        btnModeQuiz.addEventListener('click', () => {
+            currentMode = 'quiz';
+            btnModeQuiz.classList.add('active');
+            btnModeQuiz.setAttribute('aria-selected', 'true');
+            btnModeInfo.classList.remove('active');
+            btnModeInfo.setAttribute('aria-selected', 'false');
+            paneQuiz.classList.add('active');
+            paneInfo.classList.remove('active');
+        });
+
+        // Filter Toolbar Listener
+        const filterBtns = [
+            { id: 'filter-all', cat: 'all' },
+            { id: 'filter-wall', cat: 'wall' },
+            { id: 'filter-chamber', cat: 'chamber' },
+            { id: 'filter-conduction', cat: 'conduction' }
+        ];
+
+        filterBtns.forEach(item => {
+            const btn = document.getElementById(item.id);
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    const el = document.getElementById(b.id);
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+
+                // Filter cards
+                const cards = document.querySelectorAll('.detail-card');
+                cards.forEach(card => {
+                    if (item.cat === 'all' || card.dataset.category === item.cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navigation Flow Cards Smooth Scroll & Focus
+        for (let i = 1; i <= 6; i++) {
+            const flowCard = document.getElementById(`flow-card-node-0${i}`);
+            const targetDetailCard = document.getElementById(`node-card-0${i}`);
+            
+            flowCard.addEventListener('click', () => {
+                const nodeId = `${MATERIAL_ID}-node-0${i}`;
+                if (!exploredNodes.has(nodeId)) { exploredNodes.add(nodeId); trackExplore(nodeId); }
+                // Remove highlight from all
+                document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('focus-card'));
+                
+                // Show card if hidden by filter
+                targetDetailCard.style.display = 'flex';
+
+                // Scroll
+                targetDetailCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                targetDetailCard.classList.add('focus-card');
+            });
+        }
+
+        const setHeartPhase = (phase) => {
+            const pumping = phase === 'pump';
+            document.querySelectorAll('[data-heart-phase]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.heartPhase === phase)));
+            document.querySelectorAll('[data-heart-step]').forEach((step, index) => step.classList.toggle('active', pumping ? index >= 2 : index <= 1));
+            document.getElementById('heart-lab-status').innerHTML = pumping ? '<strong>收縮期：</strong>房室瓣先關閉，心室壓力升高後半月瓣開啟，血液才能射向肺動脈與主動脈。' : '<strong>舒張期：</strong>心室放鬆、房室瓣開啟，血液由心房流入心室；半月瓣維持關閉以免動脈血倒流。';
+        };
+        document.querySelectorAll('[data-heart-phase]').forEach((button) => button.addEventListener('click', () => setHeartPhase(button.dataset.heartPhase)));
+        document.querySelectorAll('[data-heart-answer]').forEach((button) => button.addEventListener('click', () => { const correct = button.dataset.heartAnswer === 'correct'; document.getElementById('heart-predict-feedback').textContent = correct ? '答對了：房室瓣先關閉，防止血液在心室收縮時逆流回心房。' : '再想想：半月瓣是在心室壓力超過動脈壓後才開啟。'; }));
+        setHeartPhase('fill');
+
+        // Quiz Stage 1 Setup
+        initStage1();
+
+        // Stage 1 Next Button Listener
+        document.getElementById('s1-next-btn').addEventListener('click', () => {
+            s1CurrentIndex++;
+            if (s1CurrentIndex < FOUNDATION_QUESTIONS.length) {
+                renderStage1Question();
+            } else {
+                // Unlock Stage 2
+                document.getElementById('stage-1-view').style.display = 'none';
+                document.getElementById('stage-2-view').style.display = 'block';
+                initStage2();
+            }
+        });
+
+        // Stage 2 Next Button Listener
+        document.getElementById('s2-next-btn').addEventListener('click', () => {
+            s2CurrentIndex++;
+            if (s2CurrentIndex < s2Questions.length) {
+                renderStage2Question();
+            } else {
+                // Stage 2 Finished -> Check if All 5 Correct
+                document.getElementById('stage-2-view').style.display = 'none';
+                if (s2CorrectCount === 5) {
+                    document.getElementById('result-banner-pass').style.display = 'block';
+                    trackComplete();
+                } else {
+                    document.getElementById('result-banner-fail').style.display = 'block';
+                    document.getElementById('fail-message-text').textContent = `您答對了 ${s2CorrectCount} / 5 題。關卡要求必須 5 題全對才能通關，請重試！`;
+                }
+            }
+        });
+
+        // Restart Full Quiz
+        document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+            document.getElementById('result-banner-pass').style.display = 'none';
+            document.getElementById('stage-1-view').style.display = 'block';
+            document.getElementById('stage-2-view').style.display = 'none';
+            s1CurrentIndex = 0;
+            initStage1();
+        });
+
+        // Retry Stage 2
+        document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            document.getElementById('result-banner-fail').style.display = 'none';
+            document.getElementById('stage-2-view').style.display = 'block';
+            initStage2();
+        });
+    });
+
+    // RENDER STAGE 1
+    function initStage1() {
+        s1CurrentIndex = 0;
+        renderStage1Question();
+    }
+
+    function renderStage1Question() {
+        s1AnsweredCorrect = false;
+        const q = FOUNDATION_QUESTIONS[s1CurrentIndex];
+        
+        document.getElementById('s1-progress-text').textContent = `第一關｜先備知識建構：${s1CurrentIndex + 1}／6`;
+        document.getElementById('s1-question-text').textContent = q.title;
+        
+        const optionsContainer = document.getElementById('s1-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s1-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s1-next-btn');
+        nextBtn.disabled = true;
+
+        q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optText;
+
+            btn.addEventListener('click', () => {
+                if (s1AnsweredCorrect) return;
+                trackAnswer(q.id, optIdx === q.answer);
+
+                if (optIdx === q.answer) {
+                    // Correct
+                    btn.classList.add('correct');
+                    s1AnsweredCorrect = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>核心解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    
+                    // Disable all options
+                    const allOpts = optionsContainer.querySelectorAll('.option-button');
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    // Wrong
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--warning)';
+                    hintBox.innerHTML = `<strong>再試一次！</strong>${q.hint}`;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // RENDER STAGE 2
+    function initStage2() {
+        s2CurrentIndex = 0;
+        s2CorrectCount = 0;
+
+        // Shuffle Stage 2 Questions and Options
+        s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
+            const optionsWithOrigIdx = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+            const shuffledOpts = shuffleArray(optionsWithOrigIdx);
+            return {
+                ...q,
+                shuffledOpts: shuffledOpts
+            };
+        });
+
+        renderStage2Question();
+    }
+
+    function renderStage2Question() {
+        s2AnsweredCorrect = false;
+        const q = s2Questions[s2CurrentIndex];
+
+        document.getElementById('s2-progress-text').textContent = `第二關｜實務病例應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s2-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s2-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s2-next-btn');
+        nextBtn.disabled = true;
+
+        q.shuffledOpts.forEach((optObj) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optObj.text;
+
+            btn.addEventListener('click', () => {
+                if (s2AnsweredCorrect) return;
+                trackAnswer(q.id, optObj.isCorrect);
+
+                const allOpts = optionsContainer.querySelectorAll('.option-button');
+
+                if (optObj.isCorrect) {
+                    btn.classList.add('correct');
+                    s2AnsweredCorrect = true;
+                    s2CorrectCount++;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>答對了！正解解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    btn.classList.add('wrong');
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--danger)';
+                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
+                    
+                    // Highlight the correct one
+                    q.shuffledOpts.forEach((o, i) => {
+                        if (o.isCorrect) {
+                            allOpts[i].classList.add('correct');
+                        }
+                    });
+
+                    allOpts.forEach(b => b.disabled = true);
+                    nextBtn.disabled = false;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+</script>
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+
+</body>
+</html>
