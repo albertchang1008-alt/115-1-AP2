@@ -487,7 +487,10 @@ function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: stri
     link: { label: '外部連結', Icon: ExternalLink },
     quiz: { label: '小測驗', Icon: ListChecks },
   } as const;
-  const contentType = contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
+  // 一般閱讀的 HTML 沒有闖關與診斷，不能標成互動資訊圖表，否則學生點開會落差。
+  const contentType = activity.type === 'html' && activity.tracking !== 'interactive'
+    ? { label: '閱讀教材', Icon: BookOpen }
+    : contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
   return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${contentType.label}，${label}，${state}`}><div className="activitycard-tags"><span className="activity-type"><contentType.Icon size={15} aria-hidden="true" />{contentType.label}</span><span className="badge">{label}</span></div><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
 function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {

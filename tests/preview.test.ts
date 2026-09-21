@@ -110,6 +110,8 @@ test('學習活動卡會分別標示內容類型與完成要求', async () => {
   assert.match(card, /互動資訊圖表/);
   assert.match(card, /外部連結/);
   assert.match(card, /小測驗/);
+  assert.match(card, /閱讀教材/, '一般閱讀的 HTML 不標成互動資訊圖表');
+  assert.match(card, /activity\.tracking !== 'interactive'/);
   assert.match(card, /className="activitycard-tags"/);
   assert.match(card, /className="activity-type"/);
   assert.match(css, /\.activitycard-tags \{ display:flex/);
