@@ -28,6 +28,8 @@
 
 三份均加入即時解釋、非計分的預測題、`prefers-reduced-motion` 支援；每份均載入 `course-learning.js`，以專屬節點 ID 記錄 6 個探索節點，既有 6 題先備＋5 題病例為唯一正式診斷分母，病例五題全對才通關。預測題／滑桿不記錄為診斷事件，避免污染分母。`tests/material.test.ts` 新增三份教材靜態驗證；內嵌 JS 語法檢查、`npm test` 83 項、`npm run build`、`git diff --check` 均通過。Mac 鎖定使瀏覽器人工預覽暫不可用；正式發布前仍須將核定檔複製到 `public/materials/<version>/index.html`、登錄教材目錄及教師活動設定（6 節點／11 題）。工作目錄中的 `public/materials/coagulation-v1/` 是既有未追蹤資料，本次未碰。
 
+教材工作室匯入建議版本代號／標題：`heart-structure-v1`／「心臟構造與解剖生理圖卡」、`coronary-circulation-v1`／「心臟血液供應（冠狀循環）圖卡」、`rbc-homeostasis-v1`／「紅血球恆定機制圖卡」。每份匯入後執行稽核並人工填探索節點 `6`、闖關題目 `11`；完成條件補充可填「先備 6 題與病例 5 題皆須全對才通關」。工作室會建立正式 `public/materials/<slug>/index.html`、更新 `shared/materials.ts` 與 README，但不會 commit、push 或部署；勿誤選既有未追蹤 `coagulation-v1`。
+
 ### 新增心臟／紅血球 HTML：已完成唯讀檢視，待教師核定改善計畫（2026-09-21，Codex）
 
 教師要求先檢視新檔、提出「更生動活潑」計畫，核定後才實作；因此本輪**沒有修改 HTML、沒有 push 或部署**。檢視的未追蹤檔為 `html/心臟構造.html`、`html/心臟血液供應.html`、`html/紅血球的恆定機制.html`：三者各有 6 個 SVG 圖解節點、分類篩選、流程導覽及 6 題基礎＋5 題病例的兩階段診斷；目前都沒有載入 `materials/course-learning.js`、也沒有 `CourseLearning` 事件，尚不能作為平台正式追蹤教材。教師另要求先看範例，已生成「紅血球 EPO 負回饋」的**純預覽**視覺稿（未放入 repo、不是正式教材資產）：以缺氧程度控制器驅動組織缺氧→腎臟 EPO→紅骨髓造血→攜氧恢復，並附一題預測。待教師確認計畫後，先進行三份共用互動骨架與 SDK／穩定 ID 整合，再依主題做心臟血流、冠狀灌流與 EPO 負回饋的專屬互動；完成驗收才複製進 `public/materials/<version>/index.html`、更新教材目錄與活動分母，最後才可隨核定範圍提交／push。
