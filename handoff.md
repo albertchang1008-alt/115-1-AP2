@@ -19,6 +19,10 @@
 
 ---
 
+### 交給 Codex：三份新教材改善（2026-09-21，教師發包）
+
+規格：`docs/MATERIAL_POLISH_2026-09-21.md`。任務 1 紅血球恆定全流程圖手機改直式、任務 2 第一關選項洗牌——直接實作；任務 3 第二關重試鑑別度——**只提方案，等教師選擇**。節點／題目 ID 與 6／11 分母不可變動。在 `feature/1.4.0-unit-model` 接續提交，完成後不 push、不部署、不匯入教材工作室，標示「教材改善待 Claude 驗收」。
+
 ### Claude 驗收 Codex 2026-09-21 工作＋活動卡標籤修正（2026-09-21，Claude）
 
 **活動卡標籤（d84f656）**：驗收通過，另修正一點——一般閱讀的 HTML 改標「閱讀教材」，只有 `tracking === 'interactive'` 才標「互動資訊圖表」（src/Student.tsx、tests/preview.test.ts）。`tsc -b` 通過；前端測試因 Claude 環境的 esbuild 平台不符無法執行，新斷言已以原始碼比對確認，請推送前由教師或 Codex 跑 `npm test`。
