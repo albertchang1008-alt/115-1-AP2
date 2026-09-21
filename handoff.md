@@ -19,6 +19,10 @@
 
 ---
 
+### 新增心臟／紅血球 HTML：已完成唯讀檢視，待教師核定改善計畫（2026-09-21，Codex）
+
+教師要求先檢視新檔、提出「更生動活潑」計畫，核定後才實作；因此本輪**沒有修改 HTML、沒有 push 或部署**。檢視的未追蹤檔為 `html/心臟構造.html`、`html/心臟血液供應.html`、`html/紅血球的恆定機制.html`：三者各有 6 個 SVG 圖解節點、分類篩選、流程導覽及 6 題基礎＋5 題病例的兩階段診斷；目前都沒有載入 `materials/course-learning.js`、也沒有 `CourseLearning` 事件，尚不能作為平台正式追蹤教材。待教師確認計畫後，先進行三份共用互動骨架與 SDK／穩定 ID 整合，再依主題做心臟血流、冠狀灌流與 EPO 負回饋的專屬互動；完成驗收才複製進 `public/materials/<version>/index.html`、更新教材目錄與活動分母，最後才可隨核定範圍提交／push。
+
 ### 學習活動內容類型標籤（2026-09-21，Codex）：已提交，純前端
 
 教師希望學生在單元「學習活動」清單可立即分辨內容是影片或資訊圖表。已在每張活動卡的原有「必做／選看」要求徽章旁，新增圖示＋內容類型標籤：`YouTube 影片`、`互動資訊圖表`、`外部連結`、`小測驗`；完成狀態與活動行為不變。修改 `src/Student.tsx`、`src/style.css`、`tests/preview.test.ts`，不改 Functions、Firestore 或教材資料。驗證：以 Node 22.23.2 執行 `npm test`（82 項）、`npm run build`、`git diff --check` 皆通過。已提交於本機 `feature/1.4.0-unit-model`，尚未推送、合併或部署。工作目錄另有使用者未追蹤的 `public/materials/coagulation-v1/`，本次未碰。
