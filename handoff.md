@@ -50,7 +50,7 @@
 - 教師明確要求執行任務 3，已將三份教材的情境實驗室改為四張有醫學插圖主角的流程卡。`心臟構造.html` 依序呈現靜脈回流、房室瓣開啟、心室收縮／房室瓣關閉、半月瓣開啟／射血；`心臟血液供應.html` 呈現收縮、血管受壓、舒張、冠狀灌流；`紅血球的恆定機制.html` 依教師先前視覺稿呈現缺氧、腎臟 EPO、紅骨髓、紅血球攜氧恢復。桌機是四欄卡片與箭頭，手機沿用單欄堆疊；原本的控制器仍會高亮相關卡片。
 - 使用 built-in ImageGen 生成三張不含文字的四格醫學插圖，分別存為 `html/assets/heart-valve-flow-strip-v1.png`、`html/assets/coronary-perfusion-flow-strip-v1.png`、`html/assets/rbc-epo-feedback-strip-v1.png`。圖片只負責視覺主角；標題、說明與狀態維持在 HTML，避免圖像文字失真並保留螢幕閱讀器語意。
 - 任務 3B 採已建議的 A＋C：第二關答錯時不再亮出正解或完整解析，只提供提示與「前往對應圖卡複習」按鈕；需完成短暫回讀後才能開啟整輪重試。這不改 `CourseLearning.answer` 的送出頻率、題目／節點 ID、6 節點／11 題分母或全對通關規則。
-- 驗證完成：內嵌 JS 語法檢查、`npm test` 85 項、`npm run build`、`git diff --check` 通過。尚待建立提交；不 push、不部署、不匯入教材工作室。CUA 仍受 `file://` Browser URL policy 阻擋，未能完成人工 390px／桌機畫面巡覽。**任務 3 實作待 Claude 驗收。**
+- 驗證完成：內嵌 JS 語法檢查、`npm test` 85 項、`npm run build`、`git diff --check` 通過。提交 `4b88abe feat: 重構三份教材情境流程與回讀重試 [Codex]`；不 push、不部署、不匯入教材工作室。CUA 仍受 `file://` Browser URL policy 阻擋，未能完成人工 390px／桌機畫面巡覽。**任務 3 實作待 Claude 驗收。**
 
 ### Claude 驗收 Codex 2026-09-21 工作＋活動卡標籤修正（2026-09-21，Claude）
 
