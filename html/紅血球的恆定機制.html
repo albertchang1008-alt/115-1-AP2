@@ -112,7 +112,7 @@
         .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
         .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
 
-        .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #fecaca; border-radius:18px; background:linear-gradient(135deg,#fff1f2 0%,#eff6ff 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; color:#b91c1c; }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; align-items:center; }.sim-step { min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.hypoxia-control { margin-top:16px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fecaca; }.hypoxia-control label { display:flex; justify-content:space-between; gap:12px; font-weight:800; }.hypoxia-control input { width:100%; margin:12px 0 4px; accent-color:var(--danger); }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; } @media (max-width:760px) { .sim-steps { grid-template-columns:1fr 28px 1fr; }.sim-arrow { transform:rotate(90deg); }.sim-step { min-height:76px; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+        .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #fecaca; border-radius:18px; background:linear-gradient(135deg,#fff1f2 0%,#eff6ff 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; line-height:1.35; color:#b91c1c; }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center; }.sim-step { min-width:0; min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; overflow-wrap:anywhere; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.hypoxia-control { margin-top:16px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fecaca; }.hypoxia-control label { display:flex; justify-content:space-between; gap:12px; font-weight:800; }.hypoxia-control input { width:100%; margin:12px 0 4px; accent-color:var(--danger); }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; }.rbc-overview { margin:16px 0; padding:12px; border:1px solid #fecaca; border-radius:14px; background:#fff; overflow-x:auto; }.rbc-overview svg { display:block; width:100%; min-width:720px; height:auto; } @media (max-width:760px) { .mission-lab { padding:18px; }.sim-steps { grid-template-columns:1fr; gap:7px; }.sim-arrow { display:none; }.sim-step { min-height:0; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
 
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
@@ -148,6 +148,26 @@
     <section class="mission-lab" aria-labelledby="rbc-lab-title">
         <h2 id="rbc-lab-title">🩸 情境實驗室｜啟動 EPO 負回饋</h2>
         <p>調整組織缺氧程度，追蹤腎臟、紅骨髓與紅血球如何共同恢復攜氧能力。</p>
+        <div class="rbc-overview" aria-label="紅血球恆定全流程圖">
+            <svg viewBox="0 0 920 430" role="img" aria-labelledby="rbc-overview-title rbc-overview-desc">
+                <title id="rbc-overview-title">紅血球恆定全流程</title><desc id="rbc-overview-desc">組織缺氧促使腎臟增加 EPO 分泌，紅骨髓造血並增加紅血球；老化紅血球由網狀內皮系統回收成分，形成恆定循環。</desc>
+                <defs><marker id="rbc-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#475569"/></marker><marker id="rbc-green-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#16a34a"/></marker></defs>
+                <text x="460" y="30" text-anchor="middle" font-size="20" font-weight="800" fill="#991b1b">紅血球恆定全流程：調節、生成、循環與回收</text>
+                <g font-family="system-ui, sans-serif" text-anchor="middle"><rect x="28" y="66" width="155" height="66" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="105" y="93" font-size="16" font-weight="800" fill="#9a3412">紅血球↓／缺氧</text><text x="105" y="116" font-size="13" fill="#7c2d12">高海拔、失血或供氧不足</text>
+                <rect x="240" y="66" width="150" height="66" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="315" y="93" font-size="16" font-weight="800" fill="#1d4ed8">腎臟感氧細胞</text><text x="315" y="116" font-size="13" fill="#1e40af">增加分泌 EPO</text>
+                <rect x="447" y="66" width="120" height="66" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="507" y="94" font-size="16" font-weight="800" fill="#6d28d9">EPO 入血</text><text x="507" y="116" font-size="13" fill="#5b21b6">造血訊號</text>
+                <rect x="624" y="66" width="125" height="66" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="686" y="93" font-size="16" font-weight="800" fill="#b91c1c">紅骨髓</text><text x="686" y="116" font-size="13" fill="#991b1b">促進紅血球生成</text>
+                <rect x="790" y="66" width="102" height="66" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/><text x="841" y="93" font-size="16" font-weight="800" fill="#be123c">紅血球↑</text><text x="841" y="116" font-size="13" fill="#9f1239">攜氧提升</text>
+                <path d="M184 99H238 M391 99H445 M568 99H622 M750 99H788" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="690" y="177" width="170" height="60" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="775" y="202" font-size="16" font-weight="800" fill="#334155">血液循環</text><text x="775" y="224" font-size="13" fill="#475569">平均壽命約 120 天</text><path d="M841 133V175" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="431" y="177" width="190" height="60" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="526" y="201" font-size="16" font-weight="800" fill="#15803d">網狀內皮系統</text><text x="526" y="224" font-size="13" fill="#166534">脾臟／肝臟吞噬老化紅血球</text><path d="M688 207H623" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="255" y="285" width="145" height="58" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="327" y="310" font-size="15" font-weight="800" fill="#15803d">Globin → 胺基酸</text><text x="327" y="331" font-size="13" fill="#166534">回收再利用</text>
+                <rect x="448" y="285" width="145" height="58" rx="12" fill="#fffbeb" stroke="#ca8a04" stroke-width="2"/><text x="520" y="310" font-size="15" font-weight="800" fill="#a16207">Heme → 鐵</text><text x="520" y="331" font-size="13" fill="#854d0e">回收送回骨髓</text>
+                <rect x="642" y="285" width="165" height="58" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="724" y="310" font-size="15" font-weight="800" fill="#c2410c">Heme → 膽紅素</text><text x="724" y="331" font-size="13" fill="#9a3412">膽汁、糞便；少量尿液</text>
+                <path d="M480 239L365 283 M526 239V283 M571 239L691 283" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/><path d="M520 284C565 245 650 202 685 134" fill="none" stroke="#ca8a04" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#rbc-arrow)"/>
+                <path d="M840 133C900 175 900 270 850 305C765 364 177 385 129 248C111 196 148 159 232 126" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#rbc-green-arrow)"/><rect x="276" y="372" width="366" height="36" rx="18" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="459" y="396" font-size="15" font-weight="800" fill="#15803d">攜氧恢復 → 缺氧刺激下降 → 腎臟 EPO 分泌下降（負回饋）</text></g>
+            </svg>
+        </div>
         <div class="sim-steps" aria-label="紅血球 EPO 負回饋流程"><div class="sim-step" data-rbc-step="0">組織缺氧<span>氧氣供應下降</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="1">腎臟分泌 EPO<span>發出造血訊號</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="2">紅骨髓造血<span>紅血球增加</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="3">攜氧恢復<span>回到恆定狀態</span></div></div>
         <div class="hypoxia-control"><label for="hypoxia-range">缺氧程度 <output id="hypoxia-value" for="hypoxia-range">中度</output></label><input id="hypoxia-range" type="range" min="0" max="2" value="1" step="1" aria-describedby="rbc-lab-status"><div>正常　　輕度　　中度</div></div>
         <div class="scenario-status" id="rbc-lab-status" aria-live="polite"></div>
@@ -319,10 +339,10 @@
                 </div>
                 <span class="card-badge bg-hematopoiesis">造血與調控</span>
                 <h2 class="card-heading">2. 組織缺氧與腎臟 EPO 負回饋調控</h2>
-                <div class="core-concept">當身體組織缺氧或紅血球數目減少時，腎臟感應刺激並促使血漿中產生紅血球生成素（Erythropoietin; EPO）以維持血液恆定。</div>
+                <div class="core-concept">當身體組織缺氧或紅血球數目減少時，腎臟感氧細胞增加分泌紅血球生成素（Erythropoietin; EPO），以維持血液恆定。</div>
                 <ul class="features-list">
                     <li><strong>缺氧刺激：</strong>高山空氣稀薄、失血、紅血球破壞加速或組織缺氧（氧氣不足）時，觸發調節機制。</li>
-                    <li><strong>EPO 機制：</strong>腎臟（近腎絲球器）受刺激釋放紅血球生成因子，使血漿中紅血球生成素原轉變成紅血球生成素（EPO）。</li>
+                    <li><strong>EPO 機制：</strong>腎臟感氧細胞受缺氧刺激，直接增加 EPO 分泌；EPO 隨血液循環抵達紅骨髓。</li>
                     <li><strong>骨髓響應：</strong>EPO 隨血液循環至紅骨髓，刺激幹細胞發育造血（成人約 1 × 10¹⁰ 個/小時）。</li>
                 </ul>
                 <div class="clinical-box">
@@ -333,29 +353,20 @@
             <!-- Node 3 Detail -->
             <div class="detail-card" id="node-card-03" data-category="structure">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <g transform="translate(10,10)">
-                            <!-- RBC Biconcave -->
-                            <ellipse cx="60" cy="50" rx="40" ry="22" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
-                            <ellipse cx="60" cy="50" rx="20" ry="8" fill="#fca5a5"/>
-                            <text x="60" y="88" font-size="9" fill="#991b1b" text-anchor="middle" font-weight="bold">直徑 7.5 µm (雙凹圓盤)</text>
-
-                            <!-- Hemoglobin Structure -->
-                            <rect x="130" y="15" width="170" height="70" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
-                            <text x="215" y="32" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">血紅素 (HbA: α₂β₂)</text>
-                            <circle cx="160" cy="55" r="10" fill="#dc2626"/>
-                            <text x="160" y="58" font-size="8" fill="#fff" text-anchor="middle">Fe²⁺</text>
-                            <circle cx="195" cy="55" r="10" fill="#dc2626"/>
-                            <text x="195" y="58" font-size="8" fill="#fff" text-anchor="middle">Fe²⁺</text>
-                            <circle cx="230" cy="55" r="10" fill="#dc2626"/>
-                            <text x="230" y="58" font-size="8" fill="#fff" text-anchor="middle">Fe²⁺</text>
-                            <circle cx="265" cy="55" r="10" fill="#dc2626"/>
-                            <text x="265" y="58" font-size="8" fill="#fff" text-anchor="middle">Fe²⁺</text>
-                            <text x="215" y="78" font-size="8" fill="#475569" text-anchor="middle">4個血基質(含Fe)可攜帶 4 個 O₂ 分子</text>
-
-                            <!-- CO2 Transport Box -->
-                            <rect x="10" y="105" width="290" height="30" fill="#eff6ff" stroke="#2563eb" rx="4"/>
-                            <text x="155" y="124" font-size="9" fill="#1e40af" text-anchor="middle" font-weight="bold">CO₂ 運輸：70% 碳酸氫根 (HCO₃⁻/經CA酵素) | 23% 碳醯胺基血紅素 | 7% 血漿溶解</text>
+                    <svg viewBox="0 0 520 295" role="img" aria-labelledby="hb-title hb-desc">
+                        <title id="hb-title">成人主要血紅素 HbA 的四聚體構造</title><desc id="hb-desc">HbA 由兩個 alpha 與兩個 beta 珠蛋白次單元組成，每個次單元各有一個含亞鐵離子的 heme，可各結合一個氧分子。</desc>
+                        <g font-family="system-ui, sans-serif">
+                            <ellipse cx="78" cy="86" rx="57" ry="30" fill="#fef2f2" stroke="#dc2626" stroke-width="4"/><ellipse cx="78" cy="86" rx="30" ry="11" fill="#fca5a5"/>
+                            <text x="78" y="137" font-size="13" fill="#991b1b" text-anchor="middle" font-weight="800">紅血球：雙凹圓盤</text><text x="78" y="156" font-size="12" fill="#991b1b" text-anchor="middle">直徑約 7.5 µm</text>
+                            <rect x="165" y="18" width="330" height="152" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/><text x="330" y="42" font-size="18" fill="#0f172a" text-anchor="middle" font-weight="800">HbA：α₂β₂（四聚體）</text>
+                            <g><rect x="190" y="57" width="104" height="42" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="242" y="82" font-size="14" fill="#1d4ed8" text-anchor="middle" font-weight="800">α 珠蛋白</text><circle cx="216" cy="105" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="216" cy="105" r="6" fill="#dc2626"/><text x="216" y="109" font-size="9" fill="#fff" text-anchor="middle" font-weight="800">Fe²⁺</text><text x="242" y="123" font-size="11" fill="#92400e" text-anchor="middle">heme</text></g>
+                            <g><rect x="365" y="57" width="104" height="42" rx="18" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/><text x="417" y="82" font-size="14" fill="#b91c1c" text-anchor="middle" font-weight="800">β 珠蛋白</text><circle cx="443" cy="105" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="443" cy="105" r="6" fill="#dc2626"/><text x="443" y="109" font-size="9" fill="#fff" text-anchor="middle" font-weight="800">Fe²⁺</text><text x="417" y="123" font-size="11" fill="#92400e" text-anchor="middle">heme</text></g>
+                            <g><rect x="190" y="127" width="104" height="42" rx="18" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/><text x="242" y="152" font-size="14" fill="#b91c1c" text-anchor="middle" font-weight="800">β 珠蛋白</text><circle cx="216" cy="175" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="216" cy="175" r="6" fill="#dc2626"/><text x="216" y="179" font-size="9" fill="#fff" text-anchor="middle" font-weight="800">Fe²⁺</text><text x="242" y="193" font-size="11" fill="#92400e" text-anchor="middle">heme</text></g>
+                            <g><rect x="365" y="127" width="104" height="42" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="417" y="152" font-size="14" fill="#1d4ed8" text-anchor="middle" font-weight="800">α 珠蛋白</text><circle cx="443" cy="175" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="443" cy="175" r="6" fill="#dc2626"/><text x="443" y="179" font-size="9" fill="#fff" text-anchor="middle" font-weight="800">Fe²⁺</text><text x="417" y="193" font-size="11" fill="#92400e" text-anchor="middle">heme</text></g>
+                            <text x="330" y="221" font-size="13" fill="#334155" text-anchor="middle" font-weight="700">每個珠蛋白次單元包覆 1 個 heme；heme 中心 Fe²⁺ 可逆結合 1 個 O₂</text><text x="330" y="242" font-size="14" fill="#15803d" text-anchor="middle" font-weight="800">合計最多攜帶 4 個 O₂ 分子</text>
+                            <rect x="20" y="252" width="155" height="30" rx="8" fill="#eff6ff" stroke="#2563eb"/><text x="97" y="271" font-size="10" fill="#1e40af" text-anchor="middle" font-weight="800">CO₂：70% HCO₃⁻（CA）</text>
+                            <rect x="184" y="252" width="155" height="30" rx="8" fill="#f5f3ff" stroke="#7c3aed"/><text x="261" y="271" font-size="10" fill="#5b21b6" text-anchor="middle" font-weight="800">23% 碳醯胺基 Hb</text>
+                            <rect x="348" y="252" width="152" height="30" rx="8" fill="#f0fdf4" stroke="#16a34a"/><text x="424" y="271" font-size="10" fill="#166534" text-anchor="middle" font-weight="800">7% 溶於血漿</text>
                         </g>
                     </svg>
                 </div>
@@ -364,7 +375,7 @@
                 <div class="core-concept">成熟紅血球呈雙凹圓盤狀以增加表面積，內含血紅素（Hb）與碳酸酐酶，專司氧氣與二氧化碳之運輸。</div>
                 <ul class="features-list">
                     <li><strong>雙凹圓盤構造：</strong>無細胞核與胞器，雙凹形狀增大了表面積與體積比，利於氣體快速擴散並通過微血管。</li>
-                    <li><strong>血紅素攜氧：</strong>血紅素（HbA）含 4 個血球素（Globin）與 4 個含鐵血基質（Heme），每克 Hb 可攜帶 1.34 ml O₂。</li>
+                    <li><strong>血紅素攜氧：</strong>成人主要 HbA 是 α₂β₂ 四聚體（2 個 α、2 個 β 珠蛋白次單元）；每個次單元各包覆 1 個含 Fe²⁺ 的 heme，因此每個 Hb 最多可逆結合 4 個 O₂。</li>
                     <li><strong>二氧化碳運輸：</strong>70% 以碳酸氫根（HCO₃⁻）形式運送（經碳酸酐酶 CA 催化），23% 與血球素結合，7% 直接溶於血漿。</li>
                 </ul>
                 <div class="clinical-box">

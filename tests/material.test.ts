@@ -127,7 +127,20 @@ test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階�
     assert.equal((html.match(new RegExp(`id: '${prefix}-foundation-q\\d\\d'`, 'g')) || []).length, 6);
     assert.equal((html.match(new RegExp(`id: '${prefix}-case-q\\d\\d'`, 'g')) || []).length, 5);
     assert.match(html, /trackComplete\(\)/);
+    assert.match(html, /grid-template-columns:minmax\(0,1fr\) auto/);
+    assert.match(html, /\.sim-arrow \{ display:none; \}/);
   }
+});
+
+test('紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制', async () => {
+  const html = await readFile(new URL('../html/紅血球的恆定機制.html', import.meta.url), 'utf8');
+  assert.match(html, /紅血球恆定全流程/);
+  assert.match(html, /HbA：α₂β₂（四聚體）/);
+  assert.match(html, /每個珠蛋白次單元包覆 1 個 heme/);
+  assert.match(html, /heme 中心 Fe²⁺ 可逆結合 1 個 O₂/);
+  assert.match(html, /合計最多攜帶 4 個 O₂ 分子/);
+  assert.match(html, /網狀內皮系統/);
+  assert.match(html, /攜氧恢復 → 缺氧刺激下降/);
 });
 
 test('血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤', async () => {
