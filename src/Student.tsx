@@ -10,6 +10,10 @@ import {
   ChevronRight,
   Settings2,
   X,
+  Youtube as YoutubeIcon,
+  Image as ImageIcon,
+  ExternalLink,
+  ListChecks,
 } from 'lucide-react';
 import {
   Course,
@@ -477,7 +481,14 @@ function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: stri
   const done = !!progress.activities[`${ownerKey}_${activity.id}`]?.completed;
   const label = activity.type === 'youtube' ? '選看' : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
   const state = activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
-  return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${label}，${state}`}><span className="badge">{label}</span><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
+  const contentTypes = {
+    youtube: { label: 'YouTube 影片', Icon: YoutubeIcon },
+    html: { label: '互動資訊圖表', Icon: ImageIcon },
+    link: { label: '外部連結', Icon: ExternalLink },
+    quiz: { label: '小測驗', Icon: ListChecks },
+  } as const;
+  const contentType = contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
+  return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${contentType.label}，${label}，${state}`}><div className="activitycard-tags"><span className="activity-type"><contentType.Icon size={15} aria-hidden="true" />{contentType.label}</span><span className="badge">{label}</span></div><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
 function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };

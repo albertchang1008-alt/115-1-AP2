@@ -1030,6 +1030,8 @@ dd {
 .unit-tabs small { display:block; font-size:.75rem; }
 .activitycards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
 .activitycard { text-align:left; min-height:130px; display:block; padding:16px; }
+.activitycard-tags { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+.activity-type { display:inline-flex; align-items:center; gap:5px; color:var(--muted); font-size:calc(12px * var(--font-scale, 1)); font-weight:700; }
 .activitycard h3 { margin:8px 0; }.activitycard footer { display:flex; gap:6px; align-items:center; margin-top:12px; }
 .practice-list { display:grid; gap:8px; }
 .practice-note { margin:0 0 4px; }

@@ -102,6 +102,19 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
 });
+test('學習活動卡會分別標示內容類型與完成要求', async () => {
+  const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
+  const card = source.slice(source.indexOf('function ActivityCard('), source.indexOf('function ReadingPage('));
+  assert.match(card, /YouTube 影片/);
+  assert.match(card, /互動資訊圖表/);
+  assert.match(card, /外部連結/);
+  assert.match(card, /小測驗/);
+  assert.match(card, /className="activitycard-tags"/);
+  assert.match(card, /className="activity-type"/);
+  assert.match(css, /\.activitycard-tags \{ display:flex/);
+  assert.match(css, /\.activity-type \{ display:inline-flex/);
+});
 test('練習分頁每個題目分類是一列並保留四種入口', async () => {
   const [source, css] = await Promise.all([
     readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'),

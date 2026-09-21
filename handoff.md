@@ -19,6 +19,10 @@
 
 ---
 
+### 學習活動內容類型標籤（2026-09-21，Codex）：已提交，純前端
+
+教師希望學生在單元「學習活動」清單可立即分辨內容是影片或資訊圖表。已在每張活動卡的原有「必做／選看」要求徽章旁，新增圖示＋內容類型標籤：`YouTube 影片`、`互動資訊圖表`、`外部連結`、`小測驗`；完成狀態與活動行為不變。修改 `src/Student.tsx`、`src/style.css`、`tests/preview.test.ts`，不改 Functions、Firestore 或教材資料。驗證：以 Node 22.23.2 執行 `npm test`（82 項）、`npm run build`、`git diff --check` 皆通過。已提交於本機 `feature/1.4.0-unit-model`，尚未推送、合併或部署。工作目錄另有使用者未追蹤的 `public/materials/coagulation-v1/`，本次未碰。
+
 ### ✅ 已部署：分類名稱跟隨 Sheet ＋ 教材診斷 INTERNAL（2026-09-20）
 
 教師執行 `scripts/deploy.sh` 完成：`npm run check` 通過（前端 81、Functions 14）、37 個函式 Successful update、Deploy complete、`origin/main` cbb3d50..fe766c6（Pages Actions 另行確認）。本機仍在 `feature/1.4.0-unit-model`。
