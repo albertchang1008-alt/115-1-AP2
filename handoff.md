@@ -26,7 +26,7 @@
 - 三份教材的流程卡在桌機使用四張等寬卡與獨立箭頭；≤760px 改為單欄卡片，隱藏裝飾箭頭，消除先前兩欄格把長中文擠成直排或溢出框的問題。
 - 驗證：內嵌 JavaScript 語法檢查、`npm test` 84 項、`npm run build`、`git diff --check` 通過。CUA 對本機 `file://` 預覽受 Browser URL policy 阻擋，未能以其截圖巡覽；仍可在教材工作室匯入前由教師瀏覽更新的本機檔確認。尚未 push、未部署。`public/materials/coagulation-v1/` 仍是既有未追蹤資料，本次未碰。
 
-**目前分支／提交前狀態：** `feature/1.4.0-unit-model`，上游為 `origin/feature/1.4.0-unit-model`，此前為 ahead 5；本次變更尚未提交。下一步：提交這批修正（訊息末尾加 `[Codex]`），待教師明確授權後才推至 feature 分支；之後以更新後的三份 `html/*.html` 分別匯入教材工作室並執行稽核。
+**目前分支／提交狀態：** `feature/1.4.0-unit-model`，提交 `cd0fc64 fix: 修正血紅素圖與教材響應式排版 [Codex]`；上游為 `origin/feature/1.4.0-unit-model`，尚未推送（累計 ahead 6）。下一步：待教師明確授權後才推至 feature 分支；之後以更新後的三份 `html/*.html` 分別匯入教材工作室並執行稽核。
 
 ### 心臟／紅血球三份 HTML 情境實驗室（2026-09-21，Codex）：已完成，待 push；尚未正式發布教材目錄
 
