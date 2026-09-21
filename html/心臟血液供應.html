@@ -808,7 +808,9 @@
         const nextBtn = document.getElementById('s1-next-btn');
         nextBtn.disabled = true;
 
-        q.options.forEach((optText, optIdx) => {
+        // 題目順序固定，但每次呈現時洗牌選項；正解以 isCorrect 保留，不依賴原始位置。
+        const shuffledOptions = shuffleArray(q.options.map((text, index) => ({ text, isCorrect: index === q.answer })));
+        shuffledOptions.forEach(({ text: optText, isCorrect }) => {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'option-button';
@@ -816,9 +818,9 @@
 
             btn.addEventListener('click', () => {
                 if (s1AnsweredCorrect) return;
-                trackAnswer(q.id, optIdx === q.answer);
+                trackAnswer(q.id, isCorrect);
 
-                if (optIdx === q.answer) {
+                if (isCorrect) {
                     // Correct
                     btn.classList.add('correct');
                     s1AnsweredCorrect = true;

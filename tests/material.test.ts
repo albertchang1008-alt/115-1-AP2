@@ -129,6 +129,9 @@ test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階�
     assert.match(html, /trackComplete\(\)/);
     assert.match(html, /grid-template-columns:minmax\(0,1fr\) auto/);
     assert.match(html, /\.sim-arrow \{ display:none; \}/);
+    assert.match(html, /const shuffledOptions = shuffleArray\(q\.options\.map\(\(text, index\) => \(\{ text, isCorrect: index === q\.answer \}\)\)\)/);
+    assert.match(html, /shuffledOptions\.forEach\(\(\{ text: optText, isCorrect \}\) =>/);
+    assert.match(html, /trackAnswer\(q\.id, isCorrect\)/);
   }
 });
 
@@ -141,6 +144,11 @@ test('紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制', async 
   assert.match(html, /合計最多攜帶 4 個 O₂ 分子/);
   assert.match(html, /網狀內皮系統/);
   assert.match(html, /攜氧恢復 → 缺氧刺激下降/);
+  assert.match(html, /rbc-overview-mobile/);
+  assert.match(html, /viewBox="0 0 360 850"/);
+  assert.match(html, /\.rbc-overview \{[^}]*overflow:hidden/);
+  assert.match(html, /\.rbc-overview \.rbc-overview-mobile \{ display:block !important; min-width:0; \}/);
+  assert.doesNotMatch(html, /\.rbc-overview \{[^}]*overflow-x:auto/);
 });
 
 test('血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤', async () => {
