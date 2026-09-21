@@ -43,6 +43,8 @@
 
 **驗證／狀態：** 三份內嵌 JavaScript 語法檢查、`npm test` 84 項、`npm run build`、`git diff --check` 通過。CUA 對本機 `file://` 預覽受 Browser URL policy 阻擋，無法完成規格要求的 390px 與桌機人工巡覽，已保留此風險待後續驗收。此次未 push、未部署、未匯入教材工作室；`public/materials/coagulation-v1/` 是既有未追蹤資料，未碰。**教材改善待 Claude 驗收。**
 
+**提交狀態：** 已提交 `a30fcb3 fix: 改善教材手機流程與選項洗牌 [Codex]`；不 push。
+
 ### Claude 驗收 Codex 2026-09-21 工作＋活動卡標籤修正（2026-09-21，Claude）
 
 **活動卡標籤（d84f656）**：驗收通過，另修正一點——一般閱讀的 HTML 改標「閱讀教材」，只有 `tracking === 'interactive'` 才標「互動資訊圖表」（src/Student.tsx、tests/preview.test.ts）。`tsc -b` 通過；前端測試因 Claude 環境的 esbuild 平台不符無法執行，新斷言已以原始碼比對確認，請推送前由教師或 Codex 跑 `npm test`。
