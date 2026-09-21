@@ -132,6 +132,11 @@ test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階�
     assert.match(html, /const shuffledOptions = shuffleArray\(q\.options\.map\(\(text, index\) => \(\{ text, isCorrect: index === q\.answer \}\)\)\)/);
     assert.match(html, /shuffledOptions\.forEach\(\(\{ text: optText, isCorrect \}\) =>/);
     assert.match(html, /trackAnswer\(q\.id, isCorrect\)/);
+    assert.match(html, /visual-flow-card/);
+    assert.match(html, /CASE_REVIEW_NODE_IDS/);
+    assert.match(html, /前往對應圖卡複習/);
+    assert.match(html, /s2ReviewRequired && !s2ReviewReady/);
+    assert.doesNotMatch(html, /答錯了！正解解析/);
   }
 });
 
@@ -149,6 +154,19 @@ test('紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制', async 
   assert.match(html, /\.rbc-overview \{[^}]*overflow:hidden/);
   assert.match(html, /\.rbc-overview \.rbc-overview-mobile \{ display:block !important; min-width:0; \}/);
   assert.doesNotMatch(html, /\.rbc-overview \{[^}]*overflow-x:auto/);
+  assert.match(html, /assets\/rbc-epo-feedback-strip-v1\.png/);
+});
+
+test('情境實驗室的四卡醫學插圖已隨三份教材提供', async () => {
+  const assets = [
+    '../html/assets/heart-valve-flow-strip-v1.png',
+    '../html/assets/coronary-perfusion-flow-strip-v1.png',
+    '../html/assets/rbc-epo-feedback-strip-v1.png',
+  ];
+  for (const asset of assets) {
+    const image = await readFile(new URL(asset, import.meta.url));
+    assert.deepEqual([...image.subarray(1, 4)], [80, 78, 71]);
+  }
 });
 
 test('血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤', async () => {

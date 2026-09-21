@@ -120,6 +120,8 @@
         @media (max-width:760px) { .mission-lab { padding:18px; }.sim-steps { grid-template-columns:1fr; gap:7px; }.sim-arrow { display:none; }.sim-step { min-height:0; } }
         @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
 
+        .visual-flow .sim-step { padding:10px 10px 12px; }.visual-art { height:128px; margin:-2px -2px 9px; border-radius:12px; background-image:var(--flow-art); background-repeat:no-repeat; background-size:400% 100%; background-position:var(--flow-position) center; }.visual-flow-card { position:relative; }.visual-flow-card strong { display:block; color:#1e3a5f; }.visual-flow-card span { line-height:1.35; }.visual-flow .sim-arrow { font-size:2rem; font-weight:800; color:#ef4444; } @media (max-width:760px) { .visual-art { height:170px; background-size:100% 400%; background-position:center var(--flow-mobile-position); }.visual-flow .sim-step { padding:12px; } }
+
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
 </head>
@@ -154,7 +156,12 @@
     <section class="mission-lab" aria-labelledby="heart-lab-title">
         <h2 id="heart-lab-title">🫀 情境實驗室｜讓血液走對路</h2>
         <p>切換心室收縮與舒張，觀察瓣膜如何維持單向血流；再先預測下一個步驟。</p>
-        <div class="sim-steps" aria-label="心臟血流與瓣膜機制"><div class="sim-step" data-heart-step="0">心房充盈<span>血液回到心房</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="1">房室瓣開啟<span>流入心室</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="2">心室收縮<span>房室瓣關閉</span></div><div class="sim-arrow">→</div><div class="sim-step" data-heart-step="3">半月瓣開啟<span>血液射入動脈</span></div></div>
+        <div class="sim-steps visual-flow" aria-label="心臟血流與瓣膜機制" style="--flow-art:url('assets/heart-valve-flow-strip-v1.png')">
+            <div class="sim-step visual-flow-card" data-heart-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>心房充盈</strong><span>靜脈血回到心房</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-heart-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>房室瓣開啟</strong><span>血液流入心室</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-heart-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>心室收縮</strong><span>房室瓣關閉</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-heart-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"></div><strong>半月瓣開啟</strong><span>血液射入動脈</span></div>
+        </div>
         <div class="scenario-controls"><strong>心跳階段：</strong><button class="scenario-option" type="button" data-heart-phase="fill" aria-pressed="true">舒張期・充盈</button><button class="scenario-option" type="button" data-heart-phase="pump" aria-pressed="false">收縮期・射血</button></div>
         <div class="scenario-status" id="heart-lab-status" aria-live="polite"></div>
         <div class="predict-card"><p>先猜一猜：心室開始收縮時，哪一組瓣膜必須先關閉？</p><button class="scenario-option" type="button" data-heart-answer="wrong">半月瓣</button><button class="scenario-option" type="button" data-heart-answer="correct">房室瓣</button><div class="predict-feedback" id="heart-predict-feedback" aria-live="polite"></div></div>
@@ -659,6 +666,9 @@
     let s2CurrentIndex = 0;
     let s2CorrectCount = 0;
     let s2AnsweredCorrect = false;
+    let s2ReviewRequired = false;
+    let s2ReviewReady = true;
+    const CASE_REVIEW_NODE_IDS = ['node-card-01', 'node-card-02', 'node-card-03', 'node-card-04', 'node-card-05'];
 
     // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
     document.addEventListener('DOMContentLoaded', () => {
@@ -794,6 +804,10 @@
 
         // Retry Stage 2
         document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            if (s2ReviewRequired && !s2ReviewReady) {
+                document.getElementById('fail-message-text').textContent = '請先點選答錯題目的「前往對應圖卡複習」，完成短暫複習後才能重新挑戰。';
+                return;
+            }
             document.getElementById('result-banner-fail').style.display = 'none';
             document.getElementById('stage-2-view').style.display = 'block';
             initStage2();
@@ -864,6 +878,8 @@
     function initStage2() {
         s2CurrentIndex = 0;
         s2CorrectCount = 0;
+        s2ReviewRequired = false;
+        s2ReviewReady = true;
 
         // Shuffle Stage 2 Questions and Options
         s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
@@ -919,15 +935,18 @@
                     btn.classList.add('wrong');
                     hintBox.style.display = 'block';
                     hintBox.style.borderLeftColor = 'var(--danger)';
-                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
-                    
-                    // Highlight the correct one
-                    q.shuffledOpts.forEach((o, i) => {
-                        if (o.isCorrect) {
-                            allOpts[i].classList.add('correct');
-                        }
+                    s2ReviewRequired = true;
+                    s2ReviewReady = false;
+                    const reviewNodeId = CASE_REVIEW_NODE_IDS[s2CurrentIndex];
+                    hintBox.innerHTML = `<strong>答錯了，先回到關鍵概念複習：</strong>${q.hint}<br><button type="button" class="scenario-option" id="s2-review-link">前往對應圖卡複習</button>`;
+                    document.getElementById('s2-review-link').addEventListener('click', (event) => {
+                        const reviewButton = event.currentTarget;
+                        document.getElementById('btn-mode-info').click();
+                        document.getElementById(reviewNodeId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        reviewButton.disabled = true;
+                        reviewButton.textContent = '已開始複習，稍候即可重試';
+                        setTimeout(() => { s2ReviewReady = true; reviewButton.textContent = '複習完成，可回到第二關重試'; }, 2000);
                     });
-
                     allOpts.forEach(b => b.disabled = true);
                     nextBtn.disabled = false;
                 }

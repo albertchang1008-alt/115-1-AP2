@@ -114,6 +114,8 @@
 
         .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #fecaca; border-radius:18px; background:linear-gradient(135deg,#fff1f2 0%,#eff6ff 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; line-height:1.35; color:#b91c1c; }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center; }.sim-step { min-width:0; min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; overflow-wrap:anywhere; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.hypoxia-control { margin-top:16px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fecaca; }.hypoxia-control label { display:flex; justify-content:space-between; gap:12px; font-weight:800; }.hypoxia-control input { width:100%; margin:12px 0 4px; accent-color:var(--danger); }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; }.rbc-overview { margin:16px 0; padding:12px; border:1px solid #fecaca; border-radius:14px; background:#fff; overflow:hidden; }.rbc-overview svg { display:block; width:100%; min-width:720px; height:auto; }.rbc-overview-mobile { display:none !important; } @media (max-width:760px) { .mission-lab { padding:18px; }.sim-steps { grid-template-columns:1fr; gap:7px; }.sim-arrow { display:none; }.sim-step { min-height:0; }.rbc-overview { padding:8px; }.rbc-overview .rbc-overview-desktop { display:none; }.rbc-overview .rbc-overview-mobile { display:block !important; min-width:0; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
 
+        .visual-flow .sim-step { padding:10px 10px 12px; }.visual-art { height:128px; margin:-2px -2px 9px; border-radius:12px; background-image:var(--flow-art); background-repeat:no-repeat; background-size:400% 100%; background-position:var(--flow-position) center; }.visual-flow-card { position:relative; }.visual-flow-card strong { display:block; color:#7f1d1d; }.visual-flow-card span { line-height:1.35; }.visual-flow .sim-arrow { font-size:2rem; font-weight:800; color:#ef4444; } @media (max-width:760px) { .visual-art { height:170px; background-size:100% 400%; background-position:center var(--flow-mobile-position); }.visual-flow .sim-step { padding:12px; } }
+
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
 </head>
@@ -185,7 +187,12 @@
                 <path d="M180 654V676" stroke="#ca8a04" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#rbc-mobile-arrow)"/><path d="M326 379C354 404 354 760 321 781C229 839 43 812 23 719C2 622 11 229 31 163" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#rbc-mobile-green)"/><rect x="52" y="772" width="256" height="42" rx="18" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="180" y="798" font-size="13" font-weight="800" fill="#15803d">攜氧恢復 → 缺氧刺激與 EPO 下降</text></g>
             </svg>
         </div>
-        <div class="sim-steps" aria-label="紅血球 EPO 負回饋流程"><div class="sim-step" data-rbc-step="0">組織缺氧<span>氧氣供應下降</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="1">腎臟分泌 EPO<span>發出造血訊號</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="2">紅骨髓造血<span>紅血球增加</span></div><div class="sim-arrow">→</div><div class="sim-step" data-rbc-step="3">攜氧恢復<span>回到恆定狀態</span></div></div>
+        <div class="sim-steps visual-flow" aria-label="紅血球 EPO 負回饋流程" style="--flow-art:url('assets/rbc-epo-feedback-strip-v1.png')">
+            <div class="sim-step visual-flow-card" data-rbc-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>組織缺氧</strong><span>氧氣供應下降</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>腎臟分泌 EPO</strong><span>發出造血訊號</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>紅骨髓造血</strong><span>紅血球增加</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"></div><strong>攜氧恢復</strong><span>回到恆定狀態</span></div>
+        </div>
         <div class="hypoxia-control"><label for="hypoxia-range">缺氧程度 <output id="hypoxia-value" for="hypoxia-range">中度</output></label><input id="hypoxia-range" type="range" min="0" max="2" value="1" step="1" aria-describedby="rbc-lab-status"><div>正常　　輕度　　中度</div></div>
         <div class="scenario-status" id="rbc-lab-status" aria-live="polite"></div>
         <div class="predict-card"><p>先猜一猜：長期居住高海拔環境，血中 EPO 濃度最可能如何變化？</p><button class="scenario-option" type="button" data-rbc-answer="wrong">下降</button><button class="scenario-option" type="button" data-rbc-answer="correct">上升</button><div class="predict-feedback" id="rbc-predict-feedback" aria-live="polite"></div></div>
@@ -759,6 +766,9 @@
     let s2CurrentIndex = 0;
     let s2CorrectCount = 0;
     let s2AnsweredCorrect = false;
+    let s2ReviewRequired = false;
+    let s2ReviewReady = true;
+    const CASE_REVIEW_NODE_IDS = ['node-card-01', 'node-card-02', 'node-card-03', 'node-card-04', 'node-card-05'];
 
     // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
     document.addEventListener('DOMContentLoaded', () => {
@@ -895,6 +905,10 @@
 
         // Retry Stage 2
         document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            if (s2ReviewRequired && !s2ReviewReady) {
+                document.getElementById('fail-message-text').textContent = '請先點選答錯題目的「前往對應圖卡複習」，完成短暫複習後才能重新挑戰。';
+                return;
+            }
             document.getElementById('result-banner-fail').style.display = 'none';
             document.getElementById('stage-2-view').style.display = 'block';
             initStage2();
@@ -965,6 +979,8 @@
     function initStage2() {
         s2CurrentIndex = 0;
         s2CorrectCount = 0;
+        s2ReviewRequired = false;
+        s2ReviewReady = true;
 
         // Shuffle Stage 2 Questions and Options
         s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
@@ -1020,15 +1036,18 @@
                     btn.classList.add('wrong');
                     hintBox.style.display = 'block';
                     hintBox.style.borderLeftColor = 'var(--danger)';
-                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
-                    
-                    // Highlight the correct one
-                    q.shuffledOpts.forEach((o, i) => {
-                        if (o.isCorrect) {
-                            allOpts[i].classList.add('correct');
-                        }
+                    s2ReviewRequired = true;
+                    s2ReviewReady = false;
+                    const reviewNodeId = CASE_REVIEW_NODE_IDS[s2CurrentIndex];
+                    hintBox.innerHTML = `<strong>答錯了，先回到關鍵概念複習：</strong>${q.hint}<br><button type="button" class="scenario-option" id="s2-review-link">前往對應圖卡複習</button>`;
+                    document.getElementById('s2-review-link').addEventListener('click', (event) => {
+                        const reviewButton = event.currentTarget;
+                        document.getElementById('btn-mode-info').click();
+                        document.getElementById(reviewNodeId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        reviewButton.disabled = true;
+                        reviewButton.textContent = '已開始複習，稍候即可重試';
+                        setTimeout(() => { s2ReviewReady = true; reviewButton.textContent = '複習完成，可回到第二關重試'; }, 2000);
                     });
-
                     allOpts.forEach(b => b.disabled = true);
                     nextBtn.disabled = false;
                 }

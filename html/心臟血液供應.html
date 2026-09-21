@@ -114,6 +114,8 @@
 
         .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #bfdbfe; border-radius:18px; background:linear-gradient(135deg,#eff6ff 0%,#fff7ed 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; line-height:1.35; color:var(--primary-dark); }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center; }.sim-step { min-width:0; min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; overflow-wrap:anywhere; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.scenario-controls { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:16px; }.scenario-controls strong { margin-right:4px; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.scenario-option[aria-pressed="true"] { background:var(--primary); color:#fff; }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; } @media (max-width:760px) { .mission-lab { padding:18px; }.sim-steps { grid-template-columns:1fr; gap:7px; }.sim-arrow { display:none; }.sim-step { min-height:0; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
 
+        .visual-flow .sim-step { padding:10px 10px 12px; }.visual-art { height:128px; margin:-2px -2px 9px; border-radius:12px; background-image:var(--flow-art); background-repeat:no-repeat; background-size:400% 100%; background-position:var(--flow-position) center; }.visual-flow-card { position:relative; }.visual-flow-card strong { display:block; color:#1e3a5f; }.visual-flow-card span { line-height:1.35; }.visual-flow .sim-arrow { font-size:2rem; font-weight:800; color:#ef4444; } @media (max-width:760px) { .visual-art { height:170px; background-size:100% 400%; background-position:center var(--flow-mobile-position); }.visual-flow .sim-step { padding:12px; } }
+
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
 </head>
@@ -148,7 +150,12 @@
     <section class="mission-lab" aria-labelledby="coronary-lab-title">
         <h2 id="coronary-lab-title">🫀 情境實驗室｜抓住心肌灌流時刻</h2>
         <p>切換心跳時相，觀察心肌內的冠狀血管何時不易、何時最能獲得血流。</p>
-        <div class="sim-steps" aria-label="冠狀循環灌流時相"><div class="sim-step" data-coronary-step="0">心室收縮<span>心肌張力上升</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="1">血管受壓<span>灌流受限</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="2">心室舒張<span>心肌放鬆</span></div><div class="sim-arrow">→</div><div class="sim-step" data-coronary-step="3">冠狀灌流<span>供氧補回來</span></div></div>
+        <div class="sim-steps visual-flow" aria-label="冠狀循環灌流時相" style="--flow-art:url('assets/coronary-perfusion-flow-strip-v1.png')">
+            <div class="sim-step visual-flow-card" data-coronary-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>心室收縮</strong><span>心肌張力上升</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-coronary-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>血管受壓</strong><span>冠狀灌流受限</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-coronary-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>心室舒張</strong><span>心肌放鬆</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-coronary-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"></div><strong>冠狀灌流</strong><span>心肌供氧恢復</span></div>
+        </div>
         <div class="scenario-controls"><strong>心跳時相：</strong><button class="scenario-option" type="button" data-coronary-phase="systole" aria-pressed="true">收縮期</button><button class="scenario-option" type="button" data-coronary-phase="diastole" aria-pressed="false">舒張期</button></div>
         <div class="scenario-status" id="coronary-lab-status" aria-live="polite"></div>
         <div class="predict-card"><p>先猜一猜：冠狀動脈主要在何時為心肌補充血液？</p><button class="scenario-option" type="button" data-coronary-answer="wrong">心室收縮期</button><button class="scenario-option" type="button" data-coronary-answer="correct">心室舒張期</button><div class="predict-feedback" id="coronary-predict-feedback" aria-live="polite"></div></div>
@@ -645,6 +652,9 @@
     let s2CurrentIndex = 0;
     let s2CorrectCount = 0;
     let s2AnsweredCorrect = false;
+    let s2ReviewRequired = false;
+    let s2ReviewReady = true;
+    const CASE_REVIEW_NODE_IDS = ['node-card-01', 'node-card-02', 'node-card-03', 'node-card-04', 'node-card-05'];
 
     // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
     document.addEventListener('DOMContentLoaded', () => {
@@ -780,6 +790,10 @@
 
         // Retry Stage 2
         document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            if (s2ReviewRequired && !s2ReviewReady) {
+                document.getElementById('fail-message-text').textContent = '請先點選答錯題目的「前往對應圖卡複習」，完成短暫複習後才能重新挑戰。';
+                return;
+            }
             document.getElementById('result-banner-fail').style.display = 'none';
             document.getElementById('stage-2-view').style.display = 'block';
             initStage2();
@@ -850,6 +864,8 @@
     function initStage2() {
         s2CurrentIndex = 0;
         s2CorrectCount = 0;
+        s2ReviewRequired = false;
+        s2ReviewReady = true;
 
         // Shuffle Stage 2 Questions and Options
         s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
@@ -905,15 +921,18 @@
                     btn.classList.add('wrong');
                     hintBox.style.display = 'block';
                     hintBox.style.borderLeftColor = 'var(--danger)';
-                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
-                    
-                    // Highlight the correct one
-                    q.shuffledOpts.forEach((o, i) => {
-                        if (o.isCorrect) {
-                            allOpts[i].classList.add('correct');
-                        }
+                    s2ReviewRequired = true;
+                    s2ReviewReady = false;
+                    const reviewNodeId = CASE_REVIEW_NODE_IDS[s2CurrentIndex];
+                    hintBox.innerHTML = `<strong>答錯了，先回到關鍵概念複習：</strong>${q.hint}<br><button type="button" class="scenario-option" id="s2-review-link">前往對應圖卡複習</button>`;
+                    document.getElementById('s2-review-link').addEventListener('click', (event) => {
+                        const reviewButton = event.currentTarget;
+                        document.getElementById('btn-mode-info').click();
+                        document.getElementById(reviewNodeId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        reviewButton.disabled = true;
+                        reviewButton.textContent = '已開始複習，稍候即可重試';
+                        setTimeout(() => { s2ReviewReady = true; reviewButton.textContent = '複習完成，可回到第二關重試'; }, 2000);
                     });
-
                     allOpts.forEach(b => b.disabled = true);
                     nextBtn.disabled = false;
                 }
