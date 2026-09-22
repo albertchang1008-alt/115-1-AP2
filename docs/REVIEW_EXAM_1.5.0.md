@@ -36,6 +36,9 @@ interface Unit {
     drawCount: number;                      // N
     allocation: Record<string, number>;     // 各來源每次抽幾題，總和＝N
     builtAt: number;
+    // 最近 10 次組卷設定（新的在前）。交卷時依「該次作答的 bankVersion」比對，
+    // 避免教師在學生作答途中重新組卷或改 N，導致正在作答的學生交卷後不被採計。
+    history: { version: string; drawCount: number; allocation: Record<string, number>; builtAt: number }[];
   };
 }
 Progress.units[unitId] // 新增欄位：
@@ -63,12 +66,12 @@ export function drawReviewQuestions(pool: Question[], allocation, attemptedIds):
 6. `publishBank(courseId, name, questions)`（同內容＝同版本，冪等）。
 7. 交易內寫回 draft：
    - 新建：`{ id: name, title: name, group: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, questionCount: drawCount, activities: [], visibility: 'hidden', review: {...} }`（`questionCount` 顯示每次作答題數）；建立 `chapters[name]`（同 sync 最小 Chapter）並加入 `chapterOrder` 尾端。
-   - 更新：只改 `bankVersion`、`questionCount`、`review`；Chapter 設定不動。
+   - 更新：只改 `bankVersion`、`questionCount`、`review`（`history` 前插本次設定，保留 10 筆）；Chapter 設定不動。
 8. 不自動發布課程。
 
 **`submitAttempt`**（僅對複習考分支，一般分類不變）
 - 只接受 `mode === 'quiz'`（`flashcard` 拒絕：「複習考僅提供作答」；`review` 模式本就不寫 progress，照舊允許）。
-- `full` 判定改為：`answers.length === review.drawCount`，且依 manifest `questionSources` 統計各來源題數**恰好等於** `review.allocation`；否則 `full = false`（照常寫錯題，但不更新最高分）。
+- `full` 判定改為：在 `review.history` 中找 `version === a.version` 的任一筆設定，`answers.length === drawCount` 且依 manifest `questionSources` 統計各來源題數**恰好等於**該筆 `allocation`；都不符則 `full = false`（照常寫錯題，但不更新最高分）。同版本不同 N 的多筆設定皆可採計。
 - 分數照舊由伺服器重批。
 - **`passedAt`**（所有分類通用）：`full` 且 `score ≥ 該生可見 unit.threshold`，且 progress 中尚無 `passedAt` → 寫入 `Date.now()`。在 `applyAttempt` 之後、同一交易內處理（`applyAttempt` 不知道門檻，不改它的簽名；可在 submitAttempt 內補欄位）。
 
@@ -117,6 +120,14 @@ export function drawReviewQuestions(pool: Question[], allocation, attemptedIds):
 - 版本 1.5.0（`npm run version:sync`）。`DEVELOPMENT_LOG.md` 最上方新增一節；`handoff.md` 更新固定決策（複習考＝組卷的 Unit、每次隨機抽 N 題、逾期標記、綜合練習排除、一般單元不放題目練習活動）；`docs/UNIT_MODEL_1.4.0.md` 加註指向本文件。
 - 建議分 2 個 commit：①model＋後端＋測試 ②教師後台＋學生端。每個 commit 前 `npm run check`、`git diff --check`。
 - **不 push、不部署**；完成後在 handoff 標示「1.5.0 複習考待 Claude 驗收」。
+
+## 題目有誤時的處理流程（教師 2026-09-22 詢問後補充）
+
+1. 教師在 Sheet 修正該題（或把「啟用」設為 FALSE 停用）→ 同步 → 來源分類產生新版本。
+2. 複習考設定頁出現「來源題庫已更新」→ 按「依目前題庫重新組卷」→ 複習考產生新版本，之後的作答都用修正後的題目池。
+3. 重新組卷當下正在作答的學生，交卷時以其作答版本比對 `review.history`，仍正常採計。
+4. 已發生的作答**不重算**（平台既有限制，與一般分類相同）：因該題被冤枉的學生可重考補回；因錯誤答案鍵多拿的分收不回；首次達標時間（逾期判定）也不重算。每次作答抽 N 題，一題錯誤對單次分數的影響為 100 ÷ N 分（N＝40 時為 2.5 分）。
+5. 「題目作廢並重算」（標記某題作廢、重算所有受影響作答的分數、最高分、`passedAt`）仍列為獨立待辦，不在 1.5.0 範圍。
 
 ## 已知限制（寫進 handoff）
 
