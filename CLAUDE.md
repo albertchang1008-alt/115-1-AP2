@@ -18,4 +18,7 @@
    `Co-Authored-By: <model 名稱> <noreply@anthropic.com>`），方便回溯是哪個
    agent、哪次做的改動。不要用 `--no-verify`、不要強制推送、不要略過測試。
 
+6. `handoff.md` 保持精簡（約 150 行內，只寫現況）；完成的項目移出並記入 `DEVELOPMENT_LOG.md`。
+   舊交接歷史在 `docs/archive/`，平常不用讀。
+
 以上規則對任何在這個 repo 工作的 AI agent 一律適用。
