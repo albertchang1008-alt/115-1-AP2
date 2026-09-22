@@ -26,6 +26,14 @@
 - 新增可單測的 `reviewAttemptIsFull()`，涵蓋題數、來源配額與舊 history 版本；Functions 測試增為 15，完整 `npm run check` 通過（前端 89、Functions 15），`git diff --check` 通過。未 push、未部署；既有未追蹤 `public/materials/coagulation-v1/` 未碰。
 - 待 Claude 再驗收；本輪依指示只建立一個補修 commit（目前 `git log -1` 的 `fix: 補修複習考 Claude 驗收項目 [Codex]`）。
 
+### Claude 再驗收 1.5.0 複習考：通過（2026-09-23，Claude）
+
+- 補修 7 項逐一確認：來源更新提示＋確認後一鍵重新組卷（前端 history 也前插保留 10 筆）、刪除時前端同步清 `classUnits`、同步擋 Sheet 單元／次單元與複習考同名、學生卡片達標／逾期／未開放徽章、完成度看板與 CSV「逾期完成」、`reviewAttemptIsFull()` 純函式與測試、開始作答改 `mode=full`。
+- Claude 順手修一處：同步衝突訊息在 Sheet 單元欄空白時會顯示「名稱『undefined』」，改為點名實際衝突的複習考名稱（`functions/src/index.ts`、`functions/tests/bank-boundary.test.cjs`）。Functions build（33 函式）＋測試 15 項通過；`git diff --check` 通過。前端測試在 Claude VM 無法執行（esbuild 平台不符），以 Codex 回報 89 項為準。
+- 未阻擋的已知缺口：後端 callable 的防線測試多為原始碼字串比對，`passedAt` 只在首次達標寫入的邏輯沒有行為測試；建議上線後第一次實際使用時，以測試學生帳號走一次「未達標→達標→逾期」確認。
+- **上線注意**：`feature/1.5.0-review-exam` 比 `main` 多 20 個 commit，包含 1.4.1 三份教材任務 3（視覺流程卡＋回讀重試，Codex 標示「待 Claude 驗收」，尚未驗收）。合併上線會一併帶上這些教材改動；請教師決定先驗收教材或分開上線。
+- 下一步：待教師明確同意後才 push／合併 `main`／部署（functions＋firestore＋GitHub Pages）。
+
 ### Claude 驗收 1.5.0 複習考：未通過，需補修（2026-09-23，Claude）
 
 **已確認正確：** 題目池凍結（來源＋ID 重複檢查＋500 題上限）、`questionSources` 寫入 manifest、交卷依 `review.history` 同版本比對題數與各來源配額才採計最高分、`passedAt` 只在首次達標寫入且用該班生效門檻、複習考拒絕閃卡、綜合練習前後端都排除、`staleUnits` 排除複習考、完成度公式維持 v3。`allocateDraw` 以實際題數（如 20/25/30/25 抽 40、84/81 抽 40）結果與比例一致。Functions 測試 14 項在 Claude 環境通過；前端測試因 VM 內 esbuild 平台不符無法執行（非程式問題），以 Codex 回報的 88 項為準。

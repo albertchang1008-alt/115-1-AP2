@@ -1195,7 +1195,8 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
         const course = await ref.get();
         if (!course.exists) fail('課程不存在，請先在課程與教材建立課程：' + courseId);
         if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
-        if ((course.data()?.draft as Course).units.some((u) => isReviewUnit(u) && (u.id === unitId || u.id === group))) fail(`名稱「${unitId === group ? unitId : group}」已被複習考使用，請改名`);
+        const reviewClash = (course.data()?.draft as Course).units.find((u) => isReviewUnit(u) && (u.id === unitId || u.id === group));
+        if (reviewClash) fail(`名稱「${reviewClash.id}」已被複習考使用，請改名`);
         const result = await publishBank(courseId, unitId, questions);
         let created = false;
         await db.runTransaction(async (tx) => {

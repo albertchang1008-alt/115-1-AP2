@@ -56,6 +56,7 @@ test('複習考 callable 有組卷、歷史採計、刪除與同步名稱衝突�
   assert.match(source, /exports\.deleteReviewExam/, '複習考可刪除');
   assert.match(source, /classUnits/, '刪除時清理班級適用清單');
   assert.match(source, /u\.id === unitId \|\| u\.id === group/, 'Sheet 單元與次單元同名都必須拒絕');
+  assert.match(source, /已被複習考使用/, '衝突訊息點名複習考');
 });
 test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量拒絕', async () => {
   const db = getFirestore();
