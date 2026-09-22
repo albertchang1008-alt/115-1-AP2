@@ -19,6 +19,21 @@
 
 ---
 
+### Claude 驗收 1.5.0 複習考：未通過，需補修（2026-09-23，Claude）
+
+**已確認正確：** 題目池凍結（來源＋ID 重複檢查＋500 題上限）、`questionSources` 寫入 manifest、交卷依 `review.history` 同版本比對題數與各來源配額才採計最高分、`passedAt` 只在首次達標寫入且用該班生效門檻、複習考拒絕閃卡、綜合練習前後端都排除、`staleUnits` 排除複習考、完成度公式維持 v3。`allocateDraw` 以實際題數（如 20/25/30/25 抽 40、84/81 抽 40）結果與比例一致。Functions 測試 14 項在 Claude 環境通過；前端測試因 VM 內 esbuild 平台不符無法執行（非程式問題），以 Codex 回報的 88 項為準。
+
+**交給 Codex 補修（同分支 `feature/1.5.0-review-exam`，一個 commit，不 push）：**
+1. **必修｜來源更新提示與一鍵重新組卷（規格「教師後台」與「題目有誤時的處理流程」）**：複習考設定頁比對各來源目前 `bankVersion` 與 `review.sourceVersions`，不同時顯示黃色提示「來源題庫已更新（列出分類），題目池仍是組卷當時內容」＋「依目前題庫重新組卷」按鈕（沿用現有來源與 N 呼叫 `buildReviewExam`）。任何重新組卷（含「修改來源與題數」）前 confirm：「會產生新的考卷版本。學生已考到的最高分保留；舊版本的錯題不帶到新版本。」並在唯讀區顯示題目池總題數與各來源題數。
+2. **必修｜刪除複習考後無法保存草稿**：`deleteReviewExam` 成功後前端 `setDraft` 只移除 units／chapters／chapterOrder，沒有同步移除各班 `classUnits` 中的 ID；教師接著按「保存草稿」會被 `saveCourse` 以「班級適用單元設定無效」拒絕。前端要一併過濾 `classUnits`（與後端一致）。
+3. **必修｜後端測試**：`functions/tests` 目前沒有任何 1.5.0 測試（仍是 14 項）。至少補：`buildReviewExam`（ID 重複、>500、N 範圍、來源為複習考被拒、名稱衝突、更新時 history 前插且上限 10）；`submitAttempt` 複習考（配額正確＝full 並更新最高分、題數或配額不符＝不更新、以 history 中舊版本交卷仍採計、閃卡被拒）；`passedAt` 首次達標才寫、未達標不寫；`submitMixedAttempts` 拒絕複習考；`deleteReviewExam` 清除 classUnits；同步遇同名複習考報錯。若現有測試架構難以覆蓋 callable，請把判定邏輯抽成可單測的純函式（例如 `reviewAttemptIsFull(history, version, answers, questionSources)`）並測它。
+4. **應修｜學生端單元卡徽章**：複習考準時完成時徽章顯示「作業・複習考」而非「已達標」；未開放時也不顯示「尚未開放」。改為：完成→「已達標」或「已完成（逾期）」；未開放→「尚未開放」；其餘→「作業・複習考」。
+5. **應修｜同步名稱衝突**：目前只擋 Sheet 次單元＝複習考名稱；Sheet「單元」欄（group）＝複習考名稱時，新分類會被併入複習考的單元。一併擋下並報同樣錯誤。
+6. **應修｜教師完成度看板**：規格要求看板／CSV 標示「逾期完成」，目前只在學生明細顯示。完成度看板的複習考欄位加標記；若有 CSV 匯出，加「逾期」欄。
+7. 小修：`PracticeRow` 開始作答的網址用 `/quiz?mode=review` 易與錯題複習模式混淆，改 `/quiz?mode=full`。
+
+完成後在本檔標示「1.5.0 複習考補修待 Claude 再驗收」。
+
 ### 1.5.0 複習考待 Claude 驗收（2026-09-23，Codex）
 
 - 分支 `feature/1.5.0-review-exam`，版本 1.5.0。依 `docs/REVIEW_EXAM_1.5.0.md` 實作：教師從多個已發布分類建立獨立複習考 Unit；題目以來源與版本凍結，依比例隨機抽 N 題、未考過優先。後端會確認題數與來源分配完整才採計最高分，首次達標記錄 `progress.units[id].passedAt`，逾期達標仍完成且學生端標「逾期完成」。
