@@ -4,6 +4,8 @@
 
 ## 1.5.0 — 複習考（作業）（2026-09-23）
 
+- **已上線（2026-09-23）**：教師執行 deploy.sh，Functions 39 個（新增 buildReviewExam、deleteReviewExam）Deploy complete；第一次因 saveSheetConfig 一次性 ENOTFOUND 中斷，重跑成功。`origin/main` fe766c6..82e7140，Pages Actions 成功，正式站 `version.json`＝1.5.0。
+
 - 新增教師限定的複習考組卷：從多個已發布的一般題目分類凍結複本為獨立 `Unit`，保留來源與當時題庫版本；最大餘數法按比例分配每次 N 題，每個來源至少一題，且同來源未考過題目優先。
 - `buildReviewExam`／`deleteReviewExam` 管理獨立題目池；題庫 manifest 儲存題目來源。同步 Sheet 不會把複習考列為舊分類，且同名衝突會明確拒絕。
 - 複習考交卷必須抽滿歷史設定中的 N 題與各來源配額才更新最高分；首次完整達標寫入 `passedAt`。期限後首次達標仍計完成，學生端顯示「逾期完成」。一般分類原有完整測驗、完成度與綜合練習行為不變；複習考被前後端排除於綜合練習。

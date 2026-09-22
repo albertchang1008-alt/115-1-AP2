@@ -18,11 +18,11 @@
 
 | 項目 | 狀態 |
 |---|---|
-| 正式站 | 1.4.1。`origin/main`＝`fe766c6`（2026-09-20 部署，Functions 37 個） |
-| 開發分支 | `feature/1.5.0-review-exam`（1.5.0），比 main 多 20 個 commit，**未 push** |
-| 1.5.0 複習考 | 已實作並經 Claude 再驗收通過（`bee6ca0`），**待教師同意後部署**（含 Functions）。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 分支中其他內容 | 1.4.1 三份新教材（`html/心臟構造.html`、`心臟血液供應.html`、`紅血球的恆定機制.html`）只在 `html/` 原始檔，**未進 `public/materials/`，合併不會上線** |
-| 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit |
+| 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
+| 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
+| 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
+| 三份新教材 | `html/心臟構造.html`、`心臟血液供應.html`、`紅血球的恆定機制.html` 只在 `html/` 原始檔，未進 `public/materials/`，學生看不到 |
+| 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 
 ## 部署方式（教師在自己的 Mac 執行）
 
@@ -30,7 +30,8 @@
 zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'
 ```
 - deploy.sh：`npm run check` → 備份分支 → 部署 Functions → 快轉推送 main。Firebase 帳號須為 **hhchang@ctcn.edu.tw**；GitHub 推送需個人權杖。
-- 部署後確認正式站 `version.json` 版本號。
+- 部署後確認正式站 `version.json` 版本號。deploy.sh 偶發單一函式 `ENOTFOUND`（Mac 網路暫時失敗）：重跑即可，未變更的函式會 Skipped。
+- `handoff.md`、`README.md`、`DEVELOPMENT_LOG.md` 都必須保留「目前版本：x.y.z」一行，`version:check` 會檢查。
 - agent 的沙箱（Claude VM／Codex）沒有 GitHub 寫入憑證；Claude VM 內 `node_modules` 是 macOS 版，前端 `npm test`／`vite build` 跑不起來（Functions build/test 可以）。前端驗證以教師或 Codex 在 Mac 上跑的結果為準。
 - 本機 `file://` 預覽在 CUA 被擋；要看教材畫面，Claude 可在雲端用 Playwright 截圖。
 
@@ -75,7 +76,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 教材元件庫 v1：規格 `docs/MATERIAL_KIT_1.md`。分支從 `feature/1.5.0-review-exam` HEAD 開 `feature/material-kit`；只做 kit＋建置／截圖檢查工具＋「心臟構造」樣板，完成後停下標示「教材元件庫 v1 待 Claude 驗收」。不 push、不部署、不動既有 `public/materials/`。
 
 **等教師決定**
-- 1.5.0 複習考部署（Claude 已驗收）。部署後用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
+- 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
 - 三份新教材視覺：方向已併入教材元件庫 v1（心臟構造為樣板）；樣板核定後再決定其他份的轉換順序。
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
 
