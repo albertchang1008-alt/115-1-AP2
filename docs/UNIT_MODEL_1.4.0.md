@@ -81,3 +81,6 @@ Course.chapterOrder?: string[]; // 單元顯示順序
 - `src/ProgressBoard.tsx`、報表／完成度看板：以單元彙總，可展開看各分類分數。
 - 測試：chapter 設定覆寫 Unit、舊資料推導、單元完成度（全部分類達標＋活動）、chapter 活動鍵、對照表展開、同步自動建 Chapter 與 staleUnits、公式 v1/v2 舊快照不變。
 - 文件：`handoff.md` 固定決策 10、11 改寫；`docs/QUESTION_BANK_PLAN.md`、`CreateCourseTemplate.gs` 欄位說明。
+# 1.5.0 加註
+
+複習考（作業）不是一般 Sheet 分類，而是教師從既有分類凍結組成的獨立 `Unit`；其組卷、抽題、完成與逾期規則見 [REVIEW_EXAM_1.5.0.md](REVIEW_EXAM_1.5.0.md)。它以一個 Chapter 計入 v3 完成度，且不包含於綜合練習。

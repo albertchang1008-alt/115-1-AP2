@@ -24,6 +24,9 @@ import {
   unitVisibility,
   wrongEntries,
   wrongCardIds,
+  allocateDraw,
+  drawReviewQuestions,
+  isOverdue,
 } from '../shared/model';
 const q = {
   id: 'q1',
@@ -254,4 +257,23 @@ test('只有活動紀錄、沒有 units 的 progress 交卷時不會丟錯（修
   const next = applyAttempt(onlyActivities, a);
   assert.equal(next.units.u.attempts, 1);
   assert.ok(next.activities['chapter:115-1課程簡介_a'].completed, '既有活動進度保留');
+});
+
+test('複習考依比例穩定分配、每類至少一題且不超出題庫', () => {
+  assert.deepEqual(allocateDraw({ a: 20, b: 10, c: 5 }, 10, ['a', 'b', 'c']), { a: 5, b: 3, c: 2 });
+  assert.deepEqual(allocateDraw({ a: 1, b: 9 }, 2, ['a', 'b']), { a: 1, b: 1 });
+  assert.deepEqual(allocateDraw({ a: 1, b: 2 }, 3, ['a', 'b']), { a: 1, b: 2 });
+  assert.throws(() => allocateDraw({ a: 1, b: 2 }, 1), /抽題數/);
+});
+
+test('複習考每個來源優先抽未考過題目，並保留來源配額', () => {
+  const pool = ['a1', 'a2', 'b1', 'b2'].map((id) => ({ ...q, id, source: id[0] }));
+  const drawn = drawReviewQuestions(pool, { a: 1, b: 1 }, new Set(['a1', 'b1']));
+  assert.deepEqual(new Set(drawn.map((x) => x.id)), new Set(['a2', 'b2']));
+});
+
+test('複習考首次達標時間晚於期限才標示逾期，完成度公式仍為 v3', () => {
+  assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:01') }), true);
+  assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:00') }), false);
+  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 3);
 });

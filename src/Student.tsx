@@ -42,6 +42,9 @@ import {
   chapterCompletion,
   chapterActivityKey,
   parseCourseTime,
+  isReviewUnit,
+  isOverdue,
+  drawReviewQuestions,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -129,6 +132,7 @@ export default function Student({
       const nextActivity = parsed.kind === 'activity' ? parsed.activityId : parsed.kind === 'wrongcards' ? '__wrongcards' : '';
       const allowed = course.units.find((u) => u.id === nextUnit);
       if (!allowed) { route(); notify('此單元目前未開放'); return; }
+      if (isReviewUnit(allowed) && (parsed.kind === 'flashcard' || (parsed.kind === 'quiz' && parsed.mode === 'draw'))) { route(`/unit/${encodeURIComponent(allowed.id)}?tab=practice`); return; }
       setUnitId(nextUnit);
       setActivityId(nextActivity);
       if (parsed.kind === 'unit') setTab(location.hash.includes('?tab=') ? parsed.tab : defaultTab(chaptersOf(course)[chapterName(allowed)], pRef.current, `chapter:${chapterName(allowed)}`));
@@ -222,7 +226,10 @@ export default function Student({
     setBusy(true);
     try {
       let qs = await cachedBank(api, course.id, target.id, target.bankVersion);
-      if (practiceCount) {
+      if (isReviewUnit(target)) {
+        const attemptedIds = new Set(Object.keys(progress.attempted?.[target.id] || {}));
+        qs = drawReviewQuestions(qs, target.review!.allocation, attemptedIds);
+      } else if (practiceCount) {
         // 抽題練習：不計分、不計完成度。已考過的題目自然排到後面（仿 v1.9），不是每次重置重洗。
         const attemptedIds = new Set(Object.keys(progress.attempted?.[target.id] || {}));
         qs = orderForPractice(qs, attemptedIds).slice(0, Math.min(practiceCount, qs.length));
@@ -233,7 +240,7 @@ export default function Student({
         notify('題庫沒有可用題目');
         return;
       }
-      setFull(!practiceCount);
+      setFull(isReviewUnit(target) || !practiceCount);
       qs = qs.map((q) => ({ ...q, options: shuffle(q.options) }));
       setQuestions(qs);
       setMode(m);
@@ -351,7 +358,7 @@ export default function Student({
           </div>
           <section className="panel"><h2>還沒完成</h2>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length ? <><ul>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).slice(0, outstandingAll ? undefined : 5).map(({ name, chapter, units }) => { const state = chapterCompletion(course, name, progress); return <li key={name}><button onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `尚有題目分類未達 ${chapter.threshold} 分` : '尚有必做活動未完成'}｜{chapter.title}</button></li>; })}</ul>{!outstandingAll && currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
           {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards?range=7d`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
-          {currentUnits.length > 0 && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
+          {currentUnits.some((u) => !isReviewUnit(u)) && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
           {currentChapters.length ? <div className="unitgrid">{currentChapters.map(({ name, chapter, units }, i) => {
                   const locked = !!chapter.opensAt && parseCourseTime(chapter.opensAt) > Date.now();
                   const state = chapterCompletion(course, name, progress);
@@ -365,7 +372,7 @@ export default function Student({
                       <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
                       <div>
                         <span className={'badge ' + (state.done ? 'green' : '')}>
-                          {state.done
+                          {isReviewUnit(units[0]) ? (state.done && isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : '作業・複習考') : state.done
                             ? '已達標'
                             : locked
                               ? '尚未開放'
@@ -374,7 +381,7 @@ export default function Student({
                                 : '選修活動'}
                         </span>
                         <h3>{chapter.title}</h3>
-                        <p>{chapter.description}</p>
+                        <p>{isReviewUnit(units[0]) ? `每次 ${units[0].review!.drawCount} 題・需達 ${chapter.threshold} 分${chapter.dueAt ? `・期限 ${new Date(chapter.dueAt).toLocaleDateString()}` : ''}` : chapter.description}</p>
                         <footer>
                           已達標分類 {units.filter((u) => !u.bankVersion || (progress.units[u.id]?.best ?? -1) >= chapter.threshold).length} / {units.length} · 活動 {state.completedActivities} / {chapter.activities.length}{' '}
                           <ChevronRight size={16} />
@@ -414,7 +421,7 @@ export default function Student({
             })}
           </div>
           <section className={tab === 'practice' ? 'practice-list' : 'activitycards'} role="tabpanel">
-            {tab === 'practice' ? <><p className="muted practice-note">完整測驗與完整閃卡計入最高成績；抽題與錯題僅供練習，不影響完成度。</p>{chapterUnits.map((classification) => <PracticeRow key={classification.id} unit={classification} threshold={chapter.threshold} progress={progress} busy={busy} start={start} route={route} />)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
+            {tab === 'practice' ? <><p className="muted practice-note">{isReviewUnit(chapterUnits[0]) ? '複習考每次隨機抽題；抽滿分配且達標才計為完成。' : '完整測驗與完整閃卡計入最高成績；抽題與錯題僅供練習，不影響完成度。'}</p>{chapterUnits.map((classification) => <PracticeRow key={classification.id} unit={classification} threshold={chapter.threshold} progress={progress} busy={busy} start={start} route={route} />)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
             {tab !== 'practice' && !chapter.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
           </section>
         </>
@@ -498,6 +505,7 @@ function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: 
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
   const best = progress.units[unit.id]?.best ?? 0;
   const passed = best >= threshold;
+  if (isReviewUnit(unit)) return <div className="practice-row"><div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">作業・複習考｜每次 {unit.review!.drawCount} 題</span></div><div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">{isOverdue(unit, progress.units[unit.id]) ? '逾期完成' : '已達標'}</span>}</div><button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=review')}>開始作答（{unit.review!.drawCount} 題）</button><button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>;
   return <div className="practice-row">
     <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">題目分類</span></div>
     <div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">已達標</span>}</div>
@@ -525,7 +533,7 @@ function WrongCards({ api, course, unit, progress, onBack }: { api: API; course:
 }
 function MixedPractice({ api, course, progress, count, onBack, notify }: { api: API; course: Course; progress: Progress; count: number; onBack: () => void; notify: (s: string) => void }) {
   const [rows, setRows] = useState<{ q: Question; unit: Unit }[]>([]), [i, setI] = useState(0), [selected, setSelected] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [done, setDone] = useState(false);
-  useEffect(() => { let active = true; void Promise.all(course.units.filter((u) => unitVisibility(u) === 'current' && u.bankVersion).map(async (unit) => (await cachedBank(api, course.id, unit.id, unit.bankVersion)).map((q) => ({ q, unit })))).then((all) => { if (!active) return; const flat = all.flat(); const wrong = flat.filter(({q,unit}) => !!wrongEntries(progress, unit.id, unit.bankVersion)[q.id]); const unseen = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !progress.attempted?.[unit.id]?.[q.id]); const other = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !!progress.attempted?.[unit.id]?.[q.id]); setRows([...shuffle(wrong), ...shuffle(unseen), ...shuffle(other)].slice(0, Math.min(count, flat.length))); }).catch((e) => notify(e.message)); return () => { active = false; }; }, [api, course.id, count]);
+  useEffect(() => { let active = true; void Promise.all(course.units.filter((u) => !isReviewUnit(u) && unitVisibility(u) === 'current' && u.bankVersion).map(async (unit) => (await cachedBank(api, course.id, unit.id, unit.bankVersion)).map((q) => ({ q, unit })))).then((all) => { if (!active) return; const flat = all.flat(); const wrong = flat.filter(({q,unit}) => !!wrongEntries(progress, unit.id, unit.bankVersion)[q.id]); const unseen = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !progress.attempted?.[unit.id]?.[q.id]); const other = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !!progress.attempted?.[unit.id]?.[q.id]); setRows([...shuffle(wrong), ...shuffle(unseen), ...shuffle(other)].slice(0, Math.min(count, flat.length))); }).catch((e) => notify(e.message)); return () => { active = false; }; }, [api, course.id, count]);
   const row = rows[i];
   async function submit() { if (!rows.length || busy) return; setBusy(true); try { const grouped = new Map<Unit, { q: Question; key: string }[]>(); rows.forEach(({ q, unit }) => grouped.set(unit, [...(grouped.get(unit) || []), { q, key: `${unit.id}:${q.id}` }])); const attempts: Attempt[] = [...grouped].map(([unit, qs]) => { const answers = qs.map(({q, key}) => ({ questionId: q.id, selected: selected[key] || '', correct: false, seconds: 0 })); return { id: crypto.randomUUID(), courseId: course.id, unitId: unit.id, version: unit.bankVersion, mode: 'quiz', answers, score: 0, full: false, clientAt: Date.now(), duration: 0 }; }); await api.call('submitMixedAttempts', { attempts }); setDone(true); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }
   if (!row) return <main className="quiz"><button onClick={onBack}>返回首頁</button><h1>目前沒有可供綜合練習的題目</h1></main>;
@@ -643,6 +651,7 @@ function Quiz({
           <span>答對：<b className="count-ok">{result.answers.filter((a) => a.correct).length}</b> 題</span>
           <span>答錯：<b className="count-bad">{questions.length - result.answers.filter((a) => a.correct).length}</b> 題</span>
         </p>
+        {isReviewUnit(unit) && <p className="muted">{Object.entries(questions.reduce((out, q, index) => { const source = q.source || '其他'; const row = out[source] || (out[source] = [0, 0]); row[1]++; if (result.answers[index].correct) row[0]++; return out; }, {} as Record<string, [number, number]>)).map(([source, [ok, total]]) => `${source} ${ok}/${total}`).join(' ・ ')}</p>}
         <p className="notice">{busy ? '正在保存…' : status}</p>
         <button className="primary" disabled={busy} onClick={onClose}>
           返回單元

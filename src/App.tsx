@@ -53,6 +53,10 @@ import {
   chaptersOf,
   orderedChapters,
   chapterName,
+  Unit,
+  allocateDraw,
+  isReviewUnit,
+  isOverdue,
 } from '../shared/model';
 import {
   API,
@@ -888,6 +892,10 @@ function CourseEditor(props: CourseEditorProps) {
   const [draft, setDraft] = useState<Course>(structuredClone(course || makeCourse()));
   const [selected, setSelected] = useState('');
   const [busy, setBusy] = useState(false);
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [reviewName, setReviewName] = useState('');
+  const [reviewSources, setReviewSources] = useState<string[]>([]);
+  const [reviewCount, setReviewCount] = useState(1);
   useEffect(() => { const next = structuredClone(course || makeCourse()); setDraft(next); setSelected(orderedChapters(next)[0]?.name || ''); }, [course?.id]);
   const isDirty = !!course && JSON.stringify(draft) !== JSON.stringify(course);
   useEffect(() => { onDirty(isDirty); return () => onDirty(false); }, [isDirty]);
@@ -910,13 +918,18 @@ function CourseEditor(props: CourseEditorProps) {
   const move = (offset: number) => { const order = rows.map((item) => item.name), at = order.indexOf(name), to = at + offset; if (to < 0 || to >= order.length) return; [order[at], order[to]] = [order[to], order[at]]; setDraft({ ...materialize(), chapterOrder: order }); };
   const removeStale = () => { const stale = draft.staleUnits || []; if (!stale.length || !confirm(`確定移除以下舊題目分類？\n${stale.join('\n')}`)) return; const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => !stale.includes(id))])); setDraft({ ...draft, units: draft.units.filter((u) => !stale.includes(u.id)), classUnits, staleUnits: [] }); };
   const moveLegacyActivity = (unitId: string, activity: Activity) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], activities: [...chaptersOf(base)[name].activities, activity] } }, units: base.units.map((u) => u.id === unitId ? { ...u, activities: u.activities.filter((a) => a.id !== activity.id) } : u) }); };
+  const reviewPool = draft.units.filter((u) => reviewSources.includes(u.id));
+  const reviewTotal = reviewPool.reduce((sum, u) => sum + (u.questionCount || 0), 0);
+  const reviewAllocation = reviewSources.length && reviewCount >= reviewSources.length && reviewCount <= reviewTotal ? allocateDraw(Object.fromEntries(reviewPool.map((u) => [u.id, u.questionCount || 0])), reviewCount, reviewSources) : {};
+  const buildReview = async () => { setBusy(true); try { const r = await api.call<any>('buildReviewExam', { courseId: draft.id, name: reviewName, sourceUnitIds: reviewSources, drawCount: reviewCount }); const review = { sourceUnitIds: reviewSources, sourceVersions: r.sourceVersions, drawCount: reviewCount, allocation: r.allocation, builtAt: r.builtAt, history: [{ version: r.version, drawCount: reviewCount, allocation: r.allocation, builtAt: r.builtAt }] }; const u: Unit = { id: reviewName, title: reviewName, group: reviewName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: r.version, questionCount: reviewCount, activities: [], visibility: 'hidden', review }; const base = materialize(); const exists = base.units.some((x) => x.id === reviewName); setDraft({ ...base, units: exists ? base.units.map((x) => x.id === reviewName ? { ...x, bankVersion: r.version, questionCount: reviewCount, review } : x) : [...base.units, u], chapters: exists ? base.chapters : { ...base.chapters, [reviewName]: { title: reviewName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }, chapterOrder: exists ? base.chapterOrder : [...(base.chapterOrder || []), reviewName] }); setSelected(reviewName); setReviewOpen(false); notify('複習考題目池已建立；請設定開放與適用班級後保存草稿。'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
   if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再同步 Google Sheet 建立單元。" /><button onClick={newCourse}>新增課程</button></section>;
   return <>
     <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy} onClick={() => act(true)}>發布課程</button></div></header>
     <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
     <ClassManager course={draft} change={setDraft} />
     {!!draft.staleUnits?.length && <div className="notice warning"><strong>Sheet 已無對應的舊題目分類</strong><p>{draft.staleUnits.join('、')}</p><button onClick={removeStale}>全部移除</button></div>}
-    <div className="editorgrid"><aside className="panel unitmenu"><div className="sectionhead"><h3>單元安排</h3></div>{rows.map(({ name: key, chapter: item, units: children }) => <button key={key} className={'unit-leaf top' + (name === key ? ' selected' : '')} onClick={() => setSelected(key)}><strong>{item.title}</strong><span className="muted">{children.length} 個分類、{children.reduce((n, u) => n + (u.questionCount || 0), 0)} 題</span></button>)}</aside>
+    {reviewOpen && <div className="modalshade"><section className="modal"><div className="sectionhead"><h2>新增複習考</h2><button onClick={() => setReviewOpen(false)}>關閉</button></div><Field label="名稱"><input value={reviewName} onChange={(e) => setReviewName(e.target.value)} placeholder="不可與既有單元同名" /></Field><p>來源分類（可跨單元；只選已發布的一般分類）</p>{draft.units.filter((u) => u.bankVersion && !isReviewUnit(u)).map((u) => <label className="check" key={u.id}><input type="checkbox" checked={reviewSources.includes(u.id)} onChange={(e) => { const next = e.target.checked ? [...reviewSources, u.id] : reviewSources.filter((id) => id !== u.id); setReviewSources(next); setReviewCount(Math.max(next.length, Math.min(40, next.reduce((sum, id) => sum + (draft.units.find((x) => x.id === id)?.questionCount || 0), 0)))); }} />{u.group ? `${u.group}／` : ''}{u.title}（{u.questionCount || 0} 題）</label>)}<Field label="每次作答題數 N"><input type="number" min={reviewSources.length || 1} max={reviewTotal || 1} value={reviewCount} onChange={(e) => setReviewCount(Number(e.target.value))} /></Field><p className="muted">題目池共 {reviewTotal} 題；分配：{Object.entries(reviewAllocation).map(([id, n]) => `${id} ${n} 題`).join('、') || '請先選擇來源'}。門檻 80 分需答對 {Math.ceil(reviewCount * .8)} 題。</p><button className="primary" disabled={busy || !reviewName || reviewCount < reviewSources.length || reviewCount > reviewTotal} onClick={buildReview}>建立</button></section></div>}
+    <div className="editorgrid"><aside className="panel unitmenu"><div className="sectionhead"><h3>單元安排</h3><button onClick={() => { setReviewName(''); setReviewSources([]); setReviewCount(1); setReviewOpen(true); }}><Plus size={16} />新增複習考</button></div>{rows.map(({ name: key, chapter: item, units: children }) => <button key={key} className={'unit-leaf top' + (name === key ? ' selected' : '')} onClick={() => setSelected(key)}><strong>{item.title}{isReviewUnit(children[0]) && <span className="badge">作業・複習考</span>}</strong><span className="muted">{isReviewUnit(children[0]) ? `題目池 ${children[0].review!.sourceUnitIds.length} 分類、每次 ${children[0].review!.drawCount} 題` : `${children.length} 個分類、${children.reduce((n, u) => n + (u.questionCount || 0), 0)} 題`}</span></button>)}</aside>
       {!chapter ? <Empty title="尚未有單元" detail="請先到題庫管理同步 Google Sheet。" /> : <section className="panel"><div className="sectionhead"><h2>單元設定</h2><button onClick={() => preview(materialize(), true, units[0]?.id)}>預覽單元</button></div>
         {units.some((u) => u.activities.length) && <div className="notice warning"><strong>以下活動掛在舊的題目分類上，請搬到單元</strong>{units.flatMap((u) => u.activities.map((a) => <div className="sectionhead" key={`${u.id}_${a.id}`}><span>{u.title}／{a.title}</span><button onClick={() => moveLegacyActivity(u.id, a)}>搬到此單元</button></div>))}</div>}
         <div className="formgrid"><Field label="單元名稱"><input value={chapter.title} onChange={(e) => changeChapter({ title: e.target.value })} /></Field><Field label="達標分數"><input type="number" min="0" max="100" value={chapter.threshold} onChange={(e) => changeChapter({ threshold: Number(e.target.value) })} /></Field><Field label="開放時間"><input type="datetime-local" value={chapter.opensAt} onChange={(e) => changeChapter({ opensAt: e.target.value })} /></Field><Field label="完成期限"><input type="datetime-local" value={chapter.dueAt} onChange={(e) => changeChapter({ dueAt: e.target.value })} /></Field></div>
@@ -933,7 +946,7 @@ function CourseEditor(props: CourseEditorProps) {
           first={index === 0}
           last={index === chapter.activities.length - 1}
         />)}
-        <hr /><h2>題目分類（來自 Sheet 次單元）</h2><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}
+        <hr /><h2>{isReviewUnit(units[0]) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{isReviewUnit(units[0]) ? <><p className="muted">題目池 {units[0].review!.sourceUnitIds.length} 個來源，每次抽 {units[0].review!.drawCount} 題，組卷於 {new Date(units[0].review!.builtAt).toLocaleString()}。</p><p>{Object.entries(units[0].review!.allocation).map(([id, n]) => `${id} ${n} 題`).join('、')}</p><div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(units[0].review!.sourceUnitIds); setReviewCount(units[0].review!.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { await api.call('deleteReviewExam', { courseId: draft.id, name: units[0].id }); setDraft((d) => ({ ...d, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></> : <><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}</>}
       </section>}
     </div>
   </>;
@@ -1435,7 +1448,7 @@ function StudentDetail({
                 · 練習 {student.progress.units[u.id]?.attempts || 0} 次
               </p>
             </div>
-            <span className="badge">{complete(u, student.progress) ? '已達標' : '待完成'}</span>
+            <span className="badge">{complete(u, student.progress) ? isReviewUnit(u) && isOverdue(u, student.progress.units[u.id]) ? '逾期完成' : '已達標' : '待完成'}</span>
           </div>
         ))}
         <h3>活動參與</h3>

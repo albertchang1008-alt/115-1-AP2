@@ -14,6 +14,8 @@ export interface Question {
   lectureTitle?: string;
   lectureUrl?: string;
   order?: number;
+  /** 複習考題目池保留原始題目分類，供按比例出題與作答分析使用。 */
+  source?: string;
   socratic?: {
     // 舊欄位：1.2.0 以前發布的題庫快照沿用這五個鍵，保留供相容顯示。
     concept?: string;
@@ -63,6 +65,14 @@ export interface Unit {
   archiveLabel?: string;
   archivedAt?: number;
   visibilityUpdatedAt?: number;
+  review?: {
+    sourceUnitIds: string[];
+    sourceVersions: Record<string, string>;
+    drawCount: number;
+    allocation: Record<string, number>;
+    builtAt: number;
+    history: { version: string; drawCount: number; allocation: Record<string, number>; builtAt: number }[];
+  };
 }
 /** Sheet 的「單元」：設定、活動及完成度的單位；Unit 只保留題庫分類。 */
 export interface Chapter {
@@ -150,13 +160,41 @@ export interface Attempt {
 export interface Progress {
   units: Record<
     string,
-    { best: number; attempts: number; updatedAt: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
+    { best: number; attempts: number; updatedAt: number; passedAt?: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
   attempted?: Record<string, Record<string, true>>;
 }
 export interface WrongEntry { n: number; at: number; }
+export function isReviewUnit(unit: Pick<Unit, 'review'>): boolean { return !!unit.review; }
+export function isOverdue(unit: Pick<Unit, 'dueAt'>, progressEntry: { passedAt?: number } | undefined) {
+  return !!unit.dueAt && !!progressEntry?.passedAt && progressEntry.passedAt > parseCourseTime(unit.dueAt);
+}
+/** 最大餘數法；來源順序就是同餘時的穩定裁決順序。 */
+export function allocateDraw(poolCounts: Record<string, number>, n: number, sourceOrder = Object.keys(poolCounts)): Record<string, number> {
+  const ids = sourceOrder.filter((id) => poolCounts[id] > 0);
+  const total = ids.reduce((sum, id) => sum + poolCounts[id], 0);
+  if (!Number.isInteger(n) || n < ids.length || n > total) throw new Error('複習考抽題數無效');
+  const out = Object.fromEntries(ids.map((id) => [id, 1])) as Record<string, number>;
+  let remaining = n - ids.length;
+  while (remaining) {
+    const capacity = ids.filter((id) => out[id] < poolCounts[id]);
+    const capTotal = capacity.reduce((sum, id) => sum + (poolCounts[id] - out[id]), 0);
+    const shares = capacity.map((id, index) => ({ id, index, raw: remaining * (poolCounts[id] - out[id]) / capTotal }));
+    let granted = 0;
+    for (const row of shares) { const add = Math.min(poolCounts[row.id] - out[row.id], Math.floor(row.raw)); out[row.id] += add; granted += add; }
+    for (const row of shares.sort((a, b) => (b.raw % 1) - (a.raw % 1) || a.index - b.index)) {
+      if (granted >= remaining) break;
+      if (out[row.id] < poolCounts[row.id]) { out[row.id]++; granted++; }
+    }
+    remaining -= granted;
+  }
+  return out;
+}
+export function drawReviewQuestions(pool: Question[], allocation: Record<string, number>, attemptedIds: ReadonlySet<string>): Question[] {
+  return shuffle(Object.entries(allocation).flatMap(([source, count]) => orderForPractice(pool.filter((q) => q.source === source), attemptedIds).slice(0, count)));
+}
 export function normalizeProgress(p: Partial<Progress> | undefined | null): Progress {
   return { ...(p || {}), units: p?.units || {}, activities: p?.activities || {} } as Progress;
 }

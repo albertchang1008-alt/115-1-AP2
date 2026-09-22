@@ -36,6 +36,8 @@ import {
   chapterActivityKey,
   parseCourseTime,
   normalizeProgress,
+  allocateDraw,
+  isReviewUnit,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -199,6 +201,10 @@ export const saveCourse = onCall(options, async (req) => {
     if (u.visibility !== undefined) visibility(u.visibility);
     if (u.archiveLabel !== undefined) cleanLabel(u.archiveLabel);
     if (u.visibility === 'archived' && u.archivedAt !== undefined && (!Number.isFinite(u.archivedAt) || u.archivedAt < 0)) fail('封存時間無效');
+    if (u.review) {
+      const r = u.review;
+      if (!Array.isArray(r.sourceUnitIds) || !r.sourceUnitIds.length || !r.sourceUnitIds.every(safeCode) || new Set(r.sourceUnitIds).size !== r.sourceUnitIds.length || !Number.isInteger(r.drawCount) || r.drawCount < r.sourceUnitIds.length || !r.allocation || Object.values(r.allocation).some((n) => !Number.isInteger(n) || n < 1) || Object.values(r.allocation).reduce((sum, n) => sum + n, 0) !== r.drawCount || !Array.isArray(r.history)) fail('複習考設定無效');
+    }
     const activityIds = new Set();
     for (const a of u.activities) {
       id(a.id);
@@ -469,6 +475,7 @@ async function publishBank(courseId: string, unitId: string, questions: Question
       chunks,
       count: sorted.length,
       questionOptions: Object.fromEntries(sorted.map((q) => [q.id, q.options.map((o) => o.id)])),
+      questionSources: Object.fromEntries(sorted.filter((q) => q.source).map((q) => [q.id, q.source])),
       createdAt: Date.now(),
     });
     // 僅供 Cloud Functions 批改；getBank 絕不讀取／回傳此文件。
@@ -477,6 +484,61 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   }
   return { version, count: sorted.length };
 }
+/** 教師把多個已發布題目分類凍結成獨立的複習考題目池。 */
+export const buildReviewExam = onCall(options, async (req) => {
+  const { p, c } = await access(req, req.data.courseId, true);
+  const name = code(req.data.name);
+  const sourceUnitIds = req.data.sourceUnitIds;
+  const drawCount = req.data.drawCount;
+  if (!Array.isArray(sourceUnitIds) || sourceUnitIds.length < 1 || sourceUnitIds.length > 30 || new Set(sourceUnitIds).size !== sourceUnitIds.length) fail('來源分類設定無效');
+  sourceUnitIds.forEach(code);
+  if (!Number.isInteger(drawCount)) fail('每次作答題數無效');
+  const draft = c.draft as Course;
+  const existing = draft.units.find((u) => u.id === name);
+  if (existing && !isReviewUnit(existing)) fail('名稱已被既有題目分類使用');
+  if (!existing && (draft.chapters?.[name] || draft.units.some((u) => u.id === name))) fail('名稱已被單元使用');
+  const sources = sourceUnitIds.map((sourceId: string) => {
+    const source = draft.units.find((u) => u.id === sourceId);
+    if (!source?.bankVersion || isReviewUnit(source)) fail(`來源分類 ${sourceId} 不可用`);
+    return source;
+  });
+  const banks = await Promise.all(sources.map(async (source) => {
+    const ref = db.doc(`banks/${draft.id}_${source.id}_${source.bankVersion}`), manifest = await ref.get();
+    if (!manifest.exists) fail(`來源題庫 ${source.id} 不存在`);
+    const chunks = await Promise.all((manifest.data()!.chunks || []).map((ch: string) => ref.collection('chunks').doc(ch).get()));
+    return chunks.flatMap((d) => d.data()?.questions || []) as Question[];
+  }));
+  const ids = new Map<string, string>();
+  const pool: Question[] = [];
+  for (let index = 0; index < sources.length; index++) for (const q of banks[index]) {
+    if (ids.has(q.id)) fail(`題目 ID 重複：${q.id}（${ids.get(q.id)}、${sources[index].id}）`);
+    ids.set(q.id, sources[index].id); pool.push({ ...q, source: sources[index].id, order: pool.length + 1 });
+  }
+  if (pool.length > MAX_BANK_QUESTIONS) fail('複習考題目池最多 500 題');
+  if (drawCount < sources.length || drawCount > pool.length) fail('每次作答題數需介於來源數與題目池題數之間');
+  const allocation = allocateDraw(Object.fromEntries(sources.map((s, i) => [s.id, banks[i].length])), drawCount, sourceUnitIds);
+  const result = await publishBank(draft.id, name, pool), builtAt = Date.now();
+  await db.runTransaction(async (tx) => {
+    const ref = db.doc(`courses/${draft.id}`), fresh = await tx.get(ref);
+    if (!fresh.data()?.teacherIds?.includes(p.uid)) fail('未獲授權');
+    const latest = fresh.data()!.draft as Course, old = latest.units.find((u) => u.id === name);
+    if (old && !isReviewUnit(old)) fail('名稱已被既有題目分類使用');
+    const entry = { version: result.version, drawCount, allocation, builtAt };
+    const review = { sourceUnitIds, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])), drawCount, allocation, builtAt, history: [entry, ...(old?.review?.history || [])].slice(0, 10) };
+    const unit: Unit = old ? { ...old, bankVersion: result.version, questionCount: drawCount, review } : { id: name, title: name, group: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: result.version, questionCount: drawCount, activities: [], visibility: 'hidden', review };
+    const chapters = { ...(latest.chapters || {}), ...(old ? {} : { [name]: { title: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }) };
+    tx.update(ref, { 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, 'draft.chapterOrder': old ? latest.chapterOrder : [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name], updatedAt: Date.now() });
+  });
+  return { ...result, allocation, poolCount: pool.length, builtAt, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])) };
+});
+export const deleteReviewExam = onCall(options, async (req) => {
+  const { p } = await access(req, req.data.courseId, true); const name = code(req.data.name);
+  await db.runTransaction(async (tx) => { const ref = db.doc(`courses/${req.data.courseId}`), snap = await tx.get(ref), data = snap.data(), draft = data?.draft as Course;
+    if (!data?.teacherIds?.includes(p.uid)) fail('未獲授權'); const unit = draft.units.find((u) => u.id === name); if (!unit || !isReviewUnit(unit)) fail('找不到複習考');
+    const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((x) => x !== name)])); const chapters = { ...(draft.chapters || {}) }; delete chapters[name];
+    tx.update(ref, { 'draft.units': draft.units.filter((u) => u.id !== name), 'draft.chapters': chapters, 'draft.chapterOrder': (draft.chapterOrder || []).filter((x) => x !== name), 'draft.classUnits': classUnits, updatedAt: Date.now() });
+  }); return { ok: true };
+});
 export const publishQuestions = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.draft?.units?.some((u: Unit) => u.id === req.data.unitId)) fail('請先建立並保存單元');
@@ -553,6 +615,7 @@ export const submitAttempt = onCall(options, async (req) => {
   const unit =
     c.published && forClass(c.published, p.classId).units.find((u: any) => u.id === a.unitId);
   if (!unit || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放');
+  if (isReviewUnit(unit) && a.mode === 'flashcard') fail('複習考僅提供作答');
   const bankRef = db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}`);
   const bank = await bankRef.get();
   if (!bank.exists) fail('題庫版本不存在');
@@ -599,7 +662,10 @@ export const submitAttempt = onCall(options, async (req) => {
   }
   // 前端傳來的 score／correct 僅供相容，絕不採用；一律以不可變題庫快照的正解重批。
   a.answers = a.answers.map((r) => ({ ...r, correct: answersById.get(r.questionId) === r.selected }));
-  a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
+  if (isReviewUnit(unit)) {
+    const sources = bank.data()!.questionSources || {};
+    a.full = a.mode !== 'review' && unit.review!.history.some((h: { version: string; drawCount: number; allocation: Record<string, number> }) => h.version === a.version && h.drawCount === a.answers.length && Object.entries(h.allocation).every(([source, count]) => a.answers.filter((r) => sources[r.questionId] === source).length === count));
+  } else a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
   a.score = Math.round((a.answers.filter((x) => x.correct).length / a.answers.length) * 100);
   const ref = db.doc(`courses/${a.courseId}/attempts/${a.id}`),
     pr = db.doc(`courses/${a.courseId}/progress/${p.uid}`);
@@ -620,6 +686,8 @@ export const submitAttempt = onCall(options, async (req) => {
       ...a,
       receivedAt: Date.now(),
     });
+    if (a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
+      next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
     tx.create(ref, saved);
     if (a.mode !== 'review') tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
     return { progress: next, duplicate: false };
@@ -640,6 +708,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     const unit = visible.find((u: any) => u.id === input.unitId);
     // 綜合練習只允許看板「目前」的單元；整批在寫入前驗完，拒絕時不留半套紀錄。
     if (!unit || unitVisibility(unit) !== 'current' || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放或已移至歷史區');
+    if (isReviewUnit(unit)) fail('複習考不列入綜合練習');
     const bankRef = db.doc(`banks/${courseId}_${input.unitId}_${input.version}`), bank = await bankRef.get();
     if (!bank.exists || !Number.isFinite(input.duration) || input.duration < 0 || input.answers.length > MAX_BANK_QUESTIONS) fail('作答格式錯誤');
     const options = bank.data()!.questionOptions || {};
@@ -1125,6 +1194,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
         const course = await ref.get();
         if (!course.exists) fail('課程不存在，請先在課程與教材建立課程：' + courseId);
         if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
+        if ((course.data()?.draft as Course).units.some((u) => u.id === unitId && isReviewUnit(u))) fail(`名稱「${unitId}」已被複習考使用，請改名`);
         const result = await publishBank(courseId, unitId, questions);
         let created = false;
         await db.runTransaction(async (tx) => {
@@ -1169,7 +1239,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
     const courseRef = db.doc(`courses/${courseId}`);
     const draft = (await courseRef.get()).data()?.draft as Course | undefined;
     const sheetUnitIds = new Set(groups.get(courseId)?.keys() || []);
-    const staleUnits = (draft?.units || []).filter((u) => !sheetUnitIds.has(u.id)).map((u) => u.id);
+    const staleUnits = (draft?.units || []).filter((u) => !isReviewUnit(u) && !sheetUnitIds.has(u.id)).map((u) => u.id);
     if (staleUnits.length) results.forEach((result) => { if (result.courseId === courseId) result.staleUnits = staleUnits; });
     if (draft) await db.runTransaction(async (tx) => {
       const current = await tx.get(courseRef), currentDraft = current.data()?.draft as Course;
