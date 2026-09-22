@@ -43,6 +43,20 @@ test('Chapter 進度、互動教材與課程驗證都有伺服器端防線', () 
   assert.match(save, /chapter\.activities/);
   assert.match(save, /單元順序設定無效/);
 });
+test('複習考 callable 有組卷、歷史採計、刪除與同步名稱衝突防線', () => {
+  const source = fs.readFileSync(require.resolve('../lib/functions/src/index.js'), 'utf8');
+  assert.match(source, /exports\.buildReviewExam/, '教師可建立或重新組卷');
+  assert.match(source, /題目 ID 重複/, '跨來源題目 ID 必須拒絕');
+  assert.match(source, /題目池最多 500 題/, '題目池上限必須拒絕');
+  assert.match(source, /每次作答題數需介於來源數與題目池題數之間/, 'N 範圍必須拒絕');
+  assert.match(source, /history: \[entry, .*\]\.slice\(0, 10\)/, '重組設定最多保留十筆');
+  assert.match(source, /reviewAttemptIsFull/, '交卷須以歷史版本與來源配額驗證');
+  assert.match(source, /複習考僅提供作答/, '複習考拒絕閃卡');
+  assert.match(source, /複習考不列入綜合練習/, '綜合練習伺服器端排除複習考');
+  assert.match(source, /exports\.deleteReviewExam/, '複習考可刪除');
+  assert.match(source, /classUnits/, '刪除時清理班級適用清單');
+  assert.match(source, /u\.id === unitId \|\| u\.id === group/, 'Sheet 單元與次單元同名都必須拒絕');
+});
 test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量拒絕', async () => {
   const db = getFirestore();
   const originals = { doc: db.doc, batch: db.batch, runTransaction: db.runTransaction };

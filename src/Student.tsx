@@ -372,7 +372,7 @@ export default function Student({
                       <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
                       <div>
                         <span className={'badge ' + (state.done ? 'green' : '')}>
-                          {isReviewUnit(units[0]) ? (state.done && isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : '作業・複習考') : state.done
+                          {isReviewUnit(units[0]) ? (state.done ? (isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : '已達標') : locked ? '尚未開放' : '作業・複習考') : state.done
                             ? '已達標'
                             : locked
                               ? '尚未開放'
@@ -505,7 +505,7 @@ function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: 
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
   const best = progress.units[unit.id]?.best ?? 0;
   const passed = best >= threshold;
-  if (isReviewUnit(unit)) return <div className="practice-row"><div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">作業・複習考｜每次 {unit.review!.drawCount} 題</span></div><div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">{isOverdue(unit, progress.units[unit.id]) ? '逾期完成' : '已達標'}</span>}</div><button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=review')}>開始作答（{unit.review!.drawCount} 題）</button><button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>;
+  if (isReviewUnit(unit)) return <div className="practice-row"><div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">作業・複習考｜每次 {unit.review!.drawCount} 題</span></div><div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">{isOverdue(unit, progress.units[unit.id]) ? '逾期完成' : '已達標'}</span>}</div><button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>開始作答（{unit.review!.drawCount} 題）</button><button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>;
   return <div className="practice-row">
     <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">題目分類</span></div>
     <div className="practice-row-score"><span>最高分 {best} / 門檻 {threshold}</span>{passed && <span className="badge green">已達標</span>}</div>

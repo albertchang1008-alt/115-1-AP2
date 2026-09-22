@@ -38,6 +38,7 @@ import {
   normalizeProgress,
   allocateDraw,
   isReviewUnit,
+  reviewAttemptIsFull,
 } from '../../shared/model';
 initializeApp();
 const db = getFirestore();
@@ -664,7 +665,7 @@ export const submitAttempt = onCall(options, async (req) => {
   a.answers = a.answers.map((r) => ({ ...r, correct: answersById.get(r.questionId) === r.selected }));
   if (isReviewUnit(unit)) {
     const sources = bank.data()!.questionSources || {};
-    a.full = a.mode !== 'review' && unit.review!.history.some((h: { version: string; drawCount: number; allocation: Record<string, number> }) => h.version === a.version && h.drawCount === a.answers.length && Object.entries(h.allocation).every(([source, count]) => a.answers.filter((r) => sources[r.questionId] === source).length === count));
+    a.full = a.mode !== 'review' && reviewAttemptIsFull(unit.review!.history, a.version, a.answers.map((r) => r.questionId), sources);
   } else a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
   a.score = Math.round((a.answers.filter((x) => x.correct).length / a.answers.length) * 100);
   const ref = db.doc(`courses/${a.courseId}/attempts/${a.id}`),
@@ -1194,7 +1195,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
         const course = await ref.get();
         if (!course.exists) fail('課程不存在，請先在課程與教材建立課程：' + courseId);
         if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
-        if ((course.data()?.draft as Course).units.some((u) => u.id === unitId && isReviewUnit(u))) fail(`名稱「${unitId}」已被複習考使用，請改名`);
+        if ((course.data()?.draft as Course).units.some((u) => isReviewUnit(u) && (u.id === unitId || u.id === group))) fail(`名稱「${unitId === group ? unitId : group}」已被複習考使用，請改名`);
         const result = await publishBank(courseId, unitId, questions);
         let created = false;
         await db.runTransaction(async (tx) => {

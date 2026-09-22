@@ -27,6 +27,7 @@ import {
   allocateDraw,
   drawReviewQuestions,
   isOverdue,
+  reviewAttemptIsFull,
 } from '../shared/model';
 const q = {
   id: 'q1',
@@ -276,4 +277,13 @@ test('複習考首次達標時間晚於期限才標示逾期，完成度公式�
   assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:01') }), true);
   assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:00') }), false);
   assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 3);
+});
+
+test('複習考交卷須符合歷史版本的題數與來源配額，舊組卷仍可採計', () => {
+  const history = [{ version: 'old', drawCount: 3, allocation: { a: 2, b: 1 }, builtAt: 1 }, { version: 'new', drawCount: 2, allocation: { a: 1, b: 1 }, builtAt: 2 }];
+  const sources = { a1: 'a', a2: 'a', b1: 'b', b2: 'b' };
+  assert.equal(reviewAttemptIsFull(history, 'old', ['a1', 'a2', 'b1'], sources), true);
+  assert.equal(reviewAttemptIsFull(history, 'old', ['a1', 'b1'], sources), false, '題數不足不得採計');
+  assert.equal(reviewAttemptIsFull(history, 'old', ['a1', 'b1', 'b2'], sources), false, '來源配額不符不得採計');
+  assert.equal(reviewAttemptIsFull(history, 'new', ['a1', 'b1'], sources), true);
 });

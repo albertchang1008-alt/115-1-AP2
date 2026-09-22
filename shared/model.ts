@@ -195,6 +195,9 @@ export function allocateDraw(poolCounts: Record<string, number>, n: number, sour
 export function drawReviewQuestions(pool: Question[], allocation: Record<string, number>, attemptedIds: ReadonlySet<string>): Question[] {
   return shuffle(Object.entries(allocation).flatMap(([source, count]) => orderForPractice(pool.filter((q) => q.source === source), attemptedIds).slice(0, count)));
 }
+export function reviewAttemptIsFull(history: NonNullable<Unit['review']>['history'], version: string, questionIds: readonly string[], questionSources: Record<string, string>): boolean {
+  return history.some((h) => h.version === version && h.drawCount === questionIds.length && Object.entries(h.allocation).every(([source, count]) => questionIds.filter((id) => questionSources[id] === source).length === count));
+}
 export function normalizeProgress(p: Partial<Progress> | undefined | null): Progress {
   return { ...(p || {}), units: p?.units || {}, activities: p?.activities || {} } as Progress;
 }

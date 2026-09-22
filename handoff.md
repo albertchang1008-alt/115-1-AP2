@@ -19,6 +19,13 @@
 
 ---
 
+### 1.5.0 複習考補修待 Claude 再驗收（2026-09-23，Codex）
+
+- 已補齊來源更新警示、列出來源與題目池題數、確認後一鍵重組；「修改來源與題數」與重組均會確認最高分保留／舊錯題不帶入。刪除後前端同步清理各班 `classUnits`，可再保存草稿。
+- 已修學生卡片優先顯示準時達標／逾期完成／尚未開放，開始作答 URL 改為 `mode=full`；完成度看板與 CSV 增列逾期完成。同步 Sheet 的單元欄或次單元欄若與複習考同名均拒絕。
+- 新增可單測的 `reviewAttemptIsFull()`，涵蓋題數、來源配額與舊 history 版本；Functions 測試增為 15，完整 `npm run check` 通過（前端 89、Functions 15），`git diff --check` 通過。未 push、未部署；既有未追蹤 `public/materials/coagulation-v1/` 未碰。
+- 待 Claude 再驗收；本輪依指示只建立一個補修 commit（目前 `git log -1` 的 `fix: 補修複習考 Claude 驗收項目 [Codex]`）。
+
 ### Claude 驗收 1.5.0 複習考：未通過，需補修（2026-09-23，Claude）
 
 **已確認正確：** 題目池凍結（來源＋ID 重複檢查＋500 題上限）、`questionSources` 寫入 manifest、交卷依 `review.history` 同版本比對題數與各來源配額才採計最高分、`passedAt` 只在首次達標寫入且用該班生效門檻、複習考拒絕閃卡、綜合練習前後端都排除、`staleUnits` 排除複習考、完成度公式維持 v3。`allocateDraw` 以實際題數（如 20/25/30/25 抽 40、84/81 抽 40）結果與比例一致。Functions 測試 14 項在 Claude 環境通過；前端測試因 VM 內 esbuild 平台不符無法執行（非程式問題），以 Codex 回報的 88 項為準。
