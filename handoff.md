@@ -23,7 +23,7 @@
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
-| ECG 教材初稿檢視 | 已檢視教師貼上的獨立 HTML 初稿（未匯入 repo）。改善計畫已定於 `docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`；待教師核定六節點／臨床內容邊界後再納入元件庫或建立新教材版本。 |
+| ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1` 已以元件庫建置，六節點、11 題、SDK 串接與 390／1280 截圖驗收通過；待教師醫學內容複核與 Claude 驗收，未發布。 |
 
 ## 部署方式（教師在自己的 Mac 執行）
 
@@ -75,11 +75,12 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
+- ECG 基礎教材：`feature/ecg-basics`，計畫 `docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`，截圖與報告在 `materials-src/ecg-basics/shots/`（gitignore）。教師仍須依指定教科書／ECG 資源複核內容；核定前不得發布。
 
 **等教師決定**
 - 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
 - 三份新教材視覺：方向已併入教材元件庫 v1（心臟構造為樣板）；樣板核定後再決定其他份的轉換順序。
-- ECG 基礎教材改善計畫：`docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`。請核定採六節點 `ecg-basics-v1`，並確認進階異常波形另案醫學審稿；核定前不匯入、不建置、不發布。
+- ECG 基礎教材內容複核：請確認採六節點 `ecg-basics-v1`，並確認進階異常波形另案醫學審稿；核定前不發布。
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
 
 **技術待辦（未排程）**

@@ -7,6 +7,12 @@
 - 已檢視教師提供的單檔 ECG 初稿，並建立 `docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`。計畫採六節點、6 題先備＋5 題病例的 `ecg-basics-v1` 建議，將異常波形臨床判讀改為後續、需來源與專業審稿的範圍。
 - 計畫列出教材元件庫重建、canvas 時距與可近用性修正、CourseLearning 診斷串接、截圖／iframe／真實帳號驗收；未匯入教材、未改產品程式、未發布。
 
+## 1.5.0 — ECG 基礎教材 v1（2026-09-23）
+
+- 新增 `ecg-basics-v1`：六個 ECG 基礎節點、6 題先備題與 5 題情境題；明確保留非診斷界線，未納入單一異常波形直接對應疾病的內容。
+- 元件庫題目流程改為先完成先備題才解鎖病例題、選項洗牌、錯答送 hint、全數病例答對才 complete；節點展開累積實際停留時間。建置稽核能讀取生成教材的固定 ID metadata。
+- 驗證：`npm run materials:build ecg-basics`、`npm run materials:shots ecg-basics`（390／1280、所有 lab 狀態與節點通過）、`npm run check`、`git diff --check` 通過；未 push、未部署，待教師內容複核。
+
 ## 1.5.0 — 教材元件庫 v1（2026-09-23）
 
 - 新增 `materials-src/kit/` 原生 HTML/CSS/JS 元件庫、SVG 圖庫與授權 manifest、`shared/materialKit.ts` 內容型別／驗證，以及 `materials:build`／`materials:shots` 建置與 Playwright 截圖工具。

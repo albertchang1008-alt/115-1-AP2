@@ -4,12 +4,19 @@ import fs from 'node:fs';
 import { validateMaterialContent } from '../shared/materialKit';
 
 const content = JSON.parse(fs.readFileSync('materials-src/heart-structure/content.json', 'utf8'));
+const ecg = JSON.parse(fs.readFileSync('materials-src/ecg-basics/content.json', 'utf8'));
 test('教材內容檔驗證固定節點、題目 ID 與答案關聯', () => {
   assert.doesNotThrow(() => validateMaterialContent(content));
   assert.equal(content.nodes.length, 6); assert.equal(content.foundation.length + content.cases.length, 11);
   assert.throws(() => validateMaterialContent({ ...content, foundation: [...content.foundation, content.foundation[0]] }), /foundation.*預期|重複/);
   assert.throws(() => validateMaterialContent({ ...content, cases: content.cases.map((q: any, i: number) => i ? q : { ...q, answer: 99 }) }), /answer/);
   assert.throws(() => validateMaterialContent({ ...content, cases: content.cases.map((q: any, i: number) => i ? q : { ...q, nodeId: 'missing' }) }), /nodeId/);
+});
+test('ECG 基礎教材維持六節點、十一題與非診斷內容界線', () => {
+  assert.doesNotThrow(() => validateMaterialContent(ecg));
+  assert.equal(ecg.nodes.length, 6); assert.equal(ecg.foundation.length + ecg.cases.length, 11);
+  assert.ok(ecg.nodes.some((node: any) => node.id === 'ecg-basics-node-06'));
+  assert.ok(ecg.credits.some((credit: string) => credit.includes('審核')));
 });
 test('心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID', () => {
   const html = fs.readFileSync('public/materials/heart-structure-v1/index.html', 'utf8');

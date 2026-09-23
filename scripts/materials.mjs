@@ -47,12 +47,17 @@ export function auditOne(slug) {
   const hasScript = /course-learning\.js/.test(html);
   const hasComplete = /\.complete\s*\(\s*\)/.test(html);
 
+  const materialIds = html.match(/<meta name="material-ids" content="([^"]*)"/);
+  const generatedNodeIds = materialIds ? materialIds[1].split(',').filter((id) => /-node-\d+$/.test(id)) : [];
+  const generatedQuestionIds = materialIds ? materialIds[1].split(',').filter((id) => /-q\d+$/.test(id)) : [];
   const dataNodeId = [...new Set([...html.matchAll(/data-node-id="([^"]+)"/g)].map((m) => m[1]))];
   const dataNode = [...new Set([...html.matchAll(/data-node="([^"]+)"/g)].map((m) => m[1]))];
   const literalExplore = [...new Set([...html.matchAll(/\.explore\(\s*['"]([\w:-]+)['"]\s*\)/g)].map((m) => m[1]))];
 
   let nodeTotal = null, nodeConfidence = 'unknown', nodeNote = '';
-  if (dataNodeId.length) {
+  if (generatedNodeIds.length) {
+    nodeTotal = generatedNodeIds.length; nodeConfidence = 'high'; nodeNote = `material-ids metadata ${generatedNodeIds.length} 個固定節點`;
+  } else if (dataNodeId.length) {
     nodeTotal = dataNodeId.length; nodeConfidence = 'high'; nodeNote = `data-node-id 屬性 ${dataNodeId.length} 個相異值`;
   } else if (dataNode.length) {
     nodeTotal = dataNode.length; nodeConfidence = 'high'; nodeNote = `data-node 屬性 ${dataNode.length} 個相異值`;
@@ -62,7 +67,7 @@ export function auditOne(slug) {
     nodeNote = '偵測不到固定節點標記，可能用變數／多個資料陣列組成節點 id（例如迴圈或物件 key），需要人工閱讀程式碼核對後手動填入 shared/materials.ts';
   }
 
-  const questionIds = [...new Set(
+  const questionIds = generatedQuestionIds.length ? generatedQuestionIds.sort() : [...new Set(
     [...html.matchAll(/id:\s*['"]([\w:-]+)['"]/g)]
       .map((m) => m[1])
       .filter((id) => /-?q\d{1,3}$/i.test(id))
