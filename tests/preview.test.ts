@@ -100,6 +100,12 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /chapterUnits\.map\(\(classification\) => <PracticeRow/);
   assert.match(source, /最高分 \{bestLabel\} \/ 門檻 \{threshold\}/);
   assert.match(source, /best < 0 \? '尚未完整作答'/);
+  // 抽題、錯題閃卡、綜合練習都要提示學生：不計分，需做完整測驗或完整閃卡。
+  assert.match(source, /這是練習，不計入最高分與達標。/);
+  assert.match(source, /const practice = mode === 'quiz' && !full;/);
+  assert.match(source, /\{practice && <PracticeHint unit=\{unit\} \/>\}/);
+  assert.match(source, /錯題閃卡 \{i \+ 1\} \/ \{qs\.length\}<\/strong><\/div><PracticeHint unit=\{unit\} \/>/);
+  assert.match(source, /綜合練習 \{i \+ 1\} \/ \{rows\.length\}<\/strong><\/div><PracticeHint \/>/);
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
 });

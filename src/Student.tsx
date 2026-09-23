@@ -523,6 +523,11 @@ function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, 
   const key = chapterActivityKey(chapterName, activity.id);
   return <main className="reading-page" ref={root as any}><header><button aria-label="離開閱讀" onClick={onBack}><ArrowLeft size={18} /></button><strong>{activity.title}</strong>{canFullscreen && <button aria-label="全螢幕閱讀" onClick={() => root.current?.requestFullscreen()}>全螢幕</button>}</header><section className="reading-body">{activity.type === 'html' ? <HtmlMaterial activity={activity} onSave={onSave} api={api} courseId={course.id} unitId={unit.id} chapterName={chapterName} uid={uid} /> : activity.type === 'youtube' ? <Youtube activity={activity} position={progress.activities[key]?.position || 0} onSave={onSave} /> : <><h1>{activity.title}</h1><p>{activity.description}</p><a className="button primary" href={activity.url} target="_blank" rel="noreferrer" onClick={() => onSave(0, false)}>開啟連結 ↗</a><button onClick={() => onSave(0, true)}>確認已閱讀</button></>}</section></main>;
 }
+// 抽題、錯題閃卡、綜合練習都不寫入最高分；學生常以為做了練習就會有成績，所以在練習畫面直接說明計分方式。
+function PracticeHint({ unit }: { unit?: Unit }) {
+  const total = unit?.questionCount ? `全部 ${unit.questionCount} 題` : '全部題目';
+  return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」或「完整閃卡」並做完{total}。</p>;
+}
 function WrongCards({ api, course, unit, progress, onBack }: { api: API; course: Course; unit: Unit; progress: Progress; onBack: () => void }) {
   const [range, setRange] = useState<'24h' | '7d' | 'all'>('7d'), [qs, setQs] = useState<Question[]>([]), [i, setI] = useState(0), [flipped, setFlipped] = useState(false), [seen, setSeen] = useState(0);
   const ids = (r: '24h' | '7d' | 'all') => wrongCardIds(progress, unit.id, unit.bankVersion, r);
@@ -530,8 +535,8 @@ function WrongCards({ api, course, unit, progress, onBack }: { api: API; course:
   useEffect(() => { if (!counts[range]) setRange(counts['7d'] ? '7d' : 'all'); }, [counts['24h'], counts['7d'], counts.all, range]);
   useEffect(() => { void cachedBank(api, course.id, unit.id, unit.bankVersion).then((all) => setQs(ids(range).map((id) => all.find((q) => q.id === id)).filter(Boolean) as Question[])); }, [range, unit.id, unit.bankVersion]);
   const q = qs[i];
-  if (!q) return <main className="quiz"><button onClick={onBack}>返回單元</button><h1>{seen ? '本次錯題閃卡已看完' : '目前沒有錯題'}</h1><p>錯題會在完整測驗、完整閃卡、抽題或綜合練習答對時移除。</p></main>;
-  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>錯題閃卡 {i + 1} / {qs.length}</strong></div><label>時間範圍 <select value={range} onChange={(e) => { setRange(e.target.value as any); setI(0); setFlipped(false); }}>{(['24h','7d','all'] as const).map((r) => <option key={r} value={r} disabled={!counts[r]}>{r === '24h' ? '最近 24 小時' : r === '7d' ? '最近 7 天' : '全部'}（{counts[r]}）</option>)}</select></label><article className="panel" onClick={() => setFlipped(true)} aria-label="點選翻到答案"><h2>{q.text}</h2>{flipped && <><p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p><Explanations q={q} /></>}</article><p>閃卡不會寫入資料或改變錯題清單；在測驗或練習中答對才會移除。</p><div className="sectionhead"><button onClick={() => { setSeen((n) => n + 1); setQs((x) => x.filter((_, index) => index !== i)); setI(0); setFlipped(false); }}>我會</button><button onClick={() => { setSeen((n) => n + 1); setQs((x) => [...x.slice(0, i), ...x.slice(i + 1), q]); setI(Math.min(i, Math.max(0, qs.length - 1))); setFlipped(false); }}>再看一次</button></div></main>;
+  if (!q) return <main className="quiz"><button onClick={onBack}>返回單元</button><h1>{seen ? '本次錯題閃卡已看完' : '目前沒有錯題'}</h1><p>錯題會在完整測驗、完整閃卡、抽題或綜合練習答對時移除。</p><PracticeHint unit={unit} /></main>;
+  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>錯題閃卡 {i + 1} / {qs.length}</strong></div><PracticeHint unit={unit} /><label>時間範圍 <select value={range} onChange={(e) => { setRange(e.target.value as any); setI(0); setFlipped(false); }}>{(['24h','7d','all'] as const).map((r) => <option key={r} value={r} disabled={!counts[r]}>{r === '24h' ? '最近 24 小時' : r === '7d' ? '最近 7 天' : '全部'}（{counts[r]}）</option>)}</select></label><article className="panel" onClick={() => setFlipped(true)} aria-label="點選翻到答案"><h2>{q.text}</h2>{flipped && <><p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p><Explanations q={q} /></>}</article><p>閃卡不會寫入資料或改變錯題清單；在測驗或練習中答對才會移除。</p><div className="sectionhead"><button onClick={() => { setSeen((n) => n + 1); setQs((x) => x.filter((_, index) => index !== i)); setI(0); setFlipped(false); }}>我會</button><button onClick={() => { setSeen((n) => n + 1); setQs((x) => [...x.slice(0, i), ...x.slice(i + 1), q]); setI(Math.min(i, Math.max(0, qs.length - 1))); setFlipped(false); }}>再看一次</button></div></main>;
 }
 function MixedPractice({ api, course, progress, count, onBack, notify }: { api: API; course: Course; progress: Progress; count: number; onBack: () => void; notify: (s: string) => void }) {
   const [rows, setRows] = useState<{ q: Question; unit: Unit }[]>([]), [i, setI] = useState(0), [selected, setSelected] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [done, setDone] = useState(false);
@@ -541,7 +546,7 @@ function MixedPractice({ api, course, progress, count, onBack, notify }: { api: 
   if (!row) return <main className="quiz"><button onClick={onBack}>返回首頁</button><h1>目前沒有可供綜合練習的題目</h1></main>;
   if (done) return <main className="quiz"><h1>綜合練習已提交</h1><p>錯題與作答紀錄已分別寫回原次單元；不影響最高成績或完成度。</p><button onClick={onBack}>返回首頁</button></main>;
   const key = `${row.unit.id}:${row.q.id}`;
-  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>綜合練習 {i + 1} / {rows.length}</strong></div><p>{row.unit.title}</p><h2>{row.q.text}</h2><div className="options">{row.q.options.map((o) => <button key={o.id} className={selected[key] === o.id ? 'chosen' : ''} onClick={() => setSelected((x) => ({ ...x, [key]: o.id }))}>{o.text}</button>)}</div><div className="sectionhead"><button disabled={i === 0} onClick={() => setI(i - 1)}>上一題</button>{i < rows.length - 1 ? <button className="primary" onClick={() => setI(i + 1)}>下一題</button> : <button className="primary" disabled={busy} onClick={submit}>完成並提交</button>}</div></main>;
+  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>綜合練習 {i + 1} / {rows.length}</strong></div><PracticeHint /><p>{row.unit.title}</p><h2>{row.q.text}</h2><div className="options">{row.q.options.map((o) => <button key={o.id} className={selected[key] === o.id ? 'chosen' : ''} onClick={() => setSelected((x) => ({ ...x, [key]: o.id }))}>{o.text}</button>)}</div><div className="sectionhead"><button disabled={i === 0} onClick={() => setI(i - 1)}>上一題</button>{i < rows.length - 1 ? <button className="primary" onClick={() => setI(i + 1)}>下一題</button> : <button className="primary" disabled={busy} onClick={submit}>完成並提交</button>}</div></main>;
 }
 function Quiz({
   questions,
@@ -580,6 +585,8 @@ function Quiz({
     attemptId = useRef(crypto.randomUUID()),
     submitted = useRef(false);
   const q = questions[i];
+  // 抽題練習：quiz 模式但非完整作答（複習考一律 full，不會出現）。
+  const practice = mode === 'quiz' && !full;
   useEffect(() => { if (forceLeave && !result) setLeave(true); }, [forceLeave, result]);
   function research(questionId: string, value: Omit<ExplanationResearchEvent, 'id' | 'questionId' | 'attemptId' | 'clientAt'>) {
     if (!researchEnabled) return;
@@ -655,6 +662,7 @@ function Quiz({
         </p>
         {isReviewUnit(unit) && <p className="muted">{Object.entries(questions.reduce((out, q, index) => { const source = q.source || '其他'; const row = out[source] || (out[source] = [0, 0]); row[1]++; if (result.answers[index].correct) row[0]++; return out; }, {} as Record<string, [number, number]>)).map(([source, [ok, total]]) => `${source} ${ok}/${total}`).join(' ・ ')}</p>}
         <p className="notice">{busy ? '正在保存…' : status}</p>
+        {practice && <PracticeHint unit={unit} />}
         <button className="primary" disabled={busy} onClick={onClose}>
           返回單元
         </button>
@@ -696,6 +704,7 @@ function Quiz({
       <div className="progressline">
         <div style={{ width: `${((i + 1) / questions.length) * 100}%` }} />
       </div>
+      {practice && i === 0 && <PracticeHint unit={unit} />}
       <span className="eyebrow">
         QUESTION {String(i + 1).padStart(2, '0')} / {questions.length}
       </span>
