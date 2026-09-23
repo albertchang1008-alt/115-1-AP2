@@ -1,0 +1,28 @@
+{
+  "slug":"heart-structure","version":"v1","title":"心臟構造與解剖生理圖卡","subtitle":"從心包、心壁到心腔、瓣膜、冠狀循環與傳導系統。","label":"心臟構造與解剖生理圖卡",
+  "stats":[{"value":"4","label":"心腔與四組瓣膜"},{"value":"70–80 次/分","label":"竇房結自發節律"},{"value":"3 倍","label":"左心室約為右心室壁厚"}],
+  "lab":{"title":"情境實驗室｜讓血液走對路","intro":"切換心室收縮與舒張，觀察瓣膜如何維持單向血流；再先預測下一個步驟。","figure":"heart-cross-section.svg","states":[{"id":"fill","label":"舒張期・充盈","explain":"房室瓣開、半月瓣關，血液由心房流入心室。"},{"id":"pump","label":"收縮期・射血","explain":"房室瓣關、半月瓣開，血液由心室射入肺動脈與主動脈。"}],"predict":{"question":"心室開始收縮時，哪一組瓣膜必須先關閉？","options":["半月瓣","房室瓣"],"answer":1,"feedback":"正確：房室瓣先關閉，避免血液逆流回心房。"}},
+  "nodes":[
+    {"id":"heart-structure-node-01","tag":"心包與心壁","title":"心包膜的層次與防護功能","summary":"外層纖維包、內層雙層漿膜。","figure":"heart-node.svg","concept":"心包膜雙層結構包圍心臟，提供固定與減摩防護。","points":["纖維心包防止心臟過度擴張並固定於縱隔。","漿膜心包分壁層與臟層；臟層即心外膜。","心包腔含少許心包液，減少搏動摩擦。"],"clinical":{"title":"臨床意義｜心包填塞","text":"心包積液會限制心室舒張充血，造成心輸出量下降。"}},
+    {"id":"heart-structure-node-02","tag":"心包與心壁","title":"心臟壁的三層構造與特徵","summary":"心外膜、心肌層與心內膜。","figure":"heart-node.svg","concept":"心肌層占大部分厚度並主導收縮。","points":["心外膜是漿膜心包臟層。","心肌層由分枝心肌細胞組成。","心內膜襯於心腔並覆蓋瓣膜。"],"clinical":{"title":"臨床意義｜左心室肥大","text":"高血壓增加後負荷，左心室心肌可代償性肥厚。"}},
+    {"id":"heart-structure-node-03","tag":"心腔與瓣膜","title":"心臟四大腔室與重要構造","summary":"左右心房與心室分流肺、體循環。","figure":"heart-node.svg","concept":"房、室中隔將心臟分成左右兩側，維持兩套循環分流。","points":["右心房接受上、下腔靜脈與冠狀竇血液。","左心房接受四條肺靜脈的充氧血。","左心室形成心尖且心肌壁最厚。"],"clinical":{"title":"臨床意義｜中隔缺損","text":"卵圓孔未閉或心室中隔缺損可使左右心血液混合。"}},
+    {"id":"heart-structure-node-04","tag":"心腔與瓣膜","title":"心臟瓣膜與單向流動機制","summary":"壓力差控制房室瓣與半月瓣。","figure":"heart-node.svg","concept":"兩組房室瓣與兩組半月瓣確保血液單向前流。","points":["右房室瓣為三尖瓣；左房室瓣為二尖瓣。","乳頭肌與腱索防止房室瓣翻轉。","肺動脈瓣與主動脈瓣防止舒張期倒流。"],"clinical":{"title":"臨床意義｜心雜音","text":"瓣膜狹窄或關閉不全會造成血液倒流與異常雜音。"}},
+    {"id":"heart-structure-node-05","tag":"冠狀與傳導","title":"冠狀血管循環與心肌血供","summary":"左右冠狀動脈供應心肌。","figure":"heart-node.svg","concept":"冠狀動脈由升主動脈基部供應心肌，靜脈血回流至冠狀竇。","points":["左冠狀動脈分前室間枝與迴旋枝。","右冠狀動脈分後室間與邊緣動脈。","冠狀竇將缺氧血注入右心房。"],"clinical":{"title":"臨床意義｜心肌梗塞","text":"左前降支阻塞常造成前壁心肌梗塞。"}},
+    {"id":"heart-structure-node-06","tag":"冠狀與傳導","title":"心臟特化自律傳導系統","summary":"竇房結啟動規律電衝動。","figure":"heart-node.svg","concept":"特化心肌細胞組成傳導系統，使心臟能自律節律性收縮。","points":["竇房結是正常節律點，每分鐘約 70–80 次。","衝動經房室結、房室束傳入心室。","浦金埃氏纖維使心室協調收縮。"],"clinical":{"title":"臨床意義｜傳導阻滯","text":"房室傳導阻滯時，較慢的下級節律點可能接手。"}}
+  ],
+  "foundation":[
+    {"id":"heart-structure-foundation-q01","stem":"1. 心包膜中何者含心包液、可減少膜面摩擦？","options":["纖維心包","心包腔","心肌層","心內膜"],"answer":1,"hint":"位於漿膜心包壁層與臟層之間。","nodeId":"heart-structure-node-01"},
+    {"id":"heart-structure-foundation-q02","stem":"2. 心臟壁哪一層由心肌細胞組成並負責收縮？","options":["心外膜","心肌層","心內膜","纖維心包"],"answer":1,"hint":"是心臟壁的中層。","nodeId":"heart-structure-node-02"},
+    {"id":"heart-structure-foundation-q03","stem":"3. 哪一腔室的心肌層最厚？","options":["右心房","左心房","右心室","左心室"],"answer":3,"hint":"要克服全身體循環阻力。","nodeId":"heart-structure-node-03"},
+    {"id":"heart-structure-foundation-q04","stem":"4. 右房室瓣及防倒翻構造為何？","options":["二尖瓣；梳狀肌","三尖瓣；腱索與乳頭肌","主動脈瓣；心肉柱","肺動脈瓣；卵圓窩"],"answer":1,"hint":"右側房室瓣有三片瓣葉。","nodeId":"heart-structure-node-04"},
+    {"id":"heart-structure-foundation-q05","stem":"5. 供應左心室前壁的主要分枝為何？","options":["右冠狀動脈後室間動脈","左冠狀動脈前室間枝（前降支）","右冠狀動脈邊緣動脈","迴旋枝"],"answer":1,"hint":"又稱 LAD。","nodeId":"heart-structure-node-05"},
+    {"id":"heart-structure-foundation-q06","stem":"6. 正常心跳節律點位於右心房壁的何構造？","options":["房室結","竇房結","希氏束","浦金埃氏纖維"],"answer":1,"hint":"每分鐘自發約 70–80 次。","nodeId":"heart-structure-node-06"}
+  ],
+  "cases":[
+    {"id":"heart-structure-case-q01","stem":"1. 急性前壁心肌梗塞最可能阻塞哪條血管？","options":["左冠狀動脈前室間枝（LAD）","右冠狀動脈後室間動脈","心大靜脈","冠狀靜脈竇"],"answer":0,"hint":"供應左心室前壁的猝死血管。","nodeId":"heart-structure-node-05"},
+    {"id":"heart-structure-case-q02","stem":"2. 二尖瓣關閉不全在心縮期會使血液逆流至何處？","options":["左心房","右心房","左心室","右心室"],"answer":0,"hint":"二尖瓣位於左心房與左心室之間。","nodeId":"heart-structure-node-04"},
+    {"id":"heart-structure-case-q03","stem":"3. 心包填塞的主要機轉為何？","options":["積液壓迫心臟，限制心室舒張充血","心肌層變薄","冠狀動脈痙攣","心內膜感染"],"answer":0,"hint":"想想無法擴張的纖維心包。","nodeId":"heart-structure-node-01"},
+    {"id":"heart-structure-case-q04","stem":"4. SA node 衝動無法傳至心室、AV node 慢節律接手，屬何障礙？","options":["完全性房室傳導阻滯","竇房結過度興奮","預激症候群","右束支傳導阻滯"],"answer":0,"hint":"關鍵在心房至心室的傳導中斷。","nodeId":"heart-structure-node-06"},
+    {"id":"heart-structure-case-q05","stem":"5. 長期高血壓最常造成何種代償性改變？","options":["左心室心肌層肥厚","右心室萎縮","三尖瓣鈣化","右心房擴大"],"answer":0,"hint":"誰負責將血液打入主動脈？","nodeId":"heart-structure-node-02"}
+  ],"credits":["心臟冠狀切面與節點圖：課程平台自繪 SVG，CC0。"]
+}

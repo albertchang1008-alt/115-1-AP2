@@ -2,6 +2,12 @@
 
 目前版本：1.5.0
 
+## 1.5.0 — 教材元件庫 v1（2026-09-23）
+
+- 新增 `materials-src/kit/` 原生 HTML/CSS/JS 元件庫、SVG 圖庫與授權 manifest、`shared/materialKit.ts` 內容型別／驗證，以及 `materials:build`／`materials:shots` 建置與 Playwright 截圖工具。
+- 首份樣板 `heart-structure-v1` 從內容檔生成單檔教材，保留 6 個既有節點 ID 與 11 個題目 ID；教材目錄及 README 自動同步。既有 `html/心臟構造.html`、既有正式教材均未修改。
+- 驗證：`npm run check`（前端 91、Functions 15）、`npm run materials:shots heart-structure`、`git diff --check` 通過。截圖與報告在 `materials-src/heart-structure/shots/`（gitignore）；未 push、未部署。
+
 ## 1.5.0 — 複習考（作業）（2026-09-23）
 
 - **已上線（2026-09-23）**：教師執行 deploy.sh，Functions 39 個（新增 buildReviewExam、deleteReviewExam）Deploy complete；第一次因 saveSheetConfig 一次性 ENOTFOUND 中斷，重跑成功。`origin/main` fe766c6..82e7140，Pages Actions 成功，正式站 `version.json`＝1.5.0。

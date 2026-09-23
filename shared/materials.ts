@@ -51,6 +51,7 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   // `npm run materials:audit` 一樣偵測不到（節點 id 來自物件 key 與陣列索引，不是
   // 固定 data-node-id 屬性），這裡的數字不是腳本自動產生的。
   'blood-post-v1': { label: '血液單元後測（全景地圖、機轉流程、易混淆配對、闖關）', tracking: 'interactive', nodeTotal: 43, questionTotal: 15, note: '5 關（每關 3 題）全部過關才送出完成' },
+  'heart-structure-v1': { label: "心臟構造與解剖生理圖卡", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。

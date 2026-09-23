@@ -158,11 +158,11 @@ export function upsertCatalogEntry(slug, entry) {
   if (lineRe.test(src)) {
     newSrc = src.replace(lineRe, newLine);
   } else {
-    const closeRe = /\n\};\s*$/;
-    if (!closeRe.test(src)) {
+    const closeAt = src.indexOf('\n};', src.indexOf('export const MATERIAL_CATALOG'));
+    if (closeAt < 0) {
       throw new Error('shared/materials.ts 格式跟預期不同，找不到 MATERIAL_CATALOG 的結尾，沒有寫入');
     }
-    newSrc = src.replace(closeRe, `\n${newLine}\n};\n`);
+    newSrc = src.slice(0, closeAt) + `\n${newLine}` + src.slice(closeAt);
   }
   fs.writeFileSync(CATALOG_PATH, newSrc);
 }

@@ -12,6 +12,8 @@
     "materials:audit": "node --experimental-strip-types scripts/materials.mjs audit",
     "materials:sync": "node --experimental-strip-types scripts/materials.mjs sync-catalog",
     "materials:studio": "node --experimental-strip-types scripts/materials-studio.mjs",
+    "materials:build": "node --experimental-strip-types scripts/materials-build.mjs",
+    "materials:shots": "node scripts/materials-shots.mjs",
     "check": "npm test && npm run build && npm --prefix functions run build && npm --prefix functions test"
   },
   "dependencies": {
@@ -27,6 +29,7 @@
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
+    "playwright": "^1.63.0",
     "prettier": "^3.9.6",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",

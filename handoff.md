@@ -21,7 +21,7 @@
 | 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 三份新教材 | `html/心臟構造.html`、`心臟血液供應.html`、`紅血球的恆定機制.html` 只在 `html/` 原始檔，未進 `public/materials/`，學生看不到 |
+| 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 
 ## 部署方式（教師在自己的 Mac 執行）
@@ -72,8 +72,8 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 ## 待辦
 
-**交給 Codex（進行中）**
-- 教材元件庫 v1：規格 `docs/MATERIAL_KIT_1.md`。分支從 `feature/1.5.0-review-exam` HEAD 開 `feature/material-kit`；只做 kit＋建置／截圖檢查工具＋「心臟構造」樣板，完成後停下標示「教材元件庫 v1 待 Claude 驗收」。不 push、不部署、不動既有 `public/materials/`。
+**待 Claude 驗收**
+- 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
 
 **等教師決定**
 - 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
