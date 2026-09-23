@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.5.0
+目前版本：1.5.1
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -21,6 +21,8 @@
 | 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
+| 1.5.1 練習計分說明 | `hotfix/1.5.1-practice-hint`：學生端「尚未完整作答」與練習不計分提示，待教師以 deploy.sh 部署。部署後 `feature/material-kit` 需先 `git merge main` 才能再部署 |
+| 本機 exclude | `.git/info/exclude` 暫列 `html/心電圖與心律不整解析.html`（教師新教材，尚未進 git）與 `materials-src/heart-structure/shots/`；要納入心電圖教材時先從 exclude 移除 |
 | 三份新教材 | `html/心臟構造.html`、`心臟血液供應.html`、`紅血球的恆定機制.html` 只在 `html/` 原始檔，未進 `public/materials/`，學生看不到 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 
