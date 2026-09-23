@@ -12,6 +12,7 @@
 - 新增 `ecg-basics-v1`：六個 ECG 基礎節點、6 題先備題與 5 題情境題；明確保留非診斷界線，未納入單一異常波形直接對應疾病的內容。
 - 元件庫題目流程改為先完成先備題才解鎖病例題、選項洗牌、錯答送 hint、全數病例答對才 complete；節點展開累積實際停留時間。建置稽核能讀取生成教材的固定 ID metadata。
 - 驗證：`npm run materials:build ecg-basics`、`npm run materials:shots ecg-basics`（390／1280、所有 lab 狀態與節點通過）、`npm run check`、`git diff --check` 通過；未 push、未部署，待教師內容複核。
+- 後續修補：節律實驗室的慢／安靜／快三種狀態改為不同 R-R 間距與流動波形，解決原本控制鈕只更新文字的問題；截圖驗收再次通過。
 
 ## 1.5.0 — 教材元件庫 v1（2026-09-23）
 

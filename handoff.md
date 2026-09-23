@@ -23,7 +23,7 @@
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
-| ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1` 已以元件庫建置，六節點、11 題、SDK 串接與 390／1280 截圖驗收通過；待教師醫學內容複核與 Claude 驗收，未發布。 |
+| ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1` 已以元件庫建置；節律圖現可切換慢／安靜／快節律並播放波形，六節點、11 題、SDK 串接與 390／1280 截圖驗收通過；待教師醫學內容複核與 Claude 驗收，未發布。 |
 
 ## 部署方式（教師在自己的 Mac 執行）
 
