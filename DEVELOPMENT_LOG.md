@@ -2,6 +2,11 @@
 
 目前版本：1.5.0
 
+## 文件 — 心電圖教材改善計畫（2026-09-23）
+
+- 已檢視教師提供的單檔 ECG 初稿，並建立 `docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`。計畫採六節點、6 題先備＋5 題病例的 `ecg-basics-v1` 建議，將異常波形臨床判讀改為後續、需來源與專業審稿的範圍。
+- 計畫列出教材元件庫重建、canvas 時距與可近用性修正、CourseLearning 診斷串接、截圖／iframe／真實帳號驗收；未匯入教材、未改產品程式、未發布。
+
 ## 1.5.0 — 教材元件庫 v1（2026-09-23）
 
 - 新增 `materials-src/kit/` 原生 HTML/CSS/JS 元件庫、SVG 圖庫與授權 manifest、`shared/materialKit.ts` 內容型別／驗證，以及 `materials:build`／`materials:shots` 建置與 Playwright 截圖工具。
