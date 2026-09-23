@@ -98,7 +98,8 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /已達標分類/);
   assert.match(source, /chapter\.activities\.filter/);
   assert.match(source, /chapterUnits\.map\(\(classification\) => <PracticeRow/);
-  assert.match(source, /最高分 \{best\} \/ 門檻 \{threshold\}/);
+  assert.match(source, /最高分 \{bestLabel\} \/ 門檻 \{threshold\}/);
+  assert.match(source, /best < 0 \? '尚未完整作答'/);
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
 });
