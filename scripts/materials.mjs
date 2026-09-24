@@ -50,13 +50,20 @@ export function auditOne(slug) {
   const materialIds = html.match(/<meta name="material-ids" content="([^"]*)"/);
   const generatedNodeIds = materialIds ? materialIds[1].split(',').filter((id) => /-node-\d+$/.test(id)) : [];
   const generatedQuestionIds = materialIds ? materialIds[1].split(',').filter((id) => /-(?:q|l)\d+$/.test(id)) : [];
-  const dataNodeId = [...new Set([...html.matchAll(/data-node-id="([^"]+)"/g)].map((m) => m[1]))];
-  const dataNode = [...new Set([...html.matchAll(/data-node="([^"]+)"/g)].map((m) => m[1]))];
+  // 排除 JS 樣板字串裡的 ${...} 佔位符（例如元件庫的 data-node-id="${n.id}"），那不是實際節點
+  const literal = (v) => !v.includes('${');
+  const dataNodeId = [...new Set([...html.matchAll(/data-node-id="([^"]+)"/g)].map((m) => m[1]).filter(literal))];
+  const dataNode = [...new Set([...html.matchAll(/data-node="([^"]+)"/g)].map((m) => m[1]).filter(literal))];
+  // 元件庫建置檔把內容以 JSON 內嵌（"id":"xxx-node-01"），舊式偵測也能讀到
+  const jsonIds = [...new Set([...html.matchAll(/"id":"([\w:-]+)"/g)].map((m) => m[1]))];
+  const jsonNodeIds = jsonIds.filter((id) => /-node-\d+$/.test(id));
   const literalExplore = [...new Set([...html.matchAll(/\.explore\(\s*['"]([\w:-]+)['"]\s*\)/g)].map((m) => m[1]))];
 
   let nodeTotal = null, nodeConfidence = 'unknown', nodeNote = '';
   if (generatedNodeIds.length) {
     nodeTotal = generatedNodeIds.length; nodeConfidence = 'high'; nodeNote = `material-ids metadata ${generatedNodeIds.length} 個固定節點`;
+  } else if (jsonNodeIds.length) {
+    nodeTotal = jsonNodeIds.length; nodeConfidence = 'high'; nodeNote = `內嵌 JSON ${jsonNodeIds.length} 個節點 id`;
   } else if (dataNodeId.length) {
     nodeTotal = dataNodeId.length; nodeConfidence = 'high'; nodeNote = `data-node-id 屬性 ${dataNodeId.length} 個相異值`;
   } else if (dataNode.length) {
@@ -68,8 +75,7 @@ export function auditOne(slug) {
   }
 
   const questionIds = generatedQuestionIds.length ? generatedQuestionIds.sort() : [...new Set(
-    [...html.matchAll(/id:\s*['"]([\w:-]+)['"]/g)]
-      .map((m) => m[1])
+    [...[...html.matchAll(/id:\s*['"]([\w:-]+)['"]/g)].map((m) => m[1]), ...jsonIds]
       .filter((id) => /-?(?:q|l)\d{1,3}$/i.test(id))
   )].sort();
   const questionTotal = questionIds.length || null;
