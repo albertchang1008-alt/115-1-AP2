@@ -26,6 +26,7 @@
 | 教材工作室 | 2026-09-24 已健康檢查：`npm run materials:studio` 可在 `127.0.0.1:5183` 提供 `/api/list`；目前列出 11 份本機教材，其中 `coagulation-v1` 有檔案但未登錄目錄（既有狀態，勿處理）。匯入區可貼上、點擊選取或拖放 `.html/.htm/.xhtml`；檔案先填入程式碼欄與預覽，需按匯入才寫檔。`.command` 與 `.app` 會主動載入 Node 22.23.2，若 5183 已有健康服務則直接開啟。僅本機匯入／稽核／目錄管理，不跑 git、push 或部署。 2026-09-25 起啟動器會比對 `/api/version`：程式檔比執行中的服務新（或舊服務不支援版本檢查）就自動關掉重開，避免沿用舊稽核邏輯。 |
 | ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1`（未發布）。2026-09-24 Codex 實作驗收不通過後，**由 Claude 依規格完成**（模擬器、暫停選拍／放大標示、卡尺、第一關 2 選擇＋4 標示），驗收紀錄 `docs/ECG_SIM_LABEL_ACCEPTANCE.md`。待教師醫學內容複核後才可發布。 |
 | 三份心臟圖像強化教材 | `feature/ecg-basics`：`cardiac-conduction-v2`、`cardiac-cycle-v2`、`coronary-circulation-v1`（Codex 手工單檔版，教師已看過並同意登錄）。**2026-09-25 Claude 驗收通過**：390／1280 無錯誤與橫向溢位、圖檔皆載入、6 節點各送一次 explore、第二關全對才 complete（錯一題不送）、題目 ID 與目錄一致；傳導系統與心動週期的 11 題與題目集完全一致。驗收時修正冠狀循環頁載入即同時顯示「通關／未通關」橫幅的 CSS（`html/心臟血液供應.html` 同步；`html/心臟構造.html`、`html/紅血球的恆定機制.html` 同一問題一併修正）。未發布。 |
+| 傳導系統／心動週期版本 | **教師決定（2026-09-25）：發布圖像強化版 `cardiac-conduction-v2`、`cardiac-cycle-v2`**。元件庫版 `-v1` 保留原名與檔案作為參考，不發布、不在後台建立活動。 |
 
 ## 部署方式（教師在自己的 Mac 執行）
 
@@ -80,8 +81,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
 
 **等教師決定**
-- 心臟傳導系統與心動週期目前各有兩版：元件庫版 `-v1`（Claude，含情境實驗室與專屬節點圖）與手工圖像強化版 `-v2`（Codex，含 ImageGen 醫學圖）。請決定要發布哪一版；未採用的版本不要上架，避免後台出現兩份相同題目的教材。
-- 發布前醫學內容複核：`ecg-basics-v1`、`cardiac-conduction-v1/v2`、`cardiac-cycle-v1/v2`、`coronary-circulation-v1`。
+- 發布前醫學內容複核：`ecg-basics-v1`、`cardiac-conduction-v2`、`cardiac-cycle-v2`、`coronary-circulation-v1`。
 - 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
 - ECG 基礎教材內容複核：請確認採六節點 `ecg-basics-v1`，並確認進階異常波形另案醫學審稿；核定前不發布。
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
