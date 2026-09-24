@@ -2,6 +2,13 @@
 
 目前版本：1.5.0
 
+## 教材 — ECG 模擬器與標示題、心臟傳導系統、心動週期（2026-09-24，未發布）
+
+- Codex 初版（未 commit）驗收不通過：頁面 SyntaxError 整頁空白、模擬器無動畫、標示題拖曳換算錯誤、kit 移除圖／ARIA／nodeTime（`docs/ECG_SIM_LABEL_ACCEPTANCE.md`）。
+- Claude 依 `docs/ECG_SIM_LABEL_SPEC.md` 完成：kit 可讀化與擴充點（lab widget、題型）、Fisher–Yates、`explore` 僅首次、`data-state` 狀態切換；`materials-src/widgets/` 四檔；`ecg-basics-v1` 重建；截圖流程改為錯誤／空白即失敗。
+- 新增 `cardiac-conduction-v1`、`cardiac-cycle-v1`（題目來自教師題目集單元一、二）與 4 張自繪 SVG。
+- 驗證：`tests/ecg-model.test.ts`＋`tests/material-kit.test.ts` 10/10、四份教材截圖 0 錯誤、ECG 互動驗收 390／1280 通過。未 push、未部署。
+
 ## 文件 — 心電圖教材改善計畫（2026-09-23）
 
 - 已檢視教師提供的單檔 ECG 初稿，並建立 `docs/ECG_MATERIAL_IMPROVEMENT_PLAN.md`。計畫採六節點、6 題先備＋5 題病例的 `ecg-basics-v1` 建議，將異常波形臨床判讀改為後續、需來源與專業審稿的範圍。

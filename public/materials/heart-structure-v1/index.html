@@ -1,6 +1,163 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="material-ids" content="heart-structure-case-q01,heart-structure-case-q02,heart-structure-case-q03,heart-structure-case-q04,heart-structure-case-q05,heart-structure-foundation-q01,heart-structure-foundation-q02,heart-structure-foundation-q03,heart-structure-foundation-q04,heart-structure-foundation-q05,heart-structure-foundation-q06,heart-structure-node-01,heart-structure-node-02,heart-structure-node-03,heart-structure-node-04,heart-structure-node-05,heart-structure-node-06"><title>心臟構造與解剖生理圖卡</title><style>:root{--oxy:#a71930;--deoxy:#1769aa;--tissue:#f3eee9;--accent:#5b3b8c;--ok:#176b45;--warn:#9a5a00;--bg:#fffaf8;--ink:#17212b;--muted:#4e5964;font:16px/1.65 system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0}.kit{max-width:1100px;margin:auto;padding:24px}.hero,.lab,.node,.quiz,.credits{background:#fff;border:1px solid #ded6d0;border-radius:18px;padding:22px;margin:18px 0}.stats,.nodes,.options{display:grid;gap:14px}.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.tile,.node-button{border:1px solid #d9ccd0;background:#fff;padding:16px;border-radius:14px;color:inherit;text-align:left}.tile strong{display:block;font-size:1.35rem;color:var(--oxy)}.nodes{grid-template-columns:repeat(3,1fr)}.node[hidden],.node-detail[hidden],.stage[hidden]{display:none}.node-figure{width:100%;max-height:340px}.state-controls,.options{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:12px 0}button{font:inherit;cursor:pointer;border-radius:10px;border:2px solid var(--accent);background:#fff;color:#281b3e;padding:10px}button[aria-pressed="true"],button:hover{background:var(--accent);color:#fff}.feedback{font-weight:700}.ok{color:var(--ok)}.warn{color:var(--warn)}.clinical{background:var(--tissue);padding:14px;border-left:5px solid var(--accent)}svg{max-width:100%;height:auto}.heart-state{width:100%}@media(max-width:760px){.kit{padding:12px}.nodes{grid-template-columns:1fr}.hero,.lab,.node,.quiz,.credits{padding:16px}}@media(prefers-reduced-motion:no-preference){.flow{animation:pulse 1.8s infinite}@keyframes pulse{50%{stroke-dashoffset:18}}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
-</style></head><body><script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script><script>window.CourseLearning=window.CourseLearning||{explore(){},nodeTime(){},answer(){},complete(){}};</script><script>const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(content, figures){const q=(rows,kind)=>rows.map((x,i)=>`<article class="stage" data-kind="${kind}" ${i?'hidden':''}><h3>${esc(x.stem)}</h3><div class="options">${x.options.map((o,n)=>`<button data-answer="${n}">${esc(o)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p></article>`).join('');return `<main class="kit" data-slug="${content.slug}"><header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header><section class="stats">${content.stats.map(x=>`<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section><section class="lab"><h2>${esc(content.lab.title)}</h2><p>${esc(content.lab.intro)}</p><div class="heart-state" data-state="${content.lab.states[0].id}">${figures[content.lab.figure]}</div><div class="state-controls">${content.lab.states.map((x,i)=>`<button data-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div><p class="state-explain" aria-live="polite">${esc(content.lab.states[0].explain)}</p><h3>${esc(content.lab.predict.question)}</h3><div class="options predict">${content.lab.predict.options.map((o,i)=>`<button data-answer="${i}">${esc(o)}</button>`).join('')}</div><p class="feedback"></p></section><section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n=>`<button class="node-button" data-node="${n.id}" aria-expanded="false"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>${content.nodes.map(n=>`<article class="node-detail" id="detail-${n.id}" hidden><img class="node-figure" alt="${esc(n.title)}" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')}</section><section class="quiz"><h2>第一關｜先備知識</h2>${q(content.foundation,'foundation')}<h2>第二關｜病例判讀</h2>${q(content.cases,'case')}</section><footer class="credits">${(content.credits||[]).map(esc).join('<br>')}</footer></main>`}
-function mount(content, figures){document.body.innerHTML=render(content,figures);const CL=window.CourseLearning||{explore(){},nodeTime(){},answer(){},complete(){}};const once=new Set;document.querySelectorAll('[data-node]').forEach(b=>b.onclick=()=>{const id=b.dataset.node,detail=document.querySelector('#detail-'+id);detail.hidden=!detail.hidden;b.setAttribute('aria-expanded',String(!detail.hidden));if(!once.has(id)){once.add(id);CL.explore(id)}if(!detail.hidden)CL.nodeTime(id,1)});document.querySelectorAll('[data-state]').forEach(b=>b.onclick=()=>{document.querySelector('.heart-state').dataset.state=b.dataset.state;document.querySelectorAll('[data-state]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelector('.state-explain').textContent=content.lab.states.find(x=>x.id===b.dataset.state).explain});document.querySelector('.predict').onclick=e=>{const b=e.target.closest('button');if(!b)return;const ok=+b.dataset.answer===content.lab.predict.answer;b.parentElement.nextElementSibling.textContent=ok?content.lab.predict.feedback:'再看一次瓣膜開關的時機。'};let f=0,c=0;document.querySelectorAll('.stage').forEach(stage=>stage.onclick=e=>{const b=e.target.closest('button');if(!b)return;const kind=stage.dataset.kind,rows=kind==='foundation'?content.foundation:content.cases,q=rows[kind==='foundation'?f:c],ok=+b.dataset.answer===q.answer;CL.answer(q.id,ok);stage.querySelector('.feedback').textContent=ok?'答對，繼續下一題。':q.hint;if(ok){stage.hidden=true;if(kind==='foundation'&&++f<rows.length)document.querySelectorAll('[data-kind="foundation"]')[f].hidden=false;else if(kind==='case'&&++c<rows.length)document.querySelectorAll('[data-kind="case"]')[c].hidden=false;else if(kind==='case')CL.complete()}})}
+
+/* ---- ECG widgets（ecg-sim、label 題型） ---- */
+.ecg-sim,.ecg-label{--ecg-muted:#4e5964}
+.ecg-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-bottom:6px}
+.ecg-hr{font-size:1.8rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-hr small{font-size:.8rem;font-weight:600;color:var(--muted);margin-left:4px}
+.ecg-chips{display:flex;flex-wrap:wrap;gap:6px}.ecg-chips button{padding:5px 12px;border-radius:999px;font-size:.85rem}
+.ecg-slider{width:100%;accent-color:var(--accent);height:28px}
+.ecg-scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.ecg-row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:10px 0}
+.ecg-tg{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.92rem}.ecg-tg small{color:var(--muted);font-weight:500}
+.ecg-tg input{width:18px;height:18px;accent-color:var(--accent)}
+.ecg-physio{background:#f4effa;border-radius:12px;padding:10px 12px;font-size:.92rem;margin-bottom:12px}.ecg-physio b{color:var(--accent)}
+.ecg-scope,.ecg-zoom{position:relative;border-radius:14px;overflow:hidden;border:1px solid #1e293b;background:#050d1a}
+.ecg-layer{position:absolute;inset:0;display:block}
+.ecg-over:focus-visible{outline:3px solid #fde047;outline-offset:-3px}
+.ecg-lbl{position:absolute;top:6px;left:10px;font:11px ui-monospace,Menlo,monospace;color:#6ee7b7;pointer-events:none}
+.ecg-hint,.ecg-sel,.ecg-note{font-size:.85rem;color:var(--muted);margin:6px 0}
+.ecg-layers{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.88rem}.ecg-layers>span{font-weight:800;color:var(--muted)}
+.ecg-zoom-wrap[hidden],.ecg-fb[hidden],.ecg-reveal[hidden]{display:none}
+.ecg-zoom-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 8px}.ecg-zoom-head small{display:block;color:var(--muted);font-size:.8rem}.ecg-zoom-head button{white-space:nowrap;flex:none}
+.ecg-reads{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
+.ecg-rd{border:1px solid #ded6d0;border-radius:12px;padding:8px 10px}.ecg-rd .k{font-size:.72rem;color:var(--muted);font-weight:700}.ecg-rd .v{font-size:1.2rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-rd .n{font-size:.72rem;color:var(--muted)}
+.ecg-bar-cap{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
+.ecg-bar{display:flex;height:22px;border-radius:8px;overflow:hidden;font-size:.72rem;font-weight:700;color:#fff}
+.ecg-bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .25s}
+.ecg-sys{background:#be123c}.ecg-dia{background:#0369a1}
+.ecg-gap{font-size:.88rem;color:var(--muted)}.ecg-gap b{color:var(--ink)}
+.ecg-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ecg-ranges{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem}.ecg-ranges input{accent-color:var(--accent);vertical-align:middle}
+.ecg-fb{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:.92rem}.ecg-fb.ok{background:#e8f5ee}.ecg-fb.ok b{color:var(--ok)}.ecg-fb.no{background:#fbf1e2}.ecg-fb.no b{color:var(--warn)}
+button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:760px){.ecg-reads{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style></head><body><script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script><script>window.CourseLearning=window.CourseLearning||{explore(){},nodeTime(){},answer(){},hint(){},complete(){}};</script><script>
+// 教材元件庫：由 content.json 產生單檔互動教材（六節點＋兩關題目＋SDK 回報）。
+// 擴充點：lab.widget（例如 "ecg-sim"）與題型 type（例如 "label"），由 materials-src/widgets/ 提供。
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+// Fisher–Yates 洗牌（無偏差）
+const shuffle = rows => {
+  const a = [...rows];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const WIDGETS = { 'ecg-sim': () => window.EcgSim };
+const QUESTION_TYPES = { label: () => window.EcgLabel };
+
+function renderLab(lab, figures) {
+  const widget = lab.widget && WIDGETS[lab.widget]?.();
+  if (lab.widget) {
+    return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p><div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div></section>`;
+  }
+  return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>`
+    + `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div>`
+    + `<div class="state-controls">${lab.states.map((x, i) => `<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div>`
+    + `<p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`
+    + `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o, i) => `<button data-answer="${i}">${esc(o)}</button>`).join('')}</div>`
+    + `<p class="feedback" aria-live="polite"></p></section>`;
+}
+
+function renderQuestion(q) {
+  const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+  if (type) return `<h3>${esc(q.stem)}</h3><div class="q-widget" data-type="${esc(q.type)}">${type.html(q)}</div>`;
+  return `<h3>${esc(q.stem)}</h3><div class="options">${shuffle(q.options.map((text, answer) => ({ text, answer }))).map(o => `<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>`;
+}
+
+function render(content, figures) {
+  const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
+  return `<main class="kit" data-slug="${content.slug}">`
+    + `<header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header>`
+    + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
+    + renderLab(content.lab, figures)
+    + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>`
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><img class="node-figure" alt="${esc(n.title)} 示意圖" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
+    + `</section>`
+    + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
+    + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
+}
+
+function mount(content, figures) {
+  document.body.innerHTML = render(content, figures);
+  const CL = window.CourseLearning || { explore() {}, nodeTime() {}, answer() {}, hint() {}, complete() {} };
+
+  // 知識節點：第一次展開送 explore；收合或分頁隱藏時送前景停留秒數
+  const opened = new Map(), explored = new Set();
+  document.querySelectorAll('[data-node]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.node, d = document.querySelector('#detail-' + id), was = d.hidden;
+    d.hidden = !was; b.setAttribute('aria-expanded', String(was));
+    if (was) { if (!explored.has(id)) { explored.add(id); CL.explore(id); } opened.set(id, performance.now()); }
+    else { const start = opened.get(id); if (start) CL.nodeTime(id, (performance.now() - start) / 1000); opened.delete(id); }
+  }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { for (const [id, start] of opened) CL.nodeTime(id, (performance.now() - start) / 1000); opened.clear(); }
+  });
+
+  // 情境實驗室
+  if (content.lab.widget) {
+    const root = document.querySelector('.lab-widget');
+    WIDGETS[content.lab.widget]?.()?.mount(root, content.lab, CL);
+  } else {
+    document.querySelectorAll('button[data-lab-state]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.labState;
+      const fig = document.querySelector('.state-figure');
+      fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
+      document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
+    }));
+    document.querySelector('.predict').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const ok = +b.dataset.answer === content.lab.predict.answer;
+      b.parentElement.nextElementSibling.textContent = ok ? content.lab.predict.feedback : '再比對圖中的狀態與箭頭。';
+    });
+  }
+
+  // 兩關題目：逐題答對才解鎖；第二關全部答對才送 complete
+  let foundation = 0, cases = 0;
+  const show = el => { el.hidden = false; el.dispatchEvent(new CustomEvent('stage-show')); };
+  const advance = (stage, kind) => {
+    stage.hidden = true;
+    if (kind === 'foundation') {
+      foundation++;
+      const next = document.querySelector(`[data-kind="foundation"][data-index="${foundation}"]`);
+      show(next || document.querySelector('[data-kind="case"][data-index="0"]'));
+    } else {
+      cases++;
+      const next = document.querySelector(`[data-kind="case"][data-index="${cases}"]`);
+      if (next) show(next); else CL.complete();
+    }
+  };
+  document.querySelectorAll('.stage').forEach(stage => {
+    const kind = stage.dataset.kind, rows = kind === 'foundation' ? content.foundation : content.cases;
+    const q = rows[+stage.dataset.index];
+    const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+    if (type) { type.mount(stage.querySelector('.q-widget'), q, CL, () => advance(stage, kind)); return; }
+    stage.addEventListener('click', e => {
+      const b = e.target.closest('button[data-answer]'); if (!b) return;
+      const ok = +b.dataset.answer === q.answer;
+      CL.answer(q.id, ok);
+      const feedback = stage.querySelector('.feedback');
+      if (!ok) { CL.hint?.(q.id); feedback.textContent = `提示：${q.hint}`; return; }
+      feedback.textContent = '答對，繼續下一題。';
+      stage.querySelectorAll('button').forEach(x => { x.disabled = true; });
+      setTimeout(() => advance(stage, kind), 250);
+    });
+  });
+}
+
+// 舊版三段節律圖（ecg-rate.svg）的狀態切換；保留相容
+document.addEventListener('click', event => {
+  const button = event.target.closest('button[data-lab-state]'); if (!button) return;
+  const figure = document.querySelector('.state-figure'), state = button.dataset.labState; if (!figure) return;
+  figure.querySelectorAll('.slow,.rest,.fast').forEach(group => { group.style.display = group.classList.contains(state) ? 'block' : 'none'; });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const figure = document.querySelector('.state-figure');
+  figure?.querySelector('.slow')?.style.setProperty('display', 'block');
+});
 
 mount({"slug":"heart-structure","version":"v1","title":"心臟構造與解剖生理圖卡","subtitle":"從心包、心壁到心腔、瓣膜、冠狀循環與傳導系統。","label":"心臟構造與解剖生理圖卡","stats":[{"value":"4","label":"心腔與四組瓣膜"},{"value":"70–80 次/分","label":"竇房結自發節律"},{"value":"3 倍","label":"左心室約為右心室壁厚"}],"lab":{"title":"情境實驗室｜讓血液走對路","intro":"切換心室收縮與舒張，觀察瓣膜如何維持單向血流；再先預測下一個步驟。","figure":"heart-cross-section.svg","states":[{"id":"fill","label":"舒張期・充盈","explain":"房室瓣開、半月瓣關，血液由心房流入心室。"},{"id":"pump","label":"收縮期・射血","explain":"房室瓣關、半月瓣開，血液由心室射入肺動脈與主動脈。"}],"predict":{"question":"心室開始收縮時，哪一組瓣膜必須先關閉？","options":["半月瓣","房室瓣"],"answer":1,"feedback":"正確：房室瓣先關閉，避免血液逆流回心房。"}},"nodes":[{"id":"heart-structure-node-01","tag":"心包與心壁","title":"心包膜的層次與防護功能","summary":"外層纖維包、內層雙層漿膜。","figure":"heart-node.svg","concept":"心包膜雙層結構包圍心臟，提供固定與減摩防護。","points":["纖維心包防止心臟過度擴張並固定於縱隔。","漿膜心包分壁層與臟層；臟層即心外膜。","心包腔含少許心包液，減少搏動摩擦。"],"clinical":{"title":"臨床意義｜心包填塞","text":"心包積液會限制心室舒張充血，造成心輸出量下降。"}},{"id":"heart-structure-node-02","tag":"心包與心壁","title":"心臟壁的三層構造與特徵","summary":"心外膜、心肌層與心內膜。","figure":"heart-node.svg","concept":"心肌層占大部分厚度並主導收縮。","points":["心外膜是漿膜心包臟層。","心肌層由分枝心肌細胞組成。","心內膜襯於心腔並覆蓋瓣膜。"],"clinical":{"title":"臨床意義｜左心室肥大","text":"高血壓增加後負荷，左心室心肌可代償性肥厚。"}},{"id":"heart-structure-node-03","tag":"心腔與瓣膜","title":"心臟四大腔室與重要構造","summary":"左右心房與心室分流肺、體循環。","figure":"heart-node.svg","concept":"房、室中隔將心臟分成左右兩側，維持兩套循環分流。","points":["右心房接受上、下腔靜脈與冠狀竇血液。","左心房接受四條肺靜脈的充氧血。","左心室形成心尖且心肌壁最厚。"],"clinical":{"title":"臨床意義｜中隔缺損","text":"卵圓孔未閉或心室中隔缺損可使左右心血液混合。"}},{"id":"heart-structure-node-04","tag":"心腔與瓣膜","title":"心臟瓣膜與單向流動機制","summary":"壓力差控制房室瓣與半月瓣。","figure":"heart-node.svg","concept":"兩組房室瓣與兩組半月瓣確保血液單向前流。","points":["右房室瓣為三尖瓣；左房室瓣為二尖瓣。","乳頭肌與腱索防止房室瓣翻轉。","肺動脈瓣與主動脈瓣防止舒張期倒流。"],"clinical":{"title":"臨床意義｜心雜音","text":"瓣膜狹窄或關閉不全會造成血液倒流與異常雜音。"}},{"id":"heart-structure-node-05","tag":"冠狀與傳導","title":"冠狀血管循環與心肌血供","summary":"左右冠狀動脈供應心肌。","figure":"heart-node.svg","concept":"冠狀動脈由升主動脈基部供應心肌，靜脈血回流至冠狀竇。","points":["左冠狀動脈分前室間枝與迴旋枝。","右冠狀動脈分後室間與邊緣動脈。","冠狀竇將缺氧血注入右心房。"],"clinical":{"title":"臨床意義｜心肌梗塞","text":"左前降支阻塞常造成前壁心肌梗塞。"}},{"id":"heart-structure-node-06","tag":"冠狀與傳導","title":"心臟特化自律傳導系統","summary":"竇房結啟動規律電衝動。","figure":"heart-node.svg","concept":"特化心肌細胞組成傳導系統，使心臟能自律節律性收縮。","points":["竇房結是正常節律點，每分鐘約 70–80 次。","衝動經房室結、房室束傳入心室。","浦金埃氏纖維使心室協調收縮。"],"clinical":{"title":"臨床意義｜傳導阻滯","text":"房室傳導阻滯時，較慢的下級節律點可能接手。"}}],"foundation":[{"id":"heart-structure-foundation-q01","stem":"1. 心包膜中何者含心包液、可減少膜面摩擦？","options":["纖維心包","心包腔","心肌層","心內膜"],"answer":1,"hint":"位於漿膜心包壁層與臟層之間。","nodeId":"heart-structure-node-01"},{"id":"heart-structure-foundation-q02","stem":"2. 心臟壁哪一層由心肌細胞組成並負責收縮？","options":["心外膜","心肌層","心內膜","纖維心包"],"answer":1,"hint":"是心臟壁的中層。","nodeId":"heart-structure-node-02"},{"id":"heart-structure-foundation-q03","stem":"3. 哪一腔室的心肌層最厚？","options":["右心房","左心房","右心室","左心室"],"answer":3,"hint":"要克服全身體循環阻力。","nodeId":"heart-structure-node-03"},{"id":"heart-structure-foundation-q04","stem":"4. 右房室瓣及防倒翻構造為何？","options":["二尖瓣；梳狀肌","三尖瓣；腱索與乳頭肌","主動脈瓣；心肉柱","肺動脈瓣；卵圓窩"],"answer":1,"hint":"右側房室瓣有三片瓣葉。","nodeId":"heart-structure-node-04"},{"id":"heart-structure-foundation-q05","stem":"5. 供應左心室前壁的主要分枝為何？","options":["右冠狀動脈後室間動脈","左冠狀動脈前室間枝（前降支）","右冠狀動脈邊緣動脈","迴旋枝"],"answer":1,"hint":"又稱 LAD。","nodeId":"heart-structure-node-05"},{"id":"heart-structure-foundation-q06","stem":"6. 正常心跳節律點位於右心房壁的何構造？","options":["房室結","竇房結","希氏束","浦金埃氏纖維"],"answer":1,"hint":"每分鐘自發約 70–80 次。","nodeId":"heart-structure-node-06"}],"cases":[{"id":"heart-structure-case-q01","stem":"1. 急性前壁心肌梗塞最可能阻塞哪條血管？","options":["左冠狀動脈前室間枝（LAD）","右冠狀動脈後室間動脈","心大靜脈","冠狀靜脈竇"],"answer":0,"hint":"供應左心室前壁的猝死血管。","nodeId":"heart-structure-node-05"},{"id":"heart-structure-case-q02","stem":"2. 二尖瓣關閉不全在心縮期會使血液逆流至何處？","options":["左心房","右心房","左心室","右心室"],"answer":0,"hint":"二尖瓣位於左心房與左心室之間。","nodeId":"heart-structure-node-04"},{"id":"heart-structure-case-q03","stem":"3. 心包填塞的主要機轉為何？","options":["積液壓迫心臟，限制心室舒張充血","心肌層變薄","冠狀動脈痙攣","心內膜感染"],"answer":0,"hint":"想想無法擴張的纖維心包。","nodeId":"heart-structure-node-01"},{"id":"heart-structure-case-q04","stem":"4. SA node 衝動無法傳至心室、AV node 慢節律接手，屬何障礙？","options":["完全性房室傳導阻滯","竇房結過度興奮","預激症候群","右束支傳導阻滯"],"answer":0,"hint":"關鍵在心房至心室的傳導中斷。","nodeId":"heart-structure-node-06"},{"id":"heart-structure-case-q05","stem":"5. 長期高血壓最常造成何種代償性改變？","options":["左心室心肌層肥厚","右心室萎縮","三尖瓣鈣化","右心房擴大"],"answer":0,"hint":"誰負責將血液打入主動脈？","nodeId":"heart-structure-node-02"}],"credits":["心臟冠狀切面與節點圖：課程平台自繪 SVG，CC0。"]},{"heart-cross-section.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 500\" role=\"img\" aria-label=\"心臟冠狀切面，含四腔室、血管及四組瓣膜\">\u003cstyle>.wall{fill:#f5d0d0;stroke:#3d2020;stroke-width:8}.rv{fill:#b8d7ef}.lv{fill:#f5b7b7;stroke-width:22}.oxy{stroke:#a71930}.deoxy{stroke:#1769aa}.flow{fill:none;stroke-width:12;marker-end:url(#a)}.label{font:18px sans-serif;fill:#17212b}.state-pump{display:none}[data-state=\"pump\"] .state-fill{display:none}[data-state=\"pump\"] .state-pump{display:block}\u003c/style>\u003cdefs>\u003cmarker id=\"a\" markerWidth=\"10\" markerHeight=\"10\" refX=\"7\" refY=\"3\" orient=\"auto\">\u003cpath d=\"M0,0 L0,6 L8,3z\" fill=\"currentColor\"/>\u003c/marker>\u003c/defs>\u003ctext class=\"label\" x=\"75\" y=\"42\">觀看者左側：右心\u003c/text>\u003ctext class=\"label\" x=\"550\" y=\"42\">觀看者右側：左心\u003c/text>\u003cpath class=\"wall\" d=\"M120 90Q60 260 170 420Q270 485 400 395Q530 485 650 420Q750 260 680 90Q550 55 400 145Q250 55 120 90Z\"/>\u003crect class=\"wall\" x=\"150\" y=\"110\" width=\"175\" height=\"95\" rx=\"35\"/>\u003crect class=\"wall\" x=\"475\" y=\"110\" width=\"175\" height=\"95\" rx=\"35\"/>\u003cpath class=\"rv\" d=\"M155 240Q245 205 330 245L315 390Q235 440 165 375Z\"/>\u003cpath class=\"lv\" d=\"M470 245Q555 205 645 240L635 390Q555 445 480 385Z\"/>\u003ctext class=\"label\" x=\"205\" y=\"160\">右心房\u003c/text>\u003ctext class=\"label\" x=\"530\" y=\"160\">左心房\u003c/text>\u003ctext class=\"label\" x=\"205\" y=\"315\">右心室\u003c/text>\u003ctext class=\"label\" x=\"535\" y=\"315\">左心室（壁厚）\u003c/text>\u003cg class=\"state-fill\">\u003cpath class=\"flow deoxy\" d=\"M235 210v65\"/>\u003cpath class=\"flow oxy\" d=\"M560 210v65\"/>\u003ctext class=\"label\" x=\"190\" y=\"235\">三尖瓣開\u003c/text>\u003ctext class=\"label\" x=\"520\" y=\"235\">二尖瓣開\u003c/text>\u003ctext class=\"label\" x=\"280\" y=\"430\">肺動脈瓣關\u003c/text>\u003ctext class=\"label\" x=\"530\" y=\"430\">主動脈瓣關\u003c/text>\u003c/g>\u003cg class=\"state-pump\">\u003cpath class=\"flow deoxy\" d=\"M260 280L330 65\"/>\u003cpath class=\"flow oxy\" d=\"M550 280L490 65\"/>\u003ctext class=\"label\" x=\"190\" y=\"235\">三尖瓣關\u003c/text>\u003ctext class=\"label\" x=\"520\" y=\"235\">二尖瓣關\u003c/text>\u003ctext class=\"label\" x=\"280\" y=\"90\">肺動脈瓣開\u003c/text>\u003ctext class=\"label\" x=\"520\" y=\"90\">主動脈瓣開\u003c/text>\u003c/g>\u003cpath class=\"deoxy flow\" d=\"M95 140h55\"/>\u003ctext class=\"label\" x=\"20\" y=\"125\">上／下腔靜脈\u003c/text>\u003cpath class=\"oxy flow\" d=\"M705 140h-55\"/>\u003ctext class=\"label\" x=\"650\" y=\"125\">肺靜脈\u003c/text>\u003ctext class=\"label\" x=\"270\" y=\"65\">肺動脈幹\u003c/text>\u003ctext class=\"label\" x=\"475\" y=\"65\">主動脈\u003c/text>\u003c/svg>\n","heart-node.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\">\u003crect width=\"600\" height=\"260\" rx=\"20\" fill=\"#fff7f7\"/>\u003cpath d=\"M300 220C80 110 160 20 300 110C440 20 520 110 300 220Z\" fill=\"#f4aaaa\" stroke=\"#761d2a\" stroke-width=\"8\"/>\u003cpath d=\"M300 100v95M220 120h160\" stroke=\"#761d2a\" stroke-width=\"8\"/>\u003ctext x=\"300\" y=\"245\" text-anchor=\"middle\" font-size=\"20\" fill=\"#17212b\">心臟構造示意\u003c/text>\u003c/svg>\n"});</script></body></html>

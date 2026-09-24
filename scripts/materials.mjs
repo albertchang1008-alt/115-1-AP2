@@ -49,7 +49,7 @@ export function auditOne(slug) {
 
   const materialIds = html.match(/<meta name="material-ids" content="([^"]*)"/);
   const generatedNodeIds = materialIds ? materialIds[1].split(',').filter((id) => /-node-\d+$/.test(id)) : [];
-  const generatedQuestionIds = materialIds ? materialIds[1].split(',').filter((id) => /-q\d+$/.test(id)) : [];
+  const generatedQuestionIds = materialIds ? materialIds[1].split(',').filter((id) => /-(?:q|l)\d+$/.test(id)) : [];
   const dataNodeId = [...new Set([...html.matchAll(/data-node-id="([^"]+)"/g)].map((m) => m[1]))];
   const dataNode = [...new Set([...html.matchAll(/data-node="([^"]+)"/g)].map((m) => m[1]))];
   const literalExplore = [...new Set([...html.matchAll(/\.explore\(\s*['"]([\w:-]+)['"]\s*\)/g)].map((m) => m[1]))];
@@ -70,7 +70,7 @@ export function auditOne(slug) {
   const questionIds = generatedQuestionIds.length ? generatedQuestionIds.sort() : [...new Set(
     [...html.matchAll(/id:\s*['"]([\w:-]+)['"]/g)]
       .map((m) => m[1])
-      .filter((id) => /-?q\d{1,3}$/i.test(id))
+      .filter((id) => /-?(?:q|l)\d{1,3}$/i.test(id))
   )].sort();
   const questionTotal = questionIds.length || null;
 

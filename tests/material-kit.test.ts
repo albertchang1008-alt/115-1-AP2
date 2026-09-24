@@ -23,3 +23,12 @@ test('心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID', () =>
   assert.match(html, /course-learning\.js/); assert.doesNotMatch(html, /cdn\./i); assert.doesNotMatch(html, /[🫀📊📝]/);
   for (const item of [...content.nodes, ...content.foundation, ...content.cases]) assert.match(html, new RegExp(item.id));
 });
+
+test('標示題型驗證與元件庫洗牌', () => {
+  const label = ecg.foundation.find((q: any) => q.type === 'label');
+  assert.throws(() => validateMaterialContent({ ...ecg, foundation: ecg.foundation.map((q: any) => q === label ? { ...q, target: 'XX' } : q) }), /標示題/);
+  assert.throws(() => validateMaterialContent({ ...ecg, foundation: ecg.foundation.map((q: any) => q === label ? { ...q, tol: 0.2 } : q) }), /標示題/);
+  const kit = fs.readFileSync('materials-src/kit/kit.js', 'utf8');
+  assert.doesNotMatch(kit, /sort\(\(\)\s*=>\s*Math\.random/); assert.match(kit, /Math\.floor\(Math\.random\(\) \* \(i \+ 1\)\)/);
+  assert.match(kit, /aria-expanded/); assert.match(kit, /nodeTime/);
+});
