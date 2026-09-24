@@ -55,6 +55,9 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'ecg-basics-v1': { label: "心電圖基礎與心率調控", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-conduction-v1': { label: "心臟的傳導系統", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-cycle-v1': { label: "心動週期", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'cardiac-conduction-v2': { label: "心臟的傳導系統（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'cardiac-cycle-v2': { label: "心動週期（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'coronary-circulation-v1': { label: "心臟血液供應（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。
