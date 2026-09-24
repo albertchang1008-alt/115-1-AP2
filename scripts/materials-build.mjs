@@ -1,7 +1,8 @@
 import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath } from 'node:url';
 import { validateMaterialContent } from '../shared/materialKit.ts';
 import { ROOT, MATERIALS_DIR, upsertCatalogEntry, syncCatalog } from './materials.mjs';
-const slug=process.argv[2]; if(!slug) throw Error('用法：npm run materials:build <slug>');
+// --preview：只產生教材檔讓教師先看，不寫入教材目錄（shared/materials.ts、README）。教師確認後再不加 --preview 重跑一次完成登錄。
+const args=process.argv.slice(2), preview=args.includes('--preview'), slug=args.find(a=>!a.startsWith('--')); if(!slug) throw Error('用法：npm run materials:build <slug>（先看不登錄：npm run materials:preview <slug>）');
 const src=path.join(ROOT,'materials-src',slug), content=JSON.parse(fs.readFileSync(path.join(src,'content.json'),'utf8')); validateMaterialContent(content);
 if(content.slug!==slug) throw Error(`slug：內容檔為 ${content.slug}，路徑為 ${slug}`);
 const figures={}; for(const file of new Set([...(content.lab.figure?[content.lab.figure]:[]),...content.nodes.map(n=>n.figure)])) figures[file]=fs.readFileSync(path.join(ROOT,'materials-src/figures',file),'utf8');
@@ -11,4 +12,4 @@ if(fs.existsSync(index)){const old=fs.readFileSync(index,'utf8'), m=old.match(/<
 fs.mkdirSync(out,{recursive:true}); const css=fs.readFileSync(path.join(ROOT,'materials-src/kit/kit.css'),'utf8'); const usesEcg=content.lab.widget==='ecg-sim'||[...content.foundation,...content.cases].some(q=>q.type==='label'); const widgets=usesEcg?['ecg-model.js','ecg-draw.js','ecg-sim.js','ecg-label.js'].map(f=>fs.readFileSync(path.join(ROOT,'materials-src/widgets',f),'utf8').replace(/^export /gm,'')).join('\n'):''; const js=widgets+'\n'+fs.readFileSync(path.join(ROOT,'materials-src/kit/kit.js'),'utf8').replace(/^export /gm,'');
 const data=JSON.stringify(content).replace(/</g,'\\u003c'), figs=JSON.stringify(figures).replace(/</g,'\\u003c');
 fs.writeFileSync(index,`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="material-ids" content="${ids.join(',')}"><title>${content.title}</title><style>${css}</style></head><body><script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script><script>window.CourseLearning=window.CourseLearning||{explore(){},nodeTime(){},answer(){},hint(){},complete(){}};</script><script>${js}\nmount(${data},${figs});</script></body></html>`);
-upsertCatalogEntry(`${slug}-${content.version}`,{label:content.label,tracking:'interactive',nodeTotal:content.nodes.length,questionTotal:content.foundation.length+content.cases.length,note:'先備 6 題逐題解鎖；病例 5 題全對才通關'}); await syncCatalog(); console.log(`已建置 ${index}`);
+if(preview){console.log(`已建置（預覽，未登錄教材目錄）：${index}\n教師確認後執行 npm run materials:build ${slug} 完成登錄。`);}else{upsertCatalogEntry(`${slug}-${content.version}`,{label:content.label,tracking:'interactive',nodeTotal:content.nodes.length,questionTotal:content.foundation.length+content.cases.length,note:'先備 6 題逐題解鎖；病例 5 題全對才通關'}); await syncCatalog(); console.log(`已建置並登錄 ${index}`);}
