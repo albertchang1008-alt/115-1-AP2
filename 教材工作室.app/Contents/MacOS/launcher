@@ -12,6 +12,11 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 for rc in "$HOME/.zprofile" "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.profile"; do
   [ -f "$rc" ] && source "$rc" >/dev/null 2>&1
 done
+# nvm 通常不會由 GUI shell 的設定檔可靠載入；明確使用本專案指定的 Node 版本。
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  source "$HOME/.nvm/nvm.sh"
+  nvm use 22.23.2 >/dev/null 2>&1
+fi
 
 cd "$DIR" 2>/dev/null || {
   osascript -e 'display dialog "找不到專案資料夾，教材工作室無法啟動。" buttons {"好"} default button 1 with icon caution' >/dev/null 2>&1
@@ -21,6 +26,20 @@ cd "$DIR" 2>/dev/null || {
 if ! command -v npm >/dev/null 2>&1; then
   osascript -e 'display dialog "找不到 npm，可能是 Node.js 沒安裝，或跟這個 App 抓到的系統路徑不一樣。請改雙擊「教材工作室.command」，它會開終端機顯示詳細錯誤訊息。" buttons {"好"} default button 1 with icon caution' >/dev/null 2>&1
   exit 1
+fi
+
+# 已有服務時：程式檔沒更新就直接開啟；程式檔比服務新（或是不支援版本檢查的舊服務）就關掉重開，
+# 避免沿用舊的稽核邏輯（例如把元件庫教材誤判成 1 個節點）。
+if curl -fsS http://127.0.0.1:5183/ >/dev/null 2>&1; then
+  running="$(curl -fsS http://127.0.0.1:5183/api/version 2>/dev/null | sed -n 's/.*"version":\([0-9]*\).*/\1/p')"
+  latest="$(stat -f %m scripts/materials.mjs scripts/materials-studio.mjs scripts/materials-studio.html 2>/dev/null | sort -n | tail -1)"
+  if [ -n "$running" ] && [ -n "$latest" ] && [ "$running" -ge "$latest" ]; then
+    open 'http://127.0.0.1:5183/' >/dev/null 2>&1
+    exit 0
+  fi
+  :
+  lsof -ti tcp:5183 | xargs kill 2>/dev/null
+  sleep 1
 fi
 
 # 背景啟動伺服器；準備好之後，伺服器本身（materials-studio.mjs）會自動開瀏覽器分頁。

@@ -31,6 +31,10 @@ import {
 
 const PORT = Number(process.env.MATERIALS_STUDIO_PORT) || 5183;
 const UI_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), 'materials-studio.html');
+// 啟動當下工作室程式檔的最新修改時間（秒）。啟動器用 /api/version 比對：
+// 程式檔更新過就關掉舊服務重開，避免沿用舊的稽核邏輯。
+const CODE_VERSION = Math.max(...['materials.mjs', 'materials-studio.mjs', 'materials-studio.html']
+  .map((f) => Math.floor(fs.statSync(path.join(path.dirname(fileURLToPath(import.meta.url)), f)).mtimeMs / 1000)));
 const SLUG_RE = /^[a-z][a-z0-9-]{1,49}$/;
 
 function sendJson(res, status, data) {
@@ -141,6 +145,7 @@ const server = http.createServer(async (req, res) => {
       res.end(fs.readFileSync(UI_PATH, 'utf8'));
       return;
     }
+    if (req.method === 'GET' && url.pathname === '/api/version') return sendJson(res, 200, { version: CODE_VERSION });
     if (req.method === 'GET' && url.pathname === '/api/list') return await handleList(req, res);
     if (req.method === 'POST' && url.pathname === '/api/import') return await handleImport(req, res);
     if (req.method === 'GET' && url.pathname === '/api/audit') return await handleAudit(req, res, url);

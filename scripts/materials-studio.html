@@ -15,6 +15,9 @@
   label { display: block; font-size: 13px; color: #374151; margin-bottom: 4px; margin-top: 10px; }
   input[type=text], textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 6px; }
   textarea { min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; resize: vertical; }
+  .dropzone { margin-top: 10px; padding: 18px; border: 2px dashed #93c5fd; border-radius: 8px; background: #f8fbff; color: #1d4ed8; text-align: center; cursor: pointer; }
+  .dropzone.dragover { border-color: #2563eb; background: #dbeafe; }
+  .dropzone small { display: block; color: #6b7280; margin-top: 4px; }
   .row { display: flex; gap: 16px; flex-wrap: wrap; }
   .row > div { flex: 1; min-width: 220px; }
   .preview-wrap { margin-top: 10px; }
@@ -54,6 +57,8 @@
       </div>
     </div>
     <label>教材 HTML 程式碼</label>
+    <input id="filePicker" type="file" accept=".html,.htm,text/html" hidden />
+    <div id="dropzone" class="dropzone" role="button" tabindex="0" aria-label="選取或拖入 HTML 教材檔案">把 HTML 檔案拖到這裡，或點一下選取檔案<small>選取後會先填入下方程式碼欄，仍可預覽與修改；不會立刻匯入。</small></div>
     <textarea id="code" placeholder="貼上完整的 index.html 內容…"></textarea>
     <div class="btnrow">
       <button id="btnPreview">更新預覽</button>
@@ -135,6 +140,24 @@
   }
   $('btnPreview').addEventListener('click', updatePreview);
   $('code').addEventListener('change', updatePreview);
+
+  async function loadHtmlFile(file) {
+    if (!file) return;
+    const allowed = /\.(html?|xhtml)$/i.test(file.name) || file.type === 'text/html';
+    if (!allowed) { showMsg($('msgImport'), 'err', '請選擇 HTML 檔案（.html、.htm 或 .xhtml）。'); return; }
+    try {
+      $('code').value = await file.text();
+      updatePreview();
+      showMsg($('msgImport'), 'ok', `已載入「${file.name}」，請確認教材代號與標題後再按「①匯入教材檔案」。`);
+    } catch (e) { showMsg($('msgImport'), 'err', '讀取檔案失敗：' + e.message); }
+  }
+  const dropzone = $('dropzone');
+  $('filePicker').addEventListener('change', (e) => { loadHtmlFile(e.target.files[0]); e.target.value = ''; });
+  dropzone.addEventListener('click', () => $('filePicker').click());
+  dropzone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('filePicker').click(); } });
+  ['dragenter', 'dragover'].forEach((name) => dropzone.addEventListener(name, (e) => { e.preventDefault(); dropzone.classList.add('dragover'); }));
+  ['dragleave', 'drop'].forEach((name) => dropzone.addEventListener(name, (e) => { e.preventDefault(); dropzone.classList.remove('dragover'); }));
+  dropzone.addEventListener('drop', (e) => loadHtmlFile(e.dataTransfer.files[0]));
 
   async function refreshList() {
     try {
