@@ -55,7 +55,7 @@
       "tag": "節律點",
       "title": "竇房結：心跳的節律點",
       "summary": "右心房壁、近上腔靜脈開口。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-sa.svg",
       "concept": "竇房結（SA node）自發去極化的頻率最高，因此主導整個心臟的節律，稱為節律點（pacemaker）。",
       "points": [
         "位於右心房壁、靠近上腔靜脈開口處。",
@@ -72,7 +72,7 @@
       "tag": "延遲",
       "title": "房室結與生理延遲",
       "summary": "全系統傳導最慢的地方。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-av.svg",
       "concept": "衝動通過房室結（AV node）時速度最慢，產生約 0.1 秒的延遲。",
       "points": [
         "房室結位於右心房下部、房室交界處。",
@@ -89,7 +89,7 @@
       "tag": "房室束",
       "title": "房室束（希氏束）與束支",
       "summary": "穿過絕緣纖維環進入心室間隔。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-his.svg",
       "concept": "房室束（希氏束，Bundle of His）穿過心房與心室之間的絕緣纖維環，把衝動由房室結帶到心室間隔頂端，再分成左右束支。",
       "points": [
         "心房與心室之間有纖維環絕緣，衝動只能經房室束進入心室。",
@@ -106,7 +106,7 @@
       "tag": "心室",
       "title": "浦金埃氏纖維與心室同步收縮",
       "summary": "傳導最快，衝動迅速傳遍心室。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-purkinje.svg",
       "concept": "浦金埃氏纖維（傳導性肌纖維）直徑粗、傳導速度全系統最快，使衝動迅速傳遍整個心室肌。",
       "points": [
         "由束支末端分支，分布在心室內膜下。",
@@ -123,7 +123,7 @@
       "tag": "自律性",
       "title": "心肌的自律性",
       "summary": "不需要神經刺激也能自己跳。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-auto.svg",
       "concept": "特化心肌能自發產生動作電位，稱為自律性（automaticity）；心臟收縮不需要神經直接啟動。",
       "points": [
         "離體蛙心放在適當生理鹽水中，沒有神經連接仍能規律跳動。",
@@ -140,7 +140,7 @@
       "tag": "神經調節",
       "title": "自主神經與心率調節",
       "summary": "交感加速、副交感（迷走）減速。",
-      "figure": "conduction-node.svg",
+      "figure": "conduction-node-ans.svg",
       "concept": "延腦心跳中樞經自主神經調節心率與收縮力：交感神經釋放正腎上腺素使心跳加快加強，迷走神經釋放乙醯膽鹼使心跳減慢。",
       "points": [
         "運動、緊張時交感神經興奮：心跳加快、收縮力增加。",

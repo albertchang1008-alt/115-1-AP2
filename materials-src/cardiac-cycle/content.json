@@ -64,7 +64,7 @@
       "tag": "充血",
       "title": "心室充血期：被動充血",
       "summary": "房室瓣開、半月瓣關。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-fill.svg",
       "concept": "心舒張末期心房與心室都舒張，心室壓低於心房壓，房室瓣開啟、半月瓣關閉，血液靠壓力差被動流入心室。",
       "points": [
         "約 70% 的心室充血量在心房收縮前就被動流入。",
@@ -81,7 +81,7 @@
       "tag": "心房收縮",
       "title": "心房收縮與心房踢",
       "summary": "主動補滿最後 20~30%。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-kick.svg",
       "concept": "心舒張末期心房主動收縮，把剩餘約 20~30% 的血液推入心室，稱為心房踢（atrial kick），讓心室達到最大充血量（EDV）。",
       "points": [
         "心房收縮發生在心室收縮之前。",
@@ -98,7 +98,7 @@
       "tag": "等容收縮",
       "title": "等容心室收縮期與第一心音",
       "summary": "兩組瓣膜都關，S1 出現。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-ivc.svg",
       "concept": "心室開始收縮，壓力大於心房壓使房室瓣關閉，但尚小於動脈壓、半月瓣未開，心室容積不變而壓力急升。",
       "points": [
         "房室瓣關閉產生第一心音（S1，Lubb）。",
@@ -115,7 +115,7 @@
       "tag": "射血",
       "title": "心室射血期與心搏量",
       "summary": "半月瓣開，射出約 70 ml。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-eject.svg",
       "concept": "心室壓超過動脈壓時半月瓣打開，血液射入主動脈與肺動脈；每次收縮射出的血量稱為心搏量（SV）。",
       "points": [
         "安靜時左心室心搏量約 70 ml。",
@@ -132,7 +132,7 @@
       "tag": "等容舒張",
       "title": "等容心室舒張期與第二心音",
       "summary": "半月瓣關閉，S2 出現。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-ivr.svg",
       "concept": "心室開始舒張，壓力降到低於動脈壓，動脈血逆流衝擊使半月瓣關閉；房室瓣仍關，心室容積不變、壓力快速下降。",
       "points": [
         "半月瓣關閉產生第二心音（S2，Dupp）。",
@@ -149,7 +149,7 @@
       "tag": "心輸出量",
       "title": "心率、心輸出量與舒張期",
       "summary": "CO = HR × SV；心跳快時舒張期縮短。",
-      "figure": "cycle-node.svg",
+      "figure": "cycle-node-co.svg",
       "concept": "心輸出量（CO）＝ 心率（HR）× 心搏量（SV）。心跳加快時心動週期縮短，其中縮短最多的是舒張期（充血期）。",
       "points": [
         "HR 70 次/分 × SV 70 ml ≈ 4,900 ml/分（約 4.9 公升/分）。",

@@ -25,10 +25,11 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
   try {
   if (isEcg) {
     for (const hr of [40, 75, 150, 195]) { await page.locator(`.ecg-chip[data-hr="${hr}"]`).click(); await page.waitForTimeout(3000); await shot(`lab-${hr}`); }
-    await page.locator('.ecg-lay-mech').check(); await page.locator('.ecg-pause').click();
-    const box = await page.locator('.ecg-over').boundingBox();
+    await page.locator('.ecg-pause').click();
+    await page.locator('.ecg-over').scrollIntoViewIfNeeded(); const box = await page.locator('.ecg-over').boundingBox();
     await page.mouse.click(box.x + box.width * 0.5, box.y + box.height * 0.5); await page.waitForTimeout(300);
     if (await page.locator('.ecg-zoom-wrap').isHidden()) errors.push(`${width}px 暫停選拍後沒有出現放大檢視`);
+    else { await page.locator('.ecg-lay-mech').check(); await page.waitForTimeout(200); }
     await shot('lab-paused-zoom');
     await page.locator('.ecg-pause').click();
     // 各標示題（暫時顯示該題以截圖）

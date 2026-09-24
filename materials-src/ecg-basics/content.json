@@ -30,7 +30,7 @@
       "tag": "波形",
       "title": "P 波與心房去極化",
       "summary": "P 波代表心房的電活動。",
-      "figure": "ecg-wave.svg",
+      "figure": "ecg-node-p.svg",
       "concept": "P 波反映心房去極化；電活動通常先於其後的機械收縮。",
       "points": [
         "P 波從起點到終點量測。",
@@ -46,7 +46,7 @@
       "tag": "傳導",
       "title": "PR 間隔與房室傳導",
       "summary": "由 P 波起點到 QRS 起點。",
-      "figure": "ecg-wave.svg",
+      "figure": "ecg-node-pr.svg",
       "concept": "PR 間隔包含心房去極化與衝動經房室交界傳至心室開始去極化的時間。",
       "points": [
         "參考範圍常寫為 0.12–0.20 秒。",
@@ -62,7 +62,7 @@
       "tag": "波形",
       "title": "QRS 與心室去極化",
       "summary": "QRS 反映快速心室去極化。",
-      "figure": "ecg-wave.svg",
+      "figure": "ecg-node-qrs.svg",
       "concept": "QRS 群波反映心室去極化。",
       "points": [
         "正常 QRS 時間常小於 0.12 秒。",
@@ -78,7 +78,7 @@
       "tag": "再極化",
       "title": "ST、T 與 QT",
       "summary": "連結心室再極化與週期時程。",
-      "figure": "ecg-wave.svg",
+      "figure": "ecg-node-st-t.svg",
       "concept": "ST 段與心室整體處於動作電位高原期有關；T 波反映心室再極化。",
       "points": [
         "QT 間隔自 QRS 起始至 T 波終點。",
@@ -94,7 +94,7 @@
       "tag": "節律",
       "title": "R-R、心率與呼吸變異",
       "summary": "相鄰 R 波間距可估算規則心率。",
-      "figure": "ecg-rate.svg",
+      "figure": "ecg-node-rr.svg",
       "concept": "R-R 間期是相鄰心室去極化之間的時間。",
       "points": [
         "規則節律可用 HR = 60 ÷ R-R（秒）估算。",
@@ -110,7 +110,7 @@
       "tag": "導程",
       "title": "10 電極與 12 導程",
       "summary": "電極貼片建立不同觀測角度。",
-      "figure": "ecg-wave.svg",
+      "figure": "ecg-node-leads.svg",
       "concept": "標準十二導程 ECG 使用十個電極建立十二個觀測角度。",
       "points": [
         "三個標準肢導程：I、II、III。",

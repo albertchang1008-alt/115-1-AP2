@@ -24,6 +24,7 @@ window.EcgSim = (() => {
     <label class="ecg-tg"><input type="checkbox" class="ecg-lag">自律神經反應時間 <small>（迷走神經幾乎立即反應，交感神經需數秒）</small></label>
     <button type="button" class="ecg-pause">暫停</button>
   </div>
+  <div class="ecg-status" aria-live="off"></div>
   <div class="ecg-physio"></div>
   <div class="ecg-scope">
     <canvas class="ecg-layer ecg-grid" aria-hidden="true"></canvas>
@@ -31,18 +32,18 @@ window.EcgSim = (() => {
     <canvas class="ecg-layer ecg-over" tabindex="0" role="img" aria-label="心電圖監視器（Lead II）。暫停後可用左右方向鍵選擇心跳、Esc 關閉放大檢視。"></canvas>
     <div class="ecg-lbl"></div>
   </div>
-  <p class="ecg-hint">按「暫停」後：<b>點一下</b>某一拍（或用 ←／→）→ 下方放大並標示該拍；<b>按住拖曳</b> → 卡尺量時間。</p>
-  <div class="ecg-layers" role="group" aria-label="標示圖層">
-    <span>標示圖層</span>
-    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-wave" checked>波形（P／QRS／T）</label>
-    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-intv" checked>間隔與段（PR、QT、R-R／PR 段、ST 段）</label>
-    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-mech">對應的機械事件 <small>（約略時間）</small></label>
-  </div>
+  <p class="ecg-hint">按「暫停」後：<b>點一下</b>某一拍（或用 ←／→）→ 下方放大並標示該拍（可切換標示圖層）；<b>按住拖曳</b> → 卡尺量時間。</p>
   <div class="ecg-zoom-wrap" hidden>
     <div class="ecg-zoom-head">
       <div><b>放大檢視：選取的這一拍</b><small>紙速與振幅同樣是 25 mm/s、10 mm/mV，只是放大顯示；方格仍是 0.04 秒／0.1 mV。</small></div>
       <button type="button" class="ecg-zoom-close">關閉</button>
     </div>
+    <div class="ecg-layers" role="group" aria-label="標示圖層">
+    <span>標示圖層</span>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-wave" checked>波形（P／QRS／T）</label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-intv" checked>間隔與段（PR、QT、R-R／PR 段、ST 段）</label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-mech">對應的機械事件 <small>（約略時間）</small></label>
+  </div>
     <div class="ecg-zoom">
       <canvas class="ecg-layer ecg-zgrid" aria-hidden="true"></canvas>
       <canvas class="ecg-layer ecg-ztrace" aria-hidden="true"></canvas>
@@ -123,6 +124,28 @@ window.EcgSim = (() => {
       return hr;
     }
 
+    let lastStatus = 0;
+    function status(force) {
+      const now = performance.now();
+      if (!force && now - lastStatus < 200) return;
+      lastStatus = now;
+      const parts = [];
+      const beatHR = lastShown ? Math.round(60 / lastShown.rr) : st.target;
+      parts.push(`<span class="ecg-pill">這一拍 <b>${beatHR}</b> bpm</span>`);
+      if (st.rsa) {
+        const ph = Math.sin(2 * Math.PI * simTime / 4);
+        const vagal = Math.max(0, Math.min(1, (110 - effHR) / 50));
+        parts.push(vagal < 0.05
+          ? '<span class="ecg-pill">呼吸：心率 &gt;110 時迷走張力低，呼吸變異幾乎消失</span>'
+          : `<span class="ecg-pill ${ph >= 0 ? 'in' : 'ex'}">呼吸：${ph >= 0 ? '吸氣 ↑ 迷走張力降低 → R-R 變短' : '吐氣 ↓ 迷走張力增加 → R-R 變長'}</span>`);
+      }
+      if (st.lag && Math.abs(effHR - st.target) >= 1) {
+        const up = st.target > effHR;
+        parts.push(`<span class="ecg-pill adj">自律神經調整中：${Math.round(effHR)} → 目標 ${st.target} bpm（${up && effHR >= 100 ? '交感神經需數秒' : up ? '迷走撤除，約 1 秒' : '迷走神經幾乎立即'}）</span>`);
+      }
+      if (st.paused) parts.push('<span class="ecg-pill">已暫停：開關與心率在「繼續」後生效</span>');
+      $('.ecg-status').innerHTML = parts.join('');
+    }
     function update(dt) {
       if (st.lag) {
         const up = st.target > effHR;
@@ -158,6 +181,7 @@ window.EcgSim = (() => {
       const done = beats.filter(b => b.start + b.pr <= simTime);
       const cur = done.length ? done[done.length - 1] : beats[0];
       if (cur && cur !== lastShown) { lastShown = cur; showReads(cur); }
+      status();
     }
 
     // ---- readouts ----
@@ -279,18 +303,19 @@ window.EcgSim = (() => {
     // ---- controls ----
     const slider = $('.ecg-slider');
     function setTarget(v) {
-      st.target = v; slider.value = v; $('.ecg-hr-out').textContent = v;
+      st.target = v; slider.value = v; $('.ecg-hr-out').textContent = v; status(true);
       root.querySelectorAll('.ecg-chip').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.hr === v)));
     }
     slider.addEventListener('input', e => setTarget(parseInt(e.target.value, 10)));
     root.querySelectorAll('.ecg-chip').forEach(c => c.addEventListener('click', () => setTarget(+c.dataset.hr)));
-    $('.ecg-rsa').addEventListener('change', e => { st.rsa = e.target.checked; });
-    $('.ecg-lag').addEventListener('change', e => { st.lag = e.target.checked; });
+    $('.ecg-rsa').addEventListener('change', e => { st.rsa = e.target.checked; status(true); });
+    $('.ecg-lag').addEventListener('change', e => { st.lag = e.target.checked; status(true); });
     const pauseBtn = $('.ecg-pause');
     function setPaused(p) {
       st.paused = p; pauseBtn.textContent = p ? '繼續' : '暫停';
       pauseBtn.setAttribute('aria-pressed', String(p));
       if (!p) clearTools();
+      status(true);
     }
     pauseBtn.addEventListener('click', () => setPaused(!st.paused));
 

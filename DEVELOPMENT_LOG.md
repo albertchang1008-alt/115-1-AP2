@@ -8,6 +8,7 @@
 - Claude 依 `docs/ECG_SIM_LABEL_SPEC.md` 完成：kit 可讀化與擴充點（lab widget、題型）、Fisher–Yates、`explore` 僅首次、`data-state` 狀態切換；`materials-src/widgets/` 四檔；`ecg-basics-v1` 重建；截圖流程改為錯誤／空白即失敗。
 - 新增 `cardiac-conduction-v1`、`cardiac-cycle-v1`（題目來自教師題目集單元一、二）與 4 張自繪 SVG。
 - 驗證：`tests/ecg-model.test.ts`＋`tests/material-kit.test.ts` 10/10、四份教材截圖 0 錯誤、ECG 互動驗收 390／1280 通過。未 push、未部署。
+- 教師試用回饋修正：三份教材的知識節點改為每節點專屬示意圖（原本共用同一張，ECG 節點 5 的節律圖在圖片模式下全黑）；模擬器新增即時狀態列（這一拍心率、呼吸相位、自律神經調整中）；標示圖層移入放大檢視。
 
 ## 文件 — 心電圖教材改善計畫（2026-09-23）
 
