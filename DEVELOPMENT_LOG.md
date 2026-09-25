@@ -2,6 +2,13 @@
 
 目前版本：1.5.1
 
+## 教材 — 心臟構造圖像強化版 v2（2026-09-25，Codex）
+
+- 依 `docs/HEART_STRUCTURE_V2_SPEC.md` 建立未發布的 `public/materials/heart-structure-v2/`，複製瓣膜血流圖資產，並同步 `html/心臟構造.html`；目錄新增 v2，`materials:sync` 更新 README。
+- 情境實驗室窄版改橫向 scroll-snap；六個知識節點改選一顯示、分類篩選與行動版回捲；SVG 最小字級 12px。SDK 在 inline script 前載入，節點探索只由點選觸發；修正解析前綴與錯題回讀 ID 對應。
+- Playwright 390／1280 實測無錯誤、無橫向溢位、資產載入、六節點 explore、11 題全對只完成一次與錯題 q04→node06；`npm run check` 通過（前端 100、Functions 15）。驗收報告與截圖在 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`、`docs/heart-structure-v2-screenshots/`。
+- Excel 題庫與既有凍結來源的題幹序號、選項排列、提示及兩處解析有既有差異；依規格未更改內容，留待教師／Claude 決定。未 push、未合併、未部署。
+
 ## 1.5.1 — 學生練習計分說明（2026-09-23）
 
 - 起因：學生反映做了練習，練習分頁卻顯示「最高分 -1」。-1 是「尚無完整作答」的內部值（抽題、錯題、綜合練習不更新最高分），學生端直接顯示出來；教師端原本已處理。

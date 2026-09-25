@@ -113,7 +113,6 @@ test('止血與血液氣體運送教材保有節點與兩層驗收追蹤', async
 
 test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤', async () => {
   const cases = [
-    ['../html/心臟構造.html', 'heart-structure'],
     ['../html/心臟血液供應.html', 'coronary-circulation'],
     ['../html/紅血球的恆定機制.html', 'rbc-homeostasis'],
   ] as const;
@@ -138,6 +137,28 @@ test('新增心臟與紅血球教材含情境實驗室、穩定事件與兩階�
     assert.match(html, /s2ReviewRequired && !s2ReviewReady/);
     assert.doesNotMatch(html, /答錯了！正解解析/);
   }
+});
+
+test('心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追蹤', async () => {
+  const html = await readFile(new URL('../public/materials/heart-structure-v2/index.html', import.meta.url), 'utf8');
+  assert.match(html, /情境實驗室/);
+  assert.match(html, /先猜一猜/);
+  assert.match(html, /<script src="\.\.\/course-learning\.js"><\/script>/);
+  assert.ok(html.indexOf('../course-learning.js') < html.indexOf('const MATERIAL_ID'));
+  const foundationBlock = html.slice(html.indexOf('const FOUNDATION_QUESTIONS'), html.indexOf('// 2. Case Questions'));
+  const caseBlock = html.slice(html.indexOf('const CASE_QUESTIONS'), html.indexOf('// Helper: Fisher-Yates Shuffle'));
+  assert.equal((foundationBlock.match(/heart-structure-foundation-q\d\d/g) || []).length, 6);
+  assert.equal((caseBlock.match(/heart-structure-case-q\d\d/g) || []).length, 5);
+  assert.match(html, /CASE_REVIEW_NODE_IDS\[q\.id\]/);
+  assert.match(html, /'heart-structure-case-q01': 'node-card-05'/);
+  assert.match(html, /q\.explanation\.replace\(\/\^解析：\//);
+  assert.match(html, /selectNode\(0\)/);
+  assert.match(html, /detailCards\.forEach\(\(card, cardIndex\) => card\.hidden = cardIndex !== index\)/);
+  assert.match(html, /window\.matchMedia\('\(max-width: 899px\)'\)/);
+  assert.match(html, /window\.selectHeartStructureNode = selectNode/);
+  assert.match(html, /window\.selectHeartStructureNode\?\.\(Number\(reviewNodeId\.slice\(-2\)\) - 1\)/);
+  assert.match(html, /scroll-snap-type:x mandatory/);
+  assert.match(html, /trackComplete\(\)/);
 });
 
 test('紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制', async () => {
