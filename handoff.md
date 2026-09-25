@@ -88,6 +88,9 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 ## 待辦
 
+**交辦 Codex（2026-09-25 第二輪）**
+- 心臟構造 `heart-structure-v2` 退回修正：依 `docs/HEART_STRUCTURE_V2_SPEC.md`「第二輪修正」，版型改成與 `cardiac-conduction-v2` 相同、修正節點示意圖文字溢框、加入點選後的閱讀提示與窄版捲動。分支 `feature/heart-structure-v2`。
+
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
 
