@@ -8,6 +8,7 @@
 - 情境實驗室窄版改橫向 scroll-snap；六個知識節點改選一顯示、分類篩選與行動版回捲；SVG 最小字級 12px。SDK 在 inline script 前載入，節點探索只由點選觸發；修正解析前綴與錯題回讀 ID 對應。
 - Playwright 390／1280 實測無錯誤、無橫向溢位、資產載入、六節點 explore、11 題全對只完成一次與錯題 q04→node06；`npm run check` 通過（前端 100、Functions 15）。驗收報告與截圖在 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`、`docs/heart-structure-v2-screenshots/`。
 - Excel 題庫與既有凍結來源的題幹序號、選項排列、提示及兩處解析有既有差異；依規格未更改內容，留待教師／Claude 決定。未 push、未合併、未部署。
+- 第二輪改為與 `cardiac-conduction-v2` 相同的「閱讀提示、六張文字導覽卡、單一主圖大卡」結構；主圖依節點與舒張／收縮切換，窄版點選後捲到大卡，解說區具 aria-live。390／1280 實測無錯誤／溢位，最小 SVG CSS 字級 12px，`npm run check` 通過；待 Claude 驗收。
 
 ## 1.5.1 — 學生練習計分說明（2026-09-23）
 

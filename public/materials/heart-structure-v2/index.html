@@ -139,6 +139,8 @@
             .visual-flow .sim-step { flex:0 0 72%; scroll-snap-align:start; min-height:0; }
             .visual-flow .sim-arrow { display:none; }
         }
+        /* 第二輪：結構與傳導系統 v2 一致，導覽在前、主圖與閱讀內容合併在同一張大卡。 */
+        #pane-infographic{display:flex;flex-direction:column}.filter-toolbar{order:0}.flow-grid{order:1;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0 0 18px}.flow-nav-card{min-height:86px;padding:10px;justify-content:center;box-shadow:none}.flow-nav-card svg{display:none}.flow-nav-card h3{margin:0;font-size:.93rem;line-height:1.35}.flow-nav-card p{margin:5px 0 0;font-size:.75rem;line-height:1.4}.flow-nav-card[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);box-shadow:0 7px 16px rgba(37,99,235,.2)}.flow-nav-card[aria-pressed="true"] h3,.flow-nav-card[aria-pressed="true"] p{color:#fff}.mission-lab{order:2}.visual-flow{display:none}.detail-cards-grid{display:none!important}.reading-cue{order:0;display:flex;align-items:center;justify-content:center;gap:7px;min-height:28px;margin:0 0 12px;color:#b45309;font-size:.86rem;font-weight:800;opacity:0;transform:translateY(-3px);transition:opacity .2s}.reading-cue.is-visible{opacity:1;transform:translateY(0);animation:reading-nudge 1.25s ease-in-out 3}.reading-cue .cue-arrow{font-size:1.25rem;line-height:1}@keyframes reading-nudge{50%{transform:translateY(7px)}}.visual-focus{width:min(100%,520px);aspect-ratio:4/3;margin:0 auto;border-radius:14px;box-shadow:inset 0 0 0 1px #fde68a;background-color:#f8fafc;background-repeat:no-repeat;transition:background .3s}.visual-focus-caption{margin:10px 0 8px;text-align:center;font-weight:800;color:#78350f}.mission-lab .selected-explanation{margin:16px auto 0;max-width:760px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left}.mission-lab .selected-explanation h3{margin:0 0 10px;font-size:1.15rem}.mission-lab .selected-explanation .card-svg-container{margin-bottom:14px}.selected-explanation svg text{font-size:max(11px,.75rem)!important}@media(max-width:760px){.flow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-nav-card{min-height:76px}.visual-focus{width:min(100%,330px)}}@media(prefers-reduced-motion:reduce){.reading-cue.is-visible{animation:none}}
     </style>
 </head>
 <body>
@@ -188,6 +190,8 @@
         <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
         <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
     </div>
+
+    <div class="reading-cue" id="reading-cue" aria-hidden="true"><span class="cue-arrow">↓</span><span>往下閱讀：查看重點與補充說明</span></div>
 
     <!-- SECTION 1: INFOGRAPHIC -->
     <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
@@ -790,8 +794,7 @@
                 // Show card if hidden by filter
                 targetDetailCard.style.display = 'flex';
 
-                // Scroll
-                targetDetailCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // 第二輪的主圖與解說在同一張大卡；捲動由選取控制器在窄版處理。
                 targetDetailCard.classList.add('focus-card');
             });
         }
@@ -1009,15 +1012,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailCards = [...document.querySelectorAll('.detail-card')];
     const flowCards = [...document.querySelectorAll('.flow-nav-card')];
     const categoryByNode = ['wall', 'wall', 'chamber', 'chamber', 'conduction', 'conduction'];
+    const lab = document.querySelector('.mission-lab');
+    const flowGrid = document.querySelector('.flow-grid');
+    flowGrid.insertAdjacentElement('afterend', lab);
+    lab.querySelector('p').insertAdjacentHTML('afterend', '<div class="visual-focus" id="visual-focus" role="img" aria-label="所選心臟構造主圖"></div><p class="visual-focus-caption" id="visual-focus-caption"></p><section class="selected-explanation" id="selected-explanation" aria-live="polite"></section>');
+    const visualFocus = document.getElementById('visual-focus');
+    const visualCaption = document.getElementById('visual-focus-caption');
+    const explanation = document.getElementById('selected-explanation');
+    const readingCue = document.getElementById('reading-cue');
+    const visualMap = [
+        { src:'assets/heart-valve-flow-strip-v1.png', position:'0%' },
+        { src:'assets/heart-valve-flow-strip-v1.png', position:'0%' },
+        { src:'assets/heart-valve-flow-strip-v1.png', position:'33.333%' },
+        { src:'assets/heart-valve-flow-strip-v1.png', position:'66.667%' },
+        { src:'assets/coronary-overview-v2.png', position:null },
+        { src:'assets/cardiac-conduction-flow-strip-v1.png', position:'0%' }
+    ];
     let selectedIndex = 0;
+
+    const renderVisual = (index, phase = null) => {
+        const visual = phase ? { src:'assets/heart-valve-flow-strip-v1.png', position: phase === 'pump' ? '100%' : '33.333%' } : visualMap[index];
+        visualFocus.style.backgroundImage = `url('${visual.src}')`;
+        visualFocus.style.backgroundSize = visual.position === null ? 'cover' : '400% 100%';
+        visualFocus.style.backgroundPosition = visual.position === null ? 'center' : `${visual.position} center`;
+        visualCaption.textContent = `已選：${flowCards[index].querySelector('h3').textContent.replace(/^\\d+\\.\\s*/, '')}`;
+    };
 
     const selectNode = (index, { scroll = false } = {}) => {
         selectedIndex = index;
         detailCards.forEach((card, cardIndex) => card.hidden = cardIndex !== index);
         flowCards.forEach((card, cardIndex) => card.setAttribute('aria-pressed', String(cardIndex === index)));
         const selected = detailCards[index];
+        explanation.innerHTML = selected.innerHTML;
+        renderVisual(index);
+        readingCue.classList.remove('is-visible');
+        void readingCue.offsetWidth;
+        readingCue.classList.add('is-visible');
         if (scroll && window.matchMedia('(max-width: 899px)').matches) {
-            selected.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            lab.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
     window.selectHeartStructureNode = selectNode;
@@ -1037,6 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    document.querySelectorAll('[data-heart-phase]').forEach((button) => button.addEventListener('click', () => renderVisual(selectedIndex, button.dataset.heartPhase)));
     selectNode(0);
 });
 </script>

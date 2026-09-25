@@ -32,6 +32,13 @@
 - 已登錄教材目錄並同步 `public/materials/README.md`。
 - 未 push、未合併、未部署。待 Claude 驗收。
 
+## 第二輪（2026-09-25）
+
+- 版面重構為「頁籤、閱讀提示、六張文字節點卡、單一情境實驗室大卡」，寬版六欄、窄版兩欄；大卡內依選取節點切換主圖、已選標示、完整解說與示意圖。
+- 主圖對應節點 1～6 的瓣膜四格、冠狀總覽與傳導圖；舒張／收縮控制會改用瓣膜第 2／4 格。
+- Playwright 390／1280：無 pageerror、console error、水平捲動；390px 高度 2,760px。行動版點節點 3 後等待動畫完成，主圖大卡頂端為 -0.3px；1280px 維持 scrollY 0。選取解說 SVG 最小 CSS 字級為 12px。
+- `npm run check` 通過（前端 100 tests、前端與 Functions build、Functions 15 tests）。
+
 ## Claude 驗收（2026-09-25）
 
 結論：**通過**（含 Claude 兩項修正）。

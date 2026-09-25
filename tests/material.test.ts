@@ -157,6 +157,11 @@ test('心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追�
   assert.match(html, /window\.matchMedia\('\(max-width: 899px\)'\)/);
   assert.match(html, /window\.selectHeartStructureNode = selectNode/);
   assert.match(html, /window\.selectHeartStructureNode\?\.\(Number\(reviewNodeId\.slice\(-2\)\) - 1\)/);
+  assert.match(html, /reading-cue/);
+  assert.match(html, /visualMap/);
+  assert.match(html, /coronary-overview-v2\.png/);
+  assert.match(html, /lab\.scrollIntoView/);
+  assert.match(html, /selected-explanation.*aria-live="polite"/);
   assert.match(html, /scroll-snap-type:x mandatory/);
   assert.match(html, /trackComplete\(\)/);
 });
