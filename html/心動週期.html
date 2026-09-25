@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="material-ids" content="cardiac-cycle-case-q01,cardiac-cycle-case-q02,cardiac-cycle-case-q03,cardiac-cycle-case-q04,cardiac-cycle-case-q05,cardiac-cycle-foundation-q01,cardiac-cycle-foundation-q02,cardiac-cycle-foundation-q03,cardiac-cycle-foundation-q04,cardiac-cycle-foundation-q05,cardiac-cycle-foundation-q06,cardiac-cycle-node-01,cardiac-cycle-node-02,cardiac-cycle-node-03,cardiac-cycle-node-04,cardiac-cycle-node-05,cardiac-cycle-node-06">
+    <title>心動週期 - 五專解剖生理學互動資訊圖表與隨堂診斷</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --focus-outline: 3px solid #2563eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.1rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Metric Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+
+        /* Navigation Mode Switch */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 1rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Filter Controls */
+        .filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Step Flow Overview Cards */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .flow-nav-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; }
+        .flow-nav-card:hover, .flow-nav-card:focus { transform: translateY(-3px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
+        .flow-nav-card { overflow:hidden; min-width:0; }
+        .flow-nav-card svg { width:64px; height:64px; margin-bottom:8px; overflow:hidden; }
+        .flow-nav-card svg text { display:none; }
+        .flow-nav-card h3 { font-size:clamp(.86rem,1.5vw,.98rem); font-weight:700; color:var(--text-main); margin:0 0 4px; overflow-wrap:anywhere; }
+        .flow-nav-card p { font-size:clamp(.75rem,1.3vw,.84rem); color:var(--text-muted); line-height:1.35; overflow-wrap:anywhere; }
+
+        /* Detailed Knowledge Cards Grid */
+        .detail-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
+        .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
+        
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container svg { width:100%; height:auto; max-height:180px; }
+        /* 情境實驗室：四格圖像化心動週期，桌機橫排、手機直式。 */
+        .visual-lab { margin:0 0 28px; padding:18px; background:linear-gradient(135deg,#eff6ff,#fff); border:1px solid #bfdbfe; border-radius:16px; }.visual-lab h2{font-size:1.15rem;margin:0 0 6px;color:#1e40af}.visual-lab>p{margin:0 0 14px;color:#64748b}.visual-crop{aspect-ratio:3/4;overflow:hidden;border-radius:12px;background:#f8fafc}.visual-crop img{display:block;width:400%;max-width:none;height:auto;transform:translateX(calc(var(--panel)*-25%));transition:transform .35s}.visual-focus{width:min(100%,420px);margin:0 auto;border-radius:14px;box-shadow:inset 0 0 0 1px #bfdbfe}.visual-focus-caption{margin:10px 0 8px;text-align:center;font-weight:800;color:#1e3a5f}.reading-cue{display:flex;align-items:center;justify-content:center;gap:7px;min-height:28px;margin:0 0 12px;color:#2563eb;font-size:.86rem;font-weight:800;opacity:0;transform:translateY(-3px);transition:opacity .2s}.reading-cue.is-visible{opacity:1;transform:translateY(0);animation:reading-nudge 1.25s ease-in-out 3}.reading-cue .cue-arrow{font-size:1.25rem;line-height:1}@keyframes reading-nudge{50%{transform:translateY(7px)}}@media(prefers-reduced-motion:reduce){.reading-cue.is-visible{animation:none}}.visual-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.visual-flow-card{padding:10px;border:1px solid var(--border);border-radius:14px;background:#fff;text-align:center;font-weight:800;color:#1e3a5f;transition:transform .2s,border-color .2s,box-shadow .2s}.visual-flow-card.active{border-color:#2563eb;box-shadow:0 0 0 3px #bfdbfe}.visual-art{margin:-2px -2px 9px}.visual-flow-card span{display:block;margin-top:4px;font-size:.82rem;font-weight:600;color:var(--text-muted);line-height:1.35}@media(max-width:760px){.visual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-flow-card{padding:8px}.visual-focus{width:min(100%,330px)}}
+
+        .selected-explanation{margin:16px auto 0;max-width:760px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left}.selected-explanation h3{margin:0 0 10px;color:var(--text-main);font-size:1.15rem}.selected-explanation .core-concept{margin:0 0 12px}.selected-explanation .features-list{margin:0 0 12px}
+        /* 單一閱讀區：選擇期別後，依序顯示圖與解說；詳細卡片僅作互動資料來源。 */
+        #pane-infographic{display:flex;flex-direction:column}.filter-toolbar{display:none}.flow-grid{order:0;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0 0 18px}.flow-nav-card{min-height:86px;padding:10px;justify-content:center;box-shadow:none}.flow-nav-card svg{display:none}.flow-nav-card h3{margin:0;font-size:.93rem;line-height:1.35}.flow-nav-card p{margin:5px 0 0;font-size:.75rem;line-height:1.4}.flow-nav-card.active{background:var(--primary);border-color:var(--primary);box-shadow:0 7px 16px rgba(37,99,235,.2)}.flow-nav-card.active h3,.flow-nav-card.active p{color:#fff}.visual-lab{order:1}.visual-flow{display:none}.detail-cards-grid{display:none!important}@media(max-width:760px){.flow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-nav-card{min-height:76px}}
+        .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
+        .bg-filling { background: var(--primary-light); color: var(--primary); }
+        .bg-systole { background: var(--danger-light); color: var(--danger); }
+        .bg-sounds { background: var(--warning-light); color: var(--warning); }
+
+        .card-heading { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+        .core-concept { font-size: 0.95rem; font-weight: 600; color: #334155; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-left: 4px solid var(--primary); border-radius: 4px; }
+        
+        .features-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .features-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 18px; position: relative; line-height: 1.4; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 4px; }
+
+        .clinical-box { font-size: 0.88rem; color: #334155; background: #fffdf5; border: 1px solid #fef3c7; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+        .clinical-box strong { color: var(--warning); }
+
+        /* Quiz Section Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .stage-title { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .progress-badge { font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 20px; }
+
+        .quiz-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .question-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; line-height: 1.5; }
+        
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-button { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-main); width: 100%; }
+        .option-button:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .option-button[disabled] { cursor: not-allowed; opacity: 0.6; }
+        .option-button.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; opacity: 1 !important; }
+        .option-button.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; opacity: 1 !important; }
+
+        .hint-box { margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--warning); display: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        .next-btn-container { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .action-btn:hover { background: var(--primary-dark); }
+        .action-btn[disabled] { background: #cbd5e1; cursor: not-allowed; }
+
+        .result-banner { text-align: center; padding: 24px; border-radius: 12px; margin-top: 20px; display: none; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); }
+        .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>心動週期 (Cardiac Cycle)</h1>
+        <p>解剖生理學：心室充血、等容收縮/舒張、心搏量與心音生理機制</p>
+    </header>
+
+    <!-- Key Metrics Dashboard -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="val">0.8 秒 / 週</div>
+            <div class="label">心跳 75 次/分時之心動週期總時間</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">70~80% 被動充血</div>
+            <div class="label">心房收縮前血液自發流入心室比例</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">70 ml 心搏量</div>
+            <div class="label">左心室每次射血量 (Stroke Volume, SV)</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">S1 / S2 心音</div>
+            <div class="label">房室瓣與半月瓣閉合產生之聽診心音</div>
+        </div>
+    </div>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
+        <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
+        
+        <!-- Category Filters -->
+        <div class="filter-toolbar" role="toolbar" aria-label="知識分類篩選">
+            <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
+            <button type="button" class="filter-btn" id="filter-filling" aria-pressed="false">心室充血期</button>
+            <button type="button" class="filter-btn" id="filter-systole" aria-pressed="false">心室收縮與射血</button>
+            <button type="button" class="filter-btn" id="filter-sounds" aria-pressed="false">舒張期與心音聽診</button>
+        </div>
+
+        <section class="visual-lab" aria-label="心動週期瓣膜與血流情境圖">
+            <h2>🫀 情境實驗室｜瓣膜決定血液往哪裡走</h2><p>比較四個時相：充血、心房收縮、等容收縮與射血。用箭頭與瓣膜位置追蹤壓力改變造成的血流方向。</p>
+            <div class="visual-flow" style="--flow-art:url('assets/cardiac-cycle-flow-strip-v1.png')">
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:0"><img src="assets/cardiac-cycle-flow-strip-v1.png" alt="被動充血時血液流入心室"></div><strong>被動充血</strong><span>房室瓣開啟，血流入心室</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:1"><img src="assets/cardiac-cycle-flow-strip-v1.png" alt="心房收縮補足心室容積"></div><strong>心房收縮</strong><span>補足心室末期容積</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:2"><img src="assets/cardiac-cycle-flow-strip-v1.png" alt="等容收縮時瓣膜關閉"></div><strong>等容收縮</strong><span>所有瓣膜暫時關閉</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:3"><img src="assets/cardiac-cycle-flow-strip-v1.png" alt="心室射血進入動脈"></div><strong>心室射血</strong><span>半月瓣開啟，血液進入動脈</span></div>
+            </div>
+            <div class="visual-focus visual-crop" id="visual-focus" style="--panel:0"><img src="assets/cardiac-cycle-flow-strip-v1.png" alt="所選心動週期的心臟圖"></div><p class="visual-focus-caption" id="visual-focus-caption">已選：被動充血</p>
+            <section class="selected-explanation" id="selected-explanation" aria-live="polite"></section>
+        </section>
+
+        <!-- 6 Step Flow Overview Cards -->
+        <div class="reading-cue" id="reading-cue" aria-hidden="true"><span class="cue-arrow">↓</span><span>往下閱讀：查看重點與補充說明</span></div>
+        <div class="flow-grid">
+            <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：心舒張末期——被動充血">
+                <svg viewBox="0 0 100 100">
+                    <rect x="25" y="20" width="50" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M 35 30 L 35 60 M 65 30 L 65 60" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+                    <line x1="30" y1="45" x2="70" y2="45" stroke="#16a34a" stroke-width="3" stroke-dasharray="2,2"/>
+                    <text x="50" y="88" font-size="8" fill="#1e40af" text-anchor="middle" font-weight="bold">被動充血 70~80%</text>
+                </svg>
+                <h3>1. 心舒張末期</h3>
+                <p>房室瓣開啟，血液順壓力被動流入</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-02" aria-label="點擊捲動至節點 2：心房收縮期——主動充血">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 25 30 C 25 20 75 20 75 30 L 65 50 L 35 50 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+                    <path d="M 50 25 L 50 65" stroke="#dc2626" stroke-width="4" marker-end="url(#arrow)"/>
+                    <text x="50" y="85" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">補充剩餘 20~30%</text>
+                </svg>
+                <h3>2. 心房收縮期</h3>
+                <p>心房主動擠壓，補滿心室容量</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-03" aria-label="點擊捲動至節點 3：等容心室收縮期與第一心音 S1">
+                <svg viewBox="0 0 100 100">
+                    <rect x="25" y="25" width="50" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <line x1="25" y1="40" x2="75" y2="40" stroke="#dc2626" stroke-width="4"/>
+                    <line x1="35" y1="25" x2="35" y2="10" stroke="#dc2626" stroke-width="3"/>
+                    <line x1="65" y1="25" x2="65" y2="10" stroke="#dc2626" stroke-width="3"/>
+                    <text x="50" y="88" font-size="8" fill="#991b1b" text-anchor="middle" font-weight="bold">房室瓣閉 (S1)</text>
+                </svg>
+                <h3>3. 等容收縮期</h3>
+                <p>瓣膜全關容積不變，產生 S1 心音</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-04" aria-label="點擊捲動至節點 4：心室射血期與心搏量">
+                <svg viewBox="0 0 100 100">
+                    <rect x="25" y="40" width="50" height="40" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <path d="M 40 40 L 40 15 M 60 40 L 60 15" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow)"/>
+                    <text x="50" y="93" font-size="8" fill="#16a34a" text-anchor="middle" font-weight="bold">射血 SV ≈ 70ml</text>
+                </svg>
+                <h3>4. 心室射血期</h3>
+                <p>半月瓣開啟，血液大量推入動脈</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-05" aria-label="點擊捲動至節點 5：等容心室舒張期與第二心音 S2">
+                <svg viewBox="0 0 100 100">
+                    <rect x="25" y="25" width="50" height="50" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="3"/>
+                    <line x1="35" y1="25" x2="65" y2="25" stroke="#d97706" stroke-width="4"/>
+                    <line x1="25" y1="45" x2="75" y2="45" stroke="#d97706" stroke-width="3"/>
+                    <text x="50" y="88" font-size="8" fill="#b45309" text-anchor="middle" font-weight="bold">半月瓣閉 (S2)</text>
+                </svg>
+                <h3>5. 等容舒張期</h3>
+                <p>心室壓驟降半月瓣閉，產生 S2 心音</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：心音聽診入門">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 30 30 Q 50 10 70 30 T 50 80 Z" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <circle cx="50" cy="45" r="12" fill="#d97706" opacity="0.3"/>
+                    <text x="50" y="48" font-size="8" fill="#b45309" text-anchor="middle" font-weight="bold">S1・S2</text>
+                    <text x="50" y="93" font-size="8" fill="#1e40af" text-anchor="middle" font-weight="bold">噗－通</text>
+                </svg>
+                <h3>6. 心音聽診入門</h3>
+                <p>S1、S2 與收縮期、舒張期</p>
+            </button>
+        </div>
+
+        <!-- Detailed Knowledge Cards Grid -->
+        <div class="detail-cards-grid">
+            
+            <!-- Node 1 Detail -->
+            <div class="detail-card" id="node-card-01" data-category="filling">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Atrium and Ventricle Outline -->
+                            <rect x="30" y="15" width="110" height="50" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+                            <text x="85" y="35" font-size="10" fill="#1e40af" text-anchor="middle" font-weight="bold">心房 (Atrium)</text>
+                            
+                            <rect x="30" y="75" width="110" height="60" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+                            <text x="85" y="105" font-size="10" fill="#1e40af" text-anchor="middle" font-weight="bold">心室 (Ventricle)</text>
+
+                            <!-- AV Valve OPEN -->
+                            <line x1="50" y1="65" x2="60" y2="75" stroke="#16a34a" stroke-width="4"/>
+                            <line x1="120" y1="65" x2="110" y2="75" stroke="#16a34a" stroke-width="4"/>
+                            <text x="85" y="70" font-size="9" fill="#16a34a" text-anchor="middle" font-weight="bold">房室瓣開啟 (AV Valve Open)</text>
+
+                            <!-- Flow Arrow -->
+                            <path d="M 85 40 L 85 90" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+                            <!-- Explanatory Right Panel -->
+                            <rect x="160" y="20" width="130" height="110" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="225" y="42" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">心舒張末期特徵</text>
+                            <text x="225" y="62" font-size="8" fill="#475569" text-anchor="middle">1. 心房壓 > 心室壓</text>
+                            <text x="225" y="80" font-size="8" fill="#475569" text-anchor="middle">2. 房室瓣開啟，半月瓣關閉</text>
+                            <text x="225" y="98" font-size="8" fill="#16a34a" text-anchor="middle" font-weight="bold">3. 被動充血：佔總充血量 70~80%</text>
+                            <text x="225" y="116" font-size="8" fill="#475569" text-anchor="middle">靜脈血自發灌入心室</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-filling">心室充血期</span>
+                <h2 class="card-heading">1. 心舒張末期 (Late Diastole / 被動充血期)</h2>
+                <div class="core-concept">心房與心室均處於舒張狀態，房室瓣開啟而半月瓣關閉，血液由腔靜脈與肺靜脈被動流入心房並直接灌滿心室。</div>
+                <ul class="features-list">
+                    <li><strong>瓣膜狀態：</strong>二尖瓣與三尖瓣（房室瓣）保持開啟，主動脈瓣與肺動脈瓣（半月瓣）保持關閉。</li>
+                    <li><strong>壓力階差：</strong>心房內累積的血液使心房壓力略大於心室壓，推開房室瓣流向心室。</li>
+                    <li><strong>70~80% 被動流入：</strong>約有 70~80% 的心室充血量係在心房收縮前被動流入，心室容積逐漸增加。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理解剖重要性：</strong><br>心室大部分的血液（約 70~80%）是在心房收縮前被動流入的；所以心房收縮只是「補滿」，不是充血的主力。
+                </div>
+            </div>
+
+            <!-- Node 2 Detail -->
+            <div class="detail-card" id="node-card-02" data-category="filling">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Atrium Squeezing -->
+                            <rect x="30" y="15" width="110" height="40" fill="#fee2e2" stroke="#dc2626" stroke-width="3" rx="6"/>
+                            <text x="85" y="32" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">心房收縮 (Atrial Systole)</text>
+                            <path d="M 40 20 L 50 35 M 130 20 L 120 35" stroke="#dc2626" stroke-width="2"/>
+
+                            <path d="M 85 35 L 85 90" stroke="#dc2626" stroke-width="5" marker-end="url(#arrow)"/>
+
+                            <rect x="30" y="80" width="110" height="55" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+                            <text x="85" y="110" font-size="10" fill="#1e40af" text-anchor="middle" font-weight="bold">心室滿盈 (EDV ≈ 130ml)</text>
+
+                            <!-- Explanatory Right Panel -->
+                            <rect x="160" y="20" width="130" height="110" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="225" y="42" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">心房收縮期特徵</text>
+                            <text x="225" y="62" font-size="8" fill="#475569" text-anchor="middle">1. 心房去極化 (ECG P波)</text>
+                            <text x="225" y="80" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">2. 主動擠入剩餘 20~30% 血液</text>
+                            <text x="225" y="98" font-size="8" fill="#475569" text-anchor="middle">3. 達成舒張末期容積 (EDV)</text>
+                            <text x="225" y="116" font-size="8" fill="#475569" text-anchor="middle">心室達到最大充血量</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-filling">心室充血期</span>
+                <h2 class="card-heading">2. 心房收縮期 (Atrial Systole / 主動充血期)</h2>
+                <div class="core-concept">心房肌受竇房結刺激發生收縮，將剩餘約 20~30% 的血液主動擠入心室，使心室達到最大充血狀態。</div>
+                <ul class="features-list">
+                    <li><strong>主動補充 20~30%：</strong>心房收縮將剩餘的 20~30% 血液送進心室，完成整個心室充血過程。</li>
+                    <li><strong>舒張末期容積 (EDV)：</strong>充血完成時心室內所含的總血量稱為「舒張末期容積（End-diastolic volume; EDV）」，正常約 130 ml。</li>
+                    <li><strong>電位對應：</strong>心房收縮發生於心電圖之 P 波之後（心房去極化引發收縮）。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理效應 (Atrial Kick)：</strong><br>心房主動收縮擠血稱為「心房踢（Atrial kick）」。運動時心跳變快、舒張時間縮短，被動充血的時間變少，心房踢就更重要。
+                </div>
+            </div>
+
+            <!-- Node 3 Detail -->
+            <div class="detail-card" id="node-card-03" data-category="systole">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Closed Ventricle Chamber -->
+                            <rect x="30" y="20" width="110" height="110" fill="#fef2f2" stroke="#dc2626" stroke-width="3" rx="10"/>
+                            <text x="85" y="45" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">心室開始收縮</text>
+                            
+                            <!-- Top Closed Valves -->
+                            <line x1="40" y1="30" x2="130" y2="30" stroke="#dc2626" stroke-width="5"/>
+                            <text x="85" y="25" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">房室瓣閉合 ✖</text>
+
+                            <!-- Bottom Closed Valves -->
+                            <line x1="50" y1="120" x2="120" y2="120" stroke="#dc2626" stroke-width="5"/>
+                            <text x="85" y="115" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">半月瓣關閉 ✖</text>
+
+                            <text x="85" y="75" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="bold">容積不變 V=常數</text>
+                            <text x="85" y="92" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">內壓劇增 (P↑↑)</text>
+
+                            <!-- Explanatory Right Panel -->
+                            <rect x="160" y="20" width="130" height="110" fill="#fffbeb" stroke="#d97706" rx="6"/>
+                            <text x="225" y="42" font-size="10" fill="#b45309" text-anchor="middle" font-weight="bold">等容收縮期特徵</text>
+                            <text x="225" y="62" font-size="8" fill="#475569" text-anchor="middle">1. 心室壓 > 心房壓 → 房室瓣關</text>
+                            <text x="225" y="80" font-size="9" fill="#d97706" text-anchor="middle" font-weight="bold">★ 撞擊產生「第一心音 S1」</text>
+                            <text x="225" y="98" font-size="8" fill="#475569" text-anchor="middle">2. 半月瓣尚未開啟 (約 0.05s)</text>
+                            <text x="225" y="116" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">四組瓣膜全關，血液無處可去</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-systole">心室收縮與射血</span>
+                <h2 class="card-heading">3. 等容心室收縮期 (Isovolumetric Contraction & S1)</h2>
+                <div class="core-concept">心室開始收縮致室內壓劇升高於心房壓，迫使房室瓣關閉產生第一心音；此時半月瓣未開，心室容積保持不變。</div>
+                <ul class="features-list">
+                    <li><strong>第一心音 (S1) 產生：</strong>心室收縮使房室瓣（二尖瓣與三尖瓣）突然關閉，血液撞擊與瓣膜震動發出「第一心音（S1; Lub）」。</li>
+                    <li><strong>四瓣全關 (等容)：</strong>此時心室壓尚小於主動脈壓，半月瓣仍關閉；四組瓣膜全部閉合，心室容積完全不變（約持續 0.05 秒）。</li>
+                    <li><strong>壓力爆發性上升：</strong>心室肌強烈收縮使心室內壓力在極短時間內急劇飆升，為衝開半月瓣做準備。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>聽診學特徵：</strong><br>第一心音（S1）音調較低、持續時間較長，標誌著心室收縮期（Systole）的開始；S1 到 S2 之間就是心室收縮期。
+                </div>
+            </div>
+
+            <!-- Node 4 Detail -->
+            <div class="detail-card" id="node-card-04" data-category="systole">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Ventricle Ejecting -->
+                            <rect x="30" y="45" width="110" height="85" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="8"/>
+                            <text x="85" y="85" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">心室快速收縮</text>
+
+                            <!-- Aorta Path OPEN -->
+                            <path d="M 85 45 L 85 10" stroke="#16a34a" stroke-width="6" marker-end="url(#arrow)"/>
+                            <text x="85" y="32" font-size="9" fill="#16a34a" text-anchor="middle" font-weight="bold">半月瓣開啟 ✔ (P室 > P動脈)</text>
+
+                            <!-- Explanatory Right Panel -->
+                            <rect x="160" y="20" width="130" height="110" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="225" y="42" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">射血期量化指標</text>
+                            <text x="225" y="62" font-size="8" fill="#475569" text-anchor="middle">1. 心室壓 > 主動脈/肺動脈壓</text>
+                            <text x="225" y="80" font-size="9" fill="#16a34a" text-anchor="middle" font-weight="bold">2. 心搏量 (SV) ≈ 70 ml</text>
+                            <text x="225" y="98" font-size="8" fill="#475569" text-anchor="middle">3. 射血時間約持續 0.25 秒</text>
+                            <text x="225" y="116" font-size="8" fill="#475569" text-anchor="middle">殘留血量 ESV ≈ 60 ml</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-systole">心室收縮與射血</span>
+                <h2 class="card-heading">4. 心室射血期 (Ventricular Ejection / 心搏量)</h2>
+                <div class="core-concept">當左、右心室壓力超越主動脈及肺動脈壓時，半月瓣開啟，血液大量由心室射入大動脈，心室容積顯著下降。</div>
+                <ul class="features-list">
+                    <li><strong>半月瓣開啟：</strong>左心室壓超過主動脈壓（>80 mmHg）、右心室壓超過肺動脈壓時，半月瓣被衝開。</li>
+                    <li><strong>心搏量 (Stroke Volume, SV)：</strong>每次心室收縮射出的血量稱為心搏量，正常安靜狀態下約為 70 ml。</li>
+                    <li><strong>收縮末期容積 (ESV)：</strong>射血後殘留在心室內的血量稱為「收縮末期容積（End-systolic volume; ESV）」，正常約 60 ml（SV = EDV - ESV）。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>心輸出量計算 (Cardiac Output, CO)：</strong><br>心輸出量 = 心率 (HR) × 心搏量 (SV)。若心率 75 次/分，CO = 75 × 70 ml ≈ 5,250 ml/min（約 5.25 公升/分）。
+                </div>
+            </div>
+
+            <!-- Node 5 Detail -->
+            <div class="detail-card" id="node-card-05" data-category="sounds">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Relaxing Chamber -->
+                            <rect x="30" y="20" width="110" height="110" fill="#fffbeb" stroke="#d97706" stroke-width="3" rx="10"/>
+                            <text x="85" y="65" font-size="10" fill="#b45309" text-anchor="middle" font-weight="bold">心室開始舒張</text>
+                            <text x="85" y="82" font-size="10" fill="#dc2626" text-anchor="middle" font-weight="bold">內壓驟降 (P↓↓)</text>
+
+                            <!-- Top Closed Semilunar Valves -->
+                            <line x1="40" y1="20" x2="130" y2="20" stroke="#d97706" stroke-width="5"/>
+                            <text x="85" y="15" font-size="8" fill="#d97706" text-anchor="middle" font-weight="bold">半月瓣關閉 ✖ (S2)</text>
+
+                            <!-- Bottom Closed AV Valves -->
+                            <line x1="50" y1="130" x2="120" y2="130" stroke="#d97706" stroke-width="5"/>
+                            <text x="85" y="125" font-size="8" fill="#d97706" text-anchor="middle" font-weight="bold">房室瓣未開 ✖</text>
+
+                            <!-- Explanatory Right Panel -->
+                            <rect x="160" y="20" width="130" height="110" fill="#fffbeb" stroke="#d97706" rx="6"/>
+                            <text x="225" y="42" font-size="10" fill="#b45309" text-anchor="middle" font-weight="bold">等容舒張期特徵</text>
+                            <text x="225" y="62" font-size="8" fill="#475569" text-anchor="middle">1. 心室壓 < 動脈壓 → 半月瓣關</text>
+                            <text x="225" y="80" font-size="9" fill="#d97706" text-anchor="middle" font-weight="bold">★ 撞擊產生「第二心音 S2」</text>
+                            <text x="225" y="98" font-size="8" fill="#475569" text-anchor="middle">2. 四組瓣膜再度全關</text>
+                            <text x="225" y="116" font-size="8" fill="#475569" text-anchor="middle">容積維持 ESV (約 60 ml)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-sounds">舒張期與心音聽診</span>
+                <h2 class="card-heading">5. 等容心室舒張期 (Isovolumetric Relaxation & S2)</h2>
+                <div class="core-concept">心室開始舒張致內壓驟降低於大動脈壓，動脈血回流充盈半月瓣使其關閉產生第二心音；四組瓣膜再度全關。</div>
+                <ul class="features-list">
+                    <li><strong>第二心音 (S2) 產生：</strong>主動脈與肺動脈半月瓣關閉，血液撞擊瓣膜發出清脆的「第二心音（S2; Dup）」。</li>
+                    <li><strong>四瓣再度全關：</strong>此時心室壓仍高於心房壓，故房室瓣尚未開啟；四組瓣膜全關，心室容積不變。</li>
+                    <li><strong>準備進入下一週期：</strong>心室肌持續鬆弛致壓力繼續驟降，當心室壓低於心房壓時，房室瓣重新開啟進入下一週期的充血期。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>聽診學特徵：</strong><br>第二心音（S2）音調較高、持續時間較短，標誌著心室舒張期（Diastole）的開始。S1 至 S2 間為心室收縮期，S2 至下一週期 S1 間為心室舒張期。
+                </div>
+            </div>
+
+            <!-- Node 6 Detail -->
+            <div class="detail-card" id="node-card-06" data-category="sounds">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Phonocardiogram / Sound Waves -->
+                            <rect x="20" y="20" width="125" height="50" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="6"/>
+                            <text x="82" y="40" font-size="10" fill="#15803d" text-anchor="middle" font-weight="bold">第一心音 S1 (Lub)</text>
+                            <text x="82" y="55" font-size="8" fill="#15803d" text-anchor="middle">房室瓣閉 (收縮期開始)</text>
+
+                            <rect x="165" y="20" width="125" height="50" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="6"/>
+                            <text x="227" y="40" font-size="10" fill="#b45309" text-anchor="middle" font-weight="bold">第二心音 S2 (Dup)</text>
+                            <text x="227" y="55" font-size="8" fill="#b45309" text-anchor="middle">半月瓣閉 (舒張期開始)</text>
+
+                            <!-- Timing Box -->
+                            <rect x="20" y="80" width="270" height="50" fill="#eff6ff" stroke="#2563eb" rx="6"/>
+                            <text x="155" y="98" font-size="10" fill="#1e40af" text-anchor="middle" font-weight="bold">S1 → S2：心室收縮期（較短）</text>
+                            <text x="155" y="116" font-size="9" fill="#1e40af" text-anchor="middle">S2 → 下一個 S1：心室舒張期（較長，心跳變快時縮短最多）</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-sounds">舒張期與心音聽診</span>
+                <h2 class="card-heading">6. 心音聽診入門 (Heart Sounds)</h2>
+                <div class="core-concept">心音是瓣膜「關閉」時的聲音：S1 是房室瓣關閉、S2 是半月瓣關閉；兩個心音把心動週期分成收縮期與舒張期。</div>
+                <ul class="features-list">
+                    <li><strong>第一與第二心音：</strong>S1（房室瓣關閉/低沉長）與 S2（半月瓣關閉/高銳短）為正常心臟聽診的主要心音。</li>
+                    <li><strong>收縮期與舒張期：</strong>S1 到 S2 之間是心室收縮期；S2 到下一個 S1 之間是心室舒張期，通常比較長。</li>
+                    <li><strong>聽起來像「噗－通」：</strong>第一聲「噗」（S1）低沉較長，第二聲「通」（S2）清脆較短。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>實驗課練習：</strong><br>用聽診器放在左胸前聽心音，一邊摸手腕脈搏：脈搏跳動出現在 S1 之後，因為那是心室射血、把血推進動脈的時候。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
+        <div class="quiz-container">
+            
+            <!-- STAGE 1: FOUNDATION -->
+            <div id="stage-1-view">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第一關｜先備知識建構</span>
+                    <span class="progress-badge" id="s1-progress-text">第一關｜先備知識建構：1／6</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s1-question-text">載入中...</div>
+                    <div class="options-group" id="s1-options-container"></div>
+                    <div class="hint-box" id="s1-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s1-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- STAGE 2: CASE APPLICATION -->
+            <div id="stage-2-view" style="display: none;">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第二關｜生活情境應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜生活情境應用：1／5</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s2-question-text">載入中...</div>
+                    <div class="options-group" id="s2-options-container"></div>
+                    <div class="hint-box" id="s2-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s2-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- RESULT BANNERS -->
+            <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜完全通關！</h3>
+                <p>您已成功通過「先備知識」與「生活情境」兩階段診斷，完整掌握心動週期、瓣膜運作與心音聽診生理學應用！</p>
+                <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
+            </div>
+
+            <div id="result-banner-fail" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p id="fail-message-text">第二關需 5 題全部答對才能通關，請複習資訊圖表後重新挑戰整輪！</p>
+                <button type="button" class="action-btn" id="btn-retry-s2">🔄 重新挑戰第二關 (重洗題目)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 心動週期解剖生理數位教材 - 專為五專生理解剖課程設計</p>
+    </footer>
+</div>
+
+<script>
+    const COURSE_CODE = 'cardiac-cycle';
+    const MATERIAL_ID = 'cardiac-cycle';
+    const exploredNodes = new Set();
+    const trackExplore = (id) => window.CourseLearning?.explore?.(id);
+    const trackAnswer = (id, correct) => window.CourseLearning?.answer?.(id, correct);
+    function trackComplete() {
+        if (window.CourseLearning?.complete) window.CourseLearning.complete();
+    }
+
+    // 1. Foundation Questions (6 Questions)
+    const FOUNDATION_QUESTIONS = [
+        {
+            "id": "cardiac-cycle-foundation-q01",
+            "title": "1. 「房室瓣」是指哪兩個瓣膜？",
+            "options": [
+                "二尖瓣與三尖瓣",
+                "主動脈瓣與肺動脈瓣",
+                "二尖瓣與主動脈瓣",
+                "三尖瓣與肺動脈瓣"
+            ],
+            "answer": 0,
+            "hint": "提示：房室瓣位在心房和心室之間。",
+            "explanation": "房室瓣是二尖瓣（左）與三尖瓣（右）；主動脈瓣與肺動脈瓣則合稱半月瓣。"
+        },
+        {
+            "id": "cardiac-cycle-foundation-q02",
+            "title": "2. 心室充血時，大部分的血液是怎麼進入心室的？",
+            "options": [
+                "心房還沒收縮前，就順著壓力差自己流入",
+                "靠心房用力收縮擠入",
+                "由動脈倒流回心室",
+                "靠心室收縮吸入"
+            ],
+            "answer": 0,
+            "hint": "提示：想想「被動充血」這個名稱。",
+            "explanation": "約 70~80% 的血液在心房收縮前就被動流入心室；心房收縮只補入最後約 20~30%。"
+        },
+        {
+            "id": "cardiac-cycle-foundation-q03",
+            "title": "3. 第一心音（S1）是哪一組瓣膜關閉的聲音？",
+            "options": [
+                "房室瓣關閉",
+                "半月瓣關閉",
+                "房室瓣打開",
+                "半月瓣打開"
+            ],
+            "answer": 0,
+            "hint": "提示：心室一開始收縮，最先關上的是心房與心室之間的門。",
+            "explanation": "心室開始收縮、壓力高過心房時，房室瓣關閉，發出低沉的第一心音。"
+        },
+        {
+            "id": "cardiac-cycle-foundation-q04",
+            "title": "4. 第二心音（S2）是哪一組瓣膜關閉的聲音？",
+            "options": [
+                "半月瓣關閉",
+                "房室瓣關閉",
+                "半月瓣打開",
+                "房室瓣打開"
+            ],
+            "answer": 0,
+            "hint": "提示：心室射完血、開始放鬆時，動脈端的門關上。",
+            "explanation": "心室開始舒張、壓力低於動脈時，半月瓣關閉，發出較清脆的第二心音。"
+        },
+        {
+            "id": "cardiac-cycle-foundation-q05",
+            "title": "5. 「等容收縮期」的「等容」是什麼意思？",
+            "options": [
+                "四個瓣膜都關著，心室裡的血量不變",
+                "心室和心房一樣大",
+                "左右心室射出的血量一樣",
+                "心室裡完全沒有血"
+            ],
+            "answer": 0,
+            "hint": "提示：「容」指的是心室的容積。",
+            "explanation": "這時房室瓣已關、半月瓣還沒開，血液進不來也出不去，心室容積不變、壓力快速上升。"
+        },
+        {
+            "id": "cardiac-cycle-foundation-q06",
+            "title": "6. 「心搏量」是指什麼？",
+            "options": [
+                "心室每收縮一次射出的血量",
+                "心室充滿時的總血量",
+                "每分鐘心臟打出的血量",
+                "射血後留在心室的血量"
+            ],
+            "answer": 0,
+            "hint": "提示：「搏」是跳一下。",
+            "explanation": "心搏量是心室每次收縮射出的血量，安靜時約 70 ml。"
+        }
+    ];
+
+    // 2. Case Questions (5 Questions)
+    const CASE_QUESTIONS = [
+        {
+            "id": "cardiac-cycle-case-q01",
+            "title": "1. 用聽診器聽心跳「噗－通」，聽到第一聲「噗」時，心室正要開始做什麼？",
+            "options": [
+                "開始收縮",
+                "開始舒張",
+                "正在被動充血",
+                "心房正在收縮"
+            ],
+            "answer": 0,
+            "hint": "提示：第一聲是 S1，是房室瓣關閉的聲音。",
+            "explanation": "S1 是心室開始收縮、房室瓣關閉的聲音，標誌心室收縮期開始。"
+        },
+        {
+            "id": "cardiac-cycle-case-q02",
+            "title": "2. 跑步時心跳從每分鐘 75 次加快到 150 次，一次心跳裡哪一段時間縮短最多？",
+            "options": [
+                "心室舒張（充血）的時間",
+                "心室收縮的時間",
+                "兩者縮短一樣多",
+                "都不會縮短"
+            ],
+            "answer": 0,
+            "hint": "提示：收縮需要的時間變化不大。",
+            "explanation": "心跳變快時，收縮時間只稍縮短，被壓縮最多的是舒張（充血）時間。"
+        },
+        {
+            "id": "cardiac-cycle-case-q03",
+            "title": "3. 心室充滿時有 130 ml 血，射血後還剩 60 ml。這次的心搏量是多少？",
+            "options": [
+                "70 ml",
+                "60 ml",
+                "130 ml",
+                "190 ml"
+            ],
+            "answer": 0,
+            "hint": "提示：充滿時的量 − 射完後剩下的量。",
+            "explanation": "心搏量 = EDV − ESV = 130 − 60 = 70 ml。"
+        },
+        {
+            "id": "cardiac-cycle-case-q04",
+            "title": "4. 某同學心跳每分鐘 70 次、心搏量 70 ml，他的心臟每分鐘約打出多少血？",
+            "options": [
+                "約 4,900 ml",
+                "約 140 ml",
+                "約 70 ml",
+                "約 49,000 ml"
+            ],
+            "answer": 0,
+            "hint": "提示：心輸出量 = 心率 × 心搏量。",
+            "explanation": "70 次/分 × 70 ml = 4,900 ml/分（約 4.9 公升）。"
+        },
+        {
+            "id": "cardiac-cycle-case-q05",
+            "title": "5. 手指按在手腕摸到脈搏跳一下，是因為心室在哪一個時期把血推進動脈？",
+            "options": [
+                "心室射血期",
+                "被動充血期",
+                "等容舒張期",
+                "心房收縮期"
+            ],
+            "answer": 0,
+            "hint": "提示：哪個時期半月瓣是打開的？",
+            "explanation": "射血期半月瓣打開，心室把血推進動脈，動脈壁被撐開，就是摸到的脈搏。"
+        }
+    ];
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // STATE VARIABLES
+    let currentMode = 'info'; // 'info' or 'quiz'
+    
+    // Stage 1 State
+    let s1CurrentIndex = 0;
+    let s1AnsweredCorrect = false;
+
+    // Stage 2 State
+    let s2Questions = [];
+    let s2CurrentIndex = 0;
+    let s2CorrectCount = 0;
+    let s2AnsweredCorrect = false;
+
+    // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mode Switch Buttons
+        const btnModeInfo = document.getElementById('btn-mode-info');
+        const btnModeQuiz = document.getElementById('btn-mode-quiz');
+        const paneInfo = document.getElementById('pane-infographic');
+        const paneQuiz = document.getElementById('pane-quiz');
+
+        btnModeInfo.addEventListener('click', () => {
+            currentMode = 'info';
+            btnModeInfo.classList.add('active');
+            btnModeInfo.setAttribute('aria-selected', 'true');
+            btnModeQuiz.classList.remove('active');
+            btnModeQuiz.setAttribute('aria-selected', 'false');
+            paneInfo.classList.add('active');
+            paneQuiz.classList.remove('active');
+        });
+
+        btnModeQuiz.addEventListener('click', () => {
+            currentMode = 'quiz';
+            btnModeQuiz.classList.add('active');
+            btnModeQuiz.setAttribute('aria-selected', 'true');
+            btnModeInfo.classList.remove('active');
+            btnModeInfo.setAttribute('aria-selected', 'false');
+            paneQuiz.classList.add('active');
+            paneInfo.classList.remove('active');
+        });
+
+        // Filter Toolbar Listener
+        const filterBtns = [
+            { id: 'filter-all', cat: 'all' },
+            { id: 'filter-filling', cat: 'filling' },
+            { id: 'filter-systole', cat: 'systole' },
+            { id: 'filter-sounds', cat: 'sounds' }
+        ];
+
+        filterBtns.forEach(item => {
+            const btn = document.getElementById(item.id);
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    const el = document.getElementById(b.id);
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+
+                // Filter cards
+                const cards = document.querySelectorAll('.detail-card');
+                cards.forEach(card => {
+                    if (item.cat === 'all' || card.dataset.category === item.cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navigation Flow Cards Smooth Scroll & Focus
+        for (let i = 1; i <= 6; i++) {
+            const flowCard = document.getElementById(`flow-card-node-0${i}`);
+            const targetDetailCard = document.getElementById(`node-card-0${i}`);
+            
+            flowCard.addEventListener('click', (event) => {
+                const nodeId = `${MATERIAL_ID}-node-0${i}`;
+                if (!exploredNodes.has(nodeId)) {
+                    exploredNodes.add(nodeId);
+                    trackExplore(nodeId);
+                }
+                document.querySelectorAll('.flow-nav-card').forEach(card => card.classList.toggle('active', card === flowCard));
+                // Remove highlight from all
+                document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('focus-card'));
+                
+                // Show card if hidden by filter
+                targetDetailCard.style.display = 'flex';
+
+                // 同步切換情境實驗室的主圖；等容舒張期仍保留詳細卡的瓣膜圖供對照。
+                const visualMap = [0, 1, 2, 3, 0, 3];
+                const visualLabels = ['被動充血', '心房收縮', '等容心室收縮', '心室射血', '等容心室舒張（下方詳細圖可看四瓣膜皆關）', '心音與瓣膜聽診（參考射血圖）'];
+                const visualIndex = visualMap[i - 1];
+                const focus = document.getElementById('visual-focus');
+                const caption = document.getElementById('visual-focus-caption');
+                if (focus) {
+                    focus.style.setProperty('--panel', visualIndex);
+                    focus.querySelector('img').style.transform = `translateX(${visualIndex * -25}%)`;
+                }
+                if (caption) caption.textContent = `已選：${visualLabels[i - 1]}`;
+                const readingCue = document.getElementById('reading-cue');
+                if (readingCue && event.isTrusted) {
+                    readingCue.classList.remove('is-visible');
+                    void readingCue.offsetWidth;
+                    readingCue.classList.add('is-visible');
+                }
+                document.querySelectorAll('.visual-flow-card').forEach((card, index) => card.classList.toggle('active', index === visualIndex));
+                const explanation = document.getElementById('selected-explanation');
+                if (explanation) {
+                    const heading = targetDetailCard.querySelector('.card-heading')?.textContent || visualLabels[i - 1];
+                    const concept = targetDetailCard.querySelector('.core-concept')?.outerHTML || '';
+                    const features = targetDetailCard.querySelector('.features-list')?.outerHTML || '';
+                    const clinical = targetDetailCard.querySelector('.clinical-box')?.outerHTML || '';
+                    explanation.innerHTML = `<h3>${heading}</h3>${concept}${features}${clinical}`;
+                }
+
+                // 不自動捲到詳細卡，讓學生能先看完剛切換的主圖；詳細內容保留在下方。
+                targetDetailCard.classList.add('focus-card');
+            });
+        }
+        document.getElementById('flow-card-node-01').click();
+
+        // Quiz Stage 1 Setup
+        initStage1();
+
+        // Stage 1 Next Button Listener
+        document.getElementById('s1-next-btn').addEventListener('click', () => {
+            s1CurrentIndex++;
+            if (s1CurrentIndex < FOUNDATION_QUESTIONS.length) {
+                renderStage1Question();
+            } else {
+                // Unlock Stage 2
+                document.getElementById('stage-1-view').style.display = 'none';
+                document.getElementById('stage-2-view').style.display = 'block';
+                initStage2();
+            }
+        });
+
+        // Stage 2 Next Button Listener
+        document.getElementById('s2-next-btn').addEventListener('click', () => {
+            s2CurrentIndex++;
+            if (s2CurrentIndex < s2Questions.length) {
+                renderStage2Question();
+            } else {
+                // Stage 2 Finished -> Check if All 5 Correct
+                document.getElementById('stage-2-view').style.display = 'none';
+                if (s2CorrectCount === 5) {
+                    document.getElementById('result-banner-pass').style.display = 'block';
+                    trackComplete();
+                } else {
+                    document.getElementById('result-banner-fail').style.display = 'block';
+                    document.getElementById('fail-message-text').textContent = `您答對了 ${s2CorrectCount} / 5 題。關卡要求必須 5 題全對才能通關，請重試！`;
+                }
+            }
+        });
+
+        // Restart Full Quiz
+        document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+            document.getElementById('result-banner-pass').style.display = 'none';
+            document.getElementById('stage-1-view').style.display = 'block';
+            document.getElementById('stage-2-view').style.display = 'none';
+            s1CurrentIndex = 0;
+            initStage1();
+        });
+
+        // Retry Stage 2
+        document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            document.getElementById('result-banner-fail').style.display = 'none';
+            document.getElementById('stage-2-view').style.display = 'block';
+            initStage2();
+        });
+    });
+
+    // RENDER STAGE 1
+    function initStage1() {
+        s1CurrentIndex = 0;
+        renderStage1Question();
+    }
+
+    function renderStage1Question() {
+        s1AnsweredCorrect = false;
+        const q = FOUNDATION_QUESTIONS[s1CurrentIndex];
+        
+        document.getElementById('s1-progress-text').textContent = `第一關｜先備知識建構：${s1CurrentIndex + 1}／6`;
+        document.getElementById('s1-question-text').textContent = q.title;
+        
+        const optionsContainer = document.getElementById('s1-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s1-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s1-next-btn');
+        nextBtn.disabled = true;
+
+        q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optText;
+
+            btn.addEventListener('click', () => {
+                if (s1AnsweredCorrect) return;
+                trackAnswer(q.id, optIdx === q.answer);
+
+                if (optIdx === q.answer) {
+                    // Correct
+                    btn.classList.add('correct');
+                    s1AnsweredCorrect = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>核心解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    
+                    // Disable all options
+                    const allOpts = optionsContainer.querySelectorAll('.option-button');
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    // Wrong
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--warning)';
+                    hintBox.innerHTML = `<strong>再試一次！</strong>${q.hint}`;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // RENDER STAGE 2
+    function initStage2() {
+        s2CurrentIndex = 0;
+        s2CorrectCount = 0;
+
+        // Shuffle Stage 2 Questions and Options
+        s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
+            const optionsWithOrigIdx = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+            const shuffledOpts = shuffleArray(optionsWithOrigIdx);
+            return {
+                ...q,
+                shuffledOpts: shuffledOpts
+            };
+        });
+
+        renderStage2Question();
+    }
+
+    function renderStage2Question() {
+        s2AnsweredCorrect = false;
+        const q = s2Questions[s2CurrentIndex];
+
+        document.getElementById('s2-progress-text').textContent = `第二關｜生活情境應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s2-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s2-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s2-next-btn');
+        nextBtn.disabled = true;
+
+        q.shuffledOpts.forEach((optObj) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optObj.text;
+
+            btn.addEventListener('click', () => {
+                if (s2AnsweredCorrect) return;
+                trackAnswer(q.id, optObj.isCorrect);
+
+                const allOpts = optionsContainer.querySelectorAll('.option-button');
+
+                if (optObj.isCorrect) {
+                    btn.classList.add('correct');
+                    s2AnsweredCorrect = true;
+                    s2CorrectCount++;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>答對了！正解解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    btn.classList.add('wrong');
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--danger)';
+                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
+                    
+                    // Highlight the correct one
+                    q.shuffledOpts.forEach((o, i) => {
+                        if (o.isCorrect) {
+                            allOpts[i].classList.add('correct');
+                        }
+                    });
+
+                    allOpts.forEach(b => b.disabled = true);
+                    nextBtn.disabled = false;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+</script>
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+
+</body>
+</html>

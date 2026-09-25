@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="material-ids" content="cardiac-conduction-case-q01,cardiac-conduction-case-q02,cardiac-conduction-case-q03,cardiac-conduction-case-q04,cardiac-conduction-case-q05,cardiac-conduction-foundation-q01,cardiac-conduction-foundation-q02,cardiac-conduction-foundation-q03,cardiac-conduction-foundation-q04,cardiac-conduction-foundation-q05,cardiac-conduction-foundation-q06,cardiac-conduction-node-01,cardiac-conduction-node-02,cardiac-conduction-node-03,cardiac-conduction-node-04,cardiac-conduction-node-05,cardiac-conduction-node-06">
+    <title>心臟的傳導系統 I - 五專解剖生理學互動資訊圖表與隨堂診斷</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --focus-outline: 3px solid #2563eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.1rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Metric Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+
+        /* Navigation Mode Switch */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 1rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Filter Controls */
+        .filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Step Flow Overview Cards */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .flow-nav-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; }
+        .flow-nav-card:hover, .flow-nav-card:focus { transform: translateY(-3px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
+        .flow-nav-card { overflow:hidden; min-width:0; }
+        .flow-nav-card svg { width:64px; height:64px; margin-bottom:8px; overflow:hidden; }
+        .flow-nav-card svg text { display:none; }
+        .flow-nav-card h3 { font-size:clamp(.86rem,1.5vw,.98rem); font-weight:700; color:var(--text-main); margin:0 0 4px; overflow-wrap:anywhere; }
+        .flow-nav-card p { font-size:clamp(.75rem,1.3vw,.84rem); color:var(--text-muted); line-height:1.35; overflow-wrap:anywhere; }
+
+        /* Detailed Knowledge Cards Grid */
+        .detail-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
+        .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
+        
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container svg { width:100%; height:auto; max-height:180px; }
+        /* 情境實驗室：四格圖像化傳導路徑，桌機橫排、手機直式。 */
+        .visual-lab { margin:0 0 28px; padding:18px; background:linear-gradient(135deg,#fff8e8,#fff); border:1px solid #fde68a; border-radius:16px; }.visual-lab h2{font-size:1.15rem;margin:0 0 6px;color:#92400e}.visual-lab>p{margin:0 0 14px;color:#64748b}.visual-crop{aspect-ratio:3/4;overflow:hidden;border-radius:12px;background:#f8fafc}.visual-crop img{display:block;width:400%;max-width:none;height:auto;transform:translateX(calc(var(--panel)*-25%));transition:transform .35s}.visual-focus{width:min(100%,420px);margin:0 auto;border-radius:14px;box-shadow:inset 0 0 0 1px #fde68a}.visual-focus-caption{margin:10px 0 8px;text-align:center;font-weight:800;color:#78350f}.reading-cue{display:flex;align-items:center;justify-content:center;gap:7px;min-height:28px;margin:0 0 12px;color:#b45309;font-size:.86rem;font-weight:800;opacity:0;transform:translateY(-3px);transition:opacity .2s}.reading-cue.is-visible{opacity:1;transform:translateY(0);animation:reading-nudge 1.25s ease-in-out 3}.reading-cue .cue-arrow{font-size:1.25rem;line-height:1}@keyframes reading-nudge{50%{transform:translateY(7px)}}@media(prefers-reduced-motion:reduce){.reading-cue.is-visible{animation:none}}.visual-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.visual-flow-card{padding:10px;border:1px solid var(--border);border-radius:14px;background:#fff;text-align:center;font-weight:800;color:#1e3a5f;transition:transform .2s,border-color .2s,box-shadow .2s}.visual-flow-card.active{border-color:#f59e0b;box-shadow:0 0 0 3px #fde68a}.visual-art{margin:-2px -2px 9px}.visual-flow-card span{display:block;margin-top:4px;font-size:.82rem;font-weight:600;color:var(--text-muted);line-height:1.35}@media(max-width:760px){.visual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-flow-card{padding:8px}.visual-focus{width:min(100%,330px)}}
+
+        .selected-explanation{margin:16px auto 0;max-width:760px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left}.selected-explanation h3{margin:0 0 10px;color:var(--text-main);font-size:1.15rem}.selected-explanation .core-concept{margin:0 0 12px}.selected-explanation .features-list{margin:0 0 12px}
+        /* 單一閱讀區：選擇節點後，依序顯示圖與解說；詳細卡片僅作互動資料來源。 */
+        #pane-infographic{display:flex;flex-direction:column}.filter-toolbar{display:none}.flow-grid{order:0;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0 0 18px}.flow-nav-card{min-height:86px;padding:10px;justify-content:center;box-shadow:none}.flow-nav-card svg{display:none}.flow-nav-card h3{margin:0;font-size:.93rem;line-height:1.35}.flow-nav-card p{margin:5px 0 0;font-size:.75rem;line-height:1.4}.flow-nav-card.active{background:var(--primary);border-color:var(--primary);box-shadow:0 7px 16px rgba(37,99,235,.2)}.flow-nav-card.active h3,.flow-nav-card.active p{color:#fff}.visual-lab{order:1}.visual-flow{display:none}.detail-cards-grid{display:none!important}@media(max-width:760px){.flow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-nav-card{min-height:76px}}
+        .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
+        .bg-node { background: var(--danger-light); color: var(--danger); }
+        .bg-conduction { background: var(--primary-light); color: var(--primary); }
+        .bg-regulation { background: var(--warning-light); color: var(--warning); }
+
+        .card-heading { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+        .core-concept { font-size: 0.95rem; font-weight: 600; color: #334155; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-left: 4px solid var(--primary); border-radius: 4px; }
+        
+        .features-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .features-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 18px; position: relative; line-height: 1.4; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 4px; }
+
+        .clinical-box { font-size: 0.88rem; color: #334155; background: #fffdf5; border: 1px solid #fef3c7; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+        .clinical-box strong { color: var(--warning); }
+
+        /* Quiz Section Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .stage-title { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .progress-badge { font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 20px; }
+
+        .quiz-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .question-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; line-height: 1.5; }
+        
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-button { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-main); width: 100%; }
+        .option-button:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .option-button[disabled] { cursor: not-allowed; opacity: 0.6; }
+        .option-button.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; opacity: 1 !important; }
+        .option-button.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; opacity: 1 !important; }
+
+        .hint-box { margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--warning); display: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        .next-btn-container { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .action-btn:hover { background: var(--primary-dark); }
+        .action-btn[disabled] { background: #cbd5e1; cursor: not-allowed; }
+
+        .result-banner { text-align: center; padding: 24px; border-radius: 12px; margin-top: 20px; display: none; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); }
+        .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>心臟的傳導系統 I (Cardiac Conduction System I)</h1>
+        <p>解剖生理學：心臟自律性、節律點 (SA node)、傳導路徑速度與神經調控</p>
+    </header>
+
+    <!-- Key Metrics Dashboard -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="val">70~80 次/分</div>
+            <div class="label">竇房結 (SA node) 節律放電頻率</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">最慢速率</div>
+            <div class="label">房室結 (AV node) 生理性傳導延遲</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">最快速率</div>
+            <div class="label">浦金埃氏纖維 (Purkinje) 極速引發心室收縮</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">延腦 (Medulla)</div>
+            <div class="label">自主神經心跳加速與抑制中樞</div>
+        </div>
+    </div>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
+        <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
+        
+        <!-- Category Filters -->
+        <div class="filter-toolbar" role="toolbar" aria-label="知識分類篩選">
+            <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
+            <button type="button" class="filter-btn" id="filter-node" aria-pressed="false">節點與起搏</button>
+            <button type="button" class="filter-btn" id="filter-conduction" aria-pressed="false">傳導束與網路</button>
+            <button type="button" class="filter-btn" id="filter-regulation" aria-pressed="false">自主神經與調控</button>
+        </div>
+
+        <section class="visual-lab" aria-label="心臟電傳導路徑情境圖">
+            <h2>⚡ 情境實驗室｜一個衝動如何走遍心臟</h2><p>依序閱讀金色電訊號：竇房結起搏、房室結短暫延遲、希氏束下傳，最後由浦金埃氏纖維同步激發心室。</p>
+            <div class="visual-flow" style="--flow-art:url('assets/cardiac-conduction-flow-strip-v1.png')">
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:0"><img src="assets/cardiac-conduction-flow-strip-v1.png" alt="竇房結訊號擴散至心房"></div><strong>竇房結起搏</strong><span>訊號先擴散至兩心房</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:1"><img src="assets/cardiac-conduction-flow-strip-v1.png" alt="房室結延遲"></div><strong>房室結延遲</strong><span>讓心室有時間充盈</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:2"><img src="assets/cardiac-conduction-flow-strip-v1.png" alt="希氏束沿室間隔下傳"></div><strong>希氏束下傳</strong><span>沿室間隔快速傳遞</span></div>
+                <div class="visual-flow-card"><div class="visual-art visual-crop" style="--panel:3"><img src="assets/cardiac-conduction-flow-strip-v1.png" alt="浦金埃氏纖維激發心室"></div><strong>浦金埃氏纖維</strong><span>由心尖向上同步激發</span></div>
+            </div>
+            <div class="visual-focus visual-crop" id="visual-focus" style="--panel:0"><img src="assets/cardiac-conduction-flow-strip-v1.png" alt="所選心臟傳導路徑圖"></div><p class="visual-focus-caption" id="visual-focus-caption">已選：竇房結起搏</p>
+            <section class="selected-explanation" id="selected-explanation" aria-live="polite"></section>
+        </section>
+
+        <!-- 6 Step Flow Overview Cards -->
+        <div class="reading-cue" id="reading-cue" aria-hidden="true"><span class="cue-arrow">↓</span><span>往下閱讀：查看重點與補充說明</span></div>
+        <div class="flow-grid">
+            <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：心臟自律性與特化心肌">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="32" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M 30 50 L 45 35 L 55 65 L 70 50" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <text x="50" y="28" font-size="8" fill="#1e40af" text-anchor="middle" font-weight="bold">特化心肌組織</text>
+                    <text x="50" y="80" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">自我興奮電衝動</text>
+                </svg>
+                <h3>1. 特化心肌自律性</h3>
+                <p>無需神經刺激自發去極化</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-02" aria-label="點擊捲動至節點 2：節律點——竇房結">
+                <svg viewBox="0 0 100 100">
+                    <rect x="20" y="20" width="60" height="60" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <circle cx="35" cy="35" r="8" fill="#d97706"/>
+                    <path d="M 35 35 L 70 70" stroke="#dc2626" stroke-width="3" stroke-dasharray="3,2"/>
+                    <text x="35" y="28" font-size="7" fill="#b45309" font-weight="bold">SA node</text>
+                    <text x="50" y="85" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">70~80 次/分</text>
+                </svg>
+                <h3>2. 節律點 (SA node)</h3>
+                <p>右心房壁起搏電位源頭</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-03" aria-label="點擊捲動至節點 3：房室延遲——房室結">
+                <svg viewBox="0 0 100 100">
+                    <rect x="20" y="25" width="60" height="50" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="10" fill="#d97706"/>
+                    <text x="50" y="38" font-size="8" fill="#b45309" text-anchor="middle" font-weight="bold">AV node (最慢)</text>
+                    <text x="50" y="85" font-size="8" fill="#d97706" text-anchor="middle" font-weight="bold">房室延遲 0.1 秒</text>
+                </svg>
+                <h3>3. 房室結 (AV node)</h3>
+                <p>最慢傳導，提供充血延遲</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-04" aria-label="點擊捲動至節點 4：室間隔傳導——房室束/希氏束">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 50 20 L 50 50 L 30 80 M 50 50 L 70 80" fill="none" stroke="#2563eb" stroke-width="4"/>
+                    <rect x="35" y="15" width="30" height="15" fill="#dbeafe" stroke="#2563eb" rx="3"/>
+                    <text x="50" y="26" font-size="7" fill="#1e40af" text-anchor="middle" font-weight="bold">希氏束</text>
+                    <text x="50" y="93" font-size="8" fill="#2563eb" text-anchor="middle" font-weight="bold">左右房室束分枝</text>
+                </svg>
+                <h3>4. 希氏束 (His Bundle)</h3>
+                <p>穿越纖維環傳至心室間隔</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-05" aria-label="點擊捲動至節點 5：快速激發——浦金埃氏纖維">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 20 30 Q 50 80 80 30" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <path d="M 30 45 L 15 60 M 40 58 L 25 75 M 60 58 L 75 75 M 70 45 L 85 60" stroke="#16a34a" stroke-width="3"/>
+                    <text x="50" y="25" font-size="8" fill="#16a34a" text-anchor="middle" font-weight="bold">Purkinje (最快)</text>
+                    <text x="50" y="90" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">心室同步收縮</text>
+                </svg>
+                <h3>5. 浦金埃氏纖維</h3>
+                <p>最快傳導，深入心肌激發</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：自主神經與化學調節">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+                    <path d="M 25 35 L 50 50 L 75 35" fill="none" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M 25 65 L 50 50 L 75 65" fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <text x="50" y="28" font-size="8" fill="#2563eb" text-anchor="middle" font-weight="bold">延腦腦幹中樞</text>
+                    <text x="50" y="82" font-size="8" fill="#dc2626" text-anchor="middle" font-weight="bold">交感/副交感調節</text>
+                </svg>
+                <h3>6. 自主神經與調控</h3>
+                <p>延腦加速/抑制中樞調速</p>
+            </button>
+        </div>
+
+        <!-- Detailed Knowledge Cards Grid -->
+        <div class="detail-cards-grid">
+            
+            <!-- Node 1 Detail -->
+            <div class="detail-card" id="node-card-01" data-category="node">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Cardiac Muscle Cell -->
+                            <rect x="20" y="20" width="260" height="70" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="8"/>
+                            <text x="150" y="42" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">特化心肌組織 (Specialized Conduction Myocardium)</text>
+                            
+                            <!-- Action Potential wave -->
+                            <path d="M 40 70 L 80 70 L 90 35 L 110 80 L 125 65 L 140 70 L 260 70" fill="none" stroke="#2563eb" stroke-width="3"/>
+                            <text x="150" y="82" font-size="9" fill="#1e40af" text-anchor="middle">自發產生並傳導動作電位 (Na⁺/Ca²⁺ 進入)</text>
+
+                            <!-- Nervous System vs Autorhythmicity -->
+                            <rect x="20" y="102" width="260" height="38" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="150" y="118" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">★ 不需神經直接刺激即能持續收縮與舒張</text>
+                            <text x="150" y="132" font-size="9" fill="#475569" text-anchor="middle">(自主神經僅調節頻率與收縮強度，不啟動收縮)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-node">節點與起搏</span>
+                <h2 class="card-heading">1. 心臟自律性與特化心肌組織</h2>
+                <div class="core-concept">心臟壁肌肉不需神經的直接刺激即可持續舒縮，係因心臟本身含有由特化心肌組織組成的「傳導系統（Conduction system）」。</div>
+                <ul class="features-list">
+                    <li><strong>特化心肌構成：</strong>傳導系統非普通神經，而是由特化的心肌纖維交織而成，兼具自發去極化與電性傳導能力。</li>
+                    <li><strong>自主神經地位：</strong>自主神經系統（交感與副交感神經）僅調節心跳速率與收縮力，不直接引發心臟收縮。</li>
+                    <li><strong>自發興奮性：</strong>細胞膜具自我興奮性，電衝動經由離子通透性改變傳遍心肌，引發心房與心室順序收縮。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理學重要意義：</strong><br>即使將心臟離體（離體心臟灌流實驗），只要提供充足養分與氧氣，心臟仍能維持自律性跳動；實驗課的離體蛙心實驗，觀察的就是這個特性。
+                </div>
+            </div>
+
+            <!-- Node 2 Detail -->
+            <div class="detail-card" id="node-card-02" data-category="node">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Right Atrium Diagram -->
+                            <rect x="20" y="15" width="260" height="120" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="8"/>
+                            <text x="150" y="35" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">右心房壁 (Right Atrial Wall)</text>
+
+                            <!-- Superior Vena Cava -->
+                            <rect x="35" y="10" width="40" height="35" fill="#cbd5e1" rx="4"/>
+                            <text x="55" y="28" font-size="8" fill="#0f172a" text-anchor="middle">上腔靜脈</text>
+
+                            <!-- SA Node Spot -->
+                            <circle cx="55" cy="55" r="14" fill="#d97706" stroke="#b45309" stroke-width="2"/>
+                            <text x="55" y="58" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">SA node</text>
+
+                            <!-- Arrow to Atria -->
+                            <path d="M 70 55 C 130 55 130 85 240 85" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+                            <text x="160" y="75" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="bold">Na⁺ 進入去極化衝動傳遍雙心房</text>
+
+                            <!-- Pacemaker Label -->
+                            <rect x="40" y="98" width="220" height="28" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+                            <text x="150" y="116" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">節律點 (Pacemaker)：自發興奮 70 ~ 80 次/分</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-node">節點與起搏</span>
+                <h2 class="card-heading">2. 節律點——竇房結 (Sinoatrial Node; SA node)</h2>
+                <div class="core-concept">竇房結位於右心房壁、上腔靜脈開口下方，為正常心跳的節律點（Pacemaker），主導整顆心臟的跳動頻率。</div>
+                <ul class="features-list">
+                    <li><strong>解剖位置：</strong>位於右心房後壁近上腔靜脈（Superior vena cava）入口下方的小塊特化組織。</li>
+                    <li><strong>放電頻率：</strong>具有全心最高的自發去極化速率（正常每分鐘自發興奮約 70～80 次）。</li>
+                    <li><strong>電去極化傳導：</strong>動作電位引發時 Na⁺ 進入細胞，去極化波快速擴散傳遍雙心房，引發心房收縮。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理重點：</strong><br>竇房結自發放電的速度最快，所以由它帶領整顆心臟的節奏；傳導系統其他部位雖然也能自己放電，但速度較慢，平常都跟著竇房結的節奏跳動。
+                </div>
+            </div>
+
+            <!-- Node 3 Detail -->
+            <div class="detail-card" id="node-card-03" data-category="node">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- AV Node Box -->
+                            <rect x="20" y="20" width="260" height="70" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="8"/>
+                            <text x="150" y="42" font-size="11" fill="#b45309" text-anchor="middle" font-weight="bold">房室結 (Atrioventricular Node; AV node)</text>
+                            <text x="150" y="60" font-size="10" fill="#78350f" text-anchor="middle">位置：心房間隔下方 (Interatrial septum)</text>
+
+                            <!-- Delay Feature Box -->
+                            <rect x="20" y="100" width="260" height="40" fill="#fef2f2" stroke="#dc2626" rx="6"/>
+                            <text x="150" y="117" font-size="10" fill="#dc2626" text-anchor="middle" font-weight="bold">★ 傳導速度全系統「最慢」 (生理性延遲)</text>
+                            <text x="150" y="132" font-size="9" fill="#7f1d1d" text-anchor="middle">功能：讓心房有充分時間將血液徹底排入心室 (充血完畢)</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-node">節點與起搏</span>
+                <h2 class="card-heading">3. 房室延遲——房室結 (Atrioventricular Node; AV node)</h2>
+                <div class="core-concept">房室結部位於心房間隔下方，為心房最後去極化的部位，且其電衝動傳導速度為整體傳導系統中最慢者。</div>
+                <ul class="features-list">
+                    <li><strong>解剖位置：</strong>部位於右心房下部、心房間隔（Interatrial septum）靠近三尖瓣處。</li>
+                    <li><strong>傳導速度最慢：</strong>衝動行經房室結時速度驟降，產生約 0.1 秒的生理性延遲（AV delay）。</li>
+                    <li><strong>充血保障生理功能：</strong>此延遲確保心房完全收縮將血液擠入心室後，心室才開始去極化收縮。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理重點：</strong><br>房室結約 0.1 秒的延遲，是心電圖上 PR 間隔的主要部分；這段時間讓心房先把血液擠進心室，心室才開始收縮。
+                </div>
+            </div>
+
+            <!-- Node 4 Detail -->
+            <div class="detail-card" id="node-card-04" data-category="conduction">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Bundle of His -->
+                            <rect x="20" y="20" width="260" height="35" fill="#dbeafe" stroke="#2563eb" rx="6"/>
+                            <text x="150" y="42" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">房室束 / 希氏束 (Bundle of His)</text>
+
+                            <!-- Arrow -->
+                            <path d="M 150 55 L 150 75" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+                            <!-- Left and Right Branches -->
+                            <rect x="20" y="80" width="120" height="50" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="80" y="100" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">左房室束分枝</text>
+                            <text x="80" y="118" font-size="8" fill="#475569" text-anchor="middle">沿心室間隔左側下行</text>
+
+                            <rect x="160" y="80" width="120" height="50" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+                            <text x="220" y="100" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">右房室束分枝</text>
+                            <text x="220" y="118" font-size="8" fill="#475569" text-anchor="middle">沿心室間隔右側下行</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-conduction">傳導束與網路</span>
+                <h2 class="card-heading">4. 室間隔傳導——房室束/希氏束 (Bundle of His)</h2>
+                <div class="core-concept">由房室結發出之房室束（希氏束）穿過心房心室間電絕緣層，通往心室間隔頂端並分為左、右分枝下行。</div>
+                <ul class="features-list">
+                    <li><strong>唯一電氣通道：</strong>心房與心室間有緻密結締組織絕緣，房室束是心房電衝動傳入心室的唯一正常通路。</li>
+                    <li><strong>兩側分枝延伸：</strong>於心室間隔（Interventricular septum）頂端分為左、右房室束分枝（Bundle branches）。</li>
+                    <li><strong>縱向深入：</strong>左、右分枝沿著心室間隔內側表面向下延伸至心尖部。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理重點：</strong><br>心房與心室之間有纖維環絕緣，衝動一定要經過房室結與希氏束才能到達心室，確保「心房先收縮、心室後收縮」的順序；左右分枝同步下傳，兩心室才能一起收縮。
+                </div>
+            </div>
+
+            <!-- Node 5 Detail -->
+            <div class="detail-card" id="node-card-05" data-category="conduction">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Purkinje Myofibers -->
+                            <rect x="20" y="20" width="260" height="40" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="6"/>
+                            <text x="150" y="44" font-size="11" fill="#15803d" text-anchor="middle" font-weight="bold">浦金埃氏纖維 (Purkinje fibers / 傳導性肌纖維)</text>
+
+                            <!-- Feature Box -->
+                            <rect x="20" y="70" width="260" height="70" fill="#fef2f2" stroke="#ef4444" rx="6"/>
+                            <text x="150" y="90" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="bold">★ 傳導速度全系統「最快」！</text>
+                            <text x="150" y="108" font-size="9" fill="#7f1d1d" text-anchor="middle">穿入心室心肌層，促使兩心室由心尖向上瞬間同步收縮</text>
+                            <text x="150" y="125" font-size="8" fill="#991b1b" text-anchor="middle">產生強大泵血推力將血液打入主動脈與肺動脈幹</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-conduction">傳導束與網路</span>
+                <h2 class="card-heading">5. 快速激發——浦金埃氏纖維 (Purkinje Fibers)</h2>
+                <div class="core-concept">房室束分枝再發出浦金埃氏纖維（傳導性肌纖維）深入心肌層，且其電衝動傳導速度為整體傳導系統中最快者。</div>
+                <ul class="features-list">
+                    <li><strong>傳導速度最快：</strong>浦金埃氏纖維直徑大、細胞間隙連接多，傳導速度居全系統之冠（極速傳播）。</li>
+                    <li><strong>深入心肌細胞：</strong>纖維大量網狀散布，深層穿入左、右心室肌層，同步激發無數心肌細胞。</li>
+                    <li><strong>由心尖向上收縮：</strong>電衝動自心尖（Apex）向心底方向推進，將血液由心室底部順暢壓擠射入動脈。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>傳導速度極致對比 summary：</strong><br>整個心臟傳導系統中：<strong>傳導速度最快的是浦金埃氏纖維</strong>（確保心室快速同步爆發收縮），<strong>最慢的是房室結</strong>（確保心房充血時間）。
+                </div>
+            </div>
+
+            <!-- Node 6 Detail -->
+            <div class="detail-card" id="node-card-06" data-category="regulation">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 320 160">
+                        <g transform="translate(10,10)">
+                            <!-- Medulla Center -->
+                            <rect x="80" y="10" width="140" height="30" fill="#f1f5f9" stroke="#475569" stroke-width="2" rx="6"/>
+                            <text x="150" y="29" font-size="10" fill="#0f172a" text-anchor="middle" font-weight="bold">延腦 (Medulla Oblongata)</text>
+
+                            <!-- Sympathetic vs Parasympathetic -->
+                            <rect x="10" y="55" width="135" height="50" fill="#fef2f2" stroke="#ef4444" rx="6"/>
+                            <text x="77" y="73" font-size="9" fill="#991b1b" text-anchor="middle" font-weight="bold">心跳加速中樞 (交感神經)</text>
+                            <text x="77" y="90" font-size="8" fill="#7f1d1d" text-anchor="middle">釋放正腎上腺素 → 心跳/收縮↑</text>
+
+                            <rect x="155" y="55" width="135" height="50" fill="#eff6ff" stroke="#2563eb" rx="6"/>
+                            <text x="222" y="73" font-size="9" fill="#1e40af" text-anchor="middle" font-weight="bold">心跳抑制中樞 (迷走神經)</text>
+                            <text x="222" y="90" font-size="8" fill="#1e3a8a" text-anchor="middle">釋放乙醯膽鹼 → 心跳/收縮↓</text>
+
+                            <!-- Other Influences -->
+                            <rect x="10" y="112" width="280" height="25" fill="#fffbeb" stroke="#d97706" rx="4"/>
+                            <text x="150" y="128" font-size="8" fill="#b45309" text-anchor="middle" font-weight="bold">體液化學物質 (甲狀腺素、腎上腺素) & 體溫升高 (發燒/運動) 均增加心跳</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="card-badge bg-regulation">自主神經與調控</span>
+                <h2 class="card-heading">6. 心跳速率之中樞神經與化學調節</h2>
+                <div class="core-concept">節律點雖啟動收縮，但心跳速率由延腦之心跳加速中樞與抑制中樞經自主神經與體液化學物質精密調節。</div>
+                <ul class="features-list">
+                    <li><strong>心跳加速中樞（交感）：</strong>經心神經支配 SA/AV node，釋放正腎上腺素（Norepinephrine），使心跳速率與收縮力增加。</li>
+                    <li><strong>心跳抑制中樞（副交感）：</strong>經迷走神經（Vagus nerve）支配 SA/AV node，釋放乙醯膽鹼（Acetylcholine），使心跳降慢。</li>
+                    <li><strong>化學與溫度影響：</strong>腎上腺素、甲狀腺素及體溫升高（如發燒、運動）均會刺激 SA/AV node 加快放電。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>情緒與性別年齡特徵：</strong><br>緊張不安或憤怒增加交感神經刺激使心跳加快；悲傷抑鬱刺激抑制中樞使心跳變慢。女性心跳略快於男性；初生嬰兒最快，老年則變慢。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
+        <div class="quiz-container">
+            
+            <!-- STAGE 1: FOUNDATION -->
+            <div id="stage-1-view">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第一關｜先備知識建構</span>
+                    <span class="progress-badge" id="s1-progress-text">第一關｜先備知識建構：1／6</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s1-question-text">載入中...</div>
+                    <div class="options-group" id="s1-options-container"></div>
+                    <div class="hint-box" id="s1-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s1-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- STAGE 2: CASE APPLICATION -->
+            <div id="stage-2-view" style="display: none;">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第二關｜生活情境應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜生活情境應用：1／5</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s2-question-text">載入中...</div>
+                    <div class="options-group" id="s2-options-container"></div>
+                    <div class="hint-box" id="s2-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s2-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- RESULT BANNERS -->
+            <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜完全通關！</h3>
+                <p>您已成功通過「先備知識」與「生活情境」兩階段診斷，完整掌握心臟傳導系統構造與解剖生理學應用！</p>
+                <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
+            </div>
+
+            <div id="result-banner-fail" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p id="fail-message-text">第二關需 5 題全部答對才能通關，請複習資訊圖表後重新挑戰整輪！</p>
+                <button type="button" class="action-btn" id="btn-retry-s2">🔄 重新挑戰第二關 (重洗題目)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 心臟傳導系統解剖生理數位教材 - 專為五專生理解剖課程設計</p>
+    </footer>
+</div>
+
+<script>
+    const COURSE_CODE = 'cardiac-conduction';
+    const MATERIAL_ID = 'cardiac-conduction';
+    const exploredNodes = new Set();
+    const trackExplore = (id) => window.CourseLearning?.explore?.(id);
+    const trackAnswer = (id, correct) => window.CourseLearning?.answer?.(id, correct);
+    function trackComplete() {
+        if (window.CourseLearning?.complete) window.CourseLearning.complete();
+    }
+
+    // 1. Foundation Questions (6 Questions)
+    const FOUNDATION_QUESTIONS = [
+        {
+            id: "cardiac-conduction-foundation-q01",
+            title: "1. 心臟傳導系統由特化心肌組織構成，其中位於右心房後壁近上腔靜脈開口下方、被稱為正常心跳「節律點（Pacemaker）」的構造為何？",
+            options: [
+                "房室結（AV node）",
+                "竇房結（SA node）",
+                "希氏束（Bundle of His）",
+                "浦金埃氏纖維（Purkinje fibers）"
+            ],
+            answer: 1,
+            hint: "提示：想想哪個構造放電頻率最高、帶領整顆心臟跳動。",
+            explanation: "解析：竇房結（SA node）位於右心房壁近上腔靜脈開口處，具有最高的自發去極化頻率（每分鐘約 70~80 次），主導正常心跳節律，故稱為節律點。"
+        },
+        {
+            id: "cardiac-conduction-foundation-q02",
+            title: "2. 在正常安靜休息狀態下，人體的竇房結（SA node）每分鐘自發產生動作電位的基本節律頻率約為多少次？",
+            options: [
+                "30~40 次",
+                "70~80 次",
+                "110~120 次",
+                "140~150 次"
+            ],
+            answer: 1,
+            hint: "提示：回想正常安靜時的竇性節律大約是每分鐘幾次。",
+            explanation: "解析：正常人竇房結每分鐘自發興奮約 70~80 次，此為正常竇性節律（Sinus rhythm）的基本頻率。"
+        },
+        {
+            id: "cardiac-conduction-foundation-q03",
+            title: "3. 電衝動在心臟傳導系統中傳播時，傳導速度「最慢」的部位為何？此生理延遲有何功能？",
+            options: [
+                "浦金埃氏纖維；使心室提前收縮",
+                "房室結（AV node）；使心房有時間將血液擠入心室",
+                "房室束分枝；防止血液逆流",
+                "竇房結（SA node）；降低心房內壓力"
+            ],
+            answer: 1,
+            hint: "提示：心房要先收縮完，心室才收縮；延遲發生在心房與心室的交界。",
+            explanation: "解析：衝動行經房室結（AV node）時傳導速度最慢（產生約 0.1 秒以上的生理延遲），能確保心房完全收縮擠血入心室後，心室才開始收縮。"
+        },
+        {
+            id: "cardiac-conduction-foundation-q04",
+            title: "4. 穿過心房與心室間絕緣纖維環，將電衝動由房室結傳向心室間隔頂端的傳導纖維束稱為？",
+            options: [
+                "冠狀靜脈竇",
+                "房室束（希氏束 / Bundle of His）",
+                "腱索",
+                "梳狀肌"
+            ],
+            answer: 1,
+            hint: "提示：找出唯一能穿過房室之間絕緣纖維環的傳導構造。",
+            explanation: "解析：由房室結發出的傳導纖維稱為房室束（Atrioventricular bundle），又稱希氏束（Bundle of His），是衝動由心房傳入心室間隔的通道。"
+        },
+        {
+            id: "cardiac-conduction-foundation-q05",
+            title: "5. 在整個心臟傳導系統中，動作電位傳導速度「最快」的構造為何？",
+            options: [
+                "竇房結（SA node）",
+                "房室結（AV node）",
+                "浦金埃氏纖維（Purkinje fibers）",
+                "心房一般肌纖維"
+            ],
+            answer: 2,
+            hint: "提示：要讓衝動在瞬間傳遍整個心室，需要直徑最粗的傳導纖維。",
+            explanation: "解析：浦金埃氏纖維（傳導性肌纖維）直徑粗，電衝動傳導速度居全系統之冠（最快），能使衝動快速傳遍整個心室。"
+        },
+        {
+            id: "cardiac-conduction-foundation-q06",
+            title: "6. 關於心臟自律性與自主神經的關係，下列敘述何者正確？",
+            options: [
+                "心臟收縮必須依賴自主神經直接發出刺激才能啟動",
+                "自主神經只會調節心跳速率與收縮力，不會引發心臟收縮",
+                "切斷自主神經後，心臟會立即永久停止跳動",
+                "心肌細胞與骨骼肌一樣受意識隨意控制"
+            ],
+            answer: 1,
+            hint: "提示：心臟有自律性；神經負責的是調節，而不是啟動。",
+            explanation: "解析：心臟肌肉具自律性，不需神經直接刺激即可自發收縮；自主神經系統僅負責調節心跳速率與收縮強度，不直接啟動收縮。"
+        }
+    ];
+
+    // 2. Case Questions (5 Questions)
+    const CASE_QUESTIONS = [
+        {
+            id: "cardiac-conduction-case-q01",
+            title: "1. 【日常生理】學生在體育課進行 800 公尺長跑時，延腦心跳加速中樞經交感神經刺激心臟，其神經末梢會釋放何種化學物質來增加心跳速率？",
+            options: [
+                "乙醯膽鹼（Acetylcholine）",
+                "正腎上腺素（Norepinephrine）",
+                "組織胺（Histamine）",
+                "胰島素（Insulin）"
+            ],
+            answer: 1,
+            hint: "提示：交感神經末梢釋放的是哪一種讓心跳加快的物質？",
+            explanation: "解析：交感神經末梢釋放正腎上腺素（Norepinephrine），作用於心臟傳導系統與心肌，使心跳速率及收縮強度增加以因應運動需求。"
+        },
+        {
+            id: "cardiac-conduction-case-q02",
+            title: "2. 【日常生理】同學們在面對期中考試感到極度緊張時，常會感覺到自己「心跳砰砰跳得很快」，這主要是哪一個神經系統興奮所致？",
+            options: [
+                "副交感神經系統（迷走神經）",
+                "交感神經系統",
+                "體軀運動神經系統",
+                "中樞痛覺傳導路徑"
+            ],
+            answer: 1,
+            hint: "提示：緊張、壓力屬於「戰或逃」反應，由哪一個神經系統主導？",
+            explanation: "解析：情緒緊張、憤怒或生理緊迫會刺激延腦心跳加速中樞，使交感神經興奮並釋放腎上腺素/正腎上腺素，增加竇房結放電頻率使心跳加快。"
+        },
+        {
+            id: "cardiac-conduction-case-q03",
+            title: "3. 【日常生理】當人體生病發燒體溫升高時，常會伴隨心跳速率變快的現象，其主要生理原因為何？",
+            options: [
+                "體溫升高會直接刺激竇房結與房室結，使其發出衝動的速率加快",
+                "體溫升高會刺激副交感神經釋放大量乙醯膽鹼",
+                "體溫升高會使浦金埃氏纖維傳導完全中斷",
+                "體溫升高會使心臟肌肉轉變為骨骼肌"
+            ],
+            answer: 0,
+            hint: "提示：溫度會影響節律細胞自發放電的速率。",
+            explanation: "解析：體溫升高（如發燒或激烈運動）能使竇房結與房室結細胞自發產生動作電位的速率加快，進而使心跳速率上升。"
+        },
+        {
+            id: "cardiac-conduction-case-q04",
+            title: "4. 【日常生理】當人在靜坐冥想或安穩入睡時，延腦心跳抑制中樞經由迷走神經（副交感神經）作用於心臟，其末梢釋放的乙醯膽鹼對心跳有何影響？",
+            options: [
+                "使心跳速率減慢，收縮強度減弱",
+                "使心跳速率飆升至每分鐘 150 次",
+                "使心室肌肉發生強直收縮",
+                "促進血液中甲狀腺素分泌"
+            ],
+            answer: 0,
+            hint: "提示：迷走神經屬於副交感神經，它對心跳的作用與交感神經相反。",
+            explanation: "解析：副交感神經（迷走神經）末梢釋放乙醯膽鹼（Acetylcholine），能降低竇房結與房室結的興奮性，使心跳速率減慢、心跳平緩。"
+        },
+        {
+            id: "cardiac-conduction-case-q05",
+            title: "5. 【實驗生理】在解剖生理學實驗中，將離體蛙心取出放置於適當的生理鹽水中，心臟在沒有任何神經連接下仍能維持有節律的跳動。這展現了心臟特化心肌的何種特性？",
+            options: [
+                "隨意運動性",
+                "自發性/自律性（Automaticity）",
+                "疲勞性",
+                "強直收縮性"
+            ],
+            answer: 1,
+            hint: "提示：沒有神經連接仍能規律跳動，說明心肌自己就能產生衝動。",
+            explanation: "解析：節律細胞（如竇房結）具有「自發性（Automaticity）」，在沒有外來神經刺激下，細胞膜能自動且有節律地去極化產生動作電位，維持離體心臟跳動。"
+        }
+    ];
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // STATE VARIABLES
+    let currentMode = 'info'; // 'info' or 'quiz'
+    
+    // Stage 1 State
+    let s1CurrentIndex = 0;
+    let s1AnsweredCorrect = false;
+
+    // Stage 2 State
+    let s2Questions = [];
+    let s2CurrentIndex = 0;
+    let s2CorrectCount = 0;
+    let s2AnsweredCorrect = false;
+
+    // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mode Switch Buttons
+        const btnModeInfo = document.getElementById('btn-mode-info');
+        const btnModeQuiz = document.getElementById('btn-mode-quiz');
+        const paneInfo = document.getElementById('pane-infographic');
+        const paneQuiz = document.getElementById('pane-quiz');
+
+        btnModeInfo.addEventListener('click', () => {
+            currentMode = 'info';
+            btnModeInfo.classList.add('active');
+            btnModeInfo.setAttribute('aria-selected', 'true');
+            btnModeQuiz.classList.remove('active');
+            btnModeQuiz.setAttribute('aria-selected', 'false');
+            paneInfo.classList.add('active');
+            paneQuiz.classList.remove('active');
+        });
+
+        btnModeQuiz.addEventListener('click', () => {
+            currentMode = 'quiz';
+            btnModeQuiz.classList.add('active');
+            btnModeQuiz.setAttribute('aria-selected', 'true');
+            btnModeInfo.classList.remove('active');
+            btnModeInfo.setAttribute('aria-selected', 'false');
+            paneQuiz.classList.add('active');
+            paneInfo.classList.remove('active');
+        });
+
+        // Filter Toolbar Listener
+        const filterBtns = [
+            { id: 'filter-all', cat: 'all' },
+            { id: 'filter-node', cat: 'node' },
+            { id: 'filter-conduction', cat: 'conduction' },
+            { id: 'filter-regulation', cat: 'regulation' }
+        ];
+
+        filterBtns.forEach(item => {
+            const btn = document.getElementById(item.id);
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    const el = document.getElementById(b.id);
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+
+                // Filter cards
+                const cards = document.querySelectorAll('.detail-card');
+                cards.forEach(card => {
+                    if (item.cat === 'all' || card.dataset.category === item.cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navigation Flow Cards Smooth Scroll & Focus
+        for (let i = 1; i <= 6; i++) {
+            const flowCard = document.getElementById(`flow-card-node-0${i}`);
+            const targetDetailCard = document.getElementById(`node-card-0${i}`);
+            
+            flowCard.addEventListener('click', (event) => {
+                const nodeId = `${MATERIAL_ID}-node-0${i}`;
+                if (!exploredNodes.has(nodeId)) {
+                    exploredNodes.add(nodeId);
+                    trackExplore(nodeId);
+                }
+                document.querySelectorAll('.flow-nav-card').forEach(card => card.classList.toggle('active', card === flowCard));
+                // Remove highlight from all
+                document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('focus-card'));
+                
+                // Show card if hidden by filter
+                targetDetailCard.style.display = 'flex';
+
+                // 上方節點與傳導主圖同步：起搏／房室延遲／希氏束／浦金埃氏纖維。
+                const visualMap = [0, 0, 1, 2, 3, 0];
+                const visualLabels = ['特化心肌自律性', '竇房結起搏', '房室結延遲', '希氏束下傳', '浦金埃氏纖維同步激發', '自主神經調節竇房結'];
+                const visualIndex = visualMap[i - 1];
+                const focus = document.getElementById('visual-focus');
+                const caption = document.getElementById('visual-focus-caption');
+                if (focus) {
+                    focus.style.setProperty('--panel', visualIndex);
+                    focus.querySelector('img').style.transform = `translateX(${visualIndex * -25}%)`;
+                }
+                if (caption) caption.textContent = `已選：${visualLabels[i - 1]}`;
+                const readingCue = document.getElementById('reading-cue');
+                if (readingCue && event.isTrusted) {
+                    readingCue.classList.remove('is-visible');
+                    void readingCue.offsetWidth;
+                    readingCue.classList.add('is-visible');
+                }
+                document.querySelectorAll('.visual-flow-card').forEach((card, index) => card.classList.toggle('active', index === visualIndex));
+                const explanation = document.getElementById('selected-explanation');
+                if (explanation) {
+                    const heading = targetDetailCard.querySelector('.card-heading')?.textContent || visualLabels[i - 1];
+                    const concept = targetDetailCard.querySelector('.core-concept')?.outerHTML || '';
+                    const features = targetDetailCard.querySelector('.features-list')?.outerHTML || '';
+                    const clinical = targetDetailCard.querySelector('.clinical-box')?.outerHTML || '';
+                    explanation.innerHTML = `<h3>${heading}</h3>${concept}${features}${clinical}`;
+                }
+
+                // 不自動捲到詳細卡，讓學生能先看完剛切換的主圖；詳細內容保留在下方。
+                targetDetailCard.classList.add('focus-card');
+            });
+        }
+        document.getElementById('flow-card-node-01').click();
+
+        // Quiz Stage 1 Setup
+        initStage1();
+
+        // Stage 1 Next Button Listener
+        document.getElementById('s1-next-btn').addEventListener('click', () => {
+            s1CurrentIndex++;
+            if (s1CurrentIndex < FOUNDATION_QUESTIONS.length) {
+                renderStage1Question();
+            } else {
+                // Unlock Stage 2
+                document.getElementById('stage-1-view').style.display = 'none';
+                document.getElementById('stage-2-view').style.display = 'block';
+                initStage2();
+            }
+        });
+
+        // Stage 2 Next Button Listener
+        document.getElementById('s2-next-btn').addEventListener('click', () => {
+            s2CurrentIndex++;
+            if (s2CurrentIndex < s2Questions.length) {
+                renderStage2Question();
+            } else {
+                // Stage 2 Finished -> Check if All 5 Correct
+                document.getElementById('stage-2-view').style.display = 'none';
+                if (s2CorrectCount === 5) {
+                    document.getElementById('result-banner-pass').style.display = 'block';
+                    trackComplete();
+                } else {
+                    document.getElementById('result-banner-fail').style.display = 'block';
+                    document.getElementById('fail-message-text').textContent = `您答對了 ${s2CorrectCount} / 5 題。關卡要求必須 5 題全對才能通關，請重試！`;
+                }
+            }
+        });
+
+        // Restart Full Quiz
+        document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+            document.getElementById('result-banner-pass').style.display = 'none';
+            document.getElementById('stage-1-view').style.display = 'block';
+            document.getElementById('stage-2-view').style.display = 'none';
+            s1CurrentIndex = 0;
+            initStage1();
+        });
+
+        // Retry Stage 2
+        document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            document.getElementById('result-banner-fail').style.display = 'none';
+            document.getElementById('stage-2-view').style.display = 'block';
+            initStage2();
+        });
+    });
+
+    // RENDER STAGE 1
+    function initStage1() {
+        s1CurrentIndex = 0;
+        renderStage1Question();
+    }
+
+    function renderStage1Question() {
+        s1AnsweredCorrect = false;
+        const q = FOUNDATION_QUESTIONS[s1CurrentIndex];
+        
+        document.getElementById('s1-progress-text').textContent = `第一關｜先備知識建構：${s1CurrentIndex + 1}／6`;
+        document.getElementById('s1-question-text').textContent = q.title;
+        
+        const optionsContainer = document.getElementById('s1-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s1-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s1-next-btn');
+        nextBtn.disabled = true;
+
+        q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optText;
+
+            btn.addEventListener('click', () => {
+                if (s1AnsweredCorrect) return;
+                trackAnswer(q.id, optIdx === q.answer);
+
+                if (optIdx === q.answer) {
+                    // Correct
+                    btn.classList.add('correct');
+                    s1AnsweredCorrect = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>核心解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    
+                    // Disable all options
+                    const allOpts = optionsContainer.querySelectorAll('.option-button');
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    // Wrong
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--warning)';
+                    hintBox.innerHTML = `<strong>再試一次！</strong>${q.hint}`;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // RENDER STAGE 2
+    function initStage2() {
+        s2CurrentIndex = 0;
+        s2CorrectCount = 0;
+
+        // Shuffle Stage 2 Questions and Options
+        s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
+            const optionsWithOrigIdx = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+            const shuffledOpts = shuffleArray(optionsWithOrigIdx);
+            return {
+                ...q,
+                shuffledOpts: shuffledOpts
+            };
+        });
+
+        renderStage2Question();
+    }
+
+    function renderStage2Question() {
+        s2AnsweredCorrect = false;
+        const q = s2Questions[s2CurrentIndex];
+
+        document.getElementById('s2-progress-text').textContent = `第二關｜生活情境應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s2-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s2-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s2-next-btn');
+        nextBtn.disabled = true;
+
+        q.shuffledOpts.forEach((optObj) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optObj.text;
+
+            btn.addEventListener('click', () => {
+                if (s2AnsweredCorrect) return;
+                trackAnswer(q.id, optObj.isCorrect);
+
+                const allOpts = optionsContainer.querySelectorAll('.option-button');
+
+                if (optObj.isCorrect) {
+                    btn.classList.add('correct');
+                    s2AnsweredCorrect = true;
+                    s2CorrectCount++;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>答對了！正解解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    btn.classList.add('wrong');
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--danger)';
+                    hintBox.innerHTML = `<strong>答錯了！正解解析：</strong>${q.explanation}`;
+                    
+                    // Highlight the correct one
+                    q.shuffledOpts.forEach((o, i) => {
+                        if (o.isCorrect) {
+                            allOpts[i].classList.add('correct');
+                        }
+                    });
+
+                    allOpts.forEach(b => b.disabled = true);
+                    nextBtn.disabled = false;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+</script>
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+
+</body>
+</html>

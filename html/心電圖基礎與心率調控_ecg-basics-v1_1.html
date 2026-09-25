@@ -1,0 +1,911 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="material-ids" content="ecg-basics-case-q01,ecg-basics-case-q02,ecg-basics-case-q03,ecg-basics-case-q04,ecg-basics-case-q05,ecg-basics-foundation-l01,ecg-basics-foundation-l02,ecg-basics-foundation-l03,ecg-basics-foundation-l04,ecg-basics-foundation-q01,ecg-basics-foundation-q04,ecg-basics-node-01,ecg-basics-node-02,ecg-basics-node-03,ecg-basics-node-04,ecg-basics-node-05,ecg-basics-node-06"><title>心電圖基礎與心率調控</title><style>:root{--oxy:#a71930;--deoxy:#1769aa;--tissue:#f3eee9;--accent:#5b3b8c;--ok:#176b45;--warn:#9a5a00;--bg:#fffaf8;--ink:#17212b;--muted:#4e5964;font:16px/1.65 system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0}.kit{max-width:1100px;margin:auto;padding:24px}.hero,.lab,.node,.quiz,.credits{background:#fff;border:1px solid #ded6d0;border-radius:18px;padding:22px;margin:18px 0}.stats,.nodes,.options{display:grid;gap:14px}.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.tile,.node-button{border:1px solid #d9ccd0;background:#fff;padding:16px;border-radius:14px;color:inherit;text-align:left}.tile strong{display:block;font-size:1.35rem;color:var(--oxy)}.nodes{grid-template-columns:repeat(3,1fr)}.node[hidden],.node-detail[hidden],.stage[hidden]{display:none}.node-figure{width:100%;max-height:340px}.state-controls,.options{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:12px 0}button{font:inherit;cursor:pointer;border-radius:10px;border:2px solid var(--accent);background:#fff;color:#281b3e;padding:10px}button[aria-pressed="true"],button:hover{background:var(--accent);color:#fff}.feedback{font-weight:700}.ok{color:var(--ok)}.warn{color:var(--warn)}.clinical{background:var(--tissue);padding:14px;border-left:5px solid var(--accent)}svg{max-width:100%;height:auto}.heart-state{width:100%}@media(max-width:760px){.kit{padding:12px}.nodes{grid-template-columns:1fr}.hero,.lab,.node,.quiz,.credits{padding:16px}}@media(prefers-reduced-motion:no-preference){.flow{animation:pulse 1.8s infinite}@keyframes pulse{50%{stroke-dashoffset:18}}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* ---- ECG widgets（ecg-sim、label 題型） ---- */
+.ecg-sim,.ecg-label{--ecg-muted:#4e5964}
+.ecg-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-bottom:6px}
+.ecg-hr{font-size:1.8rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-hr small{font-size:.8rem;font-weight:600;color:var(--muted);margin-left:4px}
+.ecg-chips{display:flex;flex-wrap:wrap;gap:6px}.ecg-chips button{padding:5px 12px;border-radius:999px;font-size:.85rem}
+.ecg-slider{width:100%;accent-color:var(--accent);height:28px}
+.ecg-scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.ecg-row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:10px 0}
+.ecg-tg{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.92rem}.ecg-tg small{color:var(--muted);font-weight:500}
+.ecg-tg input{width:18px;height:18px;accent-color:var(--accent)}
+.ecg-status{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-height:28px}.ecg-pill{display:inline-block;border:1px solid #d9ccd0;border-radius:999px;padding:3px 10px;font-size:.85rem;background:#fff}.ecg-pill b{font-size:1rem}.ecg-pill.in{background:#e6f4fb;border-color:#7cc3e8}.ecg-pill.ex{background:#f1eefa;border-color:#b9a7de}.ecg-pill.adj{background:#fff4e0;border-color:#e6b566}
+.ecg-physio{background:#f4effa;border-radius:12px;padding:10px 12px;font-size:.92rem;margin-bottom:12px}.ecg-physio b{color:var(--accent)}
+.ecg-scope,.ecg-zoom{position:relative;border-radius:14px;overflow:hidden;border:1px solid #1e293b;background:#050d1a}
+.ecg-layer{position:absolute;inset:0;display:block}
+.ecg-over:focus-visible{outline:3px solid #fde047;outline-offset:-3px}
+.ecg-lbl{position:absolute;top:6px;left:10px;font:11px ui-monospace,Menlo,monospace;color:#6ee7b7;pointer-events:none}
+.ecg-hint,.ecg-sel,.ecg-note{font-size:.85rem;color:var(--muted);margin:6px 0}
+.ecg-zoom-wrap .ecg-layers{margin:0 0 8px}.ecg-layers{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.88rem}.ecg-layers>span{font-weight:800;color:var(--muted)}
+.ecg-zoom-wrap[hidden],.ecg-fb[hidden],.ecg-reveal[hidden]{display:none}
+.ecg-zoom-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 8px}.ecg-zoom-head small{display:block;color:var(--muted);font-size:.8rem}.ecg-zoom-head button{white-space:nowrap;flex:none}
+.ecg-reads{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
+.ecg-rd{border:1px solid #ded6d0;border-radius:12px;padding:8px 10px}.ecg-rd .k{font-size:.72rem;color:var(--muted);font-weight:700}.ecg-rd .v{font-size:1.2rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-rd .n{font-size:.72rem;color:var(--muted)}
+.ecg-bar-cap{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
+.ecg-bar{display:flex;height:22px;border-radius:8px;overflow:hidden;font-size:.72rem;font-weight:700;color:#fff}
+.ecg-bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .25s}
+.ecg-sys{background:#be123c}.ecg-dia{background:#0369a1}
+.ecg-gap{font-size:.88rem;color:var(--muted)}.ecg-gap b{color:var(--ink)}
+.ecg-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ecg-ranges{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem}.ecg-ranges input{accent-color:var(--accent);vertical-align:middle}
+.ecg-fb{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:.92rem}.ecg-fb.ok{background:#e8f5ee}.ecg-fb.ok b{color:var(--ok)}.ecg-fb.no{background:#fbf1e2}.ecg-fb.no b{color:var(--warn)}
+button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:760px){.ecg-reads{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style></head><body><script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script><script>window.CourseLearning=window.CourseLearning||{explore(){},nodeTime(){},answer(){},hint(){},complete(){}};</script><script>// ECG 教學模型（純函式）：監視器、放大檢視與標示題共用。
+// 數值依 docs/ECG_SIM_LABEL_SPEC.md §2.1；以秒為單位，每一拍以 P 波起點為 0。
+
+const featureNames = {
+  P: 'P 波', PRi: 'PR 間隔', PRs: 'PR 段', QRS: 'QRS 群波',
+  ST: 'ST 段', T: 'T 波', QT: 'QT 間隔', RR: 'R-R 間期'
+};
+
+// 房室傳導隨自律神經小幅變化：迷走延長、交感縮短（仍在 0.12–0.20 s 內）
+function prFor(hr) {
+  const pts = [[40, 0.19], [75, 0.16], [150, 0.13], [200, 0.12]];
+  if (hr <= pts[0][0]) return pts[0][1];
+  for (let i = 1; i < pts.length; i++) {
+    if (hr <= pts[i][0]) {
+      const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+      return y0 + (y1 - y0) * (hr - x0) / (x1 - x0);
+    }
+  }
+  return pts[pts.length - 1][1];
+}
+
+// 建立一拍。rr＝這一拍到下一拍的間隔；prevRR＝前一個 R-R（決定 QT，Bazett）
+function makeBeat(start, rr, hr, prevRR = rr) {
+  const pDur = hr > 150 ? 0.08 : 0.09, pr = prFor(hr), qrs = 0.09;
+  const qt = 0.40 * Math.sqrt(prevRR);
+  const tDur = Math.min(0.16, 0.75 * (qt - qrs));
+  return { start, rr, pDur, pr, qrs, qt, tDur, tStart: pr + qt - tDur, end: pr + qt };
+}
+
+// 單一拍在 x 秒（相對該拍 P 起點）的電位（mV）
+function beatMv(b, x) {
+  if (x < 0 || x > b.end) return 0;
+  if (x < b.pDur) return 0.15 * Math.sin(Math.PI * x / b.pDur);
+  const q = x - b.pr;
+  if (q >= 0 && q < 0.02) return -0.10 * (q / 0.02);
+  if (q >= 0.02 && q < 0.05) return -0.10 + 1.30 * ((q - 0.02) / 0.03);
+  if (q >= 0.05 && q < 0.08) return 1.20 - 1.45 * ((q - 0.05) / 0.03);
+  if (q >= 0.08 && q < 0.09) return -0.25 + 0.25 * ((q - 0.08) / 0.01);
+  const t = x - b.tStart;
+  if (t >= 0 && t < b.tDur) {
+    let u = t / b.tDur;
+    u = u < 0.62 ? u / 0.62 * 0.5 : 0.5 + (u - 0.62) / 0.38 * 0.5; // 上升慢、下降快
+    return 0.30 * Math.sin(Math.PI * u);
+  }
+  return 0;
+}
+
+// 多拍疊加（心率很快時 P 波會疊到前一個 T 波上）
+function mvAt(beats, t) {
+  let s = 0;
+  for (const b of beats) s += beatMv(b, t - b.start);
+  return s;
+}
+
+function rPeak(b) { return b.start + b.pr + 0.05; }
+
+// 一拍的各波段（絕對時間）；next 存在時才有 R-R
+function features(b, next) {
+  const s = b.start;
+  const f = {
+    P: [s, s + b.pDur], PRi: [s, s + b.pr], PRs: [s + b.pDur, s + b.pr],
+    QRS: [s + b.pr, s + b.pr + b.qrs], ST: [s + b.pr + b.qrs, s + b.tStart],
+    T: [s + b.tStart, s + b.end], QT: [s + b.pr, s + b.end]
+  };
+  if (next) f.RR = [rPeak(b), rPeak(next)];
+  return f;
+}
+
+// 固定心率的一段心電圖（標示題用）：起點隨機落在心動週期中
+function makeStrip(hr, seconds, offset) {
+  const rr = 60 / hr, beats = [];
+  for (let st = -offset * rr; st < seconds + rr; st += rr) beats.push(makeBeat(st, rr, hr, rr));
+  return beats;
+}
+
+// 所有完整落在 [0, view] 秒內的某類波段
+function candidates(key, beats, view) {
+  const out = [];
+  for (let i = 0; i < beats.length; i++) {
+    const r = features(beats[i], beats[i + 1])[key];
+    if (r && r[0] >= -1e-6 && r[1] <= view + 1e-6) out.push(r);
+  }
+  return out;
+}
+
+// 最接近的波段與起訖誤差（秒）
+function closest(key, sel, beats, view) {
+  let best = null;
+  for (const r of candidates(key, beats, view)) {
+    const e1 = sel[0] - r[0], e2 = sel[1] - r[1], m = Math.max(Math.abs(e1), Math.abs(e2));
+    if (!best || m < best.m) best = { range: r, e1, e2, m };
+  }
+  return best;
+}
+
+// 判定：起點與終點誤差都 ≤ tol 才算對；答錯時若框選符合另一種波段，回報 confusedWith
+function grade(target, sel, beats, view, tol, confuseTol = 0.03) {
+  const best = closest(target, sel, beats, view);
+  const ok = !!best && Math.abs(best.e1) <= tol && Math.abs(best.e2) <= tol;
+  let confusedWith = null;
+  if (!ok) {
+    let bestOther = null;
+    for (const key of Object.keys(featureNames)) {
+      if (key === target) continue;
+      const m = closest(key, sel, beats, view);
+      if (m && m.m <= confuseTol && (!bestOther || m.m < bestOther.m)) bestOther = { key, m: m.m };
+    }
+    confusedWith = bestOther ? bestOther.key : null;
+  }
+  return { ok, best, confusedWith };
+}
+
+// 心率區間的生理說明（非診斷用語）
+function physioZone(hr) {
+  if (hr < 60) return 'slow';
+  if (hr < 100) return 'rest';
+  if (hr < 180) return 'fast';
+  return 'max';
+}
+
+// ECG 繪圖工具：校正方格、標籤（含碰撞避讓）、量測線與逐拍標示。
+// 依賴 ecg-model.js 的 features、featureNames。
+
+function ecgGrid(g, W, H, pxmm, base, x0 = 0) {
+  g.fillStyle = '#050d1a';
+  g.fillRect(0, 0, W, H);
+  g.lineWidth = 1;
+  for (let i = 0; x0 + i * pxmm <= W + 1; i++) {
+    const x = Math.round(x0 + i * pxmm) + 0.5;
+    g.strokeStyle = i % 5 === 0 ? 'rgba(16,185,129,0.30)' : 'rgba(16,185,129,0.09)';
+    g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke();
+  }
+  for (let j = 0; ; j++) {
+    const up = base - j * pxmm, down = base + j * pxmm;
+    if (up < 0 && down > H) break;
+    for (const y of j === 0 ? [up] : [up, down]) {
+      if (y < 0 || y > H) continue;
+      g.strokeStyle = j % 5 === 0 ? 'rgba(16,185,129,0.30)' : 'rgba(16,185,129,0.09)';
+      g.beginPath(); g.moveTo(x0, Math.round(y) + 0.5); g.lineTo(W, Math.round(y) + 0.5); g.stroke();
+    }
+  }
+}
+
+// 1 mV 校正方波（高 10 mm、寬 0.2 s），畫在左側保留區，不與波形重疊
+function ecgCalPulse(g, pxmm, base) {
+  const x0 = pxmm * 1.5, x1 = x0 + pxmm * 5;
+  g.strokeStyle = 'rgba(253,224,71,0.85)'; g.lineWidth = 1.5;
+  g.beginPath();
+  g.moveTo(x0 - pxmm, base); g.lineTo(x0, base); g.lineTo(x0, base - 10 * pxmm);
+  g.lineTo(x1, base - 10 * pxmm); g.lineTo(x1, base); g.lineTo(x1 + pxmm, base);
+  g.stroke();
+}
+
+function ecgPill(c, text, cx, cy0, col, placed) {
+  c.font = '700 12px system-ui,-apple-system,sans-serif';
+  const w = c.measureText(text).width + 12, x = cx - w / 2;
+  let cy = cy0;
+  if (placed) {
+    for (const off of [0, 20, 40, -20, 60]) {
+      const y = cy0 + off;
+      if (!placed.some(p => x < p.x + p.w + 4 && p.x < x + w + 4 && Math.abs(p.y - y) < 19)) { cy = y; break; }
+    }
+    placed.push({ x, w, y: cy });
+    if (cy !== cy0) {
+      c.strokeStyle = col; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(cx, cy0); c.lineTo(cx, cy + (cy > cy0 ? -9 : 9)); c.stroke();
+    }
+  }
+  c.fillStyle = 'rgba(5,13,26,0.88)'; c.strokeStyle = col; c.lineWidth = 1;
+  c.beginPath();
+  if (c.roundRect) c.roundRect(x, cy - 9, w, 18, 6); else c.rect(x, cy - 9, w, 18);
+  c.fill(); c.stroke();
+  c.fillStyle = col; c.textBaseline = 'middle'; c.textAlign = 'center';
+  c.fillText(text, cx, cy + 0.5);
+}
+
+function ecgBracket(c, [a, z], y, yFrom, col, text, W, placed) {
+  if (!(z > a) || a < -2 || z > W + 2) return;
+  c.strokeStyle = col; c.lineWidth = 1; c.setLineDash([3, 3]);
+  for (const x of [a, z]) { c.beginPath(); c.moveTo(x, yFrom); c.lineTo(x, y); c.stroke(); }
+  c.setLineDash([]); c.lineWidth = 2;
+  c.beginPath();
+  c.moveTo(a, y); c.lineTo(z, y);
+  c.moveTo(a, y - 5); c.lineTo(a, y + 5); c.moveTo(z, y - 5); c.lineTo(z, y + 5);
+  c.stroke();
+  ecgPill(c, text, (a + z) / 2, y, col, placed);
+}
+
+// o: { tToX, base, pxmm, H, W, mv, b, nb, layers:{wave,intv,mech} }
+function ecgAnnotate(c, o) {
+  const { tToX, base, pxmm, H, W, mv, b, nb, layers } = o;
+  const F = features(b, nb), X = r => [tToX(r[0]), tToX(r[1])];
+  const inView = ([a, z]) => z > a && a >= -2 && z <= W + 2;
+  const sDepth = 0.25 * 10 * pxmm, rTop = base - 1.2 * 10 * pxmm;
+  const placed = [];
+  c.save(); c.lineCap = 'round'; c.lineJoin = 'round';
+  if (layers.wave) {
+    for (const [k, col, lab] of [['P', '#60a5fa', 'P 波'], ['QRS', '#f87171', 'QRS'], ['T', '#4ade80', 'T 波']]) {
+      const [a, z] = X(F[k]);
+      if (!inView([a, z])) continue;
+      c.strokeStyle = col; c.lineWidth = 4.5; c.beginPath();
+      let top = base;
+      for (let x = a; x <= z + 0.01; x += 0.5) {
+        const y = base - mv(F[k][0] + (x - a) / (z - a) * (F[k][1] - F[k][0])) * 10 * pxmm;
+        if (x === a) c.moveTo(x, y); else c.lineTo(x, y);
+        top = Math.min(top, y);
+      }
+      c.stroke();
+      ecgPill(c, lab, (a + z) / 2, k === 'QRS' ? rTop - 12 : top - 14, col, placed);
+    }
+  }
+  if (layers.intv) {
+    for (const [k, col] of [['PRs', '#fbbf24'], ['ST', '#f472b6']]) {
+      const [a, z] = X(F[k]);
+      if (!inView([a, z]) || z - a < 2) continue;
+      c.strokeStyle = col; c.lineWidth = 6;
+      c.beginPath(); c.moveTo(a, base); c.lineTo(z, base); c.stroke();
+      ecgPill(c, featureNames[k], (a + z) / 2, base + sDepth + 12, col, placed);
+    }
+    const r1 = base + sDepth + 34;
+    ecgBracket(c, X(F.PRi), r1, base, '#fbbf24', 'PR 間隔', W, placed);
+    ecgBracket(c, X(F.QT), r1 + 22, base, '#5eead4', 'QT 間隔', W, placed);
+    if (F.RR) ecgBracket(c, X(F.RR), rTop - (layers.wave ? 34 : 12), rTop, '#c4b5fd', 'R-R 間期', W, placed);
+  }
+  if (layers.mech) {
+    const nextQ = nb ? nb.start + nb.pr : b.start + b.rr + b.pr;
+    const bands = [
+      ['心房收縮', [b.start + b.pDur * 0.5, b.start + b.pr + 0.03], '251,191,36'],
+      ['心室收縮', [b.start + b.pr + 0.03, b.start + b.end], '248,113,113'],
+      ['心室舒張', [b.start + b.end, nextQ + 0.03], '56,189,248']
+    ];
+    const y = H - 19;
+    c.font = '700 11px system-ui,-apple-system,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+    for (const [lab, r, rgb] of bands) {
+      const [a, z] = X(r);
+      if (!inView([a, z])) continue;
+      c.fillStyle = `rgba(${rgb},0.35)`; c.fillRect(a, y, z - a, 15);
+      c.strokeStyle = `rgba(${rgb},0.9)`; c.lineWidth = 1; c.strokeRect(a + 0.5, y + 0.5, z - a - 1, 14);
+      if (z - a > c.measureText(lab).width + 6) { c.fillStyle = '#fff'; c.fillText(lab, (a + z) / 2, y + 8); }
+    }
+  }
+  c.restore();
+}
+
+// 設定 canvas 的 CSS 尺寸與 devicePixelRatio
+function ecgSizeCanvas(cv, W, H) {
+  const d = window.devicePixelRatio || 1;
+  cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  const c = cv.getContext('2d');
+  c.setTransform(d, 0, 0, d, 0, 0);
+  return c;
+}
+
+// ECG 心率模擬器（lab widget "ecg-sim"）：即時掃描監視器、暫停選拍＋放大標示、卡尺。
+// 依賴 ecg-model.js、ecg-draw.js。規格：docs/ECG_SIM_LABEL_SPEC.md §2–§3。
+window.EcgSim = (() => {
+  const SPEED = 25, GAIN = 10; // mm/s、mm/mV
+  const PRESETS = [[40, '40'], [52, '52 運動員靜息'], [75, '75 安靜'], [100, '100'], [150, '150'], [195, '195 接近最大心率']];
+  const PHYSIO = {
+    slow: '<b>較慢心率區間（&lt;60）：</b>迷走神經釋放乙醯膽鹼，經 M₂ 受體增加 K⁺ 外流、減少 I<sub>f</sub> 與 Ca²⁺ 電流，竇房結第 4 期自動去極化變慢；房室結傳導也變慢，所以 PR 略為延長（仍在正常範圍）。PR 與 QRS 幾乎不變，<b>變長的主要是舒張期</b>。耐力運動員靜息 50 次左右屬正常生理現象。',
+    rest: '<b>安靜範圍（60–100）：</b>正常安靜時，竇房結每分鐘約放電 70~80 次。心率在這個範圍內上下變動，主要來自迷走神經（副交感）張力的增減：迷走張力增加心跳變慢，減少則心跳變快。',
+    fast: '<b>較快心率區間（&gt;100）：需要交感神經興奮。</b>正腎上腺素經 β₁ 受體增加 I<sub>f</sub> 與 L 型 Ca²⁺ 電流，竇房結放電加快；房室結傳導加快使 PR 縮短，QT 也稍縮短。但 QT 縮得比 R-R 少，所以<b>舒張期被大幅壓縮</b>，心室充血時間變少。',
+    max: '<b>接近最大心率（青少年約 200 次）：</b>舒張期只剩不到 0.1 秒，P 波貼近前一個 T 波。心率再快，心室來不及充血，每搏輸出量開始下降，這也是最大心率有上限的原因之一。'
+  };
+
+  function html(lab) {
+    const e = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    return `<div class="ecg-sim">
+  <div class="ecg-ctrl">
+    <div class="ecg-hr"><span class="ecg-hr-out">75</span><small>bpm 目標心率</small></div>
+    <div class="ecg-chips">${PRESETS.map(([v, t]) => `<button type="button" class="ecg-chip" data-hr="${v}" aria-pressed="${v === 75}">${t}</button>`).join('')}</div>
+  </div>
+  <input class="ecg-slider" type="range" min="40" max="200" value="75" step="1" aria-label="目標心率（每分鐘次數）">
+  <div class="ecg-scale" aria-hidden="true"><span>40</span><span>60</span><span>100</span><span>150</span><span>200</span></div>
+  <div class="ecg-row">
+    <label class="ecg-tg"><input type="checkbox" class="ecg-rsa">呼吸性竇性心律不整 <small>（吸氣變快、吐氣變慢）</small></label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lag">自律神經反應時間 <small>（迷走神經幾乎立即反應，交感神經需數秒）</small></label>
+    <button type="button" class="ecg-pause">暫停</button>
+  </div>
+  <div class="ecg-status" aria-live="off"></div>
+  <div class="ecg-physio"></div>
+  <div class="ecg-scope">
+    <canvas class="ecg-layer ecg-grid" aria-hidden="true"></canvas>
+    <canvas class="ecg-layer ecg-trace" aria-hidden="true"></canvas>
+    <canvas class="ecg-layer ecg-over" tabindex="0" role="img" aria-label="心電圖監視器（Lead II）。暫停後可用左右方向鍵選擇心跳、Esc 關閉放大檢視。"></canvas>
+    <div class="ecg-lbl"></div>
+  </div>
+  <p class="ecg-hint">按「暫停」後：<b>點一下</b>某一拍（或用 ←／→）→ 下方放大並標示該拍（可切換標示圖層）；<b>按住拖曳</b> → 卡尺量時間。</p>
+  <div class="ecg-zoom-wrap" hidden>
+    <div class="ecg-zoom-head">
+      <div><b>放大檢視：選取的這一拍</b><small>紙速與振幅同樣是 25 mm/s、10 mm/mV，只是放大顯示；方格仍是 0.04 秒／0.1 mV。</small></div>
+      <button type="button" class="ecg-zoom-close">關閉</button>
+    </div>
+    <div class="ecg-layers" role="group" aria-label="標示圖層">
+    <span>標示圖層</span>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-wave" checked>波形（P／QRS／T）</label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-intv" checked>間隔與段（PR、QT、R-R／PR 段、ST 段）</label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-lay-mech">對應的機械事件 <small>（約略時間）</small></label>
+  </div>
+    <div class="ecg-zoom">
+      <canvas class="ecg-layer ecg-zgrid" aria-hidden="true"></canvas>
+      <canvas class="ecg-layer ecg-ztrace" aria-hidden="true"></canvas>
+      <canvas class="ecg-layer ecg-zover" aria-hidden="true"></canvas>
+    </div>
+  </div>
+  <div class="ecg-reads"></div>
+  <div class="ecg-bar-cap"><span>一次心跳（R-R）中的時間分配</span><span class="ecg-bar-rr"></span></div>
+  <div class="ecg-bar"><div class="ecg-sys"></div><div class="ecg-dia"></div></div>
+  <p class="ecg-gap"></p>
+  <p class="ecg-sr" aria-live="polite"></p>
+  <p class="ecg-note">${e(lab.note || '')}</p>
+</div>`;
+  }
+
+  function mount(root) {
+    const $ = s => root.querySelector(s);
+    const scope = $('.ecg-scope'), gridCv = $('.ecg-grid'), traceCv = $('.ecg-trace'), overCv = $('.ecg-over');
+    let g, ctx, cx;
+    const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const st = { target: 75, paused: reduceMotion, rsa: false, lag: false };
+
+    // ---- geometry ----
+    let W = 0, H = 0, dpr = 1, pxmm = 5, pxps = 125, base = 0, X0 = 0, SW = 0, secs = 6;
+    // ---- simulation ----
+    let simTime = 0, scanX = 0, lastPt = null, beats = [], nextBeatAt = 0.25, prevRR = 0.8, effHR = 75, lastShown = null;
+
+    function resize() {
+      W = scope.clientWidth; dpr = window.devicePixelRatio || 1;
+      secs = W >= 700 ? 6 : 2.5;
+      pxmm = W / (secs * SPEED); pxps = pxmm * SPEED;
+      H = Math.round(Math.max(180, Math.min(280, pxmm * 30)));
+      scope.style.height = H + 'px';
+      g = ecgSizeCanvas(gridCv, W, H); ctx = ecgSizeCanvas(traceCv, W, H); cx = ecgSizeCanvas(overCv, W, H);
+      base = Math.round(H * 0.62);
+      X0 = Math.round(pxmm * 8); SW = W - X0;
+      ecgGrid(g, W, H, pxmm, base, 0);
+      ecgCalPulse(g, pxmm, base);
+      g.fillStyle = 'rgba(5,13,26,0.55)'; g.fillRect(0, 0, X0 - 2, H); ecgCalPulse(g, pxmm, base);
+      scanX = simTime > 0 ? (simTime * pxps) % SW : 0;
+      redrawAll();
+      $('.ecg-lbl').textContent = W >= 700
+        ? `LEAD II • 25 mm/s • 10 mm/mV • 小格 0.04 秒／0.1 mV・大格 0.20 秒／0.5 mV・畫面約 ${(SW / pxps).toFixed(1)} 秒`
+        : 'II • 25 mm/s • 小格 0.04 s • 大格 0.20 s';
+      if (st.paused) drawOverlay();
+    }
+
+    const mv = t => mvAt(beats, t);
+    const tToX = t => { let s = scanX - (simTime - t) * pxps; if (s < 0) s += SW; return X0 + s; };
+    const xToT = x => { const s = x - X0; if (s < 0) return null; return s <= scanX ? simTime - (scanX - s) / pxps : simTime - (scanX + SW - s) / pxps; };
+    const yOf = t => base - mv(t) * GAIN * pxmm;
+    const eraseW = () => Math.max(18, pxmm * 4);
+
+    function redrawAll() {
+      ctx.clearRect(0, 0, W, H); lastPt = null;
+      const step = dpr > 1 ? 0.5 : 1;
+      ctx.lineWidth = 2.2; ctx.strokeStyle = '#34d399'; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      const segs = [[0, scanX, s => simTime - (scanX - s) / pxps], [scanX + eraseW(), SW, s => simTime - (scanX + SW - s) / pxps]];
+      for (const [a, b, tf] of segs) {
+        if (b - a < 1) continue;
+        ctx.beginPath(); let started = false;
+        for (let s = a; s <= b; s += step) {
+          const t = tf(s); if (t < 0) { started = false; continue; }
+          const y = yOf(t);
+          if (!started) { ctx.moveTo(X0 + s, y); started = true; } else ctx.lineTo(X0 + s, y);
+          if (a === 0) lastPt = [s, y];
+        }
+        ctx.stroke();
+      }
+    }
+
+    function hrInstant(t) {
+      let hr = effHR;
+      if (st.rsa) {
+        const vagal = Math.max(0, Math.min(1, (110 - effHR) / 50));
+        hr *= 1 + 0.08 * vagal * Math.sin(2 * Math.PI * t / 4);
+      }
+      return hr;
+    }
+
+    let lastStatus = 0;
+    function status(force) {
+      const now = performance.now();
+      if (!force && now - lastStatus < 200) return;
+      lastStatus = now;
+      const parts = [];
+      const beatHR = lastShown ? Math.round(60 / lastShown.rr) : st.target;
+      parts.push(`<span class="ecg-pill">這一拍 <b>${beatHR}</b> bpm</span>`);
+      if (st.rsa) {
+        const ph = Math.sin(2 * Math.PI * simTime / 4);
+        const vagal = Math.max(0, Math.min(1, (110 - effHR) / 50));
+        parts.push(vagal < 0.05
+          ? '<span class="ecg-pill">呼吸：心率 &gt;110 時迷走張力低，呼吸變異幾乎消失</span>'
+          : `<span class="ecg-pill ${ph >= 0 ? 'in' : 'ex'}">呼吸：${ph >= 0 ? '吸氣 ↑ 迷走張力降低 → R-R 變短' : '吐氣 ↓ 迷走張力增加 → R-R 變長'}</span>`);
+      }
+      if (st.lag && Math.abs(effHR - st.target) >= 1) {
+        const up = st.target > effHR;
+        parts.push(`<span class="ecg-pill adj">自律神經調整中：${Math.round(effHR)} → 目標 ${st.target} bpm（${up && effHR >= 100 ? '交感神經需數秒' : up ? '迷走撤除，約 1 秒' : '迷走神經幾乎立即'}）</span>`);
+      }
+      if (st.paused) parts.push('<span class="ecg-pill">已暫停：開關與心率在「繼續」後生效</span>');
+      $('.ecg-status').innerHTML = parts.join('');
+    }
+    function update(dt) {
+      if (st.lag) {
+        const up = st.target > effHR;
+        const tau = up ? (effHR >= 100 ? 6 : 1.2) : 0.8;
+        effHR += (st.target - effHR) * (1 - Math.exp(-dt / tau));
+      } else effHR = st.target;
+      const t1 = simTime + dt;
+      // 心率只影響「下一拍」：排程下一拍時才讀取心率
+      while (nextBeatAt <= t1 + 0.5) {
+        const rr = 60 / hrInstant(nextBeatAt);
+        beats.push(makeBeat(nextBeatAt, rr, effHR, prevRR));
+        prevRR = rr; nextBeatAt += rr;
+      }
+      // 逐像素計算波形（不是每個畫面只取一點）
+      const step = dpr > 1 ? 0.5 : 1;
+      ctx.lineWidth = 2.2; ctx.strokeStyle = '#34d399'; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      let remaining = dt * pxps, t = simTime;
+      while (remaining > 1e-9) {
+        const seg = Math.min(remaining, SW - scanX), xs = scanX, xe = scanX + seg, ts = t;
+        ctx.clearRect(X0 + xs + 1, 0, Math.min(eraseW(), SW - xs), H);
+        ctx.beginPath();
+        if (lastPt) ctx.moveTo(X0 + lastPt[0], lastPt[1]); else ctx.moveTo(X0 + xs, yOf(ts));
+        for (let s = lastPt ? lastPt[0] + step : xs; s <= xe; s += step) {
+          const y = yOf(ts + (s - xs) / pxps);
+          ctx.lineTo(X0 + s, y); lastPt = [s, y];
+        }
+        ctx.stroke();
+        scanX = xe; t += seg / pxps; remaining -= seg;
+        if (scanX >= SW - 1e-6) { scanX = 0; lastPt = null; }
+      }
+      simTime = t1;
+      beats = beats.filter(b => b.start + b.end > simTime - secs - 2);
+      const done = beats.filter(b => b.start + b.pr <= simTime);
+      const cur = done.length ? done[done.length - 1] : beats[0];
+      if (cur && cur !== lastShown) { lastShown = cur; showReads(cur); }
+      status();
+    }
+
+    // ---- readouts ----
+    let lastZone = '', lastSr = 0;
+    function showReads(b) {
+      const f3 = x => x.toFixed(3), hr = 60 / b.rr, dia = b.rr - b.qt;
+      const items = [
+        ['心率', Math.round(hr), 'bpm'], ['R-R', b.rr.toFixed(2), '秒'],
+        ['PR', f3(b.pr), '正常 0.12–0.20'], ['QRS', f3(b.qrs), '正常 ＜0.12'],
+        ['QT', f3(b.qt), '隨心率小幅變化'], ['舒張期 (R-R−QT)', f3(dia), '秒']
+      ];
+      $('.ecg-reads').innerHTML = items.map(([k, v, n]) => `<div class="ecg-rd"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join('');
+      const s = Math.max(0, Math.min(1, b.qt / b.rr));
+      $('.ecg-sys').style.width = (s * 100) + '%'; $('.ecg-dia').style.width = ((1 - s) * 100) + '%';
+      $('.ecg-sys').textContent = s > 0.18 ? `收縮 QT ${Math.round(s * 100)}%` : '';
+      $('.ecg-dia').textContent = (1 - s) > 0.18 ? `舒張 ${Math.round((1 - s) * 100)}%` : `${Math.round((1 - s) * 100)}%`;
+      $('.ecg-bar-rr').textContent = `R-R ${b.rr.toFixed(2)} 秒`;
+      const gap = b.rr - b.pr - b.qt;
+      $('.ecg-gap').innerHTML = gap < 0.02
+        ? `<b>T 波結束到下一個 P 波開始只剩 ${Math.max(0, gap).toFixed(2)} 秒${gap < 0 ? '（已重疊）' : ''}：</b>心率很快時 P 波會貼上甚至疊進前一個 T 波，這是真實心電圖的現象。`
+        : `T 波結束到下一個 P 波開始：${gap.toFixed(2)} 秒。`;
+      const zone = physioZone(effHR);
+      if (zone !== lastZone) { $('.ecg-physio').innerHTML = PHYSIO[zone]; lastZone = zone; }
+      const now = performance.now();
+      if (now - lastSr > 1000) {
+        lastSr = now;
+        $('.ecg-sr').textContent = `心率 ${Math.round(hr)}，R-R ${b.rr.toFixed(2)} 秒，PR ${b.pr.toFixed(2)}，QRS ${b.qrs.toFixed(2)}，QT ${b.qt.toFixed(2)}，舒張期 ${dia.toFixed(2)} 秒`;
+      }
+    }
+
+    // ---- paused tools: select beat / zoom / caliper ----
+    let drag = null, calSpan = null, sel = null;
+    const layers = () => ({ wave: $('.ecg-lay-wave').checked, intv: $('.ecg-lay-intv').checked, mech: $('.ecg-lay-mech').checked });
+    const drawn = () => beats.filter(b => rPeak(b) <= simTime && rPeak(b) >= simTime - SW / pxps + 0.05);
+    function selectBeat(b) {
+      if (!b) return;
+      const i = beats.indexOf(b), nb = beats[i + 1] && rPeak(beats[i + 1]) <= simTime ? beats[i + 1] : null;
+      sel = { b, nb }; calSpan = null; drawOverlay();
+    }
+    function selectAt(x) {
+      const t = xToT(x); if (t === null) return;
+      let best = null, bd = 1e9;
+      for (const b of drawn()) { const d = Math.abs(rPeak(b) - t); if (d < bd) { bd = d; best = b; } }
+      selectBeat(best);
+    }
+    function drawOverlay() {
+      cx.clearRect(0, 0, W, H);
+      if (sel) {
+        const a = tToX(sel.b.start - 0.03), z = tToX(sel.b.start + sel.b.end + 0.03);
+        if (z > a) {
+          cx.fillStyle = 'rgba(96,165,250,0.16)'; cx.fillRect(a, 0, z - a, H);
+          cx.strokeStyle = 'rgba(96,165,250,0.9)'; cx.lineWidth = 1.5; cx.strokeRect(a + 0.5, 0.5, z - a - 1, H - 1);
+          ecgPill(cx, '放大 ↓', (a + z) / 2, H - 14, '#93c5fd');
+        }
+      }
+      if (calSpan) drawCal(calSpan[0], calSpan[1]);
+      renderZoom();
+    }
+    function drawCal(a, b) {
+      const dts = (b - a) / pxps;
+      cx.strokeStyle = '#fde047'; cx.lineWidth = 1.5; cx.setLineDash([4, 3]);
+      for (const x of [a, b]) { cx.beginPath(); cx.moveTo(x, 0); cx.lineTo(x, H); cx.stroke(); }
+      cx.setLineDash([]); cx.beginPath(); cx.moveTo(a, 24); cx.lineTo(b, 24); cx.stroke();
+      const txt = `${dts.toFixed(3)} 秒 ＝ ${(dts / 0.04).toFixed(1)} 小格`;
+      cx.font = '12px ui-monospace,Menlo,monospace'; cx.textAlign = 'left'; cx.textBaseline = 'alphabetic';
+      const tw = cx.measureText(txt).width + 12, tx = Math.min(Math.max(a, 4), W - tw - 4);
+      cx.fillStyle = 'rgba(15,23,42,0.9)'; cx.fillRect(tx, 30, tw, 20);
+      cx.fillStyle = '#fde047'; cx.fillText(txt, tx + 6, 44);
+    }
+    function renderZoom() {
+      const wrap = $('.ecg-zoom-wrap');
+      if (!sel) { wrap.hidden = true; return; }
+      wrap.hidden = false;
+      const { b, nb } = sel, box = $('.ecg-zoom'), ZW = box.clientWidth;
+      const nbR = nb ? rPeak(nb) : null;
+      let t0 = b.start - 0.12;
+      const need = (nbR ? nbR + 0.12 : b.start + b.end + 0.15) - t0;
+      const target = Math.max(11, Math.min(22, ZW / 50));
+      const win = Math.max(ZW / (SPEED * target), need);
+      t0 -= (win - need) / 2;
+      const zpx = ZW / (win * SPEED), zps = zpx * SPEED;
+      const ZH = Math.round(165 + 14.5 * zpx), zbase = Math.round(64 + 12 * zpx);
+      box.style.height = ZH + 'px';
+      const zg = ecgSizeCanvas($('.ecg-zgrid'), ZW, ZH), zt = ecgSizeCanvas($('.ecg-ztrace'), ZW, ZH), zo = ecgSizeCanvas($('.ecg-zover'), ZW, ZH);
+      ecgGrid(zg, ZW, ZH, zpx, zbase, 0);
+      zt.strokeStyle = '#34d399'; zt.lineWidth = 2.6; zt.lineJoin = 'round'; zt.beginPath();
+      let started = false;
+      for (let x = 0; x <= ZW; x += 0.5) {
+        const t = t0 + x / zps; if (t > simTime) break;
+        const y = zbase - mv(t) * GAIN * zpx;
+        if (started) zt.lineTo(x, y); else { zt.moveTo(x, y); started = true; }
+      }
+      zt.stroke();
+      ecgAnnotate(zo, { tToX: t => (t - t0) * zps, base: zbase, pxmm: zpx, H: ZH, W: ZW, mv, b, nb, layers: layers() });
+    }
+    function clearTools() { calSpan = null; sel = null; drag = null; cx.clearRect(0, 0, W, H); $('.ecg-zoom-wrap').hidden = true; }
+
+    const pos = e => e.clientX - overCv.getBoundingClientRect().left;
+    overCv.style.touchAction = 'pan-y';
+    overCv.addEventListener('pointerdown', e => { if (!st.paused) return; drag = { x0: pos(e), moved: false }; overCv.setPointerCapture(e.pointerId); });
+    overCv.addEventListener('pointermove', e => {
+      if (!drag) return; const x = pos(e);
+      if (Math.abs(x - drag.x0) > 4) drag.moved = true;
+      if (drag.moved) { calSpan = [Math.max(X0, Math.min(drag.x0, x)), Math.max(drag.x0, x)]; drawOverlay(); }
+    });
+    overCv.addEventListener('pointerup', () => { if (!drag) return; if (!drag.moved) selectAt(drag.x0); drag = null; });
+    overCv.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && sel) { sel = null; drawOverlay(); e.preventDefault(); return; }
+      if (!st.paused || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
+      e.preventDefault();
+      const list = drawn(); if (!list.length) return;
+      let i = sel ? list.indexOf(sel.b) : -1;
+      if (i < 0) i = list.length - 1; else i = Math.max(0, Math.min(list.length - 1, i + (e.key === 'ArrowRight' ? 1 : -1)));
+      selectBeat(list[i]);
+    });
+    $('.ecg-zoom-close').addEventListener('click', () => { sel = null; drawOverlay(); });
+    ['.ecg-lay-wave', '.ecg-lay-intv', '.ecg-lay-mech'].forEach(s => $(s).addEventListener('change', () => { if (sel) renderZoom(); }));
+
+    // ---- controls ----
+    const slider = $('.ecg-slider');
+    function setTarget(v) {
+      st.target = v; slider.value = v; $('.ecg-hr-out').textContent = v; status(true);
+      root.querySelectorAll('.ecg-chip').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.hr === v)));
+    }
+    slider.addEventListener('input', e => setTarget(parseInt(e.target.value, 10)));
+    root.querySelectorAll('.ecg-chip').forEach(c => c.addEventListener('click', () => setTarget(+c.dataset.hr)));
+    $('.ecg-rsa').addEventListener('change', e => { st.rsa = e.target.checked; status(true); });
+    $('.ecg-lag').addEventListener('change', e => { st.lag = e.target.checked; status(true); });
+    const pauseBtn = $('.ecg-pause');
+    function setPaused(p) {
+      st.paused = p; pauseBtn.textContent = p ? '繼續' : '暫停';
+      pauseBtn.setAttribute('aria-pressed', String(p));
+      if (!p) clearTools();
+      status(true);
+    }
+    pauseBtn.addEventListener('click', () => setPaused(!st.paused));
+
+    // ---- loop ----
+    let lastTs = 0;
+    function loop(ts) {
+      if (!lastTs) lastTs = ts;
+      let dt = (ts - lastTs) / 1000; lastTs = ts;
+      if (dt > 0.25) dt = 0; // 分頁隱藏後回來：跳過，不讓時間變形
+      if (!st.paused && dt > 0) update(dt);
+      requestAnimationFrame(loop);
+    }
+    resize();
+    for (let i = 0; i < 60 * (secs - 0.5); i++) update(1 / 60); // 預先填滿畫面
+    setPaused(st.paused);
+    addEventListener('resize', () => { const w = scope.clientWidth; if (w && w !== W) resize(); else if (sel) renderZoom(); });
+    requestAnimationFrame(loop);
+    return { resize };
+  }
+
+  return { html, mount };
+})();
+
+// 第一關標示題（題型 "label"）：先自己標，再對答案。
+// 依賴 ecg-model.js、ecg-draw.js。規格：docs/ECG_SIM_LABEL_SPEC.md §4.2。
+window.EcgLabel = (() => {
+  function html() {
+    return `<div class="ecg-label">
+  <div class="ecg-scope ecg-lscope">
+    <canvas class="ecg-layer ecg-lgrid" aria-hidden="true"></canvas>
+    <canvas class="ecg-layer ecg-ltrace" aria-hidden="true"></canvas>
+    <canvas class="ecg-layer ecg-lover" role="img" aria-label="作答用心電圖：按住左右拖曳框出答案，或使用下方的起點、終點滑桿"></canvas>
+    <div class="ecg-lbl">LEAD II • 25 mm/s • 10 mm/mV • 小格 0.04 秒・大格 0.20 秒</div>
+  </div>
+  <div class="ecg-sel">在心電圖上按住左右拖曳，框出你的答案。</div>
+  <div class="ecg-ranges">
+    <label>起點 <input class="ecg-start" type="range" min="0" step="0.01" value="0"></label>
+    <label>終點 <input class="ecg-end" type="range" min="0" step="0.01" value="0"></label>
+  </div>
+  <div class="ecg-row">
+    <button type="button" class="ecg-check" disabled>對答案</button>
+    <button type="button" class="ecg-clear">重新框選</button>
+    <button type="button" class="ecg-reveal" hidden>顯示正確位置</button>
+  </div>
+  <div class="ecg-fb" aria-live="polite" hidden></div>
+</div>`;
+  }
+
+  // q: { id, target, tol, hint, explain }；onPass() 由元件庫前進到下一題
+  function mount(el, q, CL, onPass) {
+    const $ = s => el.querySelector(s);
+    const scope = $('.ecg-lscope'), startIn = $('.ecg-start'), endIn = $('.ecg-end');
+    let W = 0, H = 0, pxmm = 10, pxps = 250, base = 0, view = 3, g, c, o;
+    const hr = 60 + Math.floor(Math.random() * 36);          // 每題隨機 60–95 bpm
+    const beats = makeStrip(hr, 4, Math.random());             // 起點隨機落在心動週期中
+    let sel = null, tries = 0, hinted = false, revealed = false, passed = false, answer = null;
+    const mv = t => mvAt(beats, t);
+    const box = e => (Math.abs(e) / 0.04).toFixed(1);
+
+    function resize() {
+      if (!scope.clientWidth) return; // 題目尚未顯示
+      W = scope.clientWidth;
+      view = W >= 700 ? 3 : 2; pxmm = W / (view * 25); pxps = pxmm * 25;
+      H = Math.round(Math.max(190, Math.min(320, pxmm * 26)));
+      scope.style.height = H + 'px';
+      g = ecgSizeCanvas($('.ecg-lgrid'), W, H); c = ecgSizeCanvas($('.ecg-ltrace'), W, H); o = ecgSizeCanvas($('.ecg-lover'), W, H);
+      base = Math.round(H * 0.64);
+      startIn.max = endIn.max = String(view);
+      if (sel) sel = [Math.min(sel[0], view), Math.min(sel[1], view)];
+      draw();
+    }
+    function draw() {
+      ecgGrid(g, W, H, pxmm, base, 0);
+      c.clearRect(0, 0, W, H); c.strokeStyle = '#34d399'; c.lineWidth = 2.4; c.lineJoin = 'round'; c.beginPath();
+      for (let x = 0; x <= W; x += 0.5) { const y = base - mv(x / pxps) * 10 * pxmm; if (x === 0) c.moveTo(x, y); else c.lineTo(x, y); }
+      c.stroke();
+      overlay();
+    }
+    function overlay() {
+      o.clearRect(0, 0, W, H);
+      if (answer && (passed || revealed)) {
+        const [a, z] = answer.map(t => t * pxps);
+        o.fillStyle = 'rgba(74,222,128,0.18)'; o.fillRect(a, 0, z - a, H);
+        o.strokeStyle = '#4ade80'; o.lineWidth = 2;
+        for (const x of [a, z]) { o.beginPath(); o.moveTo(x, 0); o.lineTo(x, H); o.stroke(); }
+        ecgPill(o, `正確：${featureNames[q.target]}`, (a + z) / 2, H - 14, '#4ade80');
+      }
+      if (sel) {
+        const [a, z] = sel.map(t => t * pxps);
+        o.fillStyle = 'rgba(253,224,71,0.16)'; o.fillRect(a, 0, z - a, H);
+        o.strokeStyle = '#fde047'; o.lineWidth = 1.5; o.setLineDash([5, 4]);
+        for (const x of [a, z]) { o.beginPath(); o.moveTo(x, 0); o.lineTo(x, H); o.stroke(); }
+        o.setLineDash([]);
+        ecgPill(o, `你的答案 ${(sel[1] - sel[0]).toFixed(2)} 秒`, (a + z) / 2, 34, '#fde047');
+      }
+    }
+    function setSel(a, b) {
+      if (passed) return;
+      sel = [Math.max(0, Math.min(a, b)), Math.min(view, Math.max(a, b))];
+      startIn.value = sel[0].toFixed(2); endIn.value = sel[1].toFixed(2);
+      const d = sel[1] - sel[0];
+      $('.ecg-sel').textContent = `你框的範圍：${d.toFixed(3)} 秒 ＝ ${(d / 0.04).toFixed(1)} 小格`;
+      $('.ecg-check').disabled = d <= 0;
+      overlay();
+    }
+
+    // 拖曳框選
+    const ov = $('.ecg-lover');
+    ov.style.touchAction = 'none';
+    let drag = null;
+    const tAt = e => Math.max(0, Math.min(W, e.clientX - ov.getBoundingClientRect().left)) / pxps;
+    ov.addEventListener('pointerdown', e => { if (passed) return; drag = tAt(e); ov.setPointerCapture(e.pointerId); });
+    ov.addEventListener('pointermove', e => { if (drag === null) return; const t = tAt(e); if (Math.abs(t - drag) * pxps >= 3) setSel(drag, t); });
+    ov.addEventListener('pointerup', () => { drag = null; });
+    // 鍵盤替代：起點／終點滑桿
+    startIn.addEventListener('input', () => setSel(+startIn.value, sel ? sel[1] : +startIn.value));
+    endIn.addEventListener('input', () => setSel(sel ? sel[0] : +endIn.value, +endIn.value));
+
+    function hintOnce() { if (!hinted) { hinted = true; CL.hint?.(q.id); } }
+    $('.ecg-check').addEventListener('click', () => {
+      if (!sel || passed) return;
+      const r = grade(q.target, sel, beats, view, q.tol);
+      CL.answer?.(q.id, r.ok);
+      const fb = $('.ecg-fb'); fb.hidden = false;
+      if (r.ok) {
+        passed = true; answer = r.best.range;
+        const d = sel[1] - sel[0], ans = answer[1] - answer[0];
+        const extra = q.target === 'RR'
+          ? `你量到 R-R ＝ ${d.toFixed(2)} 秒，所以心率 ＝ 60 ÷ ${d.toFixed(2)} ≈ <b>${Math.round(60 / d)} 次/分</b>（本圖實際 ${hr} 次/分）。R-R 越短，心率越快。`
+          : (q.explain || '');
+        fb.className = 'ecg-fb ok';
+        fb.innerHTML = `<b>答對了！</b>你框了 ${d.toFixed(3)} 秒（${(d / 0.04).toFixed(1)} 小格），標準答案 ${ans.toFixed(3)} 秒（${(ans / 0.04).toFixed(1)} 小格）。<br>${extra}`;
+        $('.ecg-check').disabled = true; $('.ecg-reveal').hidden = true; $('.ecg-clear').disabled = true;
+        startIn.disabled = endIn.disabled = true;
+        overlay();
+        setTimeout(onPass, 1600);
+        return;
+      }
+      tries++; hintOnce();
+      const parts = [];
+      if (r.best) {
+        parts.push(Math.abs(r.best.e1) > q.tol ? `起點${r.best.e1 < 0 ? '太早' : '太晚'} ${box(r.best.e1)} 小格` : '起點正確');
+        parts.push(Math.abs(r.best.e2) > q.tol ? `終點${r.best.e2 < 0 ? '太早' : '太晚'} ${box(r.best.e2)} 小格` : '終點正確');
+      }
+      fb.className = 'ecg-fb no';
+      fb.innerHTML = (r.confusedWith ? `<b>你框的比較像「${featureNames[r.confusedWith]}」。</b>` : `<b>還差一點：</b>${parts.join('，')}。`)
+        + `<br>提示：${q.hint}` + (revealed ? '<br>請對照綠色的正確位置，自己再框一次。' : '');
+      if (tries >= 2 && !revealed) $('.ecg-reveal').hidden = false;
+    });
+    $('.ecg-clear').addEventListener('click', () => {
+      if (passed) return;
+      sel = null; $('.ecg-check').disabled = true;
+      $('.ecg-sel').textContent = '在心電圖上按住左右拖曳，框出你的答案。';
+      overlay();
+    });
+    $('.ecg-reveal').addEventListener('click', () => {
+      const cs = candidates(q.target, beats, view);
+      answer = (sel && closest(q.target, sel, beats, view)?.range) || cs[Math.floor(cs.length / 2)];
+      revealed = true; CL.hint?.(q.id);
+      const ans = answer[1] - answer[0], fb = $('.ecg-fb');
+      fb.hidden = false; fb.className = 'ecg-fb no';
+      fb.innerHTML = `<b>正確位置已用綠色標出</b>（${ans.toFixed(3)} 秒 ＝ ${(ans / 0.04).toFixed(1)} 小格）。對照你黃色的框，看看差在哪裡，<b>再自己框一次</b>才能進下一題。`;
+      $('.ecg-reveal').hidden = true;
+      overlay();
+    });
+
+    el.__ecg = { get beats() { return beats; }, get view() { return view; }, get pxps() { return pxps; } }; // 供自動化驗收使用
+    resize();
+    el.closest('.stage')?.addEventListener('stage-show', resize);
+    addEventListener('resize', () => { if (scope.clientWidth && scope.clientWidth !== W) resize(); });
+    return { resize };
+  }
+
+  return { html, mount };
+})();
+
+// 教材元件庫：由 content.json 產生單檔互動教材（六節點＋兩關題目＋SDK 回報）。
+// 擴充點：lab.widget（例如 "ecg-sim"）與題型 type（例如 "label"），由 materials-src/widgets/ 提供。
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+// Fisher–Yates 洗牌（無偏差）
+const shuffle = rows => {
+  const a = [...rows];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const WIDGETS = { 'ecg-sim': () => window.EcgSim };
+const QUESTION_TYPES = { label: () => window.EcgLabel };
+
+function renderLab(lab, figures) {
+  const widget = lab.widget && WIDGETS[lab.widget]?.();
+  if (lab.widget) {
+    return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p><div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div></section>`;
+  }
+  return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>`
+    + `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div>`
+    + `<div class="state-controls">${lab.states.map((x, i) => `<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div>`
+    + `<p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`
+    + `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o, i) => `<button data-answer="${i}">${esc(o)}</button>`).join('')}</div>`
+    + `<p class="feedback" aria-live="polite"></p></section>`;
+}
+
+function renderQuestion(q) {
+  const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+  if (type) return `<h3>${esc(q.stem)}</h3><div class="q-widget" data-type="${esc(q.type)}">${type.html(q)}</div>`;
+  return `<h3>${esc(q.stem)}</h3><div class="options">${shuffle(q.options.map((text, answer) => ({ text, answer }))).map(o => `<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>`;
+}
+
+function render(content, figures) {
+  const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
+  return `<main class="kit" data-slug="${content.slug}">`
+    + `<header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header>`
+    + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
+    + renderLab(content.lab, figures)
+    + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>`
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><img class="node-figure" alt="${esc(n.title)} 示意圖" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
+    + `</section>`
+    + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
+    + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
+}
+
+function mount(content, figures) {
+  document.body.innerHTML = render(content, figures);
+  const CL = window.CourseLearning || { explore() {}, nodeTime() {}, answer() {}, hint() {}, complete() {} };
+
+  // 知識節點：第一次展開送 explore；收合或分頁隱藏時送前景停留秒數
+  const opened = new Map(), explored = new Set();
+  document.querySelectorAll('[data-node]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.node, d = document.querySelector('#detail-' + id), was = d.hidden;
+    d.hidden = !was; b.setAttribute('aria-expanded', String(was));
+    if (was) { if (!explored.has(id)) { explored.add(id); CL.explore(id); } opened.set(id, performance.now()); }
+    else { const start = opened.get(id); if (start) CL.nodeTime(id, (performance.now() - start) / 1000); opened.delete(id); }
+  }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { for (const [id, start] of opened) CL.nodeTime(id, (performance.now() - start) / 1000); opened.clear(); }
+  });
+
+  // 情境實驗室
+  if (content.lab.widget) {
+    const root = document.querySelector('.lab-widget');
+    WIDGETS[content.lab.widget]?.()?.mount(root, content.lab, CL);
+  } else {
+    document.querySelectorAll('button[data-lab-state]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.labState;
+      const fig = document.querySelector('.state-figure');
+      fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
+      document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
+    }));
+    document.querySelector('.predict').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const ok = +b.dataset.answer === content.lab.predict.answer;
+      b.parentElement.nextElementSibling.textContent = ok ? content.lab.predict.feedback : '再比對圖中的狀態與箭頭。';
+    });
+  }
+
+  // 兩關題目：逐題答對才解鎖；第二關全部答對才送 complete
+  let foundation = 0, cases = 0;
+  const show = el => { el.hidden = false; el.dispatchEvent(new CustomEvent('stage-show')); };
+  const advance = (stage, kind) => {
+    stage.hidden = true;
+    if (kind === 'foundation') {
+      foundation++;
+      const next = document.querySelector(`[data-kind="foundation"][data-index="${foundation}"]`);
+      show(next || document.querySelector('[data-kind="case"][data-index="0"]'));
+    } else {
+      cases++;
+      const next = document.querySelector(`[data-kind="case"][data-index="${cases}"]`);
+      if (next) show(next); else CL.complete();
+    }
+  };
+  document.querySelectorAll('.stage').forEach(stage => {
+    const kind = stage.dataset.kind, rows = kind === 'foundation' ? content.foundation : content.cases;
+    const q = rows[+stage.dataset.index];
+    const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+    if (type) { type.mount(stage.querySelector('.q-widget'), q, CL, () => advance(stage, kind)); return; }
+    stage.addEventListener('click', e => {
+      const b = e.target.closest('button[data-answer]'); if (!b) return;
+      const ok = +b.dataset.answer === q.answer;
+      CL.answer(q.id, ok);
+      const feedback = stage.querySelector('.feedback');
+      if (!ok) { CL.hint?.(q.id); feedback.textContent = `提示：${q.hint}`; return; }
+      feedback.textContent = '答對，繼續下一題。';
+      stage.querySelectorAll('button').forEach(x => { x.disabled = true; });
+      setTimeout(() => advance(stage, kind), 250);
+    });
+  });
+}
+
+// 舊版三段節律圖（ecg-rate.svg）的狀態切換；保留相容
+document.addEventListener('click', event => {
+  const button = event.target.closest('button[data-lab-state]'); if (!button) return;
+  const figure = document.querySelector('.state-figure'), state = button.dataset.labState; if (!figure) return;
+  figure.querySelectorAll('.slow,.rest,.fast').forEach(group => { group.style.display = group.classList.contains(state) ? 'block' : 'none'; });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const figure = document.querySelector('.state-figure');
+  figure?.querySelector('.slow')?.style.setProperty('display', 'block');
+});
+
+mount({"slug":"ecg-basics","version":"v1","title":"心電圖基礎與心率調控","subtitle":"以波形、傳導與 R-R 間期建立 ECG 的生理概念；本教材不作疾病診斷。","label":"心電圖基礎與心率調控","stats":[{"value":"0.12–0.20 秒","label":"PR 間隔參考範圍"},{"value":"\u003c 0.12 秒","label":"QRS 時間參考範圍"},{"value":"HR = 60 ÷ R-R","label":"規則節律的換算式"}],"lab":{"widget":"ecg-sim","title":"心率與心動週期模擬器","intro":"調整心率，觀察以 25 mm/s、10 mm/mV 校正的 ECG。暫停後可選拍、標示與量測。","note":"教學示意模型，不是個人心電圖判讀工具。"},"nodes":[{"id":"ecg-basics-node-01","tag":"波形","title":"P 波與心房去極化","summary":"P 波代表心房的電活動。","figure":"ecg-node-p.svg","concept":"P 波反映心房去極化；電活動通常先於其後的機械收縮。","points":["P 波從起點到終點量測。","ECG 記錄的是電位變化，不是直接記錄心肌收縮。"],"clinical":{"title":"判讀界線","text":"單一波形不能取代完整導程、病史與專業判讀。"}},{"id":"ecg-basics-node-02","tag":"傳導","title":"PR 間隔與房室傳導","summary":"由 P 波起點到 QRS 起點。","figure":"ecg-node-pr.svg","concept":"PR 間隔包含心房去極化與衝動經房室交界傳至心室開始去極化的時間。","points":["參考範圍常寫為 0.12–0.20 秒。","房室交界傳導延遲有助心室充盈。"],"clinical":{"title":"學習重點","text":"量測須在適當導程、紙速與完整臨床脈絡下解讀。"}},{"id":"ecg-basics-node-03","tag":"波形","title":"QRS 與心室去極化","summary":"QRS 反映快速心室去極化。","figure":"ecg-node-qrs.svg","concept":"QRS 群波反映心室去極化。","points":["正常 QRS 時間常小於 0.12 秒。","Q、R、S 是偏轉的命名規則。"],"clinical":{"title":"學習重點","text":"波形形態需由多個導程綜合判讀。"}},{"id":"ecg-basics-node-04","tag":"再極化","title":"ST、T 與 QT","summary":"連結心室再極化與週期時程。","figure":"ecg-node-st-t.svg","concept":"ST 段與心室整體處於動作電位高原期有關；T 波反映心室再極化。","points":["QT 間隔自 QRS 起始至 T 波終點。","QT 會受心率影響。"],"clinical":{"title":"判讀界線","text":"ST 或 T 的變化有多種原因，不能單靠一張示意圖診斷。"}},{"id":"ecg-basics-node-05","tag":"節律","title":"R-R、心率與呼吸變異","summary":"相鄰 R 波間距可估算規則心率。","figure":"ecg-node-rr.svg","concept":"R-R 間期是相鄰心室去極化之間的時間。","points":["規則節律可用 HR = 60 ÷ R-R（秒）估算。","心率變快時，PR 與 QRS 幾乎不變，縮短最多的是舒張期。"],"clinical":{"title":"判讀界線","text":"僅憑心率數字不能判定個人的心律診斷。"}},{"id":"ecg-basics-node-06","tag":"導程","title":"10 電極與 12 導程","summary":"電極貼片建立不同觀測角度。","figure":"ecg-node-leads.svg","concept":"標準十二導程 ECG 使用十個電極建立十二個觀測角度。","points":["三個標準肢導程：I、II、III。","六個胸前導程：V1–V6。"],"clinical":{"title":"安全提醒","text":"貼片定位與檢查操作應依合格人員與臨床規範執行。"}}],"foundation":[{"id":"ecg-basics-foundation-q01","stem":"P 波主要反映何種電活動？","options":["心房去極化","心室去極化","心室再極化","心房收縮本身"],"answer":0,"hint":"想想 ECG 記錄的是電活動。","nodeId":"ecg-basics-node-01"},{"id":"ecg-basics-foundation-l01","type":"label","stem":"框出一個完整的 P 波","target":"P","tol":0.03,"hint":"P 波是 QRS 前面那個小而圓的正向波。從它離開基線的地方，框到回到基線為止。","explain":"P 波代表心房去極化，約 0.08–0.10 秒（2–2.5 小格）；心房收縮緊接在 P 波之後發生。","nodeId":"ecg-basics-node-01"},{"id":"ecg-basics-foundation-l02","type":"label","stem":"量出一個 PR 間隔","target":"PRi","tol":0.03,"hint":"「間隔」要從 P 波開始量到 QRS 開始。只量 P 波結束到 QRS 之間那段平線，是 PR 段，不是 PR 間隔。","explain":"PR 間隔正常 0.12–0.20 秒（3–5 小格），大部分時間花在房室結約 0.1 秒的延遲，讓心室有時間充血。","nodeId":"ecg-basics-node-02"},{"id":"ecg-basics-foundation-l03","type":"label","stem":"框出一個完整的 QRS 群波","target":"QRS","tol":0.025,"hint":"從第一個小小向下的 Q 波開始，經過高聳的 R 波，到 S 波回到基線為止。正常不超過 3 小格。","explain":"QRS 代表心室去極化，正常 \u003c 0.12 秒（3 小格）；心房再極化同時發生，被 QRS 掩蓋。","nodeId":"ecg-basics-node-03"},{"id":"ecg-basics-foundation-q04","stem":"T 波主要反映？","options":["心室再極化","心房去極化","心室去極化","房室交界延遲"],"answer":0,"hint":"想想心室細胞回復膜電位的過程。","nodeId":"ecg-basics-node-04"},{"id":"ecg-basics-foundation-l04","type":"label","stem":"量出一個 R-R 間期","target":"RR","tol":0.03,"hint":"從一個 R 波的尖端，拖到下一個 R 波的尖端。","explain":"R-R 間期是相鄰兩次心室去極化的間隔；心率 ＝ 60 ÷ R-R（秒）。","nodeId":"ecg-basics-node-05"}],"cases":[{"id":"ecg-basics-case-q01","stem":"在模擬器把心率從 75 拉到 150。一次心跳（R-R）裡，縮短最多的是哪一段？","options":["T 波結束到下一個 QRS 之間（心室舒張期）","QRS 群波","PR 間隔","P 波"],"answer":0,"hint":"比較 75 與 150 時模擬器下方的收縮／舒張比例條。","nodeId":"ecg-basics-node-05"},{"id":"ecg-basics-case-q02","stem":"學生說「P 波就是心房收縮」。最合宜的修正是？","options":["P 波是心房去極化，收縮通常在其後發生","P 波是心室去極化","P 波是心室再極化","P 波只代表貼片雜訊"],"answer":0,"hint":"區分電活動與機械活動。","nodeId":"ecg-basics-node-01"},{"id":"ecg-basics-case-q03","stem":"為何正常 ECG 常看不到獨立的心房再極化波？","options":["常被同時期較大的 QRS 波群遮蔽","心房不會再極化","發生在 T 波結束後","電極無法記錄心房活動"],"answer":0,"hint":"想想心室肌量與同時發生的電活動。","nodeId":"ecg-basics-node-03"},{"id":"ecg-basics-case-q04","stem":"關於 ST 段與 T 波，哪一項較正確？","options":["T 波反映心室再極化，單一變化不可直接診斷疾病","T 波只反映心房收縮","ST 段永遠代表特定疾病","QT 不受心率影響"],"answer":0,"hint":"這份教材強調完整脈絡與非診斷界線。","nodeId":"ecg-basics-node-04"},{"id":"ecg-basics-case-q05","stem":"「12 導程」最合宜的理解是？","options":["由 10 個電極建立的 12 個觀測角度","必須使用 12 個貼片","只有 12 次心跳","只測量左心室"],"answer":0,"hint":"分清電極與導程。","nodeId":"ecg-basics-node-06"}],"credits":["心電圖示意圖：課程平台自繪 SVG，CC0。","內容發布前仍須由教師依指定課本或 ECG 教材審核。"]},{"ecg-node-p.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"P 波：心房去極化\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cline x1=\"30.0\" y1=\"20\" x2=\"30.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"62.2\" y1=\"20\" x2=\"62.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"94.5\" y1=\"20\" x2=\"94.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"126.7\" y1=\"20\" x2=\"126.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"159.0\" y1=\"20\" x2=\"159.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"191.2\" y1=\"20\" x2=\"191.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"223.4\" y1=\"20\" x2=\"223.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"255.7\" y1=\"20\" x2=\"255.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"287.9\" y1=\"20\" x2=\"287.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"320.1\" y1=\"20\" x2=\"320.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"352.4\" y1=\"20\" x2=\"352.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"384.6\" y1=\"20\" x2=\"384.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"416.9\" y1=\"20\" x2=\"416.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"449.1\" y1=\"20\" x2=\"449.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"481.3\" y1=\"20\" x2=\"481.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"513.6\" y1=\"20\" x2=\"513.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"545.8\" y1=\"20\" x2=\"545.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"156.0\" x2=\"570\" y2=\"156.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"147.0\" x2=\"570\" y2=\"147.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"138.0\" x2=\"570\" y2=\"138.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"129.0\" x2=\"570\" y2=\"129.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"120.0\" x2=\"570\" y2=\"120.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"111.0\" x2=\"570\" y2=\"111.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"102.0\" x2=\"570\" y2=\"102.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"93.0\" x2=\"570\" y2=\"93.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"84.0\" x2=\"570\" y2=\"84.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"75.0\" x2=\"570\" y2=\"75.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"66.0\" x2=\"570\" y2=\"66.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"57.0\" x2=\"570\" y2=\"57.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"48.0\" x2=\"570\" y2=\"48.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"39.0\" x2=\"570\" y2=\"39.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"30.0\" x2=\"570\" y2=\"30.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"21.0\" x2=\"570\" y2=\"21.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"174.0\" x2=\"570\" y2=\"174.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"183.0\" x2=\"570\" y2=\"183.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"192.0\" x2=\"570\" y2=\"192.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"201.0\" x2=\"570\" y2=\"201.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"210.0\" x2=\"570\" y2=\"210.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"219.0\" x2=\"570\" y2=\"219.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"228.0\" x2=\"570\" y2=\"228.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cpolyline fill=\"none\" stroke=\"#334155\" stroke-width=\"3\" stroke-linejoin=\"round\" points=\"30.0,165.0 31.6,165.0 33.2,165.0 34.8,165.0 36.4,165.0 38.1,165.0 39.7,165.0 41.3,165.0 42.9,165.0 44.5,165.0 46.1,165.0 47.7,165.0 49.3,165.0 51.0,165.0 52.6,165.0 54.2,165.0 55.8,165.0 57.4,165.0 59.0,165.0 60.6,165.0 62.2,165.0 63.9,165.0 65.5,165.0 67.1,165.0 68.7,165.0 70.3,165.0 71.9,164.1 73.5,163.1 75.1,162.2 76.7,161.3 78.4,160.4 80.0,159.5 81.6,158.7 83.2,157.8 84.8,157.1 86.4,156.3 88.0,155.6 89.6,155.0 91.3,154.4 92.9,153.8 94.5,153.3 96.1,152.9 97.7,152.5 99.3,152.2 100.9,151.9 102.5,151.7 104.1,151.6 105.8,151.5 107.4,151.5 109.0,151.6 110.6,151.7 112.2,151.9 113.8,152.2 115.4,152.5 117.0,152.9 118.7,153.3 120.3,153.8 121.9,154.4 123.5,155.0 125.1,155.6 126.7,156.3 128.3,157.1 129.9,157.8 131.6,158.7 133.2,159.5 134.8,160.4 136.4,161.3 138.0,162.2 139.6,163.1 141.2,164.1 142.8,165.0 144.4,165.0 146.1,165.0 147.7,165.0 149.3,165.0 150.9,165.0 152.5,165.0 154.1,165.0 155.7,165.0 157.3,165.0 159.0,165.0 160.6,165.0 162.2,165.0 163.8,165.0 165.4,165.0 167.0,165.0 168.6,165.0 170.2,165.0 171.9,165.0 173.5,165.0 175.1,165.0 176.7,165.0 178.3,165.0 179.9,165.0 181.5,165.0 183.1,165.0 184.7,165.0 186.4,165.0 188.0,165.0 189.6,165.0 191.2,165.0 192.8,165.0 194.4,165.0 196.0,165.0 197.6,165.0 199.3,165.0 200.9,165.9 202.5,166.8 204.1,167.7 205.7,168.6 207.3,169.5 208.9,170.4 210.5,171.3 212.1,172.2 213.8,173.1 215.4,174.0 217.0,166.2 218.6,158.4 220.2,150.6 221.8,142.8 223.4,135.0 225.0,127.2 226.7,119.4 228.3,111.6 229.9,103.8 231.5,96.0 233.1,88.2 234.7,80.4 236.3,72.6 237.9,64.8 239.6,57.0 241.2,65.7 242.8,74.4 244.4,83.1 246.0,91.8 247.6,100.5 249.2,109.2 250.8,117.9 252.4,126.6 254.1,135.3 255.7,144.0 257.3,152.7 258.9,161.4 260.5,170.1 262.1,178.8 263.7,187.5 265.3,183.0 267.0,178.5 268.6,174.0 270.2,169.5 271.8,165.0 273.4,165.0 275.0,165.0 276.6,165.0 278.2,165.0 279.9,165.0 281.5,165.0 283.1,165.0 284.7,165.0 286.3,165.0 287.9,165.0 289.5,165.0 291.1,165.0 292.7,165.0 294.4,165.0 296.0,165.0 297.6,165.0 299.2,165.0 300.8,165.0 302.4,165.0 304.0,165.0 305.6,165.0 307.3,165.0 308.9,165.0 310.5,165.0 312.1,165.0 313.7,165.0 315.3,165.0 316.9,165.0 318.5,165.0 320.1,165.0 321.8,165.0 323.4,165.0 325.0,165.0 326.6,165.0 328.2,165.0 329.8,165.0 331.4,165.0 333.0,165.0 334.7,165.0 336.3,165.0 337.9,165.0 339.5,165.0 341.1,165.0 342.7,165.0 344.3,165.0 345.9,165.0 347.6,165.0 349.2,165.0 350.8,165.0 352.4,165.0 354.0,165.0 355.6,165.0 357.2,165.0 358.8,164.9 360.4,164.0 362.1,163.2 363.7,162.3 365.3,161.5 366.9,160.6 368.5,159.8 370.1,159.0 371.7,158.1 373.3,157.3 375.0,156.5 376.6,155.7 378.2,154.9 379.8,154.1 381.4,153.3 383.0,152.6 384.6,151.8 386.2,151.1 387.9,150.3 389.5,149.6 391.1,148.9 392.7,148.3 394.3,147.6 395.9,147.0 397.5,146.3 399.1,145.7 400.7,145.1 402.4,144.6 404.0,144.0 405.6,143.5 407.2,143.0 408.8,142.5 410.4,142.0 412.0,141.6 413.6,141.2 415.3,140.8 416.9,140.4 418.5,140.1 420.1,139.8 421.7,139.5 423.3,139.2 424.9,139.0 426.5,138.8 428.1,138.6 429.8,138.4 431.4,138.3 433.0,138.2 434.6,138.1 436.2,138.0 437.8,138.0 439.4,138.0 441.0,138.1 442.7,138.2 444.3,138.4 445.9,138.7 447.5,139.1 449.1,139.5 450.7,140.0 452.3,140.6 453.9,141.2 455.6,141.9 457.2,142.6 458.8,143.5 460.4,144.3 462.0,145.2 463.6,146.2 465.2,147.2 466.8,148.3 468.4,149.4 470.1,150.6 471.7,151.8 473.3,153.0 474.9,154.3 476.5,155.6 478.1,156.9 479.7,158.3 481.3,159.6 483.0,161.0 484.6,162.4 486.2,163.8 487.8,165.0 489.4,165.0 491.0,165.0 492.6,165.0 494.2,165.0 495.9,165.0 497.5,165.0 499.1,165.0 500.7,165.0 502.3,165.0 503.9,165.0 505.5,165.0 507.1,165.0 508.7,165.0 510.4,165.0 512.0,165.0 513.6,165.0 515.2,165.0 516.8,165.0 518.4,165.0 520.0,165.0 521.6,165.0 523.3,165.0 524.9,165.0 526.5,165.0 528.1,165.0 529.7,165.0 531.3,165.0 532.9,165.0 534.5,165.0 536.1,165.0 537.8,165.0 539.4,165.0 541.0,165.0 542.6,165.0 544.2,165.0 545.8,165.0 547.4,165.0 549.0,165.0 550.7,165.0 552.3,165.0 553.9,165.0 555.5,165.0 557.1,165.0 558.7,165.0 560.3,165.0 561.9,165.0 563.6,165.0 565.2,165.0 566.8,165.0 568.4,165.0\"/>\u003cpolyline fill=\"none\" stroke=\"#2563eb\" stroke-width=\"6\" stroke-linejoin=\"round\" points=\"70.3,165.0 71.9,164.1 73.5,163.1 75.1,162.2 76.7,161.3 78.4,160.4 80.0,159.5 81.6,158.7 83.2,157.8 84.8,157.1 86.4,156.3 88.0,155.6 89.6,155.0 91.3,154.4 92.9,153.8 94.5,153.3 96.1,152.9 97.7,152.5 99.3,152.2 100.9,151.9 102.5,151.7 104.1,151.6 105.8,151.5 107.4,151.5 109.0,151.6 110.6,151.7 112.2,151.9 113.8,152.2 115.4,152.5 117.0,152.9 118.7,153.3 120.3,153.8 121.9,154.4 123.5,155.0 125.1,155.6 126.7,156.3 128.3,157.1 129.9,157.8 131.6,158.7 133.2,159.5 134.8,160.4 136.4,161.3 138.0,162.2 139.6,163.1 141.2,164.1\"/>\u003cpath d=\"M70.3 178V192M70.3 185H142.8M142.8 178V192\" stroke=\"#2563eb\" stroke-width=\"3\" fill=\"none\"/>\u003ctext x=\"106.6\" y=\"211.0\" font-size=\"18\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">P 波 ≈ 0.09 秒\u003c/text>\u003ctext x=\"106.6\" y=\"137.5\" font-size=\"22\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">P\u003c/text>\u003ctext x=\"560.0\" y=\"55.0\" font-size=\"18\" fill=\"#2563eb\" text-anchor=\"end\" font-family=\"sans-serif\" font-weight=\"bold\">心房去極化 → 接著心房收縮\u003c/text>\u003c/svg>\n","ecg-node-pr.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"PR 間隔：P 波起點到 QRS 起點\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cline x1=\"30.0\" y1=\"20\" x2=\"30.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"62.2\" y1=\"20\" x2=\"62.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"94.5\" y1=\"20\" x2=\"94.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"126.7\" y1=\"20\" x2=\"126.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"159.0\" y1=\"20\" x2=\"159.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"191.2\" y1=\"20\" x2=\"191.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"223.4\" y1=\"20\" x2=\"223.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"255.7\" y1=\"20\" x2=\"255.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"287.9\" y1=\"20\" x2=\"287.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"320.1\" y1=\"20\" x2=\"320.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"352.4\" y1=\"20\" x2=\"352.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"384.6\" y1=\"20\" x2=\"384.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"416.9\" y1=\"20\" x2=\"416.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"449.1\" y1=\"20\" x2=\"449.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"481.3\" y1=\"20\" x2=\"481.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"513.6\" y1=\"20\" x2=\"513.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"545.8\" y1=\"20\" x2=\"545.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"156.0\" x2=\"570\" y2=\"156.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"147.0\" x2=\"570\" y2=\"147.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"138.0\" x2=\"570\" y2=\"138.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"129.0\" x2=\"570\" y2=\"129.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"120.0\" x2=\"570\" y2=\"120.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"111.0\" x2=\"570\" y2=\"111.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"102.0\" x2=\"570\" y2=\"102.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"93.0\" x2=\"570\" y2=\"93.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"84.0\" x2=\"570\" y2=\"84.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"75.0\" x2=\"570\" y2=\"75.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"66.0\" x2=\"570\" y2=\"66.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"57.0\" x2=\"570\" y2=\"57.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"48.0\" x2=\"570\" y2=\"48.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"39.0\" x2=\"570\" y2=\"39.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"30.0\" x2=\"570\" y2=\"30.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"21.0\" x2=\"570\" y2=\"21.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"174.0\" x2=\"570\" y2=\"174.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"183.0\" x2=\"570\" y2=\"183.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"192.0\" x2=\"570\" y2=\"192.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"201.0\" x2=\"570\" y2=\"201.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"210.0\" x2=\"570\" y2=\"210.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"219.0\" x2=\"570\" y2=\"219.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"228.0\" x2=\"570\" y2=\"228.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cpolyline fill=\"none\" stroke=\"#334155\" stroke-width=\"3\" stroke-linejoin=\"round\" points=\"30.0,165.0 31.6,165.0 33.2,165.0 34.8,165.0 36.4,165.0 38.1,165.0 39.7,165.0 41.3,165.0 42.9,165.0 44.5,165.0 46.1,165.0 47.7,165.0 49.3,165.0 51.0,165.0 52.6,165.0 54.2,165.0 55.8,165.0 57.4,165.0 59.0,165.0 60.6,165.0 62.2,165.0 63.9,165.0 65.5,165.0 67.1,165.0 68.7,165.0 70.3,165.0 71.9,164.1 73.5,163.1 75.1,162.2 76.7,161.3 78.4,160.4 80.0,159.5 81.6,158.7 83.2,157.8 84.8,157.1 86.4,156.3 88.0,155.6 89.6,155.0 91.3,154.4 92.9,153.8 94.5,153.3 96.1,152.9 97.7,152.5 99.3,152.2 100.9,151.9 102.5,151.7 104.1,151.6 105.8,151.5 107.4,151.5 109.0,151.6 110.6,151.7 112.2,151.9 113.8,152.2 115.4,152.5 117.0,152.9 118.7,153.3 120.3,153.8 121.9,154.4 123.5,155.0 125.1,155.6 126.7,156.3 128.3,157.1 129.9,157.8 131.6,158.7 133.2,159.5 134.8,160.4 136.4,161.3 138.0,162.2 139.6,163.1 141.2,164.1 142.8,165.0 144.4,165.0 146.1,165.0 147.7,165.0 149.3,165.0 150.9,165.0 152.5,165.0 154.1,165.0 155.7,165.0 157.3,165.0 159.0,165.0 160.6,165.0 162.2,165.0 163.8,165.0 165.4,165.0 167.0,165.0 168.6,165.0 170.2,165.0 171.9,165.0 173.5,165.0 175.1,165.0 176.7,165.0 178.3,165.0 179.9,165.0 181.5,165.0 183.1,165.0 184.7,165.0 186.4,165.0 188.0,165.0 189.6,165.0 191.2,165.0 192.8,165.0 194.4,165.0 196.0,165.0 197.6,165.0 199.3,165.0 200.9,165.9 202.5,166.8 204.1,167.7 205.7,168.6 207.3,169.5 208.9,170.4 210.5,171.3 212.1,172.2 213.8,173.1 215.4,174.0 217.0,166.2 218.6,158.4 220.2,150.6 221.8,142.8 223.4,135.0 225.0,127.2 226.7,119.4 228.3,111.6 229.9,103.8 231.5,96.0 233.1,88.2 234.7,80.4 236.3,72.6 237.9,64.8 239.6,57.0 241.2,65.7 242.8,74.4 244.4,83.1 246.0,91.8 247.6,100.5 249.2,109.2 250.8,117.9 252.4,126.6 254.1,135.3 255.7,144.0 257.3,152.7 258.9,161.4 260.5,170.1 262.1,178.8 263.7,187.5 265.3,183.0 267.0,178.5 268.6,174.0 270.2,169.5 271.8,165.0 273.4,165.0 275.0,165.0 276.6,165.0 278.2,165.0 279.9,165.0 281.5,165.0 283.1,165.0 284.7,165.0 286.3,165.0 287.9,165.0 289.5,165.0 291.1,165.0 292.7,165.0 294.4,165.0 296.0,165.0 297.6,165.0 299.2,165.0 300.8,165.0 302.4,165.0 304.0,165.0 305.6,165.0 307.3,165.0 308.9,165.0 310.5,165.0 312.1,165.0 313.7,165.0 315.3,165.0 316.9,165.0 318.5,165.0 320.1,165.0 321.8,165.0 323.4,165.0 325.0,165.0 326.6,165.0 328.2,165.0 329.8,165.0 331.4,165.0 333.0,165.0 334.7,165.0 336.3,165.0 337.9,165.0 339.5,165.0 341.1,165.0 342.7,165.0 344.3,165.0 345.9,165.0 347.6,165.0 349.2,165.0 350.8,165.0 352.4,165.0 354.0,165.0 355.6,165.0 357.2,165.0 358.8,164.9 360.4,164.0 362.1,163.2 363.7,162.3 365.3,161.5 366.9,160.6 368.5,159.8 370.1,159.0 371.7,158.1 373.3,157.3 375.0,156.5 376.6,155.7 378.2,154.9 379.8,154.1 381.4,153.3 383.0,152.6 384.6,151.8 386.2,151.1 387.9,150.3 389.5,149.6 391.1,148.9 392.7,148.3 394.3,147.6 395.9,147.0 397.5,146.3 399.1,145.7 400.7,145.1 402.4,144.6 404.0,144.0 405.6,143.5 407.2,143.0 408.8,142.5 410.4,142.0 412.0,141.6 413.6,141.2 415.3,140.8 416.9,140.4 418.5,140.1 420.1,139.8 421.7,139.5 423.3,139.2 424.9,139.0 426.5,138.8 428.1,138.6 429.8,138.4 431.4,138.3 433.0,138.2 434.6,138.1 436.2,138.0 437.8,138.0 439.4,138.0 441.0,138.1 442.7,138.2 444.3,138.4 445.9,138.7 447.5,139.1 449.1,139.5 450.7,140.0 452.3,140.6 453.9,141.2 455.6,141.9 457.2,142.6 458.8,143.5 460.4,144.3 462.0,145.2 463.6,146.2 465.2,147.2 466.8,148.3 468.4,149.4 470.1,150.6 471.7,151.8 473.3,153.0 474.9,154.3 476.5,155.6 478.1,156.9 479.7,158.3 481.3,159.6 483.0,161.0 484.6,162.4 486.2,163.8 487.8,165.0 489.4,165.0 491.0,165.0 492.6,165.0 494.2,165.0 495.9,165.0 497.5,165.0 499.1,165.0 500.7,165.0 502.3,165.0 503.9,165.0 505.5,165.0 507.1,165.0 508.7,165.0 510.4,165.0 512.0,165.0 513.6,165.0 515.2,165.0 516.8,165.0 518.4,165.0 520.0,165.0 521.6,165.0 523.3,165.0 524.9,165.0 526.5,165.0 528.1,165.0 529.7,165.0 531.3,165.0 532.9,165.0 534.5,165.0 536.1,165.0 537.8,165.0 539.4,165.0 541.0,165.0 542.6,165.0 544.2,165.0 545.8,165.0 547.4,165.0 549.0,165.0 550.7,165.0 552.3,165.0 553.9,165.0 555.5,165.0 557.1,165.0 558.7,165.0 560.3,165.0 561.9,165.0 563.6,165.0 565.2,165.0 566.8,165.0 568.4,165.0\"/>\u003cpolyline fill=\"none\" stroke=\"#d97706\" stroke-width=\"7\" stroke-linejoin=\"round\" points=\"142.8,165.0 144.4,165.0 146.1,165.0 147.7,165.0 149.3,165.0 150.9,165.0 152.5,165.0 154.1,165.0 155.7,165.0 157.3,165.0 159.0,165.0 160.6,165.0 162.2,165.0 163.8,165.0 165.4,165.0 167.0,165.0 168.6,165.0 170.2,165.0 171.9,165.0 173.5,165.0 175.1,165.0 176.7,165.0 178.3,165.0 179.9,165.0 181.5,165.0 183.1,165.0 184.7,165.0 186.4,165.0 188.0,165.0 189.6,165.0 191.2,165.0 192.8,165.0 194.4,165.0 196.0,165.0 197.6,165.0\"/>\u003cpath d=\"M70.3 185V199M70.3 192H199.3M199.3 185V199\" stroke=\"#d97706\" stroke-width=\"3\" fill=\"none\"/>\u003ctext x=\"134.8\" y=\"218.0\" font-size=\"18\" fill=\"#d97706\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">PR 間隔 0.12–0.20 秒\u003c/text>\u003ctext x=\"171.0\" y=\"153.0\" font-size=\"16\" fill=\"#d97706\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">PR 段\u003c/text>\u003ctext x=\"560.0\" y=\"55.0\" font-size=\"18\" fill=\"#d97706\" text-anchor=\"end\" font-family=\"sans-serif\" font-weight=\"bold\">含房室結約 0.1 秒延遲\u003c/text>\u003c/svg>\n","ecg-node-qrs.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"QRS 群波：心室去極化\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cline x1=\"30.0\" y1=\"20\" x2=\"30.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"62.2\" y1=\"20\" x2=\"62.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"94.5\" y1=\"20\" x2=\"94.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"126.7\" y1=\"20\" x2=\"126.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"159.0\" y1=\"20\" x2=\"159.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"191.2\" y1=\"20\" x2=\"191.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"223.4\" y1=\"20\" x2=\"223.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"255.7\" y1=\"20\" x2=\"255.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"287.9\" y1=\"20\" x2=\"287.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"320.1\" y1=\"20\" x2=\"320.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"352.4\" y1=\"20\" x2=\"352.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"384.6\" y1=\"20\" x2=\"384.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"416.9\" y1=\"20\" x2=\"416.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"449.1\" y1=\"20\" x2=\"449.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"481.3\" y1=\"20\" x2=\"481.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"513.6\" y1=\"20\" x2=\"513.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"545.8\" y1=\"20\" x2=\"545.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"156.0\" x2=\"570\" y2=\"156.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"147.0\" x2=\"570\" y2=\"147.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"138.0\" x2=\"570\" y2=\"138.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"129.0\" x2=\"570\" y2=\"129.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"120.0\" x2=\"570\" y2=\"120.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"111.0\" x2=\"570\" y2=\"111.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"102.0\" x2=\"570\" y2=\"102.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"93.0\" x2=\"570\" y2=\"93.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"84.0\" x2=\"570\" y2=\"84.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"75.0\" x2=\"570\" y2=\"75.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"66.0\" x2=\"570\" y2=\"66.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"57.0\" x2=\"570\" y2=\"57.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"48.0\" x2=\"570\" y2=\"48.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"39.0\" x2=\"570\" y2=\"39.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"30.0\" x2=\"570\" y2=\"30.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"21.0\" x2=\"570\" y2=\"21.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"174.0\" x2=\"570\" y2=\"174.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"183.0\" x2=\"570\" y2=\"183.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"192.0\" x2=\"570\" y2=\"192.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"201.0\" x2=\"570\" y2=\"201.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"210.0\" x2=\"570\" y2=\"210.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"219.0\" x2=\"570\" y2=\"219.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"228.0\" x2=\"570\" y2=\"228.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cpolyline fill=\"none\" stroke=\"#334155\" stroke-width=\"3\" stroke-linejoin=\"round\" points=\"30.0,165.0 31.6,165.0 33.2,165.0 34.8,165.0 36.4,165.0 38.1,165.0 39.7,165.0 41.3,165.0 42.9,165.0 44.5,165.0 46.1,165.0 47.7,165.0 49.3,165.0 51.0,165.0 52.6,165.0 54.2,165.0 55.8,165.0 57.4,165.0 59.0,165.0 60.6,165.0 62.2,165.0 63.9,165.0 65.5,165.0 67.1,165.0 68.7,165.0 70.3,165.0 71.9,164.1 73.5,163.1 75.1,162.2 76.7,161.3 78.4,160.4 80.0,159.5 81.6,158.7 83.2,157.8 84.8,157.1 86.4,156.3 88.0,155.6 89.6,155.0 91.3,154.4 92.9,153.8 94.5,153.3 96.1,152.9 97.7,152.5 99.3,152.2 100.9,151.9 102.5,151.7 104.1,151.6 105.8,151.5 107.4,151.5 109.0,151.6 110.6,151.7 112.2,151.9 113.8,152.2 115.4,152.5 117.0,152.9 118.7,153.3 120.3,153.8 121.9,154.4 123.5,155.0 125.1,155.6 126.7,156.3 128.3,157.1 129.9,157.8 131.6,158.7 133.2,159.5 134.8,160.4 136.4,161.3 138.0,162.2 139.6,163.1 141.2,164.1 142.8,165.0 144.4,165.0 146.1,165.0 147.7,165.0 149.3,165.0 150.9,165.0 152.5,165.0 154.1,165.0 155.7,165.0 157.3,165.0 159.0,165.0 160.6,165.0 162.2,165.0 163.8,165.0 165.4,165.0 167.0,165.0 168.6,165.0 170.2,165.0 171.9,165.0 173.5,165.0 175.1,165.0 176.7,165.0 178.3,165.0 179.9,165.0 181.5,165.0 183.1,165.0 184.7,165.0 186.4,165.0 188.0,165.0 189.6,165.0 191.2,165.0 192.8,165.0 194.4,165.0 196.0,165.0 197.6,165.0 199.3,165.0 200.9,165.9 202.5,166.8 204.1,167.7 205.7,168.6 207.3,169.5 208.9,170.4 210.5,171.3 212.1,172.2 213.8,173.1 215.4,174.0 217.0,166.2 218.6,158.4 220.2,150.6 221.8,142.8 223.4,135.0 225.0,127.2 226.7,119.4 228.3,111.6 229.9,103.8 231.5,96.0 233.1,88.2 234.7,80.4 236.3,72.6 237.9,64.8 239.6,57.0 241.2,65.7 242.8,74.4 244.4,83.1 246.0,91.8 247.6,100.5 249.2,109.2 250.8,117.9 252.4,126.6 254.1,135.3 255.7,144.0 257.3,152.7 258.9,161.4 260.5,170.1 262.1,178.8 263.7,187.5 265.3,183.0 267.0,178.5 268.6,174.0 270.2,169.5 271.8,165.0 273.4,165.0 275.0,165.0 276.6,165.0 278.2,165.0 279.9,165.0 281.5,165.0 283.1,165.0 284.7,165.0 286.3,165.0 287.9,165.0 289.5,165.0 291.1,165.0 292.7,165.0 294.4,165.0 296.0,165.0 297.6,165.0 299.2,165.0 300.8,165.0 302.4,165.0 304.0,165.0 305.6,165.0 307.3,165.0 308.9,165.0 310.5,165.0 312.1,165.0 313.7,165.0 315.3,165.0 316.9,165.0 318.5,165.0 320.1,165.0 321.8,165.0 323.4,165.0 325.0,165.0 326.6,165.0 328.2,165.0 329.8,165.0 331.4,165.0 333.0,165.0 334.7,165.0 336.3,165.0 337.9,165.0 339.5,165.0 341.1,165.0 342.7,165.0 344.3,165.0 345.9,165.0 347.6,165.0 349.2,165.0 350.8,165.0 352.4,165.0 354.0,165.0 355.6,165.0 357.2,165.0 358.8,164.9 360.4,164.0 362.1,163.2 363.7,162.3 365.3,161.5 366.9,160.6 368.5,159.8 370.1,159.0 371.7,158.1 373.3,157.3 375.0,156.5 376.6,155.7 378.2,154.9 379.8,154.1 381.4,153.3 383.0,152.6 384.6,151.8 386.2,151.1 387.9,150.3 389.5,149.6 391.1,148.9 392.7,148.3 394.3,147.6 395.9,147.0 397.5,146.3 399.1,145.7 400.7,145.1 402.4,144.6 404.0,144.0 405.6,143.5 407.2,143.0 408.8,142.5 410.4,142.0 412.0,141.6 413.6,141.2 415.3,140.8 416.9,140.4 418.5,140.1 420.1,139.8 421.7,139.5 423.3,139.2 424.9,139.0 426.5,138.8 428.1,138.6 429.8,138.4 431.4,138.3 433.0,138.2 434.6,138.1 436.2,138.0 437.8,138.0 439.4,138.0 441.0,138.1 442.7,138.2 444.3,138.4 445.9,138.7 447.5,139.1 449.1,139.5 450.7,140.0 452.3,140.6 453.9,141.2 455.6,141.9 457.2,142.6 458.8,143.5 460.4,144.3 462.0,145.2 463.6,146.2 465.2,147.2 466.8,148.3 468.4,149.4 470.1,150.6 471.7,151.8 473.3,153.0 474.9,154.3 476.5,155.6 478.1,156.9 479.7,158.3 481.3,159.6 483.0,161.0 484.6,162.4 486.2,163.8 487.8,165.0 489.4,165.0 491.0,165.0 492.6,165.0 494.2,165.0 495.9,165.0 497.5,165.0 499.1,165.0 500.7,165.0 502.3,165.0 503.9,165.0 505.5,165.0 507.1,165.0 508.7,165.0 510.4,165.0 512.0,165.0 513.6,165.0 515.2,165.0 516.8,165.0 518.4,165.0 520.0,165.0 521.6,165.0 523.3,165.0 524.9,165.0 526.5,165.0 528.1,165.0 529.7,165.0 531.3,165.0 532.9,165.0 534.5,165.0 536.1,165.0 537.8,165.0 539.4,165.0 541.0,165.0 542.6,165.0 544.2,165.0 545.8,165.0 547.4,165.0 549.0,165.0 550.7,165.0 552.3,165.0 553.9,165.0 555.5,165.0 557.1,165.0 558.7,165.0 560.3,165.0 561.9,165.0 563.6,165.0 565.2,165.0 566.8,165.0 568.4,165.0\"/>\u003cpolyline fill=\"none\" stroke=\"#dc2626\" stroke-width=\"6\" stroke-linejoin=\"round\" points=\"199.3,165.0 200.9,165.9 202.5,166.8 204.1,167.7 205.7,168.6 207.3,169.5 208.9,170.4 210.5,171.3 212.1,172.2 213.8,173.1 215.4,174.0 217.0,166.2 218.6,158.4 220.2,150.6 221.8,142.8 223.4,135.0 225.0,127.2 226.7,119.4 228.3,111.6 229.9,103.8 231.5,96.0 233.1,88.2 234.7,80.4 236.3,72.6 237.9,64.8 239.6,57.0 241.2,65.7 242.8,74.4 244.4,83.1 246.0,91.8 247.6,100.5 249.2,109.2 250.8,117.9 252.4,126.6 254.1,135.3 255.7,144.0 257.3,152.7 258.9,161.4 260.5,170.1 262.1,178.8 263.7,187.5 265.3,183.0 267.0,178.5 268.6,174.0 270.2,169.5\"/>\u003ctext x=\"207.4\" y=\"196.0\" font-size=\"20\" fill=\"#dc2626\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">Q\u003c/text>\u003ctext x=\"239.6\" y=\"49.0\" font-size=\"22\" fill=\"#dc2626\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">R\u003c/text>\u003ctext x=\"273.7\" y=\"209.5\" font-size=\"20\" fill=\"#dc2626\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">S\u003c/text>\u003cpath d=\"M199.3 205V219M199.3 212H271.8M271.8 205V219\" stroke=\"#dc2626\" stroke-width=\"3\" fill=\"none\"/>\u003ctext x=\"235.5\" y=\"238.0\" font-size=\"18\" fill=\"#dc2626\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">\u003c/text>\u003ctext x=\"560.0\" y=\"55.0\" font-size=\"18\" fill=\"#dc2626\" text-anchor=\"end\" font-family=\"sans-serif\" font-weight=\"bold\">QRS &lt; 0.12 秒：心室去極化\u003c/text>\u003ctext x=\"560.0\" y=\"82.0\" font-size=\"16\" fill=\"#dc2626\" text-anchor=\"end\" font-family=\"sans-serif\">（心房再極化被遮蔽）\u003c/text>\u003c/svg>\n","ecg-node-st-t.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"ST 段、T 波與 QT 間隔\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cline x1=\"30.0\" y1=\"20\" x2=\"30.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"62.2\" y1=\"20\" x2=\"62.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"94.5\" y1=\"20\" x2=\"94.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"126.7\" y1=\"20\" x2=\"126.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"159.0\" y1=\"20\" x2=\"159.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"191.2\" y1=\"20\" x2=\"191.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"223.4\" y1=\"20\" x2=\"223.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"255.7\" y1=\"20\" x2=\"255.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"287.9\" y1=\"20\" x2=\"287.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"320.1\" y1=\"20\" x2=\"320.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"352.4\" y1=\"20\" x2=\"352.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"384.6\" y1=\"20\" x2=\"384.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"416.9\" y1=\"20\" x2=\"416.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"449.1\" y1=\"20\" x2=\"449.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"481.3\" y1=\"20\" x2=\"481.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"513.6\" y1=\"20\" x2=\"513.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"545.8\" y1=\"20\" x2=\"545.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"156.0\" x2=\"570\" y2=\"156.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"147.0\" x2=\"570\" y2=\"147.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"138.0\" x2=\"570\" y2=\"138.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"129.0\" x2=\"570\" y2=\"129.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"120.0\" x2=\"570\" y2=\"120.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"111.0\" x2=\"570\" y2=\"111.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"102.0\" x2=\"570\" y2=\"102.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"93.0\" x2=\"570\" y2=\"93.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"84.0\" x2=\"570\" y2=\"84.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"75.0\" x2=\"570\" y2=\"75.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"66.0\" x2=\"570\" y2=\"66.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"57.0\" x2=\"570\" y2=\"57.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"48.0\" x2=\"570\" y2=\"48.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"39.0\" x2=\"570\" y2=\"39.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"30.0\" x2=\"570\" y2=\"30.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"21.0\" x2=\"570\" y2=\"21.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"174.0\" x2=\"570\" y2=\"174.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"183.0\" x2=\"570\" y2=\"183.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"192.0\" x2=\"570\" y2=\"192.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"201.0\" x2=\"570\" y2=\"201.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"210.0\" x2=\"570\" y2=\"210.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"219.0\" x2=\"570\" y2=\"219.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"228.0\" x2=\"570\" y2=\"228.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cpolyline fill=\"none\" stroke=\"#334155\" stroke-width=\"3\" stroke-linejoin=\"round\" points=\"30.0,165.0 31.6,165.0 33.2,165.0 34.8,165.0 36.4,165.0 38.1,165.0 39.7,165.0 41.3,165.0 42.9,165.0 44.5,165.0 46.1,165.0 47.7,165.0 49.3,165.0 51.0,165.0 52.6,165.0 54.2,165.0 55.8,165.0 57.4,165.0 59.0,165.0 60.6,165.0 62.2,165.0 63.9,165.0 65.5,165.0 67.1,165.0 68.7,165.0 70.3,165.0 71.9,164.1 73.5,163.1 75.1,162.2 76.7,161.3 78.4,160.4 80.0,159.5 81.6,158.7 83.2,157.8 84.8,157.1 86.4,156.3 88.0,155.6 89.6,155.0 91.3,154.4 92.9,153.8 94.5,153.3 96.1,152.9 97.7,152.5 99.3,152.2 100.9,151.9 102.5,151.7 104.1,151.6 105.8,151.5 107.4,151.5 109.0,151.6 110.6,151.7 112.2,151.9 113.8,152.2 115.4,152.5 117.0,152.9 118.7,153.3 120.3,153.8 121.9,154.4 123.5,155.0 125.1,155.6 126.7,156.3 128.3,157.1 129.9,157.8 131.6,158.7 133.2,159.5 134.8,160.4 136.4,161.3 138.0,162.2 139.6,163.1 141.2,164.1 142.8,165.0 144.4,165.0 146.1,165.0 147.7,165.0 149.3,165.0 150.9,165.0 152.5,165.0 154.1,165.0 155.7,165.0 157.3,165.0 159.0,165.0 160.6,165.0 162.2,165.0 163.8,165.0 165.4,165.0 167.0,165.0 168.6,165.0 170.2,165.0 171.9,165.0 173.5,165.0 175.1,165.0 176.7,165.0 178.3,165.0 179.9,165.0 181.5,165.0 183.1,165.0 184.7,165.0 186.4,165.0 188.0,165.0 189.6,165.0 191.2,165.0 192.8,165.0 194.4,165.0 196.0,165.0 197.6,165.0 199.3,165.0 200.9,165.9 202.5,166.8 204.1,167.7 205.7,168.6 207.3,169.5 208.9,170.4 210.5,171.3 212.1,172.2 213.8,173.1 215.4,174.0 217.0,166.2 218.6,158.4 220.2,150.6 221.8,142.8 223.4,135.0 225.0,127.2 226.7,119.4 228.3,111.6 229.9,103.8 231.5,96.0 233.1,88.2 234.7,80.4 236.3,72.6 237.9,64.8 239.6,57.0 241.2,65.7 242.8,74.4 244.4,83.1 246.0,91.8 247.6,100.5 249.2,109.2 250.8,117.9 252.4,126.6 254.1,135.3 255.7,144.0 257.3,152.7 258.9,161.4 260.5,170.1 262.1,178.8 263.7,187.5 265.3,183.0 267.0,178.5 268.6,174.0 270.2,169.5 271.8,165.0 273.4,165.0 275.0,165.0 276.6,165.0 278.2,165.0 279.9,165.0 281.5,165.0 283.1,165.0 284.7,165.0 286.3,165.0 287.9,165.0 289.5,165.0 291.1,165.0 292.7,165.0 294.4,165.0 296.0,165.0 297.6,165.0 299.2,165.0 300.8,165.0 302.4,165.0 304.0,165.0 305.6,165.0 307.3,165.0 308.9,165.0 310.5,165.0 312.1,165.0 313.7,165.0 315.3,165.0 316.9,165.0 318.5,165.0 320.1,165.0 321.8,165.0 323.4,165.0 325.0,165.0 326.6,165.0 328.2,165.0 329.8,165.0 331.4,165.0 333.0,165.0 334.7,165.0 336.3,165.0 337.9,165.0 339.5,165.0 341.1,165.0 342.7,165.0 344.3,165.0 345.9,165.0 347.6,165.0 349.2,165.0 350.8,165.0 352.4,165.0 354.0,165.0 355.6,165.0 357.2,165.0 358.8,164.9 360.4,164.0 362.1,163.2 363.7,162.3 365.3,161.5 366.9,160.6 368.5,159.8 370.1,159.0 371.7,158.1 373.3,157.3 375.0,156.5 376.6,155.7 378.2,154.9 379.8,154.1 381.4,153.3 383.0,152.6 384.6,151.8 386.2,151.1 387.9,150.3 389.5,149.6 391.1,148.9 392.7,148.3 394.3,147.6 395.9,147.0 397.5,146.3 399.1,145.7 400.7,145.1 402.4,144.6 404.0,144.0 405.6,143.5 407.2,143.0 408.8,142.5 410.4,142.0 412.0,141.6 413.6,141.2 415.3,140.8 416.9,140.4 418.5,140.1 420.1,139.8 421.7,139.5 423.3,139.2 424.9,139.0 426.5,138.8 428.1,138.6 429.8,138.4 431.4,138.3 433.0,138.2 434.6,138.1 436.2,138.0 437.8,138.0 439.4,138.0 441.0,138.1 442.7,138.2 444.3,138.4 445.9,138.7 447.5,139.1 449.1,139.5 450.7,140.0 452.3,140.6 453.9,141.2 455.6,141.9 457.2,142.6 458.8,143.5 460.4,144.3 462.0,145.2 463.6,146.2 465.2,147.2 466.8,148.3 468.4,149.4 470.1,150.6 471.7,151.8 473.3,153.0 474.9,154.3 476.5,155.6 478.1,156.9 479.7,158.3 481.3,159.6 483.0,161.0 484.6,162.4 486.2,163.8 487.8,165.0 489.4,165.0 491.0,165.0 492.6,165.0 494.2,165.0 495.9,165.0 497.5,165.0 499.1,165.0 500.7,165.0 502.3,165.0 503.9,165.0 505.5,165.0 507.1,165.0 508.7,165.0 510.4,165.0 512.0,165.0 513.6,165.0 515.2,165.0 516.8,165.0 518.4,165.0 520.0,165.0 521.6,165.0 523.3,165.0 524.9,165.0 526.5,165.0 528.1,165.0 529.7,165.0 531.3,165.0 532.9,165.0 534.5,165.0 536.1,165.0 537.8,165.0 539.4,165.0 541.0,165.0 542.6,165.0 544.2,165.0 545.8,165.0 547.4,165.0 549.0,165.0 550.7,165.0 552.3,165.0 553.9,165.0 555.5,165.0 557.1,165.0 558.7,165.0 560.3,165.0 561.9,165.0 563.6,165.0 565.2,165.0 566.8,165.0 568.4,165.0\"/>\u003cpolyline fill=\"none\" stroke=\"#db2777\" stroke-width=\"7\" stroke-linejoin=\"round\" points=\"271.8,165.0 273.4,165.0 275.0,165.0 276.6,165.0 278.2,165.0 279.9,165.0 281.5,165.0 283.1,165.0 284.7,165.0 286.3,165.0 287.9,165.0 289.5,165.0 291.1,165.0 292.7,165.0 294.4,165.0 296.0,165.0 297.6,165.0 299.2,165.0 300.8,165.0 302.4,165.0 304.0,165.0 305.6,165.0 307.3,165.0 308.9,165.0 310.5,165.0 312.1,165.0 313.7,165.0 315.3,165.0 316.9,165.0 318.5,165.0 320.1,165.0 321.8,165.0 323.4,165.0 325.0,165.0 326.6,165.0 328.2,165.0 329.8,165.0 331.4,165.0 333.0,165.0 334.7,165.0 336.3,165.0 337.9,165.0 339.5,165.0 341.1,165.0 342.7,165.0 344.3,165.0 345.9,165.0 347.6,165.0 349.2,165.0 350.8,165.0 352.4,165.0 354.0,165.0 355.6,165.0 357.2,165.0\"/>\u003cpolyline fill=\"none\" stroke=\"#16a34a\" stroke-width=\"6\" stroke-linejoin=\"round\" points=\"358.7,165.0 360.3,164.1 361.9,163.3 363.5,162.4 365.1,161.6 366.7,160.7 368.3,159.9 369.9,159.1 371.5,158.2 373.2,157.4 374.8,156.6 376.4,155.8 378.0,155.0 379.6,154.2 381.2,153.4 382.8,152.7 384.4,151.9 386.1,151.2 387.7,150.4 389.3,149.7 390.9,149.0 392.5,148.3 394.1,147.7 395.7,147.0 397.3,146.4 398.9,145.8 400.6,145.2 402.2,144.6 403.8,144.1 405.4,143.5 407.0,143.0 408.6,142.6 410.2,142.1 411.8,141.6 413.5,141.2 415.1,140.8 416.7,140.5 418.3,140.1 419.9,139.8 421.5,139.5 423.1,139.2 424.7,139.0 426.4,138.8 428.0,138.6 429.6,138.4 431.2,138.3 432.8,138.2 434.4,138.1 436.0,138.0 437.6,138.0 439.2,138.0 440.9,138.1 442.5,138.2 444.1,138.4 445.7,138.7 447.3,139.0 448.9,139.5 450.5,139.9 452.1,140.5 453.8,141.1 455.4,141.8 457.0,142.6 458.6,143.4 460.2,144.2 461.8,145.1 463.4,146.1 465.0,147.1 466.7,148.2 468.3,149.3 469.9,150.5 471.5,151.7 473.1,152.9 474.7,154.2 476.3,155.4 477.9,156.8 479.5,158.1 481.2,159.5 482.8,160.8 484.4,162.2 486.0,163.6\"/>\u003ctext x=\"315.2\" y=\"189.0\" font-size=\"16\" fill=\"#db2777\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">ST 段\u003c/text>\u003ctext x=\"423.1\" y=\"126.0\" font-size=\"22\" fill=\"#16a34a\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">T\u003c/text>\u003cpath d=\"M199.3 198V212M199.3 205H487.6M487.6 198V212\" stroke=\"#0f766e\" stroke-width=\"3\" fill=\"none\"/>\u003ctext x=\"343.4\" y=\"231.0\" font-size=\"18\" fill=\"#0f766e\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">QT 間隔\u003c/text>\u003ctext x=\"40.0\" y=\"55.0\" font-size=\"18\" fill=\"#16a34a\" text-anchor=\"start\" font-family=\"sans-serif\" font-weight=\"bold\">T 波＝心室再極化\u003c/text>\u003c/svg>\n","ecg-node-rr.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"R-R 間期與心率換算\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cline x1=\"30.0\" y1=\"20\" x2=\"30.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"46.6\" y1=\"20\" x2=\"46.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"63.2\" y1=\"20\" x2=\"63.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"79.8\" y1=\"20\" x2=\"79.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"96.5\" y1=\"20\" x2=\"96.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"113.1\" y1=\"20\" x2=\"113.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"129.7\" y1=\"20\" x2=\"129.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"146.3\" y1=\"20\" x2=\"146.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"162.9\" y1=\"20\" x2=\"162.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"179.5\" y1=\"20\" x2=\"179.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"196.2\" y1=\"20\" x2=\"196.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"212.8\" y1=\"20\" x2=\"212.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"229.4\" y1=\"20\" x2=\"229.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"246.0\" y1=\"20\" x2=\"246.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"262.6\" y1=\"20\" x2=\"262.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"279.2\" y1=\"20\" x2=\"279.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"295.8\" y1=\"20\" x2=\"295.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"312.5\" y1=\"20\" x2=\"312.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"329.1\" y1=\"20\" x2=\"329.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"345.7\" y1=\"20\" x2=\"345.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"362.3\" y1=\"20\" x2=\"362.3\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"378.9\" y1=\"20\" x2=\"378.9\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"395.5\" y1=\"20\" x2=\"395.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"412.2\" y1=\"20\" x2=\"412.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"428.8\" y1=\"20\" x2=\"428.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"445.4\" y1=\"20\" x2=\"445.4\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"462.0\" y1=\"20\" x2=\"462.0\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"478.6\" y1=\"20\" x2=\"478.6\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"495.2\" y1=\"20\" x2=\"495.2\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"511.8\" y1=\"20\" x2=\"511.8\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"528.5\" y1=\"20\" x2=\"528.5\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"545.1\" y1=\"20\" x2=\"545.1\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"561.7\" y1=\"20\" x2=\"561.7\" y2=\"235\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"156.0\" x2=\"570\" y2=\"156.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"147.0\" x2=\"570\" y2=\"147.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"138.0\" x2=\"570\" y2=\"138.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"129.0\" x2=\"570\" y2=\"129.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"120.0\" x2=\"570\" y2=\"120.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"111.0\" x2=\"570\" y2=\"111.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"102.0\" x2=\"570\" y2=\"102.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"93.0\" x2=\"570\" y2=\"93.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"84.0\" x2=\"570\" y2=\"84.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"75.0\" x2=\"570\" y2=\"75.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"66.0\" x2=\"570\" y2=\"66.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"57.0\" x2=\"570\" y2=\"57.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"48.0\" x2=\"570\" y2=\"48.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"39.0\" x2=\"570\" y2=\"39.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"30.0\" x2=\"570\" y2=\"30.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"21.0\" x2=\"570\" y2=\"21.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"165.0\" x2=\"570\" y2=\"165.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"174.0\" x2=\"570\" y2=\"174.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"183.0\" x2=\"570\" y2=\"183.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"192.0\" x2=\"570\" y2=\"192.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"201.0\" x2=\"570\" y2=\"201.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"210.0\" x2=\"570\" y2=\"210.0\" stroke=\"#f3b8b8\" stroke-width=\"1.2\"/>\u003cline x1=\"30\" y1=\"219.0\" x2=\"570\" y2=\"219.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cline x1=\"30\" y1=\"228.0\" x2=\"570\" y2=\"228.0\" stroke=\"#f3b8b8\" stroke-width=\"0.5\"/>\u003cpolyline fill=\"none\" stroke=\"#334155\" stroke-width=\"3\" stroke-linejoin=\"round\" points=\"30.0,165.0 30.8,165.0 31.7,165.0 32.5,165.0 33.3,165.0 34.2,165.0 35.0,165.0 35.8,165.0 36.6,165.0 37.5,165.0 38.3,165.0 39.1,165.0 40.0,165.0 40.8,165.0 41.6,165.0 42.5,165.0 43.3,165.0 44.1,165.0 45.0,165.0 45.8,165.0 46.6,165.0 47.4,165.0 48.3,165.0 49.1,165.0 49.9,165.0 50.8,165.0 51.6,164.1 52.4,163.1 53.3,162.2 54.1,161.3 54.9,160.4 55.8,159.5 56.6,158.7 57.4,157.8 58.2,157.1 59.1,156.3 59.9,155.6 60.7,155.0 61.6,154.4 62.4,153.8 63.2,153.3 64.1,152.9 64.9,152.5 65.7,152.2 66.6,151.9 67.4,151.7 68.2,151.6 69.0,151.5 69.9,151.5 70.7,151.6 71.5,151.7 72.4,151.9 73.2,152.2 74.0,152.5 74.9,152.9 75.7,153.3 76.5,153.8 77.4,154.4 78.2,155.0 79.0,155.6 79.8,156.3 80.7,157.1 81.5,157.8 82.3,158.7 83.2,159.5 84.0,160.4 84.8,161.3 85.7,162.2 86.5,163.1 87.3,164.1 88.2,165.0 89.0,165.0 89.8,165.0 90.6,165.0 91.5,165.0 92.3,165.0 93.1,165.0 94.0,165.0 94.8,165.0 95.6,165.0 96.5,165.0 97.3,165.0 98.1,165.0 99.0,165.0 99.8,165.0 100.6,165.0 101.4,165.0 102.3,165.0 103.1,165.0 103.9,165.0 104.8,165.0 105.6,165.0 106.4,165.0 107.3,165.0 108.1,165.0 108.9,165.0 109.8,165.0 110.6,165.0 111.4,165.0 112.2,165.0 113.1,165.0 113.9,165.0 114.7,165.0 115.6,165.0 116.4,165.0 117.2,165.0 118.1,165.9 118.9,166.8 119.7,167.7 120.6,168.6 121.4,169.5 122.2,170.4 123.0,171.3 123.9,172.2 124.7,173.1 125.5,174.0 126.4,166.2 127.2,158.4 128.0,150.6 128.9,142.8 129.7,135.0 130.5,127.2 131.4,119.4 132.2,111.6 133.0,103.8 133.8,96.0 134.7,88.2 135.5,80.4 136.3,72.6 137.2,64.8 138.0,57.0 138.8,65.7 139.7,74.4 140.5,83.1 141.3,91.8 142.2,100.5 143.0,109.2 143.8,117.9 144.6,126.6 145.5,135.3 146.3,144.0 147.1,152.7 148.0,161.4 148.8,170.1 149.6,178.8 150.5,187.5 151.3,183.0 152.1,178.5 153.0,174.0 153.8,169.5 154.6,165.0 155.4,165.0 156.3,165.0 157.1,165.0 157.9,165.0 158.8,165.0 159.6,165.0 160.4,165.0 161.3,165.0 162.1,165.0 162.9,165.0 163.8,165.0 164.6,165.0 165.4,165.0 166.2,165.0 167.1,165.0 167.9,165.0 168.7,165.0 169.6,165.0 170.4,165.0 171.2,165.0 172.1,165.0 172.9,165.0 173.7,165.0 174.6,165.0 175.4,165.0 176.2,165.0 177.0,165.0 177.9,165.0 178.7,165.0 179.5,165.0 180.4,165.0 181.2,165.0 182.0,165.0 182.9,165.0 183.7,165.0 184.5,165.0 185.4,165.0 186.2,165.0 187.0,165.0 187.8,165.0 188.7,165.0 189.5,165.0 190.3,165.0 191.2,165.0 192.0,165.0 192.8,165.0 193.7,165.0 194.5,165.0 195.3,165.0 196.2,165.0 197.0,165.0 197.8,165.0 198.6,165.0 199.5,164.9 200.3,164.0 201.1,163.2 202.0,162.3 202.8,161.5 203.6,160.6 204.5,159.8 205.3,159.0 206.1,158.1 207.0,157.3 207.8,156.5 208.6,155.7 209.4,154.9 210.3,154.1 211.1,153.3 211.9,152.6 212.8,151.8 213.6,151.1 214.4,150.3 215.3,149.6 216.1,148.9 216.9,148.3 217.8,147.6 218.6,147.0 219.4,146.3 220.2,145.7 221.1,145.1 221.9,144.6 222.7,144.0 223.6,143.5 224.4,143.0 225.2,142.5 226.1,142.0 226.9,141.6 227.7,141.2 228.6,140.8 229.4,140.4 230.2,140.1 231.0,139.8 231.9,139.5 232.7,139.2 233.5,139.0 234.4,138.8 235.2,138.6 236.0,138.4 236.9,138.3 237.7,138.2 238.5,138.1 239.4,138.0 240.2,138.0 241.0,138.0 241.8,138.1 242.7,138.2 243.5,138.4 244.3,138.7 245.2,139.1 246.0,139.5 246.8,140.0 247.7,140.6 248.5,141.2 249.3,141.9 250.2,142.6 251.0,143.5 251.8,144.3 252.6,145.2 253.5,146.2 254.3,147.2 255.1,148.3 256.0,149.4 256.8,150.6 257.6,151.8 258.5,153.0 259.3,154.3 260.1,155.6 261.0,156.9 261.8,158.3 262.6,159.6 263.4,161.0 264.3,162.4 265.1,163.8 265.9,165.0 266.8,165.0 267.6,165.0 268.4,165.0 269.3,165.0 270.1,165.0 270.9,165.0 271.8,165.0 272.6,165.0 273.4,165.0 274.2,165.0 275.1,165.0 275.9,165.0 276.7,165.0 277.6,165.0 278.4,165.0 279.2,165.0 280.1,165.0 280.9,165.0 281.7,165.0 282.6,165.0 283.4,165.0 284.2,165.0 285.0,165.0 285.9,165.0 286.7,165.0 287.5,165.0 288.4,165.0 289.2,165.0 290.0,165.0 290.9,165.0 291.7,165.0 292.5,165.0 293.4,165.0 294.2,165.0 295.0,165.0 295.8,165.0 296.7,165.0 297.5,165.0 298.3,165.0 299.2,165.0 300.0,165.0 300.8,165.0 301.7,165.0 302.5,165.0 303.3,165.0 304.2,165.0 305.0,165.0 305.8,165.0 306.6,165.0 307.5,165.0 308.3,165.0 309.1,165.0 310.0,165.0 310.8,165.0 311.6,165.0 312.5,165.0 313.3,165.0 314.1,165.0 315.0,165.0 315.8,165.0 316.6,165.0 317.4,165.0 318.3,165.0 319.1,165.0 319.9,165.0 320.8,165.0 321.6,165.0 322.4,165.0 323.3,165.0 324.1,165.0 324.9,165.0 325.8,165.0 326.6,165.0 327.4,165.0 328.2,165.0 329.1,165.0 329.9,165.0 330.7,165.0 331.6,165.0 332.4,165.0 333.2,165.0 334.1,165.0 334.9,165.0 335.7,165.0 336.6,165.0 337.4,165.0 338.2,165.0 339.0,165.0 339.9,165.0 340.7,165.0 341.5,165.0 342.4,165.0 343.2,165.0 344.0,165.0 344.9,165.0 345.7,165.0 346.5,165.0 347.4,165.0 348.2,165.0 349.0,165.0 349.8,165.0 350.7,165.0 351.5,165.0 352.3,165.0 353.2,165.0 354.0,165.0 354.8,165.0 355.7,165.0 356.5,165.0 357.3,165.0 358.2,165.0 359.0,165.0 359.8,165.0 360.6,165.0 361.5,165.0 362.3,165.0 363.1,165.0 364.0,165.0 364.8,165.0 365.6,165.0 366.5,165.0 367.3,165.0 368.1,165.0 369.0,165.0 369.8,165.0 370.6,165.0 371.4,165.0 372.3,165.0 373.1,165.0 373.9,165.0 374.8,165.0 375.6,165.0 376.4,165.0 377.3,165.0 378.1,165.0 378.9,165.0 379.8,165.0 380.6,165.0 381.4,165.0 382.2,165.0 383.1,165.0 383.9,164.1 384.7,163.1 385.6,162.2 386.4,161.3 387.2,160.4 388.1,159.5 388.9,158.7 389.7,157.8 390.6,157.1 391.4,156.3 392.2,155.6 393.0,155.0 393.9,154.4 394.7,153.8 395.5,153.3 396.4,152.9 397.2,152.5 398.0,152.2 398.9,151.9 399.7,151.7 400.5,151.6 401.4,151.5 402.2,151.5 403.0,151.6 403.8,151.7 404.7,151.9 405.5,152.2 406.3,152.5 407.2,152.9 408.0,153.3 408.8,153.8 409.7,154.4 410.5,155.0 411.3,155.6 412.2,156.3 413.0,157.1 413.8,157.8 414.6,158.7 415.5,159.5 416.3,160.4 417.1,161.3 418.0,162.2 418.8,163.1 419.6,164.1 420.5,165.0 421.3,165.0 422.1,165.0 423.0,165.0 423.8,165.0 424.6,165.0 425.4,165.0 426.3,165.0 427.1,165.0 427.9,165.0 428.8,165.0 429.6,165.0 430.4,165.0 431.3,165.0 432.1,165.0 432.9,165.0 433.8,165.0 434.6,165.0 435.4,165.0 436.2,165.0 437.1,165.0 437.9,165.0 438.7,165.0 439.6,165.0 440.4,165.0 441.2,165.0 442.1,165.0 442.9,165.0 443.7,165.0 444.6,165.0 445.4,165.0 446.2,165.0 447.0,165.0 447.9,165.0 448.7,165.0 449.5,165.0 450.4,165.9 451.2,166.8 452.0,167.7 452.9,168.6 453.7,169.5 454.5,170.4 455.4,171.3 456.2,172.2 457.0,173.1 457.8,174.0 458.7,166.2 459.5,158.4 460.3,150.6 461.2,142.8 462.0,135.0 462.8,127.2 463.7,119.4 464.5,111.6 465.3,103.8 466.2,96.0 467.0,88.2 467.8,80.4 468.6,72.6 469.5,64.8 470.3,57.0 471.1,65.7 472.0,74.4 472.8,83.1 473.6,91.8 474.5,100.5 475.3,109.2 476.1,117.9 477.0,126.6 477.8,135.3 478.6,144.0 479.4,152.7 480.3,161.4 481.1,170.1 481.9,178.8 482.8,187.5 483.6,183.0 484.4,178.5 485.3,174.0 486.1,169.5 486.9,165.0 487.8,165.0 488.6,165.0 489.4,165.0 490.2,165.0 491.1,165.0 491.9,165.0 492.7,165.0 493.6,165.0 494.4,165.0 495.2,165.0 496.1,165.0 496.9,165.0 497.7,165.0 498.6,165.0 499.4,165.0 500.2,165.0 501.0,165.0 501.9,165.0 502.7,165.0 503.5,165.0 504.4,165.0 505.2,165.0 506.0,165.0 506.9,165.0 507.7,165.0 508.5,165.0 509.4,165.0 510.2,165.0 511.0,165.0 511.8,165.0 512.7,165.0 513.5,165.0 514.3,165.0 515.2,165.0 516.0,165.0 516.8,165.0 517.7,165.0 518.5,165.0 519.3,165.0 520.2,165.0 521.0,165.0 521.8,165.0 522.6,165.0 523.5,165.0 524.3,165.0 525.1,165.0 526.0,165.0 526.8,165.0 527.6,165.0 528.5,165.0 529.3,165.0 530.1,165.0 531.0,165.0 531.8,164.9 532.6,164.0 533.4,163.2 534.3,162.3 535.1,161.5 535.9,160.6 536.8,159.8 537.6,159.0 538.4,158.1 539.3,157.3 540.1,156.5 540.9,155.7 541.8,154.9 542.6,154.1 543.4,153.3 544.2,152.6 545.1,151.8 545.9,151.1 546.7,150.3 547.6,149.6 548.4,148.9 549.2,148.3 550.1,147.6 550.9,147.0 551.7,146.3 552.6,145.7 553.4,145.1 554.2,144.6 555.0,144.0 555.9,143.5 556.7,143.0 557.5,142.5 558.4,142.0 559.2,141.6 560.0,141.2 560.9,140.8 561.7,140.4 562.5,140.1 563.4,139.8 564.2,139.5 565.0,139.2 565.8,139.0 566.7,138.8 567.5,138.6 568.3,138.4 569.2,138.3\"/>\u003cpath d=\"M138.0 31V45M138.0 38H470.3M470.3 31V45\" stroke=\"#7c3aed\" stroke-width=\"3\" fill=\"none\"/>\u003ctext x=\"304.2\" y=\"64.0\" font-size=\"18\" fill=\"#7c3aed\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">\u003c/text>\u003ctext x=\"304.2\" y=\"28.0\" font-size=\"18\" fill=\"#7c3aed\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">R-R ＝ 0.80 秒\u003c/text>\u003ctext x=\"560.0\" y=\"240.0\" font-size=\"17\" fill=\"#7c3aed\" text-anchor=\"end\" font-family=\"sans-serif\" font-weight=\"bold\">心率 ＝ 60 ÷ 0.80 ＝ 75 次/分\u003c/text>\u003c/svg>\n","ecg-node-leads.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 260\" role=\"img\" aria-label=\"十二導程：10 個電極與 12 個觀測角度示意\">\u003crect width=\"600\" height=\"260\" rx=\"18\" fill=\"#fffaf8\"/>\u003cpath d=\"M300 40c-40 0-55 22-55 45s15 38 55 38 55-15 55-38-15-45-55-45z\" fill=\"#f3e3dc\" stroke=\"#7a2e38\" stroke-width=\"3\"/>\u003cpath d=\"M190 120q110-30 220 0l20 125H170z\" fill=\"#f3e3dc\" stroke=\"#7a2e38\" stroke-width=\"3\"/>\u003cpath d=\"M190 125L120 210M410 125L480 210\" stroke=\"#7a2e38\" stroke-width=\"18\" stroke-linecap=\"round\"/>\u003ccircle cx=\"285\" cy=\"150\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"285.0\" y=\"138.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V1\u003c/text>\u003ccircle cx=\"315\" cy=\"150\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"315.0\" y=\"138.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V2\u003c/text>\u003ccircle cx=\"328\" cy=\"168\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"328.0\" y=\"192.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V3\u003c/text>\u003ccircle cx=\"343\" cy=\"184\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"343.0\" y=\"208.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V4\u003c/text>\u003ccircle cx=\"362\" cy=\"186\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"362.0\" y=\"210.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V5\u003c/text>\u003ccircle cx=\"383\" cy=\"188\" r=\"7\" fill=\"#2563eb\"/>\u003ctext x=\"383.0\" y=\"212.0\" font-size=\"12\" fill=\"#2563eb\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">V6\u003c/text>\u003ccircle cx=\"118\" cy=\"212\" r=\"9\" fill=\"#d97706\"/>\u003ctext x=\"96.0\" y=\"217.0\" font-size=\"14\" fill=\"#b45309\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">RA\u003c/text>\u003ccircle cx=\"482\" cy=\"212\" r=\"9\" fill=\"#d97706\"/>\u003ctext x=\"504.0\" y=\"217.0\" font-size=\"14\" fill=\"#b45309\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">LA\u003c/text>\u003ccircle cx=\"215\" cy=\"243\" r=\"9\" fill=\"#d97706\"/>\u003ctext x=\"193.0\" y=\"248.0\" font-size=\"14\" fill=\"#b45309\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">RL\u003c/text>\u003ccircle cx=\"385\" cy=\"243\" r=\"9\" fill=\"#d97706\"/>\u003ctext x=\"407.0\" y=\"248.0\" font-size=\"14\" fill=\"#b45309\" text-anchor=\"middle\" font-family=\"sans-serif\" font-weight=\"bold\">LL\u003c/text>\u003ctext x=\"30.0\" y=\"40.0\" font-size=\"19\" fill=\"#17212b\" text-anchor=\"start\" font-family=\"sans-serif\" font-weight=\"bold\">10 個電極 → 12 個導程\u003c/text>\u003ctext x=\"30.0\" y=\"66.0\" font-size=\"16\" fill=\"#2563eb\" text-anchor=\"start\" font-family=\"sans-serif\">胸前 6（V1–V6）\u003c/text>\u003ctext x=\"30.0\" y=\"88.0\" font-size=\"16\" fill=\"#b45309\" text-anchor=\"start\" font-family=\"sans-serif\">四肢 4（RL 為接地）\u003c/text>\u003ctext x=\"570.0\" y=\"40.0\" font-size=\"14\" fill=\"#4e5964\" text-anchor=\"end\" font-family=\"sans-serif\">示意圖\u003c/text>\u003c/svg>\n"});</script></body></html>

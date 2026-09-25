@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心電圖模擬器試作：v3 現況 vs 修正版</title>
+<style>
+  :root{
+    --bg:#f1f5f9; --card:#ffffff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+    --blue:#2563eb; --blue-bg:#eff6ff; --red:#dc2626; --red-bg:#fef2f2; --amber:#b45309; --amber-bg:#fffbeb;
+    --green:#047857; --green-bg:#ecfdf5; --scope:#050d1a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0b1220; --card:#111a2b; --text:#e2e8f0; --muted:#94a3b8; --border:#1f2a3d;
+      --blue:#60a5fa; --blue-bg:#0f213f; --red:#f87171; --red-bg:#3a1517; --amber:#fbbf24; --amber-bg:#33260b;
+      --green:#34d399; --green-bg:#0b2a20;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.6;padding:20px 16px 40px}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{margin-bottom:18px}
+  header .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--amber);background:var(--amber-bg);border:1px solid color-mix(in srgb,var(--amber) 30%,transparent);padding:2px 10px;border-radius:999px;margin-bottom:6px}
+  h1{font-size:clamp(20px,3.2vw,28px);font-weight:900;letter-spacing:-.01em}
+  header p{color:var(--muted);font-size:14px;margin-top:4px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px}
+  .ctrl-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-bottom:10px}
+  .hr-big{font-size:28px;font-weight:900;font-variant-numeric:tabular-nums}
+  .hr-big small{font-size:13px;font-weight:600;color:var(--muted);margin-left:4px}
+  input[type=range]{width:100%;accent-color:var(--blue);height:28px}
+  .scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
+  .chip:hover{border-color:var(--blue)}
+  .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:12px}
+  label.tg{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;cursor:pointer}
+  label.tg input{width:18px;height:18px;accent-color:var(--blue)}
+  .tg-note{font-size:12px;color:var(--muted);font-weight:500}
+  button.btn{border:none;border-radius:10px;padding:8px 16px;font-weight:700;font-size:14px;cursor:pointer;background:var(--text);color:var(--bg)}
+  .physio{margin-top:12px;background:var(--blue-bg);border-radius:12px;padding:10px 12px;font-size:14px}
+  .physio b{color:var(--blue)}
+  .panel-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px;margin-bottom:10px}
+  .panel-head h2{font-size:18px;font-weight:900}
+  .badge{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px}
+  .badge.bad{color:var(--red);background:var(--red-bg)}
+  .badge.good{color:var(--green);background:var(--green-bg)}
+  .scope{position:relative;border-radius:14px;overflow:hidden;border:1px solid #1e293b;background:var(--scope)}
+  .scope canvas{display:block;width:100%}
+  .scope .lbl{position:absolute;top:6px;left:10px;font:11px ui-monospace,Menlo,monospace;color:#6ee7b7;pointer-events:none;letter-spacing:.02em}
+  .scope .lbl2{position:absolute;bottom:6px;right:10px;font:11px ui-monospace,Menlo,monospace;color:#fca5a5;pointer-events:none;text-align:right}
+  .layer{position:absolute;inset:0}
+  .v3scope{background-image:linear-gradient(to right,rgba(16,185,129,.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,185,129,.08) 1px,transparent 1px);background-size:20px 20px;height:190px}
+  .v3scope canvas{height:100%}
+  .reads{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
+  @media (max-width:720px){.reads{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .rd{border:1px solid var(--border);border-radius:12px;padding:8px 10px}
+  .rd .k{font-size:11px;color:var(--muted);font-weight:700}
+  .rd .v{font-size:19px;font-weight:900;font-variant-numeric:tabular-nums}
+  .rd .n{font-size:11px;color:var(--muted)}
+  .rd.flag{border-color:var(--red);background:var(--red-bg)}
+  .rd.flag .v{color:var(--red)}
+  .rd.flag .n{color:var(--red);font-weight:700}
+  .bar-wrap{margin-top:12px}
+  .bar-cap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+  .bar{display:flex;height:22px;border-radius:8px;overflow:hidden;font-size:11px;font-weight:700;color:#fff}
+  .bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .25s}
+  .bar .sys{background:#e11d48}
+  .bar .dia{background:#0284c7}
+  .note{font-size:13px;color:var(--muted);margin-top:8px}
+  .note b{color:var(--text)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{border-bottom:1px solid var(--border);padding:8px 6px;text-align:left;vertical-align:top}
+  th{font-size:12px;color:var(--muted)}
+  .tbl{overflow-x:auto}
+  h3{font-size:16px;font-weight:900;margin-bottom:8px}
+  ul.obs{padding-left:18px;font-size:14px}
+  ul.obs li{margin:4px 0}
+  .caliper-hint{font-size:12px;color:var(--muted);margin-top:6px}
+  .layers{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-top:8px;font-size:13px}
+  .layers .ttl{font-weight:800;color:var(--muted);font-size:12px}
+  .hidden{display:none !important}
+  .zoom-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 8px;font-size:14px}
+  .zoom-head .btn{white-space:nowrap;flex:none}
+  .zoom-head small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+  button.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  button.btn:disabled{opacity:.4;cursor:not-allowed}
+  .q-prompt{font-size:17px;font-weight:800;margin-bottom:10px}
+  .q-prompt small{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:2px}
+  .q-sel{font-size:13px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+  .q-fb{margin-top:12px;border-radius:12px;padding:10px 12px;font-size:14px}
+  .q-fb.ok{background:var(--green-bg)} .q-fb.ok b{color:var(--green)}
+  .q-fb.no{background:var(--amber-bg)} .q-fb.no b{color:var(--amber)}
+  .q-sum{margin-top:12px;font-size:14px}
+  .q-sum table{margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">試作頁｜供教師決定 v4 用，不給學生</span>
+    <h1>心電圖模擬器試作：v3 現況 vs 修正版</h1>
+    <p>同一根滑桿同時控制上下兩台示波器。A 原樣重現 v3 的演算法；B 為修正版。B 暫停後可點選某一拍看標示、拖曳量時間；頁面下方是第一關「先自己標，再對答案」的標示題試作。</p>
+  </header>
+
+  <section class="card" aria-label="控制">
+    <div class="ctrl-top">
+      <div class="hr-big"><span id="hrOut">75</span><small>bpm 目標心率</small></div>
+      <div class="chips" id="presets">
+        <button class="chip" data-hr="40">40 嚴重過緩</button>
+        <button class="chip" data-hr="52">52 運動員靜息</button>
+        <button class="chip on" data-hr="75">75 安靜</button>
+        <button class="chip" data-hr="100">100</button>
+        <button class="chip" data-hr="150">150</button>
+        <button class="chip" data-hr="195">195 接近最大心率</button>
+      </div>
+    </div>
+    <input type="range" id="hr" min="40" max="200" value="75" step="1" aria-label="目標心率">
+    <div class="scale"><span>40</span><span>60</span><span>100</span><span>150（v3 上限）</span><span>200</span></div>
+    <div class="row">
+      <label class="tg"><input type="checkbox" id="rsa">呼吸性竇性心律不整 <span class="tg-note">（僅 B；吸氣變快、吐氣變慢）</span></label>
+      <label class="tg"><input type="checkbox" id="lag">自律神經反應時間 <span class="tg-note">（僅 B；迷走神經幾乎立即反應，交感神經需數秒）</span></label>
+      <button class="btn" id="pause" type="button">暫停</button>
+    </div>
+    <div class="physio" id="physio"></div>
+  </section>
+
+  <section class="card" aria-label="A v3 現況">
+    <div class="panel-head">
+      <h2>A. v3 現況（原樣重現）</h2>
+      <span class="badge bad">整個心動週期等比例縮放</span>
+    </div>
+    <div class="scope v3scope" id="scopeA">
+      <canvas id="cvA"></canvas>
+      <div class="lbl">LEAD II (標準肢體導程) • 25 mm/s • 10 mm/mV</div>
+      <div class="lbl2">↑ 標示為 25 mm/s，實際速度隨螢幕寬度改變；<br>畫布不透明，背景方格被蓋住看不到</div>
+    </div>
+    <div class="reads" id="readsA"></div>
+    <div class="bar-wrap">
+      <div class="bar-cap"><span>一次心跳（R-R）中的時間分配</span><span id="capA"></span></div>
+      <div class="bar"><div class="sys" id="sysA"></div><div class="dia" id="diaA"></div></div>
+    </div>
+  </section>
+
+  <section class="card" aria-label="B 修正版">
+    <div class="panel-head">
+      <h2>B. 修正版</h2>
+      <span class="badge good">以秒為單位的真實時程・方格已校正</span>
+    </div>
+    <div class="scope" id="scopeB">
+      <canvas id="gridB" class="layer"></canvas>
+      <canvas id="cvB" class="layer"></canvas>
+      <canvas id="calB" class="layer" style="cursor:crosshair"></canvas>
+      <div class="lbl" id="lblB">LEAD II • 25 mm/s • 10 mm/mV</div>
+    </div>
+    <div class="caliper-hint" id="calHint">按「暫停」後：<b>點一下</b>某一拍 → 顯示該拍的標示；<b>按住拖曳</b> → 卡尺量時間。</div>
+    <div class="layers" role="group" aria-label="標示圖層">
+      <span class="ttl">標示圖層</span>
+      <label class="tg"><input type="checkbox" id="layWave" checked>波形（P／QRS／T）</label>
+      <label class="tg"><input type="checkbox" id="layIntv" checked>間隔與段（PR、QT、R-R／PR 段、ST 段）</label>
+      <label class="tg"><input type="checkbox" id="layMech">對應的機械事件 <span class="tg-note">（約略時間）</span></label>
+    </div>
+    <div id="zoomWrap" class="hidden">
+      <div class="zoom-head">
+        <div><b>放大檢視：選取的這一拍</b><small>紙速與振幅同樣是 25 mm/s、10 mm/mV，只是放大顯示；方格仍是 0.04 秒／0.1 mV。點監視器上其他拍可切換。</small></div>
+        <button class="btn ghost" id="zoomClose" type="button">關閉</button>
+      </div>
+      <div class="scope" id="zoomB">
+        <canvas id="zGrid" class="layer"></canvas>
+        <canvas id="zTr" class="layer"></canvas>
+        <canvas id="zOv" class="layer"></canvas>
+      </div>
+    </div>
+    <div class="reads" id="readsB"></div>
+    <div class="bar-wrap">
+      <div class="bar-cap"><span>一次心跳（R-R）中的時間分配</span><span id="capB"></span></div>
+      <div class="bar"><div class="sys" id="sysB"></div><div class="dia" id="diaB"></div></div>
+    </div>
+    <p class="note" id="overlapNote"></p>
+  </section>
+
+  <section class="card" id="quiz" aria-label="第一關標示題">
+    <div class="panel-head">
+      <h2>第一關・標示題（先自己標，再對答案）</h2>
+      <span class="badge good" id="qProg"></span>
+    </div>
+    <p class="q-prompt" id="qPrompt"></p>
+    <div class="scope" id="qScope">
+      <canvas id="qGrid" class="layer"></canvas>
+      <canvas id="qTrace" class="layer"></canvas>
+      <canvas id="qOver" class="layer" style="cursor:crosshair;touch-action:none"></canvas>
+      <div class="lbl" id="qLbl"></div>
+    </div>
+    <div class="q-sel" id="qSel"></div>
+    <div class="row">
+      <button class="btn" id="qCheck" type="button" disabled>對答案</button>
+      <button class="btn ghost" id="qClear" type="button">重新框選</button>
+      <button class="btn ghost hidden" id="qReveal" type="button">顯示正確位置</button>
+      <button class="btn hidden" id="qNext" type="button">下一題</button>
+    </div>
+    <div class="q-fb hidden" id="qFb" aria-live="polite"></div>
+    <div class="q-sum hidden" id="qSum"></div>
+  </section>
+
+  <section class="card">
+    <h3>建議這樣比對</h3>
+    <ul class="obs">
+      <li><b>按 40：</b>A 的 PR 約 0.35 秒、QRS 約 0.20 秒，已經是一度房室阻滯＋寬 QRS 的樣子；B 的 PR、QRS 仍在正常範圍，變長的是兩次心跳之間的平線（舒張期）。</li>
+      <li><b>按 75：</b>兩邊數值幾乎相同，這就是 v3 預設畫面看起來沒問題的原因。</li>
+      <li><b>按 150、195：</b>看下方紅藍比例條。A 的收縮／舒張比例永遠不變；B 的舒張期（藍）明顯被壓縮，P 波逐漸靠近、甚至疊到前一個 T 波上。</li>
+      <li><b>看 A 的 R 波高度：</b>每一拍高低不一、Q 波時有時無，這是每格畫面只取一點造成的，不是生理現象。B 每一拍都一致。</li>
+      <li><b>快速來回拖滑桿：</b>A 的波形會在一拍中途斷開跳到別處；B 從下一拍才換心率，跟竇房結的實際行為一致。</li>
+      <li><b>暫停後在 B 量 PR：</b>應約 3.5–4.5 小格（0.14–0.18 秒），可直接給學生練習數格子。</li>
+      <li><b>暫停後點一下 B 的某一拍：</b>拉到 150 以上再暫停，標示會直接顯示 P 波和前一個 T 波靠在一起、舒張期變很短。</li>
+      <li><b>第一關標示題：</b>故意只框 P 波結束到 QRS 之間的平線當作 PR 間隔，看系統會不會指出「你框的比較像 PR 段」。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>修正版採用的數值（教學近似，非個體模擬）</h3>
+    <div class="tbl">
+    <table>
+      <thead><tr><th>項目</th><th>修正版設定</th><th>v3 現況</th></tr></thead>
+      <tbody>
+        <tr><td>P 波</td><td>0.09 秒（心率 &gt;150 時 0.08），0.15 mV</td><td>佔週期 12%（40 bpm 時 0.18 秒）</td></tr>
+        <tr><td>PR 間隔</td><td>隨自律神經小幅變化：40 bpm 0.19 秒 → 75 bpm 0.16 → 150 bpm 0.13 → 200 bpm 0.12（交感縮短、迷走延長房室結傳導）</td><td>佔週期 23%（0.09–0.35 秒）</td></tr>
+        <tr><td>QRS</td><td>固定 0.09 秒；R 1.2 mV、Q −0.1、S −0.25</td><td>佔週期 13%（0.05–0.20 秒）</td></tr>
+        <tr><td>QT</td><td>Bazett：QT = 0.40 × √(前一個 R-R)</td><td>佔週期 44%</td></tr>
+        <tr><td>舒張期（R-R − QT）</td><td>剩餘時間；心率越快縮得越多</td><td>固定佔 56%</td></tr>
+        <tr><td>紙速／振幅</td><td>1 小格＝0.04 秒＝0.1 mV，1 大格＝0.20 秒＝0.5 mV；左側有 1 mV 校正方波</td><td>未校正</td></tr>
+        <tr><td>心率改變時機</td><td>下一拍生效</td><td>當拍立即跳相位</td></tr>
+        <tr><td>呼吸性竇性心律不整（開關）</td><td>呼吸週期 4 秒；幅度隨迷走張力，靜息約 ±8%，心率 &gt;110 時消失</td><td>無</td></tr>
+        <tr><td>反應時間（開關）</td><td>降心率時間常數 0.8 秒（迷走）；升到 100 以下 1.2 秒（迷走撤除）；100 以上 6 秒（交感）</td><td>立即</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = { target: 75, paused: false, rsa: false, lag: false };
+
+  // ---------- shared controls ----------
+  const slider = $('hr');
+  function setTarget(v){
+    state.target = v; slider.value = v; $('hrOut').textContent = v;
+    document.querySelectorAll('#presets .chip').forEach(c => c.classList.toggle('on', +c.dataset.hr === v));
+    A.onHR(v);
+  }
+  slider.addEventListener('input', e => setTarget(parseInt(e.target.value, 10)));
+  document.querySelectorAll('#presets .chip').forEach(c => c.addEventListener('click', () => setTarget(+c.dataset.hr)));
+  $('rsa').addEventListener('change', e => state.rsa = e.target.checked);
+  $('lag').addEventListener('change', e => state.lag = e.target.checked);
+  $('pause').addEventListener('click', () => {
+    state.paused = !state.paused;
+    $('pause').textContent = state.paused ? '繼續' : '暫停';
+    if (!state.paused) B.clearCaliper();
+  });
+
+  function readout(el, items){
+    el.innerHTML = items.map(it => `<div class="rd${it.flag ? ' flag' : ''}"><div class="k">${it.k}</div><div class="v">${it.v}</div><div class="n">${it.flag ? it.flag : it.n}</div></div>`).join('');
+  }
+  function bar(sysEl, diaEl, capEl, qt, rr){
+    const s = Math.max(0, Math.min(1, qt / rr));
+    sysEl.style.width = (s * 100) + '%'; diaEl.style.width = ((1 - s) * 100) + '%';
+    sysEl.textContent = s > 0.18 ? `收縮 QT ${Math.round(s * 100)}%` : '';
+    diaEl.textContent = (1 - s) > 0.18 ? `舒張 ${Math.round((1 - s) * 100)}%` : `${Math.round((1 - s) * 100)}%`;
+    capEl.textContent = `R-R ${rr.toFixed(2)} 秒`;
+  }
+  const f2 = x => x.toFixed(2), f3 = x => x.toFixed(3);
+  function intervalReads(hr, rr, pr, qrs, qt){
+    return [
+      { k: '心率', v: Math.round(hr), n: 'bpm' },
+      { k: 'R-R', v: f2(rr), n: '秒' },
+      { k: 'PR', v: f3(pr), n: '正常 0.12–0.20', flag: pr > 0.20 ? '＞0.20 屬房室阻滯' : (pr < 0.12 ? '＜0.12 屬異常' : '') },
+      { k: 'QRS', v: f3(qrs), n: '正常 ＜0.12', flag: qrs >= 0.12 ? '≥0.12 屬寬 QRS' : (qrs < 0.06 ? '＜0.06 過窄，不符生理' : '') },
+      { k: 'QT', v: f3(qt), n: '隨心率小幅變化' },
+      { k: '舒張期 (R-R−QT)', v: f3(rr - qt), n: '秒' }
+    ];
+  }
+
+  // ---------- shared corrected model (B monitor + quiz) ----------
+  function prFor(hr){ // AV conduction: vagal slows, sympathetic speeds
+    const pts = [[40, 0.19], [75, 0.16], [150, 0.13], [200, 0.12]];
+    if (hr <= pts[0][0]) return pts[0][1];
+    for (let i = 1; i < pts.length; i++) if (hr <= pts[i][0]){
+      const [x0, y0] = pts[i - 1], [x1, y1] = pts[i]; return y0 + (y1 - y0) * (hr - x0) / (x1 - x0);
+    }
+    return pts[pts.length - 1][1];
+  }
+  function makeBeat(start, rr, hrAuto, prevRR){
+    const pDur = hrAuto > 150 ? 0.08 : 0.09, pr = prFor(hrAuto), qrs = 0.09;
+    const qt = 0.40 * Math.sqrt(prevRR);
+    const tDur = Math.min(0.16, 0.75 * (qt - qrs));
+    return { start, rr, pDur, pr, qrs, qt, tStart: pr + qt - tDur, tDur, end: pr + qt };
+  }
+  function beatMv(b, x){ // x: seconds since this beat's P onset; returns mV
+    if (x < 0 || x > b.end) return 0;
+    if (x < b.pDur) return 0.15 * Math.sin(Math.PI * x / b.pDur);
+    const q = x - b.pr;
+    if (q >= 0 && q < 0.02) return -0.10 * (q / 0.02);
+    if (q >= 0.02 && q < 0.05) return -0.10 + (1.30) * ((q - 0.02) / 0.03);
+    if (q >= 0.05 && q < 0.08) return 1.20 - 1.45 * ((q - 0.05) / 0.03);
+    if (q >= 0.08 && q < 0.09) return -0.25 + 0.25 * ((q - 0.08) / 0.01);
+    const t = x - b.tStart;
+    if (t >= 0 && t < b.tDur){
+      let u = t / b.tDur; u = u < 0.62 ? u / 0.62 * 0.5 : 0.5 + (u - 0.62) / 0.38 * 0.5; // slow up, fast down
+      return 0.30 * Math.sin(Math.PI * u);
+    }
+    return 0;
+  }
+
+  const FEAT = { P: 'P 波', PRi: 'PR 間隔', PRs: 'PR 段', QRS: 'QRS 群波', ST: 'ST 段', T: 'T 波', QT: 'QT 間隔', RR: 'R-R 間期' };
+  function features(b, nb){
+    const s = b.start, f = {
+      P: [s, s + b.pDur], PRi: [s, s + b.pr], PRs: [s + b.pDur, s + b.pr],
+      QRS: [s + b.pr, s + b.pr + b.qrs], ST: [s + b.pr + b.qrs, s + b.tStart],
+      T: [s + b.tStart, s + b.end], QT: [s + b.pr, s + b.end]
+    };
+    if (nb) f.RR = [s + b.pr + 0.05, nb.start + nb.pr + 0.05];
+    return f;
+  }
+  function gridOn(g, W, H, pxmm, base, withCal){
+    g.fillStyle = '#050d1a'; g.fillRect(0, 0, W, H);
+    for (let i = 0; i * pxmm <= W + 1; i++){
+      const x = Math.round(i * pxmm) + 0.5;
+      g.strokeStyle = i % 5 === 0 ? 'rgba(16,185,129,0.30)' : 'rgba(16,185,129,0.09)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke();
+    }
+    for (let j = 0; ; j++){
+      const y = base - j * pxmm, y2 = base + j * pxmm;
+      if (y < 0 && y2 > H) break;
+      for (const yy of j === 0 ? [y] : [y, y2]){
+        if (yy < 0 || yy > H) continue;
+        g.strokeStyle = j % 5 === 0 ? 'rgba(16,185,129,0.30)' : 'rgba(16,185,129,0.09)';
+        g.beginPath(); g.moveTo(0, Math.round(yy) + 0.5); g.lineTo(W, Math.round(yy) + 0.5); g.stroke();
+      }
+    }
+    if (withCal){ // 1 mV calibration pulse (10 mm tall, 0.2 s wide)
+      const x0 = pxmm * 1.5, x1 = x0 + pxmm * 5;
+      g.strokeStyle = 'rgba(253,224,71,0.8)'; g.lineWidth = 1.5; g.beginPath();
+      g.moveTo(x0 - pxmm, base); g.lineTo(x0, base); g.lineTo(x0, base - 10 * pxmm); g.lineTo(x1, base - 10 * pxmm); g.lineTo(x1, base); g.lineTo(x1 + pxmm, base); g.stroke();
+    }
+  }
+  // ---------- annotation drawing (shared) ----------
+  function pill(c, text, cx, cy0, col, placed){
+    c.font = '700 12px system-ui,-apple-system,sans-serif';
+    const w = c.measureText(text).width + 12, x = cx - w / 2;
+    let cy = cy0;
+    if (placed){
+      for (const off of [0, 20, 40, -20, 60]){
+        const y = cy0 + off;
+        if (!placed.some(p => x < p.x + p.w + 4 && p.x < x + w + 4 && Math.abs(p.y - y) < 19)){ cy = y; break; }
+      }
+      placed.push({ x, w, y: cy });
+      if (cy !== cy0){ c.strokeStyle = col; c.lineWidth = 1; c.beginPath(); c.moveTo(cx, cy0); c.lineTo(cx, cy + (cy > cy0 ? -9 : 9)); c.stroke(); }
+    }
+    c.fillStyle = 'rgba(5,13,26,0.88)'; c.strokeStyle = col; c.lineWidth = 1;
+    c.beginPath(); c.roundRect ? c.roundRect(x, cy - 9, w, 18, 6) : c.rect(x, cy - 9, w, 18); c.fill(); c.stroke();
+    c.fillStyle = col; c.textBaseline = 'middle'; c.textAlign = 'center'; c.fillText(text, cx, cy + 0.5);
+  }
+  function bracket(c, [a, z], y, yFrom, col, text, W, placed){
+    if (!(z > a) || a < -2 || z > W + 2) return;
+    c.strokeStyle = col; c.lineWidth = 1; c.setLineDash([3, 3]);
+    for (const x of [a, z]){ c.beginPath(); c.moveTo(x, yFrom); c.lineTo(x, y); c.stroke(); }
+    c.setLineDash([]); c.lineWidth = 2;
+    c.beginPath(); c.moveTo(a, y); c.lineTo(z, y); c.moveTo(a, y - 5); c.lineTo(a, y + 5); c.moveTo(z, y - 5); c.lineTo(z, y + 5); c.stroke();
+    pill(c, text, (a + z) / 2, y, col, placed);
+  }
+  // o: { tToX, base, pxmm, H, W, mv, b, nb, layers }
+  function annotate(c, o){
+    const { tToX, base, pxmm, H, W, mv, b, nb, layers } = o;
+    const F = features(b, nb), X = r => [tToX(r[0]), tToX(r[1])];
+    const ok = ([a, z]) => z > a && a >= -2 && z <= W + 2;
+    const sDepth = 0.25 * 10 * pxmm, rTop = base - 1.2 * 10 * pxmm;
+    c.save(); c.lineCap = 'round'; c.lineJoin = 'round';
+    const placed = [];
+    if (layers.wave){
+      for (const [k, col, lab] of [['P', '#60a5fa', 'P 波'], ['QRS', '#f87171', 'QRS'], ['T', '#4ade80', 'T 波']]){
+        const [a, z] = X(F[k]); if (!ok([a, z])) continue;
+        c.strokeStyle = col; c.lineWidth = 4.5; c.beginPath(); let top = base;
+        for (let x = a; x <= z + 0.01; x += 0.5){
+          const y = base - mv(F[k][0] + (x - a) / (z - a) * (F[k][1] - F[k][0])) * 10 * pxmm;
+          x === a ? c.moveTo(x, y) : c.lineTo(x, y); top = Math.min(top, y);
+        }
+        c.stroke();
+        pill(c, lab, (a + z) / 2, k === 'QRS' ? rTop - 12 : top - 14, col, placed);
+      }
+    }
+    if (layers.intv){
+      for (const [k, col] of [['PRs', '#fbbf24'], ['ST', '#f472b6']]){
+        const [a, z] = X(F[k]); if (!ok([a, z]) || z - a < 2) continue;
+        c.strokeStyle = col; c.lineWidth = 6; c.beginPath(); c.moveTo(a, base); c.lineTo(z, base); c.stroke();
+        pill(c, FEAT[k], (a + z) / 2, base + sDepth + 12, col, placed);
+      }
+      const r1 = base + sDepth + 34;
+      bracket(c, X(F.PRi), r1, base, '#fbbf24', 'PR 間隔', W, placed);
+      bracket(c, X(F.QT), r1 + 22, base, '#5eead4', 'QT 間隔', W, placed);
+      if (F.RR) bracket(c, X(F.RR), rTop - (layers.wave ? 34 : 12), rTop, '#c4b5fd', 'R-R 間期', W, placed);
+    }
+    if (layers.mech){
+      const nextQ = nb ? nb.start + nb.pr : b.start + b.rr + b.pr;
+      const bands = [
+        ['心房收縮', [b.start + b.pDur * 0.5, b.start + b.pr + 0.03], '251,191,36'],
+        ['心室收縮', [b.start + b.pr + 0.03, b.start + b.end], '248,113,113'],
+        ['心室舒張', [b.start + b.end, nextQ + 0.03], '56,189,248']
+      ];
+      const y = H - 19;
+      c.font = '700 11px system-ui,-apple-system,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      for (const [lab, r, rgb] of bands){
+        const [a, z] = X(r); if (!ok([a, z])) continue;
+        c.fillStyle = `rgba(${rgb},0.35)`; c.fillRect(a, y, z - a, 15);
+        c.strokeStyle = `rgba(${rgb},0.9)`; c.lineWidth = 1; c.strokeRect(a + 0.5, y + 0.5, z - a - 1, 14);
+        if (z - a > c.measureText(lab).width + 6){ c.fillStyle = '#fff'; c.fillText(lab, (a + z) / 2, y + 8); }
+      }
+    }
+    c.restore();
+  }
+
+  // ---------- A: faithful v3 reproduction ----------
+  const A = (() => {
+    const cv = $('cvA'), ctx = cv.getContext('2d');
+    let w = 0, h = 0, currentHR = 75, scanX = 0, lastY = 0, phaseTime = 0;
+    function resize(){
+      const r = cv.parentElement.getBoundingClientRect();
+      cv.width = r.width; cv.height = r.height; w = cv.width; h = cv.height; // v3 不處理 devicePixelRatio
+      lastY = h * 0.62; ctx.fillStyle = '#050d1a'; ctx.fillRect(0, 0, w, h); scanX = 0;
+    }
+    // copied from v3 getEcgY
+    function getEcgY(t, h){
+      const baseline = h * 0.62, amp = h * 0.46;
+      if (t >= 0.05 && t < 0.17){ const pt = (t - 0.05) / 0.12; return baseline - Math.sin(pt * Math.PI) * (amp * 0.16); }
+      else if (t >= 0.17 && t < 0.28) return baseline;
+      else if (t >= 0.28 && t < 0.305){ const qt = (t - 0.28) / 0.025; return baseline + qt * (amp * 0.10); }
+      else if (t >= 0.305 && t < 0.34){ const rt = (t - 0.305) / 0.035, qB = baseline + amp * 0.10, rP = baseline - amp * 0.95; return qB + rt * (rP - qB); }
+      else if (t >= 0.34 && t < 0.38){ const st = (t - 0.34) / 0.04, rP = baseline - amp * 0.95, sB = baseline + amp * 0.24; return rP + st * (sB - rP); }
+      else if (t >= 0.38 && t < 0.41){ const jt = (t - 0.38) / 0.03, sB = baseline + amp * 0.24; return sB + jt * (baseline - sB); }
+      else if (t >= 0.41 && t < 0.52) return baseline;
+      else if (t >= 0.52 && t < 0.72){ const tt = (t - 0.52) / 0.20; return baseline - Math.pow(Math.sin(tt * Math.PI), 1.25) * (amp * 0.28); }
+      return baseline;
+    }
+    function frame(dtRaw){
+      const dt = Math.min(dtRaw, 0.05);
+      const sweepSpeed = Math.max(w * 0.26, 180), step = sweepSpeed * dt;
+      const clearAhead = Math.max(step * 4, 28);
+      ctx.fillStyle = '#050d1a'; ctx.fillRect(scanX, 0, clearAhead, h);
+      const beat = 60 / currentHR;
+      phaseTime = (phaseTime + dt) % beat;
+      const y = getEcgY(phaseTime / beat, h);
+      ctx.beginPath(); ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2.4; ctx.lineCap = 'round';
+      ctx.shadowColor = '#10b981'; ctx.shadowBlur = 5;
+      ctx.moveTo(scanX - step, lastY); ctx.lineTo(scanX, y); ctx.stroke(); ctx.shadowBlur = 0;
+      lastY = y; scanX += step; if (scanX >= w){ scanX = 0; lastY = y; }
+    }
+    function onHR(v){
+      currentHR = v; const rr = 60 / v;
+      const pr = 0.23 * rr, qrs = 0.13 * rr, qt = 0.44 * rr;
+      readout($('readsA'), intervalReads(v, rr, pr, qrs, qt));
+      bar($('sysA'), $('diaA'), $('capA'), qt, rr);
+    }
+    return { resize, frame, onHR };
+  })();
+
+  // ---------- B: corrected model ----------
+  const B = (() => {
+    const grid = $('gridB'), cv = $('cvB'), cal = $('calB');
+    const g = grid.getContext('2d'), ctx = cv.getContext('2d'), cx = cal.getContext('2d');
+    let secs = 6, W = 0, H = 0, dpr = 1, pxmm = 5, pxps = 125, base = 0;
+    let simTime = 0, scanX = 0, lastPt = null, beats = [], nextBeatAt = 0.25, prevRR = 0.8, effHR = 75, last = null;
+    const SPEED = 25, GAIN = 10; // mm/s, mm/mV
+
+    function mvAt(t){ let s = 0; for (const b of beats) s += beatMv(b, t - b.start); return s; }
+
+    function resize(){
+      const r = cv.parentElement.getBoundingClientRect();
+      W = r.width; dpr = window.devicePixelRatio || 1;
+      secs = W >= 700 ? 6 : 2.5;
+      pxmm = W / (secs * SPEED); pxps = pxmm * SPEED;
+      H = Math.round(Math.max(170, Math.min(280, pxmm * 30)));
+      cv.parentElement.style.height = H + 'px';
+      for (const c of [grid, cv, cal]){ c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); c.style.height = H + 'px'; }
+      for (const c2 of [g, ctx, cx]) c2.setTransform(dpr, 0, 0, dpr, 0, 0);
+      base = Math.round(H * 0.62);
+      drawGrid(); scanX = simTime > 0 ? (simTime * pxps) % W : 0; redrawAll();
+      if (typeof drawOverlay === 'function' && state.paused) { calSpan = null; drawOverlay(); }
+      $('lblB').textContent = W >= 700 ? `LEAD II • 25 mm/s • 10 mm/mV • 小格 0.04 秒／0.1 mV・大格 0.20 秒／0.5 mV・畫面 ${secs} 秒` : `II • 25 mm/s • 小格 0.04 s • 大格 0.20 s`;
+    }
+    function redrawAll(){ // rebuild the whole sweep from the analytic model (resize / pause safe)
+      ctx.clearRect(0, 0, W, H); lastPt = null;
+      const erase = Math.max(18, pxmm * 4), stepPx = dpr > 1 ? 0.5 : 1;
+      ctx.lineWidth = 2.2; ctx.strokeStyle = '#34d399'; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      const segs = [[0, scanX, x => simTime - (scanX - x) / pxps], [scanX + erase, W, x => simTime - (scanX + W - x) / pxps]];
+      for (const [a, b, tf] of segs){
+        if (b - a < 1) continue;
+        ctx.beginPath();
+        for (let x = a; x <= b; x += stepPx){
+          const t = tf(x); if (t < 0) { continue; }
+          const y = base - mvAt(t) * GAIN * pxmm;
+          if (x === a || tf(x - stepPx) < 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          if (a === 0) lastPt = [x, y];
+        }
+        ctx.stroke();
+      }
+    }
+    function drawGrid(){ gridOn(g, W, H, pxmm, base, true); }
+
+    function hrInstant(t){
+      let hr = effHR;
+      if (state.rsa){
+        const vagal = Math.max(0, Math.min(1, (110 - effHR) / 50));
+        hr *= 1 + 0.08 * vagal * Math.sin(2 * Math.PI * t / 4);
+      }
+      return hr;
+    }
+    function update(dt){
+      // autonomic dynamics
+      if (state.lag){
+        const up = state.target > effHR;
+        const tau = up ? (effHR >= 100 ? 6 : 1.2) : 0.8;
+        effHR += (state.target - effHR) * (1 - Math.exp(-dt / tau));
+      } else effHR = state.target;
+
+      const t0 = simTime, t1 = simTime + dt;
+      while (nextBeatAt <= t1 + 0.5){ // schedule ahead so drawing can see beats
+        const rr = 60 / hrInstant(nextBeatAt);
+        const b = makeBeat(nextBeatAt, rr, effHR, prevRR);
+        beats.push(b); prevRR = rr; nextBeatAt += rr;
+      }
+      // draw every pixel column (not one point per frame) between t0 and t1
+      const erase = Math.max(18, pxmm * 4), stepPx = dpr > 1 ? 0.5 : 1;
+      ctx.lineWidth = 2.2; ctx.strokeStyle = '#34d399'; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      let remaining = dt * pxps, t = t0;
+      while (remaining > 1e-9){
+        const seg = Math.min(remaining, W - scanX), xs = scanX, xe = scanX + seg, ts = t;
+        ctx.clearRect(xs + 1, 0, Math.min(erase, W - xs), H);
+        ctx.beginPath();
+        if (lastPt) ctx.moveTo(lastPt[0], lastPt[1]);
+        else ctx.moveTo(xs, base - mvAt(ts) * GAIN * pxmm);
+        let px = lastPt ? lastPt[0] + stepPx : xs;
+        for (; px <= xe; px += stepPx){
+          const y = base - mvAt(ts + (px - xs) / pxps) * GAIN * pxmm;
+          ctx.lineTo(px, y); lastPt = [px, y];
+        }
+        ctx.stroke();
+        scanX = xe; t += seg / pxps; remaining -= seg;
+        if (scanX >= W - 1e-6){ scanX = 0; lastPt = null; }
+      }
+      finish(t1);
+    }
+    function finish(t1){
+      simTime = t1;
+      beats = beats.filter(b => b.start + b.end > simTime - secs - 2);
+      // readout from the beat whose QRS most recently started
+      const done = beats.filter(b => b.start + b.pr <= simTime);
+      const cur = done.length ? done[done.length - 1] : beats[0];
+      if (cur && cur !== last){ last = cur; showReads(cur); }
+    }
+    function showReads(b){
+      readout($('readsB'), intervalReads(60 / b.rr, b.rr, b.pr, b.qrs, b.qt));
+      bar($('sysB'), $('diaB'), $('capB'), b.qt, b.rr);
+      const gap = b.rr - b.pr - b.qt; // time from T end to next P onset
+      $('overlapNote').innerHTML = gap < 0.02
+        ? `<b>T 波結束到下一個 P 波開始只剩 ${Math.max(0, gap).toFixed(2)} 秒${gap < 0 ? '（已重疊）' : ''}：</b>心率很快時 P 波會貼上甚至疊進前一個 T 波，這是真實心電圖的現象。`
+        : `T 波結束到下一個 P 波開始：${gap.toFixed(2)} 秒。`;
+      physio(effHR);
+    }
+
+    // ---- paused tools: click a beat = labels; drag = caliper ----
+    let drag = null, calSpan = null, selBeat = null;
+    const layers = () => ({ wave: $('layWave').checked, intv: $('layIntv').checked, mech: $('layMech').checked });
+    const xToT = x => x <= scanX ? simTime - (scanX - x) / pxps : simTime - (scanX + W - x) / pxps;
+    const tToX = t => { let x = scanX - (simTime - t) * pxps; if (x < 0) x += W; return x; };
+    function clearCaliper(){ calSpan = null; selBeat = null; drag = null; cx.clearRect(0, 0, W, H); $('zoomWrap').classList.add('hidden'); }
+    function pos(e){ const r = cal.getBoundingClientRect(); return e.clientX - r.left; }
+    cal.style.touchAction = 'none';
+    cal.addEventListener('pointerdown', e => { if (!state.paused) return; drag = { x0: pos(e), moved: false }; cal.setPointerCapture(e.pointerId); });
+    cal.addEventListener('pointermove', e => {
+      if (!drag) return; const x = pos(e);
+      if (Math.abs(x - drag.x0) > 4) drag.moved = true;
+      if (drag.moved){ calSpan = [Math.min(drag.x0, x), Math.max(drag.x0, x)]; drawOverlay(); }
+    });
+    cal.addEventListener('pointerup', e => {
+      if (!drag) return;
+      if (!drag.moved) selectBeat(drag.x0);
+      drag = null;
+    });
+    function selectBeat(x){
+      const t = xToT(x); let best = null, bd = 1e9;
+      beats.forEach((b, i) => { const d = Math.abs(b.start + b.pr + 0.05 - t); if (d < bd && b.start + b.pr + 0.05 <= simTime){ bd = d; best = i; } });
+      if (best === null) return;
+      selBeat = { b: beats[best], nb: beats[best + 1] && beats[best + 1].start + beats[best + 1].pr + 0.05 <= simTime ? beats[best + 1] : null };
+      calSpan = null; drawOverlay();
+    }
+    function drawOverlay(){
+      cx.clearRect(0, 0, W, H);
+      if (selBeat){
+        const a = tToX(selBeat.b.start - 0.03), z = tToX(selBeat.b.start + selBeat.b.end + 0.03);
+        if (z > a){
+          cx.fillStyle = 'rgba(96,165,250,0.16)'; cx.fillRect(a, 0, z - a, H);
+          cx.strokeStyle = 'rgba(96,165,250,0.9)'; cx.lineWidth = 1.5; cx.strokeRect(a + 0.5, 0.5, z - a - 1, H - 1);
+          pill(cx, '放大 ↓', (a + z) / 2, H - 14, '#93c5fd');
+        }
+      }
+      if (calSpan) drawCal(calSpan[0], calSpan[1]);
+      renderZoom();
+    }
+    // ---- zoomed view of the selected beat (labels live here, not on the busy monitor) ----
+    const zg = $('zGrid').getContext('2d'), zt = $('zTr').getContext('2d'), zo = $('zOv').getContext('2d');
+    function renderZoom(){
+      const wrap = $('zoomWrap');
+      if (!selBeat){ wrap.classList.add('hidden'); return; }
+      wrap.classList.remove('hidden');
+      const { b, nb } = selBeat;
+      const ZW = $('zoomB').getBoundingClientRect().width, zd = window.devicePixelRatio || 1;
+      const nbR = nb ? nb.start + nb.pr + 0.05 : null;
+      let t0 = b.start - 0.12;
+      const need = (nbR ? nbR + 0.12 : b.start + b.end + 0.15) - t0;
+      const target = Math.max(11, Math.min(22, ZW / 50));
+      const win = Math.max(ZW / (25 * target), need);
+      t0 -= (win - need) / 2;
+      const zpx = ZW / (win * 25), zps = zpx * 25;
+      const ZH = Math.round(165 + 14.5 * zpx), zbase = Math.round(64 + 12 * zpx);
+      $('zoomB').style.height = ZH + 'px';
+      for (const [cv, c2] of [[$('zGrid'), zg], [$('zTr'), zt], [$('zOv'), zo]]){
+        cv.width = Math.round(ZW * zd); cv.height = Math.round(ZH * zd); cv.style.height = ZH + 'px'; c2.setTransform(zd, 0, 0, zd, 0, 0);
+      }
+      gridOn(zg, ZW, ZH, zpx, zbase, false);
+      zt.clearRect(0, 0, ZW, ZH); zt.strokeStyle = '#34d399'; zt.lineWidth = 2.6; zt.lineJoin = 'round'; zt.beginPath();
+      let started = false;
+      for (let x = 0; x <= ZW; x += 0.5){
+        const t = t0 + x / zps; if (t > simTime) break;
+        const y = zbase - mvAt(t) * 10 * zpx;
+        started ? zt.lineTo(x, y) : (zt.moveTo(x, y), started = true);
+      }
+      zt.stroke();
+      zo.clearRect(0, 0, ZW, ZH);
+      annotate(zo, { tToX: t => (t - t0) * zps, base: zbase, pxmm: zpx, H: ZH, W: ZW, mv: mvAt, b, nb, layers: layers() });
+    }
+    $('zoomClose').addEventListener('click', () => { selBeat = null; drawOverlay(); });
+    ['layWave', 'layIntv', 'layMech'].forEach(id => $(id).addEventListener('change', () => { if (selBeat) renderZoom(); }));
+    function drawCal(a, b){
+      const dts = (b - a) / pxps;
+      cx.strokeStyle = '#fde047'; cx.lineWidth = 1.5; cx.setLineDash([4, 3]);
+      for (const xx of [a, b]){ cx.beginPath(); cx.moveTo(xx, 0); cx.lineTo(xx, H); cx.stroke(); }
+      cx.setLineDash([]); cx.beginPath(); cx.moveTo(a, 24); cx.lineTo(b, 24); cx.stroke();
+      const txt = `${dts.toFixed(3)} 秒 ＝ ${(dts / 0.04).toFixed(1)} 小格`;
+      cx.font = '12px ui-monospace,Menlo,monospace'; cx.textAlign = 'left'; cx.textBaseline = 'alphabetic';
+      const tw = cx.measureText(txt).width + 12, tx = Math.min(Math.max(a, 4), W - tw - 4);
+      cx.fillStyle = 'rgba(15,23,42,0.9)'; cx.fillRect(tx, 30, tw, 20);
+      cx.fillStyle = '#fde047'; cx.fillText(txt, tx + 6, 44);
+    }
+
+    function preroll(){ for (let i = 0; i < 60 * (secs - 1); i++) update(1 / 60); }
+    return { resize, update, clearCaliper, preroll, get effHR(){ return effHR; } };
+  })();
+
+  // ---------- Stage 1 labeling quiz: 先自己標，再對答案 ----------
+  const Q = (() => {
+    const TASKS = [
+      { k: 'P', prompt: '框出一個完整的 P 波', tol: 0.03,
+        hint: 'P 波是 QRS 前面那個小而圓的正向波。從它離開基線的地方，框到回到基線為止。',
+        explain: 'P 波代表<b>心房去極化</b>，約 0.08–0.10 秒（2–2.5 小格）；心房收縮緊接在 P 波之後發生。' },
+      { k: 'QRS', prompt: '框出一個完整的 QRS 群波', tol: 0.025,
+        hint: '從第一個小小向下的 Q 波開始，經過高聳的 R 波，到 S 波回到基線為止。正常不超過 3 小格。',
+        explain: 'QRS 代表<b>心室去極化</b>，正常 &lt; 0.12 秒（3 小格）；心房再極化同時發生，被 QRS 掩蓋。' },
+      { k: 'T', prompt: '框出一個完整的 T 波', tol: 0.04,
+        hint: 'QRS 之後那個較寬、較圓的正向波；它上升慢、下降快。從離開基線框到回到基線。',
+        explain: 'T 波代表<b>心室再極化</b>（K⁺ 外流）；T 波結束後心室進入舒張。' },
+      { k: 'PRi', prompt: '量出一個 PR 間隔', tol: 0.03,
+        hint: '「間隔」要從 P 波<b>開始</b>量到 QRS <b>開始</b>。只量 P 波結束到 QRS 之間那段平線，是 PR 段，不是 PR 間隔。',
+        explain: 'PR 間隔正常 0.12–0.20 秒（3–5 小格），大部分時間花在<b>房室結約 0.1 秒的延遲</b>，讓心室有時間充血。' },
+      { k: 'ST', prompt: '框出一個 ST 段', tol: 0.03,
+        hint: '從 S 波回到基線的那一點（J 點）開始，到 T 波開始上升之前，是一段平線。不要包含 QRS 或 T 波。',
+        explain: 'ST 段對應心室動作電位 <b>Phase 2 高原期</b>（Ca²⁺ 流入 ≈ K⁺ 流出），所以是平的等電位線。' },
+      { k: 'RR', prompt: '量出一個 R-R 間期', sub: '答對後會用你量的 R-R 換算心率', tol: 0.03,
+        hint: '從一個 R 波的尖端，拖到下一個 R 波的尖端。',
+        explain: null }
+    ];
+    const grid = $('qGrid'), tr = $('qTrace'), ov = $('qOver');
+    const g = grid.getContext('2d'), c = tr.getContext('2d'), o = ov.getContext('2d');
+    let W = 0, H = 0, dpr = 1, pxmm = 10, pxps = 250, base = 0, secs = 3;
+    let idx = 0, tries = 0, sel = null, done = false, revealed = false, answer = null, beats = [], hr = 75, log = [];
+
+    function newStrip(){
+      hr = 60 + Math.floor(Math.random() * 36);
+      const rr = 60 / hr; beats = [];
+      for (let st = -Math.random() * rr; st < 4 + rr; st += rr) beats.push(makeBeat(st, rr, hr, rr));
+    }
+    const mv = t => { let s = 0; for (const b of beats) s += beatMv(b, t - b.start); return s; };
+    const tToX = t => t * pxps, xToT = x => x / pxps;
+
+    function resize(){
+      const r = $('qScope').getBoundingClientRect();
+      W = r.width; dpr = window.devicePixelRatio || 1;
+      secs = W >= 700 ? 3 : 2; pxmm = W / (secs * 25); pxps = pxmm * 25;
+      H = Math.round(Math.max(190, Math.min(320, pxmm * 26)));
+      $('qScope').style.height = H + 'px';
+      for (const cv of [grid, tr, ov]){ cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + 'px'; }
+      for (const x of [g, c, o]) x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      base = Math.round(H * 0.64);
+      $('qLbl').textContent = `LEAD II • 25 mm/s • 10 mm/mV • 小格 0.04 秒・大格 0.20 秒`;
+      draw();
+    }
+    function draw(){
+      gridOn(g, W, H, pxmm, base, false);
+      c.clearRect(0, 0, W, H); c.strokeStyle = '#34d399'; c.lineWidth = 2.4; c.lineJoin = 'round'; c.beginPath();
+      for (let x = 0; x <= W; x += 0.5){ const y = base - mv(xToT(x)) * 10 * pxmm; x === 0 ? c.moveTo(x, y) : c.lineTo(x, y); }
+      c.stroke();
+      overlay();
+    }
+    function overlay(){
+      o.clearRect(0, 0, W, H);
+      if (answer && (done || revealed)){
+        const [a, z] = answer.r.map(tToX);
+        o.fillStyle = 'rgba(74,222,128,0.18)'; o.fillRect(a, 0, z - a, H);
+        o.strokeStyle = '#4ade80'; o.lineWidth = 2;
+        for (const x of [a, z]){ o.beginPath(); o.moveTo(x, 0); o.lineTo(x, H); o.stroke(); }
+        pill(o, `正確：${FEAT[TASKS[idx].k]}`, (a + z) / 2, H - 14, '#4ade80');
+      }
+      if (sel){
+        const [a, z] = sel.map(tToX);
+        o.fillStyle = 'rgba(253,224,71,0.16)'; o.fillRect(a, 0, z - a, H);
+        o.strokeStyle = '#fde047'; o.lineWidth = 1.5; o.setLineDash([5, 4]);
+        for (const x of [a, z]){ o.beginPath(); o.moveTo(x, 0); o.lineTo(x, H); o.stroke(); }
+        o.setLineDash([]);
+        pill(o, `你的答案 ${(sel[1] - sel[0]).toFixed(2)} 秒`, (a + z) / 2, 34, '#fde047');
+      }
+    }
+    function selText(){
+      if (!sel){ $('qSel').textContent = '在心電圖上按住左右拖曳，框出你的答案。'; return; }
+      const d = sel[1] - sel[0];
+      $('qSel').textContent = `你框的範圍：${d.toFixed(3)} 秒 ＝ ${(d / 0.04).toFixed(1)} 小格`;
+    }
+
+    // drag to select
+    let drag = null;
+    ov.addEventListener('pointerdown', e => {
+      if (done || revealed) return;
+      const x = e.clientX - ov.getBoundingClientRect().left;
+      drag = x; ov.setPointerCapture(e.pointerId);
+    });
+    ov.addEventListener('pointermove', e => {
+      if (drag === null) return;
+      const x = Math.max(0, Math.min(W, e.clientX - ov.getBoundingClientRect().left));
+      if (Math.abs(x - drag) < 3) return;
+      sel = [xToT(Math.min(drag, x)), xToT(Math.max(drag, x))];
+      selText(); overlay(); $('qCheck').disabled = false;
+    });
+    ov.addEventListener('pointerup', () => { drag = null; });
+
+    function candidates(key){
+      const out = [];
+      for (let i = 0; i < beats.length; i++){
+        const r = features(beats[i], beats[i + 1])[key];
+        if (r && r[0] >= -0.001 && r[1] <= secs + 0.001) out.push(r);
+      }
+      return out;
+    }
+    function match(key, s){
+      let best = null;
+      for (const r of candidates(key)){
+        const e1 = s[0] - r[0], e2 = s[1] - r[1], m = Math.max(Math.abs(e1), Math.abs(e2));
+        if (!best || m < best.m) best = { r, e1, e2, m };
+      }
+      return best;
+    }
+    const boxes = e => (Math.abs(e) / 0.04).toFixed(1);
+    function check(){
+      const t = TASKS[idx], m = match(t.k, sel);
+      answer = m;
+      const pass = m && Math.abs(m.e1) <= t.tol && Math.abs(m.e2) <= t.tol;
+      const fb = $('qFb'); fb.classList.remove('hidden');
+      if (pass){
+        done = true; log.push({ k: t.k, tries: tries + 1, revealed: false });
+        const d = sel[1] - sel[0], ans = m.r[1] - m.r[0];
+        let extra = t.explain;
+        if (t.k === 'RR') extra = `你量到 R-R ＝ ${d.toFixed(2)} 秒，所以心率 ＝ 60 ÷ ${d.toFixed(2)} ≈ <b>${Math.round(60 / d)} 次/分</b>（本圖實際 ${hr} 次/分）。R-R 越短，心率越快。`;
+        fb.className = 'q-fb ok';
+        fb.innerHTML = `<b>答對了！</b>你框了 ${d.toFixed(3)} 秒（${(d / 0.04).toFixed(1)} 小格），標準答案 ${ans.toFixed(3)} 秒（${(ans / 0.04).toFixed(1)} 小格）。<br>${extra}`;
+        $('qCheck').disabled = true; $('qReveal').classList.add('hidden'); $('qNext').classList.remove('hidden');
+      } else {
+        tries++;
+        // misconception detection: does the selection fit another feature instead?
+        let confused = null;
+        for (const k of Object.keys(FEAT)){
+          if (k === t.k) continue;
+          const mm = match(k, sel);
+          if (mm && mm.m <= 0.03 && (!confused || mm.m < confused.m)) confused = { k, m: mm.m };
+        }
+        const parts = [];
+        if (m){
+          if (Math.abs(m.e1) > t.tol) parts.push(`起點${m.e1 < 0 ? '太早' : '太晚'} ${boxes(m.e1)} 小格`);
+          else parts.push('起點正確');
+          if (Math.abs(m.e2) > t.tol) parts.push(`終點${m.e2 < 0 ? '太早' : '太晚'} ${boxes(m.e2)} 小格`);
+          else parts.push('終點正確');
+        }
+        fb.className = 'q-fb no';
+        fb.innerHTML = (confused ? `<b>你框的比較像「${FEAT[confused.k]}」。</b>` : `<b>還差一點：</b>`) +
+          (confused ? '' : parts.join('，') + '。') + `<br>提示：${t.hint}`;
+        if (tries >= 2) $('qReveal').classList.remove('hidden');
+      }
+      overlay();
+    }
+    function reveal(){
+      if (!answer){ // no selection-based match: take the middle candidate
+        const cs = candidates(TASKS[idx].k); answer = { r: cs[Math.floor(cs.length / 2)] };
+      }
+      revealed = true; log.push({ k: TASKS[idx].k, tries, revealed: true });
+      const t = TASKS[idx], ans = answer.r[1] - answer.r[0];
+      const fb = $('qFb'); fb.className = 'q-fb no';
+      fb.innerHTML = `<b>正確位置已用綠色標出</b>（${ans.toFixed(3)} 秒 ＝ ${(ans / 0.04).toFixed(1)} 小格）。對照你黃色的框，看看差在哪裡。<br>` +
+        (t.explain || `R-R ＝ ${ans.toFixed(2)} 秒，心率 ＝ 60 ÷ ${ans.toFixed(2)} ≈ ${Math.round(60 / ans)} 次/分。`);
+      $('qCheck').disabled = true; $('qReveal').classList.add('hidden'); $('qNext').classList.remove('hidden');
+      overlay();
+    }
+    function load(i){
+      idx = i; tries = 0; sel = null; done = false; revealed = false; answer = null;
+      const t = TASKS[i];
+      $('qProg').textContent = `第 ${i + 1}／${TASKS.length} 題`;
+      $('qPrompt').innerHTML = `${i + 1}. ${t.prompt}${t.sub ? `<small>${t.sub}</small>` : ''}`;
+      $('qFb').classList.add('hidden'); $('qSum').classList.add('hidden');
+      $('qCheck').disabled = true; $('qReveal').classList.add('hidden'); $('qNext').classList.add('hidden');
+      $('qScope').classList.remove('hidden'); $('qClear').classList.remove('hidden'); $('qCheck').classList.remove('hidden');
+      newStrip(); selText(); resize();
+    }
+    function summary(){
+      const first = log.filter(l => l.tries === 1 && !l.revealed).length;
+      $('qScope').classList.add('hidden'); $('qFb').classList.add('hidden');
+      ['qCheck', 'qClear', 'qReveal', 'qNext'].forEach(id => $(id).classList.add('hidden'));
+      $('qPrompt').textContent = '第一關完成';
+      $('qSel').textContent = '';
+      $('qProg').textContent = `第一次就標對 ${first}／${TASKS.length} 題`;
+      const rows = log.map(l => `<tr><td>${FEAT[l.k]}</td><td>${l.tries}</td><td>${l.revealed ? '看了答案' : (l.tries === 1 ? '一次答對' : '修正後答對')}</td></tr>`).join('');
+      const sum = $('qSum'); sum.classList.remove('hidden');
+      sum.innerHTML = `<div class="tbl"><table><thead><tr><th>項目</th><th>作答次數</th><th>結果</th></tr></thead><tbody>${rows}</tbody></table></div>
+        <div class="row"><button class="btn" id="qAgain" type="button">換一組心電圖再練一次</button></div>`;
+      $('qAgain').addEventListener('click', start);
+    }
+    function start(){ log = []; load(0); }
+    $('qCheck').addEventListener('click', () => { if (sel) check(); });
+    $('qClear').addEventListener('click', () => {
+      if (done || revealed) return;
+      sel = null; selText(); overlay(); $('qCheck').disabled = true;
+    });
+    $('qReveal').addEventListener('click', reveal);
+    $('qNext').addEventListener('click', () => { if (idx + 1 < TASKS.length) load(idx + 1); else summary(); });
+    return { resize, start };
+  })();
+
+  // ---------- corrected physiology text ----------
+  let lastZone = '';
+  function physio(hr){
+    let z, html;
+    if (hr < 60){ z = 'brady'; html = `<b>竇性心搏過緩（&lt;60）：</b>迷走神經釋放乙醯膽鹼，經 M₂ 受體增加 K⁺ 外流、減少 I<sub>f</sub> 與 Ca²⁺ 電流，竇房結第 4 期自動去極化變慢；房室結傳導也變慢，所以 PR 略為延長（仍在正常範圍）。PR 與 QRS 幾乎不變，<b>變長的主要是舒張期</b>。耐力運動員靜息 50 次左右屬正常生理現象。`; }
+    else if (hr < 100){ z = 'rest'; html = `<b>正常竇性心律（60–100）：安靜時以迷走神經為主。</b>竇房結自己的節律約每分鐘 100 次，靜息 60–80 次是迷走張力把它壓低的結果；在這個範圍內心率上升，主要是迷走張力撤除，不需要交感神經。`; }
+    else if (hr < 180){ z = 'tachy'; html = `<b>竇性心搏過速（&gt;100）：需要交感神經興奮。</b>正腎上腺素經 β₁ 受體增加 I<sub>f</sub> 與 L 型 Ca²⁺ 電流，竇房結放電加快；房室結傳導加快使 PR 縮短，QT 也稍縮短。但 QT 縮得比 R-R 少，所以<b>舒張期被大幅壓縮</b>，心室充血時間變少。`; }
+    else { z = 'max'; html = `<b>接近最大心率（青少年約 200 次）：</b>舒張期只剩不到 0.1 秒，P 波貼近前一個 T 波。心率再快，心室來不及充血，每搏輸出量開始下降，這也是最大心率有上限的原因之一。`; }
+    if (z !== lastZone){ $('physio').innerHTML = html; lastZone = z; }
+  }
+
+  // ---------- loop ----------
+  function resizeAll(){ A.resize(); B.resize(); if (!$('qScope').classList.contains('hidden')) Q.resize(); }
+  window.addEventListener('resize', resizeAll);
+  Q.start(); resizeAll(); A.onHR(75); physio(75);
+  if (reduceMotion){ state.paused = true; $('pause').textContent = '繼續'; }
+
+  let lastTs = 0;
+  function loop(ts){
+    if (!lastTs) lastTs = ts;
+    let dt = (ts - lastTs) / 1000; lastTs = ts;
+    if (dt > 0.25) dt = 0; // tab was hidden: skip instead of distorting time
+    if (!state.paused && dt > 0){ A.frame(dt); B.update(dt); }
+    requestAnimationFrame(loop);
+  }
+  // pre-roll B so the first screen already shows beats
+  B.preroll();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
