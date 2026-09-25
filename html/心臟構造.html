@@ -66,7 +66,7 @@
         .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
         .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
         
-        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; }
         .card-svg-container svg { width: 100%; height: auto; max-height: 180px; }
 
         .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
@@ -129,7 +129,21 @@
         .selected-explanation { margin-bottom: 40px; }
         .detail-card[hidden] { display: none !important; }
         .flow-nav-card[aria-pressed="true"] { border: 3px solid var(--primary); background: var(--primary-light); }
-        .detail-card svg text { font-size: max(11px, 0.75rem); }
+
+        /* 節點示意圖改用 HTML 方塊：文字會自動換行，不會再超出框外。 */
+        .hs-diagram { display:grid; gap:8px; font-size:0.9rem; line-height:1.35; text-align:center; }
+        .hs-diagram .box { border-radius:8px; padding:8px 10px; font-weight:600; overflow-wrap:anywhere; }
+        .hs-diagram .box b { display:block; font-size:0.95rem; }
+        .hs-diagram .box small { display:block; font-size:0.8rem; font-weight:500; margin-top:2px; }
+        .hs-layers { text-align:left; gap:4px; }
+        .hs-cols-3 { grid-template-columns:1fr 1.3fr 1fr; align-items:stretch; }
+        .hs-cols-2 { grid-template-columns:1fr 1fr; }
+        .hs-chain { grid-template-columns:repeat(4,minmax(0,1fr)); align-items:stretch; }
+        .hs-chain .box { position:relative; }
+        .hs-chain .box + .box::before { content:"→"; position:absolute; left:-9px; top:50%; transform:translate(-50%,-50%); color:#d97706; font-weight:800; }
+        .hs-wide { grid-column:1 / -1; }
+        .hs-chain .hs-wide::before { content:none; }
+        @media (max-width:520px) { .hs-chain { grid-template-columns:1fr 1fr; } .hs-chain .box:nth-child(3)::before { content:none; } }
         /* 節點導覽卡的小圖只作示意，文字交給下方標題，避免手機上出現 6px 的字。 */
         .flow-nav-card svg text { display: none; }
         /* 素材是橫向四格圖：窄版也用橫向裁切，避免圖被壓扁成直條。 */
@@ -283,23 +297,13 @@
             <!-- Node 1 Detail -->
             <div class="detail-card" id="node-card-01" data-category="wall">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <!-- Outer Fibrous -->
-                        <rect x="20" y="15" width="280" height="25" fill="#cbd5e1" rx="4"/>
-                        <text x="35" y="32" font-size="12" fill="#0f172a" font-weight="bold">1. 纖維心包 (Fibrous Pericardium) - 防止過度擴張與固定位置</text>
-                        <!-- Serous Parietal -->
-                        <rect x="20" y="45" width="280" height="18" fill="#93c5fd" rx="3"/>
-                        <text x="35" y="58" font-size="11" fill="#1e3a8a">2. 漿膜心包壁層 (Parietal Serous Layer)</text>
-                        <!-- Pericardial Cavity -->
-                        <rect x="20" y="67" width="280" height="22" fill="#eff6ff" stroke="#3b82f6" stroke-dasharray="4,2" rx="3"/>
-                        <text x="160" y="82" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">★ 心包腔 (Pericardial Cavity) 含心包液：減少潤滑摩擦</text>
-                        <!-- Visceral / Epicardium -->
-                        <rect x="20" y="93" width="280" height="18" fill="#fca5a5" rx="3"/>
-                        <text x="35" y="106" font-size="11" fill="#7f1d1d">3. 漿膜心包臟層 / 心外膜 (Epicardium)</text>
-                        <!-- Myocardium -->
-                        <rect x="20" y="115" width="280" height="30" fill="#ef4444" rx="4"/>
-                        <text x="160" y="134" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="bold">4. 心肌層 (Myocardium) - 心臟壁主體</text>
-                    </svg>
+                    <div class="hs-diagram hs-layers" role="img" aria-label="心包膜由外到內的層次">
+                        <div class="box" style="background:#cbd5e1;color:#0f172a">1. 纖維心包 (Fibrous Pericardium) - 防止過度擴張與固定位置</div>
+                        <div class="box" style="background:#93c5fd;color:#1e3a8a">2. 漿膜心包壁層 (Parietal Serous Layer)</div>
+                        <div class="box" style="background:#eff6ff;color:#2563eb;border:1px dashed #3b82f6;text-align:center">★ 心包腔 (Pericardial Cavity) 含心包液：減少潤滑摩擦</div>
+                        <div class="box" style="background:#fca5a5;color:#7f1d1d">3. 漿膜心包臟層 / 心外膜 (Epicardium)</div>
+                        <div class="box" style="background:#ef4444;color:#fff;text-align:center">4. 心肌層 (Myocardium) - 心臟壁主體</div>
+                    </div>
                 </div>
                 <span class="card-badge bg-wall">心包與心壁</span>
                 <h2 class="card-heading">1. 心包膜的層次與防護功能</h2>
@@ -317,23 +321,11 @@
             <!-- Node 2 Detail -->
             <div class="detail-card" id="node-card-02" data-category="wall">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <g transform="translate(10,10)">
-                            <!-- Outer -->
-                            <rect x="10" y="10" width="80" height="120" fill="#fca5a5" rx="6"/>
-                            <text x="50" y="65" font-size="11" fill="#7f1d1d" text-anchor="middle" font-weight="bold">心外膜</text>
-                            <text x="50" y="80" font-size="9" fill="#7f1d1d" text-anchor="middle">(Epicardium)</text>
-                            <!-- Middle -->
-                            <rect x="95" y="10" width="110" height="120" fill="#ef4444" rx="6"/>
-                            <text x="150" y="60" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="bold">心肌層</text>
-                            <text x="150" y="75" font-size="10" fill="#ffffff" text-anchor="middle">(Myocardium)</text>
-                            <text x="150" y="92" font-size="9" fill="#fef2f2" text-anchor="middle">最厚/心肌收縮</text>
-                            <!-- Inner -->
-                            <rect x="210" y="10" width="80" height="120" fill="#fee2e2" rx="6"/>
-                            <text x="250" y="65" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">心內膜</text>
-                            <text x="250" y="80" font-size="9" fill="#991b1b" text-anchor="middle">(Endocardium)</text>
-                        </g>
-                    </svg>
+                    <div class="hs-diagram hs-cols-3" role="img" aria-label="心臟壁由外到內三層">
+                        <div class="box" style="background:#fca5a5;color:#7f1d1d"><b>心外膜</b><small>(Epicardium)</small></div>
+                        <div class="box" style="background:#ef4444;color:#fff"><b>心肌層</b><small>(Myocardium)</small><small>最厚/心肌收縮</small></div>
+                        <div class="box" style="background:#fee2e2;color:#991b1b"><b>心內膜</b><small>(Endocardium)</small></div>
+                    </div>
                 </div>
                 <span class="card-badge bg-wall">心包與心壁</span>
                 <h2 class="card-heading">2. 心臟壁的三層構造與特徵</h2>
@@ -351,23 +343,12 @@
             <!-- Node 3 Detail -->
             <div class="detail-card" id="node-card-03" data-category="chamber">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <rect x="20" y="10" width="130" height="65" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
-                        <text x="85" y="32" font-size="12" fill="#1e40af" text-anchor="middle" font-weight="bold">右心房 (RA)</text>
-                        <text x="85" y="50" font-size="9" fill="#1e3a8a" text-anchor="middle">上/下腔靜脈、冠狀竇注入</text>
-
-                        <rect x="170" y="10" width="130" height="65" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="8"/>
-                        <text x="235" y="32" font-size="12" fill="#991b1b" text-anchor="middle" font-weight="bold">左心房 (LA)</text>
-                        <text x="235" y="50" font-size="9" fill="#7f1d1d" text-anchor="middle">4 條肺靜脈注入充氧血</text>
-
-                        <rect x="20" y="85" width="130" height="65" fill="#93c5fd" stroke="#2563eb" stroke-width="2" rx="8"/>
-                        <text x="85" y="107" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="bold">右心室 (RV)</text>
-                        <text x="85" y="125" font-size="9" fill="#1e3a8a" text-anchor="middle">唧血至肺動脈幹 (肺循環)</text>
-
-                        <rect x="170" y="85" width="130" height="65" fill="#fca5a5" stroke="#dc2626" stroke-width="3" rx="8"/>
-                        <text x="235" y="107" font-size="12" fill="#7f1d1d" text-anchor="middle" font-weight="bold">左心室 (LV) - 壁最厚</text>
-                        <text x="235" y="125" font-size="9" fill="#7f1d1d" text-anchor="middle">唧血至主動脈 (體循環)</text>
-                    </svg>
+                    <div class="hs-diagram hs-cols-2" role="img" aria-label="心臟四大腔室">
+                        <div class="box" style="background:#dbeafe;color:#1e40af;border:2px solid #3b82f6"><b>右心房 (RA)</b><small>上/下腔靜脈、冠狀竇注入</small></div>
+                        <div class="box" style="background:#fee2e2;color:#991b1b;border:2px solid #ef4444"><b>左心房 (LA)</b><small>4 條肺靜脈注入充氧血</small></div>
+                        <div class="box" style="background:#93c5fd;color:#1e3a8a;border:2px solid #2563eb"><b>右心室 (RV)</b><small>唧血至肺動脈幹 (肺循環)</small></div>
+                        <div class="box" style="background:#fca5a5;color:#7f1d1d;border:3px solid #dc2626"><b>左心室 (LV) - 壁最厚</b><small>唧血至主動脈 (體循環)</small></div>
+                    </div>
                 </div>
                 <span class="card-badge bg-chamber">心腔與瓣膜</span>
                 <h2 class="card-heading">3. 心臟四大腔室與重要構造</h2>
@@ -385,23 +366,10 @@
             <!-- Node 4 Detail -->
             <div class="detail-card" id="node-card-04" data-category="chamber">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <g transform="translate(15,15)">
-                            <!-- AV Valves -->
-                            <rect x="10" y="10" width="130" height="110" fill="#f8fafc" stroke="#2563eb" stroke-width="2" rx="8"/>
-                            <text x="75" y="30" font-size="12" fill="#1e40af" text-anchor="middle" font-weight="bold">房室瓣 (AV Valves)</text>
-                            <text x="75" y="50" font-size="10" fill="#334155" text-anchor="middle">右房室：三尖瓣</text>
-                            <text x="75" y="68" font-size="10" fill="#334155" text-anchor="middle">左房室：二尖瓣 (僧帽瓣)</text>
-                            <text x="75" y="95" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="bold">具 腱索 與 乳頭肌 拉緊</text>
-
-                            <!-- Semilunar Valves -->
-                            <rect x="155" y="10" width="130" height="110" fill="#f8fafc" stroke="#dc2626" stroke-width="2" rx="8"/>
-                            <text x="220" y="30" font-size="12" fill="#991b1b" text-anchor="middle" font-weight="bold">半月瓣 (Semilunar)</text>
-                            <text x="220" y="50" font-size="10" fill="#334155" text-anchor="middle">右室出口：肺動脈瓣</text>
-                            <text x="220" y="68" font-size="10" fill="#334155" text-anchor="middle">左室出口：主動脈瓣</text>
-                            <text x="220" y="95" font-size="9" fill="#2563eb" text-anchor="middle" font-weight="bold">每組由 3 片半月形瓣葉組成</text>
-                        </g>
-                    </svg>
+                    <div class="hs-diagram hs-cols-2" role="img" aria-label="房室瓣與半月瓣">
+                        <div class="box" style="background:#f8fafc;border:2px solid #2563eb;color:#334155"><b style="color:#1e40af">房室瓣 (AV Valves)</b><small>右房室：三尖瓣</small><small>左房室：二尖瓣 (僧帽瓣)</small><small style="color:#dc2626;font-weight:700">具 腱索 與 乳頭肌 拉緊</small></div>
+                        <div class="box" style="background:#f8fafc;border:2px solid #dc2626;color:#334155"><b style="color:#991b1b">半月瓣 (Semilunar)</b><small>右室出口：肺動脈瓣</small><small>左室出口：主動脈瓣</small><small style="color:#2563eb;font-weight:700">每組由 3 片半月形瓣葉組成</small></div>
+                    </div>
                 </div>
                 <span class="card-badge bg-chamber">心腔與瓣膜</span>
                 <h2 class="card-heading">4. 心臟瓣膜與單向流動機制</h2>
@@ -419,23 +387,10 @@
             <!-- Node 5 Detail -->
             <div class="detail-card" id="node-card-05" data-category="conduction">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <g transform="translate(10,10)">
-                            <!-- LCA -->
-                            <rect x="10" y="10" width="135" height="110" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="6"/>
-                            <text x="77" y="30" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">左冠狀動脈 (LCA)</text>
-                            <text x="77" y="55" font-size="10" fill="#334155" text-anchor="middle">• 前室間枝 (前降支)</text>
-                            <text x="77" y="72" font-size="10" fill="#334155" text-anchor="middle">• 迴旋枝</text>
-                            <text x="77" y="95" font-size="9" fill="#dc2626" text-anchor="middle">供應左、右心室前壁</text>
-
-                            <!-- RCA -->
-                            <rect x="155" y="10" width="135" height="110" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
-                            <text x="222" y="30" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">右冠狀動脈 (RCA)</text>
-                            <text x="222" y="55" font-size="10" fill="#334155" text-anchor="middle">• 後室間動脈</text>
-                            <text x="222" y="72" font-size="10" fill="#334155" text-anchor="middle">• 邊緣動脈</text>
-                            <text x="222" y="95" font-size="9" fill="#2563eb" text-anchor="middle">供應右心房室與心室後壁</text>
-                        </g>
-                    </svg>
+                    <div class="hs-diagram hs-cols-2" role="img" aria-label="左右冠狀動脈分支">
+                        <div class="box" style="background:#fef2f2;border:2px solid #ef4444;color:#334155"><b style="color:#991b1b">左冠狀動脈 (LCA)</b><small>• 前室間枝 (前降支)</small><small>• 迴旋枝</small><small style="color:#dc2626">供應左、右心室前壁</small></div>
+                        <div class="box" style="background:#eff6ff;border:2px solid #2563eb;color:#334155"><b style="color:#1e40af">右冠狀動脈 (RCA)</b><small>• 後室間動脈</small><small>• 邊緣動脈</small><small style="color:#2563eb">供應右心房室與心室後壁</small></div>
+                    </div>
                 </div>
                 <span class="card-badge bg-conduction">冠狀與傳導</span>
                 <h2 class="card-heading">5. 冠狀血管循環與心肌血供</h2>
@@ -453,35 +408,13 @@
             <!-- Node 6 Detail -->
             <div class="detail-card" id="node-card-06" data-category="conduction">
                 <div class="card-svg-container">
-                    <svg viewBox="0 0 320 160">
-                        <!-- Conduction Path -->
-                        <rect x="10" y="20" width="55" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
-                        <text x="37" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">竇房結</text>
-                        <text x="37" y="50" font-size="8" fill="#b45309" text-anchor="middle">(SA node)</text>
-
-                        <line x1="65" y1="40" x2="85" y2="40" stroke="#d97706" stroke-width="3" stroke-dasharray="3,2"/>
-
-                        <rect x="85" y="20" width="55" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
-                        <text x="112" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">房室結</text>
-                        <text x="112" y="50" font-size="8" fill="#b45309" text-anchor="middle">(AV node)</text>
-
-                        <line x1="140" y1="40" x2="160" y2="40" stroke="#d97706" stroke-width="3"/>
-
-                        <rect x="160" y="20" width="60" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
-                        <text x="190" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">房室束</text>
-                        <text x="190" y="50" font-size="8" fill="#b45309" text-anchor="middle">(Bundle of His)</text>
-
-                        <line x1="220" y1="40" x2="240" y2="40" stroke="#d97706" stroke-width="3"/>
-
-                        <rect x="240" y="20" width="70" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
-                        <text x="275" y="38" font-size="9" fill="#b45309" text-anchor="middle" font-weight="bold">浦金埃氏纖維</text>
-                        <text x="275" y="50" font-size="8" fill="#b45309" text-anchor="middle">(Purkinje)</text>
-
-                        <!-- Bottom Explanation -->
-                        <rect x="10" y="80" width="300" height="65" fill="#fffbeb" stroke="#f59e0b" stroke-width="1" rx="6"/>
-                        <text x="160" y="102" font-size="11" fill="#b45309" text-anchor="middle" font-weight="bold">竇房結 (SA node) 位於右心房上腔靜脈開口下方</text>
-                        <text x="160" y="122" font-size="10" fill="#78350f" text-anchor="middle">每分鐘自發產生 70~80 次動作電位，稱為「節律點 (Pacemaker)」</text>
-                    </svg>
+                    <div class="hs-diagram hs-chain" role="img" aria-label="心臟傳導路徑">
+                        <div class="box" style="background:#fef3c7;border:2px solid #d97706;color:#b45309"><b>竇房結</b><small>(SA node)</small></div>
+                        <div class="box" style="background:#fef3c7;border:2px solid #d97706;color:#b45309"><b>房室結</b><small>(AV node)</small></div>
+                        <div class="box" style="background:#fef3c7;border:2px solid #d97706;color:#b45309"><b>房室束</b><small>(Bundle of His)</small></div>
+                        <div class="box" style="background:#fef3c7;border:2px solid #d97706;color:#b45309"><b>浦金埃氏纖維</b><small>(Purkinje)</small></div>
+                        <div class="box hs-wide" style="background:#fffbeb;border:1px solid #f59e0b;color:#78350f"><b style="color:#b45309">竇房結 (SA node) 位於右心房上腔靜脈開口下方</b><small>每分鐘自發產生 70~80 次動作電位，稱為「節律點 (Pacemaker)」</small></div>
+                    </div>
                 </div>
                 <span class="card-badge bg-conduction">冠狀與傳導</span>
                 <h2 class="card-heading">6. 心臟特化自律傳導系統</h2>
