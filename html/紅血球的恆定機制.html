@@ -124,7 +124,7 @@
 <div class="container">
     <header>
         <h1>紅血球的恆定與生理機制</h1>
-        <p>生理學 CH05：骨髓造血、腎臟 EPO 負回饋調控、老化吞噬與臨床貧血診斷</p>
+        <p>生理學 CH05：骨髓造血、腎臟 EPO 負回饋調控、老化吞噬與造血原料</p>
     </header>
 
     <!-- Key Metrics Dashboard -->
@@ -212,7 +212,7 @@
             <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
             <button type="button" class="filter-btn" id="filter-hematopoiesis" aria-pressed="false">造血與調控</button>
             <button type="button" class="filter-btn" id="filter-structure" aria-pressed="false">構造與攜氧</button>
-            <button type="button" class="filter-btn" id="filter-patho" aria-pressed="false">代謝與貧血病理</button>
+            <button type="button" class="filter-btn" id="filter-patho" aria-pressed="false">代謝與造血原料</button>
         </div>
 
         <!-- 6 Step Flow Overview Cards -->
@@ -272,15 +272,15 @@
                 <p>鐵與蛋白回收、膽紅素排泄</p>
             </button>
 
-            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：臨床貧血鑑別與紅血球恆定失調">
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：造血原料與血比容變化">
                 <svg viewBox="0 0 100 100">
                     <rect x="20" y="25" width="25" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
-                    <rect x="55" y="45" width="25" height="30" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                    <rect x="55" y="15" width="25" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
                     <text x="32" y="88" font-size="7" fill="#dc2626" text-anchor="middle">正常45%</text>
-                    <text x="67" y="88" font-size="7" fill="#dc2626" text-anchor="middle">貧血15%</text>
+                    <text x="67" y="88" font-size="7" fill="#dc2626" text-anchor="middle">高山↑</text>
                 </svg>
-                <h3>6. 貧血鑑別診斷</h3>
-                <p>血比容異常與各種貧血病因</p>
+                <h3>6. 造血原料與血比容</h3>
+                <p>鐵、B₁₂、葉酸與血比容變化</p>
             </button>
         </div>
 
@@ -370,7 +370,7 @@
                     <li><strong>骨髓響應：</strong>EPO 隨血液循環至紅骨髓，刺激幹細胞發育造血（成人約 1 × 10¹⁰ 個/小時）。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>腎因性貧血臨床意義：</strong><br>腎臟病衰竭患者因腎組織受損無法分泌足夠 EPO，導致骨髓造血刺激受阻，引發嚴重「腎因性貧血」，臨床需定期注射人工合成 EPO。
+                    <strong>負回饋重點：</strong><br>紅血球增加、攜氧恢復後，組織缺氧解除，腎臟分泌的 EPO 隨之減少，造血速度回到平常（負回饋）。
                 </div>
             </div>
 
@@ -443,7 +443,7 @@
                     <li><strong>網狀內皮清除：</strong>破裂之紅血球碎片由脾臟與肝臟之網狀內皮細胞（巨噬細胞）進行吞噬與分解。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>脾臟功能與脾腫大：</strong><br>脾臟是體內清除老化紅血球的最主要過濾器；當發生脾功能亢進（Hypersplenism）時，會過度破壞正常紅血球而引發溶血性貧血。
+                    <strong>脾臟的角色：</strong><br>脾臟是體內清除老化紅血球最主要的過濾器；肝臟的巨噬細胞也會協助清除。
                 </div>
             </div>
 
@@ -471,7 +471,7 @@
                         </g>
                     </svg>
                 </div>
-                <span class="card-badge bg-patho">代謝與貧血病理</span>
+                <span class="card-badge bg-patho">代謝與造血原料</span>
                 <h2 class="card-heading">5. 血紅素分解回收與膽紅素代謝</h2>
                 <div class="core-concept">吞噬細胞將血紅素分解為蛋白質與鐵質進行再利用，血基質則轉化為膽紅素隨膽汁與排洩物排出。</div>
                 <ul class="features-list">
@@ -480,7 +480,7 @@
                     <li><strong>糞尿色素來源：</strong>膽紅素隨膽汁進入腸道，經腸道細菌作用形成尿膽素原（經尿液排出）與糞膽素原（使糞便呈黃褐色）。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>溶血與黃疸臨床現象：</strong><br>當紅血球大量破壞（溶血）或肝膽道阻塞時，血中游離膽紅素堆積會造成皮膚與眼鞏膜發黃，即為「黃疸（Jaundice）」。
+                    <strong>顏色的由來：</strong><br>尿液的黃色與糞便的黃褐色，都來自膽紅素在腸道轉變成的色素（尿膽素原、糞膽素原）。
                 </div>
             </div>
 
@@ -489,35 +489,31 @@
                 <div class="card-svg-container">
                     <svg viewBox="0 0 320 160">
                         <g transform="translate(10,10)">
-                            <!-- Anemia Types Comparison Grid -->
                             <rect x="10" y="10" width="135" height="55" fill="#fef2f2" stroke="#ef4444" rx="6"/>
-                            <text x="77" y="28" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">缺鐵性貧血 (Iron Deficiency)</text>
-                            <text x="77" y="45" font-size="8" fill="#7f1d1d" text-anchor="middle">小紅血球/淺色 (MCV<80, MCH<25)</text>
-
-                            <rect x="155" y="10" width="135" height="55" fill="#fef2f2" stroke="#ef4444" rx="6"/>
-                            <text x="222" y="28" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">惡性貧血 (Pernicious)</text>
-                            <text x="222" y="45" font-size="8" fill="#7f1d1d" text-anchor="middle">缺內在因子致 Vit B₁₂ 吸收不良(巨母)</text>
-
-                            <rect x="10" y="75" width="135" height="55" fill="#fef2f2" stroke="#ef4444" rx="6"/>
-                            <text x="77" y="93" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">鐮刀型與地中海型</text>
-                            <text x="77" y="110" font-size="8" fill="#7f1d1d" text-anchor="middle">基因突變 (HbS / α,β鏈缺失)</text>
-
-                            <rect x="155" y="75" width="135" height="55" fill="#fef2f2" stroke="#ef4444" rx="6"/>
-                            <text x="222" y="93" font-size="10" fill="#991b1b" text-anchor="middle" font-weight="bold">蠶豆症 (G-6-PD 缺乏)</text>
-                            <text x="222" y="110" font-size="8" fill="#7f1d1d" text-anchor="middle">酵素缺乏致氧化溶血性貧血</text>
+                            <text x="77" y="30" font-size="11" fill="#991b1b" text-anchor="middle" font-weight="bold">鐵 (Fe²⁺)</text>
+                            <text x="77" y="48" font-size="8" fill="#7f1d1d" text-anchor="middle">血紅素中心，負責結合氧</text>
+                            <rect x="155" y="10" width="135" height="55" fill="#fffbeb" stroke="#d97706" rx="6"/>
+                            <text x="222" y="30" font-size="11" fill="#b45309" text-anchor="middle" font-weight="bold">維生素 B₁₂・葉酸</text>
+                            <text x="222" y="48" font-size="8" fill="#92400e" text-anchor="middle">紅血球母細胞分裂所需</text>
+                            <rect x="10" y="75" width="135" height="55" fill="#eff6ff" stroke="#2563eb" rx="6"/>
+                            <text x="77" y="95" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">內在因子</text>
+                            <text x="77" y="113" font-size="8" fill="#1e3a8a" text-anchor="middle">胃分泌，幫助 B₁₂ 在迴腸吸收</text>
+                            <rect x="155" y="75" width="135" height="55" fill="#f0fdf4" stroke="#16a34a" rx="6"/>
+                            <text x="222" y="95" font-size="11" fill="#15803d" text-anchor="middle" font-weight="bold">血比容 (Hct)</text>
+                            <text x="222" y="113" font-size="8" fill="#166534" text-anchor="middle">平均約 45%；高山居民較高</text>
                         </g>
                     </svg>
                 </div>
-                <span class="card-badge bg-patho">代謝與貧血病理</span>
-                <h2 class="card-heading">6. 臨床貧血鑑別與紅血球恆定失調</h2>
-                <div class="core-concept">當紅血球數量或血紅素濃度低於正常值時稱為貧血，依病因分為缺鐵性、惡性、溶血性及基因突變型。</div>
+                <span class="card-badge bg-patho">代謝與造血原料</span>
+                <h2 class="card-heading">6. 造血原料與血比容變化</h2>
+                <div class="core-concept">紅骨髓持續造血需要原料：鐵用來合成血紅素，維生素 B₁₂ 與葉酸是細胞分裂所需；血比容則反映血液中紅血球所占的比例。</div>
                 <ul class="features-list">
-                    <li><strong>缺鐵性貧血：</strong>缺乏鐵質（如月經過多、腸道失血），呈現小紅血球及淺色紅血球，補充鐵劑可改善。</li>
-                    <li><strong>惡性貧血：</strong>缺乏胃壁細胞分泌之內在因子（Intrinsic factor）致維生素 B₁₂ 吸收不良，形成巨母紅血球。</li>
-                    <li><strong>基因與溶血型：</strong>鐮刀型貧血（HbS, β鏈麩胺酸變纈胺酸）、地中海型貧血（α/β鏈缺失）及蠶豆症（G-6-PD缺乏）。</li>
+                    <li><strong>鐵質：</strong>血基質中心的 Fe²⁺ 負責結合氧；來源為飲食與老化紅血球的回收。</li>
+                    <li><strong>維生素 B₁₂ 與葉酸：</strong>紅血球母細胞複製 DNA、進行分裂時需要。</li>
+                    <li><strong>內在因子：</strong>胃壁細胞分泌的內在因子（Intrinsic factor），幫助維生素 B₁₂ 在迴腸被吸收。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>血比容（Hct）變化數值：</strong><br>正常人血比容平均約 45%；貧血者可能低至 15%；而生活於高山或長期劇烈運動者可代償性升高至 65%（紅血球增多症）。
+                    <strong>血比容（Hct）變化數值：</strong><br>正常成人血比容平均約 45%（男性約 47%、女性約 42%）；生活於高山者因長期缺氧、EPO 分泌增加，血比容可代償性升高至 55% 以上。
                 </div>
             </div>
 
@@ -549,8 +545,8 @@
             <!-- STAGE 2: CASE APPLICATION -->
             <div id="stage-2-view" style="display: none;">
                 <div class="quiz-stage-header">
-                    <span class="stage-title">第二關｜實務病例應用</span>
-                    <span class="progress-badge" id="s2-progress-text">第二關｜實務病例應用：1／5</span>
+                    <span class="stage-title">第二關｜生活情境應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜生活情境應用：1／5</span>
                 </div>
 
                 <div class="quiz-card">
@@ -567,7 +563,7 @@
             <!-- RESULT BANNERS -->
             <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
                 <h3>🎉 恭喜完全通關！</h3>
-                <p>您已成功通過「先備知識」與「實務病例」兩階段診斷，完整掌握紅血球恆定機制、EPO 調控與臨床貧血診斷！</p>
+                <p>您已成功通過「先備知識」與「生活情境」兩階段診斷，完整掌握紅血球恆定機制、EPO 調控與紅血球代謝！</p>
                 <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
             </div>
 
@@ -657,16 +653,16 @@
         },
         {
             id: 'rbc-homeostasis-foundation-q06',
-            title: '6. 臨床上有關貧血（Anemia）的種類與成因，下列配對何者正確？',
+            title: '6. 製造紅血球需要原料。下列配對何者正確？',
             options: [
-                '缺鐵性貧血：缺乏維生素 B12 導致巨母紅血球形成',
-                '惡性貧血：缺乏胃壁細胞分泌之內在因子，導致維生素 B12 吸收不良',
-                '蠶豆症：血紅素 β 鏈的麩胺酸突變為纈胺酸',
-                '地中海型貧血：缺乏葡萄糖-6-磷酸去氫酶（G-6-PD）'
+                '鐵：血紅素中心的 Fe²⁺，負責結合氧',
+                '鈣：紅血球細胞核的主要成分',
+                '維生素 C：血紅素中心的金屬離子',
+                '內在因子：由腎臟分泌，刺激紅骨髓造血'
             ],
-            answer: 1,
-            hint: '提示：這種貧血是因為胃部缺乏關鍵因子，使維生素 B12 無法在迴腸吸收，導致細胞無法正常分裂。',
-            explanation: '解析：惡性貧血為缺乏胃壁細胞分泌之內在因子（Intrinsic factor），導致維生素 B12 吸收不良使紅血球母細胞無法分裂；缺鐵性貧血為鐵質缺乏；蠶豆症為 G-6-PD 缺乏；鐮刀型貧血為 β 鏈麩胺酸突變為纈胺酸。'
+            answer: 0,
+            hint: '提示：血紅素的血基質中心是哪一種金屬離子？',
+            explanation: '解析：鐵是血紅素血基質中心的 Fe²⁺；維生素 B₁₂ 與葉酸是細胞分裂所需，B₁₂ 吸收需要胃分泌的內在因子；刺激造血的 EPO 則來自腎臟。'
         }
     ];
 
@@ -674,29 +670,29 @@
     const CASE_QUESTIONS = [
         {
             id: 'rbc-homeostasis-case-q01',
-            title: '1. 【臨床病例】一位 45 歲慢性腎臟病（CKD）第五期患者，血液檢查顯示紅血球數（RBC）僅 2.2 × 10⁶/mm³，血紅素（Hb）僅 6.8 g/dl，診斷為嚴重腎因性貧血。請問該患者貧血的最主要生理機制為何？',
+            title: '1. 【生理判讀】登山客在高山停留數週後血比容升高；回到平地一段時間後，血比容又恢復正常。主要原因是？',
             options: [
-                '腎臟組織受損，無法正常釋放紅血球生成因子以產生紅血球生成素（EPO）',
-                '腎臟過度過濾將大量成熟紅血球隨尿液排出',
-                '腎臟無法吸收食物中的鐵離子致血紅素無法合成',
-                '腎臟分泌過多肝素導致紅血球在血管內大量溶血'
+                '缺氧解除，腎臟分泌的 EPO 減少，造血速度回到平常（負回饋）',
+                '平地空氣中的氧太多，紅血球被氧氣破壞',
+                '回到平地後紅骨髓停止所有造血',
+                '脾臟在平地會分泌大量 EPO'
             ],
             answer: 0,
-            hint: '提示：腎臟是體內感應缺氧並產生催化 EPO 活化因子的最主要器官。',
-            explanation: '解析：腎臟（近腎絲球器）是產生紅血球生成因子以活化 EPO 的主要器官。慢性腎病患者因腎組織實質壞死，EPO 分泌嚴重不足，骨髓造血刺激受阻，引發腎因性貧血。'
+            hint: '提示：想想 EPO 分泌是被什麼刺激的？刺激消失後會怎樣？',
+            explanation: '解析：紅血球增加、攜氧恢復後，組織不再缺氧，腎臟 EPO 分泌減少，造血速度回到平常；多出的紅血球隨壽命到期被清除，血比容逐漸恢復，這就是負回饋。'
         },
         {
             id: 'rbc-homeostasis-case-q02',
-            title: '2. 【臨床情境】一位 32 歲全胃切除術後（Total Gastrectomy）的患者，術後數年逐漸出現疲倦、舌頭發紅光滑以及周邊神經麻木感，抽血發現紅血球平均體積（MCV）高達 110 fl（巨母紅血球）。請問其最可能的原因為何？',
+            title: '2. 【生理機制】維生素 B₁₂ 是紅血球母細胞分裂所需。它要在迴腸被吸收，需要哪一種物質幫忙？',
             options: [
-                '胃切除後失去壁細胞分泌之內在因子，導致維生素 B12 吸收障礙引發惡性貧血',
-                '胃切除後無法消化吸收鐵質導致缺鐵性貧血',
-                '胃切除導致腎臟 EPO 分泌停擺',
-                '胃切除引發血紅素 β 鏈基因發生後天突變'
+                '胃壁細胞分泌的內在因子',
+                '胰臟分泌的胰島素',
+                '腎臟分泌的 EPO',
+                '肝臟製造的白蛋白'
             ],
             answer: 0,
-            hint: '提示：胃壁細胞分泌一種關鍵糖蛋白質，為維生素 B12 於小腸吸收所必需。',
-            explanation: '解析：胃壁細胞能分泌內在因子（Intrinsic factor），為迴腸吸收維生素 B12 所必需。全胃切除後缺少內在因子，致維生素 B12 吸收障礙，骨髓紅血球母細胞 DNA 合成受阻無法分裂，形成巨母紅血球貧血（惡性貧血）。'
+            hint: '提示：這種物質由胃分泌，會和 B₁₂ 結合。',
+            explanation: '解析：胃壁細胞分泌內在因子（Intrinsic factor），與維生素 B₁₂ 結合後才能在迴腸被吸收；B₁₂ 讓紅血球母細胞能正常複製 DNA 與分裂。'
         },
         {
             id: 'rbc-homeostasis-case-q03',
@@ -713,29 +709,29 @@
         },
         {
             id: 'rbc-homeostasis-case-q04',
-            title: '4. 【病例判讀】一位 2 歲男童食用蠶豆後，出現急性疲倦、茶色尿及黃疸，經診斷為蠶豆症（G-6-PD 缺乏症）引發之急性溶血。關於其茶色尿與黃疸之生理機制，下列何者正確？',
+            title: '4. 【生活觀察】糞便呈黃褐色，主要來自紅血球分解後的哪一種物質？',
             options: [
-                '紅血球大量破裂釋放血紅素，血基質代謝產生過量膽紅素，經腸道細菌轉化之尿膽素原隨尿排出',
-                'G-6-PD 毒素直接刺激腎臟分泌黑色膽汁進入尿液',
-                '破裂的紅血球細胞核直接堵塞腎小管導致血尿',
-                '蠶豆色素直接經由腎絲球過濾流入尿液'
+                '膽紅素在腸道轉變成的糞膽素原',
+                '血紅素中的鐵',
+                '血球素分解出的胺基酸',
+                '紅血球內的碳酸氫根'
             ],
             answer: 0,
-            hint: '提示：大量紅血球破裂釋放血紅素，血基質轉化為膽紅素，經腸道細菌代謝產物吸收後由腎臟排出。',
-            explanation: '解析：蠶豆症患者紅血球缺乏 G-6-PD 酵素易受氧化破裂（溶血），大量血紅素分解產生過量膽紅素，於腸道經細菌代謝形成尿膽素原（Urobilinogen），部分被腸道吸收經腎臟排入尿液，使尿液呈現深茶色，且過量膽紅素於血中堆積引發黃疸。'
+            hint: '提示：血基質分解後會變成一種色素，隨膽汁進入腸道。',
+            explanation: '解析：血基質轉成膽紅素，隨膽汁排入腸道，經腸道細菌作用形成尿膽素原與糞膽素原；糞膽素原使糞便呈黃褐色。'
         },
         {
             id: 'rbc-homeostasis-case-q05',
-            title: '5. 【鑑別診斷】檢驗科收到一份女性患者的血液報告：RBC 3.2 × 10⁶/mm³、Hb 8.5 g/dl、MCV 72 fl（小紅血球）、MCH 22 pg（淺色紅血球）。請問該患者最可能罹患何種貧血，以及臨床首選改善方式為何？',
+            title: '5. 【生理判讀】一般成年男性的紅血球數與血紅素濃度比女性高。依本教材，主要原因是？',
             options: [
-                '缺鐵性貧血；可直接補充鐵劑來改善',
-                '惡性貧血；需定期注射維生素 B12',
-                '鐮刀型貧血；需補充葉酸與骨髓移植',
-                '蠶豆症；需避免接觸抗凝血劑肝素'
+                '男性的基礎代謝率較高',
+                '男性的骨頭比較多',
+                '女性體內沒有 EPO',
+                '女性的紅血球比較大'
             ],
             answer: 0,
-            hint: '提示：MCV < 80 為小紅血球，MCH < 25 為淺色紅血球，常見於慢性失血導致的原料缺乏。',
-            explanation: '解析：MCV < 80 fl 為小紅血球，MCH < 25 pg 為淺色紅血球（Hb 含量太少），常見於月經失血或腸道慢性失血引發之缺鐵性貧血（Iron deficiency anemia），補充鐵劑可有效改善。'
+            hint: '提示：回想節點 3「男女數值特徵差異」。',
+            explanation: '解析：男性 RBC 約 540 萬/mm³、Hb 16 g/dl；女性約 480 萬/mm³、Hb 14 g/dl。男性數值較高，主要因為基礎代謝率較高、需氧較多。'
         }
     ];
 
@@ -768,7 +764,7 @@
     let s2AnsweredCorrect = false;
     let s2ReviewRequired = false;
     let s2ReviewReady = true;
-    const CASE_REVIEW_NODE_IDS = ['node-card-01', 'node-card-02', 'node-card-03', 'node-card-04', 'node-card-05'];
+    const CASE_REVIEW_NODE_IDS = ['node-card-02', 'node-card-06', 'node-card-02', 'node-card-05', 'node-card-03'];
 
     // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
     document.addEventListener('DOMContentLoaded', () => {
@@ -999,7 +995,7 @@
         s2AnsweredCorrect = false;
         const q = s2Questions[s2CurrentIndex];
 
-        document.getElementById('s2-progress-text').textContent = `第二關｜實務病例應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-progress-text').textContent = `第二關｜生活情境應用：${s2CurrentIndex + 1}／5`;
         document.getElementById('s2-question-text').textContent = q.title;
 
         const optionsContainer = document.getElementById('s2-options-container');

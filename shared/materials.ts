@@ -30,9 +30,13 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   // 實際「通關」判定是病例 5 題要在限時內全對（見 index.html 的 score === 5），
   // 不是 11 題全對，所以這裡不加 note，避免暗示兩者是同一件事。
   'hemostasis-mechanisms-v1': { label: '止血機制與凝血病理圖卡', tracking: 'interactive', nodeTotal: 6, questionTotal: 11 },
+  // v2：2026-09-25 教師決定入門化，移除病理與藥理內容（v1 已發布，保留不動）。
+  'hemostasis-mechanisms-v2': { label: '止血機制與凝血圖卡', tracking: 'interactive', nodeTotal: 6, questionTotal: 11 },
   // 跟 hemostasis-mechanisms-v1 同樣的先備知識＋限時連勝兩層結構，通關判定是
   // 病例 5 題限時全對，不是 11 題全對。
   'blood-gas-transport-v1': { label: '血液氣體運送圖卡', tracking: 'interactive', nodeTotal: 6, questionTotal: 11 },
+  // v2：2026-09-25 教師決定入門化，節點 5、6 改為紅血球回收與造血原料（v1 已發布，保留不動）。
+  'blood-gas-transport-v2': { label: '血液氣體運送圖卡', tracking: 'interactive', nodeTotal: 6, questionTotal: 11 },
   // 這份教材有兩層題目：foundationQuestions（6 題「先備知識」，要先全部答對才解鎖）
   // ＋ caseQuestions（5 題情境／陷阱題的限時連勝挑戰），兩層都會呼叫 CL.answer()，
   // 所以題目總數是 6+5=11，不是只算連勝挑戰的 5 題——這是這次用 audit 腳本重新核對

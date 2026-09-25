@@ -181,7 +181,7 @@
         </section>
 
         <!-- 6 Step Flow Overview Cards -->
-        <div class="reading-cue" id="reading-cue" aria-hidden="true"><span class="cue-arrow">↓</span><span>往下閱讀：查看重點與臨床解說</span></div>
+        <div class="reading-cue" id="reading-cue" aria-hidden="true"><span class="cue-arrow">↓</span><span>往下閱讀：查看重點與補充說明</span></div>
         <div class="flow-grid">
             <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：心臟自律性與特化心肌">
                 <svg viewBox="0 0 100 100">
@@ -284,7 +284,7 @@
                     <li><strong>自發興奮性：</strong>細胞膜具自我興奮性，電衝動經由離子通透性改變傳遍心肌，引發心房與心室順序收縮。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>生理學重要意義：</strong><br>即使將心臟離體（離體心臟灌流實驗），只要提供充足養分與氧氣，心臟仍能維持自律性跳動，這是心臟移植手術得以成功的生理學基礎。
+                    <strong>生理學重要意義：</strong><br>即使將心臟離體（離體心臟灌流實驗），只要提供充足養分與氧氣，心臟仍能維持自律性跳動；實驗課的離體蛙心實驗，觀察的就是這個特性。
                 </div>
             </div>
 
@@ -324,7 +324,7 @@
                     <li><strong>電去極化傳導：</strong>動作電位引發時 Na⁺ 進入細胞，去極化波快速擴散傳遍雙心房，引發心房收縮。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>臨床病理應用（病態竇房結症候群 SSS）：</strong><br>當竇房結因老化或缺血退化時，無法發出正常衝動，引發嚴重過緩心律與昏厥，臨床需植入「人工心律調節器（Artificial Pacemaker）」。
+                    <strong>生理重點：</strong><br>竇房結自發放電的速度最快，所以由它帶領整顆心臟的節奏；傳導系統其他部位雖然也能自己放電，但速度較慢，平常都跟著竇房結的節奏跳動。
                 </div>
             </div>
 
@@ -354,7 +354,7 @@
                     <li><strong>充血保障生理功能：</strong>此延遲確保心房完全收縮將血液擠入心室後，心室才開始去極化收縮。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>臨床病理（房室傳導阻滯 AV block）：</strong><br>若房室結發生缺血或發炎（如一度至三度 AV block），心房衝動無法順利下傳心室，會導致心室率驟減甚至心臟停搏。
+                    <strong>生理重點：</strong><br>房室結約 0.1 秒的延遲，是心電圖上 PR 間隔的主要部分；這段時間讓心房先把血液擠進心室，心室才開始收縮。
                 </div>
             </div>
 
@@ -390,7 +390,7 @@
                     <li><strong>縱向深入：</strong>左、右分枝沿著心室間隔內側表面向下延伸至心尖部。</li>
                 </ul>
                 <div class="clinical-box">
-                    <strong>心電圖與束支傳導阻滯（BBB）：</strong><br>當左或右房室束分枝受損（LBBB / RBBB）時，衝動無法同步傳導，兩心室收縮出現時間差，心電圖 QRS 波會出現寬大或鋸齒變形。
+                    <strong>生理重點：</strong><br>心房與心室之間有纖維環絕緣，衝動一定要經過房室結與希氏束才能到達心室，確保「心房先收縮、心室後收縮」的順序；左右分枝同步下傳，兩心室才能一起收縮。
                 </div>
             </div>
 
@@ -489,8 +489,8 @@
             <!-- STAGE 2: CASE APPLICATION -->
             <div id="stage-2-view" style="display: none;">
                 <div class="quiz-stage-header">
-                    <span class="stage-title">第二關｜實務病例應用</span>
-                    <span class="progress-badge" id="s2-progress-text">第二關｜實務病例應用：1／5</span>
+                    <span class="stage-title">第二關｜生活情境應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜生活情境應用：1／5</span>
                 </div>
 
                 <div class="quiz-card">
@@ -507,7 +507,7 @@
             <!-- RESULT BANNERS -->
             <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
                 <h3>🎉 恭喜完全通關！</h3>
-                <p>您已成功通過「先備知識」與「實務病例」兩階段診斷，完整掌握心臟傳導系統構造與解剖生理學應用！</p>
+                <p>您已成功通過「先備知識」與「生活情境」兩階段診斷，完整掌握心臟傳導系統構造與解剖生理學應用！</p>
                 <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
             </div>
 
@@ -950,7 +950,7 @@
         s2AnsweredCorrect = false;
         const q = s2Questions[s2CurrentIndex];
 
-        document.getElementById('s2-progress-text').textContent = `第二關｜實務病例應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-progress-text').textContent = `第二關｜生活情境應用：${s2CurrentIndex + 1}／5`;
         document.getElementById('s2-question-text').textContent = q.title;
 
         const optionsContainer = document.getElementById('s2-options-container');

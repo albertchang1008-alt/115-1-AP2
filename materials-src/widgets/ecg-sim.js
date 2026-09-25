@@ -20,7 +20,7 @@ window.EcgSim = (() => {
   <input class="ecg-slider" type="range" min="40" max="200" value="75" step="1" aria-label="目標心率（每分鐘次數）">
   <div class="ecg-scale" aria-hidden="true"><span>40</span><span>60</span><span>100</span><span>150</span><span>200</span></div>
   <div class="ecg-row">
-    <label class="ecg-tg"><input type="checkbox" class="ecg-rsa">呼吸性竇性心律不整 <small>（吸氣變快、吐氣變慢）</small></label>
+    <label class="ecg-tg"><input type="checkbox" class="ecg-rsa">呼吸造成的心率變化 <small>（吸氣變快、吐氣變慢）</small></label>
     <label class="ecg-tg"><input type="checkbox" class="ecg-lag">自律神經反應時間 <small>（迷走神經幾乎立即反應，交感神經需數秒）</small></label>
     <button type="button" class="ecg-pause">暫停</button>
   </div>
