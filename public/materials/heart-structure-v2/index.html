@@ -130,6 +130,10 @@
         .detail-card[hidden] { display: none !important; }
         .flow-nav-card[aria-pressed="true"] { border: 3px solid var(--primary); background: var(--primary-light); }
         .detail-card svg text { font-size: max(11px, 0.75rem); }
+        /* 節點導覽卡的小圖只作示意，文字交給下方標題，避免手機上出現 6px 的字。 */
+        .flow-nav-card svg text { display: none; }
+        /* 素材是橫向四格圖：窄版也用橫向裁切，避免圖被壓扁成直條。 */
+        @media (max-width:760px) { .visual-art { height:150px; background-size:400% 100%; background-position:var(--flow-position) center; } }
         @media (max-width:620px) {
             .visual-flow { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; padding:2px 2px 10px; }
             .visual-flow .sim-step { flex:0 0 72%; scroll-snap-align:start; min-height:0; }

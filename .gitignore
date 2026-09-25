@@ -13,3 +13,6 @@ coverage/
 *.tsbuildinfo
 .verify-bundle.tar.gz
 materials-src/*/shots/
+
+# Office 開檔時產生的鎖定檔
+~$*

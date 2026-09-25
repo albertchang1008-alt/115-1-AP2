@@ -22,7 +22,7 @@
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
-| 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：已建立正式 `heart-structure-v2`、登錄目錄、同步來源頁與 390／1280 截圖；`npm run check` 通過。**待 Claude 驗收**。Excel 與既有凍結來源的 11 題文字存在既有差異，詳見 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`，未自行改題。 |
+| 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：**2026-09-25 Claude 驗收通過**（修正窄版實驗室圖壓扁、導覽卡小字），已登錄目錄 `heart-structure-v2`；Excel 心臟構造講義改連 v2。`heart-structure-v1`（元件庫樣板）保留不發布。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 | 教材工作室 | 2026-09-24 已健康檢查：`npm run materials:studio` 可在 `127.0.0.1:5183` 提供 `/api/list`；目前列出 11 份本機教材，其中 `coagulation-v1` 有檔案但未登錄目錄（既有狀態，勿處理）。匯入區可貼上、點擊選取或拖放 `.html/.htm/.xhtml`；檔案先填入程式碼欄與預覽，需按匯入才寫檔。`.command` 與 `.app` 會主動載入 Node 22.23.2，若 5183 已有健康服務則直接開啟。僅本機匯入／稽核／目錄管理，不跑 git、push 或部署。 2026-09-25 起啟動器會比對 `/api/version`：程式檔比執行中的服務新（或舊服務不支援版本檢查）就自動關掉重開，避免沿用舊稽核邏輯。 |
 | ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1`（未發布）。2026-09-24 Codex 實作驗收不通過後，**由 Claude 依規格完成**（模擬器、暫停選拍／放大標示、卡尺、第一關 2 選擇＋4 標示），驗收紀錄 `docs/ECG_SIM_LABEL_ACCEPTANCE.md`。待教師醫學內容複核後才可發布。 |
@@ -89,7 +89,6 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 ## 待辦
 
 **待 Claude 驗收**
-- 心臟構造圖像強化版：`feature/heart-structure-v2`，驗收報告 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`，截圖 `docs/heart-structure-v2-screenshots/`；未 push、未合併、未部署。
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
 
 **等教師決定**
