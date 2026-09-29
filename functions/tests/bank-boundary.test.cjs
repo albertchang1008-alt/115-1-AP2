@@ -90,7 +90,7 @@ test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量
     const headers = ['課程代碼','題目ID','問題','選項A','選項B','正確答案代碼'];
     const rows = Array.from({ length: 500 }, (_, i) => ['ap2', 'q'.repeat(90) + i, '題目 ' + i, '甲', '乙', 'A']);
     const questions = parseBankSheet([headers, ...rows], 'unit01').get('ap2').get('unit01').questions;
-    const course = { id:'ap2', classIds:['A'], units:[{ id:'unit01', opensAt:'', required:true }] };
+    const course = { id:'ap2', classIds:['A'], units:[{ id:'unit01', title:'題庫', opensAt:'', dueAt:'', required:true, threshold:80, activities:[] }] };
     data.set('courses/ap2', { teacherIds:['teacher'], rosterVersion:2, draft:course, published:course });
     data.set('enrollments/ap2__student@ctcn.edu.tw', { email:'student@ctcn.edu.tw', studentId:'S1', classId:'A', enabled:true });
     const teacher = { uid:'teacher', token:{ teacher:true } };
@@ -100,12 +100,15 @@ test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量
     assert.equal(repeatBank.version, bank.version, '列順序變動不產生新版本');
     const auth = { uid:'student', token:{ email:'student@ctcn.edu.tw', email_verified:true, firebase:{ sign_in_provider:'google.com' } } };
     const attempt = { id:'attempt1', courseId:'ap2', unitId:'unit01', version:bank.version, mode:'quiz', full:true, score:0, clientAt:Date.now(), duration:500, answers: questions.map((q) => ({ questionId:q.id, selected:'a', correct:false, seconds:1 })) };
+    const flash = await handlers.submitAttempt.run({ auth, data:{ attempt:{ ...attempt, id:'attempt-flash', mode:'flashcard' } } });
+    assert.equal(flash.progress.units.unit01.best, -1, '完整閃卡不可更新最高分');
+    assert.equal(flash.progress.units.unit01.passedAt, undefined, '完整閃卡滿分仍不可寫 passedAt');
     const result = await handlers.submitAttempt.run({ auth, data:{ attempt } });
     assert.equal(result.progress.units.unit01.best, 100);
     assert.equal(data.get('courses/ap2/attempts/attempt1').score, 100, '後端必須忽略竄改的前端 score/correct，依題庫正解批改');
     const repeated = await handlers.submitAttempt.run({ auth, data:{ attempt } });
     assert.equal(repeated.duplicate, true);
-    assert.equal(repeated.progress.units.unit01.attempts, 1);
+    assert.equal(repeated.progress.units.unit01.attempts, 2, '閃卡與測驗各一次；重送測驗不再累加');
     await assert.rejects(handlers.submitAttempt.run({ auth, data:{ attempt:{ ...attempt, id:'too-many', answers:[...attempt.answers, { questionId:'extra', selected:'a', correct:true, seconds:1 }] } } }), /作答格式錯誤/);
     assert.equal(data.has('courses/ap2/attempts/too-many'), false);
   } finally { Object.assign(db, originals); }

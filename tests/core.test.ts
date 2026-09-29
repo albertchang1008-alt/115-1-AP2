@@ -180,6 +180,20 @@ test('v3 保留所有分類採計，v4 排除選做與無題庫分類', () => {
   assert.deepEqual(summary.requiredItems.map((item) => item.id), ['required']);
   assert.deepEqual(summary.optionalItems.map((item) => item.id), ['optional']);
 });
+test('summarizeUnit 不把未發布題庫的分類列入進度項目', () => {
+  const published: any = { id: 'published', title: '已發布', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] };
+  const unpublished: any = { ...published, id: 'unpublished', title: '未發布', bankVersion: '' };
+  const summary = summarizeUnit({ ...published, id: 'chapter', bankVersion: '', categories: [published, unpublished] }, emptyProgress());
+  assert.deepEqual([...summary.requiredItems, ...summary.optionalItems].map((item) => item.id), ['published']);
+});
+test('選看單元把其下分類與活動全部視為選做', () => {
+  const category: any = { id: 'category', title: '分類', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] };
+  const activity: any = { id: 'read', title: '閱讀', type: 'link', phase: 'before', url: '', description: '', required: true };
+  const summary = summarizeUnit({ ...category, id: 'chapter', required: false, bankVersion: '', categories: [category], activities: [activity] }, emptyProgress());
+  assert.equal(summary.requiredItems.length, 0);
+  assert.deepEqual(summary.optionalItems.map((item) => item.id), ['category', 'read']);
+  assert.equal(summary.next?.required, false);
+});
 test('summarizeUnit 與 v4 chapterCompletion 對必做、選做、活動及舊鍵一致', () => {
   const category: any = { id: 'cat', title: '必做分類', group: '單元', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] };
   const activity: any = { id: 'read', title: '閱讀', type: 'link', phase: 'before', url: 'https://example.com', description: '' };

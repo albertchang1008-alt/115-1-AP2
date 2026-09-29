@@ -95,10 +95,10 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /currentChapters = orderedChapters\(course\)/);
   assert.match(source, /chapterCompletion\(course, name, progress\)/);
-  assert.match(source, /已達標分類/);
+  assert.match(source, /必做分類達標/);
   assert.match(source, /chapter\.activities\.filter/);
   assert.match(source, /<PracticePanel units=\{chapterUnits\}/);
-  assert.match(source, /最高分 \{bestLabel\} \/ 門檻 \{threshold\}/);
+  assert.match(source, /最高 \$\{best\} \/ \$\{threshold\}/);
   assert.match(source, /best < 0 \? '尚未完整作答'/);
   // 抽題、錯題閃卡、綜合練習都要提示學生：不計分，需做完整測驗或完整閃卡。
   assert.match(source, /這是練習，不計入最高分與達標。/);
@@ -216,14 +216,29 @@ test('首頁待辦清單可由控制列展開', async () => {
   assert.match(source, /目前沒有待辦/);
 });
 test('1.6 首頁以既有 progress 顯示待辦與可展開的必做／選看單元卡', async () => {
-  const [source, css] = await Promise.all([readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/style.css', import.meta.url), 'utf8')]);
+  const [source, css, model] = await Promise.all([readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/style.css', import.meta.url), 'utf8'), readFile(new URL('../shared/model.ts', import.meta.url), 'utf8')]);
   assert.match(source, /const chapterProgress = currentChapters\.map/);
   assert.match(source, /已逾期 \{overdueItems\.length\} 項/);
   assert.match(source, /7 天內到期 \{soonItems\.length\} 項/);
   assert.match(source, /必做單元/); assert.match(source, /選看單元・不計完成度/);
   assert.match(source, /localStorage\.getItem\(`progress-unit:/);
   assert.match(source, /progress-dots/); assert.match(source, /next-step/);
+  assert.match(source, /summary\.state !== 'locked'/, '未開放單元不可進入待辦');
+  assert.match(source, /aria-expanded=\{expanded\}/); assert.match(source, /expanded \? <ChevronUp/);
+  assert.match(source, /課前.*課堂.*課後/); assert.match(source, /已達標 \{doneCategories\.length\} 個/);
+  assert.match(source, /只做過練習，還沒完整測驗/); assert.match(model, /節點 \$\{entry\.position\}/);
   assert.match(css, /\.todo-strip \{ display:flex/); assert.match(css, /\.dot\.late/);
+});
+test('1.6 練習分頁使用章節門檻、發布狀態與手機單一展開選單', async () => {
+  const [source, css] = await Promise.all([readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/style.css', import.meta.url), 'utf8')]);
+  const panel = source.slice(source.indexOf('function PracticePanel('), source.indexOf('function ReadingPage('));
+  assert.match(panel, /published = units\.filter\(\(unit\) => !!unit\.bankVersion\)/);
+  assert.match(panel, /required = published\.filter\(\(unit\) => unit\.required\)/);
+  assert.match(panel, /itemStatusForCategory\(\{ \.\.\.unit, threshold \}, progress\)/);
+  assert.match(panel, /const \[openMenu, setOpenMenu\] = useState\(''\)/);
+  assert.match(panel, /完整測驗 \$\{fullAttempts\} 次/); assert.match(panel, /只做過練習/);
+  assert.match(panel, /practice-wrong \$\{wrong === 0 \? 'empty'/);
+  assert.match(css, /\.practice-menu-toggle \{ display:none/); assert.match(css, /\.practice-action-group\.mobile-open \{ display:grid/);
 });
 test('教師預覽作答、影片進度與報表操作不呼叫正式寫入', async () => {
   const calls: string[] = [];
