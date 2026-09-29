@@ -969,6 +969,7 @@ dd {
 .progress-unit { border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px 16px; }
 .progress-unit.optional { background:#fafbfc; }
 .progress-unit > header { display:flex; gap:8px; align-items:center; }
+.progress-unit.locked { display:flex; align-items:flex-start; gap:10px; color:var(--muted); }
 .progress-unit .expand { margin-left:auto; min-width:44px; min-height:44px; padding:0; }
 .progress-unit .unitnumber { color:var(--muted); font-weight:700; }
 .status { border-radius:999px; padding:3px 8px; font-size:calc(12px * var(--font-scale, 1)); }
@@ -977,7 +978,7 @@ dd {
 .due { color:#5d6d7e; margin:2px 0 8px; }.due.overdue { color:#a3231b; }
 .progress-dots { display:flex; gap:3px; flex-wrap:wrap; margin:9px 0; }.dot { width:14px; height:14px; border:1px solid #aeb7c2; border-radius:3px; background:#fff; }.dot.done { background:#2f7d4f; border-color:#2f7d4f; }.dot.partial { background:#e0a23a; border-color:#e0a23a; }.dot.late { background:#c4382f; border-color:#c4382f; }
 .next-step { width:100%; display:flex; justify-content:space-between; gap:10px; margin-top:9px; border-color:#9dbbe0; color:#1b559a; background:#e7effa; text-align:left; }.next-step.late { color:#a3231b; border-color:#c4382f; background:#fbe7e5; }.next-step span { white-space:nowrap; }
-.progress-details { display:grid; gap:5px; padding-top:12px; border-top:1px solid var(--line); margin-top:12px; }.progress-details h4 { margin:5px 0; }.progress-details h4 small { color:#5d6d7e; font-weight:400; }.progress-item { display:grid; grid-template-columns:22px minmax(0, 1fr) auto; gap:6px; margin:0; padding:8px; border-radius:8px; background:#f8fafb; }.progress-item.done span { color:#226b40; }.progress-item.partial span { color:#8a4f00; }.progress-item small { color:#5d6d7e; }
+.progress-details { display:grid; gap:5px; padding-top:12px; border-top:1px solid var(--line); margin-top:12px; }.progress-details h4 { margin:5px 0; }.progress-details h4 small { color:#5d6d7e; font-weight:400; }.progress-details h5 { margin:7px 0 2px; color:var(--muted); }.progress-item { display:grid; grid-template-columns:22px minmax(0, 1fr) auto; gap:6px; margin:0; padding:8px; border-radius:8px; background:#f8fafb; }.progress-item > span { display:flex; align-items:center; }.progress-item.done span { color:#226b40; }.progress-item.partial span { color:#8a4f00; }.progress-item small { color:#5d6d7e; }.completed-items > summary { display:flex; align-items:center; gap:5px; min-height:38px; color:#4c6574; cursor:pointer; }.completed-items[open] > summary svg { transform:rotate(180deg); }.activity-phase { display:grid; gap:5px; padding-left:8px; border-left:2px solid #e4ebef; }
 .back {
   margin-bottom: 18px;
 }
@@ -1052,10 +1053,11 @@ dd {
 .activitycard h3 { margin:8px 0; }.activitycard footer { display:flex; gap:6px; align-items:center; margin-top:12px; }
 .practice-list { display:grid; gap:8px; }
 .practice-note { margin:0 0 4px; }
-.practice-row { display:grid; grid-template-columns:minmax(150px,1.4fr) minmax(170px,1fr) max-content max-content max-content max-content; grid-template-areas:"title score full flash draw wrong"; align-items:center; gap:8px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:white; }
+.practice-row { display:grid; grid-template-columns:22px minmax(150px,1.4fr) minmax(170px,1fr) max-content max-content max-content max-content; grid-template-areas:"icon title score full flash draw wrong"; align-items:center; gap:8px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:white; }
+.practice-row > svg { grid-area:icon; color:#78909c; }.practice-row.status-done > svg { color:#226b40; }.practice-row.status-partial > svg { color:#8a4f00; }
 .practice-row-title { grid-area:title; min-width:0; display:flex; flex-direction:column; }
 .practice-row-title strong { overflow:hidden; text-overflow:ellipsis; }
-.practice-row-score { grid-area:score; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+.practice-row-score { grid-area:score; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }.practice-row-score small { width:100%; color:var(--muted); }
 .practice-full { grid-area:full; }.practice-flash { grid-area:flash; }.practice-wrong { grid-area:wrong; }
 .practice-draw { grid-area:draw; display:flex; align-items:center; gap:4px; white-space:nowrap; }
 .practice-draw > span { color:var(--muted); }
@@ -1063,17 +1065,16 @@ dd {
 .practice-row.focus-pulse { animation:focus-progress-row 2s ease-out; }
 @keyframes focus-progress-row { 0%,55% { background:#e7effa; box-shadow:0 0 0 3px #9dbbe066; } 100% { background:#fff; box-shadow:none; } }
 .practice-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:10px; }.practice-summary strong { padding:10px; border:1px solid var(--line); border-radius:9px; background:#fff; text-align:center; }
-.practice-section { margin:16px 0; display:grid; gap:8px; }.practice-section h3 { margin:0; }.practice-section.optional { padding:12px; background:#fafbfc; border-radius:10px; }
-.practice-row { grid-template-columns:minmax(180px,1.4fr) minmax(160px,1fr) max-content minmax(250px,max-content); grid-template-areas:"title score full flash"; }.practice-score-action,.practice-action-group { display:flex; align-items:center; gap:5px; }.practice-score-action { grid-area:full; flex-direction:column; }.practice-action-group { grid-area:flash; flex-wrap:wrap; }.practice-action-group > small,.practice-score-action > small { width:100%; color:#5d6d7e; font-size:calc(11px * var(--font-scale, 1)); }.scorebar { display:block; position:relative; width:100%; height:6px; border-radius:6px; background:#edf1f4; overflow:hidden; }.scorebar::before { content:""; display:block; height:100%; width:var(--score); background:#e0a23a; }.scorebar::after { content:""; position:absolute; top:0; bottom:0; left:var(--threshold); width:2px; background:#5d6d7e; }.practice-row.optional .scorebar::after { display:none; }.practice-row.optional .scorebar::before { background:#9aa7b2; }
+.practice-section { margin:16px 0; display:grid; gap:8px; }.practice-section h3 { margin:0; }.practice-section.optional { padding:12px; background:#fafbfc; border-radius:10px; }.practice-section-heading { width:100%; min-height:44px; display:flex; align-items:center; justify-content:space-between; padding:4px 0; border:0; background:transparent; text-align:left; }
+.practice-row { grid-template-columns:22px minmax(180px,1.4fr) minmax(160px,1fr) max-content minmax(250px,max-content); grid-template-areas:"icon title score full flash"; }.practice-score-action,.practice-action-group { display:flex; align-items:center; gap:5px; }.practice-score-action { grid-area:full; flex-direction:column; }.practice-action-group { grid-area:flash; flex-wrap:wrap; }.practice-action-group > small,.practice-score-action > small { width:100%; color:#5d6d7e; font-size:calc(11px * var(--font-scale, 1)); }.practice-menu-toggle { display:none; }.practice-wrong.empty { border-style:dashed; color:#86949d; background:transparent; }.scorebar { display:block; position:relative; width:100%; height:6px; border-radius:6px; background:#edf1f4; overflow:hidden; }.scorebar::before { content:""; display:block; height:100%; width:var(--score); background:#e0a23a; }.scorebar::after { content:""; position:absolute; top:0; bottom:0; left:var(--threshold); width:2px; background:#5d6d7e; }.practice-row.optional .scorebar::after { display:none; }.practice-row.optional .scorebar::before { background:#9aa7b2; }
 @media (max-width: 850px) {
-  .practice-row { grid-template-columns:minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"title score score score" "full flash draw wrong"; overflow-x:auto; }
+  .practice-row { grid-template-columns:22px minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"icon title score score score" ". full flash draw wrong"; overflow-x:auto; }
 }
 @media (max-width: 600px) {
   .todo-strip { display:grid; grid-template-columns:1fr; }.todo-strip > * { width:100%; min-height:44px; text-align:left; }
   .progress-unit { padding:12px; }.progress-unit-title { align-items:flex-start; }.progress-unit-title strong { white-space:nowrap; font-size:calc(13px * var(--font-scale, 1)); }.progress-dots .dot { width:12px; height:12px; }.progress-item { grid-template-columns:20px 1fr; }.progress-item small { grid-column:2; }
   .practice-summary { grid-template-columns:1fr 1fr; }.practice-summary strong:last-child { grid-column:1 / -1; }
-  .practice-row { display:flex; flex-direction:column; align-items:stretch; overflow:visible; }.practice-row-title,.practice-row-score { width:100%; }.practice-score-action,.practice-action-group { width:100%; align-items:stretch; }.practice-action-group { display:grid; grid-template-columns:1fr 1fr; }.practice-action-group > small { grid-column:1 / -1; }.practice-draw { grid-column:1 / -1; }.practice-action-group button,.practice-score-action button { min-height:44px; }
-  .practice-row { grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; }
+  .practice-row { display:grid; grid-template-columns:22px 1fr 1fr; grid-template-areas:"icon title title" ". score score" "full full menu" ". actions actions"; overflow:visible; align-items:start; }.practice-row-title,.practice-row-score { width:100%; }.practice-score-action { width:100%; align-items:stretch; }.practice-score-action > small { display:none; }.practice-score-action button,.practice-menu-toggle { width:100%; min-height:44px; }.practice-full::after { content:"・計分"; }.practice-flash::after { content:attr(data-mobile-label); }.practice-menu-toggle { grid-area:menu; display:flex; align-items:center; justify-content:center; gap:5px; }.practice-action-group { grid-area:actions; display:none; width:100%; grid-template-columns:1fr; align-items:stretch; padding:8px; border:1px solid var(--line); border-radius:9px; background:#f8fafb; }.practice-action-group.mobile-open { display:grid; }.practice-action-group > small { grid-column:1; }.practice-action-group button { min-height:44px; }.practice-draw { grid-column:1; display:grid; grid-template-columns:1fr 1fr 1fr; }.practice-draw > span { grid-column:1 / -1; }
   .practice-draw { justify-content:space-between; }
   .practice-draw button { flex:1; }
 }

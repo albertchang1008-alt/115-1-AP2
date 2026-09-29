@@ -269,7 +269,7 @@ export function itemStatusForActivity(activity: Activity, ownerKey: string, prog
     kind: 'activity', id: activity.id, title: activity.title, required, phase,
     status: locked ? 'locked' : entry?.completed ? 'done' : partial ? 'partial' : 'todo',
     detail: activity.type === 'html' && activity.tracking === 'interactive' && entry?.position
-      ? `進度 ${entry.position}${activity.nodeTotal ? ` / ${activity.nodeTotal}` : ''}`
+      ? `節點 ${entry.position}${activity.nodeTotal ? ` / ${activity.nodeTotal}` : ''}`
       : activity.type === 'youtube' && entry?.position ? `看到 ${Math.floor(entry.position / 60)}:${String(Math.floor(entry.position % 60)).padStart(2, '0')}` : undefined,
   };
 }

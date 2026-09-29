@@ -8,6 +8,13 @@ import {
   RotateCcw,
   Clock,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
+  Circle,
+  CircleDashed,
+  AlertCircle,
+  Lock,
+  Eye,
   Settings2,
   X,
   Youtube as YoutubeIcon,
@@ -493,41 +500,87 @@ function ProgressUnitCard({ index, row, progress, route }: { index: number; row:
   const optional = summary.optionalItems;
   const review = isReviewUnit(units[0]);
   const go = (item?: any) => route(`/unit/${encodeURIComponent(units[0].id)}?tab=${item?.kind === 'category' ? `practice&focus=${encodeURIComponent(item.id)}` : phaseTab(item?.phase || 'during')}`);
-  if (summary.required && summary.state === 'locked') return <article className="progress-unit locked"><span className="unitnumber">{String(index).padStart(2, '0')}</span><div><span className="badge">鎖定・{chapter.opensAt ? new Date(chapter.opensAt).toLocaleDateString() : ''} 開放</span><h3>{chapter.title}</h3><p>題目分類 {units.filter((u) => !!u.bankVersion).length}・活動 {chapter.activities.length}・開放後才計入待辦</p></div></article>;
+  if (summary.required && summary.state === 'locked') return <article className="progress-unit locked"><Lock size={20} aria-hidden="true" /><span className="unitnumber">{String(index).padStart(2, '0')}</span><div><span className="badge">鎖定・{chapter.opensAt ? new Date(chapter.opensAt).toLocaleDateString() : ''} 開放</span><h3>{chapter.title}</h3><p>題目分類 {units.filter((u) => !!u.bankVersion).length}・活動 {chapter.activities.length}・開放後才計入待辦</p></div></article>;
   return <article className={`progress-unit ${summary.required ? '' : 'optional'} ${summary.state}`}>
-    <header><span className="unitnumber">{String(index).padStart(2, '0')}</span><span className="badge">{review ? '作業・複習考' : summary.required ? '必做單元' : '選看單元'}</span>{summary.required && <span className={`status status-${summary.state}`}>{review && summary.state === 'done' && isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : statusLabel}</span>}<button className="expand" aria-label={`展開${chapter.title}`} onClick={open}><ChevronRight size={18} /></button></header>
+    <header><span className="unitnumber">{String(index).padStart(2, '0')}</span><span className="badge">{review ? '作業・複習考' : summary.required ? '必做單元' : '選看單元'}</span>{summary.required && <span className={`status status-${summary.state}`}>{review && summary.state === 'done' && isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : statusLabel}</span>}<button className="expand" aria-expanded={expanded} aria-label={`${expanded ? '收合' : '展開'}${chapter.title}`} onClick={open}>{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button></header>
     <button className="progress-unit-title" onClick={() => go()}><h3>{chapter.title}</h3><strong>{summary.required ? `完成 ${summary.doneCount} / ${summary.totalCount} 項` : `看過 ${optional.filter((item) => item.status !== 'todo').length} / ${optional.length} 項`}</strong></button>
     {review && <p>每次 {units[0].review!.drawCount} 題・需達 {chapter.threshold} 分</p>}{summary.dueAt && summary.required && summary.state !== 'done' && <p className={summary.state === 'overdue' ? 'due overdue' : 'due'}>期限 {new Date(summary.dueAt).toLocaleDateString()}・{summary.daysLeft! < 0 ? `已過 ${Math.abs(summary.daysLeft!)} 天` : `還有 ${summary.daysLeft} 天`}</p>}
     {summary.required && <><div className="progress-dots" aria-label={`必做項目完成 ${summary.doneCount} / ${summary.totalCount}`}>{summary.requiredItems.map((item) => <i key={`${item.kind}-${item.id}`} className={`dot ${item.status} ${summary.state === 'overdue' && item.status !== 'done' ? 'late' : ''}`} />)}</div><p>題目分類 {categories.filter((item) => item.status === 'done').length} / {categories.length} 達標・活動 {activities.filter((item) => item.status === 'done').length} / {activities.length} 完成</p></>}
     {summary.required && summary.next && summary.state !== 'done' && <button className={`next-step ${summary.state === 'overdue' ? 'late' : ''}`} onClick={() => go(summary.next)}>{review ? `開始作答（${units[0].review!.drawCount} 題）` : <>{summary.next.required ? (summary.next.kind === 'category' ? '還沒達標：' : '還沒完成：') : '選做：'}{summary.next.title}<span>{summary.next.kind === 'category' ? '去練習' : '前往'}</span></>}</button>}
-    {expanded && <div className="progress-details"><h4>題目分類 <small>門檻 {chapter.threshold} 分・只有完整測驗計分</small></h4>{categories.map((item) => <ProgressItem key={item.id} item={item} />)}<h4>學習活動</h4>{activities.map((item) => <ProgressItem key={item.id} item={item} />)}{!!optional.length && <details><summary>選做（不計完成度）・{optional.length} 項</summary>{optional.map((item) => <ProgressItem key={`${item.kind}-${item.id}`} item={item} optional />)}</details>}</div>}
+    {expanded && <ProgressDetails categories={categories} activities={activities} optional={optional} threshold={chapter.threshold} />}
   </article>;
 }
-function ProgressItem({ item, optional = false }: { item: any; optional?: boolean }) { const text = item.status === 'done' ? (optional ? '看過' : '已完成') : item.status === 'partial' ? (item.kind === 'category' && item.best >= 0 ? `最高 ${item.best}・錯題 ${item.wrongCount || 0}` : '看過部分') : optional ? '還沒看過' : '還沒開始'; return <p className={`progress-item ${item.status}`}><span>{item.status === 'done' ? '✓' : item.status === 'partial' ? '◐' : '○'}</span><strong>{item.title}</strong><small>{text}{item.detail ? `・${item.detail}` : ''}</small></p>; }
+function StatusIcon({ status, optional = false }: { status: string; optional?: boolean }) {
+  if (optional && status !== 'todo') return <Eye size={18} aria-hidden="true" />;
+  if (status === 'done') return <CheckCircle2 size={18} aria-hidden="true" />;
+  if (status === 'partial') return <AlertCircle size={18} aria-hidden="true" />;
+  if (status === 'locked') return <Lock size={18} aria-hidden="true" />;
+  return optional ? <CircleDashed size={18} aria-hidden="true" /> : <Circle size={18} aria-hidden="true" />;
+}
+function ProgressItem({ item, optional = false }: { item: any; optional?: boolean }) {
+  let text = item.status === 'done' ? (optional ? '看過' : '已完成') : item.status === 'partial' ? '看過部分' : optional ? '還沒看過' : '還沒開始';
+  if (item.kind === 'category') {
+    if (item.best >= 0) text = item.status === 'done' ? `最高 ${item.best}・已達標・錯題 ${item.wrongCount || 0}` : `最高 ${item.best}・還差 ${Math.max(0, item.threshold - item.best)} 分・錯題 ${item.wrongCount || 0}`;
+    else if (item.attempted || item.wrongCount) text = '只做過練習，還沒完整測驗';
+    else text = '還沒開始';
+  }
+  return <p className={`progress-item ${item.status}`}><span><StatusIcon status={item.status} optional={optional} /></span><strong>{item.title}</strong><small>{text}{item.detail ? `・${item.detail}` : ''}</small></p>;
+}
+function ProgressDetails({ categories, activities, optional, threshold }: { categories: any[]; activities: any[]; optional: any[]; threshold: number }) {
+  const doneCategories = categories.filter((item) => item.status === 'done'), openCategories = categories.filter((item) => item.status !== 'done');
+  const allActivities = [...activities, ...optional.filter((item) => item.kind === 'activity')];
+  const optionalCategories = optional.filter((item) => item.kind === 'category');
+  const phases = [['pre', '課前'], ['class', '課堂'], ['post', '課後']] as const;
+  return <div className="progress-details">
+    <h4>題目分類 <small>門檻 {threshold} 分・只有完整測驗計分</small></h4>
+    {openCategories.map((item) => <ProgressItem key={item.id} item={item} />)}
+    {!!doneCategories.length && <details className="completed-items"><summary>已達標 {doneCategories.length} 個：{doneCategories.map((item) => `${item.title} ${item.best}`).join('、')} <ChevronDown size={16} aria-hidden="true" /></summary>{doneCategories.map((item) => <ProgressItem key={item.id} item={item} />)}</details>}
+    <h4>學習活動</h4>
+    {phases.map(([phase, label]) => {
+      const items = allActivities.filter((item) => item.phase === phase);
+      if (!items.length) return null;
+      const done = items.filter((item) => item.status === 'done').length;
+      if (done === items.length) return <details className="completed-items activity-phase" key={phase}><summary>{label}・{items.length} 項都完成 <ChevronDown size={16} aria-hidden="true" /></summary>{items.map((item) => <ProgressItem key={item.id} item={item} optional={!item.required} />)}</details>;
+      const complete = items.filter((item) => item.status === 'done'), pending = items.filter((item) => item.status !== 'done');
+      return <section className="activity-phase" key={phase}><h5>{label}・{done} / {items.length} 完成</h5>{pending.map((item) => <ProgressItem key={item.id} item={item} optional={!item.required} />)}{!!complete.length && <details className="completed-items"><summary>已完成 {complete.length} 項 <ChevronDown size={16} aria-hidden="true" /></summary>{complete.map((item) => <ProgressItem key={item.id} item={item} optional={!item.required} />)}</details>}</section>;
+    })}
+    {!!optionalCategories.length && <details><summary>選做題目分類（不計完成度）・{optionalCategories.length} 項</summary>{optionalCategories.map((item) => <ProgressItem key={item.id} item={item} optional />)}</details>}
+  </div>;
+}
 function PracticePanel({ units, threshold, progress, busy, start, route }: { units: Unit[]; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
   const published = units.filter((unit) => !!unit.bankVersion);
   const required = published.filter((unit) => unit.required), optional = published.filter((unit) => !unit.required);
   const state = (unit: Unit) => itemStatusForCategory({ ...unit, threshold }, progress).status;
   const incomplete = required.filter((unit) => state(unit) !== 'done').sort((a, b) => (state(a) === 'partial' ? 0 : 1) - (state(b) === 'partial' ? 0 : 1));
   const complete = required.filter((unit) => state(unit) === 'done');
-  return <><div className="practice-summary"><strong>必做分類達標 {complete.length} / {required.length}</strong><strong>選做分類看過 {optional.filter((unit) => state(unit) !== 'todo').length} / {optional.length}</strong><strong>達標門檻 {threshold} 分</strong></div><p className="muted practice-note"><b>計分：</b>只有完整測驗計入最高分。<br /><b>練習：</b>閃卡、抽題、錯題都不影響完成度，想用哪種就用哪種。</p>{incomplete.length > 0 && <PracticeSection title="必做・還沒達標" units={incomplete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />}{complete.length > 0 && <PracticeSection title="必做・已達標" units={complete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />}{optional.length > 0 && <PracticeSection title="選做・不計完成度" units={optional} threshold={threshold} progress={progress} busy={busy} start={start} route={route} optional />}</>;
+  const [openMenu, setOpenMenu] = useState('');
+  return <><div className="practice-summary"><strong>必做分類達標 {complete.length} / {required.length}</strong><strong>選做分類看過 {optional.filter((unit) => state(unit) !== 'todo').length} / {optional.length}</strong><strong>達標門檻 {threshold} 分</strong></div><p className="muted practice-note"><b>計分：</b>只有完整測驗計入最高分。<br /><b>練習：</b>閃卡、抽題、錯題都不影響完成度，想用哪種就用哪種。</p>{incomplete.length > 0 && <PracticeSection title="必做・還沒達標" units={incomplete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} openMenu={openMenu} setOpenMenu={setOpenMenu} />}{complete.length > 0 && <PracticeSection title="必做・已達標" units={complete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} openMenu={openMenu} setOpenMenu={setOpenMenu} collapseOnMobile />}{optional.length > 0 && <PracticeSection title="選做・不計完成度" units={optional} threshold={threshold} progress={progress} busy={busy} start={start} route={route} optional openMenu={openMenu} setOpenMenu={setOpenMenu} collapseOnMobile />}</>;
 }
-function PracticeSection({ title, units, threshold, progress, busy, start, route, optional = false }: { title: string; units: Unit[]; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void; optional?: boolean }) { return <section className={`practice-section ${optional ? 'optional' : ''}`}><h3>{title}（{units.length}）</h3>{units.map((unit) => <PracticeRow key={unit.id} unit={unit} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />)}</section>; }
-function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
+function PracticeSection({ title, units, threshold, progress, busy, start, route, optional = false, collapseOnMobile = false, openMenu, setOpenMenu }: { title: string; units: Unit[]; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void; optional?: boolean; collapseOnMobile?: boolean; openMenu: string; setOpenMenu: (id: string) => void }) {
+  const [open, setOpen] = useState(() => !(collapseOnMobile && typeof matchMedia !== 'undefined' && matchMedia('(max-width: 600px)').matches));
+  return <section className={`practice-section ${optional ? 'optional' : ''}`}><button className="practice-section-heading" aria-expanded={open} aria-label={`${open ? '收合' : '展開'}${title}`} onClick={() => setOpen(!open)}><h3>{title}（{units.length}）</h3>{open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button>{open && units.map((unit) => <PracticeRow key={unit.id} unit={unit} threshold={threshold} progress={progress} busy={busy} start={start} route={route} menuOpen={openMenu === unit.id} setMenuOpen={(value) => setOpenMenu(value ? unit.id : '')} />)}</section>;
+}
+function PracticeRow({ unit, threshold, progress, busy, start, route, menuOpen, setMenuOpen }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void; menuOpen: boolean; setMenuOpen: (value: boolean) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
   const best = progress.units[unit.id]?.best ?? -1;
   const passed = best >= threshold;
+  const attempted = Object.keys(progress.attempted?.[unit.id] || {}).length;
+  const fullAttempts = progress.units[unit.id]?.fullAttempts || 0;
+  const onlyPractice = best < 0 && (attempted > 0 || wrong > 0);
   // best = -1 表示還沒有完整作答（抽題、錯題、綜合練習不計分），不能直接把哨兵值顯示給學生。
   const bestLabel = best < 0 ? '尚未完整作答' : `${best}`;
   if (isReviewUnit(unit)) return <div className="practice-row"><div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">作業・複習考｜每次 {unit.review!.drawCount} 題</span></div><div className="practice-row-score"><span>最高分 {bestLabel} / 門檻 {threshold}</span>{passed && <span className="badge green">{isOverdue(unit, progress.units[unit.id]) ? '逾期完成' : '已達標'}</span>}</div><button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>開始作答（{unit.review!.drawCount} 題）</button><button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>;
-  return <div className={`practice-row ${unit.required ? '' : 'optional'}`} id={`practice-${unit.id}`}>
-    <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">{unit.required ? '必做' : '選做'}・{unit.questionCount || '—'} 題・看過 {Object.keys(progress.attempted?.[unit.id] || {}).length} 題・錯題 {wrong}</span></div>
-    <div className="practice-row-score"><span>{best < 0 ? '還沒完整測驗' : `最高 ${best} / ${threshold}`}</span><i className="scorebar" style={{ '--score': `${Math.max(0, best)}%`, '--threshold': `${threshold}%` } as any} />{passed && <span className="badge green">已達標</span>}</div>
+  const scoreHint = passed ? '已達標' : best >= 0 ? `還差 ${threshold - best} 分` : onlyPractice ? '只做過練習' : '還沒開始';
+  return <div className={`practice-row ${unit.required ? '' : 'optional'} status-${passed ? 'done' : onlyPractice || best >= 0 ? 'partial' : 'todo'}`} id={`practice-${unit.id}`}>
+    <StatusIcon status={passed ? 'done' : onlyPractice || best >= 0 ? 'partial' : 'todo'} optional={!unit.required} />
+    <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">{unit.required ? '必做' : '選做'}・{unit.questionCount || '—'} 題・看過 {attempted} 題・錯題 {wrong}{fullAttempts ? `・完整測驗 ${fullAttempts} 次` : ''}</span></div>
+    <div className="practice-row-score"><span>{best < 0 ? '還沒完整測驗' : `最高 ${best} / ${threshold}`}</span><small>{scoreHint}</small><i className="scorebar" style={{ '--score': `${Math.max(0, best)}%`, '--threshold': `${threshold}%` } as any} />{passed && <span className="badge green">已達標</span>}</div>
     <div className="practice-score-action"><small>計分</small><button className="practice-full primary" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>完整測驗</button></div>
-    <div className="practice-action-group"><small>練習・不計分</small><button className="practice-flash" disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
+    <button className="practice-menu-toggle" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>練習 {menuOpen ? <ChevronUp size={17} /> : <ChevronDown size={17} />}</button>
+    <div className={`practice-action-group ${menuOpen ? 'mobile-open' : ''}`}><small>練習・不計分</small><button className="practice-flash" data-mobile-label={`（整份 ${unit.questionCount || '—'} 張）`} aria-label={`閃卡，整份 ${unit.questionCount || '—'} 張`} disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
     <div className="practice-draw" aria-label="抽題題數"><span>抽題</span>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>{n} 題</button>)}</div>
-    <button className="practice-wrong" disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>
+    <button className={`practice-wrong ${wrong === 0 ? 'empty' : ''}`} disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題複習（{wrong} 題）</button></div>
   </div>;
 }
 function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; chapterName: string; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
