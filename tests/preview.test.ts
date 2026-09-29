@@ -95,7 +95,7 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
   assert.match(source, /currentChapters = orderedChapters\(course\)/);
   assert.match(source, /chapterCompletion\(course, name, progress\)/);
-  assert.match(source, /必做分類達標/);
+  assert.match(source, /分類達標/);
   assert.match(source, /chapter\.activities\.filter/);
   assert.match(source, /<PracticePanel units=\{chapterUnits\}/);
   assert.match(source, /最高 \$\{best\} \/ \$\{threshold\}/);
@@ -226,6 +226,11 @@ test('1.6 首頁以既有 progress 顯示待辦與可展開的必做／選看單
   assert.match(source, /summary\.state !== 'locked'/, '未開放單元不可進入待辦');
   assert.match(source, /aria-expanded=\{expanded\}/); assert.match(source, /expanded \? <ChevronUp/);
   assert.match(source, /課前.*課堂.*課後/); assert.match(source, /已達標 \{doneCategories\.length\} 個/);
+  assert.match(source, /選做（不計完成度）・\{optionalActivities\.length\} 項活動/);
+  assert.doesNotMatch(source, /選做題目分類/);
+  assert.match(source, /function PartialCircle/);
+  assert.match(source, /summary\.state === 'overdue' && <AlertCircle/);
+  assert.doesNotMatch(source, /status === 'partial'\) return <AlertCircle/);
   assert.match(source, /只做過練習，還沒完整測驗/); assert.match(model, /節點 \$\{entry\.position\}/);
   assert.match(css, /\.todo-strip \{ display:flex/); assert.match(css, /\.dot\.late/);
 });
@@ -233,7 +238,10 @@ test('1.6 練習分頁使用章節門檻、發布狀態與手機單一展開選�
   const [source, css] = await Promise.all([readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/style.css', import.meta.url), 'utf8')]);
   const panel = source.slice(source.indexOf('function PracticePanel('), source.indexOf('function ReadingPage('));
   assert.match(panel, /published = units\.filter\(\(unit\) => !!unit\.bankVersion\)/);
-  assert.match(panel, /required = published\.filter\(\(unit\) => unit\.required\)/);
+  assert.match(panel, /分類達標 \{complete\.length\} \/ \{published\.length\}/);
+  assert.doesNotMatch(panel, /選做分類看過|選做・不計完成度/);
+  assert.doesNotMatch(panel, /unit\.required \? '必做' : '選做'/);
+  assert.match(panel, /optionalChapter = published\.length > 0/);
   assert.match(panel, /itemStatusForCategory\(\{ \.\.\.unit, threshold \}, progress\)/);
   assert.match(panel, /const \[openMenu, setOpenMenu\] = useState\(''\)/);
   assert.match(panel, /完整測驗 \$\{fullAttempts\} 次/); assert.match(panel, /只做過練習/);
