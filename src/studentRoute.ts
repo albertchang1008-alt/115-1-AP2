@@ -1,6 +1,6 @@
 export type StudentRoute =
   | { kind: 'home' }
-  | { kind: 'unit'; unitId: string; tab: 'pre' | 'class' | 'post' | 'practice' }
+  | { kind: 'unit'; unitId: string; tab: 'pre' | 'class' | 'post' | 'practice'; focus?: string }
   | { kind: 'activity'; unitId: string; activityId: string }
   | { kind: 'quiz'; unitId: string; mode: 'full' | 'draw'; count?: number }
   | { kind: 'flashcard'; unitId: string }
@@ -19,7 +19,8 @@ export function parseStudentRoute(hash: string, courseId: string): StudentRoute 
   const unit = rest.match(/^\/unit\/([^/]+)$/);
   if (unit) {
     const tab = q.get('tab');
-    return { kind: 'unit', unitId: decodeURIComponent(unit[1]), tab: ['pre', 'class', 'post', 'practice'].includes(tab || '') ? tab as 'pre' | 'class' | 'post' | 'practice' : 'pre' };
+    const focus = q.get('focus');
+    return { kind: 'unit', unitId: decodeURIComponent(unit[1]), tab: ['pre', 'class', 'post', 'practice'].includes(tab || '') ? tab as 'pre' | 'class' | 'post' | 'practice' : 'pre', ...(focus ? { focus } : {}) };
   }
   const activity = rest.match(/^\/unit\/([^/]+)\/activity\/([^/]+)$/);
   if (activity) return { kind: 'activity', unitId: decodeURIComponent(activity[1]), activityId: decodeURIComponent(activity[2]) };

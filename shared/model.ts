@@ -1,7 +1,7 @@
 export type Mode = 'quiz' | 'flashcard' | 'review';
 export type Phase = 'before' | 'during' | 'after';
 export type UnitVisibility = 'hidden' | 'current' | 'archived';
-export const CURRENT_COMPLETION_FORMULA_VERSION = 3;
+export const CURRENT_COMPLETION_FORMULA_VERSION = 4;
 export interface Question {
   id: string;
   text: string;
@@ -259,8 +259,8 @@ export function itemStatusForCategory(unit: ProgressUnit, progress: Progress, no
     attempted, wrongCount, fullAttempts: entry?.fullAttempts,
   };
 }
-export function itemStatusForActivity(activity: Activity, ownerKey: string, progress: Progress, opensAt = '', now = Date.now()): ItemProgress {
-  const entry = progress.activities?.[`${ownerKey}_${activity.id}`];
+export function itemStatusForActivity(activity: Activity, ownerKey: string, progress: Progress, opensAt = '', now = Date.now(), legacyOwnerKey = ''): ItemProgress {
+  const entry = progress.activities?.[`${ownerKey}_${activity.id}`] || (legacyOwnerKey ? progress.activities?.[`${legacyOwnerKey}_${activity.id}`] : undefined);
   const locked = !!opensAt && parseCourseTime(opensAt) > now;
   const required = isRequiredActivity(activity);
   const partial = !!entry && (!!entry.position || !entry.completed);
@@ -275,11 +275,14 @@ export function itemStatusForActivity(activity: Activity, ownerKey: string, prog
 }
 function phaseTabForProgress(phase: Phase): 'pre' | 'class' | 'post' { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
 /** Chapter 可傳入 categories，讓首頁在同一張單元卡彙整它的題目分類。 */
-export function summarizeUnit(unit: ProgressUnit & { categories?: ProgressUnit[]; activityOwnerKey?: string }, progress: Progress, now = Date.now()): UnitProgressSummary {
-  const categories = unit.categories || (unit.bankVersion ? [unit] : []);
-  const categoryItems = categories.map((category) => itemStatusForCategory({ ...category, opensAt: unit.opensAt, dueAt: unit.dueAt, threshold: unit.threshold }, progress, now));
+export function summarizeUnit(unit: ProgressUnit & { categories?: ProgressUnit[]; activityOwnerKey?: string; legacyActivityOwnerKey?: string }, progress: Progress, now = Date.now()): UnitProgressSummary {
+  const categories = (unit.categories || (unit.bankVersion ? [unit] : [])).filter((category) => !!category.bankVersion);
+  const categoryItems = categories.map((category) => itemStatusForCategory({ ...category, required: unit.required ? category.required : false, opensAt: unit.opensAt, dueAt: unit.dueAt, threshold: unit.threshold }, progress, now));
   const ownerKey = unit.activityOwnerKey || unit.id;
-  const activityItems = (unit.activities || []).map((activity) => itemStatusForActivity(activity, ownerKey, progress, unit.opensAt, now));
+  const activityItems = (unit.activities || []).map((activity) => {
+    const effective = unit.required ? activity : { ...activity, required: false };
+    return itemStatusForActivity(effective, ownerKey, progress, unit.opensAt, now, unit.legacyActivityOwnerKey || categories[0]?.id || '');
+  });
   const all = [...categoryItems, ...activityItems];
   const requiredItems = all.filter((item) => item.required);
   const optionalItems = all.filter((item) => !item.required);
@@ -352,7 +355,8 @@ export function forClass(course: Course, classId: string): Course {
     chapterOrder: (course.chapterOrder || []).filter((name) => visibleChapterNames.has(name)),
     units: visibleUnits.map((u) => {
       const chapter = { ...chapters[chapterName(u)], ...course.chapterOverrides?.[classId]?.[chapterName(u)] };
-      return { ...u, required: chapter.required, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
+      // Chapter.required 控制整個單元是否必做；Unit.required 獨立控制題目分類是否採計。
+      return { ...u, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
     }),
   };
 }
@@ -395,12 +399,15 @@ export function chapterCompletion(course: Course, name: string, p: Progress, for
   const units = course.units.filter((u) => chapterName(u) === name);
   if (!chapter) return { eligible: false, done: false, scoreDone: false, activitiesDone: false, completedActivities: 0, totalRequired: 0 };
   if (formulaVersion < 3) return { ...unitCompletion(units[0] || ({ id: name, ...chapter, bankVersion: '' } as Unit), p, formulaVersion), units };
-  const required = requiredActivities(chapter), hasBank = units.some((u) => !!u.bankVersion);
-  const scoreDone = units.every((u) => !u.bankVersion || (p.units[u.id]?.best ?? -1) >= chapter.threshold);
+  const required = requiredActivities(chapter);
+  // v3 原樣保留：所有有題庫分類都需達標。v4 起選做分類不計完成度。
+  const scoreUnits = formulaVersion >= 4 ? units.filter((u) => u.required && !!u.bankVersion) : units.filter((u) => !!u.bankVersion);
+  const hasBank = scoreUnits.length > 0;
+  const scoreDone = scoreUnits.every((u) => (p.units[u.id]?.best ?? -1) >= chapter.threshold);
   // 尚未升級的舊課程沿用 unitId_activityId；新 Chapter 一律使用 chapter: 前綴避免撞鍵。
   const completedActivities = required.filter((a) => p.activities[chapterActivityKey(name, a.id)]?.completed || (!course.chapters && p.activities[`${units[0]?.id}_${a.id}`]?.completed)).length;
   const activitiesDone = completedActivities === required.length;
-  return { eligible: chapter.required && (hasBank || required.length > 0), done: scoreDone && activitiesDone, scoreDone, activitiesDone, completedActivities, totalRequired: required.length + (hasBank ? units.filter((u) => !!u.bankVersion).length : 0), units };
+  return { eligible: chapter.required && (hasBank || required.length > 0), done: scoreDone && activitiesDone, scoreDone, activitiesDone, completedActivities, totalRequired: required.length + scoreUnits.length, units };
 }
 export function completion(course: Course, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   if (formulaVersion >= 3) {

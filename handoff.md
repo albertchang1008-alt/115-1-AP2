@@ -21,7 +21,7 @@
 | 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 1.6.0 學習進度介面 | `feature/1.6.0-progress-ui`：已完成三個 commit（`3520b89`、`8f94197`、待本次 commit）。Activity 有選填 `required?: boolean` 覆寫，未設定沿用類型推導；只有完整測驗計分，舊閃卡分數保留；選做不計完成度；首頁依既有單一 progress 文件計算，新增 **0 次 Firestore 讀取**。桌機／手機預覽已檢視首頁、單元與練習頁，`npm run check` 與 `git diff --check` 通過。**1.6.0 學習進度介面待 Claude 驗收**。 |
+| 1.6.0 學習進度介面（第二輪修正中） | `feature/1.6.0-progress-ui`：第一輪三個 commit 為 `3520b89`、`8f94197`、`959af99`，不改寫；依 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md` 按 A → B → C 追加修正。A-1 上線資料唯讀盤點（2026-09-29）：正式 Firestore 共 1 份 course、101 份 progress，已發布選做分類 0 個；逐學生逐單元比較 v3 與預定 v4，完成狀態會改變 **0 位學生／0 個單元**。首頁維持單一 progress 文件，新增讀取 0 次。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
