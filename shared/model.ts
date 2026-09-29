@@ -1,7 +1,7 @@
 export type Mode = 'quiz' | 'flashcard' | 'review';
 export type Phase = 'before' | 'during' | 'after';
 export type UnitVisibility = 'hidden' | 'current' | 'archived';
-export const CURRENT_COMPLETION_FORMULA_VERSION = 4;
+export const CURRENT_COMPLETION_FORMULA_VERSION = 3;
 export interface Question {
   id: string;
   text: string;
@@ -277,7 +277,7 @@ function phaseTabForProgress(phase: Phase): 'pre' | 'class' | 'post' { return ph
 /** Chapter 可傳入 categories，讓首頁在同一張單元卡彙整它的題目分類。 */
 export function summarizeUnit(unit: ProgressUnit & { categories?: ProgressUnit[]; activityOwnerKey?: string; legacyActivityOwnerKey?: string }, progress: Progress, now = Date.now()): UnitProgressSummary {
   const categories = (unit.categories || (unit.bankVersion ? [unit] : [])).filter((category) => !!category.bankVersion);
-  const categoryItems = categories.map((category) => itemStatusForCategory({ ...category, required: unit.required ? category.required : false, opensAt: unit.opensAt, dueAt: unit.dueAt, threshold: unit.threshold }, progress, now));
+  const categoryItems = categories.map((category) => itemStatusForCategory({ ...category, required: unit.required, opensAt: unit.opensAt, dueAt: unit.dueAt, threshold: unit.threshold }, progress, now));
   const ownerKey = unit.activityOwnerKey || unit.id;
   const activityItems = (unit.activities || []).map((activity) => {
     const effective = unit.required ? activity : { ...activity, required: false };
@@ -355,8 +355,9 @@ export function forClass(course: Course, classId: string): Course {
     chapterOrder: (course.chapterOrder || []).filter((name) => visibleChapterNames.has(name)),
     units: visibleUnits.map((u) => {
       const chapter = { ...chapters[chapterName(u)], ...course.chapterOverrides?.[classId]?.[chapterName(u)] };
-      // Chapter.required 控制整個單元是否必做；Unit.required 獨立控制題目分類是否採計。
-      return { ...u, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
+      // 題目分類一律沿用所屬 Chapter 的必做狀態；班級覆寫也必須同步到 Unit，
+      // 因為 1.5.x 的完成度、教師待完成名單與後端儲存仍會讀取 Unit.required。
+      return { ...u, required: chapter.required, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
     }),
   };
 }
@@ -400,8 +401,8 @@ export function chapterCompletion(course: Course, name: string, p: Progress, for
   if (!chapter) return { eligible: false, done: false, scoreDone: false, activitiesDone: false, completedActivities: 0, totalRequired: 0 };
   if (formulaVersion < 3) return { ...unitCompletion(units[0] || ({ id: name, ...chapter, bankVersion: '' } as Unit), p, formulaVersion), units };
   const required = requiredActivities(chapter);
-  // v3 原樣保留：所有有題庫分類都需達標。v4 起選做分類不計完成度。
-  const scoreUnits = formulaVersion >= 4 ? units.filter((u) => u.required && !!u.bankVersion) : units.filter((u) => !!u.bankVersion);
+  // v3：必做 Chapter 底下所有已發布題目分類都需達標；分類沒有個別選做狀態。
+  const scoreUnits = units.filter((u) => !!u.bankVersion);
   const hasBank = scoreUnits.length > 0;
   const scoreDone = scoreUnits.every((u) => (p.units[u.id]?.best ?? -1) >= chapter.threshold);
   // 尚未升級的舊課程沿用 unitId_activityId；新 Chapter 一律使用 chapter: 前綴避免撞鍵。

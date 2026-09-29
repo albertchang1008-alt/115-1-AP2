@@ -19,6 +19,7 @@ import {
   CURRENT_COMPLETION_FORMULA_VERSION,
   chaptersOf,
   chapterCompletion,
+  unitCompletion,
   chapterActivityKey,
   forClass,
   unitVisibility,
@@ -156,7 +157,7 @@ test('沒有成績不視為零分達標', () => {
   const c = { units: [{ id: 'u', required: true, threshold: 0 }] } as Course;
   assert.deepEqual(completion(c, emptyProgress(), 1), { done: 0, total: 1 });
 });
-test('第四版完成度以單元計數，所有必做題目分類達標且必做活動完成才算完成', () => {
+test('第三版完成度以單元計數，所有必做題目分類達標且必做活動完成才算完成', () => {
   const unit: any = { id: 'u', required: true, threshold: 80, bankVersion: 'v', activities: [{ id: 'html', type: 'html', tracking: 'interactive' }, { id: 'link', type: 'link' }] };
   let p: any = { units: { u: { best: 90 } }, activities: {} };
   const course: any = { units: [{ ...unit, id: 'u1', group: '血液' }, { ...unit, id: 'u2', group: '血液' }], chapters: { 血液: { title: '血液', required: true, threshold: 80, activities: unit.activities, description: '', opensAt: '', dueAt: '' } } };
@@ -166,19 +167,18 @@ test('第四版完成度以單元計數，所有必做題目分類達標且必�
   p.activities[chapterActivityKey('血液', 'html')] = { completed: true };
   p.activities[chapterActivityKey('血液', 'link')] = { completed: true };
   assert.deepEqual(completion(course, p), { done: 1, total: 1 });
-  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 4);
+  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 3);
 });
-test('v3 保留所有分類採計，v4 排除選做與無題庫分類', () => {
+test('v3 採計必做單元內所有已發布分類，忽略舊分類 required 值', () => {
   const base: any = { title: '分類', group: '單元', threshold: 80, opensAt: '', dueAt: '', activities: [], bankVersion: 'v' };
   const course: any = { units: [{ ...base, id: 'required', required: true }, { ...base, id: 'optional', required: false }, { ...base, id: 'empty', required: true, bankVersion: '' }], chapters: { 單元: { title: '單元', description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } } };
   const progress: any = { units: { required: { best: 90 } }, activities: {} };
   assert.equal(chapterCompletion(course, '單元', progress, 3).done, false);
-  assert.equal(chapterCompletion(course, '單元', progress, 4).done, true);
-  assert.equal(chapterCompletion(course, '單元', progress, 4).totalRequired, 1);
+  assert.equal(chapterCompletion(course, '單元', progress, 3).totalRequired, 2);
   const summary = summarizeUnit({ ...course.chapters.單元, id: '單元', bankVersion: '', categories: course.units, activityOwnerKey: 'chapter:單元' }, progress);
-  assert.equal(summary.state, 'done');
-  assert.deepEqual(summary.requiredItems.map((item) => item.id), ['required']);
-  assert.deepEqual(summary.optionalItems.map((item) => item.id), ['optional']);
+  assert.equal(summary.state, 'inProgress');
+  assert.deepEqual(summary.requiredItems.map((item) => item.id), ['required', 'optional']);
+  assert.deepEqual(summary.optionalItems, []);
 });
 test('summarizeUnit 不把未發布題庫的分類列入進度項目', () => {
   const published: any = { id: 'published', title: '已發布', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] };
@@ -194,7 +194,7 @@ test('選看單元把其下分類與活動全部視為選做', () => {
   assert.deepEqual(summary.optionalItems.map((item) => item.id), ['category', 'read']);
   assert.equal(summary.next?.required, false);
 });
-test('summarizeUnit 與 v4 chapterCompletion 對必做、選做、活動及舊鍵一致', () => {
+test('summarizeUnit 與 v3 chapterCompletion 對分類、活動及舊鍵一致', () => {
   const category: any = { id: 'cat', title: '必做分類', group: '單元', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] };
   const activity: any = { id: 'read', title: '閱讀', type: 'link', phase: 'before', url: 'https://example.com', description: '' };
   const course: any = { units: [category, { ...category, id: 'optional', title: '選做分類', required: false }, { ...category, id: 'empty', title: '無題庫', bankVersion: '' }], chapters: { 單元: { title: '單元', description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [activity] } } };
@@ -206,20 +206,25 @@ test('summarizeUnit 與 v4 chapterCompletion 對必做、選做、活動及舊�
   ];
   for (const progress of cases) {
     const summary = summarizeUnit({ ...course.chapters.單元, id: '單元', bankVersion: '', categories: course.units, activityOwnerKey: 'chapter:單元' }, progress);
-    assert.equal(summary.state === 'done', chapterCompletion(course, '單元', progress, 4).done);
+    assert.equal(summary.state === 'done', chapterCompletion(course, '單元', progress, 3).done);
   }
   const legacyCourse: any = { units: [{ ...category, group: undefined, title: '舊單元', activities: [activity] }] };
   const legacyProgress: any = { units: { cat: { best: 90 } }, activities: { cat_read: { completed: true } } };
   const legacySummary = summarizeUnit({ ...chaptersOf(legacyCourse).舊單元, id: '舊單元', bankVersion: '', categories: legacyCourse.units, activityOwnerKey: 'chapter:舊單元' }, legacyProgress);
-  assert.equal(legacySummary.state === 'done', chapterCompletion(legacyCourse, '舊單元', legacyProgress, 4).done);
+  assert.equal(legacySummary.state === 'done', chapterCompletion(legacyCourse, '舊單元', legacyProgress, 3).done);
 });
 test('舊資料由第一個題目分類推導 Chapter，班級覆寫套用至所有分類', () => {
-  const course: any = { units: [{ id: 'rbc', title: '紅血球', group: '血液', required: true, threshold: 70, opensAt: '', dueAt: '', activities: [] }, { id: 'wbc', title: '白血球', group: '血液', required: false, threshold: 60, opensAt: '', dueAt: '', activities: [] }], chapterOverrides: { A: { 血液: { threshold: 90, required: false } } } };
+  const course: any = { units: [{ id: 'rbc', title: '紅血球', group: '血液', required: true, threshold: 70, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] }, { id: 'wbc', title: '白血球', group: '血液', required: false, threshold: 60, opensAt: '', dueAt: '', bankVersion: 'v', activities: [] }], chapterOverrides: { A: { 血液: { threshold: 90, required: false } } } };
   assert.equal(chaptersOf(course).血液.threshold, 70);
   const shown = forClass(course, 'A');
   assert.equal(shown.units[0].threshold, 90); assert.equal(shown.units[1].threshold, 90);
   assert.equal(shown.chapters!.血液.required, false);
-  assert.equal(shown.units[0].required, true); assert.equal(shown.units[1].required, false);
+  assert.equal(shown.units[0].required, false); assert.equal(shown.units[1].required, false);
+  assert.equal(unitCompletion(shown.units[0], emptyProgress(), 1).eligible, false);
+  assert.equal(unitCompletion(shown.units[0], emptyProgress(), 2).eligible, false);
+  const required = forClass(course, 'B');
+  assert.equal(unitCompletion(required.units[0], emptyProgress(), 1).eligible, true);
+  assert.equal(unitCompletion(required.units[0], emptyProgress(), 2).eligible, true);
 });
 test('教師修改 Chapter 開放時間後，該班每個題目分類都套用相同時間', () => {
   const course: any = { units: [{ id: 'a', title: 'A', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }, { id: 'b', title: 'B', group: '血液', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] }], chapters: { 血液: { title: '血液', description: '', required: true, threshold: 85, opensAt: '2026-10-01T08:00', dueAt: '', activities: [] } } };
@@ -344,10 +349,10 @@ test('複習考每個來源優先抽未考過題目，並保留來源配額', ()
   assert.deepEqual(new Set(drawn.map((x) => x.id)), new Set(['a2', 'b2']));
 });
 
-test('複習考首次達標時間晚於期限才標示逾期，完成度公式為 v4', () => {
+test('複習考首次達標時間晚於期限才標示逾期，完成度公式為 v3', () => {
   assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:01') }), true);
   assert.equal(isOverdue({ dueAt: '2026-09-23T10:00' }, { passedAt: parseCourseTime('2026-09-23T10:00') }), false);
-  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 4);
+  assert.equal(CURRENT_COMPLETION_FORMULA_VERSION, 3);
 });
 
 test('複習考交卷須符合歷史版本的題數與來源配額，舊組卷仍可採計', () => {
