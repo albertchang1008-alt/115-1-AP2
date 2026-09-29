@@ -680,6 +680,8 @@
             btnModeInfo.setAttribute('aria-selected', 'false');
             paneQuiz.classList.add('active');
             paneInfo.classList.remove('active');
+            // 切換到隨堂診斷後捲到題目區，避免學生以為按鈕沒反應（手機上題目在畫面下方）。
+            requestAnimationFrame(() => paneQuiz.scrollIntoView({ behavior: 'smooth', block: 'start' }));
         });
 
         // Filter Toolbar Listener

@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.6.0
+目前版本：1.6.1
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -21,6 +21,7 @@
 | 正式站 | **1.6.0**。`origin/main`＝`0d3130e`（2026-09-29 部署：Functions Deploy complete、Pages Actions 成功、`version.json`＝1.6.0） |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
+| 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
