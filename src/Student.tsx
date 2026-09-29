@@ -387,11 +387,12 @@ export default function Student({
               const rows = phase === 'practice' ? [] : chapter.activities.filter((a) => a.phase === phase);
               const required = rows.filter((a) => isRequiredActivity(a));
               const undone = required.filter((a) => !progress.activities[chapterActivityKey(selectedChapterName, a.id)]?.completed).length;
-              return <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); route(`/unit/${encodeURIComponent(unit.id)}?tab=${id}`); }}>{label} <small>{id === 'practice' ? '練習' : undone ? `${undone} 待完成` : required.length ? '✓ 完成' : rows.length ? `${rows.length} 項` : '暫無'}</small></button>;
+              const practiceDone = chapterUnits.filter((u) => (progress.units[u.id]?.best ?? -1) >= chapter.threshold).length;
+              return <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); route(`/unit/${encodeURIComponent(unit.id)}?tab=${id}`); }}>{label} <small>{id === 'practice' ? `必做 ${practiceDone} / ${chapterUnits.length} 達標` : undone ? `${undone} 項待完成` : required.length ? `✓ ${required.length} / ${required.length}` : rows.length ? `${rows.length} 項` : '暫無'}</small></button>;
             })}
           </div>
           <section className={tab === 'practice' ? 'practice-list' : 'activitycards'} role="tabpanel">
-            {tab === 'practice' ? <><p className="muted practice-note">{isReviewUnit(chapterUnits[0]) ? '複習考每次隨機抽題；抽滿分配且達標才計為完成。' : '完整測驗與完整閃卡計入最高成績；抽題與錯題僅供練習，不影響完成度。'}</p>{chapterUnits.map((classification) => <PracticeRow key={classification.id} unit={classification} threshold={chapter.threshold} progress={progress} busy={busy} start={start} route={route} />)}</> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
+            {tab === 'practice' ? <PracticePanel units={chapterUnits} threshold={chapter.threshold} progress={progress} busy={busy} start={start} route={route} /> : chapter.activities.filter((a) => a.phase === tabPhase(tab)).map((a) => <ActivityCard key={a.id} ownerKey={`chapter:${selectedChapterName}`} activity={a} progress={progress} onOpen={() => route(`/unit/${encodeURIComponent(unit.id)}/activity/${encodeURIComponent(a.id)}`)} />)}
             {tab !== 'practice' && !chapter.activities.some((a) => a.phase === tabPhase(tab)) && <p className="empty">本單元暫無{tab === 'pre' ? '課前' : tab === 'class' ? '課堂' : '課後'}內容。</p>}
           </section>
         </>
@@ -489,6 +490,14 @@ function ProgressUnitCard({ index, row, route }: { index: number; row: { name: s
   </article>;
 }
 function ProgressItem({ item, optional = false }: { item: any; optional?: boolean }) { const text = item.status === 'done' ? (optional ? '看過' : '已完成') : item.status === 'partial' ? (item.kind === 'category' && item.best >= 0 ? `最高 ${item.best}・錯題 ${item.wrongCount || 0}` : '看過部分') : optional ? '還沒看過' : '還沒開始'; return <p className={`progress-item ${item.status}`}><span>{item.status === 'done' ? '✓' : item.status === 'partial' ? '◐' : '○'}</span><strong>{item.title}</strong><small>{text}{item.detail ? `・${item.detail}` : ''}</small></p>; }
+function PracticePanel({ units, threshold, progress, busy, start, route }: { units: Unit[]; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
+  const required = units.filter((unit) => unit.required), optional = units.filter((unit) => !unit.required);
+  const state = (unit: Unit) => summarizeUnit(unit, progress).requiredItems[0]?.status || 'todo';
+  const incomplete = required.filter((unit) => state(unit) !== 'done').sort((a, b) => (state(a) === 'partial' ? 0 : 1) - (state(b) === 'partial' ? 0 : 1));
+  const complete = required.filter((unit) => state(unit) === 'done');
+  return <><div className="practice-summary"><strong>必做分類達標 {complete.length} / {required.length}</strong><strong>選做分類看過 {optional.filter((unit) => state(unit) !== 'todo').length} / {optional.length}</strong><strong>達標門檻 {threshold} 分</strong></div><p className="muted practice-note"><b>計分：</b>只有完整測驗計入最高分。<br /><b>練習：</b>閃卡、抽題、錯題都不影響完成度，想用哪種就用哪種。</p>{incomplete.length > 0 && <PracticeSection title="必做・還沒達標" units={incomplete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />}{complete.length > 0 && <PracticeSection title="必做・已達標" units={complete} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />}{optional.length > 0 && <PracticeSection title="選做・不計完成度" units={optional} threshold={threshold} progress={progress} busy={busy} start={start} route={route} optional />}</>;
+}
+function PracticeSection({ title, units, threshold, progress, busy, start, route, optional = false }: { title: string; units: Unit[]; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void; optional?: boolean }) { return <section className={`practice-section ${optional ? 'optional' : ''}`}><h3>{title}（{units.length}）</h3>{units.map((unit) => <PracticeRow key={unit.id} unit={unit} threshold={threshold} progress={progress} busy={busy} start={start} route={route} />)}</section>; }
 function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
@@ -497,13 +506,13 @@ function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: 
   // best = -1 表示還沒有完整作答（抽題、錯題、綜合練習不計分），不能直接把哨兵值顯示給學生。
   const bestLabel = best < 0 ? '尚未完整作答' : `${best}`;
   if (isReviewUnit(unit)) return <div className="practice-row"><div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">作業・複習考｜每次 {unit.review!.drawCount} 題</span></div><div className="practice-row-score"><span>最高分 {bestLabel} / 門檻 {threshold}</span>{passed && <span className="badge green">{isOverdue(unit, progress.units[unit.id]) ? '逾期完成' : '已達標'}</span>}</div><button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>開始作答（{unit.review!.drawCount} 題）</button><button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>;
-  return <div className="practice-row">
-    <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">題目分類</span></div>
-    <div className="practice-row-score"><span>最高分 {bestLabel} / 門檻 {threshold}</span>{passed && <span className="badge green">已達標</span>}</div>
-    <button className="practice-full" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>完整測驗</button>
-    <button className="practice-flash" disabled={busy} onClick={() => go('flashcard', '/flashcard')}>完整閃卡</button>
+  return <div className={`practice-row ${unit.required ? '' : 'optional'}`} id={`practice-${unit.id}`}>
+    <div className="practice-row-title"><strong>{unit.title}</strong><span className="muted">{unit.required ? '必做' : '選做'}・{unit.questionCount || '—'} 題・看過 {Object.keys(progress.attempted?.[unit.id] || {}).length} 題・錯題 {wrong}</span></div>
+    <div className="practice-row-score"><span>{best < 0 ? '還沒完整測驗' : `最高 ${best} / ${threshold}`}</span><i className="scorebar" style={{ '--score': `${Math.max(0, best)}%`, '--threshold': `${threshold}%` } as any} />{passed && <span className="badge green">已達標</span>}</div>
+    <div className="practice-score-action"><small>計分</small><button className="practice-full primary" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>完整測驗</button></div>
+    <div className="practice-action-group"><small>練習・不計分</small><button className="practice-flash" disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
     <div className="practice-draw" aria-label="抽題題數"><span>抽題</span>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>{n} 題</button>)}</div>
-    <button className="practice-wrong" disabled={busy || !wrong} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button>
+    <button className="practice-wrong" disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards?range=7d`)}>錯題 {wrong}</button></div>
   </div>;
 }
 function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; chapterName: string; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
@@ -515,7 +524,7 @@ function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, 
 // 抽題、錯題閃卡、綜合練習都不寫入最高分；學生常以為做了練習就會有成績，所以在練習畫面直接說明計分方式。
 function PracticeHint({ unit }: { unit?: Unit }) {
   const total = unit?.questionCount ? `全部 ${unit.questionCount} 題` : '全部題目';
-  return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」或「完整閃卡」並做完{total}。</p>;
+  return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」並做完{total}。</p>;
 }
 function WrongCards({ api, course, unit, progress, onBack }: { api: API; course: Course; unit: Unit; progress: Progress; onBack: () => void }) {
   const [range, setRange] = useState<'24h' | '7d' | 'all'>('7d'), [qs, setQs] = useState<Question[]>([]), [i, setI] = useState(0), [flipped, setFlipped] = useState(false), [seen, setSeen] = useState(0);

@@ -97,7 +97,7 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /chapterCompletion\(course, name, progress\)/);
   assert.match(source, /已達標分類/);
   assert.match(source, /chapter\.activities\.filter/);
-  assert.match(source, /chapterUnits\.map\(\(classification\) => <PracticeRow/);
+  assert.match(source, /<PracticePanel units=\{chapterUnits\}/);
   assert.match(source, /最高分 \{bestLabel\} \/ 門檻 \{threshold\}/);
   assert.match(source, /best < 0 \? '尚未完整作答'/);
   // 抽題、錯題閃卡、綜合練習都要提示學生：不計分，需做完整測驗或完整閃卡。
@@ -131,17 +131,18 @@ test('練習分頁每個題目分類是一列並保留四種入口', async () =>
   ]);
   const row = source.slice(source.indexOf('function PracticeRow('), source.indexOf('function ReadingPage('));
   assert.match(source, /className=\{tab === 'practice' \? 'practice-list' : 'activitycards'\}/);
-  assert.equal((source.match(/完整測驗與完整閃卡計入最高成績/g) || []).length, 1);
+  assert.match(source, /只有完整測驗計入最高分/);
   assert.match(row, /className="practice-row"/);
   assert.match(row, />完整測驗<\/button>/);
-  assert.match(row, />完整閃卡<\/button>/);
+  assert.match(row, />閃卡<\/button>/);
   assert.match(row, /\[10, 20, 30\]\.map/);
   assert.match(row, /`\/quiz\?mode=draw&n=\$\{n\}`/);
   assert.match(row, /wrongcards\?range=7d/);
-  assert.match(row, /disabled=\{busy \|\| !wrong\}/);
+  assert.match(row, /disabled=\{busy\}/);
   assert.match(row, /badge green/);
   assert.doesNotMatch(source, /function PracticeCards/);
   assert.match(css, /\.practice-row \{ display:grid/);
+  assert.match(css, /\.practice-summary/);
   assert.match(css, /@media \(max-width: 600px\) \{/);
 });
 test('教師單元與班級對照表使用精確中文文案', async () => {

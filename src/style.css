@@ -1060,12 +1060,17 @@ dd {
 .practice-draw { grid-area:draw; display:flex; align-items:center; gap:4px; white-space:nowrap; }
 .practice-draw > span { color:var(--muted); }
 .practice-row button { min-height:38px; padding:7px 10px; white-space:nowrap; }
+.practice-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:10px; }.practice-summary strong { padding:10px; border:1px solid var(--line); border-radius:9px; background:#fff; text-align:center; }
+.practice-section { margin:16px 0; display:grid; gap:8px; }.practice-section h3 { margin:0; }.practice-section.optional { padding:12px; background:#fafbfc; border-radius:10px; }
+.practice-row { grid-template-columns:minmax(180px,1.4fr) minmax(160px,1fr) max-content minmax(250px,max-content); grid-template-areas:"title score full flash"; }.practice-score-action,.practice-action-group { display:flex; align-items:center; gap:5px; }.practice-score-action { grid-area:full; flex-direction:column; }.practice-action-group { grid-area:flash; flex-wrap:wrap; }.practice-action-group > small,.practice-score-action > small { width:100%; color:#5d6d7e; font-size:calc(11px * var(--font-scale, 1)); }.scorebar { display:block; position:relative; width:100%; height:6px; border-radius:6px; background:#edf1f4; overflow:hidden; }.scorebar::before { content:""; display:block; height:100%; width:var(--score); background:#e0a23a; }.scorebar::after { content:""; position:absolute; top:0; bottom:0; left:var(--threshold); width:2px; background:#5d6d7e; }.practice-row.optional .scorebar::after { display:none; }.practice-row.optional .scorebar::before { background:#9aa7b2; }
 @media (max-width: 850px) {
   .practice-row { grid-template-columns:minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"title score score score" "full flash draw wrong"; overflow-x:auto; }
 }
 @media (max-width: 600px) {
   .todo-strip { display:grid; grid-template-columns:1fr; }.todo-strip > * { width:100%; min-height:44px; text-align:left; }
   .progress-unit { padding:12px; }.progress-unit-title { align-items:flex-start; }.progress-unit-title strong { white-space:nowrap; font-size:calc(13px * var(--font-scale, 1)); }.progress-dots .dot { width:12px; height:12px; }.progress-item { grid-template-columns:20px 1fr; }.progress-item small { grid-column:2; }
+  .practice-summary { grid-template-columns:1fr 1fr; }.practice-summary strong:last-child { grid-column:1 / -1; }
+  .practice-row { display:flex; flex-direction:column; align-items:stretch; overflow:visible; }.practice-row-title,.practice-row-score { width:100%; }.practice-score-action,.practice-action-group { width:100%; align-items:stretch; }.practice-action-group { display:grid; grid-template-columns:1fr 1fr; }.practice-action-group > small { grid-column:1 / -1; }.practice-draw { grid-column:1 / -1; }.practice-action-group button,.practice-score-action button { min-height:44px; }
   .practice-row { grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; }
   .practice-draw { justify-content:space-between; }
   .practice-draw button { flex:1; }

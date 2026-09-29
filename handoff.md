@@ -21,7 +21,7 @@
 | 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 1.6.0 學習進度介面（進行中） | 分支 `feature/1.6.0-progress-ui` 自 `e08483f` 建立。盤點：原 Activity 沒有 `required`，必做由類型推導；現已新增選填 `required?: boolean` 覆寫，未設定時維持原行為。首頁只讀一次 `getProgress` 的 progress 文件（已有 best、attempted、wrong、activities），本版新增 **0 次 Firestore 讀取**。第一個 commit 已完成狀態模型、計分規則與型別驗證；後續為首頁及單元／練習介面。 |
+| 1.6.0 學習進度介面 | `feature/1.6.0-progress-ui`：已完成三個 commit（`3520b89`、`8f94197`、待本次 commit）。Activity 有選填 `required?: boolean` 覆寫，未設定沿用類型推導；只有完整測驗計分，舊閃卡分數保留；選做不計完成度；首頁依既有單一 progress 文件計算，新增 **0 次 Firestore 讀取**。桌機／手機預覽已檢視首頁、單元與練習頁，`npm run check` 與 `git diff --check` 通過。**1.6.0 學習進度介面待 Claude 驗收**。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
