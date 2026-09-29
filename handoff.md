@@ -18,10 +18,10 @@
 
 | 項目 | 狀態 |
 |---|---|
-| 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
-| 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
+| 正式站 | **1.6.0**。`origin/main`＝`0d3130e`（2026-09-29 部署：Functions Deploy complete、Pages Actions 成功、`version.json`＝1.6.0） |
+| 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 1.6.0 學習進度介面 | **1.6.0 第三輪修正完成，待教師在教師預覽確認後合併**。`feature/1.6.0-progress-ui`：第一輪 `3520b89`、`8f94197`、`959af99`，第二輪 `bb6f734`、`8a4c89f`、`0b46847`，第三輪 `76b7216`、`01b4845` 與 Claude 接手的收尾 commit。教師決定題目分類一律必做，v4 已撤回、公式維持 v3（盤點 101 份 progress，v3／v4 差異 0）。`forClass()` 恢復以 Chapter（含班級覆寫）決定分類必做。首頁維持單一 progress 文件，新增讀取 0 次。progress 活動欄位只有 `position/completed/updatedAt`，互動教材只能顯示「節點 x / y」。教師預覽範例課程已擴充為涵蓋已完成、逾期、未開放、複習考、選看單元的示例資料；截圖在 `docs/progress-ui-1.6.0-screenshots/`（手機選單截圖為第二輪舊資料）。驗收紀錄 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。未 push、未合併、未部署。 |
+| 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
