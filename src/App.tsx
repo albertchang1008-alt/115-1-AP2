@@ -57,6 +57,7 @@ import {
   allocateDraw,
   isReviewUnit,
   isOverdue,
+  isRequiredActivity,
 } from '../shared/model';
 import {
   API,
@@ -816,6 +817,13 @@ function ChapterActivityEditor({
             <option value="youtube">YouTube 影片</option>
             <option value="html">互動 HTML 教材</option>
             <option value="link">外部教材</option>
+          </select>
+        </Field>
+        <Field label="必做">
+          <select value={activity.required === undefined ? '' : String(activity.required)} onChange={(e) => onChange({ required: e.target.value === '' ? undefined : e.target.value === 'true' })}>
+            <option value="">依活動類型（預設：{isRequiredActivity(activity) ? '必做' : '選做'}）</option>
+            <option value="true">必做</option>
+            <option value="false">選做</option>
           </select>
         </Field>
         <Field label={activity.type === 'html' ? 'GitHub Pages 教材網址' : '教材連結'}>

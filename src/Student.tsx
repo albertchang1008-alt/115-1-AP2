@@ -45,6 +45,7 @@ import {
   isReviewUnit,
   isOverdue,
   drawReviewQuestions,
+  isRequiredActivity,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -475,7 +476,6 @@ function StudentSettings() {
 }
 function phaseTab(phase: string) { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
 function tabPhase(tab: string) { return tab === 'pre' ? 'before' : tab === 'class' ? 'during' : 'after'; }
-function isRequiredActivity(a: any) { return (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link'; }
 export function defaultTab(unit: Pick<Unit | Chapter, 'activities'>, progress: Progress, ownerId = (unit as Unit).id || ''): 'pre' | 'class' | 'post' | 'practice' {
   const stages = [['before', 'pre'], ['during', 'class'], ['after', 'post']] as const;
   const activityKey = (id: string) => ownerId.startsWith('chapter:') ? `${ownerId}_${id}` : `${ownerId}_${id}`;

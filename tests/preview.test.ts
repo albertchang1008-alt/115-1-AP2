@@ -252,7 +252,7 @@ test('教師預覽作答、影片進度與報表操作不呼叫正式寫入', as
   });
   await api.call('updateReports');
   assert.deepEqual(calls, ['getBank']);
-  assert.equal((await api.call('getProgress')).units[c.units[0].id].best, 100);
+  assert.equal((await api.call('getProgress')).units[c.units[0].id].best, -1, '完整閃卡是練習，不更新最高分');
 });
 test('預覽重設與不同預覽 instance 不共用進度', async () => {
   const a = memoryApi(),

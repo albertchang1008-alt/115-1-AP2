@@ -225,6 +225,7 @@ export const saveCourse = onCall(options, async (req) => {
       )
         fail('YouTube 連結或片段時間無效');
       if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
+      if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
       if (a.materialVersion) id(a.materialVersion);
       for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
       if (a.type === 'html' && a.url && !validMaterialUrl(a.url))
@@ -245,6 +246,7 @@ export const saveCourse = onCall(options, async (req) => {
       if (!a.title?.trim() || !['before', 'during', 'after'].includes(a.phase) || !['html', 'youtube', 'link', 'quiz'].includes(a.type)) fail('活動類型錯誤');
       if (a.type === 'youtube' && (!youtubeId(a.url) || !Number.isFinite(a.start || 0) || (a.start || 0) < 0 || (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))) fail('YouTube 連結或片段時間無效');
       if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
+      if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
       if (a.materialVersion) id(a.materialVersion);
       for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
       if (a.type === 'html' && a.url && !validMaterialUrl(a.url)) fail('教材網址需使用有效 HTTPS 網址');
@@ -687,7 +689,8 @@ export const submitAttempt = onCall(options, async (req) => {
       ...a,
       receivedAt: Date.now(),
     });
-    if (a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
+    // 1.6.0 起閃卡是純練習：錯題與已看題數仍寫入，但只有完整測驗可達標。
+    if (a.mode === 'quiz' && a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
       next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
     tx.create(ref, saved);
     if (a.mode !== 'review') tx.set(pr, { ...next, uid: p.uid, classId: p.classId });

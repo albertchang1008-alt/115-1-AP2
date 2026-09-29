@@ -42,6 +42,8 @@ export interface Activity {
   end?: number;
   description: string;
   tracking?: 'reading' | 'interactive';
+  /** 未設定時沿用活動類型的既有必做推導；設定後可明確覆寫為必做或選做。 */
+  required?: boolean;
   materialVersion?: string;
   nodeTotal?: number;
   questionTotal?: number;
@@ -160,7 +162,7 @@ export interface Attempt {
 export interface Progress {
   units: Record<
     string,
-    { best: number; attempts: number; updatedAt: number; passedAt?: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
+    { best: number; attempts: number; updatedAt: number; passedAt?: number; fullAttempts?: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
@@ -213,6 +215,84 @@ export function wrongCardIds(progress: Progress, unitId: string, version: string
     .filter(([, entry]) => range === 'all' || (entry.at > 0 && now - entry.at <= limit))
     .sort((a, b) => b[1].n - a[1].n || b[1].at - a[1].at)
     .map(([questionId]) => questionId);
+}
+export type ItemStatus = 'done' | 'partial' | 'todo' | 'locked';
+export interface ItemProgress {
+  kind: 'category' | 'activity';
+  id: string;
+  title: string;
+  required: boolean;
+  phase?: 'pre' | 'class' | 'post';
+  status: ItemStatus;
+  best?: number;
+  threshold?: number;
+  questionCount?: number;
+  attempted?: number;
+  wrongCount?: number;
+  fullAttempts?: number;
+  detail?: string;
+}
+export interface UnitProgressSummary {
+  unitId: string;
+  required: boolean;
+  state: 'done' | 'inProgress' | 'todo' | 'overdue' | 'locked';
+  dueAt?: string;
+  daysLeft?: number;
+  requiredItems: ItemProgress[];
+  optionalItems: ItemProgress[];
+  doneCount: number;
+  totalCount: number;
+  next?: ItemProgress;
+}
+type ProgressUnit = Pick<Unit, 'id' | 'title' | 'required' | 'threshold' | 'opensAt' | 'dueAt' | 'bankVersion' | 'questionCount' | 'activities'>;
+export function itemStatusForCategory(unit: ProgressUnit, progress: Progress, now = Date.now()): ItemProgress {
+  const entry = progress.units?.[unit.id];
+  const locked = !!unit.opensAt && parseCourseTime(unit.opensAt) > now;
+  const best = entry?.best ?? -1;
+  const attempted = Object.keys(progress.attempted?.[unit.id] || {}).length;
+  const wrongCount = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
+  const hasRecord = !!entry?.attempts || attempted > 0 || wrongCount > 0;
+  return {
+    kind: 'category', id: unit.id, title: unit.title, required: unit.required,
+    status: locked ? 'locked' : best >= unit.threshold ? 'done' : hasRecord ? 'partial' : 'todo',
+    best, threshold: unit.threshold, questionCount: unit.questionCount,
+    attempted, wrongCount, fullAttempts: entry?.fullAttempts,
+  };
+}
+export function itemStatusForActivity(activity: Activity, ownerKey: string, progress: Progress, opensAt = '', now = Date.now()): ItemProgress {
+  const entry = progress.activities?.[`${ownerKey}_${activity.id}`];
+  const locked = !!opensAt && parseCourseTime(opensAt) > now;
+  const required = isRequiredActivity(activity);
+  const partial = !!entry && (!!entry.position || !entry.completed);
+  const phase = phaseTabForProgress(activity.phase);
+  return {
+    kind: 'activity', id: activity.id, title: activity.title, required, phase,
+    status: locked ? 'locked' : entry?.completed ? 'done' : partial ? 'partial' : 'todo',
+    detail: activity.type === 'html' && activity.tracking === 'interactive' && entry?.position
+      ? `進度 ${entry.position}${activity.nodeTotal ? ` / ${activity.nodeTotal}` : ''}`
+      : activity.type === 'youtube' && entry?.position ? `看到 ${Math.floor(entry.position / 60)}:${String(Math.floor(entry.position % 60)).padStart(2, '0')}` : undefined,
+  };
+}
+function phaseTabForProgress(phase: Phase): 'pre' | 'class' | 'post' { return phase === 'before' ? 'pre' : phase === 'during' ? 'class' : 'post'; }
+/** Chapter 可傳入 categories，讓首頁在同一張單元卡彙整它的題目分類。 */
+export function summarizeUnit(unit: ProgressUnit & { categories?: ProgressUnit[]; activityOwnerKey?: string }, progress: Progress, now = Date.now()): UnitProgressSummary {
+  const categories = unit.categories || (unit.bankVersion ? [unit] : []);
+  const categoryItems = categories.map((category) => itemStatusForCategory({ ...category, opensAt: unit.opensAt, dueAt: unit.dueAt, threshold: unit.threshold }, progress, now));
+  const ownerKey = unit.activityOwnerKey || unit.id;
+  const activityItems = (unit.activities || []).map((activity) => itemStatusForActivity(activity, ownerKey, progress, unit.opensAt, now));
+  const all = [...categoryItems, ...activityItems];
+  const requiredItems = all.filter((item) => item.required);
+  const optionalItems = all.filter((item) => !item.required);
+  const doneCount = requiredItems.filter((item) => item.status === 'done').length;
+  const locked = !!unit.opensAt && parseCourseTime(unit.opensAt) > now;
+  const dueAt = unit.dueAt || undefined;
+  const daysLeft = dueAt ? Math.ceil((parseCourseTime(dueAt) - now) / 86400000) : undefined;
+  const state = locked ? 'locked' : doneCount === requiredItems.length ? 'done'
+    : dueAt && parseCourseTime(dueAt) < now ? 'overdue'
+    : requiredItems.some((item) => item.status !== 'todo') ? 'inProgress' : 'todo';
+  const next = [...requiredItems.filter((item) => item.status === 'partial'), ...requiredItems.filter((item) => item.status === 'todo')][0]
+    || optionalItems.find((item) => item.status === 'todo' || item.status === 'partial');
+  return { unitId: unit.id, required: unit.required, state, dueAt, daysLeft, requiredItems, optionalItems, doneCount, totalCount: requiredItems.length, next };
 }
 export interface Stat {
   students: number;
@@ -286,8 +366,14 @@ export const modes: Record<Mode, string> = {
   flashcard: '閃卡作答',
   review: '錯題複習',
 };
+/** 活動可個別覆寫必做性；舊資料沒有 required 時維持 1.5.x 的推導規則。 */
+export function isRequiredActivity(activity: Pick<Activity, 'type' | 'tracking' | 'required'>) {
+  return activity.required === undefined
+    ? (activity.type === 'html' && activity.tracking === 'interactive') || activity.type === 'link'
+    : activity.required;
+}
 export function requiredActivities(source: Pick<Unit | Chapter, 'activities'>) {
-  return (source.activities || []).filter((a) => (a.type === 'html' && a.tracking === 'interactive') || a.type === 'link');
+  return (source.activities || []).filter(isRequiredActivity);
 }
 export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   // 只交過測驗的學生，progress 文件可能沒有 activities 欄位；先補空物件避免整頁當掉。
@@ -432,8 +518,10 @@ export function applyAttempt(p: Progress, a: Attempt): Progress {
     units: {
       ...p.units,
       [a.unitId]: {
-        best: a.full ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
+        // 1.6.0 起只有完整測驗計入最高分；舊的閃卡分數原樣保留。
+        best: a.mode === 'quiz' && a.full ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
         attempts: (old?.attempts || 0) + 1,
+        fullAttempts: (old?.fullAttempts || 0) + (a.mode === 'quiz' && a.full ? 1 : 0),
         wrong,
         updatedAt: a.receivedAt || a.clientAt,
       },

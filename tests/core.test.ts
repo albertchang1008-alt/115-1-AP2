@@ -28,6 +28,10 @@ import {
   drawReviewQuestions,
   isOverdue,
   reviewAttemptIsFull,
+  isRequiredActivity,
+  itemStatusForCategory,
+  itemStatusForActivity,
+  summarizeUnit,
 } from '../shared/model';
 const q = {
   id: 'q1',
@@ -77,12 +81,33 @@ test('題目選項正解與穩定 ID', () => {
   assert.ok(validateQuestions([{ ...q, answer: 'z' }]).length);
   assert.equal(grade([q], { q1: 'a' }, {})[0].correct, true);
 });
-test('複習與抽題不提高完成度，完整作答取最高', () => {
+test('複習、閃卡與抽題不提高完成度，只有完整測驗取最高', () => {
   let p = applyAttempt(emptyProgress(), attempt({ score: 80 }));
   p = applyAttempt(p, attempt({ id: 'a2', score: 20 }));
   assert.equal(p.units.u.best, 80);
   assert.equal(applyAttempt(p, attempt({ mode: 'review', score: 100 })), p);
+  assert.equal(applyAttempt(p, attempt({ mode: 'flashcard', score: 100 })).units.u.best, 80);
   assert.equal(applyAttempt(p, attempt({ full: false, score: 100 })).units.u.best, 80);
+});
+test('活動必做覆寫優先，未設定沿用既有類型推導', () => {
+  assert.equal(isRequiredActivity({ type: 'youtube', required: true }), true);
+  assert.equal(isRequiredActivity({ type: 'link', required: false }), false);
+  assert.equal(isRequiredActivity({ type: 'link' }), true);
+  assert.equal(isRequiredActivity({ type: 'html', tracking: 'interactive' }), true);
+  assert.equal(isRequiredActivity({ type: 'youtube' }), false);
+});
+test('進度狀態函式辨識分類、活動與單元待辦', () => {
+  const base: any = { id: 'u', title: '分類', required: true, threshold: 80, opensAt: '', dueAt: '2026-09-20T00:00', bankVersion: 'v', questionCount: 10, activities: [{ id: 'a', title: '互動', type: 'html', tracking: 'interactive', phase: 'during', required: true }] };
+  let p: any = { units: { u: { best: 70, attempts: 1, updatedAt: 1, wrong: { v: { q: { n: 1, at: 1 } } } } }, attempted: { u: { q: true } }, activities: { u_a: { position: 2, completed: false, updatedAt: 1 } } };
+  assert.equal(itemStatusForCategory(base, p, Date.parse('2026-09-01')).status, 'partial');
+  assert.equal(itemStatusForActivity(base.activities[0], 'u', p).status, 'partial');
+  const s = summarizeUnit(base, p, Date.parse('2026-09-21'));
+  assert.equal(s.state, 'overdue'); assert.equal(s.doneCount, 0); assert.equal(s.next?.kind, 'category');
+  assert.equal(itemStatusForCategory({ ...base, opensAt: '2026-10-01T00:00' }, p, Date.parse('2026-09-01')).status, 'locked');
+  p = { units: {}, activities: {} };
+  assert.equal(itemStatusForCategory(base, p).status, 'todo');
+  const optional = summarizeUnit({ ...base, required: false, activities: [{ ...base.activities[0], required: false }] }, p, Date.parse('2026-09-21'));
+  assert.equal(optional.state, 'done'); assert.equal(optional.totalCount, 0); assert.equal(optional.next?.required, false);
 });
 test('首次去重、模式分離與最新複習統計', () => {
   const m: Report['modes'] = {},

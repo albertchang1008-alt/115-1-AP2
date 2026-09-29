@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.5.1
+目前版本：1.6.0
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -21,6 +21,7 @@
 | 正式站 | **1.5.0**。`origin/main`＝`82e7140`（2026-09-23 部署：Functions 39 個 Deploy complete、Pages Actions 成功、`version.json`＝1.5.0） |
 | 開發分支 | `feature/1.5.0-review-exam` 已等於正式 main；本機 `main` 未更新（deploy.sh 不動本機 main） |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
+| 1.6.0 學習進度介面（進行中） | 分支 `feature/1.6.0-progress-ui` 自 `e08483f` 建立。盤點：原 Activity 沒有 `required`，必做由類型推導；現已新增選填 `required?: boolean` 覆寫，未設定時維持原行為。首頁只讀一次 `getProgress` 的 progress 文件（已有 best、attempted、wrong、activities），本版新增 **0 次 Firestore 讀取**。第一個 commit 已完成狀態模型、計分規則與型別驗證；後續為首頁及單元／練習介面。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
@@ -62,7 +63,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 **單元模型（1.4.0，`docs/UNIT_MODEL_1.4.0.md`）**
 7. Sheet「單元」＝`Chapter`：開放、期限、門檻、必做、班級覆寫、活動、看板移動、完成度計數都在此層。Sheet「次單元」＝`Unit`（題目分類）：題庫版本、進度、錯題、完整測驗範圍。
-8. 單元完成＝底下每個已發布分類的完整測驗／完整閃卡最高分 ≥ 單元門檻，且必做活動完成。完成度公式版本 3（`CURRENT_COMPLETION_FORMULA_VERSION`），舊結算快照用原版本。
+8. 單元完成＝底下每個已發布分類的完整測驗最高分 ≥ 單元門檻，且必做活動完成。1.6.0 起完整閃卡只作練習，舊閃卡最高分保留、不重算；選做分類與活動不計完成度。完成度公式版本 3（`CURRENT_COMPLETION_FORMULA_VERSION`），舊結算快照用原版本。
 9. 單元活動進度鍵 `chapter:<單元名>_<activityId>`。綜合練習只含看板「目前」的分類，且不含複習考。
 
 **複習考（1.5.0，`docs/REVIEW_EXAM_1.5.0.md`）**
