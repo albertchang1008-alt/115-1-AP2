@@ -961,6 +961,23 @@ dd {
   padding-top: 15px;
   border-top: 1px solid #e6eef3;
 }
+.todo-strip { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:13px 15px; margin-bottom:18px; border:1px solid var(--line); border-radius:12px; background:#fff; }
+.todo-strip button { min-height:36px; }
+.todo-overdue { color:#a3231b; background:#fbe7e5; border-color:#c4382f; }
+.todo-soon { color:#8a4f00; background:#fbefd9; border-color:#e0a23a; }
+.progress-unit-list { display:grid; gap:12px; margin:10px 0 24px; }
+.progress-unit { border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px 16px; }
+.progress-unit.optional { background:#fafbfc; }
+.progress-unit > header { display:flex; gap:8px; align-items:center; }
+.progress-unit .expand { margin-left:auto; min-width:44px; min-height:44px; padding:0; }
+.progress-unit .unitnumber { color:var(--muted); font-weight:700; }
+.status { border-radius:999px; padding:3px 8px; font-size:calc(12px * var(--font-scale, 1)); }
+.status-done { color:#226b40; background:#e5f2ea; }.status-inProgress { color:#8a4f00; background:#fbefd9; }.status-overdue { color:#a3231b; background:#fbe7e5; }.status-todo,.status-locked { color:#5d6d7e; background:#eef1f4; }
+.progress-unit-title { width:100%; display:flex; justify-content:space-between; align-items:center; text-align:left; padding:3px 0; background:transparent; border:0; color:inherit; }.progress-unit-title h3 { margin:7px 0; }
+.due { color:#5d6d7e; margin:2px 0 8px; }.due.overdue { color:#a3231b; }
+.progress-dots { display:flex; gap:3px; flex-wrap:wrap; margin:9px 0; }.dot { width:14px; height:14px; border:1px solid #aeb7c2; border-radius:3px; background:#fff; }.dot.done { background:#2f7d4f; border-color:#2f7d4f; }.dot.partial { background:#e0a23a; border-color:#e0a23a; }.dot.late { background:#c4382f; border-color:#c4382f; }
+.next-step { width:100%; display:flex; justify-content:space-between; gap:10px; margin-top:9px; border-color:#9dbbe0; color:#1b559a; background:#e7effa; text-align:left; }.next-step.late { color:#a3231b; border-color:#c4382f; background:#fbe7e5; }.next-step span { white-space:nowrap; }
+.progress-details { display:grid; gap:5px; padding-top:12px; border-top:1px solid var(--line); margin-top:12px; }.progress-details h4 { margin:5px 0; }.progress-details h4 small { color:#5d6d7e; font-weight:400; }.progress-item { display:grid; grid-template-columns:22px minmax(0, 1fr) auto; gap:6px; margin:0; padding:8px; border-radius:8px; background:#f8fafb; }.progress-item.done span { color:#226b40; }.progress-item.partial span { color:#8a4f00; }.progress-item small { color:#5d6d7e; }
 .back {
   margin-bottom: 18px;
 }
@@ -1047,6 +1064,8 @@ dd {
   .practice-row { grid-template-columns:minmax(140px,1fr) minmax(150px,1fr) max-content max-content; grid-template-areas:"title score score score" "full flash draw wrong"; overflow-x:auto; }
 }
 @media (max-width: 600px) {
+  .todo-strip { display:grid; grid-template-columns:1fr; }.todo-strip > * { width:100%; min-height:44px; text-align:left; }
+  .progress-unit { padding:12px; }.progress-unit-title { align-items:flex-start; }.progress-unit-title strong { white-space:nowrap; font-size:calc(13px * var(--font-scale, 1)); }.progress-dots .dot { width:12px; height:12px; }.progress-item { grid-template-columns:20px 1fr; }.progress-item small { grid-column:2; }
   .practice-row { grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; }
   .practice-draw { justify-content:space-between; }
   .practice-draw button { flex:1; }

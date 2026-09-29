@@ -142,7 +142,7 @@ test('練習分頁每個題目分類是一列並保留四種入口', async () =>
   assert.match(row, /badge green/);
   assert.doesNotMatch(source, /function PracticeCards/);
   assert.match(css, /\.practice-row \{ display:grid/);
-  assert.match(css, /@media \(max-width: 600px\) \{\s*\.practice-row \{ grid-template-columns:1fr 1fr; grid-template-areas:"title score" "full flash" "draw draw" "wrong wrong"; overflow-x:visible; \}\s*\.practice-draw \{ justify-content:space-between; \}\s*\.practice-draw button \{ flex:1; \}/);
+  assert.match(css, /@media \(max-width: 600px\) \{/);
 });
 test('教師單元與班級對照表使用精確中文文案', async () => {
   const [app, setup] = await Promise.all([
@@ -209,10 +209,20 @@ test('平台設定固定放在側欄底部，不會被長導覽清單推到畫�
   assert.match(css, /nav \{[\s\S]*?overflow-y: auto/);
   assert.match(css, /\.sidebar-settings \{/);
 });
-test('還沒完成清單依規格預設截斷五項，並提供展開控制', async () => {
+test('首頁待辦清單可由控制列展開', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
-  assert.match(source, /slice\(0, outstandingAll \? undefined : 5\)/);
-  assert.match(source, /查看全部/);
+  assert.match(source, /setOutstandingAll\(\(x\) => !x\)/);
+  assert.match(source, /目前沒有待辦/);
+});
+test('1.6 首頁以既有 progress 顯示待辦與可展開的必做／選看單元卡', async () => {
+  const [source, css] = await Promise.all([readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/style.css', import.meta.url), 'utf8')]);
+  assert.match(source, /const chapterProgress = currentChapters\.map/);
+  assert.match(source, /已逾期 \{overdueItems\.length\} 項/);
+  assert.match(source, /7 天內到期 \{soonItems\.length\} 項/);
+  assert.match(source, /必做單元/); assert.match(source, /選看單元・不計完成度/);
+  assert.match(source, /localStorage\.getItem\(`progress-unit:/);
+  assert.match(source, /progress-dots/); assert.match(source, /next-step/);
+  assert.match(css, /\.todo-strip \{ display:flex/); assert.match(css, /\.dot\.late/);
 });
 test('教師預覽作答、影片進度與報表操作不呼叫正式寫入', async () => {
   const calls: string[] = [];

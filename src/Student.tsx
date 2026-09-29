@@ -46,6 +46,8 @@ import {
   isOverdue,
   drawReviewQuestions,
   isRequiredActivity,
+  summarizeUnit,
+  UnitProgressSummary,
 } from '../shared/model';
 import { API, cachedBank, enqueue, dequeue, pending } from './service';
 import { Youtube, HtmlMaterial } from './Player';
@@ -104,6 +106,12 @@ export default function Student({
   const archivedUnits = course.units.filter((u) => unitVisibility(u) === 'archived');
   const currentChapters = orderedChapters(course).filter(({ units }) => units.some((u) => unitVisibility(u) === 'current'));
   const archivedChapters = orderedChapters(course).filter(({ units }) => units.length > 0 && units.every((u) => unitVisibility(u) === 'archived'));
+  const chapterProgress = currentChapters.map(({ name, chapter, units }) => ({ name, chapter, units, summary: summarizeUnit({ ...chapter, id: name, bankVersion: '', categories: units, activityOwnerKey: `chapter:${name}` } as any, progress) }));
+  const requiredProgress = chapterProgress.filter((x) => x.chapter.required);
+  const optionalProgress = chapterProgress.filter((x) => !x.chapter.required);
+  const todoItems = requiredProgress.flatMap((x) => x.summary.requiredItems.filter((item) => item.status !== 'done').map((item) => ({ ...item, chapter: x })));
+  const overdueItems = todoItems.filter((item) => item.chapter.summary.state === 'overdue');
+  const soonItems = todoItems.filter((item) => item.chapter.summary.daysLeft !== undefined && item.chapter.summary.daysLeft! >= 0 && item.chapter.summary.daysLeft! <= 7);
   const route = (path = '') => {
     if (preview) {
       if (!path) { setUnitId(''); setActivityId(''); setTaking(false); return; }
@@ -341,56 +349,17 @@ export default function Student({
       {course.studentNotice && <div className="notice">{course.studentNotice}</div>}
       {!unit ? (
         <>
-          <div className="learning-summary">
-            <div>
-              <span className="eyebrow">我的單元完成度</span>
-              <h2>
-                {ratio.done}
-                <small> / {ratio.total} 個必做單元</small>
-              </h2>
-              <p>達標後，仍須完成本單元的互動教材與外部連結。</p>
-            </div>
-            <div
-              className="ring"
-              style={{ '--pct': `${ratio.total ? (ratio.done / ratio.total) * 100 : 0}%` } as any}
-            >
-              <span>{ratio.total ? Math.round((ratio.done / ratio.total) * 100) : 0}%</span>
-            </div>
-          </div>
-          <section className="panel"><h2>還沒完成</h2>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length ? <><ul>{currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).slice(0, outstandingAll ? undefined : 5).map(({ name, chapter, units }) => { const state = chapterCompletion(course, name, progress); return <li key={name}><button onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=${state.scoreDone ? 'pre' : 'practice'}`)}>{!state.scoreDone ? `尚有題目分類未達 ${chapter.threshold} 分` : '尚有必做活動未完成'}｜{chapter.title}</button></li>; })}</ul>{!outstandingAll && currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length > 5 && <button onClick={() => setOutstandingAll(true)}>查看全部 {currentChapters.filter(({ name, chapter }) => chapter.required && !chapterCompletion(course, name, progress).done).length} 項</button>}</> : <p>目前學習的內容都完成了。</p>}</section>
+          <section className="todo-strip" aria-label="學習待辦">
+            {!!overdueItems.length && <button className="todo-overdue" onClick={() => setOutstandingAll(true)}>已逾期 {overdueItems.length} 項</button>}
+            {!!soonItems.length && <button className="todo-soon" onClick={() => setOutstandingAll(true)}>7 天內到期 {soonItems.length} 項</button>}
+            <span>必做單元完成 {requiredProgress.filter((x) => x.summary.state === 'done').length} / {requiredProgress.filter((x) => x.summary.state !== 'locked').length}</span>
+            <button onClick={() => setOutstandingAll((x) => !x)}>查看全部待辦</button>
+          </section>
+          {outstandingAll && <section className="panel todo-list"><h2>待辦</h2>{todoItems.length ? <ul>{todoItems.map((item) => <li key={`${item.chapter.name}_${item.kind}_${item.id}`}><button onClick={() => route(`/unit/${encodeURIComponent(item.chapter.units[0].id)}?tab=${item.kind === 'category' ? 'practice' : phaseTab(item.phase || 'during')}`)}>{item.chapter.chapter.title}｜{item.kind === 'category' ? '還沒達標：' : '還沒完成：'}{item.title}</button></li>)}</ul> : <p>目前沒有待辦</p>}</section>}
           {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards?range=7d`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
           {currentUnits.some((u) => !isReviewUnit(u)) && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
-          {currentChapters.length ? <div className="unitgrid">{currentChapters.map(({ name, chapter, units }, i) => {
-                  const locked = !!chapter.opensAt && parseCourseTime(chapter.opensAt) > Date.now();
-                  const state = chapterCompletion(course, name, progress);
-                  return (
-                    <button
-                      className="unitcard"
-                      key={name}
-                      disabled={locked}
-                      onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=pre`)}
-                    >
-                      <span className="unitnumber">{String(i + 1).padStart(2, '0')}</span>
-                      <div>
-                        <span className={'badge ' + (state.done ? 'green' : '')}>
-                          {isReviewUnit(units[0]) ? (state.done ? (isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : '已達標') : locked ? '尚未開放' : '作業・複習考') : state.done
-                            ? '已達標'
-                            : locked
-                              ? '尚未開放'
-                              : chapter.required
-                                ? '必做單元'
-                                : '選修活動'}
-                        </span>
-                        <h3>{chapter.title}</h3>
-                        <p>{isReviewUnit(units[0]) ? `每次 ${units[0].review!.drawCount} 題・需達 ${chapter.threshold} 分${chapter.dueAt ? `・期限 ${new Date(chapter.dueAt).toLocaleDateString()}` : ''}` : chapter.description}</p>
-                        <footer>
-                          已達標分類 {units.filter((u) => !u.bankVersion || (progress.units[u.id]?.best ?? -1) >= chapter.threshold).length} / {units.length} · 活動 {state.completedActivities} / {chapter.activities.length}{' '}
-                          <ChevronRight size={16} />
-                        </footer>
-                      </div>
-                    </button>
-                  );
-                })}</div> : null}
+          {requiredProgress.length ? <section><h2>必做單元</h2><div className="progress-unit-list">{requiredProgress.map((row, i) => <ProgressUnitCard key={row.name} index={i + 1} row={row} route={route} />)}</div></section> : null}
+          {optionalProgress.length ? <section><h2>選看單元・不計完成度</h2><div className="progress-unit-list optional-units">{optionalProgress.map((row, i) => <ProgressUnitCard key={row.name} index={i + 1} row={row} route={route} />)}</div></section> : null}
           {!currentUnits.length && <section className="panel empty"><h2>老師尚未開放新的單元</h2></section>}
           {!!archivedChapters.length && <details className="panel" open={archiveOpen} onToggle={(e) => setArchiveOpen((e.target as HTMLDetailsElement).open)}><summary>已考完的單元（{archivedChapters.length}）</summary><div className="unitgrid">{archivedChapters.map(({ name, chapter, units }, i) => { const state = chapterCompletion(course, name, progress); return <button className="unitcard" key={name} onClick={() => route(`/unit/${encodeURIComponent(units[0].id)}?tab=pre`)}><span className="unitnumber">{String(i + 1).padStart(2, '0')}</span><div><span className={'badge ' + (state.done ? 'green' : '')}>{state.done ? '已完成' : '尚未完成'}</span><h3>{chapter.title}</h3><p>{units[0]?.archiveLabel || '其他'}</p></div></button>; })}</div></details>}
         </>
@@ -500,6 +469,26 @@ function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: stri
     : contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
   return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${contentType.label}，${label}，${state}`}><div className="activitycard-tags"><span className="activity-type"><contentType.Icon size={15} aria-hidden="true" />{contentType.label}</span><span className="badge">{label}</span></div><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
+function ProgressUnitCard({ index, row, route }: { index: number; row: { name: string; chapter: Chapter; units: Unit[]; summary: UnitProgressSummary }; route: (path?: string) => void }) {
+  const { chapter, units, summary } = row;
+  const [expanded, setExpanded] = useState(() => { try { return localStorage.getItem(`progress-unit:${row.name}`) === 'open'; } catch { return false; } });
+  const open = () => { const value = !expanded; setExpanded(value); try { localStorage.setItem(`progress-unit:${row.name}`, value ? 'open' : 'closed'); } catch {} };
+  const statusLabel = summary.state === 'done' ? '已完成' : summary.state === 'overdue' ? '已逾期' : summary.state === 'inProgress' ? '進行中' : summary.state === 'locked' ? '尚未開放' : '還沒開始';
+  const categories = summary.requiredItems.filter((item) => item.kind === 'category');
+  const activities = summary.requiredItems.filter((item) => item.kind === 'activity');
+  const optional = summary.optionalItems;
+  const go = (item?: any) => route(`/unit/${encodeURIComponent(units[0].id)}?tab=${item?.kind === 'category' ? 'practice' : phaseTab(item?.phase || 'during')}`);
+  if (summary.state === 'locked') return <article className="progress-unit locked"><span className="unitnumber">{String(index).padStart(2, '0')}</span><div><span className="badge">鎖定・{chapter.opensAt ? new Date(chapter.opensAt).toLocaleDateString() : ''} 開放</span><h3>{chapter.title}</h3><p>題目分類 {units.length}・活動 {chapter.activities.length}・開放後才計入待辦</p></div></article>;
+  return <article className={`progress-unit ${summary.required ? '' : 'optional'} ${summary.state}`}>
+    <header><span className="unitnumber">{String(index).padStart(2, '0')}</span><span className="badge">{summary.required ? '必做單元' : '選看單元'}</span><span className={`status status-${summary.state}`}>{statusLabel}</span><button className="expand" aria-label={`展開${chapter.title}`} onClick={open}><ChevronRight size={18} /></button></header>
+    <button className="progress-unit-title" onClick={() => go()}><h3>{chapter.title}</h3><strong>{summary.required ? `完成 ${summary.doneCount} / ${summary.totalCount} 項` : `看過 ${optional.filter((item) => item.status !== 'todo').length} / ${optional.length} 項`}</strong></button>
+    {summary.dueAt && summary.required && summary.state !== 'done' && <p className={summary.state === 'overdue' ? 'due overdue' : 'due'}>期限 {new Date(summary.dueAt).toLocaleDateString()}・{summary.daysLeft! < 0 ? `已過 ${Math.abs(summary.daysLeft!)} 天` : `還有 ${summary.daysLeft} 天`}</p>}
+    {summary.required && <><div className="progress-dots" aria-label={`必做項目完成 ${summary.doneCount} / ${summary.totalCount}`}>{summary.requiredItems.map((item) => <i key={`${item.kind}-${item.id}`} className={`dot ${item.status} ${summary.state === 'overdue' && item.status !== 'done' ? 'late' : ''}`} />)}</div><p>題目分類 {categories.filter((item) => item.status === 'done').length} / {categories.length} 達標・活動 {activities.filter((item) => item.status === 'done').length} / {activities.length} 完成</p></>}
+    {summary.next && summary.state !== 'done' && <button className={`next-step ${summary.state === 'overdue' ? 'late' : ''}`} onClick={() => go(summary.next)}>{summary.next.required ? (summary.next.kind === 'category' ? '還沒達標：' : '還沒完成：') : '選做：'}{summary.next.title}<span>{summary.next.kind === 'category' ? '去練習' : '前往'}</span></button>}
+    {expanded && <div className="progress-details"><h4>題目分類 <small>門檻 {chapter.threshold} 分・只有完整測驗計分</small></h4>{categories.map((item) => <ProgressItem key={item.id} item={item} />)}<h4>學習活動</h4>{activities.map((item) => <ProgressItem key={item.id} item={item} />)}{!!optional.length && <details><summary>選做（不計完成度）・{optional.length} 項</summary>{optional.map((item) => <ProgressItem key={`${item.kind}-${item.id}`} item={item} optional />)}</details>}</div>}
+  </article>;
+}
+function ProgressItem({ item, optional = false }: { item: any; optional?: boolean }) { const text = item.status === 'done' ? (optional ? '看過' : '已完成') : item.status === 'partial' ? (item.kind === 'category' && item.best >= 0 ? `最高 ${item.best}・錯題 ${item.wrongCount || 0}` : '看過部分') : optional ? '還沒看過' : '還沒開始'; return <p className={`progress-item ${item.status}`}><span>{item.status === 'done' ? '✓' : item.status === 'partial' ? '◐' : '○'}</span><strong>{item.title}</strong><small>{text}{item.detail ? `・${item.detail}` : ''}</small></p>; }
 function PracticeRow({ unit, threshold, progress, busy, start, route }: { unit: Unit; threshold: number; progress: Progress; busy: boolean; start: (m: Mode, n?: number, target?: Unit) => Promise<void>; route: (path: string) => void }) {
   const go = (mode: Mode, suffix: string, n?: number) => { route(`/unit/${encodeURIComponent(unit.id)}${suffix}`); void start(mode, n, unit); };
   const wrong = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
