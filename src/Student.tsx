@@ -57,7 +57,7 @@ import {
   UnitProgressSummary,
   itemStatusForCategory,
 } from '../shared/model';
-import { API, cachedBank, enqueue, dequeue, pending } from './service';
+import { API, cachedBank, enqueue, dequeue, pending, sampleProgress } from './service';
 import { Youtube, HtmlMaterial } from './Player';
 import { parseStudentRoute } from './studentRoute';
 import ThemePicker from './ThemePicker';
@@ -170,15 +170,7 @@ export default function Student({
       .then((p) => {
         if (!active) return;
         if (preview && sim !== 'none') {
-          p = emptyProgress();
-          course.units.forEach((u, i) => {
-            if (sim === 'complete' || i === 0)
-              p.units[u.id] = {
-                best: sim === 'complete' ? 100 : 40,
-                attempts: 1,
-                updatedAt: Date.now(),
-              };
-          });
+          p = sampleProgress(course, sim);
         }
         if (preview) void api.call('setPreviewProgress', { progress: p });
         setProgress(p);
@@ -505,8 +497,8 @@ function ProgressUnitCard({ index, row, progress, route }: { index: number; row:
     <header><span className="unitnumber">{String(index).padStart(2, '0')}</span><span className="badge">{review ? '作業・複習考' : summary.required ? '必做單元' : '選看單元'}</span>{summary.required && <span className={`status status-${summary.state}`}>{summary.state === 'overdue' && <AlertCircle size={15} aria-hidden="true" />}{review && summary.state === 'done' && isOverdue(chapter, progress.units[units[0].id]) ? '已完成（逾期）' : statusLabel}</span>}<button className="expand" aria-expanded={expanded} aria-label={`${expanded ? '收合' : '展開'}${chapter.title}`} onClick={open}>{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button></header>
     <button className="progress-unit-title" onClick={() => go()}><h3>{chapter.title}</h3><strong>{summary.required ? `完成 ${summary.doneCount} / ${summary.totalCount} 項` : `看過 ${[...categories, ...optionalActivities].filter((item) => item.status !== 'todo').length} / ${categories.length + optionalActivities.length} 項`}</strong></button>
     {review && <p>每次 {units[0].review!.drawCount} 題・需達 {chapter.threshold} 分</p>}{summary.dueAt && summary.required && summary.state !== 'done' && <p className={summary.state === 'overdue' ? 'due overdue' : 'due'}>期限 {new Date(summary.dueAt).toLocaleDateString()}・{summary.daysLeft! < 0 ? `已過 ${Math.abs(summary.daysLeft!)} 天` : `還有 ${summary.daysLeft} 天`}</p>}
-    {summary.required && <><div className="progress-dots" aria-label={`必做項目完成 ${summary.doneCount} / ${summary.totalCount}`}>{summary.requiredItems.map((item) => <i key={`${item.kind}-${item.id}`} className={`dot ${item.status} ${summary.state === 'overdue' && item.status !== 'done' ? 'late' : ''}`} />)}</div><p>題目分類 {categories.filter((item) => item.status === 'done').length} / {categories.length} 達標・活動 {activities.filter((item) => item.status === 'done').length} / {activities.length} 完成</p></>}
-    {summary.required && summary.next && summary.state !== 'done' && <button className={`next-step ${summary.state === 'overdue' ? 'late' : ''}`} onClick={() => go(summary.next)}>{review ? `開始作答（${units[0].review!.drawCount} 題）` : <>{summary.next.required ? (summary.next.kind === 'category' ? '還沒達標：' : '還沒完成：') : '選做：'}{summary.next.title}<span>{summary.next.kind === 'category' ? '去練習' : '前往'}</span></>}</button>}
+    {summary.required && <><div className="progress-dots" aria-label={`必做項目完成 ${summary.doneCount} / ${summary.totalCount}`}>{summary.requiredItems.map((item) => <i key={`${item.kind}-${item.id}`} className={`dot ${item.status} ${summary.state === 'overdue' && item.status !== 'done' ? 'late' : ''}`} />)}</div><p>{[categories.length ? `題目分類 ${categories.filter((item) => item.status === 'done').length} / ${categories.length} 達標` : '', activities.length ? `活動 ${activities.filter((item) => item.status === 'done').length} / ${activities.length} 完成` : ''].filter(Boolean).join('・')}</p></>}
+    {summary.required && summary.next && summary.state !== 'done' && <button className={`next-step ${summary.state === 'overdue' ? 'late' : ''}`} onClick={() => go(summary.next)}>{review ? `開始作答（${units[0].review!.drawCount} 題）` : <>{summary.next.required ? (summary.next.kind === 'category' ? '還沒達標：' : '還沒完成：') : '選做：'}{summary.next.title}{summary.next.kind === 'category' && (summary.next.best ?? -1) >= 0 ? `（最高 ${summary.next.best} / ${chapter.threshold} 分）` : ''}<span>{summary.next.kind === 'category' ? '去練習' : '前往'}</span></>}</button>}
     {expanded && <ProgressDetails categories={categories} activities={activities} optionalActivities={optionalActivities} threshold={chapter.threshold} />}
   </article>;
 }
