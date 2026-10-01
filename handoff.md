@@ -18,17 +18,15 @@
 
 | 項目 | 狀態 |
 |---|---|
-| 正式站 | **1.6.0**。`origin/main`＝`0d3130e`（2026-09-29 部署：Functions Deploy complete、Pages Actions 成功、`version.json`＝1.6.0） |
-| 可部署分支 | `hotfix/1.6.2-student-name`（合併 commit `b00041d`，parents＝0205baa／aabb2d2；另有本交接紀錄提交）：內容＝1.6.1＋1.6.2＋五份教材與題庫 55 新題；合併後檢查通過，待 Claude 部署前最後確認。 |
+| 正式站 | **1.6.1**。`origin/main`＝`7e4732b`（正式站 `version.json`＝1.6.1，2026-10-02 Claude 確認） |
+| 可部署分支 | `hotfix/1.6.2-student-name`（合併 `b00041d`＋交接 `5f41c1f`）：1.6.2 姓名＋五份教材＋題庫 55 新題。**2026-10-02 Claude 部署前確認通過**：origin/main 可快轉；教材／題庫／目錄與 aabb2d2 逐位元相同；1.6.2 程式與 0205baa 相同；版本全 1.6.2；coagulation-v1 未追蹤。**可由教師執行 deploy.sh** |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
+| 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
 | 1.6.2 單元卡姓名 | `hotfix/1.6.2-student-name`（5071f44，由 1.6.1 建立）：**Claude 驗收通過、待部署（2026-10-02）**。已完成／已完成（逾期）時狀態標籤下方顯示本人名冊姓名，與標籤同字級（12／最大字級 15.6px）同高；未完成不顯示；教師預覽「預覽學生」；bootstrap 只回本人姓名。未 push／部署。報告 `docs/STUDENT_NAME_1.6.2_ACCEPTANCE.md`。 |
 | NotebookLM 教材初稿流程 | 2026-09-30 已提供教師「互動式資訊圖表」內容整理提示（含明確範圍、排除項目與來源依據要求）；NotebookLM 僅整理可教學內容、圖表建議與題目草案，後續由 AI agent 依平台元件、追蹤與建置流程實作。 |
-
 | 五份新教材 | `blood-vessels-v1`、`circulation-routes-v1`、`blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`（來源分支 aabb2d2）：已登錄、已 commit。**Claude 驗收通過、待部署（2026-10-02）**（同上）。待部署 |
 | 資訊圖表題庫補登 | **Claude 驗收通過、待部署（2026-10-02）**：以 git 7e4732b 對 2d8fcd5 逐格比對，既有 106 題零變動、說明頁僅合計 106→161；新 55 題與教材 HTML 題幹／選項／正解／題序一致、ID 不重複、Zuvio 序號正確。**待教師把第 108–162 列貼到 Google Sheet 題庫分頁後同步** |
-
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
@@ -103,10 +101,10 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 ## 待辦
 
-**部署前最後確認**
-- 合併與檢查完成後交 Claude 做最後確認，再由教師執行上方 deploy.sh 指令；本次不 push、不部署、不動 main。
-- 部署後教師須做兩件事：①題庫 `html/資訊圖表題庫_上傳用.xlsx` 第 108–162 列貼到 Sheet 題庫分頁後同步；②後台為五個新單元建立互動教材活動（連各 `<slug>-v1`，6 節點／11 題）。
-
+**可部署：等教師執行（2026-10-02 Claude 確認通過）**
+- 在 Mac 確認主資料夾目前分支為 `hotfix/1.6.2-student-name`，再執行上方「部署方式」的 deploy.sh 指令；完成後確認正式站 `version.json`＝1.6.2。
+- 部署後教師兩件事：①題庫 `html/資訊圖表題庫_上傳用.xlsx` 第 108–162 列貼到 Sheet 題庫分頁後同步；②後台為五個新單元建立互動教材活動（連各 `<slug>-v1`，6 節點／11 題）。
+- 本次**不含** `feature/heart-structure-v2`（心臟構造 v2，已驗收待部署）；它與本分支分開，下次部署前需先 merge 最新 main。
 
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
