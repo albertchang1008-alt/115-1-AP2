@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'/%3E"><title>1.6.2 姓名標籤驗證</title></head>
+<body><div id="root"></div>
+<script type="module">
+  import React from 'react';
+  import {createRoot} from 'react-dom/client';
+  import Student from '../../src/Student.tsx';
+  import {studentNameFixture} from './student-name.ts';
+  import '../../src/style.css';
+  const params=new URLSearchParams(location.search);
+  const state=params.get('state')||'done';
+  const name=params.has('long')?'王小明測試長姓名標籤不應推擠狀態與展開按鈕的邊界情境':'王小明';
+  const {course,progress}=studentNameFixture(state,!params.has('optional'),name);
+  const api={preview:true,call:async (method)=>method==='getProgress'?structuredClone(progress):{rows:[],next:null}};
+  createRoot(document.getElementById('root')).render(React.createElement(Student,{course,api,uid:'fixture-only',preview:params.has('preview'),notify:()=>{}}));
+</script></body></html>

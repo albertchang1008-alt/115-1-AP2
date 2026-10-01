@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.6.1
+目前版本：1.6.2
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -14,7 +14,7 @@
 4. Commit 結尾附身分標註（Claude：`Co-Authored-By: <model> <noreply@anthropic.com>`＋session 連結；Codex：`[Codex]`）。不用 `--no-verify`、不強推、不略過測試。
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
-## 目前狀態（2026-09-25）
+## 目前狀態（2026-10-02）
 
 | 項目 | 狀態 |
 |---|---|
@@ -22,6 +22,8 @@
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
+| 1.6.2 單元卡姓名 | `hotfix/1.6.2-student-name`，由 `hotfix/1.6.1-quiz-scroll` 建立。已實作、已 commit、**待 Claude 驗收**；未 push／部署。報告 `docs/STUDENT_NAME_1.6.2_ACCEPTANCE.md`。 |
+| NotebookLM 教材初稿流程 | 2026-09-30 已提供教師「互動式資訊圖表」內容整理提示（含明確範圍、排除項目與來源依據要求）；NotebookLM 僅整理可教學內容、圖表建議與題目草案，後續由 AI agent 依平台元件、追蹤與建置流程實作。 |
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
@@ -89,6 +91,13 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 22. 教材建置流程：agent 先用 `npm run materials:preview <slug>`（只產生教材檔、不登錄教材目錄）＋`npm run materials:shots <slug>`，**停下來請教師看畫面**；教師滿意後才執行 `npm run materials:build <slug>` 完成登錄並 commit。不要直接改 `public/materials/` 的 HTML，也不要用教材工作室重複匯入元件庫建置的教材。
 
 ## 待辦
+
+**五份生理教材與題庫（獨立工作樹）**
+- `/Users/HHC/.codex/worktrees/blood-vessel-infographic/課程平台1.0`、`codex/blood-vessel-infographic`：`2d8fcd5` 已登錄五份教材、題庫增列55題合計161；前106列未改。待 Claude 驗收、待部署；未 push。細節見該工作樹 docs 與 handoff；本分支未合併教材工作。
+
+**交辦 Codex：1.6.2 單元卡顯示學生姓名 — 待 Claude 驗收**
+- 已完成 bootstrap 每課本人名冊姓名／Google 備援、完成與逾期完成姓名標籤、教師預覽、1.6.2 版本同步。未完成不顯示，正式完成度算法未改。
+- 前端112／Functions18測試與兩端建置、version:check通過。390／1280各三種狀態、預設／最大字級共12張截圖無錯誤與溢位；標籤字級12／15.6px、同高25.796875／31.71875px、左緣差0px。驗收報告與重跑方式見 `docs/STUDENT_NAME_1.6.2_ACCEPTANCE.md`；教師尚未授權部署。
 
 **待 Claude 驗收**
 - 心臟構造圖像強化版第二輪：`feature/heart-structure-v2`，報告 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`；未 push、未合併、未部署。

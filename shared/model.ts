@@ -105,6 +105,8 @@ export interface Course {
   classNames?: Record<string, string>;
   classUnits?: Record<string, string[]>;
   enrollmentClassId?: string;
+  /** bootstrap 學生回應專用：該課程本人的名冊姓名，不是整班名冊。 */
+  studentName?: string;
   archived?: boolean;
   units: Unit[];
   sheetsUrl: string;

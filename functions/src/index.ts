@@ -166,7 +166,11 @@ export const bootstrap = onCall(options, async (req) => {
   for (const courseId of ids) {
     try {
       const { p: student, c } = await access(req, courseId);
-      courses.push({ ...forClass(c.published, student.classId), id: courseId, enrollmentClassId: student.classId });
+      // access() reads only this authenticated student's enrollment (or legacy roster).
+      // Empty/missing roster names fall back to the original Google token, not another course.
+      const studentName = (typeof student.name === 'string' ? student.name.trim() : '')
+        || (typeof p.name === 'string' ? p.name.trim() : '');
+      courses.push({ ...forClass(c.published, student.classId), id: courseId, enrollmentClassId: student.classId, studentName });
     } catch (e) {
       if (!(e instanceof HttpsError)) throw e;
     }

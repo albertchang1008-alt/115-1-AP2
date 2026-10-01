@@ -966,13 +966,16 @@ dd {
 .todo-overdue { color:#a3231b; background:#fbe7e5; border-color:#c4382f; }
 .todo-soon { color:#8a4f00; background:#fbefd9; border-color:#e0a23a; }
 .progress-unit-list { display:grid; gap:12px; margin:10px 0 24px; }
-.progress-unit { border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px 16px; }
+.progress-unit { min-width:0; border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px 16px; }
 .progress-unit.optional { background:#fafbfc; }
 .progress-unit > header { display:flex; gap:8px; align-items:center; }
 .progress-unit.locked { display:flex; align-items:flex-start; gap:10px; color:var(--muted); }
 .progress-unit .expand { margin-left:auto; min-width:44px; min-height:44px; padding:0; }
 .progress-unit .unitnumber { color:var(--muted); font-weight:700; }
 .status { display:inline-flex; align-items:center; gap:4px; border-radius:999px; padding:3px 8px; font-size:calc(12px * var(--font-scale, 1)); }
+.progress-status-stack { display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-width:0; }
+.progress-status-stack .status { max-width:100%; white-space:nowrap; flex-shrink:0; }
+.completion-student-name { display:block; overflow:hidden; text-overflow:ellipsis; color:#5d6d7e; background:#eef1f4; }
 .status-done { color:#226b40; background:#e5f2ea; }.status-inProgress { color:#8a4f00; background:#fbefd9; }.status-overdue { color:#a3231b; background:#fbe7e5; }.status-todo,.status-locked { color:#5d6d7e; background:#eef1f4; }
 .progress-unit-title { width:100%; display:flex; justify-content:space-between; align-items:center; text-align:left; padding:3px 0; background:transparent; border:0; color:inherit; }.progress-unit-title h3 { margin:7px 0; }
 .due { color:#5d6d7e; margin:2px 0 8px; }.due.overdue { color:#a3231b; }
