@@ -1,0 +1,29 @@
+{
+  "slug":"circulation-routes","version":"v1","title":"循環路線","subtitle":"跟著一滴血走過肺、全身、肝臟、心肌與出生前後的特殊路徑。","label":"循環路線｜互動資訊圖表",
+  "stats":[{"value":"2 個","label":"串聯的肺與體循環"},{"value":"相同","label":"兩個循環的總血流量"},{"value":"2 處","label":"胎兒主要繞肺構造"}],
+  "lab":{"title":"情境實驗室｜一滴血的 8 字旅程","intro":"切換路線，觀察缺氧血與充氧血如何在肺與全身之間完成一趟循環。","figure":"circulation-route-overview.svg","states":[{"id":"pulmonary","label":"肺循環","explain":"右心室送出缺氧血到肺；在肺泡周圍交換氣體後，充氧血回到左心房。"},{"id":"systemic","label":"體循環","explain":"左心室送出充氧血到全身；在組織交換後，缺氧血回到右心房。"},{"id":"special","label":"特殊支線","explain":"肝門脈先把消化道吸收的養分送往肝臟；冠狀循環則供應心肌。"}],"predict":{"question":"肺動脈中的血液接下來會到哪裡交換氣體？","options":["全身微血管","肺泡周圍微血管"],"answer":1,"feedback":"正確：肺動脈把缺氧血送到肺泡周圍的微血管進行氣體交換。"}},
+  "nodes":[
+    {"id":"circulation-routes-node-01","tag":"大循環","title":"體循環：把氧氣與養分送到全身","summary":"左心室出發，右心房返回。","figure":"circulation-systemic.svg","concept":"體循環由左心室將充氧血送至全身微血管；交換後的缺氧血經上、下腔靜脈回到右心房。","points":["主動脈把血液送往全身。","全身微血管進行氧氣與養分交換。","上、下腔靜脈將血液帶回右心房。"],"clinical":{"title":"生理重點","text":"體循環的路徑較長，負責供應全身組織。"}},
+    {"id":"circulation-routes-node-02","tag":"大循環","title":"肺循環：在肺泡旁完成換氣","summary":"右心室出發，左心房返回。","figure":"circulation-pulmonary.svg","concept":"肺循環把右心室送出的缺氧血帶到肺泡周圍；換氧後，充氧血經肺靜脈回到左心房。","points":["肺動脈攜帶缺氧血。","肺泡周圍微血管排出二氧化碳、吸收氧氣。","肺靜脈攜帶充氧血回左心房。"],"clinical":{"title":"生理重點","text":"動脈與靜脈依相對於心臟的流向命名，不是依血液含氧量命名。"}},
+    {"id":"circulation-routes-node-03","tag":"比較","title":"雙循環：流量相等，壓力不同","summary":"體循環高壓高阻力；肺循環低壓低阻力。","figure":"circulation-compare.svg","concept":"肺循環與體循環串聯，因此每一心搏通過兩者的總血流量相同；但運送距離與阻力不同。","points":["兩個循環的總血流量必須平衡。","體循環將血液送至全身，壓力與阻力較高。","肺循環保護薄的肺泡微血管，壓力與阻力較低。"],"clinical":{"title":"模型觀察","text":"可把兩個循環想成串聯的兩個迴路：若其中一段累積過多血液，整體便無法維持平衡。"}},
+    {"id":"circulation-routes-node-04","tag":"特殊循環","title":"肝門脈循環：養分先進肝臟","summary":"消化道 → 肝門靜脈 → 肝臟 → 下腔靜脈。","figure":"circulation-portal.svg","concept":"消化道吸收的養分隨靜脈血先經肝門靜脈進入肝臟，再由肝靜脈匯入下腔靜脈。","points":["胃、腸等消化器官的血液先匯入肝門靜脈。","肝臟可處理、儲存吸收的養分。","肝靜脈將血液送入下腔靜脈。"],"clinical":{"title":"生活連結","text":"吃完一餐後，小腸吸收的養分不會直接送往全身，而是先經肝臟處理。"}},
+    {"id":"circulation-routes-node-05","tag":"特殊循環","title":"冠狀循環：供應心肌本身","summary":"升主動脈根部 → 冠狀動脈 → 心肌 → 右心房。","figure":"circulation-coronary.svg","concept":"心肌需要自己的血液供應；冠狀動脈自升主動脈根部出發，靜脈血最後經冠狀靜脈竇回到右心房。","points":["左、右冠狀動脈自升主動脈根部發出。","心肌微血管供應氧氣與養分。","冠狀靜脈竇將血液匯入右心房。"],"clinical":{"title":"生理重點","text":"心臟雖然充滿血液，心肌細胞仍需依靠冠狀循環取得氧氣與養分。"}},
+    {"id":"circulation-routes-node-06","tag":"發育轉換","title":"胎兒循環：出生後路線改變","summary":"卵圓孔與動脈導管在出生後逐漸閉鎖。","figure":"circulation-fetal.svg","concept":"胎兒的肺尚未展開，血液可經卵圓孔與動脈導管繞過肺；出生後肺開始換氣，這些構造逐漸閉鎖。","points":["卵圓孔連接右、左心房。","動脈導管連接肺動脈幹與主動脈。","靜脈導管使部分血液繞過肝臟。","出生後分別留下卵圓窩與動脈韌帶。"],"clinical":{"title":"模型觀察","text":"出生前後的對照模型，重點是看見肺臟開始換氣後，血流不再需要繞過肺。"}}
+  ],
+  "foundation":[
+    {"id":"circulation-routes-foundation-q01","stem":"體循環由哪個心室出發、回到哪個心房？","options":["右心室→左心房","左心室→右心房","左心房→右心室","右心房→左心室"],"answer":1,"hint":"想想主動脈由哪個心室發出。","nodeId":"circulation-routes-node-01"},
+    {"id":"circulation-routes-foundation-q02","stem":"肺動脈與肺靜脈的血液配對何者正確？","options":["都攜帶充氧血","都攜帶缺氧血","肺動脈缺氧、肺靜脈充氧","肺動脈充氧、肺靜脈缺氧"],"answer":2,"hint":"肺循環在肺泡旁換氧。","nodeId":"circulation-routes-node-02"},
+    {"id":"circulation-routes-foundation-q03","stem":"體循環與肺循環的總血流量關係為何？","options":["體循環較大","肺循環較大","兩者相同","隨呼吸完全改變"],"answer":2,"hint":"兩個循環是串聯的迴路。","nodeId":"circulation-routes-node-03"},
+    {"id":"circulation-routes-foundation-q04","stem":"消化道吸收的養分先由何者送進肝臟？","options":["肝動脈","肝靜脈","肝門靜脈","下腔靜脈"],"answer":2,"hint":"先區分：這段血管是從消化道進入肝臟，還是離開肝臟。","nodeId":"circulation-routes-node-04"},
+    {"id":"circulation-routes-foundation-q05","stem":"冠狀動脈直接分支自何處？","options":["肺動脈幹","升主動脈根部","上腔靜脈","左心房"],"answer":1,"hint":"找左心室射出的血液剛離開心臟的位置。","nodeId":"circulation-routes-node-05"},
+    {"id":"circulation-routes-foundation-q06","stem":"胎兒時連接肺動脈幹與主動脈的是？","options":["卵圓孔","靜脈導管","動脈導管","臍靜脈"],"answer":2,"hint":"它是連接兩條大動脈的短路構造。","nodeId":"circulation-routes-node-06"}
+  ],
+  "cases":[
+    {"id":"circulation-routes-case-q01","stem":"【模型觀察】腳趾血液回心後，下一個換氧位置是？","options":["肺泡周圍微血管","手掌微血管","肝臟微血管","冠狀微血管"],"answer":0,"hint":"缺氧血先回右心，再由肺動脈送往哪裡？","nodeId":"circulation-routes-node-02"},
+    {"id":"circulation-routes-case-q02","stem":"【生活情境】午餐吸收的養分先送到哪個器官？","options":["肺臟","心肌","肝臟","腎臟"],"answer":2,"hint":"回想消化道與全身循環之間的特殊路線。","nodeId":"circulation-routes-node-04"},
+    {"id":"circulation-routes-case-q03","stem":"【模型觀察】滋養心肌的專屬循環稱為？","options":["肺循環","冠狀循環","肝門脈循環","體循環"],"answer":1,"hint":"找從升主動脈根部出發的支線。","nodeId":"circulation-routes-node-05"},
+    {"id":"circulation-routes-case-q04","stem":"【生理判讀】哪個循環壓力較低以保護肺泡？","options":["體循環","肺循環","肝門脈循環","冠狀循環"],"answer":1,"hint":"比較肺與全身迴路的阻力。","nodeId":"circulation-routes-node-03"},
+    {"id":"circulation-routes-case-q05","stem":"【模型觀察】出生後動脈導管閉鎖會形成？","options":["卵圓窩","動脈韌帶","靜脈韌帶","冠狀靜脈竇"],"answer":1,"hint":"回想它原本連接肺動脈幹與主動脈；出生後這條旁路不再需要。","nodeId":"circulation-routes-node-06"}
+  ],
+  "credits":["教學圖：本專案自繪 SVG，內容依據人體解剖生理學循環章節與教師提供教材初稿。"]
+}

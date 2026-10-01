@@ -35,20 +35,28 @@ function renderQuestion(q) {
 }
 
 export function render(content, figures) {
-  const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
+  const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-question-id="${q.id}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
   return `<main class="kit" data-slug="${content.slug}">`
     + `<header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header>`
+    + (content.experience === 'guided' ? '<div class="prefs-bar"><label>字級 <select data-pref="font"><option value="1">標準</option><option value="1.15">較大</option><option value="1.3">最大</option></select></label> <label>色系 <select data-pref="theme"><option value="warm">暖色</option><option value="cool">冷色</option></select></label></div><button type="button" data-go-quiz>兩階段隨堂診斷</button>' : '')
     + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
     + renderLab(content.lab, figures)
     + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>`
-    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><img class="node-figure" alt="${esc(n.title)} 示意圖" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
     + `</section>`
     + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
+    + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
     + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
 }
 
 export function mount(content, figures) {
   document.body.innerHTML = render(content, figures);
+  const guided = content.experience === 'guided';
+  document.querySelector('[data-go-quiz]')?.addEventListener('click', () => document.querySelector('.quiz').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.querySelector('[data-pref="font"]')?.addEventListener('change', e => document.documentElement.style.setProperty('--font-scale', e.target.value));
+  document.querySelector('[data-pref="theme"]')?.addEventListener('change', e => document.documentElement.dataset.theme = e.target.value);
+  const selectPanel = id => document.querySelectorAll('.state-figure [data-panel]').forEach(g => { g.style.display = g.dataset.panel === id ? '' : 'none'; });
+  selectPanel(content.lab.states?.[0]?.id);
   const CL = window.CourseLearning || { explore() {}, nodeTime() {}, answer() {}, hint() {}, complete() {} };
 
   // 知識節點：第一次展開送 explore；收合或分頁隱藏時送前景停留秒數
@@ -72,6 +80,7 @@ export function mount(content, figures) {
       const id = b.dataset.labState;
       const fig = document.querySelector('.state-figure');
       fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
+      selectPanel(id);
       document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
     }));
@@ -83,7 +92,32 @@ export function mount(content, figures) {
   }
 
   // 兩關題目：逐題答對才解鎖；第二關全部答對才送 complete
-  let foundation = 0, cases = 0;
+  let foundation = 0, cases = 0, completionSent = false;
+  // 學習成果在最後一題答對時成立；呈現結果不應是回報前提。
+  const reportCompletion = () => {
+    if (completionSent) return;
+    completionSent = true;
+    CL.complete();
+  };
+  const openForReview = id => {
+    const button = document.querySelector(`.node-button[data-node="${id}"]`), detail = document.querySelector('#detail-' + id);
+    if (!detail.hidden) { detail.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    detail.hidden = false; button?.setAttribute('aria-expanded', 'true');
+    if (!explored.has(id)) { explored.add(id); CL.explore(id); }
+    opened.set(id, performance.now());
+    detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const restartCases = () => {
+    cases = 0;
+    completionSent = false;
+    document.querySelector('.complete-banner').hidden = true;
+    document.querySelectorAll('[data-kind="case"]').forEach((item, index) => {
+      item.hidden = index !== 0;
+      if (guided) item.innerHTML = renderQuestion(content.cases[index]);
+      item.querySelectorAll('button[data-answer]').forEach(button => { button.disabled = false; });
+      const feedback = item.querySelector('.feedback'); if (feedback) feedback.textContent = '';
+    });
+  };
   const show = el => { el.hidden = false; el.dispatchEvent(new CustomEvent('stage-show')); };
   const advance = (stage, kind) => {
     stage.hidden = true;
@@ -94,7 +128,7 @@ export function mount(content, figures) {
     } else {
       cases++;
       const next = document.querySelector(`[data-kind="case"][data-index="${cases}"]`);
-      if (next) show(next); else CL.complete();
+      if (next) show(next); else { reportCompletion(); if (guided) document.querySelector('.complete-banner').hidden = false; }
     }
   };
   document.querySelectorAll('.stage').forEach(stage => {
@@ -103,14 +137,31 @@ export function mount(content, figures) {
     const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
     if (type) { type.mount(stage.querySelector('.q-widget'), q, CL, () => advance(stage, kind)); return; }
     stage.addEventListener('click', e => {
-      const b = e.target.closest('button[data-answer]'); if (!b) return;
+      const b = e.target.closest('button[data-answer]'); if (!b || b.disabled || stage.hidden) return;
       const ok = +b.dataset.answer === q.answer;
       CL.answer(q.id, ok);
       const feedback = stage.querySelector('.feedback');
-      if (!ok) { CL.hint?.(q.id); feedback.textContent = `提示：${q.hint}`; return; }
+      if (!ok) {
+        CL.hint?.(q.id);
+        if (kind === 'foundation') { feedback.textContent = `提示：${q.hint}`; return; }
+        stage.querySelectorAll('button[data-answer]').forEach(x => { x.disabled = true; });
+        feedback.textContent = `提示：${q.hint} `;
+        const review = document.createElement('button'); review.type = 'button'; review.textContent = '前往對應節點複習';
+        const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '重新挑戰本關'; retry.disabled = true;
+        review.addEventListener('click', () => { openForReview(q.nodeId); retry.disabled = false; });
+        retry.addEventListener('click', restartCases);
+        feedback.append(review, retry); return;
+      }
       feedback.textContent = '答對，繼續下一題。';
       stage.querySelectorAll('button').forEach(x => { x.disabled = true; });
-      setTimeout(() => advance(stage, kind), 250);
+      if (kind === 'case' && cases === content.cases.length - 1) reportCompletion();
+      if (guided) {
+        feedback.textContent = '答對。' + (q.explain || '');
+        const next = document.createElement('button'); next.type = 'button';
+        next.textContent = kind === 'case' && cases === content.cases.length - 1 ? '查看通關結果' : '繼續下一題';
+        next.addEventListener('click', () => { advance(stage, kind); document.querySelector('.stage:not([hidden]), .complete-banner:not([hidden])')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, { once: true });
+        feedback.append(next);
+      } else setTimeout(() => advance(stage, kind), 250);
     });
   });
 }

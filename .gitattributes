@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# 原始教材 RTF 快照逐位元保存，不做換行正規化或純文字 diff。
+materials-src/blood-vessel-circulation/*.rtf binary
+materials-src/blood-pressure-regulation/source.rtf binary
+materials-src/lymphatic-system/source.rtf binary
+materials-src/hemodynamics/source.rtf binary

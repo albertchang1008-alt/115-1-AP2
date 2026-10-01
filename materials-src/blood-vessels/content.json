@@ -1,0 +1,33 @@
+{
+  "slug": "blood-vessels",
+  "version": "v1",
+  "title": "血管構造解析",
+  "subtitle": "沿著血流前進，認識動脈、微血管與靜脈如何分工。",
+  "label": "血管構造解析｜互動資訊圖表",
+  "stats": [{"value":"3 層","label":"一般血管壁的基本構造"},{"value":"最慢","label":"微血管網中的血流速度"},{"value":">60%","label":"靜脈可儲存的全身血液"}],
+  "lab": {"title":"情境實驗室｜讓一滴血走過血管網","intro":"切換觀察位置，看看血管分支、交換與回流如何彼此相連。","figure":"blood-vessel-overview.svg","states":[{"id":"outbound","label":"由心臟送出","explain":"血液經動脈與小動脈向組織前進；血管管壁厚，能承受並調節壓力。"},{"id":"exchange","label":"微血管交換","explain":"許多微血管形成大面積網絡，血流放慢，利於氧氣、養分與廢物交換。"},{"id":"return","label":"回到心臟","explain":"血液匯入小靜脈與靜脈；肢體的瓣膜與骨骼肌幫助血液回流。"}],"predict":{"question":"哪一段最適合讓血液與組織交換物質？","options":["厚壁的動脈","單層管壁的微血管"],"answer":1,"feedback":"正確：微血管壁很薄，且血流最慢，最利於交換。"}},
+  "nodes": [
+    {"id":"blood-vessels-node-01","tag":"血管網路","title":"血液在血管中的單向路線","summary":"心臟 → 動脈 → 微血管 → 靜脈 → 心臟。","figure":"blood-vessel-route.svg","concept":"血管把心臟與全身組織連成密閉循環；動脈將血液帶離心臟，靜脈把血液送回心臟。","points":["動脈、小動脈接到微血管網。","微血管交換後，血液匯入小靜脈與靜脈。","血流方向由壓力差與瓣膜等構造維持。"],"clinical":{"title":"生理重點","text":"血管名稱是依血液相對於心臟的流向命名：離心為動脈，回心為靜脈。"}},
+    {"id":"blood-vessels-node-02","tag":"血管壁","title":"血管壁的三層基本構造","summary":"內膜接觸血液；中膜收縮；外膜保護。","figure":"blood-vessel-wall.svg","concept":"多數血管由內膜、中膜與外膜組成；三層比例不同，造就不同血管的功能。","points":["內膜的內皮細胞直接接觸血液。","中膜含平滑肌與彈性纖維。","外膜以結締組織保護並固定血管。"],"clinical":{"title":"生理重點","text":"微血管例外：它的壁極薄，主要由單層內皮與基底膜構成。"}},
+    {"id":"blood-vessels-node-03","tag":"動脈","title":"動脈：高壓輸送與阻力調節","summary":"厚壁、有彈性；小動脈能改變管徑。","figure":"blood-vessel-artery.svg","concept":"動脈將血液帶離心臟；發達的中膜讓大動脈能回彈，小動脈能以管徑調節阻力。","points":["動脈的中膜通常較發達。","大動脈在射血時擴張、舒張時回彈。","小動脈是調節周邊阻力的重要關卡。"],"clinical":{"title":"模型觀察","text":"把大動脈想成有彈性的橡皮管：它能把間歇的射血緩衝成較連續的血流。"}},
+    {"id":"blood-vessels-node-04","tag":"微血管","title":"微血管：物質交換的細網","summary":"單層管壁、總截面積最大、血流最慢。","figure":"blood-vessel-capillary.svg","concept":"微血管連接小動脈與小靜脈；薄的管壁和慢的血流讓交換有足夠時間發生。","points":["管壁不含平滑肌，厚度很薄。","廣泛分支使總截面積最大。","氧氣與養分離開血液；代謝廢物進入血液。"],"clinical":{"title":"實驗課觀察","text":"顯微模型中，紅血球常以單列通過微血管，正反映管徑很小。"}},
+    {"id":"blood-vessels-node-05","tag":"靜脈","title":"靜脈：儲存血液並促進回流","summary":"薄壁大管腔；肢體瓣膜配合骨骼肌。","figure":"blood-vessel-vein.svg","concept":"靜脈將血液送回心臟；其管腔較大，能容納大量血液，並在肢體靠瓣膜與肌肉協助回流。","points":["靜脈管壁較薄，彈性纖維較少。","靜脈是重要的血液儲存庫。","骨骼肌收縮擠壓靜脈，瓣膜可減少逆流。"],"clinical":{"title":"生活連結","text":"走路時小腿肌肉反覆收縮與放鬆，能協助下肢靜脈把血液推回心臟。"}},
+    {"id":"blood-vessels-node-06","tag":"血流動力","title":"總截面積決定血流速度","summary":"總截面積越大，平均流速越慢。","figure":"blood-vessel-speed.svg","concept":"血液從少數大血管分到大量微血管時，總截面積大增，流速因此下降；回流匯集後速度再提高。","points":["微血管單根很細，但總數很多。","微血管總截面積最大。","較慢的流速讓物質交換更充分。"],"clinical":{"title":"模型觀察","text":"將一條粗水管分成許多細管，所有細管加總的通過面積變大，水流會放慢。"}}
+  ],
+  "foundation": [
+    {"id":"blood-vessels-foundation-q01","stem":"血液離開心臟後的正確順序為何？","options":["靜脈→微血管→動脈","動脈→微血管→靜脈","微血管→動脈→靜脈","動脈→靜脈→微血管"],"answer":1,"hint":"先找離開心臟的血管，再找交換的位置。","nodeId":"blood-vessels-node-01"},
+    {"id":"blood-vessels-foundation-q02","stem":"哪一層血管壁直接接觸血液？","options":["內膜","中膜","外膜","基底膜外層"],"answer":0,"hint":"想想哪一層位在管腔最內側。","nodeId":"blood-vessels-node-02"},
+    {"id":"blood-vessels-foundation-q03","stem":"哪一類血管的中膜最發達？","options":["動脈","微血管","靜脈","所有血管相同"],"answer":0,"hint":"它必須承受離開心臟時較高的壓力。","nodeId":"blood-vessels-node-03"},
+    {"id":"blood-vessels-foundation-q04","stem":"最適合物質交換的血管構造是？","options":["厚的平滑肌層","單層內皮細胞管壁","單向瓣膜","寬大的管腔"],"answer":1,"hint":"交換距離越短越容易進行。","nodeId":"blood-vessels-node-04"},
+    {"id":"blood-vessels-foundation-q05","stem":"靜脈回流時，何者可防止下肢血液逆流？","options":["彈性纖維","靜脈瓣膜","微血管前括約肌","外膜"],"answer":1,"hint":"這是血管內像單向門的構造。","nodeId":"blood-vessels-node-05"},
+    {"id":"blood-vessels-foundation-q06","stem":"哪一段血管的總截面積最大？","options":["大動脈","小動脈","微血管","大靜脈"],"answer":2,"hint":"它由非常多條極細的小管組成。","nodeId":"blood-vessels-node-06"}
+  ],
+  "cases": [
+    {"id":"blood-vessels-case-q01","stem":"【模型觀察】厚壁、管腔較圓的血管最可能是？","options":["動脈","靜脈","微血管","淋巴管"],"answer":0,"hint":"比較中膜厚度與管腔形狀。","nodeId":"blood-vessels-node-03"},
+    {"id":"blood-vessels-case-q02","stem":"【生活情境】慢跑時，小腿肌肉可幫助哪種血管回流？","options":["動脈","靜脈","微血管","小動脈"],"answer":1,"hint":"想想瓣膜與肌肉幫浦一起作用的血管。","nodeId":"blood-vessels-node-05"},
+    {"id":"blood-vessels-case-q03","stem":"【模型觀察】血流最慢、交換最充分的位置是？","options":["主動脈","小動脈","微血管網","腔靜脈"],"answer":2,"hint":"找總截面積最大的血管區段。","nodeId":"blood-vessels-node-06"},
+    {"id":"blood-vessels-case-q04","stem":"【實驗觀察】紅血球單列通過最符合哪種血管？","options":["大動脈","靜脈","微血管","小靜脈"],"answer":2,"hint":"這種血管的管腔最細，管壁也最薄。","nodeId":"blood-vessels-node-04"},
+    {"id":"blood-vessels-case-q05","stem":"【模型觀察】橡皮管回彈能幫助哪種血管維持血流？","options":["大動脈","微血管","小靜脈","靜脈瓣膜"],"answer":0,"hint":"想想能儲存射血壓力的血管。","nodeId":"blood-vessels-node-03"}
+  ],
+  "credits": ["教學圖：本專案自繪 SVG，內容依據人體解剖生理學血管章節與教師提供教材初稿。"]
+}

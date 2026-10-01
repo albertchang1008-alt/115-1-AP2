@@ -1,0 +1,232 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="material-ids" content="flow,hemodynamics-case-1,hemodynamics-case-2,hemodynamics-case-3,hemodynamics-case-4,hemodynamics-case-5,hemodynamics-foundation-1,hemodynamics-foundation-2,hemodynamics-foundation-3,hemodynamics-foundation-4,hemodynamics-foundation-5,hemodynamics-foundation-6,patterns,pressure,radius,speed,viscosity"><title>血液動力學</title><style>:root{--oxy:#a71930;--deoxy:#1769aa;--tissue:#f3eee9;--accent:#5b3b8c;--ok:#176b45;--warn:#9a5a00;--bg:#fffaf8;--ink:#17212b;--muted:#4e5964;font:16px/1.65 system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0}.kit{max-width:1100px;margin:auto;padding:24px}.hero,.lab,.node,.quiz,.credits{background:#fff;border:1px solid #ded6d0;border-radius:18px;padding:22px;margin:18px 0}.stats,.nodes,.options{display:grid;gap:14px}.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.tile,.node-button{border:1px solid #d9ccd0;background:#fff;padding:16px;border-radius:14px;color:inherit;text-align:left}.tile strong{display:block;font-size:1.35rem;color:var(--oxy)}.nodes{grid-template-columns:repeat(3,1fr)}.node[hidden],.node-detail[hidden],.stage[hidden]{display:none}.node-figure{width:100%;max-height:340px}.state-controls,.options{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:12px 0}button{font:inherit;cursor:pointer;border-radius:10px;border:2px solid var(--accent);background:#fff;color:#281b3e;padding:10px}button[aria-pressed="true"],button:hover{background:var(--accent);color:#fff}.feedback{font-weight:700}.ok{color:var(--ok)}.warn{color:var(--warn)}.clinical{background:var(--tissue);padding:14px;border-left:5px solid var(--accent)}svg{max-width:100%;height:auto}.state-figure svg{display:block;width:100%}.heart-state{width:100%}@media(max-width:760px){.kit{padding:12px}.nodes{grid-template-columns:1fr}.hero,.lab,.node,.quiz,.credits{padding:16px}}@media(prefers-reduced-motion:no-preference){.flow{animation:pulse 1.8s infinite}@keyframes pulse{50%{stroke-dashoffset:18}}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* ---- ECG widgets（ecg-sim、label 題型） ---- */
+.ecg-sim,.ecg-label{--ecg-muted:#4e5964}
+.ecg-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-bottom:6px}
+.ecg-hr{font-size:1.8rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-hr small{font-size:.8rem;font-weight:600;color:var(--muted);margin-left:4px}
+.ecg-chips{display:flex;flex-wrap:wrap;gap:6px}.ecg-chips button{padding:5px 12px;border-radius:999px;font-size:.85rem}
+.ecg-slider{width:100%;accent-color:var(--accent);height:28px}
+.ecg-scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.ecg-row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:10px 0}
+.ecg-tg{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.92rem}.ecg-tg small{color:var(--muted);font-weight:500}
+.ecg-tg input{width:18px;height:18px;accent-color:var(--accent)}
+.ecg-status{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-height:28px}.ecg-pill{display:inline-block;border:1px solid #d9ccd0;border-radius:999px;padding:3px 10px;font-size:.85rem;background:#fff}.ecg-pill b{font-size:1rem}.ecg-pill.in{background:#e6f4fb;border-color:#7cc3e8}.ecg-pill.ex{background:#f1eefa;border-color:#b9a7de}.ecg-pill.adj{background:#fff4e0;border-color:#e6b566}
+.ecg-physio{background:#f4effa;border-radius:12px;padding:10px 12px;font-size:.92rem;margin-bottom:12px}.ecg-physio b{color:var(--accent)}
+.ecg-scope,.ecg-zoom{position:relative;border-radius:14px;overflow:hidden;border:1px solid #1e293b;background:#050d1a}
+.ecg-layer{position:absolute;inset:0;display:block}
+.ecg-over:focus-visible{outline:3px solid #fde047;outline-offset:-3px}
+.ecg-lbl{position:absolute;top:6px;left:10px;font:11px ui-monospace,Menlo,monospace;color:#6ee7b7;pointer-events:none}
+.ecg-hint,.ecg-sel,.ecg-note{font-size:.85rem;color:var(--muted);margin:6px 0}
+.ecg-zoom-wrap .ecg-layers{margin:0 0 8px}.ecg-layers{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.88rem}.ecg-layers>span{font-weight:800;color:var(--muted)}
+.ecg-zoom-wrap[hidden],.ecg-fb[hidden],.ecg-reveal[hidden]{display:none}
+.ecg-zoom-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 8px}.ecg-zoom-head small{display:block;color:var(--muted);font-size:.8rem}.ecg-zoom-head button{white-space:nowrap;flex:none}
+.ecg-reads{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
+.ecg-rd{border:1px solid #ded6d0;border-radius:12px;padding:8px 10px}.ecg-rd .k{font-size:.72rem;color:var(--muted);font-weight:700}.ecg-rd .v{font-size:1.2rem;font-weight:900;font-variant-numeric:tabular-nums}.ecg-rd .n{font-size:.72rem;color:var(--muted)}
+.ecg-bar-cap{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
+.ecg-bar{display:flex;height:22px;border-radius:8px;overflow:hidden;font-size:.72rem;font-weight:700;color:#fff}
+.ecg-bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .25s}
+.ecg-sys{background:#be123c}.ecg-dia{background:#0369a1}
+.ecg-gap{font-size:.88rem;color:var(--muted)}.ecg-gap b{color:var(--ink)}
+.ecg-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ecg-ranges{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem}.ecg-ranges input{accent-color:var(--accent);vertical-align:middle}
+.ecg-fb{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:.92rem}.ecg-fb.ok{background:#e8f5ee}.ecg-fb.ok b{color:var(--ok)}.ecg-fb.no{background:#fbf1e2}.ecg-fb.no b{color:var(--warn)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.node-detail .node-figure{max-height:none}.node-figure svg{display:block;width:100%}
+.kit[data-slug="blood-vessels"] .state-figure svg,.kit[data-slug="circulation-routes"] .state-figure svg,.kit[data-slug="blood-vessels"] .node-figure,.kit[data-slug="circulation-routes"] .node-figure{max-width:600px;margin-inline:auto}
+.state-figure[data-state="pulmonary"] .systemic,.state-figure[data-state="pulmonary"] .special,.state-figure[data-state="systemic"] .pulmonary,.state-figure[data-state="systemic"] .special,.state-figure[data-state="special"] .pulmonary,.state-figure[data-state="special"] .systemic{opacity:.18}
+.state-figure[data-state="outbound"] .exchange,.state-figure[data-state="outbound"] .return,.state-figure[data-state="exchange"] .outbound,.state-figure[data-state="exchange"] .return,.state-figure[data-state="return"] .outbound,.state-figure[data-state="return"] .exchange{opacity:.18}
+@media(max-width:760px){.ecg-reads{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 新入門教材：字級／色系偏好與逐題解析，不影響已發布教材。 */
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]){font-size:calc(16px * var(--font-scale,1))}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) h1{font-size:calc(30px * var(--font-scale,1))}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) h2{font-size:calc(24px * var(--font-scale,1))}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) h3{font-size:calc(19px * var(--font-scale,1))}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) .tile strong{font-size:calc(22px * var(--font-scale,1))}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) :is(.state-figure svg,.node-figure){max-width:600px;margin-inline:auto}
+.prefs-bar{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}.prefs-bar select{font:inherit;padding:6px;border-radius:8px}
+:root[data-theme="cool"]{--bg:#f0f7fb;--accent:#175f7d;--tissue:#e5f2f5}
+.complete-banner{padding:20px;background:#e5f6ec;border:2px solid var(--ok);border-radius:14px}.complete-banner[hidden]{display:none}
+.feedback button{display:block;margin-top:12px}
+.kit:is([data-slug="blood-pressure-regulation"],[data-slug="hemodynamics"],[data-slug="lymphatic-system"]) .node-button img{display:block;width:100%;max-height:150px;object-fit:contain;margin-bottom:12px}
+button:focus-visible,select:focus-visible{outline:3px solid #c97b00;outline-offset:3px}
+</style></head><body><script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script><script>window.CourseLearning=window.CourseLearning||{explore(){},nodeTime(){},answer(){},hint(){},complete(){}};</script><script>
+// 教材元件庫：由 content.json 產生單檔互動教材（六節點＋兩關題目＋SDK 回報）。
+// 擴充點：lab.widget（例如 "ecg-sim"）與題型 type（例如 "label"），由 materials-src/widgets/ 提供。
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+// Fisher–Yates 洗牌（無偏差）
+const shuffle = rows => {
+  const a = [...rows];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const WIDGETS = { 'ecg-sim': () => window.EcgSim };
+const QUESTION_TYPES = { label: () => window.EcgLabel };
+
+function renderLab(lab, figures) {
+  const widget = lab.widget && WIDGETS[lab.widget]?.();
+  if (lab.widget) {
+    return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p><div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div></section>`;
+  }
+  return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>`
+    + `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div>`
+    + `<div class="state-controls">${lab.states.map((x, i) => `<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div>`
+    + `<p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`
+    + `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o, i) => `<button data-answer="${i}">${esc(o)}</button>`).join('')}</div>`
+    + `<p class="feedback" aria-live="polite"></p></section>`;
+}
+
+function renderQuestion(q) {
+  const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+  if (type) return `<h3>${esc(q.stem)}</h3><div class="q-widget" data-type="${esc(q.type)}">${type.html(q)}</div>`;
+  return `<h3>${esc(q.stem)}</h3><div class="options">${shuffle(q.options.map((text, answer) => ({ text, answer }))).map(o => `<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>`;
+}
+
+function render(content, figures) {
+  const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-question-id="${q.id}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
+  return `<main class="kit" data-slug="${content.slug}">`
+    + `<header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header>`
+    + (content.experience === 'guided' ? '<div class="prefs-bar"><label>字級 <select data-pref="font"><option value="1">標準</option><option value="1.15">較大</option><option value="1.3">最大</option></select></label> <label>色系 <select data-pref="theme"><option value="warm">暖色</option><option value="cool">冷色</option></select></label></div><button type="button" data-go-quiz>兩階段隨堂診斷</button>' : '')
+    + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
+    + renderLab(content.lab, figures)
+    + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>`
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
+    + `</section>`
+    + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
+    + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
+    + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
+}
+
+function mount(content, figures) {
+  document.body.innerHTML = render(content, figures);
+  const guided = content.experience === 'guided';
+  document.querySelector('[data-go-quiz]')?.addEventListener('click', () => document.querySelector('.quiz').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.querySelector('[data-pref="font"]')?.addEventListener('change', e => document.documentElement.style.setProperty('--font-scale', e.target.value));
+  document.querySelector('[data-pref="theme"]')?.addEventListener('change', e => document.documentElement.dataset.theme = e.target.value);
+  const selectPanel = id => document.querySelectorAll('.state-figure [data-panel]').forEach(g => { g.style.display = g.dataset.panel === id ? '' : 'none'; });
+  selectPanel(content.lab.states?.[0]?.id);
+  const CL = window.CourseLearning || { explore() {}, nodeTime() {}, answer() {}, hint() {}, complete() {} };
+
+  // 知識節點：第一次展開送 explore；收合或分頁隱藏時送前景停留秒數
+  const opened = new Map(), explored = new Set();
+  document.querySelectorAll('[data-node]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.node, d = document.querySelector('#detail-' + id), was = d.hidden;
+    d.hidden = !was; b.setAttribute('aria-expanded', String(was));
+    if (was) { if (!explored.has(id)) { explored.add(id); CL.explore(id); } opened.set(id, performance.now()); }
+    else { const start = opened.get(id); if (start) CL.nodeTime(id, (performance.now() - start) / 1000); opened.delete(id); }
+  }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { for (const [id, start] of opened) CL.nodeTime(id, (performance.now() - start) / 1000); opened.clear(); }
+  });
+
+  // 情境實驗室
+  if (content.lab.widget) {
+    const root = document.querySelector('.lab-widget');
+    WIDGETS[content.lab.widget]?.()?.mount(root, content.lab, CL);
+  } else {
+    document.querySelectorAll('button[data-lab-state]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.labState;
+      const fig = document.querySelector('.state-figure');
+      fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
+      selectPanel(id);
+      document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
+    }));
+    document.querySelector('.predict').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const ok = +b.dataset.answer === content.lab.predict.answer;
+      b.parentElement.nextElementSibling.textContent = ok ? content.lab.predict.feedback : '再比對圖中的狀態與箭頭。';
+    });
+  }
+
+  // 兩關題目：逐題答對才解鎖；第二關全部答對才送 complete
+  let foundation = 0, cases = 0, completionSent = false;
+  // 學習成果在最後一題答對時成立；呈現結果不應是回報前提。
+  const reportCompletion = () => {
+    if (completionSent) return;
+    completionSent = true;
+    CL.complete();
+  };
+  const openForReview = id => {
+    const button = document.querySelector(`.node-button[data-node="${id}"]`), detail = document.querySelector('#detail-' + id);
+    if (!detail.hidden) { detail.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    detail.hidden = false; button?.setAttribute('aria-expanded', 'true');
+    if (!explored.has(id)) { explored.add(id); CL.explore(id); }
+    opened.set(id, performance.now());
+    detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const restartCases = () => {
+    cases = 0;
+    completionSent = false;
+    document.querySelector('.complete-banner').hidden = true;
+    document.querySelectorAll('[data-kind="case"]').forEach((item, index) => {
+      item.hidden = index !== 0;
+      if (guided) item.innerHTML = renderQuestion(content.cases[index]);
+      item.querySelectorAll('button[data-answer]').forEach(button => { button.disabled = false; });
+      const feedback = item.querySelector('.feedback'); if (feedback) feedback.textContent = '';
+    });
+  };
+  const show = el => { el.hidden = false; el.dispatchEvent(new CustomEvent('stage-show')); };
+  const advance = (stage, kind) => {
+    stage.hidden = true;
+    if (kind === 'foundation') {
+      foundation++;
+      const next = document.querySelector(`[data-kind="foundation"][data-index="${foundation}"]`);
+      show(next || document.querySelector('[data-kind="case"][data-index="0"]'));
+    } else {
+      cases++;
+      const next = document.querySelector(`[data-kind="case"][data-index="${cases}"]`);
+      if (next) show(next); else { reportCompletion(); if (guided) document.querySelector('.complete-banner').hidden = false; }
+    }
+  };
+  document.querySelectorAll('.stage').forEach(stage => {
+    const kind = stage.dataset.kind, rows = kind === 'foundation' ? content.foundation : content.cases;
+    const q = rows[+stage.dataset.index];
+    const type = q.type && q.type !== 'mcq' ? QUESTION_TYPES[q.type]?.() : null;
+    if (type) { type.mount(stage.querySelector('.q-widget'), q, CL, () => advance(stage, kind)); return; }
+    stage.addEventListener('click', e => {
+      const b = e.target.closest('button[data-answer]'); if (!b || b.disabled || stage.hidden) return;
+      const ok = +b.dataset.answer === q.answer;
+      CL.answer(q.id, ok);
+      const feedback = stage.querySelector('.feedback');
+      if (!ok) {
+        CL.hint?.(q.id);
+        if (kind === 'foundation') { feedback.textContent = `提示：${q.hint}`; return; }
+        stage.querySelectorAll('button[data-answer]').forEach(x => { x.disabled = true; });
+        feedback.textContent = `提示：${q.hint} `;
+        const review = document.createElement('button'); review.type = 'button'; review.textContent = '前往對應節點複習';
+        const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '重新挑戰本關'; retry.disabled = true;
+        review.addEventListener('click', () => { openForReview(q.nodeId); retry.disabled = false; });
+        retry.addEventListener('click', restartCases);
+        feedback.append(review, retry); return;
+      }
+      feedback.textContent = '答對，繼續下一題。';
+      stage.querySelectorAll('button').forEach(x => { x.disabled = true; });
+      if (kind === 'case' && cases === content.cases.length - 1) reportCompletion();
+      if (guided) {
+        feedback.textContent = '答對。' + (q.explain || '');
+        const next = document.createElement('button'); next.type = 'button';
+        next.textContent = kind === 'case' && cases === content.cases.length - 1 ? '查看通關結果' : '繼續下一題';
+        next.addEventListener('click', () => { advance(stage, kind); document.querySelector('.stage:not([hidden]), .complete-banner:not([hidden])')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, { once: true });
+        feedback.append(next);
+      } else setTimeout(() => advance(stage, kind), 250);
+    });
+  });
+}
+
+// 舊版三段節律圖（ecg-rate.svg）的狀態切換；保留相容
+document.addEventListener('click', event => {
+  const button = event.target.closest('button[data-lab-state]'); if (!button) return;
+  const figure = document.querySelector('.state-figure'), state = button.dataset.labState; if (!figure) return;
+  figure.querySelectorAll('.slow,.rest,.fast').forEach(group => { group.style.display = group.classList.contains(state) ? 'block' : 'none'; });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const figure = document.querySelector('.state-figure');
+  figure?.querySelector('.slow')?.style.setProperty('display', 'block');
+});
+
+mount({"slug":"hemodynamics","version":"v1","experience":"guided","title":"血液動力學","subtitle":"壓差推動血流、阻力限制流量；比較管徑、黏度與總截面積，再分清層流、擾流與平均動脈壓。","label":"血液動力學｜互動資訊圖表","stats":[{"value":"Q = ΔP／R","label":"血流量、壓差與阻力"},{"value":"r⁴","label":"半徑的四次方效應"},{"value":"v = Q／A","label":"總截面積與平均流速"}],"lab":{"title":"情境實驗室","intro":"比較理想圓管的半徑；壓差、管長與黏度保持不變，數值皆以基準值為1。","figure":"hemodynamics-overview.svg","states":[{"id":"narrow","label":"半徑 0.5 倍","explain":"固定壓差、管長與黏度：阻力為 16 倍，流量為 1／16。"},{"id":"baseline","label":"基準半徑","explain":"阻力與流量都以基準值 1 表示。"},{"id":"wide","label":"半徑 2 倍","explain":"固定其他條件：阻力為 1／16，流量為 16 倍。"}],"predict":{"question":"固定壓差等條件，半徑加倍時，流量變為？","options":["16 倍","2 倍","1／16","不變"],"answer":0,"feedback":"理想圓管層流模型：阻力變為 1／16，固定壓差時流量變為16倍。"}},"nodes":[{"id":"flow","tag":"01","title":"壓差推動血流","summary":"Q = ΔP／R","figure":"hemodynamics-flow.svg","concept":"血流量 Q 是單位時間流過的體積；壓差推動，阻力限制。","points":["比較的是入口與出口壓力差。","固定阻力時，壓差增加使流量增加。","固定壓差時，阻力增加使流量減少。"],"clinical":{"title":"觀察與應用","text":"流量不是單一血球前進的速度。"}},{"id":"radius","tag":"02","title":"半徑的四次方","summary":"R ∝ 1／r⁴","figure":"hemodynamics-radius.svg","concept":"理想圓管層流模型中，半徑對阻力的影響非常大。","points":["固定黏度與管長，半徑加倍使阻力變成 1／16。","再固定壓差，流量變成 16 倍。","真實血管可變形且血液並非理想流體，公式是簡化模型。"],"clinical":{"title":"觀察與應用","text":"改變半徑時，不能把流量倍數直接當流速倍數。"}},{"id":"viscosity","tag":"03","title":"血比容與黏度","summary":"血比容＝紅血球體積比例","figure":"hemodynamics-viscosity.svg","concept":"血比容是紅血球佔全血體積的百分比，不是所有血球的比例。","points":["紅血球比例升高通常使黏度增加。","黏度增加，流動阻力增加。","固定壓差及管路條件時，流量減少。"],"clinical":{"title":"觀察與應用","text":"黏度不是密度；不可由血比容單獨精算真實流量。"}},{"id":"speed","tag":"04","title":"總截面積與流速","summary":"v = Q／總截面積","figure":"hemodynamics-speed.svg","concept":"整組血管的總截面積與單一血管大小不同。","points":["分支越多，所有管腔截面積的總和可能越大。","在總流量相同時，總截面積越大，平均流速越低。","微血管床總截面積很大，慢速有利物質交換。"],"clinical":{"title":"觀察與應用","text":"不是『微血管最細，所以血流最快』。"}},{"id":"patterns","tag":"05","title":"層流與擾流","summary":"看流線，不把血流當直線箭頭","figure":"hemodynamics-patterns.svg","concept":"層流時相鄰流層較有秩序；擾流時流動較混亂。","points":["理想層流中，中央流速快，靠管壁慢。","高速與幾何變化等條件增加擾流可能。","擾流的流線出現渦旋與不規則方向，與平順層流不同。"],"clinical":{"title":"觀察與應用","text":"同一管路中不同位置的流速可以不同。"}},{"id":"pressure","tag":"06","title":"脈壓與平均動脈壓","summary":"不要把 MAP 當簡單算術平均","figure":"hemodynamics-pressure.svg","concept":"脈壓 PP = 收縮壓 SBP − 舒張壓 DBP。","points":["一般靜息心率時 MAP ≈ DBP + PP／3。","120／80 的計算範例：PP = 40、MAP ≈ 80 + 40／3 ≈ 93 mmHg。","此近似適用於一般靜息心率；心率改變時，估算關係也可能改變。"],"clinical":{"title":"觀察與應用","text":"先分清收縮壓、舒張壓、脈壓與平均動脈壓。"}}],"foundation":[{"id":"hemodynamics-foundation-1","stem":"固定壓差，阻力變成兩倍，流量如何改變？","options":["變成一半","變成兩倍","不變","變成四倍"],"answer":0,"hint":"流量與阻力是何種關係？","nodeId":"flow","explain":"Q = ΔP／R；固定分子，分母加倍使 Q 減半。"},{"id":"hemodynamics-foundation-2","stem":"理想圓管模型中，半徑加倍，阻力變為？","options":["1／16","1／2","2 倍","16 倍"],"answer":0,"hint":"先算半徑的四次方。","nodeId":"radius","explain":"R 與 r⁴ 成反比；2⁴ = 16。"},{"id":"hemodynamics-foundation-3","stem":"血比容描述哪個比例？","options":["紅血球體積／全血體積","全部白血球／全血","血漿蛋白／血漿","血小板數／紅血球數"],"answer":0,"hint":"注意分子是什麼。","nodeId":"viscosity","explain":"血比容測紅血球佔全血體積比例。"},{"id":"hemodynamics-foundation-4","stem":"總流量相同時，哪一處因總截面積大而平均流速慢？","options":["微血管床","單一主動脈","單一小動脈","所有位置必定相同"],"answer":0,"hint":"比較整組血管，不是單一管徑。","nodeId":"speed","explain":"微血管數目多，總截面積大，平均速度低。"},{"id":"hemodynamics-foundation-5","stem":"理想層流中何處速度較快？","options":["管中央","緊貼管壁","整個截面完全一樣","只有出口"],"answer":0,"hint":"回想流層與管壁的關係。","nodeId":"patterns","explain":"管中央較快，靠近管壁較慢。"},{"id":"hemodynamics-foundation-6","stem":"靜息模型血壓 120／80，脈壓與估算 MAP 為？","options":["40、約 93 mmHg","40、約 100 mmHg","80、約 93 mmHg","120、約 80 mmHg"],"answer":0,"hint":"先相減，再使用舒張壓加三分之一脈壓。","nodeId":"pressure","explain":"PP = 120 − 80 = 40 mmHg；MAP ≈ 80 + 40／3 ≈ 93 mmHg，不是收縮壓與舒張壓的簡單算術平均。"}],"cases":[{"id":"hemodynamics-case-1","stem":"【模型觀察】紅血球體積比例升高，其他條件固定，流量傾向？","options":["減少","增加","必定不變","必定增加16倍"],"answer":0,"hint":"串連血比容、黏度、阻力。","nodeId":"viscosity","explain":"黏度與阻力通常增加，固定壓差時流量減少。"},{"id":"hemodynamics-case-2","stem":"【實驗觀察】理想圓管半徑減半，固定其他條件，阻力為？","options":["16 倍","2 倍","1／16","1／2"],"answer":0,"hint":"倒數再取四次方。","nodeId":"radius","explain":"R ∝ 1／r⁴；半徑減半使 R 增加16倍。"},{"id":"hemodynamics-case-3","stem":"【模型觀察】分支總截面積加倍，總流量不變，平均流速為？","options":["一半","兩倍","四倍","十六倍"],"answer":0,"hint":"使用 v = Q／A。","nodeId":"speed","explain":"流量固定、總截面積加倍使平均流速減半。"},{"id":"hemodynamics-case-4","stem":"【實驗觀察】管路突然變徑且速度升高，哪種流動較可能出現？","options":["擾流","必定完全靜止","所有流層同速","只能保持理想層流"],"answer":0,"hint":"觀察流線是否仍然平順。","nodeId":"patterns","explain":"高速與幾何變化會增加擾流的可能；擾流的流線不像層流那樣平順。"},{"id":"hemodynamics-case-5","stem":"【模型觀察】TPR 固定，CO 減少，MAP 趨勢如何？","options":["下降","上升","必定不變","變成收縮壓加舒張壓"],"answer":0,"hint":"用 MAP ≈ CO × TPR。","nodeId":"pressure","explain":"忽略右心房壓的模型中，CO 減少使 MAP 下降。"}],"credits":["參考：OpenStax《Anatomy and Physiology 2e》20.2 Blood Flow, Blood Pressure, and Resistance（血流、血壓與阻力）。","圖像：自製理想管路模型；半徑比較固定壓差、管長與黏度。"]},{"hemodynamics-overview.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 460\" role=\"img\" aria-label=\"血液動力學｜情境比較\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"460\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">血液動力學｜情境比較\u003c/text>\u003cg data-panel=\"narrow\">\u003crect x=\"40\" y=\"130\" width=\"320\" height=\"30\" rx=\"14\" fill=\"#f5d6de\" stroke=\"#a71930\" stroke-width=\"4\"/>\u003cpath d=\"M70 145L330 145\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003ctext x=\"85\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₁ 固定\u003c/text>\u003ctext x=\"315\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₂ 固定\u003c/text>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">半徑：0.5 倍\u003c/text>\u003ctext x=\"200\" y=\"287\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">阻力：16 倍\u003c/text>\u003ctext x=\"200\" y=\"329\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">流量：1／16 倍\u003c/text>\u003ctext x=\"200\" y=\"385\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">固定黏度、管長、壓差\u003c/text>\u003ctext x=\"200\" y=\"417\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">理想圓管層流模型\u003c/text>\u003c/g>\u003cg data-panel=\"baseline\">\u003crect x=\"40\" y=\"115\" width=\"320\" height=\"60\" rx=\"14\" fill=\"#f5d6de\" stroke=\"#a71930\" stroke-width=\"4\"/>\u003cpath d=\"M70 145L330 145\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003ctext x=\"85\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₁ 固定\u003c/text>\u003ctext x=\"315\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₂ 固定\u003c/text>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">半徑：1 倍\u003c/text>\u003ctext x=\"200\" y=\"287\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">阻力：1 倍\u003c/text>\u003ctext x=\"200\" y=\"329\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">流量：1 倍\u003c/text>\u003ctext x=\"200\" y=\"385\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">固定黏度、管長、壓差\u003c/text>\u003ctext x=\"200\" y=\"417\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">理想圓管層流模型\u003c/text>\u003c/g>\u003cg data-panel=\"wide\">\u003crect x=\"40\" y=\"85\" width=\"320\" height=\"120\" rx=\"14\" fill=\"#f5d6de\" stroke=\"#a71930\" stroke-width=\"4\"/>\u003cpath d=\"M70 145L330 145\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003ctext x=\"85\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₁ 固定\u003c/text>\u003ctext x=\"315\" y=\"62\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">P₂ 固定\u003c/text>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">半徑：2 倍\u003c/text>\u003ctext x=\"200\" y=\"287\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">阻力：1／16 倍\u003c/text>\u003ctext x=\"200\" y=\"329\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"22\" fill=\"#17212b\">流量：16 倍\u003c/text>\u003ctext x=\"200\" y=\"385\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">固定黏度、管長、壓差\u003c/text>\u003ctext x=\"200\" y=\"417\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">理想圓管層流模型\u003c/text>\u003c/g>\u003c/svg>\n","hemodynamics-flow.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 435\" role=\"img\" aria-label=\"壓差推動血流\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"435\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">壓差推動血流\u003c/text>\u003crect x=\"24\" y=\"56\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#fff\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"88\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">入口壓力 P₁\u003c/text>\u003cpath d=\"M200 110L200 126\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"129\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#e2f1f7\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"161\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">壓差 ΔP = P₁ − P₂\u003c/text>\u003cpath d=\"M200 183L200 199\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"202\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#fff\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"234\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">阻力 R\u003c/text>\u003cpath d=\"M200 256L200 272\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"275\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#e2f1f7\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"307\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">出口壓力 P₂\u003c/text>\u003cpath d=\"M200 329L200 345\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"348\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#fff\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"380\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">流量 Q = ΔP／R\u003c/text>\u003c/svg>\n","hemodynamics-radius.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 410\" role=\"img\" aria-label=\"半徑的四次方\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"410\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">半徑的四次方\u003c/text>\u003crect x=\"50\" y=\"58\" width=\"300\" height=\"38\" rx=\"18\" fill=\"#dcebf6\" stroke=\"#1769aa\" stroke-width=\"3\"/>\u003crect x=\"50\" y=\"125\" width=\"300\" height=\"76\" rx=\"30\" fill=\"#f7dfe4\" stroke=\"#a71930\" stroke-width=\"3\"/>\u003cpath d=\"M90 78L310 78\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003cpath d=\"M90 164L310 164\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">半徑 r × 2\u003c/text>\u003ctext x=\"200\" y=\"280\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">阻力 R × 1／16\u003c/text>\u003ctext x=\"200\" y=\"315\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">固定壓差 ΔP\u003c/text>\u003ctext x=\"200\" y=\"350\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">流量 Q × 16\u003c/text>\u003c/svg>\n","hemodynamics-viscosity.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 410\" role=\"img\" aria-label=\"血比容與黏度\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"410\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">血比容與黏度\u003c/text>\u003crect x=\"42\" y=\"58\" width=\"96\" height=\"145\" rx=\"12\" fill=\"#fff\" stroke=\"#1769aa\"/>\u003crect x=\"44\" y=\"148\" width=\"92\" height=\"53\" fill=\"#a71930\"/>\u003crect x=\"232\" y=\"58\" width=\"96\" height=\"145\" rx=\"12\" fill=\"#fff\" stroke=\"#1769aa\"/>\u003crect x=\"234\" y=\"116\" width=\"92\" height=\"85\" fill=\"#a71930\"/>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">紅血球體積比例 ↑\u003c/text>\u003ctext x=\"200\" y=\"280\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">血液黏度 ↑\u003c/text>\u003ctext x=\"200\" y=\"315\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">阻力 ↑\u003c/text>\u003ctext x=\"200\" y=\"350\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">固定壓差：流量 ↓\u003c/text>\u003c/svg>\n","hemodynamics-speed.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 410\" role=\"img\" aria-label=\"總截面積與流速\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"410\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">總截面積與流速\u003c/text>\u003cpath d=\"M32 130L135 130\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003cpath d=\"M135 130L190 72H350\" stroke=\"#1769aa\" stroke-width=\"12\" fill=\"none\"/>\u003cpath d=\"M135 130L190 110H350\" stroke=\"#1769aa\" stroke-width=\"12\" fill=\"none\"/>\u003cpath d=\"M135 130L190 148H350\" stroke=\"#1769aa\" stroke-width=\"12\" fill=\"none\"/>\u003cpath d=\"M135 130L190 186H350\" stroke=\"#1769aa\" stroke-width=\"12\" fill=\"none\"/>\u003ctext x=\"200\" y=\"245\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">相同總流量 Q\u003c/text>\u003ctext x=\"200\" y=\"280\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">分支血管增加\u003c/text>\u003ctext x=\"200\" y=\"315\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">總截面積 A ↑\u003c/text>\u003ctext x=\"200\" y=\"350\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">平均流速 v ↓\u003c/text>\u003c/svg>\n","hemodynamics-patterns.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 510\" role=\"img\" aria-label=\"層流與擾流：流線對照\">\u003cdefs>\u003cmarker id=\"patternArrow\" markerUnits=\"userSpaceOnUse\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\">\u003cpath d=\"M0 0L9 4.5L0 9Z\" fill=\"#176b45\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"510\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">層流與擾流：流線對照\u003c/text>\u003ctext x=\"200\" y=\"70\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">層流：中央快、近壁慢\u003c/text>\u003crect x=\"30\" y=\"92\" width=\"340\" height=\"122\" rx=\"16\" fill=\"#fff\" stroke=\"#1769aa\" stroke-width=\"3\"/>\u003cpath d=\"M55 112H240\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M55 140H335\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M55 166H335\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M55 194H240\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003ctext x=\"200\" y=\"257\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">擾流：流線不規則、出現渦旋\u003c/text>\u003cpath d=\"M30 280H135L185 300H370V410H185L135 430H30Z\" fill=\"#fff\" stroke=\"#1769aa\" stroke-width=\"3\"/>\u003cpath d=\"M55 310C105 298 152 337 190 326S272 305 337 320\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M55 352C120 335 176 390 210 354S310 326 335 365\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M55 400C103 385 154 417 200 392S298 419 339 394\" stroke=\"#1769aa\" stroke-width=\"4\" fill=\"none\" marker-end=\"url(#patternArrow)\"/>\u003cpath d=\"M248 353C205 330 209 393 254 381C282 368 259 339 236 357\" fill=\"none\" stroke=\"#a71930\" stroke-width=\"3\"/>\u003ctext x=\"200\" y=\"475\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">高速／幾何變化增加擾流可能\u003c/text>\u003c/svg>\n","hemodynamics-pressure.svg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 362\" role=\"img\" aria-label=\"脈壓與平均動脈壓\">\u003cdefs>\u003cmarker id=\"arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\">\u003cpath d=\"M0 0L8 4L0 8Z\" fill=\"#5b3b8c\"/>\u003c/marker>\u003c/defs>\u003crect width=\"400\" height=\"362\" rx=\"18\" fill=\"#f5f0fa\"/>\u003ctext x=\"200\" y=\"32\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\" fill=\"#17212b\">脈壓與平均動脈壓\u003c/text>\u003crect x=\"24\" y=\"56\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#fff\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"88\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">收縮壓 120／舒張壓 80\u003c/text>\u003cpath d=\"M200 110L200 126\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"129\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#e2f1f7\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"161\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">脈壓 PP = 40 mmHg\u003c/text>\u003cpath d=\"M200 183L200 199\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"202\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#fff\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"234\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">MAP ≈ 80 + 40／3\u003c/text>\u003cpath d=\"M200 256L200 272\" fill=\"none\" stroke=\"#5b3b8c\" stroke-width=\"3\" marker-end=\"url(#arrow)\"/>\u003crect x=\"24\" y=\"275\" width=\"352\" height=\"52\" rx=\"14\" fill=\"#e2f1f7\" stroke=\"#bba9cb\"/>\u003ctext x=\"200\" y=\"307\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\" fill=\"#17212b\">MAP ≈ 93 mmHg\u003c/text>\u003c/svg>\n"});</script></body></html>

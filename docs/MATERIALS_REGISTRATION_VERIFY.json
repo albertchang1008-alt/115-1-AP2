@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-02",
+  "baselineSha256": "2439401da543997d0bfb6b639e808e5e0b7cef19792973078cfb2ef13aeb216b",
+  "finalSha256": "18a78f73e40117a111356c8579be30e4d115dd5ca8a5d39e8a37386021eb73f2",
+  "originalQuestions": 106,
+  "originalCellsCompared": 2544,
+  "originalCellsChanged": 0,
+  "originalRowsRawXmlUnchanged": 107,
+  "unchangedZipParts": [
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "xl/theme/theme1.xml",
+    "xl/styles.xml",
+    "_rels/.rels",
+    "xl/workbook.xml",
+    "xl/_rels/workbook.xml.rels",
+    "[Content_Types].xml"
+  ],
+  "notesExistingCellsChanged": [
+    "B23"
+  ],
+  "notesAppendedRange": "A24:B28",
+  "addedRange": "題庫!A108:X162",
+  "addedQuestions": 55,
+  "totalQuestions": 161,
+  "duplicateIds": 0,
+  "htmlStemOptionAnswerMatches": 55,
+  "newOptionOrderChanged": 55,
+  "correctPositionCounts": {
+    "C": 14,
+    "A": 14,
+    "D": 14,
+    "B": 13
+  },
+  "materialCounts": {
+    "血管構造解析": 11,
+    "循環路線": 11,
+    "血壓的調控": 11,
+    "淋巴系統": 11,
+    "血液動力學": 11
+  },
+  "comparison": "HTML option multisets and correct option text match exactly; shuffled Excel positions map to code and Zuvio number."
+}

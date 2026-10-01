@@ -1,0 +1,602 @@
+[
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 390,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "high",
+        "minPx": 14.94
+      },
+      {
+        "id": "low",
+        "minPx": 14.94
+      },
+      {
+        "id": "volume",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 16.47
+      },
+      {
+        "id": "sensors",
+        "minPx": 16.47
+      },
+      {
+        "id": "raas",
+        "minPx": 16.47
+      },
+      {
+        "id": "adh",
+        "minPx": 16.47
+      },
+      {
+        "id": "anp",
+        "minPx": 16.47
+      },
+      {
+        "id": "map",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 390,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "high",
+        "minPx": 14.94
+      },
+      {
+        "id": "low",
+        "minPx": 14.94
+      },
+      {
+        "id": "volume",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 16.47
+      },
+      {
+        "id": "sensors",
+        "minPx": 16.47
+      },
+      {
+        "id": "raas",
+        "minPx": 16.47
+      },
+      {
+        "id": "adh",
+        "minPx": 16.47
+      },
+      {
+        "id": "anp",
+        "minPx": 16.47
+      },
+      {
+        "id": "map",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 1280,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "high",
+        "minPx": 27
+      },
+      {
+        "id": "low",
+        "minPx": 27
+      },
+      {
+        "id": "volume",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 27
+      },
+      {
+        "id": "sensors",
+        "minPx": 27
+      },
+      {
+        "id": "raas",
+        "minPx": 27
+      },
+      {
+        "id": "adh",
+        "minPx": 27
+      },
+      {
+        "id": "anp",
+        "minPx": 27
+      },
+      {
+        "id": "map",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 1280,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "high",
+        "minPx": 27
+      },
+      {
+        "id": "low",
+        "minPx": 27
+      },
+      {
+        "id": "volume",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 27
+      },
+      {
+        "id": "sensors",
+        "minPx": 27
+      },
+      {
+        "id": "raas",
+        "minPx": 27
+      },
+      {
+        "id": "adh",
+        "minPx": 27
+      },
+      {
+        "id": "anp",
+        "minPx": 27
+      },
+      {
+        "id": "map",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 390,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "right",
+        "minPx": 14.94
+      },
+      {
+        "id": "leg",
+        "minPx": 14.94
+      },
+      {
+        "id": "left",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 16.47
+      },
+      {
+        "id": "pump",
+        "minPx": 16.47
+      },
+      {
+        "id": "thoracic",
+        "minPx": 16.47
+      },
+      {
+        "id": "right-duct",
+        "minPx": 16.47
+      },
+      {
+        "id": "nodes",
+        "minPx": 16.47
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 390,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "right",
+        "minPx": 14.94
+      },
+      {
+        "id": "leg",
+        "minPx": 14.94
+      },
+      {
+        "id": "left",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 16.47
+      },
+      {
+        "id": "pump",
+        "minPx": 16.47
+      },
+      {
+        "id": "thoracic",
+        "minPx": 16.47
+      },
+      {
+        "id": "right-duct",
+        "minPx": 16.47
+      },
+      {
+        "id": "nodes",
+        "minPx": 16.47
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 1280,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "right",
+        "minPx": 27
+      },
+      {
+        "id": "leg",
+        "minPx": 27
+      },
+      {
+        "id": "left",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 27
+      },
+      {
+        "id": "pump",
+        "minPx": 27
+      },
+      {
+        "id": "thoracic",
+        "minPx": 27
+      },
+      {
+        "id": "right-duct",
+        "minPx": 27
+      },
+      {
+        "id": "nodes",
+        "minPx": 27
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 1280,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "right",
+        "minPx": 27
+      },
+      {
+        "id": "leg",
+        "minPx": 27
+      },
+      {
+        "id": "left",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 27
+      },
+      {
+        "id": "pump",
+        "minPx": 27
+      },
+      {
+        "id": "thoracic",
+        "minPx": 27
+      },
+      {
+        "id": "right-duct",
+        "minPx": 27
+      },
+      {
+        "id": "nodes",
+        "minPx": 27
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 390,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 14.94
+      },
+      {
+        "id": "baseline",
+        "minPx": 14.94
+      },
+      {
+        "id": "wide",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 16.47
+      },
+      {
+        "id": "radius",
+        "minPx": 16.47
+      },
+      {
+        "id": "viscosity",
+        "minPx": 16.47
+      },
+      {
+        "id": "speed",
+        "minPx": 16.47
+      },
+      {
+        "id": "patterns",
+        "minPx": 16.47
+      },
+      {
+        "id": "pressure",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 390,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 14.94
+      },
+      {
+        "id": "baseline",
+        "minPx": 14.94
+      },
+      {
+        "id": "wide",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 16.47
+      },
+      {
+        "id": "radius",
+        "minPx": 16.47
+      },
+      {
+        "id": "viscosity",
+        "minPx": 16.47
+      },
+      {
+        "id": "speed",
+        "minPx": 16.47
+      },
+      {
+        "id": "patterns",
+        "minPx": 16.47
+      },
+      {
+        "id": "pressure",
+        "minPx": 16.47
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 1280,
+    "flow": "close-without-result",
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 27
+      },
+      {
+        "id": "baseline",
+        "minPx": 27
+      },
+      {
+        "id": "wide",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 27
+      },
+      {
+        "id": "radius",
+        "minPx": 27
+      },
+      {
+        "id": "viscosity",
+        "minPx": 27
+      },
+      {
+        "id": "speed",
+        "minPx": 27
+      },
+      {
+        "id": "patterns",
+        "minPx": 27
+      },
+      {
+        "id": "pressure",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 1280,
+    "flow": "show-result",
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 27
+      },
+      {
+        "id": "baseline",
+        "minPx": 27
+      },
+      {
+        "id": "wide",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 27
+      },
+      {
+        "id": "radius",
+        "minPx": 27
+      },
+      {
+        "id": "viscosity",
+        "minPx": 27
+      },
+      {
+        "id": "speed",
+        "minPx": 27
+      },
+      {
+        "id": "patterns",
+        "minPx": 27
+      },
+      {
+        "id": "pressure",
+        "minPx": 27
+      }
+    ],
+    "explore": 6,
+    "retryRequiresReview": true,
+    "completeBeforeResult": 1,
+    "completeAfterClose": 1,
+    "errors": []
+  }
+]

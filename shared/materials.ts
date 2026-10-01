@@ -64,6 +64,11 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'cardiac-conduction-v2': { label: "心臟的傳導系統（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-cycle-v2': { label: "心動週期（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'coronary-circulation-v1': { label: "心臟血液供應（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'blood-vessels-v1': { label: "血管構造解析｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'circulation-routes-v1': { label: "循環路線｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'blood-pressure-regulation-v1': { label: "血壓的調控｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'lymphatic-system-v1': { label: "淋巴系統｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'hemodynamics-v1': { label: "血液動力學｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。

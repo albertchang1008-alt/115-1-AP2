@@ -14,7 +14,7 @@
 4. Commit 結尾附身分標註（Claude：`Co-Authored-By: <model> <noreply@anthropic.com>`＋session 連結；Codex：`[Codex]`）。不用 `--no-verify`、不強推、不略過測試。
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
-## 目前狀態（2026-09-25）
+## 目前狀態（2026-10-02）
 
 | 項目 | 狀態 |
 |---|---|
@@ -22,6 +22,9 @@
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
+| 血管構造／循環路線教材 | `codex/blood-vessel-infographic`：**已登錄、已 commit、待部署**。2026-10-02 教師同意畫面；公開 HTML 已帶入新 kit，待 Claude 複驗。 |
+| 三份新生理教材 | `blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`：**已登錄、已 commit、待部署**。教師核可，登錄後公開 HTML 與新 kit 待 Claude 複驗。 |
+| 資訊圖表題庫補登 | **已增列 55 題、合計 161、待 Claude 驗收**；既有 106 題 2,544 格零變動，新題與 HTML 一致、ID 無重複。詳見 `docs/MATERIALS_REGISTRATION_ACCEPTANCE.md`。 |
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
@@ -86,9 +89,27 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 19. 教材工作室（`教材工作室.app`／`npm run materials:studio`）只做本機匯入與稽核，不跑 git、不部署；規則與 `scripts/materials.mjs` 共用。
 20. 診斷與研究資料只作教學線索：不得判定「猜題／認真」，Mastery 不是正式成績；GA4 只送去識別事件。研究設計見 Project 文件「教學實踐研究設計與平台資料蒐集評估」。
 21. 測試學生帳號用 `config/testStudents` 白名單，只放寬信箱網域，放專屬測試班。
-22. 教材建置流程：agent 先用 `npm run materials:preview <slug>`（只產生教材檔、不登錄教材目錄）＋`npm run materials:shots <slug>`，**停下來請教師看畫面**；教師滿意後才執行 `npm run materials:build <slug>` 完成登錄並 commit。不要直接改 `public/materials/` 的 HTML，也不要用教材工作室重複匯入元件庫建置的教材。
+22. 教材建置流程：agent 先用 `npm run materials:preview <slug>`（只產生教材檔、不登錄教材目錄）＋`npm run materials:shots <slug>`，**停下來請教師看畫面**；教師滿意後才執行 `npm run materials:build <slug>` 完成登錄並 commit。不要直接改 `public/materials/` 的 HTML，也不要用教材工作室重複匯入元件庫建置的教材。 **教師決定（2026-10-01）：每份新資訊圖表定稿後，必須把 6 先備＋5 情境題寫入 `html/資訊圖表題庫_上傳用.xlsx`**（欄位同既有列：題目 ID 與教材一致、單選四選一、正確答案代碼與 Zuvio 序號、解析＋①～④引導式解析、講義標題與教材連結；選項打散；「說明」分頁更新次單元來源與合計題數），未寫入題庫不算完成。**只能在最後增列新列，既有列一律不得修改、刪除或重新排序（已上傳平台、學生已在作答；改動會讓該分類產生新題庫版本）。**
 
 ## 待辦
+
+**五份教材登錄後交回 Claude 驗收**
+- `codex/blood-vessel-infographic` 本輪已 commit（識別見 `git log -1`），未 push／部署。驗收公開 HTML（含新 kit）與 Excel 的第 108–162 列，清單與證據：`docs/MATERIALS_REGISTRATION_ACCEPTANCE.md`。
+- 五份各 6 節點／11 題，HTML／來源／目錄一致；111 前端測試與建置通過。390／1280 無錯誤或橫向溢位；390 主圖：血管／循環 13.28px、其餘 14.94px；每張展開節點：血管／循環 14.64px、其餘 16.47px。探索、複習解鎖重試、最後答對即 complete（關頁後各 1 次）均通過。
+
+**教師決定（2026-10-01，三份新教材）**：①醫學內容範圍確認：未超出課本，課本皆有提及，內容通過。②心房反射（Bainbridge）採 C：節點 2 保留一句補充，**不出題**。③節點圖採 B：血壓、血液動力學流程框保留；淋巴重畫圖解。④平均動脈壓範例改 120／80。
+
+**教師決定（2026-10-02，血管／循環＋三份新教材）**：五份教材畫面全部同意（血管主圖接受三格文字流程圖）。可執行 `materials:build` 登錄五份並 commit（不 push、不部署）。
+
+**交辦 Codex：資訊圖表題庫補登（已完成，待 Claude 驗收）**
+- `html/資訊圖表題庫_上傳用.xlsx` 已增列五份各 11 題，合計 161。原有 106 題／原始列 XML 完全保留；新 55 題四選一、打散選項並同步正解與 Zuvio 序號，解析及①～④、講義標題與連結齊全；⑤留空。說明頁僅改 B23 合計與尾端五個來源。
+- **教師決定（2026-10-02）**：五份單元＝次單元＝HTML `<title>`：血管構造解析、循環路線、血壓的調控、淋巴系統、血液動力學。遵守固定決策 22；未上傳／同步平台。
+
+**交辦 Codex：1.6.2 單元卡顯示學生姓名（2026-10-02 教師要求）**
+- 需求：學生「學習進度」頁的單元卡（`src/Student.tsx` `ProgressUnitCard`），狀態標籤「已完成」／「已完成（逾期）」**正下方**顯示學生姓名（例：`王小明`）。只在已完成狀態顯示；進行中、未開始、逾期未完成、鎖定不顯示。必做與選看單元相同規則。
+- 姓名來源：該課程班級名冊的「姓名」（`enrollments` 文件的 name；舊版 roster 同理）。後端 `bootstrap` 在每門學生課程回傳 `studentName`（只回本人，不回他人資料）；查無名冊姓名時改用 Google 帳號名稱；仍無則不顯示。教師預覽顯示「預覽學生」。
+- 樣式（教師指定）：姓名與「已完成」標籤**同樣大小**（同字級、同高度與內距的標籤樣式），放在標籤正下方、左緣對齊；顏色可用中性色以區別狀態；沿用 `calc(Npx * var(--font-scale, 1))`；390px 不換行擠壓、不造成橫向溢位。
+- 版本：從 `hotfix/1.6.1-quiz-scroll` 建 `hotfix/1.6.2-student-name`，版本號 1.6.2（handoff／README／DEVELOPMENT_LOG 同步）。前端測試補一則（已完成顯示姓名、未完成不顯示）；Functions 測試補 `bootstrap` 回傳本人姓名。不 push、不部署，完成後交 Claude 驗收。
 
 **待 Claude 驗收**
 - 心臟構造圖像強化版第二輪：`feature/heart-structure-v2`，報告 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`；未 push、未合併、未部署。
