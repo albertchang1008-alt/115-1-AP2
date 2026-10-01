@@ -19,7 +19,7 @@
 | 項目 | 狀態 |
 |---|---|
 | 正式站 | **1.6.0**。`origin/main`＝`0d3130e`（2026-09-29 部署：Functions Deploy complete、Pages Actions 成功、`version.json`＝1.6.0） |
-| 可部署分支 | `hotfix/1.6.2-student-name`（合併 commit 待填）：內容＝1.6.1＋1.6.2＋五份教材與題庫 55 新題；合併後檢查通過，待 Claude 部署前最後確認。 |
+| 可部署分支 | `hotfix/1.6.2-student-name`（合併 commit `b00041d`，parents＝0205baa／aabb2d2；另有本交接紀錄提交）：內容＝1.6.1＋1.6.2＋五份教材與題庫 55 新題；合併後檢查通過，待 Claude 部署前最後確認。 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
