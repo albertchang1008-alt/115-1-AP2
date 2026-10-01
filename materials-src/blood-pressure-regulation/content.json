@@ -1,0 +1,321 @@
+{
+  "slug": "blood-pressure-regulation",
+  "version": "v1",
+  "experience": "guided",
+  "title": "血壓的調控",
+  "subtitle": "血壓改變時，從受器訊號、神經負回饋到腎臟保留或排出體液，追蹤調節的方向。",
+  "label": "血壓的調控｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "秒級",
+      "label": "壓力受器的神經反射"
+    },
+    {
+      "value": "RAAS／ADH",
+      "label": "保鈉或留水"
+    },
+    {
+      "value": "ANP",
+      "label": "排鈉排水的平衡方向"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換按鈕，觀察不同情境的路徑與反應方向。",
+    "figure": "blood-pressure-regulation-overview.svg",
+    "states": [
+      {
+        "id": "high",
+        "label": "血壓升高",
+        "explain": "受器放電增加，交感減少、迷走作用增加，使血壓回降。"
+      },
+      {
+        "id": "low",
+        "label": "血壓下降",
+        "explain": "受器放電減少，交感增加，使心輸出量與周邊阻力上升。"
+      },
+      {
+        "id": "volume",
+        "label": "體液平衡",
+        "explain": "RAAS／ADH 偏向保留體液；ANP 偏向排鈉排水。"
+      }
+    ],
+    "predict": {
+      "question": "血壓上升時，壓力受器反射的作用方向為？",
+      "options": [
+        "心率下降、小動脈舒張",
+        "增加心率與周邊阻力",
+        "增加腎素是唯一反應",
+        "所有神經放電停止"
+      ],
+      "answer": 0,
+      "feedback": "這是負回饋：血壓上升，反射使血壓回降。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "baroreflex",
+      "tag": "01",
+      "title": "壓力受器反射",
+      "summary": "把血管伸展轉成神經訊號",
+      "figure": "blood-pressure-regulation-baroreflex.svg",
+      "concept": "頸動脈竇與主動脈弓的壓力受器偵測血管壁伸展。",
+      "points": [
+        "血壓升高→放電增加→延腦整合。",
+        "交感作用下降、心臟迷走神經作用增加。",
+        "心率下降與小動脈舒張共同使血壓回降。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "血壓下降時，反射方向相反，形成負回饋。"
+      }
+    },
+    {
+      "id": "sensors",
+      "tag": "02",
+      "title": "化學與心房伸展受器",
+      "summary": "感測氣體、酸鹼與回心血量",
+      "figure": "blood-pressure-regulation-sensors.svg",
+      "concept": "不同受器監測不同訊號，不能互相混稱。",
+      "points": [
+        "頸動脈體／主動脈體感測低氧、CO₂ 與 H⁺ 變化。",
+        "化學受器連結呼吸與循環調節。",
+        "心房伸展可引起心房反射，使心率增加。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較：血管壓力受器看伸展，化學受器看血液化學。"
+      }
+    },
+    {
+      "id": "raas",
+      "tag": "03",
+      "title": "腎素—血管張力素—醛固酮",
+      "summary": "血管收縮與保鈉留水",
+      "figure": "blood-pressure-regulation-raas.svg",
+      "concept": "腎臟灌流減少可啟動 RAAS，協助維持血容量與血壓。",
+      "points": [
+        "腎臟近腎絲球細胞釋放腎素。",
+        "腎素作用於肝臟製造的血管張力素原，產生 I；ACE 再產生 II。",
+        "II 使血管收縮，並刺激腎上腺皮質釋放醛固酮。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "醛固酮增加腎臟鈉再吸收，水隨鈉保留。"
+      }
+    },
+    {
+      "id": "adh",
+      "tag": "04",
+      "title": "抗利尿激素 ADH",
+      "summary": "增加水的再吸收",
+      "figure": "blood-pressure-regulation-adh.svg",
+      "concept": "ADH 由下視丘製造，在腦下垂體後葉釋放。",
+      "points": [
+        "血漿滲透壓升高是重要刺激。",
+        "血容量明顯下降也可促進釋放。",
+        "作用於腎集合管，減少水分隨尿液流失。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "較高濃度時還具有血管收縮作用；留水是本節重點。"
+      }
+    },
+    {
+      "id": "anp",
+      "tag": "05",
+      "title": "心房排鈉胜肽 ANP",
+      "summary": "排鈉、排水的平衡方向",
+      "figure": "blood-pressure-regulation-anp.svg",
+      "concept": "心房伸展可促進 ANP 釋放，協助降低過多的血容量。",
+      "points": [
+        "ANP 促進腎臟排鈉與排水。",
+        "可抑制腎素與醛固酮等保留體液機制。",
+        "作用方向與 RAAS 的保鈉留水相對。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "同樣是體液調節，RAAS 偏保留，ANP 偏排出。"
+      }
+    },
+    {
+      "id": "map",
+      "tag": "06",
+      "title": "把心臟與血管放在一起",
+      "summary": "MAP ≈ CO × TPR",
+      "figure": "blood-pressure-regulation-map.svg",
+      "concept": "忽略右心房壓時，平均動脈壓約由心輸出量與總周邊阻力共同決定。",
+      "points": [
+        "CO = 心率 HR × 每搏量 SV。",
+        "TPR 受小動脈口徑等因素影響。",
+        "神經反射較快；腎臟與體液調節支持較持續的穩定。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較變因時，先說明其他條件是否固定。"
+      }
+    }
+  ],
+  "foundation": [
+    {
+      "id": "blood-pressure-regulation-foundation-1",
+      "stem": "血壓升高後，壓力受器反射的方向是？",
+      "options": [
+        "交感下降、心率下降",
+        "交感上升、心率上升",
+        "受器完全停止放電",
+        "只增加腎素"
+      ],
+      "answer": 0,
+      "hint": "先比較血壓與受器伸展。",
+      "nodeId": "baroreflex",
+      "explain": "伸展增加使受器放電增加，經延腦使心率及血管收縮作用下降。"
+    },
+    {
+      "id": "blood-pressure-regulation-foundation-2",
+      "stem": "化學受器主要感測哪一組變化？",
+      "options": [
+        "O₂、CO₂、H⁺",
+        "血管長度、體重",
+        "紅血球形狀、血小板數",
+        "淋巴瓣膜開關"
+      ],
+      "answer": 0,
+      "hint": "分清機械伸展與化學訊號。",
+      "nodeId": "sensors",
+      "explain": "化學受器監測氣體與酸鹼變化，不是血管長度。"
+    },
+    {
+      "id": "blood-pressure-regulation-foundation-3",
+      "stem": "腎素主要由哪裡釋放？",
+      "options": [
+        "腎臟近腎絲球細胞",
+        "肝臟肝細胞",
+        "腦下垂體後葉",
+        "心房肌細胞"
+      ],
+      "answer": 0,
+      "hint": "回想 RAAS 最前端。",
+      "nodeId": "raas",
+      "explain": "腎臟釋放腎素；肝臟提供血管張力素原。"
+    },
+    {
+      "id": "blood-pressure-regulation-foundation-4",
+      "stem": "ADH 對腎臟的主要作用是？",
+      "options": [
+        "增加水再吸收",
+        "阻止所有鈉再吸收",
+        "製造血管張力素原",
+        "直接製造紅血球"
+      ],
+      "answer": 0,
+      "hint": "看水分留在體內或尿中。",
+      "nodeId": "adh",
+      "explain": "ADH 促進集合管水再吸收，減少水分流失。"
+    },
+    {
+      "id": "blood-pressure-regulation-foundation-5",
+      "stem": "ANP 的主要方向是？",
+      "options": [
+        "促進排鈉排水",
+        "增加保鈉留水",
+        "增加腎素釋放",
+        "直接增加血比容"
+      ],
+      "answer": 0,
+      "hint": "把它與 RAAS 對照。",
+      "nodeId": "anp",
+      "explain": "ANP 協助排出鈉與水，與保留體液方向相對。"
+    },
+    {
+      "id": "blood-pressure-regulation-foundation-6",
+      "stem": "其他條件固定，CO 與 TPR 都增加，MAP 趨勢為何？",
+      "options": [
+        "增加",
+        "減少",
+        "必定不變",
+        "必定為零"
+      ],
+      "answer": 0,
+      "hint": "使用兩個變因的乘積。",
+      "nodeId": "map",
+      "explain": "在此近似模型中，兩者增加使 MAP 增加。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "blood-pressure-regulation-case-1",
+      "stem": "【生活情境】站起時血壓短暫下降，壓力受器反射會如何回應？",
+      "options": [
+        "交感增加，協助血壓回升",
+        "迷走增加，使心率更慢",
+        "ANP 是唯一即時反應",
+        "受器放電增加"
+      ],
+      "answer": 0,
+      "hint": "比較低血壓時的放電方向。",
+      "nodeId": "baroreflex",
+      "explain": "血壓下降使受器放電減少，反射性增加交感作用。"
+    },
+    {
+      "id": "blood-pressure-regulation-case-2",
+      "stem": "【模型觀察】動脈血 O₂ 降低且 CO₂、H⁺ 增加，哪種受器最直接感測？",
+      "options": [
+        "化學受器",
+        "心房伸展受器",
+        "淋巴瓣膜",
+        "腎集合管"
+      ],
+      "answer": 0,
+      "hint": "辨識刺激類型。",
+      "nodeId": "sensors",
+      "explain": "氣體與酸鹼變化屬化學受器刺激，不把一般運動等同這個模型。"
+    },
+    {
+      "id": "blood-pressure-regulation-case-3",
+      "stem": "【模型觀察】腎灌流下降後，RAAS 的第一個釋放步驟是？",
+      "options": [
+        "腎臟釋放腎素",
+        "肝臟釋放醛固酮",
+        "心房釋放 ACE",
+        "後葉釋放血管張力素原"
+      ],
+      "answer": 0,
+      "hint": "從反應鏈起點找。",
+      "nodeId": "raas",
+      "explain": "腎素作用於血管張力素原，後續形成 II。"
+    },
+    {
+      "id": "blood-pressure-regulation-case-4",
+      "stem": "【模型觀察】心房伸展增加後，哪個作用有助降低過多血容量？",
+      "options": [
+        "ANP 促進排鈉排水",
+        "醛固酮增加鈉保留",
+        "ADH 增加水保留",
+        "腎素必定增加"
+      ],
+      "answer": 0,
+      "hint": "比較保留與排出兩個方向。",
+      "nodeId": "anp",
+      "explain": "ANP 是心房來源的排鈉胜肽。"
+    },
+    {
+      "id": "blood-pressure-regulation-case-5",
+      "stem": "【模型觀察】動脈血壓短暫上升，使頸動脈竇伸展增加，壓力受器反射的方向為何？",
+      "options": [
+        "受器放電增加，心率下降",
+        "受器放電減少，心率增加",
+        "受器放電增加，交感作用增加",
+        "受器放電停止，血管持續收縮"
+      ],
+      "answer": 0,
+      "hint": "先比較伸展與受器放電，再追蹤負回饋的方向。",
+      "nodeId": "baroreflex",
+      "explain": "血壓升高使壓力受器放電增加，延腦整合後降低交感、增加心臟迷走作用，使心率下降並促進小動脈舒張。"
+    }
+  ],
+  "credits": [
+    "參考：OpenStax《Anatomy and Physiology 2e》20.4 Homeostatic Regulation of the Vascular System（血管恆定調節）。",
+    "圖像：自製神經反射與體液調節示意圖。"
+  ]
+}

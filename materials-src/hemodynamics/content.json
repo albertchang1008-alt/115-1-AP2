@@ -1,0 +1,321 @@
+{
+  "slug": "hemodynamics",
+  "version": "v1",
+  "experience": "guided",
+  "title": "血液動力學",
+  "subtitle": "壓差推動血流、阻力限制流量；比較管徑、黏度與總截面積，再分清層流、擾流與平均動脈壓。",
+  "label": "血液動力學｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "Q = ΔP／R",
+      "label": "血流量、壓差與阻力"
+    },
+    {
+      "value": "r⁴",
+      "label": "半徑的四次方效應"
+    },
+    {
+      "value": "v = Q／A",
+      "label": "總截面積與平均流速"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "比較理想圓管的半徑；壓差、管長與黏度保持不變，數值皆以基準值為1。",
+    "figure": "hemodynamics-overview.svg",
+    "states": [
+      {
+        "id": "narrow",
+        "label": "半徑 0.5 倍",
+        "explain": "固定壓差、管長與黏度：阻力為 16 倍，流量為 1／16。"
+      },
+      {
+        "id": "baseline",
+        "label": "基準半徑",
+        "explain": "阻力與流量都以基準值 1 表示。"
+      },
+      {
+        "id": "wide",
+        "label": "半徑 2 倍",
+        "explain": "固定其他條件：阻力為 1／16，流量為 16 倍。"
+      }
+    ],
+    "predict": {
+      "question": "固定壓差等條件，半徑加倍時，流量變為？",
+      "options": [
+        "16 倍",
+        "2 倍",
+        "1／16",
+        "不變"
+      ],
+      "answer": 0,
+      "feedback": "理想圓管層流模型：阻力變為 1／16，固定壓差時流量變為16倍。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "flow",
+      "tag": "01",
+      "title": "壓差推動血流",
+      "summary": "Q = ΔP／R",
+      "figure": "hemodynamics-flow.svg",
+      "concept": "血流量 Q 是單位時間流過的體積；壓差推動，阻力限制。",
+      "points": [
+        "比較的是入口與出口壓力差。",
+        "固定阻力時，壓差增加使流量增加。",
+        "固定壓差時，阻力增加使流量減少。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "流量不是單一血球前進的速度。"
+      }
+    },
+    {
+      "id": "radius",
+      "tag": "02",
+      "title": "半徑的四次方",
+      "summary": "R ∝ 1／r⁴",
+      "figure": "hemodynamics-radius.svg",
+      "concept": "理想圓管層流模型中，半徑對阻力的影響非常大。",
+      "points": [
+        "固定黏度與管長，半徑加倍使阻力變成 1／16。",
+        "再固定壓差，流量變成 16 倍。",
+        "真實血管可變形且血液並非理想流體，公式是簡化模型。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "改變半徑時，不能把流量倍數直接當流速倍數。"
+      }
+    },
+    {
+      "id": "viscosity",
+      "tag": "03",
+      "title": "血比容與黏度",
+      "summary": "血比容＝紅血球體積比例",
+      "figure": "hemodynamics-viscosity.svg",
+      "concept": "血比容是紅血球佔全血體積的百分比，不是所有血球的比例。",
+      "points": [
+        "紅血球比例升高通常使黏度增加。",
+        "黏度增加，流動阻力增加。",
+        "固定壓差及管路條件時，流量減少。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "黏度不是密度；不可由血比容單獨精算真實流量。"
+      }
+    },
+    {
+      "id": "speed",
+      "tag": "04",
+      "title": "總截面積與流速",
+      "summary": "v = Q／總截面積",
+      "figure": "hemodynamics-speed.svg",
+      "concept": "整組血管的總截面積與單一血管大小不同。",
+      "points": [
+        "分支越多，所有管腔截面積的總和可能越大。",
+        "在總流量相同時，總截面積越大，平均流速越低。",
+        "微血管床總截面積很大，慢速有利物質交換。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "不是『微血管最細，所以血流最快』。"
+      }
+    },
+    {
+      "id": "patterns",
+      "tag": "05",
+      "title": "層流與擾流",
+      "summary": "看流線，不把血流當直線箭頭",
+      "figure": "hemodynamics-patterns.svg",
+      "concept": "層流時相鄰流層較有秩序；擾流時流動較混亂。",
+      "points": [
+        "理想層流中，中央流速快，靠管壁慢。",
+        "高速與幾何變化等條件增加擾流可能。",
+        "擾流的流線出現渦旋與不規則方向，與平順層流不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "同一管路中不同位置的流速可以不同。"
+      }
+    },
+    {
+      "id": "pressure",
+      "tag": "06",
+      "title": "脈壓與平均動脈壓",
+      "summary": "不要把 MAP 當簡單算術平均",
+      "figure": "hemodynamics-pressure.svg",
+      "concept": "脈壓 PP = 收縮壓 SBP − 舒張壓 DBP。",
+      "points": [
+        "一般靜息心率時 MAP ≈ DBP + PP／3。",
+        "120／80 的計算範例：PP = 40、MAP ≈ 80 + 40／3 ≈ 93 mmHg。",
+        "此近似適用於一般靜息心率；心率改變時，估算關係也可能改變。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先分清收縮壓、舒張壓、脈壓與平均動脈壓。"
+      }
+    }
+  ],
+  "foundation": [
+    {
+      "id": "hemodynamics-foundation-1",
+      "stem": "固定壓差，阻力變成兩倍，流量如何改變？",
+      "options": [
+        "變成一半",
+        "變成兩倍",
+        "不變",
+        "變成四倍"
+      ],
+      "answer": 0,
+      "hint": "流量與阻力是何種關係？",
+      "nodeId": "flow",
+      "explain": "Q = ΔP／R；固定分子，分母加倍使 Q 減半。"
+    },
+    {
+      "id": "hemodynamics-foundation-2",
+      "stem": "理想圓管模型中，半徑加倍，阻力變為？",
+      "options": [
+        "1／16",
+        "1／2",
+        "2 倍",
+        "16 倍"
+      ],
+      "answer": 0,
+      "hint": "先算半徑的四次方。",
+      "nodeId": "radius",
+      "explain": "R 與 r⁴ 成反比；2⁴ = 16。"
+    },
+    {
+      "id": "hemodynamics-foundation-3",
+      "stem": "血比容描述哪個比例？",
+      "options": [
+        "紅血球體積／全血體積",
+        "全部白血球／全血",
+        "血漿蛋白／血漿",
+        "血小板數／紅血球數"
+      ],
+      "answer": 0,
+      "hint": "注意分子是什麼。",
+      "nodeId": "viscosity",
+      "explain": "血比容測紅血球佔全血體積比例。"
+    },
+    {
+      "id": "hemodynamics-foundation-4",
+      "stem": "總流量相同時，哪一處因總截面積大而平均流速慢？",
+      "options": [
+        "微血管床",
+        "單一主動脈",
+        "單一小動脈",
+        "所有位置必定相同"
+      ],
+      "answer": 0,
+      "hint": "比較整組血管，不是單一管徑。",
+      "nodeId": "speed",
+      "explain": "微血管數目多，總截面積大，平均速度低。"
+    },
+    {
+      "id": "hemodynamics-foundation-5",
+      "stem": "理想層流中何處速度較快？",
+      "options": [
+        "管中央",
+        "緊貼管壁",
+        "整個截面完全一樣",
+        "只有出口"
+      ],
+      "answer": 0,
+      "hint": "回想流層與管壁的關係。",
+      "nodeId": "patterns",
+      "explain": "管中央較快，靠近管壁較慢。"
+    },
+    {
+      "id": "hemodynamics-foundation-6",
+      "stem": "靜息模型血壓 120／80，脈壓與估算 MAP 為？",
+      "options": [
+        "40、約 93 mmHg",
+        "40、約 100 mmHg",
+        "80、約 93 mmHg",
+        "120、約 80 mmHg"
+      ],
+      "answer": 0,
+      "hint": "先相減，再使用舒張壓加三分之一脈壓。",
+      "nodeId": "pressure",
+      "explain": "PP = 120 − 80 = 40 mmHg；MAP ≈ 80 + 40／3 ≈ 93 mmHg，不是收縮壓與舒張壓的簡單算術平均。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "hemodynamics-case-1",
+      "stem": "【模型觀察】紅血球體積比例升高，其他條件固定，流量傾向？",
+      "options": [
+        "減少",
+        "增加",
+        "必定不變",
+        "必定增加16倍"
+      ],
+      "answer": 0,
+      "hint": "串連血比容、黏度、阻力。",
+      "nodeId": "viscosity",
+      "explain": "黏度與阻力通常增加，固定壓差時流量減少。"
+    },
+    {
+      "id": "hemodynamics-case-2",
+      "stem": "【實驗觀察】理想圓管半徑減半，固定其他條件，阻力為？",
+      "options": [
+        "16 倍",
+        "2 倍",
+        "1／16",
+        "1／2"
+      ],
+      "answer": 0,
+      "hint": "倒數再取四次方。",
+      "nodeId": "radius",
+      "explain": "R ∝ 1／r⁴；半徑減半使 R 增加16倍。"
+    },
+    {
+      "id": "hemodynamics-case-3",
+      "stem": "【模型觀察】分支總截面積加倍，總流量不變，平均流速為？",
+      "options": [
+        "一半",
+        "兩倍",
+        "四倍",
+        "十六倍"
+      ],
+      "answer": 0,
+      "hint": "使用 v = Q／A。",
+      "nodeId": "speed",
+      "explain": "流量固定、總截面積加倍使平均流速減半。"
+    },
+    {
+      "id": "hemodynamics-case-4",
+      "stem": "【實驗觀察】管路突然變徑且速度升高，哪種流動較可能出現？",
+      "options": [
+        "擾流",
+        "必定完全靜止",
+        "所有流層同速",
+        "只能保持理想層流"
+      ],
+      "answer": 0,
+      "hint": "觀察流線是否仍然平順。",
+      "nodeId": "patterns",
+      "explain": "高速與幾何變化會增加擾流的可能；擾流的流線不像層流那樣平順。"
+    },
+    {
+      "id": "hemodynamics-case-5",
+      "stem": "【模型觀察】TPR 固定，CO 減少，MAP 趨勢如何？",
+      "options": [
+        "下降",
+        "上升",
+        "必定不變",
+        "變成收縮壓加舒張壓"
+      ],
+      "answer": 0,
+      "hint": "用 MAP ≈ CO × TPR。",
+      "nodeId": "pressure",
+      "explain": "忽略右心房壓的模型中，CO 減少使 MAP 下降。"
+    }
+  ],
+  "credits": [
+    "參考：OpenStax《Anatomy and Physiology 2e》20.2 Blood Flow, Blood Pressure, and Resistance（血流、血壓與阻力）。",
+    "圖像：自製理想管路模型；半徑比較固定壓差、管長與黏度。"
+  ]
+}

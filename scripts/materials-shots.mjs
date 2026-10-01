@@ -21,7 +21,16 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
   const shot = async name => { const file = `${width}-${name}.png`; await page.screenshot({ path: path.join(shots, file), fullPage: true }); report.shots.push(file); };
   if ((await page.evaluate(() => document.body.innerText.trim().length)) < 100) errors.push(`${width}px 畫面空白（內容未渲染）`);
   if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) errors.push(`${width}px 水平捲動`);
-  await shot('page'); report.viewports.push({ width, height });
+  await shot('page');
+  const svgTextSizes = await page.evaluate(() => {
+    return [...document.querySelectorAll('.state-figure svg text')].map(text => {
+      const svg = text.ownerSVGElement, viewWidth = svg?.viewBox.baseVal.width;
+      return { text: text.textContent, px: Number.parseFloat(getComputedStyle(text).fontSize) * (svg?.getBoundingClientRect().width || 0) / viewWidth };
+    }).filter(x => Number.isFinite(x.px));
+  });
+  const minSvgTextPx = svgTextSizes.length ? Math.min(...svgTextSizes.map(x => x.px)) : null;
+  report.viewports.push({ width, height, minSvgTextPx, svgTextSizes });
+  if (width === 390 && minSvgTextPx !== null && minSvgTextPx < 12) errors.push(`390px SVG 圖內最小文字 ${minSvgTextPx.toFixed(2)}px，小於 12px`);
   try {
   if (isEcg) {
     for (const hr of [40, 75, 150, 195]) { await page.locator(`.ecg-chip[data-hr="${hr}"]`).click(); await page.waitForTimeout(3000); await shot(`lab-${hr}`); }
@@ -41,7 +50,25 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
   } else {
     for (const state of content.lab.states) { await page.locator(`button[data-lab-state="${state.id}"]`).click(); await shot(`lab-${state.id}`); }
   }
-  for (const n of content.nodes) { await page.locator(`[data-node="${n.id}"]`).click(); await shot(`node-${n.id}`); await page.locator(`[data-node="${n.id}"]`).click(); }
+  for (const n of content.nodes) {
+    await page.locator(`[data-node="${n.id}"]`).click();
+    const measurement = await page.locator(`#detail-${n.id} svg`).evaluate(svg => {
+      const ratio = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+      const texts = [...svg.querySelectorAll('text')].map(t => {
+        const b = t.getBBox();
+        return {text:t.textContent, px:parseFloat(getComputedStyle(t).fontSize)*ratio, clipped:b.x<0||b.y<0||b.x+b.width>svg.viewBox.baseVal.width||b.y+b.height>svg.viewBox.baseVal.height};
+      });
+      return {minPx: Math.min(...texts.map(t=>t.px)), texts};
+    }).catch(() => null);
+    if(measurement) {
+      report.viewports.at(-1).nodes ||= [];
+      report.viewports.at(-1).nodes.push({id:n.id,...measurement});
+      if(width===390 && measurement.minPx<12) errors.push(`${n.id} 圖內最小字級 ${measurement.minPx.toFixed(2)}px`);
+      if(measurement.texts.some(t=>t.clipped)) errors.push(`${width}px ${n.id} 文字裁切`);
+    }
+    await shot(`node-${n.id}`);
+    await page.locator(`[data-node="${n.id}"]`).click();
+  }
   } catch (e) { errors.push(`${width}px 互動失敗：${String(e.message).split('\n')[0]}`); }
   await page.close();
 }

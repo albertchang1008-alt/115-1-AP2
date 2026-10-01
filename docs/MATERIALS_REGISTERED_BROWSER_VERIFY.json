@@ -1,0 +1,582 @@
+[
+  {
+    "slug": "blood-vessels",
+    "width": 390,
+    "states": [
+      {
+        "id": "outbound",
+        "minPx": 13.28
+      },
+      {
+        "id": "exchange",
+        "minPx": 13.28
+      },
+      {
+        "id": "return",
+        "minPx": 13.28
+      }
+    ],
+    "nodes": [
+      {
+        "id": "blood-vessels-node-01",
+        "minPx": 14.64
+      },
+      {
+        "id": "blood-vessels-node-02",
+        "minPx": 14.64
+      },
+      {
+        "id": "blood-vessels-node-03",
+        "minPx": 14.64
+      },
+      {
+        "id": "blood-vessels-node-04",
+        "minPx": 14.64
+      },
+      {
+        "id": "blood-vessels-node-05",
+        "minPx": 14.64
+      },
+      {
+        "id": "blood-vessels-node-06",
+        "minPx": 14.64
+      }
+    ],
+    "exploreIds": [
+      "blood-vessels-node-01",
+      "blood-vessels-node-02",
+      "blood-vessels-node-03",
+      "blood-vessels-node-04",
+      "blood-vessels-node-05",
+      "blood-vessels-node-06"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "blood-vessels",
+    "width": 1280,
+    "states": [
+      {
+        "id": "outbound",
+        "minPx": 24
+      },
+      {
+        "id": "exchange",
+        "minPx": 24
+      },
+      {
+        "id": "return",
+        "minPx": 24
+      }
+    ],
+    "nodes": [
+      {
+        "id": "blood-vessels-node-01",
+        "minPx": 24
+      },
+      {
+        "id": "blood-vessels-node-02",
+        "minPx": 24
+      },
+      {
+        "id": "blood-vessels-node-03",
+        "minPx": 24
+      },
+      {
+        "id": "blood-vessels-node-04",
+        "minPx": 24
+      },
+      {
+        "id": "blood-vessels-node-05",
+        "minPx": 24
+      },
+      {
+        "id": "blood-vessels-node-06",
+        "minPx": 24
+      }
+    ],
+    "exploreIds": [
+      "blood-vessels-node-01",
+      "blood-vessels-node-02",
+      "blood-vessels-node-03",
+      "blood-vessels-node-04",
+      "blood-vessels-node-05",
+      "blood-vessels-node-06"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "circulation-routes",
+    "width": 390,
+    "states": [
+      {
+        "id": "pulmonary",
+        "minPx": 13.28
+      },
+      {
+        "id": "systemic",
+        "minPx": 13.28
+      },
+      {
+        "id": "special",
+        "minPx": 13.28
+      }
+    ],
+    "nodes": [
+      {
+        "id": "circulation-routes-node-01",
+        "minPx": 14.64
+      },
+      {
+        "id": "circulation-routes-node-02",
+        "minPx": 14.64
+      },
+      {
+        "id": "circulation-routes-node-03",
+        "minPx": 14.64
+      },
+      {
+        "id": "circulation-routes-node-04",
+        "minPx": 14.64
+      },
+      {
+        "id": "circulation-routes-node-05",
+        "minPx": 14.64
+      },
+      {
+        "id": "circulation-routes-node-06",
+        "minPx": 14.64
+      }
+    ],
+    "exploreIds": [
+      "circulation-routes-node-01",
+      "circulation-routes-node-02",
+      "circulation-routes-node-03",
+      "circulation-routes-node-04",
+      "circulation-routes-node-05",
+      "circulation-routes-node-06"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "circulation-routes",
+    "width": 1280,
+    "states": [
+      {
+        "id": "pulmonary",
+        "minPx": 24
+      },
+      {
+        "id": "systemic",
+        "minPx": 24
+      },
+      {
+        "id": "special",
+        "minPx": 24
+      }
+    ],
+    "nodes": [
+      {
+        "id": "circulation-routes-node-01",
+        "minPx": 24
+      },
+      {
+        "id": "circulation-routes-node-02",
+        "minPx": 24
+      },
+      {
+        "id": "circulation-routes-node-03",
+        "minPx": 24
+      },
+      {
+        "id": "circulation-routes-node-04",
+        "minPx": 24
+      },
+      {
+        "id": "circulation-routes-node-05",
+        "minPx": 24
+      },
+      {
+        "id": "circulation-routes-node-06",
+        "minPx": 24
+      }
+    ],
+    "exploreIds": [
+      "circulation-routes-node-01",
+      "circulation-routes-node-02",
+      "circulation-routes-node-03",
+      "circulation-routes-node-04",
+      "circulation-routes-node-05",
+      "circulation-routes-node-06"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 390,
+    "states": [
+      {
+        "id": "high",
+        "minPx": 14.94
+      },
+      {
+        "id": "low",
+        "minPx": 14.94
+      },
+      {
+        "id": "volume",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 16.47
+      },
+      {
+        "id": "sensors",
+        "minPx": 16.47
+      },
+      {
+        "id": "raas",
+        "minPx": 16.47
+      },
+      {
+        "id": "adh",
+        "minPx": 16.47
+      },
+      {
+        "id": "anp",
+        "minPx": 16.47
+      },
+      {
+        "id": "map",
+        "minPx": 16.47
+      }
+    ],
+    "exploreIds": [
+      "baroreflex",
+      "sensors",
+      "raas",
+      "adh",
+      "anp",
+      "map"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "blood-pressure-regulation",
+    "width": 1280,
+    "states": [
+      {
+        "id": "high",
+        "minPx": 27
+      },
+      {
+        "id": "low",
+        "minPx": 27
+      },
+      {
+        "id": "volume",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "baroreflex",
+        "minPx": 27
+      },
+      {
+        "id": "sensors",
+        "minPx": 27
+      },
+      {
+        "id": "raas",
+        "minPx": 27
+      },
+      {
+        "id": "adh",
+        "minPx": 27
+      },
+      {
+        "id": "anp",
+        "minPx": 27
+      },
+      {
+        "id": "map",
+        "minPx": 27
+      }
+    ],
+    "exploreIds": [
+      "baroreflex",
+      "sensors",
+      "raas",
+      "adh",
+      "anp",
+      "map"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 390,
+    "states": [
+      {
+        "id": "right",
+        "minPx": 14.94
+      },
+      {
+        "id": "leg",
+        "minPx": 14.94
+      },
+      {
+        "id": "left",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 16.47
+      },
+      {
+        "id": "pump",
+        "minPx": 16.47
+      },
+      {
+        "id": "thoracic",
+        "minPx": 16.47
+      },
+      {
+        "id": "right-duct",
+        "minPx": 16.47
+      },
+      {
+        "id": "nodes",
+        "minPx": 16.47
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 16.47
+      }
+    ],
+    "exploreIds": [
+      "origin",
+      "pump",
+      "thoracic",
+      "right-duct",
+      "nodes",
+      "lymphocytes"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "lymphatic-system",
+    "width": 1280,
+    "states": [
+      {
+        "id": "right",
+        "minPx": 27
+      },
+      {
+        "id": "leg",
+        "minPx": 27
+      },
+      {
+        "id": "left",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "origin",
+        "minPx": 27
+      },
+      {
+        "id": "pump",
+        "minPx": 27
+      },
+      {
+        "id": "thoracic",
+        "minPx": 27
+      },
+      {
+        "id": "right-duct",
+        "minPx": 27
+      },
+      {
+        "id": "nodes",
+        "minPx": 27
+      },
+      {
+        "id": "lymphocytes",
+        "minPx": 27
+      }
+    ],
+    "exploreIds": [
+      "origin",
+      "pump",
+      "thoracic",
+      "right-duct",
+      "nodes",
+      "lymphocytes"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 390,
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 14.94
+      },
+      {
+        "id": "baseline",
+        "minPx": 14.94
+      },
+      {
+        "id": "wide",
+        "minPx": 14.94
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 16.47
+      },
+      {
+        "id": "radius",
+        "minPx": 16.47
+      },
+      {
+        "id": "viscosity",
+        "minPx": 16.47
+      },
+      {
+        "id": "speed",
+        "minPx": 16.47
+      },
+      {
+        "id": "patterns",
+        "minPx": 16.47
+      },
+      {
+        "id": "pressure",
+        "minPx": 16.47
+      }
+    ],
+    "exploreIds": [
+      "flow",
+      "radius",
+      "viscosity",
+      "speed",
+      "patterns",
+      "pressure"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  },
+  {
+    "slug": "hemodynamics",
+    "width": 1280,
+    "states": [
+      {
+        "id": "narrow",
+        "minPx": 27
+      },
+      {
+        "id": "baseline",
+        "minPx": 27
+      },
+      {
+        "id": "wide",
+        "minPx": 27
+      }
+    ],
+    "nodes": [
+      {
+        "id": "flow",
+        "minPx": 27
+      },
+      {
+        "id": "radius",
+        "minPx": 27
+      },
+      {
+        "id": "viscosity",
+        "minPx": 27
+      },
+      {
+        "id": "speed",
+        "minPx": 27
+      },
+      {
+        "id": "patterns",
+        "minPx": 27
+      },
+      {
+        "id": "pressure",
+        "minPx": 27
+      }
+    ],
+    "exploreIds": [
+      "flow",
+      "radius",
+      "viscosity",
+      "speed",
+      "patterns",
+      "pressure"
+    ],
+    "exploreCount": 6,
+    "retryRequiresReview": true,
+    "completeWithoutResultClick": 1,
+    "completeAfterClose": 1,
+    "consoleErrors": [],
+    "horizontalOverflow": false
+  }
+]
