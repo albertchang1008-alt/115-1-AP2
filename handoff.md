@@ -22,9 +22,9 @@
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | `hotfix/1.6.1-quiz-scroll`（由 1.6.0 分支建立）：三份心臟教材按「兩階段隨堂診斷」後自動捲到題目。Claude 以 390px 寬實測三份教材皆會捲動；待教師部署。 |
-| 血管構造／循環路線教材 | `codex/blood-vessel-infographic`：**已登錄、已 commit、待部署**。2026-10-02 教師同意畫面；公開 HTML 已帶入新 kit，待 Claude 複驗。 |
-| 三份新生理教材 | `blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`：**已登錄、已 commit、待部署**。教師核可，登錄後公開 HTML 與新 kit 待 Claude 複驗。 |
-| 資訊圖表題庫補登 | **已增列 55 題、合計 161、待 Claude 驗收**；既有 106 題 2,544 格零變動，新題與 HTML 一致、ID 無重複。詳見 `docs/MATERIALS_REGISTRATION_ACCEPTANCE.md`。 |
+| 血管構造／循環路線教材 | `codex/blood-vessel-infographic`（2d8fcd5）：已登錄、已 commit。**2026-10-02 Claude 驗收通過**（登錄後 HTML 含新 kit：390／1280 無錯誤、6 節點 explore、複習後才可重試、最後答對即 complete）。待部署 |
+| 三份新生理教材 | `blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`（2d8fcd5）：已登錄、已 commit。**2026-10-02 Claude 驗收通過**（同上）。待部署 |
+| 資訊圖表題庫補登 | **2026-10-02 Claude 驗收通過**：以 git 7e4732b 對 2d8fcd5 逐格比對，既有 106 題零變動、說明頁僅合計 106→161；新 55 題與教材 HTML 題幹／選項／正解／題序一致、ID 不重複、Zuvio 序號正確。**待教師把第 108–162 列貼到 Google Sheet 題庫分頁後同步** |
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
@@ -93,23 +93,15 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 ## 待辦
 
-**五份教材登錄後交回 Claude 驗收**
-- `codex/blood-vessel-infographic` 本輪已 commit（識別見 `git log -1`），未 push／部署。驗收公開 HTML（含新 kit）與 Excel 的第 108–162 列，清單與證據：`docs/MATERIALS_REGISTRATION_ACCEPTANCE.md`。
-- 五份各 6 節點／11 題，HTML／來源／目錄一致；111 前端測試與建置通過。390／1280 無錯誤或橫向溢位；390 主圖：血管／循環 13.28px、其餘 14.94px；每張展開節點：血管／循環 14.64px、其餘 16.47px。探索、複習解鎖重試、最後答對即 complete（關頁後各 1 次）均通過。
+**部署前注意（2026-10-02 Claude）**
+- 本分支（教材＋題庫）與 `hotfix/1.6.2-student-name` 都從 1.6.1（7e4732b）分出，**部署前需合併成一條**（建議在 1.6.2 分支 merge 本分支；handoff.md 可能衝突，以兩邊最新狀態手動合併）。
+- 教師端：題庫第 108–162 列貼到 Sheet 後同步；後台為五個新單元建立互動教材活動（連 `<slug>-v1`）。
 
 **教師決定（2026-10-01，三份新教材）**：①醫學內容範圍確認：未超出課本，課本皆有提及，內容通過。②心房反射（Bainbridge）採 C：節點 2 保留一句補充，**不出題**。③節點圖採 B：血壓、血液動力學流程框保留；淋巴重畫圖解。④平均動脈壓範例改 120／80。
 
 **教師決定（2026-10-02，血管／循環＋三份新教材）**：五份教材畫面全部同意（血管主圖接受三格文字流程圖）。可執行 `materials:build` 登錄五份並 commit（不 push、不部署）。
 
-**交辦 Codex：資訊圖表題庫補登（已完成，待 Claude 驗收）**
-- `html/資訊圖表題庫_上傳用.xlsx` 已增列五份各 11 題，合計 161。原有 106 題／原始列 XML 完全保留；新 55 題四選一、打散選項並同步正解與 Zuvio 序號，解析及①～④、講義標題與連結齊全；⑤留空。說明頁僅改 B23 合計與尾端五個來源。
-- **教師決定（2026-10-02）**：五份單元＝次單元＝HTML `<title>`：血管構造解析、循環路線、血壓的調控、淋巴系統、血液動力學。遵守固定決策 22；未上傳／同步平台。
-
-**交辦 Codex：1.6.2 單元卡顯示學生姓名（2026-10-02 教師要求）**
-- 需求：學生「學習進度」頁的單元卡（`src/Student.tsx` `ProgressUnitCard`），狀態標籤「已完成」／「已完成（逾期）」**正下方**顯示學生姓名（例：`王小明`）。只在已完成狀態顯示；進行中、未開始、逾期未完成、鎖定不顯示。必做與選看單元相同規則。
-- 姓名來源：該課程班級名冊的「姓名」（`enrollments` 文件的 name；舊版 roster 同理）。後端 `bootstrap` 在每門學生課程回傳 `studentName`（只回本人，不回他人資料）；查無名冊姓名時改用 Google 帳號名稱；仍無則不顯示。教師預覽顯示「預覽學生」。
-- 樣式（教師指定）：姓名與「已完成」標籤**同樣大小**（同字級、同高度與內距的標籤樣式），放在標籤正下方、左緣對齊；顏色可用中性色以區別狀態；沿用 `calc(Npx * var(--font-scale, 1))`；390px 不換行擠壓、不造成橫向溢位。
-- 版本：從 `hotfix/1.6.1-quiz-scroll` 建 `hotfix/1.6.2-student-name`，版本號 1.6.2（handoff／README／DEVELOPMENT_LOG 同步）。前端測試補一則（已完成顯示姓名、未完成不顯示）；Functions 測試補 `bootstrap` 回傳本人姓名。不 push、不部署，完成後交 Claude 驗收。
+**1.6.2 單元卡學生姓名**：在 `hotfix/1.6.2-student-name`（5071f44）完成，2026-10-02 Claude 驗收通過，詳見該分支 handoff。
 
 **待 Claude 驗收**
 - 心臟構造圖像強化版第二輪：`feature/heart-structure-v2`，報告 `docs/HEART_STRUCTURE_V2_ACCEPTANCE.md`；未 push、未合併、未部署。
