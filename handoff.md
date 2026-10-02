@@ -106,6 +106,18 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 
+**交辦 Codex：1.6.3 知識節點點擊體驗（2026-10-02 教師回報「點節點怪怪的」，Claude 已重現）**
+- 問題（共用教材元件庫 kit，已上線的五份新教材都有）：①點節點卡片後，詳細內容其實開在**全部 6 張卡片之後**（手機約在 3,000px 處、當下畫面外），畫面只看到卡片變紫色，像沒反應；②可同時開好幾個，依節點順序疊在下方而非點擊順序；③卡片內已放完整節點圖（手機每張約 400px 高），展開後同一張圖又出現一次。
+- 規格：
+  1. **手風琴**：同時只開一個節點；開新節點會關掉前一個（關閉時照舊送 nodeTime）。再點同一張卡＝收合。
+  2. **就地展開**：詳細內容出現在被點卡片的**正下方**（手機單欄直接接在該卡下；桌面多欄時插在該卡所在列之下、橫跨整列），並平滑捲動讓詳細內容頂端出現在畫面中（保留卡片標題可見）。
+  3. **卡片瘦身**：卡片只放標題＋一句摘要（可留小圖示），完整節點圖只在詳細內容中出現一次。
+  4. 詳細內容底部加「收合」按鈕；被選卡片維持選取樣式與 `aria-expanded`。
+  5. 第二關答錯「前往對應節點複習」沿用同一套開啟邏輯（就地展開＋捲動）。
+- 追蹤不變：每節點首次開啟送一次 explore；nodeTime 規則不變；節點與題目 ID、題目內容都不改。
+- 範圍：改 `materials-src/kit/`，重建 kit 產生的已登錄教材（blood-vessels、circulation-routes、blood-pressure-regulation、lymphatic-system、hemodynamics）並**覆寫原 v1**（只改互動、內容與 ID 不變，學生紀錄延續）；kit 產生但未發布給學生的 v1（heart-structure、cardiac-conduction、cardiac-cycle、ecg-basics）一併重建。手工單檔教材（各 v2、coronary-circulation-v1 等）不動。
+- 分支：從 main（119db4c）建 `hotfix/1.6.3-node-detail`，版本 1.6.3。390／1280 截圖：點第 1、第 4 個節點後的畫面（詳細內容須在可視範圍內）、切換節點、收合。不 push、不部署，完成交 Claude 驗收。
+
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
 
