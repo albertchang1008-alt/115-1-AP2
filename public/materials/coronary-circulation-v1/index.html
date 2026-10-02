@@ -122,7 +122,36 @@
 
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
-</head>
+<style id="material-presentation">/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}
+
+:root{--accent:hsl(6 65% 27%);--accent-soft:hsl(6 40% 95%);--primary:hsl(6 65% 27%);--primary-dark:hsl(6 65% 27%);--primary-light:hsl(6 40% 95%);--b:hsl(6 65% 27%);--p:hsl(6 40% 95%);--bg:hsl(6 25% 98%);--border:hsl(6 25% 79%);--focus-outline:3px solid hsl(6 65% 27%);--tissue:hsl(6 40% 95%)}
+header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 
 <div class="container">
@@ -473,7 +502,7 @@
             </div>
 
         </div>
-    </div>
+    <section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>心臟的血液供應 - 五專解剖生理學互動資訊圖表與隨堂診斷｜概念比較</caption><thead><tr><th scope="col">主題</th><th scope="col">關鍵概念</th><th scope="col">整理重點</th></tr></thead><tbody><tr><th scope="row">1. 升主動脈基部與冠狀動脈開口</th><td data-label="關鍵概念">冠狀動脈為心臟本身的供血系統，左右兩條主幹發源自升主動脈基部的主動脈竇（Aortic sinuses）。</td><td data-label="整理重點">起源位置： 升主動脈基部位於主動脈瓣上方，設有左、右冠狀動脈開口（Coronary ostia）。；體循環第一分支： 左、右冠狀動脈是升主動脈離開心臟後發出的第一對血液分支。</td></tr><tr><th scope="row">2. 左冠狀動脈 (LCA) 及其解剖分支</th><td data-label="關鍵概念">左冠狀動脈（Left Coronary Artery; LCA）走經左心耳與肺動脈幹之間，隨即分為前室間枝與迴旋枝。</td><td data-label="整理重點">前室間枝（LAD / 前降支）： 走在前後心室間溝，供應左、右心室前壁及心室間隔前 2/3 的血液。；迴旋枝（Circumflex branch; CX）： 走在冠狀溝內，繞至心臟後方，供應左心房與左心室外側壁及後壁。</td></tr><tr><th scope="row">3. 右冠狀動脈 (RCA) 及其解剖分支</th><td data-label="關鍵概念">右冠狀動脈（Right Coronary Artery; RCA）沿冠狀溝向右向下延伸，主要分支為邊緣枝與後室間枝。</td><td data-label="整理重點">邊緣枝（Marginal branch）： 沿心臟右側下行，主要供應右心室壁的血液。；後室間枝（PDA / 後降支）： 走在後心室間溝，供應兩心室後壁及心室間隔後 1/3。</td></tr><tr><th scope="row">4. 冠狀靜脈系統與冠狀靜脈竇</th><td data-label="關鍵概念">心肌利用後的缺氧血主要由心大靜脈與心中靜脈收集，匯入心臟後方的冠狀靜脈竇，最後直接注入右心房。</td><td data-label="整理重點">心大靜脈（Great cardiac vein）： 走在前心室間溝（與前室間枝伴行），收集心臟前壁缺氧血。；心中靜脈（Middle cardiac vein）： 走在後心室間溝（與後室間枝伴行），收集心臟後壁缺氧血。</td></tr><tr><th scope="row">5. 心肌供血生理與舒張期灌流</th><td data-label="關鍵概念">與全身其他器官不同，左心室心肌的冠狀動脈血流主要發生在「心室舒張期（Diastole）」。</td><td data-label="整理重點">收縮期受壓： 心室收縮時（Systole），強烈收縮的心肌會擠壓貫穿心肌層之微血管，使冠狀血流量驟降。；舒張期灌流： 心室舒張時，心肌鬆弛血管阻力下降，且主動脈壓維持於舒張壓，促使血液大量灌入冠狀動脈。</td></tr><tr><th scope="row">6. 運動時的心肌供血</th><td data-label="關鍵概念">運動時心跳加快、收縮變強，心肌需要更多氧氣；心臟主要靠擴張冠狀動脈、增加血流量來供應。</td><td data-label="整理重點">需氧增加： 運動時心跳與收縮力增加，心肌消耗的氧氣隨之增加。；靠增加血流： 心肌安靜時已抓取血液中約 70% 的氧，很難再多抓，所以主要靠冠狀動脈擴張、讓血流量增加。</td></tr></tbody></table></section></div>
 
     <!-- SECTION 2: QUIZ -->
     <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">

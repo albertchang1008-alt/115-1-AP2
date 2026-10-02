@@ -122,7 +122,36 @@
 
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
-</head>
+<style id="material-presentation">/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}
+
+:root{--accent:hsl(47 65% 27%);--accent-soft:hsl(47 40% 95%);--primary:hsl(47 65% 27%);--primary-dark:hsl(47 65% 27%);--primary-light:hsl(47 40% 95%);--b:hsl(47 65% 27%);--p:hsl(47 40% 95%);--bg:hsl(47 25% 98%);--border:hsl(47 25% 79%);--focus-outline:3px solid hsl(47 65% 27%);--tissue:hsl(47 40% 95%)}
+header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 
 <div class="container">
@@ -488,7 +517,7 @@
             </div>
 
         </div>
-    </div>
+    <section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>心動週期 - 五專解剖生理學互動資訊圖表與隨堂診斷｜概念比較</caption><thead><tr><th scope="col">主題</th><th scope="col">關鍵概念</th><th scope="col">整理重點</th></tr></thead><tbody><tr><th scope="row">1. 心舒張末期 (Late Diastole / 被動充血期)</th><td data-label="關鍵概念">心房與心室均處於舒張狀態，房室瓣開啟而半月瓣關閉，血液由腔靜脈與肺靜脈被動流入心房並直接灌滿心室。</td><td data-label="整理重點">瓣膜狀態： 二尖瓣與三尖瓣（房室瓣）保持開啟，主動脈瓣與肺動脈瓣（半月瓣）保持關閉。；壓力階差： 心房內累積的血液使心房壓力略大於心室壓，推開房室瓣流向心室。</td></tr><tr><th scope="row">2. 心房收縮期 (Atrial Systole / 主動充血期)</th><td data-label="關鍵概念">心房肌受竇房結刺激發生收縮，將剩餘約 20~30% 的血液主動擠入心室，使心室達到最大充血狀態。</td><td data-label="整理重點">主動補充 20~30%： 心房收縮將剩餘的 20~30% 血液送進心室，完成整個心室充血過程。；舒張末期容積 (EDV)： 充血完成時心室內所含的總血量稱為「舒張末期容積（End-diastolic volume; EDV）」，正常約 130 ml。</td></tr><tr><th scope="row">3. 等容心室收縮期 (Isovolumetric Contraction &amp; S1)</th><td data-label="關鍵概念">心室開始收縮致室內壓劇升高於心房壓，迫使房室瓣關閉產生第一心音；此時半月瓣未開，心室容積保持不變。</td><td data-label="整理重點">第一心音 (S1) 產生： 心室收縮使房室瓣（二尖瓣與三尖瓣）突然關閉，血液撞擊與瓣膜震動發出「第一心音（S1; Lub）」。；四瓣全關 (等容)： 此時心室壓尚小於主動脈壓，半月瓣仍關閉；四組瓣膜全部閉合，心室容積完全不變（約持續 0.05 秒）。</td></tr><tr><th scope="row">4. 心室射血期 (Ventricular Ejection / 心搏量)</th><td data-label="關鍵概念">當左、右心室壓力超越主動脈及肺動脈壓時，半月瓣開啟，血液大量由心室射入大動脈，心室容積顯著下降。</td><td data-label="整理重點">半月瓣開啟： 左心室壓超過主動脈壓（&gt;80 mmHg）、右心室壓超過肺動脈壓時，半月瓣被衝開。；心搏量 (Stroke Volume, SV)： 每次心室收縮射出的血量稱為心搏量，正常安靜狀態下約為 70 ml。</td></tr><tr><th scope="row">5. 等容心室舒張期 (Isovolumetric Relaxation &amp; S2)</th><td data-label="關鍵概念">心室開始舒張致內壓驟降低於大動脈壓，動脈血回流充盈半月瓣使其關閉產生第二心音；四組瓣膜再度全關。</td><td data-label="整理重點">第二心音 (S2) 產生： 主動脈與肺動脈半月瓣關閉，血液撞擊瓣膜發出清脆的「第二心音（S2; Dup）」。；四瓣再度全關： 此時心室壓仍高於心房壓，故房室瓣尚未開啟；四組瓣膜全關，心室容積不變。</td></tr><tr><th scope="row">6. 心音聽診入門 (Heart Sounds)</th><td data-label="關鍵概念">心音是瓣膜「關閉」時的聲音：S1 是房室瓣關閉、S2 是半月瓣關閉；兩個心音把心動週期分成收縮期與舒張期。</td><td data-label="整理重點">第一與第二心音： S1（房室瓣關閉/低沉長）與 S2（半月瓣關閉/高銳短）為正常心臟聽診的主要心音。；收縮期與舒張期： S1 到 S2 之間是心室收縮期；S2 到下一個 S1 之間是心室舒張期，通常比較長。</td></tr></tbody></table></section></div>
 
     <!-- SECTION 2: QUIZ -->
     <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">

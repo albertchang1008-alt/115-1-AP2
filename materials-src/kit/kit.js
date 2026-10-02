@@ -34,16 +34,23 @@ function renderQuestion(q) {
   return `<h3>${esc(q.stem)}</h3><div class="options">${shuffle(q.options.map((text, answer) => ({ text, answer }))).map(o => `<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>`;
 }
 
+function renderSummary(content) {
+  const clean = s => s.replace(/[。；\s]/g,'');
+  const table = content.summaryTable || {headers:['主題','關鍵概念','整理重點'], rows:content.nodes.map(n => [n.title,n.summary,[...new Set(n.points)].filter(p=>!clean(n.summary).includes(clean(p))&&clean(p)!==clean(n.concept)).join('；')||n.clinical.text])};
+  return `<section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><p>把相關概念放在一起比較；回到知識節點可看完整圖解。</p><table><caption>${esc(content.title)}｜概念比較</caption><thead><tr>${table.headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map((cell,i)=>i?`<td data-label="${esc(table.headers[i])}">${esc(cell)}</td>`:`<th scope="row">${esc(cell)}</th>`).join('')}</tr>`).join('')}</tbody></table></section>`;
+}
+
 export function render(content, figures) {
   const stage = (rows, kind) => rows.map((q, i) => `<article class="stage" data-kind="${kind}" data-question-id="${q.id}" data-index="${i}" ${i ? 'hidden' : ''}>${renderQuestion(q)}</article>`).join('');
   return `<main class="kit" data-slug="${content.slug}">`
     + `<header class="hero"><p>${esc(content.label)}</p><h1>${esc(content.title)}</h1><p>${esc(content.subtitle)}</p></header>`
-    + (content.experience === 'guided' ? '<div class="prefs-bar"><label>字級 <select data-pref="font"><option value="1">標準</option><option value="1.15">較大</option><option value="1.3">最大</option></select></label> <label>色系 <select data-pref="theme"><option value="warm">暖色</option><option value="cool">冷色</option></select></label></div><button type="button" data-go-quiz>兩階段隨堂診斷</button>' : '')
+    + (content.experience === 'guided' ? '<div class="prefs-bar"><label>字級 <select data-pref="font"><option value="1">標準</option><option value="1.15">較大</option><option value="1.3">最大</option></select></label></div><button type="button" data-go-quiz>兩階段隨堂診斷</button>' : '')
     + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
     + renderLab(content.lab, figures)
     + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}`
     + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div><button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
     + `</div></section>`
+    + renderSummary(content)
     + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
     + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
     + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
@@ -128,7 +135,11 @@ export function mount(content, figures) {
     document.querySelector('.predict').addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;
       const ok = +b.dataset.answer === content.lab.predict.answer;
-      b.parentElement.nextElementSibling.textContent = ok ? content.lab.predict.feedback : '再比對圖中的狀態與箭頭。';
+      const feedback = b.parentElement.nextElementSibling;
+      b.parentElement.querySelectorAll('button').forEach(x => { x.classList.remove('predict-correct','predict-wrong'); x.setAttribute('aria-pressed',String(x===b)); });
+      b.classList.add(ok ? 'predict-correct' : 'predict-wrong');
+      feedback.className = `feedback predict-result ${ok ? 'ok' : 'warn'}`;
+      feedback.textContent = ok ? `✓ 答對了！${content.lab.predict.feedback}` : '✗ 尚未答對。再比對圖中的狀態與箭頭，想想變化方向後再試一次。';
     });
   }
 

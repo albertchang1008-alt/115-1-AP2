@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（含 1.6.3）：**2026-10-02 Claude 驗收通過，3 項小修（心電圖改名、Frank-Starling 斷行、頭臂動脈）複驗通過；可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（含 1.6.3）：**原階段及 3 項小修已通過 Claude；教師新增 6 點教材修訂已實作，待 Claude 驗收，暫不部署**（版本 1.6.3） |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -97,7 +97,12 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 
-**可部署（2026-10-02 Claude 複驗通過）**：在主資料夾確認分支為 `feature/stage1-supplement` 後執行 deploy.sh。小修複驗：心電圖標題＝「心電圖基礎」；Frank-Starling 標題不再斷字；「頭臂幹」全專案 0 筆，題庫僅第 196、204 列 12 格改為「頭臂動脈」，其餘逐格不變；major-vessels 圖標籤無重疊。
+**教師新增 6 點教材修訂（2026-10-02）：已完成，待 Claude 驗收**
+- 分支 `feature/stage1-supplement`，基底 11cc8d0，最新 commit 見 git log -1。心輸出量補交感節後 NE、副交感節後 ACh，分清腎上腺髓質的腎上腺素；血壓調控補 ANP／BNP 利尿與血容量→回心血量→CO→血壓因果鏈，對照 ADH／醛固酮保留方向。
+- 15 份 kit＋11 份手工資訊圖表：固定 26 套不同配色，保留生理顏色語意；kit 移除色系選單、保留字級。情境預測明示答對／未答對＋正誤樣式；紅血球改 4 個完整獨立 SVG、手機保留箭頭與負回饋，修正電性教材節點捲動邊界。
+- 26 份均有重點整理表（閱讀頁知識節點後）；手機逐列卡片，無新完成門檻。課程介紹、血液前／後測及 coagulation 不改。
+- npm run check 全過（前端 115／Functions 18、兩端 build、version 1.6.3）；52 組版面／回饋檢查＋110 張新截圖；14 組 kit／4 組手工兩關追蹤回歸通過。心輸出量與體液圖 390px 最小字 15.22／14.94px，無裁切／溢位。
+- Excel 逐位元不變；所有節點／題目 ID、題幹／選項／正解不變。報告 `docs/LEARNING_REFRESH_ACCEPTANCE.md`，驗證 JSON 與 `docs/learning-refresh-screenshots/`。原階段核可仍保留，本輪修訂需 Claude 複驗；未 push／部署，不動 main。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。

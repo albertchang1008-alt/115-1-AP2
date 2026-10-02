@@ -122,7 +122,36 @@
 
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
-</head>
+<style id="material-presentation">/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}
+
+:root{--accent:hsl(279 65% 27%);--accent-soft:hsl(279 40% 95%);--primary:hsl(279 65% 27%);--primary-dark:hsl(279 65% 27%);--primary-light:hsl(279 40% 95%);--b:hsl(279 65% 27%);--p:hsl(279 40% 95%);--bg:hsl(279 25% 98%);--border:hsl(279 25% 79%);--focus-outline:3px solid hsl(279 65% 27%);--tissue:hsl(279 40% 95%)}
+header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 
 <div class="container">
@@ -462,7 +491,7 @@
             </div>
 
         </div>
-    </div>
+    <section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>心臟的傳導系統 I - 五專解剖生理學互動資訊圖表與隨堂診斷｜概念比較</caption><thead><tr><th scope="col">主題</th><th scope="col">關鍵概念</th><th scope="col">整理重點</th></tr></thead><tbody><tr><th scope="row">1. 心臟自律性與特化心肌組織</th><td data-label="關鍵概念">心臟壁肌肉不需神經的直接刺激即可持續舒縮，係因心臟本身含有由特化心肌組織組成的「傳導系統（Conduction system）」。</td><td data-label="整理重點">特化心肌構成： 傳導系統非普通神經，而是由特化的心肌纖維交織而成，兼具自發去極化與電性傳導能力。；自主神經地位： 自主神經系統（交感與副交感神經）僅調節心跳速率與收縮力，不直接引發心臟收縮。</td></tr><tr><th scope="row">2. 節律點——竇房結 (Sinoatrial Node; SA node)</th><td data-label="關鍵概念">竇房結位於右心房壁、上腔靜脈開口下方，為正常心跳的節律點（Pacemaker），主導整顆心臟的跳動頻率。</td><td data-label="整理重點">解剖位置： 位於右心房壁近上腔靜脈（Superior vena cava）入口下方的小塊特化組織。；放電頻率： 具有全心最高的自發去極化速率（正常每分鐘自發興奮約 70～80 次）。</td></tr><tr><th scope="row">3. 房室延遲——房室結 (Atrioventricular Node; AV node)</th><td data-label="關鍵概念">房室結部位於心房間隔下方，為心房最後去極化的部位，且其電衝動傳導速度為整體傳導系統中最慢者。</td><td data-label="整理重點">解剖位置： 部位於右心房下部、心房間隔（Interatrial septum）靠近三尖瓣處。；傳導速度最慢： 衝動行經房室結時速度驟降，產生約 0.1 秒的生理性延遲（AV delay）。</td></tr><tr><th scope="row">4. 室間隔傳導——房室束/希氏束 (Bundle of His)</th><td data-label="關鍵概念">由房室結發出之房室束（希氏束）穿過心房心室間電絕緣層，通往心室間隔頂端並分為左、右分枝下行。</td><td data-label="整理重點">唯一電氣通道： 心房與心室間有緻密結締組織絕緣，房室束是心房電衝動傳入心室的唯一正常通路。；兩側分枝延伸： 於心室間隔（Interventricular septum）頂端分為左、右房室束分枝（Bundle branches）。</td></tr><tr><th scope="row">5. 快速激發——浦金埃氏纖維 (Purkinje Fibers)</th><td data-label="關鍵概念">房室束分枝再發出浦金埃氏纖維（又稱浦金氏纖維；傳導性肌纖維）深入心肌層，且其電衝動傳導速度為整體傳導系統中最快者。</td><td data-label="整理重點">傳導速度最快： 浦金埃氏纖維直徑大、細胞間隙連接多，傳導速度居全系統之冠（極速傳播）。；深入心肌細胞： 纖維大量網狀散布，深層穿入左、右心室肌層，同步激發無數心肌細胞。</td></tr><tr><th scope="row">6. 心跳速率之中樞神經與化學調節</th><td data-label="關鍵概念">節律點雖啟動收縮，但心跳速率由延腦之心跳加速中樞與抑制中樞經自主神經與體液化學物質精密調節。</td><td data-label="整理重點">心跳加速中樞（交感）： 經心神經支配 SA/AV node，釋放正腎上腺素（Norepinephrine），使心跳速率與收縮力增加。；心跳抑制中樞（副交感）： 經迷走神經（Vagus nerve）支配 SA/AV node，釋放乙醯膽鹼（Acetylcholine），使心跳降慢。</td></tr></tbody></table></section></div>
 
     <!-- SECTION 2: QUIZ -->
     <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">

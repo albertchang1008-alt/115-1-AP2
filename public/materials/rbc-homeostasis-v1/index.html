@@ -125,7 +125,36 @@
 .flow-nav-card svg{width:100%;height:auto}
 .card-svg-container svg{max-height:none}
 @media(max-width:760px){.flow-grid,.detail-cards-grid{grid-template-columns:minmax(0,1fr)}}
-</style></head>
+</style><style id="rbc-clear-flow">.visual-art{height:auto!important;background-image:none!important;background-size:auto!important}.visual-art svg{display:block;width:100%;height:auto}.visual-flow .sim-arrow{display:block}.rbc-feedback-loop{padding:14px;border:2px solid #176b45;border-radius:12px;background:#edf8f0;color:#14532d;font-weight:700}@media(max-width:760px){.visual-flow .sim-arrow{transform:rotate(90deg);font-size:24px;margin:4px;line-height:1}.visual-art svg{max-width:300px;margin:auto}}</style><style id="material-presentation">/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}
+
+:root{--accent:hsl(342 65% 27%);--accent-soft:hsl(342 40% 95%);--primary:hsl(342 65% 27%);--primary-dark:hsl(342 65% 27%);--primary-light:hsl(342 40% 95%);--b:hsl(342 65% 27%);--p:hsl(342 40% 95%);--bg:hsl(342 25% 98%);--border:hsl(342 25% 79%);--focus-outline:3px solid hsl(342 65% 27%);--tissue:hsl(342 40% 95%)}
+header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 
 <div class="container">
@@ -195,12 +224,12 @@
             </svg>
         </div>
         <div class="sim-steps visual-flow" aria-label="紅血球 EPO 負回饋流程" style="--flow-art:url('assets/rbc-epo-feedback-strip-v1.png')">
-            <div class="sim-step visual-flow-card" data-rbc-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>組織缺氧</strong><span>氧氣供應下降</span></div><div class="sim-arrow">→</div>
-            <div class="sim-step visual-flow-card" data-rbc-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>腎臟分泌 EPO</strong><span>發出造血訊號</span></div><div class="sim-arrow">→</div>
-            <div class="sim-step visual-flow-card" data-rbc-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>紅骨髓造血</strong><span>紅血球增加</span></div><div class="sim-arrow">→</div>
-            <div class="sim-step visual-flow-card" data-rbc-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"></div><strong>攜氧恢復</strong><span>回到恆定狀態</span></div>
+            <div class="sim-step visual-flow-card" data-rbc-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"><svg viewBox="0 0 240 170" role="img" aria-label="組織可用氧氣減少"><g font-family="system-ui,sans-serif" font-size="19" text-anchor="middle" fill="#17212b"><rect x="44" y="32" width="152" height="76" rx="18" fill="#fce7ef" stroke="#9d174d" stroke-width="3"/><circle cx="83" cy="68" r="18" fill="#fff" stroke="#9d174d"/><circle cx="153" cy="68" r="18" fill="#fff" stroke="#9d174d"/><text x="120" y="140">組織：可用 O₂ 減少</text></g></svg></div><strong>組織缺氧</strong><span>氧氣供應下降</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"><svg viewBox="0 0 240 170" role="img" aria-label="腎臟增加 EPO 分泌"><g font-family="system-ui,sans-serif" font-size="19" text-anchor="middle" fill="#17212b"><path d="M80 25c-60 0-65 86-16 90 35 4 43-25 21-40 25-18 15-50-5-50zM160 25c60 0 65 86 16 90-35 4-43-25-21-40-25-18-15-50 5-50z" fill="#d69c91" stroke="#7f1d1d" stroke-width="3"/><rect x="88" y="66" width="64" height="36" rx="10" fill="#fff"/><text x="120" y="91">EPO</text><text x="120" y="140">腎臟：釋放造血訊號</text></g></svg></div><strong>腎臟分泌 EPO</strong><span>發出造血訊號</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"><svg viewBox="0 0 240 170" role="img" aria-label="紅骨髓增加紅血球生成"><g font-family="system-ui,sans-serif" font-size="19" text-anchor="middle" fill="#17212b"><g transform="translate(0,-15)"><path d="M80 24q-30-15-35 10t20 24v55q-20 5-20 22t35 10h80q30 15 35-10t-20-22V58q20-5 20-22t-35-12z" fill="#fff3d7" stroke="#9a6420" stroke-width="3"/><rect x="82" y="42" width="76" height="83" rx="12" fill="#fda4af"/><circle cx="109" cy="65" r="12" fill="#be123c"/><circle cx="135" cy="95" r="12" fill="#be123c"/></g><text x="120" y="156">紅骨髓：紅血球生成↑</text></g></svg></div><strong>紅骨髓造血</strong><span>紅血球增加</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"><svg viewBox="0 0 240 170" role="img" aria-label="紅血球運送氧氣至組織"><g font-family="system-ui,sans-serif" font-size="19" text-anchor="middle" fill="#17212b"><ellipse cx="60" cy="73" rx="38" ry="27" fill="#be123c"/><ellipse cx="60" cy="73" rx="17" ry="12" fill="#fda4af"/><path d="M106 73h40m-12-10 12 10-12 10" stroke="#9d174d" stroke-width="4" fill="none"/><rect x="161" y="43" width="59" height="60" rx="15" fill="#e4f4ed" stroke="#176b45" stroke-width="3"/><text x="122" y="55">O₂</text><text x="120" y="140">紅血球把 O₂ 送給組織</text></g></svg></div><strong>攜氧恢復</strong><span>回到恆定狀態</span></div>
         </div>
-        <div class="hypoxia-control"><label for="hypoxia-range">缺氧程度 <output id="hypoxia-value" for="hypoxia-range">中度</output></label><input id="hypoxia-range" type="range" min="0" max="2" value="1" step="1" aria-describedby="rbc-lab-status"><div>正常　　輕度　　中度</div></div>
+        <p class="rbc-feedback-loop">↶ 負回饋：供氧改善 → 缺氧刺激減少 → 腎臟 EPO 分泌回降。紅血球生成需要時間，不是立即完成。</p><div class="hypoxia-control"><label for="hypoxia-range">缺氧程度 <output id="hypoxia-value" for="hypoxia-range">中度</output></label><input id="hypoxia-range" type="range" min="0" max="2" value="1" step="1" aria-describedby="rbc-lab-status"><div>正常　　輕度　　中度</div></div>
         <div class="scenario-status" id="rbc-lab-status" aria-live="polite"></div>
         <div class="predict-card"><p>先猜一猜：長期居住高海拔環境，血中 EPO 濃度最可能如何變化？</p><button class="scenario-option" type="button" data-rbc-answer="wrong">下降</button><button class="scenario-option" type="button" data-rbc-answer="correct">上升</button><div class="predict-feedback" id="rbc-predict-feedback" aria-live="polite"></div></div>
     </section>
@@ -525,7 +554,7 @@
             </div>
 
         </div>
-    </div>
+    <section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>紅血球的恆定與生理機制 - 五專解剖生理學互動資訊圖表｜概念比較</caption><thead><tr><th scope="col">主題</th><th scope="col">關鍵概念</th><th scope="col">整理重點</th></tr></thead><tbody><tr><th scope="row">刺激</th><td data-label="關鍵概念">組織氧氣供應不足</td><td data-label="整理重點">腎臟感測供氧不足</td></tr><tr><th scope="row">反應器官</th><td data-label="關鍵概念">腎臟增加 EPO 分泌</td><td data-label="整理重點">EPO 經血液送到紅骨髓</td></tr><tr><th scope="row">作用</th><td data-label="關鍵概念">紅骨髓增加紅血球生成</td><td data-label="整理重點">紅血球數量增加、攜氧改善</td></tr><tr><th scope="row">負回饋</th><td data-label="關鍵概念">組織供氧改善</td><td data-label="整理重點">缺氧刺激減少，EPO 分泌回降</td></tr><tr><th scope="row">老化與回收</th><td data-label="關鍵概念">老舊紅血球由脾臟／肝臟吞噬</td><td data-label="整理重點">鐵與胺基酸回收；血基質另形成膽紅素</td></tr><tr><th scope="row">造血原料</th><td data-label="關鍵概念">鐵、維生素 B₁₂、葉酸等</td><td data-label="整理重點">造血需要足夠原料，不只需要 EPO 訊號</td></tr></tbody></table></section></div>
 
     <!-- SECTION 2: QUIZ -->
     <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
@@ -865,7 +894,7 @@
         };
         const hypoxiaRange = document.getElementById('hypoxia-range');
         hypoxiaRange.addEventListener('input', () => setHypoxia(Number(hypoxiaRange.value)));
-        document.querySelectorAll('[data-rbc-answer]').forEach((button) => button.addEventListener('click', () => { const correct = button.dataset.rbcAnswer === 'correct'; document.getElementById('rbc-predict-feedback').textContent = correct ? '答對了：高海拔低氧會刺激腎臟增加 EPO，進而提高紅血球生成。' : '再想想：缺氧是腎臟增加 EPO 分泌的關鍵刺激。'; }));
+        document.querySelectorAll('[data-rbc-answer]').forEach((button) => button.addEventListener('click', () => { const correct = button.dataset.rbcAnswer === 'correct'; const feedback = document.getElementById('rbc-predict-feedback'); feedback.className = 'predict-feedback predict-result ' + (correct ? 'ok' : 'warn'); feedback.textContent = correct ? '✓ 答對了！高海拔低氧會刺激腎臟增加 EPO，進而提高紅血球生成。' : '✗ 尚未答對。缺氧是腎臟增加 EPO 分泌的關鍵刺激，再想一想。'; }));
         setHypoxia(Number(hypoxiaRange.value));
 
         // Quiz Stage 1 Setup

@@ -75,3 +75,7 @@ if __name__=='__main__':
         dest=ROOT/'materials-src'/c['slug'];dest.mkdir(exist_ok=True)
         (dest/'content.json').write_text(json.dumps(c,ensure_ascii=False,indent=2)+'\n')
         print(c['slug'],len(c['nodes']),len(c['foundation'])+len(c['cases']))
+
+    # Keep teacher-authorized explanations/tables and diagrams when regenerating sources.
+    import runpy
+    runpy.run_path(str(ROOT / "scripts/material-learning-refresh.py"), run_name="__main__")

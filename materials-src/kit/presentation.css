@@ -1,0 +1,27 @@
+/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}

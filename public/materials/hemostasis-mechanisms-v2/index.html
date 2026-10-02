@@ -139,7 +139,36 @@
 
         footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
     </style>
-</head>
+<style id="material-presentation">/* 固定教材配色與整理表：不用切換色系即可辨識各教材。 */
+body{border-top:6px solid var(--accent);background:var(--bg)}
+.hero{border-top:4px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),#fff)}
+.tile strong{color:var(--accent)}
+.kit button{color:var(--accent)}
+.kit button:hover,.kit button[aria-pressed="true"],.kit button[aria-expanded="true"]{color:#fff}
+.kit button.predict-correct{background:#e7f5ec!important;border-color:#176b45!important;color:#14532d!important}
+.kit button.predict-wrong{background:#fff1e6!important;border-color:#9a5a00!important;color:#783900!important}
+.predict-result{padding:12px 16px;border-radius:10px;border:2px solid currentColor}
+.predict-result.ok{background:#e7f5ec}.predict-result.warn{background:#fff1e6}
+.learning-summary{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border,#ddd);border-top:4px solid var(--accent);border-radius:16px;max-width:100%;color:#17212b}
+.learning-summary h2{font-size:calc(24px * var(--font-scale,1));margin:0 0 8px;color:var(--accent)}
+.learning-summary table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(16px * var(--font-scale,1));line-height:1.65}
+.learning-summary caption{text-align:left;font-weight:700;padding:12px 0}
+.learning-summary th,.learning-summary td{padding:12px;text-align:left;vertical-align:top;border:1px solid var(--border,#ddd);overflow-wrap:anywhere}
+.learning-summary thead th{background:var(--accent);color:#fff}
+.learning-summary tbody th{background:var(--accent-soft);color:var(--accent)}
+.learning-summary tbody tr:nth-child(even) td{background:var(--accent-soft)}
+@media(max-width:760px){
+ .learning-summary{padding:16px}
+ .learning-summary caption{display:block;width:100%}
+ .learning-summary table,.learning-summary tbody,.learning-summary tr,.learning-summary td,.learning-summary tbody th{display:block;width:100%}
+ .learning-summary thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .learning-summary tr{margin:12px 0;border:1px solid var(--border,#ddd);border-radius:10px;overflow:hidden}
+ .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
+ .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
+}
+
+:root{--accent:hsl(67 65% 27%);--accent-soft:hsl(67 40% 95%);--primary:hsl(67 65% 27%);--primary-dark:hsl(67 65% 27%);--primary-light:hsl(67 40% 95%);--b:hsl(67 65% 27%);--p:hsl(67 40% 95%);--bg:hsl(67 25% 98%);--border:hsl(67 25% 79%);--focus-outline:3px solid hsl(67 65% 27%);--tissue:hsl(67 40% 95%)}
+header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 
 <div class="container">
@@ -395,7 +424,7 @@
             </div>
 
         </div>
-    </div>
+    <section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>止血機制與凝血 - 互動資訊圖表與隨堂診斷｜概念比較</caption><thead><tr><th scope="col">主題</th><th scope="col">關鍵概念</th><th scope="col">整理重點</th></tr></thead><tbody><tr><th scope="row">1. 止血第一階段：血管痙攣 (Vascular Spasm)</th><td data-label="關鍵概念">血管受傷破裂時，血管壁平滑肌發生反射性收縮，可維持約 30 分鐘以減少破裂口的局部血流量。</td><td data-label="整理重點">平滑肌反射收縮：血管損傷越嚴重，痙攣收縮強度越大。；神經與化學引發：由痛覺神經反射及受傷血小板釋放之血清胺（serotonin）促發。</td></tr><tr><th scope="row">2. 止血第二階段：血小板栓塞 (Platelet Plug)</th><td data-label="關鍵概念">血管內皮損傷暴露下層膠原纖維，血小板接觸黏附後變形活化，釋放化學因子招募更多血小板形成疏鬆栓子。</td><td data-label="整理重點">膠原纖維黏附：血小板藉由表面受體與暴露之膠原纖維（collagen）緊密結合並變形。；釋放反應：釋放 ADP 及凝血脂 A2（TXA2）吸引並活化鄰近血小板聚集。</td></tr><tr><th scope="row">3. 凝血啟動：外在與內在徑路 (Coagulation Cascades)</th><td data-label="關鍵概念">血管內外部損傷分別啟動內在與外在凝血徑路，最終兩者匯合生成凝血酶原致活素（Prothrombin Activator）。</td><td data-label="整理重點">外在徑路（Extrinsic）：組織受損釋放組織凝血質（因子 III/Tissue Factor），與因子 VII 結合，反應極快。；內在徑路（Intrinsic）：血管內皮受損暴露膠原纖維活化因子 XII，依序活化 XI、IX、VIII。</td></tr><tr><th scope="row">4. 止血第三階段：凝血三階段與血塊收縮</th><td data-label="關鍵概念">凝血酶原致活素催化凝血酶原生成凝血酶，進一步將可溶性纖維蛋白原轉化為不溶性纖維蛋白網形成緊密血塊。</td><td data-label="整理重點">第一階段：內外在路徑匯合生成凝血酶原致活素（Prothrombin Activator）。；第二階段：致活素與 Ca²⁺ 將凝血酶原（因子 II）催化轉變為活性凝血酶（Thrombin）。</td></tr><tr><th scope="row">5. 維生素 K 作用與體內外抗凝機制</th><td data-label="關鍵概念">機體透過維生素 K 輔助肝臟合成凝血因子，同時利用內源性抗凝物質嚴密調控，防止血管內異常凝血。</td><td data-label="整理重點">維生素 K 依賴型因子：肝臟合成因子 II、VII、IX、X 需維生素 K 參與 γ-羧化修飾。；內生抗凝劑：肝素（Heparin，由肥胖細胞與嗜鹼性球分泌）可迅速增強抗凝血酶 III 活性。</td></tr><tr><th scope="row">6. 纖維蛋白溶解：修復後清除血塊 (Fibrinolysis)</th><td data-label="關鍵概念">傷口修復完成後，身體啟動纖維蛋白溶解系統，把不再需要的血塊溶解，恢復血流。</td><td data-label="整理重點">血塊的任務：血塊只是暫時堵住破口，血管壁修復後就不再需要。；凝血與纖溶平衡：兩個系統在體內同時運作、互相牽制，受傷處能止血，其他血管保持暢通。</td></tr></tbody></table></section></div>
 
     <!-- SECTION 2: QUIZ -->
     <div id="quiz-pane" class="section-pane" role="tabpanel" aria-labelledby="tab-quiz">

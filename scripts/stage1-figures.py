@@ -171,3 +171,7 @@ if __name__=='__main__':
     for i in range(6):(OUT/f'major-vessels-node-{i+1:02}.svg').write_text(vessels(i))
     (OUT/'major-vessels-overview.svg').write_text(overview('major-vessels'))
     print('42 dedicated SVGs written')
+
+    # Keep teacher-authorized explanations/tables and diagrams when regenerating sources.
+    import runpy
+    runpy.run_path(str(ROOT / "scripts/material-learning-refresh.py"), run_name="__main__")

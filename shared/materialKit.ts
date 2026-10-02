@@ -6,6 +6,7 @@ export interface MaterialContent {
   lab: any;
   nodes: MaterialNode[]; foundation: MaterialQuestion[]; cases: MaterialQuestion[];
   credits?: string[]; rules?: { nodes: number; foundation: number; cases: number };
+  summaryTable?: { headers: string[]; rows: string[][] };
 }
 const id = /^[a-z0-9-]+$/;
 export function validateMaterialContent(value: unknown): asserts value is MaterialContent {
