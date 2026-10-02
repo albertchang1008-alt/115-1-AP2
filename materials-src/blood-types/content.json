@@ -1,0 +1,320 @@
+{
+  "slug": "blood-types",
+  "version": "v1",
+  "experience": "guided",
+  "title": "血型與輸血",
+  "subtitle": "紅血球表面抗原決定血型，血漿抗體遇到對應抗原會凝集；輸血與血型鑑定都依這個原理。",
+  "label": "血型與輸血｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "4 型",
+      "label": "ABO 血型"
+    },
+    {
+      "value": "D 抗原",
+      "label": "決定 Rh"
+    },
+    {
+      "value": "凝集",
+      "label": "抗原遇對應抗體"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換情境，比較圖中的路徑、數值與反應。",
+    "figure": "blood-types-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "A 型 Rh＋",
+        "explain": "A 型 Rh＋"
+      },
+      {
+        "id": "state-2",
+        "label": "O 型 Rh＋",
+        "explain": "O 型 Rh＋"
+      },
+      {
+        "id": "state-3",
+        "label": "AB 型 Rh−（顯示各格凝集與否）",
+        "explain": "AB 型 Rh−（顯示各格凝集與否）"
+      }
+    ],
+    "predict": {
+      "question": "抗 A 凝集、抗 B 不凝集，ABO 血型是？",
+      "options": [
+        "相反方向",
+        "A 型",
+        "不變",
+        "無法由此模型判斷"
+      ],
+      "answer": 1,
+      "feedback": "A 型"
+    }
+  },
+  "nodes": [
+    {
+      "id": "blood-types-node-01",
+      "tag": "01",
+      "title": "血型與紅血球抗原",
+      "summary": "血型由紅血球表面抗原（凝集原）決定",
+      "figure": "blood-types-node-01.svg",
+      "concept": "血型由紅血球表面抗原（凝集原）決定。",
+      "points": [
+        "血型由紅血球表面抗原（凝集原）決定",
+        "血型由紅血球表面抗原（凝集原）決定。",
+        "血型由紅血球表面抗原（凝集原）決定。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "血型由紅血球表面抗原（凝集原）決定。"
+      }
+    },
+    {
+      "id": "blood-types-node-02",
+      "tag": "02",
+      "title": "ABO 系統",
+      "summary": "A 型有 A 抗原、抗 B 抗體",
+      "figure": "blood-types-node-02.svg",
+      "concept": "ABO 系統：A 型有 A 抗原、抗 B 抗體；B 型有 B 抗原、抗 A 抗體；AB 型兩種抗原、無抗體；O 型無抗原、抗 A 與抗 B 抗體。",
+      "points": [
+        "A 型有 A 抗原、抗 B 抗體",
+        "B 型有 B 抗原、抗 A 抗體",
+        "AB 型兩種抗原、無抗體"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "A 型有 A 抗原與抗 B 抗體。"
+      }
+    },
+    {
+      "id": "blood-types-node-03",
+      "tag": "03",
+      "title": "凝集反應",
+      "summary": "抗原遇對應抗體，紅血球黏聚，進而破壞",
+      "figure": "blood-types-node-03.svg",
+      "concept": "凝集反應：抗原遇對應抗體，紅血球黏聚，進而破壞。",
+      "points": [
+        "抗原遇對應抗體，紅血球黏聚，進而破壞",
+        "抗原遇對應抗體，紅血球黏聚，進而破壞。",
+        "抗原遇對應抗體，紅血球黏聚，進而破壞。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "抗原與對應抗體結合，使紅血球黏聚而發生凝集。"
+      }
+    },
+    {
+      "id": "blood-types-node-04",
+      "tag": "04",
+      "title": "Rh 系統",
+      "summary": "有 D 抗原為 Rh 陽性",
+      "figure": "blood-types-node-04.svg",
+      "concept": "Rh 系統：有 D 抗原為 Rh 陽性；Rh 陰性者通常不會天生帶抗 D 抗體，接觸 Rh 陽性血後才產生。",
+      "points": [
+        "有 D 抗原為 Rh 陽性",
+        "Rh 陰性者通常不會天生帶抗 D 抗體，接觸 Rh 陽性血後才產生",
+        "有 D 抗原為 Rh 陽性；Rh 陰性者通常不會天生帶抗 D 抗體，接觸 Rh 陽性血後才產生。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "具有 D 抗原為 Rh 陽性。"
+      }
+    },
+    {
+      "id": "blood-types-node-05",
+      "tag": "05",
+      "title": "輸血原則",
+      "summary": "以同型輸血為原則",
+      "figure": "blood-types-node-05.svg",
+      "concept": "輸血原則：以同型輸血為原則；關鍵是輸入的紅血球抗原不可遇到受血者血漿中的對應抗體；O 型紅血球無 A、B 抗原，傳統稱「萬能捐血者」，AB 型稱「萬能受血者」（⚠️ 此傳統用語是否保留，請教師決定）。",
+      "points": [
+        "以同型輸血為原則",
+        "關鍵是輸入的紅血球抗原不可遇到受血者血漿中的對應抗體",
+        "O 型紅血球無 A、B 抗原，傳統稱「萬能捐血者」，AB 型稱「萬能受血者」（⚠️ 此傳統用語是否保留，請教師決定）"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "以同型輸血為原則；關鍵是輸入的紅血球抗原不可遇到受血者血漿中的對應抗體；O 型紅血球無 A、B 抗原，傳統稱「萬能捐血者」，AB 型稱「萬能受血者」（⚠️ 此傳統用語是否保留，請教師決定）。"
+      }
+    },
+    {
+      "id": "blood-types-node-06",
+      "tag": "06",
+      "title": "血型鑑定",
+      "summary": "分別加入抗 A、抗 B、抗 D 血清，看是否凝集",
+      "figure": "blood-types-node-06.svg",
+      "concept": "血型鑑定：分別加入抗 A、抗 B、抗 D 血清，看是否凝集。",
+      "points": [
+        "分別加入抗 A、抗 B、抗 D 血清，看是否凝集",
+        "分別加入抗 A、抗 B、抗 D 血清，看是否凝集。",
+        "分別加入抗 A、抗 B、抗 D 血清，看是否凝集。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "分別加入抗 A、抗 B、抗 D 血清，看是否凝集。"
+      }
+    }
+  ],
+  "foundation": [
+    {
+      "id": "blood-types-foundation-q01",
+      "stem": "血型由何決定？",
+      "options": [
+        "血漿顏色",
+        "血小板形狀",
+        "紅血球表面抗原",
+        "白血球數目"
+      ],
+      "answer": 2,
+      "hint": "看紅血球表面，而非血漿顏色。",
+      "explain": "血型由紅血球表面抗原（凝集原）決定。",
+      "nodeId": "blood-types-node-01"
+    },
+    {
+      "id": "blood-types-foundation-q02",
+      "stem": "A 型血漿中的抗體？",
+      "options": [
+        "抗 B",
+        "抗 A 與抗 B",
+        "無",
+        "抗 A"
+      ],
+      "answer": 0,
+      "hint": "A 型具有 A 抗原，血漿抗體對應哪個另一種抗原？",
+      "explain": "A 型有 A 抗原與抗 B 抗體。",
+      "nodeId": "blood-types-node-02"
+    },
+    {
+      "id": "blood-types-foundation-q03",
+      "stem": "O 型紅血球的抗原？",
+      "options": [
+        "只有 B",
+        "A 與 B",
+        "只有 A",
+        "無 A 也無 B"
+      ],
+      "answer": 3,
+      "hint": "O 型在 ABO 系統中不帶哪兩種抗原？",
+      "explain": "O 型紅血球無 A、B 抗原。",
+      "nodeId": "blood-types-node-02"
+    },
+    {
+      "id": "blood-types-foundation-q04",
+      "stem": "AB 型血漿中的抗體？",
+      "options": [
+        "抗 B",
+        "無",
+        "抗 A 與抗 B",
+        "抗 A"
+      ],
+      "answer": 1,
+      "hint": "AB 型同時具有 A 與 B 抗原。",
+      "explain": "AB 型有 A、B 抗原，血漿無對應的抗 A、抗 B 抗體。",
+      "nodeId": "blood-types-node-02"
+    },
+    {
+      "id": "blood-types-foundation-q05",
+      "stem": "Rh 陽性指？",
+      "options": [
+        "無 D 抗原",
+        "有 A 抗原",
+        "有 D 抗原",
+        "有抗 D 抗體"
+      ],
+      "answer": 2,
+      "hint": "Rh 系統的關鍵是 D 抗原。",
+      "explain": "具有 D 抗原為 Rh 陽性。",
+      "nodeId": "blood-types-node-04"
+    },
+    {
+      "id": "blood-types-foundation-q06",
+      "stem": "凝集反應是？",
+      "options": [
+        "抗原與對應抗體結合使紅血球聚集",
+        "紅血球攜帶氧氣",
+        "白血球吞噬細菌",
+        "血小板形成血栓"
+      ],
+      "answer": 0,
+      "hint": "分清紅血球凝集與血小板作用。",
+      "explain": "抗原與對應抗體結合，使紅血球黏聚而發生凝集。",
+      "nodeId": "blood-types-node-03"
+    }
+  ],
+  "cases": [
+    {
+      "id": "blood-types-case-q01",
+      "stem": "【實驗觀察】抗 A 凝集、抗 B 不凝集，ABO 血型？",
+      "options": [
+        "AB",
+        "O",
+        "B",
+        "A"
+      ],
+      "answer": 3,
+      "hint": "凝集表示玻片抗體找到對應抗原。",
+      "explain": "抗 A 凝集、抗 B 不凝集表示有 A、無 B 抗原，是 A 型。",
+      "nodeId": "blood-types-node-06"
+    },
+    {
+      "id": "blood-types-case-q02",
+      "stem": "【實驗觀察】抗 A、抗 B 都不凝集？",
+      "options": [
+        "B",
+        "O",
+        "AB",
+        "A"
+      ],
+      "answer": 1,
+      "hint": "兩種 ABO 血清都不凝集，表示哪兩種抗原都沒有？",
+      "explain": "抗 A、抗 B 都不凝集表示無 A、B 抗原，是 O 型。",
+      "nodeId": "blood-types-node-06"
+    },
+    {
+      "id": "blood-types-case-q03",
+      "stem": "【模型觀察】B 型受血者輸入 A 型紅血球會？",
+      "options": [
+        "受血者變成 A 型",
+        "輸入的血漿使受血者紅血球增加",
+        "受血者的抗 A 抗體使輸入紅血球凝集",
+        "完全沒有反應"
+      ],
+      "answer": 2,
+      "hint": "B 型血漿有抗 A 抗體，輸入的是 A 型紅血球。",
+      "explain": "B 型血漿中的抗 A 抗體與輸入 A 型紅血球抗原結合，造成凝集。",
+      "nodeId": "blood-types-node-03"
+    },
+    {
+      "id": "blood-types-case-q04",
+      "stem": "【模型觀察】Rh 陰性者第一次接觸 Rh 陽性血，抗 D 抗體？",
+      "options": [
+        "接觸後才逐漸產生",
+        "永遠不會產生",
+        "會轉成 Rh 陽性",
+        "出生就大量存在"
+      ],
+      "answer": 0,
+      "hint": "Rh 陰性通常不天生帶抗 D。",
+      "explain": "Rh 陰性者通常不天生帶抗 D，接觸 Rh 陽性血後才逐漸產生。",
+      "nodeId": "blood-types-node-04"
+    },
+    {
+      "id": "blood-types-case-q05",
+      "stem": "【生理判讀】O 型紅血球傳統稱萬能捐血者，原因？",
+      "options": [
+        "含最多血紅素",
+        "不含 D 抗原",
+        "血漿中沒有抗體",
+        "紅血球上沒有 A 與 B 抗原"
+      ],
+      "answer": 3,
+      "hint": "注意這是 ABO 紅血球抗原的傳統用語。",
+      "explain": "傳統用語來自 O 型紅血球無 A、B 抗原；輸血仍以同型為原則。",
+      "nodeId": "blood-types-node-05"
+    }
+  ],
+  "credits": [
+    "OpenStax A&P 2e 18.6 Blood Typing。不放新生兒溶血等疾病內容。"
+  ]
+}

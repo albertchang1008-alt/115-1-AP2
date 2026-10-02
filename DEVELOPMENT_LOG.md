@@ -2,6 +2,13 @@
 
 目前版本：1.6.3
 
+## 第一階段補齊教材（2026-10-02，Codex，平台 1.6.3，未部署）
+
+- 從已提交的 1.6.3 `f7b97a7` 建 `feature/stage1-supplement`，一併納入 Claude 規格。完成 6 新 kit（36 節點、66 題、42 張 SVG）及 preview／shots／build 登錄；電性活動、紅血球草稿複製上平台並保留教學資料／既有題目 ID，補追蹤及複習重試 gate。ECG 與兩草稿 SVG 調整字級／排版，使 390px 字達 12px。
+- Artifact Tool 增列題庫第 163–228 列，227 題；前 161 題 3,864 格與 162 列原 XML 零變動，66 新題與規格／公開 HTML 一致；說明頁只更新合計、附加來源。
+- npm run check 全過（115 前端／18 Functions、兩端 build、version:check）；9 份 × 390／1280 共 18 情境及 188 張截圖，追蹤／通關／錯題複習／捲動與無溢位通過。報告 `docs/STAGE1_SUPPLEMENT_ACCEPTANCE.md`。
+- 待 Claude 驗收：規格 4 項教師決策原文保留；RBC 原稿肝素錯誤選項、血液檢查情境未自行刪改。未 push／部署，不動 main、RTF、coagulation。部署後教師同步 Sheet 新 66 題、建立心臟II 及各單元活動。
+
 ## 1.6.3 — 知識節點就地展開與手風琴（2026-10-02，Codex，未部署）
 
 - 從 790e78f 建 hotfix/1.6.3-node-detail。共用 kit 精簡卡片，詳細內容插在點擊卡片所在列之下、桌面跨整列；同時僅開一節點，平滑捲動保留標題，底部收合及答錯複習共用邏輯。首次 explore／關閉 nodeTime 不變。

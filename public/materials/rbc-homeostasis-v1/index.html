@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紅血球的恆定與生理機制 - 五專解剖生理學互動資訊圖表</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --focus-outline: 3px solid #2563eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+        header h1 { color: var(--danger); font-size: 2.1rem; margin-bottom: 6px; font-weight: 800; }
+        header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Metric Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: center; }
+        .stat-card .val { font-size: 1.6rem; font-weight: 800; color: var(--danger); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+
+        /* Navigation Mode Switch */
+        .mode-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .mode-btn { background: #e2e8f0; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-size: 1rem; }
+        .mode-btn.active, .mode-btn[aria-selected="true"] { background: var(--primary); color: white; box-shadow: var(--shadow); }
+
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
+
+        /* Filter Controls */
+        .filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); transition: all 0.2s; }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Step Flow Overview Cards */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .flow-nav-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; }
+        .flow-nav-card:hover, .flow-nav-card:focus { transform: translateY(-3px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
+        .flow-nav-card svg { width: 64px; height: 64px; margin-bottom: 8px; }
+        .flow-nav-card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .flow-nav-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; }
+
+        /* Detailed Knowledge Cards Grid */
+        .detail-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .detail-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: all 0.3s; scroll-margin-top: 20px; }
+        .detail-card.focus-card { outline: var(--focus-outline); border-color: var(--primary); box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
+
+        .card-svg-container { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; overflow: hidden; }
+        .card-svg-container svg { width: 100%; height: auto; max-height: 180px; }
+
+        .card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; width: fit-content; }
+        .bg-hematopoiesis { background: var(--danger-light); color: var(--danger); }
+        .bg-structure { background: var(--primary-light); color: var(--primary); }
+        .bg-patho { background: var(--warning-light); color: var(--warning); }
+
+        .card-heading { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+        .core-concept { font-size: 0.95rem; font-weight: 600; color: #334155; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-left: 4px solid var(--primary); border-radius: 4px; }
+
+        .features-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .features-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 18px; position: relative; line-height: 1.4; }
+        .features-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 4px; }
+
+        .clinical-box { font-size: 0.88rem; color: #334155; background: #fffdf5; border: 1px solid #fef3c7; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+        .clinical-box strong { color: var(--warning); }
+
+        /* Quiz Section Styles */
+        .quiz-container { background: var(--card-bg); padding: 28px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 850px; margin: 0 auto; }
+        .quiz-stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .stage-title { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .progress-badge { font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 20px; }
+
+        .quiz-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .question-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; line-height: 1.5; }
+
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-button { background: #ffffff; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; text-align: left; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-main); width: 100%; }
+        .option-button:hover:not([disabled]) { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .option-button[disabled] { cursor: not-allowed; opacity: 0.6; }
+        .option-button.wrong { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--danger) !important; font-weight: 700; opacity: 1 !important; }
+        .option-button.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--success) !important; font-weight: 700; opacity: 1 !important; }
+
+        .hint-box { margin-top: 14px; padding: 12px 16px; background: #ffffff; border-radius: 8px; font-size: 0.88rem; color: #334155; border-left: 4px solid var(--warning); display: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        .next-btn-container { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .action-btn:hover { background: var(--primary-dark); }
+        .action-btn[disabled] { background: #cbd5e1; cursor: not-allowed; }
+
+        .result-banner { text-align: center; padding: 24px; border-radius: 12px; margin-top: 20px; display: none; }
+        .result-banner.pass { background: var(--success-light); border: 2px solid var(--success); color: var(--success); }
+        .result-banner.fail { background: var(--danger-light); border: 2px solid var(--danger); color: var(--danger); }
+        .result-banner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-banner p { font-size: 0.95rem; margin-bottom: 16px; }
+
+        .mission-lab { margin:0 0 28px; padding:22px; border:1px solid #fecaca; border-radius:18px; background:linear-gradient(135deg,#fff1f2 0%,#eff6ff 100%); box-shadow:var(--shadow); }.mission-lab h2 { font-size:1.25rem; line-height:1.35; color:#b91c1c; }.mission-lab > p { color:var(--text-muted); margin:4px 0 16px; }.sim-steps { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center; }.sim-step { min-width:0; min-height:92px; padding:12px; border:1px solid var(--border); border-radius:14px; background:#fff; text-align:center; font-weight:800; color:#475569; overflow-wrap:anywhere; transition:transform .2s,border-color .2s,background .2s; }.sim-step.active { transform:translateY(-3px); border-color:var(--danger); color:#b91c1c; background:#fff1f2; box-shadow:0 8px 18px rgba(220,38,38,.13); }.sim-step span { display:block; margin-top:4px; font-weight:600; font-size:.82rem; color:var(--text-muted); }.sim-arrow { color:var(--danger); font-size:1.45rem; text-align:center; }.hypoxia-control { margin-top:16px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fecaca; }.hypoxia-control label { display:flex; justify-content:space-between; gap:12px; font-weight:800; }.hypoxia-control input { width:100%; margin:12px 0 4px; accent-color:var(--danger); }.scenario-status { margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff; border-left:4px solid var(--success); font-weight:700; color:#334155; }.scenario-status strong { color:#15803d; }.scenario-option { border:1px solid #93c5fd; background:#fff; color:#1d4ed8; padding:8px 14px; border-radius:999px; font:inherit; font-weight:800; cursor:pointer; }.predict-card { margin-top:14px; padding:14px; border-radius:12px; background:#fff; border:1px solid #fed7aa; }.predict-card p { font-weight:800; margin-bottom:9px; }.predict-card button { margin:0 8px 6px 0; }.predict-feedback { min-height:1.4em; margin-top:4px; font-weight:700; color:#475569; }.rbc-overview { margin:16px 0; padding:12px; border:1px solid #fecaca; border-radius:14px; background:#fff; overflow:hidden; }.rbc-overview svg { display:block; width:100%; min-width:720px; height:auto; }.rbc-overview-mobile { display:none !important; } @media (max-width:760px) { .mission-lab { padding:18px; }.sim-steps { grid-template-columns:1fr; gap:7px; }.sim-arrow { display:none; }.sim-step { min-height:0; }.rbc-overview { padding:8px; }.rbc-overview .rbc-overview-desktop { display:none; }.rbc-overview .rbc-overview-mobile { display:block !important; min-width:0; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+        .visual-flow .sim-step { padding:10px 10px 12px; }.visual-art { height:128px; margin:-2px -2px 9px; border-radius:12px; background-image:var(--flow-art); background-repeat:no-repeat; background-size:400% 100%; background-position:var(--flow-position) center; }.visual-flow-card { position:relative; }.visual-flow-card strong { display:block; color:#7f1d1d; }.visual-flow-card span { line-height:1.35; }.visual-flow .sim-arrow { font-size:2rem; font-weight:800; color:#ef4444; } @media (max-width:760px) { .visual-art { height:170px; background-size:100% 400%; background-position:center var(--flow-mobile-position); }.visual-flow .sim-step { padding:12px; } }
+
+        footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border); }
+    </style>
+<script src="https://albertchang1008-alt.github.io/115-1-AP2/materials/course-learning.js"></script>
+<style>
+/* 原圖與原標籤保留；圖例換行、取消縮圖尺寸上限，讓 390px 可讀。 */
+.flow-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.flow-nav-card svg{width:100%;height:auto}
+.card-svg-container svg{max-height:none}
+@media(max-width:760px){.flow-grid,.detail-cards-grid{grid-template-columns:minmax(0,1fr)}}
+</style></head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>紅血球的恆定與生理機制</h1>
+        <p>生理學 CH05：骨髓造血、腎臟 EPO 負回饋調控、老化吞噬與造血原料</p>
+    </header>
+
+    <!-- Key Metrics Dashboard -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="val">120 天</div>
+            <div class="label">成熟紅血球平均壽命</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">1 億個/分</div>
+            <div class="label">成人體內生成與破壞速率</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">EPO 生成素</div>
+            <div class="label">腎臟近腎絲球器缺氧刺激釋放</div>
+        </div>
+        <div class="stat-card">
+            <div class="val">45% (Hct)</div>
+            <div class="label">成人正常血比容平均值</div>
+        </div>
+    </div>
+
+    <section class="mission-lab" aria-labelledby="rbc-lab-title">
+        <h2 id="rbc-lab-title">🩸 情境實驗室｜啟動 EPO 負回饋</h2>
+        <p>調整組織缺氧程度，追蹤腎臟、紅骨髓與紅血球如何共同恢復攜氧能力。</p>
+        <div class="rbc-overview" aria-label="紅血球恆定全流程圖">
+            <svg class="rbc-overview-desktop" viewBox="0 0 920 430" role="img" aria-labelledby="rbc-overview-title rbc-overview-desc">
+                <title id="rbc-overview-title">紅血球恆定全流程</title><desc id="rbc-overview-desc">組織缺氧促使腎臟增加 EPO 分泌，紅骨髓造血並增加紅血球；老化紅血球由網狀內皮系統回收成分，形成恆定循環。</desc>
+                <defs><marker id="rbc-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#475569"/></marker><marker id="rbc-green-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#16a34a"/></marker></defs>
+                <text x="460" y="30" text-anchor="middle" font-size="20" font-weight="800" fill="#991b1b">紅血球恆定全流程：調節、生成、循環與回收</text>
+                <g font-family="system-ui, sans-serif" text-anchor="middle"><rect x="28" y="66" width="155" height="66" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="105" y="93" font-size="16" font-weight="800" fill="#9a3412">紅血球↓／缺氧</text><text x="105" y="116" font-size="13" fill="#7c2d12">高海拔、失血或供氧不足</text>
+                <rect x="240" y="66" width="150" height="66" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="315" y="93" font-size="16" font-weight="800" fill="#1d4ed8">腎臟感氧細胞</text><text x="315" y="116" font-size="13" fill="#1e40af">增加分泌 EPO</text>
+                <rect x="447" y="66" width="120" height="66" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="507" y="94" font-size="16" font-weight="800" fill="#6d28d9">EPO 入血</text><text x="507" y="116" font-size="13" fill="#5b21b6">造血訊號</text>
+                <rect x="624" y="66" width="125" height="66" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="686" y="93" font-size="16" font-weight="800" fill="#b91c1c">紅骨髓</text><text x="686" y="116" font-size="13" fill="#991b1b">促進紅血球生成</text>
+                <rect x="790" y="66" width="102" height="66" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/><text x="841" y="93" font-size="16" font-weight="800" fill="#be123c">紅血球↑</text><text x="841" y="116" font-size="13" fill="#9f1239">攜氧提升</text>
+                <path d="M184 99H238 M391 99H445 M568 99H622 M750 99H788" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="690" y="177" width="170" height="60" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="775" y="202" font-size="16" font-weight="800" fill="#334155">血液循環</text><text x="775" y="224" font-size="13" fill="#475569">平均壽命約 120 天</text><path d="M841 133V175" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="431" y="177" width="190" height="60" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="526" y="201" font-size="16" font-weight="800" fill="#15803d">網狀內皮系統</text><text x="526" y="224" font-size="13" fill="#166534">脾臟／肝臟吞噬老化紅血球</text><path d="M688 207H623" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/>
+                <rect x="255" y="285" width="145" height="58" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="327" y="310" font-size="15" font-weight="800" fill="#15803d">Globin → 胺基酸</text><text x="327" y="331" font-size="13" fill="#166534">回收再利用</text>
+                <rect x="448" y="285" width="145" height="58" rx="12" fill="#fffbeb" stroke="#ca8a04" stroke-width="2"/><text x="520" y="310" font-size="15" font-weight="800" fill="#a16207">Heme → 鐵</text><text x="520" y="331" font-size="13" fill="#854d0e">回收送回骨髓</text>
+                <rect x="642" y="285" width="165" height="58" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="724" y="310" font-size="15" font-weight="800" fill="#c2410c">Heme → 膽紅素</text><text x="724" y="331" font-size="13" fill="#9a3412">膽汁、糞便；少量尿液</text>
+                <path d="M480 239L365 283 M526 239V283 M571 239L691 283" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#rbc-arrow)"/><path d="M520 284C565 245 650 202 685 134" fill="none" stroke="#ca8a04" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#rbc-arrow)"/>
+                <path d="M840 133C900 175 900 270 850 305C765 364 177 385 129 248C111 196 148 159 232 126" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#rbc-green-arrow)"/><rect x="276" y="372" width="366" height="36" rx="18" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="459" y="396" font-size="15" font-weight="800" fill="#15803d">攜氧恢復 → 缺氧刺激下降 → 腎臟 EPO 分泌下降（負回饋）</text></g>
+            </svg>
+            <svg class="rbc-overview-mobile" viewBox="0 0 360 850" role="img" aria-labelledby="rbc-overview-mobile-title rbc-overview-mobile-desc">
+                <title id="rbc-overview-mobile-title">紅血球恆定全流程，直式版</title><desc id="rbc-overview-mobile-desc">由缺氧、腎臟 EPO、紅骨髓、紅血球循環到回收的直式流程，綠色箭頭表示負回饋。</desc>
+                <defs><marker id="rbc-mobile-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#475569"/></marker><marker id="rbc-mobile-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#16a34a"/></marker></defs>
+                <g font-family="system-ui, sans-serif" text-anchor="middle"><text x="180" y="25" font-size="17" font-weight="800" fill="#991b1b">紅血球恆定全流程</text>
+                <rect x="35" y="48" width="290" height="52" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="180" y="71" font-size="15" font-weight="800" fill="#9a3412">紅血球↓／組織缺氧</text><text x="180" y="91" font-size="15" fill="#7c2d12">高海拔、失血或供氧不足</text><path d="M180 101V119" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="125" width="290" height="52" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="180" y="148" font-size="15" font-weight="800" fill="#1d4ed8">腎臟感氧細胞</text><text x="180" y="168" font-size="15" fill="#1e40af">增加分泌 EPO</text><path d="M180 178V196" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="202" width="290" height="48" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="180" y="224" font-size="15" font-weight="800" fill="#6d28d9">EPO 入血</text><text x="180" y="242" font-size="15" fill="#5b21b6">把造血訊號送往紅骨髓</text><path d="M180 251V269" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="275" width="290" height="52" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="180" y="298" font-size="15" font-weight="800" fill="#b91c1c">紅骨髓造血</text><text x="180" y="318" font-size="15" fill="#991b1b">促進紅血球生成</text><path d="M180 328V346" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="352" width="290" height="52" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/><text x="180" y="375" font-size="15" font-weight="800" fill="#be123c">紅血球增加、攜氧提升</text><text x="180" y="395" font-size="15" fill="#9f1239">進入血液循環</text><path d="M180 405V423" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="429" width="290" height="52" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="180" y="452" font-size="15" font-weight="800" fill="#334155">血液循環</text><text x="180" y="472" font-size="15" fill="#475569">紅血球平均壽命約 120 天</text><path d="M180 482V500" stroke="#475569" stroke-width="3" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="35" y="506" width="290" height="52" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="180" y="529" font-size="15" font-weight="800" fill="#15803d">網狀內皮系統</text><text x="180" y="549" font-size="15" fill="#166534">脾臟／肝臟吞噬老化紅血球</text>
+                <path d="M180 559L87 586 M180 559V586 M180 559L273 586" stroke="#475569" stroke-width="3" fill="none" marker-end="url(#rbc-mobile-arrow)"/>
+                <rect x="18" y="592" width="138" height="62" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="87" y="618" font-size="15" font-weight="800" fill="#15803d">Globin → 胺基酸</text><text x="87" y="639" font-size="15" fill="#166534">回收再利用</text>
+                <rect x="111" y="678" width="138" height="62" rx="12" fill="#fffbeb" stroke="#ca8a04" stroke-width="2"/><text x="180" y="704" font-size="15" font-weight="800" fill="#a16207">Heme → 鐵</text><text x="180" y="725" font-size="15" fill="#854d0e">回收送回骨髓</text>
+                <rect x="204" y="592" width="138" height="62" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="273" y="618" font-size="15" font-weight="800" fill="#c2410c">Heme → 膽紅素</text><text x="273" y="639" font-size="15" fill="#9a3412">膽汁、糞便；少量尿液</text>
+                <path d="M180 654V676" stroke="#ca8a04" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#rbc-mobile-arrow)"/><path d="M326 379C354 404 354 760 321 781C229 839 43 812 23 719C2 622 11 229 31 163" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#rbc-mobile-green)"/><rect x="52" y="772" width="256" height="42" rx="18" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="180" y="798" font-size="15" font-weight="800" fill="#15803d">攜氧恢復 → 缺氧刺激與 EPO 下降</text></g>
+            </svg>
+        </div>
+        <div class="sim-steps visual-flow" aria-label="紅血球 EPO 負回饋流程" style="--flow-art:url('assets/rbc-epo-feedback-strip-v1.png')">
+            <div class="sim-step visual-flow-card" data-rbc-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>組織缺氧</strong><span>氧氣供應下降</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>腎臟分泌 EPO</strong><span>發出造血訊號</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>紅骨髓造血</strong><span>紅血球增加</span></div><div class="sim-arrow">→</div>
+            <div class="sim-step visual-flow-card" data-rbc-step="3" style="--flow-position:100%;--flow-mobile-position:100%"><div class="visual-art"></div><strong>攜氧恢復</strong><span>回到恆定狀態</span></div>
+        </div>
+        <div class="hypoxia-control"><label for="hypoxia-range">缺氧程度 <output id="hypoxia-value" for="hypoxia-range">中度</output></label><input id="hypoxia-range" type="range" min="0" max="2" value="1" step="1" aria-describedby="rbc-lab-status"><div>正常　　輕度　　中度</div></div>
+        <div class="scenario-status" id="rbc-lab-status" aria-live="polite"></div>
+        <div class="predict-card"><p>先猜一猜：長期居住高海拔環境，血中 EPO 濃度最可能如何變化？</p><button class="scenario-option" type="button" data-rbc-answer="wrong">下降</button><button class="scenario-option" type="button" data-rbc-answer="correct">上升</button><div class="predict-feedback" id="rbc-predict-feedback" aria-live="polite"></div></div>
+    </section>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector" role="tablist">
+        <button type="button" class="mode-btn active" id="btn-mode-info" role="tab" aria-selected="true" aria-controls="pane-infographic">📊 互動資訊圖表</button>
+        <button type="button" class="mode-btn" id="btn-mode-quiz" role="tab" aria-selected="false" aria-controls="pane-quiz">📝 兩階段隨堂診斷</button>
+    </div>
+
+    <!-- SECTION 1: INFOGRAPHIC -->
+    <div id="pane-infographic" class="section-pane active" role="tabpanel" aria-labelledby="btn-mode-info">
+
+        <!-- Category Filters -->
+        <div class="filter-toolbar" role="toolbar" aria-label="知識分類篩選">
+            <button type="button" class="filter-btn active" id="filter-all" aria-pressed="true">全部知識節點</button>
+            <button type="button" class="filter-btn" id="filter-hematopoiesis" aria-pressed="false">造血與調控</button>
+            <button type="button" class="filter-btn" id="filter-structure" aria-pressed="false">構造與攜氧</button>
+            <button type="button" class="filter-btn" id="filter-patho" aria-pressed="false">代謝與造血原料</button>
+        </div>
+
+        <!-- 6 Step Flow Overview Cards -->
+        <div class="flow-grid">
+            <button type="button" class="flow-nav-card" id="flow-card-node-01" aria-label="點擊捲動至節點 1：紅血球生成與紅骨髓造血">
+                <svg viewBox="0 0 480 566.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <rect x="20" y="20" width="60" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <circle cx="50" cy="40" r="12" fill="#ef4444"/>
+                    <path d="M 50 55 L 50 72" stroke="#dc2626" stroke-width="3" stroke-dasharray="3,2"/>
+                    <circle cx="50" cy="72" r="8" fill="#dc2626"/>
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">紅骨髓幹細胞</tspan></text></svg>
+                <h3>1. 骨髓造血分化</h3>
+                <p>幹細胞分化脫核釋入血液</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-02" aria-label="點擊捲動至節點 2：組織缺氧與腎臟 EPO 負回饋">
+                <svg viewBox="0 0 480 608.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <path d="M 30 30 C 10 30 10 70 30 70 C 45 70 45 30 30 30 Z" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M 45 50 L 75 50" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">EPO</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="554.0">腎臟缺氧感應</tspan></text></svg>
+                <h3>2. EPO 負回饋調控</h3>
+                <p>組織缺氧刺激腎臟分泌 EPO</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-03" aria-label="點擊捲動至節點 3：成熟紅血球構造與血紅素攜氧">
+                <svg viewBox="0 0 480 566.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <ellipse cx="50" cy="50" rx="35" ry="20" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+                    <ellipse cx="50" cy="50" rx="18" ry="8" fill="#fca5a5"/>
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">雙凹圓盤 7.5µm</tspan></text></svg>
+                <h3>3. 雙凹構造攜氧</h3>
+                <p>無核形狀與血紅素氧氣運輸</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-04" aria-label="點擊捲動至節點 4：120天老化破裂與網狀內皮吞噬">
+                <svg viewBox="0 0 480 566.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <path d="M 25 30 L 75 30 L 65 70 L 35 70 Z" fill="#fffbeb" stroke="#d97706" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="10" fill="#dc2626" stroke="#d97706" stroke-dasharray="2,2"/>
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">脾/肝竇狀微血管</tspan></text></svg>
+                <h3>4. 老化破裂吞噬</h3>
+                <p>120天過濾與巨噬細胞清除</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-05" aria-label="點擊捲動至節點 5：血紅素分解回收與膽紅素代謝">
+                <svg viewBox="0 0 480 608.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <rect x="20" y="25" width="60" height="20" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+
+                    <path d="M 50 45 L 50 65" stroke="#16a34a" stroke-width="3"/>
+                    <rect x="20" y="65" width="60" height="20" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">鐵/胺基酸回收</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="554.0">膽紅素隨膽汁排泄</tspan></text></svg>
+                <h3>5. 膽紅素代謝路徑</h3>
+                <p>鐵與蛋白回收、膽紅素排泄</p>
+            </button>
+
+            <button type="button" class="flow-nav-card" id="flow-card-node-06" aria-label="點擊捲動至節點 6：造血原料與血比容變化">
+                <svg viewBox="0 0 480 608.0" data-stage1-readable="true"><g transform="scale(4.8)">
+                    <rect x="20" y="25" width="25" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+                    <rect x="55" y="15" width="25" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+
+
+                </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">正常45%</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="554.0">高山↑</tspan></text></svg>
+                <h3>6. 造血原料與血比容</h3>
+                <p>鐵、B₁₂、葉酸與血比容變化</p>
+            </button>
+        </div>
+
+        <!-- Detailed Knowledge Cards Grid -->
+        <div class="detail-cards-grid">
+
+            <!-- Node 1 Detail -->
+            <div class="detail-card" id="node-card-01" data-category="hematopoiesis">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 554.0" data-stage1-readable="true"><g transform="scale(1.5)">
+                        <g transform="translate(10,10)">
+                            <!-- Stem Cell -->
+                            <circle cx="40" cy="50" r="22" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                            <circle cx="40" cy="50" r="10" fill="#ef4444"/>
+
+
+                            <path d="M 65 50 L 105 50" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow)"/>
+
+                            <!-- Proerythroblast & Normoblast -->
+                            <rect x="110" y="25" width="80" height="50" fill="#fef2f2" stroke="#ef4444" rx="6"/>
+
+
+
+                            <path d="M 195 50 L 235 50" stroke="#dc2626" stroke-width="3"/>
+
+                            <!-- Mature RBC -->
+                            <ellipse cx="270" cy="50" rx="25" ry="14" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+                            <ellipse cx="270" cy="50" rx="12" ry="6" fill="#fca5a5"/>
+
+
+                            <!-- Location Box -->
+                            <rect x="20" y="105" width="280" height="30" fill="#f8fafc" stroke="#cbd5e1" rx="4"/>
+
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="272.0">造血幹細胞</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="314.0">前紅血球母細胞</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="356.0">正紅血球母細胞 (核排出)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="398.0">成熟紅血球 (無核)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="440.0">造血器官：胚胎卵黃囊(3-8週) </tspan><tspan x="24" y="470.0">→ 肝臟(8週起) → 紅骨髓(5</tspan><tspan x="24" y="500.0">個月起終身)</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-hematopoiesis">造血與調控</span>
+                <h2 class="card-heading">1. 紅血球生成與紅骨髓造血</h2>
+                <div class="core-concept">成人紅血球主要由紅骨髓（如胸骨、頭蓋骨、肋骨等）中的未分化幹細胞（Stem cells）分化生成，經脫核後釋入血液。</div>
+                <ul class="features-list">
+                    <li><strong>幹細胞分化：</strong>幹細胞受刺激分化為前紅血球母細胞，經正紅血球母細胞階段排出細胞核，轉為網狀紅血球（Reticulocyte）。</li>
+                    <li><strong>無核雙凹形狀：</strong>成熟紅血球進入血液前已無細胞核，呈雙凹圓盤狀（直徑約 7.5 µm），壽命約 120 天。</li>
+                    <li><strong>造血器官演變：</strong>胚胎第 3~8 週由卵黃囊造血；第 8 週起由肝臟接替；第 5 個月起骨髓開始造血並終身維持。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>生理比例特徵：</strong><br>骨髓中 75% 的細胞屬於製造白血球的細胞，僅 25% 製造紅血球與血小板；但循環血液中紅血球數量比白血球多出 500 倍，反應出白血球平均壽命較短。
+                </div>
+            </div>
+
+            <!-- Node 2 Detail -->
+            <div class="detail-card" id="node-card-02" data-category="hematopoiesis">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 578.0" data-stage1-readable="true"><g transform="scale(1.5)">
+                        <g transform="translate(10,10)">
+                            <!-- Hypoxia Stimulus -->
+                            <rect x="15" y="15" width="80" height="40" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="6"/>
+
+
+
+                            <path d="M 95 35 L 125 35" stroke="#d97706" stroke-width="3"/>
+
+                            <!-- Kidney Release -->
+                            <rect x="125" y="15" width="85" height="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+
+
+
+                            <path d="M 210 35 L 240 35" stroke="#2563eb" stroke-width="3"/>
+
+                            <!-- Bone Marrow Response -->
+                            <rect x="240" y="15" width="65" height="40" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="6"/>
+
+
+
+                            <!-- Negative Feedback Arrow -->
+                            <path d="M 272 60 C 272 120 55 120 55 60" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="4,2"/>
+                            <rect x="110" y="100" width="100" height="22" fill="#f0fdf4" stroke="#16a34a" rx="4"/>
+
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="272.0">組織缺氧 (Hypoxia)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="314.0">高山/失血/RBC減少</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="356.0">腎臟 (近腎絲球器)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="398.0">釋放生成因子產生 EPO</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="440.0">紅骨髓</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="482.0">加速造血</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="524.0">負回饋：氧量恢復抑制EPO</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-hematopoiesis">造血與調控</span>
+                <h2 class="card-heading">2. 組織缺氧與腎臟 EPO 負回饋調控</h2>
+                <div class="core-concept">當身體組織缺氧或紅血球數目減少時，腎臟感氧細胞增加分泌紅血球生成素（Erythropoietin; EPO），以維持血液恆定。</div>
+                <ul class="features-list">
+                    <li><strong>缺氧刺激：</strong>高山空氣稀薄、失血、紅血球破壞加速或組織缺氧（氧氣不足）時，觸發調節機制。</li>
+                    <li><strong>EPO 機制：</strong>腎臟感氧細胞受缺氧刺激，直接增加 EPO 分泌；EPO 隨血液循環抵達紅骨髓。</li>
+                    <li><strong>骨髓響應：</strong>EPO 隨血液循環至紅骨髓，刺激幹細胞發育造血（成人約 1 × 10¹⁰ 個/小時）。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>負回饋重點：</strong><br>紅血球增加、攜氧恢復後，組織缺氧解除，腎臟分泌的 EPO 隨之減少，造血速度回到平常（負回饋）。
+                </div>
+            </div>
+
+            <!-- Node 3 Detail -->
+            <div class="detail-card" id="node-card-03" data-category="structure">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 1216.3076923076924" role="img" aria-labelledby="hb-title hb-desc" data-stage1-readable="true"><g transform="scale(0.9230769230769231)">
+                        <title id="hb-title">成人主要血紅素 HbA 的四聚體構造</title><desc id="hb-desc">HbA 由兩個 alpha 與兩個 beta 珠蛋白次單元組成，每個次單元各有一個含亞鐵離子的 heme，可各結合一個氧分子。</desc>
+                        <g font-family="system-ui, sans-serif">
+                            <ellipse cx="78" cy="86" rx="57" ry="30" fill="#fef2f2" stroke="#dc2626" stroke-width="4"/><ellipse cx="78" cy="86" rx="30" ry="11" fill="#fca5a5"/>
+
+                            <rect x="165" y="18" width="330" height="152" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                            <g><rect x="190" y="57" width="104" height="42" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><circle cx="216" cy="105" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="216" cy="105" r="6" fill="#dc2626"/></g>
+                            <g><rect x="365" y="57" width="104" height="42" rx="18" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/><circle cx="443" cy="105" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="443" cy="105" r="6" fill="#dc2626"/></g>
+                            <g><rect x="190" y="127" width="104" height="42" rx="18" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/><circle cx="216" cy="175" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="216" cy="175" r="6" fill="#dc2626"/></g>
+                            <g><rect x="365" y="127" width="104" height="42" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><circle cx="443" cy="175" r="15" fill="#fef3c7" stroke="#b45309" stroke-width="3"/><circle cx="443" cy="175" r="6" fill="#dc2626"/></g>
+
+                            <rect x="20" y="252" width="155" height="30" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+                            <rect x="184" y="252" width="155" height="30" rx="8" fill="#f5f3ff" stroke="#7c3aed"/>
+                            <rect x="348" y="252" width="152" height="30" rx="8" fill="#f0fdf4" stroke="#16a34a"/>
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="304.3076923076923">紅血球：雙凹圓盤</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="346.3076923076923">直徑約 7.5 µm</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="388.3076923076923">HbA：α₂β₂（四聚體）</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="430.3076923076923">α 珠蛋白</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="472.3076923076923">Fe²⁺</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="514.3076923076924">heme</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="556.3076923076924">β 珠蛋白</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="598.3076923076924">Fe²⁺</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="640.3076923076924">heme</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="682.3076923076924">β 珠蛋白</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="724.3076923076924">Fe²⁺</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="766.3076923076924">heme</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="808.3076923076924">α 珠蛋白</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="850.3076923076924">Fe²⁺</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="892.3076923076924">heme</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="934.3076923076924">每個珠蛋白次單元包覆 1 個 he</tspan><tspan x="24" y="964.3076923076924">me；heme 中心 Fe²⁺ 可</tspan><tspan x="24" y="994.3076923076924">逆結合 1 個 O₂</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="1036.3076923076924">合計最多攜帶 4 個 O₂ 分子</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="1078.3076923076924">CO₂：70% HCO₃⁻（CA）</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="1120.3076923076924">23% 碳醯胺基 Hb</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="1162.3076923076924">7% 溶於血漿</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-structure">構造與攜氧</span>
+                <h2 class="card-heading">3. 成熟紅血球構造與血紅素攜氧</h2>
+                <div class="core-concept">成熟紅血球呈雙凹圓盤狀以增加表面積，內含血紅素（Hb）與碳酸酐酶，專司氧氣與二氧化碳之運輸。</div>
+                <ul class="features-list">
+                    <li><strong>雙凹圓盤構造：</strong>無細胞核與胞器，雙凹形狀增大了表面積與體積比，利於氣體快速擴散並通過微血管。</li>
+                    <li><strong>血紅素攜氧：</strong>成人主要 HbA 是 α₂β₂ 四聚體（2 個 α、2 個 β 珠蛋白次單元）；每個次單元各包覆 1 個含 Fe²⁺ 的 heme，因此每個 Hb 最多可逆結合 4 個 O₂。</li>
+                    <li><strong>二氧化碳運輸：</strong>70% 以碳酸氫根（HCO₃⁻）形式運送（經碳酸酐酶 CA 催化），23% 與血球素結合，7% 直接溶於血漿。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>男女數值特徵差異：</strong><br>男性 RBC 約 540 萬個/mm³（Hb 16 g/dl，Hct 47%）；女性約 480 萬個/mm³（Hb 14 g/dl，Hct 42%），男性數值較高主因其基礎代謝率較高。
+                </div>
+            </div>
+
+            <!-- Node 4 Detail -->
+            <div class="detail-card" id="node-card-04" data-category="structure">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 596.0" data-stage1-readable="true"><g transform="scale(1.5)">
+                        <g transform="translate(10,10)">
+                            <!-- Capillary Pore -->
+                            <rect x="20" y="20" width="120" height="80" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="6"/>
+
+                            <line x1="80" y1="50" x2="80" y2="90" stroke="#d97706" stroke-width="6" stroke-dasharray="4,4"/>
+
+
+                            <!-- Squeezing & Rupture -->
+                            <path d="M 145 60 L 185 60" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow)"/>
+                            <circle cx="210" cy="60" r="12" fill="#ef4444" stroke="#dc2626" stroke-dasharray="3,2"/>
+
+
+                            <!-- Macrophage Phagocytosis -->
+                            <rect x="240" y="25" width="70" height="70" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="35"/>
+
+
+
+                            <!-- Lifespan Box -->
+                            <rect x="20" y="115" width="280" height="25" fill="#fef2f2" stroke="#ef4444" rx="4"/>
+
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="272.0">脾/肝竇狀微血管</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="314.0">狹窄細胞孔隙</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="356.0">老化膜變脆扭曲破裂</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="398.0">網狀內皮細胞</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="440.0">(巨噬細胞吞噬)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="482.0">生命期 120 天：成人每分鐘破壞</tspan><tspan x="24" y="512.0">與生成約 1 億個 (10⁸個/分</tspan><tspan x="24" y="542.0">) 紅血球</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-structure">構造與攜氧</span>
+                <h2 class="card-heading">4. 120天老化破裂與網狀內皮吞噬</h2>
+                <div class="core-concept">成熟紅血球循環約 120 天後，細胞膜失去彈性變脆，通過脾臟與肝臟竇狀微血管時扭曲破裂並被吞噬。</div>
+                <ul class="features-list">
+                    <li><strong>膜彈性喪失：</strong>老化紅血球缺乏細胞核無法補充修復蛋白質與酵素，細胞膜漸趨脆弱且失去變形彈性。</li>
+                    <li><strong>竇狀微血管過濾：</strong>脾臟與肝臟之竇狀微血管（Sinusoidal capillary）具細小孔隙，老化紅血球通過時易扭曲破裂。</li>
+                    <li><strong>網狀內皮清除：</strong>破裂之紅血球碎片由脾臟與肝臟之網狀內皮細胞（巨噬細胞）進行吞噬與分解。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>脾臟的角色：</strong><br>脾臟是體內清除老化紅血球最主要的過濾器；肝臟的巨噬細胞也會協助清除。
+                </div>
+            </div>
+
+            <!-- Node 5 Detail -->
+            <div class="detail-card" id="node-card-05" data-category="patho">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 566.0" data-stage1-readable="true"><g transform="scale(1.5)">
+                        <g transform="translate(10,10)">
+                            <!-- Globin & Iron Recycling -->
+                            <rect x="15" y="15" width="130" height="50" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="6"/>
+
+
+
+                            <!-- Heme to Bilirubin -->
+                            <rect x="165" y="15" width="140" height="50" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="6"/>
+
+
+
+                            <path d="M 235 65 L 235 95" stroke="#d97706" stroke-width="3" marker-end="url(#arrow)"/>
+
+                            <!-- Excretion Pathway -->
+                            <rect x="60" y="95" width="200" height="35" fill="#f8fafc" stroke="#cbd5e1" rx="6"/>
+
+
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="272.0">血球素(Globin) → 胺基酸</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="314.0">鐵質(Fe) → 運回骨髓再造血</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="356.0">血基質(Heme) → 膽紅素</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="398.0">脂溶性 → 肝臟尿苷酸轉移酶結合</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="440.0">隨膽汁排入腸道 → 尿膽素原 (尿</tspan><tspan x="24" y="470.0">液黃色)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="512.0">&amp; 糞膽素原 (糞便黃褐色)</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-patho">代謝與造血原料</span>
+                <h2 class="card-heading">5. 血紅素分解回收與膽紅素代謝</h2>
+                <div class="core-concept">吞噬細胞將血紅素分解為蛋白質與鐵質進行再利用，血基質則轉化為膽紅素隨膽汁與排洩物排出。</div>
+                <ul class="features-list">
+                    <li><strong>成分回收再利用：</strong>血球素（Globin）分解為胺基酸；血基質之鐵離子（Fe）被吸收運回紅骨髓重新造血。</li>
+                    <li><strong>膽紅素肝臟結合：</strong>血基質轉為脂溶性膽紅素，於肝臟經尿苷酸轉移酶（Glucuronyl transferase）轉為親水性結合態膽紅素。</li>
+                    <li><strong>糞尿色素來源：</strong>膽紅素隨膽汁進入腸道，經腸道細菌作用形成尿膽素原（經尿液排出）與糞膽素原（使糞便呈黃褐色）。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>顏色的由來：</strong><br>尿液的黃色與糞便的黃褐色，都來自膽紅素在腸道轉變成的色素（尿膽素原、糞膽素原）。
+                </div>
+            </div>
+
+            <!-- Node 6 Detail -->
+            <div class="detail-card" id="node-card-06" data-category="patho">
+                <div class="card-svg-container">
+                    <svg viewBox="0 0 480 620.0" data-stage1-readable="true"><g transform="scale(1.5)">
+                        <g transform="translate(10,10)">
+                            <rect x="10" y="10" width="135" height="55" fill="#fef2f2" stroke="#ef4444" rx="6"/>
+
+
+                            <rect x="155" y="10" width="135" height="55" fill="#fffbeb" stroke="#d97706" rx="6"/>
+
+
+                            <rect x="10" y="75" width="135" height="55" fill="#eff6ff" stroke="#2563eb" rx="6"/>
+
+
+                            <rect x="155" y="75" width="135" height="55" fill="#f0fdf4" stroke="#16a34a" rx="6"/>
+
+
+                        </g>
+                    </g><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="272.0">鐵 (Fe²⁺)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="314.0">血紅素中心，負責結合氧</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="356.0">維生素 B₁₂・葉酸</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="398.0">紅血球母細胞分裂所需</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="440.0">內在因子</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="482.0">胃分泌，幫助 B₁₂ 在迴腸吸收</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="524.0">血比容 (Hct)</tspan></text><text font-family="system-ui,sans-serif" font-size="24" fill="#17212b"><tspan x="24" y="566.0">平均約 45%；高山居民較高</tspan></text></svg>
+                </div>
+                <span class="card-badge bg-patho">代謝與造血原料</span>
+                <h2 class="card-heading">6. 造血原料與血比容變化</h2>
+                <div class="core-concept">紅骨髓持續造血需要原料：鐵用來合成血紅素，維生素 B₁₂ 與葉酸是細胞分裂所需；血比容則反映血液中紅血球所占的比例。</div>
+                <ul class="features-list">
+                    <li><strong>鐵質：</strong>血基質中心的 Fe²⁺ 負責結合氧；來源為飲食與老化紅血球的回收。</li>
+                    <li><strong>維生素 B₁₂ 與葉酸：</strong>紅血球母細胞複製 DNA、進行分裂時需要。</li>
+                    <li><strong>內在因子：</strong>胃壁細胞分泌的內在因子（Intrinsic factor），幫助維生素 B₁₂ 在迴腸被吸收。</li>
+                </ul>
+                <div class="clinical-box">
+                    <strong>血比容（Hct）變化數值：</strong><br>正常成人血比容平均約 45%（男性約 47%、女性約 42%）；生活於高山者因長期缺氧、EPO 分泌增加，血比容可代償性升高至 55% 以上。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUIZ -->
+    <div id="pane-quiz" class="section-pane" role="tabpanel" aria-labelledby="btn-mode-quiz">
+        <div class="quiz-container">
+
+            <!-- STAGE 1: FOUNDATION -->
+            <div id="stage-1-view">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第一關｜先備知識建構</span>
+                    <span class="progress-badge" id="s1-progress-text">第一關｜先備知識建構：1／6</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s1-question-text">載入中...</div>
+                    <div class="options-group" id="s1-options-container"></div>
+                    <div class="hint-box" id="s1-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s1-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- STAGE 2: CASE APPLICATION -->
+            <div id="stage-2-view" style="display: none;">
+                <div class="quiz-stage-header">
+                    <span class="stage-title">第二關｜生活情境應用</span>
+                    <span class="progress-badge" id="s2-progress-text">第二關｜生活情境應用：1／5</span>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="question-text" id="s2-question-text">載入中...</div>
+                    <div class="options-group" id="s2-options-container"></div>
+                    <div class="hint-box" id="s2-hint-box"></div>
+                </div>
+
+                <div class="next-btn-container">
+                    <button type="button" class="action-btn" id="s2-next-btn" disabled>下一題</button>
+                </div>
+            </div>
+
+            <!-- RESULT BANNERS -->
+            <div id="result-banner-pass" class="result-banner pass" aria-live="polite">
+                <h3>🎉 恭喜完全通關！</h3>
+                <p>您已成功通過「先備知識」與「生活情境」兩階段診斷，完整掌握紅血球恆定機制、EPO 調控與紅血球代謝！</p>
+                <button type="button" class="action-btn" id="btn-restart-quiz">🔄 重新進行隨堂診斷</button>
+            </div>
+
+            <div id="result-banner-fail" class="result-banner fail" aria-live="polite">
+                <h3>❌ 未能全對通關</h3>
+                <p id="fail-message-text">第二關需 5 題全部答對才能通關，請複習資訊圖表後重新挑戰整輪！</p>
+                <button type="button" class="action-btn" id="btn-retry-s2">🔄 重新挑戰第二關 (重洗題目)</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 紅血球恆定與生理機制數位教材 - 專為五專生理解剖課程設計</p>
+    </footer>
+</div>
+
+<script>
+    const COURSE_CODE = 'rbc-homeostasis';
+
+    // 1. Foundation Questions (6 Questions)
+    const FOUNDATION_QUESTIONS = [
+        {
+            id: 'rbc-homeostasis-foundation-q01',
+            title: '1. 成人紅血球主要在何處由幹細胞分化生成，且成熟釋入血液時具有何種細胞結構特徵？',
+            options: [
+                '黃骨髓；具雙核的圓球狀細胞',
+                '紅骨髓；無細胞核的雙凹圓盤狀細胞',
+                '脾臟；含巨型細胞核的扁平細胞',
+                '肝臟；具線粒體與核糖體的圓形細胞'
+            ],
+            answer: 1,
+            hint: '提示：成人主要造血器官部位於骨骼內部，且進入血液循環前會排出細胞核。',
+            explanation: '解析：成人紅血球主要由紅骨髓（如頭蓋骨、胸骨、肋骨等）中的幹細胞分化生成，進入血液前會失去細胞核，呈現無核之雙凹圓盤狀。'
+        },
+        {
+            id: 'rbc-homeostasis-foundation-q02',
+            title: '2. 當人體登高山或失血導致組織缺氧（Hypoxia）時，腎臟會受到刺激釋放何種因子，進而引發紅血球生成？',
+            options: [
+                '釋放紅血球生成因子，使血漿中紅血球生成素原轉變為紅血球生成素（EPO）',
+                '釋放組織胺，直接刺激血管平滑肌收縮',
+                '釋放內在因子，促進維生素 B12 直接合成血紅素',
+                '釋放肝素，抑制脾臟吞噬紅血球'
+            ],
+            answer: 0,
+            hint: '提示：腎臟近腎絲球器感應缺氧後，透過血漿中的前驅物活化一種強效造血激素。',
+            explanation: '解析：當組織缺氧時，腎臟近腎絲球器受到刺激釋放紅血球生成因子，將血漿中的紅血球生成素原活化為紅血球生成素（EPO），隨血流至紅骨髓加速造血。'
+        },
+        {
+            id: 'rbc-homeostasis-foundation-q03',
+            title: '3. 成熟紅血球內含有大量血紅素（Hb），關於血紅素攜氧與二氧化碳運輸的敘述，下列何者正確？',
+            options: [
+                '每個血紅素分子含 1 個鐵原子，可攜帶 1 個氧分子',
+                '氧氣主要與血紅素中的球蛋白（Globin）結合',
+                '血液中 70% 的二氧化碳係轉化為碳酸氫根（HCO3⁻）形式運送',
+                '二氧化碳 100% 均直接溶解於血漿中運送'
+            ],
+            answer: 2,
+            hint: '提示：二氧化碳在紅血球內經碳酸酐酶（CA）催化，主要形成無機鹽類形式存在於血漿。',
+            explanation: '解析：血紅素含有 4 個含鐵血基質，每分子可攜帶 4 個氧分子；二氧化碳在血液中以碳酸氫根（HCO3⁻）形式運送占 70%（經紅血球內碳酸酐酶 CA 催化），23% 與球蛋白結合，7% 直接溶於血漿。'
+        },
+        {
+            id: 'rbc-homeostasis-foundation-q04',
+            title: '4. 關於老化紅血球的清除過程，老化紅血球主要是在何處被網狀內皮細胞（巨噬細胞）吞噬分解？',
+            options: [
+                '腎臟與肺臟的微血管',
+                '脾臟與肝臟的竇狀微血管',
+                '紅骨髓的中央靜脈',
+                '胸腺與淋巴結的淋巴竇'
+            ],
+            answer: 1,
+            hint: '提示：該器官內的微血管具有細小細胞孔隙，彈性變差的老化紅血球通過時易扭曲破裂。',
+            explanation: '解析：老化紅血球細胞膜彈性喪失且變脆，通過脾臟與肝臟之竇狀微血管（sinusoidal capillary）細胞間孔隙時擠壓破裂，由網狀內皮細胞（巨噬細胞）吞噬分解。'
+        },
+        {
+            id: 'rbc-homeostasis-foundation-q05',
+            title: '5. 老化紅血球被吞噬分解後，其血紅素成分的回收與代謝路徑何者正確？',
+            options: [
+                '鐵質（Fe）直接經由尿液全部排出體外',
+                '血球素（Globin）轉化為膽紅素隨膽汁排出',
+                '血基質（Heme）轉化為膽紅素，經肝臟結合後隨膽汁排入腸道',
+                '膽紅素在血漿中不需與白蛋白結合即可直接溶於水'
+            ],
+            answer: 2,
+            hint: '提示：血球素分解為胺基酸，鐵質回收再造血，色素部分則轉化為脂溶性膽紅素由肝臟處理。',
+            explanation: '解析：血紅素分解時，血球素（Globin）降解為胺基酸回收；鐵質（Fe）運回骨髓再利用；血基質（Heme）轉化為脂溶性膽紅素，於肝臟經尿苷酸轉移酶轉化為結合態膽紅素隨膽汁排入腸道。'
+        },
+        {
+            id: 'rbc-homeostasis-foundation-q06',
+            title: '6. 製造紅血球需要原料。下列配對何者正確？',
+            options: [
+                '鐵：血紅素中心的 Fe²⁺，負責結合氧',
+                '鈣：紅血球細胞核的主要成分',
+                '維生素 C：血紅素中心的金屬離子',
+                '內在因子：由腎臟分泌，刺激紅骨髓造血'
+            ],
+            answer: 0,
+            hint: '提示：血紅素的血基質中心是哪一種金屬離子？',
+            explanation: '解析：鐵是血紅素血基質中心的 Fe²⁺；維生素 B₁₂ 與葉酸是細胞分裂所需，B₁₂ 吸收需要胃分泌的內在因子；刺激造血的 EPO 則來自腎臟。'
+        }
+    ];
+
+    // 2. Case Questions (5 Questions)
+    const CASE_QUESTIONS = [
+        {
+            id: 'rbc-homeostasis-case-q01',
+            title: '1. 【生理判讀】登山客在高山停留數週後血比容升高；回到平地一段時間後，血比容又恢復正常。主要原因是？',
+            options: [
+                '缺氧解除，腎臟分泌的 EPO 減少，造血速度回到平常（負回饋）',
+                '平地空氣中的氧太多，紅血球被氧氣破壞',
+                '回到平地後紅骨髓停止所有造血',
+                '脾臟在平地會分泌大量 EPO'
+            ],
+            answer: 0,
+            hint: '提示：想想 EPO 分泌是被什麼刺激的？刺激消失後會怎樣？',
+            explanation: '解析：紅血球增加、攜氧恢復後，組織不再缺氧，腎臟 EPO 分泌減少，造血速度回到平常；多出的紅血球隨壽命到期被清除，血比容逐漸恢復，這就是負回饋。'
+        },
+        {
+            id: 'rbc-homeostasis-case-q02',
+            title: '2. 【生理機制】維生素 B₁₂ 是紅血球母細胞分裂所需。它要在迴腸被吸收，需要哪一種物質幫忙？',
+            options: [
+                '胃壁細胞分泌的內在因子',
+                '胰臟分泌的胰島素',
+                '腎臟分泌的 EPO',
+                '肝臟製造的白蛋白'
+            ],
+            answer: 0,
+            hint: '提示：這種物質由胃分泌，會和 B₁₂ 結合。',
+            explanation: '解析：胃壁細胞分泌內在因子（Intrinsic factor），與維生素 B₁₂ 結合後才能在迴腸被吸收；B₁₂ 讓紅血球母細胞能正常複製 DNA 與分裂。'
+        },
+        {
+            id: 'rbc-homeostasis-case-q03',
+            title: '3. 【生理判讀】一位登山客挑戰海拔 3,800 公尺高山，在山頂停留數週後進行血液檢查，發現其血比容（Hct）由原本的 45% 代償性上升至 55%。請問此生理代償過程的正確順序為何？',
+            options: [
+                '高山低氧壓 → 組織缺氧 → 腎臟釋放 EPO 增加 → 刺激紅骨髓造血 → 血比容上升',
+                '高山低氧壓 → 脾臟加速破壞紅血球 → 骨髓幹細胞減產 → 血比容上升',
+                '高山低氧壓 → 肝臟合成過量白蛋白 → 血液黏度下降 → 血比容上升',
+                '高山低氧壓 → 胃壁細胞分泌過多內在因子 → 鐵質吸收暴增 → 血比容上升'
+            ],
+            answer: 0,
+            hint: '提示：低壓環境引發缺氧，進而啟動腎臟與骨髓之間的內分泌負回饋路徑。',
+            explanation: '解析：高山大氣壓低導致高空低氧，引發身體組織缺氧（Hypoxia），刺激腎臟釋放 EPO 隨血流至紅骨髓，加速幹細胞分化生成紅血球，使血比容（Hct）與攜氧能力代償性提高。'
+        },
+        {
+            id: 'rbc-homeostasis-case-q04',
+            title: '4. 【生活觀察】糞便呈黃褐色，主要來自紅血球分解後的哪一種物質？',
+            options: [
+                '膽紅素在腸道轉變成的糞膽素原',
+                '血紅素中的鐵',
+                '血球素分解出的胺基酸',
+                '紅血球內的碳酸氫根'
+            ],
+            answer: 0,
+            hint: '提示：血基質分解後會變成一種色素，隨膽汁進入腸道。',
+            explanation: '解析：血基質轉成膽紅素，隨膽汁排入腸道，經腸道細菌作用形成尿膽素原與糞膽素原；糞膽素原使糞便呈黃褐色。'
+        },
+        {
+            id: 'rbc-homeostasis-case-q05',
+            title: '5. 【生理判讀】一般成年男性的紅血球數與血紅素濃度比女性高。依本教材，主要原因是？',
+            options: [
+                '男性的基礎代謝率較高',
+                '男性的骨頭比較多',
+                '女性體內沒有 EPO',
+                '女性的紅血球比較大'
+            ],
+            answer: 0,
+            hint: '提示：回想節點 3「男女數值特徵差異」。',
+            explanation: '解析：男性 RBC 約 540 萬/mm³、Hb 16 g/dl；女性約 480 萬/mm³、Hb 14 g/dl。男性數值較高，主要因為基礎代謝率較高、需氧較多。'
+        }
+    ];
+
+    // Helper: Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // STATE VARIABLES
+    const MATERIAL_ID = 'rbc-homeostasis';
+    const exploredNodes = new Set();
+    function trackExplore(id) { if (window.CourseLearning && window.CourseLearning.explore) window.CourseLearning.explore(id); }
+    function trackAnswer(id, correct) { if (window.CourseLearning && window.CourseLearning.answer) window.CourseLearning.answer(id, correct); }
+    let completionSent=false;
+    function trackComplete() { if(completionSent)return;completionSent=true; if (window.CourseLearning && window.CourseLearning.complete) window.CourseLearning.complete(); }
+    let activeNode=null,nodeStart=null;
+    function finishNode(){if(activeNode&&nodeStart!==null)window.CourseLearning?.nodeTime?.(activeNode,(performance.now()-nodeStart)/1000);nodeStart=null}
+    function startNode(id){if(activeNode!==id){finishNode();activeNode=id;nodeStart=performance.now()}if(!exploredNodes.has(id)){exploredNodes.add(id);trackExplore(id)}}
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)finishNode();else if(activeNode)nodeStart=performance.now()});
+    let currentMode = 'info'; // 'info' or 'quiz'
+
+    // Stage 1 State
+    let s1CurrentIndex = 0;
+    let s1AnsweredCorrect = false;
+
+    // Stage 2 State
+    let s2Questions = [];
+    let s2CurrentIndex = 0;
+    let s2CorrectCount = 0;
+    let s2AnsweredCorrect = false;
+    let s2ReviewRequired = false;
+    let s2ReviewReady = true;
+    const CASE_REVIEW_NODE_IDS = ['node-card-02', 'node-card-06', 'node-card-02', 'node-card-05', 'node-card-03'];
+
+    // DOM ELEMENTS INITIALIZATION & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mode Switch Buttons
+        const btnModeInfo = document.getElementById('btn-mode-info');
+        const btnModeQuiz = document.getElementById('btn-mode-quiz');
+        const paneInfo = document.getElementById('pane-infographic');
+        const paneQuiz = document.getElementById('pane-quiz');
+
+        btnModeInfo.addEventListener('click', () => {
+            currentMode = 'info';
+            btnModeInfo.classList.add('active');
+            btnModeInfo.setAttribute('aria-selected', 'true');
+            btnModeQuiz.classList.remove('active');
+            btnModeQuiz.setAttribute('aria-selected', 'false');
+            paneInfo.classList.add('active');
+            paneQuiz.classList.remove('active');
+        });
+
+        btnModeQuiz.addEventListener('click', () => {
+            currentMode = 'quiz';
+            btnModeQuiz.classList.add('active');
+            btnModeQuiz.setAttribute('aria-selected', 'true');
+            btnModeInfo.classList.remove('active');
+            btnModeInfo.setAttribute('aria-selected', 'false');
+            paneQuiz.classList.add('active');
+            paneInfo.classList.remove('active');
+        });
+
+        // Filter Toolbar Listener
+        const filterBtns = [
+            { id: 'filter-all', cat: 'all' },
+            { id: 'filter-hematopoiesis', cat: 'hematopoiesis' },
+            { id: 'filter-structure', cat: 'structure' },
+            { id: 'filter-patho', cat: 'patho' }
+        ];
+
+        filterBtns.forEach(item => {
+            const btn = document.getElementById(item.id);
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    const el = document.getElementById(b.id);
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+
+                // Filter cards
+                const cards = document.querySelectorAll('.detail-card');
+                cards.forEach(card => {
+                    if (item.cat === 'all' || card.dataset.category === item.cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navigation Flow Cards Smooth Scroll & Focus
+        for (let i = 1; i <= 6; i++) {
+            const flowCard = document.getElementById(`flow-card-node-0${i}`);
+            const targetDetailCard = document.getElementById(`node-card-0${i}`);
+
+            flowCard.addEventListener('click', () => {
+                const nodeId = `${MATERIAL_ID}-node-0${i}`;
+                startNode(nodeId);
+                // Remove highlight from all
+                document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('focus-card'));
+
+                // Show card if hidden by filter
+                targetDetailCard.style.display = 'flex';
+
+                // Scroll
+                targetDetailCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                targetDetailCard.classList.add('focus-card');
+            });
+        }
+
+        const setHypoxia = (level) => {
+            const labels = ['正常', '輕度', '中度'];
+            document.getElementById('hypoxia-value').textContent = labels[level];
+            document.querySelectorAll('[data-rbc-step]').forEach((step, index) => step.classList.toggle('active', level > 0 && (level === 1 ? index < 2 : true)));
+            document.getElementById('rbc-lab-status').innerHTML = level === 0 ? '<strong>氧氣供應正常：</strong>腎臟維持基礎 EPO 分泌，紅血球生成與破壞大致平衡。' : level === 1 ? '<strong>輕度缺氧：</strong>腎臟偵測到氧氣下降，開始增加 EPO 訊號，準備刺激紅骨髓造血。' : '<strong>中度缺氧：</strong>EPO 顯著增加，紅骨髓加速製造紅血球；經一段時間後，攜氧能力回升，負回饋才會使 EPO 降回來。';
+        };
+        const hypoxiaRange = document.getElementById('hypoxia-range');
+        hypoxiaRange.addEventListener('input', () => setHypoxia(Number(hypoxiaRange.value)));
+        document.querySelectorAll('[data-rbc-answer]').forEach((button) => button.addEventListener('click', () => { const correct = button.dataset.rbcAnswer === 'correct'; document.getElementById('rbc-predict-feedback').textContent = correct ? '答對了：高海拔低氧會刺激腎臟增加 EPO，進而提高紅血球生成。' : '再想想：缺氧是腎臟增加 EPO 分泌的關鍵刺激。'; }));
+        setHypoxia(Number(hypoxiaRange.value));
+
+        // Quiz Stage 1 Setup
+        initStage1();
+
+        // Stage 1 Next Button Listener
+        document.getElementById('s1-next-btn').addEventListener('click', () => {
+            s1CurrentIndex++;
+            if (s1CurrentIndex < FOUNDATION_QUESTIONS.length) {
+                renderStage1Question();
+            } else {
+                // Unlock Stage 2
+                document.getElementById('stage-1-view').style.display = 'none';
+                document.getElementById('stage-2-view').style.display = 'block';
+                initStage2();
+            }
+        });
+
+        // Stage 2 Next Button Listener
+        document.getElementById('s2-next-btn').addEventListener('click', () => {
+            s2CurrentIndex++;
+            if (s2CurrentIndex < s2Questions.length) {
+                renderStage2Question();
+            } else {
+                // Stage 2 Finished -> Check if All 5 Correct
+                document.getElementById('stage-2-view').style.display = 'none';
+                if (s2CorrectCount === 5) {
+                    document.getElementById('result-banner-pass').style.display = 'block';
+                    trackComplete();
+                } else {
+                    document.getElementById('result-banner-fail').style.display = 'block';
+                    document.getElementById('fail-message-text').textContent = `您答對了 ${s2CorrectCount} / 5 題。關卡要求必須 5 題全對才能通關，請重試！`;
+                }
+            }
+        });
+
+        // Restart Full Quiz
+        document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+            document.getElementById('result-banner-pass').style.display = 'none';
+            document.getElementById('stage-1-view').style.display = 'block';
+            document.getElementById('stage-2-view').style.display = 'none';
+            s1CurrentIndex = 0;
+            initStage1();
+        });
+
+        // Retry Stage 2
+        document.getElementById('btn-retry-s2').addEventListener('click', () => {
+            if (s2ReviewRequired && !s2ReviewReady) {
+                document.getElementById('fail-message-text').textContent = '請先點選答錯題目的「前往對應圖卡複習」，完成短暫複習後才能重新挑戰。';
+                return;
+            }
+            document.getElementById('result-banner-fail').style.display = 'none';
+            document.getElementById('stage-2-view').style.display = 'block';
+            initStage2();
+        });
+    });
+
+    // RENDER STAGE 1
+    function initStage1() {
+        s1CurrentIndex = 0;
+        renderStage1Question();
+    }
+
+    function renderStage1Question() {
+        s1AnsweredCorrect = false;
+        const q = FOUNDATION_QUESTIONS[s1CurrentIndex];
+
+        document.getElementById('s1-progress-text').textContent = `第一關｜先備知識建構：${s1CurrentIndex + 1}／6`;
+        document.getElementById('s1-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s1-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s1-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s1-next-btn');
+        nextBtn.disabled = true;
+
+        // 題目順序固定，但每次呈現時洗牌選項；正解以 isCorrect 保留，不依賴原始位置。
+        const shuffledOptions = shuffleArray(q.options.map((text, index) => ({ text, isCorrect: index === q.answer })));
+        shuffledOptions.forEach(({ text: optText, isCorrect }) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optText;
+
+            btn.addEventListener('click', () => {
+                if (s1AnsweredCorrect) return;
+                trackAnswer(q.id, isCorrect);
+
+                if (isCorrect) {
+                    // Correct
+                    btn.classList.add('correct');
+                    s1AnsweredCorrect = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>核心解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+
+                    // Disable all options
+                    const allOpts = optionsContainer.querySelectorAll('.option-button');
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    // Wrong
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--warning)';
+                    hintBox.innerHTML = `<strong>再試一次！</strong>${q.hint}`;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // RENDER STAGE 2
+    function initStage2() {
+        s2CurrentIndex = 0;
+        s2CorrectCount = 0;
+        completionSent=false;
+        s2ReviewRequired = false;
+        s2ReviewReady = true;
+
+        // Shuffle Stage 2 Questions and Options
+        s2Questions = shuffleArray(CASE_QUESTIONS).map(q => {
+            const optionsWithOrigIdx = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+            const shuffledOpts = shuffleArray(optionsWithOrigIdx);
+            return {
+                ...q,
+                shuffledOpts: shuffledOpts
+            };
+        });
+
+        renderStage2Question();
+    }
+
+    function renderStage2Question() {
+        s2AnsweredCorrect = false;
+        const q = s2Questions[s2CurrentIndex];
+
+        document.getElementById('s2-progress-text').textContent = `第二關｜生活情境應用：${s2CurrentIndex + 1}／5`;
+        document.getElementById('s2-question-text').textContent = q.title;
+
+        const optionsContainer = document.getElementById('s2-options-container');
+        optionsContainer.innerHTML = '';
+
+        const hintBox = document.getElementById('s2-hint-box');
+        hintBox.style.display = 'none';
+
+        const nextBtn = document.getElementById('s2-next-btn');
+        nextBtn.disabled = true;
+
+        q.shuffledOpts.forEach((optObj) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-button';
+            btn.textContent = optObj.text;
+
+            btn.addEventListener('click', () => {
+                if (s2AnsweredCorrect) return;
+                trackAnswer(q.id, optObj.isCorrect);
+
+                const allOpts = optionsContainer.querySelectorAll('.option-button');
+
+                if (optObj.isCorrect) {
+                    btn.classList.add('correct');
+                    s2AnsweredCorrect = true;
+                    s2CorrectCount++;
+                    if(s2CurrentIndex===s2Questions.length-1&&s2CorrectCount===s2Questions.length)trackComplete();
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--success)';
+                    hintBox.innerHTML = `<strong>答對了！正解解析：</strong>${q.explanation}`;
+                    nextBtn.disabled = false;
+                    allOpts.forEach(b => b.disabled = true);
+                } else {
+                    btn.classList.add('wrong');
+                    hintBox.style.display = 'block';
+                    hintBox.style.borderLeftColor = 'var(--danger)';
+                    s2ReviewRequired = true;
+                    s2ReviewReady = false;
+                    const reviewNodeId = CASE_REVIEW_NODE_IDS[CASE_QUESTIONS.findIndex(item=>item.id===q.id)];
+                    hintBox.innerHTML = `<strong>答錯了，先回到關鍵概念複習：</strong>${q.hint}<br><button type="button" class="scenario-option" id="s2-review-link">前往對應圖卡複習</button>`;
+                    document.getElementById('s2-review-link').addEventListener('click', (event) => {
+                        const reviewButton = event.currentTarget;
+                        document.getElementById('btn-mode-info').click();
+                        document.getElementById(reviewNodeId.replace('node-card','flow-card-node')).click();
+                        document.getElementById(reviewNodeId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        reviewButton.disabled = true;
+                        reviewButton.textContent = '已開始複習，稍候即可重試';
+                        setTimeout(() => { s2ReviewReady = true; nextBtn.disabled=false; reviewButton.textContent = '複習完成，可回到第二關重試'; }, 2000);
+                    });
+                    allOpts.forEach(b => b.disabled = true);
+                    nextBtn.disabled = true;
+                }
+            });
+
+            optionsContainer.appendChild(btn);
+        });
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+{
+  "slug": "major-vessels",
+  "version": "v1",
+  "experience": "guided",
+  "title": "全身主要動脈與靜脈",
+  "subtitle": "從主動脈弓出發追蹤頭頸、上肢、腹部、下肢的主要血管，再沿上、下腔靜脈回到右心房。",
+  "label": "全身主要動脈與靜脈｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "3 條",
+      "label": "主動脈弓分支"
+    },
+    {
+      "value": "成對",
+      "label": "腎動脈"
+    },
+    {
+      "value": "最長",
+      "label": "大隱靜脈"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換情境，比較圖中的路徑、數值與反應。",
+    "figure": "major-vessels-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "頭頸與上肢",
+        "explain": "頭頸與上肢"
+      },
+      {
+        "id": "state-2",
+        "label": "腹部器官",
+        "explain": "腹部器官"
+      },
+      {
+        "id": "state-3",
+        "label": "下肢",
+        "explain": "下肢"
+      }
+    ],
+    "predict": {
+      "question": "左手臂的血液由主動脈弓哪一分支出發？",
+      "options": [
+        "相反方向",
+        "左鎖骨下動脈",
+        "不變",
+        "無法由此模型判斷"
+      ],
+      "answer": 1,
+      "feedback": "左鎖骨下動脈"
+    }
+  },
+  "nodes": [
+    {
+      "id": "major-vessels-node-01",
+      "tag": "01",
+      "title": "主動脈的分段",
+      "summary": "升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈",
+      "figure": "major-vessels-node-01.svg",
+      "concept": "主動脈的分段：升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈。",
+      "points": [
+        "升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈",
+        "升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈。",
+        "升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "升主動脈 → 主動脈弓 → 胸主動脈 → 腹主動脈 → 約第 4 腰椎分為左右髂總動脈。"
+      }
+    },
+    {
+      "id": "major-vessels-node-02",
+      "tag": "02",
+      "title": "主動脈弓三分支",
+      "summary": "頭臂幹（再分右頸總、右鎖骨下）、左頸總動脈、左鎖骨下動脈",
+      "figure": "major-vessels-node-02.svg",
+      "concept": "主動脈弓三分支：頭臂幹（再分右頸總、右鎖骨下）、左頸總動脈、左鎖骨下動脈。",
+      "points": [
+        "頭臂幹（再分右頸總、右鎖骨下）、左頸總動脈、左鎖骨下動脈",
+        "頭臂幹（再分右頸總、右鎖骨下）、左頸總動脈、左鎖骨下動脈。",
+        "頭臂幹（再分右頸總、右鎖骨下）、左頸總動脈、左鎖骨下動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "頭臂幹直接由主動脈弓分出，再分為右頸總與右鎖骨下動脈。"
+      }
+    },
+    {
+      "id": "major-vessels-node-03",
+      "tag": "03",
+      "title": "上肢動脈",
+      "summary": "鎖骨下 → 腋 → 肱 → 橈、尺動脈",
+      "figure": "major-vessels-node-03.svg",
+      "concept": "上肢動脈：鎖骨下 → 腋 → 肱 → 橈、尺動脈；量血壓用肱動脈、手腕摸脈搏用橈動脈。",
+      "points": [
+        "鎖骨下 → 腋 → 肱 → 橈、尺動脈",
+        "量血壓用肱動脈、手腕摸脈搏用橈動脈",
+        "鎖骨下 → 腋 → 肱 → 橈、尺動脈；量血壓用肱動脈、手腕摸脈搏用橈動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "上肢動脈由鎖骨下、腋、肱，接到橈與尺動脈。"
+      }
+    },
+    {
+      "id": "major-vessels-node-04",
+      "tag": "04",
+      "title": "腹主動脈分支",
+      "summary": "不成對的腹腔幹（胃、肝、脾）、上腸繫膜、下腸繫膜動脈",
+      "figure": "major-vessels-node-04.svg",
+      "concept": "腹主動脈分支：不成對的腹腔幹（胃、肝、脾）、上腸繫膜、下腸繫膜動脈；成對的腎動脈。",
+      "points": [
+        "不成對的腹腔幹（胃、肝、脾）、上腸繫膜、下腸繫膜動脈",
+        "成對的腎動脈",
+        "不成對的腹腔幹（胃、肝、脾）、上腸繫膜、下腸繫膜動脈；成對的腎動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "左右腎動脈是腹主動脈的成對分支。"
+      }
+    },
+    {
+      "id": "major-vessels-node-05",
+      "tag": "05",
+      "title": "下肢動脈",
+      "summary": "髂總 → 髂外 → 股 → 膕 → 脛前、脛後",
+      "figure": "major-vessels-node-05.svg",
+      "concept": "下肢動脈：髂總 → 髂外 → 股 → 膕 → 脛前、脛後；足背可摸到足背動脈。",
+      "points": [
+        "髂總 → 髂外 → 股 → 膕 → 脛前、脛後",
+        "足背可摸到足背動脈",
+        "髂總 → 髂外 → 股 → 膕 → 脛前、脛後；足背可摸到足背動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "下肢動脈由髂外到股，再到膝後的膕動脈。"
+      }
+    },
+    {
+      "id": "major-vessels-node-06",
+      "tag": "06",
+      "title": "主要靜脈",
+      "summary": "上腔靜脈收集頭頸與上肢（左右頭臂靜脈匯合）",
+      "figure": "major-vessels-node-06.svg",
+      "concept": "主要靜脈：上腔靜脈收集頭頸與上肢（左右頭臂靜脈匯合）；下腔靜脈收集下肢與腹部；淺層靜脈：頭靜脈、貴要靜脈、肘正中靜脈（抽血常用）、大隱靜脈（人體最長靜脈）。",
+      "points": [
+        "上腔靜脈收集頭頸與上肢（左右頭臂靜脈匯合）",
+        "下腔靜脈收集下肢與腹部",
+        "淺層靜脈：頭靜脈、貴要靜脈、肘正中靜脈（抽血常用）、大隱靜脈（人體最長靜脈）"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "上腔靜脈收集頭頸與上肢的血液。"
+      }
+    }
+  ],
+  "foundation": [
+    {
+      "id": "major-vessels-foundation-q01",
+      "stem": "直接由主動脈弓發出的是？",
+      "options": [
+        "頭臂幹",
+        "右頸總動脈",
+        "肱動脈",
+        "右鎖骨下動脈"
+      ],
+      "answer": 0,
+      "hint": "分清主動脈弓直接分支與頭臂幹的分支。",
+      "explain": "頭臂幹直接由主動脈弓分出，再分為右頸總與右鎖骨下動脈。",
+      "nodeId": "major-vessels-node-02"
+    },
+    {
+      "id": "major-vessels-foundation-q02",
+      "stem": "上肢動脈順序？",
+      "options": [
+        "肱→腋→橈",
+        "橈→肱→腋",
+        "腋→鎖骨下→肱",
+        "鎖骨下→腋→肱→橈、尺"
+      ],
+      "answer": 3,
+      "hint": "由軀幹走向手指，按血管位置排序。",
+      "explain": "上肢動脈由鎖骨下、腋、肱，接到橈與尺動脈。",
+      "nodeId": "major-vessels-node-03"
+    },
+    {
+      "id": "major-vessels-foundation-q03",
+      "stem": "腹主動脈的成對分支？",
+      "options": [
+        "上腸繫膜動脈",
+        "腎動脈",
+        "下腸繫膜動脈",
+        "腹腔幹"
+      ],
+      "answer": 1,
+      "hint": "成對表示左、右各有一條。",
+      "explain": "左右腎動脈是腹主動脈的成對分支。",
+      "nodeId": "major-vessels-node-04"
+    },
+    {
+      "id": "major-vessels-foundation-q04",
+      "stem": "下肢動脈順序？",
+      "options": [
+        "膕→股→髂外",
+        "髂外→膕→股",
+        "髂外→股→膕",
+        "股→髂外→膕"
+      ],
+      "answer": 2,
+      "hint": "由骨盆往膝後追蹤動脈。",
+      "explain": "下肢動脈由髂外到股，再到膝後的膕動脈。",
+      "nodeId": "major-vessels-node-05"
+    },
+    {
+      "id": "major-vessels-foundation-q05",
+      "stem": "上腔靜脈收集？",
+      "options": [
+        "頭頸與上肢",
+        "腹部器官",
+        "心肌",
+        "下肢"
+      ],
+      "answer": 0,
+      "hint": "上腔靜脈收集橫膈以上的主要回流。",
+      "explain": "上腔靜脈收集頭頸與上肢的血液。",
+      "nodeId": "major-vessels-node-06"
+    },
+    {
+      "id": "major-vessels-foundation-q06",
+      "stem": "人體最長的靜脈？",
+      "options": [
+        "股靜脈",
+        "頸內靜脈",
+        "肘正中靜脈",
+        "大隱靜脈"
+      ],
+      "answer": 3,
+      "hint": "回想下肢的長淺層靜脈。",
+      "explain": "大隱靜脈是人體最長的靜脈。",
+      "nodeId": "major-vessels-node-06"
+    }
+  ],
+  "cases": [
+    {
+      "id": "major-vessels-case-q01",
+      "stem": "【生活情境】手腕拇指側摸脈搏，是哪條動脈？",
+      "options": [
+        "肱動脈",
+        "橈動脈",
+        "頸動脈",
+        "尺動脈"
+      ],
+      "answer": 1,
+      "hint": "拇指側對應橈骨一側。",
+      "explain": "手腕拇指側可摸到橈動脈脈搏。",
+      "nodeId": "major-vessels-node-03"
+    },
+    {
+      "id": "major-vessels-case-q02",
+      "stem": "【實驗觀察】抽血常選肘窩哪條淺靜脈？",
+      "options": [
+        "頸外靜脈",
+        "股靜脈",
+        "肘正中靜脈",
+        "大隱靜脈"
+      ],
+      "answer": 2,
+      "hint": "找肘窩的淺層靜脈名稱。",
+      "explain": "肘正中靜脈是肘窩常用的淺靜脈。",
+      "nodeId": "major-vessels-node-06"
+    },
+    {
+      "id": "major-vessels-case-q03",
+      "stem": "【模型觀察】右手臂的血液由主動脈弓出發的路徑？",
+      "options": [
+        "頭臂幹→右鎖骨下→腋→肱",
+        "右頸總→腋→肱",
+        "腹腔幹→腋→肱",
+        "左鎖骨下→腋→肱"
+      ],
+      "answer": 0,
+      "hint": "人體右側先經頭臂幹。",
+      "explain": "右上肢由頭臂幹經右鎖骨下、腋、肱動脈供血。",
+      "nodeId": "major-vessels-node-02"
+    },
+    {
+      "id": "major-vessels-case-q04",
+      "stem": "【模型觀察】左腳靜脈血回心的路徑？",
+      "options": [
+        "大隱靜脈→肺靜脈→左心房",
+        "膕靜脈→主動脈→右心房",
+        "股靜脈→上腔靜脈→左心房",
+        "股靜脈→髂外→髂總→下腔靜脈→右心房"
+      ],
+      "answer": 3,
+      "hint": "腳的回流經下腔靜脈進右心房。",
+      "explain": "下肢靜脈經股、髂外、髂總、下腔靜脈回右心房。",
+      "nodeId": "major-vessels-node-06"
+    },
+    {
+      "id": "major-vessels-case-q05",
+      "stem": "【模型觀察】腹腔幹主要供應？",
+      "options": [
+        "腎臟",
+        "胃、肝、脾等上腹部器官",
+        "大腦",
+        "下肢"
+      ],
+      "answer": 1,
+      "hint": "對照腹腔幹與腎動脈的供應部位。",
+      "explain": "腹腔幹供應胃、肝、脾等上腹部器官。",
+      "nodeId": "major-vessels-node-04"
+    }
+  ],
+  "credits": [
+    "OpenStax A&P 2e 20.5 Circulatory Pathways。⚠️ 血管譯名（頭臂幹／無名動脈等）請依教師課本統一。"
+  ]
+}

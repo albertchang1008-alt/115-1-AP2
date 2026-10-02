@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-02",
+  "baselineSha256": "18a78f73e40117a111356c8579be30e4d115dd5ca8a5d39e8a37386021eb73f2",
+  "finalSha256": "8b8afdc74afa38b78627f43e6dbd0ba10489bed54b3ae6118d8a1b737cb07e41",
+  "originalQuestions": 161,
+  "originalCellsCompared": 3864,
+  "originalCellsChanged": 0,
+  "originalRowsRawXmlUnchanged": 162,
+  "unchangedZipParts": [
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "xl/theme/theme1.xml",
+    "xl/styles.xml",
+    "_rels/.rels",
+    "xl/workbook.xml",
+    "xl/_rels/workbook.xml.rels",
+    "[Content_Types].xml"
+  ],
+  "notesExistingCellsChanged": [
+    "B23"
+  ],
+  "notesAppendedRange": "A29:B34",
+  "addedRange": "題庫!A163:X228",
+  "addedQuestions": 66,
+  "totalQuestions": 227,
+  "duplicateIds": 0,
+  "htmlStemOptionAnswerMatches": 66,
+  "sourceOptionsShuffled": 66,
+  "correctPositionCounts": {
+    "C": 17,
+    "A": 17,
+    "D": 16,
+    "B": 16
+  },
+  "materialCounts": {
+    "心輸出量的調節": 11,
+    "血壓測量": 11,
+    "微血管物質交換與組織液": 11,
+    "全身主要動脈與靜脈": 11,
+    "血型與輸血": 11,
+    "淋巴器官": 11
+  },
+  "comparison": "HTML option multisets and correct option text match exactly; shuffled Excel positions map to code and Zuvio number."
+}

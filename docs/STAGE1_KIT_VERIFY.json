@@ -1,0 +1,5470 @@
+[
+  {
+    "slug": "cardiac-output",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "交感興奮",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心率 ↑、收縮力 ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "CO ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "迷走興奮",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心率 ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "CO ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "回心血量增加",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "EDV ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "Frank-Starling → S",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "V ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "心輸出量",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心率 HR（次／分）",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "× 每搏量 SV（mL）",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "70 × 70 ≈ 4900 mL/min",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "靜息約 5 L/min",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "長時間左右心輸出量相等",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "每搏量與射出分率",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "舒張末期 EDV",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "約 120 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "− 收縮末期 ESV",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "約 50 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ≈ 70 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ÷ EDV ≈ 60%",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "前負荷與 Frank-Starli",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "ng",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "回心血量增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "EDV 增加 → 心肌拉長",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "生理範圍內收縮增強",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "每搏量增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "相同前負荷下的收縮力",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "交感：正腎上腺素",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腎上腺素",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "收縮力增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "射出較多血液",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ↑、ESV ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "後負荷",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心室射血",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "克服動脈壓力",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "其他條件不變",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "後負荷 ↑ → SV 傾向 ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "自主神經與心率",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "交感作用 → 心率 ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "迷走／乙醯膽鹼 → 心率 ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "安靜時迷走作用較強",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "心率低於竇房結自身頻率",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "心率極快 → 舒張期縮短",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "充血時間減少",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "cardiac-output-node-01",
+        "cardTop": 12.421875,
+        "detailTop": 113.203125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.203125,
+        "gridWidth": 366
+      },
+      {
+        "id": "cardiac-output-node-04",
+        "cardTop": 12.15625,
+        "detailTop": 139.328125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.328125,
+        "gridWidth": 366
+      },
+      {
+        "id": "cardiac-output-node-01",
+        "cardTop": 12.421875,
+        "detailTop": 113.203125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.203125,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "cardiac-output",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "交感興奮",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心率 ↑、收縮力 ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "CO ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "迷走興奮",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心率 ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "CO ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "回心血量增加",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "EDV ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "Frank-Starling → S",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "V ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "心輸出量",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心率 HR（次／分）",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "× 每搏量 SV（mL）",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "70 × 70 ≈ 4900 mL/min",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "靜息約 5 L/min",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "長時間左右心輸出量相等",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "每搏量與射出分率",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "舒張末期 EDV",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "約 120 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "− 收縮末期 ESV",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "約 50 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ≈ 70 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ÷ EDV ≈ 60%",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "前負荷與 Frank-Starli",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "ng",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "回心血量增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "EDV 增加 → 心肌拉長",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "生理範圍內收縮增強",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "每搏量增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "相同前負荷下的收縮力",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "交感：正腎上腺素",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腎上腺素",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "收縮力增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "射出較多血液",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ↑、ESV ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "後負荷",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心室射血",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "克服動脈壓力",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "其他條件不變",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "後負荷 ↑ → SV 傾向 ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cardiac-output-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "自主神經與心率",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "交感作用 → 心率 ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "迷走／乙醯膽鹼 → 心率 ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "安靜時迷走作用較強",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "心率低於竇房結自身頻率",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "心率極快 → 舒張期縮短",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "充血時間減少",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "cardiac-output-node-01",
+        "cardTop": 11.75,
+        "detailTop": 138.921875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.921875,
+        "gridWidth": 1052
+      },
+      {
+        "id": "cardiac-output-node-04",
+        "cardTop": 11.921875,
+        "detailTop": 139.09375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.09375,
+        "gridWidth": 1052
+      },
+      {
+        "id": "cardiac-output-node-01",
+        "cardTop": 11.75,
+        "detailTop": 138.921875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.921875,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-pressure-measurement",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "高於收縮壓",
+                "px": 17.983333333333334,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 150 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "無血流",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "無聲",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "介於兩者之間",
+                "px": 17.983333333333334,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 100 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "收縮期斷續衝過",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "柯氏音",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "低於舒張壓",
+                "px": 17.983333333333334,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 60 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "恢復平順",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "聲音消失",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "聽診法原理",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶加壓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "阻斷肱動脈血流",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "緩慢放氣",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "聽血流恢復的聲音",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "柯氏音",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "受壓變窄的肱動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "血液斷續衝過",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "形成亂流",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "產生柯氏音",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "收縮壓",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "緩慢放氣",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "第一個規律柯氏音出現",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "此時壓力＝收縮壓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "舒張壓",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "繼續放氣",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "血流恢復平順",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "柯氏音消失",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "此時壓力＝舒張壓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "測量步驟",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "坐姿休息、手臂與心臟同高",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶寬度合適",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "聽診器放肘窩肱動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "橈動脈摸不到再加約 30 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "每秒約 2–3 mmHg 放氣",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "判讀與換算",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "120／80 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "脈壓＝120−80＝40",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "MAP≈80＋40÷3",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "約 93 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "手臂高於心臟 → 偏低",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "手臂低於心臟 → 偏高",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "blood-pressure-measurement-node-01",
+        "cardTop": 12.265625,
+        "detailTop": 139.4375,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.4375,
+        "gridWidth": 366
+      },
+      {
+        "id": "blood-pressure-measurement-node-04",
+        "cardTop": 12,
+        "detailTop": 112.78125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 98.78125,
+        "gridWidth": 366
+      },
+      {
+        "id": "blood-pressure-measurement-node-03",
+        "cardTop": 12.21875,
+        "detailTop": 113,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-pressure-measurement",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "高於收縮壓",
+                "px": 54.49166666666666,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 150 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "無血流",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "無聲",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "介於兩者之間",
+                "px": 54.49166666666666,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 100 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "收縮期斷續衝過",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "柯氏音",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "低於舒張壓",
+                "px": 54.49166666666666,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶 60 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈剖面",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "恢復平順",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "聲音消失",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "80",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "120",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "示例舒張壓／收縮壓 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "聽診法原理",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶加壓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "阻斷肱動脈血流",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "緩慢放氣",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "聽血流恢復的聲音",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "柯氏音",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "受壓變窄的肱動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "血液斷續衝過",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "形成亂流",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "產生柯氏音",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "收縮壓",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "緩慢放氣",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "第一個規律柯氏音出現",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "此時壓力＝收縮壓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "舒張壓",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "繼續放氣",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "血流恢復平順",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "柯氏音消失",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "此時壓力＝舒張壓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "測量步驟",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "坐姿休息、手臂與心臟同高",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "壓脈帶寬度合適",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "聽診器放肘窩肱動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "橈動脈摸不到再加約 30 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "每秒約 2–3 mmHg 放氣",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-pressure-measurement-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "判讀與換算",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "120／80 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "脈壓＝120−80＝40",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "MAP≈80＋40÷3",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "約 93 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "手臂高於心臟 → 偏低",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "手臂低於心臟 → 偏高",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "blood-pressure-measurement-node-01",
+        "cardTop": 11.5,
+        "detailTop": 138.671875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.671875,
+        "gridWidth": 1052
+      },
+      {
+        "id": "blood-pressure-measurement-node-04",
+        "cardTop": 11.671875,
+        "detailTop": 138.84375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.84375,
+        "gridWidth": 1052
+      },
+      {
+        "id": "blood-pressure-measurement-node-03",
+        "cardTop": 11.5,
+        "detailTop": 138.671875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.671875,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "capillary-exchange",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "動脈端",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "靜水壓 35 ＞ 膠體滲透壓 25",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "向外淨濾出 10 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "靜脈端",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "靜水壓 18 ＜ 膠體滲透壓 25",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "向內淨回收 7 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "淋巴回收",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "濾出略多於回收",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "組織液與少量蛋白質",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "淋巴微管 → 回靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "順濃度梯度擴散",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "O₂、CO₂、葡萄糖等",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "濃度較高的一側",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "通過微血管壁",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "濃度較低的一側",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "通過管壁的途徑",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "脂溶性物質",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "穿過內皮細胞",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "水與小分子",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "經細胞間隙",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "大分子如血漿蛋白",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不易通過",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "微血管靜水壓",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血液的壓力",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "把液體推出管壁",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "組織間隙",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "血漿膠體滲透壓",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "白蛋白不易穿過管壁",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "形成膠體滲透壓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "把液體拉回血管",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "淨過濾模型",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "動脈端 35−25＝10 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "向外：淨濾出",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "靜脈端 18−25＝−7 mmHg",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "向內：淨回收",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "淋巴回收",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "濾出略多於回收",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "多出的組織液與少量蛋白質",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "淋巴微管",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "淋巴管 → 回到靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "capillary-exchange-node-01",
+        "cardTop": 12.359375,
+        "detailTop": 139.53125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.53125,
+        "gridWidth": 366
+      },
+      {
+        "id": "capillary-exchange-node-04",
+        "cardTop": 12.09375,
+        "detailTop": 112.875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 98.875,
+        "gridWidth": 366
+      },
+      {
+        "id": "capillary-exchange-node-05",
+        "cardTop": 11.875,
+        "detailTop": 139.046875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.046875,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "capillary-exchange",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "動脈端",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "靜水壓 35 ＞ 膠體滲透壓 25",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "向外淨濾出 10 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "靜脈端",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "靜水壓 18 ＜ 膠體滲透壓 25",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "向內淨回收 7 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "淋巴回收",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "濾出略多於回收",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "組織液與少量蛋白質",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "淋巴微管 → 回靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "順濃度梯度擴散",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "O₂、CO₂、葡萄糖等",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "濃度較高的一側",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "通過微血管壁",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "濃度較低的一側",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "通過管壁的途徑",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "脂溶性物質",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "穿過內皮細胞",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "水與小分子",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "經細胞間隙",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "大分子如血漿蛋白",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不易通過",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "微血管靜水壓",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血液的壓力",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "把液體推出管壁",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "組織間隙",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "血漿膠體滲透壓",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "白蛋白不易穿過管壁",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "形成膠體滲透壓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "把液體拉回血管",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "淨過濾模型",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "動脈端 35−25＝10 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "向外：淨濾出",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "靜脈端 18−25＝−7 mmHg",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "向內：淨回收",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "capillary-exchange-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "淋巴回收",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "濾出略多於回收",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "多出的組織液與少量蛋白質",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "淋巴微管",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "淋巴管 → 回到靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "capillary-exchange-node-01",
+        "cardTop": 11.75,
+        "detailTop": 138.921875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.921875,
+        "gridWidth": 1052
+      },
+      {
+        "id": "capillary-exchange-node-04",
+        "cardTop": 11.921875,
+        "detailTop": 139.09375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.09375,
+        "gridWidth": 1052
+      },
+      {
+        "id": "capillary-exchange-node-05",
+        "cardTop": 11.921875,
+        "detailTop": 139.09375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.09375,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "major-vessels",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "頭頸與上肢",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "主動脈弓的三條分支",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腹部器官",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "腹腔幹／腸繫膜／腎動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "下肢",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "髂總 → 股 → 膕 → 脛動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "升主動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "主動脈弓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "胸主動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腹主動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "髂總動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "鎖骨下",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腋動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "橈、尺動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腹腔幹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "上腸繫膜",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "下腸繫膜",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腎動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "髂外動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "股動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "膕動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "脛前、脛後",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "上腔靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "下腔靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "大隱靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "上肢淺靜脈",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "major-vessels-node-01",
+        "cardTop": 12.046875,
+        "detailTop": 139.21875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.21875,
+        "gridWidth": 366
+      },
+      {
+        "id": "major-vessels-node-04",
+        "cardTop": 12.171875,
+        "detailTop": 139.34375,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 125.34375,
+        "gridWidth": 366
+      },
+      {
+        "id": "major-vessels-node-03",
+        "cardTop": 12.390625,
+        "detailTop": 113.171875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.171875,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "major-vessels",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "頭頸與上肢",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "主動脈弓的三條分支",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腹部器官",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "腹腔幹／腸繫膜／腎動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "下肢",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "髂總 → 股 → 膕 → 脛動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "升主動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "主動脈弓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "胸主動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腹主動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "髂總動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "頭臂幹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "左鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右頸總",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "右鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "鎖骨下",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腋動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "肱動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "橈、尺動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腹腔幹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "上腸繫膜",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "下腸繫膜",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腎動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "髂外動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "股動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "膕動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "脛前、脛後",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "major-vessels-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅：動脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "藍：靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "上腔靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "下腔靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "大隱靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "上肢淺靜脈",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "major-vessels-node-01",
+        "cardTop": 12.453125,
+        "detailTop": 139.625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.625,
+        "gridWidth": 1052
+      },
+      {
+        "id": "major-vessels-node-04",
+        "cardTop": 11.625,
+        "detailTop": 138.796875,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 124.796875,
+        "gridWidth": 1052
+      },
+      {
+        "id": "major-vessels-node-03",
+        "cardTop": 12.453125,
+        "detailTop": 139.625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.625,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-types",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "A 型 Rh＋",
+                "px": 19.366666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "O 型 Rh＋",
+                "px": 19.366666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "AB 型 Rh−",
+                "px": 19.366666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "血型與紅血球表面抗原",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "紅血球表面",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗原（凝集原）",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "決定血型",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "ABO 抗原與抗體",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "A 型：A 抗原／抗 B",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "B 型：B 抗原／抗 A",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "AB 型：A、B 抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "無抗 A、抗 B",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "O 型：無 A、B 抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "抗 A、抗 B",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "凝集反應",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "遇到對應抗體",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅血球黏聚",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "進而破壞",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "Rh 系統",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "有 D 抗原 → Rh 陽性",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "無 D 抗原 → Rh 陰性",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "Rh 陰性通常不天生帶抗 D",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "接觸 Rh 陽性血後才產生",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "輸血原則",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "以同型輸血為原則",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "輸入紅血球的抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "不可遇受血者對應抗體",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "O 型紅血球無 A、B 抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "傳統：萬能捐血者／受血者",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "血型鑑定",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "分別加入抗 A、抗 B、抗 D",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "看是否凝集",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "凝集表示具有對應抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "blood-types-node-01",
+        "cardTop": 12.484375,
+        "detailTop": 113.265625,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.265625,
+        "gridWidth": 366
+      },
+      {
+        "id": "blood-types-node-04",
+        "cardTop": 11.828125,
+        "detailTop": 112.609375,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 98.609375,
+        "gridWidth": 366
+      },
+      {
+        "id": "blood-types-node-06",
+        "cardTop": 12.390625,
+        "detailTop": 113.171875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.171875,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "blood-types",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "A 型 Rh＋",
+                "px": 58.68333333333333,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "O 型 Rh＋",
+                "px": 58.68333333333333,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "AB 型 Rh−",
+                "px": 58.68333333333333,
+                "clipped": false
+              },
+              {
+                "text": "抗 A",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 B",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 D",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "血清",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "血型與紅血球表面抗原",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "紅血球表面",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗原（凝集原）",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "決定血型",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "ABO 抗原與抗體",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "A 型：A 抗原／抗 B",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "B 型：B 抗原／抗 A",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "AB 型：A、B 抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "無抗 A、抗 B",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "O 型：無 A、B 抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "抗 A、抗 B",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "凝集反應",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "遇到對應抗體",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅血球黏聚",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "進而破壞",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "Rh 系統",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "有 D 抗原 → Rh 陽性",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "無 D 抗原 → Rh 陰性",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "Rh 陰性通常不天生帶抗 D",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "接觸 Rh 陽性血後才產生",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "輸血原則",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "以同型輸血為原則",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "輸入紅血球的抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "不可遇受血者對應抗體",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "O 型紅血球無 A、B 抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "傳統：萬能捐血者／受血者",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blood-types-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "血型鑑定",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "分別加入抗 A、抗 B、抗 D",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "看是否凝集",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "凝集表示具有對應抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "blood-types-node-01",
+        "cardTop": 12.421875,
+        "detailTop": 113.203125,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 99.203125,
+        "gridWidth": 1052
+      },
+      {
+        "id": "blood-types-node-04",
+        "cardTop": 12.203125,
+        "detailTop": 139.375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.375,
+        "gridWidth": 1052
+      },
+      {
+        "id": "blood-types-node-06",
+        "cardTop": 12.203125,
+        "detailTop": 139.375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.375,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphoid-organs",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "初級：骨髓、胸腺",
+                "px": 16.6,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "次級：淋巴結、脾臟、扁桃腺",
+                "px": 16.6,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "黏膜：扁桃腺、培氏斑、闌尾",
+                "px": 16.6,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-01",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "初級與次級淋巴器官",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "初級：骨髓、胸腺",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "淋巴球生成與成熟",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "次級：淋巴結、脾臟、扁桃腺",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "黏膜相關淋巴組織",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "遇見抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "啟動免疫防禦",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-02",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "胸腺",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "胸骨後方",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "縱膈前上部",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "T 細胞在此成熟",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "青春期後逐漸退化",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "被脂肪組織取代",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-03",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "脾臟",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "人體左上腹",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "最大的淋巴器官",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "白髓：淋巴球參與免疫",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "紅髓：過濾血液",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "清除老舊紅血球",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "與淋巴結的過濾對象不同",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-04",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "淋巴結構造",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "多條輸入淋巴管",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "被膜",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "皮質：B 細胞濾泡",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "副皮質：T 細胞",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "髓質",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "輸出淋巴管由門部離開",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-05",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "扁桃腺",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "咽扁桃腺",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腭扁桃腺",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "舌扁桃腺",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "環繞咽部",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "形成入口防線",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-06",
+        "measures": [
+          {
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "黏膜相關淋巴組織",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "消化道與呼吸道黏膜",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "遇見抗原",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "小腸迴腸的培氏斑",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "闌尾",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "屬於次級淋巴器官",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "lymphoid-organs-node-01",
+        "cardTop": 12.453125,
+        "detailTop": 113.234375,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.234375,
+        "gridWidth": 366
+      },
+      {
+        "id": "lymphoid-organs-node-04",
+        "cardTop": 11.796875,
+        "detailTop": 138.96875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 124.96875,
+        "gridWidth": 366
+      },
+      {
+        "id": "lymphoid-organs-node-01",
+        "cardTop": 12.453125,
+        "detailTop": 113.234375,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.234375,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "lymphoid-organs",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "state-1",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "初級：骨髓、胸腺",
+                "px": 50.3,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-2",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "次級：淋巴結、脾臟、扁桃腺",
+                "px": 50.3,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-3",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "人體右",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "人體左",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "黏膜：扁桃腺、培氏斑、闌尾",
+                "px": 50.3,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-01",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "初級與次級淋巴器官",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "初級：骨髓、胸腺",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "淋巴球生成與成熟",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "次級：淋巴結、脾臟、扁桃腺",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "黏膜相關淋巴組織",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "遇見抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "啟動免疫防禦",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-02",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "胸腺",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "胸骨後方",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "縱膈前上部",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "T 細胞在此成熟",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "青春期後逐漸退化",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "被脂肪組織取代",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-03",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "脾臟",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "人體左上腹",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "最大的淋巴器官",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "白髓：淋巴球參與免疫",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "紅髓：過濾血液",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "清除老舊紅血球",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "與淋巴結的過濾對象不同",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-04",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "淋巴結構造",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "多條輸入淋巴管",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "被膜",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "皮質：B 細胞濾泡",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "副皮質：T 細胞",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "髓質",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "輸出淋巴管由門部離開",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-05",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "扁桃腺",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "咽扁桃腺",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腭扁桃腺",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "舌扁桃腺",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "環繞咽部",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "形成入口防線",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lymphoid-organs-node-06",
+        "measures": [
+          {
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "黏膜相關淋巴組織",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "消化道與呼吸道黏膜",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "遇見抗原",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "小腸迴腸的培氏斑",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "闌尾",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "屬於次級淋巴器官",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "lymphoid-organs-node-01",
+        "cardTop": 11.625,
+        "detailTop": 112.40625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 98.40625,
+        "gridWidth": 1052
+      },
+      {
+        "id": "lymphoid-organs-node-04",
+        "cardTop": 12.40625,
+        "detailTop": 139.578125,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 125.578125,
+        "gridWidth": 1052
+      },
+      {
+        "id": "lymphoid-organs-node-01",
+        "cardTop": 11.625,
+        "detailTop": 112.40625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 98.40625,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "ecg-basics",
+    "width": 390,
+    "figureMeasures": [
+      {
+        "id": "ecg-basics-node-01",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "P 波 ≈ 0.09 秒",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "P",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "心房去極化 → 接著心房收縮",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-02",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "PR 間隔 0.12–0.20 秒",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "PR 段",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "含房室結約 0.1 秒延遲",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-03",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "Q",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "R",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "S",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "QRS < 0.12 秒：心室去極化",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "（心房再極化被遮蔽）",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-04",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "ST 段",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "T",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "QT 間隔",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "T 波＝心室再極化",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-05",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "R-R ＝ 0.80 秒",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "心率 ＝ 60 ÷ 0.80 ＝ 75 次/分",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-06",
+        "measures": [
+          {
+            "minPx": 13.280000000000001,
+            "texts": [
+              {
+                "text": "V1",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "V2",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "V3",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "V4",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "V5",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "V6",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "RA",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "LA",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "RL",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "LL",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "10 個電極 → 12 個導程",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "胸前 6（V1–V6）",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "四肢 4（RL 為接地）",
+                "px": 13.280000000000001,
+                "clipped": false
+              },
+              {
+                "text": "示意圖",
+                "px": 13.280000000000001,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "ecg-basics-node-01",
+        "cardTop": 12.171875,
+        "detailTop": 112.953125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 98.953125,
+        "gridWidth": 366
+      },
+      {
+        "id": "ecg-basics-node-04",
+        "cardTop": 11.515625,
+        "detailTop": 112.296875,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 98.296875,
+        "gridWidth": 366
+      },
+      {
+        "id": "ecg-basics-node-05",
+        "cardTop": 12.296875,
+        "detailTop": 113.078125,
+        "detailLeft": 12,
+        "detailWidth": 366,
+        "rowBottom": 99.078125,
+        "gridWidth": 366
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  },
+  {
+    "slug": "ecg-basics",
+    "width": 1280,
+    "figureMeasures": [
+      {
+        "id": "ecg-basics-node-01",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "P 波 ≈ 0.09 秒",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "P",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "心房去極化 → 接著心房收縮",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-02",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "PR 間隔 0.12–0.20 秒",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "PR 段",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "含房室結約 0.1 秒延遲",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-03",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "Q",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "R",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "S",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "QRS < 0.12 秒：心室去極化",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "（心房再極化被遮蔽）",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-04",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "ST 段",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "T",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "QT 間隔",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "T 波＝心室再極化",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-05",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "R-R ＝ 0.80 秒",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "心率 ＝ 60 ÷ 0.80 ＝ 75 次/分",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-basics-node-06",
+        "measures": [
+          {
+            "minPx": 40.24,
+            "texts": [
+              {
+                "text": "V1",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "V2",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "V3",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "V4",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "V5",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "V6",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "RA",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "LA",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "RL",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "LL",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "10 個電極 → 12 個導程",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "胸前 6（V1–V6）",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "四肢 4（RL 為接地）",
+                "px": 40.24,
+                "clipped": false
+              },
+              {
+                "text": "示意圖",
+                "px": 40.24,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "geometry": [
+      {
+        "id": "ecg-basics-node-01",
+        "cardTop": 11.703125,
+        "detailTop": 112.484375,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 98.484375,
+        "gridWidth": 1052
+      },
+      {
+        "id": "ecg-basics-node-04",
+        "cardTop": 12.484375,
+        "detailTop": 113.265625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 99.265625,
+        "gridWidth": 1052
+      },
+      {
+        "id": "ecg-basics-node-05",
+        "cardTop": 12.484375,
+        "detailTop": 113.265625,
+        "detailLeft": 114,
+        "detailWidth": 1052,
+        "rowBottom": 99.265625,
+        "gridWidth": 1052
+      }
+    ],
+    "accordion": true,
+    "closeButton": true,
+    "explored": 6,
+    "foundationPassed": 6,
+    "retryRequiresReview": true,
+    "completeOnLastAnswer": 1,
+    "errors": []
+  }
+]

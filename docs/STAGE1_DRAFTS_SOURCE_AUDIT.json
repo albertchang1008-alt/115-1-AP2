@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "cardiac-electrical",
+    "idsMatchOriginalAndWorkbook": true,
+    "questionCount": 11,
+    "staticTeachingTextUnchanged": true,
+    "contentFlagsForClaude": [],
+    "comparison": "All non-script/style text, whitespace-normalized after typography changes",
+    "teachingDataExactlyIdentical": true
+  },
+  {
+    "slug": "rbc-homeostasis",
+    "idsMatchOriginalAndWorkbook": true,
+    "questionCount": 11,
+    "staticTeachingTextUnchanged": true,
+    "contentFlagsForClaude": [
+      {
+        "line": 609,
+        "text": "'釋放肝素，抑制脾臟吞噬紅血球'"
+      },
+      {
+        "line": 699,
+        "text": "title: '3. 【生理判讀】一位登山客挑戰海拔 3,800 公尺高山，在山頂停留數週後進行血液檢查，發現其血比容（Hct）由原本的 45% 代償性上升至 55%。請問此生理代償過程的正確順序為何？',"
+      }
+    ],
+    "comparison": "All non-script/style text, whitespace-normalized after typography changes",
+    "teachingDataExactlyIdentical": true
+  }
+]

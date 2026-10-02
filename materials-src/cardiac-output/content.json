@@ -1,0 +1,320 @@
+{
+  "slug": "cardiac-output",
+  "version": "v1",
+  "experience": "guided",
+  "title": "心輸出量的調節",
+  "subtitle": "心輸出量由心率與每搏量決定；前負荷、收縮力、後負荷與自主神經共同調節。",
+  "label": "心輸出量的調節｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "CO = HR × SV",
+      "label": "CO = HR × SV"
+    },
+    {
+      "value": "約 5 L/min",
+      "label": "靜息成人（70 次/分 × 70 mL）"
+    },
+    {
+      "value": "SV = EDV − ESV",
+      "label": "SV = EDV − ESV"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換情境，比較圖中的路徑、數值與反應。",
+    "figure": "cardiac-output-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "交感興奮",
+        "explain": "交感興奮：心率↑、收縮力↑ → CO↑"
+      },
+      {
+        "id": "state-2",
+        "label": "迷走（副交感）興奮",
+        "explain": "迷走（副交感）興奮：心率↓ → CO↓"
+      },
+      {
+        "id": "state-3",
+        "label": "回心血量增加",
+        "explain": "回心血量增加：EDV↑ → Frank-Starling → SV↑"
+      }
+    ],
+    "predict": {
+      "question": "回心血量增加（生理範圍內），下一次收縮的每搏量？",
+      "options": [
+        "相反方向",
+        "增加",
+        "不變",
+        "無法由此模型判斷"
+      ],
+      "answer": 1,
+      "feedback": "增加"
+    }
+  },
+  "nodes": [
+    {
+      "id": "cardiac-output-node-01",
+      "tag": "01",
+      "title": "心輸出量＝心率×每搏量",
+      "summary": "一側心室每分鐘射出的血量",
+      "figure": "cardiac-output-node-01.svg",
+      "concept": "心輸出量＝心率×每搏量：一側心室每分鐘射出的血量；靜息約 5 L/min；長時間左右心輸出量相等。應用：運動時可增加數倍。",
+      "points": [
+        "一側心室每分鐘射出的血量",
+        "靜息約 5 L/min",
+        "長時間左右心輸出量相等"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "CO＝HR×SV，表示一側心室每分鐘射出的血量。"
+      }
+    },
+    {
+      "id": "cardiac-output-node-02",
+      "tag": "02",
+      "title": "每搏量＝EDV−ESV",
+      "summary": "EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL",
+      "figure": "cardiac-output-node-02.svg",
+      "concept": "每搏量＝EDV−ESV：EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL；射出分率＝SV÷EDV 約 60%。",
+      "points": [
+        "EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL",
+        "射出分率＝SV÷EDV 約 60%",
+        "EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL；射出分率＝SV÷EDV 約 60%。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "SV＝EDV−ESV＝120−50＝70 mL。"
+      }
+    },
+    {
+      "id": "cardiac-output-node-03",
+      "tag": "03",
+      "title": "前負荷與 Frank-Starling 定律",
+      "summary": "前負荷＝收縮前心室被血液撐開的程度（EDV）",
+      "figure": "cardiac-output-node-03.svg",
+      "concept": "前負荷與 Frank-Starling 定律：前負荷＝收縮前心室被血液撐開的程度（EDV）；生理範圍內心肌被拉長越多，收縮越強，SV↑；使左右心輸出量保持平衡。",
+      "points": [
+        "前負荷＝收縮前心室被血液撐開的程度（EDV）",
+        "生理範圍內心肌被拉長越多，收縮越強，SV↑",
+        "使左右心輸出量保持平衡"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "生理範圍內，前負荷增加使心肌拉長，依 Frank-Starling 收縮增強。"
+      }
+    },
+    {
+      "id": "cardiac-output-node-04",
+      "tag": "04",
+      "title": "收縮力",
+      "summary": "相同前負荷下，交感神經（正腎上腺素）與腎上腺素使收縮力增強 → SV↑、ESV↓",
+      "figure": "cardiac-output-node-04.svg",
+      "concept": "收縮力：相同前負荷下，交感神經（正腎上腺素）與腎上腺素使收縮力增強 → SV↑、ESV↓。",
+      "points": [
+        "相同前負荷下，交感神經（正腎上腺素）與腎上腺素使收縮力增強 → SV↑、ESV↓",
+        "相同前負荷下，交感神經（正腎上腺素）與腎上腺素使收縮力增強 → SV↑、ESV↓。",
+        "相同前負荷下，交感神經（正腎上腺素）與腎上腺素使收縮力增強 → SV↑、ESV↓。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "交感作用使心率與收縮力增加。"
+      }
+    },
+    {
+      "id": "cardiac-output-node-05",
+      "tag": "05",
+      "title": "後負荷",
+      "summary": "心室射血必須克服的動脈壓力",
+      "figure": "cardiac-output-node-05.svg",
+      "concept": "後負荷：心室射血必須克服的動脈壓力；後負荷↑時 SV 傾向↓。",
+      "points": [
+        "心室射血必須克服的動脈壓力",
+        "後負荷↑時 SV 傾向↓",
+        "心室射血必須克服的動脈壓力；後負荷↑時 SV 傾向↓。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "後負荷是心室射血必須克服的動脈壓力。"
+      }
+    },
+    {
+      "id": "cardiac-output-node-06",
+      "tag": "06",
+      "title": "自主神經與心率",
+      "summary": "交感使心率↑",
+      "figure": "cardiac-output-node-06.svg",
+      "concept": "自主神經與心率：交感使心率↑；迷走神經（乙醯膽鹼）使心率↓；安靜時迷走作用較強，心率低於竇房結自身頻率。應用：心率過快時舒張期縮短、充血時間減少。",
+      "points": [
+        "交感使心率↑",
+        "迷走神經（乙醯膽鹼）使心率↓",
+        "安靜時迷走作用較強，心率低於竇房結自身頻率"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "迷走神經以乙醯膽鹼降低心率。"
+      }
+    }
+  ],
+  "foundation": [
+    {
+      "id": "cardiac-output-foundation-q01",
+      "stem": "CO＝？",
+      "options": [
+        "每搏量÷心率",
+        "血壓×阻力",
+        "心率×每搏量",
+        "心率＋每搏量"
+      ],
+      "answer": 2,
+      "hint": "回想每分鐘的搏動次數與每次射出的血量。",
+      "explain": "CO＝HR×SV，表示一側心室每分鐘射出的血量。",
+      "nodeId": "cardiac-output-node-01"
+    },
+    {
+      "id": "cardiac-output-foundation-q02",
+      "stem": "EDV 120、ESV 50 mL，SV？",
+      "options": [
+        "70",
+        "50",
+        "120 mL",
+        "170"
+      ],
+      "answer": 0,
+      "hint": "用舒張末期容積減去收縮末期容積。",
+      "explain": "SV＝EDV−ESV＝120−50＝70 mL。",
+      "nodeId": "cardiac-output-node-02"
+    },
+    {
+      "id": "cardiac-output-foundation-q03",
+      "stem": "生理範圍內前負荷增加，收縮力？",
+      "options": [
+        "不變",
+        "停止",
+        "減弱",
+        "增強"
+      ],
+      "answer": 3,
+      "hint": "注意生理範圍內心肌拉長與收縮的關係。",
+      "explain": "生理範圍內，前負荷增加使心肌拉長，依 Frank-Starling 收縮增強。",
+      "nodeId": "cardiac-output-node-03"
+    },
+    {
+      "id": "cardiac-output-foundation-q04",
+      "stem": "交感對心臟？",
+      "options": [
+        "只作用於血管",
+        "心率與收縮力增加",
+        "使心臟停止",
+        "心率下降"
+      ],
+      "answer": 1,
+      "hint": "比較交感作用對心率與收縮力的方向。",
+      "explain": "交感作用使心率與收縮力增加。",
+      "nodeId": "cardiac-output-node-04"
+    },
+    {
+      "id": "cardiac-output-foundation-q05",
+      "stem": "迷走神經對心臟？",
+      "options": [
+        "增加心率",
+        "增加後負荷",
+        "降低心率",
+        "增加收縮力"
+      ],
+      "answer": 2,
+      "hint": "回想安靜時迷走神經的作用。",
+      "explain": "迷走神經以乙醯膽鹼降低心率。",
+      "nodeId": "cardiac-output-node-06"
+    },
+    {
+      "id": "cardiac-output-foundation-q06",
+      "stem": "後負荷指？",
+      "options": [
+        "心室射血要克服的動脈壓力",
+        "心房壓力",
+        "心率",
+        "舒張末期容積"
+      ],
+      "answer": 0,
+      "hint": "分清射血前的充血與射血時要克服的壓力。",
+      "explain": "後負荷是心室射血必須克服的動脈壓力。",
+      "nodeId": "cardiac-output-node-05"
+    }
+  ],
+  "cases": [
+    {
+      "id": "cardiac-output-case-q01",
+      "stem": "【生活情境】慢跑時心率 70→140、SV 70→100 mL，CO 約？",
+      "options": [
+        "7 L/min",
+        "4.9 L/min",
+        "9.8 L/min",
+        "14 L/min"
+      ],
+      "answer": 3,
+      "hint": "先乘心率與每搏量，再將 mL 換成 L。",
+      "explain": "140×100＝14000 mL/min＝14 L/min。",
+      "nodeId": "cardiac-output-node-01"
+    },
+    {
+      "id": "cardiac-output-case-q02",
+      "stem": "【模型觀察】平躺抬腿使回心血量增加，下一次 SV？",
+      "options": [
+        "不變",
+        "增加",
+        "變為零",
+        "減少"
+      ],
+      "answer": 1,
+      "hint": "把回心血量、EDV 與 Frank-Starling 連起來。",
+      "explain": "回心血量增加使 EDV 增加，生理範圍內 SV 增加。",
+      "nodeId": "cardiac-output-node-03"
+    },
+    {
+      "id": "cardiac-output-case-q03",
+      "stem": "【生理判讀】交感作用使收縮力增強，ESV？",
+      "options": [
+        "不變",
+        "等於 EDV",
+        "減少",
+        "增加"
+      ],
+      "answer": 2,
+      "hint": "收縮更強時，收縮末期留下的血量較多還是較少？",
+      "explain": "相同前負荷下收縮力增強，射出較多血，ESV 減少。",
+      "nodeId": "cardiac-output-node-04"
+    },
+    {
+      "id": "cardiac-output-case-q04",
+      "stem": "【生理判讀】主動脈壓升高、其他不變，SV？",
+      "options": [
+        "減少",
+        "不變",
+        "加倍",
+        "增加"
+      ],
+      "answer": 0,
+      "hint": "其他條件固定，心室要克服的壓力增加。",
+      "explain": "主動脈壓升高使後負荷增加，其他條件不變時 SV 傾向減少。",
+      "nodeId": "cardiac-output-node-05"
+    },
+    {
+      "id": "cardiac-output-case-q05",
+      "stem": "【模型觀察】心率極快時心室充血時間？",
+      "options": [
+        "不變",
+        "與心率無關",
+        "增加",
+        "減少，EDV 可能下降"
+      ],
+      "answer": 3,
+      "hint": "心率變快時，每次舒張可用的時間會變短。",
+      "explain": "心率極快使舒張期縮短，充血時間減少，EDV 可能下降。",
+      "nodeId": "cardiac-output-node-06"
+    }
+  ],
+  "credits": [
+    "OpenStax A&P 2e 19.4 Cardiac Physiology。"
+  ]
+}
