@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.6.2
+目前版本：1.6.3
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -19,13 +19,13 @@
 | 項目 | 狀態 |
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
-| 可部署分支 | 無待部署。`hotfix/1.6.2-student-name` 已等於 origin/main（119db4c 之後僅 handoff 更新） |
+| 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`：已實作、待 Claude 驗收；未 push／部署。詳見下方及驗收報告。 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
 | 1.6.2 單元卡姓名 | **已上線（2026-10-02）**。已完成／已完成（逾期）時狀態標籤下方顯示本人名冊姓名，與標籤同大小。報告 `docs/STUDENT_NAME_1.6.2_ACCEPTANCE.md` |
 | NotebookLM 教材初稿流程 | 2026-09-30 已提供教師「互動式資訊圖表」內容整理提示（含明確範圍、排除項目與來源依據要求）；NotebookLM 僅整理可教學內容、圖表建議與題目草案，後續由 AI agent 依平台元件、追蹤與建置流程實作。 |
-| 五份新教材 | `blood-vessels-v1`、`circulation-routes-v1`、`blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`（來源分支 aabb2d2）：已登錄、已 commit。**已上線（2026-10-02）**（同上）。待部署 |
+| 五份新教材 | `blood-vessels-v1`、`circulation-routes-v1`、`blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`（來源分支 aabb2d2）：已登錄、已 commit。**已上線（2026-10-02）**（同上）。 |
 | 資訊圖表題庫補登 | **已上線（2026-10-02）**：以 git 7e4732b 對 2d8fcd5 逐格比對，既有 106 題零變動、說明頁僅合計 106→161；新 55 題與教材 HTML 題幹／選項／正解／題序一致、ID 不重複、Zuvio 序號正確。**待教師把第 108–162 列貼到 Google Sheet 題庫分頁後同步** |
 | 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
 | 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
@@ -93,12 +93,6 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 21. 測試學生帳號用 `config/testStudents` 白名單，只放寬信箱網域，放專屬測試班。
 22. 教材建置流程：agent 先用 `npm run materials:preview <slug>`（只產生教材檔、不登錄教材目錄）＋`npm run materials:shots <slug>`，**停下來請教師看畫面**；教師滿意後才執行 `npm run materials:build <slug>` 完成登錄並 commit。不要直接改 `public/materials/` 的 HTML，也不要用教材工作室重複匯入元件庫建置的教材。 **教師決定（2026-10-01）：每份新資訊圖表定稿後，必須把 6 先備＋5 情境題寫入 `html/資訊圖表題庫_上傳用.xlsx`**（欄位同既有列：題目 ID 與教材一致、單選四選一、正確答案代碼與 Zuvio 序號、解析＋①～④引導式解析、講義標題與教材連結；選項打散；「說明」分頁更新次單元來源與合計題數），未寫入題庫不算完成。**只能在最後增列新列，既有列一律不得修改、刪除或重新排序（已上傳平台、學生已在作答；改動會讓該分類產生新題庫版本）。**
 
-## 合併驗證（2026-10-02 Codex）
-
-- `npm run check`：前端 115／Functions 18 測試、兩端建置、version:check 全通過。
-- 題庫及五份公開 HTML／目錄與 aabb2d2 逐位元相同；原 106 題 2,544 格與列 XML 不變，合計 161 題；coagulation-v1 未納入。
-- 本機真實 Student 預覽 390／1280、完成／逾期／進行中及最大字級、教師預覽等邊界通過，無錯誤；五份教材 Chrome 390／1280 開啟與互動通過（explore、複習後重試、最後答對 complete、無錯誤／溢位）。
-
 ## 待辦
 
 **部署後教師待辦（1.6.2 已於 2026-10-02 上線）**
@@ -106,17 +100,13 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 
-**交辦 Codex：1.6.3 知識節點點擊體驗（2026-10-02 教師回報「點節點怪怪的」，Claude 已重現）**
-- 問題（共用教材元件庫 kit，已上線的五份新教材都有）：①點節點卡片後，詳細內容其實開在**全部 6 張卡片之後**（手機約在 3,000px 處、當下畫面外），畫面只看到卡片變紫色，像沒反應；②可同時開好幾個，依節點順序疊在下方而非點擊順序；③卡片內已放完整節點圖（手機每張約 400px 高），展開後同一張圖又出現一次。
-- 規格：
-  1. **手風琴**：同時只開一個節點；開新節點會關掉前一個（關閉時照舊送 nodeTime）。再點同一張卡＝收合。
-  2. **就地展開**：詳細內容出現在被點卡片的**正下方**（手機單欄直接接在該卡下；桌面多欄時插在該卡所在列之下、橫跨整列），並平滑捲動讓詳細內容頂端出現在畫面中（保留卡片標題可見）。
-  3. **卡片瘦身**：卡片只放標題＋一句摘要（可留小圖示），完整節點圖只在詳細內容中出現一次。
-  4. 詳細內容底部加「收合」按鈕；被選卡片維持選取樣式與 `aria-expanded`。
-  5. 第二關答錯「前往對應節點複習」沿用同一套開啟邏輯（就地展開＋捲動）。
-- 追蹤不變：每節點首次開啟送一次 explore；nodeTime 規則不變；節點與題目 ID、題目內容都不改。
-- 範圍：改 `materials-src/kit/`，重建 kit 產生的已登錄教材（blood-vessels、circulation-routes、blood-pressure-regulation、lymphatic-system、hemodynamics）並**覆寫原 v1**（只改互動、內容與 ID 不變，學生紀錄延續）；kit 產生但未發布給學生的 v1（heart-structure、cardiac-conduction、cardiac-cycle、ecg-basics）一併重建。手工單檔教材（各 v2、coronary-circulation-v1 等）不動。
-- 分支：從 main（119db4c）建 `hotfix/1.6.3-node-detail`，版本 1.6.3。390／1280 截圖：點第 1、第 4 個節點後的畫面（詳細內容須在可視範圍內）、切換節點、收合。不 push、不部署，完成交 Claude 驗收。
+**1.6.3 知識節點點擊體驗：待 Claude 驗收**
+- 分支 `hotfix/1.6.3-node-detail`，從 `hotfix/1.6.2-student-name` 790e78f 建立（正式 main 119db4c＋交接更新）。版本已同步 1.6.3；本次提交 `fix: 1.6.3 知識節點就地展開與手風琴 [Codex]`；未 push、未部署、不動 main。
+- kit 改手風琴：同時一個；手機接在所點卡片下、桌面接在該列下並跨整列；平滑捲動保留卡片標題及詳細內容頂端。卡片只放標題／摘要、完整圖只在詳細內容；底部「收合」，aria-expanded／選取樣式同步，答錯複習共用開啟邏輯。
+- 首開 explore 各一次；手風琴關閉、再次點卡及底部收合均回報 nodeTime，visibilitychange 沿用。節點／題目 ID、內容、圖解不變。
+- 九份 kit v1 已以 materials:build 重建覆寫：blood-vessels、circulation-routes、blood-pressure-regulation、lymphatic-system、hemodynamics、heart-structure、cardiac-conduction、cardiac-cycle、ecg-basics。教師明確授權本次覆寫 v1；手工各 v2／coronary-circulation 等及題庫 xlsx 逐位元未變。
+- npm run check 全通過（前端 115／Functions 18、兩端 build、version:check）；九份 × 390／1280 共 18 情境通過、72 張截圖。
+- 驗證結果與 390／1280 節點 1、4（切換）、收合、答錯複習截圖見 `docs/NODE_DETAIL_1.6.3_ACCEPTANCE.md`；交 Claude 最後驗收後由教師決定部署。
 
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。

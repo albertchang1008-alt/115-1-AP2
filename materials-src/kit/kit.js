@@ -41,9 +41,9 @@ export function render(content, figures) {
     + (content.experience === 'guided' ? '<div class="prefs-bar"><label>字級 <select data-pref="font"><option value="1">標準</option><option value="1.15">較大</option><option value="1.3">最大</option></select></label> <label>色系 <select data-pref="theme"><option value="warm">暖色</option><option value="cool">冷色</option></select></label></div><button type="button" data-go-quiz>兩階段隨堂診斷</button>' : '')
     + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
     + renderLab(content.lab, figures)
-    + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><img alt="" src="data:image/svg+xml,${encodeURIComponent(figures[n.figure])}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}</div>`
-    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div></article>`).join('')
-    + `</section>`
+    + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}`
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div><button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
+    + `</div></section>`
     + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
     + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
     + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
@@ -61,12 +61,53 @@ export function mount(content, figures) {
 
   // 知識節點：第一次展開送 explore；收合或分頁隱藏時送前景停留秒數
   const opened = new Map(), explored = new Set();
-  document.querySelectorAll('[data-node]').forEach(b => b.addEventListener('click', () => {
-    const id = b.dataset.node, d = document.querySelector('#detail-' + id), was = d.hidden;
-    d.hidden = !was; b.setAttribute('aria-expanded', String(was));
-    if (was) { if (!explored.has(id)) { explored.add(id); CL.explore(id); } opened.set(id, performance.now()); }
-    else { const start = opened.get(id); if (start) CL.nodeTime(id, (performance.now() - start) / 1000); opened.delete(id); }
+  const buttons = [...document.querySelectorAll('.node-button')];
+  const closeNode = id => {
+    document.querySelector('#detail-' + id).hidden = true;
+    buttons.find(b => b.dataset.node === id)?.setAttribute('aria-expanded', 'false');
+    const start = opened.get(id);
+    if (start !== undefined) CL.nodeTime(id, (performance.now() - start) / 1000);
+    opened.delete(id);
+  };
+  // 詳細內容橫跨所在列；依實際卡片位置定位，亦支援窄版與字級調整。
+  const placeDetail = id => {
+    const button = buttons.find(b => b.dataset.node === id);
+    const detail = document.querySelector('#detail-' + id);
+    detail.hidden = true;
+    const rowTop = button.offsetTop;
+    const last = buttons.filter(b => b.offsetTop === rowTop).at(-1);
+    last.after(detail);
+    detail.hidden = false;
+  };
+  const revealNode = id => {
+    const button = buttons.find(b => b.dataset.node === id);
+    const detail = document.querySelector('#detail-' + id);
+    if (!button || !detail) return;
+    buttons.filter(b => b.dataset.node !== id && b.getAttribute('aria-expanded') === 'true').forEach(b => closeNode(b.dataset.node));
+    const wasClosed = detail.hidden;
+    placeDetail(id);
+    button.setAttribute('aria-expanded', 'true');
+    if (wasClosed) {
+      if (!explored.has(id)) { explored.add(id); CL.explore(id); }
+      opened.set(id, performance.now());
+    }
+    // 精簡卡片與詳細內容頂端一起留在視窗中。
+    button.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  buttons.forEach(b => b.addEventListener('click', () => {
+    if (b.getAttribute('aria-expanded') === 'true') closeNode(b.dataset.node);
+    else revealNode(b.dataset.node);
   }));
+  document.querySelectorAll('[data-close-node]').forEach(b => b.addEventListener('click', () => {
+    closeNode(b.dataset.closeNode);
+    const button = buttons.find(x => x.dataset.node === b.dataset.closeNode);
+    button.focus({ preventScroll: true });
+    button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }));
+  new ResizeObserver(() => {
+    const active = buttons.find(b => b.getAttribute('aria-expanded') === 'true');
+    if (active) placeDetail(active.dataset.node);
+  }).observe(document.querySelector('.nodes'));
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { for (const [id, start] of opened) CL.nodeTime(id, (performance.now() - start) / 1000); opened.clear(); }
   });
@@ -99,14 +140,7 @@ export function mount(content, figures) {
     completionSent = true;
     CL.complete();
   };
-  const openForReview = id => {
-    const button = document.querySelector(`.node-button[data-node="${id}"]`), detail = document.querySelector('#detail-' + id);
-    if (!detail.hidden) { detail.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
-    detail.hidden = false; button?.setAttribute('aria-expanded', 'true');
-    if (!explored.has(id)) { explored.add(id); CL.explore(id); }
-    opened.set(id, performance.now());
-    detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const openForReview = revealNode;
   const restartCases = () => {
     cases = 0;
     completionSent = false;
