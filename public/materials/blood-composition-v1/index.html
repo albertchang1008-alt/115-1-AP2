@@ -36,7 +36,10 @@ body{border-top:6px solid var(--accent);background:var(--bg)}
  .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
 }
 
-:root{--accent:hsl(42 65% 27%);--accent-soft:hsl(42 40% 95%);--primary:hsl(42 65% 27%);--primary-dark:hsl(42 65% 27%);--primary-light:hsl(42 40% 95%);--b:hsl(42 65% 27%);--p:hsl(42 40% 95%);--bg:hsl(42 25% 98%);--border:hsl(42 25% 79%);--focus-outline:3px solid hsl(42 65% 27%);--tissue:hsl(42 40% 95%)}
+/* No extra fact: keep a dash in desktop comparisons, omit the empty mobile card field. */
+@media(max-width:760px){.learning-summary td.summary-empty-cell{display:none}}
+
+:root{--accent:hsl(40 65% 27%);--accent-soft:hsl(40 40% 95%);--primary:hsl(40 65% 27%);--primary-dark:hsl(40 65% 27%);--primary-light:hsl(40 40% 95%);--b:hsl(40 65% 27%);--p:hsl(40 40% 95%);--bg:hsl(40 25% 98%);--border:hsl(40 25% 79%);--focus-outline:3px solid hsl(40 65% 27%);--tissue:hsl(40 40% 95%)}
 header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px}h1{color:var(--accent)}.mode-btn.active,.mode-btn[aria-selected="true"],.filter-btn.active,.filter-btn[aria-pressed="true"],.action-btn,.next,.node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}</style></head>
 <body>
 <main class="wrap">

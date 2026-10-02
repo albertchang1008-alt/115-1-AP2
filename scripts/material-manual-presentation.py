@@ -7,9 +7,25 @@ import json,re
 ROOT=Path(__file__).resolve().parent.parent
 EXCLUDED={'course-orientation-v1','blood-pre-v1','blood-post-v1','coagulation-v1'}
 
+def clean_rows(rows):
+    result=[]
+    for row in rows:
+        seen=[];out=[row[0]]
+        for cell in row[1:]:
+            keep=[]
+            for clause in re.split(r'[。；;\n]+',cell):
+                clause=clause.strip()
+                key=re.sub(r'[\s，、：:（）()「」『』]','',clause)
+                if not key or any(key==old or (len(key)>=6 and len(old)>=6 and (key in old or old in key)) for old in seen):continue
+                seen.append(key);keep.append(clause)
+            out.append('；'.join(keep) or '—')
+        result.append(out)
+    return result
+
 def table(rows,title):
+    rows=clean_rows(rows)
     heads=['主題','關鍵概念','整理重點']
-    return '<section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>'+escape(title)+'｜概念比較</caption><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in heads)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<th scope="row">'+escape(c)+'</th>' if i==0 else '<td data-label="'+heads[i]+'">'+escape(c)+'</td>' for i,c in enumerate(row))+'</tr>' for row in rows)+'</tbody></table></section>'
+    return '<section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><table><caption>'+escape(title)+'｜概念比較</caption><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in heads)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<th scope="row">'+escape(c)+'</th>' if i==0 else '<td'+(' class="summary-empty-cell"' if c=='—' else '')+' data-label="'+heads[i]+'">'+escape(c)+'</td>' for i,c in enumerate(row))+'</tr>' for row in rows)+'</tbody></table></section>'
 
 class EndOfPane(HTMLParser):
     def __init__(self,source,target):
@@ -56,6 +72,10 @@ for p in sorted((ROOT/'public/materials').glob('*/index.html')):
                 detail='；'.join(x.get_text(' ',strip=True) for x in points[:2])
                 rows.append([heading.get_text(' ',strip=True),key,detail])
     assert rows,(slug,'No summary source')
+    existing=doc.select_one('.learning-summary')
+    if existing:
+        rows=[[c.get_text(' ',strip=True) for c in row.select('th,td')] for row in existing.select('tbody tr')]
+        source=re.sub(r'<section class="learning-summary"[\s\S]*?</section>',lambda _:table(rows,doc.title.get_text()),source,count=1)
     if 'class="learning-summary"' not in source:
         pane=doc.select_one('#pane-infographic,#infographic-pane,#infographic,#pinfo')
         assert pane,slug

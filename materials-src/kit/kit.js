@@ -34,10 +34,28 @@ function renderQuestion(q) {
   return `<h3>${esc(q.stem)}</h3><div class="options">${shuffle(q.options.map((text, answer) => ({ text, answer }))).map(o => `<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>`;
 }
 
+// Normalize punctuation before comparison; split compound points to retain only new clauses.
+function summaryClauses(text) {
+  return text.split(/[。；;\n]+/).map(s=>s.trim()).filter(Boolean);
+}
+function summaryKey(text) { return text.replace(/[\s，、：:（）()「」『』]/g,''); }
+function summaryRow(row) {
+  const seen=[];
+  return row.map((cell,i)=>{
+    if(i===0)return cell;
+    const keep=[];
+    for(const clause of summaryClauses(cell)) {
+      const key=summaryKey(clause);
+      if(!key || seen.some(s=>s===key || (s.length>=6 && key.length>=6 && (s.includes(key)||key.includes(s)))))continue;
+      seen.push(key);keep.push(clause);
+    }
+    return keep.join('；') || '—';
+  });
+}
 function renderSummary(content) {
-  const clean = s => s.replace(/[。；\s]/g,'');
-  const table = content.summaryTable || {headers:['主題','關鍵概念','整理重點'], rows:content.nodes.map(n => [n.title,n.summary,[...new Set(n.points)].filter(p=>!clean(n.summary).includes(clean(p))&&clean(p)!==clean(n.concept)).join('；')||n.clinical.text])};
-  return `<section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><p>把相關概念放在一起比較；回到知識節點可看完整圖解。</p><table><caption>${esc(content.title)}｜概念比較</caption><thead><tr>${table.headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map((cell,i)=>i?`<td data-label="${esc(table.headers[i])}">${esc(cell)}</td>`:`<th scope="row">${esc(cell)}</th>`).join('')}</tr>`).join('')}</tbody></table></section>`;
+  const table = content.summaryTable || {headers:['主題','關鍵概念','整理重點'], rows:content.nodes.map(n => [n.title,n.summary,n.points.join('；')])};
+  const rows=table.rows.map(summaryRow);
+  return `<section class="learning-summary" aria-labelledby="summary-title"><h2 id="summary-title">重點整理表</h2><p>把相關概念放在一起比較；回到知識節點可看完整圖解。</p><table><caption>${esc(content.title)}｜概念比較</caption><thead><tr>${table.headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map((cell,i)=>i?`<td${cell==='—'?' class="summary-empty-cell"':''} data-label="${esc(table.headers[i])}">${esc(cell)}</td>`:`<th scope="row">${esc(cell)}</th>`).join('')}</tr>`).join('')}</tbody></table></section>`;
 }
 
 export function render(content, figures) {

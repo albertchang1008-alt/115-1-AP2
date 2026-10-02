@@ -25,3 +25,6 @@ body{border-top:6px solid var(--accent);background:var(--bg)}
  .learning-summary th,.learning-summary td{border:0;border-bottom:1px solid var(--border,#ddd)}
  .learning-summary td::before{content:attr(data-label) "：";display:block;font-weight:800;color:var(--accent)}
 }
+
+/* No extra fact: keep a dash in desktop comparisons, omit the empty mobile card field. */
+@media(max-width:760px){.learning-summary td.summary-empty-cell{display:none}}
