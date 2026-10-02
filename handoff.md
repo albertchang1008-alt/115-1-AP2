@@ -19,8 +19,8 @@
 | 項目 | 狀態 |
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
-| 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`，已 commit、待 Claude 驗收；未 push／部署。 |
-| 第一階段補齊教材 | **待 Claude 驗收**。`feature/stage1-supplement` 從 `f7b97a7` 建立，最新提交見 `git log -1`；6 新教材＋2 草稿登錄，ECG 字級修正，題庫 227 題。報告 `docs/STAGE1_SUPPLEMENT_ACCEPTANCE.md`；未 push／部署。 |
+| 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（998fbe1，含 1.6.3）：**2026-10-02 Claude 驗收通過，部署前需 2 項小修**（見待辦）。6 新教材＋電性活動／紅血球上平台＋題庫增列 66 題 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -33,7 +33,7 @@
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | 五個 `html/*.rtf` 草稿維持未追蹤、不 commit； `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 | 教材工作室 | 2026-09-24 已健康檢查：`npm run materials:studio` 可在 `127.0.0.1:5183` 提供 `/api/list`；目前列出 11 份本機教材，其中 `coagulation-v1` 有檔案但未登錄目錄（既有狀態，勿處理）。匯入區可貼上、點擊選取或拖放 `.html/.htm/.xhtml`；檔案先填入程式碼欄與預覽，需按匯入才寫檔。`.command` 與 `.app` 會主動載入 Node 22.23.2，若 5183 已有健康服務則直接開啟。僅本機匯入／稽核／目錄管理，不跑 git、push 或部署。 2026-09-25 起啟動器會比對 `/api/version`：程式檔比執行中的服務新（或舊服務不支援版本檢查）就自動關掉重開，避免沿用舊稽核邏輯。 |
-| ECG 基礎教材 | `feature/ecg-basics`：`ecg-basics-v1`（未發布）。2026-09-24 Codex 實作驗收不通過後，**由 Claude 依規格完成**（模擬器、暫停選拍／放大標示、卡尺、第一關 2 選擇＋4 標示），驗收紀錄 `docs/ECG_SIM_LABEL_ACCEPTANCE.md`。待教師醫學內容複核後才可發布。 |
+| ECG 基礎教材 | `ecg-basics-v1`：**2026-10-02 教師複核通過**（導程說明、示意模型說明、credits 維持原狀）；標題須改為「心電圖基礎」（Codex 尚未改，見待辦）。放「心臟II」活動，既有 Sheet 7 題不動 |
 | 三份心臟圖像強化教材 | `feature/ecg-basics`：`cardiac-conduction-v2`、`cardiac-cycle-v2`、`coronary-circulation-v1`（Codex 手工單檔版，教師已看過並同意登錄）。**2026-09-25 Claude 驗收通過**：390／1280 無錯誤與橫向溢位、圖檔皆載入、6 節點各送一次 explore、第二關全對才 complete（錯一題不送）、題目 ID 與目錄一致；傳導系統與心動週期的 11 題與題目集完全一致。驗收時修正冠狀循環頁載入即同時顯示「通關／未通關」橫幅的 CSS（`html/心臟血液供應.html` 同步；`html/心臟構造.html`、`html/紅血球的恆定機制.html` 同一問題一併修正）。未發布。 |
 | 心臟的電性活動／紅血球恆定 | 本分支已登錄 `cardiac-electrical-v1`（9 節點／11 題）、`rbc-homeostasis-v1`（6／11），包含各自 PNG。教學內容及題目 ID 保留；補 SDK、nodeTime、複習重試與立即 complete。未發布；原草稿未改。 |
 | 傳導系統／心動週期版本 | **教師決定（2026-09-25）：發布圖像強化版 `cardiac-conduction-v2`、`cardiac-cycle-v2`**。元件庫版 `-v1` 保留原名與檔案作為參考，不發布、不在後台建立活動。 |
@@ -97,21 +97,17 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 
-**1.6.3 知識節點點擊體驗：待 Claude 驗收**
-- 分支 `hotfix/1.6.3-node-detail`，從 `hotfix/1.6.2-student-name` 790e78f 建立（正式 main 119db4c＋交接更新）。版本已同步 1.6.3；本次提交 `fix: 1.6.3 知識節點就地展開與手風琴 [Codex]`；未 push、未部署、不動 main。
-- kit 改手風琴：同時一個；手機接在所點卡片下、桌面接在該列下並跨整列；平滑捲動保留卡片標題及詳細內容頂端。卡片只放標題／摘要、完整圖只在詳細內容；底部「收合」，aria-expanded／選取樣式同步，答錯複習共用開啟邏輯。
-- 首開 explore 各一次；手風琴關閉、再次點卡及底部收合均回報 nodeTime，visibilitychange 沿用。節點／題目 ID、內容、圖解不變。
-- 九份 kit v1 已以 materials:build 重建覆寫：blood-vessels、circulation-routes、blood-pressure-regulation、lymphatic-system、hemodynamics、heart-structure、cardiac-conduction、cardiac-cycle、ecg-basics。教師明確授權本次覆寫 v1；手工各 v2／coronary-circulation 等及題庫 xlsx 逐位元未變。
-- npm run check 全通過（前端 115／Functions 18、兩端 build、version:check）；九份 × 390／1280 共 18 情境通過、72 張截圖。
-- 驗證結果與 390／1280 節點 1、4（切換）、收合、答錯複習截圖見 `docs/NODE_DETAIL_1.6.3_ACCEPTANCE.md`；交 Claude 最後驗收後由教師決定部署。
+**交辦 Codex：第一階段補齊部署前 2 項小修（2026-10-02 Claude 驗收）**
+在 `feature/stage1-supplement` 修完、`npm run check`、commit（[Codex]），交 Claude 複驗後即可部署（版本 1.6.3）。
+1. **心電圖改名（教師決定，上輪漏做）**：`materials-src/ecg-basics/content.json` 的 title／label 與 `shared/materials.ts` 的 `ecg-basics-v1` label 改為「心電圖基礎」，重建 ecg-basics。Excel 既有 7 題的講義標題不改。
+2. `cardiac-output` 節點 3 圖標題「前負荷與 Frank-Starling」在 SVG 內斷成「Frank-Starli／ng」：改字級或換行位置（例：「前負荷與」／「Frank-Starling 定律」兩行）。
 
-**第一階段補齊教材：待 Claude 驗收**
-- 規格 `docs/STAGE1_SUPPLEMENT_SPEC.md` 一起提交。6 新 kit：cardiac-output、blood-pressure-measurement、capillary-exchange、major-vessels、blood-types、lymphoid-organs（各 v1，6 節點／11 題）；逐字節點內容、打散選項、hint／explain／nodeId、42 張專屬 SVG，已依教師本次授權 preview＋shots 後 build 登錄。
-- npm run check 全過（前端 115／Functions 18、兩端 build、version 1.6.3）；9 份 × 390／1280 共 18 情境，188 張截圖：無錯誤／橫向溢位、SVG 字 ≥12px、節點頂端可見、explore 各一次、錯題先複習、最後答對即 complete。SDK 以事件收集 stub 驗證；真實帳號同步仍由教師驗收。
-- 題庫僅增列 66 題到第 163–228 列；前 161 題 3,864 格及 162 列 XML 不變，新題逐題與規格／公開 HTML 一致，總計 227，ID 無重複。電性活動、ECG、紅血球未增列。
-- ⚠️ 原文保留、待教師決定：水腫用語、萬能捐／受血者、血管譯名、淋巴系統必做與新增次單元對完成度的影響。
-- 原 RBC 草稿仍含肝素錯誤選項（source 第 609 行）、血液檢查情境（第 699 行，case-q03）；遵照指示未刪改，交 Claude 判斷。兩草稿 IDs 與 Excel 既有列一致。
-- **部署後教師**：①把第 163–228 列貼上 Sheet 題庫分頁並同步（舊 55 題待辦仍在上方）；②建立「心臟II」單元；③各單元建立教材活動：心臟II＝電性活動、ECG、心輸出量、血壓測量、微血管交換、主要血管；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。電性活動填 9／11，其餘 6／11（ECG 教材 11 題，Sheet 既有 7 題不改）。先確認必做／選看設定，勿替參考版 conduction／cycle v1 建活動。
+**第一階段補齊：Claude 驗收紀錄（2026-10-02）**
+- 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
+- 電性活動、紅血球：無錯誤、載入不送事件、assets 已 commit、11 題 ID 與 Excel 一致。紅血球原稿兩處（肝素為錯誤選項、case-q03 高山血比容「血液檢查」情境）Claude 判斷屬生理情境，**維持不改**（題目已在 Sheet，學生作答中）。
+- 題庫：git f7b97a7→998fbe1 逐格比對，前 161 題零變動、說明頁僅合計 161→227；新 66 題與教材一致、ID 不重複、Zuvio 正確。
+- **待教師決定**：水腫用語、萬能捐／受血者、血管譯名（頭臂幹 vs 無名動脈）、淋巴系統若為必做，新增「淋巴器官」次單元會使已完成學生變未完成。
+- **部署後教師**：①第 108–162 列（若尚未貼）與第 163–228 列貼上 Sheet 題庫分頁並同步；②建立「心臟II」單元；③教材活動：心臟II＝電性活動、心電圖基礎、心輸出量、血壓測量、微血管交換、主要動靜脈；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。
 
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
@@ -119,7 +115,6 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **等教師決定**
 - 待教師處理：後台血液氣體運送、止血機制活動改連 v2。
 - 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
-- ECG 基礎教材內容複核：請確認採六節點 `ecg-basics-v1`，並確認進階異常波形另案醫學審稿；核定前不發布。
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
 
 **技術待辦（未排程）**
