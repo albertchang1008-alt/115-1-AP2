@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（998fbe1，含 1.6.3）：**2026-10-02 Claude 驗收通過；小修 1、2 已完成待複驗，小修 3 待辦**（見下方）。6 新教材＋電性活動／紅血球上平台＋題庫增列 66 題 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（998fbe1，含 1.6.3）：**2026-10-02 Claude 驗收通過；3 項小修已完成，待 Claude 複驗**（見下方）。6 新教材＋電性活動／紅血球上平台＋題庫增列 66 題 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -97,19 +97,17 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 
-**交辦 Codex：第一階段補齊部署前 3 項小修（2026-10-02 Claude 驗收）**
-在 `feature/stage1-supplement` 修完、`npm run check`、commit（[Codex]），交 Claude 複驗後即可部署（版本 1.6.3）。
-1. **已完成、待 Claude 複驗：心電圖改名**：`materials-src/ecg-basics/content.json` 的 title／label 與 `shared/materials.ts` 的 `ecg-basics-v1` label 改為「心電圖基礎」，重建 ecg-basics。Excel 既有 7 題的講義標題不改。
-2. **已完成、待 Claude 複驗**：`cardiac-output` 節點 3 圖標題「前負荷與 Frank-Starling」在 SVG 內斷成「Frank-Starli／ng」：改字級或換行位置（例：「前負荷與」／「Frank-Starling 定律」兩行）。
-- 小修 1、2 已重建 ecg-basics／cardiac-output v1；程式變更於協作期間被 Claude 的 `01f7256` 收錄，本次 Codex 提交補驗證與交接（最新提交見 git log -1），未重寫歷史。
-- npm run check 全過（前端 115／Functions 18、兩端 build、版本 1.6.3）；cardiac-output 390／1280 的 20 張截圖通過，390px 標題 16.6px、最小圖字 15.22px、無裁切；ECG 畫面 h1 已確認。Excel 與修改前逐位元相同；報告 `docs/STAGE1_SMALL_FIX_VERIFY.json`，4 張局部畫面在 `docs/stage1-smallfix-screenshots/`。未 push／部署。
-3. **血管譯名（教師決定 2026-10-02）：「頭臂幹」一律改為「頭臂動脈」**。範圍：`materials-src/major-vessels/content.json`、`materials-src/figures/major-vessels-overview.svg`、`major-vessels-node-02.svg`（及產生它們的 `scripts/stage1-figures.py`、`stage1-content.py`），重建 major-vessels。題庫第 196 列（major-vessels-foundation-q01）、第 204 列（major-vessels-case-q03）為本輪新增、**尚未上傳 Sheet**，可同步改；第 1–195、197–203、205–228 列其餘儲存格不得變動，改完以程式比對只有這兩列的相關儲存格改變。改後全專案搜尋「頭臂幹」應為 0（docs 規格可一併改）。
+**第一階段部署前 3 項小修：已完成，待 Claude 複驗**
+- 分支 `feature/stage1-supplement`（基底 ee0474a，最新提交見 git log -1），版本 1.6.3。ECG title／label／目錄為「心電圖基礎」；cardiac-output 節點 3 標題「前負荷與」／「Frank-Starling 定律」，390px 16.6px；兩份已重建 v1，小修 1、2 見 ee0474a。
+- 血管譯名統一「頭臂動脈」：major-vessels 內容、主圖／node-02、兩份產生程式、規格及驗證報告已同步，major-vessels 已重建 v1。全專案文字搜尋舊譯名零筆。
+- 題庫只改第 196、204 列的 I／O／P／Q／R／S，共 12 格；其餘 5,394 格、說明頁、格式及其餘 ZIP parts 不變。前 161 題仍完全不變，新 66 題與規格／HTML 一致；報告 `docs/STAGE1_TERMINOLOGY_XLSX_VERIFY.json`、`docs/STAGE1_SPEC_AUDIT.json`。
+- npm run check 全過（前端 115／Functions 18、兩端 build、version 1.6.3）。major-vessels 390／1280 的 20 張截圖通過，390px 最小圖字 15.22px、無裁切／錯誤／溢位，報告 `docs/STAGE1_TERMINOLOGY_SHOTS_VERIFY.json`。未 push／部署，交 Claude 複驗。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
 - 電性活動、紅血球：無錯誤、載入不送事件、assets 已 commit、11 題 ID 與 Excel 一致。紅血球原稿兩處（肝素為錯誤選項、case-q03 高山血比容「血液檢查」情境）Claude 判斷屬生理情境，**維持不改**（題目已在 Sheet，學生作答中）。
 - 題庫：git f7b97a7→998fbe1 逐格比對，前 161 題零變動、說明頁僅合計 161→227；新 66 題與教材一致、ID 不重複、Zuvio 正確。
-- **待教師決定**：水腫用語、萬能捐／受血者、血管譯名（頭臂幹 vs 無名動脈）。（2026-10-02 教師：淋巴系統學生尚未作答，新增「淋巴器官」次單元不影響完成度，已解決；血管譯名教師定為「頭臂動脈」，列入小修第 3 項。）
+- **待教師決定**：水腫用語、萬能捐／受血者。已決定：淋巴系統學生尚未作答，新增次單元不影響完成度；血管譯名採「頭臂動脈」，已完成修正。
 - **部署後教師**：①第 108–162 列（若尚未貼）與第 163–228 列貼上 Sheet 題庫分頁並同步；②建立「心臟II」單元；③教材活動：心臟II＝電性活動、心電圖基礎、心輸出量、血壓測量、微血管交換、主要動靜脈；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。
 
 **待 Claude 驗收**

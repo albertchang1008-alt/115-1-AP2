@@ -1,0 +1,761 @@
+{
+  "slug": "major-vessels",
+  "builtAt": "2026-10-02T14:42:13.285Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 15.216666666666667,
+      "svgTextSizes": [
+        {
+          "text": "人體右",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "人體左",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "紅：動脈",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "藍：靜脈",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "頭臂動脈",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "左頸總",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "左鎖骨下",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "右頸總",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "右鎖骨下",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "頭頸與上肢",
+          "px": 16.6
+        },
+        {
+          "text": "主動脈弓的三條分支",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "腹部器官",
+          "px": 16.6
+        },
+        {
+          "text": "腹腔幹／腸繫膜／腎動脈",
+          "px": 15.216666666666667
+        },
+        {
+          "text": "下肢",
+          "px": 16.6
+        },
+        {
+          "text": "髂總 → 股 → 膕 → 脛動脈",
+          "px": 15.216666666666667
+        }
+      ],
+      "nodes": [
+        {
+          "id": "major-vessels-node-01",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "升主動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "主動脈弓",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "胸主動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "腹主動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "髂總動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-02",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "頭臂動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "左頸總",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "左鎖骨下",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "右頸總",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "右鎖骨下",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-03",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "鎖骨下",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "腋動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "肱動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "橈、尺動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-04",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "腹腔幹",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "上腸繫膜",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "下腸繫膜",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "腎動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-05",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "髂外動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "股動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "膕動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "脛前、脛後",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-06",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "上腔靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "下腔靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "大隱靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "上肢淺靜脈",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 46.108333333333334,
+      "svgTextSizes": [
+        {
+          "text": "人體右",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "人體左",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "紅：動脈",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "藍：靜脈",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "頭臂動脈",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "左頸總",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "左鎖骨下",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "右頸總",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "右鎖骨下",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "頭頸與上肢",
+          "px": 50.3
+        },
+        {
+          "text": "主動脈弓的三條分支",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "腹部器官",
+          "px": 50.3
+        },
+        {
+          "text": "腹腔幹／腸繫膜／腎動脈",
+          "px": 46.108333333333334
+        },
+        {
+          "text": "下肢",
+          "px": 50.3
+        },
+        {
+          "text": "髂總 → 股 → 膕 → 脛動脈",
+          "px": 46.108333333333334
+        }
+      ],
+      "nodes": [
+        {
+          "id": "major-vessels-node-01",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "升主動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "主動脈弓",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "胸主動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "腹主動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "髂總動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-02",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "頭臂動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "左頸總",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "左鎖骨下",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "右頸總",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "右鎖骨下",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-03",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "鎖骨下",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "腋動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "肱動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "橈、尺動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-04",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "腹腔幹",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "上腸繫膜",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "下腸繫膜",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "腎動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-05",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "髂外動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "股動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "膕動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "脛前、脛後",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "major-vessels-node-06",
+          "minPx": 46.108333333333334,
+          "texts": [
+            {
+              "text": "人體右",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "人體左",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "紅：動脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "藍：靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "上腔靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "下腔靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "大隱靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            },
+            {
+              "text": "上肢淺靜脈",
+              "px": 46.108333333333334,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-major-vessels-node-01.png",
+    "390-node-major-vessels-node-02.png",
+    "390-node-major-vessels-node-03.png",
+    "390-node-major-vessels-node-04.png",
+    "390-node-major-vessels-node-05.png",
+    "390-node-major-vessels-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-major-vessels-node-01.png",
+    "1280-node-major-vessels-node-02.png",
+    "1280-node-major-vessels-node-03.png",
+    "1280-node-major-vessels-node-04.png",
+    "1280-node-major-vessels-node-05.png",
+    "1280-node-major-vessels-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "major-vessels-node-01",
+    "major-vessels-node-02",
+    "major-vessels-node-03",
+    "major-vessels-node-04",
+    "major-vessels-node-05",
+    "major-vessels-node-06"
+  ],
+  "questionIds": [
+    "major-vessels-foundation-q01",
+    "major-vessels-foundation-q02",
+    "major-vessels-foundation-q03",
+    "major-vessels-foundation-q04",
+    "major-vessels-foundation-q05",
+    "major-vessels-foundation-q06",
+    "major-vessels-case-q01",
+    "major-vessels-case-q02",
+    "major-vessels-case-q03",
+    "major-vessels-case-q04",
+    "major-vessels-case-q05"
+  ],
+  "ok": true
+}
