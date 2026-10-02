@@ -1,0 +1,608 @@
+{
+  "baseCommit": "bd4fbc3",
+  "xlsxUnchanged": true,
+  "xlsxSha256": "8b8afdc74afa38b78627f43e6dbd0ba10489bed54b3ae6118d8a1b737cb07e41",
+  "cardiacOutput": {
+    "slug": "cardiac-output",
+    "builtAt": "2026-10-02T14:37:24.009Z",
+    "viewports": [
+      {
+        "width": 390,
+        "height": 844,
+        "minSvgTextPx": 15.216666666666667,
+        "svgTextSizes": [
+          {
+            "text": "交感興奮",
+            "px": 16.6
+          },
+          {
+            "text": "心率 ↑、收縮力 ↑",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "CO ↑",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "迷走興奮",
+            "px": 16.6
+          },
+          {
+            "text": "心率 ↓",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "CO ↓",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "回心血量增加",
+            "px": 16.6
+          },
+          {
+            "text": "EDV ↑",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "Frank-Starling → S",
+            "px": 15.216666666666667
+          },
+          {
+            "text": "V ↑",
+            "px": 15.216666666666667
+          }
+        ],
+        "nodes": [
+          {
+            "id": "cardiac-output-node-01",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "心輸出量",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心率 HR（次／分）",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "× 每搏量 SV（mL）",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "70 × 70 ≈ 4900 mL/min",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "靜息約 5 L/min",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "長時間左右心輸出量相等",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-02",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "每搏量與射出分率",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "舒張末期 EDV",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "約 120 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "− 收縮末期 ESV",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "約 50 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ≈ 70 mL",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ÷ EDV ≈ 60%",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-03",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "前負荷與",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "Frank-Starling 定律",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "回心血量增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "EDV 增加 → 心肌拉長",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "生理範圍內收縮增強",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "每搏量增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-04",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "相同前負荷下的收縮力",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "交感：正腎上腺素",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "腎上腺素",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "收縮力增加",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "射出較多血液",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "SV ↑、ESV ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-05",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "後負荷",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "心室射血",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "克服動脈壓力",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "其他條件不變",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "後負荷 ↑ → SV 傾向 ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-06",
+            "minPx": 15.216666666666667,
+            "texts": [
+              {
+                "text": "自主神經與心率",
+                "px": 16.6,
+                "clipped": false
+              },
+              {
+                "text": "交感作用 → 心率 ↑",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "迷走／乙醯膽鹼 → 心率 ↓",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "安靜時迷走作用較強",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "心率低於竇房結自身頻率",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "心率極快 → 舒張期縮短",
+                "px": 15.216666666666667,
+                "clipped": false
+              },
+              {
+                "text": "充血時間減少",
+                "px": 15.216666666666667,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "minSvgTextPx": 46.108333333333334,
+        "svgTextSizes": [
+          {
+            "text": "交感興奮",
+            "px": 50.3
+          },
+          {
+            "text": "心率 ↑、收縮力 ↑",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "CO ↑",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "迷走興奮",
+            "px": 50.3
+          },
+          {
+            "text": "心率 ↓",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "CO ↓",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "回心血量增加",
+            "px": 50.3
+          },
+          {
+            "text": "EDV ↑",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "Frank-Starling → S",
+            "px": 46.108333333333334
+          },
+          {
+            "text": "V ↑",
+            "px": 46.108333333333334
+          }
+        ],
+        "nodes": [
+          {
+            "id": "cardiac-output-node-01",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "心輸出量",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心率 HR（次／分）",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "× 每搏量 SV（mL）",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "70 × 70 ≈ 4900 mL/min",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "靜息約 5 L/min",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "長時間左右心輸出量相等",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-02",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "每搏量與射出分率",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "舒張末期 EDV",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "約 120 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "− 收縮末期 ESV",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "約 50 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ≈ 70 mL",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ÷ EDV ≈ 60%",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-03",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "前負荷與",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "Frank-Starling 定律",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "回心血量增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "EDV 增加 → 心肌拉長",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "生理範圍內收縮增強",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "每搏量增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-04",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "相同前負荷下的收縮力",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "交感：正腎上腺素",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "腎上腺素",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "收縮力增加",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "射出較多血液",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "SV ↑、ESV ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-05",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "後負荷",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "心室射血",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "克服動脈壓力",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "其他條件不變",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "後負荷 ↑ → SV 傾向 ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          },
+          {
+            "id": "cardiac-output-node-06",
+            "minPx": 46.108333333333334,
+            "texts": [
+              {
+                "text": "自主神經與心率",
+                "px": 50.3,
+                "clipped": false
+              },
+              {
+                "text": "交感作用 → 心率 ↑",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "迷走／乙醯膽鹼 → 心率 ↓",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "安靜時迷走作用較強",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "心率低於竇房結自身頻率",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "心率極快 → 舒張期縮短",
+                "px": 46.108333333333334,
+                "clipped": false
+              },
+              {
+                "text": "充血時間減少",
+                "px": 46.108333333333334,
+                "clipped": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "shots": [
+      "390-page.png",
+      "390-lab-state-1.png",
+      "390-lab-state-2.png",
+      "390-lab-state-3.png",
+      "390-node-cardiac-output-node-01.png",
+      "390-node-cardiac-output-node-02.png",
+      "390-node-cardiac-output-node-03.png",
+      "390-node-cardiac-output-node-04.png",
+      "390-node-cardiac-output-node-05.png",
+      "390-node-cardiac-output-node-06.png",
+      "1280-page.png",
+      "1280-lab-state-1.png",
+      "1280-lab-state-2.png",
+      "1280-lab-state-3.png",
+      "1280-node-cardiac-output-node-01.png",
+      "1280-node-cardiac-output-node-02.png",
+      "1280-node-cardiac-output-node-03.png",
+      "1280-node-cardiac-output-node-04.png",
+      "1280-node-cardiac-output-node-05.png",
+      "1280-node-cardiac-output-node-06.png"
+    ],
+    "errors": [],
+    "nodeIds": [
+      "cardiac-output-node-01",
+      "cardiac-output-node-02",
+      "cardiac-output-node-03",
+      "cardiac-output-node-04",
+      "cardiac-output-node-05",
+      "cardiac-output-node-06"
+    ],
+    "questionIds": [
+      "cardiac-output-foundation-q01",
+      "cardiac-output-foundation-q02",
+      "cardiac-output-foundation-q03",
+      "cardiac-output-foundation-q04",
+      "cardiac-output-foundation-q05",
+      "cardiac-output-foundation-q06",
+      "cardiac-output-case-q01",
+      "cardiac-output-case-q02",
+      "cardiac-output-case-q03",
+      "cardiac-output-case-q04",
+      "cardiac-output-case-q05"
+    ],
+    "ok": true
+  },
+  "ecgRenderedH1": "心電圖基礎",
+  "ecgVerifiedWidths": [
+    390,
+    1280
+  ],
+  "check": {
+    "frontendTests": 115,
+    "functionsTests": 18,
+    "bothBuilds": true,
+    "version": "1.6.3"
+  },
+  "codeIncludedInCommit": "01f7256"
+}

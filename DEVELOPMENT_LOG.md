@@ -2,6 +2,11 @@
 
 目前版本：1.6.3
 
+## 第一階段部署前小修 1、2（2026-10-02，Codex，未部署）
+
+- ECG title／label／目錄改「心電圖基礎」；cardiac-output 節點 3 圖標題改「前負荷與」／「Frank-Starling 定律」兩行，產圖程式同步；兩份重建 v1。協作期間程式由 Claude 的 01f7256 收錄；本次補驗證／交接，不重寫歷史。
+- npm run check 全過（115 前端／18 Functions、兩端 build、version 1.6.3）；cardiac-output 390／1280 截圖 20 張通過，390 標題 16.6px／最小字 15.22px、無裁切；ECG 畫面名稱確認。Excel 逐位元不變。待 Claude 複驗，未 push／部署。
+
 ## 第一階段補齊教材（2026-10-02，Codex，平台 1.6.3，未部署）
 
 - 從已提交的 1.6.3 `f7b97a7` 建 `feature/stage1-supplement`，一併納入 Claude 規格。完成 6 新 kit（36 節點、66 題、42 張 SVG）及 preview／shots／build 登錄；電性活動、紅血球草稿複製上平台並保留教學資料／既有題目 ID，補追蹤及複習重試 gate。ECG 與兩草稿 SVG 調整字級／排版，使 390px 字達 12px。

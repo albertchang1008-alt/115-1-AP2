@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（998fbe1，含 1.6.3）：**2026-10-02 Claude 驗收通過，部署前需 2 項小修**（見待辦）。6 新教材＋電性活動／紅血球上平台＋題庫增列 66 題 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（998fbe1，含 1.6.3）：**2026-10-02 Claude 驗收通過；小修 1、2 已完成待複驗，小修 3 待辦**（見下方）。6 新教材＋電性活動／紅血球上平台＋題庫增列 66 題 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -33,7 +33,7 @@
 | 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
 | 未追蹤檔 | 五個 `html/*.rtf` 草稿維持未追蹤、不 commit； `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
 | 教材工作室 | 2026-09-24 已健康檢查：`npm run materials:studio` 可在 `127.0.0.1:5183` 提供 `/api/list`；目前列出 11 份本機教材，其中 `coagulation-v1` 有檔案但未登錄目錄（既有狀態，勿處理）。匯入區可貼上、點擊選取或拖放 `.html/.htm/.xhtml`；檔案先填入程式碼欄與預覽，需按匯入才寫檔。`.command` 與 `.app` 會主動載入 Node 22.23.2，若 5183 已有健康服務則直接開啟。僅本機匯入／稽核／目錄管理，不跑 git、push 或部署。 2026-09-25 起啟動器會比對 `/api/version`：程式檔比執行中的服務新（或舊服務不支援版本檢查）就自動關掉重開，避免沿用舊稽核邏輯。 |
-| ECG 基礎教材 | `ecg-basics-v1`：**2026-10-02 教師複核通過**（導程說明、示意模型說明、credits 維持原狀）；標題須改為「心電圖基礎」（Codex 尚未改，見待辦）。放「心臟II」活動，既有 Sheet 7 題不動 |
+| ECG 基礎教材 | `ecg-basics-v1`：**2026-10-02 教師複核通過**（導程說明、示意模型說明、credits 維持原狀）；title／label／目錄已改「心電圖基礎」並重建 v1，待 Claude 複驗。放「心臟II」活動，既有 Sheet 7 題不動 |
 | 三份心臟圖像強化教材 | `feature/ecg-basics`：`cardiac-conduction-v2`、`cardiac-cycle-v2`、`coronary-circulation-v1`（Codex 手工單檔版，教師已看過並同意登錄）。**2026-09-25 Claude 驗收通過**：390／1280 無錯誤與橫向溢位、圖檔皆載入、6 節點各送一次 explore、第二關全對才 complete（錯一題不送）、題目 ID 與目錄一致；傳導系統與心動週期的 11 題與題目集完全一致。驗收時修正冠狀循環頁載入即同時顯示「通關／未通關」橫幅的 CSS（`html/心臟血液供應.html` 同步；`html/心臟構造.html`、`html/紅血球的恆定機制.html` 同一問題一併修正）。未發布。 |
 | 心臟的電性活動／紅血球恆定 | 本分支已登錄 `cardiac-electrical-v1`（9 節點／11 題）、`rbc-homeostasis-v1`（6／11），包含各自 PNG。教學內容及題目 ID 保留；補 SDK、nodeTime、複習重試與立即 complete。未發布；原草稿未改。 |
 | 傳導系統／心動週期版本 | **教師決定（2026-09-25）：發布圖像強化版 `cardiac-conduction-v2`、`cardiac-cycle-v2`**。元件庫版 `-v1` 保留原名與檔案作為參考，不發布、不在後台建立活動。 |
@@ -99,8 +99,10 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 **交辦 Codex：第一階段補齊部署前 3 項小修（2026-10-02 Claude 驗收）**
 在 `feature/stage1-supplement` 修完、`npm run check`、commit（[Codex]），交 Claude 複驗後即可部署（版本 1.6.3）。
-1. **心電圖改名（教師決定，上輪漏做）**：`materials-src/ecg-basics/content.json` 的 title／label 與 `shared/materials.ts` 的 `ecg-basics-v1` label 改為「心電圖基礎」，重建 ecg-basics。Excel 既有 7 題的講義標題不改。
-2. `cardiac-output` 節點 3 圖標題「前負荷與 Frank-Starling」在 SVG 內斷成「Frank-Starli／ng」：改字級或換行位置（例：「前負荷與」／「Frank-Starling 定律」兩行）。
+1. **已完成、待 Claude 複驗：心電圖改名**：`materials-src/ecg-basics/content.json` 的 title／label 與 `shared/materials.ts` 的 `ecg-basics-v1` label 改為「心電圖基礎」，重建 ecg-basics。Excel 既有 7 題的講義標題不改。
+2. **已完成、待 Claude 複驗**：`cardiac-output` 節點 3 圖標題「前負荷與 Frank-Starling」在 SVG 內斷成「Frank-Starli／ng」：改字級或換行位置（例：「前負荷與」／「Frank-Starling 定律」兩行）。
+- 小修 1、2 已重建 ecg-basics／cardiac-output v1；程式變更於協作期間被 Claude 的 `01f7256` 收錄，本次 Codex 提交補驗證與交接（最新提交見 git log -1），未重寫歷史。
+- npm run check 全過（前端 115／Functions 18、兩端 build、版本 1.6.3）；cardiac-output 390／1280 的 20 張截圖通過，390px 標題 16.6px、最小圖字 15.22px、無裁切；ECG 畫面 h1 已確認。Excel 與修改前逐位元相同；報告 `docs/STAGE1_SMALL_FIX_VERIFY.json`，4 張局部畫面在 `docs/stage1-smallfix-screenshots/`。未 push／部署。
 3. **血管譯名（教師決定 2026-10-02）：「頭臂幹」一律改為「頭臂動脈」**。範圍：`materials-src/major-vessels/content.json`、`materials-src/figures/major-vessels-overview.svg`、`major-vessels-node-02.svg`（及產生它們的 `scripts/stage1-figures.py`、`stage1-content.py`），重建 major-vessels。題庫第 196 列（major-vessels-foundation-q01）、第 204 列（major-vessels-case-q03）為本輪新增、**尚未上傳 Sheet**，可同步改；第 1–195、197–203、205–228 列其餘儲存格不得變動，改完以程式比對只有這兩列的相關儲存格改變。改後全專案搜尋「頭臂幹」應為 0（docs 規格可一併改）。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
