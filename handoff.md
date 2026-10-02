@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（本次 commit，基底 39f33b8，含 1.6.3＋教師 6 點修訂）：**2 項必修已修正；同單元配色已拉開，待 Claude 複驗，暫不部署** |
+| 第一階段補齊教材 | `feature/stage1-supplement`（212499c，含 1.6.3＋教師 6 點修訂）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -100,12 +100,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **教師 6 點修訂：Claude 驗收（2026-10-02）**
 - 通過：心輸出量 NE（交感節後）／ACh（副交感節後）／腎上腺素（腎上腺髓質經血液）區分正確；血壓 ANP／BNP 利尿 → 血容量 → 回心血量 → CO → 血壓因果鏈與醛固酮／ADH 對照正確；預測題答對／未答對回饋明確；紅血球改 4 張獨立 SVG 正確；26 份整理表皆出現、390 無溢位、無錯誤；Excel 未動。
 
-**6 點修訂後複驗：待 Claude（2026-10-02 Codex 已修正）**
-- blood-types 保留教師核可傳統用語、capillary-exchange 改「生成多於回收時組織間液體堆積，稱為水腫。」、major-vessels 刪草稿 credits；來源／規格／整理表同步。public/materials 與 materials-src 四種草稿註記全面搜尋皆 0。
-- 26 份整理表 157 列：依句子切分、忽略標點空白去重，整理重點不重抄關鍵概念；ABO 含 A／B／AB／O。沒有額外事實的欄位桌面用「—」、手機不顯示空欄。產生程式已修正，重建不會回復重複內容。
-- 配色：21 份學生版各固定色；同單元最低差 50°，指定三組分別 60°／30°／90°。全體兩兩 ≥25° 在 21 份／360° 色環上不可能（最多 14 份）；跨單元未達者列於報告，請 Claude 複核此限制。
-- 完整 npm run check（115 前端／18 Functions、兩端 build、version 1.6.3）及 52 組 390／1280 整理表檢查通過；題目／答案／ID 不變，11 手工教材 scripts 不變，Excel 逐位元不變。報告 `docs/SUMMARY_REVISION_ACCEPTANCE.md`、機器結果 `docs/SUMMARY_REVISION_VERIFY.json`。
-- 分支 feature/stage1-supplement；本次結果見最新 [Codex] commit。待 Claude 複驗兩項必修與配色／手機整理表，未 push／部署，main 未動。
+**可部署（2026-10-03 Claude 複驗 212499c 通過）**：草稿註記全專案 0 筆（血型保留萬能捐／受血者、微血管改「稱為水腫」、血管 credits 已刪）；26 份整理表無重複句、ABO 列含四型；同單元配色色相差：心臟 ≥90°、心臟II ≥50°、血液 ≥60°、淋巴 75°（21 份無法兩兩相差 25°，以同單元區隔為準）；26 份無錯誤／溢位；6 新教材完整流程、題目／ID／Excel 未變。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
