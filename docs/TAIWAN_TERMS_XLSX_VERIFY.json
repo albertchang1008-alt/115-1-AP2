@@ -1,0 +1,76 @@
+{
+  "baselineCommit": "99bca1d",
+  "allowedRows": [
+    163,
+    164,
+    169
+  ],
+  "changedCellCount": 10,
+  "changedCells": [
+    {
+      "ref": "I163",
+      "before": "每搏量÷心率",
+      "after": "心搏量÷心率"
+    },
+    {
+      "ref": "K163",
+      "before": "心率×每搏量",
+      "after": "心率×心搏量"
+    },
+    {
+      "ref": "L163",
+      "before": "心率＋每搏量",
+      "after": "心率＋心搏量"
+    },
+    {
+      "ref": "P163",
+      "before": "「心輸出量＝心率×每搏量」：回想每分鐘的搏動次數與每次射出的血量。",
+      "after": "「心輸出量＝心率×心搏量」：回想每分鐘的搏動次數與每次射出的血量。"
+    },
+    {
+      "ref": "Q163",
+      "before": "回想每分鐘的搏動次數與每次射出的血量。 → 回到「心輸出量＝心率×每搏量」比較：一側心室每分鐘射出的血量",
+      "after": "回想每分鐘的搏動次數與每次射出的血量。 → 回到「心輸出量＝心率×心搏量」比較：一側心室每分鐘射出的血量"
+    },
+    {
+      "ref": "R163",
+      "before": "選擇「心率×每搏量」。CO＝HR×SV，表示一側心室每分鐘射出的血量。",
+      "after": "選擇「心率×心搏量」。CO＝HR×SV，表示一側心室每分鐘射出的血量。"
+    },
+    {
+      "ref": "P164",
+      "before": "「每搏量＝EDV−ESV」：用舒張末期容積減去收縮末期容積。",
+      "after": "「心搏量＝EDV−ESV」：用舒張末期容積減去收縮末期容積。"
+    },
+    {
+      "ref": "Q164",
+      "before": "用舒張末期容積減去收縮末期容積。 → 回到「每搏量＝EDV−ESV」比較：EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL",
+      "after": "用舒張末期容積減去收縮末期容積。 → 回到「心搏量＝EDV−ESV」比較：EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL"
+    },
+    {
+      "ref": "P169",
+      "before": "「心輸出量＝心率×每搏量」：先乘心率與每搏量，再將 mL 換成 L。",
+      "after": "「心輸出量＝心率×心搏量」：先乘心率與心搏量，再將 mL 換成 L。"
+    },
+    {
+      "ref": "Q169",
+      "before": "先乘心率與每搏量，再將 mL 換成 L。 → 回到「心輸出量＝心率×每搏量」比較：一側心室每分鐘射出的血量",
+      "after": "先乘心率與心搏量，再將 mL 換成 L。 → 回到「心輸出量＝心率×心搏量」比較：一側心室每分鐘射出的血量"
+    }
+  ],
+  "otherQuestionCellsUnchanged": 5396,
+  "allOtherZipPartsUnchanged": [
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "xl/theme/theme1.xml",
+    "xl/worksheets/sheet2.xml",
+    "xl/styles.xml",
+    "_rels/.rels",
+    "xl/workbook.xml",
+    "xl/_rels/workbook.xml.rels",
+    "[Content_Types].xml"
+  ],
+  "styleAndSheetStructureUnchanged": true,
+  "baselineSha256": "77dd8bb43b2a639698d22632bd72f0b48c4185a2d16b658cb1622f45d8b2e9ea",
+  "finalSha256": "48dca2aa0cbc98c858591aa7489c80baf018fa359fd4ef1d56faa401578fee2e"
+}

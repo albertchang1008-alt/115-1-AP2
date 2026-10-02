@@ -24,9 +24,9 @@ for i,line in enumerate(lines):
     if line.startswith('  6. 自主神經與心率：'):lines[i]='  6. '+co['nodes'][5]['concept']
 p.write_text('\n'.join(lines)+'\n')
 bp=load('blood-pressure-regulation');n=bp['nodes'][4]
-n.update(summary='ANP／BNP 促進排鈉、利尿，協助降低體液與血容量',concept='體液包含細胞內液與細胞外液；血漿是細胞外液的一部分。心房伸展促進 ANP 釋放，心室伸展可促進 B 型排鈉胜肽 BNP 釋放；兩者有助排鈉、排水（利尿），降低過多體液與血容量。',points=['利尿是尿量增加；ANP／BNP 促進排鈉，水隨鈉排出。','排鈉、排水↑ → 細胞外液與血容量↓ → 回心血量↓ → 每搏量與 CO 傾向↓ → 血壓傾向↓。','RAAS／醛固酮偏向保鈉留水；ADH 偏向保水、減少尿量，方向與 ANP／BNP 相對。'])
+n.update(summary='ANP／BNP 促進排鈉、利尿，協助降低體液與血容量',concept='體液包含細胞內液與細胞外液；血漿是細胞外液的一部分。心房伸展促進 ANP 釋放，心室伸展可促進 B 型排鈉胜肽 BNP 釋放；兩者有助排鈉、排水（利尿），降低過多體液與血容量。',points=['利尿是尿量增加；ANP／BNP 促進排鈉，水隨鈉排出。','排鈉、排水↑ → 細胞外液與血容量↓ → 回心血量↓ → 心搏量與 CO 傾向↓ → 血壓傾向↓。','RAAS／醛固酮偏向保鈉留水；ADH 偏向保水、減少尿量，方向與 ANP／BNP 相對。'])
 n['clinical']['text']='連接體液與血壓時，要指出血容量與回心血量的變化；身體仍有其他補償機制，所以說血壓「傾向」下降。'
-for i,line in [(3,'ADH 作用增加 → 水再吸收↑、尿量↓；ADH 作用減少 → 水再吸收↓、尿量↑。'),(2,'醛固酮促進鈉再吸收，水隨鈉保留 → 細胞外液與血容量增加，協助維持血壓。'),(5,'排尿造成血容量下降時，回心血量與每搏量傾向下降，再連到 CO 與血壓。')]:
+for i,line in [(3,'ADH 作用增加 → 水再吸收↑、尿量↓；ADH 作用減少 → 水再吸收↓、尿量↑。'),(2,'醛固酮促進鈉再吸收，水隨鈉保留 → 細胞外液與血容量增加，協助維持血壓。'),(5,'排尿造成血容量下降時，回心血量與心搏量傾向下降，再連到 CO 與血壓。')]:
     if line not in bp['nodes'][i]['points']:bp['nodes'][i]['points'].append(line)
 bp['lab']['intro']='切換情境，分清神經反射與腎臟體液調節；體液變化要連到血容量、回心血量與血壓。'
 bp['lab']['states'][2]['explain']='ANP／BNP 促進排鈉利尿 → 體液／血容量↓ → 回心血量↓ → CO 與血壓傾向↓。相對地，醛固酮保鈉留水、ADH 抗利尿，協助保留體液。'
@@ -53,7 +53,7 @@ import re
 for name in ['cardiac-output-node-04.svg','cardiac-output-node-06.svg']:
     p=fig/name;p.write_text(re.sub(r'<path\b.*?/>','',p.read_text()))
 p=fig/'cardiac-output-overview.svg';s=p.read_text().replace('>交感興奮</text>','>交感節後末梢 → NE</text>').replace('>迷走興奮</text>','>副交感節後末梢 → ACh</text>');p.write_text(s)
-(fig/'blood-pressure-regulation-anp.svg').write_text(flow('排鈉、利尿如何影響血壓',[['心房 ANP／心室 BNP','促進腎臟排鈉、排水'],['尿量↑（利尿）','細胞外液與血容量↓'],'回心血量↓',['每搏量、心輸出量傾向↓','其他條件相同時血壓傾向↓']]))
+(fig/'blood-pressure-regulation-anp.svg').write_text(flow('排鈉、利尿如何影響血壓',[['心房 ANP／心室 BNP','促進腎臟排鈉、排水'],['尿量↑（利尿）','細胞外液與血容量↓'],'回心血量↓',['心搏量、心輸出量傾向↓','其他條件相同時血壓傾向↓']]))
 # Replace the formerly sequential RAAS→ADH→ANP panel with two separate directions.
 p=fig/'blood-pressure-regulation-overview.svg';s=p.read_text();import re
 panel='<g data-panel="volume">'+text(200,66,'體液調節：兩個相反方向',22)
@@ -62,3 +62,7 @@ for x,title,rows in [(12,'保留體液',['醛固酮保鈉','ADH 保水','尿中�
     for j,line in enumerate(rows):panel+=text(x+89,160+j*45,line,18)
 panel+=text(200,377,'排出方向：回心血量↓ → CO↓',18)+text(200,410,'血壓傾向↓；仍有其他補償機制',18)+'</g>'
 s=re.sub(r'<g data-panel="volume">.*?</g>',lambda _:panel,s,flags=re.S);p.write_text(s)
+
+# Preserve approved Taiwan terminology and six prediction explanations after regeneration.
+import runpy
+runpy.run_path(str(ROOT / "scripts/material-taiwan-terms.py"), run_name="__main__")

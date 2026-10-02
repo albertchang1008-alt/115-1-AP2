@@ -1,0 +1,307 @@
+{
+  "base": "99bca1d",
+  "scanTerms": [
+    "每搏量",
+    "每搏輸出量",
+    "紅細胞",
+    "白細胞",
+    "血紅蛋白",
+    "去甲腎上腺素",
+    "乙酰",
+    "血管緊張素",
+    "鈉尿肽",
+    "浦肯野",
+    "射血分數",
+    "血細胞比容",
+    "粘度",
+    "淋巴細胞",
+    "單核細胞",
+    "粒細胞",
+    "胸導管",
+    "腸系膜",
+    "導聯",
+    "復極",
+    "平台期",
+    "不應期",
+    "袖帶",
+    "毛細血管",
+    "濾過",
+    "重吸收",
+    "腎小球",
+    "下丘腦",
+    "延髓",
+    "感受器",
+    "心肌梗死",
+    "視頻",
+    "信息",
+    "屏幕",
+    "默認",
+    "用戶",
+    "登錄",
+    "反饋",
+    "激活",
+    "界面",
+    "鏈接",
+    "網絡",
+    "點擊"
+  ],
+  "forbiddenMatches": [],
+  "pendingTeacher": [
+    {
+      "path": "public/materials/blood-post-v1/index.html",
+      "term": "扁桃體",
+      "count": 4
+    },
+    {
+      "path": "public/materials/blood-pre-v1/index.html",
+      "term": "扁桃體",
+      "count": 2
+    }
+  ],
+  "preservation": [
+    {
+      "slug": "blood-pressure-measurement",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "blood-pressure-regulation",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "blood-types",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "blood-vessels",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "cardiac-conduction",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "cardiac-cycle",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "cardiac-output",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "circulation-routes",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "ecg-basics",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "heart-structure",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "hemodynamics",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "lymphatic-system",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "lymphoid-organs",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "slug": "major-vessels",
+      "nodeIdsUnchanged": true,
+      "questionIdsAndAnswerCodesUnchanged": true,
+      "questionChangesOnlyTaiwanTerms": true
+    },
+    {
+      "id": "blood-composition-v1",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "blood-gas-transport-v1",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "blood-gas-transport-v2",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "cardiac-conduction-v2",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "cardiac-cycle-v2",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "cardiac-electrical-v1",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "coronary-circulation-v1",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "heart-structure-v2",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "hemostasis-mechanisms-v1",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "hemostasis-mechanisms-v2",
+      "scriptAndQuizUnchanged": true
+    },
+    {
+      "id": "rbc-homeostasis-v1",
+      "scriptAndQuizUnchanged": true
+    }
+  ],
+  "predictions": [
+    {
+      "slug": "cardiac-output",
+      "width": 390,
+      "feedback": "回心血量增加使舒張末期容積（EDV）變大、心肌被拉長；依 Frank-Starling 定律，生理範圍內收縮更強，心搏量增加。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "cardiac-output",
+      "width": 1280,
+      "feedback": "回心血量增加使舒張末期容積（EDV）變大、心肌被拉長；依 Frank-Starling 定律，生理範圍內收縮更強，心搏量增加。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 390,
+      "feedback": "壓脈帶壓力剛降到收縮壓以下時，血液在收縮期衝過受壓的肱動脈形成亂流，出現第一個規律柯氏音，此時的壓力就是收縮壓。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 1280,
+      "feedback": "壓脈帶壓力剛降到收縮壓以下時，血液在收縮期衝過受壓的肱動脈形成亂流，出現第一個規律柯氏音，此時的壓力就是收縮壓。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 390,
+      "feedback": "動脈端微血管靜水壓（約 35 mmHg）大於血漿膠體滲透壓（約 25 mmHg），液體淨濾出到組織間隙。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 1280,
+      "feedback": "動脈端微血管靜水壓（約 35 mmHg）大於血漿膠體滲透壓（約 25 mmHg），液體淨濾出到組織間隙。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "major-vessels",
+      "width": 390,
+      "feedback": "主動脈弓依序分出頭臂動脈、左頸總動脈、左鎖骨下動脈；左上肢的血液來自直接由主動脈弓分出的左鎖骨下動脈。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "major-vessels",
+      "width": 1280,
+      "feedback": "主動脈弓依序分出頭臂動脈、左頸總動脈、左鎖骨下動脈；左上肢的血液來自直接由主動脈弓分出的左鎖骨下動脈。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "blood-types",
+      "width": 390,
+      "feedback": "抗 A 血清使紅血球凝集，表示紅血球上有 A 抗原；抗 B 不凝集，表示沒有 B 抗原，所以是 A 型。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "blood-types",
+      "width": 1280,
+      "feedback": "抗 A 血清使紅血球凝集，表示紅血球上有 A 抗原；抗 B 不凝集，表示沒有 B 抗原，所以是 A 型。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "lymphoid-organs",
+      "width": 390,
+      "feedback": "T 淋巴球的前驅細胞由骨髓移到胸腺，在胸腺發育成熟；骨髓與胸腺是初級淋巴器官。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    },
+    {
+      "slug": "lymphoid-organs",
+      "width": 1280,
+      "feedback": "T 淋巴球的前驅細胞由骨髓移到胸腺，在胸腺發育成熟；骨髓與胸腺是初級淋巴器官。",
+      "font": 16,
+      "noOverflow": true,
+      "errors": [],
+      "noAdditionalTrackingEvents": true
+    }
+  ]
+}

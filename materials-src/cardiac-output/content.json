@@ -3,7 +3,7 @@
   "version": "v1",
   "experience": "guided",
   "title": "心輸出量的調節",
-  "subtitle": "心輸出量由心率與每搏量決定；前負荷、收縮力、後負荷與自主神經共同調節。",
+  "subtitle": "心輸出量由心率與心搏量決定；前負荷、收縮力、後負荷與自主神經共同調節。",
   "label": "心輸出量的調節｜互動資訊圖表",
   "stats": [
     {
@@ -41,7 +41,7 @@
       }
     ],
     "predict": {
-      "question": "回心血量增加（生理範圍內），下一次收縮的每搏量？",
+      "question": "回心血量增加（生理範圍內），下一次收縮的心搏量？",
       "options": [
         "相反方向",
         "增加",
@@ -49,17 +49,17 @@
         "無法由此模型判斷"
       ],
       "answer": 1,
-      "feedback": "增加"
+      "feedback": "回心血量增加使舒張末期容積（EDV）變大、心肌被拉長；依 Frank-Starling 定律，生理範圍內收縮更強，心搏量增加。"
     }
   },
   "nodes": [
     {
       "id": "cardiac-output-node-01",
       "tag": "01",
-      "title": "心輸出量＝心率×每搏量",
+      "title": "心輸出量＝心率×心搏量",
       "summary": "一側心室每分鐘射出的血量",
       "figure": "cardiac-output-node-01.svg",
-      "concept": "心輸出量＝心率×每搏量：一側心室每分鐘射出的血量；靜息約 5 L/min；長時間左右心輸出量相等。應用：運動時可增加數倍。",
+      "concept": "心輸出量＝心率×心搏量：一側心室每分鐘射出的血量；靜息約 5 L/min；長時間左右心輸出量相等。應用：運動時可增加數倍。",
       "points": [
         "一側心室每分鐘射出的血量",
         "靜息約 5 L/min",
@@ -73,10 +73,10 @@
     {
       "id": "cardiac-output-node-02",
       "tag": "02",
-      "title": "每搏量＝EDV−ESV",
+      "title": "心搏量＝EDV−ESV",
       "summary": "EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL",
       "figure": "cardiac-output-node-02.svg",
-      "concept": "每搏量＝EDV−ESV：EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL；射出分率＝SV÷EDV 約 60%。",
+      "concept": "心搏量＝EDV−ESV：EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL；射出分率＝SV÷EDV 約 60%。",
       "points": [
         "EDV 約 120 mL、ESV 約 50 mL → SV 約 70 mL",
         "射出分率＝SV÷EDV 約 60%",
@@ -161,10 +161,10 @@
       "id": "cardiac-output-foundation-q01",
       "stem": "CO＝？",
       "options": [
-        "每搏量÷心率",
+        "心搏量÷心率",
         "血壓×阻力",
-        "心率×每搏量",
-        "心率＋每搏量"
+        "心率×心搏量",
+        "心率＋心搏量"
       ],
       "answer": 2,
       "hint": "回想每分鐘的搏動次數與每次射出的血量。",
@@ -253,7 +253,7 @@
         "14 L/min"
       ],
       "answer": 3,
-      "hint": "先乘心率與每搏量，再將 mL 換成 L。",
+      "hint": "先乘心率與心搏量，再將 mL 換成 L。",
       "explain": "140×100＝14000 mL/min＝14 L/min。",
       "nodeId": "cardiac-output-node-01"
     },

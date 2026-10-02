@@ -1,0 +1,693 @@
+{
+  "slug": "blood-pressure-regulation",
+  "builtAt": "2026-10-02T16:29:06.683Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.94,
+      "svgTextSizes": [
+        {
+          "text": "血壓的調控｜情境比較",
+          "px": 16.6
+        },
+        {
+          "text": "血壓 ↑",
+          "px": 14.94
+        },
+        {
+          "text": "受器訊號 ↑",
+          "px": 14.94
+        },
+        {
+          "text": "延腦 → 交感 ↓",
+          "px": 14.94
+        },
+        {
+          "text": "心率 ↓／血管舒張",
+          "px": 14.94
+        },
+        {
+          "text": "負回饋：血壓回降",
+          "px": 14.94
+        },
+        {
+          "text": "血壓 ↓",
+          "px": 14.94
+        },
+        {
+          "text": "受器訊號 ↓",
+          "px": 14.94
+        },
+        {
+          "text": "延腦 → 交感 ↑",
+          "px": 14.94
+        },
+        {
+          "text": "心輸出量 ↑／阻力 ↑",
+          "px": 14.94
+        },
+        {
+          "text": "負回饋：血壓回升",
+          "px": 14.94
+        },
+        {
+          "text": "體液調節：兩個相反方向",
+          "px": 18.26
+        },
+        {
+          "text": "保留體液",
+          "px": 16.6
+        },
+        {
+          "text": "醛固酮保鈉",
+          "px": 14.94
+        },
+        {
+          "text": "ADH 保水",
+          "px": 14.94
+        },
+        {
+          "text": "尿中流失減少",
+          "px": 14.94
+        },
+        {
+          "text": "血容量維持／↑",
+          "px": 14.94
+        },
+        {
+          "text": "排出體液",
+          "px": 16.6
+        },
+        {
+          "text": "ANP／BNP",
+          "px": 14.94
+        },
+        {
+          "text": "排鈉、利尿↑",
+          "px": 14.94
+        },
+        {
+          "text": "血容量↓",
+          "px": 14.94
+        },
+        {
+          "text": "回心血量↓",
+          "px": 14.94
+        },
+        {
+          "text": "排出方向：回心血量↓ → CO↓",
+          "px": 14.94
+        },
+        {
+          "text": "血壓傾向↓；仍有其他補償機制",
+          "px": 14.94
+        }
+      ],
+      "nodes": [
+        {
+          "id": "baroreflex",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "壓力受器反射",
+              "px": 16.599999999999998,
+              "clipped": false
+            },
+            {
+              "text": "血壓 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "受器放電 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "延腦：交感 ↓／迷走 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心率 ↓、小動脈舒張",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "血壓回降",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "sensors",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "化學與心房伸展受器",
+              "px": 16.599999999999998,
+              "clipped": false
+            },
+            {
+              "text": "低 O₂／高 CO₂、H⁺",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "化學受器",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "延腦整合",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "呼吸＋循環反應",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "raas",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "腎素—血管張力素—醛固酮",
+              "px": 16.599999999999998,
+              "clipped": false
+            },
+            {
+              "text": "腎灌流 ↓ → 腎素",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "血管張力素原 → I",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ACE → 血管張力素 II",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "收縮血管＋醛固酮",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "鈉、水保留",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "adh",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "抗利尿激素 ADH",
+              "px": 16.599999999999998,
+              "clipped": false
+            },
+            {
+              "text": "下視丘製造",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "腦下垂體後葉釋放",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "腎集合管",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "水再吸收 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "尿中水流失 ↓",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "anp",
+          "minPx": 15.216666666666667,
+          "texts": [
+            {
+              "text": "排鈉、利尿如何影響血壓",
+              "px": 16.6,
+              "clipped": false
+            },
+            {
+              "text": "心房 ANP／心室 BNP",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "促進腎臟排鈉、排水",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "尿量↑（利尿）",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液與血容量↓",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "回心血量↓",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "心搏量、心輸出量傾向↓",
+              "px": 15.216666666666667,
+              "clipped": false
+            },
+            {
+              "text": "其他條件相同時血壓傾向↓",
+              "px": 15.216666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "map",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "把心臟與血管放在一起",
+              "px": 16.599999999999998,
+              "clipped": false
+            },
+            {
+              "text": "心率 × 心搏量",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心輸出量 CO",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "× 總周邊阻力 TPR",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "≈ 平均動脈壓 MAP",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 27,
+      "svgTextSizes": [
+        {
+          "text": "血壓的調控｜情境比較",
+          "px": 30
+        },
+        {
+          "text": "血壓 ↑",
+          "px": 27
+        },
+        {
+          "text": "受器訊號 ↑",
+          "px": 27
+        },
+        {
+          "text": "延腦 → 交感 ↓",
+          "px": 27
+        },
+        {
+          "text": "心率 ↓／血管舒張",
+          "px": 27
+        },
+        {
+          "text": "負回饋：血壓回降",
+          "px": 27
+        },
+        {
+          "text": "血壓 ↓",
+          "px": 27
+        },
+        {
+          "text": "受器訊號 ↓",
+          "px": 27
+        },
+        {
+          "text": "延腦 → 交感 ↑",
+          "px": 27
+        },
+        {
+          "text": "心輸出量 ↑／阻力 ↑",
+          "px": 27
+        },
+        {
+          "text": "負回饋：血壓回升",
+          "px": 27
+        },
+        {
+          "text": "體液調節：兩個相反方向",
+          "px": 33
+        },
+        {
+          "text": "保留體液",
+          "px": 30
+        },
+        {
+          "text": "醛固酮保鈉",
+          "px": 27
+        },
+        {
+          "text": "ADH 保水",
+          "px": 27
+        },
+        {
+          "text": "尿中流失減少",
+          "px": 27
+        },
+        {
+          "text": "血容量維持／↑",
+          "px": 27
+        },
+        {
+          "text": "排出體液",
+          "px": 30
+        },
+        {
+          "text": "ANP／BNP",
+          "px": 27
+        },
+        {
+          "text": "排鈉、利尿↑",
+          "px": 27
+        },
+        {
+          "text": "血容量↓",
+          "px": 27
+        },
+        {
+          "text": "回心血量↓",
+          "px": 27
+        },
+        {
+          "text": "排出方向：回心血量↓ → CO↓",
+          "px": 27
+        },
+        {
+          "text": "血壓傾向↓；仍有其他補償機制",
+          "px": 27
+        }
+      ],
+      "nodes": [
+        {
+          "id": "baroreflex",
+          "minPx": 27,
+          "texts": [
+            {
+              "text": "壓力受器反射",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "血壓 ↑",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "受器放電 ↑",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "延腦：交感 ↓／迷走 ↑",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "心率 ↓、小動脈舒張",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "血壓回降",
+              "px": 27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "sensors",
+          "minPx": 27,
+          "texts": [
+            {
+              "text": "化學與心房伸展受器",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "低 O₂／高 CO₂、H⁺",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "化學受器",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "延腦整合",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "呼吸＋循環反應",
+              "px": 27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "raas",
+          "minPx": 27,
+          "texts": [
+            {
+              "text": "腎素—血管張力素—醛固酮",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "腎灌流 ↓ → 腎素",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "血管張力素原 → I",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "ACE → 血管張力素 II",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "收縮血管＋醛固酮",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "鈉、水保留",
+              "px": 27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "adh",
+          "minPx": 27,
+          "texts": [
+            {
+              "text": "抗利尿激素 ADH",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "下視丘製造",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "腦下垂體後葉釋放",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "腎集合管",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "水再吸收 ↑",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "尿中水流失 ↓",
+              "px": 27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "anp",
+          "minPx": 27.5,
+          "texts": [
+            {
+              "text": "排鈉、利尿如何影響血壓",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "心房 ANP／心室 BNP",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "促進腎臟排鈉、排水",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "尿量↑（利尿）",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液與血容量↓",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "回心血量↓",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "心搏量、心輸出量傾向↓",
+              "px": 27.5,
+              "clipped": false
+            },
+            {
+              "text": "其他條件相同時血壓傾向↓",
+              "px": 27.5,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "map",
+          "minPx": 27,
+          "texts": [
+            {
+              "text": "把心臟與血管放在一起",
+              "px": 30,
+              "clipped": false
+            },
+            {
+              "text": "心率 × 心搏量",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "心輸出量 CO",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "× 總周邊阻力 TPR",
+              "px": 27,
+              "clipped": false
+            },
+            {
+              "text": "≈ 平均動脈壓 MAP",
+              "px": 27,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-high.png",
+    "390-lab-low.png",
+    "390-lab-volume.png",
+    "390-node-baroreflex.png",
+    "390-node-sensors.png",
+    "390-node-raas.png",
+    "390-node-adh.png",
+    "390-node-anp.png",
+    "390-node-map.png",
+    "1280-page.png",
+    "1280-lab-high.png",
+    "1280-lab-low.png",
+    "1280-lab-volume.png",
+    "1280-node-baroreflex.png",
+    "1280-node-sensors.png",
+    "1280-node-raas.png",
+    "1280-node-adh.png",
+    "1280-node-anp.png",
+    "1280-node-map.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "baroreflex",
+    "sensors",
+    "raas",
+    "adh",
+    "anp",
+    "map"
+  ],
+  "questionIds": [
+    "blood-pressure-regulation-foundation-1",
+    "blood-pressure-regulation-foundation-2",
+    "blood-pressure-regulation-foundation-3",
+    "blood-pressure-regulation-foundation-4",
+    "blood-pressure-regulation-foundation-5",
+    "blood-pressure-regulation-foundation-6",
+    "blood-pressure-regulation-case-1",
+    "blood-pressure-regulation-case-2",
+    "blood-pressure-regulation-case-3",
+    "blood-pressure-regulation-case-4",
+    "blood-pressure-regulation-case-5"
+  ],
+  "ok": true
+}
