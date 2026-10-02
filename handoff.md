@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（212499c，含 1.6.3＋教師 6 點修訂）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（212499c）：Claude 複驗通過；**教師 2026-10-03 追加用語統一與預測回饋修正，修完複驗後才部署**（版本 1.6.3） |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -99,6 +99,22 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 
 **教師 6 點修訂：Claude 驗收（2026-10-02）**
 - 通過：心輸出量 NE（交感節後）／ACh（副交感節後）／腎上腺素（腎上腺髓質經血液）區分正確；血壓 ANP／BNP 利尿 → 血容量 → 回心血量 → CO → 血壓因果鏈與醛固酮／ADH 對照正確；預測題答對／未答對回饋明確；紅血球改 4 張獨立 SVG 正確；26 份整理表皆出現、390 無溢位、無錯誤；Excel 未動。
+
+**交辦 Codex：用語統一（台灣用語）＋預測回饋補說明（2026-10-03 教師）**
+**固定原則（教師）：一律使用台灣課本用語，避免大陸用語。**新教材與修改時都要遵守。
+1. **「每搏量」「每搏輸出量」一律改「心搏量」**（與已上線心動週期一致）：`cardiac-output`（content、SVG、整理表；含 `SV＝心搏量`）、`blood-pressure-regulation`（節點與整理表）、`ecg-basics`（「每搏輸出量開始下降」）。題庫僅改第 163、164、169 列中含「每搏量」的儲存格（本輪新增、未上傳 Sheet）；其餘儲存格逐格不變，附程式比對。
+2. `blood-vessels`：「大面積網絡」→「大面積網路」。
+3. 手工教材可見提示與 aria-label 的「點擊」→「點選」（blood-gas-transport v1／v2「點擊展開詳細說明」；cardiac-conduction-v2、cardiac-cycle-v2、coronary-circulation-v1、heart-structure-v2、rbc-homeostasis-v1 的「點擊捲動至節點」）。
+4. **6 份新教材預測題答對回饋只重複答案**，改為說明句（kit 會自動加「✓ 答對了！」，回饋欄只填說明）：
+   - cardiac-output：回心血量增加使舒張末期容積（EDV）變大、心肌被拉長；依 Frank-Starling 定律，生理範圍內收縮更強，心搏量增加。
+   - blood-pressure-measurement：壓脈帶壓力剛降到收縮壓以下時，血液在收縮期衝過受壓的肱動脈形成亂流，出現第一個規律柯氏音，此時的壓力就是收縮壓。
+   - capillary-exchange：動脈端微血管靜水壓（約 35 mmHg）大於血漿膠體滲透壓（約 25 mmHg），液體淨濾出到組織間隙。
+   - major-vessels：主動脈弓依序分出頭臂動脈、左頸總動脈、左鎖骨下動脈；左上肢的血液來自直接由主動脈弓分出的左鎖骨下動脈。
+   - blood-types：抗 A 血清使紅血球凝集，表示紅血球上有 A 抗原；抗 B 不凝集，表示沒有 B 抗原，所以是 A 型。
+   - lymphoid-organs：T 淋巴球的前驅細胞由骨髓移到胸腺，在胸腺發育成熟；骨髓與胸腺是初級淋巴器官。
+5. 改完以 Claude 的用語清單（每搏量、每搏輸出量、紅細胞、白細胞、血紅蛋白、去甲腎上腺素、乙酰、血管緊張素、鈉尿肽、浦肯野、射血分數、血細胞比容、粘度、淋巴細胞、單核細胞、粒細胞、胸導管、腸系膜、導聯、復極、平台期、不應期、袖帶、毛細血管、濾過、重吸收、腎小球、下丘腦、延髓、感受器、心肌梗死、視頻、信息、屏幕、默認、用戶、登錄、反饋、激活、界面、鏈接、網絡、點擊）掃描 `public/materials` 與 `materials-src`，除下方待教師決定外須為 0。
+- **待教師決定**：`blood-pre-v1`、`blood-post-v1`（已上線前後測）用「扁桃體」，新教材淋巴器官用「扁桃腺」，是否統一。
+題目 ID、答案、Excel 其他列不動；npm run check；commit（[Codex]）；不 push／不部署；交 Claude 複驗。
 
 **可部署（2026-10-03 Claude 複驗 212499c 通過）**：草稿註記全專案 0 筆（血型保留萬能捐／受血者、微血管改「稱為水腫」、血管 credits 已刪）；26 份整理表無重複句、ABO 列含四型；同單元配色色相差：心臟 ≥90°、心臟II ≥50°、血液 ≥60°、淋巴 75°（21 份無法兩兩相差 25°，以同單元區隔為準）；26 份無錯誤／溢位；6 新教材完整流程、題目／ID／Excel 未變。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
 
