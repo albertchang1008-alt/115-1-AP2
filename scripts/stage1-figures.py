@@ -23,8 +23,9 @@ def box(x,y,w,lines,fill='#fff',stroke='#d8cce5'):
 def svg(body,h=480):
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 {h}" role="img" style="font-family:system-ui,sans-serif"><rect width="480" height="{h}" rx="22" fill="#f7f3fa"/>{body}</svg>'
 def flow(title,steps):
-    body=''.join(text(240,36+i*28,l,24) for i,l in enumerate(wrap(title,17)))
-    y=62+28*(len(wrap(title,17))-1)
+    title_lines = ['前負荷與', 'Frank-Starling 定律'] if title == '前負荷與 Frank-Starling' else wrap(title,17)
+    body=''.join(text(240,36+i*28,l,24) for i,l in enumerate(title_lines))
+    y=62+28*(len(title_lines)-1)
     for i,step in enumerate(steps):
         lines=step if isinstance(step,list) else wrap(step)
         b,h=box(28,y,424,lines,fill='#fff' if i%2==0 else '#e4f0f6');body+=b;y+=h

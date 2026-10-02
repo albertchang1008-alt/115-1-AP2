@@ -58,7 +58,7 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   // v1 為教材元件庫樣板，保留但不發布；正式版使用圖像強化的 v2。
   'heart-structure-v1': { label: "心臟構造與解剖生理圖卡", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'heart-structure-v2': { label: '心臟構造與解剖生理圖卡（圖像強化版）', tracking: 'interactive', nodeTotal: 6, questionTotal: 11 },
-  'ecg-basics-v1': { label: "心電圖基礎與心率調控", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'ecg-basics-v1': { label: "心電圖基礎", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-conduction-v1': { label: "心臟的傳導系統", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-cycle-v1': { label: "心動週期", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-conduction-v2': { label: "心臟的傳導系統（圖像強化版）", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
