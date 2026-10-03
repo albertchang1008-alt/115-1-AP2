@@ -1766,3 +1766,8 @@ body { padding-bottom: 60px; }
 .class-matrix .matrix-unit th[scope='row'] { padding-left: 32px; }
 .class-matrix input[type='checkbox'] { width: 18px; height: 18px; }
 @media (max-width: 600px) { .class-add { grid-template-columns: 1fr; } }
+/* Empty chapter merge action shares each chapter's menu row without nesting buttons. */
+.unitmenu .chapter-menu-entry > .unit-leaf { justify-content:flex-start; gap:13px; }
+.unitmenu .chapter-menu-entry > .unit-leaf span { color:#859aa7; font-size:calc(12px * var(--font-scale, 1)); }
+.unitmenu .chapter-menu-entry { margin-bottom:6px; }
+@media(max-width:900px) { .unitmenu .chapter-menu-entry { flex:none; } .unitmenu .chapter-menu-entry > .unit-leaf { width:auto; white-space:nowrap; } }

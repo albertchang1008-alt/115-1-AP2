@@ -2,6 +2,11 @@
 
 目前版本：1.6.4
 
+## 1.6.4 合併空單元與學生完成紀錄遷移（2026-10-03，Codex，未部署）
+
+- 空單元可選目標、預覽活動／人數並確認；教師 mergeChapter transaction 合併草稿與發布版設定／活動（目標優先、同 ID 不重複），搬移全體學生精確活動鍵，舊 key 保留、已完成不降級。研究／診斷不動，新增合併操作紀錄；預覽設定／學生變動須重確認，未保存不能合併。
+- 補實際 callable 與 React 操作、部分／已完成進度、目標既有完成、去重、權限、班級設定與完成度測試；check 119／19、兩端 build、version:check 全過，版本維持 1.6.4。報告 docs/CHAPTER_MERGE_1.6.4_ACCEPTANCE.md，交 Claude 驗收，未操作正式資料，未 push／部署。
+
 ## 1.6.4 全身主要動靜脈原創解剖底圖（2026-10-03，Codex，未部署）
 
 - 追蹤、脈搏及 overview 共用原創 SVG，補胃的肝門循環放大圖、高亮／重播／減少動畫支援，取代心臟II 必修 2。content.json、Excel、其他教材逐位元不變，14 張截圖及兩寬度完整作答通過；check 117／18 與 build 通過，用語／草稿掃描 0，報告 docs/MAJOR_VESSELS_ANATOMY_ACCEPTANCE.md，交 Claude 複驗。未 push／部署；合併單元追加工作接續處理。

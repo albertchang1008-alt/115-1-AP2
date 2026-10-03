@@ -8,6 +8,7 @@ import {
   connectAuthEmulator,
 } from 'firebase/auth';
 import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
+import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint } from '../shared/chapterMerge';
 import {
   Course,
   Question,
@@ -19,6 +20,7 @@ import {
   emptyProgress,
   applyAttempt,
   aggregate,
+  chaptersOf,
 } from '../shared/model';
 const env = import.meta.env || {};
 export const configured = !!(env.VITE_FIREBASE_PROJECT_ID && env.VITE_FIREBASE_API_KEY);
@@ -237,6 +239,23 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           publishedMap.set(draft.id, published);
           result = published;
           break;
+        case 'mergeChapter': {
+          const nextDraft = mergeChapterCourse(draft, d.sourceName, d.targetName);
+          const nextPublished = chaptersOf(published)[d.sourceName] ? mergeChapterCourse(published, d.sourceName, d.targetName) : published;
+          const activities = mergeActivityList(draft, published, d.sourceName, d.targetName);
+          const affectedStudents = activities.some(a => progress.activities[`chapter:${d.sourceName}_${a.id}`]) ? 1 : 0;
+          const confirmationToken = JSON.stringify({ draft, published, affectedStudents, source: d.sourceName, target: d.targetName });
+          if (d.expectedDraft && chapterMergeDraftFingerprint(d.expectedDraft) !== chapterMergeDraftFingerprint(draft)) throw Error('草稿剛被更新，請重新載入後合併');
+          result = { sourceName: d.sourceName, targetName: d.targetName, activities, affectedStudents, confirmationToken };
+          if (d.preview !== true) {
+            if (d.confirmationToken !== confirmationToken) throw Error('請重新預覽後確認合併');
+            draft = nextDraft; published = nextPublished;
+            courseMap.set(draft.id, draft); publishedMap.set(draft.id, published);
+            progress = mergedChapterProgress(progress, d.sourceName, d.targetName, activities.map(a => a.id));
+            result.course = draft;
+          }
+          break;
+        }
         case 'deleteCourse':
           courseMap.delete(d.courseId); publishedMap.delete(d.courseId); rosterMap.delete(d.courseId); break;
         case 'archiveCourse':

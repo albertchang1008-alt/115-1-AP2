@@ -7,6 +7,7 @@ import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { defineSecret } from 'firebase-functions/params';
 import { createHash, createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { VERSION } from '../../shared/version';
+import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint } from '../../shared/chapterMerge';
 import {
   materialUrl as validMaterialUrl,
   Course,
@@ -330,6 +331,40 @@ export const publishCourse = onCall(options, async (req) => {
     tx.update(ref, { published, classIds: course.classIds });
   });
   return published;
+});
+
+// Preview and commit both read the current course and every progress document in one transaction.
+export const mergeChapter = onCall(options, async (req) => {
+  const { p } = await access(req, req.data.courseId, true);
+  const sourceName = code(req.data.sourceName), targetName = code(req.data.targetName);
+  const ref = db.doc(`courses/${code(req.data.courseId)}`);
+  return db.runTransaction(async tx => {
+    const snap = await tx.get(ref), data = snap.data();
+    if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權');
+    const draft = data.draft as Course, published = data.published as Course | undefined;
+    if (req.data.expectedDraft && chapterMergeDraftFingerprint(req.data.expectedDraft) !== chapterMergeDraftFingerprint(draft)) fail('草稿剛被更新，請重新載入後合併');
+    let nextDraft: Course, nextPublished: Course | undefined;
+    try {
+      nextDraft = mergeChapterCourse(draft, sourceName, targetName);
+      nextPublished = published && chaptersOf(published)[sourceName] ? mergeChapterCourse(published, sourceName, targetName) : published;
+    } catch (error) { fail((error as Error).message); }
+    const activities = mergeActivityList(draft, published, sourceName, targetName);
+    const progress = await tx.get(ref.collection('progress'));
+    const activityIds = activities.map(a => a.id);
+    const affected = progress.docs.filter(doc => activityIds.some(a => doc.data().activities?.[chapterActivityKey(sourceName, a)]));
+    const confirmationToken = createHash('sha256').update(JSON.stringify({ draft, published: published || null, sourceName, targetName, students: affected.map(d => d.id).sort() })).digest('hex');
+    const preview = { sourceName, targetName, activities, affectedStudents: affected.length, confirmationToken };
+    if (req.data.preview === true) return preview;
+    if (req.data.confirmationToken !== confirmationToken) fail('課程設定或受影響學生已變動，請重新預覽後確認合併');
+    // All reads precede writes. A concurrent progress update makes Firestore retry this transaction.
+    for (const doc of affected) {
+      const before = doc.data() as Progress, after = mergedChapterProgress(before, sourceName, targetName, activityIds);
+      if (JSON.stringify(before.activities) !== JSON.stringify(after.activities)) tx.update(doc.ref, { activities: after.activities });
+    }
+    tx.update(ref, { draft: nextDraft, ...(nextPublished ? { published: nextPublished } : {}) });
+    tx.create(ref.collection('chapterMergeLog').doc(), { sourceName, targetName, activityIds, affectedStudents: affected.length, actorUid: p.uid, at: FieldValue.serverTimestamp() });
+    return { ...preview, course: { ...nextDraft, archived: !!data.archived, publishedAt: nextPublished?.publishedAt || 0 } };
+  });
 });
 async function updateVisibility(req: any, unitIds: string[], next: UnitVisibility, archiveLabel: string, action: string) {
   const { p } = await access(req, req.data.courseId, true);

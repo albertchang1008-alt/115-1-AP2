@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 心臟II 圖像化改版 | 實作 `7992b9a`，Claude 初驗已有 4 項必修／4 項建議，詳下方待辦；與 1.6.4 同分支，修正後再複驗，未部署 |
+| 心臟II 圖像化改版 | 實作 `7992b9a`，Claude 初驗 4 項必修／4 項建議；必修 2 已由 `b31b36d` 重畫，待複驗，詳下方待辦；與 1.6.4 同分支，修正後再複驗，未部署 |
 | 1.6.4 後台兩層選單 | `feature/cardiac-output-visuals`（`7e69ce9`）：題庫／報表兩層連動、研究頁分組完成，待 Claude 驗收；未 push／部署。報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md` |
 | 第一階段補齊教材 | `feature/stage1-supplement`（33e7700＋交接）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
@@ -107,7 +107,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **交辦 Codex：心臟II 圖像化修正（與 1.6.4 同一輪）**
 必修：
 1. **心輸出量長條圖未依數值比例**：EDV 140 與 120 畫得一樣高，SV／ESV 分段也未按 mL 比例，學生看不出變化。長條總高須與 EDV 成正比（同一縱軸刻度），SV 段與 ESV 段依 mL 分配；四根並排時基準線對齊。
-2. **全身主要動靜脈解剖底圖**：已依 `docs/MAJOR_VESSELS_ANATOMY_SPEC.md` 原創重畫，取代原本必修 2，待 Claude 複驗。共用底圖／胃放大圖／脈搏／overview、14 張截圖、完整作答、逐位元保留與掃描報告見 `docs/MAJOR_VESSELS_ANATOMY_ACCEPTANCE.md`。未 push／部署。
+2. **全身主要動靜脈解剖底圖**：`b31b36d` 已依 `docs/MAJOR_VESSELS_ANATOMY_SPEC.md` 原創重畫，取代原本必修 2，待 Claude 複驗。共用底圖／胃放大圖／脈搏／overview、14 張截圖、完整作答、逐位元保留與掃描報告見 `docs/MAJOR_VESSELS_ANATOMY_ACCEPTANCE.md`。未 push／部署。
 3. **6 份新教材預測題干擾選項不合理**（「相反方向／不變／無法由此模型判斷」）。改為（正解在前，實作打散；answer 依正解位置更新；feedback 不改）：
    - cardiac-output：增加／減少／不變／變為零
    - blood-pressure-measurement：收縮壓／舒張壓／脈壓／平均動脈壓
@@ -122,8 +122,9 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 7. 電性活動對齊圖的竇房結電位：畫成緩慢去極化（節律電位）上升到閾值 → 較緩的上升 → 再極化，最好畫兩個週期；目前像單一尖峰後變平線。
 8. 接力賽圖目前是縱向時間軸，可加接力棒圖示讓比喻更明顯（非必要）。
 節點／題目 ID、題目內容、Excel 不改；修完 npm run check、用語掃描，附截圖（長條四狀態、胃路徑、拔河兩格、各預測題）。
-**1.6.4 合併單元：本輪追加，待實作**
-- 無次單元才可合併；教師 callable 交易合併活動／班級設定及時間（目標優先），搬移所有學生 progress 至目標、舊鍵保留、已完成不降級；預覽活動與受影響學生人數後確認；研究／診斷不動，補行為與完成度測試。
+**1.6.4 合併單元：完成，待 Claude 驗收（本次提交）**
+- 空單元才顯示合併；預覽活動／受影響學生後確認。教師 callable 交易分別合併草稿／已發布活動與班級設定（目標優先），全體 progress 複製至目標、舊鍵保留、completed 不降級；研究／診斷不動。
+- check 119 前端／19 Functions、兩端 build、version:check 過；行為／React／完成度測試與詳情見 `docs/CHAPTER_MERGE_1.6.4_ACCEPTANCE.md`。版本 1.6.4，未 push／部署；下一步 Claude 驗收。
 **1.6.4 後台「單元／次單元」兩層選單：待 Claude 驗收**
 - ChapterUnitPicker 共用兩層選單：單元依 orderedChapters／看板順序，次單元只列該單元分類；換單元重設第一個，清空題庫預覽／報表摘要與明細，舊非同步結果不覆蓋新選擇。
 - 題庫讀取／版本徽章沿所選次單元；報表保留「全部」，此時次單元停用，仍依 Unit ID 篩選；研究資料頁依單元 optgroup 分組。
@@ -133,19 +134,16 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - **部署後教師**：①第 108–162 列（若尚未貼）與第 163–228 列貼上 Sheet 題庫分頁並同步；②建立「心臟II」單元；③教材活動：心臟II＝電性活動、心電圖基礎、心輸出量、血壓測量、微血管交換、主要動靜脈；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
-
 **等教師決定**
 - 待教師處理：後台血液氣體運送、止血機制活動改連 v2。
 - 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
-
 **技術待辦（未排程）**
 - 題目作廢並重算（標記作廢題、重算分數／最高分／passedAt）。
 - 後端 callable 缺行為測試（目前多為原始碼字串比對），`passedAt` 首次達標邏輯尚無行為測試。
 - `diagnostics` 的 `summary` 欄位補索引排除；firebase-functions 版本升級。
 - `html/血液氣體運送.html`、`html/止血機制與凝血病理.html`、`html/血液的組成.html` 的兩關改造與圖像化尚未全部完成、未正式發布。
 - 端到端驗收（真實學生登入、名冊、同步、教材事件、報表、用量）。
-
 **需要教師提供**
 - Google Sheet：補齊單元欄、名冊資料。
 - 研究用前後測、等值／遷移題內容（平台不自行杜撰）。
