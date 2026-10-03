@@ -70,6 +70,11 @@ def parse():
         if slug=='blood-types':
             c['summaryTable']={'headers':['主題','關鍵概念','整理重點'],'rows':[[n['title'],n['summary'],'；'.join(n['points'])] for n in c['nodes']]}
             c['summaryTable']['rows'][1]=['ABO 系統','依紅血球上的 A、B 抗原區分四型','A 型：A 抗原、抗 B 抗體；B 型：B 抗原、抗 A 抗體；AB 型：A、B 抗原，無抗 A／抗 B 抗體；O 型：無 A、B 抗原，有抗 A／抗 B 抗體']
+        # Reviewed node prose: prevent the old repeated summary padding from returning.
+        revision=json.loads((ROOT/'scripts/heart2-node-texts.json').read_text())[slug]
+        for node in c['nodes']:
+            node['points']=revision[node['id']]['points']
+            node['clinical']['text']=revision[node['id']]['clinical']
         output.append(c)
     return output
 

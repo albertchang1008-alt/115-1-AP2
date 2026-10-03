@@ -2,7 +2,7 @@
 from pathlib import Path
 import re
 root=Path(__file__).resolve().parents[1]/'materials-src/figures'
-RED='#a71930';BLUE='#1769aa';INK='#17212b';parts=[]
+RED='#D7263D';BLUE='#1769aa';INK='#17212b';parts=[]
 def vessel(d,color,width,routes='',name='',segment='',dash=''):
     attrs=f' data-routes="{routes}"' if routes else ''
     if segment:attrs+=f' data-aortic-segment="{segment}"'
@@ -21,7 +21,7 @@ body+='<path d="M157 271Q204 260 253 272" stroke="#b9a899" stroke-width="1" fill
 all_routes='right-hand left-hand left-foot stomach'
 # The arch is a wide curve, with its own exact limits and three superior branches.
 segments=[('ascending','M202 225C198 219 190 212 190 202Q189 192 197 184',all_routes),('arch','M197 184C207 169 232 169 249 179Q269 186 266 207',all_routes),('thoracic','M266 207C258 226 238 235 233 255L231 280','left-foot stomach'),('abdominal','M231 280L230 300','left-foot stomach'),('abdominal','M230 300L228 377','left-foot')]
-for name,d,rs in segments:vessel(d,RED,7,rs,'aorta-'+name,name)
+for name,d,rs in segments:vessel(d,RED,12,rs,'aorta-'+name,name)
 for d in ['M190 180L203 188','M258 204L274 210','M223 280L239 280']:
     parts.append(f'<path class="segment-mark" d="{d}" fill="none" stroke="#6d7880" stroke-width="1" stroke-dasharray="1 2"/>')
 vessel('M197 184C193 176 192 168 191 161',RED,5,'right-hand','brachiocephalic-artery')
@@ -31,7 +31,7 @@ vessel('M176 109C171 104 171 94 173 88',RED,2,'','right-temporal')
 vessel('M226 174C224 157 224 142 226 126L228 109',RED,3.5,'','left-carotid')
 vessel('M257 185C257 177 260 177 262 190',RED,4.5,'left-hand','left-subclavian')
 for side,route in [('right','right-hand'),('left','left-hand')]:
-    arm=[('M141 191C134 211 131 230 126 248',4,'axillary'),('M126 248C120 269 117 289 111 308',3.6,'brachial'),('M111 308C101 323 94 340 88 359L81 380',2.8,'radial'),('M111 308C111 332 107 350 101 372L99 387',2.4,'ulnar')] if side=='right' else [('M262 190C269 211 272 230 277 248',4,'axillary'),('M277 248C283 269 286 289 292 308',3.6,'brachial'),('M292 308C302 323 309 340 315 359L322 380',2.8,'radial'),('M292 308C292 332 296 350 302 372L304 387',2.4,'ulnar')]
+    arm=[('M141 191C134 211 131 230 126 248',4,'axillary'),('M126 248C139 270 142 288 132 294L111 308',3.6,'brachial'),('M111 308C101 323 94 340 88 359L81 380',2.8,'radial'),('M111 308C111 332 107 350 101 372L99 387',2.4,'ulnar')] if side=='right' else [('M262 190C269 211 272 230 277 248',4,'axillary'),('M277 248C283 269 286 289 292 308',3.6,'brachial'),('M292 308C302 323 309 340 315 359L322 380',2.8,'radial'),('M292 308C292 332 296 350 302 372L304 387',2.4,'ulnar')]
     for d,w,n in arm:vessel(d,RED,w,route,side+'-'+n)
     vessel('M95 378C101 353 116 322 120 304C130 269 139 216 148 194C159 184 180 177 187 179' if side=='right' else 'M309 378C304 353 289 322 285 304C275 269 266 216 255 194L237 180C225 172 210 178 187 179',BLUE,4,route,side+'-arm-return')
 vessel('M187 179C188 195 189 214 188 225',BLUE,5,'right-hand left-hand','superior-vena-cava')
@@ -58,13 +58,13 @@ def label(text,side,y,px,py,route='',color=INK):
 labels=''
 for route,right in [('right-hand',True),('left-hand',False)]:
     side='left' if right else 'right';other='right' if right else 'left'
-    items=[('頭臂動脈' if right else '左鎖骨下',175,195 if right else 259,176 if right else 183,RED),('鎖骨下動脈',220,157 if right else 260,180,RED),('鎖骨下靜脈',265,163 if right else 246,184 if right else 187,BLUE),('腋動脈',310,135 if right else 269,216,RED),('腋靜脈',355,139 if right else 266,224,BLUE),('肱動脈',420,120 if right else 281,275 if right else 266,RED),('橈、尺動脈',495,95 if right else 301,354 if right else 365,RED)]
+    items=[('頭臂動脈' if right else '左鎖骨下',130 if right else 175,195 if right else 259,176 if right else 183,RED),('鎖骨下動脈',220,157 if right else 260,180,RED),('鎖骨下靜脈',265,163 if right else 246,184 if right else 187,BLUE),('腋動脈',310,135 if right else 269,216,RED),('腋靜脈',355,139 if right else 266,224,BLUE),('肱動脈',420,137 if right else 281,275 if right else 266,RED),('橈、尺動脈',495,95 if right else 301,354 if right else 365,RED)]
     if not right:
         # One full label for the same left subclavian artery avoids duplicate crossing leaders.
         items=items[1:]
         items[0]=('左鎖骨下動脈',220,260,180,RED)
     for t,y,px,py,c in items:labels+=label(t,side,y,px,py,route,c)
-    labels+=label('右頭臂靜脈' if right else '左頭臂靜脈',other,205,185 if right else 218,179 if right else 176,route,BLUE)
+    labels+=label('右頭臂靜脈' if right else '左頭臂靜脈',side if right else other,175 if right else 205,180 if right else 218,178 if right else 176,route,BLUE)
     labels+=label('升主動脈',other,240,190,205,route,RED)+label('上腔靜脈',other,300,188,218,route,BLUE)+label('主動脈弓',other,100,240,175,route,RED)
 for route in ['left-foot','stomach','overview']:
     for t,y,px,py in [('升主動脈',145,190,205),('主動脈弓',100,240,175),('胸主動脈',220,245,236),('腹主動脈',280,230,291)]:labels+=label(t,'right',y,px,py,route,RED)
@@ -73,7 +73,7 @@ for t,side,y,px,py in [('腹腔幹','right',325,236,298),('胃','right',382,260,
 head='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 810" role="img" aria-label="全身主要動靜脈｜圖左＝人體右"><style>text{font-family:system-ui,sans-serif;font-size:calc(28px * var(--font-scale,1))}.anatomy-label path{opacity:.65}[data-label-state]{display:none}[data-label-state="overview"]{display:block}</style><text x="12" y="35">圖左＝人體右</text><g transform="translate(140 0) scale(.8 1)"><g data-anatomy-base="major-vessels-anatomy-base.svg"/></g>'
 (root/'major-vessels-overview.svg').write_text(head+labels+'<text x="10" y="789">紅：去程；藍：回程</text></svg>')
 pulse=''
-for t,side,y,px,py in [('顳動脈','left',83,173,90),('頸動脈','right',132,225,132),('肱動脈','left',265,122,270),('橈動脈','right',407,315,359),('股動脈','left',464,180,442),('膕（膝後）','right',560,228,545),('足背動脈','left',731,169,724)]:
+for t,side,y,px,py in [('顳動脈','left',83,169,94),('頸動脈','right',132,225,132),('肱動脈','left',290,132,294),('橈動脈','right',407,315,359),('股動脈','left',464,180,442),('膕（膝後）','right',560,228,545),('足背動脈','left',731,169,724)]:
     pulse+=label(t,side,y,px,py,color=RED)+f'<circle cx="{px*.8+140}" cy="{py}" r="6" fill="#fff" stroke="{RED}" stroke-width="2"/>'
 (root/'major-vessels-pulse.svg').write_text(head+pulse+'<text x="10" y="790">虛線：位於後側的血管</text></svg>')
 # Portal inset reuses the exact organ silhouettes, with separate superior/inferior entries.

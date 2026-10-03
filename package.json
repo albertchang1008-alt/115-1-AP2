@@ -15,7 +15,8 @@
     "materials:build": "node --experimental-strip-types scripts/materials-build.mjs",
     "materials:preview": "node --experimental-strip-types scripts/materials-build.mjs --preview",
     "materials:shots": "node scripts/materials-shots.mjs",
-    "check": "npm test && npm run build && npm --prefix functions run build && npm --prefix functions test"
+    "check": "npm test && npm run build && npm --prefix functions run build && npm --prefix functions test",
+    "materials:validate-nodes": "node --experimental-strip-types scripts/material-node-audit.mjs"
   },
   "dependencies": {
     "firebase": "^11.0.0",

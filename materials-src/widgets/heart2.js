@@ -51,7 +51,7 @@ const Heart2 = (() => {
         const button = event.target.closest('[data-aorta-select]'); if (!button) return;
         selected = selected === button.dataset.aortaSelect ? null : button.dataset.aortaSelect;
         root.querySelectorAll('[data-aorta-select]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.aortaSelect === selected)));
-        root.closest('.node-detail').querySelectorAll('[data-aortic-segment]').forEach(g => g.style.opacity = !selected || g.dataset.aorticSegment === selected ? '1' : '.3');
+        root.closest('.node-detail').querySelectorAll('[data-aortic-segment]').forEach(g => { g.style.opacity = '1'; g.classList.toggle('aortic-dim', !!selected && g.dataset.aorticSegment !== selected); });
         root.querySelector('.aorta-definition').textContent = selected ? this.segments.find(s => s[0] === selected).slice(1).join('：') : '預設顯示全部；點選一段看起訖，再點一次恢復全部。';
       });
     },

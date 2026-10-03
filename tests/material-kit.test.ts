@@ -60,3 +60,15 @@ test('標示題型驗證與元件庫洗牌', () => {
   assert.doesNotMatch(kit, /sort\(\(\)\s*=>\s*Math\.random/); assert.match(kit, /Math\.floor\(Math\.random\(\) \* \(i \+ 1\)\)/);
   assert.match(kit, /aria-expanded/); assert.match(kit, /nodeTime/);
 });
+
+test('節點文字正規化後拒絕重複及摘要重述', async () => {
+  const { validateNodeText } = await import('../shared/materialKit');
+  const n = { id: 'test-node', summary: '摘要句。', concept: '概念句。', points: ['甲。', '乙。', '丙。'], clinical: { text: '判讀例子。' } };
+  assert.deepEqual(validateNodeText([n]), []);
+  assert.match(validateNodeText([{ ...n, points: ['甲。', ' 甲 .', '概念句'] }]).join('\n'), /重複/);
+  assert.match(validateNodeText([{ ...n, points: ['摘要句', '乙', '丙'] }]).join('\n'), /summary／concept/);
+  assert.match(validateNodeText([{ ...n, clinical: { text: ' 摘要句 ' } }]).join('\n'), /clinical.*summary/);
+  const content = JSON.parse(fs.readFileSync('materials-src/heart-structure/content.json', 'utf8'));
+  content.nodes[0].points[1] = content.nodes[0].points[0] + '。';
+  assert.throws(() => validateMaterialContent(content), /正規化後重複/);
+});

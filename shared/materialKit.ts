@@ -12,6 +12,21 @@ export interface MaterialContent {
   summaryTable?: { headers: string[]; rows: string[][] };
 }
 const id = /^[a-z0-9-]+$/;
+export function validateNodeText(nodes: { id: string; points?: string[]; summary?: string; concept?: string; clinical?: { text: string } }[]): string[] {
+  const normalize = (s: string) => s.replace(/[。．.\s]/g, '');
+  const errors: string[] = [];
+  for (const n of nodes) {
+    const seen = new Set<string>();
+    for (const [i, point] of (n.points || []).entries()) {
+      const p = normalize(point);
+      if (seen.has(p)) errors.push(`${n.id}.points.${i + 1}：正規化後重複`);
+      seen.add(p);
+      if ([n.summary, n.concept].some(s => s && normalize(s) === p)) errors.push(`${n.id}.points.${i + 1}：等於 summary／concept`);
+    }
+    if (n.summary && n.clinical?.text && normalize(n.summary) === normalize(n.clinical.text)) errors.push(`${n.id}.clinical：等於 summary`);
+  }
+  return errors;
+}
 export function validateMaterialContent(value: unknown): asserts value is MaterialContent {
   const c = value as MaterialContent, errors: string[] = [];
   if (!c || typeof c !== 'object') throw new Error('content：必須是物件');
@@ -40,5 +55,6 @@ export function validateMaterialContent(value: unknown): asserts value is Materi
     }
     for(const f of c.overview.specials||[]){if(factors.has(f.id)||!c.nodes.some(n=>n.id===f.nodeId))errors.push('overview：特殊因素 ID 或 nodeId 無效');factors.add(f.id);}
   }
+  errors.push(...validateNodeText(c.nodes || []));
   if (errors.length) throw new Error(errors.join('\n'));
 }
