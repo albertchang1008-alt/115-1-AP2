@@ -107,6 +107,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **交辦 Codex：心輸出量圖像化改版（2026-10-03 教師）**
 - 規格 `docs/CARDIAC_OUTPUT_VISUALS_SPEC.md`：情境實驗室改心室容積長條圖（基準／前負荷↑／收縮力↑／後負荷↑）；6 節點專屬圖（幫浦比喻、基準長條、Frank-Starling 彈簧三格〔拉過頭＝像彈簧被拉斷〕、收縮力／後負荷長條對照、油門／煞車）；整理表上方新增**互動式公式樹**（kit 新元件 `factor-tree`，可重用）。
 - 分支：從 `feature/stage1-supplement` 最新 commit 建 `feature/cardiac-output-visuals`。**不阻擋 1.6.3 部署**；本項驗收通過後另行部署。節點／題目 ID、11 題、Excel 不改。
+- **同輪追加（2026-10-03 教師）**：心臟II 其餘教材圖像化強化，規格 `docs/HEART2_VISUALS_SPEC.md`（全身主要動靜脈節點 6 錯誤標籤必修＋區域放大＋追蹤一滴血＋脈搏點位；血壓測量放氣滑桿 `bp-cuff`＋壓力–時間圖＋水管比喻；微血管 Starling 圖＋拔河＋公式樹重用；電性活動接力賽／紅綠燈／動作電位×心電圖對齊；共通顏色語意、文字互參、常見誤解框）。**心電圖基礎本輪不改**。同分支 `feature/cardiac-output-visuals`。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
