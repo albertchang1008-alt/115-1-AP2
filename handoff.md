@@ -112,6 +112,14 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 四份 materials:preview＋materials:shots 通過；check（115／18、兩端 build）通過；用語／草稿掃描 0；5 份 × 390／1280 完整流程及 114 張截圖通過，最小圖字 14.58px。報告／比對／圖庫：`docs/HEART2_VISUALS_ACCEPTANCE.md`。
 - 下一步 Claude 依 `docs/CARDIAC_OUTPUT_VISUALS_SPEC.md`、`docs/HEART2_VISUALS_SPEC.md` 驗收，教師看畫面。未執行 build 登錄、未 push／部署，main 未動；不阻擋原 stage1 分支 1.6.3 部署。
 
+**交辦 Codex：1.6.4 後台「單元／次單元」兩層選單（2026-10-03 教師）**
+- 問題：後台把所有次單元（題目分類，`Unit`）攤平成一個下拉，卻標「單元」（例：「血液成分與血漿」其實是次單元）。依固定決策 7：Sheet「單元」＝`Chapter`、「次單元」＝`Unit`。
+- 修正：新增共用元件（例 `ChapterUnitPicker`）：先選「單元」（`orderedChapters(course)`，順序同看板），再選「次單元」（該單元底下的 units，顯示 title）。換單元時次單元重設為該單元第一個，並清空已載入資料。
+  1. 題庫管理（`src/App.tsx` 約第 1018 行）：改為兩層；「讀取已連接版本」與版本徽章沿用所選次單元。
+  2. 報表頁（約第 1596 行 `aria-label="單元"`、含「全部已載入單元」）：改為兩層；保留「全部」選項（單元＝全部時次單元停用），篩選邏輯不變。
+  3. 研究資料頁（`src/ResearchEvidence.tsx` 的「次單元」下拉）：加 `<optgroup label=單元名>` 分組即可。
+- 純前端顯示，資料結構、後端、完成度都不改。前端測試補一則（兩層連動、換單元重設次單元）。版本 1.6.4，與心臟II 圖像化同分支 `feature/cardiac-output-visuals`，一起驗收、一起部署。
+
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
 - 電性活動、紅血球：無錯誤、載入不送事件、assets 已 commit、11 題 ID 與 Excel 一致。紅血球原稿兩處（肝素為錯誤選項、case-q03 高山血比容「血液檢查」情境）Claude 判斷屬生理情境，**維持不改**（題目已在 Sheet，學生作答中）。
