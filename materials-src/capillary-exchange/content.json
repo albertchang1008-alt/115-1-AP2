@@ -102,7 +102,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "微血管靜水壓把液體推出血管。"
-      }
+      },
+      "caption": "拔河只是比喻。數值為 OpenStax 簡化模型的示意數值。"
     },
     {
       "id": "capillary-exchange-node-04",
@@ -119,7 +120,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "血漿膠體滲透壓把液體拉回血管。"
-      }
+      },
+      "caption": "拔河只是比喻。數值為 OpenStax 簡化模型的示意數值。"
     },
     {
       "id": "capillary-exchange-node-05",
@@ -136,7 +138,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "模型動脈端靜水壓大於膠體滲透壓，液體淨濾出。"
-      }
+      },
+      "caption": "拔河只是比喻。數值為 OpenStax 簡化模型的示意數值。"
     },
     {
       "id": "capillary-exchange-node-06",
@@ -153,7 +156,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "多出的組織液由淋巴管回收並送回靜脈。"
-      }
+      },
+      "reference": "延伸：淋巴系統說明組織液如何回到血液循環。"
     }
   ],
   "foundation": [
@@ -316,5 +320,60 @@
   ],
   "credits": [
     "OpenStax A&P 2e 20.3 Capillary Exchange。"
+  ],
+  "overview": {
+    "type": "factor-tree",
+    "title": "組織液公式樹",
+    "root": "組織液量（過多＝水腫）",
+    "branches": [
+      {
+        "id": "filtration",
+        "label": "濾出",
+        "sign": 1,
+        "children": [
+          {
+            "id": "hydrostatic",
+            "label": "微血管靜水壓",
+            "sign": 1,
+            "nodeId": "capillary-exchange-node-03",
+            "explainUp": "外推力量增加，濾出增加。",
+            "explainDown": "外推力量減少，濾出減少。"
+          },
+          {
+            "id": "oncotic",
+            "label": "血漿膠體滲透壓",
+            "sign": -1,
+            "nodeId": "capillary-exchange-node-04",
+            "explainUp": "白蛋白的內拉力量增加，濾出減少。",
+            "explainDown": "血漿白蛋白減少 → 膠體滲透壓↓ → 拉回的力量變小、濾出↑ → 組織液↑，過多時形成水腫。"
+          }
+        ]
+      },
+      {
+        "id": "lymph-return",
+        "label": "淋巴回收",
+        "sign": -1,
+        "children": [
+          {
+            "id": "lymph-flow",
+            "label": "淋巴回流",
+            "sign": 1,
+            "nodeId": "capillary-exchange-node-06",
+            "explainUp": "淋巴收走更多組織液，組織液量減少。",
+            "explainDown": "淋巴回收減少，組織液量增加。"
+          }
+        ]
+      }
+    ]
+  },
+  "misconceptions": [
+    {
+      "wrong": "液體在微血管只會往外流",
+      "correct": "靜脈端會回收。"
+    },
+    {
+      "wrong": "組織液全部回到微血管",
+      "correct": "多出的由淋巴回收。"
+    }
   ]
 }

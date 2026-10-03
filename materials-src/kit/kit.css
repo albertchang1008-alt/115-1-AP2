@@ -57,3 +57,19 @@ button:focus-visible,select:focus-visible{outline:3px solid #c97b00;outline-offs
 .node-detail{grid-column:1 / -1;min-width:0;background:#fff;border:1px solid #ded6d0;border-radius:18px;padding:22px}
 .node-detail [data-close-node]{display:block;margin-top:20px}
 @media(max-width:760px){.node-detail{padding:16px}}
+
+/* 心臟II 教學元件：語意顏色獨立於教材配色。 */
+.supplemental{margin:24px 0;padding:22px;background:#fff;border:1px solid var(--border);border-radius:18px;min-width:0}
+.factor-controls,.cuff-controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.factor-root{text-align:center;margin:18px 0}.factor-root button{border-width:3px}
+.factor-branches{display:grid;grid-template-columns:1fr 1fr;gap:18px}.factor-branch{text-align:center;border-top:2px solid #64748b;padding:12px;min-width:0}
+.factor-leaves{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}.factor-leaves>div{flex:1;min-width:110px}.factor-leaves button{width:100%}
+.tree-edge{display:block;color:#475569}.factor-direction{display:block;font-weight:800}.factor-active{outline:3px solid #176b45;outline-offset:2px}.factor-dim{opacity:.45}
+.factor-special{border:2px dashed #64748b;padding:12px;margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.factor-tree button{font-size:calc(16px * var(--font-scale,1));overflow-wrap:anywhere}.factor-tree [data-factor="sv"]{border-color:#176b45;color:#176b45}.factor-tree [data-factor="sv"][aria-pressed="true"]{background:#176b45;color:#fff}
+.bp-cuff input{width:100%;height:40px;accent-color:#8250a0}.bp-cuff svg{display:block;max-width:600px;margin:auto}.bp-cuff output{font-weight:800;color:#8250a0}
+.misconception{border-left:4px solid #9a5a00;background:#fff8ed;padding:8px 16px;margin:12px 0}.misconception p{margin:6px 0}.extra-figure{max-width:500px;margin:auto}
+.figure-caption,.material-reference{background:#f1f5f9;padding:12px;border-radius:8px;font-size:calc(16px * var(--font-scale,1))}
+@media(max-width:760px){.supplemental{padding:16px}.factor-branches{gap:8px}.factor-branch{padding:6px}.factor-leaves{flex-direction:column}.factor-leaves>div{min-width:0}.factor-tree button{font-size:calc(14px * var(--font-scale,1));padding:8px}}
+
+.branch-active{border-top:3px solid #176b45}.branch-active>.tree-edge{color:#176b45;font-weight:800}.factor-branch:has(.factor-dim):not(.branch-active)>.tree-edge{opacity:.45}

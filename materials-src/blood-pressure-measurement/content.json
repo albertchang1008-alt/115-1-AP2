@@ -21,25 +21,7 @@
   ],
   "lab": {
     "title": "情境實驗室",
-    "intro": "切換情境，比較圖中的路徑、數值與反應。",
-    "figure": "blood-pressure-measurement-overview.svg",
-    "states": [
-      {
-        "id": "state-1",
-        "label": "壓脈帶壓力＞收縮壓",
-        "explain": "壓脈帶壓力＞收縮壓：動脈被壓閉、無血流、無聲"
-      },
-      {
-        "id": "state-2",
-        "label": "介於兩者之間",
-        "explain": "介於兩者之間：只在收縮期衝過、斷續亂流 → 柯氏音"
-      },
-      {
-        "id": "state-3",
-        "label": "＜舒張壓",
-        "explain": "＜舒張壓：血流恢復平順、聲音消失"
-      }
-    ],
+    "intro": "拖動壓脈帶壓力或自動放氣，觀察 120／80 示意模型的血流與柯氏音。",
     "predict": {
       "question": "放氣時聽到的第一個規律聲音代表？",
       "options": [
@@ -50,7 +32,8 @@
       ],
       "answer": 1,
       "feedback": "壓脈帶壓力剛降到收縮壓以下時，血液在收縮期衝過受壓的肱動脈形成亂流，出現第一個規律柯氏音，此時的壓力就是收縮壓。"
-    }
+    },
+    "widget": "bp-cuff"
   },
   "nodes": [
     {
@@ -68,7 +51,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "聽診法在肘窩的肱動脈聽取血流聲音。"
-      }
+      },
+      "caption": "水管只是比喻。"
     },
     {
       "id": "blood-pressure-measurement-node-02",
@@ -153,7 +137,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "脈壓＝120−80＝40 mmHg。"
-      }
+      },
+      "reference": "延伸：心輸出量的調節說明 CO 如何影響平均動脈壓 MAP。"
     }
   ],
   "foundation": [
@@ -316,5 +301,15 @@
   ],
   "credits": [
     "OpenStax A&P 2e 20.2；本課血壓測量實驗講義。"
+  ],
+  "misconceptions": [
+    {
+      "wrong": "聽到的是心跳聲（心音）",
+      "correct": "是血液斷續衝過受壓動脈的柯氏音。"
+    },
+    {
+      "wrong": "放氣越快越準",
+      "correct": "太快可能錯過第一聲。"
+    }
   ]
 }

@@ -21,23 +21,28 @@
   ],
   "lab": {
     "title": "情境實驗室",
-    "intro": "切換情境，比較圖中的路徑、數值與反應。",
+    "intro": "點選四種狀態，比較心室容積。綠色上段是心搏量，灰色下段是 ESV；數字為示意數值。",
     "figure": "cardiac-output-overview.svg",
     "states": [
       {
-        "id": "state-1",
-        "label": "交感興奮",
-        "explain": "心臟交感節後神經釋放正腎上腺素 NE → 心率↑、收縮力↑ → CO↑。"
+        "id": "base",
+        "label": "基準",
+        "explain": "心搏量＝EDV−ESV＝120−50＝70 mL（示意數值）。"
       },
       {
-        "id": "state-2",
-        "label": "迷走（副交感）興奮",
-        "explain": "迷走所屬副交感節後神經釋放乙醯膽鹼 ACh → 心率↓ → CO 傾向↓。"
+        "id": "preload",
+        "label": "前負荷↑",
+        "explain": "回心血量增加使 EDV 變大，心肌被拉長；生理範圍內收縮更強，心搏量增加。"
       },
       {
-        "id": "state-3",
-        "label": "回心血量增加",
-        "explain": "回心血量增加：EDV↑ → Frank-Starling → SV↑"
+        "id": "contractility",
+        "label": "收縮力↑",
+        "explain": "交感（NE）或腎上腺素使收縮力增強，擠得更乾淨，ESV 變小，心搏量增加。"
+      },
+      {
+        "id": "afterload",
+        "label": "後負荷↑",
+        "explain": "動脈壓升高，心室射血要克服更大壓力，擠不出去的血變多，ESV 變大，心搏量減少。"
       }
     ],
     "predict": {
@@ -68,7 +73,9 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "CO＝HR×SV，表示一側心室每分鐘射出的血量。"
-      }
+      },
+      "caption": "幫浦只是比喻；心臟是心肌主動收縮。",
+      "reference": "延伸：血壓測量的平均動脈壓 MAP 也用到心輸出量。"
     },
     {
       "id": "cardiac-output-node-02",
@@ -85,7 +92,8 @@
       "clinical": {
         "title": "觀察與應用",
         "text": "SV＝EDV−ESV＝120−50＝70 mL。"
-      }
+      },
+      "caption": "射出分率＝70÷120≈58%，約 60%（示意數值）。"
     },
     {
       "id": "cardiac-output-node-03",
@@ -97,12 +105,14 @@
       "points": [
         "前負荷＝收縮前心室被血液撐開的程度（EDV）",
         "生理範圍內心肌被拉長越多，收縮越強，SV↑",
-        "使左右心輸出量保持平衡"
+        "使左右心輸出量保持平衡",
+        "心室被撐得過度時（超出生理範圍），收縮力反而下降。"
       ],
       "clinical": {
         "title": "觀察與應用",
         "text": "生理範圍內，前負荷增加使心肌拉長，依 Frank-Starling 收縮增強。"
-      }
+      },
+      "caption": "心肌像彈簧：生理範圍內拉得越長，收縮越強。彈簧只是比喻，心肌是主動收縮。"
     },
     {
       "id": "cardiac-output-node-04",
@@ -356,5 +366,92 @@
         "其他條件相同時 SV 傾向↓"
       ]
     ]
-  }
+  },
+  "overview": {
+    "type": "factor-tree",
+    "title": "公式樹總覽",
+    "root": "心輸出量 CO",
+    "branches": [
+      {
+        "id": "hr",
+        "label": "心率 HR ×",
+        "sign": 1,
+        "children": [
+          {
+            "id": "ne",
+            "label": "交感 NE",
+            "sign": 1,
+            "nodeId": "cardiac-output-node-06",
+            "explainUp": "交感作用使心率增加。",
+            "explainDown": "交感作用減少使心率降低。"
+          },
+          {
+            "id": "ach",
+            "label": "迷走 ACh",
+            "sign": -1,
+            "nodeId": "cardiac-output-node-06",
+            "explainUp": "副交感主要降低心率。",
+            "explainDown": "迷走作用減少，對心率的煞車減弱。"
+          },
+          {
+            "id": "epinephrine",
+            "label": "腎上腺素",
+            "sign": 1,
+            "nodeId": "cardiac-output-node-06",
+            "explainUp": "腎上腺髓質經血液送達心臟。",
+            "explainDown": "腎上腺素作用減少，心率傾向降低。"
+          }
+        ]
+      },
+      {
+        "id": "sv",
+        "label": "心搏量 SV",
+        "sign": 1,
+        "children": [
+          {
+            "id": "preload",
+            "label": "前負荷",
+            "sign": 1,
+            "nodeId": "cardiac-output-node-03",
+            "explainUp": "生理範圍內，EDV 增加使收縮更強。",
+            "explainDown": "回心血量減少使 EDV 與心搏量減少。"
+          },
+          {
+            "id": "contractility",
+            "label": "收縮力",
+            "sign": 1,
+            "nodeId": "cardiac-output-node-04",
+            "explainUp": "相同前負荷下，ESV 減少，心搏量增加。",
+            "explainDown": "收縮較弱使 ESV 增加，心搏量減少。"
+          },
+          {
+            "id": "afterload",
+            "label": "後負荷",
+            "sign": -1,
+            "nodeId": "cardiac-output-node-05",
+            "explainUp": "動脈壓升高使射血較困難，ESV 增加。",
+            "explainDown": "射血要克服的壓力減少，心搏量傾向增加。"
+          }
+        ]
+      }
+    ],
+    "specials": [
+      {
+        "id": "too-fast",
+        "label": "心率過快",
+        "nodeId": "cardiac-output-node-06",
+        "explainUp": "心率↑，但充血時間不足 → EDV↓ → 心搏量↓，CO 不一定增加。"
+      }
+    ]
+  },
+  "misconceptions": [
+    {
+      "wrong": "心率越快，心輸出量一定越大",
+      "correct": "過快時舒張期縮短、充血不足，心搏量下降。"
+    },
+    {
+      "wrong": "心肌拉越長收縮越強，沒有上限",
+      "correct": "超出生理範圍反而變弱。"
+    }
+  ]
 }

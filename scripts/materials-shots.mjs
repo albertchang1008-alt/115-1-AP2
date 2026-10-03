@@ -47,6 +47,9 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
       await page.evaluate(i => { document.querySelectorAll('.stage').forEach(s => { s.hidden = true; }); const s = document.querySelector(`.stage[data-kind="foundation"][data-index="${i}"]`); s.hidden = false; s.dispatchEvent(new CustomEvent('stage-show')); }, i);
       await page.waitForTimeout(200); await shot(`label-${q.id}`);
     }
+  } else if (content.lab.widget === 'bp-cuff') {
+    for(const pressure of [150,100,70]) {await page.locator('#cuff-pressure').fill(String(pressure));await shot(`lab-cuff-${pressure}`);}
+    await page.locator('[data-cuff-reset]').click();await page.locator('[data-cuff-play]').click();await page.waitForTimeout(1100);await shot('lab-cuff-auto');await page.locator('[data-cuff-play]').click();
   } else {
     for (const state of content.lab.states) { await page.locator(`button[data-lab-state="${state.id}"]`).click(); await shot(`lab-${state.id}`); }
   }

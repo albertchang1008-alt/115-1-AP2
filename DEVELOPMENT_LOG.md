@@ -2,6 +2,11 @@
 
 目前版本：1.6.3
 
+## 心臟II 圖像化改版（2026-10-03，Codex，平台 1.6.3，未部署）
+
+- 新分支 feature/cardiac-output-visuals（基底 f0f9028）完成兩份視覺規格；共用 factor-tree／bp-cuff／extras／misconceptions 與 widget 預測修正。四份 kit preview 重建，手工電性新增三圖；主要靜脈補畫及指示端點必修完成。
+- 題目與 ID／原預測／Excel 保留，其他教材與目錄不變；114 張指定截圖、四份標準 shots、10 組完整流程及既有手工回歸通過，check 115／18 與兩端 build 全過；台灣用語／草稿標記 0。報告 docs/HEART2_VISUALS_ACCEPTANCE.md，待 Claude 驗收與教師看畫面；未 push、未部署。
+
 ## 台灣用語交辦再次核對（2026-10-03，Codex，未部署）
 
 - 開工確認 `feature/stage1-supplement` 乾淨，1–5 項已由 `33e7700` 完成；重新驗證 43 詞零命中、六份回饋 12 組畫面、題目 ID／答案保留與 Excel 指定 10 格換詞，其餘 5,396 格及其他 ZIP parts 不變。

@@ -12,20 +12,15 @@ const shuffle = rows => {
   return a;
 };
 
-const WIDGETS = { 'ecg-sim': () => window.EcgSim };
+const WIDGETS = { 'ecg-sim': () => window.EcgSim, 'bp-cuff': () => Heart2.cuff };
 const QUESTION_TYPES = { label: () => window.EcgLabel };
 
 function renderLab(lab, figures) {
   const widget = lab.widget && WIDGETS[lab.widget]?.();
-  if (lab.widget) {
-    return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p><div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div></section>`;
-  }
-  return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>`
-    + `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div>`
-    + `<div class="state-controls">${lab.states.map((x, i) => `<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div>`
-    + `<p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`
-    + `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o, i) => `<button data-answer="${i}">${esc(o)}</button>`).join('')}</div>`
-    + `<p class="feedback" aria-live="polite"></p></section>`;
+  const prediction = lab.predict ? `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o,i)=>`<button data-answer="${i}">${esc(o)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>` : '';
+  const visual = lab.widget ? `<div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div>`
+    : `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div><div class="state-controls">${lab.states.map((x,i)=>`<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div><p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`;
+  return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>${visual}${prediction}</section>`;
 }
 
 function renderQuestion(q) {
@@ -66,8 +61,11 @@ export function render(content, figures) {
     + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
     + renderLab(content.lab, figures)
     + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}`
-    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div><h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div><button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div>${n.caption?`<p class="figure-caption">${esc(n.caption)}</p>`:''}<h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div>${n.reference?`<p class="material-reference">${esc(n.reference)}</p>`:''}<button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
     + `</div></section>`
+    + (content.overview?.type === 'factor-tree' ? Heart2.tree(content.overview) : '')
+    + (content.extras ? Heart2.extras(content.extras, figures) : '')
+    + (content.misconceptions ? Heart2.misconceptions(content.misconceptions) : '')
     + renderSummary(content)
     + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
     + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
@@ -150,7 +148,8 @@ export function mount(content, figures) {
       document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
     }));
-    document.querySelector('.predict').addEventListener('click', e => {
+  }
+  document.querySelector('.predict')?.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;
       const ok = +b.dataset.answer === content.lab.predict.answer;
       const feedback = b.parentElement.nextElementSibling;
@@ -159,7 +158,7 @@ export function mount(content, figures) {
       feedback.className = `feedback predict-result ${ok ? 'ok' : 'warn'}`;
       feedback.textContent = ok ? `✓ 答對了！${content.lab.predict.feedback}` : '✗ 尚未答對。再比對圖中的狀態與箭頭，想想變化方向後再試一次。';
     });
-  }
+  if(content.overview?.type==='factor-tree') Heart2.mountTree(document.querySelector('.factor-tree'),content.overview,revealNode);
 
   // 兩關題目：逐題答對才解鎖；第二關全部答對才送 complete
   let foundation = 0, cases = 0, completionSent = false;

@@ -1,0 +1,502 @@
+{
+  "base": "f0f9028",
+  "preservation": [
+    {
+      "slug": "cardiac-output",
+      "section": "foundation",
+      "sha256": "5a759b510108e12852930ec5749c153f262b3780ef7ca010a99d59d192c90a45",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-output",
+      "section": "cases",
+      "sha256": "b2979fbfb160dec6046ca6a1bc2ff48a4d48b2a9477acca3d80b65ae12f494fc",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-output",
+      "section": "lab.predict",
+      "sha256": "8380f3b847018e59ba1f3d271809ee0b7951ff3f2ce479f075a4ad1204899736",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-output",
+      "section": "node IDs",
+      "sha256": "c47f88e699bdbf6f96f1a19f3cfbf75573498bc814b79a4c0763d8114b3786ed",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "major-vessels",
+      "section": "foundation",
+      "sha256": "85c680ba0d4f2d2bc856844af1ed7c3c3953de26af24efe56813113e9ec88338",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "major-vessels",
+      "section": "cases",
+      "sha256": "171e856d59611678662ae65520b7e4b5dcb7f5cb2fcba43179a5052d116a0fb5",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "major-vessels",
+      "section": "lab.predict",
+      "sha256": "a1ac5bf31dfff7aa43e0adb023f781501fa005788c41fb08e7515c85d0635e27",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "major-vessels",
+      "section": "node IDs",
+      "sha256": "82654f9b367d11994d934a3ba9f8980eb921f79dad80ae4415c29c0b4743a0e7",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "section": "foundation",
+      "sha256": "09ee4336b1faa61ff9e771caa7d872abbb42c0539ad5245e821b11ba9d23db4f",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "section": "cases",
+      "sha256": "72f4c9079716b4ca86ce16bc06fc97f1d5f594a056efc063e4237d0003ed5d7f",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "section": "lab.predict",
+      "sha256": "bc8a62cadc734607b510684702fff4489412e17dfd707d616ab625a3037b4ab4",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "section": "node IDs",
+      "sha256": "fe21845395d6bb83dc505fc2fbf0c86540dcec643f61d090fb812584ff5a24ab",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "section": "foundation",
+      "sha256": "8340dd46b009a365326c3d3df5025966727ee5a421e3d2baa642cc269462373c",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "section": "cases",
+      "sha256": "ef544e0481ccbc255c0829aaffa5cb43b39c4de00278ef7dd248bf7b50270af4",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "section": "lab.predict",
+      "sha256": "a58345866f4d1ed04860358ad3b5114a6fcbdeef3130dd2a9ea78a602ecbb558",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "capillary-exchange",
+      "section": "node IDs",
+      "sha256": "13af12acab342077d170d2ce8d6deb1c7641ebea48e6dbb85b2ec1484b366da9",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-electrical",
+      "section": "N",
+      "sha256": "2400e3e7bbc9a9a5f97763d95403d988b36a32ce79401256465ef45d937d58b5",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-electrical",
+      "section": "A",
+      "sha256": "308c81def01c64298b12f0f8a0c3fad0752135042efb2360d7d1f78e9d20c29c",
+      "bytesUnchanged": true
+    },
+    {
+      "slug": "cardiac-electrical",
+      "section": "B",
+      "sha256": "ff13915780023ab4fb9268a21564f2ae1d1a4d49e2863e6173c9dc5903a4be2f",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "html/資訊圖表題庫_上傳用.xlsx",
+      "sha256": "48dca2aa0cbc98c858591aa7489c80baf018fa359fd4ef1d56faa401578fee2e",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "public/materials/ecg-basics-v1/index.html",
+      "sha256": "0b6858012f0ec38a9ad23a1083ad4a9926cef170c9ada6694b7c63d847b4fef3",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/ecg-basics/content.json",
+      "sha256": "edbb8d31c0222ae5783fd4c8dff5c73a47111efe113318c56c5c805af949b00a",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "shared/materials.ts",
+      "sha256": "e2706a26e41f95db64184015ecc32297d17b721008c03cd43632022b69e1eb0a",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/blood-pressure-regulation/content.json",
+      "sha256": "089ca6f293a3981ecd2698c1faa4370dc9fd0e2142cb768ad5b384499e3c6d13",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/blood-types/content.json",
+      "sha256": "179dd847a3319ccab2aa3cadae97715a34ca918a8be6de43f78768ab931a1e0a",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/blood-vessels/content.json",
+      "sha256": "ada08e1735ba2366f1cefd7d9550ae9e27d7048e4fec961d8eb1e85a2d76952f",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/cardiac-conduction/content.json",
+      "sha256": "2589635e8bd1747e08809b0189c637af3c5a824d446981045516d7cb5527b330",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/cardiac-cycle/content.json",
+      "sha256": "af930c56735cab1225debc9c6ea15d3d280a926487c007e44a18a50157a5ee35",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/circulation-routes/content.json",
+      "sha256": "e5f8d686e779bddfaf0c5f510c8b09a3b064105975cca017c6af1dc215f5425e",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/ecg-basics/content.json",
+      "sha256": "edbb8d31c0222ae5783fd4c8dff5c73a47111efe113318c56c5c805af949b00a",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/heart-structure/content.json",
+      "sha256": "3481686a321b69e3408c48c6b54bb4a9fe110c2996e1cfe770900ede989b8ee0",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/hemodynamics/content.json",
+      "sha256": "330204f26009cf7b0e08f2914d19c538cb5d84e8c71ec12089d39a0cebb6a964",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/lymphatic-system/content.json",
+      "sha256": "1837d39b8bea9eb4c870bccebf437633f22e4ae80b01f223d3de2ba5df43ec6c",
+      "bytesUnchanged": true
+    },
+    {
+      "path": "materials-src/lymphoid-organs/content.json",
+      "sha256": "dea86ec4c1e5a8903294996439df820007398a2f2377e62381c7a77fb8dbfd51",
+      "bytesUnchanged": true
+    }
+  ],
+  "unchangedPublic": [
+    "public/materials/README.md",
+    "public/materials/blood-composition-v1/index.html",
+    "public/materials/blood-gas-transport-v1/index.html",
+    "public/materials/blood-gas-transport-v2/index.html",
+    "public/materials/blood-post-v1/index.html",
+    "public/materials/blood-pre-v1/index.html",
+    "public/materials/blood-pressure-regulation-v1/index.html",
+    "public/materials/blood-types-v1/index.html",
+    "public/materials/blood-vessels-v1/index.html",
+    "public/materials/cardiac-conduction-v1/index.html",
+    "public/materials/cardiac-conduction-v2/assets/cardiac-conduction-flow-strip-v1.png",
+    "public/materials/cardiac-conduction-v2/index.html",
+    "public/materials/cardiac-cycle-v1/index.html",
+    "public/materials/cardiac-cycle-v2/assets/cardiac-cycle-flow-strip-v1.png",
+    "public/materials/cardiac-cycle-v2/index.html",
+    "public/materials/cardiac-electrical-v1/assets/cardiac-conduction-flow-strip-v1.png",
+    "public/materials/circulation-routes-v1/index.html",
+    "public/materials/coronary-circulation-v1/assets/coronary-atherosclerosis-v2.png",
+    "public/materials/coronary-circulation-v1/assets/coronary-diastolic-perfusion-v2.png",
+    "public/materials/coronary-circulation-v1/assets/coronary-lca-branches-v2.png",
+    "public/materials/coronary-circulation-v1/assets/coronary-overview-v2.png",
+    "public/materials/coronary-circulation-v1/assets/coronary-perfusion-flow-strip-v1.png",
+    "public/materials/coronary-circulation-v1/index.html",
+    "public/materials/course-learning.js",
+    "public/materials/course-orientation-v1/background.png",
+    "public/materials/course-orientation-v1/index.html",
+    "public/materials/ecg-basics-v1/index.html",
+    "public/materials/heart-structure-v1/index.html",
+    "public/materials/heart-structure-v2/assets/cardiac-conduction-flow-strip-v1.png",
+    "public/materials/heart-structure-v2/assets/coronary-overview-v2.png",
+    "public/materials/heart-structure-v2/assets/heart-valve-flow-strip-v1.png",
+    "public/materials/heart-structure-v2/index.html",
+    "public/materials/hemodynamics-v1/index.html",
+    "public/materials/hemostasis-mechanisms-v1/index.html",
+    "public/materials/hemostasis-mechanisms-v2/index.html",
+    "public/materials/lymphatic-system-v1/index.html",
+    "public/materials/lymphoid-organs-v1/index.html",
+    "public/materials/rbc-homeostasis-v1/assets/rbc-epo-feedback-strip-v1.png",
+    "public/materials/rbc-homeostasis-v1/index.html"
+  ],
+  "scanMatches": [],
+  "results": [
+    {
+      "slug": "cardiac-output",
+      "width": 390,
+      "shots": [
+        "cardiac-output-390-lab-base.png",
+        "cardiac-output-390-lab-preload.png",
+        "cardiac-output-390-lab-contractility.png",
+        "cardiac-output-390-lab-afterload.png",
+        "cardiac-output-390-tree-unselected.png",
+        "cardiac-output-390-tree-up.png",
+        "cardiac-output-390-tree-down.png",
+        "cardiac-output-390-tree-too-fast.png",
+        "cardiac-output-390-misconceptions.png",
+        "cardiac-output-390-cardiac-output-node-01.png",
+        "cardiac-output-390-cardiac-output-node-02.png",
+        "cardiac-output-390-cardiac-output-node-03.png",
+        "cardiac-output-390-cardiac-output-node-04.png",
+        "cardiac-output-390-cardiac-output-node-05.png",
+        "cardiac-output-390-cardiac-output-node-06.png"
+      ],
+      "minimumFigureTextPx": 14.94,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-output",
+      "width": 1280,
+      "shots": [
+        "cardiac-output-1280-lab-base.png",
+        "cardiac-output-1280-lab-preload.png",
+        "cardiac-output-1280-lab-contractility.png",
+        "cardiac-output-1280-lab-afterload.png",
+        "cardiac-output-1280-tree-unselected.png",
+        "cardiac-output-1280-tree-up.png",
+        "cardiac-output-1280-tree-down.png",
+        "cardiac-output-1280-tree-too-fast.png",
+        "cardiac-output-1280-misconceptions.png",
+        "cardiac-output-1280-cardiac-output-node-01.png",
+        "cardiac-output-1280-cardiac-output-node-02.png",
+        "cardiac-output-1280-cardiac-output-node-03.png",
+        "cardiac-output-1280-cardiac-output-node-04.png",
+        "cardiac-output-1280-cardiac-output-node-05.png",
+        "cardiac-output-1280-cardiac-output-node-06.png"
+      ],
+      "minimumFigureTextPx": 45.27,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "major-vessels",
+      "width": 390,
+      "shots": [
+        "major-vessels-390-lab-right-hand.png",
+        "major-vessels-390-lab-left-hand.png",
+        "major-vessels-390-lab-left-foot.png",
+        "major-vessels-390-lab-stomach.png",
+        "major-vessels-390-pulse.png",
+        "major-vessels-390-misconceptions.png",
+        "major-vessels-390-major-vessels-node-01.png",
+        "major-vessels-390-major-vessels-node-02.png",
+        "major-vessels-390-major-vessels-node-03.png",
+        "major-vessels-390-major-vessels-node-04.png",
+        "major-vessels-390-major-vessels-node-05.png",
+        "major-vessels-390-major-vessels-node-06.png"
+      ],
+      "minimumFigureTextPx": 14.94,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "major-vessels",
+      "width": 1280,
+      "shots": [
+        "major-vessels-1280-lab-right-hand.png",
+        "major-vessels-1280-lab-left-hand.png",
+        "major-vessels-1280-lab-left-foot.png",
+        "major-vessels-1280-lab-stomach.png",
+        "major-vessels-1280-pulse.png",
+        "major-vessels-1280-misconceptions.png",
+        "major-vessels-1280-major-vessels-node-01.png",
+        "major-vessels-1280-major-vessels-node-02.png",
+        "major-vessels-1280-major-vessels-node-03.png",
+        "major-vessels-1280-major-vessels-node-04.png",
+        "major-vessels-1280-major-vessels-node-05.png",
+        "major-vessels-1280-major-vessels-node-06.png"
+      ],
+      "minimumFigureTextPx": 22.5,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 390,
+      "shots": [
+        "blood-pressure-measurement-390-cuff-150.png",
+        "blood-pressure-measurement-390-cuff-120.png",
+        "blood-pressure-measurement-390-cuff-100.png",
+        "blood-pressure-measurement-390-cuff-80.png",
+        "blood-pressure-measurement-390-cuff-70.png",
+        "blood-pressure-measurement-390-cuff-auto.png",
+        "blood-pressure-measurement-390-misconceptions.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-01.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-02.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-03.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-04.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-05.png",
+        "blood-pressure-measurement-390-blood-pressure-measurement-node-06.png"
+      ],
+      "minimumFigureTextPx": 14.937890625,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 1280,
+      "shots": [
+        "blood-pressure-measurement-1280-cuff-150.png",
+        "blood-pressure-measurement-1280-cuff-120.png",
+        "blood-pressure-measurement-1280-cuff-100.png",
+        "blood-pressure-measurement-1280-cuff-80.png",
+        "blood-pressure-measurement-1280-cuff-70.png",
+        "blood-pressure-measurement-1280-cuff-auto.png",
+        "blood-pressure-measurement-1280-misconceptions.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-01.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-02.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-03.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-04.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-05.png",
+        "blood-pressure-measurement-1280-blood-pressure-measurement-node-06.png"
+      ],
+      "minimumFigureTextPx": 27,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 390,
+      "shots": [
+        "capillary-exchange-390-lab-state-1.png",
+        "capillary-exchange-390-lab-state-2.png",
+        "capillary-exchange-390-lab-state-3.png",
+        "capillary-exchange-390-tree-unselected.png",
+        "capillary-exchange-390-tree-up.png",
+        "capillary-exchange-390-tree-down.png",
+        "capillary-exchange-390-misconceptions.png",
+        "capillary-exchange-390-capillary-exchange-node-01.png",
+        "capillary-exchange-390-capillary-exchange-node-02.png",
+        "capillary-exchange-390-capillary-exchange-node-03.png",
+        "capillary-exchange-390-capillary-exchange-node-04.png",
+        "capillary-exchange-390-capillary-exchange-node-05.png",
+        "capillary-exchange-390-capillary-exchange-node-06.png"
+      ],
+      "minimumFigureTextPx": 14.94,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 1280,
+      "shots": [
+        "capillary-exchange-1280-lab-state-1.png",
+        "capillary-exchange-1280-lab-state-2.png",
+        "capillary-exchange-1280-lab-state-3.png",
+        "capillary-exchange-1280-tree-unselected.png",
+        "capillary-exchange-1280-tree-up.png",
+        "capillary-exchange-1280-tree-down.png",
+        "capillary-exchange-1280-misconceptions.png",
+        "capillary-exchange-1280-capillary-exchange-node-01.png",
+        "capillary-exchange-1280-capillary-exchange-node-02.png",
+        "capillary-exchange-1280-capillary-exchange-node-03.png",
+        "capillary-exchange-1280-capillary-exchange-node-04.png",
+        "capillary-exchange-1280-capillary-exchange-node-05.png",
+        "capillary-exchange-1280-capillary-exchange-node-06.png"
+      ],
+      "minimumFigureTextPx": 45.27,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 6,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-electrical",
+      "width": 390,
+      "shots": [
+        "cardiac-electrical-390-node-1.png",
+        "cardiac-electrical-390-node-4.png",
+        "cardiac-electrical-390-node-8.png",
+        "cardiac-electrical-390-misconceptions.png"
+      ],
+      "minimumFigureTextPx": 14.580000000000002,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 9,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-electrical",
+      "width": 1280,
+      "shots": [
+        "cardiac-electrical-1280-node-1.png",
+        "cardiac-electrical-1280-node-4.png",
+        "cardiac-electrical-1280-node-8.png",
+        "cardiac-electrical-1280-misconceptions.png"
+      ],
+      "minimumFigureTextPx": 31.365,
+      "noClipping": true,
+      "noOverflow": true,
+      "exploreOnce": 9,
+      "nodeTime": true,
+      "retryRequiresReview": true,
+      "completeOnFinalAnswer": true,
+      "newWidgetsNoEvents": true,
+      "errors": []
+    }
+  ]
+}

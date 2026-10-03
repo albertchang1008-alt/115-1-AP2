@@ -1,0 +1,815 @@
+{
+  "slug": "cardiac-output",
+  "builtAt": "2026-10-03T02:11:28.187Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.94,
+      "svgTextSizes": [
+        {
+          "text": "心室容積比較｜示意數值 mL",
+          "px": 14.94
+        },
+        {
+          "text": "EDV 120",
+          "px": 14.94
+        },
+        {
+          "text": "SV 70",
+          "px": 14.94
+        },
+        {
+          "text": "ESV 50",
+          "px": 14.94
+        },
+        {
+          "text": "基準",
+          "px": 14.94
+        },
+        {
+          "text": "EDV 140",
+          "px": 14.94
+        },
+        {
+          "text": "SV 90",
+          "px": 14.94
+        },
+        {
+          "text": "ESV 50",
+          "px": 14.94
+        },
+        {
+          "text": "前負荷↑",
+          "px": 14.94
+        },
+        {
+          "text": "EDV 120",
+          "px": 14.94
+        },
+        {
+          "text": "SV 85",
+          "px": 14.94
+        },
+        {
+          "text": "ESV 35",
+          "px": 14.94
+        },
+        {
+          "text": "收縮力↑",
+          "px": 14.94
+        },
+        {
+          "text": "EDV 120",
+          "px": 14.94
+        },
+        {
+          "text": "SV 55",
+          "px": 14.94
+        },
+        {
+          "text": "ESV 65",
+          "px": 14.94
+        },
+        {
+          "text": "後負荷↑",
+          "px": 14.94
+        },
+        {
+          "text": "綠色上段＝射出的心搏量 SV",
+          "px": 14.94
+        },
+        {
+          "text": "灰色下段＝留下的 ESV；外框＝EDV",
+          "px": 14.94
+        }
+      ],
+      "nodes": [
+        {
+          "id": "cardiac-output-node-01",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "手擠水球幫浦比喻",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "每次出水＝心搏量 SV",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "每分鐘擠幾次＝心率 HR",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "每分鐘出水＝心輸出量 CO",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "進水量：前負荷",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "擠壓力道：收縮力",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "出口：後負荷",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "速度：交感 NE 油門／迷走 ACh 煞車",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-02",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "心室容積｜示意數值 mL",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心搏量 SV＝EDV−ESV",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-03",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "Frank-Starling：彈簧三格",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "1. 拉一點",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "回彈小：收縮較弱",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "2. 拉多一點",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "回彈大：心搏量↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "3. 拉過頭",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "像被拉斷，彈不回來",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "超出生理範圍，收縮反而變弱",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-04",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "心室容積｜示意數值 mL",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 85",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ESV 35",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "收縮力↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心搏量 SV＝EDV−ESV",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-05",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "後負荷｜示意數值 mL",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 55",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "ESV 65",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "後負荷↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "SV 70 → 55：心搏量↓",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "幫浦出口變窄 → 射血阻力↑",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-06",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "自主神經：油門／煞車",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "油門：交感節後 NE",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心率↑、收縮力↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "煞車：迷走節後 ACh",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心率↓",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "另一條油門：腎上腺髓質",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "腎上腺素經血液 → 心臟",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "心率過快 → 舒張期縮短",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "充血不足 → EDV↓ → 心搏量↓",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 45.27,
+      "svgTextSizes": [
+        {
+          "text": "心室容積比較｜示意數值 mL",
+          "px": 45.27
+        },
+        {
+          "text": "EDV 120",
+          "px": 45.27
+        },
+        {
+          "text": "SV 70",
+          "px": 45.27
+        },
+        {
+          "text": "ESV 50",
+          "px": 45.27
+        },
+        {
+          "text": "基準",
+          "px": 45.27
+        },
+        {
+          "text": "EDV 140",
+          "px": 45.27
+        },
+        {
+          "text": "SV 90",
+          "px": 45.27
+        },
+        {
+          "text": "ESV 50",
+          "px": 45.27
+        },
+        {
+          "text": "前負荷↑",
+          "px": 45.27
+        },
+        {
+          "text": "EDV 120",
+          "px": 45.27
+        },
+        {
+          "text": "SV 85",
+          "px": 45.27
+        },
+        {
+          "text": "ESV 35",
+          "px": 45.27
+        },
+        {
+          "text": "收縮力↑",
+          "px": 45.27
+        },
+        {
+          "text": "EDV 120",
+          "px": 45.27
+        },
+        {
+          "text": "SV 55",
+          "px": 45.27
+        },
+        {
+          "text": "ESV 65",
+          "px": 45.27
+        },
+        {
+          "text": "後負荷↑",
+          "px": 45.27
+        },
+        {
+          "text": "綠色上段＝射出的心搏量 SV",
+          "px": 45.27
+        },
+        {
+          "text": "灰色下段＝留下的 ESV；外框＝EDV",
+          "px": 45.27
+        }
+      ],
+      "nodes": [
+        {
+          "id": "cardiac-output-node-01",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "手擠水球幫浦比喻",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "每次出水＝心搏量 SV",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "每分鐘擠幾次＝心率 HR",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "每分鐘出水＝心輸出量 CO",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "進水量：前負荷",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "擠壓力道：收縮力",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "出口：後負荷",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "速度：交感 NE 油門／迷走 ACh 煞車",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-02",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "心室容積｜示意數值 mL",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "心搏量 SV＝EDV−ESV",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-03",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "Frank-Starling：彈簧三格",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "1. 拉一點",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "回彈小：收縮較弱",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "2. 拉多一點",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "回彈大：心搏量↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "3. 拉過頭",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "像被拉斷，彈不回來",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "超出生理範圍，收縮反而變弱",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-04",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "心室容積｜示意數值 mL",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 85",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "ESV 35",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "收縮力↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "心搏量 SV＝EDV−ESV",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-05",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "後負荷｜示意數值 mL",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 70",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "ESV 50",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "基準",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "EDV 120",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 55",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "ESV 65",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "後負荷↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "SV 70 → 55：心搏量↓",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "幫浦出口變窄 → 射血阻力↑",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "cardiac-output-node-06",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "自主神經：油門／煞車",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "油門：交感節後 NE",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "心率↑、收縮力↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "煞車：迷走節後 ACh",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "心率↓",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "另一條油門：腎上腺髓質",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "腎上腺素經血液 → 心臟",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "心率過快 → 舒張期縮短",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "充血不足 → EDV↓ → 心搏量↓",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-base.png",
+    "390-lab-preload.png",
+    "390-lab-contractility.png",
+    "390-lab-afterload.png",
+    "390-node-cardiac-output-node-01.png",
+    "390-node-cardiac-output-node-02.png",
+    "390-node-cardiac-output-node-03.png",
+    "390-node-cardiac-output-node-04.png",
+    "390-node-cardiac-output-node-05.png",
+    "390-node-cardiac-output-node-06.png",
+    "1280-page.png",
+    "1280-lab-base.png",
+    "1280-lab-preload.png",
+    "1280-lab-contractility.png",
+    "1280-lab-afterload.png",
+    "1280-node-cardiac-output-node-01.png",
+    "1280-node-cardiac-output-node-02.png",
+    "1280-node-cardiac-output-node-03.png",
+    "1280-node-cardiac-output-node-04.png",
+    "1280-node-cardiac-output-node-05.png",
+    "1280-node-cardiac-output-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "cardiac-output-node-01",
+    "cardiac-output-node-02",
+    "cardiac-output-node-03",
+    "cardiac-output-node-04",
+    "cardiac-output-node-05",
+    "cardiac-output-node-06"
+  ],
+  "questionIds": [
+    "cardiac-output-foundation-q01",
+    "cardiac-output-foundation-q02",
+    "cardiac-output-foundation-q03",
+    "cardiac-output-foundation-q04",
+    "cardiac-output-foundation-q05",
+    "cardiac-output-foundation-q06",
+    "cardiac-output-case-q01",
+    "cardiac-output-case-q02",
+    "cardiac-output-case-q03",
+    "cardiac-output-case-q04",
+    "cardiac-output-case-q05"
+  ],
+  "ok": true
+}

@@ -1,11 +1,14 @@
 export interface MaterialQuestion { id: string; type?: 'mcq'|'label'; stem: string; options?: string[]; answer?: number; hint: string; nodeId: string; target?: 'P'|'PRi'|'PRs'|'QRS'|'ST'|'T'|'QT'|'RR'; tol?: number; explain?: string }
-export interface MaterialNode { id: string; tag: string; title: string; summary: string; figure: string; concept: string; points: string[]; clinical: { title: string; text: string } }
+export interface MaterialNode { id: string; tag: string; title: string; summary: string; figure: string; concept: string; points: string[]; clinical: { title: string; text: string }; caption?: string; reference?: string }
 export interface MaterialContent {
   slug: string; version: string; title: string; subtitle: string; label: string;
   stats: { value: string; label: string }[];
   lab: any;
   nodes: MaterialNode[]; foundation: MaterialQuestion[]; cases: MaterialQuestion[];
   credits?: string[]; rules?: { nodes: number; foundation: number; cases: number };
+  overview?: { type: 'factor-tree'; title: string; root: string; branches: {id: string; label: string; sign: 1|-1; children: {id: string; label: string; sign: 1|-1; nodeId: string; explainUp: string; explainDown: string}[]}[]; specials?: {id: string; label: string; nodeId: string; explainUp: string}[] };
+  extras?: {title: string; figure: string; caption?: string}[];
+  misconceptions?: {wrong: string; correct: string}[];
   summaryTable?: { headers: string[]; rows: string[][] };
 }
 const id = /^[a-z0-9-]+$/;
@@ -28,5 +31,14 @@ export function validateMaterialContent(value: unknown): asserts value is Materi
     if (!c.nodes?.some((n) => n.id === q.nodeId)) errors.push(`${kind}.${q.id}：nodeId「${q.nodeId}」不存在`);
   }
   if (c.lab.widget!=='ecg-sim' && (!Array.isArray(c.lab.predict?.options) || !c.lab.predict.options[c.lab.predict.answer])) errors.push('lab.predict.answer：必須是 options 之一');
+  if(c.overview){
+    const factors=new Set(['root']);
+    for(const b of c.overview.branches){
+      if(![1,-1].includes(b.sign))errors.push('overview：分支 sign 須為 1 或 -1');
+      for(const f of [b,...b.children]){if(factors.has(f.id)||!id.test(f.id))errors.push('overview：因素 ID 重複或無效');factors.add(f.id);}
+      for(const f of b.children){if(![1,-1].includes(f.sign)||!c.nodes.some(n=>n.id===f.nodeId))errors.push('overview：葉節點 sign 或 nodeId 無效');}
+    }
+    for(const f of c.overview.specials||[]){if(factors.has(f.id)||!c.nodes.some(n=>n.id===f.nodeId))errors.push('overview：特殊因素 ID 或 nodeId 無效');factors.add(f.id);}
+  }
   if (errors.length) throw new Error(errors.join('\n'));
 }

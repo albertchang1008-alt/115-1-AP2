@@ -1,0 +1,561 @@
+{
+  "slug": "capillary-exchange",
+  "builtAt": "2026-10-03T02:12:04.081Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.94,
+      "svgTextSizes": [
+        {
+          "text": "Starling 力量沿微血管變化",
+          "px": 14.94
+        },
+        {
+          "text": "mmHg",
+          "px": 14.94
+        },
+        {
+          "text": "35",
+          "px": 14.94
+        },
+        {
+          "text": "18",
+          "px": 14.94
+        },
+        {
+          "text": "25",
+          "px": 14.94
+        },
+        {
+          "text": "動脈端 → 微血管 → 靜脈端",
+          "px": 14.94
+        },
+        {
+          "text": "靜水壓",
+          "px": 14.94
+        },
+        {
+          "text": "膠體滲透壓（虛線）",
+          "px": 14.94
+        },
+        {
+          "text": "約 59%",
+          "px": 14.94
+        },
+        {
+          "text": "淨濾出區 ↑",
+          "px": 14.94
+        },
+        {
+          "text": "35−25＝外 10",
+          "px": 14.94
+        },
+        {
+          "text": "淨回收區 ↓",
+          "px": 14.94
+        },
+        {
+          "text": "18−25＝內 7",
+          "px": 14.94
+        },
+        {
+          "text": "濾出略多於回收 → 淋巴收走多餘液體",
+          "px": 14.94
+        },
+        {
+          "text": "示意數值（OpenStax 模型）",
+          "px": 14.94
+        }
+      ],
+      "nodes": [
+        {
+          "id": "capillary-exchange-node-01",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "擴散：各物質看自己的濃度",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "血液",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "組織",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "O₂、葡萄糖 ↓；CO₂ ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "各自沿高濃度 → 低濃度擴散",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-02",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "通過管壁的三種情形",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內皮細胞",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "脂溶性 ↓ 穿過細胞",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "水、小分子 ↓",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "走細胞間隙",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "血漿蛋白：通常留在血管內",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-03",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "拔河：靜水壓把液體往外推",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 不變",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "外推力量↑ → 濾出↑",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-04",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "拔河：白蛋白把液體往內拉",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 不變",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 ↑",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內拉力量↑ → 濾出↓",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-05",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "拔河：比較外推與內拉",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 35",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 25",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "動脈端：向外 10（示意 mmHg）",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 18",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 25",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "靜脈端：向內 7（示意 mmHg）",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-06",
+          "minPx": 14.94,
+          "texts": [
+            {
+              "text": "淋巴回收：液體回到循環",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "微血管",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "盲端淋巴微管 → 回收多出組織液",
+              "px": 14.94,
+              "clipped": false
+            },
+            {
+              "text": "回收不及 → 液體堆積＝水腫",
+              "px": 14.94,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 45.27,
+      "svgTextSizes": [
+        {
+          "text": "Starling 力量沿微血管變化",
+          "px": 45.27
+        },
+        {
+          "text": "mmHg",
+          "px": 45.27
+        },
+        {
+          "text": "35",
+          "px": 45.27
+        },
+        {
+          "text": "18",
+          "px": 45.27
+        },
+        {
+          "text": "25",
+          "px": 45.27
+        },
+        {
+          "text": "動脈端 → 微血管 → 靜脈端",
+          "px": 45.27
+        },
+        {
+          "text": "靜水壓",
+          "px": 45.27
+        },
+        {
+          "text": "膠體滲透壓（虛線）",
+          "px": 45.27
+        },
+        {
+          "text": "約 59%",
+          "px": 45.27
+        },
+        {
+          "text": "淨濾出區 ↑",
+          "px": 45.27
+        },
+        {
+          "text": "35−25＝外 10",
+          "px": 45.27
+        },
+        {
+          "text": "淨回收區 ↓",
+          "px": 45.27
+        },
+        {
+          "text": "18−25＝內 7",
+          "px": 45.27
+        },
+        {
+          "text": "濾出略多於回收 → 淋巴收走多餘液體",
+          "px": 45.27
+        },
+        {
+          "text": "示意數值（OpenStax 模型）",
+          "px": 45.27
+        }
+      ],
+      "nodes": [
+        {
+          "id": "capillary-exchange-node-01",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "擴散：各物質看自己的濃度",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "血液",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "組織",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "O₂、葡萄糖 ↓；CO₂ ↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "各自沿高濃度 → 低濃度擴散",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-02",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "通過管壁的三種情形",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內皮細胞",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "脂溶性 ↓ 穿過細胞",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "水、小分子 ↓",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "走細胞間隙",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "血漿蛋白：通常留在血管內",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-03",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "拔河：靜水壓把液體往外推",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 ↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 不變",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "外推力量↑ → 濾出↑",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-04",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "拔河：白蛋白把液體往內拉",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 不變",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 ↑",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內拉力量↑ → 濾出↓",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-05",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "拔河：比較外推與內拉",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 35",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 25",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "動脈端：向外 10（示意 mmHg）",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "外推：靜水壓 18",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "內拉：膠體滲透壓 25",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "靜脈端：向內 7（示意 mmHg）",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "capillary-exchange-node-06",
+          "minPx": 45.27,
+          "texts": [
+            {
+              "text": "淋巴回收：液體回到循環",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "微血管",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "盲端淋巴微管 → 回收多出組織液",
+              "px": 45.27,
+              "clipped": false
+            },
+            {
+              "text": "回收不及 → 液體堆積＝水腫",
+              "px": 45.27,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-capillary-exchange-node-01.png",
+    "390-node-capillary-exchange-node-02.png",
+    "390-node-capillary-exchange-node-03.png",
+    "390-node-capillary-exchange-node-04.png",
+    "390-node-capillary-exchange-node-05.png",
+    "390-node-capillary-exchange-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-capillary-exchange-node-01.png",
+    "1280-node-capillary-exchange-node-02.png",
+    "1280-node-capillary-exchange-node-03.png",
+    "1280-node-capillary-exchange-node-04.png",
+    "1280-node-capillary-exchange-node-05.png",
+    "1280-node-capillary-exchange-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "capillary-exchange-node-01",
+    "capillary-exchange-node-02",
+    "capillary-exchange-node-03",
+    "capillary-exchange-node-04",
+    "capillary-exchange-node-05",
+    "capillary-exchange-node-06"
+  ],
+  "questionIds": [
+    "capillary-exchange-foundation-q01",
+    "capillary-exchange-foundation-q02",
+    "capillary-exchange-foundation-q03",
+    "capillary-exchange-foundation-q04",
+    "capillary-exchange-foundation-q05",
+    "capillary-exchange-foundation-q06",
+    "capillary-exchange-case-q01",
+    "capillary-exchange-case-q02",
+    "capillary-exchange-case-q03",
+    "capillary-exchange-case-q04",
+    "capillary-exchange-case-q05"
+  ],
+  "ok": true
+}

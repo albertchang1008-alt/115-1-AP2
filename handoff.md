@@ -20,6 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
+| 心臟II 圖像化改版 | `feature/cardiac-output-visuals`（基底 `f0f9028`；本次 commit）：兩份規格完成，待 Claude 驗收；未 push／部署。報告 `docs/HEART2_VISUALS_ACCEPTANCE.md` |
 | 第一階段補齊教材 | `feature/stage1-supplement`（33e7700＋交接）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
@@ -104,10 +105,12 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **可部署（2026-10-03 Claude 複驗 33e7700 通過）**：用語清單掃描 public/materials、materials-src、figures 全為 0（「扁桃體」已改為「扁桃腺」）；心搏量已統一（心輸出量、血壓調控、心電圖模擬器）；6 份預測回饋為說明句並實測顯示；題庫僅第 163、164、169 列共 10 格「每搏量→心搏量」，其餘逐格不變；所有題目 ID／答案不變；抽測 6 份無錯誤／溢位。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
 - **教師決定（2026-10-03）：統一用「扁桃腺」**。Claude 已直接改 blood-pre-v1（2 處）、blood-post-v1（4 處），僅顯示文字，前測題目答案位置不變；用語檢查腳本已把「扁桃體」列為禁用詞。
 
-**交辦 Codex：心輸出量圖像化改版（2026-10-03 教師）**
-- 規格 `docs/CARDIAC_OUTPUT_VISUALS_SPEC.md`：情境實驗室改心室容積長條圖（基準／前負荷↑／收縮力↑／後負荷↑）；6 節點專屬圖（幫浦比喻、基準長條、Frank-Starling 彈簧三格〔拉過頭＝像彈簧被拉斷〕、收縮力／後負荷長條對照、油門／煞車）；整理表上方新增**互動式公式樹**（kit 新元件 `factor-tree`，可重用）。
-- 分支：從 `feature/stage1-supplement` 最新 commit 建 `feature/cardiac-output-visuals`。**不阻擋 1.6.3 部署**；本項驗收通過後另行部署。節點／題目 ID、11 題、Excel 不改。
-- **同輪追加（2026-10-03 教師）**：心臟II 其餘教材圖像化強化，規格 `docs/HEART2_VISUALS_SPEC.md`（全身主要動靜脈節點 6 錯誤標籤必修＋區域放大＋追蹤一滴血＋脈搏點位；血壓測量放氣滑桿 `bp-cuff`＋壓力–時間圖＋水管比喻；微血管 Starling 圖＋拔河＋公式樹重用；電性活動接力賽／紅綠燈／動作電位×心電圖對齊；共通顏色語意、文字互參、常見誤解框）。**心電圖基礎本輪不改**。同分支 `feature/cardiac-output-visuals`。
+**心臟II 圖像化改版：待 Claude 驗收（2026-10-03 Codex）**
+- `feature/cardiac-output-visuals` 自 stage1 最新 `f0f9028` 建立；兩份規格皆完成：心輸出量長條／幫浦／彈簧／油門煞車／公式樹；主要動靜脈區域圖與淺靜脈標籤必修、追蹤一滴血／脈搏點位；血壓滑桿／六圖；微血管 Starling／拔河／公式樹；手工電性三圖。純文字互參與誤解框同步。
+- kit 新 factor-tree（葉與分支 sign 可設定）、bp-cuff、extras、misconceptions；widget 模式保留預測。新互動不送事件、不加分母；看相關節點沿用既有閱讀入口。
+- ID／題目區塊／原預測／Excel 不變；心電圖基礎、其他公開教材與目錄逐位元不變。使用者題目不改的指示優先，心輸出量規格的預測選項換詞未套用。
+- 四份 materials:preview＋materials:shots 通過；check（115／18、兩端 build）通過；用語／草稿掃描 0；5 份 × 390／1280 完整流程及 114 張截圖通過，最小圖字 14.58px。報告／比對／圖庫：`docs/HEART2_VISUALS_ACCEPTANCE.md`。
+- 下一步 Claude 依 `docs/CARDIAC_OUTPUT_VISUALS_SPEC.md`、`docs/HEART2_VISUALS_SPEC.md` 驗收，教師看畫面。未執行 build 登錄、未 push／部署，main 未動；不阻擋原 stage1 分支 1.6.3 部署。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
