@@ -133,6 +133,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 端到端驗收（真實學生登入、名冊、同步、教材事件、報表、用量）。
 **1.6.5 後台學習活動編輯改善（2026-10-03 Claude，已 commit，待部署）**：必做／選做標籤、新增活動視窗（階段必選、資訊圖表名稱自動帶入並去「圖卡」）、預設收合並依階段分組。詳見 DEVELOPMENT_LOG。
 **網站圖示（favicon）已加入（2026-10-03 Claude）**：教師決定沿用平台既有的 Lucide 學士帽線條圖示（ISC 授權）。分頁用藍色線條（`#0ea5e9`、線寬 2.4，無底色）：`public/favicon.svg`、`public/favicon.ico`（16／32／48）；手機主畫面用藍底白線：`public/apple-touch-icon.png`（180）、`icon-192.png`、`icon-512.png`，`manifest.webmanifest` 名稱「課序」。`index.html` 已加連結，vite build 輸出為 `./` 相對路徑，GitHub Pages 子路徑可用。隨本分支下次部署上線；手機需重新「加入主畫面」才會換新圖示。
+- **上線資訊圖表分類（2026-10-03 Codex，未改後台）**：21 份學生版網址逐一 HTTP 200；依四單元整理為血液 5、心臟 4、心臟II 10、淋巴系統 2（心臟II 加入原血管／血壓的四份）。建議順序／版本／上線連結見 `docs/LIVE_INFOGRAPHICS_CLASSIFICATION.md`；心電圖歸心臟II，其餘原心臟四份留原單元。僅文件整理，分支／commit 未變，本次文件未提交。
 **需要教師提供**
 - Google Sheet：補齊單元欄、名冊資料。
 - 研究用前後測、等值／遷移題內容（平台不自行杜撰）。
