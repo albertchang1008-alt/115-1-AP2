@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.6.4
+目前版本：1.6.5
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -131,6 +131,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - `diagnostics` 的 `summary` 欄位補索引排除；firebase-functions 版本升級。
 - `html/血液氣體運送.html`、`html/止血機制與凝血病理.html`、`html/血液的組成.html` 的兩關改造與圖像化尚未全部完成、未正式發布。
 - 端到端驗收（真實學生登入、名冊、同步、教材事件、報表、用量）。
+**1.6.5 後台學習活動編輯改善（2026-10-03 Claude，已 commit，待部署）**：必做／選做標籤、新增活動視窗（階段必選、資訊圖表名稱自動帶入並去「圖卡」）、預設收合並依階段分組。詳見 DEVELOPMENT_LOG。
 **網站圖示（favicon）已加入（2026-10-03 Claude）**：教師決定沿用平台既有的 Lucide 學士帽線條圖示（ISC 授權）。分頁用藍色線條（`#0ea5e9`、線寬 2.4，無底色）：`public/favicon.svg`、`public/favicon.ico`（16／32／48）；手機主畫面用藍底白線：`public/apple-touch-icon.png`（180）、`icon-192.png`、`icon-512.png`，`manifest.webmanifest` 名稱「課序」。`index.html` 已加連結，vite build 輸出為 `./` 相對路徑，GitHub Pages 子路徑可用。隨本分支下次部署上線；手機需重新「加入主畫面」才會換新圖示。
 **需要教師提供**
 - Google Sheet：補齊單元欄、名冊資料。

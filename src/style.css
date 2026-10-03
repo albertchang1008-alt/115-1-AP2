@@ -1771,3 +1771,60 @@ body { padding-bottom: 60px; }
 .unitmenu .chapter-menu-entry > .unit-leaf span { color:#859aa7; font-size:calc(12px * var(--font-scale, 1)); }
 .unitmenu .chapter-menu-entry { margin-bottom:6px; }
 @media(max-width:900px) { .unitmenu .chapter-menu-entry { flex:none; } .unitmenu .chapter-menu-entry > .unit-leaf { width:auto; white-space:nowrap; } }
+/* 後台學習活動：收合時一眼看到類型與必做／選做 */
+.activityeditor summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.activityeditor:not([open]) summary {
+  margin-bottom: 0;
+}
+.activity-summary-title {
+  margin-right: auto;
+}
+:root .activityeditor summary .badge.required {
+  background: #1b559a;
+  color: #fff;
+}
+:root .activityeditor summary .badge.optional {
+  background: transparent;
+  color: #5d6d7e;
+  box-shadow: inset 0 0 0 1px #9aa8b5;
+}
+:root .activityeditor summary .badge.kind {
+  background: #eef2f5;
+  color: #44576a;
+}
+.activity-counts {
+  margin: 2px 0 0;
+}
+.activity-phase-group h3 {
+  margin: 22px 0 6px;
+  font-size: calc(15px * var(--font-scale, 1));
+  color: #3d5566;
+}
+.activity-phase-group .activityeditor {
+  margin: 10px 0;
+}
+.phase-choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.phase-choices button {
+  min-height: 48px;
+  font-weight: 600;
+}
+.phase-choices button.selected {
+  background: #1b559a;
+  border-color: #1b559a;
+  color: #fff;
+}
+.field-label {
+  margin: 0 0 6px;
+  font-size: calc(13px * var(--font-scale, 1));
+  color: #5d6d7e;
+}

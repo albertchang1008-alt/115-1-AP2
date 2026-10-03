@@ -35,6 +35,7 @@ import {
 import Papa from 'papaparse';
 import { VERSION } from '../shared/version';
 import { MATERIAL_CATALOG, MATERIALS_BASE_URL, materialPageUrl } from '../shared/materials';
+import { ACTIVITY_TYPE_LABEL, autoTitle, groupByPhase, insertActivity, materialTitle, moveWithinPhase, requiredLabel } from './activityEditing';
 import {
   materialUrl,
   Course,
@@ -791,6 +792,7 @@ function ChapterActivityEditor({
   onMove,
   first,
   last,
+  initiallyOpen = false,
 }: {
   activity: Activity;
   onChange: (patch: Partial<Activity>) => void;
@@ -799,12 +801,13 @@ function ChapterActivityEditor({
   onMove: (offset: number) => void;
   first: boolean;
   last: boolean;
+  initiallyOpen?: boolean;
 }) {
   const knownMaterial = activity.materialVersion ? MATERIAL_CATALOG[activity.materialVersion] : undefined;
   const materialSelectValue = knownMaterial ? activity.materialVersion! : '__custom__';
   return (
-    <details className="activityeditor" open>
-      <summary>{phases[activity.phase]} · {activity.title}</summary>
+    <details className="activityeditor" open={initiallyOpen}>
+      <summary><span className="activity-summary-title">{activity.title || '（未命名活動）'}</span><span className="badge kind">{ACTIVITY_TYPE_LABEL[activity.type]}</span><span className={'badge ' + (requiredLabel(activity).required ? 'required' : 'optional')}>{requiredLabel(activity).text}</span></summary>
       <div className="formgrid">
         <Field label="活動名稱">
           <input value={activity.title} onChange={(e) => onChange({ title: e.target.value })} />
@@ -861,7 +864,7 @@ function ChapterActivityEditor({
               const entry = MATERIAL_CATALOG[slug];
               // 網址空白或原本就是自動帶入的平台教材網址時才覆寫；教師自訂的外部網址保留不動。
               const autoUrl = !activity.url || activity.url.startsWith(MATERIALS_BASE_URL);
-              onChange({ materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal, ...(autoUrl ? { url: materialPageUrl(slug) } : {}) });
+              onChange({ title: autoTitle(activity, slug), materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal, ...(autoUrl ? { url: materialPageUrl(slug) } : {}) });
             }}>
               <option value="__custom__">其他／自訂教材版本</option>
               {Object.entries(MATERIAL_CATALOG).map(([slug, entry]) => <option key={slug} value={slug}>{entry.label}（{slug}）</option>)}
@@ -882,6 +885,34 @@ function ChapterActivityEditor({
       <div className="actions"><button type="button" disabled={first} onClick={() => onMove(-1)}>上移</button><button type="button" disabled={last} onClick={() => onMove(1)}>下移</button><button onClick={onPreview}><Eye size={16} />預覽活動</button><button onClick={onRemove}>從草稿移除</button></div>
     </details>
   );
+}
+function NewActivityDialog({ onCreate, onCancel }: { onCreate: (activity: Activity) => void; onCancel: () => void }) {
+  const [phase, setPhase] = useState<Activity['phase'] | ''>('');
+  const [type, setType] = useState<Activity['type']>('html');
+  const [slug, setSlug] = useState('');
+  const [required, setRequired] = useState('');
+  const [error, setError] = useState('');
+  function create() {
+    if (!phase) { setError('請先選擇課前、課堂或課後'); return; }
+    const entry = type === 'html' && slug ? MATERIAL_CATALOG[slug] : undefined;
+    onCreate({
+      id: uid(), phase, type, description: '',
+      title: entry ? materialTitle(slug) : '新活動',
+      url: entry ? materialPageUrl(slug) : '',
+      ...(entry ? { materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal } : {}),
+      ...(required ? { required: required === 'true' } : {}),
+    });
+  }
+  return <div className="modalshade"><section className="modal" role="dialog" aria-label="新增活動">
+    <div className="sectionhead"><h2>新增活動</h2><button onClick={onCancel}>取消</button></div>
+    <p className="field-label">階段</p>
+    <div className="phase-choices" role="radiogroup" aria-label="階段">{Object.entries(phases).map(([id, label]) => <button key={id} type="button" role="radio" aria-checked={phase === id} className={phase === id ? 'selected' : ''} onClick={() => { setPhase(id as Activity['phase']); setError(''); }}>{label}</button>)}</div>
+    {error && <p className="error" role="alert">{error}</p>}
+    <Field label="類型"><select value={type} onChange={(e) => setType(e.target.value as Activity['type'])}><option value="html">互動教材（資訊圖表）</option><option value="youtube">YouTube 影片</option><option value="link">外部教材</option></select></Field>
+    {type === 'html' && <Field label="資訊圖表"><select value={slug} onChange={(e) => setSlug(e.target.value)}><option value="">稍後再選／自訂網址</option>{Object.keys(MATERIAL_CATALOG).map((id) => <option key={id} value={id}>{materialTitle(id)}（{id}）</option>)}</select></Field>}
+    <Field label="必做"><select value={required} onChange={(e) => setRequired(e.target.value)}><option value="">依活動類型（預設：{requiredLabel({ id: '', title: '', phase: 'before', url: '', description: '', type, tracking: type === 'html' && slug ? 'interactive' : undefined }).required ? '必做' : '選做'}）</option><option value="true">必做</option><option value="false">選做</option></select></Field>
+    <div className="actions"><button className="primary" onClick={create}><Plus size={16} />建立</button></div>
+  </section></div>;
 }
 type CourseEditorProps = {
   course?: Course;
@@ -907,6 +938,8 @@ export function CourseEditor(props: CourseEditorProps) {
   const [reviewName, setReviewName] = useState('');
   const [reviewSources, setReviewSources] = useState<string[]>([]);
   const [reviewCount, setReviewCount] = useState(1);
+  const [addingActivity, setAddingActivity] = useState(false);
+  const [justAdded, setJustAdded] = useState('');
   useEffect(() => { const next = structuredClone(course || makeCourse()); setDraft(next); setSelected(orderedChapters(next)[0]?.name || ''); }, [course?.id]);
   const isDirty = !!course && JSON.stringify(draft) !== JSON.stringify(course);
   useEffect(() => { onDirty(isDirty); return () => onDirty(false); }, [isDirty]);
@@ -947,17 +980,24 @@ export function CourseEditor(props: CourseEditorProps) {
         <div className="formgrid"><Field label="單元名稱"><input value={chapter.title} onChange={(e) => changeChapter({ title: e.target.value })} /></Field><Field label="達標分數"><input type="number" min="0" max="100" value={chapter.threshold} onChange={(e) => changeChapter({ threshold: Number(e.target.value) })} /></Field><Field label="開放時間"><input type="datetime-local" value={chapter.opensAt} onChange={(e) => changeChapter({ opensAt: e.target.value })} /></Field><Field label="完成期限"><input type="datetime-local" value={chapter.dueAt} onChange={(e) => changeChapter({ dueAt: e.target.value })} /></Field></div>
         <Field label="單元說明"><textarea value={chapter.description} onChange={(e) => changeChapter({ description: e.target.value })} /></Field><label className="check"><input type="checkbox" checked={chapter.required} onChange={(e) => changeChapter({ required: e.target.checked })} />列為平常分數的必做單元</label><label className="check"><input type="checkbox" checked={chapter.research?.enabled !== false} onChange={(e) => changeChapter({ research: { enabled: e.target.checked } })} />蒐集解析研究資料</label>
         <div className="actions"><button disabled={rows[0]?.name === name} onClick={() => move(-1)}>上移</button><button disabled={rows.at(-1)?.name === name} onClick={() => move(1)}>下移</button></div><ChapterOverrides course={draft} name={name} chapter={chapter} onChange={(chapterOverrides) => setDraft({ ...draft, chapterOverrides })} changeShared={changeChapterAndOverrides} />
-        <hr /><div className="sectionhead"><h2>學習活動</h2><button onClick={() => changeChapter({ activities: [...chapter.activities, { id: uid(), title: '新活動', type: 'youtube', phase: 'before', url: '', description: '' }] })}><Plus size={16} />新增活動</button></div>
-        {chapter.activities.map((activity, index) => <ChapterActivityEditor
-          key={activity.id}
-          activity={activity}
-          onChange={(patch) => changeActivity(index, patch)}
-          onPreview={() => preview(materialize(), true, units[0]?.id, activity.id)}
-          onRemove={() => changeChapter({ activities: chapter.activities.filter((item) => item.id !== activity.id) })}
-          onMove={(offset) => { const list = [...chapter.activities], to = index + offset; if (to < 0 || to >= list.length) return; [list[index], list[to]] = [list[to], list[index]]; changeChapter({ activities: list }); }}
-          first={index === 0}
-          last={index === chapter.activities.length - 1}
-        />)}
+        <hr /><div className="sectionhead"><div><h2>學習活動</h2><p className="muted activity-counts">必做 {chapter.activities.filter((a) => requiredLabel(a).required).length}・選做 {chapter.activities.filter((a) => !requiredLabel(a).required).length}</p></div><button onClick={() => setAddingActivity(true)}><Plus size={16} />新增活動</button></div>
+        {groupByPhase(chapter.activities).map(({ phase, items }) => <section className="activity-phase-group" key={phase}>
+          <h3>{phases[phase]}（{items.length}）</h3>
+          {!items.length && <p className="muted">尚無{phases[phase]}活動</p>}
+          {items.map(({ activity, index }, pos) => <ChapterActivityEditor
+            key={activity.id}
+            activity={activity}
+            initiallyOpen={activity.id === justAdded}
+            onChange={(patch) => changeActivity(index, patch)}
+            onPreview={() => preview(materialize(), true, units[0]?.id, activity.id)}
+            onRemove={() => changeChapter({ activities: chapter.activities.filter((item) => item.id !== activity.id) })}
+            onMove={(offset) => changeChapter({ activities: moveWithinPhase(chapter.activities, index, offset < 0 ? -1 : 1) })}
+            first={pos === 0}
+            last={pos === items.length - 1}
+          />)}
+        </section>)}
+        {chapter.activities.length > 0 && <div className="actions"><button onClick={() => setAddingActivity(true)}><Plus size={16} />新增活動</button></div>}
+        {addingActivity && <NewActivityDialog onCancel={() => setAddingActivity(false)} onCreate={(activity) => { changeChapter({ activities: insertActivity(chapter.activities, activity) }); setJustAdded(activity.id); setAddingActivity(false); }} />}
         <hr /><h2>{(!!units[0] && isReviewUnit(units[0])) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{(!!units[0] && isReviewUnit(units[0])) ? (() => { const review = units[0].review!, changed = review.sourceUnitIds.filter((id) => draft.units.find((u) => u.id === id)?.bankVersion !== review.sourceVersions[id]); const sourceCounts = review.sourceUnitIds.map((id) => `${id} ${draft.units.find((u) => u.id === id)?.questionCount || 0} 題`); return <><p className="muted">題目池共 {sourceCounts.reduce((n, row) => n + Number(row.match(/(\d+) 題$/)?.[1] || 0), 0)} 題（{sourceCounts.join('、')}）；每次抽 {review.drawCount} 題，組卷於 {new Date(review.builtAt).toLocaleString()}。</p><p>{Object.entries(review.allocation).map(([id, n]) => `${id} 每次 ${n} 題`).join('、')}</p>{changed.length > 0 && <div className="notice warning"><strong>來源題庫已更新（{changed.join('、')}），題目池仍是組卷當時內容</strong><button onClick={() => void buildReview({ name: units[0].id, sources: review.sourceUnitIds, count: review.drawCount })}>依目前題庫重新組卷</button></div>}<div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(review.sourceUnitIds); setReviewCount(review.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { await api.call('deleteReviewExam', { courseId: draft.id, name: units[0].id }); setDraft((d) => ({ ...d, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id), classUnits: Object.fromEntries(Object.entries(d.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== units[0].id)])) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></>; })() : <><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}</>}
       </section>}
     </div>
