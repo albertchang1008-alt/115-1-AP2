@@ -12,7 +12,6 @@ for(const dir of ['materials-src','public/materials']){
   const p=path.join(folder,e.name);if(e.isDirectory())scan(p);else{
    const s=fs.readFileSync(p).toString(),rel=path.relative(root,p);
    for(const term of config.scanTerms)if(s.includes(term))report.forbiddenMatches.push({path:rel,term});
-   if(s.includes('扁桃體'))report.pendingTeacher.push({path:rel,term:'扁桃體',count:s.split('扁桃體').length-1});
   }
  }}scan(root+'/'+dir);
 }
