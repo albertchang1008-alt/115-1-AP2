@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 心臟II 圖像化改版 | 本次 C1–C7 修正完成：節點去重、21 份驗證、主動脈配色／加粗／左右冠狀、電性完整顯示；待 Claude 依 `docs/HEART2_C_REVIEW_ACCEPTANCE.md` 複驗，未部署 |
+| 心臟II 圖像化改版 | **2026-10-03 Claude 複驗通過，連同 1.6.4、第一階段補齊教材、1.6.3、favicon 由 `feature/cardiac-output-visuals` 一次部署**。C1–C7：節點去重、21 份驗證、主動脈配色／加粗／左右冠狀、電性完整顯示；待 Claude 依 `docs/HEART2_C_REVIEW_ACCEPTANCE.md` 複驗，未部署 |
 | 1.6.4 後台兩層選單 | `feature/cardiac-output-visuals`（`7e69ce9`）：題庫／報表兩層連動、研究頁分組完成，待 Claude 驗收；未 push／部署。報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md` |
 | 第一階段補齊教材 | `feature/stage1-supplement`（33e7700＋交接）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
@@ -101,7 +101,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
 **可部署（2026-10-03 Claude 複驗 33e7700 通過）**：用語清單掃描 public/materials、materials-src、figures 全為 0（「扁桃體」已改為「扁桃腺」）；心搏量已統一（心輸出量、血壓調控、心電圖模擬器）；6 份預測回饋為說明句並實測顯示；題庫僅第 163、164、169 列共 10 格「每搏量→心搏量」，其餘逐格不變；所有題目 ID／答案不變；抽測 6 份無錯誤／溢位。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
 - **教師決定（2026-10-03）：統一用「扁桃腺」**。Claude 已直接改 blood-pre-v1（2 處）、blood-post-v1（4 處），僅顯示文字，前測題目答案位置不變；用語檢查腳本已把「扁桃體」列為禁用詞。
-**心臟II／Claude 複驗 2f78ae2：C1–C7 修正完成，待 Claude 複驗**
+**心臟II C1–C7：2026-10-03 Claude 複驗通過（Claude 已修正主動脈分段與分界、弓放大圖、左冠狀標籤），可部署**
 - 分支 `feature/cardiac-output-visuals`，本次基底 `f589505`；C1–C4／C7 必修與 C5–C6 建議完成。本次提交結尾 [Codex]，未 push／部署。
 - 六份 34 節點去除重複重點、改應用判讀；只能取材規格與既有內容，137 筆逐句對照在 `docs/HEART2_C1_TEXT_COMPARISON.md`，待 Claude 醫學複核。
 - 新增強制節點驗證：points 正規化重複、等於 summary／concept、clinical 等於 summary 報錯。21 份學生教材 129 節點及全部 15 kit 來源過，指令 `npm run materials:validate-nodes`。
@@ -109,10 +109,10 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 題目／選項／答案／預測題、節點／題目 ID、Excel 不改；六份 content 僅 points／clinical 不同；手工電性僅 CSS 不同。26 張指定截圖、比對及檢查見 `docs/HEART2_C_REVIEW_ACCEPTANCE.md`。
 - check 120 前端／19 Functions、兩端 build、version:check 過；用語／草稿掃描 0，標準血管 shots 22 張過。固定決策 22 本次依教師明確交辦提交，目錄不重登錄。
 - 先前 A1–A10、M1 與必修 1／3／4、建議 5–8 已完成；原報告保留歷史。下一步 Claude 依 C1 對照與 C7 新圖驗收，教師決定部署。
-**1.6.4 合併單元：完成，待 Claude 驗收（本次提交）**
+**1.6.4 合併單元：2026-10-03 Claude 驗收通過，可部署**
 - 空單元才顯示合併；預覽活動／受影響學生後確認。教師 callable 交易分別合併草稿／已發布活動與班級設定（目標優先），全體 progress 複製至目標、舊鍵保留、completed 不降級；研究／診斷不動。
 - check 119 前端／19 Functions、兩端 build、version:check 過；行為／React／完成度測試與詳情見 `docs/CHAPTER_MERGE_1.6.4_ACCEPTANCE.md`。版本 1.6.4，未 push／部署；下一步 Claude 驗收。
-**1.6.4 後台「單元／次單元」兩層選單：待 Claude 驗收**
+**1.6.4 後台「單元／次單元」兩層選單：2026-10-03 Claude 驗收通過（補空白單元標題 fallback），可部署**
 - ChapterUnitPicker 共用兩層選單：單元依 orderedChapters／看板順序，次單元只列該單元分類；換單元重設第一個，清空題庫預覽／報表摘要與明細，舊非同步結果不覆蓋新選擇。
 - 題庫讀取／版本徽章沿所選次單元；報表保留「全部」，此時次單元停用，仍依 Unit ID 篩選；研究資料頁依單元 optgroup 分組。
 - 純前端顯示；資料結構／後端功能／完成度不變。版本檔全部同步 1.6.4；check 117 前端／18 Functions 及兩端 build 通過，新增實際 React 頁面操作測試。

@@ -41,7 +41,7 @@ export default function ChapterUnitPicker({ course, value, onChange, allowAll = 
       onChange={(e) => onChange(resolveChapterUnit(course, { chapterName: e.target.value, unitId: '' }, allowAll))}>
       {allowAll && <option value="">全部</option>}
       {!allowAll && !rows.length && <option value="">尚無單元</option>}
-      {rows.map((row) => <option key={row.name} value={row.name}>{row.chapter.title}</option>)}
+      {rows.map((row) => <option key={row.name} value={row.name}>{row.chapter.title || row.name}</option>)}
     </select></label>
     <label className="field"><span>次單元</span><select aria-label="次單元" value={selected.unitId} disabled={disabled || !units.length || (allowAll && !selected.chapterName)}
       onChange={(e) => onChange({ ...selected, unitId: e.target.value })}>

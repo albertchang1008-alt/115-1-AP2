@@ -50,3 +50,23 @@
 - blood-pressure-measurement-node-01：[390](heart2-c-review-screenshots/390-blood-pressure-measurement-node-01.png)、[1280](heart2-c-review-screenshots/1280-blood-pressure-measurement-node-01.png)
 - blood-types-node-01：[390](heart2-c-review-screenshots/390-blood-types-node-01.png)、[1280](heart2-c-review-screenshots/1280-blood-types-node-01.png)
 - capillary-exchange-node-01：[390](heart2-c-review-screenshots/390-capillary-exchange-node-01.png)、[1280](heart2-c-review-screenshots/1280-capillary-exchange-node-01.png)
+
+---
+
+# Claude 複驗結果（2026-10-03）
+
+**結論：通過（Claude 已直接修正主動脈兩張圖）。** 心臟II 圖像化改版、1.6.4 合併單元、1.6.4 兩層選單三項一併驗收通過，可部署。
+
+## 檢查
+- 乾淨副本 `npm run check`：前端 120／Functions 19 全過，兩端 build、version:check 過。（教師 Mac 的 Cowork 副本缺 Chrome 時，3 項瀏覽器測試會因 `channel:'chrome'` 啟動失敗，屬環境問題，非程式錯誤。）
+- C1 節點文字 137 筆逐句醫學複核：無錯誤。用語提醒：「淋巴微管」（微血管物質交換、淋巴系統教材與題目）與「微淋巴管」（血液前／後測）並存，皆非錯誤，是否統一待教師決定；題目文字不改。
+- C4 電性對齊圖、C5 脈搏點位、C6 頭臂靜脈標籤、C2 節點驗證：通過。
+
+## Claude 修正（`scripts/aorta-segments.py` 重新產生兩張圖並 `materials:build major-vessels`）
+1. **分段與分界線對齊（教師回報「箭頭這邊標示的不太對」）**：原圖弓的點虛線切過頭臂動脈根部，選取「主動脈弓」時紅色延伸超過分界線、蓋住胸主動脈起始。改為一條連續中心線（升段→弓→胸段，切點切線連續），各段以平頭端點在分界處相接，點虛線垂直畫在切點上；弓起於頭臂動脈之前、止於左鎖骨下動脈之後，三分支整段屬於弓。四段點選時顏色交界與點虛線完全一致。
+2. **左冠狀動脈標籤**原本壓在胸主動脈上：改放左欄，引線從主動脈根部下方通過，不與任何血管交叉。
+3. **弓放大圖**：頭臂動脈主幹原被右鎖骨下動脈蓋住、看不出「右側多一段」；改為明顯的一段主幹再分叉為右頸總與右鎖骨下，淡框只框主幹與分叉；同樣以點虛線標弓的起訖，並補標升主動脈、胸主動脈。
+- 節點／題目 ID、題目、content.json、其他教材不變；只改兩張 SVG、產生程式與 major-vessels-v1 建置檔。390／1280 實測四段點選、還原與放大圖無頁面錯誤。
+
+## 1.6.4 小修
+- `ChapterUnitPicker`：單元標題空白時改顯示單元代碼，避免出現空白選項。
