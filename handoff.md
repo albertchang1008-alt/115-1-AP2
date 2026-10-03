@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（實作 `33e7700`；本次提交複核交接紀錄）：**台灣用語與六份預測回饋 1–5 項已修正，待 Claude 複驗，暫不部署**（版本 1.6.3）；上一輪 212499c 已通過複驗 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（33e7700＋交接）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -101,16 +101,8 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **教師 6 點修訂：Claude 驗收（2026-10-02）**
 - 通過：心輸出量 NE（交感節後）／ACh（副交感節後）／腎上腺素（腎上腺髓質經血液）區分正確；血壓 ANP／BNP 利尿 → 血容量 → 回心血量 → CO → 血壓因果鏈與醛固酮／ADH 對照正確；預測題答對／未答對回饋明確；紅血球改 4 張獨立 SVG 正確；26 份整理表皆出現、390 無溢位、無錯誤；Excel 未動。
 
-**台灣用語＋預測回饋：待 Claude 複驗（2026-10-03 Codex 完成 1–5 項）**
-- 心搏量統一 content／SVG／整理表／ECG 元件及參考頁；血管「網路」、手工提示與 aria-label「點選」。同步規格與產生腳本，重建九份受影響 kit。
-- 六份新教材的預測答對回饋已逐字使用教師指定說明句；kit 保留自動「✓ 答對了！」前綴，題目 ID／正解代碼不變。
-- 題庫僅第 163、164、169 列共 10 格換詞，其餘 5,396 題庫格／說明頁／格式／其他 ZIP parts 不變。比對 `docs/TAIWAN_TERMS_XLSX_VERIFY.json`；前 161 題不變，新 66 題與教材／規格一致。
-- public/materials 與 materials-src 遞迴掃描 43 詞皆 0；既有前後測「扁桃體」保留（前測 2／後測 4），待教師決定。未追蹤 coagulation 本機提示換「點選」以符合全面掃描；仍 exclude、不納入 commit。
-- 完整 check（115 前端／18 Functions、兩端 build、version 1.6.3）通過；六預測×390／1280 共 12 組通過；心輸出量／血壓 SVG 各 20 張檢查通過。報告 `docs/TAIWAN_TERMS_ACCEPTANCE.md`、`docs/TAIWAN_TERMS_VERIFY.json`。
-- 2026-10-03 再次核對 `33e7700`：43 詞掃描 0、12 組預測畫面、15 kit／11 手工 ID 與答案保留、Excel 指定 10 格與其他 5,396 格／其他 ZIP parts 比對均通過；重跑 `npm run check` 通過。工作內容已 commit，本次僅提交複核交接文件。
-- 下一步 Claude 複驗用語、六說明句及 Excel 範圍；不 push、不部署，main 未動。
-
-**上一輪 Claude 複驗通過（2026-10-03，212499c；本輪仍待複驗）**：草稿註記全專案 0 筆（血型保留萬能捐／受血者、微血管改「稱為水腫」、血管 credits 已刪）；26 份整理表無重複句、ABO 列含四型；同單元配色色相差：心臟 ≥90°、心臟II ≥50°、血液 ≥60°、淋巴 75°（21 份無法兩兩相差 25°，以同單元區隔為準）；26 份無錯誤／溢位；6 新教材完整流程、題目／ID／Excel 未變。本輪用語修訂通過 Claude 複驗後，再交教師執行 deploy.sh。
+**可部署（2026-10-03 Claude 複驗 33e7700 通過）**：用語清單掃描 public/materials、materials-src、figures 全為 0（僅待決「扁桃體」）；心搏量已統一（心輸出量、血壓調控、心電圖模擬器）；6 份預測回饋為說明句並實測顯示；題庫僅第 163、164、169 列共 10 格「每搏量→心搏量」，其餘逐格不變；所有題目 ID／答案不變；抽測 6 份無錯誤／溢位。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
+- **待教師決定（不擋部署）**：血液前測／後測（已上線）用「扁桃體」，淋巴器官用「扁桃腺」，是否統一。
 
 **第一階段補齊：Claude 驗收紀錄（2026-10-02）**
 - 9 份 kit（含 6 新）點節點就地展開、同時一個、收合；6 新 390／1280 無錯誤與溢位、圖內字 ≥15.2px、explore 各 6、複習後才可重試、最後答對即 complete。66 題正解與 Claude 規格逐題一致；主圖（人體血管路徑：主動脈弓三分支、主動脈偏人體左／下腔靜脈偏右；抗 A／B／D 玻片；壓脈帶三段）醫學正確。節點圖多為流程框（規格允許）。
