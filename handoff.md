@@ -18,7 +18,7 @@
 
 | 項目 | 狀態 |
 |---|---|
-| 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
+| 正式站 | **1.6.4**。`origin/main`＝`dc8c045`（2026-10-03 教師以 deploy.sh 部署：Functions 成功；Pages Actions success；`version.json`＝1.6.4、`manifest.webmanifest` 可取得，Claude 確認）。含第一階段補齊教材、1.6.3 節點點擊、1.6.4 合併單元與兩層選單、心臟II 圖像化、favicon |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
 | 心臟II 圖像化改版 | **2026-10-03 Claude 複驗通過，連同 1.6.4、第一階段補齊教材、1.6.3、favicon 由 `feature/cardiac-output-visuals` 一次部署**。C1–C7：節點去重、21 份驗證、主動脈配色／加粗／左右冠狀、電性完整顯示；待 Claude 依 `docs/HEART2_C_REVIEW_ACCEPTANCE.md` 複驗，未部署 |
 | 1.6.4 後台兩層選單 | `feature/cardiac-output-visuals`（`7e69ce9`）：題庫／報表兩層連動、研究頁分組完成，待 Claude 驗收；未 push／部署。報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md` |
