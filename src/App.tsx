@@ -3,7 +3,8 @@ import { QuestionImage, Explanations } from './QuestionContent';
 import Diagnostics from './Diagnostics';
 import ResearchEvidence from './ResearchEvidence';
 import ProgressBoard from './ProgressBoard';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ChapterUnitPicker, { useChapterUnitSelection } from './ChapterUnitPicker';
 import {
   LayoutDashboard,
   BookOpen,
@@ -959,7 +960,7 @@ function CourseEditor(props: CourseEditorProps) {
     </div>
   </>;
 }
-function Bank({
+export function Bank({
   course,
   api,
   notify,
@@ -970,26 +971,36 @@ function Bank({
   notify: (s: string) => void;
   onSynced: () => Promise<void>;
 }) {
-  const [unitId, setUnit] = useState(course.units[0]?.id || ''),
-    [questions, setQuestions] = useState<Question[]>([]),
+  const [selection, setSelection] = useChapterUnitSelection(course);
+  const unitId = selection.unitId;
+  const request = useRef(0);
+  const [questions, setQuestions] = useState<Question[]>([]),
     [search, setSearch] = useState(''),
     [busy, setBusy] = useState(false),
     [sheetId, setSheetId] = useState(''),
     [sheetBusy, setSheetBusy] = useState(false);
   const unit = course.units.find((u) => u.id === unitId);
   useEffect(() => {
+    request.current++;
+    setQuestions([]);
+    setBusy(false);
+    return () => { request.current++; };
+  }, [course.id, unitId, unit?.bankVersion]);
+  useEffect(() => {
     if (api.preview) return;
     void api.call<any>('getSyncStatus').then((r) => setSheetId(r.sheetId || '')).catch((e) => notify('無法讀取同步檔案設定：' + e.message));
   }, [api]);
   async function load() {
     if (!unit?.bankVersion) return;
+    const ticket = ++request.current;
     setBusy(true);
     try {
-      setQuestions(await cachedBank(api, course.id, unitId, unit.bankVersion));
+      const loaded = await cachedBank(api, course.id, unitId, unit.bankVersion);
+      if (ticket === request.current) setQuestions(loaded);
     } catch (e) {
-      notify((e as Error).message);
+      if (ticket === request.current) notify((e as Error).message);
     } finally {
-      setBusy(false);
+      if (ticket === request.current) setBusy(false);
     }
   }
   return (
@@ -1015,21 +1026,13 @@ function Bank({
       </section>
       <section className="panel">
         <div className="formgrid">
-          <Field label="單元">
-            <select
-              value={unitId}
-              onChange={(e) => {
-                setUnit(e.target.value);
-                setQuestions([]);
-              }}
-            >
-              {course.units.map((u) => (
-                <option key={u.id} value={u.id}>
-                  {u.title}
-                </option>
-              ))}
-            </select>
-          </Field>
+          <ChapterUnitPicker course={course} value={selection} disabled={busy} onChange={(selected) => {
+            request.current++;
+            setSelection(selected);
+            setQuestions([]);
+            setSearch('');
+            setBusy(false);
+          }} />
         </div>
         <div className="actions">
           <button
@@ -1498,7 +1501,7 @@ function StudentDetail({
     </div>
   );
 }
-function Analysis({
+export function Analysis({
   course,
   api,
   notify,
@@ -1507,26 +1510,30 @@ function Analysis({
   api: API;
   notify: (s: string) => void;
 }) {
+  const [selection, setSelection] = useChapterUnitSelection(course, true);
+  const unit = selection.unitId;
+  const request = useRef(0);
   const [detail, setDetail] = useState<any>(null),
     [cl, setCl] = useState(course.classIds[0]),
     [reports, setReports] = useState<Report[]>([]),
     [next, setNext] = useState<string | null>(null),
     [mode, setMode] = useState('all'),
-    [unit, setUnit] = useState('all'),
     [busy, setBusy] = useState(false),
     [time, setTime] = useState<number | null>(null);
   async function load(more = false) {
+    const ticket = ++request.current;
     try {
       const r = await api.call('getReports', {
         courseId: course.id,
         classId: cl,
         after: more ? next : '',
       });
-      setReports(more ? [...reports, ...r.rows] : r.rows);
+      if (ticket !== request.current) return;
+      setReports((current) => more ? [...current, ...r.rows] : r.rows);
       setNext(r.next);
       setTime(r.job?.updatedAt || null);
     } catch (e) {
-      notify((e as Error).message);
+      if (ticket === request.current) notify((e as Error).message);
     }
   }
   async function update() {
@@ -1550,8 +1557,13 @@ function Analysis({
     }
   }
   useEffect(() => {
+    setReports([]);
+    setNext(null);
+    setTime(null);
+    setDetail(null);
     void load();
-  }, [course.id, cl]);
+    return () => { request.current++; };
+  }, [course.id, cl, selection.chapterName]);
   const rows = reports
     .filter((r) => unit === 'all' || r.unitId === unit)
     .flatMap((r) =>
@@ -1593,14 +1605,16 @@ function Analysis({
               <option key={c}>{c}</option>
             ))}
           </select>
-          <select aria-label="單元" value={unit} onChange={(e) => setUnit(e.target.value)}>
-            <option value="all">全部已載入單元</option>
-            {course.units.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.title}
-              </option>
-            ))}
-          </select>
+          <ChapterUnitPicker course={course} value={selection} allowAll disabled={busy} onChange={(selected) => {
+            if (selected.chapterName !== selection.chapterName) {
+              request.current++;
+              setReports([]);
+              setNext(null);
+              setTime(null);
+            }
+            setDetail(null);
+            setSelection(selected);
+          }} />
           <select aria-label="作答模式" value={mode} onChange={(e) => setMode(e.target.value)}>
             <option value="all">測驗＋閃卡（學生去重）</option>
             <option value="quiz">一般測驗</option>
@@ -1636,7 +1650,7 @@ function Analysis({
             <thead>
               <tr>
                 <th>題目／版本</th>
-                <th>單元</th>
+                <th>次單元</th>
                 <th>首次錯誤率</th>
                 <th>作答人數</th>
                 <th>複習後仍錯</th>
