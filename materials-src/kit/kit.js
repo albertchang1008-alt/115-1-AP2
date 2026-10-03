@@ -19,7 +19,7 @@ function renderLab(lab, figures) {
   const widget = lab.widget && WIDGETS[lab.widget]?.();
   const prediction = lab.predict ? `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o,i)=>`<button data-answer="${i}">${esc(o)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>` : '';
   const visual = lab.widget ? `<div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div>`
-    : `<div class="state-figure" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}">${figures[lab.figure]}</div><div class="state-controls">${lab.states.map((x,i)=>`<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}</div><p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`;
+    : `<div class="state-figure${lab.figure==='major-vessels-overview.svg'?' anatomy-lab':''}" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}"><div class="anatomy-main">${figures[lab.figure]}</div>${figures['major-vessels-portal.svg']?`<div class="portal-inset">${figures['major-vessels-portal.svg']}</div>`:''}</div><div class="state-controls">${lab.states.map((x,i)=>`<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}${figures['major-vessels-portal.svg']?'<button type="button" data-replay-flow>重播血流</button>':''}</div><p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`;
   return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>${visual}${prediction}</section>`;
 }
 
@@ -70,6 +70,14 @@ export function render(content, figures) {
     + `<section class="quiz"><h2>第一關｜先備知識</h2>${stage(content.foundation, 'foundation')}<h2>第二關｜情境應用</h2>${stage(content.cases, 'case').replace('data-index="0"', 'data-index="0" hidden')}</section>`
     + '<p class="complete-banner" hidden role="status">本輪第二關五題全對，已通關！</p>'
     + `<footer class="credits">${(content.credits || []).map(esc).join('<br>')}</footer></main>`;
+}
+
+// Pure visual controls: no learning events or changes to completion counts.
+function updateAnatomy(figure) {
+  const state = figure.dataset.state;
+  figure.querySelectorAll('[data-routes]').forEach(path => path.classList.toggle('route-active', path.dataset.routes.split(' ').includes(state)));
+  figure.querySelectorAll('[data-label-state]').forEach(label => label.style.display = label.dataset.labelState === state ? '' : 'none');
+  figure.querySelectorAll('svg').forEach(svg => svg.setCurrentTime?.(0));
 }
 
 export function mount(content, figures) {
@@ -144,10 +152,16 @@ export function mount(content, figures) {
       const id = b.dataset.labState;
       const fig = document.querySelector('.state-figure');
       fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
+      updateAnatomy(fig);
       selectPanel(id);
       document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
     }));
+  }
+  const anatomy = document.querySelector('.anatomy-lab');
+  if (anatomy) {
+    updateAnatomy(anatomy);
+    document.querySelector('[data-replay-flow]').addEventListener('click', () => updateAnatomy(anatomy));
   }
   document.querySelector('.predict')?.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;

@@ -6,7 +6,15 @@ import { paletteCss, colorFigure } from '../materials-src/kit/presentation.mjs';
 const args=process.argv.slice(2), preview=args.includes('--preview'), slug=args.find(a=>!a.startsWith('--')); if(!slug) throw Error('用法：npm run materials:build <slug>（先看不登錄：npm run materials:preview <slug>）');
 const src=path.join(ROOT,'materials-src',slug), content=JSON.parse(fs.readFileSync(path.join(src,'content.json'),'utf8')); validateMaterialContent(content);
 if(content.slug!==slug) throw Error(`slug：內容檔為 ${content.slug}，路徑為 ${slug}`);
-const figures={}; for(const file of new Set([...(content.lab.figure?[content.lab.figure]:[]),...content.nodes.map(n=>n.figure),...(content.extras||[]).map(e=>e.figure)])) figures[file]=colorFigure(fs.readFileSync(path.join(ROOT,'materials-src/figures',file),'utf8'),`${slug}-${content.version}`);
+// The route lab, overview and pulse map share the same original anatomy source.
+function readFigure(file) {
+  return fs.readFileSync(path.join(ROOT,'materials-src/figures',file),'utf8').replace(/<g data-anatomy-base="([a-z0-9-]+\.svg)"\/>/g, (_, base) => {
+    const svg = fs.readFileSync(path.join(ROOT,'materials-src/figures',base),'utf8');
+    return svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
+  });
+}
+const figures={}; for(const file of new Set([...(content.lab.figure?[content.lab.figure]:[]),...content.nodes.map(n=>n.figure),...(content.extras||[]).map(e=>e.figure)])) figures[file]=colorFigure(readFigure(file),`${slug}-${content.version}`);
+if(slug==='major-vessels') figures['major-vessels-portal.svg']=readFigure('major-vessels-portal.svg');
 const out=path.join(MATERIALS_DIR,`${slug}-${content.version}`), index=path.join(out,'index.html');
 const ids=[...content.nodes,...content.foundation,...content.cases].map(x=>x.id).sort();
 if(fs.existsSync(index)){const old=fs.readFileSync(index,'utf8'), m=old.match(/<meta name="material-ids" content="([^"]*)"/); if(!m||m[1].split(',').sort().join(',')!==ids.join(',')) throw Error(`版本 ${content.version} 的節點／題目 ID 有變動，請改版號`); console.log('ID 集合相同：允許覆寫純視覺／文字修訂。');}
