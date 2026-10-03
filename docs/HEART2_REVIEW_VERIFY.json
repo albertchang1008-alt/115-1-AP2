@@ -1,0 +1,518 @@
+{
+  "base": "e86761f",
+  "preservation": [
+    {
+      "file": "materials-src/major-vessels/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "4c84d405c63705bd155052ae6fec67b4425a1d4d8905dfe782cc2ed520c65832"
+    },
+    {
+      "file": "materials-src/major-vessels/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "b9e8139c4d4a78fc7d2b9a518c6af2ddd4f0cc1aa153ee94d0df79eaefbe60d5"
+    },
+    {
+      "file": "materials-src/major-vessels/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "materials-src/cardiac-output/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "8923b8422eaa76bd0cd16ce213ad53a0e47a9aa260e97ad766c9e0ef0e2ef126"
+    },
+    {
+      "file": "materials-src/cardiac-output/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "84298c58232b790957ef8574a1eda15e031daab1c76ee6f1ef543cb4825f6cd3"
+    },
+    {
+      "file": "materials-src/cardiac-output/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "materials-src/capillary-exchange/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "06fb43964a4e5b54a89c7e6a603fced486a5e5d2a4ed479e2d478d2fb0aa016e"
+    },
+    {
+      "file": "materials-src/capillary-exchange/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "c572b49c2abd80a1d259ac85a13abc0eba19c7475f7c1d1f0f9bd4caf7fd96ed"
+    },
+    {
+      "file": "materials-src/capillary-exchange/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "materials-src/blood-pressure-measurement/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "7a6b970f876c69524ea704b217e0b2f4568381ecde072040506150429634502d"
+    },
+    {
+      "file": "materials-src/blood-pressure-measurement/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "44b96bcecdbfd7008c7f22920217d5fadd500f192ab3e49b12b417210118bb16"
+    },
+    {
+      "file": "materials-src/blood-pressure-measurement/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "materials-src/blood-types/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "b1f6f65d22a2edd5cd3467b2daa5ea513421792efc615648607e47426e17cfd6"
+    },
+    {
+      "file": "materials-src/blood-types/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "a24619f9574bce3c5c7fb8af09e19af8c6dd6717d809f4c2b2c92e8bcbd69cc2"
+    },
+    {
+      "file": "materials-src/blood-types/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "materials-src/lymphoid-organs/content.json",
+      "section": "foundation",
+      "bytesUnchanged": true,
+      "sha256": "8faad36d27d3a63441a2c9354bd86efe8f3a16708b2c6a0c84519a6024d736f3"
+    },
+    {
+      "file": "materials-src/lymphoid-organs/content.json",
+      "section": "cases",
+      "bytesUnchanged": true,
+      "sha256": "76e55ba723ce20e50f0539e953c65a0adfcc4b46f7d9e4e4e135e6b016004eec"
+    },
+    {
+      "file": "materials-src/lymphoid-organs/content.json",
+      "nodeIdsUnchanged": true,
+      "onlyAuthorizedChanges": true
+    },
+    {
+      "file": "public/materials/cardiac-electrical-v1/index.html",
+      "allBytesOutsideVisualsUnchanged": true
+    },
+    {
+      "file": "materials-src/blood-pressure-regulation/content.json",
+      "sha256": "089ca6f293a3981ecd2698c1faa4370dc9fd0e2142cb768ad5b384499e3c6d13",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/blood-vessels/content.json",
+      "sha256": "ada08e1735ba2366f1cefd7d9550ae9e27d7048e4fec961d8eb1e85a2d76952f",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/cardiac-conduction/content.json",
+      "sha256": "2589635e8bd1747e08809b0189c637af3c5a824d446981045516d7cb5527b330",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/cardiac-cycle/content.json",
+      "sha256": "af930c56735cab1225debc9c6ea15d3d280a926487c007e44a18a50157a5ee35",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/circulation-routes/content.json",
+      "sha256": "e5f8d686e779bddfaf0c5f510c8b09a3b064105975cca017c6af1dc215f5425e",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/ecg-basics/content.json",
+      "sha256": "edbb8d31c0222ae5783fd4c8dff5c73a47111efe113318c56c5c805af949b00a",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/heart-structure/content.json",
+      "sha256": "3481686a321b69e3408c48c6b54bb4a9fe110c2996e1cfe770900ede989b8ee0",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/hemodynamics/content.json",
+      "sha256": "330204f26009cf7b0e08f2914d19c538cb5d84e8c71ec12089d39a0cebb6a964",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "materials-src/lymphatic-system/content.json",
+      "sha256": "1837d39b8bea9eb4c870bccebf437633f22e4ae80b01f223d3de2ba5df43ec6c",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/README.md",
+      "sha256": "1f954c3ed57fa0c989bfe407d4c315ef692356c7c171cc1e2f640424ee002586",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-composition-v1/index.html",
+      "sha256": "4797fdab0ffbfba5f4230e45c64a3fa197eb97a7e10770afd3fee85a38d65efc",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-gas-transport-v1/index.html",
+      "sha256": "27583689ba91ed5fe7891a4ab6052ea0e19bc2f7e3a185756a1b0093ce10ec58",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-gas-transport-v2/index.html",
+      "sha256": "59de663db311b79b939125f2c1999f0435f29e6b3b2b05e4ee531ac5bcf48077",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-post-v1/index.html",
+      "sha256": "4da2a73798de95e034ebf05639de51cfd01e94b4eda3dc97fb7727e5bb4d2954",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-pre-v1/index.html",
+      "sha256": "eee764f6706b7b857d34b51b6e1f165f15e44850afc519e161488ff69e3b8959",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-pressure-regulation-v1/index.html",
+      "sha256": "5c5f6e55eed19454ec5c3dfa5c5e5352aa76cd27bcb1af10df1d4e6a048f9094",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/blood-vessels-v1/index.html",
+      "sha256": "23e66f259d796fa08e03d138c9a1e8f56df72579b1c38549b85464ae86960f94",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-conduction-v1/index.html",
+      "sha256": "22050780738aeecc744cce8c65b170e89e6b521415acdfddfe863182495ab8f6",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-conduction-v2/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-conduction-v2/index.html",
+      "sha256": "77516e9ee00e49728ed4894030f7e3cc6ce22100b0980d6cf66d43b9454d525d",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-cycle-v1/index.html",
+      "sha256": "26e0259ccd224c9df4b26b0ed3459226cf7039daf0725992b00c2dace6065cf9",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-cycle-v2/assets/cardiac-cycle-flow-strip-v1.png",
+      "sha256": "e3f37f9acfab277c3c6eec73f4ac7dc70215a25f55082c88c968bfa09fabd36d",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-cycle-v2/index.html",
+      "sha256": "0438132ea1c6601299865c4daba4674cac322ca26b7d40243b62afa1c37a3fd9",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/cardiac-electrical-v1/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/circulation-routes-v1/index.html",
+      "sha256": "f9dfadba1332a746fce5988134332f39bb41aa811630636b1f5277f1102ea4f1",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/assets/coronary-atherosclerosis-v2.png",
+      "sha256": "6984431d7c294781bcb458acde54e5d69097eb1d41eb6f58f70676008bf14250",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/assets/coronary-diastolic-perfusion-v2.png",
+      "sha256": "f2bf757bdd28f89b8b8c9230f422ae14342aab83ad62cd90751cb47b6b27b43e",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/assets/coronary-lca-branches-v2.png",
+      "sha256": "39fff8f92a79eed9003d6c00ab037fd7b789725a21070ae10b42f657c36463c8",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/assets/coronary-overview-v2.png",
+      "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/assets/coronary-perfusion-flow-strip-v1.png",
+      "sha256": "3e0294f5cf9852440c7fe0f75bd4c6db219b872e4a868670b2bb64c075d9db15",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/coronary-circulation-v1/index.html",
+      "sha256": "28422e41f4a7753f718256860cee2cfe26ae2bf90febc4c570f2dedfc5ab058e",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/course-learning.js",
+      "sha256": "0cc5ab72740899983d524dc12812a0c7c64cd6e5cbd0e5e288a6f9deffa1f722",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/course-orientation-v1/background.png",
+      "sha256": "3ca2e4bf90780ce55d2387d3842c796b2bac03fe76e995507ac782eae196caf6",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/course-orientation-v1/index.html",
+      "sha256": "5f23dd72acd7816c229156e31d24c0b357be60b36140728d7aeba30f8e5dd298",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/ecg-basics-v1/index.html",
+      "sha256": "0b6858012f0ec38a9ad23a1083ad4a9926cef170c9ada6694b7c63d847b4fef3",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/heart-structure-v1/index.html",
+      "sha256": "82d03311fe6f923c52bd4ceb12255d4319393a2aebde7d13bff58d31b754417b",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/heart-structure-v2/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/heart-structure-v2/assets/coronary-overview-v2.png",
+      "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/heart-structure-v2/assets/heart-valve-flow-strip-v1.png",
+      "sha256": "eec1a09759f7fe7e456db00a5cb159356b8b0a44a0275bfe105c97f40e6819d1",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/heart-structure-v2/index.html",
+      "sha256": "4b576a686034ebfbf605aaae219636666274706e798f2033d4f42f73f06f6899",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/hemodynamics-v1/index.html",
+      "sha256": "7d9f5a569668d817bd13ab40279fbf98095f4e6b90f136f4295d6b028227a2f2",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/hemostasis-mechanisms-v1/index.html",
+      "sha256": "35fdeacf80867d0e8d4fafe8f4919e3c63ec26d5a6368cf05550e8a6b1dddb37",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/hemostasis-mechanisms-v2/index.html",
+      "sha256": "ad7a8a1e5b3b1d4e661655c13e803a892cbce1749a14959f9d0751636c2d24ef",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/lymphatic-system-v1/index.html",
+      "sha256": "6400468ede90a2610445de9dc4a1980187a035fb63852490110cb20d24e355ff",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/rbc-homeostasis-v1/assets/rbc-epo-feedback-strip-v1.png",
+      "sha256": "c5bcf211acc5ca045a3e074f70cc647aa2d89a36638003051bea459702662cbf",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "public/materials/rbc-homeostasis-v1/index.html",
+      "sha256": "74e0f06c274de7fcd339512f208a3aff919959d2c69f716138fb5c10e916197d",
+      "bytesUnchanged": true
+    },
+    {
+      "file": "html/資訊圖表題庫_上傳用.xlsx",
+      "sha256": "48dca2aa0cbc98c858591aa7489c80baf018fa359fd4ef1d56faa401578fee2e",
+      "bytesUnchanged": true
+    }
+  ],
+  "scanMatches": [],
+  "results": [
+    {
+      "slug": "major-vessels",
+      "width": 390,
+      "shots": [
+        "390-major-vessels-right-hand.png",
+        "390-major-vessels-left-hand.png",
+        "390-major-vessels-left-foot.png",
+        "390-major-vessels-stomach.png",
+        "390-major-vessels-portal.png",
+        "390-major-vessels-overview.png",
+        "390-major-vessels-pulse.png",
+        "390-major-vessels-aorta-default.png",
+        "390-major-vessels-aorta-ascending.png",
+        "390-major-vessels-aorta-arch.png",
+        "390-major-vessels-aorta-thoracic.png",
+        "390-major-vessels-aorta-abdominal.png",
+        "390-major-vessels-arch-closeup.png",
+        "390-major-vessels-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-output",
+      "width": 390,
+      "shots": [
+        "390-cardiac-output-bar-base.png",
+        "390-cardiac-output-bar-preload.png",
+        "390-cardiac-output-bar-contractility.png",
+        "390-cardiac-output-bar-afterload.png",
+        "390-cardiac-output-factor-tree.png",
+        "390-cardiac-output-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 390,
+      "shots": [
+        "390-capillary-exchange-tug-both.png",
+        "390-capillary-exchange-factor-tree.png",
+        "390-capillary-exchange-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 390,
+      "shots": [
+        "390-blood-pressure-measurement-hose.png",
+        "390-blood-pressure-measurement-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-types",
+      "width": 390,
+      "shots": [
+        "390-blood-types-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "lymphoid-organs",
+      "width": 390,
+      "shots": [
+        "390-lymphoid-organs-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-electrical",
+      "width": 390,
+      "shots": [
+        "390-cardiac-electrical-relay.png",
+        "390-cardiac-electrical-aligned.png"
+      ],
+      "errors": []
+    },
+    {
+      "slug": "major-vessels",
+      "width": 1280,
+      "shots": [
+        "1280-major-vessels-right-hand.png",
+        "1280-major-vessels-left-hand.png",
+        "1280-major-vessels-left-foot.png",
+        "1280-major-vessels-stomach.png",
+        "1280-major-vessels-portal.png",
+        "1280-major-vessels-overview.png",
+        "1280-major-vessels-pulse.png",
+        "1280-major-vessels-aorta-default.png",
+        "1280-major-vessels-aorta-ascending.png",
+        "1280-major-vessels-aorta-arch.png",
+        "1280-major-vessels-aorta-thoracic.png",
+        "1280-major-vessels-aorta-abdominal.png",
+        "1280-major-vessels-arch-closeup.png",
+        "1280-major-vessels-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-output",
+      "width": 1280,
+      "shots": [
+        "1280-cardiac-output-bar-base.png",
+        "1280-cardiac-output-bar-preload.png",
+        "1280-cardiac-output-bar-contractility.png",
+        "1280-cardiac-output-bar-afterload.png",
+        "1280-cardiac-output-factor-tree.png",
+        "1280-cardiac-output-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "capillary-exchange",
+      "width": 1280,
+      "shots": [
+        "1280-capillary-exchange-tug-both.png",
+        "1280-capillary-exchange-factor-tree.png",
+        "1280-capillary-exchange-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-pressure-measurement",
+      "width": 1280,
+      "shots": [
+        "1280-blood-pressure-measurement-hose.png",
+        "1280-blood-pressure-measurement-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "blood-types",
+      "width": 1280,
+      "shots": [
+        "1280-blood-types-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "lymphoid-organs",
+      "width": 1280,
+      "shots": [
+        "1280-lymphoid-organs-prediction.png"
+      ],
+      "completeOnFinalAnswer": true,
+      "errors": []
+    },
+    {
+      "slug": "cardiac-electrical",
+      "width": 1280,
+      "shots": [
+        "1280-cardiac-electrical-relay.png",
+        "1280-cardiac-electrical-aligned.png"
+      ],
+      "errors": []
+    }
+  ],
+  "issues": []
+}

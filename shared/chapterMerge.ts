@@ -6,6 +6,14 @@ export interface ChapterMergePreview {
   activities: { id: string; title: string; alreadyInTarget: boolean }[];
   affectedStudents: number;
   confirmationToken: string;
+  blockedReason?: string;
+}
+
+export function chapterMergePublishedBlocker(published: Course | undefined, sourceName: string, targetName: string): string {
+  if (!published || !chaptersOf(published)[sourceName]) return '';
+  if (published.units.some(u => chapterName(u) === sourceName)) return `學生端（已發布版本）的「${sourceName}」仍有次單元，請先發布後再合併`;
+  if (!chaptersOf(published)[targetName]) return `學生端（已發布版本）尚無「${targetName}」，請先發布後再合併`;
+  return '';
 }
 
 /** bootstrap adds presentation metadata; Firestore map key order is not meaningful. */

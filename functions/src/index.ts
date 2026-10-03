@@ -7,7 +7,7 @@ import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { defineSecret } from 'firebase-functions/params';
 import { createHash, createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { VERSION } from '../../shared/version';
-import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint } from '../../shared/chapterMerge';
+import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint, chapterMergePublishedBlocker } from '../../shared/chapterMerge';
 import {
   materialUrl as validMaterialUrl,
   Course,
@@ -344,17 +344,19 @@ export const mergeChapter = onCall(options, async (req) => {
     const draft = data.draft as Course, published = data.published as Course | undefined;
     if (req.data.expectedDraft && chapterMergeDraftFingerprint(req.data.expectedDraft) !== chapterMergeDraftFingerprint(draft)) fail('草稿剛被更新，請重新載入後合併');
     let nextDraft: Course, nextPublished: Course | undefined;
+    const blockedReason = chapterMergePublishedBlocker(published, sourceName, targetName);
     try {
       nextDraft = mergeChapterCourse(draft, sourceName, targetName);
-      nextPublished = published && chaptersOf(published)[sourceName] ? mergeChapterCourse(published, sourceName, targetName) : published;
+      nextPublished = !blockedReason && published && chaptersOf(published)[sourceName] ? mergeChapterCourse(published, sourceName, targetName) : published;
     } catch (error) { fail((error as Error).message); }
     const activities = mergeActivityList(draft, published, sourceName, targetName);
     const progress = await tx.get(ref.collection('progress'));
     const activityIds = activities.map(a => a.id);
     const affected = progress.docs.filter(doc => activityIds.some(a => doc.data().activities?.[chapterActivityKey(sourceName, a)]));
     const confirmationToken = createHash('sha256').update(JSON.stringify({ draft, published: published || null, sourceName, targetName, students: affected.map(d => d.id).sort() })).digest('hex');
-    const preview = { sourceName, targetName, activities, affectedStudents: affected.length, confirmationToken };
+    const preview = { sourceName, targetName, activities, affectedStudents: affected.length, confirmationToken: blockedReason ? '' : confirmationToken, ...(blockedReason ? { blockedReason } : {}) };
     if (req.data.preview === true) return preview;
+    if (blockedReason) fail(blockedReason);
     if (req.data.confirmationToken !== confirmationToken) fail('課程設定或受影響學生已變動，請重新預覽後確認合併');
     // All reads precede writes. A concurrent progress update makes Firestore retry this transaction.
     for (const doc of affected) {

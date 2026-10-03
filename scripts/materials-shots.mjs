@@ -23,7 +23,9 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
   if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) errors.push(`${width}px 水平捲動`);
   await shot('page');
   const svgTextSizes = await page.evaluate(() => {
-    return [...document.querySelectorAll('.state-figure svg text')].map(text => {
+    // Conditional portal closeups and route labels can be hidden in the initial state.
+    // Measure rendered text only; hidden SVGs have zero layout width.
+    return [...document.querySelectorAll('.state-figure svg text')].filter(text => text.getBoundingClientRect().width > 0).map(text => {
       const svg = text.ownerSVGElement, viewWidth = svg?.viewBox.baseVal.width;
       return { text: text.textContent, px: Number.parseFloat(getComputedStyle(text).fontSize) * (svg?.getBoundingClientRect().width || 0) / viewWidth };
     }).filter(x => Number.isFinite(x.px));

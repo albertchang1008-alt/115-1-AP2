@@ -8,7 +8,7 @@ import {
   connectAuthEmulator,
 } from 'firebase/auth';
 import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
-import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint } from '../shared/chapterMerge';
+import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint, chapterMergePublishedBlocker } from '../shared/chapterMerge';
 import {
   Course,
   Question,
@@ -241,13 +241,15 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           break;
         case 'mergeChapter': {
           const nextDraft = mergeChapterCourse(draft, d.sourceName, d.targetName);
-          const nextPublished = chaptersOf(published)[d.sourceName] ? mergeChapterCourse(published, d.sourceName, d.targetName) : published;
+          const blockedReason = chapterMergePublishedBlocker(published, d.sourceName, d.targetName);
+          const nextPublished = !blockedReason && chaptersOf(published)[d.sourceName] ? mergeChapterCourse(published, d.sourceName, d.targetName) : published;
           const activities = mergeActivityList(draft, published, d.sourceName, d.targetName);
           const affectedStudents = activities.some(a => progress.activities[`chapter:${d.sourceName}_${a.id}`]) ? 1 : 0;
           const confirmationToken = JSON.stringify({ draft, published, affectedStudents, source: d.sourceName, target: d.targetName });
           if (d.expectedDraft && chapterMergeDraftFingerprint(d.expectedDraft) !== chapterMergeDraftFingerprint(draft)) throw Error('草稿剛被更新，請重新載入後合併');
-          result = { sourceName: d.sourceName, targetName: d.targetName, activities, affectedStudents, confirmationToken };
+          result = { sourceName: d.sourceName, targetName: d.targetName, activities, affectedStudents, confirmationToken: blockedReason ? '' : confirmationToken, ...(blockedReason ? { blockedReason } : {}) };
           if (d.preview !== true) {
+            if (blockedReason) throw Error(blockedReason);
             if (d.confirmationToken !== confirmationToken) throw Error('請重新預覽後確認合併');
             draft = nextDraft; published = nextPublished;
             courseMap.set(draft.id, draft); publishedMap.set(draft.id, published);

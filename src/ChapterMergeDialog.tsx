@@ -27,6 +27,7 @@ export default function ChapterMergeDialog({ course, sourceName, api, onClose, o
     <label className="field">合併到<select aria-label="合併目標單元" disabled={busy} value={targetName} onChange={e => { setTargetName(e.target.value); setPreview(undefined); }}>{targets.map(row => <option key={row.name} value={row.name}>{row.chapter.title}</option>)}</select></label>
     <p>來源單元會從單元安排移除。活動依序附加；同 ID 活動沿用目標內容，既有設定優先。學生既有完成紀錄保留，已完成活動不會變回未完成；研究與診斷紀錄保留。</p>
     {preview && <div className="notice"><h3>合併前確認</h3><p>受影響學生：{preview.affectedStudents} 人</p><p>會搬移的活動（{preview.activities.length} 個）：</p>{preview.activities.length ? <ul>{preview.activities.map(a => <li key={a.id}>{a.title}（{a.id}）{a.alreadyInTarget ? '：目標已有同 ID，活動不重複，仍保留完成紀錄' : ''}</li>)}</ul> : <p>無活動；只合併設定並移除空單元。</p>}</div>}
-    <div className="actions"><button disabled={busy || !targetName} onClick={() => void request()}>預覽合併</button>{preview && <button className="primary" disabled={busy} onClick={() => void request(true)}>確認合併到「{targetName}」</button>}</div>
+    {preview?.blockedReason && <p className="error" role="alert">{preview.blockedReason}</p>}
+    <div className="actions"><button disabled={busy || !targetName} onClick={() => void request()}>預覽合併</button>{preview && <button className="primary" disabled={busy || !!preview.blockedReason} onClick={() => void request(true)}>確認合併到「{targetName}」</button>}</div>
   </section></div>;
 }

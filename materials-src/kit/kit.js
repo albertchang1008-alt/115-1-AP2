@@ -17,9 +17,9 @@ const QUESTION_TYPES = { label: () => window.EcgLabel };
 
 function renderLab(lab, figures) {
   const widget = lab.widget && WIDGETS[lab.widget]?.();
-  const prediction = lab.predict ? `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${lab.predict.options.map((o,i)=>`<button data-answer="${i}">${esc(o)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>` : '';
+  const prediction = lab.predict ? `<h3>${esc(lab.predict.question)}</h3><div class="options predict">${shuffle(lab.predict.options.map((text,answer)=>({text,answer}))).map(o=>`<button data-answer="${o.answer}">${esc(o.text)}</button>`).join('')}</div><p class="feedback" aria-live="polite"></p>` : '';
   const visual = lab.widget ? `<div class="lab-widget" data-widget="${esc(lab.widget)}">${widget ? widget.html(lab) : ''}</div>`
-    : `<div class="state-figure${lab.figure==='major-vessels-overview.svg'?' anatomy-lab':''}" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}"><div class="anatomy-main">${figures[lab.figure]}</div>${figures['major-vessels-portal.svg']?`<div class="portal-inset">${figures['major-vessels-portal.svg']}</div>`:''}</div><div class="state-controls">${lab.states.map((x,i)=>`<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}${figures['major-vessels-portal.svg']?'<button type="button" data-replay-flow>重播血流</button>':''}</div><p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`;
+    : `<div class="state-figure${lab.figure==='major-vessels-overview.svg'?' anatomy-lab':''}" data-lab-state="${lab.states[0].id}" data-state="${lab.states[0].id}"><div class="anatomy-main">${figures[lab.figure]}</div>${figures['major-vessels-portal.svg']?`<div class="portal-inset">${figures['major-vessels-portal.svg']}</div>`:''}</div><div class="state-controls">${lab.states.map((x,i)=>`<button data-lab-state="${x.id}" aria-pressed="${!i}">${esc(x.label)}</button>`).join('')}${figures['major-vessels-portal.svg']?'<button type="button" data-anatomy-overview aria-pressed="false">總覽</button><button type="button" data-replay-flow>重播血流</button>':''}</div><p class="state-explain" aria-live="polite">${esc(lab.states[0].explain)}</p>`;
   return `<section class="lab"><h2>${esc(lab.title)}</h2><p>${esc(lab.intro)}</p>${visual}${prediction}</section>`;
 }
 
@@ -61,7 +61,7 @@ export function render(content, figures) {
     + `<section class="stats">${content.stats.map(x => `<div class="tile"><strong>${esc(x.value)}</strong>${esc(x.label)}</div>`).join('')}</section>`
     + renderLab(content.lab, figures)
     + `<section><h2>知識節點</h2><div class="nodes">${content.nodes.map(n => `<button class="node-button" data-node="${n.id}" aria-expanded="false" aria-controls="detail-${n.id}"><strong>${esc(n.title)}</strong><br>${esc(n.summary)}</button>`).join('')}`
-    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div>${n.caption?`<p class="figure-caption">${esc(n.caption)}</p>`:''}<h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div>${n.reference?`<p class="material-reference">${esc(n.reference)}</p>`:''}<button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
+    + content.nodes.map(n => `<article class="node-detail" id="detail-${n.id}" data-node-id="${n.id}" hidden><div class="node-figure" role="img" aria-label="${esc(n.title)} 示意圖">${figures[n.figure]}</div>${n.figure==='major-vessels-node-01.svg'?Heart2.aorta.html():''}${n.caption?`<p class="figure-caption">${esc(n.caption)}</p>`:''}<h2>${esc(n.title)}</h2><p>${esc(n.concept)}</p><ul>${n.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul><div class="clinical"><strong>${esc(n.clinical.title)}</strong><br>${esc(n.clinical.text)}</div>${n.reference?`<p class="material-reference">${esc(n.reference)}</p>`:''}<button type="button" data-close-node="${n.id}">收合</button></article>`).join('')
     + `</div></section>`
     + (content.overview?.type === 'factor-tree' ? Heart2.tree(content.overview) : '')
     + (content.extras ? Heart2.extras(content.extras, figures) : '')
@@ -75,13 +75,15 @@ export function render(content, figures) {
 // Pure visual controls: no learning events or changes to completion counts.
 function updateAnatomy(figure) {
   const state = figure.dataset.state;
-  figure.querySelectorAll('[data-routes]').forEach(path => path.classList.toggle('route-active', path.dataset.routes.split(' ').includes(state)));
-  figure.querySelectorAll('[data-label-state]').forEach(label => label.style.display = label.dataset.labelState === state ? '' : 'none');
+  figure.querySelectorAll('.vessel,.blood-arrow').forEach(path => path.classList.toggle('route-active', state === 'overview' || (path.dataset.routes || '').split(' ').includes(state)));
+  figure.querySelectorAll('.vessel').forEach(path => { path.dataset.baseWidth ||= path.getAttribute('stroke-width'); path.style.strokeWidth = +path.dataset.baseWidth * (path.classList.contains('route-active') ? 1.15 : 1); });
+  figure.querySelectorAll('[data-label-state]').forEach(label => label.style.display = label.dataset.labelState === state ? 'block' : 'none');
   figure.querySelectorAll('svg').forEach(svg => svg.setCurrentTime?.(0));
 }
 
 export function mount(content, figures) {
   document.body.innerHTML = render(content, figures);
+  document.querySelectorAll('[data-aorta-widget]').forEach(root => Heart2.aorta.mount(root));
   const guided = content.experience === 'guided';
   document.querySelector('[data-go-quiz]')?.addEventListener('click', () => document.querySelector('.quiz').scrollIntoView({ behavior: 'smooth', block: 'start' }));
   document.querySelector('[data-pref="font"]')?.addEventListener('change', e => document.documentElement.style.setProperty('--font-scale', e.target.value));
@@ -153,6 +155,7 @@ export function mount(content, figures) {
       const fig = document.querySelector('.state-figure');
       fig.dataset.labState = id; fig.dataset.state = id; // data-state 供圖檔內 CSS 切換狀態
       updateAnatomy(fig);
+      document.querySelector('[data-anatomy-overview]')?.setAttribute('aria-pressed', 'false');
       selectPanel(id);
       document.querySelectorAll('button[data-lab-state]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       document.querySelector('.state-explain').textContent = content.lab.states.find(x => x.id === id).explain;
@@ -162,6 +165,12 @@ export function mount(content, figures) {
   if (anatomy) {
     updateAnatomy(anatomy);
     document.querySelector('[data-replay-flow]').addEventListener('click', () => updateAnatomy(anatomy));
+    document.querySelector('[data-anatomy-overview]').addEventListener('click', event => {
+      anatomy.dataset.state = 'overview'; updateAnatomy(anatomy);
+      document.querySelectorAll('button[data-lab-state]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      event.currentTarget.setAttribute('aria-pressed', 'true');
+      document.querySelector('.state-explain').textContent = '主動脈分為升主動脈、主動脈弓、胸主動脈與腹主動脈；點選目的地追蹤血流路徑。';
+    });
   }
   document.querySelector('.predict')?.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;

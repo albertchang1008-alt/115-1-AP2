@@ -8,10 +8,11 @@ const src=path.join(ROOT,'materials-src',slug), content=JSON.parse(fs.readFileSy
 if(content.slug!==slug) throw Error(`slug：內容檔為 ${content.slug}，路徑為 ${slug}`);
 // The route lab, overview and pulse map share the same original anatomy source.
 function readFigure(file) {
+  const cssClass = `figure-${file.replace('.svg','')}`;
   return fs.readFileSync(path.join(ROOT,'materials-src/figures',file),'utf8').replace(/<g data-anatomy-base="([a-z0-9-]+\.svg)"\/>/g, (_, base) => {
     const svg = fs.readFileSync(path.join(ROOT,'materials-src/figures',base),'utf8');
     return svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');
-  });
+  }).replace('<svg ', `<svg class="${cssClass}" `).replace(/text\{/g, `.${cssClass} text{`);
 }
 const figures={}; for(const file of new Set([...(content.lab.figure?[content.lab.figure]:[]),...content.nodes.map(n=>n.figure),...(content.extras||[]).map(e=>e.figure)])) figures[file]=colorFigure(readFigure(file),`${slug}-${content.version}`);
 if(slug==='major-vessels') figures['major-vessels-portal.svg']=readFigure('major-vessels-portal.svg');

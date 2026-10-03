@@ -3,7 +3,9 @@ const Heart2 = (() => {
   const e = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const button = (id,label) => `<button type="button" data-factor="${e(id)}" aria-pressed="false" aria-describedby="factor-explain">${e(label)}<span class="factor-direction"></span></button>`;
   function tree(data) {
-    return `<section class="factor-tree supplemental" aria-labelledby="factor-title"><h2 id="factor-title">${e(data.title)}</h2><div class="factor-controls"><button data-factor-change="1" aria-pressed="true">這個因素增加 ↑</button><button data-factor-change="-1" aria-pressed="false">這個因素減少 ↓</button><button data-factor-reset>重設</button></div><div class="factor-root">${button('root',data.root)}</div><div class="factor-branches">${data.branches.map(b=>`<div class="factor-branch" data-branch="${e(b.id)}"><p class="tree-edge">↓ 影響根的方向：${b.sign===-1?'−':'＋'}</p>${button(b.id,b.label)}<div class="factor-leaves">${b.children.map(c=>`<div><span class="tree-edge">↑ ${c.sign===-1?'−':'＋'}</span>${button(c.id,c.label)}</div>`).join('')}</div></div>`).join('')}</div>${(data.specials||[]).map(s=>`<div class="factor-special">${button(s.id,s.label)}<span>HR 心率↑ ⋯→ SV 心搏量↓</span></div>`).join('')}<p id="factor-explain" aria-live="polite">點選因素，沿箭頭看變化如何傳到${e(data.root)}。</p><button data-factor-node hidden>看相關節點</button></section>`;
+    const rootLabel = data.root.includes('心輸出量') ? '心輸出量' : '組織液量';
+    const direction = sign => `與${rootLabel}${sign === -1 ? '反向（−）' : '同向（＋）'}`;
+    return `<section class="factor-tree supplemental" aria-labelledby="factor-title"><h2 id="factor-title">${e(data.title)}</h2><div class="factor-controls"><button data-factor-change="1" aria-pressed="true">這個因素增加 ↑</button><button data-factor-change="-1" aria-pressed="false">這個因素減少 ↓</button><button data-factor-reset>重設</button></div><div class="factor-root">${button('root',data.root)}</div><div class="factor-branches">${data.branches.map(b=>`<div class="factor-branch" data-branch="${e(b.id)}"><p class="tree-edge">${direction(b.sign)}</p>${button(b.id,b.label)}<div class="factor-leaves">${b.children.map(c=>`<div><span class="tree-edge">${direction(c.sign * b.sign)}</span>${button(c.id,c.label)}</div>`).join('')}</div></div>`).join('')}</div>${(data.specials||[]).map(s=>`<div class="factor-special">${button(s.id,s.label)}<span>HR 心率↑ ⋯→ SV 心搏量↓</span></div>`).join('')}<p id="factor-explain" aria-live="polite">點選因素，沿箭頭看變化如何傳到${e(data.root)}。</p><button data-factor-node hidden>看相關節點</button></section>`;
   }
   function mountTree(root,data,reveal) {
     let selected=null,change=1;
@@ -35,6 +37,25 @@ const Heart2 = (() => {
       render();
     });render();
   }
+  const aorta = {
+    segments: [
+      ['ascending', '升主動脈', '主動脈根部 → 頭臂動脈起點'],
+      ['arch', '主動脈弓', '頭臂動脈起點 → 左鎖骨下動脈起點之後'],
+      ['thoracic', '胸主動脈（降主動脈）', '左鎖骨下動脈之後 → 橫膈'],
+      ['abdominal', '腹主動脈', '穿過橫膈後 → 約第 4 腰椎分為左右髂總動脈'],
+    ],
+    html() { return `<div class="aorta-segment-controls" data-aorta-widget><div class="state-controls">${this.segments.map(([id, label]) => `<button type="button" data-aorta-select="${id}" aria-pressed="false">${label}</button>`).join('')}</div><p class="aorta-definition" aria-live="polite">預設顯示全部；點選一段看起訖，再點一次恢復全部。</p></div>`; },
+    mount(root) {
+      let selected = null;
+      root.addEventListener('click', event => {
+        const button = event.target.closest('[data-aorta-select]'); if (!button) return;
+        selected = selected === button.dataset.aortaSelect ? null : button.dataset.aortaSelect;
+        root.querySelectorAll('[data-aorta-select]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.aortaSelect === selected)));
+        root.closest('.node-detail').querySelectorAll('[data-aortic-segment]').forEach(g => g.style.opacity = !selected || g.dataset.aorticSegment === selected ? '1' : '.3');
+        root.querySelector('.aorta-definition').textContent = selected ? this.segments.find(s => s[0] === selected).slice(1).join('：') : '預設顯示全部；點選一段看起訖，再點一次恢復全部。';
+      });
+    },
+  };
   const cuff={
     html:()=>`<div class="bp-cuff"><label for="cuff-pressure">壓脈帶壓力：<output id="cuff-value">150</output> mmHg（示意數值 120／80）</label><input id="cuff-pressure" type="range" min="60" max="160" value="150" step="1" aria-describedby="cuff-sound"><div class="cuff-controls"><button data-cuff-play aria-pressed="false">自動放氣</button><button data-cuff-reset>重設 150</button></div><svg viewBox="0 0 400 300" role="img" aria-label="動脈壓與壓脈帶壓力的時間圖"><g fill="#17212b" font-size="18"><text x="12" y="24">mmHg</text><text x="315" y="285">時間 →</text><text x="6" y="112">120</text><text x="12" y="200">80</text><text x="65" y="250">120：第一聲＝收縮壓</text><text x="65" y="275">80：聲音消失＝舒張壓</text></g><path d="M55 40V220H385" stroke="#64748b" fill="none"/><path d="M55 195L70 105Q87 135 108 195L123 105Q140 135 161 195L176 105Q193 135 214 195L229 105Q246 135 267 195L282 105Q299 135 320 195L335 105Q352 135 373 195" stroke="#8250a0" stroke-width="3" fill="none"/><path class="cuff-line" d="M55 40H385" stroke="#5d327a" stroke-width="4" stroke-dasharray="8 5"/><g class="cuff-notes" fill="#8250a0" font-size="24"><text x="65" y="90">♪</text><text x="171" y="90">♪</text><text x="277" y="90">♪</text></g></svg><svg class="cuff-section" viewBox="0 0 400 140" role="img" aria-label="壓脈帶下的肱動脈剖面"><rect x="155" y="10" width="90" height="115" rx="15" fill="#eee6f5" stroke="#8250a0"/><path class="cuff-lumen" fill="#fde8e8" stroke="#a71930" stroke-width="4"/><path class="cuff-flow" fill="none" stroke="#a71930" stroke-width="4"/><text x="12" y="135" font-size="18">肱動脈：紅色箭頭表示流動 →</text></svg><p id="cuff-sound" aria-live="polite"></p></div>`,
     mount(root){root=root.querySelector('.bp-cuff');let timer=null;const slider=root.querySelector('input'),play=root.querySelector('[data-cuff-play]');
@@ -45,5 +66,5 @@ const Heart2 = (() => {
   };
   function misconceptions(rows){return `<section class="misconceptions supplemental"><h2>常見誤解</h2>${rows.map(r=>`<div class="misconception"><p><strong>✗ ${e(r.wrong)}</strong></p><p>✓ ${e(r.correct)}</p></div>`).join('')}</section>`;}
   function extras(rows,figures){return rows.map(r=>`<section class="extras supplemental"><h2>${e(r.title)}</h2><div class="extra-figure">${figures[r.figure]}</div><p>${e(r.caption||'')}</p></section>`).join('');}
-  return {tree,mountTree,cuff,misconceptions,extras};
+  return {tree,mountTree,aorta,cuff,misconceptions,extras};
 })();
