@@ -139,6 +139,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - A9（建議）頸動脈／頸靜脈分支不要畫過臉部中線；外頸動脈分支留在臉側。
 合併單元：邏輯（只增不刪、completed 不降級、token、log）正確；1 項必修：
 - M1 Sheet 同步只改 draft，published 的次單元仍在舊單元 → mergeChapterCourse(published) 丟「來源單元還有次單元」，教師照流程一定失敗。改為：預覽時偵測，顯示「學生端（已發布版本）的「X」仍有次單元，請先發布後再合併」並停用確認；補 draft 空／published 非空的測試；報告寫明順序「同步→發布→合併」。
+- A10 主動脈立體圖（教師已確認）：依 `docs/MAJOR_VESSELS_ANATOMY_SPEC.md` 第 5 節，節點 1 全段圖＋分段點選、節點 2 弓放大圖、冠狀動脈開口、誤解框增列一條；人體圖主動脈形狀一致。
 仍未處理：必修 1、3、4 與建議 5–8（預測題選項截圖仍是舊的）。
 **1.6.4 合併單元：完成，待 Claude 驗收（本次提交）**
 - 空單元才顯示合併；預覽活動／受影響學生後確認。教師 callable 交易分別合併草稿／已發布活動與班級設定（目標優先），全體 progress 複製至目標、舊鍵保留、completed 不降級；研究／診斷不動。
