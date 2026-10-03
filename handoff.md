@@ -20,7 +20,7 @@
 |---|---|
 | 正式站 | **1.6.2**。`origin/main`＝`119db4c`（2026-10-02 部署：Functions Deploy complete；Pages `version.json`＝1.6.2；五份新教材線上可開啟，Claude 確認） |
 | 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 第一階段補齊教材 | `feature/stage1-supplement`（本次 commit，基底 99bca1d）：**台灣用語與六份預測回饋 1–5 項已修正，待 Claude 複驗，暫不部署**（版本 1.6.3）；上一輪 212499c 已通過複驗 |
+| 第一階段補齊教材 | `feature/stage1-supplement`（實作 `33e7700`；本次提交複核交接紀錄）：**台灣用語與六份預測回饋 1–5 項已修正，待 Claude 複驗，暫不部署**（版本 1.6.3）；上一輪 212499c 已通過複驗 |
 | 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
 | 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
 | 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
@@ -107,6 +107,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 題庫僅第 163、164、169 列共 10 格換詞，其餘 5,396 題庫格／說明頁／格式／其他 ZIP parts 不變。比對 `docs/TAIWAN_TERMS_XLSX_VERIFY.json`；前 161 題不變，新 66 題與教材／規格一致。
 - public/materials 與 materials-src 遞迴掃描 43 詞皆 0；既有前後測「扁桃體」保留（前測 2／後測 4），待教師決定。未追蹤 coagulation 本機提示換「點選」以符合全面掃描；仍 exclude、不納入 commit。
 - 完整 check（115 前端／18 Functions、兩端 build、version 1.6.3）通過；六預測×390／1280 共 12 組通過；心輸出量／血壓 SVG 各 20 張檢查通過。報告 `docs/TAIWAN_TERMS_ACCEPTANCE.md`、`docs/TAIWAN_TERMS_VERIFY.json`。
+- 2026-10-03 再次核對 `33e7700`：43 詞掃描 0、12 組預測畫面、15 kit／11 手工 ID 與答案保留、Excel 指定 10 格與其他 5,396 格／其他 ZIP parts 比對均通過；重跑 `npm run check` 通過。工作內容已 commit，本次僅提交複核交接文件。
 - 下一步 Claude 複驗用語、六說明句及 Excel 範圍；不 push、不部署，main 未動。
 
 **上一輪 Claude 複驗通過（2026-10-03，212499c；本輪仍待複驗）**：草稿註記全專案 0 筆（血型保留萬能捐／受血者、微血管改「稱為水腫」、血管 credits 已刪）；26 份整理表無重複句、ABO 列含四型；同單元配色色相差：心臟 ≥90°、心臟II ≥50°、血液 ≥60°、淋巴 75°（21 份無法兩兩相差 25°，以同單元區隔為準）；26 份無錯誤／溢位；6 新教材完整流程、題目／ID／Excel 未變。本輪用語修訂通過 Claude 複驗後，再交教師執行 deploy.sh。
