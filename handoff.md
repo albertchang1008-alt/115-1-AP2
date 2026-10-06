@@ -138,7 +138,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
 **技術待辦（未排程）**
 - 題目作廢並重算（標記作廢題、重算分數／最高分／passedAt）。
-- 後端 callable 缺行為測試（目前多為原始碼字串比對），`passedAt` 首次達標邏輯尚無行為測試。
+- **下一輪待修：快照 INTERNAL（2026-10-06 教師決定先不動，未修正／提交）**：createSnapshot 寫 forClass 的 course；forClass 無條件寫 research，未設定時為 undefined。以本機 Firestore SDK 驗證重現 `course.units.0.research` 寫入被拒；正式錯誤尚未查雲端log。下一輪先查正式後端日誌確認，再省略未設定欄位、補快照真實序列化回歸測試與清楚的錯誤提示；保留既有學生進度。本輪只記錄待辦，不改程式、不部署。分支feature/1.7.0-practice-modes／HEAD 3ef39b7，handoff本次未提交。後端passedAt首次達標仍待行為測試。
 - `diagnostics` 的 `summary` 欄位補索引排除；firebase-functions 版本升級。
 - `html/血液氣體運送.html`、`html/止血機制與凝血病理.html`、`html/血液的組成.html` 的兩關改造與圖像化尚未全部完成、未正式發布。
 - 端到端驗收（真實學生登入、名冊、同步、教材事件、報表、用量）。
