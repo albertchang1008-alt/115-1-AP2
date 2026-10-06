@@ -14,7 +14,7 @@
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
 ## 目前狀態（2026-10-06）
-**1.7.0 ①～④ 待 Claude 驗收**。①～③於2026-10-06已通過 Claude 驗收；④已依 `docs/WRONG_CARRY_1.7.0.md` 完成，待本次複驗。分支 `feature/1.7.0-practice-modes`；① `b65418b`、② `819b237`、③ `3ed3d7a`；④本次單一 commit「feat: 錯題跨版本延續（同步讀舊版比對正解）[Codex]」。未 push／部署；html/ Excel 既有修改未納入。教師決定①～④完整驗收後才部署，綜合範圍維持 current。
+**1.7.0 ①～④ Claude 驗收全部通過（2026-10-06），待教師以 deploy.sh 從 `feature/1.7.0-practice-modes` 部署**。④驗收：審 `shared/wrongCarry.ts`、`effectiveWrong` 追鏈、`syncBankTabFromSheet` 讀舊版與交易內版本核對、複習考排除；Functions 26 測試 Claude 親跑通過；同步畫面截圖符合。Claude 驗收時小修：同步完成後自動取消「錯題全部重新計算」勾選（`src/App.tsx` 一行，tsc 通過），避免下次同步沿用而誤清錯題。部署後實測：在正式站改一題錯字同步，確認訊息為「保留…重置 0 題」。分支 `feature/1.7.0-practice-modes`；① `b65418b`、② `819b237`、③ `3ed3d7a`；④本次單一 commit「feat: 錯題跨版本延續（同步讀舊版比對正解）[Codex]」。未 push／部署；html/ Excel 既有修改未納入。教師決定①～④完整驗收後才部署，綜合範圍維持 current。
 動工前七項盤點（①～③依主規格第三版；④依補充規格，過期限制已取代）：
 1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
 2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。

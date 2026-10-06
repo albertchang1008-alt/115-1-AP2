@@ -1094,6 +1094,7 @@ export function Bank({
                 await onSynced();
                 const mine = (r.banks || []).filter((bank: any) => bank.sourceCourseId === course.id || bank.courseId === course.id);
                 setCarryResults(mine.filter((bank: any) => bank.carry !== undefined && !bank.error).map((bank: any) => ({unitId:bank.unitId,carry:bank.carry})));
+                setResetWrong(false); // 全部重算只套用這一次同步，避免下一次同步沿用而誤清錯題
                 const stale = [...new Set(mine.flatMap((bank: any) => bank.staleUnits || []))];
                 if (mine.some((bank: any) => bank.error)) {
                   const errors = mine.filter((bank: any) => bank.error).slice(0, 3)
