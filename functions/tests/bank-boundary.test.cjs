@@ -113,3 +113,29 @@ test('題庫發布與 500 題交卷串接：留白題序、重送去重、超量
     assert.equal(data.has('courses/ap2/attempts/too-many'), false);
   } finally { Object.assign(db, originals); }
 });
+test('1.7.0 實際單題與綜合 callable：伺服器重批／錯題保留次數／review 不寫 attempted 或成績／不增讀取', async () => {
+  const db = getFirestore(), originals = { doc: db.doc, runTransaction: db.runTransaction };
+  const data = new Map(), reads = [];
+  db.doc = path => ({ path, get: async () => { reads.push(path); return { exists: data.has(path), data: () => data.get(path) }; }, collection: name => ({ doc: id => db.doc(`${path}/${name}/${id}`) }) });
+  db.runTransaction = async fn => { const writes=[]; const r=await fn({get:ref=>ref.get(),create:(ref,v)=>writes.push([ref.path,v]),set:(ref,v)=>writes.push([ref.path,v])}); writes.forEach(([path,v])=>data.set(path,v)); return r; };
+  try {
+    const unit = id => ({ id, title:id, opensAt:'', dueAt:'', required:true, threshold:80, activities:[], bankVersion:'v', visibility:'current' });
+    data.set('courses/ap2', { teacherIds:[], rosterVersion:2, published:{id:'ap2',classIds:['A'],units:[unit('u'),unit('u2'),{...unit('exam'),review:{}}]} });
+    data.set('enrollments/ap2__student@ctcn.edu.tw',{classId:'A',enabled:true});
+    for(const id of ['u','u2']) {data.set(`banks/ap2_${id}_v`,{count:1,questionOptions:{q:['a','b']}});data.set(`banks/ap2_${id}_v/grading/answers`,{answers:{q:'a'}});}
+    data.set('courses/ap2/progress/student',{units:{u:{best:80,attempts:1,updatedAt:1,passedAt:123,wrong:{v:{q:{n:4,at:0}}}}},activities:{}});
+    const auth={uid:'student',token:{email:'student@ctcn.edu.tw',email_verified:true,firebase:{sign_in_provider:'google.com'}}};
+    const attempt={id:'r',courseId:'ap2',unitId:'u',version:'v',mode:'review',full:false,score:0,clientAt:1,duration:1,answers:[{questionId:'q',selected:'a',correct:false,seconds:1}]};
+    const r=await handlers.submitAttempt.run({auth,data:{attempt}});
+    assert.equal(r.wrongSummary.removed,1);assert.equal(r.attempt.answers[0].correct,true);
+    assert.equal(r.progress.units.u.wrong.v.q.n,4);assert(r.progress.units.u.wrong.v.q.rm);
+    assert.equal(r.progress.units.u.best,80);assert.equal(r.progress.units.u.passedAt,123);assert.equal(r.progress.attempted,undefined);
+    const a={...attempt,id:'mixed1',answers:[{...attempt.answers[0],selected:'b',correct:true}]};
+    const m=await handlers.submitMixedAttempts.run({auth,data:{attempts:[a,{...a,id:'mixed2',unitId:'u2'}]}});
+    assert.equal(m.progress.units.u.wrong.v.q.n,5);assert.equal(m.progress.units.u.wrong.v.q.rm,undefined);assert.equal(m.progress.attempted,undefined);assert.equal(m.attempts[0].answers[0].correct,false);
+    const quiz=await handlers.submitMixedAttempts.run({auth,data:{attempts:[{...a,id:'draw',mode:'quiz',answers:attempt.answers}]}});
+    assert.equal(quiz.progress.attempted.u.q,true);assert.equal(quiz.progress.units.u.wrong.v.q.n,5);assert(quiz.progress.units.u.wrong.v.q.ok);assert.equal(quiz.progress.units.u.best,80);
+    await assert.rejects(handlers.submitMixedAttempts.run({auth,data:{attempts:[{...a,id:'exam',unitId:'exam'}]}}),/複習考不列入/);
+    assert(reads.every(path=>['courses/ap2','courses/ap2/progress/student','enrollments/ap2__student@ctcn.edu.tw'].includes(path)||path.startsWith('courses/ap2/attempts/')||/^banks\/ap2_u2?_v(?:\/grading\/answers)?$/.test(path)), JSON.stringify(reads));
+  } finally {Object.assign(db, originals);}
+});

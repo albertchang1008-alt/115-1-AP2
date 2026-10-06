@@ -170,7 +170,7 @@ export interface Progress {
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
   attempted?: Record<string, Record<string, true>>;
 }
-export interface WrongEntry { n: number; at: number; }
+export interface WrongEntry { n: number; at: number; ok?: number; rm?: number; }
 export function isReviewUnit(unit: Pick<Unit, 'review'>): boolean { return !!unit.review; }
 export function isOverdue(unit: Pick<Unit, 'dueAt'>, progressEntry: { passedAt?: number } | undefined) {
   return !!unit.dueAt && !!progressEntry?.passedAt && progressEntry.passedAt > parseCourseTime(unit.dueAt);
@@ -205,10 +205,43 @@ export function reviewAttemptIsFull(history: NonNullable<Unit['review']>['histor
 export function normalizeProgress(p: Partial<Progress> | undefined | null): Progress {
   return { ...(p || {}), units: p?.units || {}, activities: p?.activities || {} } as Progress;
 }
-export function wrongEntries(progress: Progress, unitId: string, version: string): Record<string, WrongEntry> {
-  const raw = progress.units?.[unitId]?.wrong?.[version];
-  if (Array.isArray(raw)) return Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }]));
-  return raw || {};
+/** 唯一版本錯題讀取入口；保留已移除紀錄，供伺服器再次答錯時累加。 */
+export function effectiveWrong(unitProgress: Progress['units'][string] | undefined, _unitMeta: Partial<Unit> | undefined, currentVersion: string): Record<string, WrongEntry> {
+  const raw = unitProgress?.wrong?.[currentVersion];
+  return Array.isArray(raw) ? Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }])) : { ...(raw || {}) };
+}
+export function wrongEntries(progress: Progress, unitId: string, version: string, unitMeta?: Partial<Unit>): Record<string, WrongEntry> {
+  return Object.fromEntries(Object.entries(effectiveWrong(progress.units?.[unitId], unitMeta, version)).filter(([, e]) => e.rm === undefined));
+}
+export function taipeiDay(at: number): number { return Math.floor((at + 8 * 3600000) / 86400000); }
+export function wrongGroups(entries: Record<string, WrongEntry>, now = Date.now()) {
+  const active = Object.entries(entries).filter(([, e]) => e.rm === undefined);
+  return {
+    today: Object.fromEntries(active.filter(([, e]) => taipeiDay(e.at) === taipeiDay(now))),
+    due: Object.fromEntries(active.filter(([, e]) => e.at === 0 || taipeiDay(e.at) < taipeiDay(now))),
+  };
+}
+export function reviewIds(entries: Record<string, WrongEntry>, count: number, now = Date.now()): string[] {
+  return Object.entries(wrongGroups(entries, now).due).sort((a, b) => b[1].n - a[1].n || a[1].at - b[1].at || a[0].localeCompare(b[0])).slice(0, count).map(([id]) => id);
+}
+export function reviewCounts(count: number): number[] { return [10, 20, 30, 50, ...(count > 0 && count <= 50 && ![10,20,30,50].includes(count) ? [count] : [])]; }
+export interface WrongSummary { removed: number; todayCorrect: number; wrong: number; }
+export function updateWrong(prior: Record<string, WrongEntry>, answers: Answer[], at: number) {
+  const entries = { ...prior };
+  const summary: WrongSummary = { removed: 0, todayCorrect: 0, wrong: 0 };
+  for (const answer of answers) {
+    const old = entries[answer.questionId];
+    if (!answer.correct) { entries[answer.questionId] = { n: (old?.n || 0) + 1, at }; summary.wrong++; }
+    else if (old && old.rm === undefined) {
+      if (old.at === 0 || taipeiDay(at) > taipeiDay(old.at)) {
+        const { ok: _ok, ...rest } = old;
+        entries[answer.questionId] = { ...rest, rm: at }; summary.removed++;
+      } else if (taipeiDay(at) === taipeiDay(old.at)) {
+        entries[answer.questionId] = { ...old, ok: at }; summary.todayCorrect++;
+      }
+    }
+  }
+  return { entries, summary };
 }
 /** 錯題閃卡的前端篩選：舊資料 at:0 只能在「全部」可見。 */
 export function wrongCardIds(progress: Progress, unitId: string, version: string, range: '24h' | '7d' | 'all', now = Date.now()) {
@@ -507,18 +540,13 @@ export function grade(
     seconds: times[q.id] || 0,
   }));
 }
-export function applyAttempt(p: Progress, a: Attempt): Progress {
+export function applyAttempt(p: Progress, a: Attempt, unitMeta?: Partial<Unit>): Progress {
   // 先開過教材、還沒交過卷的學生，progress 文件只有 activities（saveActivity 以 merge 建立），沒有 units。
   // 不補空物件會在讀 p.units[...] 時丟錯，Cloud Function 回 INTERNAL，所有交卷都卡在本機佇列。
-  if (a.mode === 'review') return p;
   p = normalizeProgress(p);
   const old = p.units[a.unitId];
-  const prior = wrongEntries(p, a.unitId, a.version);
-  const wrongForVersion = { ...prior };
-  for (const answer of a.answers) {
-    if (answer.correct) delete wrongForVersion[answer.questionId];
-    else wrongForVersion[answer.questionId] = { n: (prior[answer.questionId]?.n || 0) + 1, at: a.receivedAt || a.clientAt };
-  }
+  const prior = effectiveWrong(old, unitMeta, a.version);
+  const wrongForVersion = updateWrong(prior, a.answers, a.receivedAt ?? a.clientAt).entries;
   const wrong = {
     ...old?.wrong,
     [a.version]: wrongForVersion,
@@ -528,6 +556,7 @@ export function applyAttempt(p: Progress, a: Attempt): Progress {
     units: {
       ...p.units,
       [a.unitId]: {
+        ...old,
         // 1.6.0 起只有完整測驗計入最高分；舊的閃卡分數原樣保留。
         best: a.mode === 'quiz' && a.full ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
         attempts: (old?.attempts || 0) + 1,
@@ -536,7 +565,7 @@ export function applyAttempt(p: Progress, a: Attempt): Progress {
         updatedAt: a.receivedAt || a.clientAt,
       },
     },
-    attempted: mergeAttempted(p.attempted, a.unitId, a.answers.map((x) => x.questionId)),
+    ...(a.mode === 'review' ? {} : { attempted: mergeAttempted(p.attempted, a.unitId, a.answers.map((x) => x.questionId)) }),
   };
 }
 // 抽題練習「已考過優先」：把這次出現過的題目 ID 併入紀錄，只增不減，不分題庫版本。

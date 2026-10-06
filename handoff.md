@@ -16,6 +16,17 @@
 
 ## 目前狀態（2026-10-03）
 
+**1.7.0 盤點完成／實作中（2026-10-06）**：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交。
+1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
+2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。
+3. 答對現況：applyAttempt 直接刪除該錯題，答錯累加；改為隔日標 rm、同日標 ok、再錯保留累計 n。
+4. 綜合練習：MixedPractice 篩 `!isReviewUnit && visibility=current && bankVersion`，含已達標但仍 current／選看，排除 archived／hidden／複習考；進入練習才載全部候選題庫，錯題→未作答→其他補滿。後端僅 quiz/full=false，分分類寫 wrong／attempted、不更新 best。新選範圍沿用候選條件，僅載勾選分類。
+5. 複習考錯題現為翻卡；有獨立 Unit、bankVersion、wrong，改逐題重做、題數選擇，仍無閃卡／抽題。
+6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
+7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但现有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
+- 衝突皆依第三版修正；錯題複習題數採畫面內小按鈕列，手機沿用練習展開選單。學習理由：錯題重做屬提取練習，隔日答對才排除短期記憶；今天剛錯先翻卡，待複習再重做，移除保留 n。
+- 下一步依序完成 ①共用規則／後端／測試、②單元閃卡／錯題、③綜合範圍／手機，逐段 check／diff 檢查後 commit [Codex]。
+
 | 項目 | 狀態 |
 |---|---|
 | 正式站 | **1.6.4**。`origin/main`＝`dc8c045`（2026-10-03 教師以 deploy.sh 部署：Functions 成功；Pages Actions success；`version.json`＝1.6.4、`manifest.webmanifest` 可取得，Claude 確認）。含第一階段補齊教材、1.6.3 節點點擊、1.6.4 合併單元與兩層選單、心臟II 圖像化、favicon |

@@ -24,6 +24,12 @@ import {
   forClass,
   unitVisibility,
   wrongEntries,
+  effectiveWrong,
+  updateWrong,
+  wrongGroups,
+  reviewIds,
+  reviewCounts,
+  taipeiDay,
   wrongCardIds,
   allocateDraw,
   drawReviewQuestions,
@@ -86,7 +92,7 @@ test('複習、閃卡與抽題不提高完成度，只有完整測驗取最高',
   let p = applyAttempt(emptyProgress(), attempt({ score: 80 }));
   p = applyAttempt(p, attempt({ id: 'a2', score: 20 }));
   assert.equal(p.units.u.best, 80);
-  assert.equal(applyAttempt(p, attempt({ mode: 'review', score: 100 })), p);
+  assert.equal(applyAttempt(p, attempt({ mode: 'review', score: 100 })).units.u.best, 80);
   assert.equal(applyAttempt(p, attempt({ mode: 'flashcard', score: 100 })).units.u.best, 80);
   assert.equal(applyAttempt(p, attempt({ full: false, score: 100 })).units.u.best, 80);
 });
@@ -251,7 +257,7 @@ test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
   p = applyAttempt(p, attempt({ version: 'v', clientAt: 10, answers: [{ questionId: 'q1', selected: 'b', correct: false, seconds: 1 }] }));
   assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 10 });
   p = applyAttempt(p, attempt({ id: 'clear', version: 'v', clientAt: 11, answers: [{ questionId: 'q1', selected: 'a', correct: true, seconds: 1 }] }));
-  assert.deepEqual(p.units.u.wrong.v, {});
+  assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 10, ok: 11 });
 });
 test('錯題時間範圍、排序與 at:0 相容規則', () => {
   const now = 1_000_000_000;
@@ -362,4 +368,32 @@ test('複習考交卷須符合歷史版本的題數與來源配額，舊組卷�
   assert.equal(reviewAttemptIsFull(history, 'old', ['a1', 'b1'], sources), false, '題數不足不得採計');
   assert.equal(reviewAttemptIsFull(history, 'old', ['a1', 'b1', 'b2'], sources), false, '來源配額不符不得採計');
   assert.equal(reviewAttemptIsFull(history, 'new', ['a1', 'b1'], sources), true);
+});
+test('1.7.0 台北日界線、移除保留累計、同日答對與再次答錯', () => {
+  const before = Date.parse('2026-10-05T15:59:00Z'), after = Date.parse('2026-10-05T16:01:00Z');
+  const bad = [{ questionId: 'q', selected: 'b', correct: false, seconds: 0 }], good = [{ ...bad[0], correct: true }];
+  assert.equal(taipeiDay(after) - taipeiDay(before), 1);
+  let r = updateWrong({}, bad, before);
+  assert.deepEqual(r.entries.q, { n: 1, at: before });
+  r = updateWrong(r.entries, good, before + 1000);
+  assert.equal(r.entries.q.ok, before + 1000);
+  assert.equal(r.summary.todayCorrect, 1);
+  assert.equal(Object.keys(wrongGroups(r.entries, before).today).length, 1);
+  r = updateWrong(r.entries, good, after);
+  assert.deepEqual(r.entries.q, { n: 1, at: before, rm: after });
+  assert.deepEqual(updateWrong(r.entries, good, after + 1).entries, r.entries);
+  assert.deepEqual(wrongGroups(r.entries, after), { today: {}, due: {} });
+  const p: any = { units: { u: { wrong: { v: r.entries } } }, activities: {} };
+  assert.equal(Object.keys(wrongEntries(p, 'u', 'v')).length, 0);
+  assert.equal(effectiveWrong(p.units.u, {}, 'v').q.n, 1);
+  r = updateWrong(r.entries, bad, after);
+  assert.deepEqual(r.entries.q, { n: 2, at: after });
+  assert.deepEqual(updateWrong({ q: { n: 3, at: 0 } }, good, after).entries.q, { n: 3, at: 0, rm: after });
+  assert.deepEqual(effectiveWrong({ wrong: { v: ['q'] } } as any, {}, 'v'), { q: { n: 1, at: 0 } });
+});
+test('1.7.0 待複習排序與題數边界', () => {
+  const now = Date.parse('2026-10-06T02:00:00Z');
+  const e = { today: { n: 100, at: now, ok: now }, older: { n: 2, at: 1 }, newer: { n: 2, at: 2 }, most: { n: 3, at: 3 }, removed: { n: 99, at: 1, rm: 2 } };
+  assert.deepEqual(reviewIds(e, 2, now), ['most', 'older']);
+  for (const [n, expected] of [[10, [10,20,30,50]], [37,[10,20,30,50,37]], [50,[10,20,30,50]], [60,[10,20,30,50]]] as const) assert.deepEqual(reviewCounts(n), expected);
 });

@@ -26,6 +26,8 @@ import {
   safeId,
   safeCode,
   applyAttempt,
+  effectiveWrong,
+  updateWrong,
   aggregate,
   youtubeId,
   forClass,
@@ -726,25 +728,28 @@ export const submitAttempt = onCall(options, async (req) => {
       receivedAt: FieldValue.serverTimestamp(),
       processed: false,
     };
-    const next = applyAttempt(normalizeProgress(progress.data() as Progress), {
+    const before = normalizeProgress(progress.data() as Progress);
+    const receivedAt = Date.now();
+    const wrongSummary = updateWrong(effectiveWrong(before.units[a.unitId], unit, a.version), a.answers, receivedAt).summary;
+    const next = applyAttempt(before, {
       ...a,
-      receivedAt: Date.now(),
-    });
+      receivedAt,
+    }, unit);
     // 1.6.0 起閃卡是純練習：錯題與已看題數仍寫入，但只有完整測驗可達標。
     if (a.mode === 'quiz' && a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
       next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
     tx.create(ref, saved);
-    if (a.mode !== 'review') tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
-    return { progress: next, duplicate: false };
+    tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
+    return { progress: next, attempt: a, wrongSummary, duplicate: false };
   });
 });
 /** 綜合練習只寫一次 progress；每個次單元仍各留一筆不可變作答紀錄。 */
 export const submitMixedAttempts = onCall(options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const attempts = req.data?.attempts as Attempt[];
-  if (!Array.isArray(attempts) || !attempts.length || attempts.length > 10) fail('綜合練習格式錯誤');
+  if (!Array.isArray(attempts) || !attempts.length || attempts.length > 100) fail('綜合練習格式錯誤');
   const courseId = attempts[0]?.courseId;
-  if (!attempts.every((a) => a && a.courseId === courseId && a.mode === 'quiz' && a.full === false && Array.isArray(a.answers) && a.answers.length)) fail('綜合練習格式錯誤');
+  if (!attempts.every((a) => a && a.courseId === courseId && ['quiz', 'review'].includes(a.mode) && a.mode === attempts[0].mode && a.full === false && Array.isArray(a.answers) && a.answers.length)) fail('綜合練習格式錯誤');
   const { p, c } = await access(req, courseId);
   if (p.teacher) fail('預覽不能寫入正式進度');
   const visible = c.published && forClass(c.published, p.classId).units || [];
@@ -776,9 +781,10 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     const old = await Promise.all(prepared.map((a) => tx.get(db.doc(`courses/${courseId}/attempts/${a.id}`))));
     if (old.some((x) => x.exists && x.data()?.uid !== p.uid)) throw new HttpsError('permission-denied', '作答 ID 衝突');
     const progress = await tx.get(progressRef); let next = normalizeProgress(progress.data() as Progress);
-    for (let i = 0; i < prepared.length; i++) if (!old[i].exists) { const a = prepared[i]; next = applyAttempt(next, { ...a, receivedAt: Date.now() }); tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false }); }
+    const summaries = [];
+    for (let i = 0; i < prepared.length; i++) if (!old[i].exists) { const a = prepared[i]; const at = Date.now(); const unit = visible.find((u: Unit) => u.id === a.unitId); summaries.push({ unitId: a.unitId, ...updateWrong(effectiveWrong(next.units[a.unitId], unit, a.version), a.answers, at).summary }); next = applyAttempt(next, { ...a, receivedAt: at }, unit); tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false }); }
     tx.set(progressRef, { ...next, uid: p.uid, classId: p.classId });
-    return { progress: next };
+    return { progress: next, attempts: prepared, summaries };
   });
 });
 export const saveActivity = onCall(options, async (req) => {
