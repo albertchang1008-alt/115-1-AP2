@@ -16,7 +16,7 @@
 
 ## 目前狀態（2026-10-06）
 
-**1.7.0 練習模式①～③ Claude 驗收通過（2026-10-06），待教師決定部署**：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交；以下1～7為動工前盤點（①～③已依規格改版）。
+**1.7.0 練習模式：①～③ Claude 驗收通過；④ 待 Codex 依 `docs/WRONG_CARRY_1.7.0.md` 實作（2026-10-06）**。教師決定：①～④ 完整後才部署；綜合練習不放寬（維持 current）；④ 要做，同步時可讀舊版題庫比對正解（「不新增讀取」只限學生端）：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交；以下1～7為動工前盤點（①～③已依規格改版）。
 1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
 2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。
 3. 答對現況：applyAttempt 直接刪除該錯題，答錯累加；改為隔日標 rm、同日標 ok、再錯保留累計 n。
@@ -25,7 +25,7 @@
 6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
 7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但現有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
 - 衝突皆依第三版修正；錯題複習題數採畫面內小按鈕列，手機沿用練習展開選單。學習理由：錯題重做屬提取練習，隔日答對才排除短期記憶；今天剛錯先翻卡，待複習再重做，移除保留 n。
-- ① `b65418b`、② `819b237` 已提交；③綜合範圍／手機／截圖為本次提交「feat: 綜合練習選範圍與三種模式及手機驗收 [Codex]」；最終 check 前端129／Functions20、兩端build、版本一致及 diff 檢查通過。④依第7點不做。驗收報告與16張桌機／手機截圖見 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`；教師同步延續畫面未實作／無截圖。**Claude 驗收（2026-10-06）**：逐行審 shared/model.ts（updateWrong／wrongGroups／taipeiDay）、shared/practice.ts、functions submitAttempt／submitMixedAttempts，規則與第三版一致（隔日 rm 保留 n、同日 ok、再錯清 rm 累加、at:0 視為待複習、review 不寫 attempted、閃卡不呼叫後端、重送冪等）；8 組截圖符合；Functions 20 測試 Claude 親跑通過（前端測試因 macOS node_modules 無法在 VM 跑，採 Codex 結果）。小建議不擋部署：閃卡翻面時學生選錯的選項只有文字提示、未標紅。**待教師決定**：(1) 部署 1.7.0；(2) 綜合練習目前只含 visibility=current 分類，是否放寬到已考完單元；(3) ④跨版延續是否另立規格（保存伺服器專用答案特徵）。未 push／部署。
+- ① `b65418b`、② `819b237` 已提交；③綜合範圍／手機／截圖為本次提交「feat: 綜合練習選範圍與三種模式及手機驗收 [Codex]」；最終 check 前端129／Functions20、兩端build、版本一致及 diff 檢查通過。④依第7點不做。驗收報告與16張桌機／手機截圖見 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`；教師同步延續畫面未實作／無截圖。**Claude 驗收（2026-10-06）**：逐行審 shared/model.ts（updateWrong／wrongGroups／taipeiDay）、shared/practice.ts、functions submitAttempt／submitMixedAttempts，規則與第三版一致（隔日 rm 保留 n、同日 ok、再錯清 rm 累加、at:0 視為待複習、review 不寫 attempted、閃卡不呼叫後端、重送冪等）；8 組截圖符合；Functions 20 測試 Claude 親跑通過（前端測試因 macOS node_modules 無法在 VM 跑，採 Codex 結果）。小建議不擋部署：閃卡翻面時學生選錯的選項只有文字提示、未標紅。**下一步**：Codex 依 `docs/WRONG_CARRY_1.7.0.md`（取代主規格 3.6 節）實作 ④ 一個 commit → Claude 驗收 ①～④ → 教師部署。未 push／部署。
 
 | 項目 | 狀態 |
 |---|---|
