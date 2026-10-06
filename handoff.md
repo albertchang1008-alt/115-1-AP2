@@ -25,7 +25,7 @@
 6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
 7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但现有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
 - 衝突皆依第三版修正；錯題複習題數採畫面內小按鈕列，手機沿用練習展開選單。學習理由：錯題重做屬提取練習，隔日答對才排除短期記憶；今天剛錯先翻卡，待複習再重做，移除保留 n。
-- 下一步依序完成 ①共用規則／後端／測試、②單元閃卡／錯題、③綜合範圍／手機，逐段 check／diff 檢查後 commit [Codex]。
+- ① `b65418b` 已完成；②翻卡、錯題重做、題數／今天剛錯提示、移除 range 完成，check 前端 125／Functions 20、兩端 build 通過；實際 React 操作含手機、翻面焦點與再排一次，無閃卡 API 寫入。下一步③綜合範圍／手機／截圖。④依第7點不做。
 
 | 項目 | 狀態 |
 |---|---|

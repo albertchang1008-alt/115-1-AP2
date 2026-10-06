@@ -243,14 +243,6 @@ export function updateWrong(prior: Record<string, WrongEntry>, answers: Answer[]
   }
   return { entries, summary };
 }
-/** 錯題閃卡的前端篩選：舊資料 at:0 只能在「全部」可見。 */
-export function wrongCardIds(progress: Progress, unitId: string, version: string, range: '24h' | '7d' | 'all', now = Date.now()) {
-  const limit = range === '24h' ? 86400000 : 604800000;
-  return Object.entries(wrongEntries(progress, unitId, version))
-    .filter(([, entry]) => range === 'all' || (entry.at > 0 && now - entry.at <= limit))
-    .sort((a, b) => b[1].n - a[1].n || b[1].at - a[1].at)
-    .map(([questionId]) => questionId);
-}
 export type ItemStatus = 'done' | 'partial' | 'todo' | 'locked';
 export interface ItemProgress {
   kind: 'category' | 'activity';
@@ -285,7 +277,7 @@ export function itemStatusForCategory(unit: ProgressUnit, progress: Progress, no
   const locked = !!unit.opensAt && parseCourseTime(unit.opensAt) > now;
   const best = entry?.best ?? -1;
   const attempted = Object.keys(progress.attempted?.[unit.id] || {}).length;
-  const wrongCount = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion)).length;
+  const wrongCount = Object.keys(wrongEntries(progress, unit.id, unit.bankVersion, unit)).length;
   const hasRecord = !!entry?.attempts || attempted > 0 || wrongCount > 0;
   return {
     kind: 'category', id: unit.id, title: unit.title, required: unit.required,

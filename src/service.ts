@@ -19,6 +19,8 @@ import {
   Seen,
   emptyProgress,
   applyAttempt,
+  effectiveWrong,
+  updateWrong,
   aggregate,
   chaptersOf,
 } from '../shared/model';
@@ -199,12 +201,12 @@ export function sampleProgress(course: Course, state: string): Progress {
   };
   return progress;
 }
-export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQuestions): API {
+export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQuestions, previewBanks?: Map<string, Question[]>): API {
   let draft = structuredClone(initial),
     published = structuredClone(initial),
     progress = emptyProgress();
   const attempts: Attempt[] = [];
-  const banks = new Map<string, Question[]>(initial.units.filter((unit) => !!unit.bankVersion).map((unit) => [unit.bankVersion, bank]));
+  const banks = previewBanks || new Map<string, Question[]>(initial.units.filter((unit) => !!unit.bankVersion).map((unit) => [unit.bankVersion, bank]));
   const reports = new Map<string, Report>(),
     seen = new Map<string, Record<string, Seen>>();
   let roster: any[] = [],
@@ -288,18 +290,26 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           result = { rows: [], next: null };
           break;
         case 'submitAttempt':
-          if (!attempts.some((a) => a.id === d.attempt.id)) {
-            const a = {
-              ...d.attempt,
-              receivedAt: Date.now(),
-              uid: profile.uid,
-              classId: profile.classId,
-            };
-            attempts.push(a);
-            progress = applyAttempt(progress, a);
+        case 'submitMixedAttempts': {
+          const inputs: Attempt[] = name === 'submitAttempt' ? [d.attempt] : d.attempts;
+          const summaries: any[] = [];
+          const saved: Attempt[] = [];
+          for (const input of inputs) {
+            const unit = published.units.find(u => u.id === input.unitId);
+            const qs = banks.get(input.version) || bank;
+            let a = attempts.find(a => a.id === input.id);
+            if (!a) {
+              const answers = input.answers.map(r => ({...r, correct: qs.find(q => q.id === r.questionId)?.answer === r.selected}));
+              a = {...input, answers, score: answers.length ? Math.round(answers.filter(r => r.correct).length / answers.length * 100) : 0, receivedAt: Date.now(), uid: profile.uid, classId: profile.classId};
+              const summary = updateWrong(effectiveWrong(progress.units[input.unitId],unit,input.version), answers, a.receivedAt!).summary;
+              (a as any).wrongSummary = summary;
+              attempts.push(a); progress = applyAttempt(progress,a,unit);
+            }
+            summaries.push({unitId:input.unitId,...(a as any).wrongSummary}); saved.push(a);
           }
-          result = { progress };
+          result = {progress, attempt:saved[0], wrongSummary:summaries[0], attempts:saved, summaries};
           break;
+        }
         case 'saveActivity':
           progress.activities[(d.chapterName ? `chapter:${d.chapterName}` : d.unitId) + '_' + d.activityId] = {
             position: d.position,
@@ -381,11 +391,12 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
   };
 }
 export async function previewApi(source: API, course: Course, draft: boolean): Promise<API> {
-  const mem = memoryApi(course, []);
+  const banks = new Map<string, Question[]>();
+  const mem = memoryApi(course, [], banks);
   return {
     ...mem,
     async call<T>(name: string, data: any = {}) {
-      if (name === 'getBank') return source.call<T>(name, { ...data, draft });
+      if (name === 'getBank') { const r: any = await source.call(name, { ...data, draft }); banks.set(data.version, r.questions); return r as T; }
       return mem.call<T>(name, data);
     },
   };

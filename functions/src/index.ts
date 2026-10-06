@@ -719,7 +719,7 @@ export const submitAttempt = onCall(options, async (req) => {
     const [old, progress] = await Promise.all([tx.get(ref), tx.get(pr)]);
     if (old.exists) {
       if (old.data()?.uid !== p.uid) throw new HttpsError('permission-denied', '作答 ID 衝突');
-      return { progress: normalizeProgress(progress.data() as Progress), duplicate: true };
+      return { progress: normalizeProgress(progress.data() as Progress), attempt: old.data(), wrongSummary: old.data()?.wrongSummary, duplicate: true };
     }
     const saved = {
       ...a,
@@ -738,7 +738,7 @@ export const submitAttempt = onCall(options, async (req) => {
     // 1.6.0 起閃卡是純練習：錯題與已看題數仍寫入，但只有完整測驗可達標。
     if (a.mode === 'quiz' && a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
       next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
-    tx.create(ref, saved);
+    tx.create(ref, { ...saved, wrongSummary });
     tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
     return { progress: next, attempt: a, wrongSummary, duplicate: false };
   });
@@ -782,7 +782,15 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     if (old.some((x) => x.exists && x.data()?.uid !== p.uid)) throw new HttpsError('permission-denied', '作答 ID 衝突');
     const progress = await tx.get(progressRef); let next = normalizeProgress(progress.data() as Progress);
     const summaries = [];
-    for (let i = 0; i < prepared.length; i++) if (!old[i].exists) { const a = prepared[i]; const at = Date.now(); const unit = visible.find((u: Unit) => u.id === a.unitId); summaries.push({ unitId: a.unitId, ...updateWrong(effectiveWrong(next.units[a.unitId], unit, a.version), a.answers, at).summary }); next = applyAttempt(next, { ...a, receivedAt: at }, unit); tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false }); }
+    for (let i = 0; i < prepared.length; i++) {
+      const a = prepared[i];
+      if (old[i].exists) { prepared[i] = old[i].data() as Attempt; summaries.push({ unitId: a.unitId, ...old[i].data()?.wrongSummary }); continue; }
+      const at = Date.now(), unit = visible.find((u: Unit) => u.id === a.unitId);
+      const summary = updateWrong(effectiveWrong(next.units[a.unitId], unit, a.version), a.answers, at).summary;
+      summaries.push({ unitId: a.unitId, ...summary });
+      next = applyAttempt(next, { ...a, receivedAt: at }, unit);
+      tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, wrongSummary: summary, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false });
+    }
     tx.set(progressRef, { ...next, uid: p.uid, classId: p.classId });
     return { progress: next, attempts: prepared, summaries };
   });

@@ -1828,3 +1828,15 @@ body { padding-bottom: 60px; }
   font-size: calc(13px * var(--font-scale, 1));
   color: #5d6d7e;
 }
+/* 1.7.0 閃卡與隔日錯題重做 */
+.flashcard { cursor:pointer; }
+.flashcard .options button.right,.quiz .options button.right { border-color:#168553; background:#e9f8ee; color:#145b38; }
+.flashcard-answer:focus { outline:2px solid var(--primary); outline-offset:5px; }
+.flashcard-actions,.review-counts { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.flashcard-actions button { flex:1; min-height:44px; }
+@media (max-width:640px) {
+  .flashcards { padding-bottom:110px; }
+  .flashcard { padding:16px; width:100%; box-sizing:border-box; }
+  .flashcard-actions { position:fixed; bottom:0; left:0; right:0; margin:0; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:var(--bg,#fff); z-index:30; }
+  .review-counts button { min-height:44px; }
+}

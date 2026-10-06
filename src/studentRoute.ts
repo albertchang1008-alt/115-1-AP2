@@ -5,7 +5,7 @@ export type StudentRoute =
   | { kind: 'quiz'; unitId: string; mode: 'full' | 'draw'; count?: number }
   | { kind: 'flashcard'; unitId: string }
   | { kind: 'mixed'; count: number }
-  | { kind: 'wrongcards'; unitId: string; range: '24h' | '7d' | 'all' };
+  | { kind: 'wrongcards'; unitId: string };
 
 export function parseStudentRoute(hash: string, courseId: string): StudentRoute | null {
   const path = hash.replace(/^#/, '');
@@ -29,6 +29,6 @@ export function parseStudentRoute(hash: string, courseId: string): StudentRoute 
   const flashcard = rest.match(/^\/unit\/([^/]+)\/flashcard$/);
   if (flashcard) return { kind: 'flashcard', unitId: decodeURIComponent(flashcard[1]) };
   const wrongcards = rest.match(/^\/unit\/([^/]+)\/wrongcards$/);
-  if (wrongcards) return { kind: 'wrongcards', unitId: decodeURIComponent(wrongcards[1]), range: ['24h', '7d', 'all'].includes(q.get('range') || '') ? q.get('range') as '24h' | '7d' | 'all' : '7d' };
+  if (wrongcards) return { kind: 'wrongcards', unitId: decodeURIComponent(wrongcards[1]) };
   return null;
 }

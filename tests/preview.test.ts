@@ -104,7 +104,6 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /這是練習，不計入最高分與達標。/);
   assert.match(source, /const practice = mode === 'quiz' && !full;/);
   assert.match(source, /\{practice && <PracticeHint unit=\{unit\} \/>\}/);
-  assert.match(source, /錯題閃卡 \{i \+ 1\} \/ \{qs\.length\}<\/strong><\/div><PracticeHint unit=\{unit\} \/>/);
   assert.match(source, /綜合練習 \{i \+ 1\} \/ \{rows\.length\}<\/strong><\/div><PracticeHint \/>/);
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
@@ -137,7 +136,7 @@ test('練習分頁每個題目分類是一列並保留四種入口', async () =>
   assert.match(row, />閃卡<\/button>/);
   assert.match(row, /\[10, 20, 30\]\.map/);
   assert.match(row, /`\/quiz\?mode=draw&n=\$\{n\}`/);
-  assert.match(row, /wrongcards\?range=7d/);
+  assert.match(row, /wrongcards/);
   assert.match(row, /disabled=\{busy\}/);
   assert.match(row, /badge green/);
   assert.doesNotMatch(source, /function PracticeCards/);
@@ -297,7 +296,7 @@ test('預覽重設與不同預覽 instance 不共用進度', async () => {
   assert.equal((await a.call('getProgress')).units.orientation.best, 100);
   assert.deepEqual((await b.call('getProgress')).units, {});
 });
-test('一般錯題索引保留歷史，複習答對不清除', async () => {
+test('預覽重批不採用前端 correct，複習仍保留累計', async () => {
   const a = memoryApi();
   const base: Attempt = {
     id: 'a',
@@ -318,7 +317,7 @@ test('一般錯題索引保留歷史，複習答對不清除', async () => {
       id: 'b',
       mode: 'review',
       score: 100,
-      answers: [{ ...base.answers[0], correct: true }],
+      answers: [{ ...base.answers[0], selected: 'a', correct: false }],
     },
   });
   assert.equal((await a.call('getProgress')).units.orientation.wrong['example-v1']['example-1'].n, 1);
@@ -351,17 +350,12 @@ test('題庫快取超過 3 MB 時以最後使用時間淘汰', async () => {
     assert.ok(s.getItem('bank:preview:c:old2:v'));
   } finally { (globalThis as any).localStorage = old; }
 });
-test('錯題閃卡與首頁排列採純前端資料，沒有額外 callable', async () => {
+test('1.7.0 移除錯題時間選單與 range 路由參數', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
-  assert.match(source, /wrongCardIds\(progress/);
-  assert.match(source, /閃卡不會寫入資料/);
-  assert.match(source, /if \(!counts\[range\]\) setRange\(counts\['7d'\] \? '7d' : 'all'\)/, '7 天沒有題目要自動選全部');
-  assert.match(source, /setQs\(\(x\) => \[\.\.\.x\.slice/, '再看一次只調整本輪卡片佇列');
-  assert.ok(source.indexOf('還沒完成') < source.indexOf('unitgrid'), '待辦位於單元清單之前');
-  assert.match(source, /currentUnits\.filter/);
-  assert.doesNotMatch(source, /start\('review'/);
-  assert.match(source, /submitMixedAttempts/);
-  assert.match(source, /\[\.\.\.shuffle\(wrong\), \.\.\.shuffle\(unseen\), \.\.\.shuffle\(other\)\]/);
+  const route = await readFile(new URL('../src/studentRoute.ts', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /時間範圍|range=|wrongCardIds/);
+  assert.doesNotMatch(route, /q.get\('range'\)/);
+  assert.deepEqual(parseStudentRoute('#/course/c/unit/u/wrongcards?range=7d', 'c'), { kind: 'wrongcards', unitId: 'u' });
 });
 
 test('學習進度看板依課程與教材設定的單元順序排列', async () => {
@@ -433,4 +427,40 @@ test('重新同步時單筆失敗不會卡住後面的待同步紀錄，並回�
   const sync = source.slice(source.indexOf('async function sync()'), source.indexOf('async function loadHistory('));
   assert.match(sync, /for \(const a of pending\(uid\)\) \{[\s\S]*try \{[\s\S]*submitAttempt[\s\S]*\} catch \(e\) \{/);
   assert.match(sync, /組未能保存/);
+});
+test('1.7.0 實際 React 閃卡與錯題操作：翻面、自評、待複習題數、伺服器摘要與手機', async () => {
+  const { buildSync } = await import('esbuild'), { chromium } = await import('playwright');
+  const bundle = buildSync({entryPoints:['tests/fixtures/practice-modes.tsx'],bundle:true,write:false,format:'iife',platform:'browser',define:{'import.meta.env':'{}','process.env.NODE_ENV':'"production"'}}).outputFiles[0].text;
+  const browser=await chromium.launch({channel:'chrome'});
+  try {
+    const page=await browser.newPage({viewport:{width:390,height:844}}), errors:string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));
+    await page.route('http://localhost/',r=>r.fulfill({contentType:'text/html',body:'<div id="root"></div>'}));
+    await page.goto('http://localhost/');await page.addStyleTag({content:await readFile('src/style.css','utf8')});await page.addScriptTag({content:bundle});
+    const mount=async(kind:string)=>{await page.evaluate(kind=>(window as any).practiceTest.mount(kind),kind);};
+    await mount('flash');await page.getByRole('button',{name:'B. 另一選項',exact:true}).click();
+    assert.equal(await page.getByRole('button',{name:'翻面',exact:true}).count(),1,'先選不應翻面');
+    await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByText('你選的是 B，正解是 A',{exact:true}).waitFor();
+    assert.equal(await page.locator('.flashcard-answer').evaluate(e=>e===document.activeElement),true);
+    assert.equal(await page.getByText('學生不應看到的教師內容',{exact:true}).count(),0);
+    await page.getByRole('button',{name:'再看一次',exact:true}).click();await page.getByText('練習題 q1',{exact:true}).waitFor();
+    await page.locator('.flashcard').focus();await page.keyboard.press('Space');await page.getByText('正解是 A',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'我會',exact:true}).click();await page.getByText('練習題 q0',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByRole('button',{name:'我會',exact:true}).click();
+    await page.getByText('看了 3 張，其中 1 張標記再看一次',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.length),0);
+    await mount('today');await page.getByText('這 37 題今天剛錯，先用閃卡看解析，明天再來重做',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'用閃卡看解析',exact:true}).click();await page.getByRole('button',{name:'翻面',exact:true}).waitFor();
+    assert.deepEqual(await page.evaluate(()=>(window as any).practiceTest.calls.map((x:any)=>x.name)),['getBank']);
+    await mount('wrong');assert(await page.getByRole('button',{name:'50 題',exact:true}).isDisabled());
+    assert(await page.getByRole('button',{name:'全部 37 題',exact:true}).isEnabled());
+    await page.getByRole('button',{name:'10 題',exact:true}).click();
+    for(let i=0;i<10;i++){await page.getByRole('button',{name:'正確選項',exact:true}).click();await page.getByRole('button',{name:'送出答案',exact:true}).click();await page.getByRole('button',{name:i===9?'查看結果':'下一題',exact:true}).click();}
+    await page.getByText('已移除 10 題・仍答錯 0 題',{exact:true}).waitFor();
+    const inputs=await page.evaluate(()=>(window as any).practiceTest.calls.filter((x:any)=>x.name==='submitAttempt').map((x:any)=>x.data.attempt));
+    assert.equal(inputs.length,1);assert.equal(inputs[0].mode,'review');assert.deepEqual(inputs[0].answers.map((x:any)=>x.questionId).sort(),Array.from({length:10},(_,i)=>'q'+i).sort());
+    await mount('exam');await page.getByRole('button',{name:'全部 37 題',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'用閃卡看解析',exact:true}).count(),0);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    assert.deepEqual(errors,[]);
+  } finally {await browser.close();}
 });

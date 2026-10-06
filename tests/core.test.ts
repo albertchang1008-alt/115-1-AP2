@@ -30,7 +30,6 @@ import {
   reviewIds,
   reviewCounts,
   taipeiDay,
-  wrongCardIds,
   allocateDraw,
   drawReviewQuestions,
   isOverdue,
@@ -259,17 +258,10 @@ test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
   p = applyAttempt(p, attempt({ id: 'clear', version: 'v', clientAt: 11, answers: [{ questionId: 'q1', selected: 'a', correct: true, seconds: 1 }] }));
   assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 10, ok: 11 });
 });
-test('錯題時間範圍、排序與 at:0 相容規則', () => {
-  const now = 1_000_000_000;
-  const p: any = { units: { u: { wrong: { v: { legacy: { n: 1, at: 0 }, old: { n: 9, at: now - 8 * 86400000 }, recent: { n: 2, at: now - 1000 }, newest: { n: 2, at: now - 10 } } } } }, activities: {} };
-  assert.deepEqual(wrongCardIds(p, 'u', 'v', '24h', now), ['newest', 'recent']);
-  assert.deepEqual(wrongCardIds(p, 'u', 'v', '7d', now), ['newest', 'recent']);
-  assert.deepEqual(wrongCardIds(p, 'u', 'v', 'all', now), ['old', 'newest', 'recent', 'legacy']);
-});
 test('錯題閃卡不透過 applyAttempt 寫入任何學習狀態', () => {
   const p: any = { units: { u: { best: 80, attempts: 1, updatedAt: 1, wrong: { v: { q1: { n: 2, at: 3 } } } } }, attempted: { u: { q1: true } }, activities: {} };
   // 錯題閃卡是純展示；其唯一資料操作是 wrongCardIds，並不呼叫 applyAttempt。
-  assert.deepEqual(wrongCardIds(p, 'u', 'v', 'all'), ['q1']);
+  assert.deepEqual(Object.keys(wrongEntries(p, 'u', 'v')), ['q1']);
   assert.deepEqual(p.units.u.best, 80); assert.deepEqual(p.attempted.u, { q1: true }); assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 3 });
 });
 test('缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照', () => {
