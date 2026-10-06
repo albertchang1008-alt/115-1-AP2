@@ -104,7 +104,6 @@ test('學生首頁與單元頁以 Chapter 彙整活動及題目分類', async ()
   assert.match(source, /這是練習，不計入最高分與達標。/);
   assert.match(source, /const practice = mode === 'quiz' && !full;/);
   assert.match(source, /\{practice && <PracticeHint unit=\{unit\} \/>\}/);
-  assert.match(source, /綜合練習 \{i \+ 1\} \/ \{rows\.length\}<\/strong><\/div><PracticeHint \/>/);
   assert.match(source, /chapterActivityKey\(selectedChapterName, activity\.id\)/);
   assert.match(source, /parseStudentRoute\(`#\/course\/\$\{encodeURIComponent\(course\.id\)\}\$\{path\}`/);
 });
@@ -463,4 +462,60 @@ test('1.7.0 實際 React 閃卡與錯題操作：翻面、自評、待複習題�
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     assert.deepEqual(errors,[]);
   } finally {await browser.close();}
+});
+test('1.7.0 綜合練習 React：範圍三態、保存排除、三種模式、只讀所選題庫、手機', async()=>{
+  const {buildSync}=await import('esbuild'),{chromium}=await import('playwright');
+  const bundle=buildSync({entryPoints:['tests/fixtures/practice-modes.tsx'],bundle:true,write:false,format:'iife',platform:'browser',define:{'import.meta.env':'{}','process.env.NODE_ENV':'"production"'}}).outputFiles[0].text;
+  const browser=await chromium.launch({channel:'chrome'});
+  try {
+    const page=await browser.newPage({viewport:{width:390,height:844}}),errors:string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));await page.route('http://localhost/',r=>r.fulfill({contentType:'text/html',body:'<div id="root"></div>'}));
+    await page.goto('http://localhost/');await page.addStyleTag({content:await readFile('src/style.css','utf8')});await page.addScriptTag({content:bundle});
+    const mount=async(kind:string)=>{await page.evaluate(kind=>(window as any).practiceTest.mount(kind),kind);};
+    await page.evaluate(()=>localStorage.setItem('practice-scope:practice-test:student','{broken'));
+    await mount('mixed');await page.getByText('已選 3 個分類・共 44 題（待複習 37、今天剛錯 1、未作答 44）',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.length),0,'範圍數字不呼叫API');
+    assert.equal(await page.locator('.scope-category').count(),0,'單元預設收合');
+    assert.deepEqual(await page.locator('.scope-group strong').allTextContents(),['心臟','血液']);
+    await page.getByRole('button',{name:'展開血液',exact:true}).click();await page.getByLabel('血液第二分類',{exact:false}).uncheck();
+    const group=page.getByRole('checkbox',{name:'選取血液單元',exact:true});assert.equal(await group.evaluate((e:any)=>e.indeterminate),true);assert.equal(await group.getAttribute('aria-checked'),'mixed');
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('practice-scope:practice-test:student')!)[0]),'u2');
+    await page.getByRole('button',{name:'全不選',exact:true}).click();await page.getByText('請至少勾選一個分類',{exact:true}).waitFor();
+    assert.equal(await page.locator('.mixed-practice-buttons button:enabled').count(),0);
+    await page.getByRole('button',{name:'全選',exact:true}).click();await group.uncheck();
+    await page.locator('.mixed-practice-buttons > div').nth(0).getByRole('button',{name:'全部 3 張',exact:true}).click();
+    await page.getByRole('button',{name:'翻面',exact:true}).waitFor();
+    assert.deepEqual(await page.evaluate(()=>(window as any).practiceTest.calls.filter((x:any)=>x.name==='getBank').map((x:any)=>x.data.unitId)),['h']);
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.filter((x:any)=>x.name.startsWith('submit')).length),0);
+    await page.getByRole('button',{name:'離開閃卡',exact:true}).click();await page.getByText('已選 1 個分類・共 3 題（待複習 0、今天剛錯 0、未作答 3）',{exact:true}).waitFor();
+    await mount('mixed');await page.getByText('已選 1 個分類・共 3 題（待複習 0、今天剛錯 0、未作答 3）',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'全選',exact:true}).click();
+    await page.locator('.mixed-practice-buttons > div').nth(2).getByRole('button',{name:'10 題',exact:true}).click();
+    for(let i=0;i<10;i++){await page.getByRole('button',{name:'正確選項',exact:true}).click();await page.getByRole('button',{name:'送出答案',exact:true}).click();await page.getByRole('button',{name:i===9?'查看結果':'下一題',exact:true}).click();}
+    await page.getByText('已移除 10 題・仍答錯 0 題',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.find((x:any)=>x.name==='submitMixedAttempts').data.attempts[0].mode),'review');
+    await mount('mixed-small');await page.getByRole('button',{name:'全部 4 張',exact:true}).waitFor();
+    await page.getByRole('button',{name:'全部 4 題',exact:true}).click();
+    for(let i=0;i<4;i++){await page.getByRole('button',{name:'正確選項',exact:true}).click();await page.getByRole('button',{name:'送出答案',exact:true}).click();await page.getByRole('button',{name:i===3?'查看結果':'下一題',exact:true}).click();}
+    await page.getByText('移除錯題 0 題・今天已答對 1 題（明天以後再答對就會移除）',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.find((x:any)=>x.name==='submitMixedAttempts').data.attempts[0].mode),'quiz');
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
+});
+test('1.7.0 Student 整合：單元閃卡不產生進度、返回路由、首頁綜合三種模式',async()=>{
+  const {buildSync}=await import('esbuild'),{chromium}=await import('playwright');
+  const bundle=buildSync({entryPoints:['tests/fixtures/practice-modes.tsx'],bundle:true,write:false,format:'iife',platform:'browser',define:{'import.meta.env':'{}','process.env.NODE_ENV':'"production"'}}).outputFiles[0].text;
+  const browser=await chromium.launch({channel:'chrome'});
+  try{
+    const page=await browser.newPage({viewport:{width:1280,height:900}}),errors:string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));await page.route('http://localhost/',r=>r.fulfill({contentType:'text/html',body:'<div id="root"></div>'}));await page.goto('http://localhost/');
+    await page.addStyleTag({content:await readFile('src/style.css','utf8')});await page.addScriptTag({content:bundle});await page.evaluate(()=>(window as any).practiceTest.mount('student'));
+    await page.getByRole('button',{name:/去練習/}).click();await page.getByRole('button',{name:'閃卡，整份 37 張',exact:true}).click();
+    await page.getByRole('button',{name:'翻面',exact:true}).waitFor();await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByRole('button',{name:'我會',exact:true}).click();await page.getByRole('button',{name:'離開閃卡',exact:true}).click();
+    await page.getByRole('button',{name:'完整測驗',exact:true}).waitFor();assert(await page.getByText('還沒完整測驗',{exact:true}).isVisible());
+    assert.equal(await page.evaluate(()=>(window as any).practiceTest.calls.filter((x:any)=>x.name.startsWith('submit')).length),0);
+    await page.getByRole('button',{name:'返回課程',exact:true}).click();await page.getByRole('button',{name:'10 張',exact:true}).click();await page.getByRole('button',{name:'翻面',exact:true}).waitFor();
+    await page.getByRole('button',{name:'離開閃卡',exact:true}).click();await page.getByText('綜合練習',{exact:true}).waitFor();
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
 });

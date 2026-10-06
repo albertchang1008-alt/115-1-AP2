@@ -1831,12 +1831,42 @@ body { padding-bottom: 60px; }
 /* 1.7.0 閃卡與隔日錯題重做 */
 .flashcard { cursor:pointer; }
 .flashcard .options button.right,.quiz .options button.right { border-color:#168553; background:#e9f8ee; color:#145b38; }
-.flashcard-answer:focus { outline:2px solid var(--primary); outline-offset:5px; }
+.flashcard-answer:focus { outline:2px solid var(--blue); outline-offset:5px; }
 .flashcard-actions,.review-counts { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
 .flashcard-actions button { flex:1; min-height:44px; }
 @media (max-width:640px) {
   .flashcards { padding-bottom:110px; }
   .flashcard { padding:16px; width:100%; box-sizing:border-box; }
-  .flashcard-actions { position:fixed; bottom:0; left:0; right:0; margin:0; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:var(--bg,#fff); z-index:30; }
+  .flashcard-actions { position:fixed; bottom:0; left:0; right:0; margin:0; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:var(--surface,#fff); z-index:30; }
   .review-counts button { min-height:44px; }
 }
+/* 綜合練習範圍及三種模式 */
+.mixed-scope { border:1px solid var(--line); border-radius:10px; padding:12px; min-width:0; }
+.mixed-scope legend { font-size:calc(16px * var(--font-scale, 1)); font-weight:700; padding:0 8px; }
+.scope-summary { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:8px; }
+.scope-summary > span { flex:1; min-width:180px; }
+.scope-group { display:flex; align-items:stretch; border-top:1px solid var(--line); }
+.scope-group label { display:flex; align-items:center; flex:1; min-width:0; gap:10px; cursor:pointer; min-height:44px; }
+.scope-group label span { color:var(--muted); margin-left:auto; font-size:calc(13px * var(--font-scale, 1)); }
+.scope-group > button { min-width:44px; min-height:44px; }
+.scope-category { display:flex; gap:10px; align-items:center; min-height:44px; padding:8px 12px; margin-left:20px; cursor:pointer; }
+.scope-category span { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.scope-category small { color:var(--muted); font-size:calc(13px * var(--font-scale, 1)); }
+.mixed-practice-buttons { display:flex; gap:16px; flex-wrap:wrap; }
+.mixed-practice-buttons > div { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.mixed-practice-buttons .review-counts { margin:0; }
+@media (max-width:640px) {
+  .mixed-scope { padding:8px; }
+  .scope-group label { flex-wrap:wrap; gap:6px; padding:6px 0; }
+  .scope-group label span { width:100%; margin-left:25px; }
+  .scope-category { margin-left:10px; padding:8px 4px; }
+  .scope-category span { display:block; }
+  .scope-category small { display:block; }
+  .mixed-practice-buttons { flex-direction:column; }
+  .mixed-practice-buttons > div { min-height:44px; }
+  .mixed-practice-buttons button { min-height:44px; }
+}
+
+.flashcard .options button:disabled { opacity:1; cursor:default; }
+
+.mixed-practice-buttons .practice-wrong.empty { padding:10px 14px; }

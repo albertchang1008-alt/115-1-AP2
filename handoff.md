@@ -1,6 +1,6 @@
 # 專案交接（現況）
 
-目前版本：1.6.5
+目前版本：1.7.0
 
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
@@ -14,18 +14,18 @@
 4. Commit 結尾附身分標註（Claude：`Co-Authored-By: <model> <noreply@anthropic.com>`＋session 連結；Codex：`[Codex]`）。不用 `--no-verify`、不強推、不略過測試。
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
-## 目前狀態（2026-10-03）
+## 目前狀態（2026-10-06）
 
-**1.7.0 盤點完成／實作中（2026-10-06）**：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交。
+**1.7.0 練習模式待 Claude 驗收（2026-10-06）**：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交；以下1～7為動工前盤點（①～③已依規格改版）。
 1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
 2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。
 3. 答對現況：applyAttempt 直接刪除該錯題，答錯累加；改為隔日標 rm、同日標 ok、再錯保留累計 n。
 4. 綜合練習：MixedPractice 篩 `!isReviewUnit && visibility=current && bankVersion`，含已達標但仍 current／選看，排除 archived／hidden／複習考；進入練習才載全部候選題庫，錯題→未作答→其他補滿。後端僅 quiz/full=false，分分類寫 wrong／attempted、不更新 best。新選範圍沿用候選條件，僅載勾選分類。
 5. 複習考錯題現為翻卡；有獨立 Unit、bankVersion、wrong，改逐題重做、題數選擇，仍無閃卡／抽題。
 6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
-7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但现有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
+7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但現有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
 - 衝突皆依第三版修正；錯題複習題數採畫面內小按鈕列，手機沿用練習展開選單。學習理由：錯題重做屬提取練習，隔日答對才排除短期記憶；今天剛錯先翻卡，待複習再重做，移除保留 n。
-- ① `b65418b` 已完成；②翻卡、錯題重做、題數／今天剛錯提示、移除 range 完成，check 前端 125／Functions 20、兩端 build 通過；實際 React 操作含手機、翻面焦點與再排一次，無閃卡 API 寫入。下一步③綜合範圍／手機／截圖。④依第7點不做。
+- ① `b65418b`、② `819b237` 已提交；③綜合範圍／手機／截圖為本次提交「feat: 綜合練習選範圍與三種模式及手機驗收 [Codex]」；最終 check 前端129／Functions20、兩端build、版本一致及 diff 檢查通過。④依第7點不做。驗收報告與16張桌機／手機截圖見 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`；教師同步延續畫面未實作／無截圖。下一步 Claude 驗收①～③，教師另案決定零新增讀取的跨版方案，未 push／部署。
 
 | 項目 | 狀態 |
 |---|---|
@@ -72,22 +72,22 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **資料與架構**
 1. 學生入口 GitHub Pages，資料 Firebase（專案 `ap2-7ed91`，asia-east1）；舊題庫系統資料完全隔離。
 2. 成績一律由後端以私有答案表重批，前端分數不採信。完整作答才更新最高分；錯題複習、抽題、綜合練習不更新最高分與完成度。
-3. 已發布題庫是不可變快照（版本＝內容雜湊，先依題序／ID 排序）；換版本時最高分沿用、錯題按版本分開。
+3. 已發布題庫為不可變快照（版本＝內容雜湊）；最高分跨版沿用、錯題仍按版本分開（1.7.0第④段因零新增讀取前提不成立未做）。所有錯題經 shared effectiveWrong 讀取，移除標 rm 保留 n，再錯累加；同日答對標 ok，Asia/Taipei 隔日答對才移除。
 4. 代碼（課程／單元／班級）由教師自訂，可中文、英數、`-`、`_`，不可空白標點，≤50 字，建立後不改。題目 ID 等仍限英數。
 5. 時間欄位（datetime-local 無時區）一律以台灣 +08:00 解讀（`parseCourseTime`）。
 6. Firestore 不接受 undefined 欄位：要清除的欄位直接省略。
 
 **單元模型（1.4.0，`docs/UNIT_MODEL_1.4.0.md`）**
 7. Sheet「單元」＝`Chapter`：開放、期限、門檻、必做、班級覆寫、活動、看板移動、完成度計數都在此層。Sheet「次單元」＝`Unit`（題目分類）：題庫版本、進度、錯題、完整測驗範圍。
-8. 單元完成＝底下每個已發布題目分類的完整測驗最高分 ≥ 單元門檻，且必做活動完成。題目分類一律必做（沒有選做分類）；「選做／選看」只在單元（`Chapter.required`，可班級覆寫）與活動（`Activity.required` 覆寫，未設定沿用類型推導）兩個層級，不計完成度。1.6.0 起完整閃卡只作練習，舊閃卡最高分保留、不重算。完成度公式版本 3（`CURRENT_COMPLETION_FORMULA_VERSION`）。
-9. 單元活動進度鍵 `chapter:<單元名>_<activityId>`。綜合練習只含看板「目前」的分類，且不含複習考。
+8. 單元完成＝底下每個已發布題目分類的完整測驗最高分 ≥ 單元門檻，且必做活動完成。題目分類一律必做（沒有選做分類）；「選做／選看」只在單元（`Chapter.required`，可班級覆寫）與活動（`Activity.required` 覆寫，未設定沿用類型推導）兩個層級，不計完成度。1.7.0 閃卡＝翻卡、不寫入任何資料（含 attempted），舊閃卡分數保留。錯題複習＝逐題重做，只出昨天以前待複習，選10／20／30／50／≤50非檔位全部題數；時間範圍已移除，今天剛錯先看閃卡（複習考仍無閃卡）。完成度公式版本 3（`CURRENT_COMPLETION_FORMULA_VERSION`）。
+9. 單元活動進度鍵 `chapter:<單元名>_<activityId>`。綜合練習只含看板「目前」、已發布的分類（含選看／已達標），不含複習考；可按單元／分類勾範圍，預設全選、以courseId＋uid本機存排除ID；閃卡／抽題／錯題複習全部不計分，題庫只在按練習後載所選。
 
 **複習考（1.5.0，`docs/REVIEW_EXAM_1.5.0.md`）**
 10. 複習考＝教師選多個分類組成的獨立 `Unit`（`unit.review`），題目複製成快照題目池；每次依比例隨機抽 N 題（未考過優先），抽滿配額才算完整作答；最高分 ≥ 門檻完成；逾期仍完成但標「逾期完成」（`progress.units[id].passedAt`）。來源更新需教師按「重新組卷」。一般單元不放題目練習活動。
 
 **題庫同步與題目**
 11. 同步只讀與課程代碼同名的分頁；「單元」欄是分組、「次單元」欄是分類；「啟用」欄 FALSE 的列略過；同步只新增／更新，不自動刪除（舊分類以 `staleUnits` 提示教師清理）。分類名稱跟隨 Sheet 次單元。
-12. 選項每次洗牌；測驗選項不顯示 A/B/C/D。完整測驗作答中不揭曉正解，交卷後才看；閃卡／複習選了即顯示。
+12. 選項每次洗牌；測驗選項不顯示 A/B/C/D。完整測驗作答中不揭曉正解，交卷後才看；翻卡翻面顯示，抽題／錯題複習送出單題後顯示。
 13. 解析五段鍵 `keyword/chain/decide/memory/trace`（保留舊鍵相容）；畫面稱「引導式解析」，一律展開；學生看①～④，教師另看⑤。傳統解析預設收合。
 
 **前端**

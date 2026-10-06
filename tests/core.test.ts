@@ -1,3 +1,4 @@
+import { mixedScope, selectPracticeRows } from '../shared/practice';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -260,7 +261,7 @@ test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
 });
 test('錯題閃卡不透過 applyAttempt 寫入任何學習狀態', () => {
   const p: any = { units: { u: { best: 80, attempts: 1, updatedAt: 1, wrong: { v: { q1: { n: 2, at: 3 } } } } }, attempted: { u: { q1: true } }, activities: {} };
-  // 錯題閃卡是純展示；其唯一資料操作是 wrongCardIds，並不呼叫 applyAttempt。
+  // 錯題閃卡是純展示；其唯一資料操作是 wrongEntries，並不呼叫 applyAttempt。
   assert.deepEqual(Object.keys(wrongEntries(p, 'u', 'v')), ['q1']);
   assert.deepEqual(p.units.u.best, 80); assert.deepEqual(p.attempted.u, { q1: true }); assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 3 });
 });
@@ -383,9 +384,32 @@ test('1.7.0 台北日界線、移除保留累計、同日答對與再次答錯',
   assert.deepEqual(updateWrong({ q: { n: 3, at: 0 } }, good, after).entries.q, { n: 3, at: 0, rm: after });
   assert.deepEqual(effectiveWrong({ wrong: { v: ['q'] } } as any, {}, 'v'), { q: { n: 1, at: 0 } });
 });
-test('1.7.0 待複習排序與題數边界', () => {
+test('1.7.0 待複習排序與題數邊界', () => {
   const now = Date.parse('2026-10-06T02:00:00Z');
   const e = { today: { n: 100, at: now, ok: now }, older: { n: 2, at: 1 }, newer: { n: 2, at: 2 }, most: { n: 3, at: 3 }, removed: { n: 99, at: 1, rm: 2 } };
   assert.deepEqual(reviewIds(e, 2, now), ['most', 'older']);
   for (const [n, expected] of [[10, [10,20,30,50]], [37,[10,20,30,50,37]], [50,[10,20,30,50]], [60,[10,20,30,50]]] as const) assert.deepEqual(reviewCounts(n), expected);
+});
+test('1.7.0 綜合範圍：三態、合計、未作答、移除標記、候選不變與新分類預設包含',()=>{
+  const unit=(id:string,group?:string)=>({id,group,title:id,bankVersion:'v',questionCount:4,visibility:'current',required:false}) as any;
+  const p:any={units:{a:{wrong:{v:{q1:{n:2,at:0},q2:{n:1,at:Date.now()},q3:{n:9,at:0,rm:1}}}}},activities:{},attempted:{a:{q1:true}}};
+  const units=[unit('a','血液'),unit('b','血液'),unit('c'),{...unit('hidden'),visibility:'hidden'},{...unit('archived'),visibility:'archived'},{...unit('exam'),review:{}},{...unit('empty'),bankVersion:''}];
+  const s=mixedScope(units,p,['b','missing','hidden']);
+  assert.deepEqual(s.selected.map(u=>u.id),['a','c']);assert.deepEqual(s.excluded,['b']);assert.equal(s.total,8);assert.equal(s.due,1);assert.equal(s.today,1);assert.equal(s.unseen,7);
+  assert.equal(s.groups[0].partial,true);assert.equal(s.groups[0].checked,false);assert.equal(s.groups[1].name,'未分類');assert.equal(s.groups[1].checked,true);
+  assert.equal(mixedScope([...units,unit('new','血液')],p,s.excluded).selected.some(u=>u.id==='new'),true);
+  assert.equal(mixedScope(units,p,['a','b','c']).count,0);
+});
+test('1.7.0 閃卡今天優先、抽題待複習優先／今天歸其他、跨分類錯題排序取前N才洗牌',()=>{
+  const now=Date.parse('2026-10-06T02:00:00Z'),unit:any={id:'u',bankVersion:'v'};
+  const rows=['today','due1','due2','unseen','other','removed'].map(id=>({q:{...q,id},unit}));
+  const p:any={units:{u:{wrong:{v:{today:{n:10,at:now},due1:{n:3,at:0},due2:{n:2,at:0},removed:{n:99,at:0,rm:1}}}}},activities:{},attempted:{u:{other:true,removed:true}}};
+  assert.deepEqual(selectPracticeRows(rows,p,'flashcard',1,now).map(r=>r.q.id),['today']);
+  assert.deepEqual(selectPracticeRows(rows,p,'quiz',2,now).map(r=>r.q.id).sort(),['due1','due2']);
+  assert.equal(selectPracticeRows(rows,p,'quiz',3,now)[2].q.id,'unseen');
+  assert.deepEqual(selectPracticeRows(rows,p,'review',1,now).map(r=>r.q.id),['due1']);
+  for(const mode of ['flashcard','quiz'] as const){const picked=selectPracticeRows(rows,p,mode,99,now);assert.equal(picked.length,rows.length);assert.equal(new Set(picked.map(r=>r.q.id)).size,rows.length);}
+  const u2:any={id:'u2',bankVersion:'v'};p.units.u2={wrong:{v:{due1:{n:4,at:0}}}};
+  const picked=selectPracticeRows([...rows,{q:{...q,id:'due1'},unit:u2}],p,'review',2,now);
+  assert.deepEqual(picked.map(r=>`${r.unit.id}:${r.q.id}`).sort(),['u2:due1','u:due1'].sort());
 });

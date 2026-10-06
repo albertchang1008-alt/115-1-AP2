@@ -747,9 +747,10 @@ export const submitAttempt = onCall(options, async (req) => {
 export const submitMixedAttempts = onCall(options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const attempts = req.data?.attempts as Attempt[];
-  if (!Array.isArray(attempts) || !attempts.length || attempts.length > 100) fail('綜合練習格式錯誤');
+  if (!Array.isArray(attempts) || !attempts.length || attempts.length > 50) fail('綜合練習格式錯誤');
   const courseId = attempts[0]?.courseId;
   if (!attempts.every((a) => a && a.courseId === courseId && ['quiz', 'review'].includes(a.mode) && a.mode === attempts[0].mode && a.full === false && Array.isArray(a.answers) && a.answers.length)) fail('綜合練習格式錯誤');
+  if (new Set(attempts.map(a => a.unitId)).size !== attempts.length || new Set(attempts.map(a => a.id)).size !== attempts.length) fail('綜合練習包含重複分類或作答 ID');
   const { p, c } = await access(req, courseId);
   if (p.teacher) fail('預覽不能寫入正式進度');
   const visible = c.published && forClass(c.published, p.classId).units || [];

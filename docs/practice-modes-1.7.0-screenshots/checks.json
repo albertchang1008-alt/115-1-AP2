@@ -1,0 +1,117 @@
+{
+  "data": "local synthetic fixture; no production sign-in, reads or writes",
+  "checks": [
+    {
+      "device": "desktop",
+      "name": "flashcard-front",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "flashcard-back",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "wrong-choices",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "wrong-result",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "today-only",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "mixed-default",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "mixed-partial",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "name": "mixed-none",
+      "width": 1280,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "flashcard-front",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "flashcard-back",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "wrong-choices",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "wrong-result",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "today-only",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "mixed-default",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "mixed-partial",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "name": "mixed-none",
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    }
+  ]
+}

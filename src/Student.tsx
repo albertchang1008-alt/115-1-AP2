@@ -1,3 +1,5 @@
+import { MixedScopeCard, MixedPractice } from './MixedPractice';
+import { selectPracticeRows } from '../shared/practice';
 import { Flashcards, UnitWrongPractice } from './PracticeModes';
 import { QuestionImage, Explanations } from './QuestionContent';
 import { useEffect, useRef, useState } from 'react';
@@ -40,7 +42,6 @@ import {
   modes,
   grade,
   shuffle,
-  orderForPractice,
   wrongEntries,
   wrongGroups,
   Chapter,
@@ -91,6 +92,7 @@ export default function Student({
     [questions, setQuestions] = useState<Question[]>([]),
     [mode, setMode] = useState<Mode>('quiz'),
     [taking, setTaking] = useState(false),
+    [mixedIds, setMixedIds] = useState<string[] | null>(null),
     [full, setFull] = useState(true),
     [busy, setBusy] = useState(false),
     [history, setHistory] = useState<Attempt[]>([]),
@@ -126,7 +128,7 @@ export default function Student({
       if (!path) { setUnitId(''); setActivityId(''); setTaking(false); return; }
       const parsed = parseStudentRoute(`#/course/${encodeURIComponent(course.id)}${path}`, course.id);
       if (!parsed) return;
-      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.count}`); setTaking(false); return; }
+      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.practiceMode || 'quiz'}_${parsed.count}`); setTaking(false); return; }
       if (parsed.kind === 'home') { setUnitId(''); setActivityId(''); setTaking(false); return; }
       const nextUnit = course.units.find((u) => u.id === parsed.unitId);
       if (!nextUnit) return;
@@ -145,7 +147,7 @@ export default function Student({
       if (!parsed) { if (location.hash) { route(); notify('此單元目前未開放'); } return; }
       if (takingRef.current && !['quiz', 'flashcard'].includes(parsed.kind)) { setExitRequested(true); return; }
       if (parsed.kind === 'home') { setUnitId(''); setActivityId(''); setTaking(false); return; }
-      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.count}`); setTaking(false); return; }
+      if (parsed.kind === 'mixed') { setUnitId(''); setActivityId(`__mixed_${parsed.practiceMode || 'quiz'}_${parsed.count}`); setTaking(false); return; }
       const nextUnit = parsed.unitId;
       const nextActivity = parsed.kind === 'activity' ? parsed.activityId : parsed.kind === 'wrongcards' ? '__wrongcards' : '';
       const allowed = course.units.find((u) => u.id === nextUnit);
@@ -252,8 +254,7 @@ export default function Student({
         qs = drawReviewQuestions(qs, target.review!.allocation, attemptedIds);
       } else if (practiceCount) {
         // 抽題練習：不計分、不計完成度。已考過的題目自然排到後面（仿 v1.9），不是每次重置重洗。
-        const attemptedIds = new Set(Object.keys(progress.attempted?.[target.id] || {}));
-        qs = orderForPractice(qs, attemptedIds).slice(0, Math.min(practiceCount, qs.length));
+        qs = selectPracticeRows(qs.map(q=>({q,unit:target})),progress,'quiz',practiceCount).map(r=>r.q);
       } else if (m === 'flashcard') {
         const groups = wrongGroups(wrongEntries(progress, target.id, target.bankVersion, target));
         qs = [...shuffle(qs.filter(q => groups.today[q.id])), ...shuffle(qs.filter(q => groups.due[q.id])), ...shuffle(qs.filter(q => !groups.today[q.id] && !groups.due[q.id]))];
@@ -321,7 +322,7 @@ export default function Student({
     try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
     catch (e) { notify('研究資料未同步：' + (e as Error).message); }
   }
-  if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice api={api} course={course} progress={progress} count={Number(activityId.slice(8))} onBack={() => route()} notify={notify} /></>;
+  if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice key={activityId} api={api} course={course} progress={progress} uid={uid} selectedIds={mixedIds} mode={activityId.split('_')[3] as any} count={Number(activityId.split('_')[4])} onProgress={setProgress} onBack={() => route()} /></>;
   if (unit && activityId === '__wrongcards') return <><StudentSettings /><UnitWrongPractice api={api} course={course} unit={unit} progress={progress} onProgress={setProgress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} /></>;
   if (activity && unit && chapter)
     return <><StudentSettings /><ReadingPage course={course} unit={unit} chapterName={selectedChapterName} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
@@ -375,8 +376,8 @@ export default function Student({
             <button onClick={() => setOutstandingAll((x) => !x)}>查看全部待辦</button>
           </section>
           {outstandingAll && <section className="panel todo-list"><h2>待辦</h2>{todoItems.length ? <ul>{todoItems.map((item) => <li key={`${item.chapter.name}_${item.kind}_${item.id}`}><button onClick={() => route(`/unit/${encodeURIComponent(item.chapter.units[0].id)}?tab=${item.kind === 'category' ? `practice&focus=${encodeURIComponent(item.id)}` : phaseTab(item.phase || 'during')}`)}>{item.chapter.chapter.title}｜{item.kind === 'category' ? '還沒達標：' : '還沒完成：'}{item.title}</button></li>)}</ul> : <p>目前沒有待辦</p>}</section>}
-          {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion)).length} 題</button>)}</section>}
-          {currentUnits.some((u) => !isReviewUnit(u)) && <section className="panel"><h2>綜合練習</h2><p>錯題優先，接著是尚未作答的題目；不影響最高成績與完成度。</p>{[10,20,30,50].map((n) => <button key={n} onClick={() => route(`/mixed?n=${n}`)}>練習 {n} 題</button>)}</section>}
+          {currentUnits.some((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion, u)).length) && <section className="panel"><h2>建議複習｜錯題</h2>{currentUnits.filter((u) => Object.keys(wrongEntries(progress, u.id, u.bankVersion, u)).length).map((u) => <button key={u.id} onClick={() => route(`/unit/${encodeURIComponent(u.id)}/wrongcards`)}>{u.title}　{Object.keys(wrongEntries(progress, u.id, u.bankVersion, u)).length} 題</button>)}</section>}
+          {currentUnits.some((u) => !isReviewUnit(u)) && <MixedScopeCard key={`${course.id}:${uid}`} course={course} progress={progress} uid={uid} onStart={(m,n,ids)=>{setMixedIds(ids);route(`/mixed?n=${n}&mode=${m}`);}} />}
           {requiredProgress.length ? <section><h2>必做單元</h2><div className="progress-unit-list">{requiredProgress.map((row, i) => <ProgressUnitCard key={row.name} index={i + 1} row={row} progress={progress} route={route} studentName={preview ? '預覽學生' : course.studentName || ''} />)}</div></section> : null}
           {optionalProgress.length ? <section><h2>選看單元・不計完成度</h2><div className="progress-unit-list optional-units">{optionalProgress.map((row, i) => <ProgressUnitCard key={row.name} index={i + 1} row={row} progress={progress} route={route} studentName={preview ? '預覽學生' : course.studentName || ''} />)}</div></section> : null}
           {!currentUnits.length && <section className="panel empty"><h2>老師尚未開放新的單元</h2></section>}
@@ -588,7 +589,7 @@ function PracticeRow({ unit, threshold, progress, busy, start, route, menuOpen, 
     <button className="practice-menu-toggle" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>練習 {menuOpen ? <ChevronUp size={17} /> : <ChevronDown size={17} />}</button>
     <div className={`practice-action-group ${menuOpen ? 'mobile-open' : ''}`}><small>練習・不計分</small><button className="practice-flash" title="翻卡看答案，不記錄" data-mobile-label={`（整份 ${unit.questionCount || '—'} 張）`} aria-label={`閃卡，整份 ${unit.questionCount || '—'} 張`} disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
     <div className="practice-draw" title="逐題作答、立即看解析" aria-label="抽題題數"><span>抽題</span>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>{n} 題</button>)}</div>
-    <button className={`practice-wrong ${wrong === 0 ? 'empty' : ''}`} disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards`)}>錯題複習（{due} 題）</button>{today > 0 && <small>另有 {today} 題今天剛錯，明天起可重做</small>}</div>
+    <button title="只做昨天以前的錯題，答對就移除" className={`practice-wrong ${wrong === 0 ? 'empty' : ''}`} disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards`)}>錯題複習（{due} 題）</button>{today > 0 && <small>另有 {today} 題今天剛錯，明天起可重做</small>}</div>
   </div>;
 }
 function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, onSave, onBack }: { course: Course; unit: Unit; chapterName: string; activity: any; api: API; uid: string; progress: Progress; onSave: (position: number, completed: boolean) => Promise<void>; onBack: () => void }) {
@@ -601,16 +602,6 @@ function ReadingPage({ course, unit, chapterName, activity, api, uid, progress, 
 function PracticeHint({ unit }: { unit?: Unit }) {
   const total = unit?.questionCount ? `全部 ${unit.questionCount} 題` : '全部題目';
   return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」並做完{total}。</p>;
-}
-function MixedPractice({ api, course, progress, count, onBack, notify }: { api: API; course: Course; progress: Progress; count: number; onBack: () => void; notify: (s: string) => void }) {
-  const [rows, setRows] = useState<{ q: Question; unit: Unit }[]>([]), [i, setI] = useState(0), [selected, setSelected] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [done, setDone] = useState(false);
-  useEffect(() => { let active = true; void Promise.all(course.units.filter((u) => !isReviewUnit(u) && unitVisibility(u) === 'current' && u.bankVersion).map(async (unit) => (await cachedBank(api, course.id, unit.id, unit.bankVersion)).map((q) => ({ q, unit })))).then((all) => { if (!active) return; const flat = all.flat(); const wrong = flat.filter(({q,unit}) => !!wrongEntries(progress, unit.id, unit.bankVersion)[q.id]); const unseen = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !progress.attempted?.[unit.id]?.[q.id]); const other = flat.filter(({q,unit}) => !wrongEntries(progress, unit.id, unit.bankVersion)[q.id] && !!progress.attempted?.[unit.id]?.[q.id]); setRows([...shuffle(wrong), ...shuffle(unseen), ...shuffle(other)].slice(0, Math.min(count, flat.length))); }).catch((e) => notify(e.message)); return () => { active = false; }; }, [api, course.id, count]);
-  const row = rows[i];
-  async function submit() { if (!rows.length || busy) return; setBusy(true); try { const grouped = new Map<Unit, { q: Question; key: string }[]>(); rows.forEach(({ q, unit }) => grouped.set(unit, [...(grouped.get(unit) || []), { q, key: `${unit.id}:${q.id}` }])); const attempts: Attempt[] = [...grouped].map(([unit, qs]) => { const answers = qs.map(({q, key}) => ({ questionId: q.id, selected: selected[key] || '', correct: false, seconds: 0 })); return { id: crypto.randomUUID(), courseId: course.id, unitId: unit.id, version: unit.bankVersion, mode: 'quiz', answers, score: 0, full: false, clientAt: Date.now(), duration: 0 }; }); await api.call('submitMixedAttempts', { attempts }); setDone(true); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } }
-  if (!row) return <main className="quiz"><button onClick={onBack}>返回首頁</button><h1>目前沒有可供綜合練習的題目</h1></main>;
-  if (done) return <main className="quiz"><h1>綜合練習已提交</h1><p>錯題與作答紀錄已分別寫回原次單元；不影響最高成績或完成度。</p><button onClick={onBack}>返回首頁</button></main>;
-  const key = `${row.unit.id}:${row.q.id}`;
-  return <main className="quiz"><div className="sectionhead"><button onClick={onBack}>離開</button><strong>綜合練習 {i + 1} / {rows.length}</strong></div><PracticeHint /><p>{row.unit.title}</p><h2>{row.q.text}</h2><div className="options">{row.q.options.map((o) => <button key={o.id} className={selected[key] === o.id ? 'chosen' : ''} onClick={() => setSelected((x) => ({ ...x, [key]: o.id }))}>{o.text}</button>)}</div><div className="sectionhead"><button disabled={i === 0} onClick={() => setI(i - 1)}>上一題</button>{i < rows.length - 1 ? <button className="primary" onClick={() => setI(i + 1)}>下一題</button> : <button className="primary" disabled={busy} onClick={submit}>完成並提交</button>}</div></main>;
 }
 function Quiz({
   questions,

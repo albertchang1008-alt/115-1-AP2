@@ -4,7 +4,7 @@ export type StudentRoute =
   | { kind: 'activity'; unitId: string; activityId: string }
   | { kind: 'quiz'; unitId: string; mode: 'full' | 'draw'; count?: number }
   | { kind: 'flashcard'; unitId: string }
-  | { kind: 'mixed'; count: number }
+  | { kind: 'mixed'; count: number; practiceMode?: 'quiz' | 'review' | 'flashcard' }
   | { kind: 'wrongcards'; unitId: string };
 
 export function parseStudentRoute(hash: string, courseId: string): StudentRoute | null {
@@ -15,7 +15,7 @@ export function parseStudentRoute(hash: string, courseId: string): StudentRoute 
   if (!pathname.startsWith(base + '/')) return null;
   const rest = pathname.slice(base.length);
   const q = new URLSearchParams(rawQuery);
-  if (rest === '/mixed') { const n = Number(q.get('n')); return Number.isInteger(n) && [10, 20, 30, 50].includes(n) ? { kind: 'mixed', count: n } : null; }
+  if (rest === '/mixed') { const n = Number(q.get('n')), m = q.get('mode'); return Number.isInteger(n) && n >= 0 && n <= 50 ? { kind: 'mixed', count: n, ...(['quiz','review','flashcard'].includes(m || '') ? { practiceMode: m as 'quiz' | 'review' | 'flashcard' } : {}) } : null; }
   const unit = rest.match(/^\/unit\/([^/]+)$/);
   if (unit) {
     const tab = q.get('tab');
