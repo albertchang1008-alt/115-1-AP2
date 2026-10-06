@@ -58,6 +58,9 @@ export interface Unit {
   dueAt: string;
   bankVersion: string;
   questionCount?: number;
+  wrongCarry?: Record<string, { from: string; drop: string[] | '*' }>;
+  /** 同步寫入順序；資料庫 map 的鍵順序不能當成時間順序。 */
+  wrongCarryOrder?: string[];
   activities: Activity[];
   // 研究資料模式預設開啟；教師可逐單元關閉，與成績／完成資格分離。
   research?: { enabled: boolean };
@@ -205,12 +208,27 @@ export function reviewAttemptIsFull(history: NonNullable<Unit['review']>['histor
 export function normalizeProgress(p: Partial<Progress> | undefined | null): Progress {
   return { ...(p || {}), units: p?.units || {}, activities: p?.activities || {} } as Progress;
 }
-/** 唯一版本錯題讀取入口；保留已移除紀錄，供伺服器再次答錯時累加。 */
-export function effectiveWrong(unitProgress: Progress['units'][string] | undefined, _unitMeta: Partial<Unit> | undefined, currentVersion: string): Record<string, WrongEntry> {
-  const raw = unitProgress?.wrong?.[currentVersion];
-  return Array.isArray(raw) ? Object.fromEntries(raw.map((id) => [id, { n: 1, at: 0 }])) : { ...(raw || {}) };
+/** 唯一版本錯題讀取入口；延續包含 rm，供再次答錯累加，不改動原 progress。 */
+export function effectiveWrong(unitProgress: Progress['units'][string] | undefined, unitMeta: Partial<Unit> | undefined, currentVersion: string): Record<string, WrongEntry> {
+  const wrong = unitProgress?.wrong || {};
+  const normalize = (raw: Record<string, WrongEntry> | string[]) => Array.isArray(raw) ? Object.fromEntries(raw.map(id => [id, { n: 1, at: 0 }])) : { ...raw };
+  let version = currentVersion;
+  const visited = new Set<string>(), drop = new Set<string>();
+  for (let steps = 0; steps <= 10; steps++) {
+    if (visited.has(version)) return {};
+    visited.add(version);
+    if (Object.prototype.hasOwnProperty.call(wrong, version)) {
+      return Object.fromEntries(Object.entries(normalize(wrong[version])).filter(([id]) => !drop.has(id)));
+    }
+    if (steps === 10) return {};
+    const carry = unitMeta?.wrongCarry?.[version];
+    if (!carry || carry.drop === '*') return {};
+    carry.drop.forEach(id => drop.add(id));
+    version = carry.from;
+  }
+  return {};
 }
-export function wrongEntries(progress: Progress, unitId: string, version: string, unitMeta?: Partial<Unit>): Record<string, WrongEntry> {
+export function wrongEntries(progress: Progress, unitId: string, version: string, unitMeta: Partial<Unit> | undefined): Record<string, WrongEntry> {
   return Object.fromEntries(Object.entries(effectiveWrong(progress.units?.[unitId], unitMeta, version)).filter(([, e]) => e.rm === undefined));
 }
 export function taipeiDay(at: number): number { return Math.floor((at + 8 * 3600000) / 86400000); }

@@ -1,0 +1,29 @@
+{
+  "unit": {
+    "id": "u",
+    "bankVersion": "v3",
+    "wrongCarry": {
+      "v3": { "from": "v2", "drop": ["deleted"] },
+      "v2": { "from": "v1", "drop": ["changed"] }
+    }
+  },
+  "progress": {
+    "units": {
+      "u": {
+        "best": 80,
+        "attempts": 1,
+        "updatedAt": 1,
+        "wrong": {
+          "v1": {
+            "q": { "n": 4, "at": 1, "ok": 2 },
+            "removed": { "n": 7, "at": 1, "rm": 3 },
+            "changed": { "n": 2, "at": 1 },
+            "deleted": { "n": 3, "at": 1 }
+          }
+        }
+      }
+    },
+    "activities": {}
+  },
+  "expected": { "q": { "n": 4, "at": 1, "ok": 2 }, "removed": { "n": 7, "at": 1, "rm": 3 } }
+}

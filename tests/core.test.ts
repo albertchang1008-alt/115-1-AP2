@@ -1,3 +1,5 @@
+import { wrongCarryDrop, appendWrongCarry } from '../shared/wrongCarry';
+import carryFixture from './fixtures/wrong-carry.json';
 import { mixedScope, selectPracticeRows } from '../shared/practice';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -253,7 +255,7 @@ test('hidden 與逐班未勾選皆不會進入學生課程', () => {
 });
 test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
   let p: any = { units: { u: { best: 0, attempts: 1, updatedAt: 1, wrong: { v: ['q1'] } } }, activities: {} };
-  assert.deepEqual(wrongEntries(p, 'u', 'v'), { q1: { n: 1, at: 0 } });
+  assert.deepEqual(wrongEntries(p, 'u', 'v', { id: 'u', bankVersion: 'v' }), { q1: { n: 1, at: 0 } });
   p = applyAttempt(p, attempt({ version: 'v', clientAt: 10, answers: [{ questionId: 'q1', selected: 'b', correct: false, seconds: 1 }] }));
   assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 10 });
   p = applyAttempt(p, attempt({ id: 'clear', version: 'v', clientAt: 11, answers: [{ questionId: 'q1', selected: 'a', correct: true, seconds: 1 }] }));
@@ -262,7 +264,7 @@ test('錯題答錯累計、答對移除，舊陣列相容為 at: 0', () => {
 test('錯題閃卡不透過 applyAttempt 寫入任何學習狀態', () => {
   const p: any = { units: { u: { best: 80, attempts: 1, updatedAt: 1, wrong: { v: { q1: { n: 2, at: 3 } } } } }, attempted: { u: { q1: true } }, activities: {} };
   // 錯題閃卡是純展示；其唯一資料操作是 wrongEntries，並不呼叫 applyAttempt。
-  assert.deepEqual(Object.keys(wrongEntries(p, 'u', 'v')), ['q1']);
+  assert.deepEqual(Object.keys(wrongEntries(p, 'u', 'v', { id: 'u', bankVersion: 'v' })), ['q1']);
   assert.deepEqual(p.units.u.best, 80); assert.deepEqual(p.attempted.u, { q1: true }); assert.deepEqual(p.units.u.wrong.v.q1, { n: 2, at: 3 });
 });
 test('缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照', () => {
@@ -377,12 +379,12 @@ test('1.7.0 台北日界線、移除保留累計、同日答對與再次答錯',
   assert.deepEqual(updateWrong(r.entries, good, after + 1).entries, r.entries);
   assert.deepEqual(wrongGroups(r.entries, after), { today: {}, due: {} });
   const p: any = { units: { u: { wrong: { v: r.entries } } }, activities: {} };
-  assert.equal(Object.keys(wrongEntries(p, 'u', 'v')).length, 0);
-  assert.equal(effectiveWrong(p.units.u, {}, 'v').q.n, 1);
+  assert.equal(Object.keys(wrongEntries(p, 'u', 'v', { id: 'u', bankVersion: 'v' })).length, 0);
+  assert.equal(effectiveWrong(p.units.u, { id: 'u', bankVersion: 'v' }, 'v').q.n, 1);
   r = updateWrong(r.entries, bad, after);
   assert.deepEqual(r.entries.q, { n: 2, at: after });
   assert.deepEqual(updateWrong({ q: { n: 3, at: 0 } }, good, after).entries.q, { n: 3, at: 0, rm: after });
-  assert.deepEqual(effectiveWrong({ wrong: { v: ['q'] } } as any, {}, 'v'), { q: { n: 1, at: 0 } });
+  assert.deepEqual(effectiveWrong({ wrong: { v: ['q'] } } as any, { id: 'u', bankVersion: 'v' }, 'v'), { q: { n: 1, at: 0 } });
 });
 test('1.7.0 待複習排序與題數邊界', () => {
   const now = Date.parse('2026-10-06T02:00:00Z');
@@ -412,4 +414,47 @@ test('1.7.0 閃卡今天優先、抽題待複習優先／今天歸其他、跨�
   const u2:any={id:'u2',bankVersion:'v'};p.units.u2={wrong:{v:{due1:{n:4,at:0}}}};
   const picked=selectPracticeRows([...rows,{q:{...q,id:'due1'},unit:u2}],p,'review',2,now);
   assert.deepEqual(picked.map(r=>`${r.unit.id}:${r.q.id}`).sort(),['u2:due1','u:due1'].sort());
+});
+
+test('④ 正解文字比較：刪題、答案、選項數、題型重置；文字空白、換序與展示修改延續', () => {
+  const base = ['deleted', 'answer', 'count', 'type', 'display', 'space', 'shuffle'].map(id => ({...q,id}));
+  const next = base.filter(x=>x.id!=='deleted').map(x => {
+    if(x.id==='answer') return {...x,answer:'b'};
+    if(x.id==='count') return {...x,options:[...x.options,{id:'c',text:'C'}]};
+    if(x.id==='type') return {...x,questionType:'image' as const};
+    if(x.id==='display') return {...x,text:'新題幹',explanation:'新解析',image:'https://example.test/image.png',order:42,options:[x.options[0],{id:'b',text:'新干擾'}]};
+    if(x.id==='space') return {...x,options:[{id:'a',text:' \n A  \t'},x.options[1]]};
+    if(x.id==='shuffle') return {...x,answer:'b',options:[{id:'a',text:'B'},{id:'b',text:'A'}]};
+    return x;
+  }).reverse();
+  assert.deepEqual(wrongCarryDrop(base,Object.fromEntries(base.map(x=>[x.id,'a'])),next),{drop:['answer','count','deleted','type'],kept:3,changed:3,removed:1});
+  assert.equal(wrongCarryDrop([{...q,options:[{id:'a',text:' A  B '},{id:'b',text:'C'}]}],{q1:'a'},[{...q,questionType:'single',options:[{id:'a',text:'A\nB'},{id:'b',text:'C'}]}]).kept,1);
+});
+test('④ 共用 fixture：多段延續累積 drop，保留 n/at/ok/rm，不改舊資料', () => {
+  const original=structuredClone(carryFixture.progress);
+  assert.deepEqual(effectiveWrong(carryFixture.progress.units.u,carryFixture.unit,'v3'),carryFixture.expected);
+  assert.deepEqual(carryFixture.progress,original);
+  assert.deepEqual(wrongEntries(carryFixture.progress,'u','v3',carryFixture.unit),{q:carryFixture.expected.q});
+  assert.deepEqual(effectiveWrong({...carryFixture.progress.units.u,wrong:{v3:{}}},carryFixture.unit,'v3'),{});
+  assert.deepEqual(effectiveWrong({...carryFixture.progress.units.u,wrong:{v3:{direct:{n:9,at:4}},v1:carryFixture.expected}},carryFixture.unit,'v3'),{direct:{n:9,at:4}});
+  assert.deepEqual(effectiveWrong({wrong:{v1:['q','changed']}} as any,carryFixture.unit,'v2'),{q:{n:1,at:0}});
+});
+test('④ 延續防護：中斷、全部重算、循環、10段上限、單段扣除', () => {
+  const progress={wrong:{v0:{q:{n:2,at:0,ok:1,rm:2},drop:{n:1,at:0}}}} as any;
+  assert.deepEqual(effectiveWrong(progress,{wrongCarry:{v1:{from:'v0',drop:['drop']}}},'v1'),{q:progress.wrong.v0.q});
+  assert.deepEqual(effectiveWrong(progress,{},'v1'),{});
+  assert.deepEqual(effectiveWrong(progress,{wrongCarry:{v1:{from:'v0',drop:'*'}}},'v1'),{});
+  assert.deepEqual(effectiveWrong(progress,{wrongCarry:{v1:{from:'v2',drop:[]},v2:{from:'v1',drop:[]}}},'v1'),{});
+  const wrongCarry=Object.fromEntries(Array.from({length:11},(_,i)=>['v'+(i+1),{from:'v'+i,drop:[]}]));
+  assert.deepEqual(effectiveWrong(progress,{wrongCarry},'v10'),progress.wrong.v0);
+  assert.deepEqual(effectiveWrong(progress,{wrongCarry},'v11'),{});
+});
+test('④ 最近十筆按寫入順序保留，資料庫 map 排序不影響順序', () => {
+  let unit: ReturnType<typeof appendWrongCarry>={wrongCarry:{},wrongCarryOrder:[]};
+  for(let i=0;i<13;i++) unit=appendWrongCarry(unit,'hash'+i,{from:'hash'+(i-1),drop:[]});
+  unit.wrongCarry=Object.fromEntries(Object.entries(unit.wrongCarry).sort());
+  unit=appendWrongCarry(unit,'new',{from:'hash12',drop:[]});
+  assert.deepEqual(unit.wrongCarryOrder,[...Array.from({length:9},(_,i)=>'hash'+(i+4)),'new']);
+  assert.equal(Object.keys(unit.wrongCarry).length,10);
+  assert.equal(unit.wrongCarry.hash3,undefined);
 });

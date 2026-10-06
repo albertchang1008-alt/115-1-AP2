@@ -1,16 +1,20 @@
-# 1.7.0 練習模式待 Claude 驗收
+# 1.7.0 ①～④ 待 Claude 驗收
 
 2026-10-06｜分支 `feature/1.7.0-practice-modes`｜基底 `0cca83f`｜未 push、未部署。
 
-依 [第三版規格](PRACTICE_MODES_1.7.0.md) 完成①～③。① `b65418b`；② `819b237`；③提交標題「綜合練習選範圍與三種模式及手機驗收」。版本檔同步為 1.7.0。七項盤點完整結果在 [handoff](../handoff.md)。
+依 [第三版規格](PRACTICE_MODES_1.7.0.md) 完成①～④（①～③已由 Claude 驗收通過，④待驗收）。① `b65418b`；② `819b237`；③ `3ed3d7a`；④提交標題「錯題跨版本延續（同步讀舊版比對正解）」。版本檔同步為 1.7.0。七項盤點完整結果在 [handoff](../handoff.md)。
 
-## 第④段不做的原因
+## ④ 錯題跨版本延續
 
-ID 來自 Sheet 題目ID、內容雜湊僅決定 bankVersion，ID 可跨版本沿用。舊題庫／答案表是不可變快照，未被覆寫；**但現有同步讀取沒有取出舊正解**。`syncBankTabFromSheet` 讀課程→`publishBank` 讀**新版本** manifest→課程交易。舊答案 ID 在 grading 文件，正解文字／選項數量／題型在 chunks，課程 Unit 沒有答案特徵；要取得它們須新增 Firestore 讀取。
+依 [補充規格](WRONG_CARRY_1.7.0.md) 實作，取代主規格第3.6節與盤點第7點第二前提。教師已允許同步讀取舊版 manifest、grading/answers、全部 chunks；新題使用記憶體內容。只有分類改版才比對：正解文字（合併空白）、選項數、題型改變或刪題重置；題幹、解析、干擾項、圖片、題序、正解相同的選項代碼調換保留。
 
-因此「在不得新增讀取下，同步能同時取得新舊正解」不成立，依交辦跳過④。未新增 wrongCarry、教師全部重新計算核取方塊或延續訊息；教師同步後的延續畫面因此沒有截圖。`effectiveWrong` 保留介面，目前僅讀指定版本；改版仍分版本，不追溯。同步流程完全未改，亦未改寫任何學生 progress。
+- `wrongCarry` 與新 bankVersion 同交易更新；額外 `wrongCarryOrder` 保存寫入順序，避免 Firestore map 依雜湊鍵排序後錯刪最近版本，最多10筆。舊版讀取失敗寫 `'*'`，同步仍成功；勾選全部重算時直接寫 `'*'`，不讀舊版。
+- 共用 `effectiveWrong` 沿最多10段追溯、累積 drop，防循環；新版已實體化（包括空物件）直接使用。n／at／ok／rm 保留、string[] 相容。`wrongEntries` 的 Unit 參數改必填；全專案搜尋確認學生、教師進度與匯出共用路徑都傳 Unit。
+- `publishCourse` 與 `forClass` 原本完整展開 Unit，無須補欄位；實際 callable 測試確認兩次草稿同步後發布保留完整鏈。同步不讀寫任何 progress；學生首頁、練習與交卷不新增 Firestore 讀取。首次交卷由私有答案表重批，再透過既有 applyAttempt 實體化新版 wrong，舊版紀錄保留。
+- 複習考重建清除延續欄位，維持改版重新計算；部署前未記錄鏈的同步不追溯。日期仍使用 Asia/Taipei 日曆日，綜合練習範圍維持 current。
+- 教師核取方塊預設不勾，API 傳 `resetWrong`；每個改版分類顯示延續／全部重算／讀取失敗訊息，未改版不顯示。
 
-替代方案：另案制定伺服器專用答案特徵，隨既有課程文件保存，學生回應剔除；未來同步用既有課程讀取比較，第一輪沒有舊特徵不延續。需先確認文件大小與併發／發布一致性。本次不自行引入此額外資料模型。
+新增測試涵蓋補充規格第7節：所有比較條件、單段／多段／中斷／重算／循環／10段界線、最近10筆排序；實際同步／發布／交卷／複習考重建 callable；前後端共用 `tests/fixtures/wrong-carry.json` 比對；React 預設與三種結果。資料庫替身記錄 reads/writes，檢查同步零 progress 寫入、重算不讀舊版、學生交卷只讀新版既有文件。全部測試使用本機合成資料。
 
 ## 行為與驗證
 
@@ -23,7 +27,7 @@ ID 來自 Sheet 題目ID、內容雜湊僅決定 bankVersion，ID 可跨版本�
 - 範圍依首頁單元順序、三態勾選、預設全選／收合、courseId＋uid 本機存排除ID；新增分類預設包含、過期ID忽略、讀寫失敗安全退回。不選分類時全部停用，少於10題時顯示全部。
 - 範圍數字只用課程／progress；按練習後僅載選取分類。閃卡今天→待複習→未作答→其他；抽題待複習→未作答→其他（今天錯題不進未作答群）；錯題重做跨分類排序後取N。全部不計分，手機三列、44px觸控與閃卡底部安全區。
 
-完整檢查：每個 commit 前 `npm run check` 與 `git diff --check`，最終前端129個／Functions20個測試、兩端build、版本一致性與diff檢查全部通過；涵蓋純函式、實際 React 操作、Student 導覽、Functions callable 行為與兩端 build。沒有使用正式學生帳號或正式 Firestore；仍需 Claude 驗收與教師另行決定部署。
+完整檢查：每個 commit 前 `npm run check` 與 `git diff --check`，④最終前端134個／Functions26個測試、兩端build、版本一致性與diff檢查全部通過；涵蓋純函式、實際 React 操作、Student 導覽、Functions callable 行為與兩端 build。沒有使用正式學生帳號或正式 Firestore；仍需 Claude 驗收與教師另行決定部署。
 
 ## 桌機與手機截圖
 
@@ -40,4 +44,13 @@ ID 來自 Sheet 題目ID、內容雜湊僅決定 bankVersion，ID 可跨版本�
 | 綜合練習部分勾選 | [截圖](practice-modes-1.7.0-screenshots/mixed-partial-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/mixed-partial-mobile.png) |
 | 綜合練習全不選 | [截圖](practice-modes-1.7.0-screenshots/mixed-none-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/mixed-none-mobile.png) |
 
-教師同步延續畫面：第④段依前提不成立跳過，沒有對應畫面。正式題庫同步畫面保持原功能。
+## ④ 教師同步桌機截圖
+
+實際 Bank React 元件，本機合成同步回應；1280×1000。無 JavaScript 錯誤／橫向溢位，未連正式 Sheet 或 Firestore。重產：`node scripts/wrong-carry-shots.mjs`；[機器紀錄](practice-modes-1.7.0-screenshots/wrong-carry-checks.json)。
+
+| 狀態 | 桌機 |
+|---|---|
+| 核取方塊預設不勾與說明 | [截圖](practice-modes-1.7.0-screenshots/sync-checkbox-desktop.png) |
+| 延續：保留37、重置3（改答案2、刪除1） | [截圖](practice-modes-1.7.0-screenshots/sync-carry-desktop.png) |
+| 勾選全部重算 | [截圖](practice-modes-1.7.0-screenshots/sync-reset-desktop.png) |
+| 舊版讀取失敗，同步完成並重算 | [截圖](practice-modes-1.7.0-screenshots/sync-failed-desktop.png) |

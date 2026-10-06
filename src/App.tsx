@@ -1,3 +1,4 @@
+import { carryMessage, CarryResult } from '../shared/wrongCarry';
 import ChapterMergeDialog from './ChapterMergeDialog';
 import { NewCourse, ClassManager } from './CourseSetup';
 import { QuestionImage, Explanations } from './QuestionContent';
@@ -1021,7 +1022,9 @@ export function Bank({
     [search, setSearch] = useState(''),
     [busy, setBusy] = useState(false),
     [sheetId, setSheetId] = useState(''),
-    [sheetBusy, setSheetBusy] = useState(false);
+    [sheetBusy, setSheetBusy] = useState(false),
+    [resetWrong, setResetWrong] = useState(false),
+    [carryResults, setCarryResults] = useState<{unitId:string;carry:CarryResult}[]>([]);
   const unit = course.units.find((u) => u.id === unitId);
   useEffect(() => {
     request.current++;
@@ -1077,6 +1080,8 @@ export function Bank({
             setBusy(false);
           }} />
         </div>
+        <label className="wrong-carry-reset"><input type="checkbox" checked={resetWrong} disabled={api.preview || busy} onChange={e => setResetWrong(e.target.checked)} />這次改版後，錯題全部重新計算</label>
+        <p className="muted">不勾：只有正解改變或刪除的題目會從學生錯題中移除；勾選：所有改版分類的錯題重新計算</p>
         <div className="actions">
           <button
             className="primary"
@@ -1084,9 +1089,11 @@ export function Bank({
             onClick={async () => {
               setBusy(true);
               try {
-                const r = await api.call<any>('syncSheet');
+                setCarryResults([]);
+                const r = await api.call<any>('syncSheet', { resetWrong });
                 await onSynced();
                 const mine = (r.banks || []).filter((bank: any) => bank.sourceCourseId === course.id || bank.courseId === course.id);
+                setCarryResults(mine.filter((bank: any) => bank.carry !== undefined && !bank.error).map((bank: any) => ({unitId:bank.unitId,carry:bank.carry})));
                 const stale = [...new Set(mine.flatMap((bank: any) => bank.staleUnits || []))];
                 if (mine.some((bank: any) => bank.error)) {
                   const errors = mine.filter((bank: any) => bank.error).slice(0, 3)
@@ -1113,6 +1120,7 @@ export function Bank({
           </button>
           <span className="badge">{unit?.bankVersion || '未連接題庫'}</span>
         </div>
+        {carryResults.length > 0 && <div className="wrong-carry-results" role="status" aria-live="polite">{carryResults.map(row => <p key={row.unitId}><strong>{row.unitId}</strong>｜{carryMessage(row.carry)}</p>)}</div>}
       </section>
       <section className="panel">
         <div className="sectionhead">

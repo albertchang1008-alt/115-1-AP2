@@ -519,3 +519,22 @@ test('1.7.0 Student 整合：單元閃卡不產生進度、返回路由、首頁
     assert.deepEqual(errors,[]);
   }finally{await browser.close();}
 });
+
+test('④ 教師同步 React：預設不勾、傳入重算旗標、三種結果與未改版無訊息',async()=>{
+  const {buildSync}=await import('esbuild'),{chromium}=await import('playwright');
+  const bundle=buildSync({entryPoints:['tests/fixtures/wrong-carry-sync.tsx'],bundle:true,write:false,format:'iife',platform:'browser',define:{'import.meta.env':'{}','process.env.NODE_ENV':'"production"'}}).outputFiles[0].text;
+  const browser=await chromium.launch({channel:'chrome'});
+  try{
+    const page=await browser.newPage({viewport:{width:1280,height:1000}}),errors:string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));await page.route('http://localhost/',r=>r.fulfill({contentType:'text/html',body:'<div id="root"></div>'}));
+    await page.goto('http://localhost/');await page.addStyleTag({content:await readFile('src/style.css','utf8')});await page.addScriptTag({content:bundle});await page.evaluate(()=>(window as any).carryTest.mount());
+    const checkbox=page.getByRole('checkbox',{name:'這次改版後，錯題全部重新計算',exact:true});await checkbox.waitFor();assert.equal(await checkbox.isChecked(),false);
+    await page.getByRole('button',{name:'同步題庫',exact:true}).click();await page.getByText('錯題延續：保留 37 題，重置 3 題（正解改變 2、刪除 1）',{exact:false}).waitFor();
+    assert.equal(await page.locator('.wrong-carry-results p').count(),1);
+    assert.equal(await page.evaluate(()=>(window as any).carryTest.calls.find((x:any)=>x.name==='syncSheet').data.resetWrong),false);
+    await checkbox.check();await page.getByRole('button',{name:'同步題庫',exact:true}).click();await page.getByText('錯題已全部重新計算',{exact:false}).waitFor();
+    assert.equal(await page.evaluate(()=>(window as any).carryTest.calls.filter((x:any)=>x.name==='syncSheet').at(-1).data.resetWrong),true);
+    await checkbox.uncheck();await page.evaluate(()=>(window as any).carryTest.setMode('failed'));await page.getByRole('button',{name:'同步題庫',exact:true}).click();await page.getByText('舊版題庫讀取失敗，錯題重新計算',{exact:false}).waitFor();
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
+});

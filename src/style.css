@@ -1870,3 +1870,6 @@ body { padding-bottom: 60px; }
 .flashcard .options button:disabled { opacity:1; cursor:default; }
 
 .mixed-practice-buttons .practice-wrong.empty { padding:10px 14px; }
+.wrong-carry-reset { display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer; }
+.wrong-carry-results { margin-top:12px; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--soft); }
+.wrong-carry-results p { margin:6px 0; }

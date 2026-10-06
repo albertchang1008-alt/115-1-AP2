@@ -1,3 +1,4 @@
+import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wrongCarry';
 import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
 import { initializeApp } from 'firebase-admin/app';
@@ -572,6 +573,9 @@ export const buildReviewExam = onCall(options, async (req) => {
     const entry = { version: result.version, drawCount, allocation, builtAt };
     const review = { sourceUnitIds, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])), drawCount, allocation, builtAt, history: [entry, ...(old?.review?.history || [])].slice(0, 10) };
     const unit: Unit = old ? { ...old, bankVersion: result.version, questionCount: drawCount, review } : { id: name, title: name, group: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: result.version, questionCount: drawCount, activities: [], visibility: 'hidden', review };
+    // 複習考重建不延續；即使舊資料有此欄位也不帶入新題目池。
+    delete unit.wrongCarry;
+    delete unit.wrongCarryOrder;
     const chapters = { ...(latest.chapters || {}), ...(old ? {} : { [name]: { title: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }) };
     tx.update(ref, { 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, 'draft.chapterOrder': old ? latest.chapterOrder : [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name], updatedAt: Date.now() });
   });
@@ -1235,7 +1239,7 @@ function newUnitFromSheet(unitId: string, group: string | undefined, bankVersion
   return { id: unitId, title: unitId, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion, questionCount, activities: [], visibility: 'hidden', ...(group ? { group } : {}) };
 }
 // 匯出供測試直接呼叫（不是 onCall，Firebase 部署時不會把它當成雲端函式）。
-export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string, expectedCourseId?: string) {
+export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, uid: string, expectedCourseId?: string, resetWrong = false) {
   // 題庫分頁名稱就是課程代碼；正式題庫表內不再重複填課程代碼。
   // 第二個參數保留作沒有「次單元」欄的舊格式 fallback，避免既有 Sheet 失效。
   const groups = parseBankSheet(rows, tabTitle, tabTitle);
@@ -1257,18 +1261,45 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
         const reviewClash = (course.data()?.draft as Course).units.find((u) => isReviewUnit(u) && (u.id === unitId || u.id === group));
         if (reviewClash) fail(`名稱「${reviewClash.id}」已被複習考使用，請改名`);
         const result = await publishBank(courseId, unitId, questions);
-        let created = false;
+        const source = (course.data()?.draft as Course).units.find(u => u.id === unitId);
+        let change: { from: string; drop: string[] | '*'; carry: CarryResult } | undefined;
+        if (source?.bankVersion && source.bankVersion !== result.version && !isReviewUnit(source)) {
+          if (resetWrong) change = { from: source.bankVersion, drop: '*', carry: 'reset' };
+          else {
+            try {
+              const oldRef = db.doc(`banks/${courseId}_${unitId}_${source.bankVersion}`);
+              const manifest = await oldRef.get();
+              if (!manifest.exists || !Array.isArray(manifest.data()?.chunks)) throw new Error('舊版 manifest 不存在');
+              const [grading, chunks] = await Promise.all([
+                oldRef.collection('grading').doc('answers').get(),
+                Promise.all(manifest.data()!.chunks.map((ch: string) => oldRef.collection('chunks').doc(ch).get())),
+              ]);
+              if (!grading.exists || chunks.some(d => !d.exists || !Array.isArray(d.data()?.questions))) throw new Error('舊版答案或題目不完整');
+              const diff = wrongCarryDrop(chunks.flatMap(d => d.data()!.questions) as Question[], grading.data()!.answers || {}, questions);
+              change = { from: source.bankVersion, drop: diff.drop, carry: { kept: diff.kept, changed: diff.changed, removed: diff.removed } };
+            } catch {
+              change = { from: source.bankVersion, drop: '*', carry: 'failed' };
+            }
+          }
+        }
+        let created = false, carry: CarryResult | undefined;
         await db.runTransaction(async (tx) => {
           const current = await tx.get(ref);
           const draft = current.data()?.draft as Course;
           if (!current.data()?.teacherIds?.includes(uid)) fail('課程權限已變更');
           const existing = draft.units.find((u) => u.id === unitId);
           created = !existing;
+          carry = undefined;
+          // 舊版讀取在交易外；交易中核對版本，避免延續指向其他同步剛寫入的錯誤版本。
+          if (existing?.bankVersion && existing.bankVersion !== result.version && existing.bankVersion !== source?.bankVersion) fail('題庫版本在同步期間變更，請重新同步');
+          const carryPatch = change && existing?.bankVersion === change.from && existing.bankVersion !== result.version
+            ? appendWrongCarry(existing, result.version, { from: change.from, drop: change.drop }) : {};
+          if ('wrongCarry' in carryPatch) carry = change!.carry;
           // 題目分類的名稱一律跟著 Sheet 的次單元欄；後台沒有改名介面，既有 title 若與
           // 代碼不同，都是 1.3.x 舊結構留下的（例如代碼「血液成分與血漿」被改名為
           // 「課程簡介」），會讓後台與學生端顯示的分類名稱對不上 Sheet。
           const nextUnit = existing
-            ? { ...existing, title: unitId, bankVersion: result.version, questionCount: result.count, ...(group ? { group } : {}) }
+            ? { ...existing, ...carryPatch, title: unitId, bankVersion: result.version, questionCount: result.count, ...(group ? { group } : {}) }
             : newUnitFromSheet(unitId, group, result.version, result.count);
           const chapterKey = group || unitId;
           const chapters = draft.chapters || {};
@@ -1291,7 +1322,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
             },
           });
         });
-        results.push({ courseId, unitId, group, created, ...result });
+        results.push({ courseId, unitId, group, created, ...result, ...(carry !== undefined ? { carry } : {}) });
       } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
     }
   }
@@ -1387,7 +1418,7 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
           banks.push({ courseId, sourceTab: title, error: `課程分頁「${title}」缺少題庫必要欄位` });
           continue;
         }
-        const r = await syncBankTabFromSheet(rows, title, p.uid, courseId);
+        const r = await syncBankTabFromSheet(rows, title, p.uid, courseId, req.data?.resetWrong === true);
         banks.push(...r.map((bank) => ({ ...bank, sourceTab: title, sourceCourseId: courseId })));
       } catch (e) {
         banks.push({ courseId, sourceTab: title, error: (e as Error).message });

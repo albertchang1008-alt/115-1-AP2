@@ -1,7 +1,6 @@
 # 專案交接（現況）
 
 目前版本：1.7.0
-
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
 > 2026-09-23 以前的完整交接歷史：`docs/archive/handoff-2026-09-23.md`（需要查舊決策脈絡時才讀，平常不用讀）。
@@ -15,18 +14,19 @@
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
 ## 目前狀態（2026-10-06）
-
-**1.7.0 練習模式：①～③ Claude 驗收通過；④ 待 Codex 依 `docs/WRONG_CARRY_1.7.0.md` 實作（2026-10-06）**。教師決定：①～④ 完整後才部署；綜合練習不放寬（維持 current）；④ 要做，同步時可讀舊版題庫比對正解（「不新增讀取」只限學生端）：分支 `feature/1.7.0-practice-modes`，基底 `0cca83f`；規格 `docs/PRACTICE_MODES_1.7.0.md` 第三版。未 push／部署，Excel 既有修改不納入提交；以下1～7為動工前盤點（①～③已依規格改版）。
+**1.7.0 ①～④ 待 Claude 驗收**。①～③於2026-10-06已通過 Claude 驗收；④已依 `docs/WRONG_CARRY_1.7.0.md` 完成，待本次複驗。分支 `feature/1.7.0-practice-modes`；① `b65418b`、② `819b237`、③ `3ed3d7a`；④本次單一 commit「feat: 錯題跨版本延續（同步讀舊版比對正解）[Codex]」。未 push／部署；html/ Excel 既有修改未納入。教師決定①～④完整驗收後才部署，綜合範圍維持 current。
+動工前七項盤點（①～③依主規格第三版；④依補充規格，過期限制已取代）：
 1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
 2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。
 3. 答對現況：applyAttempt 直接刪除該錯題，答錯累加；改為隔日標 rm、同日標 ok、再錯保留累計 n。
 4. 綜合練習：MixedPractice 篩 `!isReviewUnit && visibility=current && bankVersion`，含已達標但仍 current／選看，排除 archived／hidden／複習考；進入練習才載全部候選題庫，錯題→未作答→其他補滿。後端僅 quiz/full=false，分分類寫 wrong／attempted、不更新 best。新選範圍沿用候選條件，僅載勾選分類。
 5. 複習考錯題現為翻卡；有獨立 Unit、bankVersion、wrong，改逐題重做、題數選擇，仍無閃卡／抽題。
 6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
-7. ID 取自 Sheet 題目ID，內容雜湊只產版本、attempted 依 ID 跨版累計，前提成立。syncBankTabFromSheet→publishBank→課程交易；舊快照未覆寫，但現有讀取只有課程與「新版本」manifest，沒有舊 grading／chunks／正解文字，不能在不新增 Firestore 讀取下同時取得新舊正解，第二前提不成立；Unit 可增欄不增讀取。**commit ④ 不做**。替代：另案先於既有課程文件保存伺服器專用答案特徵（不得洩漏學生），未來同步可用既有課程讀取比較；第一輪無舊特徵不追溯。需獨立規格確認儲存位置／大小與併發後再實作，本次維持跨版分開。
-- 衝突皆依第三版修正；錯題複習題數採畫面內小按鈕列，手機沿用練習展開選單。學習理由：錯題重做屬提取練習，隔日答對才排除短期記憶；今天剛錯先翻卡，待複習再重做，移除保留 n。
-- ① `b65418b`、② `819b237` 已提交；③綜合範圍／手機／截圖為本次提交「feat: 綜合練習選範圍與三種模式及手機驗收 [Codex]」；最終 check 前端129／Functions20、兩端build、版本一致及 diff 檢查通過。④依第7點不做。驗收報告與16張桌機／手機截圖見 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`；教師同步延續畫面未實作／無截圖。**Claude 驗收（2026-10-06）**：逐行審 shared/model.ts（updateWrong／wrongGroups／taipeiDay）、shared/practice.ts、functions submitAttempt／submitMixedAttempts，規則與第三版一致（隔日 rm 保留 n、同日 ok、再錯清 rm 累加、at:0 視為待複習、review 不寫 attempted、閃卡不呼叫後端、重送冪等）；8 組截圖符合；Functions 20 測試 Claude 親跑通過（前端測試因 macOS node_modules 無法在 VM 跑，採 Codex 結果）。小建議不擋部署：閃卡翻面時學生選錯的選項只有文字提示、未標紅。**下一步**：Codex 依 `docs/WRONG_CARRY_1.7.0.md`（取代主規格 3.6 節）實作 ④ 一個 commit → Claude 驗收 ①～④ → 教師部署。未 push／部署。
-
+7. 題目 ID 取自 Sheet 題目ID，跨版固定；舊版是不可變快照。教師新決定允許同步讀取舊 grading/answers、manifest及全部chunks，故可比對新舊正解，不再跳過④。Unit 的 wrongCarry 與 bankVersion 同交易寫入，wrongCarryOrder 明確保存最近10筆寫入順序；同步不碰任何 progress。
+- 所有 effectiveWrong／wrongEntries 呼叫已確認傳 Unit（教師學生進度／匯出經共用分類狀態函式）。共用純函式累積drop追溯最多10段，保留n／at／ok／rm；首次伺服器重批交卷才實體化新版wrong，舊紀錄保留。
+- 發布課程／forClass 原路徑保留完整 Unit，實際測試證明連續同步兩次再發布的鏈完整。教師重算不讀舊版；舊版讀取失敗以 '*' 重算且同步成功。新增讀取只在教師同步，學生既有讀取路徑不變。
+- 複習考重建不延續、移除wrongCarry／wrongCarryOrder；部署前沒有鏈的同步不追溯。教師核取方塊預設不勾，顯示三種同步結果。
+- 本次 `npm run check`：前端134／Functions26測試、兩端build／版本一致檢查通過；`git diff --check`通過。驗收報告 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`，保留16張學生桌機／手機圖，新增4張教師同步桌機圖；全為本機合成資料。下一步 Claude 驗收④與①～④整體 → 教師決定部署。
 | 項目 | 狀態 |
 |---|---|
 | 正式站 | **1.6.4**。`origin/main`＝`dc8c045`（2026-10-03 教師以 deploy.sh 部署：Functions 成功；Pages Actions success；`version.json`＝1.6.4、`manifest.webmanifest` 可取得，Claude 確認）。含第一階段補齊教材、1.6.3 節點點擊、1.6.4 合併單元與兩層選單、心臟II 圖像化、favicon |
@@ -72,7 +72,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 **資料與架構**
 1. 學生入口 GitHub Pages，資料 Firebase（專案 `ap2-7ed91`，asia-east1）；舊題庫系統資料完全隔離。
 2. 成績一律由後端以私有答案表重批，前端分數不採信。完整作答才更新最高分；錯題複習、抽題、綜合練習不更新最高分與完成度。
-3. 已發布題庫為不可變快照（版本＝內容雜湊）；最高分跨版沿用、錯題仍按版本分開（1.7.0第④段因零新增讀取前提不成立未做）。所有錯題經 shared effectiveWrong 讀取，移除標 rm 保留 n，再錯累加；同日答對標 ok，Asia/Taipei 隔日答對才移除。
+3. 題庫改版時錯題依題目 ID 延續；正解文字／選項數／題型改變或刪除的題目重置；教師可勾選全部重新計算；同步時讀舊版題庫比對（僅教師操作）；複習考與部署前的同步不延續。已發布快照不可變、最高分跨版沿用。所有錯題經 effectiveWrong；rm保留n，再錯累加；同日ok，Asia/Taipei隔日答對才移除。
 4. 代碼（課程／單元／班級）由教師自訂，可中文、英數、`-`、`_`，不可空白標點，≤50 字，建立後不改。題目 ID 等仍限英數。
 5. 時間欄位（datetime-local 無時區）一律以台灣 +08:00 解讀（`parseCourseTime`）。
 6. Firestore 不接受 undefined 欄位：要清除的欄位直接省略。
