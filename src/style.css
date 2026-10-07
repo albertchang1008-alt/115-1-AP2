@@ -1914,3 +1914,5 @@ body { padding-bottom: 60px; }
   .completion-popover { width: 100%; max-width: 100%; max-height: 85vh; border-radius: 18px 18px 0 0; padding: 22px; padding-bottom: max(22px, env(safe-area-inset-bottom)); }
   .completion-popover .sectionhead h2 { min-width: 0; overflow-wrap: anywhere; }
 }
+
+.completion-legend { display: flex; flex-wrap: wrap; gap: 0.5em 1.2em; }

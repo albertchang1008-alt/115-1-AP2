@@ -14,8 +14,8 @@
 - 任務基底 feature/1.7.0-practice-modes＝e8805f8（先依交辦提交既有交接及兩份規格，訊息 docs: 交接更新 [Claude]）。Git 過期 index.lock 已確認無 Git 程序後清除。
 - 工作1分支 feature/respiratory-infographics：7份preview（各6節點／11題）與49張SVG、可拖曳氧解離曲線；未build、未登錄、Excel未動。教材實作依規格須等教師看畫面才commit，目前改動留本機。
 - 工作1B報告：/Users/HHC/Dropbox/耕莘/antigravity/072026 新的專案/05_review/Q3疑點研究_6題.md。Q3-28答案有爭議，其餘五題答案成立但需修解析；僅報告，未改Excel／卡片／進度，B未套入A。
-- 原子卡第四輪26張已 self_checked，QC 0 error／warn；報告位於上述外部專案05_review/midterm_cards_round4_report.md，待Claude獨立驗收；總數88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked。right-left-main-bronchi已由教師更正核可為reviewed。
-- 工作2：feature/1.7.1-completion-board 從 e8805f8 獨立分出；工作目錄為 .worktrees/completion-board。各班比較＋學生矩陣／chapterCellState／名冊加權統計／CSV與明細完成，check139／26及兩端build通過；6張1280／390截圖與報告 docs/COMPLETION_BOARD_1.7.1_ACCEPTANCE.md，本次工作已提交（完整commit以git log -1為準），待Claude獨立驗收；工作1未納入此分支。
+- 原子卡第四輪26張已 self_checked，QC 0 error／warn；報告位於上述外部專案05_review/midterm_cards_round4_report.md，10/7三項修正完成，待Claude複驗；總數88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked。right-left-main-bronchi已由教師更正核可為reviewed。
+- 工作2：feature/1.7.1-completion-board 從 e8805f8 獨立分出；工作目錄為 .worktrees/completion-board。各班比較＋學生矩陣／chapterCellState／名冊加權統計／CSV與明細完成，check140／26及兩端build通過；6張1280／390截圖與報告 docs/COMPLETION_BOARD_1.7.1_ACCEPTANCE.md，本次工作已提交（完整commit以git log -1為準），10/7三項修正完成，待Claude複驗；工作1未納入此分支。
 
 ## 部署方式（教師執行）
 ```sh
@@ -72,3 +72,5 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 快照INTERNAL：教師10/6決定本輪不修。下輪先查正式log；已本機重現forClass無條件research:undefined造成Firestore拒絕，需省略欄位＋真實序列化回歸測試，保留進度。
 - 未排程：passedAt首次達標後端行為測試、題目作廢重算、diagnostics.summary索引排除、firebase-functions升級、App拆檔、真實學生端到端驗收。
 - 研究前後測／等值遷移題及Google Sheet名冊、單元欄由教師提供。
+
+- 10/7修正單：選看與不可計分不判逾期，圖例間隔及明細分隔已修；新增回歸測試、check140／26及6張截圖通過。修正由本分支提交，未push／部署。

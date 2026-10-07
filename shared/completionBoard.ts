@@ -31,8 +31,9 @@ export function chapterCellState(course: Course, name: string, p: Progress, now 
           : 'notStarted';
   return {
     state,
-    overdue: due < now && !result.done,
-    lateDone: result.done && units.some((u) => (p.units?.[u.id]?.passedAt || 0) > due),
+    overdue: result.eligible && due < now && !result.done,
+    lateDone:
+      result.eligible && result.done && units.some((u) => (p.units?.[u.id]?.passedAt || 0) > due),
     eligible: result.eligible,
   };
 }

@@ -193,3 +193,28 @@ test('既有getCompletion分頁讀完53人；失敗不回傳部分名單、重�
     /重新發布/,
   );
 });
+
+test('選看及不可計分單元不標逾期，也不影響逾期人數與CSV', () => {
+  const optional = structuredClone(c);
+  for (const chapter of Object.values(optional.chapters!)) chapter.required = false;
+  delete optional.chapterOverrides;
+  const course = forClass(optional, '護二甲');
+  for (const r of rows.護二甲) {
+    for (const { name } of orderedChapters(course)) {
+      const cell = chapterCellState(course, name, r.progress, now);
+      assert.equal(cell.eligible, false);
+      assert.equal(cell.overdue, false);
+      assert.equal(cell.lateDone, false);
+    }
+  }
+  assert.equal(classCompletionSummary(optional, '護二甲', rows.護二甲, now).overdue, 0);
+  assert(
+    matrixCsv(optional, '護二甲', rows.護二甲, now).every((r) =>
+      Object.values(r).every((value) => !String(value).includes('逾期')),
+    ),
+  );
+  const unscored = structuredClone(visible);
+  for (const u of Object.values(unscored.units)) u.bankVersion = '';
+  for (const ch of Object.values(unscored.chapters!)) ch.activities = [];
+  assert.equal(chapterCellState(unscored, '血液', emptyProgress(), now).overdue, false);
+});

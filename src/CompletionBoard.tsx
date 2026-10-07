@@ -469,8 +469,11 @@ export default function CompletionBoard({
               </label>
             </div>
             <p className="completion-legend">
-              ● 完成　◐ 進行中　○ 未開始　⊘ 未開放　
-              <span className="completion-overdue-label">逾：逾期未完成</span>　
+              <span>● 完成</span>
+              <span>◐ 進行中</span>
+              <span>○ 未開始</span>
+              <span>⊘ 未開放</span>
+              <span className="completion-overdue-label">逾：逾期未完成</span>
               <span className="muted">● 逾：逾期完成</span>
             </p>
             {!selected ? (
@@ -587,8 +590,8 @@ export default function CompletionBoard({
                   <section key={u.id}>
                     <h4>{u.title}</h4>
                     <p>
-                      最高分：{p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
-                      　作答 {p?.attempts || 0} 次
+                      最高分 {p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
+                      ｜作答 {p?.attempts || 0} 次
                     </p>
                     {!u.bankVersion && <p className="muted">題庫未發布，不列入測驗完成條件。</p>}
                     {!!p?.passedAt && <p>首次達標：{fullTime(p.passedAt)}</p>}
