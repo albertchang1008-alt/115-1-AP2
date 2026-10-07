@@ -1,19 +1,18 @@
 # 專案交接（現況）
-
 目前版本：1.7.0
 > 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
 > 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
 > 2026-09-23 以前的完整交接歷史：`docs/archive/handoff-2026-09-23.md`（需要查舊決策脈絡時才讀，平常不用讀）。
 
 ## 給接手的 AI agent
-
 1. 開工只需讀本檔＋`git log --oneline -5`；需要某功能細節時再讀對應 `docs/*.md`。不要整份讀 `DEVELOPMENT_LOG.md` 或 archive。
 2. 改動前 `git branch --show-current`；未經教師明確同意，不 push、不合併、不部署 `main`（push main＝GitHub Pages 自動上線）。
 3. 收工前更新本檔：改「目前狀態」「待辦」，把完成的項目移出（一兩行寫進 `DEVELOPMENT_LOG.md`）。不要在本檔追加流水帳。
 4. Commit 結尾附身分標註（Claude：`Co-Authored-By: <model> <noreply@anthropic.com>`＋session 連結；Codex：`[Codex]`）。不用 `--no-verify`、不強推、不略過測試。
 5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
 
-## 目前狀態（2026-10-06）
+## 目前狀態（2026-10-07）
+- 期中考第四輪（2026-10-07）：26 張章節缺口卡一次完成，全數 self_checked，QC 0 error／warn、blocked 0／合併 0；42 筆來源頁完整配對，check_data 172→198，原178筆進度／172筆配對不變。報告 `05_review/midterm_cards_round4_report.md`，6張原書文字／涵蓋限制已標 needs_review。最新全專案88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked；69 reviewed為既有教師結果，本輪未推。分支feature/1.7.0-practice-modes／HEAD8429640，僅交接文件未提交，平台程式未改／未push或部署。
 **1.7.0 ①～④ Claude 驗收全部通過（2026-10-06），待教師以 deploy.sh 從 `feature/1.7.0-practice-modes` 部署**。④驗收：審 `shared/wrongCarry.ts`、`effectiveWrong` 追鏈、`syncBankTabFromSheet` 讀舊版與交易內版本核對、複習考排除；Functions 26 測試 Claude 親跑通過；同步畫面截圖符合。Claude 驗收時小修：同步完成後自動取消「錯題全部重新計算」勾選（`src/App.tsx` 一行，tsc 通過），避免下次同步沿用而誤清錯題。部署後實測：在正式站改一題錯字同步，確認訊息為「保留…重置 0 題」。（2026-10-06 Claude 依教師確認將 `html/資訊圖表題庫_上傳用.xlsx` 還原為 HEAD：本機版為 10/5 被舊副本覆蓋，只有 162 列、缺第 163–228 列共 66 題，無新增內容；工作目錄已乾淨，可直接部署。）分支 `feature/1.7.0-practice-modes`；① `b65418b`、② `819b237`、③ `3ed3d7a`；④本次單一 commit「feat: 錯題跨版本延續（同步讀舊版比對正解）[Codex]」。未 push／部署；html/ Excel 既有修改未納入。教師決定①～④完整驗收後才部署，綜合範圍維持 current。
 動工前七項盤點（①～③依主規格第三版；④依補充規格，過期限制已取代）：
 1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
@@ -55,7 +54,6 @@
 | 止血機制 v2 例外與名稱 | **教師決定（2026-09-25）**：止血機制 v2 保留阿斯匹靈、肝硬化與血友病、華法林三段補充說明；名稱統一為「止血機制與凝血」（Excel 次單元、html 草稿檔名 `html/止血機制與凝血.html`）。 |
 | 1.5.1 練習計分說明 | `hotfix/1.5.1-practice-hint`：學生端「尚未完整作答」與練習不計分提示，已部署（main `cc0dc3b`）；2026-09-25 已併入 `feature/ecg-basics`。部署後 `feature/material-kit` 需先 `git merge main` 才能再部署 |
 | 本機 exclude | `.git/info/exclude` 暫列 `html/心電圖與心律不整解析.html`（教師新教材，尚未進 git）與 `materials-src/heart-structure/shots/`；要納入心電圖教材時先從 exclude 移除 |
-
 ## 部署方式（教師在自己的 Mac 執行）
 
 ```
@@ -94,7 +92,6 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 14. 所有 `font-size` 寫成 `calc(Npx * var(--font-scale, 1))`；色系／字級選單在頂端 `.prefs-bar`。
 15. 登入固定 `prompt: 'select_account'`；「切換帳號」沿用 `doSwitchAccount()`。
 16. 教材卡：一般閱讀 HTML 標「閱讀教材」，只有 `tracking === 'interactive'` 標「互動資訊圖表」。
-
 **互動教材與研究資料**
 17. 教材以公開 SDK `materials/course-learning.js` 回報探索、節點停留、每次作答、通關；不傳姓名／學號／信箱。發布路徑 `public/materials/<slug>-vN/index.html`，登錄於 `shared/materials.ts`，內容重大變更開新版本不覆寫。教師後台填節點／題目分母（寫入時快照，事後不回溯）。
 18. 教材格式：六個固定節點＋教學圖；卡片內「圖→概念→重點→臨床」；第一關 6 題先備逐題解鎖、第二關 5 題病例全對通關（答錯只給提示並要求回讀）。節點／題目 ID 固定英數。NotebookLM 只產初稿，不含追蹤；流程見 `docs/NOTEBOOKLM_HTML_WORKFLOW.md`。
@@ -103,9 +100,16 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 21. 測試學生帳號用 `config/testStudents` 白名單，只放寬信箱網域，放專屬測試班。
 22. 教材建置流程：agent 先用 `npm run materials:preview <slug>`（只產生教材檔、不登錄教材目錄）＋`npm run materials:shots <slug>`，**停下來請教師看畫面**；教師滿意後才執行 `npm run materials:build <slug>` 完成登錄並 commit。不要直接改 `public/materials/` 的 HTML，也不要用教材工作室重複匯入元件庫建置的教材。 **教師決定（2026-10-01）：每份新資訊圖表定稿後，必須把 6 先備＋5 情境題寫入 `html/資訊圖表題庫_上傳用.xlsx`**（欄位同既有列：題目 ID 與教材一致、單選四選一、正確答案代碼與 Zuvio 序號、解析＋①～④引導式解析、講義標題與教材連結；選項打散；「說明」分頁更新次單元來源與合計題數），未寫入題庫不算完成。**只能在最後增列新列，既有列一律不得修改、刪除或重新排序（已上傳平台、學生已在作答；改動會讓該分類產生新題庫版本）。**
 23. **用語（教師決定 2026-10-03）：一律使用台灣課本用語，不用大陸用語**（例：心搏量非每搏量、紅血球非紅細胞、微血管非毛細血管、受器非感受器、黏度非粘度、點選非點擊）。新教材與修改都要掃描用語；學生看得到的地方不得留下「⚠️」「請教師決定」等草稿註記。
-
+24. **藥物與疾病（教師決定 2026-10-07）：Q1–Q8 任何題目內容和藥物或疾病有關，一律納入「國考延伸」補充教材**（9/25「正式教材不放疾病藥物」的配套）；出處第一順位指定課本、第二順位其他課本並逐句註明。規格見 Project 文件「期中考國考延伸補充教材規格」第 5 節。
 ## 待辦
-
+**期中考（呼吸・泌尿・體液，11/9–11/13）準備（2026-10-06 Claude）**
+- 期中考下一步：Claude獨立驗第四輪26張（生成者Codex，不得自驗），教師確認來源限制並抽查；先前67張中66張已reviewed、right-left-main-bronchi被教師退回blocked（未註原因，待教師說明，本輪未碰）。原5項無出處仍待補充教材；18個章節缺口已拆26張補建，不再是未建待辦。依教師決定，Q3／Q4暫不上平台，Excel／題目不改；第四輪報告與保護比對已存外部專案05_review。
+- 教師決定（2026-10-07，`05_review/期中考原子卡抽查清單.xlsx` 待決定事項）：5 項課本無出處→補充教材後建卡（教材來源待定）；Q4-29 不發布；17 項題目／解析疑點先標註不動作（已註記於 Q3-Q4 解析總表，備份 `05_review/backups/teacher_decisions_2026-10-07/`）；18 個章節缺口補建卡→拆成 26 張交 Codex 第四輪。
+- 教師抽查完成（2026-10-07）：68 張核可→`reviewed`（frontmatter 已同步），`right-left-main-bronchi` 先退回、教師後更正為核可（共 69 張 reviewed）。Q3-Q4 解析總表已同步 ⑤欄／primary卡／發布狀態：132 題「可發布」、17 題「待教師確認（標註疑點）」、6 題「擋住：課本無出處」、Q4-29 不發布（同步前備份在 `05_review/backups/teacher_decisions_2026-10-07/`）。下一步：Q3／Q4 132 題上平台（Sheet 貼上＋同步）；教師說明 right-left-main-bronchi 退回原因；補充教材來源待教師決定；Codex 第四輪 26 張。
+- 教師決定（2026-10-07）：氣胸、減壓病、利尿劑、腎自體調節、腎衰竭／透析為國考題，補充後放入平台教材（9/25「不放疾病藥物」的例外）；出處第一順位指定課本、第二順位其他課本並註明。規格草案在 Project 文件「期中考國考延伸補充教材規格」（新教材 slug `exam-extension-resp-renal`＋5 張卡），教師已核定：Q4-84 不寫數字、併入標註疑點組暫不發布；Q3／Q4 132 題先不上平台；Codex 第四輪26張已交件、待Claude驗證；國考延伸教材＋5張卡待第四輪驗收與正式規格交辦，本輪未開始。
+- **2026-10-07 已交辦 Codex**：見 `CODEX_TASK_2026-10-07.md`（工作 1 呼吸 7 份＋疑點研究、工作 2 完成度看板 1.7.1，依序、各自分支）。
+- 完成度看板 1.7.1（教師選方案 B＋外層各班比較）：規格 `docs/COMPLETION_BOARD_1.7.1_SPEC.md`，只改前端，從 `feature/1.7.0-practice-modes` 開 `feature/1.7.1-completion-board`。
+- 呼吸 7 份資訊圖表（2026-10-07 教師核定、一次做完）：Codex 規格 `docs/RESPIRATORY_INFOGRAPHICS_SPEC.md`（A：7 份 preview＋shots 後停下給教師看，核可才 build＋Excel 第 229 列起 77 題、單元「呼吸系統」；B：Q3-2/28/39/49/52/60 疑點研究，只出報告 `05_review/Q3疑點研究_6題.md`）。解析總表 Q3「單元」欄已改 7 類（Q3-19 歸呼吸道的構造；備份 `05_review/backups/resp_7cat_2026-10-07/`）。right-left-main-bronchi：教師更正「卡片沒有錯」→ reviewed（AB-05_13 p.10 已核），併入 ① 節點 6，Q3-19 primary 改此卡。
 **部署後教師待辦（1.6.2 已於 2026-10-02 上線）**
 - ①題庫 `html/資訊圖表題庫_上傳用.xlsx` 第 108–162 列（55 題）貼到 Google Sheet 題庫分頁後按同步；②後台為五個新單元（血管構造解析、循環路線、血壓的調控、淋巴系統、血液動力學）建立互動教材活動（連各 `<slug>-v1`，6 節點／11 題）。
 - `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
@@ -128,7 +132,6 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 - 題庫讀取／版本徽章沿所選次單元；報表保留「全部」，此時次單元停用，仍依 Unit ID 篩選；研究資料頁依單元 optgroup 分組。
 - 純前端顯示；資料結構／後端功能／完成度不變。版本檔全部同步 1.6.4；check 117 前端／18 Functions 及兩端 build 通過，新增實際 React 頁面操作測試。
 - 報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md`；下一步 Claude 驗收選單。圖像修正本次完成待複驗，未 push／部署、main 未動。
-
 - **部署後教師**：①第 108–162 列（若尚未貼）與第 163–228 列貼上 Sheet 題庫分頁並同步；②建立「心臟II」單元；③教材活動：心臟II＝電性活動、心電圖基礎、心輸出量、血壓測量、微血管交換、主要動靜脈；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。
 **待 Claude 驗收**
 - 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。

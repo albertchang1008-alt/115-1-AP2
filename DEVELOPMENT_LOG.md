@@ -2,6 +2,28 @@
 
 目前版本：1.7.0
 
+## 期中考第四輪：26張章節缺口卡整批交件（2026-10-07，Codex，平台版本不變）
+
+- 依教師核定18項缺口拆26張，逐頁讀指定課本、26張獨立卡一次生成，26組來源樣本逐字自檢及42筆primary／supporting原文配對；新卡群related雙向連結、比較純文字表、五段講義不照抄。全數self_checked、review_status draft，整批QC及寫回後QC均0 error／warn，blocked=0／合併=0；未自驗或推reviewed。
+- 報告 `05_review/midterm_cards_round4_report.md`，含逐卡出處、來源限制、QC／stats；6張原書文字或涵蓋界限標needs_review。check_data 172→198，原172筆不變；todo204列僅26筆pending→drafted→self_checked，原178列不變。3更新檔先備份，543個既有卡／PDF／xlsx／索引／舊日誌等SHA-256不變；17題疑點、原5項無出處及教師退回左右主支氣管皆未處理，第五輪未開始。
+- 最新全專案88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked（教師此前已有69 reviewed）；待Claude獨立驗新26張、教師確認來源與抽查，再依另行交辦進入第五輪。平台分支feature/1.7.0-practice-modes／HEAD8429640，僅交接與開發紀錄更新，未改程式／commit／push／部署。
+
+## 期中考第三輪：僅重驗 RAAS（2026-10-07，Codex，平台版本不變）
+
+- 重讀交辦第三輪與 Claude 修訂版 RAAS，實際 fetch CH05 p.66–67、逐條比對五個專業段落及講義；前輪三項缺出處延伸已移除，5 段引文逐字吻合，裁決 PASS→awaiting_teacher_review（verifier codex）。指定日誌 `05_review/verification_log_midterm_round2_codex.md` 保留前輪 REVISE、追加本輪 PASS，verify_audit 0 error／warn、exit 0；兩列皆同一 uid，本輪僅驗一張。
+- 只更新 RAAS 進度、指定驗證日誌及交辦執行紀錄；177 個其他進度列及 534 個其他檔案保持不變，未改卡／check_data／PDF／Excel／索引／reviewed。66 張期中卡＋RAAS 共67張待教師抽查；全專案157 awaiting_teacher_review／15 self_checked／5 blocked／1 reviewed。平台分支 feature/1.7.0-practice-modes／HEAD 8429640，僅交接紀錄更新，未 commit／push／部署。
+
+## 期中考原子卡第二輪修訂與 RAAS 獨立驗證（2026-10-07，Codex，平台版本不變）
+
+- Dropbox「072026 新的專案」依第二輪逐列完成：7 張 REVISE 修正後重送 self_checked；8 張指定台灣課本用語、2 張補 supporting；63 張刪 393 處來源括號，整批 QC PASS（0 error／warn）。PASS 卡逐字限制比對通過，未自驗自生卡；報告 `05_review/midterm_cards_round2_report.md`，含各卡逐字 diff。
+- Claude 生成 RAAS 卡以 Codex 獨立裁決 REVISE→blocked：ACE 抑制劑延伸、感壓反射「數秒」及高血壓藥物「大半」未獲指定來源支持；3 段逐字引文確認存在，verify_audit PASS。卡片原文保留；原 5 項無出處不變。全專案進度 149 awaiting_teacher_review／22 self_checked／6 blocked／1 reviewed。
+- check_data 維持 172 筆，其他 109 筆不變；178 進度列中其餘 170 列不變。66 個既有修訂檔先備份，197 個非目標卡／PDF／xlsx／索引／舊日誌等 SHA-256 不變；寫回後再次 QC／audit 通過。待 Claude 重驗 7 張、核對 PASS 用語並修 RAAS、教師抽查與來源裁定；平台分支 feature/1.7.0-practice-modes／HEAD 8429640，僅更新本交接紀錄，未改程式／commit／push／部署。
+
+## 期中考原子卡整批交件（2026-10-07，Codex，平台版本不變）
+
+- Dropbox「072026 新的專案」依交辦處理68項：63張新卡通過QC（error=0、warn=0），進度self_checked；5項來源不足blocked，未造無來源卡。完整報告 `05_review/midterm_cards_report.md`，附130頁稽核、18項章節缺口清單與每卡題目／來源／限制。
+- check_data由106增至169，279個卡片來源頁引用均核對原文完整收錄；154個既有卡／PDF／題庫Excel等保護檔案SHA-256不變，既有進度列不變。三個更新檔已有同專案backup；待Claude獨立驗證及教師抽查，未發布。平台程式未改，分支feature/1.7.0-practice-modes／HEAD 8429640，未commit／push／部署。
+
 ## 1.7.0 ④ 錯題跨版本延續（2026-10-06，Codex，①～④ 待 Claude 驗收）
 
 - 依 `docs/WRONG_CARRY_1.7.0.md` 取代原跳過④的結論：教師同步可讀舊版 manifest／私有grading／chunks，按正解文字、選項數、題型、刪題判斷重置；展示內容變更保留。
