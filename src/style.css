@@ -1873,3 +1873,44 @@ body { padding-bottom: 60px; }
 .wrong-carry-reset { display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer; }
 .wrong-carry-results { margin-top:12px; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--soft); }
 .wrong-carry-results p { margin:6px 0; }
+
+/* Teacher completion board: only the matrix scrolls horizontally. */
+.completion-board { min-width: 0; max-width: 100%; }
+.completion-board .panel { min-width: 0; }
+.completion-toolbar { flex-wrap: wrap; gap: 12px; }
+.completion-toolbar h2 { margin: 0; }
+.completion-toolbar button, .completion-view { white-space: nowrap; flex-shrink: 0; }
+.completion-toolbar label { display: flex; align-items: center; gap: 8px; }
+.completion-toolbar .completion-filter input { flex: none; width: auto; }
+.completion-tablewrap { position: relative; max-width: 100%; isolation: isolate; }
+.completion-tablewrap table { min-width: 740px; width: max-content; }
+.completion-tablewrap th, .completion-tablewrap td { min-width: 100px; text-align: center; padding: 12px; white-space: nowrap; }
+.completion-tablewrap .completion-identity { position: sticky; left: 0; z-index: 2; min-width: 180px; text-align: left; background: var(--surface, #fff); box-shadow: 2px 0 0 var(--line, #e1e9ef); }
+.completion-board-name { display: block; white-space: nowrap; }
+.completion-total { font-weight: 600; background: var(--soft, #f3f8fb); }
+.completion-rate { border: 0; background: transparent; color: inherit; min-width: 64px; padding: 8px; box-shadow: none; }
+.completion-classrow { cursor: pointer; }
+.completion-classrow:hover { outline: 1px solid var(--accent, #0ea5e9); outline-offset: -1px; }
+.completion-cell { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-width: 54px; min-height: 42px; font-size: calc(21px * var(--font-scale, 1)); border-color: var(--line, #e1e9ef); }
+.completion-cell small { font-size: calc(12px * var(--font-scale, 1)); }
+.completion-cell.state-done { color: #237256; background: #edf7f1; }
+.completion-cell.state-inProgress { color: #9a6515; background: #fff7e8; }
+.completion-cell.state-notOpen { color: var(--muted, #758593); background: var(--surface, #fff); }
+.completion-cell.is-overdue { border: 2px solid #b63c48; color: #b63c48; }
+.completion-optional { color: var(--muted, #758593); }
+.completion-overdue-label { color: #b63c48; }
+.completion-legend { font-size: calc(13px * var(--font-scale, 1)); line-height: 1.8; }
+.completion-popover { width: 620px; }
+.completion-popover h2 { font-size: calc(21px * var(--font-scale, 1)); }
+.completion-popover h4 { margin: 0 0 8px; }
+.completion-category-list section { border-bottom: 1px solid var(--line, #e1e9ef); padding: 14px 0; }
+.completion-category-list p { margin: 5px 0; }
+@media (max-width: 600px) {
+  .completion-board .panel { padding: 16px; }
+  .completion-tablewrap .completion-identity { min-width: 154px; }
+  .completion-toolbar > input { min-width: 0; width: 100%; max-width: none; flex: 1 1 100%; }
+  .completion-toolbar h2 { width: 100%; font-size: calc(20px * var(--font-scale, 1)); }
+  .completion-shade { align-items: flex-end; padding: 0; }
+  .completion-popover { width: 100%; max-width: 100%; max-height: 85vh; border-radius: 18px 18px 0 0; padding: 22px; padding-bottom: max(22px, env(safe-area-inset-bottom)); }
+  .completion-popover .sectionhead h2 { min-width: 0; overflow-wrap: anywhere; }
+}

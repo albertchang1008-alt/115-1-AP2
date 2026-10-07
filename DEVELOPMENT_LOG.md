@@ -1,6 +1,16 @@
 # 開發紀錄
 
-目前版本：1.7.0
+目前版本：1.7.1
+
+## 1.7.1 — 2026-10-07 完成度看板：各班比較＋學生單元矩陣 [Codex]
+- 從e8805f8獨立建立feature/1.7.1-completion-board（.worktrees/completion-board），純前端；逐班讀完getCompletion分頁、頁面快取、各班／總人數加權完成率、姓名固定矩陣、逾期／未開放／進行中格子、明細抽屜、搜尋排序篩選及兩種CSV，保留StudentDetail。
+- 新增shared/completionBoard.ts顯示純函式與測試，不改公式v3、後端、Firestore、學生端或分析；版本全檔同步1.7.1。
+- check前端139／Functions26、兩端build、版本與diff檢查通過。兩班18人一致性／React操作、53人分頁及失敗、真實CSV下載、6張1280／390截圖見docs/COMPLETION_BOARD_1.7.1_ACCEPTANCE.md，待Claude驗收；未push／部署。
+
+## 2026-10-07 Codex 工作1：呼吸教材預覽與疑點研究（待教師看畫面）
+- feature/respiratory-infographics，基底e8805f8；七份6節點／11題、49張SVG、氧解離曲線拖曳；未登錄、未寫Excel，教材依交辦暫不commit。
+- 六題研究報告交Dropbox專案05_review/Q3疑點研究_6題.md，原始Excel／卡片／進度未改，B結論未套A；CH06 p.31已核對頸動脈體與主動脈體。
+- 將handoff整理為目前狀態，移除已完成與過期重複驗收資訊；先前功能歷史仍在本log。
 
 ## 期中考第四輪：26張章節缺口卡整批交件（2026-10-07，Codex，平台版本不變）
 
