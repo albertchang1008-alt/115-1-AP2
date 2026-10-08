@@ -1209,10 +1209,14 @@ function RosterPage({
             try {
               const r = await api.call<any>('syncRoster');
               await onSynced();
-              if (r.roster?.error) notify(`班級名冊同步未完成：${r.roster.error}`);
-              else {
-                const updated = (r.roster?.results || []).reduce((total: number, result: any) => total + (result.updated || 0), 0);
-                notify(r.roster?.changed ? `班級名冊同步完成：已更新 ${updated} 人` : `班級名冊內容一致，共 ${r.roster?.count || 0} 人，未重複寫入`);
+              const rosterResults: any[] = r.roster?.results || [];
+              if (r.roster?.error) {
+                const details = rosterResults.filter((result) => result.error).map((result) => `${result.courseId}：${result.error}`);
+                notify(`班級名冊同步未完成：${details.length ? details.join('｜') : r.roster.error}`);
+              } else {
+                const updated = rosterResults.reduce((total: number, result: any) => total + (result.updated || 0), 0);
+                const moved = rosterResults.reduce((total: number, result: any) => total + (result.emailChanged || 0), 0);
+                notify(r.roster?.changed ? `班級名冊同步完成：已更新 ${updated} 人${moved ? `（其中 ${moved} 人更換信箱）` : ''}` : `班級名冊內容一致，共 ${r.roster?.count || 0} 人，未重複寫入`);
               }
               setRows([]);
               setNext(null);
