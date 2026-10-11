@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-11",
+  "branch": "feature/micro-immuno-review",
+  "base": "e8805f8",
+  "status": "round4-four-points-complete-awaiting-review",
+  "results": [
+    {
+      "slug": "micro-bacteria-review",
+      "identicalExceptApprovedCredits": true,
+      "builtPayloadIdentical": true,
+      "validation": true,
+      "htmlBytes": 601062,
+      "sourceSha256": "76ea7a3228745b79ad8402f8e76ed23aab40c52227e69bfae5ddd676fe0acf31",
+      "adaptedSha256": "971a0fd7bfcb2af91c5f83cbf544af9f590ed2fadb37db8f9e1f727c506a841b",
+      "approvedHue": 22,
+      "onlyCreditsShapeChanged": true
+    },
+    {
+      "slug": "immuno-concepts-review",
+      "identicalExceptApprovedCredits": true,
+      "builtPayloadIdentical": true,
+      "validation": true,
+      "htmlBytes": 722749,
+      "sourceSha256": "8860f5fc740131b16ac17021e3aa9f19a1163113c7c88a522d9a1081503ba1b6",
+      "adaptedSha256": "8ec91965b10af5e97ca61f8a09ae37d4fd873b00a3ecffcda44b6a196f0c6f33",
+      "approvedHue": 216,
+      "onlyCreditsShapeChanged": true
+    }
+  ]
+}

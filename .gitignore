@@ -16,3 +16,6 @@ materials-src/*/shots/
 
 # Office 開檔時產生的鎖定檔
 ~$*
+
+# 微免驗收截圖只存本機，不納入版控或發布。
+/docs/micro-immuno-review-screenshots/

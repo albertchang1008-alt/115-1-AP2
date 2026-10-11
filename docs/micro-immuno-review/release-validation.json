@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-11",
+  "branch": "feature/micro-immuno-review",
+  "base": "e8805f8",
+  "fullCheckExitCode": 0,
+  "frontendTests": {
+    "pass": 134,
+    "fail": 0,
+    "skipped": 0
+  },
+  "functionsTests": {
+    "pass": 26,
+    "fail": 0,
+    "skipped": 0
+  },
+  "frontendBuild": true,
+  "functionsBuild": true,
+  "version": "1.7.0",
+  "materialsBuildAndSync": true,
+  "approvedPreviewHtmlUnchanged": true,
+  "contentChecks": [
+    {
+      "slug": "micro-bacteria-review",
+      "approvedContentUnchangedExceptCredits": true,
+      "htmlSha256": "323ffc5aeae0bdafe1cc8b4d6fb7caeb93f43d6014ac918f6070e8dd8e1e3e5b"
+    },
+    {
+      "slug": "immuno-concepts-review",
+      "approvedContentUnchangedExceptCredits": true,
+      "htmlSha256": "9120b7746d119c8f1102c62e491826572a59d7852062494411fe0087c779f328"
+    }
+  ],
+  "protectedCoreUnchanged": [
+    "scripts/materials-build.mjs",
+    "materials-src/kit/kit.js",
+    "materials-src/kit/kit.css",
+    "materials-src/kit/presentation.css"
+  ],
+  "catalogAdded": 2,
+  "excelAdded": 22,
+  "nodeTextAudit": "All 21 student materials and all 15 kit sources passed node text validation",
+  "galleryChecks": true,
+  "mainRefAtInspection": "3f6d925",
+  "completionBoardRef": "ed08854",
+  "push": false,
+  "merge": false,
+  "deploy": false
+}

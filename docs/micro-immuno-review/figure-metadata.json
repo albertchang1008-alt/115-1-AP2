@@ -1,0 +1,1904 @@
+[
+  {
+    "file": "micro-bacteria-review-node-01.svg",
+    "source": "MI-B-N01.png",
+    "webpBytes": 87062,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 125399,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1305
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 848,
+    "legendBaseline": 896,
+    "numberingMode": "group",
+    "heightRatio": 1.45,
+    "groups": [
+      {
+        "name": "細菌",
+        "indices": [
+          0,
+          6,
+          5,
+          1,
+          2,
+          4,
+          3
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "name": "人體細胞",
+        "indices": [
+          9,
+          8,
+          7,
+          10,
+          12,
+          11
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "name": "細菌形態",
+        "indices": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "細胞壁",
+        "xRatio": 0.2,
+        "yRatio": 0.36,
+        "number": 1,
+        "group": "細菌",
+        "markerOffset": [
+          -43,
+          -35
+        ]
+      },
+      {
+        "text": "細胞膜",
+        "xRatio": 0.21,
+        "yRatio": 0.373,
+        "number": 4,
+        "group": "細菌",
+        "markerOffset": [
+          -35,
+          35
+        ]
+      },
+      {
+        "text": "核區（環狀 DNA）",
+        "xRatio": 0.27,
+        "yRatio": 0.44,
+        "number": 5,
+        "group": "細菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "核糖體（70S）",
+        "xRatio": 0.27,
+        "yRatio": 0.51,
+        "number": 7,
+        "group": "細菌",
+        "markerOffset": [
+          35,
+          0
+        ]
+      },
+      {
+        "text": "質體",
+        "xRatio": 0.4,
+        "yRatio": 0.47,
+        "number": 6,
+        "group": "細菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "鞭毛",
+        "xRatio": 0.069751,
+        "yRatio": 0.40884,
+        "number": 3,
+        "group": "細菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "線毛",
+        "xRatio": 0.222376,
+        "yRatio": 0.309392,
+        "number": 2,
+        "group": "細菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "細胞核",
+        "xRatio": 0.7,
+        "yRatio": 0.36,
+        "number": 3,
+        "group": "人體細胞",
+        "markerOffset": [
+          40,
+          20
+        ]
+      },
+      {
+        "text": "核仁",
+        "xRatio": 0.66,
+        "yRatio": 0.33,
+        "number": 2,
+        "group": "人體細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "粒線體",
+        "xRatio": 0.68,
+        "yRatio": 0.14,
+        "number": 1,
+        "group": "人體細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "內質網",
+        "xRatio": 0.82,
+        "yRatio": 0.35,
+        "number": 4,
+        "group": "人體細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "高基氏體",
+        "xRatio": 0.74,
+        "yRatio": 0.57,
+        "number": 6,
+        "group": "人體細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "溶小體",
+        "xRatio": 0.61,
+        "yRatio": 0.56,
+        "number": 5,
+        "group": "人體細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "球菌（葡萄狀）",
+        "xRatio": 0.13,
+        "yRatio": 0.85,
+        "number": 1,
+        "group": "細菌形態",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "球菌（鏈狀）",
+        "xRatio": 0.35,
+        "yRatio": 0.84,
+        "number": 2,
+        "group": "細菌形態",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "桿菌",
+        "xRatio": 0.6,
+        "yRatio": 0.86,
+        "number": 3,
+        "group": "細菌形態",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "螺旋菌",
+        "xRatio": 0.82,
+        "yRatio": 0.85,
+        "number": 4,
+        "group": "細菌形態",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "micro-bacteria-review-node-02.svg",
+    "source": "MI-B-N02.png",
+    "webpBytes": 101236,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 141069,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      948
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 677,
+    "legendBaseline": 800.5,
+    "numberingMode": "group",
+    "heightRatio": 1.0533333333333332,
+    "groups": [
+      {
+        "name": "革蘭氏陽性菌",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "numbers": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "革蘭氏陰性菌",
+        "indices": [
+          3,
+          5,
+          4,
+          6,
+          7,
+          8,
+          9
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "磷壁酸",
+        "xRatio": 0.32,
+        "yRatio": 0.31,
+        "number": 1,
+        "group": "革蘭氏陽性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "厚肽聚醣",
+        "xRatio": 0.22,
+        "yRatio": 0.52,
+        "number": 2,
+        "group": "革蘭氏陽性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "細胞膜",
+        "xRatio": 0.22,
+        "yRatio": 0.7,
+        "number": 3,
+        "group": "革蘭氏陽性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "脂多糖（內毒素）",
+        "xRatio": 0.647786,
+        "yRatio": 0.30816,
+        "number": 1,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "外膜",
+        "xRatio": 0.720703,
+        "yRatio": 0.386285,
+        "number": 3,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "孔蛋白",
+        "xRatio": 0.62,
+        "yRatio": 0.42,
+        "number": 2,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "脂蛋白",
+        "xRatio": 0.6920572916666666,
+        "yRatio": 0.4939236111111111,
+        "number": 4,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          -35,
+          -8
+        ]
+      },
+      {
+        "text": "薄肽聚醣",
+        "xRatio": 0.71,
+        "yRatio": 0.53,
+        "number": 5,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "周質空間",
+        "xRatio": 0.7877604166666666,
+        "yRatio": 0.5928819444444444,
+        "number": 6,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          28,
+          -16
+        ]
+      },
+      {
+        "text": "細胞膜",
+        "xRatio": 0.779948,
+        "yRatio": 0.664062,
+        "number": 7,
+        "group": "革蘭氏陰性菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "micro-bacteria-review-node-03.svg",
+    "source": "MI-B-N03.png",
+    "webpBytes": 65670,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 91834,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      859
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 729,
+    "legendBaseline": 777,
+    "numberingMode": "group",
+    "heightRatio": 0.9544444444444444,
+    "groups": [
+      {
+        "name": "外毒素",
+        "indices": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "name": "內毒素",
+        "indices": [
+          4,
+          5,
+          6
+        ],
+        "numbers": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "細菌",
+        "xRatio": 0.2,
+        "yRatio": 0.39,
+        "number": 1,
+        "group": "外毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "外毒素",
+        "xRatio": 0.415,
+        "yRatio": 0.552,
+        "number": 3,
+        "group": "外毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "受體",
+        "xRatio": 0.252,
+        "yRatio": 0.608,
+        "number": 2,
+        "group": "外毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "宿主細胞",
+        "xRatio": 0.22,
+        "yRatio": 0.75,
+        "number": 4,
+        "group": "外毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "菌體破裂",
+        "xRatio": 0.77348,
+        "yRatio": 0.441989,
+        "number": 1,
+        "group": "內毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "脂多糖",
+        "xRatio": 0.7182320441988951,
+        "yRatio": 0.569060773480663,
+        "number": 2,
+        "group": "內毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "紅血球",
+        "xRatio": 0.76,
+        "yRatio": 0.73,
+        "number": 3,
+        "group": "內毒素",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "micro-bacteria-review-node-04.svg",
+    "source": "MI-B-N04.png",
+    "webpBytes": 67998,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 95695,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1063
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 802,
+    "legendBaseline": 850,
+    "numberingMode": "group",
+    "heightRatio": 1.181111111111111,
+    "groups": [
+      {
+        "name": "院內傳播與阻斷",
+        "indices": [
+          5,
+          4,
+          6,
+          7,
+          1,
+          3,
+          0,
+          2
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "傳染窩（第一床傷口）",
+        "xRatio": 0.156,
+        "yRatio": 0.546,
+        "number": 7,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "接觸傳播（手）",
+        "xRatio": 0.419,
+        "yRatio": 0.5,
+        "number": 5,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "共用聽診器",
+        "xRatio": 0.44268,
+        "yRatio": 0.610497,
+        "number": 8,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "潮濕水槽",
+        "xRatio": 0.926,
+        "yRatio": 0.405,
+        "number": 6,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          -32,
+          28
+        ]
+      },
+      {
+        "text": "入口（第二床傷口）",
+        "xRatio": 0.469,
+        "yRatio": 0.296,
+        "number": 2,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "易感宿主",
+        "xRatio": 0.454,
+        "yRatio": 0.169,
+        "number": 1,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "手部衛生（乾洗手液）",
+        "xRatio": 0.892,
+        "yRatio": 0.244,
+        "number": 3,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "手部衛生（洗手台）",
+        "xRatio": 0.946,
+        "yRatio": 0.37,
+        "number": 4,
+        "group": "院內傳播與阻斷",
+        "markerOffset": [
+          20,
+          -33
+        ]
+      }
+    ]
+  },
+  {
+    "file": "micro-bacteria-review-node-05.svg",
+    "source": "MI-B-N05.png",
+    "webpBytes": 51228,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 71185,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      913
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 718,
+    "legendBaseline": 766,
+    "numberingMode": "group",
+    "heightRatio": 1.0144444444444445,
+    "groups": [
+      {
+        "name": "滅菌",
+        "indices": [
+          0
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "消毒",
+        "indices": [
+          1
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "抗菌",
+        "indices": [
+          2
+        ],
+        "numbers": [
+          1
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "滅菌：高壓蒸氣 121℃ 15 分鐘",
+        "xRatio": 0.22,
+        "yRatio": 0.48,
+        "number": 1,
+        "group": "滅菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "消毒：環境表面",
+        "xRatio": 0.609807,
+        "yRatio": 0.41989,
+        "number": 1,
+        "group": "消毒",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗菌：皮膚",
+        "xRatio": 0.83,
+        "yRatio": 0.54,
+        "number": 1,
+        "group": "抗菌",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-01.svg",
+    "source": "MI-I-N01.png",
+    "webpBytes": 84570,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 117594,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1299
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 842,
+    "legendBaseline": 890,
+    "numberingMode": "group-continuous",
+    "heightRatio": 1.4433333333333334,
+    "groups": [
+      {
+        "name": "第一道防線",
+        "indices": [
+          1,
+          0
+        ],
+        "numbers": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "第二道防線",
+        "indices": [
+          3,
+          2
+        ],
+        "numbers": [
+          3,
+          4
+        ]
+      },
+      {
+        "name": "第三道防線",
+        "indices": [
+          4,
+          5
+        ],
+        "numbers": [
+          5,
+          6
+        ]
+      },
+      {
+        "name": "病原",
+        "indices": [
+          6
+        ],
+        "numbers": [
+          7
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "第一道防線：皮膚與黏膜（城牆、護城河）",
+        "xRatio": 0.55,
+        "yRatio": 0.71,
+        "number": 2,
+        "group": "第一道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "正常菌叢（牆外居民）",
+        "xRatio": 0.258,
+        "yRatio": 0.765,
+        "number": 1,
+        "group": "第一道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "第二道防線：吞噬細胞（守衛）",
+        "xRatio": 0.31,
+        "yRatio": 0.395,
+        "number": 4,
+        "group": "第二道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "發炎與發燒（烽火）",
+        "xRatio": 0.744,
+        "yRatio": 0.143,
+        "number": 3,
+        "group": "第二道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "第三道防線：淋巴球（拿鑰匙的士兵＝專一性）",
+        "xRatio": 0.43,
+        "yRatio": 0.46,
+        "number": 5,
+        "group": "第三道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "記憶（紀錄簿）",
+        "xRatio": 0.53,
+        "yRatio": 0.475,
+        "number": 6,
+        "group": "第三道防線",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "入侵的病原",
+        "xRatio": 0.204,
+        "yRatio": 0.583,
+        "number": 7,
+        "group": "病原",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-02.svg",
+    "source": "MI-I-N02.png",
+    "webpBytes": 73106,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 101191,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      981
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 851,
+    "legendBaseline": 899,
+    "numberingMode": "group",
+    "heightRatio": 1.09,
+    "groups": [
+      {
+        "name": "先天免疫",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "numbers": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "後天免疫",
+        "indices": [
+          3,
+          4,
+          5
+        ],
+        "numbers": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "巨噬細胞",
+        "xRatio": 0.23,
+        "yRatio": 0.28,
+        "number": 1,
+        "group": "先天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "嗜中性球",
+        "xRatio": 0.18,
+        "yRatio": 0.55,
+        "number": 2,
+        "group": "先天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "自然殺手細胞",
+        "xRatio": 0.15,
+        "yRatio": 0.79,
+        "number": 3,
+        "group": "先天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "B 細胞與抗體",
+        "xRatio": 0.63,
+        "yRatio": 0.26,
+        "number": 1,
+        "group": "後天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "T 細胞",
+        "xRatio": 0.63,
+        "yRatio": 0.55,
+        "number": 2,
+        "group": "後天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "記憶細胞",
+        "xRatio": 0.77,
+        "yRatio": 0.86,
+        "number": 3,
+        "group": "後天免疫",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-03.svg",
+    "source": "MI-I-N03.png",
+    "webpBytes": 83888,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 115701,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1281
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 1020,
+    "legendBaseline": 1068,
+    "numberingMode": "group",
+    "heightRatio": 1.4233333333333333,
+    "groups": [
+      {
+        "name": "天然主動",
+        "indices": [
+          0
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "人工主動",
+        "indices": [
+          1
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "天然被動",
+        "indices": [
+          2
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "人工被動",
+        "indices": [
+          3
+        ],
+        "numbers": [
+          1
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "天然主動（感染後康復）",
+        "xRatio": 0.20718232044198895,
+        "yRatio": 0.40515653775322286,
+        "number": 1,
+        "group": "天然主動",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "人工主動（疫苗）",
+        "xRatio": 0.76,
+        "yRatio": 0.295,
+        "number": 1,
+        "group": "人工主動",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "天然被動（胎盤 IgG）",
+        "xRatio": 0.275,
+        "yRatio": 0.784,
+        "number": 1,
+        "group": "天然被動",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "人工被動（抗蛇毒血清）",
+        "xRatio": 0.827,
+        "yRatio": 0.746,
+        "number": 1,
+        "group": "人工被動",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-04.svg",
+    "source": "MI-I-N04.png",
+    "webpBytes": 71078,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 102758,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1218
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 892,
+    "legendBaseline": 940,
+    "numberingMode": "group-continuous",
+    "heightRatio": 1.3533333333333333,
+    "groups": [
+      {
+        "name": "骨髓",
+        "indices": [
+          0,
+          1
+        ],
+        "numbers": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "骨髓系",
+        "indices": [
+          6,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "numbers": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "name": "淋巴系",
+        "indices": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "numbers": [
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "name": "次級淋巴器官",
+        "indices": [
+          12,
+          13,
+          14
+        ],
+        "numbers": [
+          13,
+          14,
+          15
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "骨髓",
+        "xRatio": 0.21408839779005526,
+        "yRatio": 0.7366482504604052,
+        "number": 1,
+        "group": "骨髓",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "造血幹細胞",
+        "xRatio": 0.347,
+        "yRatio": 0.824,
+        "number": 2,
+        "group": "骨髓",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "骨髓系：嗜中性球",
+        "xRatio": 0.104,
+        "yRatio": 0.29,
+        "number": 4,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "嗜酸性球",
+        "xRatio": 0.22,
+        "yRatio": 0.29,
+        "number": 5,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "嗜鹼性球",
+        "xRatio": 0.344,
+        "yRatio": 0.29,
+        "number": 6,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "單核球",
+        "xRatio": 0.485,
+        "yRatio": 0.302,
+        "number": 7,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "巨噬細胞",
+        "xRatio": 0.485,
+        "yRatio": 0.112,
+        "number": 3,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "樹突細胞",
+        "xRatio": 0.667,
+        "yRatio": 0.294,
+        "number": 8,
+        "group": "骨髓系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "淋巴系：B 細胞",
+        "xRatio": 0.671,
+        "yRatio": 0.51,
+        "number": 9,
+        "group": "淋巴系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "T 細胞",
+        "xRatio": 0.677,
+        "yRatio": 0.658,
+        "number": 10,
+        "group": "淋巴系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "胸腺",
+        "xRatio": 0.7603591160220995,
+        "yRatio": 0.6620626151012892,
+        "number": 11,
+        "group": "淋巴系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "自然殺手細胞",
+        "xRatio": 0.675,
+        "yRatio": 0.815,
+        "number": 12,
+        "group": "淋巴系",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "次級淋巴器官：淋巴結",
+        "xRatio": 0.923,
+        "yRatio": 0.376,
+        "number": 13,
+        "group": "次級淋巴器官",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "脾臟",
+        "xRatio": 0.923,
+        "yRatio": 0.594,
+        "number": 14,
+        "group": "次級淋巴器官",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "扁桃腺",
+        "xRatio": 0.925,
+        "yRatio": 0.8,
+        "number": 15,
+        "group": "次級淋巴器官",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-05.svg",
+    "source": "MI-I-N05.png",
+    "webpBytes": 36558,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 53636,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1129
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 868,
+    "legendBaseline": 916,
+    "numberingMode": "group-continuous",
+    "heightRatio": 1.2544444444444445,
+    "groups": [
+      {
+        "name": "抗原",
+        "indices": [
+          2,
+          1,
+          0,
+          3
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "name": "抗體",
+        "indices": [
+          7,
+          6,
+          4,
+          5
+        ],
+        "numbers": [
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "抗原",
+        "xRatio": 0.46,
+        "yRatio": 0.55,
+        "number": 3,
+        "group": "抗原",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗原決定位",
+        "xRatio": 0.318,
+        "yRatio": 0.546,
+        "number": 2,
+        "group": "抗原",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗原決定位",
+        "xRatio": 0.484,
+        "yRatio": 0.322,
+        "number": 1,
+        "group": "抗原",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗原決定位",
+        "xRatio": 0.624,
+        "yRatio": 0.575,
+        "number": 4,
+        "group": "抗原",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗體（已結合）",
+        "xRatio": 0.213,
+        "yRatio": 0.556,
+        "number": 7,
+        "group": "抗體",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗體（正在結合）",
+        "xRatio": 0.801,
+        "yRatio": 0.656,
+        "number": 8,
+        "group": "抗體",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "不吻合的抗體",
+        "xRatio": 0.737,
+        "yRatio": 0.178,
+        "number": 6,
+        "group": "抗體",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "抗體（正在結合）",
+        "xRatio": 0.4488950276243094,
+        "yRatio": 0.1731123388581952,
+        "number": 5,
+        "group": "抗體",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-06.svg",
+    "source": "MI-I-N06.png",
+    "webpBytes": 51078,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 73585,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1034
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 708,
+    "legendBaseline": 756,
+    "numberingMode": "group",
+    "heightRatio": 1.1488888888888888,
+    "groups": [
+      {
+        "name": "步驟 1",
+        "indices": [
+          0
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "步驟 2",
+        "indices": [
+          1
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "步驟 3",
+        "indices": [
+          2
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "name": "步驟 4",
+        "indices": [
+          3,
+          4
+        ],
+        "numbers": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "步驟 5",
+        "indices": [
+          5,
+          6,
+          7
+        ],
+        "numbers": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "1 抗原與 B 細胞受體結合",
+        "xRatio": 0.078,
+        "yRatio": 0.458,
+        "number": 1,
+        "group": "步驟 1",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "2 輔助型 T 細胞給訊號",
+        "xRatio": 0.296,
+        "yRatio": 0.517,
+        "number": 1,
+        "group": "步驟 2",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "3 增殖",
+        "xRatio": 0.486,
+        "yRatio": 0.518,
+        "number": 1,
+        "group": "步驟 3",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "4 漿細胞分泌抗體",
+        "xRatio": 0.657,
+        "yRatio": 0.443,
+        "number": 1,
+        "group": "步驟 4",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "4 記憶 B 細胞",
+        "xRatio": 0.663,
+        "yRatio": 0.71,
+        "number": 2,
+        "group": "步驟 4",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "5 抗體功能：調理作用",
+        "xRatio": 0.9,
+        "yRatio": 0.32,
+        "number": 1,
+        "group": "步驟 5",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "5 抗體功能：凝集",
+        "xRatio": 0.9,
+        "yRatio": 0.566,
+        "number": 2,
+        "group": "步驟 5",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "5 抗體功能：中和",
+        "xRatio": 0.905,
+        "yRatio": 0.698,
+        "number": 3,
+        "group": "步驟 5",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "file": "immuno-concepts-review-node-08.svg",
+    "source": "MI-I-N08.png",
+    "webpBytes": 50290,
+    "webpDimensions": [
+      1200,
+      900
+    ],
+    "svgBytes": 73488,
+    "viewBox": [
+      0,
+      0,
+      1200,
+      1049
+    ],
+    "imageBandY": 0,
+    "imageHeight": 900,
+    "visibleImageHeight": 723,
+    "legendBaseline": 771,
+    "numberingMode": "group",
+    "heightRatio": 1.1655555555555555,
+    "groups": [
+      {
+        "name": "CD4 輔助型 T 細胞",
+        "indices": [
+          4,
+          0,
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "name": "CD8 毒殺型 T 細胞",
+        "indices": [
+          10,
+          8,
+          7,
+          9
+        ],
+        "numbers": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "樹突細胞",
+        "xRatio": 0.114,
+        "yRatio": 0.461,
+        "number": 2,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "MHC＋抗原片段",
+        "xRatio": 0.176,
+        "yRatio": 0.465,
+        "number": 3,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "輔助型 T 細胞",
+        "xRatio": 0.24,
+        "yRatio": 0.471,
+        "number": 4,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "細胞激素",
+        "xRatio": 0.311,
+        "yRatio": 0.421,
+        "number": 5,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "B 細胞",
+        "xRatio": 0.403,
+        "yRatio": 0.291,
+        "number": 1,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "巨噬細胞",
+        "xRatio": 0.444,
+        "yRatio": 0.5,
+        "number": 6,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "毒殺型 T 細胞",
+        "xRatio": 0.402,
+        "yRatio": 0.691,
+        "number": 7,
+        "group": "CD4 輔助型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "受病毒感染的細胞",
+        "xRatio": 0.813,
+        "yRatio": 0.453,
+        "number": 3,
+        "group": "CD8 毒殺型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "細胞凋亡",
+        "xRatio": 0.907,
+        "yRatio": 0.317,
+        "number": 2,
+        "group": "CD8 毒殺型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "健康細胞",
+        "xRatio": 0.735,
+        "yRatio": 0.69,
+        "number": 4,
+        "group": "CD8 毒殺型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      },
+      {
+        "text": "毒殺型 T 細胞（CD8）",
+        "xRatio": 0.6422651933701657,
+        "yRatio": 0.45119705340699817,
+        "number": 1,
+        "group": "CD8 毒殺型 T 細胞",
+        "markerOffset": [
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]
