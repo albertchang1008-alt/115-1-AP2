@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-11",
+  "branch": "codex/release-1.7.1-micro-immuno",
+  "version": "1.7.1",
+  "completionBoardBase": "ed08854",
+  "microAmendedCommit": "465c375c40f9170559e01db6e3f2dee485ad82b7",
+  "originMainMerged": "3f6d92574c0c29b64a3cad2a352e9ce4add4b962",
+  "microCommitAddedPngWebpScreenshots": [],
+  "microScreenshotsTracked": false,
+  "microScreenshotsLocalOnly": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/micro-immuno-review/docs/micro-immuno-review-screenshots",
+  "materials": [
+    {
+      "slug": "micro-bacteria-review",
+      "nodeTotal": 6,
+      "questionTotal": 11,
+      "approvedHtmlUnchanged": true,
+      "sha256": "323ffc5aeae0bdafe1cc8b4d6fb7caeb93f43d6014ac918f6070e8dd8e1e3e5b"
+    },
+    {
+      "slug": "immuno-concepts-review",
+      "nodeTotal": 8,
+      "questionTotal": 11,
+      "approvedHtmlUnchanged": true,
+      "sha256": "9120b7746d119c8f1102c62e491826572a59d7852062494411fe0087c779f328"
+    }
+  ],
+  "excelQuestions": 249,
+  "excelRows": {
+    "micro-bacteria-review": [
+      229,
+      239
+    ],
+    "immuno-concepts-review": [
+      240,
+      250
+    ]
+  },
+  "excelMatchesClaudeAcceptedMicroCommit": true,
+  "excelSha256": "e115ec6e8818ab1b612451c9250f056df522e9c3db2db6155cba70948f09ff16",
+  "completionBoardSourcesMatchEd08854": true,
+  "rosterBackendAndErrorUiMatchLatestMain": true,
+  "unapprovedRespiratoryAndBloodFlowMaterialFilesExcluded": true,
+  "npmCi": true,
+  "functionsCi": true,
+  "materialsSync": true,
+  "fullCheckExitCode": 0,
+  "frontendTests": {
+    "pass": 140,
+    "fail": 0,
+    "skipped": 0
+  },
+  "functionsTests": {
+    "pass": 29,
+    "fail": 0,
+    "skipped": 0
+  },
+  "frontendBuild": true,
+  "functionsBuild": true,
+  "deployExecuted": false,
+  "pushExecuted": false
+}

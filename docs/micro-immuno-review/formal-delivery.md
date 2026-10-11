@@ -1,3 +1,5 @@
+整合更新（2026-10-11）：教師已核可正式交件並授權整合；1.7.1 release已完成、check140／29全過，待教師自行部署，未push／未執行deploy.sh。詳見 ../RELEASE_1.7.1_MICRO_IMMUNO_REPORT.md。下列1.7.0正式交件及部署建議保留為歷史紀錄。
+
 ## 教師核可後正式交件（2026-10-11）
 
 教師已核可兩份教材畫面，並授權正式 build、教材登錄、Excel 追加、完整 check 及本機 commit。本次平台版本仍為 1.7.0；分支為 `feature/micro-immuno-review`，基底 `e8805f8`。未 push、合併或部署，其他工作目錄未修改。

@@ -1,5 +1,11 @@
 # 開發紀錄
 
+## 1.7.1 看板＋微免release整合完成（2026-10-11，Codex）
+
+- 由ed08854建立指定release worktree與codex/release-1.7.1-micro-immuno，依序合併微免 465c375c40f9170559e01db6e3f2dee485ad82b7 與最新main 3f6d92574c0c29b64a3cad2a352e9ce4add4b962。handoff衝突已整合；版本維持1.7.1、看板檔及名冊後端與錯誤詳情UI逐項比對通過。
+- 微免142張本機截圖從未推送提交移出版控且.gitignore；教材內嵌圖不變。Excel與Claude核可檔完全相同249題（229–239細菌、240–250免疫），登錄與dist正式輸出一致；沒有呼吸／血流未核可教材。
+- 乾淨npm ci／functions ci、materials:sync、完整check通過：前端140／Functions29，0fail／skipped，版本與兩端build通過。報告、完整check與結構驗證交件；本機commit結尾[Codex]，停在乾淨release分支，未push／部署，教師自行執行deploy.sh。
+
 ## 2026-10-07｜1.7.1 Claude 驗收後修正 [Codex]
 
 - 選看與不可計分單元排除逾期標記、人数、排序／篩選及CSV；補回歸測試。

@@ -413,9 +413,12 @@ export const deleteCourse = onCall(options, async (req) => {
 async function writeEnrollments(uid: string, courseId: string, rows: Roster[], migrating = false) {
   const errors = validateRoster(rows, await testStudents());
   if (errors.length) fail(errors.join('；'));
-  let updated = 0;
+  let updated = 0, emailChanged = 0;
+  // 名冊以試算表為準：同一學號換了信箱時，把舊信箱的選課資料搬到新信箱。
+  // 舊信箱若仍出現在本次名冊（例如兩人互換信箱），不自動處理以免搬錯人。
+  const rosterEmails = new Set(rows.map((row) => row.email));
   for (let i = 0; i < rows.length; i += 100) {
-    updated += await db.runTransaction(async (tx) => {
+    const result = await db.runTransaction(async (tx) => {
       const course = await tx.get(db.doc(`courses/${code(courseId)}`));
       if (!course.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
       if (!migrating && course.data()?.rosterVersion !== 2) fail('請先在班級名冊預覽並轉換舊名冊');
@@ -427,23 +430,35 @@ async function writeEnrollments(uid: string, courseId: string, rows: Roster[], m
         const old = await tx.get(ref);
         const key = db.doc(`courses/${courseId}/studentIds/${id(row.studentId)}`);
         const existing = await tx.get(key);
-        if (existing.exists && existing.data()!.email !== row.email) fail('此課程學號已屬於其他信箱：' + row.studentId);
+        let moveFrom = null;
+        const previousEmail = existing.exists ? String(existing.data()!.email || '') : '';
+        if (previousEmail && previousEmail !== row.email) {
+          if (rosterEmails.has(previousEmail)) fail(`此課程學號已屬於其他信箱：${row.studentId}（${previousEmail} 仍在名冊中，請確認是否兩人信箱互換）`);
+          const previous = await tx.get(enrollmentRef(courseId, previousEmail));
+          if (previous.exists && previous.data()!.studentId !== row.studentId) fail(`此課程學號已屬於其他信箱：${row.studentId}（${previousEmail} 的選課資料學號不一致）`);
+          moveFrom = previous.exists ? enrollmentRef(courseId, previousEmail) : null;
+        }
         const oldKey = old.exists && old.data()!.studentId !== row.studentId ? db.doc(`courses/${courseId}/studentIds/${id(old.data()!.studentId)}`) : null;
         const oldKeySnap = oldKey ? await tx.get(oldKey) : null;
-        originals.push({ row, ref, old, key, existing, oldKey, oldKeySnap });
+        originals.push({ row, ref, old, key, existing, oldKey, oldKeySnap, previousEmail, moveFrom });
       }
-      let count = 0;
-      for (const { row, ref, old, key, existing, oldKey, oldKeySnap } of originals) {
-        if (migrating && old.exists) continue;
+      let count = 0, moved = 0;
+      for (const { row, ref, old, key, existing, oldKey, oldKeySnap, previousEmail, moveFrom } of originals) {
+        const emailChange = !!previousEmail && previousEmail !== row.email;
+        if (migrating && old.exists && !emailChange) continue;
         const value = { ...row, courseId };
         if (!old.exists || Object.entries(value).some(([k, v]) => old.data()![k] !== v)) { tx.set(ref, value); count++; }
-        if (!existing.exists) tx.set(key, { email: row.email });
+        if (!existing.exists || emailChange) tx.set(key, { email: row.email });
+        if (moveFrom) tx.delete(moveFrom);
+        if (emailChange) moved++;
         if (oldKey && oldKeySnap?.data()?.email === row.email) tx.delete(oldKey);
       }
-      return count;
+      return { count, moved };
     });
+    updated += result.count;
+    emailChanged += result.moved;
   }
-  return { count: rows.length, updated, changed: updated > 0 };
+  return { count: rows.length, updated, emailChanged, changed: updated > 0 };
 }
 export const importRoster = onCall(options, async (req) => {
   const { p } = await access(req, req.data.courseId, true);
@@ -1227,7 +1242,9 @@ async function syncRosterFromSheet(sheetId: string, token: string, p: any, title
     }
     catch (e) { results.push({ courseId, error: (e as Error).message + '；先前批次可能已保存，可修正後重試' }); }
   }
-  return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: results.some((r) => 'error' in r) ? '部分課程名冊未完成' : '' };
+  // 錯誤直接帶出「課程：原因」，前端舊版只顯示 error 字串時也看得到具體原因。
+  const failures = results.filter((r): r is { courseId: string; error: string } => 'error' in r).map((r) => `${r.courseId}：${r.error}`);
+  return { count: students.length, changed: results.some((r) => 'changed' in r && r.changed), results, error: failures.length ? '部分課程名冊未完成｜' + failures.join('｜') : '' };
 }
 // 次單元在課程草稿裡不存在時，直接依 Sheet 資料建立一個新單元（id=次單元、
 // title=次單元、group=單元），不再要求老師先手動在後台逐一建立——教師仍需

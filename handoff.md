@@ -9,11 +9,13 @@
 4. Claude 寫規格／獨立驗收，Codex 實作，教師裁定內容與部署。
 
 ## 目前狀態（2026-10-11）
-- release整合進行中：指定worktree `.worktrees/release-1.7.1-micro-immuno`／分支 `codex/release-1.7.1-micro-immuno`，自ed08854整合微免465c375；待合併最新origin/main、npm ci／sync／完整check後交教師部署。本次不push、不執行deploy.sh。
+- Release整合完成：`.worktrees/release-1.7.1-micro-immuno`／`codex/release-1.7.1-micro-immuno`／1.7.1；自ed08854依序整合微免 465c375c40f9170559e01db6e3f2dee485ad82b7 與最新main 3f6d92574c0c29b64a3cad2a352e9ce4add4b962。本次本機merge commit訊息結尾[Codex]，工作目錄乾淨；main／origin/main均為提交的祖先，待教師在本worktree執行scripts/deploy.sh。本次不push、不部署。
+- npm ci／functions ci／materials:sync與完整check全通過：前端140、Functions29，0fail／skipped，版本檢查與兩端build成功。兩份微免登錄、Excel249題、看板及名冊修正逐項核對；未納入呼吸／血流未核可教材。報告`docs/RELEASE_1.7.1_465c375c40f9170559e01db6e3f2dee485ad82b7_IMMUNO_REPORT.md`，數據`docs/micro-immuno-review/release-integration-verification.json`。
+- 微免截圖只存本機，142張PNG已由amend移出版控並.gitignore；原本機檔案仍在微免worktree，release沒有此資料夾。微免提交新增PNG／WebP截圖0，教材內嵌圖不改；主目錄、看板與血流worktree工作檔未動。
 - 115-MI 微免：教師10/11核可畫面，兩份正式build＋shared/materials.ts登錄＋materials:sync完成；正式HTML SHA與核可preview相同。`feature/micro-immuno-review`自e8805f8，已本機提交，訊息「feat: 正式登錄微免兩份教材並追加22題 [Codex]」，工作目錄乾淨（SHA由git rev-parse HEAD取得），未push／合併／部署。主目錄及其他worktree未改。
 - Excel新增22題：細菌「題庫」229–239列、免疫240–250列；每份6先備＋5情境，總249題。既有題庫228列與說明34列原始XML未變；說明只追加35–37列來源與新合計。Excel選項換位且正解映射核對，教師定稿JSON原文不改；未指定單元代碼，單元／次單元沿用原標題、課程代碼留空供教師匯入設定。
 - `npm run check`前端134／Functions26全過，0fail／skipped，版本與兩端build成功；前輪三字型／兩寬252狀態、SDK4、46標準圖／140圖截圖集對應相同HTML。唯一kit仍核可hues22／216，credits僅核可形狀與署名。報告`docs/MICRO_IMMUNO_REVIEW_REPORT.md`、Excel保存證據`docs/micro-immuno-review/question-bank-verification.json`、完整check紀錄`full-check.txt`。
-- Claude正式交件驗收通過（22題獨立逐題比對0錯），教師已授權整合：先將微免截圖移出版控並amend未推送提交，再從ed08854建立指定release worktree／分支、合併微免與最新origin/main、保留1.7.1並完整check與commit。停在乾淨整合分支，由教師部署；本次不push、不執行deploy.sh。截圖只保留本機（.gitignore），報告／截圖集頁面已註明。
+- Claude正式交件驗收通過（22題獨立逐題0錯），教師授權的整合已完成；只待教師從release worktree部署，截圖集只供原微免worktree本機檢視。
 - 本次未變更正式站；讀取時本機main／origin/main＝3f6d925（版本檔1.7.0），已含名冊換信箱修正；本次未push／部署。
 - 1.7.0 ①～④於10/6 Claude驗收通過；目前main已含此基底與名冊修正，上線請依上方release整合流程，不從舊功能分支直接部署。前端134／Functions26測試及兩端build通過；同步後會清除「全部重算」勾選。驗收 docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md。
 - 任務基底 feature/1.7.0-practice-modes＝e8805f8（先依交辦提交既有交接及兩份規格，訊息 docs: 交接更新 [Claude]）。Git 過期 index.lock 已確認無 Git 程序後清除。
@@ -30,7 +32,7 @@
 
 ## 部署方式（教師執行）
 ```sh
-zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'
+zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/.worktrees/release-1.7.1-micro-immuno/scripts/deploy.sh'
 ```
 - deploy.sh：npm run check → 備份 → Functions → 快轉push main；Firebase帳號 hhchang@ctcn.edu.tw。
 - VERSION／兩端package與lock／shared/version.ts／apps-script/version.gs／public/version.json／三份文件版本行須同步（version:sync／version:check）。
@@ -73,7 +75,7 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 23. **用語（教師決定 2026-10-03）：一律使用台灣課本用語，不用大陸用語**（例：心搏量非每搏量、紅血球非紅細胞、微血管非毛細血管、受器非感受器、黏度非粘度、點選非點擊）。新教材與修改都要掃描用語；學生看得到的地方不得留下「⚠️」「請教師決定」等草稿註記。
 24. **藥物與疾病（教師決定 2026-10-07）：Q1–Q8 任何題目內容和藥物或疾病有關，一律納入「國考延伸」補充教材**（9/25「正式教材不放疾病藥物」的配套）；出處第一順位指定課本、第二順位其他課本並逐句註明。規格見 Project 文件「期中考國考延伸補充教材規格」第 5 節。
 ## 待辦
-- 微免：Claude正式交件通過，教師已授權release整合；截圖移出版控、amend後進行整合與完整check，停下回報，由教師部署。
+- 微免＋看板release已驗證且本機提交；下一步教師從release worktree執行deploy.sh。
 - 血流：v2 已由 Claude 驗收通過，待教師看畫面；核可後依固定決策 22 正式 build、Excel 末列新增 11 題、登錄、commit。
 - 工作1：最終兩尺寸截圖／作答驗證已通過（14頁全流程，check134／26），預覽見docs/RESPIRATORY_INFOGRAPHICS_PREVIEW.md，10/8Claude複驗通過，待教師看畫面；核可前不build、登錄、寫Excel或commit教材。核可後Excel僅第229列起增77題，既有列不可改。
 - 工作1B：Claude已核對報告引句，待教師裁定六題與資訊圖表修訂；教師原決定Q3／Q4先不上平台仍有效。
