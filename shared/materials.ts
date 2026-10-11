@@ -77,6 +77,8 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'lymphoid-organs-v1': { label: "淋巴器官｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-electrical-v1': { label: "心臟的電性活動｜互動資訊圖表", tracking: 'interactive', nodeTotal: 9, questionTotal: 11, note: "9 個知識節點；6 先備＋5 情境" },
   'rbc-homeostasis-v1': { label: "紅血球的恆定機制｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "6 個知識節點；6 先備＋5 情境" },
+  'micro-bacteria-review-v1': { label: "細菌怎麼害人，我們怎麼對付它｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'immuno-concepts-review-v1': { label: "從小安的第一年認識免疫｜互動資訊圖表", tracking: 'interactive', nodeTotal: 8, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。

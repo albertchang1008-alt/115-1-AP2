@@ -1,0 +1,1585 @@
+{
+  "slug": "immuno-concepts-review",
+  "builtAt": "2026-10-11T03:35:14.181Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 12.726666666666667,
+      "svgTextSizes": [
+        {
+          "text": "抗體濃度",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "時間（天）",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "第一次接觸抗原",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "第二次接觸同一抗原",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "IgM",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "IgG",
+          "px": 12.726666666666667
+        },
+        {
+          "text": "拖動時間軸：觀察潛伏期與高峰",
+          "px": 12.726666666666667
+        }
+      ],
+      "nodes": [
+        {
+          "id": "immuno-concepts-review-node-01",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "三道防線與免疫記憶",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "第一道防線｜ ① 正常菌叢（牆外居民）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "② 皮膚與黏膜（城牆、護城河）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "第二道防線｜ ③ 發炎與發燒（烽火）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "④ 吞噬細胞（守衛）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "第三道防線｜ ⑤ 淋巴球（拿鑰匙的士兵＝專一性）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 記憶（紀錄簿）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "病原｜ ⑦ 入侵的病原",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-02",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "先天免疫：立即、非專一",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "後天免疫：專一、有記憶",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "先天免疫｜ ① 巨噬細胞 ② 嗜中性球 ③ 自然殺手細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "後天免疫｜ ① B 細胞與抗體 ② T 細胞 ③ 記憶細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-03",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "天然主動（感染後康復）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "人工主動（疫苗）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "天然被動（胎盤 IgG）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "人工被動（抗蛇毒血清）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "天然主動｜ ① 感染後康復",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "人工主動｜ ① 疫苗",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "天然被動｜ ① 胎盤 IgG",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "人工被動｜ ① 抗蛇毒血清",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-04",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "骨髓系",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "淋巴系",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "次級淋巴器官",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "骨髓｜ ① 骨髓 ② 造血幹細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "骨髓系｜ ③ 巨噬細胞 ④ 嗜中性球 ⑤ 嗜酸性球",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 嗜鹼性球 ⑦ 單核球 ⑧ 樹突細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "淋巴系｜ ⑨ B 細胞 ⑩ T 細胞 ⑪ 胸腺 ⑫ 自然殺手細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "次級淋巴器官｜ ⑬ 淋巴結 ⑭ 脾臟 ⑮ 扁桃腺",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "8",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "9",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "10",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "11",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "12",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "13",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "14",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "15",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-05",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "抗原與抗體",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "的專一性",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "抗原｜ ① 抗原決定位 ② 抗原決定位 ③ 抗原",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "④ 抗原決定位",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "抗體｜ ⑤ 抗體（正在結合） ⑥ 不吻合的抗體",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "⑦ 抗體（已結合） ⑧ 抗體（正在結合）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "8",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "鎖＝抗原",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "鑰匙＝抗體",
+              "px": 12.021166666666668,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-06",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "步驟 1",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 2",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 3",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 4",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 5",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 1｜ ① 抗原與 B 細胞受體結合",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 2｜ ① 輔助型 T 細胞給訊號",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 3｜ ① 增殖",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 4｜ ① 漿細胞分泌抗體 ② 記憶 B 細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "步驟 5｜ ① 調理作用 ② 凝集 ③ 中和",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-07",
+          "minPx": 12.726666666666667,
+          "texts": [
+            {
+              "text": "抗體結構",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "抗原結合部位",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "抗原結合部位",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "Fab",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "輕鏈（×2）",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "絞鏈區",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "雙硫鍵",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "重鏈（×2）",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "Fc",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "可變區",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "恆定區",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "五種抗體（依血中含量排列）",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "IgG",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "單體",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "IgA",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "雙體",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "J 鏈、分泌片",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "IgM",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "五聚體",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "J 鏈",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "IgD",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "單體：插在 B 細胞膜上",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "IgE",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "單體：接在肥大細胞上",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-08",
+          "minPx": 12.021166666666668,
+          "texts": [
+            {
+              "text": "CD4 輔助型 T 細胞：指揮官",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "CD8 毒殺型 T 細胞：殺手",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "CD4 輔助型 T 細胞｜ ① B 細胞 ② 樹突細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "③ MHC＋抗原片段 ④ 輔助型 T 細胞 ⑤ 細胞激素",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 巨噬細胞 ⑦ 毒殺型 T 細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "CD8 毒殺型 T 細胞｜ ① 毒殺型 T 細胞（CD8）",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "② 細胞凋亡 ③ 受病毒感染的細胞 ④ 健康細胞",
+              "px": 12.021166666666668,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 12.726666666666667,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 12.726666666666667,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 38.56333333333333,
+      "svgTextSizes": [
+        {
+          "text": "抗體濃度",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "時間（天）",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "第一次接觸抗原",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "第二次接觸同一抗原",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "IgM",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "IgG",
+          "px": 38.56333333333333
+        },
+        {
+          "text": "拖動時間軸：觀察潛伏期與高峰",
+          "px": 38.56333333333333
+        }
+      ],
+      "nodes": [
+        {
+          "id": "immuno-concepts-review-node-01",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "三道防線與免疫記憶",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "第一道防線｜ ① 正常菌叢（牆外居民）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "② 皮膚與黏膜（城牆、護城河）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "第二道防線｜ ③ 發炎與發燒（烽火）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "④ 吞噬細胞（守衛）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "第三道防線｜ ⑤ 淋巴球（拿鑰匙的士兵＝專一性）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 記憶（紀錄簿）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "病原｜ ⑦ 入侵的病原",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-02",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "先天免疫：立即、非專一",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "後天免疫：專一、有記憶",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "先天免疫｜ ① 巨噬細胞 ② 嗜中性球 ③ 自然殺手細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "後天免疫｜ ① B 細胞與抗體 ② T 細胞 ③ 記憶細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-03",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "天然主動（感染後康復）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "人工主動（疫苗）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "天然被動（胎盤 IgG）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "人工被動（抗蛇毒血清）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "天然主動｜ ① 感染後康復",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "人工主動｜ ① 疫苗",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "天然被動｜ ① 胎盤 IgG",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "人工被動｜ ① 抗蛇毒血清",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-04",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "骨髓系",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "淋巴系",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "次級淋巴器官",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "骨髓｜ ① 骨髓 ② 造血幹細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "骨髓系｜ ③ 巨噬細胞 ④ 嗜中性球 ⑤ 嗜酸性球",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 嗜鹼性球 ⑦ 單核球 ⑧ 樹突細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "淋巴系｜ ⑨ B 細胞 ⑩ T 細胞 ⑪ 胸腺 ⑫ 自然殺手細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "次級淋巴器官｜ ⑬ 淋巴結 ⑭ 脾臟 ⑮ 扁桃腺",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "8",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "9",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "10",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "11",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "12",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "13",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "14",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "15",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-05",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "抗原與抗體",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "的專一性",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "抗原｜ ① 抗原決定位 ② 抗原決定位 ③ 抗原",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "④ 抗原決定位",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "抗體｜ ⑤ 抗體（正在結合） ⑥ 不吻合的抗體",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "⑦ 抗體（已結合） ⑧ 抗體（正在結合）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "8",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "鎖＝抗原",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "鑰匙＝抗體",
+              "px": 36.425583333333336,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-06",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "步驟 1",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 2",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 3",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 4",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 5",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 1｜ ① 抗原與 B 細胞受體結合",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 2｜ ① 輔助型 T 細胞給訊號",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 3｜ ① 增殖",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 4｜ ① 漿細胞分泌抗體 ② 記憶 B 細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "步驟 5｜ ① 調理作用 ② 凝集 ③ 中和",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-07",
+          "minPx": 38.56333333333333,
+          "texts": [
+            {
+              "text": "抗體結構",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "抗原結合部位",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "抗原結合部位",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "Fab",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "輕鏈（×2）",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "絞鏈區",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "雙硫鍵",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "重鏈（×2）",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "Fc",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "可變區",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "恆定區",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "五種抗體（依血中含量排列）",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "IgG",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "單體",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "IgA",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "雙體",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "J 鏈、分泌片",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "IgM",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "五聚體",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "J 鏈",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "IgD",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "單體：插在 B 細胞膜上",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "IgE",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "單體：接在肥大細胞上",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "immuno-concepts-review-node-08",
+          "minPx": 36.425583333333336,
+          "texts": [
+            {
+              "text": "CD4 輔助型 T 細胞：指揮官",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "CD8 毒殺型 T 細胞：殺手",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "CD4 輔助型 T 細胞｜ ① B 細胞 ② 樹突細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "③ MHC＋抗原片段 ④ 輔助型 T 細胞 ⑤ 細胞激素",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "⑥ 巨噬細胞 ⑦ 毒殺型 T 細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "CD8 毒殺型 T 細胞｜ ① 毒殺型 T 細胞（CD8）",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "② 細胞凋亡 ③ 受病毒感染的細胞 ④ 健康細胞",
+              "px": 36.425583333333336,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "5",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "6",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "7",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "3",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "2",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "4",
+              "px": 38.56333333333333,
+              "clipped": false
+            },
+            {
+              "text": "1",
+              "px": 38.56333333333333,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-primary.png",
+    "390-lab-secondary.png",
+    "390-node-immuno-concepts-review-node-01.png",
+    "390-node-immuno-concepts-review-node-02.png",
+    "390-node-immuno-concepts-review-node-03.png",
+    "390-node-immuno-concepts-review-node-04.png",
+    "390-node-immuno-concepts-review-node-05.png",
+    "390-node-immuno-concepts-review-node-06.png",
+    "390-node-immuno-concepts-review-node-07.png",
+    "390-node-immuno-concepts-review-node-08.png",
+    "1280-page.png",
+    "1280-lab-primary.png",
+    "1280-lab-secondary.png",
+    "1280-node-immuno-concepts-review-node-01.png",
+    "1280-node-immuno-concepts-review-node-02.png",
+    "1280-node-immuno-concepts-review-node-03.png",
+    "1280-node-immuno-concepts-review-node-04.png",
+    "1280-node-immuno-concepts-review-node-05.png",
+    "1280-node-immuno-concepts-review-node-06.png",
+    "1280-node-immuno-concepts-review-node-07.png",
+    "1280-node-immuno-concepts-review-node-08.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "immuno-concepts-review-node-01",
+    "immuno-concepts-review-node-02",
+    "immuno-concepts-review-node-03",
+    "immuno-concepts-review-node-04",
+    "immuno-concepts-review-node-05",
+    "immuno-concepts-review-node-06",
+    "immuno-concepts-review-node-07",
+    "immuno-concepts-review-node-08"
+  ],
+  "questionIds": [
+    "immuno-concepts-review-foundation-q01",
+    "immuno-concepts-review-foundation-q02",
+    "immuno-concepts-review-foundation-q03",
+    "immuno-concepts-review-foundation-q04",
+    "immuno-concepts-review-foundation-q05",
+    "immuno-concepts-review-foundation-q06",
+    "immuno-concepts-review-case-q01",
+    "immuno-concepts-review-case-q02",
+    "immuno-concepts-review-case-q03",
+    "immuno-concepts-review-case-q04",
+    "immuno-concepts-review-case-q05"
+  ],
+  "ok": true
+}

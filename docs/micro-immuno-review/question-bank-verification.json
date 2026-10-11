@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-11",
+  "originalQuestions": 227,
+  "originalQuestionRowsRawXmlUnchanged": 228,
+  "originalNotesRowsRawXmlUnchanged": 34,
+  "originalCellsChanged": 0,
+  "unchangedZipParts": [
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "xl/theme/theme1.xml",
+    "xl/styles.xml",
+    "_rels/.rels",
+    "xl/workbook.xml",
+    "xl/_rels/workbook.xml.rels",
+    "[Content_Types].xml"
+  ],
+  "addedQuestions": 22,
+  "totalQuestions": 249,
+  "ranges": {
+    "micro-bacteria-review": "題庫!A229:X239",
+    "immuno-concepts-review": "題庫!A240:X250"
+  },
+  "notesAppendedRange": "說明!A35:B37",
+  "existingNotesCellsChanged": 0,
+  "duplicateIds": 0,
+  "sourceStemOptionsCorrectAnswerExplanationMatches": 22,
+  "correctPositionCounts": {
+    "B": 5,
+    "A": 4,
+    "C": 8,
+    "D": 5
+  },
+  "optionOrder": "Excel only cyclic rotation by question index; approved JSON unchanged",
+  "chapterConvention": "No chapter assigned in source; use approved title as unit and subunit, matching existing title-only entries",
+  "baselineSha256": "48dca2aa0cbc98c858591aa7489c80baf018fa359fd4ef1d56faa401578fee2e",
+  "finalSha256": "e115ec6e8818ab1b612451c9250f056df522e9c3db2db6155cba70948f09ff16"
+}

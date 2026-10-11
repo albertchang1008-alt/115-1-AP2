@@ -18,6 +18,60 @@
 - 六題研究報告交Dropbox專案05_review/Q3疑點研究_6題.md，原始Excel／卡片／進度未改，B結論未套A；CH06 p.31已核對頸動脈體與主動脈體。
 - 將handoff整理為目前狀態，移除已完成與過期重複驗收資訊；先前功能歷史仍在本log。
 
+## 微免截圖移出版控與release整合授權（2026-10-11，Codex，版本不變）
+
+- Claude正式交件通過，22題Excel獨立逐題比對0錯；教師授權整合，但不push、不執行deploy.sh。
+- 微免47MB截圖以git rm --cached移出版控，檔案保留本機、加入.gitignore；報告與截圖集頁面註明本機限定，amend尚未推送的9b301be。教材內嵌教學圖與Excel不變。
+- 下一步自ed08854建立codex/release-1.7.1-micro-immuno，依序整合微免與最新origin/main、保留看板及名冊同步修正與版本1.7.1，全check後本機commit，交教師部署。
+
+## 115-MI 微免正式建置與22題追加（2026-10-11，Codex，版本不變）
+
+- 教師核可兩份畫面後，在指定worktree執行兩份materials:build及materials:sync，正式輸出SHA與核可preview相同；catalog／教材README各新增兩筆（6／8節點、各11題）。教師定稿原文不改，唯一kit改動仍為核可hues22／216，credits僅核可形狀與署名。
+- Excel追加細菌229–239列、免疫240–250列，共22題，總249題；既有題庫228列與說明34列原始XML、所有原有儲存格與其他ZIP parts完整保留，說明只增35–37列來源與新合計。Excel選項換位、答案代碼／Zuvio序號與核可正解逐題匹配；單元及次單元沿原標題，課程代碼留空。存檔重新匯入及渲染檢視通過。
+- npm run check成功：前端134、Functions26全部通過，0 fail／skipped，版本一致及前後端build通過；完整紀錄與逐列Excel證據納入交件。核可preview三字型／兩寬252狀態、SDK4、46標準shots／140圖截圖集因正式輸出SHA相同仍適用。
+- 報告／截圖集狀態／handoff更新；本機commit結尾[Codex]，不push／合併／部署。讀取時main及origin/main已為3f6d925，獨立看板ed08854未包含名冊修正；建議新codex/release-1.7.1-micro-immuno由看板整合微免＋最新main，保留1.7.1並重驗後教師部署。具體命令於formal-delivery.md，待教師決定，未建立整合分支或修改其他worktree。
+
+## 115-MI 教師核可與上傳流程釐清（2026-10-11，Codex，版本不變）
+
+- 教師核可兩份畫面，授權指定worktree正式build／教材登錄與sync、Excel追加22題、完整check及commit；不push／合併／部署。上述正式作業尚待執行。
+- 回答上傳目的地：教材透過GitHub Pages發布；Excel題目追加至課程Google Sheet，再由教師後台同步題庫。Zuvio解答僅為匯出欄位。尚未上傳任何外部平台，主目錄與其他worktree未修改。
+
+## 115-MI 第三輪複驗四點修正（2026-10-11，Codex，版本不變）
+
+- Claude醫學內容與104錨點已通過，本輪僅修四點：所有圖例Noto量測≤1080、只在完整項目間換行，移除textLength；B-N02細胞質移到圖像外右下、圖例上方獨立白底列；I-N01／04／05依圖例分組接續編號，I-N04骨髓1–2→骨髓系3–8→淋巴系9–12→次級器官13–15，淋巴標題對準B/T/NK列；50S藥名與外框淨距最小23.03單位≥12（扣描邊）。
+- 驗證擴為system-ui、Noto Sans CJK TC、Arial-sans-serif fallback三字型，兩寬／兩色系252狀態全通過，手機字≥12.02、字框間距≥3；既有圈／圖例不重疊、引線不交叉、高度≤1.45與結構檢查全過。新增Noto90%行寬、細胞質獨立列、分組接續順序、淋巴標題位置與50S字框外框淨距檢查；SDK4流程、20測試、節點驗證、標準shots24＋22均過。
+- 截圖集新增fallback、共140張，兩寬篩選與載入通過；報告依四點列數值，round4-four-point-checks／anchor-preservation／asset-sha交件。104錨點文字／比例／偏移與第三輪逐欄相同，其他三張自繪SVG SHA不變；定稿JSON／其他kit／建置程式／Excel／教材登錄保護檔案不變。
+- handoff與報告更新，下一步Claude只複驗四點、教師看畫面。指定worktree／feature/micro-immuno-review／HEAD e8805f8未提交；仍停preview，未正式build／Excel／登錄／commit／push／部署，主目錄與其他worktree未改；唯一kit仍核可hues22／216，credits維持核可形狀與署名。
+
+## 115-MI 微免第三輪圖面修正完成（2026-10-10，Codex，版本不變）
+
+- 依Claude第二輪複驗，12張點陣圖的圖例全部改為單欄、每組獨立段落，修正B-N01人體細胞／細菌形態並排交錯；I-N01／I-N04／I-N05改為全圖連續編號，其他保留區塊編號。I-N05補紫色圓頭旁正在結合的抗體，I-N08補右側藍色CD8細胞並置於該組首項，共104個標記。
+- I-N04三個標題放回對應細胞／器官上方，骨髓標記落在紅色組織（來源310,800），與造血幹細胞分開；B-N03脂多糖移至粉紅色鏈分子（1040,618，RGB232/103/139）。I-N05標題避開抗體、鎖／鑰匙說明移至鎖旁；B-N02細胞質移至右側膜下方、I-N03第一個標記移離小孩臉部。B-N06藥名在外框左側分行、MRSA整個括號同一行。
+- 點陣viewBox依實際內容收緊877–1303（原圖900，≤1.45）；只除去近白底部留白。I-N03於白色分隔帶拆兩排，各留60單位標題帶，保留全圖；圖例四組單欄。B-N01形態圖例以textLength略收水平字距，字高保留，比例圖註仍在最後。
+- 最終雙字型／1280與390／預設與冷色168狀態、SDK4流程、既有20測試、節點驗證與標準shots24＋22通過；手機字≥12.02px、越界／錯誤／水平溢位0。新增編號圓圈含描邊兩兩不重疊、圖例文字框兩兩不重疊與單欄檢查；原引線／高度／間距／字級／結構檢查全部重跑。98圖截圖集兩尺寸載入與篩選通過，來源像素、第三輪16圖SHA與保護檔案證據更新。
+- 報告、截圖集、handoff更新；指定worktree／feature/micro-immuno-review／HEAD e8805f8未提交，定稿內容與其他kit未改，唯一kit仍核可hues22／216、credits保持核可形狀與署名。仍停preview，未正式build／Excel／登錄／commit／push／部署，未修改主目錄或其他worktree工作檔。
+
+## 115-MI 微免圖面第二輪修正完成（2026-10-10，Codex，版本不變）
+
+- Claude 前輪已通過內容、唯一 kit 改動、SDK與自動檢查；本輪依圖面意見將12張點陣圖改為102個實心編號＋分組圖例，區塊標題留在圖面上，各組獨立閱讀順序；viewBox高1305≤900×1.45。8條短引線最大55.44單位，所有引線互不相交。B-N01比例圖註保留；I-N03兩個原圖半幅各留100單位標題空間，所有原圖像素保留。
+- B-N02脂蛋白錨到來源1063,569黑色連接線，周質空間1210,683桃色中央；I-N04胸腺1101,719橘色器官。抗生素圖只留一個50S上／30S下核糖體，四抗藥機轉改為具象示意與指定說明。IgM五Fc連五邊形環、J鏈色段；IgA雙Fc接J鏈、分泌片貼合；實驗室IgG移離曲線。節點06重複曲線移除以符合高度上限，實驗室互動曲線完整保留。
+- 最終雙字型／1280與390／預設與冷色168狀態、SDK4流程、既有20測試及標準shots24＋22全通過；手機字≥12.02px、字框距≥5.47、越界／錯誤／水平溢位0。新增引線相交、短引線長度、高度上限、編號順序、核糖體／IgM Fc環／IgA接觸幾何檢查；98圖截圖集兩尺寸篩選與載入檢查通過，原始結果與16圖SHA交件。
+- 報告 docs/MICRO_IMMUNO_REVIEW_REPORT.md、截圖集 docs/micro-immuno-review-preview.html 已更新；待Claude圖面複驗與教師看畫面。指定worktree／feature/micro-immuno-review／HEAD e8805f8未提交；定稿與kit本輪未改，唯一kit仍為核可hues22／216。未正式build／寫Excel／登錄／commit／push／部署，主目錄與其他worktree工作檔未改；深色主題限制如前。
+
+## 115-MI 微免兩份資訊圖表 preview 完成（2026-10-10，Codex，版本不變）
+
+- 指定 e8805f8／feature/micro-immuno-review 獨立 worktree：細菌6、免疫8節點，各6先備＋5情境；定稿文字／題目／答案／來源不變，僅核可 credits 形狀與署名；唯一 kit 改動為 presentation.mjs 的 hues 新增22／216。
+- 12張1200px／quality80 WebP 內嵌SVG、102個中文錨點標籤、4張自繪 SVG，染色五狀態、反應兩狀態與原生時間軸、節點06重用曲線；manifest僅增16筆。
+- preview／標準shots（24＋22）通過；正式 Noto Sans CJK TC 與 system-ui、兩寬、冷色共168狀態／SDK4流程及20既有測試通過，手機最小字 12.73px、文字間距 ≥6.33、無裁切／溢位／pageerror。98張檢視圖、報告及原始結果已交件。
+- 既有 kit 無真正深色主題，本輪未超出核可範圍，系統深色偏好仍淺色；限制明列。報告 docs/MICRO_IMMUNO_REVIEW_REPORT.md，截圖集 docs/micro-immuno-review-preview.html，待 Claude 與教師驗收。HEAD e8805f8，未build／Excel／登錄／commit／push／部署，主目錄與其他worktree工作檔未改。
+- 截圖集最後檢查：390／1280 篩選、98張引用與可見圖片載入通過，無水平溢位或錯誤；本機檢視入口為 http://127.0.0.1:8769/docs/micro-immuno-review-preview.html（伺服器關閉後可由檔案重開）。
+
+## 115-MI 微免兩份資訊圖表前置檢查：依規定停工（2026-10-10，Codex）
+
+- 從 e8805f8 開獨立 worktree `.worktrees/micro-immuno-review`／`feature/micro-immuno-review`，完整複製交辦資料。兩份 content.json 逐位元組一致，既有內容／節點驗證通過（6／8 節點，各11題）；主目錄與其他 worktree 工作檔案未改。
+- 實際配色函式對兩個 slug 拋 Missing material palette；依交辦禁止擴大 kit 並要求先停下的規則，僅提出在 presentation.mjs 的 hues 新增兩筆方案，待 Claude／教師同意，未套用。
+- 交件 docs/MICRO_IMMUNO_REVIEW_REPORT.md、docs/micro-immuno-review/preflight-results.json；preview.html 為阻塞說明入口，尚無截圖，preview 未完成。未轉圖、未 build／Excel／登錄／commit／push／部署；HEAD e8805f8，版本1.7.0不變。
+
 ## 期中考第四輪：26張章節缺口卡整批交件（2026-10-07，Codex，平台版本不變）
 
 - 依教師核定18項缺口拆26張，逐頁讀指定課本、26張獨立卡一次生成，26組來源樣本逐字自檢及42筆primary／supporting原文配對；新卡群related雙向連結、比較純文字表、五段講義不照抄。全數self_checked、review_status draft，整批QC及寫回後QC均0 error／warn，blocked=0／合併=0；未自驗或推reviewed。
