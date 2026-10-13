@@ -1,6 +1,13 @@
 # 開發紀錄
 目前版本：1.9.0
 
+## 1.9.0 驗收修正（2026-10-13，Codex；本機待 Claude 複驗）
+- 依 Claude 對78cb5dc的驗收修 M-1：presentationSnap 不遮蔽簡報轉換 JSON；假 Firestore 跑 CLI apply，交易設定精確一致、不含 snapshot 欄位，全程封鎖網路與真實 SDK／憑證。
+- m-1 前／後測任一來源空白時保存成功後提醒，不阻擋；m-2 標題明示保存草稿即對學生生效、不需發布。
+- m-4 重拍18張測試班截圖，提示標籤移至48px白底外側；桌機／手機來源提醒與標籤不相交驗證通過。
+- AP2／MI 完整 check：前端157／Functions54、0 fail／0 skipped；兩站 guide 驗證通過，圖片585690 bytes、最小12.25px、無溢位／外部請求。
+- 更新報告與交接；未改 Excel、未 push／部署／執行正式 migration／接觸正式 Firebase。待 Claude 複驗 M-1，m-3 留教師決定。
+
 ## 1.9.0（2026-10-13，Codex；本機待 Claude 驗收）
 - 從 origin/main@a593796 建 feature/1.9.0-unify／.worktrees/unify-1.9.0，逐檔移植題庫分離、1.8.0 反思與指定 MI 功能 commit；沒有 merge MI 網站分支。
 - 功能改為課程 features（預設關閉）、後端 access＋features 驗證、課程來源題目設定與私有簡報、資料驅動互動，保留舊輪次／試卷紀錄路徑。

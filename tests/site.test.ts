@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { transformSync } from 'esbuild';
 import { sites, siteId, miMaterialSlugs } from '../shared/site';
@@ -46,4 +48,28 @@ test('MI 舊簡報選項指示轉換與備註移為 migration 資料，與 70354
     assert.equal(result.html,module.exports.interactiveSlideHTML(html,id));
     assert.equal(result.notes,module.exports.interactiveSlideNotes('原有備註',id));
   }
+});
+
+test('MI migration apply 使用假 Firestore 寫入 JSON 定義與轉換，不展開 snapshot', () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'mi-apply-test-'));
+  try {
+    const output = path.join(temp, 'writes.json');
+    const run = spawnSync(process.execPath, [
+      '--require', path.resolve('tests/fixtures/fake-mi-firestore.cjs'),
+      'scripts/migrate-mi-1.9.0.mjs', '--project', 'mi-bd885', '--apply', '--confirm-mi-only',
+    ], { encoding: 'utf8', env: { ...process.env, FAKE_MI_WRITES: output } });
+    assert.equal(run.status, 0, run.stderr);
+    const writes = JSON.parse(fs.readFileSync(output, 'utf8'));
+    assert.equal(writes.length, 2);
+    assert.equal(writes[0].operation, 'update');
+    const config = writes[1];
+    assert.equal(config.path, 'courses/115-1-MI-國考精準對焦/classroomConfig/interactions');
+    assert.equal(config.operation, 'set');
+    assert.deepEqual(config.options, { merge: true });
+    assert.deepEqual(config.data, {
+      ...JSON.parse(fs.readFileSync('docs/unify-1.9.0/mi-interactions.json', 'utf8')),
+      ...JSON.parse(fs.readFileSync('docs/unify-1.9.0/mi-slide-transforms.json', 'utf8')),
+    });
+    for (const key of ['exists', '_snapshotMarker', '_reference', 'data']) assert.equal(key in config.data, false);
+  } finally { fs.rmSync(temp, { recursive: true, force: true }); }
 });

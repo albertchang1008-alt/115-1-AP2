@@ -2,7 +2,17 @@
 
 2026-10-13，Codex。本機分支 `feature/1.9.0-unify`，worktree `.worktrees/unify-1.9.0`；從 `origin/main@a593796` 開始。
 
-已完成實作，待 Claude 獨立驗收與教師授權。未 push、部署或執行 migration 寫入；未讀寫兩站正式學生資料。最後本機 commit 可用 `git log -1` 查閱。
+78cb5dc 已獲 Claude 有條件通過；本次完成 M-1、m-1、m-2、m-4，待 Claude 複驗與教師授權。未 push、部署或執行 migration 寫入；未讀寫兩站正式學生資料。最後本機 commit 可用 `git log -1` 查閱。
+
+## Claude 驗收修正（2026-10-13）
+
+- M-1：apply 讀回簡報改用 `presentationSnap`，存在檢查同步改名；交易仍展開檔頭載入的 `mi-slide-transforms.json`。
+- 新增 CLI apply 回歸測試，以 preload 完全攔截 Firebase SDK，假 `runTransaction/tx.get/tx.set` 記錄兩筆寫入；斷言設定完全等於 `{ interactions, ...mi-slide-transforms.json }`、merge 為 true，且沒有 snapshot 欄位。測試另封鎖網路；沒有載入真實 SDK／憑證或連線任何 Firebase 專案。
+- m-1：開啟正式前後測且任一來源空白，保存成功後提醒補齊來源；不阻擋保存。React 驗證涵蓋僅前測、僅後測、兩邊空白、兩邊完整及功能關閉。
+- m-2：功能標題明示「保存草稿即對學生生效，不需發布」，桌機與手機均驗證。
+- m-4：18 張截圖重拍；48px 白底標籤帶位於原始畫面上方，原介面內容不被覆蓋。驗證標籤與內容矩形不相交，並目視抽查手機反思／桌機設定畫面；兩站 guide 重新建置驗證。
+- 驗收原文留在 `docs/unify-1.9.0/UNIFY_1.9.0_CLAUDE_ACCEPTANCE.md`；該文件針對 78cb5dc，不代表修正版已複驗。m-3 的 AP2 是否加入 MI 22 題留給教師決定，本次未改 Excel。
+- 未 push、部署或執行真實 migration；下方 apply 測試僅為假 Firestore 測試，不是線上相容性驗證。
 
 ## 移植範圍
 
@@ -46,15 +56,15 @@
 - 登入頁「第一次使用？看使用說明」；學生首頁 prefs-bar「？使用說明」。新視窗開啟，保留目前課序。
 - Student.tsx 首次三張提示（待辦、分頁、完成度）可逐張閱讀或略過；只存 `course-guide-seen:<courseId>:<uid>`，storage 失敗仍可關閉，不寫雲端。
 - 第三節 1–10 與 1.7.x 練習規則、1.9.0 正式前後測／互動／反思／影片續播已納入；條件功能清楚標示「老師有開放時才會看到」。反思說明依 allowEdit／截止與保存成功規則。
-- 截圖由實際 React 元件搭配本機合成測試帳號／測試班、記憶體 API 產生；未登入正式帳號、未使用真實名冊。18 張有指示標籤的 1280／390 JPEG 放 `public/guide/img/`，共 **584,447 bytes**（約 0.56 MiB，低於 3 MB）。
+- 截圖由實際 React 元件搭配本機合成測試帳號／測試班、記憶體 API 產生；未登入正式帳號、未使用真實名冊。18 張有指示標籤的 1280／390 JPEG 放 `public/guide/img/`，共 **585,690 bytes**（約 0.56 MiB，低於 3 MB）。
 - 兩站建置說明頁截圖：[AP2 1280](unify-1.9.0/guide-ap2-1280.png)、[AP2 390](unify-1.9.0/guide-ap2-390.png)、[MI 1280](unify-1.9.0/guide-mi-1280.png)、[MI 390](unify-1.9.0/guide-mi-390.png)。
 
 ## 驗證
 
 |最終指令|前端測試|Functions|build／版本／後端入口|
 |---|---:|---:|---|
-|`VITE_SITE_ID=ap2 npm run check`|156 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
-|`VITE_SITE_ID=mi npm run check`|156 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
+|`VITE_SITE_ID=ap2 npm run check`|157 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
+|`VITE_SITE_ID=mi npm run check`|157 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
 
 完整輸出：[check-ap2.txt](unify-1.9.0/check-ap2.txt)、[check-mi.txt](unify-1.9.0/check-mi.txt)。
 
@@ -62,7 +72,7 @@
 
 ## MI migration dry-run
 
-執行的僅為離線 dry-run：
+migration 資料查核使用離線 dry-run；apply 僅在假 Firestore 回歸測試中執行：
 
 ```sh
 node scripts/migrate-mi-1.9.0.mjs --project mi-bd885 --dry-run
@@ -70,7 +80,7 @@ node scripts/migrate-mi-1.9.0.mjs --project mi-bd885 --dry-run
 
 完整輸出：[migration-dry-run.json](unify-1.9.0/migration-dry-run.json)。只預計開啟該 MI 課程三項 features、同步現存 draft/published 的 features、寫入原 12 題定義及舊簡報文字轉換；12 題逐字與 `70354e0:shared/classroom.ts` 一致。其他正式紀錄／私有來源／簡報不寫、不搬移。
 
-`--apply` 拒絕非 `mi-bd885`，另需 `--confirm-mi-only`；寫入前查驗該課程現存 state、rounds、assessments、presentation，缺少任何路徑立即停止。正式執行會用 transaction 更新，不覆蓋課程其他欄位。**本次未執行 apply；正式資料相容性留待授權後核對，沒有把本機測試當成線上驗證。**
+`--apply` 拒絕非 `mi-bd885`，另需 `--confirm-mi-only`；寫入前查驗該課程現存 state、rounds、assessments、presentation，缺少任何路徑立即停止。正式執行會用 transaction 更新，不覆蓋課程其他欄位。**本次只在假 Firestore 執行 apply 測試，未執行正式 migration；正式資料相容性留待授權後核對，沒有把本機測試當成線上驗證。**
 
 ## 授權後的部署草稿（本次未執行）
 

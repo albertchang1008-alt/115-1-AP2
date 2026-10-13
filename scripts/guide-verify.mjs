@@ -41,14 +41,19 @@ export async function verifyGuide(shots = false) {
         const marks={home:['.todo-strip','① 待辦入口'],completion:['.progress-unit-list','② 必做單元完成項目'],unit:['.unit-tabs','③ 學習階段分頁'],practice:['.practice-list','④ 完整測驗才計分'],reflection:['textarea','⑤ 必做題填寫後送出'],login:['a[href="./guide/index.html"]','⑥ 未登入也能看說明'],answers:['.options','⑦ 選項每次打散'],material:['.activitycards','⑧ 看活動類型與完成条件'],settings:['.settings-sheet','⑨ 色系與字級']};
         const [selector,label]=marks[name];
         const target=page.locator(selector).first(); if(await target.count()) await target.scrollIntoViewIfNeeded();
-        await page.evaluate(({selector,label})=>{
-          const el=document.querySelector(selector); if(!el) return;
-          const rect=el.getBoundingClientRect(); const badge=document.createElement('div');badge.id='guide-shot-label';badge.textContent=label;
-          Object.assign(badge.style,{position:'fixed',top:Math.max(4,Math.min(innerHeight-40,rect.top-32))+'px',left:Math.max(4,Math.min(innerWidth-230,rect.left))+'px',zIndex:'1000',background:'#075985',color:'#fff',padding:'4px 8px',borderRadius:'4px',fontSize:'14px',fontFamily:'system-ui'});document.body.append(badge);
-        },{selector,label});
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${name}-${width}: overflow`);
-        if(shots) await page.screenshot({path:`${out}/${name}-${width}.jpg`,fullPage:false,type:'jpeg',quality:65});
-        await page.locator('#guide-shot-label').evaluateAll(els=>els.forEach(el=>el.remove()));
+        // Compose a separate caption band outside the unmodified application screenshot.
+        const capture=await page.screenshot({fullPage:false,type:'png'});
+        const framed=await browser.newPage({viewport:{width,height:998}});
+        try {
+          await framed.setContent('<style>*{box-sizing:border-box}body{margin:0}header{height:48px;display:flex;align-items:center;padding:0 12px;background:white;color:#075985;font:600 14px system-ui}img{display:block;width:100%;height:950px}</style><header></header><img>');
+          await framed.locator('header').evaluate((el,text)=>el.textContent=text,label);
+          await framed.locator('img').evaluate((el,data)=>el.src=data,'data:image/png;base64,'+capture.toString('base64'));
+          await framed.locator('img').evaluate(el=>el.decode());
+          const caption=await framed.locator('header').boundingBox(), content=await framed.locator('img').boundingBox();
+          assert(caption && content && caption.y+caption.height<=content.y, 'caption must stay outside app content');
+          if(shots) await framed.screenshot({path:`${out}/${name}-${width}.jpg`,type:'jpeg',quality:65});
+        } finally { await framed.close(); }
       };
       await page.getByRole('button',{name:'查看全部待辦',exact:true}).click();await shot('home');await shot('completion');
       await page.evaluate(()=>window.guideTest.render('unit'));await page.getByRole('tab',{name:/^課前/}).waitFor();await shot('unit');
@@ -64,8 +69,23 @@ export async function verifyGuide(shots = false) {
       await page.getByRole('button',{name:'顯示設定',exact:true}).click();await shot('settings');
       await page.evaluate(()=>window.guideTest.render('teacher'));
       const preIds=page.getByLabel('前測來源題目 ID（逗號分隔，保存後同步題庫）');await preIds.fill('');await preIds.pressSequentially('q1,q2');assert.equal(await preIds.inputValue(),'q1,q2');
-      await page.getByRole('button',{name:'保存草稿',exact:true}).click();assert.deepEqual(await page.evaluate(()=>window.guideTest.saved.assessmentSources.pretest),['q1','q2']);
-      assert.deepEqual(errors,[]);report.push({width,tips:true,links:true,overflow:false,errors});await page.close();
+      assert.equal(await page.getByText('課程功能（預設關閉；保存草稿即對學生生效，不需發布）',{exact:true}).count(),1);
+      const postIds=page.getByLabel('後測來源題目 ID（逗號分隔）');
+      const save=async(warning)=>{
+        await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+        await page.waitForFunction(()=>window.guideTest.notices.at(-1)?.startsWith('草稿已保存'));
+        assert.equal(await page.evaluate(()=>window.guideTest.notices.at(-1).includes('提醒：')),warning);
+        await page.evaluate(()=>window.guideTest.notices.length=0);
+      };
+      await postIds.fill('');await save(true);
+      assert.deepEqual(await page.evaluate(()=>window.guideTest.saved.assessmentSources.pretest),['q1','q2']);
+      await preIds.fill('');await postIds.fill('q3');await save(true);
+      assert.deepEqual(await page.evaluate(()=>window.guideTest.saved.assessmentSources),{pretest:[],posttest:['q3']});
+      await postIds.fill('');await save(true);
+      await preIds.fill('q1');await postIds.fill('q3');await save(false);
+      await page.getByLabel('正式前後測',{exact:true}).uncheck();
+      await save(false);
+      assert.deepEqual(errors,[]);report.push({width,tips:true,links:true,captionOutsideContent:true,assessmentSourceWarnings:true,featureLegend:true,overflow:false,errors});await page.close();
     }
   } finally { await browser.close(); }
   if(shots) await fs.writeFile('docs/unify-1.9.0/guide-ui-verification.json',JSON.stringify(report,null,2)+'\n');

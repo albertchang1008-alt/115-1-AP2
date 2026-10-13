@@ -25,13 +25,13 @@ else {
   const current = await ref.get();
   if (!current.exists) throw Error('MI 課程不存在，拒絕建立新課程');
   // Read existing legacy paths before applying. Never move, rewrite or clear records.
-  const [state, rounds, exams, presentation] = await Promise.all([
+  const [state, rounds, exams, presentationSnap] = await Promise.all([
     ref.collection('classroomState').doc('current').get(),
     ref.collection('classroomRounds').limit(1).get(),
     ref.collection('assessments').limit(1).get(),
     ref.collection('teacherAssets').doc('presentation').get(),
   ]);
-  if (!state.exists || rounds.empty || exams.empty || !presentation.exists) throw Error('舊輪次／測驗／簡報路徑未確認，停止；請 Claude 與教師核對');
+  if (!state.exists || rounds.empty || exams.empty || !presentationSnap.exists) throw Error('舊輪次／測驗／簡報路徑未確認，停止；請 Claude 與教師核對');
   await db.runTransaction(async tx => {
     const c = (await tx.get(ref)).data();
     if (!c?.draft || !c?.published) throw Error('MI 已發布課程資料不完整');
