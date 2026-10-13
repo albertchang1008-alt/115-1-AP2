@@ -66,3 +66,13 @@ dry-run 用的是第 10 行的變數，所以 dry-run 報告看起來正確，**
 2. Claude 複驗 M-1。
 3. 教師確認 m-3。
 4. 教師授權後依序：AP2 部署 → MI 部署 → MI migration 先 `--dry-run` 再 `--apply --confirm-mi-only`。各站 features 預設關閉，上線後由教師逐課開啟。
+
+## 複驗（2026-10-13 23:15，對象 3a49056）：通過
+
+- **M-1 已修**：apply 區塊改用 `presentationSnap`，寫入仍展開 `mi-slide-transforms.json`。
+- **新測試有效**：用假 Firestore 跑 `--apply --confirm-mi-only`，斷言寫入內容等於 interactions＋transforms，且不含 snapshot 欄位；網路與未 mock 的 Firebase 模組一律拒絕。Claude 把修正暫時還原，該測試**確實失敗**，恢復後通過。
+- m-1：保存或發布時，若開啟前後測而任一邊來源空白，顯示提醒（不阻擋）。m-2：欄位標題改為「保存草稿即對學生生效，不需發布」。m-4：18 張截圖的提示標籤移到上方，不再壓字。
+- 兩站重跑 `npm run check`：前端 157／157、Functions 54／54、0 skipped。
+- 剩 **m-3 待教師確認**（AP2 是否加 micro 的 22 題），不擋部署。
+
+**結論：可交教師授權部署。** 順序：AP2 部署 → MI 部署 → MI migration 先 `--dry-run`、再 `--apply --confirm-mi-only`。
