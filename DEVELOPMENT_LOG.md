@@ -1,6 +1,14 @@
 # 開發紀錄
 目前版本：1.9.0
 
+## 1.9.0 CI修正與AP2成功發布、MI暫存失敗（2026-10-13，Codex）
+- 7a6720e僅tests修正：MI70354e0兩份原檔.txt＋README SHA-256，讀fixture比對與雜湊檢查、無skip。
+- 無70354e0乾淨shallow clone與unify兩站完整check158／54、0 fail／skipped；deploy.sh同結果。
+- AP2 Actions38424586178 build/deploy全綠、Pages1.9.0成功；JS SHA與同設定本機build一致；索引READY、排程15:36–15:43 UTC連續200。
+- test班三新開關均關閉、guide可開、既有10題作答保存成功；影片20→38秒重整續播。AP2既有reflection0，反思僅本機React/callable回歸，不新增正式活动。
+- MI release/mi-1.9.0自70354e0（含d48aac8）開worktree，合併unify產24衝突；內容寫入後git add因default sandbox index.lock不可寫失敗，依指示停止。MERGE_HEAD／24unmerged保留，尚未check／dry-run／commit，不可部署。
+- 報告docs/DEPLOY_1.9.0_REPORT.md；未push mi／apply／部署MI／改Excel或正式學生資料。
+
 ## 1.9.0 規則／索引成功，Actions失敗停止（2026-10-13，Codex）
 - 教師明確授權AP2規則／索引，CLI限定ap2-7ed91、non-interactive部署成功；未加force、無刪除提示、未刪索引。
 - 查40d3ec4的Actions38422029549：build的check前端155／157通過、2 fail、0 skipped；兩項site.test依賴MI70354e0，本機有該歷史但CI depth1沒有。Pages deploy跳過。

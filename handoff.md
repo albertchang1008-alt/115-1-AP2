@@ -9,18 +9,17 @@
 4. Claude 獨立驗收，Codex 實作，教師決定課程內容與部署。
 
 ## 目前任務（2026-10-13）
-- feature/1.9.0-unify；基底origin/main@a593796。3a49056已由Claude複驗通過，複驗記錄提交40d3ec4。
-- 教師授權部署，m-3定案AP2不加微生物22題；Excel不動。
-- deploy.sh完整check157／Functions54、0 fail／skipped通過；AP2 Functions部署成功，origin/main與備份分支普通push40d3ec4。本機main未改。
-- AP2變數未設VITE_SITE_ID，workflow預設ap2。
-- 本輪教師明確授權後，AP2規則／索引部署成功，CLI exit0；未force、無刪除提示、未刪索引。READY與排程缺索引錯誤消失尚未驗證。
-- 查Actions38422029549：build/check失敗，前端155 pass／2 fail／0 skipped；兩項歷史比對依賴MI70354e0，CI depth1無該物件，Pages deploy跳過。依任何一步失敗停下，未修程式／重跑Actions／回退。
-- Actions／線上JS雜湊／測試班三新功能關閉與guide尚未驗證；A段未完成驗收。
-- B段未開始，沒有release/mi-1.9.0合併、MI check或migration dry-run；未push mi／apply／部署MI。
-- 實際fetch與ls-remote確認mi/main=70354e0，非交辦記載d48aac8；後續重新核對並保留其續播／種類切換修正（unify已移植）。
-- 本轮未改Excel或正式學生資料。root原feature/respiratory-infographics及教材未提交工作保留。
-- 詳細停止紀錄docs/DEPLOY_1.9.0_REPORT.md；原整合報告docs/UNIFY_1.9.0_REPORT.md。
-- 此交接為部署後本機紀錄，最後commit以git log -1查閱，不再次推main。
+- feature/1.9.0-unify；CI修正7a6720e僅tests，兩份MI歷史.txt＋README SHA，無skip。
+- 不含70354e0乾淨clone AP2 check與本目錄兩站check158／Functions54、0 fail／skipped全過。
+- AP2 deploy.sh成功；origin/main與備份分支7a6720e，Actions38424586178 build/deploy success，Pages1.9.0、JS SHA同本機production build。
+- 索引READY；排程15:36–15:43 UTC連續HTTP200，缺索引舊錯誤已停止。
+- test班三新開關均關閉、guide／首次提示、既有10題測驗雲端保存、影片重整38秒續播驗證通過。
+- AP2既有反思活動0；反思以本機React/callable回歸驗證，未新增正式活動。
+- MI release/mi-1.9.0／.worktrees/release-mi-1.9.0自mi/main70354e0（含d48aac8）開，合併本分支7a6720e。
+- 24衝突共用內容已寫入工作檔；git add因default sandbox index.lock不可寫失敗，依指示停止。24unmerged／MERGE_HEAD保留，尚未MI check／dry-run／commit。
+- MI專屬.firebaserc／workflow未完成，不可部署；恢復時用已授權Git metadata escalation（不是自動核准拒絕）。
+- 報告docs/DEPLOY_1.9.0_REPORT.md／ap2-live-verification.json；Excel／正式學生資料未改，未push mi／apply／部署MI。
+- root教材工作保留；本輪交接只本機commit，不再push main。
 
 ## 固定決策
 1. **兩課程共用 1.9.0 主程式；新功能以課程 features 開關；網站差異只放在建置設定。**
@@ -36,7 +35,6 @@
 11. 禁未授權部署；Firebase 指令須明確指定專案。MI 要先 migration，再部署 Functions／前端；AP2 依既有 deploy.sh 流程。
 
 ## 下一步
-1. 待教師指示修CI歷史比對依賴；保留逐字比對與完整測試，不skip；修後再發布。
-2. 核對索引READY與expireAssessments日誌、Actions成功、同環境本機build與線上雜湊、測試班三開關關閉與guide。
-3. A完成後再做B：重查mi/main，release/mi-1.9.0合併unify，逐項衝突報告、MI check／離線dry-run／變數核對／本機commit，交Claude。
-4. MI仍不得push／apply／部署Functions；另行指示後順序migration→Functions→Pages。
+1. 恢復MI合併，使用Git metadata權限暫存24檔，核對MI專屬設定、非衝突來源快照與d48aac8。
+2. MI完整check全過0 skipped、離線dry-run、變數核對（未設列待辦不改）、本機commit [Codex]，交Claude複驗。
+3. MI仍禁止push／apply／Functions部署，另行指示後migration→Functions→Pages。

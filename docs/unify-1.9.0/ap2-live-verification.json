@@ -1,0 +1,132 @@
+{
+  "releaseCommit": "7a6720e376bc892296d32bd1ae94467347a5cfc6",
+  "actions": {
+    "runId": 38424586178,
+    "build": "success",
+    "deploy": "success",
+    "url": "https://github.com/albertchang1008-alt/115-1-AP2/actions/runs/38424586178"
+  },
+  "index": {
+    "project": "ap2-7ed91",
+    "checkedAt": "2026-10-13T15:43:36.147Z",
+    "indexes": [
+      {
+        "name": "projects/ap2-7ed91/databases/(default)/collectionGroups/assessmentSessions/indexes/CICAgJj7z4EK",
+        "state": "READY",
+        "queryScope": "COLLECTION_GROUP",
+        "fields": [
+          {
+            "fieldPath": "state",
+            "order": "ASCENDING"
+          },
+          {
+            "fieldPath": "expiresAt",
+            "order": "ASCENDING"
+          }
+        ]
+      }
+    ]
+  },
+  "scheduler": {
+    "recentRequests": [
+      {
+        "timestamp": "2026-10-13T15:43:00.383756Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:42:01.024032Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:41:00.414450Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:40:00.369253Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:39:00.614962Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:38:00.369823Z",
+        "status": 200
+      },
+      {
+        "timestamp": "2026-10-13T15:37:00.911252Z",
+        "status": 200
+      }
+    ],
+    "missingIndexErrorsAfterRecovery": 0,
+    "historicalErrorsThrough": "2026-10-13T15:35:01Z",
+    "manualTrigger": false
+  },
+  "jsHash": {
+    "url": "https://albertchang1008-alt.github.io/115-1-AP2/assets/index-BI4EsoCH.js",
+    "local": "dist/assets/index-BI4EsoCH.js",
+    "sha256": "ce1cdcc44513adef8ab8ec4b71cc46f80f0447c2d68840d12edb658027f35c7c",
+    "equal": true
+  },
+  "features": {
+    "project": "ap2-7ed91",
+    "courseId": "115-1-AP2",
+    "readMask": [
+      "features"
+    ],
+    "features": {
+      "assessments": false,
+      "teachingConsole": false,
+      "classroomInteraction": false
+    },
+    "missingDefaultsToFalse": true,
+    "checkedAt": "2026-10-13T15:48:04.875Z"
+  },
+  "studentSmoke": {
+    "class": "test",
+    "version": "1.9.0",
+    "guideAccessible": true,
+    "firstUseTipsDismissible": true,
+    "regularQuiz": {
+      "questions": 10,
+      "score": 20,
+      "cloudSaved": true
+    },
+    "video": {
+      "id": "JCX_ku4d0sY",
+      "startedAt": 20,
+      "playedTo": 38.636978,
+      "resumeAfterReload": 38
+    },
+    "reflection": {
+      "existingPublishedActivities": 0,
+      "liveCase": "not applicable; no existing reflection activity",
+      "localReactAndCallableRegression": "passed"
+    }
+  },
+  "cleanClone": {
+    "path": "/private/tmp/ap2-ci-1.9.0.3K5DvL",
+    "source": "origin/main@40d3ec4; shallow depth1; only fixed tests copied in",
+    "contains70354e0": false,
+    "ap2Check": {
+      "frontend": 158,
+      "functions": 54,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "unifyChecks": {
+    "ap2": {
+      "frontend": 158,
+      "functions": 54,
+      "failed": 0,
+      "skipped": 0
+    },
+    "mi": {
+      "frontend": 158,
+      "functions": 54,
+      "failed": 0,
+      "skipped": 0
+    }
+  }
+}
