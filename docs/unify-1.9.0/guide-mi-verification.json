@@ -1,0 +1,34 @@
+{
+  "report": [
+    {
+      "site": "mi",
+      "width": 1280,
+      "minFont": 12.25,
+      "overflow": false,
+      "print": true,
+      "requests": 12,
+      "externalRequests": 0,
+      "errors": []
+    },
+    {
+      "site": "mi",
+      "width": 390,
+      "minFont": 12.25,
+      "overflow": false,
+      "print": true,
+      "requests": 12,
+      "externalRequests": 0,
+      "errors": []
+    }
+  ],
+  "imageBytes": 584447,
+  "materials": [
+    "immuno-concepts-review-v1",
+    "micro-bacteria-review-v1"
+  ],
+  "legacyCHP": [
+    "CHP07_immune_infographic.html",
+    "CHP08_hypersensitivity_infographic.html",
+    "CHP16_mycology_infographic.html"
+  ]
+}

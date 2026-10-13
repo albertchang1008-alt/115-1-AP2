@@ -1,3 +1,10 @@
+import { ReflectionEditor } from './ReflectionEditor';
+import { ReflectionResults } from './ReflectionResults';
+import { reflectionTemplate, validateReflectionConfig } from '../shared/reflection';
+import { ClassroomConfigEditor, StudentInteraction } from './ClassroomInteraction';
+import { featureEnabled } from '../shared/features';
+import TeachingControl from './TeachingControl';
+import { TeacherAssessments } from './Assessments';
 import CompletionBoard from './CompletionBoard';
 import { carryMessage, CarryResult } from '../shared/wrongCarry';
 import ChapterMergeDialog from './ChapterMergeDialog';
@@ -9,6 +16,8 @@ import ProgressBoard from './ProgressBoard';
 import { useEffect, useRef, useState } from 'react';
 import ChapterUnitPicker, { useChapterUnitSelection } from './ChapterUnitPicker';
 import {
+  ListChecks,
+  Presentation,
   LayoutDashboard,
   BookOpen,
   Users,
@@ -82,6 +91,9 @@ import Student from './Student';
 import ThemePicker from './ThemePicker';
 import FontSizePicker from './FontSizePicker';
 const tabs = [
+  ['teaching', '授課控制台', Presentation],
+  ['assessments', '正式測驗', ListChecks],
+  ['classroom', '課堂互動', ListChecks],
   ['overview', '教學總覽', LayoutDashboard],
   ['courses', '課程與教材', BookOpen],
   ['bank', '題庫管理', Layers],
@@ -197,6 +209,23 @@ export default function App() {
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }
+  useEffect(() => {
+    if (api.preview || !profile || profile.teacher || !(featureEnabled(courses.find(c => c.id === courseId), 'teachingConsole') || featureEnabled(courses.find(c => c.id === courseId), 'classroomInteraction'))) return;
+    let alive = true, pending = false;
+    const refresh = async () => {
+      if (pending) return;
+      pending = true;
+      try {
+        const updated = await api.call<Course>('getClassroomCourse', { courseId });
+        if (alive) setCourses(old => old.map(c => c.id === courseId && JSON.stringify(c) !== JSON.stringify(updated) ? updated : c));
+      } catch { /* Existing course remains usable while temporarily offline. */ }
+      finally { pending = false; }
+    };
+    const timer = setInterval(() => void refresh(), 15000);
+    const focus = () => void refresh();
+    window.addEventListener('focus', focus);
+    return () => { alive = false; clearInterval(timer); window.removeEventListener('focus', focus); };
+  }, [api, profile?.uid, profile?.teacher, courseId]);
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(''), 7000);
@@ -346,6 +375,7 @@ export default function App() {
             <ArrowUpRight size={18} />
           </button>
           <p className="muted">@ctcn.edu.tw · 需列入課程名冊</p>
+          <p><a href="./guide/index.html" target="_blank" rel="noopener">第一次使用？看使用說明</a></p>
           <p className="muted">登入時會列出瀏覽器中的 Google 帳號，可選擇其他帳戶</p>
           <button className="linkbutton" onClick={() => setApi(memoryApi())}>
             查看操作示例（不連接正式資料） →
@@ -461,14 +491,21 @@ export default function App() {
           <small>v{VERSION}</small>
         </div>
         {course ? (
-          <Student
-            key={course.id}
-            api={api}
-            course={course}
-            classLabel={course.classNames?.[course.enrollmentClassId || ''] || course.enrollmentClassId || ''}
-            uid={profile.uid}
-            notify={notify}
-          />
+          <>
+            {featureEnabled(course, 'classroomInteraction') && (
+              <div className="student-interaction-host">
+                <StudentInteraction key={course.id} api={api} course={course} />
+              </div>
+            )}
+            <Student
+              key={course.id}
+              api={api}
+              course={course}
+              classLabel={course.classNames?.[course.enrollmentClassId || ''] || course.enrollmentClassId || ''}
+              uid={profile.uid}
+              notify={notify}
+            />
+          </>
         ) : (
           <Empty title="尚無已發布課程" detail="教師發布課程後，就會出現在這裡。" />
         )}
@@ -488,7 +525,7 @@ export default function App() {
         </div>
         <div className="workspace-label">TEACHING WORKSPACE</div>
         <nav>
-          {tabs.filter(([id]) => id !== 'settings').map(([id, label, Icon]) => (
+          {tabs.filter(([id]) => id !== 'settings').filter(([id]) => (id !== 'assessments' || featureEnabled(course, 'assessments')) && (id !== 'teaching' || featureEnabled(course, 'teachingConsole')) && (id !== 'classroom' || featureEnabled(course, 'classroomInteraction'))).map(([id, label, Icon]) => (
             <button className={tab === id ? 'active' : ''} key={id} onClick={() => nav(id)}>
               <Icon size={19} />
               {label}
@@ -614,6 +651,12 @@ export default function App() {
             <ResearchEvidence key={course.id} course={course} api={api} notify={notify} />
           ) : !course ? (
             <Empty title="建立第一門課程" detail="請從「課程與教材」建立課程，再匯入名冊及題庫。" />
+          ) : tab === 'teaching' && featureEnabled(course, 'teachingConsole') ? (
+            <TeachingControl key={course.id} api={api} course={course} notify={notify} changed={async () => { const data = await api.call('bootstrap'); setCourses(data.courses); }} progress={<CompletionPage course={course} api={api} notify={notify} />} />
+          ) : tab === 'assessments' && featureEnabled(course, 'assessments') ? (
+            <TeacherAssessments key={course.id} api={api} course={course} notify={notify} />
+          ) : tab === 'classroom' && featureEnabled(course, 'classroomInteraction') ? (
+            <ClassroomConfigEditor key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'bank' ? (
             <Bank key={course.id} course={course} api={api} notify={notify} onSynced={async () => {
               const data = await api.call('bootstrap');
@@ -820,10 +863,10 @@ function ChapterActivityEditor({
           </select>
         </Field>
         <Field label="類型">
-          <select value={activity.type} onChange={(e) => onChange({ type: e.target.value as Activity['type'] })}>
+          <select value={activity.type} onChange={(e) => onChange({ type: e.target.value as Activity['type'], ...(e.target.value === 'reflection' ? { reflection: activity.reflection || reflectionTemplate(), tracking: undefined } : {}) })}>
             <option value="youtube">YouTube 影片</option>
             <option value="html">互動 HTML 教材</option>
-            <option value="link">外部教材</option>
+            <option value="link">外部教材</option><option value="reflection">反思</option>
           </select>
         </Field>
         <Field label="必做">
@@ -833,9 +876,9 @@ function ChapterActivityEditor({
             <option value="false">選做</option>
           </select>
         </Field>
-        <Field label={activity.type === 'html' ? 'GitHub Pages 教材網址' : '教材連結'}>
+        {activity.type !== 'reflection' && <Field label={activity.type === 'html' ? 'GitHub Pages 教材網址' : '教材連結'}>
           <input type="url" value={activity.url || ''} onChange={(e) => onChange({ url: e.target.value })} />
-        </Field>
+        </Field>}
       </div>
       {activity.type === 'youtube' && <>
         <div className="formgrid">
@@ -881,6 +924,7 @@ function ChapterActivityEditor({
           </Field>
         </div>
       </>}
+      {activity.type === 'reflection' && <ReflectionEditor config={activity.reflection || {prompts:[],allowEdit:true}} onChange={reflection => onChange({reflection})} />}
       <Field label="學習說明">
         <textarea value={activity.description} onChange={(e) => onChange({ description: e.target.value })} />
       </Field>
@@ -899,7 +943,8 @@ function NewActivityDialog({ onCreate, onCancel }: { onCreate: (activity: Activi
     const entry = type === 'html' && slug ? MATERIAL_CATALOG[slug] : undefined;
     onCreate({
       id: uid(), phase, type, description: '',
-      title: entry ? materialTitle(slug) : '新活動',
+      ...(type === 'reflection' ? { reflection: reflectionTemplate() } : {}),
+      title: entry ? materialTitle(slug) : type === 'reflection' ? '課後反思' : '新活動',
       url: entry ? materialPageUrl(slug) : '',
       ...(entry ? { materialVersion: slug, tracking: entry.tracking, nodeTotal: entry.nodeTotal, questionTotal: entry.questionTotal } : {}),
       ...(required ? { required: required === 'true' } : {}),
@@ -910,7 +955,7 @@ function NewActivityDialog({ onCreate, onCancel }: { onCreate: (activity: Activi
     <p className="field-label">階段</p>
     <div className="phase-choices" role="radiogroup" aria-label="階段">{Object.entries(phases).map(([id, label]) => <button key={id} type="button" role="radio" aria-checked={phase === id} className={phase === id ? 'selected' : ''} onClick={() => { setPhase(id as Activity['phase']); setError(''); }}>{label}</button>)}</div>
     {error && <p className="error" role="alert">{error}</p>}
-    <Field label="類型"><select value={type} onChange={(e) => setType(e.target.value as Activity['type'])}><option value="html">互動教材（資訊圖表）</option><option value="youtube">YouTube 影片</option><option value="link">外部教材</option></select></Field>
+    <Field label="類型"><select value={type} onChange={(e) => setType(e.target.value as Activity['type'])}><option value="html">互動教材（資訊圖表）</option><option value="youtube">YouTube 影片</option><option value="link">外部教材</option><option value="reflection">反思</option></select></Field>
     {type === 'html' && <Field label="資訊圖表"><select value={slug} onChange={(e) => setSlug(e.target.value)}><option value="">稍後再選／自訂網址</option>{Object.keys(MATERIAL_CATALOG).map((id) => <option key={id} value={id}>{materialTitle(id)}（{id}）</option>)}</select></Field>}
     <Field label="必做"><select value={required} onChange={(e) => setRequired(e.target.value)}><option value="">依活動類型（預設：{requiredLabel({ id: '', title: '', phase: 'before', url: '', description: '', type, tracking: type === 'html' && slug ? 'interactive' : undefined }).required ? '必做' : '選做'}）</option><option value="true">必做</option><option value="false">選做</option></select></Field>
     <div className="actions"><button className="primary" onClick={create}><Plus size={16} />建立</button></div>
@@ -960,7 +1005,7 @@ export function CourseEditor(props: CourseEditorProps) {
   const changeChapter = (patch: Partial<Chapter>) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeChapterAndOverrides = (patch: Partial<Chapter>, chapterOverrides: Course['chapterOverrides']) => { const base = materialize(); setDraft({ ...base, chapterOverrides, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeActivity = (index: number, patch: Partial<Activity>) => changeChapter({ activities: chapter!.activities.map((a, i) => i === index ? { ...a, ...patch } : a) });
-  const act = async (publish = false) => { setBusy(true); try { const ready = materialize(); await save(ready); if (publish) { const result = await api.call<Course>('publishCourse', { courseId: ready.id }); setDraft(result); onPublished(result); } notify(publish ? '課程已發布' : '草稿已保存'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
+  const act = async (publish = false) => { setBusy(true); try { const ready = materialize(); for (const chapter of Object.values(chaptersOf(ready))) for (const a of chapter.activities) if (a.type === 'reflection') validateReflectionConfig(a.reflection); await save(ready); if (publish) { const result = await api.call<Course>('publishCourse', { courseId: ready.id }); setDraft(result); onPublished(result); } notify(publish ? '課程已發布' : '草稿已保存'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
   const move = (offset: number) => { const order = rows.map((item) => item.name), at = order.indexOf(name), to = at + offset; if (to < 0 || to >= order.length) return; [order[at], order[to]] = [order[to], order[at]]; setDraft({ ...materialize(), chapterOrder: order }); };
   const removeStale = () => { const stale = draft.staleUnits || []; if (!stale.length || !confirm(`確定移除以下舊題目分類？\n${stale.join('\n')}`)) return; const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => !stale.includes(id))])); setDraft({ ...draft, units: draft.units.filter((u) => !stale.includes(u.id)), classUnits, staleUnits: [] }); };
   const moveLegacyActivity = (unitId: string, activity: Activity) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], activities: [...chaptersOf(base)[name].activities, activity] } }, units: base.units.map((u) => u.id === unitId ? { ...u, activities: u.activities.filter((a) => a.id !== activity.id) } : u) }); };
@@ -971,7 +1016,9 @@ export function CourseEditor(props: CourseEditorProps) {
   if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再同步 Google Sheet 建立單元。" /><button onClick={newCourse}>新增課程</button></section>;
   return <>
     <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy} onClick={() => act(true)}>發布課程</button></div></header>
-    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
+    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><fieldset><legend>課程功能（預設關閉；保存後生效）</legend>{(['assessments', 'teachingConsole', 'classroomInteraction'] as const).map((key, i) => <label className="check" key={key}><input type="checkbox" checked={draft.features?.[key] === true} onChange={e => setDraft({ ...draft, features: { ...draft.features, [key]: e.target.checked } })} />{['正式前後測', '授課控制台', '課堂互動'][i]}</label>)}</fieldset>
+      {draft.features?.assessments && <div className="formgrid">{(['pretest', 'posttest'] as const).map(kind => <Field key={kind} label={kind === 'pretest' ? '前測來源題目 ID（逗號分隔，保存後同步題庫）' : '後測來源題目 ID（逗號分隔）'}><input value={(draft.assessmentSources?.[kind] || []).join(',')} onChange={e => setDraft({ ...draft, assessmentSources: { pretest: draft.assessmentSources?.pretest || [], posttest: draft.assessmentSources?.posttest || [], [kind]: e.target.value ? e.target.value.split(',').map(s => s.trim()) : [] } })} /></Field>)}</div>}
+      <p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
     <ClassManager course={draft} change={setDraft} />
     {!!draft.staleUnits?.length && <div className="notice warning"><strong>Sheet 已無對應的舊題目分類</strong><p>{draft.staleUnits.join('、')}</p><button onClick={removeStale}>全部移除</button></div>}
     {reviewOpen && <div className="modalshade"><section className="modal"><div className="sectionhead"><h2>新增複習考</h2><button onClick={() => setReviewOpen(false)}>關閉</button></div><Field label="名稱"><input value={reviewName} onChange={(e) => setReviewName(e.target.value)} placeholder="不可與既有單元同名" /></Field><p>來源分類（可跨單元；只選已發布的一般分類）</p>{draft.units.filter((u) => u.bankVersion && !isReviewUnit(u)).map((u) => <label className="check" key={u.id}><input type="checkbox" checked={reviewSources.includes(u.id)} onChange={(e) => { const next = e.target.checked ? [...reviewSources, u.id] : reviewSources.filter((id) => id !== u.id); setReviewSources(next); setReviewCount(Math.max(next.length, Math.min(40, next.reduce((sum, id) => sum + (draft.units.find((x) => x.id === id)?.questionCount || 0), 0)))); }} />{u.group ? `${u.group}／` : ''}{u.title}（{u.questionCount || 0} 題）</label>)}<Field label="每次作答題數 N"><input type="number" min={reviewSources.length || 1} max={reviewTotal || 1} value={reviewCount} onChange={(e) => setReviewCount(Number(e.target.value))} /></Field><p className="muted">題目池共 {reviewTotal} 題；分配：{Object.entries(reviewAllocation).map(([id, n]) => `${id} ${n} 題`).join('、') || '請先選擇來源'}。門檻 80 分需答對 {Math.ceil(reviewCount * .8)} 題。</p><button className="primary" disabled={busy || !reviewName || reviewCount < reviewSources.length || reviewCount > reviewTotal} onClick={() => void buildReview()}>建立</button></section></div>}
@@ -1610,7 +1657,7 @@ export function Analysis({
     </>
   );
 }
-function ReportsPage({
+export function ReportsPage({
   course,
   api,
   notify,
@@ -1641,6 +1688,7 @@ function ReportsPage({
           <p>結算快照固定課程門檻與當次讀取結果，不受日後新增單元影響。</p>
         </div>
       </header>
+      <ReflectionResults key={course.id} course={course} api={api} />
       <section className="panel">
         <h2>完成度結算快照</h2>
         <p>快照依批次取得學生進度，完成時保留採集起訖時間。請在評分截止後結算。</p>

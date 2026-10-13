@@ -1,4 +1,14 @@
 # 開發紀錄
+目前版本：1.9.0
+
+## 1.9.0（2026-10-13，Codex；本機待 Claude 驗收）
+- 從 origin/main@a593796 建 feature/1.9.0-unify／.worktrees/unify-1.9.0，逐檔移植題庫分離、1.8.0 反思與指定 MI 功能 commit；沒有 merge MI 網站分支。
+- 功能改為課程 features（預設關閉）、後端 access＋features 驗證、課程來源題目設定與私有簡報、資料驅動互動，保留舊輪次／試卷紀錄路徑。
+- 修反思換行與換信箱未作答判斷；影片等待雲端進度、補考種類切換、倒數／加時一併移植。
+- VITE_SITE_ID 分開 AP2／MI 目錄、網址及 CHP 建置；AP2 原快照全部保留。MI 簡報選項指示改為課程 migration 資料，顯示與舊版逐頁一致。
+- 共用靜態學生說明、登入／首頁入口與本機三張提示；18 張測試班指示截圖、兩站桌機／手機建置截圖；無正式學生資料。
+- AP2／MI 各跑完整 check，前端156／Functions54、0 fail／0 skipped，版本／build／51入口通過；guide 最小12.25px、無溢位／外部請求、色系字級／列印有效；圖片584447 bytes。
+- migration 只產離線 dry-run，12題逐字一致；未 apply、push 或部署。報告 docs/UNIFY_1.9.0_REPORT.md，待 Claude 獨立驗收。
 
 ## 1.7.1 看板＋微免release整合完成（2026-10-11，Codex）
 
@@ -12,7 +22,7 @@
 - 圖例分項加間距；最高分／門檻與作答次數加分隔。
 - check140／26、兩端build、版本檢查及兩尺寸截圖通過，待Claude複驗，未push／部署。
 
-目前版本：1.7.1
+
 
 ## 1.7.1 — 2026-10-07 完成度看板：各班比較＋學生單元矩陣 [Codex]
 - 從e8805f8獨立建立feature/1.7.1-completion-board（.worktrees/completion-board），純前端；逐班讀完getCompletion分頁、頁面快取、各班／總人數加權完成率、姓名固定矩陣、逾期／未開放／進行中格子、明細抽屜、搜尋排序篩選及兩種CSV，保留StudentDetail。

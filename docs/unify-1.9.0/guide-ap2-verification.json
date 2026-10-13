@@ -1,0 +1,59 @@
+{
+  "report": [
+    {
+      "site": "ap2",
+      "width": 1280,
+      "minFont": 12.25,
+      "overflow": false,
+      "print": true,
+      "requests": 12,
+      "externalRequests": 0,
+      "errors": []
+    },
+    {
+      "site": "ap2",
+      "width": 390,
+      "minFont": 12.25,
+      "overflow": false,
+      "print": true,
+      "requests": 12,
+      "externalRequests": 0,
+      "errors": []
+    }
+  ],
+  "imageBytes": 584447,
+  "materials": [
+    "blood-composition-v1",
+    "blood-gas-transport-v1",
+    "blood-gas-transport-v2",
+    "blood-post-v1",
+    "blood-pre-v1",
+    "blood-pressure-measurement-v1",
+    "blood-pressure-regulation-v1",
+    "blood-types-v1",
+    "blood-vessels-v1",
+    "capillary-exchange-v1",
+    "cardiac-conduction-v1",
+    "cardiac-conduction-v2",
+    "cardiac-cycle-v1",
+    "cardiac-cycle-v2",
+    "cardiac-electrical-v1",
+    "cardiac-output-v1",
+    "circulation-routes-v1",
+    "coronary-circulation-v1",
+    "course-orientation-v1",
+    "ecg-basics-v1",
+    "heart-structure-v1",
+    "heart-structure-v2",
+    "hemodynamics-v1",
+    "hemostasis-mechanisms-v1",
+    "hemostasis-mechanisms-v2",
+    "immuno-concepts-review-v1",
+    "lymphatic-system-v1",
+    "lymphoid-organs-v1",
+    "major-vessels-v1",
+    "micro-bacteria-review-v1",
+    "rbc-homeostasis-v1"
+  ],
+  "legacyCHP": []
+}

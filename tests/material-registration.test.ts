@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { MATERIAL_CATALOG } from '../shared/materials';
+import { ALL_MATERIAL_CATALOG as MATERIAL_CATALOG } from '../shared/materials';
 import { validateMaterialContent } from '../shared/materialKit';
 import { physiologySlugs, readBuiltMaterial } from '../scripts/materials-html-content.mjs';
 

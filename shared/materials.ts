@@ -1,3 +1,4 @@
+import { SITE, siteId, miMaterialSlugs } from './site';
 // 教材目錄的唯一資料來源（single source of truth）。
 //
 // public/materials/README.md 的「正式教材版本」表格、教師後台活動表單的「教材版本」
@@ -24,7 +25,7 @@ export interface MaterialCatalogEntry {
    */
   note?: string;
 }
-export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
+export const ALL_MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'course-orientation-v1': { label: '課程介紹、規範、評量與參訪圖卡', tracking: 'interactive', nodeTotal: 8, questionTotal: 10, note: '10 題全對才送出完成' },
   // questionTotal=11 是「先備知識 6 題＋病例限時連勝 5 題」兩層的總和，用於診斷分母；
   // 實際「通關」判定是病例 5 題要在限時內全對（見 index.html 的 score === 5），
@@ -82,7 +83,8 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。
-export const MATERIALS_BASE_URL = 'https://albertchang1008-alt.github.io/115-1-AP2/materials/';
+export const MATERIAL_CATALOG = siteId() === 'mi' ? Object.fromEntries(Object.entries(ALL_MATERIAL_CATALOG).filter(([slug]) => miMaterialSlugs.includes(slug))) : ALL_MATERIAL_CATALOG;
+export const MATERIALS_BASE_URL = SITE.materials;
 export function materialPageUrl(slug: string) {
   return `${MATERIALS_BASE_URL}${slug}/index.html`;
 }

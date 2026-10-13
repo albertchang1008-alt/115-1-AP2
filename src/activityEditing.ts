@@ -3,7 +3,7 @@ import { isRequiredActivity } from '../shared/model';
 import { MATERIAL_CATALOG } from '../shared/materials';
 
 export const PHASE_ORDER: Phase[] = ['before', 'during', 'after'];
-export const ACTIVITY_TYPE_LABEL: Record<Activity['type'], string> = { html: '互動教材', youtube: '影片', link: '外部教材', quiz: '測驗' };
+export const ACTIVITY_TYPE_LABEL: Record<Activity['type'], string> = { html: '互動教材', youtube: '影片', link: '外部教材', quiz: '測驗', reflection: '反思' };
 
 /** 目錄名稱多以「圖卡」結尾；學生看到的活動名稱不需要這兩個字。 */
 export function materialTitle(slug: string) {

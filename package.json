@@ -1,6 +1,6 @@
 {
   "name": "course-platform",
-  "version": "1.7.1",
+  "version": "1.9.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,8 +15,9 @@
     "materials:build": "node --experimental-strip-types scripts/materials-build.mjs",
     "materials:preview": "node --experimental-strip-types scripts/materials-build.mjs --preview",
     "materials:shots": "node scripts/materials-shots.mjs",
-    "check": "npm test && npm run build && npm --prefix functions run build && npm --prefix functions test",
-    "materials:validate-nodes": "node --experimental-strip-types scripts/material-node-audit.mjs"
+    "check": "npm test && npm run build && npm --prefix functions test",
+    "materials:validate-nodes": "node --experimental-strip-types scripts/material-node-audit.mjs",
+    "pretest": "npm --prefix functions run build"
   },
   "dependencies": {
     "firebase": "^11.0.0",

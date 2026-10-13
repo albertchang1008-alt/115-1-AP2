@@ -1,3 +1,8 @@
+import { validateReflectionConfig, validateReflectionAnswers, reflectionActivity, buildReflectionResponse, reflectionProgress, summarizeReflections } from '../../shared/reflection';
+import { featureNames } from '../../shared/features';
+import { createClassroomHandlers } from './classroom';
+import { createTeachingHandlers } from './teaching';
+import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
 import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wrongCarry';
 import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
@@ -157,7 +162,7 @@ export const bootstrap = onCall(options, async (req) => {
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
     const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, features: d.data().features || {}, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
   }
   const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
   const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
@@ -174,7 +179,7 @@ export const bootstrap = onCall(options, async (req) => {
       // Empty/missing roster names fall back to the original Google token, not another course.
       const studentName = (typeof student.name === 'string' ? student.name.trim() : '')
         || (typeof p.name === 'string' ? p.name.trim() : '');
-      courses.push({ ...forClass(c.published, student.classId), id: courseId, enrollmentClassId: student.classId, studentName });
+      courses.push({ ...forClass(c.published, student.classId), features: c.features || {}, id: courseId, enrollmentClassId: student.classId, studentName });
     } catch (e) {
       if (!(e instanceof HttpsError)) throw e;
     }
@@ -187,6 +192,8 @@ export const saveCourse = onCall(options, async (req) => {
   const course = req.data.course as Course;
   code(course.id);
   size(course);
+  if (course.features && (Object.keys(course.features).some(k => !featureNames.includes(k as any)) || Object.values(course.features).some(v => typeof v !== 'boolean'))) fail('功能開關設定無效');
+  if (course.assessmentSources && ['pretest', 'posttest'].some(k => { const ids = (course.assessmentSources as any)[k]; return !Array.isArray(ids) || ids.length > 100 || ids.some((id: unknown) => typeof id !== 'string' || !safeId(id)) || new Set(ids).size !== ids.length; })) fail('前後測來源設定無效');
   if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
     fail('請填寫課程與學期，最多 50 班、50 單元');
   if (new Set(course.classIds).size !== course.classIds.length) fail('班級代碼重複');
@@ -221,7 +228,7 @@ export const saveCourse = onCall(options, async (req) => {
       activityIds.add(a.id);
       if (
         !['before', 'during', 'after'].includes(a.phase) ||
-        !['html', 'youtube', 'link', 'quiz'].includes(a.type)
+        !['html', 'youtube', 'link', 'quiz', 'reflection'].includes(a.type)
       )
         fail('活動類型錯誤');
       if (
@@ -232,6 +239,7 @@ export const saveCourse = onCall(options, async (req) => {
           (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))
       )
         fail('YouTube 連結或片段時間無效');
+      if (a.type === 'reflection') { try { a.reflection = validateReflectionConfig(a.reflection); delete a.tracking; } catch (e) { fail((e as Error).message); } }
       if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
       if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
       if (a.materialVersion) id(a.materialVersion);
@@ -251,8 +259,9 @@ export const saveCourse = onCall(options, async (req) => {
       id(a.id);
       if (activityIds.has(a.id)) fail('活動 ID 重複');
       activityIds.add(a.id);
-      if (!a.title?.trim() || !['before', 'during', 'after'].includes(a.phase) || !['html', 'youtube', 'link', 'quiz'].includes(a.type)) fail('活動類型錯誤');
+      if (!a.title?.trim() || !['before', 'during', 'after'].includes(a.phase) || !['html', 'youtube', 'link', 'quiz', 'reflection'].includes(a.type)) fail('活動類型錯誤');
       if (a.type === 'youtube' && (!youtubeId(a.url) || !Number.isFinite(a.start || 0) || (a.start || 0) < 0 || (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))) fail('YouTube 連結或片段時間無效');
+      if (a.type === 'reflection') { try { a.reflection = validateReflectionConfig(a.reflection); delete a.tracking; } catch (e) { fail((e as Error).message); } }
       if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
       if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
       if (a.materialVersion) id(a.materialVersion);
@@ -298,6 +307,8 @@ export const saveCourse = onCall(options, async (req) => {
       ref,
       {
         draft: course,
+        features: Object.fromEntries(featureNames.map(k => [k, course.features?.[k] === true])),
+        ...(course.assessmentSources ? { assessmentSources: course.assessmentSources } : {}),
         teacherIds: old.data()?.teacherIds || [p.uid],
         classIds: old.data()?.published?.classIds || [],
         rosterVersion: old.exists ? old.data()?.rosterVersion || 1 : 2,
@@ -653,7 +664,9 @@ export const getBank = onCall(options, async (req) => {
   const docs = await Promise.all(
     manifest.data()!.chunks.map((ch: string) => ref.collection('chunks').doc(ch).get()),
   );
-  return { questions: docs.flatMap((d) => d.data()?.questions || []) };
+  const questions = docs.flatMap((d) => d.data()?.questions || []);
+  if (!p.teacher) assertPracticeBank(c, req.data.unitId, questions.map((q: Question) => q.id));
+  return { questions };
 });
 export const getProgress = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
@@ -684,6 +697,7 @@ export const submitAttempt = onCall(options, async (req) => {
   const bankRef = db.doc(`banks/${a.courseId}_${a.unitId}_${a.version}`);
   const bank = await bankRef.get();
   if (!bank.exists) fail('題庫版本不存在');
+  assertPracticeBank(c, a.unitId, Object.keys(bank.data()!.questionOptions || {}));
   if (
     !['quiz', 'flashcard', 'review'].includes(a.mode) ||
     !Array.isArray(a.answers) ||
@@ -782,6 +796,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     const bankRef = db.doc(`banks/${courseId}_${input.unitId}_${input.version}`), bank = await bankRef.get();
     if (!bank.exists || !Number.isFinite(input.duration) || input.duration < 0 || input.answers.length > MAX_BANK_QUESTIONS) fail('作答格式錯誤');
     const options = bank.data()!.questionOptions || {};
+    assertPracticeBank(c, input.unitId, Object.keys(options));
     if (new Set(input.answers.map((x) => x.questionId)).size !== input.answers.length) fail('作答格式錯誤');
     for (const answer of input.answers) if (!options[answer.questionId] || typeof answer.selected !== 'string' || !options[answer.questionId].includes(answer.selected)) fail('題目或選項不屬於本次題庫');
     const grading = await bankRef.collection('grading').doc('answers').get();
@@ -833,6 +848,7 @@ export const saveActivity = onCall(options, async (req) => {
   )
     fail('活動資料無效');
   const activity = activityOwner.activities.find((a: any) => a.id === activityId);
+  if (activity?.type === 'reflection') fail('反思需填寫並送出，不能直接標記完成');
   if (activity?.tracking === 'interactive') fail('互動教材需由事件回報通關');
   const ref = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
   await ref.set(
@@ -846,6 +862,70 @@ export const saveActivity = onCall(options, async (req) => {
     { merge: true },
   );
   return { ok: true };
+});
+// Reflection responses and progress are committed together; raw text never goes to analytics.
+function reflectionRequest(data: any) {
+  const courseId = code(data?.courseId), activityId = id(data?.activityId), chapterId = data?.chapterId;
+  if (typeof chapterId !== 'string' || !chapterId || chapterId.length > 200 || chapterId.includes('/')) fail('單元名稱格式錯誤');
+  return { courseId, chapterId, activityId, key: chapterActivityKey(chapterId, activityId) };
+}
+function reflectionOrFail<T>(action: () => T): T {
+  try { return action(); } catch (e) { return fail((e as Error).message); }
+}
+export const saveReflection = onCall(options, async (req) => {
+  const request = reflectionRequest(req.data);
+  const { p } = await access(req, request.courseId);
+  if (p.teacher) fail('教師預覽不能寫入正式反思或進度');
+  size(req.data, 40000);
+  const root = db.doc(`courses/${request.courseId}`);
+  const responseRef = db.doc(`courses/${request.courseId}/reflections/${request.key}/responses/${req.auth!.uid}`);
+  const progressRef = db.doc(`courses/${request.courseId}/progress/${req.auth!.uid}`);
+  return db.runTransaction(async tx => {
+    const [courseDoc, old, progressDoc, membership] = await Promise.all([tx.get(root), tx.get(responseRef), tx.get(progressRef), tx.get(enrollmentRef(request.courseId, p.email))]);
+    const c = courseDoc.data();
+    // Recheck course and membership in the transaction, including concurrent roster changes.
+    const member = c?.rosterVersion === 2 ? membership : await tx.get(db.doc(`roster/${p.email}`));
+    const roster = member.data();
+    if (!c || c.archived || !roster?.enabled || !c.published?.classIds?.includes(roster.classId)) throw new HttpsError('permission-denied', '未列入此課程的啟用班級名冊');
+    const now = Date.now();
+    const { config } = reflectionOrFail(() => reflectionActivity(c.published, roster.classId, request.chapterId, request.activityId, now, true));
+    const answers = reflectionOrFail(() => validateReflectionAnswers(config, req.data.answers));
+    const row = reflectionOrFail(() => buildReflectionResponse({ ...roster, classId: roster.classId, uid: req.auth!.uid }, config, answers, old.exists ? old.data() as any : null, now));
+    const progress = reflectionProgress(normalizeProgress(progressDoc.data() as Progress), request.key, now);
+    tx.set(responseRef, row);
+    tx.set(progressRef, { ...progress, uid: req.auth!.uid, classId: roster.classId });
+    return { response: row, progress };
+  });
+});
+export const getMyReflection = onCall(options, async req => {
+  const r = reflectionRequest(req.data), { p, c } = await access(req, r.courseId);
+  if (p.teacher) fail('教師預覽不讀取學生反思');
+  reflectionOrFail(() => reflectionActivity(c.published, p.classId, r.chapterId, r.activityId));
+  const response = await db.doc(`courses/${r.courseId}/reflections/${r.key}/responses/${req.auth!.uid}`).get();
+  return { response: response.data() || null };
+});
+/** Private course setting: never copied into draft/published or returned to a caller. */
+export function reflectionResearchId(courseId: string, studentId: string, salt: string) {
+  return createHmac('sha256', salt).update(JSON.stringify([courseId, studentId])).digest('hex');
+}
+export const getReflections = onCall(options, async req => {
+  const r = reflectionRequest(req.data), { c } = await access(req, r.courseId, true);
+  const chapter = c.published && chaptersOf(c.published)[r.chapterId];
+  const activity = chapter?.activities.find((a: import('../../shared/model').Activity) => a.id === r.activityId && a.type === 'reflection');
+  if (!activity) fail('反思活動尚未發布');
+  const classId = req.data.classId ? code(req.data.classId) : '';
+  if (classId && !c.published.classIds.includes(classId)) fail('班級不屬於已發布課程');
+  const rosterSnap = await rosterQuery(r.courseId, c).get();
+  const roster = rosterSnap.docs.map(d => d.data() as Roster).filter(x => x.enabled && c.published.classIds.includes(x.classId) && (!classId || classId === x.classId) );
+  const snap = await db.collection(`courses/${r.courseId}/reflections/${r.key}/responses`).get();
+  const salt = await db.runTransaction(async tx => {
+    const root = db.doc(`courses/${r.courseId}`), doc = await tx.get(root);
+    const stored = doc.data()?.reflectionSalt;
+    if (stored) return stored as string;
+    const next = randomUUID(); tx.set(root, { reflectionSalt: next }, { merge: true }); return next;
+  });
+  const rows = snap.docs.map(d => d.data() as any).filter(x => (!classId || x.classCode === classId) && c.published.classIds.includes(x.classCode) ).map(x => ({ ...x, researchId: reflectionResearchId(r.courseId, x.studentId, salt) }));
+  return summarizeReflections(activity!, rows, roster);
 });
 // 題庫解析研究資料：僅在授權課程保存粗粒度曝光／展開／停留；不影響成績與完成度。
 export const saveExplanationResearchEvents = onCall(options, async (req) => {
@@ -1270,6 +1350,8 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
   }
   for (const [courseId, units] of groups) {
     const ref = db.doc(`courses/${courseId}`);
+    const assessmentCourse = (await ref.get()).data();
+    if (assessmentCourse?.teacherIds?.includes(uid)) await storeAssessmentSources(db, courseId, assessmentCourse, units);
     for (const [unitId, { group, questions }] of units) {
       try {
         const course = await ref.get();
@@ -1496,3 +1578,9 @@ export const getLearningDiagnostics = onCall(options, async (req) => {
   const snap = await (after ? base.startAfter(after) : base).limit(50).get();
   return { rows: snap.docs.map((d) => ({ ...d.data(), id: d.id })), next: snap.size === 50 ? snap.docs.at(-1)!.id : null };
 });
+
+export const { getAssessments, prepareAssessment, controlAssessment, startAssessment, saveAssessment, previewAssessment, assessmentReport, expireAssessments } = createAssessmentHandlers(db, access, options);
+
+export const { getTeachingDeck, getClassroomCourse } = createTeachingHandlers(db, access, options);
+
+export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);

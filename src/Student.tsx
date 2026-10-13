@@ -1,3 +1,6 @@
+import { featureEnabled } from '../shared/features';
+import { ReflectionPage } from './ReflectionPage';
+import { StudentAssessments } from './Assessments';
 import { MixedScopeCard, MixedPractice } from './MixedPractice';
 import { selectPracticeRows } from '../shared/practice';
 import { Flashcards, UnitWrongPractice } from './PracticeModes';
@@ -86,6 +89,7 @@ export default function Student({
   sim = 'none',
   notify,
 }: Props) {
+  const [progressLoad, setProgressLoad] = useState({ ready: false, error: '', retry: 0 });
   const [progress, setProgress] = useState<Progress>(emptyProgress()),
     [unitId, setUnitId] = useState(initialUnit || ''),
     [activityId, setActivityId] = useState(initialActivity || ''),
@@ -103,6 +107,16 @@ export default function Student({
     [exitRequested, setExitRequested] = useState(false),
     [tab, setTab] = useState<'pre' | 'class' | 'post' | 'practice'>('pre'),
     [queueCount, setQueueCount] = useState(preview ? 0 : pending(uid).length);
+  useEffect(() => {
+    if (!unitId || course.units.some(u => u.id === unitId)) return;
+    setUnitId('');
+    setActivityId('');
+    setTaking(false);
+    setQuestions([]);
+    setMixedIds(null);
+    location.hash = `#/course/${encodeURIComponent(course.id)}`;
+    notify('教師已調整單元開放，請依目前課堂進度繼續。');
+  }, [course.units, unitId]);
   const pRef = useRef(progress);
   const takingRef = useRef(taking);
   pRef.current = progress;
@@ -168,6 +182,7 @@ export default function Student({
   }, [course.id, preview]);
   useEffect(() => {
     let active = true;
+    setProgressLoad(s => ({ ...s, ready: false, error: '' }));
     api
       .call<Progress>('getProgress', { courseId: course.id })
       .then((p) => {
@@ -177,12 +192,13 @@ export default function Student({
         }
         if (preview) void api.call('setPreviewProgress', { progress: p });
         setProgress(p);
+        setProgressLoad(s => ({ ...s, ready: true, error: '' }));
       })
-      .catch((e) => notify(e.message));
+      .catch((e) => { if (active) { setProgressLoad(s => ({ ...s, error: e.message })); notify(e.message); } });
     return () => {
       active = false;
     };
-  }, [api, course.id, sim]);
+  }, [api, course.id, sim, progressLoad.retry]);
   useEffect(() => {
     if (tab !== 'practice') return;
     const parsed = parseStudentRoute(location.hash, course.id);
@@ -324,6 +340,11 @@ export default function Student({
   }
   if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice key={activityId} api={api} course={course} progress={progress} uid={uid} selectedIds={mixedIds} mode={activityId.split('_')[3] as any} count={Number(activityId.split('_')[4])} onProgress={setProgress} onBack={() => route()} /></>;
   if (unit && activityId === '__wrongcards') return <><StudentSettings /><UnitWrongPractice api={api} course={course} unit={unit} progress={progress} onProgress={setProgress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} /></>;
+  // 等待雲端進度，避免直接重整活動路由時播放器先用 0 秒建立。
+  if (activity && unit && chapter && !progressLoad.ready)
+    return <><StudentSettings /><main><p role={progressLoad.error ? 'alert' : 'status'}>{progressLoad.error ? '無法載入學習紀錄，請重試。' : '正在載入學習紀錄…'}</p>{progressLoad.error && <button onClick={() => setProgressLoad(s => ({ ...s, retry: s.retry + 1 }))}>重新載入</button>}<button onClick={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)}>返回單元</button></main></>;
+  if (activity?.type === 'reflection' && unit && chapter)
+    return <><StudentSettings /><ReflectionPage key={course.id + selectedChapterName + activity.id} course={course} chapterId={selectedChapterName} dueAt={chapter.dueAt} activity={activity} api={preview ? { ...api, preview: true } : api} uid={uid} onProgress={setProgress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
   if (activity && unit && chapter)
     return <><StudentSettings /><ReadingPage course={course} unit={unit} chapterName={selectedChapterName} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
   if (taking && unit && mode === 'flashcard') return <><StudentSettings /><Flashcards rows={questions.map(q => ({q,unit}))} onBack={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`);}} onPractice={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=draw&n=10`);void start('quiz',10,unit);}} /></>;
@@ -342,6 +363,7 @@ export default function Student({
       /></>);
   return (
     <><StudentSettings /><div className="student">
+      {!unit && <><div className="prefs-bar student-guide-prefs"><ThemePicker /><FontSizePicker /><a className="button" href="./guide/index.html" target="_blank" rel="noopener">？使用說明</a></div>{!preview && <FirstUseTips courseId={course.id} uid={uid} />}</>}
       <div className="student-top">
         <span className="eyebrow">LEARNING SPACE</span>
         <span>
@@ -366,6 +388,7 @@ export default function Student({
           </button>
         </div>
       )}
+      {!unit && featureEnabled(course, 'assessments') && <StudentAssessments api={api} course={course} />}
       {course.studentNotice && <div className="notice">{course.studentNotice}</div>}
       {!unit ? (
         <>
@@ -477,7 +500,7 @@ export function defaultTab(unit: Pick<Unit | Chapter, 'activities'>, progress: P
 }
 function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: string; activity: any; progress: Progress; onOpen: () => void }) {
   const done = !!progress.activities[`${ownerKey}_${activity.id}`]?.completed;
-  const label = activity.type === 'youtube' ? '選看' : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
+  const label = activity.type === 'youtube' ? '選看' : activity.type === 'reflection' ? (isRequiredActivity(activity) ? '必做' : '選做') : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
   const state = activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
   const contentTypes = {
     youtube: { label: 'YouTube 影片', Icon: YoutubeIcon },
@@ -488,7 +511,7 @@ function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: stri
   // 一般閱讀的 HTML 沒有闖關與診斷，不能標成互動資訊圖表，否則學生點開會落差。
   const contentType = activity.type === 'html' && activity.tracking !== 'interactive'
     ? { label: '閱讀教材', Icon: BookOpen }
-    : contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
+    : activity.type === 'reflection' ? { label: '反思', Icon: BookOpen } : contentTypes[activity.type as keyof typeof contentTypes] || contentTypes.link;
   return <button className="activitycard" onClick={onOpen} aria-label={`${activity.title}，${contentType.label}，${label}，${state}`}><div className="activitycard-tags"><span className="activity-type"><contentType.Icon size={15} aria-hidden="true" />{contentType.label}</span><span className="badge">{label}</span></div><h3>{activity.title}</h3>{activity.description && activity.description !== activity.title && <p>{activity.description}</p>}<footer>{done ? <><CheckCircle2 size={16} /> 已完成</> : <><BookOpen size={16} /> {state}</>}</footer></button>;
 }
 export function ProgressUnitCard({ index, row, progress, route, studentName = '' }: { index: number; row: { name: string; chapter: Chapter; units: Unit[]; summary: UnitProgressSummary }; progress: Progress; route: (path?: string) => void; studentName?: string }) {
@@ -870,4 +893,13 @@ function Socratic({ q }: { q: Question }) {
       )}
     </>
   );
+}
+
+export function FirstUseTips({ courseId, uid }: { courseId: string; uid: string }) {
+  const key = `course-guide-seen:${courseId}:${uid}`;
+  const [step, setStep] = useState(() => { try { return localStorage.getItem(key) ? -1 : 0; } catch { return 0; } });
+  const cards = [ ['待辦在哪裡', '首頁「待辦」列出還沒達標的分類與未完成的必做活動，點一下就能前往。'], ['單元頁的分頁', '依課前、課堂、課後與練習分頁，查看活動卡上的必做／選做標示。'], ['完成度怎麼算', '每個題目分類的完整測驗最高分達門檻，加上全部必做活動完成，單元才算完成；閃卡與練習不計分。'] ];
+  const dismiss = () => { try { localStorage.setItem(key, '1'); } catch {} setStep(-1); };
+  if (step < 0) return null;
+  return <section className="panel first-use-tips" aria-label="首次使用提示"><span>{step + 1} / 3</span><h2>{cards[step][0]}</h2><p>{cards[step][1]}</p><div className="actions"><button onClick={dismiss}>略過提示</button><button className="primary" onClick={() => step === 2 ? dismiss() : setStep(step + 1)}>{step === 2 ? '開始使用' : '下一張'}</button></div></section>;
 }

@@ -310,6 +310,12 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           result = {progress, attempt:saved[0], wrongSummary:summaries[0], attempts:saved, summaries};
           break;
         }
+        case 'getMyReflection':
+          result = {response:null}; break;
+        case 'getReflections':
+          result = {rows:[],missing:[],rosterCount:0,choiceCounts:[]}; break;
+        case 'saveReflection':
+          throw Error('教師預覽不寫入正式反思或進度');
         case 'saveActivity':
           progress.activities[(d.chapterName ? `chapter:${d.chapterName}` : d.unitId) + '_' + d.activityId] = {
             position: d.position,

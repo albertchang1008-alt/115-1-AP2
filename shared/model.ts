@@ -32,10 +32,24 @@ export interface Question {
   };
   remedialUrl?: string;
 }
+export interface ReflectionPrompt {
+  id: string;
+  kind: 'text' | 'single';
+  text: string;
+  options?: string[];
+  required: boolean;
+  maxLength?: number;
+}
+export interface ReflectionConfig { prompts: ReflectionPrompt[]; allowEdit: boolean; }
+export interface ReflectionResponse {
+  uid: string; classCode: string; studentId: string; name: string; email: string;
+  answers: Record<string, string>; promptsSnapshot: ReflectionPrompt[];
+  submittedAt: number; updatedAt: number; editCount: number;
+}
 export interface Activity {
   id: string;
   title: string;
-  type: 'html' | 'youtube' | 'link' | 'quiz';
+  type: 'html' | 'youtube' | 'link' | 'quiz' | 'reflection';
   phase: Phase;
   url: string;
   start?: number;
@@ -44,6 +58,7 @@ export interface Activity {
   tracking?: 'reading' | 'interactive';
   /** 未設定時沿用活動類型的既有必做推導；設定後可明確覆寫為必做或選做。 */
   required?: boolean;
+  reflection?: ReflectionConfig;
   materialVersion?: string;
   nodeTotal?: number;
   questionTotal?: number;
@@ -100,6 +115,8 @@ export interface ExplanationResearchEvent {
   clientAt: number;
 }
 export interface Course {
+  features?: Partial<import('./features').CourseFeatures>;
+  assessmentSources?: { pretest: string[]; posttest: string[] };
   id: string;
   title: string;
   description: string;
@@ -135,6 +152,7 @@ export interface Profile {
   enabled: boolean;
 }
 export interface Roster {
+  uid?: string;
   email: string;
   name: string;
   studentId: string;

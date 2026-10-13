@@ -1,3 +1,4 @@
+import { siteId } from '../shared/site';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { Activity } from '../shared/model';
@@ -6,12 +7,15 @@ import { autoTitle, groupByPhase, insertActivity, materialTitle, moveWithinPhase
 const a = (id: string, phase: Activity['phase'], extra: Partial<Activity> = {}): Activity => ({ id, title: id, type: 'youtube', phase, url: '', description: '', ...extra });
 
 test('教材名稱去掉「圖卡」，只在預設／空白／上一份自動名稱時帶入', () => {
-  assert.equal(materialTitle('hemostasis-mechanisms-v2'), '止血機制與凝血');
-  assert.equal(autoTitle({ title: '新活動' }, 'hemostasis-mechanisms-v2'), '止血機制與凝血');
-  assert.equal(autoTitle({ title: '  ' }, 'blood-gas-transport-v2'), '血液氣體運送');
-  assert.equal(autoTitle({ title: '止血機制與凝血', materialVersion: 'hemostasis-mechanisms-v2' }, 'blood-gas-transport-v2'), '血液氣體運送');
-  assert.equal(autoTitle({ title: '止血機制與凝血圖卡', materialVersion: 'hemostasis-mechanisms-v2' }, 'blood-gas-transport-v2'), '血液氣體運送');
-  assert.equal(autoTitle({ title: '老師自訂', materialVersion: 'hemostasis-mechanisms-v2' }, 'blood-gas-transport-v2'), '老師自訂');
+  const mi = siteId() === 'mi';
+  const firstSlug = mi ? 'micro-bacteria-review-v1' : 'hemostasis-mechanisms-v2', secondSlug = mi ? 'immuno-concepts-review-v1' : 'blood-gas-transport-v2';
+  const first = mi ? '細菌怎麼害人，我們怎麼對付它｜互動資訊圖表' : '止血機制與凝血', second = mi ? '從小安的第一年認識免疫｜互動資訊圖表' : '血液氣體運送';
+  assert.equal(materialTitle(firstSlug), first);
+  assert.equal(autoTitle({ title: '新活動' }, firstSlug), first);
+  assert.equal(autoTitle({ title: '  ' }, secondSlug), second);
+  assert.equal(autoTitle({ title: first, materialVersion: firstSlug }, secondSlug), second);
+  assert.equal(autoTitle({ title: mi ? first : '止血機制與凝血圖卡', materialVersion: firstSlug }, secondSlug), second);
+  assert.equal(autoTitle({ title: '老師自訂', materialVersion: firstSlug }, secondSlug), '老師自訂');
 });
 
 test('必做標籤區分手動設定與依類型推導', () => {

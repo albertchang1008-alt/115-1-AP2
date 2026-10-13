@@ -1,0 +1,570 @@
+{
+  "project": "mi-bd885",
+  "courseId": "115-1-MI-國考精準對焦",
+  "writes": [
+    {
+      "path": "courses/115-1-MI-國考精準對焦",
+      "operation": "update features; mirror into existing draft/published",
+      "features": {
+        "assessments": true,
+        "teachingConsole": true,
+        "classroomInteraction": true
+      }
+    },
+    {
+      "path": "courses/115-1-MI-國考精準對焦/classroomConfig/interactions",
+      "operation": "set definitions and existing MI presentation wording transforms",
+      "interactions": [
+        {
+          "slideId": "c1-predict",
+          "title": "革蘭氏染色：先猜再看",
+          "fields": [
+            {
+              "id": "pick",
+              "label": "傷口檢體做革蘭氏染色，細菌被番紅染成紅色。這隻菌「最不可能」有哪個特徵？",
+              "kind": "choice",
+              "options": [
+                "細胞壁外有一層外膜",
+                "含有脂多糖（內毒素）",
+                "能形成內孢子",
+                "肽聚醣層很薄"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c1-toxin",
+          "title": "討論點1：內毒素／外毒素",
+          "fields": [
+            {
+              "id": "pick",
+              "label": "王先生的高燒和休克，是內毒素還是外毒素造成的？",
+              "kind": "choice",
+              "options": [
+                "內毒素",
+                "外毒素"
+              ]
+            },
+            {
+              "id": "reason",
+              "label": "你選這個答案的主要理由是？",
+              "kind": "choice",
+              "options": [
+                "菌體外膜的脂多糖與發燒、休克有關",
+                "活菌分泌的蛋白質毒素造成特定作用",
+                "尚未對照毒素的來源與作用",
+                "目前不確定"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c1-spread",
+          "title": "感染與傳播",
+          "fields": [
+            {
+              "id": "path",
+              "label": "細菌從A床到B床，你認為可能經由哪個途徑？",
+              "kind": "choice",
+              "options": [
+                "照護者的手接觸不同病床",
+                "共用器材接觸不同病床",
+                "病床周遭環境接觸",
+                "目前無法判斷"
+              ]
+            },
+            {
+              "id": "intercept",
+              "label": "你會優先加強哪個攔截步驟？",
+              "kind": "choice",
+              "options": [
+                "接觸病人前後的手部衛生",
+                "共用器材的消毒處理",
+                "依指示執行接觸隔離",
+                "目前不確定"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c1-sterile",
+          "title": "消毒與滅菌：對還是錯",
+          "fields": [
+            {
+              "id": "tf0",
+              "label": "高壓蒸氣滅菌器，多半是100℃、15分鐘。",
+              "kind": "choice",
+              "options": [
+                "對",
+                "錯"
+              ]
+            },
+            {
+              "id": "tf1",
+              "label": "皮膚消毒時，95%酒精比70%酒精更有效。",
+              "kind": "choice",
+              "options": [
+                "對",
+                "錯"
+              ]
+            },
+            {
+              "id": "tf2",
+              "label": "紫外線穿透力強，隔著包裝也能殺菌。",
+              "kind": "choice",
+              "options": [
+                "對",
+                "錯"
+              ]
+            },
+            {
+              "id": "tf3",
+              "label": "「滅菌」連內孢子都要殺死，「消毒」不一定。",
+              "kind": "choice",
+              "options": [
+                "對",
+                "錯"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c1-drug",
+          "title": "抗生素作用目標配對",
+          "fields": [
+            {
+              "id": "drug0",
+              "label": "Penicillin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug1",
+              "label": "Amoxicillin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug2",
+              "label": "Cefazolin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug3",
+              "label": "Vancomycin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug4",
+              "label": "Gentamicin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug5",
+              "label": "Erythromycin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug6",
+              "label": "Clarithromycin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug7",
+              "label": "Tetracycline",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug8",
+              "label": "Ciprofloxacin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug9",
+              "label": "Rifampin",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            },
+            {
+              "id": "drug10",
+              "label": "Sulfonamides",
+              "kind": "choice",
+              "options": [
+                "細胞壁合成",
+                "核糖體（蛋白質合成）",
+                "DNA複製",
+                "RNA合成",
+                "葉酸合成"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c1-resist",
+          "title": "抗藥性衛教",
+          "fields": [
+            {
+              "id": "advice",
+              "label": "王先生說「燒退了，藥可以停了吧？」你會選哪一句衛教？",
+              "kind": "choice",
+              "options": [
+                "症狀改善後仍應依醫療團隊指示用藥，不自行停藥",
+                "燒退後就自行停藥",
+                "自行把每次藥量減半",
+                "留下剩藥，下次生病自行服用"
+              ]
+            },
+            {
+              "id": "transfer",
+              "label": "哪個不是細菌傳遞抗藥性基因的方式？",
+              "kind": "choice",
+              "options": [
+                "接合",
+                "轉導",
+                "轉形",
+                "分泌作用"
+              ]
+            },
+            {
+              "id": "hospital",
+              "label": "醫院可以如何協助減少抗藥菌？",
+              "kind": "choice",
+              "options": [
+                "參考病原菌與藥物敏感性資訊，避免抗生素濫用",
+                "所有感染都使用相同抗生素",
+                "不參考藥物敏感性資訊",
+                "目前不確定"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c2-predict",
+          "title": "第二劑疫苗：先猜再看",
+          "fields": [
+            {
+              "id": "pick",
+              "label": "小安打完第二劑疫苗後，下列何者正確？",
+              "kind": "choice",
+              "options": [
+                "產生的抗體以IgM為主",
+                "免疫反應比第一劑更快",
+                "抗體的親和力變低",
+                "抗體濃度比第一劑低"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c2-newborn",
+          "title": "新生兒的兩份禮物",
+          "fields": [
+            {
+              "id": "placenta",
+              "label": "哪一種抗體能通過胎盤？",
+              "kind": "choice",
+              "options": [
+                "IgG",
+                "IgA",
+                "IgM",
+                "IgD",
+                "IgE"
+              ]
+            },
+            {
+              "id": "milk",
+              "label": "哪一種抗體在母乳裡？",
+              "kind": "choice",
+              "options": [
+                "IgG",
+                "IgA",
+                "IgM",
+                "IgD",
+                "IgE"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c2-first",
+          "title": "先天免疫：事件排序",
+          "fields": [
+            {
+              "id": "order",
+              "label": "傷口被細菌入侵：把這四件事排出先後順序",
+              "kind": "order",
+              "options": [
+                "單核球離開血管，分化成巨噬細胞",
+                "補體被活化，C5a把吞噬細胞吸引過來",
+                "巨噬細胞吞噬細菌，也清掉戰死的嗜中性球",
+                "嗜中性球最早大量聚集到傷口"
+              ]
+            },
+            {
+              "id": "heat",
+              "label": "補體加熱到幾度就失效？",
+              "kind": "choice",
+              "options": [
+                "37℃",
+                "56℃",
+                "70℃",
+                "100℃"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c2-tcell",
+          "title": "免疫細胞角色卡",
+          "fields": [
+            {
+              "id": "role",
+              "label": "每人選一張角色卡",
+              "kind": "choice",
+              "options": [
+                "樹突細胞",
+                "TH1",
+                "TH2",
+                "TH17",
+                "Treg",
+                "CD8毒殺型T細胞",
+                "B細胞／漿細胞"
+              ]
+            },
+            {
+              "id": "intro",
+              "label": "你選的角色主要負責哪項工作？",
+              "kind": "choice",
+              "options": [
+                "呈現抗原，啟動初始T細胞",
+                "活化巨噬細胞",
+                "協助B細胞產生抗體與嗜酸性球反應",
+                "招募嗜中性球",
+                "抑制反應，避免免疫反應過度",
+                "殺死病毒感染細胞或腫瘤細胞",
+                "製造專一性抗體"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "c2-hiv",
+          "title": "HIV衛教",
+          "fields": [
+            {
+              "id": "receptor",
+              "label": "HIV的gp120主要與哪個受器結合？",
+              "kind": "choice",
+              "options": [
+                "CD4",
+                "CD8",
+                "MHC I",
+                "MHC II"
+              ]
+            },
+            {
+              "id": "advice",
+              "label": "媽媽問「為什麼連小感染都扛不住？」你會選哪個說明？",
+              "kind": "choice",
+              "options": [
+                "輔助型T細胞受損，其他免疫細胞的協調也受影響",
+                "只有製造抗體的細胞受到影響",
+                "只有負責吞噬的細胞受到影響",
+                "目前不確定"
+              ]
+            }
+          ]
+        },
+        {
+          "slideId": "reflect",
+          "title": "一分鐘反思",
+          "fields": [
+            {
+              "id": "concept",
+              "label": "今天最需要再加強哪個概念？",
+              "kind": "choice",
+              "options": [
+                "革蘭氏染色與細菌構造",
+                "內毒素與外毒素",
+                "傳播、消毒與滅菌",
+                "抗生素作用目標與抗藥性",
+                "抗體與疫苗反應",
+                "先天免疫與補體",
+                "T細胞角色與HIV",
+                "目前皆能掌握"
+              ]
+            },
+            {
+              "id": "confidence",
+              "label": "目前你對這些概念的掌握情形是？",
+              "kind": "choice",
+              "options": [
+                "能獨立解釋",
+                "看圖提示後能解釋",
+                "仍需教師說明"
+              ]
+            }
+          ]
+        }
+      ],
+      "slideTransforms": {
+        "c1-spread": {
+          "replaceText": [
+            [
+              "在紙上畫出細菌從 A 床走到 B 床的所有可能路徑，再<b>圈出你會攔截的那一步</b>。",
+              "在自己的課序選擇可能的傳播途徑，以及你會優先加強的攔截步驟。"
+            ],
+            [
+              "個人任務｜4 分鐘",
+              "個人任務｜選擇途徑與攔截步驟"
+            ]
+          ]
+        },
+        "c1-resist": {
+          "replaceText": [
+            [
+              "30 秒，寫下一句衛教說明",
+              "個別選擇衛教說明"
+            ],
+            [
+              "一人當王先生，一人當護理師：用上面的機制解釋為什麼不能自己停藥，以及醫院可以怎麼減少抗藥菌。",
+              "在自己的課序選擇適當的衛教說明、基因傳遞方式，以及醫院減少抗藥菌的做法。"
+            ]
+          ]
+        },
+        "c2-tcell": {
+          "replaceText": [
+            [
+              "每人選一張角色卡，用一句話自我介紹：「我是＿＿，在醫院負責＿＿。」",
+              "每人選一張角色卡，再於課序選擇該角色負責的工作。"
+            ],
+            [
+              "負責：＿＿＿＿",
+              "在課序選擇角色的工作"
+            ]
+          ]
+        },
+        "c2-hiv": {
+          "replaceText": [
+            [
+              "30 秒，寫下衛教重點",
+              "個別選擇受器與衛教說明"
+            ]
+          ]
+        },
+        "c2-first": {
+          "replaceText": [
+            [
+              "加碼：補體加熱到幾度就失效？",
+              "加碼：在課序選擇補體失效的溫度。"
+            ]
+          ]
+        },
+        "reflect": {
+          "replaceText": [
+            [
+              "原本我以為＿＿＿＿＿＿＿＿，",
+              "選擇今天最需要加強的概念，"
+            ],
+            [
+              "現在我知道＿＿＿＿＿＿＿＿。",
+              "再選擇目前的掌握情形。"
+            ],
+            [
+              "寫在 [Zuvio 開放題／小卡] 上，一兩句就好。",
+              "在自己的課序「目前課堂互動」選擇後送出。"
+            ]
+          ]
+        },
+        "c1-sterile": {
+          "replaceText": [
+            [
+              "每題舉手：對的舉一隻手，錯的舉兩隻手。",
+              "在自己的課序逐題選擇對或錯，完成後送出。"
+            ]
+          ]
+        },
+        "c1-toxin": {
+          "firstTableHTML": "<div style=\"display:flex;gap:40px;margin-top:60px\"><div style=\"flex:1;border:3px solid #ba4609;border-radius:20px;padding:65px;font-size:54px\">A　內毒素</div><div style=\"flex:1;border:3px solid #ba4609;border-radius:20px;padding:65px;font-size:54px\">B　外毒素</div></div>"
+        }
+      },
+      "interactionNotesPrefix": "本頁操作：學生在自己的課序選擇作答，沒有自由填答、不分組。教師手動開放、結束，查看票數後統整；不計分。\n原教材醫學講解參考（原有書寫／分組操作指示不適用）：\n"
+    }
+  ],
+  "preserve": [
+    "classroomState",
+    "classroomRounds",
+    "assessments",
+    "assessmentSources",
+    "teacherAssets",
+    "progress",
+    "enrollments"
+  ]
+}
