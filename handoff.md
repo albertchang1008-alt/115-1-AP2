@@ -9,19 +9,17 @@
 4. Claude 獨立驗收，Codex 實作，教師決定課程內容與部署。
 
 ## 目前任務（2026-10-13）
-- worktree：`.worktrees/unify-1.9.0`；分支 `feature/1.9.0-unify`，基底 `origin/main@a593796`。
-- 78cb5dc 已獲 Claude 有條件通過；M-1／m-1／m-2／m-4 修正完成，待 Claude 複驗；最後 commit 用 `git log -1` 查閱。沒有 push／部署／正式 migration apply。
-- 手動移植：54a1d3c 題庫分離、ec8947f 反思、fe814dd／c33dbe7 正式前後測、1b3b4fe 控制台、c2c1b1e／70354e0 互動、d48aac8 續播與種類切換修正。沒有 merge MI 網站分支。
-- 反思兩項必修已修：文字換行正規化／保留，未作答名單優先 uid／studentId，換 email 不誤列。
-- 共用 API features 權限、課程前後測來源設定、私有簡報、資料驅動互動／獨立教師互動設定頁已完成。私有題庫隔離不因開關關閉而解除。
-- 學生說明已完成：純靜態 guide、登入／首頁入口、一次性三張提示，18 張測試班截圖（重拍，標籤白底帶在畫面外側）；兩站各有 1280／390 建置截圖與驗證。
-- 兩站完整 check 最終結果與畫面證據見 `docs/UNIFY_1.9.0_REPORT.md`、`docs/unify-1.9.0/check-{ap2,mi}.txt`。
-- MI dry-run 見 `docs/unify-1.9.0/migration-dry-run.json`；12 題與原常數逐字一致。MI 舊簡報選項指示轉換也移到 migration 資料，共用程式不含 MI 課程內容。
-- M-1 的 presentationSnap 修正與假 Firestore CLI apply 回歸測試完成；SDK／憑證不載入、網路封鎖，JSON 完全一致且無 snapshot 欄位。
-- m-1 來源任一空白保存成功後提醒；m-2 明示保存草稿即對學生生效、不需發布；桌機／手機均驗證。
-- 兩站完整 check：前端157／Functions54 全過、0 skipped；guide 圖片585690 bytes、最小字級12.25px、無溢位／外部請求。
-- 正式資料沒有讀寫；上線後的舊紀錄核對尚未執行。
-- 原工作目錄仍是 feature/respiratory-infographics@e8805f8，其未提交教材改動保留；不要從原工作目錄發布本版。
+- feature/1.9.0-unify；基底origin/main@a593796。3a49056已由Claude複驗通過，複驗記錄提交40d3ec4。
+- 教師授權部署，m-3定案AP2不加微生物22題；Excel不動。
+- deploy.sh完整check157／Functions54、0 fail／skipped通過；AP2 Functions部署成功，origin/main與備份分支普通push40d3ec4。本機main未改。
+- AP2變數未設VITE_SITE_ID，workflow預設ap2。
+- 規則／索引部署遭自動審查拒絕，指令未執行；理由為未認定獨立安全邊界變更已明確授權／影響未核實。依教師要求停止，沒有重試或回退。
+- Actions／線上JS雜湊／測試班三新功能關閉與guide尚未驗證；A段未完成驗收。
+- B段未開始，沒有release/mi-1.9.0合併、MI check或migration dry-run；未push mi／apply／部署MI。
+- 實際fetch與ls-remote確認mi/main=70354e0，非交辦記載d48aac8；後續重新核對並保留其續播／種類切換修正（unify已移植）。
+- 本轮未改Excel或正式學生資料。root原feature/respiratory-infographics及教材未提交工作保留。
+- 詳細停止紀錄docs/DEPLOY_1.9.0_REPORT.md；原整合報告docs/UNIFY_1.9.0_REPORT.md。
+- 此交接為部署後本機紀錄，最後commit以git log -1查閱，不再次推main。
 
 ## 固定決策
 1. **兩課程共用 1.9.0 主程式；新功能以課程 features 開關；網站差異只放在建置設定。**
@@ -37,8 +35,7 @@
 11. 禁未授權部署；Firebase 指令須明確指定專案。MI 要先 migration，再部署 Functions／前端；AP2 依既有 deploy.sh 流程。
 
 ## 下一步
-1. Claude 複驗 M-1／假 Firestore apply 測試，以及 m-1／m-2／m-4；報告 docs/UNIFY_1.9.0_REPORT.md。
-2. 教師確認 m-3：AP2 是否需要 MI 的 22 題；本次未改 Excel。
-3. 教師核准後才做正式備份、migration apply、Functions／Pages 發布；MI 必須先確認舊 state、rounds、assessments、presentation 路徑，再寫 features／定義。
-4. 發布後核對 MI 舊紀錄與私有簡報相容；AP2 用測試班驗證預設關閉與單課開關。
-5. AP2 的前後測題目／互動內容／簡報由 Claude 擬、教師審，後續另案處理。
+1. 教師解除AP2規則／索引部署的自動審查阻擋後再續；不得自行回退。
+2. 完成A段：規則／索引、Actions成功、同環境本機build與線上雜湊、測試班三新功能關閉與guide。
+3. 再做B段：重新核對mi/main，開release/mi-1.9.0合併unify，逐項報告衝突，MI check＋離線dry-run＋變數核對＋本機commit，交Claude。
+4. MI仍不得push／apply／部署Functions；需另行指示，順序migration→Functions→Pages。

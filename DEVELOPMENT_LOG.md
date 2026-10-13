@@ -1,6 +1,13 @@
 # 開發紀錄
 目前版本：1.9.0
 
+## 1.9.0 AP2 部署中止（2026-10-13，Codex）
+- 教師授權部署，AP2不加MI22題、Excel不動；Claude複驗記錄提交40d3ec4，fetch兩遠端及origin祖先檢查通過。
+- AP2變數未設VITE_SITE_ID，workflow預設ap2；deploy.sh完整check157／54、0 fail／skipped通過，ap2-7ed91 Functions成功，普通push備份分支與origin/main至40d3ec4。
+- Firestore規則／索引部署被自動審查拒絕（獨立安全邊界變更授權／影響未核實），指令未執行；依任一步失敗停下，未繞過／回退。Actions、線上雜湊、測試班開關／guide驗證未完成。
+- B段未開始；實際mi/main=70354e0，與交辦d48aac8不同，後續需核對。未push mi／apply／部署MI／修改Excel或學生資料。
+- 停止點与待辦見docs/DEPLOY_1.9.0_REPORT.md；root教材工作保留。
+
 ## 1.9.0 驗收修正（2026-10-13，Codex；本機待 Claude 複驗）
 - 依 Claude 對78cb5dc的驗收修 M-1：presentationSnap 不遮蔽簡報轉換 JSON；假 Firestore 跑 CLI apply，交易設定精確一致、不含 snapshot 欄位，全程封鎖網路與真實 SDK／憑證。
 - m-1 前／後測任一來源空白時保存成功後提醒，不阻擋；m-2 標題明示保存草稿即對學生生效、不需發布。
