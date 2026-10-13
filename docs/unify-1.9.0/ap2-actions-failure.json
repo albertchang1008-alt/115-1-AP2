@@ -1,0 +1,29 @@
+{
+  "runId": 38422029549,
+  "headSha": "40d3ec489642031f06142eecff5e1969abb8de9e",
+  "url": "https://github.com/albertchang1008-alt/115-1-AP2/actions/runs/38422029549",
+  "conclusion": "failure",
+  "buildJobId": 115381569171,
+  "failedStep": "npm run check",
+  "frontend": {
+    "tests": 157,
+    "pass": 155,
+    "fail": 2,
+    "skipped": 0
+  },
+  "checkoutFetchDepth": 1,
+  "failedTests": [
+    {
+      "file": "tests/site.test.ts",
+      "name": "MI migration dry-run 12 題與 70354e0 常數逐字一致，拒絕 AP2 專案",
+      "error": "git show status 128 !== 0"
+    },
+    {
+      "file": "tests/site.test.ts",
+      "name": "MI 舊簡報選項指示轉換與備註移為 migration 資料，與 70354e0 顯示完全相同",
+      "error": "module.exports.interactiveSlideHTML is not a function"
+    }
+  ],
+  "pagesDeploy": "skipped",
+  "source": "GitHub workflow run jobs and decoded build job logs"
+}

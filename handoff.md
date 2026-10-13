@@ -13,7 +13,8 @@
 - 教師授權部署，m-3定案AP2不加微生物22題；Excel不動。
 - deploy.sh完整check157／Functions54、0 fail／skipped通過；AP2 Functions部署成功，origin/main與備份分支普通push40d3ec4。本機main未改。
 - AP2變數未設VITE_SITE_ID，workflow預設ap2。
-- 規則／索引部署遭自動審查拒絕，指令未執行；理由為未認定獨立安全邊界變更已明確授權／影響未核實。依教師要求停止，沒有重試或回退。
+- 本輪教師明確授權後，AP2規則／索引部署成功，CLI exit0；未force、無刪除提示、未刪索引。READY與排程缺索引錯誤消失尚未驗證。
+- 查Actions38422029549：build/check失敗，前端155 pass／2 fail／0 skipped；兩項歷史比對依賴MI70354e0，CI depth1無該物件，Pages deploy跳過。依任何一步失敗停下，未修程式／重跑Actions／回退。
 - Actions／線上JS雜湊／測試班三新功能關閉與guide尚未驗證；A段未完成驗收。
 - B段未開始，沒有release/mi-1.9.0合併、MI check或migration dry-run；未push mi／apply／部署MI。
 - 實際fetch與ls-remote確認mi/main=70354e0，非交辦記載d48aac8；後續重新核對並保留其續播／種類切換修正（unify已移植）。
@@ -35,7 +36,7 @@
 11. 禁未授權部署；Firebase 指令須明確指定專案。MI 要先 migration，再部署 Functions／前端；AP2 依既有 deploy.sh 流程。
 
 ## 下一步
-1. 教師解除AP2規則／索引部署的自動審查阻擋後再續；不得自行回退。
-2. 完成A段：規則／索引、Actions成功、同環境本機build與線上雜湊、測試班三新功能關閉與guide。
-3. 再做B段：重新核對mi/main，開release/mi-1.9.0合併unify，逐項報告衝突，MI check＋離線dry-run＋變數核對＋本機commit，交Claude。
-4. MI仍不得push／apply／部署Functions；需另行指示，順序migration→Functions→Pages。
+1. 待教師指示修CI歷史比對依賴；保留逐字比對與完整測試，不skip；修後再發布。
+2. 核對索引READY與expireAssessments日誌、Actions成功、同環境本機build與線上雜湊、測試班三開關關閉與guide。
+3. A完成後再做B：重查mi/main，release/mi-1.9.0合併unify，逐項衝突報告、MI check／離線dry-run／變數核對／本機commit，交Claude。
+4. MI仍不得push／apply／部署Functions；另行指示後順序migration→Functions→Pages。

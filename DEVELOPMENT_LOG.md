@@ -1,6 +1,12 @@
 # 開發紀錄
 目前版本：1.9.0
 
+## 1.9.0 規則／索引成功，Actions失敗停止（2026-10-13，Codex）
+- 教師明確授權AP2規則／索引，CLI限定ap2-7ed91、non-interactive部署成功；未加force、無刪除提示、未刪索引。
+- 查40d3ec4的Actions38422029549：build的check前端155／157通過、2 fail、0 skipped；兩項site.test依賴MI70354e0，本機有該歷史但CI depth1沒有。Pages deploy跳過。
+- 依任何一步失敗停下，沒有修測試／重跑Actions／回退。READY與排程log、線上雜湊／測試班驗證尚未完成，B段未開始。
+- 更新docs/DEPLOY_1.9.0_REPORT.md與Actions失敗摘要；未改Excel／學生資料／push mi／apply／部署MI。
+
 ## 1.9.0 AP2 部署中止（2026-10-13，Codex）
 - 教師授權部署，AP2不加MI22題、Excel不動；Claude複驗記錄提交40d3ec4，fetch兩遠端及origin祖先檢查通過。
 - AP2變數未設VITE_SITE_ID，workflow預設ap2；deploy.sh完整check157／54、0 fail／skipped通過，ap2-7ed91 Functions成功，普通push備份分支與origin/main至40d3ec4。
