@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { transformSync } from 'esbuild';
 import { sites, siteId, miMaterialSlugs } from '../shared/site';
@@ -17,9 +18,8 @@ test('網站設定保留 AP2 全目錄，MI 兩筆目錄與網址依建置選擇
   assert.throws(() => siteId('unknown'));
 });
 test('MI migration dry-run 12 題與 70354e0 常數逐字一致，拒絕 AP2 專案', () => {
-  const old = spawnSync('git', ['show','70354e0:shared/classroom.ts'], { encoding:'utf8' });
-  assert.equal(old.status, 0);
-  const code = transformSync(old.stdout, { loader:'ts', format:'cjs' }).code;
+  const old = fs.readFileSync('tests/fixtures/mi-70354e0/classroom.ts.txt', 'utf8');
+  const code = transformSync(old, { loader:'ts', format:'cjs' }).code;
   const source = { exports: {} as any };
   new Function('module','exports', code)(source, source.exports);
   assert.equal(interactions.length, 12);
@@ -38,7 +38,7 @@ test('課堂設定拒絕重複 ID、無效格式與過大題目，保留選項�
 
 test('MI 舊簡報選項指示轉換與備註移為 migration 資料，與 70354e0 顯示完全相同', async () => {
   const { classroomDeckSlides } = await import('../shared/presentation');
-  const source = spawnSync('git',['show','70354e0:src/ClassroomInteraction.tsx'],{encoding:'utf8'}).stdout;
+  const source = fs.readFileSync('tests/fixtures/mi-70354e0/ClassroomInteraction.tsx.txt', 'utf8');
   const tail = 'const interactions = '+JSON.stringify(interactions)+';\n'+source.slice(source.indexOf('export function interactiveSlideHTML'));
   const module={exports:{} as any};new Function('module','exports',transformSync(tail,{loader:'ts',format:'cjs'}).code)(module,module.exports);
   const config = {...JSON.parse(fs.readFileSync('docs/unify-1.9.0/mi-slide-transforms.json','utf8')),interactions};
@@ -72,4 +72,16 @@ test('MI migration apply 使用假 Firestore 寫入 JSON 定義與轉換，不�
     });
     for (const key of ['exists', '_snapshotMarker', '_reference', 'data']) assert.equal(key in config.data, false);
   } finally { fs.rmSync(temp, { recursive: true, force: true }); }
+});
+
+test('MI 70354e0 歷史測試資料 SHA-256 與 README 記錄一致', () => {
+  const folder = 'tests/fixtures/mi-70354e0';
+  const readme = fs.readFileSync(folder + '/README.md', 'utf8');
+  for (const file of ['classroom.ts.txt', 'ClassroomInteraction.tsx.txt']) {
+    const row = readme.split('\n').find(line => line.startsWith('| `' + file + '` |'));
+    assert(row, file + ': README 必須記錄來源與雜湊');
+    const expected = row.match(/`([a-f0-9]{64})`/);
+    assert(expected, file + ': README 必須含 SHA-256');
+    assert.equal(createHash('sha256').update(fs.readFileSync(folder + '/' + file)).digest('hex'), expected[1], file);
+  }
 });
