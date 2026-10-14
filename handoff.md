@@ -11,7 +11,7 @@
 ## 目前任務（2026-10-14）
 - feature/1.9.0-unify：新增學生說明「2. 加到手機主畫面」，逐字使用交辦內容；原2–10改3–11與id。
 - guide.css補手機清單／小標字級≥16px與列印樣式；guide-verify核對11節、兩份5步清單、5則注意、兩種字級無溢位與列印。
-- 完整檢查與兩站截圖證據見docs/GUIDE_HOMESCREEN_2026-10-14_REPORT.md；只本機提交，待合併MI後Claude複驗。
+- 完整檢查與兩站截圖證據見docs/GUIDE_HOMESCREEN_2026-10-14_REPORT.md；共用提交e2dd36c，合併前Git權限失敗停止，尚未合併MI。
 - 目前manifest standalone、Apple圖示與title具備；src/service.ts仍signInWithPopup，登入程式未改。
 - iPhone／Android主畫面登入需教師test帳號真機實測；若iPhone失敗依交辦修改注意第3點，另列redirect評估。
 - AP2正式main仍7a6720e，本次不push、不部署；原CI歷史fixture及分站教材測試均保留。
@@ -34,6 +34,6 @@
 11. 禁未授權部署；Firebase 指令須明確指定專案。MI 要先 migration，再部署 Functions／前端；AP2 依既有 deploy.sh 流程。
 
 ## 下一步
-1. guide合併MI並完整MI check後，交Claude複驗。
+1. 本輪停在合併前：git merge-tree因預設sandbox不能寫Git暫存檔exit128；未merge。教師續作後須用已授權提升權限合併，再完整MI check，交Claude複驗。
 2. 教師用test帳號真機驗證iPhone與Android：加到主畫面→開圖示→Google登入→一題練習保存→關閉重開保持登入。
 3. 本次不push／部署；後續發布需另行交辦，MI不可重跑migration。

@@ -17,7 +17,7 @@
 - MI乾淨release匯出套入本次三份共用修改完整check：前端150、Functions54，0 fail／0 skipped。目錄`/private/tmp/guide-homescreen-mi-q0zv6kni`，無Git或未追蹤教材；共用分支保留AP2教材，MI需用其專屬教材樹檢查。
 - 兩站guide驗證：1280／390皆11節、主畫面清單10步／5注意、最小16px、預設／特大無水平捲動、無pageerror、print通過。全文含「加入主畫面」與「加到主畫面」。
 - 證據：`docs/unify-1.9.0/guide-homescreen-{ap2,mi}/`有全頁截圖、A4列印PDF及verification.json；同層check／verify.txt完整輸出。
-- 合併後MI check結果由MI交接補充；兩站共用guide來源一致，待Claude複驗。
+- 尚未執行合併後MI check；共用提交e2dd36c，合併前Git預檢失敗停止。
 
 ## 教師真機實測（尚待教師執行，Codex不代做）
 使用test帳號，iPhone（Safari）與Android（Chrome）各完成：
@@ -30,4 +30,4 @@
 iPhone standalone下popup可能失敗；若教師實測失敗，依交辦把注意第3點改為「若主畫面圖示無法登入，請改用 Safari 直接開網址」，另列待辦評估standalone redirect登入。本次保留交辦原文；真機結果未取得。
 
 ## 發布界線
-本次只本機提交與合併release/mi-1.9.0，停下交Claude複驗；不續作部署。MI前次migration已成功，不可重跑apply；Functions的deleteCourse失敗仍為獨立部署阻塞。
+本次只完成共用本機提交e2dd36c。合併前git merge-tree --write-tree --name-only預檢使用預設sandbox，不能建立Git暫存檔，exit128；依「任何一步失敗就停下」未重試、未執行合併。此指令也寫Git中繼資料，應使用已授權提升權限。MI合併與合併後check尚未完成；不續作部署。MI前次migration已成功，不可重跑apply；Functions的deleteCourse失敗仍為獨立部署阻塞。
