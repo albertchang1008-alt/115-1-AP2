@@ -4,7 +4,80 @@ import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createServer } from 'node:http';
+export async function verifyStaticGuide(shots = false, built = false) {
+  const site = process.env.VITE_SITE_ID || 'ap2';
+  const base = site === 'mi' ? '/115-MI/' : '/115-1-AP2/';
+  const root = built ? 'dist' : 'public';
+  const out = `docs/unify-1.9.0/guide-homescreen-${site}`;
+  if (shots) await fs.mkdir(out, { recursive: true });
+  const server = createServer(async (req, res) => {
+    const pathname = new URL(req.url, 'http://localhost').pathname;
+    try {
+      assert(pathname.startsWith(base));
+      const relative = pathname.slice(base.length) || 'index.html';
+      assert(!relative.includes('..'));
+      const body = await fs.readFile(path.join(root, relative));
+      const types = { '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.png':'image/png', '.jpg':'image/jpeg', '.webmanifest':'application/manifest+json' };
+      res.writeHead(200, { 'Content-Type': types[path.extname(relative)] || 'application/octet-stream' }); res.end(body);
+    } catch { res.writeHead(404); res.end(); }
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const origin = `http://127.0.0.1:${server.address().port}`;
+  const browser = await chromium.launch({ channel: 'chrome' });
+  const report = [];
+  try {
+    if (built) {
+      const index = await fs.readFile('dist/index.html', 'utf8');
+      const manifestHref = index.match(/<link[^>]*rel="manifest"[^>]*href="([^"]+)"/)[1];
+      const appleHref = index.match(/<link[^>]*rel="apple-touch-icon"[^>]*href="([^"]+)"/)[1];
+      const manifestUrl = new URL(manifestHref, origin + base);
+      assert(manifestUrl.pathname.startsWith(base));
+      const response = await fetch(manifestUrl); assert.equal(response.status, 200);
+      const manifest = await response.json(); assert.equal(manifest.display, 'standalone');
+      for (const url of [new URL(appleHref, origin + base), ...manifest.icons.map(icon => new URL(icon.src, manifestUrl))]) {
+        assert(url.pathname.startsWith(base)); assert.equal((await fetch(url)).status, 200);
+      }
+      assert.equal(JSON.parse(await fs.readFile('dist/site.json', 'utf8')).id, site);
+    }
+    for (const width of [1280, 390]) {
+      const page = await browser.newPage({ viewport: { width, height: 950 } });
+      const errors = []; page.on('pageerror', e => errors.push(e.message));
+      assert.equal((await page.goto(origin + base + 'guide/index.html')).status(), 200);
+      const steps = page.locator('details[id^="step-"]'); assert.equal(await steps.count(), 11);
+      for (let i = 1; i <= 11; i++) assert.match(await page.locator(`#step-${i} summary`).innerText(), new RegExp(`^${i}\\. `));
+      assert.equal(await page.locator('#step-2 summary').innerText(), '2. 加到手機主畫面');
+      assert.equal(await page.locator('#step-2 img').count(), 0);
+      assert.equal(await page.locator('#step-2 ol').count(), 2);
+      assert.equal(await page.locator('#step-2 ol li').count(), 10);
+      assert.equal(await page.locator('#step-2 ul li').count(), 5);
+      await page.locator('details').evaluateAll(nodes => nodes.forEach(node => node.open = true));
+      assert.match(await page.locator('main').innerText(), /加入主畫面/);
+      assert.match(await page.locator('main').innerText(), /加到主畫面/);
+      await page.locator('img').evaluateAll(images => Promise.all(images.map(img => { img.loading = 'eager'; return img.decode(); })));
+      for (const size of ['default', 'xlarge']) {
+        await page.locator('#size').selectOption(size);
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+      }
+      await page.locator('#size').selectOption('default');
+      const fonts = await page.locator('#step-2 h3, #step-2 li').evaluateAll(nodes => nodes.map(node => parseFloat(getComputedStyle(node).fontSize)));
+      assert(fonts.every(size => size >= 16));
+      if (shots) await page.screenshot({ path: `${out}/guide-${width}.png`, fullPage: true });
+      await page.emulateMedia({ media: 'print' });
+      assert.equal(await page.locator('.prefs-bar').isVisible(), false);
+      assert.equal(await page.locator('#step-2 ol').first().isVisible(), true);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+      if (shots && width === 1280) await page.pdf({ path: `${out}/guide-print.pdf`, format: 'A4', printBackground: true });
+      assert.deepEqual(errors, []);
+      report.push({ site, width, sections: 11, minFont: Math.min(...fonts), overflow: false, print: true, errors, builtAssetsHttp200: built });
+      await page.close();
+    }
+  } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
+  if (shots) await fs.writeFile(`${out}/verification.json`, JSON.stringify(report, null, 2) + '\n');
+  return report;
+}
 export async function verifyGuide(shots = false) {
+  await verifyStaticGuide();
   const bundle = buildSync({ entryPoints: ['tests/fixtures/student-guide.tsx'], bundle:true,write:false,format:'iife',platform:'browser',define:{ 'import.meta.env':'{}','process.env.NODE_ENV':'"production"' } }).outputFiles[0].text;
   const css = (await fs.readFile('src/style.css','utf8')).replace(/^@import[^;]+;\s*/,'');
   const browser = await chromium.launch({channel:'chrome'}); const report=[];
@@ -91,4 +164,4 @@ export async function verifyGuide(shots = false) {
   if(shots) await fs.writeFile('docs/unify-1.9.0/guide-ui-verification.json',JSON.stringify(report,null,2)+'\n');
   return report;
 }
-if(process.argv[1] && path.resolve(process.argv[1])===path.resolve(fileURLToPath(import.meta.url))) console.log(JSON.stringify(await verifyGuide(process.argv.includes('--shots')),null,2));
+if(process.argv[1] && path.resolve(process.argv[1])===path.resolve(fileURLToPath(import.meta.url))) console.log(JSON.stringify(await (process.argv.includes('--guide-only') ? verifyStaticGuide(process.argv.includes('--shots'), process.argv.includes('--dist')) : verifyGuide(process.argv.includes('--shots'))),null,2));

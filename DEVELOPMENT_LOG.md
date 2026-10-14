@@ -1,3 +1,9 @@
+# 2026-10-14：學生說明加入手機主畫面 [Codex]
+
+- 共用guide逐字加入iPhone／Android操作，舊節與id改3–11；字級≥16px、列印樣式。
+- guide-verify新增11節、清單、字級／無溢位／print，以及產物在Pages子路徑HTTP200的檢查；登入程式未改。
+- 檢查結果與真機待辦見docs/GUIDE_HOMESCREEN_2026-10-14_REPORT.md；本機提交後合併MI，待Claude複驗，不push／部署。
+
 # 開發紀錄
 目前版本：1.9.0
 
