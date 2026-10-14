@@ -1,6 +1,11 @@
 # 開發紀錄
 目前版本：1.9.0
 
+## 1.9.0 共用分站教材測試回補（2026-10-14，Codex）
+- material-registration依站別核對：AP2保留原五份生理教材斷言；MI兩份微免HTML／來源／ID／目錄／SDK一致，且AP2公開檔不存在，無skip。
+- 與MI release相同測試檔；共用AP2完整check158／54、0 fail／skipped通過，純暫存MI匯出150／54、0 fail／skipped通過。
+- 本機回補commit，不push、不重新部署AP2。MI報告與待Claude複驗在release工作目錄。
+
 ## 1.9.0 CI修正與AP2成功發布、MI暫存失敗（2026-10-13，Codex）
 - 7a6720e僅tests修正：MI70354e0兩份原檔.txt＋README SHA-256，讀fixture比對與雜湊檢查、無skip。
 - 無70354e0乾淨shallow clone與unify兩站完整check158／54、0 fail／skipped；deploy.sh同結果。
