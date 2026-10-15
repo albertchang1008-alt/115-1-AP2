@@ -1,3 +1,14 @@
+# 2026-10-15：AP2 本機 MCP 第1–2階段，唯讀驗證完成並列明後端缺口 [Codex]
+目前版本：1.9.0
+
+- 從最新origin/main4ed3778開獨立feature/platform-mcp／.worktrees/platform-mcp；不動原呼吸工作目錄。完整盤點functions/src五檔57個callable；bootstrap／getReflections／getAssessments／assessmentReport均因實際寫入排除。
+- 新增tools/platform-mcp：官方TypeScript SDK、stdio、固定AP2專案、三支硬白名單、工具投影／個資過濾／掃描；完成度沿用平台forClass與公式3在記憶體分頁，只輸出數字。依賴限工具自己的package與lock。
+- 教師本人Google學校帳號登入；簽章與teacher驗證、refresh同身分；refresh token僅macOS鑰匙圈，security stdin不帶token argv。首次popup-closed-by-user後本人重試成功；未遇學校／App Check拒絕，未變更安全設定。
+- 獨立check型別／14測試／build全過0 skipped；正式AP2七工具smoke：4 PASS、3依後端缺口固定unavailable；官方SDK真正stdio握手與get_published成功，8份JSON個資掃描0。完成度只讀test班2人，未開輪或作答。
+- 3受限工具是list_courses／get_course_draft／diff_draft_published；目前無純讀列表／草稿入口，不能用會寫profile的bootstrap或Admin／REST繞過。list_materials只確認published使用，sync只回歷史staleUnits和錯誤旗標；這些限制明列供Claude裁定，未宣稱7工具全功能可用。
+- docs/platform-mcp含CALLABLE_INVENTORY、STAGE2_REPORT、check／smoke紀錄、JSON與無帳號／token登入錯誤截圖。成功頁教師已關閉，以程式成功與live smoke佐證，不補造畫面。
+- 對functions、前端／shared、根與functions package／lock、安全規則及部署設定比對基底零差異；未實作寫入、改學生資料／Excel、push／部署／同步。保存本機commit後交Claude驗收，桌面設定由教師自行加入。第3階段僅列patchCourseDraft／auditLog與補唯讀後端建議。
+
 # 2026-10-15：呼吸七份整合完成，停點一待核對 [Codex]
 目前版本：1.9.0
 

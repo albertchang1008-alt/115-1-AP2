@@ -1,0 +1,38 @@
+{
+  "scope": "all 8 live smoke JSONs",
+  "totalFindings": 0,
+  "scannedFiles": [
+    {
+      "file": "diff_draft_published.json",
+      "findings": 0
+    },
+    {
+      "file": "get_completion_summary.json",
+      "findings": 0
+    },
+    {
+      "file": "get_course_draft.json",
+      "findings": 0
+    },
+    {
+      "file": "get_published.json",
+      "findings": 0
+    },
+    {
+      "file": "get_sync_status.json",
+      "findings": 0
+    },
+    {
+      "file": "list_courses.json",
+      "findings": 0
+    },
+    {
+      "file": "list_materials.json",
+      "findings": 0
+    },
+    {
+      "file": "stdio-handshake.json",
+      "findings": 0
+    }
+  ]
+}

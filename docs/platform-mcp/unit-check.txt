@@ -1,0 +1,105 @@
+
+> platform-mcp@0.1.0 check
+> tsc --noEmit && npm test && npm run build
+
+
+> platform-mcp@0.1.0 test
+> node --import tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: whitelist blocks writes and deceptive reads before token/network access
+ok 1 - whitelist blocks writes and deceptive reads before token/network access
+  ---
+  duration_ms: 1.663
+  type: 'test'
+  ...
+# Subtest: privacy filter removes nested identities, dynamic identifier keys and secret content
+ok 2 - privacy filter removes nested identities, dynamic identifier keys and secret content
+  ---
+  duration_ms: 1.237458
+  type: 'test'
+  ...
+# Subtest: requires boolean teacher custom claim
+ok 3 - requires boolean teacher custom claim
+  ---
+  duration_ms: 0.141083
+  type: 'test'
+  ...
+# Subtest: diff handles stable object order, additions, removals, arrays and escaped paths
+ok 4 - diff handles stable object order, additions, removals, arrays and escaped paths
+  ---
+  duration_ms: 0.19675
+  type: 'test'
+  ...
+# Subtest: draft/list/diff fail closed without any backend call
+ok 5 - draft/list/diff fail closed without any backend call
+  ---
+  duration_ms: 1.246708
+  type: 'test'
+  ...
+# Subtest: published projection has course configuration and no roster or teacher IDs
+ok 6 - published projection has course configuration and no roster or teacher IDs
+  ---
+  duration_ms: 0.401
+  type: 'test'
+  ...
+# Subtest: material usage explicitly covers published only, both chapter and legacy activities
+ok 7 - material usage explicitly covers published only, both chapter and legacy activities
+  ---
+  duration_ms: 0.772792
+  type: 'test'
+  ...
+# Subtest: completion aggregates all pages in memory with canonical v3 and class overrides
+ok 8 - completion aggregates all pages in memory with canonical v3 and class overrides
+  ---
+  duration_ms: 0.578208
+  type: 'test'
+  ...
+# Subtest: completion detects repeating cursors rather than returning partial counts
+ok 9 - completion detects repeating cursors rather than returning partial counts
+  ---
+  duration_ms: 0.442625
+  type: 'test'
+  ...
+# Subtest: sync errors do not expose free-form names, emails, sheet IDs or roster details
+ok 10 - sync errors do not expose free-form names, emails, sheet IDs or roster details
+  ---
+  duration_ms: 0.439083
+  type: 'test'
+  ...
+# Subtest: callable uses only fixed AP2 endpoint and correct callable envelope
+ok 11 - callable uses only fixed AP2 endpoint and correct callable envelope
+  ---
+  duration_ms: 1.3825
+  type: 'test'
+  ...
+# Subtest: App Check/auth failure latches connection off and never exposes raw response
+ok 12 - App Check/auth failure latches connection off and never exposes raw response
+  ---
+  duration_ms: 0.992208
+  type: 'test'
+  ...
+# Subtest: input schemas reject arbitrary callable/project and unknown fields
+ok 13 - input schemas reject arbitrary callable/project and unknown fields
+  ---
+  duration_ms: 0.41125
+  type: 'test'
+  ...
+# Subtest: official SDK protocol exposes seven read-only tools and sanitizes tool results
+ok 14 - official SDK protocol exposes seven read-only tools and sanitizes tool results
+  ---
+  duration_ms: 11.63
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 330.179459
+
+> platform-mcp@0.1.0 build
+> node build.mjs

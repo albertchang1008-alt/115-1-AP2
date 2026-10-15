@@ -1,0 +1,11 @@
+{
+  "tool": "get_course_draft",
+  "mode": "live",
+  "privacyFindings": 0,
+  "result": {
+    "available": false,
+    "code": "READONLY_BACKEND_GAP",
+    "tool": "get_course_draft",
+    "reason": "目前沒有純唯讀課程列表／草稿 callable；bootstrap 會寫入 profile，禁止作為替代。需另案新增唯讀後端，本輪不修改。"
+  }
+}
