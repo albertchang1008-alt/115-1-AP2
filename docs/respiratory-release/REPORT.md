@@ -45,3 +45,23 @@
 ## 交接
 
 交付本機 commit 一次；Sheet 備份、泌尿／體液素材及其他既有未提交工作排除。全域底圖審查檔只提交呼吸 28 筆，工作區其餘審查資料保留。Claude 下一步檢查七份登錄與教材、Excel 77 題、Sheet 欄位和回讀證據；教師另行決定平台同步與部署。[Codex]
+
+
+## ②提問鏈改寫：階段二寫入（2026-10-15）
+
+依 [Claude 審稿](chain-rewrite-claude-review.md) 已整句替換 `breathing-mechanics-foundation-q06` 與 `lung-function-case-q04`，其餘75題沿用草稿。77題重新檢查全部通過：每題2問、51–76字，以→串接且每句以？結尾；不含①原句、正解完整文字或完整題幹（含去標點正規化比對），台灣用詞／A2／數值出處與節點ID檢查全過。[定稿表](chain-rewrite-draft.md)、[草稿檢查](chain-rewrite-draft-verification.json)
+
+| 目標 | 實際修改範圍 | 修改數 | 其他格比對 |
+|---|---|---:|---|
+| Excel「題庫」 | Q229:Q305（②提問鏈） | 77 | 7,325格值／型別／樣式不變；所有格樣式不變 |
+| Sheet「115-1-AP2」 | U404:U480（②提問鏈） | 77 | 15,283格原生資料零差異；目標格格式／驗證等也不變 |
+
+寫入前重新讀取原生儲存格，確認表頭、77個ID、欄位限制與即時值。Sheet 寫入前完整480×32分頁CSV備份：`docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.csv`（時間戳為UTC），SHA256 `4d2ff50f6741910c7392fb76831d20015fa2476bf89c3d9525182dbef13502af`。另存原生格式／公式／驗證／註記／富文字／chip與值JSON、原Excel及回讀快照；均放已忽略的 `docs/sheet-backups/`，不commit。
+
+Excel 用 artifact-tool 寫入候選，再保留原OOXML，只置換77格的字串值；其餘9個ZIP成員逐位元一致，題庫XML除77個c元素外也逐位元一致。重新開啟最終Excel逐格比較，包含第1–228列及整份「說明」分頁皆不變，仍為304題。寫前SHA256 `f4263b222c24b3c404f5748276880ce89a5ee448603540e664e4862f63614a8e`，寫後 `04498f115cb3d512825ec01606282c633e308ff19b906297769df40861849215`。
+
+Sheet 以單一原子批次 `updateCells`，僅 `fields: userEnteredValue` 更新U404:U480；沒有格式、列高、欄寬或結構寫入。寫後完整讀回A1:AF480，逐格比對值／公式、格式、驗證、註記、chip、富文字；恰好只有77格②的值改變，Sheet屬性不變，仍479題。逐題直接對照「最終Excel、Sheet回讀、定稿」77格完全一致。
+
+已查看Excel原樣式與修改後兩段渲染，並在Google Sheets原生100%畫面核對U431、U446兩句定稿與換行。教材來源／圖檔／公開HTML／登錄等 751 檔雜湊不變；這輪只跑與77格資料修改相關的定稿、檔案保護及讀回檢查，未重新build教材。完整逐格驗證、77個ID與兩邊儲存格座標見 [階段二驗證](chain-rewrite-write-verification.json)。
+
+`handoff.md`、`DEVELOPMENT_LOG.md` 已更新，本輪另做單一本機commit（以git log -1為準，父commit f71a45b）。停下交Claude驗收；未push、未部署、未按平台同步。[Codex]

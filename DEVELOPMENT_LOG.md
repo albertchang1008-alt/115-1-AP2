@@ -1,5 +1,22 @@
 ## 2026-10-15 Codex：呼吸發布唯讀預檢，表頭不符依交辦停止
 
+## 2026-10-15 呼吸77題②提問鏈：階段二寫入 [Codex]
+
+- Claude審稿通過，兩題依指定整句替換，其餘75題保留；77題定稿自動檢查全過，2問／51–76字，見chain-rewrite-draft-verification.json。
+- Excel只改Q229:Q305的77格②；其他7325格值／型別／樣式不變、全部格樣式不變；9個其他ZIP成員與題庫XML非目標區逐位元不變。
+- Sheet115-1-AP2完整480×32先備份CSV／原生與值JSON／原Excel到docs/sheet-backups/（忽略不提交），單一原子批次只改U404:U480的userEnteredValue。全表回讀其他15283格零差異、目標格式與驗證不變；77格最終Excel／Sheet／定稿一致，仍479題。
+- 完整證據docs/respiratory-release/chain-rewrite-write-verification.json；REPORT.md已附加新節，來源與教材751檔雜湊不變，Excel與Google100%原生畫面核對通過。未build／push／部署／平台同步。
+- feature/respiratory-infographics，本輪單一本機commit（父f71a45b，以git log -1為準），停下交Claude驗收。
+
+
+## 2026-10-15 呼吸77題②提問鏈：階段一起草 [Codex]
+
+- 依 CODEX_TASK_respiratory-chain-rewrite_2026-10-15.md 僅起草；唯讀讀取Excel第2–228列②與229–305列現有題目，對照七份content節點／解析／④，完成 docs/respiratory-release/chain-rewrite-draft.md。
+- 每題一列，完整77題ID／題幹／正解／①／新②／依據；每題2問，以→連接，51–73字。77題問句結構、①與完整答案排除（含正規化）、完整題幹排除、台灣用詞、A2掃描、數值出處與節點ID均通過；檢查結果寫入草稿開頭。字串檢查不代替Claude語意審稿。
+- Excel唯讀且SHA256不變，61份受保護content／教材／登錄／Excel檔案雜湊不變；未存取Google Sheet，未改既有發布報告或驗證證據。僅新增草稿、更新交接與日誌。
+- feature/respiratory-infographics／HEAD f71a45b，本輪未commit／push／部署／同步；停下交Claude審稿，尚未執行階段二寫入。
+
+
 ## 2026-10-15 呼吸七份正式建置與題庫發布（本機 release）[Codex]
 
 - 教師11:50欄位裁定取代預檢停點；七份build／登錄，沿用驗收圖層，content與其他教材不變。
