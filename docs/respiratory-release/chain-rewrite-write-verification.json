@@ -1,0 +1,559 @@
+{
+  "ok": true,
+  "authorization": "Teacher authorized stage two after Claude approval, exact two sentence replacements applied",
+  "baseCommit": "f71a45b",
+  "draftVerification": {
+    "ok": true,
+    "count": 77,
+    "replacedIds": [
+      "breathing-mechanics-foundation-q06",
+      "lung-function-case-q04"
+    ],
+    "unchangedOtherDraftRows": 75,
+    "checks": {
+      "present": 77,
+      "twoOrThreeQuestions": 77,
+      "arrowAndSentenceEnds": 77,
+      "notHint": 77,
+      "notFullAnswer": 77,
+      "notFullStem": 77,
+      "length40to90": 77,
+      "taiwanTerms": 77,
+      "A2": 77,
+      "evidence": 77,
+      "numericSource": 77,
+      "contentIdentity": 77
+    },
+    "lengthMin": 51,
+    "lengthMax": 76,
+    "draftSHA256": "b570638a1efb2206cc2d576e2be89c53352875b869ccbcce8a81c6ca94a20ba6"
+  },
+  "excel": {
+    "ok": true,
+    "changedCount": 77,
+    "range": "題庫!Q229:Q305",
+    "onlyChangedColumn": "②提問鏈",
+    "protectedCellsUnchanged": 7325,
+    "allCellStylesPreserved": true,
+    "allOtherZipMembersByteIdentical": 9,
+    "sheet1Except77CellsByteIdentical": true,
+    "rowsIncludingHeader": 305,
+    "questions": 304,
+    "beforeSHA256": "f4263b222c24b3c404f5748276880ce89a5ee448603540e664e4862f63614a8e",
+    "afterSHA256": "04498f115cb3d512825ec01606282c633e308ff19b906297769df40861849215",
+    "authoredWith": "@oai/artifact-tool; original OOXML preserved outside 77 approved value edits"
+  },
+  "sheet": {
+    "ok": true,
+    "spreadsheetId": "1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk",
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk/edit?ouid=108134287664086524891",
+    "sheet": "115-1-AP2",
+    "sheetId": 1633868463,
+    "grid": [
+      480,
+      32
+    ],
+    "questionCount": 479,
+    "range": "U404:U480",
+    "changedCells": 77,
+    "protectedCellsChecked": 15283,
+    "protectedCellMismatches": 0,
+    "mismatches": [],
+    "targetMetadataUnchanged": true,
+    "sheetPropertiesUnchanged": true,
+    "backupCSV": "docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.csv",
+    "all77MatchApprovedDraft": true,
+    "checkedFields": "userEnteredValue,userEnteredFormat,dataValidation,note,chipRuns,textFormatRuns",
+    "ids": [
+      "airway-structure-foundation-q01",
+      "airway-structure-foundation-q02",
+      "airway-structure-foundation-q03",
+      "airway-structure-foundation-q04",
+      "airway-structure-foundation-q05",
+      "airway-structure-foundation-q06",
+      "airway-structure-case-q01",
+      "airway-structure-case-q02",
+      "airway-structure-case-q03",
+      "airway-structure-case-q04",
+      "airway-structure-case-q05",
+      "lungs-pleura-foundation-q01",
+      "lungs-pleura-foundation-q02",
+      "lungs-pleura-foundation-q03",
+      "lungs-pleura-foundation-q04",
+      "lungs-pleura-foundation-q05",
+      "lungs-pleura-foundation-q06",
+      "lungs-pleura-case-q01",
+      "lungs-pleura-case-q02",
+      "lungs-pleura-case-q03",
+      "lungs-pleura-case-q04",
+      "lungs-pleura-case-q05",
+      "breathing-mechanics-foundation-q01",
+      "breathing-mechanics-foundation-q02",
+      "breathing-mechanics-foundation-q03",
+      "breathing-mechanics-foundation-q04",
+      "breathing-mechanics-foundation-q05",
+      "breathing-mechanics-foundation-q06",
+      "breathing-mechanics-case-q01",
+      "breathing-mechanics-case-q02",
+      "breathing-mechanics-case-q03",
+      "breathing-mechanics-case-q04",
+      "breathing-mechanics-case-q05",
+      "lung-function-foundation-q01",
+      "lung-function-foundation-q02",
+      "lung-function-foundation-q03",
+      "lung-function-foundation-q04",
+      "lung-function-foundation-q05",
+      "lung-function-foundation-q06",
+      "lung-function-case-q01",
+      "lung-function-case-q02",
+      "lung-function-case-q03",
+      "lung-function-case-q04",
+      "lung-function-case-q05",
+      "gas-exchange-foundation-q01",
+      "gas-exchange-foundation-q02",
+      "gas-exchange-foundation-q03",
+      "gas-exchange-foundation-q04",
+      "gas-exchange-foundation-q05",
+      "gas-exchange-foundation-q06",
+      "gas-exchange-case-q01",
+      "gas-exchange-case-q02",
+      "gas-exchange-case-q03",
+      "gas-exchange-case-q04",
+      "gas-exchange-case-q05",
+      "o2-co2-transport-foundation-q01",
+      "o2-co2-transport-foundation-q02",
+      "o2-co2-transport-foundation-q03",
+      "o2-co2-transport-foundation-q04",
+      "o2-co2-transport-foundation-q05",
+      "o2-co2-transport-foundation-q06",
+      "o2-co2-transport-case-q01",
+      "o2-co2-transport-case-q02",
+      "o2-co2-transport-case-q03",
+      "o2-co2-transport-case-q04",
+      "o2-co2-transport-case-q05",
+      "respiratory-control-foundation-q01",
+      "respiratory-control-foundation-q02",
+      "respiratory-control-foundation-q03",
+      "respiratory-control-foundation-q04",
+      "respiratory-control-foundation-q05",
+      "respiratory-control-foundation-q06",
+      "respiratory-control-case-q01",
+      "respiratory-control-case-q02",
+      "respiratory-control-case-q03",
+      "respiratory-control-case-q04",
+      "respiratory-control-case-q05"
+    ]
+  },
+  "directExcelSheetDraftMatches": 77,
+  "allOtherValuesMismatches": 0,
+  "pairs": [
+    {
+      "id": "airway-structure-foundation-q01",
+      "excelCell": "Q229",
+      "sheetCell": "U404"
+    },
+    {
+      "id": "airway-structure-foundation-q02",
+      "excelCell": "Q230",
+      "sheetCell": "U405"
+    },
+    {
+      "id": "airway-structure-foundation-q03",
+      "excelCell": "Q231",
+      "sheetCell": "U406"
+    },
+    {
+      "id": "airway-structure-foundation-q04",
+      "excelCell": "Q232",
+      "sheetCell": "U407"
+    },
+    {
+      "id": "airway-structure-foundation-q05",
+      "excelCell": "Q233",
+      "sheetCell": "U408"
+    },
+    {
+      "id": "airway-structure-foundation-q06",
+      "excelCell": "Q234",
+      "sheetCell": "U409"
+    },
+    {
+      "id": "airway-structure-case-q01",
+      "excelCell": "Q235",
+      "sheetCell": "U410"
+    },
+    {
+      "id": "airway-structure-case-q02",
+      "excelCell": "Q236",
+      "sheetCell": "U411"
+    },
+    {
+      "id": "airway-structure-case-q03",
+      "excelCell": "Q237",
+      "sheetCell": "U412"
+    },
+    {
+      "id": "airway-structure-case-q04",
+      "excelCell": "Q238",
+      "sheetCell": "U413"
+    },
+    {
+      "id": "airway-structure-case-q05",
+      "excelCell": "Q239",
+      "sheetCell": "U414"
+    },
+    {
+      "id": "lungs-pleura-foundation-q01",
+      "excelCell": "Q240",
+      "sheetCell": "U415"
+    },
+    {
+      "id": "lungs-pleura-foundation-q02",
+      "excelCell": "Q241",
+      "sheetCell": "U416"
+    },
+    {
+      "id": "lungs-pleura-foundation-q03",
+      "excelCell": "Q242",
+      "sheetCell": "U417"
+    },
+    {
+      "id": "lungs-pleura-foundation-q04",
+      "excelCell": "Q243",
+      "sheetCell": "U418"
+    },
+    {
+      "id": "lungs-pleura-foundation-q05",
+      "excelCell": "Q244",
+      "sheetCell": "U419"
+    },
+    {
+      "id": "lungs-pleura-foundation-q06",
+      "excelCell": "Q245",
+      "sheetCell": "U420"
+    },
+    {
+      "id": "lungs-pleura-case-q01",
+      "excelCell": "Q246",
+      "sheetCell": "U421"
+    },
+    {
+      "id": "lungs-pleura-case-q02",
+      "excelCell": "Q247",
+      "sheetCell": "U422"
+    },
+    {
+      "id": "lungs-pleura-case-q03",
+      "excelCell": "Q248",
+      "sheetCell": "U423"
+    },
+    {
+      "id": "lungs-pleura-case-q04",
+      "excelCell": "Q249",
+      "sheetCell": "U424"
+    },
+    {
+      "id": "lungs-pleura-case-q05",
+      "excelCell": "Q250",
+      "sheetCell": "U425"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q01",
+      "excelCell": "Q251",
+      "sheetCell": "U426"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q02",
+      "excelCell": "Q252",
+      "sheetCell": "U427"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q03",
+      "excelCell": "Q253",
+      "sheetCell": "U428"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q04",
+      "excelCell": "Q254",
+      "sheetCell": "U429"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q05",
+      "excelCell": "Q255",
+      "sheetCell": "U430"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q06",
+      "excelCell": "Q256",
+      "sheetCell": "U431"
+    },
+    {
+      "id": "breathing-mechanics-case-q01",
+      "excelCell": "Q257",
+      "sheetCell": "U432"
+    },
+    {
+      "id": "breathing-mechanics-case-q02",
+      "excelCell": "Q258",
+      "sheetCell": "U433"
+    },
+    {
+      "id": "breathing-mechanics-case-q03",
+      "excelCell": "Q259",
+      "sheetCell": "U434"
+    },
+    {
+      "id": "breathing-mechanics-case-q04",
+      "excelCell": "Q260",
+      "sheetCell": "U435"
+    },
+    {
+      "id": "breathing-mechanics-case-q05",
+      "excelCell": "Q261",
+      "sheetCell": "U436"
+    },
+    {
+      "id": "lung-function-foundation-q01",
+      "excelCell": "Q262",
+      "sheetCell": "U437"
+    },
+    {
+      "id": "lung-function-foundation-q02",
+      "excelCell": "Q263",
+      "sheetCell": "U438"
+    },
+    {
+      "id": "lung-function-foundation-q03",
+      "excelCell": "Q264",
+      "sheetCell": "U439"
+    },
+    {
+      "id": "lung-function-foundation-q04",
+      "excelCell": "Q265",
+      "sheetCell": "U440"
+    },
+    {
+      "id": "lung-function-foundation-q05",
+      "excelCell": "Q266",
+      "sheetCell": "U441"
+    },
+    {
+      "id": "lung-function-foundation-q06",
+      "excelCell": "Q267",
+      "sheetCell": "U442"
+    },
+    {
+      "id": "lung-function-case-q01",
+      "excelCell": "Q268",
+      "sheetCell": "U443"
+    },
+    {
+      "id": "lung-function-case-q02",
+      "excelCell": "Q269",
+      "sheetCell": "U444"
+    },
+    {
+      "id": "lung-function-case-q03",
+      "excelCell": "Q270",
+      "sheetCell": "U445"
+    },
+    {
+      "id": "lung-function-case-q04",
+      "excelCell": "Q271",
+      "sheetCell": "U446"
+    },
+    {
+      "id": "lung-function-case-q05",
+      "excelCell": "Q272",
+      "sheetCell": "U447"
+    },
+    {
+      "id": "gas-exchange-foundation-q01",
+      "excelCell": "Q273",
+      "sheetCell": "U448"
+    },
+    {
+      "id": "gas-exchange-foundation-q02",
+      "excelCell": "Q274",
+      "sheetCell": "U449"
+    },
+    {
+      "id": "gas-exchange-foundation-q03",
+      "excelCell": "Q275",
+      "sheetCell": "U450"
+    },
+    {
+      "id": "gas-exchange-foundation-q04",
+      "excelCell": "Q276",
+      "sheetCell": "U451"
+    },
+    {
+      "id": "gas-exchange-foundation-q05",
+      "excelCell": "Q277",
+      "sheetCell": "U452"
+    },
+    {
+      "id": "gas-exchange-foundation-q06",
+      "excelCell": "Q278",
+      "sheetCell": "U453"
+    },
+    {
+      "id": "gas-exchange-case-q01",
+      "excelCell": "Q279",
+      "sheetCell": "U454"
+    },
+    {
+      "id": "gas-exchange-case-q02",
+      "excelCell": "Q280",
+      "sheetCell": "U455"
+    },
+    {
+      "id": "gas-exchange-case-q03",
+      "excelCell": "Q281",
+      "sheetCell": "U456"
+    },
+    {
+      "id": "gas-exchange-case-q04",
+      "excelCell": "Q282",
+      "sheetCell": "U457"
+    },
+    {
+      "id": "gas-exchange-case-q05",
+      "excelCell": "Q283",
+      "sheetCell": "U458"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q01",
+      "excelCell": "Q284",
+      "sheetCell": "U459"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q02",
+      "excelCell": "Q285",
+      "sheetCell": "U460"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q03",
+      "excelCell": "Q286",
+      "sheetCell": "U461"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q04",
+      "excelCell": "Q287",
+      "sheetCell": "U462"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q05",
+      "excelCell": "Q288",
+      "sheetCell": "U463"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q06",
+      "excelCell": "Q289",
+      "sheetCell": "U464"
+    },
+    {
+      "id": "o2-co2-transport-case-q01",
+      "excelCell": "Q290",
+      "sheetCell": "U465"
+    },
+    {
+      "id": "o2-co2-transport-case-q02",
+      "excelCell": "Q291",
+      "sheetCell": "U466"
+    },
+    {
+      "id": "o2-co2-transport-case-q03",
+      "excelCell": "Q292",
+      "sheetCell": "U467"
+    },
+    {
+      "id": "o2-co2-transport-case-q04",
+      "excelCell": "Q293",
+      "sheetCell": "U468"
+    },
+    {
+      "id": "o2-co2-transport-case-q05",
+      "excelCell": "Q294",
+      "sheetCell": "U469"
+    },
+    {
+      "id": "respiratory-control-foundation-q01",
+      "excelCell": "Q295",
+      "sheetCell": "U470"
+    },
+    {
+      "id": "respiratory-control-foundation-q02",
+      "excelCell": "Q296",
+      "sheetCell": "U471"
+    },
+    {
+      "id": "respiratory-control-foundation-q03",
+      "excelCell": "Q297",
+      "sheetCell": "U472"
+    },
+    {
+      "id": "respiratory-control-foundation-q04",
+      "excelCell": "Q298",
+      "sheetCell": "U473"
+    },
+    {
+      "id": "respiratory-control-foundation-q05",
+      "excelCell": "Q299",
+      "sheetCell": "U474"
+    },
+    {
+      "id": "respiratory-control-foundation-q06",
+      "excelCell": "Q300",
+      "sheetCell": "U475"
+    },
+    {
+      "id": "respiratory-control-case-q01",
+      "excelCell": "Q301",
+      "sheetCell": "U476"
+    },
+    {
+      "id": "respiratory-control-case-q02",
+      "excelCell": "Q302",
+      "sheetCell": "U477"
+    },
+    {
+      "id": "respiratory-control-case-q03",
+      "excelCell": "Q303",
+      "sheetCell": "U478"
+    },
+    {
+      "id": "respiratory-control-case-q04",
+      "excelCell": "Q304",
+      "sheetCell": "U479"
+    },
+    {
+      "id": "respiratory-control-case-q05",
+      "excelCell": "Q305",
+      "sheetCell": "U480"
+    }
+  ],
+  "backup": {
+    "csv": "docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.csv",
+    "csvRows": 480,
+    "csvColumns": 32,
+    "csvSHA256": "4d2ff50f6741910c7392fb76831d20015fa2476bf89c3d9525182dbef13502af",
+    "nativeBefore": "docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.native.json",
+    "valuesBefore": "docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.values.json",
+    "excelBefore": "docs/sheet-backups/20261015-052830-chain-rewrite-before-115-1-AP2.xlsx",
+    "ignoredAndExcludedFromCommit": true,
+    "timestampTimezone": "UTC"
+  },
+  "protectedSourceAndMaterialFileCount": 751,
+  "protectedSourceAndMaterialMismatches": 0,
+  "visualVerification": {
+    "excel": "Artifact renders at existing dimensions: Q255:Q257 and Q270:Q272; approved content readable",
+    "sheet": "Google native 100% view inspected U431 and U446; values readable and formula bar exact; no formatting writes"
+  },
+  "successfulSheetBatches": 1,
+  "sheetWriteFields": "userEnteredValue only",
+  "push": false,
+  "deploy": false,
+  "platformSync": false,
+  "build": false
+}

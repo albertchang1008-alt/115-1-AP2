@@ -1,0 +1,387 @@
+{
+  "focusStyle": "block",
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview-state-1",
+      "file": "1280-overview-state-1.png",
+      "minPx": 29.50588235294118,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "小肺泡",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "表面張力",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "P＝2T/r",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        }
+      ],
+      "focus": [
+        {
+          "label": "表面張力",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "P＝2T/r",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "minPx": 29.50588235294118,
+      "boxes": [
+        {
+          "label": "肺尖",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "右肺",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "上葉",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "水平裂",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "中葉",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "斜裂",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "下葉",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "左肺",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "上葉",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "心切跡",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "斜裂",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "下葉",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "肺底",
+          "px": 29.50588235294118,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        }
+      ],
+      "focus": [
+        {
+          "label": "右肺",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "水平裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "斜裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "左肺",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "心切跡",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "斜裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview-state-1",
+      "file": "390-overview-state-1.png",
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "小肺泡",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "表面張力",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "P＝2T/r",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        }
+      ],
+      "focus": [
+        {
+          "label": "表面張力",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "P＝2T/r",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "肺尖",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "右肺",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "上葉",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "水平裂",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "中葉",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "斜裂",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "下葉",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "左肺",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "上葉",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "心切跡",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "斜裂",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "下葉",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        },
+        {
+          "label": "肺底",
+          "px": 12.889411764705882,
+          "clipped": false,
+          "fill": "rgb(23, 33, 43)"
+        }
+      ],
+      "focus": [
+        {
+          "label": "右肺",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "水平裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "斜裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "左肺",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "心切跡",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        },
+        {
+          "label": "斜裂",
+          "black": true,
+          "bold": true,
+          "orange": true,
+          "shown": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

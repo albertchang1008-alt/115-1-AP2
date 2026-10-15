@@ -1,24 +1,22 @@
 # 專案交接（現況）
 目前版本：1.9.0
-> 本檔是 unify worktree 的交接；其他教材任務見原工作目錄的 handoff.md。歷史見 DEVELOPMENT_LOG.md。
+> 此為呼吸發布獨立整合目錄；未發布，停點為整合commit後交Claude核對。
 
 ## 開工規則
-1. 開工讀本檔與 git log -5；改動前確認分支。
-2. 未經教師授權，不 push、合併／部署 main；不執行正式 migration。
-3. 收工更新 handoff.md／DEVELOPMENT_LOG.md；commit 結尾 [Codex]；不可略過測試。
-4. Claude 獨立驗收，Codex 實作，教師決定課程內容與部署。
+1. 先讀本檔與git log -5；改動前確認分支。
+2. 本輪授權一般合併／驗證／本機commit；未經最終SHA核可不push，且不部署Functions／rules／indexes。
+3. 收工更新handoff／DEVELOPMENT_LOG；commit結尾[Codex]，不可略過測試。
+4. 不操作平台同步、正式學生或Google Sheet；Claude獨立驗收，教師裁定。
 
-## 目前任務（2026-10-14）
-- feature/1.9.0-unify：新增學生說明「2. 加到手機主畫面」，逐字使用交辦內容；原2–10改3–11與id。
-- guide.css補手機清單／小標字級≥16px與列印樣式；guide-verify核對11節、兩份5步清單、5則注意、兩種字級無溢位與列印。
-- 完整檢查與兩站截圖證據見docs/GUIDE_HOMESCREEN_2026-10-14_REPORT.md；共用提交e2dd36c，合併前Git權限失敗停止，尚未合併MI。
-- 目前manifest standalone、Apple圖示與title具備；src/service.ts仍signInWithPopup，登入程式未改。
-- iPhone／Android主畫面登入需教師test帳號真機實測；若iPhone失敗依交辦修改注意第3點，另列redirect評估。
-- AP2正式main仍7a6720e，本次不push、不部署；原CI歷史fixture及分站教材測試均保留。
-- MI release已由Claude驗收510b6ad；後續migration成功，Functions59操作成功但deleteCourse失敗（exit2），部署停在step2；不可重跑apply／自行回退。
-- MI規則索引／Pages尚未執行；本次guide任務不續部署。所有MI Firebase指令須--project mi-bd885，.firebaserc不改。
-- MI公開教材保持兩份＋三CHP，GitHub VITE_SITE_ID未设、workflow fallback mi不改。
-- Excel、學生資料與root教材工作均未動。
+## 目前狀態（2026-10-15）
+- 分支codex/respiratory-release-2026-10-15，origin/main基準8e61f58，呼吸來源f541b29；一般merge本機commit以git log -1為準，雙親保留兩邊。
+- 教師已核可Pages-only計畫；只合併呼吸兩提交，解六衝突，保留main1.9.0與兩站設定／MI登錄。
+- 只補oxygen-curve.js原檔（SHA d105171b…），七份HTML／content／Excel保持核可快照。
+- 77題②已由Claude核可f541b29，Excel304題與Sheet479題就緒；本輪不再寫入。
+- 主站呼吸七頁仍待部署，根目錄其他未提交工作不動；血流／泌尿／作圖工具／私人備份排除。
+- 必要驗證全過：AP2 check158／54、materials20、節點21／15、七份乾淨重建SHA、126狀態、五份10頁回歸。AP2 catalog／dist38，MI catalog／dist2＋3CHP，無呼吸；functions／rules／indexes與main零差異。
+- 額外MI全量測試在裁切副本149過9敗，未整合main亦同9敗（AP2快照依賴及SDK站別假設），新增失敗0；不聲稱MI完整check過。報告docs/respiratory-release/INTEGRATION_REPORT.md與integration-verification.json。
+- 已停下交Claude核對最終SHA、diff與額外MI限制，確認前不push任何分支／main，不部署／同步。
 
 ## 固定決策
 1. **兩課程共用 1.9.0 主程式；新功能以課程 features 開關；網站差異只放在建置設定。**
@@ -33,7 +31,8 @@
 10. 學生說明不需登入、不連 Firebase、無外部相依；提示只存 courseId＋uid 的 localStorage，try/catch，略過即可關閉。
 11. 禁未授權部署；Firebase 指令須明確指定專案。MI 要先 migration，再部署 Functions／前端；AP2 依既有 deploy.sh 流程。
 
+
 ## 下一步
-1. 本輪停在合併前：git merge-tree因預設sandbox不能寫Git暫存檔exit128；未merge。教師續作後須用已授權提升權限合併，再完整MI check，交Claude複驗。
-2. 教師用test帳號真機驗證iPhone與Android：加到主畫面→開圖示→Google登入→一題練習保存→關閉重開保持登入。
-3. 本次不push／部署；後續發布需另行交辦，MI不可重跑migration。
+- Claude核對最終commit及本次報告；核可後再由教師指示Pages-only push。
+- 不執行通用deploy.sh（會部署Functions），不push／部署／同步。
+[Codex]

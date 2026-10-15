@@ -1,0 +1,1367 @@
+{
+  "slug": "lungs-pleura",
+  "focusStyle": "red",
+  "anchorCoordinates": "original PNG pixels",
+  "figures": {
+    "overview-state-1": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-01.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1622
+      ],
+      "fontSize": 66,
+      "state": "state-1",
+      "red": [
+        "表面張力",
+        "P＝2T/r"
+      ],
+      "labels": [
+        {
+          "label": "大肺泡",
+          "anchor": [
+            550,
+            430
+          ],
+          "textPosition": [
+            380,
+            240
+          ],
+          "align": "end",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "anchor": [
+            370,
+            1110
+          ],
+          "textPosition": [
+            380,
+            850
+          ],
+          "align": "end",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "anchor": [
+            800,
+            638
+          ],
+          "textPosition": [
+            1320,
+            440
+          ],
+          "align": "start",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1312
+          ],
+          "align": "middle",
+          "lines": [
+            "P＝2T/r"
+          ],
+          "renderAs": "caption"
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [
+        {
+          "start": [
+            240,
+            490
+          ],
+          "end": [
+            370,
+            490
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            870,
+            490
+          ],
+          "end": [
+            740,
+            490
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            350,
+            1110
+          ],
+          "end": [
+            450,
+            1110
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            740,
+            1110
+          ],
+          "end": [
+            640,
+            1110
+          ],
+          "width": 13
+        }
+      ],
+      "notes": [
+        "P＝2T/r",
+        "表面張力相同：小肺泡半徑小、",
+        "所需壓力較大，較易塌陷"
+      ],
+      "radius": {
+        "start": [
+          550,
+          520
+        ],
+        "end": [
+          820,
+          350
+        ]
+      }
+    },
+    "overview-state-2": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1622
+      ],
+      "fontSize": 66,
+      "state": "state-2",
+      "red": [
+        "表面張力素"
+      ],
+      "labels": [
+        {
+          "label": "大肺泡",
+          "anchor": [
+            550,
+            430
+          ],
+          "textPosition": [
+            380,
+            240
+          ],
+          "align": "end",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "anchor": [
+            370,
+            1110
+          ],
+          "textPosition": [
+            380,
+            850
+          ],
+          "align": "end",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "anchor": [
+            800,
+            638
+          ],
+          "textPosition": [
+            1320,
+            440
+          ],
+          "align": "start",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "anchor": [
+            648,
+            1262
+          ],
+          "textPosition": [
+            1320,
+            1030
+          ],
+          "align": "start",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1312
+          ],
+          "align": "middle",
+          "lines": [
+            "P＝2T/r"
+          ],
+          "renderAs": "caption"
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [
+        {
+          "start": [
+            240,
+            490
+          ],
+          "end": [
+            370,
+            490
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            870,
+            490
+          ],
+          "end": [
+            740,
+            490
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            350,
+            1110
+          ],
+          "end": [
+            450,
+            1110
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            740,
+            1110
+          ],
+          "end": [
+            640,
+            1110
+          ],
+          "width": 7
+        }
+      ],
+      "notes": [
+        "P＝2T/r",
+        "有表面張力素：表面張力降低，",
+        "小肺泡也能維持擴張"
+      ],
+      "radius": {
+        "start": [
+          550,
+          520
+        ],
+        "end": [
+          820,
+          350
+        ]
+      }
+    },
+    "overview-state-3": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-03.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1622
+      ],
+      "fontSize": 66,
+      "state": "state-3",
+      "red": [
+        "表面張力",
+        "表面張力素"
+      ],
+      "labels": [
+        {
+          "label": "大肺泡",
+          "anchor": [
+            550,
+            430
+          ],
+          "textPosition": [
+            380,
+            240
+          ],
+          "align": "end",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "anchor": [
+            370,
+            1110
+          ],
+          "textPosition": [
+            380,
+            850
+          ],
+          "align": "end",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "anchor": [
+            800,
+            638
+          ],
+          "textPosition": [
+            1320,
+            440
+          ],
+          "align": "start",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "anchor": [
+            681,
+            1230
+          ],
+          "textPosition": [
+            1320,
+            1030
+          ],
+          "align": "start",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1312
+          ],
+          "align": "middle",
+          "lines": [
+            "P＝2T/r"
+          ],
+          "renderAs": "caption"
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [
+        {
+          "start": [
+            240,
+            490
+          ],
+          "end": [
+            370,
+            490
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            870,
+            490
+          ],
+          "end": [
+            740,
+            490
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            350,
+            1110
+          ],
+          "end": [
+            450,
+            1110
+          ],
+          "width": 13
+        },
+        {
+          "start": [
+            740,
+            1110
+          ],
+          "end": [
+            640,
+            1110
+          ],
+          "width": 13
+        }
+      ],
+      "notes": [
+        "P＝2T/r",
+        "表面張力素不足（早產兒）：",
+        "肺泡不易維持擴張，呼吸費力"
+      ],
+      "radius": {
+        "start": [
+          550,
+          520
+        ],
+        "end": [
+          820,
+          350
+        ]
+      }
+    },
+    "node-01": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-04.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1396
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "右肺",
+        "左肺",
+        "水平裂",
+        "斜裂",
+        "心切跡"
+      ],
+      "labels": [
+        {
+          "label": "肺尖",
+          "anchor": [
+            440,
+            280
+          ],
+          "textPosition": [
+            380,
+            140
+          ],
+          "align": "end",
+          "lines": [
+            "肺尖"
+          ]
+        },
+        {
+          "label": "右肺",
+          "anchor": [
+            300,
+            430
+          ],
+          "textPosition": [
+            380,
+            290
+          ],
+          "align": "end",
+          "lines": [
+            "右肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "anchor": [
+            330,
+            550
+          ],
+          "textPosition": [
+            380,
+            440
+          ],
+          "align": "end",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "水平裂",
+          "anchor": [
+            355,
+            609
+          ],
+          "textPosition": [
+            380,
+            600
+          ],
+          "align": "end",
+          "lines": [
+            "水平裂"
+          ]
+        },
+        {
+          "label": "中葉",
+          "anchor": [
+            400,
+            760
+          ],
+          "textPosition": [
+            380,
+            770
+          ],
+          "align": "end",
+          "lines": [
+            "中葉"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "anchor": [
+            365,
+            807
+          ],
+          "textPosition": [
+            380,
+            930
+          ],
+          "align": "end",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "anchor": [
+            200,
+            940
+          ],
+          "textPosition": [
+            380,
+            1090
+          ],
+          "align": "end",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "左肺",
+          "anchor": [
+            820,
+            430
+          ],
+          "textPosition": [
+            1320,
+            290
+          ],
+          "align": "start",
+          "lines": [
+            "左肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "anchor": [
+            780,
+            560
+          ],
+          "textPosition": [
+            1320,
+            450
+          ],
+          "align": "start",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "心切跡",
+          "anchor": [
+            739,
+            744
+          ],
+          "textPosition": [
+            1320,
+            660
+          ],
+          "align": "start",
+          "lines": [
+            "心切跡"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "anchor": [
+            820,
+            765
+          ],
+          "textPosition": [
+            1320,
+            850
+          ],
+          "align": "start",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "anchor": [
+            840,
+            910
+          ],
+          "textPosition": [
+            1320,
+            1030
+          ],
+          "align": "start",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "肺底",
+          "anchor": [
+            825,
+            947
+          ],
+          "textPosition": [
+            1320,
+            1190
+          ],
+          "align": "start",
+          "lines": [
+            "肺底"
+          ]
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [],
+      "notes": [],
+      "radius": null
+    },
+    "node-02": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-05.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1292
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "肺門",
+        "肺根"
+      ],
+      "labels": [
+        {
+          "label": "肺門",
+          "anchor": [
+            455,
+            570
+          ],
+          "textPosition": [
+            380,
+            350
+          ],
+          "align": "end",
+          "lines": [
+            "肺門"
+          ]
+        },
+        {
+          "label": "肺根",
+          "anchor": [
+            735,
+            300
+          ],
+          "textPosition": [
+            1320,
+            180
+          ],
+          "align": "start",
+          "lines": [
+            "肺根"
+          ]
+        },
+        {
+          "label": "肺血管",
+          "anchor": [
+            1000,
+            350
+          ],
+          "textPosition": [
+            1320,
+            350
+          ],
+          "align": "start",
+          "lines": [
+            "肺血管"
+          ]
+        },
+        {
+          "label": "淋巴管",
+          "anchor": [
+            831,
+            465
+          ],
+          "textPosition": [
+            1320,
+            520
+          ],
+          "align": "start",
+          "lines": [
+            "淋巴管"
+          ]
+        },
+        {
+          "label": "支氣管",
+          "anchor": [
+            970,
+            535
+          ],
+          "textPosition": [
+            1320,
+            750
+          ],
+          "align": "start",
+          "lines": [
+            "支氣管"
+          ]
+        },
+        {
+          "label": "神經",
+          "anchor": [
+            855,
+            595
+          ],
+          "textPosition": [
+            1320,
+            940
+          ],
+          "align": "start",
+          "lines": [
+            "神經"
+          ]
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [],
+      "notes": [],
+      "radius": null
+    },
+    "node-03": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-06.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1276
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "壁層胸膜",
+        "胸膜腔",
+        "臟層胸膜"
+      ],
+      "labels": [
+        {
+          "label": "胸腔壁",
+          "anchor": [
+            315,
+            590
+          ],
+          "textPosition": [
+            380,
+            300
+          ],
+          "align": "end",
+          "lines": [
+            "胸腔壁"
+          ]
+        },
+        {
+          "label": "壁層胸膜",
+          "anchor": [
+            525,
+            575
+          ],
+          "textPosition": [
+            380,
+            620
+          ],
+          "align": "end",
+          "lines": [
+            "壁層胸膜"
+          ]
+        },
+        {
+          "label": "胸膜腔",
+          "anchor": [
+            590,
+            675
+          ],
+          "textPosition": [
+            380,
+            940
+          ],
+          "align": "end",
+          "lines": [
+            "胸膜腔"
+          ]
+        },
+        {
+          "label": "臟層胸膜",
+          "anchor": [
+            660,
+            635
+          ],
+          "textPosition": [
+            1320,
+            580
+          ],
+          "align": "start",
+          "lines": [
+            "臟層胸膜"
+          ]
+        },
+        {
+          "label": "肺",
+          "anchor": [
+            920,
+            830
+          ],
+          "textPosition": [
+            1320,
+            960
+          ],
+          "align": "start",
+          "lines": [
+            "肺"
+          ]
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.6778309409888357
+      },
+      "arrows": [],
+      "notes": [
+        "胸內壓低於大氣壓"
+      ],
+      "radius": null
+    },
+    "node-04": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-07.png",
+      "sourceSize": [
+        1145,
+        1374
+      ],
+      "crop": [
+        0,
+        530,
+        1145,
+        844
+      ],
+      "viewBox": [
+        1700,
+        1086
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "第一型肺泡細胞",
+        "第二型肺泡細胞（中隔細胞）",
+        "肺泡巨噬細胞（灰塵細胞）"
+      ],
+      "labels": [
+        {
+          "label": "第二型肺泡細胞（中隔細胞）",
+          "anchor": [
+            320,
+            695
+          ],
+          "textPosition": [
+            380,
+            220
+          ],
+          "align": "end",
+          "lines": [
+            "第二型",
+            "肺泡細胞",
+            "（中隔",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "anchor": [
+            550,
+            1245
+          ],
+          "textPosition": [
+            380,
+            720
+          ],
+          "align": "end",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "anchor": [
+            655,
+            585
+          ],
+          "textPosition": [
+            1320,
+            190
+          ],
+          "align": "start",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡巨噬細胞（灰塵細胞）",
+          "anchor": [
+            810,
+            900
+          ],
+          "textPosition": [
+            1320,
+            490
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡巨噬",
+            "細胞",
+            "（灰塵",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "肺泡腔",
+          "anchor": [
+            670,
+            1090
+          ],
+          "textPosition": [
+            1320,
+            880
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡腔"
+          ]
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.74235807860262
+      },
+      "arrows": [],
+      "notes": [],
+      "radius": null
+    },
+    "node-05": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-08.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1316
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "第一型肺泡細胞",
+        "肺泡細胞基底膜",
+        "間質",
+        "微血管基底膜",
+        "內皮細胞"
+      ],
+      "labels": [
+        {
+          "label": "肺泡側",
+          "anchor": [
+            700,
+            300
+          ],
+          "textPosition": [
+            380,
+            160
+          ],
+          "align": "end",
+          "lines": [
+            "肺泡側"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "anchor": [
+            460,
+            545
+          ],
+          "textPosition": [
+            1320,
+            200
+          ],
+          "align": "start",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡細胞基底膜",
+          "anchor": [
+            580,
+            590
+          ],
+          "textPosition": [
+            1320,
+            410
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡細胞",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "間質",
+          "anchor": [
+            690,
+            643
+          ],
+          "textPosition": [
+            1320,
+            620
+          ],
+          "align": "start",
+          "lines": [
+            "間質"
+          ]
+        },
+        {
+          "label": "微血管基底膜",
+          "anchor": [
+            770,
+            690
+          ],
+          "textPosition": [
+            1320,
+            800
+          ],
+          "align": "start",
+          "lines": [
+            "微血管",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "內皮細胞",
+          "anchor": [
+            810,
+            728
+          ],
+          "textPosition": [
+            1320,
+            1000
+          ],
+          "align": "start",
+          "lines": [
+            "內皮細胞"
+          ]
+        },
+        {
+          "label": "血液側",
+          "anchor": [
+            470,
+            1000
+          ],
+          "textPosition": [
+            380,
+            880
+          ],
+          "align": "end",
+          "lines": [
+            "血液側"
+          ]
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.6778309409888357
+      },
+      "arrows": [],
+      "notes": [
+        "厚度通常不超過0.5 μm"
+      ],
+      "radius": null
+    },
+    "node-06": {
+      "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": null,
+      "viewBox": [
+        1700,
+        1742
+      ],
+      "fontSize": 66,
+      "state": null,
+      "red": [
+        "表面張力素",
+        "P＝2T/r"
+      ],
+      "labels": [
+        {
+          "label": "大肺泡",
+          "anchor": [
+            550,
+            430
+          ],
+          "textPosition": [
+            380,
+            240
+          ],
+          "align": "end",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "anchor": [
+            370,
+            1110
+          ],
+          "textPosition": [
+            380,
+            850
+          ],
+          "align": "end",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "anchor": [
+            648,
+            1262
+          ],
+          "textPosition": [
+            1320,
+            1030
+          ],
+          "align": "start",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "T",
+          "anchor": [
+            800,
+            638
+          ],
+          "textPosition": [
+            1320,
+            440
+          ],
+          "align": "start",
+          "lines": [
+            "T"
+          ]
+        },
+        {
+          "label": "r",
+          "anchor": [
+            685,
+            435
+          ],
+          "textPosition": [
+            380,
+            620
+          ],
+          "align": "end",
+          "lines": [
+            "r"
+          ]
+        },
+        {
+          "label": "P",
+          "anchor": [
+            590,
+            1190
+          ],
+          "textPosition": [
+            1320,
+            900
+          ],
+          "align": "start",
+          "lines": [
+            "P"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1322
+          ],
+          "align": "middle",
+          "lines": [
+            "P＝2T/r"
+          ],
+          "renderAs": "caption"
+        }
+      ],
+      "imageTransform": {
+        "x": 425,
+        "y": 100,
+        "scale": 0.7575757575757576
+      },
+      "arrows": [
+        {
+          "start": [
+            240,
+            490
+          ],
+          "end": [
+            370,
+            490
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            870,
+            490
+          ],
+          "end": [
+            740,
+            490
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            350,
+            1110
+          ],
+          "end": [
+            450,
+            1110
+          ],
+          "width": 7
+        },
+        {
+          "start": [
+            740,
+            1110
+          ],
+          "end": [
+            640,
+            1110
+          ],
+          "width": 7
+        }
+      ],
+      "notes": [
+        "P＝2T/r",
+        "張力相同時小肺泡較易塌陷；",
+        "表面張力素降低表面張力，減少塌陷傾向、",
+        "幫助肺泡擴張與維持，並提高肺順應性。"
+      ],
+      "radius": {
+        "start": [
+          550,
+          520
+        ],
+        "end": [
+          820,
+          350
+        ]
+      }
+    }
+  }
+}

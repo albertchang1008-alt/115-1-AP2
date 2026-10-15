@@ -1,0 +1,4755 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 3,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜薄",
+          "lines": [
+            "膜薄"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "肺微血管"
+          ]
+        },
+        {
+          "label": "正常：膜薄、面積大，擴散順暢",
+          "lines": [
+            "正常：膜薄、面積大，擴散順暢"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 166,
+          "marker": true,
+          "strokePx": 6.258823529411765
+        },
+        {
+          "index": 1,
+          "samples": 132,
+          "marker": true,
+          "strokePx": 6.258823529411765
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "膜薄",
+          "x": 783.9903580515008,
+          "y": 42.207040786743164,
+          "w": 132.01928389699836,
+          "h": 95.61910378305535,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 903.1617254959909,
+          "y": 766.4716820967825,
+          "w": 55.765822561163645,
+          "h": 63.74610900878906,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1046.6255750154194,
+          "y": 318.1005799142938,
+          "w": 87.78403834292763,
+          "h": 63.74610900878906,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 312.0099840666118,
+          "y": 447.5801046271073,
+          "w": 87.99005608809621,
+          "h": 63.74604074578536,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1299.9999598452919,
+          "y": 588.1044809441817,
+          "w": 131.98501586914062,
+          "h": 63.74604074578536,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1299.9999598452919,
+          "y": 715.4786039653577,
+          "w": 175.97997565018503,
+          "h": 63.74610900878906,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常：膜薄、面積大，擴散順暢",
+          "x": 80.00000803094161,
+          "y": 1250.1080322265625,
+          "w": 923.9999630576685,
+          "h": 95.36478142989309,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 393.8980322781159,
+          "clip": {
+            "x": 450,
+            "y": 743.338139947792,
+            "width": 380,
+            "height": 393.8980322781159
+          },
+          "nonWhiteRatio": 0.7671051025390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 3,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜變厚",
+          "lines": [
+            "膜變厚"
+          ]
+        },
+        {
+          "label": "擴散減少",
+          "lines": [
+            "擴散減少"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "肺微血管"
+          ]
+        },
+        {
+          "label": "纖維化或肺水腫：膜變厚，擴散減少",
+          "lines": [
+            "纖維化或肺水腫：膜變厚，擴散減少"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 166,
+          "marker": true,
+          "strokePx": 3.1294117647058823
+        },
+        {
+          "index": 1,
+          "samples": 132,
+          "marker": true,
+          "strokePx": 3.1294117647058823
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "膜變厚",
+          "x": 751.0189176860608,
+          "y": 41.65663618790476,
+          "w": 197.96216462787828,
+          "h": 91.70977542274876,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "擴散減少",
+          "x": 718.0252235814145,
+          "y": 166.6545837803891,
+          "w": 263.94955283717104,
+          "h": 91.70974129124691,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 903.1711457905016,
+          "y": 863.562425312243,
+          "w": 55.74684544613486,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1046.6191582930715,
+          "y": 431.0184077212685,
+          "w": 87.79673526161595,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 311.99346441971625,
+          "y": 555.92748541581,
+          "w": 88.00650747198807,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1299.9999598452919,
+          "y": 691.491325779965,
+          "w": 132.00986360248766,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1299.9999598452919,
+          "y": 814.3693743254008,
+          "w": 176.01301494397615,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "纖維化或肺水腫：膜變厚，擴散減少",
+          "x": 80.00000803094161,
+          "y": 1330.9781205026727,
+          "w": 1055.9999967876233,
+          "h": 91.99845966539884,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "index": 5,
+          "widthCss": 380,
+          "heightCss": 379.9937417925148,
+          "clip": {
+            "x": 450,
+            "y": 795.9479748030203,
+            "width": 380,
+            "height": 379.9937417925148
+          },
+          "nonWhiteRatio": 0.77044677734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 3,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "交換面積減少",
+          "lines": [
+            "交換面積減少"
+          ]
+        },
+        {
+          "label": "擴散減少",
+          "lines": [
+            "擴散減少"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "肺微血管"
+          ]
+        },
+        {
+          "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+          "lines": [
+            "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 166,
+          "marker": true,
+          "strokePx": 3.1294117647058823
+        },
+        {
+          "index": 1,
+          "samples": 132,
+          "marker": true,
+          "strokePx": 3.1294117647058823
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "交換面積減少",
+          "x": 652.0378353721217,
+          "y": 41.65663618790476,
+          "w": 395.92432925575656,
+          "h": 91.70977542274876,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "擴散減少",
+          "x": 718.0252235814145,
+          "y": 166.6545837803891,
+          "w": 263.94955283717104,
+          "h": 91.70974129124691,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 903.1711457905016,
+          "y": 863.562425312243,
+          "w": 55.74684544613486,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1046.6191582930715,
+          "y": 431.0184077212685,
+          "w": 87.79673526161595,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 311.99346441971625,
+          "y": 555.92748541581,
+          "w": 88.00650747198807,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1299.9999598452919,
+          "y": 691.491325779965,
+          "w": 132.00986360248766,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1299.9999598452919,
+          "y": 814.3693743254008,
+          "w": 176.01301494397615,
+          "h": 62.631032843338815,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+          "x": 80.00000803094161,
+          "y": 1330.9781205026727,
+          "w": 1386.0000128495064,
+          "h": 91.99845966539884,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "index": 8,
+          "widthCss": 380,
+          "heightCss": 379.9937417925148,
+          "clip": {
+            "x": 450,
+            "y": 795.9479748030203,
+            "width": 380,
+            "height": 379.9937417925148
+          },
+          "nonWhiteRatio": 0.7713775634765625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 4,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "外呼吸",
+          "lines": [
+            "外呼吸"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "肺泡"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "肺微血管"
+          ]
+        },
+        {
+          "label": "內呼吸",
+          "lines": [
+            "內呼吸"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "組織細胞",
+          "lines": [
+            "組織細胞"
+          ]
+        },
+        {
+          "label": "組織微血管",
+          "lines": [
+            "組織微血管"
+          ]
+        },
+        {
+          "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+          "lines": [
+            "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血",
+            "液與組織細胞間的交換。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 123,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 106,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 2,
+          "samples": 123,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 3,
+          "samples": 130,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "外呼吸",
+          "x": 751.0194637900904,
+          "y": 41.65756200489245,
+          "w": 197.96107241981906,
+          "h": 91.71032152677837,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 965.3085005910773,
+          "y": 562.1145710192228,
+          "w": 55.746572394120065,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 972.0108353464226,
+          "y": 251.50998567280016,
+          "w": 87.79632568359375,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 311.9940105237459,
+          "y": 429.53948974609375,
+          "w": 88.00602963096216,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1299.9998233192846,
+          "y": 410.60015828985917,
+          "w": 176.01192273591693,
+          "h": 62.631408289859166,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "內呼吸",
+          "x": 751.0194637900904,
+          "y": 866.9569396972656,
+          "w": 197.96107241981906,
+          "h": 91.71032152677837,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 965.3085005910773,
+          "y": 1364.6868013080798,
+          "w": 55.746572394120065,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 949.2836239463404,
+          "y": 1046.5064560739618,
+          "w": 87.79632568359375,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織細胞",
+          "x": 223.98811741879112,
+          "y": 1213.172422710218,
+          "w": 176.01192273591693,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織微血管",
+          "x": 1299.9998233192846,
+          "y": 1258.6268455103823,
+          "w": 220.01493755139802,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+          "x": 80.00000803094161,
+          "y": 1713.101991352282,
+          "w": 1518.0000465794612,
+          "h": 177.79604460063732,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "index": 3,
+          "widthCss": 380,
+          "heightCss": 237.07562581773863,
+          "clip": {
+            "x": 450,
+            "y": 1912.9895023206223,
+            "width": 380,
+            "height": 237.07562581773863
+          },
+          "nonWhiteRatio": 0.7389984130859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "index": 4,
+          "widthCss": 380,
+          "heightCss": 237.75297812200105,
+          "clip": {
+            "x": 450,
+            "y": 2281.9468824000915,
+            "width": 380,
+            "height": 237.75297812200105
+          },
+          "nonWhiteRatio": 0.8786773681640625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 5,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "混合氣體",
+          "lines": [
+            "混合氣體"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "高分壓"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "高分壓"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "低分壓"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "低分壓"
+          ]
+        },
+        {
+          "label": "總壓",
+          "lines": [
+            "總壓"
+          ]
+        },
+        {
+          "label": "O₂分壓",
+          "lines": [
+            "O₂分壓"
+          ]
+        },
+        {
+          "label": "CO₂分壓",
+          "lines": [
+            "CO₂分壓"
+          ]
+        },
+        {
+          "label": "各自的分壓差",
+          "lines": [
+            "各自的分壓差"
+          ]
+        },
+        {
+          "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+          "lines": [
+            "混合氣體中每種氣體各有自己的分壓；每種氣體依自",
+            "己的分壓差擴散；氣體總壓不等於氧分壓。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 234,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 234,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "O₂",
+          "x": 851.6721705386512,
+          "y": 687.1076122083161,
+          "w": 55.746572394120065,
+          "h": 62.63116936934622,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 835.6472938939145,
+          "y": 1073.4660419664885,
+          "w": 87.79659873560855,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "混合氣體",
+          "x": 223.9872982627467,
+          "y": 206.0535320482756,
+          "w": 176.01274189196133,
+          "h": 62.63113523784436,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 267.9904496042352,
+          "y": 528.0188731143348,
+          "w": 132.00959055047286,
+          "h": 62.63113523784436,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 267.9904496042352,
+          "y": 906.8017136423211,
+          "w": 132.00959055047286,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 1299.9999598452919,
+          "y": 528.0188731143348,
+          "w": 132.00959055047286,
+          "h": 62.63113523784436,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 1299.9999598452919,
+          "y": 906.8017136423211,
+          "w": 132.00959055047286,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總壓",
+          "x": 80.00000803094161,
+          "y": 1293.0918803967927,
+          "w": 131.99996546695107,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "O₂分壓",
+          "x": 80.00000803094161,
+          "y": 1471.0895739103619,
+          "w": 216.15623474121094,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂分壓",
+          "x": 80.00000803094161,
+          "y": 1649.0871308979235,
+          "w": 264.4687612433182,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "各自的分壓差",
+          "x": 80.00000803094161,
+          "y": 1827.0846878854852,
+          "w": 395.9999646638569,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+          "x": 80.00000803094161,
+          "y": 2005.0823813990542,
+          "w": 1518.0000465794612,
+          "h": 177.79440628854852,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.82425278093933,
+          "clip": {
+            "x": 450,
+            "y": 1857.1070842450765,
+            "width": 380,
+            "height": 474.82425278093933
+          },
+          "nonWhiteRatio": 0.775146484375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 6,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺動脈",
+          "lines": [
+            "肺動脈"
+          ]
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "lines": [
+            "入肺血",
+            "PO₂約40 mmHg"
+          ]
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "lines": [
+            "入肺血",
+            "PCO₂約45 mmHg"
+          ]
+        },
+        {
+          "label": "肺靜脈",
+          "lines": [
+            "肺靜脈"
+          ]
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "lines": [
+            "肺泡",
+            "PO₂約100 mmHg"
+          ]
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "lines": [
+            "肺泡",
+            "PCO₂約40 mmHg"
+          ]
+        },
+        {
+          "label": "離肺血PO₂約95 mmHg",
+          "lines": [
+            "離肺血PO₂約95 mmHg"
+          ]
+        },
+        {
+          "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+          "lines": [
+            "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧",
+            "血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺",
+            "泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約",
+            "95。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 90,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 90,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "O₂",
+          "x": 939.3914955540707,
+          "y": 610.9597537392063,
+          "w": 55.74629934210526,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 713.2390313399466,
+          "y": 434.723996614155,
+          "w": 87.79618915758634,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺動脈",
+          "x": 267.9912687602796,
+          "y": 253.06569952713815,
+          "w": 132.00877139442844,
+          "h": 62.631476552862864,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "x": 66.95487976074219,
+          "y": 520.8083544279399,
+          "w": 333.04516039396583,
+          "h": 140.5114063463713,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "x": 34.76525557668585,
+          "y": 721.5680052104749,
+          "w": 365.2347845780222,
+          "h": 140.5113380833676,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺靜脈",
+          "x": 1299.9998233192846,
+          "y": 278.8232080559981,
+          "w": 132.00890792043586,
+          "h": 62.631476552862864,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "x": 1299.9998233192846,
+          "y": 401.70292904502463,
+          "w": 351.07976813065375,
+          "h": 140.5113380833676,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "x": 1299.9998233192846,
+          "y": 602.4625115645559,
+          "w": 365.2347845780222,
+          "h": 140.5113380833676,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "離肺血PO₂約95 mmHg",
+          "x": 80.00000803094161,
+          "y": 1125.294727526213,
+          "w": 690.5624710886102,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+          "x": 80.00000803094161,
+          "y": 1303.2944689298931,
+          "w": 1508.9687146638569,
+          "h": 349.38998573704765,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 379.99928936895964,
+          "clip": {
+            "x": 450,
+            "y": 1857.107474061967,
+            "width": 380,
+            "height": 379.99928936895964
+          },
+          "nonWhiteRatio": 0.9936981201171875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜面積↑",
+          "lines": [
+            "膜面積↑"
+          ]
+        },
+        {
+          "label": "分壓差↑",
+          "lines": [
+            "分壓差↑"
+          ]
+        },
+        {
+          "label": "溶解度↑",
+          "lines": [
+            "溶解度↑"
+          ]
+        },
+        {
+          "label": "擴散↑",
+          "lines": [
+            "擴散↑"
+          ]
+        },
+        {
+          "label": "膜厚度↑",
+          "lines": [
+            "膜厚度↑"
+          ]
+        },
+        {
+          "label": "分子量平方根↑",
+          "lines": [
+            "分子量平方根↑"
+          ]
+        },
+        {
+          "label": "擴散↓",
+          "lines": [
+            "擴散↓"
+          ]
+        },
+        {
+          "label": "CO₂溶解度約為O₂的20倍",
+          "lines": [
+            "CO₂溶解度約為O₂的20倍"
+          ]
+        },
+        {
+          "label": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+          "lines": [
+            "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚",
+            "度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解",
+            "度約為 O₂ 的 20 倍。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 76,
+          "marker": true,
+          "strokePx": 2.682318341869398
+        },
+        {
+          "index": 1,
+          "samples": 76,
+          "marker": true,
+          "strokePx": 2.682318341869398
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50550176056338,
+      "boxes": [
+        {
+          "label": "膜面積↑",
+          "x": 293.03177682976974,
+          "y": 110.65555773283306,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "分壓差↑",
+          "x": 293.03177682976974,
+          "y": 235.65399169921875,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溶解度↑",
+          "x": 293.03177682976974,
+          "y": 360.65228913959703,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "擴散↑",
+          "x": 326.0251978824013,
+          "y": 780.64697265625,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "膜厚度↑",
+          "x": 1143.0208547491775,
+          "y": 110.65555773283306,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "分子量平方根↑",
+          "x": 1044.0404550652754,
+          "y": 235.65399169921875,
+          "w": 461.9078947368421,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "擴散↓",
+          "x": 1176.0142758018092,
+          "y": 780.64697265625,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.50550176056338,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂溶解度約為O₂的20倍",
+          "x": 80.0099061664782,
+          "y": 1015.9869545384457,
+          "w": 756.4902656956723,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+          "x": 80.0099061664782,
+          "y": 1193.9846480520148,
+          "w": 1517.5897859272204,
+          "h": 263.5903529116982,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ]
+        },
+        {
+          "label": "肺尖 通氣V 0.24",
+          "lines": [
+            "肺尖 通氣V 0.24"
+          ]
+        },
+        {
+          "label": "肺尖 血流Q 0.07",
+          "lines": [
+            "肺尖 血流Q 0.07"
+          ]
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ]
+        },
+        {
+          "label": "肺底 通氣V 0.82",
+          "lines": [
+            "肺底 通氣V 0.82"
+          ]
+        },
+        {
+          "label": "肺底 血流Q 1.29",
+          "lines": [
+            "肺底 血流Q 1.29"
+          ]
+        },
+        {
+          "label": "站立",
+          "lines": [
+            "站立"
+          ]
+        },
+        {
+          "label": "肺尖0.24/0.07≈3.4",
+          "lines": [
+            "肺尖0.24/0.07≈3.4"
+          ]
+        },
+        {
+          "label": "肺底0.82/1.29≈0.63",
+          "lines": [
+            "肺底0.82/1.29≈0.63"
+          ]
+        },
+        {
+          "label": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+          "lines": [
+            "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與",
+            "血流都多於肺尖，但血流差異更大，肺尖",
+            "0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50551853394419,
+      "boxes": [
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "x": 503.7613075657894,
+          "y": 397.6521000109221,
+          "w": 692.477384868421,
+          "h": 91.71052631578947,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖 通氣V 0.24",
+          "x": 70.00964917634663,
+          "y": 522.6505339773078,
+          "w": 486.26843502646994,
+          "h": 91.71056044729131,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖 血流Q 0.07",
+          "x": 70.00964917634663,
+          "y": 797.6471228348581,
+          "w": 491.2314284475226,
+          "h": 91.71059457879316,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "x": 503.7613075657894,
+          "y": 1250.6415758634869,
+          "w": 692.477384868421,
+          "h": 91.71052631578947,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底 通氣V 0.82",
+          "x": 70.00964917634663,
+          "y": 1375.6400098298725,
+          "w": 486.26843502646994,
+          "h": 91.71052631578947,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底 血流Q 1.29",
+          "x": 70.00964917634663,
+          "y": 1650.636564555921,
+          "w": 481.5850468685752,
+          "h": 91.71066284179688,
+          "px": 29.50551853394419,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "站立",
+          "x": 80.009496588456,
+          "y": 60.9992484042519,
+          "w": 131.99839541786594,
+          "h": 91.99886071054559,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖0.24/0.07≈3.4",
+          "x": 80.009496588456,
+          "y": 238.99705284520198,
+          "w": 584.8990550794099,
+          "h": 91.99885217767012,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺底0.82/1.29≈0.63",
+          "x": 80.009496588456,
+          "y": 1091.9865457635176,
+          "w": 615.0549195942126,
+          "h": 91.99880098041734,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+          "x": 80.009496588456,
+          "y": 1944.9759874845804,
+          "w": 1533.7623837119654,
+          "h": 263.59048943770557,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 4,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血流轉向",
+          "lines": [
+            "血流轉向"
+          ]
+        },
+        {
+          "label": "肺小動脈收縮",
+          "lines": [
+            "肺小動脈收縮"
+          ]
+        },
+        {
+          "label": "血流減少",
+          "lines": [
+            "血流減少"
+          ]
+        },
+        {
+          "label": "局部低氧",
+          "lines": [
+            "局部低氧"
+          ]
+        },
+        {
+          "label": "通氣良好",
+          "lines": [
+            "通氣良好"
+          ]
+        },
+        {
+          "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+          "lines": [
+            "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不",
+            "佳處的血流，改善通氣與灌流的配合。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 155,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "血流轉向",
+          "x": 527.2727243523849,
+          "y": 604.1384365684107,
+          "w": 263.94818757709703,
+          "h": 91.71018500077096,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺小動脈收縮",
+          "x": 135.98181473581414,
+          "y": 213.63077665630138,
+          "w": 264.0182254188939,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血流減少",
+          "x": 223.9878443667763,
+          "y": 336.50998567280016,
+          "w": 176.01219578793174,
+          "h": 62.63130589535361,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "局部低氧",
+          "x": 1299.9999598452919,
+          "y": 300.75136686626234,
+          "w": 176.01205926192432,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "通氣良好",
+          "x": 1299.9999598452919,
+          "y": 823.4751811780427,
+          "w": 176.01205926192432,
+          "h": 62.63130589535361,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+          "x": 80.00000803094161,
+          "y": 1293.1006180612665,
+          "w": 1518.0000465794612,
+          "h": 177.79563502261513,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8274340353721,
+          "clip": {
+            "x": 450,
+            "y": 2010.6698088842975,
+            "width": 380,
+            "height": 474.8274340353721
+          },
+          "nonWhiteRatio": 0.9919891357421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 3,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜薄",
+          "lines": [
+            "膜薄"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1　肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2　呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3　肺微血管"
+          ]
+        },
+        {
+          "label": "正常：膜薄、面積大，擴散順暢",
+          "lines": [
+            "正常：膜薄、面積大，擴散順暢"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 304,
+          "marker": true,
+          "strokePx": 2.7341176470588233
+        },
+        {
+          "index": 1,
+          "samples": 241,
+          "marker": true,
+          "strokePx": 2.7341176470588233
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "膜薄",
+          "x": 784.0328538274191,
+          "y": 39.31099966347936,
+          "w": 131.93437047751553,
+          "h": 92.16728784951819,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 1031.070166898061,
+          "y": 1073.360084625612,
+          "w": 83.60911909356174,
+          "h": 92.16734644878342,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1166.5404170392508,
+          "y": 510.602666096515,
+          "w": 131.61457475409452,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 716.0886465785015,
+          "y": 660.3401965405568,
+          "w": 26.482961264001318,
+          "h": 92.16734644878342,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1303.6428520478398,
+          "y": 909.1365814208984,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1451.417854033321,
+          "y": 913.6580225933029,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 89.99999402517297,
+          "y": 1844.2568583660816,
+          "w": 224.3445132152144,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 89.99999402517297,
+          "y": 1959.2534628259132,
+          "w": 303.3930858933782,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 89.99999402517297,
+          "y": 2074.2500672857445,
+          "w": 369.40031396337304,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常：膜薄、面積大，擴散順暢",
+          "x": 79.99999034835632,
+          "y": 2260.93216861587,
+          "w": 923.9999334496189,
+          "h": 91.99725231492376,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 304.64967998448407,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 910.917026280062,
+            "width": 304.65882352941173,
+            "height": 304.64967998448407
+          },
+          "nonWhiteRatio": 0.766845703125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 3,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜變厚",
+          "lines": [
+            "膜變厚"
+          ]
+        },
+        {
+          "label": "擴散減少",
+          "lines": [
+            "擴散減少"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1　肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2　呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3　肺微血管"
+          ]
+        },
+        {
+          "label": "纖維化或肺水腫：膜變厚，擴散減少",
+          "lines": [
+            "纖維化或肺水腫：膜變厚，擴散減少"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 304,
+          "marker": true,
+          "strokePx": 1.3670588235294117
+        },
+        {
+          "index": 1,
+          "samples": 241,
+          "marker": true,
+          "strokePx": 1.3670588235294117
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "膜變厚",
+          "x": 751.0692044913051,
+          "y": 39.31099966347936,
+          "w": 197.86159101738988,
+          "h": 92.16728784951819,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "擴散減少",
+          "x": 718.0656295224845,
+          "y": 164.30724155471987,
+          "w": 263.86881908738474,
+          "h": 92.16730738260661,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 1031.070166898061,
+          "y": 1198.3564583651992,
+          "w": 83.60911909356174,
+          "h": 92.16734644878342,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1166.5404170392508,
+          "y": 635.5988445052182,
+          "w": 131.61457475409452,
+          "h": 92.16730738260661,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 716.0886465785015,
+          "y": 785.3364921477904,
+          "w": 26.482961264001318,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1303.6428520478398,
+          "y": 1034.1327988957785,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1451.417854033321,
+          "y": 1038.6542400681828,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 89.99999402517297,
+          "y": 1969.2531539733152,
+          "w": 224.3445132152144,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 89.99999402517297,
+          "y": 2084.249758433147,
+          "w": 303.3930858933782,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 89.99999402517297,
+          "y": 2199.246206628271,
+          "w": 369.40031396337304,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "纖維化或肺水腫：膜變厚，擴散減少",
+          "x": 79.99999034835632,
+          "y": 2385.9284642231037,
+          "w": 1056.0000132365399,
+          "h": 91.9970960502165,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "index": 3,
+          "widthCss": 304.65882352941173,
+          "heightCss": 304.64967998448407,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 935.3280583301008,
+            "width": 304.65882352941173,
+            "height": 304.64967998448407
+          },
+          "nonWhiteRatio": 0.7694091796875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 3,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "交換面積減少",
+          "lines": [
+            "交換面積減少"
+          ]
+        },
+        {
+          "label": "擴散減少",
+          "lines": [
+            "擴散減少"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1　肺泡"
+          ]
+        },
+        {
+          "label": "呼吸膜",
+          "lines": [
+            "2　呼吸膜"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "3　肺微血管"
+          ]
+        },
+        {
+          "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+          "lines": [
+            "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 304,
+          "marker": true,
+          "strokePx": 1.3670588235294117
+        },
+        {
+          "index": 1,
+          "samples": 241,
+          "marker": true,
+          "strokePx": 1.3670588235294117
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "交換面積減少",
+          "x": 652.1384089826101,
+          "y": 39.31099966347936,
+          "w": 395.72318203477977,
+          "h": 92.16728784951819,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "擴散減少",
+          "x": 718.0656295224845,
+          "y": 164.30724155471987,
+          "w": 263.86881908738474,
+          "h": 92.16730738260661,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 1031.070166898061,
+          "y": 1198.3564583651992,
+          "w": 83.60911909356174,
+          "h": 92.16734644878342,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1166.5404170392508,
+          "y": 635.5988445052182,
+          "w": 131.61457475409452,
+          "h": 92.16730738260661,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 716.0886465785015,
+          "y": 785.3364921477904,
+          "w": 26.482961264001318,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 1303.6428520478398,
+          "y": 1034.1327988957785,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1451.417854033321,
+          "y": 1038.6542400681828,
+          "w": 39.604352468467624,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 89.99999402517297,
+          "y": 1969.2531539733152,
+          "w": 224.3445132152144,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸膜",
+          "x": 89.99999402517297,
+          "y": 2084.249758433147,
+          "w": 303.3930858933782,
+          "h": 92.16726831642978,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 89.99999402517297,
+          "y": 2199.246206628271,
+          "w": 369.40031396337304,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+          "x": 79.99999034835632,
+          "y": 2385.9284642231037,
+          "w": 1385.999978306782,
+          "h": 91.9970960502165,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "index": 6,
+          "widthCss": 304.65882352941173,
+          "heightCss": 304.64967998448407,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 935.3280583301008,
+            "width": 304.65882352941173,
+            "height": 304.64967998448407
+          },
+          "nonWhiteRatio": 0.769439697265625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 4,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "外呼吸",
+          "lines": [
+            "外呼吸"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "1　肺泡"
+          ]
+        },
+        {
+          "label": "肺微血管",
+          "lines": [
+            "2　肺微血管"
+          ]
+        },
+        {
+          "label": "內呼吸",
+          "lines": [
+            "內呼吸"
+          ]
+        },
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "組織細胞",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "組織微血管",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "組織細胞",
+          "lines": [
+            "3　組織細胞"
+          ]
+        },
+        {
+          "label": "組織微血管",
+          "lines": [
+            "4　組織微血管"
+          ]
+        },
+        {
+          "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+          "lines": [
+            "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血",
+            "液與組織細胞間的交換。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 224,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 193,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 2,
+          "samples": 225,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 3,
+          "samples": 238,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "外呼吸",
+          "x": 751.0706108736705,
+          "y": 39.31315318647638,
+          "w": 197.85885638501273,
+          "h": 92.16859656644155,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 1037.9481579883989,
+          "y": 889.1933762883566,
+          "w": 83.60786897590361,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1092.1616198068643,
+          "y": 330.95435176987246,
+          "w": 131.61262144525367,
+          "h": 92.16859656644155,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 599.0046581590033,
+          "y": 657.798785473927,
+          "w": 26.482570602233153,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 1332.1231888001225,
+          "y": 623.0394202542593,
+          "w": 39.60372740963856,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 89.99999402517297,
+          "y": 1257.573047316218,
+          "w": 224.34130978871542,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺微血管",
+          "x": 89.99999402517297,
+          "y": 1372.5729333349022,
+          "w": 369.3950790956796,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "內呼吸",
+          "x": 751.0706108736705,
+          "y": 1537.572525208255,
+          "w": 197.85885638501273,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "O₂",
+          "x": 1083.8497437626484,
+          "y": 2038.4681058217245,
+          "w": 83.60794710825725,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1046.9744762742375,
+          "y": 1724.9359406620624,
+          "w": 131.61254331290004,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織細胞",
+          "x": 717.5778492387519,
+          "y": 2079.587600891849,
+          "w": 39.60372740963856,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織微血管",
+          "x": 1431.2942412962398,
+          "y": 2068.0102612598835,
+          "w": 39.60388367434582,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織細胞",
+          "x": 89.99999402517297,
+          "y": 2758.613384200866,
+          "w": 369.3950790956796,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "組織微血管",
+          "x": 89.99999402517297,
+          "y": 2873.61327021955,
+          "w": 435.32132298113356,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+          "x": 79.99999034835632,
+          "y": 3060.2917774614084,
+          "w": 1517.9999018289957,
+          "h": 177.79642128082645,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 190.07202680953247,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 1985.21500748503,
+            "width": 304.65882352941173,
+            "height": 190.07202680953247
+          },
+          "nonWhiteRatio": 0.746673583984375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "index": 1,
+          "widthCss": 304.65882352941173,
+          "heightCss": 190.61509229751402,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2277.816284612553,
+            "width": 304.65882352941173,
+            "height": 190.61509229751402
+          },
+          "nonWhiteRatio": 0.8872833251953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 5,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "混合氣體",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "混合氣體",
+          "lines": [
+            "1　混合氣體"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "2　高分壓"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "3　低分壓"
+          ]
+        },
+        {
+          "label": "高分壓",
+          "lines": [
+            "4　高分壓"
+          ]
+        },
+        {
+          "label": "低分壓",
+          "lines": [
+            "5　低分壓"
+          ]
+        },
+        {
+          "label": "總壓",
+          "lines": [
+            "總壓"
+          ]
+        },
+        {
+          "label": "O₂分壓",
+          "lines": [
+            "O₂分壓"
+          ]
+        },
+        {
+          "label": "CO₂分壓",
+          "lines": [
+            "CO₂分壓"
+          ]
+        },
+        {
+          "label": "各自的分壓差",
+          "lines": [
+            "各自的分壓差"
+          ]
+        },
+        {
+          "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+          "lines": [
+            "混合氣體中每種氣體各有自己的分壓；每種氣體依自",
+            "己的分壓差擴散；氣體總壓不等於氧分壓。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 429,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 429,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "O₂",
+          "x": 858.944669976292,
+          "y": 1221.1396182876035,
+          "w": 83.60802524061089,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 834.9424109401474,
+          "y": 1617.1815803252073,
+          "w": 131.61254331290004,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "混合氣體",
+          "x": 744.9940233345492,
+          "y": 352.0504779126271,
+          "w": 26.482570602233153,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 509.0216579207455,
+          "y": 942.9584365293205,
+          "w": 39.60372740963856,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 1259.823571630271,
+          "y": 942.9584365293205,
+          "w": 39.60372740963856,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 502.0697536238705,
+          "y": 1638.1441782756026,
+          "w": 39.60372740963856,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 1259.823571630271,
+          "y": 1638.1441782756026,
+          "w": 39.60372740963856,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "混合氣體",
+          "x": 89.99999402517297,
+          "y": 2108.614082796028,
+          "w": 356.27388322209737,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 89.99999402517297,
+          "y": 2223.6136562852976,
+          "w": 303.3888276801052,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 89.99999402517297,
+          "y": 2338.613542303982,
+          "w": 303.3888276801052,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "高分壓",
+          "x": 89.99999402517297,
+          "y": 2453.6134283226656,
+          "w": 303.3888276801052,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低分壓",
+          "x": 89.99999402517297,
+          "y": 2568.613001811935,
+          "w": 303.3888276801052,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總壓",
+          "x": 79.99999034835632,
+          "y": 2755.2915090537936,
+          "w": 132.00000165456748,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "O₂分壓",
+          "x": 79.99999034835632,
+          "y": 2933.2910744540663,
+          "w": 216.15624255444632,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂分壓",
+          "x": 79.99999034835632,
+          "y": 3111.2906398543396,
+          "w": 264.4687583647579,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "各自的分壓差",
+          "x": 79.99999034835632,
+          "y": 3289.290517784027,
+          "w": 396.0000049637025,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+          "x": 79.99999034835632,
+          "y": 3467.2900831843,
+          "w": 1517.9999018289957,
+          "h": 177.79642128082645,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68701689103966,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2061.5845301240993,
+            "width": 304.65882352941173,
+            "height": 380.68701689103966
+          },
+          "nonWhiteRatio": 0.7750091552734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 6,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "O₂",
+          "lines": [
+            "O₂"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺動脈",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "肺靜脈",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "lines": [
+            "1　肺泡PO₂約100 mmHg"
+          ]
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "lines": [
+            "2　肺泡PCO₂約40 mmHg"
+          ]
+        },
+        {
+          "label": "肺動脈",
+          "lines": [
+            "3　肺動脈"
+          ]
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "lines": [
+            "4　入肺血PO₂約40 mmHg"
+          ]
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "lines": [
+            "5　入肺血PCO₂約45 mmHg"
+          ]
+        },
+        {
+          "label": "肺靜脈",
+          "lines": [
+            "6　肺靜脈"
+          ]
+        },
+        {
+          "label": "離肺血PO₂約95 mmHg",
+          "lines": [
+            "離肺血PO₂約95 mmHg"
+          ]
+        },
+        {
+          "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+          "lines": [
+            "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧",
+            "血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺",
+            "泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約",
+            "95。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 163,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 163,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "O₂",
+          "x": 1074.5298040918558,
+          "y": 1129.3889516807465,
+          "w": 83.60872843179358,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 303.76249566135635,
+          "y": 1095.1454162597656,
+          "w": 131.6137934305582,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "x": 865.3710560626295,
+          "y": 591.3284669439477,
+          "w": 26.482726866940418,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "x": 1070.2935460102128,
+          "y": 734.387556328831,
+          "w": 39.60419620376036,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺動脈",
+          "x": 277.8534165347915,
+          "y": 438.3174252797322,
+          "w": 39.604118071406724,
+          "h": 92.16765897819795,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "x": 337.56630219608905,
+          "y": 929.6943756471197,
+          "w": 39.60415713758354,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "x": 531.633317326925,
+          "y": 1166.0528711525792,
+          "w": 39.60419620376036,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺靜脈",
+          "x": 1399.9586358127824,
+          "y": 485.5891400072948,
+          "w": 39.60403993905309,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "x": 89.99999402517297,
+          "y": 1719.2755641707456,
+          "w": 751.1986698012754,
+          "h": 92.16758084584431,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "x": 89.99999402517297,
+          "y": 1834.273262483528,
+          "w": 784.9623163062406,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺動脈",
+          "x": 89.99999402517297,
+          "y": 1949.2706482668957,
+          "w": 303.39179670954326,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "x": 89.99999402517297,
+          "y": 2064.268034050264,
+          "w": 802.6441367275744,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "x": 89.99999402517297,
+          "y": 2179.265732363046,
+          "w": 850.8893024490541,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺靜脈",
+          "x": 89.99999402517297,
+          "y": 2294.2634306758287,
+          "w": 303.39179670954326,
+          "h": 92.16742458113706,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "離肺血PO₂約95 mmHg",
+          "x": 79.99999034835632,
+          "y": 2480.9466258589046,
+          "w": 690.5624941170934,
+          "h": 91.9980336384601,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+          "x": 79.99999034835632,
+          "y": 2658.943065965032,
+          "w": 1508.968739337232,
+          "h": 349.38288309487956,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 304.65228731942216,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2188.7561195826647,
+            "width": 304.65882352941173,
+            "height": 304.65228731942216
+          },
+          "nonWhiteRatio": 0.991363525390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "膜面積↑",
+          "lines": [
+            "膜面積↑"
+          ]
+        },
+        {
+          "label": "分壓差↑",
+          "lines": [
+            "分壓差↑"
+          ]
+        },
+        {
+          "label": "溶解度↑",
+          "lines": [
+            "溶解度↑"
+          ]
+        },
+        {
+          "label": "擴散↑",
+          "lines": [
+            "擴散↑"
+          ]
+        },
+        {
+          "label": "膜厚度↑",
+          "lines": [
+            "膜厚度↑"
+          ]
+        },
+        {
+          "label": "分子量平方根↑",
+          "lines": [
+            "分子量平方根↑"
+          ]
+        },
+        {
+          "label": "擴散↓",
+          "lines": [
+            "擴散↓"
+          ]
+        },
+        {
+          "label": "CO₂溶解度約為O₂的20倍",
+          "lines": [
+            "CO₂溶解度約為O₂的20倍"
+          ]
+        },
+        {
+          "label": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+          "lines": [
+            "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚",
+            "度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解",
+            "度約為 O₂ 的 20 倍。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 76,
+          "marker": true,
+          "strokePx": 1.171754961587708
+        },
+        {
+          "index": 1,
+          "samples": 76,
+          "marker": true,
+          "strokePx": 1.171754961587708
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889304577464788,
+      "boxes": [
+        {
+          "label": "膜面積↑",
+          "x": 293.07117691959246,
+          "y": 108.31175654767509,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "分壓差↑",
+          "x": 293.07117691959246,
+          "y": 233.31070865493226,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溶解度↑",
+          "x": 293.07117691959246,
+          "y": 358.3096607621894,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "擴散↑",
+          "x": 326.0742049619376,
+          "y": 778.3062211002213,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "膜厚度↑",
+          "x": 1143.064066875412,
+          "y": 108.31175654767509,
+          "w": 263.86491246970303,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "分子量平方根↑",
+          "x": 1044.134755881436,
+          "y": 233.31070865493226,
+          "w": 461.7233781929476,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "擴散↓",
+          "x": 1176.0672511824644,
+          "y": 778.3062211002213,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889304577464788,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂溶解度約為O₂的20倍",
+          "x": 80.00639720135425,
+          "y": 1015.991560235081,
+          "w": 756.4936994070031,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+          "x": 80.00639720135425,
+          "y": 1193.990031782403,
+          "w": 1517.596738884248,
+          "h": 263.5915273643402,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ]
+        },
+        {
+          "label": "肺尖 通氣V 0.24",
+          "lines": [
+            "肺尖 通氣V 0.24"
+          ]
+        },
+        {
+          "label": "肺尖 血流Q 0.07",
+          "lines": [
+            "肺尖 血流Q 0.07"
+          ]
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ]
+        },
+        {
+          "label": "肺底 通氣V 0.82",
+          "lines": [
+            "肺底 通氣V 0.82"
+          ]
+        },
+        {
+          "label": "肺底 血流Q 1.29",
+          "lines": [
+            "肺底 血流Q 1.29"
+          ]
+        },
+        {
+          "label": "站立",
+          "lines": [
+            "站立"
+          ]
+        },
+        {
+          "label": "肺尖0.24/0.07≈3.4",
+          "lines": [
+            "肺尖0.24/0.07≈3.4"
+          ]
+        },
+        {
+          "label": "肺底0.82/1.29≈0.63",
+          "lines": [
+            "肺底0.82/1.29≈0.63"
+          ]
+        },
+        {
+          "label": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+          "lines": [
+            "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與",
+            "血流都多於肺尖，但血流差異更大，肺尖",
+            "0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889121720116618,
+      "boxes": [
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "x": 503.9273503315018,
+          "y": 395.30267370752546,
+          "w": 692.1452212046428,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖 通氣V 0.24",
+          "x": 70.01754691801875,
+          "y": 520.2999069030027,
+          "w": 486.0457454819277,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖 血流Q 0.07",
+          "x": 70.01754691801875,
+          "y": 795.2936011624624,
+          "w": 491.00621234939763,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "x": 503.9273503315018,
+          "y": 1248.2837355280499,
+          "w": 692.1452212046428,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底 通氣V 0.82",
+          "x": 70.01754691801875,
+          "y": 1373.2808124588198,
+          "w": 486.0457454819277,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底 血流Q 1.29",
+          "x": 70.01754691801875,
+          "y": 1648.2745067182796,
+          "w": 481.32537933717293,
+          "h": 92.16867469879519,
+          "px": 12.889121720116618,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "站立",
+          "x": 80.01733573086291,
+          "y": 60.99863167268685,
+          "w": 131.99703262512944,
+          "h": 91.99795550610646,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺尖0.24/0.07≈3.4",
+          "x": 80.01733573086291,
+          "y": 238.99460298469268,
+          "w": 584.8930565707656,
+          "h": 91.99795550610646,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺底0.82/1.29≈0.63",
+          "x": 80.01733573086291,
+          "y": 1091.9754304081562,
+          "w": 615.0486291172994,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+          "x": 80.01733573086291,
+          "y": 1944.956179699266,
+          "w": 1533.7466963802476,
+          "h": 263.58793327607304,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 4,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血流轉向",
+          "lines": [
+            "血流轉向"
+          ]
+        },
+        {
+          "label": "局部低氧",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "肺小動脈收縮",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "血流減少",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "通氣良好",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "局部低氧",
+          "lines": [
+            "1　局部低氧"
+          ]
+        },
+        {
+          "label": "肺小動脈收縮",
+          "lines": [
+            "2　肺小動脈收縮"
+          ]
+        },
+        {
+          "label": "血流減少",
+          "lines": [
+            "3　血流減少"
+          ]
+        },
+        {
+          "label": "通氣良好",
+          "lines": [
+            "4　通氣良好"
+          ]
+        },
+        {
+          "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+          "lines": [
+            "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不",
+            "佳處的血流，改善通氣與灌流的配合。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 283,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "血流轉向",
+          "x": 257.7005041650979,
+          "y": 1101.6915011118695,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "局部低氧",
+          "x": 724.1383885762779,
+          "y": 525.8391782461879,
+          "w": 26.482726866940418,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺小動脈收縮",
+          "x": 307.4172146349068,
+          "y": 365.94881724162275,
+          "w": 39.60403993905309,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血流減少",
+          "x": 374.1551755422569,
+          "y": 534.1815259083209,
+          "w": 39.60403993905309,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "通氣良好",
+          "x": 717.5776929740447,
+          "y": 1485.1829069206515,
+          "w": 39.60403993905309,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "局部低氧",
+          "x": 89.99999402517297,
+          "y": 2108.5850175604764,
+          "w": 356.8363580359034,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺小動脈收縮",
+          "x": 89.99999402517297,
+          "y": 2223.583340932088,
+          "w": 501.2511218886778,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血流減少",
+          "x": 89.99999402517297,
+          "y": 2338.581351774285,
+          "w": 369.3976183971727,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "通氣良好",
+          "x": 89.99999402517297,
+          "y": 2453.579675145896,
+          "w": 369.3976183971727,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+          "x": 79.99999034835632,
+          "y": 2640.2559946818524,
+          "w": 1517.9999018289957,
+          "h": 177.7942335749247,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.6818724854352,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2517.490582191781,
+            "width": 304.65882352941173,
+            "height": 380.6818724854352
+          },
+          "nonWhiteRatio": 0.99420166015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

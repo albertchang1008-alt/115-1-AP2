@@ -1,0 +1,5627 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "淺快",
+          "lines": [
+            "淺快"
+          ]
+        },
+        {
+          "label": "TV 150 mL／VD 150 mL／F 40 次/min",
+          "lines": [
+            "TV 150 mL／VD 150 mL／F 40 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 6000／肺泡通氣量",
+            "0 mL/min"
+          ]
+        },
+        {
+          "label": "淺快 150 mL×40 次 → 肺泡通氣 0",
+          "lines": [
+            "淺快 150 mL×40 次 → 肺泡通氣 0"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50586564938045,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360057630037,
+          "y": 663.6574273360403,
+          "w": 766.3280567369962,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.00043367084703,
+          "y": 788.6573630885074,
+          "w": 263.9473684210526,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.00043367084703,
+          "y": 1063.6572627017372,
+          "w": 329.9342105263158,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.00043367084703,
+          "y": 1338.6568892629523,
+          "w": 329.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "淺快",
+          "x": 80.00041760896382,
+          "y": 60.999965165790755,
+          "w": 131.99996546695107,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 150 mL／VD 150 mL／F 40 次/min",
+          "x": 115.00042965537622,
+          "y": 238.99986869410463,
+          "w": 1164.0150050113075,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.00041760896382,
+          "y": 504.99970084742495,
+          "w": 599.3590023643092,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min",
+          "x": 80.00041760896382,
+          "y": 1632.9990427117598,
+          "w": 1416.7804838481702,
+          "h": 177.79686375668174,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "淺快 150 mL×40 次 → 肺泡通氣 0",
+          "x": 80.00041760896382,
+          "y": 1898.9989431280837,
+          "w": 1019.5306235865543,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "一般",
+          "lines": [
+            "一般"
+          ]
+        },
+        {
+          "label": "TV 500 mL／VD 150 mL／F 12 次/min",
+          "lines": [
+            "TV 500 mL／VD 150 mL／F 12 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 1800／肺泡通氣量",
+            "4200 mL/min"
+          ]
+        },
+        {
+          "label": "一般 500 mL×12 次 → 4200 mL/min",
+          "lines": [
+            "一般 500 mL×12 次 → 4200 mL/min"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50586564938045,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360057630037,
+          "y": 663.6574273360403,
+          "w": 766.3280567369962,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.00043367084703,
+          "y": 788.6573630885074,
+          "w": 263.9473684210526,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.00043367084703,
+          "y": 1063.6572627017372,
+          "w": 329.9342105263158,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.00043367084703,
+          "y": 1338.6568892629523,
+          "w": 329.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "一般",
+          "x": 80.00041760896382,
+          "y": 60.999965165790755,
+          "w": 131.99996546695107,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL／VD 150 mL／F 12 次/min",
+          "x": 115.00042965537622,
+          "y": 238.99986869410463,
+          "w": 1164.0150050113075,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.00041760896382,
+          "y": 504.99970084742495,
+          "w": 599.3590023643092,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min",
+          "x": 80.00041760896382,
+          "y": 1632.9990427117598,
+          "w": 1403.6398556357935,
+          "h": 177.79686375668174,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "一般 500 mL×12 次 → 4200 mL/min",
+          "x": 80.00041760896382,
+          "y": 1898.9989431280837,
+          "w": 1112.796317652652,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "深慢",
+          "lines": [
+            "深慢"
+          ]
+        },
+        {
+          "label": "TV 1000 mL／VD 150 mL／F 6 次/min",
+          "lines": [
+            "TV 1000 mL／VD 150 mL／F 6 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 900／肺泡通氣量",
+            "5100 mL/min"
+          ]
+        },
+        {
+          "label": "深慢 1000 mL×6 次 → 5100 mL/min",
+          "lines": [
+            "深慢 1000 mL×6 次 → 5100 mL/min"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50586564938045,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360057630037,
+          "y": 663.6574273360403,
+          "w": 766.3280567369962,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.00043367084703,
+          "y": 788.6573630885074,
+          "w": 263.9473684210526,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.00043367084703,
+          "y": 1063.6572627017372,
+          "w": 329.9342105263158,
+          "h": 91.71045805278577,
+          "px": 29.50586564938045,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.00043367084703,
+          "y": 1338.6568892629523,
+          "w": 329.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.50586564938045,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "深慢",
+          "x": 80.00041760896382,
+          "y": 60.999965165790755,
+          "w": 131.99996546695107,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 1000 mL／VD 150 mL／F 6 次/min",
+          "x": 115.00042965537622,
+          "y": 238.99986869410463,
+          "w": 1164.0150050113075,
+          "h": 91.99994438572934,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.00041760896382,
+          "y": 504.99970084742495,
+          "w": 599.3590023643092,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min",
+          "x": 80.00041760896382,
+          "y": 1632.9990427117598,
+          "w": 1377.171149002878,
+          "h": 177.79686375668174,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深慢 1000 mL×6 次 → 5100 mL/min",
+          "x": 80.00041760896382,
+          "y": 1898.9989431280837,
+          "w": 1099.6399889494244,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "lines": [
+            "RV 1200"
+          ]
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "lines": [
+            "ERV 1200"
+          ]
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "lines": [
+            "TV 500"
+          ]
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "lines": [
+            "IRV 3100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "1200",
+          "lines": [
+            "1200"
+          ]
+        },
+        {
+          "label": "2400",
+          "lines": [
+            "2400"
+          ]
+        },
+        {
+          "label": "2900",
+          "lines": [
+            "2900"
+          ]
+        },
+        {
+          "label": "6000",
+          "lines": [
+            "6000"
+          ]
+        },
+        {
+          "label": "容積（mL）",
+          "lines": [
+            "容積（mL）"
+          ]
+        },
+        {
+          "label": "時間",
+          "lines": [
+            "時間"
+          ]
+        },
+        {
+          "label": "課本男性示例",
+          "lines": [
+            "課本男性示例"
+          ]
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "lines": [
+            "潮氣容積TV 500 mL"
+          ]
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "lines": [
+            "吸氣儲備容積IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "lines": [
+            "呼氣儲備容積ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "lines": [
+            "肺餘容積RV 1200 mL"
+          ]
+        },
+        {
+          "label": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+          "lines": [
+            "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、",
+            "呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL",
+            "（課本男性示例）。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [
+        {
+          "low": 0,
+          "high": 1200,
+          "height": 264,
+          "y": 1399
+        },
+        {
+          "low": 1200,
+          "high": 2400,
+          "height": 264,
+          "y": 1135
+        },
+        {
+          "low": 2400,
+          "high": 2900,
+          "height": 110,
+          "y": 1025
+        },
+        {
+          "low": 2900,
+          "high": 6000,
+          "height": 682,
+          "y": 343
+        }
+      ],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505826790971543,
+      "boxes": [
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "x": 1199.9993013080798,
+          "y": 1483.6548815275494,
+          "w": 257.3067434210526,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "x": 1199.9993013080798,
+          "y": 1219.6553601716694,
+          "w": 299.66694078947364,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "x": 1199.9993013080798,
+          "y": 1032.6557560970907,
+          "w": 224.83758223684208,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "x": 1199.9993013080798,
+          "y": 636.6566105892783,
+          "w": 274.2578125,
+          "h": 91.71045805278577,
+          "px": 29.505826790971543,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 175.40206106085526,
+          "y": 1613.6546727230673,
+          "w": 39.59909539473684,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1200",
+          "x": 69.74629050806949,
+          "y": 1349.6551513671875,
+          "w": 145.2549342105263,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2400",
+          "x": 56.60484313964844,
+          "y": 1085.6556982743111,
+          "w": 158.39638157894737,
+          "h": 91.71045805278577,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2900",
+          "x": 56.60484313964844,
+          "y": 975.6558749550267,
+          "w": 158.39638157894737,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "6000",
+          "x": 56.60484313964844,
+          "y": 293.657236601177,
+          "w": 158.39638157894737,
+          "h": 91.71049218428762,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "容積（mL）",
+          "x": 470.40643390856286,
+          "y": 228.65732393766703,
+          "w": 359.1878429212068,
+          "h": 91.71054338154039,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "時間",
+          "x": 584.0134791324012,
+          "y": 1703.6546646921258,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505826790971543,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "課本男性示例",
+          "x": 80.00144155401932,
+          "y": 60.99988410347386,
+          "w": 395.9992820338199,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "x": 115.00138533742803,
+          "y": 1888.9965017218337,
+          "w": 608.2645255640933,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "x": 115.00138533742803,
+          "y": 2066.9961065995067,
+          "w": 789.7015822561164,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "x": 115.00138533742803,
+          "y": 2244.995711477179,
+          "w": 815.1234074642783,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "x": 115.00138533742803,
+          "y": 2422.9953163548516,
+          "w": 640.7488411351254,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+          "x": 80.00144155401932,
+          "y": 2600.995194284539,
+          "w": 1437.2941990902548,
+          "h": 263.5932199578536,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "IC＝TV＋IRV＝3600 mL",
+          "lines": [
+            "IC＝TV＋IRV＝3600 mL"
+          ]
+        },
+        {
+          "label": "FRC＝ERV＋RV＝2400 mL",
+          "lines": [
+            "FRC＝ERV＋RV＝2400 mL"
+          ]
+        },
+        {
+          "label": "VC＝IRV＋TV＋ERV＝4800 mL",
+          "lines": [
+            "VC＝IRV＋TV＋ERV＝4800 mL"
+          ]
+        },
+        {
+          "label": "TLC＝VC＋RV＝6000 mL",
+          "lines": [
+            "TLC＝VC＋RV＝6000 mL"
+          ]
+        },
+        {
+          "label": "TV 500 mL",
+          "lines": [
+            "TV 500 mL"
+          ]
+        },
+        {
+          "label": "IRV 3100 mL",
+          "lines": [
+            "IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "ERV 1200 mL",
+          "lines": [
+            "ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "RV 1200 mL",
+          "lines": [
+            "RV 1200 mL"
+          ]
+        },
+        {
+          "label": "平靜呼氣末FRC",
+          "lines": [
+            "平靜呼氣末FRC"
+          ]
+        },
+        {
+          "label": "平靜吸氣末FRC＋TV",
+          "lines": [
+            "平靜吸氣末FRC＋TV"
+          ]
+        },
+        {
+          "label": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+          "lines": [
+            "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC",
+            "＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝",
+            "6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為",
+            "FRC＋TV。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "RV",
+          "x": 1280
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "RV",
+          "x": 1280
+        }
+      ],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50588235294118,
+      "boxes": [
+        {
+          "label": "IC＝TV＋IRV＝3600 mL",
+          "x": 80.00253376207853,
+          "y": 60.99979877471924,
+          "w": 731.6225995515522,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FRC＝ERV＋RV＝2400 mL",
+          "x": 80.00253376207853,
+          "y": 413.9986319290964,
+          "w": 829.8878760086862,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "VC＝IRV＋TV＋ERV＝4800 mL",
+          "x": 80.00253376207853,
+          "y": 766.9974437512849,
+          "w": 956.0125130101254,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TLC＝VC＋RV＝6000 mL",
+          "x": 80.00253376207853,
+          "y": 1119.9962897049752,
+          "w": 785.0755350213301,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL",
+          "x": 115.00247754548725,
+          "y": 1472.9950673956619,
+          "w": 341.04572095369036,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "IRV 3100 mL",
+          "x": 115.00247754548725,
+          "y": 1650.9945357473273,
+          "w": 386.90494336579974,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "ERV 1200 mL",
+          "x": 115.00247754548725,
+          "y": 1828.9938675729852,
+          "w": 413.29548885947776,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "RV 1200 mL",
+          "x": 115.00247754548725,
+          "y": 2006.9933359246504,
+          "w": 371.2643874318976,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣末FRC",
+          "x": 80.00253376207853,
+          "y": 2184.992667750308,
+          "w": 460.7485158819901,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜吸氣末FRC＋TV",
+          "x": 80.00253376207853,
+          "y": 2362.9921361019738,
+          "w": 609.7792816162109,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+          "x": 80.00253376207853,
+          "y": 2540.9914679276317,
+          "w": 1530.5417351973683,
+          "h": 349.38943963301807,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 6,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "鼻腔",
+          "lines": [
+            "鼻腔"
+          ]
+        },
+        {
+          "label": "傳導區",
+          "lines": [
+            "傳導區"
+          ]
+        },
+        {
+          "label": "終末細支氣管",
+          "lines": [
+            "終末細支氣管"
+          ]
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "lines": [
+            "呼吸性細支氣管"
+          ]
+        },
+        {
+          "label": "呼吸區",
+          "lines": [
+            "呼吸區"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "肺泡"
+          ]
+        },
+        {
+          "label": "不交換氣體",
+          "lines": [
+            "不交換氣體"
+          ]
+        },
+        {
+          "label": "氣體交換",
+          "lines": [
+            "氣體交換"
+          ]
+        },
+        {
+          "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+          "lines": [
+            "鼻腔至終末細支氣管只傳送氣體、不交換；自",
+            "呼吸性細支氣管起為呼吸區。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "鼻腔",
+          "x": 311.9939422607422,
+          "y": 107.57085499010587,
+          "w": 88.00609789396587,
+          "h": 62.63135709260639,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "傳導區",
+          "x": 1299.9998233192846,
+          "y": 342.4177390650699,
+          "w": 132.00918097245065,
+          "h": 62.63134002685547,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "終末細支氣管",
+          "x": 1299.9998233192846,
+          "y": 617.4157273141961,
+          "w": 264.0182254188939,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "x": 1299.9998233192846,
+          "y": 740.2948680676911,
+          "w": 308.021240234375,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸區",
+          "x": 1299.9998233192846,
+          "y": 868.929194400185,
+          "w": 132.00918097245065,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 1299.9998233192846,
+          "y": 991.8083351536801,
+          "w": 88.00616615696957,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "不交換氣體",
+          "x": 80.00000803094161,
+          "y": 1317.6470385099713,
+          "w": 330.00001606188323,
+          "h": 91.99941534745065,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣體交換",
+          "x": 80.00000803094161,
+          "y": 1495.6458242315994,
+          "w": 263.99999919690583,
+          "h": 91.99941534745065,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+          "x": 80.00000803094161,
+          "y": 1673.6446099532277,
+          "w": 1319.9999277215254,
+          "h": 177.79563502261513,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.82736384392757,
+          "clip": {
+            "x": 450,
+            "y": 2176.7791789278403,
+            "width": 380,
+            "height": 474.82736384392757
+          },
+          "nonWhiteRatio": 0.52154541015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每次容積（mL／次）",
+          "lines": [
+            "每次容積（mL／次）"
+          ]
+        },
+        {
+          "label": "TV 500 mL",
+          "lines": [
+            "TV 500 mL"
+          ]
+        },
+        {
+          "label": "VD 150 mL",
+          "lines": [
+            "VD 150 mL"
+          ]
+        },
+        {
+          "label": "到達肺泡350 mL",
+          "lines": [
+            "到達肺泡350 mL"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ]
+        },
+        {
+          "label": "F 12次/min",
+          "lines": [
+            "F 12次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+          "lines": [
+            "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝",
+            "（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣",
+            "6000、肺泡通氣 4200 mL/min。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505804643714974,
+      "boxes": [
+        {
+          "label": "每次容積（mL／次）",
+          "x": 538.4322919343647,
+          "y": 41.65760040283203,
+          "w": 623.1352113422595,
+          "h": 91.71053484866493,
+          "px": 29.505804643714974,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL",
+          "x": 70.00207198293585,
+          "y": 166.65728016903526,
+          "w": 340.9786184210526,
+          "h": 91.71050925003854,
+          "px": 29.505804643714974,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VD 150 mL",
+          "x": 70.00207198293585,
+          "y": 441.6565824809827,
+          "w": 338.6019736842105,
+          "h": 91.71052631578947,
+          "px": 29.505804643714974,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "到達肺泡350 mL",
+          "x": 70.00207198293585,
+          "y": 716.6557994641755,
+          "w": 499.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.505804643714974,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8358692369963,
+          "y": 1347.6542262027137,
+          "w": 766.3281932630036,
+          "h": 91.71052631578947,
+          "px": 29.505804643714974,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.00207198293585,
+          "y": 1472.653888903166,
+          "w": 616.7393092105262,
+          "h": 91.71052631578947,
+          "px": 29.505804643714974,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "x": 70.00207198293585,
+          "y": 1747.6531741493625,
+          "w": 689.5065789473684,
+          "h": 91.71052631578947,
+          "px": 29.505804643714974,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "F 12次/min",
+          "x": 80.00205592105263,
+          "y": 1010.9973385459498,
+          "w": 335.35845706337375,
+          "h": 91.99975666246915,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.00205592105263,
+          "y": 1188.996806897615,
+          "w": 605.7484195106907,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+          "x": 80.00205592105263,
+          "y": 2041.9946449681331,
+          "w": 1484.886619166324,
+          "h": 263.5929469058388,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣0 mL/min",
+          "lines": [
+            "肺泡通氣0 mL/min"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣5100 mL/min",
+          "lines": [
+            "肺泡通氣5100 mL/min"
+          ]
+        },
+        {
+          "label": "淺快150×40",
+          "lines": [
+            "淺快150×40"
+          ]
+        },
+        {
+          "label": "一般500×12",
+          "lines": [
+            "一般500×12"
+          ]
+        },
+        {
+          "label": "深慢1000×6",
+          "lines": [
+            "深慢1000×6"
+          ]
+        },
+        {
+          "label": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+          "lines": [
+            "總通氣同為 6000 mL/min 時，150×40 → 0、",
+            "500×12 → 4200、1000×6 → 5100 mL/min；淺快",
+            "呼吸的死腔佔比較高。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505618091677505,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360740260074,
+          "y": 219.65532804790294,
+          "w": 766.328125,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.0069869192023,
+          "y": 344.6542057238127,
+          "w": 616.7393092105262,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣0 mL/min",
+          "x": 70.0069869192023,
+          "y": 619.6517502634149,
+          "w": 570.7442434210526,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360740260074,
+          "y": 1072.6477733411286,
+          "w": 766.328125,
+          "h": 91.71045805278577,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.0069869192023,
+          "y": 1197.6466851485402,
+          "w": 616.7393092105262,
+          "h": 91.71038978978207,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "x": 70.0069869192023,
+          "y": 1472.644332082648,
+          "w": 689.5065789473684,
+          "h": 91.71038978978207,
+          "px": 29.505618091677505,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 466.8360740260074,
+          "y": 1925.6400821083469,
+          "w": 766.328125,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.0069869192023,
+          "y": 2050.638925652755,
+          "w": 616.7393092105262,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣5100 mL/min",
+          "x": 70.0069869192023,
+          "y": 2325.636436060855,
+          "w": 676.9592927631579,
+          "h": 91.71052631578947,
+          "px": 29.505618091677505,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "淺快150×40",
+          "x": 80.00690259431538,
+          "y": 60.999453193263,
+          "w": 356.79365459241365,
+          "h": 91.99918495981316,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "一般500×12",
+          "x": 80.00690259431538,
+          "y": 913.9917875591077,
+          "w": 356.79365459241365,
+          "h": 91.99921055843956,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深慢1000×6",
+          "x": 80.00690259431538,
+          "y": 1766.9841645893298,
+          "w": 356.79365459241365,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+          "x": 80.00690259431538,
+          "y": 2619.976405093544,
+          "w": 1497.5958251953125,
+          "h": 263.5915816457648,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "1",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "4",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "5",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "呼出容積（L）",
+          "lines": [
+            "呼出容積（L）"
+          ]
+        },
+        {
+          "label": "1",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "時間（秒）",
+          "lines": [
+            "時間（秒）"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "阻塞性",
+          "lines": [
+            "阻塞性"
+          ]
+        },
+        {
+          "label": "限制性",
+          "lines": [
+            "限制性"
+          ]
+        },
+        {
+          "label": "課本示範數值",
+          "lines": [
+            "課本示範數值"
+          ]
+        },
+        {
+          "label": "型態",
+          "lines": [
+            "型態"
+          ]
+        },
+        {
+          "label": "FEV₁",
+          "lines": [
+            "FEV₁"
+          ]
+        },
+        {
+          "label": "FVC",
+          "lines": [
+            "FVC"
+          ]
+        },
+        {
+          "label": "FEV₁/FVC",
+          "lines": [
+            "FEV₁/FVC"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "4 L",
+          "lines": [
+            "4 L"
+          ]
+        },
+        {
+          "label": "5 L",
+          "lines": [
+            "5 L"
+          ]
+        },
+        {
+          "label": "4/5＝0.8",
+          "lines": [
+            "4/5＝0.8"
+          ]
+        },
+        {
+          "label": "阻塞性",
+          "lines": [
+            "阻塞性"
+          ]
+        },
+        {
+          "label": "1 L",
+          "lines": [
+            "1 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "1/2.8≈0.36",
+          "lines": [
+            "1/2.8≈0.36"
+          ]
+        },
+        {
+          "label": "限制性",
+          "lines": [
+            "限制性"
+          ]
+        },
+        {
+          "label": "2.5 L",
+          "lines": [
+            "2.5 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "2.5/2.8≈0.89",
+          "lines": [
+            "2.5/2.8≈0.89"
+          ]
+        },
+        {
+          "label": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+          "lines": [
+            "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性",
+            "1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／",
+            "2.8≈0.89，肺容量減少但比值可正常或增加。這些是",
+            "課本示範數值，用來理解型態。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [
+        {
+          "series": "正常",
+          "fev": 4,
+          "fvc": 5,
+          "path": "M250 1343C253.33333333 1319.68957525 256.66666667 1297.04844356 260.00000000 1275.04701391C263.33333333 1253.04558426 266.66666667 1231.68385793 270.00000000 1210.93319993C273.33333333 1190.18254194 276.66666667 1170.04295356 280.00000000 1150.48673661C283.33333333 1130.93051966 286.66666667 1111.95767542 290.00000000 1093.54142345C293.33333333 1075.12517148 296.66666667 1057.26551303 300.00000000 1039.93656649C303.33333333 1022.60761994 306.66666667 1005.80938654 310.00000000 989.51686467C313.33333333 973.22434281 316.66666667 957.43753372 320.00000000 942.13229720C323.33333333 926.82706067 326.66666667 912.00339794 330.00000000 897.63801168C333.33333333 883.27262541 336.66666667 869.36551685 340.00000000 855.89421323C343.33333333 842.42290961 346.66666667 829.38741214 350.00000000 816.76605447C353.33333333 804.14469680 356.66666667 791.93748012 360.00000000 780.12352642C363.33333333 768.30957272 366.66666667 756.88888318 370.00000000 745.84135026C373.33333333 734.79381734 376.66666667 724.11944222 380.00000000 713.79887009C383.33333333 703.47829796 386.66666667 693.51152999 390.00000000 683.87994654C393.33333333 674.24836310 396.66666667 664.95196533 400.00000000 655.97285136C403.33333333 646.99373739 406.66666667 638.33190836 410.00000000 629.97016288C413.33333333 621.60841739 416.66666667 613.54675659 420.00000000 605.76866245C423.33333333 597.99056832 426.66666667 590.49604197 430.00000000 583.26923184C433.33333333 576.04242172 436.66666667 569.08332892 440.00000000 562.37675153C443.33333333 555.67017414 446.66666667 549.21611327 450.00000000 543.00000000C453.33333333 536.78388673 456.66666667 530.80572217 460.00000000 525.05155397C463.33333333 519.29738576 466.66666667 513.76721500 470.00000000 508.44768960C473.33333333 503.12816420 476.66666667 498.01928522 480.00000000 493.10828469C483.33333333 488.19728416 486.66666667 483.48416315 490.00000000 478.95672182C493.33333333 474.42928049 496.66666667 470.08751988 500.00000000 465.91979250C503.33333333 461.75206512 506.66666667 457.75837200 510.00000000 453.92760234C513.33333333 450.09683267 516.66666667 446.42898747 520.00000000 442.91347714C523.33333333 439.39796682 526.66666667 436.03479238 530.00000000 432.81387013C533.33333333 429.59294788 536.66666667 426.51427883 540.00000000 423.56827005C543.33333333 420.62226127 546.66666667 417.80891376 550.00000000 415.11911041C553.33333333 412.42930705 556.66666667 409.86304884 560.00000000 407.41167968C563.33333333 404.96031051 566.66666667 402.62383137 570.00000000 400.39403258C573.33333333 398.16423378 576.66666667 396.04111629 580.00000000 394.01690239C583.33333333 391.99268849 586.66666667 390.06737914 590.00000000 388.23361433C593.33333333 386.39984953 596.66666667 384.65763020 600.00000000 383.00000000C603.33333333 381.34236980 606.66666667 379.76932963 610.00000000 378.27431287C613.33333333 376.77929612 616.66666667 375.36230368 620.00000000 374.01714494C623.33333333 372.67198620 626.66666667 371.39866205 630.00000000 370.19134436C633.33333333 368.98402667 636.66666667 367.84271633 640.00000000 366.76193431C643.33333333 365.68115230 646.66666667 364.66089949 650.00000000 363.69603286C653.33333333 362.73116623 656.66666667 361.82168663 660.00000000 360.96277403C663.33333333 360.10386143 666.66666667 359.29551667 670.00000000 358.53322996C673.33333333 357.77094325 676.66666667 357.05471541 680.00000000 356.38033428C683.33333333 355.70595314 686.66666667 355.07341953 690.00000000 354.47880652C693.33333333 353.88419350 696.66666667 353.32750190 700.00000000 352.80507783C703.33333333 352.28265377 706.66666667 351.79449803 710.00000000 351.33721782C713.33333333 350.87993761 716.66666667 350.45353371 720.00000000 350.05486257C723.33333333 349.65619144 726.66666667 349.28525384 730.00000000 348.93914392C733.33333333 348.59303400 736.66666667 348.27175252 740.00000000 347.97261992C743.33333333 347.67348732 746.66666667 347.39650434 750.00000000 347.13920657C753.33333333 346.88190880 756.66666667 346.64429697 760.00000000 346.42411082C763.33333333 346.20392468 766.66666667 346.00116493 770.00000000 345.81376478C773.33333333 345.62636463 776.66666667 345.45432477 780.00000000 345.29576130C783.33333333 345.13719783 786.66666667 344.99211143 790.00000000 344.85879081C793.33333333 344.72547018 796.66666667 344.60391600 800.00000000 344.49257948C803.33333333 344.38124296 806.66666667 344.28012476 810.00000000 344.18782878C813.33333333 344.09553281 816.66666667 344.01205968 820.00000000 343.93615637C823.33333333 343.86025306 826.66666667 343.79192017 830.00000000 343.73003834C833.33333333 343.66815651 836.66666667 343.61272633 840.00000000 343.56275296C843.33333333 343.51277958 846.66666667 343.46826360 850.00000000 343.42832578C853.33333333 343.38838795 856.66666667 343.35302886 860.00000000 343.32147624C863.33333333 343.28992362 866.66666667 343.26217802 870.00000000 343.23756576C873.33333333 343.21295350 876.66666667 343.19147511 880.00000000 343.17254733C883.33333333 343.15361956 886.66666667 343.13724292 890.00000000 343.12291672C893.33333333 343.10859051 896.66666667 343.09631524 900.00000000 343.08566516C903.33333333 343.07501507 906.66666667 343.06599065 910.00000000 343.05823377C913.33333333 343.05047689 916.66666667 343.04398801 920.00000000 343.03846960C923.33333333 343.03295118 926.66666667 343.02840366 930.00000000 343.02458334C933.33333333 343.02076302 936.66666667 343.01767031 940.00000000 343.01510890C943.33333333 343.01254748 946.66666667 343.01051775 950.00000000 343.00886464C953.33333333 343.00721154 956.66666667 343.00593542 960.00000000 343.00491667C963.33333333 343.00389792 966.66666667 343.00313688 970.00000000 343.00254389C973.33333333 343.00195090 976.66666667 343.00152628 980.00000000 343.00120521C983.33333333 343.00088413 986.66666667 343.00066691 990.00000000 343.00050878C993.33333333 343.00035065 996.66666667 343.00025189 1000.00000000 343.00018346C1003.33333333 343.00011504 1006.66666667 343.00007719 1010.00000000 343.00005265C1013.33333333 343.00002810 1016.66666667 343.00001708 1020.00000000 343.00001053C1023.33333333 343.00000398 1026.66666667 343.00000211 1030.00000000 343.00000109C1033.33333333 343.00000007 1036.66666667 343.00000006 1040.00000000 343.00000002C1043.33333333 342.99999998 1046.66666667 343.00000000 1050.00000000 343.00000000",
+          "atOne": [
+            449.9999694824219,
+            543.0000610351562
+          ],
+          "end": [
+            1050,
+            343
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            6.831996276841266,
+            6.5233515802323145,
+            6.228600420381242,
+            5.9373857979362565,
+            5.660980224609375,
+            5.392217224949741,
+            5.1359710693359375,
+            4.88814205878426,
+            4.6498260498046875,
+            4.421792685671561,
+            4.200447082519531,
+            3.989906349539377,
+            3.7867584228515625,
+            3.59180294724635,
+            3.4056625366210938,
+            3.2254409790039062,
+            3.054401190181007,
+            2.8897967903014767,
+            2.7321749413492533,
+            2.5820846557617188,
+            2.4371583448728367,
+            2.299986648610502,
+            2.168304443359375,
+            2.0425949096679688,
+            1.923225109959068,
+            1.8085715920578307,
+            1.6997222900390625,
+            1.5960655212402344,
+            1.4974269965095652,
+            1.403620938270098,
+            1.3143794464895382,
+            1.2297286987304688,
+            1.1494037582684193,
+            1.0732498168945312,
+            1.0010986244306608,
+            0.9327234857443676,
+            0.8681192923027626,
+            0.8070831298828125,
+            0.7494621276855469,
+            0.6950927359980469,
+            0.6436985496631648,
+            0.5956511787594415,
+            0.5502510070800781,
+            0.507598818978737,
+            0.4677655621762251,
+            0.43007438489414457,
+            0.39512775713555454,
+            0.36229258058363534,
+            0.3316230773925781,
+            0.3031677487773802,
+            0.27640704035155983,
+            0.2517585754394531,
+            0.22875595092773438,
+            0.20743654105852644,
+            0.18779373168945312,
+            0.16947174072265625,
+            0.15272786920265807,
+            0.1371002197265625,
+            0.12308214631764464,
+            0.11008071899414062,
+            0.09795918367346938,
+            0.08712072083069482,
+            0.07723940094451184,
+            0.06824979018844891,
+            0.06010391156073333,
+            0.05259744718511341,
+            0.045985824693109946,
+            0.04003112769220205,
+            0.03450775146484375,
+            0.030117264688603887,
+            0.025474353985946763,
+            0.021968841552734375,
+            0.01859283447265625,
+            0.01564788818359375,
+            0.013256376412423991,
+            0.01084136962890625,
+            0.0088043212890625,
+            0.0074462890625,
+            0.006118681050399011,
+            0.004962921142578125,
+            0.003726959228515625,
+            0.002986907958984375,
+            0.002361333638513771,
+            0.001827239990234375,
+            0.0013885498046875,
+            0.0009498451256542106,
+            0.000705718994140625,
+            0.00051116943359375,
+            0.000354766845703125,
+            0.00023651483939879454,
+            0.000133514404296875,
+            0.00008392333984375,
+            0.00004959030776507927,
+            0.000030517578125,
+            0.000011444091796875,
+            0.00000762939453125,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "series": "阻塞性",
+          "fev": 1,
+          "fvc": 2.8,
+          "path": "M250 1343C253.33333333 1339.41638049 256.66666667 1335.84476234 260.00000000 1332.28521583C263.33333333 1328.72566932 266.66666667 1325.17819446 270.00000000 1321.64286282C273.33333333 1318.10753118 276.66666667 1314.58434277 280.00000000 1311.07337053C283.33333333 1307.56239830 286.66666667 1304.06364223 290.00000000 1300.57717669C293.33333333 1297.09071114 296.66666667 1293.61653611 300.00000000 1290.15472739C303.33333333 1286.69291867 306.66666667 1283.24347626 310.00000000 1279.80647744C313.33333333 1276.36947863 316.66666667 1272.94492340 320.00000000 1269.53289060C323.33333333 1266.12085780 326.66666667 1262.72134742 330.00000000 1259.33443989C333.33333333 1255.94753237 336.66666667 1252.57322769 340.00000000 1249.21160794C343.33333333 1245.84998819 346.66666667 1242.50105336 350.00000000 1239.16488726C353.33333333 1235.82872115 356.66666667 1232.50532376 360.00000000 1229.19478065C363.33333333 1225.88423754 366.66666667 1222.58654870 370.00000000 1219.30180154C373.33333333 1216.01705437 376.66666667 1212.74524888 380.00000000 1209.48647435C383.33333333 1206.22769983 386.66666667 1202.98195627 390.00000000 1199.74933495C393.33333333 1196.51671363 396.66666667 1193.29721455 400.00000000 1190.09093102C403.33333333 1186.88464750 406.66666667 1183.69157952 410.00000000 1180.51182255C413.33333333 1177.33206558 416.66666667 1174.16561960 420.00000000 1171.01258227C423.33333333 1167.85954494 426.66666667 1164.71991626 430.00000000 1161.59379618C433.33333333 1158.46767609 436.66666667 1155.35506460 440.00000000 1152.25606405C443.33333333 1149.15706350 446.66666667 1146.07167387 450.00000000 1143.00000000C453.33333333 1139.92832613 456.66666667 1136.87036801 460.00000000 1133.82623306C463.33333333 1130.78209811 466.66666667 1127.75178632 470.00000000 1124.73540781C473.33333333 1121.71902929 476.66666667 1118.71658405 480.00000000 1115.72818501C483.33333333 1112.73978597 486.66666667 1109.76543313 490.00000000 1106.80524235C493.33333333 1103.84505157 496.66666667 1100.89902285 500.00000000 1097.96727513C503.33333333 1095.03552740 506.66666667 1092.11806067 510.00000000 1089.21499707C513.33333333 1086.31193348 516.66666667 1083.42327301 520.00000000 1080.54914118C523.33333333 1077.67500935 526.66666667 1074.81540615 530.00000000 1071.97046060C533.33333333 1069.12551504 536.66666667 1066.29522713 540.00000000 1063.47972956C543.33333333 1060.66423199 546.66666667 1057.86352476 550.00000000 1055.07774443C553.33333333 1052.29196410 556.66666667 1049.52111067 560.00000000 1046.76532477C563.33333333 1044.00953886 566.66666667 1041.26882047 570.00000000 1038.54331450C573.33333333 1035.81780852 576.66666667 1033.10751494 580.00000000 1030.41258314C583.33333333 1027.71765135 586.66666667 1025.03808132 590.00000000 1022.37402717C593.33333333 1019.70997303 596.66666667 1017.06143474 600.00000000 1014.42857143C603.33333333 1011.79570811 606.66666667 1009.17851974 610.00000000 1006.57717068C613.33333333 1003.97582161 616.66666667 1001.39031184 620.00000000 998.82081127C623.33333333 996.25131070 626.66666667 993.69781932 630.00000000 991.16051294C633.33333333 988.62320656 636.66666667 986.10208515 640.00000000 983.59733076C643.33333333 981.09257638 646.66666667 978.60418898 650.00000000 976.13235726C653.33333333 973.66052553 656.66666667 971.20524943 660.00000000 968.76672467C663.33333333 966.32819991 666.66666667 963.90642645 670.00000000 961.50160749C673.33333333 959.09678853 676.66666667 956.70892403 680.00000000 954.33822516C683.33333333 951.96752629 686.66666667 949.61399301 690.00000000 947.27784503C693.33333333 944.94169705 696.66666667 942.62293432 700.00000000 940.32178567C703.33333333 938.02063701 706.66666667 935.73710238 710.00000000 933.47142037C713.33333333 931.20573836 716.66666667 928.95790892 720.00000000 926.72818115C723.33333333 924.49845338 726.66666667 922.28682722 730.00000000 920.09356308C733.33333333 917.90029894 736.66666667 915.72539675 740.00000000 913.56912910C743.33333333 911.41286146 746.66666667 909.27522829 750.00000000 907.15651538C753.33333333 905.03780247 756.66666667 902.93800974 760.00000000 900.85743726C763.33333333 898.77686479 766.66666667 896.71551249 770.00000000 894.67369598C773.33333333 892.63187947 776.66666667 890.60959865 780.00000000 888.60718609C783.33333333 886.60477354 786.66666667 884.62222913 790.00000000 882.65990399C793.33333333 880.69757884 796.66666667 878.75547282 800.00000000 876.83395739C803.33333333 874.91244196 806.66666667 873.01151696 810.00000000 871.13157627C813.33333333 869.25163557 816.66666667 867.39267901 820.00000000 865.55512524C823.33333333 863.71757146 826.66666667 861.90142028 830.00000000 860.10711786C833.33333333 858.31281544 836.66666667 856.54036157 840.00000000 854.79023313C843.33333333 853.04010469 846.66666667 851.31230142 850.00000000 849.60733468C853.33333333 847.90236793 856.66666667 846.22023739 860.00000000 844.56149327C863.33333333 842.90274914 866.66666667 841.26739105 870.00000000 839.65601331C873.33333333 838.04463558 876.66666667 836.45723773 880.00000000 834.89446449C883.33333333 833.33169125 886.66666667 831.79354205 890.00000000 830.28071965C893.33333333 828.76789724 896.66666667 827.28040093 900.00000000 825.81900086C903.33333333 824.35760080 906.66666667 822.92229611 910.00000000 821.51393598C913.33333333 820.10557585 916.66666667 818.72415918 920.00000000 817.37062889C923.33333333 816.01709860 926.66666667 814.69145326 930.00000000 813.39474834C933.33333333 812.09804342 936.66666667 810.83027704 940.00000000 809.59264185C943.33333333 808.35500665 946.66666667 807.14750009 950.00000000 805.97148492C953.33333333 804.79546976 956.66666667 803.65094244 960.00000000 802.53948108C963.33333333 801.42801972 966.66666667 800.34961920 970.00000000 799.30613721C973.33333333 798.26265522 976.66666667 797.25408404 980.00000000 796.28265579C983.33333333 795.31122754 986.66666667 794.37692991 990.00000000 793.48251678C993.33333333 792.58810364 996.66666667 791.73355392 1000.00000000 790.92238756C1003.33333333 790.11122120 1006.66666667 789.34339820 1010.00000000 788.62364771C1013.33333333 787.90389722 1016.66666667 787.23213109 1020.00000000 786.61520210C1023.33333333 785.99827311 1026.66666667 785.43593313 1030.00000000 784.93947918C1033.33333333 784.44302522 1036.66666667 784.01131934 1040.00000000 783.66888604C1043.33333333 783.32645275 1046.66666667 783.00000000 1050.00000000 783.00000000",
+          "atOne": [
+            449.9999694824219,
+            1143
+          ],
+          "end": [
+            1050,
+            783
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            1.0719340207444028,
+            1.0665130615234375,
+            1.060577392578125,
+            1.0546722412109375,
+            1.0491598161322933,
+            1.042694091796875,
+            1.0371591078152,
+            1.031097412109375,
+            1.0250052451887315,
+            1.019378662109375,
+            1.0127602110298577,
+            1.0070609777031796,
+            1.0008430513116886,
+            0.9946136474609375,
+            0.9888115356005265,
+            0.9820098876953125,
+            0.976154236428209,
+            0.9697991569551203,
+            0.9633636474609375,
+            0.9574127197265625,
+            0.9504278199303433,
+            0.9443933700814435,
+            0.9378392709322774,
+            0.9312250853535258,
+            0.9250981334615076,
+            0.917877197265625,
+            0.9116786511281925,
+            0.904937744140625,
+            0.8980865478515625,
+            0.891754150390625,
+            0.88433837890625,
+            0.8779177777014835,
+            0.8709225810143242,
+            0.8638458251953125,
+            0.857330322265625,
+            0.8496246337890625,
+            0.8429718017578125,
+            0.835745511974426,
+            0.8284149169921875,
+            0.8216400146484375,
+            0.8136444091796875,
+            0.806732177734375,
+            0.799224853515625,
+            0.791612307645358,
+            0.7845535278320312,
+            0.7762298583984375,
+            0.76904296875,
+            0.7611846923828125,
+            0.7532577514648438,
+            0.7458781881575635,
+            0.7371922516460293,
+            0.7296676635742188,
+            0.7214410510334094,
+            0.7134497570056381,
+            0.7050682454547536,
+            0.6966018676757812,
+            0.6881866455078125,
+            0.6796899437717913,
+            0.671112060546875,
+            0.6624424929999772,
+            0.6534881591796875,
+            0.6446075439453125,
+            0.6356048583984375,
+            0.626498210920632,
+            0.6172866821289062,
+            0.6077698346697591,
+            0.5982818603515625,
+            0.5886948494350477,
+            0.578948974609375,
+            0.5690732503757505,
+            0.5588412563991059,
+            0.5486373901367188,
+            0.5382843017578125,
+            0.5277481079101562,
+            0.5170174943351313,
+            0.5058822631835938,
+            0.4947548312772272,
+            0.48340606689453125,
+            0.47180938720703125,
+            0.45997970565571333,
+            0.4476165771484375,
+            0.435211181640625,
+            0.422482128279661,
+            0.4094390869140625,
+            0.39598846435546875,
+            0.38188462741567547,
+            0.3675661654192702,
+            0.3527858946677755,
+            0.33740739893036703,
+            0.32143402099609375,
+            0.30438232421875,
+            0.28699712369631725,
+            0.2682779824983025,
+            0.2484302400988777,
+            0.22722452373867996,
+            0.2039031982421875,
+            0.17823300526436256,
+            0.1486968994140625,
+            0.11353891694767841,
+            0.05858612060546875
+          ]
+        },
+        {
+          "series": "限制性",
+          "fev": 2.5,
+          "fvc": 2.8,
+          "path": "M250 1343C253.33333333 1324.88376794 256.66666667 1307.53314212 260.00000000 1290.89456035C263.33333333 1274.25597859 266.66666667 1258.32945084 270.00000000 1243.06454948C273.33333333 1227.79964812 276.66666667 1213.19638277 280.00000000 1199.20731361C283.33333333 1185.21824445 286.66666667 1171.84338076 290.00000000 1159.03812887C293.33333333 1146.23287698 296.66666667 1133.99724584 300.00000000 1122.28935132C303.33333333 1110.58145680 306.66666667 1099.40130752 310.00000000 1088.70959709C313.33333333 1078.01788666 316.66666667 1067.81462339 320.00000000 1058.06295164C323.33333333 1048.31127989 326.66666667 1039.01120767 330.00000000 1030.12820775C333.33333333 1021.24520783 336.66666667 1012.77928792 340.00000000 1004.69813139C343.33333333 996.61697486 346.66666667 988.92058913 350.00000000 981.57875483C353.33333333 974.23692054 356.66666667 967.24964480 360.00000000 960.58869649C363.33333333 953.92774817 366.66666667 947.59313412 370.00000000 941.55850660C373.33333333 935.52387908 376.66666667 929.78924466 380.00000000 924.33003833C383.33333333 918.87083199 386.66666667 913.68706005 390.00000000 908.75584351C393.33333333 903.82462696 396.66666667 899.14597187 400.00000000 894.69859248C403.33333333 890.25121309 406.66666667 886.03511521 410.00000000 882.03051737C413.33333333 878.02591953 416.66666667 874.23282729 420.00000000 870.63287818C423.33333333 867.03292907 426.66666667 863.62612842 430.00000000 860.39545111C433.33333333 857.16477380 436.66666667 854.11022492 440.00000000 851.21603854C443.33333333 848.32185216 446.66666667 845.58803315 450.00000000 843.00000000C453.33333333 840.41196685 456.66666667 837.96972421 460.00000000 835.65980358C463.33333333 833.34988295 466.66666667 831.17228876 470.00000000 829.11459727C473.33333333 827.05690577 476.66666667 825.11912122 480.00000000 823.28979952C483.33333333 821.46047782 486.66666667 819.73962302 490.00000000 818.11670863C493.33333333 816.49379423 496.66666667 814.96882409 500.00000000 813.53213018C503.33333333 812.09543627 506.66666667 810.74702225 510.00000000 809.47802226C513.33333333 808.20902227 516.66666667 807.01943979 520.00000000 805.90115762C523.33333333 804.78287545 526.66666667 803.73589689 530.00000000 802.75280251C533.33333333 801.76970813 536.66666667 800.85050107 540.00000000 799.98841142C543.33333333 799.12632178 546.66666667 798.32135251 550.00000000 797.56733747C553.33333333 796.81332242 556.66666667 796.11026440 560.00000000 795.45255763C563.33333333 794.79485085 566.66666667 794.18249798 570.00000000 793.61041258C573.33333333 793.03832717 576.66666667 792.50651174 580.00000000 792.01036043C583.33333333 791.51420913 586.66666667 791.05372430 590.00000000 790.62474408C593.33333333 790.19576385 596.66666667 789.79829045 600.00000000 789.42857143C603.33333333 789.05885241 606.66666667 788.71688987 610.00000000 788.39930830C613.33333333 788.08172674 616.66666667 787.78852812 620.00000000 787.51668333C623.33333333 787.24483853 626.66666667 786.99434941 630.00000000 786.76250450C633.33333333 786.53065958 636.66666667 786.31746061 640.00000000 786.12048687C643.33333333 785.92351313 646.66666667 785.74276623 650.00000000 785.57609101C653.33333333 785.40941579 656.66666667 785.25681375 660.00000000 785.11637170C663.33333333 784.97592964 666.66666667 784.84764899 670.00000000 784.72983651C673.33333333 784.61202403 676.66666667 784.50468104 680.00000000 784.40631383C683.33333333 784.30794662 686.66666667 784.21855641 690.00000000 784.13682992C693.33333333 784.05510343 696.66666667 783.98104181 700.00000000 783.91349455C703.33333333 783.84594728 706.66666667 783.78491543 710.00000000 783.72939490C713.33333333 783.67387436 716.66666667 783.62386611 720.00000000 783.57849732C723.33333333 783.53312852 726.66666667 783.49240008 730.00000000 783.45555647C733.33333333 783.41871287 736.66666667 783.38575493 740.00000000 783.35603165C743.33333333 783.32630837 746.66666667 783.29982050 750.00000000 783.27600975C753.33333333 783.25219900 756.66666667 783.23106607 760.00000000 783.21213464C763.33333333 783.19320321 766.66666667 783.17647391 770.00000000 783.16154257C773.33333333 783.14661123 776.66666667 783.13347842 780.00000000 783.12180321C783.33333333 783.11012799 786.66666667 783.09991089 790.00000000 783.09086610C793.33333333 783.08182131 796.66666667 783.07394930 800.00000000 783.06701212C803.33333333 783.06007494 806.66666667 783.05407299 810.00000000 783.04880962C813.33333333 783.04354625 816.66666667 783.03902182 820.00000000 783.03507506C823.33333333 783.03112830 826.66666667 783.02775955 830.00000000 783.02483770C833.33333333 783.02191584 836.66666667 783.01944118 840.00000000 783.01730813C843.33333333 783.01517508 846.66666667 783.01338390 850.00000000 783.01185044C853.33333333 783.01031697 856.66666667 783.00904144 860.00000000 783.00795753C863.33333333 783.00687362 866.66666667 783.00598151 870.00000000 783.00522960C873.33333333 783.00447769 876.66666667 783.00386614 880.00000000 783.00335534C883.33333333 783.00284453 886.66666667 783.00243461 890.00000000 783.00209563C893.33333333 783.00175666 896.66666667 783.00148876 900.00000000 783.00126969C903.33333333 783.00105062 906.66666667 783.00088050 910.00000000 783.00074312C913.33333333 783.00060575 916.66666667 783.00050121 920.00000000 783.00041800C923.33333333 783.00033478 926.66666667 783.00027296 930.00000000 783.00022453C933.33333333 783.00017611 936.66666667 783.00014114 940.00000000 783.00011426C943.33333333 783.00008738 946.66666667 783.00006862 950.00000000 783.00005451C953.33333333 783.00004041 956.66666667 783.00003097 960.00000000 783.00002406C963.33333333 783.00001714 966.66666667 783.00001276 970.00000000 783.00000964C973.33333333 783.00000652 976.66666667 783.00000468 980.00000000 783.00000342C983.33333333 783.00000215 986.66666667 783.00000148 990.00000000 783.00000103C993.33333333 783.00000059 996.66666667 783.00000038 1000.00000000 783.00000025C1003.33333333 783.00000012 1006.66666667 783.00000007 1010.00000000 783.00000004C1013.33333333 783.00000002 1016.66666667 783.00000001 1020.00000000 783.00000000C1023.33333333 783.00000000 1026.66666667 783.00000000 1030.00000000 783.00000000C1033.33333333 783.00000000 1036.66666667 783.00000000 1040.00000000 783.00000000C1043.33333333 783.00000000 1046.66666667 783.00000000 1050.00000000 783.00000000",
+          "atOne": [
+            449.99993896484375,
+            843.0000610351562
+          ],
+          "end": [
+            1050,
+            783
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            5.2535247802734375,
+            4.907947189129597,
+            4.580259016956265,
+            4.2715301513671875,
+            3.981994560220948,
+            3.706787109375,
+            3.4503957733315533,
+            3.208172638598017,
+            2.9805336741116557,
+            2.767848082916576,
+            2.5663070678710938,
+            2.379225237940834,
+            2.2032394409179688,
+            2.038292077225026,
+            1.8841328272520934,
+            1.7399053188526872,
+            1.605316162109375,
+            1.4797230540349806,
+            1.3625998023979278,
+            1.2534637451171875,
+            1.1517410278320312,
+            1.0572662353515625,
+            0.9694673960312192,
+            0.8879691159753111,
+            0.8123657698279183,
+            0.7422533330790212,
+            0.6774342444067215,
+            0.6174950313378575,
+            0.5621523883637363,
+            0.5110837297484941,
+            0.46385955810546875,
+            0.42069846840489045,
+            0.3808502927768983,
+            0.34424591064453125,
+            0.31082916259765625,
+            0.2799530029296875,
+            0.2519626767171991,
+            0.226318359375,
+            0.20288694086501416,
+            0.18168015808226076,
+            0.16219969024894523,
+            0.14454761159981994,
+            0.12878319714967995,
+            0.11440364382662832,
+            0.1014556884765625,
+            0.08953026176252928,
+            0.07904052734375,
+            0.06960349734113572,
+            0.0611572265625,
+            0.05356597900390625,
+            0.04669952392578125,
+            0.04060332791650454,
+            0.035385401805128516,
+            0.03058624267578125,
+            0.026634013107199806,
+            0.0225982666015625,
+            0.01958465576171875,
+            0.01667022705078125,
+            0.014175523189721602,
+            0.012130644755212744,
+            0.00995635986328125,
+            0.008491580898902121,
+            0.0071868896484375,
+            0.006057693041282339,
+            0.005058327166192369,
+            0.00397491455078125,
+            0.0033111572265625,
+            0.00273895263671875,
+            0.002250654215589786,
+            0.0018157958984375,
+            0.001373291015625,
+            0.0011139000999458308,
+            0.000885009765625,
+            0.000701904296875,
+            0.0005493122153303884,
+            0.00038909912109375,
+            0.00029754638671875,
+            0.0002288835821806502,
+            0.00017547607421875,
+            0.00012969970703125,
+            0.00007629336324033173,
+            0.00006103515625,
+            0.0000457763671875,
+            0.000030518043793392844,
+            0.0000152587890625,
+            0.0000152587890625,
+            0.000007629278117704503,
+            0,
+            0.00000762939453125,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "fevPoints": [
+        {
+          "value": 4,
+          "x": 450,
+          "y": 543
+        },
+        {
+          "value": 1,
+          "x": 450,
+          "y": 1143
+        },
+        {
+          "value": 2.5,
+          "x": 450,
+          "y": 843
+        }
+      ],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505774803954996,
+      "boxes": [
+        {
+          "label": "0",
+          "x": 170.4032295628598,
+          "y": 1293.6528657612048,
+          "w": 39.59909539473684,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1",
+          "x": 183.5097262733861,
+          "y": 1093.6535965768915,
+          "w": 26.492598684210524,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4",
+          "x": 170.4032295628598,
+          "y": 493.65582315545333,
+          "w": 39.59909539473684,
+          "h": 91.71049218428762,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "5",
+          "x": 170.4032295628598,
+          "y": 293.65655397114,
+          "w": 39.59909539473684,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼出容積（L）",
+          "x": 432.6251140393709,
+          "y": 228.65679489938836,
+          "w": 434.75109702662417,
+          "h": 91.71049218428762,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1",
+          "x": 436.75516228926807,
+          "y": 1373.6526007401314,
+          "w": 26.492598684210524,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "時間（秒）",
+          "x": 685.0328947368421,
+          "y": 1373.6526007401314,
+          "w": 329.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 1179.9987873278164,
+          "y": 295.6565575850637,
+          "w": 131.9736842105263,
+          "h": 91.71049218428762,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "阻塞性",
+          "x": 1179.9987873278164,
+          "y": 843.6545442280016,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "限制性",
+          "x": 1179.9987873278164,
+          "y": 603.6554075542249,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505774803954996,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "課本示範數值",
+          "x": 80.00280681409333,
+          "y": 60.99977744253058,
+          "w": 395.99853114077916,
+          "h": 91.99966280083906,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "型態",
+          "x": 68.00285339355469,
+          "y": 1580.9942386024875,
+          "w": 131.99948762592516,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "FEV₁",
+          "x": 403.36096914190995,
+          "y": 1580.9942386024875,
+          "w": 157.2806910464638,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FVC",
+          "x": 722.7505252235813,
+          "y": 1580.9942386024875,
+          "w": 130.21823280736018,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FEV₁/FVC",
+          "x": 1042.1398765162417,
+          "y": 1580.9942386024875,
+          "w": 316.6083165218955,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 68.00285339355469,
+          "y": 1726.3843335603412,
+          "w": 131.99948762592516,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4 L",
+          "x": 403.36096914190995,
+          "y": 1726.3843335603412,
+          "w": 100.39030376233552,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "5 L",
+          "x": 722.7505252235813,
+          "y": 1726.3843335603412,
+          "w": 100.39016723632812,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4/5＝0.8",
+          "x": 1042.1398765162417,
+          "y": 1726.3843335603412,
+          "w": 275.56149934467516,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "阻塞性",
+          "x": 68.00285339355469,
+          "y": 1871.7744285181948,
+          "w": 197.99929970189143,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1 L",
+          "x": 403.36096914190995,
+          "y": 1871.7744285181948,
+          "w": 87.26530777780633,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.8 L",
+          "x": 722.7505252235813,
+          "y": 1871.7744285181948,
+          "w": 157.42117630807977,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1/2.8≈0.36",
+          "x": 1042.1398765162417,
+          "y": 1871.7744285181948,
+          "w": 346.10817357113484,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "限制性",
+          "x": 68.00285339355469,
+          "y": 2017.1645234760483,
+          "w": 197.99929970189143,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.5 L",
+          "x": 403.36096914190995,
+          "y": 2017.1645234760483,
+          "w": 157.42131283408716,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.8 L",
+          "x": 722.7505252235813,
+          "y": 2017.1645234760483,
+          "w": 157.42117630807977,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.5/2.8≈0.89",
+          "x": 1042.1398765162417,
+          "y": 2017.1645234760483,
+          "w": 416.40473215203536,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+          "x": 80.00280681409333,
+          "y": 2388.991329795436,
+          "w": 1538.4632471988075,
+          "h": 349.38943963301807,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "淺快",
+          "lines": [
+            "淺快"
+          ]
+        },
+        {
+          "label": "TV 150 mL／VD 150 mL／F 40 次/min",
+          "lines": [
+            "TV 150 mL／VD 150 mL／F 40 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 6000／肺泡通氣量",
+            "0 mL/min"
+          ]
+        },
+        {
+          "label": "淺快 150 mL×40 次 → 肺泡通氣 0",
+          "lines": [
+            "淺快 150 mL×40 次 → 肺泡通氣 0"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.888968563561267,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 661.2880982548357,
+          "w": 765.9120858433736,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.02682513501271,
+          "y": 786.2837688032404,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.02682513501271,
+          "y": 1061.2742596362011,
+          "w": 329.79103915662654,
+          "h": 92.16875283114882,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.02682513501271,
+          "y": 1336.2648286015155,
+          "w": 329.79103915662654,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "淺快",
+          "x": 80.026477216238,
+          "y": 60.997904065143636,
+          "w": 131.99546997805678,
+          "h": 91.99684212006719,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 150 mL／VD 150 mL／F 40 次/min",
+          "x": 115.02527903361494,
+          "y": 238.9917902199619,
+          "w": 1163.9755662665311,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.026477216238,
+          "y": 504.9826449658498,
+          "w": 599.338791169316,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min",
+          "x": 80.026477216238,
+          "y": 1632.9438450824784,
+          "w": 1416.7325582848976,
+          "h": 177.79079575136484,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "淺快 150 mL×40 次 → 肺泡通氣 0",
+          "x": 80.026477216238,
+          "y": 1898.9346607621894,
+          "w": 1019.4962650896556,
+          "h": 91.99693978550923,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "一般",
+          "lines": [
+            "一般"
+          ]
+        },
+        {
+          "label": "TV 500 mL／VD 150 mL／F 12 次/min",
+          "lines": [
+            "TV 500 mL／VD 150 mL／F 12 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 1800／肺泡通氣量",
+            "4200 mL/min"
+          ]
+        },
+        {
+          "label": "一般 500 mL×12 次 → 4200 mL/min",
+          "lines": [
+            "一般 500 mL×12 次 → 4200 mL/min"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.888968563561267,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 661.2880982548357,
+          "w": 765.9120858433736,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.02682513501271,
+          "y": 786.2837688032404,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.02682513501271,
+          "y": 1061.2742596362011,
+          "w": 329.79103915662654,
+          "h": 92.16875283114882,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.02682513501271,
+          "y": 1336.2648286015155,
+          "w": 329.79103915662654,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "一般",
+          "x": 80.026477216238,
+          "y": 60.997904065143636,
+          "w": 131.99546997805678,
+          "h": 91.99684212006719,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL／VD 150 mL／F 12 次/min",
+          "x": 115.02527903361494,
+          "y": 238.9917902199619,
+          "w": 1163.9755662665311,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.026477216238,
+          "y": 504.9826449658498,
+          "w": 599.338791169316,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min",
+          "x": 80.026477216238,
+          "y": 1632.9438450824784,
+          "w": 1403.5924153155593,
+          "h": 177.79079575136484,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "一般 500 mL×12 次 → 4200 mL/min",
+          "x": 80.026477216238,
+          "y": 1898.9346607621894,
+          "w": 1112.7586364746094,
+          "h": 91.99693978550923,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣量",
+          "lines": [
+            "總通氣量"
+          ]
+        },
+        {
+          "label": "死腔通氣量",
+          "lines": [
+            "死腔通氣量"
+          ]
+        },
+        {
+          "label": "肺泡通氣量",
+          "lines": [
+            "肺泡通氣量"
+          ]
+        },
+        {
+          "label": "深慢",
+          "lines": [
+            "深慢"
+          ]
+        },
+        {
+          "label": "TV 1000 mL／VD 150 mL／F 6 次/min",
+          "lines": [
+            "TV 1000 mL／VD 150 mL／F 6 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min",
+          "lines": [
+            "總通氣量 6000／死腔通氣量 900／肺泡通氣量",
+            "5100 mL/min"
+          ]
+        },
+        {
+          "label": "深慢 1000 mL×6 次 → 5100 mL/min",
+          "lines": [
+            "深慢 1000 mL×6 次 → 5100 mL/min"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.888968563561267,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 661.2880982548357,
+          "w": 765.9120858433736,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量",
+          "x": 70.02682513501271,
+          "y": 786.2837688032404,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "死腔通氣量",
+          "x": 70.02682513501271,
+          "y": 1061.2742596362011,
+          "w": 329.79103915662654,
+          "h": 92.16875283114882,
+          "px": 12.888968563561267,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣量",
+          "x": 70.02682513501271,
+          "y": 1336.2648286015155,
+          "w": 329.79103915662654,
+          "h": 92.16867469879519,
+          "px": 12.888968563561267,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "深慢",
+          "x": 80.026477216238,
+          "y": 60.997904065143636,
+          "w": 131.99546997805678,
+          "h": 91.99684212006719,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 1000 mL／VD 150 mL／F 6 次/min",
+          "x": 115.02527903361494,
+          "y": 238.9917902199619,
+          "w": 1163.9755662665311,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.026477216238,
+          "y": 504.9826449658498,
+          "w": 599.338791169316,
+          "h": 91.99682258697878,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min",
+          "x": 80.026477216238,
+          "y": 1632.9438450824784,
+          "w": 1377.1246117281628,
+          "h": 177.79079575136484,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深慢 1000 mL×6 次 → 5100 mL/min",
+          "x": 80.026477216238,
+          "y": 1898.9346607621894,
+          "w": 1099.6028670345445,
+          "h": 91.99693978550923,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "lines": [
+            "RV 1200"
+          ]
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "lines": [
+            "ERV 1200"
+          ]
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "lines": [
+            "TV 500"
+          ]
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "lines": [
+            "IRV 3100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "1200",
+          "lines": [
+            "1200"
+          ]
+        },
+        {
+          "label": "2400",
+          "lines": [
+            "2400"
+          ]
+        },
+        {
+          "label": "2900",
+          "lines": [
+            "2900"
+          ]
+        },
+        {
+          "label": "6000",
+          "lines": [
+            "6000"
+          ]
+        },
+        {
+          "label": "容積（mL）",
+          "lines": [
+            "容積（mL）"
+          ]
+        },
+        {
+          "label": "時間",
+          "lines": [
+            "時間"
+          ]
+        },
+        {
+          "label": "課本男性示例",
+          "lines": [
+            "課本男性示例"
+          ]
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "lines": [
+            "潮氣容積TV 500 mL"
+          ]
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "lines": [
+            "吸氣儲備容積IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "lines": [
+            "呼氣儲備容積ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "lines": [
+            "肺餘容積RV 1200 mL"
+          ]
+        },
+        {
+          "label": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+          "lines": [
+            "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、",
+            "呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL",
+            "（課本男性示例）。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [
+        {
+          "low": 0,
+          "high": 1200,
+          "height": 264,
+          "y": 1399
+        },
+        {
+          "low": 1200,
+          "high": 2400,
+          "height": 264,
+          "y": 1135
+        },
+        {
+          "low": 2400,
+          "high": 2900,
+          "height": 110,
+          "y": 1025
+        },
+        {
+          "low": 2900,
+          "high": 6000,
+          "height": 682,
+          "y": 343
+        }
+      ],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889106967615309,
+      "boxes": [
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "x": 1199.9916903943902,
+          "y": 1481.2764455036945,
+          "w": 257.22436560205665,
+          "h": 92.16883096350246,
+          "px": 12.889106967615309,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "x": 1199.9916903943902,
+          "y": 1217.2826927828503,
+          "w": 299.5483490357916,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "x": 1199.9916903943902,
+          "y": 1030.2871244499484,
+          "w": 224.741308373141,
+          "h": 92.16883096350246,
+          "px": 12.889106967615309,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "x": 1199.9916903943902,
+          "y": 634.2965735010355,
+          "w": 274.1057981927711,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 175.41127492146322,
+          "y": 1611.2733680081656,
+          "w": 39.60372740963856,
+          "h": 92.16883096350246,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1200",
+          "x": 69.80131562933865,
+          "y": 1347.2796152873213,
+          "w": 145.21368670176312,
+          "h": 92.16883096350246,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2400",
+          "x": 56.68008068957961,
+          "y": 1083.2860188311843,
+          "w": 158.33492164152216,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2900",
+          "x": 56.68008068957961,
+          "y": 973.2884786215174,
+          "w": 158.33492164152216,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "6000",
+          "x": 56.68008068957961,
+          "y": 291.3046044039439,
+          "w": 158.33492164152216,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "容積（mL）",
+          "x": 470.5077987119376,
+          "y": 226.30622128406205,
+          "w": 358.9937876506024,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "時間",
+          "x": 584.0385620852551,
+          "y": 1701.271369658321,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889106967615309,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "課本男性示例",
+          "x": 80.01821471984128,
+          "y": 60.99855354033321,
+          "w": 395.9906290812665,
+          "h": 91.99779924139919,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "x": 115.01738766589797,
+          "y": 1888.955284026732,
+          "w": 608.2512315497341,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "x": 115.01738766589797,
+          "y": 2066.9510990740305,
+          "w": 789.684479495129,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "x": 115.01738766589797,
+          "y": 2244.946914121329,
+          "w": 815.1057002056076,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "x": 115.01738766589797,
+          "y": 2422.942729168628,
+          "w": 640.7348357051252,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+          "x": 80.01821471984128,
+          "y": 2600.9385442159264,
+          "w": 1437.2629280549934,
+          "h": 263.5876207466585,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "IC＝TV＋IRV＝3600 mL",
+          "lines": [
+            "IC＝TV＋IRV＝3600 mL"
+          ]
+        },
+        {
+          "label": "FRC＝ERV＋RV＝2400 mL",
+          "lines": [
+            "FRC＝ERV＋RV＝2400 mL"
+          ]
+        },
+        {
+          "label": "VC＝IRV＋TV＋ERV＝4800 mL",
+          "lines": [
+            "VC＝IRV＋TV＋ERV＝4800 mL"
+          ]
+        },
+        {
+          "label": "TLC＝VC＋RV＝6000 mL",
+          "lines": [
+            "TLC＝VC＋RV＝6000 mL"
+          ]
+        },
+        {
+          "label": "TV 500 mL",
+          "lines": [
+            "TV 500 mL"
+          ]
+        },
+        {
+          "label": "IRV 3100 mL",
+          "lines": [
+            "IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "ERV 1200 mL",
+          "lines": [
+            "ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "RV 1200 mL",
+          "lines": [
+            "RV 1200 mL"
+          ]
+        },
+        {
+          "label": "平靜呼氣末FRC",
+          "lines": [
+            "平靜呼氣末FRC"
+          ]
+        },
+        {
+          "label": "平靜吸氣末FRC＋TV",
+          "lines": [
+            "平靜吸氣末FRC＋TV"
+          ]
+        },
+        {
+          "label": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+          "lines": [
+            "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC",
+            "＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝",
+            "6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為",
+            "FRC＋TV。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "RV",
+          "x": 1280
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "IRV",
+          "x": 80
+        },
+        {
+          "key": "TV",
+          "x": 855
+        },
+        {
+          "key": "ERV",
+          "x": 980
+        },
+        {
+          "key": "RV",
+          "x": 1280
+        }
+      ],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "IC＝TV＋IRV＝3600 mL",
+          "x": 80.01739433012814,
+          "y": 60.99863167268685,
+          "w": 731.6084666424488,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FRC＝ERV＋RV＝2400 mL",
+          "x": 80.01739433012814,
+          "y": 413.9906825789486,
+          "w": 829.8719337187619,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "VC＝IRV＋TV＋ERV＝4800 mL",
+          "x": 80.01739433012814,
+          "y": 766.9826553528568,
+          "w": 955.9940384094974,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TLC＝VC＋RV＝6000 mL",
+          "x": 80.01739433012814,
+          "y": 1119.9747843914722,
+          "w": 785.0603724100504,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL",
+          "x": 115.01658680927324,
+          "y": 1472.9667571653804,
+          "w": 341.03920718273486,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "IRV 3100 mL",
+          "x": 115.01658680927324,
+          "y": 1650.9627284773862,
+          "w": 386.89750763307137,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "ERV 1200 mL",
+          "x": 115.01658680927324,
+          "y": 1828.958699789392,
+          "w": 413.2875695286027,
+          "h": 91.99787737375283,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "RV 1200 mL",
+          "x": 115.01658680927324,
+          "y": 2006.954827366105,
+          "w": 371.2572856121753,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣末FRC",
+          "x": 80.01739433012814,
+          "y": 2184.950642413404,
+          "w": 460.73961372835095,
+          "h": 91.9980336384601,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜吸氣末FRC＋TV",
+          "x": 80.01739433012814,
+          "y": 2362.946769990117,
+          "w": 609.7674680043416,
+          "h": 91.99772110904556,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+          "x": 80.01739433012814,
+          "y": 2540.9425850374155,
+          "w": 1530.5123294692442,
+          "h": 349.38288309487956,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 6,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "鼻腔",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "傳導區",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "終末細支氣管",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "呼吸區",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "鼻腔",
+          "lines": [
+            "1　鼻腔"
+          ]
+        },
+        {
+          "label": "傳導區",
+          "lines": [
+            "2　傳導區"
+          ]
+        },
+        {
+          "label": "終末細支氣管",
+          "lines": [
+            "3　終末細支氣管"
+          ]
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "lines": [
+            "4　呼吸性細支氣管"
+          ]
+        },
+        {
+          "label": "肺泡",
+          "lines": [
+            "5　肺泡"
+          ]
+        },
+        {
+          "label": "呼吸區",
+          "lines": [
+            "6　呼吸區"
+          ]
+        },
+        {
+          "label": "不交換氣體",
+          "lines": [
+            "不交換氣體"
+          ]
+        },
+        {
+          "label": "氣體交換",
+          "lines": [
+            "氣體交換"
+          ]
+        },
+        {
+          "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+          "lines": [
+            "鼻腔至終末細支氣管只傳送氣體、不交換；自",
+            "呼吸性細支氣管起為呼吸區。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "鼻腔",
+          "x": 384.88700590937975,
+          "y": 171.29846595856083,
+          "w": 26.482765933117236,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "傳導區",
+          "x": 1412.7648411026921,
+          "y": 602.3059063647167,
+          "w": 39.60419620376036,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "終末細支氣管",
+          "x": 1204.2086497846856,
+          "y": 1107.001688394202,
+          "w": 39.60419620376036,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "x": 1103.647232055664,
+          "y": 1306.2757561005742,
+          "w": 39.604118071406724,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 999.8236322977457,
+          "y": 1706.2410561435195,
+          "w": 39.604118071406724,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸區",
+          "x": 1412.7648411026921,
+          "y": 1568.59669513013,
+          "w": 39.60419620376036,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻腔",
+          "x": 89.99999402517297,
+          "y": 2108.5753291486258,
+          "w": 224.3433802960867,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "傳導區",
+          "x": 89.99999402517297,
+          "y": 2223.5730274614084,
+          "w": 303.3916013786592,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "終末細支氣管",
+          "x": 89.99999402517297,
+          "y": 2338.5707257741906,
+          "w": 501.2522157416287,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "x": 89.99999402517297,
+          "y": 2453.568424086973,
+          "w": 567.259131282209,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡",
+          "x": 89.99999402517297,
+          "y": 2568.56643492917,
+          "w": 237.4647324343762,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸區",
+          "x": 89.99999402517297,
+          "y": 2683.5641332419523,
+          "w": 303.3916013786592,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "不交換氣體",
+          "x": 79.99999034835632,
+          "y": 2870.239515189665,
+          "w": 330.00000413641874,
+          "h": 91.9980336384601,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣體交換",
+          "x": 79.99999034835632,
+          "y": 3048.235955295793,
+          "w": 264.00000330913497,
+          "h": 91.99834616787463,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+          "x": 79.99999034835632,
+          "y": 3226.2323954019203,
+          "w": 1320.000016545675,
+          "h": 177.7932959866811,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68015881422514,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2088.928016257844,
+            "width": 304.65882352941173,
+            "height": 380.68015881422514
+          },
+          "nonWhiteRatio": 0.5195159912109375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每次容積（mL／次）",
+          "lines": [
+            "每次容積（mL／次）"
+          ]
+        },
+        {
+          "label": "TV 500 mL",
+          "lines": [
+            "TV 500 mL"
+          ]
+        },
+        {
+          "label": "VD 150 mL",
+          "lines": [
+            "VD 150 mL"
+          ]
+        },
+        {
+          "label": "到達肺泡350 mL",
+          "lines": [
+            "到達肺泡350 mL"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ]
+        },
+        {
+          "label": "F 12次/min",
+          "lines": [
+            "F 12次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+          "lines": [
+            "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝",
+            "（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣",
+            "6000、肺泡通氣 4200 mL/min。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889386509207364,
+      "boxes": [
+        {
+          "label": "每次容積（mL／次）",
+          "x": 538.5706108736705,
+          "y": 39.31307505412274,
+          "w": 622.8587001203055,
+          "h": 92.16867469879519,
+          "px": 12.889386509207364,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "TV 500 mL",
+          "x": 70.00152978552394,
+          "y": 164.31280848491625,
+          "w": 340.832078313253,
+          "h": 92.16867469879519,
+          "px": 12.889386509207364,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VD 150 mL",
+          "x": 70.00152978552394,
+          "y": 439.3122845385448,
+          "w": 338.43185240963857,
+          "h": 92.16859656644155,
+          "px": 12.889386509207364,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "到達肺泡350 mL",
+          "x": 70.00152978552394,
+          "y": 714.3117605921734,
+          "w": 499.7271112648838,
+          "h": 92.16883096350246,
+          "px": 12.889386509207364,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.0439180121365,
+          "y": 1345.3105237110553,
+          "w": 765.9120858433736,
+          "h": 92.16851843408791,
+          "px": 12.889386509207364,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.00152978552394,
+          "y": 1470.3102571418488,
+          "w": 616.4580195783133,
+          "h": 92.16867469879519,
+          "px": 12.889386509207364,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "x": 70.00152978552394,
+          "y": 1745.3097331954773,
+          "w": 689.1848644578314,
+          "h": 92.16867469879519,
+          "px": 12.889386509207364,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "F 12次/min",
+          "x": 80.00151392925217,
+          "y": 1010.9979652496706,
+          "w": 335.3587116103575,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "x": 80.00151392925217,
+          "y": 1188.9976869146508,
+          "w": 605.7488085275673,
+          "h": 91.99975255024003,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+          "x": 80.00151392925217,
+          "y": 2041.9959378529745,
+          "w": 1484.8875666239176,
+          "h": 263.5932462761201,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣0 mL/min",
+          "lines": [
+            "肺泡通氣0 mL/min"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ]
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "lines": [
+            "總通氣6000 mL/min"
+          ]
+        },
+        {
+          "label": "肺泡通氣5100 mL/min",
+          "lines": [
+            "肺泡通氣5100 mL/min"
+          ]
+        },
+        {
+          "label": "淺快150×40",
+          "lines": [
+            "淺快150×40"
+          ]
+        },
+        {
+          "label": "一般500×12",
+          "lines": [
+            "一般500×12"
+          ]
+        },
+        {
+          "label": "深慢1000×6",
+          "lines": [
+            "深慢1000×6"
+          ]
+        },
+        {
+          "label": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+          "lines": [
+            "總通氣同為 6000 mL/min 時，150×40 → 0、",
+            "500×12 → 4200、1000×6 → 5100 mL/min；淺快",
+            "呼吸的死腔佔比較高。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889283972691809,
+      "boxes": [
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 217.31037461614036,
+          "w": 765.9122421080808,
+          "h": 92.16875283114882,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.00772177454937,
+          "y": 342.3090923263366,
+          "w": 616.45805864449,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣0 mL/min",
+          "x": 70.00772177454937,
+          "y": 617.3065369387707,
+          "w": 570.4536506928594,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 1070.301984304405,
+          "w": 765.9122421080808,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.00772177454937,
+          "y": 1195.300623882248,
+          "w": 616.45805864449,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "x": 70.00772177454937,
+          "y": 1470.298068494682,
+          "w": 689.1848644578314,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "x": 467.04395707831327,
+          "y": 1923.2935158603163,
+          "w": 765.9122421080808,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "x": 70.00772177454937,
+          "y": 2048.292155438159,
+          "w": 616.45805864449,
+          "h": 92.16867469879519,
+          "px": 12.889283972691809,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡通氣5100 mL/min",
+          "x": 70.00772177454937,
+          "y": 2323.2892875211787,
+          "w": 676.6236822289158,
+          "h": 92.16898722820972,
+          "px": 12.889283972691809,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "淺快150×40",
+          "x": 80.00762778592397,
+          "y": 60.99941299622318,
+          "w": 356.7933461752283,
+          "h": 91.99904935905732,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "一般500×12",
+          "x": 80.00762778592397,
+          "y": 913.9908664197808,
+          "w": 356.7933461752283,
+          "h": 91.99912749141096,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深慢1000×6",
+          "x": 80.00762778592397,
+          "y": 1766.9825542403992,
+          "w": 356.7933461752283,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+          "x": 80.00762778592397,
+          "y": 2619.97408579631,
+          "w": 1497.594543824713,
+          "h": 263.59105857021837,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "1",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "4",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "5",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "呼出容積（L）",
+          "lines": [
+            "呼出容積（L）"
+          ]
+        },
+        {
+          "label": "1",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "時間（秒）",
+          "lines": [
+            "時間（秒）"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "阻塞性",
+          "lines": [
+            "阻塞性"
+          ]
+        },
+        {
+          "label": "限制性",
+          "lines": [
+            "限制性"
+          ]
+        },
+        {
+          "label": "課本示範數值",
+          "lines": [
+            "課本示範數值"
+          ]
+        },
+        {
+          "label": "型態",
+          "lines": [
+            "型態"
+          ]
+        },
+        {
+          "label": "FEV₁",
+          "lines": [
+            "FEV₁"
+          ]
+        },
+        {
+          "label": "FVC",
+          "lines": [
+            "FVC"
+          ]
+        },
+        {
+          "label": "FEV₁/FVC",
+          "lines": [
+            "FEV₁/FVC"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "4 L",
+          "lines": [
+            "4 L"
+          ]
+        },
+        {
+          "label": "5 L",
+          "lines": [
+            "5 L"
+          ]
+        },
+        {
+          "label": "4/5＝0.8",
+          "lines": [
+            "4/5＝0.8"
+          ]
+        },
+        {
+          "label": "阻塞性",
+          "lines": [
+            "阻塞性"
+          ]
+        },
+        {
+          "label": "1 L",
+          "lines": [
+            "1 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "1/2.8≈0.36",
+          "lines": [
+            "1/2.8≈0.36"
+          ]
+        },
+        {
+          "label": "限制性",
+          "lines": [
+            "限制性"
+          ]
+        },
+        {
+          "label": "2.5 L",
+          "lines": [
+            "2.5 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "2.5/2.8≈0.89",
+          "lines": [
+            "2.5/2.8≈0.89"
+          ]
+        },
+        {
+          "label": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+          "lines": [
+            "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性",
+            "1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／",
+            "2.8≈0.89，肺容量減少但比值可正常或增加。這些是",
+            "課本示範數值，用來理解型態。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [
+        {
+          "series": "正常",
+          "fev": 4,
+          "fvc": 5,
+          "path": "M250 1343C253.33333333 1319.68957525 256.66666667 1297.04844356 260.00000000 1275.04701391C263.33333333 1253.04558426 266.66666667 1231.68385793 270.00000000 1210.93319993C273.33333333 1190.18254194 276.66666667 1170.04295356 280.00000000 1150.48673661C283.33333333 1130.93051966 286.66666667 1111.95767542 290.00000000 1093.54142345C293.33333333 1075.12517148 296.66666667 1057.26551303 300.00000000 1039.93656649C303.33333333 1022.60761994 306.66666667 1005.80938654 310.00000000 989.51686467C313.33333333 973.22434281 316.66666667 957.43753372 320.00000000 942.13229720C323.33333333 926.82706067 326.66666667 912.00339794 330.00000000 897.63801168C333.33333333 883.27262541 336.66666667 869.36551685 340.00000000 855.89421323C343.33333333 842.42290961 346.66666667 829.38741214 350.00000000 816.76605447C353.33333333 804.14469680 356.66666667 791.93748012 360.00000000 780.12352642C363.33333333 768.30957272 366.66666667 756.88888318 370.00000000 745.84135026C373.33333333 734.79381734 376.66666667 724.11944222 380.00000000 713.79887009C383.33333333 703.47829796 386.66666667 693.51152999 390.00000000 683.87994654C393.33333333 674.24836310 396.66666667 664.95196533 400.00000000 655.97285136C403.33333333 646.99373739 406.66666667 638.33190836 410.00000000 629.97016288C413.33333333 621.60841739 416.66666667 613.54675659 420.00000000 605.76866245C423.33333333 597.99056832 426.66666667 590.49604197 430.00000000 583.26923184C433.33333333 576.04242172 436.66666667 569.08332892 440.00000000 562.37675153C443.33333333 555.67017414 446.66666667 549.21611327 450.00000000 543.00000000C453.33333333 536.78388673 456.66666667 530.80572217 460.00000000 525.05155397C463.33333333 519.29738576 466.66666667 513.76721500 470.00000000 508.44768960C473.33333333 503.12816420 476.66666667 498.01928522 480.00000000 493.10828469C483.33333333 488.19728416 486.66666667 483.48416315 490.00000000 478.95672182C493.33333333 474.42928049 496.66666667 470.08751988 500.00000000 465.91979250C503.33333333 461.75206512 506.66666667 457.75837200 510.00000000 453.92760234C513.33333333 450.09683267 516.66666667 446.42898747 520.00000000 442.91347714C523.33333333 439.39796682 526.66666667 436.03479238 530.00000000 432.81387013C533.33333333 429.59294788 536.66666667 426.51427883 540.00000000 423.56827005C543.33333333 420.62226127 546.66666667 417.80891376 550.00000000 415.11911041C553.33333333 412.42930705 556.66666667 409.86304884 560.00000000 407.41167968C563.33333333 404.96031051 566.66666667 402.62383137 570.00000000 400.39403258C573.33333333 398.16423378 576.66666667 396.04111629 580.00000000 394.01690239C583.33333333 391.99268849 586.66666667 390.06737914 590.00000000 388.23361433C593.33333333 386.39984953 596.66666667 384.65763020 600.00000000 383.00000000C603.33333333 381.34236980 606.66666667 379.76932963 610.00000000 378.27431287C613.33333333 376.77929612 616.66666667 375.36230368 620.00000000 374.01714494C623.33333333 372.67198620 626.66666667 371.39866205 630.00000000 370.19134436C633.33333333 368.98402667 636.66666667 367.84271633 640.00000000 366.76193431C643.33333333 365.68115230 646.66666667 364.66089949 650.00000000 363.69603286C653.33333333 362.73116623 656.66666667 361.82168663 660.00000000 360.96277403C663.33333333 360.10386143 666.66666667 359.29551667 670.00000000 358.53322996C673.33333333 357.77094325 676.66666667 357.05471541 680.00000000 356.38033428C683.33333333 355.70595314 686.66666667 355.07341953 690.00000000 354.47880652C693.33333333 353.88419350 696.66666667 353.32750190 700.00000000 352.80507783C703.33333333 352.28265377 706.66666667 351.79449803 710.00000000 351.33721782C713.33333333 350.87993761 716.66666667 350.45353371 720.00000000 350.05486257C723.33333333 349.65619144 726.66666667 349.28525384 730.00000000 348.93914392C733.33333333 348.59303400 736.66666667 348.27175252 740.00000000 347.97261992C743.33333333 347.67348732 746.66666667 347.39650434 750.00000000 347.13920657C753.33333333 346.88190880 756.66666667 346.64429697 760.00000000 346.42411082C763.33333333 346.20392468 766.66666667 346.00116493 770.00000000 345.81376478C773.33333333 345.62636463 776.66666667 345.45432477 780.00000000 345.29576130C783.33333333 345.13719783 786.66666667 344.99211143 790.00000000 344.85879081C793.33333333 344.72547018 796.66666667 344.60391600 800.00000000 344.49257948C803.33333333 344.38124296 806.66666667 344.28012476 810.00000000 344.18782878C813.33333333 344.09553281 816.66666667 344.01205968 820.00000000 343.93615637C823.33333333 343.86025306 826.66666667 343.79192017 830.00000000 343.73003834C833.33333333 343.66815651 836.66666667 343.61272633 840.00000000 343.56275296C843.33333333 343.51277958 846.66666667 343.46826360 850.00000000 343.42832578C853.33333333 343.38838795 856.66666667 343.35302886 860.00000000 343.32147624C863.33333333 343.28992362 866.66666667 343.26217802 870.00000000 343.23756576C873.33333333 343.21295350 876.66666667 343.19147511 880.00000000 343.17254733C883.33333333 343.15361956 886.66666667 343.13724292 890.00000000 343.12291672C893.33333333 343.10859051 896.66666667 343.09631524 900.00000000 343.08566516C903.33333333 343.07501507 906.66666667 343.06599065 910.00000000 343.05823377C913.33333333 343.05047689 916.66666667 343.04398801 920.00000000 343.03846960C923.33333333 343.03295118 926.66666667 343.02840366 930.00000000 343.02458334C933.33333333 343.02076302 936.66666667 343.01767031 940.00000000 343.01510890C943.33333333 343.01254748 946.66666667 343.01051775 950.00000000 343.00886464C953.33333333 343.00721154 956.66666667 343.00593542 960.00000000 343.00491667C963.33333333 343.00389792 966.66666667 343.00313688 970.00000000 343.00254389C973.33333333 343.00195090 976.66666667 343.00152628 980.00000000 343.00120521C983.33333333 343.00088413 986.66666667 343.00066691 990.00000000 343.00050878C993.33333333 343.00035065 996.66666667 343.00025189 1000.00000000 343.00018346C1003.33333333 343.00011504 1006.66666667 343.00007719 1010.00000000 343.00005265C1013.33333333 343.00002810 1016.66666667 343.00001708 1020.00000000 343.00001053C1023.33333333 343.00000398 1026.66666667 343.00000211 1030.00000000 343.00000109C1033.33333333 343.00000007 1036.66666667 343.00000006 1040.00000000 343.00000002C1043.33333333 342.99999998 1046.66666667 343.00000000 1050.00000000 343.00000000",
+          "atOne": [
+            449.9999694824219,
+            543.0000610351562
+          ],
+          "end": [
+            1050,
+            343
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            6.831996276841266,
+            6.5233515802323145,
+            6.228600420381242,
+            5.9373857979362565,
+            5.660980224609375,
+            5.392217224949741,
+            5.1359710693359375,
+            4.88814205878426,
+            4.6498260498046875,
+            4.421792685671561,
+            4.200447082519531,
+            3.989906349539377,
+            3.7867584228515625,
+            3.59180294724635,
+            3.4056625366210938,
+            3.2254409790039062,
+            3.054401190181007,
+            2.8897967903014767,
+            2.7321749413492533,
+            2.5820846557617188,
+            2.4371583448728367,
+            2.299986648610502,
+            2.168304443359375,
+            2.0425949096679688,
+            1.923225109959068,
+            1.8085715920578307,
+            1.6997222900390625,
+            1.5960655212402344,
+            1.4974269965095652,
+            1.403620938270098,
+            1.3143794464895382,
+            1.2297286987304688,
+            1.1494037582684193,
+            1.0732498168945312,
+            1.0010986244306608,
+            0.9327234857443676,
+            0.8681192923027626,
+            0.8070831298828125,
+            0.7494621276855469,
+            0.6950927359980469,
+            0.6436985496631648,
+            0.5956511787594415,
+            0.5502510070800781,
+            0.507598818978737,
+            0.4677655621762251,
+            0.43007438489414457,
+            0.39512775713555454,
+            0.36229258058363534,
+            0.3316230773925781,
+            0.3031677487773802,
+            0.27640704035155983,
+            0.2517585754394531,
+            0.22875595092773438,
+            0.20743654105852644,
+            0.18779373168945312,
+            0.16947174072265625,
+            0.15272786920265807,
+            0.1371002197265625,
+            0.12308214631764464,
+            0.11008071899414062,
+            0.09795918367346938,
+            0.08712072083069482,
+            0.07723940094451184,
+            0.06824979018844891,
+            0.06010391156073333,
+            0.05259744718511341,
+            0.045985824693109946,
+            0.04003112769220205,
+            0.03450775146484375,
+            0.030117264688603887,
+            0.025474353985946763,
+            0.021968841552734375,
+            0.01859283447265625,
+            0.01564788818359375,
+            0.013256376412423991,
+            0.01084136962890625,
+            0.0088043212890625,
+            0.0074462890625,
+            0.006118681050399011,
+            0.004962921142578125,
+            0.003726959228515625,
+            0.002986907958984375,
+            0.002361333638513771,
+            0.001827239990234375,
+            0.0013885498046875,
+            0.0009498451256542106,
+            0.000705718994140625,
+            0.00051116943359375,
+            0.000354766845703125,
+            0.00023651483939879454,
+            0.000133514404296875,
+            0.00008392333984375,
+            0.00004959030776507927,
+            0.000030517578125,
+            0.000011444091796875,
+            0.00000762939453125,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "series": "阻塞性",
+          "fev": 1,
+          "fvc": 2.8,
+          "path": "M250 1343C253.33333333 1339.41638049 256.66666667 1335.84476234 260.00000000 1332.28521583C263.33333333 1328.72566932 266.66666667 1325.17819446 270.00000000 1321.64286282C273.33333333 1318.10753118 276.66666667 1314.58434277 280.00000000 1311.07337053C283.33333333 1307.56239830 286.66666667 1304.06364223 290.00000000 1300.57717669C293.33333333 1297.09071114 296.66666667 1293.61653611 300.00000000 1290.15472739C303.33333333 1286.69291867 306.66666667 1283.24347626 310.00000000 1279.80647744C313.33333333 1276.36947863 316.66666667 1272.94492340 320.00000000 1269.53289060C323.33333333 1266.12085780 326.66666667 1262.72134742 330.00000000 1259.33443989C333.33333333 1255.94753237 336.66666667 1252.57322769 340.00000000 1249.21160794C343.33333333 1245.84998819 346.66666667 1242.50105336 350.00000000 1239.16488726C353.33333333 1235.82872115 356.66666667 1232.50532376 360.00000000 1229.19478065C363.33333333 1225.88423754 366.66666667 1222.58654870 370.00000000 1219.30180154C373.33333333 1216.01705437 376.66666667 1212.74524888 380.00000000 1209.48647435C383.33333333 1206.22769983 386.66666667 1202.98195627 390.00000000 1199.74933495C393.33333333 1196.51671363 396.66666667 1193.29721455 400.00000000 1190.09093102C403.33333333 1186.88464750 406.66666667 1183.69157952 410.00000000 1180.51182255C413.33333333 1177.33206558 416.66666667 1174.16561960 420.00000000 1171.01258227C423.33333333 1167.85954494 426.66666667 1164.71991626 430.00000000 1161.59379618C433.33333333 1158.46767609 436.66666667 1155.35506460 440.00000000 1152.25606405C443.33333333 1149.15706350 446.66666667 1146.07167387 450.00000000 1143.00000000C453.33333333 1139.92832613 456.66666667 1136.87036801 460.00000000 1133.82623306C463.33333333 1130.78209811 466.66666667 1127.75178632 470.00000000 1124.73540781C473.33333333 1121.71902929 476.66666667 1118.71658405 480.00000000 1115.72818501C483.33333333 1112.73978597 486.66666667 1109.76543313 490.00000000 1106.80524235C493.33333333 1103.84505157 496.66666667 1100.89902285 500.00000000 1097.96727513C503.33333333 1095.03552740 506.66666667 1092.11806067 510.00000000 1089.21499707C513.33333333 1086.31193348 516.66666667 1083.42327301 520.00000000 1080.54914118C523.33333333 1077.67500935 526.66666667 1074.81540615 530.00000000 1071.97046060C533.33333333 1069.12551504 536.66666667 1066.29522713 540.00000000 1063.47972956C543.33333333 1060.66423199 546.66666667 1057.86352476 550.00000000 1055.07774443C553.33333333 1052.29196410 556.66666667 1049.52111067 560.00000000 1046.76532477C563.33333333 1044.00953886 566.66666667 1041.26882047 570.00000000 1038.54331450C573.33333333 1035.81780852 576.66666667 1033.10751494 580.00000000 1030.41258314C583.33333333 1027.71765135 586.66666667 1025.03808132 590.00000000 1022.37402717C593.33333333 1019.70997303 596.66666667 1017.06143474 600.00000000 1014.42857143C603.33333333 1011.79570811 606.66666667 1009.17851974 610.00000000 1006.57717068C613.33333333 1003.97582161 616.66666667 1001.39031184 620.00000000 998.82081127C623.33333333 996.25131070 626.66666667 993.69781932 630.00000000 991.16051294C633.33333333 988.62320656 636.66666667 986.10208515 640.00000000 983.59733076C643.33333333 981.09257638 646.66666667 978.60418898 650.00000000 976.13235726C653.33333333 973.66052553 656.66666667 971.20524943 660.00000000 968.76672467C663.33333333 966.32819991 666.66666667 963.90642645 670.00000000 961.50160749C673.33333333 959.09678853 676.66666667 956.70892403 680.00000000 954.33822516C683.33333333 951.96752629 686.66666667 949.61399301 690.00000000 947.27784503C693.33333333 944.94169705 696.66666667 942.62293432 700.00000000 940.32178567C703.33333333 938.02063701 706.66666667 935.73710238 710.00000000 933.47142037C713.33333333 931.20573836 716.66666667 928.95790892 720.00000000 926.72818115C723.33333333 924.49845338 726.66666667 922.28682722 730.00000000 920.09356308C733.33333333 917.90029894 736.66666667 915.72539675 740.00000000 913.56912910C743.33333333 911.41286146 746.66666667 909.27522829 750.00000000 907.15651538C753.33333333 905.03780247 756.66666667 902.93800974 760.00000000 900.85743726C763.33333333 898.77686479 766.66666667 896.71551249 770.00000000 894.67369598C773.33333333 892.63187947 776.66666667 890.60959865 780.00000000 888.60718609C783.33333333 886.60477354 786.66666667 884.62222913 790.00000000 882.65990399C793.33333333 880.69757884 796.66666667 878.75547282 800.00000000 876.83395739C803.33333333 874.91244196 806.66666667 873.01151696 810.00000000 871.13157627C813.33333333 869.25163557 816.66666667 867.39267901 820.00000000 865.55512524C823.33333333 863.71757146 826.66666667 861.90142028 830.00000000 860.10711786C833.33333333 858.31281544 836.66666667 856.54036157 840.00000000 854.79023313C843.33333333 853.04010469 846.66666667 851.31230142 850.00000000 849.60733468C853.33333333 847.90236793 856.66666667 846.22023739 860.00000000 844.56149327C863.33333333 842.90274914 866.66666667 841.26739105 870.00000000 839.65601331C873.33333333 838.04463558 876.66666667 836.45723773 880.00000000 834.89446449C883.33333333 833.33169125 886.66666667 831.79354205 890.00000000 830.28071965C893.33333333 828.76789724 896.66666667 827.28040093 900.00000000 825.81900086C903.33333333 824.35760080 906.66666667 822.92229611 910.00000000 821.51393598C913.33333333 820.10557585 916.66666667 818.72415918 920.00000000 817.37062889C923.33333333 816.01709860 926.66666667 814.69145326 930.00000000 813.39474834C933.33333333 812.09804342 936.66666667 810.83027704 940.00000000 809.59264185C943.33333333 808.35500665 946.66666667 807.14750009 950.00000000 805.97148492C953.33333333 804.79546976 956.66666667 803.65094244 960.00000000 802.53948108C963.33333333 801.42801972 966.66666667 800.34961920 970.00000000 799.30613721C973.33333333 798.26265522 976.66666667 797.25408404 980.00000000 796.28265579C983.33333333 795.31122754 986.66666667 794.37692991 990.00000000 793.48251678C993.33333333 792.58810364 996.66666667 791.73355392 1000.00000000 790.92238756C1003.33333333 790.11122120 1006.66666667 789.34339820 1010.00000000 788.62364771C1013.33333333 787.90389722 1016.66666667 787.23213109 1020.00000000 786.61520210C1023.33333333 785.99827311 1026.66666667 785.43593313 1030.00000000 784.93947918C1033.33333333 784.44302522 1036.66666667 784.01131934 1040.00000000 783.66888604C1043.33333333 783.32645275 1046.66666667 783.00000000 1050.00000000 783.00000000",
+          "atOne": [
+            449.9999694824219,
+            1143
+          ],
+          "end": [
+            1050,
+            783
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            1.0719340207444028,
+            1.0665130615234375,
+            1.060577392578125,
+            1.0546722412109375,
+            1.0491598161322933,
+            1.042694091796875,
+            1.0371591078152,
+            1.031097412109375,
+            1.0250052451887315,
+            1.019378662109375,
+            1.0127602110298577,
+            1.0070609777031796,
+            1.0008430513116886,
+            0.9946136474609375,
+            0.9888115356005265,
+            0.9820098876953125,
+            0.976154236428209,
+            0.9697991569551203,
+            0.9633636474609375,
+            0.9574127197265625,
+            0.9504278199303433,
+            0.9443933700814435,
+            0.9378392709322774,
+            0.9312250853535258,
+            0.9250981334615076,
+            0.917877197265625,
+            0.9116786511281925,
+            0.904937744140625,
+            0.8980865478515625,
+            0.891754150390625,
+            0.88433837890625,
+            0.8779177777014835,
+            0.8709225810143242,
+            0.8638458251953125,
+            0.857330322265625,
+            0.8496246337890625,
+            0.8429718017578125,
+            0.835745511974426,
+            0.8284149169921875,
+            0.8216400146484375,
+            0.8136444091796875,
+            0.806732177734375,
+            0.799224853515625,
+            0.791612307645358,
+            0.7845535278320312,
+            0.7762298583984375,
+            0.76904296875,
+            0.7611846923828125,
+            0.7532577514648438,
+            0.7458781881575635,
+            0.7371922516460293,
+            0.7296676635742188,
+            0.7214410510334094,
+            0.7134497570056381,
+            0.7050682454547536,
+            0.6966018676757812,
+            0.6881866455078125,
+            0.6796899437717913,
+            0.671112060546875,
+            0.6624424929999772,
+            0.6534881591796875,
+            0.6446075439453125,
+            0.6356048583984375,
+            0.626498210920632,
+            0.6172866821289062,
+            0.6077698346697591,
+            0.5982818603515625,
+            0.5886948494350477,
+            0.578948974609375,
+            0.5690732503757505,
+            0.5588412563991059,
+            0.5486373901367188,
+            0.5382843017578125,
+            0.5277481079101562,
+            0.5170174943351313,
+            0.5058822631835938,
+            0.4947548312772272,
+            0.48340606689453125,
+            0.47180938720703125,
+            0.45997970565571333,
+            0.4476165771484375,
+            0.435211181640625,
+            0.422482128279661,
+            0.4094390869140625,
+            0.39598846435546875,
+            0.38188462741567547,
+            0.3675661654192702,
+            0.3527858946677755,
+            0.33740739893036703,
+            0.32143402099609375,
+            0.30438232421875,
+            0.28699712369631725,
+            0.2682779824983025,
+            0.2484302400988777,
+            0.22722452373867996,
+            0.2039031982421875,
+            0.17823300526436256,
+            0.1486968994140625,
+            0.11353891694767841,
+            0.05858612060546875
+          ]
+        },
+        {
+          "series": "限制性",
+          "fev": 2.5,
+          "fvc": 2.8,
+          "path": "M250 1343C253.33333333 1324.88376794 256.66666667 1307.53314212 260.00000000 1290.89456035C263.33333333 1274.25597859 266.66666667 1258.32945084 270.00000000 1243.06454948C273.33333333 1227.79964812 276.66666667 1213.19638277 280.00000000 1199.20731361C283.33333333 1185.21824445 286.66666667 1171.84338076 290.00000000 1159.03812887C293.33333333 1146.23287698 296.66666667 1133.99724584 300.00000000 1122.28935132C303.33333333 1110.58145680 306.66666667 1099.40130752 310.00000000 1088.70959709C313.33333333 1078.01788666 316.66666667 1067.81462339 320.00000000 1058.06295164C323.33333333 1048.31127989 326.66666667 1039.01120767 330.00000000 1030.12820775C333.33333333 1021.24520783 336.66666667 1012.77928792 340.00000000 1004.69813139C343.33333333 996.61697486 346.66666667 988.92058913 350.00000000 981.57875483C353.33333333 974.23692054 356.66666667 967.24964480 360.00000000 960.58869649C363.33333333 953.92774817 366.66666667 947.59313412 370.00000000 941.55850660C373.33333333 935.52387908 376.66666667 929.78924466 380.00000000 924.33003833C383.33333333 918.87083199 386.66666667 913.68706005 390.00000000 908.75584351C393.33333333 903.82462696 396.66666667 899.14597187 400.00000000 894.69859248C403.33333333 890.25121309 406.66666667 886.03511521 410.00000000 882.03051737C413.33333333 878.02591953 416.66666667 874.23282729 420.00000000 870.63287818C423.33333333 867.03292907 426.66666667 863.62612842 430.00000000 860.39545111C433.33333333 857.16477380 436.66666667 854.11022492 440.00000000 851.21603854C443.33333333 848.32185216 446.66666667 845.58803315 450.00000000 843.00000000C453.33333333 840.41196685 456.66666667 837.96972421 460.00000000 835.65980358C463.33333333 833.34988295 466.66666667 831.17228876 470.00000000 829.11459727C473.33333333 827.05690577 476.66666667 825.11912122 480.00000000 823.28979952C483.33333333 821.46047782 486.66666667 819.73962302 490.00000000 818.11670863C493.33333333 816.49379423 496.66666667 814.96882409 500.00000000 813.53213018C503.33333333 812.09543627 506.66666667 810.74702225 510.00000000 809.47802226C513.33333333 808.20902227 516.66666667 807.01943979 520.00000000 805.90115762C523.33333333 804.78287545 526.66666667 803.73589689 530.00000000 802.75280251C533.33333333 801.76970813 536.66666667 800.85050107 540.00000000 799.98841142C543.33333333 799.12632178 546.66666667 798.32135251 550.00000000 797.56733747C553.33333333 796.81332242 556.66666667 796.11026440 560.00000000 795.45255763C563.33333333 794.79485085 566.66666667 794.18249798 570.00000000 793.61041258C573.33333333 793.03832717 576.66666667 792.50651174 580.00000000 792.01036043C583.33333333 791.51420913 586.66666667 791.05372430 590.00000000 790.62474408C593.33333333 790.19576385 596.66666667 789.79829045 600.00000000 789.42857143C603.33333333 789.05885241 606.66666667 788.71688987 610.00000000 788.39930830C613.33333333 788.08172674 616.66666667 787.78852812 620.00000000 787.51668333C623.33333333 787.24483853 626.66666667 786.99434941 630.00000000 786.76250450C633.33333333 786.53065958 636.66666667 786.31746061 640.00000000 786.12048687C643.33333333 785.92351313 646.66666667 785.74276623 650.00000000 785.57609101C653.33333333 785.40941579 656.66666667 785.25681375 660.00000000 785.11637170C663.33333333 784.97592964 666.66666667 784.84764899 670.00000000 784.72983651C673.33333333 784.61202403 676.66666667 784.50468104 680.00000000 784.40631383C683.33333333 784.30794662 686.66666667 784.21855641 690.00000000 784.13682992C693.33333333 784.05510343 696.66666667 783.98104181 700.00000000 783.91349455C703.33333333 783.84594728 706.66666667 783.78491543 710.00000000 783.72939490C713.33333333 783.67387436 716.66666667 783.62386611 720.00000000 783.57849732C723.33333333 783.53312852 726.66666667 783.49240008 730.00000000 783.45555647C733.33333333 783.41871287 736.66666667 783.38575493 740.00000000 783.35603165C743.33333333 783.32630837 746.66666667 783.29982050 750.00000000 783.27600975C753.33333333 783.25219900 756.66666667 783.23106607 760.00000000 783.21213464C763.33333333 783.19320321 766.66666667 783.17647391 770.00000000 783.16154257C773.33333333 783.14661123 776.66666667 783.13347842 780.00000000 783.12180321C783.33333333 783.11012799 786.66666667 783.09991089 790.00000000 783.09086610C793.33333333 783.08182131 796.66666667 783.07394930 800.00000000 783.06701212C803.33333333 783.06007494 806.66666667 783.05407299 810.00000000 783.04880962C813.33333333 783.04354625 816.66666667 783.03902182 820.00000000 783.03507506C823.33333333 783.03112830 826.66666667 783.02775955 830.00000000 783.02483770C833.33333333 783.02191584 836.66666667 783.01944118 840.00000000 783.01730813C843.33333333 783.01517508 846.66666667 783.01338390 850.00000000 783.01185044C853.33333333 783.01031697 856.66666667 783.00904144 860.00000000 783.00795753C863.33333333 783.00687362 866.66666667 783.00598151 870.00000000 783.00522960C873.33333333 783.00447769 876.66666667 783.00386614 880.00000000 783.00335534C883.33333333 783.00284453 886.66666667 783.00243461 890.00000000 783.00209563C893.33333333 783.00175666 896.66666667 783.00148876 900.00000000 783.00126969C903.33333333 783.00105062 906.66666667 783.00088050 910.00000000 783.00074312C913.33333333 783.00060575 916.66666667 783.00050121 920.00000000 783.00041800C923.33333333 783.00033478 926.66666667 783.00027296 930.00000000 783.00022453C933.33333333 783.00017611 936.66666667 783.00014114 940.00000000 783.00011426C943.33333333 783.00008738 946.66666667 783.00006862 950.00000000 783.00005451C953.33333333 783.00004041 956.66666667 783.00003097 960.00000000 783.00002406C963.33333333 783.00001714 966.66666667 783.00001276 970.00000000 783.00000964C973.33333333 783.00000652 976.66666667 783.00000468 980.00000000 783.00000342C983.33333333 783.00000215 986.66666667 783.00000148 990.00000000 783.00000103C993.33333333 783.00000059 996.66666667 783.00000038 1000.00000000 783.00000025C1003.33333333 783.00000012 1006.66666667 783.00000007 1010.00000000 783.00000004C1013.33333333 783.00000002 1016.66666667 783.00000001 1020.00000000 783.00000000C1023.33333333 783.00000000 1026.66666667 783.00000000 1030.00000000 783.00000000C1033.33333333 783.00000000 1036.66666667 783.00000000 1040.00000000 783.00000000C1043.33333333 783.00000000 1046.66666667 783.00000000 1050.00000000 783.00000000",
+          "atOne": [
+            449.99993896484375,
+            843.0000610351562
+          ],
+          "end": [
+            1050,
+            783
+          ],
+          "monotonic": true,
+          "concave": true,
+          "slopes": [
+            5.2535247802734375,
+            4.907947189129597,
+            4.580259016956265,
+            4.2715301513671875,
+            3.981994560220948,
+            3.706787109375,
+            3.4503957733315533,
+            3.208172638598017,
+            2.9805336741116557,
+            2.767848082916576,
+            2.5663070678710938,
+            2.379225237940834,
+            2.2032394409179688,
+            2.038292077225026,
+            1.8841328272520934,
+            1.7399053188526872,
+            1.605316162109375,
+            1.4797230540349806,
+            1.3625998023979278,
+            1.2534637451171875,
+            1.1517410278320312,
+            1.0572662353515625,
+            0.9694673960312192,
+            0.8879691159753111,
+            0.8123657698279183,
+            0.7422533330790212,
+            0.6774342444067215,
+            0.6174950313378575,
+            0.5621523883637363,
+            0.5110837297484941,
+            0.46385955810546875,
+            0.42069846840489045,
+            0.3808502927768983,
+            0.34424591064453125,
+            0.31082916259765625,
+            0.2799530029296875,
+            0.2519626767171991,
+            0.226318359375,
+            0.20288694086501416,
+            0.18168015808226076,
+            0.16219969024894523,
+            0.14454761159981994,
+            0.12878319714967995,
+            0.11440364382662832,
+            0.1014556884765625,
+            0.08953026176252928,
+            0.07904052734375,
+            0.06960349734113572,
+            0.0611572265625,
+            0.05356597900390625,
+            0.04669952392578125,
+            0.04060332791650454,
+            0.035385401805128516,
+            0.03058624267578125,
+            0.026634013107199806,
+            0.0225982666015625,
+            0.01958465576171875,
+            0.01667022705078125,
+            0.014175523189721602,
+            0.012130644755212744,
+            0.00995635986328125,
+            0.008491580898902121,
+            0.0071868896484375,
+            0.006057693041282339,
+            0.005058327166192369,
+            0.00397491455078125,
+            0.0033111572265625,
+            0.00273895263671875,
+            0.002250654215589786,
+            0.0018157958984375,
+            0.001373291015625,
+            0.0011139000999458308,
+            0.000885009765625,
+            0.000701904296875,
+            0.0005493122153303884,
+            0.00038909912109375,
+            0.00029754638671875,
+            0.0002288835821806502,
+            0.00017547607421875,
+            0.00012969970703125,
+            0.00007629336324033173,
+            0.00006103515625,
+            0.0000457763671875,
+            0.000030518043793392844,
+            0.0000152587890625,
+            0.0000152587890625,
+            0.000007629278117704503,
+            0,
+            0.00000762939453125,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "fevPoints": [
+        {
+          "value": 4,
+          "x": 450,
+          "y": 543
+        },
+        {
+          "value": 1,
+          "x": 450,
+          "y": 1143
+        },
+        {
+          "value": 2.5,
+          "x": 450,
+          "y": 843
+        }
+      ],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889394391408114,
+      "boxes": [
+        {
+          "label": "0",
+          "x": 170.39715066013568,
+          "y": 1291.3113789386061,
+          "w": 39.603707876550146,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1",
+          "x": 183.5183660668063,
+          "y": 1091.3116179316878,
+          "w": 26.48249246987952,
+          "h": 92.16883096350246,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4",
+          "x": 170.39715066013568,
+          "y": 491.3124911756401,
+          "w": 39.603707876550146,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "5",
+          "x": 170.39715066013568,
+          "y": 291.31273016872177,
+          "w": 39.603707876550146,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼出容積（L）",
+          "x": 432.73983001708984,
+          "y": 226.31286253412088,
+          "w": 434.52085701816054,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1",
+          "x": 436.7592708174005,
+          "y": 1371.311408353139,
+          "w": 26.482453403702703,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "時間（秒）",
+          "x": 685.1045585540404,
+          "y": 1371.311408353139,
+          "w": 329.7909610242729,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 1179.9994962761202,
+          "y": 293.31276215702655,
+          "w": 131.93257343338198,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "阻塞性",
+          "x": 1179.9994962761202,
+          "y": 841.3119948053935,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "限制性",
+          "x": 1179.9994962761202,
+          "y": 601.3123753559158,
+          "w": 197.8586219879518,
+          "h": 92.16851843408791,
+          "px": 12.889394391408114,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "課本示範數值",
+          "x": 80.00104513513037,
+          "y": 60.99988179034498,
+          "w": 395.99945803722704,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "型態",
+          "x": 68.00104853618576,
+          "y": 1580.9978622988046,
+          "w": 131.99984538986024,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "FEV₁",
+          "x": 403.3599945436041,
+          "y": 1580.9978622988046,
+          "w": 157.28105292262802,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FVC",
+          "x": 722.7501329169216,
+          "y": 1580.9978622988046,
+          "w": 130.21858399172865,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "FEV₁/FVC",
+          "x": 1042.1403494225929,
+          "y": 1580.9978622988046,
+          "w": 316.6089391133872,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 68.00104853618576,
+          "y": 1726.388264851398,
+          "w": 131.99984538986024,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4 L",
+          "x": 403.3599945436041,
+          "y": 1726.388264851398,
+          "w": 100.39046413927194,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "5 L",
+          "x": 722.7501329169216,
+          "y": 1726.388264851398,
+          "w": 100.39054227162558,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "4/5＝0.8",
+          "x": 1042.1403494225929,
+          "y": 1726.388264851398,
+          "w": 275.5621071321419,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "阻塞性",
+          "x": 68.00104853618576,
+          "y": 1871.778667403991,
+          "w": 197.99972901861352,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1 L",
+          "x": 403.3599945436041,
+          "y": 1871.778667403991,
+          "w": 87.2654788465385,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.8 L",
+          "x": 722.7501329169216,
+          "y": 1871.778667403991,
+          "w": 157.42169115916792,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "1/2.8≈0.36",
+          "x": 1042.1403494225929,
+          "y": 1871.778667403991,
+          "w": 346.10890308058407,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "限制性",
+          "x": 68.00104853618576,
+          "y": 2017.1692262212916,
+          "w": 197.99972901861352,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.5 L",
+          "x": 403.3599945436041,
+          "y": 2017.1692262212916,
+          "w": 157.4216130268143,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.8 L",
+          "x": 722.7501329169216,
+          "y": 2017.1692262212916,
+          "w": 157.42169115916792,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2.5/2.8≈0.89",
+          "x": 1042.1403494225929,
+          "y": 2017.1692262212916,
+          "w": 416.4056754973998,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+          "x": 80.00104513513037,
+          "y": 2388.9967217502826,
+          "w": 1538.4666718632343,
+          "h": 349.3900712714138,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

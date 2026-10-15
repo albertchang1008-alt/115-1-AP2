@@ -1,0 +1,212 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "valid-inline-raster",
+      "expected": true,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "valid-inline-raster",
+          "index": 0,
+          "widthCss": 260,
+          "heightCss": 260,
+          "clip": {
+            "x": 20,
+            "y": 20,
+            "width": 260,
+            "height": 260
+          },
+          "nonWhiteRatio": 1,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            2,
+            2
+          ],
+          "decodedSize": [
+            2,
+            2
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "decoded-but-white",
+      "expected": false,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "decoded-but-white",
+          "index": 0,
+          "widthCss": 260,
+          "heightCss": 260,
+          "clip": {
+            "x": 20,
+            "y": 20,
+            "width": 260,
+            "height": 260
+          },
+          "nonWhiteRatio": 0,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            2,
+            2
+          ],
+          "decodedSize": [
+            2,
+            2
+          ],
+          "inline": true,
+          "ok": false
+        }
+      ]
+    },
+    {
+      "name": "missing-use-resource",
+      "expected": false,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "missing-use-resource",
+          "index": 0,
+          "widthCss": 260,
+          "heightCss": 260,
+          "clip": {
+            "x": 20,
+            "y": 20,
+            "width": 260,
+            "height": 260
+          },
+          "nonWhiteRatio": 0,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": false,
+          "dimensionsCorrect": false,
+          "reason": "missing image resource",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "name": "hidden-layer-resource",
+      "expected": false,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "hidden-layer-resource",
+          "index": 0,
+          "widthCss": 260,
+          "heightCss": 260,
+          "clip": {
+            "x": 20,
+            "y": 20,
+            "width": 260,
+            "height": 260
+          },
+          "nonWhiteRatio": 1,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": false,
+          "svgSize": [
+            2,
+            2
+          ],
+          "decodedSize": [
+            2,
+            2
+          ],
+          "inline": false,
+          "ok": false
+        }
+      ]
+    },
+    {
+      "name": "isolated-hemoglobin-desktop",
+      "width": 1280,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "index": 1,
+          "widthCss": 380,
+          "heightCss": 474.82638652455785,
+          "clip": {
+            "x": 190,
+            "y": 89.41095977596741,
+            "width": 380,
+            "height": 474.82638652455785
+          },
+          "nonWhiteRatio": 0.6077880859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "isolated-hemoglobin-mobile",
+      "width": 390,
+      "ok": true,
+      "result": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "index": 0,
+          "widthCss": 357.88235294117646,
+          "heightCss": 447.19096717212324,
+          "clip": {
+            "x": 16.058823529411764,
+            "y": 45.88209755360918,
+            "width": 357.88235294117646,
+            "height": 447.19096717212324
+          },
+          "nonWhiteRatio": 0.604217529296875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    }
+  ]
+}

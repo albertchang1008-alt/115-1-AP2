@@ -1,0 +1,3482 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "lines": [
+            "表面張力相同：小肺泡半徑小、"
+          ]
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "lines": [
+            "所需壓力較大，較易塌陷"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505702836004932,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.04234474583674,
+          "y": 170.65643410933643,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.04234474583674,
+          "y": 780.6527750115645,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9971972013775,
+          "y": 370.6552425183748,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 726.4668996710526,
+          "y": 1242.6498894942433,
+          "w": 247.0662006578947,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "x": 388.09224178916526,
+          "y": 1352.6493032355056,
+          "w": 923.8157894736842,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "x": 487.07250494706,
+          "y": 1462.6485804507606,
+          "w": 725.8552631578947,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-01.png",
+          "index": 0,
+          "widthCss": 379.99768803945744,
+          "heightCss": 474.82777226985456,
+          "clip": {
+            "x": 450.0011559802713,
+            "y": 695.3618603575833,
+            "width": 379.99768803945744,
+            "height": 474.82777226985456
+          },
+          "nonWhiteRatio": 0.3626556396484375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "有表面張力素：表面張力降低，",
+          "lines": [
+            "有表面張力素：表面張力降低，"
+          ]
+        },
+        {
+          "label": "小肺泡也能維持擴張",
+          "lines": [
+            "小肺泡也能維持擴張"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505702836004932,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.04234474583674,
+          "y": 170.65643410933643,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.04234474583674,
+          "y": 780.6527750115645,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9971972013775,
+          "y": 370.6552425183748,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.9971972013775,
+          "y": 960.6516667416221,
+          "w": 329.9342105263158,
+          "h": 91.71059457879316,
+          "px": 29.505702836004932,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 727.0610608552631,
+          "y": 1242.6498894942433,
+          "w": 245.87787828947367,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "有表面張力素：表面張力降低，",
+          "x": 388.09224178916526,
+          "y": 1352.6493032355056,
+          "w": 923.8157894736842,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡也能維持擴張",
+          "x": 553.0593470523231,
+          "y": 1462.6485804507606,
+          "w": 593.8815789473684,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+          "index": 1,
+          "widthCss": 379.99768803945744,
+          "heightCss": 474.82777226985456,
+          "clip": {
+            "x": 450.0011559802713,
+            "y": 695.3618603575833,
+            "width": 379.99768803945744,
+            "height": 474.82777226985456
+          },
+          "nonWhiteRatio": 0.363128662109375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "表面張力素不足（早產兒）：",
+          "lines": [
+            "表面張力素不足（早產兒）："
+          ]
+        },
+        {
+          "label": "肺泡不易維持擴張，呼吸費力",
+          "lines": [
+            "肺泡不易維持擴張，呼吸費力"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505702836004932,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.04234474583674,
+          "y": 170.65643410933643,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.04234474583674,
+          "y": 780.6527750115645,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9971972013775,
+          "y": 370.6552425183748,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.9971972013775,
+          "y": 960.6516667416221,
+          "w": 329.9342105263158,
+          "h": 91.71059457879316,
+          "px": 29.505702836004932,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 727.0610608552631,
+          "y": 1242.6498894942433,
+          "w": 245.87787828947367,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素不足（早產兒）：",
+          "x": 437.58237336811266,
+          "y": 1352.6493032355056,
+          "w": 824.8355263157895,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡不易維持擴張，呼吸費力",
+          "x": 421.0856628417969,
+          "y": 1462.6485804507606,
+          "w": 857.828947368421,
+          "h": 91.71052631578947,
+          "px": 29.505702836004932,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-03.png",
+          "index": 2,
+          "widthCss": 379.99768803945744,
+          "heightCss": 474.82777226985456,
+          "clip": {
+            "x": 450.0011559802713,
+            "y": 695.3618603575833,
+            "width": 379.99768803945744,
+            "height": 474.82777226985456
+          },
+          "nonWhiteRatio": 0.3580474853515625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺尖",
+          "lines": [
+            "肺尖"
+          ]
+        },
+        {
+          "label": "右肺",
+          "lines": [
+            "右肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "水平裂",
+          "lines": [
+            "水平裂"
+          ]
+        },
+        {
+          "label": "中葉",
+          "lines": [
+            "中葉"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "左肺",
+          "lines": [
+            "左肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "心切跡",
+          "lines": [
+            "心切跡"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "肺底",
+          "lines": [
+            "肺底"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505864971346703,
+      "boxes": [
+        {
+          "label": "肺尖",
+          "x": 248.02659285695927,
+          "y": 70.65780639648438,
+          "w": 131.9736159475226,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右肺",
+          "x": 248.02659285695927,
+          "y": 220.6577019942434,
+          "w": 131.9736159475226,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "上葉",
+          "x": 248.02659285695927,
+          "y": 370.65759759200245,
+          "w": 131.9736159475226,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "水平裂",
+          "x": 182.03968248869242,
+          "y": 530.6574771278782,
+          "w": 197.96052631578945,
+          "h": 91.71059457879316,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中葉",
+          "x": 248.02659285695927,
+          "y": 700.6573406018708,
+          "w": 131.9736159475226,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "斜裂",
+          "x": 248.02659285695927,
+          "y": 860.6573566637541,
+          "w": 131.9736159475226,
+          "h": 91.71038978978207,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "下葉",
+          "x": 248.02659285695927,
+          "y": 1020.6572361996299,
+          "w": 131.9736159475226,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左肺",
+          "x": 1319.9997911955181,
+          "y": 220.6577019942434,
+          "w": 131.9735476845189,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "上葉",
+          "x": 1319.9997911955181,
+          "y": 380.6575815301192,
+          "w": 131.9735476845189,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "心切跡",
+          "x": 1319.9997911955181,
+          "y": 590.6575172825864,
+          "w": 197.96052631578945,
+          "h": 91.71045805278577,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "斜裂",
+          "x": 1319.9997911955181,
+          "y": 780.6573486328125,
+          "w": 131.9735476845189,
+          "h": 91.71052631578947,
+          "px": 29.505864971346703,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "下葉",
+          "x": 1319.9997911955181,
+          "y": 960.6571960449219,
+          "w": 131.9735476845189,
+          "h": 91.71066284179688,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底",
+          "x": 1319.9997911955181,
+          "y": 1120.6570755807977,
+          "w": 131.9735476845189,
+          "h": 91.71066284179688,
+          "px": 29.505864971346703,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-04.png",
+          "index": 0,
+          "widthCss": 379.9997761461318,
+          "heightCss": 474.83038147267774,
+          "clip": {
+            "x": 450.0001119269341,
+            "y": 1912.549606017192,
+            "width": 379.9997761461318,
+            "height": 474.83038147267774
+          },
+          "nonWhiteRatio": 0.6966552734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺門",
+          "lines": [
+            "肺門"
+          ]
+        },
+        {
+          "label": "肺根",
+          "lines": [
+            "肺根"
+          ]
+        },
+        {
+          "label": "肺血管",
+          "lines": [
+            "肺血管"
+          ]
+        },
+        {
+          "label": "淋巴管",
+          "lines": [
+            "淋巴管"
+          ]
+        },
+        {
+          "label": "支氣管",
+          "lines": [
+            "支氣管"
+          ]
+        },
+        {
+          "label": "神經",
+          "lines": [
+            "神經"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505563080495357,
+      "boxes": [
+        {
+          "label": "肺門",
+          "x": 248.03143953022203,
+          "y": 280.6541242097553,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺根",
+          "x": 1319.9948762592517,
+          "y": 110.65593317935341,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺血管",
+          "x": 1319.9948762592517,
+          "y": 280.6541242097553,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "淋巴管",
+          "x": 1319.9948762592517,
+          "y": 450.6522811086554,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "支氣管",
+          "x": 1319.9948762592517,
+          "y": 680.6497955322266,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "神經",
+          "x": 1319.9948762592517,
+          "y": 870.6476472553453,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505563080495357,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-05.png",
+          "index": 0,
+          "widthCss": 379.99588815789474,
+          "heightCss": 474.82552321997963,
+          "clip": {
+            "x": 450.0020559210526,
+            "y": 1912.549148606811,
+            "width": 379.99588815789474,
+            "height": 474.82552321997963
+          },
+          "nonWhiteRatio": 0.5656585693359375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "胸腔壁",
+          "lines": [
+            "胸腔壁"
+          ]
+        },
+        {
+          "label": "壁層胸膜",
+          "lines": [
+            "壁層胸膜"
+          ]
+        },
+        {
+          "label": "胸膜腔",
+          "lines": [
+            "胸膜腔"
+          ]
+        },
+        {
+          "label": "臟層胸膜",
+          "lines": [
+            "臟層胸膜"
+          ]
+        },
+        {
+          "label": "肺",
+          "lines": [
+            "肺"
+          ]
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "lines": [
+            "胸內壓低於大氣壓"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505387931034484,
+      "boxes": [
+        {
+          "label": "胸腔壁",
+          "x": 182.0473962081106,
+          "y": 230.65290752210115,
+          "w": 197.96045805278575,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "壁層胸膜",
+          "x": 116.06055410284745,
+          "y": 550.647615131579,
+          "w": 263.9473001580489,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸膜腔",
+          "x": 182.0473962081106,
+          "y": 870.6421862150493,
+          "w": 197.96045805278575,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "臟層胸膜",
+          "x": 1319.992282265111,
+          "y": 510.6482254831414,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺",
+          "x": 1319.992282265111,
+          "y": 890.641881039268,
+          "w": 65.98670557925576,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "x": 586.0526315789473,
+          "y": 1116.6380229749177,
+          "w": 527.8948733681126,
+          "h": 91.71052631578947,
+          "px": 29.505387931034484,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-06.png",
+          "index": 0,
+          "widthCss": 379.9936324451411,
+          "heightCss": 379.9936324451411,
+          "clip": {
+            "x": 450.00318377742946,
+            "y": 1912.5488832288402,
+            "width": 379.9936324451411,
+            "height": 379.9936324451411
+          },
+          "nonWhiteRatio": 0.904052734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "第二型肺泡細胞（中隔細胞）",
+          "lines": [
+            "第二型",
+            "肺泡細胞",
+            "（中隔",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡巨噬細胞（灰塵細胞）",
+          "lines": [
+            "肺泡巨噬",
+            "細胞",
+            "（灰塵",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "肺泡腔",
+          "lines": [
+            "肺泡腔"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505524861878452,
+      "boxes": [
+        {
+          "label": "第二型肺泡細胞（中隔細胞）",
+          "x": 116.05830142372533,
+          "y": 150.65522043328536,
+          "w": 263.9473684210526,
+          "h": 313.46780877364307,
+          "px": 29.505524861878452,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 182.0451435289885,
+          "y": 650.6492293508429,
+          "w": 197.96059457879318,
+          "h": 165.62966597707648,
+          "px": 29.505524861878452,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "x": 1319.994330155222,
+          "y": 120.65560993395353,
+          "w": 263.9473684210526,
+          "h": 165.62959771407276,
+          "px": 29.505524861878452,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡巨噬細胞（灰塵細胞）",
+          "x": 1319.994330155222,
+          "y": 420.65198797928656,
+          "w": 263.9473684210526,
+          "h": 313.46787703664677,
+          "px": 29.505524861878452,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡腔",
+          "x": 1319.994330155222,
+          "y": 810.6471975226151,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505524861878452,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-07.png",
+          "index": 0,
+          "widthCss": 379.99539594843463,
+          "heightCss": 280.1014158413994,
+          "clip": {
+            "x": 450.0023020257827,
+            "y": 2066.1115906998157,
+            "width": 379.99539594843463,
+            "height": 280.1014158413994
+          },
+          "nonWhiteRatio": 0.9264373779296875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1145,
+            1374
+          ],
+          "decodedSize": [
+            1200,
+            1440
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺泡側",
+          "lines": [
+            "肺泡側"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡細胞基底膜",
+          "lines": [
+            "肺泡細胞",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "間質",
+          "lines": [
+            "間質"
+          ]
+        },
+        {
+          "label": "微血管基底膜",
+          "lines": [
+            "微血管",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "內皮細胞",
+          "lines": [
+            "內皮細胞"
+          ]
+        },
+        {
+          "label": "血液側",
+          "lines": [
+            "血液側"
+          ]
+        },
+        {
+          "label": "厚度通常不超過0.5 μm",
+          "lines": [
+            "厚度通常不超過0.5 μm"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505817819148934,
+      "boxes": [
+        {
+          "label": "肺泡側",
+          "x": 182.04050164473682,
+          "y": 90.65753535220497,
+          "w": 197.96052631578945,
+          "h": 91.71049218428762,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "x": 1319.9988355134662,
+          "y": 130.65743697317023,
+          "w": 263.9473684210526,
+          "h": 165.6303486071135,
+          "px": 29.505817819148934,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡細胞基底膜",
+          "x": 1319.9988355134662,
+          "y": 340.6569631476151,
+          "w": 263.9473684210526,
+          "h": 165.6304168701172,
+          "px": 29.505817819148934,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "間質",
+          "x": 1319.9988355134662,
+          "y": 550.65648932206,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505817819148934,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "微血管基底膜",
+          "x": 1319.9988355134662,
+          "y": 730.6560636821546,
+          "w": 197.96052631578945,
+          "h": 165.6303486071135,
+          "px": 29.505817819148934,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "內皮細胞",
+          "x": 1319.9988355134662,
+          "y": 930.6556059184827,
+          "w": 263.9473684210526,
+          "h": 91.71066284179688,
+          "px": 29.505817819148934,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血液側",
+          "x": 182.04050164473682,
+          "y": 810.6559351870887,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "厚度通常不超過0.5 μm",
+          "x": 513.0581825657895,
+          "y": 1156.65502447831,
+          "w": 673.8837713944284,
+          "h": 91.71052631578947,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-08.png",
+          "index": 0,
+          "widthCss": 379.9991688829787,
+          "heightCss": 379.9991688829787,
+          "clip": {
+            "x": 450.00041555851067,
+            "y": 2066.112034574468,
+            "width": 379.9991688829787,
+            "height": 379.9991688829787
+          },
+          "nonWhiteRatio": 0.692108154296875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "T",
+          "lines": [
+            "T"
+          ]
+        },
+        {
+          "label": "r",
+          "lines": [
+            "r"
+          ]
+        },
+        {
+          "label": "P",
+          "lines": [
+            "P"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "張力相同時小肺泡較易塌陷；",
+          "lines": [
+            "張力相同時小肺泡較易塌陷；"
+          ]
+        },
+        {
+          "label": "表面張力素降低表面張力，減少塌陷傾向、",
+          "lines": [
+            "表面張力素降低表面張力，減少塌陷傾向、"
+          ]
+        },
+        {
+          "label": "幫助肺泡擴張與維持，並提高肺順應性。",
+          "lines": [
+            "幫助肺泡擴張與維持，並提高肺順應性。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50547144087256,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.0459626850329,
+          "y": 170.65453981098375,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.0459626850329,
+          "y": 780.6460169741981,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.9935109991775,
+          "y": 960.6434069181743,
+          "w": 197.96038978978206,
+          "h": 165.62952945106906,
+          "px": 29.50547144087256,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "T",
+          "x": 1319.9935109991775,
+          "y": 370.6517269736842,
+          "w": 40.85731907894737,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "r",
+          "x": 355.8905350534539,
+          "y": 550.6492534436677,
+          "w": 24.11602221037212,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "P",
+          "x": 1319.9935109991775,
+          "y": 830.6453222977487,
+          "w": 42.39514802631579,
+          "h": 91.71045805278577,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 726.4668996710526,
+          "y": 1252.6393609297902,
+          "w": 247.0662006578947,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "張力相同時小肺泡較易塌陷；",
+          "x": 421.0854580527857,
+          "y": 1362.6378189890008,
+          "w": 857.8290156314247,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素降低表面張力，減少塌陷傾向、",
+          "x": 223.1249317369963,
+          "y": 1472.6364135742188,
+          "w": 1253.75,
+          "h": 91.71038978978207,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "幫助肺泡擴張與維持，並提高肺順應性。",
+          "x": 256.11835278962786,
+          "y": 1582.6348716334292,
+          "w": 1187.7631578947369,
+          "h": 91.71052631578947,
+          "px": 29.50547144087256,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+          "index": 0,
+          "widthCss": 379.9947079506315,
+          "heightCss": 474.82404848683444,
+          "clip": {
+            "x": 450.0026460246843,
+            "y": 2066.1115097588977,
+            "width": 379.9947079506315,
+            "height": 474.82404848683444
+          },
+          "nonWhiteRatio": 0.3661956787109375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "lines": [
+            "表面張力相同：小肺泡半徑小、"
+          ]
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "lines": [
+            "所需壓力較大，較易塌陷"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889353421701601,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.14347103992142,
+          "y": 168.3121692703431,
+          "w": 197.85866105412865,
+          "h": 92.16875283114882,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.14347103992142,
+          "y": 778.3095026590738,
+          "w": 197.85866105412865,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9979851044804,
+          "y": 368.3113052184323,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 726.5084553913898,
+          "y": 1240.3073598103351,
+          "w": 246.98324548192772,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力相同：小肺泡半徑小、",
+          "x": 388.3165083735822,
+          "y": 1350.3069314611964,
+          "w": 923.366905120482,
+          "h": 92.16851843408791,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "所需壓力較大，較易塌陷",
+          "x": 487.24581936755817,
+          "y": 1460.3063468473504,
+          "w": 725.5082831325302,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-01.png",
+          "index": 0,
+          "widthCss": 165.99924861282366,
+          "heightCss": 207.42508677871834,
+          "clip": {
+            "x": 112.00037569358815,
+            "y": 802.9824483662146,
+            "width": 165.99924861282366,
+            "height": 207.42508677871834
+          },
+          "nonWhiteRatio": 0.3657379150390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "有表面張力素：表面張力降低，",
+          "lines": [
+            "有表面張力素：表面張力降低，"
+          ]
+        },
+        {
+          "label": "小肺泡也能維持擴張",
+          "lines": [
+            "小肺泡也能維持擴張"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889353421701601,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.14347103992142,
+          "y": 168.3121692703431,
+          "w": 197.85866105412865,
+          "h": 92.16875283114882,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.14347103992142,
+          "y": 778.3095026590738,
+          "w": 197.85866105412865,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9979851044804,
+          "y": 368.3113052184323,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.9979851044804,
+          "y": 958.3086312535298,
+          "w": 329.7911954213338,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 727.1084337349398,
+          "y": 1240.3073598103351,
+          "w": 245.7831325301205,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "有表面張力素：表面張力降低，",
+          "x": 388.3165083735822,
+          "y": 1350.3069314611964,
+          "w": 923.366905120482,
+          "h": 92.16851843408791,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡也能維持擴張",
+          "x": 553.2120670180723,
+          "y": 1460.3063468473504,
+          "w": 593.5758659638554,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+          "index": 1,
+          "widthCss": 165.99924861282366,
+          "heightCss": 207.42508677871834,
+          "clip": {
+            "x": 112.00037569358815,
+            "y": 802.9824483662146,
+            "width": 165.99924861282366,
+            "height": 207.42508677871834
+          },
+          "nonWhiteRatio": 0.366241455078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力",
+          "lines": [
+            "表面張力"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面張力素"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "表面張力素不足（早產兒）：",
+          "lines": [
+            "表面張力素不足（早產兒）："
+          ]
+        },
+        {
+          "label": "肺泡不易維持擴張，呼吸費力",
+          "lines": [
+            "肺泡不易維持擴張，呼吸費力"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889353421701601,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.14347103992142,
+          "y": 168.3121692703431,
+          "w": 197.85866105412865,
+          "h": 92.16875283114882,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.14347103992142,
+          "y": 778.3095026590738,
+          "w": 197.85866105412865,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力",
+          "x": 1319.9979851044804,
+          "y": 368.3113052184323,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.9979851044804,
+          "y": 958.3086312535298,
+          "w": 329.7911954213338,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 727.1084337349398,
+          "y": 1240.3073598103351,
+          "w": 245.7831325301205,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素不足（早產兒）：",
+          "x": 437.8011657531003,
+          "y": 1350.3069314611964,
+          "w": 824.3975903614459,
+          "h": 92.16851843408791,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺泡不易維持擴張，呼吸費力",
+          "x": 421.2796107832208,
+          "y": 1460.3063468473504,
+          "w": 857.4407003012049,
+          "h": 92.16867469879519,
+          "px": 12.889353421701601,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-03.png",
+          "index": 2,
+          "widthCss": 165.99924861282366,
+          "heightCss": 207.42508677871834,
+          "clip": {
+            "x": 112.00037569358815,
+            "y": 802.9824483662146,
+            "width": 165.99924861282366,
+            "height": 207.42508677871834
+          },
+          "nonWhiteRatio": 0.3610382080078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺尖",
+          "lines": [
+            "肺尖"
+          ]
+        },
+        {
+          "label": "右肺",
+          "lines": [
+            "右肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "水平裂",
+          "lines": [
+            "水平裂"
+          ]
+        },
+        {
+          "label": "中葉",
+          "lines": [
+            "中葉"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "左肺",
+          "lines": [
+            "左肺"
+          ]
+        },
+        {
+          "label": "上葉",
+          "lines": [
+            "上葉"
+          ]
+        },
+        {
+          "label": "心切跡",
+          "lines": [
+            "心切跡"
+          ]
+        },
+        {
+          "label": "斜裂",
+          "lines": [
+            "斜裂"
+          ]
+        },
+        {
+          "label": "下葉",
+          "lines": [
+            "下葉"
+          ]
+        },
+        {
+          "label": "肺底",
+          "lines": [
+            "肺底"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889147564469914,
+      "boxes": [
+        {
+          "label": "肺尖",
+          "x": 248.07721563132415,
+          "y": 68.31041359039675,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右肺",
+          "x": 248.07721563132415,
+          "y": 218.30734344850106,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "上葉",
+          "x": 248.07721563132415,
+          "y": 368.30419517425173,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "水平裂",
+          "x": 182.15101081204702,
+          "y": 528.3009724444654,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中葉",
+          "x": 248.07721563132415,
+          "y": 698.2975971267884,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "斜裂",
+          "x": 248.07721563132415,
+          "y": 858.2942181322949,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "下葉",
+          "x": 248.07721563132415,
+          "y": 1018.2908391378013,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左肺",
+          "x": 1319.9903281338245,
+          "y": 218.30734344850106,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "上葉",
+          "x": 1319.9903281338245,
+          "y": 378.3040425863611,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "心切跡",
+          "x": 1319.9903281338245,
+          "y": 588.2997443877072,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "斜裂",
+          "x": 1319.9903281338245,
+          "y": 778.2957513648344,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "下葉",
+          "x": 1319.9903281338245,
+          "y": 958.2920671945595,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺底",
+          "x": 1319.9903281338245,
+          "y": 1118.2890007294804,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889147564469914,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-04.png",
+          "index": 0,
+          "widthCss": 165.99659742120343,
+          "heightCss": 207.42177397063946,
+          "clip": {
+            "x": 112.00170128939828,
+            "y": 1740.982136461318,
+            "width": 165.99659742120343,
+            "height": 207.42177397063946
+          },
+          "nonWhiteRatio": 0.70147705078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺門",
+          "lines": [
+            "肺門"
+          ]
+        },
+        {
+          "label": "肺根",
+          "lines": [
+            "肺根"
+          ]
+        },
+        {
+          "label": "肺血管",
+          "lines": [
+            "肺血管"
+          ]
+        },
+        {
+          "label": "淋巴管",
+          "lines": [
+            "淋巴管"
+          ]
+        },
+        {
+          "label": "支氣管",
+          "lines": [
+            "支氣管"
+          ]
+        },
+        {
+          "label": "神經",
+          "lines": [
+            "神經"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889028637770897,
+      "boxes": [
+        {
+          "label": "肺門",
+          "x": 248.08155197695078,
+          "y": 278.3029119652438,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺根",
+          "x": 1319.985952722021,
+          "y": 108.30792806234705,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺血管",
+          "x": 1319.985952722021,
+          "y": 278.3029119652438,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "淋巴管",
+          "x": 1319.985952722021,
+          "y": 448.2978177357869,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "支氣管",
+          "x": 1319.985952722021,
+          "y": 678.29102665545,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "神經",
+          "x": 1319.985952722021,
+          "y": 868.2853147207973,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889028637770897,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-05.png",
+          "index": 0,
+          "widthCss": 165.99506578947367,
+          "heightCss": 207.41986011351594,
+          "clip": {
+            "x": 112.00246710526315,
+            "y": 1868.15383126935,
+            "width": 165.99506578947367,
+            "height": 207.41986011351594
+          },
+          "nonWhiteRatio": 0.5703125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "胸腔壁",
+          "lines": [
+            "胸腔壁"
+          ]
+        },
+        {
+          "label": "壁層胸膜",
+          "lines": [
+            "壁層胸膜"
+          ]
+        },
+        {
+          "label": "胸膜腔",
+          "lines": [
+            "胸膜腔"
+          ]
+        },
+        {
+          "label": "臟層胸膜",
+          "lines": [
+            "臟層胸膜"
+          ]
+        },
+        {
+          "label": "肺",
+          "lines": [
+            "肺"
+          ]
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "lines": [
+            "胸內壓低於大氣壓"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889008620689655,
+      "boxes": [
+        {
+          "label": "胸腔壁",
+          "x": 182.1560894150332,
+          "y": 228.3038311694042,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "壁層胸膜",
+          "x": 116.14985753254719,
+          "y": 548.2937916215644,
+          "w": 263.8648538704378,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸膜腔",
+          "x": 182.1560894150332,
+          "y": 868.283908338432,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "臟層胸膜",
+          "x": 1319.9851713984847,
+          "y": 508.29510516430963,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺",
+          "x": 1319.9851713984847,
+          "y": 888.2832906332361,
+          "w": 66.0062123493976,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "x": 586.1750131630037,
+          "y": 1114.276123046875,
+          "w": 527.649739276932,
+          "h": 92.16867469879519,
+          "px": 12.889008620689655,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-06.png",
+          "index": 0,
+          "widthCss": 165.9948079937304,
+          "heightCss": 165.9948079937304,
+          "clip": {
+            "x": 112.00259600313478,
+            "y": 1968.935050940439,
+            "width": 165.9948079937304,
+            "height": 165.9948079937304
+          },
+          "nonWhiteRatio": 0.9052886962890625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "第二型肺泡細胞（中隔細胞）",
+          "lines": [
+            "第二型",
+            "肺泡細胞",
+            "（中隔",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡巨噬細胞（灰塵細胞）",
+          "lines": [
+            "肺泡巨噬",
+            "細胞",
+            "（灰塵",
+            "細胞）"
+          ]
+        },
+        {
+          "label": "肺泡腔",
+          "lines": [
+            "肺泡腔"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.888725828729283,
+      "boxes": [
+        {
+          "label": "第二型肺泡細胞（中隔細胞）",
+          "x": 116.16019053631518,
+          "y": 148.30153591661568,
+          "w": 263.8648343373494,
+          "h": 313.9168888689524,
+          "px": 12.888725828729283,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 182.16636381953597,
+          "y": 648.2749203601516,
+          "w": 197.85866105412865,
+          "h": 166.0848502653191,
+          "px": 12.888725828729283,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "x": 1319.974857927805,
+          "y": 118.30316566559206,
+          "w": 263.8648343373494,
+          "h": 166.08469400061182,
+          "px": 12.888725828729283,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡巨噬細胞（灰塵細胞）",
+          "x": 1319.974857927805,
+          "y": 418.28718070524286,
+          "w": 263.8648343373494,
+          "h": 313.9168888689524,
+          "px": 12.888725828729283,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡腔",
+          "x": 1319.974857927805,
+          "y": 808.2663846303182,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.888725828729283,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-07.png",
+          "index": 0,
+          "widthCss": 165.99116597605894,
+          "heightCss": 122.35506298967928,
+          "clip": {
+            "x": 112.00441701197053,
+            "y": 2096.1064974677715,
+            "width": 165.99116597605894,
+            "height": 122.35506298967928
+          },
+          "nonWhiteRatio": 0.9350433349609375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1145,
+            1374
+          ],
+          "decodedSize": [
+            1200,
+            1440
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺泡側",
+          "lines": [
+            "肺泡側"
+          ]
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "lines": [
+            "第一型",
+            "肺泡細胞"
+          ]
+        },
+        {
+          "label": "肺泡細胞基底膜",
+          "lines": [
+            "肺泡細胞",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "間質",
+          "lines": [
+            "間質"
+          ]
+        },
+        {
+          "label": "微血管基底膜",
+          "lines": [
+            "微血管",
+            "基底膜"
+          ]
+        },
+        {
+          "label": "內皮細胞",
+          "lines": [
+            "內皮細胞"
+          ]
+        },
+        {
+          "label": "血液側",
+          "lines": [
+            "血液側"
+          ]
+        },
+        {
+          "label": "厚度通常不超過0.5 μm",
+          "lines": [
+            "厚度通常不超過0.5 μm"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889057750759878,
+      "boxes": [
+        {
+          "label": "肺泡側",
+          "x": 182.1542923708996,
+          "y": 88.30885829695737,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889057750759878,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "第一型肺泡細胞",
+          "x": 1319.9870465749718,
+          "y": 128.30777915127308,
+          "w": 263.8648343373494,
+          "h": 166.08664730945267,
+          "px": 12.889057750759878,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺泡細胞基底膜",
+          "x": 1319.9870465749718,
+          "y": 338.3019964379001,
+          "w": 263.8648343373494,
+          "h": 166.0867254418063,
+          "px": 12.889057750759878,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "間質",
+          "x": 1319.9870465749718,
+          "y": 548.2962918568807,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889057750759878,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "微血管基底膜",
+          "x": 1319.9870465749718,
+          "y": 728.2913575689477,
+          "w": 197.8586219879518,
+          "h": 166.08656917709902,
+          "px": 12.889057750759878,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "內皮細胞",
+          "x": 1319.9870465749718,
+          "y": 928.2858055758189,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889057750759878,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血液側",
+          "x": 182.1542923708996,
+          "y": 808.2890430128718,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889057750759878,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "厚度通常不超過0.5 μm",
+          "x": 513.2483838552453,
+          "y": 1154.2795755777015,
+          "w": 673.5033104218633,
+          "h": 92.16867469879519,
+          "px": 12.889057750759878,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-08.png",
+          "index": 0,
+          "widthCss": 165.99544072948328,
+          "heightCss": 165.99544072948328,
+          "clip": {
+            "x": 112.00227963525836,
+            "y": 2249.669500379939,
+            "width": 165.99544072948328,
+            "height": 165.99544072948328
+          },
+          "nonWhiteRatio": 0.6976776123046875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大肺泡",
+          "lines": [
+            "大肺泡"
+          ]
+        },
+        {
+          "label": "小肺泡",
+          "lines": [
+            "小肺泡"
+          ]
+        },
+        {
+          "label": "表面張力素",
+          "lines": [
+            "表面",
+            "張力素"
+          ]
+        },
+        {
+          "label": "T",
+          "lines": [
+            "T"
+          ]
+        },
+        {
+          "label": "r",
+          "lines": [
+            "r"
+          ]
+        },
+        {
+          "label": "P",
+          "lines": [
+            "P"
+          ]
+        },
+        {
+          "label": "P＝2T/r",
+          "lines": [
+            "P＝2T/r"
+          ]
+        },
+        {
+          "label": "張力相同時小肺泡較易塌陷；",
+          "lines": [
+            "張力相同時小肺泡較易塌陷；"
+          ]
+        },
+        {
+          "label": "表面張力素降低表面張力，減少塌陷傾向、",
+          "lines": [
+            "表面張力素降低表面張力，減少塌陷傾向、"
+          ]
+        },
+        {
+          "label": "幫助肺泡擴張與維持，並提高肺順應性。",
+          "lines": [
+            "幫助肺泡擴張與維持，並提高肺順應性。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.888849024110218,
+      "boxes": [
+        {
+          "label": "大肺泡",
+          "x": 182.16191027537886,
+          "y": 168.30279338790712,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小肺泡",
+          "x": 182.16191027537886,
+          "y": 778.2760620117188,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素",
+          "x": 1319.979545869023,
+          "y": 958.268314959055,
+          "w": 197.8586219879518,
+          "h": 166.0853190594409,
+          "px": 12.888849024110218,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "T",
+          "x": 1319.979545869023,
+          "y": 368.2940379682794,
+          "w": 40.883691626859,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "r",
+          "x": 355.9382656970656,
+          "y": 548.2861346509084,
+          "w": 24.082266566265062,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "P",
+          "x": 1319.979545869023,
+          "y": 828.2740489546076,
+          "w": 42.40399096385542,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "P＝2T/r",
+          "x": 726.5083772590361,
+          "y": 1250.2554836043394,
+          "w": 246.98324548192772,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "張力相同時小肺泡較易塌陷；",
+          "x": 421.27972798175125,
+          "y": 1360.2506798433972,
+          "w": 857.4406221688512,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "表面張力素降低表面張力，減少塌陷傾向、",
+          "x": 223.42110599379942,
+          "y": 1470.245876082455,
+          "w": 1253.158022409462,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "幫助肺泡擴張與維持，並提高肺順應性。",
+          "x": 256.42421216849823,
+          "y": 1580.2410723215128,
+          "w": 1187.1518100600645,
+          "h": 92.16867469879519,
+          "px": 12.888849024110218,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+          "index": 0,
+          "widthCss": 165.99275258323766,
+          "heightCss": 207.4169696365514,
+          "clip": {
+            "x": 112.00362370838117,
+            "y": 2350.4504341274396,
+            "width": 165.99275258323766,
+            "height": 207.4169696365514
+          },
+          "nonWhiteRatio": 0.3702545166015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

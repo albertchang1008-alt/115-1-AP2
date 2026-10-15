@@ -1,0 +1,173 @@
+{
+  "_說明": "Claude 審圖結果，作圖助手讀取。verdict：pass 通過／redo 要重畫／fix 要小修；at 為審查時間（epoch），圖在此之後重新存檔即視為待審。prompt 為修圖用 prompt，base 為需先上傳的底圖。審查紀錄見 docs/IMAGE_REVIEW_*.md。",
+  "items": {
+    "IMG-lungs-pleura-01": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-02": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-03": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-04": {
+      "verdict": "pass",
+      "note": "畫風範例；「橫膈」錨點指上緣圓頂。",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-05": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-06": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-07": {
+      "verdict": "pass",
+      "note": "細支氣管淡紅環紋是平滑肌，不要標成軟骨。",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-lungs-pleura-08": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791903900.0,
+      "reviewed": "2026-10-13T23:05+08:00"
+    },
+    "IMG-breathing-mechanics-01": {
+      "verdict": "pass",
+      "note": "21:34 新版；與 02 同畫風同構圖家族。圖寬高與 02／03 不同（1122×1402 vs 1198×1313），標籤層每狀態各自定錨點。「橫膈」錨點指上緣圓頂。",
+      "at": 1791985720,
+      "reviewed": "2026-10-14T21:48+08:00"
+    },
+    "IMG-breathing-mechanics-02": {
+      "verdict": "pass",
+      "note": "21:36 新版：肺明顯變大、胸膜腔變薄、胸廓較寬，可辨識為吸氣。未逐像素對齊 01，總覽改為各狀態獨立錨點。",
+      "at": 1791985720,
+      "reviewed": "2026-10-14T21:48+08:00"
+    },
+    "IMG-breathing-mechanics-03": {
+      "verdict": "pass",
+      "note": "22:02 新版（以 02 為底）；與上一版 03 幾乎相同，定稿。肺比 02 小、橫膈較高，可辨識為呼氣。標籤層不要拿 state-1 與 state-3 比大小，以回縮與氣流向外箭頭表達。",
+      "at": 1791986800,
+      "reviewed": "2026-10-14T22:06+08:00"
+    },
+    "IMG-breathing-mechanics-04": {
+      "verdict": "pass",
+      "note": "寬 941 px 可接受；肋間肌只標位置，外／內層由文字說明。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-breathing-mechanics-05": {
+      "verdict": "pass",
+      "note": "（21:57 被 rc-01 的下載檔蓋掉，Claude 已放回通過版本。）箭頭已移除；三欄由程式改上下排。",
+      "at": 1791986800,
+      "reviewed": "2026-10-14T22:06+08:00"
+    },
+    "IMG-lung-function-01": {
+      "verdict": "pass",
+      "note": "上段末端灰色環帶不要標成軟骨。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-01": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-02": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-03": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-04": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-05": {
+      "verdict": "pass",
+      "note": "每格各自標高／低分壓，不共用腔室名稱。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-06": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-gas-exchange-07": {
+      "verdict": "pass",
+      "note": "上格標「局部低氧」。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-o2-co2-transport-01": {
+      "verdict": "pass",
+      "note": "（可選）四條鏈改對角兩兩同色以對應 2α2β。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-o2-co2-transport-02": {
+      "verdict": "pass",
+      "note": "單一交換蛋白（HCO₃⁻出、Cl⁻入）、血紅素未帶 O₂、紅血球小於組織細胞且有內皮與組織間隙，均已修正。",
+      "at": 1791985720,
+      "reviewed": "2026-10-14T21:48+08:00"
+    },
+    "IMG-respiratory-control-01": {
+      "verdict": "pass",
+      "note": "22:02 定稿：病人左肺兩葉＋心切跡、右肺三葉、縱隔心臟（心尖偏左）、頸動脈體與主動脈體、腦幹與腦脊髓液、迷走神經到雙肺皆正確。",
+      "at": 1791986800,
+      "reviewed": "2026-10-14T22:06+08:00"
+    },
+    "IMG-respiratory-control-02": {
+      "verdict": "pass",
+      "note": "（此圖 20:50 被移到 _rejected，Claude 已放回原通過版本。）標籤錨點避開神經末端的圓點。",
+      "at": 1791986800,
+      "reviewed": "2026-10-14T21:48+08:00"
+    },
+    "IMG-respiratory-control-03": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-respiratory-control-04": {
+      "verdict": "pass",
+      "note": "",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    },
+    "IMG-respiratory-control-05": {
+      "verdict": "pass",
+      "note": "「肺牽張受器」指細支氣管上的末梢，不指放大框的肺泡。",
+      "at": 1791965400.0,
+      "reviewed": "2026-10-14T16:10+08:00"
+    }
+  }
+}

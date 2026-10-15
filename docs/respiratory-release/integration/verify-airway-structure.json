@@ -1,0 +1,3866 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.39963167587477,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.04551295230263,
+          "y": 232.6279650236431,
+          "w": 127.96052631578948,
+          "h": 88.42106869346217,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.04551295230263,
+          "y": 542.6242547286184,
+          "w": 127.96052631578948,
+          "h": 88.42098838404605,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 236.02577611019737,
+          "y": 682.6224557976974,
+          "w": 63.98032740542764,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.04551295230263,
+          "y": 822.620849609375,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9960166529606,
+          "y": 102.6295230263158,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9960166529606,
+          "y": 242.6278204666941,
+          "w": 255.92105263157896,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9960166529606,
+          "y": 422.6256360505757,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9960166529606,
+          "y": 572.6238049958882,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9960166529606,
+          "y": 772.621427837171,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 687.7916666666666,
+          "heightCss": 515.84375,
+          "clip": {
+            "x": 260.00460405156537,
+            "y": 650.65625,
+            "width": 687.7916666666666,
+            "height": 515.84375
+          },
+          "nonWhiteRatio": 0.996551513671875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.39963167587477,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.04551295230263,
+          "y": 232.6279650236431,
+          "w": 127.96052631578948,
+          "h": 88.42106869346217,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.04551295230263,
+          "y": 542.6242547286184,
+          "w": 127.96052631578948,
+          "h": 88.42098838404605,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 236.02577611019737,
+          "y": 682.6224557976974,
+          "w": 63.98032740542764,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.04551295230263,
+          "y": 822.620849609375,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9960166529606,
+          "y": 102.6295230263158,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9960166529606,
+          "y": 242.6278204666941,
+          "w": 255.92105263157896,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9960166529606,
+          "y": 422.6256360505757,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9960166529606,
+          "y": 572.6238049958882,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9960166529606,
+          "y": 772.621427837171,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 687.7916666666666,
+          "heightCss": 515.84375,
+          "clip": {
+            "x": 260.00460405156537,
+            "y": 650.65625,
+            "width": 687.7916666666666,
+            "height": 515.84375
+          },
+          "nonWhiteRatio": 0.99700927734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.39963167587477,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.04551295230263,
+          "y": 232.6279650236431,
+          "w": 127.96052631578948,
+          "h": 88.42106869346217,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.04551295230263,
+          "y": 542.6242547286184,
+          "w": 127.96052631578948,
+          "h": 88.42098838404605,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 236.02577611019737,
+          "y": 682.6224557976974,
+          "w": 63.98032740542764,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.04551295230263,
+          "y": 822.620849609375,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9960166529606,
+          "y": 102.6295230263158,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9960166529606,
+          "y": 242.6278204666941,
+          "w": 255.92105263157896,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9960166529606,
+          "y": 422.6256360505757,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9960166529606,
+          "y": 572.6238049958882,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9960166529606,
+          "y": 772.621427837171,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 687.7916666666666,
+          "heightCss": 515.84375,
+          "clip": {
+            "x": 260.00460405156537,
+            "y": 650.65625,
+            "width": 687.7916666666666,
+            "height": 515.84375
+          },
+          "nonWhiteRatio": 0.99652099609375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "鼻腔",
+          "lines": [
+            "鼻腔"
+          ]
+        },
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "口腔",
+          "lines": [
+            "口腔"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.39963167587477,
+      "boxes": [
+        {
+          "label": "鼻腔",
+          "x": 172.04551295230263,
+          "y": 132.62916966488487,
+          "w": 127.96052631578948,
+          "h": 88.4210205078125,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "軟腭",
+          "x": 172.04551295230263,
+          "y": 252.62772409539474,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口腔",
+          "x": 172.04551295230263,
+          "y": 382.6261179070724,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.04551295230263,
+          "y": 552.6241262335526,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9960166529606,
+          "y": 112.62939453125,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9960166529606,
+          "y": 422.62566817434214,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9960166529606,
+          "y": 572.6238049958882,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9960166529606,
+          "y": 772.621427837171,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 687.7916666666666,
+          "heightCss": 515.84375,
+          "clip": {
+            "x": 260.00460405156537,
+            "y": 1632.171875,
+            "width": 687.7916666666666,
+            "height": 515.84375
+          },
+          "nonWhiteRatio": 0.9973297119140625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "咽扁桃體",
+          "lines": [
+            "咽扁桃體"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.39963167587477,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.04551295230263,
+          "y": 302.6270816200658,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "咽扁桃體",
+          "x": 1129.9960166529606,
+          "y": 32.630358244243425,
+          "w": 255.92105263157896,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9960166529606,
+          "y": 162.62881630345396,
+          "w": 127.96052631578948,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9960166529606,
+          "y": 302.6270816200658,
+          "w": 255.92105263157896,
+          "h": 88.42105263157895,
+          "px": 30.39963167587477,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9960166529606,
+          "y": 492.6247687088816,
+          "w": 127.96052631578948,
+          "h": 88.42111687911185,
+          "px": 30.39963167587477,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 687.7916666666666,
+          "heightCss": 515.84375,
+          "clip": {
+            "x": 260.00460405156537,
+            "y": 1632.171875,
+            "width": 687.7916666666666,
+            "height": 515.84375
+          },
+          "nonWhiteRatio": 0.9969024658203125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "會厭軟骨",
+          "lines": [
+            "會厭軟骨"
+          ]
+        },
+        {
+          "label": "喉結",
+          "lines": [
+            "喉結"
+          ]
+        },
+        {
+          "label": "甲狀軟骨",
+          "lines": [
+            "甲狀軟骨"
+          ]
+        },
+        {
+          "label": "環狀軟骨",
+          "lines": [
+            "環狀軟骨"
+          ]
+        },
+        {
+          "label": "楔狀軟骨",
+          "lines": [
+            "楔狀軟骨"
+          ]
+        },
+        {
+          "label": "小角軟骨",
+          "lines": [
+            "小角軟骨"
+          ]
+        },
+        {
+          "label": "杓狀軟骨",
+          "lines": [
+            "杓狀軟骨"
+          ]
+        },
+        {
+          "label": "前面觀",
+          "lines": [
+            "前面觀"
+          ]
+        },
+        {
+          "label": "後面觀",
+          "lines": [
+            "後面觀"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 31.615871710526314,
+      "boxes": [
+        {
+          "label": "會厭軟骨",
+          "x": 152.01899879857115,
+          "y": 94.0783463026348,
+          "w": 207.9821134868421,
+          "h": 74.01316416890998,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉結",
+          "x": 255.99720603541326,
+          "y": 364.0772668938888,
+          "w": 104.00390625,
+          "h": 74.01310770135177,
+          "px": 31.615871710526314,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "甲狀軟骨",
+          "x": 152.01899879857115,
+          "y": 504.0766565423263,
+          "w": 207.9821134868421,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "環狀軟骨",
+          "x": 152.01899879857115,
+          "y": 704.0758634868421,
+          "w": 207.9821134868421,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "楔狀軟骨",
+          "x": 749.9994980661493,
+          "y": 1424.0729683323912,
+          "w": 207.98221387361227,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小角軟骨",
+          "x": 749.9994980661493,
+          "y": 1574.0724864758943,
+          "w": 207.98221387361227,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "杓狀軟骨",
+          "x": 749.9994980661493,
+          "y": 1744.0715589021381,
+          "w": 207.98221387361227,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "前面觀",
+          "x": 572.0034147563733,
+          "y": 1004.0746990003084,
+          "w": 155.99300986842107,
+          "h": 74.01325828150699,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後面觀",
+          "x": 296.00454631604646,
+          "y": 2184.069784064042,
+          "w": 155.99300986842107,
+          "h": 74.01315789473685,
+          "px": 31.615871710526314,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 328.31866776315786,
+          "heightCss": 660.2853207236842,
+          "clip": {
+            "x": 503.20055509868416,
+            "y": 1632.171875,
+            "width": 328.31866776315786,
+            "height": 660.2853207236842
+          },
+          "nonWhiteRatio": 0.9919281005859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "approved-airway-inline-raster",
+          "index": 1,
+          "widthCss": 393.98240131578945,
+          "heightCss": 660.2853207236842,
+          "clip": {
+            "x": 290.4014185855263,
+            "y": 2325.2890625,
+            "width": 393.98240131578945,
+            "height": 660.2853207236842
+          },
+          "nonWhiteRatio": 0.9942779541015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "前庭皺襞",
+          "lines": [
+            "前庭皺襞"
+          ]
+        },
+        {
+          "label": "聲帶皺襞（真聲帶）",
+          "lines": [
+            "聲帶皺襞",
+            "（真聲帶）"
+          ]
+        },
+        {
+          "label": "聲門",
+          "lines": [
+            "聲門"
+          ]
+        },
+        {
+          "label": "杓狀軟骨",
+          "lines": [
+            "杓狀軟骨"
+          ]
+        },
+        {
+          "label": "食團",
+          "lines": [
+            "食團"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "前",
+          "lines": [
+            "前"
+          ]
+        },
+        {
+          "label": "後",
+          "lines": [
+            "後"
+          ]
+        },
+        {
+          "label": "上面觀（由上往下看喉入口）",
+          "lines": [
+            "上面觀（由上往下看喉入口）"
+          ]
+        },
+        {
+          "label": "吞嚥時",
+          "lines": [
+            "吞嚥時"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 31.615914096916296,
+      "boxes": [
+        {
+          "label": "會厭",
+          "x": 305.99669406288547,
+          "y": 204.07824767263313,
+          "w": 104.00385605661492,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "前庭皺襞",
+          "x": 202.0184868260434,
+          "y": 354.077841106214,
+          "w": 207.98206329345703,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "聲帶皺襞（真聲帶）",
+          "x": 150.02938320762232,
+          "y": 504.07745963648745,
+          "w": 259.9711669118781,
+          "h": 133.29300127531354,
+          "px": 31.615914096916296,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "聲門",
+          "x": 305.99669406288547,
+          "y": 664.0770058882864,
+          "w": 104.00385605661492,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "杓狀軟骨",
+          "x": 202.0184868260434,
+          "y": 804.0765963102642,
+          "w": 207.98206329345703,
+          "h": 74.01320808812191,
+          "px": 31.615914096916296,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食團",
+          "x": 799.9995382208573,
+          "y": 1504.0747993870787,
+          "w": 104.00390625,
+          "h": 74.01305750796669,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 799.9995382208573,
+          "y": 1664.0743456388775,
+          "w": 104.00390625,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 799.9995382208573,
+          "y": 1824.0739922774467,
+          "w": 104.00390625,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 799.9995382208573,
+          "y": 1984.0734381424754,
+          "w": 104.00390625,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "前",
+          "x": 803.9920204564145,
+          "y": 9.07877244447407,
+          "w": 52.014802631578945,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後",
+          "x": 803.9920204564145,
+          "y": 824.0766023334704,
+          "w": 52.014802631578945,
+          "h": 74.01315789473685,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "上面觀（由上往下看喉入口）",
+          "x": 287.0579769736842,
+          "y": 1039.0760522139701,
+          "w": 675.8839456658615,
+          "h": 74.01305750796669,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吞嚥時",
+          "x": 306.0041728772615,
+          "y": 2174.072867945621,
+          "w": 155.99300986842107,
+          "h": 74.01335866827714,
+          "px": 31.615914096916296,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 437.7588105726872,
+          "heightCss": 660.2862059471365,
+          "clip": {
+            "x": 533.6002890969162,
+            "y": 1759.34375,
+            "width": 437.7588105726872,
+            "height": 660.2862059471365
+          },
+          "nonWhiteRatio": 0.990203857421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "approved-airway-inline-raster",
+          "index": 1,
+          "widthCss": 418.3028634361233,
+          "heightCss": 660.2862059471365,
+          "clip": {
+            "x": 284.3209664096916,
+            "y": 2452.461866740088,
+            "width": 418.3028634361233,
+            "height": 660.2862059471365
+          },
+          "nonWhiteRatio": 0.9945831298828125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "C 形透明軟骨",
+          "lines": [
+            "C 形",
+            "透明軟骨"
+          ]
+        },
+        {
+          "label": "黏膜層（偽複層纖毛柱狀上皮）",
+          "lines": [
+            "黏膜層",
+            "（偽複層",
+            "纖毛柱狀",
+            "上皮）"
+          ]
+        },
+        {
+          "label": "氣管腔",
+          "lines": [
+            "氣管腔"
+          ]
+        },
+        {
+          "label": "氣管平滑肌",
+          "lines": [
+            "氣管",
+            "平滑肌"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        },
+        {
+          "label": "前",
+          "lines": [
+            "前"
+          ]
+        },
+        {
+          "label": "後",
+          "lines": [
+            "後"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 31.525892857142857,
+      "boxes": [
+        {
+          "label": "C 形透明軟骨",
+          "x": 136.01798810456927,
+          "y": 341.38113724557974,
+          "w": 223.98237328780323,
+          "h": 141.9978212055407,
+          "px": 31.525892857142857,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "黏膜層（偽複層纖毛柱狀上皮）",
+          "x": 136.01798810456927,
+          "y": 541.3809706035413,
+          "w": 223.98237328780323,
+          "h": 269.67761993408203,
+          "px": 31.525892857142857,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管腔",
+          "x": 1039.9996104993318,
+          "y": 241.38130187988278,
+          "w": 167.97286184210526,
+          "h": 78.15784052798622,
+          "px": 31.525892857142857,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管平滑肌",
+          "x": 1039.9996104993318,
+          "y": 461.3810047350431,
+          "w": 167.97286184210526,
+          "h": 141.9978212055407,
+          "px": 31.525892857142857,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1039.9996104993318,
+          "y": 691.3808320697984,
+          "w": 111.99126795718544,
+          "h": 78.1578947368421,
+          "px": 31.525892857142857,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "前",
+          "x": 661.9952954744037,
+          "y": 26.3814986379523,
+          "w": 56.0094572368421,
+          "h": 78.1578947368421,
+          "px": 31.525892857142857,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後",
+          "x": 661.9952954744037,
+          "y": 861.3805630332545,
+          "w": 56.0094572368421,
+          "h": 78.1578947368421,
+          "px": 31.525892857142857,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 343.4070471938776,
+          "heightCss": 427.8514030612245,
+          "clip": {
+            "x": 485.1853475765306,
+            "y": 1793.1214923469388,
+            "width": 343.4070471938776,
+            "height": 427.8514030612245
+          },
+          "nonWhiteRatio": 0.9973297119140625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            610,
+            760
+          ],
+          "decodedSize": [
+            1200,
+            1495
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "右主支氣管",
+          "lines": [
+            "右主",
+            "支氣管"
+          ]
+        },
+        {
+          "label": "次級支氣管（肺葉）",
+          "lines": [
+            "次級支氣管",
+            "（肺葉）"
+          ]
+        },
+        {
+          "label": "細支氣管",
+          "lines": [
+            "細支氣管"
+          ]
+        },
+        {
+          "label": "三級支氣管（肺節）",
+          "lines": [
+            "三級支氣管",
+            "（肺節）"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "隆凸",
+          "lines": [
+            "隆凸"
+          ]
+        },
+        {
+          "label": "左主支氣管",
+          "lines": [
+            "左主",
+            "支氣管"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 30.399784482758623,
+      "boxes": [
+        {
+          "label": "右主支氣管",
+          "x": 310.07714522512333,
+          "y": 215.78730532997534,
+          "w": 239.92598684210526,
+          "h": 201.7256084241365,
+          "px": 30.399784482758623,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "次級支氣管（肺葉）",
+          "x": 150.1264873303865,
+          "y": 445.78568307976974,
+          "w": 399.8766447368421,
+          "h": 201.72568873355263,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "細支氣管",
+          "x": 230.10181627775492,
+          "y": 915.7824064555921,
+          "w": 319.9013157894737,
+          "h": 110.52631578947368,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "三級支氣管（肺節）",
+          "x": 150.1264873303865,
+          "y": 705.7838841488486,
+          "w": 399.8766447368421,
+          "h": 201.72568873355263,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 1579.9958881578948,
+          "y": 165.7877068770559,
+          "w": 159.95065789473685,
+          "h": 110.52631578947368,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "隆凸",
+          "x": 1579.9958881578948,
+          "y": 325.7865504214638,
+          "w": 159.95065789473685,
+          "h": 110.52631578947368,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左主支氣管",
+          "x": 1579.9958881578948,
+          "y": 485.7853939658717,
+          "w": 239.92598684210526,
+          "h": 201.72568873355263,
+          "px": 30.399784482758623,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 550.2360991379311,
+          "heightCss": 412.6770743534483,
+          "clip": {
+            "x": 366.4019396551724,
+            "y": 1759.34375,
+            "width": 550.2360991379311,
+            "height": 412.6770743534483
+          },
+          "nonWhiteRatio": 0.98480224609375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279926335174954,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.0660473926958,
+          "y": 232.5284291462726,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.0660473926958,
+          "y": 542.5266495670181,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 235.99677028426206,
+          "y": 682.5260024472892,
+          "w": 64.00602409638554,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.0660473926958,
+          "y": 822.5252082548947,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9981174698796,
+          "y": 102.5292086314006,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9981174698796,
+          "y": 242.52841443900604,
+          "w": 255.8734939759036,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9981174698796,
+          "y": 422.52741434487956,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9981174698796,
+          "y": 572.5265319088855,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9981174698796,
+          "y": 772.5253553275603,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 300.4583333333333,
+          "heightCss": 225.34375,
+          "clip": {
+            "x": 29.000920810313087,
+            "y": 783.453125,
+            "width": 300.4583333333333,
+            "height": 225.34375
+          },
+          "nonWhiteRatio": 0.9905548095703125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279926335174954,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.0660473926958,
+          "y": 232.5284291462726,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.0660473926958,
+          "y": 542.5266495670181,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 235.99677028426206,
+          "y": 682.5260024472892,
+          "w": 64.00602409638554,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.0660473926958,
+          "y": 822.5252082548947,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9981174698796,
+          "y": 102.5292086314006,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9981174698796,
+          "y": 242.52841443900604,
+          "w": 255.8734939759036,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9981174698796,
+          "y": 422.52741434487956,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9981174698796,
+          "y": 572.5265319088855,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9981174698796,
+          "y": 772.5253553275603,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 300.4583333333333,
+          "heightCss": 225.34375,
+          "clip": {
+            "x": 29.000920810313087,
+            "y": 783.453125,
+            "width": 300.4583333333333,
+            "height": 225.34375
+          },
+          "nonWhiteRatio": 0.9897613525390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "喉",
+          "lines": [
+            "喉"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279926335174954,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.0660473926958,
+          "y": 232.5284291462726,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.0660473926958,
+          "y": 542.5266495670181,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉",
+          "x": 235.99677028426206,
+          "y": 682.5260024472892,
+          "w": 64.00602409638554,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 172.0660473926958,
+          "y": 822.5252082548947,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9981174698796,
+          "y": 102.5292086314006,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9981174698796,
+          "y": 242.52841443900604,
+          "w": 255.8734939759036,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9981174698796,
+          "y": 422.52741434487956,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9981174698796,
+          "y": 572.5265319088855,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9981174698796,
+          "y": 772.5253553275603,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 300.4583333333333,
+          "heightCss": 225.34375,
+          "clip": {
+            "x": 29.000920810313087,
+            "y": 783.453125,
+            "width": 300.4583333333333,
+            "height": 225.34375
+          },
+          "nonWhiteRatio": 0.9901580810546875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "鼻腔",
+          "lines": [
+            "鼻腔"
+          ]
+        },
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "口腔",
+          "lines": [
+            "口腔"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        },
+        {
+          "label": "喉咽",
+          "lines": [
+            "喉咽"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279926335174954,
+      "boxes": [
+        {
+          "label": "鼻腔",
+          "x": 172.0660473926958,
+          "y": 132.52901743693525,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "軟腭",
+          "x": 172.0660473926958,
+          "y": 252.52832619540663,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "口腔",
+          "x": 172.0660473926958,
+          "y": 382.5276202466115,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 172.0660473926958,
+          "y": 552.5267083960844,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9981174698796,
+          "y": 112.52912038780121,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9981174698796,
+          "y": 422.52741434487956,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "喉咽",
+          "x": 1129.9981174698796,
+          "y": 572.5265319088855,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1129.9981174698796,
+          "y": 772.5253553275603,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 300.4583333333333,
+          "heightCss": 225.34375,
+          "clip": {
+            "x": 29.000920810313087,
+            "y": 1584.125,
+            "width": 300.4583333333333,
+            "height": 225.34375
+          },
+          "nonWhiteRatio": 0.9918365478515625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "軟腭",
+          "lines": [
+            "軟腭"
+          ]
+        },
+        {
+          "label": "咽扁桃體",
+          "lines": [
+            "咽扁桃體"
+          ]
+        },
+        {
+          "label": "鼻咽",
+          "lines": [
+            "鼻咽"
+          ]
+        },
+        {
+          "label": "耳咽管口",
+          "lines": [
+            "耳咽管口"
+          ]
+        },
+        {
+          "label": "口咽",
+          "lines": [
+            "口咽"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279926335174954,
+      "boxes": [
+        {
+          "label": "軟腭",
+          "x": 172.0660473926958,
+          "y": 302.5280320500753,
+          "w": 127.9367469879518,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "咽扁桃體",
+          "x": 1129.9981174698796,
+          "y": 32.52960572759789,
+          "w": 255.8734939759036,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "鼻咽",
+          "x": 1129.9981174698796,
+          "y": 162.52882624246988,
+          "w": 127.93689406061748,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "耳咽管口",
+          "x": 1129.9981174698796,
+          "y": 302.5280320500753,
+          "w": 255.8734939759036,
+          "h": 91.56626506024097,
+          "px": 13.279926335174954,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "口咽",
+          "x": 1129.9981174698796,
+          "y": 492.5270172486822,
+          "w": 127.93689406061748,
+          "h": 91.5663385965738,
+          "px": 13.279926335174954,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 300.4583333333333,
+          "heightCss": 225.34375,
+          "clip": {
+            "x": 29.000920810313087,
+            "y": 1684.90625,
+            "width": 300.4583333333333,
+            "height": 225.34375
+          },
+          "nonWhiteRatio": 0.9926910400390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "會厭軟骨",
+          "lines": [
+            "會厭軟骨"
+          ]
+        },
+        {
+          "label": "喉結",
+          "lines": [
+            "喉結"
+          ]
+        },
+        {
+          "label": "甲狀軟骨",
+          "lines": [
+            "甲狀軟骨"
+          ]
+        },
+        {
+          "label": "環狀軟骨",
+          "lines": [
+            "環狀軟骨"
+          ]
+        },
+        {
+          "label": "楔狀軟骨",
+          "lines": [
+            "楔狀軟骨"
+          ]
+        },
+        {
+          "label": "小角軟骨",
+          "lines": [
+            "小角軟骨"
+          ]
+        },
+        {
+          "label": "杓狀軟骨",
+          "lines": [
+            "杓狀軟骨"
+          ]
+        },
+        {
+          "label": "前面觀",
+          "lines": [
+            "前面觀"
+          ]
+        },
+        {
+          "label": "後面觀",
+          "lines": [
+            "後面觀"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.81107456140351,
+      "boxes": [
+        {
+          "label": "會厭軟骨",
+          "x": 151.98282448642226,
+          "y": 93.52270379123918,
+          "w": 208.01957831325302,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "喉結",
+          "x": 255.99261364304874,
+          "y": 363.52031202201385,
+          "w": 104.00978915662651,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "甲狀軟骨",
+          "x": 151.98282448642226,
+          "y": 503.51901226733105,
+          "w": 208.01957831325302,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "環狀軟骨",
+          "x": 151.98282448642226,
+          "y": 703.517155474927,
+          "w": 208.01957831325302,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "楔狀軟骨",
+          "x": 749.9988395047475,
+          "y": 1423.5105859227926,
+          "w": 208.01963576351304,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "小角軟骨",
+          "x": 749.9988395047475,
+          "y": 1573.5093082290098,
+          "w": 208.01963576351304,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "杓狀軟骨",
+          "x": 749.9988395047475,
+          "y": 1743.5078448559864,
+          "w": 208.01963576351304,
+          "h": 75.3012048192771,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "前面觀",
+          "x": 571.9924260334797,
+          "y": 1003.5144851868411,
+          "w": 156.01468373493975,
+          "h": 75.30131971979716,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後面觀",
+          "x": 295.9949424467891,
+          "y": 2183.5037599126977,
+          "w": 156.01468373493975,
+          "h": 75.30143462031721,
+          "px": 13.81107456140351,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 143.42269736842107,
+          "heightCss": 288.43898026315793,
+          "clip": {
+            "x": 135.2405427631579,
+            "y": 1785.6875,
+            "width": 143.42269736842107,
+            "height": 288.43898026315793
+          },
+          "nonWhiteRatio": 0.99237060546875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "approved-airway-inline-raster",
+          "index": 1,
+          "widthCss": 172.10723684210527,
+          "heightCss": 288.43898026315793,
+          "clip": {
+            "x": 42.28138706140351,
+            "y": 2088.46875,
+            "width": 172.10723684210527,
+            "height": 288.43898026315793
+          },
+          "nonWhiteRatio": 0.9956512451171875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "前庭皺襞",
+          "lines": [
+            "前庭皺襞"
+          ]
+        },
+        {
+          "label": "聲帶皺襞（真聲帶）",
+          "lines": [
+            "聲帶皺襞",
+            "（真聲帶）"
+          ]
+        },
+        {
+          "label": "聲門",
+          "lines": [
+            "聲門"
+          ]
+        },
+        {
+          "label": "杓狀軟骨",
+          "lines": [
+            "杓狀軟骨"
+          ]
+        },
+        {
+          "label": "食團",
+          "lines": [
+            "食團"
+          ]
+        },
+        {
+          "label": "會厭",
+          "lines": [
+            "會厭"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "前",
+          "lines": [
+            "前"
+          ]
+        },
+        {
+          "label": "後",
+          "lines": [
+            "後"
+          ]
+        },
+        {
+          "label": "上面觀（由上往下看喉入口）",
+          "lines": [
+            "上面觀（由上往下看喉入口）"
+          ]
+        },
+        {
+          "label": "吞嚥時",
+          "lines": [
+            "吞嚥時"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.811068281938326,
+      "boxes": [
+        {
+          "label": "會厭",
+          "x": 305.9922356203378,
+          "y": 203.52162510515694,
+          "w": 104.00981788175652,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "前庭皺襞",
+          "x": 201.9824751888413,
+          "y": 353.52017506059394,
+          "w": 208.01957831325302,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "聲帶皺襞（真聲帶）",
+          "x": 149.97758061052804,
+          "y": 503.5186675657709,
+          "w": 260.0244728915663,
+          "h": 134.5806811229292,
+          "px": 13.811068281938326,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "聲門",
+          "x": 305.9922356203378,
+          "y": 663.5171821318477,
+          "w": 104.00981788175652,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "杓狀軟骨",
+          "x": 201.9824751888413,
+          "y": 803.5158823771649,
+          "w": 208.01957831325302,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食團",
+          "x": 799.9983178563865,
+          "y": 1503.509153802711,
+          "w": 104.00978915662651,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "會厭",
+          "x": 799.9983178563865,
+          "y": 1663.5076683687876,
+          "w": 104.00978915662651,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 799.9983178563865,
+          "y": 1823.5061829348645,
+          "w": 104.00978915662651,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 799.9983178563865,
+          "y": 1983.5046975009413,
+          "w": 104.00978915662651,
+          "h": 75.30143462031721,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "前",
+          "x": 803.9955920483693,
+          "y": 8.52349292801087,
+          "w": 52.004894578313255,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後",
+          "x": 803.9955920483693,
+          "y": 823.5156966979245,
+          "w": 52.004894578313255,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "上面觀（由上往下看喉入口）",
+          "x": 287.0269855820989,
+          "y": 1038.5136431958301,
+          "w": 675.9459713855422,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吞嚥時",
+          "x": 305.99496450768896,
+          "y": 2173.5030484486774,
+          "w": 156.01468373493975,
+          "h": 75.3012048192771,
+          "px": 13.811068281938326,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 191.23017621145374,
+          "heightCss": 288.4388491189427,
+          "clip": {
+            "x": 148.52044328193833,
+            "y": 1912.859375,
+            "width": 191.23017621145374,
+            "height": 288.4388491189427
+          },
+          "nonWhiteRatio": 0.9914398193359375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "approved-airway-inline-raster",
+          "index": 1,
+          "widthCss": 182.73105726872245,
+          "heightCss": 288.4388491189427,
+          "clip": {
+            "x": 39.625481828193834,
+            "y": 2215.640487334802,
+            "width": 182.73105726872245,
+            "height": 288.4388491189427
+          },
+          "nonWhiteRatio": 0.9962921142578125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "C 形透明軟骨",
+          "lines": [
+            "C 形",
+            "透明軟骨"
+          ]
+        },
+        {
+          "label": "黏膜層（偽複層纖毛柱狀上皮）",
+          "lines": [
+            "黏膜層",
+            "（偽複層",
+            "纖毛柱狀",
+            "上皮）"
+          ]
+        },
+        {
+          "label": "氣管腔",
+          "lines": [
+            "氣管腔"
+          ]
+        },
+        {
+          "label": "氣管平滑肌",
+          "lines": [
+            "氣管",
+            "平滑肌"
+          ]
+        },
+        {
+          "label": "食道",
+          "lines": [
+            "食道"
+          ]
+        },
+        {
+          "label": "前",
+          "lines": [
+            "前"
+          ]
+        },
+        {
+          "label": "後",
+          "lines": [
+            "後"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.771428571428572,
+      "boxes": [
+        {
+          "label": "C 形透明軟骨",
+          "x": 135.98388648894894,
+          "y": 338.99370216461546,
+          "w": 224.0257906626506,
+          "h": 145.16335452895567,
+          "px": 13.771428571428572,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "黏膜層（偽複層纖毛柱狀上皮）",
+          "x": 135.98388648894894,
+          "y": 538.9876032450113,
+          "w": 224.0257906626506,
+          "h": 272.83946117722843,
+          "px": 13.771428571428572,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管腔",
+          "x": 1039.9887360722184,
+          "y": 238.9968136706984,
+          "w": 167.9875753012048,
+          "h": 81.32530120481927,
+          "px": 13.771428571428572,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管平滑肌",
+          "x": 1039.9887360722184,
+          "y": 458.99009244987764,
+          "w": 167.9875753012048,
+          "h": 145.16335452895567,
+          "px": 13.771428571428572,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "食道",
+          "x": 1039.9887360722184,
+          "y": 688.9829980321678,
+          "w": 112.01301942388694,
+          "h": 81.32530120481927,
+          "px": 13.771428571428572,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "前",
+          "x": 661.9804566165051,
+          "y": 24.00341033935547,
+          "w": 56.038153315164955,
+          "h": 81.32530120481927,
+          "px": 13.771428571428572,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "後",
+          "x": 661.9804566165051,
+          "y": 858.9776464255459,
+          "w": 56.038153315164955,
+          "h": 81.32530120481927,
+          "px": 13.771428571428572,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 150.01020408163265,
+          "heightCss": 186.89795918367346,
+          "clip": {
+            "x": 127.37244897959184,
+            "y": 2054.7863520408164,
+            "width": 150.01020408163265,
+            "height": 186.89795918367346
+          },
+          "nonWhiteRatio": 0.9982452392578125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            610,
+            760
+          ],
+          "decodedSize": [
+            1200,
+            1495
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "右主支氣管",
+          "lines": [
+            "右主",
+            "支氣管"
+          ]
+        },
+        {
+          "label": "次級支氣管（肺葉）",
+          "lines": [
+            "次級支氣管",
+            "（肺葉）"
+          ]
+        },
+        {
+          "label": "細支氣管",
+          "lines": [
+            "細支氣管"
+          ]
+        },
+        {
+          "label": "三級支氣管（肺節）",
+          "lines": [
+            "三級支氣管",
+            "（肺節）"
+          ]
+        },
+        {
+          "label": "氣管",
+          "lines": [
+            "氣管"
+          ]
+        },
+        {
+          "label": "隆凸",
+          "lines": [
+            "隆凸"
+          ]
+        },
+        {
+          "label": "左主支氣管",
+          "lines": [
+            "左主",
+            "支氣管"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 13.279094827586206,
+      "boxes": [
+        {
+          "label": "右主支氣管",
+          "x": 310.19633649343467,
+          "y": 215.6421707337161,
+          "w": 239.83433734939757,
+          "h": 205.65161647566828,
+          "px": 13.279094827586206,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "次級支氣管（肺葉）",
+          "x": 150.27540275849492,
+          "y": 445.62650014118975,
+          "w": 399.7552710843373,
+          "h": 205.65161647566828,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "細支氣管",
+          "x": 230.18880637295274,
+          "y": 915.5944456537086,
+          "w": 319.8418674698795,
+          "h": 114.45801516613328,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "三級支氣管（肺節）",
+          "x": 150.27540275849492,
+          "y": 705.608781561794,
+          "w": 399.7552710843373,
+          "h": 205.65161647566828,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "氣管",
+          "x": 1579.96046686747,
+          "y": 165.64555340502633,
+          "w": 159.92093373493975,
+          "h": 114.4578313253012,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "隆凸",
+          "x": 1579.96046686747,
+          "y": 325.6346920886672,
+          "w": 159.92093373493975,
+          "h": 114.4578313253012,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左主支氣管",
+          "x": 1579.96046686747,
+          "y": 485.62383077230794,
+          "w": 239.83433734939757,
+          "h": 205.65152455525225,
+          "px": 13.279094827586206,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "approved-airway-inline-raster",
+          "index": 0,
+          "widthCss": 240.35161637931034,
+          "heightCss": 180.26371228448275,
+          "clip": {
+            "x": 75.48814655172414,
+            "y": 2140.8125,
+            "width": 240.35161637931034,
+            "height": 180.26371228448275
+          },
+          "nonWhiteRatio": 0.99005126953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1448,
+            1086
+          ],
+          "decodedSize": [
+            1200,
+            900
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

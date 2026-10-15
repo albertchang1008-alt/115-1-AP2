@@ -1,0 +1,1079 @@
+
+> course-platform@1.9.0 check
+> npm test && npm run build && npm --prefix functions test
+
+
+> course-platform@1.9.0 pretest
+> npm --prefix functions run build
+
+
+> course-platform-functions@1.9.0 build
+> node scripts/check-runtime.cjs && tsc && node scripts/check-entry.cjs
+
+後端入口載入通過：51 個函式（未連接雲端）。
+
+> course-platform@1.9.0 test
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: 教材名稱去掉「圖卡」，只在預設／空白／上一份自動名稱時帶入
+ok 1 - 教材名稱去掉「圖卡」，只在預設／空白／上一份自動名稱時帶入
+  ---
+  duration_ms: 0.550167
+  type: 'test'
+  ...
+# Subtest: 必做標籤區分手動設定與依類型推導
+ok 2 - 必做標籤區分手動設定與依類型推導
+  ---
+  duration_ms: 0.398792
+  type: 'test'
+  ...
+# Subtest: 新活動插在同階段最後，分組與同階段內移動保留其他順序
+ok 3 - 新活動插在同階段最後，分組與同階段內移動保留其他順序
+  ---
+  duration_ms: 0.321833
+  type: 'test'
+  ...
+# Subtest: 合併保留目標 false／0 設定、來源次單元防線及部分進度
+ok 4 - 合併保留目標 false／0 設定、來源次單元防線及部分進度
+  ---
+  duration_ms: 0.961541
+  type: 'test'
+  ...
+# Subtest: 單元安排僅空單元可合併、先預覽人數／活動再確認；換目標清空預覽，未保存不得合併
+ok 5 - 單元安排僅空單元可合併、先預覽人數／活動再確認；換目標清空預覽，未保存不得合併
+  ---
+  duration_ms: 5663.857583
+  type: 'test'
+  ...
+# Subtest: 兩層選單處理無題庫的單元及舊課程，不改寫來源資料
+ok 6 - 兩層選單處理無題庫的單元及舊課程，不改寫來源資料
+  ---
+  duration_ms: 0.84375
+  type: 'test'
+  ...
+# Subtest: 題庫／報表兩層連動、換單元重設及清空資料，研究選單依看板順序分組
+ok 7 - 題庫／報表兩層連動、換單元重設及清空資料，研究選單依看板順序分組
+  ---
+  duration_ms: 5588.8445
+  type: 'test'
+  ...
+# Subtest: 12頁全部選項式，拒絕自由文字與重複排序，沒有答案鍵
+ok 8 - 12頁全部選項式，拒絕自由文字與重複排序，沒有答案鍵
+  ---
+  duration_ms: 1.547125
+  type: 'test'
+  ...
+# Subtest: 所有互動54人計票，每題及排序位置總票数一致，統計不存身分與文字
+ok 9 - 所有互動54人計票，每題及排序位置總票数一致，統計不存身分與文字
+  ---
+  duration_ms: 45.0175
+  type: 'test'
+  ...
+# Subtest: 舊短答格式不能再接受任意內容
+ok 10 - 舊短答格式不能再接受任意內容
+  ---
+  duration_ms: 0.241417
+  type: 'test'
+  ...
+# Subtest: 倒數顯示到零就停、舊資料顯示已開時間，格式與10秒界線
+ok 11 - 倒數顯示到零就停、舊資料顯示已開時間，格式與10秒界線
+  ---
+  duration_ms: 0.099833
+  type: 'test'
+  ...
+# Subtest: 完成度看板React：兩層導航、格子明細、快取、覆寫一致性、篩選CSV、既有StudentDetail及更新失敗
+ok 12 - 完成度看板React：兩層導航、格子明細、快取、覆寫一致性、篩選CSV、既有StudentDetail及更新失敗
+  ---
+  duration_ms: 7807.337625
+  type: 'test'
+  ...
+# Subtest: chapterCellState：未開放仍計分，已完成優先，未開始／作答／活動／逾期與缺passedAt
+ok 13 - chapterCellState：未開放仍計分，已完成優先，未開始／作答／活動／逾期與缺passedAt
+  ---
+  duration_ms: 7.350709
+  type: 'test'
+  ...
+# Subtest: 兩班完整名冊、可見性與覆寫：矩陣n/m和計分完成格一致，全部班級加總重算
+ok 14 - 兩班完整名冊、可見性與覆寫：矩陣n/m和計分完成格一致，全部班級加總重算
+  ---
+  duration_ms: 3.827583
+  type: 'test'
+  ...
+# Subtest: CSV使用同一格子狀態且只含傳入篩選名單；不把無成績改成零分
+ok 15 - CSV使用同一格子狀態且只含傳入篩選名單；不把無成績改成零分
+  ---
+  duration_ms: 0.39625
+  type: 'test'
+  ...
+# Subtest: 既有getCompletion分頁讀完53人；失敗不回傳部分名單、重複游標不無限讀取
+ok 16 - 既有getCompletion分頁讀完53人；失敗不回傳部分名單、重複游標不無限讀取
+  ---
+  duration_ms: 1.053625
+  type: 'test'
+  ...
+# Subtest: 選看及不可計分單元不標逾期，也不影響逾期人數與CSV
+ok 17 - 選看及不可計分單元不標逾期，也不影響逾期人數與CSV
+  ---
+  duration_ms: 5.453208
+  type: 'test'
+  ...
+# Subtest: YouTube 僅接受支援網域與影片 ID
+ok 18 - YouTube 僅接受支援網域與影片 ID
+  ---
+  duration_ms: 0.904458
+  type: 'test'
+  ...
+# Subtest: 名冊信箱、學號與重複資料檢查
+ok 19 - 名冊信箱、學號與重複資料檢查
+  ---
+  duration_ms: 0.54575
+  type: 'test'
+  ...
+# Subtest: 題目選項正解與穩定 ID
+ok 20 - 題目選項正解與穩定 ID
+  ---
+  duration_ms: 0.177291
+  type: 'test'
+  ...
+# Subtest: 複習、閃卡與抽題不提高完成度，只有完整測驗取最高
+ok 21 - 複習、閃卡與抽題不提高完成度，只有完整測驗取最高
+  ---
+  duration_ms: 0.357625
+  type: 'test'
+  ...
+# Subtest: 活動必做覆寫優先，未設定沿用既有類型推導
+ok 22 - 活動必做覆寫優先，未設定沿用既有類型推導
+  ---
+  duration_ms: 0.070125
+  type: 'test'
+  ...
+# Subtest: 進度狀態函式辨識分類、活動與單元待辦
+ok 23 - 進度狀態函式辨識分類、活動與單元待辦
+  ---
+  duration_ms: 0.429459
+  type: 'test'
+  ...
+# Subtest: 首次去重、模式分離與最新複習統計
+ok 24 - 首次去重、模式分離與最新複習統計
+  ---
+  duration_ms: 0.223375
+  type: 'test'
+  ...
+# Subtest: 另一位學生獨立計入首次
+ok 25 - 另一位學生獨立計入首次
+  ---
+  duration_ms: 0.063084
+  type: 'test'
+  ...
+# Subtest: 沒有成績不視為零分達標
+ok 26 - 沒有成績不視為零分達標
+  ---
+  duration_ms: 0.331416
+  type: 'test'
+  ...
+# Subtest: 第三版完成度以單元計數，所有必做題目分類達標且必做活動完成才算完成
+ok 27 - 第三版完成度以單元計數，所有必做題目分類達標且必做活動完成才算完成
+  ---
+  duration_ms: 0.548167
+  type: 'test'
+  ...
+# Subtest: v3 採計必做單元內所有已發布分類，忽略舊分類 required 值
+ok 28 - v3 採計必做單元內所有已發布分類，忽略舊分類 required 值
+  ---
+  duration_ms: 0.146667
+  type: 'test'
+  ...
+# Subtest: summarizeUnit 不把未發布題庫的分類列入進度項目
+ok 29 - summarizeUnit 不把未發布題庫的分類列入進度項目
+  ---
+  duration_ms: 0.152416
+  type: 'test'
+  ...
+# Subtest: 選看單元把其下分類與活動全部視為選做
+ok 30 - 選看單元把其下分類與活動全部視為選做
+  ---
+  duration_ms: 0.140125
+  type: 'test'
+  ...
+# Subtest: summarizeUnit 與 v3 chapterCompletion 對分類、活動及舊鍵一致
+ok 31 - summarizeUnit 與 v3 chapterCompletion 對分類、活動及舊鍵一致
+  ---
+  duration_ms: 0.323209
+  type: 'test'
+  ...
+# Subtest: 舊資料由第一個題目分類推導 Chapter，班級覆寫套用至所有分類
+ok 32 - 舊資料由第一個題目分類推導 Chapter，班級覆寫套用至所有分類
+  ---
+  duration_ms: 0.16
+  type: 'test'
+  ...
+# Subtest: 教師修改 Chapter 開放時間後，該班每個題目分類都套用相同時間
+ok 33 - 教師修改 Chapter 開放時間後，該班每個題目分類都套用相同時間
+  ---
+  duration_ms: 0.065166
+  type: 'test'
+  ...
+# Subtest: All 修改共用開放時間會清掉同欄位覆寫，單一班覆寫仍優先且可恢復
+ok 34 - All 修改共用開放時間會清掉同欄位覆寫，單一班覆寫仍優先且可恢復
+  ---
+  duration_ms: 0.123833
+  type: 'test'
+  ...
+# Subtest: hidden 與逐班未勾選皆不會進入學生課程
+ok 35 - hidden 與逐班未勾選皆不會進入學生課程
+  ---
+  duration_ms: 0.073542
+  type: 'test'
+  ...
+# Subtest: 錯題答錯累計、答對移除，舊陣列相容為 at: 0
+ok 36 - 錯題答錯累計、答對移除，舊陣列相容為 at: 0
+  ---
+  duration_ms: 0.115834
+  type: 'test'
+  ...
+# Subtest: 錯題閃卡不透過 applyAttempt 寫入任何學習狀態
+ok 37 - 錯題閃卡不透過 applyAttempt 寫入任何學習狀態
+  ---
+  duration_ms: 0.057208
+  type: 'test'
+  ...
+# Subtest: 缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照
+ok 38 - 缺少 visibility 視為目前學習，規則版本 1 與 2 可各自重算快照
+  ---
+  duration_ms: 0.139125
+  type: 'test'
+  ...
+# Subtest: v2 沒有題庫時只要求互動教材與連結，只有選看時不列入分母
+ok 39 - v2 沒有題庫時只要求互動教材與連結，只有選看時不列入分母
+  ---
+  duration_ms: 0.088792
+  type: 'test'
+  ...
+# Subtest: 每單元上限放寬到 500 題
+ok 40 - 每單元上限放寬到 500 題
+  ---
+  duration_ms: 6.7935
+  type: 'test'
+  ...
+# Subtest: 完整測驗與抽題練習都會記錄已考過，複習模式不會
+ok 41 - 完整測驗與抽題練習都會記錄已考過，複習模式不會
+  ---
+  duration_ms: 0.192583
+  type: 'test'
+  ...
+# Subtest: mergeAttempted 只增不減，跨題庫版本保留
+ok 42 - mergeAttempted 只增不減，跨題庫版本保留
+  ---
+  duration_ms: 0.06325
+  type: 'test'
+  ...
+# Subtest: 抽題練習排序：未考過的題目一定排在已考過的前面
+ok 43 - 抽題練習排序：未考過的題目一定排在已考過的前面
+  ---
+  duration_ms: 0.578
+  type: 'test'
+  ...
+# Subtest: progress 缺少 activities／units 欄位時完成度照常計算，不會丟出錯誤
+ok 44 - progress 缺少 activities／units 欄位時完成度照常計算，不會丟出錯誤
+  ---
+  duration_ms: 0.242333
+  type: 'test'
+  ...
+# Subtest: 開放時間沒有時區時一律以台灣時間解讀（伺服器是 UTC）
+ok 45 - 開放時間沒有時區時一律以台灣時間解讀（伺服器是 UTC）
+  ---
+  duration_ms: 0.107
+  type: 'test'
+  ...
+# Subtest: 只有活動紀錄、沒有 units 的 progress 交卷時不會丟錯（修正 INTERNAL）
+ok 46 - 只有活動紀錄、沒有 units 的 progress 交卷時不會丟錯（修正 INTERNAL）
+  ---
+  duration_ms: 0.066917
+  type: 'test'
+  ...
+# Subtest: 複習考依比例穩定分配、每類至少一題且不超出題庫
+ok 47 - 複習考依比例穩定分配、每類至少一題且不超出題庫
+  ---
+  duration_ms: 0.317459
+  type: 'test'
+  ...
+# Subtest: 複習考每個來源優先抽未考過題目，並保留來源配額
+ok 48 - 複習考每個來源優先抽未考過題目，並保留來源配額
+  ---
+  duration_ms: 0.096708
+  type: 'test'
+  ...
+# Subtest: 複習考首次達標時間晚於期限才標示逾期，完成度公式為 v3
+ok 49 - 複習考首次達標時間晚於期限才標示逾期，完成度公式為 v3
+  ---
+  duration_ms: 0.058208
+  type: 'test'
+  ...
+# Subtest: 複習考交卷須符合歷史版本的題數與來源配額，舊組卷仍可採計
+ok 50 - 複習考交卷須符合歷史版本的題數與來源配額，舊組卷仍可採計
+  ---
+  duration_ms: 0.0905
+  type: 'test'
+  ...
+# Subtest: 1.7.0 台北日界線、移除保留累計、同日答對與再次答錯
+ok 51 - 1.7.0 台北日界線、移除保留累計、同日答對與再次答錯
+  ---
+  duration_ms: 0.183333
+  type: 'test'
+  ...
+# Subtest: 1.7.0 待複習排序與題數邊界
+ok 52 - 1.7.0 待複習排序與題數邊界
+  ---
+  duration_ms: 0.1915
+  type: 'test'
+  ...
+# Subtest: 1.7.0 綜合範圍：三態、合計、未作答、移除標記、候選不變與新分類預設包含
+ok 53 - 1.7.0 綜合範圍：三態、合計、未作答、移除標記、候選不變與新分類預設包含
+  ---
+  duration_ms: 0.467708
+  type: 'test'
+  ...
+# Subtest: 1.7.0 閃卡今天優先、抽題待複習優先／今天歸其他、跨分類錯題排序取前N才洗牌
+ok 54 - 1.7.0 閃卡今天優先、抽題待複習優先／今天歸其他、跨分類錯題排序取前N才洗牌
+  ---
+  duration_ms: 0.442
+  type: 'test'
+  ...
+# Subtest: ④ 正解文字比較：刪題、答案、選項數、題型重置；文字空白、換序與展示修改延續
+ok 55 - ④ 正解文字比較：刪題、答案、選項數、題型重置；文字空白、換序與展示修改延續
+  ---
+  duration_ms: 0.221583
+  type: 'test'
+  ...
+# Subtest: ④ 共用 fixture：多段延續累積 drop，保留 n/at/ok/rm，不改舊資料
+ok 56 - ④ 共用 fixture：多段延續累積 drop，保留 n/at/ok/rm，不改舊資料
+  ---
+  duration_ms: 0.125166
+  type: 'test'
+  ...
+# Subtest: ④ 延續防護：中斷、全部重算、循環、10段上限、單段扣除
+ok 57 - ④ 延續防護：中斷、全部重算、循環、10段上限、單段扣除
+  ---
+  duration_ms: 0.10525
+  type: 'test'
+  ...
+# Subtest: ④ 最近十筆按寫入順序保留，資料庫 map 排序不影響順序
+ok 58 - ④ 最近十筆按寫入順序保留，資料庫 map 排序不影響順序
+  ---
+  duration_ms: 0.189334
+  type: 'test'
+  ...
+# Subtest: 心率 40／75／150／195 的間期符合規格 §2.1
+ok 59 - 心率 40／75／150／195 的間期符合規格 §2.1
+  ---
+  duration_ms: 0.672375
+  type: 'test'
+  ...
+# Subtest: 心率 195 時 T 波結束到下一個 P 波起點 ≤ 0（波形重疊）
+ok 60 - 心率 195 時 T 波結束到下一個 P 波起點 ≤ 0（波形重疊）
+  ---
+  duration_ms: 0.073
+  type: 'test'
+  ...
+# Subtest: QT 由前一個 R-R 決定：同一拍的參數不因之後心率改變而改變
+ok 61 - QT 由前一個 R-R 決定：同一拍的參數不因之後心率改變而改變
+  ---
+  duration_ms: 0.371458
+  type: 'test'
+  ...
+# Subtest: 標示題判定：正確框選、PR 段誤框、QRS 兩端過寬
+ok 62 - 標示題判定：正確框選、PR 段誤框、QRS 兩端過寬
+  ---
+  duration_ms: 0.4375
+  type: 'test'
+  ...
+# Subtest: 只計入完整落在畫面內的波段；R-R 由 R 峰到下一個 R 峰
+ok 63 - 只計入完整落在畫面內的波段；R-R 由 R 峰到下一個 R 峰
+  ---
+  duration_ms: 0.14825
+  type: 'test'
+  ...
+# Subtest: ECG 建置檔：單檔、含 SDK、無 CDN、包含 widget 與全部題目 ID
+not ok 64 - ECG 建置檔：單檔、含 SDK、無 CDN、包含 widget 與全部題目 ID
+  ---
+  duration_ms: 0.118958
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/ecg-model.test.ts:51:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'public/materials/ecg-basics-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    Object.readFileSync (node:fs:440:20)
+    TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/ecg-model.test.ts:52:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 學生說明入口與首次三張提示可略過、帳號課程隔離、畫面無溢位
+ok 65 - 學生說明入口與首次三張提示可略過、帳號課程隔離、畫面無溢位
+  ---
+  duration_ms: 17030.83525
+  type: 'test'
+  ...
+# Subtest: MI互動：常駐狀態／頁綁定確認／伺服器倒數與保留答案／加時／黑屏／1280及390與1.2字級
+ok 66 - MI互動：常駐狀態／頁綁定確認／伺服器倒數與保留答案／加時／黑屏／1280及390與1.2字級
+  ---
+  duration_ms: 32289.490833
+  type: 'test'
+  ...
+# Subtest: 共用 kit 最後答對即通關，結果呈現不重送；guided、舊MCQ及題型callback相容
+ok 67 - 共用 kit 最後答對即通關，結果呈現不重送；guided、舊MCQ及題型callback相容
+  ---
+  duration_ms: 6219.846292
+  type: 'test'
+  ...
+# Subtest: 三份生理教材維持固定ID與四選一，採教師核定的換題及120／80範例
+ok 68 - 三份生理教材維持固定ID與四選一，採教師核定的換題及120／80範例
+  ---
+  duration_ms: 2.93325
+  type: 'test'
+  ...
+# Subtest: 教材內容檔驗證固定節點、題目 ID 與答案關聯
+ok 69 - 教材內容檔驗證固定節點、題目 ID 與答案關聯
+  ---
+  duration_ms: 1.080333
+  type: 'test'
+  ...
+# Subtest: ECG 基礎教材維持六節點、十一題與非診斷內容界線
+ok 70 - ECG 基礎教材維持六節點、十一題與非診斷內容界線
+  ---
+  duration_ms: 0.13325
+  type: 'test'
+  ...
+# Subtest: 心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID
+not ok 71 - 心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID
+  ---
+  duration_ms: 0.126917
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material-kit.test.ts:49:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'public/materials/heart-structure-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    Object.readFileSync (node:fs:440:20)
+    TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material-kit.test.ts:50:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 標示題型驗證與元件庫洗牌
+ok 72 - 標示題型驗證與元件庫洗牌
+  ---
+  duration_ms: 0.437167
+  type: 'test'
+  ...
+# Subtest: 節點文字正規化後拒絕重複及摘要重述
+ok 73 - 節點文字正規化後拒絕重複及摘要重述
+  ---
+  duration_ms: 1.644875
+  type: 'test'
+  ...
+# Subtest: 依站別核對已登錄教材的HTML、來源、節點／題目ID及目錄分母一致；MI不含AP2公開檔
+not ok 74 - 依站別核對已登錄教材的HTML、來源、節點／題目ID及目錄分母一致；MI不含AP2公開檔
+  ---
+  duration_ms: 10.140959
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material-registration.test.ts:10:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert(html.includes('<script src="' + MATERIALS_BASE_URL + 'course-learning.js"></script>'))
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material-registration.test.ts:48:7)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: 教材接受 Pages 子路徑、自訂網域與版本參數，拒絕非 HTTPS 與帳密網址
+ok 75 - 教材接受 Pages 子路徑、自訂網域與版本參數，拒絕非 HTTPS 與帳密網址
+  ---
+  duration_ms: 0.68675
+  type: 'test'
+  ...
+# Subtest: 學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈現 iframe
+ok 76 - 學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈現 iframe
+  ---
+  duration_ms: 3.030291
+  type: 'test'
+  ...
+# Subtest: 血液組成教材使用 SDK、固定診斷分母與滿分通關
+not ok 77 - 血液組成教材使用 SDK、固定診斷分母與滿分通關
+  ---
+  duration_ms: 9.357041
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:60:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/blood-composition-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:61:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 課程介紹圖卡以十題全對作為教材完成條件
+not ok 78 - 課程介紹圖卡以十題全對作為教材完成條件
+  ---
+  duration_ms: 9.676834
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:76:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/course-orientation-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:77:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤方法
+ok 79 - course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤方法
+  ---
+  duration_ms: 91.596625
+  type: 'test'
+  ...
+# Subtest: 止血與血液氣體運送教材保有節點與兩層驗收追蹤
+not ok 80 - 止血與血液氣體運送教材保有節點與兩層驗收追蹤
+  ---
+  duration_ms: 9.671792
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:99:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/hemostasis-mechanisms-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:105:18)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤
+ok 81 - 新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤
+  ---
+  duration_ms: 68.697125
+  type: 'test'
+  ...
+# Subtest: 心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追蹤
+not ok 82 - 心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追蹤
+  ---
+  duration_ms: 5.666667
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:142:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/heart-structure-v2/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:143:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制
+ok 83 - 紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制
+  ---
+  duration_ms: 30.091334
+  type: 'test'
+  ...
+# Subtest: 情境實驗室的四卡醫學插圖已隨三份教材提供
+ok 84 - 情境實驗室的四卡醫學插圖已隨三份教材提供
+  ---
+  duration_ms: 27.120584
+  type: 'test'
+  ...
+# Subtest: 血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤
+not ok 85 - 血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤
+  ---
+  duration_ms: 0.353542
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:198:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/blood-pre-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:199:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 血液單元後測（blood-post-v1）保有五關闖關與 CL 別名追蹤
+not ok 86 - 血液單元後測（blood-post-v1）保有五關闖關與 CL 別名追蹤
+  ---
+  duration_ms: 0.337792
+  type: 'test'
+  location: '/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:219:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/respiratory-integration-validation/mi-main-baseline/public/materials/blood-post-v1/index.html'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (/private/tmp/respiratory-integration-validation/mi-main-baseline/tests/material.test.ts:220:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 班級可明確取消全部單元，必做與提供分開，來源不被更改
+ok 87 - 班級可明確取消全部單元，必做與提供分開，來源不被更改
+  ---
+  duration_ms: 1.047541
+  type: 'test'
+  ...
+# Subtest: 中文雙解析、圖片及空白選項保持正確答案代碼
+ok 88 - 中文雙解析、圖片及空白選項保持正確答案代碼
+  ---
+  duration_ms: 17.293625
+  type: 'test'
+  ...
+# Subtest: 單一分頁可依「次單元」拆成多個題庫，「單元」欄只是分組標籤
+ok 89 - 單一分頁可依「次單元」拆成多個題庫，「單元」欄只是分組標籤
+  ---
+  duration_ms: 1.017458
+  type: 'test'
+  ...
+# Subtest: 課程代碼分頁可讀正式題庫欄位，不要求每列重複課程代碼
+ok 90 - 課程代碼分頁可讀正式題庫欄位，不要求每列重複課程代碼
+  ---
+  duration_ms: 0.268875
+  type: 'test'
+  ...
+# Subtest: Zuvio解答不會影響平台使用正確答案代碼
+ok 91 - Zuvio解答不會影響平台使用正確答案代碼
+  ---
+  duration_ms: 0.24075
+  type: 'test'
+  ...
+# Subtest: 次單元空白時以單元本身當作一節，不再用分頁名稱（課程代碼）補位
+ok 92 - 次單元空白時以單元本身當作一節，不再用分頁名稱（課程代碼）補位
+  ---
+  duration_ms: 0.423833
+  type: 'test'
+  ...
+# Subtest: 同一次單元的「單元」欄填了不同值要報錯
+ok 93 - 同一次單元的「單元」欄填了不同值要報錯
+  ---
+  duration_ms: 0.333542
+  type: 'test'
+  ...
+# Subtest: 沒有「次單元」欄時，退回用分頁名當單元（向後相容）
+ok 94 - 沒有「次單元」欄時，退回用分頁名當單元（向後相容）
+  ---
+  duration_ms: 10.03575
+  type: 'test'
+  ...
+# Subtest: 同一學生可以跨課程，單一課程不能重複歸屬兩班
+ok 95 - 同一學生可以跨課程，單一課程不能重複歸屬兩班
+  ---
+  duration_ms: 0.59675
+  type: 'test'
+  ...
+# Subtest: 班級名冊可由單一課程分頁推得課程代碼與授課班級
+ok 96 - 班級名冊可由單一課程分頁推得課程代碼與授課班級
+  ---
+  duration_ms: 0.403375
+  type: 'test'
+  ...
+# Subtest: 重玩不覆蓋首次錯誤，通關不改變首次結果
+ok 97 - 重玩不覆蓋首次錯誤，通關不改變首次結果
+  ---
+  duration_ms: 0.371291
+  type: 'test'
+  ...
+# Subtest: 逐圖卡停留時間累計，並保留每題所有嘗試次數
+ok 98 - 逐圖卡停留時間累計，並保留每題所有嘗試次數
+  ---
+  duration_ms: 0.0675
+  type: 'test'
+  ...
+# Subtest: 課程、單元、班級代碼可用中文，仍拒絕空白與符號
+ok 99 - 課程、單元、班級代碼可用中文，仍拒絕空白與符號
+  ---
+  duration_ms: 0.170583
+  type: 'test'
+  ...
+# Subtest: 2026-09-15 起名冊信箱不再限制網域，但仍要求基本格式
+ok 100 - 2026-09-15 起名冊信箱不再限制網域，但仍要求基本格式
+  ---
+  duration_ms: 0.058167
+  type: 'test'
+  ...
+# Subtest: 題序留白不把 undefined 寫入 Firestore；錯誤題序明確指出列號
+ok 101 - 題序留白不把 undefined 寫入 Firestore；錯誤題序明確指出列號
+  ---
+  duration_ms: 0.281292
+  type: 'test'
+  ...
+# Subtest: 學生 hash 路由可解析、保留 tab 並拒絕其他課程或不完整路由
+ok 102 - 學生 hash 路由可解析、保留 tab 並拒絕其他課程或不完整路由
+  ---
+  duration_ms: 1.435792
+  type: 'test'
+  ...
+# Subtest: 次單元預設開啟第一個尚有必做活動的標籤，否則第一個有內容標籤
+ok 103 - 次單元預設開啟第一個尚有必做活動的標籤，否則第一個有內容標籤
+  ---
+  duration_ms: 0.172666
+  type: 'test'
+  ...
+# Subtest: 完整測驗延後鎖定，抽題與錯題在送出選項後才揭示回饋
+ok 104 - 完整測驗延後鎖定，抽題與錯題在送出選項後才揭示回饋
+  ---
+  duration_ms: 43.89925
+  type: 'test'
+  ...
+# Subtest: 作答與閱讀固定頂部列，並提供學生顯示設定面板
+ok 105 - 作答與閱讀固定頂部列，並提供學生顯示設定面板
+  ---
+  duration_ms: 10.087459
+  type: 'test'
+  ...
+# Subtest: 教師偏好列不作為 app grid 的子節點
+ok 106 - 教師偏好列不作為 app grid 的子節點
+  ---
+  duration_ms: 10.887042
+  type: 'test'
+  ...
+# Subtest: 教師課程編輯器以 Chapter 編輯並提供題目分類唯讀與舊資料清理
+ok 107 - 教師課程編輯器以 Chapter 編輯並提供題目分類唯讀與舊資料清理
+  ---
+  duration_ms: 10.6205
+  type: 'test'
+  ...
+# Subtest: Chapter 活動編輯器保留完整教材欄位並以中文類型呈現
+ok 108 - Chapter 活動編輯器保留完整教材欄位並以中文類型呈現
+  ---
+  duration_ms: 11.889875
+  type: 'test'
+  ...
+# Subtest: 新 CourseEditor 在草稿尚未保存時阻止直接離開
+ok 109 - 新 CourseEditor 在草稿尚未保存時阻止直接離開
+  ---
+  duration_ms: 11.305084
+  type: 'test'
+  ...
+# Subtest: 停用的 LegacyCourseEditor 與專用 helper 已移除
+ok 110 - 停用的 LegacyCourseEditor 與專用 helper 已移除
+  ---
+  duration_ms: 11.353708
+  type: 'test'
+  ...
+# Subtest: 學生首頁與單元頁以 Chapter 彙整活動及題目分類
+ok 111 - 學生首頁與單元頁以 Chapter 彙整活動及題目分類
+  ---
+  duration_ms: 17.449041
+  type: 'test'
+  ...
+# Subtest: 學習活動卡會分別標示內容類型與完成要求
+ok 112 - 學習活動卡會分別標示內容類型與完成要求
+  ---
+  duration_ms: 22.303125
+  type: 'test'
+  ...
+# Subtest: 練習分頁每個題目分類是一列並保留四種入口
+ok 113 - 練習分頁每個題目分類是一列並保留四種入口
+  ---
+  duration_ms: 14.009041
+  type: 'test'
+  ...
+# Subtest: 教師單元與班級對照表使用精確中文文案
+ok 114 - 教師單元與班級對照表使用精確中文文案
+  ---
+  duration_ms: 12.075208
+  type: 'test'
+  ...
+# Subtest: 教師總覽的單元、必做、活動與達標門檻讀取 Chapter
+ok 115 - 教師總覽的單元、必做、活動與達標門檻讀取 Chapter
+  ---
+  duration_ms: 7.85675
+  type: 'test'
+  ...
+# Subtest: Chapter 互動教材把 chapterName 傳到 LearningBridge 與後端
+ok 116 - Chapter 互動教材把 chapterName 傳到 LearningBridge 與後端
+  ---
+  duration_ms: 0.685292
+  type: 'test'
+  ...
+# Subtest: 學習進度看板只可整組移動同一單元的題目分類
+ok 117 - 學習進度看板只可整組移動同一單元的題目分類
+  ---
+  duration_ms: 4.557792
+  type: 'test'
+  ...
+# Subtest: 題庫管理頁可直接設定同步 Google Sheet 網址
+ok 118 - 題庫管理頁可直接設定同步 Google Sheet 網址
+  ---
+  duration_ms: 6.57425
+  type: 'test'
+  ...
+# Subtest: 題庫同步找不到分頁時顯示後端實際讀到的分頁名稱
+ok 119 - 題庫同步找不到分頁時顯示後端實際讀到的分頁名稱
+  ---
+  duration_ms: 2.987625
+  type: 'test'
+  ...
+# Subtest: 題庫同步有驗證錯誤時顯示次單元與實際後端訊息
+ok 120 - 題庫同步有驗證錯誤時顯示次單元與實際後端訊息
+  ---
+  duration_ms: 10.295833
+  type: 'test'
+  ...
+# Subtest: 平台設定固定放在側欄底部，不會被長導覽清單推到畫面外
+ok 121 - 平台設定固定放在側欄底部，不會被長導覽清單推到畫面外
+  ---
+  duration_ms: 3.230416
+  type: 'test'
+  ...
+# Subtest: 首頁待辦清單可由控制列展開
+ok 122 - 首頁待辦清單可由控制列展開
+  ---
+  duration_ms: 3.199792
+  type: 'test'
+  ...
+# Subtest: 1.6 首頁以既有 progress 顯示待辦與可展開的必做／選看單元卡
+ok 123 - 1.6 首頁以既有 progress 顯示待辦與可展開的必做／選看單元卡
+  ---
+  duration_ms: 24.271625
+  type: 'test'
+  ...
+# Subtest: 1.6 練習分頁使用章節門檻、發布狀態與手機單一展開選單
+ok 124 - 1.6 練習分頁使用章節門檻、發布狀態與手機單一展開選單
+  ---
+  duration_ms: 3.676708
+  type: 'test'
+  ...
+# Subtest: 教師預覽作答、影片進度與報表操作不呼叫正式寫入
+ok 125 - 教師預覽作答、影片進度與報表操作不呼叫正式寫入
+  ---
+  duration_ms: 1.327041
+  type: 'test'
+  ...
+# Subtest: 預覽重設與不同預覽 instance 不共用進度
+ok 126 - 預覽重設與不同預覽 instance 不共用進度
+  ---
+  duration_ms: 2.421125
+  type: 'test'
+  ...
+# Subtest: 預覽重批不採用前端 correct，複習仍保留累計
+ok 127 - 預覽重批不採用前端 correct，複習仍保留累計
+  ---
+  duration_ms: 0.708125
+  type: 'test'
+  ...
+# Subtest: 題庫快取命中、版本淘汰、毀損與配額失敗都可安全退回
+ok 128 - 題庫快取命中、版本淘汰、毀損與配額失敗都可安全退回
+  ---
+  duration_ms: 0.516208
+  type: 'test'
+  ...
+# Subtest: 題庫快取超過 3 MB 時以最後使用時間淘汰
+ok 129 - 題庫快取超過 3 MB 時以最後使用時間淘汰
+  ---
+  duration_ms: 0.132292
+  type: 'test'
+  ...
+# Subtest: 1.7.0 移除錯題時間選單與 range 路由參數
+ok 130 - 1.7.0 移除錯題時間選單與 range 路由參數
+  ---
+  duration_ms: 3.834458
+  type: 'test'
+  ...
+# Subtest: 學習進度看板依課程與教材設定的單元順序排列
+ok 131 - 學習進度看板依課程與教材設定的單元順序排列
+  ---
+  duration_ms: 1.004916
+  type: 'test'
+  ...
+# Subtest: 選擇教材版本時自動帶入 GitHub Pages 教材網址，並可一鍵帶入建議網址
+ok 132 - 選擇教材版本時自動帶入 GitHub Pages 教材網址，並可一鍵帶入建議網址
+  ---
+  duration_ms: 3.730625
+  type: 'test'
+  ...
+# Subtest: 單元學習活動可上移下移，並提供三種晴空粉色系
+ok 133 - 單元學習活動可上移下移，並提供三種晴空粉色系
+  ---
+  duration_ms: 8.139
+  type: 'test'
+  ...
+# Subtest: 測驗結果以答對／答錯分色卡逐選項標示正確答案與本次選擇
+ok 134 - 測驗結果以答對／答錯分色卡逐選項標示正確答案與本次選擇
+  ---
+  duration_ms: 2.524
+  type: 'test'
+  ...
+# Subtest: 晴空粉 A 是預設色系，並在開頁時就套用已選色系
+ok 135 - 晴空粉 A 是預設色系，並在開頁時就套用已選色系
+  ---
+  duration_ms: 3.45425
+  type: 'test'
+  ...
+# Subtest: 三種晴空粉側欄與學生頂部列不用深色底，並為勾選控制項指定主色
+ok 136 - 三種晴空粉側欄與學生頂部列不用深色底，並為勾選控制項指定主色
+  ---
+  duration_ms: 1.134
+  type: 'test'
+  ...
+# Subtest: All 編輯 Chapter 共用設定，會清理同欄位覆寫並提示例外班級
+ok 137 - All 編輯 Chapter 共用設定，會清理同欄位覆寫並提示例外班級
+  ---
+  duration_ms: 0.607917
+  type: 'test'
+  ...
+# Subtest: 重新同步時單筆失敗不會卡住後面的待同步紀錄，並回報原因
+ok 138 - 重新同步時單筆失敗不會卡住後面的待同步紀錄，並回報原因
+  ---
+  duration_ms: 0.466417
+  type: 'test'
+  ...
+# Subtest: 1.7.0 實際 React 閃卡與錯題操作：翻面、自評、待複習題數、伺服器摘要與手機
+ok 139 - 1.7.0 實際 React 閃卡與錯題操作：翻面、自評、待複習題數、伺服器摘要與手機
+  ---
+  duration_ms: 6805.810083
+  type: 'test'
+  ...
+# Subtest: 1.7.0 綜合練習 React：範圍三態、保存排除、三種模式、只讀所選題庫、手機
+ok 140 - 1.7.0 綜合練習 React：範圍三態、保存排除、三種模式、只讀所選題庫、手機
+  ---
+  duration_ms: 4127.7075
+  type: 'test'
+  ...
+# Subtest: 1.7.0 Student 整合：單元閃卡不產生進度、返回路由、首頁綜合三種模式
+ok 141 - 1.7.0 Student 整合：單元閃卡不產生進度、返回路由、首頁綜合三種模式
+  ---
+  duration_ms: 1959.709292
+  type: 'test'
+  ...
+# Subtest: ④ 教師同步 React：預設不勾、傳入重算旗標、三種結果與未改版無訊息
+ok 142 - ④ 教師同步 React：預設不勾、傳入重算旗標、三種結果與未改版無訊息
+  ---
+  duration_ms: 1523.280417
+  type: 'test'
+  ...
+# Subtest: 反思React＋實際callable：建活動、發布、作答、修改、草稿、唯讀、教師彙整CSV與預覽隔離（1280／390）
+ok 143 - 反思React＋實際callable：建活動、發布、作答、修改、草稿、唯讀、教師彙整CSV與預覽隔離（1280／390）
+  ---
+  duration_ms: 10229.84375
+  type: 'test'
+  ...
+# Subtest: 反思設定：題數、ID、題型、字數、選項驗證及預設值
+ok 144 - 反思設定：題數、ID、題型、字數、選項驗證及預設值
+  ---
+  duration_ms: 1.927667
+  type: 'test'
+  ...
+# Subtest: 反思：必做／選做、只增完成、截止台灣時間、草稿以課程與帳號隔離，公式仍為3
+ok 145 - 反思：必做／選做、只增完成、截止台灣時間、草稿以課程與帳號隔離，公式仍為3
+  ---
+  duration_ms: 36.221208
+  type: 'test'
+  ...
+# Subtest: 反思CSV：BOM、欄位、台灣時間、完整長答案、去識別不含身分欄及試算表公式保護
+ok 146 - 反思CSV：BOM、欄位、台灣時間、完整長答案、去識別不含身分欄及試算表公式保護
+  ---
+  duration_ms: 107.015666
+  type: 'test'
+  ...
+# Subtest: 反思文字允許換行、正規化 CRLF 與空行，Tab 拒絕，長度以正規化後計
+ok 147 - 反思文字允許換行、正規化 CRLF 與空行，Tab 拒絕，長度以正規化後計
+  ---
+  duration_ms: 0.145125
+  type: 'test'
+  ...
+# Subtest: 反思未作答名單優先學號或 uid，換信箱不重列，無學號才用 email
+ok 148 - 反思未作答名單優先學號或 uid，換信箱不重列，無學號才用 email
+  ---
+  duration_ms: 0.294833
+  type: 'test'
+  ...
+# Subtest: 網站設定保留 AP2 全目錄，MI 兩筆目錄與網址依建置選擇
+ok 149 - 網站設定保留 AP2 全目錄，MI 兩筆目錄與網址依建置選擇
+  ---
+  duration_ms: 0.8745
+  type: 'test'
+  ...
+# Subtest: MI migration dry-run 12 題與 70354e0 常數逐字一致，拒絕 AP2 專案
+ok 150 - MI migration dry-run 12 題與 70354e0 常數逐字一致，拒絕 AP2 專案
+  ---
+  duration_ms: 183.679875
+  type: 'test'
+  ...
+# Subtest: 課堂設定拒絕重複 ID、無效格式與過大題目，保留選項／排序
+ok 151 - 課堂設定拒絕重複 ID、無效格式與過大題目，保留選項／排序
+  ---
+  duration_ms: 0.292209
+  type: 'test'
+  ...
+# Subtest: MI 舊簡報選項指示轉換與備註移為 migration 資料，與 70354e0 顯示完全相同
+ok 152 - MI 舊簡報選項指示轉換與備註移為 migration 資料，與 70354e0 顯示完全相同
+  ---
+  duration_ms: 29.557541
+  type: 'test'
+  ...
+# Subtest: MI migration apply 使用假 Firestore 寫入 JSON 定義與轉換，不展開 snapshot
+ok 153 - MI migration apply 使用假 Firestore 寫入 JSON 定義與轉換，不展開 snapshot
+  ---
+  duration_ms: 238.43175
+  type: 'test'
+  ...
+# Subtest: MI 70354e0 歷史測試資料 SHA-256 與 README 記錄一致
+ok 154 - MI 70354e0 歷史測試資料 SHA-256 與 README 記錄一致
+  ---
+  duration_ms: 0.445
+  type: 'test'
+  ...
+# Subtest: 已完成與逾期完成卡顯示本人姓名，姓名緊接在完成標籤下方
+ok 155 - 已完成與逾期完成卡顯示本人姓名，姓名緊接在完成標籤下方
+  ---
+  duration_ms: 8.3425
+  type: 'test'
+  ...
+# Subtest: 進行中、未開始、逾期未完成與鎖定卡都不顯示姓名
+ok 156 - 進行中、未開始、逾期未完成與鎖定卡都不顯示姓名
+  ---
+  duration_ms: 34.46
+  type: 'test'
+  ...
+# Subtest: 完成但沒有姓名不顯示空標籤；有姓名去頭尾空白並以文字呈現
+ok 157 - 完成但沒有姓名不顯示空標籤；有姓名去頭尾空白並以文字呈現
+  ---
+  duration_ms: 1.6745
+  type: 'test'
+  ...
+# Subtest: 選看單元也在確實完成後顯示姓名，空必做集合不誤當看完
+ok 158 - 選看單元也在確實完成後顯示姓名，空必做集合不誤當看完
+  ---
+  duration_ms: 0.682375
+  type: 'test'
+  ...
+1..158
+# tests 158
+# suites 0
+# pass 149
+# fail 9
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 33386.843209

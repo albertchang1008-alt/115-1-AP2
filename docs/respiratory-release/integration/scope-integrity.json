@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "main": "8e61f58ff7d6a44feea85cc7ec98b4a3b1c5aa4d",
+  "respiratory": "f541b296f17e352cacdddca09a161ee05a891af9",
+  "protectedMainPathsZeroDiff": [
+    "functions",
+    "firestore.rules",
+    "firestore.indexes.json",
+    "src",
+    ".github",
+    "VERSION",
+    "package.json",
+    "package-lock.json",
+    "vite.config.ts",
+    "shared/site.ts",
+    ".firebaserc",
+    "firebase.json",
+    "public/guide",
+    "public/materials/course-learning.js"
+  ],
+  "functionsRulesIndexesDiff": "",
+  "mainExistingPublicFilesUnchanged": 67,
+  "respiratorySourceFigureExcelFilesUnchanged": 142,
+  "sevenApprovedHtmlUnchanged": true,
+  "onlyNewRuntimeSource": "materials-src/widgets/oxygen-curve.js",
+  "widgetSha256": "d105171bd96c72f95a6652fe76b3c79970cafdc3505a54dcba6a1f7e9cd163a9",
+  "unmergedPaths": []
+}

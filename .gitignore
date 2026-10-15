@@ -19,3 +19,6 @@ materials-src/*/shots/
 
 # 微免驗收截圖只存本機，不納入版控或發布。
 /docs/micro-immuno-review-screenshots/
+
+# Private Google Sheets release snapshots (never commit)
+docs/sheet-backups/

@@ -1,0 +1,5 @@
+
+> course-platform@1.7.0 materials:validate-nodes
+> node --experimental-strip-types scripts/material-node-audit.mjs
+
+All 21 student materials and all 15 kit sources passed node text validation

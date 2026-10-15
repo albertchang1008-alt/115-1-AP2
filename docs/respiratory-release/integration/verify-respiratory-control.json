@@ -1,0 +1,5779 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 7,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣",
+          "lines": [
+            "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使",
+            "腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 1,
+          "samples": 253,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 2,
+          "samples": 48,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 3,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 4,
+          "samples": 99,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 5,
+          "samples": 56,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1299.9999598452919,
+          "y": 294.5757494474712,
+          "w": 264.0176793148643,
+          "h": 62.631476552862864,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1299.9999598452919,
+          "y": 436.7355025442023,
+          "w": 176.01192273591693,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1299.9999598452919,
+          "y": 724.7571844803659,
+          "w": 220.01480102539062,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 499.0418082789371,
+          "y": 842.3273749100534,
+          "w": 263.94784626207854,
+          "h": 91.71038978978207,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 501.6445400840357,
+          "y": 161.1450255544562,
+          "w": 263.94770973607115,
+          "h": 91.71037272403115,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 311.9941470497533,
+          "y": 1511.7240825452302,
+          "w": 88.00589310495477,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 311.9941470497533,
+          "y": 1723.1336493241158,
+          "w": 88.00589310495477,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 1299.9999598452919,
+          "y": 1666.4670281661183,
+          "w": 221.2380740517064,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 1299.9999598452919,
+          "y": 1789.346715023643,
+          "w": 264.0176793148643,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 489.1799203973067,
+          "y": 1343.3304475483142,
+          "w": 263.94777799907484,
+          "h": 91.71038978978207,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1099.793990285773,
+          "y": 1441.4070450632196,
+          "w": 132.46326647306742,
+          "h": 91.71025326377466,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣",
+          "x": 80.00000803094161,
+          "y": 2135.3363840203533,
+          "w": 1408.7812885485196,
+          "h": 177.79631765265214,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 3,
+          "widthCss": 380,
+          "heightCss": 453.81375640285427,
+          "clip": {
+            "x": 450,
+            "y": 684.1855460946864,
+            "width": 380,
+            "height": 453.81375640285427
+          },
+          "nonWhiteRatio": 0.6873626708984375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 4,
+          "widthCss": 380,
+          "heightCss": 321.53735439157276,
+          "clip": {
+            "x": 450,
+            "y": 1213.999067598374,
+            "width": 380,
+            "height": 321.53735439157276
+          },
+          "nonWhiteRatio": 0.98834228515625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 7,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制吸氣（赫鮑二氏反射）",
+          "lines": [
+            "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制",
+            "吸氣（赫鮑二氏反射）"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 1,
+          "samples": 253,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 2,
+          "samples": 48,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 3,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 4,
+          "samples": 99,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 5,
+          "samples": 56,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1300.0000963712994,
+          "y": 300.07259368896484,
+          "w": 264.0007500899465,
+          "h": 63.16519084729646,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1300.0000963712994,
+          "y": 444.68687960976047,
+          "w": 176.02352744654604,
+          "h": 63.16519084729646,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1300.0000963712994,
+          "y": 737.6814189710115,
+          "w": 219.99473170230263,
+          "h": 63.16519084729646,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 499.0418082789371,
+          "y": 855.2212323640522,
+          "w": 264.0006818269428,
+          "h": 94.74782040244654,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 501.59163625616776,
+          "y": 162.27774770636307,
+          "w": 264.0007500899465,
+          "h": 94.74780333669561,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 311.9882081684313,
+          "y": 1538.2359313964844,
+          "w": 88.01183198627672,
+          "h": 63.16525911030016,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 311.9882081684313,
+          "y": 1753.2956575092517,
+          "w": 88.01183198627672,
+          "h": 63.16525911030016,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 1300.0000963712994,
+          "y": 1695.6506909822162,
+          "w": 220.54916381835938,
+          "h": 63.16525911030016,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 1300.0000963712994,
+          "y": 1820.65185546875,
+          "w": 264.0007500899465,
+          "h": 63.16525911030016,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 489.1535026148746,
+          "y": 1364.874661094264,
+          "w": 264.0006818269428,
+          "h": 94.74782040244654,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1100.1900522332442,
+          "y": 1464.644590678968,
+          "w": 131.671142578125,
+          "h": 94.74782040244654,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制吸氣（赫鮑二氏反射）",
+          "x": 80.00000803094161,
+          "y": 2172.204686215049,
+          "w": 1518.0000465794612,
+          "h": 180.8659684030633,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 8,
+          "widthCss": 380,
+          "heightCss": 461.6492065869804,
+          "clip": {
+            "x": 450,
+            "y": 684.7644556705907,
+            "width": 380,
+            "height": 461.6492065869804
+          },
+          "nonWhiteRatio": 0.689300537109375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 9,
+          "widthCss": 380,
+          "heightCss": 327.08894882238235,
+          "clip": {
+            "x": 450,
+            "y": 1223.725622868239,
+            "width": 380,
+            "height": 327.08894882238235
+          },
+          "nonWhiteRatio": 0.989471435546875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 7,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "初到高山：大氣壓降低，吸入氧分壓下降，周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升",
+          "lines": [
+            "初到高山：大氣壓降低，吸入氧分壓下降，",
+            "周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 1,
+          "samples": 253,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 2,
+          "samples": 48,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 3,
+          "samples": 252,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 4,
+          "samples": 99,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 5,
+          "samples": 56,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1299.9999598452919,
+          "y": 294.5757494474712,
+          "w": 264.0176793148643,
+          "h": 62.631476552862864,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1299.9999598452919,
+          "y": 436.7355025442023,
+          "w": 176.01192273591693,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1299.9999598452919,
+          "y": 724.7571844803659,
+          "w": 220.01480102539062,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 499.0418082789371,
+          "y": 842.3273749100534,
+          "w": 263.94784626207854,
+          "h": 91.71038978978207,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 501.6445400840357,
+          "y": 161.1450255544562,
+          "w": 263.94770973607115,
+          "h": 91.71037272403115,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 311.9941470497533,
+          "y": 1511.7240825452302,
+          "w": 88.00589310495477,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 311.9941470497533,
+          "y": 1723.1336493241158,
+          "w": 88.00589310495477,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 1299.9999598452919,
+          "y": 1666.4670281661183,
+          "w": 220.53906089381167,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 1299.9999598452919,
+          "y": 1789.346715023643,
+          "w": 264.0176793148643,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 489.1799203973067,
+          "y": 1343.3304475483142,
+          "w": 263.94777799907484,
+          "h": 91.71038978978207,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1100.1959228515625,
+          "y": 1441.4070450632196,
+          "w": 131.65926481548107,
+          "h": 91.71025326377466,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "初到高山：大氣壓降低，吸入氧分壓下降，周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升",
+          "x": 80.00000803094161,
+          "y": 2135.3363840203533,
+          "w": 1515.8280543277137,
+          "h": 177.79631765265214,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 13,
+          "widthCss": 380,
+          "heightCss": 453.81375640285427,
+          "clip": {
+            "x": 450,
+            "y": 684.1855460946864,
+            "width": 380,
+            "height": 453.81375640285427
+          },
+          "nonWhiteRatio": 0.6874542236328125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 14,
+          "widthCss": 380,
+          "heightCss": 321.53735439157276,
+          "clip": {
+            "x": 450,
+            "y": 1213.999067598374,
+            "width": 380,
+            "height": 321.53735439157276
+          },
+          "nonWhiteRatio": 0.989990234375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 4,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "呼吸中樞",
+          "lines": [
+            "呼吸中樞"
+          ]
+        },
+        {
+          "label": "化學受器訊息",
+          "lines": [
+            "化學受器訊息"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "延髓"
+          ]
+        },
+        {
+          "label": "牽張受器訊息",
+          "lines": [
+            "牽張受器訊息"
+          ]
+        },
+        {
+          "label": "呼吸深度",
+          "lines": [
+            "呼吸深度"
+          ]
+        },
+        {
+          "label": "呼吸頻率",
+          "lines": [
+            "呼吸頻率"
+          ]
+        },
+        {
+          "label": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率。",
+          "lines": [
+            "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊",
+            "息，調整呼吸的深度與頻率。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 146,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 1,
+          "samples": 259,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "呼吸中樞",
+          "x": 718.0257696854441,
+          "y": 41.65716522618344,
+          "w": 263.9485971551192,
+          "h": 91.71008260626542,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "化學受器訊息",
+          "x": 135.98147342079562,
+          "y": 606.8081343801398,
+          "w": 264.0185667339124,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 1300.0000963712994,
+          "y": 340.1440349378084,
+          "w": 88.00630268297697,
+          "h": 62.631271763851764,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 1300.0000963712994,
+          "y": 463.02286850778677,
+          "w": 88.00630268297697,
+          "h": 62.631271763851764,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "牽張受器訊息",
+          "x": 1300.0000963712994,
+          "y": 971.1986421283922,
+          "w": 264.0186349969161,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸深度",
+          "x": 80.00000803094161,
+          "y": 1418.0957754034744,
+          "w": 263.99999919690583,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸頻率",
+          "x": 80.00000803094161,
+          "y": 1596.0940150210731,
+          "w": 263.99999919690583,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率。",
+          "x": 80.00000803094161,
+          "y": 1774.0923911646792,
+          "w": 1518.0000465794612,
+          "h": 177.79508891858552,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-02.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8260985525813,
+          "clip": {
+            "x": 450,
+            "y": 2351.1140305501463,
+            "width": 380,
+            "height": 474.8260985525813
+          },
+          "nonWhiteRatio": 0.8097076416015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 5,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "血液",
+          "lines": [
+            "血液"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "lines": [
+            "腦脊髓液H⁺增加"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "中樞化學受器"
+          ]
+        },
+        {
+          "label": "血中H⁺不易直接穿越",
+          "lines": [
+            "血中H⁺不易直接穿越"
+          ]
+        },
+        {
+          "label": "促進呼吸",
+          "lines": [
+            "促進呼吸"
+          ]
+        },
+        {
+          "label": "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。",
+          "lines": [
+            "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂",
+            "能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易",
+            "直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 91,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 1,
+          "samples": 61,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 2,
+          "samples": 41,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "CO₂",
+          "x": 665.9501085783305,
+          "y": 713.8048633776212,
+          "w": 87.79673526161595,
+          "h": 62.63116936934622,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血液",
+          "x": 311.9936692087274,
+          "y": 156.81189486854953,
+          "w": 88.00637094598066,
+          "h": 62.63118643509714,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 311.67918155067844,
+          "y": 289.385986328125,
+          "w": 88.3208586040296,
+          "h": 62.63113523784436,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 223.98743478875411,
+          "y": 412.2644103200812,
+          "w": 176.01260536595393,
+          "h": 62.63116936934622,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "x": 1299.9999598452919,
+          "y": 663.6236371492084,
+          "w": 309.2454689427426,
+          "h": 62.63116936934622,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 1299.9999598452919,
+          "y": 786.5020952726665,
+          "w": 264.0189080489309,
+          "h": 62.63116936934622,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血中H⁺不易直接穿越",
+          "x": 80.00000803094161,
+          "y": 1293.0929726048519,
+          "w": 594.7968493009868,
+          "h": 91.99886924342105,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "促進呼吸",
+          "x": 80.00000803094161,
+          "y": 1471.090666118421,
+          "w": 263.99999919690583,
+          "h": 91.99886924342105,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。",
+          "x": 80.00000803094161,
+          "y": 1649.0884961579975,
+          "w": 1497.5468123586554,
+          "h": 263.5903529116982,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-03.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8246323130194,
+          "clip": {
+            "x": 450,
+            "y": 2295.2321110451308,
+            "width": 380,
+            "height": 474.8246323130194
+          },
+          "nonWhiteRatio": 0.9977874755859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 2,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "頸動脈體",
+          "lines": [
+            "頸動脈體"
+          ]
+        },
+        {
+          "label": "主動脈體",
+          "lines": [
+            "主動脈體"
+          ]
+        },
+        {
+          "label": "血中H⁺",
+          "lines": [
+            "血中H⁺"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "低氧",
+          "lines": [
+            "低氧"
+          ]
+        },
+        {
+          "label": "PO₂低於約60 mmHg",
+          "lines": [
+            "PO₂低於約60 mmHg"
+          ]
+        },
+        {
+          "label": "周邊化學受器包括頸動脈體與主動脈體；感受血中 H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明顯；反應比中樞快。",
+          "lines": [
+            "周邊化學受器包括頸動脈體與主動脈體；感受血中",
+            "H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明",
+            "顯；反應比中樞快。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 652.0392006321957,
+          "y": 41.65768999802439,
+          "w": 395.92146220960115,
+          "h": 91.710406855533,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "頸動脈體",
+          "x": 1299.9999598452919,
+          "y": 305.29816075375203,
+          "w": 176.01178620990953,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "主動脈體",
+          "x": 1299.9999598452919,
+          "y": 720.4485602127878,
+          "w": 176.01178620990953,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血中H⁺",
+          "x": 80.00000803094161,
+          "y": 1418.1056052760073,
+          "w": 198.79688463712992,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 80.00000803094161,
+          "y": 1596.10521015368,
+          "w": 131.6718934711657,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低氧",
+          "x": 80.00000803094161,
+          "y": 1774.1046785053454,
+          "w": 131.99996546695107,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂低於約60 mmHg",
+          "x": 80.00000803094161,
+          "y": 1952.104283383018,
+          "w": 631.5781844289679,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器包括頸動脈體與主動脈體；感受血中 H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明顯；反應比中樞快。",
+          "x": 80.00000803094161,
+          "y": 2130.103751734683,
+          "w": 1504.9530752081619,
+          "h": 263.5930834318462,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-04.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.82941063544195,
+          "clip": {
+            "x": 450,
+            "y": 2351.1146542233787,
+            "width": 380,
+            "height": 474.82941063544195
+          },
+          "nonWhiteRatio": 0.6884765625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 4,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "赫鮑二氏反射",
+          "lines": [
+            "赫鮑二氏反射"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "延髓"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "肺牽張受器"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "避免肺過度擴張",
+          "lines": [
+            "避免肺過度擴張"
+          ]
+        },
+        {
+          "label": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。",
+          "lines": [
+            "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓",
+            "與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 132,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        },
+        {
+          "index": 1,
+          "samples": 133,
+          "marker": true,
+          "strokePx": 2.682352941176471
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "赫鮑二氏反射",
+          "x": 652.0385180021586,
+          "y": 41.65716522618344,
+          "w": 395.92282746967516,
+          "h": 91.71008260626542,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 311.9938739977385,
+          "y": 260.59932407579925,
+          "w": 88.00616615696957,
+          "h": 62.63128882960269,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 311.9938739977385,
+          "y": 383.47817471152854,
+          "w": 88.00616615696957,
+          "h": 62.63130589535361,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 223.9876395777652,
+          "y": 557.566207082648,
+          "w": 176.01240057694284,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 179.98455649928042,
+          "y": 870.442039088199,
+          "w": 220.01548365542763,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 80.00000803094161,
+          "y": 1418.0957754034744,
+          "w": 263.99999919690583,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "避免肺過度擴張",
+          "x": 80.00000803094161,
+          "y": 1596.0940150210731,
+          "w": 461.99998152883427,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。",
+          "x": 80.00000803094161,
+          "y": 1774.0923911646792,
+          "w": 1518.0000465794612,
+          "h": 177.79508891858552,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-05.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8260985525813,
+          "clip": {
+            "x": 450,
+            "y": 2504.6765305501463,
+            "width": 380,
+            "height": 474.8260985525813
+          },
+          "nonWhiteRatio": 0.70281982421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "正常範圍",
+          "lines": [
+            "正常範圍"
+          ]
+        },
+        {
+          "label": "35",
+          "lines": [
+            "35"
+          ]
+        },
+        {
+          "label": "45",
+          "lines": [
+            "45"
+          ]
+        },
+        {
+          "label": "PCO₂（mmHg）",
+          "lines": [
+            "PCO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "PCO₂＜35 mmHg",
+          "lines": [
+            "PCO₂＜35 mmHg"
+          ]
+        },
+        {
+          "label": "PCO₂＞45 mmHg",
+          "lines": [
+            "PCO₂＞45 mmHg"
+          ]
+        },
+        {
+          "label": "呼吸性鹼中毒方向",
+          "lines": [
+            "呼吸性鹼中毒方向"
+          ]
+        },
+        {
+          "label": "呼吸性酸中毒方向",
+          "lines": [
+            "呼吸性酸中毒方向"
+          ]
+        },
+        {
+          "label": "腎臟排酸留HCO₃⁻",
+          "lines": [
+            "腎臟排酸留HCO₃⁻"
+          ]
+        },
+        {
+          "label": "pH 7.35–7.45",
+          "lines": [
+            "pH 7.35–7.45"
+          ]
+        },
+        {
+          "label": "pH＝pKa＋log（HCO₃⁻/H₂CO₃）",
+          "lines": [
+            "pH＝pKa＋log（HCO₃⁻/H₂CO₃）"
+          ]
+        },
+        {
+          "label": "6.1＋log（26/1.3）≈7.4",
+          "lines": [
+            "6.1＋log（26/1.3）≈7.4"
+          ]
+        },
+        {
+          "label": "血液 pH 約 7.35–7.45；pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向。",
+          "lines": [
+            "血液 pH 約 7.35–7.45；pH＝pKa＋log",
+            "（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；",
+            "PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可",
+            "排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為",
+            "呼吸性鹼中毒方向。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 111,
+          "marker": true,
+          "strokePx": 2.682327498988264
+        },
+        {
+          "index": 1,
+          "samples": 111,
+          "marker": true,
+          "strokePx": 2.682327498988264
+        },
+        {
+          "index": 2,
+          "samples": 56,
+          "marker": true,
+          "strokePx": 2.682327498988264
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505602488870903,
+      "boxes": [
+        {
+          "label": "正常範圍",
+          "x": 718.0263157894736,
+          "y": 698.6506130820826,
+          "w": 263.9473684210526,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "35",
+          "x": 510.40384392989307,
+          "y": 825.6494261089124,
+          "w": 79.19819078947368,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "45",
+          "x": 1110.398238332648,
+          "y": 825.6494261089124,
+          "w": 79.19819078947368,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂（mmHg）",
+          "x": 597.32421875,
+          "y": 540.6521706832083,
+          "w": 505.3515625,
+          "h": 91.71049218428762,
+          "px": 29.505602488870903,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂＜35 mmHg",
+          "x": 151.11319692511307,
+          "y": 1065.6471292596113,
+          "w": 547.7817294472142,
+          "h": 91.71059457879316,
+          "px": 29.505602488870903,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂＞45 mmHg",
+          "x": 1001.1053466796875,
+          "y": 1065.6471292596113,
+          "w": 547.7815246582031,
+          "h": 91.71059457879316,
+          "px": 29.505602488870903,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性鹼中毒方向",
+          "x": 161.0566590961657,
+          "y": 1215.6457278603002,
+          "w": 527.894805105109,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性酸中毒方向",
+          "x": 1011.0486723247327,
+          "y": 1215.6457278603002,
+          "w": 527.8947368421052,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "腎臟排酸留HCO₃⁻",
+          "x": 1014.9456706799958,
+          "y": 1535.6427564119037,
+          "w": 520.1008766575864,
+          "h": 91.71052631578947,
+          "px": 29.505602488870903,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH 7.35–7.45",
+          "x": 80.00731217233758,
+          "y": 60.99942332819888,
+          "w": 428.0115589342619,
+          "h": 91.99912522968492,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH＝pKa＋log（HCO₃⁻/H₂CO₃）",
+          "x": 80.00731217233758,
+          "y": 220.99790773893656,
+          "w": 999.8654857434724,
+          "h": 91.99912522968492,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "6.1＋log（26/1.3）≈7.4",
+          "x": 80.00731217233758,
+          "y": 380.99637081748557,
+          "w": 715.1182435688219,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血液 pH 約 7.35–7.45；pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向。",
+          "x": 80.00731217233758,
+          "y": 1750.983453047903,
+          "w": 1535.4542139956825,
+          "h": 435.1833383660567,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "運動",
+          "lines": [
+            "運動"
+          ]
+        },
+        {
+          "label": "潮氣量增加",
+          "lines": [
+            "潮氣量增加"
+          ]
+        },
+        {
+          "label": "呼吸頻率增加",
+          "lines": [
+            "呼吸頻率增加"
+          ]
+        },
+        {
+          "label": "體溫升高",
+          "lines": [
+            "體溫升高"
+          ]
+        },
+        {
+          "label": "促進呼吸",
+          "lines": [
+            "促進呼吸"
+          ]
+        },
+        {
+          "label": "初到高山",
+          "lines": [
+            "初到高山"
+          ]
+        },
+        {
+          "label": "大氣壓降低",
+          "lines": [
+            "大氣壓降低"
+          ]
+        },
+        {
+          "label": "吸入氧分壓下降",
+          "lines": [
+            "吸入氧分壓下降"
+          ]
+        },
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "CO₂排出增加",
+          "lines": [
+            "CO₂排出增加"
+          ]
+        },
+        {
+          "label": "pH上升",
+          "lines": [
+            "pH上升"
+          ]
+        },
+        {
+          "label": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向；焦慮也是課本所列情境。",
+          "lines": [
+            "運動時潮氣量與頻率增加以配合需求，體溫升高也可",
+            "促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺",
+            "激周邊化學受器而換氣增加，CO₂ 排出增加，可朝",
+            "呼吸性鹼中毒方向；焦慮也是課本所列情境。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 273,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 1,
+          "samples": 156,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 2,
+          "samples": 66,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 3,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 4,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 5,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 6,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 7,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        },
+        {
+          "index": 8,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 2.6823275862068963
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50560344827586,
+      "boxes": [
+        {
+          "label": "運動",
+          "x": 359.01718541195515,
+          "y": 90.65637488114206,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "潮氣量增加",
+          "x": 315.0364243356805,
+          "y": 360.65385918868213,
+          "w": 329.9342787893195,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸頻率增加",
+          "x": 282.0430032830489,
+          "y": 590.6517149272718,
+          "w": 395.92112089458266,
+          "h": 91.71045805278577,
+          "px": 29.50560344827586,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "體溫升高",
+          "x": 293.03034330669203,
+          "y": 910.6486752158717,
+          "w": 263.9474366840563,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "促進呼吸",
+          "x": 293.03034330669203,
+          "y": 1260.6452460038033,
+          "w": 263.9474366840563,
+          "h": 91.71066284179688,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "初到高山",
+          "x": 1143.022356535259,
+          "y": 90.65637488114206,
+          "w": 263.94750494706,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓降低",
+          "x": 1110.0290720086348,
+          "y": 360.65385918868213,
+          "w": 329.9342105263158,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸入氧分壓下降",
+          "x": 1044.0420933773642,
+          "y": 630.6512411017167,
+          "w": 461.9080312628495,
+          "h": 91.71059457879316,
+          "px": 29.50560344827586,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器",
+          "x": 1077.0356509560033,
+          "y": 900.6486912777549,
+          "w": 395.9210526315789,
+          "h": 91.71059457879316,
+          "px": 29.50560344827586,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 1143.022356535259,
+          "y": 1170.6463462428042,
+          "w": 263.94750494706,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂排出增加",
+          "x": 1077.192792390522,
+          "y": 1440.6437281558387,
+          "w": 395.6064967105263,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH上升",
+          "x": 1165.9150374563117,
+          "y": 1710.6412465948806,
+          "w": 218.16200657894737,
+          "h": 91.71052631578947,
+          "px": 29.50560344827586,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向；焦慮也是課本所列情境。",
+          "x": 80.00731217233758,
+          "y": 2065.980489630448,
+          "w": 1517.9857113486842,
+          "h": 349.387391742907,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 7,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        },
+        {
+          "id": "7",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1　周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2　迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3　肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4　橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5　延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6　腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7　中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣",
+          "lines": [
+            "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使",
+            "腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 461,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 1,
+          "samples": 463,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 2,
+          "samples": 87,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 3,
+          "samples": 460,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 4,
+          "samples": 180,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 5,
+          "samples": 101,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1020.0860862272332,
+          "y": 419.5049515689712,
+          "w": 26.482726866940418,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1037.9855052534356,
+          "y": 680.4069289241929,
+          "w": 39.60396180669946,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1163.0028965961503,
+          "y": 1209.0050387095257,
+          "w": 39.60388367434582,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器",
+          "x": 89.99999402517297,
+          "y": 2022.3131478550924,
+          "w": 488.1296525518579,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 89.99999402517297,
+          "y": 2137.3113149619967,
+          "w": 369.39754026481904,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 89.99999402517297,
+          "y": 2252.3094820689007,
+          "w": 435.32421387821796,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 205.8884793017284,
+          "y": 1538.8292059840926,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 431.22023387127615,
+          "y": 288.67414198726055,
+          "w": 263.8668267123671,
+          "h": 92.16795197452407,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 746.1979647716844,
+          "y": 2951.2990193194655,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 754.1979364601963,
+          "y": 3339.293348932841,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 943.1979121932064,
+          "y": 3140.296182287745,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 970.9581811744047,
+          "y": 3458.2911112222328,
+          "w": 36.08370861375189,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 89.99999402517297,
+          "y": 3857.2852261095163,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 89.99999402517297,
+          "y": 3972.283236951713,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 89.99999402517297,
+          "y": 4087.281560323325,
+          "w": 437.1644652033427,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 89.99999402517297,
+          "y": 4202.279883694936,
+          "w": 498.2106794793922,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 1158.0666507583067,
+          "y": 2841.3008540509695,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1411.7931871529086,
+          "y": 3201.295360886907,
+          "w": 132.4133999376412,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣",
+          "x": 79.99999034835632,
+          "y": 4388.9646415250845,
+          "w": 1408.7811849203456,
+          "h": 177.7942335749247,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 363.8335389222872,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 833.7249612413285,
+            "width": 304.65882352941173,
+            "height": 363.8335389222872
+          },
+          "nonWhiteRatio": 0.6822357177734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 1,
+          "widthCss": 304.65882352941173,
+          "heightCss": 257.7843178473828,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 1298.1334185148203,
+            "width": 304.65882352941173,
+            "height": 257.7843178473828
+          },
+          "nonWhiteRatio": 0.990203857421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 7,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        },
+        {
+          "id": "7",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1　周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2　迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3　肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4　橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5　延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6　腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7　中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制吸氣（赫鮑二氏反射）",
+          "lines": [
+            "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制",
+            "吸氣（赫鮑二氏反射）"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 461,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 1,
+          "samples": 463,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 2,
+          "samples": 87,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 3,
+          "samples": 460,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 4,
+          "samples": 180,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 5,
+          "samples": 101,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1020.0860862272332,
+          "y": 419.5049515689712,
+          "w": 26.482726866940418,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1037.9855052534356,
+          "y": 680.4069289241929,
+          "w": 39.60396180669946,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1163.0028965961503,
+          "y": 1209.0050387095257,
+          "w": 39.60388367434582,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器",
+          "x": 89.99999402517297,
+          "y": 2022.3131478550924,
+          "w": 488.1296525518579,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 89.99999402517297,
+          "y": 2137.3113149619967,
+          "w": 369.39754026481904,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 89.99999402517297,
+          "y": 2252.3094820689007,
+          "w": 435.32421387821796,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 205.8884793017284,
+          "y": 1538.8292059840926,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 431.22023387127615,
+          "y": 288.67414198726055,
+          "w": 263.8668267123671,
+          "h": 92.16795197452407,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 746.1979647716844,
+          "y": 2951.2990193194655,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 754.1979364601963,
+          "y": 3339.293348932841,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 943.1979121932064,
+          "y": 3140.296182287745,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 970.9581811744047,
+          "y": 3458.2911112222328,
+          "w": 36.08370861375189,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 89.99999402517297,
+          "y": 3857.2852261095163,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 89.99999402517297,
+          "y": 3972.283236951713,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 89.99999402517297,
+          "y": 4087.281560323325,
+          "w": 436.12436731177644,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 89.99999402517297,
+          "y": 4202.279883694936,
+          "w": 497.8106418287898,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 1158.0666507583067,
+          "y": 2841.3008540509695,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1412.193224803511,
+          "y": 3201.295360886907,
+          "w": 131.61348090114365,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制吸氣（赫鮑二氏反射）",
+          "x": 79.99999034835632,
+          "y": 4388.9646415250845,
+          "w": 1517.9999018289957,
+          "h": 177.7942335749247,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 5,
+          "widthCss": 304.65882352941173,
+          "heightCss": 363.8335389222872,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 833.7249612413285,
+            "width": 304.65882352941173,
+            "height": 363.8335389222872
+          },
+          "nonWhiteRatio": 0.68243408203125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 6,
+          "widthCss": 304.65882352941173,
+          "heightCss": 257.7843178473828,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 1298.1334185148203,
+            "width": 304.65882352941173,
+            "height": 257.7843178473828
+          },
+          "nonWhiteRatio": 0.990234375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 7,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        },
+        {
+          "id": "7",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "1　周邊化學受器"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "2　迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "3　肺牽張受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "4　橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "5　延髓"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "lines": [
+            "6　腦脊髓液H⁺"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "7　中樞化學受器"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "初到高山：大氣壓降低，吸入氧分壓下降，周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升",
+          "lines": [
+            "初到高山：大氣壓降低，吸入氧分壓下降，",
+            "周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 461,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 1,
+          "samples": 463,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 2,
+          "samples": 87,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 3,
+          "samples": 460,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 4,
+          "samples": 180,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 5,
+          "samples": 101,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 1020.0860862272332,
+          "y": 419.5049515689712,
+          "w": 26.482726866940418,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 1037.9855052534356,
+          "y": 680.4069289241929,
+          "w": 39.60396180669946,
+          "h": 92.16797150761249,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 1163.0028965961503,
+          "y": 1209.0050387095257,
+          "w": 39.60388367434582,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器",
+          "x": 89.99999402517297,
+          "y": 2022.3131478550924,
+          "w": 488.76963466046806,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 89.99999402517297,
+          "y": 2137.3113149619967,
+          "w": 369.39754026481904,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 89.99999402517297,
+          "y": 2252.3094820689007,
+          "w": 435.32421387821796,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 205.8884793017284,
+          "y": 1538.8292059840926,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 431.22023387127615,
+          "y": 288.67414198726055,
+          "w": 263.8668267123671,
+          "h": 92.16795197452407,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 746.1979647716844,
+          "y": 2951.2990193194655,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 754.1979364601963,
+          "y": 3339.293348932841,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 943.1979121932064,
+          "y": 3140.296182287745,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 970.9581811744047,
+          "y": 3458.2911112222328,
+          "w": 36.08370861375189,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 89.99999402517297,
+          "y": 3857.2852261095163,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 89.99999402517297,
+          "y": 3972.283236951713,
+          "w": 237.46414644172393,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺",
+          "x": 89.99999402517297,
+          "y": 4087.281560323325,
+          "w": 436.12436731177644,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 89.99999402517297,
+          "y": 4202.279883694936,
+          "w": 497.8106418287898,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 1158.0666507583067,
+          "y": 2841.3008540509695,
+          "w": 263.86686577854385,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 1412.193224803511,
+          "y": 3201.295360886907,
+          "w": 131.61348090114365,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "初到高山：大氣壓降低，吸入氧分壓下降，周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升",
+          "x": 79.99999034835632,
+          "y": 4388.9646415250845,
+          "w": 1515.828134927405,
+          "h": 177.7942335749247,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 10,
+          "widthCss": 304.65882352941173,
+          "heightCss": 363.8335389222872,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 833.7249612413285,
+            "width": 304.65882352941173,
+            "height": 363.8335389222872
+          },
+          "nonWhiteRatio": 0.68212890625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+          "index": 11,
+          "widthCss": 304.65882352941173,
+          "heightCss": 257.7843178473828,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 1298.1334185148203,
+            "width": 304.65882352941173,
+            "height": 257.7843178473828
+          },
+          "nonWhiteRatio": 0.990234375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1148,
+            1371
+          ],
+          "decodedSize": [
+            1200,
+            1433
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 4,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "呼吸中樞",
+          "lines": [
+            "呼吸中樞"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "化學受器訊息",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "牽張受器訊息",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "1　橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "2　延髓"
+          ]
+        },
+        {
+          "label": "化學受器訊息",
+          "lines": [
+            "3　化學受器訊息"
+          ]
+        },
+        {
+          "label": "牽張受器訊息",
+          "lines": [
+            "4　牽張受器訊息"
+          ]
+        },
+        {
+          "label": "呼吸深度",
+          "lines": [
+            "呼吸深度"
+          ]
+        },
+        {
+          "label": "呼吸頻率",
+          "lines": [
+            "呼吸頻率"
+          ]
+        },
+        {
+          "label": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率。",
+          "lines": [
+            "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊",
+            "息，調整呼吸的深度與頻率。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 267,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 1,
+          "samples": 473,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "呼吸中樞",
+          "x": 718.066801507789,
+          "y": 39.31237186294005,
+          "w": 263.86639698442207,
+          "h": 92.16812777231975,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 912.7747363354787,
+          "y": 398.7305744584785,
+          "w": 26.482648734586785,
+          "h": 92.16812777231975,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 1118.4601105839374,
+          "y": 585.0386562117611,
+          "w": 39.60396180669946,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "化學受器訊息",
+          "x": 518.2996405176369,
+          "y": 888.1367143378201,
+          "w": 39.60396180669946,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "牽張受器訊息",
+          "x": 1170.3851538968374,
+          "y": 1746.896445033062,
+          "w": 39.60403993905309,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 89.99999402517297,
+          "y": 2233.5914703736826,
+          "w": 224.90245635250966,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 89.99999402517297,
+          "y": 2348.5901062747084,
+          "w": 237.46375577995576,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "化學受器訊息",
+          "x": 89.99999402517297,
+          "y": 2463.5887421757343,
+          "w": 501.25018430043417,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "牽張受器訊息",
+          "x": 89.99999402517297,
+          "y": 2578.587690606175,
+          "w": 501.25018430043417,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸深度",
+          "x": 79.99999034835632,
+          "y": 2765.264322671546,
+          "w": 264.00000330913497,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "呼吸頻率",
+          "x": 79.99999034835632,
+          "y": 2943.262325424746,
+          "w": 264.00000330913497,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率。",
+          "x": 79.99999034835632,
+          "y": 3121.260328177946,
+          "w": 1517.9999018289957,
+          "h": 177.79485863375376,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-02.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68329556203525,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2441.63649018671,
+            "width": 304.65882352941173,
+            "height": 380.68329556203525
+          },
+          "nonWhiteRatio": 0.810760498046875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 5,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "血液",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "血液",
+          "lines": [
+            "1　血液"
+          ]
+        },
+        {
+          "label": "血腦障壁",
+          "lines": [
+            "2　血腦障壁"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "3　CO₂"
+          ]
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "lines": [
+            "4　腦脊髓液H⁺增加"
+          ]
+        },
+        {
+          "label": "中樞化學受器",
+          "lines": [
+            "5　中樞化學受器"
+          ]
+        },
+        {
+          "label": "血中H⁺不易直接穿越",
+          "lines": [
+            "血中H⁺不易直接穿越"
+          ]
+        },
+        {
+          "label": "促進呼吸",
+          "lines": [
+            "促進呼吸"
+          ]
+        },
+        {
+          "label": "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。",
+          "lines": [
+            "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂",
+            "能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易",
+            "直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 166,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 1,
+          "samples": 111,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 2,
+          "samples": 74,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "CO₂",
+          "x": 526.9743632121259,
+          "y": 514.6142936614623,
+          "w": 131.61277770996094,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血液",
+          "x": 390.44858403952725,
+          "y": 261.6748625973621,
+          "w": 26.482570602233153,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 444.60981437958867,
+          "y": 811.3235473632812,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 823.7007278993906,
+          "y": 409.98936848468094,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "x": 895.0910407376577,
+          "y": 1286.8283007518355,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 1277.8987103197949,
+          "y": 1360.0631621946773,
+          "w": 39.60388367434582,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血液",
+          "x": 89.99999402517297,
+          "y": 2108.6034567959337,
+          "w": 224.34185671519086,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血腦障壁",
+          "x": 89.99999402517297,
+          "y": 2223.602717755789,
+          "w": 369.3960166839232,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 89.99999402517297,
+          "y": 2338.601978715644,
+          "w": 237.9431759018496,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "腦脊髓液H⁺增加",
+          "x": 89.99999402517297,
+          "y": 2453.601239675499,
+          "w": 569.0955541220056,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "中樞化學受器",
+          "x": 89.99999402517297,
+          "y": 2568.600500635354,
+          "w": 501.24885605042243,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血中H⁺不易直接穿越",
+          "x": 79.99999034835632,
+          "y": 2755.2780702889686,
+          "w": 594.7968793202596,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "促進呼吸",
+          "x": 79.99999034835632,
+          "y": 2933.2770106304124,
+          "w": 264.00000330913497,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。",
+          "x": 79.99999034835632,
+          "y": 3111.275638442442,
+          "w": 1497.5468830889968,
+          "h": 263.591996158462,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-03.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.6851710342779,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2518.006334104289,
+            "width": 304.65882352941173,
+            "height": 380.6851710342779
+          },
+          "nonWhiteRatio": 0.9953765869140625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 2,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "頸動脈體",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "主動脈體",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "頸動脈體",
+          "lines": [
+            "1　頸動脈體"
+          ]
+        },
+        {
+          "label": "主動脈體",
+          "lines": [
+            "2　主動脈體"
+          ]
+        },
+        {
+          "label": "血中H⁺",
+          "lines": [
+            "血中H⁺"
+          ]
+        },
+        {
+          "label": "CO₂",
+          "lines": [
+            "CO₂"
+          ]
+        },
+        {
+          "label": "低氧",
+          "lines": [
+            "低氧"
+          ]
+        },
+        {
+          "label": "PO₂低於約60 mmHg",
+          "lines": [
+            "PO₂低於約60 mmHg"
+          ]
+        },
+        {
+          "label": "周邊化學受器包括頸動脈體與主動脈體；感受血中 H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明顯；反應比中樞快。",
+          "lines": [
+            "周邊化學受器包括頸動脈體與主動脈體；感受血中",
+            "H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明",
+            "顯；反應比中樞快。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "周邊化學受器",
+          "x": 652.1409092179264,
+          "y": 39.31284065706184,
+          "w": 395.71825969650087,
+          "h": 92.1684403017343,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "頸動脈體",
+          "x": 850.6624060941031,
+          "y": 429.7759182481881,
+          "w": 26.482570602233153,
+          "h": 92.1684403017343,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "主動脈體",
+          "x": 1017.8986147225622,
+          "y": 1191.6970034679734,
+          "w": 39.60380554199219,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "頸動脈體",
+          "x": 89.99999402517297,
+          "y": 2233.6058467267508,
+          "w": 356.8345609917698,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "主動脈體",
+          "x": 89.99999402517297,
+          "y": 2348.605107686606,
+          "w": 369.3957432206855,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血中H⁺",
+          "x": 79.99999034835632,
+          "y": 2535.282989869635,
+          "w": 198.7968743565571,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂",
+          "x": 79.99999034835632,
+          "y": 2713.281930211079,
+          "w": 131.67188483548452,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "低氧",
+          "x": 79.99999034835632,
+          "y": 2891.2811830819373,
+          "w": 132.00000165456748,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂低於約60 mmHg",
+          "x": 79.99999034835632,
+          "y": 3069.280123423381,
+          "w": 631.5781535872494,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器包括頸動脈體與主動脈體；感受血中 H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明顯；反應比中樞快。",
+          "x": 79.99999034835632,
+          "y": 3247.279063764825,
+          "w": 1504.9530488898956,
+          "h": 263.59230868787654,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-04.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68568123623544,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2643.199234958506,
+            "width": 304.65882352941173,
+            "height": 380.68568123623544
+          },
+          "nonWhiteRatio": 0.6863250732421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 4,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "赫鮑二氏反射",
+          "lines": [
+            "赫鮑二氏反射"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "橋腦",
+          "lines": [
+            "1　橋腦"
+          ]
+        },
+        {
+          "label": "延髓",
+          "lines": [
+            "2　延髓"
+          ]
+        },
+        {
+          "label": "迷走神經",
+          "lines": [
+            "3　迷走神經"
+          ]
+        },
+        {
+          "label": "肺牽張受器",
+          "lines": [
+            "4　肺牽張受器"
+          ]
+        },
+        {
+          "label": "抑制吸氣",
+          "lines": [
+            "抑制吸氣"
+          ]
+        },
+        {
+          "label": "避免肺過度擴張",
+          "lines": [
+            "避免肺過度擴張"
+          ]
+        },
+        {
+          "label": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。",
+          "lines": [
+            "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓",
+            "與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 241,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        },
+        {
+          "index": 1,
+          "samples": 244,
+          "marker": true,
+          "strokePx": 1.1717647058823528
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "赫鮑二氏反射",
+          "x": 652.1402060267437,
+          "y": 39.31237186294005,
+          "w": 395.719509814159,
+          "h": 92.16812777231975,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 554.5126581766519,
+          "y": 347.7419474038733,
+          "w": 26.482648734586785,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 386.66857983692586,
+          "y": 460.3608280779368,
+          "w": 39.60396180669946,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 622.0963627459055,
+          "y": 797.7635211255177,
+          "w": 39.60396180669946,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 826.4814583651992,
+          "y": 1371.9811588884836,
+          "w": 39.60396180669946,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橋腦",
+          "x": 89.99999402517297,
+          "y": 2233.5914703736826,
+          "w": 224.3424427078431,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "延髓",
+          "x": 89.99999402517297,
+          "y": 2348.5901062747084,
+          "w": 237.46375577995576,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "迷走神經",
+          "x": 89.99999402517297,
+          "y": 2463.5887421757343,
+          "w": 369.3969542721668,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺牽張受器",
+          "x": 89.99999402517297,
+          "y": 2578.587690606175,
+          "w": 435.32351068703525,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "抑制吸氣",
+          "x": 79.99999034835632,
+          "y": 2765.264322671546,
+          "w": 264.00000330913497,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "避免肺過度擴張",
+          "x": 79.99999034835632,
+          "y": 2943.262325424746,
+          "w": 462.0000057909862,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。",
+          "x": 79.99999034835632,
+          "y": 3121.260328177946,
+          "w": 1517.9999018289957,
+          "h": 177.79485863375376,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-05.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68329556203525,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2796.76149018671,
+            "width": 304.65882352941173,
+            "height": 380.68329556203525
+          },
+          "nonWhiteRatio": 0.7076416015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "正常範圍",
+          "lines": [
+            "正常範圍"
+          ]
+        },
+        {
+          "label": "35",
+          "lines": [
+            "35"
+          ]
+        },
+        {
+          "label": "45",
+          "lines": [
+            "45"
+          ]
+        },
+        {
+          "label": "PCO₂（mmHg）",
+          "lines": [
+            "PCO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "PCO₂＜35 mmHg",
+          "lines": [
+            "PCO₂＜35 mmHg"
+          ]
+        },
+        {
+          "label": "PCO₂＞45 mmHg",
+          "lines": [
+            "PCO₂＞45 mmHg"
+          ]
+        },
+        {
+          "label": "呼吸性鹼中毒方向",
+          "lines": [
+            "呼吸性鹼中毒方向"
+          ]
+        },
+        {
+          "label": "呼吸性酸中毒方向",
+          "lines": [
+            "呼吸性酸中毒方向"
+          ]
+        },
+        {
+          "label": "腎臟排酸留HCO₃⁻",
+          "lines": [
+            "腎臟排酸留HCO₃⁻"
+          ]
+        },
+        {
+          "label": "pH 7.35–7.45",
+          "lines": [
+            "pH 7.35–7.45"
+          ]
+        },
+        {
+          "label": "pH＝pKa＋log（HCO₃⁻/H₂CO₃）",
+          "lines": [
+            "pH＝pKa＋log（HCO₃⁻/H₂CO₃）"
+          ]
+        },
+        {
+          "label": "6.1＋log（26/1.3）≈7.4",
+          "lines": [
+            "6.1＋log（26/1.3）≈7.4"
+          ]
+        },
+        {
+          "label": "血液 pH 約 7.35–7.45；pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向。",
+          "lines": [
+            "血液 pH 約 7.35–7.45；pH＝pKa＋log",
+            "（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；",
+            "PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可",
+            "排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為",
+            "呼吸性鹼中毒方向。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 111,
+          "marker": true,
+          "strokePx": 1.171742209631728
+        },
+        {
+          "index": 1,
+          "samples": 111,
+          "marker": true,
+          "strokePx": 1.171742209631728
+        },
+        {
+          "index": 2,
+          "samples": 56,
+          "marker": true,
+          "strokePx": 1.171742209631728
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.88916430594901,
+      "boxes": [
+        {
+          "label": "正常範圍",
+          "x": 718.0675828313254,
+          "y": 696.2985027267273,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "35",
+          "x": 510.40210034473836,
+          "y": 823.2960804399238,
+          "w": 79.20737668692348,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "45",
+          "x": 1110.3905229683382,
+          "y": 823.2960804399238,
+          "w": 79.20737668692348,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂（mmHg）",
+          "x": 597.4561530423452,
+          "y": 538.3016011801111,
+          "w": 505.08761578295605,
+          "h": 92.16859656644155,
+          "px": 12.88916430594901,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂＜35 mmHg",
+          "x": 151.26236145754896,
+          "y": 1063.291480742305,
+          "w": 547.4915286144578,
+          "h": 92.16851843408791,
+          "px": 12.88916430594901,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "PCO₂＞45 mmHg",
+          "x": 1001.2460317956396,
+          "y": 1063.291480742305,
+          "w": 547.4916067468115,
+          "h": 92.16851843408791,
+          "px": 12.88916430594901,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性鹼中毒方向",
+          "x": 161.1832951924887,
+          "y": 1213.2885668651168,
+          "w": 527.6496611445783,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸性酸中毒方向",
+          "x": 1011.1669655305794,
+          "y": 1213.2885668651168,
+          "w": 527.6495830122248,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "腎臟排酸留HCO₃⁻",
+          "x": 1015.087334506483,
+          "y": 1533.2824339349586,
+          "w": 519.8090013251248,
+          "h": 92.16867469879519,
+          "px": 12.88916430594901,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH 7.35–7.45",
+          "x": 80.01477689628142,
+          "y": 60.99886606974774,
+          "w": 428.0073924236987,
+          "h": 91.99818990316736,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH＝pKa＋log（HCO₃⁻/H₂CO₃）",
+          "x": 80.01477689628142,
+          "y": 220.99572147231504,
+          "w": 999.8558228274427,
+          "h": 91.998268035521,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "6.1＋log（26/1.3）≈7.4",
+          "x": 80.01477689628142,
+          "y": 380.992655007236,
+          "w": 715.1112889669029,
+          "h": 91.998268035521,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血液 pH 約 7.35–7.45；pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向。",
+          "x": 80.01477689628142,
+          "y": 1750.9663593338198,
+          "w": 1535.439355689359,
+          "h": 435.17908303134413,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "運動",
+          "lines": [
+            "運動"
+          ]
+        },
+        {
+          "label": "潮氣量增加",
+          "lines": [
+            "潮氣量增加"
+          ]
+        },
+        {
+          "label": "呼吸頻率增加",
+          "lines": [
+            "呼吸頻率增加"
+          ]
+        },
+        {
+          "label": "體溫升高",
+          "lines": [
+            "體溫升高"
+          ]
+        },
+        {
+          "label": "促進呼吸",
+          "lines": [
+            "促進呼吸"
+          ]
+        },
+        {
+          "label": "初到高山",
+          "lines": [
+            "初到高山"
+          ]
+        },
+        {
+          "label": "大氣壓降低",
+          "lines": [
+            "大氣壓降低"
+          ]
+        },
+        {
+          "label": "吸入氧分壓下降",
+          "lines": [
+            "吸入氧分壓下降"
+          ]
+        },
+        {
+          "label": "周邊化學受器",
+          "lines": [
+            "周邊化學受器"
+          ]
+        },
+        {
+          "label": "換氣增加",
+          "lines": [
+            "換氣增加"
+          ]
+        },
+        {
+          "label": "CO₂排出增加",
+          "lines": [
+            "CO₂排出增加"
+          ]
+        },
+        {
+          "label": "pH上升",
+          "lines": [
+            "pH上升"
+          ]
+        },
+        {
+          "label": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向；焦慮也是課本所列情境。",
+          "lines": [
+            "運動時潮氣量與頻率增加以配合需求，體溫升高也可",
+            "促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺",
+            "激周邊化學受器而換氣增加，CO₂ 排出增加，可朝",
+            "呼吸性鹼中毒方向；焦慮也是課本所列情境。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 273,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 1,
+          "samples": 156,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 2,
+          "samples": 66,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 3,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 4,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 5,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 6,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 7,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        },
+        {
+          "index": 8,
+          "samples": 34,
+          "marker": true,
+          "strokePx": 1.1717313218390804
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889044540229884,
+      "boxes": [
+        {
+          "label": "運動",
+          "x": 359.04590193047585,
+          "y": 88.3087020322501,
+          "w": 131.9324171686747,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "潮氣量增加",
+          "x": 315.1150485119188,
+          "y": 358.3009880709361,
+          "w": 329.79111728898016,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "呼吸頻率增加",
+          "x": 282.15194610228025,
+          "y": 588.2944313876601,
+          "w": 395.7172439759036,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "體溫升高",
+          "x": 293.07969334613847,
+          "y": 908.2853294280638,
+          "w": 263.8647562049958,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "促進呼吸",
+          "x": 293.07969334613847,
+          "y": 1258.275300910674,
+          "w": 263.8647562049958,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "初到高山",
+          "x": 1143.0553941841586,
+          "y": 88.3087020322501,
+          "w": 263.8648343373494,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓降低",
+          "x": 1110.09229177452,
+          "y": 358.3009880709361,
+          "w": 329.79103915662654,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸入氧分壓下降",
+          "x": 1044.1260831901827,
+          "y": 628.2931959772685,
+          "w": 461.72345632530124,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "周邊化學受器",
+          "x": 1077.1291112325277,
+          "y": 898.2856382806617,
+          "w": 395.7173221082573,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "換氣增加",
+          "x": 1143.0553941841586,
+          "y": 1168.278080584055,
+          "w": 263.8648343373494,
+          "h": 92.16851843408791,
+          "px": 12.889044540229884,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "CO₂排出增加",
+          "x": 1077.2892044251225,
+          "y": 1438.2702103580339,
+          "w": 395.3972138554217,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "pH上升",
+          "x": 1165.9375477986164,
+          "y": 1708.2624963967198,
+          "w": 218.10052710843374,
+          "h": 92.16867469879519,
+          "px": 12.889044540229884,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向；焦慮也是課本所列情境。",
+          "x": 80.02194553972727,
+          "y": 2065.9410040062594,
+          "w": 1517.9567727697902,
+          "h": 349.3806953889778,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

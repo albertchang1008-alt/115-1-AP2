@@ -1,0 +1,5861 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 5,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "758 mmHg"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "無氣流",
+          "lines": [
+            "無氣流"
+          ]
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "lines": [
+            "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無",
+            "氣流"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "肺內壓",
+          "x": 175.54636905067844,
+          "y": 467.92398151598474,
+          "w": 224.45367110402958,
+          "h": 140.51113329435648,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 175.54636905067844,
+          "y": 668.6830861944901,
+          "w": 224.45367110402958,
+          "h": 140.51106503135279,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 311.9940105237459,
+          "y": 869.4421908729954,
+          "w": 88.00602963096216,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1299.9998233192846,
+          "y": 226.68964285599557,
+          "w": 224.45367110402958,
+          "h": 140.51108209710372,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1299.9998233192846,
+          "y": 492.756935922723,
+          "w": 176.01192273591693,
+          "h": 62.631408289859166,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "無氣流",
+          "x": 80.00000803094161,
+          "y": 1225.7289926629317,
+          "w": 197.99998233192844,
+          "h": 91.99955187345806,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "x": 80.00000803094161,
+          "y": 1403.728187962582,
+          "w": 1484.546805933902,
+          "h": 177.79604460063732,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 2,
+          "widthCss": 355.8931497012868,
+          "heightCss": 444.7058809511452,
+          "clip": {
+            "x": 462.0534251493566,
+            "y": 684.1855144002375,
+            "width": 355.8931497012868,
+            "height": 444.7058809511452
+          },
+          "nonWhiteRatio": 0.692901611328125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 5,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "754 mmHg"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "空氣流入",
+          "lines": [
+            "空氣流入"
+          ]
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "lines": [
+            "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、",
+            "肺內壓降到 758，低於大氣壓，空氣流入"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 96,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 57,
+          "marker": true,
+          "strokePx": 3.5764705882352943
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "肺內壓",
+          "x": 171.5270433927837,
+          "y": 478.21189880371094,
+          "w": 228.47299676192432,
+          "h": 140.51106503135279,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 171.5270433927837,
+          "y": 678.9709352192126,
+          "w": 228.47299676192432,
+          "h": 140.51113329435648,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 311.9940105237459,
+          "y": 879.7301764237253,
+          "w": 88.00602963096216,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1299.9998233192846,
+          "y": 236.97759427522357,
+          "w": 224.45367110402958,
+          "h": 140.51108209710372,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1299.9998233192846,
+          "y": 481.0499673140676,
+          "w": 176.01192273591693,
+          "h": 62.631408289859166,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "空氣流入",
+          "x": 80.00000803094161,
+          "y": 1225.7289926629317,
+          "w": 263.99999919690583,
+          "h": 91.99955187345806,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "x": 80.00000803094161,
+          "y": 1403.728187962582,
+          "w": 1391.2812483938117,
+          "h": 177.79604460063732,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-02.png",
+          "index": 5,
+          "widthCss": 380,
+          "heightCss": 416.4756210071174,
+          "clip": {
+            "x": 450,
+            "y": 698.3006443722514,
+            "width": 380,
+            "height": 416.4756210071174
+          },
+          "nonWhiteRatio": 0.7068328857421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 5,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "高於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "通常較低"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "空氣流出",
+          "lines": [
+            "空氣流出"
+          ]
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "lines": [
+            "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大",
+            "氣壓，空氣流出"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 97,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 48,
+          "marker": true,
+          "strokePx": 3.5764705882352943
+        },
+        {
+          "index": 2,
+          "samples": 52,
+          "marker": true,
+          "strokePx": 3.5764705882352943
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "肺內壓",
+          "x": 179.98517086631372,
+          "y": 437.0601613898026,
+          "w": 220.01486928839432,
+          "h": 140.51120155736018,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 223.98811741879112,
+          "y": 637.8192660683079,
+          "w": 176.01192273591693,
+          "h": 140.51113329435648,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 311.9940105237459,
+          "y": 838.5783707468133,
+          "w": 88.00602963096216,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1299.9998233192846,
+          "y": 201.50194268477588,
+          "w": 224.45367110402958,
+          "h": 140.51109916285463,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1299.9998233192846,
+          "y": 499.49725903962786,
+          "w": 176.01192273591693,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流出",
+          "x": 80.00000803094161,
+          "y": 1225.7289926629317,
+          "w": 263.99999919690583,
+          "h": 91.99955187345806,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "x": 80.00000803094161,
+          "y": 1403.728187962582,
+          "w": 1518.0000465794612,
+          "h": 177.79604460063732,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-03.png",
+          "index": 8,
+          "widthCss": 380,
+          "heightCss": 416.4756210071174,
+          "clip": {
+            "x": 450,
+            "y": 698.3006443722514,
+            "width": 380,
+            "height": 416.4756210071174
+          },
+          "nonWhiteRatio": 0.61688232421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 8,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "平靜吸氣",
+          "lines": [
+            "平靜吸氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "肋間肌"
+          ]
+        },
+        {
+          "label": "平靜呼氣",
+          "lines": [
+            "平靜呼氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "用力吸氣",
+          "lines": [
+            "用力吸氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "lines": [
+            "胸鎖乳突肌"
+          ]
+        },
+        {
+          "label": "用力呼氣",
+          "lines": [
+            "用力呼氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "腹直肌",
+          "lines": [
+            "腹直肌"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "肋間肌"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "彈性回縮",
+          "lines": [
+            "彈性回縮"
+          ]
+        },
+        {
+          "label": "內肋間肌",
+          "lines": [
+            "內肋間肌"
+          ]
+        },
+        {
+          "label": "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要是吸氣肌放鬆與彈性回縮；用力吸氣可動用胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹直肌。",
+          "lines": [
+            "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要",
+            "是吸氣肌放鬆與彈性回縮；用力吸氣可動用",
+            "胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹",
+            "直肌。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 26.03764705882353,
+      "boxes": [
+        {
+          "label": "平靜吸氣",
+          "x": 718.0192283797217,
+          "y": 41.71563844320551,
+          "w": 263.9616463814767,
+          "h": 91.25244641161818,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 487.0086305895098,
+          "w": 87.97843129213003,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 1420.000043683213,
+          "y": 340.88762560137224,
+          "w": 131.96756958250495,
+          "h": 62.52482510940218,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣",
+          "x": 718.0192283797217,
+          "y": 975.2886793011462,
+          "w": 263.9616463814767,
+          "h": 91.25238194854312,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 1374.9918215317468,
+          "w": 87.97843129213003,
+          "h": 62.524954035552305,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "用力吸氣",
+          "x": 718.0192283797217,
+          "y": 1893.6652302979,
+          "w": 263.9616463814767,
+          "h": 91.25248508946322,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 2395.0685171199366,
+          "w": 87.97843129213003,
+          "h": 62.525057176472416,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "x": 1420.000043683213,
+          "y": 2066.5886152809703,
+          "w": 219.94594930417495,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "用力呼氣",
+          "x": 718.0192283797217,
+          "y": 2701.980414874037,
+          "w": 263.9616463814767,
+          "h": 91.25227880762301,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 3057.2625162113254,
+          "w": 87.97843129213003,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腹直肌",
+          "x": 148.03236094905176,
+          "y": 3194.03212075205,
+          "w": 131.96764693819503,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 1420.000043683213,
+          "y": 2995.30741575935,
+          "w": 131.96756958250495,
+          "h": 62.524644612791995,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 79.99999120268622,
+          "y": 816.561816843082,
+          "w": 263.9999890185255,
+          "h": 91.99994733745962,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "彈性回縮",
+          "x": 79.99999120268622,
+          "y": 1734.9360987395935,
+          "w": 263.9999890185255,
+          "h": 91.99984419653951,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "內肋間肌",
+          "x": 79.99999120268622,
+          "y": 3551.63778073745,
+          "w": 263.9999890185255,
+          "h": 91.9996379146993,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要是吸氣肌放鬆與彈性回縮；用力吸氣可動用胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹直肌。",
+          "x": 79.99999120268622,
+          "y": 3729.6375555262175,
+          "w": 1518.0000077659045,
+          "h": 349.3902794172465,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 5,
+          "widthCss": 650.9411764705883,
+          "heightCss": 272.55112385829557,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 2040.3059678093646,
+            "width": 650.9411764705883,
+            "height": 272.55112385829557
+          },
+          "nonWhiteRatio": 0.56072998046875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 6,
+          "widthCss": 650.9411764705883,
+          "heightCss": 263.5583232126906,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 2592.7615649118075,
+            "width": 650.9411764705883,
+            "height": 263.5583232126906
+          },
+          "nonWhiteRatio": 0.517547607421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 7,
+          "widthCss": 650.9411764705883,
+          "heightCss": 302.98829805252944,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 3136.224397487066,
+            "width": 650.9411764705883,
+            "height": 302.98829805252944
+          },
+          "nonWhiteRatio": 0.5758514404296875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 3,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 8,
+          "widthCss": 650.9411764705883,
+          "heightCss": 316.8233870822052,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 3614.5566869116947,
+            "width": 650.9411764705883,
+            "height": 316.8233870822052
+          },
+          "nonWhiteRatio": 0.493316650390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 3,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "肺內壓（肺泡壓）",
+          "lines": [
+            "肺內壓",
+            "（肺泡壓）"
+          ]
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "lines": [
+            "胸內壓",
+            "（胸膜內壓）"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓"
+          ]
+        },
+        {
+          "label": "肺間壓＝肺內壓－胸內壓",
+          "lines": [
+            "肺間壓＝肺內壓－胸內壓"
+          ]
+        },
+        {
+          "label": "相對大氣壓較低",
+          "lines": [
+            "相對大氣壓較低"
+          ]
+        },
+        {
+          "label": "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零；肺間壓＝肺內壓－胸內壓。",
+          "lines": [
+            "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓",
+            "——「負壓」是相對大氣壓而言，不是絕對壓力小於",
+            "零；肺間壓＝肺內壓－胸內壓。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "肺內壓（肺泡壓）",
+          "x": 179.9838056062397,
+          "y": 497.71484375,
+          "w": 220.01616628546464,
+          "h": 140.50976803428247,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "x": 135.98058600174753,
+          "y": 698.4716274863795,
+          "w": 264.0193858899568,
+          "h": 140.50976803428247,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1299.9999598452919,
+          "y": 240.14327400609065,
+          "w": 132.00972707648026,
+          "h": 62.63110110634251,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓＝肺內壓－胸內壓",
+          "x": 80.00000803094161,
+          "y": 1293.088603772615,
+          "w": 725.9999807257401,
+          "h": 91.99845966539884,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "相對大氣壓較低",
+          "x": 80.00000803094161,
+          "y": 1471.0857511821546,
+          "w": 461.99998152883427,
+          "h": 91.99845966539884,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零；肺間壓＝肺內壓－胸內壓。",
+          "x": 80.00000803094161,
+          "y": 1649.0827620656867,
+          "w": 1518.0000465794612,
+          "h": 263.58953375565375,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8230140971618,
+          "clip": {
+            "x": 450,
+            "y": 1955.4819967773922,
+            "width": 380,
+            "height": 474.8230140971618
+          },
+          "nonWhiteRatio": 0.6900482177734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 15,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "吸氣前",
+          "lines": [
+            "吸氣前"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "758 mmHg"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "吸氣",
+          "lines": [
+            "吸氣"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "754 mmHg"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "平靜呼氣",
+          "lines": [
+            "平靜呼氣"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "肺內壓",
+            "高於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "胸內壓",
+            "通常較低"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "橫膈"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "大氣壓",
+            "760 mmHg"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "無氣流",
+          "lines": [
+            "無氣流"
+          ]
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "lines": [
+            "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無",
+            "氣流"
+          ]
+        },
+        {
+          "label": "空氣流入",
+          "lines": [
+            "空氣流入"
+          ]
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "lines": [
+            "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、",
+            "肺內壓降到 758，低於大氣壓，空氣流入"
+          ]
+        },
+        {
+          "label": "空氣流出",
+          "lines": [
+            "空氣流出"
+          ]
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "lines": [
+            "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大",
+            "氣壓，空氣流出"
+          ]
+        },
+        {
+          "label": "肺內壓760→758 mmHg",
+          "lines": [
+            "肺內壓760→758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓758→754 mmHg",
+          "lines": [
+            "胸內壓758→754 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓低於大氣壓",
+          "lines": [
+            "肺內壓低於大氣壓"
+          ]
+        },
+        {
+          "label": "肺內壓高於大氣壓",
+          "lines": [
+            "肺內壓高於大氣壓"
+          ]
+        },
+        {
+          "label": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入；肺內壓決定與外界之間的氣流方向。",
+          "lines": [
+            "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓",
+            "760→758 mmHg，肺內壓低於大氣壓而空氣流入；",
+            "肺內壓決定與外界之間的氣流方向。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 124,
+          "marker": true,
+          "strokePx": 7.101176470588236
+        },
+        {
+          "index": 1,
+          "samples": 73,
+          "marker": true,
+          "strokePx": 4.734117647058824
+        },
+        {
+          "index": 2,
+          "samples": 125,
+          "marker": true,
+          "strokePx": 7.101176470588236
+        },
+        {
+          "index": 3,
+          "samples": 62,
+          "marker": true,
+          "strokePx": 4.734117647058824
+        },
+        {
+          "index": 4,
+          "samples": 67,
+          "marker": true,
+          "strokePx": 4.734117647058824
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 26.03764705882353,
+      "boxes": [
+        {
+          "label": "吸氣前",
+          "x": 751.0111207753479,
+          "y": 41.71558364959171,
+          "w": 197.97786159022428,
+          "h": 91.25241418008065,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 55.61801917984282,
+          "y": 721.9648327078544,
+          "w": 224.38204027786406,
+          "h": 140.4046515584229,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 55.61801917984282,
+          "y": 922.7244564837537,
+          "w": 224.38204027786406,
+          "h": 140.40470312888294,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 1123.484131830113,
+          "w": 87.97843129213003,
+          "h": 62.5247477537121,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1420.000043683213,
+          "y": 409.7783340848464,
+          "w": 224.38204027786406,
+          "h": 140.40472891411298,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1420.000043683213,
+          "y": 754.1016353053553,
+          "w": 175.95675944333996,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸氣",
+          "x": 784.0029100300541,
+          "y": 2068.024336888823,
+          "w": 131.99407679897178,
+          "h": 91.25248508946322,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 51.604599696741424,
+          "y": 2761.5874091389164,
+          "w": 228.39545976096545,
+          "h": 140.40449684704274,
+          "px": 26.03764705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 51.604599696741424,
+          "y": 2962.347084485276,
+          "w": 228.39545976096545,
+          "h": 140.40470312888294,
+          "px": 26.03764705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 3163.106759831635,
+          "w": 87.97843129213003,
+          "h": 62.525057176472416,
+          "px": 26.03764705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1420.000043683213,
+          "y": 2449.4010910125185,
+          "w": 224.38204027786406,
+          "h": 140.40449684704274,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1420.000043683213,
+          "y": 2765.260257303833,
+          "w": 175.95675944333996,
+          "h": 62.5248508946322,
+          "px": 26.03764705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣",
+          "x": 718.0191252388015,
+          "y": 4094.3335349232725,
+          "w": 263.9617495223969,
+          "h": 91.25248508946322,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 60.05390387169172,
+          "y": 4734.641030768514,
+          "w": 219.94615558601515,
+          "h": 140.40490941072315,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 104.04311951775674,
+          "y": 4935.401118678554,
+          "w": 175.95693993995013,
+          "h": 140.40449684704274,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 192.02157659511678,
+          "y": 5136.160794024912,
+          "w": 87.97843129213003,
+          "h": 62.52443833095179,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1420.000043683213,
+          "y": 4429.799790126429,
+          "w": 224.38204027786406,
+          "h": 140.40532197440356,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1420.000043683213,
+          "y": 4815.4416275782805,
+          "w": 175.95675944333996,
+          "h": 62.52526345831262,
+          "px": 26.03764705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "無氣流",
+          "x": 79.99999120268622,
+          "y": 1643.2941535358163,
+          "w": 198.00001110281667,
+          "h": 91.99984419653951,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "x": 79.99999120268622,
+          "y": 1821.2939283245837,
+          "w": 1484.5468691755716,
+          "h": 177.79658717616178,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流入",
+          "x": 79.99999120268622,
+          "y": 3669.6033515702657,
+          "w": 263.9999890185255,
+          "h": 92.00005047837972,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "x": 79.99999120268622,
+          "y": 3847.603126359033,
+          "w": 1391.2812796075111,
+          "h": 177.79638089432157,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流出",
+          "x": 79.99999120268622,
+          "y": 5695.912343322875,
+          "w": 263.9999890185255,
+          "h": 92.00005047837972,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "x": 79.99999120268622,
+          "y": 5873.9121181116425,
+          "w": 1518.0000077659045,
+          "h": 177.79679345800199,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓760→758 mmHg",
+          "x": 79.99999120268622,
+          "y": 6139.911725933462,
+          "w": 722.3906499965053,
+          "h": 92.00005047837972,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓758→754 mmHg",
+          "x": 79.99999120268622,
+          "y": 6317.911500722229,
+          "w": 722.3906499965053,
+          "h": 92.00005047837972,
+          "px": 39.0564705882353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓低於大氣壓",
+          "x": 79.99999120268622,
+          "y": 6495.911275510996,
+          "w": 528.0000296075111,
+          "h": 91.9996379146993,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓高於大氣壓",
+          "x": 79.99999120268622,
+          "y": 6673.911050299764,
+          "w": 528.0000296075111,
+          "h": 91.9996379146993,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入；肺內壓決定與外界之間的氣流方向。",
+          "x": 79.99999120268622,
+          "y": 6851.910825088531,
+          "w": 1529.9530089968005,
+          "h": 263.5931238739438,
+          "px": 39.0564705882353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 4,
+          "widthCss": 609.6460842715993,
+          "heightCss": 761.7846363348979,
+          "clip": {
+            "x": 335.1769578642004,
+            "y": 2040.3058719896005,
+            "width": 609.6460842715993,
+            "height": 761.7846363348979
+          },
+          "nonWhiteRatio": 0.6919097900390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-02.png",
+          "index": 5,
+          "widthCss": 650.9411764705883,
+          "heightCss": 713.4260101989115,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 3263.583221519065,
+            "width": 650.9411764705883,
+            "height": 713.4260101989115
+          },
+          "nonWhiteRatio": 0.70880126953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-03.png",
+          "index": 6,
+          "widthCss": 650.9411764705883,
+          "heightCss": 713.4260101989115,
+          "clip": {
+            "x": 314.52941176470586,
+            "y": 4462.6814746908885,
+            "width": 650.9411764705883,
+            "height": 713.4260101989115
+          },
+          "nonWhiteRatio": 0.6178741455078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "順應性較大",
+          "lines": [
+            "順應性較大"
+          ]
+        },
+        {
+          "label": "順應性較小",
+          "lines": [
+            "順應性較小"
+          ]
+        },
+        {
+          "label": "肺容積改變量ΔV",
+          "lines": [
+            "肺容積改變量ΔV"
+          ]
+        },
+        {
+          "label": "肺間壓改變量ΔP",
+          "lines": [
+            "肺間壓改變量ΔP"
+          ]
+        },
+        {
+          "label": "C＝ΔV/ΔP",
+          "lines": [
+            "C＝ΔV/ΔP"
+          ]
+        },
+        {
+          "label": "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較大容積變化即順應性較大；肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張。",
+          "lines": [
+            "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較",
+            "大容積變化即順應性較大；肺組織彈性與肺泡表面張",
+            "力都會影響，表面張力素降低張力、有助擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50582061068702,
+      "boxes": [
+        {
+          "label": "順應性較大",
+          "x": 1129.9994137412623,
+          "y": 355.65700731779395,
+          "w": 329.9340740003084,
+          "h": 91.71052631578947,
+          "px": 29.50582061068702,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "順應性較小",
+          "x": 1129.9994137412623,
+          "y": 825.6559793572676,
+          "w": 329.9340740003084,
+          "h": 91.71052631578947,
+          "px": 29.50582061068702,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺容積改變量ΔV",
+          "x": 608.9453125,
+          "y": 193.65734602275646,
+          "w": 482.109375,
+          "h": 91.71054338154039,
+          "px": 29.50582061068702,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓改變量ΔP",
+          "x": 408.84091828998766,
+          "y": 1303.65503411544,
+          "w": 482.318942421361,
+          "h": 91.71038978978207,
+          "px": 29.50582061068702,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "C＝ΔV/ΔP",
+          "x": 80.00157808002672,
+          "y": 60.99987130416067,
+          "w": 326.31183423494036,
+          "h": 91.99980785972193,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較大容積變化即順應性較大；肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張。",
+          "x": 80.00157808002672,
+          "y": 1508.9968390213814,
+          "w": 1517.996906481291,
+          "h": 263.5932199578536,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "肺氣腫",
+          "lines": [
+            "肺氣腫"
+          ]
+        },
+        {
+          "label": "纖維化",
+          "lines": [
+            "纖維化"
+          ]
+        },
+        {
+          "label": "順應性增加",
+          "lines": [
+            "順應性增加"
+          ]
+        },
+        {
+          "label": "回縮變差",
+          "lines": [
+            "回縮變差"
+          ]
+        },
+        {
+          "label": "氣體滯留",
+          "lines": [
+            "氣體滯留"
+          ]
+        },
+        {
+          "label": "肺餘容積增加",
+          "lines": [
+            "肺餘容積增加"
+          ]
+        },
+        {
+          "label": "順應性降低",
+          "lines": [
+            "順應性降低"
+          ]
+        },
+        {
+          "label": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加；纖維化順應性降低，需要較大壓力才能擴張。",
+          "lines": [
+            "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼",
+            "氣後氣體滯留、肺餘容積增加；纖維化順應性降低，",
+            "需要較大壓力才能擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505817819148934,
+      "boxes": [
+        {
+          "label": "正常",
+          "x": 784.0131578947368,
+          "y": 41.657651600084804,
+          "w": 131.9736842105263,
+          "h": 91.71052631578947,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫",
+          "x": 751.0197368421052,
+          "y": 1545.2535047029194,
+          "w": 197.96052631578945,
+          "h": 91.71038978978207,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "纖維化",
+          "x": 751.0197368421052,
+          "y": 3760.8477943821954,
+          "w": 197.96052631578945,
+          "h": 91.71052631578947,
+          "px": 29.505817819148934,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "順應性增加",
+          "x": 80.00171460603413,
+          "y": 3068.1809114155017,
+          "w": 329.9992651688425,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "回縮變差",
+          "x": 80.00171460603413,
+          "y": 3246.180516293174,
+          "w": 263.9993848298725,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "氣體滯留",
+          "x": 80.00171460603413,
+          "y": 3424.180121170847,
+          "w": 263.9993848298725,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺餘容積增加",
+          "x": 80.00171460603413,
+          "y": 3602.1797260485196,
+          "w": 395.9990772448088,
+          "h": 91.99968839946546,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "順應性降低",
+          "x": 80.00171460603413,
+          "y": 5281.629285310444,
+          "w": 329.9992651688425,
+          "h": 91.99941534745065,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加；纖維化順應性降低，需要較大壓力才能擴張。",
+          "x": 80.00171460603413,
+          "y": 5459.628617136102,
+          "w": 1517.9966334292762,
+          "h": 263.5934930098684,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 0,
+          "widthCss": 379.9991688829787,
+          "heightCss": 570.3202398685698,
+          "clip": {
+            "x": 450.00041555851067,
+            "y": 2135.3535194701335,
+            "width": 379.9991688829787,
+            "height": 570.3202398685698
+          },
+          "nonWhiteRatio": 0.7496185302734375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 1,
+          "widthCss": 379.9991688829787,
+          "heightCss": 570.3202398685698,
+          "clip": {
+            "x": 450.00041555851067,
+            "y": 2807.549303409901,
+            "width": 379.9991688829787,
+            "height": 570.3202398685698
+          },
+          "nonWhiteRatio": 0.786773681640625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 2,
+          "widthCss": 379.9991688829787,
+          "heightCss": 569.3568716860832,
+          "clip": {
+            "x": 450.00041555851067,
+            "y": 3798.05021894739,
+            "width": 379.9991688829787,
+            "height": 569.3568716860832
+          },
+          "nonWhiteRatio": 0.747100830078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 1,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "胸膜腔密閉",
+          "lines": [
+            "胸膜腔密閉"
+          ]
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "lines": [
+            "胸內壓低於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓更負",
+          "lines": [
+            "胸內壓更負"
+          ]
+        },
+        {
+          "label": "肺間壓增加",
+          "lines": [
+            "肺間壓增加"
+          ]
+        },
+        {
+          "label": "肺容積增加",
+          "lines": [
+            "肺容積增加"
+          ]
+        },
+        {
+          "label": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。",
+          "lines": [
+            "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴",
+            "張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "胸膜腔密閉",
+          "x": 179.98551218133224,
+          "y": 596.2075725354646,
+          "w": 220.0145279733758,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "x": 80.00000803094161,
+          "y": 1293.1081269916735,
+          "w": 527.9999983938117,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓更負",
+          "x": 80.00000803094161,
+          "y": 1471.108004921361,
+          "w": 330.00001606188323,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓增加",
+          "x": 80.00000803094161,
+          "y": 1749.1077222322162,
+          "w": 330.00001606188323,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺容積增加",
+          "x": 80.00000803094161,
+          "y": 2027.1074395430715,
+          "w": 330.00001606188323,
+          "h": 91.99996145148026,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。",
+          "x": 80.00000803094161,
+          "y": 2205.107317472759,
+          "w": 1518.0000465794612,
+          "h": 177.79659070466693,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.8302059017912,
+          "clip": {
+            "x": 450,
+            "y": 2082.654379615235,
+            "width": 380,
+            "height": 474.8302059017912
+          },
+          "nonWhiteRatio": 0.68963623046875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 5,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "橫膈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4　肺內壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5　胸內壓 758 mmHg"
+          ]
+        },
+        {
+          "label": "無氣流",
+          "lines": [
+            "無氣流"
+          ]
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "lines": [
+            "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無",
+            "氣流"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "橫膈",
+          "x": 822.4348275058242,
+          "y": 1190.7440231507085,
+          "w": 26.482570602233153,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1407.0594603756824,
+          "y": 878.2261722059136,
+          "w": 39.60388367434582,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1453.9377787027015,
+          "y": 389.9168933730528,
+          "w": 39.60388367434582,
+          "h": 92.1682449708502,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 568.4617835355093,
+          "y": 832.6506327433759,
+          "w": 39.60388367434582,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 295.0060465249671,
+          "y": 1001.9311744046499,
+          "w": 39.60392274052264,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 1984.937130112246,
+          "w": 224.3421692446054,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 2099.9359222779794,
+          "w": 369.396485478045,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 2214.9347144437124,
+          "w": 661.8254144507719,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 2329.933506609446,
+          "w": 661.8254144507719,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 2444.9327675693007,
+          "w": 661.8254144507719,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "無氣流",
+          "x": 79.99999034835632,
+          "y": 2631.6158064876695,
+          "w": 198.00000248185125,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "x": 79.99999034835632,
+          "y": 2809.6141217702843,
+          "w": 1484.5469095620765,
+          "h": 177.7951711631683,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 0,
+          "widthCss": 285.3315478515625,
+          "heightCss": 356.5339134518768,
+          "clip": {
+            "x": 52.334223094267,
+            "y": 833.7250455097087,
+            "width": 285.3315478515625,
+            "height": 356.5339134518768
+          },
+          "nonWhiteRatio": 0.689239501953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 5,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "橫膈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4　肺內壓 758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5　胸內壓 754 mmHg"
+          ]
+        },
+        {
+          "label": "空氣流入",
+          "lines": [
+            "空氣流入"
+          ]
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "lines": [
+            "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、",
+            "肺內壓降到 758，低於大氣壓，空氣流入"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 175,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 103,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "橫膈",
+          "x": 684.4632481954185,
+          "y": 1186.244927831443,
+          "w": 26.482648734586785,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1412.2680755982917,
+          "y": 856.7404781479433,
+          "w": 39.60388367434582,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1469.5636243705292,
+          "y": 408.7982016873647,
+          "w": 39.60388367434582,
+          "h": 92.1682449708502,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 503.3533119293581,
+          "y": 851.5319410576878,
+          "w": 39.60388367434582,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 225.99103536950537,
+          "y": 1020.8124045866082,
+          "w": 39.60388367434582,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 1984.937130112246,
+          "w": 224.90222195544877,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 2099.9359222779794,
+          "w": 369.396485478045,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 2214.9347144437124,
+          "w": 661.8254144507719,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 2329.933506609446,
+          "w": 667.825979209808,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 2444.9327675693007,
+          "w": 667.825979209808,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "空氣流入",
+          "x": 79.99999034835632,
+          "y": 2631.6158064876695,
+          "w": 264.00000330913497,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "x": 79.99999034835632,
+          "y": 2809.6141217702843,
+          "w": 1391.28125661827,
+          "h": 177.7951711631683,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-02.png",
+          "index": 3,
+          "widthCss": 304.65882352941173,
+          "heightCss": 333.90089303482694,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 845.0415646580045,
+            "width": 304.65882352941173,
+            "height": 333.90089303482694
+          },
+          "nonWhiteRatio": 0.707916259765625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 5,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "橫膈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4　肺內壓 高於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5　胸內壓 通常較低"
+          ]
+        },
+        {
+          "label": "空氣流出",
+          "lines": [
+            "空氣流出"
+          ]
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "lines": [
+            "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大",
+            "氣壓，空氣流出"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 176,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 87,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        },
+        {
+          "index": 2,
+          "samples": 94,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "橫膈",
+          "x": 789.8805917027486,
+          "y": 1177.0714081913593,
+          "w": 26.482570602233153,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1422.6854623082172,
+          "y": 890.596711491964,
+          "w": 39.60388367434582,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1482.5853186917593,
+          "y": 343.6903160738658,
+          "w": 39.60388367434582,
+          "h": 92.1682449708502,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 407.0511231939477,
+          "y": 871.0058832743082,
+          "w": 39.60392274052264,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 283.28650600938914,
+          "y": 929.6613256615329,
+          "w": 39.60388367434582,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 1984.937130112246,
+          "w": 224.3421692446054,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 2099.9359222779794,
+          "w": 369.396485478045,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 2214.9347144437124,
+          "w": 661.8254144507719,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 2329.933506609446,
+          "w": 655.1047428544746,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 2444.9327675693007,
+          "w": 589.178225505783,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流出",
+          "x": 79.99999034835632,
+          "y": 2631.6158064876695,
+          "w": 264.00000330913497,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "x": 79.99999034835632,
+          "y": 2809.6141217702843,
+          "w": 1517.9999018289957,
+          "h": 177.7951711631683,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-03.png",
+          "index": 6,
+          "widthCss": 304.65882352941173,
+          "heightCss": 333.90089303482694,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 845.0415646580045,
+            "width": 304.65882352941173,
+            "height": 333.90089303482694
+          },
+          "nonWhiteRatio": 0.615966796875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 8,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        },
+        {
+          "id": "7",
+          "kind": "label"
+        },
+        {
+          "id": "8",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "平靜吸氣",
+          "lines": [
+            "平靜吸氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1　橫膈"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "2　肋間肌"
+          ]
+        },
+        {
+          "label": "平靜呼氣",
+          "lines": [
+            "平靜呼氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "3　橫膈"
+          ]
+        },
+        {
+          "label": "用力吸氣",
+          "lines": [
+            "用力吸氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "4　橫膈"
+          ]
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "lines": [
+            "5　胸鎖乳突肌"
+          ]
+        },
+        {
+          "label": "用力呼氣",
+          "lines": [
+            "用力呼氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "7"
+          ]
+        },
+        {
+          "label": "腹直肌",
+          "lines": [
+            "8"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "6　橫膈"
+          ]
+        },
+        {
+          "label": "肋間肌",
+          "lines": [
+            "7　肋間肌"
+          ]
+        },
+        {
+          "label": "腹直肌",
+          "lines": [
+            "8　腹直肌"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "外肋間肌"
+          ]
+        },
+        {
+          "label": "彈性回縮",
+          "lines": [
+            "彈性回縮"
+          ]
+        },
+        {
+          "label": "內肋間肌",
+          "lines": [
+            "內肋間肌"
+          ]
+        },
+        {
+          "label": "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要是吸氣肌放鬆與彈性回縮；用力吸氣可動用胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹直肌。",
+          "lines": [
+            "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要",
+            "是吸氣肌放鬆與彈性回縮；用力吸氣可動用",
+            "胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹",
+            "直肌。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "平靜吸氣",
+          "x": 718.0671140372035,
+          "y": 39.31270880871509,
+          "w": 263.86577192559304,
+          "h": 92.16834263629224,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 822.6673493902367,
+          "y": 624.4424038622753,
+          "w": 26.482648734586785,
+          "h": 92.16832310320383,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 1146.0111411221058,
+          "y": 417.2175487840032,
+          "w": 39.60388367434582,
+          "h": 92.16832310320383,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 937.4837025102363,
+          "w": 224.90198755838787,
+          "h": 92.16828403702702,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 89.99999402517297,
+          "y": 1052.483041602445,
+          "w": 303.38964806981835,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣",
+          "x": 718.0671140372035,
+          "y": 1395.4804018319371,
+          "w": 263.86577192559304,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 816.1067319203572,
+          "y": 1915.9559502659074,
+          "w": 39.60388367434582,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 2272.100094714797,
+          "w": 237.46320885348035,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "用力吸氣",
+          "x": 718.0671140372035,
+          "y": 2615.097845606057,
+          "w": 263.86577192559304,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 819.4222783467857,
+          "y": 3279.801499699972,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "x": 948.7315580069301,
+          "y": 2813.960155808782,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 3586.21190082596,
+          "w": 237.46320885348035,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸鎖乳突肌",
+          "x": 89.99999402517297,
+          "y": 3701.2111617858154,
+          "w": 435.3225730987917,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "用力呼氣",
+          "x": 718.0671140372035,
+          "y": 3866.20950354151,
+          "w": 263.86577192559304,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 822.7379029055676,
+          "y": 4323.689122946866,
+          "w": 39.60388367434582,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 1078.1431910503343,
+          "y": 4235.825540933264,
+          "w": 36.08347421669099,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腹直肌",
+          "x": 787.9239231707103,
+          "y": 4517.651440723833,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 4870.47996061394,
+          "w": 237.46320885348035,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肋間肌",
+          "x": 89.99999402517297,
+          "y": 4985.479221573795,
+          "w": 299.9493242746376,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "腹直肌",
+          "x": 89.99999402517297,
+          "y": 5100.478170004236,
+          "w": 303.38964806981835,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 79.99999034835632,
+          "y": 1239.1629552266684,
+          "w": 264.00000330913497,
+          "h": 91.99936188847187,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "彈性回縮",
+          "x": 79.99999034835632,
+          "y": 2458.7790707507766,
+          "w": 264.00000330913497,
+          "h": 91.99944002082549,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "內肋間肌",
+          "x": 79.99999034835632,
+          "y": 5287.149489069559,
+          "w": 264.00000330913497,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要是吸氣肌放鬆與彈性回縮；用力吸氣可動用胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹直肌。",
+          "x": 79.99999034835632,
+          "y": 5465.148116881589,
+          "w": 1517.9999018289957,
+          "h": 349.3878835655121,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 127.5608009753286,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2032.4335416314811,
+            "width": 304.65882352941173,
+            "height": 127.5608009753286
+          },
+          "nonWhiteRatio": 0.5496063232421875,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 1,
+          "widthCss": 304.65882352941173,
+          "heightCss": 123.35193558573582,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2297.285116441466,
+            "width": 304.65882352941173,
+            "height": 123.35193558573582
+          },
+          "nonWhiteRatio": 0.51318359375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 2,
+          "widthCss": 304.65882352941173,
+          "heightCss": 141.80616676837604,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2535.4691763434776,
+            "width": 304.65882352941173,
+            "height": 141.80616676837604
+          },
+          "nonWhiteRatio": 0.5671234130859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 3,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+          "index": 3,
+          "widthCss": 304.65882352941173,
+          "heightCss": 148.28132870349907,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2779.804002974771,
+            "width": 304.65882352941173,
+            "height": 148.28132870349907
+          },
+          "nonWhiteRatio": 0.4781494140625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            941,
+            1672
+          ],
+          "decodedSize": [
+            1200,
+            2132
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 3,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "大氣壓",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "肺內壓（肺泡壓）",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "1　大氣壓"
+          ]
+        },
+        {
+          "label": "肺內壓（肺泡壓）",
+          "lines": [
+            "2　肺內壓（肺泡壓）"
+          ]
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "lines": [
+            "3　胸內壓（胸膜內壓）"
+          ]
+        },
+        {
+          "label": "肺間壓＝肺內壓－胸內壓",
+          "lines": [
+            "肺間壓＝肺內壓－胸內壓"
+          ]
+        },
+        {
+          "label": "相對大氣壓較低",
+          "lines": [
+            "相對大氣壓較低"
+          ]
+        },
+        {
+          "label": "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零；肺間壓＝肺內壓－胸內壓。",
+          "lines": [
+            "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓",
+            "——「負壓」是相對大氣壓而言，不是絕對壓力小於",
+            "零；肺間壓＝肺內壓－胸內壓。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "大氣壓",
+          "x": 1502.747997605657,
+          "y": 414.6105846726751,
+          "w": 26.482648734586785,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓（肺泡壓）",
+          "x": 550.732771172581,
+          "y": 887.3300759189101,
+          "w": 39.60403993905309,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "x": 258.75415802001953,
+          "y": 1068.0756810199784,
+          "w": 39.604079005229906,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 2108.58251732516,
+          "w": 290.9098406872117,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓（肺泡壓）",
+          "x": 89.99999402517297,
+          "y": 2223.580528167357,
+          "w": 633.1848673073642,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓（胸膜內壓）",
+          "x": 89.99999402517297,
+          "y": 2338.5788515389686,
+          "w": 699.11157998694,
+          "h": 92.16773711055158,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓＝肺內壓－胸內壓",
+          "x": 79.99999034835632,
+          "y": 2525.25485854551,
+          "w": 726.000048166298,
+          "h": 91.99834616787463,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "相對大氣壓較低",
+          "x": 79.99999034835632,
+          "y": 2703.2516111810523,
+          "w": 462.0000057909862,
+          "h": 91.99865869728916,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零；肺間壓＝肺內壓－胸內壓。",
+          "x": 79.99999034835632,
+          "y": 2881.2486763460092,
+          "w": 1517.9999018289957,
+          "h": 263.5894959231457,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68141017924387,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2108.803064404432,
+            "width": 304.65882352941173,
+            "height": 380.68141017924387
+          },
+          "nonWhiteRatio": 0.6920166015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 15,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        },
+        {
+          "id": "5",
+          "kind": "label"
+        },
+        {
+          "id": "6",
+          "kind": "label"
+        },
+        {
+          "id": "7",
+          "kind": "label"
+        },
+        {
+          "id": "8",
+          "kind": "label"
+        },
+        {
+          "id": "9",
+          "kind": "label"
+        },
+        {
+          "id": "10",
+          "kind": "label"
+        },
+        {
+          "id": "11",
+          "kind": "label"
+        },
+        {
+          "id": "12",
+          "kind": "label"
+        },
+        {
+          "id": "13",
+          "kind": "label"
+        },
+        {
+          "id": "14",
+          "kind": "label"
+        },
+        {
+          "id": "15",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "吸氣前",
+          "lines": [
+            "吸氣前"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "1　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "2　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "3　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "4　肺內壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "5　胸內壓 758 mmHg"
+          ]
+        },
+        {
+          "label": "吸氣",
+          "lines": [
+            "吸氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "6"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "7"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "8"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "9"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "10"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "6　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "7　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "8　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "9　肺內壓 758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "10　胸內壓 754 mmHg"
+          ]
+        },
+        {
+          "label": "平靜呼氣",
+          "lines": [
+            "平靜呼氣"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "11"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "12"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "13"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "14"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "15"
+          ]
+        },
+        {
+          "label": "橫膈",
+          "lines": [
+            "11　橫膈"
+          ]
+        },
+        {
+          "label": "外肋間肌",
+          "lines": [
+            "12　外肋間肌"
+          ]
+        },
+        {
+          "label": "大氣壓",
+          "lines": [
+            "13　大氣壓 760 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓",
+          "lines": [
+            "14　肺內壓 高於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓",
+          "lines": [
+            "15　胸內壓 通常較低"
+          ]
+        },
+        {
+          "label": "無氣流",
+          "lines": [
+            "無氣流"
+          ]
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "lines": [
+            "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無",
+            "氣流"
+          ]
+        },
+        {
+          "label": "空氣流入",
+          "lines": [
+            "空氣流入"
+          ]
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "lines": [
+            "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、",
+            "肺內壓降到 758，低於大氣壓，空氣流入"
+          ]
+        },
+        {
+          "label": "空氣流出",
+          "lines": [
+            "空氣流出"
+          ]
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "lines": [
+            "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大",
+            "氣壓，空氣流出"
+          ]
+        },
+        {
+          "label": "肺內壓760→758 mmHg",
+          "lines": [
+            "肺內壓760→758 mmHg"
+          ]
+        },
+        {
+          "label": "胸內壓758→754 mmHg",
+          "lines": [
+            "胸內壓758→754 mmHg"
+          ]
+        },
+        {
+          "label": "肺內壓低於大氣壓",
+          "lines": [
+            "肺內壓低於大氣壓"
+          ]
+        },
+        {
+          "label": "肺內壓高於大氣壓",
+          "lines": [
+            "肺內壓高於大氣壓"
+          ]
+        },
+        {
+          "label": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入；肺內壓決定與外界之間的氣流方向。",
+          "lines": [
+            "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓",
+            "760→758 mmHg，肺內壓低於大氣壓而空氣流入；",
+            "肺內壓決定與外界之間的氣流方向。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 175,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 103,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        },
+        {
+          "index": 2,
+          "samples": 176,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 3,
+          "samples": 87,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        },
+        {
+          "index": 4,
+          "samples": 94,
+          "marker": true,
+          "strokePx": 1.5623529411764705
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "吸氣前",
+          "x": 751.0705327413169,
+          "y": 39.312984713588854,
+          "w": 197.85901264971997,
+          "h": 92.16850866754372,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 822.4349056381777,
+          "y": 1315.7508666256824,
+          "w": 26.48249246987952,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1407.0596166403898,
+          "y": 1003.2310623720468,
+          "w": 39.60372740963856,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1453.9377787027015,
+          "y": 514.9189317082785,
+          "w": 39.60372740963856,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 568.4619398002166,
+          "y": 957.6552885124482,
+          "w": 39.60380554199219,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 295.0061246573207,
+          "y": 1126.936767761966,
+          "w": 39.60380554199219,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 2109.94827086667,
+          "w": 224.3415051195995,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 2224.9478443559397,
+          "w": 369.395430691271,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 2339.9477303746235,
+          "w": 661.8235392742847,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 2454.947147599186,
+          "w": 661.8235392742847,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 2569.9467210884554,
+          "w": 661.8235392742847,
+          "h": 92.16851843408791,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸氣",
+          "x": 784.0337132833091,
+          "y": 3178.9445072771555,
+          "w": 131.93257343338198,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 677.9026307255389,
+          "y": 4450.882969132389,
+          "w": 39.60380554199219,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1414.0282412609422,
+          "y": 4121.376956801817,
+          "w": 36.08339608433735,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1469.5637806352363,
+          "y": 3673.431984775038,
+          "w": 39.60372740963856,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 503.3533900617117,
+          "y": 4116.168029049793,
+          "w": 39.60380554199219,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 212.74978913456562,
+          "y": 4285.449586431664,
+          "w": 66.08637614422534,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 5249.580328148532,
+          "w": 237.46277912553535,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 5364.579276578973,
+          "w": 366.27513701657216,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 5479.578850068242,
+          "w": 661.8235392742847,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 5594.5790486163405,
+          "w": 667.8241040333209,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 5709.5786221056105,
+          "w": 694.8666492140437,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣",
+          "x": 718.0673484342644,
+          "y": 6318.575939500189,
+          "w": 263.8653031314712,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 776.6393454678088,
+          "y": 7581.341037980045,
+          "w": 52.96506307211267,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 1409.4442160732776,
+          "y": 7294.864700501224,
+          "w": 66.08637614422534,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 1469.3442287215269,
+          "y": 6747.9551016566265,
+          "w": 66.08637614422534,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 393.80991602518475,
+          "y": 7275.274731739458,
+          "w": 66.08633707804853,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 270.045337906803,
+          "y": 7333.9296272002075,
+          "w": 66.0862980118717,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "橫膈",
+          "x": 89.99999402517297,
+          "y": 8389.21144784215,
+          "w": 250.82403665565585,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "外肋間肌",
+          "x": 89.99999402517297,
+          "y": 8504.209771213762,
+          "w": 395.7979546972068,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "大氣壓",
+          "x": 89.99999402517297,
+          "y": 8619.21059482069,
+          "w": 688.2260242140437,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓",
+          "x": 89.99999402517297,
+          "y": 8734.2089181923,
+          "w": 681.5853992140437,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓",
+          "x": 89.99999402517297,
+          "y": 8849.209741799228,
+          "w": 615.6590771962361,
+          "h": 92.16867469879519,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "無氣流",
+          "x": 79.99999034835632,
+          "y": 2756.630697595068,
+          "w": 198.00000248185125,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流",
+          "x": 79.99999034835632,
+          "y": 2934.630262995341,
+          "w": 1484.5469095620765,
+          "h": 177.7961087514119,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流入",
+          "x": 79.99999034835632,
+          "y": 5896.260567171028,
+          "w": 264.00000330913497,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入",
+          "x": 79.99999034835632,
+          "y": 6074.259820041887,
+          "w": 1391.28125661827,
+          "h": 177.7961087514119,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "空氣流出",
+          "x": 79.99999034835632,
+          "y": 9035.88981168816,
+          "w": 264.00000330913497,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出",
+          "x": 79.99999034835632,
+          "y": 9213.889064559018,
+          "w": 1517.9999018289957,
+          "h": 177.7961087514119,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓760→758 mmHg",
+          "x": 79.99999034835632,
+          "y": 9479.888474797628,
+          "w": 722.3906459578549,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓758→754 mmHg",
+          "x": 79.99999034835632,
+          "y": 9657.887727668487,
+          "w": 722.3906459578549,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓低於大氣壓",
+          "x": 79.99999034835632,
+          "y": 9835.886980539346,
+          "w": 528.0000456844468,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺內壓高於大氣壓",
+          "x": 79.99999034835632,
+          "y": 10013.886233410203,
+          "w": 528.0000456844468,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入；肺內壓決定與外界之間的氣流方向。",
+          "x": 79.99999034835632,
+          "y": 10191.885486281062,
+          "w": 1529.9530580819371,
+          "h": 263.59293374670557,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 0,
+          "widthCss": 285.3315478515625,
+          "heightCss": 356.53601327845246,
+          "clip": {
+            "x": 52.334223094267,
+            "y": 2286.7774347295267,
+            "width": 285.3315478515625,
+            "height": 356.53601327845246
+          },
+          "nonWhiteRatio": 0.6895599365234375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-02.png",
+          "index": 1,
+          "widthCss": 304.65882352941173,
+          "heightCss": 333.9028595629534,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2911.245607378248,
+            "width": 304.65882352941173,
+            "height": 333.9028595629534
+          },
+          "nonWhiteRatio": 0.708770751953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-03.png",
+          "index": 2,
+          "widthCss": 304.65882352941173,
+          "heightCss": 333.9028595629534,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 3524.397155490162,
+            "width": 304.65882352941173,
+            "height": 333.9028595629534
+          },
+          "nonWhiteRatio": 0.6176605224609375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1198,
+            1313
+          ],
+          "decodedSize": [
+            1200,
+            1315
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "順應性較大",
+          "lines": [
+            "順應性較大"
+          ]
+        },
+        {
+          "label": "順應性較小",
+          "lines": [
+            "順應性較小"
+          ]
+        },
+        {
+          "label": "肺容積改變量ΔV",
+          "lines": [
+            "肺容積改變量ΔV"
+          ]
+        },
+        {
+          "label": "肺間壓改變量ΔP",
+          "lines": [
+            "肺間壓改變量ΔP"
+          ]
+        },
+        {
+          "label": "C＝ΔV/ΔP",
+          "lines": [
+            "C＝ΔV/ΔP"
+          ]
+        },
+        {
+          "label": "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較大容積變化即順應性較大；肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張。",
+          "lines": [
+            "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較",
+            "大容積變化即順應性較大；肺組織彈性與肺泡表面張",
+            "力都會影響，表面張力素降低張力、有助擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889312977099237,
+      "boxes": [
+        {
+          "label": "順應性較大",
+          "x": 1129.9978371126106,
+          "y": 353.3099714531956,
+          "w": 329.79111728898016,
+          "h": 92.16867469879519,
+          "px": 12.889312977099237,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "順應性較小",
+          "x": 1129.9978371126106,
+          "y": 823.3063939106034,
+          "w": 329.79111728898016,
+          "h": 92.16867469879519,
+          "px": 12.889312977099237,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺容積改變量ΔV",
+          "x": 609.0574011745224,
+          "y": 191.31128701818997,
+          "w": 481.8853539156627,
+          "h": 92.16867469879519,
+          "px": 12.889312977099237,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓改變量ΔP",
+          "x": 408.97880462278806,
+          "y": 1301.302788056523,
+          "w": 482.0453689759036,
+          "h": 92.16867469879519,
+          "px": 12.889312977099237,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "C＝ΔV/ΔP",
+          "x": 80.00590887414404,
+          "y": 60.99956926093044,
+          "w": 326.30998887211445,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較大容積變化即順應性較大；肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張。",
+          "x": 80.00590887414404,
+          "y": 1508.9884286903475,
+          "w": 1517.988338240658,
+          "h": 263.59168362904745,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "肺氣腫",
+          "lines": [
+            "肺氣腫"
+          ]
+        },
+        {
+          "label": "纖維化",
+          "lines": [
+            "纖維化"
+          ]
+        },
+        {
+          "label": "順應性增加",
+          "lines": [
+            "順應性增加"
+          ]
+        },
+        {
+          "label": "回縮變差",
+          "lines": [
+            "回縮變差"
+          ]
+        },
+        {
+          "label": "氣體滯留",
+          "lines": [
+            "氣體滯留"
+          ]
+        },
+        {
+          "label": "肺餘容積增加",
+          "lines": [
+            "肺餘容積增加"
+          ]
+        },
+        {
+          "label": "順應性降低",
+          "lines": [
+            "順應性降低"
+          ]
+        },
+        {
+          "label": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加；纖維化順應性降低，需要較大壓力才能擴張。",
+          "lines": [
+            "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼",
+            "氣後氣體滯留、肺餘容積增加；纖維化順應性降低，",
+            "需要較大壓力才能擴張。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        },
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889386367536034,
+      "boxes": [
+        {
+          "label": "正常",
+          "x": 784.0337914156627,
+          "y": 39.31303598794592,
+          "w": 131.9324171686747,
+          "h": 92.16866493225098,
+          "px": 12.889386367536034,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫",
+          "x": 751.0706890060242,
+          "y": 1542.9092774908227,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889386367536034,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "纖維化",
+          "x": 751.0706890060242,
+          "y": 3758.5040540580294,
+          "w": 197.8586219879518,
+          "h": 92.16867469879519,
+          "px": 12.889386367536034,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "順應性增加",
+          "x": 80.00151392925217,
+          "y": 3068.1815825312974,
+          "w": 329.99934001141287,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "回縮變差",
+          "x": 80.00151392925217,
+          "y": 3246.18114793157,
+          "w": 263.9994954488364,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "氣體滯留",
+          "x": 80.00151392925217,
+          "y": 3424.180713331843,
+          "w": 263.9994954488364,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺餘容積增加",
+          "x": 80.00151392925217,
+          "y": 3602.180278732116,
+          "w": 395.9992236401662,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "順應性降低",
+          "x": 80.00151392925217,
+          "y": 5281.630219608905,
+          "w": 329.99934001141287,
+          "h": 91.99990881494729,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加；纖維化順應性降低，需要較大壓力才能擴張。",
+          "x": 80.00151392925217,
+          "y": 5459.630097538592,
+          "w": 1517.9969327995577,
+          "h": 263.59293374670557,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 0,
+          "widthCss": 165.99967291523677,
+          "heightCss": 249.13994826203597,
+          "clip": {
+            "x": 112.0001635423816,
+            "y": 2513.3401311440425,
+            "width": 165.99967291523677,
+            "height": 249.13994826203597
+          },
+          "nonWhiteRatio": 0.747100830078125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 1,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 1,
+          "widthCss": 165.99967291523677,
+          "heightCss": 249.13994826203597,
+          "clip": {
+            "x": 112.0001635423816,
+            "y": 2806.9836161995718,
+            "width": 165.99967291523677,
+            "height": 249.13994826203597
+          },
+          "nonWhiteRatio": 0.786895751953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        },
+        {
+          "plateIndex": 2,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+          "index": 2,
+          "widthCss": 165.99967291523677,
+          "heightCss": 248.71910838583355,
+          "clip": {
+            "x": 112.0001635423816,
+            "y": 3239.6762151986504,
+            "width": 165.99967291523677,
+            "height": 248.71910838583355
+          },
+          "nonWhiteRatio": 0.7512054443359375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1774,
+            887
+          ],
+          "decodedSize": [
+            1200,
+            600
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 1,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "胸膜腔密閉",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "胸膜腔密閉",
+          "lines": [
+            "1　胸膜腔密閉"
+          ]
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "lines": [
+            "胸內壓低於大氣壓"
+          ]
+        },
+        {
+          "label": "胸內壓更負",
+          "lines": [
+            "胸內壓更負"
+          ]
+        },
+        {
+          "label": "肺間壓增加",
+          "lines": [
+            "肺間壓增加"
+          ]
+        },
+        {
+          "label": "肺容積增加",
+          "lines": [
+            "肺容積增加"
+          ]
+        },
+        {
+          "label": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。",
+          "lines": [
+            "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴",
+            "張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "胸膜腔密閉",
+          "x": 265.3148536222527,
+          "y": 1068.0867758141944,
+          "w": 26.482570602233153,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸膜腔密閉",
+          "x": 89.99999402517297,
+          "y": 2108.604081854763,
+          "w": 422.7611564728151,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓低於大氣壓",
+          "x": 79.99999034835632,
+          "y": 2295.2816515083773,
+          "w": 528.0000456844468,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "胸內壓更負",
+          "x": 79.99999034835632,
+          "y": 2473.280591849821,
+          "w": 330.00000413641874,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "肺間壓增加",
+          "x": 79.99999034835632,
+          "y": 2751.278631371188,
+          "w": 330.00000413641874,
+          "h": 91.99959628553276,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "肺容積增加",
+          "x": 79.99999034835632,
+          "y": 3029.2769834219694,
+          "w": 330.00000413641874,
+          "h": 91.99928375611823,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。",
+          "x": 79.99999034835632,
+          "y": 3207.2756112339985,
+          "w": 1517.9999018289957,
+          "h": 177.79579622199736,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.68525701936306,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2617.4907124125875,
+            "width": 304.65882352941173,
+            "height": 380.68525701936306
+          },
+          "nonWhiteRatio": 0.691680908203125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

@@ -1,0 +1,339 @@
+{
+  "slug": "lungs-pleura",
+  "version": "v1",
+  "experience": "guided",
+  "title": "肺與胸膜",
+  "subtitle": "右肺三葉、左肺兩葉，外有胸膜包覆；肺泡由三種細胞組成，表面張力素讓大小肺泡都能維持擴張。",
+  "label": "肺與胸膜｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "右 3 左 2",
+      "label": "肺葉"
+    },
+    {
+      "value": "第二型",
+      "label": "分泌表面張力素"
+    },
+    {
+      "value": "P＝2T/r",
+      "label": "拉普拉斯關係"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "lungs-pleura-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "表面張力相同",
+        "explain": "表面張力相同：小肺泡半徑小、所需壓力較大，較易塌陷"
+      },
+      {
+        "id": "state-2",
+        "label": "有表面張力素",
+        "explain": "有表面張力素：表面張力降低，小肺泡也能維持擴張"
+      },
+      {
+        "id": "state-3",
+        "label": "表面張力素不足（早產兒）",
+        "explain": "表面張力素不足（早產兒）：肺泡不易維持擴張，呼吸費力"
+      }
+    ],
+    "predict": {
+      "question": "表面張力相同時，半徑較小的肺泡？",
+      "options": [
+        "所需壓力較大、較易塌陷",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "P＝2T/r；張力固定時半徑越小，所需壓力越大，越易塌陷。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "lungs-pleura-node-01",
+      "tag": "01",
+      "title": "肺葉與肺裂",
+      "summary": "右肺上、中、下三葉，以水平裂與斜裂分隔",
+      "figure": "lungs-pleura-node-01.svg",
+      "concept": "右肺上、中、下三葉，以水平裂與斜裂分隔；左肺上、下兩葉，以斜裂分隔；左肺前緣有心切跡；肺尖在上，肺底接近橫膈。",
+      "points": [
+        "左肺上、下兩葉，以斜裂分隔",
+        "左肺前緣有心切跡",
+        "肺尖在上，肺底接近橫膈"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "用右側水平裂、左側心切跡辨認左右肺。"
+      },
+      "sources": [
+        "lung-lobes；AB-05_13 p.7–8"
+      ],
+      "reference": "lung-lobes；AB-05_13 p.7–8"
+    },
+    {
+      "id": "lungs-pleura-node-02",
+      "tag": "02",
+      "title": "肺門與肺根",
+      "summary": "肺門位於肺的內側面，是支氣管、肺血管、淋巴管與神經進出肺的區域",
+      "figure": "lungs-pleura-node-02.svg",
+      "concept": "肺門位於肺的內側面，是支氣管、肺血管、淋巴管與神經進出肺的區域；進出肺門的構造合稱肺根。",
+      "points": [
+        "肺門在肺內側，是管道與神經的進出區。",
+        "進出肺門的構造合稱肺根。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "肺門不在肺尖或肺底。"
+      },
+      "sources": [
+        "hilum-of-lung；p.7–8, 10"
+      ],
+      "reference": "hilum-of-lung；p.7–8, 10"
+    },
+    {
+      "id": "lungs-pleura-node-03",
+      "tag": "03",
+      "title": "胸膜",
+      "summary": "臟層胸膜覆蓋肺表面，壁層胸膜貼胸腔壁",
+      "figure": "lungs-pleura-node-03.svg",
+      "concept": "臟層胸膜覆蓋肺表面，壁層胸膜貼胸腔壁；兩層之間是密閉的胸膜腔，壓力通常低於大氣壓，讓肺能隨胸廓擴張。",
+      "points": [
+        "臟層貼肺表面，壁層貼胸腔壁。",
+        "密閉胸膜腔通常維持低於大氣壓的壓力。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "胸膜腔在肺的外面，不是氣體交換場所。"
+      },
+      "sources": [
+        "pleura；AB-05_13 p.8；CH06 p.6, 8–9"
+      ],
+      "reference": "pleura；AB-05_13 p.8；CH06 p.6, 8–9"
+    },
+    {
+      "id": "lungs-pleura-node-04",
+      "tag": "04",
+      "title": "肺泡三種細胞",
+      "summary": "第一型細胞為單層鱗狀上皮，構成肺泡壁連續內襯、參與氣體交換",
+      "figure": "lungs-pleura-node-04.svg",
+      "concept": "第一型細胞為單層鱗狀上皮，構成肺泡壁連續內襯、參與氣體交換；第二型細胞（中隔細胞）分泌表面張力素；肺泡巨噬細胞（灰塵細胞）清除肺泡內灰塵與碎片。",
+      "points": [
+        "第二型細胞（中隔細胞）分泌表面張力素",
+        "肺泡巨噬細胞（灰塵細胞）清除肺泡內灰塵與碎片"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "分泌表面張力素的是第二型細胞，不是第一型細胞或肺泡巨噬細胞。"
+      },
+      "sources": [
+        "alveolar-cells；AB-05_13 p.11；CH06 p.19"
+      ],
+      "reference": "alveolar-cells；AB-05_13 p.11；CH06 p.19"
+    },
+    {
+      "id": "lungs-pleura-node-05",
+      "tag": "05",
+      "title": "呼吸膜",
+      "summary": "肺泡氣體與微血管血液之間的薄層，由肺泡側依序為第一型肺泡細胞、其基底膜、間質、微血管基底膜、內皮細胞",
+      "figure": "lungs-pleura-node-05.svg",
+      "concept": "肺泡氣體與微血管血液之間的薄層，由肺泡側依序為第一型肺泡細胞、其基底膜、間質、微血管基底膜、內皮細胞；生理課本描述厚度通常不超過 0.5 μm，薄且面積廣利於擴散。",
+      "points": [
+        "呼吸膜連接肺泡內襯與微血管內皮。",
+        "厚度通常不超過 0.5 μm，薄且面積廣。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "肺水腫或纖維化使膜變厚，妨礙氣體交換。"
+      },
+      "sources": [
+        "respiratory-membrane；CH06 p.19–21"
+      ],
+      "reference": "respiratory-membrane；CH06 p.19–21"
+    },
+    {
+      "id": "lungs-pleura-node-06",
+      "tag": "06",
+      "title": "表面張力素與拉普拉斯關係",
+      "summary": "P＝2T/r，張力相同時小肺泡較易塌陷",
+      "figure": "lungs-pleura-node-06.svg",
+      "concept": "P＝2T/r，張力相同時小肺泡較易塌陷；表面張力素降低表面張力，減少塌陷傾向、幫助肺泡擴張與維持，並提高肺順應性。",
+      "points": [
+        "同張力下，半徑小的肺泡較易塌陷。",
+        "表面張力素降低張力並提高順應性。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "早產兒表面張力素不足可造成呼吸窘迫；成人肺泡壁受損、表面張力素作用降低也會影響肺功能。"
+      },
+      "sources": [
+        "surfactant、ards；CH06 p.19–20"
+      ],
+      "reference": "surfactant、ards；CH06 p.19–20"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "lungs-pleura-foundation-q01",
+      "stem": "右肺的分葉？",
+      "options": [
+        "兩葉，以斜裂分隔",
+        "三葉，只以水平裂分隔",
+        "兩葉，以水平裂分隔",
+        "三葉，以水平裂與斜裂分隔"
+      ],
+      "answer": 3,
+      "hint": "數右肺的裂線，再看分成幾個區域。",
+      "explain": "右肺由水平裂與斜裂分成上、中、下三葉。",
+      "nodeId": "lungs-pleura-node-01"
+    },
+    {
+      "id": "lungs-pleura-foundation-q02",
+      "stem": "心切跡位於？",
+      "options": [
+        "左肺前緣",
+        "右肺前緣",
+        "右肺底",
+        "左肺尖"
+      ],
+      "answer": 0,
+      "hint": "從左右肺的前緣找凹口。",
+      "explain": "心切跡位於左肺前緣；左肺只有上、下兩葉。",
+      "nodeId": "lungs-pleura-node-01"
+    },
+    {
+      "id": "lungs-pleura-foundation-q03",
+      "stem": "覆蓋在肺表面的胸膜？",
+      "options": [
+        "壁層胸膜",
+        "臟層胸膜",
+        "縱膈",
+        "橫膈"
+      ],
+      "answer": 1,
+      "hint": "分清貼肺表面與貼胸腔壁的兩層。",
+      "explain": "臟層胸膜覆蓋肺表面，壁層胸膜貼胸腔壁。",
+      "nodeId": "lungs-pleura-node-03"
+    },
+    {
+      "id": "lungs-pleura-foundation-q04",
+      "stem": "構成肺泡壁連續內襯、參與氣體交換的是？",
+      "options": [
+        "第二型肺泡細胞",
+        "肺泡巨噬細胞",
+        "第一型肺泡細胞",
+        "杯狀細胞"
+      ],
+      "answer": 2,
+      "hint": "氣體交換需要薄而連續的肺泡內襯。",
+      "explain": "第一型肺泡細胞是單層鱗狀上皮，構成連續內襯並參與氣體交換。",
+      "nodeId": "lungs-pleura-node-04"
+    },
+    {
+      "id": "lungs-pleura-foundation-q05",
+      "stem": "分泌表面張力素的是？",
+      "options": [
+        "第一型肺泡細胞",
+        "肺泡巨噬細胞",
+        "微血管內皮細胞",
+        "第二型肺泡細胞"
+      ],
+      "answer": 3,
+      "hint": "將分泌功能與氣體交換、清除功能分開。",
+      "explain": "第二型肺泡細胞分泌表面張力素；第一型參與交換，巨噬細胞負責清除。",
+      "nodeId": "lungs-pleura-node-04"
+    },
+    {
+      "id": "lungs-pleura-foundation-q06",
+      "stem": "呼吸膜不包括？",
+      "options": [
+        "第二型肺泡細胞",
+        "第一型肺泡細胞",
+        "微血管內皮細胞",
+        "基底膜"
+      ],
+      "answer": 0,
+      "hint": "沿肺泡到微血管列出薄層的順序。",
+      "explain": "呼吸膜包括第一型細胞、基底膜、間質與微血管內皮；第二型細胞不在這個薄層序列中。",
+      "nodeId": "lungs-pleura-node-05"
+    }
+  ],
+  "cases": [
+    {
+      "id": "lungs-pleura-case-q01",
+      "stem": "【模型觀察】依 P＝2T/r，表面張力相同時哪顆肺泡較易塌陷？",
+      "options": [
+        "半徑較大的肺泡",
+        "半徑較小的肺泡",
+        "兩者一樣",
+        "與半徑無關"
+      ],
+      "answer": 1,
+      "hint": "在張力固定時，看半徑在公式的分子還是分母。",
+      "explain": "P＝2T/r；張力相同時半徑越小所需壓力越大，較易塌陷。",
+      "nodeId": "lungs-pleura-node-06"
+    },
+    {
+      "id": "lungs-pleura-case-q02",
+      "stem": "【生理判讀】早產兒呼吸困難，最可能與哪種細胞分泌不足有關？",
+      "options": [
+        "第一型肺泡細胞",
+        "肺泡巨噬細胞",
+        "第二型肺泡細胞",
+        "纖毛柱狀細胞"
+      ],
+      "answer": 2,
+      "hint": "先想表面張力素不足會如何影響肺泡擴張。",
+      "explain": "表面張力素降低張力，幫助肺泡擴張與維持；不足時塌陷傾向增加。",
+      "nodeId": "lungs-pleura-node-06"
+    },
+    {
+      "id": "lungs-pleura-case-q03",
+      "stem": "【生理判讀】肺纖維化使呼吸膜變厚，最直接的影響？",
+      "options": [
+        "氣體擴散加快",
+        "肺葉數目減少",
+        "表面張力素增加",
+        "氣體擴散變慢"
+      ],
+      "answer": 3,
+      "hint": "比較薄膜與厚膜的擴散條件。",
+      "explain": "呼吸膜薄且面積廣利於擴散；膜變厚會使氣體擴散變慢。",
+      "nodeId": "lungs-pleura-node-05"
+    },
+    {
+      "id": "lungs-pleura-case-q04",
+      "stem": "【模型觀察】吸入的灰塵到達肺泡後，主要由誰清除？",
+      "options": [
+        "肺泡巨噬細胞",
+        "第二型肺泡細胞",
+        "第一型肺泡細胞",
+        "紅血球"
+      ],
+      "answer": 0,
+      "hint": "分清肺泡壁細胞與腔內清除細胞的功能。",
+      "explain": "肺泡巨噬細胞清除肺泡內的灰塵與碎片。",
+      "nodeId": "lungs-pleura-node-04"
+    },
+    {
+      "id": "lungs-pleura-case-q05",
+      "stem": "【模型觀察】肺標本內側面，支氣管與肺血管進出的區域？",
+      "options": [
+        "肺尖",
+        "肺門",
+        "肺底",
+        "心切跡"
+      ],
+      "answer": 1,
+      "hint": "找出肺內側面讓多種構造進出的區域。",
+      "explain": "肺門是支氣管、肺血管、淋巴管與神經進出肺的區域；進出的構造合稱肺根。",
+      "nodeId": "lungs-pleura-node-02"
+    }
+  ],
+  "credits": [
+    "解剖學 AB-05_13 p.7–11；生理學 CH06 p.6, 8–9, 19–21。"
+  ]
+}

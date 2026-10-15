@@ -1,0 +1,2674 @@
+{
+  "slug": "lung-function",
+  "focusStyle": "red",
+  "anchorCoordinates": "original PNG pixels",
+  "figures": {
+    "node-03": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3506
+      ],
+      "fontSize": 66,
+      "red": [
+        "傳導區",
+        "終末細支氣管",
+        "呼吸性細支氣管",
+        "呼吸區"
+      ],
+      "labels": [
+        {
+          "label": "鼻腔",
+          "anchor": [
+            236,
+            105
+          ],
+          "textPosition": [
+            398.1283422459893,
+            242.98930481283423
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            398.1283422459893,
+            220.98930481283423
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "傳導區",
+          "anchor": [
+            980,
+            415
+          ],
+          "textPosition": [
+            1432.566844919786,
+            674.0053475935829
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            1432.566844919786,
+            652.0053475935829
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "終末細支氣管",
+          "anchor": [
+            830,
+            778
+          ],
+          "textPosition": [
+            1224.0106951871658,
+            1178.711229946524
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            1224.0106951871658,
+            1156.711229946524
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "anchor": [
+            826,
+            853
+          ],
+          "textPosition": [
+            1123.4491978609626,
+            1377.9893048128342
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            1218.4491978609626,
+            1260.9893048128342
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "肺泡",
+          "anchor": [
+            683,
+            1209
+          ],
+          "textPosition": [
+            1019.6256684491979,
+            1777.9625668449198
+          ],
+          "align": "middle",
+          "lines": [
+            "5"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            1019.6256684491979,
+            1755.9625668449198
+          ],
+          "number": 5,
+          "plate": 0
+        },
+        {
+          "label": "呼吸區",
+          "anchor": [
+            980,
+            1110
+          ],
+          "textPosition": [
+            1432.566844919786,
+            1640.3155080213903
+          ],
+          "align": "middle",
+          "lines": [
+            "6"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "svgAnchor": [
+            1432.566844919786,
+            1618.3155080213903
+          ],
+          "number": 6,
+          "plate": 0
+        },
+        {
+          "label": "鼻腔",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2180.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "1　鼻腔"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "傳導區",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2295.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "2　傳導區"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "終末細支氣管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2410.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "3　終末細支氣管"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "呼吸性細支氣管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2525.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "4　呼吸性細支氣管"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "肺泡",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2640.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "5　肺泡"
+          ],
+          "renderAs": "number-key",
+          "number": 5
+        },
+        {
+          "label": "呼吸區",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2755.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "6　呼吸區"
+          ],
+          "renderAs": "number-key",
+          "number": 6
+        },
+        {
+          "label": "不交換氣體",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2854.3048128342243
+          ],
+          "lines": [
+            "不交換氣體"
+          ]
+        },
+        {
+          "label": "氣體交換",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3032.3048128342243
+          ],
+          "lines": [
+            "氣體交換"
+          ]
+        },
+        {
+          "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3210.3048128342243
+          ],
+          "lines": [
+            "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 75,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "上段末端灰色環帶不要標成軟骨。",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [],
+      "notes": [
+        "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3506
+          ],
+          "fontSize": 66,
+          "red": [
+            "傳導區",
+            "終末細支氣管",
+            "呼吸性細支氣管",
+            "呼吸區"
+          ],
+          "labels": [
+            {
+              "label": "鼻腔",
+              "anchor": [
+                236,
+                105
+              ],
+              "textPosition": [
+                398.1283422459893,
+                242.98930481283423
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                398.1283422459893,
+                220.98930481283423
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "傳導區",
+              "anchor": [
+                980,
+                415
+              ],
+              "textPosition": [
+                1432.566844919786,
+                674.0053475935829
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1432.566844919786,
+                652.0053475935829
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "終末細支氣管",
+              "anchor": [
+                830,
+                778
+              ],
+              "textPosition": [
+                1224.0106951871658,
+                1178.711229946524
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1224.0106951871658,
+                1156.711229946524
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "呼吸性細支氣管",
+              "anchor": [
+                826,
+                853
+              ],
+              "textPosition": [
+                1123.4491978609626,
+                1377.9893048128342
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1218.4491978609626,
+                1260.9893048128342
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                683,
+                1209
+              ],
+              "textPosition": [
+                1019.6256684491979,
+                1777.9625668449198
+              ],
+              "align": "middle",
+              "lines": [
+                "5"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1019.6256684491979,
+                1755.9625668449198
+              ],
+              "number": 5,
+              "plate": 0
+            },
+            {
+              "label": "呼吸區",
+              "anchor": [
+                980,
+                1110
+              ],
+              "textPosition": [
+                1432.566844919786,
+                1640.3155080213903
+              ],
+              "align": "middle",
+              "lines": [
+                "6"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1432.566844919786,
+                1618.3155080213903
+              ],
+              "number": 6,
+              "plate": 0
+            },
+            {
+              "label": "鼻腔",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2180.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "1　鼻腔"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "傳導區",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2295.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "2　傳導區"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "終末細支氣管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2410.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "3　終末細支氣管"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "呼吸性細支氣管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2525.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "4　呼吸性細支氣管"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "肺泡",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2640.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "5　肺泡"
+              ],
+              "renderAs": "number-key",
+              "number": 5
+            },
+            {
+              "label": "呼吸區",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2755.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "6　呼吸區"
+              ],
+              "renderAs": "number-key",
+              "number": 6
+            },
+            {
+              "label": "不交換氣體",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2854.3048128342243
+              ],
+              "lines": [
+                "不交換氣體"
+              ]
+            },
+            {
+              "label": "氣體交換",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3032.3048128342243
+              ],
+              "lines": [
+                "氣體交換"
+              ]
+            },
+            {
+              "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3210.3048128342243
+              ],
+              "lines": [
+                "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 75,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "上段末端灰色環帶不要標成軟骨。",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [],
+          "notes": [
+            "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            1954
+          ],
+          "fontSize": 66,
+          "red": [
+            "傳導區",
+            "終末細支氣管",
+            "呼吸性細支氣管",
+            "呼吸區"
+          ],
+          "labels": [
+            {
+              "label": "鼻腔",
+              "anchor": [
+                236,
+                105
+              ],
+              "textPosition": [
+                400,
+                154.54545454545456
+              ],
+              "align": "end",
+              "lines": [
+                "鼻腔"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                603.7878787878788,
+                154.54545454545456
+              ],
+              "plate": 0
+            },
+            {
+              "label": "傳導區",
+              "anchor": [
+                980,
+                415
+              ],
+              "textPosition": [
+                1300,
+                389.3939393939394
+              ],
+              "align": "start",
+              "lines": [
+                "傳導區"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1167.4242424242425,
+                389.3939393939394
+              ],
+              "plate": 0
+            },
+            {
+              "label": "終末細支氣管",
+              "anchor": [
+                830,
+                778
+              ],
+              "textPosition": [
+                1300,
+                664.3939393939394
+              ],
+              "align": "start",
+              "lines": [
+                "終末細支氣管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1053.7878787878788,
+                664.3939393939394
+              ],
+              "plate": 0
+            },
+            {
+              "label": "呼吸性細支氣管",
+              "anchor": [
+                826,
+                853
+              ],
+              "textPosition": [
+                1300,
+                787.2739393939394
+              ],
+              "align": "start",
+              "lines": [
+                "呼吸性細支氣管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1050.7575757575758,
+                721.2121212121212
+              ],
+              "plate": 0
+            },
+            {
+              "label": "呼吸區",
+              "anchor": [
+                980,
+                1110
+              ],
+              "textPosition": [
+                1300,
+                915.9090909090909
+              ],
+              "align": "start",
+              "lines": [
+                "呼吸區"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                1167.4242424242425,
+                915.9090909090909
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                683,
+                1209
+              ],
+              "textPosition": [
+                1300,
+                1038.7890909090909
+              ],
+              "align": "start",
+              "lines": [
+                "肺泡"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "svgAnchor": [
+                942.4242424242424,
+                990.9090909090909
+              ],
+              "plate": 0
+            },
+            {
+              "label": "不交換氣體",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1301.6690909090908
+              ],
+              "lines": [
+                "不交換氣體"
+              ]
+            },
+            {
+              "label": "氣體交換",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1479.6690909090908
+              ],
+              "lines": [
+                "氣體交換"
+              ]
+            },
+            {
+              "label": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1657.6690909090908
+              ],
+              "lines": [
+                "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 75,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "上段末端灰色環帶不要標成軟骨。",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [],
+          "notes": [
+            "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "overview-state-1": {
+      "state": "state-1",
+      "viewBox": [
+        1700,
+        2179
+      ],
+      "fontSize": 66,
+      "red": [
+        "淺快",
+        "肺泡通氣量"
+      ],
+      "labels": [
+        {
+          "label": "淺快",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "淺快"
+          ]
+        },
+        {
+          "label": "TV 150 mL／VD 150 mL／F 40 次/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            223
+          ],
+          "lines": [
+            "TV 150 mL／VD 150 mL／F 40 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            489
+          ],
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            733
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            858
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "死腔通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1133
+          ],
+          "align": "start",
+          "lines": [
+            "死腔通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1408
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1617
+          ],
+          "lines": [
+            "總通氣量 6000／死腔通氣量 6000／肺泡通氣量 0 mL/min"
+          ]
+        },
+        {
+          "label": "淺快 150 mL×40 次 → 肺泡通氣 0",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1883
+          ],
+          "lines": [
+            "淺快 150 mL×40 次 → 肺泡通氣 0"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "淺快 150 mL×40 次 → 肺泡通氣 0"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "總通氣量",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "死腔通氣量",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣量",
+          "value": 0,
+          "max": 6000,
+          "width": 0.0,
+          "unit": "mL/min"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "overview-state-2": {
+      "state": "state-2",
+      "viewBox": [
+        1700,
+        2179
+      ],
+      "fontSize": 66,
+      "red": [
+        "一般",
+        "肺泡通氣量"
+      ],
+      "labels": [
+        {
+          "label": "一般",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "一般"
+          ]
+        },
+        {
+          "label": "TV 500 mL／VD 150 mL／F 12 次/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            223
+          ],
+          "lines": [
+            "TV 500 mL／VD 150 mL／F 12 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            489
+          ],
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            733
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            858
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "死腔通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1133
+          ],
+          "align": "start",
+          "lines": [
+            "死腔通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1408
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1617
+          ],
+          "lines": [
+            "總通氣量 6000／死腔通氣量 1800／肺泡通氣量 4200 mL/min"
+          ]
+        },
+        {
+          "label": "一般 500 mL×12 次 → 4200 mL/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1883
+          ],
+          "lines": [
+            "一般 500 mL×12 次 → 4200 mL/min"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "一般 500 mL×12 次 → 4200 mL/min"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "總通氣量",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "死腔通氣量",
+          "value": 1800,
+          "max": 6000,
+          "width": 450.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣量",
+          "value": 4200,
+          "max": 6000,
+          "width": 1050.0,
+          "unit": "mL/min"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "overview-state-3": {
+      "state": "state-3",
+      "viewBox": [
+        1700,
+        2179
+      ],
+      "fontSize": 66,
+      "red": [
+        "深慢",
+        "肺泡通氣量"
+      ],
+      "labels": [
+        {
+          "label": "深慢",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "深慢"
+          ]
+        },
+        {
+          "label": "TV 1000 mL／VD 150 mL／F 6 次/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            223
+          ],
+          "lines": [
+            "TV 1000 mL／VD 150 mL／F 6 次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            489
+          ],
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            733
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            858
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "死腔通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1133
+          ],
+          "align": "start",
+          "lines": [
+            "死腔通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣量",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1408
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣量"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1617
+          ],
+          "lines": [
+            "總通氣量 6000／死腔通氣量 900／肺泡通氣量 5100 mL/min"
+          ]
+        },
+        {
+          "label": "深慢 1000 mL×6 次 → 5100 mL/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1883
+          ],
+          "lines": [
+            "深慢 1000 mL×6 次 → 5100 mL/min"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "深慢 1000 mL×6 次 → 5100 mL/min"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "總通氣量",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "死腔通氣量",
+          "value": 900,
+          "max": 6000,
+          "width": 225.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣量",
+          "value": 5100,
+          "max": 6000,
+          "width": 1275.0,
+          "unit": "mL/min"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-01": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3057
+      ],
+      "fontSize": 66,
+      "red": [
+        "肺餘容積RV 1200 mL",
+        "呼氣儲備容積ERV 1200 mL",
+        "潮氣容積TV 500 mL",
+        "吸氣儲備容積IRV 3100 mL"
+      ],
+      "labels": [
+        {
+          "label": "課本男性示例",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "課本男性示例"
+          ]
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "anchor": null,
+          "textPosition": [
+            1200,
+            1553.0
+          ],
+          "align": "start",
+          "lines": [
+            "RV 1200"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "anchor": null,
+          "textPosition": [
+            1200,
+            1289.0
+          ],
+          "align": "start",
+          "lines": [
+            "ERV 1200"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "anchor": null,
+          "textPosition": [
+            1200,
+            1102.0
+          ],
+          "align": "start",
+          "lines": [
+            "TV 500"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "anchor": null,
+          "textPosition": [
+            1200,
+            706.0
+          ],
+          "align": "start",
+          "lines": [
+            "IRV 3100"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "textPosition": [
+            215,
+            1683.0
+          ],
+          "align": "end",
+          "lines": [
+            "0"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "1200",
+          "anchor": null,
+          "textPosition": [
+            215,
+            1419.0
+          ],
+          "align": "end",
+          "lines": [
+            "1200"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "2400",
+          "anchor": null,
+          "textPosition": [
+            215,
+            1155.0
+          ],
+          "align": "end",
+          "lines": [
+            "2400"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "2900",
+          "anchor": null,
+          "textPosition": [
+            215,
+            1045.0
+          ],
+          "align": "end",
+          "lines": [
+            "2900"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "6000",
+          "anchor": null,
+          "textPosition": [
+            215,
+            363.0
+          ],
+          "align": "end",
+          "lines": [
+            "6000"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "容積（mL）",
+          "anchor": null,
+          "textPosition": [
+            650,
+            298
+          ],
+          "align": "middle",
+          "lines": [
+            "容積（mL）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "時間",
+          "anchor": null,
+          "textPosition": [
+            650,
+            1773.0
+          ],
+          "align": "middle",
+          "lines": [
+            "時間"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "潮氣容積TV 500 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1873.0
+          ],
+          "lines": [
+            "潮氣容積TV 500 mL"
+          ]
+        },
+        {
+          "label": "吸氣儲備容積IRV 3100 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2051.0
+          ],
+          "lines": [
+            "吸氣儲備容積IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "呼氣儲備容積ERV 1200 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2229.0
+          ],
+          "lines": [
+            "呼氣儲備容積ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "肺餘容積RV 1200 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2407.0
+          ],
+          "lines": [
+            "肺餘容積RV 1200 mL"
+          ]
+        },
+        {
+          "label": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2585.0
+          ],
+          "lines": [
+            "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。"
+      ],
+      "data": [
+        {
+          "type": "volume-band",
+          "label": "RV",
+          "low": 0,
+          "high": 1200,
+          "height": 264.0,
+          "scale": 0.22
+        },
+        {
+          "type": "volume-band",
+          "label": "ERV",
+          "low": 1200,
+          "high": 2400,
+          "height": 264.0,
+          "scale": 0.22
+        },
+        {
+          "type": "volume-band",
+          "label": "TV",
+          "low": 2400,
+          "high": 2900,
+          "height": 110.0,
+          "scale": 0.22
+        },
+        {
+          "type": "volume-band",
+          "label": "IRV",
+          "low": 2900,
+          "high": 6000,
+          "height": 682.0,
+          "scale": 0.22
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-02": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3085
+      ],
+      "fontSize": 66,
+      "red": [
+        "IC＝TV＋IRV＝3600 mL",
+        "FRC＝ERV＋RV＝2400 mL",
+        "VC＝IRV＋TV＋ERV＝4800 mL",
+        "TLC＝VC＋RV＝6000 mL"
+      ],
+      "labels": [
+        {
+          "label": "IC＝TV＋IRV＝3600 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "IC＝TV＋IRV＝3600 mL"
+          ]
+        },
+        {
+          "label": "FRC＝ERV＋RV＝2400 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            398
+          ],
+          "lines": [
+            "FRC＝ERV＋RV＝2400 mL"
+          ]
+        },
+        {
+          "label": "VC＝IRV＋TV＋ERV＝4800 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            751
+          ],
+          "lines": [
+            "VC＝IRV＋TV＋ERV＝4800 mL"
+          ]
+        },
+        {
+          "label": "TLC＝VC＋RV＝6000 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1104
+          ],
+          "lines": [
+            "TLC＝VC＋RV＝6000 mL"
+          ]
+        },
+        {
+          "label": "TV 500 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1457
+          ],
+          "lines": [
+            "TV 500 mL"
+          ]
+        },
+        {
+          "label": "IRV 3100 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1635
+          ],
+          "lines": [
+            "IRV 3100 mL"
+          ]
+        },
+        {
+          "label": "ERV 1200 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1813
+          ],
+          "lines": [
+            "ERV 1200 mL"
+          ]
+        },
+        {
+          "label": "RV 1200 mL",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1991
+          ],
+          "lines": [
+            "RV 1200 mL"
+          ]
+        },
+        {
+          "label": "平靜呼氣末FRC",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2169
+          ],
+          "lines": [
+            "平靜呼氣末FRC"
+          ]
+        },
+        {
+          "label": "平靜吸氣末FRC＋TV",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2347
+          ],
+          "lines": [
+            "平靜吸氣末FRC＋TV"
+          ]
+        },
+        {
+          "label": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2525
+          ],
+          "lines": [
+            "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。"
+      ],
+      "data": [
+        {
+          "type": "segment",
+          "label": "TV",
+          "value": 500,
+          "max": 6000,
+          "width": 125.0,
+          "offset": 3100,
+          "x": 855.0
+        },
+        {
+          "type": "segment",
+          "label": "IRV",
+          "value": 3100,
+          "max": 6000,
+          "width": 775.0,
+          "offset": 0,
+          "x": 80.0
+        },
+        {
+          "type": "segment",
+          "label": "ERV",
+          "value": 1200,
+          "max": 6000,
+          "width": 300.0,
+          "offset": 3600,
+          "x": 980.0
+        },
+        {
+          "type": "segment",
+          "label": "RV",
+          "value": 1200,
+          "max": 6000,
+          "width": 300.0,
+          "offset": 4800,
+          "x": 1280.0
+        },
+        {
+          "type": "segment",
+          "label": "IRV",
+          "value": 3100,
+          "max": 6000,
+          "width": 775.0,
+          "offset": 0,
+          "x": 80.0
+        },
+        {
+          "type": "segment",
+          "label": "TV",
+          "value": 500,
+          "max": 6000,
+          "width": 125.0,
+          "offset": 3100,
+          "x": 855.0
+        },
+        {
+          "type": "segment",
+          "label": "ERV",
+          "value": 1200,
+          "max": 6000,
+          "width": 300.0,
+          "offset": 3600,
+          "x": 980.0
+        },
+        {
+          "type": "segment",
+          "label": "IRV",
+          "value": 3100,
+          "max": 6000,
+          "width": 775.0,
+          "offset": 0,
+          "x": 80.0
+        },
+        {
+          "type": "segment",
+          "label": "TV",
+          "value": 500,
+          "max": 6000,
+          "width": 125.0,
+          "offset": 3100,
+          "x": 855.0
+        },
+        {
+          "type": "segment",
+          "label": "ERV",
+          "value": 1200,
+          "max": 6000,
+          "width": 300.0,
+          "offset": 3600,
+          "x": 980.0
+        },
+        {
+          "type": "segment",
+          "label": "RV",
+          "value": 1200,
+          "max": 6000,
+          "width": 300.0,
+          "offset": 4800,
+          "x": 1280.0
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-04": {
+      "state": null,
+      "viewBox": [
+        1700,
+        2498
+      ],
+      "fontSize": 66,
+      "red": [
+        "VD 150 mL",
+        "VA＝（TV－VD）×F",
+        "肺泡通氣4200 mL/min"
+      ],
+      "labels": [
+        {
+          "label": "每次容積（mL／次）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "每次容積（mL／次）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "TV 500 mL",
+          "anchor": null,
+          "textPosition": [
+            70,
+            236
+          ],
+          "align": "start",
+          "lines": [
+            "TV 500 mL"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "VD 150 mL",
+          "anchor": null,
+          "textPosition": [
+            70,
+            511
+          ],
+          "align": "start",
+          "lines": [
+            "VD 150 mL"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "到達肺泡350 mL",
+          "anchor": null,
+          "textPosition": [
+            70,
+            786
+          ],
+          "align": "start",
+          "lines": [
+            "到達肺泡350 mL"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "F 12次/min",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            995
+          ],
+          "lines": [
+            "F 12次/min"
+          ]
+        },
+        {
+          "label": "VA＝（TV－VD）×F",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1173
+          ],
+          "lines": [
+            "VA＝（TV－VD）×F"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1417
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1542
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣6000 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1817
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2026
+          ],
+          "lines": [
+            "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "TV 500 mL",
+          "value": 500,
+          "max": 500,
+          "width": 1500.0,
+          "unit": "mL／次"
+        },
+        {
+          "type": "bar",
+          "label": "VD 150 mL",
+          "value": 150,
+          "max": 500,
+          "width": 450.0,
+          "unit": "mL／次"
+        },
+        {
+          "type": "bar",
+          "label": "到達肺泡350 mL",
+          "value": 350,
+          "max": 500,
+          "width": 1050.0,
+          "unit": "mL／次"
+        },
+        {
+          "type": "bar",
+          "label": "總通氣6000 mL/min",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣4200 mL/min",
+          "value": 4200,
+          "max": 6000,
+          "width": 1050.0,
+          "unit": "mL/min"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-05": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3076
+      ],
+      "fontSize": 66,
+      "red": [
+        "肺泡通氣0 mL/min",
+        "肺泡通氣4200 mL/min",
+        "肺泡通氣5100 mL/min"
+      ],
+      "labels": [
+        {
+          "label": "淺快150×40",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "淺快150×40"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            289
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            414
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣6000 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣0 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            689
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣0 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "一般500×12",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            898
+          ],
+          "lines": [
+            "一般500×12"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1142
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1267
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣6000 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣4200 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1542
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣4200 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "深慢1000×6",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1751
+          ],
+          "lines": [
+            "深慢1000×6"
+          ]
+        },
+        {
+          "label": "每分鐘通氣量（mL/min）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1995
+          ],
+          "align": "middle",
+          "lines": [
+            "每分鐘通氣量（mL/min）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣6000 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            2120
+          ],
+          "align": "start",
+          "lines": [
+            "總通氣6000 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡通氣5100 mL/min",
+          "anchor": null,
+          "textPosition": [
+            70,
+            2395
+          ],
+          "align": "start",
+          "lines": [
+            "肺泡通氣5100 mL/min"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2604
+          ],
+          "lines": [
+            "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "總通氣6000 mL/min",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣0 mL/min",
+          "value": 0,
+          "max": 6000,
+          "width": 0.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "總通氣6000 mL/min",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣4200 mL/min",
+          "value": 4200,
+          "max": 6000,
+          "width": 1050.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "總通氣6000 mL/min",
+          "value": 6000,
+          "max": 6000,
+          "width": 1500.0,
+          "unit": "mL/min"
+        },
+        {
+          "type": "bar",
+          "label": "肺泡通氣5100 mL/min",
+          "value": 5100,
+          "max": 6000,
+          "width": 1275.0,
+          "unit": "mL/min"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-06": {
+      "state": null,
+      "viewBox": [
+        1700,
+        2933
+      ],
+      "fontSize": 66,
+      "red": [
+        "FEV₁",
+        "FVC",
+        "4/5＝0.8",
+        "1/2.8≈0.36",
+        "2.5/2.8≈0.89"
+      ],
+      "labels": [
+        {
+          "label": "課本示範數值",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "課本示範數值"
+          ]
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "textPosition": [
+            210,
+            1363
+          ],
+          "align": "end",
+          "lines": [
+            "0"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "1",
+          "anchor": null,
+          "textPosition": [
+            210,
+            1163
+          ],
+          "align": "end",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "4",
+          "anchor": null,
+          "textPosition": [
+            210,
+            563
+          ],
+          "align": "end",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "5",
+          "anchor": null,
+          "textPosition": [
+            210,
+            363
+          ],
+          "align": "end",
+          "lines": [
+            "5"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "呼出容積（L）",
+          "anchor": null,
+          "textPosition": [
+            650,
+            298
+          ],
+          "align": "middle",
+          "lines": [
+            "呼出容積（L）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "1",
+          "anchor": null,
+          "textPosition": [
+            450,
+            1443
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "時間（秒）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1443
+          ],
+          "align": "middle",
+          "lines": [
+            "時間（秒）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "textPosition": [
+            1180,
+            365
+          ],
+          "align": "start",
+          "lines": [
+            "正常"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "阻塞性",
+          "anchor": null,
+          "textPosition": [
+            1180,
+            913.0
+          ],
+          "align": "start",
+          "lines": [
+            "阻塞性"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "限制性",
+          "anchor": null,
+          "textPosition": [
+            1180,
+            673.0
+          ],
+          "align": "start",
+          "lines": [
+            "限制性"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "型態",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1553
+          ],
+          "lines": [
+            "型態"
+          ]
+        },
+        {
+          "label": "FEV₁",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            400,
+            1553
+          ],
+          "lines": [
+            "FEV₁"
+          ]
+        },
+        {
+          "label": "FVC",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            750,
+            1553
+          ],
+          "lines": [
+            "FVC"
+          ]
+        },
+        {
+          "label": "FEV₁/FVC",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            1100,
+            1553
+          ],
+          "lines": [
+            "FEV₁/FVC"
+          ]
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1713
+          ],
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "4 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            400,
+            1713
+          ],
+          "lines": [
+            "4 L"
+          ]
+        },
+        {
+          "label": "5 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            750,
+            1713
+          ],
+          "lines": [
+            "5 L"
+          ]
+        },
+        {
+          "label": "4/5＝0.8",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            1100,
+            1713
+          ],
+          "lines": [
+            "4/5＝0.8"
+          ]
+        },
+        {
+          "label": "阻塞性",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1873
+          ],
+          "lines": [
+            "阻塞性"
+          ]
+        },
+        {
+          "label": "1 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            400,
+            1873
+          ],
+          "lines": [
+            "1 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            750,
+            1873
+          ],
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "1/2.8≈0.36",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            1100,
+            1873
+          ],
+          "lines": [
+            "1/2.8≈0.36"
+          ]
+        },
+        {
+          "label": "限制性",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2033
+          ],
+          "lines": [
+            "限制性"
+          ]
+        },
+        {
+          "label": "2.5 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            400,
+            2033
+          ],
+          "lines": [
+            "2.5 L"
+          ]
+        },
+        {
+          "label": "2.8 L",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            750,
+            2033
+          ],
+          "lines": [
+            "2.8 L"
+          ]
+        },
+        {
+          "label": "2.5/2.8≈0.89",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            1100,
+            2033
+          ],
+          "lines": [
+            "2.5/2.8≈0.89"
+          ]
+        },
+        {
+          "label": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2373
+          ],
+          "lines": [
+            "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。"
+      ],
+      "data": [
+        {
+          "type": "FEV curve",
+          "series": "正常",
+          "atOneSecond": 4,
+          "plateau": 5,
+          "atOneSecondXY": [
+            450,
+            543
+          ],
+          "plateauXY": [
+            1050,
+            343
+          ],
+          "scale": 200,
+          "zeroY": 1343,
+          "model": "FVC*(1-(1-t/T)^p)",
+          "T": 4,
+          "p": 5.594501939997886,
+          "monotonic": true,
+          "concave": true
+        },
+        {
+          "type": "FEV curve",
+          "series": "阻塞性",
+          "atOneSecond": 1,
+          "plateau": 2.8,
+          "atOneSecondXY": [
+            450,
+            1143
+          ],
+          "plateauXY": [
+            1050,
+            783.0
+          ],
+          "scale": 200,
+          "zeroY": 1343,
+          "model": "FVC*(1-(1-t/T)^p)",
+          "T": 4,
+          "p": 1.535836934548975,
+          "monotonic": true,
+          "concave": true
+        },
+        {
+          "type": "FEV curve",
+          "series": "限制性",
+          "atOneSecond": 2.5,
+          "plateau": 2.8,
+          "atOneSecondXY": [
+            450,
+            843.0
+          ],
+          "plateauXY": [
+            1050,
+            783.0
+          ],
+          "scale": 200,
+          "zeroY": 1343,
+          "model": "FVC*(1-(1-t/T)^p)",
+          "T": 4,
+          "p": 7.764099453508604,
+          "monotonic": true,
+          "concave": true
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    }
+  }
+}

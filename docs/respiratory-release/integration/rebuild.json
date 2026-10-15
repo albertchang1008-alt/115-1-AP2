@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "cleanTrackedFilesOnly": true,
+  "materials": [
+    {
+      "slug": "airway-structure",
+      "ok": true,
+      "sha256": "c18846a7fd6025239665ba7741feb4f628a7097e106f4b9dedbbcbdeb0a042d3"
+    },
+    {
+      "slug": "lungs-pleura",
+      "ok": true,
+      "sha256": "ae5aa0d3de7235caff3b0dd6058aaf92063a0efbacc58e7ed7f03062743b7b68"
+    },
+    {
+      "slug": "breathing-mechanics",
+      "ok": true,
+      "sha256": "8a41c590f9535ea8de297c1b8cbba7dd67e501845ce2934c8d5acfe2bfc40c5c"
+    },
+    {
+      "slug": "lung-function",
+      "ok": true,
+      "sha256": "e1001a47de4f218766c9eab03369408a370b66b96c776990ed35e10b3ad112ad"
+    },
+    {
+      "slug": "gas-exchange",
+      "ok": true,
+      "sha256": "f60cf821936442ca0411ec5600236239233849e7819b0077dbaf63139d1953f1"
+    },
+    {
+      "slug": "o2-co2-transport",
+      "ok": true,
+      "sha256": "a1df02b24dceea2a0d79c5e0d022b77dc38faa962aba22a2a901135315f9e773"
+    },
+    {
+      "slug": "respiratory-control",
+      "ok": true,
+      "sha256": "04f4c21b038826707805b591501429ff92772958cb6735a03ec997421eab36f5"
+    }
+  ]
+}

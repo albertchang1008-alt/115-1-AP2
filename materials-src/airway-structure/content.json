@@ -1,0 +1,338 @@
+{
+  "slug": "airway-structure",
+  "version": "v1",
+  "experience": "guided",
+  "title": "呼吸道的構造",
+  "subtitle": "從鼻咽、喉到氣管與支氣管樹，認識空氣進入肺之前經過的通道與支撐構造。",
+  "label": "呼吸道的構造｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "3 段",
+      "label": "咽：鼻咽、口咽、喉咽"
+    },
+    {
+      "value": "9 塊",
+      "label": "喉軟骨"
+    },
+    {
+      "value": "C 形",
+      "label": "氣管透明軟骨環"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "airway-structure-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "鼻咽",
+        "explain": "鼻咽：耳咽管開口在此，軟腭是鼻咽與口咽的分界參考"
+      },
+      {
+        "id": "state-2",
+        "label": "喉",
+        "explain": "喉：甲狀軟骨形成喉結，杓狀軟骨與聲帶相連，吞嚥時會厭蓋住喉入口"
+      },
+      {
+        "id": "state-3",
+        "label": "氣管",
+        "explain": "氣管：C 形透明軟骨環缺口朝後方食道，內襯偽複層纖毛柱狀上皮"
+      }
+    ],
+    "predict": {
+      "question": "吞嚥時食物沒有誤入氣管，主要是哪個構造蓋住喉入口？",
+      "options": [
+        "會厭",
+        "聲帶",
+        "軟腭",
+        "甲狀軟骨"
+      ],
+      "answer": 0,
+      "feedback": "吞嚥時喉上提，會厭蓋住喉入口，防止食物誤入氣管。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "airway-structure-node-01",
+      "tag": "01",
+      "title": "咽的三段",
+      "summary": "咽分鼻咽、口咽、喉咽",
+      "figure": "airway-structure-node-01.svg",
+      "concept": "咽分鼻咽、口咽、喉咽；鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分；口咽與喉咽是空氣和食物的共同通路。",
+      "points": [
+        "鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分",
+        "口咽與喉咽是空氣和食物的共同通路"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "咽與喉不是同一構造。"
+      },
+      "sources": [
+        "pharynx-divisions；AB-05_13 p.3–5"
+      ],
+      "reference": "pharynx-divisions；AB-05_13 p.3–5"
+    },
+    {
+      "id": "airway-structure-node-02",
+      "tag": "02",
+      "title": "耳咽管",
+      "summary": "開口在鼻咽，連通中耳",
+      "figure": "airway-structure-node-02.svg",
+      "concept": "開口在鼻咽，連通中耳；使鼓膜兩側壓力較能平衡；不連到外耳道。",
+      "points": [
+        "使鼓膜兩側壓力較能平衡",
+        "不連到外耳道"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "搭飛機或電梯時耳朵悶脹，可用耳咽管平衡中耳壓力來解釋。"
+      },
+      "sources": [
+        "auditory-tube；p.3–4"
+      ],
+      "reference": "auditory-tube；p.3–4"
+    },
+    {
+      "id": "airway-structure-node-03",
+      "tag": "03",
+      "title": "喉軟骨",
+      "summary": "喉位於喉咽下、氣管上",
+      "figure": "airway-structure-node-03.svg",
+      "concept": "喉位於喉咽下、氣管上；九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨；甲狀軟骨形成喉結。",
+      "points": [
+        "九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨",
+        "甲狀軟骨形成喉結"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "甲狀軟骨不是甲狀腺。"
+      },
+      "sources": [
+        "laryngeal-cartilage；p.4–5, 20–21"
+      ],
+      "reference": "laryngeal-cartilage；p.4–5, 20–21"
+    },
+    {
+      "id": "airway-structure-node-04",
+      "tag": "04",
+      "title": "聲帶與會厭",
+      "summary": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲",
+      "figure": "airway-structure-node-04.svg",
+      "concept": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲；吞嚥時喉上提、會厭蓋住喉入口，防止食物誤入氣管。",
+      "points": [
+        "聲帶負責發音，與杓狀軟骨相連。",
+        "吞嚥時喉上提，會厭保護喉入口。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "會厭負責吞嚥保護，不是發音的聲帶。"
+      },
+      "sources": [
+        "laryngeal-cartilage；p.4–5, 20–21"
+      ],
+      "reference": "laryngeal-cartilage；p.4–5, 20–21"
+    },
+    {
+      "id": "airway-structure-node-05",
+      "tag": "05",
+      "title": "氣管",
+      "summary": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支",
+      "figure": "airway-structure-node-05.svg",
+      "concept": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支；16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連；內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣。",
+      "points": [
+        "16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連",
+        "內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "課本記載吸菸可抑制纖毛活動數小時，清除黏液更依賴咳嗽。"
+      },
+      "sources": [
+        "trachea；p.8–10"
+      ],
+      "reference": "trachea；p.8–10"
+    },
+    {
+      "id": "airway-structure-node-06",
+      "tag": "06",
+      "title": "主支氣管與支氣管樹",
+      "summary": "氣管分成左、右主支氣管",
+      "figure": "airway-structure-node-06.svg",
+      "concept": "氣管分成左、右主支氣管；右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管；主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多。",
+      "points": [
+        "右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管",
+        "主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "細支氣管平滑肌痙攣使氣道變窄，與氣喘發作相關。"
+      },
+      "sources": [
+        "right-left-main-bronchi、bronchial-tree、airway-histology；AB-05_13 p.10–11"
+      ],
+      "reference": "right-left-main-bronchi、bronchial-tree、airway-histology；AB-05_13 p.10–11"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "airway-structure-foundation-q01",
+      "stem": "鼻咽與口咽的分界參考構造？",
+      "options": [
+        "軟腭",
+        "會厭",
+        "聲帶",
+        "環狀軟骨"
+      ],
+      "answer": 0,
+      "hint": "比較鼻腔後方與口腔後方的分界。",
+      "explain": "軟腭是區分鼻咽與口咽的參考邊界。",
+      "nodeId": "airway-structure-node-01"
+    },
+    {
+      "id": "airway-structure-foundation-q02",
+      "stem": "耳咽管連通哪兩處？",
+      "options": [
+        "口咽與外耳道",
+        "鼻咽與中耳",
+        "喉咽與中耳",
+        "鼻腔與內耳"
+      ],
+      "answer": 1,
+      "hint": "從鼓膜兩側的壓力平衡思考通路。",
+      "explain": "耳咽管開口在鼻咽，連通中耳；它不連到外耳道。",
+      "nodeId": "airway-structure-node-02"
+    },
+    {
+      "id": "airway-structure-foundation-q03",
+      "stem": "喉結由哪塊軟骨形成？",
+      "options": [
+        "環狀軟骨",
+        "會厭軟骨",
+        "甲狀軟骨",
+        "杓狀軟骨"
+      ],
+      "answer": 2,
+      "hint": "找出構成頸前突出輪廓的單一軟骨。",
+      "explain": "甲狀軟骨形成喉結；它屬於單一的喉軟骨。",
+      "nodeId": "airway-structure-node-03"
+    },
+    {
+      "id": "airway-structure-foundation-q04",
+      "stem": "與聲帶相連、參與發聲的成對軟骨？",
+      "options": [
+        "甲狀軟骨",
+        "會厭軟骨",
+        "環狀軟骨",
+        "杓狀軟骨"
+      ],
+      "answer": 3,
+      "hint": "區分發聲連接構造與吞嚥保護構造。",
+      "explain": "杓狀軟骨與聲帶相連並參與發聲；會厭主要保護吞嚥時的喉入口。",
+      "nodeId": "airway-structure-node-04"
+    },
+    {
+      "id": "airway-structure-foundation-q05",
+      "stem": "氣管內襯的上皮？",
+      "options": [
+        "偽複層纖毛柱狀上皮",
+        "單層鱗狀上皮",
+        "複層鱗狀上皮",
+        "單層立方上皮"
+      ],
+      "answer": 0,
+      "hint": "想想黏液要靠什麼構造往外移動。",
+      "explain": "氣管內襯偽複層纖毛柱狀上皮；纖毛與杯狀細胞的黏液協同清潔空氣。",
+      "nodeId": "airway-structure-node-05"
+    },
+    {
+      "id": "airway-structure-foundation-q06",
+      "stem": "右主支氣管與左主支氣管相比？",
+      "options": [
+        "較長、較窄且較水平",
+        "較短、較寬且較垂直",
+        "較短、較窄且較水平",
+        "兩側完全相同"
+      ],
+      "answer": 1,
+      "hint": "從管徑、長度與中線夾角比較兩側。",
+      "explain": "右主支氣管較短、較寬且較垂直，與中線的夾角較小。",
+      "nodeId": "airway-structure-node-06"
+    }
+  ],
+  "cases": [
+    {
+      "id": "airway-structure-case-q01",
+      "stem": "【生活情境】搭飛機下降時耳朵悶脹，吞口水後改善，是哪個構造平衡了中耳壓力？",
+      "options": [
+        "氣管",
+        "會厭",
+        "耳咽管",
+        "鼻腔"
+      ],
+      "answer": 2,
+      "hint": "吞嚥後耳悶改善，先找連通中耳的通道。",
+      "explain": "耳咽管連通鼻咽與中耳，使鼓膜兩側壓力較能平衡。",
+      "nodeId": "airway-structure-node-02"
+    },
+    {
+      "id": "airway-structure-case-q02",
+      "stem": "【生理判讀】吞嚥時食物沒有誤入氣管，主要因為？",
+      "options": [
+        "聲帶完全打開",
+        "氣管軟骨環關閉",
+        "耳咽管關閉",
+        "喉上提、會厭蓋住喉入口"
+      ],
+      "answer": 3,
+      "hint": "觀察吞嚥時喉的位置與入口如何改變。",
+      "explain": "吞嚥時喉上提，會厭蓋住喉入口，防止食物誤入氣管。",
+      "nodeId": "airway-structure-node-04"
+    },
+    {
+      "id": "airway-structure-case-q03",
+      "stem": "【模型觀察】氣管 C 形軟骨環的缺口朝向？",
+      "options": [
+        "後方的食道",
+        "前方的胸骨",
+        "左側的心臟",
+        "右側的肺"
+      ],
+      "answer": 0,
+      "hint": "先確認氣管與食道的前後位置。",
+      "explain": "氣管在食道前方，C 形軟骨環的缺口朝向後方食道。",
+      "nodeId": "airway-structure-node-05"
+    },
+    {
+      "id": "airway-structure-case-q04",
+      "stem": "【生活情境】小孩吃花生時嗆到，吸入的花生較容易卡在哪裡？",
+      "options": [
+        "左主支氣管，因其較寬",
+        "右主支氣管，因其較短、寬且垂直",
+        "氣管上段，因其最窄",
+        "食道，因其在氣管後方"
+      ],
+      "answer": 1,
+      "hint": "沿吸入方向比較左右主支氣管的形狀。",
+      "explain": "右主支氣管較短、寬且垂直，因此吸入的異物較容易卡住右側。",
+      "nodeId": "airway-structure-node-06"
+    },
+    {
+      "id": "airway-structure-case-q05",
+      "stem": "【模型觀察】沿支氣管樹往下，軟骨與平滑肌的變化？",
+      "options": [
+        "軟骨越來越多",
+        "兩者都不變",
+        "軟骨漸少、細支氣管已無軟骨且平滑肌較多",
+        "平滑肌消失只剩軟骨"
+      ],
+      "answer": 2,
+      "hint": "依主支氣管到終末細支氣管的順序比較管壁。",
+      "explain": "越往下軟骨越少；細支氣管已無軟骨，但平滑肌較多。",
+      "nodeId": "airway-structure-node-06"
+    }
+  ],
+  "credits": [
+    "解剖學 AB-05_13 呼吸系統 p.3–11, 20–21。"
+  ]
+}
