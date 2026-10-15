@@ -18,7 +18,7 @@ export function chapterMergePublishedBlocker(published: Course | undefined, sour
 
 /** bootstrap adds presentation metadata; Firestore map key order is not meaningful. */
 export function chapterMergeDraftFingerprint(course: Course): string {
-  const { archived: _archived, publishedAt: _publishedAt, ...draft } = course;
+  const { archived: _archived, publishedAt: _publishedAt, revision: _revision, ...draft } = course;
   const stable = (value: any): any => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
     ? Object.fromEntries(Object.keys(value).sort().filter(key => value[key] !== undefined).map(key => [key, stable(value[key])])) : value;
   return JSON.stringify(stable(draft));

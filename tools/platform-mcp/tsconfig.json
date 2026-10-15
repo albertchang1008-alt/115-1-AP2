@@ -16,6 +16,7 @@
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts",
-    "stdio-smoke.mts"
+    "stdio-smoke.mts",
+    "emulator-flow.mts"
   ]
 }

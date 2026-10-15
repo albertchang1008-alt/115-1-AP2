@@ -3,7 +3,7 @@ const v = fs.readFileSync('VERSION', 'utf8').trim();
 if (!/^\d+\.\d+\.\d+$/.test(v)) throw Error('VERSION 必須為 x.y.z');
 const check = process.argv.includes('--check');
 let bad = false;
-for (const path of ['package.json', 'functions/package.json']) {
+for (const path of ['package.json', 'functions/package.json', 'tools/platform-mcp/package.json']) {
   const json = JSON.parse(fs.readFileSync(path, 'utf8'));
   if (check) {
     if (json.version !== v) {
@@ -46,7 +46,7 @@ for (const path of ['README.md', 'DEVELOPMENT_LOG.md', 'handoff.md']) {
     }
   } else fs.writeFileSync(path, s.replace(/目前版本：\d+\.\d+\.\d+/, `目前版本：${v}`));
 }
-for (const path of ['package-lock.json', 'functions/package-lock.json']) {
+for (const path of ['package-lock.json', 'functions/package-lock.json', 'tools/platform-mcp/package-lock.json']) {
   if (!fs.existsSync(path)) continue;
   const j = JSON.parse(fs.readFileSync(path, 'utf8'));
   if (check) {

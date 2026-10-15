@@ -52,7 +52,7 @@ function memoryDb() {
       startAfter() {
         return q;
       },
-      doc: (id) => doc(path + '/' + id),
+      doc: (id = require('node:crypto').randomUUID()) => doc(path + '/' + id),
       get: async () => {
         const docs = [...data.keys()]
           .filter(
@@ -60,7 +60,7 @@ function memoryDb() {
               key.startsWith(path + '/') &&
               key.slice(path.length + 1).split('/').length === 1 &&
               filters.every(([f, op, v]) =>
-                op === 'array-contains' ? data.get(key)[f]?.includes(v) : data.get(key)[f] === v,
+                op === 'array-contains' ? data.get(key)[f]?.includes(v) : op === 'in' ? v.includes(data.get(key)[f]) : data.get(key)[f] === v,
               ),
           )
           .slice(0, max)

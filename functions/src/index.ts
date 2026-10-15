@@ -1,3 +1,6 @@
+import { validateCourseDraft } from '../../shared/courseValidation';
+import { createPlatformHandlers } from './platformMcp';
+import { courseRevision, assertExpectedRevision, REVISION_CONFLICT } from '../../shared/courseDraft';
 import { validateReflectionConfig, validateReflectionAnswers, reflectionActivity, buildReflectionResponse, reflectionProgress, summarizeReflections } from '../../shared/reflection';
 import { featureNames } from '../../shared/features';
 import { createClassroomHandlers } from './classroom';
@@ -58,6 +61,9 @@ const options = {
   memory: '512MiB' as const,
 };
 const syncSecret = defineSecret('SHEETS_SYNC_KEY');
+function stableHash(value: unknown) {
+  return createHash('sha256').update(JSON.stringify(value, (_key, v) => v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map(k => [k,v[k]])) : v)).digest('hex');
+}
 function fail(message: string): never {
   throw new HttpsError('failed-precondition', message);
 }
@@ -100,6 +106,12 @@ function visibleProgress(progress: Progress, course: Course) {
     ? [...chapterPrefixes].some((prefix) => key.startsWith(prefix))
     : ids.has(key.split('_')[0]);
   return { ...progress, units: Object.fromEntries(Object.entries(progress.units || {}).filter(([id]) => ids.has(id))), activities: Object.fromEntries(Object.entries(progress.activities || {}).filter(([key]) => activityVisible(key))), attempted: Object.fromEntries(Object.entries(progress.attempted || {}).filter(([id]) => ids.has(id))) } as Progress;
+}
+function validateDraft(course: Course) {
+  try { size(course); validateCourseDraft(course); } catch (error) { fail((error as Error).message); }
+}
+function checkRevision(current: number, expected: unknown, optional = false) {
+  try { assertExpectedRevision(current,expected,optional); } catch { throw new HttpsError('failed-precondition',REVISION_CONFLICT,{reason:'REVISION_CONFLICT'}); }
 }
 // 測試帳號白名單：config/testStudents { emails: ["..."] }。清空即立刻失效。
 let testCache = { at: 0, emails: [] as string[] };
@@ -162,7 +174,7 @@ export const bootstrap = onCall(options, async (req) => {
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
     const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, features: d.data().features || {}, id: d.id, archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, features: d.data().features || {}, id: d.id, revision:courseRevision(d.data()), archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
   }
   const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
   const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
@@ -189,124 +201,23 @@ export const bootstrap = onCall(options, async (req) => {
 export const saveCourse = onCall(options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
-  const course = req.data.course as Course;
-  code(course.id);
-  size(course);
-  if (course.features && (Object.keys(course.features).some(k => !featureNames.includes(k as any)) || Object.values(course.features).some(v => typeof v !== 'boolean'))) fail('功能開關設定無效');
-  if (course.assessmentSources && ['pretest', 'posttest'].some(k => { const ids = (course.assessmentSources as any)[k]; return !Array.isArray(ids) || ids.length > 100 || ids.some((id: unknown) => typeof id !== 'string' || !safeId(id)) || new Set(ids).size !== ids.length; })) fail('前後測來源設定無效');
-  if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
-    fail('請填寫課程與學期，最多 50 班、50 單元');
-  if (new Set(course.classIds).size !== course.classIds.length) fail('班級代碼重複');
-  course.classIds.forEach((cl) => code(cl));
-  for (const [cl, units] of Object.entries(course.classUnits || {}))
-    if (!course.classIds.includes(cl) || !Array.isArray(units) || new Set(units).size !== units.length || units.some((u) => !course.units.some((unit) => unit.id === u))) fail('班級適用單元設定無效');
-  const unitIds = new Set();
-  for (const u of course.units) {
-    code(u.id);
-    if (unitIds.has(u.id)) fail('單元 ID 重複');
-    unitIds.add(u.id);
-    if (
-      !u.title ||
-      u.threshold < 0 ||
-      u.threshold > 100 ||
-      !Number.isFinite(u.threshold) ||
-      u.activities.length > 30
-    )
-      fail('單元設定無效');
-    if (u.research && typeof u.research.enabled !== 'boolean') fail('研究資料設定無效');
-    if (u.visibility !== undefined) visibility(u.visibility);
-    if (u.archiveLabel !== undefined) cleanLabel(u.archiveLabel);
-    if (u.visibility === 'archived' && u.archivedAt !== undefined && (!Number.isFinite(u.archivedAt) || u.archivedAt < 0)) fail('封存時間無效');
-    if (u.review) {
-      const r = u.review;
-      if (!Array.isArray(r.sourceUnitIds) || !r.sourceUnitIds.length || !r.sourceUnitIds.every(safeCode) || new Set(r.sourceUnitIds).size !== r.sourceUnitIds.length || !Number.isInteger(r.drawCount) || r.drawCount < r.sourceUnitIds.length || !r.allocation || Object.values(r.allocation).some((n) => !Number.isInteger(n) || n < 1) || Object.values(r.allocation).reduce((sum, n) => sum + n, 0) !== r.drawCount || !Array.isArray(r.history)) fail('複習考設定無效');
-    }
-    const activityIds = new Set();
-    for (const a of u.activities) {
-      id(a.id);
-      if (activityIds.has(a.id)) fail('活動 ID 重複');
-      activityIds.add(a.id);
-      if (
-        !['before', 'during', 'after'].includes(a.phase) ||
-        !['html', 'youtube', 'link', 'quiz', 'reflection'].includes(a.type)
-      )
-        fail('活動類型錯誤');
-      if (
-        a.type === 'youtube' &&
-        (!youtubeId(a.url) ||
-          !Number.isFinite(a.start || 0) ||
-          (a.start || 0) < 0 ||
-          (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))
-      )
-        fail('YouTube 連結或片段時間無效');
-      if (a.type === 'reflection') { try { a.reflection = validateReflectionConfig(a.reflection); delete a.tracking; } catch (e) { fail((e as Error).message); } }
-      if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
-      if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
-      if (a.materialVersion) id(a.materialVersion);
-      for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
-      if (a.type === 'html' && a.url && !validMaterialUrl(a.url))
-        fail('教材網址需使用有效 HTTPS 網址');
-      if (a.type === 'link' && !/^https:\/\//.test(a.url)) fail('教材連結需使用 HTTPS');
-    }
-  }
-  if (course.chapters !== undefined && (!course.chapters || Array.isArray(course.chapters) || typeof course.chapters !== 'object')) fail('單元設定無效');
-  const chapters = chaptersOf(course);
-  for (const [name, chapter] of Object.entries(chapters)) {
-    if (!name.trim() || !chapter.title?.trim() || !Number.isFinite(chapter.threshold) || chapter.threshold < 0 || chapter.threshold > 100 || !Array.isArray(chapter.activities) || chapter.activities.length > 30) fail('單元設定無效');
-    if (chapter.research && typeof chapter.research.enabled !== 'boolean') fail('研究資料設定無效');
-    const activityIds = new Set<string>();
-    for (const a of chapter.activities) {
-      id(a.id);
-      if (activityIds.has(a.id)) fail('活動 ID 重複');
-      activityIds.add(a.id);
-      if (!a.title?.trim() || !['before', 'during', 'after'].includes(a.phase) || !['html', 'youtube', 'link', 'quiz', 'reflection'].includes(a.type)) fail('活動類型錯誤');
-      if (a.type === 'youtube' && (!youtubeId(a.url) || !Number.isFinite(a.start || 0) || (a.start || 0) < 0 || (a.end !== undefined && (!Number.isFinite(a.end) || a.end <= (a.start || 0))))) fail('YouTube 連結或片段時間無效');
-      if (a.type === 'reflection') { try { a.reflection = validateReflectionConfig(a.reflection); delete a.tracking; } catch (e) { fail((e as Error).message); } }
-      if (a.tracking && !['reading', 'interactive'].includes(a.tracking)) fail('教材紀錄方式無效');
-      if (a.required !== undefined && typeof a.required !== 'boolean') fail('活動必做設定無效');
-      if (a.materialVersion) id(a.materialVersion);
-      for (const total of [a.nodeTotal, a.questionTotal]) if (total !== undefined && (!Number.isInteger(total) || total < 0 || total > 500)) fail('診斷節點與題目總數需為 0–500');
-      if (a.type === 'html' && a.url && !validMaterialUrl(a.url)) fail('教材網址需使用有效 HTTPS 網址');
-      if (a.type === 'link' && !/^https:\/\//.test(a.url)) fail('教材連結需使用 HTTPS');
-    }
-  }
-  if (course.chapterOrder !== undefined && (!Array.isArray(course.chapterOrder) || course.chapterOrder.some((name) => typeof name !== 'string' || !chapters[name]) || new Set(course.chapterOrder).size !== course.chapterOrder.length)) fail('單元順序設定無效');
-  for (const [cl, overrides] of Object.entries(course.chapterOverrides || {})) {
-    if (!course.classIds.includes(cl) || !overrides || Array.isArray(overrides) || typeof overrides !== 'object') fail('班級單元設定無效');
-    for (const [name, settings] of Object.entries(overrides)) {
-      if (!chapters[name] || !settings || Array.isArray(settings) || Object.keys(settings).some((k) => !['threshold', 'required', 'opensAt', 'dueAt'].includes(k))) fail('班級單元設定無效');
-      if (settings.threshold !== undefined && (!Number.isFinite(settings.threshold) || settings.threshold < 0 || settings.threshold > 100)) fail('班級達標門檻無效');
-      if (settings.required !== undefined && typeof settings.required !== 'boolean') fail('班級必做設定無效');
-      if (settings.opensAt !== undefined && typeof settings.opensAt !== 'string') fail('班級開放時間無效');
-      if (settings.dueAt !== undefined && typeof settings.dueAt !== 'string') fail('班級期限無效');
-    }
-  }
-  for (const cl of Object.keys(course.classOverrides || {})) {
-    if (!course.classIds.includes(cl)) fail('班級設定不屬於課程');
-    for (const [unitId, settings] of Object.entries(course.classOverrides![cl])) {
-      if (
-        !course.units.some((u) => u.id === unitId) ||
-        Object.keys(settings).some(
-          (k) => !['threshold', 'required', 'opensAt', 'dueAt'].includes(k),
-        )
-      )
-        fail('班級單元設定無效');
-      if (
-        settings.threshold !== undefined &&
-        (!Number.isFinite(settings.threshold) || settings.threshold < 0 || settings.threshold > 100)
-      )
-        fail('班級達標門檻無效');
-    }
-  }
+  const { revision: _clientRevision, ...inputCourse } = req.data.course || {};
+  const course = inputCourse as Course;
+  validateDraft(course);
   const ref = db.doc(`courses/${course.id}`);
-  await db.runTransaction(async (tx) => {
+  const revision = await db.runTransaction(async (tx) => {
     const old = await tx.get(ref);
     if (old.exists && !old.data()?.teacherIds?.includes(p.uid))
       throw new HttpsError('permission-denied', '未獲授權');
+    const before = courseRevision(old.data());
+    checkRevision(before, req.data.expectedRevision, true);
+    const revision = before + 1;
+    const audit = ref.collection('auditLog').doc();
     tx.set(
       ref,
       {
         draft: course,
+        revision,
         features: Object.fromEntries(featureNames.map(k => [k, course.features?.[k] === true])),
         ...(course.assessmentSources ? { assessmentSources: course.assessmentSources } : {}),
         teacherIds: old.data()?.teacherIds || [p.uid],
@@ -316,8 +227,10 @@ export const saveCourse = onCall(options, async (req) => {
       },
       { merge: true },
     );
+    tx.set(audit, { at: Date.now(), actorUid:p.uid, source:'admin-ui', requestId:randomUUID(), fromRevision:before, toRevision:revision, summary:{op:'saveCourse',unitCount:course.units.length,chapterCount:Object.keys(chaptersOf(course)).length}, diff:{beforeHash:createHash('sha256').update(JSON.stringify(old.data()?.draft || null)).digest('hex'),afterHash:createHash('sha256').update(JSON.stringify(course)).digest('hex')} });
+    return revision;
   });
-  return { ok: true };
+  return { ok: true, revision };
 });
 export const publishCourse = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -344,7 +257,7 @@ export const publishCourse = onCall(options, async (req) => {
     if (JSON.stringify(fresh.data()?.draft) !== JSON.stringify(course)) fail('草稿剛被更新，請重新載入後發布');
     tx.update(ref, { published, classIds: course.classIds });
   });
-  return published;
+  return { ...published, revision:courseRevision(c) };
 });
 
 // Preview and commit both read the current course and every progress document in one transaction.
@@ -377,9 +290,9 @@ export const mergeChapter = onCall(options, async (req) => {
       const before = doc.data() as Progress, after = mergedChapterProgress(before, sourceName, targetName, activityIds);
       if (JSON.stringify(before.activities) !== JSON.stringify(after.activities)) tx.update(doc.ref, { activities: after.activities });
     }
-    tx.update(ref, { draft: nextDraft, ...(nextPublished ? { published: nextPublished } : {}) });
+    tx.update(ref, { revision:courseRevision(data)+1, draft: nextDraft, ...(nextPublished ? { published: nextPublished } : {}) });
     tx.create(ref.collection('chapterMergeLog').doc(), { sourceName, targetName, activityIds, affectedStudents: affected.length, actorUid: p.uid, at: FieldValue.serverTimestamp() });
-    return { ...preview, course: { ...nextDraft, archived: !!data.archived, publishedAt: nextPublished?.publishedAt || 0 } };
+    return { ...preview, course: { ...nextDraft, revision:courseRevision(data)+1, archived: !!data.archived, publishedAt: nextPublished?.publishedAt || 0 } };
   });
 });
 async function updateVisibility(req: any, unitIds: string[], next: UnitVisibility, archiveLabel: string, action: string) {
@@ -393,7 +306,7 @@ async function updateVisibility(req: any, unitIds: string[], next: UnitVisibilit
     if (!ids.length || ids.length > 200 || ids.some((id) => !draft.units.some((u) => u.id === id))) fail('次單元設定無效');
     const before = Object.fromEntries(ids.map((id) => [id, unitVisibility(draft.units.find((u) => u.id === id)!)]));
     const update = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => ids.includes(u.id) ? patchVisibility(u, next, archiveLabel, at) : u) });
-    tx.update(ref, { draft: update(draft), ...(published ? { published: update(published) } : {}) });
+    tx.update(ref, { revision:courseRevision(data)+1, draft: update(draft), ...(published ? { published: update(published) } : {}) });
     tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action, unitIds: ids, from: before, to: next, archiveLabel });
     return { units: ids, visibility: next, archiveLabel };
   });
@@ -409,11 +322,11 @@ export const renameArchiveLabel = onCall(options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const from = cleanLabel(req.data.from), to = cleanLabel(req.data.to);
   if (!from || !to) fail('請填寫歷史標籤');
   const ref = db.doc(`courses/${code(req.data.courseId)}`);
-  return db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); const change = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => u.visibility === 'archived' && u.archiveLabel === from ? { ...u, archiveLabel: to, visibilityUpdatedAt: Date.now() } : u) }); tx.update(ref, { draft: change(data.draft), ...(data.published ? { published: change(data.published) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'renameLabel', from, to }); return { ok: true }; });
+  return db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); const change = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => u.visibility === 'archived' && u.archiveLabel === from ? { ...u, archiveLabel: to, visibilityUpdatedAt: Date.now() } : u) }); tx.update(ref, { revision:courseRevision(data)+1, draft: change(data.draft), ...(data.published ? { published: change(data.published) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'renameLabel', from, to }); return { ok: true }; });
 });
 export const setStudentNotice = onCall(options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const text = cleanLabel(req.data.text, 60), ref = db.doc(`courses/${code(req.data.courseId)}`);
-  await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { draft: withNotice(data.draft, text), ...(data.published ? { published: withNotice(data.published, text) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
+  await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { revision:courseRevision(data)+1, draft: withNotice(data.draft, text), ...(data.published ? { published: withNotice(data.published, text) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
   return { text };
 });
 export const deleteCourse = onCall(options, async (req) => {
@@ -560,6 +473,7 @@ async function publishBank(courseId: string, unitId: string, questions: Question
 /** 教師把多個已發布題目分類凍結成獨立的複習考題目池。 */
 export const buildReviewExam = onCall(options, async (req) => {
   const { p, c } = await access(req, req.data.courseId, true);
+  checkRevision(courseRevision(c),req.data.expectedRevision,true);
   const name = code(req.data.name);
   const sourceUnitIds = req.data.sourceUnitIds;
   const drawCount = req.data.drawCount;
@@ -591,9 +505,10 @@ export const buildReviewExam = onCall(options, async (req) => {
   if (drawCount < sources.length || drawCount > pool.length) fail('每次作答題數需介於來源數與題目池題數之間');
   const allocation = allocateDraw(Object.fromEntries(sources.map((s, i) => [s.id, banks[i].length])), drawCount, sourceUnitIds);
   const result = await publishBank(draft.id, name, pool), builtAt = Date.now();
-  await db.runTransaction(async (tx) => {
+  const revision = await db.runTransaction(async (tx) => {
     const ref = db.doc(`courses/${draft.id}`), fresh = await tx.get(ref);
     if (!fresh.data()?.teacherIds?.includes(p.uid)) fail('未獲授權');
+    checkRevision(courseRevision(fresh.data()),req.data.expectedRevision,true);
     const latest = fresh.data()!.draft as Course, old = latest.units.find((u) => u.id === name);
     if (old && !isReviewUnit(old)) fail('名稱已被既有題目分類使用');
     const entry = { version: result.version, drawCount, allocation, builtAt };
@@ -603,17 +518,20 @@ export const buildReviewExam = onCall(options, async (req) => {
     delete unit.wrongCarry;
     delete unit.wrongCarryOrder;
     const chapters = { ...(latest.chapters || {}), ...(old ? {} : { [name]: { title: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }) };
-    tx.update(ref, { 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, 'draft.chapterOrder': old ? latest.chapterOrder : [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name], updatedAt: Date.now() });
+    tx.update(ref, { revision:courseRevision(fresh.data())+1, 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, 'draft.chapterOrder': old ? latest.chapterOrder : [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name], updatedAt: Date.now() });
+    return courseRevision(fresh.data())+1;
   });
-  return { ...result, allocation, poolCount: pool.length, builtAt, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])) };
+  return { ...result, revision, allocation, poolCount: pool.length, builtAt, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])) };
 });
 export const deleteReviewExam = onCall(options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const name = code(req.data.name);
-  await db.runTransaction(async (tx) => { const ref = db.doc(`courses/${req.data.courseId}`), snap = await tx.get(ref), data = snap.data(), draft = data?.draft as Course;
-    if (!data?.teacherIds?.includes(p.uid)) fail('未獲授權'); const unit = draft.units.find((u) => u.id === name); if (!unit || !isReviewUnit(unit)) fail('找不到複習考');
+  const revision = await db.runTransaction(async (tx) => { const ref = db.doc(`courses/${req.data.courseId}`), snap = await tx.get(ref), data = snap.data(), draft = data?.draft as Course;
+    if (!data?.teacherIds?.includes(p.uid)) fail('未獲授權');
+    checkRevision(courseRevision(data),req.data.expectedRevision,true); const unit = draft.units.find((u) => u.id === name); if (!unit || !isReviewUnit(unit)) fail('找不到複習考');
     const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((x) => x !== name)])); const chapters = { ...(draft.chapters || {}) }; delete chapters[name];
-    tx.update(ref, { 'draft.units': draft.units.filter((u) => u.id !== name), 'draft.chapters': chapters, 'draft.chapterOrder': (draft.chapterOrder || []).filter((x) => x !== name), 'draft.classUnits': classUnits, updatedAt: Date.now() });
-  }); return { ok: true };
+    tx.update(ref, { revision:courseRevision(data)+1, 'draft.units': draft.units.filter((u) => u.id !== name), 'draft.chapters': chapters, 'draft.chapterOrder': (draft.chapterOrder || []).filter((x) => x !== name), 'draft.classUnits': classUnits, updatedAt: Date.now() });
+    return courseRevision(data)+1;
+  }); return { ok: true, revision };
 });
 export const publishQuestions = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -1297,7 +1215,7 @@ async function ensureRosterClasses(uid: string, courseId: string, classIds: stri
     if (!current.data()?.teacherIds?.includes(uid)) fail('未獲授權管理此課程');
     const draft = current.data()?.draft as Course;
     const nextClassIds = [...new Set([...(draft.classIds || []), ...classIds])];
-    if (nextClassIds.length !== draft.classIds.length) tx.update(ref, { draft: { ...draft, classIds: nextClassIds } });
+    if (nextClassIds.length !== draft.classIds.length) tx.update(ref, { revision:courseRevision(current.data())+1, draft: { ...draft, classIds: nextClassIds } });
   });
 }
 async function syncRosterFromSheet(sheetId: string, token: string, p: any, titles: string[], courseIds: string[]) {
@@ -1381,6 +1299,25 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
             }
           }
         }
+        let questionChanges: {added:number|null;updated:number|null;retained:number|null;reset:number|null} | undefined;
+        let oldQuestionCount = 0;
+        if (!source?.bankVersion) questionChanges = {added:result.count,updated:0,retained:0,reset:0};
+        else if (source.bankVersion === result.version) questionChanges = {added:0,updated:0,retained:result.count,reset:0};
+        else if (resetWrong) questionChanges = {added:null,updated:null,retained:null,reset:result.count};
+        else try {
+          const oldBank = db.doc(`banks/${courseId}_${unitId}_${source.bankVersion}`);
+          const manifest = await oldBank.get();
+          if (!manifest.exists || !Array.isArray(manifest.data()?.chunks)) throw Error('old bank unavailable');
+          const chunks = await Promise.all(manifest.data()!.chunks.map((ch:string)=>oldBank.collection('chunks').doc(ch).get()));
+          if (chunks.some(d=>!d.exists || !Array.isArray(d.data()?.questions))) throw Error('old chunks unavailable');
+          const oldQuestions = chunks.flatMap(d=>d.data()!.questions) as Question[];
+          oldQuestionCount = oldQuestions.length;
+          const canonical = (q:Question) => { const {order:_order,...content}=q; return JSON.stringify(content,(_k,v)=>v && typeof v==='object' && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])) : v); };
+          const byId = new Map(oldQuestions.map(q=>[q.id,canonical(q)]));
+          const added = questions.filter(q=>!byId.has(q.id)).length;
+          const retained = questions.filter(q=>byId.get(q.id)===canonical(q)).length;
+          questionChanges = {added,retained,updated:questions.length-added-retained,reset:0};
+        } catch { /* Older banks may be incomplete: never invent question counts. */ }
         let created = false, carry: CarryResult | undefined;
         await db.runTransaction(async (tx) => {
           const current = await tx.get(ref);
@@ -1413,6 +1350,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
           const chapterChanged = !chapters[chapterKey] || !draft.chapterOrder?.includes(chapterKey);
           if (!unitChanged && !chapterChanged) return;
           tx.update(ref, {
+            revision:courseRevision(current.data())+1,
             draft: {
               ...draft,
               chapters: nextChapters,
@@ -1421,7 +1359,8 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
             },
           });
         });
-        results.push({ courseId, unitId, group, created, ...result, ...(carry !== undefined ? { carry } : {}) });
+        if (questionChanges && carry) questionChanges.reset = typeof carry === 'object' ? carry.changed+carry.removed : carry === 'reset' ? result.count : oldQuestionCount || null;
+        results.push({ courseId, unitId, group, created, ...result, ...(carry !== undefined ? { carry } : {}), ...(questionChanges ? {questionChanges} : {}) });
       } catch (e) { results.push({ courseId, unitId, error: (e as Error).message }); }
     }
   }
@@ -1434,7 +1373,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
     if (staleUnits.length) results.forEach((result) => { if (result.courseId === courseId) result.staleUnits = staleUnits; });
     if (draft) await db.runTransaction(async (tx) => {
       const current = await tx.get(courseRef), currentDraft = current.data()?.draft as Course;
-      tx.update(courseRef, { draft: { ...currentDraft, staleUnits } });
+      tx.update(courseRef, { revision:courseRevision(current.data())+1, draft: { ...currentDraft, staleUnits } });
     });
   }
   return results;
@@ -1479,6 +1418,17 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
   const runId = randomUUID();
   await db.runTransaction(async (tx) => {
     const s = await tx.get(statusRef);
+    if (req.data?.expectedRevisions !== undefined) {
+      const expected = req.data.expectedRevisions;
+      if (!expected || typeof expected !== 'object' || Array.isArray(expected)) fail('expectedRevisions格式無效');
+      const managed = await tx.get(db.collection('courses').where('teacherIds','array-contains',p.uid).limit(501));
+      if (managed.size > 500 || JSON.stringify(managed.docs.map(d=>d.id).sort()) !== JSON.stringify(Object.keys(expected).sort())) fail('可管理課程已變動，請重新預覽');
+      for (const d of managed.docs) checkRevision(courseRevision(d.data()),expected[d.id]);
+    }
+    if (req.data?.expectedSyncStateHash !== undefined) {
+      const config = await tx.get(db.doc('sync/config'));
+      if (config.data()?.sheetId !== sheetId || req.data.expectedSyncStateHash !== stableHash({sheetId:config.data()?.sheetId || '',status:s.data() || null})) fail('同步來源或狀態已變動，請重新預覽');
+    }
     if (s.data()?.syncing && s.data()?.leaseUntil > Date.now())
       fail('已有同步正在執行，請稍後再試');
     tx.set(statusRef, { syncing: true, runId, leaseUntil: Date.now() + 360000 }, { merge: true });
@@ -1584,3 +1534,5 @@ export const { getAssessments, prepareAssessment, controlAssessment, startAssess
 export const { getTeachingDeck, getClassroomCourse } = createTeachingHandlers(db, access, options);
 
 export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);
+
+export const { listManagedCourses, getCourseDraft, getCompletionSummary, patchCourseDraft } = createPlatformHandlers(db, identity, access, rosterQuery, validateDraft, checkRevision, options);

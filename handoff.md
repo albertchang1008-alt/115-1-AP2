@@ -1,28 +1,27 @@
-# 專案交接（AP2 本機 MCP）
-目前版本：1.9.0
+# 專案交接（AP2 本機 MCP 第3階段）
+目前版本：1.9.1
 
 ## 目前狀態（2026-10-15）
-- 分支 `feature/platform-mcp`；獨立 worktree `/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/platform-mcp`；基底 `origin/main@4ed3778e67a630dfe9cc8ea13096cc220a616868`。本輪本機 commit 見 git log -1，未 push／部署。
-- 依 CODEX_TASK_platform-mcp-stage1-2_2026-10-15.md 實作盤點與唯讀連接器。根目錄原分支與大量未提交工作不動；原呼吸整合紀錄保留於 DEVELOPMENT_LOG／Git基底。
-- 第1階段：讀完 functions/src 五檔，共57支callable，盤點 docs/platform-mcp/CALLABLE_INVENTORY.md，程式對照57支無漏列。
-- 第2階段：tools/platform-mcp/ 使用官方 TypeScript MCP SDK，stdio；依賴只在其 package／lock。硬白名單 getPublished／getSyncStatus／getCompletion，所有其他callable在token或網路前拒絕。
-- **3工具有後端缺口**：list_courses／get_course_draft／diff_draft_published固定available:false。bootstrap會寫profile，沒有純讀教師草稿入口；Firestore client rules全deny，不用Admin／REST繞過。此3項不能列完整可用，交Claude裁定後續另案。
-- 4可用工具：get_published課程投影、get_sync_status專案級狀態與錯誤旗標／歷史staleUnits、list_materials38份AP2目錄及「已發布」使用位置（草稿未知）、get_completion_summary在記憶體分頁／公式3彙總後只回數字。
-- 教師本人已完成本機學校Google登入；ID token驗簽章／issuer／audience／expiry／teacher claim，refresh同一身分。refresh token只存macOS鑰匙圈service platform-mcp-ap2；無token檔案／log／設定，未借用網站session。
-- 第一次彈窗收到auth/popup-closed-by-user後重新操作成功；不是學校拒絕。實際callable／stdio均成功，本次未遇App Check或學校拒絕，沒有改安全設定。本機登入server已結束。
-- 驗證：工具獨立npm run check（型別＋14測試＋build）全過、0 skipped；7工具實際smoke（4 PASS／3 unavailable）及官方SDK stdio握手＋get_published成功。8份JSON皆個資掃描0，test完成度只讀2人彙總；沒有開輪／作答／改課程。
-- 證據：docs/platform-mcp/STAGE2_REPORT.md、unit-check.txt、live-smoke.txt、readonly-smoke/*.json、login-popup-closed.jpg；截圖只含本機安全錯誤，成功頁教師已關閉，不補造成功畫面。
-- 程式／functions／rules／indexes／根與functions package／lock／站別／部署設定相對基底零差異；新增只在tools/platform-mcp與docs/platform-mcp，另更新本交接／DEVELOPMENT_LOG。
+- worktree `/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/platform-mcp`，分支feature/platform-mcp；前輪f0c1e7e，本輪commit見git log -1。開工fetch確認origin/main=4ed3778，已是本分支祖先，無需merge。
+- **停點A完成，待Claude審查**：後端4新callable、root revision防覆蓋、共用驗證、交易auditLog／requestId去重、7唯讀＋5兩步寫入工具完成。本機1.9.1；未push／部署／正式課程寫入。
+- 新純讀listManagedCourses／getCourseDraft不經bootstrap、不寫profile；getCompletionSummary在後端彙總，只傳統計，不傳名冊／個人progress到Mac。patchCourseDraft只接受4種op，不能改班級、題庫、功能或發布。
+- patch在同一交易確認owner、expectedRevision、完整驗證、revision+1、audit及去重。同requestId同payload回原結果，換payload／actor拒絕。UUID v4 requestId；舊root revision缺值當0。
+- saveCourse支援可選expectedRevision，寫入即遞增並稽核；新版後台一定傳版本，成功採新revision，衝突保留本機內容並提示重新整理，不自動重試。其他草稿變更路徑也遞增；複習考編輯帶版本避免掩蓋競態。
+- audit只存教師actorUid（交辦例外）、來源、時間、UUID、revision、schema摘要／hash，不存學生個資、token或原始內容。Firestore僅owner教師讀，所有client寫拒絕。
+- 連接器仍固定ap2-7ed91。純讀白名單5支新契約，移除getCompletion；寫入白名單僅patchCourseDraft／syncSheet。preview→教師同意→apply，10分鐘一次性確認碼綁工具／payload／真實草稿與revision／同步狀態。沒有發布工具。
+- **相容注意**：舊客戶端省略expectedRevision仍可保存（依交辦），無版本保護；新版UI／MCP明確帶版本。同步全重算保持不讀舊bank，所以無法比較的新增／更新／保留題數回null，不假造0；詳報告。
+- 驗證全過0 skipped：AP2前端162／Functions61；工具16；Auth＋Firestore＋Functions Emulator16項（含並行衝突／並行重送、後台helper拒存、audit規則與7唯讀工具），個資掃描0、正式呼叫0。
+- 證據docs/platform-mcp/STAGE3_REPORT.md與stage3/；版本VERSION／三package與lock／shared／public／apps-script／三文件一致1.9.1，version:check已納入工具套件。
+- 既有題庫／評分／錯題／教材回歸通過；未改Excel、教材來源／公開教材、站別設定或正式資料；不碰其他worktree。前輪鑰匙圈登入機制保留，本輪Emulator使用合成帳號，不取正式token。
 
 ## 固定決策
-1. 不實作寫入、不改functions、不部署、不push、不按平台同步；不動Excel／學生資料／MI。
-2. 固定ap2-7ed91／asia-east1，不能透過參數切換站別／URL。沒有generic callable工具。
-3. 所有MCP輸出投影／彙總／過濾並掃描；名冊／逐題作答／uid不輸出；同步錯誤全文可能含人名，僅回旗標。
-4. 發現學校或App Check阻擋就停下，不改authorized domains／OAuth／App Check／rules，不用debug token。
-5. 每次啟動／請求刷新並驗teacher；無權限拒絕啟動。Claude桌面設定由教師驗收後自行加入，設定不能放token。
-6. 本機commit結尾[Codex]；不使用force push／--no-verify，不略過測試。
+1. 本輪停點A只許本機程式、測試／Emulator與commit，不部署、不push、不merge main、不對正式課程寫入、不跑migration。
+2. source/backend參數白名單固定；無generic callable、無Admin憑證用於正式連接器，不關App Check／學校限制。Emulator腳本只許demo專案與localhost。
+3. 寫入工具套用前必須把預覽給教師看並取得同意，不能僅憑初始概括授權自動apply。確認碼失效／衝突／未知結果須先讀狀態再重新預覽。
+4. sync_sheet為所有管理課程對應Sheet，不限單課程；目前上限100課，不發布、不同步名冊；正式成功同步測試留停點B。
+5. 本機commit結尾[Codex]，不可force push／--no-verify或略過測試。Claude桌面設定不放token，由教師驗收與部署後自行加入。
 
 ## 下一步
-- 停下交Claude獨立驗收（工具README與STAGE2_REPORT有操作及證據），尤其確認3項後端缺口與PII邊界，不能宣稱全部7工具可用。
-- 第3階段另案：listManagedCourses／getCourseDraft純讀入口、patchCourseDraft expectedRevision／欄位白名單、auditLog同交易；本輪只寫建議，未實作。
-- 教師驗收後自行將本機連接器加入Claude桌面試用；無部署需求。
+- Claude獨立審查本輪diff與STAGE3_REPORT，重跑平台check、工具check、README的Emulator流程。特別核對legacy省略版本與同步未知題數限制。
+- 教師另行核可後才合併／正式流程發布Functions、audit規則、AP2 Pages；部署影響清單已列報告。MI不部署。
+- 停點B：部署後7唯讀正式smoke；寫入只用教師另建MCP-TEST課程，再驗新增／設定／衝突／過期／audit，正式課程禁止寫入。

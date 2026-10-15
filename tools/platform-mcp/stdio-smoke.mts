@@ -10,7 +10,7 @@ try {
   const list = await client.listTools();
   const result = await client.callTool({name:'get_published',arguments:{courseId:'115-1-AP2'}});
   if (result.isError) throw Error('STDIO_TOOL_FAILED');
-  const evidence = safeOutput({mode:'live',transport:'stdio',toolCount:list.tools.length,allReadOnly:list.tools.every(t=>t.annotations?.readOnlyHint === true),tool:'get_published',privacyFindings:privacyFindings(result),result});
+  const evidence = safeOutput({mode:'live',transport:'stdio',toolCount:list.tools.length,readOnlyTools:list.tools.filter(t=>t.annotations?.readOnlyHint === true).length,destructiveTools:list.tools.filter(t=>t.annotations?.destructiveHint === true).length,tool:'get_published',privacyFindings:privacyFindings(result),result});
   await writeFile('../../docs/platform-mcp/readonly-smoke/stdio-handshake.json',JSON.stringify(evidence,null,2)+'\n');
   console.log('STDIO tools='+list.tools.length+'; get_published PASS; privacy findings '+privacyFindings(result));
 } finally {await client.close();}

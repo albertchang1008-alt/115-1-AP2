@@ -1,3 +1,20 @@
+# 第3階段更新（1.9.1，本機／未部署）
+
+目前61支callable（原57＋新增4）。唯讀白名單改為listManagedCourses／getCourseDraft／getPublished／getSyncStatus／getCompletionSummary；寫入白名單另列patchCourseDraft／syncSheet。舊getCompletion已移出連接器，名冊不再傳回Mac。
+
+| 新callable | 權限 | 輸入 | 輸出／副作用 |
+|---|---|---|---|
+| listManagedCourses | teacher claim、teacherIds篩選 | 無 | 純讀課程代碼／名稱／學期／草稿發布旗標／revision，不寫profile |
+| getCourseDraft | 課程owner教師 | courseId | 純讀course投影＋revision，無名冊／teacherIds／Sheet網址 |
+| getCompletionSummary | 課程owner教師 | courseId、classId | 純讀，由後端彙總人數／各單元完成數／必做機會數，只回統計 |
+| patchCourseDraft | 課程owner教師 | courseId、expectedRevision、ops、UUID requestId | 交易內驗證4種op、版本遞增、auditLog／重送去重；只改draft |
+
+saveCourse共用驗證並支援可選expectedRevision；管理頁明確帶版本。所有草稿變更路徑遞增revision；syncSheet增加確認用revision集合／來源狀態hash檢查與題數摘要。auditLog只存教師actor與結構摘要／hash，不存學生資料。完整語意、相容限制與部署影響見STAGE3_REPORT.md。
+
+以下為第1–2階段在4ed3778的**歷史快照**：行號／當時缺口與白名單均不代表此分支1.9.1；保留供回溯。
+
+---
+
 # AP2 callable 盤點（第 1 階段）
 
 日期：2026-10-15；基底 `origin/main@4ed3778e67a630dfe9cc8ea13096cc220a616868`。

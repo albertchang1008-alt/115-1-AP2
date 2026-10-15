@@ -43,7 +43,7 @@ test('Chapter 進度、互動教材與課程驗證都有伺服器端防線', () 
   assert.match(source, /chapterPrefixes/, 'visibleProgress 要保留學生可見 Chapter 活動鍵');
   assert.match(source, /requestedChapter/, '互動教材事件要接受 chapterName');
   assert.match(source, /chapterActivityKey/, '互動教材通關要寫 chapter 活動鍵');
-  const save = source.slice(source.indexOf('exports.saveCourse = (0'), source.indexOf('exports.publishCourse = (0'));
+  const save = fs.readFileSync(require.resolve('../lib/shared/courseValidation.js'),'utf8');
   assert.match(save, /chapterOrder/);
   assert.match(save, /chapterOverrides/);
   assert.match(save, /chapter\.activities/);

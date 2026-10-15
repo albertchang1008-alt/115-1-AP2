@@ -1,3 +1,14 @@
+# 2026-10-15：平台MCP第3階段完成停點A，交Claude審查 [Codex]
+目前版本：1.9.1
+
+- 沿用feature/platform-mcp獨立worktree；fetch確認origin/main4ed3778無新提交，前輪f0c1e7e為基底。只本機commit，不push／部署／merge main或正式資料寫入。
+- 新增listManagedCourses／getCourseDraft／getCompletionSummary純讀與patchCourseDraft；saveCourse／patch共用驗證，root revision0相容、交易比較與遞增、UUID requestId重送去重、auditLog同交易；稽核只存教師actor與schema／hash摘要，規則僅owner教師讀、client寫拒絕。
+- 後台明確傳讀取revision並保留衝突時的本機編輯；其他草稿變更路徑遞增，複習考建立／刪除也帶版本與回傳新revision。revision為metadata，不存入draft。舊客戶端省略expectedRevision仍相容但無衝突保護，報告明列。
+- 連接器7唯讀補齊，移除舊getCompletion個資傳輸；新增5個destructive兩步工具，教師預覽同意＋10分鐘一次性碼，綁payload／真實草稿／revision／同步來源狀態，失效或變動拒絕。寫入白名單只有patchCourseDraft／syncSheet，沒有發布工具。
+- 同步保留既有全重算不讀舊bank保證；未知新增／更新／保留題數回null、reset已知值，不捏造數字。外部Sheet成功套用只測mock契約，留停點B由教師另授權測試課程，不對正式課程同步。
+- 完整AP2 check前端162／Functions61，工具check16，全部0 skipped；demo-platform-mcp的Auth／Firestore／Functions Emulator16項真實HTTP流程通過，包含並行衝突與重送、後台保存helper拒絕、audit規則、7唯讀工具，個資掃描0，正式呼叫0。
+- 版本升1.9.1，version:check納入工具package／lock；未變更依賴版本、Excel、教材、站別與其他worktree。報告docs/platform-mcp/STAGE3_REPORT.md、stage3證據，README安裝與停點規則更新。停止交Claude，桌面設定未修改、未部署MI。
+
 # 2026-10-15：AP2 本機 MCP 第1–2階段，唯讀驗證完成並列明後端缺口 [Codex]
 目前版本：1.9.0
 

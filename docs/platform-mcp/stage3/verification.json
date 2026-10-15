@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-15",
+  "version": "1.9.1",
+  "site": "ap2",
+  "stage": "A local only",
+  "platformAndFunctions": [
+    {
+      "tests": 162,
+      "pass": 162,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "tests": 61,
+      "pass": 61,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "connector": [
+    {
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "emulatorChecks": 16,
+  "productionCalls": 0,
+  "deployed": false,
+  "pushed": false
+}

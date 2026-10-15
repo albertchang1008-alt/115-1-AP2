@@ -115,6 +115,8 @@ export interface ExplanationResearchEvent {
   clientAt: number;
 }
 export interface Course {
+  /** Root draft revision returned to editors; not part of the persisted draft payload. */
+  revision?: number;
   features?: Partial<import('./features').CourseFeatures>;
   assessmentSources?: { pretest: string[]; posttest: string[] };
   id: string;

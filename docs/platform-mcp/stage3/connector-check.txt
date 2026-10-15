@@ -1,0 +1,117 @@
+
+> platform-mcp@1.9.1 check
+> tsc --noEmit && npm test && npm run build
+
+
+> platform-mcp@1.9.1 test
+> node --import tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: read and write allowlists are separate; legacy PII and unsafe get functions rejected before token/network
+ok 1 - read and write allowlists are separate; legacy PII and unsafe get functions rejected before token/network
+  ---
+  duration_ms: 1.389666
+  type: 'test'
+  ...
+# Subtest: privacy removes nested names/IDs/credentials, scans output, and preserves material/activity UUIDs
+ok 2 - privacy removes nested names/IDs/credentials, scans output, and preserves material/activity UUIDs
+  ---
+  duration_ms: 1.386833
+  type: 'test'
+  ...
+# Subtest: missing or nonboolean teacher claim refuses startup
+ok 3 - missing or nonboolean teacher claim refuses startup
+  ---
+  duration_ms: 0.14375
+  type: 'test'
+  ...
+# Subtest: diff is stable across key order and detects arrays/additions/removals
+ok 4 - diff is stable across key order and detects arrays/additions/removals
+  ---
+  duration_ms: 0.293
+  type: 'test'
+  ...
+# Subtest: all seven read tools use actual new backend contracts, and draft diff reads both true versions
+ok 5 - all seven read tools use actual new backend contracts, and draft diff reads both true versions
+  ---
+  duration_ms: 2.176375
+  type: 'test'
+  ...
+# Subtest: completion tool only invokes backend summary, never obtains roster/individual progress
+ok 6 - completion tool only invokes backend summary, never obtains roster/individual progress
+  ---
+  duration_ms: 0.211333
+  type: 'test'
+  ...
+# Subtest: sync errors are flags, never free form names/emails or Sheet identifiers
+ok 7 - sync errors are flags, never free form names/emails or Sheet identifiers
+  ---
+  duration_ms: 0.371167
+  type: 'test'
+  ...
+# Subtest: actual callable transport is AP2 fixed endpoint and correct envelope
+ok 8 - actual callable transport is AP2 fixed endpoint and correct envelope
+  ---
+  duration_ms: 1.617375
+  type: 'test'
+  ...
+# Subtest: App Check/401 permanently stops this client and never exposes raw failure
+ok 9 - App Check/401 permanently stops this client and never exposes raw failure
+  ---
+  duration_ms: 7.531208
+  type: 'test'
+  ...
+# Subtest: schemas reject arbitrary endpoint/project or traversal
+ok 10 - schemas reject arbitrary endpoint/project or traversal
+  ---
+  duration_ms: 4.658834
+  type: 'test'
+  ...
+# Subtest: write preview shows before-after and never writes; apply requires teacher approval and one-use confirmation
+ok 11 - write preview shows before-after and never writes; apply requires teacher approval and one-use confirmation
+  ---
+  duration_ms: 5.904291
+  type: 'test'
+  ...
+# Subtest: confirmation rejects expired, changed payload/tool/course, stale revision and unversioned draft changes
+ok 12 - confirmation rejects expired, changed payload/tool/course, stale revision and unversioned draft changes
+  ---
+  duration_ms: 2.201208
+  type: 'test'
+  ...
+# Subtest: all activity tools build strict white-listed ops and invalid fields/order fail at preview
+ok 13 - all activity tools build strict white-listed ops and invalid fields/order fail at preview
+  ---
+  duration_ms: 3.84025
+  type: 'test'
+  ...
+# Subtest: sync preview makes scope/reset explicit, binds status and all revisions, and returns exact backend question counts
+ok 14 - sync preview makes scope/reset explicit, binds status and all revisions, and returns exact backend question counts
+  ---
+  duration_ms: 0.693333
+  type: 'test'
+  ...
+# Subtest: SDK exposes exactly seven read and five destructive two-step write tools, with sanitized results
+ok 15 - SDK exposes exactly seven read and five destructive two-step write tools, with sanitized results
+  ---
+  duration_ms: 40.90825
+  type: 'test'
+  ...
+# Subtest: sync unknown question counts stay null; private data in a write preview is refused
+ok 16 - sync unknown question counts stay null; private data in a write preview is refused
+  ---
+  duration_ms: 1.725292
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1209.417958
+
+> platform-mcp@1.9.1 build
+> node build.mjs

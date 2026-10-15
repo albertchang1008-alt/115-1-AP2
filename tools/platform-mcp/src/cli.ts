@@ -4,7 +4,7 @@ import { serve } from './server.js';
 import { smoke } from './smoke.js';
 import { SafeError } from './config.js';
 try {
-  if (process.argv[2] === '--version') process.stdout.write('platform-mcp 0.1.0\n');
+  if (process.argv[2] === '--version') process.stdout.write('platform-mcp 1.9.1\n');
   else if (process.argv[2] === 'login') await loginPage();
   else if (process.argv[2] === 'smoke') await smoke();
   else if (!process.argv[2]) await serve(await authenticatedToken());

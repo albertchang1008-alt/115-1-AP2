@@ -1,18 +1,36 @@
 import { PROJECT_ID, REGION, SafeError } from './config.js';
 import { authenticatedToken } from './auth.js';
+import { decodeJwt } from 'jose';
 // Audited by effects, not by name. bootstrap/getReflections/assessmentReport are excluded.
-export const READONLY_CALLABLES = Object.freeze(['getPublished','getSyncStatus','getCompletion'] as const);
+export const READONLY_CALLABLES = Object.freeze(['listManagedCourses','getCourseDraft','getPublished','getSyncStatus','getCompletionSummary'] as const);
+export const WRITE_CALLABLES = Object.freeze(['patchCourseDraft','syncSheet'] as const);
+export function assertWrite(name:string) {
+  if (!(WRITE_CALLABLES as readonly string[]).includes(name)) throw new SafeError('WRITE_CALLABLE_NOT_ALLOWLISTED');
+}
 export function assertReadonly(name: string) {
   if (!(READONLY_CALLABLES as readonly string[]).includes(name)) throw new SafeError('CALLABLE_NOT_ALLOWLISTED');
 }
 export type Call = (name: string, data: Record<string,unknown>) => Promise<any>;
 export class CallableClient {
   private blocked = false;
+  private subject?: string;
   constructor(private token = authenticatedToken, private transport: typeof fetch = fetch) {}
   async call(name: string, data: Record<string,unknown>): Promise<any> {
     assertReadonly(name); // Must precede even token access or network.
+    return this.request(name,data);
+  }
+  async write(name:string,data:Record<string,unknown>):Promise<any> {
+    assertWrite(name);
+    return this.request(name,data);
+  }
+  private async request(name:string,data:Record<string,unknown>):Promise<any> {
     if (this.blocked) throw new SafeError('APP_CHECK_BLOCKED: 已停止連線，請回報教師；不可關閉 App Check。');
     const token = await this.token();
+    if (this.token === authenticatedToken) {
+      const subject = decodeJwt(token).sub;
+      if (!subject || (this.subject && this.subject !== subject)) throw new SafeError('AUTH_IDENTITY_CHANGED: 請重新啟動並重新預覽。');
+      this.subject = subject;
+    }
     let response: Response;
     try {
       response = await this.transport('https://' + REGION + '-' + PROJECT_ID + '.cloudfunctions.net/' + name, {

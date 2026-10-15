@@ -1,3 +1,4 @@
+import { saveDraftWithRevision } from './courseRevision';
 import { ReflectionEditor } from './ReflectionEditor';
 import { ReflectionResults } from './ReflectionResults';
 import { reflectionTemplate, validateReflectionConfig } from '../shared/reflection';
@@ -295,18 +296,19 @@ export default function App() {
     return () => controller.abort();
   }, [profile?.uid]);
   async function save(c: Course) {
-    await api.call('saveCourse', { course: c });
+    const saved = await saveDraftWithRevision(api,c);
     setCourses((old) =>
-      old.some((x) => x.id === c.id) ? old.map((x) => (x.id === c.id ? c : x)) : [...old, c],
+      old.some((x) => x.id === c.id) ? old.map((x) => (x.id === c.id ? saved : x)) : [...old, saved],
     );
     setCourseId(c.id);
     setDirty(false);
     setUnsavedIds((old) => { const next = new Set(old); next.delete(c.id); return next; });
+    return saved;
   }
   async function openPreview(c: Course, draft = true, unit?: string, activity?: string) {
     try {
       let chosen = c;
-      if (draft) await save(c);
+      if (draft) chosen = await save(c);
       else if (api.preview) chosen = await api.call('getPublished', { courseId: c.id });
       else chosen = await api.call('getPublished', { courseId: c.id });
       setPreviewClass(chosen.classIds[0]);
@@ -964,7 +966,7 @@ function NewActivityDialog({ onCreate, onCancel }: { onCreate: (activity: Activi
 type CourseEditorProps = {
   course?: Course;
   api: API;
-  save: (course: Course) => Promise<void>;
+  save: (course: Course) => Promise<Course | void>;
   preview: (course: Course, draft?: boolean, unitId?: string, activityId?: string) => void;
   notify: (message: string) => void;
   newCourse: () => void;
@@ -1010,7 +1012,8 @@ export function CourseEditor(props: CourseEditorProps) {
     try {
       const ready = materialize();
       for (const chapter of Object.values(chaptersOf(ready))) for (const a of chapter.activities) if (a.type === 'reflection') validateReflectionConfig(a.reflection);
-      await save(ready);
+      const saved = await save(ready);
+      setDraft(saved || ready);
       if (publish) {
         const result = await api.call<Course>('publishCourse', { courseId: ready.id });
         setDraft(result); onPublished(result);
@@ -1025,7 +1028,7 @@ export function CourseEditor(props: CourseEditorProps) {
   const reviewPool = draft.units.filter((u) => reviewSources.includes(u.id));
   const reviewTotal = reviewPool.reduce((sum, u) => sum + (u.questionCount || 0), 0);
   const reviewAllocation = reviewSources.length && reviewCount >= reviewSources.length && reviewCount <= reviewTotal ? allocateDraw(Object.fromEntries(reviewPool.map((u) => [u.id, u.questionCount || 0])), reviewCount, reviewSources) : {};
-  const buildReview = async (input?: { name: string; sources: string[]; count: number }) => { const examName = input?.name || reviewName, sources = input?.sources || reviewSources, count = input?.count || reviewCount, previous = draft.units.find((u) => u.id === examName); if (previous?.review && !confirm('會產生新的考卷版本。學生已考到的最高分保留；舊版本的錯題不帶到新版本。')) return; setBusy(true); try { const r = await api.call<any>('buildReviewExam', { courseId: draft.id, name: examName, sourceUnitIds: sources, drawCount: count }); const review = { sourceUnitIds: sources, sourceVersions: r.sourceVersions, drawCount: count, allocation: r.allocation, builtAt: r.builtAt, history: [{ version: r.version, drawCount: count, allocation: r.allocation, builtAt: r.builtAt }, ...(previous?.review?.history || [])].slice(0, 10) }; const u: Unit = { id: examName, title: examName, group: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: r.version, questionCount: count, activities: [], visibility: 'hidden', review }; const base = materialize(); const exists = base.units.some((x) => x.id === examName); setDraft({ ...base, units: exists ? base.units.map((x) => x.id === examName ? { ...x, bankVersion: r.version, questionCount: count, review } : x) : [...base.units, u], chapters: exists ? base.chapters : { ...base.chapters, [examName]: { title: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }, chapterOrder: exists ? base.chapterOrder : [...(base.chapterOrder || []), examName] }); setSelected(examName); setReviewOpen(false); notify('複習考題目池已建立；請設定開放與適用班級後保存草稿。'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
+  const buildReview = async (input?: { name: string; sources: string[]; count: number }) => { const examName = input?.name || reviewName, sources = input?.sources || reviewSources, count = input?.count || reviewCount, previous = draft.units.find((u) => u.id === examName); if (previous?.review && !confirm('會產生新的考卷版本。學生已考到的最高分保留；舊版本的錯題不帶到新版本。')) return; setBusy(true); try { const r = await api.call<any>('buildReviewExam', { courseId: draft.id, expectedRevision:draft.revision ?? 0, name: examName, sourceUnitIds: sources, drawCount: count }); const review = { sourceUnitIds: sources, sourceVersions: r.sourceVersions, drawCount: count, allocation: r.allocation, builtAt: r.builtAt, history: [{ version: r.version, drawCount: count, allocation: r.allocation, builtAt: r.builtAt }, ...(previous?.review?.history || [])].slice(0, 10) }; const u: Unit = { id: examName, title: examName, group: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: r.version, questionCount: count, activities: [], visibility: 'hidden', review }; const base = materialize(); const exists = base.units.some((x) => x.id === examName); setDraft({ ...base, revision:r.revision ?? base.revision, units: exists ? base.units.map((x) => x.id === examName ? { ...x, bankVersion: r.version, questionCount: count, review } : x) : [...base.units, u], chapters: exists ? base.chapters : { ...base.chapters, [examName]: { title: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }, chapterOrder: exists ? base.chapterOrder : [...(base.chapterOrder || []), examName] }); setSelected(examName); setReviewOpen(false); notify('複習考題目池已建立；請設定開放與適用班級後保存草稿。'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
   if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再同步 Google Sheet 建立單元。" /><button onClick={newCourse}>新增課程</button></section>;
   return <>
     <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy} onClick={() => act(true)}>發布課程</button></div></header>
@@ -1060,7 +1063,7 @@ export function CourseEditor(props: CourseEditorProps) {
         </section>)}
         {chapter.activities.length > 0 && <div className="actions"><button onClick={() => setAddingActivity(true)}><Plus size={16} />新增活動</button></div>}
         {addingActivity && <NewActivityDialog onCancel={() => setAddingActivity(false)} onCreate={(activity) => { changeChapter({ activities: insertActivity(chapter.activities, activity) }); setJustAdded(activity.id); setAddingActivity(false); }} />}
-        <hr /><h2>{(!!units[0] && isReviewUnit(units[0])) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{(!!units[0] && isReviewUnit(units[0])) ? (() => { const review = units[0].review!, changed = review.sourceUnitIds.filter((id) => draft.units.find((u) => u.id === id)?.bankVersion !== review.sourceVersions[id]); const sourceCounts = review.sourceUnitIds.map((id) => `${id} ${draft.units.find((u) => u.id === id)?.questionCount || 0} 題`); return <><p className="muted">題目池共 {sourceCounts.reduce((n, row) => n + Number(row.match(/(\d+) 題$/)?.[1] || 0), 0)} 題（{sourceCounts.join('、')}）；每次抽 {review.drawCount} 題，組卷於 {new Date(review.builtAt).toLocaleString()}。</p><p>{Object.entries(review.allocation).map(([id, n]) => `${id} 每次 ${n} 題`).join('、')}</p>{changed.length > 0 && <div className="notice warning"><strong>來源題庫已更新（{changed.join('、')}），題目池仍是組卷當時內容</strong><button onClick={() => void buildReview({ name: units[0].id, sources: review.sourceUnitIds, count: review.drawCount })}>依目前題庫重新組卷</button></div>}<div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(review.sourceUnitIds); setReviewCount(review.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { await api.call('deleteReviewExam', { courseId: draft.id, name: units[0].id }); setDraft((d) => ({ ...d, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id), classUnits: Object.fromEntries(Object.entries(d.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== units[0].id)])) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></>; })() : <><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}</>}
+        <hr /><h2>{(!!units[0] && isReviewUnit(units[0])) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{(!!units[0] && isReviewUnit(units[0])) ? (() => { const review = units[0].review!, changed = review.sourceUnitIds.filter((id) => draft.units.find((u) => u.id === id)?.bankVersion !== review.sourceVersions[id]); const sourceCounts = review.sourceUnitIds.map((id) => `${id} ${draft.units.find((u) => u.id === id)?.questionCount || 0} 題`); return <><p className="muted">題目池共 {sourceCounts.reduce((n, row) => n + Number(row.match(/(\d+) 題$/)?.[1] || 0), 0)} 題（{sourceCounts.join('、')}）；每次抽 {review.drawCount} 題，組卷於 {new Date(review.builtAt).toLocaleString()}。</p><p>{Object.entries(review.allocation).map(([id, n]) => `${id} 每次 ${n} 題`).join('、')}</p>{changed.length > 0 && <div className="notice warning"><strong>來源題庫已更新（{changed.join('、')}），題目池仍是組卷當時內容</strong><button onClick={() => void buildReview({ name: units[0].id, sources: review.sourceUnitIds, count: review.drawCount })}>依目前題庫重新組卷</button></div>}<div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(review.sourceUnitIds); setReviewCount(review.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { const removed = await api.call<any>('deleteReviewExam', { courseId: draft.id, expectedRevision:draft.revision ?? 0, name: units[0].id }); setDraft((d) => ({ ...d, revision:removed.revision ?? d.revision, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id), classUnits: Object.fromEntries(Object.entries(d.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== units[0].id)])) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></>; })() : <><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row" key={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題</span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}</>}
       </section>}
     </div>
   </>;

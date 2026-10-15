@@ -1,3 +1,4 @@
+import { courseRevision, assertExpectedRevision } from '../shared/courseDraft';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -232,10 +233,14 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
         case 'bootstrap':
           result = { profile, courses: [...courseMap.values()] };
           break;
-        case 'saveCourse':
-          draft = structuredClone(d.course);
+        case 'saveCourse': {
+          const before = courseRevision(courseMap.get(d.course.id));
+          assertExpectedRevision(before,d.expectedRevision,true);
+          draft = { ...structuredClone(d.course), revision:before+1 };
           courseMap.set(draft.id, draft);
+          result = {ok:true,revision:before+1};
           break;
+        }
         case 'publishCourse':
           published = { ...structuredClone(draft), publishedAt: Date.now() };
           publishedMap.set(draft.id, published);

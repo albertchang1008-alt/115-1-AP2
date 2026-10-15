@@ -1,0 +1,41 @@
+{
+  "mode": "firebase-emulator",
+  "project": "demo-platform-mcp",
+  "productionCalls": 0,
+  "checks": [
+    "pure read list/draft legacy revision0",
+    "read callables do not bootstrap/write profile",
+    "non-teacher and cross-course denied",
+    "connector preview/apply adds activity atomically",
+    "requestId replay does not increment revision or duplicate audit",
+    "stale patch and real admin save helper both rejected without overwriting",
+    "all four patch ops work through connector and callable",
+    "changed revision and expired confirmation denied",
+    "fresh admin save advances revision and audits admin-ui",
+    "concurrent revision7 patches allow exactly one commit",
+    "concurrent same requestId applies once and returns one duplicate",
+    "audit metadata only; published unchanged",
+    "Firestore audit rules allow owner teacher read only; other/student read and client write denied",
+    "sync stale source/status hash rejected before lease or external Sheet access",
+    "backend completion numbers only; no PII transported to connector",
+    "all seven connector read tools use actual emulator callables and scan zero PII"
+  ],
+  "checkCount": 16,
+  "finalRevision": 9,
+  "auditCount": 9,
+  "completion": {
+    "students": 2,
+    "enabledStudents": 2,
+    "completedStudents": 1,
+    "completedRequiredChapters": 1,
+    "requiredChapterOpportunities": 2,
+    "chapters": [
+      {
+        "chapterId": "chapter",
+        "completed": 1,
+        "opportunities": 2
+      }
+    ]
+  },
+  "privacyFindings": 0
+}

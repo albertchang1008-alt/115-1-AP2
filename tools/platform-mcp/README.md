@@ -1,10 +1,9 @@
-# AP2 本機唯讀 MCP 連接器（階段 1–2）
+# AP2 本機 MCP 連接器 1.9.1（第3階段／停點A）
 
-僅 macOS／Node.js 22，以官方 MCP TypeScript SDK 的 stdio 提供工具。固定專案 ap2-7ed91、asia-east1，不支援 MI 或傳入自訂 URL／projectId。未修改 Functions，不能部署。
+本機程式與 Emulator 驗證版本，尚未部署。教師核可並完成 Functions／規則／Pages 發布後，才安裝到 Claude 桌面版並執行停點B。**本輪不對正式課程寫入，不提供發布工具。**
 
-## 安裝與登入
-
-在此目錄執行（依賴只存在此目錄；根目錄與 functions 的 package／lock 不變）：
+## 安裝、登入與 Claude 桌面設定
+需要 macOS 與 Node.js 22。在本目錄執行：
 
 ```sh
 npm ci
@@ -12,71 +11,83 @@ npm run check
 npx --no-install platform-mcp login
 ```
 
-首次會開啟 localhost 頁面，請**教師本人**按「以學校 Google 帳號登入」，選已有 teacher claim 的 ctcn.edu.tw Google 帳號。Google 密碼、驗證碼或鑰匙圈提示由本人操作。不要把 token 貼給 AI，也不要把 token 放入設定檔。
+登入由教師本人在 localhost 頁面操作學校 Google 帳號與鑰匙圈提示；不要把密碼、OTP 或 token 貼給 AI。使用與正式 AP2 相同的公開 Firebase 設定、inMemoryPersistence，驗證 Google 簽章、issuer、audience、expiry、teacher claim 與 refresh 同一身分。refresh token 僅存 macOS 鑰匙圈 service `platform-mcp-ap2`／account `firebase-refresh`；security 以 stdin 存入，不放 argv、檔案或 log。啟動與每次請求前刷新並驗證 teacher，連線中換教師身分時拒絕，須重啟與重新預覽。
 
-登入使用與正式 AP2 網站相同的公開 Firebase 設定，瀏覽器使用 inMemoryPersistence；ID token／refresh token 只在記憶體，refresh token 存於 macOS 鑰匙圈 service `platform-mcp-ap2`、account `firebase-refresh`。security -i 透過 stdin 存入，不把 token 放 process argv、檔案或 log。ID token 以 Google 公鑰驗 RS256、issuer、audience、有效期及 teacher===true；登入另外核對學校信箱／Google provider，並確認 refresh token 與登入教師相同。
+學校、App Check 或401認證阻擋時停止，不改 authorized domains／OAuth／App Check／rules，不使用 debug token 或服務帳戶。正式連接器固定 ap2-7ed91／asia-east1，不能由參數切換站別、URL或使用 Emulator。
 
-每次 stdio 啟動、每次 callable 請求前都從鑰匙圈換新 ID token 並驗 teacher claim；未登入或權限不足拒絕啟動。refresh token 輪替時更新同一鑰匙圈項目；不使用 Admin SDK、服務帳戶、ADC、既有網站 session 或 App Check debug token。
-
-若學校帳號、auth/unauthorized-domain、App Check 或其他認證限制擋下，**停下回報實際代碼**。不改 authorized domains／Google OAuth／App Check／Firestore rules，不換私人帳號繞過。401 或 App Check 錯誤會鎖住該連線後續 callable。
-
-## 加入 Claude 桌面版
-
-教師驗收後自行編輯 `~/Library/Application Support/Claude/claude_desktop_config.json`，將以下節點併入既有 mcpServers；不要覆蓋其他連接器：
+教師完成後續驗收與發布後，自行將以下節點併入 `~/Library/Application Support/Claude/claude_desktop_config.json` 的既有 mcpServers（不要覆蓋其他設定）：
 
 ```json
 {
   "mcpServers": {
     "platform-mcp-ap2": {
       "command": "/Users/HHC/.nvm/versions/node/v22.23.2/bin/node",
-      "args": [
-        "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/platform-mcp/tools/platform-mcp/dist/cli.js"
-      ]
+      "args": ["/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/platform-mcp/tools/platform-mcp/dist/cli.js"]
     }
   }
 }
 ```
 
-不需要 env，不包含任何 token。更換 Node 版本或移動 worktree 時自行更新絕對路徑。編譯產物 dist 忽略版控，首次使用前須 npm run build。本輪不替教師修改 Claude 設定，也不安裝至全域。
+設定無 env、無 token。移動 worktree 或換 Node 時更新絕對路徑，dist 不提交，先 npm run build。重新啟動 Claude 後應列出12工具：7唯讀、5標 destructive 的兩步寫入工具。無憑證時拒絕啟動，只有 stderr 安全錯誤，stdout 保留給 stdio 協定。本輪不替教師修改桌面設定。
 
-重新啟動 Claude 桌面版後，確認連接器顯示已連線、工具列表有下列七個名稱。也可用 `npm start` 檢查：有 teacher token 時會等待 stdio MCP 協定輸入（不向 stdout 印文字），無 token 時 stderr 顯示安全錯誤碼並結束。不要將手動啟動的 stdio 視窗當作 HTTP 服務。
-
-## 工具與既有後端限制
-
-| 工具 | 可用範圍 |
+## 七個唯讀工具
+| 工具 | 輸入／內容 |
 |---|---|
-| list_courses | available:false；bootstrap 會寫 profile，不能使用 |
-| get_course_draft | available:false；無純唯讀草稿入口 |
-| get_published | 指定 courseId；單元、分類、活動與班級設定投影，不含名冊 |
-| diff_draft_published | available:false；未取得可靠草稿，不能計算線上差異 |
-| get_sync_status | 專案級最近同步結果數量／錯誤旗標／歷史 staleUnits；捨棄錯誤全文和名冊 |
-| list_materials | 指定 courseId；repo AP2 目錄38份及已發布活動使用位置；草稿使用情況 unknown |
-| get_completion_summary | courseId、classId；分頁讀取後僅回傳數字，沿用平台完成度公式3 |
+| list_courses | 無參數；教師管理的課程代碼、名稱、學期、草稿／發布旗標、revision |
+| get_course_draft | courseId；課程草稿投影＋revision，不含名冊／teacherIds／Sheet網址 |
+| get_published | courseId；已發布課程投影 |
+| diff_draft_published | courseId；讀真實草稿與發布版本，回傳差異路徑摘要，忽略發布時間等metadata |
+| get_sync_status | 專案級最近同步時間、數字／錯誤旗標、上次同步staleUnits；即時草稿另讀get_course_draft |
+| list_materials | courseId；repo的38份AP2目錄及草稿／已發布活動的使用位置 |
+| get_completion_summary | courseId、classId；由後端計算人數、完成數、各單元完成數、必做機會數，不把名冊／逐題資料傳回Mac |
 
-list_courses 等工具雖保留介面，**不是完整功能已驗收**。本輪沒有純唯讀方式取得真實草稿，故 diffSummary 純函式只做離線單元測試，線上工具不要求 AI 傳入草稿快照冒充目前資料。詳細盤點見 `../../docs/platform-mcp/CALLABLE_INVENTORY.md`。
+純讀白名單固定為 listManagedCourses、getCourseDraft、getPublished、getSyncStatus、getCompletionSummary；舊 getCompletion 已移除。bootstrap 等帶副作用入口仍禁止。
 
-完成度後端回應必然包含學生名冊與進度，只有本機記憶體接觸；不回傳個別學生、游標或逐題資料。只統計 enabled===true 的完成度，students 另外保留總列數，零必做項目不算「完成學生」。若超過100頁、游標循環或任何頁讀取失敗，整個工具失敗，不回半份總數。這是即時分頁讀取，不是同一時間點快照。
+## 五個寫入工具：一定先預覽
+所有工具都有 `mode: "preview" | "apply"`；**套用前必須把預覽內容給教師看，並取得同意**。預覽不寫入，回傳改前→改後、expectedRevision、confirmationCode、expiresAt、requestId。確認碼只在這個MCP連線記憶體、10分鐘有效、一次性；重啟後失效。套用需同一工具與相同內容，加 confirmationCode 與 teacherApproved:true。讀回草稿／revision／同步狀態變動、內容改動、過期或重用均拒絕，必須重新預覽。
 
-所有 MCP 輸出經 course 投影／工具專用彙總，再經遞迴過濾（email、學號、姓名、uid、名冊、逐題作答、token等）與 email／8–12位學號／JWT 掃描；未知例外不回傳原始訊息。自由文字 regex 無法辨識所有人名，所以不收名冊／錯誤全文／個人資料工具，也不能將本工具視為任意資料的通用匿名化器。
+| 工具 | preview需要的內容 |
+|---|---|
+| add_activity | courseId、chapter（既有單元鍵）、activity（完整活動） |
+| update_activity | courseId、chapter、activityId、patch |
+| reorder_activities | courseId、chapter、activityIds（完整排列，不可漏項或重複） |
+| update_chapter_settings | courseId、chapter、patch |
+| sync_sheet | resetWrong（預設false）；範圍為此教師名下所有對應Sheet課程，不限單課程 |
 
-## 測試與實際驗證
+activity欄位白名單：id（僅新增）、title/type/phase/url/start/end/description/tracking/required/reflection/materialVersion/nodeTotal/questionTotal。chapter設定白名單：title/description/required/threshold/opensAt/dueAt。不能用這些工具變更班級、名冊、題庫答案、課程功能或刪除單元。保存與patch使用共用課程驗證。
 
-```sh
-npm run check
-npm run smoke
-npm run smoke:stdio
+套用範例（確認前只能做第一步；代碼必須使用實際回傳值）：
+```json
+{"mode":"preview","courseId":"MCP-TEST","chapter":"呼吸系統","patch":{"required":true}}
+```
+教師看過預覽並同意後，使用同一工具：
+```json
+{"mode":"apply","courseId":"MCP-TEST","chapter":"呼吸系統","patch":{"required":true},"confirmationCode":"實際預覽回傳值","teacherApproved":true}
 ```
 
-check 包含型別、單元／官方 SDK 協定測試、CLI與登入頁建置；每次測試都禁止寫入類 callable 並檢查去識別與 teacher claim。
+寫入白名單另列為 patchCourseDraft／syncSheet，沒有generic callable。patchCourseDraft在同一交易完成owner授權、expectedRevision、op驗證、revision遞增、auditLog及requestId去重；同requestId改payload或換教師一律拒絕。確認碼若已用但網路回應失敗，先讀草稿確認結果，不自動重送寫入。
 
-smoke 必須先由本人完成登入，只對正式 AP2 課程 `115-1-AP2` 執行；完成度指定 test 班，不開輪、不作答、不改成績。輸出先過濾和掃描，0 findings 才寫入 `docs/platform-mcp/readonly-smoke/*.json`，包含 live 標記。三個受限工具記錄 unavailable，不算實際後端通過。任何錯誤即停止，不跳過或填入模擬資料。
+sync_sheet預覽只顯示範圍／目前狀態，不預讀Sheet題目或假裝預估題數；套用前與後端取得lease前均核對所有管理課程revision及同步來源／狀態hash。既有同步最多100課，連接器超過此數會拒絕部分預覽。它同步題庫／草稿，不發布、不執行syncRoster。結果回 added／updated／retained／reset 題數；全部重算保持「不讀舊bank」保證，因此該情況前三項為null、reset為本次題數。舊bank不完整時未知項也為null，countsComplete=false；不捏造0。reset可能和其他項重疊，不是互斥加總。
 
-登入流程截圖只記錄無帳號／token 的本機等待、成功或安全錯誤頁；不截取 Google 帳號選單、密碼、驗證碼或鑰匙圈秘密。
+## revision 與稽核
+舊課程root沒有revision視為0。bootstrap／getCourseDraft回root revision；管理頁保存時帶讀取版本，成功後保存新版本，衝突顯示「草稿已在其他地方被修改，請重新整理後再編輯」，保留本機未保存內容，不自動覆寫或重試。其他草稿變更路徑也遞增revision。
 
-## 安全邊界與後續
+saveCourse的expectedRevision依交辦保留可選，舊客戶端省略時仍可保存並遞增；**舊客戶端省略版本不具有衝突保護**。新版管理頁、MCP patch及複習考編輯會明確帶版本。升級後請重整管理頁。
 
-唯讀白名單：getPublished、getSyncStatus、getCompletion。bootstrap、getReflections、getAssessments、assessmentReport 都有寫入副作用，禁止使用。即使原始碼某模式只讀，整支具寫入能力的 callable 仍不開放。未提供 generic call、寫入工具或自訂 endpoint。
+auditLog只存時間、教師actorUid、來源、UUID requestId、op／欄位／數量、revision前後與hash；不存原始課程文字、token、名冊或作答。教師uid是交辦明定的稽核actor，不是學生uid。規則只允許該課owner教師讀，學生／其他教師不可讀、客戶端不可直接寫。
 
-第3階段 patchCourseDraft／auditLog，以及補齊 listManagedCourses／getCourseDraft／後端完成度彙總，必須另案授權。不要從此工具直接修改正式資料。
+## 本機驗證（停點A）
+```sh
+# worktree根目錄：完整平台檢查
+VITE_SITE_ID=ap2 npm run check
+# 本工具目錄：獨立檢查
+npm run check
+# worktree根目錄：只可用demo Emulator，不需要正式登入
+firebase emulators:exec --project demo-platform-mcp --only auth,functions,firestore --config firebase.platform-mcp-emulator.json 'GCLOUD_PROJECT=demo-platform-mcp node --import tsx tools/platform-mcp/emulator-flow.mts'
+```
 
-官方參考：[MCP SDK](https://ts.sdk.modelcontextprotocol.io/server)、[Firebase callable](https://firebase.google.com/docs/functions/callable-reference)、[Firebase token refresh](https://firebase.google.com/docs/reference/rest/auth#section-refresh-token)、[Firebase Google 登入](https://firebase.google.com/docs/auth/web/google-signin)。
+Emulator腳本硬檢查demo專案與127.0.0.1:9499／8480，callable固定localhost:5501，使用合成教師／學生與MCP-TEST資料，不從鑰匙圈取得正式token。流程包括7唯讀工具、4patch op、後台保存衝突、並行衝突／重送、確認碼過期、audit權限與個資掃描。外部Sheet同步套用只做mock契約與錯誤前置檢查，停點A不連正式Sheet；真實同步留停點B另行授權。
+
+`npm run smoke`／`npm run smoke:stdio` 是後續部署後的正式**唯讀**驗證命令，本輪不執行；正式寫入只可用教師另外建立的測試課程。這輪不實作preview_publish／publish_course。
+
+證據與限制：../../docs/platform-mcp/STAGE3_REPORT.md；STAGE2_REPORT及readonly-smoke是1.9.0歷史證據，不代表新後端已上線。所有輸出仍需投影／過濾與個資掃描；自由文字regex不是通用人名匿名化器。
