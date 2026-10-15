@@ -1,0 +1,1960 @@
+{
+  "ok": true,
+  "branch": "feature/respiratory-infographics",
+  "head": "e8805f8",
+  "changedAllowed": [
+    {
+      "path": "materials-src/kit/kit.css",
+      "before": "6746ea9ec62df0980f37158ad839fe9709d81d00fc737aced31d42d880fcba71",
+      "after": "bd91145c7d104f575f71413e8dc9419273fdb1e53de55dc931728e57b40884a6"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-06.svg",
+      "before": "616fcc1f1d77b9288ce30d93f238265245e3c1f9bd1725cb00cd2f27b0f90bea",
+      "after": "3d636fd7ab7ac5d1da70dd878d4a710f76bb79379356ead87e06c40a7b5b668c"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-06.svg",
+      "before": "86acc794275be5522a1e2dbd838d4c39b2bf5592849930dcafe4c6d771e9befa",
+      "after": "a82f1693513b532e93773e8cf4ab3de9f3236d4de7677e4ccf1ab903902e116e"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-04.svg",
+      "before": "a3f91a8620f5ca438a2bd18877f67a1a602652803c1b964fe2cfc10048ef3298",
+      "after": "83db9492e9356f5109cfa2447f9e476ed65a5b6615069a0b8c2cb5e7dd9485a3"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-05.svg",
+      "before": "18a293e78cec1286f0a4b71f0e14c5622e66424e52f3f2c09029770625d90164",
+      "after": "f42f719ff7938c0a664c822e524726c4554cef3f468e05d86bacfb7a0a77515e"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-04.svg",
+      "before": "1d4b1e6b02a7d37287c45daee4ac93bf7818a4fc9e1eb163b09924cd0f3930a1",
+      "after": "c2a365e65440745cbff26b06808c804503e3dbe29016ea8e07944371acf13a0b"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-05.svg",
+      "before": "02b50636135ec14bfa2b72c3afb01fb107b83cca14d13778bbf7e98d8a7f6a52",
+      "after": "bf17180f6e749ce39de66116035ff8fafa97df4992096bee0ac8c85c974bdab4"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-01.svg",
+      "before": "8d732052c8856e9d7154d529a758f0402be332e790bbf3e79fce1ed1200c23bc",
+      "after": "60790e69433c640112d4c4a007592b7ddc8d5caac67240c6902db13fbad9f12d"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-01.svg",
+      "before": "b858e69126402bf5f05d8d29a832a5c394fe9d2898ee68a0bad5a860e6f65151",
+      "after": "c5be5cf3f285226a7d3d54fbaae9a04e2040aee118cff1880d2e26c2b54d976e"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-02.svg",
+      "before": "8d54e670f74aa1924587f36a27ae1163103ff3a713faa7da79372242daa19874",
+      "after": "3e96053868dc3ad006186b6e40c51a6ef85d26a54cdbba62ab44fb10c20bc409"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-03.svg",
+      "before": "8459189233cf29f2dab98af46b854ce622c4bb052c0eefc3804c8c18a93a2ff5",
+      "after": "d2ceecd5a533c113c2cb1dffcefb6debc13cef23527d9b631f49e1f07ff9d013"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-02.svg",
+      "before": "350077cc213791ba019aaf22154af570b84141813936ad195693914805be7969",
+      "after": "9f8d89f91192fb4396dc9dcf9881cd7b5ca56721af86f65c4ae8dea279384283"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-03.svg",
+      "before": "5e5db8f153b8a79193ed6ad2b63c5b942ded1c5494e29dffbd01940ed6c0bffc",
+      "after": "7df986ad49f404f0b8ac66d2318243ee39c9711f492d8fa09e3c18df93b0d758"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-06.svg",
+      "before": "5e38fe970402486197c68afcd688aad1f1dfd78a675963b9d09b6eed4c07ecfb",
+      "after": "c381241d7538e286a74e680655c9fa213bb261d828f4a3ee0486d2cab314eb03"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-05.svg",
+      "before": "6caa89d563e1688bcb76daac1a5df1fc4c6da4407c090d758cbd625362cdd2dc",
+      "after": "a85ea018438bc5c7b1aece1f65faddaec5c7b4c5a98f9984d8406099ba4a49bb"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-04.svg",
+      "before": "0a94b41b36d959ea789ebe9ff582afb7bdd6f94e0f3b79e98075ab935ea2f713",
+      "after": "dce492a256629a92a62458730990630136e9951ac43841817f7e8ab1de5b9f19"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-overview.svg",
+      "before": "8cecc032f01abe480046dbeef78e3439ea54de2b2bd4a048c70c8ad46217e907",
+      "after": "709e70e15cc1777ea026e7d8997d1c4cad372e43b25335d869ab8200fa2434a0"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-01.svg",
+      "before": "de573a09400236dd85b26cf15bd1c6edcaab63646fabfb49d933c8e73b57fa49",
+      "after": "5e01dd96f9e796ce04b3ced2962ded31a199e07282e20330e993bcf23aa03f74"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-03.svg",
+      "before": "fcee94c50e798f4737b19d7deee07c0b26b5b41c842adfab52ec80780546e88c",
+      "after": "bf38d9131e490043574ac77826116dc9cd4390482e8fdbdf7e5f252d8fbb9775"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-02.svg",
+      "before": "9eceed3fe3f392020bcf1ee44b72d62ca048d60c34c493b902e544fb70cd3f0d",
+      "after": "4c31e2c74838dff5d2d4e081e7ceead930c0559a51438a26b4ebe18660cc6787"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-05.svg",
+      "before": "8fab6be48aa37dd4acb0961e763dd7fa3cbabfdb2b7f498b1624e5e355b9ca56",
+      "after": "e134b80bf64912c5d05a9135adf0a669cdce0a090a7eee5bb0b8a70789ec9b7a"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-03.svg",
+      "before": "d5f99ce57d6cc5139cf4fa89847f6cd05b24c8559b3a2b61c0a0fc38cf4b4722",
+      "after": "603f824538de2ee7de3370099642045544e9a05ce65482286d81df643c349d67"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-02.svg",
+      "before": "b066c586caf7cb545efc9bf3ac223cdb7cb3b1a9ca2d2bc9a38b7d2a62471b09",
+      "after": "bc8a8f2804671de668b1bd0c16f5c7c17dc8b0de0875d4cead1418ad56de76eb"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-04.svg",
+      "before": "7ef35f970ea6c6d2ed8c240aa4e95004e9d0591ff112479bf3b4e70b1af8d850",
+      "after": "bf6ea43bd94ded2853974d681b25db0fe0e6eabbb2638fe202d9c4c2079ddd4a"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-overview.svg",
+      "before": "0f883632d3949a5f0a8929cb2faf68cc88624beca5a849dd17c1c95c0234958b",
+      "after": "b93dd9e68ed61efbdc0926d6e8a04ae2dd0697ce1e4dc97e7b0c6936de17fc0c"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-06.svg",
+      "before": "f206929261242f7f3056ebd48558124d3fff2a96019395c93c9c598b5b45b666",
+      "after": "096c91bf08b57cc5ad10625efea93b9933713944b7d84932fac9abed8516f46d"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-01.svg",
+      "before": "b588dcac29956798a3f7b5adba341eea5952e6e7b93e198d5e270c8ac6063c76",
+      "after": "c334986bd2435caea2864cf6d88748a65b73ec4a3dcf960015ab3fec6e9d09f0"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-03.svg",
+      "before": "ec5717d84b846cf4c2a43fc364c846192e118236c09e42817c585471bf7ac468",
+      "after": "9d5b6787711b4b928d353cffec9d4f23a957c7737a496527f099cf19311fdd2b"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-05.svg",
+      "before": "5060d0a240859cff0511358eff67dda61d1e54e34b2a8587dcdbbfb4ec113ec4",
+      "after": "66f836da621c07daa3a606e2d4de54d5e0a2609cb9421ebf63f249de006c823d"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-04.svg",
+      "before": "8337c8a94c1dbd8489f794f9d40198e8e9ff72b91538fe2e3a9a3f13538a8771",
+      "after": "6ad3f6849c32235ecb36f0d04e78f5c28618e2f1b2e8a9932d5415c4c0315894"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-02.svg",
+      "before": "c69e020aff416f1814cfb67a179741dff45a3eca9bf8381aa626333e68432ac1",
+      "after": "a2f561f8fdfe503af787854ae6e5a378bd10ba1928496b2809875d6c395533c9"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-06.svg",
+      "before": "62641797442d28c4d21f0190890b84d0f8da68450770aa8daaec2e52557efc64",
+      "after": "aa3010c62a341eb4723455d86b7c054a4ada25900b9c6cbaa0413a2c161d57fe"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-01.svg",
+      "before": "bd887f3acdaf6567bd059970f1c672b00d72263c684da16f89d58067cdb2e204",
+      "after": "4bdf4877686c55715501ecda85f0d19bc1ed4d8bafe8cf6ebee2f48fd4e90c90"
+    },
+    {
+      "path": "materials-src/figures/lung-function-overview.svg",
+      "before": "3e1712dbfe2bf90f61639ad7e8d922be16ddd0978642bd7b37d38efb748c3fda",
+      "after": "a7e93a2d49713a99a15fb639d3c90e059254c46afd4c018604ae361f4faadf8b"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-overview.svg",
+      "before": "49646159f560c0d0d581e0cae43e291fb9a86e52654584b91f128d2b08c4a7b9",
+      "after": "e1ec634151efb99e1567376d50f420f0a56e014c6e6969ca7977777444a69fbc"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-overview.svg",
+      "before": "e3e4579aa761e80ba297d9a4e4fa4dbe291f44f487a6452d838c04ea079517dd",
+      "after": "df2104995f2ce6872715f2da7cf9538292be3bf4845f405e7f5f88c48f65d46b"
+    },
+    {
+      "path": "public/materials/breathing-mechanics-v1/index.html",
+      "before": "ec1592e14244ffd8939c99046364804595ea38e31080d1418c850cdd59b8cb01",
+      "after": "b9215469279c88c29400d1ff9fbad369b36104ba1fb1006560f2eb9f004b710f"
+    },
+    {
+      "path": "public/materials/gas-exchange-v1/index.html",
+      "before": "eaae7a1ca8a1d58cc7195841d2b10a7cf457b2eebeb78bc7e448af7da8947a27",
+      "after": "380b587c0b5f956035ab88d0fe1a9f2ea5941710e528af308b11b9c4ea6b6e74"
+    },
+    {
+      "path": "public/materials/lung-function-v1/index.html",
+      "before": "96b19de161c6b9aa0289514e940045fd9b882fe5938669d8295120de38abcac6",
+      "after": "00aa5ed846a6013304ffc575d0c67a694c60551670d0f5c2bd9335a6bc79df93"
+    },
+    {
+      "path": "public/materials/respiratory-control-v1/index.html",
+      "before": "73ccbe575d0868148fdda0ca5652346d147e7f66db5fdcd7cff5902ebf6dc60e",
+      "after": "9d5fc3ea36f99dbc985052535ac16e1b116a6a327b4186847ea235b26514c5d3"
+    },
+    {
+      "path": "public/materials/o2-co2-transport-v1/index.html",
+      "before": "cbf81f099759dab20b14f868f0811e33bf36a903f38270ecab5ebeabbc4f0e69",
+      "after": "eb1dee1c7f241e5c6b9bdc323128c6c844a1371be0658ba121dad04d82e7db25"
+    }
+  ],
+  "protectedCount": 344,
+  "protectedFiles": [
+    {
+      "path": "materials-src/manual-presentation-targets.json",
+      "sha256": "f90e99bd13abf795014bff04d778576860a28d16effaad5eecea64c44840c919"
+    },
+    {
+      "path": "materials-src/blood-vessel-circulation/循環路線.rtf",
+      "sha256": "3211448329a37f11fe2f3da93a6e0b94ccce6240479033a481310d7c79101aaf"
+    },
+    {
+      "path": "materials-src/blood-vessel-circulation/血管構造解析.rtf",
+      "sha256": "a526a982a488604b7fe2fee16b892a2c99df45e263e756979ec819b690942f43"
+    },
+    {
+      "path": "materials-src/cardiac-output/content.json",
+      "sha256": "ea7bea9327c6c3a800a7a6e021d5822d43660189dfc395ee58c7255968694536"
+    },
+    {
+      "path": "materials-src/ecg-basics/content.json",
+      "sha256": "edbb8d31c0222ae5783fd4c8dff5c73a47111efe113318c56c5c805af949b00a"
+    },
+    {
+      "path": "materials-src/ecg-basics/reference/ecg-sim-prototype.html",
+      "sha256": "c7176bf9aacc6404c31db6ee18d287efd91b02423e7ff8bffb4b3e772f811b37"
+    },
+    {
+      "path": "materials-src/hemodynamics/content.json",
+      "sha256": "330204f26009cf7b0e08f2914d19c538cb5d84e8c71ec12089d39a0cebb6a964"
+    },
+    {
+      "path": "materials-src/hemodynamics/source.rtf",
+      "sha256": "202ffce5b0ba2ff88e4ddaffa995391f9391accea45aa6f7b3cc29b735376ac4"
+    },
+    {
+      "path": "materials-src/major-vessels/content.json",
+      "sha256": "0e4fbb40c11bdbe9db155c0a7ce786111e4a656191cc9b44f2b1d98adeed1419"
+    },
+    {
+      "path": "materials-src/lymphatic-system/content.json",
+      "sha256": "1837d39b8bea9eb4c870bccebf437633f22e4ae80b01f223d3de2ba5df43ec6c"
+    },
+    {
+      "path": "materials-src/lymphatic-system/source.rtf",
+      "sha256": "b57c799f23747305090d14491e69afca17170dd0cacd5f6411e57e84f30a0993"
+    },
+    {
+      "path": "materials-src/respiratory-control/content.json",
+      "sha256": "46a01763a86f8f7a100872744eb3e9b2be0b4fbe457083f5c9fb9d7aa5fe20fd"
+    },
+    {
+      "path": "materials-src/kit/presentation.css",
+      "sha256": "4a1f2e9a1b952cdca0334fb83c82d1723c6a071de693ca16751a7f0a771f4a95"
+    },
+    {
+      "path": "materials-src/kit/kit.js",
+      "sha256": "a46a964506486da1dcf157678f923a57646bd8203a7c44e1dd4f6b5746f2d280"
+    },
+    {
+      "path": "materials-src/kit/presentation.mjs",
+      "sha256": "1a89f67d0207dc0d29da0f6fa8b43bced4438b70e04925a526a58f09ab93a622"
+    },
+    {
+      "path": "materials-src/lymphoid-organs/content.json",
+      "sha256": "550bf3552b6dc8691493ca75034cb25ce5605656008289beaa19c2ba494ea295"
+    },
+    {
+      "path": "materials-src/cardiac-conduction/content.json",
+      "sha256": "2589635e8bd1747e08809b0189c637af3c5a824d446981045516d7cb5527b330"
+    },
+    {
+      "path": "materials-src/gas-exchange/content.json",
+      "sha256": "301b9336facf31b566b5be0beb0e7cfe2088deaae3b538599bfe1c5d3cb61120"
+    },
+    {
+      "path": "materials-src/circulation-routes/content.json",
+      "sha256": "e5f8d686e779bddfaf0c5f510c8b09a3b064105975cca017c6af1dc215f5425e"
+    },
+    {
+      "path": "materials-src/o2-co2-transport/content.json",
+      "sha256": "af7fa87e682b2395d385223b8b3c2dc5e2f4131d8cbf6f8093f1ead941c16153"
+    },
+    {
+      "path": "materials-src/blood-types/content.json",
+      "sha256": "84f9a573b5d9510a545ff3d1702e34852867ad99c4a908e6feeb789eba015f3e"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-06.svg",
+      "sha256": "a46964f602f20f7f36ddd72ea6cb4eec477290f516b738199ed44976983a74bf"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-speed.svg",
+      "sha256": "f707312a1667e8ec36a8ccaed85ba00aa54b43ae92a6f74e611aff859a81acfa"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-03.svg",
+      "sha256": "05728d9de83b89d6818e1ae430ec1c8f3e688e8300c09e93a63d456ec9795d3d"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-04.svg",
+      "sha256": "782518394f7de28113bb49b67c5001877f970e22dcd5ed759d16aa3e020dc910"
+    },
+    {
+      "path": "materials-src/figures/circulation-route-overview.svg",
+      "sha256": "39b81f81f69b3bbaf3633e5cc2a6cd0793391b4185bee344ec3d9baf104aa941"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-05.svg",
+      "sha256": "a5586cd55334c7e9141661f3c69dd012dacc137bc5c0ae83bacb126203826dbf"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-viscosity.svg",
+      "sha256": "0faf414369b27fd6ad47bac40c62367072e0fdcf60542a0ded592b6f92b0bd82"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-04.svg",
+      "sha256": "bedd4c03985c248ed85ab25535cbe4e5f32bf98f9a6c77e1f830ec7dfb5ef475"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-baroreflex.svg",
+      "sha256": "2e6aeb642b8803f659389889a1ea2a10740fe4a20eeb0b099aad0d5b846e1dca"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-05.svg",
+      "sha256": "b0983ec5a337a4f6e05521884dbdc70feaf6fc58ee9c6f7237773174c7249b34"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-02.svg",
+      "sha256": "b1463a4be9472cd6510f1caef87caa8358dc17772f94bd895d06ce85114fbd53"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-05.svg",
+      "sha256": "45b77988715b7c1fb95afc7fbdec094c441091e9752af0b52def49d6495fdb0e"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-pressure.svg",
+      "sha256": "daed434342e1d2d386e90eecbae2539bb239eaa42eb1588f296e65a710989cfe"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-st-t.svg",
+      "sha256": "c8a26d9b0abcc5c7e0d97e6d0904427b957ba2c22f5ef4d0ee67dfaacc30b6b1"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-06.svg",
+      "sha256": "7012ababbc5f512d4648dd6c7d0e314259d77a93861ca9feb318a602380b56a5"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-sa.svg",
+      "sha256": "288c17e275b426a9f0d09804e444a1968045d2ce384910ea26bf6f33499b6db8"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-nodes.svg",
+      "sha256": "6c564f34eafe6b93df7f61742d51e10a673a4f74542cdceacb15004f245be048"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-06.svg",
+      "sha256": "b18690da659d03b7b9926203c9c95e2b9600e96adac962feb9f667782d3e31fe"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-01.svg",
+      "sha256": "66f1aeafd4d6c2f92c71e90ce5fb7238688e715a8caad039c44d85f472657be4"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-04.svg",
+      "sha256": "9c4fd0ce57dd9a945878dafb31a4ff061768125531ba51c87e49b463febac159"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-overview.svg",
+      "sha256": "682b5ecd985a6a589639f0741eac80db57bc38f41e92e7ecfa20e37f9c4ffbb8"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-05.svg",
+      "sha256": "141addf185318bb17749a0525c0341ad4c4fba1af36cf7a8317e1cdcb864ee36"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-02.svg",
+      "sha256": "ecd24be577c833506ad3eb00f4ddafa8bb736b27cf142272e50b32bda7f14059"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-03.svg",
+      "sha256": "9e60029b278791f16366b16aa51be2822c0f219d46d7614fa8c55672517f6c9c"
+    },
+    {
+      "path": "materials-src/figures/.DS_Store",
+      "sha256": "721bf21eba13dd37dbb11beb6ab0c181318a4ae7db514bb2d0c39571edaaa779"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-overview-state-2.svg",
+      "sha256": "f923e73463ac0aab6a36ba43a82a63951cb7a7002dcc0526bf1360ac70513499"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-overview-state-3.svg",
+      "sha256": "1a57ca9bb48f23450d9e00c86acb70485800ac6ef51fdd825617b772203b25e5"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-qrs.svg",
+      "sha256": "99f12a0b06db9c72bc32ca9a53b2c6dc5912a7d563d1ccc40cdd40bd6c3a52a8"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-02.svg",
+      "sha256": "9037e6fff03f4e96c06739d42cf942b5d6bda4853c1b21878b8bb99b3ea60248"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-03.svg",
+      "sha256": "19fcb509cf2bc35b61975e41826535b9a87d46ee38d97f0775d8f04125e18167"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-04.svg",
+      "sha256": "808979f4d0e146e9ab30ebb8849eab7ba6aabe1d4abd82babe39265742849696"
+    },
+    {
+      "path": "materials-src/figures/cardiac-electrical-traffic.svg",
+      "sha256": "37afe82b6fb80a63491973130afe463cb4336675ed5f6c1369fe86bd91d2755b"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-01.svg",
+      "sha256": "211121ccc20c7d88c1531b0b3ce9e30ffb6434e0d06717103e78880097db3ef6"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-03.svg",
+      "sha256": "db40d7a41d6998b64a2bc6b1ed9a41afb05d34de0f1e34e37f010d330a13294b"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-node-06.svg",
+      "sha256": "bfd742b722c660cf358037e120870af52e6ad36943c10d324963233ee78120f6"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-node-01.svg",
+      "sha256": "ac5ff81db504cfcd392acfefb2fe53e2225a8934454a2ea85708e1dc66ee0992"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-p.svg",
+      "sha256": "1f549cc44e2f7e57c9116f2249217af38b751de1afcd859bf2387fcdf7473728"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-ans.svg",
+      "sha256": "1ff1787e07bb6f631a2c4438a2d0f6f7817634d3ab7eff54c950f2ce129b0370"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-overview-state-1.svg",
+      "sha256": "542f65f3134f4bdb4ce58908f29b66a8bf0716e28bc02aa4fc61f654e5b917af"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-raas.svg",
+      "sha256": "c7b5f328e33370f77cdf8df9161dc16f45733bb04f4168fe83a131087e935d61"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-node-01.svg",
+      "sha256": "1c94431f57741ba10591fd1046d5ae57a119599bbf9847e72168609593ff59d7"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-overview.svg",
+      "sha256": "6e3f47fb68e8369f5cad9c8b24d17b42f8eb1a8f37a51169baa2e474db2d1a0b"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-origin.svg",
+      "sha256": "b6c6824ff3ae3f7c2d8c251e8500c690e260c1d76b18674ba45b03c3c5ef8809"
+    },
+    {
+      "path": "materials-src/figures/circulation-portal.svg",
+      "sha256": "15bc48071a454febb92ab061f6628d69a1685dcd1d2ed91a04ff40203c5f77df"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-node-02.svg",
+      "sha256": "78b278c7828d967abff212016c198edeb1c0703b3052008abd0155eab4a34865"
+    },
+    {
+      "path": "materials-src/figures/circulation-compare.svg",
+      "sha256": "cb23d5cd61e694f599f9e8c4340eb6dcd8000cfef9a5beb66cd60a44ef41a4c8"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-03.svg",
+      "sha256": "87c7fdc462ce207976f3987edaf1e94959be0a7d6c0d8ef0f030786f5816cee4"
+    },
+    {
+      "path": "materials-src/figures/circulation-systemic.svg",
+      "sha256": "20b165030719874662326e992f3c888522e569b11ca93c6548558d60c5dd4f90"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-ivr.svg",
+      "sha256": "467831c201708ebce1f853215e556cfe158478bb23ce46e5cd13564480831956"
+    },
+    {
+      "path": "materials-src/figures/ecg-rate.svg",
+      "sha256": "42dbf8ab11f1bd8c18e1b8220156895a2dadaa63d48bcec2a2965525385884a3"
+    },
+    {
+      "path": "materials-src/figures/heart-cross-section.svg",
+      "sha256": "f5e1eae8e21e6969df081e1247ced80ac2acd6f56ed541759528e806efda6b2d"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-02.svg",
+      "sha256": "c1bf0307d728a73c87e6515df204e3634c5c3d0062e0df005e8d6467ee4fdcbb"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-eject.svg",
+      "sha256": "be316154e428952021da37920fb5977ee9ced426a91c682b5eda89fa3f7cdd21"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-adh.svg",
+      "sha256": "4706d1db07b790424c12aa7ace8c57d48bf4f6d64a2fb1ca07e970dda54cfde9"
+    },
+    {
+      "path": "materials-src/figures/cardiac-electrical-aligned.svg",
+      "sha256": "0ac6a5f0bc03d54b1875d2266087b0a2bccfc4dc3dfe0ea39087cc6558f1a70d"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-overview.svg",
+      "sha256": "2597eb8e8e7149881d4b8db0e18585db853d81a15554a7f6c0b55421b6f6558d"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-01.svg",
+      "sha256": "6409a724a1f621bb1e0d8786dc2d8ea7e4b132532643fac166a58a5ebb58754f"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-05.svg",
+      "sha256": "5ff4eaa44b6fb4b32987e60eedbe393a9155e30bf2143b504074595046306dec"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-ivc.svg",
+      "sha256": "1500d21e8811b820a2e120647b744072401e4dd0ba0c803d19ba5beeeda3c13b"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-auto.svg",
+      "sha256": "8b1bfddaa74fcf09b059096e4234f4e6bacb1d2c7907363210c677d9ddd2007b"
+    },
+    {
+      "path": "materials-src/figures/cardiac-electrical-relay.svg",
+      "sha256": "ce89e6cf1996e646edb4269dc4c736e1dbb2e1f9d3041444fc248c2ea3f75f0e"
+    },
+    {
+      "path": "materials-src/figures/conduction-pathway.svg",
+      "sha256": "77b724ce6f63cfc789ccb772fd5b02390cb0502209e9cc0ad2037faa4fa5cc7f"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-leads.svg",
+      "sha256": "ab65c29a5a5a2bd2f424aa29c02a50b2004faa68d4215ebccb5f502cfae62a87"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-04.svg",
+      "sha256": "4ceeb1566efd01ec5a03c60e39dafa42482c290eac2b856440239a99e21c259d"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-flow.svg",
+      "sha256": "559734fcf02077bc012a6e464b2cd082bff1b07bc48cb279353cc5c8361beaec"
+    },
+    {
+      "path": "materials-src/figures/blood-types-node-06.svg",
+      "sha256": "3927b08022b05d4b51722dea131c1cddbc2580b2ff87e1afb89a8d0ce8f9c0a5"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-rr.svg",
+      "sha256": "23cdc599b3f2e86d4fe372066addcc7ab75ec8302c6502f595ec63713ab169f0"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-av.svg",
+      "sha256": "06ef5ff3206d91ba01f256eb1ae7275ec5757ec46ff706f0de361ed955576c21"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-artery.svg",
+      "sha256": "f45373f4dc44e57c38ab810665732d4f25f9f78e1cae875a20fb9ae34f01b63d"
+    },
+    {
+      "path": "materials-src/figures/ecg-wave.svg",
+      "sha256": "dac55972a028f95d48ec32628102506ba141f35986283edc1c5461d943fd9b3b"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-02.svg",
+      "sha256": "24128f27d9d3b3ddb77f93b063523554082ef0591cd3128881c1d2785ff2364f"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-05.svg",
+      "sha256": "e6ea116e16b8b4e50e6370079003901ea7ca35c4e41efe86b393cc2193be54c6"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-anatomy-base.svg",
+      "sha256": "1152e60988d2d8f642b865edac4fca305cd1fca84f87cf9187c4245717e38d07"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-04.svg",
+      "sha256": "ee87f564a0bb6589321de314c5855ca500eb4aa1341a4c84036580a6e9ecd2f4"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-overview.svg",
+      "sha256": "59249c09d5cd0fc4281ff800e6a4d400a95593f699c09624a2cfa2bd8292fff0"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-03.svg",
+      "sha256": "755e39751e41f44eca9dd8dc293898aefe18e1bac3acf0e972fc4d3ab51f4ac5"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-kick.svg",
+      "sha256": "be663564149f541d6da872e6ef79b315d4b0ba83ffb1556b159efa7f79a64d7f"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-01.svg",
+      "sha256": "f924783caf46bde9f0932d8d5b058cb9c528c16ba146350a816328220eb580de"
+    },
+    {
+      "path": "materials-src/figures/cardiac-cycle.svg",
+      "sha256": "f106b658c88925583204b34ae0473601b390ee638e35f5692e38c9831b8ca425"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-06.svg",
+      "sha256": "9992c55ef3724cd477fa19e3148694d19b1b48032e4f61dae0376efc8737a028"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-pulse.svg",
+      "sha256": "6c35ddb196584ab4f67e524dc9dc695ce83eab95621eb752bfb0a95a8b5b7bdd"
+    },
+    {
+      "path": "materials-src/figures/heart-node.svg",
+      "sha256": "0a4555c9a348cc4bcaabff6ecd33c7b091e80e5d33b9b3c9b09928bc2cf5ac3a"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-overview.svg",
+      "sha256": "39d2d70746e0eabb3a95e2b6a2984529db64f252ff8907dc9ebc44bcc4725233"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-overview.svg",
+      "sha256": "e9107690f1b13a969dd475294f0ad80b001debbe65a9d2440985e48e87520875"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-04.svg",
+      "sha256": "67324b07f8729b07949ebfc4954dd42df3ca114ddaebb613c224f6881b08f12f"
+    },
+    {
+      "path": "materials-src/figures/circulation-fetal.svg",
+      "sha256": "2bf10c8f056e96579fcfb0f7e44cb2ea6e5b2fb12a6002b0f7e26605df4aeca8"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-03.svg",
+      "sha256": "f704fbff383a74d6a5146f8654a0a66816116f72f4b2a28db820d71e2d8961a9"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-02.svg",
+      "sha256": "dba3631e6098e1e3ad54c3985b4e0e88180b2091d723f8ef87078066a38f77c7"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-measurement-overview.svg",
+      "sha256": "51c663b268a0b703098bd98ff8b1fae1674a2174746442d825a237930a93ac8f"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-patterns.svg",
+      "sha256": "9f6b944bb4d05446066fdbdc1b437c7f8e5094b86b72ec986f02260a031070d0"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-05.svg",
+      "sha256": "2935d051ad086b63db4225273d263391969e8408f88c7cdc86b09fbaf38509da"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-co.svg",
+      "sha256": "0a1f2be72668b2bb84ab378ac4309ac8c15b0ab00433b4985d6488a0aff793ab"
+    },
+    {
+      "path": "materials-src/figures/manifest.json",
+      "sha256": "0dc39007217999e2ac636b9621ac2d2e3e2712564e92bee6bf31ed19b46ca6ea"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-overview.svg",
+      "sha256": "a349acd563b745e4deb0efe0193d50806578e14b9777306163e26683a15f0a0a"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-node-01.svg",
+      "sha256": "27592fcbc15bdccb377d3076f7a5dc0a5e50df2a472babe9b8147c658b20f08e"
+    },
+    {
+      "path": "materials-src/figures/ecg-node-pr.svg",
+      "sha256": "5cdd05ffc36ead6854f2751beabf7f7a8ce3c10e7a136e4151059c67e8a420cb"
+    },
+    {
+      "path": "materials-src/figures/capillary-exchange-node-06.svg",
+      "sha256": "5ef9d17b8704dcef3ddb68bb6001518a8758d606ddec276bc5baf0f3df3c250b"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-wall.svg",
+      "sha256": "bcaf2dc0f05f7665b730147b78440a4f5001c61bf555e2572cd01d66de514992"
+    },
+    {
+      "path": "materials-src/figures/cycle-node-fill.svg",
+      "sha256": "366ee7014c1cc59ade963c7bc8617e66a6dccaac18df478b6081dfdeefeba895"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-02.svg",
+      "sha256": "7a24ddec3f6aebdb3b11fd45907ac1baf8a43a2673a425ee9ded0b987fbb58ec"
+    },
+    {
+      "path": "materials-src/figures/cardiac-output-overview.svg",
+      "sha256": "d2ef1f9f8a7c60502e1704e1ec040b9a3eabba1956ae3f94ab95bd729abe7c67"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-his.svg",
+      "sha256": "5bdb93ee7f96250fb5ed4474a688c3ead16e3397991b05331c57692e78e081b9"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-03.svg",
+      "sha256": "463fe72e7cd33e7167abbdcfeca57a7e2c5e17cd3131fccfcdcd61f3876a8ca0"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-speed.svg",
+      "sha256": "469f7de8909d744cca14e14080a1ba102c02c4ff2a587706e25ce66d3d02748d"
+    },
+    {
+      "path": "materials-src/figures/major-vessels-portal.svg",
+      "sha256": "204ddcb61bfc72544bdfded08a6b79aa3dcedfa5af2c169a998c5108b334e45d"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-01.svg",
+      "sha256": "4078a74ec30ef615e02646a427cf3492e5e322abe8c01890cb60f3bdcd600e7c"
+    },
+    {
+      "path": "materials-src/figures/lymphoid-organs-overview.svg",
+      "sha256": "371d61fde9532fd9df20d603de0e6c7706f69033654e37b9988135b874a7e93f"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-vein.svg",
+      "sha256": "886d23cebe83209a1738374363eac03ac076f7caf76fd52ca3c9608ca5831420"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-pump.svg",
+      "sha256": "01bb0250765c8f9c4c436bd1dacb8b02c91cc3e31055df7c82815abeca9fd5c3"
+    },
+    {
+      "path": "materials-src/figures/circulation-pulmonary.svg",
+      "sha256": "01630dc56b3987ad03b26a8077cf4be8ad45006ca25a73e2544a44e21c11b9b8"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-lymphocytes.svg",
+      "sha256": "683d62cba839109a66487172d0c14890509ee2b22fddfcd00fa9b5c86efc649e"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-04.svg",
+      "sha256": "8972bab158ee7bb752abb8355bc817ac5b334d7c623d4c41aed5dbb901cab5bc"
+    },
+    {
+      "path": "materials-src/figures/circulation-coronary.svg",
+      "sha256": "3b733a74332d864fb49148ebb7743f83f505f73ecd4b9578451b516ba73ed881"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-thoracic.svg",
+      "sha256": "3b7cd745a14334462630eb73d5ee45e78c3eaf32e732c87ec21d40200033fd4c"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-05.svg",
+      "sha256": "b87d98c33559ef43c19df828091e3c623aa3ec6b4c8de04b2cbe182a54d8b859"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-map.svg",
+      "sha256": "8e1ab2e815690058b65baf22c7cddfd163d820c2b8cb8bbc06b6630551e2d199"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-sensors.svg",
+      "sha256": "ebe130ac981626556265108aeb6f9454f545cc1cd9446c351e94a8252406f330"
+    },
+    {
+      "path": "materials-src/figures/lymphatic-system-right-duct.svg",
+      "sha256": "98491ba2df4f9d0b1a348ce42afb281a9c89b0467d8cb22bef29eec8997898ac"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-route.svg",
+      "sha256": "3317ac547f0f88fa67041c9304b4c797b3b27f28ce83b13169038b5b727ca5fb"
+    },
+    {
+      "path": "materials-src/figures/conduction-node-purkinje.svg",
+      "sha256": "fd0e6299c06cecf6e4deccf0454b28e2ceed3abe404a713ffe6c1129fa26c2c9"
+    },
+    {
+      "path": "materials-src/figures/blood-vessel-capillary.svg",
+      "sha256": "66486faff8e56af7f6198cd10b8a98ceff1bf1b657da1a4053b488cde71ba96b"
+    },
+    {
+      "path": "materials-src/figures/blood-pressure-regulation-anp.svg",
+      "sha256": "c486dccbf76d44ca62d8df2fb7a82e1a95694e91f6be42129afd39ba612e9965"
+    },
+    {
+      "path": "materials-src/figures/blood-types-overview.svg",
+      "sha256": "b0f0785a21a9d66179ddddd34ac23ee44ceba74434321cfad136ea1e88e8a81f"
+    },
+    {
+      "path": "materials-src/figures/lungs-pleura-overview.svg",
+      "sha256": "45f407353e55cc6156fe0d46e498dedac725c6290b8603ecad2a489df13c3bd1"
+    },
+    {
+      "path": "materials-src/figures/airway-structure-node-06.svg",
+      "sha256": "a96ec9041b6c39f0d8d58e6c1f35711a08f486fe2aa3986a551357b718885664"
+    },
+    {
+      "path": "materials-src/figures/hemodynamics-radius.svg",
+      "sha256": "28a45c980065c87e7910c4682e51c589f381018b47be064f9a8fcdf94f348a21"
+    },
+    {
+      "path": "materials-src/figures/raster/_chatgpt_run_log.csv",
+      "sha256": "b321a56d0594c9b66987188e58610a7fd61fee9d56ddf5d3f1d01397187291ca"
+    },
+    {
+      "path": "materials-src/figures/raster/_review.json",
+      "sha256": "b66c910a08a4ec5dde9167fd2c8b0d32e77323cf7f39802157ea4d0484c43684"
+    },
+    {
+      "path": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-02.png",
+      "sha256": "6c8f0df805aad2479c54a8a571b323dc7c215e49ebb30fbf11e71c9f2bc34aa2"
+    },
+    {
+      "path": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-03.png",
+      "sha256": "bddac3a6d1dfd7dfdf0a2b2e990a7d806f5c68e3fd342475821bdf17dcd135f2"
+    },
+    {
+      "path": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+      "sha256": "d4e5f733075998cea33d3e7e2d8a3f164df375ddd08580a0b84ee1e0d75b9d5d"
+    },
+    {
+      "path": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-05.png",
+      "sha256": "6ae6d69b5dd7c1dcc783b65b2c6669a21c86f0993b946fdd3d1f48241cc23295"
+    },
+    {
+      "path": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-04.png",
+      "sha256": "f059e299b5568dc98841ecfb6108abf681de428aa21402081966472f929f4479"
+    },
+    {
+      "path": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-03.png",
+      "sha256": "68d815ed4a2297497bebc21c67e2c33b237525c148e5fda39d8b4ed3e305bd25"
+    },
+    {
+      "path": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-02.png",
+      "sha256": "b3a0e95a14090114a9007f9af3a5991aa0ae5352da9334f51789138e8fe11c62"
+    },
+    {
+      "path": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-01.png",
+      "sha256": "31c0148ba5b499c7e4bf508911c61dab290955e6badf184cf9330124d93768ed"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-04.png",
+      "sha256": "7b5575e1cb577fd0b3fac5e37a0921ac1aef96d7db3edf7a46592cdd25bf72c6"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-05.png",
+      "sha256": "df4ff6b2419e967bec3a993a690015c3876ebe9c0268c9a93432bc9607c6a181"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-01.png",
+      "sha256": "03e30ee68aef1dce5b15619e0cf7e433aec185d98731a92958febd1fb8e1da25"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-02.png",
+      "sha256": "d55933ba4ac52b103c9d85bebd79f30764cbc1f3d5a92f652e3094c2230232e0"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/incoming/IMG-respiratory-control-03.png",
+      "sha256": "e65341341ef910127e81e50ccf19b48229ddab60f5851c053e7ea1f9a5169fa4"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+      "sha256": "e4db66328c091633c25e174206b6fc7a89b30316efda09f138ad39a30ca0b159"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+      "sha256": "72fba411961b46d51123681369731dfbe2e8f40b05f9a65e1b3d4f822fc396be"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+      "sha256": "f174b57faddffb094fc33b8d78fc854112f71930dcb824560be46ea0bac94daf"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+      "sha256": "932692a0a15d8ec330a48db6ee762b31ca60be497a75cfef826f9767f1f547eb"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+      "sha256": "958e5b7994d05db0284624afa8a1f7cf60b7e542dc180a5a0477d30bbd5d8274"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+      "sha256": "7517f8282e7e3796943ff415e61fcda1d53e7b6bf1371be0f0fa21086bb8eec8"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+      "sha256": "81859c77d386919d729b5038840c7265254ef86c686ada51449b6720fbbcf34a"
+    },
+    {
+      "path": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+      "sha256": "ab901c65e6f3fcd123d63b2b6042a0730abe4bd538c7046c8a3b13e635a367c5"
+    },
+    {
+      "path": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-02.png",
+      "sha256": "f6e9ea98ba81fa61c312478d2fc44a7a88bb3260701bb4ef66b675845f9b7e9d"
+    },
+    {
+      "path": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-03.png",
+      "sha256": "195d46d9f013a3b00f5b7b1286a5c244bd629b3d3ae6c3a0f4adf65e5bb2afde"
+    },
+    {
+      "path": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-04.png",
+      "sha256": "f35ad194ef9ecfe007fc3028f1bee107a4a1659cbcb61c36b29e72c855e86370"
+    },
+    {
+      "path": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+      "sha256": "12441ff2c296d064fbac5da5f1d22b077678f52a8b512e805979655fb0f0d5ff"
+    },
+    {
+      "path": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+      "sha256": "87df55559e7533997756ec8ad6580e972ef2be7259d8b9ae8f86e9c03f15dcb4"
+    },
+    {
+      "path": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-02.png",
+      "sha256": "9527c96eca562ad678713c4165cceff492518ae9c3e696661d8674297f4618c9"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-01.png",
+      "sha256": "e5bccda5be355f52537f6087bbbd718858ab9a96a24a36e825212e825029a86a"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-02.png",
+      "sha256": "d9e66ae035fc86a8604ef66f76435315d3be088250fe508c8235c4de34405346"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-03.png",
+      "sha256": "4606697afee329a10f41669d7171502aaf58530a144162fc8698188e9d4d496e"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/.DS_Store",
+      "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-06.png",
+      "sha256": "10f8ca26a0e2c3eab827a11f064e0b43dc95692f24029b4ba74ac66e9d35aa16"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-04.png",
+      "sha256": "fd9a45efffb191d0a344309c373968d6d3540787ea113175277e2fe7a2f937b3"
+    },
+    {
+      "path": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-05.png",
+      "sha256": "3714cecc0e5909ddc94a306cae5570b6a9871ab833dc796bb233d3ad3bfe9a69"
+    },
+    {
+      "path": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+      "sha256": "b8bf09e5ca26da836ef4675fe3e8b1badd2f3859efb7e8aa09fb00fa3dda9b67"
+    },
+    {
+      "path": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+      "sha256": "e028dc2e1e4cd79e3d92d7638d600b6313beaed9d9bd6878f1d4136ed580d4cf"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+      "sha256": "4d0c9c41c9a9ff76a4f3a973967d66aebb1a4c801f28478b5e843e4fcd407f6b"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+      "sha256": "5d522b5d4ec63a5cf015a317c1e5584005ddd8ef65eee705c3cb9baad10fe482"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+      "sha256": "273a708b8232cda4b914633c036e8f49d4ad7a14d41f56c42c84c2e88a2eaf18"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+      "sha256": "2170a8bd1650ae083f530f0d84b8bd341c1f83bc2850595633b88d6428fcd8f3"
+    },
+    {
+      "path": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+      "sha256": "12ea9b21c5ae806d09e51793e4b11860de831aa1e79c8e6e18e83ca3460801d9"
+    },
+    {
+      "path": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-01.png",
+      "sha256": "40ee546dcbd2b43edf6755c605ec7606b9e24411254a8789baccec4ac2f9c3fc"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-01.png",
+      "sha256": "b7e80ba2ded199a02871042642aee6b94e9458e2bd82b9a0ec6e976dbba21f48"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-02.png",
+      "sha256": "207796249ecee857ef3dca1b89c57c3e7bab17b63a7f5a3533b988f03dc073fb"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-03.png",
+      "sha256": "be925f916c6f7d16af1193670b54d0c69b4ec8ab3e877d66b900d60131f326b5"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-04.png",
+      "sha256": "e626320b91a2e228ff5f69bc66d7b8b9269604716a170b818d0d2ffabd0227df"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/incoming/IMG-breathing-mechanics-05.png",
+      "sha256": "d1d241a264c7296cce0a4ee34291d24266472ffe0a16c8baec294423f9befadf"
+    },
+    {
+      "path": "materials-src/figures/raster/lung-function/incoming/IMG-lung-function-01.png",
+      "sha256": "469c6ab3702acce6fa4583ec8e8364a7067215156c3f353bebdce3e394ee675e"
+    },
+    {
+      "path": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-04.png",
+      "sha256": "fd9e52dd3e0e1fc2fcec903d3c59ed498e93248a3e00df4eab4cfde682aecdd3"
+    },
+    {
+      "path": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-05.png",
+      "sha256": "fa7242780cc272debbef7cc51d2d0e4816e2a061c6a6b28843a2e1cc7929ed6c"
+    },
+    {
+      "path": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-01.png",
+      "sha256": "62c5c96a2131805122e98e1c65c1b9e9375b44b646a46b110d22642537ea806a"
+    },
+    {
+      "path": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-02.png",
+      "sha256": "08e83ddf7cd45386131cf22e10b3beeb10f1a78794d12943eb1db5b132a272b6"
+    },
+    {
+      "path": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-03.png",
+      "sha256": "02047e4d62d08b5b4aca46df23574950e1c9496e5efc30e9dcc8795b410e2475"
+    },
+    {
+      "path": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-02.png",
+      "sha256": "41e953c58ad461de42c1440ec75b2920a62ea4800b1ac0a421f4bb935b43bc5f"
+    },
+    {
+      "path": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+      "sha256": "8d6176b33babb0560db584dfe544d3fd8f1681c9b2e05b360a4d3bb96e068045"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/labels.json",
+      "sha256": "380936d99aa9fb67d75004e8fb2de07edad749cbdb609be8851c2106117ab2c1"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-02.webp",
+      "sha256": "c46f66a25b38e388be6a8b9a2bf95acbf8633d2f1832ed77639bfce7830415b1"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-03.webp",
+      "sha256": "cab4575dd055056a4bc74b2c2b181f9423892edc9eb3acc409ad085e6ae82ad2"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-04.webp",
+      "sha256": "10f35cc6aa209b5a33c22d4326ac379d2d9e209e93113839c9f08181668e2b5c"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-08.webp",
+      "sha256": "a0daf925483d4b2d9f4066de676479987947b318cda904af6e2584b50f9116f7"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-05.webp",
+      "sha256": "8e4c9ac67fe67fee8972dca9bb3f85328c8c270e37d0630adacb5b677bf6b3a9"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-06.webp",
+      "sha256": "653731123b972ac0ba859c3992b8613e8c3722ef15111cf75d5eba3b9620f424"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-07.webp",
+      "sha256": "eedf311f827ed1192ca3fba4cde88e39af59f489bb47b9b5b1e406b89099430d"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/plate-01.webp",
+      "sha256": "8a7209e13a64b7ff62850485107b9aa233f67e6603eabe8f408077839180a262"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-02.png",
+      "sha256": "d0124b8bf195dd80bb912da29f5363f26e4ace8fdde079ac6c6c7d6c96579afa"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-03.png",
+      "sha256": "06cfcf96db47230fd06a24cc592c93b146179ede050dbefd57155664a105051d"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-01.png",
+      "sha256": "7eb6d68e7945a3942a524580e4f21cc6fcc6773dbc6a21dc69048b9a8ab78f53"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-04.png",
+      "sha256": "a3fcbcf6f7ae62270c94322c488025edb596e584df69ca15ccd01e7255034a00"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-05.png",
+      "sha256": "9c34d2f8f07ee5f0cb5b002beed4068fe9873d78310fec76b55ccc8abce1f8f6"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-07.png",
+      "sha256": "634b2392b656595ab1950180b2861a3cab6e7072d6636fda344eb233c7af5b77"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-06.png",
+      "sha256": "b38098793c3d8edb8c7e528417583172c54b9ca3fdf576093ed19dcd37130423"
+    },
+    {
+      "path": "materials-src/figures/raster/lungs-pleura/incoming/IMG-lungs-pleura-08.png",
+      "sha256": "8a89d5c33a683a0590a5941749905a0d71288e24cdcfd705a54fea4b0abb6de8"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/labels.json",
+      "sha256": "89cedb890f5b65317a0f4325b3ad3c22fba699cf797c68a499775aca90cc795e"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/trachea.webp",
+      "sha256": "06770c964ec58d9dab9fbc492b19358bc5de4364abe4e46622e0fd4168d7a64d"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/swallow.webp",
+      "sha256": "2b226e05c09d52619c015c8c927e182f31e57c0be43c836b36e7de557a869962"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/sagittal.webp",
+      "sha256": "0b94b03e546f4b3876b32f1ecbf807acd9fa16c7475211a2e47a78f4ecdb7a21"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/dimensions.json",
+      "sha256": "c4672a17855c43447785352bafd803ed401e724efae414a0daaf82371f7f87af"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/cartilage.webp",
+      "sha256": "b58be34ae777b595bc143dc40d35bc00f2f4f3ca15b2ff953fae267467b12926"
+    },
+    {
+      "path": "materials-src/figures/raster/airway-structure/bronchi.webp",
+      "sha256": "42ad9e929e78583e616fc1a19ee923fce3ff9a71feb118b9a664b490cb4f4bd3"
+    },
+    {
+      "path": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-05.png",
+      "sha256": "aedeb3a6726b9d0a3afb58e0604acd670eebbcae02b6569bf09908eb17206557"
+    },
+    {
+      "path": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-04.png",
+      "sha256": "cb30ea18b0ed0188732249dcd77a76e20e1889e7bb223828a985c2f0d649ac1a"
+    },
+    {
+      "path": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-03.png",
+      "sha256": "ef293b2e782f19e2f1ee93b18c3cead282e6d11a7cb059dc6e204143244bf0c5"
+    },
+    {
+      "path": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-02.png",
+      "sha256": "bc112855ea9f400fb4c2d9f34a85b2aaea8833b70bf232c84fa0c11a45566ca5"
+    },
+    {
+      "path": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+      "sha256": "349654f87ca0d73e0568da1746ffe31ee9a8ebbf394f662d6f5031cdb1dd91a9"
+    },
+    {
+      "path": "materials-src/blood-pressure-measurement/content.json",
+      "sha256": "b5eddef8068b44ff811b12ee7015c3d4fbfa843a71c0b73440dc94defedbfabf"
+    },
+    {
+      "path": "materials-src/cardiac-cycle/content.json",
+      "sha256": "af930c56735cab1225debc9c6ea15d3d280a926487c007e44a18a50157a5ee35"
+    },
+    {
+      "path": "materials-src/breathing-mechanics/content.json",
+      "sha256": "d00b874f1f30694ecede0624a89ba26b01791dfe247d5614b00bdfd7f5493443"
+    },
+    {
+      "path": "materials-src/blood-vessels/content.json",
+      "sha256": "ada08e1735ba2366f1cefd7d9550ae9e27d7048e4fec961d8eb1e85a2d76952f"
+    },
+    {
+      "path": "materials-src/blood-pressure-regulation/content.json",
+      "sha256": "089ca6f293a3981ecd2698c1faa4370dc9fd0e2142cb768ad5b384499e3c6d13"
+    },
+    {
+      "path": "materials-src/blood-pressure-regulation/source.rtf",
+      "sha256": "9d1dea5f7415d3c31e41f16437576aa83e13cf3902c8b7884b5056651870a87b"
+    },
+    {
+      "path": "materials-src/capillary-exchange/content.json",
+      "sha256": "eb17f29083e1858439f727d3a3653b7bff82042667387450b91252c090d16f48"
+    },
+    {
+      "path": "materials-src/lung-function/content.json",
+      "sha256": "04cfb420ffcd6f2b8fa26e8799936d9e59ab78afcc8c95f63fb6bfcaa3952b21"
+    },
+    {
+      "path": "materials-src/heart-structure/content.json",
+      "sha256": "3481686a321b69e3408c48c6b54bb4a9fe110c2996e1cfe770900ede989b8ee0"
+    },
+    {
+      "path": "materials-src/lungs-pleura/content.json",
+      "sha256": "06f86fae215a3046fee66b294e3fe00feb4a81326a4c394456ac89151e1fa621"
+    },
+    {
+      "path": "materials-src/widgets/ecg-draw.js",
+      "sha256": "de6b4b69293c1559774b25d305bf173c40834238604de8e3ed51dd6331bd4ce3"
+    },
+    {
+      "path": "materials-src/widgets/ecg-model.js",
+      "sha256": "c0d03f531f303ddc6faaf590ab1ae6fb9a406bbe19bcd4efa1e04a66385ae7ca"
+    },
+    {
+      "path": "materials-src/widgets/ecg-label.js",
+      "sha256": "7d5d2d23e87ce6866d15207ed6e774195f4f044d5f9491f1ce616d75919e6ee1"
+    },
+    {
+      "path": "materials-src/widgets/ecg-sim.js",
+      "sha256": "3d57c9e7b12cffce0a4525348f3b1d18ab387626686c1b78ef6f74a6c0f2f020"
+    },
+    {
+      "path": "materials-src/widgets/heart2.js",
+      "sha256": "65d727efd0813d6923f378a08b51014b5b54e5eb0a3fe36d51e34e646c555a89"
+    },
+    {
+      "path": "materials-src/widgets/oxygen-curve.js",
+      "sha256": "d105171bd96c72f95a6652fe76b3c79970cafdc3505a54dcba6a1f7e9cd163a9"
+    },
+    {
+      "path": "materials-src/airway-structure/content.json",
+      "sha256": "3214cabb0b80a295f71f385263970f044ea320a296830263aed01d2330954878"
+    },
+    {
+      "path": "public/materials/.DS_Store",
+      "sha256": "23835ebc3a11da2cb70e4ad8f2f1be5da3fa5b1e327f8e510fd2998861a424f1"
+    },
+    {
+      "path": "public/materials/course-learning.js",
+      "sha256": "0cc5ab72740899983d524dc12812a0c7c64cd6e5cbd0e5e288a6f9deffa1f722"
+    },
+    {
+      "path": "public/materials/README.md",
+      "sha256": "1f954c3ed57fa0c989bfe407d4c315ef692356c7c171cc1e2f640424ee002586"
+    },
+    {
+      "path": "public/materials/ecg-basics-v1/index.html",
+      "sha256": "0b6858012f0ec38a9ad23a1083ad4a9926cef170c9ada6694b7c63d847b4fef3"
+    },
+    {
+      "path": "public/materials/cardiac-cycle-v2/index.html",
+      "sha256": "0438132ea1c6601299865c4daba4674cac322ca26b7d40243b62afa1c37a3fd9"
+    },
+    {
+      "path": "public/materials/cardiac-cycle-v2/assets/cardiac-cycle-flow-strip-v1.png",
+      "sha256": "e3f37f9acfab277c3c6eec73f4ac7dc70215a25f55082c88c968bfa09fabd36d"
+    },
+    {
+      "path": "public/materials/blood-pressure-measurement-v1/index.html",
+      "sha256": "90b9b5f95505a40d99e5008bd179b0024fd4f6cd10fa9073e69688ce1d4feee1"
+    },
+    {
+      "path": "public/materials/hemostasis-mechanisms-v1/index.html",
+      "sha256": "35fdeacf80867d0e8d4fafe8f4919e3c63ec26d5a6368cf05550e8a6b1dddb37"
+    },
+    {
+      "path": "public/materials/heart-structure-v2/index.html",
+      "sha256": "4b576a686034ebfbf605aaae219636666274706e798f2033d4f42f73f06f6899"
+    },
+    {
+      "path": "public/materials/heart-structure-v2/assets/coronary-overview-v2.png",
+      "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9"
+    },
+    {
+      "path": "public/materials/heart-structure-v2/assets/heart-valve-flow-strip-v1.png",
+      "sha256": "eec1a09759f7fe7e456db00a5cb159356b8b0a44a0275bfe105c97f40e6819d1"
+    },
+    {
+      "path": "public/materials/heart-structure-v2/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6"
+    },
+    {
+      "path": "public/materials/circulation-routes-v1/index.html",
+      "sha256": "f9dfadba1332a746fce5988134332f39bb41aa811630636b1f5277f1102ea4f1"
+    },
+    {
+      "path": "public/materials/hemodynamics-v1/index.html",
+      "sha256": "7d9f5a569668d817bd13ab40279fbf98095f4e6b90f136f4295d6b028227a2f2"
+    },
+    {
+      "path": "public/materials/rbc-homeostasis-v1/index.html",
+      "sha256": "74e0f06c274de7fcd339512f208a3aff919959d2c69f716138fb5c10e916197d"
+    },
+    {
+      "path": "public/materials/rbc-homeostasis-v1/assets/rbc-epo-feedback-strip-v1.png",
+      "sha256": "c5bcf211acc5ca045a3e074f70cc647aa2d89a36638003051bea459702662cbf"
+    },
+    {
+      "path": "public/materials/blood-gas-transport-v1/index.html",
+      "sha256": "27583689ba91ed5fe7891a4ab6052ea0e19bc2f7e3a185756a1b0093ce10ec58"
+    },
+    {
+      "path": "public/materials/cardiac-conduction-v2/index.html",
+      "sha256": "77516e9ee00e49728ed4894030f7e3cc6ce22100b0980d6cf66d43b9454d525d"
+    },
+    {
+      "path": "public/materials/cardiac-conduction-v2/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/index.html",
+      "sha256": "28422e41f4a7753f718256860cee2cfe26ae2bf90febc4c570f2dedfc5ab058e"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-overview-v2.png",
+      "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-diastolic-perfusion-v2.png",
+      "sha256": "f2bf757bdd28f89b8b8c9230f422ae14342aab83ad62cd90751cb47b6b27b43e"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-perfusion-flow-strip-v1.png",
+      "sha256": "3e0294f5cf9852440c7fe0f75bd4c6db219b872e4a868670b2bb64c075d9db15"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-lca-branches-v2.png",
+      "sha256": "39fff8f92a79eed9003d6c00ab037fd7b789725a21070ae10b42f657c36463c8"
+    },
+    {
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-atherosclerosis-v2.png",
+      "sha256": "6984431d7c294781bcb458acde54e5d69097eb1d41eb6f58f70676008bf14250"
+    },
+    {
+      "path": "public/materials/coagulation-v1/index.html",
+      "sha256": "9313777daf037273a070c67cabb4d1a5273d52aea045a1930ea739886ce267f5"
+    },
+    {
+      "path": "public/materials/blood-vessels-v1/index.html",
+      "sha256": "23e66f259d796fa08e03d138c9a1e8f56df72579b1c38549b85464ae86960f94"
+    },
+    {
+      "path": "public/materials/course-orientation-v1/index.html",
+      "sha256": "5f23dd72acd7816c229156e31d24c0b357be60b36140728d7aeba30f8e5dd298"
+    },
+    {
+      "path": "public/materials/course-orientation-v1/background.png",
+      "sha256": "3ca2e4bf90780ce55d2387d3842c796b2bac03fe76e995507ac782eae196caf6"
+    },
+    {
+      "path": "public/materials/lymphatic-system-v1/index.html",
+      "sha256": "6400468ede90a2610445de9dc4a1980187a035fb63852490110cb20d24e355ff"
+    },
+    {
+      "path": "public/materials/blood-pressure-regulation-v1/index.html",
+      "sha256": "5c5f6e55eed19454ec5c3dfa5c5e5352aa76cd27bcb1af10df1d4e6a048f9094"
+    },
+    {
+      "path": "public/materials/cardiac-electrical-v1/index.html",
+      "sha256": "eda1dab299ae34c7cca90cd4e9f113ca9bc82d7ba63e55df7ece630bda475294"
+    },
+    {
+      "path": "public/materials/cardiac-electrical-v1/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6"
+    },
+    {
+      "path": "public/materials/cardiac-cycle-v1/index.html",
+      "sha256": "26e0259ccd224c9df4b26b0ed3459226cf7039daf0725992b00c2dace6065cf9"
+    },
+    {
+      "path": "public/materials/cardiac-output-v1/index.html",
+      "sha256": "1019f67d958b880f3ebd927612fc4acd848b88fa69b3fd5e426c379628dc995b"
+    },
+    {
+      "path": "public/materials/heart-structure-v1/index.html",
+      "sha256": "82d03311fe6f923c52bd4ceb12255d4319393a2aebde7d13bff58d31b754417b"
+    },
+    {
+      "path": "public/materials/hemostasis-mechanisms-v2/index.html",
+      "sha256": "ad7a8a1e5b3b1d4e661655c13e803a892cbce1749a14959f9d0751636c2d24ef"
+    },
+    {
+      "path": "public/materials/airway-structure-v1/index.html",
+      "sha256": "ed30482ae532b2de91ac9727fc992cbe1a03702c930f09da3a306de5e28a873b"
+    },
+    {
+      "path": "public/materials/blood-gas-transport-v2/index.html",
+      "sha256": "59de663db311b79b939125f2c1999f0435f29e6b3b2b05e4ee531ac5bcf48077"
+    },
+    {
+      "path": "public/materials/capillary-exchange-v1/index.html",
+      "sha256": "c5def3ce1bf14c18d6c35b53e18f1e9e1a73ba59fcbd4b5386527ee09a385012"
+    },
+    {
+      "path": "public/materials/blood-types-v1/index.html",
+      "sha256": "d4b3a1b81c3f0614537fdd1328068492db6120d9b5246424a77195efe380a8d1"
+    },
+    {
+      "path": "public/materials/blood-pre-v1/index.html",
+      "sha256": "eee764f6706b7b857d34b51b6e1f165f15e44850afc519e161488ff69e3b8959"
+    },
+    {
+      "path": "public/materials/blood-composition-v1/index.html",
+      "sha256": "4797fdab0ffbfba5f4230e45c64a3fa197eb97a7e10770afd3fee85a38d65efc"
+    },
+    {
+      "path": "public/materials/lymphoid-organs-v1/index.html",
+      "sha256": "7e5dd7b5a71fc1edc2dc68aa7402d2c2164521277e998275ebabb8cb2234c336"
+    },
+    {
+      "path": "public/materials/cardiac-conduction-v1/index.html",
+      "sha256": "22050780738aeecc744cce8c65b170e89e6b521415acdfddfe863182495ab8f6"
+    },
+    {
+      "path": "public/materials/blood-post-v1/index.html",
+      "sha256": "4da2a73798de95e034ebf05639de51cfd01e94b4eda3dc97fb7727e5bb4d2954"
+    },
+    {
+      "path": "public/materials/lungs-pleura-v1/index.html",
+      "sha256": "713cc9fd92c066b2062c5aba8c148aa7e310651c58d6bc0e99b51b5a7bd6a992"
+    },
+    {
+      "path": "public/materials/major-vessels-v1/index.html",
+      "sha256": "f51ff4b0b882bc2b32eb668ba94bc6262d4fc3bd27d29b46394b36bc9b613ecd"
+    },
+    {
+      "path": "html/題目集.rtf",
+      "sha256": "1fac12ca33782123fa1394e9f7814641d135c6fa4fba9aae28aaa46c79e34f5f"
+    },
+    {
+      "path": "html/資訊圖表題庫_上傳用.xlsx",
+      "sha256": "48dca2aa0cbc98c858591aa7489c80baf018fa359fd4ef1d56faa401578fee2e"
+    },
+    {
+      "path": "html/.DS_Store",
+      "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
+    },
+    {
+      "path": "html/心動週期.html",
+      "sha256": "8d442b22abcd6a4495cbaf7b3dd949d6c77c76bb1d4ad9361a0aad1f4eebbcf4"
+    },
+    {
+      "path": "html/循環路線.rtf",
+      "sha256": "3211448329a37f11fe2f3da93a6e0b94ccce6240479033a481310d7c79101aaf"
+    },
+    {
+      "path": "html/紅血球的恆定機制.html",
+      "sha256": "885004ef6ff2b7bbb2b756ef2c99efb551841ba0ff0237c4fb2b27f8fcd8a57c"
+    },
+    {
+      "path": "html/止血機制與凝血.html",
+      "sha256": "2cd46838dcb7edc227e8e83140ffd2b2b609f1f2205c177dc06d3cd5e7f95593"
+    },
+    {
+      "path": "html/血液氣體運送.html",
+      "sha256": "00220ab2fa616017aa7f0cfe40c40b82f511c896d5a58666274bb1e5d84fa7aa"
+    },
+    {
+      "path": "html/淋巴系統.rtf",
+      "sha256": "b57c799f23747305090d14491e69afca17170dd0cacd5f6411e57e84f30a0993"
+    },
+    {
+      "path": "html/血壓的調控.rtf",
+      "sha256": "9d1dea5f7415d3c31e41f16437576aa83e13cf3902c8b7884b5056651870a87b"
+    },
+    {
+      "path": "html/心電圖與心律不整解析v3.html",
+      "sha256": "8d908b73da6b6405d297e0ab9c2ffb7d66c1a45a87db6da2fc74c11046c235fc"
+    },
+    {
+      "path": "html/115學年度解剖生理學與實驗2_課程介紹背景.png",
+      "sha256": "3ca2e4bf90780ce55d2387d3842c796b2bac03fe76e995507ac782eae196caf6"
+    },
+    {
+      "path": "html/血管構造解析.rtf",
+      "sha256": "a526a982a488604b7fe2fee16b892a2c99df45e263e756979ec819b690942f43"
+    },
+    {
+      "path": "html/心臟的傳導系統 I.html",
+      "sha256": "3459781693e535a8e1ad69800507f3da7ac02186ba10e113dc626db7edc57103"
+    },
+    {
+      "path": "html/心臟構造.html",
+      "sha256": "e5d67deb3035035370528d83adcf52012998b22ae5dda4e3d88469c83e23e420"
+    },
+    {
+      "path": "html/血液的組成.html",
+      "sha256": "31dbcbe74d9eb8ad34f025b2b67c1d693e7541cd30fc7c7b1d67d2a003957c0f"
+    },
+    {
+      "path": "html/115學年度解剖生理學與實驗2_ZUVIo題本.csv",
+      "sha256": "73cfdb50ff0615e9be221437fb7e6c236ed78603738bdf019745290a0ffa62bd"
+    },
+    {
+      "path": "html/心臟血液供應.html",
+      "sha256": "b5959421194c87d307baaf8c94e067a2deb56b954f620fcbedee97faee350b7e"
+    },
+    {
+      "path": "html/心電圖基礎與心率調控_ecg-basics-v1_1.html",
+      "sha256": "14fd8585f9022b9575db20673945f0a210ff82e961c727ab53f2e7f8162bf788"
+    },
+    {
+      "path": "html/心臟電性活動.html",
+      "sha256": "3944aad077eea188a5ffa54cda7fa722b0c11f657944ef37b21a9f6f1ba836cb"
+    },
+    {
+      "path": "html/心電圖模擬器試作_v3對照.html",
+      "sha256": "2b93f18cbf2ec8a4bea2d30d678058b04387b88b9777392034e0fe1261baba06"
+    },
+    {
+      "path": "html/115學年度解剖生理學與實驗2_課程介紹資訊圖卡.html",
+      "sha256": "0e1253d49a594ac82f6e64ad28ddc4a6468760b3cb053fa6b88d2e85b0ad10a3"
+    },
+    {
+      "path": "html/血液動力學（Hemodynamics）.rtf",
+      "sha256": "202ffce5b0ba2ff88e4ddaffa995391f9391accea45aa6f7b3cc29b735376ac4"
+    },
+    {
+      "path": "html/~$資訊圖表題庫_上傳用.xlsx",
+      "sha256": "f88a5f0991645e4f6988321bc158394671af7935693ea17e63e2a333b302d542"
+    },
+    {
+      "path": "html/assets/coronary-overview-v2.png",
+      "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9"
+    },
+    {
+      "path": "html/assets/heart-valve-flow-strip-v1.png",
+      "sha256": "eec1a09759f7fe7e456db00a5cb159356b8b0a44a0275bfe105c97f40e6819d1"
+    },
+    {
+      "path": "html/assets/coronary-circulation-panels-v2.png",
+      "sha256": "ff1bcf93a508ff05880d9819722bccfae0dac0666d6d07bed77d5f1bdedb6775"
+    },
+    {
+      "path": "html/assets/coronary-diastolic-perfusion-v2.png",
+      "sha256": "f2bf757bdd28f89b8b8c9230f422ae14342aab83ad62cd90751cb47b6b27b43e"
+    },
+    {
+      "path": "html/assets/coronary-perfusion-flow-strip-v1.png",
+      "sha256": "3e0294f5cf9852440c7fe0f75bd4c6db219b872e4a868670b2bb64c075d9db15"
+    },
+    {
+      "path": "html/assets/coronary-lca-branches-v2.png",
+      "sha256": "39fff8f92a79eed9003d6c00ab037fd7b789725a21070ae10b42f657c36463c8"
+    },
+    {
+      "path": "html/assets/coronary-atherosclerosis-v2.png",
+      "sha256": "6984431d7c294781bcb458acde54e5d69097eb1d41eb6f58f70676008bf14250"
+    },
+    {
+      "path": "html/assets/cardiac-conduction-flow-strip-v1.png",
+      "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6"
+    },
+    {
+      "path": "html/assets/rbc-epo-feedback-strip-v1.png",
+      "sha256": "c5bcf211acc5ca045a3e074f70cc647aa2d89a36638003051bea459702662cbf"
+    },
+    {
+      "path": "html/assets/cardiac-cycle-flow-strip-v1.png",
+      "sha256": "e3f37f9acfab277c3c6eec73f4ac7dc70215a25f55082c88c968bfa09fabd36d"
+    },
+    {
+      "path": "html/_原稿備份/心動週期.html",
+      "sha256": "edb3ffd9dda6545a781644dad540100a9e0cc1ad83b735d3350a630151d808a3"
+    },
+    {
+      "path": "html/_原稿備份/心臟的傳導系統 I.html",
+      "sha256": "4ac0c600807aa1a103de6979c50f4b67b3844bce7f4fc5d62a82c1618c3eaa4c"
+    },
+    {
+      "path": "shared/learning.ts",
+      "sha256": "5228d81c28b29c1762c2e9616e0cf4d4814c74b8f6d3bb78531b19f7f12320b4"
+    },
+    {
+      "path": "shared/materialKit.ts",
+      "sha256": "d0527d13ff829251206131276bc8a1dee1dc0cb1f03f389dc445168b32249e94"
+    },
+    {
+      "path": "shared/model.ts",
+      "sha256": "a59f5a40fa55880f84fccaeebba12b50413e8a107744f05903c573a43575044d"
+    },
+    {
+      "path": "shared/chapterMerge.ts",
+      "sha256": "db4712e0538c5621a71703eeca1e2456a7ba7c2cc9db363ed9bc24901c5de7ef"
+    },
+    {
+      "path": "shared/practice.ts",
+      "sha256": "6da4722893ef2c79b5c65bf9d9e1ef275c73cdd4d4170e7bd423726642f797d0"
+    },
+    {
+      "path": "shared/materials.ts",
+      "sha256": "e2706a26e41f95db64184015ecc32297d17b721008c03cd43632022b69e1eb0a"
+    },
+    {
+      "path": "shared/sheets.ts",
+      "sha256": "509658933d75c90b6f4ca26eb4bb4dd5a32d33093889a4f44a02dffc8d0445e1"
+    },
+    {
+      "path": "shared/version.ts",
+      "sha256": "9a73844acaeed9a86cbdb94396de5816b1afee5a376693279265df414b0a851b"
+    },
+    {
+      "path": "shared/wrongCarry.ts",
+      "sha256": "ebe68aa080e2495a1fdd82fc1ed5c920dff36a5776c51a6c542f79bd7d1d5f90"
+    }
+  ],
+  "unexpectedChanges": [],
+  "materials": [
+    {
+      "slug": "gas-exchange",
+      "captionSourceExact": true,
+      "diagramStates": 18,
+      "shots": 20,
+      "htmlBytes": 1169178,
+      "minMobilePx": 12.889411764705882
+    },
+    {
+      "slug": "respiratory-control",
+      "captionSourceExact": true,
+      "diagramStates": 18,
+      "shots": 20,
+      "htmlBytes": 1293644,
+      "minMobilePx": 12.889411764705882
+    },
+    {
+      "slug": "breathing-mechanics",
+      "captionSourceExact": true,
+      "diagramStates": 18,
+      "shots": 20,
+      "htmlBytes": 917195,
+      "minMobilePx": 12.889411764705882
+    },
+    {
+      "slug": "o2-co2-transport",
+      "captionSourceExact": true,
+      "diagramStates": 18,
+      "shots": 20,
+      "htmlBytes": 477049,
+      "minMobilePx": 12.889411764705882
+    },
+    {
+      "slug": "lung-function",
+      "captionSourceExact": true,
+      "diagramStates": 18,
+      "shots": 20,
+      "htmlBytes": 234144,
+      "minMobilePx": 12.889411764705882
+    }
+  ],
+  "generatedArtifacts": [
+    {
+      "path": "materials-src/figures/gas-exchange-overview-state-2.svg",
+      "sha256": "f35a66f4418ab65cac389acf1c1ab3243c822c5d0a7f48486621cb2fabb1ba87"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-overview-state-3.svg",
+      "sha256": "a2af4d9b524212325947eaa971031a292e2f70cf2c104a153c30d9557771d1a5"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-overview-state-1.svg",
+      "sha256": "03fa97016866a1fb93c8c5337a101fa8262bf8f201f598310e0a8bff5c317246"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-06.svg",
+      "sha256": "c381241d7538e286a74e680655c9fa213bb261d828f4a3ee0486d2cab314eb03"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-05.svg",
+      "sha256": "a85ea018438bc5c7b1aece1f65faddaec5c7b4c5a98f9984d8406099ba4a49bb"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-04.svg",
+      "sha256": "dce492a256629a92a62458730990630136e9951ac43841817f7e8ab1de5b9f19"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-01.svg",
+      "sha256": "5e01dd96f9e796ce04b3ced2962ded31a199e07282e20330e993bcf23aa03f74"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-03.svg",
+      "sha256": "bf38d9131e490043574ac77826116dc9cd4390482e8fdbdf7e5f252d8fbb9775"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-node-02.svg",
+      "sha256": "4c31e2c74838dff5d2d4e081e7ceead930c0559a51438a26b4ebe18660cc6787"
+    },
+    {
+      "path": "materials-src/figures/gas-exchange-overview.svg",
+      "sha256": "df2104995f2ce6872715f2da7cf9538292be3bf4845f405e7f5f88c48f65d46b"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-02.webp",
+      "sha256": "daca1ddb7cd5b10234feffe9793703b2bad2dd04db71d5cb775e418ef2635746"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-03.webp",
+      "sha256": "fa0ff7d12629bfa826cbc5b22fda4b95a1aced115afa906fc4660c023f4b7370"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-04.webp",
+      "sha256": "863a80722623e98539f095ac80a92413419c5efe0f421f8a6161d166ba02e501"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-05.webp",
+      "sha256": "7021ecd9ccef01877366192e4d2c9c0c4220607726f2bc861195881c3fd51e3e"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-06.webp",
+      "sha256": "1095a107b150d0fc7c05a89aaaaea5a8fcbd4da372e24ac6b5faae62872ce5d2"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-07.webp",
+      "sha256": "bd77a140c05d27bbbaa378bec3ac41b7b0f25892441445781fd3b2a8bf026820"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/plate-01.webp",
+      "sha256": "4d13952f8ae5e521b551c4758a6d6dfc68ee490a58b663f5764b9db2d4e72ce1"
+    },
+    {
+      "path": "materials-src/figures/raster/gas-exchange/labels.json",
+      "sha256": "439df9aef63a31b11980d5d1aed8527d8005c4d51c406a47ca65aededa08f161"
+    },
+    {
+      "path": "public/materials/gas-exchange-v1/index.html",
+      "sha256": "380b587c0b5f956035ab88d0fe1a9f2ea5941710e528af308b11b9c4ea6b6e74"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-06.svg",
+      "sha256": "3d636fd7ab7ac5d1da70dd878d4a710f76bb79379356ead87e06c40a7b5b668c"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-05.svg",
+      "sha256": "f42f719ff7938c0a664c822e524726c4554cef3f468e05d86bacfb7a0a77515e"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-04.svg",
+      "sha256": "c2a365e65440745cbff26b06808c804503e3dbe29016ea8e07944371acf13a0b"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-01.svg",
+      "sha256": "c5be5cf3f285226a7d3d54fbaae9a04e2040aee118cff1880d2e26c2b54d976e"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-03.svg",
+      "sha256": "d2ceecd5a533c113c2cb1dffcefb6debc13cef23527d9b631f49e1f07ff9d013"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-node-02.svg",
+      "sha256": "9f8d89f91192fb4396dc9dcf9881cd7b5ca56721af86f65c4ae8dea279384283"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-overview.svg",
+      "sha256": "b93dd9e68ed61efbdc0926d6e8a04ae2dd0697ce1e4dc97e7b0c6936de17fc0c"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-overview-state-2.svg",
+      "sha256": "82e857cfd0dce258218a216add034558c5394b327404023a94740f78437546c4"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-overview-state-3.svg",
+      "sha256": "5a099f6f27c049efdbc8623e2b9ee08d6d5189b7cacd2238715e542bb3616fd8"
+    },
+    {
+      "path": "materials-src/figures/respiratory-control-overview-state-1.svg",
+      "sha256": "3a744998a82649c4216ef5696ff82d91e3cc475f3e41380d4b9e3c0c9fa2aa38"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/plate-02.webp",
+      "sha256": "3241bca8286c0f2c8158e207d0be9839fb2f965c18147b9f7c7e1d5fb0115624"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/plate-03.webp",
+      "sha256": "fcf34497761721aef7f9c4946f56005de13ba27cf140e6b550c593da2be1de68"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/plate-04.webp",
+      "sha256": "37aac4fa7e6515ca1c11db565a5777eccead2c7d5aba1c9ba081bb7854b69e9a"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/plate-05.webp",
+      "sha256": "797147274f85c6fd8e1405da062e3f17cd67474338cce90b6b93296e80ea4c24"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/plate-01.webp",
+      "sha256": "73993e16599cd995aa5ddb05703521c0691daef1eec1d75ac2bca06b75983c03"
+    },
+    {
+      "path": "materials-src/figures/raster/respiratory-control/labels.json",
+      "sha256": "c3e90a6098f2dfcdb43e23a6833753d7921aef87d1a44699d62dd6e39b19c6e1"
+    },
+    {
+      "path": "public/materials/respiratory-control-v1/index.html",
+      "sha256": "9d5fc3ea36f99dbc985052535ac16e1b116a6a327b4186847ea235b26514c5d3"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-06.svg",
+      "sha256": "a82f1693513b532e93773e8cf4ab3de9f3236d4de7677e4ccf1ab903902e116e"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-04.svg",
+      "sha256": "83db9492e9356f5109cfa2447f9e476ed65a5b6615069a0b8c2cb5e7dd9485a3"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-05.svg",
+      "sha256": "bf17180f6e749ce39de66116035ff8fafa97df4992096bee0ac8c85c974bdab4"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-01.svg",
+      "sha256": "60790e69433c640112d4c4a007592b7ddc8d5caac67240c6902db13fbad9f12d"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-02.svg",
+      "sha256": "3e96053868dc3ad006186b6e40c51a6ef85d26a54cdbba62ab44fb10c20bc409"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-node-03.svg",
+      "sha256": "7df986ad49f404f0b8ac66d2318243ee39c9711f492d8fa09e3c18df93b0d758"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-overview.svg",
+      "sha256": "709e70e15cc1777ea026e7d8997d1c4cad372e43b25335d869ab8200fa2434a0"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-overview-state-1.svg",
+      "sha256": "a8bc57409b45f5a7a48d18e067f2e6ec47d71d3559579328c1e2f41aca424245"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-overview-state-3.svg",
+      "sha256": "dfd75c05f6078f2467f01c33da3a1e6a893f316043309b1f68da4d182bbdccfa"
+    },
+    {
+      "path": "materials-src/figures/breathing-mechanics-overview-state-2.svg",
+      "sha256": "f983cfcf9190b8de7c18b7d0ffa28fcf66b49066218cdd9feb7d1a0deab080a1"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/plate-02.webp",
+      "sha256": "6ae186488aecf882b15c397c366c4074275eb99d49bad86d97ebaa3578d88590"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/plate-03.webp",
+      "sha256": "a5fdd66b2f3debf1b196e2b42f0e30689b20e21b082dad9f7d9d15c5fbacc0ce"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/plate-04.webp",
+      "sha256": "cde7a52bedb6bc373973d1bf9ed6cd98aacdfff08279787c70fc22c3bb413481"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/plate-05.webp",
+      "sha256": "f51ccf6bd00b79c83010f342fd358d574243cf2273528e19a1afc601faa16225"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/plate-01.webp",
+      "sha256": "c725b9295c92715f45de1b24064393c1279fa4d183d19cdb7eabcd2ffa3b2aad"
+    },
+    {
+      "path": "materials-src/figures/raster/breathing-mechanics/labels.json",
+      "sha256": "4e11c4a72ca72c4c4112aefdc6fff5185345a83b38a027349c9ada12701d96e8"
+    },
+    {
+      "path": "public/materials/breathing-mechanics-v1/index.html",
+      "sha256": "b9215469279c88c29400d1ff9fbad369b36104ba1fb1006560f2eb9f004b710f"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-03.svg",
+      "sha256": "603f824538de2ee7de3370099642045544e9a05ce65482286d81df643c349d67"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-02.svg",
+      "sha256": "bc8a8f2804671de668b1bd0c16f5c7c17dc8b0de0875d4cead1418ad56de76eb"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-01.svg",
+      "sha256": "c334986bd2435caea2864cf6d88748a65b73ec4a3dcf960015ab3fec6e9d09f0"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-05.svg",
+      "sha256": "66f836da621c07daa3a606e2d4de54d5e0a2609cb9421ebf63f249de006c823d"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-04.svg",
+      "sha256": "6ad3f6849c32235ecb36f0d04e78f5c28618e2f1b2e8a9932d5415c4c0315894"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-node-06.svg",
+      "sha256": "aa3010c62a341eb4723455d86b7c054a4ada25900b9c6cbaa0413a2c161d57fe"
+    },
+    {
+      "path": "materials-src/figures/o2-co2-transport-overview.svg",
+      "sha256": "e1ec634151efb99e1567376d50f420f0a56e014c6e6969ca7977777444a69fbc"
+    },
+    {
+      "path": "materials-src/figures/raster/o2-co2-transport/plate-02.webp",
+      "sha256": "e592ef8f78b82e61337eb5a4167b6645410eddf26f46b80cf6ece264fc41c976"
+    },
+    {
+      "path": "materials-src/figures/raster/o2-co2-transport/plate-01.webp",
+      "sha256": "210ca588687ae832712e97b97e5cb9eef4472fb47b326b6dc0f535bd0d2cf784"
+    },
+    {
+      "path": "materials-src/figures/raster/o2-co2-transport/labels.json",
+      "sha256": "961dcb744481fb814e225fc8dfbd072ae2e849770fa1f5bdabd7d8cd2c46e71f"
+    },
+    {
+      "path": "public/materials/o2-co2-transport-v1/index.html",
+      "sha256": "eb1dee1c7f241e5c6b9bdc323128c6c844a1371be0658ba121dad04d82e7db25"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-05.svg",
+      "sha256": "e134b80bf64912c5d05a9135adf0a669cdce0a090a7eee5bb0b8a70789ec9b7a"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-04.svg",
+      "sha256": "bf6ea43bd94ded2853974d681b25db0fe0e6eabbb2638fe202d9c4c2079ddd4a"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-06.svg",
+      "sha256": "096c91bf08b57cc5ad10625efea93b9933713944b7d84932fac9abed8516f46d"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-03.svg",
+      "sha256": "9d5b6787711b4b928d353cffec9d4f23a957c7737a496527f099cf19311fdd2b"
+    },
+    {
+      "path": "materials-src/figures/lung-function-overview-state-2.svg",
+      "sha256": "cd2c71d55e0592daf9455a7192122f563c46e8d9d48f413a69dd87275bb21757"
+    },
+    {
+      "path": "materials-src/figures/lung-function-overview-state-3.svg",
+      "sha256": "c88b132bd1f9a1673898ee4477e7fefcaf4c1f10651f48b8c44cd92d87c536b5"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-02.svg",
+      "sha256": "a2f561f8fdfe503af787854ae6e5a378bd10ba1928496b2809875d6c395533c9"
+    },
+    {
+      "path": "materials-src/figures/lung-function-overview-state-1.svg",
+      "sha256": "c158a614350ffeba5d3d28b3d429602cc1708177f7d970bb7f5be1d2a9a378b6"
+    },
+    {
+      "path": "materials-src/figures/lung-function-node-01.svg",
+      "sha256": "4bdf4877686c55715501ecda85f0d19bc1ed4d8bafe8cf6ebee2f48fd4e90c90"
+    },
+    {
+      "path": "materials-src/figures/lung-function-overview.svg",
+      "sha256": "a7e93a2d49713a99a15fb639d3c90e059254c46afd4c018604ae361f4faadf8b"
+    },
+    {
+      "path": "materials-src/figures/raster/lung-function/plate-01.webp",
+      "sha256": "0b67ab3f57f0d55242e650423092c5c69f409063fc1500381b6f0a63174c38f9"
+    },
+    {
+      "path": "materials-src/figures/raster/lung-function/labels.json",
+      "sha256": "218683b389ad10506e92743d86828764393fcb68f556fd056308a3809befcc39"
+    },
+    {
+      "path": "public/materials/lung-function-v1/index.html",
+      "sha256": "00aa5ed846a6013304ffc575d0c67a694c60551670d0f5c2bd9335a6bc79df93"
+    },
+    {
+      "path": "scripts/respiratory-labels.py",
+      "sha256": "ee3e9b3f84941a764abdae8840a2c4a57699f8186b3146bbaf567aabd392142e"
+    },
+    {
+      "path": "scripts/respiratory-labels-stage2.py",
+      "sha256": "598625799aa254f7f2f4b3a5db16f55dc556004c6907908a5371aec8be9aa8be"
+    },
+    {
+      "path": "scripts/respiratory-labels-verify.mjs",
+      "sha256": "59212b8b717cfcff2cc096363261ed8d203404178e9ce9b91784335f75ebdcbf"
+    },
+    {
+      "path": "scripts/respiratory-kit-stage2-verify.mjs",
+      "sha256": "eed9dd0c064fb4cc7b1e4e0b52a013a0ae903e3cd57a702cc3c710201e944039"
+    }
+  ]
+}

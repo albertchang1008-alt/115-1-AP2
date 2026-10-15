@@ -1,0 +1,4378 @@
+{
+  "measurements": [
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-1",
+      "file": "1280-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "lines": [
+            "PO₂ 40 mmHg"
+          ]
+        },
+        {
+          "label": "飽和度約75%",
+          "lines": [
+            "飽和度約75%"
+          ]
+        },
+        {
+          "label": "正常：PO₂ 40 mmHg 時飽和度約 75%",
+          "lines": [
+            "正常：PO₂ 40 mmHg 時飽和度約 75%"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 33.24968251088534,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.3453947368421,
+          "y": 9.894431666324014,
+          "w": 209.3092105263158,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25435598273026,
+          "y": 380.89090768914474,
+          "w": 145.49013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.700927734375,
+          "y": 332.8913702713816,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.19606419613487,
+          "y": 65.89389519942435,
+          "w": 33.61182283100329,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.70072856702303,
+          "y": 358.89111328125,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.4032689144737,
+          "y": 358.89111328125,
+          "w": 25.19407894736842,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19234426398026,
+          "y": 358.89111328125,
+          "w": 33.61184210526316,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 349.0036878083882,
+          "y": 38.894155401932565,
+          "w": 41.99013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "x": 24.00206234580592,
+          "y": 437.9958174856086,
+          "w": 144.95174367804276,
+          "h": 28.999723735608555,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "飽和度約75%",
+          "x": 24.00206234580592,
+          "y": 514.9950786389803,
+          "w": 129.13939144736844,
+          "h": 28.99974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "正常：PO₂ 40 mmHg 時飽和度約 75%",
+          "x": 24.00206234580592,
+          "y": 591.9943590666119,
+          "w": 369.1839535361842,
+          "h": 28.999704461348685,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-2",
+      "file": "1280-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "右移",
+          "lines": [
+            "右移"
+          ]
+        },
+        {
+          "label": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧",
+          "lines": [
+            "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升",
+            "高、2,3-DPG 增加 → 親和力下降、利於釋氧"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 33.24968251088534,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.3453947368421,
+          "y": 9.894431666324014,
+          "w": 209.3092105263158,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25435598273026,
+          "y": 380.89090768914474,
+          "w": 145.49013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.700927734375,
+          "y": 332.8913702713816,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.19606419613487,
+          "y": 65.89389519942435,
+          "w": 33.61182283100329,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.70072856702303,
+          "y": 358.89111328125,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.4032689144737,
+          "y": 358.89111328125,
+          "w": 25.19407894736842,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19234426398026,
+          "y": 358.89111328125,
+          "w": 33.61184210526316,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 409.00310958059214,
+          "y": 118.89337800678454,
+          "w": 41.99013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右移",
+          "x": 349.0036878083882,
+          "y": 38.894155401932565,
+          "w": 41.99013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧",
+          "x": 24.00206234580592,
+          "y": 437.9958174856086,
+          "w": 430.05838815789474,
+          "h": 58.3900788959704,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "overview",
+      "state": "state-3",
+      "file": "1280-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "左移",
+          "lines": [
+            "左移"
+          ]
+        },
+        {
+          "label": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加",
+          "lines": [
+            "左移：pH 升高、溫度降低、2,3-DPG 減少 →",
+            "親和力增加"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 33.24968251088534,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.3453947368421,
+          "y": 9.894431666324014,
+          "w": 209.3092105263158,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25435598273026,
+          "y": 380.89090768914474,
+          "w": 145.49013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.700927734375,
+          "y": 332.8913702713816,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.19606419613487,
+          "y": 65.89389519942435,
+          "w": 33.61182283100329,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.70072856702303,
+          "y": 358.89111328125,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.4032689144737,
+          "y": 358.89111328125,
+          "w": 25.19407894736842,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19234426398026,
+          "y": 358.89111328125,
+          "w": 33.61184210526316,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 409.00310958059214,
+          "y": 118.89337800678454,
+          "w": 41.99013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左移",
+          "x": 349.0036878083882,
+          "y": 38.894155401932565,
+          "w": 41.99013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24968251088534,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加",
+          "x": 24.00206234580592,
+          "y": 437.9958174856086,
+          "w": 429.87088815789474,
+          "h": 58.3900788959704,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-01",
+      "file": "1280-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "氧的運送形式（%）",
+          "lines": [
+            "氧的運送形式（%）"
+          ]
+        },
+        {
+          "label": "與血紅素結合約97%",
+          "lines": [
+            "與血紅素結合約97%"
+          ]
+        },
+        {
+          "label": "溶於血漿約3%",
+          "lines": [
+            "溶於血漿約3%"
+          ]
+        },
+        {
+          "label": "血紅素",
+          "lines": [
+            "血紅素"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "每克血紅素約攜1.34 mL氧",
+          "lines": [
+            "每克血紅素約攜1.34 mL氧"
+          ]
+        },
+        {
+          "label": "溶解係數約0.003 mL/dL/mmHg",
+          "lines": [
+            "溶解係數約0.003 mL/dL/mmHg"
+          ]
+        },
+        {
+          "label": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+          "lines": [
+            "約 97% 與血紅素結合、3% 直接溶於血漿；每克",
+            "血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解",
+            "係數約 0.003 mL/dL/mmHg）。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.50544905462185,
+      "boxes": [
+        {
+          "label": "氧的運送形式（%）",
+          "x": 554.0378289473684,
+          "y": 41.65626927425987,
+          "w": 591.9243421052631,
+          "h": 91.71052631578947,
+          "px": 29.50544905462185,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "與血紅素結合約97%",
+          "x": 70.01142401444284,
+          "y": 166.65441312287982,
+          "w": 603.7375962106805,
+          "h": 91.71050925003854,
+          "px": 29.50544905462185,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "溶於血漿約3%",
+          "x": 70.01142401444284,
+          "y": 441.65037054764593,
+          "w": 435.2754934210526,
+          "h": 91.71052631578947,
+          "px": 29.50544905462185,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血紅素",
+          "x": 80.01133968955591,
+          "y": 735.9891791092722,
+          "w": 197.99704702276932,
+          "h": 91.99866445440995,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 80.01133968955591,
+          "y": 913.9865995708265,
+          "w": 131.99805410284745,
+          "h": 91.99859619140625,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "每克血紅素約攜1.34 mL氧",
+          "x": 80.01133968955591,
+          "y": 1091.9840200323806,
+          "w": 768.3011988589637,
+          "h": 91.99859619140625,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溶解係數約0.003 mL/dL/mmHg",
+          "x": 80.01133968955591,
+          "y": 1269.9813039679275,
+          "w": 965.9077132375617,
+          "h": 91.99873271741365,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+          "x": 80.01133968955591,
+          "y": 1447.9787244294819,
+          "w": 1510.2121935392681,
+          "h": 263.589943333676,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-02",
+      "file": "1280-node-02.png",
+      "directLabelCount": 4,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素",
+          "lines": [
+            "血紅素"
+          ]
+        },
+        {
+          "label": "四條肽鏈",
+          "lines": [
+            "四條肽鏈"
+          ]
+        },
+        {
+          "label": "四個血基質",
+          "lines": [
+            "四個血基質"
+          ]
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "lines": [
+            "二價鐵Fe²⁺"
+          ]
+        },
+        {
+          "label": "四分子O₂",
+          "lines": [
+            "四分子O₂"
+          ]
+        },
+        {
+          "label": "可逆結合",
+          "lines": [
+            "可逆結合"
+          ]
+        },
+        {
+          "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+          "lines": [
+            "四條肽鏈、四個血基質，血基質中心為二價鐵",
+            "（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "血紅素",
+          "x": 751.0191907380756,
+          "y": 41.65720789056075,
+          "w": 197.96161852384867,
+          "h": 91.71009967201634,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四條肽鏈",
+          "x": 223.9877078407689,
+          "y": 422.71923065185547,
+          "w": 176.01233231393914,
+          "h": 62.63134002685547,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四個血基質",
+          "x": 179.9846247622841,
+          "y": 545.5980642218339,
+          "w": 220.01541539242393,
+          "h": 62.63137415835732,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "x": 1299.9998233192846,
+          "y": 531.8092105263157,
+          "w": 217.42913497121708,
+          "h": 62.631237632349915,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "四分子O₂",
+          "x": 1299.9998233192846,
+          "y": 798.4733782316508,
+          "w": 188.1053964715255,
+          "h": 62.63130589535361,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "可逆結合",
+          "x": 80.00000803094161,
+          "y": 1418.0965945595187,
+          "w": 263.99999919690583,
+          "h": 91.99914229543585,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+          "x": 80.00000803094161,
+          "y": 1596.094970703125,
+          "w": 1479.984379818565,
+          "h": 177.7953619706003,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 474.82638652455785,
+          "clip": {
+            "x": 450,
+            "y": 2422.2078347759675,
+            "width": 380,
+            "height": 474.82638652455785
+          },
+          "nonWhiteRatio": 0.60791015625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "name": "node-03",
+      "file": "1280-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "lines": [
+            "PO₂ 40 mmHg"
+          ]
+        },
+        {
+          "label": "飽和度約75%",
+          "lines": [
+            "飽和度約75%"
+          ]
+        },
+        {
+          "label": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+          "lines": [
+            "描述 PO₂ 與血紅素氧飽和度的 S 形關係；",
+            "PO₂ 40 mmHg 時飽和度約 75%。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 33.249695757997216,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.3453947368421,
+          "y": 9.89444371273643,
+          "w": 209.3092105263158,
+          "h": 29.052629169664886,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25439453125,
+          "y": 380.8910618832237,
+          "w": 145.49013157894737,
+          "h": 29.052593030427634,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.70085063733553,
+          "y": 332.8914859169408,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.195967824835527,
+          "y": 65.89392892937911,
+          "w": 33.61184210526316,
+          "h": 29.052626760382402,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.700651469983555,
+          "y": 358.8912289268092,
+          "w": 12.601973684210527,
+          "h": 29.052593030427634,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.4032689144737,
+          "y": 358.8912289268092,
+          "w": 25.19407894736842,
+          "h": 29.052593030427634,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19242136101974,
+          "y": 358.8912289268092,
+          "w": 33.61184210526316,
+          "h": 29.052593030427634,
+          "px": 33.249695757997216,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "x": 24.00198524876645,
+          "y": 437.9959909539474,
+          "w": 144.9517822265625,
+          "h": 28.99974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "飽和度約75%",
+          "x": 24.00198524876645,
+          "y": 514.995271381579,
+          "w": 129.13942999588815,
+          "h": 28.99974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+          "x": 24.00198524876645,
+          "y": 591.9945903577303,
+          "w": 396.3401521381579,
+          "h": 58.39009817023027,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-04",
+      "file": "1280-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "右移",
+          "lines": [
+            "右移"
+          ]
+        },
+        {
+          "label": "H⁺增加（pH降低）",
+          "lines": [
+            "H⁺增加（pH降低）"
+          ]
+        },
+        {
+          "label": "CO₂增加",
+          "lines": [
+            "CO₂增加"
+          ]
+        },
+        {
+          "label": "溫度升高",
+          "lines": [
+            "溫度升高"
+          ]
+        },
+        {
+          "label": "2,3-DPG增加",
+          "lines": [
+            "2,3-DPG增加"
+          ]
+        },
+        {
+          "label": "親和力降低",
+          "lines": [
+            "親和力降低"
+          ]
+        },
+        {
+          "label": "利於釋氧",
+          "lines": [
+            "利於釋氧"
+          ]
+        },
+        {
+          "label": "波爾效應",
+          "lines": [
+            "波爾效應"
+          ]
+        },
+        {
+          "label": "左移",
+          "lines": [
+            "左移"
+          ]
+        },
+        {
+          "label": "相反條件",
+          "lines": [
+            "相反條件"
+          ]
+        },
+        {
+          "label": "親和力增加",
+          "lines": [
+            "親和力增加"
+          ]
+        },
+        {
+          "label": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+          "lines": [
+            "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、",
+            "2,3-DPG 增加 → 親和力降低、曲線右移、利",
+            "於釋氧；pH 下降促進釋氧稱波爾效應；相反",
+            "條件使曲線左移。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 33.24992938992899,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.3453947368421,
+          "y": 9.894667776007402,
+          "w": 209.3092105263158,
+          "h": 29.052633988229854,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25478001644737,
+          "y": 380.8938759251645,
+          "w": 145.49013157894737,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.69944361636513,
+          "y": 332.89395302220396,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.194522255345394,
+          "y": 65.89455052425987,
+          "w": 33.61184210526316,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.69939864309211,
+          "y": 358.8939273231908,
+          "w": 12.601973684210527,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.40303762335526,
+          "y": 358.8939273231908,
+          "w": 25.19407894736842,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19365491365136,
+          "y": 358.8939273231908,
+          "w": 33.61184210526316,
+          "h": 29.05263157894737,
+          "px": 33.24992938992899,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 33.00044330797697,
+          "y": 437.99907483552636,
+          "w": 41.99990362870066,
+          "h": 28.999935752467106,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右移",
+          "x": 33.00044330797697,
+          "y": 514.9988949424343,
+          "w": 41.99990362870066,
+          "h": 28.999935752467106,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺增加（pH降低）",
+          "x": 24.000462582236842,
+          "y": 591.9987535978619,
+          "w": 174.68712736430922,
+          "h": 28.999935752467106,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂增加",
+          "x": 24.000462582236842,
+          "y": 668.9986122532895,
+          "w": 83.90607653166118,
+          "h": 28.99989720394737,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溫度升高",
+          "x": 24.000462582236842,
+          "y": 745.9984323601974,
+          "w": 83.99982653166118,
+          "h": 28.99989720394737,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2,3-DPG增加",
+          "x": 24.000462582236842,
+          "y": 822.9982524671053,
+          "w": 129.46848016036185,
+          "h": 28.999974300986842,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "親和力降低",
+          "x": 24.000462582236842,
+          "y": 899.9980725740132,
+          "w": 104.99976870888159,
+          "h": 28.999974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "利於釋氧",
+          "x": 24.000462582236842,
+          "y": 976.9978926809212,
+          "w": 83.99982653166118,
+          "h": 28.999974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "波爾效應",
+          "x": 24.000462582236842,
+          "y": 1053.9977898848686,
+          "w": 83.99982653166118,
+          "h": 28.99989720394737,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左移",
+          "x": 33.00044330797697,
+          "y": 1130.9976099917765,
+          "w": 41.99990362870066,
+          "h": 28.99989720394737,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "相反條件",
+          "x": 24.000462582236842,
+          "y": 1207.9974300986842,
+          "w": 83.99982653166118,
+          "h": 28.999974300986842,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "親和力增加",
+          "x": 24.000462582236842,
+          "y": 1284.997250205592,
+          "w": 104.99976870888159,
+          "h": 28.999974300986842,
+          "px": 33.25,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+          "x": 24.000462582236842,
+          "y": 1361.9970703125,
+          "w": 423.4522126850329,
+          "h": 117.17161800986842,
+          "px": 33.25,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-05",
+      "file": "1280-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "CO₂ 的三種運送形式（%）",
+          "lines": [
+            "CO₂ 的三種運送形式（%）"
+          ]
+        },
+        {
+          "label": "HCO₃⁻在血漿約70%",
+          "lines": [
+            "HCO₃⁻在血漿約70%"
+          ]
+        },
+        {
+          "label": "碳醯胺基血紅素約23%",
+          "lines": [
+            "碳醯胺基血紅素約23%"
+          ]
+        },
+        {
+          "label": "直接溶解約7%",
+          "lines": [
+            "直接溶解約7%"
+          ]
+        },
+        {
+          "label": "血紅素蛋白胺基",
+          "lines": [
+            "血紅素蛋白胺基"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+          "lines": [
+            "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白",
+            "的胺基結合（碳醯胺基血紅素）、7% 直接溶解。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 29.505637608069165,
+      "boxes": [
+        {
+          "label": "CO₂ 的三種運送形式（%）",
+          "x": 444.2403371710526,
+          "y": 41.656986035798724,
+          "w": 811.5191891318873,
+          "h": 91.71052631578947,
+          "px": 29.505637608069165,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "HCO₃⁻在血漿約70%",
+          "x": 70.0064408151727,
+          "y": 166.65593197471216,
+          "w": 597.7611019736842,
+          "h": 91.71052631578947,
+          "px": 29.505637608069165,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "碳醯胺基血紅素約23%",
+          "x": 70.0064408151727,
+          "y": 441.6536471718236,
+          "w": 672.835115131579,
+          "h": 91.71052631578947,
+          "px": 29.505637608069165,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "直接溶解約7%",
+          "x": 70.0064408151727,
+          "y": 716.6514306319388,
+          "w": 432.16488486842104,
+          "h": 91.71052631578947,
+          "px": 29.505637608069165,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血紅素蛋白胺基",
+          "x": 80.00635649028577,
+          "y": 1010.991604453639,
+          "w": 461.9962270636307,
+          "h": 91.99927882144326,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 80.00635649028577,
+          "y": 1188.9901171232525,
+          "w": 131.99894152189555,
+          "h": 91.99927882144326,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+          "x": 80.00635649028577,
+          "y": 1366.9886297928658,
+          "w": 1507.0499781558387,
+          "h": 177.79549849660773,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 1280,
+      "name": "node-06",
+      "file": "1280-node-06.png",
+      "directLabelCount": 7,
+      "keyCount": 0,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "step"
+        },
+        {
+          "id": "2",
+          "kind": "step"
+        },
+        {
+          "id": "3",
+          "kind": "step"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "desktop",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "氯轉移",
+          "lines": [
+            "氯轉移"
+          ]
+        },
+        {
+          "label": "①",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "②",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "③",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "紅血球",
+          "lines": [
+            "紅血球"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "碳酸酐酶",
+          "lines": [
+            "碳酸酐酶"
+          ]
+        },
+        {
+          "label": "HCO₃⁻",
+          "lines": [
+            "HCO₃⁻"
+          ]
+        },
+        {
+          "label": "Cl⁻",
+          "lines": [
+            "Cl⁻"
+          ]
+        },
+        {
+          "label": "H⁺",
+          "lines": [
+            "H⁺"
+          ]
+        },
+        {
+          "label": "血紅素緩衝",
+          "lines": [
+            "血紅素緩衝"
+          ]
+        },
+        {
+          "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+          "lines": [
+            "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ →",
+            "H⁺＋HCO₃⁻；"
+          ]
+        },
+        {
+          "label": "② H⁺由血紅素緩衝；",
+          "lines": [
+            "② H⁺由血紅素緩衝；"
+          ]
+        },
+        {
+          "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+          "lines": [
+            "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 47,
+          "marker": true,
+          "strokePx": 5.364705882352942
+        },
+        {
+          "index": 1,
+          "samples": 41,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 2,
+          "samples": 26,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        },
+        {
+          "index": 3,
+          "samples": 72,
+          "marker": true,
+          "strokePx": 4.470588235294118
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 19.67058823529412,
+      "boxes": [
+        {
+          "label": "氯轉移",
+          "x": 751.0197368421052,
+          "y": 41.65774972815262,
+          "w": 197.96052631578945,
+          "h": 91.71042392128392,
+          "px": 29.50588235294118,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "①",
+          "x": 683.563874897204,
+          "y": 408.87706355044713,
+          "w": 26.492598684210524,
+          "h": 91.71042392128392,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "②",
+          "x": 997.6247526469983,
+          "y": 661.0297112715872,
+          "w": 39.59909539473684,
+          "h": 91.71045805278577,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "③",
+          "x": 1071.5082590203535,
+          "y": 547.1542900486996,
+          "w": 39.59909539473684,
+          "h": 91.71042392128392,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "紅血球",
+          "x": 267.9912004972759,
+          "y": 636.318503931949,
+          "w": 132.00877139442844,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 1299.9999598452919,
+          "y": 337.3956298828125,
+          "w": 88.00589310495477,
+          "h": 62.63154481586657,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "碳酸酐酶",
+          "x": 1299.9999598452919,
+          "y": 508.2086422568873,
+          "w": 176.01178620990953,
+          "h": 62.63154481586657,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "HCO₃⁻",
+          "x": 1299.9999598452919,
+          "y": 631.0884656404194,
+          "w": 128.02439639442844,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "Cl⁻",
+          "x": 1299.9999598452919,
+          "y": 753.9682207609477,
+          "w": 50.71354113127056,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺",
+          "x": 1299.9999598452919,
+          "y": 876.8479076184724,
+          "w": 44.527274683902135,
+          "h": 62.63151068436472,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血紅素緩衝",
+          "x": 1299.9999598452919,
+          "y": 999.7275944759971,
+          "w": 220.0146644993832,
+          "h": 62.631442421361015,
+          "px": 19.67058823529412,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+          "x": 80.00000803094161,
+          "y": 1325.5755133377877,
+          "w": 1508.906185752467,
+          "h": 177.79645417865953,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "② H⁺由血紅素緩衝；",
+          "x": 80.00000803094161,
+          "y": 1591.574867650082,
+          "w": 616.7812226947985,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+          "x": 80.00000803094161,
+          "y": 1769.5746090537623,
+          "w": 1298.6875353361431,
+          "h": 91.99982492547285,
+          "px": 29.50588235294118,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "index": 2,
+          "widthCss": 380,
+          "heightCss": 379.9992378048781,
+          "clip": {
+            "x": 450,
+            "y": 2575.7709603658536,
+            "width": 380,
+            "height": 379.9992378048781
+          },
+          "nonWhiteRatio": 0.9361114501953125,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-1",
+      "file": "390-overview-state-1.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "lines": [
+            "PO₂ 40 mmHg"
+          ]
+        },
+        {
+          "label": "飽和度約75%",
+          "lines": [
+            "飽和度約75%"
+          ]
+        },
+        {
+          "label": "正常：PO₂ 40 mmHg 時飽和度約 75%",
+          "lines": [
+            "正常：PO₂ 40 mmHg 時飽和度約 75%"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 14.524650761973874,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.35013957195972,
+          "y": 10.312483454325113,
+          "w": 209.29969879518072,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25762424698794,
+          "y": 381.3035932793675,
+          "w": 145.48192771084337,
+          "h": 28.91561852880271,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.702094755977036,
+          "y": 333.30472279743975,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.197746920298382,
+          "y": 66.31114362234092,
+          "w": 33.61446334655027,
+          "h": 28.915657135377447,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.701613092996986,
+          "y": 359.3041330360505,
+          "w": 12.605421686746988,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.39544751270708,
+          "y": 359.3041330360505,
+          "w": 25.210843373493976,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.1884471479669,
+          "y": 359.3041330360505,
+          "w": 33.6144578313253,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 348.9991116810994,
+          "y": 39.31178724909403,
+          "w": 41.99548192771084,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "x": 24.00519313582455,
+          "y": 437.9894725385919,
+          "w": 144.9496423192771,
+          "h": 28.999317582831328,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "飽和度約75%",
+          "x": 24.00519313582455,
+          "y": 514.9876164815512,
+          "w": 129.13751441312124,
+          "h": 28.999317582831328,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "正常：PO₂ 40 mmHg 時飽和度約 75%",
+          "x": 24.00519313582455,
+          "y": 591.9857604245105,
+          "w": 369.1786359304405,
+          "h": 28.999317582831328,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-2",
+      "file": "390-overview-state-2.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "右移",
+          "lines": [
+            "右移"
+          ]
+        },
+        {
+          "label": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧",
+          "lines": [
+            "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升",
+            "高、2,3-DPG 增加 → 親和力下降、利於釋氧"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 14.524650761973874,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.35013957195972,
+          "y": 10.312483454325113,
+          "w": 209.29969879518072,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25762424698794,
+          "y": 381.3035932793675,
+          "w": 145.48192771084337,
+          "h": 28.91561852880271,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.702094755977036,
+          "y": 333.30472279743975,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.197746920298382,
+          "y": 66.31114362234092,
+          "w": 33.61446334655027,
+          "h": 28.915657135377447,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.701613092996986,
+          "y": 359.3041330360505,
+          "w": 12.605421686746988,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.39544751270708,
+          "y": 359.3041330360505,
+          "w": 25.210843373493976,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.1884471479669,
+          "y": 359.3041330360505,
+          "w": 33.6144578313253,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 408.99769978350906,
+          "y": 119.30985783956137,
+          "w": 41.99548192771084,
+          "h": 28.915673681052336,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右移",
+          "x": 348.9991116810994,
+          "y": 39.31178724909403,
+          "w": 41.99548192771084,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧",
+          "x": 24.00519313582455,
+          "y": 437.9894725385919,
+          "w": 430.05218138177713,
+          "h": 58.389201336596386,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "overview",
+      "state": "state-3",
+      "file": "390-overview-state-3.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "左移",
+          "lines": [
+            "左移"
+          ]
+        },
+        {
+          "label": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加",
+          "lines": [
+            "左移：pH 升高、溫度降低、2,3-DPG 減少 →",
+            "親和力增加"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 14.524650761973874,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.35013957195972,
+          "y": 10.312483454325113,
+          "w": 209.29969879518072,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25762424698794,
+          "y": 381.3035932793675,
+          "w": 145.48192771084337,
+          "h": 28.91561852880271,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.702094755977036,
+          "y": 333.30472279743975,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.197746920298382,
+          "y": 66.31114362234092,
+          "w": 33.61446334655027,
+          "h": 28.915657135377447,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.701613092996986,
+          "y": 359.3041330360505,
+          "w": 12.605421686746988,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.39544751270708,
+          "y": 359.3041330360505,
+          "w": 25.210843373493976,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.1884471479669,
+          "y": 359.3041330360505,
+          "w": 33.6144578313253,
+          "h": 28.915640589702562,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 408.99769978350906,
+          "y": 119.30985783956137,
+          "w": 41.99548192771084,
+          "h": 28.915673681052336,
+          "px": 14.524650761973874,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左移",
+          "x": 348.9991116810994,
+          "y": 39.31178724909403,
+          "w": 41.99548192771084,
+          "h": 28.915665408214892,
+          "px": 14.524650761973874,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加",
+          "x": 24.00519313582455,
+          "y": 437.9894725385919,
+          "w": 429.8646637330572,
+          "h": 58.389201336596386,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-01",
+      "file": "390-node-01.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "氧的運送形式（%）",
+          "lines": [
+            "氧的運送形式（%）"
+          ]
+        },
+        {
+          "label": "與血紅素結合約97%",
+          "lines": [
+            "與血紅素結合約97%"
+          ]
+        },
+        {
+          "label": "溶於血漿約3%",
+          "lines": [
+            "溶於血漿約3%"
+          ]
+        },
+        {
+          "label": "血紅素",
+          "lines": [
+            "血紅素"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "每克血紅素約攜1.34 mL氧",
+          "lines": [
+            "每克血紅素約攜1.34 mL氧"
+          ]
+        },
+        {
+          "label": "溶解係數約0.003 mL/dL/mmHg",
+          "lines": [
+            "溶解係數約0.003 mL/dL/mmHg"
+          ]
+        },
+        {
+          "label": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+          "lines": [
+            "約 97% 與血紅素結合、3% 直接溶於血漿；每克",
+            "血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解",
+            "係數約 0.003 mL/dL/mmHg）。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889000131302522,
+      "boxes": [
+        {
+          "label": "氧的運送形式（%）",
+          "x": 554.1723136442254,
+          "y": 39.30971536291651,
+          "w": 591.6556071086103,
+          "h": 92.16867469879519,
+          "px": 12.889000131302522,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "與血紅素結合約97%",
+          "x": 70.0249108923487,
+          "y": 164.3056984407356,
+          "w": 603.4168312348515,
+          "h": 92.16875283114882,
+          "px": 12.889000131302522,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "溶於血漿約3%",
+          "x": 70.0249108923487,
+          "y": 439.2969705972327,
+          "w": 435.08094879518075,
+          "h": 92.16867469879519,
+          "px": 12.889000131302522,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血紅素",
+          "x": 80.0245825066624,
+          "y": 735.9764558723174,
+          "w": 197.99369329429535,
+          "h": 91.9970960502165,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 80.0245825066624,
+          "y": 913.9708645372506,
+          "w": 131.9958020405597,
+          "h": 91.99693978550923,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "每克血紅素約攜1.34 mL氧",
+          "x": 80.0245825066624,
+          "y": 1091.9651169374765,
+          "w": 768.288012585008,
+          "h": 91.9970960502165,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溶解係數約0.003 mL/dL/mmHg",
+          "x": 80.0245825066624,
+          "y": 1269.9593693377024,
+          "w": 965.8910636442254,
+          "h": 91.9970960502165,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+          "x": 80.0245825066624,
+          "y": 1447.9537780026355,
+          "w": 1510.1861976715456,
+          "h": 263.5852767760495,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-02",
+      "file": "390-node-02.png",
+      "directLabelCount": 0,
+      "keyCount": 4,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "label"
+        },
+        {
+          "id": "2",
+          "kind": "label"
+        },
+        {
+          "id": "3",
+          "kind": "label"
+        },
+        {
+          "id": "4",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素",
+          "lines": [
+            "血紅素"
+          ]
+        },
+        {
+          "label": "四條肽鏈",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "四個血基質",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "四分子O₂",
+          "lines": [
+            "4"
+          ]
+        },
+        {
+          "label": "四條肽鏈",
+          "lines": [
+            "1　四條肽鏈"
+          ]
+        },
+        {
+          "label": "四個血基質",
+          "lines": [
+            "2　四個血基質"
+          ]
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "lines": [
+            "3　二價鐵Fe²⁺"
+          ]
+        },
+        {
+          "label": "四分子O₂",
+          "lines": [
+            "4　四分子O₂"
+          ]
+        },
+        {
+          "label": "可逆結合",
+          "lines": [
+            "可逆結合"
+          ]
+        },
+        {
+          "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+          "lines": [
+            "四條肽鏈、四個血基質，血基質中心為二價鐵",
+            "（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "血紅素",
+          "x": 751.0699858148414,
+          "y": 39.31213746587915,
+          "w": 197.86010650267085,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四條肽鏈",
+          "x": 393.2292363729822,
+          "y": 645.2765131571207,
+          "w": 26.482726866940418,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四個血基質",
+          "x": 483.99477119905407,
+          "y": 848.268274514072,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "x": 1186.1338236245765,
+          "y": 845.4877003129707,
+          "w": 39.60403993905309,
+          "h": 92.16789337525886,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四分子O₂",
+          "x": 1208.3796673510449,
+          "y": 1334.8920431481788,
+          "w": 39.60403993905309,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四條肽鏈",
+          "x": 89.99999402517297,
+          "y": 2233.5852197853915,
+          "w": 356.27610999417595,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四個血基質",
+          "x": 89.99999402517297,
+          "y": 2348.583543157003,
+          "w": 435.32413574586434,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "x": 89.99999402517297,
+          "y": 2463.5818665286147,
+          "w": 431.4037667699607,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "四分子O₂",
+          "x": 89.99999402517297,
+          "y": 2578.580189900226,
+          "w": 387.4792811382248,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "可逆結合",
+          "x": 79.99999034835632,
+          "y": 2765.2565094361826,
+          "w": 264.00000330913497,
+          "h": 91.99865869728916,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+          "x": 79.99999034835632,
+          "y": 2943.2538871305537,
+          "w": 1479.9842926393073,
+          "h": 177.7942335749247,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 380.6822001210371,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2268.308252793718,
+            "width": 304.65882352941173,
+            "height": 380.6822001210371
+          },
+          "nonWhiteRatio": 0.6069488525390625,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1122,
+            1402
+          ],
+          "decodedSize": [
+            1200,
+            1499
+          ],
+          "inline": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "name": "node-03",
+      "file": "390-node-03.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "lines": [
+            "PO₂ 40 mmHg"
+          ]
+        },
+        {
+          "label": "飽和度約75%",
+          "lines": [
+            "飽和度約75%"
+          ]
+        },
+        {
+          "label": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+          "lines": [
+            "描述 PO₂ 與血紅素氧飽和度的 S 形關係；",
+            "PO₂ 40 mmHg 時飽和度約 75%。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 14.524665333796941,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.35016163285957,
+          "y": 10.31252206089985,
+          "w": 209.29969879518072,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25762424698794,
+          "y": 381.30399037556475,
+          "w": 145.48192771084337,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.70189620787839,
+          "y": 333.3050757718374,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.197542856974774,
+          "y": 66.31122635071536,
+          "w": 33.61445231610034,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.70143660579819,
+          "y": 359.3044639495482,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.39540339090738,
+          "y": 359.3044639495482,
+          "w": 25.210843373493976,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.1886236351657,
+          "y": 359.3044639495482,
+          "w": 33.6144578313253,
+          "h": 28.91566265060241,
+          "px": 14.524665333796941,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "x": 24.004978042051018,
+          "y": 437.98991375658886,
+          "w": 144.94979674557607,
+          "h": 28.999317582831328,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "飽和度約75%",
+          "x": 24.004978042051018,
+          "y": 514.9881459431476,
+          "w": 129.13764677852032,
+          "h": 28.999317582831328,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+          "x": 24.004978042051018,
+          "y": 591.9863340079066,
+          "w": 396.33461090455575,
+          "h": 58.389289580195786,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-04",
+      "file": "390-node-04.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "lines": [
+            "血紅素氧飽和度（%）"
+          ]
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "lines": [
+            "PO₂（mmHg）"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "0",
+          "lines": [
+            "0"
+          ]
+        },
+        {
+          "label": "40",
+          "lines": [
+            "40"
+          ]
+        },
+        {
+          "label": "100",
+          "lines": [
+            "100"
+          ]
+        },
+        {
+          "label": "正常",
+          "lines": [
+            "正常"
+          ]
+        },
+        {
+          "label": "右移",
+          "lines": [
+            "右移"
+          ]
+        },
+        {
+          "label": "H⁺增加（pH降低）",
+          "lines": [
+            "H⁺增加（pH降低）"
+          ]
+        },
+        {
+          "label": "CO₂增加",
+          "lines": [
+            "CO₂增加"
+          ]
+        },
+        {
+          "label": "溫度升高",
+          "lines": [
+            "溫度升高"
+          ]
+        },
+        {
+          "label": "2,3-DPG增加",
+          "lines": [
+            "2,3-DPG增加"
+          ]
+        },
+        {
+          "label": "親和力降低",
+          "lines": [
+            "親和力降低"
+          ]
+        },
+        {
+          "label": "利於釋氧",
+          "lines": [
+            "利於釋氧"
+          ]
+        },
+        {
+          "label": "波爾效應",
+          "lines": [
+            "波爾效應"
+          ]
+        },
+        {
+          "label": "左移",
+          "lines": [
+            "左移"
+          ]
+        },
+        {
+          "label": "相反條件",
+          "lines": [
+            "相反條件"
+          ]
+        },
+        {
+          "label": "親和力增加",
+          "lines": [
+            "親和力增加"
+          ]
+        },
+        {
+          "label": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+          "lines": [
+            "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、",
+            "2,3-DPG 增加 → 親和力降低、曲線右移、利",
+            "於釋氧；pH 下降促進釋氧稱波爾效應；相反",
+            "條件使曲線左移。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 14.524985877985799,
+      "boxes": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "x": 135.35017266330948,
+          "y": 10.313222494470068,
+          "w": 209.29967673428087,
+          "h": 28.91566265060241,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "x": 227.25896996187876,
+          "y": 381.3128588573042,
+          "w": 145.48194977174322,
+          "h": 28.91566265060241,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 33.69748402790851,
+          "y": 333.3129073912839,
+          "w": 12.605421686746988,
+          "h": 28.91566265060241,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 16.192970735480987,
+          "y": 66.3131677099021,
+          "w": 33.6144578313253,
+          "h": 28.91566265060241,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "0",
+          "x": 53.6974656438253,
+          "y": 359.3129132741905,
+          "w": 12.605421686746988,
+          "h": 28.915640589702562,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "40",
+          "x": 191.39463125941265,
+          "y": 359.3129132741905,
+          "w": 25.210821312594128,
+          "h": 28.915640589702562,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "100",
+          "x": 403.19263871893827,
+          "y": 359.3129132741905,
+          "w": 33.6144578313253,
+          "h": 28.915640589702562,
+          "px": 14.524985877985799,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "正常",
+          "x": 33.00019965114364,
+          "y": 437.9995764307229,
+          "w": 41.999965805605235,
+          "h": 28.999979409826807,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "右移",
+          "x": 33.00019965114364,
+          "y": 514.9994852456701,
+          "w": 41.999965805605235,
+          "h": 28.999979409826807,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺增加（pH降低）",
+          "x": 24.000207372458586,
+          "y": 591.9994381824172,
+          "w": 174.68733822006777,
+          "h": 28.999979409826807,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "CO₂增加",
+          "x": 24.000207372458586,
+          "y": 668.9993469973645,
+          "w": 83.90617278685053,
+          "h": 28.999979409826807,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "溫度升高",
+          "x": 24.000207372458586,
+          "y": 745.9992999341115,
+          "w": 83.99992058076054,
+          "h": 28.99993528802711,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "2,3-DPG增加",
+          "x": 24.000207372458586,
+          "y": 822.999164627259,
+          "w": 129.46862645896084,
+          "h": 29.000023531626507,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "親和力降低",
+          "x": 24.000207372458586,
+          "y": 899.999117564006,
+          "w": 104.99990072595068,
+          "h": 28.99993528802711,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "利於釋氧",
+          "x": 24.000207372458586,
+          "y": 976.9990705007531,
+          "w": 83.99992058076054,
+          "h": 28.99993528802711,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "波爾效應",
+          "x": 24.000207372458586,
+          "y": 1053.9989351939007,
+          "w": 83.99992058076054,
+          "h": 29.000023531626507,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "左移",
+          "x": 33.00019965114364,
+          "y": 1130.9988881306476,
+          "w": 41.999965805605235,
+          "h": 29.000023531626507,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "相反條件",
+          "x": 24.000207372458586,
+          "y": 1207.9988410673946,
+          "w": 83.99992058076054,
+          "h": 28.99993528802711,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "親和力增加",
+          "x": 24.000207372458586,
+          "y": 1284.9987940041417,
+          "w": 104.99990072595068,
+          "h": 28.99993528802711,
+          "px": 14.525,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+          "x": 24.000207372458586,
+          "y": 1361.998658697289,
+          "w": 423.4527073136295,
+          "h": 117.17179263930723,
+          "px": 14.525,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-05",
+      "file": "390-node-05.png",
+      "directLabelCount": 0,
+      "keyCount": 0,
+      "annotationIds": [],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "CO₂ 的三種運送形式（%）",
+          "lines": [
+            "CO₂ 的三種運送形式（%）"
+          ]
+        },
+        {
+          "label": "HCO₃⁻在血漿約70%",
+          "lines": [
+            "HCO₃⁻在血漿約70%"
+          ]
+        },
+        {
+          "label": "碳醯胺基血紅素約23%",
+          "lines": [
+            "碳醯胺基血紅素約23%"
+          ]
+        },
+        {
+          "label": "直接溶解約7%",
+          "lines": [
+            "直接溶解約7%"
+          ]
+        },
+        {
+          "label": "血紅素蛋白胺基",
+          "lines": [
+            "血紅素蛋白胺基"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+          "lines": [
+            "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白",
+            "的胺基結合（碳醯胺基血紅素）、7% 直接溶解。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889139048991353,
+      "boxes": [
+        {
+          "label": "CO₂ 的三種運送形式（%）",
+          "x": 444.44182981927713,
+          "y": 39.31088734822101,
+          "w": 811.1163403614459,
+          "h": 92.16867469879519,
+          "px": 12.889139048991353,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "HCO₃⁻在血漿約70%",
+          "x": 70.01651166433312,
+          "y": 164.3082768084055,
+          "w": 597.4962349397591,
+          "h": 92.16867469879519,
+          "px": 12.889139048991353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "碳醯胺基血紅素約23%",
+          "x": 70.01651166433312,
+          "y": 439.302439861987,
+          "w": 672.4632906626506,
+          "h": 92.16867469879519,
+          "px": 12.889139048991353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "直接溶解約7%",
+          "x": 70.01651166433312,
+          "y": 714.2966029155685,
+          "w": 431.96065512048193,
+          "h": 92.16867469879519,
+          "px": 12.889139048991353,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "血紅素蛋白胺基",
+          "x": 80.01630047717727,
+          "y": 1010.9785884259695,
+          "w": 461.99020018060526,
+          "h": 91.9980336384601,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 80.01630047717727,
+          "y": 1188.9748722673899,
+          "w": 131.9972084229251,
+          "h": 91.9980336384601,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+          "x": 80.01630047717727,
+          "y": 1366.970999844103,
+          "w": 1507.0305881730046,
+          "h": 177.79313972197383,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": []
+    },
+    {
+      "width": 390,
+      "name": "node-06",
+      "file": "390-node-06.png",
+      "directLabelCount": 0,
+      "keyCount": 7,
+      "annotationIds": [
+        {
+          "id": "1",
+          "kind": "step"
+        },
+        {
+          "id": "2",
+          "kind": "step"
+        },
+        {
+          "id": "3",
+          "kind": "step"
+        },
+        {
+          "id": "A",
+          "kind": "label"
+        },
+        {
+          "id": "B",
+          "kind": "label"
+        },
+        {
+          "id": "C",
+          "kind": "label"
+        },
+        {
+          "id": "D",
+          "kind": "label"
+        },
+        {
+          "id": "E",
+          "kind": "label"
+        },
+        {
+          "id": "F",
+          "kind": "label"
+        },
+        {
+          "id": "G",
+          "kind": "label"
+        }
+      ],
+      "duplicateNumbers": [],
+      "labelMode": "mobile",
+      "layoutFailure": false,
+      "wordBreaks": [],
+      "singleCharacterLines": [],
+      "renderedLines": [
+        {
+          "label": "氯轉移",
+          "lines": [
+            "氯轉移"
+          ]
+        },
+        {
+          "label": "①",
+          "lines": [
+            "1"
+          ]
+        },
+        {
+          "label": "②",
+          "lines": [
+            "2"
+          ]
+        },
+        {
+          "label": "③",
+          "lines": [
+            "3"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "label": "紅血球",
+          "lines": [
+            "B"
+          ]
+        },
+        {
+          "label": "碳酸酐酶",
+          "lines": [
+            "C"
+          ]
+        },
+        {
+          "label": "H⁺",
+          "lines": [
+            "D"
+          ]
+        },
+        {
+          "label": "血紅素緩衝",
+          "lines": [
+            "E"
+          ]
+        },
+        {
+          "label": "HCO₃⁻",
+          "lines": [
+            "F"
+          ]
+        },
+        {
+          "label": "Cl⁻",
+          "lines": [
+            "G"
+          ]
+        },
+        {
+          "label": "血漿",
+          "lines": [
+            "A　血漿"
+          ]
+        },
+        {
+          "label": "紅血球",
+          "lines": [
+            "B　紅血球"
+          ]
+        },
+        {
+          "label": "碳酸酐酶",
+          "lines": [
+            "C　碳酸酐酶"
+          ]
+        },
+        {
+          "label": "H⁺",
+          "lines": [
+            "D　H⁺"
+          ]
+        },
+        {
+          "label": "血紅素緩衝",
+          "lines": [
+            "E　血紅素緩衝"
+          ]
+        },
+        {
+          "label": "HCO₃⁻",
+          "lines": [
+            "F　HCO₃⁻"
+          ]
+        },
+        {
+          "label": "Cl⁻",
+          "lines": [
+            "G　Cl⁻"
+          ]
+        },
+        {
+          "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+          "lines": [
+            "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ →",
+            "H⁺＋HCO₃⁻；"
+          ]
+        },
+        {
+          "label": "② H⁺由血紅素緩衝；",
+          "lines": [
+            "② H⁺由血紅素緩衝；"
+          ]
+        },
+        {
+          "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+          "lines": [
+            "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+          ]
+        }
+      ],
+      "arrowTextHits": [],
+      "arrowGeometry": [
+        {
+          "index": 0,
+          "samples": 120,
+          "marker": true,
+          "strokePx": 2.3435294117647056
+        },
+        {
+          "index": 1,
+          "samples": 74,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 2,
+          "samples": 82,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        },
+        {
+          "index": 3,
+          "samples": 130,
+          "marker": true,
+          "strokePx": 1.9529411764705882
+        }
+      ],
+      "segments": [],
+      "badBars": [],
+      "volumeBands": [],
+      "fevCurves": [],
+      "fevPoints": [],
+      "uses": [
+        {
+          "resolved": true,
+          "ratio": 0
+        }
+      ],
+      "punctuationHeads": [],
+      "distortedImages": 0,
+      "minPx": 12.889411764705882,
+      "boxes": [
+        {
+          "label": "氯轉移",
+          "x": 751.0701420795488,
+          "y": 39.312449995293676,
+          "w": 197.85963770854906,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "①",
+          "x": 555.6104177451996,
+          "y": 620.5455917909921,
+          "w": 26.482648734586785,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "②",
+          "x": 1137.4707279435124,
+          "y": 1083.3160216549793,
+          "w": 39.60380554199219,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "③",
+          "x": 1273.0688807476,
+          "y": 874.3229142154556,
+          "w": 39.60388367434582,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 1516.2605193724116,
+          "y": 488.68107163762477,
+          "w": 43.36423759000847,
+          "h": 92.16812777231975,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "紅血球",
+          "x": 710.6999362807676,
+          "y": 1037.2876270707832,
+          "w": 44.7244437344103,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "碳酸酐酶",
+          "x": 1011.3164327230799,
+          "y": 802.1704983998494,
+          "w": 48.08483813182418,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "H⁺",
+          "x": 899.3971491434488,
+          "y": 982.5515379388648,
+          "w": 46.56461692718138,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血紅素緩衝",
+          "x": 832.2354374161687,
+          "y": 1234.2952314629613,
+          "w": 42.08411710808076,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "HCO₃⁻",
+          "x": 1479.0920211608152,
+          "y": 744.1806655332267,
+          "w": 38.083740602056665,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "Cl⁻",
+          "x": 1451.059226530144,
+          "y": 1136.3297611834055,
+          "w": 49.364802349044616,
+          "h": 92.16820590467339,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血漿",
+          "x": 89.99999402517297,
+          "y": 1844.2935805722893,
+          "w": 241.22399249708798,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "紅血球",
+          "x": 89.99999402517297,
+          "y": 1959.2925290027297,
+          "w": 308.5106378578278,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "碳酸酐酶",
+          "x": 89.99999402517297,
+          "y": 2074.2914774331703,
+          "w": 378.0375721942948,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "H⁺",
+          "x": 89.99999402517297,
+          "y": 2189.290425863611,
+          "w": 179.2978516544204,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "血紅素緩衝",
+          "x": 89.99999402517297,
+          "y": 2304.2887492352224,
+          "w": 437.80358785606296,
+          "h": 92.16836216938066,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "HCO₃⁻",
+          "x": 89.99999402517297,
+          "y": 2419.2876976656626,
+          "w": 296.26944668321727,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "Cl⁻",
+          "x": 89.99999402517297,
+          "y": 2534.286646096103,
+          "w": 191.8590729495129,
+          "h": 92.16804963996611,
+          "px": 12.889411764705882,
+          "red": true,
+          "bold": true,
+          "clipped": false
+        },
+        {
+          "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+          "x": 79.99999034835632,
+          "y": 2720.9717164556664,
+          "w": 1508.9062334543253,
+          "h": 177.7951711631683,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "② H⁺由血紅素緩衝；",
+          "x": 79.99999034835632,
+          "y": 2986.9689389883756,
+          "w": 616.781292191471,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        },
+        {
+          "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+          "x": 79.99999034835632,
+          "y": 3164.9672542709905,
+          "w": 1298.6875419157097,
+          "h": 91.99897122670369,
+          "px": 12.889411764705882,
+          "red": false,
+          "bold": false,
+          "clipped": false
+        }
+      ],
+      "overlaps": [],
+      "anchorHits": [],
+      "lineHits": [],
+      "crossings": [],
+      "rasterChecks": [
+        {
+          "plateIndex": 0,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "index": 0,
+          "widthCss": 304.65882352941173,
+          "heightCss": 304.6556603773585,
+          "clip": {
+            "x": 42.67058823529412,
+            "y": 2803.3865429970974,
+            "width": 304.65882352941173,
+            "height": 304.6556603773585
+          },
+          "nonWhiteRatio": 0.95062255859375,
+          "samplePixels": 65536,
+          "threshold": 0.2,
+          "decoded": true,
+          "dimensionsCorrect": true,
+          "sourceLayerVisible": true,
+          "svgSize": [
+            1254,
+            1254
+          ],
+          "decodedSize": [
+            1200,
+            1200
+          ],
+          "inline": false,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "oxygenContract": {
+    "viewBoxWidth": 480,
+    "k": [
+      26,
+      31,
+      21
+    ],
+    "sliderValues": [
+      0,
+      40,
+      100
+    ],
+    "pointerPO2": 70
+  },
+  "ok": true
+}

@@ -1,0 +1,338 @@
+{
+  "slug": "gas-exchange",
+  "version": "v1",
+  "experience": "guided",
+  "title": "氣體交換",
+  "subtitle": "氧與二氧化碳各自順著分壓差穿過呼吸膜；膜的面積、厚度與通氣灌流的配合決定交換效率。",
+  "label": "氣體交換｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "100 vs 40 mmHg",
+      "label": "肺泡與入肺血的 PO₂"
+    },
+    {
+      "value": "45 vs 40 mmHg",
+      "label": "入肺血與肺泡的 PCO₂"
+    },
+    {
+      "value": "約 20 倍",
+      "label": "CO₂ 溶解度是 O₂ 的倍數"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "gas-exchange-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "正常",
+        "explain": "正常：膜薄、面積大，擴散順暢"
+      },
+      {
+        "id": "state-2",
+        "label": "纖維化或肺水腫",
+        "explain": "纖維化或肺水腫：膜變厚，擴散減少"
+      },
+      {
+        "id": "state-3",
+        "label": "肺氣腫",
+        "explain": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+      }
+    ],
+    "predict": {
+      "question": "呼吸膜變厚時氧的擴散？",
+      "options": [
+        "減少",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "呼吸膜厚度增加使擴散減少；薄膜較有利於氣體交換。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "gas-exchange-node-01",
+      "tag": "01",
+      "title": "外呼吸與內呼吸",
+      "summary": "外呼吸是肺泡與肺微血管間的氣體交換",
+      "figure": "gas-exchange-node-01.svg",
+      "concept": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+      "points": [
+        "外呼吸連接肺泡與肺微血管。",
+        "內呼吸連接血液與組織細胞。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "組織端氧由血液進入細胞、CO₂ 由細胞進入血液。"
+      },
+      "sources": [
+        "external-respiration；CH06 p.4, 17, 20, 23"
+      ],
+      "reference": "external-respiration；CH06 p.4, 17, 20, 23"
+    },
+    {
+      "id": "gas-exchange-node-02",
+      "tag": "02",
+      "title": "分壓",
+      "summary": "混合氣體中每種氣體各有自己的分壓",
+      "figure": "gas-exchange-node-02.svg",
+      "concept": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+      "points": [
+        "每種氣體依自己的分壓差擴散",
+        "氣體總壓不等於氧分壓"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "高海拔大氣壓降低，吸入的氧分壓跟著下降，並不是空氣中氧的比例變小。"
+      },
+      "sources": [
+        "gas-diffusion；CH06 p.16–17"
+      ],
+      "reference": "gas-diffusion；CH06 p.16–17"
+    },
+    {
+      "id": "gas-exchange-node-03",
+      "tag": "03",
+      "title": "肺部的分壓梯度",
+      "summary": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血",
+      "figure": "gas-exchange-node-03.svg",
+      "concept": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+      "points": [
+        "血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡",
+        "離肺的動脈血 PO₂ 約 95"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "肺動脈帶入肺的是低氧血，不能只看血管名稱判斷含氧量。"
+      },
+      "sources": [
+        "external-respiration；CH06 p.17, 20"
+      ],
+      "reference": "external-respiration；CH06 p.17, 20"
+    },
+    {
+      "id": "gas-exchange-node-04",
+      "tag": "04",
+      "title": "影響擴散的因素",
+      "summary": "膜面積、分壓差、溶解度增加 → 擴散增加",
+      "figure": "gas-exchange-node-04.svg",
+      "concept": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+      "points": [
+        "膜厚度、分子量（平方根）增加 → 擴散減少",
+        "CO₂ 溶解度約為 O₂ 的 20 倍"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "肺氣腫減少面積，纖維化與肺水腫增加膜厚，高海拔降低吸入氧分壓。"
+      },
+      "sources": [
+        "gas-diffusion；CH06 p.16–17, 20–21"
+      ],
+      "reference": "gas-diffusion；CH06 p.16–17, 20–21"
+    },
+    {
+      "id": "gas-exchange-node-05",
+      "tag": "05",
+      "title": "通氣灌流比",
+      "summary": "V/Q 比較肺泡通氣量與血流量",
+      "figure": "gas-exchange-node-05.svg",
+      "concept": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+      "points": [
+        "站立時肺底通氣與血流均較多。",
+        "肺尖 V/Q 約 3.4，肺底約 0.63。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "通氣量、血流量與兩者的比值是三種不同的量；通氣量較大的地方，V/Q 不一定較大。"
+      },
+      "sources": [
+        "ventilation-perfusion；CH06 p.21–22"
+      ],
+      "reference": "ventilation-perfusion；CH06 p.21–22"
+    },
+    {
+      "id": "gas-exchange-node-06",
+      "tag": "06",
+      "title": "低氧性肺血管收縮",
+      "summary": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合",
+      "figure": "gas-exchange-node-06.svg",
+      "concept": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+      "points": [
+        "局部低氧觸發肺小動脈收縮。",
+        "減少通氣不佳處血流，有助通氣與灌流配合。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "臨床延伸：減壓病見國考延伸補充教材。"
+      },
+      "sources": [
+        "ventilation-perfusion；CH06 p.22"
+      ],
+      "reference": "ventilation-perfusion；CH06 p.22"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "gas-exchange-foundation-q01",
+      "stem": "外呼吸發生在？",
+      "options": [
+        "肺泡與肺微血管之間",
+        "組織細胞與微血管之間",
+        "鼻腔內",
+        "細胞粒線體內"
+      ],
+      "answer": 0,
+      "hint": "先區分肺部交換與組織端交換。",
+      "explain": "外呼吸是肺泡與肺微血管之間的交換；內呼吸是血液與組織細胞間的交換。",
+      "nodeId": "gas-exchange-node-01"
+    },
+    {
+      "id": "gas-exchange-foundation-q02",
+      "stem": "每種氣體的擴散方向由何決定？",
+      "options": [
+        "混合氣體總壓",
+        "該氣體自己的分壓差",
+        "氣體分子量",
+        "血流速度"
+      ],
+      "answer": 1,
+      "hint": "混合氣體中，各氣體是否共用同一個壓差？",
+      "explain": "每種氣體依自己的分壓差擴散，氣體總壓不能取代氧分壓。",
+      "nodeId": "gas-exchange-node-02"
+    },
+    {
+      "id": "gas-exchange-foundation-q03",
+      "stem": "肺泡 PO₂ 約 100、入肺血約 40 mmHg，O₂ 如何移動？",
+      "options": [
+        "由血液進入肺泡",
+        "不移動",
+        "由肺泡擴散進入血液",
+        "以主動運輸進入血液"
+      ],
+      "answer": 2,
+      "hint": "比較肺泡與入肺血的氧分壓高低。",
+      "explain": "肺泡 PO₂ 約 100，高於入肺血約 40 mmHg，因此氧由肺泡擴散入血。",
+      "nodeId": "gas-exchange-node-03"
+    },
+    {
+      "id": "gas-exchange-foundation-q04",
+      "stem": "哪個變化會使擴散增加？",
+      "options": [
+        "呼吸膜變厚",
+        "分壓差變小",
+        "分子量增加",
+        "呼吸膜面積增加"
+      ],
+      "answer": 3,
+      "hint": "分清增加交換面積與增加膜厚的效果。",
+      "explain": "呼吸膜面積增加會增加擴散；膜厚增加則減少擴散。",
+      "nodeId": "gas-exchange-node-04"
+    },
+    {
+      "id": "gas-exchange-foundation-q05",
+      "stem": "站立時哪個部位 V/Q 較高？",
+      "options": [
+        "肺尖",
+        "肺底",
+        "兩處相同",
+        "肺門"
+      ],
+      "answer": 0,
+      "hint": "比較兩處通氣量除以血流量的結果。",
+      "explain": "肺尖 V/Q 約 3.4，高於肺底約 0.63；血流的上下差異比通氣更大。",
+      "nodeId": "gas-exchange-node-05"
+    },
+    {
+      "id": "gas-exchange-foundation-q06",
+      "stem": "肺泡局部低氧時，該處肺小動脈？",
+      "options": [
+        "舒張",
+        "收縮",
+        "不變",
+        "破裂"
+      ],
+      "answer": 1,
+      "hint": "思考如何減少送往通氣不佳處的血流。",
+      "explain": "局部肺泡低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流。",
+      "nodeId": "gas-exchange-node-06"
+    }
+  ],
+  "cases": [
+    {
+      "id": "gas-exchange-case-q01",
+      "stem": "【生理判讀】CO₂ 分子量比 O₂ 大，卻容易擴散，主要因為？",
+      "options": [
+        "CO₂ 以主動運輸通過",
+        "呼吸膜對 CO₂ 較薄",
+        "CO₂ 溶解度約為 O₂ 的 20 倍",
+        "CO₂ 不需要分壓差"
+      ],
+      "answer": 2,
+      "hint": "分子量之外，還有哪個氣體性質影響擴散？",
+      "explain": "CO₂ 的溶解度約為 O₂ 的 20 倍；較高溶解度有利於擴散。",
+      "nodeId": "gas-exchange-node-04"
+    },
+    {
+      "id": "gas-exchange-case-q02",
+      "stem": "【生理判讀】肺水腫使呼吸膜變厚，最可能妨礙？",
+      "options": [
+        "肺葉的數目",
+        "表面張力素的分泌位置",
+        "血紅素的構造",
+        "氧的擴散"
+      ],
+      "answer": 3,
+      "hint": "膜厚增加對擴散的影響方向為何？",
+      "explain": "膜厚增加會減少擴散，因此呼吸膜變厚會妨礙氧的擴散。",
+      "nodeId": "gas-exchange-node-04"
+    },
+    {
+      "id": "gas-exchange-case-q03",
+      "stem": "【模型觀察】一處肺泡被痰阻塞而無通氣，該處肺小動脈的反應與意義？",
+      "options": [
+        "收縮，使血流轉向通氣良好的肺泡",
+        "舒張，增加流向該處的血流",
+        "不變",
+        "收縮，使全身血壓下降"
+      ],
+      "answer": 0,
+      "hint": "將局部血管反應與通氣、灌流配合連起來。",
+      "explain": "低氧處肺小動脈收縮，減少通氣不佳處的血流，使通氣與灌流較能配合。",
+      "nodeId": "gas-exchange-node-06"
+    },
+    {
+      "id": "gas-exchange-case-q04",
+      "stem": "【模型觀察】肺尖 V/Q≈3.4、肺底≈0.63，何者正確？",
+      "options": [
+        "肺尖血流比肺底多",
+        "肺尖通氣相對血流較多",
+        "肺底通氣多於血流",
+        "兩處配合完全相同"
+      ],
+      "answer": 1,
+      "hint": "比值大於一，代表分子相對分母如何？",
+      "explain": "肺尖 V/Q≈3.4，表示通氣相對血流較多；不能據此說肺尖的絕對通氣量最多。",
+      "nodeId": "gas-exchange-node-05"
+    },
+    {
+      "id": "gas-exchange-case-q05",
+      "stem": "【模型觀察】運動中的肌肉，O₂ 與 CO₂ 的擴散方向？",
+      "options": [
+        "兩者都由血液進入細胞",
+        "O₂ 由細胞進入血液",
+        "O₂ 由血液進入細胞、CO₂ 由細胞進入血液",
+        "兩者都不移動"
+      ],
+      "answer": 2,
+      "hint": "從內呼吸的交換雙方判斷兩種氣體方向。",
+      "explain": "內呼吸是血液與組織細胞的交換；氧由血液進入細胞，CO₂ 由細胞進入血液。",
+      "nodeId": "gas-exchange-node-01"
+    }
+  ],
+  "credits": [
+    "生理學 CH06 p.4, 16–17, 20–23。"
+  ]
+}

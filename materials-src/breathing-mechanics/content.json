@@ -1,0 +1,339 @@
+{
+  "slug": "breathing-mechanics",
+  "version": "v1",
+  "experience": "guided",
+  "title": "肺通氣與呼吸力學",
+  "subtitle": "呼吸肌改變胸腔容積，胸內壓與肺內壓跟著變化，空氣順著壓力差進出；肺順應性決定肺有多容易被撐開。",
+  "label": "肺通氣與呼吸力學｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "758→754 mmHg",
+      "label": "吸氣時胸內壓"
+    },
+    {
+      "value": "760→758 mmHg",
+      "label": "吸氣時肺內壓"
+    },
+    {
+      "value": "C＝ΔV/ΔP",
+      "label": "肺順應性"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "breathing-mechanics-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "吸氣前",
+        "explain": "吸氣前：肺內壓 760 等於大氣壓，胸內壓 758，無氣流"
+      },
+      {
+        "id": "state-2",
+        "label": "吸氣",
+        "explain": "吸氣：橫膈與外肋間肌收縮，胸內壓降到 754、肺內壓降到 758，低於大氣壓，空氣流入"
+      },
+      {
+        "id": "state-3",
+        "label": "平靜呼氣",
+        "explain": "平靜呼氣：吸氣肌放鬆、肺彈性回縮，肺內壓高於大氣壓，空氣流出"
+      }
+    ],
+    "predict": {
+      "question": "吸氣時肺內壓與大氣壓相比？",
+      "options": [
+        "較低",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "吸氣使肺內壓低於大氣壓，壓差使空氣流入肺。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "breathing-mechanics-node-01",
+      "tag": "01",
+      "title": "呼吸肌",
+      "summary": "平靜吸氣主要靠橫膈與外肋間肌收縮",
+      "figure": "breathing-mechanics-node-01.svg",
+      "concept": "平靜吸氣主要靠橫膈與外肋間肌收縮；平靜呼氣主要是吸氣肌放鬆與彈性回縮；用力吸氣可動用胸鎖乳突肌等輔助肌；用力呼氣可動用內肋間肌及腹直肌。",
+      "points": [
+        "平靜呼氣主要是吸氣肌放鬆與彈性回縮",
+        "用力吸氣可動用胸鎖乳突肌等輔助肌",
+        "用力呼氣可動用內肋間肌及腹直肌"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "平靜呼氣不必由內肋間肌主動收縮。"
+      },
+      "sources": [
+        "respiratory-muscles；CH06 p.3, 8, 10；AB-05_13 p.13"
+      ],
+      "reference": "respiratory-muscles；CH06 p.3, 8, 10；AB-05_13 p.13"
+    },
+    {
+      "id": "breathing-mechanics-node-02",
+      "tag": "02",
+      "title": "三種壓力",
+      "summary": "大氣壓、肺內壓、胸內壓",
+      "figure": "breathing-mechanics-node-02.svg",
+      "concept": "大氣壓、肺內壓、胸內壓；胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零；肺間壓＝肺內壓－胸內壓。",
+      "points": [
+        "胸內壓通常低於大氣壓——「負壓」是相對大氣壓而言，不是絕對壓力小於零",
+        "肺間壓＝肺內壓－胸內壓"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "胸內壓不是肺內壓；決定空氣進出方向的是肺內壓與大氣壓的差。"
+      },
+      "sources": [
+        "intrapleural-pressure；CH06 p.6–7"
+      ],
+      "reference": "intrapleural-pressure；CH06 p.6–7"
+    },
+    {
+      "id": "breathing-mechanics-node-03",
+      "tag": "03",
+      "title": "吸氣與呼氣的壓力變化",
+      "summary": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入",
+      "figure": "breathing-mechanics-node-03.svg",
+      "concept": "吸氣時胸腔擴大，胸內壓 758→754 mmHg、肺內壓 760→758 mmHg，肺內壓低於大氣壓而空氣流入；肺內壓決定與外界之間的氣流方向。",
+      "points": [
+        "吸氣時胸內壓由 758 降至 754 mmHg。",
+        "肺內壓降到 758 mmHg，低於外界而流入空氣。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "課本列用力咳嗽、解便為胸內壓負壓的例外。"
+      },
+      "sources": [
+        "intrapleural-pressure；CH06 p.8–9"
+      ],
+      "reference": "intrapleural-pressure；CH06 p.8–9"
+    },
+    {
+      "id": "breathing-mechanics-node-04",
+      "tag": "04",
+      "title": "肺順應性",
+      "summary": "C＝ΔV/ΔP，ΔP 為肺間壓改變量",
+      "figure": "breathing-mechanics-node-04.svg",
+      "concept": "C＝ΔV/ΔP，ΔP 為肺間壓改變量；同樣壓差帶來較大容積變化即順應性較大；肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張。",
+      "points": [
+        "同樣壓差帶來較大容積變化即順應性較大",
+        "肺組織彈性與肺泡表面張力都會影響，表面張力素降低張力、有助擴張"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "順應性和彈性回縮不是同一件事：容易撐開，不代表也容易縮回。"
+      },
+      "sources": [
+        "lung-compliance；CH06 p.9–10, 19–20"
+      ],
+      "reference": "lung-compliance；CH06 p.9–10, 19–20"
+    },
+    {
+      "id": "breathing-mechanics-node-05",
+      "tag": "05",
+      "title": "順應性改變",
+      "summary": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加",
+      "figure": "breathing-mechanics-node-05.svg",
+      "concept": "肺氣腫肺泡壁破壞，順應性增加但回縮變差，盡力呼氣後氣體滯留、肺餘容積增加；纖維化順應性降低，需要較大壓力才能擴張。",
+      "points": [
+        "肺氣腫較易擴張，但回縮變差、氣體滯留。",
+        "纖維化不易擴張，所需壓力較大。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "順應性高不代表肺功能正常。"
+      },
+      "sources": [
+        "lung-compliance、emphysema；CH06 p.9, 12, 15, 21"
+      ],
+      "reference": "lung-compliance、emphysema；CH06 p.9, 12, 15, 21"
+    },
+    {
+      "id": "breathing-mechanics-node-06",
+      "tag": "06",
+      "title": "胸膜腔的密閉與肺的擴張",
+      "summary": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張",
+      "figure": "breathing-mechanics-node-06.svg",
+      "concept": "胸膜腔密閉、胸內壓低於大氣壓，肺才能隨胸廓擴張；吸氣時胸內壓更負、肺間壓增加，肺容積增加。",
+      "points": [
+        "密閉胸膜腔與較低胸內壓使肺隨胸廓擴張。",
+        "吸氣時肺間壓增加，肺容積也增加。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "臨床延伸：胸膜腔進氣（氣胸）見國考延伸補充教材。"
+      },
+      "sources": [
+        "pleura、intrapleural-pressure；CH06 p.6, 8–9"
+      ],
+      "reference": "pleura、intrapleural-pressure；CH06 p.6, 8–9"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "breathing-mechanics-foundation-q01",
+      "stem": "平靜吸氣主要由哪些肌肉收縮？",
+      "options": [
+        "內肋間肌與腹直肌",
+        "胸鎖乳突肌與腹直肌",
+        "橫膈與外肋間肌",
+        "只有腹肌"
+      ],
+      "answer": 2,
+      "hint": "區分平靜吸氣肌與用力呼氣肌。",
+      "explain": "平靜吸氣主要靠橫膈與外肋間肌收縮。",
+      "nodeId": "breathing-mechanics-node-01"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q02",
+      "stem": "平靜呼氣主要靠？",
+      "options": [
+        "腹肌強力收縮",
+        "內肋間肌持續收縮",
+        "橫膈收縮下降",
+        "吸氣肌放鬆與肺的彈性回縮"
+      ],
+      "answer": 3,
+      "hint": "想想平靜呼氣是否需要額外呼氣肌收縮。",
+      "explain": "平靜呼氣主要靠吸氣肌放鬆與肺的彈性回縮。",
+      "nodeId": "breathing-mechanics-node-01"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q03",
+      "stem": "肺間壓＝？",
+      "options": [
+        "肺內壓－胸內壓",
+        "胸內壓－大氣壓",
+        "大氣壓－肺內壓",
+        "肺內壓＋胸內壓"
+      ],
+      "answer": 0,
+      "hint": "確認肺內與胸膜腔之間的壓差如何定義。",
+      "explain": "肺間壓是肺內壓減去胸內壓。",
+      "nodeId": "breathing-mechanics-node-02"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q04",
+      "stem": "平時胸內壓與大氣壓相比？",
+      "options": [
+        "較高",
+        "較低",
+        "相等",
+        "隨機變動"
+      ],
+      "answer": 1,
+      "hint": "負壓是相對哪個參考壓力而言？",
+      "explain": "胸內壓通常低於大氣壓；負壓是相對大氣壓，並非絕對壓力小於零。",
+      "nodeId": "breathing-mechanics-node-02"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q05",
+      "stem": "肺順應性的意義？",
+      "options": [
+        "每分鐘換氣量",
+        "最大吸氣後能呼出的量",
+        "肺間壓改變時肺容積改變的多寡（ΔV/ΔP）",
+        "肺泡表面張力"
+      ],
+      "answer": 2,
+      "hint": "把容積變化放在分子、壓力變化放在分母。",
+      "explain": "順應性 C＝ΔV/ΔP，表示肺間壓改變時肺容積改變的多寡。",
+      "nodeId": "breathing-mechanics-node-04"
+    },
+    {
+      "id": "breathing-mechanics-foundation-q06",
+      "stem": "肺氣腫的肺順應性？",
+      "options": [
+        "減少",
+        "不變",
+        "變為零",
+        "增加"
+      ],
+      "answer": 3,
+      "hint": "分清容易撐開與容易縮回兩件事。",
+      "explain": "肺氣腫的順應性增加，但彈性回縮變差，容易有氣體滯留。",
+      "nodeId": "breathing-mechanics-node-05"
+    }
+  ],
+  "cases": [
+    {
+      "id": "breathing-mechanics-case-q01",
+      "stem": "【模型觀察】吸氣時胸內壓 758→754、肺內壓 760→758 mmHg，空氣為何流入？",
+      "options": [
+        "肺內壓低於大氣壓",
+        "胸內壓高於肺內壓",
+        "肺內壓高於大氣壓",
+        "大氣壓下降"
+      ],
+      "answer": 0,
+      "hint": "將吸氣時肺內壓與外界壓力比較。",
+      "explain": "吸氣時肺內壓由 760 降到 758 mmHg，低於大氣壓而使空氣流入。",
+      "nodeId": "breathing-mechanics-node-03"
+    },
+    {
+      "id": "breathing-mechanics-case-q02",
+      "stem": "【生理判讀】吸氣過程中胸內壓的變化？",
+      "options": [
+        "升高到高於大氣壓",
+        "變得更低（更負）",
+        "保持不變",
+        "變成等於肺內壓"
+      ],
+      "answer": 1,
+      "hint": "依 758→754 的變化判讀相對大氣壓的方向。",
+      "explain": "吸氣時胸內壓下降，變得更低、更負。",
+      "nodeId": "breathing-mechanics-node-03"
+    },
+    {
+      "id": "breathing-mechanics-case-q03",
+      "stem": "【生理判讀】肺纖維化病人要吸入同樣空氣量，需要？",
+      "options": [
+        "更小的壓力，因順應性增加",
+        "不需壓力變化",
+        "更大的壓力變化，因順應性降低",
+        "只靠肺內壓上升"
+      ],
+      "answer": 2,
+      "hint": "用同樣容積變化需要多少壓差來判讀。",
+      "explain": "纖維化使順應性降低，因此吸入相同容積需要更大的壓力變化。",
+      "nodeId": "breathing-mechanics-node-05"
+    },
+    {
+      "id": "breathing-mechanics-case-q04",
+      "stem": "【生理判讀】肺氣腫病人容易吸進、不易呼出，最可能的結果？",
+      "options": [
+        "肺餘容積減少",
+        "順應性降低",
+        "呼吸膜變厚",
+        "氣體滯留、肺餘容積增加"
+      ],
+      "answer": 3,
+      "hint": "回縮變差時，盡力呼氣後會留下多少氣體？",
+      "explain": "肺氣腫回縮變差，呼氣後氣體滯留，肺餘容積增加。",
+      "nodeId": "breathing-mechanics-node-05"
+    },
+    {
+      "id": "breathing-mechanics-case-q05",
+      "stem": "【生活情境】跑完步用力把氣吐乾淨時，額外參與的肌肉？",
+      "options": [
+        "內肋間肌與腹直肌",
+        "外肋間肌",
+        "胸鎖乳突肌",
+        "只有橫膈"
+      ],
+      "answer": 0,
+      "hint": "比較平靜呼氣與用力呼氣的肌肉參與。",
+      "explain": "用力呼氣可動用內肋間肌及腹直肌；平靜呼氣主要靠放鬆與回縮。",
+      "nodeId": "breathing-mechanics-node-01"
+    }
+  ],
+  "credits": [
+    "生理學 CH06 p.3, 6–10, 12, 15, 19–21；解剖學 AB-05_13 p.13。"
+  ]
+}

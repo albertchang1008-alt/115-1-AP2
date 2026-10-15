@@ -77,6 +77,13 @@ export const MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'lymphoid-organs-v1': { label: "淋巴器官｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
   'cardiac-electrical-v1': { label: "心臟的電性活動｜互動資訊圖表", tracking: 'interactive', nodeTotal: 9, questionTotal: 11, note: "9 個知識節點；6 先備＋5 情境" },
   'rbc-homeostasis-v1': { label: "紅血球的恆定機制｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "6 個知識節點；6 先備＋5 情境" },
+  'airway-structure-v1': { label: "呼吸道的構造｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'lungs-pleura-v1': { label: "肺與胸膜｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'breathing-mechanics-v1': { label: "肺通氣與呼吸力學｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'lung-function-v1': { label: "肺容積與肺功能｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'gas-exchange-v1': { label: "氣體交換｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'o2-co2-transport-v1': { label: "氧與二氧化碳的運輸｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  'respiratory-control-v1': { label: "呼吸調節｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。

@@ -1,71 +1,53 @@
 # 專案交接（現況）
 目前版本：1.7.0
-> 這份文件只寫「現在」：版本、分支、固定決策、待辦。**上限約 150 行。**
-> 完成或過期的項目直接刪掉，改記在 `DEVELOPMENT_LOG.md`（新版本在最上面）。
-> 2026-09-23 以前的完整交接歷史：`docs/archive/handoff-2026-09-23.md`（需要查舊決策脈絡時才讀，平常不用讀）。
+> 只寫現況（約 150 行內）；歷史見 DEVELOPMENT_LOG.md 與 docs/archive/。
 
 ## 給接手的 AI agent
-1. 開工只需讀本檔＋`git log --oneline -5`；需要某功能細節時再讀對應 `docs/*.md`。不要整份讀 `DEVELOPMENT_LOG.md` 或 archive。
-2. 改動前 `git branch --show-current`；未經教師明確同意，不 push、不合併、不部署 `main`（push main＝GitHub Pages 自動上線）。
-3. 收工前更新本檔：改「目前狀態」「待辦」，把完成的項目移出（一兩行寫進 `DEVELOPMENT_LOG.md`）。不要在本檔追加流水帳。
-4. Commit 結尾附身分標註（Claude：`Co-Authored-By: <model> <noreply@anthropic.com>`＋session 連結；Codex：`[Codex]`）。不用 `--no-verify`、不強推、不略過測試。
-5. 分工：Claude 寫規格與驗收；Codex 實作；教師做決策與部署。規格放 `docs/`，交辦寫在本檔「待辦」。
+1. 開工讀本檔＋git log --oneline -5，需要功能細節再讀 docs 規格。
+2. 改動前確認分支；未經教師明確同意，不 push、合併或部署 main（push main 自動上線）。
+3. 每段工作收工更新本檔與 DEVELOPMENT_LOG.md；commit 結尾 [Codex]；不略過測試。
+4. Claude 寫規格／獨立驗收，Codex 實作，教師裁定內容與部署。
 
-## 目前狀態（2026-10-07）
-- 期中考第四輪（2026-10-07）：26 張章節缺口卡一次完成，全數 self_checked，QC 0 error／warn、blocked 0／合併 0；42 筆來源頁完整配對，check_data 172→198，原178筆進度／172筆配對不變。報告 `05_review/midterm_cards_round4_report.md`，6張原書文字／涵蓋限制已標 needs_review。最新全專案88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked；69 reviewed為既有教師結果，本輪未推。分支feature/1.7.0-practice-modes／HEAD8429640，僅交接文件未提交，平台程式未改／未push或部署。
-**1.7.0 ①～④ Claude 驗收全部通過（2026-10-06），待教師以 deploy.sh 從 `feature/1.7.0-practice-modes` 部署**。④驗收：審 `shared/wrongCarry.ts`、`effectiveWrong` 追鏈、`syncBankTabFromSheet` 讀舊版與交易內版本核對、複習考排除；Functions 26 測試 Claude 親跑通過；同步畫面截圖符合。Claude 驗收時小修：同步完成後自動取消「錯題全部重新計算」勾選（`src/App.tsx` 一行，tsc 通過），避免下次同步沿用而誤清錯題。部署後實測：在正式站改一題錯字同步，確認訊息為「保留…重置 0 題」。（2026-10-06 Claude 依教師確認將 `html/資訊圖表題庫_上傳用.xlsx` 還原為 HEAD：本機版為 10/5 被舊副本覆蓋，只有 162 列、缺第 163–228 列共 66 題，無新增內容；工作目錄已乾淨，可直接部署。）分支 `feature/1.7.0-practice-modes`；① `b65418b`、② `819b237`、③ `3ed3d7a`；④本次單一 commit「feat: 錯題跨版本延續（同步讀舊版比對正解）[Codex]」。未 push／部署；html/ Excel 既有修改未納入。教師決定①～④完整驗收後才部署，綜合範圍維持 current。
-動工前七項盤點（①～③依主規格第三版；④依補充規格，過期限制已取代）：
-1. 結構：`shared/model.ts` 的 wrong 已是版本→題目→`{n,at}`，相容 string[]；時間選單在 `Student.tsx` WrongCards，首頁／單元連結與 `studentRoute.ts` 帶 range。依規格移除，新增 ok/rm。
-2. 模式：quiz（完整／抽題）、flashcard（完整作答）、review（作答但不更新 progress）；前兩者寫 wrong／attempted／attempts，只有 full quiz 寫 best／fullAttempts／passedAt。新閃卡改純翻卡，review 改錯題重做，只寫錯題相關進度。
-3. 答對現況：applyAttempt 直接刪除該錯題，答錯累加；改為隔日標 rm、同日標 ok、再錯保留累計 n。
-4. 綜合練習：MixedPractice 篩 `!isReviewUnit && visibility=current && bankVersion`，含已達標但仍 current／選看，排除 archived／hidden／複習考；進入練習才載全部候選題庫，錯題→未作答→其他補滿。後端僅 quiz/full=false，分分類寫 wrong／attempted、不更新 best。新選範圍沿用候選條件，僅載勾選分類。
-5. 複習考錯題現為翻卡；有獨立 Unit、bankVersion、wrong，改逐題重做、題數選擇，仍無閃卡／抽題。
-6. 錯題讀取：Student 首頁建議卡、PracticeRow、WrongCards、MixedPractice；shared itemStatusForCategory（首頁分類／教師學生進度／完成度匯出共用）、applyAttempt。全改經 effectiveWrong；App／報表 aggregate 的首次答錯人數屬歷史研究統計，非錯題清單，不改其語意。
-7. 題目 ID 取自 Sheet 題目ID，跨版固定；舊版是不可變快照。教師新決定允許同步讀取舊 grading/answers、manifest及全部chunks，故可比對新舊正解，不再跳過④。Unit 的 wrongCarry 與 bankVersion 同交易寫入，wrongCarryOrder 明確保存最近10筆寫入順序；同步不碰任何 progress。
-- 所有 effectiveWrong／wrongEntries 呼叫已確認傳 Unit（教師學生進度／匯出經共用分類狀態函式）。共用純函式累積drop追溯最多10段，保留n／at／ok／rm；首次伺服器重批交卷才實體化新版wrong，舊紀錄保留。
-- 發布課程／forClass 原路徑保留完整 Unit，實際測試證明連續同步兩次再發布的鏈完整。教師重算不讀舊版；舊版讀取失敗以 '*' 重算且同步成功。新增讀取只在教師同步，學生既有讀取路徑不變。
-- 複習考重建不延續、移除wrongCarry／wrongCarryOrder；部署前沒有鏈的同步不追溯。教師核取方塊預設不勾，顯示三種同步結果。
-- 本次 `npm run check`：前端134／Functions26測試、兩端build／版本一致檢查通過；`git diff --check`通過。驗收報告 `docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md`，保留16張學生桌機／手機圖，新增4張教師同步桌機圖；全為本機合成資料。下一步 Claude 驗收④與①～④整體 → 教師決定部署。
-| 項目 | 狀態 |
-|---|---|
-| 正式站 | **1.6.4**。`origin/main`＝`dc8c045`（2026-10-03 教師以 deploy.sh 部署：Functions 成功；Pages Actions success；`version.json`＝1.6.4、`manifest.webmanifest` 可取得，Claude 確認）。含第一階段補齊教材、1.6.3 節點點擊、1.6.4 合併單元與兩層選單、心臟II 圖像化、favicon |
-| 1.6.3 知識節點點擊體驗 | `hotfix/1.6.3-node-detail`＝`f7b97a7`：**2026-10-02 Claude 驗收通過**（點節點後詳細內容就地展開於卡片正下方且在畫面內、同時只開一個、收合正常、explore／nodeTime 正常）。已併入 `feature/stage1-supplement`，隨其部署 |
-| 心臟II 圖像化改版 | **2026-10-03 Claude 複驗通過，連同 1.6.4、第一階段補齊教材、1.6.3、favicon 由 `feature/cardiac-output-visuals` 一次部署**。C1–C7：節點去重、21 份驗證、主動脈配色／加粗／左右冠狀、電性完整顯示；待 Claude 依 `docs/HEART2_C_REVIEW_ACCEPTANCE.md` 複驗，未部署 |
-| 1.6.4 後台兩層選單 | `feature/cardiac-output-visuals`（`7e69ce9`）：題庫／報表兩層連動、研究頁分組完成，待 Claude 驗收；未 push／部署。報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md` |
-| 第一階段補齊教材 | `feature/stage1-supplement`（33e7700＋交接）：**2026-10-03 Claude 複驗全部通過，可由教師執行 deploy.sh 部署（版本 1.6.3）**。origin/main 可快轉 |
-| 開發分支 | `feature/1.6.0-progress-ui` 已等於正式 main（之後僅本行 handoff 更新）；本機 `main` 未更新（deploy.sh 不動本機 main）。其他功能分支（`feature/heart-structure-v2`、`feature/material-kit`、`feature/ecg-basics`）下次部署前需先 `git merge` 最新 main |
-| 1.5.0 複習考 | 已上線。規格 `docs/REVIEW_EXAM_1.5.0.md` |
-| 1.6.1 隨堂診斷捲動 | **已上線**（origin/main 7e4732b）。三份心臟教材按「兩階段隨堂診斷」後自動捲到題目 |
-| 1.6.2 單元卡姓名 | **已上線（2026-10-02）**。已完成／已完成（逾期）時狀態標籤下方顯示本人名冊姓名，與標籤同大小。報告 `docs/STUDENT_NAME_1.6.2_ACCEPTANCE.md` |
-| NotebookLM 教材初稿流程 | 2026-09-30 已提供教師「互動式資訊圖表」內容整理提示（含明確範圍、排除項目與來源依據要求）；NotebookLM 僅整理可教學內容、圖表建議與題目草案，後續由 AI agent 依平台元件、追蹤與建置流程實作。 |
-| 五份新教材 | `blood-vessels-v1`、`circulation-routes-v1`、`blood-pressure-regulation-v1`、`lymphatic-system-v1`、`hemodynamics-v1`（來源分支 aabb2d2）：已登錄、已 commit。**已上線（2026-10-02）**（同上）。 |
-| 資訊圖表題庫補登 | **已上線（2026-10-02）**：以 git 7e4732b 對 2d8fcd5 逐格比對，既有 106 題零變動、說明頁僅合計 106→161；新 55 題與教材 HTML 題幹／選項／正解／題序一致、ID 不重複、Zuvio 序號正確。**待教師把第 108–162 列貼到 Google Sheet 題庫分頁後同步** |
-| 1.6.0 學習進度介面 | **已上線（2026-09-29）**。完整閃卡不計分（舊分數保留）、題目分類一律必做、選做只在單元與活動層級、完成度公式維持 v3。規格 `docs/1.6.0-學習進度介面規格.md`，驗收 `docs/PROGRESS_UI_1.6.0_ACCEPTANCE.md`。**上線後待實測**：測試學生帳號完整閃卡滿分後最高分不變；完整測驗達標後單元變為已完成；首頁待辦、逾期標示與「去練習」定位。 |
-| 教材元件庫 v1 | `feature/material-kit`：心臟構造樣板已完成，待 Claude 驗收；其他教材尚未轉換 |
-| 心臟構造圖像強化版 v2 | `feature/heart-structure-v2`：第二輪（版型比照傳導系統 v2、閱讀提示與窄版捲動）**2026-09-25 Claude 驗收通過**；Claude 將節點示意圖改為 HTML 方塊修正文字溢框。已登錄目錄。待教師以 deploy.sh 從此分支部署。 |
-| 未追蹤檔 | 五個 `html/*.rtf` 草稿維持未追蹤、不 commit； `public/materials/coagulation-v1/`：既有資料，不要碰、不要 commit（已列入本機 `.git/info/exclude`，deploy.sh 的乾淨檢查不會被擋） |
-| 教材工作室 | 2026-09-24 已健康檢查：`npm run materials:studio` 可在 `127.0.0.1:5183` 提供 `/api/list`；目前列出 11 份本機教材，其中 `coagulation-v1` 有檔案但未登錄目錄（既有狀態，勿處理）。匯入區可貼上、點擊選取或拖放 `.html/.htm/.xhtml`；檔案先填入程式碼欄與預覽，需按匯入才寫檔。`.command` 與 `.app` 會主動載入 Node 22.23.2，若 5183 已有健康服務則直接開啟。僅本機匯入／稽核／目錄管理，不跑 git、push 或部署。 2026-09-25 起啟動器會比對 `/api/version`：程式檔比執行中的服務新（或舊服務不支援版本檢查）就自動關掉重開，避免沿用舊稽核邏輯。 |
-| ECG 基礎教材 | `ecg-basics-v1`：**2026-10-02 教師複核通過**（導程說明、示意模型說明、credits 維持原狀）；title／label／目錄已改「心電圖基礎」並重建 v1，待 Claude 複驗。放「心臟II」活動，既有 Sheet 7 題不動 |
-| 三份心臟圖像強化教材 | `feature/ecg-basics`：`cardiac-conduction-v2`、`cardiac-cycle-v2`、`coronary-circulation-v1`（Codex 手工單檔版，教師已看過並同意登錄）。**2026-09-25 Claude 驗收通過**：390／1280 無錯誤與橫向溢位、圖檔皆載入、6 節點各送一次 explore、第二關全對才 complete（錯一題不送）、題目 ID 與目錄一致；傳導系統與心動週期的 11 題與題目集完全一致。驗收時修正冠狀循環頁載入即同時顯示「通關／未通關」橫幅的 CSS（`html/心臟血液供應.html` 同步；`html/心臟構造.html`、`html/紅血球的恆定機制.html` 同一問題一併修正）。未發布。 |
-| 心臟的電性活動／紅血球恆定 | 本分支已登錄 `cardiac-electrical-v1`（9 節點／11 題）、`rbc-homeostasis-v1`（6／11），包含各自 PNG。教學內容及題目 ID 保留；補 SDK、nodeTime、複習重試與立即 complete。未發布；原草稿未改。 |
-| 傳導系統／心動週期版本 | **教師決定（2026-09-25）：發布圖像強化版 `cardiac-conduction-v2`、`cardiac-cycle-v2`**。元件庫版 `-v1` 保留原名與檔案作為參考，不發布、不在後台建立活動。 |
-| 心動週期 v2／冠狀循環 v1 入門化 | **教師決定（2026-09-25）**：對象為第一次學解剖生理的五專生，尚未學病理與藥理。兩份教材 22 題改為入門題（第二關改為生活情境），知識節點移除疾病、檢查與藥物內容（冠狀循環節點 6 改為「運動時的心肌供血」、心動週期節點 6 改為「心音聽診入門」）；Excel 題庫同步並打散選項。教師已逐項複核勾選。 |
-| 全面去除病理與藥理 | **教師決定（2026-09-25）**：心電圖基礎、心臟傳導系統 v2、心臟構造、紅血球的恆定機制（html 草稿）、血液氣體運送、止血機制全部移除疾病、檢查、藥物內容，Excel 共換掉 18 題。已發布的 `blood-gas-transport-v1`、`hemostasis-mechanisms-v1` 保留不動，改好的內容為新的 `-v2`（已登錄目錄）；教師確認後後台活動改連 v2。`blood-composition-v1` 無病理題，未改。教師已逐項複核勾選。 |
-| 止血機制 v2 例外與名稱 | **教師決定（2026-09-25）**：止血機制 v2 保留阿斯匹靈、肝硬化與血友病、華法林三段補充說明；名稱統一為「止血機制與凝血」（Excel 次單元、html 草稿檔名 `html/止血機制與凝血.html`）。 |
-| 1.5.1 練習計分說明 | `hotfix/1.5.1-practice-hint`：學生端「尚未完整作答」與練習不計分提示，已部署（main `cc0dc3b`）；2026-09-25 已併入 `feature/ecg-basics`。部署後 `feature/material-kit` 需先 `git merge main` 才能再部署 |
-| 本機 exclude | `.git/info/exclude` 暫列 `html/心電圖與心律不整解析.html`（教師新教材，尚未進 git）與 `materials-src/heart-structure/shots/`；要納入心電圖教材時先從 exclude 移除 |
-## 部署方式（教師在自己的 Mac 執行）
+## 目前狀態（2026-10-15）
+- **10/15 呼吸七份發布已完成，停下交 Claude 驗收**：依教師11:50裁定，七份build／登錄，Excel229–305列增77題共304，舊5472格不變；Sheet115-1-AP2完整476列CSV已備份（docs/sheet-backups/忽略不提交），AC–AE增三欄、227舊題只補三欄、175其他題不動、404–480列增77題，共479題。全表值／公式及11687原生儲存格逐格零差異，77 ID純文字且無重複；完整證據docs/respiratory-release/REPORT.md及JSON。七份126狀態verify、節點21／15、materials20、check前端134／Functions26均過0skip。feature/respiratory-infographics，本機單一release commit以git log -1為準（基底e8805f8）；不push／部署／平台同步。下一步Claude驗收，教師另決同步與部署。[Codex]
+- **ChatGPT 底圖 68 張已全通過**（_review.json 全 pass；呼吸28、泌尿／體液40），私人照片已移除。呼吸兩階段實作完成見上；泌尿／體液尚無 content.json，另開交辦，不進教材實作。
+- **肺與胸膜階段一已由 Claude 驗收通過**（含 R-1～R-8、避頭點與 B 比較截圖），教師已選 A。舊複修紀錄見 DEVELOPMENT_LOG.md、docs/RESPIRATORY_LABELS_V2_CLAUDE_REVIEW.md；本輪不重畫肺／胸膜與呼吸道；release正式build更新兩份HTML，圖層來源保持。
+- **學生說明主畫面（10/14 Codex，B完成）**：A教師端項目由教師親自驗證正常，正式班未操作；MI release本機merge 1ba1743（efeb1e7＋8e61f58）保留雙方全部紀錄，合併後check150／54全過0 skipped、guide1280／390及列印／MI子路徑200通過。停在本機commit，待Claude複驗，不push／部署；交辦與報告在.worktrees/release-mi-1.9.0/docs/。
+- **MI1.9.0上線（10/14，A完成）**：migration已成功不可重跑；deleteCourse單項重試成功、規則索引／Actions38514907129／Pages成功，正式mi/main=b64217d。同公開variables乾淨重建的線上JS雜湊一致，教師親驗test正常。詳release worktree handoff與A報告；本輪不再部署、Excel／正式學生資料未改。
+- **1.9.0準備已驗收**：MI .worktrees/release-mi-1.9.0／release/mi-1.9.0本機510b6ad（parents70354e0＋7a6720e），共用測試回補178f862；24衝突解決、d48aac8保留，29個未追蹤AP2公開教材移repo外不提交；純暫存匯出MI check150／54、dist2教材＋3CHP、離線dry-run均通過。Claude.xlsx無變動稽核採用。.firebaserc不改、MI指令必--project mi-bd885。AP2正式main7a6720e已發布驗證不變，root教材工作保留。
+- **ChatGPT本機製圖輔助／網頁控制台（10/13 Codex）**：chatgpt_auto_illustrator.py＋chatgpt_illustrator_web.py，說明 docs/CHATGPT_AUTO_ILLUSTRATOR.md。教師提供 /Users/HHC/Downloads/CHATGPT_PROMPT_PACK_UNIQUE_2026-10-13.md，與repo版SHA一致（68張／16單元）；網頁預設載入此檔，支援上傳MD、slug／張數／網址、登入完成、開始／續跑／停止、日誌與圖庫。Persistent獨立profile共用、每包雜湊獨立進度；不保證免驗證，Chrome日常預設profile不支援。Google拒絕自動化瀏覽器登入後已改一般Chrome本人登入（不啟用Playwright／remote-debugging），登入完成按鈕會正常關閉工具登入Chrome後才續跑；生成前檢查鎖PID，死程序鎖交Chrome原生回收不刪鎖。14項本機測試全過，桌機1280／手機390無pageerror或溢位；虛擬環境.venv-illustrator已安裝Playwright1.60／Pillow11.3。控制台本次已啟動 http://127.0.0.1:8765（exec session62696）；重開用 .venv-illustrator/bin/python chatgpt_illustrator_web.py。教師後續回報existing-session錯誤，已核對並正常關閉工具登入Chrome PID67361，修正keychain旗標；實際persistent Chrome啟動／ChatGPT聊天框載入成功（無prompt）。教師回報Cloudflare驗證反覆出現，已停止該次generate等待並保留進度，尚未送prompt；Playwright實際網站可用性未通過，不再反覆啟動重試。下一步待教師選擇一般Chrome擴充功能版（仍不能保證免驗證）或保留工具暫停；再登入時按「登入完成，關閉登入視窗」。未操作帳密／產圖。feature/respiratory-infographics／e8805f8，未commit／push／部署。
+- **10/13 Claude 審查呼吸／泌尿／體液（已完成，未commit）**：摘要 docs/RESPIRATORY_URINARY_REVIEW_SUMMARY_2026-10-13.md（含教師待答6題）。①呼吸道V2 docs/AIRWAY_FIGURES_V2_CLAUDE_REVIEW.md：**有條件通過、可交教師看畫面**，無解剖錯誤；Claude獨立重跑1280／390（0錯誤、最小30.40／13.28px、紅字18狀態吻合、無變形），183檔SHA不變；Codex小修A-01～A-04（node-04杓狀軟骨錨點、「後」與圖說、會厭錨點；node-03後面觀圖說），只改scripts/airway-figures.py圖層。②呼吸六份prompts docs/RESPIRATORY_PROMPTS_CLAUDE_REVIEW.md：54段中34段可交ChatGPT、20段待教師C1（資料層建議原生SVG）；C2氧曲線保留oxygen-curve.js程式；C3–C5已依CH06修文（V/Q單位L/分、頸動脈體位置p.30、95不指肺靜脈）。③泌尿／體液 docs/URINARY_FLUID_CLAUDE_REVIEW.md：90段中63段可交（待教師確認U1）、13段待資料層、14段待六卡核可或數值擇一（PCT 67%／75%、RBF 1200／1100、50kg自編例）；六卡經CH09原頁核對均相符、建議核可但Claude未改卡片／進度。Claude已直接修規格文件（簡體字、重複狀態名、3份總覽紅字錯位、RAAS空白來源、prompt內審查者指示等），差異 docs/respiratory-v2-specs/、docs/urinary-fluid-specs/ 各 CLAUDE_EDITS_2026-10-13.diff；content／Excel／登錄／258與33來源SHA均未變。
+- **10/13 16:45 教師裁定（呼吸／泌尿／體液）**：審查建議全採；用詞併呈「逼尿肌（迫尿肌）」「紅血球生成素（腎紅血球生成因子）」；C1資料層改原生SVG（呼吸20、泌尿體液16圖位）。Claude已改規格（U1去重、PCT 67%／75%、RBF不標、過濾壓p.12、刪50kg例）並產 docs/CHATGPT_PROMPT_PACK_2026-10-13.md（108段）；作圖改用唯一底圖版 docs/CHATGPT_PROMPT_PACK_UNIQUE_2026-10-13.md（68張：呼吸28＋泌尿體液40，涵蓋全部108圖位，箭頭／紅字／路線由程式疊加），教師自行貼ChatGPT，肺與胸膜8張已試畫（審查 docs/IMAGE_REVIEW_lungs-pleura_2026-10-13.md：04／06／08通過，8張重畫後全部通過、底圖定稿；開場指令已補「不畫箭頭／引線、肺動脈藍肺靜脈紅」）；半自動作圖助手 scripts/chatgpt_assist.py（本機網頁 localhost:8765，自動放剪貼簿、監看下載資料夾轉PNG改名到 incoming/，說明 docs/CHATGPT_ASSIST_USAGE.md；新指令包格式 docs/CHATGPT_PROMPT_PACK_FORMAT.md，助手自動讀docs/最新符合格式的指令包、網頁可切換；不操作ChatGPT網頁、不用API）。六卡核可勾選清單已寫 072026專案 05_review/教師核可_泌尿體液六卡_20261013.md，**待教師本人跑 apply_teacher_review.py**（dry-run已過）。post-review交辦已於10/14階段一完成（見上），待Claude複驗；不build／Excel／登錄／commit。學生端使用說明規畫 docs/STUDENT_GUIDE_PLAN.md，待教師答4題。
+- **教材圖風格（10/13 22:45 教師定案）**：底圖改手繪解剖圖譜畫風（不透明水彩、霧面、光源左上、圖譜配色、單一尺度），箭頭與標籤一律由程式疊加（Nature式箭頭文法、色盲友善）；指南 docs/FIGURE_STYLE_GUIDE.md，開場指令與68段prompt已更新。肺與胸膜8張新畫風全部通過、底圖定稿（10/13 23:05 Claude，審查記錄 docs/IMAGE_REVIEW_lungs-pleura_2026-10-13.md 末節）；其餘呼吸20張亦已於10/14定稿；泌尿／體液素材由教師續作。教師10/14已定案重點 A 紅色粗體。
+- 10/13修正已上線：教師授權後提交d48aac87並正常push mi/main；Actions38317348554 build/deploy成功。前端135＋Functions42全過0跳過、版本／兩端編譯／49入口通過；線上index-Cq6saXmE.js SHA256與本機已測build逐位元相同。正式Chrome選前測補考＋理由再切後測，自動回一般正式測驗、理由消失。影片重整等待進度修正同批上線（延遲／失敗重試本機fixture已驗，本輪未新增線上學生播放）。僅前端更新，不部署Functions、不操作正式場次或成績；版本仍1.7.1。MI codex/115-mi-assessments HEAD與mi/main=d48aac87，發布後證據交接留本機未提交；根目錄e8805f8不部署。證據docs/mi-exam-review/fixes-release-verification.json及teacher-kind-switch-fixed-live.png。
+- 115-MI國考佈建（10/13 Codex，已完成）：教師已指定套用74題Claude修訂、仍有疑義排除。74題已套入reviewed-bank.json，69可用／5待裁定排除；通過291另3待裁定排除，合計357來源題可用、50排除（42停用＋8未決）。現行資料核對128／171／223／235，修正171入學前疫苗DTaP-IPV及223移除過時累計數。Sheet115-MI／115-1-MI-國考精準對焦已寫入並逐格驗證：原83列ID保留、新增297、60既有解析更新、2既有題幹／選項修訂、1停用，共380列／379啟用；parser32分類（原5＋25新＋前後測2）。reports：docs/mi-exam-review/revisions-applied.json、deployment-selection.json。47課後YouTube已發布於mi-bd885六選做Chapter，原2小時教材保留。課序同步並發布完成：30分類／365題（原68＋新增297）、47影片、6選做Chapter，25新分類visibility=current；N551／N552／test可見。前後測14題已同步私有assessmentSources，各7題；正式前測待開放。實際bank分塊驗證297新ID存在、50排除來源ID及停用micro-111-1-r0274均未出現；報告deployment-completed.json及deployed-bank-verification.json、畫面course-published.png。分支feature/respiratory-infographics／HEAD e8805f8，未commit／push／程式部署。
+- 泌尿／體液下一批規格（10/11 Codex）：docs/URINARY_FLUID_INFOGRAPHICS_SPEC.md＋docs/urinary-fluid-specs/十份詳細作者草案；建議泌尿6＋體液4＝10次單元／10份資訊圖表、60節點／70圖位／90段ChatGPT prompts／110題考點藍圖（未命正式題）。33來源卡中27 reviewed、6待教師；比例／解剖／單位爭點列U1–G2，待Claude回核原PDF。10/13 Claude 已審（見上）。僅文件，258保護檔及33來源卡SHA不變，未產圖或改教材／Excel／登錄；分支feature/respiratory-infographics／HEAD e8805f8、未commit。
+- 呼吸其餘六份製圖規格（10/11 Codex）：docs/RESPIRATORY_FIGURES_V2_SPEC.md＋docs/respiratory-v2-specs/六份詳細規格，42圖位／54段ChatGPT prompts（含18個總覽狀態），標籤／紅字／出處／題目覆蓋與驗收已列。教師指定圖由ChatGPT做，Codex只寫prompt；先Claude審，不產圖或實作。Claude交辦 CODEX_TASK_respiratory-prompts_CLAUDE_REVIEW_2026-10-11.md，10/13 Claude 已審（見上）。258檔SHA不變；曲線互動接合等C1–C6待裁定。分支仍feature/respiratory-infographics／HEAD e8805f8，未commit。
+- 呼吸道構造圖 V2（10/11 Codex）：七圖已換 ChatGPT WebP 底圖＋原生中文 SVG 標籤，overview 三狀態紅字切換；喉軟骨／聲帶兩格上下排，手機最小13.28px，HTML約1.124MB。preview、節點稽核、materials20測試、18狀態字框／引線／錨點檢查通過；報告 docs/AIRWAY_FIGURES_V2_REPORT.md，截圖 docs/respiratory-screenshots/airway-v2/。content與其他六份來源／preview、Excel、登錄檔SHA不變。分支 feature/respiratory-infographics／HEAD e8805f8，未commit；10/11狀態確認：本輪圖面實作已完成，剩Claude獨立驗收＋教師看畫面；核可後另行授權正式build、11題增列Excel、登錄、commit與部署。現仍不build／Excel／登錄／push／部署。
+- origin/main7a6720e（AP2 1.9.0已發布驗證），本機main仍a593796；root程式仍1.7.0，不从root部署。
+- 1.7.0 ①～④於 10/6 Claude 驗收通過，待教師從 feature/1.7.0-practice-modes 執行 deploy.sh。前端134／Functions26測試及兩端build通過；同步後會清除「全部重算」勾選。驗收 docs/PRACTICE_MODES_1.7.0_ACCEPTANCE.md。
+- 任務基底 feature/1.7.0-practice-modes＝e8805f8（先依交辦提交既有交接及兩份規格，訊息 docs: 交接更新 [Claude]）。Git 過期 index.lock 已確認無 Git 程序後清除。
+- 呼吸系統規畫確認（10/11）：依 docs/RESPIRATORY_INFOGRAPHICS_SPEC.md A1，單元「呼吸系統」下7次單元，一對一7份資訊圖表；每份6節點＋1總覽（7圖）、11題。呼吸道的構造本身是其中1次單元／1份教材，6節點不另拆次單元。
+- 工作1B報告：/Users/HHC/Dropbox/耕莘/antigravity/072026 新的專案/05_review/Q3疑點研究_6題.md。Q3-28答案有爭議，其餘五題答案成立但需修解析；僅報告，未改Excel／卡片／進度，B未套入A。
+- 原子卡第四輪26張已 self_checked，QC 0 error／warn；報告位於上述外部專案05_review/midterm_cards_round4_report.md，待Claude獨立驗收；總數88 awaiting_teacher_review／41 self_checked／69 reviewed／6 blocked。right-left-main-bronchi已由教師更正核可為reviewed。
+- 工作2已完成：feature/1.7.1-completion-board＝ed08854，基底e8805f8；獨立工作目錄 /Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/completion-board（乾淨）。版本1.7.1、前端140／Functions26、兩端build／版本檢查通過，報告為該worktree內 docs/COMPLETION_BOARD_1.7.1_ACCEPTANCE.md（含6張1280／390圖），待Claude獨立驗收，未push／部署。原目錄仍是呼吸分支1.7.0，不可直接從此部署看板。
 
-```
+
+- 血流路徑動畫（2026-10-08 教師決定：一份教材四模式＝肺／體／胎兒／大腦；胎兒混合血紫色；含出生後閉鎖；先獨立；單元未定）：Codex 規格 `docs/BLOOD_FLOW_ROUTES_SPEC.md`。**階段 1 經 Claude 驗證通過**（35 句原文全核、解剖無誤、大腦第 4 步依表 11-2＋圖 11-17 核可、needs_review 已解除），教師抽查 4 張全核可（2026-10-08），已 reviewed（進度檔＋frontmatter）。**階段 2 已做至 preview＋shots，待 Claude 解剖／11題驗收與教師看畫面。** 視覺計畫 `docs/BLOOD_FLOW_ROUTES_VISUAL_PLAN.md`（worktree）為準；肺模式方案D與三小修教師已核可；依教師接續交辦，體／胎兒／大腦均已分次交preview，待整體圖面人工驗收。
+
+- 血流階段2：`.worktrees/blood-flow-routes`／`feature/blood-flow-routes`／HEAD e8805f8，未提交。教師 10/9 判定第三輪美感不足，Claude 畫四模式樣張 v2（`docs/blood-flow-sample/blood-flow-sample-v2.html`；胎盤左側、臍動脈修圓），Codex 依樣張重畫完成（報告 `docs/BLOOD_FLOW_ROUTES_V2_REPORT.md`）。**Claude 10/9 驗收通過**：畫面與樣張逐步一致（僅三個心腔座標微調）；content.json／presentation.mjs／materials-build.mjs SHA 不變；Claude 以 Noto Sans CJK TC 補跑 1280／390 共 66 狀態：文字不壓當步血管、間距、越界、手機字 ≥12.5px、pageerror、水平溢位全過（僅肺第6步肺靜脈在心臟邊緣貼近心房名，屬可接受）。**下一步：教師看畫面**（`public/materials/blood-flow-routes-v1/index.html` 或截圖集 `docs/blood-flow-routes-preview.html`），核可後才 build＋Excel 新增 6 先備＋5 情境題＋登錄＋commit。
+
+## 部署方式（教師執行）
+```sh
 zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents/ChatGPT/課程平台1.0/scripts/deploy.sh'
 ```
-- deploy.sh：`npm run check` → 備份分支 → 部署 Functions → 快轉推送 main。Firebase 帳號須為 **hhchang@ctcn.edu.tw**；GitHub 推送需個人權杖。
-- 部署後確認正式站 `version.json` 版本號。deploy.sh 偶發單一函式 `ENOTFOUND`（Mac 網路暫時失敗）：重跑即可，未變更的函式會 Skipped。
-- `handoff.md`、`README.md`、`DEVELOPMENT_LOG.md` 都必須保留「目前版本：x.y.z」一行，`version:check` 會檢查。
-- agent 的沙箱（Claude VM／Codex）沒有 GitHub 寫入憑證；Claude VM 內 `node_modules` 是 macOS 版，前端 `npm test`／`vite build` 跑不起來（Functions build/test 可以）。前端驗證以教師或 Codex 在 Mac 上跑的結果為準。
-- 本機 `file://` 預覽在 CUA 被擋；要看教材畫面，Claude 可在雲端用 Playwright 截圖。
+- deploy.sh：npm run check → 備份 → Functions → 快轉push main；Firebase帳號 hhchang@ctcn.edu.tw。
+- VERSION／兩端package與lock／shared/version.ts／apps-script/version.gs／public/version.json／三份文件版本行須同步（version:sync／version:check）。
+- 既有本機資料不要納入：public/materials/coagulation-v1、html五份RTF、html/心電圖與心律不整解析.html；exclude現況保留。
 
 ## 固定決策（精簡版；細節見各 docs）
+
+- **1.9.0 固定決策（Claude已複驗、AP2部署待完成驗證）**：兩課程共用 1.9.0 主程式；新功能以課程 features 開關；網站差異只放在建置設定。
 
 **資料與架構**
 1. 學生入口 GitHub Pages，資料 Firebase（專案 `ap2-7ed91`，asia-east1）；舊題庫系統資料完全隔離。
@@ -102,52 +84,18 @@ zsh -ilc 'source ~/.nvm/nvm.sh && nvm use 22.23.2 >/dev/null && bash ~/Documents
 23. **用語（教師決定 2026-10-03）：一律使用台灣課本用語，不用大陸用語**（例：心搏量非每搏量、紅血球非紅細胞、微血管非毛細血管、受器非感受器、黏度非粘度、點選非點擊）。新教材與修改都要掃描用語；學生看得到的地方不得留下「⚠️」「請教師決定」等草稿註記。
 24. **藥物與疾病（教師決定 2026-10-07）：Q1–Q8 任何題目內容和藥物或疾病有關，一律納入「國考延伸」補充教材**（9/25「正式教材不放疾病藥物」的配套）；出處第一順位指定課本、第二順位其他課本並逐句註明。規格見 Project 文件「期中考國考延伸補充教材規格」第 5 節。
 ## 待辦
-**期中考（呼吸・泌尿・體液，11/9–11/13）準備（2026-10-06 Claude）**
-- 期中考下一步：Claude獨立驗第四輪26張（生成者Codex，不得自驗），教師確認來源限制並抽查；先前67張中66張已reviewed、right-left-main-bronchi被教師退回blocked（未註原因，待教師說明，本輪未碰）。原5項無出處仍待補充教材；18個章節缺口已拆26張補建，不再是未建待辦。依教師決定，Q3／Q4暫不上平台，Excel／題目不改；第四輪報告與保護比對已存外部專案05_review。
-- 教師決定（2026-10-07，`05_review/期中考原子卡抽查清單.xlsx` 待決定事項）：5 項課本無出處→補充教材後建卡（教材來源待定）；Q4-29 不發布；17 項題目／解析疑點先標註不動作（已註記於 Q3-Q4 解析總表，備份 `05_review/backups/teacher_decisions_2026-10-07/`）；18 個章節缺口補建卡→拆成 26 張交 Codex 第四輪。
-- 教師抽查完成（2026-10-07）：68 張核可→`reviewed`（frontmatter 已同步），`right-left-main-bronchi` 先退回、教師後更正為核可（共 69 張 reviewed）。Q3-Q4 解析總表已同步 ⑤欄／primary卡／發布狀態：132 題「可發布」、17 題「待教師確認（標註疑點）」、6 題「擋住：課本無出處」、Q4-29 不發布（同步前備份在 `05_review/backups/teacher_decisions_2026-10-07/`）。下一步：Q3／Q4 132 題上平台（Sheet 貼上＋同步）；教師說明 right-left-main-bronchi 退回原因；補充教材來源待教師決定；Codex 第四輪 26 張。
-- 教師決定（2026-10-07）：氣胸、減壓病、利尿劑、腎自體調節、腎衰竭／透析為國考題，補充後放入平台教材（9/25「不放疾病藥物」的例外）；出處第一順位指定課本、第二順位其他課本並註明。規格草案在 Project 文件「期中考國考延伸補充教材規格」（新教材 slug `exam-extension-resp-renal`＋5 張卡），教師已核定：Q4-84 不寫數字、併入標註疑點組暫不發布；Q3／Q4 132 題先不上平台；Codex 第四輪26張已交件、待Claude驗證；國考延伸教材＋5張卡待第四輪驗收與正式規格交辦，本輪未開始。
-- **2026-10-07 已交辦 Codex**：見 `CODEX_TASK_2026-10-07.md`（工作 1 呼吸 7 份＋疑點研究、工作 2 完成度看板 1.7.1，依序、各自分支）。
-- 完成度看板 1.7.1（教師選方案 B＋外層各班比較）：規格 `docs/COMPLETION_BOARD_1.7.1_SPEC.md`，只改前端，從 `feature/1.7.0-practice-modes` 開 `feature/1.7.1-completion-board`。
-- 呼吸 7 份資訊圖表（2026-10-07 教師核定、一次做完）：Codex 規格 `docs/RESPIRATORY_INFOGRAPHICS_SPEC.md`（A：7 份 preview＋shots 後停下給教師看，核可才 build＋Excel 第 229 列起 77 題、單元「呼吸系統」；B：Q3-2/28/39/49/52/60 疑點研究，只出報告 `05_review/Q3疑點研究_6題.md`）。解析總表 Q3「單元」欄已改 7 類（Q3-19 歸呼吸道的構造；備份 `05_review/backups/resp_7cat_2026-10-07/`）。right-left-main-bronchi：教師更正「卡片沒有錯」→ reviewed（AB-05_13 p.10 已核），併入 ① 節點 6，Q3-19 primary 改此卡。
-**部署後教師待辦（1.6.2 已於 2026-10-02 上線）**
-- ①題庫 `html/資訊圖表題庫_上傳用.xlsx` 第 108–162 列（55 題）貼到 Google Sheet 題庫分頁後按同步；②後台為五個新單元（血管構造解析、循環路線、血壓的調控、淋巴系統、血液動力學）建立互動教材活動（連各 `<slug>-v1`，6 節點／11 題）。
-- `feature/heart-structure-v2`（心臟構造 v2，已驗收）未含在本次部署；要上線前先 merge 最新 main。
-- 本機 `.git/info/exclude` 已加入 `html/` 五份 NotebookLM 原稿 RTF（來源已快照在 `materials-src/<slug>/source.rtf`）。
-**可部署（2026-10-03 Claude 複驗 33e7700 通過）**：用語清單掃描 public/materials、materials-src、figures 全為 0（「扁桃體」已改為「扁桃腺」）；心搏量已統一（心輸出量、血壓調控、心電圖模擬器）；6 份預測回饋為說明句並實測顯示；題庫僅第 163、164、169 列共 10 格「每搏量→心搏量」，其餘逐格不變；所有題目 ID／答案不變；抽測 6 份無錯誤／溢位。在主資料夾確認分支 `feature/stage1-supplement` 後執行 deploy.sh。
-- **教師決定（2026-10-03）：統一用「扁桃腺」**。Claude 已直接改 blood-pre-v1（2 處）、blood-post-v1（4 處），僅顯示文字，前測題目答案位置不變；用語檢查腳本已把「扁桃體」列為禁用詞。
-**心臟II C1–C7：2026-10-03 Claude 複驗通過（Claude 已修正主動脈分段與分界、弓放大圖、左冠狀標籤），可部署**
-- 分支 `feature/cardiac-output-visuals`，本次基底 `f589505`；C1–C4／C7 必修與 C5–C6 建議完成。本次提交結尾 [Codex]，未 push／部署。
-- 六份 34 節點去除重複重點、改應用判讀；只能取材規格與既有內容，137 筆逐句對照在 `docs/HEART2_C1_TEXT_COMPARISON.md`，待 Claude 醫學複核。
-- 新增強制節點驗證：points 正規化重複、等於 summary／concept、clinical 等於 summary 報錯。21 份學生教材 129 節點及全部 15 kit 來源過，指令 `npm run materials:validate-nodes`。
-- 主動脈全段／弓加粗鮮紅漸層、選段其他改淺灰、黑色分界／括號、左右冠狀動脈；人體／肝門動脈紅一致。弓引線／頭臂淡框、肱與顳脈搏點、右頭臂靜脈同側標籤修正。電性卡片 1280 不再截斷。
-- 題目／選項／答案／預測題、節點／題目 ID、Excel 不改；六份 content 僅 points／clinical 不同；手工電性僅 CSS 不同。26 張指定截圖、比對及檢查見 `docs/HEART2_C_REVIEW_ACCEPTANCE.md`。
-- check 120 前端／19 Functions、兩端 build、version:check 過；用語／草稿掃描 0，標準血管 shots 22 張過。固定決策 22 本次依教師明確交辦提交，目錄不重登錄。
-- 先前 A1–A10、M1 與必修 1／3／4、建議 5–8 已完成；原報告保留歷史。下一步 Claude 依 C1 對照與 C7 新圖驗收，教師決定部署。
-**1.6.4 合併單元：2026-10-03 Claude 驗收通過，可部署**
-- 空單元才顯示合併；預覽活動／受影響學生後確認。教師 callable 交易分別合併草稿／已發布活動與班級設定（目標優先），全體 progress 複製至目標、舊鍵保留、completed 不降級；研究／診斷不動。
-- check 119 前端／19 Functions、兩端 build、version:check 過；行為／React／完成度測試與詳情見 `docs/CHAPTER_MERGE_1.6.4_ACCEPTANCE.md`。版本 1.6.4，未 push／部署；下一步 Claude 驗收。
-**1.6.4 後台「單元／次單元」兩層選單：2026-10-03 Claude 驗收通過（補空白單元標題 fallback），可部署**
-- ChapterUnitPicker 共用兩層選單：單元依 orderedChapters／看板順序，次單元只列該單元分類；換單元重設第一個，清空題庫預覽／報表摘要與明細，舊非同步結果不覆蓋新選擇。
-- 題庫讀取／版本徽章沿所選次單元；報表保留「全部」，此時次單元停用，仍依 Unit ID 篩選；研究資料頁依單元 optgroup 分組。
-- 純前端顯示；資料結構／後端功能／完成度不變。版本檔全部同步 1.6.4；check 117 前端／18 Functions 及兩端 build 通過，新增實際 React 頁面操作測試。
-- 報告 `docs/CHAPTER_UNIT_PICKER_1.6.4_ACCEPTANCE.md`；下一步 Claude 驗收選單。圖像修正本次完成待複驗，未 push／部署、main 未動。
-- **部署後教師**：①第 108–162 列（若尚未貼）與第 163–228 列貼上 Sheet 題庫分頁並同步；②建立「心臟II」單元；③教材活動：心臟II＝電性活動、心電圖基礎、心輸出量、血壓測量、微血管交換、主要動靜脈；血液＝紅血球恆定、血型與輸血；淋巴系統＝淋巴器官。
-**待 Claude 驗收**
-- 教材元件庫 v1：`feature/material-kit` 的心臟構造樣板、內容驗證、建置／截圖工具已完成（最新提交 `feat: 建立教材元件庫與心臟構造樣板 [Codex]`）；截圖與報告在 `materials-src/heart-structure/shots/`（本機 gitignore）。驗收前不要轉換其他教材、不要 push 或部署。既有 `html/心臟構造.html` 與既有 `public/materials/` 版本未改。
-**等教師決定**
-- 待教師處理：後台血液氣體運送、止血機制活動改連 v2。
-- 1.5.0 上線後實測：用測試學生帳號走一次「未達標→達標→逾期達標」確認標示。
-- 長期流程其餘項目（未排程）：規格決策清單、把流程寫成 Skill、`App.tsx` 拆檔。
-**技術待辦（未排程）**
-- 題目作廢並重算（標記作廢題、重算分數／最高分／passedAt）。
-- **下一輪待修：快照 INTERNAL（2026-10-06 教師決定先不動，未修正／提交）**：createSnapshot 寫 forClass 的 course；forClass 無條件寫 research，未設定時為 undefined。以本機 Firestore SDK 驗證重現 `course.units.0.research` 寫入被拒；正式錯誤尚未查雲端log。下一輪先查正式後端日誌確認，再省略未設定欄位、補快照真實序列化回歸測試與清楚的錯誤提示；保留既有學生進度。本輪只記錄待辦，不改程式、不部署。分支feature/1.7.0-practice-modes／HEAD 3ef39b7，handoff本次未提交。後端passedAt首次達標仍待行為測試。
-- `diagnostics` 的 `summary` 欄位補索引排除；firebase-functions 版本升級。
-- `html/血液氣體運送.html`、`html/止血機制與凝血病理.html`、`html/血液的組成.html` 的兩關改造與圖像化尚未全部完成、未正式發布。
-- 端到端驗收（真實學生登入、名冊、同步、教材事件、報表、用量）。
-**1.6.5 後台學習活動編輯改善（2026-10-03 Claude，已 commit，待部署）**：必做／選做標籤、新增活動視窗（階段必選、資訊圖表名稱自動帶入並去「圖卡」）、預設收合並依階段分組。詳見 DEVELOPMENT_LOG。
-**網站圖示（favicon）已加入（2026-10-03 Claude）**：教師決定沿用平台既有的 Lucide 學士帽線條圖示（ISC 授權）。分頁用藍色線條（`#0ea5e9`、線寬 2.4，無底色）：`public/favicon.svg`、`public/favicon.ico`（16／32／48）；手機主畫面用藍底白線：`public/apple-touch-icon.png`（180）、`icon-192.png`、`icon-512.png`，`manifest.webmanifest` 名稱「課序」。`index.html` 已加連結，vite build 輸出為 `./` 相對路徑，GitHub Pages 子路徑可用。隨本分支下次部署上線；手機需重新「加入主畫面」才會換新圖示。
-- **上線資訊圖表分類（2026-10-03 Codex，未改後台）**：21 份學生版網址逐一 HTTP 200；依四單元整理為血液 5、心臟 4、心臟II 10、淋巴系統 2（心臟II 加入原血管／血壓的四份）。建議順序／版本／上線連結見 `docs/LIVE_INFOGRAPHICS_CLASSIFICATION.md`；心電圖歸心臟II，其餘原心臟四份留原單元。僅文件整理，分支／commit 未變，本次文件未提交。
-**需要教師提供**
-- Google Sheet：補齊單元欄、名冊資料。
-- 研究用前後測、等值／遷移題內容（平台不自行杜撰）。
+- 115-MI實測：學生前測86／後測100、單選／排序各1票、完整測驗100雲端保存、閃卡不增次數、選做不增必做；教師測驗控制／CSV／38頁簡報／互動再投／黑屏／全螢幕／備註通過。test驗收已收回，原正式前測prepared未公布、三班恢復、互動入口空；私有前後各7題來源就緒，原正式後測未建立。影片續播及種類切換修正已上線，仍待跨裝置、真實手機、46其餘影片及HTML全通關；報告STUDENT_ACCEPTANCE.md／TEACHER_ACCEPTANCE.md。
+- 泌尿／體液底圖（10/14 22:15 Claude 審 37 張，docs/IMAGE_REVIEW_urinary-fluid_2026-10-14.md）：29 通過、3 小修（nephron-circulation-01、water-sodium-02／04）、urinary-route 01–05 重畫、酸鹼 3 張未畫。**urinary-route 01–04 與兩個 _rejected 檔是作圖助手誤存的私人照片，教師須手動刪除，不可 commit。** 助手已改為略過 jpg／heic 與超大圖。
+- 泌尿／體液：教師10/13已裁定；74段可交ChatGPT（指令包），16資料層圖位待底圖回來後原生SVG；六卡待教師執行apply；無content，不進教材實作。
+- 血流：v2 已由 Claude 驗收通過，待教師看畫面；核可後依固定決策 22 正式 build、Excel 末列新增 11 題、登錄、commit。
+- 工作1B：Claude已核對報告引句，待教師裁定六題與資訊圖表修訂；教師原決定Q3／Q4先不上平台仍有效。
+- 工作2：三項修正已提交ed08854，check140／26及Claude複驗通過；教師決定部署。
+- 第四輪26張原子卡待Claude獨立驗；國考延伸兩份教材與補建卡另開單，這次不做。
+- 1.7.0部署後教師實測：改一題錯字同步顯示保留／重置0題；閃卡不改最高分；完整測驗完成度、逾期與首頁定位。
+- 題庫Excel既有227題已確認全在Sheet；本輪呼吸77題也已追加，教師驗收後再決定平台同步。後台依 docs/LIVE_INFOGRAPHICS_CLASSIFICATION.md 建活動；血液氣體運送／止血機制活動改連v2。
+- feature/heart-structure-v2（9/25驗收）及feature/material-kit（待驗）未部署；部署前合併最新main。其他已完成階段細節查DEVELOPMENT_LOG。
+- 快照INTERNAL：教師10/6決定本輪不修。下輪先查正式log；已本機重現forClass無條件research:undefined造成Firestore拒絕，需省略欄位＋真實序列化回歸測試，保留進度。
+- 未排程：passedAt首次達標後端行為測試、題目作廢重算、diagnostics.summary索引排除、firebase-functions升級、App拆檔、真實學生端到端驗收。
+- 研究前後測／等值遷移題及Google Sheet名冊、單元欄由教師提供。
+
+- 學生端使用說明：教師10/13決定站內靜態頁＋登入頁／首頁連結＋首次提示卡3張、兩站共用、併入1.9.0上線；已寫入 unify 規格第8節（docs/STUDENT_GUIDE_PLAN.md 文末記決定）。

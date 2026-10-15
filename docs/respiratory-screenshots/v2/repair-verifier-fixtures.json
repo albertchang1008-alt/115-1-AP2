@@ -1,0 +1,93 @@
+[
+  {
+    "name": "同圖重複編號",
+    "ok": true,
+    "duplicateNumbers": [
+      {
+        "id": "1",
+        "kind": "label"
+      }
+    ],
+    "wordBreaks": [],
+    "singleCharacterLines": [],
+    "arrowTextHits": []
+  },
+  {
+    "name": "步驟數字與標籤字母",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [],
+    "singleCharacterLines": [],
+    "arrowTextHits": []
+  },
+  {
+    "name": "拆開醫學詞＋單字行",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [
+      {
+        "label": "中樞化學受器",
+        "term": "中樞化學受器",
+        "lines": [
+          "中樞化學受",
+          "器"
+        ]
+      }
+    ],
+    "singleCharacterLines": [
+      {
+        "label": "中樞化學受器",
+        "line": "器"
+      }
+    ],
+    "arrowTextHits": []
+  },
+  {
+    "name": "數值與單位拆行",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [
+      {
+        "label": "肺內壓760mmHg",
+        "term": "760mmHg",
+        "lines": [
+          "760",
+          "mmHg"
+        ]
+      }
+    ],
+    "singleCharacterLines": [],
+    "arrowTextHits": []
+  },
+  {
+    "name": "只碰到箭頭頭部",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [],
+    "singleCharacterLines": [],
+    "arrowTextHits": [
+      {
+        "label": "CO₂",
+        "line": "CO₂",
+        "arrow": 0,
+        "markerHead": true
+      }
+    ]
+  },
+  {
+    "name": "距離足夠",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [],
+    "singleCharacterLines": [],
+    "arrowTextHits": []
+  },
+  {
+    "name": "合法指定斷行",
+    "ok": true,
+    "duplicateNumbers": [],
+    "wordBreaks": [],
+    "singleCharacterLines": [],
+    "arrowTextHits": []
+  }
+]

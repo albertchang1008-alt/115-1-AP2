@@ -1,0 +1,338 @@
+{
+  "slug": "o2-co2-transport",
+  "version": "v1",
+  "experience": "guided",
+  "title": "氧與二氧化碳的運輸",
+  "subtitle": "氧主要由血紅素攜帶，解離曲線的左右移決定在組織釋出多少；二氧化碳主要變成碳酸氫根在血漿中運送。",
+  "label": "氧與二氧化碳的運輸｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "97%／3%",
+      "label": "O₂ 結合血紅素／溶於血漿"
+    },
+    {
+      "value": "70／23／7%",
+      "label": "CO₂：碳酸氫根／碳醯胺基血紅素／溶解"
+    },
+    {
+      "value": "PO₂ 40 → 約 75%",
+      "label": "組織端血紅素飽和度"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "o2-co2-transport-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "正常",
+        "explain": "正常：PO₂ 40 mmHg 時飽和度約 75%"
+      },
+      {
+        "id": "state-2",
+        "label": "右移",
+        "explain": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧"
+      },
+      {
+        "id": "state-3",
+        "label": "左移",
+        "explain": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加"
+      }
+    ],
+    "predict": {
+      "question": "運動中的肌肉溫度升高、酸增加，曲線會？",
+      "options": [
+        "右移，釋氧增加",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "肌肉溫度與 H⁺增加使曲線右移、親和力下降，因此釋氧增加。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "o2-co2-transport-node-01",
+      "tag": "01",
+      "title": "氧的運送形式",
+      "summary": "約 97% 與血紅素結合、3% 直接溶於血漿",
+      "figure": "o2-co2-transport-node-01.svg",
+      "concept": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+      "points": [
+        "每克血紅素約攜 1.34 mL 氧",
+        "溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "PO₂、飽和度與含氧量是三種不同的量。"
+      },
+      "sources": [
+        "oxygen-transport；CH06 p.23–25；AB-05_13 p.16"
+      ],
+      "reference": "oxygen-transport；CH06 p.23–25；AB-05_13 p.16"
+    },
+    {
+      "id": "o2-co2-transport-node-02",
+      "tag": "02",
+      "title": "血紅素",
+      "summary": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆",
+      "figure": "o2-co2-transport-node-02.svg",
+      "concept": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+      "points": [
+        "血紅素有四條肽鏈與四個血基質。",
+        "Fe²⁺可逆結合氧，每分子最多攜四分子氧。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "CO 對血紅素的親和力約為氧的 250 倍，會妨礙氧運送。"
+      },
+      "sources": [
+        "hemoglobin-oxygen；CH06 p.23–25, 27"
+      ],
+      "reference": "hemoglobin-oxygen；CH06 p.23–25, 27"
+    },
+    {
+      "id": "o2-co2-transport-node-03",
+      "tag": "03",
+      "title": "氧解離曲線",
+      "summary": "描述 PO₂ 與血紅素氧飽和度的 S 形關係",
+      "figure": "o2-co2-transport-node-03.svg",
+      "concept": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+      "points": [
+        "PO₂ 與飽和度呈 S 形關係。",
+        "PO₂ 40 mmHg 時飽和度約 75%。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "PO₂ 降低沿原曲線改變飽和度，不等於曲線位移。"
+      },
+      "sources": [
+        "oxygen-dissociation-curve；CH06 p.25"
+      ],
+      "reference": "oxygen-dissociation-curve；CH06 p.25"
+    },
+    {
+      "id": "o2-co2-transport-node-04",
+      "tag": "04",
+      "title": "右移與左移",
+      "summary": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧",
+      "figure": "o2-co2-transport-node-04.svg",
+      "concept": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+      "points": [
+        "pH 下降促進釋氧稱波爾效應",
+        "相反條件使曲線左移"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "運動肌肉產生酸與熱，促使血紅素釋出較多氧。"
+      },
+      "sources": [
+        "oxygen-dissociation-curve；CH06 p.25–27"
+      ],
+      "reference": "oxygen-dissociation-curve；CH06 p.25–27"
+    },
+    {
+      "id": "o2-co2-transport-node-05",
+      "tag": "05",
+      "title": "CO₂ 的三種運送形式",
+      "summary": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解",
+      "figure": "o2-co2-transport-node-05.svg",
+      "concept": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+      "points": [
+        "約 70% 以 HCO₃⁻在血漿運送。",
+        "約 23% 結合蛋白胺基，7% 直接溶解。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "CO₂ 結合血紅素蛋白，氧結合血基質的二價鐵，位置不同。"
+      },
+      "sources": [
+        "co2-transport；CH06 p.27–28"
+      ],
+      "reference": "co2-transport；CH06 p.27–28"
+    },
+    {
+      "id": "o2-co2-transport-node-06",
+      "tag": "06",
+      "title": "碳酸酐酶與氯轉移",
+      "summary": "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻",
+      "figure": "o2-co2-transport-node-06.svg",
+      "concept": "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；H⁺由血紅素緩衝；HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+      "points": [
+        "H⁺由血紅素緩衝",
+        "HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "反應在紅血球內，但 HCO₃⁻主要在血漿中運送。"
+      },
+      "sources": [
+        "co2-transport；CH06 p.28"
+      ],
+      "reference": "co2-transport；CH06 p.28"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "o2-co2-transport-foundation-q01",
+      "stem": "血液中的氧大部分以何種形式運送？",
+      "options": [
+        "直接溶於血漿",
+        "形成碳酸氫根",
+        "與白蛋白結合",
+        "與血紅素結合"
+      ],
+      "answer": 3,
+      "hint": "比較與血紅素結合及直接溶解的比例。",
+      "explain": "約 97% 的氧與血紅素結合，只有約 3% 直接溶於血漿。",
+      "nodeId": "o2-co2-transport-node-01"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q02",
+      "stem": "血基質中與氧結合的鐵？",
+      "options": [
+        "二價鐵（Fe²⁺）",
+        "三價鐵（Fe³⁺）",
+        "鈣離子",
+        "鎂離子"
+      ],
+      "answer": 0,
+      "hint": "注意血基質中心鐵的價數。",
+      "explain": "血基質中心是二價鐵 Fe²⁺，可與氧可逆結合。",
+      "nodeId": "o2-co2-transport-node-02"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q03",
+      "stem": "一分子血紅素最多攜帶幾分子氧？",
+      "options": [
+        "1",
+        "4",
+        "2",
+        "8"
+      ],
+      "answer": 1,
+      "hint": "由血基質的數目推算可結合的氧數目。",
+      "explain": "一分子血紅素有四個血基質，可攜帶四分子氧。",
+      "nodeId": "o2-co2-transport-node-02"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q04",
+      "stem": "下列何者使解離曲線右移？",
+      "options": [
+        "pH 升高",
+        "溫度降低",
+        "溫度升高",
+        "2,3-DPG 減少"
+      ],
+      "answer": 2,
+      "hint": "比較活動肌肉的溫度與釋氧需求。",
+      "explain": "溫度升高使親和力降低、曲線右移，有利於釋氧。",
+      "nodeId": "o2-co2-transport-node-04"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q05",
+      "stem": "CO₂ 在血液中最主要的運送形式？",
+      "options": [
+        "直接溶解",
+        "碳醯胺基血紅素",
+        "與血基質鐵結合",
+        "碳酸氫根"
+      ],
+      "answer": 3,
+      "hint": "比較三種 CO₂ 運送形式的比例。",
+      "explain": "約 70% 的 CO₂ 以 HCO₃⁻ 在血漿運送，是最大宗的形式。",
+      "nodeId": "o2-co2-transport-node-05"
+    },
+    {
+      "id": "o2-co2-transport-foundation-q06",
+      "stem": "紅血球內催化 CO₂ 與水反應的酶？",
+      "options": [
+        "碳酸酐酶",
+        "胃蛋白酶",
+        "澱粉酶",
+        "脂肪酶"
+      ],
+      "answer": 0,
+      "hint": "找出紅血球內加速 CO₂ 與水反應的酶。",
+      "explain": "碳酸酐酶催化 CO₂ 與水形成碳酸，接著解離為 H⁺ 與 HCO₃⁻。",
+      "nodeId": "o2-co2-transport-node-06"
+    }
+  ],
+  "cases": [
+    {
+      "id": "o2-co2-transport-case-q01",
+      "stem": "【生活情境】馬拉松跑者腿部肌肉溫度升高、酸增加，血紅素對氧的親和力？",
+      "options": [
+        "上升，抓住氧不放",
+        "下降，釋出更多氧給肌肉",
+        "不變",
+        "血紅素改與 CO₂ 結合而完全不攜氧"
+      ],
+      "answer": 1,
+      "hint": "將酸與溫度變化連到曲線移動及釋氧。",
+      "explain": "H⁺增加與溫度升高使曲線右移、親和力降低，因此有利於釋氧給肌肉。",
+      "nodeId": "o2-co2-transport-node-04"
+    },
+    {
+      "id": "o2-co2-transport-case-q02",
+      "stem": "【模型觀察】血液從肺部流到 PO₂ 約 40 mmHg 的組織，血紅素飽和度約為？",
+      "options": [
+        "25%",
+        "0%",
+        "75%",
+        "100%"
+      ],
+      "answer": 2,
+      "hint": "在 S 形曲線上找 PO₂ 40 的對應高度。",
+      "explain": "課本指出 PO₂ 40 mmHg 時，血紅素氧飽和度約為 75%。",
+      "nodeId": "o2-co2-transport-node-03"
+    },
+    {
+      "id": "o2-co2-transport-case-q03",
+      "stem": "【生理判讀】過度換氣使血中 CO₂ 減少、pH 上升，解離曲線？",
+      "options": [
+        "右移，親和力下降",
+        "不移動",
+        "變成直線",
+        "左移，親和力增加"
+      ],
+      "answer": 3,
+      "hint": "用右移條件的相反方向判斷。",
+      "explain": "CO₂ 減少、pH 上升是右移條件的相反方向，使曲線左移、親和力增加。",
+      "nodeId": "o2-co2-transport-node-04"
+    },
+    {
+      "id": "o2-co2-transport-case-q04",
+      "stem": "【模型觀察】HCO₃⁻由紅血球移到血漿時，哪個離子同時進入紅血球？",
+      "options": [
+        "Cl⁻",
+        "Na⁺",
+        "K⁺",
+        "Ca²⁺"
+      ],
+      "answer": 0,
+      "hint": "思考碳酸氫根移出紅血球時的離子交換。",
+      "explain": "HCO₃⁻移出紅血球時 Cl⁻進入，這個交換稱氯轉移。",
+      "nodeId": "o2-co2-transport-node-06"
+    },
+    {
+      "id": "o2-co2-transport-case-q05",
+      "stem": "【生理判讀】一氧化碳使氧運送下降的主要原因？",
+      "options": [
+        "CO 使溶解氧大增",
+        "CO 與血紅素親和力約為氧的 250 倍，佔據結合位置",
+        "CO 使紅血球數目立刻減半",
+        "CO 只溶在血漿中"
+      ],
+      "answer": 1,
+      "hint": "比較 CO 與氧對同一結合位置的競爭。",
+      "explain": "CO 與血紅素的親和力約為氧的 250 倍，佔據結合位置，使氧運送下降。",
+      "nodeId": "o2-co2-transport-node-02"
+    }
+  ],
+  "credits": [
+    "生理學 CH06 p.23–28；解剖學 AB-05_13 p.16。"
+  ]
+}

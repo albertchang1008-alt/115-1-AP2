@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "baselineFileCount": 799,
+  "unchangedFileCount": 794,
+  "changedFiles": [
+    "public/materials/README.md",
+    "public/materials/airway-structure-v1/index.html",
+    "public/materials/lungs-pleura-v1/index.html",
+    "shared/materials.ts",
+    "html/資訊圖表題庫_上傳用.xlsx"
+  ],
+  "contentAndFiguresUnchanged": true,
+  "otherMaterialsUnchanged": true,
+  "note": "Compared with release-start baseline, not Git HEAD. Seven builds authorized; airway and lungs HTML regenerated; other five HTML hashes unchanged."
+}

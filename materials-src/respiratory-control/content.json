@@ -1,0 +1,340 @@
+{
+  "slug": "respiratory-control",
+  "version": "v1",
+  "experience": "guided",
+  "title": "呼吸調節",
+  "subtitle": "延髓與橋腦的呼吸中樞依化學受器與肺牽張受器的訊息調整呼吸；CO₂ 是最主要的驅動因素，也連動血液酸鹼。",
+  "label": "呼吸調節｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "腦脊髓液 H⁺",
+      "label": "中樞化學受器的直接刺激"
+    },
+    {
+      "value": "PO₂＜約 60 mmHg",
+      "label": "周邊受器明顯反應"
+    },
+    {
+      "value": "pH 7.35–7.45",
+      "label": "正常血液"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "respiratory-control-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "閉氣",
+        "explain": "閉氣：PCO₂ 逐漸上升，CO₂ 穿過血腦障壁使腦脊髓液 H⁺增加，刺激中樞化學受器，驅動吸氣"
+      },
+      {
+        "id": "state-2",
+        "label": "深吸氣",
+        "explain": "深吸氣：肺牽張受器受牽拉，經迷走神經傳入，抑制吸氣（赫鮑二氏反射）"
+      },
+      {
+        "id": "state-3",
+        "label": "初到高山",
+        "explain": "初到高山：大氣壓降低，吸入氧分壓下降，周邊化學受器使換氣增加，CO₂ 排出增加、pH 上升"
+      }
+    ],
+    "predict": {
+      "question": "初到高山呼吸加快，主要由哪類受器偵測低氧？",
+      "options": [
+        "周邊化學受器",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "高海拔使吸入氧分壓下降；周邊化學受器偵測低氧，促進換氣。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "respiratory-control-node-01",
+      "tag": "01",
+      "title": "呼吸中樞",
+      "summary": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率",
+      "figure": "respiratory-control-node-01.svg",
+      "concept": "延髓與橋腦的呼吸中樞接收化學受器與牽張受器的訊息，調整呼吸的深度與頻率。",
+      "points": [
+        "延髓與橋腦整合化學、牽張受器訊息。",
+        "中樞調整呼吸深度與頻率。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "呼吸中樞不只是化學受器；化學受器與牽張受器的訊息都送到延髓與橋腦整合。"
+      },
+      "sources": [
+        "central-chemoreceptor、hering-breuer-reflex；CH06 p.29, 34；AB-05_13 p.17"
+      ],
+      "reference": "central-chemoreceptor、hering-breuer-reflex；CH06 p.29, 34；AB-05_13 p.17"
+    },
+    {
+      "id": "respiratory-control-node-02",
+      "tag": "02",
+      "title": "中樞化學受器",
+      "summary": "位於延髓附近，直接感受腦脊髓液的 H⁺",
+      "figure": "respiratory-control-node-02.svg",
+      "concept": "位於延髓附近，直接感受腦脊髓液的 H⁺；血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越；一般情況 CO₂ 是重要的呼吸驅動因素。",
+      "points": [
+        "血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，血中 H⁺不易直接穿越",
+        "一般情況 CO₂ 是重要的呼吸驅動因素"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "血中 H⁺不易穿越血腦障壁，所以直接刺激中樞受器的是腦脊髓液的 H⁺。"
+      },
+      "sources": [
+        "central-chemoreceptor、hypercapnia；CH06 p.31, 33"
+      ],
+      "reference": "central-chemoreceptor、hypercapnia；CH06 p.31, 33"
+    },
+    {
+      "id": "respiratory-control-node-03",
+      "tag": "03",
+      "title": "周邊化學受器",
+      "summary": "周邊化學受器包括頸動脈體與主動脈體",
+      "figure": "respiratory-control-node-03.svg",
+      "concept": "周邊化學受器包括頸動脈體與主動脈體；感受血中 H⁺、CO₂ 與低氧；PO₂ 低於約 60 mmHg 時刺激明顯；反應比中樞快。",
+      "points": [
+        "感受血中 H⁺、CO₂ 與低氧",
+        "PO₂ 低於約 60 mmHg 時刺激明顯",
+        "反應比中樞快"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "中樞與周邊受器的位置、直接刺激物不能混用；明顯低氧主要由周邊受器偵測。"
+      },
+      "sources": [
+        "central-chemoreceptor；CH06 p.31"
+      ],
+      "reference": "central-chemoreceptor；CH06 p.31"
+    },
+    {
+      "id": "respiratory-control-node-04",
+      "tag": "04",
+      "title": "赫鮑二氏反射",
+      "summary": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張",
+      "figure": "respiratory-control-node-04.svg",
+      "concept": "肺與肺泡壁的牽張受器受牽拉，經迷走神經傳入延髓與橋腦呼吸中樞，抑制吸氣、避免肺過度擴張。",
+      "points": [
+        "肺壁受牽拉的訊息由迷走神經傳入。",
+        "中樞抑制吸氣，避免肺過度擴張。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "這是機械性牽張反射，不是化學受器反應。"
+      },
+      "sources": [
+        "hering-breuer-reflex；CH06 p.34；AB-05_13 p.17–18"
+      ],
+      "reference": "hering-breuer-reflex；CH06 p.34；AB-05_13 p.17–18"
+    },
+    {
+      "id": "respiratory-control-node-05",
+      "tag": "05",
+      "title": "CO₂ 與酸鹼",
+      "summary": "血液 pH 約 7.35–7.45",
+      "figure": "respiratory-control-node-05.svg",
+      "concept": "血液 pH 約 7.35–7.45；pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4；PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償；PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向。",
+      "points": [
+        "pH＝pKa＋log（HCO₃⁻/H₂CO₃），示例 6.1＋log（26/1.3）≈7.4",
+        "PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向，腎臟可排酸留 HCO₃⁻ 代償",
+        "PCO₂ 低於 35 mmHg 為呼吸性鹼中毒方向"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "呼吸性異常主要看 CO₂，代謝性異常主要看 HCO₃⁻；呼吸調整較快，腎臟代償需要較長時間。"
+      },
+      "sources": [
+        "acid-base-balance、hypercapnia、respiratory-alkalosis；CH09 p.37–41, 44–45"
+      ],
+      "reference": "acid-base-balance、hypercapnia、respiratory-alkalosis；CH09 p.37–41, 44–45"
+    },
+    {
+      "id": "respiratory-control-node-06",
+      "tag": "06",
+      "title": "運動與高海拔",
+      "summary": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸",
+      "figure": "respiratory-control-node-06.svg",
+      "concept": "運動時潮氣量與頻率增加以配合需求，體溫升高也可促進呼吸；高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向；焦慮也是課本所列情境。",
+      "points": [
+        "高海拔大氣壓降低使吸入氧分壓下降，刺激周邊化學受器而換氣增加，CO₂ 排出增加，可朝呼吸性鹼中毒方向",
+        "焦慮也是課本所列情境"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "呼吸變快不一定 CO₂ 就降低，要看實際有效通氣；運動時呼吸增加也不等於已發生高碳酸血症。"
+      },
+      "sources": [
+        "exercise-ventilation、high-altitude-adaptation、respiratory-alkalosis；CH06 p.31, 35；CH09 p.45"
+      ],
+      "reference": "exercise-ventilation、high-altitude-adaptation、respiratory-alkalosis；CH06 p.31, 35；CH09 p.45"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "respiratory-control-foundation-q01",
+      "stem": "直接刺激中樞化學受器的是？",
+      "options": [
+        "血液中的 O₂",
+        "血液中的 Na⁺",
+        "腦脊髓液中的 H⁺",
+        "腦脊髓液中的葡萄糖"
+      ],
+      "answer": 2,
+      "hint": "區分血中物質與受器直接接觸的腦脊髓液物質。",
+      "explain": "中樞化學受器直接感受腦脊髓液中的 H⁺，不是血中 H⁺直接穿越血腦障壁。",
+      "nodeId": "respiratory-control-node-02"
+    },
+    {
+      "id": "respiratory-control-foundation-q02",
+      "stem": "能穿越血腦障壁、間接刺激中樞受器的是？",
+      "options": [
+        "血中 H⁺",
+        "HCO₃⁻",
+        "白蛋白",
+        "CO₂"
+      ],
+      "answer": 3,
+      "hint": "哪種氣體能先通過障壁，再使腦脊髓液酸增加？",
+      "explain": "血中 CO₂ 能穿越血腦障壁，在腦脊髓液增加 H⁺，間接刺激中樞受器。",
+      "nodeId": "respiratory-control-node-02"
+    },
+    {
+      "id": "respiratory-control-foundation-q03",
+      "stem": "周邊化學受器對低氧明顯反應約在？",
+      "options": [
+        "PO₂ 低於約 60 mmHg",
+        "PO₂ 高於 100 mmHg",
+        "PO₂ 低於 95 mmHg",
+        "PCO₂ 低於 35 mmHg"
+      ],
+      "answer": 0,
+      "hint": "留意低氧刺激開始明顯的分壓界線。",
+      "explain": "PO₂ 低於約 60 mmHg 時，周邊化學受器的低氧刺激明顯。",
+      "nodeId": "respiratory-control-node-03"
+    },
+    {
+      "id": "respiratory-control-foundation-q04",
+      "stem": "赫鮑二氏反射的傳入神經？",
+      "options": [
+        "膈神經",
+        "迷走神經",
+        "舌下神經",
+        "副神經"
+      ],
+      "answer": 1,
+      "hint": "沿肺牽張受器到延髓、橋腦追蹤傳入路徑。",
+      "explain": "肺牽張受器的訊息經迷走神經傳入呼吸中樞，抑制吸氣。",
+      "nodeId": "respiratory-control-node-04"
+    },
+    {
+      "id": "respiratory-control-foundation-q05",
+      "stem": "正常血液 pH？",
+      "options": [
+        "6.8–7.0",
+        "7.6–7.8",
+        "7.35–7.45",
+        "7.0–7.2"
+      ],
+      "answer": 2,
+      "hint": "分清正常範圍與酸、鹼方向。",
+      "explain": "正常血液 pH 約為 7.35–7.45。",
+      "nodeId": "respiratory-control-node-05"
+    },
+    {
+      "id": "respiratory-control-foundation-q06",
+      "stem": "PCO₂ 低於 35 mmHg、pH 上升，屬於哪個方向？",
+      "options": [
+        "呼吸性酸中毒",
+        "代謝性酸中毒",
+        "代謝性鹼中毒",
+        "呼吸性鹼中毒"
+      ],
+      "answer": 3,
+      "hint": "比較 CO₂ 降低與血液 pH 上升的方向。",
+      "explain": "PCO₂ 低於 35 mmHg 是呼吸性鹼中毒方向。",
+      "nodeId": "respiratory-control-node-05"
+    }
+  ],
+  "cases": [
+    {
+      "id": "respiratory-control-case-q01",
+      "stem": "【生活情境】閉氣一段時間後忍不住吸氣，最主要的驅動？",
+      "options": [
+        "CO₂ 累積使腦脊髓液 H⁺增加，刺激中樞化學受器",
+        "O₂ 增加刺激周邊受器",
+        "肺牽張受器興奮",
+        "血液 pH 上升"
+      ],
+      "answer": 0,
+      "hint": "把 CO₂ 累積連到腦脊髓液與中樞受器。",
+      "explain": "CO₂ 能穿越血腦障壁，使腦脊髓液 H⁺增加，刺激中樞化學受器並驅動呼吸。",
+      "nodeId": "respiratory-control-node-02"
+    },
+    {
+      "id": "respiratory-control-case-q02",
+      "stem": "【生活情境】初登玉山呼吸加快，血液最可能的變化？",
+      "options": [
+        "PCO₂ 上升、pH 下降",
+        "PCO₂ 下降、pH 上升",
+        "PCO₂ 與 pH 都下降",
+        "兩者都不變"
+      ],
+      "answer": 1,
+      "hint": "高山低氧促進換氣後，CO₂ 排出如何改變？",
+      "explain": "高海拔低氧刺激周邊受器，使換氣與 CO₂ 排出增加，可使 PCO₂ 下降、pH 上升。",
+      "nodeId": "respiratory-control-node-06"
+    },
+    {
+      "id": "respiratory-control-case-q03",
+      "stem": "【生理判讀】深吸氣使肺過度擴張時，哪個反射抑制吸氣？",
+      "options": [
+        "壓力受器反射",
+        "膝反射",
+        "赫鮑二氏反射",
+        "咳嗽反射"
+      ],
+      "answer": 2,
+      "hint": "肺牽張受器的訊息對吸氣是促進還是抑制？",
+      "explain": "肺牽張受器經迷走神經傳入中樞，抑制吸氣、避免肺過度擴張，形成赫鮑二氏反射。",
+      "nodeId": "respiratory-control-node-04"
+    },
+    {
+      "id": "respiratory-control-case-q04",
+      "stem": "【生理判讀】肺泡換氣不足使 PCO₂ 超過 45 mmHg，屬於？",
+      "options": [
+        "呼吸性鹼中毒",
+        "代謝性鹼中毒",
+        "pH 不受影響",
+        "呼吸性酸中毒，腎臟排酸、保留 HCO₃⁻ 代償"
+      ],
+      "answer": 3,
+      "hint": "依 PCO₂ 的界線判方向，再看腎臟代償。",
+      "explain": "PCO₂ 超過 45 mmHg 為呼吸性酸中毒方向；腎臟可排酸、保留 HCO₃⁻代償。",
+      "nodeId": "respiratory-control-node-05"
+    },
+    {
+      "id": "respiratory-control-case-q05",
+      "stem": "【模型觀察】依 pH＝6.1＋log（HCO₃⁻/H₂CO₃），HCO₃⁻ 不變而 H₂CO₃ 增加，pH？",
+      "options": [
+        "下降",
+        "上升",
+        "不變",
+        "固定為 6.1"
+      ],
+      "answer": 0,
+      "hint": "分母增加而分子固定，比值與對數如何變化？",
+      "explain": "H₂CO₃ 增加使 HCO₃⁻/H₂CO₃ 比值降低，因此依公式 pH 下降。",
+      "nodeId": "respiratory-control-node-05"
+    }
+  ],
+  "credits": [
+    "生理學 CH06 p.29–35、CH09 p.37–45；解剖學 AB-05_13 p.17–18。"
+  ]
+}

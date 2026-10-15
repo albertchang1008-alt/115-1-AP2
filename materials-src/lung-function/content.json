@@ -1,0 +1,340 @@
+{
+  "slug": "lung-function",
+  "version": "v1",
+  "experience": "guided",
+  "title": "肺容積與肺功能",
+  "subtitle": "四個肺容積組成四個肺容量；扣掉死腔才是真正到達肺泡的換氣；用 FEV₁ 與 FVC 比較阻塞性與限制性型態。",
+  "label": "肺容積與肺功能｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "TV 500 mL",
+      "label": "潮氣容積"
+    },
+    {
+      "value": "150 mL",
+      "label": "解剖死腔"
+    },
+    {
+      "value": "VA＝（TV－VD）×F",
+      "label": "肺泡通氣量"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三種情境，對照模型與課本概念。",
+    "figure": "lung-function-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "淺快",
+        "explain": "淺快 150 mL×40 次 → 肺泡通氣 0"
+      },
+      {
+        "id": "state-2",
+        "label": "一般",
+        "explain": "一般 500 mL×12 次 → 4200 mL/min"
+      },
+      {
+        "id": "state-3",
+        "label": "深慢",
+        "explain": "深慢 1000 mL×6 次 → 5100 mL/min"
+      }
+    ],
+    "predict": {
+      "question": "總換氣量相同，哪種型態肺泡通氣量最多？",
+      "options": [
+        "深慢呼吸",
+        "與模型所示方向相反",
+        "沒有變化",
+        "與此構造無關"
+      ],
+      "answer": 0,
+      "feedback": "總通氣相同時，深慢呼吸的死腔佔比較低，示例肺泡通氣達 5100 mL/min。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "lung-function-node-01",
+      "tag": "01",
+      "title": "四個肺容積",
+      "summary": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）",
+      "figure": "lung-function-node-01.svg",
+      "concept": "潮氣容積 TV 500、吸氣儲備容積 IRV 3100、呼氣儲備容積 ERV 1200、肺餘容積 RV 1200 mL（課本男性示例）。",
+      "points": [
+        "課本示例：TV 500、IRV 3100 mL。",
+        "ERV 與 RV 均為 1200 mL。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "肺泡回彈變差時盡力呼氣後氣體滯留，RV 增加。"
+      },
+      "sources": [
+        "lung-volumes；CH06 p.11–12"
+      ],
+      "reference": "lung-volumes；CH06 p.11–12"
+    },
+    {
+      "id": "lung-function-node-02",
+      "tag": "02",
+      "title": "四個肺容量",
+      "summary": "IC＝TV＋IRV＝3600",
+      "figure": "lung-function-node-02.svg",
+      "concept": "IC＝TV＋IRV＝3600；FRC＝ERV＋RV＝2400；VC＝IRV＋TV＋ERV＝4800；TLC＝VC＋RV＝6000 mL。平靜呼氣末肺內為 FRC，平靜吸氣末為 FRC＋TV。",
+      "points": [
+        "IC＝TV＋IRV；VC＝IRV＋TV＋ERV。",
+        "FRC＝ERV＋RV；TLC＝VC＋RV。",
+        "平靜呼氣末為 FRC，吸氣末再加 TV。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "RV 與包含 RV 的容量無法用簡單肺量計直接測得。"
+      },
+      "sources": [
+        "lung-volumes；CH06 p.12"
+      ],
+      "reference": "lung-volumes；CH06 p.12"
+    },
+    {
+      "id": "lung-function-node-03",
+      "tag": "03",
+      "title": "傳導區與呼吸區",
+      "summary": "鼻腔至終末細支氣管只傳送氣體、不交換",
+      "figure": "lung-function-node-03.svg",
+      "concept": "鼻腔至終末細支氣管只傳送氣體、不交換；自呼吸性細支氣管起為呼吸區。",
+      "points": [
+        "鼻腔到終末細支氣管只負責傳導。",
+        "呼吸性細支氣管起才有交換功能。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "終末細支氣管仍屬傳導區、不交換氣體；從呼吸性細支氣管才開始有交換功能。"
+      },
+      "sources": [
+        "anatomic-dead-space、bronchial-tree；CH06 p.5, 13；AB-05_13 p.11"
+      ],
+      "reference": "anatomic-dead-space、bronchial-tree；CH06 p.5, 13；AB-05_13 p.11"
+    },
+    {
+      "id": "lung-function-node-04",
+      "tag": "04",
+      "title": "死腔與肺泡通氣量",
+      "summary": "解剖死腔約 150 mL，健康者肺泡死腔為零",
+      "figure": "lung-function-node-04.svg",
+      "concept": "解剖死腔約 150 mL，健康者肺泡死腔為零；VA＝（TV－死腔）×呼吸頻率；TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min。",
+      "points": [
+        "VA＝（TV－死腔）×呼吸頻率",
+        "TV 500、F 12 時總通氣 6000、肺泡通氣 4200 mL/min"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "死腔不是 RV，不能加進容量公式。"
+      },
+      "sources": [
+        "anatomic-dead-space、alveolar-ventilation；CH06 p.13–14"
+      ],
+      "reference": "anatomic-dead-space、alveolar-ventilation；CH06 p.13–14"
+    },
+    {
+      "id": "lung-function-node-05",
+      "tag": "05",
+      "title": "淺快與深慢呼吸",
+      "summary": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min",
+      "figure": "lung-function-node-05.svg",
+      "concept": "總通氣同為 6000 mL/min 時，150×40 → 0、500×12 → 4200、1000×6 → 5100 mL/min；淺快呼吸的死腔佔比較高。",
+      "points": [
+        "總通氣 6000 不代表肺泡通氣相同。",
+        "淺快、一般、深慢的 VA 分別為 0、4200、5100。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "呼吸次數增加不一定表示肺泡通氣改善。"
+      },
+      "sources": [
+        "alveolar-ventilation；CH06 p.13–14"
+      ],
+      "reference": "alveolar-ventilation；CH06 p.13–14"
+    },
+    {
+      "id": "lung-function-node-06",
+      "tag": "06",
+      "title": "阻塞性與限制性",
+      "summary": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8",
+      "figure": "lung-function-node-06.svg",
+      "concept": "課本示範：正常 FEV₁ 4 L／FVC 5 L＝0.8；阻塞性 1／2.8≈0.36，FEV₁/FVC 降低；限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加。這些是課本示範數值，用來理解型態。",
+      "points": [
+        "阻塞性 1／2.8≈0.36，FEV₁/FVC 降低",
+        "限制性 2.5／2.8≈0.89，肺容量減少但比值可正常或增加",
+        "這些是課本示範數值，用來理解型態"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比值高不代表肺容量正常；限制性型態要同時看肺容量是否減少。"
+      },
+      "sources": [
+        "obstructive-restrictive；CH06 p.9, 12, 14–15"
+      ],
+      "reference": "obstructive-restrictive；CH06 p.9, 12, 14–15"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "lung-function-foundation-q01",
+      "stem": "平靜呼吸時一次吸入或呼出的量？",
+      "options": [
+        "肺餘容積",
+        "潮氣容積",
+        "吸氣儲備容積",
+        "肺活量"
+      ],
+      "answer": 1,
+      "hint": "從平靜的一次呼吸量判斷容積名稱。",
+      "explain": "潮氣容積是平靜呼吸時一次吸入或呼出的量，課本男性示例為 500 mL。",
+      "nodeId": "lung-function-node-01"
+    },
+    {
+      "id": "lung-function-foundation-q02",
+      "stem": "盡力呼氣後仍留在肺內的量？",
+      "options": [
+        "功能肺餘量",
+        "呼氣儲備容積",
+        "肺餘容積",
+        "潮氣容積"
+      ],
+      "answer": 2,
+      "hint": "盡力吐氣後仍存在的氣體屬於哪種容積？",
+      "explain": "肺餘容積是盡力呼氣後仍留在肺內的量，課本示例為 1200 mL。",
+      "nodeId": "lung-function-node-01"
+    },
+    {
+      "id": "lung-function-foundation-q03",
+      "stem": "肺活量（VC）＝？",
+      "options": [
+        "IRV＋ERV",
+        "TV＋RV",
+        "ERV＋RV",
+        "IRV＋TV＋ERV"
+      ],
+      "answer": 3,
+      "hint": "肺活量涵蓋能吸入與能呼出的哪些部分？",
+      "explain": "VC＝IRV＋TV＋ERV，不包含盡力呼氣後仍留下的 RV。",
+      "nodeId": "lung-function-node-02"
+    },
+    {
+      "id": "lung-function-foundation-q04",
+      "stem": "功能肺餘量（FRC）＝？",
+      "options": [
+        "ERV＋RV",
+        "TV＋IRV",
+        "IRV＋ERV",
+        "TV＋RV"
+      ],
+      "answer": 0,
+      "hint": "平靜呼氣末還有哪些氣體留在肺內？",
+      "explain": "FRC＝ERV＋RV，是平靜呼氣末的肺內氣體量。",
+      "nodeId": "lung-function-node-02"
+    },
+    {
+      "id": "lung-function-foundation-q05",
+      "stem": "傳導區的最後一段？",
+      "options": [
+        "呼吸性細支氣管",
+        "終末細支氣管",
+        "肺泡管",
+        "主支氣管"
+      ],
+      "answer": 1,
+      "hint": "找出呼吸區開始之前的最後一段。",
+      "explain": "終末細支氣管仍只傳送氣體；自呼吸性細支氣管起才是呼吸區。",
+      "nodeId": "lung-function-node-03"
+    },
+    {
+      "id": "lung-function-foundation-q06",
+      "stem": "肺泡通氣量的算法？",
+      "options": [
+        "潮氣容積×呼吸頻率",
+        "（潮氣容積＋死腔）×呼吸頻率",
+        "（潮氣容積－死腔）×呼吸頻率",
+        "肺活量×呼吸頻率"
+      ],
+      "answer": 2,
+      "hint": "先扣掉每次未參與交換的量，再乘頻率。",
+      "explain": "肺泡通氣量 VA＝（TV－死腔）×呼吸頻率，不能直接使用總通氣量。",
+      "nodeId": "lung-function-node-04"
+    }
+  ],
+  "cases": [
+    {
+      "id": "lung-function-case-q01",
+      "stem": "【模型觀察】TV 450 mL、死腔 150 mL、每分鐘 12 次，肺泡通氣量？",
+      "options": [
+        "5400 mL/min",
+        "1800 mL/min",
+        "4200 mL/min",
+        "3600 mL/min"
+      ],
+      "answer": 3,
+      "hint": "先算 450－150，再乘每分鐘次數。",
+      "explain": "VA＝（450－150）×12＝3600 mL/min。",
+      "nodeId": "lung-function-node-04"
+    },
+    {
+      "id": "lung-function-case-q02",
+      "stem": "【模型觀察】每次 150 mL、每分鐘 40 次（總通氣 6000），肺泡通氣量？",
+      "options": [
+        "0 mL/min",
+        "6000 mL/min",
+        "4200 mL/min",
+        "3000 mL/min"
+      ],
+      "answer": 0,
+      "hint": "比較每次呼吸量與 150 mL 死腔是否相等。",
+      "explain": "VA＝（150－150）×40＝0；總通氣雖有 6000，肺泡通氣仍為零。",
+      "nodeId": "lung-function-node-05"
+    },
+    {
+      "id": "lung-function-case-q03",
+      "stem": "【生理判讀】長期吸菸使肺泡壁回彈變差，盡力呼氣後哪一項增加？",
+      "options": [
+        "潮氣容積",
+        "肺餘容積",
+        "肺活量",
+        "吸氣儲備容積"
+      ],
+      "answer": 1,
+      "hint": "找出盡力呼氣後留下的容積名稱。",
+      "explain": "盡力呼氣後仍留下的氣體稱肺餘容積，因此題目所述增加的是 RV。",
+      "nodeId": "lung-function-node-01"
+    },
+    {
+      "id": "lung-function-case-q04",
+      "stem": "【生理判讀】FEV₁ 2.5 L、FVC 2.8 L（比值約 0.89），肺容量明顯減少，較符合？",
+      "options": [
+        "阻塞性型態",
+        "完全正常",
+        "限制性型態",
+        "只有死腔增加"
+      ],
+      "answer": 2,
+      "hint": "同時比較肺容量與 FEV₁/FVC，勿只看比值。",
+      "explain": "課本限制性示例為 2.5/2.8≈0.89；肺容量減少而比值可正常或增加。",
+      "nodeId": "lung-function-node-06"
+    },
+    {
+      "id": "lung-function-case-q05",
+      "stem": "【生理判讀】平靜吸氣結束時，肺內的氣體量？",
+      "options": [
+        "肺活量",
+        "肺餘容積",
+        "總肺容量",
+        "功能肺餘量＋潮氣容積"
+      ],
+      "answer": 3,
+      "hint": "從平靜呼氣末的量加上一次平靜吸氣量。",
+      "explain": "平靜呼氣末為 FRC，平靜吸氣末則為 FRC＋TV。",
+      "nodeId": "lung-function-node-02"
+    }
+  ],
+  "credits": [
+    "生理學 CH06 p.5, 9, 11–15；解剖學 AB-05_13 p.11。"
+  ]
+}

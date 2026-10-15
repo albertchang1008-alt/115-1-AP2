@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "materials": {
+    "airway-structure": {
+      "ok": true,
+      "states": 18
+    },
+    "lungs-pleura": {
+      "ok": true,
+      "states": 18
+    },
+    "breathing-mechanics": {
+      "ok": true,
+      "states": 18
+    },
+    "lung-function": {
+      "ok": true,
+      "states": 18
+    },
+    "gas-exchange": {
+      "ok": true,
+      "states": 18
+    },
+    "o2-co2-transport": {
+      "ok": true,
+      "states": 18
+    },
+    "respiratory-control": {
+      "ok": true,
+      "states": 18
+    }
+  },
+  "totalStates": 126,
+  "sizes": [
+    1280,
+    390
+  ],
+  "nodeValidation": {
+    "student": 21,
+    "sources": 15
+  },
+  "materialTests": 20,
+  "check": {
+    "frontendTests": 134,
+    "functionsTests": 26,
+    "skipped": 0,
+    "frontendBuild": true,
+    "functionsBuild": true
+  },
+  "excelVerification": "excel-verification.json",
+  "sheetVerification": "sheet-write-verification.json",
+  "scopeIntegrity": "scope-integrity.json",
+  "commit": "single local release commit; see git log -1",
+  "push": false,
+  "deploy": false,
+  "platformSync": false
+}

@@ -16,3 +16,6 @@ materials-src/*/shots/
 
 # Office 開檔時產生的鎖定檔
 ~$*
+
+# Private Google Sheets release snapshots (never commit)
+docs/sheet-backups/

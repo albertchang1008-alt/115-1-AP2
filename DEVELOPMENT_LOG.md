@@ -1,6 +1,423 @@
+## 2026-10-15 Codex：呼吸發布唯讀預檢，表頭不符依交辦停止
+
+## 2026-10-15 呼吸七份正式建置與題庫發布（本機 release）[Codex]
+
+- 教師11:50欄位裁定取代預檢停點；七份build／登錄，沿用驗收圖層，content與其他教材不變。
+- Excel229–305列增77題，共304題；說明增7列，既有5472格值／型別／樣式不變。
+- Sheet全476×29含空白列先備份，忽略不提交；插入AC–AE三欄，227舊題只補新欄，175其他題不動；404–480增77題，402→479題。完整回讀值／公式與11687原生格零差異，77新ID純文字且無重複。首次結構批次審核拒絕未執行，改插入保留舊欄後成功。
+- 七份126狀態含實際底圖檢查全過；通用verify支援呼吸道舊manifest。節點21／15、materials20、完整check134／26，零skip，兩端build通過。
+- 詳docs/respiratory-release/REPORT.md；feature/respiratory-infographics，以單一本機release commit交件，停下交Claude。未push／部署／平台同步。
+
+- 讀release交辦與handoff，確認feature/respiratory-infographics／e8805f8；教師已核可畫面並授權本機正式build／登錄／Excel77題／Sheet附加／一次commit，不push／部署／同步。
+- 使用學校Google Drive連線，profile／目標metadata／A1:AC3表頭及C1:C476 ID唯讀成功。實際分頁115-1-AP2／gid1633868463，402題無重複；Excel現227題全在Sheet，包含先前待貼108–228列121題，Sheet另175題不動；呼吸77 ID尚未在兩邊，未冒稱已寫Excel。
+- Sheet缺Excel10個同名欄位，含問題／③回頭選答案的別名差異及講義標題／講義連結／啟用／題型等缺欄。依交辦三.3「表頭對不上就停下，不自行新增欄位」，停止資料作業並請教師指定目標分頁或欄位對應／省略／補齊方式。
+- 新增docs/respiratory-release/REPORT.md、sheet-preflight.json（含三份ID清單及77待新增ID），更新handoff；未build／登錄／Excel／Sheet寫入／CSV備份／commit，未push／部署／按平台同步，未保存金鑰token。待教師回覆後從完整比對與備份續作。[Codex]
+
+## 2026-10-15 Codex：第三次修正 R3-1／R3-2，待 Claude 兩項複查
+- 血紅素o2-co2-transport node-02原雙版面引用不存在plate-01；改每版獨立內嵌WebP image，不依賴另一層use／defs。手機／桌機實際非白約61%，各自移除另一層後仍顯示，原像素錨點不變。
+- breathing-mechanics node-01／03僅放寬指定桌機容器與圖片，四格實測650.94 CSS px，三格609.65／650.94／650.94，皆≥600；側欄直標保留，手機layout記錄及截圖SHA不變。r2.py新增--r3限制只重產三圖位，完整入口亦保留修正。
+- 新增respiratory-raster-verify.mjs：實際截圖裁切SVG視窗、256×256取樣非白>20%，另驗圖片decode／原圖尺寸／寬高比及資源不在隱藏層。舊版preview實測1280／390非白0.67%／0.59%、缺圖片資源，兩版皆明確失敗；舊失敗JSON保存。6個正反例含白圖、缺引用、隱藏層與兩版各自獨立顯示，全通過。
+- 五份45狀態×兩尺寸90狀態全數重跑通過，72底圖視窗最低47.81%；幾何／拆詞／單字／單位／撞號／箭頭／比例／氧曲線互動亦過。節點21／15、materials20／20無skip；本輪不重跑R2已通過10頁完整作答，原證據保留。
+- 只改三SVG、兩manifest的三記錄、兩preview與本輪證據；其他42圖位／84圖面截圖、所有原像素錨點、content、PNG／WebP、氧曲線JS、其他教材、共用CSS／教材JS、登錄不變。報告新增「第三次修正」附截圖，r3-scope-integrity.json及r3-old-version-rejection.json保存證據。
+- feature/respiratory-infographics／HEAD e8805f8，未build／Excel／登錄／commit／push／部署；更新handoff後停下，交Claude僅複查R3-1／R3-2，尚未核可。[Codex]
+
+## 2026-10-15 Codex：階段二再修，桌機／手機雙版面與 R2-1～R2-4 完成待再驗
+- 依教師方案甲，五份教材24個有解剖標籤的狀態改為≥768px中文引線直標、<768px全寬圖＋編號對照；資料圖直接命名保留。新增scripts/respiratory-labels-r2.py，沿用repair／stage2基礎，保存兩版labels記錄。
+- R2-1：氯轉移手機標籤A～G搭步驟①②③，多格圖整圖連續編號，verify新增同圖重複編號及版面顯示檢查。R2-2：三總覽中樞受器原像素(601,253)→(566,250)，落在延髓表面靠CSF側，H⁺箭頭終點同步移；其他原像素錨點逐項保持。R2-3：刪浮空T，迷走傳入以T端止於延髓，文字與非當前路線一起淡化0.3。
+- 390／1280共90圖面狀態、767／768邊界90狀態全過，拆詞／單字行／數值單位／箭頭間距／撞號均0；fixture7／7。五份preview同步，48受影響圖面截圖重拍，21未受影響記錄／SVG／42張圖不變，另更新3氧曲線桌機互動截圖；原全頁shots不覆寫。
+- R2-4：最終版本五份×兩尺寸10頁完整作答回歸全過，探索6節點、6先備＋5情境、答錯回讀／重試、最後complete僅一次；節點21／15、materials20／20無skip。圖表數值／比例與氧曲線互動仍過。
+- 報告新增「階段二再修」逐項截圖，r2-breakpoint-verification.json與r2-scope-integrity.json保存邊界、SHA及錨點證據。content、incoming PNG／WebP、氧曲線JS、共用CSS／教材JS、其他教材與登錄未變。
+- feature/respiratory-infographics／HEAD e8805f8，未build／Excel／登錄／commit／push／部署；更新handoff後停下，交Claude再驗及教師看畫面，尚未核可。[Codex]
+
+## 2026-10-15 Codex：呼吸標籤 V2 階段二 S2-1～S2-14 複修，待 Claude 再驗
+- 依Claude階段二未通過審查修正全部14項：低氧血管與轉向、呼吸調控路線／腦幹放大／T抑制、六處資料圖因果與曲線、醫學詞換行、配色及氣體符號間距；另修四格肌肉放大、外肋間肌錨點、正常虛線尾標、去重、固定容量區段與手機編號對照。
+- 新增scripts/respiratory-labels-repair.py，限制40受影響狀態；保留5未受影響SVG／labels記錄／10張截圖。五份preview同步，80張圖面截圖重拍，另3張氧曲線桌機滑桿／探針完整截圖；既有全頁圖不覆寫。
+- verify新增文字與箭身／marker頭部至少4 CSS px、醫學詞／數值單位拆行與單字成行檢查；90狀態通過、5個正反例fixture全過；FEV₁精確一秒點／終點、單調與凹性／容量位置／比例及氧曲線互動通過。節點21／15、materials20／20無skip；未重跑先前10頁完整作答回歸。
+- 報告新增「階段二複修」逐項截圖；SHA證據stage2-repair-scope-integrity.json：1021開工檔中883不變、138限定圖層／manifest／preview／圖面證據與圖庫異動，無非預期／遺失。content、定稿PNG、WebP、氧曲線JS、共用CSS／教材JS、其他教材不變。
+- feature/respiratory-infographics／HEAD e8805f8，未build／Excel／登錄／commit／push／部署；更新handoff後停下交Claude再驗，尚未核可。[Codex]
+
+## 2026-10-15 Codex：呼吸標籤 V2 階段二五份完成，停下待驗收
+- 教師定案 A 紅色粗體後，依序完成 gas-exchange、respiratory-control、breathing-mechanics、o2-co2-transport、lung-function，每份先標籤、再資料層、preview／shots／verify、報告後換下一份；共20資料圖位、三狀態＋六節點各兩尺寸90圖面與100全頁截圖。
+- 沿用 respiratory-labels.py 入口、FOCUS_STYLE=red 與 labels.json／verify，stage2 模組使用20張incoming定稿PNG（PNG不改）、原生SVG標籤／引線／圓點、HTML原文圖說及嚴格避頭點。力學三狀態補白同畫布、獨立錨點；四格肌肉按實際分界裁切、三欄順應性上下排；共用SVG圖像資源使HTML2.57MB→0.92MB。95無引線、分壓各格獨立、化學受器避竇、牽張受器指細支氣管。
+- 精確資料圖：V/Q同尺度；97／3、70／23／7；肺泡通氣0空條、4200／5100；四容積與四容量；一秒FEV₁ 4／1／2.5與終點5／2.8／2.8。氧曲線保留480寬及k26／31／21、slider／pointer／probe，oxygen-curve.js原檔SHA不變；兩尺寸三狀態0／40／100與pointer70通過。氯轉移①②③對應原句分段，圖說來源逐字重組驗證通過。
+- 圖面驗證90狀態通過：手機最小12.89px、裁切／重疊／引線／錨點／紅字／等比例／溢位／console／pageerror／避頭點無錯；資料比例與曲線座標實測通過。節點21學生教材／15sources、materials20／20（0skip）、10頁六節點／11題／答錯回讀／最後complete只一次回歸全過。Chrome測試使用已存在的依賴符號連結與sandbox escalation，未install或改package／lock。
+- 報告 docs/RESPIRATORY_LABELS_V2_REPORT.md（每份完成即更新）；驗收入口 docs/respiratory-screenshots/v2/stage2-index.html。SHA證據stage2-scope-integrity.json：344保護檔不變（含content／氧widget／PNG／其他教材／Excel／登錄），41既有檔案僅授權圖層／preview／限定CSS異動；先前未提交工作保留。
+- feature/respiratory-infographics／HEAD e8805f8；未build／Excel／登錄／commit／push／部署。階段二尚未經Claude／教師驗收，停下等待錨點、解剖、資料層比例複驗。[Codex]
+
+## 2026-10-14 Codex：階段一 R-1～R-8 複修與 A／B 比較完成
+- lungs-pleura：張力／T指內襯；state-1不顯示表面張力素，state-2／3指連續／斷續薄層；公式無引線圖下caption，r指半徑線中段，小肺泡指壁、P移至偏心腔內；淋巴管指綠色構造。圖下說明從既有content讀取，僅換行、未改肺／胸膜content，labels.json同步。
+- airway R-6：細支氣管錨點SVG618,798（底圖338,798），直接引線、不沿肺緣。gas-exchange R-7：只改node-03 summary單一詞組，還原後JSON與開工版本一致。
+- 三份preview／shots各20圖、兩支verify各18狀態全過；21教材／15 sources稽核、materials20／20測試通過0skip。手機最小airway13.28、lungs12.89px；HTML1,124,832／1,214,268 bytes。暫存測試preload停用平滑捲動穩定截圖，未改教材JS／verify原始碼。
+- FOCUS_STYLE=block產node-01與overview-state-1兩尺寸4圖，B黑字／橙塊／粗體／字級驗證通過；並排頁docs/respiratory-screenshots/v2/lungs-pleura/style-B/index.html。設定與產物恢復red，SVG／labels.json／preview SHA與已驗A版一致。
+- 報告與airway報告更新；新scope證據review-fixes-scope-integrity.json保留其他呼吸教材／底圖、Excel及登錄SHA。同期外部作圖日誌／審圖／泌尿05三檔變動另列、未覆蓋。
+- feature/respiratory-infographics／e8805f8，未build／Excel／登錄／commit／push／部署；停在階段一，待Claude複驗及教師選A／B，未開始階段二。[Codex]
+
+## 2026-10-14 Codex：呼吸標籤 V2 階段一完成，停下待驗收
+- 任務0：airway A-01～A-06錨點／圖說／標籤順序小修，verify支援折線逐段；預測選項改會厭／聲帶／軟腭／甲狀軟骨，gas-exchange node-03 concept／points兩處用詞改經肺動脈入肺的缺氧血；還原授權修改後content SHA與開工一致。
+- 任務1：lungs-pleura 8張定稿PNG轉1200寬WebP quality70（82時HTML過1.5MB），總覽三狀態＋6節點中文SVG／引線／張力箭頭／半徑線；node-04裁切既有放大框。原始像素anchors及文字位置保存在labels.json；FOCUS_STYLE單一設定可換紅字／黑字橙塊，當前紅色粗體。
+- 三份preview／shots全過；airway／lungs各18狀態verify全過，節點稽核21份教材／15 sources、materials20／20通過0skip。手機字級13.28／12.89px；HTML1,124,868／1,214,309 bytes。報告docs/RESPIRATORY_LABELS_V2_REPORT.md，兩尺寸截圖docs/respiratory-screenshots/v2/lungs-pleura/；airway報告追加10/13修正節。
+- SHA：其他呼吸教材、Excel、shared/materials.ts、8張incoming PNG不變；工作期間另觀察作圖日誌／_review及泌尿底圖9個既有檔案外部變動，列scope-integrity.json並保留，未由本任務寫入。
+- feature/respiratory-infographics／e8805f8，未commit／push／部署；未materials:build、Excel、登錄或登入。停在階段一，待Claude錨點／解剖與content複驗、教師看畫面決定A／B；沒有開始階段二。[Codex]
+
+## 2026-10-14 22:15 Claude：泌尿／體液底圖審查、助手略過照片
+- 審 37 張：29 通過、3 小修、5 重畫（urinary-route 01–04 為誤存私人照片，05 畫成總覽）；結論與修圖 prompt 寫入 _review.json；紀錄 docs/IMAGE_REVIEW_urinary-fluid_2026-10-14.md。
+- scripts/chatgpt_assist.py：略過 .jpg/.jpeg/.heic 與長邊 >3000 px 的下載檔（以假下載測試通過）。私人照片 6 檔待教師手動刪除，勿 commit。
+
+## 2026-10-14 22:10 Claude：呼吸標籤層交辦
+- 新增 CODEX_TASK_respiratory-labels_2026-10-14.md：28 張底圖對應 34 圖位、20 資料層圖位（原生 SVG／HTML，氧曲線保留 oxygen-curve.js）、標籤／箭頭規則、labels.json 錨點檔、驗證項目；階段一含尚未執行的 post-review 小修與 lungs-pleura 試做。
+
+## 2026-10-14 22:05 Claude：呼吸28張底圖定稿
+- rc-01 修好通過；bm-03 新版定稿；bm-05 被 rc-01 下載檔誤蓋，已復原。_review.json 28 張全部 pass。
+
+## 2026-10-14 Claude：作圖助手接上審圖結果、呼吸修圖複看
+- scripts/chatgpt_assist.py 讀 materials-src/figures/raster/_review.json：清單標通過／待審／要重畫／要小修；點要修項目移舊圖並改放修圖prompt；審查後重存即回待審；點已存好的圖先確認；/review 顯示結論。說明見 docs/CHATGPT_ASSIST_USAGE.md。
+- 21:23／21:46 複看：bm-01／02（新）、bm-05、o2-02 通過；bm-03 待教師決定（Claude 先前 prompt 要求「比 01 小」有誤）；rc-01 待小修。rc-02、bm-05 曾被移到 _rejected，已放回。
+- 注意：同一暫存檔名第二次寫回裝置時送出的是舊版，17:00 與 21:21 的交接、審查檔、_review.json 更新曾遺失，21:47 以新檔名重寫。
+
+## 2026-10-14 Claude：呼吸其餘20張底圖審查
+- 對照唯一底圖指令包、風格指南與content審breathing-mechanics 5、lung-function 1、gas-exchange 7、o2-co2-transport 2、respiratory-control 5。15通過；5待處理：bm-02／03重畫（構圖與01不同，灰階差異30–36；gas-exchange三狀態僅9–11）、o2-02重畫（交換蛋白畫成兩個、Hb帶O₂、尺度）、bm-05移除箭頭、rc-01補主動脈體。紀錄與修圖prompt：docs/IMAGE_REVIEW_respiratory_2026-10-14.md。未改圖檔、content或程式。
+
+## 2026-10-14 Claude：主畫面說明複驗
+- MI release@1ba1743 相對線上 b64217d 只改 guide 三檔；說明內容與交辦逐字相同。乾淨匯出重跑 MI 150／54、AP2 unify@8e61f58 158／54 全過、0 skipped；390px 字級16px、無水平捲動。通過，可發布兩站前端；教師真機實測後再通知學生。
+
+## 2026-10-14 Codex：MI主畫面說明本機合併完成，交Claude複驗
+- A教師端項目由教師親自驗證：test報表／CSV、互動題目／倒數／加時／送出／結束／統計正常，正式班未操作。Codex既有雜湊證據一致，不將教師親驗列自動化通過。
+- release/mi-1.9.0本機merge 1ba1743（efeb1e7＋8e61f58）；雙方紀錄完整存archive並合入開發log。合併後MI check150＋54全過0fail／skipped，guide1280／390、11節、16px、無溢位／錯誤、列印／資源200通過。正式mi/main仍b64217d，不push／部署。
+- 報告與Claude交辦在release worktree docs/GUIDE_HOMESCREEN_MI_MERGE_2026-10-14_REPORT.md及CLAUDE_REVIEW_GUIDE_HOMESCREEN_MI_2026-10-14.md；其工作區乾淨。本輪只同步root／unify交接文件，不提交其他教材改動。
+
+## 本輪移出root handoff的先前停止紀錄（完整保留）
+- **學生說明主畫面（10/14 Codex）**：共用e2dd36c已完成，AP2 check158／54、MI乾淨匯出150／54及兩站guide1280／390通過。教師續作後用提升權限merge-tree預檢exit1：handoff.md／DEVELOPMENT_LOG.md內容衝突（非權限錯誤）；依指示停止，未實際merge或跑合併後MI check。unify HEAD8e61f58／MI release b64217d不變；本輪只有交接更新未提交，待續作指示。不push／部署。
+- **MI1.9.0授權上線（10/14 Codex，migration成功、Functions部分失敗停止）**：教師結束後測後09:03:07重新step0確認open測驗／active session／open互動全0，四份唯讀本機備份完成并Git排除、dry-run一致；原腳本apply成功，三處features一致、12互動＋轉換與JSON一致無snapshot欄位。Functions明確mi-bd885部署，predeploy通過，59操作成功（5create／54update），deleteCourse更新失敗／CLI exit2；依指示停在step2，不重apply、不回退。規則索引／Pages／上線驗證未開始，未改mi/main或變數，MI1.9.0尚未上線完成；deleteCourse最終revision待核對。報告docs/DEPLOY_MI_1.9.0_REPORT.md，續作前重新檢查無活動，再處理Functions失敗項。Excel、正式學生作答成績未改，私有備份不提交。本輪交接只本機commit。
+
+## 2026-10-14 13:09 Codex：MI續上線，停在雜湊驗證
+- 13:04:08重新查MI open測驗／active session／open互動均0；未沿用09:03。
+- deleteCourse唯讀查ACTIVE／deletecourse-00004-zac／updateTime 2026-10-13T11:48:34.464920870Z；單獨重試一次成功，新ACTIVE／deletecourse-00005-xis／updateTime 2026-10-14T05:06:06.501867296Z，未重試整批。
+- 規則索引部署成功，無刪索引提示；一般push mi/main到b64217d。Actions38514907129 build/deploy全綠；assessmentSessions索引READY；05:07UTC新排程HTTP200、查得日誌無缺索引錯誤。
+- **步驟4失敗停止**：線上JS index-Dbnb149l.js，本機MI build index-C4gGzaUt.js；比對腳本找不到線上同名本機檔ENOENT／exit1，SHA未比對，原因未核對。不重建、不重新部署、不回退。
+- test班互動／前後測／影片與guide驗證、N551／N552唯讀確認尚未完成；只登入既有test帳號，未新建輪次或作答。
+- 未重跑migration apply、未改Excel／學生資料／GitHub variables；主畫面guide尚未合併。報告docs/DEPLOY_MI_1.9.0_REPORT.md與unify-1.9.0/mi-resume-*證據；後續需教師指示。
+
+## 2026-10-14 Codex：手機主畫面說明續作，合併預檢衝突停止
+- 教師重新交辦後完整讀取handoff與CODEX_TASK_GUIDE_HOMESCREEN_2026-10-14.md；既有e2dd36c實作與兩站check／guide證據保留，沒有重改程式。
+- 以提升權限執行git merge-tree --write-tree --name-only release/mi-1.9.0 feature/1.9.0-unify，exit1；衝突僅DEVELOPMENT_LOG.md與handoff.md，暫存合併樹2ee5cecd9538b9bd3d8047749b46d95834fd5987。此為內容衝突，不是權限拒絕。
+- 依「任何一步失敗就停下」停止；未執行git merge、未跑合併後MI check，未push／部署，未改登入／Excel／學生資料。共用HEAD8e61f58，MI release HEADb64217d，均未移動。待教師續作指示後整合兩份交接文件，再合併、MI check、交Claude複驗。
+
+# 2026-10-14：學生說明主畫面停止點 [Codex]
+
+- 共用guide主畫面說明已提交e2dd36c；AP2 check158／54、MI乾淨匯出check150／54及兩站guide1280／390通過、0 skipped。合併前git merge-tree預檢以預設sandbox執行，因Git中繼資料暫存檔權限失敗（exit128）；依教師指示停止，未實際merge、未跑合併後MI check。應使用已授權提升權限，待教師續作指示後合併；不push／部署。
+
+## 2026-10-14 Claude：MI 1.9.0 release 複驗
+- release/mi-1.9.0@510b6ad 乾淨匯出重跑 MI check 150／54、unify@178f862 AP2 158／54 全過；程式碼與共用分支一致、含 d48aac8、無 xlsx 變動、MI 不含 AP2 公開檔。通過，交辦 MI 上線（CODEX_TASK_DEPLOY_MI_1.9.0_2026-10-14.md）。
+
+## 1.9.0 MI migration成功、Functions部分失敗停止（2026-10-14，Codex）
+- 教師結束後測後重新step0：09:03:07 open測驗／active session／open互動全0，四份唯讀本機備份完成、Git排除，dry-run逐位元一致。
+- 原腳本apply成功；三處features一致、12題＋簡報轉換與JSON一致、無snapshot欄位，未改學生作答／成績。
+- Functions明確mi-bd885／non-interactive，predeploy51入口通過；59操作成功（5create／54update），deleteCourse更新失敗，CLI exit2。
+- 依任何一步失敗停下：規則索引／Pages未執行，不重apply、不回退、不改變數。狀態及完整stdout docs/unify-1.9.0/mi-deployment-status.json／mi-functions-deploy-failure.txt。
+- 私有備份不提交；報告docs/DEPLOY_MI_1.9.0_REPORT.md。教師續作前重新確認無活動，再處理Functions失敗項。
+
+## 1.9.0 MI授權上線，正式後測open而停止（2026-10-14，Codex）
+- Claude複驗510b6ad通過、教師授權上線；開工唯讀檢查08:29:50發現後測open，班級N551／N552／test；active session0／open互動0。
+- 依交辦停在步驟0，不關閉場次。備份、dry-run、migration、Firebase與Pages均未開始；備份路徑只加入本機Git排除。
+- 只讀場次／輪次metadata，未讀寫學生作答成績、未改Excel或GitHub變數。報告docs/DEPLOY_MI_1.9.0_REPORT.md。
+- 教師結束後測後重新檢查，再依備份→dry-run→apply→Functions→規則索引→Pages；任何失敗停下，不自行回退。
+
+## 2026-10-13 Claude：1.9.0 部署交辦
+- 教師裁定 AP2 不加微生物22題並授權部署。發現 mi/main 含 d48aac8 且非 3a49056 祖先，MI 需先合併；交辦 CODEX_TASK_DEPLOY_1.9.0_2026-10-13.md（AP2 直接部署、MI 準備後交 Claude 複驗）。
+
+## 1.9.0 MI本機準備完成（2026-10-14，Codex；待Claude複驗）
+- 移出29個未追蹤AP2公开教材、不提交；指定4檔回原暫存。分站測試AP2維持五份斷言／MI兩份一致且AP2公開檔不存在，無skip；回補unify178f862。
+- MI纯暫存checkout-index匯出乾淨安裝check150／54、0 fail／skipped，dist2教材＋3CHP；共用AP2 check158／54通過，不重新部署AP2。
+- 24衝突已解決、d48aac8保留；workflow fallback mi，.firebaserc不改，MI指令必--project mi-bd885。變數未設唯讀列待辦。
+- 離線dry-run重跑成功；引用Claude.xlsx無變動稽核，不修工具。報告docs/MI_1.9.0_RELEASE_PREPARATION.md。
+- 本機merge510b6ad（70354e0＋7a6720e），MI工作目錄乾淨，交Claude複驗；不push mi／apply／部署MI／讀寫正式學生資料／改Excel。
+
+## 1.9.0 MI check通過、補充稽核工具失敗停止（2026-10-14，Codex）
+- 24衝突無標記、授權Git metadata暫存成功；workflow fallback mi，.firebaserc依教師指示不改；MI變數未設唯讀列待辦。
+- 保留d48aac8全部新增行與2份原fixture；補42快照／還原3完整共用測試，不skip。MI dist僅2教材＋3 CHP。
+- 完整MI check158／Functions54、0 fail／skipped、版本／build／51入口通過；離線dry-run mi-bd885成功12題＋簡報轉換。
+- 補充Excel逐位元稽核未處理Git中文路徑轉義、FileNotFoundError，依任一步失敗停下。尚未最終暫存／合併commit；不是測試失敗，無需追加Git授權。
+- 報告docs/MI_1.9.0_RELEASE_PREPARATION.md；未push／apply／部署MI／改Excel或正式學生資料。
+
+## 1.9.0 CI修正與AP2成功發布、MI暫存失敗（2026-10-13，Codex）
+- 7a6720e僅tests修正：MI70354e0兩份原檔.txt＋README SHA-256，讀fixture比對與雜湊檢查、無skip。
+- 無70354e0乾淨shallow clone與unify兩站完整check158／54、0 fail／skipped；deploy.sh同結果。
+- AP2 Actions38424586178 build/deploy全綠、Pages1.9.0成功；JS SHA與同設定本機build一致；索引READY、排程15:36–15:43 UTC連續200。
+- test班三新開關均關閉、guide可開、既有10題作答保存成功；影片20→38秒重整續播。AP2既有reflection0，反思僅本機React/callable回歸，不新增正式活动。
+- MI release/mi-1.9.0自70354e0（含d48aac8）開worktree，合併unify產24衝突；內容寫入後git add因default sandbox index.lock不可寫失敗，依指示停止。MERGE_HEAD／24unmerged保留，尚未check／dry-run／commit，不可部署。
+- 報告docs/DEPLOY_1.9.0_REPORT.md；未push mi／apply／部署MI／改Excel或正式學生資料。
+
+## 1.9.0 規則／索引成功，Actions失敗停止（2026-10-13，Codex）
+- 教師明確授權AP2規則／索引，CLI限定ap2-7ed91、non-interactive部署成功；未加force、無刪除提示、未刪索引。
+- 查40d3ec4的Actions38422029549：build的check前端155／157通過、2 fail、0 skipped；兩項site.test依賴MI70354e0，本機有該歷史但CI depth1沒有。Pages deploy跳過。
+- 依任何一步失敗停下，沒有修測試／重跑Actions／回退。READY與排程log、線上雜湊／測試班驗證尚未完成，B段未開始。
+- 更新docs/DEPLOY_1.9.0_REPORT.md與Actions失敗摘要；未改Excel／學生資料／push mi／apply／部署MI。
+
+## 1.9.0 AP2 部署中止（2026-10-13，Codex）
+- 教師授權部署，AP2不加MI22題、Excel不動；Claude複驗記錄提交40d3ec4，fetch兩遠端及origin祖先檢查通過。
+- AP2變數未設VITE_SITE_ID，workflow預設ap2；deploy.sh完整check157／54、0 fail／skipped通過，ap2-7ed91 Functions成功，普通push備份分支與origin/main至40d3ec4。
+- Firestore規則／索引部署被自動審查拒絕（獨立安全邊界變更授權／影響未核實），指令未執行；依任一步失敗停下，未繞過／回退。Actions、線上雜湊、測試班開關／guide驗證未完成。
+- B段未開始；實際mi/main=70354e0，與交辦d48aac8不同，後續需核對。未push mi／apply／部署MI／修改Excel或學生資料。
+- 停止點与待辦見docs/DEPLOY_1.9.0_REPORT.md；root教材工作保留。
+
+## 2026-10-13 Claude：1.9.0 修正複驗（3a49056）
+- M-1 migration 變數遮蔽已修並有 mock apply 測試（還原修正時測試失敗，證明有效）；m-1／m-2／m-4 完成；AP2／MI check 前端157、Functions54 全過。結論可交教師授權部署；m-3 待教師。
+
+## 2026-10-13 Claude：肺與胸膜新畫風8張審圖
+- 教師以新畫風重畫7張（01–03、05–08），連同04共8張全部通過；無字、無箭頭、無引線，肺循環配色、胸膜層次、肺泡三細胞、呼吸膜五層均正確。lungs-pleura 底圖定稿，可開始其餘60張。
+
+## 2026-10-13 Claude：1.9.0 共用整合獨立驗收
+- 對象 feature/1.9.0-unify@78cb5dc；隔離環境重跑 AP2／MI check（前端156、Functions54、0 skipped）、guide 驗證、dist 分離（AP2 31 教材／MI 2＋3 CHP）。
+- 結論有條件通過；必修 M-1：MI migration `--apply` 變數遮蔽寫錯資料，需改名並補 mock 測試。小項：前後測來源單邊空白無提示、features 保存草稿即生效、AP2 micro 22 題待教師確認、說明截圖標籤壓字。
+- 報告與 Codex 交辦在 .worktrees/unify-1.9.0；未 commit／push／部署／執行 migration。
+
+## 2026-10-13 Claude：教材圖風格定案
+- 教師定案底圖為手繪解剖圖譜畫風、箭頭標籤由程式依Nature式文法疊加。新增 docs/FIGURE_STYLE_GUIDE.md；唯一底圖版開場指令加入畫風、單一尺度與「不畫箭頭」，68段prompt末尾加提醒；肺與胸膜#04以教師試畫新版取代，其餘7張舊版移至_rejected待重畫。發布風格樣張Artifact（A紅字／B黑字色塊）待選。
+
+## 2026-10-13 Claude：肺與胸膜試畫審查
+
+## 1.9.0 共用整合本機交件（2026-10-13，Codex；正式環境未部署）
+
+- 指定隔離 worktree `.worktrees/unify-1.9.0`／feature/1.9.0-unify 已完成並 commit 78cb5dc；反思必修與 MI 功能通用化、分站建置、學生使用說明一併完成。AP2／MI 各 check 前端156、Functions54全過、0 skipped；只有 migration 離線 dry-run，未 apply／push／部署。
+- 完整變更歷史、現況、截圖與部署草稿見該 worktree 的 DEVELOPMENT_LOG.md／handoff.md／docs/UNIFY_1.9.0_REPORT.md；根工作目錄版本與既有教材任務保留，Claude 接手請到指定 worktree 驗收。
+
+- 教師以作圖助手完成8張；Claude審圖：3通過、5重畫（01–03箭頭方向與細支氣管軟骨環、05肺動脈靜脈配色、07引線與分泌箭頭）。報告 docs/IMAGE_REVIEW_lungs-pleura_2026-10-13.md；唯一底圖版開場指令補不畫箭頭引線與肺循環配色。
+
+## 2026-10-13 Claude：ChatGPT半自動作圖助手
+- 新增 scripts/chatgpt_assist.py（Python標準庫＋Pillow，本機網頁介面）與 docs/CHATGPT_ASSIST_USAGE.md。教師因帳號條款風險選半自動：教師自行操作ChatGPT，助手放剪貼簿、監看下載資料夾、轉PNG改名、重畫／略過／續跑、審圖總覽。Claude以假下載檔測試存檔、重畫、紀錄與1280／390畫面通過。後續：埠號被占用時自動改用下一個或開啟已執行的助手；預設讀docs/最新符合格式的指令包、網頁下拉切換指令包／次單元、編號支援3位數；新增 docs/CHATGPT_PROMPT_PACK_FORMAT.md。未commit。
+
+## 2026-10-13 Codex：反覆Cloudflare驗證，停止製圖等待
+- 教師回報人類驗證一直出現；停止本次generate等待並保留進度，不代按／繞過驗證、不反覆啟動。尚未送prompt；先前Chrome啟動／聊天框只讀測試成功不能視為實際批次流程可用。
+- 說明Playwright方案目前網站驗證未通過，提議一般Chrome擴充功能直接在本人正常登入分頁操作，仍不保證免驗證；待教師選擇後才改架構。未新增擴充功能／產圖／commit／push／部署；feature/respiratory-infographics／e8805f8。
+
+## 2026-10-13 Codex：Cloudflare驗證狀態說明
+- 教師截圖為ChatGPT Cloudflare「驗證您是人類」。只讀控制台確認mode=generate／busy=true，日誌仍等待聊天框，尚未送出prompt；說明由本人勾選驗證，製圖階段保持視窗開啟，聊天框就緒後腳本續行，逾時才重新開始。
+- 不操作／繞過驗證、不重啟瀏覽器或修改流程；僅更新交接，feature/respiratory-infographics／e8805f8，未commit／push／部署。
+
+## 2026-10-13 Codex：Chrome既有工作階段／設定檔佔用修正
+- 教師回報launch_persistent_context TargetClosed與「正於現有瀏覽器工作階段中開啟」。核對SingletonLock與ps，確認PID67361是工具開啟的普通登入Chrome，仍持有獨立profile，新的自動化Chrome只轉交開頁後退出。
+- 登入完成按鈕改為正常關閉工具自行啟動的登入Chrome（SIGTERM，15秒逾時需本人退出，不強制kill）；生成與登入前共用profile佔用檢查，保守提示PID。僅同主機且確認PID不存在才讓Chrome自行回收殘留鎖，不手動刪鎖檔。生成移除mock-keychain／password-store=basic，與普通Chrome登入保持相同系統keychain設定；網頁按鈕／說明更新。
+- 已比對完整程序命令後，正常關閉67361；以既有profile做一次真實Chrome只讀啟動測試，persistent context成功且ChatGPT聊天框存在，完成即關閉，未送prompt／產圖。14項核心＋本機HTTP＋Chromium fixture通過，新增占用前置攔截／死亡PID鎖保留／完成登入正常退出測試。
+- 保留提示詞／生成進度，不讀取帳密、不commit／push／部署；feature/respiratory-infographics／e8805f8。下一步教師刷新控制台後單張續跑。
+
+## 2026-10-13 Codex：Google登入拒絕修正
+- 教師截圖顯示Google「目前無法登入帳戶／瀏覽器或應用程式可能有安全疑慮」。核對Google官方說明，自動化控制瀏覽器可能被拒絕登入，不是ChatGPT圖片配額訊息。
+- 將CLI --login-only／網頁登入改為一般Chrome／Chromium直接啟動、同一工具獨立profile，不使用Playwright控制、remote debugging或帳密自動填入；本人登入後先退出Chrome（macOS⌘Q），再按完成。確認程序已退出才允許交接；設定檔佔用不強制解除，不強制關閉本人一般Chrome。生成期間遇到Google登入網址會停止並提示使用新流程。
+- 更新網頁按鈕／操作說明；新增正常瀏覽器參數、待退出、SingletonLock攔截測試。12項本機核心／HTTP／Chromium fixture全過，未實際驗證教師Google登入成功，不保證網站登入許可。
+- 已從本機控制台重新啟動一般Chrome登入工作供本人操作；保留原MD與生成進度，未讀取帳密／產圖／commit／push／部署。feature/respiratory-infographics／e8805f8，handoff更新登入步驟。
+
+## 2026-10-13 Codex：ChatGPT製圖本機網頁控制台
+- 教師提供Downloads提示詞MD，核對68圖／16slug，與repo包SHA256一致。新增chatgpt_illustrator_web.py及tools/illustrator-web/HTML／CSS／JS；Python標準庫localhost服務，網頁載入MD、選單元／張數／瀏覽器／ChatGPT網址、登入完成、dry-run清單、開始／續跑／停止、即時日誌、圖庫預覽／下載。
+- MD只作資料解析不執行，4MB上限，按內容雜湊保存獨立進度／共用登入profile，固定輸出incoming；操作採結構化subprocess argv，單工作限制、同源token／Host檢查、圖片ID白名單與路徑保護。關閉頁面不中斷工作，關閉服務才停止；更新操作說明。
+- 新增tests/test_chatgpt_illustrator_web.py；專案.venv-illustrator安裝Playwright1.60.0／Pillow11.3.0成功。10項命令列＋HTTP＋Chromium測試通過；子程序pipe釋放修正後網頁4項重跑通過；1280／390畫面檢視、0pageerror／手機0溢位。所有生成控制測試只用dry-run／fixture，未登入ChatGPT或產圖。
+- 已啟動127.0.0.1:8765載入教師Downloads檔，Codex瀏覽器開啟已queued；待本人登入與單張正式網站實測。不部署雲端、不改教材／Excel／登錄、不commit／push；feature/respiratory-infographics／e8805f8。handoff更新現況與重新啟動方式。
+
+## 2026-10-13 Codex：ChatGPT本機批次製圖輔助腳本
+- 新增 chatgpt_auto_illustrator.py、requirements-chatgpt-illustrator.txt、docs/CHATGPT_AUTO_ILLUSTRATOR.md、tests/test_chatgpt_auto_illustrator.py；.gitignore 排除登入profile／進度／截圖、venv與Python快取。
+- 解析68張唯一底圖與修改自依賴，提供Persistent Context／獨立設定檔、slug分對話與網址記錄、單張送出與新assistant圖片穩定檢查、下載按鈕／來源fallback、Pillow真PNG轉檔／驗證／原子存檔、既有跳過、續跑不重送、下載重試、用量限制停止、10–15秒冷卻、執行鎖及控制參數。
+- 官方Playwright已核對Chrome日常預設設定檔不受支援；改以獨立profile首次本人登入後沿用，不能保證免Cloudflare。未使用API／教師ChatGPT帳號或產圖；正式網頁selector與專案頁待首次--limit 1實測。
+- 驗證：5核心測試（68／8張解析、引用、錯誤prompt、PNG、鎖、續跑不重送）＋1本機Chromium fixture（新圖判定／限制／逾時）通過；Python編譯與dry-run通過。pip安裝受沙箱網路限制，核心用bundled Python/Pillow、fixture用既有Playwright；瀏覽器fixture沙箱MachPort拒絕後，以經自動審核允許的沙箱外本機測試通過，不接觸正式網頁。
+- feature/respiratory-infographics／HEAD e8805f8；未commit／push／部署，不改既有教材／Excel／登錄；handoff更新下一步登入與肺胸膜單張試跑。
+
+## 2026-10-13 Claude：ChatGPT唯一底圖版指令包
+- 新增 docs/CHATGPT_PROMPT_PACK_UNIQUE_2026-10-13.md：108段合併為68張唯一底圖（總覽狀態共用、節點共用底圖），每張列出使用圖位，程式檢查108圖位全數涵蓋。僅文件，未改其他檔。
+
+## 2026-10-13 Claude：教師裁定落實、ChatGPT指令包、Codex交辦、學生說明規畫
+- 教師16:45裁定審查建議全採、用詞併呈、兩處content授權修改。Claude改規格：泌尿U1三處去重（route node-01改輸尿管蠕動與生理瓣膜、tubular總覽state-1改Na⁺與水、fluid node-05改血漿vs組織間液蛋白質）、fluid node-06刪50kg自編例、PCT／RBF／過濾壓數值、併呈用詞；RESPIRATORY_INFOGRAPHICS_SPEC.md與gas-exchange規格「入肺靜脈血」改字；四份報告補裁定節；兩份CLAUDE_EDITS diff重產。
+- 新增 docs/CHATGPT_PROMPT_PACK_2026-10-13.md（108段）、CODEX_TASK_post-review_2026-10-13.md、docs/STUDENT_GUIDE_PLAN.md；外部專案新增六卡核可勾選清單（未執行狀態變更）。
+- 未改content／程式／Excel／登錄／卡片狀態，未commit／push／部署。feature/respiratory-infographics／e8805f8。
+
+## 2026-10-13 Claude：呼吸道V2驗收、呼吸六份prompts與泌尿／體液規格審查
+- 依CODEX_TASK_RESPIRATORY_URINARY_CLAUDE_REVIEW_2026-10-13.md完成三份詳細報告＋摘要：docs/AIRWAY_FIGURES_V2_CLAUDE_REVIEW.md、RESPIRATORY_PROMPTS_CLAUDE_REVIEW.md、URINARY_FLUID_CLAUDE_REVIEW.md、RESPIRATORY_URINARY_REVIEW_SUMMARY_2026-10-13.md。
+- 回核原PDF：AB-05_13、CH06（呼吸）、AB-05_15、CH09（泌尿／體液）及六張待審卡。呼吸道V2有條件通過（A-01～A-04小修）；Claude工作區Playwright重跑兩尺寸18狀態通過。呼吸prompts 34可交／20待C1；泌尿體液63可交（待U1）／13待資料層／14待來源或數值。
+- 直接修正規格文件（簡體字、重複狀態名、總覽紅字錯位、RAAS來源頁、ACE依原書、V/Q單位、周邊受器位置、prompt內審查者指示等），差異存兩個CLAUDE_EDITS_2026-10-13.diff；總規格各補第七節審查結果。
+- 未改content／preview／程式／Excel／登錄／原子卡／進度；183、258、33檔SHA核對不變。未產圖、未commit／push／部署。feature/respiratory-infographics／e8805f8。
+
+## 2026-10-13 Codex：呼吸／泌尿Claude交接prompt
+- 新增CODEX_TASK_RESPIRATORY_URINARY_CLAUDE_REVIEW_2026-10-13.md，整合新版呼吸道圖驗收、六份呼吸prompts與泌尿／體液規格及來源審查，列來源、權限範圍、未核可卡與四份報告要求。
+- 僅交接文件，教師自行交Claude；未啟動審查／產圖／實作／commit／push／部署。feature/respiratory-infographics／e8805f8。
+
+## 2026-10-13 Codex：呼吸與泌尿開發缺項盤點（僅檢視）
+- 核對handoff、呼吸預覽／V2報告、六篇製圖規格與泌尿／體液十篇規格。實檔呼吸7份content／preview存在，shared/materials.ts尚未登錄；泌尿無content實作，指定兩份新版Claude審查報告未找到。
+- 區分10/8舊呼吸驗收與10/11ChatGPT圖待審；泌尿6篇66題與體液4篇44題皆僅藍圖，6待教師來源及U1–G2需裁定。整理製圖、接合、內容與命題、驗收、題庫增列、登錄及部署缺項。
+- 僅查檔與交接文件；未重跑功能測試、未改教材／圖／Excel／程式，未commit／push／部署，feature/respiratory-infographics／e8805f8。
+
+## 2026-10-13 Codex：115-MI兩項修正發布成功
+- 教師授權「現在可以更新」，d48aac87正常push mi/main；Actions38317348554建置及Pages部署success。前端135＋Functions42全過0跳過、版本／兩端編譯／49入口成功。
+- 線上首頁／新JS200，新JS SHA256與本機已驗build逐位元一致。Chrome正式前測補考填理由後切後測，來源回一般正式測驗且理由欄消失，未建立新場次；截图teacher-kind-switch-fixed-live.png。
+- 影片等待進度／失敗重試同批發布，前輪本機原生Chrome延遲／失敗／重試已驗，本輪未新增線上學生播放。證據fixes-release-verification.json。
+- 只更新MI前端，未部署Functions、未改課程／名冊／場次／成績；版本仍1.7.1。MI HEAD與remote main=d48aac87，後續證據與交接未提交；根目錄e8805f8維持原狀。
+
+## 2026-10-13 Codex：補考切換缺陷操作說明
+- 核對Assessments表單與後端種類檢查；說明僅前測補考來源殘留使後測建立遭拒，既有試卷／成績不受影響。現場重整後直接選後測、一般正式測驗及正式班級再建立；本機清空來源／理由修正尚未部署。
+- 僅說明與交接，feature/respiratory-infographics／e8805f8，未改功能／雲端、未commit／push／部署。
+
+## 2026-10-13 Codex：115-MI教師控制台實機驗收
+- 正式Chrome教師UI僅test班完成前測補考／後測建立、開放、預覽、結束及公布，雲端audit一致；作答報表及55筆8欄配對CSV下載正常。授課38頁、互動開關／再投、換頁、黑屏、全螢幕內結束與備註隱藏通過。
+- 發現前測補考切後測殘留makeup/reason，建立遭拒；MI Assessments.tsx切種類清空兩欄，本機真實React fixture回歸成功。現場先重整正式測驗頁再建立一般後測。此修正及影片續播修正均未部署。
+- 僅驗收test場次，0新作答；兩試卷closed／released並收回classIds，互動closed／入口清空，原正式前測prepared未公布與N551/N552/test恢復。學生重新登入／重整未再見internal。跨裝置／54人承載未實測。
+- 報告主目錄docs/mi-exam-review/TEACHER_ACCEPTANCE.md、去識別JSON與3張截圖；前端編譯/build、59前端＋42Functions通過，先前4headless受阻不列通過。主目錄e8805f8／MI75801d1，未commit／push／部署，待新修正上線授權。
+
+## 2026-10-13 Codex：115-MI當日授課狀態答覆
+- 10/13授課就緒確認：只讀雲端正式前測仍prepared／未公布，N551/N552/test設定正常，沒有開放中的課堂互動。已實測學生主要流程可用；上課由教師開放前測／結束前測後開後測、選互動頁開放及結束統整。影片可播放，直接重整續播缺陷本機已修、未部署；教師控制台實機、多人跨裝置及其餘影片仍未完整驗證，不保證全部零問題。此輪無程式／雲端設定變更、未commit／push／部署。
+
+## 2026-10-13 Codex：115-MI真實學生前後測／課堂互動驗收與影片修正
+- test已可進入；前測6/7=86、後測7/7=100，儲存重載、交卷鎖定、延後公布、前測未結束阻擋後測通過。兩輪不計分單選／排序各1回答，未作答驗證、送出鎖定、重整保存與結束統計通過。
+- 一般2題完整測驗100分後端持久、閃卡不增次數、選做不增必做；TB24秒雲端位置與重新進入續播通過。直接重整start=0已重現，MI Student.tsx本機修正等待進度／失敗重試，延遲fixture0→1次/start42通過，未上線。
+- 正式前測原班級／prepared恢復、驗收測驗收回班級且保留作答稽核、互動closed並清空latest；不動N551/N552成績。報告STUDENT_ACCEPTANCE.md及去識別JSON／4截圖。59前端與42Functions測試、兩端編譯／49入口通過；選定100項前端96通過4headless沙箱受阻，不列通過。非54人或跨裝置；其餘影片／HTML完整通關另列。
+- 根目錄feature/respiratory-infographics=e8805f8，MI codex/115-mi-assessments=75801d1，未commit／push／部署；新修正發布需教師明確授權。
+
+## 2026-10-13 Codex：test名冊信箱差異確認
+- 使用者截圖及115-MI班級名冊A56:E56均为albertchang@gmail.com，已同步enabled enrollment到test班；實際登入albertchang1008@gmail.com無membership。確定為信箱不一致，而非未發布或全班未同步。
+- 尚未更正Sheet或帳號資格；feature/respiratory-infographics／HEAD e8805f8，未commit／push／部署。
+
+## 2026-10-13 Codex：test空課程清單原因定位
+- 指定test帳號profile同名hhchang chang／teacher=false，無enrollment也無legacy roster；課程已發布且包含test班。原因為未加入啟用課程名冊。
+- bootstrap依enabled enrollment找課程，空清單UI統一顯示未發布，教師預覽不驗證真實帳號會員資格；補足此前「test可見」只驗證班級設定的限制。
+- 未修改名冊／權限／課程；正式學生端驗收待建立test membership。更新STUDENT_ACCEPTANCE.md與handoff；feature/respiratory-infographics／HEAD e8805f8，未commit／push／部署。
+
+## 2026-10-13 Codex：115-MI學生介面實測
+- 教師預覽實際操作通過：三班365題、六新增單元25分類、1影片播放32秒、閃卡、两題100分完整交卷、選做不增必做完成度、手機寬度交卷畫面。
+- 真實學生端驗收未完成：教師登入且測試白名單空，已請教師登入可用學生測試帳號；不將預覽結果當正式後端驗收。正式學生成績／名冊／白名單未動。
+- 報告docs/mi-exam-review/STUDENT_ACCEPTANCE.md與3張截圖；feature/respiratory-infographics／HEAD e8805f8，未commit／push／部署main。
+
+## 2026-10-13 Codex：115-MI未完成工作盤點
+- 確認本輪題庫／影片佈建已發布且bank驗證完成。未做真實學生端完整操作驗收；14前後測僅Sheet；8疑義題依指示排除、42停用。
+- Claude覆核Excel保留原審查版本，最新可用內容在Sheet／reviewed-bank.json；文件與資料未commit，分支feature/respiratory-infographics／HEAD e8805f8，無push／程式部署。
+
+## 2026-10-13 Codex：微免Claude修訂與Google Sheet寫入
+- 依教師選擇，74修訂全部套用，69可用、5待裁定排除；另291通過中3未決排除，42停用，357来源可用／50排除。
+- 115-MI Sheet新增297題，更新60既有解析，修復既有TH選項，停用1題；380資料列／379啟用，逐格回讀與真實parser驗證通過。原列及ID保留。
+- reviewed-bank.json、revisions-applied.json、deployment-selection.json可追溯；同步與發布完成：30分類365題、25新分類current、47YouTube、六選做單元，N551／N552／test可見。實際bank分塊驗證全部297新增ID及排除50來源／1既有停用題通過；14前後測維持僅Sheet。未commit／push／程式部署。
+
 # 開發紀錄
 
+## 115-MI影片活動與407題Claude覆核包完成（2026-10-12，Codex）
+
+- 依教師授權在明確mi-bd885課程交易追加六選做Chapter、47課後YouTube草稿（20／20／3／0／4／0），原5分類／69題、兩份教材與published快照保留；Chrome確認免疫20影片選看。未發布，新單元尚無核可分類。
+- 407題新解析與①–⑤完成；官方23卷逐題定位、逐格核答案，18差異／更正與4列學名C.誤切錯欄候選；402唯一答案、5非唯一留白，全部FALSE。重新分類377題／25章、30非微免延伸待裁定，43題建議保留停用。原20欄逐格及來源SHA保留。
+- 新增Claude覆核版Excel（五頁、標準24＋17備查欄）、完整407題MD／JSON、407列空白回填CSV、優先爭點／答案／錯欄／去重清單與交辦檔。教師選擇自行交Claude；未代稱已收件或通過。交付ZIP含本輪審查檔案，不含外部原卷與課本，Claude須依交辦路徑讀來源。
+- Google Drive學校帳號只讀115-MI確定目標sheetId 0、83題；59題題幹／選項集合一致、4同幹異選項，尚需近似題人工核對。未讀名冊／寫Sheet；覆核後重讀、去重追加，既有列／ID保留。
+- 五頁視覺檢查、匯出407ID及原文／來源SHA、四組驗證／凍結、概要快取26／407／47與公式錯誤0通過；repo實際parser全FALSE如預期無題，記憶體模擬364題六單元／25分類及五段解析成功。內容未經Claude覆核。更新課程規畫與handoff；分支feature/respiratory-infographics／HEAD e8805f8，未commit／push／部署／同步／發布。
+
+## 115-MI國考題庫課序格式與規畫（2026-10-12，Codex）
+
+- 教師選擇加入目前國考精準對焦課程；新規畫保留2輔導單元／69題，追加6選做單元／24章節題目分類；來源407題、105–114年、46原細分類，2缺答案，解析多套版且有分類疑點。
+- 新增docs/115-MI-national-exam-course-plan.md與outputs/01a13058-c172-7e62-9a0a-98bd6448f46b/微免國考題庫_課序格式_規畫版.xlsx；4分頁含標準24欄＋11備查欄、原始20欄、47影片重新配置、課程規畫。原檔與原題／選項／答案不改，解析原文留原始頁，新解析欄留白；全部FALSE待核對，不可覆蓋既有Sheet。
+- 實際parseBankSheet記憶體模擬405題成功（6單元／24分類），407 ID唯一，逐格原值及來源SHA一致；公式變動／復原及保存快取24／407／2／47、資料驗證與4頁渲染通過。格式驗證不等於官方答案／醫學內容已核對。未改程式或對外同步／發布／commit／push／部署；待教師確認規畫與內容核對。
+
+## 115-MI影片活動規畫（2026-10-12，Codex）
+
+- 只讀教師後台，確認115-MI站v1.7.1、唯一課程115-1-MI-國考精準對焦、細菌38題／免疫31題，各已有1個必做互動教材，無課前／課後活動。
+- 新增 docs/115-MI-youtube-activity-plan.md，47支逐片對應23細菌／20免疫／4病毒待建單元；建議課後YouTube選做，先草稿驗收再教師授權發布。核對47列與23＋20＋4合計；教師確認前未建立／保存／發布；無程式修改／commit／push／部署。
+
+## Moodle課程YouTube清單（2026-10-12，Codex）
+
+- 教師在學校Chrome設定檔登入後，以原生Chrome逐項查看課程1080「114-2 微生物與免疫學小考專區 新店」的64個期中前／期中後補充活動；58個活動含影片，依YouTube影片ID合併11個複製活動，整理47支不同影片。
+- 新增 docs/moodle-1080-youtube-list.md，依章節排列並附YouTube及Moodle來源；另列6個Drive資源（未開Drive檔案）。Ch3生長的iframe雖顯示為文字仍取得ID；Ch5資料夾說明內影片亦納入。未逐支播放或驗證全片可用性。
+- 自動審核拒絕儲存完整私人課程HTML至暫存資料夾，已取消儲存、改直接讀頁面；輸出僅所需影片索引。核對64活動無漏查、47個ID各11字元且不重複；僅文件，不涉及程式測試。feature/respiratory-infographics／HEAD e8805f8；未commit／push／部署。
+
+## 泌尿、體液次單元與ChatGPT製圖規格（2026-10-11，Codex）
+
+- 新增總規格、十份詳細作者規格及Claude交辦：建議泌尿6＋體液4，60教學節點、70圖位、90段ChatGPT prompts（60節點＋30總覽狀態）、110題考點藍圖；逐圖候選標籤／紅字、來源、解剖方向驗收、預測活動與跨篇分工已列，尚未命題或實作。
+- 記錄33來源卡狀態與SHA、67個Q4候選題號映射；27卡reviewed、6卡仍待教師，未重核PDF，需Claude核對U1–G2來源／數值／解剖爭點。教師指定ChatGPT製圖、Claude先審，無產圖或自畫替代圖。
+- SPEC_SELF_CHECK通過十篇結構／90prompts／標籤紅字／文件連結；258教材／圖／preview／Excel／登錄檔與33外部卡SHA不變。僅文件與交接，無preview／build／Excel／登錄／commit／push／部署。feature/respiratory-infographics／HEAD e8805f8；Claude審查報告待產生。
+
+## 呼吸六份ChatGPT製圖prompt規格（2026-10-11，Codex）
+
+- 新增總規格、六份逐圖詳細規格與Claude交辦；42教材圖位／54段可複製prompts（36節點＋18總覽狀態），含標籤白名單、紅字、解剖／數值驗收、來源與66題覆蓋。教師明定由ChatGPT製圖，撤除草稿Codex繪圖安排；本回合僅文件。
+- 258個教材／圖／preview／登錄／Excel檔案SHA不變；未產圖／改教材／preview／build／Excel／登錄／commit／push／部署。feature/respiratory-infographics／HEAD e8805f8；待Claude審，審查結果尚未產生，C1–C6列待裁定。
+
+## 呼吸教材規畫數量確認（2026-10-11，Codex）
+
+- 依呼吸規格A1確認：呼吸系統7次單元對應7份資訊圖表，每份6節點、7圖與11題；呼吸道構造為其中1次單元／1份教材。僅核對與更新交接，未修改教材或登錄。
+
+## 呼吸道剩餘工作確認（2026-10-11，Codex）
+
+- 核對交接與V2報告：本輪七圖實作、preview、測試與截圖已完成；剩Claude獨立驗收及教師看畫面。正式build／11題Excel增列／登錄／commit／部署仍待後續授權；本次只更新交接，未修改教材。
+
+## 呼吸道構造圖 V2（2026-10-11，Codex，版本不變）
+
+- 依 CODEX_TASK_airway-figures_2026-10-11.md，七圖換成指定 ChatGPT 底圖＋中文 SVG 標籤；沿用 Claude 已核可錨點，標籤與紅字限定規格清單，overview 隨三狀態切換。喉軟骨及聲帶兩格上下排；氣管僅裁指定橫切面。新增 repo 可重跑產生器、五張1200px品質82 WebP、圖面驗證腳本；CSS限airway-structure。
+- preview、materials20／20、節點稽核、既有shots與額外18狀態幾何檢查通過；手機最小13.28px、桌機30.40px，HTML約1.124MB。兩尺寸各9張圖面；報告 docs/AIRWAY_FIGURES_V2_REPORT.md。content、其他六份呼吸教材及Excel／登錄檔SHA不變。
+- feature/respiratory-infographics／HEAD e8805f8，未commit；待Claude及教師驗收。未正式build／Excel／登錄／push／部署。
+
+## 大腦循環雙視圖重做（2026-10-08，Codex，版本不變）
+
+- 教師「接下去做」授權接續大腦；第1～6步頸部前視＋腦底仰視，額／顳葉、小腦、腦幹及中心標记；第7步獨立前視靜脈回流，左頭臂靜脈跨中線匯右側上腔。不再上下疊長圖，皆400×430。
+- 保留核可供血拓樸；第4步六分支同步、第5步前交通1／後交通2、第6步七段環本體，中大腦環外註記且淡化遠端；交通粒子往返註明不是固定流向。方案D最多30顆，標準1秒／慢1.6／快0.6、減少動態無粒子、暫停凍結。節點5／6同步，字卡／6節點11題／SDK保留，其他三模式幾何未改。
+- 21張大腦圖（14逐步／4雙視圖深色／2填色中途／1減少動態）、四模式Playwright及節點文字驗證通過；測試遠端字型5秒逾時後用既定本機備援。報告 docs/BLOOD_FLOW_CEREBRAL_PREVIEW.md；截圖集現收四模式92張。feature/blood-flow-routes／HEAD e8805f8未提交。四模式已分次完成preview，等整體人工核可才教材登錄／Excel／commit；未push／部署。
+
+
+## 胎兒循環依視覺計畫重做（2026-10-08，Codex，版本不變）
+
+- 教師交辦「胎兒循環」，接續只做出生前8步及出生後6步。另畫胎兒四腔／心房中隔、塌陷肺、右大肝葉、膀胱、圓盤胎盤與三條螺旋臍血管；卵圓孔在心房中隔、導管接左鎖骨下遠側、臍動脈由髂內分支；移除成人無關標籤。
+- 方案D紫色深淺、同步填色＋粒子；卵圓孔與右室4對8顆，導管90%與到肺總10%為18對2顆；最多20顆。胎盤藍轉紅，臍靜脈紅／臍動脈藍；出生後累積變灰與改名、末步紅藍分開；註明閉鎖對照順序不是實際時序。節點3／4同步，字卡、6節點11題與SDK保留。
+- 35張交件（28兩寬逐步／4出生前後深色／2填色中途／1減少動態）；胎兒Playwright、肺／體回歸、節點文字檢查通過。報告 docs/BLOOD_FLOW_FETAL_PREVIEW.md，截圖集 docs/blood-flow-routes-preview.html。feature/blood-flow-routes／HEAD e8805f8，未提交；停preview待胎兒人工核可才大腦，未登錄／Excel／commit／push／部署。
+
+
+## 體循環依視覺計畫重做（2026-10-08，Codex，版本不變）
+
+- 教師「可以」核可肺循環方案D，授權接續體循環。僅重做體模式及節點2：淡色人體四腔心臟、弓三起點及頭臂再分支、腹主動脈圖右／下腔圖左、左右頭臂靜脈匯上腔、上下半身微血管網、升主動脈根部冠狀動脈、左側瓣膜。
+- 共用方案D同步填色＋粒子流，體模式最多30顆；標準1秒／慢1.6／快0.6，微血管紅轉藍、暫停凍結、減少動態填滿無粒子。字卡、6節點11題與SDK保留，肺專用回歸檢查保留。
+- 19張體圖（14逐步／2深色／2填色中途／1減少動態）與Playwright、肺回歸、節點文字驗證均通過；節點2樣式限定於獨立圖，避免污染深色動畫配色。報告 docs/BLOOD_FLOW_SYSTEMIC_PREVIEW.md，截圖集 docs/blood-flow-routes-preview.html。feature/blood-flow-routes／HEAD e8805f8，未提交；停preview待體模式核可才胎兒，未登錄／Excel／commit／push／部署。
+
+
+## 肺循環方案D：填色推進與粒子流（2026-10-08，Codex，版本不變）
+
+- 依四之一及方案D，只修改肺模式；同一步全部路徑同步dashoffset填色（標準1秒ease-in-out），填滿後各分支5顆半徑3粒子持續流，週期1.4秒隨慢／快調整。肺動脈拆4完整分支、四肺靜脈及上下腔同時動，最多20顆；單血滴移除。肺泡藍轉紅、減少動態直接填滿無粒子，保留SDK事件0。
+- 第6步左室400字重、左房加粗；主幹與肺靜脈標籤移近血管，後者分兩行。17張交件圖（12逐步／2深色／2填色中途／1減少動態），Playwright查同步填色、粒子移動／上限、暫停凍結、標籤bbox及手機同屏。深色控制項改用專用配色變數，避免kit局部變數干擾。報告／交接更新，待核可後才體模式；未登錄／Excel／commit／push／部署。
+
+## 血流肺模式依視覺樣張重做（2026-10-08，Codex，版本不變）
+
+- 教師限定只做肺模式。依樣張改完整雙肺、冠狀切面四腔；肺動脈幹由右室上端出、避開右房，左右肺靜脈各二獨立路徑入左房。不畫主動脈、無引線／發光，當步路線與必要標籤明亮。
+- 圖→字卡→控制列；最多8標籤；標準1秒、慢1.6／快0.6、0.7秒停留、ease-in-out與深色。節點1同步；字卡／11題／SDK保留，其他模式／節點圖未重做。12張兩尺寸逐步＋2深色圖，bbox零碰撞／裁切、手機同屏圖字卡下一步、SDK步驟0、速度與node驗證通過。
+- 最新報告 `docs/BLOOD_FLOW_PULMONARY_PREVIEW.md`；舊全模式圖面Claude未通過，不可沿用舊驗收結論。停preview，待肺核可才體→胎兒→大腦；未登錄／Excel／commit／push／部署。
+
+## 血流動畫加速與 UI 視覺升級（2026-10-08，Codex，平台版本不變）
+
+- 依教師貼上要求，動畫基準4200→1600ms、手動提示2600→1000ms；速度選單改0.75／1／1.5（預設推薦）／2×。CSS僅作用於血流教材，套膠囊分頁、柔和陰影／漸層、毛玻璃說明卡、狀態徽章、圓形步驟及血滴發光；保留最小44px觸控、font-scale與減少動態停播規則。手機畫布縮小內距以維持圖字≥12px。
+- 預覽與84張交件圖／82標準圖刷新；兩尺寸功能、字體／裁切、SDK與倍速檢查通過。新增推薦預設／四檔選單與2×實際步進時間檢查。完整專案check134／26沿用此前通過結果；未登錄／Excel／commit／push／部署，仍待畫面驗收。
+
+## 血流標籤與胎兒引線三處修正（2026-10-08，Codex，平台版本不變）
+
+- 套用教師指定標籤背景陰影、文字600粗體與不可選取、引線4／2虛線及0.85透明度；SVG另將引線群置於血管與器官下層。卵圓孔引線水平M-5 369→185 369、標籤377；動脈導管引線M438 340→275 320、標籤350；右鎖骨下156、頭臂動脈236。配合挪開肺靜脈、左頭臂與T4標籤避免新碰撞。
+- 改來源CSS／SVG生成器後重建本機preview、刷新84交件圖與82標準圖，兩尺寸功能／裁切／SDK檢查通過；未直接修生成HTML，後續重建可保留修訂。交接與預覽報告更新，仍待驗收，未登錄／Excel／commit／push／部署。
+
+## 血流預覽圖面修訂：解剖標示與標籤排版（2026-10-08，Codex，平台版本不變）
+
+- 依教師截圖意見，區分頭臂靜脈左右各一與肺靜脈左右各二；威利氏環近端路徑與環外遠端拆分，中大腦於環步驟淡化並註明環外分支。各圖加側邊標籤引線及頂層底色、前方肺動脈幹隔離描邊，肺泡交換註解移回肺旁；胎兒補胎兒端／胎盤端。
+- 核定字卡、題目與追蹤規則保留；重建 preview、84交件圖及標準82圖，更新報告與來源稽核。測試文字邊界採SVG實際座標轉換，手機最小字12.69px；功能／SDK、node驗證、check134／26與兩端build通過。未build登錄、Excel、commit、push或部署；待Claude與教師驗收。
+
+## 血流路徑動畫階段 2：預覽與截圖交件（2026-10-08，Codex，平台版本不變）
+
+- 從 e8805f8 建 `feature/blood-flow-routes`，隔離於 `.worktrees/blood-flow-routes`；依核定階段1來源完成肺／體／胎兒／大腦四模式、34步與單血滴播放、倍速、暫停、步驟點、瓣膜及減少動態；胎兒6項出生後閉鎖與名稱切換，全閉鎖成人紅藍。6節點／6先備＋5模型觀察題，提示解析待Claude逐題驗收。
+- 7張SVG與元件庫條件載入、截圖／功能驗證腳本；所有字卡對照核定版一致。84張交件PNG（68逐步＋12節點＋2通關＋2動態），標準shots82張errors0。check前端134／Functions26、兩端build／版本、node驗證及功能驗證通過；SDK動畫事件0、6節點探索／停留、全對complete一次；手機圖字最小16.6px、控制最小44px、無橫向溢位。台灣用語／疾病藥物指定詞掃描0。
+- 報告 `docs/BLOOD_FLOW_ROUTES_PREVIEW.md`、截圖索引 `docs/blood-flow-routes-preview.html`、來源／掃描稽核JSON均在血流worktree。保留既有循環路線、目錄與Excel零改動；未commit／push／部署，依教師要求停在preview＋shots，待Claude解剖／內容獨立驗收與教師看畫面。主目錄仍為呼吸分支，不混入血流程式。
+
+## 2026-10-08｜血流路徑階段1：四卡重驗與原句表 [Codex]
+
+- 依docs/BLOOD_FLOW_ROUTES_SPEC.md只做階段1：pulmonary／systemic／fetal／cerebral四卡逐項重修、補來源，經progress_cli回self_checked，frontmatter同步。胎兒補分流比例與六項出生後變化；移除肺動脈高壓、先天異常與庫辛氏反射，庫辛氏另列國考延伸候選。
+- 外部知識庫05_review/blood_flow_steps_sources.md涵蓋34列；附quotes JSON、17頁來源chunks、4頁PDF圖、QC／狀態日誌與保護檔驗證。機械QC四卡PASS（0 error／warn），其他201檔（卡片與解析Excel）及其他todo列不變，保留四卡與todo原檔備份。
+- 指出「臍靜脈純充氧」頁碼11-40；大腦第4步完整來源配對的文字原句缺口標無出處，保留原書圖示出處與needs_review供Claude裁定。不自升awaiting_teacher_review／reviewed。
+- 更新handoff後停止，待Claude複驗與教師抽查；未開始階段2、未改平台程式或教材、未push／部署。
+
+## 2026-10-07｜Claude 驗收後呼吸與看板修正 [Codex]
+
+- 呼吸R1圖解重畫、77題提示／解析、7預測回饋、12應用句與42節點重點修訂，題目身份不變；教學文字保存於可重建來源。
+- 7份preview／shots、節點稽核、14頁互動驗證與用語／A2掃描更新；教材仍未build、登錄、寫Excel或commit，待Claude複驗。
+- 看板獨立worktree三項修正提交ed08854，check140／26與兩尺寸截圖通過。main未push／部署，B報告未動。
+
 目前版本：1.7.0
+
+## 2026-10-07 Codex 工作2交件（獨立1.7.1分支）
+- feature/1.7.1-completion-board＝4a76a1f，從e8805f8分出；.worktrees/completion-board工作目錄乾淨，各班比較／學生單元矩陣／逾期明細／兩種CSV完成。版本1.7.1、check139／26、兩端build通過，報告與6張截圖在該worktree docs/COMPLETION_BOARD_1.7.1_ACCEPTANCE.md。待Claude驗收，未push／部署。
+- 原工作目錄維持feature/respiratory-infographics／1.7.0，呼吸七份預覽與六題報告完成，等待教師看畫面核可，未登錄／Excel／commit教材。兩工作未混在同一分支。
+
+## 2026-10-07 Codex 工作1：呼吸教材預覽與疑點研究（待教師看畫面）
+- feature/respiratory-infographics，基底e8805f8；七份6節點／11題、49張SVG、氧解離曲線拖曳；未登錄、未寫Excel，教材依交辦暫不commit。
+- 六題研究報告交Dropbox專案05_review/Q3疑點研究_6題.md，原始Excel／卡片／進度未改，B結論未套A；CH06 p.31已核對頸動脈體與主動脈體。
+- 將handoff整理為目前狀態，移除已完成與過期重複驗收資訊；先前功能歷史仍在本log。
 
 ## 期中考第四輪：26張章節缺口卡整批交件（2026-10-07，Codex，平台版本不變）
 

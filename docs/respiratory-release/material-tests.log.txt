@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: 共用 kit 最後答對即通關，結果呈現不重送；guided、舊MCQ及題型callback相容
+ok 1 - 共用 kit 最後答對即通關，結果呈現不重送；guided、舊MCQ及題型callback相容
+  ---
+  duration_ms: 3221.37175
+  type: 'test'
+  ...
+# Subtest: 三份生理教材維持固定ID與四選一，採教師核定的換題及120／80範例
+ok 2 - 三份生理教材維持固定ID與四選一，採教師核定的換題及120／80範例
+  ---
+  duration_ms: 1.901667
+  type: 'test'
+  ...
+# Subtest: 教材內容檔驗證固定節點、題目 ID 與答案關聯
+ok 3 - 教材內容檔驗證固定節點、題目 ID 與答案關聯
+  ---
+  duration_ms: 0.419708
+  type: 'test'
+  ...
+# Subtest: ECG 基礎教材維持六節點、十一題與非診斷內容界線
+ok 4 - ECG 基礎教材維持六節點、十一題與非診斷內容界線
+  ---
+  duration_ms: 0.123459
+  type: 'test'
+  ...
+# Subtest: 心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID
+ok 5 - 心臟構造樣板是單檔、含 SDK、無 CDN 與固定教材 ID
+  ---
+  duration_ms: 0.870833
+  type: 'test'
+  ...
+# Subtest: 標示題型驗證與元件庫洗牌
+ok 6 - 標示題型驗證與元件庫洗牌
+  ---
+  duration_ms: 0.451166
+  type: 'test'
+  ...
+# Subtest: 節點文字正規化後拒絕重複及摘要重述
+ok 7 - 節點文字正規化後拒絕重複及摘要重述
+  ---
+  duration_ms: 0.74175
+  type: 'test'
+  ...
+# Subtest: 五份已登錄教材的HTML、來源、節點／題目ID及目錄分母完全一致，公開檔保留目前 kit 的作答與通關邏輯
+ok 8 - 五份已登錄教材的HTML、來源、節點／題目ID及目錄分母完全一致，公開檔保留目前 kit 的作答與通關邏輯
+  ---
+  duration_ms: 5.274583
+  type: 'test'
+  ...
+# Subtest: 教材接受 Pages 子路徑、自訂網域與版本參數，拒絕非 HTTPS 與帳密網址
+ok 9 - 教材接受 Pages 子路徑、自訂網域與版本參數，拒絕非 HTTPS 與帳密網址
+  ---
+  duration_ms: 0.616584
+  type: 'test'
+  ...
+# Subtest: 學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈現 iframe
+ok 10 - 學生與預覽共用教材元件直接嵌入 Pages，無效網址不呈現 iframe
+  ---
+  duration_ms: 3.363916
+  type: 'test'
+  ...
+# Subtest: 血液組成教材使用 SDK、固定診斷分母與滿分通關
+ok 11 - 血液組成教材使用 SDK、固定診斷分母與滿分通關
+  ---
+  duration_ms: 4.406875
+  type: 'test'
+  ...
+# Subtest: 課程介紹圖卡以十題全對作為教材完成條件
+ok 12 - 課程介紹圖卡以十題全對作為教材完成條件
+  ---
+  duration_ms: 1.590417
+  type: 'test'
+  ...
+# Subtest: course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤方法
+ok 13 - course-learning.js 的 trackScrollNodes 是可重用的捲動節點追蹤方法
+  ---
+  duration_ms: 0.730792
+  type: 'test'
+  ...
+# Subtest: 止血與血液氣體運送教材保有節點與兩層驗收追蹤
+ok 14 - 止血與血液氣體運送教材保有節點與兩層驗收追蹤
+  ---
+  duration_ms: 1.778916
+  type: 'test'
+  ...
+# Subtest: 新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤
+ok 15 - 新增心臟與紅血球教材含情境實驗室、穩定事件與兩階段通關追蹤
+  ---
+  duration_ms: 1.906959
+  type: 'test'
+  ...
+# Subtest: 心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追蹤
+ok 16 - 心臟構造 v2 保有情境實驗室、單一節點解說與兩階段追蹤
+  ---
+  duration_ms: 0.966375
+  type: 'test'
+  ...
+# Subtest: 紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制
+ok 17 - 紅血球教材以 HbA 四聚體與全流程圖呈現恆定機制
+  ---
+  duration_ms: 1.735334
+  type: 'test'
+  ...
+# Subtest: 情境實驗室的四卡醫學插圖已隨三份教材提供
+ok 18 - 情境實驗室的四卡醫學插圖已隨三份教材提供
+  ---
+  duration_ms: 4.107875
+  type: 'test'
+  ...
+# Subtest: 血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤
+ok 19 - 血液單元前測（blood-pre-v1）保有 10 題滿分通關與 CL 別名追蹤
+  ---
+  duration_ms: 1.395458
+  type: 'test'
+  ...
+# Subtest: 血液單元後測（blood-post-v1）保有五關闖關與 CL 別名追蹤
+ok 20 - 血液單元後測（blood-post-v1）保有五關闖關與 CL 別名追蹤
+  ---
+  duration_ms: 1.87625
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3615.087625

@@ -1,0 +1,2872 @@
+{
+  "slug": "o2-co2-transport",
+  "focusStyle": "red",
+  "anchorCoordinates": "original PNG pixels",
+  "figures": {
+    "node-02": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3311
+      ],
+      "fontSize": 66,
+      "red": [
+        "四個血基質",
+        "二價鐵Fe²⁺",
+        "四分子O₂"
+      ],
+      "labels": [
+        {
+          "label": "血紅素",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "血紅素"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "四條肽鏈",
+          "anchor": [
+            242,
+            356
+          ],
+          "textPosition": [
+            406.47058823529414,
+            716.9732620320856
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "svgAnchor": [
+            406.47058823529414,
+            694.9732620320856
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "四個血基質",
+          "anchor": [
+            312,
+            502
+          ],
+          "textPosition": [
+            503.7967914438503,
+            919.9679144385027
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "svgAnchor": [
+            503.7967914438503,
+            897.9679144385027
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "anchor": [
+            817,
+            500
+          ],
+          "textPosition": [
+            1205.9358288770054,
+            917.1871657754011
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "svgAnchor": [
+            1205.9358288770054,
+            895.1871657754011
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "四分子O₂",
+          "anchor": [
+            833,
+            852
+          ],
+          "textPosition": [
+            1228.1818181818182,
+            1406.5989304812833
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "svgAnchor": [
+            1228.1818181818182,
+            1384.5989304812833
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "四條肽鏈",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2305.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "1　四條肽鏈"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "四個血基質",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2420.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "2　四個血基質"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "二價鐵Fe²⁺",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2535.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "3　二價鐵Fe²⁺"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "四分子O₂",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2650.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "4　四分子O₂"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "可逆結合",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2749.3048128342243
+          ],
+          "lines": [
+            "可逆結合"
+          ]
+        },
+        {
+          "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2927.3048128342243
+          ],
+          "lines": [
+            "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 200,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "（可選）四條鏈改對角兩兩同色以對應 2α2β。",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [],
+      "notes": [
+        "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+      ],
+      "data": [],
+      "repair": "R3-1–R3-2",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3311
+          ],
+          "fontSize": 66,
+          "red": [
+            "四個血基質",
+            "二價鐵Fe²⁺",
+            "四分子O₂"
+          ],
+          "labels": [
+            {
+              "label": "血紅素",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "血紅素"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "四條肽鏈",
+              "anchor": [
+                242,
+                356
+              ],
+              "textPosition": [
+                406.47058823529414,
+                716.9732620320856
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                406.47058823529414,
+                694.9732620320856
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "四個血基質",
+              "anchor": [
+                312,
+                502
+              ],
+              "textPosition": [
+                503.7967914438503,
+                919.9679144385027
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                503.7967914438503,
+                897.9679144385027
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "二價鐵Fe²⁺",
+              "anchor": [
+                817,
+                500
+              ],
+              "textPosition": [
+                1205.9358288770054,
+                917.1871657754011
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                1205.9358288770054,
+                895.1871657754011
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "四分子O₂",
+              "anchor": [
+                833,
+                852
+              ],
+              "textPosition": [
+                1228.1818181818182,
+                1406.5989304812833
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                1228.1818181818182,
+                1384.5989304812833
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "四條肽鏈",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2305.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "1　四條肽鏈"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "四個血基質",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2420.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "2　四個血基質"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "二價鐵Fe²⁺",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2535.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "3　二價鐵Fe²⁺"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "四分子O₂",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2650.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "4　四分子O₂"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "可逆結合",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2749.3048128342243
+              ],
+              "lines": [
+                "可逆結合"
+              ]
+            },
+            {
+              "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2927.3048128342243
+              ],
+              "lines": [
+                "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 200,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "（可選）四條鏈改對角兩兩同色以對應 2α2β。",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [],
+          "notes": [
+            "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            1964
+          ],
+          "fontSize": 66,
+          "red": [
+            "四個血基質",
+            "二價鐵Fe²⁺",
+            "四分子O₂"
+          ],
+          "labels": [
+            {
+              "label": "血紅素",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "血紅素"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "四條肽鏈",
+              "anchor": [
+                242,
+                356
+              ],
+              "textPosition": [
+                400,
+                469.6969696969697
+              ],
+              "align": "end",
+              "lines": [
+                "四條肽鏈"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                608.3333333333334,
+                469.6969696969697
+              ],
+              "plate": 0
+            },
+            {
+              "label": "四個血基質",
+              "anchor": [
+                312,
+                502
+              ],
+              "textPosition": [
+                400,
+                592.5769696969696
+              ],
+              "align": "end",
+              "lines": [
+                "四個血基質"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                661.3636363636364,
+                580.3030303030303
+              ],
+              "plate": 0
+            },
+            {
+              "label": "二價鐵Fe²⁺",
+              "anchor": [
+                817,
+                500
+              ],
+              "textPosition": [
+                1300,
+                578.7878787878788
+              ],
+              "align": "start",
+              "lines": [
+                "二價鐵Fe²⁺"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                1043.939393939394,
+                578.7878787878788
+              ],
+              "plate": 0
+            },
+            {
+              "label": "四分子O₂",
+              "anchor": [
+                833,
+                852
+              ],
+              "textPosition": [
+                1300,
+                845.4545454545455
+              ],
+              "align": "start",
+              "lines": [
+                "四分子O₂"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "svgAnchor": [
+                1056.060606060606,
+                845.4545454545455
+              ],
+              "plate": 0
+            },
+            {
+              "label": "可逆結合",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1402.121212121212
+              ],
+              "lines": [
+                "可逆結合"
+              ]
+            },
+            {
+              "label": "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1580.121212121212
+              ],
+              "lines": [
+                "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-01.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 200,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "（可選）四條鏈改對角兩兩同色以對應 2α2β。",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [],
+          "notes": [
+            "四條肽鏈、四個血基質，血基質中心為二價鐵（Fe²⁺），一分子血紅素可攜四分子氧，結合可逆。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-06": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3445
+      ],
+      "fontSize": 66,
+      "red": [
+        "氯轉移",
+        "碳酸酐酶",
+        "HCO₃⁻",
+        "Cl⁻"
+      ],
+      "labels": [
+        {
+          "label": "氯轉移",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "氯轉移"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "①",
+          "anchor": null,
+          "textPosition": [
+            568.8516746411483,
+            692.2392344497607
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "②",
+          "anchor": null,
+          "textPosition": [
+            1157.2727272727273,
+            1155.0143540669856
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "③",
+          "anchor": null,
+          "textPosition": [
+            1292.8708133971293,
+            946.0191387559809
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "血漿",
+          "anchor": [
+            1180,
+            272
+          ],
+          "textPosition": [
+            1537.9425837320575,
+            560.3732057416269
+          ],
+          "align": "middle",
+          "lines": [
+            "A"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            1537.9425837320575,
+            538.3732057416269
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "紅血球",
+          "anchor": [
+            533,
+            713
+          ],
+          "textPosition": [
+            733.0622009569378,
+            1108.9856459330144
+          ],
+          "align": "middle",
+          "lines": [
+            "B"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            733.0622009569378,
+            1086.9856459330144
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "碳酸酐酶",
+          "anchor": [
+            776,
+            524
+          ],
+          "textPosition": [
+            1035.3588516746413,
+            873.866028708134
+          ],
+          "align": "middle",
+          "lines": [
+            "C"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            1035.3588516746413,
+            851.866028708134
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "H⁺",
+          "anchor": [
+            806,
+            669
+          ],
+          "textPosition": [
+            922.6794258373207,
+            1054.248803827751
+          ],
+          "align": "middle",
+          "lines": [
+            "D"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            1072.6794258373207,
+            1032.248803827751
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "血紅素緩衝",
+          "anchor": [
+            706,
+            795
+          ],
+          "textPosition": [
+            853.2775119617226,
+            1305.9952153110048
+          ],
+          "align": "middle",
+          "lines": [
+            "E"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            948.2775119617226,
+            1188.9952153110048
+          ],
+          "number": 5,
+          "plate": 0
+        },
+        {
+          "label": "HCO₃⁻",
+          "anchor": [
+            1148,
+            606
+          ],
+          "textPosition": [
+            1498.1339712918661,
+            815.8755980861245
+          ],
+          "align": "middle",
+          "lines": [
+            "F"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            1498.1339712918661,
+            953.8755980861245
+          ],
+          "number": 6,
+          "plate": 0
+        },
+        {
+          "label": "Cl⁻",
+          "anchor": [
+            1130,
+            664
+          ],
+          "textPosition": [
+            1475.7416267942585,
+            1208.0287081339713
+          ],
+          "align": "middle",
+          "lines": [
+            "G"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgAnchor": [
+            1475.7416267942585,
+            1026.0287081339713
+          ],
+          "number": 7,
+          "plate": 0
+        },
+        {
+          "label": "血漿",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1916.0
+          ],
+          "align": "start",
+          "lines": [
+            "A　血漿"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "紅血球",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2031.0
+          ],
+          "align": "start",
+          "lines": [
+            "B　紅血球"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "碳酸酐酶",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2146.0
+          ],
+          "align": "start",
+          "lines": [
+            "C　碳酸酐酶"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "H⁺",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2261.0
+          ],
+          "align": "start",
+          "lines": [
+            "D　H⁺"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "血紅素緩衝",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2376.0
+          ],
+          "align": "start",
+          "lines": [
+            "E　血紅素緩衝"
+          ],
+          "renderAs": "number-key",
+          "number": 5
+        },
+        {
+          "label": "HCO₃⁻",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2491.0
+          ],
+          "align": "start",
+          "lines": [
+            "F　HCO₃⁻"
+          ],
+          "renderAs": "number-key",
+          "number": 6
+        },
+        {
+          "label": "Cl⁻",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2606.0
+          ],
+          "align": "start",
+          "lines": [
+            "G　Cl⁻"
+          ],
+          "renderAs": "number-key",
+          "number": 7
+        },
+        {
+          "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2705.0
+          ],
+          "lines": [
+            "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+          ]
+        },
+        {
+          "label": "② H⁺由血紅素緩衝；",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2971.0
+          ],
+          "lines": [
+            "② H⁺由血紅素緩衝；"
+          ]
+        },
+        {
+          "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3149.0
+          ],
+          "lines": [
+            "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "sourceSize": [
+            1254,
+            1254
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 200,
+            "scale": 1.244019138755981
+          },
+          "reviewNote": "單一交換蛋白（HCO₃⁻出、Cl⁻入）、血紅素未帶 O₂、紅血球小於組織細胞且有內皮與組織間隙，均已修正。",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            401,
+            378
+          ],
+          "end": [
+            651,
+            445
+          ],
+          "color": "#0072B2",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "step": 1,
+          "stepPosition": [
+            401,
+            378
+          ],
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgPoints": [
+            [
+              650.9543269244316,
+              692.2427452616806
+            ],
+            [
+              879.8564593301436,
+              753.5885167464115
+            ]
+          ],
+          "svgStart": [
+            650.9543269244316,
+            692.2427452616806
+          ],
+          "svgEnd": [
+            879.8564593301436,
+            753.5885167464115
+          ]
+        },
+        {
+          "start": [
+            818,
+            684
+          ],
+          "end": [
+            735,
+            765
+          ],
+          "color": "#17212b",
+          "width": 10,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "step": 2,
+          "stepPosition": [
+            874,
+            750
+          ],
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgPoints": [
+            [
+              1087.6076555023924,
+              1050.909090909091
+            ],
+            [
+              984.354066985646,
+              1151.6746411483255
+            ]
+          ],
+          "svgStart": [
+            1087.6076555023924,
+            1050.909090909091
+          ],
+          "svgEnd": [
+            984.354066985646,
+            1151.6746411483255
+          ]
+        },
+        {
+          "start": [
+            983,
+            582
+          ],
+          "end": [
+            1181,
+            582
+          ],
+          "color": "#17212b",
+          "width": 10,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "step": 3,
+          "stepPosition": [
+            983,
+            582
+          ],
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgPoints": [
+            [
+              1377.8708133971293,
+              924.0191387559809
+            ],
+            [
+              1539.1866028708134,
+              924.0191387559809
+            ]
+          ],
+          "svgStart": [
+            1377.8708133971293,
+            924.0191387559809
+          ],
+          "svgEnd": [
+            1539.1866028708134,
+            924.0191387559809
+          ]
+        },
+        {
+          "start": [
+            1197,
+            692
+          ],
+          "end": [
+            990,
+            692
+          ],
+          "color": "#17212b",
+          "width": 10,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+          "svgPoints": [
+            [
+              1559.0909090909092,
+              1060.8612440191387
+            ],
+            [
+              1301.578947368421,
+              1060.8612440191387
+            ]
+          ],
+          "svgStart": [
+            1559.0909090909092,
+            1060.8612440191387
+          ],
+          "svgEnd": [
+            1301.578947368421,
+            1060.8612440191387
+          ]
+        }
+      ],
+      "notes": [
+        "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；H⁺由血紅素緩衝；HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+      ],
+      "data": [],
+      "captionSteps": [
+        {
+          "step": 1,
+          "text": "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+        },
+        {
+          "step": 2,
+          "text": "H⁺由血紅素緩衝；"
+        },
+        {
+          "step": 3,
+          "text": "HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+        }
+      ],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3445
+          ],
+          "fontSize": 66,
+          "red": [
+            "氯轉移",
+            "碳酸酐酶",
+            "HCO₃⁻",
+            "Cl⁻"
+          ],
+          "labels": [
+            {
+              "label": "氯轉移",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "氯轉移"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "①",
+              "anchor": null,
+              "textPosition": [
+                568.8516746411483,
+                692.2392344497607
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "②",
+              "anchor": null,
+              "textPosition": [
+                1157.2727272727273,
+                1155.0143540669856
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "③",
+              "anchor": null,
+              "textPosition": [
+                1292.8708133971293,
+                946.0191387559809
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "血漿",
+              "anchor": [
+                1180,
+                272
+              ],
+              "textPosition": [
+                1537.9425837320575,
+                560.3732057416269
+              ],
+              "align": "middle",
+              "lines": [
+                "A"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1537.9425837320575,
+                538.3732057416269
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "紅血球",
+              "anchor": [
+                533,
+                713
+              ],
+              "textPosition": [
+                733.0622009569378,
+                1108.9856459330144
+              ],
+              "align": "middle",
+              "lines": [
+                "B"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                733.0622009569378,
+                1086.9856459330144
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "碳酸酐酶",
+              "anchor": [
+                776,
+                524
+              ],
+              "textPosition": [
+                1035.3588516746413,
+                873.866028708134
+              ],
+              "align": "middle",
+              "lines": [
+                "C"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1035.3588516746413,
+                851.866028708134
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "H⁺",
+              "anchor": [
+                806,
+                669
+              ],
+              "textPosition": [
+                922.6794258373207,
+                1054.248803827751
+              ],
+              "align": "middle",
+              "lines": [
+                "D"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1072.6794258373207,
+                1032.248803827751
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "血紅素緩衝",
+              "anchor": [
+                706,
+                795
+              ],
+              "textPosition": [
+                853.2775119617226,
+                1305.9952153110048
+              ],
+              "align": "middle",
+              "lines": [
+                "E"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                948.2775119617226,
+                1188.9952153110048
+              ],
+              "number": 5,
+              "plate": 0
+            },
+            {
+              "label": "HCO₃⁻",
+              "anchor": [
+                1148,
+                606
+              ],
+              "textPosition": [
+                1498.1339712918661,
+                815.8755980861245
+              ],
+              "align": "middle",
+              "lines": [
+                "F"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1498.1339712918661,
+                953.8755980861245
+              ],
+              "number": 6,
+              "plate": 0
+            },
+            {
+              "label": "Cl⁻",
+              "anchor": [
+                1130,
+                664
+              ],
+              "textPosition": [
+                1475.7416267942585,
+                1208.0287081339713
+              ],
+              "align": "middle",
+              "lines": [
+                "G"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1475.7416267942585,
+                1026.0287081339713
+              ],
+              "number": 7,
+              "plate": 0
+            },
+            {
+              "label": "血漿",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1916.0
+              ],
+              "align": "start",
+              "lines": [
+                "A　血漿"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "紅血球",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2031.0
+              ],
+              "align": "start",
+              "lines": [
+                "B　紅血球"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "碳酸酐酶",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2146.0
+              ],
+              "align": "start",
+              "lines": [
+                "C　碳酸酐酶"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "H⁺",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2261.0
+              ],
+              "align": "start",
+              "lines": [
+                "D　H⁺"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "血紅素緩衝",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2376.0
+              ],
+              "align": "start",
+              "lines": [
+                "E　血紅素緩衝"
+              ],
+              "renderAs": "number-key",
+              "number": 5
+            },
+            {
+              "label": "HCO₃⁻",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2491.0
+              ],
+              "align": "start",
+              "lines": [
+                "F　HCO₃⁻"
+              ],
+              "renderAs": "number-key",
+              "number": 6
+            },
+            {
+              "label": "Cl⁻",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2606.0
+              ],
+              "align": "start",
+              "lines": [
+                "G　Cl⁻"
+              ],
+              "renderAs": "number-key",
+              "number": 7
+            },
+            {
+              "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2705.0
+              ],
+              "lines": [
+                "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+              ]
+            },
+            {
+              "label": "② H⁺由血紅素緩衝；",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2971.0
+              ],
+              "lines": [
+                "② H⁺由血紅素緩衝；"
+              ]
+            },
+            {
+              "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3149.0
+              ],
+              "lines": [
+                "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 200,
+                "scale": 1.244019138755981
+              },
+              "reviewNote": "單一交換蛋白（HCO₃⁻出、Cl⁻入）、血紅素未帶 O₂、紅血球小於組織細胞且有內皮與組織間隙，均已修正。",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                401,
+                378
+              ],
+              "end": [
+                651,
+                445
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 1,
+              "stepPosition": [
+                401,
+                378
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  650.9543269244316,
+                  692.2427452616806
+                ],
+                [
+                  879.8564593301436,
+                  753.5885167464115
+                ]
+              ],
+              "svgStart": [
+                650.9543269244316,
+                692.2427452616806
+              ],
+              "svgEnd": [
+                879.8564593301436,
+                753.5885167464115
+              ]
+            },
+            {
+              "start": [
+                818,
+                684
+              ],
+              "end": [
+                735,
+                765
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 2,
+              "stepPosition": [
+                874,
+                750
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  1087.6076555023924,
+                  1050.909090909091
+                ],
+                [
+                  984.354066985646,
+                  1151.6746411483255
+                ]
+              ],
+              "svgStart": [
+                1087.6076555023924,
+                1050.909090909091
+              ],
+              "svgEnd": [
+                984.354066985646,
+                1151.6746411483255
+              ]
+            },
+            {
+              "start": [
+                983,
+                582
+              ],
+              "end": [
+                1181,
+                582
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 3,
+              "stepPosition": [
+                983,
+                582
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  1377.8708133971293,
+                  924.0191387559809
+                ],
+                [
+                  1539.1866028708134,
+                  924.0191387559809
+                ]
+              ],
+              "svgStart": [
+                1377.8708133971293,
+                924.0191387559809
+              ],
+              "svgEnd": [
+                1539.1866028708134,
+                924.0191387559809
+              ]
+            },
+            {
+              "start": [
+                1197,
+                692
+              ],
+              "end": [
+                990,
+                692
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  1559.0909090909092,
+                  1060.8612440191387
+                ],
+                [
+                  1301.578947368421,
+                  1060.8612440191387
+                ]
+              ],
+              "svgStart": [
+                1559.0909090909092,
+                1060.8612440191387
+              ],
+              "svgEnd": [
+                1301.578947368421,
+                1060.8612440191387
+              ]
+            }
+          ],
+          "notes": [
+            "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；H⁺由血紅素緩衝；HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+          ],
+          "data": [],
+          "captionSteps": [
+            {
+              "step": 1,
+              "text": "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+            },
+            {
+              "step": 2,
+              "text": "H⁺由血紅素緩衝；"
+            },
+            {
+              "step": 3,
+              "text": "HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+            }
+          ],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            2050
+          ],
+          "fontSize": 66,
+          "red": [
+            "氯轉移",
+            "碳酸酐酶",
+            "HCO₃⁻",
+            "Cl⁻"
+          ],
+          "labels": [
+            {
+              "label": "氯轉移",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "氯轉移"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "①",
+              "anchor": null,
+              "textPosition": [
+                696.810207336523,
+                478.2200956937799
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "②",
+              "anchor": null,
+              "textPosition": [
+                1017.4242424242424,
+                730.3732057416267
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "③",
+              "anchor": null,
+              "textPosition": [
+                1091.3078149920254,
+                616.4976076555024
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "紅血球",
+              "anchor": [
+                533,
+                713
+              ],
+              "textPosition": [
+                400,
+                683.2934609250399
+              ],
+              "align": "end",
+              "lines": [
+                "紅血球"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                786.2838915470494,
+                683.2934609250399
+              ],
+              "plate": 0
+            },
+            {
+              "label": "血漿",
+              "anchor": [
+                1180,
+                272
+              ],
+              "textPosition": [
+                1300,
+                384.3700159489633
+              ],
+              "align": "start",
+              "lines": [
+                "血漿"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1224.840510366826,
+                384.3700159489633
+              ],
+              "plate": 0
+            },
+            {
+              "label": "碳酸酐酶",
+              "anchor": [
+                776,
+                524
+              ],
+              "textPosition": [
+                1300,
+                555.1834130781499
+              ],
+              "align": "start",
+              "lines": [
+                "碳酸酐酶"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                950.9968102073365,
+                555.1834130781499
+              ],
+              "plate": 0
+            },
+            {
+              "label": "HCO₃⁻",
+              "anchor": [
+                1148,
+                606
+              ],
+              "textPosition": [
+                1300,
+                678.0634130781499
+              ],
+              "align": "start",
+              "lines": [
+                "HCO₃⁻"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1203.1499202551834,
+                610.7655502392345
+              ],
+              "plate": 0
+            },
+            {
+              "label": "Cl⁻",
+              "anchor": [
+                1130,
+                664
+              ],
+              "textPosition": [
+                1300,
+                800.9434130781499
+              ],
+              "align": "start",
+              "lines": [
+                "Cl⁻"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                1190.9489633173844,
+                650.0797448165869
+              ],
+              "plate": 0
+            },
+            {
+              "label": "H⁺",
+              "anchor": [
+                806,
+                669
+              ],
+              "textPosition": [
+                1300,
+                923.8234130781499
+              ],
+              "align": "start",
+              "lines": [
+                "H⁺"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                971.3317384370016,
+                653.4688995215311
+              ],
+              "plate": 0
+            },
+            {
+              "label": "血紅素緩衝",
+              "anchor": [
+                706,
+                795
+              ],
+              "textPosition": [
+                1300,
+                1046.7034130781499
+              ],
+              "align": "start",
+              "lines": [
+                "血紅素緩衝"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgAnchor": [
+                903.548644338118,
+                738.8755980861243
+              ],
+              "plate": 0
+            },
+            {
+              "label": "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1309.58341307815
+              ],
+              "lines": [
+                "① 紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+              ]
+            },
+            {
+              "label": "② H⁺由血紅素緩衝；",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1575.58341307815
+              ],
+              "lines": [
+                "② H⁺由血紅素緩衝；"
+              ]
+            },
+            {
+              "label": "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1753.58341307815
+              ],
+              "lines": [
+                "③ HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 200,
+                "scale": 0.6778309409888357
+              },
+              "reviewNote": "單一交換蛋白（HCO₃⁻出、Cl⁻入）、血紅素未帶 O₂、紅血球小於組織細胞且有內皮與組織間隙，均已修正。",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                401,
+                378
+              ],
+              "end": [
+                651,
+                445
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 1,
+              "stepPosition": [
+                401,
+                378
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  778.9128596198063,
+                  478.2236065056998
+                ],
+                [
+                  866.2679425837321,
+                  501.63476874003186
+                ]
+              ],
+              "svgStart": [
+                778.9128596198063,
+                478.2236065056998
+              ],
+              "svgEnd": [
+                866.2679425837321,
+                501.63476874003186
+              ]
+            },
+            {
+              "start": [
+                818,
+                684
+              ],
+              "end": [
+                735,
+                765
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 2,
+              "stepPosition": [
+                874,
+                750
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  979.4657097288676,
+                  663.6363636363636
+                ],
+                [
+                  923.2057416267942,
+                  718.5406698564593
+                ]
+              ],
+              "svgStart": [
+                979.4657097288676,
+                663.6363636363636
+              ],
+              "svgEnd": [
+                923.2057416267942,
+                718.5406698564593
+              ]
+            },
+            {
+              "start": [
+                983,
+                582
+              ],
+              "end": [
+                1181,
+                582
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "step": 3,
+              "stepPosition": [
+                983,
+                582
+              ],
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  1176.3078149920254,
+                  594.4976076555024
+                ],
+                [
+                  1225.5183413078148,
+                  594.4976076555024
+                ]
+              ],
+              "svgStart": [
+                1176.3078149920254,
+                594.4976076555024
+              ],
+              "svgEnd": [
+                1225.5183413078148,
+                594.4976076555024
+              ]
+            },
+            {
+              "start": [
+                1197,
+                692
+              ],
+              "end": [
+                990,
+                692
+              ],
+              "color": "#17212b",
+              "width": 10,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/o2-co2-transport/incoming/IMG-o2-co2-transport-02.png",
+              "svgPoints": [
+                [
+                  1236.3636363636363,
+                  669.0590111642744
+                ],
+                [
+                  1096.0526315789473,
+                  669.0590111642744
+                ]
+              ],
+              "svgStart": [
+                1236.3636363636363,
+                669.0590111642744
+              ],
+              "svgEnd": [
+                1096.0526315789473,
+                669.0590111642744
+              ]
+            }
+          ],
+          "notes": [
+            "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；H⁺由血紅素緩衝；HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+          ],
+          "data": [],
+          "captionSteps": [
+            {
+              "step": 1,
+              "text": "紅血球內碳酸酐酶催化 CO₂＋H₂O → H₂CO₃ → H⁺＋HCO₃⁻；"
+            },
+            {
+              "step": 2,
+              "text": "H⁺由血紅素緩衝；"
+            },
+            {
+              "step": 3,
+              "text": "HCO₃⁻移出紅血球時 Cl⁻進入，稱氯轉移。"
+            }
+          ],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-01": {
+      "state": null,
+      "viewBox": [
+        1700,
+        1904
+      ],
+      "fontSize": 66,
+      "red": [
+        "與血紅素結合約97%",
+        "溶於血漿約3%"
+      ],
+      "labels": [
+        {
+          "label": "氧的運送形式（%）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "氧的運送形式（%）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "與血紅素結合約97%",
+          "anchor": null,
+          "textPosition": [
+            70,
+            236
+          ],
+          "align": "start",
+          "lines": [
+            "與血紅素結合約97%"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "溶於血漿約3%",
+          "anchor": null,
+          "textPosition": [
+            70,
+            511
+          ],
+          "align": "start",
+          "lines": [
+            "溶於血漿約3%"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "血紅素",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            720
+          ],
+          "lines": [
+            "血紅素"
+          ]
+        },
+        {
+          "label": "血漿",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            898
+          ],
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "每克血紅素約攜1.34 mL氧",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1076
+          ],
+          "lines": [
+            "每克血紅素約攜1.34 mL氧"
+          ]
+        },
+        {
+          "label": "溶解係數約0.003 mL/dL/mmHg",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1254
+          ],
+          "lines": [
+            "溶解係數約0.003 mL/dL/mmHg"
+          ]
+        },
+        {
+          "label": "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1432
+          ],
+          "lines": [
+            "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "約 97% 與血紅素結合、3% 直接溶於血漿；每克血紅素約攜 1.34 mL 氧；溶解氧隨 PO₂ 增加（溶解係數約 0.003 mL/dL/mmHg）。"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "與血紅素結合約97%",
+          "value": 97,
+          "max": 100,
+          "width": 1455.0,
+          "unit": "%"
+        },
+        {
+          "type": "bar",
+          "label": "溶於血漿約3%",
+          "value": 3,
+          "max": 100,
+          "width": 45.0,
+          "unit": "%"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "node-05": {
+      "state": null,
+      "viewBox": [
+        1700,
+        1735
+      ],
+      "fontSize": 66,
+      "red": [
+        "HCO₃⁻在血漿約70%",
+        "碳醯胺基血紅素約23%",
+        "直接溶解約7%"
+      ],
+      "labels": [
+        {
+          "label": "CO₂ 的三種運送形式（%）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂ 的三種運送形式（%）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "HCO₃⁻在血漿約70%",
+          "anchor": null,
+          "textPosition": [
+            70,
+            236
+          ],
+          "align": "start",
+          "lines": [
+            "HCO₃⁻在血漿約70%"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "碳醯胺基血紅素約23%",
+          "anchor": null,
+          "textPosition": [
+            70,
+            511
+          ],
+          "align": "start",
+          "lines": [
+            "碳醯胺基血紅素約23%"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "直接溶解約7%",
+          "anchor": null,
+          "textPosition": [
+            70,
+            786
+          ],
+          "align": "start",
+          "lines": [
+            "直接溶解約7%"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "血紅素蛋白胺基",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            995
+          ],
+          "lines": [
+            "血紅素蛋白胺基"
+          ]
+        },
+        {
+          "label": "血漿",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1173
+          ],
+          "lines": [
+            "血漿"
+          ]
+        },
+        {
+          "label": "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1351
+          ],
+          "lines": [
+            "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "約 70% 以 HCO₃⁻ 在血漿運送、23% 與血紅素蛋白的胺基結合（碳醯胺基血紅素）、7% 直接溶解。"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "HCO₃⁻在血漿約70%",
+          "value": 70,
+          "max": 100,
+          "width": 1050.0,
+          "unit": "%"
+        },
+        {
+          "type": "bar",
+          "label": "碳醯胺基血紅素約23%",
+          "value": 23,
+          "max": 100,
+          "width": 345.0,
+          "unit": "%"
+        },
+        {
+          "type": "bar",
+          "label": "直接溶解約7%",
+          "value": 7,
+          "max": 100,
+          "width": 105.0,
+          "unit": "%"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    },
+    "overview-state-1": {
+      "state": "state-1",
+      "viewBox": [
+        480,
+        689
+      ],
+      "fontSize": 21,
+      "red": [
+        "正常",
+        "PO₂ 40 mmHg",
+        "飽和度約75%"
+      ],
+      "labels": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "100",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "40",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "飽和度約75%",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "正常：PO₂ 40 mmHg 時飽和度約 75%",
+          "anchor": null,
+          "renderAs": "html"
+        }
+      ],
+      "plates": [],
+      "notes": [
+        "正常：PO₂ 40 mmHg 時飽和度約 75%"
+      ],
+      "data": [
+        {
+          "type": "oxygen-curve",
+          "k": [
+            26,
+            31,
+            21
+          ],
+          "x": "60+3.6*PO2",
+          "y": "350-2.7*S"
+        }
+      ]
+    },
+    "overview-state-2": {
+      "state": "state-2",
+      "viewBox": [
+        480,
+        565
+      ],
+      "fontSize": 21,
+      "red": [
+        "右移"
+      ],
+      "labels": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "100",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "40",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "右移",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "renderAs": "curve-end",
+          "textPosition": [
+            430,
+            141
+          ],
+          "lines": [
+            "正常"
+          ]
+        }
+      ],
+      "plates": [],
+      "notes": [
+        "右移：H⁺增加（pH 降低）、CO₂ 增加、溫度升高、2,3-DPG 增加 → 親和力下降、利於釋氧"
+      ],
+      "data": [
+        {
+          "type": "oxygen-curve",
+          "k": [
+            26,
+            31,
+            21
+          ],
+          "x": "60+3.6*PO2",
+          "y": "350-2.7*S"
+        }
+      ]
+    },
+    "overview-state-3": {
+      "state": "state-3",
+      "viewBox": [
+        480,
+        535
+      ],
+      "fontSize": 21,
+      "red": [
+        "左移"
+      ],
+      "labels": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "100",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "40",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "左移",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "renderAs": "curve-end",
+          "textPosition": [
+            430,
+            141
+          ],
+          "lines": [
+            "正常"
+          ]
+        }
+      ],
+      "plates": [],
+      "notes": [
+        "左移：pH 升高、溫度降低、2,3-DPG 減少 → 親和力增加"
+      ],
+      "data": [
+        {
+          "type": "oxygen-curve",
+          "k": [
+            26,
+            31,
+            21
+          ],
+          "x": "60+3.6*PO2",
+          "y": "350-2.7*S"
+        }
+      ]
+    },
+    "node-03": {
+      "state": null,
+      "viewBox": [
+        480,
+        719
+      ],
+      "fontSize": 21,
+      "red": [
+        "PO₂ 40 mmHg",
+        "飽和度約75%"
+      ],
+      "labels": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "100",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "40",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂ 40 mmHg",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "飽和度約75%",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。",
+          "anchor": null,
+          "renderAs": "html"
+        }
+      ],
+      "plates": [],
+      "notes": [
+        "描述 PO₂ 與血紅素氧飽和度的 S 形關係；PO₂ 40 mmHg 時飽和度約 75%。"
+      ],
+      "data": [
+        {
+          "type": "oxygen-curve",
+          "k": [
+            26,
+            31,
+            21
+          ],
+          "x": "60+3.6*PO2",
+          "y": "350-2.7*S"
+        }
+      ]
+    },
+    "node-04": {
+      "state": null,
+      "viewBox": [
+        480,
+        1549
+      ],
+      "fontSize": 21,
+      "red": [
+        "右移",
+        "親和力降低",
+        "利於釋氧",
+        "左移",
+        "親和力增加"
+      ],
+      "labels": [
+        {
+          "label": "血紅素氧飽和度（%）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "PO₂（mmHg）",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "0",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "100",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "40",
+          "anchor": null,
+          "renderAs": "data"
+        },
+        {
+          "label": "正常",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "右移",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "H⁺增加（pH降低）",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "CO₂增加",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "溫度升高",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "2,3-DPG增加",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "親和力降低",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "利於釋氧",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "波爾效應",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "左移",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "相反條件",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "親和力增加",
+          "anchor": null,
+          "renderAs": "html"
+        },
+        {
+          "label": "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。",
+          "anchor": null,
+          "renderAs": "html"
+        }
+      ],
+      "plates": [],
+      "notes": [
+        "H⁺增加（pH 降低）、CO₂ 增多、溫度升高、2,3-DPG 增加 → 親和力降低、曲線右移、利於釋氧；pH 下降促進釋氧稱波爾效應；相反條件使曲線左移。"
+      ],
+      "data": [
+        {
+          "type": "oxygen-curve",
+          "k": [
+            26,
+            31,
+            21
+          ],
+          "x": "60+3.6*PO2",
+          "y": "350-2.7*S"
+        }
+      ]
+    }
+  }
+}

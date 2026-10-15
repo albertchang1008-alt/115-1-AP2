@@ -1,0 +1,6779 @@
+{
+  "slug": "gas-exchange",
+  "focusStyle": "red",
+  "anchorCoordinates": "original PNG pixels",
+  "figures": {
+    "overview-state-1": {
+      "state": "state-1",
+      "viewBox": [
+        1700,
+        2453
+      ],
+      "fontSize": 66,
+      "red": [
+        "膜薄"
+      ],
+      "labels": [
+        {
+          "label": "膜薄",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "膜薄"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1072.8747628623364,
+            1145.0802002041028
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            1232.3477489977067,
+            582.3058136369366
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡",
+          "anchor": [
+            530,
+            410
+          ],
+          "textPosition": [
+            729.3301435406698,
+            732.0478468899521
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "svgAnchor": [
+            729.3301435406698,
+            710.0478468899521
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": [
+            887,
+            610
+          ],
+          "textPosition": [
+            1323.4449760765551,
+            980.8516746411484
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "svgAnchor": [
+            1173.4449760765551,
+            958.8516746411484
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "肺微血管",
+          "anchor": [
+            1050,
+            690
+          ],
+          "textPosition": [
+            1471.22009569378,
+            985.3732057416269
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "svgAnchor": [
+            1376.22009569378,
+            1058.3732057416269
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "肺泡",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1916.0
+          ],
+          "align": "start",
+          "lines": [
+            "1　肺泡"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2031.0
+          ],
+          "align": "start",
+          "lines": [
+            "2　呼吸膜"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "肺微血管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2146.0
+          ],
+          "align": "start",
+          "lines": [
+            "3　肺微血管"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "正常：膜薄、面積大，擴散順暢",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2245.0
+          ],
+          "lines": [
+            "正常：膜薄、面積大，擴散順暢"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "sourceSize": [
+            1254,
+            1254
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 200,
+            "scale": 1.244019138755981
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            675,
+            500
+          ],
+          "end": [
+            1080,
+            770
+          ],
+          "color": "#D55E00",
+          "width": 14,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "svgPoints": [
+            [
+              909.7129186602871,
+              822.0095693779905
+            ],
+            [
+              1413.5406698564593,
+              1157.8947368421054
+            ]
+          ],
+          "svgStart": [
+            909.7129186602871,
+            822.0095693779905
+          ],
+          "svgEnd": [
+            1413.5406698564593,
+            1157.8947368421054
+          ]
+        },
+        {
+          "start": [
+            1050,
+            490
+          ],
+          "end": [
+            705,
+            320
+          ],
+          "color": "#0072B2",
+          "width": 14,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+          "svgPoints": [
+            [
+              1376.22009569378,
+              809.5693779904307
+            ],
+            [
+              947.0334928229665,
+              598.0861244019138
+            ]
+          ],
+          "svgStart": [
+            1376.22009569378,
+            809.5693779904307
+          ],
+          "svgEnd": [
+            947.0334928229665,
+            598.0861244019138
+          ]
+        }
+      ],
+      "notes": [
+        "正常：膜薄、面積大，擴散順暢"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": "state-1",
+          "viewBox": [
+            1700,
+            2453
+          ],
+          "fontSize": 66,
+          "red": [
+            "膜薄"
+          ],
+          "labels": [
+            {
+              "label": "膜薄",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "膜薄"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1072.8747628623364,
+                1145.0802002041028
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1232.3477489977067,
+                582.3058136369366
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                729.3301435406698,
+                732.0478468899521
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                729.3301435406698,
+                710.0478468899521
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1323.4449760765551,
+                980.8516746411484
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                1173.4449760765551,
+                958.8516746411484
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1471.22009569378,
+                985.3732057416269
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                1376.22009569378,
+                1058.3732057416269
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1916.0
+              ],
+              "align": "start",
+              "lines": [
+                "1　肺泡"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2031.0
+              ],
+              "align": "start",
+              "lines": [
+                "2　呼吸膜"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "肺微血管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2146.0
+              ],
+              "align": "start",
+              "lines": [
+                "3　肺微血管"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "正常：膜薄、面積大，擴散順暢",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2245.0
+              ],
+              "lines": [
+                "正常：膜薄、面積大，擴散順暢"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 200,
+                "scale": 1.244019138755981
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 14,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgPoints": [
+                [
+                  909.7129186602871,
+                  822.0095693779905
+                ],
+                [
+                  1413.5406698564593,
+                  1157.8947368421054
+                ]
+              ],
+              "svgStart": [
+                909.7129186602871,
+                822.0095693779905
+              ],
+              "svgEnd": [
+                1413.5406698564593,
+                1157.8947368421054
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 14,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgPoints": [
+                [
+                  1376.22009569378,
+                  809.5693779904307
+                ],
+                [
+                  947.0334928229665,
+                  598.0861244019138
+                ]
+              ],
+              "svgStart": [
+                1376.22009569378,
+                809.5693779904307
+              ],
+              "svgEnd": [
+                947.0334928229665,
+                598.0861244019138
+              ]
+            }
+          ],
+          "notes": [
+            "正常：膜薄、面積大，擴散順暢"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": "state-1",
+          "viewBox": [
+            1700,
+            1398
+          ],
+          "fontSize": 66,
+          "red": [
+            "膜薄"
+          ],
+          "labels": [
+            {
+              "label": "膜薄",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "膜薄"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                931.0446193216666,
+                785.5506946219656
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1090.5176054570368,
+                352.9995935412428
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                400,
+                477.91068580542264
+              ],
+              "align": "end",
+              "lines": [
+                "肺泡"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                784.250398724083,
+                477.91068580542264
+              ],
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1300,
+                613.4768740031898
+              ],
+              "align": "start",
+              "lines": [
+                "呼吸膜"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                1026.2360446570974,
+                613.4768740031898
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1300,
+                736.3568740031898
+              ],
+              "align": "start",
+              "lines": [
+                "肺微血管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgAnchor": [
+                1136.7224880382773,
+                667.7033492822966
+              ],
+              "plate": 0
+            },
+            {
+              "label": "正常：膜薄、面積大，擴散順暢",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1190.0
+              ],
+              "lines": [
+                "正常：膜薄、面積大，擴散順暢"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 200,
+                "scale": 0.6778309409888357
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 14,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgPoints": [
+                [
+                  882.5358851674641,
+                  538.9154704944178
+                ],
+                [
+                  1157.0574162679425,
+                  721.9298245614035
+                ]
+              ],
+              "svgStart": [
+                882.5358851674641,
+                538.9154704944178
+              ],
+              "svgEnd": [
+                1157.0574162679425,
+                721.9298245614035
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 14,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-01.png",
+              "svgPoints": [
+                [
+                  1136.7224880382773,
+                  532.1371610845295
+                ],
+                [
+                  902.8708133971292,
+                  416.9059011164274
+                ]
+              ],
+              "svgStart": [
+                1136.7224880382773,
+                532.1371610845295
+              ],
+              "svgEnd": [
+                902.8708133971292,
+                416.9059011164274
+              ]
+            }
+          ],
+          "notes": [
+            "正常：膜薄、面積大，擴散順暢"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "overview-state-2": {
+      "state": "state-2",
+      "viewBox": [
+        1700,
+        2578
+      ],
+      "fontSize": 66,
+      "red": [
+        "膜變厚",
+        "擴散減少"
+      ],
+      "labels": [
+        {
+          "label": "膜變厚",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "膜變厚"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "擴散減少",
+          "anchor": null,
+          "textPosition": [
+            850,
+            236
+          ],
+          "align": "middle",
+          "lines": [
+            "擴散減少"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1072.8747628623364,
+            1270.0802002041028
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            1232.3477489977067,
+            707.3058136369366
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡",
+          "anchor": [
+            530,
+            410
+          ],
+          "textPosition": [
+            729.3301435406698,
+            857.0478468899521
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "svgAnchor": [
+            729.3301435406698,
+            835.0478468899521
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": [
+            887,
+            610
+          ],
+          "textPosition": [
+            1323.4449760765551,
+            1105.8516746411483
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "svgAnchor": [
+            1173.4449760765551,
+            1083.8516746411483
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "肺微血管",
+          "anchor": [
+            1050,
+            690
+          ],
+          "textPosition": [
+            1471.22009569378,
+            1110.3732057416269
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "svgAnchor": [
+            1376.22009569378,
+            1183.3732057416269
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "肺泡",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2041.0
+          ],
+          "align": "start",
+          "lines": [
+            "1　肺泡"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2156.0
+          ],
+          "align": "start",
+          "lines": [
+            "2　呼吸膜"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "肺微血管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2271.0
+          ],
+          "align": "start",
+          "lines": [
+            "3　肺微血管"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "纖維化或肺水腫：膜變厚，擴散減少",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2370.0
+          ],
+          "lines": [
+            "纖維化或肺水腫：膜變厚，擴散減少"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "sourceSize": [
+            1254,
+            1254
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 325,
+            "scale": 1.244019138755981
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            675,
+            500
+          ],
+          "end": [
+            1080,
+            770
+          ],
+          "color": "#D55E00",
+          "width": 7,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "svgPoints": [
+            [
+              909.7129186602871,
+              947.0095693779905
+            ],
+            [
+              1413.5406698564593,
+              1282.8947368421054
+            ]
+          ],
+          "svgStart": [
+            909.7129186602871,
+            947.0095693779905
+          ],
+          "svgEnd": [
+            1413.5406698564593,
+            1282.8947368421054
+          ]
+        },
+        {
+          "start": [
+            1050,
+            490
+          ],
+          "end": [
+            705,
+            320
+          ],
+          "color": "#0072B2",
+          "width": 7,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+          "svgPoints": [
+            [
+              1376.22009569378,
+              934.5693779904307
+            ],
+            [
+              947.0334928229665,
+              723.0861244019138
+            ]
+          ],
+          "svgStart": [
+            1376.22009569378,
+            934.5693779904307
+          ],
+          "svgEnd": [
+            947.0334928229665,
+            723.0861244019138
+          ]
+        }
+      ],
+      "notes": [
+        "纖維化或肺水腫：膜變厚，擴散減少"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": "state-2",
+          "viewBox": [
+            1700,
+            2578
+          ],
+          "fontSize": 66,
+          "red": [
+            "膜變厚",
+            "擴散減少"
+          ],
+          "labels": [
+            {
+              "label": "膜變厚",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "膜變厚"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "擴散減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                236
+              ],
+              "align": "middle",
+              "lines": [
+                "擴散減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1072.8747628623364,
+                1270.0802002041028
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1232.3477489977067,
+                707.3058136369366
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                729.3301435406698,
+                857.0478468899521
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                729.3301435406698,
+                835.0478468899521
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1323.4449760765551,
+                1105.8516746411483
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                1173.4449760765551,
+                1083.8516746411483
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1471.22009569378,
+                1110.3732057416269
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                1376.22009569378,
+                1183.3732057416269
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2041.0
+              ],
+              "align": "start",
+              "lines": [
+                "1　肺泡"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2156.0
+              ],
+              "align": "start",
+              "lines": [
+                "2　呼吸膜"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "肺微血管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2271.0
+              ],
+              "align": "start",
+              "lines": [
+                "3　肺微血管"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "纖維化或肺水腫：膜變厚，擴散減少",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2370.0
+              ],
+              "lines": [
+                "纖維化或肺水腫：膜變厚，擴散減少"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 325,
+                "scale": 1.244019138755981
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgPoints": [
+                [
+                  909.7129186602871,
+                  947.0095693779905
+                ],
+                [
+                  1413.5406698564593,
+                  1282.8947368421054
+                ]
+              ],
+              "svgStart": [
+                909.7129186602871,
+                947.0095693779905
+              ],
+              "svgEnd": [
+                1413.5406698564593,
+                1282.8947368421054
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgPoints": [
+                [
+                  1376.22009569378,
+                  934.5693779904307
+                ],
+                [
+                  947.0334928229665,
+                  723.0861244019138
+                ]
+              ],
+              "svgStart": [
+                1376.22009569378,
+                934.5693779904307
+              ],
+              "svgEnd": [
+                947.0334928229665,
+                723.0861244019138
+              ]
+            }
+          ],
+          "notes": [
+            "纖維化或肺水腫：膜變厚，擴散減少"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": "state-2",
+          "viewBox": [
+            1700,
+            1523
+          ],
+          "fontSize": 66,
+          "red": [
+            "膜變厚",
+            "擴散減少"
+          ],
+          "labels": [
+            {
+              "label": "膜變厚",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "膜變厚"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "擴散減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                236
+              ],
+              "align": "middle",
+              "lines": [
+                "擴散減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                931.0446193216666,
+                910.5506946219656
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1090.5176054570368,
+                477.9995935412428
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                400,
+                602.9106858054226
+              ],
+              "align": "end",
+              "lines": [
+                "肺泡"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                784.250398724083,
+                602.9106858054226
+              ],
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1300,
+                738.4768740031898
+              ],
+              "align": "start",
+              "lines": [
+                "呼吸膜"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                1026.2360446570974,
+                738.4768740031898
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1300,
+                861.3568740031898
+              ],
+              "align": "start",
+              "lines": [
+                "肺微血管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgAnchor": [
+                1136.7224880382773,
+                792.7033492822966
+              ],
+              "plate": 0
+            },
+            {
+              "label": "纖維化或肺水腫：膜變厚，擴散減少",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1315.0
+              ],
+              "lines": [
+                "纖維化或肺水腫：膜變厚，擴散減少"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 325,
+                "scale": 0.6778309409888357
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgPoints": [
+                [
+                  882.5358851674641,
+                  663.9154704944178
+                ],
+                [
+                  1157.0574162679425,
+                  846.9298245614035
+                ]
+              ],
+              "svgStart": [
+                882.5358851674641,
+                663.9154704944178
+              ],
+              "svgEnd": [
+                1157.0574162679425,
+                846.9298245614035
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-02.png",
+              "svgPoints": [
+                [
+                  1136.7224880382773,
+                  657.1371610845295
+                ],
+                [
+                  902.8708133971292,
+                  541.9059011164275
+                ]
+              ],
+              "svgStart": [
+                1136.7224880382773,
+                657.1371610845295
+              ],
+              "svgEnd": [
+                902.8708133971292,
+                541.9059011164275
+              ]
+            }
+          ],
+          "notes": [
+            "纖維化或肺水腫：膜變厚，擴散減少"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "overview-state-3": {
+      "state": "state-3",
+      "viewBox": [
+        1700,
+        2578
+      ],
+      "fontSize": 66,
+      "red": [
+        "交換面積減少",
+        "擴散減少"
+      ],
+      "labels": [
+        {
+          "label": "交換面積減少",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "交換面積減少"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "擴散減少",
+          "anchor": null,
+          "textPosition": [
+            850,
+            236
+          ],
+          "align": "middle",
+          "lines": [
+            "擴散減少"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1072.8747628623364,
+            1270.0802002041028
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            1232.3477489977067,
+            707.3058136369366
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡",
+          "anchor": [
+            530,
+            410
+          ],
+          "textPosition": [
+            729.3301435406698,
+            857.0478468899521
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "svgAnchor": [
+            729.3301435406698,
+            835.0478468899521
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": [
+            887,
+            610
+          ],
+          "textPosition": [
+            1323.4449760765551,
+            1105.8516746411483
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "svgAnchor": [
+            1173.4449760765551,
+            1083.8516746411483
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "肺微血管",
+          "anchor": [
+            1050,
+            690
+          ],
+          "textPosition": [
+            1471.22009569378,
+            1110.3732057416269
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "svgAnchor": [
+            1376.22009569378,
+            1183.3732057416269
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "肺泡",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2041.0
+          ],
+          "align": "start",
+          "lines": [
+            "1　肺泡"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "呼吸膜",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2156.0
+          ],
+          "align": "start",
+          "lines": [
+            "2　呼吸膜"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "肺微血管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2271.0
+          ],
+          "align": "start",
+          "lines": [
+            "3　肺微血管"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2370.0
+          ],
+          "lines": [
+            "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "sourceSize": [
+            1254,
+            1254
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 325,
+            "scale": 1.244019138755981
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            675,
+            500
+          ],
+          "end": [
+            1080,
+            770
+          ],
+          "color": "#D55E00",
+          "width": 7,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "svgPoints": [
+            [
+              909.7129186602871,
+              947.0095693779905
+            ],
+            [
+              1413.5406698564593,
+              1282.8947368421054
+            ]
+          ],
+          "svgStart": [
+            909.7129186602871,
+            947.0095693779905
+          ],
+          "svgEnd": [
+            1413.5406698564593,
+            1282.8947368421054
+          ]
+        },
+        {
+          "start": [
+            1050,
+            490
+          ],
+          "end": [
+            705,
+            320
+          ],
+          "color": "#0072B2",
+          "width": 7,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+          "svgPoints": [
+            [
+              1376.22009569378,
+              934.5693779904307
+            ],
+            [
+              947.0334928229665,
+              723.0861244019138
+            ]
+          ],
+          "svgStart": [
+            1376.22009569378,
+            934.5693779904307
+          ],
+          "svgEnd": [
+            947.0334928229665,
+            723.0861244019138
+          ]
+        }
+      ],
+      "notes": [
+        "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": "state-3",
+          "viewBox": [
+            1700,
+            2578
+          ],
+          "fontSize": 66,
+          "red": [
+            "交換面積減少",
+            "擴散減少"
+          ],
+          "labels": [
+            {
+              "label": "交換面積減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "交換面積減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "擴散減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                236
+              ],
+              "align": "middle",
+              "lines": [
+                "擴散減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1072.8747628623364,
+                1270.0802002041028
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1232.3477489977067,
+                707.3058136369366
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                729.3301435406698,
+                857.0478468899521
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                729.3301435406698,
+                835.0478468899521
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1323.4449760765551,
+                1105.8516746411483
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                1173.4449760765551,
+                1083.8516746411483
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1471.22009569378,
+                1110.3732057416269
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                1376.22009569378,
+                1183.3732057416269
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2041.0
+              ],
+              "align": "start",
+              "lines": [
+                "1　肺泡"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2156.0
+              ],
+              "align": "start",
+              "lines": [
+                "2　呼吸膜"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "肺微血管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2271.0
+              ],
+              "align": "start",
+              "lines": [
+                "3　肺微血管"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2370.0
+              ],
+              "lines": [
+                "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 325,
+                "scale": 1.244019138755981
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgPoints": [
+                [
+                  909.7129186602871,
+                  947.0095693779905
+                ],
+                [
+                  1413.5406698564593,
+                  1282.8947368421054
+                ]
+              ],
+              "svgStart": [
+                909.7129186602871,
+                947.0095693779905
+              ],
+              "svgEnd": [
+                1413.5406698564593,
+                1282.8947368421054
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgPoints": [
+                [
+                  1376.22009569378,
+                  934.5693779904307
+                ],
+                [
+                  947.0334928229665,
+                  723.0861244019138
+                ]
+              ],
+              "svgStart": [
+                1376.22009569378,
+                934.5693779904307
+              ],
+              "svgEnd": [
+                947.0334928229665,
+                723.0861244019138
+              ]
+            }
+          ],
+          "notes": [
+            "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": "state-3",
+          "viewBox": [
+            1700,
+            1523
+          ],
+          "fontSize": 66,
+          "red": [
+            "交換面積減少",
+            "擴散減少"
+          ],
+          "labels": [
+            {
+              "label": "交換面積減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "交換面積減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "擴散減少",
+              "anchor": null,
+              "textPosition": [
+                850,
+                236
+              ],
+              "align": "middle",
+              "lines": [
+                "擴散減少"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                931.0446193216666,
+                910.5506946219656
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1090.5176054570368,
+                477.9995935412428
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                530,
+                410
+              ],
+              "textPosition": [
+                400,
+                602.9106858054226
+              ],
+              "align": "end",
+              "lines": [
+                "肺泡"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                784.250398724083,
+                602.9106858054226
+              ],
+              "plate": 0
+            },
+            {
+              "label": "呼吸膜",
+              "anchor": [
+                887,
+                610
+              ],
+              "textPosition": [
+                1300,
+                738.4768740031898
+              ],
+              "align": "start",
+              "lines": [
+                "呼吸膜"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                1026.2360446570974,
+                738.4768740031898
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                1050,
+                690
+              ],
+              "textPosition": [
+                1300,
+                861.3568740031898
+              ],
+              "align": "start",
+              "lines": [
+                "肺微血管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgAnchor": [
+                1136.7224880382773,
+                792.7033492822966
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1315.0
+              ],
+              "lines": [
+                "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 325,
+                "scale": 0.6778309409888357
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                675,
+                500
+              ],
+              "end": [
+                1080,
+                770
+              ],
+              "color": "#D55E00",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgPoints": [
+                [
+                  882.5358851674641,
+                  663.9154704944178
+                ],
+                [
+                  1157.0574162679425,
+                  846.9298245614035
+                ]
+              ],
+              "svgStart": [
+                882.5358851674641,
+                663.9154704944178
+              ],
+              "svgEnd": [
+                1157.0574162679425,
+                846.9298245614035
+              ]
+            },
+            {
+              "start": [
+                1050,
+                490
+              ],
+              "end": [
+                705,
+                320
+              ],
+              "color": "#0072B2",
+              "width": 7,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-03.png",
+              "svgPoints": [
+                [
+                  1136.7224880382773,
+                  657.1371610845295
+                ],
+                [
+                  902.8708133971292,
+                  541.9059011164275
+                ]
+              ],
+              "svgStart": [
+                1136.7224880382773,
+                657.1371610845295
+              ],
+              "svgEnd": [
+                902.8708133971292,
+                541.9059011164275
+              ]
+            }
+          ],
+          "notes": [
+            "肺氣腫：肺泡壁破壞、交換面積減少，擴散減少"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-01": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3340
+      ],
+      "fontSize": 66,
+      "red": [
+        "外呼吸",
+        "內呼吸"
+      ],
+      "labels": [
+        {
+          "label": "外呼吸",
+          "anchor": null,
+          "textPosition": [
+            850,
+            111
+          ],
+          "align": "middle",
+          "lines": [
+            "外呼吸"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1079.7521372773724,
+            960.8815910448342
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            1157.9679144385027,
+            402.6417112299465
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡",
+          "anchor": [
+            390,
+            365
+          ],
+          "textPosition": [
+            612.2459893048128,
+            729.4866310160428
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgAnchor": [
+            612.2459893048128,
+            707.4866310160428
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "肺微血管",
+          "anchor": [
+            922,
+            340
+          ],
+          "textPosition": [
+            1351.9251336898396,
+            694.7272727272727
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgAnchor": [
+            1351.9251336898396,
+            672.7272727272727
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "肺泡",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1329.2620320855615
+          ],
+          "align": "start",
+          "lines": [
+            "1　肺泡"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "肺微血管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1444.2620320855615
+          ],
+          "align": "start",
+          "lines": [
+            "2　肺微血管"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "內呼吸",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1609.2620320855615
+          ],
+          "align": "middle",
+          "lines": [
+            "內呼吸"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1125.6537219032284,
+            2110.1584168786417
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            1112.7807486631016,
+            1796.6256684491977
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "組織細胞",
+          "anchor": [
+            480,
+            1010
+          ],
+          "textPosition": [
+            737.379679144385,
+            2151.27807486631
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgAnchor": [
+            737.379679144385,
+            2129.27807486631
+          ],
+          "number": 1,
+          "plate": 1
+        },
+        {
+          "label": "組織微血管",
+          "anchor": [
+            925,
+            1070
+          ],
+          "textPosition": [
+            1451.096256684492,
+            2139.7005347593586
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgAnchor": [
+            1356.096256684492,
+            2212.7005347593586
+          ],
+          "number": 2,
+          "plate": 1
+        },
+        {
+          "label": "組織細胞",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2830.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "3　組織細胞"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "組織微血管",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2945.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "4　組織微血管"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3044.3048128342243
+          ],
+          "lines": [
+            "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": [
+            0,
+            0,
+            1122,
+            700
+          ],
+          "imageTransform": {
+            "x": 70.0,
+            "y": 200,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        },
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": [
+            0,
+            700,
+            1122,
+            702
+          ],
+          "imageTransform": {
+            "x": 70.0,
+            "y": 1698.2620320855615,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            600,
+            380
+          ],
+          "end": [
+            910,
+            460
+          ],
+          "color": "#D55E00",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgPoints": [
+            [
+              904.2245989304813,
+              728.3422459893048
+            ],
+            [
+              1335.24064171123,
+              839.572192513369
+            ]
+          ],
+          "svgStart": [
+            904.2245989304813,
+            728.3422459893048
+          ],
+          "svgEnd": [
+            1335.24064171123,
+            839.572192513369
+          ]
+        },
+        {
+          "start": [
+            920,
+            245
+          ],
+          "end": [
+            645,
+            245
+          ],
+          "color": "#0072B2",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgPoints": [
+            [
+              1349.144385026738,
+              540.6417112299465
+            ],
+            [
+              966.7914438502673,
+              540.6417112299465
+            ]
+          ],
+          "svgStart": [
+            1349.144385026738,
+            540.6417112299465
+          ],
+          "svgEnd": [
+            966.7914438502673,
+            540.6417112299465
+          ]
+        },
+        {
+          "start": [
+            930,
+            1080
+          ],
+          "end": [
+            610,
+            1110
+          ],
+          "color": "#D55E00",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgPoints": [
+            [
+              1363.048128342246,
+              2226.604278074866
+            ],
+            [
+              918.1283422459893,
+              2268.31550802139
+            ]
+          ],
+          "svgStart": [
+            1363.048128342246,
+            2226.604278074866
+          ],
+          "svgEnd": [
+            918.1283422459893,
+            2268.31550802139
+          ]
+        },
+        {
+          "start": [
+            580,
+            870
+          ],
+          "end": [
+            920,
+            870
+          ],
+          "color": "#0072B2",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+          "svgPoints": [
+            [
+              876.4171122994652,
+              1934.6256684491977
+            ],
+            [
+              1349.144385026738,
+              1934.6256684491977
+            ]
+          ],
+          "svgStart": [
+            876.4171122994652,
+            1934.6256684491977
+          ],
+          "svgEnd": [
+            1349.144385026738,
+            1934.6256684491977
+          ]
+        }
+      ],
+      "notes": [
+        "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3340
+          ],
+          "fontSize": 66,
+          "red": [
+            "外呼吸",
+            "內呼吸"
+          ],
+          "labels": [
+            {
+              "label": "外呼吸",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "外呼吸"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1079.7521372773724,
+                960.8815910448342
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1157.9679144385027,
+                402.6417112299465
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                390,
+                365
+              ],
+              "textPosition": [
+                612.2459893048128,
+                729.4866310160428
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                612.2459893048128,
+                707.4866310160428
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                922,
+                340
+              ],
+              "textPosition": [
+                1351.9251336898396,
+                694.7272727272727
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                1351.9251336898396,
+                672.7272727272727
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "肺泡",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1329.2620320855615
+              ],
+              "align": "start",
+              "lines": [
+                "1　肺泡"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "肺微血管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1444.2620320855615
+              ],
+              "align": "start",
+              "lines": [
+                "2　肺微血管"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "內呼吸",
+              "anchor": null,
+              "textPosition": [
+                850,
+                1609.2620320855615
+              ],
+              "align": "middle",
+              "lines": [
+                "內呼吸"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1125.6537219032284,
+                2110.1584168786417
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1112.7807486631016,
+                1796.6256684491977
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "組織細胞",
+              "anchor": [
+                480,
+                1010
+              ],
+              "textPosition": [
+                737.379679144385,
+                2151.27807486631
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                737.379679144385,
+                2129.27807486631
+              ],
+              "number": 1,
+              "plate": 1
+            },
+            {
+              "label": "組織微血管",
+              "anchor": [
+                925,
+                1070
+              ],
+              "textPosition": [
+                1451.096256684492,
+                2139.7005347593586
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                1356.096256684492,
+                2212.7005347593586
+              ],
+              "number": 2,
+              "plate": 1
+            },
+            {
+              "label": "組織細胞",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2830.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "3　組織細胞"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "組織微血管",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2945.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "4　組織微血管"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3044.3048128342243
+              ],
+              "lines": [
+                "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": [
+                0,
+                0,
+                1122,
+                700
+              ],
+              "imageTransform": {
+                "x": 70.0,
+                "y": 200,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            },
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": [
+                0,
+                700,
+                1122,
+                702
+              ],
+              "imageTransform": {
+                "x": 70.0,
+                "y": 1698.2620320855615,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                600,
+                380
+              ],
+              "end": [
+                910,
+                460
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  904.2245989304813,
+                  728.3422459893048
+                ],
+                [
+                  1335.24064171123,
+                  839.572192513369
+                ]
+              ],
+              "svgStart": [
+                904.2245989304813,
+                728.3422459893048
+              ],
+              "svgEnd": [
+                1335.24064171123,
+                839.572192513369
+              ]
+            },
+            {
+              "start": [
+                920,
+                245
+              ],
+              "end": [
+                645,
+                245
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  1349.144385026738,
+                  540.6417112299465
+                ],
+                [
+                  966.7914438502673,
+                  540.6417112299465
+                ]
+              ],
+              "svgStart": [
+                1349.144385026738,
+                540.6417112299465
+              ],
+              "svgEnd": [
+                966.7914438502673,
+                540.6417112299465
+              ]
+            },
+            {
+              "start": [
+                930,
+                1080
+              ],
+              "end": [
+                610,
+                1110
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  1363.048128342246,
+                  2226.604278074866
+                ],
+                [
+                  918.1283422459893,
+                  2268.31550802139
+                ]
+              ],
+              "svgStart": [
+                1363.048128342246,
+                2226.604278074866
+              ],
+              "svgEnd": [
+                918.1283422459893,
+                2268.31550802139
+              ]
+            },
+            {
+              "start": [
+                580,
+                870
+              ],
+              "end": [
+                920,
+                870
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  876.4171122994652,
+                  1934.6256684491977
+                ],
+                [
+                  1349.144385026738,
+                  1934.6256684491977
+                ]
+              ],
+              "svgStart": [
+                876.4171122994652,
+                1934.6256684491977
+              ],
+              "svgEnd": [
+                1349.144385026738,
+                1934.6256684491977
+              ]
+            }
+          ],
+          "notes": [
+            "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            1993
+          ],
+          "fontSize": 66,
+          "red": [
+            "外呼吸",
+            "內呼吸"
+          ],
+          "labels": [
+            {
+              "label": "外呼吸",
+              "anchor": null,
+              "textPosition": [
+                850,
+                111
+              ],
+              "align": "middle",
+              "lines": [
+                "外呼吸"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                993.1818181818181,
+                609.090909090909
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                1015.9090909090909,
+                298.4848484848485
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡",
+              "anchor": [
+                390,
+                365
+              ],
+              "textPosition": [
+                400,
+                476.5151515151515
+              ],
+              "align": "end",
+              "lines": [
+                "肺泡"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                720.4545454545455,
+                476.5151515151515
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺微血管",
+              "anchor": [
+                922,
+                340
+              ],
+              "textPosition": [
+                1300,
+                457.57575757575756
+              ],
+              "align": "start",
+              "lines": [
+                "肺微血管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                1123.4848484848485,
+                457.57575757575756
+              ],
+              "plate": 0
+            },
+            {
+              "label": "內呼吸",
+              "anchor": null,
+              "textPosition": [
+                850,
+                936.3030303030303
+              ],
+              "align": "middle",
+              "lines": [
+                "內呼吸"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                993.1818181818181,
+                1411.6666666666665
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                993.1818181818181,
+                1093.4848484848485
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "組織細胞",
+              "anchor": [
+                480,
+                1010
+              ],
+              "textPosition": [
+                400,
+                1260.151515151515
+              ],
+              "align": "end",
+              "lines": [
+                "組織細胞"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                788.6363636363636,
+                1260.151515151515
+              ],
+              "plate": 1
+            },
+            {
+              "label": "組織微血管",
+              "anchor": [
+                925,
+                1070
+              ],
+              "textPosition": [
+                1300,
+                1305.6060606060605
+              ],
+              "align": "start",
+              "lines": [
+                "組織微血管"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgAnchor": [
+                1125.7575757575758,
+                1305.6060606060605
+              ],
+              "plate": 1
+            },
+            {
+              "label": "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1697.121212121212
+              ],
+              "lines": [
+                "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": [
+                0,
+                0,
+                1122,
+                700
+              ],
+              "imageTransform": {
+                "x": 425.0,
+                "y": 200,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            },
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": [
+                0,
+                700,
+                1122,
+                702
+              ],
+              "imageTransform": {
+                "x": 425.0,
+                "y": 1025.3030303030303,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                600,
+                380
+              ],
+              "end": [
+                910,
+                460
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  879.5454545454545,
+                  487.8787878787879
+                ],
+                [
+                  1114.3939393939395,
+                  548.4848484848485
+                ]
+              ],
+              "svgStart": [
+                879.5454545454545,
+                487.8787878787879
+              ],
+              "svgEnd": [
+                1114.3939393939395,
+                548.4848484848485
+              ]
+            },
+            {
+              "start": [
+                920,
+                245
+              ],
+              "end": [
+                645,
+                245
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  1121.969696969697,
+                  385.6060606060606
+                ],
+                [
+                  913.6363636363636,
+                  385.6060606060606
+                ]
+              ],
+              "svgStart": [
+                1121.969696969697,
+                385.6060606060606
+              ],
+              "svgEnd": [
+                913.6363636363636,
+                385.6060606060606
+              ]
+            },
+            {
+              "start": [
+                930,
+                1080
+              ],
+              "end": [
+                610,
+                1110
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  1129.5454545454545,
+                  1313.181818181818
+                ],
+                [
+                  887.1212121212121,
+                  1335.909090909091
+                ]
+              ],
+              "svgStart": [
+                1129.5454545454545,
+                1313.181818181818
+              ],
+              "svgEnd": [
+                887.1212121212121,
+                1335.909090909091
+              ]
+            },
+            {
+              "start": [
+                580,
+                870
+              ],
+              "end": [
+                920,
+                870
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-04.png",
+              "svgPoints": [
+                [
+                  864.3939393939394,
+                  1154.090909090909
+                ],
+                [
+                  1121.969696969697,
+                  1154.090909090909
+                ]
+              ],
+              "svgStart": [
+                864.3939393939394,
+                1154.090909090909
+              ],
+              "svgEnd": [
+                1121.969696969697,
+                1154.090909090909
+              ]
+            }
+          ],
+          "notes": [
+            "外呼吸是肺泡與肺微血管間的氣體交換；內呼吸是血液與組織細胞間的交換。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-02": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3747
+      ],
+      "fontSize": 66,
+      "red": [
+        "O₂分壓",
+        "CO₂分壓",
+        "各自的分壓差"
+      ],
+      "labels": [
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            900.7486631016043,
+            1292.8288770053475
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            900.7486631016043,
+            1688.8716577540108
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "混合氣體",
+          "anchor": [
+            495,
+            235
+          ],
+          "textPosition": [
+            758.2352941176471,
+            423.7379679144385
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgAnchor": [
+            758.2352941176471,
+            401.7379679144385
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "高分壓",
+          "anchor": [
+            330,
+            660
+          ],
+          "textPosition": [
+            528.8235294117646,
+            1014.6470588235294
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgAnchor": [
+            528.8235294117646,
+            992.6470588235294
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "低分壓",
+          "anchor": [
+            870,
+            660
+          ],
+          "textPosition": [
+            1279.625668449198,
+            1014.6470588235294
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgAnchor": [
+            1279.625668449198,
+            992.6470588235294
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "高分壓",
+          "anchor": [
+            325,
+            1160
+          ],
+          "textPosition": [
+            521.8716577540107,
+            1709.8342245989304
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgAnchor": [
+            521.8716577540107,
+            1687.8342245989304
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "低分壓",
+          "anchor": [
+            870,
+            1160
+          ],
+          "textPosition": [
+            1279.625668449198,
+            1709.8342245989304
+          ],
+          "align": "middle",
+          "lines": [
+            "5"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgAnchor": [
+            1279.625668449198,
+            1687.8342245989304
+          ],
+          "number": 5,
+          "plate": 0
+        },
+        {
+          "label": "混合氣體",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2180.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "1　混合氣體"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "高分壓",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2295.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "2　高分壓"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "低分壓",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2410.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "3　低分壓"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "高分壓",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2525.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "4　高分壓"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "低分壓",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2640.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "5　低分壓"
+          ],
+          "renderAs": "number-key",
+          "number": 5
+        },
+        {
+          "label": "總壓",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2739.3048128342243
+          ],
+          "lines": [
+            "總壓"
+          ]
+        },
+        {
+          "label": "O₂分壓",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2917.3048128342243
+          ],
+          "lines": [
+            "O₂分壓"
+          ]
+        },
+        {
+          "label": "CO₂分壓",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3095.3048128342243
+          ],
+          "lines": [
+            "CO₂分壓"
+          ]
+        },
+        {
+          "label": "各自的分壓差",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3273.3048128342243
+          ],
+          "lines": [
+            "各自的分壓差"
+          ]
+        },
+        {
+          "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            3451.3048128342243
+          ],
+          "lines": [
+            "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 75,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "每格各自標高／低分壓，不共用腔室名稱。",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            290,
+            745
+          ],
+          "end": [
+            905,
+            745
+          ],
+          "color": "#D55E00",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgPoints": [
+            [
+              473.2085561497326,
+              1110.8288770053475
+            ],
+            [
+              1328.288770053476,
+              1110.8288770053475
+            ]
+          ],
+          "svgStart": [
+            473.2085561497326,
+            1110.8288770053475
+          ],
+          "svgEnd": [
+            1328.288770053476,
+            1110.8288770053475
+          ]
+        },
+        {
+          "start": [
+            290,
+            1260
+          ],
+          "end": [
+            905,
+            1260
+          ],
+          "color": "#0072B2",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+          "svgPoints": [
+            [
+              473.2085561497326,
+              1826.8716577540108
+            ],
+            [
+              1328.288770053476,
+              1826.8716577540108
+            ]
+          ],
+          "svgStart": [
+            473.2085561497326,
+            1826.8716577540108
+          ],
+          "svgEnd": [
+            1328.288770053476,
+            1826.8716577540108
+          ]
+        }
+      ],
+      "notes": [
+        "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3747
+          ],
+          "fontSize": 66,
+          "red": [
+            "O₂分壓",
+            "CO₂分壓",
+            "各自的分壓差"
+          ],
+          "labels": [
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                900.7486631016043,
+                1292.8288770053475
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                900.7486631016043,
+                1688.8716577540108
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "混合氣體",
+              "anchor": [
+                495,
+                235
+              ],
+              "textPosition": [
+                758.2352941176471,
+                423.7379679144385
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                758.2352941176471,
+                401.7379679144385
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "高分壓",
+              "anchor": [
+                330,
+                660
+              ],
+              "textPosition": [
+                528.8235294117646,
+                1014.6470588235294
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                528.8235294117646,
+                992.6470588235294
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "低分壓",
+              "anchor": [
+                870,
+                660
+              ],
+              "textPosition": [
+                1279.625668449198,
+                1014.6470588235294
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                1279.625668449198,
+                992.6470588235294
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "高分壓",
+              "anchor": [
+                325,
+                1160
+              ],
+              "textPosition": [
+                521.8716577540107,
+                1709.8342245989304
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                521.8716577540107,
+                1687.8342245989304
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "低分壓",
+              "anchor": [
+                870,
+                1160
+              ],
+              "textPosition": [
+                1279.625668449198,
+                1709.8342245989304
+              ],
+              "align": "middle",
+              "lines": [
+                "5"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                1279.625668449198,
+                1687.8342245989304
+              ],
+              "number": 5,
+              "plate": 0
+            },
+            {
+              "label": "混合氣體",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2180.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "1　混合氣體"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "高分壓",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2295.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "2　高分壓"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "低分壓",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2410.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "3　低分壓"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "高分壓",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2525.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "4　高分壓"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "低分壓",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2640.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "5　低分壓"
+              ],
+              "renderAs": "number-key",
+              "number": 5
+            },
+            {
+              "label": "總壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2739.3048128342243
+              ],
+              "lines": [
+                "總壓"
+              ]
+            },
+            {
+              "label": "O₂分壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2917.3048128342243
+              ],
+              "lines": [
+                "O₂分壓"
+              ]
+            },
+            {
+              "label": "CO₂分壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3095.3048128342243
+              ],
+              "lines": [
+                "CO₂分壓"
+              ]
+            },
+            {
+              "label": "各自的分壓差",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3273.3048128342243
+              ],
+              "lines": [
+                "各自的分壓差"
+              ]
+            },
+            {
+              "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                3451.3048128342243
+              ],
+              "lines": [
+                "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 75,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "每格各自標高／低分壓，不共用腔室名稱。",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                290,
+                745
+              ],
+              "end": [
+                905,
+                745
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgPoints": [
+                [
+                  473.2085561497326,
+                  1110.8288770053475
+                ],
+                [
+                  1328.288770053476,
+                  1110.8288770053475
+                ]
+              ],
+              "svgStart": [
+                473.2085561497326,
+                1110.8288770053475
+              ],
+              "svgEnd": [
+                1328.288770053476,
+                1110.8288770053475
+              ]
+            },
+            {
+              "start": [
+                290,
+                1260
+              ],
+              "end": [
+                905,
+                1260
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgPoints": [
+                [
+                  473.2085561497326,
+                  1826.8716577540108
+                ],
+                [
+                  1328.288770053476,
+                  1826.8716577540108
+                ]
+              ],
+              "svgStart": [
+                473.2085561497326,
+                1826.8716577540108
+              ],
+              "svgEnd": [
+                1328.288770053476,
+                1826.8716577540108
+              ]
+            }
+          ],
+          "notes": [
+            "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            2285
+          ],
+          "fontSize": 66,
+          "red": [
+            "O₂分壓",
+            "CO₂分壓",
+            "各自的分壓差"
+          ],
+          "labels": [
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                879.5454545454545,
+                734.0909090909091
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                879.5454545454545,
+                1120.4545454545455
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "混合氣體",
+              "anchor": [
+                495,
+                235
+              ],
+              "textPosition": [
+                400,
+                253.03030303030303
+              ],
+              "align": "end",
+              "lines": [
+                "混合氣體"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                800.0,
+                253.03030303030303
+              ],
+              "plate": 0
+            },
+            {
+              "label": "高分壓",
+              "anchor": [
+                330,
+                660
+              ],
+              "textPosition": [
+                400,
+                575.0
+              ],
+              "align": "end",
+              "lines": [
+                "高分壓"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                675.0,
+                575.0
+              ],
+              "plate": 0
+            },
+            {
+              "label": "高分壓",
+              "anchor": [
+                325,
+                1160
+              ],
+              "textPosition": [
+                400,
+                953.7878787878788
+              ],
+              "align": "end",
+              "lines": [
+                "高分壓"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                671.2121212121212,
+                953.7878787878788
+              ],
+              "plate": 0
+            },
+            {
+              "label": "低分壓",
+              "anchor": [
+                870,
+                660
+              ],
+              "textPosition": [
+                1300,
+                575.0
+              ],
+              "align": "start",
+              "lines": [
+                "低分壓"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                1084.090909090909,
+                575.0
+              ],
+              "plate": 0
+            },
+            {
+              "label": "低分壓",
+              "anchor": [
+                870,
+                1160
+              ],
+              "textPosition": [
+                1300,
+                953.7878787878788
+              ],
+              "align": "start",
+              "lines": [
+                "低分壓"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgAnchor": [
+                1084.090909090909,
+                953.7878787878788
+              ],
+              "plate": 0
+            },
+            {
+              "label": "總壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1277.121212121212
+              ],
+              "lines": [
+                "總壓"
+              ]
+            },
+            {
+              "label": "O₂分壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1455.121212121212
+              ],
+              "lines": [
+                "O₂分壓"
+              ]
+            },
+            {
+              "label": "CO₂分壓",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1633.121212121212
+              ],
+              "lines": [
+                "CO₂分壓"
+              ]
+            },
+            {
+              "label": "各自的分壓差",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1811.121212121212
+              ],
+              "lines": [
+                "各自的分壓差"
+              ]
+            },
+            {
+              "label": "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1989.121212121212
+              ],
+              "lines": [
+                "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 75,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "每格各自標高／低分壓，不共用腔室名稱。",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                290,
+                745
+              ],
+              "end": [
+                905,
+                745
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgPoints": [
+                [
+                  644.6969696969697,
+                  639.3939393939394
+                ],
+                [
+                  1110.6060606060605,
+                  639.3939393939394
+                ]
+              ],
+              "svgStart": [
+                644.6969696969697,
+                639.3939393939394
+              ],
+              "svgEnd": [
+                1110.6060606060605,
+                639.3939393939394
+              ]
+            },
+            {
+              "start": [
+                290,
+                1260
+              ],
+              "end": [
+                905,
+                1260
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-05.png",
+              "svgPoints": [
+                [
+                  644.6969696969697,
+                  1029.5454545454545
+                ],
+                [
+                  1110.6060606060605,
+                  1029.5454545454545
+                ]
+              ],
+              "svgStart": [
+                644.6969696969697,
+                1029.5454545454545
+              ],
+              "svgEnd": [
+                1110.6060606060605,
+                1029.5454545454545
+              ]
+            }
+          ],
+          "notes": [
+            "混合氣體中每種氣體各有自己的分壓；每種氣體依自己的分壓差擴散；氣體總壓不等於氧分壓。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-03": {
+      "state": null,
+      "viewBox": [
+        1700,
+        3115
+      ],
+      "fontSize": 66,
+      "red": [
+        "肺泡PO₂約100 mmHg",
+        "肺泡PCO₂約40 mmHg",
+        "入肺血PO₂約40 mmHg",
+        "入肺血PCO₂約45 mmHg"
+      ],
+      "labels": [
+        {
+          "label": "O₂",
+          "anchor": null,
+          "textPosition": [
+            1116.334058768412,
+            1201.1006792158082
+          ],
+          "align": "middle",
+          "lines": [
+            "O₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂",
+          "anchor": null,
+          "textPosition": [
+            369.56937799043067,
+            1166.8564593301435
+          ],
+          "align": "middle",
+          "lines": [
+            "CO₂"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "anchor": [
+            650,
+            455
+          ],
+          "textPosition": [
+            878.6124401913876,
+            663.0287081339713
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            878.6124401913876,
+            641.0287081339713
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "anchor": [
+            820,
+            570
+          ],
+          "textPosition": [
+            1090.0956937799042,
+            806.0909090909091
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            1090.0956937799042,
+            784.0909090909091
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "肺動脈",
+          "anchor": [
+            183,
+            332
+          ],
+          "textPosition": [
+            297.6555023923445,
+            510.0143540669857
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            297.6555023923445,
+            488.0143540669857
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "anchor": [
+            231,
+            727
+          ],
+          "textPosition": [
+            357.3684210526316,
+            1001.4019138755981
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            357.3684210526316,
+            979.4019138755981
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "anchor": [
+            387,
+            917
+          ],
+          "textPosition": [
+            551.4354066985646,
+            1237.7655502392345
+          ],
+          "align": "middle",
+          "lines": [
+            "5"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            551.4354066985646,
+            1215.7655502392345
+          ],
+          "number": 5,
+          "plate": 0
+        },
+        {
+          "label": "肺靜脈",
+          "anchor": [
+            1085,
+            370
+          ],
+          "textPosition": [
+            1419.7607655502393,
+            557.2870813397129
+          ],
+          "align": "middle",
+          "lines": [
+            "6"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgAnchor": [
+            1419.7607655502393,
+            535.2870813397129
+          ],
+          "number": 6,
+          "plate": 0
+        },
+        {
+          "label": "肺泡PO₂約100 mmHg",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1791.0
+          ],
+          "align": "start",
+          "lines": [
+            "1　肺泡PO₂約100 mmHg"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "肺泡PCO₂約40 mmHg",
+          "anchor": null,
+          "textPosition": [
+            90,
+            1906.0
+          ],
+          "align": "start",
+          "lines": [
+            "2　肺泡PCO₂約40 mmHg"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "肺動脈",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2021.0
+          ],
+          "align": "start",
+          "lines": [
+            "3　肺動脈"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "入肺血PO₂約40 mmHg",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2136.0
+          ],
+          "align": "start",
+          "lines": [
+            "4　入肺血PO₂約40 mmHg"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "入肺血PCO₂約45 mmHg",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2251.0
+          ],
+          "align": "start",
+          "lines": [
+            "5　入肺血PCO₂約45 mmHg"
+          ],
+          "renderAs": "number-key",
+          "number": 5
+        },
+        {
+          "label": "肺靜脈",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2366.0
+          ],
+          "align": "start",
+          "lines": [
+            "6　肺靜脈"
+          ],
+          "renderAs": "number-key",
+          "number": 6
+        },
+        {
+          "label": "離肺血PO₂約95 mmHg",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2465.0
+          ],
+          "lines": [
+            "離肺血PO₂約95 mmHg"
+          ]
+        },
+        {
+          "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2643.0
+          ],
+          "lines": [
+            "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "sourceSize": [
+            1254,
+            1254
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 75,
+            "scale": 1.244019138755981
+          },
+          "reviewNote": "",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            710,
+            760
+          ],
+          "end": [
+            715,
+            1020
+          ],
+          "color": "#D55E00",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgPoints": [
+            [
+              953.2535885167465,
+              1020.4545454545455
+            ],
+            [
+              959.4736842105264,
+              1343.8995215311006
+            ]
+          ],
+          "svgStart": [
+            953.2535885167465,
+            1020.4545454545455
+          ],
+          "svgEnd": [
+            959.4736842105264,
+            1343.8995215311006
+          ]
+        },
+        {
+          "start": [
+            490,
+            990
+          ],
+          "end": [
+            490,
+            730
+          ],
+          "color": "#0072B2",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+          "svgPoints": [
+            [
+              679.5693779904307,
+              1306.578947368421
+            ],
+            [
+              679.5693779904307,
+              983.133971291866
+            ]
+          ],
+          "svgStart": [
+            679.5693779904307,
+            1306.578947368421
+          ],
+          "svgEnd": [
+            679.5693779904307,
+            983.133971291866
+          ]
+        }
+      ],
+      "notes": [
+        "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            3115
+          ],
+          "fontSize": 66,
+          "red": [
+            "肺泡PO₂約100 mmHg",
+            "肺泡PCO₂約40 mmHg",
+            "入肺血PO₂約40 mmHg",
+            "入肺血PCO₂約45 mmHg"
+          ],
+          "labels": [
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                1116.334058768412,
+                1201.1006792158082
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                369.56937799043067,
+                1166.8564593301435
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺泡PO₂約100 mmHg",
+              "anchor": [
+                650,
+                455
+              ],
+              "textPosition": [
+                878.6124401913876,
+                663.0287081339713
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                878.6124401913876,
+                641.0287081339713
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "肺泡PCO₂約40 mmHg",
+              "anchor": [
+                820,
+                570
+              ],
+              "textPosition": [
+                1090.0956937799042,
+                806.0909090909091
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                1090.0956937799042,
+                784.0909090909091
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "肺動脈",
+              "anchor": [
+                183,
+                332
+              ],
+              "textPosition": [
+                297.6555023923445,
+                510.0143540669857
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                297.6555023923445,
+                488.0143540669857
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "入肺血PO₂約40 mmHg",
+              "anchor": [
+                231,
+                727
+              ],
+              "textPosition": [
+                357.3684210526316,
+                1001.4019138755981
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                357.3684210526316,
+                979.4019138755981
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "入肺血PCO₂約45 mmHg",
+              "anchor": [
+                387,
+                917
+              ],
+              "textPosition": [
+                551.4354066985646,
+                1237.7655502392345
+              ],
+              "align": "middle",
+              "lines": [
+                "5"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                551.4354066985646,
+                1215.7655502392345
+              ],
+              "number": 5,
+              "plate": 0
+            },
+            {
+              "label": "肺靜脈",
+              "anchor": [
+                1085,
+                370
+              ],
+              "textPosition": [
+                1419.7607655502393,
+                557.2870813397129
+              ],
+              "align": "middle",
+              "lines": [
+                "6"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                1419.7607655502393,
+                535.2870813397129
+              ],
+              "number": 6,
+              "plate": 0
+            },
+            {
+              "label": "肺泡PO₂約100 mmHg",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1791.0
+              ],
+              "align": "start",
+              "lines": [
+                "1　肺泡PO₂約100 mmHg"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "肺泡PCO₂約40 mmHg",
+              "anchor": null,
+              "textPosition": [
+                90,
+                1906.0
+              ],
+              "align": "start",
+              "lines": [
+                "2　肺泡PCO₂約40 mmHg"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "肺動脈",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2021.0
+              ],
+              "align": "start",
+              "lines": [
+                "3　肺動脈"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "入肺血PO₂約40 mmHg",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2136.0
+              ],
+              "align": "start",
+              "lines": [
+                "4　入肺血PO₂約40 mmHg"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "入肺血PCO₂約45 mmHg",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2251.0
+              ],
+              "align": "start",
+              "lines": [
+                "5　入肺血PCO₂約45 mmHg"
+              ],
+              "renderAs": "number-key",
+              "number": 5
+            },
+            {
+              "label": "肺靜脈",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2366.0
+              ],
+              "align": "start",
+              "lines": [
+                "6　肺靜脈"
+              ],
+              "renderAs": "number-key",
+              "number": 6
+            },
+            {
+              "label": "離肺血PO₂約95 mmHg",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2465.0
+              ],
+              "lines": [
+                "離肺血PO₂約95 mmHg"
+              ]
+            },
+            {
+              "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2643.0
+              ],
+              "lines": [
+                "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 75,
+                "scale": 1.244019138755981
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                710,
+                760
+              ],
+              "end": [
+                715,
+                1020
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgPoints": [
+                [
+                  953.2535885167465,
+                  1020.4545454545455
+                ],
+                [
+                  959.4736842105264,
+                  1343.8995215311006
+                ]
+              ],
+              "svgStart": [
+                953.2535885167465,
+                1020.4545454545455
+              ],
+              "svgEnd": [
+                959.4736842105264,
+                1343.8995215311006
+              ]
+            },
+            {
+              "start": [
+                490,
+                990
+              ],
+              "end": [
+                490,
+                730
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgPoints": [
+                [
+                  679.5693779904307,
+                  1306.578947368421
+                ],
+                [
+                  679.5693779904307,
+                  983.133971291866
+                ]
+              ],
+              "svgStart": [
+                679.5693779904307,
+                1306.578947368421
+              ],
+              "svgEnd": [
+                679.5693779904307,
+                983.133971291866
+              ]
+            }
+          ],
+          "notes": [
+            "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            1759
+          ],
+          "fontSize": 66,
+          "red": [
+            "入肺血PO₂約40 mmHg",
+            "入肺血PCO₂約45 mmHg",
+            "肺泡PO₂約100 mmHg",
+            "肺泡PCO₂約40 mmHg"
+          ],
+          "labels": [
+            {
+              "label": "O₂",
+              "anchor": null,
+              "textPosition": [
+                967.2647527910685,
+                657.9346092503987
+              ],
+              "align": "middle",
+              "lines": [
+                "O₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "CO₂",
+              "anchor": null,
+              "textPosition": [
+                757.1371610845295,
+                481.6985645933014
+              ],
+              "align": "middle",
+              "lines": [
+                "CO₂"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺動脈",
+              "anchor": [
+                183,
+                332
+              ],
+              "textPosition": [
+                400,
+                300.03987240829343
+              ],
+              "align": "end",
+              "lines": [
+                "肺動脈"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                549.0430622009569,
+                300.03987240829343
+              ],
+              "plate": 0
+            },
+            {
+              "label": "入肺血PO₂約40 mmHg",
+              "anchor": [
+                231,
+                727
+              ],
+              "textPosition": [
+                400,
+                567.7830940988836
+              ],
+              "align": "end",
+              "lines": [
+                "入肺血",
+                "PO₂約40 mmHg"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                581.578947368421,
+                567.7830940988836
+              ],
+              "plate": 0
+            },
+            {
+              "label": "入肺血PCO₂約45 mmHg",
+              "anchor": [
+                387,
+                917
+              ],
+              "textPosition": [
+                400,
+                768.5430940988836
+              ],
+              "align": "end",
+              "lines": [
+                "入肺血",
+                "PCO₂約45 mmHg"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                687.3205741626793,
+                696.5709728867623
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺靜脈",
+              "anchor": [
+                1085,
+                370
+              ],
+              "textPosition": [
+                1300,
+                325.79744816586924
+              ],
+              "align": "start",
+              "lines": [
+                "肺靜脈"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                1160.4465709728865,
+                325.79744816586924
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺泡PO₂約100 mmHg",
+              "anchor": [
+                650,
+                455
+              ],
+              "textPosition": [
+                1300,
+                448.67744816586924
+              ],
+              "align": "start",
+              "lines": [
+                "肺泡",
+                "PO₂約100 mmHg"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                865.5901116427432,
+                383.41307814992024
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺泡PCO₂約40 mmHg",
+              "anchor": [
+                820,
+                570
+              ],
+              "textPosition": [
+                1300,
+                649.4374481658692
+              ],
+              "align": "start",
+              "lines": [
+                "肺泡",
+                "PCO₂約40 mmHg"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgAnchor": [
+                980.8213716108453,
+                461.3636363636363
+              ],
+              "plate": 0
+            },
+            {
+              "label": "離肺血PO₂約95 mmHg",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1109.3030940988835
+              ],
+              "lines": [
+                "離肺血PO₂約95 mmHg"
+              ]
+            },
+            {
+              "label": "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1287.3030940988835
+              ],
+              "lines": [
+                "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "sourceSize": [
+                1254,
+                1254
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 75,
+                "scale": 0.6778309409888357
+              },
+              "reviewNote": "",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                710,
+                760
+              ],
+              "end": [
+                715,
+                1020
+              ],
+              "color": "#D55E00",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgPoints": [
+                [
+                  906.2599681020733,
+                  590.1515151515151
+                ],
+                [
+                  909.6491228070175,
+                  766.3875598086124
+                ]
+              ],
+              "svgStart": [
+                906.2599681020733,
+                590.1515151515151
+              ],
+              "svgEnd": [
+                909.6491228070175,
+                766.3875598086124
+              ]
+            },
+            {
+              "start": [
+                490,
+                990
+              ],
+              "end": [
+                490,
+                730
+              ],
+              "color": "#0072B2",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-06.png",
+              "svgPoints": [
+                [
+                  757.1371610845295,
+                  746.0526315789473
+                ],
+                [
+                  757.1371610845295,
+                  569.8165869218501
+                ]
+              ],
+              "svgStart": [
+                757.1371610845295,
+                746.0526315789473
+              ],
+              "svgEnd": [
+                757.1371610845295,
+                569.8165869218501
+              ]
+            }
+          ],
+          "notes": [
+            "肺泡 PO₂ 約 100 mmHg，高於經肺動脈入肺的缺氧血約 40，氧擴散入血；血中 PCO₂ 約 45，高於肺泡約 40，CO₂ 移入肺泡；離肺的動脈血 PO₂ 約 95。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-06": {
+      "state": null,
+      "viewBox": [
+        1700,
+        2920
+      ],
+      "fontSize": 66,
+      "red": [
+        "血流轉向",
+        "局部低氧",
+        "肺小動脈收縮"
+      ],
+      "labels": [
+        {
+          "label": "血流轉向",
+          "anchor": null,
+          "textPosition": [
+            257.7005347593583,
+            1173.3957219251338
+          ],
+          "align": "start",
+          "lines": [
+            "血流轉向"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "局部低氧",
+          "anchor": [
+            480,
+            360
+          ],
+          "textPosition": [
+            737.379679144385,
+            597.5347593582887
+          ],
+          "align": "middle",
+          "lines": [
+            "1"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "svgAnchor": [
+            737.379679144385,
+            575.5347593582887
+          ],
+          "number": 1,
+          "plate": 0
+        },
+        {
+          "label": "肺小動脈收縮",
+          "anchor": [
+            185,
+            245
+          ],
+          "textPosition": [
+            327.2192513368984,
+            437.6417112299465
+          ],
+          "align": "middle",
+          "lines": [
+            "2"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "svgAnchor": [
+            327.2192513368984,
+            415.6417112299465
+          ],
+          "number": 2,
+          "plate": 0
+        },
+        {
+          "label": "血流減少",
+          "anchor": [
+            233,
+            366
+          ],
+          "textPosition": [
+            393.9572192513369,
+            605.8770053475936
+          ],
+          "align": "middle",
+          "lines": [
+            "3"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "svgAnchor": [
+            393.9572192513369,
+            583.8770053475936
+          ],
+          "number": 3,
+          "plate": 0
+        },
+        {
+          "label": "通氣良好",
+          "anchor": [
+            480,
+            1050
+          ],
+          "textPosition": [
+            737.379679144385,
+            1556.8930481283423
+          ],
+          "align": "middle",
+          "lines": [
+            "4"
+          ],
+          "renderAs": "number-marker",
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "svgAnchor": [
+            737.379679144385,
+            1534.8930481283423
+          ],
+          "number": 4,
+          "plate": 0
+        },
+        {
+          "label": "局部低氧",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2180.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "1　局部低氧"
+          ],
+          "renderAs": "number-key",
+          "number": 1
+        },
+        {
+          "label": "肺小動脈收縮",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2295.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "2　肺小動脈收縮"
+          ],
+          "renderAs": "number-key",
+          "number": 2
+        },
+        {
+          "label": "血流減少",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2410.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "3　血流減少"
+          ],
+          "renderAs": "number-key",
+          "number": 3
+        },
+        {
+          "label": "通氣良好",
+          "anchor": null,
+          "textPosition": [
+            90,
+            2525.3048128342243
+          ],
+          "align": "start",
+          "lines": [
+            "4　通氣良好"
+          ],
+          "renderAs": "number-key",
+          "number": 4
+        },
+        {
+          "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            2624.3048128342243
+          ],
+          "lines": [
+            "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+          ]
+        }
+      ],
+      "plates": [
+        {
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "crop": null,
+          "imageTransform": {
+            "x": 70.0,
+            "y": 75,
+            "scale": 1.3903743315508021
+          },
+          "reviewNote": "上格標「局部低氧」。",
+          "canvas": null,
+          "numberedKey": true
+        }
+      ],
+      "arrows": [
+        {
+          "start": [
+            40,
+            560
+          ],
+          "end": [
+            40,
+            965
+          ],
+          "color": "#17212b",
+          "width": 12,
+          "signal": false,
+          "terminal": "arrow",
+          "route": null,
+          "directLabel": "血流轉向",
+          "labelAt": [
+            135,
+            790
+          ],
+          "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+          "svgPoints": [
+            [
+              125.6149732620321,
+              853.6096256684492
+            ],
+            [
+              125.6149732620321,
+              1416.711229946524
+            ]
+          ],
+          "svgStart": [
+            125.6149732620321,
+            853.6096256684492
+          ],
+          "svgEnd": [
+            125.6149732620321,
+            1416.711229946524
+          ]
+        }
+      ],
+      "notes": [
+        "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+      ],
+      "data": [],
+      "repair": "R2-1–R2-4",
+      "layouts": {
+        "mobile": {
+          "state": null,
+          "viewBox": [
+            1700,
+            2920
+          ],
+          "fontSize": 66,
+          "red": [
+            "血流轉向",
+            "局部低氧",
+            "肺小動脈收縮"
+          ],
+          "labels": [
+            {
+              "label": "血流轉向",
+              "anchor": null,
+              "textPosition": [
+                257.7005347593583,
+                1173.3957219251338
+              ],
+              "align": "start",
+              "lines": [
+                "血流轉向"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "局部低氧",
+              "anchor": [
+                480,
+                360
+              ],
+              "textPosition": [
+                737.379679144385,
+                597.5347593582887
+              ],
+              "align": "middle",
+              "lines": [
+                "1"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                737.379679144385,
+                575.5347593582887
+              ],
+              "number": 1,
+              "plate": 0
+            },
+            {
+              "label": "肺小動脈收縮",
+              "anchor": [
+                185,
+                245
+              ],
+              "textPosition": [
+                327.2192513368984,
+                437.6417112299465
+              ],
+              "align": "middle",
+              "lines": [
+                "2"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                327.2192513368984,
+                415.6417112299465
+              ],
+              "number": 2,
+              "plate": 0
+            },
+            {
+              "label": "血流減少",
+              "anchor": [
+                233,
+                366
+              ],
+              "textPosition": [
+                393.9572192513369,
+                605.8770053475936
+              ],
+              "align": "middle",
+              "lines": [
+                "3"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                393.9572192513369,
+                583.8770053475936
+              ],
+              "number": 3,
+              "plate": 0
+            },
+            {
+              "label": "通氣良好",
+              "anchor": [
+                480,
+                1050
+              ],
+              "textPosition": [
+                737.379679144385,
+                1556.8930481283423
+              ],
+              "align": "middle",
+              "lines": [
+                "4"
+              ],
+              "renderAs": "number-marker",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                737.379679144385,
+                1534.8930481283423
+              ],
+              "number": 4,
+              "plate": 0
+            },
+            {
+              "label": "局部低氧",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2180.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "1　局部低氧"
+              ],
+              "renderAs": "number-key",
+              "number": 1
+            },
+            {
+              "label": "肺小動脈收縮",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2295.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "2　肺小動脈收縮"
+              ],
+              "renderAs": "number-key",
+              "number": 2
+            },
+            {
+              "label": "血流減少",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2410.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "3　血流減少"
+              ],
+              "renderAs": "number-key",
+              "number": 3
+            },
+            {
+              "label": "通氣良好",
+              "anchor": null,
+              "textPosition": [
+                90,
+                2525.3048128342243
+              ],
+              "align": "start",
+              "lines": [
+                "4　通氣良好"
+              ],
+              "renderAs": "number-key",
+              "number": 4
+            },
+            {
+              "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                2624.3048128342243
+              ],
+              "lines": [
+                "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 70.0,
+                "y": 75,
+                "scale": 1.3903743315508021
+              },
+              "reviewNote": "上格標「局部低氧」。",
+              "canvas": null,
+              "numberedKey": true
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                40,
+                560
+              ],
+              "end": [
+                40,
+                965
+              ],
+              "color": "#17212b",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "directLabel": "血流轉向",
+              "labelAt": [
+                135,
+                790
+              ],
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgPoints": [
+                [
+                  125.6149732620321,
+                  853.6096256684492
+                ],
+                [
+                  125.6149732620321,
+                  1416.711229946524
+                ]
+              ],
+              "svgStart": [
+                125.6149732620321,
+                853.6096256684492
+              ],
+              "svgEnd": [
+                125.6149732620321,
+                1416.711229946524
+              ]
+            }
+          ],
+          "notes": [
+            "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        },
+        "desktop": {
+          "state": null,
+          "viewBox": [
+            1700,
+            1573
+          ],
+          "fontSize": 66,
+          "red": [
+            "血流轉向",
+            "肺小動脈收縮",
+            "局部低氧"
+          ],
+          "labels": [
+            {
+              "label": "血流轉向",
+              "anchor": null,
+              "textPosition": [
+                527.2727272727273,
+                673.4848484848485
+              ],
+              "align": "start",
+              "lines": [
+                "血流轉向"
+              ],
+              "renderAs": "label"
+            },
+            {
+              "label": "肺小動脈收縮",
+              "anchor": [
+                185,
+                245
+              ],
+              "textPosition": [
+                400,
+                260.6060606060606
+              ],
+              "align": "end",
+              "lines": [
+                "肺小動脈收縮"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                565.1515151515151,
+                260.6060606060606
+              ],
+              "plate": 0
+            },
+            {
+              "label": "血流減少",
+              "anchor": [
+                233,
+                366
+              ],
+              "textPosition": [
+                400,
+                383.4860606060606
+              ],
+              "align": "end",
+              "lines": [
+                "血流減少"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                601.5151515151515,
+                352.27272727272725
+              ],
+              "plate": 0
+            },
+            {
+              "label": "局部低氧",
+              "anchor": [
+                480,
+                360
+              ],
+              "textPosition": [
+                1300,
+                347.72727272727275
+              ],
+              "align": "start",
+              "lines": [
+                "局部低氧"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                788.6363636363636,
+                347.72727272727275
+              ],
+              "plate": 0
+            },
+            {
+              "label": "通氣良好",
+              "anchor": [
+                480,
+                1050
+              ],
+              "textPosition": [
+                1300,
+                870.4545454545455
+              ],
+              "align": "start",
+              "lines": [
+                "通氣良好"
+              ],
+              "renderAs": "direct-label",
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgAnchor": [
+                788.6363636363636,
+                870.4545454545455
+              ],
+              "plate": 0
+            },
+            {
+              "label": "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。",
+              "anchor": null,
+              "renderAs": "html",
+              "textPosition": [
+                50,
+                1277.121212121212
+              ],
+              "lines": [
+                "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+              ]
+            }
+          ],
+          "plates": [
+            {
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "sourceSize": [
+                1122,
+                1402
+              ],
+              "crop": null,
+              "imageTransform": {
+                "x": 425.0,
+                "y": 75,
+                "scale": 0.7575757575757576
+              },
+              "reviewNote": "上格標「局部低氧」。",
+              "canvas": null,
+              "numberedKey": false
+            }
+          ],
+          "arrows": [
+            {
+              "start": [
+                40,
+                560
+              ],
+              "end": [
+                40,
+                965
+              ],
+              "color": "#17212b",
+              "width": 12,
+              "signal": false,
+              "terminal": "arrow",
+              "route": null,
+              "directLabel": "血流轉向",
+              "labelAt": [
+                135,
+                790
+              ],
+              "source": "materials-src/figures/raster/gas-exchange/incoming/IMG-gas-exchange-07.png",
+              "svgPoints": [
+                [
+                  455.3030303030303,
+                  499.24242424242425
+                ],
+                [
+                  455.3030303030303,
+                  806.060606060606
+                ]
+              ],
+              "svgStart": [
+                455.3030303030303,
+                499.24242424242425
+              ],
+              "svgEnd": [
+                455.3030303030303,
+                806.060606060606
+              ]
+            }
+          ],
+          "notes": [
+            "肺泡局部低氧使該處肺小動脈收縮，減少流向通氣不佳處的血流，改善通氣與灌流的配合。"
+          ],
+          "data": [],
+          "repair": "S2-1–S2-14"
+        }
+      },
+      "breakpoint": 768
+    },
+    "node-04": {
+      "state": null,
+      "viewBox": [
+        1700,
+        1562
+      ],
+      "fontSize": 66,
+      "red": [
+        "膜面積↑",
+        "擴散↑",
+        "膜厚度↑",
+        "擴散↓"
+      ],
+      "labels": [
+        {
+          "label": "膜面積↑",
+          "anchor": null,
+          "textPosition": [
+            425,
+            180
+          ],
+          "align": "middle",
+          "lines": [
+            "膜面積↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "分壓差↑",
+          "anchor": null,
+          "textPosition": [
+            425,
+            305
+          ],
+          "align": "middle",
+          "lines": [
+            "分壓差↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "溶解度↑",
+          "anchor": null,
+          "textPosition": [
+            425,
+            430
+          ],
+          "align": "middle",
+          "lines": [
+            "溶解度↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "擴散↑",
+          "anchor": null,
+          "textPosition": [
+            425,
+            850
+          ],
+          "align": "middle",
+          "lines": [
+            "擴散↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "膜厚度↑",
+          "anchor": null,
+          "textPosition": [
+            1275,
+            180
+          ],
+          "align": "middle",
+          "lines": [
+            "膜厚度↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "分子量平方根↑",
+          "anchor": null,
+          "textPosition": [
+            1275,
+            305
+          ],
+          "align": "middle",
+          "lines": [
+            "分子量平方根↑"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "擴散↓",
+          "anchor": null,
+          "textPosition": [
+            1275,
+            850
+          ],
+          "align": "middle",
+          "lines": [
+            "擴散↓"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "CO₂溶解度約為O₂的20倍",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1000
+          ],
+          "lines": [
+            "CO₂溶解度約為O₂的20倍"
+          ]
+        },
+        {
+          "label": "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1178
+          ],
+          "lines": [
+            "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "膜面積、分壓差、溶解度增加 → 擴散增加；膜厚度、分子量（平方根）增加 → 擴散減少；CO₂ 溶解度約為 O₂ 的 20 倍。"
+      ],
+      "data": [],
+      "repair": "S2-1–S2-14"
+    },
+    "node-05": {
+      "state": null,
+      "viewBox": [
+        1700,
+        2401
+      ],
+      "fontSize": 66,
+      "red": [
+        "肺尖0.24/0.07≈3.4",
+        "肺底0.82/1.29≈0.63"
+      ],
+      "labels": [
+        {
+          "label": "站立",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            45
+          ],
+          "lines": [
+            "站立"
+          ]
+        },
+        {
+          "label": "肺尖0.24/0.07≈3.4",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            223
+          ],
+          "lines": [
+            "肺尖0.24/0.07≈3.4"
+          ]
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            467
+          ],
+          "align": "middle",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺尖 通氣V 0.24",
+          "anchor": null,
+          "textPosition": [
+            70,
+            592
+          ],
+          "align": "start",
+          "lines": [
+            "肺尖 通氣V 0.24"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺尖 血流Q 0.07",
+          "anchor": null,
+          "textPosition": [
+            70,
+            867
+          ],
+          "align": "start",
+          "lines": [
+            "肺尖 血流Q 0.07"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺底0.82/1.29≈0.63",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1076
+          ],
+          "lines": [
+            "肺底0.82/1.29≈0.63"
+          ]
+        },
+        {
+          "label": "通氣V／血流Q（L/分）",
+          "anchor": null,
+          "textPosition": [
+            850,
+            1320
+          ],
+          "align": "middle",
+          "lines": [
+            "通氣V／血流Q（L/分）"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺底 通氣V 0.82",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1445
+          ],
+          "align": "start",
+          "lines": [
+            "肺底 通氣V 0.82"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "肺底 血流Q 1.29",
+          "anchor": null,
+          "textPosition": [
+            70,
+            1720
+          ],
+          "align": "start",
+          "lines": [
+            "肺底 血流Q 1.29"
+          ],
+          "renderAs": "label"
+        },
+        {
+          "label": "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。",
+          "anchor": null,
+          "renderAs": "html",
+          "textPosition": [
+            50,
+            1929
+          ],
+          "lines": [
+            "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。"
+          ]
+        }
+      ],
+      "plates": [],
+      "arrows": [],
+      "notes": [
+        "V/Q 比較肺泡通氣量與血流量；站立時肺底的通氣與血流都多於肺尖，但血流差異更大，肺尖 0.24/0.07≈3.4、肺底 0.82/1.29≈0.63。"
+      ],
+      "data": [
+        {
+          "type": "bar",
+          "label": "肺尖 通氣V 0.24",
+          "value": 0.24,
+          "max": 1.29,
+          "width": 279.06976744186045,
+          "unit": "L/分"
+        },
+        {
+          "type": "bar",
+          "label": "肺尖 血流Q 0.07",
+          "value": 0.07,
+          "max": 1.29,
+          "width": 81.39534883720931,
+          "unit": "L/分"
+        },
+        {
+          "type": "bar",
+          "label": "肺底 通氣V 0.82",
+          "value": 0.82,
+          "max": 1.29,
+          "width": 953.4883720930233,
+          "unit": "L/分"
+        },
+        {
+          "type": "bar",
+          "label": "肺底 血流Q 1.29",
+          "value": 1.29,
+          "max": 1.29,
+          "width": 1500.0,
+          "unit": "L/分"
+        }
+      ],
+      "repair": "S2-1–S2-14"
+    }
+  }
+}
