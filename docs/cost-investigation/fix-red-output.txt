@@ -1,0 +1,126 @@
+TAP version 13
+# (node:91373) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: learning: burst becomes one request; no acknowledgement before server success; duplicate IDs stay unique
+ok 1 - learning: burst becomes one request; no acknowledgement before server success; duplicate IDs stay unique
+  ---
+  duration_ms: 2.21575
+  type: 'test'
+  ...
+# Subtest: learning: completion flushes immediately, completion callback waits for server and fires once
+ok 2 - learning: completion flushes immediately, completion callback waits for server and fires once
+  ---
+  duration_ms: 0.794958
+  type: 'test'
+  ...
+# Subtest: queue: failed delivery is not acknowledged and reconnect retries original IDs
+ok 3 - queue: failed delivery is not acknowledged and reconnect retries original IDs
+  ---
+  duration_ms: 0.552334
+  type: 'test'
+  ...
+# Subtest: queue: partial acceptance only acknowledges confirmed IDs and retries the remainder
+ok 4 - queue: partial acceptance only acknowledges confirmed IDs and retries the remainder
+  ---
+  duration_ms: 0.403833
+  type: 'test'
+  ...
+# Subtest: research: 20 single events share one request without sending uid or changing payload IDs
+ok 5 - research: 20 single events share one request without sending uid or changing payload IDs
+  ---
+  duration_ms: 0.895
+  type: 'test'
+  ...
+# Subtest: queue: replay after reopening and final navigation flush preserve IDs; no callbacks after close
+ok 6 - queue: replay after reopening and final navigation flush preserve IDs; no callbacks after close
+  ---
+  duration_ms: 0.376959
+  type: 'test'
+  ...
+# Subtest: queue: full batches never exceed backend limit and storage failure forces immediate cloud delivery
+ok 7 - queue: full batches never exceed backend limit and storage failure forces immediate cloud delivery
+  ---
+  duration_ms: 1.757459
+  type: 'test'
+  ...
+# Subtest: learning preview neither stores events nor calls cloud
+ok 8 - learning preview neither stores events nor calls cloud
+  ---
+  duration_ms: 0.299708
+  type: 'test'
+  ...
+# Subtest: poll: visible idle makes 6 requests/minute; hidden/offline stops and resuming refreshes immediately
+ok 9 - poll: visible idle makes 6 requests/minute; hidden/offline stops and resuming refreshes immediately
+  ---
+  duration_ms: 1.292709
+  type: 'test'
+  ...
+# Subtest: poll: active interval stays 2 seconds; reconnect never overlaps an outstanding request; cleanup invalidates late response
+ok 10 - poll: active interval stays 2 seconds; reconnect never overlaps an outstanding request; cleanup invalidates late response
+  ---
+  duration_ms: 0.58275
+  type: 'test'
+  ...
+# Subtest: queue: completion from a closed view cannot erase newer durable events from a reopened view
+ok 11 - queue: completion from a closed view cannot erase newer durable events from a reopened view
+  ---
+  duration_ms: 0.537208
+  type: 'test'
+  ...
+# Subtest: learning: actual server committed but response lost; replay acknowledges all IDs without double counting
+ok 12 - learning: actual server committed but response lost; replay acknowledges all IDs without double counting
+  ---
+  duration_ms: 308.983375
+  type: 'test'
+  ...
+# Subtest: research: actual server committed but response lost; replay acknowledges all IDs without double counting
+not ok 13 - research: actual server committed but response lost; replay acknowledges all IDs without double counting
+  ---
+  duration_ms: 3.424833
+  type: 'test'
+  location: '/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/reduce-function-costs/tests/function-costs.test.ts:1:10722'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + [
+    +   {
+    +     action: 'exposed',
+    +     attemptId: 'attempt',
+    +     clientAt: 100,
+    +     format: 'guided',
+    +     id: 'e1',
+    +     questionId: 'q1',
+    +     seconds: 3
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'e1'
+      questionId: 'q1'
+      attemptId: 'attempt'
+      clientAt: 100
+      format: 'guided'
+      action: 'exposed'
+      seconds: 3
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/reduce-function-costs/tests/function-costs.test.ts:257:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 12
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 460.769125

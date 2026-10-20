@@ -1,0 +1,150 @@
+TAP version 13
+# (node:91834) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: learning: burst becomes one request; no acknowledgement before server success; duplicate IDs stay unique
+ok 1 - learning: burst becomes one request; no acknowledgement before server success; duplicate IDs stay unique
+  ---
+  duration_ms: 3.417334
+  type: 'test'
+  ...
+# Subtest: learning: completion flushes immediately, completion callback waits for server and fires once
+ok 2 - learning: completion flushes immediately, completion callback waits for server and fires once
+  ---
+  duration_ms: 1.067209
+  type: 'test'
+  ...
+# Subtest: queue: failed delivery is not acknowledged and reconnect retries original IDs
+ok 3 - queue: failed delivery is not acknowledged and reconnect retries original IDs
+  ---
+  duration_ms: 0.759542
+  type: 'test'
+  ...
+# Subtest: queue: partial acceptance only acknowledges confirmed IDs and retries the remainder
+ok 4 - queue: partial acceptance only acknowledges confirmed IDs and retries the remainder
+  ---
+  duration_ms: 0.739417
+  type: 'test'
+  ...
+# Subtest: research: 20 single events share one request without sending uid or changing payload IDs
+ok 5 - research: 20 single events share one request without sending uid or changing payload IDs
+  ---
+  duration_ms: 1.405958
+  type: 'test'
+  ...
+# Subtest: queue: replay after reopening and final navigation flush preserve IDs; no callbacks after close
+ok 6 - queue: replay after reopening and final navigation flush preserve IDs; no callbacks after close
+  ---
+  duration_ms: 0.560084
+  type: 'test'
+  ...
+# Subtest: queue: full batches never exceed backend limit and storage failure forces immediate cloud delivery
+ok 7 - queue: full batches never exceed backend limit and storage failure forces immediate cloud delivery
+  ---
+  duration_ms: 3.119333
+  type: 'test'
+  ...
+# Subtest: learning preview neither stores events nor calls cloud
+ok 8 - learning preview neither stores events nor calls cloud
+  ---
+  duration_ms: 0.497458
+  type: 'test'
+  ...
+# Subtest: poll: visible idle makes 6 requests/minute; hidden/offline stops and resuming refreshes immediately
+ok 9 - poll: visible idle makes 6 requests/minute; hidden/offline stops and resuming refreshes immediately
+  ---
+  duration_ms: 1.981916
+  type: 'test'
+  ...
+# Subtest: poll: active interval stays 2 seconds; reconnect never overlaps an outstanding request; cleanup invalidates late response
+ok 10 - poll: active interval stays 2 seconds; reconnect never overlaps an outstanding request; cleanup invalidates late response
+  ---
+  duration_ms: 1.036292
+  type: 'test'
+  ...
+# Subtest: queue: completion from a closed view cannot erase newer durable events from a reopened view
+ok 11 - queue: completion from a closed view cannot erase newer durable events from a reopened view
+  ---
+  duration_ms: 0.855041
+  type: 'test'
+  ...
+# Subtest: learning: actual server committed but response lost; replay acknowledges all IDs without double counting
+ok 12 - learning: actual server committed but response lost; replay acknowledges all IDs without double counting
+  ---
+  duration_ms: 487.384292
+  type: 'test'
+  ...
+# Subtest: research: actual server committed but response lost; replay acknowledges all IDs without double counting
+ok 13 - research: actual server committed but response lost; replay acknowledges all IDs without double counting
+  ---
+  duration_ms: 1.213709
+  type: 'test'
+  ...
+# Subtest: queue: functions/invalid-argument drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+ok 14 - queue: functions/invalid-argument drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+  ---
+  duration_ms: 0.479416
+  type: 'test'
+  ...
+# Subtest: queue: functions/failed-precondition drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+ok 15 - queue: functions/failed-precondition drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+  ---
+  duration_ms: 0.340959
+  type: 'test'
+  ...
+# Subtest: queue: permission-denied drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+ok 16 - queue: permission-denied drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen
+  ---
+  duration_ms: 0.349916
+  type: 'test'
+  ...
+# Subtest: queue: functions/unavailable remains durable and retries successfully
+ok 17 - queue: functions/unavailable remains durable and retries successfully
+  ---
+  duration_ms: 0.458042
+  type: 'test'
+  ...
+# Subtest: queue: functions/deadline-exceeded remains durable and retries successfully
+ok 18 - queue: functions/deadline-exceeded remains durable and retries successfully
+  ---
+  duration_ms: 0.24525
+  type: 'test'
+  ...
+# Subtest: queue: functions/internal remains durable and retries successfully
+ok 19 - queue: functions/internal remains durable and retries successfully
+  ---
+  duration_ms: 0.31525
+  type: 'test'
+  ...
+# Subtest: queue: functions/network-request-failed remains durable and retries successfully
+ok 20 - queue: functions/network-request-failed remains durable and retries successfully
+  ---
+  duration_ms: 0.270916
+  type: 'test'
+  ...
+# Subtest: queue: uncoded network failure remains durable and retries successfully
+ok 21 - queue: uncoded network failure remains durable and retries successfully
+  ---
+  duration_ms: 0.227042
+  type: 'test'
+  ...
+# Subtest: learning: rejected old material version asks to reopen, does not complete or retry
+ok 22 - learning: rejected old material version asks to reopen, does not complete or retry
+  ---
+  duration_ms: 0.390958
+  type: 'test'
+  ...
+# Subtest: research: permanent refusal is reported once and fresh future IDs can still be saved
+ok 23 - research: permanent refusal is reported once and fresh future IDs can still be saved
+  ---
+  duration_ms: 0.4345
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 691.44775

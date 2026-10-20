@@ -879,7 +879,8 @@ export const saveExplanationResearchEvents = onCall(options, async (req) => {
       tx.set(root, { uid: p.uid, classId: p.classId, name: p.name, studentId: p.studentId, unitId, version, summary, startedAt: current.data()?.startedAt || Date.now(), updatedAt: Date.now() }, { merge: true });
       fresh.forEach((e: any, i: number) => tx.create(refs[events.indexOf(e)], { ...e, receivedAt: Date.now() }));
     }
-    return { accepted: fresh.map((e: any) => e.id), summary };
+    // Existing IDs are confirmed too: a previous commit may have lost its response.
+    return { accepted: events.map((e: any) => e.id), summary };
   });
 });
 export const getExplanationResearchEvidence = onCall(options, async (req) => {

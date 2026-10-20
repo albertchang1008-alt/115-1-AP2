@@ -22,6 +22,12 @@ export function learningBridge(api: API, context: { courseId: string; unitId: st
       if (events.some((e) => e.type === 'completed')) completed();
       changed(remaining ? '紀錄待同步' : '學習紀錄已同步');
     },
+    rejected: (error) => {
+      const message = String((error as { message?: string })?.message || '');
+      changed(message.includes('教材版本已更新')
+        ? '教材版本已更新，這批紀錄未儲存，請重新開啟教材。'
+        : '學習紀錄遭伺服器拒絕，已停止重送；請重新開啟教材或聯絡教師。');
+    },
     failed: () => { if (!errorShown) changed('學習紀錄暫時無法儲存'); errorShown = true; },
   });
   return {

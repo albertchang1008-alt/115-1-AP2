@@ -201,3 +201,137 @@ test('queue: completion from a closed view cannot erase newer durable events fro
   assert.ok(JSON.parse(env.data.get('same-view')!).some((e: any) => e.id === 'new'));
   finishOld(['new']); await tick();
 });
+
+// Use real callable handlers and transaction code; only Firestore I/O is in memory.
+async function actualEventServer(t: TestContext) {
+  const { createRequire } = await import('node:module');
+  const require = createRequire(import.meta.url);
+  process.env.FIREBASE_CONFIG = JSON.stringify({ projectId: 'demo-course-platform' });
+  const handlers = require('../functions/lib/functions/src/index.js');
+  const { memoryDb } = require('../functions/tests/helpers/reflection-memory.cjs');
+  const db = memoryDb();
+  t.after(() => db.restore());
+  const email = 'student@example.edu';
+  db.data.set('courses/course', { rosterVersion: 2, published: {
+    id: 'course', title: '合成課程', classIds: ['A'], units: [{ id: 'unit', title: '單元', bankVersion: 'v1', activities: [
+      { id: 'html', type: 'html', tracking: 'interactive', materialVersion: 'v1' },
+    ] }],
+  } });
+  db.data.set(`enrollments/course__${email}`, { email, uid: context.uid, classId: 'A', studentId: 'synthetic', name: '合成學生', enabled: true });
+  const auth = { uid: context.uid, token: { email, email_verified: true, firebase: { sign_in_provider: 'google.com' } } };
+  return { db, call: (name: string, data: unknown) => handlers[name].run({ auth, data }) };
+}
+
+for (const kind of ['learning', 'research'] as const) test(`${kind}: actual server committed but response lost; replay acknowledges all IDs without double counting`, async (t) => {
+  const env = environment(t);
+  const server = await actualEventServer(t);
+  let calls = 0, complete = 0;
+  const api = apiFor(async (name, data) => {
+    calls++;
+    const response = await server.call(name, data);
+    if (calls === 1) throw Object.assign(Error('response lost after commit'), { code: 'functions/unavailable' });
+    return response;
+  });
+  const events = kind === 'learning'
+    ? [{ id: 'e1', type: 'time' as const, seconds: 15 }, { id: 'e2', type: 'completed' as const }]
+    : [{ id: 'e1', questionId: 'q1', attemptId: 'attempt', clientAt: 100, format: 'guided' as const, action: 'exposed' as const, seconds: 3 }];
+  const bridge = kind === 'learning'
+    ? learningBridge(api, context, () => {}, () => { complete++; })
+    : researchBridge(api, { uid: context.uid, courseId: 'course', unitId: 'unit', version: 'v1' }, () => {});
+  // Register cleanup before restoring the in-memory server.
+  env.cleanup.push(() => bridge.close());
+  const result = kind === 'learning'
+    ? (bridge as ReturnType<typeof learningBridge>).receive(events as any)
+    : (bridge as ReturnType<typeof researchBridge>).enqueue(events as any, true);
+  assert.deepEqual(await result, []);
+  assert.equal(calls, 1); assert.equal(complete, 0);
+  const key = [...env.data.keys()][0];
+  assert.deepEqual(JSON.parse(env.data.get(key)!).map((e: any) => e.id), events.map((e) => e.id));
+  const writesAfterCommit = server.db.writes.length;
+  const snapshotAfterCommit = structuredClone([...server.db.data]);
+  await tick();
+  env.win.dispatchEvent(new Event('online'));
+  // Firebase auth/transaction promises have more layers than a simple send mock.
+  for (let i = 0; i < 12; i++) await tick();
+  assert.equal(calls, 2);
+  assert.deepEqual(JSON.parse(env.data.get(key)!), []);
+  assert.equal(server.db.writes.length, writesAfterCommit);
+  assert.deepEqual([...server.db.data], snapshotAfterCommit);
+  if (kind === 'learning') assert.equal(complete, 1);
+  const root = kind === 'learning' ? `courses/course/diagnostics/${context.uid}_unit_html_v1` : `courses/course/research/${context.uid}_unit_v1`;
+  assert.equal(server.db.data.get(root).summary[kind === 'learning' ? 'activeSeconds' : 'events'], kind === 'learning' ? 15 : 1);
+});
+
+for (const code of ['functions/invalid-argument', 'functions/failed-precondition', 'permission-denied']) {
+  test(`queue: ${code} drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen`, async (t) => {
+    const env = environment(t);
+    let calls = 0, notices = 0, saved = 0;
+    const options = { key: `permanent:${code}`, valid: (e: { id: string }) => !!e?.id,
+      send: async () => { calls++; throw Object.assign(Error('明確拒絕'), { code }); },
+      rejected: () => { notices++; }, saved: () => { saved++; },
+    };
+    const batch = eventBatcher(options);
+    assert.deepEqual(await batch.enqueue([{ id: 'bad' }], true), []);
+    await tick();
+    assert.deepEqual(JSON.parse(env.data.get(options.key)!), []);
+    assert.equal(saved, 0); assert.equal(notices, 1);
+    assert.deepEqual(await batch.enqueue([{ id: 'bad' }], true), []);
+    t.mock.timers.tick(300000); env.win.dispatchEvent(new Event('online'));
+    env.doc.visibilityState = 'hidden'; env.doc.dispatchEvent(new Event('visibilitychange')); await tick();
+    batch.close(); assert.equal(calls, 1); assert.equal(notices, 1);
+    const reopened = eventBatcher(options);
+    env.cleanup.push(() => reopened.close());
+    assert.deepEqual(await reopened.enqueue([{ id: 'bad' }], true), []);
+    t.mock.timers.tick(60000); await tick(); assert.equal(calls, 1);
+  });
+}
+
+for (const code of ['functions/unavailable', 'functions/deadline-exceeded', 'functions/internal', 'functions/network-request-failed', undefined]) {
+  test(`queue: ${code || 'uncoded network failure'} remains durable and retries successfully`, async (t) => {
+    const env = environment(t);
+    let calls = 0, rejected = 0;
+    const batch = eventBatcher<{ id: string }>({ key: 'transient', valid: (e) => !!e?.id, rejected: () => { rejected++; },
+      send: async (events) => { calls++; if (calls === 1) throw Object.assign(Error('Failed to fetch: network offline'), code ? { code } : {}); return events.map((e) => e.id); },
+    });
+    env.cleanup.push(() => batch.close());
+    assert.deepEqual(await batch.enqueue([{ id: 'retry' }], true), []);
+    await tick(); assert.equal(JSON.parse(env.data.get('transient')!).length, 1);
+    t.mock.timers.tick(30000); await tick();
+    assert.equal(calls, 2); assert.deepEqual(JSON.parse(env.data.get('transient')!), []); assert.equal(rejected, 0);
+  });
+}
+
+test('learning: rejected old material version asks to reopen, does not complete or retry', async (t) => {
+  const env = environment(t);
+  let calls = 0, completed = 0;
+  const messages: string[] = [];
+  const bridge = learningBridge(apiFor(async () => {
+    calls++; throw Object.assign(Error('教材版本已更新，請重新開啟教材'), { code: 'functions/failed-precondition' });
+  }), context, (message) => messages.push(message), () => { completed++; });
+  env.cleanup.push(() => bridge.close());
+  const done = { id: 'rejected-done', type: 'completed' as const };
+  assert.deepEqual(await bridge.receive([done]), []); await tick();
+  assert.match(messages.at(-1)!, /請重新開啟教材/); assert.match(messages.at(-1)!, /未儲存/);
+  assert.equal(completed, 0);
+  assert.deepEqual(await bridge.receive([done]), []);
+  t.mock.timers.tick(120000); await tick(); assert.equal(calls, 1);
+  assert.equal(messages.filter((m) => m.includes('教材版本已更新')).length, 1);
+});
+
+test('research: permanent refusal is reported once and fresh future IDs can still be saved', async (t) => {
+  const env = environment(t);
+  let calls = 0;
+  const notices: (boolean | undefined)[] = [];
+  const bridge = researchBridge(apiFor(async (_, data) => {
+    calls++; if (calls === 1) throw Object.assign(Error('研究資料活動未開放'), { code: 'functions/failed-precondition' });
+    return { accepted: data.events.map((e: any) => e.id) };
+  }), { uid: context.uid, courseId: 'course', unitId: 'unit', version: 'v1' }, (permanent) => notices.push(permanent));
+  env.cleanup.push(() => bridge.close());
+  const bad = { id: 'bad', questionId: 'q', attemptId: 'attempt', clientAt: 100, format: 'guided' as const, action: 'exposed' as const, seconds: 3 };
+  assert.deepEqual(await bridge.enqueue([bad], true), []); await tick();
+  assert.deepEqual(notices, [true]);
+  assert.deepEqual(await bridge.enqueue([bad], true), []);
+  t.mock.timers.tick(60000); await tick(); assert.equal(calls, 1);
+  assert.deepEqual(await bridge.enqueue([{ ...bad, id: 'new' }], true), ['new']);
+  assert.equal(calls, 2); assert.deepEqual(notices, [true]);
+});

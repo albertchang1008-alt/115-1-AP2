@@ -128,10 +128,12 @@ export default function Student({
   researchNotify.current = notify;
   useEffect(() => {
     if (preview || api.preview || !unit?.bankVersion || unit.research?.enabled === false) return;
-    let reported = false;
-    const bridge = researchBridge(api, { uid, courseId: course.id, unitId: unit.id, version: unit.bankVersion }, () => {
-      if (!reported) researchNotify.current('研究資料暫時無法同步，請保持此頁開啟並連線。');
-      reported = true;
+    const reported = new Set<boolean>();
+    const bridge = researchBridge(api, { uid, courseId: course.id, unitId: unit.id, version: unit.bankVersion }, (permanent = false) => {
+      if (!reported.has(permanent)) researchNotify.current(permanent
+        ? '研究資料遭伺服器拒絕，已停止重送；請重新開啟活動或聯絡教師。'
+        : '研究資料暫時無法同步，請保持此頁開啟並連線。');
+      reported.add(permanent);
     });
     researchQueue.current = bridge;
     return () => { researchQueue.current = null; bridge.close(); };
