@@ -1,4 +1,5 @@
 import { featureEnabled } from '../shared/features';
+import { visiblePoll } from './VisiblePoll';
 import { useEffect, useState, useRef } from 'react';
 import { API } from './service';
 import { Course } from '../shared/model';
@@ -17,22 +18,7 @@ function usePoll(
   dependencies: unknown[],
   delay: number,
 ) {
-  useEffect(() => {
-    let disposed = false,
-      timer: ReturnType<typeof setTimeout>;
-    const run = async () => {
-      try {
-        if (!disposed) await task(() => !disposed);
-      } finally {
-        if (!disposed) timer = setTimeout(run, delay);
-      }
-    };
-    void run();
-    return () => {
-      disposed = true;
-      clearTimeout(timer);
-    };
-  }, dependencies);
+  useEffect(() => visiblePoll(task, delay), [...dependencies, delay]);
 }
 /** Anchor to server time and a monotonic local clock; device wall-clock changes do not affect countdown. */
 export function useInteractionClock(serverNow?: number) {
@@ -84,7 +70,7 @@ export function StudentInteraction({ api, course }: { api: API; course: Course }
       }
     },
     [api, course.id, state.round?.status],
-    state.round?.status === 'open' ? 2000 : 5000,
+    state.round?.status === 'open' ? 2000 : 10000,
   );
   if (!featureEnabled(course, 'classroomInteraction') || api.preview) return null;
   return (
@@ -412,7 +398,7 @@ export function TeacherInteraction({
       }
     },
     [api, course.id, slideId, selected],
-    2000,
+    state.activeRound?.status === 'open' ? 2000 : 10000,
   );
   async function action(action: string, target?: PollRound, replacement?: typeof confirmOpen) {
     if (busy) return;

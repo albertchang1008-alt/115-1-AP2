@@ -1,4 +1,5 @@
 import { featureEnabled } from '../shared/features';
+import { researchBridge } from './ResearchBridge';
 import { ReflectionPage } from './ReflectionPage';
 import { StudentAssessments } from './Assessments';
 import { MixedScopeCard, MixedPractice } from './MixedPractice';
@@ -122,6 +123,19 @@ export default function Student({
   pRef.current = progress;
   takingRef.current = taking;
   const unit = course.units.find((u) => u.id === unitId);
+  const researchQueue = useRef<ReturnType<typeof researchBridge> | null>(null);
+  const researchNotify = useRef(notify);
+  researchNotify.current = notify;
+  useEffect(() => {
+    if (preview || api.preview || !unit?.bankVersion || unit.research?.enabled === false) return;
+    let reported = false;
+    const bridge = researchBridge(api, { uid, courseId: course.id, unitId: unit.id, version: unit.bankVersion }, () => {
+      if (!reported) researchNotify.current('研究資料暫時無法同步，請保持此頁開啟並連線。');
+      reported = true;
+    });
+    researchQueue.current = bridge;
+    return () => { researchQueue.current = null; bridge.close(); };
+  }, [api, preview, uid, course.id, unit?.id, unit?.bankVersion, unit?.research?.enabled]);
   const selectedChapterName = unit ? chapterName(unit) : '';
   const chapter = selectedChapterName ? chaptersOf(course)[selectedChapterName] : undefined;
   const chapterUnits = selectedChapterName ? course.units.filter((u) => chapterName(u) === selectedChapterName) : [];
@@ -335,8 +349,7 @@ export default function Student({
   }
   async function saveResearch(events: ExplanationResearchEvent[]) {
     if (preview || !unit || unit.research?.enabled === false || !events.length) return;
-    try { await api.call('saveExplanationResearchEvents', { courseId: course.id, unitId: unit.id, version: unit.bankVersion, events }); }
-    catch (e) { notify('研究資料未同步：' + (e as Error).message); }
+    await researchQueue.current?.enqueue(events);
   }
   if (activityId.startsWith('__mixed_')) return <><StudentSettings /><MixedPractice key={activityId} api={api} course={course} progress={progress} uid={uid} selectedIds={mixedIds} mode={activityId.split('_')[3] as any} count={Number(activityId.split('_')[4])} onProgress={setProgress} onBack={() => route()} /></>;
   if (unit && activityId === '__wrongcards') return <><StudentSettings /><UnitWrongPractice api={api} course={course} unit={unit} progress={progress} onProgress={setProgress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`)} /></>;

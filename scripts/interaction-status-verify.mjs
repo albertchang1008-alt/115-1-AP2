@@ -60,7 +60,7 @@ export async function verifyInteractionStatus(shots = false) {
       await page.getByRole('button', { name: '進入互動', exact: true }).click();
       const first = page.getByRole('radio').first();
       await first.check();
-      await page.getByRole('button', { name: '快轉 51 秒', exact: true }).click();
+      await page.getByRole('button', { name: '跳至剩餘 9 秒', exact: true }).click();
       await page.locator('.interaction-timer.urgent').waitFor();
       await shot('student-ten-seconds');
       assert(!(await first.isDisabled()));
@@ -104,7 +104,7 @@ export async function verifyInteractionStatus(shots = false) {
         document.querySelector('.classroom-statusbar').textContent.includes('討論點1'),
       );
       await shot('replaced');
-      await page.getByRole('button', {name:'快轉 51 秒',exact:true}).click();
+      await page.getByRole('button', {name:'跳至剩餘 9 秒',exact:true}).click();
       await page.getByRole('button', {name:'快轉 30 秒',exact:true}).click();
       await page.locator('.classroom-statusbar.expired').waitFor();
       await page.getByRole('button', {name:'顯示結果',exact:true}).click();

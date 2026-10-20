@@ -111,7 +111,7 @@ createRoot(document.getElementById('root')!).render(
   <>
     <div className="notice">
       <strong>本機合成資料，不連雲端</strong>
-      <button onClick={() => (advance += 51000)}>快轉 51 秒</button>
+      <button onClick={() => { const active = rounds.find((r) => r.status === 'open'); if (active?.deadlineAt) advance += Math.max(0, active.deadlineAt - now() - 9000); }}>跳至剩餘 9 秒</button>
       <button onClick={() => (advance += 30000)}>快轉 30 秒</button>
     </div>
     <main style={{ padding: 12 }}>
