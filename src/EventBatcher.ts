@@ -1,9 +1,14 @@
-function retryable(error: unknown) {
+type Outcome = 'retry' | 'discard' | 'hold';
+// discard：伺服器明確拒絕內容（格式錯誤、教材版本已更新、活動未開放）→ 丟棄並記住 ID，不重送。
+// retry：暫時性錯誤 → 保留，定時重送。
+// hold：其餘（登入失效、權限、未分類）→ 保留在本機，本頁不再重送；下次開啟頁面（重新登入後）再送。
+function classify(error: unknown): Outcome {
   const value = error as { code?: unknown; message?: unknown } | null;
   const code = typeof value?.code === 'string' ? value.code.replace(/^functions\//, '') : '';
-  if (code) return ['unavailable', 'deadline-exceeded', 'internal', 'network-request-failed'].includes(code);
-  // Fetch/socket failures need not carry a Firebase code. Other unclassified errors stop.
-  return /network|offline|fetch|socket|connection|斷線|連線/i.test(String(value?.message || ''));
+  if (['invalid-argument', 'failed-precondition'].includes(code)) return 'discard';
+  if (['unavailable', 'deadline-exceeded', 'internal', 'network-request-failed', 'resource-exhausted', 'aborted'].includes(code)) return 'retry';
+  if (!code && /network|offline|fetch|socket|connection|斷線|連線/i.test(String(value?.message || ''))) return 'retry';
+  return 'hold';
 }
 // Persist first; acknowledge only IDs accepted by the server. Retries retain IDs.
 export function eventBatcher<T extends { id: string }>(options: {
@@ -14,8 +19,11 @@ export function eventBatcher<T extends { id: string }>(options: {
   saved?: (events: T[], remaining: number) => void;
   failed?: () => void;
   rejected?: (error: unknown) => void;
+  held?: (error: unknown) => void;
+  // 本機無法寫入：事件只在記憶體，關頁會遺失。
+  volatile?: () => void;
 }) {
-  let queue: T[] = [], closed = false, flight: Promise<void> | null = null;
+  let queue: T[] = [], closed = false, held = false, flight: Promise<void> | null = null;
   const accepted = new Set<string>();
   const discarded = new Set<string>();
   const discardedKey = `${options.key}:discarded`;
@@ -40,7 +48,7 @@ export function eventBatcher<T extends { id: string }>(options: {
       localStorage.setItem(options.key, JSON.stringify(queue));
       return true;
     }
-    catch { if (!closed) options.failed?.(); return false; }
+    catch { if (!closed) (options.volatile ?? options.failed)?.(); return false; }
   };
   try {
     const stored = JSON.parse(localStorage.getItem(options.key) || '[]');
@@ -60,6 +68,8 @@ export function eventBatcher<T extends { id: string }>(options: {
   }
   function flush(): Promise<void> {
     if (flight) return flight;
+    // 本頁已因登入／權限問題暫停：事件仍在本機，不再打雲端。
+    if (held) { settle(true); return Promise.resolve(); }
     if (!queue.length) return Promise.resolve();
     flight = (async () => {
       try {
@@ -68,7 +78,17 @@ export function eventBatcher<T extends { id: string }>(options: {
           let ids: Set<string>;
           try { ids = new Set(await options.send(batch)); }
           catch (error) {
-            if (retryable(error)) throw error;
+            const outcome = classify(error);
+            if (outcome === 'retry') throw error;
+            if (outcome === 'hold') {
+              // 只有確實寫入本機，才能承諾「重開後送出」並停止本頁重送。
+              // 寫不進本機時事件只在記憶體：維持重送（外層 catch 顯示暫時無法儲存），避免關頁後遺失。
+              if (!persist()) throw error;
+              held = true;
+              if (!closed) options.held ? options.held(error) : options.failed?.();
+              settle(true);
+              return;
+            }
             for (const event of batch) discarded.add(event.id);
             queue = queue.filter((e) => !discarded.has(e.id));
             try {
@@ -115,8 +135,8 @@ export function eventBatcher<T extends { id: string }>(options: {
       queue.push(...fresh);
       const durable = persist();
       const result = new Promise<string[]>((resolve) => waiters.push({ ids: events.map((e) => e.id), resolve }));
-      settle();
-      if (fresh.length) options.pending?.();
+      settle(held);
+      if (fresh.length && !held) options.pending?.();
       if (urgent || queue.length >= 30 || !durable) void flush();
       return result;
     },

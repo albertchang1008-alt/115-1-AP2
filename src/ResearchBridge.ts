@@ -1,7 +1,7 @@
 import type { API } from './service';
 import { safeId, ExplanationResearchEvent } from '../shared/model';
 import { eventBatcher } from './EventBatcher';
-export function researchBridge(api: API, context: { uid: string; courseId: string; unitId: string; version: string }, failed: (permanent?: boolean) => void) {
+export function researchBridge(api: API, context: { uid: string; courseId: string; unitId: string; version: string }, failed: (permanent?: boolean, held?: boolean) => void) {
   const { uid, ...request } = context;
   return eventBatcher<ExplanationResearchEvent>({
     key: `explanation-events-v1:${JSON.stringify([uid, request.courseId, request.unitId, request.version])}`,
@@ -11,5 +11,6 @@ export function researchBridge(api: API, context: { uid: string; courseId: strin
     send: async (events) => (await api.call<{ accepted: string[] }>('saveExplanationResearchEvents', { ...request, events })).accepted,
     failed: () => failed(false),
     rejected: () => failed(true),
+    held: () => failed(false, true),
   });
 }

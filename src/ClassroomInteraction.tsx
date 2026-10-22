@@ -70,7 +70,8 @@ export function StudentInteraction({ api, course }: { api: API; course: Course }
       }
     },
     [api, course.id, state.round?.status],
-    state.round?.status === 'open' ? 2000 : 10000,
+    // 學生閒置維持 5 秒：教師開題後學生最慢約 5 秒看到題目（教師 2026-10-21 決定）。
+    state.round?.status === 'open' ? 2000 : 5000,
   );
   if (!featureEnabled(course, 'classroomInteraction') || api.preview) return null;
   return (

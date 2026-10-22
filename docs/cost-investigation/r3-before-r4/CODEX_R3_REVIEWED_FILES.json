@@ -1,0 +1,12 @@
+{
+  "branch": "codex/reduce-function-costs",
+  "base": "2e60f08e95c69f40a60d759e62838ab9c4ff2311",
+  "files": {
+    "src/EventBatcher.ts": "909c6400b0bf8c50ef4535eee5fd880f148b5508ea61da5775c11821a87a646a",
+    "src/LearningBridge.ts": "419f4ce4799c15b26644ed52ce6432c4256e68beec85de8bf86183b63bcb1ea7",
+    "src/ResearchBridge.ts": "c91b7a7a68abdae326da1018cf5b14869b342e7400abbf4cf40d7418e230bd4d",
+    "src/Student.tsx": "f316fd0e4bdcd13b0dd418efb3f414d89649066a70fbcd56668f56523504e484",
+    "src/ClassroomInteraction.tsx": "9f97e2572ea0075b82323f613372639bdc08571f0b8fd7ec5805e25908c7bf7e",
+    "tests/function-costs.test.ts": "16c4cb76fe6c3946474686ba7bd67a6b3f4fe25df99a2f4c5542f5da2a4ac6c5"
+  }
+}

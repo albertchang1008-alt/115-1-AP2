@@ -1,0 +1,14 @@
+{
+  "branch": "codex/reduce-function-costs",
+  "base": "2e60f08e95c69f40a60d759e62838ab9c4ff2311",
+  "date": "2026-10-22 Asia/Taipei",
+  "files": {
+    "src/EventBatcher.ts": "233de4f4231ce10080be51f44bd6655a241639a989144a2063f8b671f881979a",
+    "src/LearningBridge.ts": "27a88b180b80f46a9b5a42ca1f8e5adb0b982c02624b3a73f12632309e0f8fb3",
+    "src/ResearchBridge.ts": "c91b7a7a68abdae326da1018cf5b14869b342e7400abbf4cf40d7418e230bd4d",
+    "src/Student.tsx": "f316fd0e4bdcd13b0dd418efb3f414d89649066a70fbcd56668f56523504e484",
+    "src/ClassroomInteraction.tsx": "9f97e2572ea0075b82323f613372639bdc08571f0b8fd7ec5805e25908c7bf7e",
+    "tests/function-costs.test.ts": "1e74f74809d7f3dc66c27164aeaf4c4bf454126eeb576aced93c31994a66939c",
+    "docs/cost-investigation/codex-r3-audit-relaxed.test.ts": "3c686a3cf67289c4a9b613a9e35fc79fb4573f06070208d859a88fcca135ead5"
+  }
+}

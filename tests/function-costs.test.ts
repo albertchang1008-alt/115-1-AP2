@@ -262,7 +262,7 @@ for (const kind of ['learning', 'research'] as const) test(`${kind}: actual serv
   assert.equal(server.db.data.get(root).summary[kind === 'learning' ? 'activeSeconds' : 'events'], kind === 'learning' ? 15 : 1);
 });
 
-for (const code of ['functions/invalid-argument', 'functions/failed-precondition', 'permission-denied']) {
+for (const code of ['functions/invalid-argument', 'functions/failed-precondition']) {
   test(`queue: ${code} drops rejected batch, never acknowledges it, and suppresses iframe replay across reopen`, async (t) => {
     const env = environment(t);
     let calls = 0, notices = 0, saved = 0;
@@ -300,6 +300,88 @@ for (const code of ['functions/unavailable', 'functions/deadline-exceeded', 'fun
     assert.equal(calls, 2); assert.deepEqual(JSON.parse(env.data.get('transient')!), []); assert.equal(rejected, 0);
   });
 }
+
+for (const code of ['functions/unauthenticated', 'functions/permission-denied', 'permission-denied', 'functions/not-found', undefined]) {
+  test(`queue: ${code || 'uncoded non-network error'} is held locally, not retried this page, and sent on next visit`, async (t) => {
+    const env = environment(t);
+    let calls = 0, held = 0, rejected = 0, failing = true;
+    const options = { key: `held:${code}`, valid: (e: { id: string }) => !!e?.id,
+      send: async (events: { id: string }[]) => {
+        calls++;
+        if (failing) throw Object.assign(Error('請重新登入'), code ? { code } : {});
+        return events.map((e) => e.id);
+      },
+      held: () => { held++; }, rejected: () => { rejected++; },
+    };
+    const batch = eventBatcher(options);
+    assert.deepEqual(await batch.enqueue([{ id: 'keep' }], true), []);
+    await tick();
+    assert.deepEqual(JSON.parse(env.data.get(options.key)!).map((e: any) => e.id), ['keep']);
+    assert.equal(held, 1); assert.equal(rejected, 0);
+    // 本頁不再打雲端：計時器、上線、切到背景、再加新事件都不會重送。
+    assert.deepEqual(await batch.enqueue([{ id: 'later' }], true), []);
+    t.mock.timers.tick(300000); env.win.dispatchEvent(new Event('online'));
+    env.doc.visibilityState = 'hidden'; env.doc.dispatchEvent(new Event('visibilitychange')); await tick();
+    batch.close(); await tick();
+    assert.equal(calls, 1);
+    assert.deepEqual(JSON.parse(env.data.get(options.key)!).map((e: any) => e.id).sort(), ['keep', 'later']);
+    assert.equal(env.data.get(`${options.key}:discarded`) ?? null, null);
+    // 下次開啟（重新登入後）：一次送出且清空。
+    failing = false;
+    const reopened = eventBatcher(options);
+    env.cleanup.push(() => reopened.close());
+    for (let i = 0; i < 6; i++) await tick();
+    assert.equal(calls, 2);
+    assert.deepEqual(JSON.parse(env.data.get(options.key)!), []);
+  });
+}
+
+test('learning: expired login keeps completed event, shows re-login message, completes after reopen', async (t) => {
+  const env = environment(t);
+  let calls = 0, completed = 0, failing = true;
+  const messages: string[] = [];
+  const api = apiFor(async (_, data) => {
+    calls++;
+    if (failing) throw Object.assign(Error('請重新登入'), { code: 'functions/unauthenticated' });
+    return { accepted: data.events.map((e: any) => e.id) };
+  });
+  const bridge = learningBridge(api, context, (message) => messages.push(message), () => { completed++; });
+  const done = { id: 'held-done', type: 'completed' as const };
+  assert.deepEqual(await bridge.receive([done]), []); await tick();
+  assert.match(messages.at(-1)!, /重新登入/); assert.match(messages.at(-1)!, /暫存/);
+  assert.equal(completed, 0);
+  t.mock.timers.tick(120000); await tick(); assert.equal(calls, 1);
+  bridge.close(); await tick();
+  failing = false;
+  const reopened = learningBridge(api, context, (message) => messages.push(message), () => { completed++; });
+  env.cleanup.push(() => reopened.close());
+  for (let i = 0; i < 12; i++) await tick();
+  assert.equal(calls, 2); assert.equal(completed, 1);
+  assert.equal(messages.at(-1), '學習紀錄已同步');
+});
+
+test('learning: expired login with unwritable storage never claims saved, keeps retrying in page, completes once login works', async (t) => {
+  const env = environment(t);
+  env.storage.setItem = () => { throw Object.assign(Error('quota'), { name: 'QuotaExceededError' }); };
+  let calls = 0, completed = 0, failing = true;
+  const messages: string[] = [];
+  const bridge = learningBridge(apiFor(async (_, data) => {
+    calls++;
+    if (failing) throw Object.assign(Error('請重新登入'), { code: 'functions/unauthenticated' });
+    return { accepted: data.events.map((e: any) => e.id) };
+  }), context, (message) => messages.push(message), () => { completed++; });
+  env.cleanup.push(() => bridge.close());
+  assert.deepEqual(await bridge.receive([{ id: 'mem-done', type: 'completed' as const }]), []);
+  for (let i = 0; i < 6; i++) await tick();
+  assert.equal(messages.some((m) => m.includes('已暫存')), false);
+  assert.match(messages.at(-1)!, /請先不要關閉此頁/);
+  assert.equal(completed, 0);
+  failing = false;
+  t.mock.timers.tick(30000);
+  for (let i = 0; i < 12; i++) await tick();
+  assert.equal(calls, 2); assert.equal(completed, 1);
+  assert.equal(messages.at(-1), '學習紀錄已同步');
+});
 
 test('learning: rejected old material version asks to reopen, does not complete or retry', async (t) => {
   const env = environment(t);
