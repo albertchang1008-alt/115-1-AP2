@@ -1,0 +1,2393 @@
+{
+  "baseline": "3e524158",
+  "fullBefore": {
+    "profile": "acidbase-full-v1",
+    "slug": "acid-base-homeostasis",
+    "title": "Code pH｜酸鹼三系統",
+    "mindmapSource": "../../docs/classroom/mindmap-relay/acidbase.relay.json",
+    "legacyApply": "apply.json",
+    "designSource": "../../docs/urinary-release/DESIGN_ACIDBASE_FINAL.md",
+    "sources": [
+      {
+        "uid": "acid-base-balance",
+        "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+      },
+      {
+        "uid": "acid-base-balance",
+        "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "鹼/酸比增加使 pH 上升"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+      },
+      {
+        "uid": "hypercapnia",
+        "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+      },
+      {
+        "uid": "respiratory-alkalosis",
+        "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+      },
+      {
+        "uid": "respiratory-alkalosis",
+        "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+      },
+      {
+        "uid": "metabolic-alkalosis",
+        "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "acid-base-homeostasis-node-01",
+        "title": "三系統分工",
+        "summary": "緩衝減少波動，肺與腎調整酸的去路。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          }
+        ],
+        "edges": [
+          "edge_resp_ph",
+          "edge_renal_ph"
+        ],
+        "termId": "buffer"
+      },
+      {
+        "id": "acid-base-homeostasis-node-02",
+        "title": "碳酸比值",
+        "summary": "相同pKa下，鹼／酸比增加使pH上升。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ],
+        "edges": [
+          "edge_ratio_ph"
+        ],
+        "termId": "ratio"
+      },
+      {
+        "id": "acid-base-homeostasis-node-03",
+        "title": "緩衝與場域",
+        "summary": "接住H⁺仍在體內，不等於酸已排出。",
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+          }
+        ],
+        "edges": [
+          "edge_buffer_ph"
+        ],
+        "termId": "buffer"
+      },
+      {
+        "id": "acid-base-homeostasis-node-04",
+        "title": "有效CO₂排出",
+        "summary": "有效CO₂排出增加可減酸；不能只看呼吸次數。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ],
+        "edges": [
+          "edge_resp_co2",
+          "edge_co2_ratio"
+        ],
+        "termId": "resp"
+      },
+      {
+        "id": "acid-base-homeostasis-node-05",
+        "title": "找錯：腎端雙方向",
+        "summary": "H⁺分泌入管液，HCO₃⁻回到血液，協助排酸留鹼。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ],
+        "edges": [
+          "edge_renal_h",
+          "edge_renal_hco3"
+        ],
+        "termId": "renal"
+      },
+      {
+        "id": "acid-base-homeostasis-node-06",
+        "title": "尿端攜酸整合",
+        "summary": "NH₃結合H⁺成NH₄⁺，隨尿攜酸；與保留HCO₃⁻互補。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ],
+        "edges": [
+          "edge_h_ph",
+          "edge_hco3_ratio",
+          "edge_h_hco3_parallel"
+        ],
+        "termId": "ammonium"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "F1",
+        "node": 0,
+        "stem": "身體有緩衝（先接住多出的酸）、肺和腎臟，它們怎麼合作維持血液的酸鹼？",
+        "options": [
+          "先接酸、肺排二氧化碳、腎排酸留鹼",
+          "先接酸、肺回收鹼、腎排二氧化碳",
+          "先排酸、肺接住酸、腎回收鹼",
+          "先留酸、肺排二氧化碳、腎排掉鹼"
+        ],
+        "answer": 0,
+        "feedback": [
+          "三者分工合作：先接住酸，再由肺和腎臟調整酸的去路。",
+          "肺負責排二氧化碳，回收鹼是腎臟的工作。",
+          "先接住酸還不等於排出酸，肺負責排二氧化碳。",
+          "先接住酸能減少酸鹼變動，腎臟還會把鹼留回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ]
+      },
+      {
+        "id": "F2",
+        "node": 1,
+        "stem": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸；用課本算式比較兩者時，要怎麼算？",
+        "options": [
+          "碳酸的量 ÷ 碳酸氫根的量",
+          "碳酸氫根的量 ÷ 碳酸的量",
+          "碳酸氫根的量 ＋ 碳酸的量",
+          "碳酸氫根的量 − 碳酸的量"
+        ],
+        "answer": 1,
+        "feedback": [
+          "你把上下放反了：要把接酸的碳酸氫根放在上面。",
+          "把接酸的碳酸氫根放上面、碳酸放下面，再相除。",
+          "這裡要比較鹼是酸的多少倍，所以用相除，不是相加。",
+          "這裡要比較鹼是酸的多少倍，所以用相除，不是相減。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          }
+        ]
+      },
+      {
+        "id": "F3",
+        "node": 2,
+        "stem": "氫離子（H⁺）越多越酸；緩衝系統像接球一樣接住或放出氫離子，直接有什麼幫助？",
+        "options": [
+          "讓酸隨著尿液排出體外",
+          "讓二氧化碳隨呼氣排出",
+          "讓酸不酸的數字（pH）較少變動",
+          "讓血液與尿液一起變酸"
+        ],
+        "answer": 2,
+        "feedback": [
+          "先接住酸還沒有把酸排出，隨尿排出需要腎臟幫忙。",
+          "先接住酸還沒有把二氧化碳呼出，呼出需要肺幫忙。",
+          "接住或放出氫離子，可讓表示酸不酸的數字（pH）較少變動。",
+          "先接住或放出氫離子，是減少酸鹼變動，不是讓血液和尿液一起變酸。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          }
+        ]
+      },
+      {
+        "id": "F4",
+        "node": 3,
+        "stem": "其他條件一樣，肺真正排出的二氧化碳（CO₂，會影響血液酸不酸的氣體）增加時，對血液有什麼影響？",
+        "options": [
+          "酸增加，血液比較酸",
+          "酸不變，只有尿液變酸",
+          "酸不變，只是呼吸變快",
+          "酸減少，血液比較不酸"
+        ],
+        "answer": 3,
+        "feedback": [
+          "二氧化碳排出增加會減少酸，不是增加酸。",
+          "這裡改變的是肺排出的二氧化碳，會影響血液的酸鹼。",
+          "要看真正排出多少二氧化碳，不能只看呼吸快慢。",
+          "肺排出更多二氧化碳，可以讓血液比較不酸。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "F5",
+        "node": 4,
+        "stem": "腎臟幫血液減酸時，氫離子（H⁺，讓液體變酸）和碳酸氫根（HCO₃⁻，接酸的鹼）各往哪裡去？",
+        "options": [
+          "氫離子進腎小管液，碳酸氫根回血液",
+          "氫離子進腎小管液，碳酸氫根也進管液",
+          "氫離子回血液，碳酸氫根也回血液",
+          "氫離子回血液，碳酸氫根進腎小管液"
+        ],
+        "answer": 0,
+        "feedback": [
+          "腎臟把氫離子送進管液，並把接酸的碳酸氫根留回血液。",
+          "碳酸氫根要留回血液，才能幫血液接住酸。",
+          "氫離子要送進管液排出，才能幫血液減酸。",
+          "你把兩者的去向放反了：氫離子進管液，碳酸氫根回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ]
+      },
+      {
+        "id": "F6",
+        "node": 5,
+        "stem": "氨（NH₃）會接住氫離子（H⁺，讓液體變酸）；這能怎麼幫腎臟排酸？",
+        "options": [
+          "形成碳酸氫根，隨尿帶走酸",
+          "形成銨（NH₄⁺），隨尿帶走酸",
+          "形成銨（NH₄⁺），回血液帶走酸",
+          "形成碳酸，回血液帶走酸"
+        ],
+        "answer": 1,
+        "feedback": [
+          "氨接住氫離子後形成的是銨，不是碳酸氫根。",
+          "氨接住氫離子形成銨，再隨尿排出，就能帶走酸。",
+          "銨要隨尿排到體外，才算把酸帶走。",
+          "氨接住氫離子形成的是銨，要隨尿排出才能帶走酸。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ]
+      }
+    ],
+    "pool": [
+      {
+        "id": "P-A",
+        "group": "P",
+        "side": "A",
+        "node": 1,
+        "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）增加；表示酸不酸的數字（pH）會怎麼變？",
+        "options": [
+          "變大，血液比較不酸",
+          "變小，血液比較酸",
+          "不變，鹼的量不影響它",
+          "先變小，最後回到原來的值"
+        ],
+        "answer": 0,
+        "feedback": [
+          "接酸的鹼增加、酸不變時，血液比較不酸，pH會變大。",
+          "接酸的鹼增加會讓血液比較不酸，所以pH變大，不是變小。",
+          "酸的量不變，但接酸的鹼增加也會讓pH變大。",
+          "其他條件一樣時，接酸的鹼增加會使pH變大，沒有先變酸再回復的步驟。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ]
+      },
+      {
+        "id": "P-B",
+        "group": "P",
+        "side": "B",
+        "node": 1,
+        "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）減少；表示酸不酸的數字（pH）會怎麼變？",
+        "options": [
+          "不變，鹼的量不影響它",
+          "變大，血液比較不酸",
+          "變小，血液比較酸",
+          "先變大，最後回到原來的值"
+        ],
+        "answer": 2,
+        "feedback": [
+          "酸的量不變，但接酸的鹼減少也會讓pH變小。",
+          "接酸的鹼減少會讓血液比較酸，所以pH變小，不是變大。",
+          "接酸的鹼減少、酸不變時，血液比較酸，pH會變小。",
+          "其他條件一樣時，接酸的鹼減少會使pH變小，沒有先減酸再回復的步驟。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          }
+        ]
+      },
+      {
+        "id": "R-A",
+        "group": "R",
+        "side": "A",
+        "node": 3,
+        "stem": "這次血液變酸的主要原因是呼吸排不掉二氧化碳（CO₂），血中二氧化碳增加，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+        "options": [
+          "代謝性鹼中毒（身體的酸減少或鹼增加）",
+          "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+          "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+          "代謝性酸中毒（身體的酸增加或鹼減少）"
+        ],
+        "answer": 1,
+        "feedback": [
+          "這次是呼吸排不掉二氧化碳而變酸，不是身體的鹼增加。",
+          "二氧化碳增加讓血液變酸，主要原因在呼吸，符合呼吸性酸中毒。",
+          "二氧化碳增加讓血液變酸，不是呼出較多二氧化碳而變不酸。",
+          "兩種情況都可能變酸，但這次已知主要原因是呼吸排不掉二氧化碳。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ],
+        "reasons": [
+          "因為主要變化是接酸的鹼增加",
+          "因為呼吸排不掉二氧化碳，血液因此變酸",
+          "因為呼吸變快，血液就會比較酸",
+          "因為二氧化碳增加會讓血液比較不酸"
+        ],
+        "reasonAnswer": 1,
+        "reasonFeedback": [
+          "這次主要變化是二氧化碳增加，不是接酸的鹼增加。",
+          "主要原因在呼吸，二氧化碳留在血中增加會使血液變酸。",
+          "呼吸快慢不能直接代表二氧化碳排出多少，要看實際排出。",
+          "二氧化碳增加會使血液比較酸，不是比較不酸。"
+        ]
+      },
+      {
+        "id": "R-B",
+        "group": "R",
+        "side": "B",
+        "node": 3,
+        "stem": "這次血液變不酸的主要原因是呼吸排出較多二氧化碳（CO₂），血中二氧化碳減少，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+          "代謝性酸中毒（身體的酸增加或鹼減少）",
+          "代謝性鹼中毒（身體的酸減少或鹼增加）",
+          "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）"
+        ],
+        "answer": 0,
+        "feedback": [
+          "呼出較多二氧化碳讓血液比較不酸，符合呼吸性鹼中毒。",
+          "這次血液比較不酸，主要原因是呼吸排出較多二氧化碳。",
+          "兩種情況都可能比較不酸，但這次已知主要原因在呼吸。",
+          "這次是二氧化碳減少而比較不酸，不是二氧化碳增加而變酸。"
+        ],
+        "sources": [
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+          },
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ],
+        "reasons": [
+          "因為接酸的鹼減少，所以血液比較不酸",
+          "因為二氧化碳減少，所以氫離子（讓液體變酸的小顆粒）增加",
+          "因為呼出較多二氧化碳，氫離子（讓液體變酸的小顆粒）減少，血液比較不酸",
+          "因為肺把接酸的鹼留回血液"
+        ],
+        "reasonAnswer": 2,
+        "reasonFeedback": [
+          "接酸的鹼減少會使血液比較酸，這次主要變化是二氧化碳減少。",
+          "氫離子是讓液體變酸的小顆粒，呼出較多二氧化碳會讓它減少。",
+          "氫離子是讓液體變酸的小顆粒，呼出較多二氧化碳可讓它減少，pH變大。",
+          "把接酸的鹼留回血液是腎臟的工作，肺負責排二氧化碳。"
+        ]
+      },
+      {
+        "id": "K-A",
+        "group": "K",
+        "side": "A",
+        "node": 4,
+        "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把更多銨（帶著酸的NH₄⁺）排進尿液，也把更多碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，這有什麼幫助？",
+        "options": [
+          "尿液更酸，也讓血液更酸",
+          "把鹼排掉，讓血液比較不酸",
+          "排酸留鹼，幫血液比較不酸",
+          "把酸留住，讓血液的鹼增加"
+        ],
+        "answer": 2,
+        "feedback": [
+          "尿液帶走更多酸，可以幫血液減酸，不是讓血液也更酸。",
+          "這裡是把碳酸氫根這種鹼留回血液，不是排掉鹼。",
+          "把酸排到尿裡、把鹼留回血液，可幫表示酸不酸的數字（pH）回升。",
+          "銨是帶著酸排出，不是把酸留在血液裡。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ],
+        "reasons": [
+          "因為尿液變酸，血液也跟著變酸",
+          "因為留住碳酸氫根就是留住酸",
+          "因為氫離子（讓液體變酸的小顆粒）被接住就已離開身體",
+          "因為氫離子（讓液體變酸的小顆粒）送進尿裡、碳酸氫根留回血液，都幫血液減酸"
+        ],
+        "reasonAnswer": 3,
+        "reasonFeedback": [
+          "尿液把酸帶走，可以幫血液比較不酸。",
+          "碳酸氫根是接酸的鹼，留住它不是留住酸。",
+          "氫離子只是被接住還沒離開身體，仍要排到體外。",
+          "把氫離子排出、把接酸的碳酸氫根留下，都能幫血液減酸。"
+        ]
+      },
+      {
+        "id": "K-B",
+        "group": "K",
+        "side": "B",
+        "node": 4,
+        "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，也把氫離子（H⁺，讓液體變酸）送進管液，這兩件事怎麼配合？",
+        "options": [
+          "一起排酸留鹼，讓血液比較不酸",
+          "一起把酸留住，讓血液比較酸",
+          "一起把鹼排掉，讓血液比較酸",
+          "留下鹼會抵銷排酸，血液酸鹼不變"
+        ],
+        "answer": 0,
+        "feedback": [
+          "留下接酸的鹼、排出氫離子，都能幫血液比較不酸。",
+          "碳酸氫根是接酸的鹼，氫離子則送進管液，並沒有一起留酸。",
+          "碳酸氫根是留回血液，不是和氫離子一起排掉。",
+          "留鹼與排酸都幫血液減酸，兩者不會互相抵銷。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ],
+        "reasons": [
+          "因為留住接酸的鹼、排出酸，都幫血液減酸",
+          "因為接酸的鹼和氫離子，都要留回血液",
+          "因為回收碳酸氫根，就是把它排進尿裡",
+          "因為尿液變酸，血液也要一起變酸"
+        ],
+        "reasonAnswer": 0,
+        "reasonFeedback": [
+          "留鹼與排酸都幫血液比較不酸，兩者可以一起作用。",
+          "氫離子要送進管液排出，碳酸氫根才是留回血液。",
+          "回收是把碳酸氫根留回血液，不是排到尿裡。",
+          "尿液帶走酸，能幫血液減酸，兩者不必一起變酸。"
+        ]
+      },
+      {
+        "id": "N-A",
+        "group": "N",
+        "side": "A",
+        "node": 5,
+        "stem": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+        "options": [
+          "能，接住酸就等於酸已消失",
+          "能，形成銨就等於尿已排出",
+          "不能，因為氨還沒接住氫離子",
+          "不能，接住酸和排出酸是兩件事"
+        ],
+        "answer": 3,
+        "feedback": [
+          "接住酸只是改變它的形式，酸沒有因此消失。",
+          "形成銨之後還要隨尿排到體外，才算把酸排出。",
+          "氨已經接住氫離子形成銨，接下來還要隨尿排出。",
+          "銨仍在體內，還要隨尿排出才算把酸帶走。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ],
+        "reasons": [
+          "因為酸一被接住，就已經離開身體",
+          "因為先形成銨，再隨尿排出，是兩個步驟",
+          "因為銨還留在體內，就表示氨沒有接住酸",
+          "因為氨接住氫離子後，形成的是碳酸氫根"
+        ],
+        "reasonAnswer": 1,
+        "reasonFeedback": [
+          "酸被接住後還在體內，要隨尿排出才算離開身體。",
+          "銨已形成但還在體內，所以還要隨尿排出才能帶走酸。",
+          "氨已接住氫離子形成銨，只是銨還沒隨尿排出。",
+          "氨接住氫離子形成的是銨，不是接酸的碳酸氫根。"
+        ]
+      },
+      {
+        "id": "N-B",
+        "group": "N",
+        "side": "B",
+        "node": 5,
+        "stem": "銨（NH₄⁺，由氨接住讓液體變酸的氫離子而形成）已隨尿排出體外；與只在體內接住酸相比，有什麼不同？",
+        "options": [
+          "酸還在體內，只是換成銨的形式",
+          "只有水排出，銨帶著的酸仍在體內",
+          "銨帶著酸，已隨尿排到體外",
+          "酸和接酸的鹼，都要一起隨尿排出"
+        ],
+        "answer": 2,
+        "feedback": [
+          "這次銨已隨尿排到體外，帶著的酸也離開了身體。",
+          "銨不是只有水，它也能隨尿把酸帶到體外。",
+          "銨隨尿離開身體，才能把接住的酸帶到體外。",
+          "排銨能帶走酸，腎臟同時可以把接酸的碳酸氫根留回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          }
+        ],
+        "reasons": [
+          "因為銨已隨尿把酸帶出身體，不只是接住酸",
+          "因為接住酸就等於尿液已離開身體",
+          "因為銨隨尿排出時，只會帶走水",
+          "因為排出銨時，也要把接酸的鹼全部排掉"
+        ],
+        "reasonAnswer": 0,
+        "reasonFeedback": [
+          "這次銨已隨尿排出，帶著的酸也離開了身體。",
+          "接住酸還需要排尿這一步，才算把酸帶到體外。",
+          "銨可以隨尿把酸帶走，不是只排出水。",
+          "排銨帶走酸的同時，腎臟可以把接酸的鹼留回血液。"
+        ]
+      },
+      {
+        "id": "S-A",
+        "group": "S",
+        "side": "A",
+        "node": 1,
+        "stem": "這次血液變酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）減少，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+          "代謝性酸中毒（身體的酸增加或鹼減少）",
+          "代謝性鹼中毒（身體的酸減少或鹼增加）",
+          "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）"
+        ],
+        "answer": 1,
+        "feedback": [
+          "這次主要是接酸的鹼減少，不是呼吸排不掉二氧化碳。",
+          "接酸的碳酸氫根減少、血液變酸，符合代謝性酸中毒。",
+          "這次接酸的鹼減少，血液是變酸，不是比較不酸。",
+          "這次接酸的鹼減少而變酸，不是呼吸排出較多二氧化碳。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+          }
+        ]
+      },
+      {
+        "id": "S-B",
+        "group": "S",
+        "side": "B",
+        "node": 1,
+        "stem": "這次血液變不酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+          "代謝性酸中毒（身體的酸增加或鹼減少）",
+          "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+          "代謝性鹼中毒（身體的酸減少或鹼增加）"
+        ],
+        "answer": 3,
+        "feedback": [
+          "這次主要是接酸的鹼增加，不是呼吸排出較多二氧化碳。",
+          "接酸的鹼增加讓血液比較不酸，不是鹼減少而變酸。",
+          "這次是接酸的鹼增加，不是呼吸排不掉二氧化碳而變酸。",
+          "接酸的碳酸氫根增加、血液比較不酸，符合代謝性鹼中毒。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "metabolic-alkalosis",
+            "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+          }
+        ]
+      }
+    ],
+    "glossary": [
+      {
+        "id": "buffer",
+        "name": "化學緩衝系統",
+        "text": "緩衝像接球：先接住多出的氫離子（H⁺，讓液體變酸的小顆粒），需要時也能放出，讓pH（表示酸不酸的數字，越小越酸）較少變動。接住酸後，仍需要肺或腎臟幫忙排出。",
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          }
+        ]
+      },
+      {
+        "id": "ratio",
+        "name": "碳酸氫根／碳酸比",
+        "text": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸。課本算式把鹼的量放上面、酸的量放下面相除。其他條件一樣，鹼相對於酸變多，pH（表示酸不酸的數字，越小越酸）就變大。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ]
+      },
+      {
+        "id": "resp",
+        "name": "呼吸調節系統",
+        "text": "肺能把二氧化碳（CO₂，會影響血液酸不酸的氣體）呼出。真正排出的二氧化碳增加，可以減少血液的酸；呼吸變快不代表排出一定增加。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "renal",
+        "name": "腎臟排酸留鹼",
+        "text": "腎臟把氫離子（H⁺，讓液體變酸的小顆粒）送進管液，之後隨尿排出；把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液。尿液帶走酸，可幫血液比較不酸。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ]
+      },
+      {
+        "id": "ammonium",
+        "name": "氨與銨",
+        "text": "氨（NH₃）接住氫離子（H⁺，讓液體變酸的小顆粒）後，形成銨（NH₄⁺）。銨隨尿排出才能把酸帶走；腎臟同時可留下碳酸氫根（HCO₃⁻，接酸的鹼）。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          }
+        ]
+      },
+      {
+        "id": "resp-acid",
+        "name": "呼吸性酸中毒",
+        "text": "呼吸性酸中毒：呼吸排不掉二氧化碳（CO₂），血液因此變酸，pH（表示酸不酸的數字，越小越酸）偏低。腎臟可增加銨（NH₄⁺，帶著酸）的排出，並留下更多碳酸氫根（HCO₃⁻，接酸的鹼）幫血液減酸。",
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ]
+      },
+      {
+        "id": "resp-alk",
+        "name": "呼吸性鹼中毒",
+        "text": "呼吸性鹼中毒：呼吸排出較多二氧化碳（CO₂），血液因此比較不酸，pH（表示酸不酸的數字，越小越酸）偏高。要看真正排出的二氧化碳，不能只看呼吸快慢。",
+        "sources": [
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "met-acid",
+        "name": "代謝性酸中毒",
+        "text": "代謝性酸中毒：身體的酸增加或鹼減少，讓血液變酸。碳酸氫根（HCO₃⁻）是接酸的鹼；它減少時，pH（表示酸不酸的數字，越小越酸）會往低值變。",
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ]
+      },
+      {
+        "id": "met-alk",
+        "name": "代謝性鹼中毒",
+        "text": "代謝性鹼中毒：身體的酸減少或鹼增加，讓血液比較不酸。常見碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（表示酸不酸的數字，越小越酸）往高值變。",
+        "sources": [
+          {
+            "uid": "metabolic-alkalosis",
+            "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ]
+      }
+    ]
+  },
+  "fullAfter": {
+    "profile": "acidbase-full-v1",
+    "slug": "acid-base-homeostasis",
+    "title": "Code pH｜酸鹼三系統",
+    "mindmapSource": "../../docs/classroom/mindmap-relay/acidbase.relay.json",
+    "legacyApply": "apply.json",
+    "designSource": "../../docs/urinary-release/DESIGN_ACIDBASE_FINAL.md",
+    "sources": [
+      {
+        "uid": "acid-base-balance",
+        "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+      },
+      {
+        "uid": "acid-base-balance",
+        "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "鹼/酸比增加使 pH 上升"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+      },
+      {
+        "uid": "buffer-systems",
+        "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+      },
+      {
+        "uid": "renal-acid-base-compensation",
+        "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+      },
+      {
+        "uid": "hypercapnia",
+        "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+      },
+      {
+        "uid": "abg-interpretation",
+        "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+      },
+      {
+        "uid": "respiratory-alkalosis",
+        "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+      },
+      {
+        "uid": "respiratory-alkalosis",
+        "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+      },
+      {
+        "uid": "metabolic-alkalosis",
+        "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "acid-base-homeostasis-node-01",
+        "title": "三系統分工",
+        "summary": "緩衝減少波動，肺與腎調整酸的去路。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          }
+        ],
+        "edges": [
+          "edge_resp_ph",
+          "edge_renal_ph"
+        ],
+        "termId": "buffer"
+      },
+      {
+        "id": "acid-base-homeostasis-node-02",
+        "title": "碳酸比值",
+        "summary": "相同pKa下，鹼／酸比增加使pH上升。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ],
+        "edges": [
+          "edge_ratio_ph"
+        ],
+        "termId": "ratio"
+      },
+      {
+        "id": "acid-base-homeostasis-node-03",
+        "title": "緩衝與場域",
+        "summary": "接住H⁺仍在體內，不等於酸已排出。",
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+          }
+        ],
+        "edges": [
+          "edge_buffer_ph"
+        ],
+        "termId": "buffer"
+      },
+      {
+        "id": "acid-base-homeostasis-node-04",
+        "title": "有效CO₂排出",
+        "summary": "有效CO₂排出增加可減酸；不能只看呼吸次數。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ],
+        "edges": [
+          "edge_resp_co2",
+          "edge_co2_ratio"
+        ],
+        "termId": "resp"
+      },
+      {
+        "id": "acid-base-homeostasis-node-05",
+        "title": "找錯：腎端雙方向",
+        "summary": "H⁺分泌入管液，HCO₃⁻回到血液，協助排酸留鹼。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ],
+        "edges": [
+          "edge_renal_h",
+          "edge_renal_hco3"
+        ],
+        "termId": "renal"
+      },
+      {
+        "id": "acid-base-homeostasis-node-06",
+        "title": "尿端攜酸整合",
+        "summary": "NH₃結合H⁺成NH₄⁺，隨尿攜酸；與保留HCO₃⁻互補。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ],
+        "edges": [
+          "edge_h_ph",
+          "edge_hco3_ratio",
+          "edge_h_hco3_parallel"
+        ],
+        "termId": "ammonium"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "F1",
+        "node": 0,
+        "stem": "身體有緩衝（先接住多出的酸）、肺和腎臟，它們怎麼合作維持血液的酸鹼？",
+        "options": [
+          "先接酸、肺排二氧化碳、腎排酸留鹼",
+          "先接酸、肺回收鹼、腎排二氧化碳",
+          "先排酸、肺接住酸、腎回收鹼",
+          "先留酸、肺排二氧化碳、腎排掉鹼"
+        ],
+        "answer": 0,
+        "feedback": [
+          "三者分工合作：先接住酸，再由肺和腎臟調整酸的去路。",
+          "肺負責排二氧化碳，回收鹼是腎臟的工作。",
+          "先接住酸還不等於排出酸，肺負責排二氧化碳。",
+          "先接住酸能減少酸鹼變動，腎臟還會把鹼留回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ]
+      },
+      {
+        "id": "F2",
+        "node": 1,
+        "stem": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸；用課本算式比較兩者時，要怎麼算？",
+        "options": [
+          "碳酸的量 ÷ 碳酸氫根的量",
+          "碳酸氫根的量 ÷ 碳酸的量",
+          "碳酸氫根的量 ＋ 碳酸的量",
+          "碳酸氫根的量 − 碳酸的量"
+        ],
+        "answer": 1,
+        "feedback": [
+          "你把上下放反了：要把接酸的碳酸氫根放在上面。",
+          "把接酸的碳酸氫根放上面、碳酸放下面，再相除。",
+          "這裡要比較鹼是酸的多少倍，所以用相除，不是相加。",
+          "這裡要比較鹼是酸的多少倍，所以用相除，不是相減。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          }
+        ]
+      },
+      {
+        "id": "F3",
+        "node": 2,
+        "stem": "氫離子（H⁺）越多越酸；緩衝系統像接球一樣接住或放出氫離子，直接有什麼幫助？",
+        "options": [
+          "讓酸隨著尿液排出體外",
+          "讓二氧化碳隨呼氣排出",
+          "讓酸不酸的數字（pH）較少變動",
+          "讓血液與尿液一起變酸"
+        ],
+        "answer": 2,
+        "feedback": [
+          "先接住酸還沒有把酸排出，隨尿排出需要腎臟幫忙。",
+          "先接住酸還沒有把二氧化碳呼出，呼出需要肺幫忙。",
+          "接住或放出氫離子，可讓表示酸不酸的數字（pH）較少變動。",
+          "先接住或放出氫離子，是減少酸鹼變動，不是讓血液和尿液一起變酸。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          }
+        ]
+      },
+      {
+        "id": "F4",
+        "node": 3,
+        "stem": "其他條件一樣，肺真正排出的二氧化碳（CO₂，會影響血液酸不酸的氣體）增加時，對血液有什麼影響？",
+        "options": [
+          "酸增加，血液比較酸",
+          "酸不變，只有尿液變酸",
+          "酸不變，只是呼吸變快",
+          "酸減少，血液比較不酸"
+        ],
+        "answer": 3,
+        "feedback": [
+          "二氧化碳排出增加會減少酸，不是增加酸。",
+          "這裡改變的是肺排出的二氧化碳，會影響血液的酸鹼。",
+          "要看真正排出多少二氧化碳，不能只看呼吸快慢。",
+          "肺排出更多二氧化碳，可以讓血液比較不酸。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "F5",
+        "node": 4,
+        "stem": "腎臟幫血液減酸時，氫離子（H⁺，讓液體變酸）和碳酸氫根（HCO₃⁻，接酸的鹼）各往哪裡去？",
+        "options": [
+          "氫離子進腎小管液，碳酸氫根回血液",
+          "氫離子進腎小管液，碳酸氫根也進管液",
+          "氫離子回血液，碳酸氫根也回血液",
+          "氫離子回血液，碳酸氫根進腎小管液"
+        ],
+        "answer": 0,
+        "feedback": [
+          "腎臟把氫離子送進管液，並把接酸的碳酸氫根留回血液。",
+          "碳酸氫根要留回血液，才能幫血液接住酸。",
+          "氫離子要送進管液排出，才能幫血液減酸。",
+          "你把兩者的去向放反了：氫離子進管液，碳酸氫根回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ]
+      },
+      {
+        "id": "F6",
+        "node": 5,
+        "stem": "氨（NH₃）會接住氫離子（H⁺，讓液體變酸）；這能怎麼幫腎臟排酸？",
+        "options": [
+          "形成碳酸氫根，隨尿帶走酸",
+          "形成銨（NH₄⁺），隨尿帶走酸",
+          "形成銨（NH₄⁺），回血液帶走酸",
+          "形成碳酸，回血液帶走酸"
+        ],
+        "answer": 1,
+        "feedback": [
+          "氨接住氫離子後形成的是銨，不是碳酸氫根。",
+          "氨接住氫離子形成銨，再隨尿排出，就能帶走酸。",
+          "銨要隨尿排到體外，才算把酸帶走。",
+          "氨接住氫離子形成的是銨，要隨尿排出才能帶走酸。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ]
+      }
+    ],
+    "pool": [
+      {
+        "id": "P-A",
+        "group": "P",
+        "side": "A",
+        "node": 1,
+        "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）增加；表示酸不酸的數字（pH）會怎麼變？",
+        "options": [
+          "變大，血液比較不酸",
+          "變小，血液比較酸",
+          "不變，鹼的量不影響它",
+          "先變小，最後回到原來的值"
+        ],
+        "answer": 0,
+        "feedback": [
+          "接酸的鹼增加、酸不變時，血液比較不酸，pH會變大。",
+          "接酸的鹼增加會讓血液比較不酸，所以pH變大，不是變小。",
+          "酸的量不變，但接酸的鹼增加也會讓pH變大。",
+          "其他條件一樣時，接酸的鹼增加會使pH變大，沒有先變酸再回復的步驟。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ]
+      },
+      {
+        "id": "P-B",
+        "group": "P",
+        "side": "B",
+        "node": 1,
+        "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）減少；表示酸不酸的數字（pH）會怎麼變？",
+        "options": [
+          "不變，鹼的量不影響它",
+          "變大，血液比較不酸",
+          "變小，血液比較酸",
+          "先變大，最後回到原來的值"
+        ],
+        "answer": 2,
+        "feedback": [
+          "酸的量不變，但接酸的鹼減少也會讓pH變小。",
+          "接酸的鹼減少會讓血液比較酸，所以pH變小，不是變大。",
+          "接酸的鹼減少、酸不變時，血液比較酸，pH會變小。",
+          "其他條件一樣時，接酸的鹼減少會使pH變小，沒有先減酸再回復的步驟。"
+        ],
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          }
+        ]
+      },
+      {
+        "id": "R-A",
+        "group": "R",
+        "side": "A",
+        "node": 3,
+        "stem": "這次血液變酸的主要原因是呼吸排不掉二氧化碳（CO₂），血中二氧化碳增加，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+        "options": [
+          "代謝性鹼中毒",
+          "呼吸性酸中毒",
+          "呼吸性鹼中毒",
+          "代謝性酸中毒"
+        ],
+        "answer": 1,
+        "feedback": [
+          "這次是呼吸排不掉二氧化碳而變酸，不是身體的鹼增加。",
+          "二氧化碳增加讓血液變酸，主要原因在呼吸，符合呼吸性酸中毒。",
+          "二氧化碳增加讓血液變酸，不是呼出較多二氧化碳而變不酸。",
+          "兩種情況都可能變酸，但這次已知主要原因是呼吸排不掉二氧化碳。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ],
+        "reasons": [
+          "因為主要變化是接酸的鹼增加",
+          "因為呼吸排不掉二氧化碳，血液因此變酸",
+          "因為呼吸變快，血液就會比較酸",
+          "因為二氧化碳增加會讓血液比較不酸"
+        ],
+        "reasonAnswer": 1,
+        "reasonFeedback": [
+          "這次主要變化是二氧化碳增加，不是接酸的鹼增加。",
+          "主要原因在呼吸，二氧化碳留在血中增加會使血液變酸。",
+          "呼吸快慢不能直接代表二氧化碳排出多少，要看實際排出。",
+          "二氧化碳增加會使血液比較酸，不是比較不酸。"
+        ]
+      },
+      {
+        "id": "R-B",
+        "group": "R",
+        "side": "B",
+        "node": 3,
+        "stem": "這次血液變不酸的主要原因是呼吸排出較多二氧化碳（CO₂），血中二氧化碳減少，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性鹼中毒",
+          "代謝性酸中毒",
+          "代謝性鹼中毒",
+          "呼吸性酸中毒"
+        ],
+        "answer": 0,
+        "feedback": [
+          "呼出較多二氧化碳讓血液比較不酸，符合呼吸性鹼中毒。",
+          "這次血液比較不酸，主要原因是呼吸排出較多二氧化碳。",
+          "兩種情況都可能比較不酸，但這次已知主要原因在呼吸。",
+          "這次是二氧化碳減少而比較不酸，不是二氧化碳增加而變酸。"
+        ],
+        "sources": [
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+          },
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ],
+        "reasons": [
+          "因為接酸的鹼減少，所以血液比較不酸",
+          "因為二氧化碳減少，所以氫離子（讓液體變酸的小顆粒）增加",
+          "因為呼出較多二氧化碳，氫離子（讓液體變酸的小顆粒）減少，血液比較不酸",
+          "因為肺把接酸的鹼留回血液"
+        ],
+        "reasonAnswer": 2,
+        "reasonFeedback": [
+          "接酸的鹼減少會使血液比較酸，這次主要變化是二氧化碳減少。",
+          "氫離子是讓液體變酸的小顆粒，呼出較多二氧化碳會讓它減少。",
+          "氫離子是讓液體變酸的小顆粒，呼出較多二氧化碳可讓它減少，pH變大。",
+          "把接酸的鹼留回血液是腎臟的工作，肺負責排二氧化碳。"
+        ]
+      },
+      {
+        "id": "K-A",
+        "group": "K",
+        "side": "A",
+        "node": 4,
+        "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把更多銨（帶著酸的NH₄⁺）排進尿液，也把更多碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，這有什麼幫助？",
+        "options": [
+          "尿液更酸，也讓血液更酸",
+          "把鹼排掉，讓血液比較不酸",
+          "排酸留鹼，幫血液比較不酸",
+          "把酸留住，讓血液的鹼增加"
+        ],
+        "answer": 2,
+        "feedback": [
+          "尿液帶走更多酸，可以幫血液減酸，不是讓血液也更酸。",
+          "這裡是把碳酸氫根這種鹼留回血液，不是排掉鹼。",
+          "把酸排到尿裡、把鹼留回血液，可幫表示酸不酸的數字（pH）回升。",
+          "銨是帶著酸排出，不是把酸留在血液裡。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ],
+        "reasons": [
+          "因為尿液變酸，血液也跟著變酸",
+          "因為留住碳酸氫根就是留住酸",
+          "因為氫離子（讓液體變酸的小顆粒）被接住就已離開身體",
+          "因為氫離子（讓液體變酸的小顆粒）送進尿裡、碳酸氫根留回血液，都幫血液減酸"
+        ],
+        "reasonAnswer": 3,
+        "reasonFeedback": [
+          "尿液把酸帶走，可以幫血液比較不酸。",
+          "碳酸氫根是接酸的鹼，留住它不是留住酸。",
+          "氫離子只是被接住還沒離開身體，仍要排到體外。",
+          "把氫離子排出、把接酸的碳酸氫根留下，都能幫血液減酸。"
+        ]
+      },
+      {
+        "id": "K-B",
+        "group": "K",
+        "side": "B",
+        "node": 4,
+        "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，也把氫離子（H⁺，讓液體變酸）送進管液，這兩件事怎麼配合？",
+        "options": [
+          "一起排酸留鹼，讓血液比較不酸",
+          "一起把酸留住，讓血液比較酸",
+          "一起把鹼排掉，讓血液比較酸",
+          "留下鹼會抵銷排酸，血液酸鹼不變"
+        ],
+        "answer": 0,
+        "feedback": [
+          "留下接酸的鹼、排出氫離子，都能幫血液比較不酸。",
+          "碳酸氫根是接酸的鹼，氫離子則送進管液，並沒有一起留酸。",
+          "碳酸氫根是留回血液，不是和氫離子一起排掉。",
+          "留鹼與排酸都幫血液減酸，兩者不會互相抵銷。"
+        ],
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ],
+        "reasons": [
+          "因為留住接酸的鹼、排出酸，都幫血液減酸",
+          "因為接酸的鹼和氫離子，都要留回血液",
+          "因為回收碳酸氫根，就是把它排進尿裡",
+          "因為尿液變酸，血液也要一起變酸"
+        ],
+        "reasonAnswer": 0,
+        "reasonFeedback": [
+          "留鹼與排酸都幫血液比較不酸，兩者可以一起作用。",
+          "氫離子要送進管液排出，碳酸氫根才是留回血液。",
+          "回收是把碳酸氫根留回血液，不是排到尿裡。",
+          "尿液帶走酸，能幫血液減酸，兩者不必一起變酸。"
+        ]
+      },
+      {
+        "id": "N-A",
+        "group": "N",
+        "side": "A",
+        "node": 5,
+        "stem": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+        "options": [
+          "能，接住酸就等於酸已消失",
+          "能，形成銨就等於尿已排出",
+          "不能，因為氨還沒接住氫離子",
+          "不能，接住酸和排出酸是兩件事"
+        ],
+        "answer": 3,
+        "feedback": [
+          "接住酸只是改變它的形式，酸沒有因此消失。",
+          "形成銨之後還要隨尿排到體外，才算把酸排出。",
+          "氨已經接住氫離子形成銨，接下來還要隨尿排出。",
+          "銨仍在體內，還要隨尿排出才算把酸帶走。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          }
+        ],
+        "reasons": [
+          "因為酸一被接住，就已經離開身體",
+          "因為先形成銨，再隨尿排出，是兩個步驟",
+          "因為銨還留在體內，就表示氨沒有接住酸",
+          "因為氨接住氫離子後，形成的是碳酸氫根"
+        ],
+        "reasonAnswer": 1,
+        "reasonFeedback": [
+          "酸被接住後還在體內，要隨尿排出才算離開身體。",
+          "銨已形成但還在體內，所以還要隨尿排出才能帶走酸。",
+          "氨已接住氫離子形成銨，只是銨還沒隨尿排出。",
+          "氨接住氫離子形成的是銨，不是接酸的碳酸氫根。"
+        ]
+      },
+      {
+        "id": "N-B",
+        "group": "N",
+        "side": "B",
+        "node": 5,
+        "stem": "銨（NH₄⁺，由氨接住讓液體變酸的氫離子而形成）已隨尿排出體外；與只在體內接住酸相比，有什麼不同？",
+        "options": [
+          "酸還在體內，只是換成銨的形式",
+          "只有水排出，銨帶著的酸仍在體內",
+          "銨帶著酸，已隨尿排到體外",
+          "酸和接酸的鹼，都要一起隨尿排出"
+        ],
+        "answer": 2,
+        "feedback": [
+          "這次銨已隨尿排到體外，帶著的酸也離開了身體。",
+          "銨不是只有水，它也能隨尿把酸帶到體外。",
+          "銨隨尿離開身體，才能把接住的酸帶到體外。",
+          "排銨能帶走酸，腎臟同時可以把接酸的碳酸氫根留回血液。"
+        ],
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          }
+        ],
+        "reasons": [
+          "因為銨已隨尿把酸帶出身體，不只是接住酸",
+          "因為接住酸就等於尿液已離開身體",
+          "因為銨隨尿排出時，只會帶走水",
+          "因為排出銨時，也要把接酸的鹼全部排掉"
+        ],
+        "reasonAnswer": 0,
+        "reasonFeedback": [
+          "這次銨已隨尿排出，帶著的酸也離開了身體。",
+          "接住酸還需要排尿這一步，才算把酸帶到體外。",
+          "銨可以隨尿把酸帶走，不是只排出水。",
+          "排銨帶走酸的同時，腎臟可以把接酸的鹼留回血液。"
+        ]
+      },
+      {
+        "id": "S-A",
+        "group": "S",
+        "side": "A",
+        "node": 1,
+        "stem": "這次血液變酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）減少，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性酸中毒",
+          "代謝性酸中毒",
+          "代謝性鹼中毒",
+          "呼吸性鹼中毒"
+        ],
+        "answer": 1,
+        "feedback": [
+          "這次主要是接酸的鹼減少，不是呼吸排不掉二氧化碳。",
+          "接酸的碳酸氫根減少、血液變酸，符合代謝性酸中毒。",
+          "這次接酸的鹼減少，血液是變酸，不是比較不酸。",
+          "這次接酸的鹼減少而變酸，不是呼吸排出較多二氧化碳。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+          }
+        ]
+      },
+      {
+        "id": "S-B",
+        "group": "S",
+        "side": "B",
+        "node": 1,
+        "stem": "這次血液變不酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+        "options": [
+          "呼吸性鹼中毒",
+          "代謝性酸中毒",
+          "呼吸性酸中毒",
+          "代謝性鹼中毒"
+        ],
+        "answer": 3,
+        "feedback": [
+          "這次主要是接酸的鹼增加，不是呼吸排出較多二氧化碳。",
+          "接酸的鹼增加讓血液比較不酸，不是鹼減少而變酸。",
+          "這次是接酸的鹼增加，不是呼吸排不掉二氧化碳而變酸。",
+          "接酸的碳酸氫根增加、血液比較不酸，符合代謝性鹼中毒。"
+        ],
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          },
+          {
+            "uid": "metabolic-alkalosis",
+            "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+          }
+        ]
+      }
+    ],
+    "glossary": [
+      {
+        "id": "buffer",
+        "name": "化學緩衝系統",
+        "text": "緩衝像接球：先接住多出的氫離子（H⁺，讓液體變酸的小顆粒），需要時也能放出，讓pH（表示酸不酸的數字，越小越酸）較少變動。接住酸後，仍需要肺或腎臟幫忙排出。",
+        "sources": [
+          {
+            "uid": "buffer-systems",
+            "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+          }
+        ]
+      },
+      {
+        "id": "ratio",
+        "name": "碳酸氫根／碳酸比",
+        "text": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸。課本算式把鹼的量放上面、酸的量放下面相除。其他條件一樣，鹼相對於酸變多，pH（表示酸不酸的數字，越小越酸）就變大。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "buffer-systems",
+            "quote": "鹼/酸比增加使 pH 上升"
+          }
+        ]
+      },
+      {
+        "id": "resp",
+        "name": "呼吸調節系統",
+        "text": "肺能把二氧化碳（CO₂，會影響血液酸不酸的氣體）呼出。真正排出的二氧化碳增加，可以減少血液的酸；呼吸變快不代表排出一定增加。",
+        "sources": [
+          {
+            "uid": "acid-base-balance",
+            "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "renal",
+        "name": "腎臟排酸留鹼",
+        "text": "腎臟把氫離子（H⁺，讓液體變酸的小顆粒）送進管液，之後隨尿排出；把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液。尿液帶走酸，可幫血液比較不酸。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+          }
+        ]
+      },
+      {
+        "id": "ammonium",
+        "name": "氨與銨",
+        "text": "氨（NH₃）接住氫離子（H⁺，讓液體變酸的小顆粒）後，形成銨（NH₄⁺）。銨隨尿排出才能把酸帶走；腎臟同時可留下碳酸氫根（HCO₃⁻，接酸的鹼）。",
+        "sources": [
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+          }
+        ]
+      },
+      {
+        "id": "resp-acid",
+        "name": "呼吸性酸中毒",
+        "text": "呼吸性酸中毒：呼吸排不掉二氧化碳（CO₂），血液因此變酸，pH（表示酸不酸的數字，越小越酸）偏低。腎臟可增加銨（NH₄⁺，帶著酸）的排出，並留下更多碳酸氫根（HCO₃⁻，接酸的鹼）幫血液減酸。",
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+          },
+          {
+            "uid": "renal-acid-base-compensation",
+            "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+          }
+        ]
+      },
+      {
+        "id": "resp-alk",
+        "name": "呼吸性鹼中毒",
+        "text": "呼吸性鹼中毒：呼吸排出較多二氧化碳（CO₂），血液因此比較不酸，pH（表示酸不酸的數字，越小越酸）偏高。要看真正排出的二氧化碳，不能只看呼吸快慢。",
+        "sources": [
+          {
+            "uid": "respiratory-alkalosis",
+            "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+          },
+          {
+            "uid": "hypercapnia",
+            "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+          }
+        ]
+      },
+      {
+        "id": "met-acid",
+        "name": "代謝性酸中毒",
+        "text": "代謝性酸中毒：身體的酸增加或鹼減少，讓血液變酸。碳酸氫根（HCO₃⁻）是接酸的鹼；它減少時，pH（表示酸不酸的數字，越小越酸）會往低值變。",
+        "sources": [
+          {
+            "uid": "abg-interpretation",
+            "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ]
+      },
+      {
+        "id": "met-alk",
+        "name": "代謝性鹼中毒",
+        "text": "代謝性鹼中毒：身體的酸減少或鹼增加，讓血液比較不酸。常見碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（表示酸不酸的數字，越小越酸）往高值變。",
+        "sources": [
+          {
+            "uid": "metabolic-alkalosis",
+            "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+          },
+          {
+            "uid": "abg-interpretation",
+            "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+          }
+        ]
+      }
+    ]
+  },
+  "bankChanges": [
+    {
+      "id": "kidney-anatomy-case-q04",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "before": {
+        "id": "kidney-anatomy-case-q04",
+        "stem": "腎上腺在腎臟附近，這表示它和腎臟有什麼關係？",
+        "options": [
+          "腎上腺就是腎錐體的尖端",
+          "腎上腺在腎臟旁邊，是另一個器官",
+          "腎上腺就是伸進髓質的腎柱",
+          "腎上腺就是收集尿液的腎盂"
+        ],
+        "answer": 1,
+        "hint": "先想想：住在附近，就表示是同一個器官嗎？",
+        "explain": "因為腎上腺雖在腎臟附近，仍是另一個器官，所以選「腎上腺在腎臟旁邊，是另一個器官」。選「腎上腺就是腎錐體的尖端」的同學，說的腎錐體尖端叫腎乳頭，並不是腎上腺。",
+        "nodeId": "kidney-anatomy-node-04",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+          "kidney-position；anatomy/AB-05_15 p.2–3"
+        ]
+      },
+      "after": {
+        "id": "kidney-anatomy-case-q04",
+        "stem": "腎上腺與腎臟有什麼關係？",
+        "options": [
+          "它是腎臟的腎錐體尖端",
+          "它靠近腎臟，但屬另一個器官",
+          "它是腎臟伸進髓質的腎柱",
+          "它是腎臟收集尿液的腎盂"
+        ],
+        "answer": 1,
+        "hint": "先想想：住在附近，就表示是同一個器官嗎？",
+        "explain": "因為腎上腺雖在腎臟附近，仍是另一個器官，所以選「它靠近腎臟，但屬另一個器官」。選「它是腎臟的腎錐體尖端」的同學，說的腎錐體尖端叫腎乳頭，並不是腎上腺。",
+        "nodeId": "kidney-anatomy-node-04",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+          "kidney-position；anatomy/AB-05_15 p.2–3"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「它靠近腎臟，但屬另一個器官」，因為腎上腺鄰近腎臟，但兩者是不同器官。",
+        "memory": "腎上腺在旁邊，不是腎的一塊",
+        "trace": "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4\nkidney-position；anatomy/AB-05_15 p.2–3"
+      },
+      "evidence": [
+        {
+          "uid": "kidney-structure",
+          "quote": "外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "腎上腺位於腎附近但不是腎葉或腎元"
+        },
+        {
+          "uid": "kidney-structure",
+          "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+        }
+      ]
+    },
+    {
+      "id": "nephron-circulation-case-q04",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "before": {
+        "id": "nephron-circulation-case-q04",
+        "stem": "近腎絲球器會幫忙調節腎臟的血流，其中分泌腎素的細胞在哪裡？",
+        "options": [
+          "遠曲小管的緻密斑",
+          "入球小動脈壁的近腎絲球細胞",
+          "腎盂內面",
+          "鮑氏囊外壁"
+        ],
+        "answer": 1,
+        "hint": "先想想：分泌腎素的細胞在血管壁，還是管液的感測點？",
+        "explain": "因為入球小動脈壁的近腎絲球細胞會分泌腎素，所以選「入球小動脈壁的近腎絲球細胞」。選「遠曲小管的緻密斑」的同學，所選的緻密斑負責感受管液的鈉，和分泌腎素的細胞不同。",
+        "nodeId": "nephron-circulation-node-05",
+        "sources": [
+          "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+        ]
+      },
+      "after": {
+        "id": "nephron-circulation-case-q04",
+        "stem": "腎臟需要調節血流時，會由哪個位置的細胞分泌腎素？",
+        "options": [
+          "遠曲小管的緻密斑",
+          "入球小動脈壁的近腎絲球細胞",
+          "腎盂內面",
+          "鮑氏囊外壁"
+        ],
+        "answer": 1,
+        "hint": "先想想：分泌腎素的細胞在血管壁，還是管液的感測點？",
+        "explain": "因為入球小動脈壁的近腎絲球細胞會分泌腎素，所以選「入球小動脈壁的近腎絲球細胞」。選「遠曲小管的緻密斑」的同學，所選的緻密斑負責感受管液的鈉，和分泌腎素的細胞不同。",
+        "nodeId": "nephron-circulation-node-05",
+        "sources": [
+          "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「入球小動脈壁的近腎絲球細胞」，因為腎素由入球小動脈壁的近腎絲球細胞分泌。",
+        "memory": "腎素的家，在入球血管壁",
+        "trace": "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      },
+      "evidence": [
+        {
+          "uid": "juxtaglomerular-apparatus",
+          "quote": "近腎絲球器包含入球小動脈的近腎絲球細胞、遠曲小管緻密斑及位於其間的 Lacis 細胞。"
+        },
+        {
+          "uid": "juxtaglomerular-apparatus",
+          "quote": "近腎絲球細胞為入球小動脈壁特化平滑肌細胞，感受壓力並分泌腎素；緻密斑感受管液鈉變化。"
+        }
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q01",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "before": {
+        "id": "filtration-clearance-foundation-q01",
+        "stem": "腎絲球先把血液裡的水和部分物質濾出來，它們會往哪裡走？",
+        "options": [
+          "從腎絲球微血管進入鮑氏囊腔",
+          "從鮑氏囊腔進入入球小動脈",
+          "從腎盂進入腎皮質",
+          "從膀胱進入輸尿管"
+        ],
+        "answer": 0,
+        "hint": "先想想：水先在血管裡，過濾後進到哪個空間？",
+        "explain": "因為水和能通過的物質會從腎絲球血管進入鮑氏囊，所以選「從腎絲球微血管進入鮑氏囊腔」。選「從鮑氏囊腔進入入球小動脈」的同學，把血管到囊腔的方向寫反了。",
+        "nodeId": "filtration-clearance-node-01",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      },
+      "after": {
+        "id": "filtration-clearance-foundation-q01",
+        "stem": "腎絲球先把血液裡的水和部分物質濾出來，它們會往哪裡走？",
+        "options": [
+          "從腎絲球微血管進入鮑氏囊腔",
+          "從腎絲球微血管進入入球小動脈",
+          "從腎絲球微血管進入腎盂",
+          "從腎絲球微血管進入輸尿管"
+        ],
+        "answer": 0,
+        "hint": "先想想：水先在血管裡，過濾後進到哪個空間？",
+        "explain": "因為水和能通過的物質會從腎絲球血管進入鮑氏囊，所以選「從腎絲球微血管進入鮑氏囊腔」。選「從腎絲球微血管進入入球小動脈」的同學，把濾液的去處選成了血管，濾液應進入鮑氏囊。",
+        "nodeId": "filtration-clearance-node-01",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「從腎絲球微血管進入鮑氏囊腔」，因為過濾是從腎絲球微血管到鮑氏囊腔。",
+        "memory": "血管先濾水，鮑氏囊來接",
+        "trace": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      },
+      "evidence": [
+        {
+          "uid": "glomerular-filtration",
+          "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊"
+        }
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q04",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "before": {
+        "id": "filtration-clearance-foundation-q04",
+        "stem": "哪一種力量會把水從腎絲球血管推進鮑氏囊，幫忙過濾？",
+        "options": [
+          "鮑氏囊裡的水往回頂的壓力",
+          "血漿蛋白把水拉回血管的力量（膠體滲透壓）",
+          "尿道外括約肌收緊的力量",
+          "腎絲球血管裡的水往外推的壓力（靜水壓）"
+        ],
+        "answer": 3,
+        "hint": "先想想：哪股力往囊裡推，哪股力往血管拉？",
+        "explain": "因為腎絲球血管內往外推的水壓會促進過濾，所以要選這股往囊裡推的力量。選「血漿蛋白把水拉回血管的力量（膠體滲透壓）」的同學，選的是把水拉回血管的力量，方向相反。",
+        "nodeId": "filtration-clearance-node-04",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+          "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+        ]
+      },
+      "after": {
+        "id": "filtration-clearance-foundation-q04",
+        "stem": "哪一種力量會把水從腎絲球血管推進鮑氏囊，幫忙過濾？",
+        "options": [
+          "鮑氏囊裡的水往回頂的壓力",
+          "腎絲球血管內蛋白質拉住水的力量（膠體滲透壓）",
+          "尿道外括約肌收緊的力量",
+          "腎絲球血管裡的水往外推的壓力（靜水壓）"
+        ],
+        "answer": 3,
+        "hint": "先想想：哪股力往囊裡推，哪股力往血管拉？",
+        "explain": "因為腎絲球血管內往外推的水壓會促進過濾，所以要選這股往囊裡推的力量。選「腎絲球血管內蛋白質拉住水的力量（膠體滲透壓）」的同學，選的是把水留在血管內的力量，方向相反。",
+        "nodeId": "filtration-clearance-node-04",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+          "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「腎絲球血管裡的水往外推的壓力（靜水壓）」，因為腎絲球血管內的靜水壓把水往囊裡推。",
+        "memory": "血管水壓往外推，幫忙濾水",
+        "trace": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6\ngfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+      },
+      "evidence": [
+        {
+          "uid": "gfr-regulation",
+          "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+        },
+        {
+          "uid": "gfr-regulation",
+          "quote": "每分鐘濾出多少水，取決於往囊裡推與往血裡拉的力量怎麼相抵。"
+        }
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q05",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "before": {
+        "id": "filtration-clearance-foundation-q05",
+        "stem": "清除率的算式是「尿中物質有多濃 × 每分鐘尿量 ÷ 血漿中有多濃」（C＝U×V／P），算出的數字在說什麼？",
+        "options": [
+          "每分鐘相當清掉多少毫升血漿裡的那種物質",
+          "每分鐘從尿裡排掉多少毫克的那種物質",
+          "每毫升尿裡裝了多少毫克的那種物質",
+          "一天從膀胱排掉多少毫升的尿"
+        ],
+        "answer": 0,
+        "hint": "先想想：算出來的單位是毫升／分鐘，還是毫克／分鐘？",
+        "explain": "因為清除率是把尿裡排掉的物質換算回血漿體積，所以選「每分鐘相當清掉多少毫升血漿裡的那種物質」。選「每分鐘從尿裡排掉多少毫克的那種物質」的同學，在說每分鐘排掉的物質重量，和每分鐘相當多少血漿是不同的量。",
+        "nodeId": "filtration-clearance-node-05",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      "after": {
+        "id": "filtration-clearance-foundation-q05",
+        "stem": "清除率的算式是「尿中物質有多濃 × 每分鐘尿量 ÷ 血漿中有多濃」（C＝U×V／P），算出的數字在說什麼？",
+        "options": [
+          "每分鐘相當清掉多少毫升血漿裡的那種物質",
+          "每分鐘從血漿移到尿裡多少毫克的那種物質",
+          "每毫升尿裡裝了多少毫克的那種物質",
+          "一天從膀胱排掉多少毫升的尿"
+        ],
+        "answer": 0,
+        "hint": "先想想：算出來的單位是毫升／分鐘，還是毫克／分鐘？",
+        "explain": "因為清除率是把尿裡排掉的物質換算回血漿體積，所以選「每分鐘相當清掉多少毫升血漿裡的那種物質」。選「每分鐘從血漿移到尿裡多少毫克的那種物質」的同學，在說每分鐘排掉的物質重量，和每分鐘相當多少血漿是不同的量。",
+        "nodeId": "filtration-clearance-node-05",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「每分鐘相當清掉多少毫升血漿裡的那種物質」，因為清除率表示每分鐘相當被清除的血漿體積。",
+        "memory": "清除率算血漿，不是算尿量",
+        "trace": "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      },
+      "evidence": [
+        {
+          "uid": "renal-clearance",
+          "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+        },
+        {
+          "uid": "renal-clearance",
+          "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積"
+        },
+        {
+          "uid": "renal-clearance",
+          "quote": "U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+        },
+        {
+          "uid": "renal-clearance",
+          "quote": "把尿裡帶走的某物質，換算成原來多少血漿才裝得下它。"
+        },
+        {
+          "uid": "renal-clearance",
+          "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量"
+        }
+      ]
+    },
+    {
+      "id": "urine-concentration-case-q04",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "before": {
+        "id": "urine-concentration-case-q04",
+        "stem": "髓質周圍已經有濃淡差，能吸引水移出，但集尿管不太能通水，還能得到同樣濃的尿嗎？",
+        "options": [
+          "能，外面的濃淡差可以代替水通道",
+          "不能，集尿管也要能讓水通過",
+          "能，只要尿在膀胱裡存一樣久",
+          "不能，因為上升枝也要讓水通過"
+        ],
+        "answer": 1,
+        "hint": "先想想：門外能吸引水，門卻過不去，水能出去嗎？",
+        "explain": "因為水還得穿過集尿管的管壁才能回血液，所以選「不能，集尿管也要能讓水通過」。選「能，外面的濃淡差可以代替水通道」的同學，把外面的吸水條件當成已經替管壁開好了門。",
+        "nodeId": "urine-concentration-node-01",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+        ]
+      },
+      "after": {
+        "id": "urine-concentration-case-q04",
+        "stem": "髓質周圍已經有濃淡差，能吸引水移出，但集尿管不太能通水，還能得到同樣濃的尿嗎？",
+        "options": [
+          "能，集尿管外的濃淡差可以代替水通道",
+          "不能，集尿管也要能讓水通過",
+          "能，只要尿在膀胱裡存一樣久",
+          "不能，因為上升枝也要讓水通過"
+        ],
+        "answer": 1,
+        "hint": "先想想：門外能吸引水，門卻過不去，水能出去嗎？",
+        "explain": "因為水還得穿過集尿管的管壁才能回血液，所以選「不能，集尿管也要能讓水通過」。選「能，集尿管外的濃淡差可以代替水通道」的同學，把外面的吸水條件當成已經替管壁開好了門。",
+        "nodeId": "urine-concentration-node-01",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「不能，集尿管也要能讓水通過」，因為集尿管水通透性（水穿過管壁有多容易，叫做水通透性）是濃縮尿液的必要條件。",
+        "memory": "濃淡差有了，水門也要開",
+        "trace": "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+      },
+      "evidence": [
+        {
+          "uid": "urine-concentration",
+          "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+        },
+        {
+          "uid": "urine-concentration",
+          "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "可增加遠曲小管近集尿管段及皮質集尿管對水的通透性"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+        }
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q06",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "before": {
+        "id": "urinary-route-micturition-foundation-q06",
+        "stem": "酸不酸的數字叫pH，數字越小越酸。記錄尿液時，每日尿量、尿比重和pH各是在說什麼？",
+        "options": [
+          "三個都在說一天排出幾毫升尿",
+          "尿量看每日容量，比重看相對密度，pH看酸鹼",
+          "尿比重的單位是每天幾公升",
+          "pH是在說一天排出多少物質"
+        ],
+        "answer": 1,
+        "hint": "先想想：容量、相對密度和酸不酸，能用同一個數字代替嗎？",
+        "explain": "因為每日尿量、比重與pH（酸不酸的數字叫pH，數字越小越酸）描述不同事情，所以選「尿量看每日容量，比重看相對密度，pH看酸鹼」。選「尿比重的單位是每天幾公升」的同學，把比重這種相對密度，寫成一天排出的尿量單位。",
+        "nodeId": "urinary-route-micturition-node-06",
+        "sources": [
+          "urine-physical-properties；physiology/CH09 p.22"
+        ]
+      },
+      "after": {
+        "id": "urinary-route-micturition-foundation-q06",
+        "stem": "酸不酸的數字叫pH，數字越小越酸。記錄尿液時，每日尿量、尿比重和pH各是在說什麼？",
+        "options": [
+          "尿量看酸鹼，比重看每日容量，pH看相對密度",
+          "尿量看每日容量，比重看相對密度，pH看酸鹼",
+          "尿量看相對密度，比重看酸鹼，pH看每日容量",
+          "尿量看每日容量，比重看酸鹼，pH看相對密度"
+        ],
+        "answer": 1,
+        "hint": "先想想：容量、相對密度和酸不酸，能用同一個數字代替嗎？",
+        "explain": "因為每日尿量、比重與pH（酸不酸的數字，越小越酸）分別描述容量、相對密度與酸鹼，所以選「尿量看每日容量，比重看相對密度，pH看酸鹼」。選「尿量看相對密度，比重看酸鹼，pH看每日容量」的同學，把三個項目的意思錯配了。",
+        "nodeId": "urinary-route-micturition-node-06",
+        "sources": [
+          "urine-physical-properties；physiology/CH09 p.22"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「尿量看每日容量，比重看相對密度，pH看酸鹼」，因為尿量是每日容量，比重是相對密度，pH（酸不酸的數字叫pH，數字越小越酸）是酸鹼性。",
+        "memory": "尿量看多少，比重看密，pH看酸鹼",
+        "trace": "urine-physical-properties；physiology/CH09 p.22"
+      },
+      "evidence": [
+        {
+          "uid": "urine-physical-properties",
+          "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。"
+        },
+        {
+          "uid": "urine-physical-properties",
+          "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義"
+        },
+        {
+          "uid": "urine-physical-properties",
+          "quote": "把每日容量、比重、酸鹼值及澄清度分開配對"
+        },
+        {
+          "uid": "acid-base-balance",
+          "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸）"
+        }
+      ]
+    },
+    {
+      "id": "electrolyte-balance-case-q01",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "before": {
+        "id": "electrolyte-balance-case-q01",
+        "stem": "把同樣顆數的葡萄糖和氯化鈉（NaCl，一種鹽）放進水裡，想比較最後小粒子有幾顆，要先注意什麼？",
+        "options": [
+          "只數鈉，不數拆出來的氯",
+          "把兩種物質都當成不會拆開",
+          "確認氯化鈉拆開，鈉和氯兩種都要數",
+          "只比較每種物質看起來有多大"
+        ],
+        "answer": 2,
+        "hint": "先想想：一份鹽拆出鈉和氯，兩種是不是都該算？",
+        "explain": "因為葡萄糖不拆開，氯化鈉拆成鈉和氯兩種粒子，所以兩種都要數，選「確認氯化鈉拆開，鈉和氯兩種都要數」。選「只數鈉，不數拆出來的氯」的同學，少算了氯離子，會把兩顆當成一顆。",
+        "nodeId": "electrolyte-balance-node-01",
+        "sources": [
+          "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+        ]
+      },
+      "after": {
+        "id": "electrolyte-balance-case-q01",
+        "stem": "把同樣顆數的葡萄糖和氯化鈉（NaCl，一種鹽）放進水裡，想比較最後小粒子有幾顆，要先注意什麼？",
+        "options": [
+          "只數鈉，不數拆出來的氯",
+          "把葡萄糖和氯化鈉都當成不會拆開",
+          "確認氯化鈉拆開，鈉和氯兩種都要數",
+          "只比較每種物質看起來有多大"
+        ],
+        "answer": 2,
+        "hint": "先想想：一份鹽拆出鈉和氯，兩種是不是都該算？",
+        "explain": "因為葡萄糖不拆開，氯化鈉拆成鈉和氯兩種粒子，所以兩種都要數，選「確認氯化鈉拆開，鈉和氯兩種都要數」。選「只數鈉，不數拆出來的氯」的同學，少算了氯離子，會把兩顆當成一顆。",
+        "nodeId": "electrolyte-balance-node-01",
+        "sources": [
+          "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+        ]
+      },
+      "guidance": {
+        "chain": "",
+        "decide": "答案是「確認氯化鈉拆開，鈉和氯兩種都要數」，因為氯化鈉拆開後，鈉與氯兩種粒子都要數。",
+        "memory": "糖一顆不拆，鹽拆鈉加氯",
+        "trace": "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      },
+      "evidence": [
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3597 @@
+{
+  "schemaVersion": 2,
+  "slug": "tubular-handling",
+  "version": "v1",
+  "title": {
+    "text": "腎小管再吸收、分泌與排泄",
+    "sources": [
+      {
+        "uid": "renal-handling",
+        "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+      },
+      {
+        "uid": "renal-handling",
+        "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+      },
+      {
+        "uid": "renal-handling",
+        "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+      },
+      {
+        "uid": "renal-handling",
+        "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+      },
+      {
+        "uid": "renal-handling",
+        "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・腎小管再吸收、分泌與排泄",
+      "sources": [
+        {
+          "uid": "renal-handling",
+          "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+        },
+        {
+          "uid": "renal-handling",
+          "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+        },
+        {
+          "uid": "renal-handling",
+          "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+        },
+        {
+          "uid": "renal-handling",
+          "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+        },
+        {
+          "uid": "renal-handling",
+          "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+      "width": 1122,
+      "height": 1402,
+      "anchorView": "overview"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "tubular-reabsorption",
+          "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+        },
+        {
+          "uid": "tubular-reabsorption",
+          "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+        },
+        {
+          "uid": "tubular-reabsorption",
+          "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+        },
+        {
+          "uid": "tubular-reabsorption",
+          "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+        },
+        {
+          "uid": "tubular-reabsorption",
+          "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "reabs": {
+        "name": {
+          "text": "腎小管再吸收",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "text": {
+          "text": "再吸收是把管液中的物質送回血液。方向和把血中物質送入管液的分泌不同。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        }
+      },
+      "secretion": {
+        "name": {
+          "text": "腎小管分泌",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "text": {
+          "text": "分泌是把血中物質送入管液。排泄量要把分泌量加回過濾減再吸收的結果。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        }
+      },
+      "glucose": {
+        "name": {
+          "text": "葡萄糖回收",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "text": {
+          "text": "近曲小管用鈉共同運輸回收葡萄糖，正常可全部回收。全回收描述比例，不代表過濾負荷增加。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        }
+      },
+      "tm": {
+        "name": {
+          "text": "葡萄糖最大轉運量",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "text": {
+          "text": "葡萄糖最大轉運量是375 mg/min。過濾負荷超過回收能力時，會出現糖尿。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        }
+      },
+      "potassium": {
+        "name": {
+          "text": "鉀離子分泌",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "text": {
+          "text": "遠曲小管與集尿管可分泌鉀離子，調節鉀排泄。血鉀升高與醛固酮可促進這個作用。",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        }
+      },
+      "aldo": {
+        "name": {
+          "text": "醛固酮的作用",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "text": {
+          "text": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鈉回收和鉀分泌是不同物質的不同移動方向。",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "處理方向",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "再吸收由管液回血，分泌由血進管液。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "reabs",
+            "kind": "focus",
+            "name": {
+              "text": "腎小管再吸收",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "reabs",
+                "term": "reabs",
+                "label": {
+                  "text": "腎小管再吸收",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                    },
+                    {
+                      "uid": "renal-handling",
+                      "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                    },
+                    {
+                      "uid": "renal-handling",
+                      "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                    },
+                    {
+                      "uid": "renal-handling",
+                      "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                    },
+                    {
+                      "uid": "renal-handling",
+                      "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-0-0",
+            "kind": "focus",
+            "short": {
+              "text": "再吸收",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                }
+              ]
+            },
+            "full": {
+              "text": "再吸收",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.43,
+            "anchorRef": "再吸收",
+            "anchor": [
+              0.5392156862745098,
+              0.5064194008559201
+            ],
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "葡萄糖最大轉運量",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 375,
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mg/min",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "status": {
+              "text": "課本值",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "reabs",
+              "term": "reabs",
+              "kind": "focus",
+              "label": {
+                "text": "腎小管再吸收",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "再吸收",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "secretion",
+              "term": "secretion",
+              "kind": "focus",
+              "label": {
+                "text": "腎小管分泌",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "分泌",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "reabs"
+            ],
+            "to": [
+              "secretion"
+            ],
+            "description": {
+              "text": "再吸收由管液回血，分泌由血進管液。",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                },
+                {
+                  "uid": "renal-handling",
+                  "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "葡萄糖回收",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "正常可全回收，但轉運能力有上限。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "glucose",
+            "kind": "focus",
+            "name": {
+              "text": "葡萄糖回收",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "glucose",
+                "term": "glucose",
+                "label": {
+                  "text": "葡萄糖回收",
+                  "sources": [
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                    },
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                    },
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                    },
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                    },
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "葡萄糖",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "full": {
+              "text": "葡萄糖",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.35,
+            "anchorRef": "葡萄糖",
+            "anchor": [
+              0.47237076648841353,
+              0.42796005706134094
+            ],
+            "sources": [
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "葡萄糖最大轉運量",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 375,
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mg/min",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "status": {
+              "text": "課本值",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "glucose",
+              "term": "glucose",
+              "kind": "focus",
+              "label": {
+                "text": "葡萄糖回收",
+                "sources": [
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "葡萄糖",
+                "sources": [
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "tm",
+              "term": "tm",
+              "kind": "focus",
+              "label": {
+                "text": "葡萄糖最大轉運量",
+                "sources": [
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "Tm",
+                "sources": [
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                  },
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "glucose"
+            ],
+            "to": [
+              "tm"
+            ],
+            "description": {
+              "text": "正常可全回收，但轉運能力有上限。",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "鉀的調節",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "遠曲小管與集尿管分泌鉀，醛固酮促鈉回收並排鉀。",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "potassium",
+            "kind": "focus",
+            "name": {
+              "text": "鉀離子分泌",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "potassium",
+                "term": "potassium",
+                "label": {
+                  "text": "鉀離子分泌",
+                  "sources": [
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                    },
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                    },
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                    },
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                    },
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-2-0",
+            "kind": "focus",
+            "short": {
+              "text": "K⁺",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "full": {
+              "text": "K⁺",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.55,
+            "anchorRef": "K⁺",
+            "anchor": [
+              0.7308377896613191,
+              0.5385164051355207
+            ],
+            "sources": [
+              {
+                "uid": "potassium-secretion",
+                "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "葡萄糖最大轉運量",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 375,
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mg/min",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            },
+            "status": {
+              "text": "課本值",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+                },
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "potassium",
+              "term": "potassium",
+              "kind": "focus",
+              "label": {
+                "text": "鉀離子分泌",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "鉀分泌",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "aldo",
+              "term": "aldo",
+              "kind": "focus",
+              "label": {
+                "text": "醛固酮的作用",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "醛固酮",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "potassium"
+            ],
+            "to": [
+              "aldo"
+            ],
+            "description": {
+              "text": "遠曲小管與集尿管分泌鉀，醛固酮促鈉回收並排鉀。",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                },
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "potassium-secretion",
+                "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q01",
+            "stem": "小管裡原本被濾出的物質，又回到血液，這個動作叫什麼？",
+            "options": [
+              "再吸收",
+              "分泌",
+              "腎絲球過濾",
+              "排泄到體外"
+            ],
+            "answer": 0,
+            "hint": "先想想：物質這次是在回到血液，還是離開血液？",
+            "explain": "因為再吸收就是把管液中的物質收回血液，所以選「再吸收」。選「分泌」的同學，所選的分泌是從血液送進管液，方向相反。",
+            "nodeId": "tubular-handling-node-01",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q02",
+            "stem": "想算同一種物質最後隨尿排出多少，哪一個加減算式正確？",
+            "options": [
+              "先濾出＋收回血液－額外送進管液",
+              "先濾出－收回血液＋額外送進管液",
+              "收回血液－先濾出＋額外送進管液",
+              "先濾出＋收回血液＋額外送進管液"
+            ],
+            "answer": 1,
+            "hint": "先想想：拿回身體的要減掉，另送進尿的要加上嗎？",
+            "explain": "因為收回血液的部分不會再隨尿排出，而分泌是另外加進管液，所以選「先濾出－收回血液＋額外送進管液」。選「先濾出＋收回血液－額外送進管液」的同學，把再吸收和分泌的加減號交換了。",
+            "nodeId": "tubular-handling-node-02",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q03",
+            "stem": "在近曲小管，葡萄糖和水各用什麼方式回到血液？",
+            "options": [
+              "葡萄糖跟著水移動，水搭鈉離子的共同運輸",
+              "葡萄糖從血液送進管液，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收",
+              "葡萄糖搭鈉離子的共同運輸，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收",
+              "葡萄糖和鈉離子反向移動，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收"
+            ],
+            "answer": 2,
+            "hint": "先想想：葡萄糖和鈉是一起走，還是一個進、一個出？",
+            "explain": "因為近曲小管讓葡萄糖和鈉離子同方向回收，水則靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）移動，所以選「葡萄糖搭鈉離子的共同運輸，水靠滲透回收」。選「葡萄糖和鈉離子反向移動，水靠滲透回收」的同學，把葡萄糖與鈉的共同運輸，錯寫成一進一出的交換。",
+            "nodeId": "tubular-handling-node-03",
+            "sources": [
+              "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "水主要依滲透作用回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q04",
+            "stem": "腎小管回收葡萄糖也有速度上限，「葡萄糖最大轉運量」指的是什麼？",
+            "options": [
+              "尿裡葡萄糖有多濃的固定數字",
+              "腎臟每分鐘血流量的上限",
+              "膀胱一天能存多少尿的上限",
+              "每分鐘能搬運多少葡萄糖的上限"
+            ],
+            "answer": 3,
+            "hint": "先想想：這個上限是在算每分鐘搬多少，還是液體多濃？",
+            "explain": "因為小管每分鐘能搬運的葡萄糖有上限，所以這個上限叫最大轉運量，選「每分鐘能搬運多少葡萄糖的上限」。選「尿裡葡萄糖有多濃的固定數字」的同學，說的是尿有多濃，和每分鐘能搬多少不同。",
+            "nodeId": "tubular-handling-node-04",
+            "sources": [
+              "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "葡萄糖最大轉運量為 375 mg/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q05",
+            "stem": "醛固酮是幫忙調整鈉與鉀的激素，它在腎小管後段會怎麼做？",
+            "options": [
+              "把鈉收回血液，把鉀送進管液",
+              "把鈉送進管液，把鉀收回血液",
+              "把鈉和鉀都送進管液",
+              "讓鈉和鉀都停止移動"
+            ],
+            "answer": 0,
+            "hint": "先想想：醛固酮要把哪一種留下，哪一種送進尿？",
+            "explain": "因為醛固酮增加鈉再吸收並增加鉀分泌，所以選「把鈉收回血液，把鉀送進管液」。選「把鈉送進管液，把鉀收回血液」的同學，把留下鈉與排出鉀的方向寫反了。",
+            "nodeId": "tubular-handling-node-05",
+            "sources": [
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-foundation-q06",
+            "stem": "看到尿裡某種物質比較濃，就能說腎小管把更多這種物質分泌進尿裡嗎？",
+            "options": [
+              "能，尿有多濃就是分泌的速度",
+              "不能，還要看收回多少水、每分鐘排多少尿",
+              "能，尿有多濃就是腎絲球過濾率",
+              "不能，尿變濃表示收回血液的物質更多"
+            ],
+            "answer": 1,
+            "hint": "先想想：尿變濃，可能只是剩下的水變少嗎？",
+            "explain": "因為回收較多水也會讓剩下的尿變濃，所以單看濃淡還不夠，選「不能，還要看收回多少水、每分鐘排多少尿」。選「不能，尿變濃表示收回血液的物質更多」的同學，把尿比較濃直接當成物質回收量增加，少看了水的改變。",
+            "nodeId": "tubular-handling-node-06",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+              "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "濃度高低不可直接當成再吸收總量。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "tubular-handling-case-q01",
+            "stem": "某種物質從小管旁的血液移進小管裡的液體，這個動作叫什麼？",
+            "options": [
+              "再吸收",
+              "從膀胱排尿",
+              "分泌",
+              "腎絲球過濾"
+            ],
+            "answer": 2,
+            "hint": "先想想：這一次是從血往管液，還是從管液往血？",
+            "explain": "因為從血液額外送進管液叫分泌，所以選「分泌」。選「再吸收」的同學，所選的再吸收是把管液裡的物質拿回血液，方向相反。",
+            "nodeId": "tubular-handling-node-01",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-case-q02",
+            "stem": "同一種物質，先濾出和額外送進管液的量都不變，但收回血液的量變多，最後隨尿排出的量會怎麼變？",
+            "options": [
+              "變多",
+              "不變",
+              "還不能知道，要先知道每分鐘尿量",
+              "變少"
+            ],
+            "answer": 3,
+            "hint": "先想想：原本要排掉的物質，多拿一些回身體，還會排得更多嗎？",
+            "explain": "因為先濾出的量要扣掉收回血液的量，再加上分泌量，所以回收變多就排出變少，選「變少」。選「還不能知道，要先知道每分鐘尿量」的同學，把計算物質排出量和計算尿有多濃混在一起，本題已固定其餘收支量。",
+            "nodeId": "tubular-handling-node-02",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-case-q03",
+            "stem": "兩份尿裡的同一種物質一樣濃，甲每分鐘排出的尿比較多，哪個說法正確？",
+            "options": [
+              "甲每分鐘排掉的這種物質比較多",
+              "甲乙每分鐘排掉的這種物質一樣多",
+              "甲每分鐘排掉的這種物質比較少",
+              "可以知道甲的小管分泌增加了"
+            ],
+            "answer": 0,
+            "hint": "先想想：一樣濃的兩杯水，倒出去比較多會帶走比較多物質嗎？",
+            "explain": "因為每分鐘排出量是尿中濃度（同樣多的水裡裝了多少物質，叫做濃度，就像糖水有多甜）乘以每分鐘尿量，所以一樣濃而尿較多的甲，排出物質也較多，選「甲每分鐘排掉的這種物質比較多」。選「甲乙每分鐘排掉的這種物質一樣多」的同學，忽略了兩份尿每分鐘的量不同。",
+            "nodeId": "tubular-handling-node-06",
+            "sources": [
+              "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+              "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-case-q04",
+            "stem": "正常情況下，送進腎小管的葡萄糖沒有超過回收能力，搬運功能也正常，葡萄糖會怎樣？",
+            "options": [
+              "被額外分泌進尿，才排得出去",
+              "能被小管收回血液",
+              "因搬運位置已滿，而留在尿裡",
+              "靠分泌從管液回到血液"
+            ],
+            "answer": 1,
+            "hint": "先想想：送來的糖沒超過回收能力，還會不會收不完？",
+            "explain": "因為正常小管有能力把這些葡萄糖收回，所以選「能被小管收回血液」。選「因搬運位置已滿，而留在尿裡」的同學，要在送來的糖超過回收能力時才可能發生，和題目的條件不同。",
+            "nodeId": "tubular-handling-node-04",
+            "sources": [
+              "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "葡萄糖正常全回收，尿素部分回收。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "tubular-handling-case-q05",
+            "stem": "醛固酮增加時，腎小管後段的鈉和鉀會往哪裡走？",
+            "options": [
+              "鈉從血進管液，鉀從管液回血",
+              "鈉和鉀都從血進管液",
+              "鈉從管液回血，鉀從血進管液",
+              "鈉和鉀都從管液回血"
+            ],
+            "answer": 2,
+            "hint": "先想想：鈉要留住、鉀要排掉，各要往哪裡移動？",
+            "explain": "因為醛固酮促進留鈉和排鉀，所以鈉回血、鉀進管液，選「鈉從管液回血，鉀從血進管液」。選「鈉和鉀都從管液回血」的同學，把鉀也當成要一起留回血液了。",
+            "nodeId": "tubular-handling-node-05",
+            "sources": [
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "切到葡萄糖「回收」主題，正常運輸功能完整且負荷未超能力時，物質移動方向為何？",
+          "options": [
+            "由血液分泌入管液",
+            "由膀胱回到腎盂",
+            "由尿道直接回到腎絲球",
+            "由管液回血液"
+          ],
+          "answer": 3,
+          "feedback": "再吸收將葡萄糖由管液送回血液，與鉀分泌入管液的方向不同，見節點 01、03、04。",
+          "sources": [
+            "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "potassium-secretion",
+            "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "tubular-handling-node-01",
+        "title": {
+          "text": "三種物質移動",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。\n過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-01.svg",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          }
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-01-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "血",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "囊",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    380,
+                    300
+                  ],
+                  [
+                    450,
+                    330
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "flow-01-2",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "管液",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "血",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    560,
+                    720
+                  ],
+                  [
+                    630,
+                    720
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "flow-01-3",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "血",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "管液",
+                  "sources": [
+                    {
+                      "uid": "renal-handling",
+                      "quote": "分泌把血中物質送入管液。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    800,
+                    800
+                  ],
+                  [
+                    720,
+                    800
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "分泌把血中物質送入管液。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tubular-handling-node-02",
+        "title": {
+          "text": "排泄量的收支",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。\n過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-02-data.svg",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下列步驟與原句排列順序，再核對結果。",
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "腎絲球初次過濾負荷量",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            {
+              "text": "扣除腎小管再吸收回血量",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "排泄量＝過濾量－再吸收量＋分泌量。"
+                }
+              ]
+            },
+            {
+              "text": "加上腎小管分泌入尿量",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "排泄量＝過濾量－再吸收量＋分泌量。"
+                }
+              ]
+            },
+            {
+              "text": "最終隨尿液排出體外的排泄量",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "排泄量＝過濾量－再吸收量＋分泌量。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      {
+        "id": "tubular-handling-node-03",
+        "title": {
+          "text": "近曲小管的回收",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。\n近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-03.svg",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「葡萄糖回收」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-03-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "濾液中的水與特定溶質",
+                  "sources": [
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "血液",
+                  "sources": [
+                    {
+                      "uid": "tubular-reabsorption",
+                      "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    425,
+                    750
+                  ],
+                  [
+                    500,
+                    695
+                  ],
+                  [
+                    600,
+                    640
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "tubular-reabsorption",
+                    "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tubular-handling-node-04",
+        "title": {
+          "text": "葡萄糖的最大轉運量",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。\n近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-04-data.svg",
+          "sources": [
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+            },
+            {
+              "uid": "tubular-reabsorption",
+              "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「葡萄糖回收」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "近曲小管以 Na⁺共同運輸回收葡萄糖與胺基酸，正常可全回收；葡萄糖最大轉運量為 375 mg/min，過濾負荷超過能力即出現糖尿。水主要依滲透作用回收。肌酸酐不被再吸收，尿素部分回收。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "正常尿中葡萄糖很少，使尿液／血漿濃度比很小；糖出現在尿裡也可能是攜帶體功能異常，不能只歸因血糖過高。"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "- 葡萄糖正常再吸收比例最高\n- 近曲小管是大量回收段\n- Na⁺與葡萄糖同向運輸，H⁺與 Na⁺為反向交換"
+              },
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "U/P 是濃度比，清除率還要乘尿流量；濃度高低不可直接當成再吸收總量。課本 p.9-14 表列近端 Na⁺75%，p.9-16 文字為67%，兩者分列、不合成單一精確值。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "tubular-handling-node-05",
+        "title": {
+          "text": "鉀的調節性分泌",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。\n醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-05.svg",
+          "sources": [
+            {
+              "uid": "potassium-secretion",
+              "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「鉀的調節」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "potassium-secretion",
+                "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-05-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "血",
+                  "sources": [
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "管液",
+                  "sources": [
+                    {
+                      "uid": "potassium-secretion",
+                      "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    965,
+                    975
+                  ],
+                  [
+                    820,
+                    975
+                  ],
+                  [
+                    655,
+                    975
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tubular-handling-node-06",
+        "title": {
+          "text": "濃度比與排泄量",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。\n過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/tubular-handling-node-06-data.svg",
+          "sources": [
+            {
+              "uid": "renal-handling",
+              "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "腎小管再吸收、分泌與排泄",
+        "sources": [
+          {
+            "uid": "renal-handling",
+            "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+          },
+          {
+            "uid": "renal-handling",
+            "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+          },
+          {
+            "uid": "renal-handling",
+            "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+          },
+          {
+            "uid": "renal-handling",
+            "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+          },
+          {
+            "uid": "renal-handling",
+            "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+              },
+              {
+                "uid": "renal-handling",
+                "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "再吸收是把管液中的物質送回血液。方向和把血中物質送入管液的分泌不同。",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "分泌是把血中物質送入管液。排泄量要把分泌量加回過濾減再吸收的結果。",
+                "sources": [
+                  {
+                    "uid": "renal-handling",
+                    "quote": "腎臟處理物質包括腎絲球過濾、腎小管再吸收與分泌；排泄量＝過濾量－再吸收量＋分泌量。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。菊糖只過濾，葡萄糖正常全回收，肌酸酐有少量分泌，PAH 過濾加分泌。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "葡萄糖運輸有最大量限制，過濾負荷超過回收能力可能出現尿糖；清除率與 GFR 的比較要配物質的處理方式。"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "- 比較排泄與過濾負荷時兩者都需用物質量/時間\n- 比較清除率與 GFR 才能都用 mL/min"
+                  },
+                  {
+                    "uid": "renal-handling",
+                    "quote": "尿中濃度較高不等於一定分泌，水回收也會濃縮；物質排泄量不能直接與體積流率 GFR 比大小。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "potassium-secretion",
+                "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "遠曲小管與集尿管可分泌鉀離子，調節鉀排泄。血鉀升高與醛固酮可促進這個作用。",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鈉回收和鉀分泌是不同物質的不同移動方向。",
+                "sources": [
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "腎臟可藉遠曲小管與集尿管分泌 K⁺調節鉀排泄；醛固酮與血鉀升高可促進此作用。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。鉀在前段有大量再吸收，最終尿鉀仍受後段分泌調整，因此不能只由初次過濾量推算。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "血漿鉀升高是增加分泌的刺激；指定頁面血鉀正常範圍約 3.8–5 mEq/L，鉀異常亦可影響心肌與神經肌肉。"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "- 醛固酮：鈉回收增加、鉀分泌增加\n- 問調節性分泌部位抓遠曲與集尿管"
+                  },
+                  {
+                    "uid": "potassium-secretion",
+                    "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

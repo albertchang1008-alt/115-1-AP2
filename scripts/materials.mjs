@@ -45,7 +45,7 @@ export function auditOne(slug) {
   if (!fs.existsSync(htmlPath)) return { slug, error: '找不到 index.html' };
   const html = fs.readFileSync(htmlPath, 'utf8');
   const hasScript = /course-learning\.js/.test(html);
-  const hasComplete = /\.complete\s*\(\s*\)/.test(html);
+  const hasComplete = /\.complete\s*\(\s*\)|emit\(['"]complete['"]\)/.test(html);
 
   const materialIds = html.match(/<meta name="material-ids" content="([^"]*)"/);
   const generatedNodeIds = materialIds ? materialIds[1].split(',').filter((id) => /-node-\d+$/.test(id)) : [];
@@ -74,7 +74,8 @@ export function auditOne(slug) {
     nodeNote = '偵測不到固定節點標記，可能用變數／多個資料陣列組成節點 id（例如迴圈或物件 key），需要人工閱讀程式碼核對後手動填入 shared/materials.ts';
   }
 
-  const questionIds = generatedQuestionIds.length ? generatedQuestionIds.sort() : [...new Set(
+  const assessmentIds=html.match(/<meta name="material-assessment-ids" content="([^"]*)"/);
+  const questionIds = assessmentIds ? assessmentIds[1].split(',').filter(Boolean).sort() : generatedQuestionIds.length ? generatedQuestionIds.sort() : [...new Set(
     [...[...html.matchAll(/id:\s*['"]([\w:-]+)['"]/g)].map((m) => m[1]), ...jsonIds]
       .filter((id) => /-?(?:q|l)\d{1,3}$/i.test(id))
   )].sort();
@@ -107,7 +108,8 @@ export async function loadCatalog() {
   // process）不會出現，是這次幫教材工作室測試時才抓到的。
   const url = pathToFileUrl(CATALOG_PATH);
   url.searchParams.set('t', `${Date.now()}-${Math.random()}`);
-  const mod = await import(url);
+  const {tsImport}=await import('tsx/esm/api');
+  const mod = await tsImport(url.href,import.meta.url);
   return mod.MATERIAL_CATALOG;
 }
 
@@ -169,7 +171,8 @@ export function upsertCatalogEntry(slug, entry) {
   if (lineRe.test(src)) {
     newSrc = src.replace(lineRe, newLine);
   } else {
-    const closeAt = src.indexOf('\n};', src.indexOf('export const MATERIAL_CATALOG'));
+    const declaration=src.includes('export const ALL_MATERIAL_CATALOG')?'export const ALL_MATERIAL_CATALOG':'export const MATERIAL_CATALOG';
+    const closeAt = src.indexOf('\n};', src.indexOf(declaration));
     if (closeAt < 0) {
       throw new Error('shared/materials.ts 格式跟預期不同，找不到 MATERIAL_CATALOG 的結尾，沒有寫入');
     }

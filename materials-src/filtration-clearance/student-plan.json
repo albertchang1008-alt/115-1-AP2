@@ -1,0 +1,153 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/filtration-clearance.md",
+  "nodes": [
+    {
+      "figure": "filter-direction",
+      "steps": [
+        {
+          "type": "arrows",
+          "choices": [
+            "腎絲球",
+            "鮑氏囊"
+          ],
+          "expected": [
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "filter-layers",
+      "steps": [
+        {
+          "type": "sequence",
+          "choices": [
+            "微血管內皮",
+            "基底膜",
+            "足細胞（鮑氏囊臟層）",
+            "鮑氏囊壁層"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "filter-particles",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "水",
+            "葡萄糖",
+            "胺基酸",
+            "白蛋白",
+            "紅血球"
+          ],
+          "choices": [
+            "過得去",
+            "過不去"
+          ],
+          "expected": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "unique": false
+        }
+      ]
+    },
+    {
+      "figure": "filter-pressures",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "腎絲球（微血管內）的靜水壓",
+            "囊內壓",
+            "血漿膠體壓"
+          ],
+          "choices": [
+            "推進鮑氏囊",
+            "對抗過濾"
+          ],
+          "expected": [
+            0,
+            1,
+            1
+          ],
+          "unique": false,
+          "rowFeedback": [
+            "腎絲球（微血管內）的靜水壓促進過濾。",
+            "囊內壓對抗過濾。",
+            "血漿膠體壓對抗過濾。"
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "clearance",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "U",
+            "V",
+            "P"
+          ],
+          "choices": [
+            "尿中濃度",
+            "每分鐘尿量",
+            "血漿濃度"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "rowFeedback": [
+            "U 是尿中濃度",
+            "V 是每分鐘尿量",
+            "P 是血漿濃度。"
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "clearance-substances",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "菊糖",
+            "肌酸酐",
+            "PAH"
+          ],
+          "choices": [
+            "只過濾，不回收、不分泌",
+            "過濾，再加少量分泌",
+            "過濾＋分泌"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 0,
+          "useActionQuestion": true
+        }
+      ]
+    }
+  ]
+}

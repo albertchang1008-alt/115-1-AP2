@@ -1,0 +1,4764 @@
+{
+  "schemaVersion": 1,
+  "slug": "water-sodium-regulation",
+  "version": "v1",
+  "title": {
+    "text": "水分收支與鈉水調節",
+    "sources": [
+      {
+        "uid": "water-intake-output",
+        "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・水分收支與鈉水調節",
+      "sources": [
+        {
+          "uid": "water-intake-output",
+          "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+        }
+      ]
+    },
+    "initialState": "state-2",
+    "figure": {
+      "src": "overview.png",
+      "width": 1122,
+      "height": 1402
+    },
+    "compactTerms": {
+      "thirst": "retainSignals",
+      "renin": "hormonesDown"
+    },
+    "glossary": {
+      "water": {
+        "name": {
+          "text": "水攝取三來源",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+            }
+          ]
+        },
+        "text": {
+          "text": "水攝取包括喝入的液體、食物中的水，以及身體自己產生的代謝水。平衡示例中三者每日合計2500 mL，與排出量相等。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+            }
+          ]
+        }
+      },
+      "thirst": {
+        "name": {
+          "text": "口渴",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        },
+        "text": {
+          "text": "口渴是促使人喝水的感覺，主要控制水的攝取。水不足時，喝水增加攝取，和抗利尿激素（ADH）保水一起調節水量。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        }
+      },
+      "adhUp": {
+        "name": {
+          "text": "抗利尿激素（ADH）",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            }
+          ]
+        },
+        "text": {
+          "text": "抗利尿激素（ADH）是幫助腎臟保水的激素。水不足時，腦下垂體後葉釋放ADH，讓集尿管更容易回收水。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            }
+          ]
+        }
+      },
+      "raas": {
+        "name": {
+          "text": "腎素－血管收縮素－醛固酮系統（RAAS）",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎素－血管收縮素－醛固酮系統（RAAS）是多器官接力升高血壓的路徑。保留狀態中，腎臟發動、肺臟轉化、腎上腺釋出醛固酮，幫助留鈉留水。",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        }
+      },
+      "anp": {
+        "name": {
+          "text": "心房利鈉尿肽（ANP）",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            }
+          ]
+        },
+        "text": {
+          "text": "心房利鈉尿肽（ANP）主要由心房分泌，回到心臟的血變多時會刺激它釋放。排出狀態中，它促進排鈉，也減少讓身體留住鈉水的激素訊號。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            }
+          ]
+        }
+      },
+      "renin": {
+        "name": {
+          "text": "腎素（Renin）",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎素（Renin）由腎臟近腎絲球細胞釋放，是升高血壓路徑的起點。排出狀態中，心房利鈉尿肽（ANP）抑制腎素分泌。",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            }
+          ]
+        }
+      },
+      "angii": {
+        "name": {
+          "text": "血管收縮素II（AngII）",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            }
+          ]
+        },
+        "text": {
+          "text": "血管收縮素II（AngII）是會讓小動脈收縮、提高血壓的訊號。排出狀態中，心房利鈉尿肽（ANP）抑制它的分泌。",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            }
+          ]
+        }
+      },
+      "aldosterone": {
+        "name": {
+          "text": "醛固酮（Aldosterone）",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            }
+          ]
+        },
+        "text": {
+          "text": "醛固酮（Aldosterone）由腎上腺皮質釋出，幫助腎臟回收鈉。排出狀態中，心房利鈉尿肽（ANP）降低醛固酮的釋放。",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            }
+          ]
+        }
+      },
+      "adhDown": {
+        "name": {
+          "text": "抗利尿激素（ADH）",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            }
+          ]
+        },
+        "text": {
+          "text": "抗利尿激素（ADH）讓集尿管更容易回收水，幫助把水留回身體。排出狀態中，心房利鈉尿肽（ANP）抑制ADH分泌。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            }
+          ]
+        }
+      },
+      "volumeUp": {
+        "name": {
+          "text": "回心血量增加",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            }
+          ]
+        },
+        "text": {
+          "text": "回心血量是回到心臟的血液量。回來的血增加時，會刺激心房壁的牽張接受器，帶動心房利鈉尿肽（ANP）分泌。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            }
+          ]
+        }
+      },
+      "stretch": {
+        "name": {
+          "text": "心房牽張",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+            }
+          ]
+        },
+        "text": {
+          "text": "心房牽張是心房肌肉被拉長的狀態。回心血量增加讓牽張接受器興奮，刺激心房利鈉尿肽（ANP）分泌。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+            }
+          ]
+        }
+      },
+      "hormonesDown": {
+        "name": {
+          "text": "四個激素下降",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            }
+          ]
+        },
+        "text": {
+          "text": "四個激素是腎素、血管收縮素II（AngII）、醛固酮和抗利尿激素（ADH）。排出狀態中，心房利鈉尿肽（ANP）抑制這些激素的分泌或釋放。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            }
+          ]
+        }
+      },
+      "excrete": {
+        "name": {
+          "text": "排鈉排水增加",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            }
+          ]
+        },
+        "text": {
+          "text": "排鈉排水是把鈉和水排出身體。心房利鈉尿肽（ANP）促進鈉排泄，抗利尿激素（ADH）受抑制則使水分排泄增加。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            }
+          ]
+        }
+      },
+      "volumeDown": {
+        "name": {
+          "text": "血容積下降",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            }
+          ]
+        },
+        "text": {
+          "text": "血容積是血管內的血液量，血漿是細胞外液的一部分。這條排出流程以排鈉排水減少體液量，表示減少血管內液體的回饋方向。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            }
+          ]
+        }
+      },
+      "deficit": {
+        "name": {
+          "text": "水不足或血壓下降",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            }
+          ]
+        },
+        "text": {
+          "text": "水不足時，口渴促進攝取，抗利尿激素（ADH）幫助保水。血壓下降也會啟動腎素－血管收縮素－醛固酮系統（RAAS）。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            }
+          ]
+        }
+      },
+      "retainSignals": {
+        "name": {
+          "text": "口渴、ADH與RAAS上升",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "text": {
+          "text": "口渴促進喝水，抗利尿激素（ADH）增加腎端保水。腎素－血管收縮素－醛固酮系統（RAAS）接力作用，幫助留住鈉和水。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        }
+      },
+      "conserve": {
+        "name": {
+          "text": "喝水增加、保水保鈉",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            }
+          ]
+        },
+        "text": {
+          "text": "喝水讓進入身體的水增加，保水則讓腎臟少流失水。抗利尿激素（ADH）增加水回收，醛固酮促進鈉回收，水可隨滲透作用回收。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            }
+          ]
+        }
+      },
+      "waterOut": {
+        "name": {
+          "text": "每日排出2500 mL",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        },
+        "text": {
+          "text": "水會經尿液、呼氣、皮膚及糞便排出。平衡時，每日總排出約2500 mL，與攝取量相等；各途徑的量仍可有範圍。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "平衡",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "每日水攝取示例共2500 mL，與排出維持平衡。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "changes": [
+          {
+            "name": {
+              "text": "水攝取三來源",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "液體、食物與代謝水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                }
+              ]
+            },
+            "direction": "same",
+            "badge": {
+              "text": "＝ 基準",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                }
+              ]
+            },
+            "terms": [
+              "water"
+            ],
+            "termLabels": [
+              {
+                "text": "水攝取三來源",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "labels": [],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "液體",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1500,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝基準",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "食物水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 800,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝基準",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "代謝水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 200,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝基準",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "term": "water",
+              "label": {
+                "text": "攝取2500",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "攝取2500",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                  }
+                ]
+              },
+              "direction": null,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "一天喝進來、吃進來和自己產生的水，會從尿、呼氣、皮膚及糞便離開。"
+                }
+              ]
+            }
+          ],
+          "＝",
+          [
+            {
+              "term": "waterOut",
+              "label": {
+                "text": "排出2500",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "排出2500",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+                  },
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+                  }
+                ]
+              },
+              "direction": null,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+                }
+              ]
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": {
+              "text": "攝取2500＝排出2500",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "容易混淆盲點 / 表列總排出約 2500 mL / 各範圍上下限不是同時發生的固定分項"
+              }
+            ],
+            "from": [
+              "water"
+            ],
+            "to": [
+              "waterOut"
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "保留",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "水分不足或血壓下降時，飲水與腎端保水相互配合。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+            }
+          ]
+        },
+        "changes": [
+          {
+            "name": {
+              "text": "口渴",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "促進飲水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "direction": "up",
+            "badge": {
+              "text": "↑ 上升",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "terms": [
+              "thirst"
+            ],
+            "termLabels": [
+              {
+                "text": "口渴",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": {
+              "text": "ADH",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "集尿管水通透性增加",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            "direction": "up",
+            "badge": {
+              "text": "↑ 上升",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            "terms": [
+              "adhUp"
+            ],
+            "termLabels": [
+              {
+                "text": "ADH",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": {
+              "text": "RAAS",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "AngII升壓；醛固酮保鈉",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            },
+            "direction": "up",
+            "badge": {
+              "text": "↑ 上升",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            },
+            "terms": [
+              "raas"
+            ],
+            "termLabels": [
+              {
+                "text": "RAAS",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "thirst",
+            "short": {
+              "text": "口渴",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "full": {
+              "text": "口渴",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.08,
+            "anchor": [
+              0.515,
+              0.12
+            ],
+            "direction": "up",
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              }
+            ]
+          },
+          {
+            "id": "adh",
+            "short": {
+              "text": "ADH",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            "full": {
+              "text": "抗利尿激素",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.2,
+            "anchor": [
+              0.525,
+              0.145
+            ],
+            "direction": "up",
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              }
+            ]
+          },
+          {
+            "id": "raas",
+            "short": {
+              "text": "RAAS",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            },
+            "full": {
+              "text": "腎素／醛固酮",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.59,
+            "anchor": [
+              0.39,
+              0.62
+            ],
+            "direction": "up",
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+              },
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+              }
+            ]
+          }
+        ],
+        "indicators": [
+          {
+            "a": [
+              0.515,
+              0.12
+            ],
+            "dir": "up",
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ]
+          },
+          {
+            "a": [
+              0.39,
+              0.62
+            ],
+            "dir": "up",
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ]
+          }
+        ],
+        "intake": [
+          {
+            "name": {
+              "text": "液體",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1500,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "↑攝取，未定量",
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "食物水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 800,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝不變",
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "代謝水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 200,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝不變",
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "term": "deficit",
+              "label": {
+                "text": "水不足／血壓下降",
+                "sources": [
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "缺水/低壓",
+                "sources": [
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  }
+                ]
+              },
+              "direction": null,
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "thirst",
+              "label": {
+                "text": "口渴",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "口渴/ADH/RAAS",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            {
+              "term": "adhUp",
+              "label": {
+                "text": "ADH",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                }
+              ]
+            },
+            {
+              "term": "raas",
+              "label": {
+                "text": "RAAS",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素由腎臟近腎絲球器分泌、轉化酶在肺臟、醛固酮由腎上腺皮質分泌——三個器官分工，是追蹤這條升壓鏈每一步發生在哪個器官的基礎。"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "conserve",
+              "label": {
+                "text": "喝水增加・保水保鈉",
+                "sources": [
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "飲水·保鈉水",
+                "sources": [
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                  }
+                ]
+              },
+              "direction": null,
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                }
+              ]
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": {
+              "text": "水不足→口渴↑",
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              }
+            ],
+            "from": [
+              "deficit"
+            ],
+            "to": [
+              "thirst"
+            ]
+          },
+          {
+            "relation": {
+              "text": "水不足→ADH↑",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              }
+            ],
+            "from": [
+              "deficit"
+            ],
+            "to": [
+              "adhUp"
+            ]
+          },
+          {
+            "relation": {
+              "text": "血壓下降／脫水→RAAS↑",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "脫水時血容積、血壓與 GFR 下降，可興奮 RAAS 保水。"
+              }
+            ],
+            "from": [
+              "deficit"
+            ],
+            "to": [
+              "raas"
+            ]
+          },
+          {
+            "relation": {
+              "text": "口渴↑→喝水增加",
+              "sources": [
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                },
+                {
+                  "uid": "water-intake-output",
+                  "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+              }
+            ],
+            "from": [
+              "thirst"
+            ],
+            "to": [
+              "conserve"
+            ]
+          },
+          {
+            "relation": {
+              "text": "ADH↑→保水",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+              }
+            ],
+            "from": [
+              "adhUp"
+            ],
+            "to": [
+              "conserve"
+            ]
+          },
+          {
+            "relation": {
+              "text": "RAAS↑→保鈉保水",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+              }
+            ],
+            "from": [
+              "raas"
+            ],
+            "to": [
+              "conserve"
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "排出",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "ANP促排鈉，並抑制RAAS相關激素與ADH。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制腎素及血管收縮素II的分泌；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "降低腎上腺絲球帶釋放醛固酮；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "抑制下視丘ADH的分泌。"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            }
+          ]
+        },
+        "changes": [
+          {
+            "name": {
+              "text": "ANP",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "促進鈉與水排出",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            },
+            "direction": "up",
+            "badge": {
+              "text": "↑ 上升",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            },
+            "terms": [
+              "anp"
+            ],
+            "termLabels": [
+              {
+                "text": "ANP",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": {
+              "text": "腎素／AngII",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "detail": {
+              "text": "ANP抑制兩者分泌",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "direction": "down",
+            "badge": {
+              "text": "↓ 下降",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "terms": [
+              "renin",
+              "angii"
+            ],
+            "termLabels": [
+              {
+                "text": "腎素",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              {
+                "text": "AngII",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": {
+              "text": "醛固酮",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "detail": {
+              "text": "ANP降低其釋放",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "direction": "down",
+            "badge": {
+              "text": "↓ 下降",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "terms": [
+              "aldosterone"
+            ],
+            "termLabels": [
+              {
+                "text": "醛固酮",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": {
+              "text": "ADH",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "ANP抑制其分泌",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "direction": "down",
+            "badge": {
+              "text": "↓ 下降",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "terms": [
+              "adhDown"
+            ],
+            "termLabels": [
+              {
+                "text": "ADH",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制下視丘ADH的分泌。"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "adh",
+            "short": {
+              "text": "ADH",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "full": {
+              "text": "抗利尿激素",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.08,
+            "anchor": [
+              0.525,
+              0.145
+            ],
+            "direction": "down",
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              }
+            ]
+          },
+          {
+            "id": "anp",
+            "short": {
+              "text": "ANP",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            },
+            "full": {
+              "text": "心房利鈉尿肽",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.36,
+            "anchor": [
+              0.51,
+              0.445
+            ],
+            "direction": "up",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+              }
+            ]
+          },
+          {
+            "id": "renin",
+            "short": {
+              "text": "腎素",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "full": {
+              "text": "腎素",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.59,
+            "anchor": [
+              0.39,
+              0.62
+            ],
+            "direction": "down",
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+              },
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              }
+            ]
+          },
+          {
+            "id": "aldosterone",
+            "short": {
+              "text": "醛固酮",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "full": {
+              "text": "醛固酮",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.6,
+            "anchor": [
+              0.405,
+              0.562
+            ],
+            "direction": "down",
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+              },
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              }
+            ]
+          },
+          {
+            "id": "angii",
+            "short": {
+              "text": "血管收縮素II",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "full": {
+              "text": "血管收縮素II",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.77,
+            "circulating": true,
+            "direction": "down",
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              }
+            ]
+          }
+        ],
+        "indicators": [
+          {
+            "a": [
+              0.525,
+              0.145
+            ],
+            "dir": "down",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ]
+          },
+          {
+            "a": [
+              0.51,
+              0.445
+            ],
+            "dir": "up",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ]
+          },
+          {
+            "a": [
+              0.39,
+              0.62
+            ],
+            "dir": "down",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ]
+          }
+        ],
+        "intake": [
+          {
+            "name": {
+              "text": "液體",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1500,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝不變",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "食物水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 800,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝不變",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          },
+          {
+            "name": {
+              "text": "代謝水",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 200,
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            },
+            "status": {
+              "text": "＝不變",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ],
+            "unit": {
+              "text": "mL",
+              "sources": [
+                {
+                  "uid": "water-intake-output",
+                  "quote": "消化道吸收液體 1500 mL、食物含水 800 mL、代謝水 200 mL／日。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "term": "volumeUp",
+              "label": {
+                "text": "回心血量",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "血量",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "stretch",
+              "label": {
+                "text": "心房牽張",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "牽張",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+                  }
+                ]
+              },
+              "direction": null,
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "anp",
+              "label": {
+                "text": "ANP",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "ANP",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                  },
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP主要由心房、少量由心室細胞分泌，整體功能為降血壓。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "課本列出：降低腎上腺絲球帶釋放醛固酮；抑制腎素及血管收縮素II的分泌；抑制下視丘ADH的分泌。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "renin",
+              "label": {
+                "text": "腎素",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "四素",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              "direction": "down",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            {
+              "term": "angii",
+              "label": {
+                "text": "AngII",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              "direction": "down",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血管收縮素 II 有三方面作用：①直接作用於小動脈使其收縮，增加周邊血管阻力而升壓；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            {
+              "term": "aldosterone",
+              "label": {
+                "text": "醛固酮",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                  },
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                  }
+                ]
+              },
+              "direction": "down",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "aliases: [\"Renin-Angiotensin-Aldosterone System\", \"RAAS\"]"
+                },
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            {
+              "term": "adhDown",
+              "label": {
+                "text": "ADH",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制下視丘ADH的分泌。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制下視丘ADH的分泌。"
+                  }
+                ]
+              },
+              "direction": "down",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "excrete",
+              "label": {
+                "text": "排鈉排水",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "排",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+                  },
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                }
+              ]
+            }
+          ],
+          "→",
+          [
+            {
+              "term": "volumeDown",
+              "label": {
+                "text": "血容積",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "血量",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+                  }
+                ]
+              },
+              "direction": "down",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+                }
+              ]
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": {
+              "text": "回心血量↑→心房牽張",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+              }
+            ],
+            "from": [
+              "volumeUp"
+            ],
+            "to": [
+              "stretch"
+            ]
+          },
+          {
+            "relation": {
+              "text": "心房牽張→ANP↑",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "心房肌肉拉長、心房壓上升或細胞外液增多，也會刺激ANP分泌。"
+              }
+            ],
+            "from": [
+              "stretch"
+            ],
+            "to": [
+              "anp"
+            ]
+          },
+          {
+            "relation": {
+              "text": "ANP↑→腎素↓",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              }
+            ],
+            "from": [
+              "anp"
+            ],
+            "to": [
+              "renin"
+            ]
+          },
+          {
+            "relation": {
+              "text": "ANP↑→AngII↓",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制腎素及血管收縮素II的分泌；"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              }
+            ],
+            "from": [
+              "anp"
+            ],
+            "to": [
+              "angii"
+            ]
+          },
+          {
+            "relation": {
+              "text": "ANP↑→醛固酮↓",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "降低腎上腺絲球帶釋放醛固酮；"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "降低腎上腺絲球帶釋放醛固酮；"
+              }
+            ],
+            "from": [
+              "anp"
+            ],
+            "to": [
+              "aldosterone"
+            ]
+          },
+          {
+            "relation": {
+              "text": "ANP↑→ADH↓",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "抑制下視丘ADH的分泌。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制下視丘ADH的分泌。"
+              }
+            ],
+            "from": [
+              "anp"
+            ],
+            "to": [
+              "adhDown"
+            ]
+          },
+          {
+            "relation": {
+              "text": "抑制激素／ANP作用→排鈉排水↑",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+                },
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                },
+                {
+                  "uid": "sodium-water-balance",
+                  "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+              }
+            ],
+            "from": [
+              "anp",
+              "renin",
+              "angii",
+              "aldosterone",
+              "adhDown"
+            ],
+            "to": [
+              "excrete"
+            ]
+          },
+          {
+            "relation": {
+              "text": "排鈉排水↑→血容積↓",
+              "sources": [
+                {
+                  "uid": "anp-volume-feedback",
+                  "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+              }
+            ],
+            "from": [
+              "excrete"
+            ],
+            "to": [
+              "volumeDown"
+            ]
+          }
+        ],
+        "teacherNote": true
+      }
+    ],
+    "referenceHeading": {
+      "text": "每日攝取基準（mL／日）",
+      "sources": [
+        {
+          "uid": "water-intake-output",
+          "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+        }
+      ]
+    }
+  },
+  "learning": {
+    "nodes": [
+      {
+        "id": "water-sodium-regulation-node-01",
+        "title": {
+          "text": "水攝取三來源",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "液體、食物與代謝水共同構成攝取",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-01.svg",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "在圖中對照液體1500、食物水800、代謝水200 mL三項每日來源。",
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "water-sodium-regulation-node-02",
+        "title": {
+          "text": "排出途徑與無知覺蒸散",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿、肺、皮膚與糞便皆可排水",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-02.svg",
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "在圖中找出尿液、肺呼氣、皮膚與糞便的排水途徑。",
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "water-sodium-regulation-node-03",
+        "title": {
+          "text": "口渴與ADH",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "增加攝取與增加保水是兩條路徑",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "水不足時，腦下垂體後葉釋放 ADH，增加保水。 水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-03.svg",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切到保留狀態，對照口渴促飲水與ADH保水的兩條路徑。",
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "water-sodium-regulation-node-04",
+        "title": {
+          "text": "RAAS的分工",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎素啟動，血管收縮素II與醛固酮接續作用",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "血壓下降時，刺激腎臟的近腎絲球細胞釋放腎素； 失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-04.svg",
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依腎素、血管收縮素I、肺臟轉化與血管收縮素II接力作用排序。",
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+              },
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "血壓下降時，刺激腎臟的近腎絲球細胞釋放腎素；",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+                }
+              ]
+            },
+            {
+              "text": "腎素催化血液中的血管收縮素原轉換成血管收縮素 I",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**"
+                }
+              ]
+            },
+            {
+              "text": "再經由位於肺臟的血管收縮素轉化酶（ACE）轉變成具活性的血管收縮素 II。",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            {
+              "text": "②作用於腎上腺皮質釋出醛固酮，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "②作用於腎上腺皮質釋出**醛固酮**，使腎臟遠曲小管及集尿管對 Na⁺ 再吸收增加、尿量減少，"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "flowRoutes": [
+          {
+            "id": "raas-relay",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "近腎絲球細胞",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "腎素",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    490,
+                    165
+                  ],
+                  [
+                    430,
+                    200
+                  ],
+                  [
+                    360,
+                    265
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "血管收縮素原",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "血管收縮素 I",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    320,
+                    530
+                  ],
+                  [
+                    750,
+                    530
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "血管收縮素 I",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "血管收縮素 II",
+                  "sources": [
+                    {
+                      "uid": "renin-angiotensin-aldosterone",
+                      "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    750,
+                    530
+                  ],
+                  [
+                    790,
+                    850
+                  ],
+                  [
+                    920,
+                    920
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "water-sodium-regulation-node-05",
+        "title": {
+          "text": "醛固酮與ADH比較",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "保鈉與調水通透性的直接作用不同",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。 醛固酮促進遠端鈉再吸收，同時增加鉀分泌。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-05.svg",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切到保留狀態，分辨醛固酮保鈉與ADH增加水通透性的作用。",
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+              },
+              {
+                "uid": "potassium-secretion",
+                "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "water-sodium-regulation-node-06",
+        "title": {
+          "text": "排鈉與容積／濃度",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "鈉總量與鈉濃度是不同的量",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "ANP也增加腎絲球過濾作用並促進鈉排泄； ADH受到抑制時，水分排泄增加，體內液體量減少。 鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "figures/node-06.svg",
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切到排出狀態，對照ANP促排鈉及ADH抑制後水分排泄增加。",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "水分收支與鈉水調節",
+        "sources": [
+          {
+            "uid": "water-intake-output",
+            "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "水分收支",
+            "sources": [
+              {
+                "uid": "water-intake-output",
+                "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+              },
+              {
+                "uid": "water-intake-output",
+                "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。",
+                "sources": [
+                  {
+                    "uid": "water-intake-output",
+                    "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "保留調節",
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。",
+                "sources": [
+                  {
+                    "uid": "sodium-water-balance",
+                    "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "水不足時，腦下垂體後葉釋放 ADH，增加保水。",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。",
+                "sources": [
+                  {
+                    "uid": "renin-angiotensin-aldosterone",
+                    "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "排出調節",
+            "sources": [
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "抑制腎素及血管收縮素II的分泌；"
+              },
+              {
+                "uid": "anp-volume-feedback",
+                "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "回心血量增加時，心房壁的牽張接受器受到興奮，刺激心房利鈉尿肽（ANP）分泌。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "抑制腎素及血管收縮素II的分泌；",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "抑制腎素及血管收縮素II的分泌；"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "ADH受到抑制時，水分排泄增加，體內液體量減少。",
+                "sources": [
+                  {
+                    "uid": "anp-volume-feedback",
+                    "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    },
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q01",
+            "stem": "一天補進身體的水，應把哪三種來源算進去？",
+            "options": [
+              "喝進的液體、食物裡的水、身體產生的代謝水",
+              "喝進的液體，不算食物和代謝水",
+              "尿液、呼氣與糞便帶走的水",
+              "流汗和皮膚慢慢散掉的水"
+            ],
+            "answer": 0,
+            "hint": "先想想：除了喝水，吃東西和身體運作也會帶來水嗎？",
+            "explain": "因為身體會從喝水、食物和代謝產水得到水分，所以選「喝進的液體、食物裡的水、身體產生的代謝水」。選「喝進的液體，不算食物和代謝水」的同學，漏掉了食物裡的水與身體代謝產生的水。",
+            "nodeId": "water-sodium-regulation-node-01",
+            "sources": [
+              "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "攝取為 1500＋800＋200＝2500 mL／日。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q02",
+            "stem": "沒有看到汗流出來時，皮膚還會失去水分嗎？",
+            "options": [
+              "不會，而且呼氣也沒有水",
+              "會，仍有看不見的無知覺蒸散",
+              "不會，皮膚此時不會排水",
+              "不會，這些水都改從糞便排掉"
+            ],
+            "answer": 1,
+            "hint": "先想想：沒看見汗，和沒有水離開皮膚，一樣嗎？",
+            "explain": "因為皮膚即使沒明顯流汗，仍會慢慢散掉水，所以仍有看不見的無知覺蒸散。選「不會，皮膚此時不會排水」的同學，把沒有看見汗當成沒有皮膚失水。",
+            "nodeId": "water-sodium-regulation-node-02",
+            "sources": [
+              "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q03",
+            "stem": "身體缺水時，口渴和抗利尿激素（ADH，叫腎臟留水的訊號）主要各做什麼？",
+            "options": [
+              "口渴幫小管開水門，ADH讓人喝水",
+              "口渴讓人喝水，ADH讓小管更難通水",
+              "口渴讓人喝水，ADH讓小管更容易通水",
+              "口渴讓人喝水，ADH直接促鈉回收"
+            ],
+            "answer": 2,
+            "hint": "先想想：一個讓水進身體，一個讓水留身體，怎麼配？",
+            "explain": "因為口渴增加喝進的水，ADH增加腎小管的水回收，所以選「口渴讓人喝水，ADH讓小管更容易通水」。選「口渴幫小管開水門，ADH讓人喝水」的同學，把增加喝水和增加水通透性（水穿過管壁有多容易，叫做水通透性）的工作交換了。",
+            "nodeId": "water-sodium-regulation-node-03",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q04",
+            "stem": "腎素—血管收縮素—醛固酮系統（RAAS）是一條調血壓的訊號鏈，哪個物質直接讓血管收縮？",
+            "options": [
+              "腎素",
+              "血管收縮素原",
+              "尿裡的物質",
+              "血管收縮素II"
+            ],
+            "answer": 3,
+            "hint": "先想想：先啟動接力，和最後直接讓血管收縮，是同一棒嗎？",
+            "explain": "因為血管收縮素II直接作用於小動脈，使血管縮緊，所以選「血管收縮素II」。選「腎素」的同學，所選的腎素是先啟動前面轉換的酵素（幫身體進行化學工作的幫手，叫做酵素），不是直接收縮血管的那個物質。",
+            "nodeId": "water-sodium-regulation-node-04",
+            "sources": [
+              "renin-angiotensin-aldosterone；physiology/CH05 p.66, physiology/CH05 p.67",
+              "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血管收縮素原→**血管收縮素 I**→（肺臟 **ACE**）→**血管收縮素 II**"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "它只是催化血管收縮素原轉成血管收縮素 I"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q05",
+            "stem": "醛固酮和抗利尿激素（ADH）都會影響留水，它們最直接的工作怎麼配？",
+            "options": [
+              "醛固酮促鈉回收，ADH讓水更容易通過",
+              "醛固酮直接開水通道，ADH不調整水通過",
+              "ADH主要促鈉回收，醛固酮不調整鈉",
+              "醛固酮促鈉排出，ADH促水回收"
+            ],
+            "answer": 0,
+            "hint": "先想想：把鈉留下，和替水開門，是同一條直接作用嗎？",
+            "explain": "因為醛固酮主要促鈉回收，ADH直接讓水更容易穿過管壁（水通透性增加），所以兩個訊號留水的方式不同。選「醛固酮直接開水通道，ADH不調整水通過」的同學，把直接開水通道的工作交給醛固酮了。",
+            "nodeId": "water-sodium-regulation-node-05",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-foundation-q06",
+            "stem": "想知道鈉在體液裡有多濃，要一起看哪兩個量？",
+            "options": [
+              "剛才喝水的動作和次數",
+              "鈉的量和水的量",
+              "鈉的總量，不看水有多少",
+              "鈉的總量和鉀的總量"
+            ],
+            "answer": 1,
+            "hint": "先想想：一樣多的鹽，放在一杯和兩杯水裡會一樣鹹嗎？",
+            "explain": "因為濃度（同樣多的水裡裝了多少物質，叫做濃度，就像糖水有多甜）在比較物質量和水量，所以要把鈉量與水量一起看，選「鈉的量和水的量」。選「鈉的總量，不看水有多少」的同學，漏掉水量，一樣多的鈉配不同水量就可能不一樣濃。",
+            "nodeId": "water-sodium-regulation-node-06",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "water-sodium-regulation-case-q01",
+            "stem": "一天喝進1500毫升液體、從食物得到800毫升水，身體再產生200毫升代謝水，合計多少？",
+            "options": [
+              "2300毫升／日",
+              "1700毫升／日",
+              "2500毫升／日",
+              "3300毫升／日"
+            ],
+            "answer": 2,
+            "hint": "先想想：食物裡的800毫升水，應算一次還是兩次？",
+            "explain": "因為三種來源都算攝取，所以先算1500加800等於2300，再加200等於2500毫升，選「2500毫升／日」。選「3300毫升／日」的同學，又把800毫升食物水加了一次，變成3300毫升。",
+            "nodeId": "water-sodium-regulation-node-01",
+            "sources": [
+              "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "正常液體攝取與排出維持平衡；課本平均每日總攝取約 2500 mL，來源包括飲入液體、食物含水與代謝水。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "攝取為 1500＋800＋200＝2500 mL／日。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-case-q02",
+            "stem": "同學寫「沒有流汗，就沒有水從皮膚離開」，應怎麼改才對？",
+            "options": [
+              "把呼氣帶走的水也刪掉",
+              "把糞便帶走的水改算皮膚失水",
+              "認為水都從尿排出",
+              "加上皮膚看不見的無知覺蒸散"
+            ],
+            "answer": 3,
+            "hint": "先想想：身體排水，真的只有尿這一條路嗎？",
+            "explain": "因為沒明顯流汗時皮膚仍有看不見的水分散出，所以要保留無知覺蒸散，選「加上皮膚看不見的無知覺蒸散」。選「認為水都從尿排出」的同學，漏掉皮膚、呼氣與糞便等其他排水途徑。",
+            "nodeId": "water-sodium-regulation-node-02",
+            "sources": [
+              "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "water-intake-output",
+              "quote": "排出途徑包括腎臟尿液、肺呼氣、皮膚蒸散與流汗、糞便。"
+            },
+            {
+              "uid": "water-intake-output",
+              "quote": "口渴控制攝取；ADH 與醛固酮調節尿量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-case-q03",
+            "stem": "腎小管後段把更多鈉收回血液，也把更多鉀送進尿，最像哪種激素在作用？",
+            "options": [
+              "醛固酮",
+              "抗利尿激素ADH",
+              "心房利鈉尿肽ANP",
+              "副甲狀腺素PTH"
+            ],
+            "answer": 0,
+            "hint": "先想想：留鈉和排鉀同時出現，應找哪個訊號？",
+            "explain": "因為醛固酮會增加鈉再吸收與鉀分泌，所以選「醛固酮」。選「抗利尿激素ADH」的同學，所選的ADH主要直接增加水通透性（水穿過管壁有多容易，叫做水通透性），不是這個留鈉又排鉀的組合。",
+            "nodeId": "water-sodium-regulation-node-05",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。"
+            },
+            {
+              "uid": "potassium-secretion",
+              "quote": "醛固酮促進遠端鈉再吸收，同時增加鉀分泌。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "心房利鈉尿肽促鈉排出"
+            },
+            {
+              "uid": "calcium-phosphate-balance",
+              "quote": "加強腎小管回收 Ca²⁺ 並排 HPO₄²⁻。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-case-q04",
+            "stem": "腎素和接著轉換的幫手ACE會接力，血管收縮素原會依什麼順序變成血管收縮素II？",
+            "options": [
+              "先由ACE變成I，再由腎素變成II",
+              "先變成I，再經轉換幫手ACE變成II",
+              "腎素本身直接變成II",
+              "I先變回原，再經ACE變成II"
+            ],
+            "answer": 1,
+            "hint": "先想想：先由腎素起步，再由哪個轉換幫手接手？",
+            "explain": "因為腎素先把血管收縮素原變成I，再由轉化酵素（幫身體進行化學工作的幫手）ACE把I變成II，所以要依這個順序接力。選「先由ACE變成I，再由腎素變成II」的同學，把兩個幫忙轉換的順序交換了。",
+            "nodeId": "water-sodium-regulation-node-04",
+            "sources": [
+              "renin-angiotensin-aldosterone；physiology/CH05 p.66, physiology/CH05 p.67",
+              "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "失血、脫水使血壓下降時，靠這條鏈讓血管收縮、留住鈉和水，把血壓撐回來。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "血管收縮素原→**血管收縮素 I**→（肺臟 **ACE**）→**血管收縮素 II**"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "它只是催化血管收縮素原轉成血管收縮素 I"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "water-sodium-regulation-case-q05",
+            "stem": "同樣多的水裡裝了多少物質，叫做濃度，就像糖水有多甜。同樣多的鈉，現在配上更多水，能直接說它的濃度沒有變嗎？",
+            "options": [
+              "能，水量不會影響濃度",
+              "能，鈉的總量會抵銷水增加的影響",
+              "不能，還要把水量的改變算進去",
+              "能，濃度只看鈉有幾顆"
+            ],
+            "answer": 2,
+            "hint": "先想想：同樣多的鹽，加更多水後會一樣鹹嗎？",
+            "explain": "因為同樣的鈉分到更多水裡會比較淡，所以不能說濃度（同樣多的水裡裝了多少物質，叫做濃度，就像糖水有多甜）不變，選「不能，還要把水量的改變算進去」。選「能，鈉的總量會抵銷水增加的影響」的同學，把鈉總量沒變當成能抵銷水量增加，少看了鈉和水的比例。",
+            "nodeId": "water-sodium-regulation-node-06",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ANP也增加腎絲球過濾作用並促進鈉排泄；"
+            },
+            {
+              "uid": "anp-volume-feedback",
+              "quote": "ADH受到抑制時，水分排泄增加，體內液體量減少。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "切換「保留」主題，哪種配對最合適？",
+          "options": [
+            "口渴直接使尿中溶質消失",
+            "ADH只增加食物水",
+            "醛固酮只使所有離子都排出",
+            "口渴增加攝取，ADH增加腎端保水"
+          ],
+          "answer": 3,
+          "feedback": "口渴促飲水，ADH提高水通透性；醛固酮主要調整鈉回收。",
+          "sources": [
+            "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+            "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+          },
+          {
+            "uid": "sodium-water-balance",
+            "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+          }
+        ]
+      }
+    }
+  }
+}

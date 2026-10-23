@@ -1,0 +1,4373 @@
+{
+  "pass": true,
+  "errors": [],
+  "matches": [
+    {
+      "path": "title",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "title",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "title",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "title",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "title",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.header",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.header",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.header",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.header",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.header",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.referenceHeading",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.referenceHeading",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.referenceHeading",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.referenceHeading",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.referenceHeading",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.ureter.name",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.glossary.ureter.name",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.glossary.ureter.name",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.glossary.ureter.name",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.glossary.ureter.name",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.glossary.ureter.text",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.glossary.ureter.text",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.glossary.ureter.text",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.glossary.ureter.text",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.glossary.ureter.text",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.glossary.bladder.name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.glossary.bladder.name",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.bladder.name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.bladder.name",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.bladder.name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.glossary.bladder.text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.glossary.bladder.text",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.bladder.text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.bladder.text",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.bladder.text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.glossary.storage.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.storage.name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.storage.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.storage.name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.storage.name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.glossary.storage.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.storage.text",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.storage.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.storage.text",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.storage.text",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.glossary.sphincter.name",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.glossary.sphincter.name",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.glossary.sphincter.name",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.glossary.sphincter.name",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.glossary.sphincter.name",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.sphincter.text",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.glossary.sphincter.text",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.glossary.sphincter.text",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.glossary.sphincter.text",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.glossary.sphincter.text",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.para.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.para.name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.para.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.para.name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.para.name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.glossary.para.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.para.text",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.para.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.para.text",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.para.text",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.glossary.detrusor.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.detrusor.name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.detrusor.name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.detrusor.name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.detrusor.name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.glossary.detrusor.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.glossary.detrusor.text",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.glossary.detrusor.text",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.glossary.detrusor.text",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.glossary.detrusor.text",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].name",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].banner",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].changes[0].name",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].changes[0].name",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].changes[0].name",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].changes[0].name",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].changes[0].name",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].changes[0].detail",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].changes[0].detail",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].changes[0].detail",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].changes[0].detail",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].changes[0].detail",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].changes[0].bindings[0].label",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].changes[0].bindings[0].label",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].changes[0].bindings[0].label",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].changes[0].bindings[0].label",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].changes[0].bindings[0].label",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].labels[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].labels[0].short",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].labels[0].full",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[0].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[0].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[0].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[0].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[0].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[0].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[0].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[0].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[0].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[0].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[0].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[0].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[0].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[0].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[0].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].label",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].label",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].label",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].label",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].label",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].label",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].label",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].label",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].label",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].label",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].edges[0]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "lab.states[0].edges[0].description",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].name",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].banner",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].labels[0]",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].labels[0].short",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].labels[0].full",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].edges[0]",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[1].edges[0].description",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].name",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].banner",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].changes[0].name",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].changes[0].detail",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].changes[0].bindings[0].label",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[0]",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[0].short",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[0].full",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[1]",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[1].short",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].labels[1].full",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].intake[0].name",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].intake[0].amount",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].intake[0].unit",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].intake[0].status",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].label",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].label",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].edges[0]",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "lab.states[2].edges[0].description",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.questions.foundation[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.questions.foundation[1]",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。",
+      "line": 53
+    },
+    {
+      "path": "learning.questions.foundation[2]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.questions.foundation[3]",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.questions.foundation[4]",
+      "uid": "micturition-reflex",
+      "quote": "骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.questions.foundation[5]",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。",
+      "line": 33
+    },
+    {
+      "path": "learning.questions.cases[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.questions.cases[1]",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。",
+      "line": 53
+    },
+    {
+      "path": "learning.questions.cases[2]",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.questions.cases[3]",
+      "uid": "micturition-reflex",
+      "quote": "骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.questions.cases[4]",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。",
+      "line": 33
+    },
+    {
+      "path": "learning.questions.predict",
+      "uid": "micturition-reflex",
+      "quote": "交感興奮與內外括約肌收縮有利抑制排尿",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[0].title",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[0].title",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[0].title",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[0].title",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].title",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[0].summary",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[0].summary",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[0].summary",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[0].summary",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].summary",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[0].concept",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[0].concept",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[0].concept",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[0].concept",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].concept",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[0].figure",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[0].figure",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[0].figure",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[0].figure",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].figure",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[0].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[0].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[0].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[0].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[0]",
+      "uid": "kidney-structure",
+      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[0].from",
+      "uid": "kidney-structure",
+      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[0].to",
+      "uid": "kidney-structure",
+      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[1]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[1].from",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[0].flowRoutes[0].segments[1].to",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[1].title",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[1].title",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].title",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[1].title",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[1].title",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[1].summary",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[1].summary",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].summary",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[1].summary",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[1].summary",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[1].concept",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[1].concept",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].concept",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[1].concept",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[1].concept",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[1].figure",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[1].figure",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].figure",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[1].figure",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[1].figure",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[1].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "輸尿管由腎盂通至膀胱，課本長約 25–30 cm，沿途有三處生理性狹窄。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[1].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。輸尿管以蠕動送尿，斜行穿入膀胱壁的構造有助防逆流。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "尿路狹窄與阻塞可影響上游壓力；阻塞升高鮑氏囊反壓，妨礙過濾。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[1].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "- 依來源列三段：腎盂端、髂外血管交叉、膀胱壁端\n- 題庫另用總腸骨分叉需比對來源",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[1].lookTask.instruction",
+      "uid": "ureter-constrictions",
+      "quote": "此處依課本的髂外血管文字，不把總腸骨分叉和髂外交叉擅自寫成完全同一定位。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[1].lookTask.steps[0]",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].lookTask.steps[1]",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[1].lookTask.steps[2]",
+      "uid": "ureter-constrictions",
+      "quote": "指定解剖來源三處為腎盂交接、與髂外動脈及靜脈交叉、進入膀胱處。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[2].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.nodes[2].title",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[2].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[2].title",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[2].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[2].summary",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.nodes[2].summary",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[2].summary",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[2].summary",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[2].summary",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[2].concept",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.nodes[2].concept",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[2].concept",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[2].concept",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[2].concept",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[2].figure",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.nodes[2].figure",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[2].figure",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[2].figure",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[2].figure",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[2].lookTask.instruction",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.nodes[2].lookTask.instruction",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[2].lookTask.instruction",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[2].lookTask.instruction",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[2].lookTask.instruction",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.nodes[3].title",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[3].title",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[3].title",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[3].title",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[3].title",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[3].summary",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[3].summary",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[3].summary",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[3].summary",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[3].summary",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[3].concept",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[3].concept",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[3].concept",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[3].concept",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[3].concept",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[3].figure",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[3].figure",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[3].figure",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[3].figure",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[3].figure",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[3].lookTask.instruction",
+      "uid": "urethra",
+      "quote": "尿道把膀胱內尿液排至體外；課本女性約 3.8 cm，男性約 20 cm。男性另作精液通道。",
+      "line": 49
+    },
+    {
+      "path": "learning.nodes[3].lookTask.instruction",
+      "uid": "urethra",
+      "quote": "男性尿道分前列腺部、膜部與陰莖部，課本約 2.5、2、15 cm。外尿道括約肌位於泌尿生殖膈相關位置，屬骨骼肌，受陰部神經控制。內括約肌於射精時防止精液逆流入膀胱。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[3].lookTask.instruction",
+      "uid": "urethra",
+      "quote": "比較男女尿道時，應同時看長度、分段與功能；可控制排尿出口的是外括約肌。",
+      "line": 57
+    },
+    {
+      "path": "learning.nodes[3].lookTask.instruction",
+      "uid": "urethra",
+      "quote": "- 男性尿道三段依序前列腺、膜、陰莖\n- 外括約肌的體神經來源為 S2–S4 陰部神經",
+      "line": 61
+    },
+    {
+      "path": "learning.nodes[3].lookTask.instruction",
+      "uid": "urethra",
+      "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路，名稱相近但位置不同。",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[0].segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[0].segments[0].from",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[0].segments[0].to",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[1].segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[1].segments[0].from",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[3].flowRoutes[1].segments[0].to",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[4].title",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[4].title",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[4].title",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[4].title",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[4].title",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.nodes[4].summary",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[4].summary",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[4].summary",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[4].summary",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[4].summary",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.nodes[4].concept",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[4].concept",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[4].concept",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[4].concept",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[4].concept",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.nodes[4].figure",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[4].figure",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[4].figure",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[4].figure",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[4].figure",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.nodes[4].lookTask.instruction",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.nodes[4].lookTask.instruction",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.nodes[4].lookTask.instruction",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.nodes[4].lookTask.instruction",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.nodes[4].lookTask.instruction",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.nodes[4].flowRoutes[0].segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[4].flowRoutes[0].segments[0].from",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[4].flowRoutes[0].segments[0].to",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.nodes[5].title",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。表 9-5、9-6 列物理特性與 24 小時溶質量。",
+      "line": 33
+    },
+    {
+      "path": "learning.nodes[5].title",
+      "uid": "urine-physical-properties",
+      "quote": "正常尿比重 1.008–1.030；pH 約 6.0，表列 4.6–8.0、另註最低 4.5，可隨飲食改變。剛排出透明或澄清，靜置後可因細菌作用混濁；顏色為稻草色，隨飲食與濃度改變。表列氨味與尿中碳酸銨相關。",
+      "line": 37
+    },
+    {
+      "path": "learning.nodes[5].title",
+      "uid": "urine-physical-properties",
+      "quote": "課本 24 小時溶質例\n項目 / 有機溶質 / 無機溶質\n例與量 / 尿素 25.00 g、肌酸酐 1.50 g、尿酸 0.80 g / NaCl 15.0 g、K⁺ 3.8 g、Ca²⁺ 0.3 g、Mg²⁺ 0.1 g\n容易混淆盲點 / 表中是每日量 / 不能誤當每公升濃度",
+      "line": 41
+    },
+    {
+      "path": "learning.nodes[5].title",
+      "uid": "urine-physical-properties",
+      "quote": "- 每日 1–2 L、水約 95%、比重 1.008–1.030。\n- pH 約 6.0；外觀須分剛排出與靜置後。",
+      "line": 48
+    },
+    {
+      "path": "learning.nodes[5].title",
+      "uid": "urine-physical-properties",
+      "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義；正常尿含少量酮體不等於表 9-7 的過多酮體。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[5].summary",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。表 9-5、9-6 列物理特性與 24 小時溶質量。",
+      "line": 33
+    },
+    {
+      "path": "learning.nodes[5].summary",
+      "uid": "urine-physical-properties",
+      "quote": "正常尿比重 1.008–1.030；pH 約 6.0，表列 4.6–8.0、另註最低 4.5，可隨飲食改變。剛排出透明或澄清，靜置後可因細菌作用混濁；顏色為稻草色，隨飲食與濃度改變。表列氨味與尿中碳酸銨相關。",
+      "line": 37
+    },
+    {
+      "path": "learning.nodes[5].summary",
+      "uid": "urine-physical-properties",
+      "quote": "課本 24 小時溶質例\n項目 / 有機溶質 / 無機溶質\n例與量 / 尿素 25.00 g、肌酸酐 1.50 g、尿酸 0.80 g / NaCl 15.0 g、K⁺ 3.8 g、Ca²⁺ 0.3 g、Mg²⁺ 0.1 g\n容易混淆盲點 / 表中是每日量 / 不能誤當每公升濃度",
+      "line": 41
+    },
+    {
+      "path": "learning.nodes[5].summary",
+      "uid": "urine-physical-properties",
+      "quote": "- 每日 1–2 L、水約 95%、比重 1.008–1.030。\n- pH 約 6.0；外觀須分剛排出與靜置後。",
+      "line": 48
+    },
+    {
+      "path": "learning.nodes[5].summary",
+      "uid": "urine-physical-properties",
+      "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義；正常尿含少量酮體不等於表 9-7 的過多酮體。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[5].concept",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。表 9-5、9-6 列物理特性與 24 小時溶質量。",
+      "line": 33
+    },
+    {
+      "path": "learning.nodes[5].concept",
+      "uid": "urine-physical-properties",
+      "quote": "正常尿比重 1.008–1.030；pH 約 6.0，表列 4.6–8.0、另註最低 4.5，可隨飲食改變。剛排出透明或澄清，靜置後可因細菌作用混濁；顏色為稻草色，隨飲食與濃度改變。表列氨味與尿中碳酸銨相關。",
+      "line": 37
+    },
+    {
+      "path": "learning.nodes[5].concept",
+      "uid": "urine-physical-properties",
+      "quote": "課本 24 小時溶質例\n項目 / 有機溶質 / 無機溶質\n例與量 / 尿素 25.00 g、肌酸酐 1.50 g、尿酸 0.80 g / NaCl 15.0 g、K⁺ 3.8 g、Ca²⁺ 0.3 g、Mg²⁺ 0.1 g\n容易混淆盲點 / 表中是每日量 / 不能誤當每公升濃度",
+      "line": 41
+    },
+    {
+      "path": "learning.nodes[5].concept",
+      "uid": "urine-physical-properties",
+      "quote": "- 每日 1–2 L、水約 95%、比重 1.008–1.030。\n- pH 約 6.0；外觀須分剛排出與靜置後。",
+      "line": 48
+    },
+    {
+      "path": "learning.nodes[5].concept",
+      "uid": "urine-physical-properties",
+      "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義；正常尿含少量酮體不等於表 9-7 的過多酮體。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[5].figure",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。表 9-5、9-6 列物理特性與 24 小時溶質量。",
+      "line": 33
+    },
+    {
+      "path": "learning.nodes[5].figure",
+      "uid": "urine-physical-properties",
+      "quote": "正常尿比重 1.008–1.030；pH 約 6.0，表列 4.6–8.0、另註最低 4.5，可隨飲食改變。剛排出透明或澄清，靜置後可因細菌作用混濁；顏色為稻草色，隨飲食與濃度改變。表列氨味與尿中碳酸銨相關。",
+      "line": 37
+    },
+    {
+      "path": "learning.nodes[5].figure",
+      "uid": "urine-physical-properties",
+      "quote": "課本 24 小時溶質例\n項目 / 有機溶質 / 無機溶質\n例與量 / 尿素 25.00 g、肌酸酐 1.50 g、尿酸 0.80 g / NaCl 15.0 g、K⁺ 3.8 g、Ca²⁺ 0.3 g、Mg²⁺ 0.1 g\n容易混淆盲點 / 表中是每日量 / 不能誤當每公升濃度",
+      "line": 41
+    },
+    {
+      "path": "learning.nodes[5].figure",
+      "uid": "urine-physical-properties",
+      "quote": "- 每日 1–2 L、水約 95%、比重 1.008–1.030。\n- pH 約 6.0；外觀須分剛排出與靜置後。",
+      "line": 48
+    },
+    {
+      "path": "learning.nodes[5].figure",
+      "uid": "urine-physical-properties",
+      "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義；正常尿含少量酮體不等於表 9-7 的過多酮體。",
+      "line": 53
+    },
+    {
+      "path": "learning.nodes[5].lookTask.instruction",
+      "uid": "urine-physical-properties",
+      "quote": "健康成人每日尿量約 1–2 L；尿液水分約佔 95%，其餘 5% 為細胞代謝溶質及外來物質。表 9-5、9-6 列物理特性與 24 小時溶質量。",
+      "line": 33
+    },
+    {
+      "path": "learning.nodes[5].lookTask.instruction",
+      "uid": "urine-physical-properties",
+      "quote": "正常尿比重 1.008–1.030；pH 約 6.0，表列 4.6–8.0、另註最低 4.5，可隨飲食改變。剛排出透明或澄清，靜置後可因細菌作用混濁；顏色為稻草色，隨飲食與濃度改變。表列氨味與尿中碳酸銨相關。",
+      "line": 37
+    },
+    {
+      "path": "learning.nodes[5].lookTask.instruction",
+      "uid": "urine-physical-properties",
+      "quote": "課本 24 小時溶質例\n項目 / 有機溶質 / 無機溶質\n例與量 / 尿素 25.00 g、肌酸酐 1.50 g、尿酸 0.80 g / NaCl 15.0 g、K⁺ 3.8 g、Ca²⁺ 0.3 g、Mg²⁺ 0.1 g\n容易混淆盲點 / 表中是每日量 / 不能誤當每公升濃度",
+      "line": 41
+    },
+    {
+      "path": "learning.nodes[5].lookTask.instruction",
+      "uid": "urine-physical-properties",
+      "quote": "- 每日 1–2 L、水約 95%、比重 1.008–1.030。\n- pH 約 6.0；外觀須分剛排出與靜置後。",
+      "line": 48
+    },
+    {
+      "path": "learning.nodes[5].lookTask.instruction",
+      "uid": "urine-physical-properties",
+      "quote": "尿液的比重、pH 與每日溶質排出量各有不同意義；正常尿含少量酮體不等於表 9-7 的過多酮體。",
+      "line": 53
+    },
+    {
+      "path": "learning.mindmap.center",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "learning.mindmap.center",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "learning.mindmap.center",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.mindmap.center",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "learning.mindmap.center",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.mindmap.branches[0].title",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[0].text",
+      "uid": "urine-pathway",
+      "quote": "尿液由腎元管液經集尿管進入腎乳頭，再循腎盞、腎盂、輸尿管、膀胱與尿道排出。",
+      "line": 61
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[0].text",
+      "uid": "urine-pathway",
+      "quote": "腎元內先由鮑氏囊接收濾液，再經近曲小管、亨利氏環、遠曲小管到集尿管；乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。",
+      "line": 65
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[0].text",
+      "uid": "urine-pathway",
+      "quote": "定位尿路阻塞須按上游到下游追蹤；輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[0].text",
+      "uid": "urine-pathway",
+      "quote": "- 乳頭→小腎盞→大腎盞→腎盂\n- 腎盂後是輸尿管，不是尿道",
+      "line": 73
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[0].text",
+      "uid": "urine-pathway",
+      "quote": "形成尿液的管段與收集尿液的腎盞不同；腎臟血流路徑也不是尿流路徑。",
+      "line": 78
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[1].text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱位於骨盆腔、恥骨後方，是暫存尿液的肌性器官；膀胱三角由兩輸尿管口與一尿道內口界定。",
+      "line": 50
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[1].text",
+      "uid": "urinary-bladder",
+      "quote": "逼尿肌為平滑肌；內尿道括約肌亦為平滑肌，外括約肌為骨骼肌。充盈約 300 mL 可引發排尿感，課本容量約 700–800 mL。排尿反射使逼尿肌收縮與內括約肌鬆弛。",
+      "line": 54
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[1].text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱儲尿與排尿涉及副交感、交感及體神經配合；外括約肌提供有意識的控制。",
+      "line": 58
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[1].text",
+      "uid": "urinary-bladder",
+      "quote": "- 三角頂點是兩輸尿管口與尿道內口\n- 逼尿肌不能列為骨骼肌",
+      "line": 62
+    },
+    {
+      "path": "learning.mindmap.branches[0].items[1].text",
+      "uid": "urinary-bladder",
+      "quote": "膀胱出口內、外括約肌是不同肌肉與控制系統，不能因皆能影響排尿就混為一談。",
+      "line": 67
+    },
+    {
+      "path": "learning.mindmap.branches[1].title",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.mindmap.branches[1].title",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.mindmap.branches[1].title",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.mindmap.branches[1].title",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.mindmap.branches[1].title",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[0].text",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[0].text",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[0].text",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[0].text",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[0].text",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[1].text",
+      "uid": "micturition-reflex",
+      "quote": "排尿是膀胱牽張訊息引起的脊髓反射與外括約肌隨意控制共同完成的動作。",
+      "line": 54
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[1].text",
+      "uid": "micturition-reflex",
+      "quote": "課本膀胱平均容量 700–800 mL，超過約 300 mL 可引起尿意。骨盆副交感神經 S2–S4 促逼尿肌收縮、內括約肌鬆弛；儲尿時交感神經促相反反應；陰神經體神經控制外括約肌。",
+      "line": 58
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[1].text",
+      "uid": "micturition-reflex",
+      "quote": "排尿時須膀胱擠壓與出口放鬆配合。內括約肌為平滑肌，外括約肌為骨骼肌，後者讓排尿能受意識引發或停止。",
+      "line": 62
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[1].text",
+      "uid": "micturition-reflex",
+      "quote": "- 副交感興奮有利排尿\n- 交感興奮與內外括約肌收縮有利抑制排尿\n- 外括約肌位於泌尿生殖膈處，見解剖圖15-7與膜部尿道段",
+      "line": 66
+    },
+    {
+      "path": "learning.mindmap.branches[1].items[1].text",
+      "uid": "micturition-reflex",
+      "quote": "尿意的感受器位於膀胱壁，隨意控制的肌肉是尿道外括約肌，不是膀胱三角。",
+      "line": 72
+    },
+    {
+      "path": "urinary-route-micturition-node-01.flowRoutes.flow-01-1.segments[0]",
+      "uid": "kidney-structure",
+      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。",
+      "line": 61
+    },
+    {
+      "path": "urinary-route-micturition-node-01.flowRoutes.flow-01-1.segments[1]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "urinary-route-micturition-node-04.flowRoutes.flow-04-1.segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "urinary-route-micturition-node-04.flowRoutes.flow-04-2.segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    },
+    {
+      "path": "urinary-route-micturition-node-05.flowRoutes.flow-05-1.segments[0]",
+      "uid": "urine-pathway",
+      "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。",
+      "line": 69
+    }
+  ],
+  "sourceUids": [
+    "urine-pathway",
+    "ureter-constrictions",
+    "urinary-bladder",
+    "micturition-reflex",
+    "urethra",
+    "urine-physical-properties",
+    "kidney-structure"
+  ],
+  "displayFields": 189,
+  "skipped": 0,
+  "preAnswer": {
+    "pass": true,
+    "cases": [
+      {
+        "node": 1,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 1,
+        "step": 2,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 2,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 2,
+        "step": 100,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 3,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 3,
+        "step": 2,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 3,
+        "step": 100,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 4,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 4,
+        "step": 2,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 4,
+        "step": 100,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 5,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 5,
+        "step": 2,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 5,
+        "step": 100,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 6,
+        "step": 1,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      },
+      {
+        "node": 6,
+        "step": 100,
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "pass": true
+      }
+    ],
+    "errors": []
+  }
+}

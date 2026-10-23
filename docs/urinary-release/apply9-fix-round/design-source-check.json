@@ -1,0 +1,83 @@
+{
+  "scope": "acid-base-homeostasis",
+  "sourceQuotes": [
+    {
+      "key": "A1",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "pass": true
+    },
+    {
+      "key": "A2",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "pass": true
+    },
+    {
+      "key": "A3",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "pass": true
+    },
+    {
+      "key": "B1",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "pass": true
+    },
+    {
+      "key": "B2",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "pass": true
+    },
+    {
+      "key": "B3",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "pass": true
+    },
+    {
+      "key": "B4",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升",
+      "pass": true
+    },
+    {
+      "key": "K1",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "pass": true
+    },
+    {
+      "key": "K2",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "pass": true
+    },
+    {
+      "key": "K3",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼",
+      "pass": true
+    },
+    {
+      "key": "K4",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "pass": true
+    }
+  ],
+  "nodeRows": 6,
+  "foundationCandidates": 6,
+  "poolCandidates": 15,
+  "dualTierCandidates": 9,
+  "combinedSingleCandidates": 9,
+  "perRound": {
+    "total": 5,
+    "dual": 3,
+    "single": 2
+  },
+  "didNotReadOtherProposal": true,
+  "skipped": 0
+}

@@ -48,9 +48,9 @@
 
 | 畫面 | 1280 | 390 |
 |---|---|---|
-| 各班比較 | [桌機](completion-board-1.7.1-screenshots/comparison-1280.png) | [手機](completion-board-1.7.1-screenshots/comparison-390.png) |
-| 學生矩陣 | [桌機](completion-board-1.7.1-screenshots/matrix-1280.png) | [手機](completion-board-1.7.1-screenshots/matrix-390.png) |
-| 格子明細 | [桌機](completion-board-1.7.1-screenshots/popover-1280.png) | [手機](completion-board-1.7.1-screenshots/popover-390.png) |
+| 各班比較 | [桌機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/comparison-1280.png) | [手機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/comparison-390.png) |
+| 學生矩陣 | [桌機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/matrix-1280.png) | [手機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/matrix-390.png) |
+| 格子明細 | [桌機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/popover-1280.png) | [手機](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/completion-board-1.7.1-screenshots/popover-390.png) |
 
 `docs/completion-board-1.7.1-screenshots/checks.json`：兩尺寸均無 pageerror／console error／整頁橫向溢位。手機姓名橫排、搜尋欄完整、按鈕不斷行、明細抽屜可捲動。
 

@@ -1,0 +1,389 @@
+{
+  "slug": "tubular-handling",
+  "version": "v1",
+  "experience": "guided",
+  "title": "腎小管再吸收、分泌與排泄",
+  "subtitle": "以血液與管液的移動方向，理解物質收支、回收上限及鉀的調節。",
+  "label": "腎小管再吸收、分泌與排泄｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "三種移動",
+      "label": "過濾、再吸收、分泌"
+    },
+    {
+      "value": "減回收、加分泌",
+      "label": "排泄收支"
+    },
+    {
+      "value": "濃度≠排泄量",
+      "label": "比較前先核對單位"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中構造與方向建立關係；紅色粗體標出本次觀察的重點。",
+    "figure": "tubular-handling-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "大量回收",
+        "explain": "Na⁺與水大部分在腎小管回收。"
+      },
+      {
+        "id": "state-2",
+        "label": "回收",
+        "explain": "葡萄糖正常大部分回收。"
+      },
+      {
+        "id": "state-3",
+        "label": "分泌",
+        "explain": "K調節性分泌方向。"
+      }
+    ],
+    "predict": {
+      "question": "切到葡萄糖「回收」主題，正常運輸功能完整且負荷未超能力時，物質移動方向為何？",
+      "options": [
+        "由血液分泌入管液",
+        "由膀胱回到腎盂",
+        "由尿道直接回到腎絲球",
+        "由管液回血液"
+      ],
+      "answer": 3,
+      "feedback": "再吸收將葡萄糖由管液送回血液，與鉀分泌入管液的方向不同，見節點 01、03、04。",
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "tubular-handling-node-01",
+      "tag": "01",
+      "title": "三種物質移動",
+      "summary": "過濾是物質由血液進入鮑氏囊",
+      "figure": "tubular-handling-node-01.svg",
+      "concept": "過濾是物質由血液進入鮑氏囊；再吸收是物質由管液回血；分泌是物質由血液進入小管管液。",
+      "points": [
+        "再吸收與分泌的移動方向相反。",
+        "排泄指物質最後隨尿液離開身體。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "看物質移動時先說出兩側區間，再配上動詞；管液中的物質回到血液，應稱再吸收。"
+      },
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 10、14–15、17、27 頁。",
+      "caption": "過濾是物質由血液進入鮑氏囊。"
+    },
+    {
+      "id": "tubular-handling-node-02",
+      "tag": "02",
+      "title": "排泄量的收支",
+      "summary": "以同一物質與相同時間範圍計算，排泄量＝過濾量－再吸收量＋分泌量",
+      "figure": "tubular-handling-node-02-data.svg",
+      "concept": "以同一物質與相同時間範圍計算，排泄量＝過濾量－再吸收量＋分泌量。",
+      "points": [
+        "再吸收使留在管液中的物質量減少。",
+        "分泌使進入管液的物質量增加。",
+        "式中各項都應用物質量／時間表示。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "用收支式逐項標正負號，再檢查單位；不能把物質排泄量與 GFR 的 mL/min 直接相減。"
+      },
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 10、14–15、17、27 頁。",
+      "caption": "以同一物質與相同時間範圍計算，排泄量＝過濾量－再吸收量＋分泌量。"
+    },
+    {
+      "id": "tubular-handling-node-03",
+      "tag": "03",
+      "title": "近曲小管的回收",
+      "summary": "近曲小管是大量再吸收的部位，透過 Na⁺共同運輸回收葡萄糖與胺基酸，水則隨滲透作用回收",
+      "figure": "tubular-handling-node-03.svg",
+      "concept": "近曲小管是大量再吸收的部位，透過 Na⁺共同運輸回收葡萄糖與胺基酸，水則隨滲透作用回收。",
+      "points": [
+        "本課採近曲 Na⁺再吸收約 67%。",
+        "水再吸收約 75%，不可與鈉合成同一百分比。",
+        "正常葡萄糖可被回收。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較鈉與水回收比例時，分別標出溶質與水的分母，再連到共同運輸與滲透兩種機轉。"
+      },
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6 頁；《生理學》腎臟與體液的恆定，第 13–17、27 頁。",
+      "caption": "近曲小管是大量再吸收的部位，透過 Na⁺共同運輸回收葡萄糖與胺基酸，水則隨滲透作用回收。"
+    },
+    {
+      "id": "tubular-handling-node-04",
+      "tag": "04",
+      "title": "葡萄糖的最大轉運量",
+      "summary": "葡萄糖再吸收具有最大轉運量",
+      "figure": "tubular-handling-node-04-data.svg",
+      "concept": "葡萄糖再吸收具有最大轉運量；課本為 375 mg/min。過濾負荷與小管回收能力必須以相同物質量／時間比較。",
+      "points": [
+        "過濾負荷是每分鐘進入濾液的葡萄糖量。",
+        "最大轉運量是運輸能力的上限。",
+        "負荷超過回收能力時，無法全部回收。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較兩個量時先核對是否都為 mg/min；不可把血漿濃度直接當作每分鐘的運輸上限。"
+      },
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6 頁；《生理學》腎臟與體液的恆定，第 13–17、27 頁。",
+      "caption": "葡萄糖再吸收具有最大轉運量。"
+    },
+    {
+      "id": "tubular-handling-node-05",
+      "tag": "05",
+      "title": "鉀的調節性分泌",
+      "summary": "遠曲小管與集尿管可分泌 K⁺",
+      "figure": "tubular-handling-node-05.svg",
+      "concept": "遠曲小管與集尿管可分泌 K⁺；醛固酮促進遠端 Na⁺再吸收，同時增加 K⁺分泌。",
+      "points": [
+        "鉀分泌的方向是由血液進入管液。",
+        "鈉再吸收的方向是由管液回血。",
+        "最終鉀排泄仍受後段調節影響。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在同一個小管區間分別追鈉與鉀的方向：不能因鈉被保留，就推論鉀也一起保留。"
+      },
+      "sources": [
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 14、17–18、34 頁。",
+      "caption": "遠曲小管與集尿管可分泌 K⁺。"
+    },
+    {
+      "id": "tubular-handling-node-06",
+      "tag": "06",
+      "title": "濃度比與排泄量",
+      "summary": "U／P 是尿與血漿的濃度比，排泄量是 U×V，清除率則為 U×V／P",
+      "figure": "tubular-handling-node-06-data.svg",
+      "concept": "U／P 是尿與血漿的濃度比，排泄量是 U×V，清除率則為 U×V／P；濃度、物質量流率與體積流率應分開比較。",
+      "points": [
+        "尿濃度相同時，尿流量仍可能不同。",
+        "水回收本身也能提高管液濃度。",
+        "不能只用尿濃度認定分泌增加。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較兩份尿樣時，先核對尿濃度與流量，再算同一物質每分鐘排出的量，最後才討論清除率。"
+      },
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6 頁；《生理學》腎臟與體液的恆定，第 10、13–17、27 頁。",
+      "caption": "U／P 是尿與血漿的濃度比，排泄量是 U×V，清除率則為 U×V／P。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "tubular-handling-foundation-q01",
+      "stem": "物質從小管管液移回血液，稱為何者？",
+      "options": [
+        "再吸收",
+        "分泌",
+        "腎絲球過濾",
+        "排泄到體外"
+      ],
+      "answer": 0,
+      "hint": "先說出起點是管液還是血液。",
+      "explain": "再吸收由管液回血，分泌由血進管液，過濾則是由腎絲球血液進鮑氏囊。",
+      "nodeId": "tubular-handling-node-01",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ]
+    },
+    {
+      "id": "tubular-handling-foundation-q02",
+      "stem": "同一物質的排泄量收支式為何？",
+      "options": [
+        "過濾量＋再吸收量－分泌量",
+        "過濾量－再吸收量＋分泌量",
+        "再吸收量－過濾量＋分泌量",
+        "過濾量＋再吸收量＋分泌量"
+      ],
+      "answer": 1,
+      "hint": "回收會減少最後留在管液的物質。",
+      "explain": "排泄＝過濾－再吸收＋分泌，式中各量都須以相同的物質量／時間表示。",
+      "nodeId": "tubular-handling-node-02",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ]
+    },
+    {
+      "id": "tubular-handling-foundation-q03",
+      "stem": "近曲小管回收葡萄糖與水的機轉配對，何者正確？",
+      "options": [
+        "葡萄糖只靠水通道，水只靠腎素分泌",
+        "葡萄糖由血分泌入管液，水完全不回收",
+        "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+        "葡萄糖與水均由膀胱形成"
+      ],
+      "answer": 2,
+      "hint": "把溶質運輸與水移動的方式分開。",
+      "explain": "近曲以 Na⁺共同運輸回收葡萄糖等溶質，水則依滲透回收；本課採 Na⁺約 67%、水約 75%。",
+      "nodeId": "tubular-handling-node-03",
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    },
+    {
+      "id": "tubular-handling-foundation-q04",
+      "stem": "葡萄糖最大轉運量代表何種意義？",
+      "options": [
+        "尿中葡萄糖濃度的固定值",
+        "腎血流量的上限",
+        "每天膀胱能儲存的尿量",
+        "每分鐘可運輸的葡萄糖量上限"
+      ],
+      "answer": 3,
+      "hint": "最大量的單位是物質量／時間。",
+      "explain": "課本葡萄糖最大轉運量為 375 mg/min，是回收能力的上限，並非濃度或尿量。",
+      "nodeId": "tubular-handling-node-04",
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    },
+    {
+      "id": "tubular-handling-foundation-q05",
+      "stem": "醛固酮對遠端 Na⁺與 K⁺處理的作用為何？",
+      "options": [
+        "增加 Na⁺再吸收及 K⁺分泌",
+        "增加 Na⁺分泌及 K⁺再吸收",
+        "兩者都只增加分泌",
+        "兩者都完全停止運輸"
+      ],
+      "answer": 0,
+      "hint": "不要將保鈉直接推成保鉀。",
+      "explain": "醛固酮促遠端鈉由管液回血、鉀由血進管液，方向相反。",
+      "nodeId": "tubular-handling-node-05",
+      "sources": [
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+      ]
+    },
+    {
+      "id": "tubular-handling-foundation-q06",
+      "stem": "僅見尿中某物質濃度較高，能否直接判定其分泌增加？",
+      "options": [
+        "可以，濃度就是分泌速率",
+        "不能，水回收與尿流量也影響判讀",
+        "可以，濃度等同 GFR",
+        "不能，因尿中不含任何溶質"
+      ],
+      "answer": 1,
+      "hint": "比較濃度與物質量／時間是否同一種量。",
+      "explain": "水回收可提高尿濃度；排泄量還需乘尿流量，不能由濃度直接認定分泌增加。",
+      "nodeId": "tubular-handling-node-06",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "tubular-handling-case-q01",
+      "stem": "【方向判讀】某物質由管周血液移入小管管液，應標哪個動詞？",
+      "options": [
+        "再吸收",
+        "由膀胱排出",
+        "分泌",
+        "腎絲球過濾"
+      ],
+      "answer": 2,
+      "hint": "區分進入小管與進入鮑氏囊的位置。",
+      "explain": "由血進小管管液是分泌；腎絲球過濾的終點是鮑氏囊腔，再吸收則反向回血。",
+      "nodeId": "tubular-handling-node-01",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ]
+    },
+    {
+      "id": "tubular-handling-case-q02",
+      "stem": "【收支比較】其他量固定，再吸收量增加時，最終物質排泄量如何改變？",
+      "options": [
+        "增加",
+        "必定不變",
+        "必定等於 GFR 的數值",
+        "減少"
+      ],
+      "answer": 3,
+      "hint": "將再吸收在收支式中的正負號找出來。",
+      "explain": "排泄＝過濾－再吸收＋分泌；其他條件固定時，增加被減去的再吸收量使排泄減少。",
+      "nodeId": "tubular-handling-node-02",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+      ]
+    },
+    {
+      "id": "tubular-handling-case-q03",
+      "stem": "【尿樣比較】兩份尿樣中同一物質的尿濃度相同，甲的每分鐘尿流量較大，何者正確？",
+      "options": [
+        "甲每分鐘排出的物質量較多",
+        "兩份排泄量必定相同",
+        "甲的物質排泄量一定較少",
+        "單憑此條件可知甲的分泌必定增加"
+      ],
+      "answer": 0,
+      "hint": "用相同的尿濃度乘上各自的流量。",
+      "explain": "排泄量為 U×V；U 相同而 V 較大時，物質排泄量較多，但仍不能單憑此條件認定分泌變化。",
+      "nodeId": "tubular-handling-node-06",
+      "sources": [
+        "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    },
+    {
+      "id": "tubular-handling-case-q04",
+      "stem": "【能力比較】正常葡萄糖過濾負荷未超過小管回收能力且運輸功能完整時，預期為何？",
+      "options": [
+        "葡萄糖必定完全靠分泌排出",
+        "葡萄糖可被回收",
+        "葡萄糖只停在腎盂不進小管",
+        "最大轉運量會變成尿流量"
+      ],
+      "answer": 1,
+      "hint": "同時核對進入量與運輸上限。",
+      "explain": "正常葡萄糖可回收；過濾負荷與回收能力應使用同一物質量／時間比較。",
+      "nodeId": "tubular-handling-node-04",
+      "sources": [
+        "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+      ]
+    },
+    {
+      "id": "tubular-handling-case-q05",
+      "stem": "【方向配對】醛固酮作用增加時，遠端的鈉與鉀移動應如何配對？",
+      "options": [
+        "鈉由血入管液，鉀由管液回血",
+        "鈉與鉀都只由血入管液",
+        "鈉由管液回血，鉀由血入管液",
+        "鈉與鉀都只由管液回血"
+      ],
+      "answer": 2,
+      "hint": "分別替鈉與鉀寫出起點、終點。",
+      "explain": "醛固酮增加鈉再吸收與鉀分泌，不能將其解讀成同時保鈉保鉀。",
+      "nodeId": "tubular-handling-node-05",
+      "sources": [
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 6 頁；《生理學》腎臟與體液的恆定，第 10、13–18、27、34 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

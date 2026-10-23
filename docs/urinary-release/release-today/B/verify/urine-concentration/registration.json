@@ -1,0 +1,41 @@
+{
+  "pass": true,
+  "slug": "urine-concentration",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/urine-concentration-v1/index.html",
+  "sha256": "f7ecb55736548b93bfa443ebb28077e710df5d7fa5d609d4a76eb986fa9a0c26",
+  "audit": {
+    "slug": "urine-concentration-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 17,
+    "questionIds": [
+      "urine-concentration-case-q01",
+      "urine-concentration-case-q02",
+      "urine-concentration-case-q03",
+      "urine-concentration-case-q04",
+      "urine-concentration-case-q05",
+      "urine-concentration-foundation-q01",
+      "urine-concentration-foundation-q02",
+      "urine-concentration-foundation-q03",
+      "urine-concentration-foundation-q04",
+      "urine-concentration-foundation-q05",
+      "urine-concentration-foundation-q06",
+      "urine-concentration-node-01-micro",
+      "urine-concentration-node-02-micro",
+      "urine-concentration-node-03-micro",
+      "urine-concentration-node-04-micro",
+      "urine-concentration-node-05-micro",
+      "urine-concentration-node-06-micro"
+    ]
+  },
+  "catalog": {
+    "label": "逆流機制與尿液濃縮｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 17,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

@@ -1,0 +1,387 @@
+{
+  "slug": "kidney-anatomy",
+  "version": "v1",
+  "experience": "guided",
+  "title": "腎臟位置、構造與功能",
+  "subtitle": "從後腹腔位置與腎切面，連結尿液形成、收集通路及內分泌功能。",
+  "label": "腎臟位置、構造與功能｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "後腹腔",
+      "label": "腎臟的位置"
+    },
+    {
+      "value": "皮質／髓質",
+      "label": "切面的內外分區"
+    },
+    {
+      "value": "內分泌",
+      "label": "腎功能的另一面"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+    "figure": "kidney-anatomy-stage1-base-01.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "位置",
+        "explain": "器官位置與右低左高。"
+      },
+      {
+        "id": "state-2",
+        "label": "切面",
+        "explain": "皮質、髓質及收集區。"
+      },
+      {
+        "id": "state-3",
+        "label": "功能",
+        "explain": "製尿與內分泌三分工。"
+      }
+    ],
+    "predict": {
+      "question": "由「位置」切到「切面」閱讀主題，應改以哪項關係為主？",
+      "options": [
+        "外皮質、內髓質及尿液收集區",
+        "右腎必定比左腎高",
+        "膀胱製造紅血球生成素（腎紅血球生成因子）",
+        "輸尿管取代腎小體過濾"
+      ],
+      "answer": 0,
+      "feedback": "切面主題看皮質、髓質與收集區；位置主題看後腹腔及兩腎高低，可回讀節點 01–03。",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "kidney-anatomy-node-01",
+      "tag": "01",
+      "title": "腎臟的位置",
+      "summary": "腎臟位於後腹腔、脊柱兩側，右腎通常較左腎低",
+      "figure": "kidney-anatomy-stage1-base-02.svg",
+      "concept": "腎臟位於後腹腔、脊柱兩側，右腎通常較左腎低。",
+      "points": [
+        "腎在腹膜的後方，並非位於腹膜腔內。",
+        "前面觀圖片的左側對應身體右側。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "讀圖時先依身體左右定位，再比較兩腎高度，避免把畫面左右當成身體左右。"
+      },
+      "sources": [
+        "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2"
+      ],
+      "reference": "《解剖學》泌尿系統，第 2–3 頁；《生理學》腎臟與體液的恆定，第 2 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "kidney-anatomy-node-02",
+      "tag": "02",
+      "title": "皮質、髓質與腎柱",
+      "summary": "腎切面外層是皮質，內層為髓質",
+      "figure": "kidney-anatomy-stage1-base-03.svg",
+      "concept": "腎切面外層是皮質，內層為髓質；皮質延伸至腎錐體之間的部分稱腎柱。",
+      "points": [
+        "腎錐體屬於髓質。",
+        "腎柱與外圍皮質相連。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在切面上找兩個腎錐體之間的組織，沿著它連回外圍皮質，就能辨識腎柱。"
+      },
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ],
+      "reference": "《解剖學》泌尿系統，第 3–6 頁；《生理學》腎臟與體液的恆定，第 3–4 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "kidney-anatomy-node-03",
+      "tag": "03",
+      "title": "乳頭、腎盞與腎盂",
+      "summary": "集尿管開口於腎乳頭，尿液依序流入小腎盞、大腎盞與腎盂，再進入輸尿管",
+      "figure": "kidney-anatomy-stage1-base-03.svg",
+      "concept": "集尿管開口於腎乳頭，尿液依序流入小腎盞、大腎盞與腎盂，再進入輸尿管。",
+      "points": [
+        "腎乳頭是腎錐體的尖端。",
+        "小腎盞承接乳頭流出的尿液。",
+        "腎盂接續輸尿管。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "沿乳頭向外追蹤收集路徑，與皮質中形成濾液的腎小體分開標記。"
+      },
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ],
+      "reference": "《解剖學》泌尿系統，第 3–6 頁；《生理學》腎臟與體液的恆定，第 3–4 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "kidney-anatomy-node-04",
+      "tag": "04",
+      "title": "腎門與保護層",
+      "summary": "腎門在腎臟內側凹入處",
+      "figure": "kidney-anatomy-stage1-base-04.svg",
+      "concept": "腎門在腎臟內側凹入處；腎外圍由內而外依次有腎被膜、脂肪囊與腎筋膜。",
+      "points": [
+        "腎門是內側的出入口區。",
+        "腎被膜緊貼腎表面，脂肪囊位於其外。",
+        "腎筋膜是更外層的支持構造。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較器官切面與包覆層：找出入口是在定位腎門，排列包覆層則要從腎表面向外追蹤。"
+      },
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+        "kidney-position；anatomy/AB-05_15 p.2–3"
+      ],
+      "reference": "《解剖學》泌尿系統，第 2–6 頁；《生理學》腎臟與體液的恆定，第 3–4 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "kidney-anatomy-node-05",
+      "tag": "05",
+      "title": "器官分工與尿液形成",
+      "summary": "泌尿系統中，腎臟形成尿液、輸尿管運送尿液、膀胱儲存尿液，尿道將尿液排出體外",
+      "figure": "kidney-anatomy-stage1-base-05.svg",
+      "concept": "泌尿系統中，腎臟形成尿液、輸尿管運送尿液、膀胱儲存尿液，尿道將尿液排出體外。",
+      "points": [
+        "尿液形成與尿液運送是不同功能。",
+        "膀胱是暫存場所，並非主要製尿場所。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "用「形成、運送、儲存、排出」四個動詞依序配對器官，檢查是否把輸尿管和尿道交換。"
+      },
+      "sources": [
+        "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+      ],
+      "reference": "《解剖學》泌尿系統，第 2、9–11、14 頁；《生理學》腎臟與體液的恆定，第 9–10 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "kidney-anatomy-node-06",
+      "tag": "06",
+      "title": "腎臟的內分泌功能",
+      "summary": "腎臟除形成尿液，也具有腎素、紅血球生成素（腎紅血球生成因子）及活化維生素 D 的內分泌相關功能",
+      "figure": "kidney-anatomy-stage1-base-06.svg",
+      "concept": "腎臟除形成尿液，也具有腎素、紅血球生成素（腎紅血球生成因子）及活化維生素 D 的內分泌相關功能。",
+      "points": [
+        "腎素參與血壓與醛固酮的連鎖調節。",
+        "紅血球生成素（腎紅血球生成因子）促進造血。",
+        "活化維生素 D 參與鈣的調節。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "整理腎功能時分成製尿與內分泌兩欄；只記錄尿量，無法涵蓋造血與維生素 D 活化的角色。"
+      },
+      "sources": [
+        "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+      ],
+      "reference": "《解剖學》泌尿系統，第 9 頁；《生理學》腎臟與體液的恆定，第 6–7、9、35 頁。",
+      "caption": "無字底圖。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "kidney-anatomy-foundation-q01",
+      "stem": "關於腎臟位置，哪一項正確？",
+      "options": [
+        "位於後腹腔，右腎通常較低",
+        "位於腹膜腔內，右腎通常較高",
+        "位於骨盆腔，左右等高",
+        "位於胸腔，左腎通常較低"
+      ],
+      "answer": 0,
+      "hint": "分別核對腹膜關係與身體左右。",
+      "explain": "腎臟在腹膜後方，右腎通常較左腎低；不要將畫面左右直接當成身體左右。",
+      "nodeId": "kidney-anatomy-node-01",
+      "sources": [
+        "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-foundation-q02",
+      "stem": "腎柱是什麼構造？",
+      "options": [
+        "腎錐體的尖端",
+        "深入腎錐體之間的皮質",
+        "連接腎盂的輸尿管",
+        "腎臟外圍的脂肪囊"
+      ],
+      "answer": 1,
+      "hint": "由錐體之間向外圍皮質追蹤。",
+      "explain": "腎柱是延伸到錐體之間的皮質；錐體屬髓質，尖端則稱腎乳頭。",
+      "nodeId": "kidney-anatomy-node-02",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-foundation-q03",
+      "stem": "腎乳頭流出的尿液先由哪個構造承接？",
+      "options": [
+        "腎絲球",
+        "大腎盞",
+        "小腎盞",
+        "腎門"
+      ],
+      "answer": 2,
+      "hint": "找出直接包接乳頭的收集構造。",
+      "explain": "尿液由乳頭先進小腎盞，再匯入大腎盞與腎盂；腎絲球負責過濾。",
+      "nodeId": "kidney-anatomy-node-03",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-foundation-q04",
+      "stem": "腎外包覆層由內而外的順序為何？",
+      "options": [
+        "脂肪囊、腎筋膜、腎被膜",
+        "腎筋膜、腎被膜、脂肪囊",
+        "腎被膜、腎筋膜、脂肪囊",
+        "腎被膜、脂肪囊、腎筋膜"
+      ],
+      "answer": 3,
+      "hint": "從緊貼腎表面的層開始。",
+      "explain": "腎被膜貼近腎表面，向外才是脂肪囊與腎筋膜；腎門則是內側凹入的出入口區。",
+      "nodeId": "kidney-anatomy-node-04",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+        "kidney-position；anatomy/AB-05_15 p.2–3"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-foundation-q05",
+      "stem": "哪個配對符合泌尿系統器官分工？",
+      "options": [
+        "腎臟形成尿液，膀胱儲存尿液",
+        "輸尿管形成尿液，尿道儲存尿液",
+        "膀胱形成尿液，腎臟排尿到體外",
+        "尿道運送尿液到膀胱，輸尿管排尿到體外"
+      ],
+      "answer": 0,
+      "hint": "先分清形成、運送、儲存與排出。",
+      "explain": "腎形成尿液，輸尿管送至膀胱儲存，最後經尿道排至體外。",
+      "nodeId": "kidney-anatomy-node-05",
+      "sources": [
+        "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-foundation-q06",
+      "stem": "腎臟的紅血球生成素（腎紅血球生成因子）主要參與何種功能？",
+      "options": [
+        "將尿液由膀胱運至腎盂",
+        "促進紅血球生成",
+        "直接作為膀胱壁肌肉",
+        "使腎乳頭轉變為腎柱"
+      ],
+      "answer": 1,
+      "hint": "把內分泌訊號與尿液通路分開。",
+      "explain": "紅血球生成素（腎紅血球生成因子）參與造血；腎素及活化維生素 D 分別參與血壓連鎖調節與鈣調節。",
+      "nodeId": "kidney-anatomy-node-06",
+      "sources": [
+        "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "kidney-anatomy-case-q01",
+      "stem": "【切面觀察】兩個腎錐體之間的組織與外圍皮質相連，應辨認為何？",
+      "options": [
+        "腎乳頭",
+        "腎盂",
+        "腎柱",
+        "腎被膜"
+      ],
+      "answer": 2,
+      "hint": "抓住與皮質連續及位於錐體間兩個線索。",
+      "explain": "腎柱是深入錐體間的皮質；乳頭位於錐體尖端，腎盂則是收集區。",
+      "nodeId": "kidney-anatomy-node-02",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-case-q02",
+      "stem": "【路徑觀察】由集尿管出口沿尿液方向追蹤，經乳頭後的正確順序為何？",
+      "options": [
+        "大腎盞、小腎盞、腎盂",
+        "腎盂、大腎盞、小腎盞",
+        "腎絲球、小腎盞、輸尿管",
+        "小腎盞、大腎盞、腎盂"
+      ],
+      "answer": 3,
+      "hint": "從最先承接乳頭的構造往外追。",
+      "explain": "小腎盞先承接乳頭尿液，再匯入大腎盞與腎盂，之後接輸尿管。",
+      "nodeId": "kidney-anatomy-node-03",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-case-q03",
+      "stem": "【器官配對】尿液已離開腎盂，正被送往膀胱；排到體外時又經另一條管道。兩者依序為何？",
+      "options": [
+        "輸尿管、尿道",
+        "尿道、輸尿管",
+        "輸尿管、腎小管",
+        "腎小管、尿道"
+      ],
+      "answer": 0,
+      "hint": "分辨膀胱入口前與出口後的管道。",
+      "explain": "輸尿管負責腎至膀胱的運送，尿道負責膀胱至體外的排出。",
+      "nodeId": "kidney-anatomy-node-05",
+      "sources": [
+        "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-case-q04",
+      "stem": "【模型觀察】腎上腺位於腎臟附近。哪種判讀符合器官定位？",
+      "options": [
+        "是腎錐體的尖端",
+        "鄰近腎臟，仍是另一個器官",
+        "是深入髓質的腎柱",
+        "就是腎門內的腎盂"
+      ],
+      "answer": 1,
+      "hint": "鄰近位置是否等同器官組成？",
+      "explain": "腎上腺與腎臟相鄰，但不是腎葉、腎元或尿液收集區；不能因位置接近而混同。",
+      "nodeId": "kidney-anatomy-node-04",
+      "sources": [
+        "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+        "kidney-position；anatomy/AB-05_15 p.2–3"
+      ]
+    },
+    {
+      "id": "kidney-anatomy-case-q05",
+      "stem": "【概念整理】只以尿量整理腎臟功能，會漏掉下列哪一組角色？",
+      "options": [
+        "輸尿管運尿與尿道排尿",
+        "腎盞收集與腎盂匯流",
+        "造血訊號與維生素 D 活化",
+        "膀胱暫存與括約肌控制"
+      ],
+      "answer": 2,
+      "hint": "找出腎臟本身的內分泌相關作用。",
+      "explain": "腎臟還參與紅血球生成素（腎紅血球生成因子）、腎素與維生素 D 活化，不能只用尿量涵蓋全部功能。",
+      "nodeId": "kidney-anatomy-node-06",
+      "sources": [
+        "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 2–6、9–11、14 頁；《生理學》腎臟與體液的恆定，第 2–4、6–7、9–10、35 頁。",
+    "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+  ]
+}

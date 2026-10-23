@@ -1,0 +1,68 @@
+{
+  "base": "fc174f1e456c7a78f4d258402fe518da199b2b14",
+  "root_files_checked": 1830,
+  "root_changed": [],
+  "cards_changed": [],
+  "protected_unchanged": {
+    "shared/materials.ts": true,
+    "materials-src/figures/manifest.json": true,
+    "shared/materialKit.ts": true,
+    "scripts/materials-build.mjs": true,
+    "scripts/material-node-audit.mjs": true,
+    "html/資訊圖表題庫_上傳用.xlsx": true
+  },
+  "common_code_diff": [
+    "materials-src/kit/presentation.mjs"
+  ],
+  "palette_only_six_additions": true,
+  "palette_hue": 176,
+  "draft_node_unchanged": true,
+  "r1_shuffle_invariants": 70,
+  "original_correct_text_unchanged": 67,
+  "intentional_rewrites": [
+    {
+      "id": "nephron-circulation-case-q03",
+      "changed_text_fields": [
+        "stem",
+        "hint",
+        "explain"
+      ],
+      "old_correct": "近曲小管",
+      "new_correct": "亨利氏環薄段"
+    },
+    {
+      "id": "filtration-clearance-case-q05",
+      "changed_text_fields": [
+        "stem",
+        "hint",
+        "explain"
+      ],
+      "old_correct": "血漿原本不含血球，應著重蛋白質差異",
+      "new_correct": "葡萄糖可自由通過過濾膜"
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q02",
+      "changed_text_fields": [
+        "stem",
+        "hint",
+        "explain"
+      ],
+      "old_correct": "與髂外動脈及靜脈交叉處",
+      "new_correct": "與髂外動脈及靜脈交叉處"
+    },
+    {
+      "id": "urinary-route-micturition-case-q02",
+      "changed_text_fields": [
+        "stem",
+        "hint",
+        "explain"
+      ],
+      "old_correct": "與髂外動脈及靜脈交叉處",
+      "new_correct": "腎盂與輸尿管交接處 → 跨越髂外動脈及靜脈處 → 進入膀胱壁處"
+    }
+  ],
+  "student_visible_editorial_terms": [],
+  "screenshots": 100,
+  "browser_question_mappings": 110,
+  "browser_predictions": 10
+}

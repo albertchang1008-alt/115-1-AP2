@@ -1,0 +1,101 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/urine-concentration.md",
+  "nodes": [
+    {
+      "figure": "gradient",
+      "steps": [
+        {
+          "type": "multi",
+          "sourceOptions": "question",
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "loop-down",
+      "steps": [
+        {
+          "type": "explore",
+          "choices": [
+            "下降枝"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 1,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "loop-up",
+      "steps": [
+        {
+          "type": "explore",
+          "choices": [
+            "上升枝"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 1,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "vasa-recta",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "adh",
+      "steps": [
+        {
+          "type": "explore",
+          "choices": [
+            "ADH"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "adh-comparison",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "濃尿",
+            "稀尿"
+          ],
+          "choices": [
+            "有 ADH",
+            "沒有 ADH"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ]
+}

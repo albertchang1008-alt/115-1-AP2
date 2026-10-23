@@ -1,0 +1,603 @@
+{
+  "recipe": {
+    "maxLongEdge": 1600,
+    "format": "WEBP",
+    "quality": 80,
+    "method": 6,
+    "lossless": false,
+    "exact": true,
+    "resample": "LANCZOS",
+    "upscale": false
+  },
+  "encoder": {
+    "pillow": "12.3.0",
+    "libwebp": "1.6.0"
+  },
+  "images": [
+    {
+      "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-03.png",
+      "sourceSha256": "02047e4d62d08b5b4aca46df23574950e1c9496e5efc30e9dcc8795b410e2475",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/02047e4d62d08b5b4aca46df23574950e1c9496e5efc30e9dcc8795b410e2475.webp",
+      "sha256": "5ac91db92b3aa4661f758d2726ce137daa19e11f8f10540143bf06778246e8ef",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 266146
+    },
+    {
+      "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-02.png",
+      "sourceSha256": "08e83ddf7cd45386131cf22e10b3beeb10f1a78794d12943eb1db5b132a272b6",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/08e83ddf7cd45386131cf22e10b3beeb10f1a78794d12943eb1db5b132a272b6.webp",
+      "sha256": "1f25de6d6d63985b44ae5cc9035c1f6d7cbd5a6256de12b1dd67df4352d30c5e",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 90250
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-06.png",
+      "sourceSha256": "10f8ca26a0e2c3eab827a11f064e0b43dc95692f24029b4ba74ac66e9d35aa16",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/10f8ca26a0e2c3eab827a11f064e0b43dc95692f24029b4ba74ac66e9d35aa16.webp",
+      "sha256": "1ea02a74be2c53d53e8e1f0d158e9894f2cbedf922666bec9d20b78ae28f10ad",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 207314
+    },
+    {
+      "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+      "sourceSha256": "12441ff2c296d064fbac5da5f1d22b077678f52a8b512e805979655fb0f0d5ff",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/12441ff2c296d064fbac5da5f1d22b077678f52a8b512e805979655fb0f0d5ff.webp",
+      "sha256": "0a09804dc7b2ce0cddbbb223678c01f7b45efbcc1fde48950e3d53b2cac79bd5",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 174766
+    },
+    {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+      "sourceSha256": "12ea9b21c5ae806d09e51793e4b11860de831aa1e79c8e6e18e83ca3460801d9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/12ea9b21c5ae806d09e51793e4b11860de831aa1e79c8e6e18e83ca3460801d9.webp",
+      "sha256": "de66754070423c63b465e2a1c3b76ed92dcca722f3a3c0dafddaa9416ffa2db0",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 220182
+    },
+    {
+      "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-03.png",
+      "sourceSha256": "195d46d9f013a3b00f5b7b1286a5c244bd629b3d3ae6c3a0f4adf65e5bb2afde",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "path": "materials-src/figures/derived/195d46d9f013a3b00f5b7b1286a5c244bd629b3d3ae6c3a0f4adf65e5bb2afde.webp",
+      "sha256": "1aaa97e85cb630c5789c5bfff161a6027d7b8f4e2746f9da40ba9e1ec727129e",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 235196
+    },
+    {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+      "sourceSha256": "2170a8bd1650ae083f530f0d84b8bd341c1f83bc2850595633b88d6428fcd8f3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/2170a8bd1650ae083f530f0d84b8bd341c1f83bc2850595633b88d6428fcd8f3.webp",
+      "sha256": "40f452eb5a82b5e6ea6cc51a2eac73e440deaa2f5b7331fd9f9d8d661efcff38",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 99140
+    },
+    {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+      "sourceSha256": "273a708b8232cda4b914633c036e8f49d4ad7a14d41f56c42c84c2e88a2eaf18",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/273a708b8232cda4b914633c036e8f49d4ad7a14d41f56c42c84c2e88a2eaf18.webp",
+      "sha256": "7335fb4c8c7a1ba2c9abfc5c30ff766c02d67bab12da4404886509bcadc00df7",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 137326
+    },
+    {
+      "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-01.png",
+      "sourceSha256": "31c0148ba5b499c7e4bf508911c61dab290955e6badf184cf9330124d93768ed",
+      "sourceSize": [
+        1198,
+        1313
+      ],
+      "path": "materials-src/figures/derived/31c0148ba5b499c7e4bf508911c61dab290955e6badf184cf9330124d93768ed.webp",
+      "sha256": "7d11add353ca4c04d7e0f4b205ac436b172109626b159902be0dd8e46a26f1be",
+      "size": [
+        1198,
+        1313
+      ],
+      "bytes": 143274
+    },
+    {
+      "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+      "sourceSha256": "349654f87ca0d73e0568da1746ffe31ee9a8ebbf394f662d6f5031cdb1dd91a9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/349654f87ca0d73e0568da1746ffe31ee9a8ebbf394f662d6f5031cdb1dd91a9.webp",
+      "sha256": "5d82bf1682986bbf684ce798391e4c96e3231e6227fa52f72abd422ba75c96ef",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 175590
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-05.png",
+      "sourceSha256": "3714cecc0e5909ddc94a306cae5570b6a9871ab833dc796bb233d3ad3bfe9a69",
+      "sourceSize": [
+        1055,
+        1493
+      ],
+      "path": "materials-src/figures/derived/3714cecc0e5909ddc94a306cae5570b6a9871ab833dc796bb233d3ad3bfe9a69.webp",
+      "sha256": "4a4d7d85bf854624f780d8ac509a58c598376f654cf1a3f719dbb61e9c4855ad",
+      "size": [
+        1055,
+        1493
+      ],
+      "bytes": 193004
+    },
+    {
+      "source": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-01.png",
+      "sourceSha256": "40ee546dcbd2b43edf6755c605ec7606b9e24411254a8789baccec4ac2f9c3fc",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "path": "materials-src/figures/derived/40ee546dcbd2b43edf6755c605ec7606b9e24411254a8789baccec4ac2f9c3fc.webp",
+      "sha256": "e8d8f34123b1be3cc85dcfe01ba0b4835c57833fbf2aa89792c34296fdb04019",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 179606
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-03.png",
+      "sourceSha256": "4606697afee329a10f41669d7171502aaf58530a144162fc8698188e9d4d496e",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/4606697afee329a10f41669d7171502aaf58530a144162fc8698188e9d4d496e.webp",
+      "sha256": "3370480aeb5fa81b2c5cae177e1be25397c02a2c544adceacc756b72fbd849b9",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 181418
+    },
+    {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+      "sourceSha256": "4d0c9c41c9a9ff76a4f3a973967d66aebb1a4c801f28478b5e843e4fcd407f6b",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/4d0c9c41c9a9ff76a4f3a973967d66aebb1a4c801f28478b5e843e4fcd407f6b.webp",
+      "sha256": "95d200415862bcf843eb8123853b10fd7dd1f962980db6eae3dfe7e1f05868ff",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 179944
+    },
+    {
+      "source": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-90.png",
+      "sourceSha256": "58965abd57839aac98e6c2134a7b43cb6c706646c482813e80dfc278c0e35853",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "materials-src/figures/derived/58965abd57839aac98e6c2134a7b43cb6c706646c482813e80dfc278c0e35853.webp",
+      "sha256": "263385e91cb59efcef84ad737ab9e7de7b9631615f7265969d418922027bad95",
+      "size": [
+        1086,
+        1448
+      ],
+      "bytes": 18928
+    },
+    {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sourceSha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88.webp",
+      "sha256": "4df841fb01a3ffd5b3e352064d6597031b3623970c863d9d87cc1c6793d090b8",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 135564
+    },
+    {
+      "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-03.png",
+      "sourceSha256": "68d815ed4a2297497bebc21c67e2c33b237525c148e5fda39d8b4ed3e305bd25",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/68d815ed4a2297497bebc21c67e2c33b237525c148e5fda39d8b4ed3e305bd25.webp",
+      "sha256": "bb0dc3736c04f9c127065a630817131f9776c6f274a03fd7269ab4933c18472e",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 101374
+    },
+    {
+      "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-05.png",
+      "sourceSha256": "6ae6d69b5dd7c1dcc783b65b2c6669a21c86f0993b946fdd3d1f48241cc23295",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/6ae6d69b5dd7c1dcc783b65b2c6669a21c86f0993b946fdd3d1f48241cc23295.webp",
+      "sha256": "bc593ebdc52733524991c4a6c59b4077b0e2ed31a0c7112fae60d517f91da2c5",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 195492
+    },
+    {
+      "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-02.png",
+      "sourceSha256": "6c8f0df805aad2479c54a8a571b323dc7c215e49ebb30fbf11e71c9f2bc34aa2",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/6c8f0df805aad2479c54a8a571b323dc7c215e49ebb30fbf11e71c9f2bc34aa2.webp",
+      "sha256": "1a3abeed9fa78d93d57417bb9333f96fc3375fe045877b12033bd2dd2758eb31",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 245802
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-07.png",
+      "sourceSha256": "7804d8d44ca96f5bd65fef5481727abc2dbfb4dfbb12083010cfc5205a4733cb",
+      "sourceSize": [
+        1055,
+        1491
+      ],
+      "path": "materials-src/figures/derived/7804d8d44ca96f5bd65fef5481727abc2dbfb4dfbb12083010cfc5205a4733cb.webp",
+      "sha256": "07df073be78d6bab5cd4136cb70395fd15ef790c11a406935f2aa0b5daed977f",
+      "size": [
+        1055,
+        1491
+      ],
+      "bytes": 24198
+    },
+    {
+      "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+      "sourceSha256": "87df55559e7533997756ec8ad6580e972ef2be7259d8b9ae8f86e9c03f15dcb4",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/87df55559e7533997756ec8ad6580e972ef2be7259d8b9ae8f86e9c03f15dcb4.webp",
+      "sha256": "9216030c7bba404f530e6a2b6aea8676907d8f90d4cfe7add86b93483fc59e99",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 224048
+    },
+    {
+      "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+      "sourceSha256": "8d6176b33babb0560db584dfe544d3fd8f1681c9b2e05b360a4d3bb96e068045",
+      "sourceSize": [
+        1145,
+        1374
+      ],
+      "path": "materials-src/figures/derived/8d6176b33babb0560db584dfe544d3fd8f1681c9b2e05b360a4d3bb96e068045.webp",
+      "sha256": "30348305e34a0f55bb32836a3e2e0f04cd57983c959f634ffb5d67e220a94694",
+      "size": [
+        1145,
+        1374
+      ],
+      "bytes": 203552
+    },
+    {
+      "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-02.png",
+      "sourceSha256": "9527c96eca562ad678713c4165cceff492518ae9c3e696661d8674297f4618c9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/9527c96eca562ad678713c4165cceff492518ae9c3e696661d8674297f4618c9.webp",
+      "sha256": "ab44ddf792778cc6f3059a7b530d74b0a89509d40ec97803f8bf5ce48b8007ec",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 237486
+    },
+    {
+      "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+      "sourceSha256": "ab901c65e6f3fcd123d63b2b6042a0730abe4bd538c7046c8a3b13e635a367c5",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/ab901c65e6f3fcd123d63b2b6042a0730abe4bd538c7046c8a3b13e635a367c5.webp",
+      "sha256": "2c61a1d038293b7248c8fe02e9859940299a74a780d231ca134cdf9054937d36",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 172536
+    },
+    {
+      "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-05.png",
+      "sourceSha256": "aedeb3a6726b9d0a3afb58e0604acd670eebbcae02b6569bf09908eb17206557",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/aedeb3a6726b9d0a3afb58e0604acd670eebbcae02b6569bf09908eb17206557.webp",
+      "sha256": "9ac0455b1e2cce09af4c65f443d37bad9524395fb5faa27b3ba8bc99017022a1",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 164236
+    },
+    {
+      "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-02.png",
+      "sourceSha256": "b3a0e95a14090114a9007f9af3a5991aa0ae5352da9334f51789138e8fe11c62",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/b3a0e95a14090114a9007f9af3a5991aa0ae5352da9334f51789138e8fe11c62.webp",
+      "sha256": "daf70eb4ac7967598b19baefaf67046018cc54ac692cdf3587db9a4c82892c90",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 76962
+    },
+    {
+      "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-02.png",
+      "sourceSha256": "bc112855ea9f400fb4c2d9f34a85b2aaea8833b70bf232c84fa0c11a45566ca5",
+      "sourceSize": [
+        1198,
+        1313
+      ],
+      "path": "materials-src/figures/derived/bc112855ea9f400fb4c2d9f34a85b2aaea8833b70bf232c84fa0c11a45566ca5.webp",
+      "sha256": "1a4ffd14e63d79290c5d85f0267151ec0717060d174d7e1a1af7008ae1e98dbf",
+      "size": [
+        1198,
+        1313
+      ],
+      "bytes": 203140
+    },
+    {
+      "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-03.png",
+      "sourceSha256": "bddac3a6d1dfd7dfdf0a2b2e990a7d806f5c68e3fd342475821bdf17dcd135f2",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/bddac3a6d1dfd7dfdf0a2b2e990a7d806f5c68e3fd342475821bdf17dcd135f2.webp",
+      "sha256": "a64b5b1317f71ccb8ab9c4b8eb4b9bde028801430237a832e2c5995edc032d82",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 204140
+    },
+    {
+      "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-90.png",
+      "sourceSha256": "bf49822cf3323c6d9945c2752b4b7ae161a8ccebd06cff071341846cf0882cb1",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "path": "materials-src/figures/derived/bf49822cf3323c6d9945c2752b4b7ae161a8ccebd06cff071341846cf0882cb1.webp",
+      "sha256": "dc61a3fceb55d0dcd94593caf7b4538235c5620c7f2508a9eac668c5753cd32f",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 176964
+    },
+    {
+      "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-04.png",
+      "sourceSha256": "cb30ea18b0ed0188732249dcd77a76e20e1889e7bb223828a985c2f0d649ac1a",
+      "sourceSize": [
+        1198,
+        1313
+      ],
+      "path": "materials-src/figures/derived/cb30ea18b0ed0188732249dcd77a76e20e1889e7bb223828a985c2f0d649ac1a.webp",
+      "sha256": "7fd99855371a36c6d4eb63687ab9d1ffda1c981375699253d1eaa609e0673e50",
+      "size": [
+        1198,
+        1313
+      ],
+      "bytes": 121866
+    },
+    {
+      "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+      "sourceSha256": "d4e5f733075998cea33d3e7e2d8a3f164df375ddd08580a0b84ee1e0d75b9d5d",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/d4e5f733075998cea33d3e7e2d8a3f164df375ddd08580a0b84ee1e0d75b9d5d.webp",
+      "sha256": "12b7ef817f69ae5b85a3c938edd3de17ab44e5b00ec7a7b7d2c55067ff5a9576",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 107366
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-02.png",
+      "sourceSha256": "d9e66ae035fc86a8604ef66f76435315d3be088250fe508c8235c4de34405346",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/d9e66ae035fc86a8604ef66f76435315d3be088250fe508c8235c4de34405346.webp",
+      "sha256": "8c835287a9098029cabaf1aed743c7d97e7ea5133a1962f31ff595b71047785b",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 130944
+    },
+    {
+      "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-03.png",
+      "sourceSha256": "ef293b2e782f19e2f1ee93b18c3cead282e6d11a7cb059dc6e204143244bf0c5",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/ef293b2e782f19e2f1ee93b18c3cead282e6d11a7cb059dc6e204143244bf0c5.webp",
+      "sha256": "76cf5100a6413d05bf624ba76c42d5ed466692c9560c9dac935833e1e6fbd121",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 219828
+    },
+    {
+      "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-04.png",
+      "sourceSha256": "f059e299b5568dc98841ecfb6108abf681de428aa21402081966472f929f4479",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/f059e299b5568dc98841ecfb6108abf681de428aa21402081966472f929f4479.webp",
+      "sha256": "32eadc459d5218f0ec98345cb7fb9d33ea52ccf85575e4ab5d4a4016607ab485",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 263762
+    },
+    {
+      "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-04.png",
+      "sourceSha256": "f35ad194ef9ecfe007fc3028f1bee107a4a1659cbcb61c36b29e72c855e86370",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/f35ad194ef9ecfe007fc3028f1bee107a4a1659cbcb61c36b29e72c855e86370.webp",
+      "sha256": "63facb2d9f40ce4d4c1a54d08fa832a0e12ee0e9809308147f1f7abe03b6ea24",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 199578
+    },
+    {
+      "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-05.png",
+      "sourceSha256": "fa7242780cc272debbef7cc51d2d0e4816e2a061c6a6b28843a2e1cc7929ed6c",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/fa7242780cc272debbef7cc51d2d0e4816e2a061c6a6b28843a2e1cc7929ed6c.webp",
+      "sha256": "25ef2804ccd71785f0d9def578884cc844c88dce38b9c3a9d6228e553a4a1282",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 250290
+    },
+    {
+      "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-04.png",
+      "sourceSha256": "fd9a45efffb191d0a344309c373968d6d3540787ea113175277e2fe7a2f937b3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/fd9a45efffb191d0a344309c373968d6d3540787ea113175277e2fe7a2f937b3.webp",
+      "sha256": "b5ae748e5ed5a40ce0273655e1a305314f797a85ced8181ccd67f79a5baf6950",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 179834
+    },
+    {
+      "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-04.png",
+      "sourceSha256": "fd9e52dd3e0e1fc2fcec903d3c59ed498e93248a3e00df4eab4cfde682aecdd3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "path": "materials-src/figures/derived/fd9e52dd3e0e1fc2fcec903d3c59ed498e93248a3e00df4eab4cfde682aecdd3.webp",
+      "sha256": "b8f729ac6647bb2c69bf5295671abc5dd0062d3030318a72ee38686821e15c30",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 230762
+    },
+    {
+      "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sourceSha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "materials-src/figures/derived/fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4.webp",
+      "sha256": "83bd354ad4b50c3a023fc7c8c231542fee7d1353b2327433cffce824d49fffd6",
+      "size": [
+        1086,
+        1448
+      ],
+      "bytes": 194728
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+{
+  "scriptVersion": "3.2",
+  "scriptSha256": "330b7dbec21080542e18cb32b993ed6a70ceeb8690e5299bf61876cc1c2d705a",
+  "results": [
+    {
+      "name": "390x844-N01-guide1",
+      "description": "首次進入：先選角色，無預選、無正誤提示，圖仍保留。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-guide2",
+      "description": "點角色後才展開說明選單，第二步引導指向真實選項。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-guide3",
+      "description": "自行選一段說明後第三步提示；未判斷對錯，不代填。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-skip",
+      "description": "操作說明可重看與略過，作答保留。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-exchange",
+      "description": "選到已使用說明：明確交換兩列或取消，未暗中更動原答案。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-retry-wrong-rows",
+      "description": "統一檢查答錯先說明，再試一次清空所有列。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N01-correct",
+      "description": "配對全對後圖上三區亮起；整關確認通過才長枝。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-guide1",
+      "description": "首次進入：先選角色，無預選、無正誤提示，圖仍保留。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-guide2",
+      "description": "點角色後才展開說明選單，第二步引導指向真實選項。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-guide3",
+      "description": "自行選一段說明後第三步提示；未判斷對錯，不代填。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-skip",
+      "description": "操作說明可重看與略過，作答保留。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-exchange",
+      "description": "選到已使用說明：明確交換兩列或取消，未暗中更動原答案。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-retry-wrong-rows",
+      "description": "統一檢查答錯先說明，再試一次清空所有列。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "390x844-N03-correct",
+      "description": "配對全對後圖上三區亮起；整關確認通過才長枝。",
+      "pass": true,
+      "geometry": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-guide1",
+      "description": "首次進入：先選角色，無預選、無正誤提示，圖仍保留。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-guide2",
+      "description": "點角色後才展開說明選單，第二步引導指向真實選項。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-guide3",
+      "description": "自行選一段說明後第三步提示；未判斷對錯，不代填。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-skip",
+      "description": "操作說明可重看與略過，作答保留。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-exchange",
+      "description": "選到已使用說明：明確交換兩列或取消，未暗中更動原答案。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-retry-wrong-rows",
+      "description": "統一檢查答錯先說明，再試一次清空所有列。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N01-correct",
+      "description": "配對全對後圖上三區亮起；整關確認通過才長枝。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-guide1",
+      "description": "首次進入：先選角色，無預選、無正誤提示，圖仍保留。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-guide2",
+      "description": "點角色後才展開說明選單，第二步引導指向真實選項。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-guide3",
+      "description": "自行選一段說明後第三步提示；未判斷對錯，不代填。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-skip",
+      "description": "操作說明可重看與略過，作答保留。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-exchange",
+      "description": "選到已使用說明：明確交換兩列或取消，未暗中更動原答案。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-retry-wrong-rows",
+      "description": "統一檢查答錯先說明，再試一次清空所有列。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    },
+    {
+      "name": "1280x800-N03-correct",
+      "description": "配對全對後圖上三區亮起；整關確認通過才長枝。",
+      "pass": true,
+      "geometry": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "outside": [],
+        "clipping": [],
+        "small": []
+      },
+      "textErrors": []
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

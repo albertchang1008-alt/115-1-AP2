@@ -1,0 +1,394 @@
+{
+  "slug": "water-sodium-regulation",
+  "version": "v1",
+  "experience": "guided",
+  "title": "水分收支與鈉水調節",
+  "subtitle": "從每日水分來去，分辨口渴、ADH、RAAS與排鈉調節的分工。",
+  "label": "水分收支與鈉水調節｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "2500 mL/日",
+      "label": "攝取示例合計"
+    },
+    {
+      "value": "口渴與ADH",
+      "label": "攝取與腎端保水"
+    },
+    {
+      "value": "ANP",
+      "label": "促進排鈉"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中構造與方向建立關係；紅色粗體標出本次觀察的重點。",
+    "figure": "water-sodium-regulation-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "平衡",
+        "explain": "三攝取來源與排出路徑。"
+      },
+      {
+        "id": "state-2",
+        "label": "保留",
+        "explain": "口渴、ADH、醛固酮分工。"
+      },
+      {
+        "id": "state-3",
+        "label": "排出",
+        "explain": "ANP排Na與水的定性方向。"
+      }
+    ],
+    "predict": {
+      "question": "切換「保留」主題，哪種配對最合適？",
+      "options": [
+        "口渴直接使尿中溶質消失",
+        "ADH只增加食物水",
+        "醛固酮只使所有離子都排出",
+        "口渴增加攝取，ADH增加腎端保水"
+      ],
+      "answer": 3,
+      "feedback": "口渴促飲水，ADH提高水通透性；醛固酮主要調整鈉回收。",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "water-sodium-regulation-node-01",
+      "tag": "01",
+      "title": "水攝取三來源",
+      "summary": "液體、食物與代謝水共同構成攝取",
+      "figure": "water-sodium-regulation-node-01.svg",
+      "concept": "每日攝取示例為液體1500 mL、食物800 mL、代謝水200 mL，合計2500 mL。",
+      "points": [
+        "三項都使用每日分母。",
+        "代謝水是體內代謝產生的水。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "整理一天水分來源時，飲水量不等於全部水攝取量。"
+      },
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 29–30 頁。",
+      "caption": "液體、食物與代謝水共同構成攝取。"
+    },
+    {
+      "id": "water-sodium-regulation-node-02",
+      "tag": "02",
+      "title": "排出途徑與無知覺蒸散",
+      "summary": "尿、肺、皮膚與糞便皆可排水",
+      "figure": "water-sodium-regulation-node-02.svg",
+      "concept": "水分經尿液、呼氣、皮膚蒸散、流汗與糞便排出；無明顯流汗仍有皮膚蒸散。",
+      "points": [
+        "各途徑的量可有範圍。",
+        "不可將各範圍極值強行湊成攝取示例總量。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "看見沒有流汗的情境，仍須保留呼氣與皮膚蒸散兩條路徑。"
+      },
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 29–30 頁。",
+      "caption": "尿、肺、皮膚與糞便皆可排水。"
+    },
+    {
+      "id": "water-sodium-regulation-node-03",
+      "tag": "03",
+      "title": "口渴與ADH",
+      "summary": "增加攝取與增加保水是兩條路徑",
+      "figure": "water-sodium-regulation-node-03.svg",
+      "concept": "口渴促進飲水；抗利尿激素ADH增加集尿管對水的通透性，使水沿滲透梯度回收。",
+      "points": [
+        "飲水影響進入身體的水。",
+        "ADH影響腎臟最後留回的水。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "用入口與腎端兩個位置追蹤水分，避免將口渴等同於小管水通道。"
+      },
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、19、21–22、30、34、37 頁。",
+      "caption": "增加攝取與增加保水是兩條路徑。"
+    },
+    {
+      "id": "water-sodium-regulation-node-04",
+      "tag": "04",
+      "title": "RAAS的分工",
+      "summary": "腎素啟動，血管收縮素II與醛固酮接續作用",
+      "figure": "water-sodium-regulation-node-04.svg",
+      "concept": "近腎絲球細胞釋放腎素，促血管收縮素原形成I；經肺臟轉化酶形成II，再促進醛固酮作用。",
+      "points": [
+        "腎素本身不是直接血管收縮者。",
+        "血管收縮素II可促血管收縮。",
+        "醛固酮促鈉再吸收。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "按催化、血管作用與腎端鈉回收逐步配對，不把整條鏈壓成腎素直接收縮血管。"
+      },
+      "sources": [
+        "renin-angiotensin-aldosterone；physiology/CH05 p.66, physiology/CH05 p.67",
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6 頁；《生理學》第5章，第 66–67 頁；《生理學》腎臟與體液的恆定，第 4、6–7 頁。",
+      "caption": "腎素啟動，血管收縮素II與醛固酮接續作用。"
+    },
+    {
+      "id": "water-sodium-regulation-node-05",
+      "tag": "05",
+      "title": "醛固酮與ADH比較",
+      "summary": "保鈉與調水通透性的直接作用不同",
+      "figure": "water-sodium-regulation-node-05.svg",
+      "concept": "醛固酮促遠曲小管及集尿管鈉再吸收並增加鉀分泌；ADH直接增加水通透性。",
+      "points": [
+        "鈉回到血液，鉀進入管液。",
+        "水可隨鈉回收而移動，但不等同ADH直接調整水通道。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "把鈉、鉀、水分成三列，再填各自移動方向與調節訊號。"
+      },
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 14、16–19、21–22、30、34、37 頁。",
+      "caption": "保鈉與調水通透性的直接作用不同。"
+    },
+    {
+      "id": "water-sodium-regulation-node-06",
+      "tag": "06",
+      "title": "排鈉與容積／濃度",
+      "summary": "鈉總量與鈉濃度是不同的量",
+      "figure": "water-sodium-regulation-node-06.svg",
+      "concept": "心房利鈉尿肽ANP促進排鈉；鈉量與水量共同影響體液容積和濃度。",
+      "points": [
+        "濃度要同時考慮溶質量與水量。",
+        "鈉總量相同時，水量不同仍可使濃度改變。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較容器時先看水位與粒子總數，再判讀濃度，避免只數鈉粒子。"
+      },
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、22、30、34、37 頁。",
+      "caption": "鈉總量與鈉濃度是不同的量。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "water-sodium-regulation-foundation-q01",
+      "stem": "每日攝取示例應包含哪三項？",
+      "options": [
+        "液體、食物與代謝水",
+        "只有直接飲用液體",
+        "尿液、肺與糞便",
+        "只有流汗與皮膚蒸散"
+      ],
+      "answer": 0,
+      "hint": "將攝取端與排出端分開。",
+      "explain": "攝取含液體1500、食物800與代謝水200 mL/日；尿與蒸散是排出。",
+      "nodeId": "water-sodium-regulation-node-01",
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-foundation-q02",
+      "stem": "沒有明顯流汗時，皮膚排水如何理解？",
+      "options": [
+        "呼氣也必定不含水",
+        "仍可有無知覺蒸散",
+        "皮膚完全不排水",
+        "排水必定全部改從糞便"
+      ],
+      "answer": 1,
+      "hint": "區分汗腺排汗與蒸散。",
+      "explain": "無明顯汗液不等於沒有皮膚蒸散，呼氣也能帶走水分。",
+      "nodeId": "water-sodium-regulation-node-02",
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-foundation-q03",
+      "stem": "口渴與ADH的主要分工為何？",
+      "options": [
+        "ADH只增加食物含水量",
+        "兩者只改變糞便排水",
+        "口渴促飲水，ADH增水通透性",
+        "口渴直接取代水通道"
+      ],
+      "answer": 2,
+      "hint": "入口與腎端各處理什麼？",
+      "explain": "口渴增加水攝取；ADH使集尿管更易通水，增加回收。",
+      "nodeId": "water-sodium-regulation-node-03",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-foundation-q04",
+      "stem": "RAAS中真正具有直接血管收縮作用者為何？",
+      "options": [
+        "腎素本身",
+        "血管收縮素原",
+        "尿中溶質",
+        "血管收縮素II"
+      ],
+      "answer": 3,
+      "hint": "腎素負責催化鏈的前段。",
+      "explain": "腎素啟動轉換；血管收縮素II才直接促血管收縮。",
+      "nodeId": "water-sodium-regulation-node-04",
+      "sources": [
+        "renin-angiotensin-aldosterone；physiology/CH05 p.66, physiology/CH05 p.67",
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-foundation-q05",
+      "stem": "醛固酮與ADH的直接作用配對，何者正確？",
+      "options": [
+        "醛固酮促鈉回收，ADH增水通透性",
+        "醛固酮只直接增加水通道",
+        "ADH直接主要增加鈉回收",
+        "兩者都只促糞便排鈉"
+      ],
+      "answer": 0,
+      "hint": "將離子運輸與水通透性分開。",
+      "explain": "醛固酮促鈉回收並增鉀分泌；ADH主要直接調整水通透性。",
+      "nodeId": "water-sodium-regulation-node-05",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-foundation-q06",
+      "stem": "判斷鈉濃度時應同時考慮什麼？",
+      "options": [
+        "只看當次飲水動作",
+        "鈉量與水量",
+        "只數鈉總量而忽略水量",
+        "只看容器材質"
+      ],
+      "answer": 1,
+      "hint": "濃度是量與容積的關係。",
+      "explain": "同樣鈉量配不同水量，可有不同濃度；總量不能取代濃度。",
+      "nodeId": "water-sodium-regulation-node-06",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "water-sodium-regulation-case-q01",
+      "stem": "【收支表】1500 mL液體、800 mL食物水與200 mL代謝水，合計為何？",
+      "options": [
+        "只採800 mL/日",
+        "只採200 mL/日",
+        "2500 mL/日",
+        "只採1500 mL/日"
+      ],
+      "answer": 2,
+      "hint": "三項使用相同時間分母。",
+      "explain": "三項相加為2500 mL/日，不能漏掉食物或代謝水。",
+      "nodeId": "water-sodium-regulation-node-01",
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-case-q02",
+      "stem": "【途徑辨識】有人把「沒有流汗」寫成「沒有皮膚失水」，應如何修正？",
+      "options": [
+        "刪除所有呼氣水分",
+        "將糞便排水視為皮膚排水",
+        "認定只有尿液能排水",
+        "保留皮膚無知覺蒸散"
+      ],
+      "answer": 3,
+      "hint": "先分開兩種皮膚排水方式。",
+      "explain": "皮膚蒸散與流汗不同；沒有明顯流汗仍可蒸散。",
+      "nodeId": "water-sodium-regulation-node-02",
+      "sources": [
+        "water-intake-output；physiology/CH09 p.30, physiology/CH09 p.29"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-case-q03",
+      "stem": "【箭頭配對】遠端小管同時增加Na⁺回收與K⁺分泌，應配哪個訊號？",
+      "options": [
+        "醛固酮",
+        "只有口渴行為",
+        "只靠皮膚蒸散",
+        "食物中的代謝水"
+      ],
+      "answer": 0,
+      "hint": "將兩個離子方向放在同一張圖。",
+      "explain": "醛固酮使Na⁺朝血、K⁺朝管液；不是ADH直接主要保鈉。",
+      "nodeId": "water-sodium-regulation-node-05",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-case-q04",
+      "stem": "【流程核對】腎素之後的鏈條應如何追蹤？",
+      "options": [
+        "先將腎素當成尿中廢物排出",
+        "血管收縮素原→I→經轉化酶形成II",
+        "腎素立即等同於血管收縮素II",
+        "完全跳過血管收縮素I"
+      ],
+      "answer": 1,
+      "hint": "分開啟動酵素與轉換產物。",
+      "explain": "腎素促原形成I，再經轉化酶形成II，各步角色不同。",
+      "nodeId": "water-sodium-regulation-node-04",
+      "sources": [
+        "renin-angiotensin-aldosterone；physiology/CH05 p.66, physiology/CH05 p.67",
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "water-sodium-regulation-case-q05",
+      "stem": "【容器比較】鈉總量相同但水量增加，能直接說鈉濃度不變嗎？",
+      "options": [
+        "能，水量與濃度無關",
+        "能，ANP就是鈉濃度的單位",
+        "不能，須把水量改變納入",
+        "能，濃度只看鈉總數"
+      ],
+      "answer": 2,
+      "hint": "把總量與每單位水中的量分開。",
+      "explain": "水量增加會改變同樣鈉量所對應的濃度；ANP是調節訊號而非單位。",
+      "nodeId": "water-sodium-regulation-node-06",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 6 頁；《生理學》第5章，第 66–67 頁；《生理學》腎臟與體液的恆定，第 4、6–7、14、16–19、21–22、29–30、34、37 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

@@ -1,4 +1,5 @@
 import { API } from './service';
+import { matchingGuideScope } from './matchingGuideScope';
 import { learningBridge } from './LearningBridge';
 import { useEffect, useRef, useState } from 'react';
 import { Activity, youtubeId, materialUrl } from '../shared/model';
@@ -105,7 +106,7 @@ export function HtmlMaterial({
   const session = useRef(crypto.randomUUID());
   const [status, setStatus] = useState('');
   const interactive = activity.tracking === 'interactive';
-  const init = () => frame.current?.contentWindow?.postMessage({ type: 'init', protocolVersion: 1, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', sessionId: session.current }, '*');
+  const init = () => frame.current?.contentWindow?.postMessage({ type: 'init', guideScope: matchingGuideScope(uid), protocolVersion: 1, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', sessionId: session.current }, '*');
   useEffect(() => {
     if (!interactive) return;
     const bridge = learningBridge(api, { courseId, unitId, ...(chapterName ? { chapterName } : {}), activityId: activity.id, materialVersion: activity.materialVersion || 'v1', uid }, setStatus, () => onSave(1, true));

@@ -1,0 +1,64 @@
+{
+  "pass": true,
+  "expectedFailures": [
+    {
+      "mode": "missing",
+      "exitCode": 1,
+      "errors": [
+        "learning.nodes[3].flowRoutes[0].segments[0]: sources required",
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: sources required",
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: flow evidence must explicitly order from → to",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    },
+    {
+      "mode": "reverse",
+      "exitCode": 1,
+      "errors": [
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: flow evidence must explicitly order from → to",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    },
+    {
+      "mode": "neutral",
+      "exitCode": 1,
+      "errors": [
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: flow evidence must explicitly order from → to",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    },
+    {
+      "mode": "bogus-quote",
+      "exitCode": 1,
+      "errors": [
+        "learning.nodes[3].flowRoutes[0].segments[0]: quote not found in renin-angiotensin-aldosterone",
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: quote not found in renin-angiotensin-aldosterone",
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: flow evidence must explicitly order from → to",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    },
+    {
+      "mode": "outside",
+      "exitCode": 1,
+      "errors": [
+        "water-sodium-regulation-node-04.flowRoutes: points must be in raster coordinates",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    },
+    {
+      "mode": "negated",
+      "exitCode": 1,
+      "errors": [
+        "water-sodium-regulation-node-04.flowRoutes.raas-relay.segments[0]: flow evidence must explicitly order from → to",
+        "schemaVersion: frozen v1 sample only; changed data must migrate to v2"
+      ],
+      "skipped": 0
+    }
+  ],
+  "skipped": 0
+}

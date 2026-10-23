@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-TW">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>水分收支與鈉水調節・方案2＋</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;font:14px/1.3 -apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;color:#163044;background:#edf3f6}body{overflow:hidden}.top-bar{height:32px;display:flex;align-items:center;padding:0 12px;background:#173e4b;color:white;font-weight:700;font-size:14px}.viewport-screen{height:calc(100dvh - 32px);width:100%;padding:10px;gap:10px;display:flex;max-width:1440px;margin:auto}.figure-pane{position:relative;flex:1;min-width:0;min-height:0;background:#fff;border:1px solid #d5e3e8;border-radius:16px;overflow:hidden;padding:8px;display:flex}.figure-pane svg{width:100%;height:100%;display:block}.panel-pane{position:relative;flex:0 0 40%;min-width:310px;height:100%;border:1px solid #d5e3e8;border-radius:16px;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px}.state-tabs{height:40px;flex:none;display:flex;gap:4px;background:#edf3f6;border-radius:10px;padding:3px}.btn-tab{flex:1;border:0;border-radius:7px;font:700 14px/1.2 inherit;font-family:inherit;font-size:14px;background:transparent;color:#486474;cursor:pointer}.btn-tab.active{background:#173e4b;color:#fff}.state-summary-banner{font-size:14px;line-height:1.35;padding:8px;background:#f1f7fa;border-radius:8px;min-height:54px;flex:none}.changes-scroll-area{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:visible}.factor-card{display:flex;align-items:center;gap:8px;min-width:0;border:1px solid #dce6eb;border-radius:10px;padding:10px;background:#f4f7f9;flex:none}.up-card{background:#fff2f4;border-color:#f5c6cf}.down-card{background:#eef6ff;border-color:#b6d9f5}.shape-marker{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:6px;background:#e4edf1;color:#334f60;font-size:16px;font-weight:800}.marker-up{background:#bd2648;color:white}.marker-down{background:#12609b;color:white}.factor-info{flex:1;min-width:0}.factor-name{font-size:14px;line-height:18px;font-weight:750}.factor-desc{font-size:14px;line-height:18px;color:#3e5969;overflow-wrap:anywhere}.solid-badge{flex:none;font-size:14px;line-height:18px;font-weight:750;padding:4px 7px;background:#e4edf1;color:#334f60;border-radius:6px}.badge-solid-up{background:#bd2648;color:white}.badge-solid-down{background:#12609b;color:white}.intake-reference{font-size:14px;line-height:18px;color:#385968;flex:none}.unchanged-toggle-bar{font-family:inherit;text-align:left;font-size:14px;line-height:20px;min-height:28px;border:0;border-radius:7px;padding:4px 7px;background:#edf3f6;cursor:pointer;flex:none;color:#2e5365}.unchanged-list{display:none;position:absolute;z-index:3;bottom:46px;left:8px;right:8px;padding:10px;border:1px solid #9eb7c3;border-radius:10px;background:white;box-shadow:0 4px 14px #173e4b22;gap:6px;flex-wrap:wrap}.unchanged-list.open{display:flex}.unchanged-tag{font-size:14px;line-height:20px;background:#f0f5f7;border-radius:4px;padding:2px 5px}.teacher-note{display:none;position:absolute;z-index:4;left:12px;right:12px;bottom:12px;padding:6px;background:#fff7df;border:1px solid #ccac4d;border-radius:7px;font-size:14px;line-height:18px}.teacher-preview .teacher-note.show{display:block}svg .p2p-lbl-text{font-size:16px;font-weight:750;fill:#163044}svg .p2p-badge-text{font-size:16px;font-weight:800;fill:white;text-anchor:middle;dominant-baseline:central}.organ-glow{fill:none;stroke:#bd2648;stroke-width:3;opacity:.7}.organ-arrow-shape{fill:#bd2648;stroke:white;stroke-width:2}.indicator-down .organ-glow{stroke:#12609b}.indicator-down .organ-arrow-shape{fill:#12609b}.motion-up{animation:bounceUp .6s ease-out both}.motion-down{animation:bounceDown .6s ease-out both}.organ-glow{animation:pulseGlow 1.8s ease-in-out infinite}@keyframes bounceUp{0%{transform:translateY(10px);opacity:.2}100%{transform:translateY(0);opacity:1}}@keyframes bounceDown{0%{transform:translateY(-10px);opacity:.2}100%{transform:translateY(0);opacity:1}}@keyframes pulseGlow{50%{opacity:.3;stroke-width:6}}@media(prefers-reduced-motion:reduce){.motion-up,.motion-down,.organ-glow{animation:none!important}}
+@media(max-width:767px) and (orientation:portrait){.viewport-screen{flex-direction:column;padding:6px;gap:6px}.figure-pane{flex:0 0 53%;height:53%;padding:6px;border-radius:12px}.panel-pane{flex:1;min-height:0;min-width:0;height:auto;padding:8px;gap:3px;border-radius:12px}.state-tabs{height:30px}.state-summary-banner{padding:4px 6px;min-height:36px;line-height:18px}.changes-scroll-area{gap:4px}.factor-card{padding:3px 6px;gap:6px;border-radius:7px}.factor-name,.factor-desc{line-height:16px}.solid-badge{font-size:14px;line-height:16px;padding:3px 5px}.intake-reference{line-height:16px}.unchanged-toggle-bar{min-height:24px;padding:2px 6px;line-height:20px}}
+@media(max-height:500px) and (orientation:landscape){.viewport-screen{flex-direction:row;padding:6px;gap:8px}.figure-pane{flex:1;padding:4px}.panel-pane{flex:0 0 47%;min-width:0;padding:8px;gap:3px}.state-tabs{height:30px}.state-summary-banner{padding:4px 6px;min-height:36px;line-height:18px}.changes-scroll-area{gap:4px}.factor-card{padding:3px 6px;gap:6px}.factor-name,.factor-desc{line-height:16px}.solid-badge{font-size:14px;line-height:16px;padding:3px 5px}.intake-reference{line-height:16px}.unchanged-toggle-bar{min-height:24px;line-height:20px;padding:2px 6px}}
+
+/* HTML text is sized in CSS pixels independently of the complete image. */
+.figure-pane{padding:8px!important}.label-layer{position:absolute;inset:9px;pointer-events:none}.plot-label{position:absolute;display:flex;align-items:center;gap:4px;transform:translateY(-50%);max-width:48%;padding:3px 4px;border-radius:7px;background:#ffffffee;box-shadow:0 1px 5px #173e4b22;white-space:nowrap}.label-name{font-size:14px;line-height:18px;font-weight:750}.plot-label .solid-badge{font-size:14px;line-height:18px;padding:2px 4px}.teacher-note{bottom:4px;padding:4px 6px;left:6px;right:6px}.organ-arrow-shape{stroke-width:1.5}.organ-glow{stroke-width:2}
+@media(max-width:767px) and (orientation:portrait){.factor-card{padding:0 6px}.plot-label .solid-badge{font-size:12px;line-height:18px;padding:1px 3px}.plot-label{gap:3px;padding:2px 3px}.label-name{font-size:14px}}
+@media(max-height:500px) and (orientation:landscape){.factor-card{padding:0 6px}.plot-label .solid-badge{font-size:12px;line-height:18px;padding:1px 3px}.plot-label{gap:3px;padding:2px 3px}}
+
+.term-box{height:124px;flex:0 0 124px;padding:6px 8px;border:1px solid #a9c4ce;border-left:4px solid #237b88;border-radius:9px;background:#f2fafb;overflow:visible}.term-caption{font-size:14px;line-height:16px;font-weight:750;color:#175260}.term-text{margin-top:4px;font-size:14px;line-height:18px;color:#173e4b}.term-select{border:0;background:transparent;font:inherit;font-weight:750;color:inherit;cursor:pointer;padding:0;text-align:left;white-space:nowrap}.term-select.active{color:#07566b;text-decoration:underline;text-underline-offset:3px}.factor-card.selected{box-shadow:inset 0 0 0 2px #237b88}.term-select:focus-visible{outline:2px solid #07566b;outline-offset:2px}
+@media(max-width:767px) and (orientation:portrait){.state-summary-banner{display:none}.changes-scroll-area{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:26px;align-content:start;gap:4px}.factor-card{height:26px;padding:0 4px;gap:3px;min-width:0}.factor-card:only-child{grid-column:1/-1}.factor-desc,.factor-card>.shape-marker{display:none}.factor-info{min-width:0}.factor-name{white-space:nowrap;font-size:14px;line-height:18px}.factor-card .solid-badge{font-size:12px;line-height:18px;padding:1px 3px}.term-box{height:124px;flex-basis:124px}.panel-pane{gap:3px}}
+@media(max-height:500px) and (orientation:landscape){.state-summary-banner{display:none}.changes-scroll-area{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:26px;align-content:start;gap:4px}.factor-card{height:26px;padding:0 4px;gap:3px;min-width:0}.factor-card:only-child{grid-column:1/-1}.factor-desc,.factor-card>.shape-marker{display:none}.factor-name{white-space:nowrap;font-size:14px;line-height:18px}.factor-card .solid-badge{font-size:12px;line-height:18px;padding:1px 3px}.panel-pane{gap:3px}}
+
+
+/* Permanent intake references: quantities are the content's daily baseline, never simulated state totals. */
+.intake-panel{flex:none;border-top:1px solid #d5e3e8;padding-top:3px}
+.intake-heading{font-size:14px;font-weight:600;line-height:18px;color:#385968;cursor:default}
+.unchanged-list,.unchanged-list.open{display:flex;flex-direction:column;position:static;padding:0;border:0;border-radius:0;background:none;box-shadow:none;gap:0}
+.intake-row{display:flex;justify-content:space-between;gap:6px;font-size:14px;line-height:18px;color:#385968;white-space:nowrap}
+@media(max-width:767px) and (orientation:portrait){.figure-pane{flex-basis:49%;height:49%}.panel-pane{padding:6px;gap:2px}.intake-panel{padding-top:2px}}
+@media(max-height:500px) and (orientation:landscape){.panel-pane{gap:2px}.intake-panel{padding-top:2px}}
+
+/* A qualitative, unscored flow; references live in the report, never in student markup. */
+.state-summary-banner{display:none}.changes-scroll-area{flex:0 0 auto}
+.causal-box{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:4px;border:1px solid #d5e3e8;border-radius:8px;background:#fafcfd;gap:3px}
+.causal-caption{font-size:14px;line-height:18px;color:#385968;font-weight:600}
+.causal-flow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-height:0}
+.causal-stage{display:flex;align-items:center;justify-content:center;gap:3px;flex-wrap:wrap}
+.causal-node{font-family:inherit;font-size:14px;line-height:18px;padding:1px 4px;display:inline-flex;align-items:center;gap:2px;border:1px solid #c1d5dc;background:#fff;border-radius:5px;color:#163044;cursor:pointer;white-space:nowrap}
+.flow-badge.solid-badge{font-size:12px;line-height:16px;padding:0 3px;border-radius:3px}
+.causal-link{font-size:14px;line-height:14px;transform:rotate(90deg);color:#486474}
+.causal-node.active{outline:2px solid #237b88;outline-offset:0;background:#eaf7fa}
+.flow-short{display:none}
+@media(max-width:767px) and (orientation:portrait), (max-height:500px) and (orientation:landscape){
+ .causal-box{flex:0 0 28px;min-height:28px;padding:2px;gap:0}.causal-caption{display:none}
+ .causal-flow{flex-direction:row;justify-content:space-between;gap:0;width:100%}.causal-stage{flex-wrap:nowrap;gap:0;min-width:0}.causal-node{padding:1px 0;gap:0;border:0;background:transparent;font-size:14px;line-height:18px}.flow-full,.desktop-node{display:none}.flow-short{display:inline}.flow-badge.solid-badge{padding:0 1px}.causal-link,.causal-flow .causal-link:first-of-type{transform:none;font-size:14px;line-height:18px}.causal-node.active{outline-width:1px}
+}
+@media(max-width:767px) and (orientation:portrait){.figure-pane{flex-basis:43%;height:43%}}
+
+.causal-link[data-equal]{transform:none}
+
+@media(min-width:768px) and (min-height:501px){.factor-card{padding:8px 10px}.causal-link{line-height:10px}.causal-node{padding:0 4px}.causal-flow{flex:none}}
+
+/* Fill the actual remainder of the panel. Nodes share row width; connectors absorb spare height. */
+.causal-box{flex:1;min-height:0;padding:5px;gap:5px;justify-content:flex-start}
+.causal-caption{flex:none;font-size:14px;line-height:18px}
+.causal-flow{flex:1;min-height:0;display:grid;align-items:stretch;justify-content:stretch;width:100%;gap:0}
+.causal-stage{width:100%;display:flex;align-items:stretch;justify-content:space-between;gap:6px;flex-wrap:nowrap;min-height:0}
+.causal-node{justify-content:center;font-weight:600;white-space:nowrap;min-height:0;border-radius:6px}
+.flow-badge.solid-badge{font-size:14px;line-height:1.15;padding:0 3px}
+.causal-link,.causal-flow .causal-link:first-of-type{position:relative;display:flex;align-items:center;justify-content:center;transform:none;min-height:0;font-size:20px;line-height:1;color:#486474}
+.flow-link-glyph{display:none}.causal-link::before{content:'';position:absolute;left:calc(50% - 1px);top:1px;bottom:6px;width:2px;background:#6e8c9c}
+.causal-link::after{content:'';position:absolute;left:calc(50% - 5px);bottom:1px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #6e8c9c}
+.causal-link[data-equal] .flow-link-glyph{display:inline;font-size:20px}.causal-link[data-equal]::before,.causal-link[data-equal]::after{display:none}
+@media(max-width:767px) and (orientation:portrait), (max-height:500px) and (orientation:landscape){
+ .causal-box{flex:1;min-height:28px;padding:2px;gap:0}.causal-caption{display:none}
+ .causal-flow{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:0}
+ .causal-stage{flex:none;gap:0}.causal-node{border:0;border-radius:4px;background:#ffffff88;gap:2px}
+ .flow-badge.solid-badge{padding:0 3px}.causal-link{flex:1;min-width:8px;height:100%;max-height:none}
+ .causal-link::before{left:1px;right:5px;top:calc(50% - 1px);bottom:auto;width:auto;height:2px}
+ .causal-link::after{left:auto;right:0;top:calc(50% - 5px);bottom:auto;border:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid #6e8c9c}
+}
+</style></head>
+<body><header class="top-bar">情境實驗室・水分收支與鈉水調節</header>
+<main class="viewport-screen"><section class="figure-pane" aria-label="完整全身器官圖"><svg id="plan2plus-svg" role="img" aria-label="水攝取與調節器官"></svg><div class="label-layer" aria-label="本狀態變化"></div><div class="teacher-note" role="note">ANP體液回饋來源卡：reviewed（已核可）</div></section>
+<section class="panel-pane" aria-label="狀態與變化"><div class="state-tabs" role="group" aria-label="切換狀態"><button class="btn-tab" data-state="state-1">平衡</button><button class="btn-tab" data-state="state-2">保留</button><button class="btn-tab" data-state="state-3">排出</button></div><div class="state-summary-banner" id="p2p-banner"></div><div class="changes-scroll-area" id="p2p-changes-list"></div><section class="causal-box" aria-label="因果小圖"><h2 class="causal-caption">點節點看說明</h2><div id="causal-flow" class="causal-flow"></div></section><section class="term-box" aria-label="名詞說明" aria-live="polite" aria-atomic="true"><h2 class="term-caption">名詞說明</h2><p class="term-text" id="term-description"></p></section><section class="intake-panel" aria-label="每日水攝取"><h2 class="intake-heading" id="p2p-toggle-unchanged">每日攝取基準（mL／日）</h2><div class="unchanged-list open" id="p2p-unchanged-tags"></div></section></section></main>
+<script>
+const STATES={
+ 'state-1':{name:'平衡',banner:'每日水攝取示例共2500 mL，與排出維持平衡。',changes:[['水攝取三來源','液體、食物與代謝水','same','＝ 基準']]},
+ 'state-2':{name:'保留',banner:'水分不足或血壓下降時，飲水與腎端保水相互配合。',changes:[['口渴','促進飲水','up','↑ 上升'],['ADH','集尿管水通透性增加','up','↑ 上升'],['RAAS','AngII升壓；醛固酮保鈉','up','↑ 上升']]},
+ 'state-3':{name:'排出',banner:'ANP促排鈉，並抑制RAAS相關激素與ADH。',changes:[['ANP','促進鈉與水排出','up','↑ 上升'],['腎素／AngII','ANP抑制兩者分泌','down','↓ 下降'],['醛固酮','ANP降低其釋放','down','↓ 下降'],['ADH','ANP抑制其分泌','down','↓ 下降']]}
+};
+let current='state-2';const svg=document.querySelector('svg'),NS='http://www.w3.org/2000/svg';
+function el(tag,attrs={},text=''){const e=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text)e.textContent=text;return e}
+// Both trend shapes exist; a down trend is activated only when an approved state supplies it.
+function indicator(x,y,direction){const outer=el('g',{class:'organ-indicator indicator-'+direction,transform:`translate(${x},${y})`});const inner=el('g',{class:direction==='down'?'motion-down':'motion-up'});inner.append(el('circle',{class:'organ-glow',cx:0,cy:0,r:17}));inner.append(el('path',{class:'organ-arrow-shape',d:direction==='down'?'M -9 -5 L -4 -5 L -4 -14 L 4 -14 L 4 -5 L 9 -5 L 0 9 Z':'M -9 5 L -4 5 L -4 14 L 4 14 L 4 5 L 9 5 L 0 -9 Z'}));outer.append(inner);return outer}
+const LABELS={
+ 'state-1':[],
+ 'state-2':[
+  {id:'thirst',short:'口渴',full:'口渴',side:'left',y:.08,anchor:[.515,.12],direction:'up'},
+  {id:'adh',short:'ADH',full:'抗利尿激素',side:'right',y:.20,anchor:[.525,.145],direction:'up'},
+  {id:'raas',short:'RAAS',full:'腎素／醛固酮',side:'left',y:.59,anchor:[.39,.62],direction:'up'}],
+ 'state-3':[
+  {id:'adh',short:'ADH',full:'抗利尿激素',side:'left',y:.08,anchor:[.525,.145],direction:'down'},
+  {id:'anp',short:'ANP',full:'心房利鈉尿肽',side:'right',y:.36,anchor:[.51,.445],direction:'up'},
+  {id:'renin',short:'腎素',full:'腎素',side:'left',y:.59,anchor:[.39,.62],direction:'down'},
+  {id:'aldosterone',short:'醛固酮',full:'醛固酮',side:'right',y:.60,anchor:[.405,.562],direction:'down'},
+  {id:'angii',short:'血管收縮素II',full:'血管收縮素II',side:'right',y:.77,circulating:true,direction:'down'}]
+};
+function draw(){const W=svg.clientWidth,H=svg.clientHeight;if(!W||!H)return;svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('class','st-'+current);
+ // The same complete raster is contained in every state; no cropping or state-dependent transform.
+ svg.append(el('image',{href:'assets/overview-raster.png',x:0,y:0,width:W,height:H,preserveAspectRatio:'xMidYMid meet','data-full-body':'true'}));
+ const k=Math.min(W/1122,H/1402),iw=1122*k,ih=1402*k,ox=(W-iw)/2,oy=(H-ih)/2;
+ const compact=matchMedia('(max-width:767px), (max-height:500px)').matches,layer=document.querySelector('.label-layer');layer.replaceChildren();
+ for(const d of LABELS[current]){
+  const tag=document.createElement('div');tag.className='plot-label '+d.direction;tag.dataset.tag=d.id;tag.style[d.side]='2%';tag.style.top=`${(oy+ih*d.y)/H*100}%`;
+  tag.innerHTML=`<span class="label-name">${compact?d.short:d.full}</span><span class="solid-badge badge-solid-${d.direction}">${d.direction==='up'?'↑ 上升':'↓ 下降'}</span>`;layer.append(tag);
+  if(d.circulating){tag.dataset.circulating='true';continue;}
+  const r=tag.getBoundingClientRect(),lr=layer.getBoundingClientRect(),ax=ox+d.anchor[0]*iw,ay=oy+d.anchor[1]*ih;
+  const tx=d.side==='left'?r.right-lr.left:r.left-lr.left,ty=r.top-lr.top+r.height/2;
+  svg.append(el('polyline',{'data-leader-for':d.id,points:`${tx},${ty} ${ax},${ay}`,fill:'none',stroke:d.direction==='up'?'#bd2648':'#12609b','stroke-width':1.5}));svg.append(el('circle',{'data-anchor-for':d.id,cx:ax,cy:ay,r:3,fill:d.direction==='up'?'#bd2648':'#12609b'}));
+ }
+ const organStates=current==='state-2'?[{a:[.515,.12],dir:'up'},{a:[.39,.62],dir:'up'}]:current==='state-3'?[{a:[.525,.145],dir:'down'},{a:[.51,.445],dir:'up'},{a:[.39,.62],dir:'down'}]:[];
+ for(const o of organStates)svg.append(indicator(ox+o.a[0]*iw,oy+o.a[1]*ih,o.dir));
+}
+const GLOSSARY={"water": {"name": "水攝取三來源", "text": "水攝取包括喝入的液體、食物中的水，以及身體自己產生的代謝水。平衡示例中三者每日合計2500 mL，與排出量相等。"}, "thirst": {"name": "口渴", "text": "口渴是促使人喝水的感覺，主要控制水的攝取。水不足時，喝水增加攝取，和抗利尿激素（ADH）保水一起調節水量。"}, "adhUp": {"name": "抗利尿激素（ADH）", "text": "抗利尿激素（ADH）是幫助腎臟保水的激素。水不足時，腦下垂體後葉釋放ADH，讓集尿管更容易回收水。"}, "raas": {"name": "腎素－血管收縮素－醛固酮系統（RAAS）", "text": "腎素－血管收縮素－醛固酮系統（RAAS）是多器官接力升高血壓的路徑。保留狀態中，腎臟發動、肺臟轉化、腎上腺釋出醛固酮，幫助留鈉留水。"}, "anp": {"name": "心房利鈉尿肽（ANP）", "text": "心房利鈉尿肽（ANP）主要由心房分泌，回到心臟的血變多時會刺激它釋放。排出狀態中，它促進排鈉，也減少讓身體留住鈉水的激素訊號。"}, "renin": {"name": "腎素（Renin）", "text": "腎素（Renin）由腎臟近腎絲球細胞釋放，是升高血壓路徑的起點。排出狀態中，心房利鈉尿肽（ANP）抑制腎素分泌。"}, "angii": {"name": "血管收縮素II（AngII）", "text": "血管收縮素II（AngII）是會讓小動脈收縮、提高血壓的訊號。排出狀態中，心房利鈉尿肽（ANP）抑制它的分泌。"}, "aldosterone": {"name": "醛固酮（Aldosterone）", "text": "醛固酮（Aldosterone）由腎上腺皮質釋出，幫助腎臟回收鈉。排出狀態中，心房利鈉尿肽（ANP）降低醛固酮的釋放。"}, "adhDown": {"name": "抗利尿激素（ADH）", "text": "抗利尿激素（ADH）讓集尿管更容易回收水，幫助把水留回身體。排出狀態中，心房利鈉尿肽（ANP）抑制ADH分泌。"}};
+const INTAKE={'state-1':[['液體',1500,'＝基準'],['食物水',800,'＝基準'],['代謝水',200,'＝基準']],'state-2':[['液體',1500,'↑攝取，未定量'],['食物水',800,'＝不變'],['代謝水',200,'＝不變']],'state-3':[['液體',1500,'＝不變'],['食物水',800,'＝不變'],['代謝水',200,'＝不變']]};
+Object.assign(GLOSSARY,{"volumeUp": {"name": "回心血量增加", "text": "回心血量是回到心臟的血液量。回來的血增加時，會刺激心房壁的牽張接受器，帶動心房利鈉尿肽（ANP）分泌。"}, "stretch": {"name": "心房牽張", "text": "心房牽張是心房肌肉被拉長的狀態。回心血量增加讓牽張接受器興奮，刺激心房利鈉尿肽（ANP）分泌。"}, "hormonesDown": {"name": "四個激素下降", "text": "四個激素是腎素、血管收縮素II（AngII）、醛固酮和抗利尿激素（ADH）。排出狀態中，心房利鈉尿肽（ANP）抑制這些激素的分泌或釋放。"}, "excrete": {"name": "排鈉排水增加", "text": "排鈉排水是把鈉和水排出身體。心房利鈉尿肽（ANP）促進鈉排泄，抗利尿激素（ADH）受抑制則使水分排泄增加。"}, "volumeDown": {"name": "血容積下降", "text": "血容積是血管內的血液量，血漿是細胞外液的一部分。這條排出流程以排鈉排水減少體液量，表示減少血管內液體的回饋方向。"}, "deficit": {"name": "水不足或血壓下降", "text": "水不足時，口渴促進攝取，抗利尿激素（ADH）幫助保水。血壓下降也會啟動腎素－血管收縮素－醛固酮系統（RAAS）。"}, "retainSignals": {"name": "口渴、ADH與RAAS上升", "text": "口渴促進喝水，抗利尿激素（ADH）增加腎端保水。腎素－血管收縮素－醛固酮系統（RAAS）接力作用，幫助留住鈉和水。"}, "conserve": {"name": "喝水增加、保水保鈉", "text": "喝水讓進入身體的水增加，保水則讓腎臟少流失水。抗利尿激素（ADH）增加水回收，醛固酮促進鈉回收，水可隨滲透作用回收。"}, "waterOut": {"name": "每日排出2500 mL", "text": "水會經尿液、呼氣、皮膚及糞便排出。平衡時，每日總排出約2500 mL，與攝取量相等；各途徑的量仍可有範圍。"}});
+const FLOWS={"state-1": [[["water", "攝取2500", "攝取2500", null]], "＝", [["waterOut", "排出2500", "排出2500", null]]], "state-2": [[["deficit", "水不足／血壓下降", "缺水/低壓", null]], "→", [["thirst", "口渴", "口渴/ADH/RAAS", "up"], ["adhUp", "ADH", "", "up"], ["raas", "RAAS", "", "up"]], "→", [["conserve", "喝水增加・保水保鈉", "飲水·保鈉水", null]]], "state-3": [[["volumeUp", "回心血量", "血量", "up"]], "→", [["stretch", "心房牽張", "牽張", null]], "→", [["anp", "ANP", "ANP", "up"]], "→", [["renin", "腎素", "四素", "down"], ["angii", "AngII", "", "down"], ["aldosterone", "醛固酮", "", "down"], ["adhDown", "ADH", "", "down"]], "→", [["excrete", "排鈉排水", "排", "up"]], "→", [["volumeDown", "血容積", "血量", "down"]]]};
+function drawFlow(s){document.querySelector('#causal-flow').innerHTML=FLOWS[s].map(stage=>typeof stage==='string'?`<span class="causal-link" ${stage==='＝'?'data-equal':''} aria-hidden="true"><span class="flow-link-glyph">${stage}</span></span>`:`<div class="causal-stage">${stage.map(([key,label,short,dir],i)=>`<button type="button" class="causal-node ${short?'':'desktop-node'}" data-causal-term="${key}" data-compact-term="${s==='state-2'&&key==='thirst'?'retainSignals':s==='state-3'&&key==='renin'?'hormonesDown':key}" aria-label="${s==='state-2'&&key==='thirst'?'口渴、ADH與RAAS':s==='state-3'&&key==='renin'?'腎素、AngII、醛固酮與ADH':GLOSSARY[key].name}${dir==='up'?'上升':dir==='down'?'下降':''}" aria-pressed="false"><span class="flow-full">${label}</span><span class="flow-short">${short}</span>${dir?`<span class="solid-badge flow-badge badge-solid-${dir}">${dir==='up'?'↑':'↓'}</span>`:''}</button>`).join('')}</div>`).join('');}
+// Fit real CSS text to the available flow area; no transforms shrink the text.
+const flowMeasure=document.createElement('canvas').getContext('2d');
+function fitFlow(){
+ const flow=document.querySelector('#causal-flow');if(!flow||!flow.children.length)return;
+ const compact=matchMedia('(max-width:767px) and (orientation:portrait), (max-height:500px) and (orientation:landscape)').matches;
+ const stages=[...flow.querySelectorAll('.causal-stage')],links=[...flow.querySelectorAll('.causal-link')],W=flow.clientWidth,H=flow.clientHeight;
+ const family=getComputedStyle(flow).fontFamily;
+ const nodesFor=stage=>[...stage.querySelectorAll('.causal-node')].filter(b=>getComputedStyle(b).display!=='none');
+ const natural=(node,f)=>{flowMeasure.font=`600 ${f}px ${family}`;const name=node.querySelector(compact?'.flow-short':'.flow-full').textContent;return flowMeasure.measureText(name).width+(node.querySelector('.flow-badge')?flowMeasure.measureText('↑').width+6+2:0)+2;};
+ flow.dataset.layout=compact?'compact':'spread';
+ if(compact){
+  flow.style.removeProperty('grid-template-rows');
+  const nodes=stages.flatMap(nodesFor);let font=20;
+  while(font>14&&nodes.reduce((sum,n)=>sum+natural(n,font),0)+links.length*8>W)font--;
+  const nodeH=Math.max(22,H*.9);
+  stages.forEach(stage=>{const ns=nodesFor(stage);stage.style.width='auto';stage.style.height=`${nodeH}px`;ns.forEach(n=>{n.style.fontSize=`${font}px`;n.style.lineHeight='1.25';n.style.padding='0';n.style.height='100%';n.style.minWidth='0';n.style.flex='0 0 auto';n.querySelectorAll('.flow-badge').forEach(b=>{b.style.fontSize=`${font}px`})})});
+ }else{
+  const nodeH=Math.max(22,(H-(stages.length-1)*8)/stages.length*.7);
+  flow.style.gridTemplateRows=[...flow.children].map(e=>e.classList.contains('causal-stage')?`${nodeH}px`:'minmax(8px,1fr)').join(' ');
+  stages.forEach(stage=>{stage.style.width='100%';stage.style.height='100%';const ns=nodesFor(stage),slot=(W-(ns.length-1)*6)/ns.length;let font=Math.min(20,Math.max(14,Math.floor((nodeH-4)/1.25)));
+   while(font>14&&Math.max(...ns.map(n=>natural(n,font)))+8>slot)font--;
+   ns.forEach(n=>{n.style.fontSize=`${font}px`;n.style.lineHeight='1.25';n.style.height='100%';n.style.padding='0 4px';n.style.flex='1 1 0';n.style.minWidth='0';n.querySelectorAll('.flow-badge').forEach(b=>{b.style.fontSize=`${font}px`})});
+  });
+ }
+ flow.dataset.fittedWidth=String(W);flow.dataset.fittedHeight=String(H);
+}
+new ResizeObserver(()=>requestAnimationFrame(fitFlow)).observe(document.querySelector('.causal-box'));
+const ROW_TERMS={'state-1':[['water']],'state-2':[['thirst'],['adhUp'],['raas']],'state-3':[['anp'],['renin','angii'],['aldosterone'],['adhDown']]};
+function selectTerm(key){document.querySelector('#term-description').textContent=GLOSSARY[key].text;document.querySelectorAll('.term-select').forEach(b=>{const selected=b.dataset.term===key;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',selected)});document.querySelectorAll('.factor-card').forEach(c=>c.classList.toggle('selected',!!c.querySelector('.term-select.active')));document.querySelector('.term-box').dataset.selected=key;document.querySelectorAll('.causal-node').forEach(b=>{const match=b.dataset.causalTerm===key||b.dataset.compactTerm===key;b.classList.toggle('active',match);b.setAttribute('aria-pressed',match)});}
+function switchState(s){current=s;const d=STATES[s];document.querySelectorAll('.btn-tab').forEach(b=>{b.classList.toggle('active',b.dataset.state===s);b.setAttribute('aria-pressed',b.dataset.state===s)});document.querySelector('#p2p-banner').textContent=d.banner;document.querySelector('#p2p-changes-list').innerHTML=d.changes.map(([name,detail,type,badge],i)=>`<div role="group" data-default-term="${ROW_TERMS[s][i][0]}" class="factor-card ${type==='same'?'':type+'-card'}"><span class="shape-marker ${type==='same'?'':'marker-'+type}">${type==='up'?'↑':type==='down'?'↓':'＝'}</span><div class="factor-info"><div class="factor-name">${ROW_TERMS[s][i].map((key,j)=>`<button type="button" class="term-select" data-term="${key}" aria-pressed="false">${ROW_TERMS[s][i].length===1?name:(j===0?'腎素':'AngII')}</button>`).join('<span aria-hidden="true">／</span>')}</div><div class="factor-desc">${detail}</div></div><span class="solid-badge ${type==='same'?'':'badge-solid-'+type}">${badge}</span></div>`).join('');document.querySelector('#p2p-unchanged-tags').innerHTML=INTAKE[s].map(([name,value,status])=>`<div class="intake-row"><span>${name} ${value} mL</span><span>${status}</span></div>`).join('');document.querySelector('.teacher-note').classList.toggle('show',s==='state-3');drawFlow(s);fitFlow();selectTerm(ROW_TERMS[s][0][0]);draw()}
+if(new URLSearchParams(location.search).get('teacher')==='1')document.body.classList.add('teacher-preview');
+document.querySelectorAll('.btn-tab').forEach(b=>b.addEventListener('click',()=>switchState(b.dataset.state)));document.querySelector('#p2p-changes-list').addEventListener('click',e=>{const target=e.target.closest('.term-select');const row=e.target.closest('.factor-card');if(target)selectTerm(target.dataset.term);else if(row)selectTerm(row.dataset.defaultTerm)});document.querySelector('#causal-flow').addEventListener('click',e=>{const b=e.target.closest('.causal-node');if(b)selectTerm(matchMedia('(max-width:767px) and (orientation:portrait), (max-height:500px) and (orientation:landscape)').matches?b.dataset.compactTerm:b.dataset.causalTerm)});new ResizeObserver(draw).observe(document.querySelector('.figure-pane'));switchState(current);
+</script></body></html>

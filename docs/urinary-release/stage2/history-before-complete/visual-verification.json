@@ -1,0 +1,65 @@
+{
+  "viewports": [],
+  "initialPages": [
+    {
+      "width": 1280,
+      "screenshot": "screenshots/1280-initial-page.png"
+    }
+  ],
+  "cases": [],
+  "errors": [
+    {
+      "kind": "script_exception",
+      "message": "page.screenshot: Clipped area is either empty or outside the resulting image\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at /Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/課程平台1.0/scripts/kidney-anatomy-verify.mjs:31:408"
+    },
+    {
+      "ok": false,
+      "kind": "material_anchor_misplacement",
+      "figure": "overview",
+      "state": "state-1",
+      "label": "後腹腔",
+      "sourceAnchor": [
+        170,
+        510
+      ],
+      "observed": "錨點位於前面觀底圖左下方的髂骨上緣／骨性區",
+      "expected": "腹膜後方的腎周區域，而非骨性構造",
+      "screenshot": "screenshots/1280-overview-state-1.png",
+      "decision": "遵教師教材不合格立即停止規則，不改底圖或錨點，不再重跑，不進C。"
+    }
+  ],
+  "crops": [
+    {
+      "slot": "overview",
+      "label": "右腎",
+      "index": 1,
+      "path": "crops/overview-anchor-1.png",
+      "sourceAnchor": [
+        350,
+        400
+      ]
+    },
+    {
+      "slot": "overview",
+      "label": "左腎",
+      "index": 2,
+      "path": "crops/overview-anchor-2.png",
+      "sourceAnchor": [
+        780,
+        260
+      ]
+    },
+    {
+      "slot": "overview",
+      "label": "後腹腔",
+      "index": 3,
+      "path": "crops/overview-anchor-3.png",
+      "sourceAnchor": [
+        170,
+        510
+      ]
+    }
+  ],
+  "ok": false,
+  "status": "stopped_material_anchor_failure_and_crop_script_exception"
+}

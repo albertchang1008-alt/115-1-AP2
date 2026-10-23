@@ -1,0 +1,1778 @@
+[
+  {
+    "key": "必做1",
+    "slug": "kidney-anatomy",
+    "nodeId": "kidney-anatomy-node-03",
+    "status": "完成",
+    "note": "",
+    "routes": [
+      {
+        "id": "flow-03-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "乳頭",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "to": {
+              "text": "小腎盞",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "points": [
+              [
+                538,
+                430
+              ],
+              [
+                548,
+                445
+              ],
+              [
+                565,
+                455
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "小腎盞",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "to": {
+              "text": "大腎盞",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "points": [
+              [
+                565,
+                455
+              ],
+              [
+                580,
+                495
+              ],
+              [
+                603,
+                550
+              ],
+              [
+                613,
+                602
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "大腎盞",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "to": {
+              "text": "腎盂",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                }
+              ]
+            },
+            "points": [
+              [
+                613,
+                602
+              ],
+              [
+                640,
+                640
+              ],
+              [
+                685,
+                678
+              ],
+              [
+                725,
+                712
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "腎盂",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                }
+              ]
+            },
+            "to": {
+              "text": "輸尿管",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                }
+              ]
+            },
+            "points": [
+              [
+                725,
+                712
+              ],
+              [
+                800,
+                772
+              ],
+              [
+                865,
+                850
+              ],
+              [
+                900,
+                950
+              ],
+              [
+                925,
+                1110
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "必做2",
+    "slug": "filtration-clearance",
+    "nodeId": "filtration-clearance-node-01",
+    "status": "完成",
+    "note": "",
+    "routes": [
+      {
+        "id": "flow-01-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "血液",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                }
+              ]
+            },
+            "to": {
+              "text": "過濾膜",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                }
+              ]
+            },
+            "points": [
+              [
+                625,
+                800
+              ],
+              [
+                715,
+                825
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "過濾膜",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                }
+              ]
+            },
+            "to": {
+              "text": "鮑氏囊",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                }
+              ]
+            },
+            "points": [
+              [
+                715,
+                825
+              ],
+              [
+                805,
+                850
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選1",
+    "slug": "nephron-circulation",
+    "nodeId": "nephron-circulation-node-04",
+    "status": "完成",
+    "note": "皮質腎元與近髓質腎元分別顯示管周微血管與直血管；未把二者串接，也未由同一個出球血管跨接兩個腎元。多點折線為方向示意。",
+    "routes": [
+      {
+        "id": "flow-04-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "腎動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "葉間",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                140,
+                710
+              ],
+              [
+                245,
+                730
+              ],
+              [
+                350,
+                800
+              ],
+              [
+                460,
+                850
+              ],
+              [
+                515,
+                780
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "葉間",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "弓狀",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                515,
+                780
+              ],
+              [
+                505,
+                670
+              ],
+              [
+                520,
+                530
+              ],
+              [
+                510,
+                475
+              ],
+              [
+                475,
+                440
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "弓狀",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "小葉間動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                475,
+                440
+              ],
+              [
+                370,
+                420
+              ],
+              [
+                363,
+                330
+              ],
+              [
+                374,
+                210
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "小葉間動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "入球小動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                374,
+                210
+              ],
+              [
+                400,
+                160
+              ],
+              [
+                430,
+                155
+              ],
+              [
+                450,
+                170
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "入球小動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "腎絲球",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                450,
+                170
+              ],
+              [
+                450,
+                210
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "腎絲球",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "出球小動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                450,
+                210
+              ],
+              [
+                490,
+                230
+              ],
+              [
+                505,
+                260
+              ],
+              [
+                530,
+                270
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "出球小動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "管周微血管",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                530,
+                270
+              ],
+              [
+                565,
+                280
+              ],
+              [
+                600,
+                300
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "管周微血管",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "靜脈回流",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                600,
+                300
+              ],
+              [
+                570,
+                340
+              ],
+              [
+                535,
+                400
+              ],
+              [
+                545,
+                440
+              ],
+              [
+                490,
+                465
+              ],
+              [
+                420,
+                460
+              ],
+              [
+                355,
+                450
+              ],
+              [
+                320,
+                520
+              ],
+              [
+                300,
+                650
+              ],
+              [
+                275,
+                745
+              ],
+              [
+                235,
+                800
+              ],
+              [
+                210,
+                830
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "flow-04-2",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "出球小動脈",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "直血管",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                810,
+                430
+              ],
+              [
+                820,
+                510
+              ],
+              [
+                825,
+                700
+              ],
+              [
+                825,
+                950
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "直血管",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "to": {
+              "text": "靜脈回流",
+              "sources": [
+                {
+                  "uid": "renal-blood-flow",
+                  "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+                }
+              ]
+            },
+            "points": [
+              [
+                825,
+                950
+              ],
+              [
+                825,
+                1050
+              ],
+              [
+                842,
+                1085
+              ],
+              [
+                862,
+                1060
+              ],
+              [
+                860,
+                950
+              ],
+              [
+                860,
+                700
+              ],
+              [
+                870,
+                590
+              ],
+              [
+                850,
+                555
+              ],
+              [
+                750,
+                540
+              ],
+              [
+                650,
+                525
+              ],
+              [
+                550,
+                485
+              ],
+              [
+                440,
+                460
+              ],
+              [
+                355,
+                450
+              ],
+              [
+                320,
+                520
+              ],
+              [
+                300,
+                650
+              ],
+              [
+                275,
+                745
+              ],
+              [
+                235,
+                800
+              ],
+              [
+                210,
+                830
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-blood-flow",
+                "quote": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選2",
+    "slug": "tubular-handling",
+    "nodeId": "tubular-handling-node-01",
+    "status": "完成",
+    "note": "三種處理分開顯示，未把三者畫成同一物質必經的連續路徑。",
+    "routes": [
+      {
+        "id": "flow-01-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "血",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "to": {
+              "text": "囊",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "points": [
+              [
+                380,
+                300
+              ],
+              [
+                450,
+                330
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "flow-01-2",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "管液",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "to": {
+              "text": "血",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "points": [
+              [
+                560,
+                720
+              ],
+              [
+                630,
+                720
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "過濾把物質由血移入囊；再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "flow-01-3",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "血",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "to": {
+              "text": "管液",
+              "sources": [
+                {
+                  "uid": "renal-handling",
+                  "quote": "分泌把血中物質送入管液。"
+                }
+              ]
+            },
+            "points": [
+              [
+                800,
+                800
+              ],
+              [
+                720,
+                800
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-handling",
+                "quote": "分泌把血中物質送入管液。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選3",
+    "slug": "tubular-handling",
+    "nodeId": "tubular-handling-node-03",
+    "status": "完成",
+    "note": "顯示共同回收方向；Na⁺／葡萄糖共同運輸與水滲透不畫成同一跨膜機制。",
+    "routes": [
+      {
+        "id": "flow-03-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "濾液中的水與特定溶質",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                }
+              ]
+            },
+            "to": {
+              "text": "血液",
+              "sources": [
+                {
+                  "uid": "tubular-reabsorption",
+                  "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+                }
+              ]
+            },
+            "points": [
+              [
+                425,
+                750
+              ],
+              [
+                500,
+                695
+              ],
+              [
+                600,
+                640
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "tubular-reabsorption",
+                "quote": "腎小管再吸收是將濾液中的水與特定溶質移回血液；可用主動或被動運輸。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選4",
+    "slug": "tubular-handling",
+    "nodeId": "tubular-handling-node-05",
+    "status": "部分完成",
+    "note": "已畫血→管液的鉀分泌；缺細胞內K⁺→管腔的逐段來源，不補細胞內支線。",
+    "routes": [
+      {
+        "id": "flow-05-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "血",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "to": {
+              "text": "管液",
+              "sources": [
+                {
+                  "uid": "potassium-secretion",
+                  "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+                }
+              ]
+            },
+            "points": [
+              [
+                965,
+                975
+              ],
+              [
+                820,
+                975
+              ],
+              [
+                655,
+                975
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "potassium-secretion",
+                "quote": "分泌是從血進管液，再吸收是反方向；不能把醛固酮的排鉀作用寫成保鉀。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選5",
+    "slug": "urine-concentration",
+    "nodeId": "urine-concentration-node-02",
+    "status": "缺依據",
+    "note": "countercurrent-mechanism只寫下降枝水通透及水移出；未明寫皮質→髓質的管液路徑或移出後到間質的完整端點，不用名稱猜流向。",
+    "routes": []
+  },
+  {
+    "key": "候選6",
+    "slug": "urine-concentration",
+    "nodeId": "urine-concentration-node-03",
+    "status": "缺依據",
+    "note": "countercurrent-mechanism只寫上升枝不透水／再吸收NaCl及共同運輸帶入離子；未明寫髓質→皮質管液路徑與NaCl外移兩端。",
+    "routes": []
+  },
+  {
+    "key": "候選7",
+    "slug": "urine-concentration",
+    "nodeId": "urine-concentration-node-04",
+    "status": "缺依據",
+    "note": "countercurrent-mechanism只寫直血管緩慢逆流交換，沒有降枝／升枝的確切血流端點與順序，不能自行畫成雙向循環。",
+    "routes": []
+  },
+  {
+    "key": "候選8",
+    "slug": "urine-concentration",
+    "nodeId": "urine-concentration-node-05",
+    "status": "部分完成",
+    "note": "已畫ADH存在時集尿管水→高張間質；reviewed卡寫水通道但未寫AQP2，不標AQP2／細胞內通路。",
+    "routes": [
+      {
+        "id": "flow-05-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "集尿管水",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                }
+              ]
+            },
+            "to": {
+              "text": "高張間質",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                }
+              ]
+            },
+            "points": [
+              [
+                440,
+                1000
+              ],
+              [
+                615,
+                1000
+              ],
+              [
+                760,
+                1000
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選9",
+    "slug": "urinary-route-micturition",
+    "nodeId": "urinary-route-micturition-node-01",
+    "status": "部分完成",
+    "note": "已畫腎盂→輸尿管→膀胱；缺斜穿膀胱壁防逆流的明確原句，不畫逆流阻斷效果。",
+    "routes": [
+      {
+        "id": "flow-01-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "腎盂",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                }
+              ]
+            },
+            "to": {
+              "text": "輸尿管",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                }
+              ]
+            },
+            "points": [
+              [
+                438,
+                230
+              ],
+              [
+                460,
+                320
+              ],
+              [
+                480,
+                430
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "輸尿管",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "to": {
+              "text": "膀胱",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "points": [
+              [
+                480,
+                430
+              ],
+              [
+                480,
+                580
+              ],
+              [
+                570,
+                660
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選10",
+    "slug": "urinary-route-micturition",
+    "nodeId": "urinary-route-micturition-node-04",
+    "status": "部分完成",
+    "note": "兩性皆畫膀胱沿尿道向體外；缺內口／外口逐段名稱與位置依據，不新增內外口標示。",
+    "routes": [
+      {
+        "id": "flow-04-1",
+        "width": 1055,
+        "height": 1493,
+        "segments": [
+          {
+            "from": {
+              "text": "膀胱",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "to": {
+              "text": "體外",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "points": [
+              [
+                545,
+                330
+              ],
+              [
+                545,
+                420
+              ],
+              [
+                545,
+                490
+              ],
+              [
+                545,
+                555
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "flow-04-2",
+        "width": 1055,
+        "height": 1493,
+        "segments": [
+          {
+            "from": {
+              "text": "膀胱",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "to": {
+              "text": "體外",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "points": [
+              [
+                595,
+                850
+              ],
+              [
+                595,
+                960
+              ],
+              [
+                600,
+                1050
+              ],
+              [
+                585,
+                1120
+              ],
+              [
+                490,
+                1175
+              ],
+              [
+                400,
+                1160
+              ],
+              [
+                250,
+                1210
+              ],
+              [
+                145,
+                1300
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選11",
+    "slug": "urinary-route-micturition",
+    "nodeId": "urinary-route-micturition-node-05",
+    "status": "完成",
+    "note": "只在原圖下半排尿圖示畫尿流，上半儲尿圖示不畫尿流；反射神經線未當作尿路。",
+    "routes": [
+      {
+        "id": "flow-05-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "膀胱",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "to": {
+              "text": "體外",
+              "sources": [
+                {
+                  "uid": "urine-pathway",
+                  "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+                }
+              ]
+            },
+            "points": [
+              [
+                600,
+                1000
+              ],
+              [
+                605,
+                1100
+              ],
+              [
+                600,
+                1190
+              ],
+              [
+                600,
+                1375
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "urine-pathway",
+                "quote": "輸尿管蠕動送尿至膀胱，尿道負責由膀胱排至體外。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選12",
+    "slug": "water-sodium-regulation",
+    "nodeId": "water-sodium-regulation-node-04",
+    "status": "完成",
+    "note": "第三凍結內RAAS接力；分開顯示釋放與轉換，不把腎素本身畫成血管收縮素。",
+    "routes": [
+      {
+        "id": "raas-relay",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "近腎絲球細胞",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "to": {
+              "text": "腎素",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "points": [
+              [
+                490,
+                165
+              ],
+              [
+                430,
+                200
+              ],
+              [
+                360,
+                265
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "血管收縮素原",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "to": {
+              "text": "血管收縮素 I",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "points": [
+              [
+                320,
+                530
+              ],
+              [
+                750,
+                530
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "血管收縮素 I",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "to": {
+              "text": "血管收縮素 II",
+              "sources": [
+                {
+                  "uid": "renin-angiotensin-aldosterone",
+                  "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+                }
+              ]
+            },
+            "points": [
+              [
+                750,
+                530
+              ],
+              [
+                790,
+                850
+              ],
+              [
+                920,
+                920
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renin-angiotensin-aldosterone",
+                "quote": "血壓下降時，刺激腎臟的**近腎絲球細胞**釋放**腎素**；腎素催化血液中的**血管收縮素原**轉換成**血管收縮素 I**，再經由位於**肺臟**的血管收縮素轉化酶（ACE）轉變成具活性的**血管收縮素 II**。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選13",
+    "slug": "electrolyte-balance",
+    "nodeId": "electrolyte-balance-node-02",
+    "status": "完成",
+    "note": "依原圖粒子少→多側顯示淨移動，不擴寫未核定濃度或壓力數值。",
+    "routes": [
+      {
+        "id": "flow-02-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "水",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "水移向離子或分子較多區域；"
+                }
+              ]
+            },
+            "to": {
+              "text": "離子或分子較多區域",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "水移向離子或分子較多區域；"
+                }
+              ]
+            },
+            "points": [
+              [
+                430,
+                390
+              ],
+              [
+                560,
+                390
+              ],
+              [
+                660,
+                390
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "水移向離子或分子較多區域；"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "候選14",
+    "slug": "acid-base-homeostasis",
+    "nodeId": "acid-base-homeostasis-node-04",
+    "status": "缺依據",
+    "note": "已找到external-respiration明寫CO₂移入肺泡，但原圖沒有可辨認的肺泡交換剖面座標；不把箭頭畫在肺門大血管與支氣管間冒充肺泡交換。H₂CO₃肺端分解及肺泡→體外亦缺逐段原句。",
+    "routes": []
+  },
+  {
+    "key": "候選15",
+    "slug": "acid-base-homeostasis",
+    "nodeId": "acid-base-homeostasis-node-05",
+    "status": "部分完成",
+    "note": "已畫HCO₃⁻回到血液；H⁺原句寫小管分泌，但未明寫管壁細胞內→管腔兩端，不以一般血→管液定義冒充H⁺細胞內來源。",
+    "routes": [
+      {
+        "id": "flow-05-1",
+        "width": 1122,
+        "height": 1402,
+        "segments": [
+          {
+            "from": {
+              "text": "HCO₃⁻",
+              "sources": [
+                {
+                  "uid": "renal-acid-base-compensation",
+                  "quote": "同時 HCO₃⁻回到血液。"
+                }
+              ]
+            },
+            "to": {
+              "text": "血液",
+              "sources": [
+                {
+                  "uid": "renal-acid-base-compensation",
+                  "quote": "同時 HCO₃⁻回到血液。"
+                }
+              ]
+            },
+            "points": [
+              [
+                800,
+                300
+              ],
+              [
+                1000,
+                300
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "renal-acid-base-compensation",
+                "quote": "同時 HCO₃⁻回到血液。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "排序補強",
+    "slug": "filtration-clearance",
+    "nodeId": "filtration-clearance-node-02",
+    "status": "完成",
+    "note": "排對三層膜後逐段播放；此為額外排序節點，不混入17處計數。",
+    "routes": [
+      {
+        "id": "flow-02-1",
+        "width": 1254,
+        "height": 1254,
+        "segments": [
+          {
+            "from": {
+              "text": "微血管內皮",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            "to": {
+              "text": "基底膜",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            "points": [
+              [
+                475,
+                650
+              ],
+              [
+                575,
+                650
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+              }
+            ]
+          },
+          {
+            "from": {
+              "text": "基底膜",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            "to": {
+              "text": "鮑氏囊臟層足細胞",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            "points": [
+              [
+                575,
+                650
+              ],
+              [
+                815,
+                650
+              ]
+            ],
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

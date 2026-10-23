@@ -1,0 +1,388 @@
+{
+  "slug": "urine-concentration",
+  "version": "v1",
+  "experience": "guided",
+  "title": "逆流機制與尿液濃縮",
+  "subtitle": "區分下降枝、上升枝及直血管，再用梯度與水通透性理解 ADH 的作用。",
+  "label": "逆流機制與尿液濃縮｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "梯度＋通水",
+      "label": "濃縮的兩個條件"
+    },
+    {
+      "value": "下降枝通水",
+      "label": "水可沿梯度移出"
+    },
+    {
+      "value": "尿量與濃度",
+      "label": "分開判讀變化"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+    "figure": "urine-concentration-stage1-base-01.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "少水",
+        "explain": "ADH保水與濃尿。"
+      },
+      {
+        "id": "state-2",
+        "label": "較多水",
+        "explain": "較少ADH、水回收降低的定性比較。"
+      },
+      {
+        "id": "state-3",
+        "label": "有梯度但不通水",
+        "explain": "只有梯度不代表水已回收。"
+      }
+    ],
+    "predict": {
+      "question": "其他條件相同，由較少水切到較多水、ADH 較少的比較狀態時，預測哪個方向？",
+      "options": [
+        "水回收減少，尿量增加且較稀",
+        "水回收增加，尿量減少且較濃",
+        "集尿管水通透性一定上升",
+        "只要有梯度，尿量與濃度必定不變"
+      ],
+      "answer": 0,
+      "feedback": "此定性比較中 ADH 較少，末端通水及水回收較少；尿量較多、較稀，見節點 05–06。",
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "urine-concentration-node-01",
+      "tag": "01",
+      "title": "髓質梯度與濃縮條件",
+      "summary": "尿液濃縮需要髓質高滲透梯度，以及末端集尿管具有足夠水通透性",
+      "figure": "urine-concentration-stage1-base-01.svg",
+      "concept": "尿液濃縮需要髓質高滲透梯度，以及末端集尿管具有足夠水通透性；兩個條件要配合。",
+      "points": [
+        "髓質環境提供水外移的滲透梯度。",
+        "ADH 可調整集尿管對水的通透性。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "分析濃縮條件時分別檢查「周圍有無梯度」與「管壁能否通水」，不能只找到其中一項就判定會形成濃尿。"
+      },
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、19–22 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urine-concentration-node-02",
+      "tag": "02",
+      "title": "亨利氏環下降枝",
+      "summary": "亨利氏環下降枝對水通透，對溶質通透較差",
+      "figure": "urine-concentration-stage1-base-01.svg",
+      "concept": "亨利氏環下降枝對水通透，對溶質通透較差；水沿周圍髓質的滲透梯度移出，使管液變濃。",
+      "points": [
+        "下降枝的重點是水向外移動。",
+        "水減少可使管內溶質濃度提高。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "沿下降枝往髓質追蹤時，分別描述水量變化與濃度變化，不把管液變濃解讀成一定有溶質分泌。"
+      },
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ],
+      "reference": "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 19–22 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urine-concentration-node-03",
+      "tag": "03",
+      "title": "亨利氏環上升枝",
+      "summary": "亨利氏環上升枝不透水，並回收 NaCl",
+      "figure": "urine-concentration-stage1-base-01.svg",
+      "concept": "亨利氏環上升枝不透水，並回收 NaCl；溶質移出而水未跟隨，管液逐漸變稀。",
+      "points": [
+        "上升枝與下降枝的水通透性不同。",
+        "鹽分移出有助建立髓質濃度差。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較環的兩邊時，用「水是否能離開」及「鹽是否回收」兩欄逐項核對，不能把兩邊畫成相同作用。"
+      },
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ],
+      "reference": "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 19–22 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urine-concentration-node-04",
+      "tag": "04",
+      "title": "直血管逆流交換",
+      "summary": "直血管透過緩慢的逆流交換，減少髓質溶質流失，協助保留亨利氏環建立的滲透梯度",
+      "figure": "urine-concentration-stage1-base-01.svg",
+      "concept": "直血管透過緩慢的逆流交換，減少髓質溶質流失，協助保留亨利氏環建立的滲透梯度。",
+      "points": [
+        "亨利氏環屬於管液通路。",
+        "直血管屬於血液通路。",
+        "逆流增強與逆流交換的角色不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在相鄰的 U 形構造中先辨管液與血液，再把建立梯度配給亨利氏環、保留梯度配給直血管。"
+      },
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ],
+      "reference": "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 19–22 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urine-concentration-node-05",
+      "tag": "05",
+      "title": "ADH與水通道",
+      "summary": "ADH 作用於 V2 受器，增加水通道數目與集尿管水通透性，使水可沿髓質梯度再吸收",
+      "figure": "urine-concentration-stage1-base-02.svg",
+      "concept": "ADH 作用於 V2 受器，增加水通道數目與集尿管水通透性，使水可沿髓質梯度再吸收。",
+      "points": [
+        "受器接收激素訊號，水通道提供水通過的路徑。",
+        "受器與水通道是不同構造。",
+        "水回收仍需要外側的滲透梯度。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "觀察集尿管細胞圖時，把激素訊號端與管腔面的水通道分開，避免將 ADH 當成直接流過水的孔道。"
+      },
+      "sources": [
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、19、21–22、30、37 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urine-concentration-node-06",
+      "tag": "06",
+      "title": "濃尿與稀尿條件比較",
+      "summary": "在髓質梯度等其他條件相同時，ADH 較多使水回收增加、尿量較少且較濃",
+      "figure": "urine-concentration-stage1-base-02.svg",
+      "concept": "在髓質梯度等其他條件相同時，ADH 較多使水回收增加、尿量較少且較濃；ADH 較少則方向相反。",
+      "points": [
+        "尿量是排出的液體體積。",
+        "尿濃度描述單位體積中的溶質情況。",
+        "ADH 並非決定尿量的唯一因素。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較兩個模型時先固定其他條件，再分別說明水回收、尿量與濃度三個變化方向。"
+      },
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、19–22、30、37 頁。",
+      "caption": "無字底圖。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "urine-concentration-foundation-q01",
+      "stem": "濃縮尿液需配合哪一組條件？",
+      "options": [
+        "髓質滲透梯度與可通水的集尿管",
+        "只有髓質梯度即可，管壁可完全不通水",
+        "只有膀胱收縮，無需小管水移動",
+        "只有輸尿管蠕動，無需髓質環境"
+      ],
+      "answer": 0,
+      "hint": "把外側環境與管壁通透性分開檢查。",
+      "explain": "髓質梯度提供水移動方向，集尿管須能通水；只有一項不足以同樣濃縮尿液。",
+      "nodeId": "urine-concentration-node-01",
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+      ]
+    },
+    {
+      "id": "urine-concentration-foundation-q02",
+      "stem": "亨利氏環下降枝的主要特性為何？",
+      "options": [
+        "完全不透水，只主動送鹽",
+        "對水通透，水可沿梯度移出",
+        "把血液直接排入尿道",
+        "只負責儲存最終尿液"
+      ],
+      "answer": 1,
+      "hint": "比較環兩側的水通透性。",
+      "explain": "下降枝可通水，水外移使管液濃縮；不能將上升枝不透水的性質套在下降枝。",
+      "nodeId": "urine-concentration-node-02",
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "urine-concentration-foundation-q03",
+      "stem": "亨利氏環上升枝回收 NaCl 時，水的通透性為何？",
+      "options": [
+        "水與鹽必定等比例通過",
+        "只讓水通過而不回收鹽",
+        "不透水",
+        "由膀胱壓力決定是否透水"
+      ],
+      "answer": 2,
+      "hint": "鹽外移是否一定伴隨水外移？",
+      "explain": "上升枝回收鹽而不透水，管液可變稀，並參與建立髓質梯度。",
+      "nodeId": "urine-concentration-node-03",
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "urine-concentration-foundation-q04",
+      "stem": "直血管在逆流機制中的主要角色為何？",
+      "options": [
+        "取代鮑氏囊形成管液",
+        "直接將尿液送至膀胱",
+        "製造輸尿管的蠕動",
+        "逆流交換以減少髓質梯度流失"
+      ],
+      "answer": 3,
+      "hint": "分辨血液通路與小管通路。",
+      "explain": "直血管透過逆流交換保留梯度，亨利氏環則負責逆流增強，兩者角色不同。",
+      "nodeId": "urine-concentration-node-04",
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "urine-concentration-foundation-q05",
+      "stem": "ADH 增加集尿管水回收的直接機轉為何？",
+      "options": [
+        "經 V2 受器增加水通道與水通透性",
+        "使外尿道括約肌收縮",
+        "直接把水從腎盂推回血管",
+        "將亨利氏環上升枝變成主要通水段"
+      ],
+      "answer": 0,
+      "hint": "訊號受器與供水通過的構造應分開。",
+      "explain": "ADH 經 V2 受器增加水通道，使水沿既有梯度回收；並非靠尿道出口控制。",
+      "nodeId": "urine-concentration-node-05",
+      "sources": [
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    },
+    {
+      "id": "urine-concentration-foundation-q06",
+      "stem": "其他條件相同，ADH 較多時尿量與濃度的方向為何？",
+      "options": [
+        "尿量較多、尿較稀",
+        "尿量較少、尿較濃",
+        "尿量較少、尿較稀",
+        "尿量較多、尿較濃"
+      ],
+      "answer": 1,
+      "hint": "從水回收增加推到最終留下的水量。",
+      "explain": "水回收較多，留在尿中的水較少，因此尿量下降、濃度上升；此比較以其他條件相同為前提。",
+      "nodeId": "urine-concentration-node-06",
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "urine-concentration-case-q01",
+      "stem": "【管段比較】某段回收 NaCl，水卻無法隨之通過，最符合哪個管段？",
+      "options": [
+        "亨利氏環下降枝",
+        "尿道",
+        "亨利氏環上升枝",
+        "膀胱"
+      ],
+      "answer": 2,
+      "hint": "用水通透性將環兩側區分。",
+      "explain": "上升枝不透水並回收鹽；下降枝則可通水，兩者共同參與濃縮環境。",
+      "nodeId": "urine-concentration-node-03",
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "urine-concentration-case-q02",
+      "stem": "【角色配對】同學將亨利氏環與直血管都寫成「逆流交換血管」，應如何修正？",
+      "options": [
+        "兩者都是輸尿管的分支",
+        "直血管是小管，亨利氏環是動脈",
+        "兩者都直接構成過濾膜",
+        "亨利氏環為小管逆流增強，直血管為血管逆流交換"
+      ],
+      "answer": 3,
+      "hint": "先判斷裡面流的是血液還是管液。",
+      "explain": "亨利氏環建立梯度，直血管的逆流交換協助保留梯度，構造與角色不能互換。",
+      "nodeId": "urine-concentration-node-04",
+      "sources": [
+        "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "urine-concentration-case-q03",
+      "stem": "【訊號觀察】集尿管水通道增加，水通透性上升，哪項最直接符合此變化？",
+      "options": [
+        "ADH 經 V2 受器作用",
+        "外括約肌隨意收縮",
+        "輸尿管三處狹窄變化",
+        "腎門包覆層增厚"
+      ],
+      "answer": 0,
+      "hint": "選擇作用於集尿管通水能力的訊號。",
+      "explain": "ADH 直接調節集尿管水通透性；尿路出口與包覆構造不是此機轉的替代說明。",
+      "nodeId": "urine-concentration-node-05",
+      "sources": [
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    },
+    {
+      "id": "urine-concentration-case-q04",
+      "stem": "【條件推論】髓質已有高滲透梯度，但集尿管仍不易通水，能否只靠梯度得到同樣濃縮效果？",
+      "options": [
+        "可以，梯度可取代任何管壁通透性",
+        "不能，末端水通透性仍是必要條件",
+        "可以，只要膀胱儲尿時間相同",
+        "不能，因所有上升枝都必須透水"
+      ],
+      "answer": 1,
+      "hint": "把水移動方向與水能否穿過膜分開。",
+      "explain": "梯度存在不代表水已移動；集尿管需有足夠水通透性，才能利用梯度回收水。",
+      "nodeId": "urine-concentration-node-01",
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+      ]
+    },
+    {
+      "id": "urine-concentration-case-q05",
+      "stem": "【模型比較】其他條件相同，由 ADH 較多切到較少時，合理方向為何？",
+      "options": [
+        "水回收增加、尿量減少、尿較濃",
+        "水回收不變、尿量與濃度都必定不變",
+        "水回收減少、尿量增加、尿較稀",
+        "水回收減少、尿量減少、尿較濃"
+      ],
+      "answer": 2,
+      "hint": "沿 ADH、水通透性、水回收依序推論。",
+      "explain": "ADH 較少時末端通水減少，水回收較少，尿量較多且較稀；尿量與濃度是分開的量。",
+      "nodeId": "urine-concentration-node-06",
+      "sources": [
+        "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+        "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 16、19–22、30、37 頁。",
+    "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+  ]
+}

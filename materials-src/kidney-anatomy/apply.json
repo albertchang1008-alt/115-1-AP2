@@ -1,0 +1,3665 @@
+{
+  "schemaVersion": 2,
+  "slug": "kidney-anatomy",
+  "version": "v1",
+  "title": {
+    "text": "腎臟位置、構造與功能",
+    "sources": [
+      {
+        "uid": "kidney-position",
+        "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+      },
+      {
+        "uid": "kidney-position",
+        "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+      },
+      {
+        "uid": "kidney-position",
+        "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+      },
+      {
+        "uid": "kidney-position",
+        "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+      },
+      {
+        "uid": "kidney-position",
+        "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・腎臟位置、構造與功能",
+      "sources": [
+        {
+          "uid": "kidney-position",
+          "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+      "width": 1122,
+      "height": 1402,
+      "anchorView": "overview"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "kidney-position",
+          "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+        },
+        {
+          "uid": "kidney-position",
+          "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "position": {
+        "name": {
+          "text": "腎臟位置",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎臟位於脊柱兩側的後腹腔，右腎較左腎低。課本大致定位在T12至L3。",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        }
+      },
+      "hilum": {
+        "name": {
+          "text": "腎門",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎臟內側凹入處是腎門。腎臟大致介於T12至L3，右腎較左腎低。",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        }
+      },
+      "cortex": {
+        "name": {
+          "text": "腎皮質",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎切面外層是皮質，內層是髓質。皮質含腎絲球與曲小管。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        }
+      },
+      "medulla": {
+        "name": {
+          "text": "腎髓質",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "text": {
+          "text": "髓質由腎錐體組成，尖端是腎乳頭。皮質伸入腎錐體之間的部分叫腎柱。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        }
+      },
+      "renin": {
+        "name": {
+          "text": "腎素",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎素來源連到近腎絲球細胞。它促進RAAS連鎖，調節血壓與醛固酮。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        }
+      },
+      "epo": {
+        "name": {
+          "text": "紅血球生成素",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎臟的紅血球生成素促進紅血球生成。腎素則連到RAAS調節血壓，兩者有不同分工。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        }
+      },
+      "vitd": {
+        "name": {
+          "text": "維生素D活化",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎將維生素D₃轉為具活性的形式，參與鈣調節。它與腎素、紅血球生成素分泌，都是腎的內分泌角色。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "位置",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "後腹腔、脊柱兩側，右腎較左腎低。",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "position",
+            "kind": "focus",
+            "name": {
+              "text": "腎臟位置",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "position",
+                "term": "position",
+                "label": {
+                  "text": "腎臟位置",
+                  "sources": [
+                    {
+                      "uid": "kidney-position",
+                      "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                    },
+                    {
+                      "uid": "kidney-position",
+                      "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                    },
+                    {
+                      "uid": "kidney-position",
+                      "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                    },
+                    {
+                      "uid": "kidney-position",
+                      "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                    },
+                    {
+                      "uid": "kidney-position",
+                      "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-0-0",
+            "kind": "focus",
+            "short": {
+              "text": "右腎",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "full": {
+              "text": "右腎",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.25,
+            "anchorRef": "右腎",
+            "anchor": [
+              0.31194295900178254,
+              0.28530670470756064
+            ],
+            "sources": [
+              {
+                "uid": "kidney-position",
+                "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本位置",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "T12–L3",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "position",
+              "term": "position",
+              "kind": "focus",
+              "label": {
+                "text": "腎臟位置",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "位置",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "hilum",
+              "term": "hilum",
+              "kind": "focus",
+              "label": {
+                "text": "腎門",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "腎門",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "position"
+            ],
+            "to": [
+              "hilum"
+            ],
+            "description": {
+              "text": "後腹腔、脊柱兩側，右腎較左腎低。",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "kidney-position",
+                "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "切面",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "外皮質、內髓質，腎柱是伸入錐體間的皮質。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "cortex",
+            "kind": "focus",
+            "name": {
+              "text": "腎皮質",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "cortex",
+                "term": "cortex",
+                "label": {
+                  "text": "腎皮質",
+                  "sources": [
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                    },
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                    },
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                    },
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                    },
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "腎皮質",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "full": {
+              "text": "腎皮質",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.5,
+            "anchorRef": "腎皮質",
+            "anchor": [
+              0.33868092691622104,
+              0.47075606276747506
+            ],
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          },
+          {
+            "id": "label-1-1",
+            "kind": "focus",
+            "short": {
+              "text": "腎髓質",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "full": {
+              "text": "腎髓質",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.65,
+            "anchorRef": "腎髓質",
+            "anchor": [
+              0.26737967914438504,
+              0.6348074179743224
+            ],
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本位置",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "T12–L3",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "cortex",
+              "term": "cortex",
+              "kind": "focus",
+              "label": {
+                "text": "腎皮質",
+                "sources": [
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "皮質",
+                "sources": [
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "medulla",
+              "term": "medulla",
+              "kind": "focus",
+              "label": {
+                "text": "腎髓質",
+                "sources": [
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "髓質",
+                "sources": [
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                  },
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "cortex"
+            ],
+            "to": [
+              "medulla"
+            ],
+            "description": {
+              "text": "外皮質、內髓質，腎柱是伸入錐體間的皮質。",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+                },
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "內分泌功能",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "腎素、紅血球生成素、維生素D活化是並列角色。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "renin",
+            "kind": "focus",
+            "name": {
+              "text": "腎素",
+              "sources": [
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "renin",
+                "term": "renin",
+                "label": {
+                  "text": "腎素",
+                  "sources": [
+                    {
+                      "uid": "kidney-endocrine",
+                      "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                    },
+                    {
+                      "uid": "kidney-endocrine",
+                      "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                    },
+                    {
+                      "uid": "kidney-endocrine",
+                      "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                    },
+                    {
+                      "uid": "kidney-endocrine",
+                      "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                    },
+                    {
+                      "uid": "kidney-endocrine",
+                      "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本位置",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "T12–L3",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                },
+                {
+                  "uid": "kidney-position",
+                  "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "renin",
+              "term": "renin",
+              "kind": "focus",
+              "label": {
+                "text": "腎素",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "腎素",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "epo",
+              "term": "epo",
+              "kind": "focus",
+              "label": {
+                "text": "紅血球生成素",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "造血素",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "vitd",
+              "term": "vitd",
+              "kind": "focus",
+              "label": {
+                "text": "維生素D活化",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "活化D",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "renin"
+            ],
+            "to": [
+              "epo"
+            ],
+            "description": {
+              "text": "腎素、紅血球生成素、維生素D活化是並列角色。",
+              "sources": [
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+              }
+            ]
+          },
+          {
+            "relation": "parallel",
+            "from": [
+              "renin"
+            ],
+            "to": [
+              "vitd"
+            ],
+            "description": {
+              "text": "腎素、紅血球生成素、維生素D活化是並列角色。",
+              "sources": [
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                },
+                {
+                  "uid": "kidney-endocrine",
+                  "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q01",
+            "stem": "腎臟在身體的哪個位置？",
+            "options": [
+              "在腹膜後面靠背部，右腎通常比左腎低一點",
+              "在腹膜腔裡面，右腎通常比左腎高一點",
+              "在骨盆腔裡，左右腎臟一樣高",
+              "在胸腔裡，左腎通常比右腎低一點"
+            ],
+            "answer": 0,
+            "hint": "先想想：腎臟靠肚子前面，還是靠背後？",
+            "explain": "因為腎臟在腹膜後面靠背部，所以叫後腹腔器官，右腎通常又比左腎低一點。選「在腹膜腔裡面，右腎通常比左腎高一點」的同學，把「腹膜後面」和「腹膜腔裡面」弄反了。",
+            "nodeId": "kidney-anatomy-node-01",
+            "sources": [
+              "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎在腹部後面靠脊柱兩旁，左右高度略不同。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q02",
+            "stem": "腎臟裡的「腎柱」是什麼？",
+            "options": [
+              "腎錐體的尖端",
+              "伸進腎錐體之間的皮質",
+              "從腎盂接出去的輸尿管",
+              "包在腎臟外面的脂肪囊"
+            ],
+            "answer": 1,
+            "hint": "先想想：腎柱在錐體之間，還是在尖端？",
+            "explain": "因為腎臟外層的皮質會伸進錐體之間，所以這部分叫腎柱。選「腎錐體的尖端」的同學，說的是錐體尖端的腎乳頭。",
+            "nodeId": "kidney-anatomy-node-02",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q03",
+            "stem": "尿液從腎乳頭（腎錐體的尖端）流出後，先進入哪裡？",
+            "options": [
+              "腎絲球",
+              "大腎盞",
+              "小腎盞",
+              "腎門"
+            ],
+            "answer": 2,
+            "hint": "先想想：乳頭流出的尿先進小腎盞，還是大腎盞？",
+            "explain": "因為小腎盞先接住乳頭流出的尿，所以答案是小腎盞。選「大腎盞」的同學，所選的大腎盞要等小腎盞的尿匯過來，才接得到。",
+            "nodeId": "kidney-anatomy-node-03",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q04",
+            "stem": "從貼著腎臟表面的位置往外數，三層保護構造的順序是什麼？",
+            "options": [
+              "脂肪囊、腎筋膜、腎被膜",
+              "腎筋膜、腎被膜、脂肪囊",
+              "腎被膜、腎筋膜、脂肪囊",
+              "腎被膜、脂肪囊、腎筋膜"
+            ],
+            "answer": 3,
+            "hint": "先想想：哪一層先貼住腎臟，外面才有脂肪？",
+            "explain": "因為腎被膜貼著腎表面，外面再包脂肪囊與腎筋膜，所以選「腎被膜、脂肪囊、腎筋膜」。選「腎被膜、腎筋膜、脂肪囊」的同學，把脂肪囊與腎筋膜的位置交換了。",
+            "nodeId": "kidney-anatomy-node-04",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+              "kidney-position；anatomy/AB-05_15 p.2–3"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q05",
+            "stem": "腎臟與膀胱各做什麼工作？",
+            "options": [
+              "腎臟製造尿液，膀胱暫存尿液",
+              "輸尿管製造尿液，尿道暫存尿液",
+              "膀胱製造尿液，腎臟把尿排到體外",
+              "尿道把尿送到膀胱，輸尿管把尿排到體外"
+            ],
+            "answer": 0,
+            "hint": "先想想：尿在哪裡形成，又在哪裡先存起來？",
+            "explain": "因為腎臟先形成尿液，尿再送到膀胱存放，所以選「腎臟製造尿液，膀胱暫存尿液」。選「尿道把尿送到膀胱，輸尿管把尿排到體外」的同學，把輸尿管的送尿工作和尿道的排尿工作交換了。",
+            "nodeId": "kidney-anatomy-node-05",
+            "sources": [
+              "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "一套系統先處理血液形成尿，再將尿運走、存起來、排到外面。"
+            },
+            {
+              "uid": "urethra",
+              "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-foundation-q06",
+            "stem": "腎臟的紅血球生成素（腎紅血球生成因子）主要幫忙做什麼？",
+            "options": [
+              "減少紅血球生成",
+              "增加紅血球生成",
+              "增加白血球生成",
+              "增加血小板生成"
+            ],
+            "answer": 1,
+            "hint": "先想想：這個訊號主要幫哪一種血球生成？",
+            "explain": "因為紅血球生成素會促進紅血球生成，所以選「增加紅血球生成」。選「增加白血球生成」的同學，把這個造血訊號的主要對象換成白血球了。",
+            "nodeId": "kidney-anatomy-node-06",
+            "sources": [
+              "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "紅血球生成素促進紅血球生成"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "kidney-anatomy-case-q01",
+            "stem": "兩個腎錐體之間有一塊組織，和外層皮質連在一起，它叫什麼？",
+            "options": [
+              "腎乳頭",
+              "腎盂",
+              "腎柱",
+              "腎被膜"
+            ],
+            "answer": 2,
+            "hint": "先想想：這塊組織連著皮質，還是位在錐體尖端？",
+            "explain": "因為皮質伸入錐體之間的部分叫腎柱，所以選「腎柱」。選「腎乳頭」的同學，所選的腎乳頭在錐體尖端，不在兩個錐體之間。",
+            "nodeId": "kidney-anatomy-node-02",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-case-q02",
+            "stem": "集尿管把尿送到腎乳頭後，尿接下來會依序流過哪三個地方？",
+            "options": [
+              "大腎盞、小腎盞、腎盂",
+              "腎盂、大腎盞、小腎盞",
+              "腎絲球、小腎盞、輸尿管",
+              "小腎盞、大腎盞、腎盂"
+            ],
+            "answer": 3,
+            "hint": "先想想：尿要先被小盞接住，還是先進大盞？",
+            "explain": "因為小腎盞先接尿，再匯到大腎盞和腎盂，所以選「小腎盞、大腎盞、腎盂」。選「大腎盞、小腎盞、腎盂」的同學，把小腎盞和大腎盞的先後交換了。",
+            "nodeId": "kidney-anatomy-node-03",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-case-q03",
+            "stem": "尿液離開腎盂後，先送到膀胱，再排到身體外面，這兩段各走哪條管？",
+            "options": [
+              "先輸尿管，再尿道",
+              "先尿道，再輸尿管",
+              "先輸尿管，再腎小管",
+              "先腎小管，再尿道"
+            ],
+            "answer": 0,
+            "hint": "先想想：腎臟到膀胱的管，和膀胱到體外的管一樣嗎？",
+            "explain": "因為輸尿管接腎臟與膀胱，尿道接膀胱與體外，所以選「先輸尿管，再尿道」。選「先尿道，再輸尿管」的同學，把這兩條管的先後與工作交換了。",
+            "nodeId": "kidney-anatomy-node-05",
+            "sources": [
+              "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urethra",
+              "quote": "尿道與輸尿管分別是膀胱出口與腎至膀胱的通路"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-case-q04",
+            "stem": "腎上腺與腎臟有什麼關係？",
+            "options": [
+              "它是腎臟的腎錐體尖端",
+              "它靠近腎臟，但屬另一個器官",
+              "它是腎臟伸進髓質的腎柱",
+              "它是腎臟收集尿液的腎盂"
+            ],
+            "answer": 1,
+            "hint": "先想想：住在附近，就表示是同一個器官嗎？",
+            "explain": "因為腎上腺雖在腎臟附近，仍是另一個器官，所以選「它靠近腎臟，但屬另一個器官」。選「它是腎臟的腎錐體尖端」的同學，說的腎錐體尖端叫腎乳頭，並不是腎上腺。",
+            "nodeId": "kidney-anatomy-node-04",
+            "sources": [
+              "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+              "kidney-position；anatomy/AB-05_15 p.2–3"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "kidney-anatomy-case-q05",
+            "stem": "如果只用「尿有多少」介紹腎臟，還會漏掉哪一組工作？",
+            "options": [
+              "輸尿管送尿、尿道排尿",
+              "腎盞接尿、腎盂收集尿",
+              "發出造血訊號、活化維生素D",
+              "膀胱儲尿、括約肌管出口"
+            ],
+            "answer": 2,
+            "hint": "先想想：除了製造尿液，腎臟還會發出什麼訊號？",
+            "explain": "因為腎臟也參與紅血球生成與維生素D活化，所以選「發出造血訊號、活化維生素D」。選「膀胱儲尿、括約肌管出口」的同學，說的是膀胱和排尿出口的工作。",
+            "nodeId": "kidney-anatomy-node-06",
+            "sources": [
+              "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "由「位置」切到「切面」閱讀主題，應改以哪項關係為主？",
+          "options": [
+            "外皮質、內髓質及尿液收集區",
+            "右腎必定比左腎高",
+            "膀胱製造紅血球生成素（腎紅血球生成因子）",
+            "輸尿管取代腎小體過濾"
+          ],
+          "answer": 0,
+          "feedback": "切面主題看皮質、髓質與收集區；位置主題看後腹腔及兩腎高低，可回讀節點 01–03。",
+          "sources": [
+            "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "kidney-structure",
+            "quote": "腎絲球在皮質"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "kidney-anatomy-node-01",
+        "title": {
+          "text": "腎臟的位置",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。\n位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-01.svg",
+          "sources": [
+            {
+              "uid": "kidney-position",
+              "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+            },
+            {
+              "uid": "kidney-position",
+              "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "kidney-position",
+                "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "kidney-anatomy-node-02",
+        "title": {
+          "text": "皮質、髓質與腎柱",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。\n皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-02.svg",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下列步驟與原句排列順序，再核對結果。",
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "外層腎皮質含腎小體曲小管",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。"
+                }
+              ]
+            },
+            {
+              "text": "內層腎髓質含腎錐體與腎乳頭",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "髓質由8–18個腎錐體組成，尖端為腎乳頭。"
+                }
+              ]
+            },
+            {
+              "text": "中央靠近腎門收集部接腎盂",
+              "sources": [
+                {
+                  "uid": "kidney-structure",
+                  "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "id": "kidney-anatomy-node-03",
+        "title": {
+          "text": "乳頭、腎盞與腎盂",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。\n皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-03.svg",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「切面」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-03-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "乳頭",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "小腎盞",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    538,
+                    430
+                  ],
+                  [
+                    548,
+                    445
+                  ],
+                  [
+                    565,
+                    455
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "urine-pathway",
+                    "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "小腎盞",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "大腎盞",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    565,
+                    455
+                  ],
+                  [
+                    580,
+                    495
+                  ],
+                  [
+                    603,
+                    550
+                  ],
+                  [
+                    613,
+                    602
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "urine-pathway",
+                    "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "大腎盞",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "腎盂",
+                  "sources": [
+                    {
+                      "uid": "urine-pathway",
+                      "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    613,
+                    602
+                  ],
+                  [
+                    640,
+                    640
+                  ],
+                  [
+                    685,
+                    678
+                  ],
+                  [
+                    725,
+                    712
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "urine-pathway",
+                    "quote": "乳頭開口入小腎盞，小腎盞合入大腎盞，再匯入腎盂。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "腎盂",
+                  "sources": [
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "輸尿管",
+                  "sources": [
+                    {
+                      "uid": "kidney-structure",
+                      "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    725,
+                    712
+                  ],
+                  [
+                    800,
+                    772
+                  ],
+                  [
+                    865,
+                    850
+                  ],
+                  [
+                    900,
+                    950
+                  ],
+                  [
+                    925,
+                    1110
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "kidney-structure",
+                    "quote": "腎盂位於靠近腎門的收集部，接輸尿管。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kidney-anatomy-node-04",
+        "title": {
+          "text": "腎門與保護層",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。\n皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-04.svg",
+          "sources": [
+            {
+              "uid": "kidney-structure",
+              "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+            },
+            {
+              "uid": "kidney-structure",
+              "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "kidney-structure",
+                "quote": "腎臟切面外為皮質、內為髓質；腎盂位於靠近腎門的收集部，接輸尿管。皮質伸入腎錐體間的部分稱腎柱。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "皮質含腎絲球與曲小管；髓質由8–18個腎錐體組成，尖端為腎乳頭。集尿管開口於乳頭，尿經小腎盞、大腎盞至腎盂。外圍包覆依次腎被膜、脂肪囊、腎筋膜。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "過濾功能主要位於皮質腎小體；收集尿液的腎盞、腎盂與製造濾液的位置不同。"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "- 腎絲球在皮質\n- 腎錐體屬髓質\n- 腎乳頭鄰小腎盞\n- 腎盂最接近腎門"
+              },
+              {
+                "uid": "kidney-structure",
+                "quote": "腎柱是深入錐體間的皮質，不是另一個腎錐體；腎乳頭為尖端，不是腎門。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "kidney-anatomy-node-05",
+        "title": {
+          "text": "器官分工與尿液形成",
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "評估腎功能不能只問尿量，水鹽、酸鹼、廢物與內分泌都是功能面向；尿路通暢也與形成尿液不同。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "- 形成尿液在腎，儲尿在膀胱\n- 尿素主要源自胺基酸代謝，尿酸與核酸、肌酸酐與肌肉代謝相關"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "輸尿管是運送，不是主要製尿場所；腎臟調節血液狀態，也不等於所有尿路器官都有相同功能。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。",
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "評估腎功能不能只問尿量，水鹽、酸鹼、廢物與內分泌都是功能面向；尿路通暢也與形成尿液不同。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "- 形成尿液在腎，儲尿在膀胱\n- 尿素主要源自胺基酸代謝，尿酸與核酸、肌酸酐與肌肉代謝相關"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "輸尿管是運送，不是主要製尿場所；腎臟調節血液狀態，也不等於所有尿路器官都有相同功能。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。\n腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。",
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "評估腎功能不能只問尿量，水鹽、酸鹼、廢物與內分泌都是功能面向；尿路通暢也與形成尿液不同。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "- 形成尿液在腎，儲尿在膀胱\n- 尿素主要源自胺基酸代謝，尿酸與核酸、肌酸酐與肌肉代謝相關"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "輸尿管是運送，不是主要製尿場所；腎臟調節血液狀態，也不等於所有尿路器官都有相同功能。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-05.svg",
+          "sources": [
+            {
+              "uid": "urinary-system-overview",
+              "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "評估腎功能不能只問尿量，水鹽、酸鹼、廢物與內分泌都是功能面向；尿路通暢也與形成尿液不同。"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "- 形成尿液在腎，儲尿在膀胱\n- 尿素主要源自胺基酸代謝，尿酸與核酸、肌酸酐與肌肉代謝相關"
+            },
+            {
+              "uid": "urinary-system-overview",
+              "quote": "輸尿管是運送，不是主要製尿場所；腎臟調節血液狀態，也不等於所有尿路器官都有相同功能。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "urinary-system-overview",
+                "quote": "泌尿系統含腎、輸尿管、膀胱與尿道；腎形成尿液，其餘構造運送、儲存或排出尿液。"
+              },
+              {
+                "uid": "urinary-system-overview",
+                "quote": "腎以過濾、再吸收與分泌調節水、電解質與酸鹼，排出尿素、尿酸與肌酸酐等廢物；並具腎素、紅血球生成素與活化維生素 D 的內分泌作用。"
+              },
+              {
+                "uid": "urinary-system-overview",
+                "quote": "評估腎功能不能只問尿量，水鹽、酸鹼、廢物與內分泌都是功能面向；尿路通暢也與形成尿液不同。"
+              },
+              {
+                "uid": "urinary-system-overview",
+                "quote": "- 形成尿液在腎，儲尿在膀胱\n- 尿素主要源自胺基酸代謝，尿酸與核酸、肌酸酐與肌肉代謝相關"
+              },
+              {
+                "uid": "urinary-system-overview",
+                "quote": "輸尿管是運送，不是主要製尿場所；腎臟調節血液狀態，也不等於所有尿路器官都有相同功能。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "kidney-anatomy-node-06",
+        "title": {
+          "text": "腎臟的內分泌功能",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。\n腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/kidney-anatomy-node-06.svg",
+          "sources": [
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+            },
+            {
+              "uid": "kidney-endocrine",
+              "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「內分泌功能」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "腎臟位置、構造與功能",
+        "sources": [
+          {
+            "uid": "kidney-position",
+            "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+          },
+          {
+            "uid": "kidney-position",
+            "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+          },
+          {
+            "uid": "kidney-position",
+            "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+          },
+          {
+            "uid": "kidney-position",
+            "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+          },
+          {
+            "uid": "kidney-position",
+            "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "kidney-position",
+                "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+              },
+              {
+                "uid": "kidney-position",
+                "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "腎臟位於脊柱兩側的後腹腔，右腎較左腎低。課本大致定位在T12至L3。",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "腎臟內側凹入處是腎門。腎臟大致介於T12至L3，右腎較左腎低。",
+                "sources": [
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎臟位於後腹腔、脊柱兩側，課本大致介於 T12 至 L3；右腎較左腎低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "位置與外側覆蓋構造協助辨認後腹腔器官；腎本體周圍有被膜及脂肪等支持保護層，內側凹入處為腎門。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "判斷腹腔位置題，應分腹膜內與後腹腔；肝臟相關位置使右側腎臟較低。"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "- 後腹腔不是腹膜腔內\n- 右低左高，腎門在內側凹緣"
+                  },
+                  {
+                    "uid": "kidney-position",
+                    "quote": "腎上腺位於腎附近但不是腎葉或腎元；不能把腎位置當膀胱的骨盆位置。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+              },
+              {
+                "uid": "kidney-endocrine",
+                "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "腎臟的紅血球生成素促進紅血球生成。腎素則連到RAAS調節血壓，兩者有不同分工。",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "腎將維生素D₃轉為具活性的形式，參與鈣調節。它與腎素、紅血球生成素分泌，都是腎的內分泌角色。",
+                "sources": [
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎具內分泌角色，包含腎素、紅血球生成素及維生素 D 的活化，與尿液形成功能並列。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎素促 RAAS 連鎖調節血壓與醛固酮；紅血球生成素促進紅血球生成；腎將維生素 D₃ 轉為具活性的形式，參與鈣調節。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "腎功能評估除水鹽與廢物外，也需辨認造血與鈣代謝相關角色；本卡不擴寫指定來源未完整描述的腎衰竭症狀與透析。"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "- 腎素來源連到近腎絲球細胞\n- 紅血球生成素配造血，活化維生素 D 配鈣"
+                  },
+                  {
+                    "uid": "kidney-endocrine",
+                    "quote": "醛固酮是 RAAS 的下游激素，不是直接把它當成腎所分泌；ADH 來源也不在腎。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

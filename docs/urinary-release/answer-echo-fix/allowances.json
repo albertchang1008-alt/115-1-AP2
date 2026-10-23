@@ -1,0 +1,18 @@
+[
+  {
+    "key": "bank:nephron-circulation-case-q01",
+    "sha256": "ecd34f6a9756769a4a9b4943d74f37d5edcaf6f495d47fd9fc224820c3840108",
+    "rules": [
+      "keyword-exclusive"
+    ],
+    "reason": "題幹同時寫皮質與髓質，錯誤選項「髓質深處」也逐字出現，且共用字串4字比正解「皮質」2字更長；沒有可優先挑皮質的字面提示，必須分清腎小體與長環的位置。依據nephron-types：兩型腎小體均位於皮質，差異是靠近交界程度及環的走向。"
+  },
+  {
+    "key": "bank:fluid-compartments-foundation-q05",
+    "sha256": "7eb181b510ab24b2900712292cf7b6cc425606651b797025ffe124249aa25cd8",
+    "rules": [
+      "keyword-exclusive"
+    ],
+    "reason": "題幹並列血漿與組織間液，錯誤選項也重複組織間液（4字），比正解只重複血漿（2字）更長；題幹沒有說哪邊蛋白質多，需知道血管壁較不讓蛋白質通過。依據electrolyte-osmolarity：血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。"
+  }
+]

@@ -1,0 +1,3307 @@
+{
+  "pass": true,
+  "cases": 28,
+  "skipped": 0,
+  "results": [
+    {
+      "key": "必做1",
+      "nodeId": "kidney-anatomy-node-03",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "kidney-anatomy-node-03-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "78ebf5ae5d02e999fd23b40ad3185efd699cc8ccca11903d70754ecb4a1bdcf5",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M538 430 L548 445 L565 455",
+              "rect": {
+                "x": 625.2164916992188,
+                "y": 315.9884948730469,
+                "width": 17.35455322265625,
+                "height": 16.069000244140625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M565 455 L580 495 L603 550 L613 602",
+              "rect": {
+                "x": 642.571044921875,
+                "y": 332.0574951171875,
+                "width": 30.85247802734375,
+                "height": 94.48553466796875
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M613 602 L640 640 L685 678 L725 712",
+              "rect": {
+                "x": 673.4235229492188,
+                "y": 426.54302978515625,
+                "width": 71.98907470703125,
+                "height": 70.7034912109375
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+              "rect": {
+                "x": 745.41259765625,
+                "y": 497.24652099609375,
+                "width": 128.55194091796875,
+                "height": 255.81805419921875
+              }
+            }
+          ]
+        },
+        {
+          "name": "kidney-anatomy-node-03-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "06dd2231ac3febbdfed33ac8083f591cc43d7479c128bef939db745362d8259f",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M538 430 L548 445 L565 455",
+              "rect": {
+                "x": 625.2164916992188,
+                "y": 315.9884948730469,
+                "width": 17.35455322265625,
+                "height": 16.069000244140625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M565 455 L580 495 L603 550 L613 602",
+              "rect": {
+                "x": 642.571044921875,
+                "y": 332.0574951171875,
+                "width": 30.85247802734375,
+                "height": 94.48553466796875
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M613 602 L640 640 L685 678 L725 712",
+              "rect": {
+                "x": 673.4235229492188,
+                "y": 426.54302978515625,
+                "width": 71.98907470703125,
+                "height": 70.7034912109375
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+              "rect": {
+                "x": 745.41259765625,
+                "y": 497.24652099609375,
+                "width": 128.55194091796875,
+                "height": 255.81805419921875
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "kidney-anatomy-node-03-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M538 430 L548 445 L565 455",
+          "rect": {
+            "x": 625.2164916992188,
+            "y": 315.9884948730469,
+            "width": 17.35455322265625,
+            "height": 16.069000244140625
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M565 455 L580 495 L603 550 L613 602",
+          "rect": {
+            "x": 642.571044921875,
+            "y": 332.0574951171875,
+            "width": 30.85247802734375,
+            "height": 94.48553466796875
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M613 602 L640 640 L685 678 L725 712",
+          "rect": {
+            "x": 673.4235229492188,
+            "y": 426.54302978515625,
+            "width": 71.98907470703125,
+            "height": 70.7034912109375
+          }
+        },
+        {
+          "segment": 3,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+          "rect": {
+            "x": 745.41259765625,
+            "y": 497.24652099609375,
+            "width": 128.55194091796875,
+            "height": 255.81805419921875
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "必做1",
+      "nodeId": "kidney-anatomy-node-03",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "kidney-anatomy-node-03-390-t1.png",
+          "currentTime": 150,
+          "sha256": "7901608ca90dc4873c728186bc72468cc650552cc83e2ebdc25db1f9c1278a73",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M538 430 L548 445 L565 455",
+              "rect": {
+                "x": 188.11228942871094,
+                "y": 399.98614501953125,
+                "width": 8.0855712890625,
+                "height": 7.48651123046875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M565 455 L580 495 L603 550 L613 602",
+              "rect": {
+                "x": 196.19786071777344,
+                "y": 407.47265625,
+                "width": 14.37432861328125,
+                "height": 44.020660400390625
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M613 602 L640 640 L685 678 L725 712",
+              "rect": {
+                "x": 210.5721893310547,
+                "y": 451.4933166503906,
+                "width": 33.54011535644531,
+                "height": 32.94061279296875
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+              "rect": {
+                "x": 244.1123046875,
+                "y": 484.4339294433594,
+                "width": 59.893035888671875,
+                "height": 119.18521118164062
+              }
+            }
+          ]
+        },
+        {
+          "name": "kidney-anatomy-node-03-390-t2.png",
+          "currentTime": 450,
+          "sha256": "68e43e03fa18d88e7601f4e4ec9879287381136ee7de35479d3d0dccc7086041",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M538 430 L548 445 L565 455",
+              "rect": {
+                "x": 188.11228942871094,
+                "y": 399.98614501953125,
+                "width": 8.0855712890625,
+                "height": 7.48651123046875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M565 455 L580 495 L603 550 L613 602",
+              "rect": {
+                "x": 196.19786071777344,
+                "y": 407.47265625,
+                "width": 14.37432861328125,
+                "height": 44.020660400390625
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M613 602 L640 640 L685 678 L725 712",
+              "rect": {
+                "x": 210.5721893310547,
+                "y": 451.4933166503906,
+                "width": 33.54011535644531,
+                "height": 32.94061279296875
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+              "rect": {
+                "x": 244.1123046875,
+                "y": 484.4339294433594,
+                "width": 59.893035888671875,
+                "height": 119.18521118164062
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "kidney-anatomy-node-03-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M538 430 L548 445 L565 455",
+          "rect": {
+            "x": 188.11228942871094,
+            "y": 399.98614501953125,
+            "width": 8.0855712890625,
+            "height": 7.48651123046875
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M565 455 L580 495 L603 550 L613 602",
+          "rect": {
+            "x": 196.19786071777344,
+            "y": 407.47265625,
+            "width": 14.37432861328125,
+            "height": 44.020660400390625
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M613 602 L640 640 L685 678 L725 712",
+          "rect": {
+            "x": 210.5721893310547,
+            "y": 451.4933166503906,
+            "width": 33.54011535644531,
+            "height": 32.94061279296875
+          }
+        },
+        {
+          "segment": 3,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M725 712 L800 772 L865 850 L900 950 L925 1110",
+          "rect": {
+            "x": 244.1123046875,
+            "y": 484.4339294433594,
+            "width": 59.893035888671875,
+            "height": 119.18521118164062
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "必做2",
+      "nodeId": "filtration-clearance-node-01",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "filtration-clearance-node-01-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "92978ebe61a521bc7049732238be027608c78eeece49d4ccac8359b0ef406ca0",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M625 800 L715 825",
+              "rect": {
+                "x": 913.462158203125,
+                "y": 532.1064453125,
+                "width": 54.95599365234375,
+                "height": 15.265380859375
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M715 825 L805 850",
+              "rect": {
+                "x": 968.4181518554688,
+                "y": 547.371826171875,
+                "width": 54.95587158203125,
+                "height": 15.265380859375
+              }
+            }
+          ]
+        },
+        {
+          "name": "filtration-clearance-node-01-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "3caf29f8cc8ff7c29ed06cb9543955fe33c4ce2a9f6be72b66f9d8b43f31d54d",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M625 800 L715 825",
+              "rect": {
+                "x": 913.462158203125,
+                "y": 532.1064453125,
+                "width": 54.95599365234375,
+                "height": 15.265380859375
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M715 825 L805 850",
+              "rect": {
+                "x": 968.4181518554688,
+                "y": 547.371826171875,
+                "width": 54.95587158203125,
+                "height": 15.265380859375
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "filtration-clearance-node-01-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M625 800 L715 825",
+          "rect": {
+            "x": 913.462158203125,
+            "y": 532.1064453125,
+            "width": 54.95599365234375,
+            "height": 15.265380859375
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M715 825 L805 850",
+          "rect": {
+            "x": 968.4181518554688,
+            "y": 547.371826171875,
+            "width": 54.95587158203125,
+            "height": 15.265380859375
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "必做2",
+      "nodeId": "filtration-clearance-node-01",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "filtration-clearance-node-01-390-t1.png",
+          "currentTime": 150,
+          "sha256": "18142716f9fd94a0e793f6ba5c27135fbe8792df1fb7854d76ff36011fca5c20",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "18.3345px",
+              "animation": "apply-flow-travel",
+              "d": "M625 800 L715 825",
+              "rect": {
+                "x": 214.165771484375,
+                "y": 517.5970458984375,
+                "width": 26.951889038085938,
+                "height": 7.4864501953125
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "18.3345px",
+              "animation": "apply-flow-travel",
+              "d": "M715 825 L805 850",
+              "rect": {
+                "x": 241.11766052246094,
+                "y": 525.08349609375,
+                "width": 26.951858520507812,
+                "height": 7.4864501953125
+              }
+            }
+          ]
+        },
+        {
+          "name": "filtration-clearance-node-01-390-t2.png",
+          "currentTime": 450,
+          "sha256": "e953701f7697ea5482091bc8dc5891284b4a3e2faada077a880abf5145c90658",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "8.33447px",
+              "animation": "apply-flow-travel",
+              "d": "M625 800 L715 825",
+              "rect": {
+                "x": 214.165771484375,
+                "y": 517.5970458984375,
+                "width": 26.951889038085938,
+                "height": 7.4864501953125
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "8.33447px",
+              "animation": "apply-flow-travel",
+              "d": "M715 825 L805 850",
+              "rect": {
+                "x": 241.11766052246094,
+                "y": 525.08349609375,
+                "width": 26.951858520507812,
+                "height": 7.4864501953125
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "filtration-clearance-node-01-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M625 800 L715 825",
+          "rect": {
+            "x": 214.165771484375,
+            "y": 517.5970458984375,
+            "width": 26.951889038085938,
+            "height": 7.4864501953125
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M715 825 L805 850",
+          "rect": {
+            "x": 241.11766052246094,
+            "y": 525.08349609375,
+            "width": 26.951858520507812,
+            "height": 7.4864501953125
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選2",
+      "nodeId": "tubular-handling-node-01",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-01-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "0ddfed006d21e7bc185bfaa31b86fe43e4796cc5fd29869fea2f1a8397b67f03",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M380 300 L450 330",
+              "rect": {
+                "x": 763.8598022460938,
+                "y": 226.7986297607422,
+                "width": 42.74346923828125,
+                "height": 18.318466186523438
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M560 720 L630 720",
+              "rect": {
+                "x": 873.771728515625,
+                "y": 483.2572021484375,
+                "width": 42.7435302734375,
+                "height": 0
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M800 800 L720 800",
+              "rect": {
+                "x": 971.4712524414062,
+                "y": 532.1064453125,
+                "width": 48.84967041015625,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-01-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "0295aeddc97a4dfd2a3a8ef5c542a7a256b12ac592b836c646e3a7ce406a3545",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M380 300 L450 330",
+              "rect": {
+                "x": 763.8598022460938,
+                "y": 226.7986297607422,
+                "width": 42.74346923828125,
+                "height": 18.318466186523438
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M560 720 L630 720",
+              "rect": {
+                "x": 873.771728515625,
+                "y": 483.2572021484375,
+                "width": 42.7435302734375,
+                "height": 0
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M800 800 L720 800",
+              "rect": {
+                "x": 971.4712524414062,
+                "y": 532.1064453125,
+                "width": 48.84967041015625,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-01-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M380 300 L450 330",
+          "rect": {
+            "x": 763.8598022460938,
+            "y": 226.7986297607422,
+            "width": 42.74346923828125,
+            "height": 18.318466186523438
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M560 720 L630 720",
+          "rect": {
+            "x": 873.771728515625,
+            "y": 483.2572021484375,
+            "width": 42.7435302734375,
+            "height": 0
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M800 800 L720 800",
+          "rect": {
+            "x": 971.4712524414062,
+            "y": 532.1064453125,
+            "width": 48.84967041015625,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選2",
+      "nodeId": "tubular-handling-node-01",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-01-390-t1.png",
+          "currentTime": 150,
+          "sha256": "267acbeb327b083fb4e8980d677b18f223b77e929eaa9a4879bf79e5f6431e98",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7767px",
+              "animation": "apply-flow-travel",
+              "d": "M380 300 L450 330",
+              "rect": {
+                "x": 140.79678344726562,
+                "y": 319.86859130859375,
+                "width": 20.962570190429688,
+                "height": 8.983795166015625
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "17.7767px",
+              "animation": "apply-flow-travel",
+              "d": "M560 720 L630 720",
+              "rect": {
+                "x": 194.70053100585938,
+                "y": 445.6416320800781,
+                "width": 20.962570190429688,
+                "height": 0
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "17.7767px",
+              "animation": "apply-flow-travel",
+              "d": "M800 800 L720 800",
+              "rect": {
+                "x": 242.61495971679688,
+                "y": 469.598388671875,
+                "width": 23.957244873046875,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-01-390-t2.png",
+          "currentTime": 450,
+          "sha256": "447a7070327976cd6f427eb1e29ae60b6852664f2fc8296827393461a16fe306",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.77667px",
+              "animation": "apply-flow-travel",
+              "d": "M380 300 L450 330",
+              "rect": {
+                "x": 140.79678344726562,
+                "y": 319.86859130859375,
+                "width": 20.962570190429688,
+                "height": 8.983795166015625
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "7.77667px",
+              "animation": "apply-flow-travel",
+              "d": "M560 720 L630 720",
+              "rect": {
+                "x": 194.70053100585938,
+                "y": 445.6416320800781,
+                "width": 20.962570190429688,
+                "height": 0
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "7.77667px",
+              "animation": "apply-flow-travel",
+              "d": "M800 800 L720 800",
+              "rect": {
+                "x": 242.61495971679688,
+                "y": 469.598388671875,
+                "width": 23.957244873046875,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-01-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M380 300 L450 330",
+          "rect": {
+            "x": 140.79678344726562,
+            "y": 319.86859130859375,
+            "width": 20.962570190429688,
+            "height": 8.983795166015625
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M560 720 L630 720",
+          "rect": {
+            "x": 194.70053100585938,
+            "y": 445.6416320800781,
+            "width": 20.962570190429688,
+            "height": 0
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M800 800 L720 800",
+          "rect": {
+            "x": 242.61495971679688,
+            "y": 469.598388671875,
+            "width": 23.957244873046875,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選3",
+      "nodeId": "tubular-handling-node-03",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-03-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "446fcd78c63e287ec6f2f6d1419ef6ea8917120766f6dfe646e8b98fea2c5298",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M425 750 L500 695 L600 640",
+              "rect": {
+                "x": 791.3378295898438,
+                "y": 434.0018615722656,
+                "width": 106.8587646484375,
+                "height": 67.167724609375
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-03-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "874ae8a99404332b14164627283e0e29789af557dac34be033b3fde0c5dd56e8",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M425 750 L500 695 L600 640",
+              "rect": {
+                "x": 791.3378295898438,
+                "y": 434.0018615722656,
+                "width": 106.8587646484375,
+                "height": 67.167724609375
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-03-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M425 750 L500 695 L600 640",
+          "rect": {
+            "x": 791.3378295898438,
+            "y": 434.0018615722656,
+            "width": 106.8587646484375,
+            "height": 67.167724609375
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選3",
+      "nodeId": "tubular-handling-node-03",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-03-390-t1.png",
+          "currentTime": 150,
+          "sha256": "4a1e35bddfa45138010b638871ad39e28f020a164dc1ceac97d5ade34d47102c",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7778px",
+              "animation": "apply-flow-travel",
+              "d": "M425 750 L500 695 L600 640",
+              "rect": {
+                "x": 154.27273559570312,
+                "y": 311.87432861328125,
+                "width": 52.406402587890625,
+                "height": 32.94091796875
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-03-390-t2.png",
+          "currentTime": 450,
+          "sha256": "3ea434deec62b945f549552c3475df86cee06f51fe137bf0f91e826ac40e63b4",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.7778px",
+              "animation": "apply-flow-travel",
+              "d": "M425 750 L500 695 L600 640",
+              "rect": {
+                "x": 154.27273559570312,
+                "y": 311.87432861328125,
+                "width": 52.406402587890625,
+                "height": 32.94091796875
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-03-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M425 750 L500 695 L600 640",
+          "rect": {
+            "x": 154.27273559570312,
+            "y": 311.87432861328125,
+            "width": 52.406402587890625,
+            "height": 32.94091796875
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選4",
+      "nodeId": "tubular-handling-node-05",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-05-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "0cfeccc328198ca37165175ba7c92ccaf81d8749744f4a26bba6827f4c7899f1",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M965 975 L820 975 L655 975",
+              "rect": {
+                "x": 931.7808227539062,
+                "y": 638.5634155273438,
+                "width": 189.29278564453125,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-05-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "27d072575f66dfb434bb9621ff5db51595acb0a4de0a715cb5814ae3ab07b1c2",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M965 975 L820 975 L655 975",
+              "rect": {
+                "x": 931.7808227539062,
+                "y": 638.5634155273438,
+                "width": 189.29278564453125,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-05-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M965 975 L820 975 L655 975",
+          "rect": {
+            "x": 931.7808227539062,
+            "y": 638.5634155273438,
+            "width": 189.29278564453125,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選4",
+      "nodeId": "tubular-handling-node-05",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "tubular-handling-node-05-390-t1.png",
+          "currentTime": 150,
+          "sha256": "5bf03c1d1ea77c8a378da3ac5e36a658f6ad4e40705f3cfaa4b144e09a6de564",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.2189px",
+              "animation": "apply-flow-travel",
+              "d": "M965 975 L820 975 L655 975",
+              "rect": {
+                "x": 223.1497344970703,
+                "y": 546.1905517578125,
+                "width": 92.83421325683594,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "tubular-handling-node-05-390-t2.png",
+          "currentTime": 450,
+          "sha256": "a22585923f63be635df3fac5fda09788bafe6dbaabb2e91ad99f981342342887",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.21893px",
+              "animation": "apply-flow-travel",
+              "d": "M965 975 L820 975 L655 975",
+              "rect": {
+                "x": 223.1497344970703,
+                "y": 546.1905517578125,
+                "width": 92.83421325683594,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "tubular-handling-node-05-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M965 975 L820 975 L655 975",
+          "rect": {
+            "x": 223.1497344970703,
+            "y": 546.1905517578125,
+            "width": 92.83421325683594,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選8",
+      "nodeId": "urine-concentration-node-05",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urine-concentration-node-05-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "6206e89d42d34fe86dfeda00d2b495c8c615e15fd8e8580ad132e929068f5843",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M440 1000 L615 1000 L760 1000",
+              "rect": {
+                "x": 800.4971313476562,
+                "y": 653.8233032226562,
+                "width": 195.39898681640625,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "urine-concentration-node-05-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "7400ffe0a5c59945855b4cd3a39764686ea7aa9bb03e84b3387e347eae2b14f6",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M440 1000 L615 1000 L760 1000",
+              "rect": {
+                "x": 800.4971313476562,
+                "y": 653.8233032226562,
+                "width": 195.39898681640625,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urine-concentration-node-05-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M440 1000 L615 1000 L760 1000",
+          "rect": {
+            "x": 800.4971313476562,
+            "y": 653.8233032226562,
+            "width": 195.39898681640625,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選8",
+      "nodeId": "urine-concentration-node-05",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urine-concentration-node-05-390-t1.png",
+          "currentTime": 150,
+          "sha256": "5c89ad62b2a92cedd7372d7fea96c19c1b3a35951c9f095526a7ece35e6755cc",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M440 1000 L615 1000 L760 1000",
+              "rect": {
+                "x": 158.76470947265625,
+                "y": 553.270751953125,
+                "width": 95.82887268066406,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "urine-concentration-node-05-390-t2.png",
+          "currentTime": 450,
+          "sha256": "d5bac8907ad5cf3092017f564574b4d274ca8aa7ef3a1bc2d58ce39b511f38c8",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M440 1000 L615 1000 L760 1000",
+              "rect": {
+                "x": 158.76470947265625,
+                "y": 553.270751953125,
+                "width": 95.82887268066406,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urine-concentration-node-05-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M440 1000 L615 1000 L760 1000",
+          "rect": {
+            "x": 158.76470947265625,
+            "y": 553.270751953125,
+            "width": 95.82887268066406,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選9",
+      "nodeId": "urinary-route-micturition-node-01",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-01-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "823c0f3b19d82b420312acdbb83aa5af4724b69caac188a1fcae951f4b45cbca",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M438 230 L460 320 L480 430",
+              "rect": {
+                "x": 799.27587890625,
+                "y": 184.0565948486328,
+                "width": 25.6461181640625,
+                "height": 122.12388610839844
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M480 430 L480 580 L570 660",
+              "rect": {
+                "x": 824.9219970703125,
+                "y": 306.18048095703125,
+                "width": 54.95599365234375,
+                "height": 140.44247436523438
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-01-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "b4bc2781fa0db0f6169869a909ab1d6211642f6bb77ba3524cd476f0582e19cf",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M438 230 L460 320 L480 430",
+              "rect": {
+                "x": 799.27587890625,
+                "y": 184.0565948486328,
+                "width": 25.6461181640625,
+                "height": 122.12388610839844
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M480 430 L480 580 L570 660",
+              "rect": {
+                "x": 824.9219970703125,
+                "y": 306.18048095703125,
+                "width": 54.95599365234375,
+                "height": 140.44247436523438
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-01-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M438 230 L460 320 L480 430",
+          "rect": {
+            "x": 799.27587890625,
+            "y": 184.0565948486328,
+            "width": 25.6461181640625,
+            "height": 122.12388610839844
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M480 430 L480 580 L570 660",
+          "rect": {
+            "x": 824.9219970703125,
+            "y": 306.18048095703125,
+            "width": 54.95599365234375,
+            "height": 140.44247436523438
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選9",
+      "nodeId": "urinary-route-micturition-node-01",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-01-390-t1.png",
+          "currentTime": 150,
+          "sha256": "d5e6ed33ad60f39b529dc05d65c751ecb480acacdcfacbe800052f314712d7b8",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "18.3311px",
+              "animation": "apply-flow-travel",
+              "d": "M438 230 L460 320 L480 430",
+              "rect": {
+                "x": 158.165771484375,
+                "y": 275.9066162109375,
+                "width": 12.577545166015625,
+                "height": 59.892059326171875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "18.3311px",
+              "animation": "apply-flow-travel",
+              "d": "M480 430 L480 580 L570 660",
+              "rect": {
+                "x": 170.74331665039062,
+                "y": 335.7986755371094,
+                "width": 26.951873779296875,
+                "height": 68.87588500976562
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-01-390-t2.png",
+          "currentTime": 450,
+          "sha256": "09a8496fedec9cfe3bcb2f113e4261a228d35e223996a0b3b6baf8144959caf1",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "8.33113px",
+              "animation": "apply-flow-travel",
+              "d": "M438 230 L460 320 L480 430",
+              "rect": {
+                "x": 158.165771484375,
+                "y": 275.9066162109375,
+                "width": 12.577545166015625,
+                "height": 59.892059326171875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "8.33113px",
+              "animation": "apply-flow-travel",
+              "d": "M480 430 L480 580 L570 660",
+              "rect": {
+                "x": 170.74331665039062,
+                "y": 335.7986755371094,
+                "width": 26.951873779296875,
+                "height": 68.87588500976562
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-01-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M438 230 L460 320 L480 430",
+          "rect": {
+            "x": 158.165771484375,
+            "y": 275.9066162109375,
+            "width": 12.577545166015625,
+            "height": 59.892059326171875
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M480 430 L480 580 L570 660",
+          "rect": {
+            "x": 170.74331665039062,
+            "y": 335.7986755371094,
+            "width": 26.951873779296875,
+            "height": 68.87588500976562
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選10",
+      "nodeId": "urinary-route-micturition-node-04",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-04-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "8ba10dc0537c68801d9287a8b18fe7eb016f87943bd0d22479e20b4bfda77125",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M545 330 L545 420 L545 490 L545 555",
+              "rect": {
+                "x": 885.7468872070312,
+                "y": 257.50927734375,
+                "width": 0,
+                "height": 146.11459350585938
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+              "rect": {
+                "x": 625.9866333007812,
+                "y": 595.1962890625,
+                "width": 295.477294921875,
+                "height": 292.2291259765625
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-04-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "ac7a76f353cf0e98dbdc4800b9dba04a221031f9ea620968a930bf99a121c2b8",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M545 330 L545 420 L545 490 L545 555",
+              "rect": {
+                "x": 885.7468872070312,
+                "y": 257.50927734375,
+                "width": 0,
+                "height": 146.11459350585938
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+              "rect": {
+                "x": 625.9866333007812,
+                "y": 595.1962890625,
+                "width": 295.477294921875,
+                "height": 292.2291259765625
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-04-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M545 330 L545 420 L545 490 L545 555",
+          "rect": {
+            "x": 885.7468872070312,
+            "y": 257.50927734375,
+            "width": 0,
+            "height": 146.11459350585938
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+          "rect": {
+            "x": 625.9866333007812,
+            "y": 595.1962890625,
+            "width": 295.477294921875,
+            "height": 292.2291259765625
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選10",
+      "nodeId": "urinary-route-micturition-node-04",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-04-390-t1.png",
+          "currentTime": 150,
+          "sha256": "30785e26b8503646c790254b2c24658de1bdfe2e9bbb4236778334eb108d2f69",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M545 330 L545 420 L545 490 L545 555",
+              "rect": {
+                "x": 200.57345581054688,
+                "y": 256.31585693359375,
+                "width": 0,
+                "height": 71.657470703125
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "17.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+              "rect": {
+                "x": 73.18009948730469,
+                "y": 421.9242248535156,
+                "width": 144.90994262695312,
+                "height": 143.31491088867188
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-04-390-t2.png",
+          "currentTime": 450,
+          "sha256": "730f456759437a2d2687ac4955691dd69c428e1105f2c72cf8bdd914b6c66ec0",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M545 330 L545 420 L545 490 L545 555",
+              "rect": {
+                "x": 200.57345581054688,
+                "y": 256.31585693359375,
+                "width": 0,
+                "height": 71.657470703125
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "7.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+              "rect": {
+                "x": 73.18009948730469,
+                "y": 421.9242248535156,
+                "width": 144.90994262695312,
+                "height": 143.31491088867188
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-04-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M545 330 L545 420 L545 490 L545 555",
+          "rect": {
+            "x": 200.57345581054688,
+            "y": 256.31585693359375,
+            "width": 0,
+            "height": 71.657470703125
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M595 850 L595 960 L600 1050 L585 1120 L490 1175 L400 1160 L250 1210 L145 1300",
+          "rect": {
+            "x": 73.18009948730469,
+            "y": 421.9242248535156,
+            "width": 144.90994262695312,
+            "height": 143.31491088867188
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選11",
+      "nodeId": "urinary-route-micturition-node-05",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-05-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "6d3cf440f6730ba8d7623f95bc0159a17dafea97055bd7ec45184b865f2dc222",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+              "rect": {
+                "x": 898.1965942382812,
+                "y": 653.8233642578125,
+                "width": 3.0531005859375,
+                "height": 228.98089599609375
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-05-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "af912e7b95ed2d410aaef79c200d259082a34effaad638189707bbf931167d19",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+              "rect": {
+                "x": 898.1965942382812,
+                "y": 653.8233642578125,
+                "width": 3.0531005859375,
+                "height": 228.98089599609375
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-05-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+          "rect": {
+            "x": 898.1965942382812,
+            "y": 653.8233642578125,
+            "width": 3.0531005859375,
+            "height": 228.98089599609375
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選11",
+      "nodeId": "urinary-route-micturition-node-05",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "urinary-route-micturition-node-05-390-t1.png",
+          "currentTime": 150,
+          "sha256": "97b6d9f399695c07eb2335993cd59acdee48e38074ded1199703e758cb73b17a",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7767px",
+              "animation": "apply-flow-travel",
+              "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+              "rect": {
+                "x": 206.67913818359375,
+                "y": 506.6785583496094,
+                "width": 1.4973297119140625,
+                "height": 112.29763793945312
+              }
+            }
+          ]
+        },
+        {
+          "name": "urinary-route-micturition-node-05-390-t2.png",
+          "currentTime": 450,
+          "sha256": "90097fa1bfeeb42e14137281ac5922e60ea5f48f0cca98b62083b565181c6724",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.77667px",
+              "animation": "apply-flow-travel",
+              "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+              "rect": {
+                "x": 206.67913818359375,
+                "y": 506.6785583496094,
+                "width": 1.4973297119140625,
+                "height": 112.29763793945312
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "urinary-route-micturition-node-05-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M600 1000 L605 1100 L600 1190 L600 1375",
+          "rect": {
+            "x": 206.67913818359375,
+            "y": 506.6785583496094,
+            "width": 1.4973297119140625,
+            "height": 112.29763793945312
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選12",
+      "nodeId": "water-sodium-regulation-node-04",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "water-sodium-regulation-node-04-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "d2e8c5beed255862ccdc6794f374e4281863997557a0703b8dea332155df92e3",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M490 165 L430 200 L360 265",
+              "rect": {
+                "x": 751.6473999023438,
+                "y": 144.33544921875,
+                "width": 79.38079833984375,
+                "height": 61.06207275390625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M320 530 L750 530",
+              "rect": {
+                "x": 727.2225341796875,
+                "y": 367.2120056152344,
+                "width": 262.56732177734375,
+                "height": 0
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M750 530 L790 850 L920 920",
+              "rect": {
+                "x": 989.7898559570312,
+                "y": 367.2120056152344,
+                "width": 103.80572509765625,
+                "height": 238.14212036132812
+              }
+            }
+          ]
+        },
+        {
+          "name": "water-sodium-regulation-node-04-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "04d9538eb7c5d1e483e23ff80955165d354acdf56cdd9d0c17aa7855edf89183",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M490 165 L430 200 L360 265",
+              "rect": {
+                "x": 751.6473999023438,
+                "y": 144.33544921875,
+                "width": 79.38079833984375,
+                "height": 61.06207275390625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M320 530 L750 530",
+              "rect": {
+                "x": 727.2225341796875,
+                "y": 367.2120056152344,
+                "width": 262.56732177734375,
+                "height": 0
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M750 530 L790 850 L920 920",
+              "rect": {
+                "x": 989.7898559570312,
+                "y": 367.2120056152344,
+                "width": 103.80572509765625,
+                "height": 238.14212036132812
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "water-sodium-regulation-node-04-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M490 165 L430 200 L360 265",
+          "rect": {
+            "x": 751.6473999023438,
+            "y": 817.92919921875,
+            "width": 79.38079833984375,
+            "height": 61.06207275390625
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M320 530 L750 530",
+          "rect": {
+            "x": 727.2225341796875,
+            "y": 1040.8057861328125,
+            "width": 262.56732177734375,
+            "height": 0
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M750 530 L790 850 L920 920",
+          "rect": {
+            "x": 989.7898559570312,
+            "y": 1040.8057861328125,
+            "width": 103.80572509765625,
+            "height": 238.14208984375
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "segments": 3,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選12",
+      "nodeId": "water-sodium-regulation-node-04",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "water-sodium-regulation-node-04-390-t1.png",
+          "currentTime": 150,
+          "sha256": "c507fb0726f08f43ba9c1c0ee553cd55cbb53b2c5d4be71d59aa87d8fb38ee8e",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M490 165 L430 200 L360 265",
+              "rect": {
+                "x": 134.80747985839844,
+                "y": 117.97358703613281,
+                "width": 38.93049621582031,
+                "height": 29.946365356445312
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "17.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M320 530 L750 530",
+              "rect": {
+                "x": 122.82887268066406,
+                "y": 227.27781677246094,
+                "width": 128.7700653076172,
+                "height": 0
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "17.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M750 530 L790 850 L920 920",
+              "rect": {
+                "x": 251.59893798828125,
+                "y": 227.27781677246094,
+                "width": 50.9090576171875,
+                "height": 116.79081726074219
+              }
+            }
+          ]
+        },
+        {
+          "name": "water-sodium-regulation-node-04-390-t2.png",
+          "currentTime": 450,
+          "sha256": "dcda1ed6a86fc81085310a6fda76f26074fe022367595ef40116d03d5b0a4c82",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M490 165 L430 200 L360 265",
+              "rect": {
+                "x": 134.80747985839844,
+                "y": 117.97358703613281,
+                "width": 38.93049621582031,
+                "height": 29.946365356445312
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "7.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M320 530 L750 530",
+              "rect": {
+                "x": 122.82887268066406,
+                "y": 227.27781677246094,
+                "width": 128.7700653076172,
+                "height": 0
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "7.7758px",
+              "animation": "apply-flow-travel",
+              "d": "M750 530 L790 850 L920 920",
+              "rect": {
+                "x": 251.59893798828125,
+                "y": 227.27781677246094,
+                "width": 50.9090576171875,
+                "height": 116.79081726074219
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "water-sodium-regulation-node-04-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M490 165 L430 200 L360 265",
+          "rect": {
+            "x": 134.80747985839844,
+            "y": 780.5673217773438,
+            "width": 38.93049621582031,
+            "height": 29.94635009765625
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M320 530 L750 530",
+          "rect": {
+            "x": 122.82887268066406,
+            "y": 889.87158203125,
+            "width": 128.7700653076172,
+            "height": 0
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M750 530 L790 850 L920 920",
+          "rect": {
+            "x": 251.59893798828125,
+            "y": 889.87158203125,
+            "width": 50.9090576171875,
+            "height": 116.790771484375
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "segments": 3,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選13",
+      "nodeId": "electrolyte-balance-node-02",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "electrolyte-balance-node-02-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "3ded9dac420038b057fc94fe8f0d10a06093dd5f3fc5db843f05a63fa57a67da",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M430 390 L560 390 L660 390",
+              "rect": {
+                "x": 794.3909301757812,
+                "y": 281.1289978027344,
+                "width": 140.44293212890625,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "electrolyte-balance-node-02-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "45fabf0de04d9ba536477e3bf89b7cd5d7b8c95427747971d365b3237d03d538",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M430 390 L560 390 L660 390",
+              "rect": {
+                "x": 794.3909301757812,
+                "y": 281.1289978027344,
+                "width": 140.44293212890625,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "electrolyte-balance-node-02-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M430 390 L560 390 L660 390",
+          "rect": {
+            "x": 794.3909301757812,
+            "y": 876.7227783203125,
+            "width": 140.44293212890625,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2
+        ],
+        "segments": 1,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選13",
+      "nodeId": "electrolyte-balance-node-02",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "electrolyte-balance-node-02-390-t1.png",
+          "currentTime": 150,
+          "sha256": "76b341a53809046c9251d306aab91e3aea8b6783caf2c99ad3cd3fe596774ae5",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "18.3333px",
+              "animation": "apply-flow-travel",
+              "d": "M430 390 L560 390 L660 390",
+              "rect": {
+                "x": 155.77005004882812,
+                "y": 394.97552490234375,
+                "width": 68.87701416015625,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "electrolyte-balance-node-02-390-t2.png",
+          "currentTime": 450,
+          "sha256": "940ba4594ac9a32dfc5215140b5f2fbbf46dd96b9776311b6ff6426dc0490b8c",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "8.33333px",
+              "animation": "apply-flow-travel",
+              "d": "M430 390 L560 390 L660 390",
+              "rect": {
+                "x": 155.77005004882812,
+                "y": 394.97552490234375,
+                "width": 68.87701416015625,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "electrolyte-balance-node-02-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M430 390 L560 390 L660 390",
+          "rect": {
+            "x": 155.77005004882812,
+            "y": 436.56927490234375,
+            "width": 68.87701416015625,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2
+        ],
+        "segments": 1,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "排序補強",
+      "nodeId": "filtration-clearance-node-02",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "filtration-clearance-node-02-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "5c0aa4be0438e3d5c1e2c5e2b415d60cdf7dcfdf63fc5344f8a7a4f359c3e13d",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M475 650 L575 650",
+              "rect": {
+                "x": 791.3378295898438,
+                "y": 512.1119384765625,
+                "width": 54.63458251953125,
+                "height": 0
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M575 650 L815 650",
+              "rect": {
+                "x": 845.972412109375,
+                "y": 512.1119384765625,
+                "width": 131.12298583984375,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "filtration-clearance-node-02-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "2e6db3f26ea2ec411af4653b0d522f1d1d36867ccaf271ccc7f2d183137ef88a",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M475 650 L575 650",
+              "rect": {
+                "x": 791.3378295898438,
+                "y": 512.1119384765625,
+                "width": 54.63458251953125,
+                "height": 0
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M575 650 L815 650",
+              "rect": {
+                "x": 845.972412109375,
+                "y": 512.1119384765625,
+                "width": 131.12298583984375,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "filtration-clearance-node-02-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M475 650 L575 650",
+          "rect": {
+            "x": 791.3378295898438,
+            "y": 1032.7056884765625,
+            "width": 54.63458251953125,
+            "height": 0
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M575 650 L815 650",
+          "rect": {
+            "x": 845.972412109375,
+            "y": 1032.7056884765625,
+            "width": 131.12298583984375,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2
+        ],
+        "segments": 2,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "排序補強",
+      "nodeId": "filtration-clearance-node-02",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "filtration-clearance-node-02-390-t1.png",
+          "currentTime": 150,
+          "sha256": "7a02131d0d492ada9e4e10330645c5c4d5236a059372883f87f2858936d6fe47",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M475 650 L575 650",
+              "rect": {
+                "x": 154.27273559570312,
+                "y": 535.5654296875,
+                "width": 26.79425048828125,
+                "height": 0
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "17.7769px",
+              "animation": "apply-flow-travel",
+              "d": "M575 650 L815 650",
+              "rect": {
+                "x": 181.06698608398438,
+                "y": 535.5654296875,
+                "width": 64.30621337890625,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "filtration-clearance-node-02-390-t2.png",
+          "currentTime": 450,
+          "sha256": "86b958233bac965f760314664caaf66f4617dac5340e148ee4ddf76f50f77899",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M475 650 L575 650",
+              "rect": {
+                "x": 154.27273559570312,
+                "y": 535.5654296875,
+                "width": 26.79425048828125,
+                "height": 0
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "7.77687px",
+              "animation": "apply-flow-travel",
+              "d": "M575 650 L815 650",
+              "rect": {
+                "x": 181.06698608398438,
+                "y": 535.5654296875,
+                "width": 64.30621337890625,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "filtration-clearance-node-02-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M475 650 L575 650",
+          "rect": {
+            "x": 154.27273559570312,
+            "y": 577.1591796875,
+            "width": 26.79425048828125,
+            "height": 0
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M575 650 L815 650",
+          "rect": {
+            "x": 181.06698608398438,
+            "y": 577.1591796875,
+            "width": 64.30621337890625,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2
+        ],
+        "segments": 2,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選1",
+      "nodeId": "nephron-circulation-node-04",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "nephron-circulation-node-04-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "72a7bd3a773f76dcdd240cfbc22c87334e290862599806b57752fc001b3fd82b",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+              "rect": {
+                "x": 617.3106079101562,
+                "y": 477.1197814941406,
+                "width": 228.98321533203125,
+                "height": 85.48623657226562
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+              "rect": {
+                "x": 821.868896484375,
+                "y": 312.2535705566406,
+                "width": 27.4779052734375,
+                "height": 207.60928344726562
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M475 440 L370 420 L363 330 L374 210",
+              "rect": {
+                "x": 753.479248046875,
+                "y": 171.81195068359375,
+                "width": 68.3896484375,
+                "height": 140.44161987304688
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M374 210 L400 160 L430 155 L450 170",
+              "rect": {
+                "x": 760.1961059570312,
+                "y": 138.22808837890625,
+                "width": 46.40716552734375,
+                "height": 33.5838623046875
+              }
+            },
+            {
+              "segment": 4,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M450 170 L450 210",
+              "rect": {
+                "x": 806.603271484375,
+                "y": 147.38731384277344,
+                "width": 0,
+                "height": 24.424636840820312
+              }
+            },
+            {
+              "segment": 5,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M450 210 L490 230 L505 260 L530 270",
+              "rect": {
+                "x": 806.603271484375,
+                "y": 171.81195068359375,
+                "width": 48.84979248046875,
+                "height": 36.636932373046875
+              }
+            },
+            {
+              "segment": 6,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M530 270 L565 280 L600 300",
+              "rect": {
+                "x": 855.4530639648438,
+                "y": 208.44888305664062,
+                "width": 42.7435302734375,
+                "height": 18.3184814453125
+              }
+            },
+            {
+              "segment": 7,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 660.0541381835938,
+                "y": 226.76736450195312,
+                "width": 238.1424560546875,
+                "height": 323.6262512207031
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M810 430 L820 510 L825 700 L825 950",
+              "rect": {
+                "x": 1026.42724609375,
+                "y": 306.14739990234375,
+                "width": 9.1591796875,
+                "height": 317.52020263671875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 660.0541381835938,
+                "y": 318.3597106933594,
+                "width": 403.01031494140625,
+                "height": 387.7409973144531
+              }
+            }
+          ]
+        },
+        {
+          "name": "nephron-circulation-node-04-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "65a300d914c93a727675aff91971905b223de0dbe6320ee091e746edbc714410",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+              "rect": {
+                "x": 617.3106079101562,
+                "y": 477.1197814941406,
+                "width": 228.98321533203125,
+                "height": 85.48623657226562
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+              "rect": {
+                "x": 821.868896484375,
+                "y": 312.2535705566406,
+                "width": 27.4779052734375,
+                "height": 207.60928344726562
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M475 440 L370 420 L363 330 L374 210",
+              "rect": {
+                "x": 753.479248046875,
+                "y": 171.81195068359375,
+                "width": 68.3896484375,
+                "height": 140.44161987304688
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M374 210 L400 160 L430 155 L450 170",
+              "rect": {
+                "x": 760.1961059570312,
+                "y": 138.22808837890625,
+                "width": 46.40716552734375,
+                "height": 33.5838623046875
+              }
+            },
+            {
+              "segment": 4,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M450 170 L450 210",
+              "rect": {
+                "x": 806.603271484375,
+                "y": 147.38731384277344,
+                "width": 0,
+                "height": 24.424636840820312
+              }
+            },
+            {
+              "segment": 5,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M450 210 L490 230 L505 260 L530 270",
+              "rect": {
+                "x": 806.603271484375,
+                "y": 171.81195068359375,
+                "width": 48.84979248046875,
+                "height": 36.636932373046875
+              }
+            },
+            {
+              "segment": 6,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M530 270 L565 280 L600 300",
+              "rect": {
+                "x": 855.4530639648438,
+                "y": 208.44888305664062,
+                "width": 42.7435302734375,
+                "height": 18.3184814453125
+              }
+            },
+            {
+              "segment": 7,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 660.0541381835938,
+                "y": 226.76736450195312,
+                "width": 238.1424560546875,
+                "height": 323.6262512207031
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M810 430 L820 510 L825 700 L825 950",
+              "rect": {
+                "x": 1026.42724609375,
+                "y": 306.14739990234375,
+                "width": 9.1591796875,
+                "height": 317.52020263671875
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 660.0541381835938,
+                "y": 318.3597106933594,
+                "width": 403.01031494140625,
+                "height": 387.7409973144531
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "nephron-circulation-node-04-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+          "rect": {
+            "x": 617.3106079101562,
+            "y": 1071.7135009765625,
+            "width": 228.98321533203125,
+            "height": 85.4862060546875
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+          "rect": {
+            "x": 821.868896484375,
+            "y": 906.8472900390625,
+            "width": 27.4779052734375,
+            "height": 207.6092529296875
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M475 440 L370 420 L363 330 L374 210",
+          "rect": {
+            "x": 753.479248046875,
+            "y": 766.4057006835938,
+            "width": 68.3896484375,
+            "height": 140.44158935546875
+          }
+        },
+        {
+          "segment": 3,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M374 210 L400 160 L430 155 L450 170",
+          "rect": {
+            "x": 760.1961059570312,
+            "y": 732.8218383789062,
+            "width": 46.40716552734375,
+            "height": 33.5838623046875
+          }
+        },
+        {
+          "segment": 4,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M450 170 L450 210",
+          "rect": {
+            "x": 806.603271484375,
+            "y": 741.9810791015625,
+            "width": 0,
+            "height": 24.42462158203125
+          }
+        },
+        {
+          "segment": 5,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M450 210 L490 230 L505 260 L530 270",
+          "rect": {
+            "x": 806.603271484375,
+            "y": 766.4057006835938,
+            "width": 48.84979248046875,
+            "height": 36.63690185546875
+          }
+        },
+        {
+          "segment": 6,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M530 270 L565 280 L600 300",
+          "rect": {
+            "x": 855.4530639648438,
+            "y": 803.0426025390625,
+            "width": 42.7435302734375,
+            "height": 18.3184814453125
+          }
+        },
+        {
+          "segment": 7,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+          "rect": {
+            "x": 660.0541381835938,
+            "y": 821.361083984375,
+            "width": 238.1424560546875,
+            "height": 323.626220703125
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M810 430 L820 510 L825 700 L825 950",
+          "rect": {
+            "x": 1026.42724609375,
+            "y": 900.7411499023438,
+            "width": 9.1591796875,
+            "height": 317.52020263671875
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+          "rect": {
+            "x": 660.0541381835938,
+            "y": 912.9534912109375,
+            "width": 403.01031494140625,
+            "height": 387.740966796875
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "segments": 8,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選1",
+      "nodeId": "nephron-circulation-node-04",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "nephron-circulation-node-04-390-t1.png",
+          "currentTime": 150,
+          "sha256": "2105391e146779f95fd2f366e1ea122ac2e8c01d2e500de36f51970b1d23c66a",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+              "rect": {
+                "x": 68.92513275146484,
+                "y": 347.8052062988281,
+                "width": 112.2994613647461,
+                "height": 41.924713134765625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+              "rect": {
+                "x": 169.24598693847656,
+                "y": 266.9504089355469,
+                "width": 13.475936889648438,
+                "height": 101.817138671875
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M475 440 L370 420 L363 330 L374 210",
+              "rect": {
+                "x": 135.70587158203125,
+                "y": 198.07411193847656,
+                "width": 33.54011535644531,
+                "height": 68.87629699707031
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M374 210 L400 160 L430 155 L450 170",
+              "rect": {
+                "x": 139,
+                "y": 181.6036834716797,
+                "width": 22.759353637695312,
+                "height": 16.470428466796875
+              }
+            },
+            {
+              "segment": 4,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M450 170 L450 210",
+              "rect": {
+                "x": 161.7593536376953,
+                "y": 186.09561157226562,
+                "width": 0,
+                "height": 11.978500366210938
+              }
+            },
+            {
+              "segment": 5,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M450 210 L490 230 L505 260 L530 270",
+              "rect": {
+                "x": 161.7593536376953,
+                "y": 198.07411193847656,
+                "width": 23.95721435546875,
+                "height": 17.967727661132812
+              }
+            },
+            {
+              "segment": 6,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M530 270 L565 280 L600 300",
+              "rect": {
+                "x": 185.71656799316406,
+                "y": 216.04183959960938,
+                "width": 20.962570190429688,
+                "height": 8.983856201171875
+              }
+            },
+            {
+              "segment": 7,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 89.88770294189453,
+                "y": 225.02569580078125,
+                "width": 116.79143524169922,
+                "height": 158.7149658203125
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M810 430 L820 510 L825 700 L825 950",
+              "rect": {
+                "x": 269.56683349609375,
+                "y": 263.9557800292969,
+                "width": 4.49200439453125,
+                "height": 155.7203369140625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "17.7779px",
+              "animation": "apply-flow-travel",
+              "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 89.88770294189453,
+                "y": 269.9450378417969,
+                "width": 197.64706420898438,
+                "height": 190.15847778320312
+              }
+            }
+          ]
+        },
+        {
+          "name": "nephron-circulation-node-04-390-t2.png",
+          "currentTime": 450,
+          "sha256": "8704fd661199e24f3275b4cc44ef1bb3a7a94eb5a5cb6dbcba874bb88593dd70",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+              "rect": {
+                "x": 68.92513275146484,
+                "y": 347.8052062988281,
+                "width": 112.2994613647461,
+                "height": 41.924713134765625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+              "rect": {
+                "x": 169.24598693847656,
+                "y": 266.9504089355469,
+                "width": 13.475936889648438,
+                "height": 101.817138671875
+              }
+            },
+            {
+              "segment": 2,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M475 440 L370 420 L363 330 L374 210",
+              "rect": {
+                "x": 135.70587158203125,
+                "y": 198.07411193847656,
+                "width": 33.54011535644531,
+                "height": 68.87629699707031
+              }
+            },
+            {
+              "segment": 3,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M374 210 L400 160 L430 155 L450 170",
+              "rect": {
+                "x": 139,
+                "y": 181.6036834716797,
+                "width": 22.759353637695312,
+                "height": 16.470428466796875
+              }
+            },
+            {
+              "segment": 4,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M450 170 L450 210",
+              "rect": {
+                "x": 161.7593536376953,
+                "y": 186.09561157226562,
+                "width": 0,
+                "height": 11.978500366210938
+              }
+            },
+            {
+              "segment": 5,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M450 210 L490 230 L505 260 L530 270",
+              "rect": {
+                "x": 161.7593536376953,
+                "y": 198.07411193847656,
+                "width": 23.95721435546875,
+                "height": 17.967727661132812
+              }
+            },
+            {
+              "segment": 6,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M530 270 L565 280 L600 300",
+              "rect": {
+                "x": 185.71656799316406,
+                "y": 216.04183959960938,
+                "width": 20.962570190429688,
+                "height": 8.983856201171875
+              }
+            },
+            {
+              "segment": 7,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 89.88770294189453,
+                "y": 225.02569580078125,
+                "width": 116.79143524169922,
+                "height": 158.7149658203125
+              }
+            },
+            {
+              "segment": 0,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M810 430 L820 510 L825 700 L825 950",
+              "rect": {
+                "x": 269.56683349609375,
+                "y": 263.9557800292969,
+                "width": 4.49200439453125,
+                "height": 155.7203369140625
+              }
+            },
+            {
+              "segment": 1,
+              "offset": "7.77787px",
+              "animation": "apply-flow-travel",
+              "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+              "rect": {
+                "x": 89.88770294189453,
+                "y": 269.9450378417969,
+                "width": 197.64706420898438,
+                "height": 190.15847778320312
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "nephron-circulation-node-04-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M140 710 L245 730 L350 800 L460 850 L515 780",
+          "rect": {
+            "x": 68.92513275146484,
+            "y": 884.39892578125,
+            "width": 112.2994613647461,
+            "height": 41.92474365234375
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M515 780 L505 670 L520 530 L510 475 L475 440",
+          "rect": {
+            "x": 169.24598693847656,
+            "y": 803.544189453125,
+            "width": 13.475936889648438,
+            "height": 101.817138671875
+          }
+        },
+        {
+          "segment": 2,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M475 440 L370 420 L363 330 L374 210",
+          "rect": {
+            "x": 135.70587158203125,
+            "y": 734.6678466796875,
+            "width": 33.54011535644531,
+            "height": 68.8763427734375
+          }
+        },
+        {
+          "segment": 3,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M374 210 L400 160 L430 155 L450 170",
+          "rect": {
+            "x": 139,
+            "y": 718.1974487304688,
+            "width": 22.759353637695312,
+            "height": 16.47039794921875
+          }
+        },
+        {
+          "segment": 4,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M450 170 L450 210",
+          "rect": {
+            "x": 161.7593536376953,
+            "y": 722.6893920898438,
+            "width": 0,
+            "height": 11.97845458984375
+          }
+        },
+        {
+          "segment": 5,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M450 210 L490 230 L505 260 L530 270",
+          "rect": {
+            "x": 161.7593536376953,
+            "y": 734.6678466796875,
+            "width": 23.95721435546875,
+            "height": 17.9677734375
+          }
+        },
+        {
+          "segment": 6,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M530 270 L565 280 L600 300",
+          "rect": {
+            "x": 185.71656799316406,
+            "y": 752.6356201171875,
+            "width": 20.962570190429688,
+            "height": 8.98382568359375
+          }
+        },
+        {
+          "segment": 7,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M600 300 L570 340 L535 400 L545 440 L490 465 L420 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+          "rect": {
+            "x": 89.88770294189453,
+            "y": 761.6194458007812,
+            "width": 116.79143524169922,
+            "height": 158.7149658203125
+          }
+        },
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M810 430 L820 510 L825 700 L825 950",
+          "rect": {
+            "x": 269.56683349609375,
+            "y": 800.549560546875,
+            "width": 4.49200439453125,
+            "height": 155.7203369140625
+          }
+        },
+        {
+          "segment": 1,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M825 950 L825 1050 L842 1085 L862 1060 L860 950 L860 700 L870 590 L850 555 L750 540 L650 525 L550 485 L440 460 L355 450 L320 520 L300 650 L275 745 L235 800 L210 830",
+          "rect": {
+            "x": 89.88770294189453,
+            "y": 806.538818359375,
+            "width": 197.64706420898438,
+            "height": 190.158447265625
+          }
+        }
+      ],
+      "sequence": {
+        "correctOrder": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "segments": 8,
+        "playedOnce": true
+      },
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選15",
+      "nodeId": "acid-base-homeostasis-node-05",
+      "width": 1280,
+      "pass": true,
+      "shots": [
+        {
+          "name": "acid-base-homeostasis-node-05-1280-t1.png",
+          "currentTime": 150,
+          "sha256": "2143c5c7aa157dc7460f33fc36c330691fdba2b407172cf71362848b14bc1090",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "25px",
+              "animation": "apply-flow-travel",
+              "d": "M800 300 L1000 300",
+              "rect": {
+                "x": 1020.3209228515625,
+                "y": 226.39236450195312,
+                "width": 122.1243896484375,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "acid-base-homeostasis-node-05-1280-t2.png",
+          "currentTime": 450,
+          "sha256": "b3180a9ede3c1326deb696150750dae6f1fa9424a3a8843feaacd97072246b31",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "15px",
+              "animation": "apply-flow-travel",
+              "d": "M800 300 L1000 300",
+              "rect": {
+                "x": 1020.3209228515625,
+                "y": 226.39236450195312,
+                "width": 122.1243896484375,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "acid-base-homeostasis-node-05-1280-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M800 300 L1000 300",
+          "rect": {
+            "x": 1020.3209228515625,
+            "y": 226.39236450195312,
+            "width": 122.1243896484375,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    },
+    {
+      "key": "候選15",
+      "nodeId": "acid-base-homeostasis-node-05",
+      "width": 390,
+      "pass": true,
+      "shots": [
+        {
+          "name": "acid-base-homeostasis-node-05-390-t1.png",
+          "currentTime": 150,
+          "sha256": "a0881a2b491c369e53e153c660dc0c34d2d6f35959ec8ab41829bb4c29f3ae1d",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "17.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M800 300 L1000 300",
+              "rect": {
+                "x": 266.57220458984375,
+                "y": 297.05633544921875,
+                "width": 59.893035888671875,
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "name": "acid-base-homeostasis-node-05-390-t2.png",
+          "currentTime": 450,
+          "sha256": "30c7315c0819b22d46830a8e050956080ac33ae994ecbae713749357a401739e",
+          "sample": [
+            {
+              "segment": 0,
+              "offset": "7.7756px",
+              "animation": "apply-flow-travel",
+              "d": "M800 300 L1000 300",
+              "rect": {
+                "x": 266.57220458984375,
+                "y": 297.05633544921875,
+                "width": 59.893035888671875,
+                "height": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reduced": "acid-base-homeostasis-node-05-390-reduced.png",
+      "staticSample": [
+        {
+          "segment": 0,
+          "offset": "0px",
+          "animation": "none",
+          "d": "M800 300 L1000 300",
+          "rect": {
+            "x": 266.57220458984375,
+            "y": 297.05633544921875,
+            "width": 59.893035888671875,
+            "height": 0
+          }
+        }
+      ],
+      "sequence": null,
+      "errors": [],
+      "skipped": 0
+    }
+  ]
+}

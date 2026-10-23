@@ -1,0 +1,247 @@
+{
+  "slug": "electrolyte-balance",
+  "builtAt": "2026-10-17T02:22:53.646Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.84235294117647,
+      "svgTextSizes": [
+        {
+          "text": "構造與功能圖例",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "葡萄糖",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "NaCl",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "MgCl₂",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "4",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "4",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "解離粒子",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "5",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "滲透",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "6",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "價數",
+          "px": 14.84235294117647
+        }
+      ],
+      "nodes": [
+        {
+          "id": "electrolyte-balance-node-03",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "mEq/L",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "電荷當量濃度",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "價數",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "每種離子攜帶的電荷",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "滲透粒子數",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "計算所有解離後粒子",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "價數不等於粒子總數",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 17.933952205882353,
+      "svgTextSizes": [
+        {
+          "text": "本節關鍵概念",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "葡萄糖",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "NaCl",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "MgCl₂",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "解離粒子",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "滲透",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "價數",
+          "px": 17.933952205882353
+        }
+      ],
+      "nodes": [
+        {
+          "id": "electrolyte-balance-node-03",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "mEq/L",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "電荷當量濃度",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "價數",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "每種離子攜帶的電荷",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "滲透粒子數",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "計算所有解離後粒子",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "價數不等於粒子總數",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-electrolyte-balance-node-01.png",
+    "390-node-electrolyte-balance-node-02.png",
+    "390-node-electrolyte-balance-node-03.png",
+    "390-node-electrolyte-balance-node-04.png",
+    "390-node-electrolyte-balance-node-05.png",
+    "390-node-electrolyte-balance-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-electrolyte-balance-node-01.png",
+    "1280-node-electrolyte-balance-node-02.png",
+    "1280-node-electrolyte-balance-node-03.png",
+    "1280-node-electrolyte-balance-node-04.png",
+    "1280-node-electrolyte-balance-node-05.png",
+    "1280-node-electrolyte-balance-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "electrolyte-balance-node-01",
+    "electrolyte-balance-node-02",
+    "electrolyte-balance-node-03",
+    "electrolyte-balance-node-04",
+    "electrolyte-balance-node-05",
+    "electrolyte-balance-node-06"
+  ],
+  "questionIds": [
+    "electrolyte-balance-foundation-q01",
+    "electrolyte-balance-foundation-q02",
+    "electrolyte-balance-foundation-q03",
+    "electrolyte-balance-foundation-q04",
+    "electrolyte-balance-foundation-q05",
+    "electrolyte-balance-foundation-q06",
+    "electrolyte-balance-case-q01",
+    "electrolyte-balance-case-q02",
+    "electrolyte-balance-case-q03",
+    "electrolyte-balance-case-q04",
+    "electrolyte-balance-case-q05"
+  ],
+  "ok": true
+}

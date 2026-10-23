@@ -1,0 +1,384 @@
+{
+  "slug": "fluid-compartments",
+  "version": "v1",
+  "experience": "guided",
+  "title": "體液分布與細胞內外液",
+  "subtitle": "先辨認分母，再連結體重、總水量與內外液的分布。",
+  "label": "體液分布與細胞內外液｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "60%",
+      "label": "體重含水的標準示例"
+    },
+    {
+      "value": "2/3與1/3",
+      "label": "總水量分內液與外液"
+    },
+    {
+      "value": "20%與80%",
+      "label": "外液分血漿與組織間液"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中關係觀察；紅色粗體標出這次的重點。",
+    "figure": "fluid-compartments-overview-data.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "標準示例",
+        "explain": "體重60%總水，以2/3與1/3分。"
+      },
+      {
+        "id": "state-2",
+        "label": "外液細分",
+        "explain": "血漿20%、組織間液80%的外液分母。"
+      },
+      {
+        "id": "state-3",
+        "label": "個別差異",
+        "explain": "成年男約65%、女約55%（皆以體重為分母）。"
+      }
+    ],
+    "predict": {
+      "question": "切換到「外液細分」，血漿20%的分母應選哪一個？",
+      "options": [
+        "細胞內液",
+        "血漿本身",
+        "細胞外液",
+        "體重"
+      ],
+      "answer": 2,
+      "feedback": "血漿與組織間液共同構成細胞外液，兩項分別佔外液20%與80%。",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "fluid-compartments-node-01",
+      "tag": "01",
+      "title": "總水量與比例分母",
+      "summary": "總水量約佔體重60%是標準示例",
+      "figure": "fluid-compartments-node-01-data.svg",
+      "concept": "體液分布的百分比必須先辨認分母；標準示例以體重的60%表示總水量。",
+      "points": [
+        "體重與總水量是不同分母。",
+        "個別含水比例會隨年齡與性別而異。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "看到百分比先補上「佔誰的比例」，再進行分配。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、33、37 頁。",
+      "caption": "總水量約佔體重60%是標準示例。"
+    },
+    {
+      "id": "fluid-compartments-node-02",
+      "tag": "02",
+      "title": "細胞內液與細胞外液",
+      "summary": "總水量分為內液2/3與外液1/3",
+      "figure": "fluid-compartments-node-02-data.svg",
+      "concept": "以總水量為分母，細胞內液佔2/3，細胞外液佔1/3。",
+      "points": [
+        "細胞膜界定細胞內外。",
+        "血漿屬於細胞外液。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "用同一總水量作基準比較兩份水量，勿把血管內誤稱細胞內。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、33、37 頁。",
+      "caption": "總水量分為內液2/3與外液1/3。"
+    },
+    {
+      "id": "fluid-compartments-node-03",
+      "tag": "03",
+      "title": "血漿與組織間液",
+      "summary": "細胞外液再分血漿20%與組織間液80%",
+      "figure": "fluid-compartments-node-03-data.svg",
+      "concept": "血漿與組織間液都是細胞外液；此處20%與80%的分母是細胞外液。",
+      "points": [
+        "血漿在血管內。",
+        "組織間液位於細胞間隙。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "將血管壁與細胞膜分開看，兩條界線代表不同分類。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、33、37 頁。",
+      "caption": "細胞外液再分血漿20%與組織間液80%。"
+    },
+    {
+      "id": "fluid-compartments-node-04",
+      "tag": "04",
+      "title": "換算到體重比例",
+      "summary": "同一60%示例對應內液40%、外液20%",
+      "figure": "fluid-compartments-node-04-data.svg",
+      "concept": "標準示例中，內液佔體重40%、外液佔20%；外液細分為血漿4%與組織間液16%。",
+      "points": [
+        "4%與16%是外液20%的細分。",
+        "不能把40%、20%、4%、16%全部相加。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先畫內外兩層分類，再確認血漿和組織間液已包含於外液。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、33、37 頁。",
+      "caption": "同一60%示例對應內液40%、外液20%。"
+    },
+    {
+      "id": "fluid-compartments-node-05",
+      "tag": "05",
+      "title": "血漿與組織間液的差別",
+      "summary": "血漿蛋白質量是重要差別",
+      "figure": "fluid-compartments-node-05.svg",
+      "concept": "血漿與組織間液同屬外液；微血管壁對蛋白質不通透，使較多蛋白質保留在血漿。",
+      "points": [
+        "小離子在兩側都存在。",
+        "蛋白質與小離子的分布不能混為一談。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較圖中大分子與小粒子的位置，避免用是否有血球作為兩種液體的主要差別。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、31–33、37 頁。",
+      "caption": "血漿蛋白質量是重要差別。"
+    },
+    {
+      "id": "fluid-compartments-node-06",
+      "tag": "06",
+      "title": "含水比例的個別差異",
+      "summary": "含水比例隨性別與年齡改變",
+      "figure": "fluid-compartments-node-06-data.svg",
+      "concept": "男性約65%、女性約55%；課本也列嬰兒約77%、老人約47%，這些比例都以體重為分母。",
+      "points": [
+        "脂肪比例影響身體含水比例。",
+        "標準60%示例不適用所有個別條件。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較同一尺度的比例條，先讀人物條件，再讀含水比例。"
+      },
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 28–29、33、37 頁。",
+      "caption": "含水比例隨性別與年齡改變。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "fluid-compartments-foundation-q01",
+      "stem": "標準示例的總水量60%，分母是什麼？",
+      "options": [
+        "體重",
+        "細胞內液",
+        "血漿",
+        "組織間液"
+      ],
+      "answer": 0,
+      "hint": "先區分全身重量與水量分類。",
+      "explain": "60%是總水量佔體重；不是血漿或內液中的比例。",
+      "nodeId": "fluid-compartments-node-01",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-foundation-q02",
+      "stem": "以總水量為分母，內液與外液如何分配？",
+      "options": [
+        "內液與外液都各佔全部總水量",
+        "細胞內液2/3、細胞外液1/3",
+        "細胞內液1/3、細胞外液2/3",
+        "全部都是血漿"
+      ],
+      "answer": 1,
+      "hint": "兩份的和應等於總水量。",
+      "explain": "總水量分內液2/3與外液1/3；血漿只是外液的一部分。",
+      "nodeId": "fluid-compartments-node-02",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-foundation-q03",
+      "stem": "「血漿20%」在外液細分圖的分母為何？",
+      "options": [
+        "細胞內液",
+        "紅血球總量",
+        "細胞外液",
+        "體重"
+      ],
+      "answer": 2,
+      "hint": "先找血漿所在的上一層分類。",
+      "explain": "血漿佔細胞外液20%，其餘為組織間液80%，不能直接乘體重。",
+      "nodeId": "fluid-compartments-node-03",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-foundation-q04",
+      "stem": "標準示例中血漿4%與組織間液16%，應如何合併？",
+      "options": [
+        "再額外加到外液20%之外",
+        "合成細胞內液",
+        "兩者都是以血漿為分母",
+        "合成佔體重20%的細胞外液"
+      ],
+      "answer": 3,
+      "hint": "辨認主分類和細分類。",
+      "explain": "4%加16%已經構成外液20%；再加一次外液會重複計數。",
+      "nodeId": "fluid-compartments-node-04",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-foundation-q05",
+      "stem": "血漿與組織間液的重要差別是什麼？",
+      "options": [
+        "血漿含較多蛋白質",
+        "組織間液完全沒有小離子",
+        "血漿就是紅血球內液",
+        "組織間液就是尿液"
+      ],
+      "answer": 0,
+      "hint": "比較大分子在微血管兩側的分布。",
+      "explain": "微血管壁使蛋白質較多保留在血漿；小離子兩側都有。",
+      "nodeId": "fluid-compartments-node-05",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "fluid-compartments-foundation-q06",
+      "stem": "女性約55%、男性約65%的含水比例，應如何理解？",
+      "options": [
+        "脂肪比例與含水比例完全無關",
+        "性別條件會影響體重含水比例",
+        "所有人一律套用標準60%",
+        "兩者都以細胞外液為分母"
+      ],
+      "answer": 1,
+      "hint": "先讀個別條件，再選總水比例。",
+      "explain": "55%與65%都以體重為分母；不能忽略性別與脂肪差異。",
+      "nodeId": "fluid-compartments-node-06",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "fluid-compartments-case-q01",
+      "stem": "【分母核對】資料先給體重，再註明採60%標準示例，第一步要算什麼？",
+      "options": [
+        "把全部體重當成內液",
+        "將血漿比例當成總水比例",
+        "以體重求總水量",
+        "直接把體重當成血漿量"
+      ],
+      "answer": 2,
+      "hint": "先找水量分配的最上層。",
+      "explain": "先由體重與總水率得到總水量，再往內外液分配。",
+      "nodeId": "fluid-compartments-node-01",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-case-q02",
+      "stem": "【分類整理】將血漿放在「血管內」後，還應歸入哪一類？",
+      "options": [
+        "細胞內液",
+        "腎小管內液",
+        "紅血球細胞質",
+        "細胞外液"
+      ],
+      "answer": 3,
+      "hint": "血管壁不是細胞內外分類的界線。",
+      "explain": "血漿雖在血管內，仍在身體細胞之外，屬細胞外液。",
+      "nodeId": "fluid-compartments-node-02",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-case-q03",
+      "stem": "【比例核對】同一60%示例已採4%與16%的體重分法，應怎麼處理其他分法？",
+      "options": [
+        "維持本示例一致的分母與比例",
+        "任意將兩項換成別組比例",
+        "再把4%與16%加到內外液總和上",
+        "將4%解釋成總水量比例"
+      ],
+      "answer": 0,
+      "hint": "一份計算中只能使用一致的假設。",
+      "explain": "4%與16%是本示例外液的體重細分，不能混用不同示例或重複加總。",
+      "nodeId": "fluid-compartments-node-04",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-case-q04",
+      "stem": "【條件比較】相同體重下比較成年男女的課本含水比例，哪個因素應納入？",
+      "options": [
+        "只看當次尿液顏色",
+        "性別與脂肪比例差異",
+        "將兩者都視為固定60%且不問條件",
+        "只看血管的長度"
+      ],
+      "answer": 1,
+      "hint": "總水率與身體組成有關。",
+      "explain": "課本男女比例不同，與脂肪比例差異相連；不能只套標準值。",
+      "nodeId": "fluid-compartments-node-06",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+      ]
+    },
+    {
+      "id": "fluid-compartments-case-q05",
+      "stem": "【圖面判讀】微血管內外都有小離子，管內另有較多大分子，最適合解釋為何？",
+      "options": [
+        "血漿都在紅血球內",
+        "大分子一定都能自由穿過微血管壁",
+        "蛋白質較多保留在血漿",
+        "組織間液沒有任何溶質"
+      ],
+      "answer": 2,
+      "hint": "先分辨管壁對大小分子的作用。",
+      "explain": "兩側都有小離子，較多血漿蛋白質保留於管內，才是此比較的重點。",
+      "nodeId": "fluid-compartments-node-05",
+      "sources": [
+        "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    }
+  ],
+  "credits": [
+    "《生理學》腎臟與體液的恆定，第 28–29、31–33、37 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

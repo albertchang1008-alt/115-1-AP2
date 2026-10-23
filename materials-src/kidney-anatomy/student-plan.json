@@ -1,0 +1,174 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/kidney-anatomy.md",
+  "nodes": [
+    {
+      "figure": "body",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "左腎",
+            "右腎"
+          ],
+          "choices": [
+            "較高",
+            "較低"
+          ],
+          "expected": [
+            0,
+            1
+          ],
+          "rowFeedback": [
+            "右腎比左腎低",
+            "肝臟在右側，所以右腎比較低。"
+          ],
+          "labels": [
+            "身體右側",
+            "左側"
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "kidney-cut",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "皮質",
+            "髓質",
+            "腎柱"
+          ],
+          "choices": [
+            "外圈",
+            "內部",
+            "腎錐體之間"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "rowFeedback": [
+            "腎臟切面外為皮質。",
+            "腎臟切面內為髓質。",
+            "皮質伸入腎錐體間的部分稱腎柱。"
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "urine-route",
+      "steps": [
+        {
+          "type": "sequence",
+          "choices": [
+            "腎乳頭",
+            "小腎盞",
+            "大腎盞",
+            "腎盂"
+          ],
+          "expected": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "kidney-layers",
+      "steps": [
+        {
+          "type": "sequence",
+          "choices": [
+            "腎被膜",
+            "脂肪囊",
+            "腎筋膜"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 1,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "urinary",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "腎",
+            "輸尿管",
+            "膀胱",
+            "尿道"
+          ],
+          "choices": [
+            "製造尿",
+            "運送尿",
+            "儲存尿",
+            "排出尿"
+          ],
+          "expected": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "rowFeedback": [
+            "腎形成尿液",
+            "輸尿管運送",
+            "膀胱儲存",
+            "尿道排出"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 0,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "endocrine",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "腎素",
+            "紅血球生成素",
+            "活化維生素 D"
+          ],
+          "choices": [
+            "血壓",
+            "紅血球",
+            "鈣"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "rowFeedback": [
+            "腎素啟動 RAAS 調節血壓",
+            "紅血球生成素促進紅血球生成",
+            "腎把維生素 D 轉成活性形式，參與鈣調節。"
+          ]
+        }
+      ]
+    }
+  ]
+}

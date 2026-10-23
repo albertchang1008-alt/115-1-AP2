@@ -1,0 +1,134 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/tubular-handling.md",
+  "nodes": [
+    {
+      "figure": "three-transports",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "過濾",
+            "再吸收",
+            "分泌"
+          ],
+          "choices": [
+            "血液→鮑氏囊",
+            "管液→血液",
+            "血液→管液"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "equation",
+      "steps": [
+        {
+          "type": "signs",
+          "choices": [
+            "＋",
+            "－"
+          ],
+          "expected": [
+            1,
+            0
+          ],
+          "labels": [
+            "排泄量",
+            "過濾量",
+            "再吸收量",
+            "分泌量"
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "tubule-substances",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "葡萄糖",
+            "胺基酸",
+            "尿素",
+            "肌酸酐"
+          ],
+          "choices": [
+            "正常全部回收",
+            "部分回收",
+            "不回收"
+          ],
+          "expected": [
+            0,
+            0,
+            1,
+            2
+          ],
+          "unique": false
+        }
+      ]
+    },
+    {
+      "figure": "glucose-slider",
+      "steps": [
+        {
+          "type": "slider",
+          "choices": [
+            "過濾出來的葡萄糖"
+          ],
+          "labels": [
+            "375 mg/min",
+            "尿中出現葡萄糖"
+          ],
+          "instructionAfterAnswer": true
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 1,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "nephron",
+      "steps": [
+        {
+          "type": "multi",
+          "choices": [
+            "遠曲小管",
+            "集尿管",
+            "近曲小管"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 0,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "concentration",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

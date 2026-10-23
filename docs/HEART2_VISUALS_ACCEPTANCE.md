@@ -40,7 +40,7 @@
 | 微血管交換 | 13 | 13 | 14.94px |
 | 心臟電性活動 | 4 | 4 | 14.58px |
 
-- [114 張截圖索引](heart2-visuals-screenshots/index.html)
+- [114 張截圖索引](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-visuals-screenshots/index.html)
 - [完整互動及流程結果](HEART2_VISUALS_VERIFY.json)
 - [既有手工流程回歸](STAGE1_DRAFTS_VERIFY.json)
 

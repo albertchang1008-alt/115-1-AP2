@@ -2,8 +2,10 @@ import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath }
 import { validateMaterialContent } from '../shared/materialKit.ts';
 import { ROOT, MATERIALS_DIR, upsertCatalogEntry, syncCatalog } from './materials.mjs';
 import { paletteCss, colorFigure } from '../materials-src/kit/presentation.mjs';
+import { buildApprovedUrinary, approvedUrinarySlugs } from './urinary-release-build.mjs';
 // --preview：只產生教材檔讓教師先看，不寫入教材目錄（shared/materials.ts、README）。教師確認後再不加 --preview 重跑一次完成登錄。
 const args=process.argv.slice(2), preview=args.includes('--preview'), slug=args.find(a=>!a.startsWith('--')); if(!slug) throw Error('用法：npm run materials:build <slug>（先看不登錄：npm run materials:preview <slug>）');
+if(approvedUrinarySlugs.includes(slug)){await buildApprovedUrinary(slug,{preview});process.exit(0);}
 const src=path.join(ROOT,'materials-src',slug), content=JSON.parse(fs.readFileSync(path.join(src,'content.json'),'utf8')); validateMaterialContent(content);
 if(content.slug!==slug) throw Error(`slug：內容檔為 ${content.slug}，路徑為 ${slug}`);
 // The route lab, overview and pulse map share the same original anatomy source.

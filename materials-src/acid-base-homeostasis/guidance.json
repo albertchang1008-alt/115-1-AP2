@@ -1,0 +1,34 @@
+{
+  "slots": [
+    {
+      "id": "slot_buffer",
+      "text": "接收或釋放 H⁺",
+      "sources": [
+        {
+          "uid": "buffer-systems",
+          "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+        }
+      ]
+    },
+    {
+      "id": "slot_lung",
+      "text": "增加 CO₂ 排出",
+      "sources": [
+        {
+          "uid": "acid-base-balance",
+          "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+        }
+      ]
+    },
+    {
+      "id": "slot_kidney",
+      "text": "分泌 H⁺並回收 HCO₃⁻",
+      "sources": [
+        {
+          "uid": "acid-base-balance",
+          "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+        }
+      ]
+    }
+  ]
+}

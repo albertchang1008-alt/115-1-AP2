@@ -1,0 +1,762 @@
+[
+  {
+    "slug": "kidney-anatomy",
+    "width": 1280,
+    "screenshot": "screenshots/kidney-anatomy-1280.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "kidney-anatomy-foundation-q01",
+        "expected": "位於後腹腔，右腎通常較低",
+        "rendered": "位於後腹腔，右腎通常較低",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q02",
+        "expected": "深入腎錐體之間的皮質",
+        "rendered": "深入腎錐體之間的皮質",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q03",
+        "expected": "小腎盞",
+        "rendered": "小腎盞",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q04",
+        "expected": "腎被膜、脂肪囊、腎筋膜",
+        "rendered": "腎被膜、脂肪囊、腎筋膜",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q05",
+        "expected": "腎臟形成尿液，膀胱儲存尿液",
+        "rendered": "腎臟形成尿液，膀胱儲存尿液",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q06",
+        "expected": "促進紅血球生成",
+        "rendered": "促進紅血球生成",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q01",
+        "expected": "腎柱",
+        "rendered": "腎柱",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q02",
+        "expected": "小腎盞、大腎盞、腎盂",
+        "rendered": "小腎盞、大腎盞、腎盂",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q03",
+        "expected": "輸尿管、尿道",
+        "rendered": "輸尿管、尿道",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q04",
+        "expected": "鄰近腎臟，仍是另一個器官",
+        "rendered": "鄰近腎臟，仍是另一個器官",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q05",
+        "expected": "造血訊號與維生素 D 活化",
+        "rendered": "造血訊號與維生素 D 活化",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "kidney-anatomy",
+    "width": 390,
+    "screenshot": "screenshots/kidney-anatomy-390.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "kidney-anatomy-foundation-q01",
+        "expected": "位於後腹腔，右腎通常較低",
+        "rendered": "位於後腹腔，右腎通常較低",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q02",
+        "expected": "深入腎錐體之間的皮質",
+        "rendered": "深入腎錐體之間的皮質",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q03",
+        "expected": "小腎盞",
+        "rendered": "小腎盞",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q04",
+        "expected": "腎被膜、脂肪囊、腎筋膜",
+        "rendered": "腎被膜、脂肪囊、腎筋膜",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q05",
+        "expected": "腎臟形成尿液，膀胱儲存尿液",
+        "rendered": "腎臟形成尿液，膀胱儲存尿液",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-foundation-q06",
+        "expected": "促進紅血球生成",
+        "rendered": "促進紅血球生成",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q01",
+        "expected": "腎柱",
+        "rendered": "腎柱",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q02",
+        "expected": "小腎盞、大腎盞、腎盂",
+        "rendered": "小腎盞、大腎盞、腎盂",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q03",
+        "expected": "輸尿管、尿道",
+        "rendered": "輸尿管、尿道",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q04",
+        "expected": "鄰近腎臟，仍是另一個器官",
+        "rendered": "鄰近腎臟，仍是另一個器官",
+        "ok": true
+      },
+      {
+        "id": "kidney-anatomy-case-q05",
+        "expected": "造血訊號與維生素 D 活化",
+        "rendered": "造血訊號與維生素 D 活化",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "nephron-circulation",
+    "width": 1280,
+    "screenshot": "screenshots/nephron-circulation-1280.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "nephron-circulation-foundation-q01",
+        "expected": "腎小體與腎小管",
+        "rendered": "腎小體與腎小管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q02",
+        "expected": "兩型腎小體都位於皮質",
+        "rendered": "兩型腎小體都位於皮質",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q03",
+        "expected": "近曲小管",
+        "rendered": "近曲小管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q04",
+        "expected": "入球小動脈、出球小動脈",
+        "rendered": "入球小動脈、出球小動脈",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q05",
+        "expected": "遠曲小管的緻密斑",
+        "rendered": "遠曲小管的緻密斑",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q06",
+        "expected": "GFR／RPF",
+        "rendered": "GFR／RPF",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q01",
+        "expected": "皮質",
+        "rendered": "皮質",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q02",
+        "expected": "管周微血管或直血管",
+        "rendered": "管周微血管或直血管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q03",
+        "expected": "亨利氏環薄段",
+        "rendered": "亨利氏環薄段",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q04",
+        "expected": "入球小動脈壁的近腎絲球細胞",
+        "rendered": "入球小動脈壁的近腎絲球細胞",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q05",
+        "expected": "分母改為腎血漿流量",
+        "rendered": "分母改為腎血漿流量",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "nephron-circulation",
+    "width": 390,
+    "screenshot": "screenshots/nephron-circulation-390.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "nephron-circulation-foundation-q01",
+        "expected": "腎小體與腎小管",
+        "rendered": "腎小體與腎小管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q02",
+        "expected": "兩型腎小體都位於皮質",
+        "rendered": "兩型腎小體都位於皮質",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q03",
+        "expected": "近曲小管",
+        "rendered": "近曲小管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q04",
+        "expected": "入球小動脈、出球小動脈",
+        "rendered": "入球小動脈、出球小動脈",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q05",
+        "expected": "遠曲小管的緻密斑",
+        "rendered": "遠曲小管的緻密斑",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-foundation-q06",
+        "expected": "GFR／RPF",
+        "rendered": "GFR／RPF",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q01",
+        "expected": "皮質",
+        "rendered": "皮質",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q02",
+        "expected": "管周微血管或直血管",
+        "rendered": "管周微血管或直血管",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q03",
+        "expected": "亨利氏環薄段",
+        "rendered": "亨利氏環薄段",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q04",
+        "expected": "入球小動脈壁的近腎絲球細胞",
+        "rendered": "入球小動脈壁的近腎絲球細胞",
+        "ok": true
+      },
+      {
+        "id": "nephron-circulation-case-q05",
+        "expected": "分母改為腎血漿流量",
+        "rendered": "分母改為腎血漿流量",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "filtration-clearance",
+    "width": 1280,
+    "screenshot": "screenshots/filtration-clearance-1280.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "filtration-clearance-foundation-q01",
+        "expected": "腎絲球微血管到鮑氏囊腔",
+        "rendered": "腎絲球微血管到鮑氏囊腔",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q02",
+        "expected": "微血管內皮、基底膜、足細胞",
+        "rendered": "微血管內皮、基底膜、足細胞",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q03",
+        "expected": "白蛋白的含量",
+        "rendered": "白蛋白的含量",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q04",
+        "expected": "腎絲球微血管靜水壓",
+        "rendered": "腎絲球微血管靜水壓",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q05",
+        "expected": "每分鐘相當被清除的血漿體積",
+        "rendered": "每分鐘相當被清除的血漿體積",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q06",
+        "expected": "菊糖",
+        "rendered": "菊糖",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q01",
+        "expected": "一小時尿量除以 60",
+        "rendered": "一小時尿量除以 60",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q02",
+        "expected": "每分鐘相當清除 69 mL 血漿中的該物質",
+        "rendered": "每分鐘相當清除 69 mL 血漿中的該物質",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q03",
+        "expected": "肌酸酐另有少量分泌，菊糖不分泌",
+        "rendered": "肌酸酐另有少量分泌，菊糖不分泌",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q04",
+        "expected": "它估的是腎血漿流量，換算血流還需血漿比例",
+        "rendered": "它估的是腎血漿流量，換算血流還需血漿比例",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q05",
+        "expected": "葡萄糖可自由通過過濾膜",
+        "rendered": "葡萄糖可自由通過過濾膜",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "filtration-clearance",
+    "width": 390,
+    "screenshot": "screenshots/filtration-clearance-390.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "filtration-clearance-foundation-q01",
+        "expected": "腎絲球微血管到鮑氏囊腔",
+        "rendered": "腎絲球微血管到鮑氏囊腔",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q02",
+        "expected": "微血管內皮、基底膜、足細胞",
+        "rendered": "微血管內皮、基底膜、足細胞",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q03",
+        "expected": "白蛋白的含量",
+        "rendered": "白蛋白的含量",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q04",
+        "expected": "腎絲球微血管靜水壓",
+        "rendered": "腎絲球微血管靜水壓",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q05",
+        "expected": "每分鐘相當被清除的血漿體積",
+        "rendered": "每分鐘相當被清除的血漿體積",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-foundation-q06",
+        "expected": "菊糖",
+        "rendered": "菊糖",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q01",
+        "expected": "一小時尿量除以 60",
+        "rendered": "一小時尿量除以 60",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q02",
+        "expected": "每分鐘相當清除 69 mL 血漿中的該物質",
+        "rendered": "每分鐘相當清除 69 mL 血漿中的該物質",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q03",
+        "expected": "肌酸酐另有少量分泌，菊糖不分泌",
+        "rendered": "肌酸酐另有少量分泌，菊糖不分泌",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q04",
+        "expected": "它估的是腎血漿流量，換算血流還需血漿比例",
+        "rendered": "它估的是腎血漿流量，換算血流還需血漿比例",
+        "ok": true
+      },
+      {
+        "id": "filtration-clearance-case-q05",
+        "expected": "葡萄糖可自由通過過濾膜",
+        "rendered": "葡萄糖可自由通過過濾膜",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "tubular-handling",
+    "width": 1280,
+    "screenshot": "screenshots/tubular-handling-1280.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "tubular-handling-foundation-q01",
+        "expected": "再吸收",
+        "rendered": "再吸收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q02",
+        "expected": "過濾量－再吸收量＋分泌量",
+        "rendered": "過濾量－再吸收量＋分泌量",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q03",
+        "expected": "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+        "rendered": "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q04",
+        "expected": "每分鐘可運輸的葡萄糖量上限",
+        "rendered": "每分鐘可運輸的葡萄糖量上限",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q05",
+        "expected": "增加 Na⁺再吸收及 K⁺分泌",
+        "rendered": "增加 Na⁺再吸收及 K⁺分泌",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q06",
+        "expected": "不能，水回收與尿流量也影響判讀",
+        "rendered": "不能，水回收與尿流量也影響判讀",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q01",
+        "expected": "分泌",
+        "rendered": "分泌",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q02",
+        "expected": "減少",
+        "rendered": "減少",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q03",
+        "expected": "甲每分鐘排出的物質量較多",
+        "rendered": "甲每分鐘排出的物質量較多",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q04",
+        "expected": "葡萄糖可被回收",
+        "rendered": "葡萄糖可被回收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q05",
+        "expected": "鈉由管液回血，鉀由血入管液",
+        "rendered": "鈉由管液回血，鉀由血入管液",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "tubular-handling",
+    "width": 390,
+    "screenshot": "screenshots/tubular-handling-390.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "tubular-handling-foundation-q01",
+        "expected": "再吸收",
+        "rendered": "再吸收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q02",
+        "expected": "過濾量－再吸收量＋分泌量",
+        "rendered": "過濾量－再吸收量＋分泌量",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q03",
+        "expected": "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+        "rendered": "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q04",
+        "expected": "每分鐘可運輸的葡萄糖量上限",
+        "rendered": "每分鐘可運輸的葡萄糖量上限",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q05",
+        "expected": "增加 Na⁺再吸收及 K⁺分泌",
+        "rendered": "增加 Na⁺再吸收及 K⁺分泌",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-foundation-q06",
+        "expected": "不能，水回收與尿流量也影響判讀",
+        "rendered": "不能，水回收與尿流量也影響判讀",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q01",
+        "expected": "分泌",
+        "rendered": "分泌",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q02",
+        "expected": "減少",
+        "rendered": "減少",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q03",
+        "expected": "甲每分鐘排出的物質量較多",
+        "rendered": "甲每分鐘排出的物質量較多",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q04",
+        "expected": "葡萄糖可被回收",
+        "rendered": "葡萄糖可被回收",
+        "ok": true
+      },
+      {
+        "id": "tubular-handling-case-q05",
+        "expected": "鈉由管液回血，鉀由血入管液",
+        "rendered": "鈉由管液回血，鉀由血入管液",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "urine-concentration",
+    "width": 1280,
+    "screenshot": "screenshots/urine-concentration-1280.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "urine-concentration-foundation-q01",
+        "expected": "髓質滲透梯度與可通水的集尿管",
+        "rendered": "髓質滲透梯度與可通水的集尿管",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q02",
+        "expected": "對水通透，水可沿梯度移出",
+        "rendered": "對水通透，水可沿梯度移出",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q03",
+        "expected": "不透水",
+        "rendered": "不透水",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q04",
+        "expected": "逆流交換以減少髓質梯度流失",
+        "rendered": "逆流交換以減少髓質梯度流失",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q05",
+        "expected": "經 V2 受器增加水通道與水通透性",
+        "rendered": "經 V2 受器增加水通道與水通透性",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q06",
+        "expected": "尿量較少、尿較濃",
+        "rendered": "尿量較少、尿較濃",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q01",
+        "expected": "亨利氏環上升枝",
+        "rendered": "亨利氏環上升枝",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q02",
+        "expected": "亨利氏環為小管逆流增強，直血管為血管逆流交換",
+        "rendered": "亨利氏環為小管逆流增強，直血管為血管逆流交換",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q03",
+        "expected": "ADH 經 V2 受器作用",
+        "rendered": "ADH 經 V2 受器作用",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q04",
+        "expected": "不能，末端水通透性仍是必要條件",
+        "rendered": "不能，末端水通透性仍是必要條件",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q05",
+        "expected": "水回收減少、尿量增加、尿較稀",
+        "rendered": "水回收減少、尿量增加、尿較稀",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  },
+  {
+    "slug": "urine-concentration",
+    "width": 390,
+    "screenshot": "screenshots/urine-concentration-390.png",
+    "errors": [],
+    "overflow": false,
+    "mappings": [
+      {
+        "id": "urine-concentration-foundation-q01",
+        "expected": "髓質滲透梯度與可通水的集尿管",
+        "rendered": "髓質滲透梯度與可通水的集尿管",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q02",
+        "expected": "對水通透，水可沿梯度移出",
+        "rendered": "對水通透，水可沿梯度移出",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q03",
+        "expected": "不透水",
+        "rendered": "不透水",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q04",
+        "expected": "逆流交換以減少髓質梯度流失",
+        "rendered": "逆流交換以減少髓質梯度流失",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q05",
+        "expected": "經 V2 受器增加水通道與水通透性",
+        "rendered": "經 V2 受器增加水通道與水通透性",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-foundation-q06",
+        "expected": "尿量較少、尿較濃",
+        "rendered": "尿量較少、尿較濃",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q01",
+        "expected": "亨利氏環上升枝",
+        "rendered": "亨利氏環上升枝",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q02",
+        "expected": "亨利氏環為小管逆流增強，直血管為血管逆流交換",
+        "rendered": "亨利氏環為小管逆流增強，直血管為血管逆流交換",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q03",
+        "expected": "ADH 經 V2 受器作用",
+        "rendered": "ADH 經 V2 受器作用",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q04",
+        "expected": "不能，末端水通透性仍是必要條件",
+        "rendered": "不能，末端水通透性仍是必要條件",
+        "ok": true
+      },
+      {
+        "id": "urine-concentration-case-q05",
+        "expected": "水回收減少、尿量增加、尿較稀",
+        "rendered": "水回收減少、尿量增加、尿較稀",
+        "ok": true
+      }
+    ],
+    "predictionCorrect": true
+  }
+]

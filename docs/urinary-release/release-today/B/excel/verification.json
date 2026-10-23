@@ -1,0 +1,27 @@
+{
+  "pass": true,
+  "counts": {
+    "xl/worksheets/sheet1.xml": {
+      "before": 305,
+      "after": 415,
+      "appended": 110
+    },
+    "xl/worksheets/sheet2.xml": {
+      "before": 41,
+      "after": 51,
+      "appended": 10
+    }
+  },
+  "originalCellsUnchanged": true,
+  "originalOtherZipMembersUnchanged": true,
+  "existingRowsCompared": 346,
+  "questions": 414,
+  "appended": 110,
+  "excluded": 0,
+  "skipped": 0,
+  "duplicateIds": [],
+  "beforeSha256": "04498f115cb3d512825ec01606282c633e308ff19b906297769df40861849215",
+  "afterSha256": "237dc14792f9ea8abaa0dc39c1c7fec040a101b01c41970a5fef804a1efe7b10",
+  "authoring": "artifact-tool; graft only authored additions to preserve original workbook",
+  "backup": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/docs/sheet-backups/2026-10-22-urinary-excel-before.xlsx"
+}

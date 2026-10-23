@@ -37,19 +37,19 @@
 
 26 張位於 [heart2-c-review-screenshots](heart2-c-review-screenshots)，以下含兩種寬度：
 
-- aorta-default：[390](heart2-c-review-screenshots/390-aorta-default.png)、[1280](heart2-c-review-screenshots/1280-aorta-default.png)
-- aorta-ascending：[390](heart2-c-review-screenshots/390-aorta-ascending.png)、[1280](heart2-c-review-screenshots/1280-aorta-ascending.png)
-- aorta-arch：[390](heart2-c-review-screenshots/390-aorta-arch.png)、[1280](heart2-c-review-screenshots/1280-aorta-arch.png)
-- aorta-thoracic：[390](heart2-c-review-screenshots/390-aorta-thoracic.png)、[1280](heart2-c-review-screenshots/1280-aorta-thoracic.png)
-- aorta-abdominal：[390](heart2-c-review-screenshots/390-aorta-abdominal.png)、[1280](heart2-c-review-screenshots/1280-aorta-abdominal.png)
-- arch-closeup：[390](heart2-c-review-screenshots/390-arch-closeup.png)、[1280](heart2-c-review-screenshots/1280-arch-closeup.png)
-- electrical-aligned：[390](heart2-c-review-screenshots/390-electrical-aligned.png)、[1280](heart2-c-review-screenshots/1280-electrical-aligned.png)
-- electrical-aligned-full-page：[390](heart2-c-review-screenshots/390-electrical-aligned-full-page.png)、[1280](heart2-c-review-screenshots/1280-electrical-aligned-full-page.png)
-- pulse：[390](heart2-c-review-screenshots/390-pulse.png)、[1280](heart2-c-review-screenshots/1280-pulse.png)
-- right-hand：[390](heart2-c-review-screenshots/390-right-hand.png)、[1280](heart2-c-review-screenshots/1280-right-hand.png)
-- blood-pressure-measurement-node-01：[390](heart2-c-review-screenshots/390-blood-pressure-measurement-node-01.png)、[1280](heart2-c-review-screenshots/1280-blood-pressure-measurement-node-01.png)
-- blood-types-node-01：[390](heart2-c-review-screenshots/390-blood-types-node-01.png)、[1280](heart2-c-review-screenshots/1280-blood-types-node-01.png)
-- capillary-exchange-node-01：[390](heart2-c-review-screenshots/390-capillary-exchange-node-01.png)、[1280](heart2-c-review-screenshots/1280-capillary-exchange-node-01.png)
+- aorta-default：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-aorta-default.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-aorta-default.png)
+- aorta-ascending：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-aorta-ascending.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-aorta-ascending.png)
+- aorta-arch：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-aorta-arch.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-aorta-arch.png)
+- aorta-thoracic：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-aorta-thoracic.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-aorta-thoracic.png)
+- aorta-abdominal：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-aorta-abdominal.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-aorta-abdominal.png)
+- arch-closeup：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-arch-closeup.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-arch-closeup.png)
+- electrical-aligned：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-electrical-aligned.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-electrical-aligned.png)
+- electrical-aligned-full-page：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-electrical-aligned-full-page.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-electrical-aligned-full-page.png)
+- pulse：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-pulse.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-pulse.png)
+- right-hand：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-right-hand.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-right-hand.png)
+- blood-pressure-measurement-node-01：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-blood-pressure-measurement-node-01.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-blood-pressure-measurement-node-01.png)
+- blood-types-node-01：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-blood-types-node-01.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-blood-types-node-01.png)
+- capillary-exchange-node-01：[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/390-capillary-exchange-node-01.png)、[1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/heart2-c-review-screenshots/1280-capillary-exchange-node-01.png)
 
 ---
 

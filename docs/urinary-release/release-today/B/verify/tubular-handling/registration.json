@@ -1,0 +1,40 @@
+{
+  "pass": true,
+  "slug": "tubular-handling",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/tubular-handling-v1/index.html",
+  "sha256": "f31cfcf8e5b0d39ac9588d2adb4dabf28065870725e0ff940db28ecd02c67d95",
+  "audit": {
+    "slug": "tubular-handling-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 16,
+    "questionIds": [
+      "tubular-handling-case-q01",
+      "tubular-handling-case-q02",
+      "tubular-handling-case-q03",
+      "tubular-handling-case-q04",
+      "tubular-handling-case-q05",
+      "tubular-handling-foundation-q01",
+      "tubular-handling-foundation-q02",
+      "tubular-handling-foundation-q03",
+      "tubular-handling-foundation-q04",
+      "tubular-handling-foundation-q05",
+      "tubular-handling-foundation-q06",
+      "tubular-handling-node-01-micro",
+      "tubular-handling-node-02-micro",
+      "tubular-handling-node-03-micro",
+      "tubular-handling-node-05-micro",
+      "tubular-handling-node-06-micro"
+    ]
+  },
+  "catalog": {
+    "label": "腎小管再吸收、分泌與排泄｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 16,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

@@ -39,7 +39,7 @@
 - 官方SDK實際stdio client列出7個readOnly工具，再成功呼叫get_published，證據 `readonly-smoke/stdio-handshake.json`。這是實際鑰匙圈刷新與HTTPS讀取，非fixture。
 - 首次Google彈窗關閉後本機收到 `auth/popup-closed-by-user`，不誤報為學校阻擋；教師重新操作後，本機程式明確回報「教師登入成功；鑰匙圈已保存」，使用者也確認成功。成功頁已由使用者關閉，未補造成功截圖；改由成功登入紀錄與實際stdio／smoke證明。首次安全錯誤畫面如下，不含帳號／token：
 
-![本機登入流程首次彈窗關閉的安全錯誤頁](login-popup-closed.jpg)
+![本機登入流程首次彈窗關閉的安全錯誤頁](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/platform-mcp/login-popup-closed.jpg)
 
 ## 第3階段建議（未實作）
 - 優先另案補 listManagedCourses／getCourseDraft 純唯讀 callable，才能提供真實課程列表、草稿和diff；加後端完成度aggregate可避免名冊離開後端。

@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "slug": "electrolyte-balance",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/electrolyte-balance-v1/index.html",
+  "sha256": "d6be2f0a2995099cad5217c0aae63796dd5327131235ef90825a84f4136aebca",
+  "audit": {
+    "slug": "electrolyte-balance-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 15,
+    "questionIds": [
+      "electrolyte-balance-case-q01",
+      "electrolyte-balance-case-q02",
+      "electrolyte-balance-case-q03",
+      "electrolyte-balance-case-q04",
+      "electrolyte-balance-case-q05",
+      "electrolyte-balance-foundation-q01",
+      "electrolyte-balance-foundation-q02",
+      "electrolyte-balance-foundation-q03",
+      "electrolyte-balance-foundation-q04",
+      "electrolyte-balance-foundation-q05",
+      "electrolyte-balance-foundation-q06",
+      "electrolyte-balance-node-01-micro",
+      "electrolyte-balance-node-02-micro",
+      "electrolyte-balance-node-03-micro",
+      "electrolyte-balance-node-06-micro"
+    ]
+  },
+  "catalog": {
+    "label": "電解質、滲透與離子平衡｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 15,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

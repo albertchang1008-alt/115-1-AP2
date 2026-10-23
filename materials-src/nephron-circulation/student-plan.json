@@ -1,0 +1,128 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/nephron-circulation.md",
+  "nodes": [
+    {
+      "figure": "nephron",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "腎小體",
+            "腎小管"
+          ],
+          "choices": [
+            "圓球那一端",
+            "後面長長的管子"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 0,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "two-nephrons",
+      "steps": [
+        {
+          "type": "point",
+          "choices": [
+            "環較長",
+            "環較短"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "epithelium",
+      "steps": [
+        {
+          "type": "point",
+          "choices": [
+            "近曲小管",
+            "遠曲小管",
+            "亨利氏環薄段"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 0,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "blood-route",
+      "steps": [
+        {
+          "type": "sequence",
+          "choices": [
+            "入球小動脈",
+            "腎絲球",
+            "出球小動脈",
+            "管周微血管"
+          ],
+          "expected": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "jga",
+      "steps": [
+        {
+          "type": "explore",
+          "choices": [
+            "近腎絲球細胞",
+            "緻密斑"
+          ],
+          "reveals": [
+            "在入球小動脈壁上，感受壓力、分泌腎素",
+            "在遠曲小管，感受管液的鈉"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "answer": 0,
+          "action": 1,
+          "useActionQuestion": true
+        }
+      ]
+    },
+    {
+      "figure": "blood-tube",
+      "steps": [
+        {
+          "type": "point",
+          "choices": [
+            "血漿",
+            "血球"
+          ],
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

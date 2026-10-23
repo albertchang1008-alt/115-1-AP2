@@ -1,0 +1,157 @@
+{
+  "pass": true,
+  "questionCount": 110,
+  "fixedIdsAnswerPositionsCountsTypesUnits": 110,
+  "manualMeaningStatements": 110,
+  "correctTextChanged": 88,
+  "blankChains": 110,
+  "unchangedTraceFields": 110,
+  "memoryMax": 16,
+  "bannedMatches": [],
+  "chemicalFirstUses": 41,
+  "unexplainedChemicalTerms": 0,
+  "symbolsWithChinese": 27,
+  "reviewedCards": 34,
+  "proofExcerpts": 106,
+  "productFilesUnchanged": [
+    {
+      "file": "materials-src/acid-base-homeostasis/apply.json",
+      "sha256": "8f399567745cfe70afd630d17de54a1f0bb79d0819398ab988463674c8d341fd"
+    },
+    {
+      "file": "materials-src/acid-base-homeostasis/content.json",
+      "sha256": "ed4ef9af96b0565927ead9ca2918e29f7669eccff603bb34a1b3dc143d742b70"
+    },
+    {
+      "file": "public/materials/acid-base-homeostasis-v1/index.html",
+      "sha256": "037f2ed4b41a4dcb8a20d60266a0b2983f4e3eec00674ae90aa87c5e7d869d17"
+    },
+    {
+      "file": "materials-src/electrolyte-balance/apply.json",
+      "sha256": "1701bdbd99e3c85c133ef5649a9cd8cbd7091e02a0e5aff4e1813c22bab7f6d6"
+    },
+    {
+      "file": "materials-src/electrolyte-balance/content.json",
+      "sha256": "6079f0edd1295f9fbe46ca93374bcc5d6b198074f86aba6217c44b92c40c308f"
+    },
+    {
+      "file": "public/materials/electrolyte-balance-v1/index.html",
+      "sha256": "4267b450b0e69a937f1e6ad984b27dceffb811a44a33b3c2b405f205a5159858"
+    },
+    {
+      "file": "materials-src/filtration-clearance/apply.json",
+      "sha256": "44baa829b36e3c9777566dfe4de708cf8caf79477e2a73e3f71cdf6ab1454be6"
+    },
+    {
+      "file": "materials-src/filtration-clearance/content.json",
+      "sha256": "a33fbcce5e1aea3d966b26ed0563622b2d8b191fa195f5bdcc6efb64f48b065b"
+    },
+    {
+      "file": "public/materials/filtration-clearance-v1/index.html",
+      "sha256": "d39fd4f5c823a3d24e4b53592ea1c09caa313bd35910c6c4a1c86b4b3a9dd449"
+    },
+    {
+      "file": "materials-src/fluid-compartments/apply.json",
+      "sha256": "8b9a937cf0a14b1a4eaa71bad03b2d6250c608580bdd3a43ff10a8ba2e62d648"
+    },
+    {
+      "file": "materials-src/fluid-compartments/content.json",
+      "sha256": "1a292b298e8ea9267320a0cf60769ab75644d2669d893d4f981008a1ebb518dc"
+    },
+    {
+      "file": "public/materials/fluid-compartments-v1/index.html",
+      "sha256": "71d5d06ff97b6b62448308206f3714efa6b1fa18908448bb63de02b893be022d"
+    },
+    {
+      "file": "materials-src/kidney-anatomy/apply.json",
+      "sha256": "6e50bad22033b08f4c69254740298b60c72189892b84cf516a098311bd57c220"
+    },
+    {
+      "file": "materials-src/kidney-anatomy/content.json",
+      "sha256": "9a66a8233167e0cdcff475610346c72476cea4230fdbe14cfbbe77be49f87ece"
+    },
+    {
+      "file": "public/materials/kidney-anatomy-v1/index.html",
+      "sha256": "cf9ce02972a2ddb6f86749df01827ba7cd64a9fab2272a2d0ff208a895c05b7e"
+    },
+    {
+      "file": "materials-src/nephron-circulation/apply.json",
+      "sha256": "8818f78021e870ee3c78affec3e173c157cda962daaa6907b5dac65b0e48cad1"
+    },
+    {
+      "file": "materials-src/nephron-circulation/content.json",
+      "sha256": "8ce349df05f5338ea208f59be451464c2b2d5125d8b9a936735e411eae9803ca"
+    },
+    {
+      "file": "public/materials/nephron-circulation-v1/index.html",
+      "sha256": "0d3e26f6d18fdd5c69e272f5d09d5a6da0544c74cfbb2fd4206f0d29296ec592"
+    },
+    {
+      "file": "materials-src/tubular-handling/apply.json",
+      "sha256": "1ee8c50215461af282c9214a097f5e054e0b82e2888e4b912690ec052b3383df"
+    },
+    {
+      "file": "materials-src/tubular-handling/content.json",
+      "sha256": "36942342ead79beafe9db70bf10f3f0334ec9ed452cf2156396e6c0c1ad05994"
+    },
+    {
+      "file": "public/materials/tubular-handling-v1/index.html",
+      "sha256": "ff736f2eabf92a4937d0a7cc77383fc9ae00b7787bbf994d7cd73a10710b6eac"
+    },
+    {
+      "file": "materials-src/urinary-route-micturition/apply.json",
+      "sha256": "568e5c1635efe7ac3596c965ad5e2f2c970e9d4cebe6013bfebec98627b7c649"
+    },
+    {
+      "file": "materials-src/urinary-route-micturition/content.json",
+      "sha256": "1b368e2e2689f94fd3a4df52b76434ebbee38efc2272ecb2261d04faf88309c4"
+    },
+    {
+      "file": "public/materials/urinary-route-micturition-v2/index.html",
+      "sha256": "2cae9a390ccab161b787dc25a7624aa3aeeae790d53fc56763dfbca27d8b4673"
+    },
+    {
+      "file": "materials-src/urine-concentration/apply.json",
+      "sha256": "bc50f40c877943987b98f2d4b611baeab7c3f8535090e2e0ae21d7fe5992e9fd"
+    },
+    {
+      "file": "materials-src/urine-concentration/content.json",
+      "sha256": "ba737461745056924a7255b25768b3bd8812127568056ef62639a687d6c3f64e"
+    },
+    {
+      "file": "public/materials/urine-concentration-v1/index.html",
+      "sha256": "ac14ef379201628ef5bcda0d23fee963455057360617d622530d3ae2e2183d58"
+    },
+    {
+      "file": "materials-src/water-sodium-regulation/apply.json",
+      "sha256": "dff484ec7c5faa366c454fa1e1bb60a989dfdfcd084abfc84c8d291f5de13116"
+    },
+    {
+      "file": "materials-src/water-sodium-regulation/content.json",
+      "sha256": "803cf1e0a4210dfc24aa9f3f0a5155ef02aa8e45f97f034d2dbd034dfd72ba98"
+    },
+    {
+      "file": "public/materials/water-sodium-regulation-v1/index.html",
+      "sha256": "217695ae25d27e37884f35d154deaf18189760189c94de03b20b6af0f20aff69"
+    },
+    {
+      "file": "materials-src/acid-base-homeostasis/full.json",
+      "sha256": "0bbe2db461066e12d25d990f277d4ea497ecd629298578759256b43a04e9ed52"
+    },
+    {
+      "file": "html/資訊圖表題庫_上傳用.xlsx",
+      "sha256": "a563ef4c4f820d4ba13ec5ccd39dc3181a9fa4474fd8024d8d4eca8b18b4643d"
+    },
+    {
+      "file": "docs/urinary-release/release-today/B/bank-manifest.json",
+      "sha256": "8c16c0b92468c05bf89f17f156966fb57ea869e476cbffe5fbe6a48c03644993"
+    }
+  ],
+  "liveWrites": {
+    "materials": 0,
+    "excel": 0,
+    "sheet": 0,
+    "platform": 0
+  },
+  "limits": "Meaning and age suitability are author review, not automatic semantic equivalence or actual pupil comprehension tests."
+}

@@ -35,14 +35,14 @@
 
 | 狀態 | 桌機 | 手機 |
 |---|---|---|
-| 閃卡正面 | [截圖](practice-modes-1.7.0-screenshots/flashcard-front-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/flashcard-front-mobile.png) |
-| 閃卡翻面（先選錯誤選項） | [截圖](practice-modes-1.7.0-screenshots/flashcard-back-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/flashcard-back-mobile.png) |
-| 錯題複習題數選擇 | [截圖](practice-modes-1.7.0-screenshots/wrong-choices-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/wrong-choices-mobile.png) |
-| 錯題複習結果 | [截圖](practice-modes-1.7.0-screenshots/wrong-result-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/wrong-result-mobile.png) |
-| 只有今天剛錯 | [截圖](practice-modes-1.7.0-screenshots/today-only-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/today-only-mobile.png) |
-| 綜合練習預設 | [截圖](practice-modes-1.7.0-screenshots/mixed-default-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/mixed-default-mobile.png) |
-| 綜合練習部分勾選 | [截圖](practice-modes-1.7.0-screenshots/mixed-partial-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/mixed-partial-mobile.png) |
-| 綜合練習全不選 | [截圖](practice-modes-1.7.0-screenshots/mixed-none-desktop.png) | [截圖](practice-modes-1.7.0-screenshots/mixed-none-mobile.png) |
+| 閃卡正面 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/flashcard-front-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/flashcard-front-mobile.png) |
+| 閃卡翻面（先選錯誤選項） | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/flashcard-back-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/flashcard-back-mobile.png) |
+| 錯題複習題數選擇 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/wrong-choices-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/wrong-choices-mobile.png) |
+| 錯題複習結果 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/wrong-result-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/wrong-result-mobile.png) |
+| 只有今天剛錯 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/today-only-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/today-only-mobile.png) |
+| 綜合練習預設 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-default-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-default-mobile.png) |
+| 綜合練習部分勾選 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-partial-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-partial-mobile.png) |
+| 綜合練習全不選 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-none-desktop.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/mixed-none-mobile.png) |
 
 ## ④ 教師同步桌機截圖
 
@@ -50,7 +50,7 @@
 
 | 狀態 | 桌機 |
 |---|---|
-| 核取方塊預設不勾與說明 | [截圖](practice-modes-1.7.0-screenshots/sync-checkbox-desktop.png) |
-| 延續：保留37、重置3（改答案2、刪除1） | [截圖](practice-modes-1.7.0-screenshots/sync-carry-desktop.png) |
-| 勾選全部重算 | [截圖](practice-modes-1.7.0-screenshots/sync-reset-desktop.png) |
-| 舊版讀取失敗，同步完成並重算 | [截圖](practice-modes-1.7.0-screenshots/sync-failed-desktop.png) |
+| 核取方塊預設不勾與說明 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/sync-checkbox-desktop.png) |
+| 延續：保留37、重置3（改答案2、刪除1） | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/sync-carry-desktop.png) |
+| 勾選全部重算 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/sync-reset-desktop.png) |
+| 舊版讀取失敗，同步完成並重算 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/practice-modes-1.7.0-screenshots/sync-failed-desktop.png) |

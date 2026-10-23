@@ -57,7 +57,7 @@
 - Student.tsx 首次三張提示（待辦、分頁、完成度）可逐張閱讀或略過；只存 `course-guide-seen:<courseId>:<uid>`，storage 失敗仍可關閉，不寫雲端。
 - 第三節 1–10 與 1.7.x 練習規則、1.9.0 正式前後測／互動／反思／影片續播已納入；條件功能清楚標示「老師有開放時才會看到」。反思說明依 allowEdit／截止與保存成功規則。
 - 截圖由實際 React 元件搭配本機合成測試帳號／測試班、記憶體 API 產生；未登入正式帳號、未使用真實名冊。18 張有指示標籤的 1280／390 JPEG 放 `public/guide/img/`，共 **585,690 bytes**（約 0.56 MiB，低於 3 MB）。
-- 兩站建置說明頁截圖：[AP2 1280](unify-1.9.0/guide-ap2-1280.png)、[AP2 390](unify-1.9.0/guide-ap2-390.png)、[MI 1280](unify-1.9.0/guide-mi-1280.png)、[MI 390](unify-1.9.0/guide-mi-390.png)。
+- 兩站建置說明頁截圖：[AP2 1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/guide-ap2-1280.png)、[AP2 390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/guide-ap2-390.png)、[MI 1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/guide-mi-1280.png)、[MI 390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/guide-mi-390.png)。
 
 ## 驗證
 
@@ -66,7 +66,7 @@
 |`VITE_SITE_ID=ap2 npm run check`|157 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
 |`VITE_SITE_ID=mi npm run check`|157 全過、0 skipped|54 全過、0 skipped|全過；51 個入口|
 
-完整輸出：[check-ap2.txt](unify-1.9.0/check-ap2.txt)、[check-mi.txt](unify-1.9.0/check-mi.txt)。
+完整輸出：[check-ap2.txt](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/check-ap2.txt)、[check-mi.txt](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/unify-1.9.0/check-mi.txt)。
 
 額外驗證 `node scripts/guide-site-verify.mjs ap2|mi`：1280／390 未登入讀取、全部說明圖片可載、無外部依賴請求、最小字級 **12.25px**（小字級）、預設／特大字級無溢位、夜間色系與列印展開／還原有效、0 pageerror；並檢查 dist 教材與 CHP 範圍。證據為 `guide-ap2-verification.json`、`guide-mi-verification.json`。React 驗證含三張提示、略過後不重現、課程帳號隔離、storage 拒絕時可略過、登入／首頁連結與來源 ID 逐字輸入。
 

@@ -1,0 +1,82 @@
+{
+  "pass": true,
+  "note": "Large local material directories; example sizes refer to directories with external PNG assets, not inline HTML. No modifications.",
+  "rows": [
+    {
+      "material": "coronary-circulation-v1",
+      "htmlBytes": 77364,
+      "directoryBytes": 11352557,
+      "imageBytes": 11275193,
+      "imageCount": 5,
+      "assets": [
+        {
+          "path": "public/materials/coronary-circulation-v1/assets/coronary-overview-v2.png",
+          "bytes": 2165104,
+          "width": 1086,
+          "height": 1448,
+          "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9"
+        },
+        {
+          "path": "public/materials/coronary-circulation-v1/assets/coronary-diastolic-perfusion-v2.png",
+          "bytes": 2272058,
+          "width": 1086,
+          "height": 1448,
+          "sha256": "f2bf757bdd28f89b8b8c9230f422ae14342aab83ad62cd90751cb47b6b27b43e"
+        },
+        {
+          "path": "public/materials/coronary-circulation-v1/assets/coronary-perfusion-flow-strip-v1.png",
+          "bytes": 2072013,
+          "width": 2172,
+          "height": 724,
+          "sha256": "3e0294f5cf9852440c7fe0f75bd4c6db219b872e4a868670b2bb64c075d9db15"
+        },
+        {
+          "path": "public/materials/coronary-circulation-v1/assets/coronary-lca-branches-v2.png",
+          "bytes": 2434757,
+          "width": 1086,
+          "height": 1448,
+          "sha256": "39fff8f92a79eed9003d6c00ab037fd7b789725a21070ae10b42f657c36463c8"
+        },
+        {
+          "path": "public/materials/coronary-circulation-v1/assets/coronary-atherosclerosis-v2.png",
+          "bytes": 2331261,
+          "width": 1086,
+          "height": 1448,
+          "sha256": "6984431d7c294781bcb458acde54e5d69097eb1d41eb6f58f70676008bf14250"
+        }
+      ],
+      "unchangedFrom": "9205d12e"
+    },
+    {
+      "material": "heart-structure-v2",
+      "htmlBytes": 76059,
+      "directoryBytes": 6170071,
+      "imageBytes": 6094012,
+      "imageCount": 3,
+      "assets": [
+        {
+          "path": "public/materials/heart-structure-v2/assets/coronary-overview-v2.png",
+          "bytes": 2165104,
+          "width": 1086,
+          "height": 1448,
+          "sha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9"
+        },
+        {
+          "path": "public/materials/heart-structure-v2/assets/heart-valve-flow-strip-v1.png",
+          "bytes": 1884360,
+          "width": 2172,
+          "height": 724,
+          "sha256": "eec1a09759f7fe7e456db00a5cb159356b8b0a44a0275bfe105c97f40e6819d1"
+        },
+        {
+          "path": "public/materials/heart-structure-v2/assets/cardiac-conduction-flow-strip-v1.png",
+          "bytes": 2044548,
+          "width": 2172,
+          "height": 724,
+          "sha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6"
+        }
+      ],
+      "unchangedFrom": "9205d12e"
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "slug": "nephron-circulation",
+  "version": "v1",
+  "experience": "guided",
+  "title": "腎元、腎血流與近腎絲球器",
+  "subtitle": "先辨腎元與上皮，再追血流及近腎絲球器，最後區分三種流量。",
+  "label": "腎元、腎血流與近腎絲球器｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "腎小體＋腎小管",
+      "label": "腎元組成"
+    },
+    {
+      "value": "兩型都在皮質",
+      "label": "腎小體的位置"
+    },
+    {
+      "value": "GFR／RPF",
+      "label": "過濾分率 FF"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+    "figure": "nephron-circulation-stage1-base-01.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "短環",
+        "explain": "皮質型環較短。"
+      },
+      {
+        "id": "state-2",
+        "label": "長環",
+        "explain": "近髓質型環深入髓質。"
+      },
+      {
+        "id": "state-3",
+        "label": "訊號",
+        "explain": "近腎絲球器感測與腎素。"
+      }
+    ],
+    "predict": {
+      "question": "由「短環」切到「長環」閱讀主題，哪個比較正確？",
+      "options": [
+        "近髓質腎元的腎小體改位於髓質深部",
+        "近髓質腎元的長環較深入髓質",
+        "皮質腎元的環必定較長",
+        "兩型腎元的血液直接流入集尿管"
+      ],
+      "answer": 1,
+      "feedback": "兩型腎小體仍都在皮質；近髓質型較靠交界且環較長，見節點 02。",
+      "sources": [
+        "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "nephron-circulation-node-01",
+      "tag": "01",
+      "title": "腎元基本構造",
+      "summary": "腎元由腎小體與腎小管構成",
+      "figure": "nephron-circulation-stage1-base-02.svg",
+      "concept": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。",
+      "points": [
+        "腎絲球是腎小體內的微血管叢。",
+        "集尿管接收多個腎元的管液，另列為接續構造。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "沿管液走向找出鮑氏囊與近曲小管的接點，勿把入球小動脈當成管液入口。"
+      },
+      "sources": [
+        "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、6–7 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "nephron-circulation-node-02",
+      "tag": "02",
+      "title": "皮質與近髓質腎元",
+      "summary": "皮質腎元與近髓質腎元的腎小體都在皮質",
+      "figure": "nephron-circulation-stage1-base-01.svg",
+      "concept": "皮質腎元與近髓質腎元的腎小體都在皮質；近髓質型較靠近皮髓交界，亨利氏環較長且深入髓質。",
+      "points": [
+        "皮質型的亨利氏環較短。",
+        "近髓質型的長環與直血管配合濃縮功能。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在同一皮髓交界線比較兩型：先找腎小體，再追環的長短，不能單憑「近髓質」名稱判斷腎小體在髓質。"
+      },
+      "sources": [
+        "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6、8 頁；《生理學》腎臟與體液的恆定，第 4、20 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "nephron-circulation-node-03",
+      "tag": "03",
+      "title": "腎小管各段上皮",
+      "summary": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮",
+      "figure": "nephron-circulation-stage1-base-03.svg",
+      "concept": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮。",
+      "points": [
+        "刷狀緣是辨認近曲小管的線索。",
+        "亨利氏環薄段與較厚管段的上皮不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "觀察三張顯微示意時，先比細胞高低，再看管腔面有無刷狀緣，將形態配回管段。"
+      },
+      "sources": [
+        "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、6–7 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "nephron-circulation-node-04",
+      "tag": "04",
+      "title": "腎臟血流路徑",
+      "summary": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流",
+      "figure": "nephron-circulation-stage1-base-04.svg",
+      "concept": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。",
+      "points": [
+        "腎絲球的前後都接小動脈。",
+        "出球後還有參與小管交換的微血管。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在血流圖停在腎絲球出口時，下一站先找出球小動脈，再追蹤第二套微血管，不能直接跳至腎靜脈。"
+      },
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ],
+      "reference": "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 8、13、27 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "nephron-circulation-node-05",
+      "tag": "05",
+      "title": "近腎絲球器的位置與細胞",
+      "summary": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞",
+      "figure": "nephron-circulation-stage1-base-05.svg",
+      "concept": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。",
+      "points": [
+        "近腎絲球細胞分泌腎素。",
+        "緻密斑感受的是管液鈉變化。",
+        "感測管液與分泌腎素由不同細胞分工。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "把感測點分成小管側與血管側：在遠曲小管找緻密斑，在入球壁找分泌腎素的細胞。"
+      },
+      "sources": [
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ],
+      "reference": "《解剖學》泌尿系統，第 6 頁；《生理學》腎臟與體液的恆定，第 4、6–7 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "nephron-circulation-node-06",
+      "tag": "06",
+      "title": "血流、血漿流量與過濾分率",
+      "summary": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿",
+      "figure": "nephron-circulation-stage1-placeholder.svg",
+      "concept": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿；腎絲球過濾率 GFR 是每分鐘形成的濾液體積。",
+      "points": [
+        "過濾分率 FF＝GFR／RPF。",
+        "FF 的分母是血漿流量，而非全部血流量。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較兩個流量前先辨認液體所屬區間；算過濾分率時，讓濾液體積流率除以血漿體積流率。"
+      },
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ],
+      "reference": "《解剖學》泌尿系統，第 8 頁；《生理學》腎臟與體液的恆定，第 8、13、27 頁。",
+      "caption": "圖面佔位。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "nephron-circulation-foundation-q01",
+      "stem": "腎元的基本組成為何？",
+      "options": [
+        "腎小體與腎小管",
+        "腎盂與輸尿管",
+        "膀胱與尿道",
+        "腎被膜與腎筋膜"
+      ],
+      "answer": 0,
+      "hint": "先找過濾單位，再找接續的管段。",
+      "explain": "腎小體與腎小管構成腎元；集尿管接收多個腎元的管液，另作接續構造。",
+      "nodeId": "nephron-circulation-node-01",
+      "sources": [
+        "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+      ]
+    },
+    {
+      "id": "nephron-circulation-foundation-q02",
+      "stem": "比較皮質與近髓質腎元，哪一項正確？",
+      "options": [
+        "近髓質型腎小體在髓質深部",
+        "兩型腎小體都位於皮質",
+        "兩型亨利氏環都只在皮質",
+        "皮質型亨利氏環較長且深入髓質"
+      ],
+      "answer": 1,
+      "hint": "將腎小體的位置與環的長短分開。",
+      "explain": "兩型腎小體均在皮質；近髓質型靠近交界且環較長，不能把近髓質等同髓質內。",
+      "nodeId": "nephron-circulation-node-02",
+      "sources": [
+        "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+      ]
+    },
+    {
+      "id": "nephron-circulation-foundation-q03",
+      "stem": "有明顯刷狀緣的立方上皮，最符合哪個管段？",
+      "options": [
+        "亨利氏環薄段",
+        "遠曲小管",
+        "近曲小管",
+        "鮑氏囊腔"
+      ],
+      "answer": 2,
+      "hint": "比較管腔面與細胞形狀。",
+      "explain": "近曲小管有刷狀緣，遠曲無明顯刷狀緣，亨利氏環薄段則為扁平上皮。",
+      "nodeId": "nephron-circulation-node-03",
+      "sources": [
+        "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+      ]
+    },
+    {
+      "id": "nephron-circulation-foundation-q04",
+      "stem": "腎絲球前後相接的血管依序為何？",
+      "options": [
+        "入球小靜脈、出球小靜脈",
+        "腎靜脈、入球小動脈",
+        "管周微血管、腎動脈",
+        "入球小動脈、出球小動脈"
+      ],
+      "answer": 3,
+      "hint": "先以進入或離開腎絲球命名。",
+      "explain": "血液由入球小動脈進腎絲球，再由出球小動脈離開，之後還有管周微血管或直血管。",
+      "nodeId": "nephron-circulation-node-04",
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "nephron-circulation-foundation-q05",
+      "stem": "近腎絲球器中，感受管液鈉變化的是何者？",
+      "options": [
+        "遠曲小管的緻密斑",
+        "入球壁的近腎絲球細胞",
+        "鮑氏囊壁層",
+        "腎盂上皮"
+      ],
+      "answer": 0,
+      "hint": "感測對象是管液，應先找小管側。",
+      "explain": "緻密斑位於遠曲小管並感受管液鈉；近腎絲球細胞位於入球小動脈壁，分泌腎素。",
+      "nodeId": "nephron-circulation-node-05",
+      "sources": [
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "nephron-circulation-foundation-q06",
+      "stem": "過濾分率 FF 的算法為何？",
+      "options": [
+        "GFR／RBF",
+        "GFR／RPF",
+        "RBF／GFR",
+        "RPF／GFR"
+      ],
+      "answer": 1,
+      "hint": "分母要對應可被過濾的血漿流量。",
+      "explain": "FF 是 GFR 除以腎血漿流量 RPF，不能將包含血球的 RBF 直接代為分母。",
+      "nodeId": "nephron-circulation-node-06",
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "nephron-circulation-case-q01",
+      "stem": "【定位觀察】某腎元的長環深入髓質，腎小體靠近皮髓交界。腎小體仍應標在哪一區？",
+      "options": [
+        "髓質深部",
+        "腎盂",
+        "皮質",
+        "腎乳頭出口"
+      ],
+      "answer": 2,
+      "hint": "不要用環深入的區域取代腎小體位置。",
+      "explain": "近髓質腎元的腎小體在靠近交界的皮質，深入髓質的是長環。",
+      "nodeId": "nephron-circulation-node-02",
+      "sources": [
+        "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+      ]
+    },
+    {
+      "id": "nephron-circulation-case-q02",
+      "stem": "【血流追蹤】血液剛離開出球小動脈，下一段應接何者？",
+      "options": [
+        "鮑氏囊腔",
+        "輸尿管",
+        "直接進入腎靜脈",
+        "管周微血管或直血管"
+      ],
+      "answer": 3,
+      "hint": "離開腎絲球後還需要小管交換區。",
+      "explain": "出球小動脈接管周微血管或直血管；血流通路不應接入管液通路，也不是立刻進腎靜脈。",
+      "nodeId": "nephron-circulation-node-04",
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ]
+    },
+    {
+      "id": "nephron-circulation-case-q03",
+      "stem": "【切片觀察】一段位於髓質深處的細管，管壁為扁平上皮，最可能是哪段？",
+      "options": [
+        "亨利氏環薄段",
+        "近曲小管",
+        "遠曲小管",
+        "集尿管"
+      ],
+      "answer": 0,
+      "hint": "先比較細胞高低，再排除立方上皮管段。",
+      "explain": "亨利氏環薄段為扁平上皮；近曲與遠曲小管則為立方上皮，刷狀緣用於區分後兩者。",
+      "nodeId": "nephron-circulation-node-03",
+      "sources": [
+        "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+      ]
+    },
+    {
+      "id": "nephron-circulation-case-q04",
+      "stem": "【訊號配對】要在近腎絲球器標出腎素分泌來源，應選哪個位置？",
+      "options": [
+        "遠曲小管緻密斑",
+        "入球小動脈壁的近腎絲球細胞",
+        "腎盂內面",
+        "鮑氏囊壁層"
+      ],
+      "answer": 1,
+      "hint": "將感受管液的細胞與分泌腎素者分開。",
+      "explain": "分泌腎素的是入球小動脈壁近腎絲球細胞；緻密斑是管液鈉感測點。",
+      "nodeId": "nephron-circulation-node-05",
+      "sources": [
+        "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+      ]
+    },
+    {
+      "id": "nephron-circulation-case-q05",
+      "stem": "【流量判讀】同學以 GFR 除以全部腎血流量來算 FF，應修正哪個項目？",
+      "options": [
+        "分子改為腎血流量",
+        "把兩者都改成尿中物質濃度",
+        "分母改為腎血漿流量",
+        "將分子分母互換即可"
+      ],
+      "answer": 2,
+      "hint": "先確認過濾分率的血液區間。",
+      "explain": "FF 的分母為 RPF；RBF 包含血球，與定義中的血漿流量不同。",
+      "nodeId": "nephron-circulation-node-06",
+      "sources": [
+        "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 5–6、8 頁；《生理學》腎臟與體液的恆定，第 4、6–8、13、20、27 頁。",
+    "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+  ]
+}

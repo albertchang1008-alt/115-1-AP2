@@ -1,0 +1,37 @@
+{
+  "baseline": "81243fa",
+  "pass": true,
+  "approvedScriptSha256": "a6f8ae051a98a0460f5ff6019a544d3146b50ecba4011414a7e880bf916c1a4d",
+  "results": [
+    {
+      "file": "materials-src/acid-base-homeostasis/full.json",
+      "byteIdentical": true,
+      "sha256": "1db2a5662260f2d89684d4b58b4a985d3a8334d623daa30e327d1b8260a66ef5"
+    },
+    {
+      "file": "materials-src/acid-base-homeostasis/apply.json",
+      "byteIdentical": true,
+      "sha256": "8663e52dec5f37de64a21b1d65d1f3298d48753c00c6e00fef0b8e8bd9fc1de9"
+    },
+    {
+      "file": "materials-src/acid-base-homeostasis/content.json",
+      "byteIdentical": true,
+      "sha256": "ed4ef9af96b0565927ead9ca2918e29f7669eccff603bb34a1b3dc143d742b70"
+    },
+    {
+      "file": "docs/classroom/mindmap-relay/acidbase.relay.json",
+      "byteIdentical": true,
+      "sha256": "18589ea88a1b7f8ae3bebe6b4bc2322b642648e5f2b20c8ffbd2532308183eae"
+    },
+    {
+      "file": "materials-src/apply-kit/full.js",
+      "byteIdentical": true,
+      "sha256": "eaad3fb22562f4c2be21181d894b1b3d8c5c8d352a0997dd3b2f214511782aab"
+    },
+    {
+      "file": "materials-src/apply-kit/full.css",
+      "byteIdentical": true,
+      "sha256": "03209442f4497b4c27b16adf82d3c219abd4b8e62923555c847a9388b271368d"
+    }
+  ]
+}

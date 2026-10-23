@@ -1,0 +1,4630 @@
+{
+  "pass": false,
+  "questions": 126,
+  "flagged": 12,
+  "allowed": 0,
+  "unresolved": 12,
+  "keywordVocabulary": [
+    "碳酸氫根",
+    "碳酸",
+    "氫離子",
+    "二氧化碳",
+    "血紅素",
+    "紅血球",
+    "銨離子",
+    "緩衝",
+    "呼吸",
+    "代謝",
+    "酸中毒",
+    "鹼中毒",
+    "pH",
+    "HCO₃⁻",
+    "H₂CO₃",
+    "CO₂",
+    "NH₃",
+    "NH₄⁺",
+    "NaCl",
+    "MgCl₂",
+    "Mg²⁺",
+    "Cl⁻",
+    "Na⁺",
+    "K⁺",
+    "PTH",
+    "ADH",
+    "RAAS",
+    "ACE",
+    "V2",
+    "GFR",
+    "RPF",
+    "FF",
+    "PAH",
+    "鈉離子",
+    "鉀離子",
+    "氯離子",
+    "鎂離子",
+    "氯化鎂",
+    "氯化鈉",
+    "葡萄糖",
+    "酵素",
+    "神經肌肉",
+    "鈉通道",
+    "水通道",
+    "溶質",
+    "滲透",
+    "細胞內",
+    "細胞外",
+    "血漿",
+    "組織間液",
+    "蛋白質",
+    "白蛋白",
+    "副甲狀腺素",
+    "鈣",
+    "磷",
+    "鈉",
+    "鉀",
+    "水量",
+    "尿量",
+    "尿比重",
+    "密度",
+    "腎絲球過濾率",
+    "腎絲球",
+    "血管",
+    "靜水壓",
+    "腎血漿流量",
+    "腎血流量",
+    "腎錐體",
+    "腎乳頭",
+    "鮑氏囊",
+    "菊糖",
+    "肌酸酐",
+    "清除率",
+    "皮質",
+    "髓質",
+    "腎上腺",
+    "腎臟",
+    "腎柱",
+    "腎被膜",
+    "脂肪囊",
+    "腎筋膜",
+    "膀胱",
+    "紅血球生成",
+    "維生素D",
+    "腎小體",
+    "腎小管",
+    "腎元",
+    "近曲小管",
+    "遠曲小管",
+    "亨利氏環",
+    "近髓質",
+    "刷狀緣",
+    "近腎絲球器",
+    "近腎絲球細胞",
+    "緻密斑",
+    "入球小動脈",
+    "出球小動脈",
+    "管周微血管",
+    "直血管",
+    "腎素",
+    "過濾分率",
+    "分泌",
+    "再吸收",
+    "共同運輸",
+    "醛固酮",
+    "輸尿管",
+    "尿道",
+    "交叉",
+    "蠕動",
+    "尿道外括約肌",
+    "尿道內括約肌",
+    "括約肌",
+    "骨骼肌",
+    "逼尿肌",
+    "迫尿肌",
+    "膀胱三角",
+    "陰神經",
+    "下降枝",
+    "上升枝",
+    "逆流交換",
+    "逆流增強",
+    "集尿管",
+    "受器",
+    "抗利尿激素",
+    "代謝水",
+    "無知覺蒸散",
+    "口渴",
+    "血管收縮素",
+    "血管收縮"
+  ],
+  "rows": [
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F1",
+      "sha256": "cf4b9c89bebe72316b50338fbb9a96767a373f9bdb065772fa3fd74c086ce299",
+      "stem": "身體有緩衝（先接住多出的酸）、肺和腎臟，它們怎麼合作維持血液的酸鹼？",
+      "options": [
+        "先接酸、肺排二氧化碳、腎排酸留鹼",
+        "先接酸、肺回收鹼、腎排二氧化碳",
+        "先排酸、肺接住酸、腎回收鹼",
+        "先留酸、肺排二氧化碳、腎排掉鹼"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "先接"
+        },
+        {
+          "length": 2,
+          "text": "先接"
+        },
+        {
+          "length": 2,
+          "text": "接住"
+        },
+        {
+          "length": 2,
+          "text": "酸肺"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F2",
+      "sha256": "24af7d669ea67515fe09c151da355a4b810de21c94cb3a414429af1b4cc78aa2",
+      "stem": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸；用課本算式比較兩者時，要怎麼算？",
+      "options": [
+        "碳酸的量 ÷ 碳酸氫根的量",
+        "碳酸氫根的量 ÷ 碳酸的量",
+        "碳酸氫根的量 ＋ 碳酸的量",
+        "碳酸氫根的量 − 碳酸的量"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F3",
+      "sha256": "94ecb23814c410e35813d015f612ec0f312a0c693df3b8b554762bfcd8d7a569",
+      "stem": "氫離子（H⁺）越多越酸；緩衝系統像接球一樣接住或放出氫離子，直接有什麼幫助？",
+      "options": [
+        "讓酸隨著尿液排出體外",
+        "讓二氧化碳隨呼氣排出",
+        "讓酸不酸的數字（pH）較少變動",
+        "讓血液與尿液一起變酸"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "酸"
+        },
+        {
+          "length": 1,
+          "text": "出"
+        },
+        {
+          "length": 1,
+          "text": "h"
+        },
+        {
+          "length": 1,
+          "text": "酸"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F4",
+      "sha256": "ad5f2713f718cd0fb5a6fd0dcc39fb1a3f2cbdd9d0432b278f9091e13630008b",
+      "stem": "其他條件一樣，肺真正排出的二氧化碳（CO₂，會影響血液酸不酸的氣體）增加時，對血液有什麼影響？",
+      "options": [
+        "酸增加，血液比較酸",
+        "酸不變，只有尿液變酸",
+        "酸不變，只是呼吸變快",
+        "酸減少，血液比較不酸"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "血液"
+        },
+        {
+          "length": 2,
+          "text": "酸不"
+        },
+        {
+          "length": 2,
+          "text": "酸不"
+        },
+        {
+          "length": 2,
+          "text": "血液"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F5",
+      "sha256": "4588ac30667ed66779a316b9b2fea14d64d21e0f11ebccfe27d49b8936d8e1da",
+      "stem": "腎臟幫血液減酸時，氫離子（H⁺，讓液體變酸）和碳酸氫根（HCO₃⁻，接酸的鹼）各往哪裡去？",
+      "options": [
+        "氫離子進腎小管液，碳酸氫根回血液",
+        "氫離子進腎小管液，碳酸氫根也進管液",
+        "氫離子回血液，碳酸氫根也回血液",
+        "氫離子回血液，碳酸氫根進腎小管液"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "F6",
+      "sha256": "8878e514462eca02b49ae6e1bb689930af718c23ac9270a267ae949d3322fd50",
+      "stem": "氨（NH₃）會接住氫離子（H⁺，讓液體變酸）；這能怎麼幫腎臟排酸？",
+      "options": [
+        "形成碳酸氫根，隨尿帶走酸",
+        "形成銨（NH₄⁺），隨尿帶走酸",
+        "形成銨（NH₄⁺），回血液帶走酸",
+        "形成碳酸，回血液帶走酸"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "氫"
+        },
+        {
+          "length": 2,
+          "text": "nh"
+        },
+        {
+          "length": 2,
+          "text": "nh"
+        },
+        {
+          "length": 1,
+          "text": "液"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "P-A",
+      "sha256": "0f3f1dfdbf7c00b24a9b46db0b96b225786de4e3d6135d2a91f9ae475fba39ca",
+      "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）增加；表示酸不酸的數字（pH）會怎麼變？",
+      "options": [
+        "變大，血液比較不酸",
+        "變小，血液比較酸",
+        "不變，鹼的量不影響它",
+        "先變小，最後回到原來的值"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "不酸"
+        },
+        {
+          "length": 1,
+          "text": "酸"
+        },
+        {
+          "length": 3,
+          "text": "的量不"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "P-B",
+      "sha256": "40313e0ebd262cc6ffd5f968116639b8e5c57a815ab9d889034c1771d182c0a2",
+      "stem": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）減少；表示酸不酸的數字（pH）會怎麼變？",
+      "options": [
+        "不變，鹼的量不影響它",
+        "變大，血液比較不酸",
+        "變小，血液比較酸",
+        "先變大，最後回到原來的值"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "的量不"
+        },
+        {
+          "length": 2,
+          "text": "不酸"
+        },
+        {
+          "length": 1,
+          "text": "酸"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "R-A",
+      "sha256": "bfece80674d9517f1fd1081a870d8cc5a1a269c7336f4d5ad7f05c0e204ced8a",
+      "stem": "這次血液變酸的主要原因是呼吸排不掉二氧化碳（CO₂），血中二氧化碳增加，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "options": [
+        "代謝性鹼中毒（身體的酸減少或鹼增加）",
+        "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+        "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+        "代謝性酸中毒（身體的酸增加或鹼減少）"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "增加"
+        },
+        {
+          "length": 9,
+          "text": "呼吸排不掉二氧化碳"
+        },
+        {
+          "length": 4,
+          "text": "二氧化碳"
+        },
+        {
+          "length": 2,
+          "text": "增加"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "longest-exclusive",
+          "correct": {
+            "length": 9,
+            "text": "呼吸排不掉二氧化碳"
+          },
+          "distractorMax": 4
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "R-B",
+      "sha256": "96ce84a9ea5b77fa09a516bdda7c2bd48dd362e2c5b330ddebcf313cc7527ae7",
+      "stem": "這次血液變不酸的主要原因是呼吸排出較多二氧化碳（CO₂），血中二氧化碳減少，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "options": [
+        "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+        "代謝性酸中毒（身體的酸增加或鹼減少）",
+        "代謝性鹼中毒（身體的酸減少或鹼增加）",
+        "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 10,
+          "text": "呼吸排出較多二氧化碳"
+        },
+        {
+          "length": 2,
+          "text": "減少"
+        },
+        {
+          "length": 2,
+          "text": "減少"
+        },
+        {
+          "length": 4,
+          "text": "二氧化碳"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "longest-exclusive",
+          "correct": {
+            "length": 10,
+            "text": "呼吸排出較多二氧化碳"
+          },
+          "distractorMax": 4
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "K-A",
+      "sha256": "d57a3588a9680249fb9c69d994b55b93886f903554f20502fdb639931f2e5306",
+      "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把更多銨（帶著酸的NH₄⁺）排進尿液，也把更多碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，這有什麼幫助？",
+      "options": [
+        "尿液更酸，也讓血液更酸",
+        "把鹼排掉，讓血液比較不酸",
+        "排酸留鹼，幫血液比較不酸",
+        "把酸留住，讓血液的鹼增加"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "讓血液"
+        },
+        {
+          "length": 3,
+          "text": "讓血液"
+        },
+        {
+          "length": 2,
+          "text": "血液"
+        },
+        {
+          "length": 3,
+          "text": "讓血液"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "K-B",
+      "sha256": "6cb48223bc31ce9ed56ff5acaf7ddc968fda28752e165f2f00dc87a9b43c9b90",
+      "stem": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，也把氫離子（H⁺，讓液體變酸）送進管液，這兩件事怎麼配合？",
+      "options": [
+        "一起排酸留鹼，讓血液比較不酸",
+        "一起把酸留住，讓血液比較酸",
+        "一起把鹼排掉，讓血液比較酸",
+        "留下鹼會抵銷排酸，血液酸鹼不變"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "讓血液"
+        },
+        {
+          "length": 3,
+          "text": "讓血液"
+        },
+        {
+          "length": 3,
+          "text": "讓血液"
+        },
+        {
+          "length": 2,
+          "text": "血液"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "N-A",
+      "sha256": "e218e2c3d13b135de1adf5011fd15f383204ea8bf7ce04bbb5db983ee018bfc9",
+      "stem": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+      "options": [
+        "能，接住酸就等於酸已消失",
+        "能，形成銨就等於尿已排出",
+        "不能，因為氨還沒接住氫離子",
+        "不能，接住酸和排出酸是兩件事"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "接住"
+        },
+        {
+          "length": 3,
+          "text": "形成銨"
+        },
+        {
+          "length": 5,
+          "text": "接住氫離子"
+        },
+        {
+          "length": 2,
+          "text": "接住"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "N-B",
+      "sha256": "e58a92af16deda65b6d9ee077366ed4571a8f2d2be4b0f90fe3862079f8eb77a",
+      "stem": "銨（NH₄⁺，由氨接住讓液體變酸的氫離子而形成）已隨尿排出體外；與只在體內接住酸相比，有什麼不同？",
+      "options": [
+        "酸還在體內，只是換成銨的形式",
+        "只有水排出，銨帶著的酸仍在體內",
+        "銨帶著酸，已隨尿排到體外",
+        "酸和接酸的鹼，都要一起隨尿排出"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "在體內"
+        },
+        {
+          "length": 3,
+          "text": "在體內"
+        },
+        {
+          "length": 4,
+          "text": "已隨尿排"
+        },
+        {
+          "length": 4,
+          "text": "隨尿排出"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "S-A",
+      "sha256": "859d5c5d13abc1ee141e60734e61747a12bd67057d820db2e49eb0c7397586a8",
+      "stem": "這次血液變酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）減少，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "options": [
+        "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+        "代謝性酸中毒（身體的酸增加或鹼減少）",
+        "代謝性鹼中毒（身體的酸減少或鹼增加）",
+        "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "變酸"
+        },
+        {
+          "length": 3,
+          "text": "鹼減少"
+        },
+        {
+          "length": 2,
+          "text": "減少"
+        },
+        {
+          "length": 1,
+          "text": "變"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "full",
+      "slug": "acid-base-homeostasis",
+      "id": "S-B",
+      "sha256": "8154579b2d5025648d0cedec21e378e6e33168185a5bdb8c1e7ce6354958502f",
+      "stem": "這次血液變不酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "options": [
+        "呼吸性鹼中毒（呼吸排出較多二氧化碳而變不酸）",
+        "代謝性酸中毒（身體的酸增加或鹼減少）",
+        "呼吸性酸中毒（呼吸排不掉二氧化碳而變酸）",
+        "代謝性鹼中毒（身體的酸減少或鹼增加）"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "變不酸"
+        },
+        {
+          "length": 2,
+          "text": "增加"
+        },
+        {
+          "length": 1,
+          "text": "變"
+        },
+        {
+          "length": 3,
+          "text": "鹼增加"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q01",
+      "sha256": "f47fb32a0632c6ae9b4c5cd9089382ffe1762f59b737358a8bca8b3ac65b339c",
+      "stem": "腎臟在身體的哪個位置？",
+      "options": [
+        "在腹膜後面靠背部，右腎通常比左腎低一點",
+        "在腹膜腔裡面，右腎通常比左腎高一點",
+        "在骨盆腔裡，左右腎臟一樣高",
+        "在胸腔裡，左腎通常比右腎低一點"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 2,
+          "text": "腎臟"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q02",
+      "sha256": "a3fd7f5074bd12341bd254a961a28ff06729d1335c5ff1116c4ed0c8541fc092",
+      "stem": "腎臟裡的「腎柱」是什麼？",
+      "options": [
+        "腎錐體的尖端",
+        "伸進腎錐體之間的皮質",
+        "從腎盂接出去的輸尿管",
+        "包在腎臟外面的脂肪囊"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 2,
+          "text": "腎臟"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q03",
+      "sha256": "9dd926a3360729a2b2530e33b57976ef5e8fbda7f4a29b4b448c31f72d6873a6",
+      "stem": "尿液從腎乳頭（腎錐體的尖端）流出後，先進入哪裡？",
+      "options": [
+        "腎絲球",
+        "大腎盞",
+        "小腎盞",
+        "腎門"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q04",
+      "sha256": "8352f7b1ca194fc3dedee6e13760f81910f0b7cbdd0e93632d2c8f6cd8ea4212",
+      "stem": "從貼著腎臟表面的位置往外數，三層保護構造的順序是什麼？",
+      "options": [
+        "脂肪囊、腎筋膜、腎被膜",
+        "腎筋膜、腎被膜、脂肪囊",
+        "腎被膜、腎筋膜、脂肪囊",
+        "腎被膜、脂肪囊、腎筋膜"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q05",
+      "sha256": "1a309a34de7dc89019a92800ab29759f94f4038eb33f6b49f77e1c0e2d0592d9",
+      "stem": "腎臟與膀胱各做什麼工作？",
+      "options": [
+        "腎臟製造尿液，膀胱暫存尿液",
+        "輸尿管製造尿液，尿道暫存尿液",
+        "膀胱製造尿液，腎臟把尿排到體外",
+        "尿道把尿送到膀胱，輸尿管把尿排到體外"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "腎臟"
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 2,
+          "text": "腎臟"
+        },
+        {
+          "length": 2,
+          "text": "膀胱"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "foundation",
+      "id": "kidney-anatomy-foundation-q06",
+      "sha256": "e88d8b12df95f939af8bf2caa6fdb7065f2a74bdac3570938fe37d6bf1a13d2c",
+      "stem": "腎臟的紅血球生成素（腎紅血球生成因子）主要幫忙做什麼？",
+      "options": [
+        "減少紅血球生成",
+        "增加紅血球生成",
+        "增加白血球生成",
+        "增加血小板生成"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 5,
+          "text": "紅血球生成"
+        },
+        {
+          "length": 5,
+          "text": "紅血球生成"
+        },
+        {
+          "length": 4,
+          "text": "血球生成"
+        },
+        {
+          "length": 2,
+          "text": "生成"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "id": "kidney-anatomy-case-q01",
+      "sha256": "03031cdd2dc4ead828a69bbb082da4cd7616a0893d62477e529ab14fb9ba36a6",
+      "stem": "兩個腎錐體之間有一塊組織，和外層皮質連在一起，它叫什麼？",
+      "options": [
+        "腎乳頭",
+        "腎盂",
+        "腎柱",
+        "腎被膜"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "id": "kidney-anatomy-case-q02",
+      "sha256": "8e78a642e8d1e23d2c4951b90cf6c9a1db72730215b69bfe82c78e7b468a53bb",
+      "stem": "集尿管把尿送到腎乳頭後，尿接下來會依序流過哪三個地方？",
+      "options": [
+        "大腎盞、小腎盞、腎盂",
+        "腎盂、大腎盞、小腎盞",
+        "腎絲球、小腎盞、輸尿管",
+        "小腎盞、大腎盞、腎盂"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 2,
+          "text": "尿管"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "id": "kidney-anatomy-case-q03",
+      "sha256": "2ad5349b288c7d7650563f11e82f941f5965c3c663b7f515ec782c9dc16dd9a2",
+      "stem": "尿液離開腎盂後，先送到膀胱，再排到身體外面，這兩段各走哪條管？",
+      "options": [
+        "先輸尿管，再尿道",
+        "先尿道，再輸尿管",
+        "先輸尿管，再腎小管",
+        "先腎小管，再尿道"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "id": "kidney-anatomy-case-q04",
+      "sha256": "5d8ab6383f98fcc54410067c079d6da5d079049fd369a72c139c706bb0adb661",
+      "stem": "腎上腺在腎臟附近，這表示它和腎臟有什麼關係？",
+      "options": [
+        "腎上腺就是腎錐體的尖端",
+        "腎上腺在腎臟旁邊，是另一個器官",
+        "腎上腺就是伸進髓質的腎柱",
+        "腎上腺就是收集尿液的腎盂"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 3,
+          "text": "腎上腺"
+        },
+        {
+          "length": 6,
+          "text": "腎上腺在腎臟"
+        },
+        {
+          "length": 3,
+          "text": "腎上腺"
+        },
+        {
+          "length": 3,
+          "text": "腎上腺"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "longest-exclusive",
+          "correct": {
+            "length": 6,
+            "text": "腎上腺在腎臟"
+          },
+          "distractorMax": 3
+        },
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "腎臟"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "kidney-anatomy",
+      "stage": "cases",
+      "id": "kidney-anatomy-case-q05",
+      "sha256": "85b73ac5fb84b8ca1a0da256f8e20053c0ff70b103d7f4ad4d99ddee99df3da6",
+      "stem": "如果只用「尿有多少」介紹腎臟，還會漏掉哪一組工作？",
+      "options": [
+        "輸尿管送尿、尿道排尿",
+        "腎盞接尿、腎盂收集尿",
+        "發出造血訊號、活化維生素D",
+        "膀胱儲尿、括約肌管出口"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q01",
+      "sha256": "1611ddb658f89b8f78efa5fd27f943f14ee5c0d64116a6797f38473077e0f94b",
+      "stem": "腎元是腎臟裡處理液體的小單位，它由哪兩部分組成？",
+      "options": [
+        "腎小體與腎小管",
+        "腎盂與輸尿管",
+        "膀胱與尿道",
+        "腎被膜與腎筋膜"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q02",
+      "sha256": "06015519303e4a8d8fa7f17812e7ea8665e1a3d31e725c25c9f5cee2a74ba83f",
+      "stem": "皮質腎元和近髓質腎元是兩種腎元，它們的腎小體在哪裡？",
+      "options": [
+        "近髓質型的腎小體在髓質深處",
+        "兩種的腎小體都在皮質",
+        "兩種的亨利氏環都只在皮質",
+        "皮質型的亨利氏環較長，伸到髓質深處"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 5,
+          "text": "的腎小體在"
+        },
+        {
+          "length": 4,
+          "text": "的腎小體"
+        },
+        {
+          "length": 2,
+          "text": "皮質"
+        },
+        {
+          "length": 2,
+          "text": "皮質"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q03",
+      "sha256": "2782a313fb80fe61837801cdff5e2b6d96dbab0afe7e64b5e66be94f108514b3",
+      "stem": "某段腎小管的細胞像小方塊，內側有一圈細刷毛般的「刷狀緣」，最像哪一段？",
+      "options": [
+        "亨利氏環薄段",
+        "遠曲小管",
+        "近曲小管",
+        "鮑氏囊腔"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "段"
+        },
+        {
+          "length": 2,
+          "text": "小管"
+        },
+        {
+          "length": 2,
+          "text": "小管"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q04",
+      "sha256": "c37d69eb0f70a5d4c88561ff4d1c771e3a3a954b1d87ff78da38d13ed3d23eeb",
+      "stem": "血液進出腎絲球時，先走進來和再走出去的血管各叫什麼？",
+      "options": [
+        "入球小靜脈、出球小靜脈",
+        "腎靜脈、入球小動脈",
+        "管周微血管、腎動脈",
+        "入球小動脈、出球小動脈"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 1,
+          "text": "出"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 2,
+          "text": "血管"
+        },
+        {
+          "length": 1,
+          "text": "出"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q05",
+      "sha256": "d389970dea16941f1d52f762ca2bc2db80ae55f412219e0fce72409d716e9364",
+      "stem": "近腎絲球器是小管與血管靠近的感測站，其中誰負責感受管液裡的鈉變化？",
+      "options": [
+        "遠曲小管的緻密斑",
+        "入球血管壁的近腎絲球細胞",
+        "鮑氏囊外壁的細胞",
+        "腎盂內面的細胞"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "小管"
+        },
+        {
+          "length": 4,
+          "text": "近腎絲球"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "foundation",
+      "id": "nephron-circulation-foundation-q06",
+      "sha256": "a13c831b28ac1e32c9032933063fa82d9898ddaa40060708a1607905b88b2e0d",
+      "stem": "過濾分率（FF）是在問送到腎臟的血漿有多少比例被濾出去，應怎麼算？",
+      "options": [
+        "每分鐘濾出的量（GFR）除以腎血流量（RBF）",
+        "每分鐘濾出的量（GFR）除以腎血漿流量（RPF）",
+        "腎血流量（RBF）除以每分鐘濾出的量（GFR）",
+        "腎血漿流量（RPF）除以每分鐘濾出的量（GFR）"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "濾出"
+        },
+        {
+          "length": 2,
+          "text": "血漿"
+        },
+        {
+          "length": 2,
+          "text": "濾出"
+        },
+        {
+          "length": 2,
+          "text": "血漿"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "id": "nephron-circulation-case-q01",
+      "sha256": "ecd34f6a9756769a4a9b4943d74f37d5edcaf6f495d47fd9fc224820c3840108",
+      "stem": "某腎元的亨利氏環很長，伸進髓質深處，腎小體靠近皮質與髓質交界，腎小體仍在哪一區？",
+      "options": [
+        "髓質深處",
+        "腎盂",
+        "皮質",
+        "腎乳頭出口"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 4,
+          "text": "髓質深處"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 2,
+          "text": "皮質"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "皮質"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "id": "nephron-circulation-case-q02",
+      "sha256": "2c41a03ca33b70a8c7926a3864207d4693159cd32143c8a73c213847725c22df",
+      "stem": "血液剛離開出球小動脈，接下來會進入哪裡？",
+      "options": [
+        "入球小動脈",
+        "腎絲球微血管",
+        "腎靜脈",
+        "管周微血管或直血管"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 4,
+          "text": "球小動脈"
+        },
+        {
+          "length": 1,
+          "text": "血"
+        },
+        {
+          "length": 1,
+          "text": "脈"
+        },
+        {
+          "length": 1,
+          "text": "血"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "id": "nephron-circulation-case-q03",
+      "sha256": "71a912df12ff98ccfb06f452c82b656a567b2d7ce3cf9aceb9f45a78446d51e4",
+      "stem": "在腎髓質深處看到一段細管，管壁是很扁的「扁平上皮」，最像哪一段？",
+      "options": [
+        "亨利氏環薄段",
+        "近曲小管",
+        "遠曲小管",
+        "集尿管"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "段"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "id": "nephron-circulation-case-q04",
+      "sha256": "149d9443a3643b07b49a532148fb66021c52111f7bbc648051c879f4f7b7aec6",
+      "stem": "近腎絲球器會幫忙調節腎臟的血流，其中分泌腎素的細胞在哪裡？",
+      "options": [
+        "遠曲小管的緻密斑",
+        "入球小動脈壁的近腎絲球細胞",
+        "腎盂內面",
+        "鮑氏囊外壁"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 4,
+          "text": "近腎絲球"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "腎絲球"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "nephron-circulation",
+      "stage": "cases",
+      "id": "nephron-circulation-case-q05",
+      "sha256": "9b0dc06e63ce73328551a4031a64c6f2826edb8e763977fcfe268b9dfc960677",
+      "stem": "同學算過濾分率（FF）時，把每分鐘濾出的量（GFR）除以整份腎血流量，應改哪裡？",
+      "options": [
+        "上面的數改成腎血流量",
+        "上面的數改成腎血漿流量",
+        "下面的數改成腎血漿流量",
+        "把上面和下面的數交換"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 4,
+          "text": "腎血流量"
+        },
+        {
+          "length": 2,
+          "text": "腎血"
+        },
+        {
+          "length": 2,
+          "text": "腎血"
+        },
+        {
+          "length": 1,
+          "text": "把"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q01",
+      "sha256": "8616b1acb1d22b7816f877cd7664f8d3e1ffa5dcb2a31431f3cdbb72a21a2e3e",
+      "stem": "腎絲球先把血液裡的水和部分物質濾出來，它們會往哪裡走？",
+      "options": [
+        "從腎絲球微血管進入鮑氏囊腔",
+        "從鮑氏囊腔進入入球小動脈",
+        "從腎盂進入腎皮質",
+        "從膀胱進入輸尿管"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "腎絲球"
+        },
+        {
+          "length": 1,
+          "text": "球"
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "腎絲球"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q02",
+      "sha256": "f0807a524f6737f558cda33c08053da76325fddb0ac6653379bccbecb9e566d8",
+      "stem": "腎絲球有三層過濾膜，像連在一起的濾網，它們是哪三層？",
+      "options": [
+        "微血管內皮、腎被膜、鮑氏囊壁層",
+        "微血管內皮、基底膜、足細胞",
+        "近曲小管、遠曲小管、集尿管",
+        "入球小動脈、出球小動脈、腎靜脈"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 1,
+          "text": "膜"
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "腎"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q03",
+      "sha256": "b57eb3361d82747026443dc97b3a484594b2aca956dc0daf8cbc210f24a91510",
+      "stem": "血漿是血液裡不含血球的液體，和剛濾進鮑氏囊的液體相比，哪種物質的量差別最明顯？",
+      "options": [
+        "血漿裡的血球",
+        "兩邊的水",
+        "兩邊的白蛋白",
+        "兩邊的葡萄糖"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "血漿"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q04",
+      "sha256": "af20d748d935e7f3a27f21bf5379b6b8f83f44b796a6a132967ae404ac0104c3",
+      "stem": "哪一種力量會把水從腎絲球血管推進鮑氏囊，幫忙過濾？",
+      "options": [
+        "鮑氏囊裡的水往回頂的壓力",
+        "血漿蛋白把水拉回血管的力量（膠體滲透壓）",
+        "尿道外括約肌收緊的力量",
+        "腎絲球血管裡的水往外推的壓力（靜水壓）"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "鮑氏囊"
+        },
+        {
+          "length": 2,
+          "text": "力量"
+        },
+        {
+          "length": 2,
+          "text": "力量"
+        },
+        {
+          "length": 5,
+          "text": "腎絲球血管"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "腎絲球"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q05",
+      "sha256": "e35bfdb54ab00b833d8f0421e4320631040ca3379570febb53e642f2a659a2d3",
+      "stem": "清除率的算式是「尿中物質有多濃 × 每分鐘尿量 ÷ 血漿中有多濃」（C＝U×V／P），算出的數字在說什麼？",
+      "options": [
+        "每分鐘相當清掉多少毫升血漿裡的那種物質",
+        "每分鐘從尿裡排掉多少毫克的那種物質",
+        "每毫升尿裡裝了多少毫克的那種物質",
+        "一天從膀胱排掉多少毫升的尿"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "每分鐘"
+        },
+        {
+          "length": 3,
+          "text": "每分鐘"
+        },
+        {
+          "length": 2,
+          "text": "物質"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "血漿"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "foundation",
+      "id": "filtration-clearance-foundation-q06",
+      "sha256": "a7d860cc378dd8346ca19318952c6c7d130d738df6279f1cd0d9461c8e063a2f",
+      "stem": "哪一種物質在腎臟只被濾出，不被小管收回、也不額外送進管液，清除率可代表腎絲球過濾率（GFR）？",
+      "options": [
+        "PAH（對胺馬尿酸）",
+        "菊糖",
+        "葡萄糖",
+        "尿素"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "cases",
+      "id": "filtration-clearance-case-q01",
+      "sha256": "68a60f1302629616b97b3ef0de165b1e3ce5d5b6b618791a4fcfb1f27d738d34",
+      "stem": "收集了一小時的尿，要放進清除率公式中的「每分鐘尿量」，應先怎麼算？",
+      "options": [
+        "把一小時尿量乘以60",
+        "把一小時尿量直接放進去",
+        "把一小時尿量除以60",
+        "把一小時尿量除以血漿有多濃"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "一小時"
+        },
+        {
+          "length": 3,
+          "text": "一小時"
+        },
+        {
+          "length": 3,
+          "text": "一小時"
+        },
+        {
+          "length": 3,
+          "text": "一小時"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "cases",
+      "id": "filtration-clearance-case-q02",
+      "sha256": "6f41ded706497ee7c8519efd17624628aa48cf914b47f62eea7426dd65c5524f",
+      "stem": "某物質的清除率算出是69毫升／分鐘（69 mL/min），這是在說什麼？",
+      "options": [
+        "每分鐘排出69毫克的這種物質",
+        "每分鐘形成69毫升的最後尿液",
+        "每毫升尿裡有69毫克的這種物質",
+        "每分鐘相當清掉69毫升血漿裡的這種物質"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "69毫"
+        },
+        {
+          "length": 4,
+          "text": "69毫升"
+        },
+        {
+          "length": 3,
+          "text": "69毫"
+        },
+        {
+          "length": 4,
+          "text": "69毫升"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "cases",
+      "id": "filtration-clearance-case-q03",
+      "sha256": "9efc6c4a644d452df8f7adab528f0cb0cad9d497c3be8d4098af75758d67ae4d",
+      "stem": "菊糖和肌酸酐都能幫忙了解每分鐘濾出多少液體（腎絲球過濾率，GFR），它們在腎小管裡有什麼不同？",
+      "options": [
+        "肌酸酐會被少量分泌，菊糖不會",
+        "菊糖會被大量收回，肌酸酐不會被濾出",
+        "兩種都靠分泌才進入尿液",
+        "兩種都不會被腎小管分泌"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "肌酸酐"
+        },
+        {
+          "length": 3,
+          "text": "肌酸酐"
+        },
+        {
+          "length": 1,
+          "text": "都"
+        },
+        {
+          "length": 3,
+          "text": "腎小管"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "cases",
+      "id": "filtration-clearance-case-q04",
+      "sha256": "e6e9119c8cec7998acdf6d005979cfcfa8b38b746235f870c674b71b02a68040",
+      "stem": "用PAH（對胺馬尿酸）的清除率估算腎臟流量時，為什麼不能直接把結果當成整份腎血流量？",
+      "options": [
+        "它估算的是膀胱能裝多少尿",
+        "它估的是血漿流量，換成整份血流還要算血漿比例",
+        "它不會被濾出，也不會被分泌",
+        "血漿流量和整份血流量數字相同"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "估算"
+        },
+        {
+          "length": 3,
+          "text": "成整份"
+        },
+        {
+          "length": 1,
+          "text": "不"
+        },
+        {
+          "length": 3,
+          "text": "血流量"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "filtration-clearance",
+      "stage": "cases",
+      "id": "filtration-clearance-case-q05",
+      "sha256": "cf3c7940548f3c53bacdbcf796f5017ca8752527ce7a155437c06cfc94d4332e",
+      "stem": "剛進鮑氏囊的濾液和血漿裡，葡萄糖一樣濃，最可能是為什麼？",
+      "options": [
+        "鮑氏囊把葡萄糖分泌進去",
+        "濾液裡的血球把葡萄糖放出來",
+        "葡萄糖能通過過濾膜",
+        "白蛋白把葡萄糖一起帶過去"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "鮑氏囊"
+        },
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 4,
+          "text": "葡萄糖一"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q01",
+      "sha256": "9d09d4f6ee7e473e3392e7fb4a8a7f5f04f72a5c25c696a4b1904136b2b1ae08",
+      "stem": "小管裡原本被濾出的物質，又回到血液，這個動作叫什麼？",
+      "options": [
+        "再吸收",
+        "分泌",
+        "腎絲球過濾",
+        "排泄到體外"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "濾"
+        },
+        {
+          "length": 1,
+          "text": "到"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q02",
+      "sha256": "7181633e924e36a65619ca1d542cc6a700c0e859209f0e1be587c15610204936",
+      "stem": "想算同一種物質最後隨尿排出多少，哪一個加減算式正確？",
+      "options": [
+        "先濾出＋收回血液－額外送進管液",
+        "先濾出－收回血液＋額外送進管液",
+        "收回血液－先濾出＋額外送進管液",
+        "先濾出＋收回血液＋額外送進管液"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "出"
+        },
+        {
+          "length": 1,
+          "text": "出"
+        },
+        {
+          "length": 1,
+          "text": "出"
+        },
+        {
+          "length": 1,
+          "text": "出"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q03",
+      "sha256": "28970d80357a9bd962b0f800cbfd7ad9c584355a9541cc8b5bce3e151a4b6136",
+      "stem": "在近曲小管，葡萄糖和水各用什麼方式回到血液？",
+      "options": [
+        "葡萄糖跟著水移動，水搭鈉離子的共同運輸",
+        "葡萄糖從血液送進管液，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收",
+        "葡萄糖搭鈉離子的共同運輸，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收",
+        "葡萄糖和鈉離子反向移動，水靠滲透（隔著能通水、卻不通物質的膜，水往小粒子較多側移，叫做滲透）回收"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 4,
+          "text": "葡萄糖和"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q04",
+      "sha256": "1b01e120fba47f7a4d86cf8a27daa74920a0d9f5f6fe618cb7eca668a11ebd97",
+      "stem": "腎小管回收葡萄糖也有速度上限，「葡萄糖最大轉運量」指的是什麼？",
+      "options": [
+        "尿裡葡萄糖有多濃的固定數字",
+        "腎臟每分鐘血流量的上限",
+        "膀胱一天能存多少尿的上限",
+        "每分鐘能搬運多少葡萄糖的上限"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        },
+        {
+          "length": 2,
+          "text": "上限"
+        },
+        {
+          "length": 2,
+          "text": "上限"
+        },
+        {
+          "length": 3,
+          "text": "葡萄糖"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q05",
+      "sha256": "fdf6598a5e9f609ca3ba30dc6ab30680aa9f4a4654dc64366107af9055461596",
+      "stem": "醛固酮是幫忙調整鈉與鉀的激素，它在腎小管後段會怎麼做？",
+      "options": [
+        "把鈉收回血液，把鉀送進管液",
+        "把鈉送進管液，把鉀收回血液",
+        "把鈉和鉀都送進管液",
+        "讓鈉和鉀都停止移動"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "鈉"
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "foundation",
+      "id": "tubular-handling-foundation-q06",
+      "sha256": "c4b9dc39c3e54d3de9c1fdeb53ca5dc828e8eedf4af570ba0680ab9c23f024e5",
+      "stem": "看到尿裡某種物質比較濃，就能說腎小管把更多這種物質分泌進尿裡嗎？",
+      "options": [
+        "能，尿有多濃就是分泌的速度",
+        "不能，還要看收回多少水、每分鐘排多少尿",
+        "能，尿有多濃就是腎絲球過濾率",
+        "不能，尿變濃表示收回血液的物質更多"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "濃就"
+        },
+        {
+          "length": 1,
+          "text": "看"
+        },
+        {
+          "length": 2,
+          "text": "濃就"
+        },
+        {
+          "length": 2,
+          "text": "物質"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "cases",
+      "id": "tubular-handling-case-q01",
+      "sha256": "b70b2ea811867399845a758562dc9be6e4daea8a17712488e7b3185e65c65319",
+      "stem": "某種物質從小管旁的血液移進小管裡的液體，這個動作叫什麼？",
+      "options": [
+        "再吸收",
+        "從膀胱排尿",
+        "分泌",
+        "腎絲球過濾"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "從"
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "cases",
+      "id": "tubular-handling-case-q02",
+      "sha256": "47362a26e0d18a891024a8de3a20d9a94e6992cfbe0ac3511303c3346b559e81",
+      "stem": "同一種物質，先濾出和額外送進管液的量都不變，但收回血液的量變多，最後隨尿排出的量會怎麼變？",
+      "options": [
+        "變多",
+        "不變",
+        "還不能知道，要先知道每分鐘尿量",
+        "變少"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "變多"
+        },
+        {
+          "length": 2,
+          "text": "不變"
+        },
+        {
+          "length": 1,
+          "text": "先"
+        },
+        {
+          "length": 1,
+          "text": "變"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "cases",
+      "id": "tubular-handling-case-q03",
+      "sha256": "34de19dbe35152d182b4a83231fb3b47e00aa58f617e4fdb187b7c2b69295000",
+      "stem": "兩份尿裡的同一種物質一樣濃，甲每分鐘排出的尿比較多，哪個說法正確？",
+      "options": [
+        "甲每分鐘排掉的這種物質比較多",
+        "甲乙每分鐘排掉的這種物質一樣多",
+        "甲每分鐘排掉的這種物質比較少",
+        "可以知道甲的小管分泌增加了"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 5,
+          "text": "甲每分鐘排"
+        },
+        {
+          "length": 5,
+          "text": "種物質一樣"
+        },
+        {
+          "length": 5,
+          "text": "甲每分鐘排"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "cases",
+      "id": "tubular-handling-case-q04",
+      "sha256": "1b7c1aac34dd33667cd15b9440ce201cd9496930d22f457b268612eae1fa8a4a",
+      "stem": "正常情況下，送進腎小管的葡萄糖沒有超過回收能力，搬運功能也正常，葡萄糖會怎樣？",
+      "options": [
+        "被額外分泌進尿，才排得出去",
+        "能被小管收回血液",
+        "因搬運位置已滿，而留在尿裡",
+        "靠分泌從管液回到血液"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "進"
+        },
+        {
+          "length": 2,
+          "text": "小管"
+        },
+        {
+          "length": 2,
+          "text": "搬運"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "tubular-handling",
+      "stage": "cases",
+      "id": "tubular-handling-case-q05",
+      "sha256": "c7cedb4023dad43e0cc3be79d78c22632b7a2a19cbdc49ed914d6d45b1420415",
+      "stem": "醛固酮增加時，腎小管後段的鈉和鉀會往哪裡走？",
+      "options": [
+        "鈉從血進管液，鉀從管液回血",
+        "鈉和鉀都從血進管液",
+        "鈉從管液回血，鉀從血進管液",
+        "鈉和鉀都從管液回血"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 3,
+          "text": "鈉和鉀"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 3,
+          "text": "鈉和鉀"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q01",
+      "sha256": "e975126a039126124fde59dd507a7715a858c86db634ee6d02f2052ba8eef524",
+      "stem": "想讓最後的尿變濃，腎髓質周圍和集尿管要怎麼配合？",
+      "options": [
+        "周圍物質較多，集尿管也能讓水通過",
+        "周圍物質較多，集尿管不讓水通過",
+        "周圍物質較少，集尿管能讓水通過",
+        "周圍物質較多，上升枝能讓水通過"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "集尿管"
+        },
+        {
+          "length": 3,
+          "text": "集尿管"
+        },
+        {
+          "length": 3,
+          "text": "集尿管"
+        },
+        {
+          "length": 2,
+          "text": "周圍"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q02",
+      "sha256": "4040def54f0b4bf664d07d8485e0fd621bf89b675ae84b4060b94c62bbc450cf",
+      "stem": "亨利氏環像一段彎下去再上來的小管，它的下降枝主要怎麼處理水？",
+      "options": [
+        "不讓水通過，主動把鹽送出去",
+        "讓水通過，水往管外物質較多處移出",
+        "讓水通過，水往管內移入",
+        "讓水通過，水移出後管內變淡"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "去"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q03",
+      "sha256": "e42008c24ae8f1485e326eed710b596188581a31baf0db8fc334db32f922c8ee",
+      "stem": "亨利氏環的上升枝把氯化鈉（NaCl，一種鹽）收回血液時，水能一起穿過它的管壁嗎？",
+      "options": [
+        "水和鹽一起通過，比例相同",
+        "水能通過，鹽不能回收",
+        "水不能穿過管壁",
+        "水能不能通過，要看膀胱壓力"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "一起"
+        },
+        {
+          "length": 2,
+          "text": "水能"
+        },
+        {
+          "length": 2,
+          "text": "穿過"
+        },
+        {
+          "length": 2,
+          "text": "水能"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q04",
+      "sha256": "d3aafa7ded0f911306035611f7caa48eb83adf2fec2daaac34683a381ecafd4e",
+      "stem": "腎髓質周圍有濃淡差，稱為滲透梯度，旁邊的直血管主要怎麼保住這個差別？",
+      "options": [
+        "做逆流增強，建立髓質的濃淡差",
+        "加快血流，把髓質的鹽帶走",
+        "替集尿管開水通道，回收水",
+        "做逆流交換，減少髓質物質被帶走"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "濃淡差"
+        },
+        {
+          "length": 2,
+          "text": "髓質"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 2,
+          "text": "髓質"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q05",
+      "sha256": "e2f71077570fbb590f4854f06e656283e9c29540bd5455cf8a6feedba81adaf8",
+      "stem": "受器像接收激素訊號的接收站。抗利尿激素（ADH，叫腎臟把水留下來的訊號）會用哪個受器，幫集尿管多開水通道？",
+      "options": [
+        "用V2受器，增加水通道，讓水更容易通過",
+        "用V2受器，減少水通道，讓水更難通過",
+        "用V2受器，增加鈉通道，讓鈉更容易通過",
+        "用醛固酮受器，增加水通道，讓水更容易通過"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "水通道"
+        },
+        {
+          "length": 3,
+          "text": "水通道"
+        },
+        {
+          "length": 2,
+          "text": "受器"
+        },
+        {
+          "length": 3,
+          "text": "水通道"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "foundation",
+      "id": "urine-concentration-foundation-q06",
+      "sha256": "056e92df7f0d81d2d585d7d3ead0795d0d02d551a02aa63bb2e872b149008c66",
+      "stem": "抗利尿激素（ADH，幫腎臟留水的訊號）比較多，其他條件都相同時，尿會怎麼變？",
+      "options": [
+        "尿變多，也變淡",
+        "尿變少，也變濃",
+        "尿變少，也變淡",
+        "尿變多，也變濃"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "id": "urine-concentration-case-q01",
+      "sha256": "82f36d889cbb2240d20695fe0318c818dded12c855a19b1dec627aff5ccd4316",
+      "stem": "某段小管會把氯化鈉（NaCl，一種鹽）收回，水卻穿不過管壁，最像哪一段？",
+      "options": [
+        "亨利氏環下降枝",
+        "尿道",
+        "亨利氏環上升枝",
+        "膀胱"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "id": "urine-concentration-case-q02",
+      "sha256": "9814aca06c86e01903acbad37d0cfeb20b7a81d42720c3c04432c160a356d53c",
+      "stem": "亨利氏環是處理管液的小管，直血管是運血的血管，它們在逆流機制中各做什麼？",
+      "options": [
+        "亨利氏環做逆流交換，直血管做逆流增強",
+        "亨利氏環做逆流增強，直血管也做逆流增強",
+        "亨利氏環做逆流交換，直血管也做逆流交換",
+        "亨利氏環做逆流增強，直血管做逆流交換"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 4,
+          "text": "亨利氏環"
+        },
+        {
+          "length": 4,
+          "text": "亨利氏環"
+        },
+        {
+          "length": 4,
+          "text": "亨利氏環"
+        },
+        {
+          "length": 4,
+          "text": "亨利氏環"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "id": "urine-concentration-case-q03",
+      "sha256": "e4c3aea959c0444b6a499972356d0bab8839d5931613cd0d292abca665175457",
+      "stem": "集尿管的水通道變多，水也更容易通過，最直接是哪個訊號在作用？",
+      "options": [
+        "抗利尿激素ADH，透過V2受器（受器像接收激素訊號的接收站）",
+        "醛固酮，直接增加水通道",
+        "抗利尿激素ADH，透過V2減少水通道",
+        "腎素，直接增加水通道"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "訊號"
+        },
+        {
+          "length": 3,
+          "text": "水通道"
+        },
+        {
+          "length": 3,
+          "text": "水通道"
+        },
+        {
+          "length": 3,
+          "text": "水通道"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "id": "urine-concentration-case-q04",
+      "sha256": "db6cd825836fa02c720e7a45fb606f5c91a62300e6bd6a54dddb63316dba4225",
+      "stem": "髓質周圍已經有濃淡差，能吸引水移出，但集尿管不太能通水，還能得到同樣濃的尿嗎？",
+      "options": [
+        "能，外面的濃淡差可以代替水通道",
+        "不能，集尿管也要能讓水通過",
+        "能，只要尿在膀胱裡存一樣久",
+        "不能，因為上升枝也要讓水通過"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 3,
+          "text": "濃淡差"
+        },
+        {
+          "length": 3,
+          "text": "集尿管"
+        },
+        {
+          "length": 1,
+          "text": "能"
+        },
+        {
+          "length": 1,
+          "text": "能"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "集尿管"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "urine-concentration",
+      "stage": "cases",
+      "id": "urine-concentration-case-q05",
+      "sha256": "9e3d69d7d096b78209c920248d84eade606341fd14b7576a4e996bb21a1dece7",
+      "stem": "抗利尿激素（ADH）是叫腎臟把水留下來的訊號，如果ADH變少，其他條件都一樣，水和尿會怎麼變？",
+      "options": [
+        "留下的水變多，尿變少、變濃",
+        "留下的水不變，尿量與濃淡不變",
+        "留下的水變少，尿變多、變淡",
+        "留下的水變少，尿變少、變濃"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "留下"
+        },
+        {
+          "length": 2,
+          "text": "留下"
+        },
+        {
+          "length": 2,
+          "text": "留下"
+        },
+        {
+          "length": 2,
+          "text": "留下"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q01",
+      "sha256": "3dee2e8c17d8c0d0f7bb12229a99b2261aa1982058090a6a069aefdd19700bd4",
+      "stem": "輸尿管怎麼把尿送到膀胱，又怎麼幫忙防止尿倒流？",
+      "options": [
+        "管壁一段段收縮送尿，斜穿膀胱壁幫忙防倒流",
+        "靠重力送尿，末端另有一片獨立瓣膜",
+        "先在膀胱製尿，再沿輸尿管送回腎盂",
+        "靠尿道收縮，代替輸尿管把尿送到膀胱"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "幫忙防"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 3,
+          "text": "輸尿管"
+        },
+        {
+          "length": 6,
+          "text": "把尿送到膀胱"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q02",
+      "sha256": "0535a7a47c523eeab98007b7d19ffe880ea6d785d1152d708f081e839e1b08c6",
+      "stem": "輸尿管從腎盂通到膀胱，沿路有三個較窄的地方，中間那個在哪裡？",
+      "options": [
+        "腎門和腎筋膜交界",
+        "與髂外動脈及靜脈交叉的地方",
+        "尿道通到體外的開口",
+        "膀胱出口的尿道內口"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "腎"
+        },
+        {
+          "length": 3,
+          "text": "的地方"
+        },
+        {
+          "length": 2,
+          "text": "通到"
+        },
+        {
+          "length": 2,
+          "text": "膀胱"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q03",
+      "sha256": "870d831642897ac1c97b735dd26186dbc28c51f2eed7c5e65dbe110c242f5458",
+      "stem": "膀胱三角是膀胱內的一塊三角區域，它的三個角由哪三處界定？",
+      "options": [
+        "左右輸尿管口和尿道外口",
+        "左右腎盂開口和尿道內口",
+        "左右輸尿管口和尿道內口",
+        "左右輸尿管口和膀胱頂"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "內"
+        },
+        {
+          "length": 1,
+          "text": "內"
+        },
+        {
+          "length": 2,
+          "text": "膀胱"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q04",
+      "sha256": "08fb37965339f8ca731deb5233c12cb0f45b7f2ad7c5b4d8b8c73c5576056dff",
+      "stem": "哪一個尿道括約肌是骨骼肌，能讓我們用意識暫時管住排尿出口？",
+      "options": [
+        "尿道內括約肌",
+        "膀胱壁的逼尿肌（迫尿肌）",
+        "輸尿管壁的平滑肌",
+        "尿道外括約肌"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 3,
+          "text": "括約肌"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 3,
+          "text": "括約肌"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q05",
+      "sha256": "4ba64214ac9644667b0c07590dc65a9f8634836c263774552199f7bd40ee09b5",
+      "stem": "排尿時，膀胱壁的逼尿肌（迫尿肌）和尿液出口要怎麼配合？",
+      "options": [
+        "膀胱壁收縮，出口放鬆",
+        "膀胱壁放鬆，出口緊閉",
+        "膀胱壁收縮，出口也緊閉",
+        "輸尿管停止蠕動，出口緊閉"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "膀胱壁"
+        },
+        {
+          "length": 3,
+          "text": "膀胱壁"
+        },
+        {
+          "length": 3,
+          "text": "膀胱壁"
+        },
+        {
+          "length": 2,
+          "text": "出口"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "foundation",
+      "id": "urinary-route-micturition-foundation-q06",
+      "sha256": "cfc4d528d32e4c207ced560a5d6f1ca7fde4fd342ad4c35025870d8dc24cd942",
+      "stem": "酸不酸的數字叫pH，數字越小越酸。記錄尿液時，每日尿量、尿比重和pH各是在說什麼？",
+      "options": [
+        "三個都在說一天排出幾毫升尿",
+        "尿量看每日容量，比重看相對密度，pH看酸鹼",
+        "尿比重的單位是每天幾公升",
+        "pH是在說一天排出多少物質"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "在說"
+        },
+        {
+          "length": 2,
+          "text": "ph"
+        },
+        {
+          "length": 3,
+          "text": "尿比重"
+        },
+        {
+          "length": 3,
+          "text": "是在說"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "尿量"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "cases",
+      "id": "urinary-route-micturition-case-q01",
+      "sha256": "216200537e3440e3207e61672ae054b57e9fa25549156bfb12ae53051d112cf1",
+      "stem": "輸尿管斜斜地穿過膀胱壁，膀胱內壓增加會把這段壓閉，這有什麼作用？",
+      "options": [
+        "表示末端另有一片獨立瓣膜",
+        "像閥門一樣，有助防止尿倒流",
+        "讓尿從膀胱倒流回腎盂",
+        "讓輸尿管不必再蠕動送尿"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "有"
+        },
+        {
+          "length": 1,
+          "text": "尿"
+        },
+        {
+          "length": 2,
+          "text": "膀胱"
+        },
+        {
+          "length": 3,
+          "text": "輸尿管"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "cases",
+      "id": "urinary-route-micturition-case-q02",
+      "sha256": "2268bbbc56f8525f8ecb28eda1eaeb0a6de7e6bfc126e725893eb56ccdefab81",
+      "stem": "一滴尿從腎盂流向膀胱，會依序經過輸尿管哪三個較窄的地方？",
+      "options": [
+        "先膀胱壁，再髂外血管交叉，最後腎盂交接",
+        "先髂外血管交叉，再腎盂交接，最後膀胱壁",
+        "先腎盂交接，再髂外血管交叉，最後膀胱壁",
+        "先腎盂交接，再尿道內口，最後膀胱壁"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "腎盂"
+        },
+        {
+          "length": 2,
+          "text": "腎盂"
+        },
+        {
+          "length": 2,
+          "text": "腎盂"
+        },
+        {
+          "length": 2,
+          "text": "腎盂"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "cases",
+      "id": "urinary-route-micturition-case-q03",
+      "sha256": "e2e12840c34f3996ca1c209a59121300bdeb944597c69b6ed286c15e03e9b68e",
+      "stem": "要在膀胱裡找出膀胱三角，應找哪三處來定出範圍？",
+      "options": [
+        "左右輸尿管口和尿道外口",
+        "左右腎盂開口和尿道內口",
+        "左右輸尿管口和膀胱頂",
+        "左右輸尿管口和尿道內口"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 2,
+          "text": "膀胱"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "cases",
+      "id": "urinary-route-micturition-case-q04",
+      "sha256": "8859feec1051a9fcc69e35590630776f0c6ef16deaafdeb07fc742eed2e58ba7",
+      "stem": "想用意識暫時控制排尿出口，主要是哪一條神經和哪塊肌肉在配合？",
+      "options": [
+        "陰神經與尿道外括約肌",
+        "副交感神經與尿道外括約肌",
+        "陰神經與尿道內括約肌",
+        "交感神經與尿道外括約肌"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "神經"
+        },
+        {
+          "length": 2,
+          "text": "神經"
+        },
+        {
+          "length": 2,
+          "text": "神經"
+        },
+        {
+          "length": 2,
+          "text": "神經"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "urinary-route-micturition",
+      "stage": "cases",
+      "id": "urinary-route-micturition-case-q05",
+      "sha256": "7787d0af76225bc2d3101dc88ec0ffd5833810727c1419eb8631d7e2328c857d",
+      "stem": "尿液紀錄同時寫了每日尿量和尿比重，應怎麼看這兩個數字？",
+      "options": [
+        "尿量一樣，比重就一樣",
+        "用比重直接換成每日尿量",
+        "一個看每日容量，一個看相對密度，分開來看",
+        "兩個都在說尿液酸不酸"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "尿量"
+        },
+        {
+          "length": 4,
+          "text": "每日尿量"
+        },
+        {
+          "length": 2,
+          "text": "每日"
+        },
+        {
+          "length": 2,
+          "text": "尿液"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q01",
+      "sha256": "f5bb5fa2adc8d9a21c0ed5b90b4b5214318b87f357fd71f20ad5044a79cbf43a",
+      "stem": "課本用「全身的水約占60%」作標準例子，這60%是在和什麼相比？",
+      "options": [
+        "全身體重",
+        "細胞裡的水",
+        "血漿的量",
+        "細胞之間的水"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "全身"
+        },
+        {
+          "length": 2,
+          "text": "的水"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 2,
+          "text": "的水"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q02",
+      "sha256": "d9cd74299dafbc1b26895371ab38377375ebf33a4d9dae4cffa33752556e83a8",
+      "stem": "先把全身的水當成一整份，細胞內液和細胞外液各分到多少？",
+      "options": [
+        "細胞內一半，細胞外一半",
+        "細胞內三分之二，細胞外三分之一",
+        "細胞內三分之一，細胞外三分之二",
+        "細胞內五分之四，細胞外五分之一"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 3,
+          "text": "細胞內"
+        },
+        {
+          "length": 3,
+          "text": "細胞內"
+        },
+        {
+          "length": 3,
+          "text": "細胞內"
+        },
+        {
+          "length": 3,
+          "text": "細胞內"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q03",
+      "sha256": "edced1713013c54acf184dea8c129b80f895f4c510b8185b81194a3a61a7544b",
+      "stem": "血漿占20%、細胞之間的組織間液占80%，這兩個比例是在分哪一整份水？",
+      "options": [
+        "全身總水量",
+        "細胞內液",
+        "細胞外液",
+        "全身體重"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "水"
+        },
+        {
+          "length": 2,
+          "text": "細胞"
+        },
+        {
+          "length": 2,
+          "text": "細胞"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q04",
+      "sha256": "e8fdeb548961ca97e24e8c8e2600515ae43f44333f186d2e6a954e85c450f3c3",
+      "stem": "同一個標準例子說血漿占體重4%、組織間液占體重16%，把兩項合起來是什麼？",
+      "options": [
+        "先加成20%，再多加一次外液20%",
+        "合起來就是細胞內液",
+        "兩項都改說成占血漿的比例",
+        "合起來是占體重20%的細胞外液"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 1,
+          "text": "一"
+        },
+        {
+          "length": 3,
+          "text": "合起來"
+        },
+        {
+          "length": 2,
+          "text": "血漿"
+        },
+        {
+          "length": 4,
+          "text": "合起來是"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q05",
+      "sha256": "7eb181b510ab24b2900712292cf7b6cc425606651b797025ffe124249aa25cd8",
+      "stem": "血漿在血管內，組織間液在細胞之間，兩邊的重要差別是什麼？",
+      "options": [
+        "血漿的蛋白質比較多",
+        "組織間液沒有小離子",
+        "組織間液的蛋白質比較多",
+        "兩邊的蛋白質差不多"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "血漿"
+        },
+        {
+          "length": 4,
+          "text": "組織間液"
+        },
+        {
+          "length": 4,
+          "text": "組織間液"
+        },
+        {
+          "length": 3,
+          "text": "兩邊的"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "血漿"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "foundation",
+      "id": "fluid-compartments-foundation-q06",
+      "sha256": "10a13470b52406769b8c305152c718b7daf9f4b19ef3696c81751db3f4195011",
+      "stem": "課本說女性全身水量約占體重55%、男性約65%，使用這些比例時要注意什麼？",
+      "options": [
+        "脂肪多少不會影響身體含水比例",
+        "男女的條件會影響身體含水比例",
+        "每個人都用標準60%就好",
+        "55%和65%是拿水和細胞外液相比"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "比例"
+        },
+        {
+          "length": 2,
+          "text": "比例"
+        },
+        {
+          "length": 1,
+          "text": "6"
+        },
+        {
+          "length": 2,
+          "text": "55"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "cases",
+      "id": "fluid-compartments-case-q01",
+      "sha256": "59e06ec06fe0f336fbc02cc9d7d2ad5048deab5a784bee15292bcbad04090de5",
+      "stem": "知道一個人的體重，並採用「全身水約占體重60%」的例子，想分出細胞內外各有多少水，第一步要算什麼？",
+      "options": [
+        "把整個體重當成細胞裡的水",
+        "把血漿比例當成全身水比例",
+        "先用體重算出全身共有多少水",
+        "直接把體重當成血漿的量"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "體重"
+        },
+        {
+          "length": 3,
+          "text": "全身水"
+        },
+        {
+          "length": 4,
+          "text": "有多少水"
+        },
+        {
+          "length": 2,
+          "text": "體重"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "cases",
+      "id": "fluid-compartments-case-q02",
+      "sha256": "dc671a45c63c028f8ec0e053b6262cc2d91eb1666e69f82c6dcbe4b51c40e5f0",
+      "stem": "血漿雖然在血管裡，但以「在不在細胞裡」來分，它屬於哪一類？",
+      "options": [
+        "細胞內液",
+        "腎小管內液",
+        "紅血球裡的液體",
+        "細胞外液"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "細胞"
+        },
+        {
+          "length": 1,
+          "text": "管"
+        },
+        {
+          "length": 1,
+          "text": "血"
+        },
+        {
+          "length": 2,
+          "text": "細胞"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "cases",
+      "id": "fluid-compartments-case-q03",
+      "sha256": "ad4d0219376f23c79acd3da6580522665e6fe88a13a5d59bd43673ad8c7f412c",
+      "stem": "這個例子用全身水占體重60%、血漿占體重4%、組織間液占16%，另一份資料卻用不同數字，應怎麼整理？",
+      "options": [
+        "保留本例的比較基準和比例，另一例另外列",
+        "把4%和16%改說成占細胞外液的比例",
+        "把4%和16%改說成細胞內液的兩部分",
+        "把4%改說成占全身總水量的比例"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "另一"
+        },
+        {
+          "length": 2,
+          "text": "16"
+        },
+        {
+          "length": 2,
+          "text": "16"
+        },
+        {
+          "length": 2,
+          "text": "全身"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "cases",
+      "id": "fluid-compartments-case-q04",
+      "sha256": "6b9aca206353b27873c6d12018e1b0a632fac4390f313cc4eca1b668f9c70cd6",
+      "stem": "兩位成年男女體重一樣，要估算身體有多少水，還要把什麼差異算進去？",
+      "options": [
+        "主要看年齡，男女差異可以省略",
+        "男女與脂肪比例的差異",
+        "男女都用60%，不再看其他條件",
+        "把女性的含水比例設得比男性高"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "男女"
+        },
+        {
+          "length": 2,
+          "text": "男女"
+        },
+        {
+          "length": 2,
+          "text": "男女"
+        },
+        {
+          "length": 1,
+          "text": "男"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "fluid-compartments",
+      "stage": "cases",
+      "id": "fluid-compartments-case-q05",
+      "sha256": "bd4c5079c821791dd9ba28a004e3f6f5e0ea8a94fa456fdf94def0ab40771f63",
+      "stem": "正常血漿和組織間液都有小離子，為什麼血漿通常有比較多蛋白質？",
+      "options": [
+        "微血管壁會主動把外面的蛋白質搬回血漿",
+        "微血管壁讓蛋白質自由通過，兩邊應一樣多",
+        "微血管壁不太讓蛋白質通過，較多留在血漿",
+        "微血管壁擋住小離子，卻讓蛋白質容易通過"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "蛋白質"
+        },
+        {
+          "length": 3,
+          "text": "蛋白質"
+        },
+        {
+          "length": 3,
+          "text": "蛋白質"
+        },
+        {
+          "length": 3,
+          "text": "小離子"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q01",
+      "sha256": "0d2ee8c1cd5f9fbd200975b2dfa2bfc51bf53f2ed927db651c1f17bc16624d25",
+      "stem": "一天補進身體的水，應把哪三種來源算進去？",
+      "options": [
+        "喝進的液體、食物裡的水、身體產生的代謝水",
+        "喝進的液體，不算食物和代謝水",
+        "尿液、呼氣與糞便帶走的水",
+        "流汗和皮膚慢慢散掉的水"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "身體"
+        },
+        {
+          "length": 1,
+          "text": "進"
+        },
+        {
+          "length": 2,
+          "text": "的水"
+        },
+        {
+          "length": 2,
+          "text": "的水"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q02",
+      "sha256": "598a769b795d6492e8077d74faf358c653165a5fcdb298316774af79fb442c7f",
+      "stem": "沒有看到汗流出來時，皮膚還會失去水分嗎？",
+      "options": [
+        "不會，而且呼氣也沒有水",
+        "會，仍有看不見的無知覺蒸散",
+        "不會，皮膚此時不會排水",
+        "不會，這些水都改從糞便排掉"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "沒有"
+        },
+        {
+          "length": 2,
+          "text": "有看"
+        },
+        {
+          "length": 2,
+          "text": "皮膚"
+        },
+        {
+          "length": 1,
+          "text": "會"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q03",
+      "sha256": "6ea4c5d7f06aaf568d4cdd69275ae7262c04ea2110b71f47b1825c419afeaf07",
+      "stem": "身體缺水時，口渴和抗利尿激素（ADH，叫腎臟留水的訊號）主要各做什麼？",
+      "options": [
+        "口渴幫小管開水門，ADH讓人喝水",
+        "口渴讓人喝水，ADH讓小管更難通水",
+        "口渴讓人喝水，ADH讓小管更容易通水",
+        "口渴讓人喝水，ADH直接促鈉回收"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 3,
+          "text": "adh"
+        },
+        {
+          "length": 3,
+          "text": "adh"
+        },
+        {
+          "length": 3,
+          "text": "adh"
+        },
+        {
+          "length": 3,
+          "text": "adh"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q04",
+      "sha256": "23b52ee0d0d0546bb6d57be0526253ccc216c358937193e6a3a6f1104896b3b1",
+      "stem": "腎素—血管收縮素—醛固酮系統（RAAS）是一條調血壓的訊號鏈，哪個物質直接讓血管收縮？",
+      "options": [
+        "腎素",
+        "血管收縮素原",
+        "尿裡的物質",
+        "血管收縮素II"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "腎素"
+        },
+        {
+          "length": 5,
+          "text": "血管收縮素"
+        },
+        {
+          "length": 2,
+          "text": "物質"
+        },
+        {
+          "length": 5,
+          "text": "血管收縮素"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q05",
+      "sha256": "6ecda2a233d12f1c75bb82378b31543412270505a472468d32bb287c312b1a34",
+      "stem": "醛固酮和抗利尿激素（ADH）都會影響留水，它們最直接的工作怎麼配？",
+      "options": [
+        "醛固酮促鈉回收，ADH讓水更容易通過",
+        "醛固酮直接開水通道，ADH不調整水通過",
+        "ADH主要促鈉回收，醛固酮不調整鈉",
+        "醛固酮促鈉排出，ADH促水回收"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "醛固酮"
+        },
+        {
+          "length": 3,
+          "text": "醛固酮"
+        },
+        {
+          "length": 3,
+          "text": "醛固酮"
+        },
+        {
+          "length": 3,
+          "text": "醛固酮"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "foundation",
+      "id": "water-sodium-regulation-foundation-q06",
+      "sha256": "f75201d7c01fbb6d6c68bf8bb2ab03426dbc961f39306c3fdb51285dc86c70d0",
+      "stem": "想知道鈉在體液裡有多濃，要一起看哪兩個量？",
+      "options": [
+        "剛才喝水的動作和次數",
+        "鈉的量和水的量",
+        "鈉的總量，不看水有多少",
+        "鈉的總量和鉀的總量"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        },
+        {
+          "length": 2,
+          "text": "有多"
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "cases",
+      "id": "water-sodium-regulation-case-q01",
+      "sha256": "3bb79b5d747143b6bfe9df611f65a8e80cc92ccd5039e4bd86f3079a2246e3e8",
+      "stem": "一天喝進1500毫升液體、從食物得到800毫升水，身體再產生200毫升代謝水，合計多少？",
+      "options": [
+        "2300毫升／日",
+        "1700毫升／日",
+        "2500毫升／日",
+        "3300毫升／日"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 4,
+          "text": "00毫升"
+        },
+        {
+          "length": 4,
+          "text": "00毫升"
+        },
+        {
+          "length": 5,
+          "text": "500毫升"
+        },
+        {
+          "length": 4,
+          "text": "00毫升"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "cases",
+      "id": "water-sodium-regulation-case-q02",
+      "sha256": "f95cdd0f00a11fe1230ca99500a4be1123e3b4723d24725f014787d4ba9dfbfd",
+      "stem": "同學寫「沒有流汗，就沒有水從皮膚離開」，應怎麼改才對？",
+      "options": [
+        "把呼氣帶走的水也刪掉",
+        "把糞便帶走的水改算皮膚失水",
+        "認為水都從尿排出",
+        "加上皮膚看不見的無知覺蒸散"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 1,
+          "text": "水"
+        },
+        {
+          "length": 2,
+          "text": "皮膚"
+        },
+        {
+          "length": 1,
+          "text": "水"
+        },
+        {
+          "length": 2,
+          "text": "皮膚"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "cases",
+      "id": "water-sodium-regulation-case-q03",
+      "sha256": "78fc78b686339ad878e0400fee81cef80147800ec07707ccda060dbf8f0eb499",
+      "stem": "腎小管後段把更多鈉收回血液，也把更多鉀送進尿，最像哪種激素在作用？",
+      "options": [
+        "醛固酮",
+        "抗利尿激素ADH",
+        "心房利鈉尿肽ANP",
+        "副甲狀腺素PTH"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 0,
+          "text": ""
+        },
+        {
+          "length": 2,
+          "text": "激素"
+        },
+        {
+          "length": 1,
+          "text": "鈉"
+        },
+        {
+          "length": 1,
+          "text": "素"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "cases",
+      "id": "water-sodium-regulation-case-q04",
+      "sha256": "6e52700b03ed5ba0951a04fbbd6fefce7b32cce57485403b9cd3caad15496472",
+      "stem": "腎素和接著轉換的幫手ACE會接力，血管收縮素原會依什麼順序變成血管收縮素II？",
+      "options": [
+        "先由ACE變成I，再由腎素變成II",
+        "先變成I，再經轉換幫手ACE變成II",
+        "腎素本身直接變成II",
+        "I先變回原，再經ACE變成II"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 3,
+          "text": "ace"
+        },
+        {
+          "length": 5,
+          "text": "幫手ace"
+        },
+        {
+          "length": 2,
+          "text": "腎素"
+        },
+        {
+          "length": 3,
+          "text": "ace"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "water-sodium-regulation",
+      "stage": "cases",
+      "id": "water-sodium-regulation-case-q05",
+      "sha256": "ef8ab663bcf8eb14fbc1a7338d02a8e776df992e3b937e8cf4b3a79a880e64d1",
+      "stem": "同樣多的水裡裝了多少物質，叫做濃度，就像糖水有多甜。同樣多的鈉，現在配上更多水，能直接說它的濃度沒有變嗎？",
+      "options": [
+        "能，水量不會影響濃度",
+        "能，鈉的總量會抵銷水增加的影響",
+        "不能，還要把水量的改變算進去",
+        "能，濃度只看鈉有幾顆"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "濃度"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 2,
+          "text": "濃度"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q01",
+      "sha256": "415db90aeb49671cdf2addb1587b16dbca7114fca3c8492eb24a8f471081111f",
+      "stem": "一顆氯化鎂（MgCl₂）放進水裡，拆成一顆鎂離子（Mg²⁺）和兩顆氯離子（Cl⁻），最後共幾顆小粒子？",
+      "options": [
+        "3顆",
+        "1顆",
+        "2顆",
+        "4顆"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "顆"
+        },
+        {
+          "length": 1,
+          "text": "顆"
+        },
+        {
+          "length": 1,
+          "text": "顆"
+        },
+        {
+          "length": 1,
+          "text": "顆"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q02",
+      "sha256": "6b868046d3d2bb63f823cf386558c03e6b7f8602d9ac9e19db7635000cd1eb2f",
+      "stem": "兩邊隔著一層只讓水通過、不讓裡面物質通過的膜，水整體會往哪一邊移？",
+      "options": [
+        "不管膜能讓什麼通過，水方向都一樣",
+        "往小粒子比較多的那邊",
+        "往小粒子比較少的那邊",
+        "停在原處，不移動"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "通過"
+        },
+        {
+          "length": 1,
+          "text": "邊"
+        },
+        {
+          "length": 1,
+          "text": "邊"
+        },
+        {
+          "length": 1,
+          "text": "不"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q03",
+      "sha256": "3d41eca4f4794da84855e9d649b9d980abaf011972692ae9c13d23810c46fa83",
+      "stem": "mEq/L是每公升的毫當量，會把小粒子帶的電也算進去，它和「拆開後有幾顆粒子」有什麼不同？",
+      "options": [
+        "算電看粒子顆數，算顆數看帶電份數",
+        "兩者都只數還沒拆開的整顆物質",
+        "算電的量要看帶幾份電，粒子顆數另外數",
+        "帶幾份電，就拆成幾顆粒子"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "粒子"
+        },
+        {
+          "length": 2,
+          "text": "拆開"
+        },
+        {
+          "length": 2,
+          "text": "粒子"
+        },
+        {
+          "length": 4,
+          "text": "幾顆粒子"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q04",
+      "sha256": "e0c0834e685cd8959a14707fcff9420ac458403d6242ad731dff586ef9242d1f",
+      "stem": "鈉離子（Na⁺）和鉀離子（K⁺）是體液中的帶電小粒子，哪一種在細胞外比較多，哪一種在細胞內比較多？",
+      "options": [
+        "鈉和鉀都主要在細胞外",
+        "鈉和鉀都主要在細胞內",
+        "鈉主要在細胞內，鉀主要在細胞外",
+        "鈉主要在細胞外，鉀主要在細胞內"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 4,
+          "text": "在細胞外"
+        },
+        {
+          "length": 4,
+          "text": "在細胞內"
+        },
+        {
+          "length": 4,
+          "text": "在細胞外"
+        },
+        {
+          "length": 4,
+          "text": "在細胞外"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q05",
+      "sha256": "09fe94e92a36ccc2a7e734e5f20880af55be5786bbe16f2867d67d27f22d138a",
+      "stem": "副甲狀腺素（PTH，一種調整鈣磷的激素）在腎臟作用時，會把鈣和磷往哪裡送？",
+      "options": [
+        "把更多鈣收回血液，把更多磷排進尿",
+        "把更多鈣和磷都收回血液",
+        "把更多鈣和磷都排進尿",
+        "把更多鈣排進尿，把更多磷收回血液"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "鈣"
+        },
+        {
+          "length": 3,
+          "text": "鈣和磷"
+        },
+        {
+          "length": 3,
+          "text": "鈣和磷"
+        },
+        {
+          "length": 1,
+          "text": "鈣"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "foundation",
+      "id": "electrolyte-balance-foundation-q06",
+      "sha256": "b23e533ba143ceacf9a8cbbd180ce73b772754e7f9ce6ebb8168d0d70e6ec062",
+      "stem": "鎂離子（Mg²⁺）是一種帶電小粒子，它會幫身體做什麼？",
+      "options": [
+        "是細胞外最多的正電粒子",
+        "參與酵素（幫身體進行化學工作的幫手，叫做酵素）工作與神經肌肉功能",
+        "降低幫忙代謝的酵素（幫身體進行化學工作的幫手，叫做酵素）活性",
+        "血鎂變低時，讓神經肌肉更不容易被刺激"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "粒子"
+        },
+        {
+          "length": 3,
+          "text": "幫身體"
+        },
+        {
+          "length": 3,
+          "text": "幫身體"
+        },
+        {
+          "length": 1,
+          "text": "鎂"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "id": "electrolyte-balance-case-q01",
+      "sha256": "af5c35c288e66c8e7ffe27e0257197c51bd3a2d73698cdfbd0bef35c68aaf66e",
+      "stem": "把同樣顆數的葡萄糖和氯化鈉（NaCl，一種鹽）放進水裡，想比較最後小粒子有幾顆，要先注意什麼？",
+      "options": [
+        "只數鈉，不數拆出來的氯",
+        "把兩種物質都當成不會拆開",
+        "確認氯化鈉拆開，鈉和氯兩種都要數",
+        "只比較每種物質看起來有多大"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "數"
+        },
+        {
+          "length": 1,
+          "text": "把"
+        },
+        {
+          "length": 3,
+          "text": "氯化鈉"
+        },
+        {
+          "length": 2,
+          "text": "比較"
+        }
+      ],
+      "findings": [
+        {
+          "rule": "keyword-exclusive",
+          "keywords": [
+            "氯化鈉"
+          ]
+        }
+      ],
+      "disposition": "FAIL"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "id": "electrolyte-balance-case-q02",
+      "sha256": "a890b67d500005538a3698b638b704f9f6e240e876834a04fac0bb4c57a830f1",
+      "stem": "鎂離子（Mg²⁺）的「2+」表示帶兩份正電，同學因此說一顆氯化鎂（MgCl₂）拆開只有兩顆粒子，他錯在哪裡？",
+      "options": [
+        "應該數鎂的兩份正電，就算兩顆",
+        "應該把氯離子省略不算",
+        "應該把氯化鎂當成沒拆開的一顆",
+        "把帶電的份數，當成拆開後的顆數"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 4,
+          "text": "兩份正電"
+        },
+        {
+          "length": 2,
+          "text": "離子"
+        },
+        {
+          "length": 3,
+          "text": "氯化鎂"
+        },
+        {
+          "length": 2,
+          "text": "拆開"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "id": "electrolyte-balance-case-q03",
+      "sha256": "2a91e21017ce42f845b987704a2eea788eb233ef611b6d1172904ac1a7b8c181",
+      "stem": "兩邊的物質多少不同，想用「水往物質較多側移動」來想水流方向，先要確定膜有什麼特性？",
+      "options": [
+        "讓水通過，卻不讓溶質（溶在水裡的物質，叫做溶質）通過",
+        "讓溶質（溶在水裡的物質，叫做溶質）都能自由穿過",
+        "只要知道離子帶幾份電即可",
+        "不必知道膜能讓什麼通過"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "的物質"
+        },
+        {
+          "length": 3,
+          "text": "的物質"
+        },
+        {
+          "length": 1,
+          "text": "要"
+        },
+        {
+          "length": 2,
+          "text": "什麼"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "id": "electrolyte-balance-case-q04",
+      "sha256": "91457821225e718978772378f0e1da052cb69f7ae472c6b1e51b9218ca546b57",
+      "stem": "鈉鉀在細胞內外的分布，和鉀從血液送進小管的「分泌」，應怎麼分清楚？",
+      "options": [
+        "鉀分泌就是鉀從管液回到血液",
+        "先看是在比較細胞內外，還是在說血到管液",
+        "細胞外液就是腎小管裡的尿",
+        "細胞內液就是血管裡的血漿"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "鉀從"
+        },
+        {
+          "length": 4,
+          "text": "細胞內外"
+        },
+        {
+          "length": 2,
+          "text": "細胞"
+        },
+        {
+          "length": 3,
+          "text": "細胞內"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "electrolyte-balance",
+      "stage": "cases",
+      "id": "electrolyte-balance-case-q05",
+      "sha256": "5092b3c1080f653950f4dfe305ccbea33c8a38a67da8202025621c760d93e55b",
+      "stem": "已知氯離子（Cl⁻）是細胞外主要陰離子，也就是外液裡較多的負電小粒子，再配上副甲狀腺素（PTH，調整鈣與磷的激素）的腎臟作用，哪一組正確？",
+      "options": [
+        "氯主要在細胞外；PTH留鈣、排磷",
+        "氯主要在細胞內；PTH留鈣、排磷",
+        "氯主要在細胞外；PTH排鈣、留磷",
+        "氯主要在細胞外；PTH留鈣、也留磷"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 3,
+          "text": "細胞外"
+        },
+        {
+          "length": 3,
+          "text": "pth"
+        },
+        {
+          "length": 3,
+          "text": "細胞外"
+        },
+        {
+          "length": 3,
+          "text": "細胞外"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q01",
+      "sha256": "c137a5e52322f342a281e0a0913fc44bb578b000e780c003073990fb96725777",
+      "stem": "身體用哪三組工作一起讓血液不要太酸、也不要太鹼？",
+      "options": [
+        "化學緩衝（先接住多出來的酸，讓酸不酸的數字別亂跳，叫做緩衝）、肺、腎",
+        "化學緩衝（先接住多出來的酸，讓酸不酸的數字別亂跳，叫做緩衝）這一組就夠",
+        "化學緩衝（先接住多出來的酸，讓酸不酸的數字別亂跳，叫做緩衝）、肺、膀胱",
+        "化學緩衝（先接住多出來的酸，讓酸不酸的數字別亂跳，叫做緩衝）、肝、腎"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 1,
+          "text": "讓"
+        },
+        {
+          "length": 1,
+          "text": "組"
+        },
+        {
+          "length": 1,
+          "text": "讓"
+        },
+        {
+          "length": 1,
+          "text": "讓"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q02",
+      "sha256": "29c7a52f55423cec4cd8bf01016f3a4b99163f78ced6cfbd49e1bc0a466f09c0",
+      "stem": "先接住多出來的酸，讓酸不酸的數字別亂跳，叫做緩衝。酸不酸的數字叫pH，數字越小越酸。在碳酸緩衝公式裡，會接酸的碳酸氫根（HCO₃⁻）當作鹼，碳酸（H₂CO₃）當作酸，算pH時，上面的分子與下面的分母要怎麼放？",
+      "options": [
+        "上面放鹼加酸，下面放酸",
+        "上面放鹼，下面放酸",
+        "上面放酸，下面放鹼",
+        "上面放鹼減酸，下面放酸"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 2,
+          "text": "上面"
+        },
+        {
+          "length": 2,
+          "text": "上面"
+        },
+        {
+          "length": 2,
+          "text": "上面"
+        },
+        {
+          "length": 2,
+          "text": "上面"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q03",
+      "sha256": "8d257cb9c12ef30bf9d5facf47d91e91ce7e0c961fe64253b9d95e7708272aeb",
+      "stem": "能幫忙接住酸的血紅素，主要在哪裡工作？",
+      "options": [
+        "尿液裡",
+        "呼出去的氣體裡",
+        "紅血球裡",
+        "血漿裡自由漂著"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "裡"
+        },
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 1,
+          "text": "血"
+        },
+        {
+          "length": 1,
+          "text": "血"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q04",
+      "sha256": "a32f6bb31581d75318ac4985ec9e3f5ac1e260539fca09036d61d894bd22e327",
+      "stem": "酸不酸的數字叫pH，數字越小越酸。其他條件先不變，呼吸加快、呼出更多二氧化碳（CO₂）時，血液的pH會往哪個方向變？",
+      "options": [
+        "pH變小，血液更酸",
+        "pH不改變",
+        "pH變大，但血液的酸增加",
+        "pH變大，血液比較不酸"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 2,
+          "text": "ph"
+        },
+        {
+          "length": 2,
+          "text": "ph"
+        },
+        {
+          "length": 3,
+          "text": "血液的"
+        },
+        {
+          "length": 2,
+          "text": "不酸"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q05",
+      "sha256": "a935ecfc1a0b6dc38f6e1ff41e6fdd049352456510f94734f02194544cef0259",
+      "stem": "氫離子（H⁺）會讓液體變酸，碳酸氫根（HCO₃⁻）會幫忙接住酸，腎臟排酸留鹼時會怎麼做？",
+      "options": [
+        "把氫離子送進管液，碳酸氫根留回血液",
+        "把氫離子和碳酸氫根都送進管液",
+        "把氫離子留回血液，不讓它排出",
+        "把氫離子留回血液，碳酸氫根送進管液"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 3,
+          "text": "氫離子"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "foundation",
+      "id": "acid-base-homeostasis-foundation-q06",
+      "sha256": "d57e8095c9f3ec3a4625ef367c1cf4fdb074cb96d14455ee89407eb4634b4285",
+      "stem": "氨是能接住酸的物質（NH₃），它接住讓液體變酸的氫離子（H⁺）後會變成什麼？",
+      "options": [
+        "紅血球裡的血紅素",
+        "帶正電的銨離子（NH₄⁺）",
+        "會接酸的碳酸氫根（HCO₃⁻）",
+        "能呼出的二氧化碳（CO₂）"
+      ],
+      "answer": 1,
+      "matches": [
+        {
+          "length": 1,
+          "text": "的"
+        },
+        {
+          "length": 2,
+          "text": "nh"
+        },
+        {
+          "length": 2,
+          "text": "酸的"
+        },
+        {
+          "length": 1,
+          "text": "能"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "cases",
+      "id": "acid-base-homeostasis-case-q01",
+      "sha256": "f3c01d15b48ccdb31f1dd32c6a79f6aebaaf46fc98c06b45e1bb31cccef91464",
+      "stem": "用公式把酸和鹼的量相除，來算血液酸不酸的數字pH，除法上面叫分子、下面叫分母，代入數字前應先確認哪種放法？",
+      "options": [
+        "把鹼加酸，代替鹼除以酸",
+        "把鹼減酸，代替鹼除以酸",
+        "把鹼放上面，酸放下面",
+        "把酸放上面，鹼放下面"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 1,
+          "text": "把"
+        },
+        {
+          "length": 1,
+          "text": "把"
+        },
+        {
+          "length": 2,
+          "text": "上面"
+        },
+        {
+          "length": 2,
+          "text": "把酸"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "cases",
+      "id": "acid-base-homeostasis-case-q02",
+      "sha256": "304b50f84191fa868085bf2d3c85df0bda4b59a922f7eeeff7c876d1b10f15b3",
+      "stem": "血液裡的緩衝物先接住氫離子（H⁺）後，就能說酸已經離開身體了嗎？",
+      "options": [
+        "能，接住氫離子就是把它排出體外",
+        "能，pH（酸不酸的數字叫pH，數字越小越酸）變穩就表示酸已經排掉",
+        "能，沒被接住的氫離子減少，就表示總酸量減少",
+        "不能，暫時接住和真正排出是兩回事"
+      ],
+      "answer": 3,
+      "matches": [
+        {
+          "length": 5,
+          "text": "接住氫離子"
+        },
+        {
+          "length": 3,
+          "text": "酸已經"
+        },
+        {
+          "length": 3,
+          "text": "氫離子"
+        },
+        {
+          "length": 2,
+          "text": "接住"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "cases",
+      "id": "acid-base-homeostasis-case-q03",
+      "sha256": "a91fbac9a29c18b7c3fc043a1d54309527ce965771c60350e398e5b3e5d34e86",
+      "stem": "血液裡的二氧化碳（CO₂，一種氣體）要真正離開身體，主要會走哪條路？",
+      "options": [
+        "血液送到肺，再跟著呼氣出去",
+        "血液送到腎，和碳酸氫根一起進尿",
+        "血液送到肺，變成碳酸氫根再呼出去",
+        "在細胞膜兩側重新分配水分"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 2,
+          "text": "血液"
+        },
+        {
+          "length": 2,
+          "text": "血液"
+        },
+        {
+          "length": 2,
+          "text": "血液"
+        },
+        {
+          "length": 0,
+          "text": ""
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "cases",
+      "id": "acid-base-homeostasis-case-q04",
+      "sha256": "8eef5cdca0a30159db3d5dd7b0ec4109fb7cb1d79db7b736cbacc37837d85e1d",
+      "stem": "氫離子（H⁺）會讓血液變酸，碳酸氫根（HCO₃⁻）是接住氫離子的幫手，血液太酸時腎臟會怎麼做？",
+      "options": [
+        "把氫離子送進管液排掉，把碳酸氫根留回血液",
+        "把氫離子留回血液，把碳酸氫根送進管液",
+        "把氫離子和碳酸氫根都送進管液",
+        "把氫離子和碳酸氫根都留回血液"
+      ],
+      "answer": 0,
+      "matches": [
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        },
+        {
+          "length": 4,
+          "text": "碳酸氫根"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    },
+    {
+      "scope": "bank",
+      "slug": "acid-base-homeostasis",
+      "stage": "cases",
+      "id": "acid-base-homeostasis-case-q05",
+      "sha256": "fbee462bbf00cb065cd91fd1a3b7f5b70326c71b17dce4fdad1d9cd3978380c4",
+      "stem": "尿液帶走更多氫離子（H⁺，讓液體變酸的小粒子）時，對血液有什麼幫助？",
+      "options": [
+        "也排掉碳酸氫根，讓血裡接酸的幫手變少",
+        "氫離子留在血液裡，沒有排出去",
+        "幫忙減少血液裡酸的負擔",
+        "尿變酸，表示血液也跟著更酸"
+      ],
+      "answer": 2,
+      "matches": [
+        {
+          "length": 2,
+          "text": "酸的"
+        },
+        {
+          "length": 3,
+          "text": "氫離子"
+        },
+        {
+          "length": 2,
+          "text": "酸的"
+        },
+        {
+          "length": 2,
+          "text": "變酸"
+        }
+      ],
+      "findings": [],
+      "disposition": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "baseline": true,
+      "width": 1280,
+      "screenshot": "before/fluid-compartments-1280-state-3-full.png",
+      "hasPage29": true
+    },
+    {
+      "baseline": true,
+      "width": 390,
+      "screenshot": "before/fluid-compartments-390-state-3-full.png",
+      "hasPage29": true
+    },
+    {
+      "baseline": false,
+      "width": 1280,
+      "screenshot": "final/fluid-compartments-1280-state-3-full.png",
+      "hasPage29": false
+    },
+    {
+      "baseline": false,
+      "width": 390,
+      "screenshot": "final/fluid-compartments-390-state-3-full.png",
+      "hasPage29": false
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

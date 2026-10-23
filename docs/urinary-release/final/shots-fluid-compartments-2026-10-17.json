@@ -1,0 +1,613 @@
+{
+  "slug": "fluid-compartments",
+  "builtAt": "2026-10-17T02:22:25.830Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 13.944,
+      "svgTextSizes": [
+        {
+          "text": "總水量",
+          "px": 13.944
+        },
+        {
+          "text": "60%",
+          "px": 13.944
+        },
+        {
+          "text": "體重",
+          "px": 13.944
+        },
+        {
+          "text": "100%",
+          "px": 13.944
+        },
+        {
+          "text": "全長＝體重；藍色段＝總水量 60%",
+          "px": 13.944
+        },
+        {
+          "text": "細胞內液",
+          "px": 13.944
+        },
+        {
+          "text": "2/3",
+          "px": 13.944
+        },
+        {
+          "text": "細胞外液",
+          "px": 13.944
+        },
+        {
+          "text": "1/3",
+          "px": 13.944
+        },
+        {
+          "text": "內液2/3（深藍）、外液1/3（淺藍）",
+          "px": 13.944
+        },
+        {
+          "text": "血漿",
+          "px": 13.944
+        },
+        {
+          "text": "20%",
+          "px": 13.944
+        },
+        {
+          "text": "組織間液",
+          "px": 13.944
+        },
+        {
+          "text": "80%",
+          "px": 13.944
+        },
+        {
+          "text": "血漿20%（深藍）、組織間液80%（淺藍）",
+          "px": 13.944
+        },
+        {
+          "text": "個別差異：皆以體重 100% 為分母",
+          "px": 13.944
+        },
+        {
+          "text": "成年男性65%",
+          "px": 13.944
+        },
+        {
+          "text": "成年女性55%",
+          "px": 13.944
+        }
+      ],
+      "nodes": [
+        {
+          "id": "fluid-compartments-node-01",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "總水量",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "60%標準示例",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "體重",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "100%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "全長＝體重；藍色段＝總水量 60%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "分母：體重；單位：%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "其餘 40% 底框部分不屬於總水量",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-02",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "總水量",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "100%（共同分母）",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "細胞內液",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "2/3",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "1/3",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "內液2/3（深藍）、外液1/3（淺藍）",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：總水量",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-03",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "細胞外液",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "血漿",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "20%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "組織間液",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "80%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：細胞外液；單位：%",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-04",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "細胞內液40%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液20%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "血漿4%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "組織間液16%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：體重；單位：%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "4%與16%已包含在外液20%內",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-06",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "成年男性65%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "成年女性55%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "嬰兒77%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "老人47%",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "脂肪",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "比例不同，含水比例也會不同",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：體重；單位：%",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 42.252,
+      "svgTextSizes": [
+        {
+          "text": "總水量",
+          "px": 42.252
+        },
+        {
+          "text": "60%",
+          "px": 42.252
+        },
+        {
+          "text": "體重",
+          "px": 42.252
+        },
+        {
+          "text": "100%",
+          "px": 42.252
+        },
+        {
+          "text": "全長＝體重；藍色段＝總水量 60%",
+          "px": 42.252
+        },
+        {
+          "text": "細胞內液",
+          "px": 42.252
+        },
+        {
+          "text": "2/3",
+          "px": 42.252
+        },
+        {
+          "text": "細胞外液",
+          "px": 42.252
+        },
+        {
+          "text": "1/3",
+          "px": 42.252
+        },
+        {
+          "text": "內液2/3（深藍）、外液1/3（淺藍）",
+          "px": 42.252
+        },
+        {
+          "text": "血漿",
+          "px": 42.252
+        },
+        {
+          "text": "20%",
+          "px": 42.252
+        },
+        {
+          "text": "組織間液",
+          "px": 42.252
+        },
+        {
+          "text": "80%",
+          "px": 42.252
+        },
+        {
+          "text": "血漿20%（深藍）、組織間液80%（淺藍）",
+          "px": 42.252
+        },
+        {
+          "text": "個別差異：皆以體重 100% 為分母",
+          "px": 42.252
+        },
+        {
+          "text": "成年男性65%",
+          "px": 42.252
+        },
+        {
+          "text": "成年女性55%",
+          "px": 42.252
+        }
+      ],
+      "nodes": [
+        {
+          "id": "fluid-compartments-node-01",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "總水量",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "60%標準示例",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "體重",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "100%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "全長＝體重；藍色段＝總水量 60%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "分母：體重；單位：%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "其餘 40% 底框部分不屬於總水量",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-02",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "總水量",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "100%（共同分母）",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "細胞內液",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "2/3",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "1/3",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "內液2/3（深藍）、外液1/3（淺藍）",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：總水量",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-03",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "細胞外液",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "血漿",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "20%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "組織間液",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "80%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：細胞外液；單位：%",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-04",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "細胞內液40%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "細胞外液20%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "血漿4%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "組織間液16%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：體重；單位：%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "4%與16%已包含在外液20%內",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "fluid-compartments-node-06",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "成年男性65%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "成年女性55%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "嬰兒77%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "老人47%",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "脂肪",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "比例不同，含水比例也會不同",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "共同分母：體重；單位：%",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-fluid-compartments-node-01.png",
+    "390-node-fluid-compartments-node-02.png",
+    "390-node-fluid-compartments-node-03.png",
+    "390-node-fluid-compartments-node-04.png",
+    "390-node-fluid-compartments-node-05.png",
+    "390-node-fluid-compartments-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-fluid-compartments-node-01.png",
+    "1280-node-fluid-compartments-node-02.png",
+    "1280-node-fluid-compartments-node-03.png",
+    "1280-node-fluid-compartments-node-04.png",
+    "1280-node-fluid-compartments-node-05.png",
+    "1280-node-fluid-compartments-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "fluid-compartments-node-01",
+    "fluid-compartments-node-02",
+    "fluid-compartments-node-03",
+    "fluid-compartments-node-04",
+    "fluid-compartments-node-05",
+    "fluid-compartments-node-06"
+  ],
+  "questionIds": [
+    "fluid-compartments-foundation-q01",
+    "fluid-compartments-foundation-q02",
+    "fluid-compartments-foundation-q03",
+    "fluid-compartments-foundation-q04",
+    "fluid-compartments-foundation-q05",
+    "fluid-compartments-foundation-q06",
+    "fluid-compartments-case-q01",
+    "fluid-compartments-case-q02",
+    "fluid-compartments-case-q03",
+    "fluid-compartments-case-q04",
+    "fluid-compartments-case-q05"
+  ],
+  "ok": true
+}

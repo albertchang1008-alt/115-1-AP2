@@ -1,5 +1,5 @@
 {
-  "materials": 21,
+  "materials": 31,
   "results": [
     {
       "slug": "heart-structure-v2",
@@ -124,6 +124,66 @@
     {
       "slug": "lymphoid-organs-v1",
       "format": "kit",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "kidney-anatomy-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "nephron-circulation-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "filtration-clearance-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "tubular-handling-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "urine-concentration-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "urinary-route-micturition-v2",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "fluid-compartments-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "water-sodium-regulation-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "electrolyte-balance-v1",
+      "format": "approved-student-script",
+      "nodes": 6,
+      "errors": []
+    },
+    {
+      "slug": "acid-base-homeostasis-v1",
+      "format": "approved-student-script",
       "nodes": 6,
       "errors": []
     }

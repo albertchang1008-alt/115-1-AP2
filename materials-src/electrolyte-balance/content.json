@@ -1,0 +1,390 @@
+{
+  "slug": "electrolyte-balance",
+  "version": "v1",
+  "experience": "guided",
+  "title": "電解質、滲透與離子平衡",
+  "subtitle": "以膜通透條件、解離粒子與離子方向整理電解質平衡。",
+  "label": "電解質、滲透與離子平衡｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "1／2／3",
+      "label": "完全解離模型的粒子比較"
+    },
+    {
+      "value": "Na⁺外、K⁺內",
+      "label": "主要陽離子分布"
+    },
+    {
+      "value": "Mg²⁺",
+      "label": "酵素與神經肌肉功能"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中構造與方向建立關係；紅色粗體標出本次觀察的重點。",
+    "figure": "electrolyte-balance-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "不解離",
+        "explain": "葡萄糖同分子數比較。"
+      },
+      {
+        "id": "state-2",
+        "label": "二粒子",
+        "explain": "NaCl完全解離。"
+      },
+      {
+        "id": "state-3",
+        "label": "三粒子",
+        "explain": "MgCl2完全解離。"
+      }
+    ],
+    "predict": {
+      "question": "從葡萄糖切換到完全解離的NaCl，同樣起始分子數下會怎樣？",
+      "options": [
+        "解離後粒子數增加",
+        "粒子數必定減少",
+        "只剩Na⁺而沒有Cl⁻",
+        "變成與價數無關的尿流量"
+      ],
+      "answer": 0,
+      "feedback": "NaCl每個分子形成Na⁺與Cl⁻，粒子數由一份起始分子對應兩粒子。",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "electrolyte-balance-node-01",
+      "tag": "01",
+      "title": "解離與粒子數",
+      "summary": "相同起始分子數下比較解離後粒子",
+      "figure": "electrolyte-balance-node-01.svg",
+      "concept": "在完全解離模型中，一個葡萄糖分子維持1粒子，NaCl形成2粒子，MgCl₂形成3粒子。",
+      "points": [
+        "MgCl₂形成一個Mg²⁺與兩個Cl⁻。",
+        "Mg²⁺的二價不代表MgCl₂只形成兩粒子。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先固定起始分子數，再數解離後的全部粒子，不只看離子電荷。"
+      },
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 31–33 頁。",
+      "caption": "相同起始分子數且完全解離時，比較每個分子形成的粒子數；右側各外框對應一個起始分子。"
+    },
+    {
+      "id": "electrolyte-balance-node-02",
+      "tag": "02",
+      "title": "滲透與水移動",
+      "summary": "在只通水的膜模型中，水移向粒子較多側",
+      "figure": "electrolyte-balance-node-02.svg",
+      "concept": "膜可通水而不通溶質時，兩側粒子濃度不同會帶動水朝粒子較多側移動。",
+      "points": [
+        "膜的通透條件是判斷前提。",
+        "水移動與溶質直接穿膜不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先查膜允許誰通過，再判斷哪側粒子較多，勿直接把溶質畫成自由穿膜。"
+      },
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 31–33 頁。",
+      "caption": "在只通水的膜模型中，水移向粒子較多側。"
+    },
+    {
+      "id": "electrolyte-balance-node-03",
+      "tag": "03",
+      "title": "mEq與mOsm的意義",
+      "summary": "電荷當量與滲透粒子數描述不同概念",
+      "figure": "electrolyte-balance-node-03-data.svg",
+      "concept": "mEq/L涉及離子電荷當量與價數；滲透效應則須考慮溶液中粒子數。",
+      "points": [
+        "價數與粒子數不可互換。",
+        "解離後須計入各種離子。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較NaCl與MgCl₂時，分開寫每種離子的電荷與整份溶質解離後的粒子數。"
+      },
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 31–33 頁。",
+      "caption": "電荷當量與滲透粒子數描述不同概念。"
+    },
+    {
+      "id": "electrolyte-balance-node-04",
+      "tag": "04",
+      "title": "鈉與鉀",
+      "summary": "鈉主要在細胞外，鉀主要在細胞內",
+      "figure": "electrolyte-balance-node-04.svg",
+      "concept": "Na⁺是主要細胞外陽離子，K⁺主要在細胞內；腎小管後段可調節鉀分泌。",
+      "points": [
+        "醛固酮增加鈉回收與鉀分泌。",
+        "鉀分泌的方向是血到管液。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先用細胞膜定位內外液，再用腎小管壁定位回收與分泌，兩種界線不能混用。"
+      },
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 14、16–18、22、30–34、37 頁。",
+      "caption": "鈉主要在細胞外，鉀主要在細胞內。"
+    },
+    {
+      "id": "electrolyte-balance-node-05",
+      "tag": "05",
+      "title": "氯與鈣磷",
+      "summary": "氯是外液陰離子，PTH使腎回鈣排磷",
+      "figure": "electrolyte-balance-node-05.svg",
+      "concept": "Cl⁻是重要細胞外陰離子，常隨Na⁺移動；副甲狀腺素促腎鈣再吸收並增加磷排泄。",
+      "points": [
+        "鈣回收與磷排泄方向不同。",
+        "活化維生素D參與腸道鈣吸收。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "將鈣與磷的腎端方向分別畫出，避免把兩者都寫成保留或排出。"
+      },
+      "sources": [
+        "chloride-balance；physiology/CH09 p.34, physiology/CH09 p.16",
+        "calcium-phosphate-balance；physiology/CH09 p.35, physiology/CH09 p.16"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 16、34–35 頁。",
+      "caption": "氯是外液陰離子，PTH使腎回鈣排磷。"
+    },
+    {
+      "id": "electrolyte-balance-node-06",
+      "tag": "06",
+      "title": "鎂的角色",
+      "summary": "鎂參與酵素與神經肌肉功能",
+      "figure": "electrolyte-balance-node-06.svg",
+      "concept": "Mg²⁺是重要細胞內電解質，參與多種酵素活性、鈉鉀幫浦與神經肌肉功能。",
+      "points": [
+        "鎂也與核糖體功能有關。",
+        "不能因為量較少就視為沒有生理作用。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "從細胞內反應、膜運輸與神經肌肉三個位置整理鎂的功能。"
+      },
+      "sources": [
+        "magnesium-balance；physiology/CH09 p.35, physiology/CH09 p.36"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 35–36 頁。",
+      "caption": "鎂參與酵素與神經肌肉功能。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "electrolyte-balance-foundation-q01",
+      "stem": "相同起始分子數且完全解離時，MgCl₂每個分子形成幾個粒子？",
+      "options": [
+        "3粒子",
+        "1粒子",
+        "2粒子",
+        "只依Mg²⁺的價數判斷而不計Cl⁻"
+      ],
+      "answer": 0,
+      "hint": "數所有解離產物。",
+      "explain": "一個Mg²⁺加兩個Cl⁻共3粒子；二價不等於兩粒子。",
+      "nodeId": "electrolyte-balance-node-01",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-foundation-q02",
+      "stem": "只通水、不通溶質的膜模型中，水淨移動朝哪側？",
+      "options": [
+        "與膜通透條件無關",
+        "粒子較多側",
+        "一律朝粒子較少側",
+        "一律不移動"
+      ],
+      "answer": 1,
+      "hint": "先確認膜能通過的是誰。",
+      "explain": "在此模型前提下，水朝粒子較多側移動；不能讓溶質直接自由穿膜。",
+      "nodeId": "electrolyte-balance-node-02",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-foundation-q03",
+      "stem": "mEq/L與滲透粒子數應如何區分？",
+      "options": [
+        "兩者只描述水的體積",
+        "mEq/L直接表示尿流量",
+        "電荷當量涉及價數，粒子數須另計",
+        "價數與解離粒子數永遠相同"
+      ],
+      "answer": 2,
+      "hint": "一個概念看電荷，另一個數粒子。",
+      "explain": "價數與解離後粒子總數不同；此處只辨概念，不作數值換算。",
+      "nodeId": "electrolyte-balance-node-03",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-foundation-q04",
+      "stem": "主要陽離子的細胞內外分布為何？",
+      "options": [
+        "Na⁺只存在內液",
+        "K⁺只存在血漿",
+        "兩者都不存在細胞內",
+        "Na⁺主要外液、K⁺主要內液"
+      ],
+      "answer": 3,
+      "hint": "先用細胞膜定位內外。",
+      "explain": "Na⁺主要在細胞外，K⁺主要在細胞內；主要不等於另一側完全沒有。",
+      "nodeId": "electrolyte-balance-node-04",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-foundation-q05",
+      "stem": "副甲狀腺素的腎端鈣磷作用應如何配對？",
+      "options": [
+        "增加鈣再吸收與磷排泄",
+        "鈣與磷都一律保留",
+        "鈣與磷都一律排出",
+        "只改變尿液顏色"
+      ],
+      "answer": 0,
+      "hint": "把鈣與磷各畫一條方向。",
+      "explain": "副甲狀腺素促回鈣排磷，兩者不能寫成相同方向。",
+      "nodeId": "electrolyte-balance-node-05",
+      "sources": [
+        "chloride-balance；physiology/CH09 p.34, physiology/CH09 p.16",
+        "calcium-phosphate-balance；physiology/CH09 p.35, physiology/CH09 p.16"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-foundation-q06",
+      "stem": "鎂的角色包含何者？",
+      "options": [
+        "只能當細胞外主要陽離子",
+        "參與酵素活性與神經肌肉功能",
+        "完全沒有細胞內作用",
+        "只是尿液顏色來源"
+      ],
+      "answer": 1,
+      "hint": "從反應與膜運輸找功能。",
+      "explain": "鎂參與多種酵素、鈉鉀幫浦與神經肌肉功能。",
+      "nodeId": "electrolyte-balance-node-06",
+      "sources": [
+        "magnesium-balance；physiology/CH09 p.35, physiology/CH09 p.36"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "electrolyte-balance-case-q01",
+      "stem": "【粒子模型】等起始分子數比較葡萄糖與NaCl，哪項前提不可漏？",
+      "options": [
+        "只數Na⁺而不數Cl⁻",
+        "將所有物質都視為不解離",
+        "確認NaCl完全解離並計入兩種離子",
+        "只比溶質外觀大小"
+      ],
+      "answer": 2,
+      "hint": "先固定起始量，再看解離。",
+      "explain": "葡萄糖維持一粒子，NaCl完全解離成兩粒子；不能只數其中一種離子。",
+      "nodeId": "electrolyte-balance-node-01",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-case-q02",
+      "stem": "【概念核對】把Mg²⁺的「二價」寫成MgCl₂「兩粒子」，錯在哪裡？",
+      "options": [
+        "忽略葡萄糖也有固定二價",
+        "應完全不計Cl⁻",
+        "應只看水的多少而不看溶質",
+        "混淆價數與全部解離產物的粒子數"
+      ],
+      "answer": 3,
+      "hint": "列出MgCl₂的解離產物。",
+      "explain": "MgCl₂完全解離有Mg²⁺和兩個Cl⁻，共三粒子；二價是電荷。",
+      "nodeId": "electrolyte-balance-node-01",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-case-q03",
+      "stem": "【膜條件】兩側粒子不同，要用本節模型判斷水流，應先確認何者？",
+      "options": [
+        "膜可通水且不通溶質",
+        "溶質都能任意穿膜",
+        "只有離子價數即可",
+        "膜條件完全不用知道"
+      ],
+      "answer": 0,
+      "hint": "水能否移動取決於膜條件。",
+      "explain": "先確認模型只允許水通過，再判粒子較多側；不能跳過通透性。",
+      "nodeId": "electrolyte-balance-node-02",
+      "sources": [
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-case-q04",
+      "stem": "【雙界線】細胞內外離子分布與小管鉀分泌，應如何整理？",
+      "options": [
+        "把鉀分泌畫成管液回血",
+        "分開細胞膜的內外與血／管液方向",
+        "將細胞外直接等同於尿液",
+        "將細胞內直接等同於血漿"
+      ],
+      "answer": 1,
+      "hint": "兩張圖的界線並不相同。",
+      "explain": "Na/K分布用細胞膜分類；鉀分泌則由血到管液，不能混用兩種區間。",
+      "nodeId": "electrolyte-balance-node-04",
+      "sources": [
+        "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+        "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+      ]
+    },
+    {
+      "id": "electrolyte-balance-case-q05",
+      "stem": "【方向配對】一圖要同時呈現Cl⁻與PTH作用，何者正確？",
+      "options": [
+        "PTH使鈣與磷一律同向",
+        "必須標出降鈣素分泌細胞才可判讀",
+        "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+        "Cl⁻是主要細胞外陽離子"
+      ],
+      "answer": 2,
+      "hint": "先辨電荷，再分鈣磷方向。",
+      "explain": "Cl⁻是陰離子；PTH在腎端回鈣排磷，不需延伸分泌細胞定位。",
+      "nodeId": "electrolyte-balance-node-05",
+      "sources": [
+        "chloride-balance；physiology/CH09 p.34, physiology/CH09 p.16",
+        "calcium-phosphate-balance；physiology/CH09 p.35, physiology/CH09 p.16"
+      ]
+    }
+  ],
+  "credits": [
+    "《生理學》腎臟與體液的恆定，第 14、16–18、22、30–37 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

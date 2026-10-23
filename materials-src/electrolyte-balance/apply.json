@@ -1,0 +1,3298 @@
+{
+  "schemaVersion": 2,
+  "slug": "electrolyte-balance",
+  "version": "v1",
+  "title": {
+    "text": "電解質、滲透與離子平衡",
+    "sources": [
+      {
+        "uid": "electrolyte-osmolarity",
+        "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+      },
+      {
+        "uid": "electrolyte-osmolarity",
+        "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+      },
+      {
+        "uid": "electrolyte-osmolarity",
+        "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+      },
+      {
+        "uid": "electrolyte-osmolarity",
+        "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+      },
+      {
+        "uid": "electrolyte-osmolarity",
+        "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・電解質、滲透與離子平衡",
+      "sources": [
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-01.png",
+      "width": 1122,
+      "height": 1402,
+      "anchorView": "overview"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+        },
+        {
+          "uid": "electrolyte-osmolarity",
+          "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "glucose": {
+        "name": {
+          "text": "葡萄糖不解離",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "text": {
+          "text": "葡萄糖是非電解質，在水中不解離。課本等數目分子的例子，每個葡萄糖分子仍算一個粒子。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        }
+      },
+      "nacl": {
+        "name": {
+          "text": "氯化鈉（NaCl）",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "text": {
+          "text": "在課本完全解離的例子，氯化鈉成為鈉與氯兩種離子。每個NaCl的起始分子對應兩個粒子。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        }
+      },
+      "mgcl": {
+        "name": {
+          "text": "氯化鎂（MgCl₂）",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "text": {
+          "text": "課本完全解離例中，氯化鎂形成一個鎂離子與兩個氯離子。總共三個粒子，二價不等於兩個粒子。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        }
+      },
+      "osm": {
+        "name": {
+          "text": "滲透粒子比較",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "text": {
+          "text": "滲透效應要看解離後的粒子數。比較一、二、三粒子時，先固定相同起始分子數並採課本完全解離條件。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "不解離",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "相同起始分子數；採課本完全解離例比較。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "glucose",
+            "kind": "focus",
+            "name": {
+              "text": "葡萄糖不解離",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "glucose",
+                "term": "glucose",
+                "label": {
+                  "text": "葡萄糖不解離",
+                  "sources": [
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-0-0",
+            "kind": "focus",
+            "short": {
+              "text": "葡萄糖",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "full": {
+              "text": "葡萄糖",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.12,
+            "anchorRef": "葡萄糖",
+            "anchor": [
+              0.13368983957219252,
+              0.10699001426533523
+            ],
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "等數目分子、完全解離",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1,
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "粒子",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "status": {
+              "text": "葡萄糖參照",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "glucose",
+              "term": "glucose",
+              "kind": "focus",
+              "label": {
+                "text": "葡萄糖不解離",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "葡萄糖",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "osm",
+              "term": "osm",
+              "kind": "focus",
+              "label": {
+                "text": "滲透粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "glucose"
+            ],
+            "to": [
+              "osm"
+            ],
+            "description": {
+              "text": "相同起始分子數；採課本完全解離例比較。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "二粒子",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "相同起始分子數；NaCl完全解離成兩個粒子。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "nacl",
+            "kind": "focus",
+            "name": {
+              "text": "氯化鈉（NaCl）",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "nacl",
+                "term": "nacl",
+                "label": {
+                  "text": "氯化鈉（NaCl）",
+                  "sources": [
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "NaCl",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "full": {
+              "text": "NaCl",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.42,
+            "anchorRef": "NaCl",
+            "anchor": [
+              0.13368983957219252,
+              0.42082738944365194
+            ],
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "等數目分子、完全解離",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1,
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "粒子",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "status": {
+              "text": "葡萄糖參照",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "nacl",
+              "term": "nacl",
+              "kind": "focus",
+              "label": {
+                "text": "氯化鈉（NaCl）",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "NaCl",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "osm",
+              "term": "osm",
+              "kind": "focus",
+              "label": {
+                "text": "滲透粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "nacl"
+            ],
+            "to": [
+              "osm"
+            ],
+            "description": {
+              "text": "相同起始分子數；NaCl完全解離成兩個粒子。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "三粒子",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "相同起始分子數；MgCl₂完全解離成三個粒子。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "mgcl",
+            "kind": "focus",
+            "name": {
+              "text": "氯化鎂（MgCl₂）",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "mgcl",
+                "term": "mgcl",
+                "label": {
+                  "text": "氯化鎂（MgCl₂）",
+                  "sources": [
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                    },
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-2-0",
+            "kind": "focus",
+            "short": {
+              "text": "MgCl₂",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "full": {
+              "text": "MgCl₂",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.72,
+            "anchorRef": "MgCl₂",
+            "anchor": [
+              0.13368983957219252,
+              0.7310984308131241
+            ],
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "等數目分子、完全解離",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 1,
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "粒子",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "status": {
+              "text": "葡萄糖參照",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "mgcl",
+              "term": "mgcl",
+              "kind": "focus",
+              "label": {
+                "text": "氯化鎂（MgCl₂）",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "MgCl₂",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "osm",
+              "term": "osm",
+              "kind": "focus",
+              "label": {
+                "text": "滲透粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "粒子比較",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "mgcl"
+            ],
+            "to": [
+              "osm"
+            ],
+            "description": {
+              "text": "相同起始分子數；MgCl₂完全解離成三個粒子。",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                },
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q01",
+            "stem": "一顆氯化鎂（MgCl₂）放進水裡，拆成一顆鎂離子（Mg²⁺）和兩顆氯離子（Cl⁻），最後共幾顆小粒子？",
+            "options": [
+              "3顆",
+              "1顆",
+              "2顆",
+              "4顆"
+            ],
+            "answer": 0,
+            "hint": "先想想：要數拆開後有幾顆，還是只看鎂帶幾份電？",
+            "explain": "因為一顆鎂離子加兩顆氯離子，所以1加2等於3顆。選「2顆」的同學，是把鎂帶的「2份電」當成了顆數。",
+            "nodeId": "electrolyte-balance-node-01",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q02",
+            "stem": "兩邊隔著一層只讓水通過、不讓裡面物質通過的膜，水整體會往哪一邊移？",
+            "options": [
+              "不管膜能讓什麼通過，水方向都一樣",
+              "往小粒子比較多的那邊",
+              "往小粒子比較少的那邊",
+              "停在原處，不移動"
+            ],
+            "answer": 1,
+            "hint": "先想想：像糖水一濃一淡，水會往物質多還是少的一邊跑？",
+            "explain": "因為這個模型只讓水過膜，而水會往小粒子較多的一邊移，所以選「往小粒子比較多的那邊」。選「往小粒子比較少的那邊」的同學，把水移動的方向寫反了。",
+            "nodeId": "electrolyte-balance-node-02",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域；"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q03",
+            "stem": "mEq/L是每公升的毫當量，會把小粒子帶的電也算進去，它和「拆開後有幾顆粒子」有什麼不同？",
+            "options": [
+              "算電看粒子顆數，算顆數看帶電份數",
+              "兩者都只數還沒拆開的整顆物質",
+              "算電的量要看帶幾份電，粒子顆數另外數",
+              "帶幾份電，就拆成幾顆粒子"
+            ],
+            "answer": 2,
+            "hint": "先想想：一顆帶兩份電，和拆成兩顆，是同一件事嗎？",
+            "explain": "因為毫當量要考慮每顆離子帶幾份電，而粒子數是在數顆數，所以選「算電的量要看帶幾份電，粒子顆數另外數」。選「帶幾份電，就拆成幾顆粒子」的同學，把帶電的份數直接當成拆開後的顆數。",
+            "nodeId": "electrolyte-balance-node-03",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q04",
+            "stem": "鈉離子（Na⁺）和鉀離子（K⁺）是體液中的帶電小粒子，哪一種在細胞外比較多，哪一種在細胞內比較多？",
+            "options": [
+              "鈉和鉀都主要在細胞外",
+              "鈉和鉀都主要在細胞內",
+              "鈉主要在細胞內，鉀主要在細胞外",
+              "鈉主要在細胞外，鉀主要在細胞內"
+            ],
+            "answer": 3,
+            "hint": "先想想：細胞外最多的正電小粒子是鈉，還是鉀？",
+            "explain": "因為鈉是細胞外主要陽離子（帶正電的小粒子叫陽離子），鉀是細胞內主要陽離子，所以選「鈉主要在細胞外，鉀主要在細胞內」。選「鈉主要在細胞內，鉀主要在細胞外」的同學，把主要分布的位置交換了。",
+            "nodeId": "electrolyte-balance-node-04",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉主要是細胞外陽離子"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "氯是陰離子，Na⁺ 是陽離子"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q05",
+            "stem": "副甲狀腺素（PTH，一種調整鈣磷的激素）在腎臟作用時，會把鈣和磷往哪裡送？",
+            "options": [
+              "把更多鈣收回血液，把更多磷排進尿",
+              "把更多鈣和磷都收回血液",
+              "把更多鈣和磷都排進尿",
+              "把更多鈣排進尿，把更多磷收回血液"
+            ],
+            "answer": 0,
+            "hint": "先想想：這個訊號是把鈣和磷都留下，還是一留一排？",
+            "explain": "因為PTH在腎臟促進回收鈣、排出磷，所以選「把更多鈣收回血液，把更多磷排進尿」。選「把更多鈣和磷都收回血液」的同學，把腎臟對磷的作用也寫成回收，方向錯了。",
+            "nodeId": "electrolyte-balance-node-05",
+            "sources": [
+              "chloride-balance；physiology/CH09 p.34, physiology/CH09 p.16",
+              "calcium-phosphate-balance；physiology/CH09 p.35, physiology/CH09 p.16"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "calcium-phosphate-balance",
+              "quote": "加強腎小管回收 Ca²⁺ 並排 HPO₄²⁻。"
+            },
+            {
+              "uid": "calcium-phosphate-balance",
+              "quote": "PTH 在骨與腎對磷的方向須分位置：骨釋出磷，腎抑制再吸收並排磷。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-foundation-q06",
+            "stem": "鎂離子（Mg²⁺）是一種帶電小粒子，它會幫身體做什麼？",
+            "options": [
+              "是細胞外最多的正電粒子",
+              "參與酵素（幫身體進行化學工作的幫手，叫做酵素）工作與神經肌肉功能",
+              "降低幫忙代謝的酵素（幫身體進行化學工作的幫手，叫做酵素）活性",
+              "血鎂變低時，讓神經肌肉更不容易被刺激"
+            ],
+            "answer": 1,
+            "hint": "先想想：鎂會幫細胞內的酵素工作，還是沒有作用？",
+            "explain": "因為鎂會幫忙活化酵素，也參與神經肌肉功能，所以選「參與酵素工作與神經肌肉功能」。選「血鎂變低時，讓神經肌肉更不容易被刺激」的同學，把低血鎂時比較容易被刺激（興奮性增加）的方向說反了。",
+            "nodeId": "electrolyte-balance-node-06",
+            "sources": [
+              "magnesium-balance；physiology/CH09 p.35, physiology/CH09 p.36"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "electrolyte-balance-case-q01",
+            "stem": "把同樣顆數的葡萄糖和氯化鈉（NaCl，一種鹽）放進水裡，想比較最後小粒子有幾顆，要先注意什麼？",
+            "options": [
+              "只數鈉，不數拆出來的氯",
+              "把葡萄糖和氯化鈉都當成不會拆開",
+              "確認氯化鈉拆開，鈉和氯兩種都要數",
+              "只比較每種物質看起來有多大"
+            ],
+            "answer": 2,
+            "hint": "先想想：一份鹽拆出鈉和氯，兩種是不是都該算？",
+            "explain": "因為葡萄糖不拆開，氯化鈉拆成鈉和氯兩種粒子，所以兩種都要數，選「確認氯化鈉拆開，鈉和氯兩種都要數」。選「只數鈉，不數拆出來的氯」的同學，少算了氯離子，會把兩顆當成一顆。",
+            "nodeId": "electrolyte-balance-node-01",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-case-q02",
+            "stem": "鎂離子（Mg²⁺）的「2+」表示帶兩份正電，同學因此說一顆氯化鎂（MgCl₂）拆開只有兩顆粒子，他錯在哪裡？",
+            "options": [
+              "應該數鎂的兩份正電，就算兩顆",
+              "應該把氯離子省略不算",
+              "應該把氯化鎂當成沒拆開的一顆",
+              "把帶電的份數，當成拆開後的顆數"
+            ],
+            "answer": 3,
+            "hint": "先想想：鎂上的2+是在說帶電，還是在數拆出幾顆？",
+            "explain": "因為一顆MgCl₂拆成一顆鎂離子和兩顆氯離子，所以共三顆，「把帶電的份數，當成拆開後的顆數」才說中錯誤。選「應該數鎂的兩份正電，就算兩顆」的同學，仍在數電的份數，沒有把拆出的三顆粒子數清楚。",
+            "nodeId": "electrolyte-balance-node-01",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-case-q03",
+            "stem": "兩邊的物質多少不同，想用「水往物質較多側移動」來想水流方向，先要確定膜有什麼特性？",
+            "options": [
+              "讓水通過，卻不讓溶質（溶在水裡的物質，叫做溶質）通過",
+              "讓溶質（溶在水裡的物質，叫做溶質）都能自由穿過",
+              "只要知道離子帶幾份電即可",
+              "不必知道膜能讓什麼通過"
+            ],
+            "answer": 0,
+            "hint": "先想想：水能不能過、物質能不能過，要不要先分清楚？",
+            "explain": "因為這個水移動模型先假定膜能通水、不能通溶質（溶在水裡的物質，叫做溶質），所以選「讓水通過，卻不讓溶質通過」。選「讓溶質都能自由穿過」的同學，把物質也能自由通過的情況帶進來，已經換了條件。",
+            "nodeId": "electrolyte-balance-node-02",
+            "sources": [
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域；"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-case-q04",
+            "stem": "鈉鉀在細胞內外的分布，和鉀從血液送進小管的「分泌」，應怎麼分清楚？",
+            "options": [
+              "鉀分泌就是鉀從管液回到血液",
+              "先看是在比較細胞內外，還是在說血到管液",
+              "細胞外液就是腎小管裡的尿",
+              "細胞內液就是血管裡的血漿"
+            ],
+            "answer": 1,
+            "hint": "先想想：細胞膜內外，和血液到小管，是同一組位置嗎？",
+            "explain": "因為細胞內外是按細胞膜分區，分泌則是從血送進管液，所以選「先看是在比較細胞內外，還是在說血到管液」。選「鉀分泌就是鉀從管液回到血液」的同學，把分泌寫成反方向的再吸收了。",
+            "nodeId": "electrolyte-balance-node-04",
+            "sources": [
+              "sodium-water-balance；physiology/CH09 p.37, physiology/CH09 p.34, physiology/CH09 p.30, physiology/CH09 p.16, physiology/CH09 p.22",
+              "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉主要是細胞外陽離子"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "renal-handling",
+              "quote": "再吸收把管液中物質送回血；分泌把血中物質送入管液。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "electrolyte-balance-case-q05",
+            "stem": "已知氯離子（Cl⁻）是細胞外主要陰離子，也就是外液裡較多的負電小粒子，再配上副甲狀腺素（PTH，調整鈣與磷的激素）的腎臟作用，哪一組正確？",
+            "options": [
+              "氯主要在細胞外；PTH留鈣、排磷",
+              "氯主要在細胞內；PTH留鈣、排磷",
+              "氯主要在細胞外；PTH排鈣、留磷",
+              "氯主要在細胞外；PTH留鈣、也留磷"
+            ],
+            "answer": 0,
+            "hint": "先想想：題目已說氯在外面，鈣和磷又各該留下還是排掉？",
+            "explain": "因為副甲狀腺素PTH在腎臟幫忙回收鈣、排出磷，所以配上題目已給的氯分布，選「氯主要在細胞外；PTH留鈣、排磷」。選「氯主要在細胞內；PTH留鈣、排磷」的同學，把已知的細胞外改成細胞內了。",
+            "nodeId": "electrolyte-balance-node-05",
+            "sources": [
+              "chloride-balance；physiology/CH09 p.34, physiology/CH09 p.16",
+              "calcium-phosphate-balance；physiology/CH09 p.35, physiology/CH09 p.16"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子"
+            },
+            {
+              "uid": "calcium-phosphate-balance",
+              "quote": "加強腎小管回收 Ca²⁺ 並排 HPO₄²⁻。"
+            },
+            {
+              "uid": "calcium-phosphate-balance",
+              "quote": "PTH 在骨與腎對磷的方向須分位置：骨釋出磷，腎抑制再吸收並排磷。"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "從葡萄糖切換到完全解離的NaCl，同樣起始分子數下會怎樣？",
+          "options": [
+            "解離後粒子數增加",
+            "粒子數必定減少",
+            "只剩Na⁺而沒有Cl⁻",
+            "變成與價數無關的尿流量"
+          ],
+          "answer": 0,
+          "feedback": "NaCl每個分子形成Na⁺與Cl⁻，粒子數由一份起始分子對應兩粒子。",
+          "sources": [
+            "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "electrolyte-balance-node-01",
+        "title": {
+          "text": "解離與粒子數",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。\n等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-01.svg",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "electrolyte-balance-node-02",
+        "title": {
+          "text": "滲透與水移動",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。\n等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-02.svg",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下列步驟與原句排列順序，再核對結果。",
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "葡萄糖為 1 粒子非電解質不解離",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+                }
+              ]
+            },
+            {
+              "text": "NaCl 成 Na⁺、Cl⁻ 共 2 粒子",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+                }
+              ]
+            },
+            {
+              "text": "MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子",
+              "sources": [
+                {
+                  "uid": "electrolyte-osmolarity",
+                  "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2
+          ]
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-02-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "水",
+                  "sources": [
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "水移向離子或分子較多區域；"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "離子或分子較多區域",
+                  "sources": [
+                    {
+                      "uid": "electrolyte-osmolarity",
+                      "quote": "水移向離子或分子較多區域；"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    430,
+                    390
+                  ],
+                  [
+                    560,
+                    390
+                  ],
+                  [
+                    660,
+                    390
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "水移向離子或分子較多區域；"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "electrolyte-balance-node-03",
+        "title": {
+          "text": "mEq與mOsm的意義",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。\n等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-03-data.svg",
+          "sources": [
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「二粒子」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "electrolyte-balance-node-04",
+        "title": {
+          "text": "鈉與鉀",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "- 鈉主要是細胞外陽離子\n- 醛固酮配保鈉，ADH 配增加水通透性，心房利鈉尿肽配排鈉"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮與 ADH 都影響水但直接機制不同；濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "- 鈉主要是細胞外陽離子\n- 醛固酮配保鈉，ADH 配增加水通透性，心房利鈉尿肽配排鈉"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮與 ADH 都影響水但直接機制不同；濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。\n醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "- 鈉主要是細胞外陽離子\n- 醛固酮配保鈉，ADH 配增加水通透性，心房利鈉尿肽配排鈉"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮與 ADH 都影響水但直接機制不同；濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-04.svg",
+          "sources": [
+            {
+              "uid": "sodium-water-balance",
+              "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "- 鈉主要是細胞外陽離子\n- 醛固酮配保鈉，ADH 配增加水通透性，心房利鈉尿肽配排鈉"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "醛固酮與 ADH 都影響水但直接機制不同；濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "sodium-water-balance",
+                "quote": "鈉量與水量共同影響細胞外液狀態；課本區分醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮促進遠曲小管及集尿管鈉回收，水可隨滲透作用回收；ADH 直接增加遠端與集尿管水通透性。心房利鈉尿肽促鈉排出，口渴及飲水亦參與水量調節。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "水分不足時可由口渴增加攝取及 ADH 增加保水配合；鈉的總量改變與鈉濃度改變不能視為同一件事。"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "- 鈉主要是細胞外陽離子\n- 醛固酮配保鈉，ADH 配增加水通透性，心房利鈉尿肽配排鈉"
+              },
+              {
+                "uid": "sodium-water-balance",
+                "quote": "醛固酮與 ADH 都影響水但直接機制不同；濃度是溶質量與水量的比例，不是只看鈉總量。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "electrolyte-balance-node-05",
+        "title": {
+          "text": "氯與鈣磷",
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "課本低氯血症例包括過度嘔吐、脫水、腹瀉造成血中 Cl⁻ 過低，可能有痙攣、鹼中毒、呼吸衰弱及昏迷；不另加補氯劑量或治療方案。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "- Cl⁻—細胞外主要陰離子—95–103 mEq/L。\n- 醛固酮間接配 Cl⁻；亨利氏環上升枝粗段亦有主動運輸。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "氯是陰離子，Na⁺ 是陽離子；「隨 Na⁺ 被動吸收」不能擴大成所有腎管段的氯運輸均被動。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。",
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "課本低氯血症例包括過度嘔吐、脫水、腹瀉造成血中 Cl⁻ 過低，可能有痙攣、鹼中毒、呼吸衰弱及昏迷；不另加補氯劑量或治療方案。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "- Cl⁻—細胞外主要陰離子—95–103 mEq/L。\n- 醛固酮間接配 Cl⁻；亨利氏環上升枝粗段亦有主動運輸。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "氯是陰離子，Na⁺ 是陽離子；「隨 Na⁺ 被動吸收」不能擴大成所有腎管段的氯運輸均被動。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。\nCl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。",
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "課本低氯血症例包括過度嘔吐、脫水、腹瀉造成血中 Cl⁻ 過低，可能有痙攣、鹼中毒、呼吸衰弱及昏迷；不另加補氯劑量或治療方案。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "- Cl⁻—細胞外主要陰離子—95–103 mEq/L。\n- 醛固酮間接配 Cl⁻；亨利氏環上升枝粗段亦有主動運輸。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "氯是陰離子，Na⁺ 是陽離子；「隨 Na⁺ 被動吸收」不能擴大成所有腎管段的氯運輸均被動。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-05.svg",
+          "sources": [
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "Cl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "課本低氯血症例包括過度嘔吐、脫水、腹瀉造成血中 Cl⁻ 過低，可能有痙攣、鹼中毒、呼吸衰弱及昏迷；不另加補氯劑量或治療方案。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "- Cl⁻—細胞外主要陰離子—95–103 mEq/L。\n- 醛固酮間接配 Cl⁻；亨利氏環上升枝粗段亦有主動運輸。"
+            },
+            {
+              "uid": "chloride-balance",
+              "quote": "氯是陰離子，Na⁺ 是陽離子；「隨 Na⁺ 被動吸收」不能擴大成所有腎管段的氯運輸均被動。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "chloride-balance",
+                "quote": "Cl⁻ 為細胞外液主要陰離子，課本正常血清濃度為 95–103 mEq/L，參與不同體液區間滲透壓的調節。"
+              },
+              {
+                "uid": "chloride-balance",
+                "quote": "Cl⁻ 易在細胞內外區間擴散。Na⁺ 在醛固酮調節下再吸收時，Cl⁻ 可被動吸收，所以濃度間接受醛固酮影響；CH09 p.16 另述亨利氏環上升枝粗段有 Cl⁻ 主動運輸，兩個描述各有條件。"
+              },
+              {
+                "uid": "chloride-balance",
+                "quote": "課本低氯血症例包括過度嘔吐、脫水、腹瀉造成血中 Cl⁻ 過低，可能有痙攣、鹼中毒、呼吸衰弱及昏迷；不另加補氯劑量或治療方案。"
+              },
+              {
+                "uid": "chloride-balance",
+                "quote": "- Cl⁻—細胞外主要陰離子—95–103 mEq/L。\n- 醛固酮間接配 Cl⁻；亨利氏環上升枝粗段亦有主動運輸。"
+              },
+              {
+                "uid": "chloride-balance",
+                "quote": "氯是陰離子，Na⁺ 是陽離子；「隨 Na⁺ 被動吸收」不能擴大成所有腎管段的氯運輸均被動。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "electrolyte-balance-node-06",
+        "title": {
+          "text": "鎂的角色",
+          "sources": [
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "高低鎂比較\n項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低\n課本表現 / 顫抖、強直、痙攣、甚至心律不整 / 昏迷、血壓降低\n容易混淆盲點 / 不配中樞抑制為主要敘述 / 不把低鎂痙攣整段搬過來"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "- 正常血漿 Mg²⁺ 1.3–2.1 mEq/L。\n- 低鎂配興奮增加；高鎂配中樞減低與低血壓。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "血漿參考濃度不代表鎂以細胞外為主要分布；勿把鎂的 mEq/L 數字套用成鈣或鉀的範圍。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。",
+          "sources": [
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "高低鎂比較\n項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低\n課本表現 / 顫抖、強直、痙攣、甚至心律不整 / 昏迷、血壓降低\n容易混淆盲點 / 不配中樞抑制為主要敘述 / 不把低鎂痙攣整段搬過來"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "- 正常血漿 Mg²⁺ 1.3–2.1 mEq/L。\n- 低鎂配興奮增加；高鎂配中樞減低與低血壓。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "血漿參考濃度不代表鎂以細胞外為主要分布；勿把鎂的 mEq/L 數字套用成鈣或鉀的範圍。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。\nMg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。",
+          "sources": [
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "高低鎂比較\n項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低\n課本表現 / 顫抖、強直、痙攣、甚至心律不整 / 昏迷、血壓降低\n容易混淆盲點 / 不配中樞抑制為主要敘述 / 不把低鎂痙攣整段搬過來"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "- 正常血漿 Mg²⁺ 1.3–2.1 mEq/L。\n- 低鎂配興奮增加；高鎂配中樞減低與低血壓。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "血漿參考濃度不代表鎂以細胞外為主要分布；勿把鎂的 mEq/L 數字套用成鈣或鉀的範圍。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/electrolyte-balance-node-06.svg",
+          "sources": [
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "高低鎂比較\n項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低\n課本表現 / 顫抖、強直、痙攣、甚至心律不整 / 昏迷、血壓降低\n容易混淆盲點 / 不配中樞抑制為主要敘述 / 不把低鎂痙攣整段搬過來"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "- 正常血漿 Mg²⁺ 1.3–2.1 mEq/L。\n- 低鎂配興奮增加；高鎂配中樞減低與低血壓。"
+            },
+            {
+              "uid": "magnesium-balance",
+              "quote": "血漿參考濃度不代表鎂以細胞外為主要分布；勿把鎂的 mEq/L 數字套用成鈣或鉀的範圍。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「三粒子」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "magnesium-balance",
+                "quote": "Mg²⁺ 是細胞內主要電解質之一，課本正常血漿濃度為 1.3–2.1 mEq/L；低血鎂與高血鎂的神經反應方向不同。"
+              },
+              {
+                "uid": "magnesium-balance",
+                "quote": "Mg²⁺ 活化醣類與蛋白質代謝的酶，參與 Na⁺–K⁺ 幫浦引發、核糖體製造、中樞神經傳遞及心肌功能。課本列利尿劑作用可使血鎂降低；不在此擴寫利尿劑類別或機轉。"
+              },
+              {
+                "uid": "magnesium-balance",
+                "quote": "高低鎂比較\n項目 / 低血鎂症 / 高血鎂症\n神經與肌肉 / 興奮性增加 / 中樞機能減低\n課本表現 / 顫抖、強直、痙攣、甚至心律不整 / 昏迷、血壓降低\n容易混淆盲點 / 不配中樞抑制為主要敘述 / 不把低鎂痙攣整段搬過來"
+              },
+              {
+                "uid": "magnesium-balance",
+                "quote": "- 正常血漿 Mg²⁺ 1.3–2.1 mEq/L。\n- 低鎂配興奮增加；高鎂配中樞減低與低血壓。"
+              },
+              {
+                "uid": "magnesium-balance",
+                "quote": "血漿參考濃度不代表鎂以細胞外為主要分布；勿把鎂的 mEq/L 數字套用成鈣或鉀的範圍。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "電解質、滲透與離子平衡",
+        "sources": [
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+          },
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+          },
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+          },
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+          },
+          {
+            "uid": "electrolyte-osmolarity",
+            "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "葡萄糖是非電解質，在水中不解離。課本等數目分子的例子，每個葡萄糖分子仍算一個粒子。",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "在課本完全解離的例子，氯化鈉成為鈉與氯兩種離子。每個NaCl的起始分子對應兩個粒子。",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+              },
+              {
+                "uid": "electrolyte-osmolarity",
+                "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "課本完全解離例中，氯化鎂形成一個鎂離子與兩個氯離子。總共三個粒子，二價不等於兩個粒子。",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "滲透效應要看解離後的粒子數。比較一、二、三粒子時，先固定相同起始分子數並採課本完全解離條件。",
+                "sources": [
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。滲透效應須看解離後粒子數，離子濃度亦以 mEq/L 表示並考慮價數。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "等數目分子完全解離的課本例：葡萄糖為 1 粒子，NaCl 成 Na⁺、Cl⁻ 共 2 粒子，MgCl₂ 成 Mg²⁺、2Cl⁻ 共 3 粒子。水移向離子或分子較多區域；Mg²⁺ 吸引 Cl⁻ 的量為 Na⁺ 的兩倍，故不能只看未解離分子的個數或質量。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。表 9-9 列細胞內主要陽離子 K⁺、細胞外 Na⁺，主要陰離子分別為磷酸根與 Cl⁻。"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "- 粒子數比較（相同起始分子數、依課本完全解離例）\n- 項目 / 葡萄糖 / NaCl / MgCl₂\n- 粒子數 / 1 / 2 / 3\n- 解離後 / 葡萄糖分子 / Na⁺、Cl⁻ / Mg²⁺、2Cl⁻\n- 容易混淆盲點 / 不解離 / 不是仍只算一粒子 / Mg²⁺ 價數 2 不等於只產生兩粒子"
+                  },
+                  {
+                    "uid": "electrolyte-osmolarity",
+                    "quote": "mEq/L 考慮離子價數，與滲透粒子數不是同一件事。原頁公式標離子重 g、溶液 L，未顯示毫量換算；本卡不照抄作計算題公式，待教師確認單位。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,387 @@
+{
+  "slug": "filtration-clearance",
+  "version": "v1",
+  "experience": "guided",
+  "title": "腎絲球過濾與清除率",
+  "subtitle": "由過濾方向、膜與壓力，連結清除率的意義、單位及指標物質。",
+  "label": "腎絲球過濾與清除率｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "血液到囊腔",
+      "label": "過濾方向"
+    },
+    {
+      "value": "三層膜",
+      "label": "過濾屏障"
+    },
+    {
+      "value": "菊糖／肌酸酐／PAH",
+      "label": "處理方式與測量目標"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中構造與方向建立關係；紅色粗體標出本次觀察的重點。",
+    "figure": "filtration-clearance-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "過濾",
+        "explain": "血到囊的過濾方向。"
+      },
+      {
+        "id": "state-2",
+        "label": "排泄",
+        "explain": "菊糖只過濾，不再吸收不分泌。"
+      },
+      {
+        "id": "state-3",
+        "label": "計算",
+        "explain": "課本尿素示例：U＝18 mg/mL、V＝1 mL/min、P＝0.26 mg/mL，C 約 69 mL/min。"
+      }
+    ],
+    "predict": {
+      "question": "由過濾方向改看菊糖的排泄，應預測哪種小管處理？",
+      "options": [
+        "過濾後全部再吸收",
+        "只由小管分泌，不過濾",
+        "只過濾，不再吸收也不分泌",
+        "完全不經腎臟處理"
+      ],
+      "answer": 2,
+      "feedback": "菊糖只過濾，其清除率可對應 GFR；形成濾液與後續物質排泄仍是兩個觀察層次，見節點 06。",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "filtration-clearance-node-01",
+      "tag": "01",
+      "title": "過濾位置與方向",
+      "summary": "腎絲球過濾使水與可通過的溶質由腎絲球微血管跨過過濾膜，進入鮑氏囊腔形成濾液",
+      "figure": "filtration-clearance-node-01.svg",
+      "concept": "腎絲球過濾使水與可通過的溶質由腎絲球微血管跨過過濾膜，進入鮑氏囊腔形成濾液。",
+      "points": [
+        "過濾發生於腎小體。",
+        "鮑氏囊內的濾液之後仍會經小管處理。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "讀過濾示意時先指出血液側與囊腔側，沿跨膜方向說出起點與終點，勿把濾液直接稱為最終尿。"
+      },
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、11–12 頁。",
+      "caption": "腎絲球過濾使水與可通過的溶質由腎絲球微血管跨過過濾膜，進入鮑氏囊腔形成濾液。"
+    },
+    {
+      "id": "filtration-clearance-node-02",
+      "tag": "02",
+      "title": "三層過濾膜",
+      "summary": "三層過濾膜依序包含微血管內皮、基底膜與鮑氏囊臟層的足細胞及其過濾裂隙",
+      "figure": "filtration-clearance-node-02.svg",
+      "concept": "三層過濾膜依序包含微血管內皮、基底膜與鮑氏囊臟層的足細胞及其過濾裂隙。",
+      "points": [
+        "足細胞屬於鮑氏囊臟層。",
+        "鮑氏囊壁層不是三層過濾膜的第三層。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在膜的放大圖由血液側向外逐層辨認，將包圍囊腔的壁層與貼近微血管的足細胞分開。"
+      },
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、11–12 頁。",
+      "caption": "三層過濾膜依序包含微血管內皮、基底膜與鮑氏囊臟層的足細胞及其過濾裂隙。"
+    },
+    {
+      "id": "filtration-clearance-node-03",
+      "tag": "03",
+      "title": "血漿與濾液成分",
+      "summary": "葡萄糖與胺基酸等小溶質可通過過濾膜，白蛋白則受限制",
+      "figure": "filtration-clearance-node-03.svg",
+      "concept": "葡萄糖與胺基酸等小溶質可通過過濾膜，白蛋白則受限制；比較血漿與濾液時，重要差別在蛋白質。",
+      "points": [
+        "血漿本來就不包含血球。",
+        "正常濾液中的白蛋白與血漿不同。",
+        "不能把所有大小的蛋白質都視為完全相同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較血漿與濾液時，先排除「血球被移除」的誤解，再比較白蛋白與小溶質的通過情況。"
+      },
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、11–12 頁。",
+      "caption": "葡萄糖與胺基酸等小溶質可通過過濾膜，白蛋白則受限制。"
+    },
+    {
+      "id": "filtration-clearance-node-04",
+      "tag": "04",
+      "title": "促進與對抗過濾的壓力",
+      "summary": "腎絲球靜水壓促進過濾，鮑氏囊內靜水壓與血漿膠體滲透壓對抗過濾",
+      "figure": "filtration-clearance-node-04-data.svg",
+      "concept": "腎絲球靜水壓促進過濾，鮑氏囊內靜水壓與血漿膠體滲透壓對抗過濾；課本計算例為 55＋0－15－30＝10 mmHg。",
+      "points": [
+        "55 mmHg 是此例的腎絲球靜水壓。",
+        "囊內靜水壓為 15 mmHg，血漿膠體滲透壓為 30 mmHg。",
+        "鮑氏囊膠體滲透壓在此例取 0。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "計算時先將促進與對抗壓力分組，再帶入同一計算例的數值，避免混用課本不同段落的數字。"
+      },
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+        "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+      ],
+      "reference": "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、11–12 頁。",
+      "caption": "腎絲球靜水壓促進過濾，鮑氏囊內靜水壓與血漿膠體滲透壓對抗過濾。"
+    },
+    {
+      "id": "filtration-clearance-node-05",
+      "tag": "05",
+      "title": "清除率的量與單位",
+      "summary": "血漿清除率 C＝U×V／P",
+      "figure": "filtration-clearance-node-05-data.svg",
+      "concept": "血漿清除率 C＝U×V／P；U 是尿中物質濃度、V 是每分鐘尿流量、P 是同一物質的血漿濃度。",
+      "points": [
+        "U 與 P 使用相容的濃度單位。",
+        "V 須換成 mL/min。",
+        "清除率表示相當的血漿體積流率。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "課本尿素示例 U＝18 mg/mL、V＝1 mL/min、P＝0.26 mg/mL，可得 C 約 69 mL/min；結果不是物質排出的 mg/min。"
+      },
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 13–15、26–27 頁。",
+      "caption": "血漿清除率 C＝U×V／P。"
+    },
+    {
+      "id": "filtration-clearance-node-06",
+      "tag": "06",
+      "title": "菊糖、肌酸酐與PAH",
+      "summary": "菊糖可過濾而不再吸收、不分泌，清除率等於 GFR",
+      "figure": "filtration-clearance-node-06.svg",
+      "concept": "菊糖可過濾而不再吸收、不分泌，清除率等於 GFR；肌酸酐有少量分泌，可估 GFR；PAH 經過濾與分泌，可估腎血漿流量。",
+      "points": [
+        "菊糖與肌酸酐的分泌條件不同。",
+        "PAH 對應的是血漿流量。",
+        "血漿流量換算全部血流量還需血漿比例。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "配對指標時同時檢查「物質如何被處理」與「想估哪一種流量」，不能只看到清除率就全部當作 GFR。"
+      },
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 13–15、26–27 頁。",
+      "caption": "菊糖可過濾而不再吸收、不分泌，清除率等於 GFR。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "filtration-clearance-foundation-q01",
+      "stem": "腎絲球過濾的主要方向為何？",
+      "options": [
+        "腎絲球微血管到鮑氏囊腔",
+        "鮑氏囊腔到入球小動脈",
+        "腎盂到腎皮質",
+        "膀胱到輸尿管"
+      ],
+      "answer": 0,
+      "hint": "先區分血液側與初始濾液側。",
+      "explain": "水與可通過溶質由腎絲球微血管跨過過濾膜進入鮑氏囊腔，之後再經小管處理。",
+      "nodeId": "filtration-clearance-node-01",
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q02",
+      "stem": "哪一組構成三層過濾膜？",
+      "options": [
+        "微血管內皮、腎被膜、鮑氏囊壁層",
+        "微血管內皮、基底膜、足細胞",
+        "近曲小管、遠曲小管、集尿管",
+        "入球小動脈、出球小動脈、腎靜脈"
+      ],
+      "answer": 1,
+      "hint": "找出貼近過濾介面的三層。",
+      "explain": "過濾膜包含微血管內皮、基底膜及臟層足細胞；鮑氏囊壁層不是第三層。",
+      "nodeId": "filtration-clearance-node-02",
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q03",
+      "stem": "比較正常血漿與腎絲球濾液，哪一項較能顯示兩者差別？",
+      "options": [
+        "血漿中的血球數量",
+        "兩者是否都含水",
+        "白蛋白的含量",
+        "兩者是否都含葡萄糖"
+      ],
+      "answer": 2,
+      "hint": "先想血漿原本是否含血球。",
+      "explain": "血漿本就不含血球；小溶質與水可過濾，白蛋白的通過受限，因此蛋白質是重要差別。",
+      "nodeId": "filtration-clearance-node-03",
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q04",
+      "stem": "哪種壓力促進腎絲球過濾？",
+      "options": [
+        "鮑氏囊內靜水壓",
+        "血漿膠體滲透壓",
+        "尿道外括約肌張力",
+        "腎絲球微血管靜水壓"
+      ],
+      "answer": 3,
+      "hint": "比較壓力朝向囊腔或阻止進入的作用。",
+      "explain": "腎絲球靜水壓促進過濾，囊內靜水壓與血漿膠體滲透壓則對抗；本課計算例為 55＋0－15－30＝10 mmHg。",
+      "nodeId": "filtration-clearance-node-04",
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+        "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q05",
+      "stem": "C＝U×V／P 計算出的清除率，表示哪種量？",
+      "options": [
+        "每分鐘相當被清除的血漿體積",
+        "每分鐘尿中排出的物質質量",
+        "每毫升尿中的物質濃度",
+        "每天由膀胱排出的總尿量"
+      ],
+      "answer": 0,
+      "hint": "先將濃度比與尿流量的單位相乘。",
+      "explain": "U 與 P 的濃度單位相消後，留下體積／時間；清除率不是 mg/min 的物質排泄量。",
+      "nodeId": "filtration-clearance-node-05",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    },
+    {
+      "id": "filtration-clearance-foundation-q06",
+      "stem": "哪種物質只過濾、不再吸收也不分泌，可用其清除率對應 GFR？",
+      "options": [
+        "PAH",
+        "菊糖",
+        "葡萄糖",
+        "尿素"
+      ],
+      "answer": 1,
+      "hint": "排除有回收或額外分泌的物質。",
+      "explain": "菊糖只過濾，清除率等於 GFR；PAH 有分泌，葡萄糖與尿素則有再吸收。",
+      "nodeId": "filtration-clearance-node-06",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "filtration-clearance-case-q01",
+      "stem": "【單位整理】收集一小時尿液後，要把尿量帶入以 mL/min 為單位的 V，應如何處理？",
+      "options": [
+        "一小時尿量乘以 60",
+        "直接用一小時尿量",
+        "一小時尿量除以 60",
+        "先除以血漿濃度即可"
+      ],
+      "answer": 2,
+      "hint": "流量的分母要先統一為分鐘。",
+      "explain": "一小時等於 60 分鐘，故先將收集量除以 60，再代入清除率公式。",
+      "nodeId": "filtration-clearance-node-05",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    },
+    {
+      "id": "filtration-clearance-case-q02",
+      "stem": "【結果判讀】計算得到清除率 69 mL/min，哪種說明符合其意義？",
+      "options": [
+        "每分鐘一定排出 69 mg 該物質",
+        "每分鐘一定形成 69 mL 最終尿",
+        "尿中每毫升含 69 mg 該物質",
+        "每分鐘相當清除 69 mL 血漿中的該物質"
+      ],
+      "answer": 3,
+      "hint": "辨別結果單位是體積流率或物質流率。",
+      "explain": "清除率的 mL/min 指相當血漿體積；物質排泄量需用尿濃度乘尿流量另算。",
+      "nodeId": "filtration-clearance-node-05",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    },
+    {
+      "id": "filtration-clearance-case-q03",
+      "stem": "【指標比較】菊糖與肌酸酐都可用來理解 GFR，哪項差異正確？",
+      "options": [
+        "肌酸酐另有少量分泌，菊糖不分泌",
+        "菊糖大量再吸收，肌酸酐全不過濾",
+        "兩者都只靠分泌進入尿液",
+        "兩者都完全不分泌"
+      ],
+      "answer": 0,
+      "hint": "核對過濾後的小管處理是否相同。",
+      "explain": "菊糖不再吸收也不分泌；肌酸酐有少量分泌，故兩者不能視為完全相同的處理條件。",
+      "nodeId": "filtration-clearance-node-06",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    },
+    {
+      "id": "filtration-clearance-case-q04",
+      "stem": "【流量配對】將 PAH 清除率直接標為全部腎血流量，問題在哪裡？",
+      "options": [
+        "PAH 只估膀胱容量",
+        "它估的是腎血漿流量，換算血流還需血漿比例",
+        "PAH 不能經過濾或分泌",
+        "血漿流量與血流量一定相等"
+      ],
+      "answer": 1,
+      "hint": "問清楚是否已包含血球部分。",
+      "explain": "PAH 可估 RPF；全部 RBF 還包含血球，兩者不能直接畫上等號。",
+      "nodeId": "filtration-clearance-node-06",
+      "sources": [
+        "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+      ]
+    },
+    {
+      "id": "filtration-clearance-case-q05",
+      "stem": "【成分比較】測得鮑氏囊濾液的葡萄糖濃度與血漿相近，最合理的解釋為何？",
+      "options": [
+        "葡萄糖在鮑氏囊內被分泌",
+        "濾液中的血球釋出葡萄糖",
+        "葡萄糖可自由通過過濾膜",
+        "白蛋白攜帶葡萄糖通過"
+      ],
+      "answer": 2,
+      "hint": "判斷葡萄糖這類小溶質能否通過過濾膜。",
+      "explain": "葡萄糖是可通過過濾膜的小溶質，因此初始濾液濃度可與血漿相近；並非囊內分泌、血球釋出或靠白蛋白通過。",
+      "nodeId": "filtration-clearance-node-03",
+      "sources": [
+        "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 5–6 頁；《生理學》腎臟與體液的恆定，第 4、11–15、26–27 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

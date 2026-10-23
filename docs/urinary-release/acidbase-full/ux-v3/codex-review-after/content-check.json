@@ -1,0 +1,4488 @@
+{
+  "pass": true,
+  "errors": [],
+  "matches": [
+    {
+      "path": "full",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "full",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "full",
+      "uid": "buffer-systems",
+      "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+    },
+    {
+      "path": "full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "full",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full",
+      "uid": "abg-interpretation",
+      "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+    },
+    {
+      "path": "full",
+      "uid": "abg-interpretation",
+      "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+    },
+    {
+      "path": "full",
+      "uid": "abg-interpretation",
+      "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+    },
+    {
+      "path": "full",
+      "uid": "respiratory-alkalosis",
+      "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+    },
+    {
+      "path": "full",
+      "uid": "respiratory-alkalosis",
+      "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+    },
+    {
+      "path": "full",
+      "uid": "metabolic-alkalosis",
+      "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+    },
+    {
+      "path": "full.nodes[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "full.nodes[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "full.nodes[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.nodes[1]",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "full.nodes[2]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "full.nodes[2]",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+    },
+    {
+      "path": "full.nodes[2]",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "full.nodes[2]",
+      "uid": "buffer-systems",
+      "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+    },
+    {
+      "path": "full.nodes[3]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.nodes[3]",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full.nodes[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full.nodes[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.nodes[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.nodes[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full.nodes[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.nodes[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full.nodes[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.foundation[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "full.foundation[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "full.foundation[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.foundation[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.foundation[2]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "full.foundation[2]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "full.foundation[3]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.foundation[3]",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full.foundation[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.foundation[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full.foundation[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.foundation[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.pool[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.pool[0]",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "full.pool[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.pool[2]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full.pool[2]",
+      "uid": "abg-interpretation",
+      "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+    },
+    {
+      "path": "full.pool[2]",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full.pool[3]",
+      "uid": "respiratory-alkalosis",
+      "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+    },
+    {
+      "path": "full.pool[3]",
+      "uid": "respiratory-alkalosis",
+      "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+    },
+    {
+      "path": "full.pool[3]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full.pool[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.pool[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full.pool[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.pool[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "full.pool[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.pool[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full.pool[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.pool[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "full.pool[6]",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "full.pool[6]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full.pool[6]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.pool[7]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "full.pool[7]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "full.pool[7]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full.pool[8]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full.pool[8]",
+      "uid": "abg-interpretation",
+      "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+    },
+    {
+      "path": "full.pool[8]",
+      "uid": "abg-interpretation",
+      "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+    },
+    {
+      "path": "full.pool[9]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full.pool[9]",
+      "uid": "metabolic-alkalosis",
+      "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+    },
+    {
+      "path": "full.glossary[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "full.glossary[0]",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "full.glossary[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.glossary[1]",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "full.glossary[2]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "full.glossary[2]",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full.glossary[3]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.glossary[3]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "full.glossary[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "full.glossary[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "full.glossary[5]",
+      "uid": "abg-interpretation",
+      "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+    },
+    {
+      "path": "full.glossary[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "full.glossary[6]",
+      "uid": "respiratory-alkalosis",
+      "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+    },
+    {
+      "path": "full.glossary[6]",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "full.glossary[7]",
+      "uid": "abg-interpretation",
+      "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+    },
+    {
+      "path": "full.glossary[7]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "full.glossary[8]",
+      "uid": "metabolic-alkalosis",
+      "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+    },
+    {
+      "path": "full.glossary[8]",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "guidance.slots[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "guidance.slots[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "guidance.slots[2]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "graph.edge_buffer_ph",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "graph.edge_resp_ph",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "graph.edge_renal_ph",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "graph.edge_ratio_ph",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "graph.edge_resp_co2",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "graph.edge_co2_ratio",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "graph.edge_renal_h",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。"
+    },
+    {
+      "path": "graph.edge_renal_hco3",
+      "uid": "renal-acid-base-compensation",
+      "quote": "NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "graph.edge_h_ph",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "graph.edge_hco3_ratio",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "graph.edge_h_hco3_parallel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.F1",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "question.F1",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "question.F1",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.F2",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "question.F3",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "question.F3",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "question.F4",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "question.F4",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "question.F5",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.F6",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "question.F6",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.F6",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "question.P-A",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "question.P-A",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "question.P-B",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "question.R-A",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "question.R-A",
+      "uid": "abg-interpretation",
+      "quote": "高 CO₂ 配低 pH 為呼吸性酸方向"
+    },
+    {
+      "path": "question.R-A",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "question.R-B",
+      "uid": "respiratory-alkalosis",
+      "quote": "呼出 CO₂ 增多，使碳酸系統往減少 H⁺的方向改變，pH 上升。若伴隨代償，腎臟對酸與碳酸氫根的調節須與主要呼吸變化分開判讀。"
+    },
+    {
+      "path": "question.R-B",
+      "uid": "respiratory-alkalosis",
+      "quote": "低 CO₂ 與高 pH 配呼吸性鹼方向"
+    },
+    {
+      "path": "question.R-B",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "question.K-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.K-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "question.K-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "question.K-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "question.K-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.K-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "question.K-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "question.K-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。"
+    },
+    {
+      "path": "question.N-A",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "question.N-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "question.N-A",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "question.N-B",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "question.N-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "question.N-B",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "question.S-A",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "question.S-A",
+      "uid": "abg-interpretation",
+      "quote": "低 HCO₃⁻配低 pH 為代謝性酸方向"
+    },
+    {
+      "path": "question.S-A",
+      "uid": "abg-interpretation",
+      "quote": "pH 靠近正常不能單獨排除代償；指定頁面沒有完整混合型判讀與代償預測公式，不能僅靠本卡做全部臨床判斷。"
+    },
+    {
+      "path": "question.S-B",
+      "uid": "abg-interpretation",
+      "quote": "pH 低先判酸血症，pH 高先判鹼血症；CO₂ 增加使酸度增加，HCO₃⁻增加使鹼度增加。CO₂ 對應呼吸端，HCO₃⁻對應代謝端，再看另一端是否同時朝代償方向改變。"
+    },
+    {
+      "path": "question.S-B",
+      "uid": "metabolic-alkalosis",
+      "quote": "代謝性鹼中毒是代謝端酸減少或鹼增加，使血液 pH 朝高值偏移，常見 HCO₃⁻增加。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-01",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-01",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-02",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-02",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "path": "acid-base-homeostasis-node-03",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-03",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-03",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-03",
+      "uid": "buffer-systems",
+      "quote": "碳酸配細胞外，血紅素配血球，磷酸鹽與銨接尿液排酸。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-04",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-04",
+      "uid": "hypercapnia",
+      "quote": "若有效肺泡換氣不足，CO₂ 排出受限，需用 PCO₂ 與 pH 評估，而非只看呼吸次數。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-05",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-05",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-05",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-06",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-06",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "path": "acid-base-homeostasis-node-06",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    },
+    {
+      "path": "acid-base-homeostasis-node-06",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "path": "embeddedLab.title",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.title",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.title",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.title",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.title",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.header",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.header",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.header",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.header",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.header",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.referenceHeading",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.referenceHeading",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.referenceHeading",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.referenceHeading",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.referenceHeading",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.name",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.name",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.name",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.name",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.name",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.text",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.text",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.text",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.text",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.glossary.buffer.text",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.text",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.text",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.text",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.text",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.carbonate.text",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.text",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.text",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.text",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.text",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.resp.text",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.text",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.text",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.text",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.text",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.glossary.acid.text",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.glossary.renal.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.glossary.bicarb.text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].banner",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].name",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].name",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].name",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].name",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].name",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].detail",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].detail",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].detail",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].detail",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].detail",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].bindings[0].label",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].bindings[0].label",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].bindings[0].label",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].bindings[0].label",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].changes[0].bindings[0].label",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[0].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].label",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].label",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].label",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].label",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].label",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][0].compactLabel",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].label",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].label",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].label",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].label",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].label",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].flowStages[0][1].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[0].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].banner",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].banner",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].banner",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].banner",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].banner",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].name",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].name",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].name",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].name",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].name",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].detail",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].detail",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].detail",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].detail",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].detail",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].bindings[0].label",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].bindings[0].label",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].bindings[0].label",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].bindings[0].label",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].bindings[0].label",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0]",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].short",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].labels[0].full",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[1].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].label",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].label",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].label",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].label",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].label",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[0][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].label",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].label",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].label",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].label",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].label",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flowStages[2][0].compactLabel",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0]",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].description",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[2].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].banner",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].banner",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].banner",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].banner",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].banner",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].detail",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].detail",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].detail",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].detail",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].detail",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].bindings[0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].bindings[0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].bindings[0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].bindings[0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].bindings[0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].short",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].short",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].short",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].short",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].short",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].labels[0].full",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].name",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].amount",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].unit",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].intake[0].status",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][0].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].label",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flowStages[0][1].compactLabel",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0].description",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0].description",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0].description",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0].description",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].edges[0].description",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[0]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[1]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[2]",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[3]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.questions.foundation[5]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.questions.cases[0]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.questions.cases[1]",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.questions.cases[2]",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.questions.cases[3]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.questions.cases[4]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.questions.predict",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].title",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].title",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].title",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].title",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].title",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].summary",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].summary",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].summary",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].summary",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].summary",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].concept",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].concept",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].concept",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].concept",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].concept",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].figure",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].figure",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].figure",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].figure",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].figure",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[0].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].title",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].title",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].title",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].title",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].title",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].summary",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].summary",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].summary",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].summary",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].summary",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].concept",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].concept",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].concept",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].concept",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].concept",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].figure",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].figure",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].figure",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].figure",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].figure",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.steps[0]",
+      "uid": "acid-base-balance",
+      "quote": "比例中的鹼在分子、酸在分母",
+      "line": 75
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.steps[1]",
+      "uid": "acid-base-balance",
+      "quote": "比例中的鹼在分子、酸在分母",
+      "line": 75
+    },
+    {
+      "path": "embeddedLab.learning.nodes[1].lookTask.steps[2]",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].title",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].title",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].title",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].title",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].title",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].summary",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].summary",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].summary",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].summary",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].summary",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].concept",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].concept",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].concept",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].concept",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].concept",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].figure",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].figure",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].figure",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].figure",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].figure",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].lookTask.instruction",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].lookTask.instruction",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].lookTask.instruction",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].lookTask.instruction",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.nodes[2].lookTask.instruction",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].title",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].title",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].title",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].title",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].title",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].summary",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].summary",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].summary",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].summary",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].summary",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].concept",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].concept",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].concept",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].concept",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].concept",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].figure",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].figure",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].figure",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].figure",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].figure",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.nodes[3].lookTask.instruction",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].flowRoutes[0].segments[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].flowRoutes[0].segments[0].from",
+      "uid": "renal-acid-base-compensation",
+      "quote": "同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[4].flowRoutes[0].segments[0].to",
+      "uid": "renal-acid-base-compensation",
+      "quote": "同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].summary",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].concept",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].figure",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.nodes[5].lookTask.instruction",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.center",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.center",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.center",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.center",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.center",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].title",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[0].text",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。",
+      "line": 48
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[0].text",
+      "uid": "buffer-systems",
+      "quote": "碳酸/HCO₃⁻為重要細胞外緩衝；磷酸鹽可在腎小管承接 H⁺，血紅素與蛋白的可解離基團亦能緩衝。課本 pH 由 pKa 與鹼/酸比決定。",
+      "line": 52
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[0].text",
+      "uid": "buffer-systems",
+      "quote": "緩衝先降低 pH 波動，再由呼吸排 CO₂、腎臟排酸調整；尿中 NH₄⁺與磷酸鹽攜酸與腎臟功能相連。",
+      "line": 56
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[0].text",
+      "uid": "buffer-systems",
+      "quote": "- 鹼/酸比增加使 pH 上升\n- 緩衝並非只靠碳酸一組，血紅素和蛋白也有角色",
+      "line": 60
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[0].text",
+      "uid": "buffer-systems",
+      "quote": "化學暫時接住 H⁺與真正排出酸不同；細胞外、血球與尿液中緩衝的所在不可混同。",
+      "line": 65
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[1].text",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[1].text",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[1].text",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[1].text",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[0].items[1].text",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].title",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[0].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[0].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[0].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[0].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[0].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[1].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "腎臟藉分泌 H⁺、排出銨與可滴定酸，以及回收或產生 HCO₃⁻，調整血液酸鹼。",
+      "line": 55
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[1].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[1].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "呼吸性酸中毒可由腎臟增加酸性銨排泄與血漿 HCO₃⁻來代償；血液 pH 降低時腎小管排酸作用增加。",
+      "line": 63
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[1].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "- 排銨增加與保留碳酸氫根增加是同方向的排酸留鹼\n- 課本正常血 pH 為 7.35–7.45",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.learning.mindmap.branches[1].items[1].text",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。",
+      "line": 72
+    },
+    {
+      "path": "embeddedLab.acid-base-homeostasis-node-05.flowRoutes.flow-05-1.segments[0]",
+      "uid": "renal-acid-base-compensation",
+      "quote": "同時 HCO₃⁻回到血液。",
+      "line": 59
+    },
+    {
+      "path": "embeddedLab.lab.states[1].changes[0].directionSources",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flow[0].directionSources",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].flow[1].directionSources",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].fromSources",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].fromSources",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].fromSources",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].fromSources",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].fromSources",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].toSources",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。",
+      "line": 62
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].toSources",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。",
+      "line": 66
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].toSources",
+      "uid": "acid-base-balance",
+      "quote": "呼吸性異常主看 CO₂，代謝性異常主看 HCO₃⁻；呼吸調整較快，腎臟代償需較長時間。",
+      "line": 70
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].toSources",
+      "uid": "acid-base-balance",
+      "quote": "- 區分酸中毒與鹼中毒後，再分呼吸或代謝來源\n- 比例中的鹼在分子、酸在分母",
+      "line": 74
+    },
+    {
+      "path": "embeddedLab.lab.states[1].edges[0].toSources",
+      "uid": "acid-base-balance",
+      "quote": "緩衝可減少 pH 波動，但不等於酸已全部排出體外；呼吸與腎臟的角色也不可互換。",
+      "line": 79
+    },
+    {
+      "path": "embeddedLab.lab.states[2].changes[0].directionSources",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flow[0].directionSources",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼",
+      "line": 67
+    },
+    {
+      "path": "embeddedLab.lab.states[2].flow[1].directionSources",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼",
+      "line": 67
+    }
+  ],
+  "sourceUids": [
+    "acid-base-balance",
+    "buffer-systems",
+    "renal-acid-base-compensation",
+    "hypercapnia",
+    "abg-interpretation",
+    "respiratory-alkalosis",
+    "metabolic-alkalosis"
+  ],
+  "displayFields": 210,
+  "profile": "acidbase-full-v1",
+  "approvedStudentScript": {
+    "sha256": "3705725f11500321ca4ab8d9d6645bc7e6039515bc8d350c0aad366025a18816",
+    "units": 159,
+    "source": "docs/urinary-release/ACIDBASE_STUDENT_SCRIPT.md"
+  },
+  "skipped": 0
+}

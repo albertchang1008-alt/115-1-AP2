@@ -1,0 +1,2383 @@
+{
+  "pass": true,
+  "cases": 66,
+  "results": [
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q01",
+      "measure": [
+        {
+          "text": "只依Mg²⁺的價數判斷而不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "1粒子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "2粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "3粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q02",
+      "measure": [
+        {
+          "text": "與膜通透條件無關",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律朝粒子較少側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "粒子較多側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律不移動",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q03",
+      "measure": [
+        {
+          "text": "電荷當量涉及價數，粒子數須另計",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "兩者只描述水的體積",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "mEq/L直接表示尿流量",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "價數與解離粒子數永遠相同",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q04",
+      "measure": [
+        {
+          "text": "兩者都不存在細胞內",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "K⁺只存在血漿",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "Na⁺只存在內液",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "Na⁺主要外液、K⁺主要內液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q05",
+      "measure": [
+        {
+          "text": "只改變尿液顏色",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律保留",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律排出",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "增加鈣再吸收與磷排泄",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-foundation-q06",
+      "measure": [
+        {
+          "text": "完全沒有細胞內作用",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只是尿液顏色來源",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "參與酵素活性與神經肌肉功能",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只能當細胞外主要陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-case-q01",
+      "measure": [
+        {
+          "text": "將所有物質都視為不解離",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只比溶質外觀大小",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "確認NaCl完全解離並計入兩種離子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "只數Na⁺而不數Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-case-q02",
+      "measure": [
+        {
+          "text": "應只看水的多少而不看溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "混淆價數與全部解離產物的粒子數",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "忽略葡萄糖也有固定二價",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "應完全不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-case-q03",
+      "measure": [
+        {
+          "text": "膜可通水且不通溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只有離子價數即可",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膜條件完全不用知道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "溶質都能任意穿膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-case-q04",
+      "measure": [
+        {
+          "text": "把鉀分泌畫成管液回血",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "分開細胞膜的內外與血／管液方向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "將細胞外直接等同於尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "將細胞內直接等同於血漿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 1280,
+      "id": "electrolyte-balance-case-q05",
+      "measure": [
+        {
+          "text": "必須標出降鈣素分泌細胞才可判讀",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "Cl⁻是主要細胞外陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "PTH使鈣與磷一律同向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q01",
+      "measure": [
+        {
+          "text": "3粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只依Mg²⁺的價數判斷而不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "1粒子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "2粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q02",
+      "measure": [
+        {
+          "text": "與膜通透條件無關",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "粒子較多側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律朝粒子較少側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律不移動",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q03",
+      "measure": [
+        {
+          "text": "價數與解離粒子數永遠相同",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "兩者只描述水的體積",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "電荷當量涉及價數，粒子數須另計",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "mEq/L直接表示尿流量",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q04",
+      "measure": [
+        {
+          "text": "Na⁺只存在內液",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "K⁺只存在血漿",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "兩者都不存在細胞內",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "Na⁺主要外液、K⁺主要內液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q05",
+      "measure": [
+        {
+          "text": "增加鈣再吸收與磷排泄",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只改變尿液顏色",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律保留",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律排出",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-foundation-q06",
+      "measure": [
+        {
+          "text": "只是尿液顏色來源",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "參與酵素活性與神經肌肉功能",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只能當細胞外主要陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "完全沒有細胞內作用",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-case-q01",
+      "measure": [
+        {
+          "text": "將所有物質都視為不解離",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只比溶質外觀大小",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只數Na⁺而不數Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "確認NaCl完全解離並計入兩種離子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-case-q02",
+      "measure": [
+        {
+          "text": "忽略葡萄糖也有固定二價",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "混淆價數與全部解離產物的粒子數",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "應完全不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "應只看水的多少而不看溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-case-q03",
+      "measure": [
+        {
+          "text": "膜可通水且不通溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膜條件完全不用知道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "溶質都能任意穿膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只有離子價數即可",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-case-q04",
+      "measure": [
+        {
+          "text": "將細胞內直接等同於血漿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "將細胞外直接等同於尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "分開細胞膜的內外與血／管液方向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "把鉀分泌畫成管液回血",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 820,
+      "id": "electrolyte-balance-case-q05",
+      "measure": [
+        {
+          "text": "Cl⁻是主要細胞外陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "必須標出降鈣素分泌細胞才可判讀",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "PTH使鈣與磷一律同向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q01",
+      "measure": [
+        {
+          "text": "1粒子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "3粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只依Mg²⁺的價數判斷而不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "2粒子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q02",
+      "measure": [
+        {
+          "text": "與膜通透條件無關",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律不移動",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "粒子較多側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "一律朝粒子較少側",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q03",
+      "measure": [
+        {
+          "text": "價數與解離粒子數永遠相同",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "mEq/L直接表示尿流量",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "電荷當量涉及價數，粒子數須另計",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "兩者只描述水的體積",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q04",
+      "measure": [
+        {
+          "text": "Na⁺只存在內液",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "K⁺只存在血漿",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "Na⁺主要外液、K⁺主要內液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "兩者都不存在細胞內",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q05",
+      "measure": [
+        {
+          "text": "只改變尿液顏色",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律保留",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鈣與磷都一律排出",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "增加鈣再吸收與磷排泄",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-foundation-q06",
+      "measure": [
+        {
+          "text": "完全沒有細胞內作用",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只能當細胞外主要陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只是尿液顏色來源",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "參與酵素活性與神經肌肉功能",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-case-q01",
+      "measure": [
+        {
+          "text": "只比溶質外觀大小",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "確認NaCl完全解離並計入兩種離子",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        },
+        {
+          "text": "將所有物質都視為不解離",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只數Na⁺而不數Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0.0078125
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-case-q02",
+      "measure": [
+        {
+          "text": "應只看水的多少而不看溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "應完全不計Cl⁻",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "忽略葡萄糖也有固定二價",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "混淆價數與全部解離產物的粒子數",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-case-q03",
+      "measure": [
+        {
+          "text": "膜條件完全不用知道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "只有離子價數即可",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膜可通水且不通溶質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "溶質都能任意穿膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-case-q04",
+      "measure": [
+        {
+          "text": "將細胞外直接等同於尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "將細胞內直接等同於血漿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "把鉀分泌畫成管液回血",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "分開細胞膜的內外與血／管液方向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "width": 390,
+      "id": "electrolyte-balance-case-q05",
+      "measure": [
+        {
+          "text": "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "必須標出降鈣素分泌細胞才可判讀",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "Cl⁻是主要細胞外陽離子",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "PTH使鈣與磷一律同向",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q01",
+      "measure": [
+        {
+          "text": "位於腹膜腔內，右腎通常較高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於胸腔，左腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於後腹腔，右腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於骨盆腔，左右等高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q02",
+      "measure": [
+        {
+          "text": "腎臟外圍的脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "連接腎盂的輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "深入腎錐體之間的皮質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q03",
+      "measure": [
+        {
+          "text": "腎絲球",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎門",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "大腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q04",
+      "measure": [
+        {
+          "text": "脂肪囊、腎筋膜、腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜、脂肪囊、腎筋膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎筋膜、腎被膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜、腎筋膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q05",
+      "measure": [
+        {
+          "text": "尿道運送尿液到膀胱，輸尿管排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膀胱形成尿液，腎臟排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎臟形成尿液，膀胱儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管形成尿液，尿道儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-foundation-q06",
+      "measure": [
+        {
+          "text": "將尿液由膀胱運至腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "促進紅血球生成",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "使腎乳頭轉變為腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "直接作為膀胱壁肌肉",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-case-q01",
+      "measure": [
+        {
+          "text": "腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎乳頭",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-case-q02",
+      "measure": [
+        {
+          "text": "大腎盞、小腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "小腎盞、大腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎絲球、小腎盞、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盂、大腎盞、小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-case-q03",
+      "measure": [
+        {
+          "text": "腎小管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "尿道、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、腎小管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-case-q04",
+      "measure": [
+        {
+          "text": "是深入髓質的腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "就是腎門內的腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "是腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鄰近腎臟，仍是另一個器官",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 1280,
+      "id": "kidney-anatomy-case-q05",
+      "measure": [
+        {
+          "text": "造血訊號與維生素 D 活化",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盞收集與腎盂匯流",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膀胱暫存與括約肌控制",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管運尿與尿道排尿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q01",
+      "measure": [
+        {
+          "text": "位於腹膜腔內，右腎通常較高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於胸腔，左腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於後腹腔，右腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於骨盆腔，左右等高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q02",
+      "measure": [
+        {
+          "text": "深入腎錐體之間的皮質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎臟外圍的脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "連接腎盂的輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q03",
+      "measure": [
+        {
+          "text": "大腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎絲球",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎門",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q04",
+      "measure": [
+        {
+          "text": "脂肪囊、腎筋膜、腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜、脂肪囊、腎筋膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎筋膜、腎被膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜、腎筋膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q05",
+      "measure": [
+        {
+          "text": "膀胱形成尿液，腎臟排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "尿道運送尿液到膀胱，輸尿管排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎臟形成尿液，膀胱儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管形成尿液，尿道儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-foundation-q06",
+      "measure": [
+        {
+          "text": "使腎乳頭轉變為腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "直接作為膀胱壁肌肉",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "將尿液由膀胱運至腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "促進紅血球生成",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-case-q01",
+      "measure": [
+        {
+          "text": "腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎乳頭",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-case-q02",
+      "measure": [
+        {
+          "text": "大腎盞、小腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盂、大腎盞、小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎絲球、小腎盞、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "小腎盞、大腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-case-q03",
+      "measure": [
+        {
+          "text": "尿道、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、腎小管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎小管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-case-q04",
+      "measure": [
+        {
+          "text": "是深入髓質的腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "是腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "就是腎門內的腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鄰近腎臟，仍是另一個器官",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 820,
+      "id": "kidney-anatomy-case-q05",
+      "measure": [
+        {
+          "text": "腎盞收集與腎盂匯流",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "造血訊號與維生素 D 活化",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膀胱暫存與括約肌控制",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管運尿與尿道排尿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q01",
+      "measure": [
+        {
+          "text": "位於後腹腔，右腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於骨盆腔，左右等高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於胸腔，左腎通常較低",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "位於腹膜腔內，右腎通常較高",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q02",
+      "measure": [
+        {
+          "text": "深入腎錐體之間的皮質",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎臟外圍的脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "連接腎盂的輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q03",
+      "measure": [
+        {
+          "text": "大腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎絲球",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎門",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q04",
+      "measure": [
+        {
+          "text": "腎被膜、脂肪囊、腎筋膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜、腎筋膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎筋膜、腎被膜、脂肪囊",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "脂肪囊、腎筋膜、腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q05",
+      "measure": [
+        {
+          "text": "膀胱形成尿液，腎臟排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管形成尿液，尿道儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎臟形成尿液，膀胱儲存尿液",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "尿道運送尿液到膀胱，輸尿管排尿到體外",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-foundation-q06",
+      "measure": [
+        {
+          "text": "將尿液由膀胱運至腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "使腎乳頭轉變為腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "促進紅血球生成",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "直接作為膀胱壁肌肉",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-case-q01",
+      "measure": [
+        {
+          "text": "腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎被膜",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎乳頭",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-case-q02",
+      "measure": [
+        {
+          "text": "小腎盞、大腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎盂、大腎盞、小腎盞",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "腎絲球、小腎盞、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "大腎盞、小腎盞、腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-case-q03",
+      "measure": [
+        {
+          "text": "腎小管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "尿道、輸尿管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、尿道",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管、腎小管",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-case-q04",
+      "measure": [
+        {
+          "text": "是腎錐體的尖端",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "就是腎門內的腎盂",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "是深入髓質的腎柱",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "鄰近腎臟，仍是另一個器官",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "slug": "kidney-anatomy",
+      "width": 390,
+      "id": "kidney-anatomy-case-q05",
+      "measure": [
+        {
+          "text": "腎盞收集與腎盂匯流",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "輸尿管運尿與尿道排尿",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "造血訊號與維生素 D 活化",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        },
+        {
+          "text": "膀胱暫存與括約肌控制",
+          "align": "center",
+          "centerErrors": [
+            0
+          ]
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "skipped": 0
+}

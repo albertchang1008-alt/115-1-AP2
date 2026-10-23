@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "slug": "kidney-anatomy",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/kidney-anatomy-v1/index.html",
+  "sha256": "2bbfde0b88387c40885544cbc45f462f6afe39099093c48190f59a886869be9c",
+  "audit": {
+    "slug": "kidney-anatomy-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 15,
+    "questionIds": [
+      "kidney-anatomy-case-q01",
+      "kidney-anatomy-case-q02",
+      "kidney-anatomy-case-q03",
+      "kidney-anatomy-case-q04",
+      "kidney-anatomy-case-q05",
+      "kidney-anatomy-foundation-q01",
+      "kidney-anatomy-foundation-q02",
+      "kidney-anatomy-foundation-q03",
+      "kidney-anatomy-foundation-q04",
+      "kidney-anatomy-foundation-q05",
+      "kidney-anatomy-foundation-q06",
+      "kidney-anatomy-node-01-micro",
+      "kidney-anatomy-node-02-micro",
+      "kidney-anatomy-node-03-micro",
+      "kidney-anatomy-node-06-micro"
+    ]
+  },
+  "catalog": {
+    "label": "腎臟位置、構造與功能｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 15,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

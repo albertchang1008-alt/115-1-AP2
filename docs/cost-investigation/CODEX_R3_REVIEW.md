@@ -53,8 +53,8 @@ node node_modules/tsx/dist/cli.mjs --test docs/cost-investigation/codex-r3-audit
 
 | 檢查 | 結果 | 完整輸出 |
 |---|---|---|
-| npm run check | 前端191、Functions61；FAIL0／skipped0；型別與建置PASS | [Mac完整檢查](CODEX_R3_MAC_CHECK.txt) |
-| Codex獨立8案 | PASS8／FAIL0／skipped0 | [獨立測試輸出](CODEX_R3_AUDIT.txt) |
+| npm run check | 前端191、Functions61；FAIL0／skipped0；型別與建置PASS | [Mac完整檢查](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/cost-investigation/CODEX_R3_MAC_CHECK.txt) |
+| Codex獨立8案 | PASS8／FAIL0／skipped0 | [獨立測試輸出](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/cost-investigation/CODEX_R3_AUDIT.txt) |
 | 生產／獨立測試SHA | 檢查前後一致 | [雜湊清單](CODEX_R3_REVIEWED_FILES.json) |
 | 前輪未通過證據 | 保留歷史，非本輪結果 | [前輪報告](r3-before-r4/CODEX_R3_REVIEW.md) |
 

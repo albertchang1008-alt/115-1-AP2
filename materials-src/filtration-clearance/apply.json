@@ -1,0 +1,3574 @@
+{
+  "schemaVersion": 2,
+  "slug": "filtration-clearance",
+  "version": "v1",
+  "title": {
+    "text": "腎絲球過濾與清除率",
+    "sources": [
+      {
+        "uid": "glomerular-filtration",
+        "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+      },
+      {
+        "uid": "glomerular-filtration",
+        "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+      },
+      {
+        "uid": "glomerular-filtration",
+        "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+      },
+      {
+        "uid": "glomerular-filtration",
+        "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+      },
+      {
+        "uid": "glomerular-filtration",
+        "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・腎絲球過濾與清除率",
+      "sources": [
+        {
+          "uid": "glomerular-filtration",
+          "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+        },
+        {
+          "uid": "glomerular-filtration",
+          "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+      "width": 1122,
+      "height": 1402,
+      "anchorView": "overview"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "gfr-regulation",
+          "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+        },
+        {
+          "uid": "gfr-regulation",
+          "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+        },
+        {
+          "uid": "gfr-regulation",
+          "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+        },
+        {
+          "uid": "gfr-regulation",
+          "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+        },
+        {
+          "uid": "gfr-regulation",
+          "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "filter": {
+        "name": {
+          "text": "腎絲球過濾",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "text": {
+          "text": "過濾讓血中的水與可通過的溶質進入鮑氏囊。正常濾液不含血球與白蛋白。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        }
+      },
+      "membrane": {
+        "name": {
+          "text": "三層過濾膜",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "text": {
+          "text": "過濾膜依序是微血管內皮、基底膜和足細胞。鮑氏囊壁層不算在這三層裡。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        }
+      },
+      "inulin": {
+        "name": {
+          "text": "菊糖清除率",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "菊糖可自由過濾，不再吸收，也不分泌。因此它的清除率等於腎絲球過濾率，這是相等而非上升。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        }
+      },
+      "gfr": {
+        "name": {
+          "text": "腎絲球過濾率（GFR）",
+          "sources": [
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+            }
+          ]
+        },
+        "text": {
+          "text": "腎絲球過濾率（GFR）是每分鐘形成的濾液體積。課本男性約125、女性約115 mL/min。",
+          "sources": [
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+            }
+          ]
+        }
+      },
+      "formula": {
+        "name": {
+          "text": "清除率公式",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "清除率是尿濃度乘每分鐘尿量，再除以血漿濃度。單位mL/min代表相當的血漿體積，不是物質排泄量。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        }
+      },
+      "urea": {
+        "name": {
+          "text": "尿素計算例",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "課本尿素算例用U＝18、P＝0.26、V＝1，得到約69 mL/min。這是指定數值的計算結果，不表示清除率上升。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "過濾",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "水與可通過的溶質跨過濾膜進入鮑氏囊。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "filter",
+            "kind": "focus",
+            "name": {
+              "text": "腎絲球過濾",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "filter",
+                "term": "filter",
+                "label": {
+                  "text": "腎絲球過濾",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                    },
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                    },
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                    },
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                    },
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-0-0",
+            "kind": "focus",
+            "short": {
+              "text": "腎絲球",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                }
+              ]
+            },
+            "full": {
+              "text": "腎絲球",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.35,
+            "anchorRef": "腎絲球",
+            "anchor": [
+              0.4768270944741533,
+              0.47075606276747506
+            ],
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本男性GFR",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 125,
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mL/min",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "status": {
+              "text": "參照值",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "filter",
+              "term": "filter",
+              "kind": "focus",
+              "label": {
+                "text": "腎絲球過濾",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "過濾",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "membrane",
+              "term": "membrane",
+              "kind": "focus",
+              "label": {
+                "text": "三層過濾膜",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "過濾膜",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "filter"
+            ],
+            "to": [
+              "membrane"
+            ],
+            "description": {
+              "text": "水與可通過的溶質跨過濾膜進入鮑氏囊。",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                },
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "菊糖與GFR",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "菊糖清除率等於GFR，不代表GFR上升。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "inulin",
+            "kind": "focus",
+            "name": {
+              "text": "菊糖清除率",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "inulin",
+                "term": "inulin",
+                "label": {
+                  "text": "菊糖清除率",
+                  "sources": [
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "鮑氏囊",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "full": {
+              "text": "鮑氏囊",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.52,
+            "anchorRef": "鮑氏囊",
+            "anchor": [
+              0.8377896613190731,
+              0.5278174037089871
+            ],
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本男性GFR",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 125,
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mL/min",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "status": {
+              "text": "參照值",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "inulin",
+              "term": "inulin",
+              "kind": "focus",
+              "label": {
+                "text": "菊糖清除率",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "菊糖",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "gfr",
+              "term": "gfr",
+              "kind": "focus",
+              "label": {
+                "text": "腎絲球過濾率（GFR）",
+                "sources": [
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "GFR",
+                "sources": [
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                  },
+                  {
+                    "uid": "gfr-regulation",
+                    "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "inulin"
+            ],
+            "to": [
+              "gfr"
+            ],
+            "description": {
+              "text": "菊糖清除率等於GFR，不代表GFR上升。",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+              },
+              {
+                "uid": "gfr-regulation",
+                "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "尿素算例",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "以U×V/P計算清除率，分清濃度與每分鐘尿量。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "formula",
+            "kind": "focus",
+            "name": {
+              "text": "清除率公式",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "formula",
+                "term": "formula",
+                "label": {
+                  "text": "清除率公式",
+                  "sources": [
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                    },
+                    {
+                      "uid": "renal-clearance",
+                      "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "課本男性GFR",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 125,
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "mL/min",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            },
+            "status": {
+              "text": "參照值",
+              "sources": [
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積；指定課本男性約 125、女性約 115 mL/min。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。入球收縮降低過濾；課本一般條件下出球收縮提高過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "交感神經興奮使入球小動脈收縮、腎血流及 GFR 下降；輸尿管阻塞增加囊內靜水壓，也對抗過濾。"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "- 血漿白蛋白增加，提高膠體滲透壓，使 GFR 下降\n- 過濾表面積或通透度增加可提高 GFR"
+                },
+                {
+                  "uid": "gfr-regulation",
+                  "quote": "同一課本 p.9-11 前段描述腎絲球平均壓約 60，後段有效壓示例用 55 mmHg；不得把兩組示例任意拼接。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "formula",
+              "term": "formula",
+              "kind": "focus",
+              "label": {
+                "text": "清除率公式",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "U×V/P",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "urea",
+              "term": "urea",
+              "kind": "focus",
+              "label": {
+                "text": "尿素計算例",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "尿素69",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "formula"
+            ],
+            "to": [
+              "urea"
+            ],
+            "description": {
+              "text": "以U×V/P計算清除率，分清濃度與每分鐘尿量。",
+              "sources": [
+                {
+                  "uid": "renal-clearance",
+                  "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                },
+                {
+                  "uid": "renal-clearance",
+                  "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q01",
+            "stem": "腎絲球先把血液裡的水和部分物質濾出來，它們會往哪裡走？",
+            "options": [
+              "從腎絲球微血管進入鮑氏囊腔",
+              "從腎絲球微血管進入入球小動脈",
+              "從腎絲球微血管進入腎盂",
+              "從腎絲球微血管進入輸尿管"
+            ],
+            "answer": 0,
+            "hint": "先想想：水先在血管裡，過濾後進到哪個空間？",
+            "explain": "因為水和能通過的物質會從腎絲球血管進入鮑氏囊，所以選「從腎絲球微血管進入鮑氏囊腔」。選「從腎絲球微血管進入入球小動脈」的同學，把濾液的去處選成了血管，濾液應進入鮑氏囊。",
+            "nodeId": "filtration-clearance-node-01",
+            "sources": [
+              "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q02",
+            "stem": "腎絲球有三層過濾膜，像連在一起的濾網，它們是哪三層？",
+            "options": [
+              "微血管內皮、腎被膜、鮑氏囊壁層",
+              "微血管內皮、基底膜、足細胞",
+              "近曲小管、遠曲小管、集尿管",
+              "入球小動脈、出球小動脈、腎靜脈"
+            ],
+            "answer": 1,
+            "hint": "先想想：哪三層真的在過濾，哪一些只是外面包住的構造？",
+            "explain": "因為過濾膜由微血管內皮、基底膜與鮑氏囊臟層的足細胞組成，所以選「微血管內皮、基底膜、足細胞」。選「微血管內皮、腎被膜、鮑氏囊壁層」的同學，把外面的腎被膜和鮑氏囊壁層當成了過濾膜。",
+            "nodeId": "filtration-clearance-node-02",
+            "sources": [
+              "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q03",
+            "stem": "血漿是血液裡不含血球的液體，和剛濾進鮑氏囊的液體相比，哪種物質的量差別最明顯？",
+            "options": [
+              "血漿裡的血球",
+              "兩邊的水",
+              "兩邊的白蛋白",
+              "兩邊的葡萄糖"
+            ],
+            "answer": 2,
+            "hint": "先想想：水和小物質能過去，哪一種蛋白質比較難過去？",
+            "explain": "因為白蛋白屬於受過濾膜限制的蛋白質，所以它的含量能顯出兩邊差別，選「兩邊的白蛋白」。選「血漿裡的血球」的同學，把血漿當成含血球的整份血液了。",
+            "nodeId": "filtration-clearance-node-03",
+            "sources": [
+              "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿與濾液主要差異為蛋白質"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q04",
+            "stem": "哪一種力量會把水從腎絲球血管推進鮑氏囊，幫忙過濾？",
+            "options": [
+              "鮑氏囊裡的水往回頂的壓力",
+              "腎絲球血管內蛋白質拉住水的力量（膠體滲透壓）",
+              "尿道外括約肌收緊的力量",
+              "腎絲球血管裡的水往外推的壓力（靜水壓）"
+            ],
+            "answer": 3,
+            "hint": "先想想：哪股力往囊裡推，哪股力往血管拉？",
+            "explain": "因為腎絲球血管內往外推的水壓會促進過濾，所以要選這股往囊裡推的力量。選「腎絲球血管內蛋白質拉住水的力量（膠體滲透壓）」的同學，選的是把水留在血管內的力量，方向相反。",
+            "nodeId": "filtration-clearance-node-04",
+            "sources": [
+              "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+              "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "gfr-regulation",
+              "quote": "有效過濾壓＝腎絲球靜水壓＋鮑氏囊膠體滲透壓－鮑氏囊靜水壓－血漿膠體滲透壓。課本示例為 55＋0－15－30＝10 mmHg。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "每分鐘濾出多少水，取決於往囊裡推與往血裡拉的力量怎麼相抵。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q05",
+            "stem": "清除率的算式是「尿中物質有多濃 × 每分鐘尿量 ÷ 血漿中有多濃」（C＝U×V／P），算出的數字在說什麼？",
+            "options": [
+              "每分鐘相當清掉多少毫升血漿裡的那種物質",
+              "每分鐘從血漿移到尿裡多少毫克的那種物質",
+              "每毫升尿裡裝了多少毫克的那種物質",
+              "一天從膀胱排掉多少毫升的尿"
+            ],
+            "answer": 0,
+            "hint": "先想想：算出來的單位是毫升／分鐘，還是毫克／分鐘？",
+            "explain": "因為清除率是把尿裡排掉的物質換算回血漿體積，所以選「每分鐘相當清掉多少毫升血漿裡的那種物質」。選「每分鐘從血漿移到尿裡多少毫克的那種物質」的同學，在說每分鐘排掉的物質重量，和每分鐘相當多少血漿是不同的量。",
+            "nodeId": "filtration-clearance-node-05",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "把尿裡帶走的某物質，換算成原來多少血漿才裝得下它。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-foundation-q06",
+            "stem": "哪一種物質在腎臟只被濾出，不被小管收回、也不額外送進管液，清除率可代表腎絲球過濾率（GFR）？",
+            "options": [
+              "PAH（對胺馬尿酸）",
+              "菊糖",
+              "葡萄糖",
+              "尿素"
+            ],
+            "answer": 1,
+            "hint": "先想想：要用來看過濾量，這種物質後來還能被加進或收回嗎？",
+            "explain": "因為菊糖被濾出後不再吸收也不分泌，所以它的清除率等於GFR，選「菊糖」。選「葡萄糖」的同學，所選的葡萄糖正常會被收回，和菊糖的處理方式不同。",
+            "nodeId": "filtration-clearance-node-06",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "gfr-regulation",
+              "quote": "腎絲球過濾率 GFR 是每分鐘形成的濾液體積"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "filtration-clearance-case-q01",
+            "stem": "收集了一小時的尿，要放進清除率公式中的「每分鐘尿量」，應先怎麼算？",
+            "options": [
+              "把一小時尿量乘以60",
+              "把一小時尿量直接放進去",
+              "把一小時尿量除以60",
+              "把一小時尿量除以血漿有多濃"
+            ],
+            "answer": 2,
+            "hint": "先想想：一小時的尿要平均分給幾分鐘？",
+            "explain": "因為一小時有60分鐘，所以要把總尿量除以60，才得到每分鐘尿量，選「把一小時尿量除以60」。選「把一小時尿量直接放進去」的同學，會把一小時的量誤當成一分鐘的量。",
+            "nodeId": "filtration-clearance-node-05",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "收集一小時尿液須先除以 60，轉成 mL/min"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-case-q02",
+            "stem": "某物質的清除率算出是69毫升／分鐘（69 mL/min），這是在說什麼？",
+            "options": [
+              "每分鐘排出69毫克的這種物質",
+              "每分鐘形成69毫升的最後尿液",
+              "每毫升尿裡有69毫克的這種物質",
+              "每分鐘相當清掉69毫升血漿裡的這種物質"
+            ],
+            "answer": 3,
+            "hint": "先想想：69毫升是在描述相當的血漿，還是實際尿量？",
+            "explain": "因為清除率的毫升指相當的血漿體積，所以選「每分鐘相當清掉69毫升血漿裡的這種物質」。選「每分鐘形成69毫升的最後尿液」的同學，把血漿體積誤當成最後形成的尿量了。",
+            "nodeId": "filtration-clearance-node-05",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-case-q03",
+            "stem": "菊糖和肌酸酐都能幫忙了解每分鐘濾出多少液體（腎絲球過濾率，GFR），它們在腎小管裡有什麼不同？",
+            "options": [
+              "肌酸酐會被少量分泌，菊糖不會",
+              "菊糖會被大量收回，肌酸酐不會被濾出",
+              "兩種都靠分泌才進入尿液",
+              "兩種都不會被腎小管分泌"
+            ],
+            "answer": 0,
+            "hint": "先想想：被濾出之後，哪一種還會從血液多送一點進管液？",
+            "explain": "因為肌酸酐還會由血液少量送進管液，而菊糖不會，所以選「肌酸酐會被少量分泌，菊糖不會」。選「兩種都不會被腎小管分泌」的同學，把肌酸酐也當成不分泌的菊糖了。",
+            "nodeId": "filtration-clearance-node-06",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-case-q04",
+            "stem": "用PAH（對胺馬尿酸）的清除率估算腎臟流量時，為什麼不能直接把結果當成整份腎血流量？",
+            "options": [
+              "它估算的是膀胱能裝多少尿",
+              "它估的是血漿流量，換成整份血流還要算血漿比例",
+              "它不會被濾出，也不會被分泌",
+              "血漿流量和整份血流量數字相同"
+            ],
+            "answer": 1,
+            "hint": "先想想：一份血液除了血漿，還有沒有血球？",
+            "explain": "因為PAH清除率估的是不含血球的血漿流量，所以還要用血漿比例換算整份血流，選「它估的是血漿流量，換成整份血流還要算血漿比例」。選「血漿流量和整份血流量數字相同」的同學，忽略了整份血液還包含血球。",
+            "nodeId": "filtration-clearance-node-06",
+            "sources": [
+              "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-blood-flow",
+              "quote": "腎血漿流量只計血流中的血漿部分。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "filtration-clearance-case-q05",
+            "stem": "剛進鮑氏囊的濾液和血漿裡，葡萄糖一樣濃，最可能是為什麼？",
+            "options": [
+              "鮑氏囊把葡萄糖分泌進去",
+              "濾液裡的血球把葡萄糖放出來",
+              "葡萄糖能通過過濾膜",
+              "白蛋白把葡萄糖一起帶過去"
+            ],
+            "answer": 2,
+            "hint": "先想想：葡萄糖是過濾過去，還是鮑氏囊另外製造的？",
+            "explain": "因為葡萄糖這種小物質可以通過過濾膜，所以剛形成的濾液可和血漿一樣濃，選「葡萄糖能通過過濾膜」。選「鮑氏囊把葡萄糖分泌進去」的同學，把過濾過程誤說成鮑氏囊分泌葡萄糖。",
+            "nodeId": "filtration-clearance-node-03",
+            "sources": [
+              "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "由過濾方向改看菊糖的排泄，應預測哪種小管處理？",
+          "options": [
+            "過濾後全部再吸收",
+            "只由小管分泌，不過濾",
+            "只過濾，不再吸收也不分泌",
+            "完全不經腎臟處理"
+          ],
+          "answer": 2,
+          "feedback": "菊糖只過濾，其清除率可對應 GFR；形成濾液與後續物質排泄仍是兩個觀察層次，見節點 06。",
+          "sources": [
+            "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "renal-clearance",
+            "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "filtration-clearance-node-01",
+        "title": {
+          "text": "過濾位置與方向",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。\n過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-01.svg",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          }
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-01-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "血液",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "過濾膜",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    625,
+                    800
+                  ],
+                  [
+                    715,
+                    825
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "過濾膜",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "鮑氏囊",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    715,
+                    825
+                  ],
+                  [
+                    805,
+                    850
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "filtration-clearance-node-02",
+        "title": {
+          "text": "三層過濾膜",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。\n過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-02.svg",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下列步驟與原句排列順序，再核對結果。",
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "微血管內皮細胞及其窗孔",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            {
+              "text": "細胞外基底膜層",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            },
+            {
+              "text": "鮑氏囊臟層足細胞足突與裂隙",
+              "sources": [
+                {
+                  "uid": "glomerular-filtration",
+                  "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2
+          ]
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-02-1",
+            "width": 1254,
+            "height": 1254,
+            "segments": [
+              {
+                "from": {
+                  "text": "微血管內皮",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "基底膜",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    475,
+                    650
+                  ],
+                  [
+                    575,
+                    650
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                  }
+                ]
+              },
+              {
+                "from": {
+                  "text": "基底膜",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "鮑氏囊臟層足細胞",
+                  "sources": [
+                    {
+                      "uid": "glomerular-filtration",
+                      "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    575,
+                    650
+                  ],
+                  [
+                    815,
+                    650
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "filtration-clearance-node-03",
+        "title": {
+          "text": "血漿與濾液成分",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。\n過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-03.svg",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "filtration-clearance-node-04",
+        "title": {
+          "text": "促進與對抗過濾的壓力",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。\n過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-04-data.svg",
+          "sources": [
+            {
+              "uid": "glomerular-filtration",
+              "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+            },
+            {
+              "uid": "glomerular-filtration",
+              "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "filtration-clearance-node-05",
+        "title": {
+          "text": "清除率的量與單位",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。\n菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-05-data.svg",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「尿素算例」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      },
+      {
+        "id": "filtration-clearance-node-06",
+        "title": {
+          "text": "菊糖、肌酸酐與PAH",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。\n菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/filtration-clearance-node-06.svg",
+          "sources": [
+            {
+              "uid": "renal-clearance",
+              "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+            },
+            {
+              "uid": "renal-clearance",
+              "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「尿素算例」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "腎絲球過濾與清除率",
+        "sources": [
+          {
+            "uid": "glomerular-filtration",
+            "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+          },
+          {
+            "uid": "glomerular-filtration",
+            "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+          },
+          {
+            "uid": "glomerular-filtration",
+            "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+          },
+          {
+            "uid": "glomerular-filtration",
+            "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+          },
+          {
+            "uid": "glomerular-filtration",
+            "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "glomerular-filtration",
+                "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+              },
+              {
+                "uid": "glomerular-filtration",
+                "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "過濾讓血中的水與可通過的溶質進入鮑氏囊。正常濾液不含血球與白蛋白。",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "過濾膜依序是微血管內皮、基底膜和足細胞。鮑氏囊壁層不算在這三層裡。",
+                "sources": [
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "腎絲球過濾是血液中的水與可通過的溶質經過濾膜進入鮑氏囊；正常濾液不含血球及白蛋白。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜依序含微血管內皮、基底膜、鮑氏囊臟層足細胞。小孔與裂隙限制大小；解剖課本也記載帶電分子的通過差異。葡萄糖、胺基酸及小分子溶質可過濾。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "過濾膜受損時可出現蛋白尿與血尿；形成濾液的位置是皮質的腎小體，不是輸尿管或腎盂。"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "- 鮑氏囊壁層不構成三層過濾膜\n- 血漿與濾液主要差異為蛋白質\n- 靜水壓促進過濾，囊內壓與血漿膠體壓對抗"
+                  },
+                  {
+                    "uid": "glomerular-filtration",
+                    "quote": "血漿本來就不包含血球，故比較「血漿與濾液」不能拿血球當主要成分差別。小分子蛋白與白蛋白也不應一概而論。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "renal-clearance",
+                "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+              },
+              {
+                "uid": "renal-clearance",
+                "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "清除率是尿濃度乘每分鐘尿量，再除以血漿濃度。單位mL/min代表相當的血漿體積，不是物質排泄量。",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "課本尿素算例用U＝18、P＝0.26、V＝1，得到約69 mL/min。這是指定數值的計算結果，不表示清除率上升。",
+                "sources": [
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "血漿清除率 C＝U×V/P，代表每分鐘排除某物質所相當的血漿體積；U 為尿濃度，V 為每分鐘尿量，P 為血漿濃度。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "菊糖可自由過濾、不再吸收也不分泌，清除率等於 GFR。肌酸酐不再吸收但有少量分泌，可估 GFR；PAH 兼具過濾與分泌，可估腎血漿流量。葡萄糖正常全回收，尿素部分回收。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "課本以尿素 U＝18 mg/mL、P＝0.26 mg/mL、V＝1 mL/min 算得約 69 mL/min；肌酸酐是臨床評估過濾率的常用內生性物質。"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "- 收集一小時尿液須先除以 60，轉成 mL/min\n- 清除率排序為 PAH＞肌酸酐＞尿素＞葡萄糖\n- PAH 清除率換算血流量須除以血漿比例，不能當作總血流量"
+                  },
+                  {
+                    "uid": "renal-clearance",
+                    "quote": "清除率的 mL/min 是血漿體積，不是 mg/min 的物質排泄量；菊糖與肌酸酐的分泌條件不同。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

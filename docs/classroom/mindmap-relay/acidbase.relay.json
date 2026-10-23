@@ -1,0 +1,288 @@
+{
+  "theme": "acid-base-homeostasis",
+  "title": "全班心智圖闖關｜酸鹼平衡與三系統調節",
+  "description": "8-10分鐘課堂複習心智圖闖關活動樣張。與個人互動資訊圖表共用同一份心智圖關聯資料。",
+  "nodes": [
+    {
+      "id": "node_blood_ph",
+      "label": "血液 pH (7.35–7.45)",
+      "uid": "acid-base-balance"
+    },
+    {
+      "id": "node_chem_buffer",
+      "label": "化學緩衝系統",
+      "uid": "buffer-systems"
+    },
+    {
+      "id": "node_resp_system",
+      "label": "呼吸調節系統",
+      "uid": "acid-base-balance"
+    },
+    {
+      "id": "node_renal_system",
+      "label": "腎臟調節系統",
+      "uid": "renal-acid-base-compensation"
+    },
+    {
+      "id": "node_ratio_base_acid",
+      "label": "鹼／酸比 (HCO₃⁻/H₂CO₃)",
+      "uid": "acid-base-balance"
+    },
+    {
+      "id": "node_co2_excretion",
+      "label": "肺泡 CO₂ 排出",
+      "uid": "hypercapnia"
+    },
+    {
+      "id": "node_h_secretion",
+      "label": "腎小管 H⁺ 分泌與排銨",
+      "uid": "renal-acid-base-compensation"
+    },
+    {
+      "id": "node_hco3_reabsorption",
+      "label": "血液 HCO₃⁻ 回收 (血液保鹼)",
+      "uid": "renal-acid-base-compensation"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_buffer_ph",
+      "from": "node_chem_buffer",
+      "to": "node_blood_ph",
+      "relation": "parallel",
+      "sign": null,
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "id": "edge_resp_ph",
+      "from": "node_resp_system",
+      "to": "node_blood_ph",
+      "relation": "parallel",
+      "sign": null,
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "id": "edge_renal_ph",
+      "from": "node_renal_system",
+      "to": "node_blood_ph",
+      "relation": "parallel",
+      "sign": null,
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "id": "edge_ratio_ph",
+      "from": "node_ratio_base_acid",
+      "to": "node_blood_ph",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "id": "edge_resp_co2",
+      "from": "node_resp_system",
+      "to": "node_co2_excretion",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "id": "edge_co2_ratio",
+      "from": "node_co2_excretion",
+      "to": "node_ratio_base_acid",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "id": "edge_renal_h",
+      "from": "node_renal_system",
+      "to": "node_h_secretion",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。"
+    },
+    {
+      "id": "edge_renal_hco3",
+      "from": "node_renal_system",
+      "to": "node_hco3_reabsorption",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "renal-acid-base-compensation",
+      "quote": "NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "id": "edge_h_ph",
+      "from": "node_h_secretion",
+      "to": "node_blood_ph",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "id": "edge_hco3_ratio",
+      "from": "node_hco3_reabsorption",
+      "to": "node_ratio_base_acid",
+      "relation": "cause",
+      "sign": "up",
+      "uid": "acid-base-balance",
+      "quote": "碳酸系統以 HCO₃⁻/H₂CO₃ 比值影響 pH，課本 pH＝pKa＋log（鹼/酸），示例 6.1＋log（26/1.3）≈7.4。呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "id": "edge_h_hco3_parallel",
+      "from": "node_h_secretion",
+      "to": "node_hco3_reabsorption",
+      "relation": "parallel",
+      "sign": "up",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    }
+  ],
+  "rounds": [
+    {
+      "id": "round_01",
+      "roundNumber": 1,
+      "unlocks": [
+        "node_blood_ph",
+        "node_chem_buffer",
+        "node_resp_system",
+        "node_renal_system",
+        "edge_resp_ph",
+        "edge_renal_ph"
+      ],
+      "stem": "急診團隊接獲一位疑似酸鹼失衡的病人。在評估動脈血液酸鹼指標前，護理師向實習生提問：人體正常血液 pH 維持在約 7.35–7.45，是由哪三大系統共同配合調節？",
+      "options": [
+        "由化學緩衝、消化吸收與神經傳導三系統配合",
+        "由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合",
+        "僅靠呼吸調整 CO₂，緩衝與腎臟不參與酸鹼恆定",
+        "僅靠腎臟分泌 H⁺，化學緩衝與呼吸系統無調節功能"
+      ],
+      "answer": "由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合",
+      "explanation": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻三者密切配合。",
+      "uid": "acid-base-balance",
+      "quote": "酸鹼平衡維持血液 pH 約 7.35–7.45，由化學緩衝、呼吸調整 CO₂ 與腎臟調整 H⁺/HCO₃⁻配合。"
+    },
+    {
+      "id": "round_02",
+      "roundNumber": 2,
+      "unlocks": [
+        "edge_buffer_ph"
+      ],
+      "stem": "實習生疑惑地問：「既然化學緩衝系統可以在體液中迅速結合 H⁺，那是不是代表體內的酸已經全部被排除了？」護理師應如何正確說明化學緩衝的直接作用？",
+      "options": [
+        "緩衝物一旦接住 H⁺，體內的酸便立刻完全排出體外",
+        "化學緩衝以弱酸與共軛鹼接收或釋放 H⁺以減少 pH 波動，但暫時接住不等於真正排出酸",
+        "化學緩衝會直接取代呼吸與腎臟的所有排酸功能",
+        "化學緩衝只能在尿液中作用，無法在細胞外液減少波動"
+      ],
+      "answer": "化學緩衝以弱酸與共軛鹼接收或釋放 H⁺以減少 pH 波動，但暫時接住不等於真正排出酸",
+      "explanation": "緩衝系統以弱酸與其共軛鹼接收或釋放 H⁺，主要作用在於減少血液與體液的 pH 波動，化學暫時接住 H⁺與真正排出酸完全不同，後續仍須仰賴肺與腎調整去路。",
+      "uid": "buffer-systems",
+      "quote": "緩衝系統以弱酸與其共軛鹼，接收或釋放 H⁺，減少血液與體液的 pH 波動。"
+    },
+    {
+      "id": "round_03",
+      "roundNumber": 3,
+      "unlocks": [
+        "node_ratio_base_acid",
+        "edge_ratio_ph"
+      ],
+      "stem": "醫師檢視動脈血氣報告時，向團隊指出血液 pH 取決於碳酸系統的平衡公式。依據課本公式 pH＝pKa＋log（鹼/酸），當鹼／酸比值（HCO₃⁻/H₂CO₃）增加時，血液 pH 的走向為何？",
+      "options": [
+        "鹼／酸比值增加會使血液 pH 上升",
+        "鹼／酸比值增加會使血液 pH 下降",
+        "比值中的鹼在分母、酸在分子，比值增加對 pH 無影響",
+        "血液 pH 僅取決於 pKa，與鹼／酸比值之變化完全無關"
+      ],
+      "answer": "鹼／酸比值增加會使血液 pH 上升",
+      "explanation": "依據公式，鹼（HCO₃⁻）在分子、酸（H₂CO₃）在分母；相同 pKa 下，鹼／酸比增加會使對數項增加，進而使血液 pH 上升。",
+      "uid": "buffer-systems",
+      "quote": "鹼/酸比增加使 pH 上升"
+    },
+    {
+      "id": "round_04",
+      "roundNumber": 4,
+      "unlocks": [
+        "node_co2_excretion",
+        "edge_resp_co2",
+        "edge_co2_ratio"
+      ],
+      "stem": "病人在急診觀察中呈現呼吸深快，經確認肺泡通氣良好且有效 CO₂ 排出增加。關於呼吸系統此時排碳對酸鹼平衡的影響，下列敘述何者正確？",
+      "options": [
+        "呼出 CO₂ 增多會使體內酸負荷增加，血液 pH 下降",
+        "呼吸增加 CO₂ 排出可減酸，使碳酸系統往減少 H⁺方向改變，血液 pH 朝上升方向",
+        "呼吸排碳會將血液中的碳酸氫根一併全部呼出體外",
+        "只要呼吸次數增加，無論肺泡通氣是否有效，都保證能等效減酸"
+      ],
+      "answer": "呼吸增加 CO₂ 排出可減酸，使碳酸系統往減少 H⁺方向改變，血液 pH 朝上升方向",
+      "explanation": "呼吸增加 CO₂ 排出可減少體內碳酸（分母酸），達到減酸效果，使碳酸系統往減少 H⁺的方向改變，pH 朝上升方向；但需注意須為有效肺泡通氣才能確保排出。",
+      "uid": "acid-base-balance",
+      "quote": "呼吸增加 CO₂ 排出可減酸；腎臟分泌 H⁺並回收 HCO₃⁻。"
+    },
+    {
+      "id": "round_05",
+      "roundNumber": 5,
+      "unlocks": [
+        "node_h_secretion",
+        "node_hco3_reabsorption",
+        "edge_renal_h",
+        "edge_renal_hco3"
+      ],
+      "stem": "當病人動脈血液 pH 降低時，腎小管排酸作用增加。關於腎小管對 H⁺ 與 HCO₃⁻ 的跨膜運送方向，下列何者正確？",
+      "options": [
+        "將 H⁺ 與 HCO₃⁻ 同時全部排入腎小管管液中",
+        "將 H⁺ 與 HCO₃⁻ 同時全部吸收回微血管血液中",
+        "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺，遠曲與集尿管主動分泌 H⁺入管液，同時 HCO₃⁻ 回到血液",
+        "將血液中的 HCO₃⁻ 大量分泌至管液，同時將尿中的 H⁺ 吸收回血液"
+      ],
+      "answer": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺，遠曲與集尿管主動分泌 H⁺入管液，同時 HCO₃⁻ 回到血液",
+      "explanation": "血液 pH 降低時腎小管排酸作用增加；近曲小管以 Na⁺－H⁺ 相對運送分泌 H⁺，遠曲與集尿管主動分泌 H⁺（受醛固酮調節）至管液中，同時將 HCO₃⁻ 回收回血液，達成排酸留鹼。",
+      "uid": "renal-acid-base-compensation",
+      "quote": "近曲小管以 Na⁺－H⁺相對運送分泌 H⁺；遠曲小管與集尿管主動分泌 H⁺，受醛固酮調節。NH₃ 結合 H⁺成 NH₄⁺，磷酸鹽也能承接 H⁺排出；同時 HCO₃⁻回到血液。"
+    },
+    {
+      "id": "round_06",
+      "roundNumber": 6,
+      "unlocks": [
+        "edge_h_ph"
+      ],
+      "stem": "實習生看見檢驗報告顯示病人尿液呈強酸性，擔憂地問：「尿液這麼酸，是不是代表病人的血液也變得更酸了？」針對這項容易混淆的觀念，護理師應如何澄清？",
+      "options": [
+        "尿液變酸與血液變酸是同方向的，尿變酸表示血液必定更酸",
+        "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升",
+        "尿液酸鹼度與腎臟排酸功能毫無關聯",
+        "尿液變酸表示腎臟正在把血液中的酸性物質完全吸回體內"
+      ],
+      "answer": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升",
+      "explanation": "尿液變酸與血液變酸不是同方向的判斷；腎小管把 H⁺ 分泌入尿液排走，使尿液酸化，正是為了減少血液的酸負擔、協助血液 pH 回升。",
+      "uid": "renal-acid-base-compensation",
+      "quote": "尿液變酸與血液變酸不是同方向的判斷；排掉酸性尿液是協助血液 pH 回升。"
+    },
+    {
+      "id": "round_07",
+      "roundNumber": 7,
+      "unlocks": [
+        "edge_hco3_ratio",
+        "edge_h_hco3_parallel"
+      ],
+      "stem": "在慢性呼吸性酸中毒引發腎臟代償的過程中，腎小管管腔利用 NH₃ 結合 H⁺ 形成 NH₄⁺ 排出，此「排銨」作用與血液「保留碳酸氫根」的功能關係為何？",
+      "options": [
+        "排銨增加會阻礙碳酸氫根保留，兩者功能互相抵銷",
+        "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼，兩者互補協助血液 pH 回升",
+        "排銨作用只在肝臟進行，與腎臟保留碳酸氫根完全獨立無涉",
+        "腎小管排銨會導致血液流失大量碳酸氫根而加重酸中毒"
+      ],
+      "answer": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼，兩者互補協助血液 pH 回升",
+      "explanation": "NH₃ 在腎小管管腔結合 H⁺ 形成 NH₄⁺ 隨尿排出，同時新生成的 HCO₃⁻ 回到血液；排銨增加與保留碳酸氫根增加是同方向的排酸留鹼，兩者協同拉高鹼／酸比，協助血液 pH 回升。",
+      "uid": "renal-acid-base-compensation",
+      "quote": "排銨增加與保留碳酸氫根增加是同方向的排酸留鹼"
+    }
+  ]
+}

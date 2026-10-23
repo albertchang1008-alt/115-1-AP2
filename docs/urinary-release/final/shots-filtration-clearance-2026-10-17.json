@@ -1,0 +1,371 @@
+{
+  "slug": "filtration-clearance",
+  "builtAt": "2026-10-17T02:21:21.602Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.84235294117647,
+      "svgTextSizes": [
+        {
+          "text": "構造與功能圖例",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "腎絲球",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "鮑氏囊",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "濾液",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "4",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "菊糖",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "5",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "GFR",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "6",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "U尿濃度",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "7",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "V尿流量",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "8",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "P血漿濃度",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "9",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "mL/min",
+          "px": 14.84235294117647
+        }
+      ],
+      "nodes": [
+        {
+          "id": "filtration-clearance-node-04",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "＋ 腎絲球靜水壓55 mmHg",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "－ 鮑氏囊內壓15 mmHg",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "－ 血漿膠體滲透壓30 mmHg",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "＋ 鮑氏囊膠體滲透壓0",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "＝ 有效過濾壓10 mmHg",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "壓力（mmHg）；各條同一尺度",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "55 ＋ 0 － 15 － 30 ＝ 10 mmHg",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "filtration-clearance-node-05",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "C＝U×V/P",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "U尿濃度",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "V尿流量",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "P血漿濃度",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "mL/min",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "U＝18 mg/mL；V＝1 mL/min",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "P＝0.26 mg/mL",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "C ≈ 69 mL/min",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 17.933952205882353,
+      "svgTextSizes": [
+        {
+          "text": "清除率與過濾指標",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "腎絲球",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "鮑氏囊",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "濾液",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "菊糖",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "GFR",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "U尿濃度",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "V尿流量",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "P血漿濃度",
+          "px": 17.933952205882353
+        },
+        {
+          "text": "mL/min",
+          "px": 17.933952205882353
+        }
+      ],
+      "nodes": [
+        {
+          "id": "filtration-clearance-node-04",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "＋ 腎絲球靜水壓55 mmHg",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "－ 鮑氏囊內壓15 mmHg",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "－ 血漿膠體滲透壓30 mmHg",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "＋ 鮑氏囊膠體滲透壓0",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "＝ 有效過濾壓10 mmHg",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "壓力（mmHg）；各條同一尺度",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "55 ＋ 0 － 15 － 30 ＝ 10 mmHg",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "id": "filtration-clearance-node-05",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "C＝U×V/P",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "U尿濃度",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "V尿流量",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "P血漿濃度",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "mL/min",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "U＝18 mg/mL；V＝1 mL/min",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "P＝0.26 mg/mL",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "C ≈ 69 mL/min",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-filtration-clearance-node-01.png",
+    "390-node-filtration-clearance-node-02.png",
+    "390-node-filtration-clearance-node-03.png",
+    "390-node-filtration-clearance-node-04.png",
+    "390-node-filtration-clearance-node-05.png",
+    "390-node-filtration-clearance-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-filtration-clearance-node-01.png",
+    "1280-node-filtration-clearance-node-02.png",
+    "1280-node-filtration-clearance-node-03.png",
+    "1280-node-filtration-clearance-node-04.png",
+    "1280-node-filtration-clearance-node-05.png",
+    "1280-node-filtration-clearance-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "filtration-clearance-node-01",
+    "filtration-clearance-node-02",
+    "filtration-clearance-node-03",
+    "filtration-clearance-node-04",
+    "filtration-clearance-node-05",
+    "filtration-clearance-node-06"
+  ],
+  "questionIds": [
+    "filtration-clearance-foundation-q01",
+    "filtration-clearance-foundation-q02",
+    "filtration-clearance-foundation-q03",
+    "filtration-clearance-foundation-q04",
+    "filtration-clearance-foundation-q05",
+    "filtration-clearance-foundation-q06",
+    "filtration-clearance-case-q01",
+    "filtration-clearance-case-q02",
+    "filtration-clearance-case-q03",
+    "filtration-clearance-case-q04",
+    "filtration-clearance-case-q05"
+  ],
+  "ok": true
+}

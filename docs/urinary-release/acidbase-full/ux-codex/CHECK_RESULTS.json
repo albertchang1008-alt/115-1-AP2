@@ -1,0 +1,92 @@
+{
+  "baseline": "6598178",
+  "pass": true,
+  "skipped": 0,
+  "independentReview": "FAIL: N01 SVG fraction and tiny screen fonts; micro-answer still modal",
+  "before": {
+    "legacyLayout": {
+      "pass": 464,
+      "fail": 0,
+      "skipped": 0
+    },
+    "legacyTests": {
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "newRegressionAgainstBaseline": {
+      "pass": 2,
+      "fail": 1,
+      "skipped": 0,
+      "expectedRed": true
+    }
+  },
+  "after": {
+    "content": {
+      "pass": true,
+      "displayFields": 210,
+      "quoteOccurrences": 786,
+      "errors": []
+    },
+    "ux": {
+      "cases": 42,
+      "pass": 42,
+      "fail": 0,
+      "skipped": 0
+    },
+    "layout": {
+      "cases": 464,
+      "pass": 464,
+      "fail": 0,
+      "skipped": 0
+    },
+    "tests": {
+      "pass": 28,
+      "fail": 0,
+      "skipped": 0
+    },
+    "npmCheck": {
+      "pass": true,
+      "frontend": 162,
+      "backend": 61,
+      "skipped": 0
+    },
+    "policy": {
+      "selectLiteralCount": 0,
+      "showModalCount": 0,
+      "dialogCreationCount": 0
+    },
+    "n01Ratios": [
+      {
+        "width": 1280,
+        "svgRatio": 0.8412305216802168
+      },
+      {
+        "width": 390,
+        "svgRatio": 0.7562658629441624
+      }
+    ]
+  },
+  "protectedData": [
+    {
+      "path": "materials-src/acid-base-homeostasis/full.json",
+      "sha256": "1db2a5662260f2d89684d4b58b4a985d3a8334d623daa30e327d1b8260a66ef5",
+      "byteIdenticalTo6598178": true
+    },
+    {
+      "path": "materials-src/acid-base-homeostasis/apply.json",
+      "sha256": "8663e52dec5f37de64a21b1d65d1f3298d48753c00c6e00fef0b8e8bd9fc1de9",
+      "byteIdenticalTo6598178": true
+    },
+    {
+      "path": "materials-src/acid-base-homeostasis/content.json",
+      "sha256": "ed4ef9af96b0565927ead9ca2918e29f7669eccff603bb34a1b3dc143d742b70",
+      "byteIdenticalTo6598178": true
+    },
+    {
+      "path": "docs/classroom/mindmap-relay/acidbase.relay.json",
+      "sha256": "18589ea88a1b7f8ae3bebe6b4bc2322b642648e5f2b20c8ffbd2532308183eae",
+      "byteIdenticalTo6598178": true
+    }
+  ]
+}

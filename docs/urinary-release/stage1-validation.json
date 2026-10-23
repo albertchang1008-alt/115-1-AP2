@@ -1,0 +1,292 @@
+[
+  {
+    "slug": "kidney-anatomy",
+    "nodes": 6,
+    "foundation": 6,
+    "cases": 5,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/kidney-anatomy/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 0,
+      "log": "kidney-anatomy-schema.log",
+      "tail": "nodeText []\nPASS\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "kidney-anatomy"
+      ],
+      "exit_code": 1,
+      "log": "kidney-anatomy-preview.log",
+      "tail": "perimental-strip-types scripts/materials-build.mjs --preview kidney-anatomy\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18\nexport function palette(id){const slug=id.replace(/-v\\d+$/,''),version=Number(id.match(/-v(\\d+)$/)?.[1]||1),hue=studentHues[id] ?? (hues[slug]+(version-1)*9)%360;if(!Number.isFinite(hue))throw Error('Missing material palette: '+id);return {accent:`hsl(${hue} 65% 27%)`,soft:`hsl(${hue} 40% 95%)`,border:`hsl(${hue} 25% 79%)`,bg:`hsl(${hue} 25% 98%)`};}\n                                                                                                                                                                                                 ^\n\nError: Missing material palette: kidney-anatomy-v1\n    at palette (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18:194)\n    at colorFigure (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:20:45)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:17:186\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "kidney-anatomy-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 11
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "slug": "nephron-circulation",
+    "nodes": 6,
+    "foundation": 6,
+    "cases": 5,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/nephron-circulation/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 0,
+      "log": "nephron-circulation-schema.log",
+      "tail": "nodeText []\nPASS\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "nephron-circulation"
+      ],
+      "exit_code": 1,
+      "log": "nephron-circulation-preview.log",
+      "tail": "-strip-types scripts/materials-build.mjs --preview nephron-circulation\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18\nexport function palette(id){const slug=id.replace(/-v\\d+$/,''),version=Number(id.match(/-v(\\d+)$/)?.[1]||1),hue=studentHues[id] ?? (hues[slug]+(version-1)*9)%360;if(!Number.isFinite(hue))throw Error('Missing material palette: '+id);return {accent:`hsl(${hue} 65% 27%)`,soft:`hsl(${hue} 40% 95%)`,border:`hsl(${hue} 25% 79%)`,bg:`hsl(${hue} 25% 98%)`};}\n                                                                                                                                                                                                 ^\n\nError: Missing material palette: nephron-circulation-v1\n    at palette (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18:194)\n    at colorFigure (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:20:45)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:17:186\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "nephron-circulation-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 11
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "slug": "filtration-clearance",
+    "nodes": 6,
+    "foundation": 6,
+    "cases": 5,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/filtration-clearance/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 0,
+      "log": "filtration-clearance-schema.log",
+      "tail": "nodeText []\nPASS\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "filtration-clearance"
+      ],
+      "exit_code": 1,
+      "log": "filtration-clearance-preview.log",
+      "tail": "trip-types scripts/materials-build.mjs --preview filtration-clearance\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18\nexport function palette(id){const slug=id.replace(/-v\\d+$/,''),version=Number(id.match(/-v(\\d+)$/)?.[1]||1),hue=studentHues[id] ?? (hues[slug]+(version-1)*9)%360;if(!Number.isFinite(hue))throw Error('Missing material palette: '+id);return {accent:`hsl(${hue} 65% 27%)`,soft:`hsl(${hue} 40% 95%)`,border:`hsl(${hue} 25% 79%)`,bg:`hsl(${hue} 25% 98%)`};}\n                                                                                                                                                                                                 ^\n\nError: Missing material palette: filtration-clearance-v1\n    at palette (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18:194)\n    at colorFigure (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:20:45)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:17:186\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "filtration-clearance-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 11
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "slug": "tubular-handling",
+    "nodes": 6,
+    "foundation": 6,
+    "cases": 5,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/tubular-handling/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 0,
+      "log": "tubular-handling-schema.log",
+      "tail": "nodeText []\nPASS\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "tubular-handling"
+      ],
+      "exit_code": 1,
+      "log": "tubular-handling-preview.log",
+      "tail": "mental-strip-types scripts/materials-build.mjs --preview tubular-handling\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18\nexport function palette(id){const slug=id.replace(/-v\\d+$/,''),version=Number(id.match(/-v(\\d+)$/)?.[1]||1),hue=studentHues[id] ?? (hues[slug]+(version-1)*9)%360;if(!Number.isFinite(hue))throw Error('Missing material palette: '+id);return {accent:`hsl(${hue} 65% 27%)`,soft:`hsl(${hue} 40% 95%)`,border:`hsl(${hue} 25% 79%)`,bg:`hsl(${hue} 25% 98%)`};}\n                                                                                                                                                                                                 ^\n\nError: Missing material palette: tubular-handling-v1\n    at palette (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18:194)\n    at colorFigure (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:20:45)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:17:186\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "tubular-handling-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 11
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "slug": "urine-concentration",
+    "nodes": 6,
+    "foundation": 6,
+    "cases": 5,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/urine-concentration/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 0,
+      "log": "urine-concentration-schema.log",
+      "tail": "nodeText []\nPASS\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "urine-concentration"
+      ],
+      "exit_code": 1,
+      "log": "urine-concentration-preview.log",
+      "tail": "-strip-types scripts/materials-build.mjs --preview urine-concentration\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18\nexport function palette(id){const slug=id.replace(/-v\\d+$/,''),version=Number(id.match(/-v(\\d+)$/)?.[1]||1),hue=studentHues[id] ?? (hues[slug]+(version-1)*9)%360;if(!Number.isFinite(hue))throw Error('Missing material palette: '+id);return {accent:`hsl(${hue} 65% 27%)`,soft:`hsl(${hue} 40% 95%)`,border:`hsl(${hue} 25% 79%)`,bg:`hsl(${hue} 25% 98%)`};}\n                                                                                                                                                                                                 ^\n\nError: Missing material palette: urine-concentration-v1\n    at palette (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:18:194)\n    at colorFigure (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/materials-src/kit/presentation.mjs:20:45)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:17:186\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "urine-concentration-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 11
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "nodes": 6,
+    "foundation": 5,
+    "cases": 4,
+    "prediction": 1,
+    "schema": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs';import {validateMaterialContent,validateNodeText} from './shared/materialKit.ts';const c=JSON.parse(fs.readFileSync('materials-src/urinary-route-micturition/content.json'));console.log('nodeText',JSON.stringify(validateNodeText(c.nodes)));validateMaterialContent(c);console.log('PASS');"
+      ],
+      "exit_code": 1,
+      "log": "urinary-route-micturition-schema.log",
+      "tail": "nodeText []\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/[eval1]:1:265\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:282:26)\n    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:278:20)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+    },
+    "preview": {
+      "command": [
+        "npm",
+        "run",
+        "materials:preview",
+        "urinary-route-micturition"
+      ],
+      "exit_code": 1,
+      "log": "urinary-route-micturition-preview.log",
+      "tail": "\n> course-platform@1.9.1 materials:preview\n> node --experimental-strip-types scripts/materials-build.mjs --preview urinary-route-micturition\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/materials-build.mjs:7:124\n\nNode.js v22.23.2\n"
+    },
+    "node_audit": {
+      "command": [
+        "npm",
+        "run",
+        "materials:validate-nodes"
+      ],
+      "exit_code": 1,
+      "log": "urinary-route-micturition-node-audit.log",
+      "tail": "\n> course-platform@1.9.1 materials:validate-nodes\n> node --experimental-strip-types scripts/material-node-audit.mjs\n\nfile:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59\n  if (errors.length) throw new Error(errors.join('\\n'));\n                           ^\n\nError: foundation：預期 6 筆，實得 5 筆\ncases：預期 5 筆，實得 4 筆\n    at validateMaterialContent (file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit.ts:59:28)\n    at file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/scripts/material-node-audit.mjs:15:120\n\nNode.js v22.23.2\n"
+    },
+    "term_scan": [],
+    "source_answer_positions_0_based": {
+      "0": 9
+    },
+    "duplicate_question_ids": 0,
+    "question_sources_present": true
+  },
+  {
+    "material_kit_regression": {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "tests/material-kit.test.ts",
+        "tests/material-kit-completion.test.ts"
+      ],
+      "exit_code": 1,
+      "log": "material-kit-tests.log",
+      "tail": "nary-stage1-2026-10-16/課程平台1.0/shared/materialKit' imported from /Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/課程平台1.0/tests/material-kit.test.ts\n#     at finalizeResolution (node:internal/modules/esm/resolve:275:11)\n#     at moduleResolve (node:internal/modules/esm/resolve:861:10)\n#     at defaultResolve (node:internal/modules/esm/resolve:985:11)\n#     at \\#cachedDefaultResolve (node:internal/modules/esm/loader:747:20)\n#     at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)\n#     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)\n#     at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {\n#   code: 'ERR_MODULE_NOT_FOUND',\n#   url: 'file:///Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/%E8%AA%B2%E7%A8%8B%E5%B9%B3%E5%8F%B01.0/shared/materialKit'\n# }\n# Node.js v22.23.2\n# Subtest: tests/material-kit.test.ts\nnot ok 2 - tests/material-kit.test.ts\n  ---\n  duration_ms: 57.603792\n  type: 'test'\n  location: '/Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/課程平台1.0/tests/material-kit.test.ts:1:1'\n  failureType: 'testCodeFailure'\n  exitCode: 1\n  signal: ~\n  error: 'test failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 1\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 3147.589583\n"
+    }
+  }
+]

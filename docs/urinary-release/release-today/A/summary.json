@@ -1,0 +1,173 @@
+{
+  "pass": true,
+  "rows": [
+    {
+      "slug": "kidney-anatomy",
+      "layout": {
+        "cases": 652,
+        "pass": 652,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 96,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "nephron-circulation",
+      "layout": {
+        "cases": 675,
+        "pass": 675,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 104,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "filtration-clearance",
+      "layout": {
+        "cases": 628,
+        "pass": 628,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 88,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "tubular-handling",
+      "layout": {
+        "cases": 644,
+        "pass": 644,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 104,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "urine-concentration",
+      "layout": {
+        "cases": 654,
+        "pass": 654,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 120,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "layout": {
+        "cases": 701,
+        "pass": 701,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 120,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "fluid-compartments",
+      "layout": {
+        "cases": 618,
+        "pass": 618,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 88,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "layout": {
+        "cases": 659,
+        "pass": 659,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 104,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "electrolyte-balance",
+      "layout": {
+        "cases": 673,
+        "pass": 673,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 104,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "layout": {
+        "cases": 648,
+        "pass": 648,
+        "fail": 0,
+        "skipped": 0
+      },
+      "preAnswerCases": 120,
+      "missing": [],
+      "extra": [],
+      "contentPass": true
+    }
+  ],
+  "layoutCases": 6552,
+  "preAnswerCases": 1048,
+  "sourceHashes": {
+    "materials-src/apply-kit/scripted-player.js": "bf4956a70c2e3be5a24608d57f9719c52cdd448693442cd3406a491b3a562869",
+    "materials-src/apply-kit/scripted.css": "9e1304d889465b823d157cb611c0ee3122f3c6d0baa4159aef5edeef6b4b3368",
+    "materials-src/apply-kit/full-render.mjs": "237087a24803c38357ec594da9e25a6c5f6513d27b4345be789215a5a9eb7d65",
+    "materials-src/apply-kit/scripted-compile.mjs": "5a497b3767080b3eac0ce839f3a36e647d5ce730e83ca23158897e2c895eb692",
+    "materials-src/apply-kit/scripted-render.mjs": "11d3732afb1bda681c6b578154290968fdd321ffdeecc18e74311a40f6c52577",
+    "materials-src/apply-kit/teacher-figures.mjs": "f5b6ad144a7ef87a97531132aba109e102185bc28bde334d64a4f4d774e31ea1",
+    "materials-src/apply-kit/flow.js": "b11c43672e46458a264080354daeae7e6c284fa568d18e987e3a6a18ebf7294c",
+    "materials-src/apply-kit/taiwan-terms.json": "3f61d95c6a71cb19646d79cc6fcf08fe998742324e90b0922b27fe8da6956998",
+    "materials-src/apply-kit/semantics.mjs": "c8a8c2d12d129f0373af9db4e2eb922b59d94abc9cea3e35440a6993d0bfec08",
+    "materials-src/apply-kit/render.mjs": "5dc49c77508742a56e4b20ffd0392241ab3d0a5aeb7d4ac1989dd43de90fc66f",
+    "materials-src/apply-kit/learning.css": "ddabaf9965087fc420449ea92714384e707bc4dca6dac3aa2b82ab218a8ab222",
+    "materials-src/apply-kit/spatial-policy.mjs": "9a6cf020defe2377d9b8ad972a3c58dc24774284d4682ce0228e5cf2a0a608b7",
+    "materials-src/apply-kit/lab.css": "c66a583a0b5c0a39bb81c621f4089ee67301b0b8813d0b511344cae5c0c26ac0",
+    "materials-src/apply-kit/student-figures.js": "625dcd2cb3badccb6f7a9a3432aa89117bd71b52fbe0e16aff3c1e17b8f2b136",
+    "materials-src/apply-kit/student-script.mjs": "2f1d30c35f0b1cb7c74c4b55875945c6a9e488fb3db74d86c8740f93909575ce",
+    "materials-src/apply-kit/learning.js": "2fec52f47c20dba218f7256fe6cb57eea5079756c42ab8e2a560df26c31d7f32",
+    "materials-src/apply-kit/student.js": "0e7b149de66107e254d763a21edd3e46da65813bf46ea919959bcf13e144a630",
+    "materials-src/apply-kit/student-components.js": "db4d4396aee4b82095d93ce40d9a9f8572e9e1159dc84cca06030c215018d6f3",
+    "materials-src/apply-kit/anchor-assets.json": "c97f00fa37aedfe0e3c9811c8edbf6c5b7a6ee059a10a8f277e3fdf0c4e21167",
+    "materials-src/apply-kit/lab.js": "b6e9b6844ac075c5146e383815d457764ea3d4c7c0cd56dfb18114b9d2fe149d",
+    "materials-src/apply-kit/teacher-figures.js": "e70f0ad11b78e867868487c8b4215eb80a934e89b8c86507031d67181aa469d4",
+    "materials-src/apply-kit/full-check.mjs": "f53f143fdd99d75bae02c04b06b0f9ed5d070fbb5709c3f75af9b6e4ae0087bf",
+    "materials-src/apply-kit/spatial-figure.js": "3ec685a99239f0a908201d1dec31b3eb65ea17f0b1f799e7396e6168b775fb48",
+    "materials-src/apply-kit/full.css": "03209442f4497b4c27b16adf82d3c219abd4b8e62923555c847a9388b271368d",
+    "materials-src/apply-kit/student.css": "b50fdf3f59aea31e461c9517a4f526d76c40842e523c08a8712c4578d34b0a37",
+    "materials-src/apply-kit/flow-check.mjs": "13b059740b0aa817540ce4a9260e30a00b9fde62ad5774b16e0b2f876934a610",
+    "materials-src/apply-kit/direction-approvals.json": "a227f07a441d664c65f10603270b9718837853dbdece22e9e5272d925b45fa5e",
+    "materials-src/apply-kit/full.js": "c55d07a28bac88750a0bb194499a98bd56c135208771252e2cc75b418239b11b",
+    "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+    "materials-src/apply-kit/full-model.mjs": "7e8f0ad94c84e7ef79e9ebeee8061c2132b6bd4d1302a25bb3c4b17260dcabcc",
+    "materials-src/apply-kit/lab.html": "5f479ddf0b52f6012f03523a25922749558680c46e6c55c1c4099ced3d524a0e",
+    "materials-src/apply-kit/FREEZE_MANIFEST.json": "38874c0441b51292303ce0514020d3d2b3d0c01ebdfa3b20ad8c0724a9ae5996",
+    "materials-src/apply-kit/model.mjs": "f476f3cddc13370c60faaa11d4be1451357476b16f373c680531997b5f842937",
+    "scripts/lib/pre-answer-audit.mjs": "5832cbd538cc090b8d0e0a6f9da201b3889bf67c349f1194e31b5de47cc6c842"
+  }
+}

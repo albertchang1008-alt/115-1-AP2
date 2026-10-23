@@ -1,0 +1,117 @@
+{
+  "changedNodes": 23,
+  "changedSteps": 24,
+  "cases": 6552,
+  "summary": [
+    {
+      "slug": "kidney-anatomy",
+      "layout": {
+        "cases": 652,
+        "pass": 652,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 83
+    },
+    {
+      "slug": "nephron-circulation",
+      "layout": {
+        "cases": 675,
+        "pass": 675,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 76
+    },
+    {
+      "slug": "filtration-clearance",
+      "layout": {
+        "cases": 628,
+        "pass": 628,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 78
+    },
+    {
+      "slug": "tubular-handling",
+      "layout": {
+        "cases": 644,
+        "pass": 644,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 80
+    },
+    {
+      "slug": "urine-concentration",
+      "layout": {
+        "cases": 654,
+        "pass": 654,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 87
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "layout": {
+        "cases": 701,
+        "pass": 701,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 80
+    },
+    {
+      "slug": "fluid-compartments",
+      "layout": {
+        "cases": 618,
+        "pass": 618,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 69
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "layout": {
+        "cases": 659,
+        "pass": 659,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 79
+    },
+    {
+      "slug": "electrolyte-balance",
+      "layout": {
+        "cases": 673,
+        "pass": 673,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 75
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "layout": {
+        "cases": 648,
+        "pass": 648,
+        "fail": 0,
+        "skipped": 0
+      },
+      "scriptDiff": true,
+      "requiredUnits": 149
+    }
+  ]
+}

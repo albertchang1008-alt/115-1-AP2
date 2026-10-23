@@ -1,0 +1,131 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/fluid-compartments.md",
+  "nodes": [
+    {
+      "figure": "body-water",
+      "steps": [
+        {
+          "type": "slider",
+          "sourceOptions": "question",
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "stepVal": 5,
+          "threshold": 60
+        }
+      ]
+    },
+    {
+      "figure": "compartments-beaker",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "細胞內液",
+            "細胞外液"
+          ],
+          "choices": [
+            "2/3",
+            "1/3"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "ecf-breakdown",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "血漿",
+            "組織間液"
+          ],
+          "choices": [
+            "20%",
+            "80%"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "icf-ecf-ions",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "細胞內液",
+            "細胞外液",
+            "血漿",
+            "組織間液"
+          ],
+          "choices": [
+            "40%",
+            "20%",
+            "4%",
+            "16%"
+          ],
+          "expected": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "osmosis-tube",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0,
+          "instructionAfterAnswer": true
+        }
+      ]
+    },
+    {
+      "figure": "fluid-summary",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "女性",
+            "男性"
+          ],
+          "choices": [
+            "55%",
+            "65%"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

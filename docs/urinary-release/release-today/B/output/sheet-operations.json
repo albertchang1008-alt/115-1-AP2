@@ -1,0 +1,162 @@
+{
+  "initialWrite": {
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTPError: 400: \n\n\n\nBad Request\n\nContent:\n{'code': 400,\n 'message': 'Invalid requests[1].copyPaste: 這項操作不支援含有已篩除列的範圍。',\n 'status': 'INVALID_ARGUMENT'}\n\nRequest URL:\nhttps://sheets.googleapis.com/v4/spreadsheets/1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk:batchUpdate (Response: {'error': {'code': 400, 'message': 'Invalid requests[1].copyPaste: 這項操作不支援含有已篩除列的範圍。', 'status': 'INVALID_ARGUMENT'}})"
+      }
+    ],
+    "structuredContent": {
+      "error": "HTTPError: 400: \n\n\n\nBad Request\n\nContent:\n{'code': 400,\n 'message': 'Invalid requests[1].copyPaste: 這項操作不支援含有已篩除列的範圍。',\n 'status': 'INVALID_ARGUMENT'}\n\nRequest URL:\nhttps://sheets.googleapis.com/v4/spreadsheets/1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk:batchUpdate (Response: {'error': {'code': 400, 'message': 'Invalid requests[1].copyPaste: 這項操作不支援含有已篩除列的範圍。', 'status': 'INVALID_ARGUMENT'}})",
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  },
+  "successfulWrite": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "spreadsheetId": "1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk",
+      "replies": [
+        {},
+        {},
+        {}
+      ],
+      "updatedSpreadsheet": null
+    },
+    "isError": false
+  },
+  "finalVerification": {
+    "pass": true,
+    "spreadsheetId": "1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk",
+    "tab": "115-1-AP2",
+    "sheetId": 1633868463,
+    "url": "https://docs.google.com/spreadsheets/d/1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk/edit#gid=1633868463",
+    "beforeRows": 552,
+    "afterRows": 662,
+    "beforeQuestions": 551,
+    "afterQuestions": 661,
+    "appended": 110,
+    "excluded": 0,
+    "skipped": [],
+    "range": "A553:AF662",
+    "oldCellsCompared": 17664,
+    "newCellsCompared": 3520,
+    "oldCellDifferences": [],
+    "newCellDifferences": [],
+    "duplicateIds": [],
+    "idFormatErrors": [],
+    "extraColumnPolicy": [
+      {
+        "index": 0,
+        "header": "題庫",
+        "distinctCount": 1,
+        "fill": "資訊圖表",
+        "mixed": false
+      },
+      {
+        "index": 3,
+        "header": "年度",
+        "distinctCount": 1,
+        "fill": "資訊圖表",
+        "mixed": false
+      },
+      {
+        "index": 6,
+        "header": "考點",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 7,
+        "header": "圖層",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 8,
+        "header": "圖中角色",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 9,
+        "header": "認知層次",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 10,
+        "header": "zuvio",
+        "distinctCount": 6,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 24,
+        "header": "primary卡",
+        "distinctCount": 2,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 25,
+        "header": "引用卡片",
+        "distinctCount": 12,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 26,
+        "header": "教師覆核註記",
+        "distinctCount": 12,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 27,
+        "header": "發布狀態",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      }
+    ],
+    "backup": "docs/sheet-backups/2026-10-22-urinary-before.json and .csv (entire 552×32 cells including blanks; not committed)",
+    "omittedExcelColumns": [
+      "課程代碼 (分頁即課程)",
+      "題型 (all 單選)",
+      "圖片網址 (all blank)"
+    ],
+    "aliases": {
+      "問題": "題目",
+      "③回頭選答案": "③對答案",
+      "題序": "序號"
+    },
+    "enableColumn": "既有AF啟用欄寫入TRUE，未增加表頭",
+    "initialRejectedBatch": "HTTP 400 copyPaste source includes filtered rows; atomic failure confirmed rowCount=552. Replaced with explicit formats from backed-up source cells, only new range updated; filters unchanged.",
+    "mutation": "appendDimension 110 rows + updateCells A553:AF662; no preexisting cells, headers, filter, roster or other tabs modified",
+    "finalReadAfterRowAutoResize": {
+      "pass": true,
+      "cellsCompared": 21184,
+      "range": "A1:AF662",
+      "nativeVisualProof": "release-today/B/sheet-after.png",
+      "rowResize": "Only new rows 553:662 auto-sized after native visual check. No existing row dimensions altered.",
+      "blankNormalization": "Google returns empty string writes as absent cells; compare these as blank. Nonempty values and original userEnteredValue objects compared exactly."
+    }
+  },
+  "operationScope": {
+    "appendRows": 110,
+    "updateRange": "A553:AF662",
+    "newRowsAutoSized": "553:662",
+    "preexistingCellWrites": 0,
+    "platformSynchronization": 0
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "pass": true,
+  "skipped": 0,
+  "baseline": "991c73b",
+  "guide": {
+    "cases": 34,
+    "pass": 34,
+    "fail": 0,
+    "skipped": 0
+  },
+  "layout": {
+    "cases": 464,
+    "pass": 464,
+    "fail": 0,
+    "skipped": 0
+  },
+  "content": {
+    "pass": true,
+    "quotes": 789,
+    "reviewedCards": 7,
+    "errors": []
+  },
+  "tests": {
+    "pass": 29,
+    "fail": 0,
+    "skipped": 0
+  },
+  "npmCheck": {
+    "pass": true,
+    "frontend": 162,
+    "backend": 61,
+    "skipped": 0
+  },
+  "protectedData": [
+    {
+      "path": "materials-src/acid-base-homeostasis/full.json",
+      "sha256": "1db2a5662260f2d89684d4b58b4a985d3a8334d623daa30e327d1b8260a66ef5",
+      "unchanged": true
+    },
+    {
+      "path": "materials-src/acid-base-homeostasis/apply.json",
+      "sha256": "8663e52dec5f37de64a21b1d65d1f3298d48753c00c6e00fef0b8e8bd9fc1de9",
+      "unchanged": true
+    },
+    {
+      "path": "materials-src/acid-base-homeostasis/content.json",
+      "sha256": "ed4ef9af96b0565927ead9ca2918e29f7669eccff603bb34a1b3dc143d742b70",
+      "unchanged": true
+    },
+    {
+      "path": "docs/classroom/mindmap-relay/acidbase.relay.json",
+      "sha256": "18589ea88a1b7f8ae3bebe6b4bc2322b642648e5f2b20c8ffbd2532308183eae",
+      "unchanged": true
+    }
+  ],
+  "testedFileSha256": {
+    "materials-src/apply-kit/full.js": "eaad3fb22562f4c2be21181d894b1b3d8c5c8d352a0997dd3b2f214511782aab",
+    "materials-src/apply-kit/full.css": "03209442f4497b4c27b16adf82d3c219abd4b8e62923555c847a9388b271368d",
+    "materials-src/apply-kit/full-render.mjs": "19eba8d73d37acc0e62e66e6f8f918fa91d4f8674e62440b405abe7cb26d9f97",
+    "materials-src/apply-kit/full-check.mjs": "b582097f25dbb007cce7d8573b60876db5efcd64c2f53d65bdbf8b9db40cb8d3",
+    "materials-src/acid-base-homeostasis/guidance.json": "2a2dc0c3a62d1d27e24358f1d8845b5509bde12966fcd500fb7c04aade76cd89",
+    "scripts/lib/acidbase-full-browser.mjs": "54ba2dbcde88baccaf9675150493aaba5ed090f7426b8f4dad56f70964bcf2fd",
+    "scripts/acidbase-guide-check.mjs": "f5a58bcb3bb03c9aee18325b22a875a4e3a352bcb942fc9a65798a7f0de3d553",
+    "tests/acidbase-guide.test.mjs": "d7f30a35e77b447265233f698a695a819040ccd68efcf22da1d131eb04162783",
+    "tests/acidbase-full-browser.test.mjs": "aad55bfb3bd8a75a386c8487052b7e7b2197414b1f5116f9c1f3311ae0b0f4dc"
+  }
+}

@@ -1,0 +1,3474 @@
+{
+  "schemaVersion": 2,
+  "slug": "urine-concentration",
+  "version": "v1",
+  "title": {
+    "text": "逆流機制與尿液濃縮",
+    "sources": [
+      {
+        "uid": "adh-water-reabsorption",
+        "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+      },
+      {
+        "uid": "adh-water-reabsorption",
+        "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+      },
+      {
+        "uid": "adh-water-reabsorption",
+        "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+      },
+      {
+        "uid": "adh-water-reabsorption",
+        "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+      },
+      {
+        "uid": "adh-water-reabsorption",
+        "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・逆流機制與尿液濃縮",
+      "sources": [
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+        },
+        {
+          "uid": "adh-water-reabsorption",
+          "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+      "width": 1145,
+      "height": 1374,
+      "anchorView": "overview"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "urine-concentration",
+          "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+        },
+        {
+          "uid": "urine-concentration",
+          "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+        },
+        {
+          "uid": "urine-concentration",
+          "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+        },
+        {
+          "uid": "urine-concentration",
+          "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+        },
+        {
+          "uid": "urine-concentration",
+          "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "adh": {
+        "name": {
+          "text": "抗利尿激素（ADH）",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "抗利尿激素（ADH）又稱血管加壓素，能增加集尿管對水的通透性。水可沿髓質梯度回到血液，形成濃尿。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        }
+      },
+      "water": {
+        "name": {
+          "text": "集尿管水回收",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "集尿管對水的通透性會受抗利尿激素調整。水分再吸收增加時，身體可以保留水分。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        }
+      },
+      "descending": {
+        "name": {
+          "text": "亨利氏環下降枝",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "text": {
+          "text": "亨利氏環下降枝對水通透，水可移出管液。水離開後，管液變濃。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        }
+      },
+      "ascending": {
+        "name": {
+          "text": "亨利氏環上升枝",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "text": {
+          "text": "亨利氏環上升枝不透水，卻會再吸收氯化鈉。鹽離開而水沒跟著走，管液便變稀。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        }
+      },
+      "gradient": {
+        "name": {
+          "text": "髓質滲透梯度",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "text": {
+          "text": "濃縮尿液需要髓質高滲透梯度。只有梯度不夠，集尿管還必須能通水。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        }
+      },
+      "permeability": {
+        "name": {
+          "text": "集尿管通水條件",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "text": {
+          "text": "集尿管可調節對水的通透性。末端如果不容易通水，即使髓質高張，也不能得到相同的濃縮效果。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "ADH保水",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "水不足時，ADH增加保水。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "mode": "change",
+        "relation": "cause",
+        "changes": [
+          {
+            "id": "adh",
+            "kind": "focus",
+            "name": {
+              "text": "抗利尿激素（ADH）",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "adh",
+                "term": "adh",
+                "label": {
+                  "text": "抗利尿激素（ADH）",
+                  "sources": [
+                    {
+                      "uid": "adh-water-reabsorption",
+                      "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                    },
+                    {
+                      "uid": "adh-water-reabsorption",
+                      "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                    },
+                    {
+                      "uid": "adh-water-reabsorption",
+                      "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                    },
+                    {
+                      "uid": "adh-water-reabsorption",
+                      "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                    },
+                    {
+                      "uid": "adh-water-reabsorption",
+                      "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-0-0",
+            "kind": "focus",
+            "short": {
+              "text": "集尿管",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                }
+              ]
+            },
+            "full": {
+              "text": "集尿管",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.35,
+            "anchorRef": "集尿管",
+            "anchor": [
+              0.754585152838428,
+              0.61863173216885
+            ],
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "正常每日尿量",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "1–2",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "L/日",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "status": {
+              "text": "正常參照",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "adh",
+              "term": "adh",
+              "kind": "focus",
+              "label": {
+                "text": "抗利尿激素（ADH）",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "ADH",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ],
+          "→",
+          [
+            {
+              "id": "water",
+              "term": "water",
+              "kind": "change",
+              "label": {
+                "text": "集尿管水回收",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "水回收",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "direction": "up",
+              "directionSources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腺苷酸環化酶活性與水分再吸收均增加"
+                }
+              ]
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "cause",
+            "from": [
+              "adh"
+            ],
+            "to": [
+              "water"
+            ],
+            "description": {
+              "text": "水不足時，ADH增加保水。",
+              "sources": [
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                },
+                {
+                  "uid": "adh-water-reabsorption",
+                  "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ],
+            "fromSources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ],
+            "toSources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "環段特性",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "下降枝可通水，上升枝不透水而回收鹽。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "descending",
+            "kind": "focus",
+            "name": {
+              "text": "亨利氏環下降枝",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "descending",
+                "term": "descending",
+                "label": {
+                  "text": "亨利氏環下降枝",
+                  "sources": [
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                    },
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                    },
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                    },
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                    },
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "水回收",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            "full": {
+              "text": "水回收",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.46,
+            "anchorRef": "水回收",
+            "anchor": [
+              0.7860262008733624,
+              0.4949053857350801
+            ],
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "正常每日尿量",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "1–2",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "L/日",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "status": {
+              "text": "正常參照",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "descending",
+              "term": "descending",
+              "kind": "focus",
+              "label": {
+                "text": "亨利氏環下降枝",
+                "sources": [
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "下降枝",
+                "sources": [
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "ascending",
+              "term": "ascending",
+              "kind": "focus",
+              "label": {
+                "text": "亨利氏環上升枝",
+                "sources": [
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "上升枝",
+                "sources": [
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                  },
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "descending"
+            ],
+            "to": [
+              "ascending"
+            ],
+            "description": {
+              "text": "下降枝可通水，上升枝不透水而回收鹽。",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "濃縮條件",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "髓質梯度與集尿管水通透性必須配合。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "gradient",
+            "kind": "focus",
+            "name": {
+              "text": "髓質滲透梯度",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "gradient",
+                "term": "gradient",
+                "label": {
+                  "text": "髓質滲透梯度",
+                  "sources": [
+                    {
+                      "uid": "urine-concentration",
+                      "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                    },
+                    {
+                      "uid": "urine-concentration",
+                      "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                    },
+                    {
+                      "uid": "urine-concentration",
+                      "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                    },
+                    {
+                      "uid": "urine-concentration",
+                      "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                    },
+                    {
+                      "uid": "urine-concentration",
+                      "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-2-0",
+            "kind": "focus",
+            "short": {
+              "text": "滲透梯度",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "full": {
+              "text": "滲透梯度",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.6,
+            "anchorRef": "滲透梯度",
+            "anchor": [
+              0.6812227074235808,
+              0.7933042212518195
+            ],
+            "sources": [
+              {
+                "uid": "urine-concentration",
+                "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "正常每日尿量",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "amount": {
+              "value": "1–2",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "L/日",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "status": {
+              "text": "正常參照",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "gradient",
+              "term": "gradient",
+              "kind": "focus",
+              "label": {
+                "text": "髓質滲透梯度",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "髓質梯度",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "permeability",
+              "term": "permeability",
+              "kind": "focus",
+              "label": {
+                "text": "集尿管通水條件",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "通水條件",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "gradient"
+            ],
+            "to": [
+              "permeability"
+            ],
+            "description": {
+              "text": "髓質梯度與集尿管水通透性必須配合。",
+              "sources": [
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                },
+                {
+                  "uid": "urine-concentration",
+                  "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "urine-concentration",
+                "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q01",
+            "stem": "想讓最後的尿變濃，腎髓質周圍和集尿管要怎麼配合？",
+            "options": [
+              "周圍物質較多，集尿管也能讓水通過",
+              "周圍物質較多，集尿管不讓水通過",
+              "周圍物質較少，集尿管能讓水通過",
+              "周圍物質較多，上升枝能讓水通過"
+            ],
+            "answer": 0,
+            "hint": "先想想：外面能吸引水，裡面的管壁還要開門嗎？",
+            "explain": "因為周圍物質較多能吸引水移出，而集尿管也要能通水，所以選「周圍物質較多，集尿管也能讓水通過」。選「周圍物質較多，集尿管不讓水通過」的同學，只有外面的濃淡差，水卻過不了管壁，仍收不回同樣多的水。",
+            "nodeId": "urine-concentration-node-01",
+            "sources": [
+              "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "水移向離子或分子較多區域"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q02",
+            "stem": "亨利氏環像一段彎下去再上來的小管，它的下降枝主要怎麼處理水？",
+            "options": [
+              "不讓水通過，主動把鹽送出去",
+              "讓水通過，水往管外物質較多處移出",
+              "讓水通過，水往管內移入",
+              "讓水通過，水移出後管內變淡"
+            ],
+            "answer": 1,
+            "hint": "先想想：同樣的物質留下，水變少後會更濃還是更淡？",
+            "explain": "因為下降枝能通水，水移出後剩下的管液較濃，所以選「讓水通過，水往管外物質較多處移出」。選「讓水通過，水移出後管內變淡」的同學，把水變少後的結果寫成變淡，方向相反。",
+            "nodeId": "urine-concentration-node-02",
+            "sources": [
+              "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃"
+            },
+            {
+              "uid": "sodium-water-balance",
+              "quote": "濃度是溶質量與水量的比例，不是只看鈉總量。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q03",
+            "stem": "亨利氏環的上升枝把氯化鈉（NaCl，一種鹽）收回血液時，水能一起穿過它的管壁嗎？",
+            "options": [
+              "水和鹽一起通過，比例相同",
+              "水能通過，鹽不能回收",
+              "水不能穿過管壁",
+              "水能不能通過，要看膀胱壓力"
+            ],
+            "answer": 2,
+            "hint": "先想想：鹽能走，就表示水也能一起走嗎？",
+            "explain": "因為上升枝回收鹽卻不透水，所以選「水不能穿過管壁」。選「水和鹽一起通過，比例相同」的同學，把上升枝當成鹽和水會一起走，和這段管壁的特性不同。",
+            "nodeId": "urine-concentration-node-03",
+            "sources": [
+              "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "上升枝不透水而再吸收 NaCl，管液變稀。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q04",
+            "stem": "腎髓質周圍有濃淡差，稱為滲透梯度，旁邊的直血管主要怎麼保住這個差別？",
+            "options": [
+              "做逆流增強，建立髓質的濃淡差",
+              "加快血流，把髓質的鹽帶走",
+              "替集尿管開水通道，回收水",
+              "做逆流交換，減少髓質物質被帶走"
+            ],
+            "answer": 3,
+            "hint": "先想想：哪一個先建立濃淡差，哪一個避免它被血流帶走？",
+            "explain": "因為直血管靠緩慢的逆流交換減少物質流失，所以選「做逆流交換，減少髓質物質被帶走」。選「做逆流增強，建立髓質的濃淡差」的同學，所選的逆流增強主要是亨利氏環建立濃淡差的工作。",
+            "nodeId": "urine-concentration-node-04",
+            "sources": [
+              "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "電解質如酸、鹼、鹽，溶於液體會解離成離子；非電解質如葡萄糖不解離。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q05",
+            "stem": "受器像接收激素訊號的接收站。抗利尿激素（ADH，叫腎臟把水留下來的訊號）會用哪個受器，幫集尿管多開水通道？",
+            "options": [
+              "用V2受器，增加水通道，讓水更容易通過",
+              "用V2受器，減少水通道，讓水更難通過",
+              "用V2受器，增加鈉通道，讓鈉更容易通過",
+              "用醛固酮受器，增加水通道，讓水更容易通過"
+            ],
+            "answer": 0,
+            "hint": "先想想：這條訊號增加的是讓水通過，還是讓鈉通過的通道？",
+            "explain": "因為抗利尿激素會增加集尿管的水通道，讓水更容易回到血液，所以它幫身體留下水。選「用V2受器（受器像接收激素訊號的接收站），增加鈉通道，讓鈉更容易通過」的同學，把增加水通道誤當成增加鈉通道。",
+            "nodeId": "urine-concentration-node-05",
+            "sources": [
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-foundation-q06",
+            "stem": "抗利尿激素（ADH，幫腎臟留水的訊號）比較多，其他條件都相同時，尿會怎麼變？",
+            "options": [
+              "尿變多，也變淡",
+              "尿變少，也變濃",
+              "尿變少，也變淡",
+              "尿變多，也變濃"
+            ],
+            "answer": 1,
+            "hint": "先想想：水被收回去，留在尿裡的水會更多還是更少？",
+            "explain": "因為ADH讓更多水回血液，留在尿裡的水較少，所以尿少又濃，選「尿變少，也變濃」。選「尿變少，也變淡」的同學，雖想到尿量少，卻把濃淡方向寫反了。",
+            "nodeId": "urine-concentration-node-06",
+            "sources": [
+              "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "urine-concentration-case-q01",
+            "stem": "某段小管會把氯化鈉（NaCl，一種鹽）收回，水卻穿不過管壁，最像哪一段？",
+            "options": [
+              "亨利氏環下降枝",
+              "尿道",
+              "亨利氏環上升枝",
+              "膀胱"
+            ],
+            "answer": 2,
+            "hint": "先想想：哪一邊讓水走，哪一邊把鹽收回但水過不去？",
+            "explain": "因為亨利氏環上升枝回收鹽又不透水，所以選「亨利氏環上升枝」。選「亨利氏環下降枝」的同學，所選的下降枝能讓水通過，性質不同。",
+            "nodeId": "urine-concentration-node-03",
+            "sources": [
+              "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "上升枝不透水而再吸收 NaCl，管液變稀。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-case-q02",
+            "stem": "亨利氏環是處理管液的小管，直血管是運血的血管，它們在逆流機制中各做什麼？",
+            "options": [
+              "亨利氏環做逆流交換，直血管做逆流增強",
+              "亨利氏環做逆流增強，直血管也做逆流增強",
+              "亨利氏環做逆流交換，直血管也做逆流交換",
+              "亨利氏環做逆流增強，直血管做逆流交換"
+            ],
+            "answer": 3,
+            "hint": "先想想：一個負責建立，一個負責保住，名字怎麼配？",
+            "explain": "因為亨利氏環先建立髓質濃淡差，直血管再幫忙保住，所以選「亨利氏環做逆流增強，直血管做逆流交換」。選「亨利氏環做逆流交換，直血管做逆流增強」的同學，把兩個構造的工作名稱交換了。",
+            "nodeId": "urine-concentration-node-04",
+            "sources": [
+              "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-case-q03",
+            "stem": "集尿管的水通道變多，水也更容易通過，最直接是哪個訊號在作用？",
+            "options": [
+              "抗利尿激素ADH，透過V2受器（受器像接收激素訊號的接收站）",
+              "醛固酮，直接增加水通道",
+              "抗利尿激素ADH，透過V2減少水通道",
+              "腎素，直接增加水通道"
+            ],
+            "answer": 0,
+            "hint": "先想想：直接增加水通道，和先留住鈉，是同一個工作嗎？",
+            "explain": "因為抗利尿激素ADH會透過V2受器（受器像接收激素訊號的接收站）增加水通道，所以選「抗利尿激素ADH，透過V2受器」。選「醛固酮，直接增加水通道」的同學，所選的醛固酮主要促進鈉回收，並不是這條直接增加水通道的訊號。",
+            "nodeId": "urine-concentration-node-05",
+            "sources": [
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            },
+            {
+              "uid": "renin-angiotensin-aldosterone",
+              "quote": "它只是催化血管收縮素原轉成血管收縮素 I"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-case-q04",
+            "stem": "髓質周圍已經有濃淡差，能吸引水移出，但集尿管不太能通水，還能得到同樣濃的尿嗎？",
+            "options": [
+              "能，集尿管外的濃淡差可以代替水通道",
+              "不能，集尿管也要能讓水通過",
+              "能，只要尿在膀胱裡存一樣久",
+              "不能，因為上升枝也要讓水通過"
+            ],
+            "answer": 1,
+            "hint": "先想想：門外能吸引水，門卻過不去，水能出去嗎？",
+            "explain": "因為水還得穿過集尿管的管壁才能回血液，所以選「不能，集尿管也要能讓水通過」。選「能，集尿管外的濃淡差可以代替水通道」的同學，把外面的吸水條件當成已經替管壁開好了門。",
+            "nodeId": "urine-concentration-node-01",
+            "sources": [
+              "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "可增加遠曲小管近集尿管段及皮質集尿管對水的通透性"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "urine-concentration-case-q05",
+            "stem": "抗利尿激素（ADH）是叫腎臟把水留下來的訊號，如果ADH變少，其他條件都一樣，水和尿會怎麼變？",
+            "options": [
+              "留下的水變多，尿變少、變濃",
+              "留下的水不變，尿量與濃淡不變",
+              "留下的水變少，尿變多、變淡",
+              "留下的水變少，尿變少、變濃"
+            ],
+            "answer": 2,
+            "hint": "先想想：水沒留回血液，是不是就跟著尿排出去了？",
+            "explain": "因為ADH變少，集尿管水通道也變少，所以水留不住，尿就多又淡，選「留下的水變少，尿變多、變淡」。選「留下的水變少，尿變少、變濃」的同學，只想到水留不住，卻忘了這些水會跟著尿排掉。",
+            "nodeId": "urine-concentration-node-06",
+            "sources": [
+              "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+              "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "其他條件相同，由較少水切到較多水、ADH 較少的比較狀態時，預測哪個方向？",
+          "options": [
+            "水回收減少，尿量增加且較稀",
+            "水回收增加，尿量減少且較濃",
+            "集尿管水通透性一定上升",
+            "只要有梯度，尿量與濃度必定不變"
+          ],
+          "answer": 0,
+          "feedback": "此定性比較中 ADH 較少，末端通水及水回收較少；尿量較多、較稀，見節點 05–06。",
+          "sources": [
+            "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+            "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "urine-concentration-node-01",
+        "title": {
+          "text": "髓質梯度與濃縮條件",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。\n亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-01.svg",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "urine-concentration",
+                "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "urine-concentration-node-02",
+        "title": {
+          "text": "亨利氏環下降枝",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。\n下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-02.svg",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下降枝水分移出與管液變濃的順序排列。",
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "下降枝對水通透，水移出管液",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            },
+            {
+              "text": "水移出後，管液變濃",
+              "sources": [
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+                },
+                {
+                  "uid": "countercurrent-mechanism",
+                  "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "id": "urine-concentration-node-03",
+        "title": {
+          "text": "亨利氏環上升枝",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。\n下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-03.svg",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「環段特性」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "urine-concentration-node-04",
+        "title": {
+          "text": "直血管逆流交換",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。\n下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-04.svg",
+          "sources": [
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+            },
+            {
+              "uid": "countercurrent-mechanism",
+              "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "尿液濃縮中的逆流機制由亨利氏環的逆流增強裝置與直血管的逆流交換裝置配合，維持髓質高張環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "下降枝對水通透、對溶質通透差，水移出後管液變濃；上升枝不透水而再吸收 NaCl，管液變稀。上升枝共同運輸帶入一個 Na⁺、一個 K⁺與兩個 Cl⁻。直血管緩慢逆流交換，減少髓質溶質流失。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "- 逆流交換的血管是直血管\n- 上升枝對水通透度最低\n- 髓質深部可達 1200 mOsm/L，近曲小管液約 300 mOsm/L"
+              },
+              {
+                "uid": "countercurrent-mechanism",
+                "quote": "亨利氏環建立濃度差，直血管保留濃度差；不可把兩者名稱或水通透性互換。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "urine-concentration-node-05",
+        "title": {
+          "text": "ADH與水通道",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。\nADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-05.svg",
+          "sources": [
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+            },
+            {
+              "uid": "adh-water-reabsorption",
+              "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「濃縮條件」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        },
+        "flowRoutes": [
+          {
+            "id": "flow-05-1",
+            "width": 1122,
+            "height": 1402,
+            "segments": [
+              {
+                "from": {
+                  "text": "集尿管水",
+                  "sources": [
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                    }
+                  ]
+                },
+                "to": {
+                  "text": "高張間質",
+                  "sources": [
+                    {
+                      "uid": "countercurrent-mechanism",
+                      "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                    }
+                  ]
+                },
+                "points": [
+                  [
+                    440,
+                    1000
+                  ],
+                  [
+                    615,
+                    1000
+                  ],
+                  [
+                    760,
+                    1000
+                  ]
+                ],
+                "sources": [
+                  {
+                    "uid": "countercurrent-mechanism",
+                    "quote": "ADH 存在時，集尿管水可進入高張間質；NaCl 與尿素共同參與濃縮環境。"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "urine-concentration-node-06",
+        "title": {
+          "text": "濃尿與稀尿條件比較",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。\n亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/urine-concentration-node-06.svg",
+          "sources": [
+            {
+              "uid": "urine-concentration",
+              "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+            },
+            {
+              "uid": "urine-concentration",
+              "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "urine-concentration",
+                "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "逆流機制與尿液濃縮",
+        "sources": [
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+          },
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+          },
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+          },
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+          },
+          {
+            "uid": "adh-water-reabsorption",
+            "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+              },
+              {
+                "uid": "adh-water-reabsorption",
+                "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "抗利尿激素（ADH）又稱血管加壓素，能增加集尿管對水的通透性。水可沿髓質梯度回到血液，形成濃尿。",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "集尿管對水的通透性會受抗利尿激素調整。水分再吸收增加時，身體可以保留水分。",
+                "sources": [
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "抗利尿激素 ADH 又稱血管加壓素，可增加遠曲小管近集尿管段及皮質集尿管對水的通透性；皮質集尿管是主要作用處。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 作用於 V2 受器，提高腺苷酸環化酶活性、增加水通道數目，水沿髓質滲透梯度再吸收，形成濃尿。水不足時，腦下垂體後葉釋放 ADH，增加保水。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "腎臟濃縮尿液需同時有高張髓質與可通水的集尿管；單有滲透梯度不足以代表水已回收。"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "- 腺苷酸環化酶活性與水分再吸收均增加\n- 本課本濃尿可達 1200 mOsm/L，約為血漿的四倍"
+                  },
+                  {
+                    "uid": "adh-water-reabsorption",
+                    "quote": "ADH 直接調整水通透性；醛固酮主要促進鈉再吸收，兩者保水方式不同。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "urine-concentration",
+                "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+              },
+              {
+                "uid": "urine-concentration",
+                "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "濃縮尿液需要髓質高滲透梯度。只有梯度不夠，集尿管還必須能通水。",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "集尿管可調節對水的通透性。末端如果不容易通水，即使髓質高張，也不能得到相同的濃縮效果。",
+                "sources": [
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿液濃縮需髓質高滲透梯度與集尿管可調節水通透性配合，ADH 增加水回收形成濃尿。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "亨利氏環上升枝回收鹽而不透水，下降枝可通水；直血管減少梯度流失，尿素再循環補充髓質溶質。ADH 作用時集尿管水移出，尿液可達課本 1200 mOsm/L。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "水攝取不足時 ADH 保水；即使可形成高張髓質，若末端不通水，也不能同樣濃縮。"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "- 尿濃縮不是所有管段都通水\n- 正常尿約 1–2 L/日，水約佔 95%"
+                  },
+                  {
+                    "uid": "urine-concentration",
+                    "quote": "尿量、尿中物質排泄量與滲透濃度分屬不同量；指定頁面未完整支持 mannitol、葡萄糖滲透性利尿機制。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

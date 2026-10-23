@@ -1,0 +1,2266 @@
+{
+  "version": 1,
+  "task": "CODEX_TASK_apply9-use-chatgpt-figures_2026-10-21.md",
+  "policy": "解剖／構造僅教師ChatGPT底圖；資料圖白名單可自繪；只有明列缺圖暫保留舊圖。",
+  "entries": [
+    {
+      "slug": "kidney-anatomy",
+      "node": 1,
+      "key": "kidney-anatomy:N01",
+      "current": "body",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-01.svg",
+      "anchors": {
+        "右腎": [
+          31.1943,
+          23.5378
+        ],
+        "左腎": [
+          68.8948,
+          16.4051
+        ],
+        "脊柱": [
+          50.0891,
+          28.5307
+        ],
+        "腹膜": [
+          26.2923,
+          69.5435
+        ],
+        "後腹腔": [
+          19.6078,
+          83.0956
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+      "sha256": "4d0c9c41c9a9ff76a4f3a973967d66aebb1a4c801f28478b5e843e4fcd407f6b",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "kidney-anatomy",
+      "node": 2,
+      "key": "kidney-anatomy:N02",
+      "current": "kidney-cut",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-02.svg",
+      "anchors": {
+        "腎皮質": [
+          75.1337,
+          13.8374
+        ],
+        "腎髓質": [
+          66.8449,
+          21.398
+        ],
+        "腎柱": [
+          45.9002,
+          19.9715
+        ],
+        "腎錐體": [
+          32.8877,
+          38.8017
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "kidney-anatomy",
+      "node": 3,
+      "key": "kidney-anatomy:N03",
+      "current": "urine-route",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-03.svg",
+      "anchors": {
+        "腎乳頭": [
+          47.9501,
+          30.6705
+        ],
+        "小腎盞": [
+          50.3565,
+          32.4536
+        ],
+        "大腎盞": [
+          54.6346,
+          42.9387
+        ],
+        "腎盂": [
+          64.6168,
+          50.7846
+        ],
+        "輸尿管": [
+          82.4421,
+          79.1726
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "kidney-anatomy",
+      "node": 4,
+      "key": "kidney-anatomy:N04",
+      "current": "kidney-layers",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-04.svg",
+      "anchors": {
+        "腎門": [
+          62.3886,
+          32.097
+        ],
+        "腎被膜": [
+          28.4314,
+          63.3381
+        ],
+        "脂肪囊": [
+          28.4314,
+          60.1284
+        ],
+        "腎筋膜": [
+          28.3422,
+          56.4907
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+      "sha256": "273a708b8232cda4b914633c036e8f49d4ad7a14d41f56c42c84c2e88a2eaf18",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        135,
+        701,
+        617,
+        687
+      ]
+    },
+    {
+      "slug": "kidney-anatomy",
+      "node": 5,
+      "key": "kidney-anatomy:N05",
+      "current": "urinary",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-05.svg",
+      "anchors": {
+        "腎臟": [
+          23.1729,
+          23.5378
+        ],
+        "輸尿管": [
+          34.3137,
+          48.5021
+        ],
+        "膀胱": [
+          49.8217,
+          74.893
+        ],
+        "尿道": [
+          49.1979,
+          91.2981
+        ],
+        "形成": [
+          19.6078,
+          28.5307
+        ],
+        "運送": [
+          35.7398,
+          57.0613
+        ],
+        "儲存": [
+          42.7807,
+          77.0328
+        ],
+        "排出": [
+          49.287,
+          96.6476
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+      "sha256": "2170a8bd1650ae083f530f0d84b8bd341c1f83bc2850595633b88d6428fcd8f3",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "kidney-anatomy",
+      "node": 6,
+      "key": "kidney-anatomy:N06",
+      "current": "endocrine",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/kidney-anatomy-node-06.svg",
+      "anchors": {
+        "腎素": [
+          66.8449,
+          17.1184
+        ],
+        "紅血球生成素（腎紅血球生成因子）": [
+          39.6613,
+          46.3623
+        ],
+        "活化維生素D": [
+          41.8895,
+          75.6063
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+      "sha256": "12ea9b21c5ae806d09e51793e4b11860de831aa1e79c8e6e18e83ca3460801d9",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 1,
+      "key": "nephron-circulation:N01",
+      "current": "nephron",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-01.svg",
+      "anchors": {
+        "腎小體": [
+          39.6613,
+          18.5449
+        ],
+        "腎小管": [
+          22.2816,
+          40.6562
+        ],
+        "腎絲球": [
+          41.4439,
+          17.8317
+        ],
+        "鮑氏囊": [
+          30.303,
+          21.0414
+        ],
+        "近曲小管": [
+          24.5098,
+          33.5235
+        ],
+        "亨利氏環": [
+          53.4759,
+          89.8716
+        ],
+        "遠曲小管": [
+          67.2906,
+          33.5235
+        ],
+        "集尿管": [
+          87.1658,
+          69.9001
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-02.png",
+      "sha256": "b3a0e95a14090114a9007f9af3a5991aa0ae5352da9334f51789138e8fe11c62",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 2,
+      "key": "nephron-circulation:N02",
+      "current": "two-nephrons",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-02.svg",
+      "anchors": {
+        "皮質": [
+          13.773,
+          16.7555
+        ],
+        "髓質": [
+          34.2237,
+          64.7372
+        ],
+        "皮質腎元": [
+          20.0334,
+          24.3717
+        ],
+        "近髓質腎元": [
+          50.0835,
+          33.511
+        ],
+        "短環": [
+          25.8765,
+          50.2666
+        ],
+        "長環": [
+          50.0835,
+          86.8241
+        ],
+        "直血管": [
+          45.4925,
+          79.9695
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-01.png",
+      "sha256": "31c0148ba5b499c7e4bf508911c61dab290955e6badf184cf9330124d93768ed",
+      "width": 1198,
+      "height": 1313,
+      "crop": [
+        0,
+        0,
+        1198,
+        1313
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 3,
+      "key": "nephron-circulation:N03",
+      "current": "epithelium",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-03.svg",
+      "anchors": {
+        "近曲小管": [
+          48.1283,
+          19.2582
+        ],
+        "刷狀緣": [
+          29.4118,
+          14.2653
+        ],
+        "遠曲小管": [
+          48.574,
+          80.5991
+        ],
+        "亨利氏環薄段": [
+          48.1283,
+          50.6419
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-03.png",
+      "sha256": "68d815ed4a2297497bebc21c67e2c33b237525c148e5fda39d8b4ed3e305bd25",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 4,
+      "key": "nephron-circulation:N04",
+      "current": "blood-route",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-04.svg",
+      "anchors": {
+        "腎動脈": [
+          12.4777,
+          50.6419
+        ],
+        "葉間動脈": [
+          45.9002,
+          55.6348
+        ],
+        "弓狀動脈": [
+          42.3351,
+          31.3837
+        ],
+        "小葉間動脈": [
+          33.3333,
+          14.9786
+        ],
+        "入球小動脈": [
+          40.107,
+          12.1255
+        ],
+        "腎絲球": [
+          40.107,
+          14.9786
+        ],
+        "出球小動脈": [
+          47.2371,
+          19.2582
+        ],
+        "管周微血管": [
+          53.4759,
+          21.398
+        ],
+        "直血管": [
+          70.41,
+          65.6205
+        ],
+        "靜脈回流": [
+          18.7166,
+          59.2011
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-04.png",
+      "sha256": "f059e299b5568dc98841ecfb6108abf681de428aa21402081966472f929f4479",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 5,
+      "key": "nephron-circulation:N05",
+      "current": "jga",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-05.svg",
+      "anchors": {
+        "入球小動脈": [
+          42.3351,
+          42.796
+        ],
+        "近腎絲球細胞": [
+          49.4652,
+          56.3481
+        ],
+        "遠曲小管": [
+          90.0178,
+          53.495
+        ],
+        "緻密斑": [
+          77.9857,
+          72.0399
+        ],
+        "Lacis細胞": [
+          31.8182,
+          63.0528
+        ],
+        "腎素": [
+          46.3458,
+          48.5021
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-05.png",
+      "sha256": "6ae6d69b5dd7c1dcc783b65b2c6669a21c86f0993b946fdd3d1f48241cc23295",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "nephron-circulation",
+      "node": 6,
+      "key": "nephron-circulation:N06",
+      "current": "blood-tube",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/nephron-circulation-node-06.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "血球／血漿分量資料示意"
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 1,
+      "key": "filtration-clearance:N01",
+      "current": "filter-direction",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/filtration-clearance-node-01.svg",
+      "anchors": {
+        "腎絲球": [
+          47.6827,
+          47.0756
+        ],
+        "鮑氏囊": [
+          83.779,
+          52.7817
+        ],
+        "血液": [
+          21.3904,
+          13.5521
+        ],
+        "濾液": [
+          67.2906,
+          69.1869
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+      "sha256": "ab901c65e6f3fcd123d63b2b6042a0730abe4bd538c7046c8a3b13e635a367c5",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 2,
+      "key": "filtration-clearance:N02",
+      "current": "filter-layers",
+      "kind": "anatomy",
+      "anchors": {
+        "微血管腔": [
+          22,
+          48
+        ],
+        "微血管內皮": [
+          38,
+          45
+        ],
+        "基底膜": [
+          43,
+          45
+        ],
+        "足細胞": [
+          54,
+          45
+        ],
+        "過濾裂隙": [
+          55,
+          57
+        ],
+        "鮑氏囊腔": [
+          78,
+          48
+        ],
+        "鮑氏囊壁層": [
+          95,
+          48
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-90.png",
+      "sha256": "bf49822cf3323c6d9945c2752b4b7ae161a8ccebd06cff071341846cf0882cb1",
+      "width": 1536,
+      "height": 1024,
+      "crop": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "spatialNote": "新G03四個獨立實體熱區；三層過濾膜為核定正確順序，鮑氏囊壁層保留為可定位的干擾項。",
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 3,
+      "key": "filtration-clearance:N03",
+      "current": "filter-particles",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/filtration-clearance-node-03.svg",
+      "anchors": {
+        "血漿": [
+          29.1069,
+          28.7081
+        ],
+        "濾液": [
+          82.9346,
+          47.8469
+        ],
+        "白蛋白": [
+          25.5183,
+          45.4545
+        ],
+        "葡萄糖": [
+          82.1372,
+          78.9474
+        ],
+        "胺基酸": [
+          79.7448,
+          35.8852
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-03.png",
+      "sha256": "195d46d9f013a3b00f5b7b1286a5c244bd629b3d3ae6c3a0f4adf65e5bb2afde",
+      "width": 1254,
+      "height": 1254,
+      "crop": [
+        0,
+        439,
+        1254,
+        351
+      ]
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 4,
+      "key": "filtration-clearance:N04",
+      "current": "filter-pressures",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/filtration-clearance-node-01.svg",
+      "anchors": {
+        "腎絲球": [
+          47.6827,
+          47.0756
+        ],
+        "鮑氏囊": [
+          83.779,
+          52.7817
+        ],
+        "血液": [
+          21.3904,
+          13.5521
+        ],
+        "濾液": [
+          67.2906,
+          69.1869
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+      "sha256": "ab901c65e6f3fcd123d63b2b6042a0730abe4bd538c7046c8a3b13e635a367c5",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 5,
+      "key": "filtration-clearance:N05",
+      "current": "clearance",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/filtration-clearance-node-05.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "清除率公式與單位"
+    },
+    {
+      "slug": "filtration-clearance",
+      "node": 6,
+      "key": "filtration-clearance:N06",
+      "current": "clearance-substances",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/filtration-clearance-node-06.svg",
+      "anchors": {
+        "菊糖": [
+          46.3458,
+          18.1883
+        ],
+        "肌酸酐": [
+          47.2371,
+          55.6348
+        ],
+        "PAH": [
+          48.1283,
+          89.8716
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-04.png",
+      "sha256": "f35ad194ef9ecfe007fc3028f1bee107a4a1659cbcb61c36b29e72c855e86370",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 1,
+      "key": "tubular-handling:N01",
+      "current": "three-transports",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-01.svg",
+      "anchors": {
+        "過濾": [
+          40.107,
+          23.5378
+        ],
+        "再吸收": [
+          56.1497,
+          51.3552
+        ],
+        "分泌": [
+          64.1711,
+          57.0613
+        ],
+        "排泄": [
+          85.5615,
+          93.4379
+        ],
+        "血液": [
+          68.1818,
+          59.2011
+        ],
+        "管液": [
+          50.8021,
+          56.3481
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+      "sha256": "d4e5f733075998cea33d3e7e2d8a3f164df375ddd08580a0b84ee1e0d75b9d5d",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 2,
+      "key": "tubular-handling:N02",
+      "current": "equation",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-02.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "排泄量收支公式"
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 3,
+      "key": "tubular-handling:N03",
+      "current": "tubule-substances",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-03.svg",
+      "anchors": {
+        "近曲小管": [
+          46.3458,
+          42.796
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-02.png",
+      "sha256": "6c8f0df805aad2479c54a8a571b323dc7c215e49ebb30fbf11e71c9f2bc34aa2",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 4,
+      "key": "tubular-handling:N04",
+      "current": "glucose-slider",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-04.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "葡萄糖負荷曲線"
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 5,
+      "key": "tubular-handling:N05",
+      "current": "nephron",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-05.svg",
+      "anchors": {
+        "遠曲小管": [
+          29.4118,
+          19.2582
+        ],
+        "集尿管": [
+          29.4118,
+          73.4665
+        ],
+        "K⁺": [
+          57.9323,
+          69.5435
+        ],
+        "Na⁺": [
+          86.0071,
+          82.7389
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-03.png",
+      "sha256": "bddac3a6d1dfd7dfdf0a2b2e990a7d806f5c68e3fd342475821bdf17dcd135f2",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "tubular-handling",
+      "node": 6,
+      "key": "tubular-handling:N06",
+      "current": "concentration",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/tubular-handling-node-06.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "溶質粒子與相對濃度"
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 1,
+      "key": "urine-concentration:N01",
+      "current": "gradient",
+      "kind": "anatomy",
+      "anchors": {
+        "皮質": [
+          12,
+          23
+        ],
+        "髓質": [
+          12,
+          50
+        ],
+        "滲透梯度": [
+          12,
+          78
+        ],
+        "下降枝": [
+          48,
+          57
+        ],
+        "上升枝": [
+          60,
+          57
+        ],
+        "ADH": [
+          81,
+          48
+        ],
+        "集尿管": [
+          81,
+          65
+        ],
+        "水通道": [
+          81,
+          65
+        ],
+        "水回收": [
+          75,
+          70
+        ]
+      },
+      "positions": {
+        "0": [
+          81,
+          48
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 2,
+      "key": "urine-concentration:N02",
+      "current": "loop-down",
+      "kind": "anatomy",
+      "anchors": {
+        "皮質": [
+          12,
+          23
+        ],
+        "髓質": [
+          12,
+          50
+        ],
+        "滲透梯度": [
+          12,
+          78
+        ],
+        "下降枝": [
+          48,
+          57
+        ],
+        "上升枝": [
+          60,
+          57
+        ],
+        "ADH": [
+          81,
+          48
+        ],
+        "集尿管": [
+          81,
+          65
+        ],
+        "水通道": [
+          81,
+          65
+        ],
+        "水回收": [
+          75,
+          70
+        ]
+      },
+      "positions": {
+        "0": [
+          48,
+          57
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 3,
+      "key": "urine-concentration:N03",
+      "current": "loop-up",
+      "kind": "anatomy",
+      "anchors": {
+        "皮質": [
+          12,
+          23
+        ],
+        "髓質": [
+          12,
+          50
+        ],
+        "滲透梯度": [
+          12,
+          78
+        ],
+        "下降枝": [
+          48,
+          57
+        ],
+        "上升枝": [
+          60,
+          57
+        ],
+        "ADH": [
+          81,
+          48
+        ],
+        "集尿管": [
+          81,
+          65
+        ],
+        "水通道": [
+          81,
+          65
+        ],
+        "水回收": [
+          75,
+          70
+        ]
+      },
+      "positions": {
+        "0": [
+          60,
+          57
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 4,
+      "key": "urine-concentration:N04",
+      "current": "vasa-recta",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urine-concentration-node-04.svg",
+      "anchors": {
+        "直血管": [
+          64.7162,
+          75.6914
+        ],
+        "髓質梯度": [
+          68.1223,
+          79.3304
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+      "sha256": "8d6176b33babb0560db584dfe544d3fd8f1681c9b2e05b360a4d3bb96e068045",
+      "width": 1145,
+      "height": 1374,
+      "crop": [
+        0,
+        0,
+        1145,
+        1374
+      ]
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 5,
+      "key": "urine-concentration:N05",
+      "current": "adh",
+      "kind": "anatomy",
+      "anchors": {
+        "皮質": [
+          12,
+          23
+        ],
+        "髓質": [
+          12,
+          50
+        ],
+        "滲透梯度": [
+          12,
+          78
+        ],
+        "下降枝": [
+          48,
+          57
+        ],
+        "上升枝": [
+          60,
+          57
+        ],
+        "ADH": [
+          81,
+          48
+        ],
+        "集尿管": [
+          81,
+          65
+        ],
+        "水通道": [
+          81,
+          65
+        ],
+        "水回收": [
+          75,
+          70
+        ]
+      },
+      "positions": {
+        "0": [
+          81,
+          48
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "urine-concentration",
+      "node": 6,
+      "key": "urine-concentration:N06",
+      "current": "adh-comparison",
+      "kind": "anatomy",
+      "anchors": {
+        "皮質": [
+          12,
+          23
+        ],
+        "髓質": [
+          12,
+          50
+        ],
+        "滲透梯度": [
+          12,
+          78
+        ],
+        "下降枝": [
+          48,
+          57
+        ],
+        "上升枝": [
+          60,
+          57
+        ],
+        "ADH": [
+          81,
+          48
+        ],
+        "集尿管": [
+          81,
+          65
+        ],
+        "水通道": [
+          81,
+          65
+        ],
+        "水回收": [
+          75,
+          70
+        ]
+      },
+      "positions": {
+        "0": [
+          81,
+          48
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-90.png",
+      "sha256": "fe6a1df64de121a4bcd8b421c86b2b2f514c30551f9a7570e7c046094cf70bc4",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過"
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 1,
+      "key": "urinary-route-micturition:N01",
+      "current": "ureter-peristalsis",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urinary-route-micturition-node-01.svg",
+      "anchors": {
+        "腎盂": [
+          39.0374,
+          16.4051
+        ],
+        "輸尿管": [
+          42.6025,
+          32.097
+        ],
+        "膀胱壁": [
+          42.7807,
+          72.7532
+        ],
+        "斜行穿入": [
+          68.1818,
+          80.9558
+        ],
+        "膀胱": [
+          50.8021,
+          47.0756
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-02.png",
+      "sha256": "d9e66ae035fc86a8604ef66f76435315d3be088250fe508c8235c4de34405346",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 2,
+      "key": "urinary-route-micturition:N02",
+      "current": "ureter-constrictions",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urinary-route-micturition-node-02.svg",
+      "anchors": {
+        "腎盂交接": [
+          30.4813,
+          20.6847
+        ],
+        "髂外血管交叉": [
+          37.4332,
+          59.9144
+        ],
+        "進入膀胱": [
+          37.8788,
+          74.893
+        ]
+      },
+      "positions": {
+        "0": [
+          30.4813,
+          20.6847
+        ],
+        "1": [
+          37.4332,
+          59.9144
+        ],
+        "2": [
+          37.8788,
+          74.893
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-03.png",
+      "sha256": "4606697afee329a10f41669d7171502aaf58530a144162fc8698188e9d4d496e",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        583,
+        1402
+      ]
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 3,
+      "key": "urinary-route-micturition:N03",
+      "current": "bladder-trigone",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urinary-route-micturition-node-03.svg",
+      "anchors": {
+        "輸尿管口": [
+          32.5312,
+          27.1041
+        ],
+        "尿道內口": [
+          47.6827,
+          44.9358
+        ],
+        "膀胱三角": [
+          48.1283,
+          36.3766
+        ],
+        "逼尿肌（迫尿肌）": [
+          86.8984,
+          79.8859
+        ]
+      },
+      "positions": {
+        "0": [
+          32.53,
+          27.1
+        ],
+        "1": [
+          63.0,
+          27.1
+        ],
+        "2": [
+          47.68,
+          44.94
+        ]
+      },
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-04.png",
+      "sha256": "fd9a45efffb191d0a344309c373968d6d3540787ea113175277e2fe7a2f937b3",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        743
+      ]
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 4,
+      "key": "urinary-route-micturition:N04",
+      "current": "urethra-male-female",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urinary-route-micturition-node-04.svg",
+      "anchors": {
+        "女性尿道": [
+          51.6588,
+          32.8198
+        ],
+        "男性尿道": [
+          37.9147,
+          77.6959
+        ],
+        "前列腺部": [
+          56.4929,
+          63.2954
+        ],
+        "膜部": [
+          56.872,
+          70.3282
+        ],
+        "陰莖部": [
+          28.436,
+          83.0543
+        ],
+        "內括約肌": [
+          51.1848,
+          26.1219
+        ],
+        "外括約肌": [
+          55.9242,
+          33.8245
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-05.png",
+      "sha256": "3714cecc0e5909ddc94a306cae5570b6a9871ab833dc796bb233d3ad3bfe9a69",
+      "width": 1055,
+      "height": 1493,
+      "crop": [
+        0,
+        0,
+        1055,
+        1493
+      ]
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 5,
+      "key": "urinary-route-micturition:N05",
+      "current": "micturition-reflex",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/urinary-route-micturition-node-05.svg",
+      "anchors": {
+        "膀胱牽張": [
+          66.3993,
+          71.3267
+        ],
+        "S2–S4": [
+          52.5847,
+          7.8459
+        ],
+        "骨盆副交感神經": [
+          61.4973,
+          84.1655
+        ],
+        "交感神經": [
+          65.0624,
+          12.1255
+        ],
+        "陰神經": [
+          61.0517,
+          89.1583
+        ],
+        "逼尿肌（迫尿肌）": [
+          68.6275,
+          76.3195
+        ],
+        "外括約肌": [
+          53.4759,
+          84.5221
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-06.png",
+      "sha256": "10f8ca26a0e2c3eab827a11f064e0b43dc95692f24029b4ba74ac66e9d35aa16",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "node": 6,
+      "key": "urinary-route-micturition:N06",
+      "current": "normal-urine",
+      "kind": "anatomy",
+      "sourceWrapper": "docs/urinary-release/NODE06_IMAGE_REVIEW.md",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "origin": "/Users/HHC/.codex/worktrees/urinary-stage1-2026-10-16/課程平台1.0/materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-07.png",
+      "approval": "NODE06_FIGURE.md：1055×1491原PNG可用；SHA與教師原圖一致",
+      "src": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-07.png",
+      "sha256": "7804d8d44ca96f5bd65fef5481727abc2dbfb4dfbb12083010cfc5205a4733cb",
+      "width": 1055,
+      "height": 1491,
+      "crop": [
+        0,
+        0,
+        1055,
+        1491
+      ]
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 1,
+      "key": "fluid-compartments:N01",
+      "current": "body-water",
+      "kind": "anatomy",
+      "anchors": {
+        "人形": [
+          50,
+          50
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "gapId": "G01",
+      "request": "正面完整中性人形輪廓，四肢分開、輪廓封閉，內部均勻淡色，純白背景；供程式疊加水位，不畫器官、文字、數字、刻度或箭頭。",
+      "src": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-90.png",
+      "sha256": "58965abd57839aac98e6c2134a7b43cb6c706646c482813e80dfc278c0e35853",
+      "width": 1086,
+      "height": 1448,
+      "crop": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "approval": "CODEX_TASK_apply9-integrate-new-figures_2026-10-22.md；Claude 審圖通過",
+      "bodyClip": "M535 32h8v1h-8ZM527 33h23v1h-23ZM523 34h31v1h-31ZM520 35h38v1h-38ZM517 36h43v1h-43ZM515 37h47v1h-47ZM513 38h52v1h-52ZM510 39h57v1h-57ZM508 40h61v1h-61ZM507 41h63v1h-63ZM505 42h67v1h-67ZM504 43h69v1h-69ZM502 44h73v1h-73ZM501 45h75v1h-75ZM500 46h77v1h-77ZM499 47h79v1h-79ZM497 48h82v1h-82ZM496 49h84v1h-84ZM495 50h86v1h-86ZM495 51h87v1h-87ZM494 52h89v1h-89ZM493 53h91v1h-91ZM492 54h93v1h-93ZM491 55h94v1h-94ZM490 56h96v1h-96ZM490 57h97v1h-97ZM489 58h98v1h-98ZM489 59h99v1h-99ZM488 60h101v1h-101ZM487 61h102v1h-102ZM487 62h103v1h-103ZM486 63h104v1h-104ZM486 64h105v1h-105ZM485 65h106v1h-106ZM485 66h107v1h-107ZM485 67h107v1h-107ZM484 68h109v1h-109ZM484 69h109v1h-109ZM484 70h109v1h-109ZM483 71h111v1h-111ZM483 72h111v1h-111ZM483 73h111v1h-111ZM482 74h113v1h-113ZM482 75h113v1h-113ZM482 76h113v1h-113ZM481 77h114v1h-114ZM481 78h115v1h-115ZM481 79h115v1h-115ZM481 80h115v1h-115ZM481 81h115v1h-115ZM480 82h116v1h-116ZM480 83h116v1h-116ZM480 84h117v1h-117ZM480 85h117v1h-117ZM480 86h117v1h-117ZM480 87h117v1h-117ZM480 88h117v1h-117ZM480 89h117v1h-117ZM480 90h117v1h-117ZM479 91h118v1h-118ZM479 92h118v1h-118ZM479 93h118v1h-118ZM479 94h118v1h-118ZM480 95h117v1h-117ZM480 96h117v1h-117ZM480 97h117v1h-117ZM480 98h117v1h-117ZM480 99h117v1h-117ZM480 100h117v1h-117ZM480 101h117v1h-117ZM480 102h117v1h-117ZM480 103h117v1h-117ZM480 104h117v1h-117ZM480 105h117v1h-117ZM480 106h117v1h-117ZM480 107h117v1h-117ZM479 108h118v1h-118ZM477 109h122v1h-122ZM476 110h125v1h-125ZM475 111h127v1h-127ZM474 112h128v1h-128ZM474 113h129v1h-129ZM473 114h130v1h-130ZM473 115h131v1h-131ZM473 116h131v1h-131ZM473 117h131v1h-131ZM473 118h131v1h-131ZM473 119h131v1h-131ZM473 120h131v1h-131ZM473 121h130v1h-130ZM473 122h130v1h-130ZM474 123h129v1h-129ZM474 124h129v1h-129ZM474 125h128v1h-128ZM475 126h127v1h-127ZM475 127h127v1h-127ZM475 128h127v1h-127ZM476 129h125v1h-125ZM476 130h125v1h-125ZM477 131h123v1h-123ZM477 132h123v1h-123ZM477 133h122v1h-122ZM478 134h121v1h-121ZM478 135h120v1h-120ZM479 136h119v1h-119ZM479 137h119v1h-119ZM480 138h117v1h-117ZM480 139h117v1h-117ZM481 140h115v1h-115ZM481 141h115v1h-115ZM482 142h114v1h-114ZM482 143h113v1h-113ZM483 144h112v1h-112ZM483 145h111v1h-111ZM484 146h109v1h-109ZM485 147h107v1h-107ZM486 148h104v1h-104ZM488 149h100v1h-100ZM489 150h99v1h-99ZM489 151h99v1h-99ZM490 152h98v1h-98ZM490 153h97v1h-97ZM490 154h97v1h-97ZM490 155h97v1h-97ZM491 156h95v1h-95ZM491 157h95v1h-95ZM491 158h95v1h-95ZM491 159h94v1h-94ZM492 160h93v1h-93ZM492 161h93v1h-93ZM493 162h91v1h-91ZM493 163h91v1h-91ZM493 164h91v1h-91ZM494 165h89v1h-89ZM494 166h89v1h-89ZM495 167h87v1h-87ZM495 168h87v1h-87ZM496 169h85v1h-85ZM496 170h85v1h-85ZM496 171h84v1h-84ZM497 172h83v1h-83ZM498 173h81v1h-81ZM498 174h81v1h-81ZM499 175h79v1h-79ZM499 176h79v1h-79ZM499 177h79v1h-79ZM499 178h79v1h-79ZM499 179h79v1h-79ZM499 180h79v1h-79ZM499 181h79v1h-79ZM499 182h79v1h-79ZM499 183h79v1h-79ZM500 184h77v1h-77ZM500 185h77v1h-77ZM500 186h77v1h-77ZM500 187h77v1h-77ZM500 188h77v1h-77ZM500 189h77v1h-77ZM500 190h77v1h-77ZM500 191h77v1h-77ZM500 192h77v1h-77ZM500 193h77v1h-77ZM500 194h77v1h-77ZM500 195h77v1h-77ZM500 196h77v1h-77ZM500 197h77v1h-77ZM500 198h77v1h-77ZM500 199h77v1h-77ZM500 200h77v1h-77ZM500 201h77v1h-77ZM500 202h77v1h-77ZM500 203h78v1h-78ZM499 204h79v1h-79ZM499 205h79v1h-79ZM499 206h79v1h-79ZM499 207h79v1h-79ZM499 208h79v1h-79ZM499 209h79v1h-79ZM499 210h79v1h-79ZM499 211h79v1h-79ZM499 212h79v1h-79ZM498 213h81v1h-81ZM498 214h81v1h-81ZM498 215h81v1h-81ZM497 216h82v1h-82ZM497 217h83v1h-83ZM497 218h83v1h-83ZM496 219h85v1h-85ZM496 220h85v1h-85ZM495 221h87v1h-87ZM494 222h88v1h-88ZM494 223h89v1h-89ZM493 224h91v1h-91ZM492 225h93v1h-93ZM491 226h95v1h-95ZM490 227h97v1h-97ZM489 228h99v1h-99ZM488 229h101v1h-101ZM486 230h104v1h-104ZM485 231h107v1h-107ZM484 232h109v1h-109ZM482 233h113v1h-113ZM480 234h116v1h-116ZM479 235h119v1h-119ZM477 236h123v1h-123ZM476 237h125v1h-125ZM474 238h129v1h-129ZM472 239h133v1h-133ZM470 240h137v1h-137ZM468 241h141v1h-141ZM466 242h145v1h-145ZM464 243h149v1h-149ZM462 244h153v1h-153ZM460 245h157v1h-157ZM458 246h161v1h-161ZM456 247h165v1h-165ZM453 248h170v1h-170ZM451 249h174v1h-174ZM449 250h179v1h-179ZM447 251h183v1h-183ZM444 252h188v1h-188ZM442 253h193v1h-193ZM439 254h198v1h-198ZM437 255h203v1h-203ZM434 256h209v1h-209ZM432 257h213v1h-213ZM429 258h219v1h-219ZM427 259h224v1h-224ZM423 260h231v1h-231ZM421 261h236v1h-236ZM417 262h243v1h-243ZM413 263h250v1h-250ZM410 264h257v1h-257ZM406 265h265v1h-265ZM403 266h271v1h-271ZM400 267h276v1h-276ZM398 268h281v1h-281ZM396 269h285v1h-285ZM393 270h290v1h-290ZM391 271h294v1h-294ZM389 272h298v1h-298ZM388 273h301v1h-301ZM386 274h305v1h-305ZM385 275h307v1h-307ZM383 276h310v1h-310ZM382 277h313v1h-313ZM381 278h315v1h-315ZM380 279h317v1h-317ZM379 280h319v1h-319ZM377 281h322v1h-322ZM376 282h324v1h-324ZM375 283h326v1h-326ZM374 284h328v1h-328ZM374 285h329v1h-329ZM373 286h331v1h-331ZM372 287h333v1h-333ZM371 288h335v1h-335ZM370 289h337v1h-337ZM370 290h337v1h-337ZM369 291h339v1h-339ZM368 292h341v1h-341ZM368 293h341v1h-341ZM367 294h343v1h-343ZM366 295h345v1h-345ZM366 296h345v1h-345ZM365 297h347v1h-347ZM365 298h347v1h-347ZM364 299h349v1h-349ZM364 300h349v1h-349ZM363 301h351v1h-351ZM363 302h351v1h-351ZM362 303h353v1h-353ZM362 304h353v1h-353ZM361 305h355v1h-355ZM361 306h355v1h-355ZM360 307h357v1h-357ZM360 308h357v1h-357ZM359 309h359v1h-359ZM359 310h359v1h-359ZM359 311h359v1h-359ZM358 312h361v1h-361ZM358 313h361v1h-361ZM357 314h362v1h-362ZM357 315h363v1h-363ZM357 316h363v1h-363ZM356 317h365v1h-365ZM356 318h365v1h-365ZM356 319h365v1h-365ZM356 320h365v1h-365ZM355 321h367v1h-367ZM355 322h367v1h-367ZM355 323h367v1h-367ZM355 324h368v1h-368ZM354 325h369v1h-369ZM354 326h369v1h-369ZM354 327h369v1h-369ZM354 328h369v1h-369ZM353 329h371v1h-371ZM353 330h371v1h-371ZM353 331h371v1h-371ZM353 332h371v1h-371ZM353 333h371v1h-371ZM352 334h373v1h-373ZM352 335h373v1h-373ZM352 336h373v1h-373ZM352 337h373v1h-373ZM352 338h373v1h-373ZM351 339h374v1h-374ZM351 340h375v1h-375ZM351 341h375v1h-375ZM351 342h375v1h-375ZM351 343h375v1h-375ZM351 344h375v1h-375ZM351 345h375v1h-375ZM351 346h375v1h-375ZM351 347h375v1h-375ZM351 348h375v1h-375ZM350 349h376v1h-376ZM350 350h376v1h-376ZM350 351h377v1h-377ZM350 352h377v1h-377ZM350 353h377v1h-377ZM350 354h377v1h-377ZM350 355h377v1h-377ZM350 356h377v1h-377ZM350 357h377v1h-377ZM350 358h377v1h-377ZM350 359h377v1h-377ZM350 360h377v1h-377ZM350 361h377v1h-377ZM350 362h377v1h-377ZM350 363h377v1h-377ZM350 364h377v1h-377ZM350 365h377v1h-377ZM350 366h377v1h-377ZM350 367h377v1h-377ZM350 368h377v1h-377ZM350 369h377v1h-377ZM350 370h377v1h-377ZM350 371h376v1h-376ZM350 372h376v1h-376ZM350 373h376v1h-376ZM350 374h376v1h-376ZM350 375h376v1h-376ZM350 376h376v1h-376ZM350 377h376v1h-376ZM350 378h376v1h-376ZM350 379h376v1h-376ZM350 380h376v1h-376ZM350 381h376v1h-376ZM350 382h376v1h-376ZM350 383h376v1h-376ZM350 384h376v1h-376ZM350 385h376v1h-376ZM350 386h376v1h-376ZM350 387h376v1h-376ZM350 388h377v1h-377ZM350 389h377v1h-377ZM350 390h377v1h-377ZM350 391h377v1h-377ZM350 392h377v1h-377ZM350 393h377v1h-377ZM349 394h378v1h-378ZM349 395h378v1h-378ZM349 396h379v1h-379ZM349 397h379v1h-379ZM349 398h379v1h-379ZM349 399h379v1h-379ZM348 400h381v1h-381ZM348 401h381v1h-381ZM348 402h381v1h-381ZM348 403h381v1h-381ZM347 404h383v1h-383ZM347 405h383v1h-383ZM347 406h383v1h-383ZM347 407h383v1h-383ZM346 408h385v1h-385ZM346 409h385v1h-385ZM346 410h385v1h-385ZM346 411h385v1h-385ZM345 412h387v1h-387ZM345 413h387v1h-387ZM345 414h387v1h-387ZM345 415h387v1h-387ZM344 416h388v1h-388ZM344 417h389v1h-389ZM344 418h389v1h-389ZM344 419h389v1h-389ZM344 420h389v1h-389ZM343 421h391v1h-391ZM343 422h391v1h-391ZM343 423h391v1h-391ZM343 424h391v1h-391ZM343 425h391v1h-391ZM342 426h392v1h-392ZM342 427h393v1h-393ZM342 428h393v1h-393ZM342 429h67v1h-67ZM420 429h237v1h-237ZM668 429h67v1h-67ZM342 430h67v1h-67ZM420 430h237v1h-237ZM668 430h67v1h-67ZM342 431h67v1h-67ZM420 431h237v1h-237ZM668 431h67v1h-67ZM341 432h67v1h-67ZM420 432h237v1h-237ZM669 432h66v1h-66ZM341 433h67v1h-67ZM421 433h235v1h-235ZM669 433h67v1h-67ZM341 434h67v1h-67ZM421 434h235v1h-235ZM669 434h67v1h-67ZM341 435h67v1h-67ZM421 435h235v1h-235ZM669 435h67v1h-67ZM341 436h67v1h-67ZM422 436h234v1h-234ZM669 436h67v1h-67ZM341 437h66v1h-66ZM422 437h233v1h-233ZM669 437h67v1h-67ZM341 438h66v1h-66ZM422 438h233v1h-233ZM670 438h66v1h-66ZM340 439h67v1h-67ZM422 439h233v1h-233ZM670 439h66v1h-66ZM340 440h67v1h-67ZM423 440h231v1h-231ZM670 440h67v1h-67ZM340 441h67v1h-67ZM423 441h231v1h-231ZM670 441h67v1h-67ZM340 442h66v1h-66ZM423 442h231v1h-231ZM670 442h67v1h-67ZM340 443h66v1h-66ZM423 443h230v1h-230ZM671 443h66v1h-66ZM340 444h66v1h-66ZM424 444h229v1h-229ZM671 444h66v1h-66ZM340 445h66v1h-66ZM424 445h229v1h-229ZM671 445h66v1h-66ZM340 446h66v1h-66ZM424 446h228v1h-228ZM671 446h66v1h-66ZM339 447h66v1h-66ZM425 447h227v1h-227ZM672 447h66v1h-66ZM339 448h66v1h-66ZM425 448h227v1h-227ZM672 448h66v1h-66ZM339 449h66v1h-66ZM425 449h226v1h-226ZM672 449h66v1h-66ZM339 450h66v1h-66ZM426 450h225v1h-225ZM672 450h66v1h-66ZM339 451h65v1h-65ZM426 451h225v1h-225ZM673 451h65v1h-65ZM339 452h65v1h-65ZM426 452h225v1h-225ZM673 452h65v1h-65ZM339 453h65v1h-65ZM427 453h223v1h-223ZM673 453h65v1h-65ZM339 454h65v1h-65ZM427 454h223v1h-223ZM673 454h65v1h-65ZM339 455h65v1h-65ZM427 455h223v1h-223ZM674 455h64v1h-64ZM339 456h64v1h-64ZM428 456h221v1h-221ZM674 456h64v1h-64ZM339 457h64v1h-64ZM428 457h221v1h-221ZM674 457h64v1h-64ZM338 458h65v1h-65ZM428 458h221v1h-221ZM674 458h65v1h-65ZM338 459h65v1h-65ZM428 459h221v1h-221ZM675 459h64v1h-64ZM338 460h64v1h-64ZM429 460h219v1h-219ZM675 460h64v1h-64ZM338 461h64v1h-64ZM429 461h219v1h-219ZM675 461h64v1h-64ZM338 462h64v1h-64ZM429 462h219v1h-219ZM675 462h64v1h-64ZM338 463h64v1h-64ZM430 463h217v1h-217ZM676 463h63v1h-63ZM338 464h63v1h-63ZM430 464h217v1h-217ZM676 464h63v1h-63ZM338 465h63v1h-63ZM430 465h217v1h-217ZM676 465h63v1h-63ZM338 466h63v1h-63ZM430 466h217v1h-217ZM676 466h63v1h-63ZM338 467h62v1h-62ZM431 467h215v1h-215ZM677 467h62v1h-62ZM338 468h62v1h-62ZM431 468h215v1h-215ZM677 468h62v1h-62ZM337 469h63v1h-63ZM431 469h215v1h-215ZM677 469h63v1h-63ZM337 470h62v1h-62ZM431 470h215v1h-215ZM678 470h62v1h-62ZM337 471h62v1h-62ZM432 471h213v1h-213ZM678 471h62v1h-62ZM337 472h62v1h-62ZM432 472h213v1h-213ZM678 472h62v1h-62ZM337 473h61v1h-61ZM432 473h213v1h-213ZM679 473h61v1h-61ZM337 474h61v1h-61ZM432 474h213v1h-213ZM679 474h61v1h-61ZM337 475h61v1h-61ZM433 475h211v1h-211ZM679 475h61v1h-61ZM337 476h60v1h-60ZM433 476h211v1h-211ZM680 476h60v1h-60ZM337 477h60v1h-60ZM433 477h211v1h-211ZM680 477h61v1h-61ZM337 478h60v1h-60ZM434 478h210v1h-210ZM680 478h61v1h-61ZM336 479h60v1h-60ZM434 479h209v1h-209ZM681 479h60v1h-60ZM336 480h60v1h-60ZM434 480h209v1h-209ZM681 480h60v1h-60ZM336 481h60v1h-60ZM434 481h209v1h-209ZM682 481h59v1h-59ZM336 482h59v1h-59ZM434 482h209v1h-209ZM682 482h59v1h-59ZM336 483h59v1h-59ZM435 483h208v1h-208ZM682 483h59v1h-59ZM335 484h60v1h-60ZM435 484h207v1h-207ZM683 484h59v1h-59ZM335 485h59v1h-59ZM435 485h207v1h-207ZM683 485h59v1h-59ZM335 486h59v1h-59ZM435 486h207v1h-207ZM683 486h59v1h-59ZM335 487h58v1h-58ZM435 487h207v1h-207ZM684 487h58v1h-58ZM335 488h58v1h-58ZM435 488h206v1h-206ZM684 488h58v1h-58ZM334 489h59v1h-59ZM436 489h205v1h-205ZM684 489h59v1h-59ZM334 490h58v1h-58ZM436 490h205v1h-205ZM685 490h58v1h-58ZM334 491h58v1h-58ZM436 491h205v1h-205ZM685 491h58v1h-58ZM333 492h58v1h-58ZM436 492h205v1h-205ZM686 492h57v1h-57ZM333 493h58v1h-58ZM436 493h205v1h-205ZM686 493h58v1h-58ZM333 494h58v1h-58ZM436 494h205v1h-205ZM687 494h57v1h-57ZM333 495h57v1h-57ZM437 495h203v1h-203ZM687 495h57v1h-57ZM332 496h58v1h-58ZM437 496h203v1h-203ZM687 496h58v1h-58ZM332 497h57v1h-57ZM437 497h203v1h-203ZM688 497h57v1h-57ZM332 498h57v1h-57ZM437 498h203v1h-203ZM688 498h57v1h-57ZM331 499h58v1h-58ZM437 499h203v1h-203ZM688 499h58v1h-58ZM331 500h57v1h-57ZM437 500h203v1h-203ZM689 500h57v1h-57ZM330 501h58v1h-58ZM437 501h203v1h-203ZM689 501h58v1h-58ZM330 502h58v1h-58ZM438 502h201v1h-201ZM689 502h58v1h-58ZM329 503h58v1h-58ZM438 503h201v1h-201ZM690 503h58v1h-58ZM329 504h58v1h-58ZM438 504h201v1h-201ZM690 504h58v1h-58ZM328 505h59v1h-59ZM438 505h201v1h-201ZM690 505h59v1h-59ZM328 506h58v1h-58ZM438 506h201v1h-201ZM691 506h58v1h-58ZM327 507h59v1h-59ZM438 507h201v1h-201ZM691 507h59v1h-59ZM327 508h59v1h-59ZM438 508h201v1h-201ZM691 508h59v1h-59ZM326 509h60v1h-60ZM438 509h201v1h-201ZM691 509h60v1h-60ZM326 510h59v1h-59ZM438 510h201v1h-201ZM692 510h59v1h-59ZM325 511h60v1h-60ZM438 511h201v1h-201ZM692 511h60v1h-60ZM325 512h60v1h-60ZM438 512h201v1h-201ZM692 512h60v1h-60ZM324 513h61v1h-61ZM438 513h201v1h-201ZM692 513h61v1h-61ZM323 514h62v1h-62ZM438 514h201v1h-201ZM692 514h61v1h-61ZM323 515h61v1h-61ZM438 515h201v1h-201ZM693 515h61v1h-61ZM322 516h62v1h-62ZM438 516h201v1h-201ZM693 516h61v1h-61ZM322 517h62v1h-62ZM438 517h201v1h-201ZM693 517h62v1h-62ZM321 518h63v1h-63ZM438 518h201v1h-201ZM693 518h62v1h-62ZM321 519h63v1h-63ZM438 519h201v1h-201ZM693 519h63v1h-63ZM320 520h64v1h-64ZM438 520h201v1h-201ZM693 520h63v1h-63ZM320 521h64v1h-64ZM438 521h201v1h-201ZM693 521h64v1h-64ZM319 522h64v1h-64ZM438 522h201v1h-201ZM694 522h63v1h-63ZM319 523h64v1h-64ZM438 523h201v1h-201ZM694 523h64v1h-64ZM318 524h65v1h-65ZM438 524h201v1h-201ZM694 524h64v1h-64ZM318 525h65v1h-65ZM438 525h201v1h-201ZM694 525h65v1h-65ZM317 526h66v1h-66ZM438 526h201v1h-201ZM694 526h65v1h-65ZM317 527h66v1h-66ZM438 527h201v1h-201ZM694 527h66v1h-66ZM316 528h67v1h-67ZM438 528h201v1h-201ZM694 528h66v1h-66ZM316 529h67v1h-67ZM438 529h201v1h-201ZM695 529h66v1h-66ZM316 530h67v1h-67ZM438 530h201v1h-201ZM695 530h66v1h-66ZM315 531h67v1h-67ZM438 531h201v1h-201ZM695 531h67v1h-67ZM315 532h67v1h-67ZM438 532h201v1h-201ZM695 532h67v1h-67ZM314 533h68v1h-68ZM438 533h201v1h-201ZM695 533h68v1h-68ZM314 534h68v1h-68ZM438 534h201v1h-201ZM695 534h68v1h-68ZM314 535h68v1h-68ZM438 535h201v1h-201ZM695 535h68v1h-68ZM313 536h69v1h-69ZM437 536h202v1h-202ZM695 536h69v1h-69ZM313 537h69v1h-69ZM437 537h203v1h-203ZM696 537h68v1h-68ZM312 538h69v1h-69ZM437 538h203v1h-203ZM696 538h69v1h-69ZM312 539h69v1h-69ZM437 539h203v1h-203ZM696 539h69v1h-69ZM311 540h70v1h-70ZM437 540h203v1h-203ZM696 540h69v1h-69ZM311 541h70v1h-70ZM437 541h203v1h-203ZM696 541h70v1h-70ZM311 542h70v1h-70ZM436 542h204v1h-204ZM696 542h70v1h-70ZM310 543h71v1h-71ZM436 543h204v1h-204ZM697 543h69v1h-69ZM310 544h71v1h-71ZM436 544h205v1h-205ZM697 544h70v1h-70ZM310 545h70v1h-70ZM436 545h205v1h-205ZM697 545h70v1h-70ZM309 546h71v1h-71ZM436 546h205v1h-205ZM697 546h70v1h-70ZM309 547h71v1h-71ZM435 547h206v1h-206ZM697 547h71v1h-71ZM309 548h71v1h-71ZM435 548h207v1h-207ZM698 548h70v1h-70ZM309 549h70v1h-70ZM435 549h207v1h-207ZM698 549h70v1h-70ZM308 550h71v1h-71ZM435 550h207v1h-207ZM698 550h71v1h-71ZM308 551h71v1h-71ZM434 551h208v1h-208ZM698 551h71v1h-71ZM308 552h71v1h-71ZM434 552h208v1h-208ZM698 552h71v1h-71ZM308 553h71v1h-71ZM434 553h209v1h-209ZM699 553h70v1h-70ZM307 554h71v1h-71ZM434 554h209v1h-209ZM699 554h71v1h-71ZM307 555h71v1h-71ZM433 555h210v1h-210ZM699 555h71v1h-71ZM307 556h71v1h-71ZM433 556h210v1h-210ZM699 556h71v1h-71ZM306 557h71v1h-71ZM433 557h211v1h-211ZM700 557h70v1h-70ZM306 558h71v1h-71ZM433 558h211v1h-211ZM700 558h71v1h-71ZM306 559h71v1h-71ZM432 559h212v1h-212ZM700 559h71v1h-71ZM306 560h71v1h-71ZM432 560h213v1h-213ZM701 560h70v1h-70ZM306 561h70v1h-70ZM432 561h213v1h-213ZM701 561h70v1h-70ZM305 562h71v1h-71ZM432 562h213v1h-213ZM701 562h70v1h-70ZM305 563h71v1h-71ZM431 563h214v1h-214ZM702 563h70v1h-70ZM305 564h70v1h-70ZM431 564h215v1h-215ZM702 564h70v1h-70ZM305 565h70v1h-70ZM431 565h215v1h-215ZM702 565h70v1h-70ZM305 566h70v1h-70ZM431 566h215v1h-215ZM702 566h70v1h-70ZM304 567h70v1h-70ZM430 567h216v1h-216ZM703 567h69v1h-69ZM304 568h70v1h-70ZM430 568h216v1h-216ZM703 568h69v1h-69ZM304 569h70v1h-70ZM430 569h217v1h-217ZM703 569h70v1h-70ZM304 570h69v1h-69ZM430 570h217v1h-217ZM704 570h69v1h-69ZM304 571h69v1h-69ZM430 571h217v1h-217ZM704 571h69v1h-69ZM304 572h69v1h-69ZM429 572h218v1h-218ZM705 572h68v1h-68ZM303 573h69v1h-69ZM429 573h219v1h-219ZM705 573h68v1h-68ZM303 574h69v1h-69ZM429 574h219v1h-219ZM705 574h68v1h-68ZM303 575h69v1h-69ZM429 575h219v1h-219ZM706 575h68v1h-68ZM303 576h68v1h-68ZM428 576h220v1h-220ZM706 576h68v1h-68ZM303 577h68v1h-68ZM428 577h220v1h-220ZM706 577h68v1h-68ZM303 578h68v1h-68ZM428 578h221v1h-221ZM707 578h67v1h-67ZM303 579h67v1h-67ZM428 579h221v1h-221ZM707 579h67v1h-67ZM302 580h68v1h-68ZM428 580h221v1h-221ZM708 580h66v1h-66ZM302 581h67v1h-67ZM428 581h221v1h-221ZM708 581h66v1h-66ZM302 582h67v1h-67ZM428 582h221v1h-221ZM708 582h66v1h-66ZM302 583h67v1h-67ZM427 583h222v1h-222ZM709 583h66v1h-66ZM302 584h66v1h-66ZM427 584h222v1h-222ZM709 584h66v1h-66ZM302 585h66v1h-66ZM427 585h223v1h-223ZM710 585h65v1h-65ZM302 586h65v1h-65ZM427 586h223v1h-223ZM710 586h65v1h-65ZM302 587h65v1h-65ZM427 587h223v1h-223ZM711 587h64v1h-64ZM302 588h64v1h-64ZM427 588h223v1h-223ZM711 588h64v1h-64ZM301 589h65v1h-65ZM426 589h224v1h-224ZM711 589h64v1h-64ZM301 590h64v1h-64ZM426 590h224v1h-224ZM712 590h63v1h-63ZM301 591h64v1h-64ZM426 591h224v1h-224ZM712 591h63v1h-63ZM301 592h64v1h-64ZM426 592h225v1h-225ZM713 592h63v1h-63ZM301 593h63v1h-63ZM426 593h225v1h-225ZM713 593h63v1h-63ZM301 594h63v1h-63ZM426 594h225v1h-225ZM714 594h62v1h-62ZM301 595h62v1h-62ZM426 595h225v1h-225ZM714 595h62v1h-62ZM301 596h62v1h-62ZM426 596h225v1h-225ZM715 596h61v1h-61ZM301 597h61v1h-61ZM425 597h226v1h-226ZM715 597h61v1h-61ZM301 598h61v1h-61ZM425 598h226v1h-226ZM716 598h60v1h-60ZM300 599h61v1h-61ZM425 599h227v1h-227ZM716 599h60v1h-60ZM300 600h61v1h-61ZM425 600h227v1h-227ZM717 600h59v1h-59ZM300 601h60v1h-60ZM425 601h227v1h-227ZM717 601h59v1h-59ZM300 602h60v1h-60ZM424 602h228v1h-228ZM718 602h59v1h-59ZM300 603h59v1h-59ZM424 603h228v1h-228ZM718 603h59v1h-59ZM300 604h59v1h-59ZM424 604h229v1h-229ZM719 604h58v1h-58ZM300 605h58v1h-58ZM424 605h229v1h-229ZM719 605h58v1h-58ZM300 606h58v1h-58ZM424 606h229v1h-229ZM720 606h57v1h-57ZM300 607h57v1h-57ZM423 607h230v1h-230ZM720 607h57v1h-57ZM300 608h57v1h-57ZM423 608h230v1h-230ZM721 608h56v1h-56ZM300 609h56v1h-56ZM423 609h231v1h-231ZM721 609h56v1h-56ZM299 610h56v1h-56ZM423 610h231v1h-231ZM722 610h55v1h-55ZM299 611h56v1h-56ZM422 611h232v1h-232ZM722 611h56v1h-56ZM299 612h55v1h-55ZM422 612h232v1h-232ZM723 612h55v1h-55ZM299 613h55v1h-55ZM422 613h233v1h-233ZM723 613h55v1h-55ZM299 614h54v1h-54ZM422 614h233v1h-233ZM724 614h54v1h-54ZM299 615h54v1h-54ZM422 615h234v1h-234ZM725 615h53v1h-53ZM298 616h54v1h-54ZM421 616h235v1h-235ZM725 616h53v1h-53ZM298 617h54v1h-54ZM421 617h235v1h-235ZM726 617h52v1h-52ZM298 618h53v1h-53ZM421 618h235v1h-235ZM726 618h53v1h-53ZM298 619h52v1h-52ZM421 619h236v1h-236ZM727 619h52v1h-52ZM298 620h52v1h-52ZM420 620h237v1h-237ZM727 620h52v1h-52ZM298 621h51v1h-51ZM420 621h237v1h-237ZM728 621h51v1h-51ZM298 622h51v1h-51ZM420 622h237v1h-237ZM728 622h51v1h-51ZM297 623h51v1h-51ZM419 623h239v1h-239ZM729 623h50v1h-50ZM297 624h51v1h-51ZM419 624h239v1h-239ZM729 624h50v1h-50ZM297 625h50v1h-50ZM419 625h239v1h-239ZM730 625h50v1h-50ZM297 626h50v1h-50ZM418 626h241v1h-241ZM730 626h50v1h-50ZM297 627h49v1h-49ZM418 627h241v1h-241ZM731 627h49v1h-49ZM297 628h48v1h-48ZM418 628h241v1h-241ZM732 628h48v1h-48ZM296 629h49v1h-49ZM417 629h243v1h-243ZM732 629h49v1h-49ZM296 630h48v1h-48ZM417 630h243v1h-243ZM733 630h48v1h-48ZM296 631h48v1h-48ZM417 631h243v1h-243ZM733 631h48v1h-48ZM296 632h47v1h-47ZM416 632h245v1h-245ZM734 632h47v1h-47ZM295 633h48v1h-48ZM416 633h245v1h-245ZM735 633h46v1h-46ZM295 634h47v1h-47ZM416 634h245v1h-245ZM735 634h47v1h-47ZM295 635h47v1h-47ZM415 635h247v1h-247ZM736 635h46v1h-46ZM295 636h46v1h-46ZM415 636h247v1h-247ZM736 636h46v1h-46ZM294 637h47v1h-47ZM415 637h247v1h-247ZM737 637h45v1h-45ZM294 638h46v1h-46ZM414 638h249v1h-249ZM737 638h46v1h-46ZM294 639h45v1h-45ZM414 639h249v1h-249ZM738 639h45v1h-45ZM294 640h45v1h-45ZM414 640h249v1h-249ZM738 640h45v1h-45ZM293 641h45v1h-45ZM413 641h251v1h-251ZM739 641h44v1h-44ZM293 642h45v1h-45ZM413 642h251v1h-251ZM739 642h44v1h-44ZM293 643h44v1h-44ZM413 643h251v1h-251ZM740 643h44v1h-44ZM293 644h44v1h-44ZM412 644h253v1h-253ZM740 644h44v1h-44ZM293 645h43v1h-43ZM412 645h253v1h-253ZM741 645h43v1h-43ZM292 646h44v1h-44ZM412 646h253v1h-253ZM741 646h44v1h-44ZM292 647h43v1h-43ZM412 647h253v1h-253ZM742 647h43v1h-43ZM292 648h43v1h-43ZM411 648h255v1h-255ZM742 648h43v1h-43ZM292 649h42v1h-42ZM411 649h255v1h-255ZM743 649h42v1h-42ZM291 650h43v1h-43ZM411 650h255v1h-255ZM743 650h43v1h-43ZM291 651h42v1h-42ZM410 651h257v1h-257ZM744 651h42v1h-42ZM291 652h42v1h-42ZM410 652h257v1h-257ZM744 652h42v1h-42ZM290 653h43v1h-43ZM410 653h257v1h-257ZM744 653h43v1h-43ZM290 654h42v1h-42ZM410 654h257v1h-257ZM745 654h42v1h-42ZM290 655h42v1h-42ZM409 655h259v1h-259ZM745 655h42v1h-42ZM289 656h42v1h-42ZM409 656h259v1h-259ZM746 656h41v1h-41ZM289 657h42v1h-42ZM409 657h259v1h-259ZM746 657h42v1h-42ZM289 658h41v1h-41ZM408 658h261v1h-261ZM747 658h41v1h-41ZM288 659h42v1h-42ZM408 659h261v1h-261ZM747 659h41v1h-41ZM288 660h42v1h-42ZM408 660h261v1h-261ZM747 660h42v1h-42ZM288 661h41v1h-41ZM407 661h262v1h-262ZM748 661h41v1h-41ZM287 662h42v1h-42ZM407 662h263v1h-263ZM748 662h41v1h-41ZM287 663h41v1h-41ZM407 663h263v1h-263ZM748 663h42v1h-42ZM287 664h41v1h-41ZM407 664h263v1h-263ZM749 664h41v1h-41ZM286 665h42v1h-42ZM406 665h264v1h-264ZM749 665h42v1h-42ZM286 666h41v1h-41ZM406 666h265v1h-265ZM750 666h41v1h-41ZM286 667h41v1h-41ZM406 667h265v1h-265ZM750 667h41v1h-41ZM285 668h42v1h-42ZM406 668h265v1h-265ZM750 668h42v1h-42ZM285 669h41v1h-41ZM406 669h265v1h-265ZM751 669h41v1h-41ZM284 670h42v1h-42ZM405 670h267v1h-267ZM751 670h41v1h-41ZM284 671h42v1h-42ZM405 671h267v1h-267ZM751 671h42v1h-42ZM283 672h43v1h-43ZM405 672h267v1h-267ZM751 672h42v1h-42ZM283 673h42v1h-42ZM405 673h267v1h-267ZM752 673h42v1h-42ZM282 674h43v1h-43ZM404 674h269v1h-269ZM752 674h43v1h-43ZM281 675h44v1h-44ZM404 675h269v1h-269ZM752 675h44v1h-44ZM280 676h45v1h-45ZM404 676h269v1h-269ZM753 676h44v1h-44ZM279 677h45v1h-45ZM404 677h269v1h-269ZM753 677h45v1h-45ZM278 678h46v1h-46ZM404 678h269v1h-269ZM753 678h46v1h-46ZM277 679h47v1h-47ZM403 679h271v1h-271ZM753 679h47v1h-47ZM276 680h48v1h-48ZM403 680h271v1h-271ZM753 680h48v1h-48ZM275 681h49v1h-49ZM403 681h271v1h-271ZM753 681h49v1h-49ZM274 682h50v1h-50ZM403 682h271v1h-271ZM753 682h50v1h-50ZM273 683h51v1h-51ZM403 683h271v1h-271ZM753 683h51v1h-51ZM272 684h52v1h-52ZM402 684h273v1h-273ZM753 684h52v1h-52ZM271 685h53v1h-53ZM402 685h273v1h-273ZM753 685h54v1h-54ZM270 686h54v1h-54ZM402 686h273v1h-273ZM753 686h54v1h-54ZM269 687h55v1h-55ZM402 687h273v1h-273ZM753 687h56v1h-56ZM268 688h56v1h-56ZM402 688h273v1h-273ZM753 688h57v1h-57ZM267 689h57v1h-57ZM402 689h273v1h-273ZM753 689h58v1h-58ZM266 690h58v1h-58ZM401 690h275v1h-275ZM753 690h59v1h-59ZM265 691h59v1h-59ZM401 691h275v1h-275ZM753 691h59v1h-59ZM264 692h60v1h-60ZM401 692h275v1h-275ZM753 692h60v1h-60ZM263 693h61v1h-61ZM401 693h275v1h-275ZM753 693h61v1h-61ZM262 694h62v1h-62ZM401 694h275v1h-275ZM753 694h62v1h-62ZM261 695h63v1h-63ZM400 695h276v1h-276ZM753 695h63v1h-63ZM260 696h64v1h-64ZM400 696h277v1h-277ZM753 696h64v1h-64ZM259 697h65v1h-65ZM400 697h277v1h-277ZM752 697h66v1h-66ZM259 698h65v1h-65ZM400 698h277v1h-277ZM752 698h66v1h-66ZM258 699h66v1h-66ZM400 699h277v1h-277ZM752 699h67v1h-67ZM257 700h67v1h-67ZM400 700h277v1h-277ZM752 700h68v1h-68ZM257 701h68v1h-68ZM399 701h278v1h-278ZM752 701h68v1h-68ZM256 702h69v1h-69ZM399 702h279v1h-279ZM752 702h69v1h-69ZM255 703h70v1h-70ZM399 703h279v1h-279ZM752 703h70v1h-70ZM255 704h70v1h-70ZM399 704h279v1h-279ZM752 704h70v1h-70ZM254 705h71v1h-71ZM399 705h279v1h-279ZM752 705h71v1h-71ZM254 706h71v1h-71ZM399 706h279v1h-279ZM752 706h71v1h-71ZM253 707h72v1h-72ZM398 707h280v1h-280ZM752 707h72v1h-72ZM253 708h72v1h-72ZM398 708h280v1h-280ZM752 708h72v1h-72ZM252 709h73v1h-73ZM398 709h281v1h-281ZM752 709h73v1h-73ZM252 710h73v1h-73ZM398 710h281v1h-281ZM752 710h73v1h-73ZM251 711h74v1h-74ZM398 711h281v1h-281ZM752 711h74v1h-74ZM251 712h73v1h-73ZM398 712h281v1h-281ZM752 712h74v1h-74ZM251 713h73v1h-73ZM398 713h281v1h-281ZM752 713h75v1h-75ZM250 714h74v1h-74ZM398 714h281v1h-281ZM752 714h75v1h-75ZM250 715h74v1h-74ZM398 715h281v1h-281ZM752 715h75v1h-75ZM249 716h75v1h-75ZM397 716h282v1h-282ZM753 716h75v1h-75ZM249 717h75v1h-75ZM397 717h283v1h-283ZM753 717h75v1h-75ZM248 718h76v1h-76ZM397 718h283v1h-283ZM753 718h76v1h-76ZM248 719h76v1h-76ZM397 719h283v1h-283ZM753 719h76v1h-76ZM247 720h77v1h-77ZM397 720h283v1h-283ZM753 720h77v1h-77ZM247 721h77v1h-77ZM397 721h283v1h-283ZM753 721h77v1h-77ZM246 722h77v1h-77ZM397 722h283v1h-283ZM754 722h77v1h-77ZM246 723h77v1h-77ZM397 723h283v1h-283ZM754 723h77v1h-77ZM245 724h78v1h-78ZM396 724h285v1h-285ZM754 724h78v1h-78ZM245 725h78v1h-78ZM396 725h285v1h-285ZM754 725h78v1h-78ZM244 726h79v1h-79ZM396 726h285v1h-285ZM754 726h79v1h-79ZM244 727h79v1h-79ZM396 727h285v1h-285ZM754 727h79v1h-79ZM243 728h79v1h-79ZM396 728h285v1h-285ZM754 728h80v1h-80ZM243 729h79v1h-79ZM396 729h285v1h-285ZM755 729h79v1h-79ZM242 730h80v1h-80ZM396 730h285v1h-285ZM755 730h80v1h-80ZM242 731h80v1h-80ZM396 731h285v1h-285ZM755 731h80v1h-80ZM241 732h81v1h-81ZM395 732h286v1h-286ZM755 732h81v1h-81ZM241 733h80v1h-80ZM395 733h286v1h-286ZM755 733h81v1h-81ZM240 734h81v1h-81ZM395 734h286v1h-286ZM756 734h81v1h-81ZM240 735h81v1h-81ZM395 735h287v1h-287ZM756 735h81v1h-81ZM239 736h82v1h-82ZM395 736h287v1h-287ZM756 736h82v1h-82ZM238 737h82v1h-82ZM395 737h287v1h-287ZM757 737h82v1h-82ZM238 738h82v1h-82ZM395 738h287v1h-287ZM757 738h60v1h-60ZM828 738h11v1h-11ZM237 739h11v1h-11ZM259 739h61v1h-61ZM395 739h287v1h-287ZM757 739h60v1h-60ZM829 739h11v1h-11ZM236 740h11v1h-11ZM259 740h61v1h-61ZM395 740h287v1h-287ZM757 740h60v1h-60ZM830 740h11v1h-11ZM236 741h10v1h-10ZM259 741h60v1h-60ZM395 741h287v1h-287ZM758 741h59v1h-59ZM831 741h10v1h-10ZM235 742h10v1h-10ZM259 742h60v1h-60ZM395 742h136v1h-136ZM546 742h136v1h-136ZM758 742h59v1h-59ZM832 742h10v1h-10ZM235 743h9v1h-9ZM259 743h60v1h-60ZM395 743h136v1h-136ZM546 743h136v1h-136ZM758 743h59v1h-59ZM833 743h9v1h-9ZM235 744h7v1h-7ZM259 744h60v1h-60ZM395 744h136v1h-136ZM546 744h136v1h-136ZM758 744h59v1h-59ZM835 744h6v1h-6ZM237 745h3v1h-3ZM259 745h59v1h-59ZM394 745h137v1h-137ZM546 745h136v1h-136ZM759 745h58v1h-58ZM836 745h4v1h-4ZM259 746h59v1h-59ZM394 746h137v1h-137ZM546 746h136v1h-136ZM759 746h58v1h-58ZM259 747h59v1h-59ZM394 747h137v1h-137ZM546 747h137v1h-137ZM759 747h58v1h-58ZM259 748h58v1h-58ZM394 748h137v1h-137ZM546 748h137v1h-137ZM760 748h57v1h-57ZM259 749h58v1h-58ZM394 749h137v1h-137ZM546 749h137v1h-137ZM760 749h57v1h-57ZM259 750h58v1h-58ZM394 750h137v1h-137ZM546 750h137v1h-137ZM760 750h58v1h-58ZM259 751h58v1h-58ZM394 751h136v1h-136ZM546 751h137v1h-137ZM760 751h58v1h-58ZM258 752h58v1h-58ZM394 752h136v1h-136ZM546 752h137v1h-137ZM760 752h58v1h-58ZM258 753h58v1h-58ZM394 753h136v1h-136ZM546 753h137v1h-137ZM761 753h57v1h-57ZM258 754h58v1h-58ZM394 754h136v1h-136ZM546 754h137v1h-137ZM761 754h58v1h-58ZM258 755h58v1h-58ZM394 755h136v1h-136ZM546 755h137v1h-137ZM761 755h58v1h-58ZM258 756h58v1h-58ZM394 756h136v1h-136ZM547 756h136v1h-136ZM761 756h58v1h-58ZM257 757h58v1h-58ZM394 757h136v1h-136ZM547 757h136v1h-136ZM761 757h58v1h-58ZM257 758h58v1h-58ZM394 758h136v1h-136ZM547 758h136v1h-136ZM762 758h57v1h-57ZM257 759h58v1h-58ZM394 759h136v1h-136ZM547 759h136v1h-136ZM762 759h58v1h-58ZM257 760h58v1h-58ZM394 760h136v1h-136ZM547 760h136v1h-136ZM762 760h58v1h-58ZM257 761h58v1h-58ZM394 761h136v1h-136ZM547 761h136v1h-136ZM762 761h58v1h-58ZM256 762h58v1h-58ZM394 762h136v1h-136ZM547 762h136v1h-136ZM763 762h57v1h-57ZM256 763h58v1h-58ZM394 763h136v1h-136ZM547 763h136v1h-136ZM763 763h58v1h-58ZM256 764h58v1h-58ZM394 764h135v1h-135ZM547 764h136v1h-136ZM763 764h58v1h-58ZM256 765h58v1h-58ZM394 765h135v1h-135ZM547 765h136v1h-136ZM763 765h58v1h-58ZM255 766h58v1h-58ZM394 766h135v1h-135ZM547 766h136v1h-136ZM763 766h58v1h-58ZM255 767h58v1h-58ZM394 767h135v1h-135ZM548 767h135v1h-135ZM764 767h58v1h-58ZM255 768h58v1h-58ZM394 768h135v1h-135ZM548 768h135v1h-135ZM764 768h58v1h-58ZM254 769h59v1h-59ZM394 769h135v1h-135ZM548 769h135v1h-135ZM764 769h58v1h-58ZM254 770h58v1h-58ZM394 770h135v1h-135ZM548 770h135v1h-135ZM765 770h57v1h-57ZM254 771h58v1h-58ZM394 771h135v1h-135ZM548 771h135v1h-135ZM765 771h57v1h-57ZM254 772h58v1h-58ZM394 772h135v1h-135ZM548 772h135v1h-135ZM765 772h58v1h-58ZM254 773h57v1h-57ZM394 773h135v1h-135ZM548 773h135v1h-135ZM765 773h58v1h-58ZM253 774h58v1h-58ZM394 774h134v1h-134ZM548 774h135v1h-135ZM766 774h57v1h-57ZM253 775h58v1h-58ZM394 775h134v1h-134ZM548 775h135v1h-135ZM766 775h57v1h-57ZM253 776h57v1h-57ZM394 776h134v1h-134ZM548 776h135v1h-135ZM766 776h58v1h-58ZM253 777h57v1h-57ZM394 777h134v1h-134ZM549 777h134v1h-134ZM767 777h57v1h-57ZM253 778h57v1h-57ZM394 778h134v1h-134ZM549 778h134v1h-134ZM767 778h57v1h-57ZM252 779h57v1h-57ZM394 779h134v1h-134ZM549 779h134v1h-134ZM767 779h57v1h-57ZM252 780h57v1h-57ZM394 780h134v1h-134ZM549 780h134v1h-134ZM768 780h56v1h-56ZM252 781h57v1h-57ZM394 781h134v1h-134ZM549 781h134v1h-134ZM768 781h57v1h-57ZM252 782h56v1h-56ZM394 782h133v1h-133ZM549 782h134v1h-134ZM768 782h57v1h-57ZM252 783h56v1h-56ZM394 783h133v1h-133ZM549 783h134v1h-134ZM769 783h56v1h-56ZM252 784h56v1h-56ZM394 784h133v1h-133ZM550 784h133v1h-133ZM769 784h56v1h-56ZM251 785h56v1h-56ZM394 785h133v1h-133ZM550 785h133v1h-133ZM769 785h56v1h-56ZM251 786h56v1h-56ZM394 786h133v1h-133ZM550 786h133v1h-133ZM770 786h55v1h-55ZM251 787h55v1h-55ZM394 787h133v1h-133ZM550 787h133v1h-133ZM770 787h56v1h-56ZM251 788h55v1h-55ZM394 788h133v1h-133ZM550 788h133v1h-133ZM771 788h55v1h-55ZM251 789h54v1h-54ZM394 789h133v1h-133ZM550 789h133v1h-133ZM771 789h55v1h-55ZM250 790h55v1h-55ZM394 790h132v1h-132ZM550 790h132v1h-132ZM772 790h54v1h-54ZM250 791h54v1h-54ZM394 791h132v1h-132ZM551 791h131v1h-131ZM772 791h54v1h-54ZM250 792h54v1h-54ZM395 792h131v1h-131ZM551 792h131v1h-131ZM773 792h53v1h-53ZM250 793h53v1h-53ZM395 793h131v1h-131ZM551 793h131v1h-131ZM774 793h53v1h-53ZM250 794h51v1h-51ZM395 794h131v1h-131ZM551 794h131v1h-131ZM776 794h51v1h-51ZM250 795h42v1h-42ZM395 795h131v1h-131ZM551 795h131v1h-131ZM785 795h42v1h-42ZM250 796h42v1h-42ZM395 796h130v1h-130ZM551 796h131v1h-131ZM785 796h42v1h-42ZM250 797h41v1h-41ZM395 797h130v1h-130ZM552 797h130v1h-130ZM785 797h42v1h-42ZM250 798h41v1h-41ZM395 798h130v1h-130ZM552 798h130v1h-130ZM786 798h40v1h-40ZM251 799h40v1h-40ZM395 799h130v1h-130ZM552 799h130v1h-130ZM786 799h40v1h-40ZM252 800h38v1h-38ZM395 800h130v1h-130ZM552 800h130v1h-130ZM786 800h39v1h-39ZM253 801h37v1h-37ZM395 801h130v1h-130ZM552 801h130v1h-130ZM787 801h37v1h-37ZM255 802h34v1h-34ZM395 802h129v1h-129ZM552 802h130v1h-130ZM787 802h35v1h-35ZM262 803h27v1h-27ZM395 803h129v1h-129ZM553 803h128v1h-128ZM788 803h27v1h-27ZM262 804h26v1h-26ZM396 804h128v1h-128ZM553 804h128v1h-128ZM788 804h27v1h-27ZM262 805h26v1h-26ZM396 805h128v1h-128ZM553 805h128v1h-128ZM789 805h26v1h-26ZM262 806h25v1h-25ZM396 806h128v1h-128ZM553 806h128v1h-128ZM790 806h25v1h-25ZM262 807h24v1h-24ZM396 807h127v1h-127ZM553 807h128v1h-128ZM791 807h24v1h-24ZM262 808h23v1h-23ZM396 808h127v1h-127ZM553 808h128v1h-128ZM792 808h23v1h-23ZM262 809h10v1h-10ZM396 809h127v1h-127ZM554 809h127v1h-127ZM805 809h9v1h-9ZM263 810h8v1h-8ZM396 810h127v1h-127ZM554 810h127v1h-127ZM805 810h9v1h-9ZM263 811h8v1h-8ZM396 811h127v1h-127ZM554 811h127v1h-127ZM806 811h7v1h-7ZM264 812h6v1h-6ZM396 812h127v1h-127ZM554 812h127v1h-127ZM807 812h6v1h-6ZM265 813h4v1h-4ZM396 813h126v1h-126ZM554 813h127v1h-127ZM808 813h4v1h-4ZM266 814h1v1h-1ZM397 814h125v1h-125ZM555 814h125v1h-125ZM809 814h2v1h-2ZM397 815h125v1h-125ZM555 815h125v1h-125ZM397 816h125v1h-125ZM555 816h125v1h-125ZM397 817h124v1h-124ZM555 817h125v1h-125ZM397 818h124v1h-124ZM556 818h124v1h-124ZM397 819h124v1h-124ZM556 819h124v1h-124ZM397 820h124v1h-124ZM556 820h124v1h-124ZM397 821h124v1h-124ZM556 821h124v1h-124ZM398 822h122v1h-122ZM556 822h123v1h-123ZM398 823h122v1h-122ZM557 823h122v1h-122ZM398 824h122v1h-122ZM557 824h122v1h-122ZM398 825h122v1h-122ZM557 825h122v1h-122ZM398 826h122v1h-122ZM557 826h122v1h-122ZM398 827h121v1h-121ZM558 827h121v1h-121ZM398 828h121v1h-121ZM558 828h121v1h-121ZM398 829h121v1h-121ZM558 829h121v1h-121ZM398 830h121v1h-121ZM558 830h120v1h-120ZM399 831h119v1h-119ZM558 831h120v1h-120ZM399 832h119v1h-119ZM559 832h119v1h-119ZM399 833h119v1h-119ZM559 833h119v1h-119ZM399 834h119v1h-119ZM559 834h119v1h-119ZM399 835h118v1h-118ZM559 835h119v1h-119ZM399 836h118v1h-118ZM560 836h118v1h-118ZM399 837h118v1h-118ZM560 837h118v1h-118ZM399 838h118v1h-118ZM560 838h117v1h-117ZM400 839h117v1h-117ZM560 839h117v1h-117ZM400 840h116v1h-116ZM560 840h117v1h-117ZM400 841h116v1h-116ZM561 841h116v1h-116ZM400 842h116v1h-116ZM561 842h116v1h-116ZM400 843h115v1h-115ZM561 843h116v1h-116ZM400 844h115v1h-115ZM561 844h115v1h-115ZM400 845h115v1h-115ZM562 845h114v1h-114ZM401 846h114v1h-114ZM562 846h114v1h-114ZM401 847h113v1h-113ZM562 847h114v1h-114ZM401 848h113v1h-113ZM562 848h114v1h-114ZM401 849h113v1h-113ZM563 849h113v1h-113ZM401 850h113v1h-113ZM563 850h113v1h-113ZM402 851h111v1h-111ZM563 851h112v1h-112ZM402 852h111v1h-111ZM564 852h111v1h-111ZM402 853h111v1h-111ZM564 853h111v1h-111ZM402 854h111v1h-111ZM564 854h111v1h-111ZM402 855h110v1h-110ZM564 855h111v1h-111ZM402 856h110v1h-110ZM565 856h110v1h-110ZM403 857h109v1h-109ZM565 857h109v1h-109ZM403 858h109v1h-109ZM565 858h109v1h-109ZM403 859h108v1h-108ZM565 859h109v1h-109ZM403 860h108v1h-108ZM566 860h108v1h-108ZM403 861h108v1h-108ZM566 861h108v1h-108ZM404 862h107v1h-107ZM566 862h107v1h-107ZM404 863h106v1h-106ZM566 863h107v1h-107ZM404 864h106v1h-106ZM567 864h106v1h-106ZM404 865h106v1h-106ZM567 865h106v1h-106ZM404 866h106v1h-106ZM567 866h106v1h-106ZM404 867h105v1h-105ZM567 867h106v1h-106ZM405 868h104v1h-104ZM568 868h104v1h-104ZM405 869h104v1h-104ZM568 869h104v1h-104ZM405 870h104v1h-104ZM568 870h104v1h-104ZM405 871h103v1h-103ZM568 871h104v1h-104ZM405 872h103v1h-103ZM568 872h104v1h-104ZM406 873h102v1h-102ZM569 873h102v1h-102ZM406 874h102v1h-102ZM569 874h102v1h-102ZM406 875h102v1h-102ZM569 875h102v1h-102ZM406 876h101v1h-101ZM569 876h102v1h-102ZM406 877h101v1h-101ZM569 877h102v1h-102ZM406 878h101v1h-101ZM570 878h100v1h-100ZM407 879h100v1h-100ZM570 879h100v1h-100ZM407 880h99v1h-99ZM570 880h100v1h-100ZM407 881h99v1h-99ZM570 881h100v1h-100ZM407 882h99v1h-99ZM570 882h100v1h-100ZM407 883h99v1h-99ZM571 883h98v1h-98ZM408 884h98v1h-98ZM571 884h98v1h-98ZM408 885h98v1h-98ZM571 885h98v1h-98ZM408 886h97v1h-97ZM571 886h98v1h-98ZM408 887h97v1h-97ZM572 887h96v1h-96ZM409 888h96v1h-96ZM572 888h96v1h-96ZM409 889h96v1h-96ZM572 889h96v1h-96ZM409 890h96v1h-96ZM572 890h96v1h-96ZM409 891h95v1h-95ZM572 891h96v1h-96ZM410 892h94v1h-94ZM572 892h95v1h-95ZM410 893h94v1h-94ZM573 893h94v1h-94ZM410 894h94v1h-94ZM573 894h94v1h-94ZM410 895h94v1h-94ZM573 895h94v1h-94ZM411 896h93v1h-93ZM573 896h94v1h-94ZM411 897h93v1h-93ZM573 897h93v1h-93ZM411 898h92v1h-92ZM573 898h93v1h-93ZM411 899h92v1h-92ZM573 899h93v1h-93ZM411 900h92v1h-92ZM574 900h92v1h-92ZM412 901h91v1h-91ZM574 901h91v1h-91ZM412 902h91v1h-91ZM574 902h91v1h-91ZM412 903h91v1h-91ZM574 903h91v1h-91ZM412 904h91v1h-91ZM574 904h91v1h-91ZM412 905h91v1h-91ZM574 905h91v1h-91ZM412 906h91v1h-91ZM574 906h90v1h-90ZM413 907h89v1h-89ZM574 907h90v1h-90ZM413 908h89v1h-89ZM574 908h90v1h-90ZM413 909h89v1h-89ZM574 909h90v1h-90ZM413 910h89v1h-89ZM575 910h89v1h-89ZM414 911h88v1h-88ZM575 911h88v1h-88ZM414 912h88v1h-88ZM575 912h88v1h-88ZM414 913h88v1h-88ZM575 913h88v1h-88ZM414 914h88v1h-88ZM575 914h88v1h-88ZM414 915h88v1h-88ZM575 915h88v1h-88ZM414 916h87v1h-87ZM575 916h88v1h-88ZM414 917h87v1h-87ZM575 917h87v1h-87ZM415 918h86v1h-86ZM576 918h86v1h-86ZM415 919h86v1h-86ZM576 919h86v1h-86ZM415 920h86v1h-86ZM576 920h86v1h-86ZM415 921h86v1h-86ZM576 921h86v1h-86ZM415 922h86v1h-86ZM576 922h86v1h-86ZM415 923h86v1h-86ZM576 923h86v1h-86ZM415 924h86v1h-86ZM576 924h86v1h-86ZM415 925h85v1h-85ZM576 925h86v1h-86ZM415 926h85v1h-85ZM576 926h86v1h-86ZM415 927h85v1h-85ZM576 927h86v1h-86ZM416 928h84v1h-84ZM576 928h85v1h-85ZM416 929h84v1h-84ZM577 929h84v1h-84ZM416 930h84v1h-84ZM577 930h84v1h-84ZM416 931h84v1h-84ZM577 931h84v1h-84ZM416 932h84v1h-84ZM577 932h84v1h-84ZM416 933h84v1h-84ZM577 933h84v1h-84ZM416 934h83v1h-83ZM577 934h84v1h-84ZM416 935h83v1h-83ZM577 935h84v1h-84ZM416 936h83v1h-83ZM578 936h83v1h-83ZM416 937h83v1h-83ZM578 937h83v1h-83ZM416 938h83v1h-83ZM578 938h83v1h-83ZM416 939h82v1h-82ZM578 939h83v1h-83ZM416 940h82v1h-82ZM578 940h83v1h-83ZM416 941h82v1h-82ZM578 941h83v1h-83ZM416 942h82v1h-82ZM579 942h82v1h-82ZM415 943h83v1h-83ZM579 943h82v1h-82ZM415 944h82v1h-82ZM579 944h82v1h-82ZM415 945h82v1h-82ZM579 945h83v1h-83ZM415 946h82v1h-82ZM580 946h82v1h-82ZM415 947h82v1h-82ZM580 947h82v1h-82ZM415 948h82v1h-82ZM580 948h82v1h-82ZM415 949h81v1h-81ZM580 949h82v1h-82ZM415 950h81v1h-81ZM581 950h81v1h-81ZM415 951h81v1h-81ZM581 951h81v1h-81ZM414 952h82v1h-82ZM581 952h81v1h-81ZM414 953h81v1h-81ZM581 953h82v1h-82ZM414 954h81v1h-81ZM582 954h81v1h-81ZM414 955h81v1h-81ZM582 955h81v1h-81ZM414 956h80v1h-80ZM582 956h81v1h-81ZM414 957h80v1h-80ZM583 957h80v1h-80ZM414 958h80v1h-80ZM583 958h80v1h-80ZM414 959h79v1h-79ZM583 959h80v1h-80ZM413 960h80v1h-80ZM584 960h80v1h-80ZM413 961h80v1h-80ZM584 961h80v1h-80ZM413 962h79v1h-79ZM584 962h80v1h-80ZM413 963h79v1h-79ZM585 963h79v1h-79ZM413 964h79v1h-79ZM585 964h79v1h-79ZM413 965h78v1h-78ZM585 965h79v1h-79ZM413 966h78v1h-78ZM585 966h79v1h-79ZM412 967h79v1h-79ZM586 967h79v1h-79ZM412 968h78v1h-78ZM586 968h79v1h-79ZM412 969h78v1h-78ZM587 969h78v1h-78ZM412 970h77v1h-77ZM587 970h78v1h-78ZM412 971h77v1h-77ZM587 971h78v1h-78ZM412 972h77v1h-77ZM588 972h77v1h-77ZM412 973h76v1h-76ZM588 973h77v1h-77ZM412 974h76v1h-76ZM589 974h76v1h-76ZM412 975h76v1h-76ZM589 975h76v1h-76ZM412 976h75v1h-75ZM589 976h76v1h-76ZM412 977h75v1h-75ZM590 977h75v1h-75ZM412 978h75v1h-75ZM590 978h75v1h-75ZM412 979h74v1h-74ZM591 979h74v1h-74ZM411 980h75v1h-75ZM591 980h74v1h-74ZM411 981h74v1h-74ZM591 981h74v1h-74ZM411 982h74v1h-74ZM592 982h73v1h-73ZM411 983h74v1h-74ZM592 983h74v1h-74ZM411 984h73v1h-73ZM592 984h74v1h-74ZM411 985h73v1h-73ZM593 985h73v1h-73ZM411 986h73v1h-73ZM593 986h73v1h-73ZM411 987h72v1h-72ZM593 987h73v1h-73ZM411 988h72v1h-72ZM594 988h72v1h-72ZM411 989h72v1h-72ZM594 989h72v1h-72ZM411 990h71v1h-71ZM594 990h72v1h-72ZM411 991h71v1h-71ZM594 991h72v1h-72ZM411 992h71v1h-71ZM595 992h71v1h-71ZM411 993h71v1h-71ZM595 993h71v1h-71ZM411 994h70v1h-70ZM595 994h71v1h-71ZM411 995h70v1h-70ZM596 995h70v1h-70ZM411 996h70v1h-70ZM596 996h70v1h-70ZM411 997h70v1h-70ZM596 997h70v1h-70ZM410 998h71v1h-71ZM596 998h71v1h-71ZM410 999h71v1h-71ZM596 999h71v1h-71ZM410 1000h70v1h-70ZM596 1000h71v1h-71ZM410 1001h70v1h-70ZM596 1001h71v1h-71ZM410 1002h70v1h-70ZM596 1002h71v1h-71ZM409 1003h71v1h-71ZM597 1003h70v1h-70ZM409 1004h71v1h-71ZM597 1004h71v1h-71ZM409 1005h71v1h-71ZM597 1005h71v1h-71ZM409 1006h71v1h-71ZM597 1006h71v1h-71ZM408 1007h72v1h-72ZM597 1007h71v1h-71ZM408 1008h72v1h-72ZM597 1008h72v1h-72ZM408 1009h72v1h-72ZM597 1009h72v1h-72ZM407 1010h73v1h-73ZM597 1010h72v1h-72ZM407 1011h73v1h-73ZM597 1011h72v1h-72ZM407 1012h73v1h-73ZM597 1012h73v1h-73ZM407 1013h73v1h-73ZM597 1013h73v1h-73ZM406 1014h74v1h-74ZM597 1014h73v1h-73ZM406 1015h74v1h-74ZM597 1015h74v1h-74ZM406 1016h74v1h-74ZM597 1016h74v1h-74ZM405 1017h75v1h-75ZM597 1017h74v1h-74ZM405 1018h75v1h-75ZM597 1018h75v1h-75ZM405 1019h75v1h-75ZM597 1019h75v1h-75ZM405 1020h75v1h-75ZM597 1020h75v1h-75ZM404 1021h76v1h-76ZM596 1021h77v1h-77ZM404 1022h76v1h-76ZM596 1022h77v1h-77ZM404 1023h76v1h-76ZM596 1023h77v1h-77ZM403 1024h78v1h-78ZM596 1024h77v1h-77ZM403 1025h78v1h-78ZM596 1025h78v1h-78ZM403 1026h78v1h-78ZM596 1026h78v1h-78ZM402 1027h79v1h-79ZM596 1027h78v1h-78ZM402 1028h79v1h-79ZM596 1028h79v1h-79ZM402 1029h79v1h-79ZM596 1029h79v1h-79ZM402 1030h79v1h-79ZM596 1030h79v1h-79ZM401 1031h80v1h-80ZM595 1031h81v1h-81ZM401 1032h80v1h-80ZM595 1032h81v1h-81ZM401 1033h80v1h-80ZM595 1033h81v1h-81ZM400 1034h82v1h-82ZM595 1034h81v1h-81ZM400 1035h82v1h-82ZM595 1035h82v1h-82ZM400 1036h82v1h-82ZM595 1036h82v1h-82ZM399 1037h83v1h-83ZM595 1037h82v1h-82ZM399 1038h83v1h-83ZM594 1038h84v1h-84ZM399 1039h83v1h-83ZM594 1039h84v1h-84ZM399 1040h83v1h-83ZM594 1040h84v1h-84ZM398 1041h85v1h-85ZM594 1041h84v1h-84ZM398 1042h85v1h-85ZM594 1042h85v1h-85ZM398 1043h85v1h-85ZM594 1043h85v1h-85ZM398 1044h85v1h-85ZM593 1044h86v1h-86ZM397 1045h86v1h-86ZM593 1045h87v1h-87ZM397 1046h86v1h-86ZM593 1046h87v1h-87ZM397 1047h86v1h-86ZM593 1047h87v1h-87ZM397 1048h86v1h-86ZM593 1048h87v1h-87ZM396 1049h88v1h-88ZM593 1049h88v1h-88ZM396 1050h88v1h-88ZM593 1050h88v1h-88ZM396 1051h88v1h-88ZM593 1051h88v1h-88ZM396 1052h88v1h-88ZM592 1052h89v1h-89ZM396 1053h88v1h-88ZM592 1053h89v1h-89ZM395 1054h89v1h-89ZM592 1054h90v1h-90ZM395 1055h89v1h-89ZM592 1055h90v1h-90ZM395 1056h89v1h-89ZM592 1056h90v1h-90ZM395 1057h89v1h-89ZM592 1057h90v1h-90ZM395 1058h89v1h-89ZM592 1058h90v1h-90ZM394 1059h91v1h-91ZM592 1059h90v1h-90ZM394 1060h91v1h-91ZM592 1060h91v1h-91ZM394 1061h91v1h-91ZM592 1061h91v1h-91ZM394 1062h91v1h-91ZM592 1062h91v1h-91ZM394 1063h91v1h-91ZM592 1063h91v1h-91ZM394 1064h91v1h-91ZM592 1064h91v1h-91ZM393 1065h92v1h-92ZM591 1065h92v1h-92ZM393 1066h92v1h-92ZM591 1066h93v1h-93ZM393 1067h92v1h-92ZM591 1067h93v1h-93ZM393 1068h92v1h-92ZM591 1068h93v1h-93ZM393 1069h92v1h-92ZM591 1069h93v1h-93ZM393 1070h92v1h-92ZM591 1070h93v1h-93ZM393 1071h92v1h-92ZM591 1071h93v1h-93ZM392 1072h93v1h-93ZM591 1072h93v1h-93ZM392 1073h93v1h-93ZM591 1073h93v1h-93ZM392 1074h93v1h-93ZM591 1074h93v1h-93ZM392 1075h93v1h-93ZM591 1075h93v1h-93ZM392 1076h93v1h-93ZM591 1076h93v1h-93ZM392 1077h93v1h-93ZM591 1077h94v1h-94ZM392 1078h93v1h-93ZM591 1078h94v1h-94ZM392 1079h93v1h-93ZM591 1079h94v1h-94ZM392 1080h93v1h-93ZM591 1080h94v1h-94ZM392 1081h93v1h-93ZM591 1081h94v1h-94ZM392 1082h93v1h-93ZM591 1082h94v1h-94ZM392 1083h93v1h-93ZM591 1083h94v1h-94ZM392 1084h93v1h-93ZM592 1084h93v1h-93ZM392 1085h93v1h-93ZM592 1085h93v1h-93ZM392 1086h93v1h-93ZM592 1086h93v1h-93ZM392 1087h93v1h-93ZM592 1087h93v1h-93ZM392 1088h92v1h-92ZM592 1088h93v1h-93ZM392 1089h92v1h-92ZM592 1089h93v1h-93ZM392 1090h92v1h-92ZM592 1090h93v1h-93ZM392 1091h92v1h-92ZM592 1091h93v1h-93ZM392 1092h92v1h-92ZM592 1092h93v1h-93ZM392 1093h92v1h-92ZM593 1093h92v1h-92ZM392 1094h92v1h-92ZM593 1094h92v1h-92ZM392 1095h92v1h-92ZM593 1095h92v1h-92ZM392 1096h92v1h-92ZM593 1096h91v1h-91ZM392 1097h91v1h-91ZM593 1097h91v1h-91ZM392 1098h91v1h-91ZM593 1098h91v1h-91ZM393 1099h90v1h-90ZM593 1099h91v1h-91ZM393 1100h90v1h-90ZM594 1100h90v1h-90ZM393 1101h90v1h-90ZM594 1101h90v1h-90ZM393 1102h90v1h-90ZM594 1102h90v1h-90ZM393 1103h89v1h-89ZM594 1103h90v1h-90ZM393 1104h89v1h-89ZM594 1104h90v1h-90ZM393 1105h89v1h-89ZM595 1105h89v1h-89ZM393 1106h89v1h-89ZM595 1106h89v1h-89ZM393 1107h89v1h-89ZM595 1107h89v1h-89ZM393 1108h88v1h-88ZM595 1108h88v1h-88ZM394 1109h87v1h-87ZM596 1109h87v1h-87ZM394 1110h87v1h-87ZM596 1110h87v1h-87ZM394 1111h87v1h-87ZM596 1111h87v1h-87ZM394 1112h86v1h-86ZM596 1112h87v1h-87ZM394 1113h86v1h-86ZM597 1113h86v1h-86ZM394 1114h86v1h-86ZM597 1114h86v1h-86ZM394 1115h86v1h-86ZM597 1115h86v1h-86ZM394 1116h85v1h-85ZM597 1116h86v1h-86ZM395 1117h84v1h-84ZM598 1117h84v1h-84ZM395 1118h84v1h-84ZM598 1118h84v1h-84ZM395 1119h83v1h-83ZM598 1119h84v1h-84ZM395 1120h83v1h-83ZM598 1120h84v1h-84ZM395 1121h83v1h-83ZM599 1121h83v1h-83ZM395 1122h83v1h-83ZM599 1122h83v1h-83ZM395 1123h82v1h-82ZM599 1123h83v1h-83ZM395 1124h82v1h-82ZM600 1124h81v1h-81ZM396 1125h81v1h-81ZM600 1125h81v1h-81ZM396 1126h80v1h-80ZM600 1126h81v1h-81ZM396 1127h80v1h-80ZM601 1127h80v1h-80ZM396 1128h80v1h-80ZM601 1128h80v1h-80ZM396 1129h80v1h-80ZM601 1129h80v1h-80ZM396 1130h79v1h-79ZM601 1130h80v1h-80ZM396 1131h79v1h-79ZM602 1131h78v1h-78ZM397 1132h78v1h-78ZM602 1132h78v1h-78ZM397 1133h77v1h-77ZM602 1133h78v1h-78ZM397 1134h77v1h-77ZM603 1134h77v1h-77ZM397 1135h77v1h-77ZM603 1135h77v1h-77ZM397 1136h76v1h-76ZM603 1136h77v1h-77ZM397 1137h76v1h-76ZM604 1137h75v1h-75ZM398 1138h74v1h-74ZM604 1138h75v1h-75ZM398 1139h74v1h-74ZM604 1139h75v1h-75ZM398 1140h74v1h-74ZM605 1140h74v1h-74ZM398 1141h73v1h-73ZM605 1141h74v1h-74ZM398 1142h73v1h-73ZM605 1142h74v1h-74ZM398 1143h73v1h-73ZM606 1143h72v1h-72ZM398 1144h73v1h-73ZM606 1144h72v1h-72ZM399 1145h71v1h-71ZM606 1145h72v1h-72ZM399 1146h71v1h-71ZM607 1146h71v1h-71ZM399 1147h71v1h-71ZM607 1147h71v1h-71ZM399 1148h70v1h-70ZM607 1148h71v1h-71ZM399 1149h70v1h-70ZM608 1149h69v1h-69ZM399 1150h70v1h-70ZM608 1150h69v1h-69ZM400 1151h68v1h-68ZM608 1151h69v1h-69ZM400 1152h68v1h-68ZM609 1152h68v1h-68ZM400 1153h68v1h-68ZM609 1153h68v1h-68ZM400 1154h67v1h-67ZM609 1154h67v1h-67ZM400 1155h67v1h-67ZM609 1155h67v1h-67ZM401 1156h66v1h-66ZM610 1156h66v1h-66ZM401 1157h66v1h-66ZM610 1157h66v1h-66ZM401 1158h65v1h-65ZM610 1158h66v1h-66ZM401 1159h65v1h-65ZM611 1159h64v1h-64ZM402 1160h64v1h-64ZM611 1160h64v1h-64ZM402 1161h63v1h-63ZM611 1161h64v1h-64ZM402 1162h63v1h-63ZM611 1162h64v1h-64ZM402 1163h63v1h-63ZM612 1163h63v1h-63ZM402 1164h63v1h-63ZM612 1164h63v1h-63ZM402 1165h62v1h-62ZM612 1165h62v1h-62ZM403 1166h61v1h-61ZM612 1166h62v1h-62ZM403 1167h61v1h-61ZM613 1167h61v1h-61ZM403 1168h61v1h-61ZM613 1168h61v1h-61ZM403 1169h60v1h-60ZM613 1169h60v1h-60ZM403 1170h60v1h-60ZM614 1170h59v1h-59ZM404 1171h59v1h-59ZM614 1171h59v1h-59ZM404 1172h59v1h-59ZM614 1172h59v1h-59ZM404 1173h58v1h-58ZM614 1173h59v1h-59ZM404 1174h58v1h-58ZM615 1174h57v1h-57ZM404 1175h58v1h-58ZM615 1175h57v1h-57ZM405 1176h57v1h-57ZM615 1176h57v1h-57ZM405 1177h57v1h-57ZM615 1177h57v1h-57ZM405 1178h56v1h-56ZM615 1178h57v1h-57ZM405 1179h56v1h-56ZM616 1179h55v1h-55ZM406 1180h55v1h-55ZM616 1180h55v1h-55ZM406 1181h55v1h-55ZM616 1181h55v1h-55ZM406 1182h54v1h-54ZM616 1182h55v1h-55ZM406 1183h54v1h-54ZM616 1183h54v1h-54ZM406 1184h54v1h-54ZM617 1184h53v1h-53ZM407 1185h53v1h-53ZM617 1185h53v1h-53ZM407 1186h53v1h-53ZM617 1186h53v1h-53ZM407 1187h52v1h-52ZM617 1187h53v1h-53ZM407 1188h52v1h-52ZM617 1188h52v1h-52ZM407 1189h52v1h-52ZM617 1189h52v1h-52ZM408 1190h51v1h-51ZM618 1190h51v1h-51ZM408 1191h51v1h-51ZM618 1191h51v1h-51ZM408 1192h51v1h-51ZM618 1192h50v1h-50ZM408 1193h50v1h-50ZM618 1193h50v1h-50ZM409 1194h49v1h-49ZM618 1194h50v1h-50ZM409 1195h49v1h-49ZM618 1195h50v1h-50ZM409 1196h49v1h-49ZM618 1196h50v1h-50ZM409 1197h49v1h-49ZM619 1197h48v1h-48ZM410 1198h48v1h-48ZM619 1198h48v1h-48ZM410 1199h48v1h-48ZM619 1199h48v1h-48ZM410 1200h47v1h-47ZM619 1200h48v1h-48ZM410 1201h47v1h-47ZM619 1201h48v1h-48ZM410 1202h47v1h-47ZM619 1202h47v1h-47ZM410 1203h47v1h-47ZM619 1203h47v1h-47ZM411 1204h46v1h-46ZM619 1204h47v1h-47ZM411 1205h46v1h-46ZM620 1205h46v1h-46ZM411 1206h46v1h-46ZM620 1206h46v1h-46ZM411 1207h46v1h-46ZM620 1207h45v1h-45ZM411 1208h46v1h-46ZM620 1208h45v1h-45ZM411 1209h46v1h-46ZM620 1209h45v1h-45ZM412 1210h45v1h-45ZM620 1210h45v1h-45ZM412 1211h45v1h-45ZM620 1211h45v1h-45ZM412 1212h45v1h-45ZM620 1212h45v1h-45ZM412 1213h44v1h-44ZM620 1213h45v1h-45ZM412 1214h44v1h-44ZM620 1214h44v1h-44ZM412 1215h44v1h-44ZM620 1215h44v1h-44ZM412 1216h44v1h-44ZM620 1216h44v1h-44ZM413 1217h43v1h-43ZM620 1217h44v1h-44ZM413 1218h43v1h-43ZM620 1218h44v1h-44ZM413 1219h43v1h-43ZM620 1219h44v1h-44ZM413 1220h43v1h-43ZM620 1220h44v1h-44ZM413 1221h43v1h-43ZM620 1221h43v1h-43ZM413 1222h43v1h-43ZM620 1222h43v1h-43ZM413 1223h43v1h-43ZM620 1223h43v1h-43ZM413 1224h43v1h-43ZM620 1224h43v1h-43ZM414 1225h42v1h-42ZM620 1225h43v1h-43ZM414 1226h42v1h-42ZM620 1226h43v1h-43ZM414 1227h42v1h-42ZM620 1227h43v1h-43ZM414 1228h42v1h-42ZM620 1228h43v1h-43ZM414 1229h42v1h-42ZM620 1229h43v1h-43ZM414 1230h42v1h-42ZM620 1230h43v1h-43ZM414 1231h42v1h-42ZM620 1231h43v1h-43ZM414 1232h42v1h-42ZM620 1232h43v1h-43ZM414 1233h42v1h-42ZM620 1233h43v1h-43ZM414 1234h42v1h-42ZM620 1234h43v1h-43ZM414 1235h42v1h-42ZM620 1235h43v1h-43ZM414 1236h42v1h-42ZM620 1236h43v1h-43ZM414 1237h42v1h-42ZM620 1237h43v1h-43ZM414 1238h43v1h-43ZM620 1238h43v1h-43ZM414 1239h43v1h-43ZM620 1239h43v1h-43ZM414 1240h43v1h-43ZM620 1240h43v1h-43ZM414 1241h43v1h-43ZM620 1241h43v1h-43ZM414 1242h43v1h-43ZM620 1242h43v1h-43ZM414 1243h43v1h-43ZM620 1243h43v1h-43ZM414 1244h43v1h-43ZM619 1244h44v1h-44ZM414 1245h43v1h-43ZM619 1245h44v1h-44ZM414 1246h43v1h-43ZM619 1246h44v1h-44ZM414 1247h44v1h-44ZM619 1247h44v1h-44ZM414 1248h44v1h-44ZM619 1248h44v1h-44ZM414 1249h44v1h-44ZM619 1249h44v1h-44ZM413 1250h45v1h-45ZM618 1250h45v1h-45ZM413 1251h45v1h-45ZM618 1251h45v1h-45ZM413 1252h46v1h-46ZM618 1252h45v1h-45ZM413 1253h46v1h-46ZM618 1253h46v1h-46ZM413 1254h46v1h-46ZM617 1254h47v1h-47ZM413 1255h46v1h-46ZM617 1255h47v1h-47ZM412 1256h48v1h-48ZM617 1256h47v1h-47ZM412 1257h48v1h-48ZM617 1257h47v1h-47ZM412 1258h48v1h-48ZM616 1258h49v1h-49ZM412 1259h48v1h-48ZM616 1259h49v1h-49ZM412 1260h49v1h-49ZM616 1260h49v1h-49ZM411 1261h50v1h-50ZM616 1261h49v1h-49ZM411 1262h50v1h-50ZM615 1262h50v1h-50ZM411 1263h51v1h-51ZM615 1263h51v1h-51ZM411 1264h51v1h-51ZM615 1264h51v1h-51ZM410 1265h52v1h-52ZM615 1265h51v1h-51ZM410 1266h52v1h-52ZM614 1266h52v1h-52ZM410 1267h52v1h-52ZM614 1267h52v1h-52ZM410 1268h52v1h-52ZM614 1268h53v1h-53ZM410 1269h52v1h-52ZM614 1269h53v1h-53ZM410 1270h52v1h-52ZM614 1270h53v1h-53ZM410 1271h52v1h-52ZM615 1271h52v1h-52ZM410 1272h52v1h-52ZM615 1272h52v1h-52ZM410 1273h52v1h-52ZM615 1273h52v1h-52ZM410 1274h52v1h-52ZM615 1274h52v1h-52ZM410 1275h52v1h-52ZM615 1275h52v1h-52ZM410 1276h51v1h-51ZM615 1276h51v1h-51ZM411 1277h50v1h-50ZM616 1277h50v1h-50ZM411 1278h50v1h-50ZM616 1278h50v1h-50ZM411 1279h50v1h-50ZM616 1279h50v1h-50ZM411 1280h50v1h-50ZM616 1280h50v1h-50ZM411 1281h50v1h-50ZM616 1281h50v1h-50ZM411 1282h49v1h-49ZM616 1282h50v1h-50ZM411 1283h49v1h-49ZM616 1283h50v1h-50ZM411 1284h49v1h-49ZM616 1284h50v1h-50ZM411 1285h49v1h-49ZM616 1285h50v1h-50ZM411 1286h49v1h-49ZM616 1286h50v1h-50ZM411 1287h49v1h-49ZM616 1287h50v1h-50ZM411 1288h49v1h-49ZM616 1288h50v1h-50ZM411 1289h49v1h-49ZM616 1289h50v1h-50ZM411 1290h49v1h-49ZM616 1290h50v1h-50ZM411 1291h49v1h-49ZM616 1291h50v1h-50ZM410 1292h50v1h-50ZM616 1292h50v1h-50ZM410 1293h50v1h-50ZM616 1293h51v1h-51ZM409 1294h51v1h-51ZM616 1294h51v1h-51ZM409 1295h52v1h-52ZM616 1295h52v1h-52ZM408 1296h53v1h-53ZM616 1296h52v1h-52ZM408 1297h53v1h-53ZM616 1297h53v1h-53ZM407 1298h54v1h-54ZM616 1298h53v1h-53ZM407 1299h54v1h-54ZM615 1299h55v1h-55ZM406 1300h55v1h-55ZM615 1300h55v1h-55ZM406 1301h55v1h-55ZM615 1301h56v1h-56ZM405 1302h56v1h-56ZM615 1302h56v1h-56ZM405 1303h57v1h-57ZM615 1303h57v1h-57ZM404 1304h58v1h-58ZM615 1304h57v1h-57ZM404 1305h58v1h-58ZM615 1305h58v1h-58ZM403 1306h59v1h-59ZM614 1306h59v1h-59ZM403 1307h59v1h-59ZM614 1307h60v1h-60ZM402 1308h60v1h-60ZM614 1308h60v1h-60ZM402 1309h60v1h-60ZM614 1309h61v1h-61ZM401 1310h61v1h-61ZM614 1310h62v1h-62ZM401 1311h62v1h-62ZM614 1311h62v1h-62ZM400 1312h63v1h-63ZM614 1312h63v1h-63ZM400 1313h63v1h-63ZM614 1313h63v1h-63ZM399 1314h64v1h-64ZM614 1314h64v1h-64ZM398 1315h65v1h-65ZM613 1315h65v1h-65ZM398 1316h65v1h-65ZM613 1316h66v1h-66ZM397 1317h66v1h-66ZM613 1317h66v1h-66ZM397 1318h66v1h-66ZM614 1318h66v1h-66ZM396 1319h67v1h-67ZM614 1319h67v1h-67ZM395 1320h68v1h-68ZM614 1320h67v1h-67ZM395 1321h67v1h-67ZM614 1321h68v1h-68ZM394 1322h68v1h-68ZM614 1322h69v1h-69ZM393 1323h69v1h-69ZM615 1323h68v1h-68ZM393 1324h69v1h-69ZM615 1324h69v1h-69ZM392 1325h69v1h-69ZM615 1325h70v1h-70ZM391 1326h70v1h-70ZM616 1326h69v1h-69ZM391 1327h69v1h-69ZM616 1327h70v1h-70ZM390 1328h70v1h-70ZM617 1328h70v1h-70ZM389 1329h70v1h-70ZM617 1329h71v1h-71ZM388 1330h71v1h-71ZM618 1330h70v1h-70ZM388 1331h70v1h-70ZM619 1331h70v1h-70ZM387 1332h70v1h-70ZM620 1332h70v1h-70ZM386 1333h70v1h-70ZM620 1333h71v1h-71ZM385 1334h70v1h-70ZM621 1334h70v1h-70ZM384 1335h70v1h-70ZM622 1335h70v1h-70ZM384 1336h70v1h-70ZM623 1336h70v1h-70ZM383 1337h70v1h-70ZM624 1337h70v1h-70ZM382 1338h71v1h-71ZM624 1338h70v1h-70ZM381 1339h71v1h-71ZM624 1339h71v1h-71ZM380 1340h72v1h-72ZM625 1340h71v1h-71ZM380 1341h72v1h-72ZM625 1341h72v1h-72ZM379 1342h72v1h-72ZM625 1342h73v1h-73ZM378 1343h73v1h-73ZM625 1343h73v1h-73ZM377 1344h74v1h-74ZM625 1344h74v1h-74ZM377 1345h74v1h-74ZM625 1345h75v1h-75ZM376 1346h75v1h-75ZM625 1346h75v1h-75ZM375 1347h76v1h-76ZM625 1347h76v1h-76ZM375 1348h76v1h-76ZM625 1348h77v1h-77ZM374 1349h77v1h-77ZM625 1349h77v1h-77ZM374 1350h77v1h-77ZM625 1350h78v1h-78ZM373 1351h78v1h-78ZM626 1351h78v1h-78ZM372 1352h79v1h-79ZM626 1352h78v1h-78ZM372 1353h79v1h-79ZM626 1353h79v1h-79ZM372 1354h79v1h-79ZM626 1354h79v1h-79ZM371 1355h80v1h-80ZM626 1355h79v1h-79ZM371 1356h80v1h-80ZM626 1356h80v1h-80ZM371 1357h79v1h-79ZM626 1357h80v1h-80ZM371 1358h79v1h-79ZM626 1358h80v1h-80ZM371 1359h79v1h-79ZM627 1359h78v1h-78ZM372 1360h78v1h-78ZM627 1360h78v1h-78ZM372 1361h77v1h-77ZM627 1361h77v1h-77ZM373 1362h76v1h-76ZM628 1362h76v1h-76ZM374 1363h75v1h-75ZM628 1363h75v1h-75ZM376 1364h72v1h-72ZM629 1364h72v1h-72ZM377 1365h71v1h-71ZM629 1365h70v1h-70ZM378 1366h69v1h-69ZM630 1366h69v1h-69ZM379 1367h68v1h-68ZM630 1367h68v1h-68ZM380 1368h66v1h-66ZM631 1368h66v1h-66ZM381 1369h64v1h-64ZM632 1369h64v1h-64ZM382 1370h63v1h-63ZM632 1370h63v1h-63ZM387 1371h57v1h-57ZM633 1371h59v1h-59ZM388 1372h55v1h-55ZM634 1372h54v1h-54ZM389 1373h53v1h-53ZM634 1373h53v1h-53ZM391 1374h51v1h-51ZM635 1374h51v1h-51ZM393 1375h48v1h-48ZM636 1375h48v1h-48ZM400 1376h40v1h-40ZM637 1376h39v1h-39ZM402 1377h36v1h-36ZM638 1377h37v1h-37ZM404 1378h4v1h-4ZM419 1378h18v1h-18ZM640 1378h18v1h-18ZM669 1378h4v1h-4ZM421 1379h14v1h-14ZM642 1379h14v1h-14ZM423 1380h10v1h-10ZM644 1380h11v1h-11ZM426 1381h4v1h-4ZM647 1381h5v1h-5Z",
+      "bodyClipFrame": [
+        1086,
+        1448
+      ],
+      "bodyClipMethod": "Source-colour closed outline, exterior flood fill, 3px inset; scripts/trace-body-water-mask.py"
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 2,
+      "key": "fluid-compartments:N02",
+      "current": "compartments-beaker",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/fluid-compartments-node-02.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "細胞內外液分數"
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 3,
+      "key": "fluid-compartments:N03",
+      "current": "ecf-breakdown",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/fluid-compartments-node-03.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "細胞外液細分比例"
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 4,
+      "key": "fluid-compartments:N04",
+      "current": "icf-ecf-ions",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/fluid-compartments-node-04.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "四格體重比例"
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 5,
+      "key": "fluid-compartments:N05",
+      "current": "osmosis-tube",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/fluid-compartments-node-05.svg",
+      "anchors": {
+        "血漿": [
+          35.0877,
+          39.8724
+        ],
+        "組織間液": [
+          83.7321,
+          63.7959
+        ],
+        "微血管壁": [
+          69.378,
+          48.6443
+        ],
+        "血漿蛋白質": [
+          49.4418,
+          35.8852
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-01.png",
+      "sha256": "40ee546dcbd2b43edf6755c605ec7606b9e24411254a8789baccec4ac2f9c3fc",
+      "width": 1254,
+      "height": 1254,
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ]
+    },
+    {
+      "slug": "fluid-compartments",
+      "node": 6,
+      "key": "fluid-compartments:N06",
+      "current": "fluid-summary",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/fluid-compartments-node-06.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "含水比例分類"
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 1,
+      "key": "water-sodium-regulation:N01",
+      "current": "water-balance",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-01.svg",
+      "anchors": {
+        "液體1500 mL": [
+          13.369,
+          14.2653
+        ],
+        "食物800 mL": [
+          13.369,
+          32.097
+        ],
+        "代謝水200 mL": [
+          11.5865,
+          46.3623
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+      "sha256": "349654f87ca0d73e0568da1746ffe31ee9a8ebbf394f662d6f5031cdb1dd91a9",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 2,
+      "key": "water-sodium-regulation:N02",
+      "current": "water-balance",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-02.svg",
+      "anchors": {
+        "尿液": [
+          87.344,
+          83.4522
+        ],
+        "呼氣水分": [
+          86.4528,
+          29.2439
+        ],
+        "皮膚蒸散": [
+          86.631,
+          37.6605
+        ],
+        "流汗": [
+          91.9786,
+          47.4322
+        ],
+        "糞便": [
+          94.4742,
+          71.3267
+        ],
+        "腎": [
+          38,
+          61
+        ],
+        "肺": [
+          86,
+          23
+        ],
+        "皮膚": [
+          86.6,
+          44
+        ],
+        "腸": [
+          80,
+          60
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+      "sha256": "349654f87ca0d73e0568da1746ffe31ee9a8ebbf394f662d6f5031cdb1dd91a9",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 3,
+      "key": "water-sodium-regulation:N03",
+      "current": "thirst-adh",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-03.svg",
+      "anchors": {
+        "飲水": [
+          22.5376,
+          15.2323
+        ],
+        "集尿管": [
+          19.1987,
+          70.8302
+        ],
+        "水回收": [
+          68.4474,
+          76.1615
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-02.png",
+      "sha256": "bc112855ea9f400fb4c2d9f34a85b2aaea8833b70bf232c84fa0c11a45566ca5",
+      "width": 1198,
+      "height": 1313,
+      "crop": [
+        0,
+        0,
+        1198,
+        1313
+      ]
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 4,
+      "key": "water-sodium-regulation:N04",
+      "current": "jga",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-04.svg",
+      "anchors": {
+        "近腎絲球細胞": [
+          43.672,
+          11.7689
+        ],
+        "腎素": [
+          32.0856,
+          18.9016
+        ],
+        "血管收縮素原": [
+          28.5205,
+          37.8031
+        ],
+        "血管收縮素I": [
+          66.8449,
+          37.8031
+        ],
+        "轉化酶（肺臟）": [
+          70.41,
+          60.6277
+        ],
+        "血管收縮素II": [
+          81.9964,
+          65.6205
+        ],
+        "醛固酮": [
+          90.0178,
+          79.1726
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-03.png",
+      "sha256": "ef293b2e782f19e2f1ee93b18c3cead282e6d11a7cb059dc6e204143244bf0c5",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 5,
+      "key": "water-sodium-regulation:N05",
+      "current": "aldosterone-action",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-05.svg",
+      "anchors": {
+        "醛固酮": [
+          60.9349,
+          9.1394
+        ],
+        "Na⁺再吸收": [
+          75.1252,
+          23.9909
+        ],
+        "K⁺分泌": [
+          28.3806,
+          35.7959
+        ],
+        "ADH": [
+          60.9349,
+          55.5979
+        ],
+        "水通透性": [
+          33.389,
+          71.5918
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-04.png",
+      "sha256": "cb30ea18b0ed0188732249dcd77a76e20e1889e7bb223828a985c2f0d649ac1a",
+      "width": 1198,
+      "height": 1313,
+      "crop": [
+        0,
+        0,
+        1198,
+        1313
+      ]
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "node": 6,
+      "key": "water-sodium-regulation:N06",
+      "current": "anp-action",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/water-sodium-regulation-node-06.svg",
+      "anchors": {
+        "ANP": [
+          21,
+          17
+        ],
+        "排鈉": [
+          95.3654,
+          44.5792
+        ],
+        "排水": [
+          91.8004,
+          42.4394
+        ],
+        "鈉總量": [
+          30.303,
+          57.7746
+        ],
+        "水量": [
+          73.0838,
+          57.7746
+        ],
+        "體液容積": [
+          30.303,
+          83.4522
+        ],
+        "濃度": [
+          78.4314,
+          87.7318
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-05.png",
+      "sha256": "aedeb3a6726b9d0a3afb58e0604acd670eebbcae02b6569bf09908eb17206557",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        650
+      ]
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 1,
+      "key": "electrolyte-balance:N01",
+      "current": "electrolyte-dissociation",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-01.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "解離粒子數"
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 2,
+      "key": "electrolyte-balance:N02",
+      "current": "osmosis-direction",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-02.svg",
+      "anchors": {
+        "半透膜": [
+          49.9109,
+          24.9643
+        ],
+        "水": [
+          38.3244,
+          30.3138
+        ],
+        "粒子較少": [
+          25,
+          30
+        ],
+        "粒子較多": [
+          75,
+          30
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-02.png",
+      "sha256": "08e83ddf7cd45386131cf22e10b3beeb10f1a78794d12943eb1db5b132a272b6",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        700
+      ]
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 3,
+      "key": "electrolyte-balance:N03",
+      "current": "meq-valency",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-03.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "離子價數／電荷數"
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 4,
+      "key": "electrolyte-balance:N04",
+      "current": "na-k-distribution",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-04.svg",
+      "anchors": {
+        "Na⁺": [
+          13.369,
+          8.5592
+        ],
+        "K⁺": [
+          50.8021,
+          26.3909
+        ],
+        "細胞外液": [
+          13.369,
+          14.2653
+        ],
+        "細胞內液": [
+          66.8449,
+          29.9572
+        ],
+        "醛固酮": [
+          63.7255,
+          53.495
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-03.png",
+      "sha256": "02047e4d62d08b5b4aca46df23574950e1c9496e5efc30e9dcc8795b410e2475",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 5,
+      "key": "electrolyte-balance:N05",
+      "current": "chloride-balance",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-05.svg",
+      "anchors": {
+        "Cl⁻": [
+          11.5865,
+          8.5592
+        ],
+        "Ca²⁺": [
+          86.0071,
+          57.0613
+        ],
+        "磷酸根": [
+          18.7166,
+          46.3623
+        ],
+        "鈣再吸收": [
+          76.6488,
+          53.495
+        ],
+        "磷排泄": [
+          31.1943,
+          52.7817
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-04.png",
+      "sha256": "fd9e52dd3e0e1fc2fcec903d3c59ed498e93248a3e00df4eab4cfde682aecdd3",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        463
+      ]
+    },
+    {
+      "slug": "electrolyte-balance",
+      "node": 6,
+      "key": "electrolyte-balance:N06",
+      "current": "magnesium-role",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/electrolyte-balance-node-06.svg",
+      "anchors": {
+        "Mg²⁺": [
+          40.107,
+          14.2653
+        ],
+        "細胞內液": [
+          57.9323,
+          17.8317
+        ],
+        "酵素活性": [
+          44.5633,
+          42.796
+        ],
+        "神經肌肉功能": [
+          49.0196,
+          78.4593
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-05.png",
+      "sha256": "fa7242780cc272debbef7cc51d2d0e4816e2a061c6a6b28843a2e1cc7929ed6c",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 1,
+      "key": "acid-base-homeostasis:N01",
+      "current": "matching-reference",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-01.svg",
+      "anchors": {
+        "化學緩衝": [
+          15.1515,
+          79.8859
+        ],
+        "肺": [
+          35.6506,
+          24.9643
+        ],
+        "腎": [
+          36.5419,
+          45.6491
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+      "sha256": "12441ff2c296d064fbac5da5f1d22b077678f52a8b512e805979655fb0f0d5ff",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 2,
+      "key": "acid-base-homeostasis:N02",
+      "current": "ratio-board",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-02.svg",
+      "anchors": {},
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "reason": "酸鹼比值與數值"
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 3,
+      "key": "acid-base-homeostasis:N03",
+      "current": "matching-reference",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-03.svg",
+      "anchors": {
+        "碳酸系統": [
+          44.5633,
+          14.2653
+        ],
+        "磷酸鹽": [
+          57.9323,
+          49.9287
+        ],
+        "蛋白質": [
+          26.738,
+          78.4593
+        ],
+        "血紅素": [
+          84.6702,
+          79.1726
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-02.png",
+      "sha256": "9527c96eca562ad678713c4165cceff492518ae9c3e696661d8674297f4618c9",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        1402
+      ]
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 4,
+      "key": "acid-base-homeostasis:N04",
+      "current": "lung-svg",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-04.svg",
+      "anchors": {
+        "CO₂": [
+          46.9697,
+          34.2368
+        ],
+        "肺": [
+          35.6506,
+          24.9643
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+      "sha256": "12441ff2c296d064fbac5da5f1d22b077678f52a8b512e805979655fb0f0d5ff",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        112,
+        0,
+        898,
+        603
+      ]
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 5,
+      "key": "acid-base-homeostasis:N05",
+      "current": "renal-columns-svg",
+      "kind": "anatomy",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-05.svg",
+      "anchors": {
+        "H⁺": [
+          38.3244,
+          14.2653
+        ],
+        "HCO₃⁻": [
+          83.779,
+          18.5449
+        ],
+        "血液": [
+          95.3654,
+          10.699
+        ],
+        "管液": [
+          31.1943,
+          42.796
+        ],
+        "近曲小管": [
+          49.0196,
+          14.2653
+        ],
+        "遠曲小管": [
+          52.5847,
+          51.3552
+        ],
+        "集尿管": [
+          57.9323,
+          82.0257
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+      "sha256": "87df55559e7533997756ec8ad6580e972ef2be7259d8b9ae8f86e9c03f15dcb4",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        0,
+        1122,
+        435
+      ],
+      "flipX": true
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "node": 6,
+      "key": "acid-base-homeostasis:N06",
+      "current": "reaction-svg",
+      "kind": "data",
+      "sourceWrapper": "materials-src/figures/acid-base-homeostasis-node-06.svg",
+      "anchors": {
+        "NH₃": [
+          17.8253,
+          71.3267
+        ],
+        "H⁺": [
+          38.3244,
+          67.7603
+        ],
+        "NH₄⁺": [
+          44.5633,
+          78.4593
+        ],
+        "磷酸鹽": [
+          22.2816,
+          89.1583
+        ],
+        "尿液排酸": [
+          8.9127,
+          82.7389
+        ]
+      },
+      "positions": {},
+      "labelPolicy": "HTML固定px；配合標籤置於圖下，不壓外框；熱區以原圖百分比定位",
+      "src": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+      "sha256": "87df55559e7533997756ec8ad6580e972ef2be7259d8b9ae8f86e9c03f15dcb4",
+      "width": 1122,
+      "height": 1402,
+      "crop": [
+        0,
+        925,
+        1122,
+        477
+      ],
+      "reason": "NH3與H+結合為NH4+的化學反應圖，不畫器官或腎小管。"
+    }
+  ]
+}

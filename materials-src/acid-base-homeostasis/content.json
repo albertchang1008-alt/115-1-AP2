@@ -1,0 +1,384 @@
+{
+  "slug": "acid-base-homeostasis",
+  "version": "v1",
+  "experience": "guided",
+  "title": "酸鹼緩衝與肺腎調節",
+  "subtitle": "分開暫時緩衝、肺排CO₂與腎端排酸留鹼，追蹤血與尿的方向。",
+  "label": "酸鹼緩衝與肺腎調節｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "7.35–7.45",
+      "label": "血液pH範圍"
+    },
+    {
+      "value": "鹼／酸",
+      "label": "碳酸系統比值方向"
+    },
+    {
+      "value": "肺與腎",
+      "label": "不同的調整途徑"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換三個閱讀主題，沿圖中構造與方向建立關係；紅色粗體標出本次觀察的重點。",
+    "figure": "acid-base-homeostasis-overview.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "緩衝",
+        "explain": "先減小pH波動。"
+      },
+      {
+        "id": "state-2",
+        "label": "肺調整",
+        "explain": "CO2排出增加的定性方向。"
+      },
+      {
+        "id": "state-3",
+        "label": "腎調整",
+        "explain": "酸入尿、碳酸氫根回到血。"
+      }
+    ],
+    "predict": {
+      "question": "由緩衝切換到「肺調整」，哪一個變化最相符？",
+      "options": [
+        "緩衝等於酸已全部排出",
+        "CO₂排出增加，pH朝上升方向",
+        "CO₂一律改由尿液呼出",
+        "肺直接回收所有HCO₃⁻"
+      ],
+      "answer": 1,
+      "feedback": "肺增加CO₂排出可減少酸負荷；腎臟負責另一組排酸留鹼方向。",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "acid-base-homeostasis-node-01",
+      "tag": "01",
+      "title": "酸鹼平衡三系統",
+      "summary": "化學緩衝、肺與腎共同維持酸鹼",
+      "figure": "acid-base-homeostasis-node-01.svg",
+      "concept": "血液pH約7.35–7.45；化學緩衝減小波動，肺調整CO₂排出，腎臟調整H⁺與HCO₃⁻。",
+      "points": [
+        "暫時接住H⁺不等於已排出酸。",
+        "肺與腎的調節對象不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "把緩衝與離開身體的路徑分開，才能辨認每個系統負責的步驟。"
+      },
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 37–38、40–41、44–45 頁。",
+      "caption": "化學緩衝、肺與腎共同維持酸鹼。"
+    },
+    {
+      "id": "acid-base-homeostasis-node-02",
+      "tag": "02",
+      "title": "碳酸氫根與碳酸比",
+      "summary": "鹼在分子，酸在分母",
+      "figure": "acid-base-homeostasis-node-02-data.svg",
+      "concept": "碳酸系統以HCO₃⁻／H₂CO₃的比值影響pH；pH＝pKa＋log（鹼／酸）。",
+      "points": [
+        "課本示例為6.1＋log（26／1.3）≈7.4。",
+        "分子與分母不可顛倒。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先將鹼與酸放回公式的正確位置，再讀示例，避免只記兩個數字。"
+      },
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 37–38、40–41、44–45 頁。",
+      "caption": "鹼在分子，酸在分母。"
+    },
+    {
+      "id": "acid-base-homeostasis-node-03",
+      "tag": "03",
+      "title": "多種緩衝系統",
+      "summary": "碳酸、磷酸鹽、蛋白質與血紅素分處不同區間",
+      "figure": "acid-base-homeostasis-node-03.svg",
+      "concept": "碳酸／HCO₃⁻是重要細胞外緩衝；血紅素位於血球內，磷酸鹽可在腎小管承接H⁺。",
+      "points": [
+        "蛋白質可解離基團也能緩衝。",
+        "血漿、血球與尿液的所在需分開。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "看到血紅素先找紅血球，再將磷酸鹽接到管液，勿把全部緩衝物放在血漿。"
+      },
+      "sources": [
+        "buffer-systems；physiology/CH09 p.38, physiology/CH09 p.39, physiology/CH09 p.40, physiology/CH09 p.42"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 38–40、42 頁。",
+      "caption": "碳酸、磷酸鹽、蛋白質與血紅素分處不同區間。"
+    },
+    {
+      "id": "acid-base-homeostasis-node-04",
+      "tag": "04",
+      "title": "呼吸調節CO₂",
+      "summary": "呼吸增加CO₂排出可使pH上升",
+      "figure": "acid-base-homeostasis-node-04.svg",
+      "concept": "呼吸速率增加使CO₂排出增加，碳酸負荷減少，pH朝上升方向改變。",
+      "points": [
+        "排出的物質為CO₂。",
+        "不能把此途徑當成腎小管排H⁺。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "沿血液到肺再到體外追蹤CO₂，將呼氣方向與血液pH變化配對。"
+      },
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 37–38、40–41、44–45 頁。",
+      "caption": "呼吸增加CO₂排出可使pH上升。"
+    },
+    {
+      "id": "acid-base-homeostasis-node-05",
+      "tag": "05",
+      "title": "腎臟分泌H⁺與回收HCO₃⁻",
+      "summary": "酸進管液，碳酸氫根回到血液",
+      "figure": "acid-base-homeostasis-node-05.svg",
+      "concept": "近曲小管以Na⁺－H⁺相對運送分泌H⁺；遠曲小管與集尿管也可分泌H⁺，同時HCO₃⁻回到血液。",
+      "points": [
+        "分泌方向須由血側朝管液側理解。",
+        "尿液變酸與血液變酸不能畫成同向。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在圖上先標血側與管液側，再填入氫與碳酸氫根的箭頭。"
+      },
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 17、41–42、44–45 頁。",
+      "caption": "酸進管液，碳酸氫根回到血液。"
+    },
+    {
+      "id": "acid-base-homeostasis-node-06",
+      "tag": "06",
+      "title": "銨與磷酸鹽帶走酸",
+      "summary": "NH₃承接H⁺成NH₄⁺並隨尿排出",
+      "figure": "acid-base-homeostasis-node-06.svg",
+      "concept": "NH₃與H⁺結合形成NH₄⁺；磷酸鹽也能承接H⁺，協助尿液排酸。",
+      "points": [
+        "回收HCO₃⁻與排酸配合。",
+        "尿腔反應與鹼回血分屬不同方向。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "把酸接到尿中攜帶物，再追蹤尿液出口，不要因尿酸化就推定血也更酸。"
+      },
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45",
+        "buffer-systems；physiology/CH09 p.38, physiology/CH09 p.39, physiology/CH09 p.40, physiology/CH09 p.42"
+      ],
+      "reference": "《生理學》腎臟與體液的恆定，第 17、38–42、44–45 頁。",
+      "caption": "NH₃承接H⁺成NH₄⁺並隨尿排出。"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "acid-base-homeostasis-foundation-q01",
+      "stem": "維持酸鹼平衡的三系統為何？",
+      "options": [
+        "化學緩衝、肺與腎",
+        "只有化學緩衝",
+        "只有尿液顏色",
+        "只有骨骼肌收縮"
+      ],
+      "answer": 0,
+      "hint": "分開暫接與排出路徑。",
+      "explain": "緩衝減小波動，肺調CO₂，腎調H⁺與HCO₃⁻，不能只列一項。",
+      "nodeId": "acid-base-homeostasis-node-01",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-foundation-q02",
+      "stem": "碳酸系統公式中的比值如何放置？",
+      "options": [
+        "把血球數放分母",
+        "HCO₃⁻為分子、H₂CO₃為分母",
+        "H₂CO₃為分子、HCO₃⁻為分母",
+        "把尿量放分子"
+      ],
+      "answer": 1,
+      "hint": "辨認哪一項是鹼、哪一項是酸。",
+      "explain": "比值為鹼／酸，因此HCO₃⁻在上、H₂CO₃在下。",
+      "nodeId": "acid-base-homeostasis-node-02",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-foundation-q03",
+      "stem": "血紅素緩衝主要應定位在哪裡？",
+      "options": [
+        "只在尿腔",
+        "只在呼氣管腔",
+        "紅血球內",
+        "全部在血漿游離"
+      ],
+      "answer": 2,
+      "hint": "先找血紅素所屬的細胞。",
+      "explain": "血紅素位於紅血球內，不應把其主要位置畫成血漿。",
+      "nodeId": "acid-base-homeostasis-node-03",
+      "sources": [
+        "buffer-systems；physiology/CH09 p.38, physiology/CH09 p.39, physiology/CH09 p.40, physiology/CH09 p.42"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-foundation-q04",
+      "stem": "呼吸速率增加、CO₂排出增加時，本節定性方向為何？",
+      "options": [
+        "pH必定朝下降方向",
+        "腎臟停止所有作用",
+        "CO₂全部改由尿道呼出",
+        "pH朝上升方向"
+      ],
+      "answer": 3,
+      "hint": "追蹤CO₂與碳酸的連動。",
+      "explain": "排CO₂增加可減少酸負荷，使pH朝上升方向改變。",
+      "nodeId": "acid-base-homeostasis-node-04",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-foundation-q05",
+      "stem": "腎臟排酸留鹼的方向為何？",
+      "options": [
+        "H⁺入管液，HCO₃⁻回到血液",
+        "H⁺與HCO₃⁻都只回到尿腔",
+        "H⁺只回到血液且不排出",
+        "兩者都只從肺排出"
+      ],
+      "answer": 0,
+      "hint": "先標血側與管液側。",
+      "explain": "腎端分泌H⁺並回收HCO₃⁻，兩個方向需分清楚。",
+      "nodeId": "acid-base-homeostasis-node-05",
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-foundation-q06",
+      "stem": "NH₃承接H⁺後形成何者？",
+      "options": [
+        "血紅素",
+        "NH₄⁺",
+        "HCO₃⁻",
+        "CO₂"
+      ],
+      "answer": 1,
+      "hint": "想想尿中攜帶酸的形式。",
+      "explain": "NH₃結合H⁺成NH₄⁺並隨尿排出，磷酸鹽也能承接H⁺。",
+      "nodeId": "acid-base-homeostasis-node-06",
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45",
+        "buffer-systems；physiology/CH09 p.38, physiology/CH09 p.39, physiology/CH09 p.40, physiology/CH09 p.42"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "acid-base-homeostasis-case-q01",
+      "stem": "【公式核對】示例6.1＋log（26／1.3）中，應優先確認什麼？",
+      "options": [
+        "改用尿流量作分母",
+        "將所有單位省略後視為任何情境都適用",
+        "鹼在分子、酸在分母",
+        "任意將兩個數字交換"
+      ],
+      "answer": 2,
+      "hint": "先辨比例方向再代入。",
+      "explain": "示例延續鹼／酸方向；交換分子分母會改變意義。",
+      "nodeId": "acid-base-homeostasis-node-02",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-case-q02",
+      "stem": "【緩衝觀察】緩衝物接住H⁺後，能說酸已全部離開身體嗎？",
+      "options": [
+        "能，所有酸都立刻消失",
+        "能，肺與腎不再有作用",
+        "能，所有緩衝都發生在尿外",
+        "不能，仍須區分緩衝與排出"
+      ],
+      "answer": 3,
+      "hint": "分清暫存與真正出口。",
+      "explain": "化學緩衝先減少波動，後續仍由肺與腎調整酸的來去。",
+      "nodeId": "acid-base-homeostasis-node-01",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-case-q03",
+      "stem": "【途徑配對】要說明CO₂離開身體，應沿哪條路徑？",
+      "options": [
+        "血液到肺，再隨呼氣排出",
+        "血液到尿道，直接呼出",
+        "血紅素離開細胞後變成尿液",
+        "只靠細胞膜內外分配水"
+      ],
+      "answer": 0,
+      "hint": "辨認氣體排出的器官。",
+      "explain": "肺可藉呼氣排CO₂；腎端處理H⁺與HCO₃⁻，兩者分工不同。",
+      "nodeId": "acid-base-homeostasis-node-04",
+      "sources": [
+        "acid-base-balance；physiology/CH09 p.37, physiology/CH09 p.38, physiology/CH09 p.40, physiology/CH09 p.41, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-case-q04",
+      "stem": "【雙箭頭】圖上H⁺朝管液，另一條HCO₃⁻箭頭應朝哪裡？",
+      "options": [
+        "一律進入膀胱壁肌",
+        "血液",
+        "一律朝尿液出口",
+        "一律朝呼氣管腔"
+      ],
+      "answer": 1,
+      "hint": "排酸與留鹼須配對。",
+      "explain": "HCO₃⁻回到血液配合H⁺排入管液，不應畫成同向全排出。",
+      "nodeId": "acid-base-homeostasis-node-05",
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45"
+      ]
+    },
+    {
+      "id": "acid-base-homeostasis-case-q05",
+      "stem": "【血尿區分】尿液承接並排出更多H⁺時，對血液方向應如何理解？",
+      "options": [
+        "代表緩衝物完全不再需要",
+        "代表H⁺只在血中累積而不排出",
+        "有助減少血中的酸負荷",
+        "代表血液必定同樣更酸"
+      ],
+      "answer": 2,
+      "hint": "先看酸被移往哪個區間。",
+      "explain": "將H⁺隨尿排出是幫血液減少酸負荷，尿變酸不能直接等同血變酸。",
+      "nodeId": "acid-base-homeostasis-node-06",
+      "sources": [
+        "renal-acid-base-compensation；physiology/CH09 p.42, physiology/CH09 p.41, physiology/CH09 p.17, physiology/CH09 p.44, physiology/CH09 p.45",
+        "buffer-systems；physiology/CH09 p.38, physiology/CH09 p.39, physiology/CH09 p.40, physiology/CH09 p.42"
+      ]
+    }
+  ],
+  "credits": [
+    "《生理學》腎臟與體液的恆定，第 17、37–42、44–45 頁。",
+    "底圖由 ChatGPT 製作；中文標籤、引線與方向箭頭以原生 SVG 呈現。"
+  ]
+}

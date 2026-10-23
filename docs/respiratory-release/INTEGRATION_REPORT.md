@@ -11,7 +11,7 @@
 - `git diff origin/main -- functions firestore.rules firestore.indexes.json` **完全空白**，暫存區同樣空白差異。src、Actions、Vite站別、shared/site、Firebase設定與版本／套件鎖檔亦無差異。
 - main既有公開教材、SDK、guide等67檔逐位元不變；呼吸來源／圖檔／Excel保護檔逐位元對應f541b29，七份HTML均保持核可SHA，Excel仍304題。本輪沒有重新寫入題庫。
 
-[完整diff路徑](integration/changed-paths.json)、[runtime diff（閱讀用）](integration/runtime-diff.txt)、[完整驗證](integration-verification.json)、[範圍保護](integration/scope-integrity.json)、[兩站清單JSON](integration/site-materials.json)。
+[完整diff路徑](integration/changed-paths.json)、[runtime diff（閱讀用）](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/runtime-diff.txt)、[完整驗證](integration-verification.json)、[範圍保護](integration/scope-integrity.json)、[兩站清單JSON](integration/site-materials.json)。
 
 ## 必要驗證結果
 
@@ -28,9 +28,9 @@
 | AP2打包 | dist/site.json為ap2，38份教材，七份新增HTML SHA與核可版相同 |
 | MI站別與打包 | catalog僅2筆、隔離build成功，dist僅2份MI教材＋3份CHP；呼吸教材零筆 |
 
-完整紀錄在 [AP2 check](integration/integration-check.log.txt)、[materials測試](integration/integration-material-tests.log.txt)、[乾淨重建](integration/rebuild.json)、七份 `integration/verify-<slug>.json`、[作答回歸](integration/interaction-verification.json)、[MI build](integration/mi-build.log.txt)。
+完整紀錄在 [AP2 check](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/integration-check.log.txt)、[materials測試](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/integration-material-tests.log.txt)、[乾淨重建](integration/rebuild.json)、七份 `integration/verify-<slug>.json`、[作答回歸](integration/interaction-verification.json)、[MI build](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/mi-build.log.txt)。
 
-**額外MI全量測試的既有限制，請Claude一併核對**：本次發布對象是AP2；額外將AP2 repo裁成MI兩份公開教材後跑整套check，158項中149過、9敗，未修改的origin/main相同裁切亦149過、同9項失敗、零skip，新增失敗0。8項依賴被裁掉的AP2教材快照，另1項MI登錄測試期待MI SDK URL，但AP2主線保留的MI教材快照使用AP2 URL。這不是本次合併新增的差異；沒有改測試、補入AP2公開教材或聲稱MI完整check通過。MI目前正式分支不在本次整合／部署範圍。兩份完整log及9項同名對照見 [MI實驗](integration/mi-check.log.txt)、[main基準](integration/mi-main-baseline-check.log.txt)、驗證JSON。
+**額外MI全量測試的既有限制，請Claude一併核對**：本次發布對象是AP2；額外將AP2 repo裁成MI兩份公開教材後跑整套check，158項中149過、9敗，未修改的origin/main相同裁切亦149過、同9項失敗、零skip，新增失敗0。8項依賴被裁掉的AP2教材快照，另1項MI登錄測試期待MI SDK URL，但AP2主線保留的MI教材快照使用AP2 URL。這不是本次合併新增的差異；沒有改測試、補入AP2公開教材或聲稱MI完整check通過。MI目前正式分支不在本次整合／部署範圍。兩份完整log及9項同名對照見 [MI實驗](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/mi-check.log.txt)、[main基準](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/integration/mi-main-baseline-check.log.txt)、驗證JSON。
 
 目錄同步CLI另遇main既有extensionless TypeScript import問題，使用已安裝tsx的 `NODE_OPTIONS='--import tsx' VITE_SITE_ID=ap2 npm run materials:sync` 成功，未為此修改共用程式。這是本機目錄重生，不是平台後台同步。
 

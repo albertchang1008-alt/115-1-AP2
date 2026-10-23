@@ -1,0 +1,38 @@
+{
+  "pass": true,
+  "slug": "fluid-compartments",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/fluid-compartments-v1/index.html",
+  "sha256": "f5d1f64651fdce8d8ff1f7928c3a9a3e6a6fafd3d26d847c6a61e9816351ec7a",
+  "audit": {
+    "slug": "fluid-compartments-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 14,
+    "questionIds": [
+      "fluid-compartments-case-q01",
+      "fluid-compartments-case-q02",
+      "fluid-compartments-case-q03",
+      "fluid-compartments-case-q04",
+      "fluid-compartments-case-q05",
+      "fluid-compartments-foundation-q01",
+      "fluid-compartments-foundation-q02",
+      "fluid-compartments-foundation-q03",
+      "fluid-compartments-foundation-q04",
+      "fluid-compartments-foundation-q05",
+      "fluid-compartments-foundation-q06",
+      "fluid-compartments-node-01-micro",
+      "fluid-compartments-node-03-micro",
+      "fluid-compartments-node-04-micro"
+    ]
+  },
+  "catalog": {
+    "label": "體液分布與細胞內外液｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 14,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

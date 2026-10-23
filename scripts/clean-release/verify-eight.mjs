@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {approvedUrinarySlugs,approvedUrinaryDocument} from '../urinary-release-build.mjs';
+import {checkApplyScript,scriptSizes} from '../lib/apply-script-check.mjs';
+import {checkScriptLayout} from '../lib/acidbase-script-layout.mjs';
+const targets=process.argv.slice(2);let next=0;
+const slugs=targets.length?targets:approvedUrinarySlugs;assert(slugs.every(s=>approvedUrinarySlugs.includes(s)));
+await Promise.all([0,1,2].map(async()=>{while(next<slugs.length){const slug=slugs[next++],d=approvedUrinaryDocument(slug),file=path.resolve('materials-src',slug,slug==='acid-base-homeostasis'?'full.json':'apply.json');
+ const opts={file,html:path.resolve('public/materials',d.version,'index.html'),out:path.resolve(process.env.RELEASE_EVIDENCE,'verify',slug),sizes:scriptSizes,shots:false};
+ const result=slug==='acid-base-homeostasis'?await checkScriptLayout(JSON.parse(fs.readFileSync(file)),opts):await checkApplyScript(file,opts);
+ assert.equal((result.summary||result).fail,0);if(result.diff)assert(result.diff.pass);
+ console.log('EIGHT_VIEWPORTS '+JSON.stringify({slug,pass:true,sizes:scriptSizes,summary:result.summary||result}));
+}}));

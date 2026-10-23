@@ -1,0 +1,180 @@
+{
+  "unexplainedChemistry": [],
+  "pass": true,
+  "questions": 16,
+  "glossary": 9,
+  "structuralChanges": 0,
+  "sourcesOrNodesChanges": 0,
+  "bannedTerms": 0,
+  "chemistryFirstUse": [
+    {
+      "id": "F1",
+      "term": "緩衝",
+      "firstUse": "身體有緩衝（先接住多出的酸）、肺和腎臟，它們怎麼合作維持血液的酸鹼？",
+      "explanationAnchor": "接住"
+    },
+    {
+      "id": "F2",
+      "term": "HCO₃⁻",
+      "firstUse": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸；用課本算式比較兩者時，要怎麼算？",
+      "explanationAnchor": "接酸"
+    },
+    {
+      "id": "F2",
+      "term": "H₂CO₃",
+      "firstUse": "碳酸氫根（HCO₃⁻）是接酸的鹼，碳酸（H₂CO₃）是酸；用課本算式比較兩者時，要怎麼算？",
+      "explanationAnchor": "碳酸"
+    },
+    {
+      "id": "F3",
+      "term": "緩衝",
+      "firstUse": "氫離子（H⁺）越多越酸；緩衝系統像接球一樣接住或放出氫離子，直接有什麼幫助？",
+      "explanationAnchor": "接住"
+    },
+    {
+      "id": "F3",
+      "term": "H⁺",
+      "firstUse": "氫離子（H⁺）越多越酸；緩衝系統像接球一樣接住或放出氫離子，直接有什麼幫助？",
+      "explanationAnchor": "讓液體變酸|越多越酸"
+    },
+    {
+      "id": "F4",
+      "term": "CO₂",
+      "firstUse": "其他條件一樣，肺真正排出的二氧化碳（CO₂，會影響血液酸不酸的氣體）增加時，對血液有什麼影響？",
+      "explanationAnchor": "二氧化碳"
+    },
+    {
+      "id": "F5",
+      "term": "H⁺",
+      "firstUse": "腎臟幫血液減酸時，氫離子（H⁺，讓液體變酸）和碳酸氫根（HCO₃⁻，接酸的鹼）各往哪裡去？",
+      "explanationAnchor": "讓液體變酸|越多越酸"
+    },
+    {
+      "id": "F5",
+      "term": "HCO₃⁻",
+      "firstUse": "腎臟幫血液減酸時，氫離子（H⁺，讓液體變酸）和碳酸氫根（HCO₃⁻，接酸的鹼）各往哪裡去？",
+      "explanationAnchor": "接酸"
+    },
+    {
+      "id": "F6",
+      "term": "H⁺",
+      "firstUse": "氨（NH₃）會接住氫離子（H⁺，讓液體變酸）；這能怎麼幫腎臟排酸？",
+      "explanationAnchor": "讓液體變酸|越多越酸"
+    },
+    {
+      "id": "F6",
+      "term": "NH₃",
+      "firstUse": "氨（NH₃）會接住氫離子（H⁺，讓液體變酸）；這能怎麼幫腎臟排酸？",
+      "explanationAnchor": "氨"
+    },
+    {
+      "id": "P-A",
+      "term": "pH",
+      "firstUse": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）增加；表示酸不酸的數字（pH）會怎麼變？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "P-B",
+      "term": "pH",
+      "firstUse": "其他條件一樣，碳酸（酸）的量不變，碳酸氫根（接酸的鹼）減少；表示酸不酸的數字（pH）會怎麼變？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "R-A",
+      "term": "pH",
+      "firstUse": "這次血液變酸的主要原因是呼吸排不掉二氧化碳（CO₂），血中二氧化碳增加，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "R-A",
+      "term": "CO₂",
+      "firstUse": "這次血液變酸的主要原因是呼吸排不掉二氧化碳（CO₂），血中二氧化碳增加，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "explanationAnchor": "二氧化碳"
+    },
+    {
+      "id": "R-B",
+      "term": "pH",
+      "firstUse": "這次血液變不酸的主要原因是呼吸排出較多二氧化碳（CO₂），血中二氧化碳減少，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "R-B",
+      "term": "CO₂",
+      "firstUse": "這次血液變不酸的主要原因是呼吸排出較多二氧化碳（CO₂），血中二氧化碳減少，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "explanationAnchor": "二氧化碳"
+    },
+    {
+      "id": "K-A",
+      "term": "HCO₃⁻",
+      "firstUse": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把更多銨（帶著酸的NH₄⁺）排進尿液，也把更多碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，這有什麼幫助？",
+      "explanationAnchor": "接酸"
+    },
+    {
+      "id": "K-A",
+      "term": "NH₄⁺",
+      "firstUse": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把更多銨（帶著酸的NH₄⁺）排進尿液，也把更多碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，這有什麼幫助？",
+      "explanationAnchor": "銨"
+    },
+    {
+      "id": "K-B",
+      "term": "H⁺",
+      "firstUse": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，也把氫離子（H⁺，讓液體變酸）送進管液，這兩件事怎麼配合？",
+      "explanationAnchor": "讓液體變酸|越多越酸"
+    },
+    {
+      "id": "K-B",
+      "term": "HCO₃⁻",
+      "firstUse": "呼吸性酸中毒是呼吸排不掉二氧化碳而讓血液變酸；腎臟把碳酸氫根（HCO₃⁻，接酸的鹼）留回血液，也把氫離子（H⁺，讓液體變酸）送進管液，這兩件事怎麼配合？",
+      "explanationAnchor": "接酸"
+    },
+    {
+      "id": "N-A",
+      "term": "H⁺",
+      "firstUse": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+      "explanationAnchor": "讓液體變酸|越多越酸"
+    },
+    {
+      "id": "N-A",
+      "term": "NH₃",
+      "firstUse": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+      "explanationAnchor": "氨"
+    },
+    {
+      "id": "N-A",
+      "term": "NH₄⁺",
+      "firstUse": "氨（NH₃）接住氫離子（H⁺，讓液體變酸）形成銨（NH₄⁺），銨還在體內，尚未隨尿排出；這時能說酸已排出體外嗎？",
+      "explanationAnchor": "銨"
+    },
+    {
+      "id": "N-B",
+      "term": "NH₄⁺",
+      "firstUse": "銨（NH₄⁺，由氨接住讓液體變酸的氫離子而形成）已隨尿排出體外；與只在體內接住酸相比，有什麼不同？",
+      "explanationAnchor": "銨"
+    },
+    {
+      "id": "S-A",
+      "term": "pH",
+      "firstUse": "這次血液變酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）減少，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "S-A",
+      "term": "HCO₃⁻",
+      "firstUse": "這次血液變酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）減少，pH（越小越酸）偏低；最符合哪種酸鹼異常？",
+      "explanationAnchor": "接酸"
+    },
+    {
+      "id": "S-B",
+      "term": "pH",
+      "firstUse": "這次血液變不酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "explanationAnchor": "表示酸不酸|越小越酸"
+    },
+    {
+      "id": "S-B",
+      "term": "HCO₃⁻",
+      "firstUse": "這次血液變不酸的主要原因是碳酸氫根（HCO₃⁻，接酸的鹼）增加，pH（越小越酸）偏高；最符合哪種酸鹼異常？",
+      "explanationAnchor": "接酸"
+    }
+  ],
+  "documentSha256": "37a46c4efd2074337098f78b090ea74833946801fdd515f87fabd2f4a2aef2d1"
+}

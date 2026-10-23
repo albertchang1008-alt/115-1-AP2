@@ -28,9 +28,9 @@
 
 | 狀態 | 390px | 1280px |
 |---|---|---|
-| 已完成 | [截圖](student-name-1.6.2-screenshots/390-done-default.png) | [截圖](student-name-1.6.2-screenshots/1280-done-default.png) |
-| 已完成（逾期） | [截圖](student-name-1.6.2-screenshots/390-late-default.png) | [截圖](student-name-1.6.2-screenshots/1280-late-default.png) |
-| 進行中 | [截圖](student-name-1.6.2-screenshots/390-inProgress-default.png) | [截圖](student-name-1.6.2-screenshots/1280-inProgress-default.png) |
+| 已完成 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/390-done-default.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/1280-done-default.png) |
+| 已完成（逾期） | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/390-late-default.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/1280-late-default.png) |
+| 進行中 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/390-inProgress-default.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/student-name-1.6.2-screenshots/1280-inProgress-default.png) |
 
 同目錄 `*-xlarge.png` 為以上六種畫面的最大字級版本。
 

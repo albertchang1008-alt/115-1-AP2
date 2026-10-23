@@ -1,0 +1,375 @@
+{
+  "slug": "filtration-clearance",
+  "method": "author renderer; real UI clicks; scripted traversal is automated verification, not independent novice certification",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜過濾往哪個方向走？\n💡提示\n過濾時，水和小分子是從腎絲球（血液）流到鮑氏囊，還是反過來？請點箭頭，讓它指向正確方向。\n腎絲球\n鮑氏囊\n腎絲球 ←\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "腎絲球 ←",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "arrows"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜過濾膜有三層\n💡提示\n請從血液那一側開始，依序點出過濾膜的三層。\n鮑氏囊壁層\n基底膜\n足細胞（鮑氏囊臟層）\n微血管內皮\n\n微血管內皮 → 基底膜 → 足細胞（鮑氏囊臟層）",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "鮑氏囊壁層",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "基底膜",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "足細胞（鮑氏囊臟層）",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "微血管內皮",
+          "role": null
+        }
+      ],
+      "steps": [
+        "sequence"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜什麼過得去，什麼過不去？\n💡提示\n請把水、葡萄糖、胺基酸、白蛋白、紅血球，分到〔過得去〕或〔過不去〕。\n水\n葡萄糖\n胺基酸\n白蛋白\n紅血球\n已完成 0／5\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n水\n選擇說明\n葡萄糖\n選擇說明\n胺基酸\n選擇說明\n白蛋白\n選擇說明\n紅血球\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "水",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "葡萄糖",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "胺基酸",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "白蛋白",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "紅血球",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜哪個力量推，哪個力量擋？\n💡提示\n請把三個壓力卡放到〔推進鮑氏囊〕或〔對抗過濾〕：腎絲球（微血管內）的靜水壓、囊內壓、血漿膠體壓。\n推進鮑氏囊\n對抗過濾\n已完成 0／3\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n腎絲球（微血管內）的靜水壓\n選擇說明\n囊內壓\n選擇說明\n血漿膠體壓\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "腎絲球（微血管內）的靜水壓",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "囊內壓",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "血漿膠體壓",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜清除率公式\n💡提示\n請把『尿中濃度』『每分鐘尿量』『血漿濃度』放到 U、V、P。\n尿中濃度\n每分鐘尿量\n血漿濃度\n已完成 0／3\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\nU\n選擇說明\nV\n選擇說明\nP\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "U",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "V",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "P",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜菊糖、肌酸酐、PAH\n💡提示\n三種物質在腎臟的遭遇不同。請把它們配到正確的處理方式。\n只過濾，不回收、不分泌\n過濾，再加少量分泌\n過濾＋分泌\n已完成 0／3\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n菊糖\n選擇說明\n肌酸酐\n選擇說明\nPAH\n選擇說明\n檢查配對\n菊糖：只過濾，不回收、不分泌\n肌酸酐：過濾，再加少量分泌\nPAH：過濾＋分泌",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "菊糖",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "肌酸酐",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "PAH",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching",
+        "choice"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI",
+  "baseline": "Initial integration: df77a38 figure/player plus 993d21c compiler/checker; captured before takeover corrections"
+}

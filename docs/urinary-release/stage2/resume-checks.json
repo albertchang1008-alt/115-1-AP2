@@ -1,0 +1,52 @@
+{
+  "card": {
+    "path": "/Users/HHC/Dropbox/耕莘/antigravity/072026 新的專案/01_knowledge/urine-physical-properties.md",
+    "status": "reviewed",
+    "sha256": "b8f7811abb5a1c466cf962589a85c30585fdae18ad24132ca9d9bf4251b3c63a",
+    "unchanged_at_stop": true
+  },
+  "todo": {
+    "path": "/Users/HHC/Dropbox/耕莘/antigravity/072026 新的專案/todo_all.jsonl",
+    "sha256": "abc651c0e04ce4297a93bc768dc9fa65a769f88fb089c59772b959e3b42f3d0e",
+    "row": {
+      "uid": "urine-physical-properties",
+      "title": "正常尿液的物理特性與成分",
+      "status": "reviewed",
+      "source_page": "physiology/CH09 p.22",
+      "needs_review": false,
+      "generated_by": "codex",
+      "verified_by": "claude",
+      "verify_verdict": "PASS",
+      "blocked_reason": null,
+      "last_updated": "2026-10-13T11:40:12+00:00"
+    },
+    "unchanged_at_stop": true
+  },
+  "script_repairs": [
+    {
+      "attempt": 1,
+      "original_error": "locator.evaluate 的回呼錯把 this 當作 SVG 元素",
+      "fix": "改以第一參數 measure(svg) 接收元素；例外寫入 errors 並要求18案例／兩尺寸才可ok；新增初始頁截圖、所有文字框與引線點越界檢查，既有門檻未刪減"
+    }
+  ],
+  "C_content_identical_to_after_A": true,
+  "script_repairs_used": 1,
+  "script_repair_limit": 2,
+  "second_script_error": "page.screenshot: Clipped area is either empty or outside the resulting image",
+  "second_repair_performed": false,
+  "material_failure": {
+    "ok": false,
+    "kind": "material_anchor_misplacement",
+    "figure": "overview",
+    "state": "state-1",
+    "label": "後腹腔",
+    "sourceAnchor": [
+      170,
+      510
+    ],
+    "observed": "錨點位於前面觀底圖左下方的髂骨上緣／骨性區",
+    "expected": "腹膜後方的腎周區域，而非骨性構造",
+    "screenshot": "screenshots/1280-overview-state-1.png",
+    "decision": "遵教師教材不合格立即停止規則，不改底圖或錨點，不再重跑，不進C。"
+  }
+}

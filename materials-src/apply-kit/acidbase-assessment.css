@@ -1,0 +1,5 @@
+/* Keep acid-base assessment choices adjacent to their stem, like the general courses. */
+.student-screen[data-screen="quiz"] .quiz-region {
+  margin-block: 0;
+  align-self: start;
+}

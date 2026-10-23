@@ -1,0 +1,155 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/urinary-route-micturition.md",
+  "nodes": [
+    {
+      "figure": "ureter-peristalsis",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "ureter-constrictions",
+      "steps": [
+        {
+          "type": "multi",
+          "choices": [
+            "腎盂交接處",
+            "髂外動脈及靜脈交叉處",
+            "進入膀胱處"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "onDiagram": true,
+          "blindHotspots": true
+        }
+      ]
+    },
+    {
+      "figure": "bladder-trigone",
+      "steps": [
+        {
+          "type": "sequence",
+          "choices": [
+            "兩個輸尿管口",
+            "兩個輸尿管口",
+            "尿道內口"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "blindHotspots": true,
+          "unorderedPrefix": 2
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 1,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "urethra-male-female",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "女性尿道",
+            "男性尿道"
+          ],
+          "choices": [
+            "3.8 cm",
+            "20 cm"
+          ],
+          "expected": [
+            0,
+            1
+          ],
+          "rowFeedback": [
+            "女性尿道約 3.8 cm",
+            "男性約 20 cm"
+          ],
+          "hideInstruction": true
+        },
+        {
+          "type": "sequence",
+          "choices": [
+            "前列腺部",
+            "膜部",
+            "陰莖部"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ],
+          "blindHotspots": true,
+          "useActionQuestion": true,
+          "action": 0
+        }
+      ]
+    },
+    {
+      "figure": "micturition-reflex",
+      "steps": [
+        {
+          "type": "slider",
+          "choices": [
+            "膀胱尿量滑桿"
+          ],
+          "labels": [
+            "300 mL",
+            "想尿尿了"
+          ],
+          "sliderThreshold": 300,
+          "unit": "mL",
+          "threshold": 300,
+          "max": 600
+        },
+        {
+          "type": "matching",
+          "roles": [
+            "逼尿肌",
+            "內括約肌"
+          ],
+          "choices": [
+            "收縮",
+            "放鬆"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "normal-urine",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

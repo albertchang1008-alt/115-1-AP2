@@ -39,7 +39,7 @@
 | B | 櫻花藍調 | 桃紅 `#db2777` | 天藍 `#0ea5e9` |
 | C | 粉霧紫光 | 紫色 `#7e22ce` | 桃紅 `#db2777` |
 
-![A／B／C 晴空粉方案視覺稿](blossom-theme-options.png)
+![A／B／C 晴空粉方案視覺稿](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/blossom-theme-options.png)
 
 本機操作示例已驗證三個選項均能切換；教師端「課程與教材」的班級覆寫下拉
 預設為 `All`，在此選項下變更或恢復設定會批次套用到全部班級。

@@ -1,0 +1,251 @@
+{
+  "slug": "electrolyte-balance",
+  "peerCommit": "4085d334b4056a60206d4b39518b3f21c5eef43f",
+  "method": "author renderer; real UI clicks; scripted traversal is automated verification, not independent novice certification",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜溶進水裡會變成幾顆？\n💡提示\n一個葡萄糖、一個 NaCl、一個 MgCl₂ 溶進水裡，各會變成幾顆粒子？請放到 1／2／3 格。\n第 1 關｜溶進水裡會變成幾顆？\n已完成 0／3\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n一個葡萄糖\n選擇說明\n一個 NaCl\n選擇說明\n一個 MgCl₂\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "一個葡萄糖",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "一個 NaCl",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "一個 MgCl₂",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜水往哪邊走？\n💡提示\n半透膜兩邊，一邊粒子多、一邊粒子少。水會往哪一邊走？請點箭頭。\n第 2 關｜水往哪邊走？\n粒子少的一邊\n粒子多的一邊",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "粒子少的一邊",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "粒子多的一邊",
+          "role": null
+        }
+      ],
+      "steps": [
+        "point"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜mEq 和粒子數不一樣\n💡提示\nMg²⁺ 帶 2 個正電，Na⁺ 帶 1 個。誰能吸引的 Cl⁻ 是對方的兩倍？\n第 3 關｜mEq 和粒子數不一樣\nNa⁺\nMg²⁺",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "Na⁺",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "Mg²⁺",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜鈉和鉀住在哪？\n💡提示\n請把 Na⁺ 和 K⁺ 分別放到它比較多的地方：細胞外、細胞內。\n第 4 關｜鈉和鉀住在哪？\n已完成 0／2\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n細胞外\n選擇說明\n細胞內\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞外",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞內",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching",
+        "choice"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜氯離子\n💡提示\n細胞外液最主要的『陰離子』是誰？\n第 5 關｜氯離子\nNa⁺\nK⁺\nCl⁻",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "Na⁺",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "K⁺",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "Cl⁻",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice",
+        "choice"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜鎂離子\n💡提示\nMg²⁺ 主要在細胞內還是細胞外？\n第 6 關｜鎂離子\n細胞外\n細胞內",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞外",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞內",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice",
+        "choice"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI"
+}

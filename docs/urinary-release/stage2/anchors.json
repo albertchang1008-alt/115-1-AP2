@@ -1,0 +1,2514 @@
+{
+  "slug": "kidney-anatomy",
+  "focusStyle": "red",
+  "focusSwitch": "scripts/kidney-anatomy-figures.py: FOCUS_STYLE",
+  "breakpoint": 768,
+  "fontSizes": {
+    "desktop": 32,
+    "mobile": 76
+  },
+  "figures": {
+    "overview": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+      "sha256": "5d522b5d4ec63a5cf015a317c1e5584005ddd8ef65eee705c3cb9baad10fe482",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          3579
+        ],
+        "desktop": [
+          1700,
+          1530
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 700,
+          "y": 55,
+          "scale": 0.8021390374331551
+        }
+      },
+      "labels": [
+        {
+          "label": "右腎",
+          "index": 1,
+          "sourceAnchor": [
+            350,
+            400
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                980.7486631016043,
+                375.85561497326205
+              ],
+              "text": [
+                650,
+                386.85561497326205
+              ],
+              "leader": [
+                [
+                  670,
+                  375.85561497326205
+                ],
+                [
+                  980.7486631016043,
+                  375.85561497326205
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                530.3030303030303,
+                646.060606060606
+              ],
+              "pin": [
+                410.30303030303025,
+                581.060606060606
+              ],
+              "leader": [
+                [
+                  410.30303030303025,
+                  581.060606060606
+                ],
+                [
+                  530.3030303030303,
+                  646.060606060606
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "左腎",
+          "index": 2,
+          "sourceAnchor": [
+            780,
+            260
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1325.6684491978608,
+                263.5561497326203
+              ],
+              "text": [
+                650,
+                274.5561497326203
+              ],
+              "leader": [
+                [
+                  670,
+                  263.5561497326203
+                ],
+                [
+                  1325.6684491978608,
+                  263.5561497326203
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1181.8181818181818,
+                433.93939393939394
+              ],
+              "pin": [
+                1316.8181818181818,
+                363.93939393939394
+              ],
+              "leader": [
+                [
+                  1316.8181818181818,
+                  363.93939393939394
+                ],
+                [
+                  1181.8181818181818,
+                  433.93939393939394
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "後腹腔",
+          "index": 3,
+          "sourceAnchor": [
+            230,
+            460
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                884.4919786096257,
+                423.98395721925135
+              ],
+              "text": [
+                650,
+                434.98395721925135
+              ],
+              "leader": [
+                [
+                  670,
+                  423.98395721925135
+                ],
+                [
+                  884.4919786096257,
+                  423.98395721925135
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                348.4848484848485,
+                736.969696969697
+              ],
+              "pin": [
+                248.4848484848485,
+                826.969696969697
+              ],
+              "leader": [
+                [
+                  248.4848484848485,
+                  826.969696969697
+                ],
+                [
+                  348.4848484848485,
+                  736.969696969697
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎皮質",
+          "index": 4,
+          "sourceAnchor": [
+            380,
+            660
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1004.8128342245989,
+                584.4117647058823
+              ],
+              "text": [
+                650,
+                595.4117647058823
+              ],
+              "leader": [
+                [
+                  670,
+                  584.4117647058823
+                ],
+                [
+                  1004.8128342245989,
+                  584.4117647058823
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                575.7575757575758,
+                1040.0
+              ],
+              "pin": [
+                455.75757575757575,
+                975.0
+              ],
+              "leader": [
+                [
+                  455.75757575757575,
+                  975.0
+                ],
+                [
+                  575.7575757575758,
+                  1040.0
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎髓質",
+          "index": 5,
+          "sourceAnchor": [
+            300,
+            890
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                940.6417112299465,
+                768.903743315508
+              ],
+              "text": [
+                650,
+                779.903743315508
+              ],
+              "leader": [
+                [
+                  670,
+                  768.903743315508
+                ],
+                [
+                  940.6417112299465,
+                  768.903743315508
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                454.54545454545456,
+                1388.4848484848485
+              ],
+              "pin": [
+                334.54545454545456,
+                1323.4848484848485
+              ],
+              "leader": [
+                [
+                  334.54545454545456,
+                  1323.4848484848485
+                ],
+                [
+                  454.54545454545456,
+                  1388.4848484848485
+                ]
+              ],
+              "text": [
+                180,
+                2826
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎盂",
+          "index": 6,
+          "sourceAnchor": [
+            435,
+            1010
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1048.9304812834225,
+                865.1604278074866
+              ],
+              "text": [
+                650,
+                876.1604278074866
+              ],
+              "leader": [
+                [
+                  670,
+                  865.1604278074866
+                ],
+                [
+                  1048.9304812834225,
+                  865.1604278074866
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                659.0909090909091,
+                1570.3030303030303
+              ],
+              "pin": [
+                809.0909090909091,
+                1605.3030303030303
+              ],
+              "leader": [
+                [
+                  809.0909090909091,
+                  1605.3030303030303
+                ],
+                [
+                  659.0909090909091,
+                  1570.3030303030303
+                ]
+              ],
+              "text": [
+                180,
+                2946
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎素",
+          "index": 7,
+          "sourceAnchor": null,
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": true,
+          "layouts": {
+            "desktop": {
+              "text": [
+                850,
+                1279.5989304812833
+              ],
+              "leader": null
+            },
+            "mobile": {
+              "leader": null,
+              "text": [
+                180,
+                3226
+              ]
+            }
+          }
+        },
+        {
+          "label": "紅血球生成素（腎紅血球生成因子）",
+          "index": 8,
+          "sourceAnchor": null,
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": true,
+          "layouts": {
+            "desktop": {
+              "text": [
+                850,
+                1359.5989304812833
+              ],
+              "leader": null
+            },
+            "mobile": {
+              "leader": null,
+              "text": [
+                180,
+                3346
+              ]
+            }
+          }
+        },
+        {
+          "label": "活化維生素D",
+          "index": 9,
+          "sourceAnchor": null,
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-01.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": true,
+          "layouts": {
+            "desktop": {
+              "text": [
+                850,
+                1439.5989304812833
+              ],
+              "leader": null
+            },
+            "mobile": {
+              "leader": null,
+              "text": [
+                180,
+                3466
+              ]
+            }
+          }
+        }
+      ],
+      "states": {
+        "state-1": [
+          "右腎",
+          "左腎",
+          "後腹腔"
+        ],
+        "state-2": [
+          "腎皮質",
+          "腎髓質",
+          "腎盂"
+        ],
+        "state-3": [
+          "腎素",
+          "紅血球生成素（腎紅血球生成因子）",
+          "活化維生素D"
+        ]
+      },
+      "focus": [],
+      "arrows": []
+    },
+    "node-01": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+      "sha256": "4d0c9c41c9a9ff76a4f3a973967d66aebb1a4c801f28478b5e843e4fcd407f6b",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          2939
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 350,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "右腎",
+          "index": 1,
+          "sourceAnchor": [
+            350,
+            330
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                661.9429590017826,
+                349.11764705882354
+              ],
+              "text": [
+                280,
+                360.11764705882354
+              ],
+              "leader": [
+                [
+                  300,
+                  349.11764705882354
+                ],
+                [
+                  661.9429590017826,
+                  349.11764705882354
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                530.3030303030303,
+                540.0
+              ],
+              "pin": [
+                410.30303030303025,
+                475.0
+              ],
+              "leader": [
+                [
+                  410.30303030303025,
+                  475.0
+                ],
+                [
+                  530.3030303030303,
+                  540.0
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "左腎",
+          "index": 2,
+          "sourceAnchor": [
+            773,
+            230
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1038.9483065953655,
+                259.99108734402853
+              ],
+              "text": [
+                1420,
+                270.99108734402853
+              ],
+              "leader": [
+                [
+                  1400,
+                  259.99108734402853
+                ],
+                [
+                  1038.9483065953655,
+                  259.99108734402853
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1171.2121212121212,
+                388.4848484848485
+              ],
+              "pin": [
+                1311.2121212121212,
+                318.4848484848485
+              ],
+              "leader": [
+                [
+                  1311.2121212121212,
+                  318.4848484848485
+                ],
+                [
+                  1171.2121212121212,
+                  388.4848484848485
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "脊柱",
+          "index": 3,
+          "sourceAnchor": [
+            562,
+            400
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                850.8912655971479,
+                411.50623885918003
+              ],
+              "text": [
+                1420,
+                422.50623885918003
+              ],
+              "leader": [
+                [
+                  1400,
+                  411.50623885918003
+                ],
+                [
+                  850.8912655971479,
+                  411.50623885918003
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                851.5151515151515,
+                646.060606060606
+              ],
+              "pin": [
+                1001.5151515151515,
+                691.060606060606
+              ],
+              "leader": [
+                [
+                  1001.5151515151515,
+                  691.060606060606
+                ],
+                [
+                  851.5151515151515,
+                  646.060606060606
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "腹膜",
+          "index": 4,
+          "sourceAnchor": [
+            295,
+            975
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                612.9233511586453,
+                923.9839572192514
+              ],
+              "text": [
+                280,
+                934.9839572192514
+              ],
+              "leader": [
+                [
+                  300,
+                  923.9839572192514
+                ],
+                [
+                  612.9233511586453,
+                  923.9839572192514
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                446.969696969697,
+                1517.2727272727273
+              ],
+              "pin": [
+                326.969696969697,
+                1452.2727272727273
+              ],
+              "leader": [
+                [
+                  326.969696969697,
+                  1452.2727272727273
+                ],
+                [
+                  446.969696969697,
+                  1517.2727272727273
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        },
+        {
+          "label": "後腹腔",
+          "index": 5,
+          "sourceAnchor": [
+            220,
+            1165
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-02.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                546.078431372549,
+                1093.3244206773618
+              ],
+              "text": [
+                280,
+                1104.3244206773618
+              ],
+              "leader": [
+                [
+                  300,
+                  1093.3244206773618
+                ],
+                [
+                  546.078431372549,
+                  1093.3244206773618
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                333.3333333333333,
+                1805.1515151515152
+              ],
+              "pin": [
+                183.33333333333331,
+                1875.1515151515152
+              ],
+              "leader": [
+                [
+                  183.33333333333331,
+                  1875.1515151515152
+                ],
+                [
+                  333.3333333333333,
+                  1805.1515151515152
+                ]
+              ],
+              "text": [
+                180,
+                2826
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "後腹腔",
+        "右腎"
+      ],
+      "arrows": []
+    },
+    "node-02": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          2819
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 350,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "腎皮質",
+          "index": 1,
+          "sourceAnchor": [
+            843,
+            194
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1101.3368983957218,
+                227.90552584670232
+              ],
+              "text": [
+                1420,
+                238.90552584670232
+              ],
+              "leader": [
+                [
+                  1400,
+                  227.90552584670232
+                ],
+                [
+                  1101.3368983957218,
+                  227.90552584670232
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1277.2727272727273,
+                333.93939393939394
+              ],
+              "pin": [
+                1417.2727272727273,
+                253.93939393939394
+              ],
+              "leader": [
+                [
+                  1417.2727272727273,
+                  253.93939393939394
+                ],
+                [
+                  1277.2727272727273,
+                  333.93939393939394
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎髓質",
+          "index": 2,
+          "sourceAnchor": [
+            750,
+            300
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1018.4491978609625,
+                322.379679144385
+              ],
+              "text": [
+                1420,
+                333.379679144385
+              ],
+              "leader": [
+                [
+                  1400,
+                  322.379679144385
+                ],
+                [
+                  1018.4491978609625,
+                  322.379679144385
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1136.3636363636363,
+                494.54545454545456
+              ],
+              "pin": [
+                1296.3636363636363,
+                554.5454545454545
+              ],
+              "leader": [
+                [
+                  1296.3636363636363,
+                  554.5454545454545
+                ],
+                [
+                  1136.3636363636363,
+                  494.54545454545456
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎柱",
+          "index": 3,
+          "sourceAnchor": [
+            515,
+            280
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                809.0017825311943,
+                304.554367201426
+              ],
+              "text": [
+                280,
+                315.554367201426
+              ],
+              "leader": [
+                [
+                  300,
+                  304.554367201426
+                ],
+                [
+                  809.0017825311943,
+                  304.554367201426
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                780.3030303030303,
+                464.24242424242425
+              ],
+              "pin": [
+                630.3030303030303,
+                384.24242424242425
+              ],
+              "leader": [
+                [
+                  630.3030303030303,
+                  384.24242424242425
+                ],
+                [
+                  780.3030303030303,
+                  464.24242424242425
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎錐體",
+          "index": 4,
+          "sourceAnchor": [
+            369,
+            544
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                678.8770053475936,
+                539.8484848484848
+              ],
+              "text": [
+                280,
+                550.8484848484848
+              ],
+              "leader": [
+                [
+                  300,
+                  539.8484848484848
+                ],
+                [
+                  678.8770053475936,
+                  539.8484848484848
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                559.0909090909091,
+                864.2424242424242
+              ],
+              "pin": [
+                409.0909090909091,
+                904.2424242424242
+              ],
+              "leader": [
+                [
+                  409.0909090909091,
+                  904.2424242424242
+                ],
+                [
+                  559.0909090909091,
+                  864.2424242424242
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "腎皮質",
+        "腎髓質",
+        "腎柱"
+      ],
+      "arrows": []
+    },
+    "node-03": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+      "sha256": "5dbaf942116afa4aeec2d6b0555f9a3b08d4234b4cfe428d8b1d60b3f3b9bb88",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          2939
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 350,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "腎乳頭",
+          "index": 1,
+          "sourceAnchor": [
+            538,
+            430
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                829.5008912655971,
+                438.24420677361854
+              ],
+              "text": [
+                280,
+                449.24420677361854
+              ],
+              "leader": [
+                [
+                  300,
+                  438.24420677361854
+                ],
+                [
+                  829.5008912655971,
+                  438.24420677361854
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                815.1515151515151,
+                691.5151515151515
+              ],
+              "pin": [
+                665.1515151515151,
+                591.5151515151515
+              ],
+              "leader": [
+                [
+                  665.1515151515151,
+                  591.5151515151515
+                ],
+                [
+                  815.1515151515151,
+                  691.5151515151515
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "小腎盞",
+          "index": 2,
+          "sourceAnchor": [
+            565,
+            455
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                853.5650623885917,
+                460.52584670231727
+              ],
+              "text": [
+                1420,
+                471.52584670231727
+              ],
+              "leader": [
+                [
+                  1400,
+                  460.52584670231727
+                ],
+                [
+                  853.5650623885917,
+                  460.52584670231727
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                856.060606060606,
+                729.3939393939394
+              ],
+              "pin": [
+                1006.060606060606,
+                804.3939393939394
+              ],
+              "leader": [
+                [
+                  1006.060606060606,
+                  804.3939393939394
+                ],
+                [
+                  856.060606060606,
+                  729.3939393939394
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "大腎盞",
+          "index": 3,
+          "sourceAnchor": [
+            613,
+            602
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                896.3458110516934,
+                591.5418894830659
+              ],
+              "text": [
+                280,
+                602.5418894830659
+              ],
+              "leader": [
+                [
+                  300,
+                  591.5418894830659
+                ],
+                [
+                  896.3458110516934,
+                  591.5418894830659
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                928.7878787878788,
+                952.1212121212121
+              ],
+              "pin": [
+                778.7878787878788,
+                1022.1212121212121
+              ],
+              "leader": [
+                [
+                  778.7878787878788,
+                  1022.1212121212121
+                ],
+                [
+                  928.7878787878788,
+                  952.1212121212121
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎盂",
+          "index": 4,
+          "sourceAnchor": [
+            725,
+            712
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                996.1675579322638,
+                689.5811051693404
+              ],
+              "text": [
+                1420,
+                700.5811051693404
+              ],
+              "leader": [
+                [
+                  1400,
+                  689.5811051693404
+                ],
+                [
+                  996.1675579322638,
+                  689.5811051693404
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1098.4848484848485,
+                1118.7878787878788
+              ],
+              "pin": [
+                1258.4848484848485,
+                1148.7878787878788
+              ],
+              "leader": [
+                [
+                  1258.4848484848485,
+                  1148.7878787878788
+                ],
+                [
+                  1098.4848484848485,
+                  1118.7878787878788
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        },
+        {
+          "label": "輸尿管",
+          "index": 5,
+          "sourceAnchor": [
+            925,
+            1110
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-03.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1174.420677361854,
+                1044.3048128342245
+              ],
+              "text": [
+                1420,
+                1055.3048128342245
+              ],
+              "leader": [
+                [
+                  1400,
+                  1044.3048128342245
+                ],
+                [
+                  1174.420677361854,
+                  1044.3048128342245
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1401.5151515151515,
+                1721.8181818181818
+              ],
+              "pin": [
+                1531.5151515151515,
+                1751.8181818181818
+              ],
+              "leader": [
+                [
+                  1531.5151515151515,
+                  1751.8181818181818
+                ],
+                [
+                  1401.5151515151515,
+                  1721.8181818181818
+                ]
+              ],
+              "text": [
+                180,
+                2826
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "腎乳頭",
+        "小腎盞",
+        "大腎盞",
+        "腎盂"
+      ],
+      "arrows": []
+    },
+    "node-04": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+      "sha256": "273a708b8232cda4b914633c036e8f49d4ad7a14d41f56c42c84c2e88a2eaf18",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          2819
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 350,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "腎門",
+          "index": 1,
+          "sourceAnchor": [
+            700,
+            450
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                973.885918003565,
+                456.06951871657753
+              ],
+              "text": [
+                1420,
+                467.06951871657753
+              ],
+              "leader": [
+                [
+                  1400,
+                  456.06951871657753
+                ],
+                [
+                  973.885918003565,
+                  456.06951871657753
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1060.6060606060605,
+                721.8181818181819
+              ],
+              "pin": [
+                1210.6060606060605,
+                756.8181818181819
+              ],
+              "leader": [
+                [
+                  1210.6060606060605,
+                  756.8181818181819
+                ],
+                [
+                  1060.6060606060605,
+                  721.8181818181819
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎被膜",
+          "index": 2,
+          "sourceAnchor": [
+            319,
+            888
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                634.313725490196,
+                846.4438502673796
+              ],
+              "text": [
+                1420,
+                857.4438502673796
+              ],
+              "leader": [
+                [
+                  1400,
+                  846.4438502673796
+                ],
+                [
+                  634.313725490196,
+                  846.4438502673796
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                483.3333333333333,
+                1385.4545454545455
+              ],
+              "pin": [
+                523.3333333333333,
+                1535.4545454545455
+              ],
+              "leader": [
+                [
+                  523.3333333333333,
+                  1535.4545454545455
+                ],
+                [
+                  483.3333333333333,
+                  1385.4545454545455
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "脂肪囊",
+          "index": 3,
+          "sourceAnchor": [
+            319,
+            843
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                634.313725490196,
+                806.3368983957218
+              ],
+              "text": [
+                280,
+                817.3368983957218
+              ],
+              "leader": [
+                [
+                  300,
+                  806.3368983957218
+                ],
+                [
+                  634.313725490196,
+                  806.3368983957218
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                483.3333333333333,
+                1317.2727272727273
+              ],
+              "pin": [
+                353.3333333333333,
+                1337.2727272727273
+              ],
+              "leader": [
+                [
+                  353.3333333333333,
+                  1337.2727272727273
+                ],
+                [
+                  483.3333333333333,
+                  1317.2727272727273
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "腎筋膜",
+          "index": 4,
+          "sourceAnchor": [
+            318,
+            792
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-04.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                633.4224598930482,
+                760.8823529411765
+              ],
+              "text": [
+                280,
+                771.8823529411765
+              ],
+              "leader": [
+                [
+                  300,
+                  760.8823529411765
+                ],
+                [
+                  633.4224598930482,
+                  760.8823529411765
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                481.8181818181818,
+                1240.0
+              ],
+              "pin": [
+                281.8181818181818,
+                1120.0
+              ],
+              "leader": [
+                [
+                  281.8181818181818,
+                  1120.0
+                ],
+                [
+                  481.8181818181818,
+                  1240.0
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "腎門",
+        "腎被膜"
+      ],
+      "arrows": []
+    },
+    "node-05": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+      "sha256": "2170a8bd1650ae083f530f0d84b8bd341c1f83bc2850595633b88d6428fcd8f3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          3299
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 350,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "腎臟",
+          "index": 1,
+          "sourceAnchor": [
+            260,
+            330
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                581.729055258467,
+                349.11764705882354
+              ],
+              "text": [
+                280,
+                360.11764705882354
+              ],
+              "leader": [
+                [
+                  300,
+                  349.11764705882354
+                ],
+                [
+                  581.729055258467,
+                  349.11764705882354
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                393.93939393939394,
+                540.0
+              ],
+              "pin": [
+                273.93939393939394,
+                445.0
+              ],
+              "leader": [
+                [
+                  273.93939393939394,
+                  445.0
+                ],
+                [
+                  393.93939393939394,
+                  540.0
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "輸尿管",
+          "index": 2,
+          "sourceAnchor": [
+            385,
+            680
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                693.1372549019608,
+                661.060606060606
+              ],
+              "text": [
+                280,
+                672.060606060606
+              ],
+              "leader": [
+                [
+                  300,
+                  661.060606060606
+                ],
+                [
+                  693.1372549019608,
+                  661.060606060606
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                583.3333333333334,
+                1070.3030303030303
+              ],
+              "pin": [
+                463.33333333333337,
+                1010.3030303030303
+              ],
+              "leader": [
+                [
+                  463.33333333333337,
+                  1010.3030303030303
+                ],
+                [
+                  583.3333333333334,
+                  1070.3030303030303
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "膀胱",
+          "index": 3,
+          "sourceAnchor": [
+            559,
+            1050
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                848.2174688057041,
+                990.8288770053475
+              ],
+              "text": [
+                1420,
+                1001.8288770053475
+              ],
+              "leader": [
+                [
+                  1400,
+                  990.8288770053475
+                ],
+                [
+                  848.2174688057041,
+                  990.8288770053475
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                846.969696969697,
+                1630.909090909091
+              ],
+              "pin": [
+                996.969696969697,
+                1540.909090909091
+              ],
+              "leader": [
+                [
+                  996.969696969697,
+                  1540.909090909091
+                ],
+                [
+                  846.969696969697,
+                  1630.909090909091
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        },
+        {
+          "label": "尿道",
+          "index": 4,
+          "sourceAnchor": [
+            552,
+            1280
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                841.9786096256685,
+                1195.819964349376
+              ],
+              "text": [
+                1420,
+                1206.819964349376
+              ],
+              "leader": [
+                [
+                  1400,
+                  1195.819964349376
+                ],
+                [
+                  841.9786096256685,
+                  1195.819964349376
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                836.3636363636364,
+                1979.3939393939395
+              ],
+              "pin": [
+                986.3636363636364,
+                1889.3939393939395
+              ],
+              "leader": [
+                [
+                  986.3636363636364,
+                  1889.3939393939395
+                ],
+                [
+                  836.3636363636364,
+                  1979.3939393939395
+                ]
+              ],
+              "text": [
+                180,
+                2706
+              ]
+            }
+          }
+        },
+        {
+          "label": "形成",
+          "index": 5,
+          "sourceAnchor": [
+            220,
+            400
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                546.078431372549,
+                411.50623885918003
+              ],
+              "text": [
+                280,
+                422.50623885918003
+              ],
+              "leader": [
+                [
+                  300,
+                  411.50623885918003
+                ],
+                [
+                  546.078431372549,
+                  411.50623885918003
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                333.3333333333333,
+                646.060606060606
+              ],
+              "pin": [
+                213.33333333333331,
+                736.060606060606
+              ],
+              "leader": [
+                [
+                  213.33333333333331,
+                  736.060606060606
+                ],
+                [
+                  333.3333333333333,
+                  646.060606060606
+                ]
+              ],
+              "text": [
+                180,
+                2826
+              ]
+            }
+          }
+        },
+        {
+          "label": "運送",
+          "index": 6,
+          "sourceAnchor": [
+            401,
+            800
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                707.397504456328,
+                768.0124777183601
+              ],
+              "text": [
+                280,
+                779.0124777183601
+              ],
+              "leader": [
+                [
+                  300,
+                  768.0124777183601
+                ],
+                [
+                  707.397504456328,
+                  768.0124777183601
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                607.5757575757576,
+                1252.121212121212
+              ],
+              "pin": [
+                487.5757575757576,
+                1342.121212121212
+              ],
+              "leader": [
+                [
+                  487.5757575757576,
+                  1342.121212121212
+                ],
+                [
+                  607.5757575757576,
+                  1252.121212121212
+                ]
+              ],
+              "text": [
+                180,
+                2946
+              ]
+            }
+          }
+        },
+        {
+          "label": "儲存",
+          "index": 7,
+          "sourceAnchor": [
+            480,
+            1080
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                777.807486631016,
+                1017.566844919786
+              ],
+              "text": [
+                280,
+                1028.566844919786
+              ],
+              "leader": [
+                [
+                  300,
+                  1017.566844919786
+                ],
+                [
+                  777.807486631016,
+                  1017.566844919786
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                727.2727272727273,
+                1676.3636363636363
+              ],
+              "pin": [
+                577.2727272727273,
+                1766.3636363636363
+              ],
+              "leader": [
+                [
+                  577.2727272727273,
+                  1766.3636363636363
+                ],
+                [
+                  727.2727272727273,
+                  1676.3636363636363
+                ]
+              ],
+              "text": [
+                180,
+                3066
+              ]
+            }
+          }
+        },
+        {
+          "label": "排出",
+          "index": 8,
+          "sourceAnchor": [
+            553,
+            1355
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-05.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": false,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                842.8698752228164,
+                1262.6648841354722
+              ],
+              "text": [
+                280,
+                1273.6648841354722
+              ],
+              "leader": [
+                [
+                  300,
+                  1262.6648841354722
+                ],
+                [
+                  842.8698752228164,
+                  1262.6648841354722
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                837.8787878787879,
+                2093.030303030303
+              ],
+              "pin": [
+                687.8787878787879,
+                2073.030303030303
+              ],
+              "leader": [
+                [
+                  687.8787878787879,
+                  2073.030303030303
+                ],
+                [
+                  837.8787878787879,
+                  2093.030303030303
+                ]
+              ],
+              "text": [
+                180,
+                3186
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "腎臟",
+        "形成"
+      ],
+      "arrows": []
+    },
+    "node-06": {
+      "source": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+      "sha256": "12ea9b21c5ae806d09e51793e4b11860de831aa1e79c8e6e18e83ca3460801d9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "viewBoxes": {
+        "mobile": [
+          1700,
+          2699
+        ],
+        "desktop": [
+          1700,
+          1385
+        ]
+      },
+      "imageTransforms": {
+        "mobile": {
+          "x": 0,
+          "y": 40,
+          "scale": 1.5151515151515151
+        },
+        "desktop": {
+          "x": 640,
+          "y": 55,
+          "scale": 0.8912655971479501
+        }
+      },
+      "labels": [
+        {
+          "label": "腎素",
+          "index": 1,
+          "sourceAnchor": [
+            750,
+            240
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1308.4491978609626,
+                268.903743315508
+              ],
+              "text": [
+                600,
+                279.903743315508
+              ],
+              "leader": [
+                [
+                  620,
+                  268.903743315508
+                ],
+                [
+                  1308.4491978609626,
+                  268.903743315508
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                1136.3636363636363,
+                403.6363636363636
+              ],
+              "pin": [
+                1016.3636363636363,
+                338.6363636363636
+              ],
+              "leader": [
+                [
+                  1016.3636363636363,
+                  338.6363636363636
+                ],
+                [
+                  1136.3636363636363,
+                  403.6363636363636
+                ]
+              ],
+              "text": [
+                180,
+                2346
+              ]
+            }
+          }
+        },
+        {
+          "label": "紅血球生成素（腎紅血球生成因子）",
+          "index": 2,
+          "sourceAnchor": [
+            445,
+            650
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1036.6131907308377,
+                634.3226381461675
+              ],
+              "text": [
+                600,
+                645.3226381461675
+              ],
+              "leader": [
+                [
+                  620,
+                  634.3226381461675
+                ],
+                [
+                  1036.6131907308377,
+                  634.3226381461675
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                674.2424242424242,
+                1024.848484848485
+              ],
+              "pin": [
+                554.2424242424242,
+                959.848484848485
+              ],
+              "leader": [
+                [
+                  554.2424242424242,
+                  959.848484848485
+                ],
+                [
+                  674.2424242424242,
+                  1024.848484848485
+                ]
+              ],
+              "text": [
+                180,
+                2466
+              ]
+            }
+          }
+        },
+        {
+          "label": "活化維生素D",
+          "index": 3,
+          "sourceAnchor": [
+            470,
+            1060
+          ],
+          "sourceFile": "materials-src/figures/raster/kidney-anatomy/incoming/IMG-kidney-anatomy-06.png",
+          "sourceSize": [
+            1122,
+            1402
+          ],
+          "focus": true,
+          "conceptCallout": false,
+          "layouts": {
+            "desktop": {
+              "anchor": [
+                1058.8948306595366,
+                999.7415329768271
+              ],
+              "text": [
+                600,
+                1010.7415329768271
+              ],
+              "leader": [
+                [
+                  620,
+                  999.7415329768271
+                ],
+                [
+                  1058.8948306595366,
+                  999.7415329768271
+                ]
+              ]
+            },
+            "mobile": {
+              "anchor": [
+                712.1212121212121,
+                1646.060606060606
+              ],
+              "pin": [
+                592.1212121212121,
+                1581.060606060606
+              ],
+              "leader": [
+                [
+                  592.1212121212121,
+                  1581.060606060606
+                ],
+                [
+                  712.1212121212121,
+                  1646.060606060606
+                ]
+              ],
+              "text": [
+                180,
+                2586
+              ]
+            }
+          }
+        }
+      ],
+      "states": {},
+      "focus": [
+        "腎素",
+        "紅血球生成素（腎紅血球生成因子）",
+        "活化維生素D"
+      ],
+      "arrows": []
+    }
+  }
+}

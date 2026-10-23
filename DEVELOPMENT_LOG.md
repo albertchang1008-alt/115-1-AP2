@@ -1,3 +1,77 @@
+## 2026-10-17 泌尿體液圖面收尾、驗證與交件文件 [Codex]
+
+- 基底36fcbec；A補腎素6號顆粒錨點、靜脈側CO₂入肺、體液短說明。原文字實際在總覽與node-01，node-02核對正常。
+- B十份preview／200標準shots、180圖面案例＋20初始頁全部通過，0 errors/pageerror；全庫節點21版／34來源通過，共用測試20 pass、0 fail、0 skipped。40組截圖集／400圖片載入正常。
+- 16列前後對照，git show 649b98b取40張原截圖，F-7另補完整state-3頁證明explain刪頁碼；新腎素錨點crop、COMPLETE_REPORT及handoff同步。
+- 176保護檔案及所有content.json不變；保留開工時既有dirty截圖與紀錄。本輪無腳本失敗或修復；無build／登錄／Excel或Sheet／push／merge／部署。
+- 本輪commit訊息「泌尿體液圖面收尾、驗證與交件文件 [Codex]」。C為另一卡片專案，依序於此commit後執行並另報結果。
+
+## 2026-10-17 Antigravity圖面修訂（36fcbec）[Antigravity，Codex補記]
+
+- Antigravity提交36fcbec完成U-1～U-4與F-1～F-9：功能框、手機圖例間距、再吸收箭頭、刪無目標虛線、RAAS編號、集尿管端點、Na／K說明、氣管呼出、兩色比例條、刪課本頁碼、空白格裁切／淡化及引線重排。
+- Claude於ANTIGRAVITY_HANDOFF_CLAUDE_ACCEPTANCE_2026-10-17.md大致通過，留腎素缺6號、CO₂入肺起點、體重底框用語三小修與交件文件待補。本次收尾已處理；舊D「失敗未提交」已移出現況交接，保留歷史。
+
+## 2026-10-17 停止已執行的一次性排程重複觸發 [Codex]
+
+- automation-2於台北01:01再次喚醒，核對目前handoff後未執行過期階段一交辦；原排程改PAUSED，其餘欄位保留。
+- 僅補本交接紀錄，保留目前D圖面失敗停點及所有未提交工作；未改教材／來源卡、未開分支、未commit／push／部署。
+
+## 2026-10-16 期末卡修正與泌尿續作：D失敗停止 [Codex]
+
+U-1–U-4修圖與四份preview完成嘗試，腎臟18例通過；其他44例中5例手機圖例標題與首列文字重疊，驗證exit1。依教師「任何一步失敗就停下」保留dirty、未commit、不修後重跑，後續體液與共用測試未執行。STOP_REPORT記錄實際截圖及失敗，不以649b98b舊PASS代替。卡片專案A31修正、B26清理、C3PASS／12REVISE及auditPASS已完成，詳該專案05_review執行報告。未push、merge或部署。
+
+## 2026-10-16 泌尿完整製作：階段四與十份畫面交件 [Codex]
+
+- RAAS訊號步驟①–⑤，手機結構標籤A–G；修正圖層避讓後18案例通過。
+
+- 四份體液24節點、44題、4預測完成；14張已pass原圖的標籤／箭頭與原生資料層，配色僅增四個210鍵。
+- 十份共60節點、110題＋10預測；200最終截圖、180圖面案例、264引線crop通過。HTML十份並列，40切換／400次圖片載入及預覽連結、放大通過。
+- 精確6→6／12／18粒子；編號避讓原分子與原生粒子，四個實際渲染案例0遮擋。酸鹼尿腔補原生符號。原PNG不改。
+- 33卡及唯一進度列均reviewed；電解質與鈣磷兩卡仍needs_review=true，依交辦附條件使用，疑義公式與分泌細胞身分已排除，原旗標不改。繁體2963段0差異。
+- 160保護檔案SHA通過；全庫節點21版／實際34來源及20共用測試（0 skipped）通過。既有工具訊息固定15，未改工具。
+- 交件docs/urinary-release/COMPLETE_REPORT.md及screenshots.html；階段四本機commit後停Claude總驗收。無build／登錄／Excel／Sheet／push／merge／部署／卡片或進度寫入。
+
+## 2026-10-16 泌尿完整製作：階段三 [Codex]
+
+六個原生資料圖及PCT67%／75%比例條完成，14資料圖面、60標準shots通過；全庫節點與20共用測試（0 skipped）通過。資料源與截圖對照見data/SLOT_MAP.md，續做四份體液。
+
+## 2026-10-16 泌尿完整製作：階段二 [Codex]
+
+五份標籤及箭頭完成，76圖面案例、132 crops、100標準shots通過；六份來源卡與用詞通過。題目及來源不變，續做資料層。詳STAGE2_COMPLETE_REPORT.md。
+
+## 2026-10-16 泌尿完整製作：階段一 [Codex]
+
+A沿用、腎臟標籤及35錨點crops通過，尿路C補第六節與兩題、預覽v2。標準40 screenshots；全庫節點稽核及20共用教材測試通過，0 skipped。詳 docs/urinary-release/STAGE1_COMPLETE_REPORT.md。舊證據保留，繼續階段二。
+
+## 2026-10-16 泌尿階段二續作：腳本修正後發現教材錨點錯位，停止 [Codex]
+
+- A成果保留。開工確認urine-physical-properties frontmatter及todo_all.jsonl唯一列均reviewed，SHA記resume-checks且收工未變。
+- 依新規則第一次修本輪驗證腳本：measure(svg)正確接SVG，補例外及完整案例條件，保留並增強檢查。重跑出1280初始頁／overview state1與3crop後遇crop範圍錯誤；原錯及修法留history／log，尚未用第二次修正。
+- 人工檢視overview state1發現後腹腔(170,510)引線落在髂骨上緣，屬教材實際錨點錯位；按新規則立即停止，不修教材／不再重跑／不繼續C。
+- C資格成立但未補內容，尿路仍與A快照相同；未完成B案例、完整截圖與crop、C與全庫稽核／共用測試／diffcheck，不commit。STAGE2_REPORT分A/B/C及handoff已更新，所有未提交成果保留；未build／登錄／Excel／Sheet／push／部署／同步，未動來源卡或todo。
+
+## 2026-10-16 泌尿階段二 A 完成／B 驗證失敗依令停止 [Codex]
+
+- feature/urinary-infographics@1a8d405指定worktree，兩交辦文件原樣複製docs/待提交。A完成中文reference／credits及filtration node03開頭修改；六份A-only JSON比對通過、sources保留。
+- B產生kidney七張響應式原生SVG標籤、35預定引線與3功能說明，白名單比對通過、原PNG不變；單一FOCUS_STYLE控制紅粗體。只kidney改figure／導讀／caption／圖層credit，preview成功。
+- 新視覺驗證腳本locator.evaluate錯把this當SVG，TypeError svg.getBoundingClientRect is not a function，exit1。依教師「任何一步失敗就停下回報」立即停止，未修後重跑、未做shots／共用測試／diffcheck／commit。證據finally原錯寫ok=true，收工按真實exit/log改false，不改實作。
+- C仍draft，不補尿路節點或兩題。STAGE2_REPORT與stage2/預定錨點表及失敗證據、handoff已交接；工作留未提交，單次commit尚未使用。原根目錄／底圖／卡片不變，無build／登錄／Excel／Sheet／push／部署／同步。待教師續作指示。
+
+## 2026-10-16 泌尿階段一 Claude R 修正與 D1 預覽 [Codex]
+
+- 在指定feature/urinary-infographics／fc174f1 worktree依審稿處理R1–R5。64題及6預測重排：70／70保持正解文字及題目說明；R2／R3三題依指定改正解，另foundation02修編者語，前後證據分開記錄。尿路可見來源代碼改中文引用，sources不變；R4卡沒有中文Lacis名稱，依例外保留。
+- D1只新增presentation.mjs hues六個泌尿鍵，全部176青綠色，不改其餘共用程式。五份preview及標準100張390／1280截圖通過，另10張視窗圖交件；110題渲染正解與10預測對應全過，無頁面錯誤。
+- D2卡仍draft，node06與兩缺題維持原佔位；第六份preview與全庫節點稽核仍題數失敗，不放寬驗證。前五schema過、六nodeText無錯、用詞0命中，kit測試7／7通過0skip。
+- STAGE1_CONTENT_REPORT新增「R 修正」，r-fixes含答案比對、驗證、截圖及保護證據，handoff覆寫過期現況。原根目錄、來源卡、catalog／manifest／Excel與validator不變；只preview、不build／登錄／寫Sheet／push／部署／同步。一次本機commit後停Claude複驗。
+
+## 2026-10-16 泌尿教材階段一內容交件（preview受阻） [Codex]
+
+- 01:00 automation-2單次執行；fetch origin/main=460ca11600b68108415d88e7468404d4271fa121，獨立managed worktree／feature/urinary-infographics，原根目錄與呼吸分支未改。
+- 建立六份content：35教學節點＋1待核卡佔位、64四選一題＋6預測，逐卡reviewed與來源頁碼；26通過底圖原樣嵌入SVG、資料位空白，未做標籤或資料層，體液不做。
+- 五份schema通過，最後一份按交辦略過先備06與情境05，只留5＋4題，不放寬驗證。五份preview因缺共用palette失敗，最後一份因題數失敗；六次validate-nodes都停同一題數限制，無新HTML或截圖。完整記錄並依停止條件交付，不自行改共用程式或卡。
+- 六份nodeText無重複錯誤、用詞掃描0、64題與6預測來源正解全首項（作者規則）；runtime洗牌保留，新頁分布未驗。首次Node測試解析失敗後改專案tsx，kit相關測試7／7過0skip。
+- 報告docs/urinary-release/STAGE1_CONTENT_REPORT.md與來源／圖位／SHA／驗證證據；原追蹤檔及來源卡SHA不變，catalog／manifest／Excel／共用kit與公開教材未改。未build／寫Excel或Sheet／push／部署／同步；一次feature本機commit，更新交接後停Claude審。
+
 # 2026-10-15：平台MCP第3階段完成停點A，交Claude審查 [Codex]
 目前版本：1.9.1
 

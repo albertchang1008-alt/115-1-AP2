@@ -1,0 +1,286 @@
+{
+  "slug": "tubular-handling",
+  "method": "author renderer; real UI clicks; scripted traversal is automated verification, not independent novice certification",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜三種移動，往哪裡走？\n💡提示\n請把『過濾』『再吸收』『分泌』三個箭頭放到圖上，並指向正確方向。\n血液→鮑氏囊\n管液→血液\n血液→管液\n已完成 0／3\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n過濾\n選擇說明\n再吸收\n選擇說明\n分泌\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "過濾",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "再吸收",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "分泌",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜尿裡最後剩多少？\n💡提示\n排泄量＝過濾量 □ 再吸收量 □ 分泌量。請在兩個框裡填上＋或－。\n排泄量\n＝\n過濾量\n□\n再吸收量\n□\n分泌量\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "□",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "□",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "signs"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜近曲小管拿回什麼？\n💡提示\n請把葡萄糖、胺基酸、尿素、肌酸酐，分到〔正常全部回收〕〔部分回收〕〔不回收〕。\n正常全部回收\n部分回收\n不回收\n已完成 0／4\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n葡萄糖\n選擇說明\n胺基酸\n選擇說明\n尿素\n選擇說明\n肌酸酐\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "葡萄糖",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "胺基酸",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "尿素",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "肌酸酐",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜回收能力有上限\n💡提示\n如果過濾出來的葡萄糖越來越多，超過腎小管回收的上限，會發生什麼事？\n過濾出來的葡萄糖\n0 mg/min\n\n拖動「過濾出來的葡萄糖」滑桿：沒超過 375 時全部回收；超過後，尿中出現葡萄糖。\n\n下一步 →",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "下一步 →",
+          "role": null
+        }
+      ],
+      "steps": [
+        "slider",
+        "choice"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜鉀的調節\n💡提示\n血鉀太高時，腎臟在哪兩段把 K⁺ 送進尿裡？請在圖上點出來。\n遠曲小管\n集尿管\n近曲小管\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "遠曲小管",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "集尿管",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "近曲小管",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "multi",
+        "choice"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜尿比較濃，就一定是分泌嗎？\n💡提示\n某物質在尿中的濃度比血漿高，表示它一定被分泌嗎？\n不一定\n一定",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "不一定",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "一定",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI",
+  "baseline": "Initial integration: df77a38 figure/player plus 993d21c compiler/checker; captured before takeover corrections"
+}

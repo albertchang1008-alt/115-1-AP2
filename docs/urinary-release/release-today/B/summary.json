@@ -1,0 +1,325 @@
+{
+  "pass": true,
+  "branch": "release/urinary-2026-10-22",
+  "originMain": "ba41abbb0a4c064bdc9063bf9ebd8bf00b1f6b1f",
+  "mergedApply": "52143988",
+  "mergeCommit": "527aa908",
+  "A": {
+    "layoutCases": 6552,
+    "preAnswerCases": 1048
+  },
+  "B": {
+    "verifyCases": 1662,
+    "materials": [
+      {
+        "slug": "kidney-anatomy",
+        "path": "public/materials/kidney-anatomy-v1/index.html",
+        "diagnosticQuestions": 15,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 166,
+          "pass": 166,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "2bbfde0b88387c40885544cbc45f462f6afe39099093c48190f59a886869be9c",
+        "htmlSha256": "cf9ce02972a2ddb6f86749df01827ba7cd64a9fab2272a2d0ff208a895c05b7e"
+      },
+      {
+        "slug": "nephron-circulation",
+        "path": "public/materials/nephron-circulation-v1/index.html",
+        "diagnosticQuestions": 14,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 171,
+          "pass": 171,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "4f688819cabc4799b07a85f758c33e677c922a539f9b72ab46e3fa5d27601be8",
+        "htmlSha256": "0d3e26f6d18fdd5c69e272f5d09d5a6da0544c74cfbb2fd4206f0d29296ec592"
+      },
+      {
+        "slug": "filtration-clearance",
+        "path": "public/materials/filtration-clearance-v1/index.html",
+        "diagnosticQuestions": 15,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 160,
+          "pass": 160,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "d6cbf1223408e6e0388947092ec4c7538726c5b6b258ba9c0aa57a2bcd637618",
+        "htmlSha256": "d39fd4f5c823a3d24e4b53592ea1c09caa313bd35910c6c4a1c86b4b3a9dd449"
+      },
+      {
+        "slug": "tubular-handling",
+        "path": "public/materials/tubular-handling-v1/index.html",
+        "diagnosticQuestions": 16,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 164,
+          "pass": 164,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "f31cfcf8e5b0d39ac9588d2adb4dabf28065870725e0ff940db28ecd02c67d95",
+        "htmlSha256": "ff736f2eabf92a4937d0a7cc77383fc9ae00b7787bbf994d7cd73a10710b6eac"
+      },
+      {
+        "slug": "urine-concentration",
+        "path": "public/materials/urine-concentration-v1/index.html",
+        "diagnosticQuestions": 17,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 168,
+          "pass": 168,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "f7ecb55736548b93bfa443ebb28077e710df5d7fa5d609d4a76eb986fa9a0c26",
+        "htmlSha256": "ac14ef379201628ef5bcda0d23fee963455057360617d622530d3ae2e2183d58"
+      },
+      {
+        "slug": "urinary-route-micturition",
+        "path": "public/materials/urinary-route-micturition-v2/index.html",
+        "diagnosticQuestions": 16,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 179,
+          "pass": 179,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "371371b77cf20ae2def792611df1ef8b3f2bb77ed669bd13a94b67d50e917ed2",
+        "htmlSha256": "2cae9a390ccab161b787dc25a7624aa3aeeae790d53fc56763dfbca27d8b4673"
+      },
+      {
+        "slug": "fluid-compartments",
+        "path": "public/materials/fluid-compartments-v1/index.html",
+        "diagnosticQuestions": 14,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 156,
+          "pass": 156,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "f5d1f64651fdce8d8ff1f7928c3a9a3e6a6fafd3d26d847c6a61e9816351ec7a",
+        "htmlSha256": "71d5d06ff97b6b62448308206f3714efa6b1fa18908448bb63de02b893be022d"
+      },
+      {
+        "slug": "water-sodium-regulation",
+        "path": "public/materials/water-sodium-regulation-v1/index.html",
+        "diagnosticQuestions": 15,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 167,
+          "pass": 167,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "5d18b9ef1bc687636b18378ccd9ff36fb191ab1afbfc8a80ae04c43580e580e4",
+        "htmlSha256": "217695ae25d27e37884f35d154deaf18189760189c94de03b20b6af0f20aff69"
+      },
+      {
+        "slug": "electrolyte-balance",
+        "path": "public/materials/electrolyte-balance-v1/index.html",
+        "diagnosticQuestions": 15,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 169,
+          "pass": 169,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "d6be2f0a2995099cad5217c0aae63796dd5327131235ef90825a84f4136aebca",
+        "htmlSha256": "4267b450b0e69a937f1e6ad984b27dceffb811a44a33b3c2b405f205a5159858"
+      },
+      {
+        "slug": "acid-base-homeostasis",
+        "path": "public/materials/acid-base-homeostasis-v1/index.html",
+        "diagnosticQuestions": 15,
+        "bankQuestions": 11,
+        "verify": {
+          "cases": 162,
+          "pass": 162,
+          "fail": 0,
+          "skipped": 0
+        },
+        "renderSha256": "09c06eb1c2dc843e42989a9f1026f18f157066b8b08e97452e5de61838c3cd17",
+        "htmlSha256": "de0b181d2e1c255d63f494837473411df3efdf7fb334b1e0d27d0aa1ae7b1879"
+      }
+    ],
+    "npmTests": [
+      193,
+      61
+    ],
+    "materialTests": 21,
+    "lessonRegression": 75
+  },
+  "bank": {
+    "written": 110,
+    "excluded": 0,
+    "skipped": 0,
+    "approvedRewrites": 11,
+    "duplicateIds": []
+  },
+  "excel": {
+    "pass": true,
+    "counts": {
+      "xl/worksheets/sheet1.xml": {
+        "before": 305,
+        "after": 415,
+        "appended": 110
+      },
+      "xl/worksheets/sheet2.xml": {
+        "before": 41,
+        "after": 51,
+        "appended": 10
+      }
+    },
+    "originalCellsUnchanged": true,
+    "originalOtherZipMembersUnchanged": true,
+    "existingRowsCompared": 346,
+    "questions": 414,
+    "appended": 110,
+    "excluded": 0,
+    "skipped": 0,
+    "duplicateIds": [],
+    "beforeSha256": "04498f115cb3d512825ec01606282c633e308ff19b906297769df40861849215",
+    "afterSha256": "237dc14792f9ea8abaa0dc39c1c7fec040a101b01c41970a5fef804a1efe7b10",
+    "authoring": "artifact-tool; graft only authored additions to preserve original workbook",
+    "backup": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/docs/sheet-backups/2026-10-22-urinary-excel-before.xlsx"
+  },
+  "sheet": {
+    "pass": true,
+    "spreadsheetId": "1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk",
+    "tab": "115-1-AP2",
+    "sheetId": 1633868463,
+    "url": "https://docs.google.com/spreadsheets/d/1JU-XoFaDHYGcBqmlmcflUsHswUmMJXk39yETk9o3QPk/edit#gid=1633868463",
+    "beforeRows": 552,
+    "afterRows": 662,
+    "beforeQuestions": 551,
+    "afterQuestions": 661,
+    "appended": 110,
+    "excluded": 0,
+    "skipped": [],
+    "range": "A553:AF662",
+    "oldCellsCompared": 17664,
+    "newCellsCompared": 3520,
+    "oldCellDifferences": [],
+    "newCellDifferences": [],
+    "duplicateIds": [],
+    "idFormatErrors": [],
+    "extraColumnPolicy": [
+      {
+        "index": 0,
+        "header": "題庫",
+        "distinctCount": 1,
+        "fill": "資訊圖表",
+        "mixed": false
+      },
+      {
+        "index": 3,
+        "header": "年度",
+        "distinctCount": 1,
+        "fill": "資訊圖表",
+        "mixed": false
+      },
+      {
+        "index": 6,
+        "header": "考點",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 7,
+        "header": "圖層",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 8,
+        "header": "圖中角色",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 9,
+        "header": "認知層次",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      },
+      {
+        "index": 10,
+        "header": "zuvio",
+        "distinctCount": 6,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 24,
+        "header": "primary卡",
+        "distinctCount": 2,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 25,
+        "header": "引用卡片",
+        "distinctCount": 12,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 26,
+        "header": "教師覆核註記",
+        "distinctCount": 12,
+        "fill": "",
+        "mixed": true
+      },
+      {
+        "index": 27,
+        "header": "發布狀態",
+        "distinctCount": 1,
+        "fill": "",
+        "mixed": false
+      }
+    ],
+    "backup": "docs/sheet-backups/2026-10-22-urinary-before.json and .csv (entire 552×32 cells including blanks; not committed)",
+    "omittedExcelColumns": [
+      "課程代碼 (分頁即課程)",
+      "題型 (all 單選)",
+      "圖片網址 (all blank)"
+    ],
+    "aliases": {
+      "問題": "題目",
+      "③回頭選答案": "③對答案",
+      "題序": "序號"
+    },
+    "enableColumn": "既有AF啟用欄寫入TRUE，未增加表頭",
+    "initialRejectedBatch": "HTTP 400 copyPaste source includes filtered rows; atomic failure confirmed rowCount=552. Replaced with explicit formats from backed-up source cells, only new range updated; filters unchanged.",
+    "mutation": "appendDimension 110 rows + updateCells A553:AF662; no preexisting cells, headers, filter, roster or other tabs modified",
+    "finalReadAfterRowAutoResize": {
+      "pass": true,
+      "cellsCompared": 21184,
+      "range": "A1:AF662",
+      "nativeVisualProof": "release-today/B/sheet-after.png",
+      "rowResize": "Only new rows 553:662 auto-sized after native visual check. No existing row dimensions altered.",
+      "blankNormalization": "Google returns empty string writes as absent cells; compare these as blank. Nonempty values and original userEnteredValue objects compared exactly."
+    },
+    "backupSha256": {
+      "2026-10-22-urinary-before.json": "bcb4573ca12f1bdda295fdb4f8d59e887e041d316d6e7a659c062b2f1440158e",
+      "2026-10-22-urinary-before.csv": "e340fc508a3b31afaa703d61aaeb499f11e96122858af8bf958428414f817fc2"
+    }
+  },
+  "push": false,
+  "deploy": false,
+  "platformSync": false
+}

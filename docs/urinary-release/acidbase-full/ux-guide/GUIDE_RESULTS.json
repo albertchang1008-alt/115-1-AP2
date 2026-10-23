@@ -1,0 +1,852 @@
+{
+  "results": [
+    {
+      "name": "N01-demo",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N01-demo.png",
+      "description": "N01 自動示範：上方說明點標籤、點功能格，標籤飛向功能格；學生尚未被要求答題。",
+      "guide": "示範：② 點功能格，標籤放進去",
+      "targets": [
+        {
+          "text": "接收或釋放 H⁺點此放入",
+          "id": "slot-buffer"
+        },
+        {
+          "text": "化學緩衝",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N01-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N01-step1.png",
+      "description": "N01 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "換你了！① 點一張標籤",
+      "targets": [
+        {
+          "text": "化學緩衝",
+          "id": ""
+        },
+        {
+          "text": "肺",
+          "id": ""
+        },
+        {
+          "text": "腎臟",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N01-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N01-step2.png",
+      "description": "N01 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "不能（仍在體內）",
+          "id": ""
+        },
+        {
+          "text": "能（已離體）",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N02-step1.png",
+      "description": "N02 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點分子格中的一個選項",
+      "targets": [
+        {
+          "text": "HCO₃⁻",
+          "id": ""
+        },
+        {
+          "text": "H₂CO₃",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-repair",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N02-repair.png",
+      "description": "N02 圖上配錯後：分子格重新亮起，題目保持隱藏，可直接改正後繼續。",
+      "guide": "① 點分子格中的一個選項",
+      "targets": [
+        {
+          "text": "HCO₃⁻",
+          "id": ""
+        },
+        {
+          "text": "H₂CO₃",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N02-step2.png",
+      "description": "N02 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "上升",
+          "id": ""
+        },
+        {
+          "text": "下降",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N03-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N03-step1.png",
+      "description": "N03 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點圖上的「緩衝物承接H⁺」",
+      "targets": [
+        {
+          "text": "緩衝物承接H⁺",
+          "id": "accept-h"
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N03-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N03-step2.png",
+      "description": "N03 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "否",
+          "id": ""
+        },
+        {
+          "text": "是",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N04-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N04-step1.png",
+      "description": "N04 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點圖上的「有效CO₂排出增加」",
+      "targets": [
+        {
+          "text": "有效CO₂排出增加",
+          "id": "effective"
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N04-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N04-step2.png",
+      "description": "N04 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "減酸、pH朝上升方向",
+          "id": ""
+        },
+        {
+          "text": "酸增加、pH朝下降方向",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N05-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N05-step1.png",
+      "description": "N05 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點亮起的 H⁺ 箭頭本體，翻轉方向",
+      "targets": [
+        {
+          "text": "血液 ← H⁺",
+          "id": "flip-h"
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N05-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N05-step2.png",
+      "description": "N05 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "兩者都進管液",
+          "id": ""
+        },
+        {
+          "text": "H⁺進管液、HCO₃⁻回血",
+          "id": ""
+        },
+        {
+          "text": "兩者都回血",
+          "id": ""
+        },
+        {
+          "text": "H⁺回血、HCO₃⁻進管液",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N06-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N06-step1.png",
+      "description": "N06 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 先點圖上的 H⁺",
+      "targets": [
+        {
+          "text": "H⁺",
+          "id": "pick-h"
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N06-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-N06-step2.png",
+      "description": "N06 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "同方向排酸留鹼",
+          "id": ""
+        },
+        {
+          "text": "互相抵銷",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step1",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-trace-step1.png",
+      "description": "結尾第1格：只亮緩衝判斷，後兩格暫時不能作答；完整圖與右下角小圖都遮住。",
+      "guide": "① 先選緩衝接住H⁺之後的狀態",
+      "targets": [
+        {
+          "text": "仍在體內，減少pH波動",
+          "id": ""
+        },
+        {
+          "text": "酸已全部離體",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step2",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-trace-step2.png",
+      "description": "結尾第2格：緩衝選定後，只亮肺端排出物。",
+      "guide": "② 再選肺端排出物",
+      "targets": [
+        {
+          "text": "CO₂",
+          "id": ""
+        },
+        {
+          "text": "直接呼出HCO₃⁻",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step3",
+      "width": 1280,
+      "height": 800,
+      "file": "shots/1280x800-trace-step3.png",
+      "description": "結尾第3格：前兩格選定後，只亮腎端去向。",
+      "guide": "③ 最後選腎端兩個去向",
+      "targets": [
+        {
+          "text": "H⁺向尿端、HCO₃⁻回血",
+          "id": ""
+        },
+        {
+          "text": "H⁺回血、HCO₃⁻向尿端",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N01-demo",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N01-demo.png",
+      "description": "N01 自動示範：上方說明點標籤、點功能格，標籤飛向功能格；學生尚未被要求答題。",
+      "guide": "示範：② 點功能格，標籤放進去",
+      "targets": [
+        {
+          "text": "接收或釋放 H⁺點此放入",
+          "id": "slot-buffer"
+        },
+        {
+          "text": "化學緩衝",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N01-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N01-step1.png",
+      "description": "N01 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "換你了！① 點一張標籤",
+      "targets": [
+        {
+          "text": "化學緩衝",
+          "id": ""
+        },
+        {
+          "text": "肺",
+          "id": ""
+        },
+        {
+          "text": "腎臟",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N01-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N01-step2.png",
+      "description": "N01 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "不能（仍在體內）",
+          "id": ""
+        },
+        {
+          "text": "能（已離體）",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N02-step1.png",
+      "description": "N02 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點分子格中的一個選項",
+      "targets": [
+        {
+          "text": "HCO₃⁻",
+          "id": ""
+        },
+        {
+          "text": "H₂CO₃",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-repair",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N02-repair.png",
+      "description": "N02 圖上配錯後：分子格重新亮起，題目保持隱藏，可直接改正後繼續。",
+      "guide": "① 點分子格中的一個選項",
+      "targets": [
+        {
+          "text": "HCO₃⁻",
+          "id": ""
+        },
+        {
+          "text": "H₂CO₃",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N02-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N02-step2.png",
+      "description": "N02 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "上升",
+          "id": ""
+        },
+        {
+          "text": "下降",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N03-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N03-step1.png",
+      "description": "N03 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點圖上的「緩衝物承接H⁺」",
+      "targets": [
+        {
+          "text": "緩衝物承接H⁺",
+          "id": "accept-h"
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N03-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N03-step2.png",
+      "description": "N03 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "否",
+          "id": ""
+        },
+        {
+          "text": "是",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N04-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N04-step1.png",
+      "description": "N04 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點圖上的「有效CO₂排出增加」",
+      "targets": [
+        {
+          "text": "有效CO₂排出增加",
+          "id": "effective"
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N04-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N04-step2.png",
+      "description": "N04 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "減酸、pH朝上升方向",
+          "id": ""
+        },
+        {
+          "text": "酸增加、pH朝下降方向",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N05-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N05-step1.png",
+      "description": "N05 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 點亮起的 H⁺ 箭頭本體，翻轉方向",
+      "targets": [
+        {
+          "text": "血液 ← H⁺",
+          "id": "flip-h"
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N05-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N05-step2.png",
+      "description": "N05 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "兩者都進管液",
+          "id": ""
+        },
+        {
+          "text": "H⁺進管液、HCO₃⁻回血",
+          "id": ""
+        },
+        {
+          "text": "兩者都回血",
+          "id": ""
+        },
+        {
+          "text": "H⁺回血、HCO₃⁻進管液",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N06-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N06-step1.png",
+      "description": "N06 第1步：只顯示圖上操作，上方命令指示與亮框指出現在要點哪裡，右側答題尚未出現。",
+      "guide": "① 先點圖上的 H⁺",
+      "targets": [
+        {
+          "text": "H⁺",
+          "id": "pick-h"
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "N06-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-N06-step2.png",
+      "description": "N06 第2步：完成圖上操作後才出現原題與原選項，圖面暫時淡化。",
+      "guide": "② 第 2 步：點一個答案",
+      "targets": [
+        {
+          "text": "同方向排酸留鹼",
+          "id": ""
+        },
+        {
+          "text": "互相抵銷",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step1",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-trace-step1.png",
+      "description": "結尾第1格：只亮緩衝判斷，後兩格暫時不能作答；完整圖與右下角小圖都遮住。",
+      "guide": "① 先選緩衝接住H⁺之後的狀態",
+      "targets": [
+        {
+          "text": "仍在體內，減少pH波動",
+          "id": ""
+        },
+        {
+          "text": "酸已全部離體",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step2",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-trace-step2.png",
+      "description": "結尾第2格：緩衝選定後，只亮肺端排出物。",
+      "guide": "② 再選肺端排出物",
+      "targets": [
+        {
+          "text": "CO₂",
+          "id": ""
+        },
+        {
+          "text": "直接呼出HCO₃⁻",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "name": "trace-step3",
+      "width": 390,
+      "height": 844,
+      "file": "shots/390x844-trace-step3.png",
+      "description": "結尾第3格：前兩格選定後，只亮腎端去向。",
+      "guide": "③ 最後選腎端兩個去向",
+      "targets": [
+        {
+          "text": "H⁺向尿端、HCO₃⁻回血",
+          "id": ""
+        },
+        {
+          "text": "H⁺回血、HCO₃⁻向尿端",
+          "id": ""
+        }
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "outside": [],
+      "clipping": [],
+      "small": [],
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "summary": {
+    "cases": 34,
+    "pass": 34,
+    "fail": 0,
+    "skipped": 0
+  }
+}

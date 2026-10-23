@@ -1,0 +1,78 @@
+{
+  "base": "460ca11600b68108415d88e7468404d4271fa121",
+  "root_tracked_files_checked": 1830,
+  "root_changed": [],
+  "card_changed": [],
+  "copied_input_changed": [],
+  "protected": {
+    "shared/materials.ts": {
+      "unchanged": true,
+      "sha256": "75354b3bc22863348531020f6a815059718867908a1f88f1d41ada5810f2669c"
+    },
+    "materials-src/figures/manifest.json": {
+      "unchanged": true,
+      "sha256": "233e4242bd47a8d40c597e8c849ec51d0609ee8c549f468fe33b87c2a734b7d2"
+    },
+    "materials-src/kit/presentation.mjs": {
+      "unchanged": true,
+      "sha256": "df0a62bc8654afcb4723f8882ac7379c8268abb9138d8e57bda6ae2bd7e6bc07"
+    },
+    "shared/materialKit.ts": {
+      "unchanged": true,
+      "sha256": "d0527d13ff829251206131276bc8a1dee1dc0cb1f03f389dc445168b32249e94"
+    },
+    "html/資訊圖表題庫_上傳用.xlsx": {
+      "unchanged": true,
+      "sha256": "04498f115cb3d512825ec01606282c633e308ff19b906297769df40861849215"
+    }
+  },
+  "new_public_materials": [],
+  "source_counts": {
+    "kidney-anatomy": {
+      "nodes": 6,
+      "foundation": 6,
+      "cases": 5
+    },
+    "nephron-circulation": {
+      "nodes": 6,
+      "foundation": 6,
+      "cases": 5
+    },
+    "filtration-clearance": {
+      "nodes": 6,
+      "foundation": 6,
+      "cases": 5
+    },
+    "tubular-handling": {
+      "nodes": 6,
+      "foundation": 6,
+      "cases": 5
+    },
+    "urine-concentration": {
+      "nodes": 6,
+      "foundation": 6,
+      "cases": 5
+    },
+    "urinary-route-micturition": {
+      "nodes": 6,
+      "foundation": 5,
+      "cases": 4
+    }
+  },
+  "source_answer_positions": {
+    "0": 64,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "predictions_answer_positions": {
+    "0": 6,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "source_only_inputs": [
+    "CODEX_TASK_urinary-content-stage1_2026-10-16.md"
+  ],
+  "copy_note": "交辦原檔只讀，其他指定規格原樣複製；交辦不納入commit。"
+}

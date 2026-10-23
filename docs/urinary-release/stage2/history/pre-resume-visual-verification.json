@@ -1,0 +1,15 @@
+{
+  "viewports": [],
+  "cases": [],
+  "errors": [
+    {
+      "stage": "locator.evaluate",
+      "message": "locator.evaluate: TypeError: svg.getBoundingClientRect is not a function",
+      "log": "visual-verify.log"
+    }
+  ],
+  "crops": [],
+  "ok": false,
+  "status": "instrumentation_exception_before_first_case",
+  "note": "驗證腳本finally原先在未捕獲例外時寫入ok=true；此處依exit code 1及原始log修正證據狀態，不修改腳本或重跑。"
+}

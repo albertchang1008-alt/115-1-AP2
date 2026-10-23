@@ -1,0 +1,11 @@
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;background:#edf3f6;color:#163044}header{padding:12px;background:#173e4b;color:white}h1{font-size:22px;margin:0}button{font:inherit;cursor:pointer;padding:8px 12px;border:1px solid #a9c4ce;border-radius:7px;background:white;color:#173e4b}button:disabled{opacity:.55;cursor:default}nav{display:flex;gap:6px;flex-wrap:wrap}main{padding:10px;max-width:1280px;margin:auto}[hidden]{display:none!important}.lab-frame{border:0;width:100%;height:calc(100dvh - 130px)}article,.predict,.quiz-rule,.mm-branch{padding:16px;border:1px solid #d5e3e8;border-radius:9px;background:white;margin:10px 0}.node-figure svg{width:100%;display:block}.options,.chip-bank{display:flex;flex-direction:column;gap:8px}.look-task{padding:12px;background:#f2fafb}.sequence-list li{margin:8px 0}.sequence-list button{padding:2px 8px;margin-left:4px}.feedback{padding:10px;background:#f5f8fa}.mm-slot{min-height:48px;width:100%;text-align:left}.mm-slot.wrong{border:2px solid #bd2648}.mm-chip[aria-pressed=true]{outline:3px solid #237b88}dialog{max-width:480px;border:1px solid #a9c4ce;border-radius:12px;padding:24px}dialog::backdrop{background:#173e4b88}button[aria-pressed=true]{background:#eaf7fa}
+
+/* Movement arrows are independent of concentration/change badges. */
+.flow-route{pointer-events:none}.flow-route-path{animation:apply-flow-travel .9s linear infinite}
+@keyframes apply-flow-travel{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+.flow-once .flow-route-path{animation:none}.flow-once .flow-route-path.flow-active{animation:apply-flow-travel .65s linear 1}
+@media(prefers-reduced-motion:reduce){.flow-route-path{animation:none!important;stroke-dasharray:none}}
+
+/* Assessment choices must wrap inside the question at every viewport/font scale. */
+.options{width:100%;min-width:0;max-width:100%}
+.options>[data-answer]{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;max-width:100%;min-height:48px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-align:center;font-size:calc(16px * var(--font-scale,1))}

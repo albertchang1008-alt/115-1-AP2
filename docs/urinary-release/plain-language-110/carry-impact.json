@@ -1,0 +1,407 @@
+{
+  "pass": true,
+  "scope": "In-memory pure functions only; no real students, no actual approval, no server or Sheet writes",
+  "native": {
+    "changedCorrectText": 88,
+    "kept": 22,
+    "removedQuestions": 0,
+    "newBankVersions": 10
+  },
+  "proposedApprovedFixture": {
+    "retainedWrongEntries": 110,
+    "drop": 0,
+    "rejectsDraftApproval": true,
+    "rejectsChangedContentHash": true,
+    "rejectsChangedAnswerPosition": true
+  },
+  "results": [
+    {
+      "unitId": "腎臟位置構造與功能",
+      "oldVersion": "13c6d847b48a9b2d67ce",
+      "newVersion": "6c9fbec4f2300686f6ce",
+      "nativeCarry": {
+        "drop": [
+          "kidney-anatomy-case-q03",
+          "kidney-anatomy-case-q04",
+          "kidney-anatomy-case-q05",
+          "kidney-anatomy-foundation-q01",
+          "kidney-anatomy-foundation-q02",
+          "kidney-anatomy-foundation-q05",
+          "kidney-anatomy-foundation-q06"
+        ],
+        "kept": 4,
+        "changed": 7,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "kidney-anatomy-foundation-q03",
+        "kidney-anatomy-foundation-q04",
+        "kidney-anatomy-case-q01",
+        "kidney-anatomy-case-q02"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "kidney-anatomy-foundation-q01",
+        "kidney-anatomy-foundation-q02",
+        "kidney-anatomy-foundation-q03",
+        "kidney-anatomy-foundation-q04",
+        "kidney-anatomy-foundation-q05",
+        "kidney-anatomy-foundation-q06",
+        "kidney-anatomy-case-q01",
+        "kidney-anatomy-case-q02",
+        "kidney-anatomy-case-q03",
+        "kidney-anatomy-case-q04",
+        "kidney-anatomy-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "腎元腎血流與近腎絲球器",
+      "oldVersion": "0c39a0050e8d6f61f55a",
+      "newVersion": "362fa94eca4afa149075",
+      "nativeCarry": {
+        "drop": [
+          "nephron-circulation-case-q05",
+          "nephron-circulation-foundation-q02",
+          "nephron-circulation-foundation-q06"
+        ],
+        "kept": 8,
+        "changed": 3,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "nephron-circulation-foundation-q01",
+        "nephron-circulation-foundation-q03",
+        "nephron-circulation-foundation-q04",
+        "nephron-circulation-foundation-q05",
+        "nephron-circulation-case-q01",
+        "nephron-circulation-case-q02",
+        "nephron-circulation-case-q03",
+        "nephron-circulation-case-q04"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "nephron-circulation-foundation-q01",
+        "nephron-circulation-foundation-q02",
+        "nephron-circulation-foundation-q03",
+        "nephron-circulation-foundation-q04",
+        "nephron-circulation-foundation-q05",
+        "nephron-circulation-foundation-q06",
+        "nephron-circulation-case-q01",
+        "nephron-circulation-case-q02",
+        "nephron-circulation-case-q03",
+        "nephron-circulation-case-q04",
+        "nephron-circulation-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "腎絲球過濾與清除率",
+      "oldVersion": "20afe3bdd9b6f45f9543",
+      "newVersion": "8b0a821c0955fdeebabe",
+      "nativeCarry": {
+        "drop": [
+          "filtration-clearance-case-q01",
+          "filtration-clearance-case-q02",
+          "filtration-clearance-case-q03",
+          "filtration-clearance-case-q04",
+          "filtration-clearance-case-q05",
+          "filtration-clearance-foundation-q01",
+          "filtration-clearance-foundation-q03",
+          "filtration-clearance-foundation-q04",
+          "filtration-clearance-foundation-q05"
+        ],
+        "kept": 2,
+        "changed": 9,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "filtration-clearance-foundation-q02",
+        "filtration-clearance-foundation-q06"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "filtration-clearance-foundation-q01",
+        "filtration-clearance-foundation-q02",
+        "filtration-clearance-foundation-q03",
+        "filtration-clearance-foundation-q04",
+        "filtration-clearance-foundation-q05",
+        "filtration-clearance-foundation-q06",
+        "filtration-clearance-case-q01",
+        "filtration-clearance-case-q02",
+        "filtration-clearance-case-q03",
+        "filtration-clearance-case-q04",
+        "filtration-clearance-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "腎小管再吸收分泌與排泄",
+      "oldVersion": "e9c25c31c33a9c39a783",
+      "newVersion": "97cdcf2a3f1fc5089326",
+      "nativeCarry": {
+        "drop": [
+          "tubular-handling-case-q02",
+          "tubular-handling-case-q03",
+          "tubular-handling-case-q04",
+          "tubular-handling-case-q05",
+          "tubular-handling-foundation-q02",
+          "tubular-handling-foundation-q03",
+          "tubular-handling-foundation-q04",
+          "tubular-handling-foundation-q05",
+          "tubular-handling-foundation-q06"
+        ],
+        "kept": 2,
+        "changed": 9,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "tubular-handling-foundation-q01",
+        "tubular-handling-case-q01"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "tubular-handling-foundation-q01",
+        "tubular-handling-foundation-q02",
+        "tubular-handling-foundation-q03",
+        "tubular-handling-foundation-q04",
+        "tubular-handling-foundation-q05",
+        "tubular-handling-foundation-q06",
+        "tubular-handling-case-q01",
+        "tubular-handling-case-q02",
+        "tubular-handling-case-q03",
+        "tubular-handling-case-q04",
+        "tubular-handling-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "逆流機制與尿液濃縮",
+      "oldVersion": "3c431dbae26edfbfeff5",
+      "newVersion": "13cf5a949ad8e7e9f7f0",
+      "nativeCarry": {
+        "drop": [
+          "urine-concentration-case-q02",
+          "urine-concentration-case-q03",
+          "urine-concentration-case-q04",
+          "urine-concentration-case-q05",
+          "urine-concentration-foundation-q01",
+          "urine-concentration-foundation-q02",
+          "urine-concentration-foundation-q03",
+          "urine-concentration-foundation-q04",
+          "urine-concentration-foundation-q05",
+          "urine-concentration-foundation-q06"
+        ],
+        "kept": 1,
+        "changed": 10,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "urine-concentration-case-q01"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "urine-concentration-foundation-q01",
+        "urine-concentration-foundation-q02",
+        "urine-concentration-foundation-q03",
+        "urine-concentration-foundation-q04",
+        "urine-concentration-foundation-q05",
+        "urine-concentration-foundation-q06",
+        "urine-concentration-case-q01",
+        "urine-concentration-case-q02",
+        "urine-concentration-case-q03",
+        "urine-concentration-case-q04",
+        "urine-concentration-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "尿液通路與排尿控制",
+      "oldVersion": "e70e9a111607f464c0e6",
+      "newVersion": "7d244c22cb6bba34da18",
+      "nativeCarry": {
+        "drop": [
+          "urinary-route-micturition-case-q01",
+          "urinary-route-micturition-case-q02",
+          "urinary-route-micturition-case-q03",
+          "urinary-route-micturition-case-q05",
+          "urinary-route-micturition-foundation-q01",
+          "urinary-route-micturition-foundation-q02",
+          "urinary-route-micturition-foundation-q03",
+          "urinary-route-micturition-foundation-q04",
+          "urinary-route-micturition-foundation-q05",
+          "urinary-route-micturition-foundation-q06"
+        ],
+        "kept": 1,
+        "changed": 10,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "urinary-route-micturition-case-q04"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "urinary-route-micturition-foundation-q01",
+        "urinary-route-micturition-foundation-q02",
+        "urinary-route-micturition-foundation-q03",
+        "urinary-route-micturition-foundation-q04",
+        "urinary-route-micturition-foundation-q05",
+        "urinary-route-micturition-foundation-q06",
+        "urinary-route-micturition-case-q01",
+        "urinary-route-micturition-case-q02",
+        "urinary-route-micturition-case-q03",
+        "urinary-route-micturition-case-q04",
+        "urinary-route-micturition-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "體液分布與細胞內外液",
+      "oldVersion": "8dd363f54ed3bf290b53",
+      "newVersion": "c073a18a49221a83e81a",
+      "nativeCarry": {
+        "drop": [
+          "fluid-compartments-case-q01",
+          "fluid-compartments-case-q03",
+          "fluid-compartments-case-q04",
+          "fluid-compartments-case-q05",
+          "fluid-compartments-foundation-q01",
+          "fluid-compartments-foundation-q02",
+          "fluid-compartments-foundation-q04",
+          "fluid-compartments-foundation-q05",
+          "fluid-compartments-foundation-q06"
+        ],
+        "kept": 2,
+        "changed": 9,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "fluid-compartments-foundation-q03",
+        "fluid-compartments-case-q02"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "fluid-compartments-foundation-q01",
+        "fluid-compartments-foundation-q02",
+        "fluid-compartments-foundation-q03",
+        "fluid-compartments-foundation-q04",
+        "fluid-compartments-foundation-q05",
+        "fluid-compartments-foundation-q06",
+        "fluid-compartments-case-q01",
+        "fluid-compartments-case-q02",
+        "fluid-compartments-case-q03",
+        "fluid-compartments-case-q04",
+        "fluid-compartments-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "水分收支與鈉水調節",
+      "oldVersion": "01ef6a456dcc99ae1c60",
+      "newVersion": "dcc215c65c4e2209f129",
+      "nativeCarry": {
+        "drop": [
+          "water-sodium-regulation-case-q01",
+          "water-sodium-regulation-case-q02",
+          "water-sodium-regulation-case-q04",
+          "water-sodium-regulation-case-q05",
+          "water-sodium-regulation-foundation-q01",
+          "water-sodium-regulation-foundation-q02",
+          "water-sodium-regulation-foundation-q03",
+          "water-sodium-regulation-foundation-q05",
+          "water-sodium-regulation-foundation-q06"
+        ],
+        "kept": 2,
+        "changed": 9,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [
+        "water-sodium-regulation-foundation-q04",
+        "water-sodium-regulation-case-q03"
+      ],
+      "proposedFixtureVisibleWrongIds": [
+        "water-sodium-regulation-foundation-q01",
+        "water-sodium-regulation-foundation-q02",
+        "water-sodium-regulation-foundation-q03",
+        "water-sodium-regulation-foundation-q04",
+        "water-sodium-regulation-foundation-q05",
+        "water-sodium-regulation-foundation-q06",
+        "water-sodium-regulation-case-q01",
+        "water-sodium-regulation-case-q02",
+        "water-sodium-regulation-case-q03",
+        "water-sodium-regulation-case-q04",
+        "water-sodium-regulation-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "電解質滲透與離子平衡",
+      "oldVersion": "32106b89677ab7f417fb",
+      "newVersion": "21b14bdf07fe503d7060",
+      "nativeCarry": {
+        "drop": [
+          "electrolyte-balance-case-q01",
+          "electrolyte-balance-case-q02",
+          "electrolyte-balance-case-q03",
+          "electrolyte-balance-case-q04",
+          "electrolyte-balance-case-q05",
+          "electrolyte-balance-foundation-q01",
+          "electrolyte-balance-foundation-q02",
+          "electrolyte-balance-foundation-q03",
+          "electrolyte-balance-foundation-q04",
+          "electrolyte-balance-foundation-q05",
+          "electrolyte-balance-foundation-q06"
+        ],
+        "kept": 0,
+        "changed": 11,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [],
+      "proposedFixtureVisibleWrongIds": [
+        "electrolyte-balance-foundation-q01",
+        "electrolyte-balance-foundation-q02",
+        "electrolyte-balance-foundation-q03",
+        "electrolyte-balance-foundation-q04",
+        "electrolyte-balance-foundation-q05",
+        "electrolyte-balance-foundation-q06",
+        "electrolyte-balance-case-q01",
+        "electrolyte-balance-case-q02",
+        "electrolyte-balance-case-q03",
+        "electrolyte-balance-case-q04",
+        "electrolyte-balance-case-q05"
+      ],
+      "beforeCount": 11
+    },
+    {
+      "unitId": "酸鹼緩衝與肺腎調節",
+      "oldVersion": "b9ad7047fe2b7b1c111f",
+      "newVersion": "6daf9789133ac3a25dbd",
+      "nativeCarry": {
+        "drop": [
+          "acid-base-homeostasis-case-q01",
+          "acid-base-homeostasis-case-q02",
+          "acid-base-homeostasis-case-q03",
+          "acid-base-homeostasis-case-q04",
+          "acid-base-homeostasis-case-q05",
+          "acid-base-homeostasis-foundation-q01",
+          "acid-base-homeostasis-foundation-q02",
+          "acid-base-homeostasis-foundation-q03",
+          "acid-base-homeostasis-foundation-q04",
+          "acid-base-homeostasis-foundation-q05",
+          "acid-base-homeostasis-foundation-q06"
+        ],
+        "kept": 0,
+        "changed": 11,
+        "removed": 0
+      },
+      "nativeVisibleWrongIds": [],
+      "proposedFixtureVisibleWrongIds": [
+        "acid-base-homeostasis-foundation-q01",
+        "acid-base-homeostasis-foundation-q02",
+        "acid-base-homeostasis-foundation-q03",
+        "acid-base-homeostasis-foundation-q04",
+        "acid-base-homeostasis-foundation-q05",
+        "acid-base-homeostasis-foundation-q06",
+        "acid-base-homeostasis-case-q01",
+        "acid-base-homeostasis-case-q02",
+        "acid-base-homeostasis-case-q03",
+        "acid-base-homeostasis-case-q04",
+        "acid-base-homeostasis-case-q05"
+      ],
+      "beforeCount": 11
+    }
+  ]
+}

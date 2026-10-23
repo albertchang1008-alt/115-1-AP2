@@ -1,0 +1,328 @@
+{
+  "slug": "fluid-compartments",
+  "peerCommit": "4085d334b4056a60206d4b39518b3f21c5eef43f",
+  "method": "author renderer; real UI clicks; scripted traversal is automated verification, not independent novice certification",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜身體裡有多少水？\n💡提示\n依課本的標準例子，身體的總水量大約占體重多少？請把人形圖裡的水位拉到你的答案。\n第 1 關｜身體裡有多少水？\n60%\n20%\n40%",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "60%",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "20%",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "40%",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜細胞裡面和外面\n💡提示\n總水量裡，細胞內、細胞外各占多少？請把 2/3、1/3 放進去。\n第 2 關｜細胞裡面和外面\n已完成 0／2\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n細胞內液\n選擇說明\n細胞外液\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞內液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞外液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching",
+        "choice"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜細胞外液再分兩格\n💡提示\n細胞外液分成血漿和組織間液。請把 20%、80% 放進去（這是占細胞外液的比例）。\n第 3 關｜細胞外液再分兩格\n已完成 0／2\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n血漿\n選擇說明\n組織間液\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "血漿",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "組織間液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜全部換成占體重的 %\n💡提示\n請在四個水箱填上占體重的比例：細胞內液、細胞外液、血漿、組織間液。\n第 4 關｜全部換成占體重的 %\n已完成 0／4\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n細胞內液\n選擇說明\n細胞外液\n選擇說明\n血漿\n選擇說明\n組織間液\n選擇說明\n檢查配對\n\n把 40%、20%、4%、16% 拖進對應的水箱。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞內液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "細胞外液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "血漿",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "組織間液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜血漿和組織間液差在哪？\n💡提示\n血漿和組織間液之間隔著微血管壁。哪一種東西過不去，所以主要留在血漿裡？\n第 5 關｜血漿和組織間液差在哪？\nNa⁺\n蛋白質\n水\n\n點選後，只呈現蛋白質試著穿過微血管壁、被擋住的畫面。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "Na⁺",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "蛋白質",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "水",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜每個人都一樣嗎？\n💡提示\n課本說，含水比例會隨年齡、性別不同。請把 55%、65% 分別放到女性、男性。\n第 6 關｜每個人都一樣嗎？\n已完成 0／2\n操作說明\n\n先點選一個角色，決定你要幫誰配對。\n\n略過引導\n女性\n選擇說明\n男性\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "女性",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "男性",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching",
+        "choice"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI"
+}

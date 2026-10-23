@@ -1,0 +1,53 @@
+{
+  "baseline": "a5773cc",
+  "branch": "codex/acidbase-full",
+  "pass": true,
+  "skipped": 0,
+  "content": {
+    "pass": true,
+    "displayFields": 210,
+    "quoteOccurrences": 786,
+    "reviewedCardCount": 7,
+    "errors": []
+  },
+  "fullLayout": {
+    "cases": 464,
+    "pass": 464,
+    "fail": 0,
+    "skipped": 0
+  },
+  "frozenLabLayout": {
+    "cases": 24,
+    "pass": 24,
+    "fail": 0,
+    "skipped": 0
+  },
+  "tests": {
+    "applyAndFull": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "npmCheckFrontend": {
+      "tests": 162,
+      "pass": 162,
+      "fail": 0,
+      "skipped": 0
+    },
+    "npmCheckBackend": {
+      "tests": 61,
+      "pass": 61,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "compatibility": {
+    "protectedAssetsUnchanged": 32,
+    "profileDispatchEntriesChanged": 3,
+    "otherMaterialsUnchanged": 9,
+    "byteIdenticalLegacyOutputs": 18,
+    "canonicalRelayMatchesRoot": true,
+    "approvedDesignMatchesRoot": true
+  }
+}

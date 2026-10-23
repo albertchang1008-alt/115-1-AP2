@@ -1,0 +1,3220 @@
+{
+  "schemaVersion": 2,
+  "slug": "fluid-compartments",
+  "version": "v1",
+  "title": {
+    "text": "體液分布與細胞內外液",
+    "sources": [
+      {
+        "uid": "body-fluid-compartments",
+        "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+      },
+      {
+        "uid": "body-fluid-compartments",
+        "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+      },
+      {
+        "uid": "body-fluid-compartments",
+        "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+      },
+      {
+        "uid": "body-fluid-compartments",
+        "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+      },
+      {
+        "uid": "body-fluid-compartments",
+        "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+      }
+    ]
+  },
+  "lab": {
+    "header": {
+      "text": "情境實驗室・體液分布與細胞內外液",
+      "sources": [
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+        }
+      ]
+    },
+    "initialState": "state-1",
+    "figure": {
+      "src": "../figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-01.png",
+      "width": 1254,
+      "height": 1254,
+      "anchorView": "node-05"
+    },
+    "referenceHeading": {
+      "text": "課本參照",
+      "sources": [
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+        },
+        {
+          "uid": "body-fluid-compartments",
+          "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+        }
+      ]
+    },
+    "compactTerms": {},
+    "glossary": {
+      "total": {
+        "name": {
+          "text": "標準示例總水量",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "標準示例的總水量約佔體重60%。細胞內液佔總水三分之二，細胞外液佔三分之一。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      },
+      "split": {
+        "name": {
+          "text": "細胞內液與外液",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "按標準示例，細胞內液佔體重40%，細胞外液佔20%。這兩個比例的分母都是體重。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      },
+      "plasma": {
+        "name": {
+          "text": "血漿比例",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "血漿佔細胞外液20%，不是體重20%。按標準示例換算，血漿佔體重4%。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      },
+      "interstitial": {
+        "name": {
+          "text": "組織間液比例",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "組織間液佔細胞外液80%。按標準示例換算，組織間液佔體重16%。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      },
+      "female": {
+        "name": {
+          "text": "課本女性總水率",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "課本女性總水比例約佔體重55%。實際比例隨年齡和性別改變，不能直接套用標準示例。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      },
+      "male": {
+        "name": {
+          "text": "課本男性總水率",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "text": {
+          "text": "課本男性總水比例約佔體重65%。實際總水比例也會隨年齡及性別而異。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        }
+      }
+    },
+    "states": [
+      {
+        "id": "state-1",
+        "name": {
+          "text": "標準分配",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "先辨體重、總水與細胞外液三種分母。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "total",
+            "kind": "focus",
+            "name": {
+              "text": "標準示例總水量",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "total",
+                "term": "total",
+                "label": {
+                  "text": "標準示例總水量",
+                  "sources": [
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "標準示例總水量",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 60,
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "%體重",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "total",
+              "term": "total",
+              "kind": "focus",
+              "label": {
+                "text": "標準示例總水量",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "總水量",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "split",
+              "term": "split",
+              "kind": "focus",
+              "label": {
+                "text": "細胞內液與外液",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "內外液",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "total"
+            ],
+            "to": [
+              "split"
+            ],
+            "description": {
+              "text": "先辨體重、總水與細胞外液三種分母。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-2",
+        "name": {
+          "text": "外液細分",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "血漿與組織間液換成體重比例分別為4%與16%。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "plasma",
+            "kind": "focus",
+            "name": {
+              "text": "血漿比例",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "plasma",
+                "term": "plasma",
+                "label": {
+                  "text": "血漿比例",
+                  "sources": [
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "id": "label-1-0",
+            "kind": "focus",
+            "short": {
+              "text": "血漿",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "full": {
+              "text": "血漿",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "side": "left",
+            "y": 0.35,
+            "anchorRef": "血漿",
+            "anchor": [
+              0.3508771929824561,
+              0.39872408293460926
+            ],
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          {
+            "id": "label-1-1",
+            "kind": "focus",
+            "short": {
+              "text": "組織間液",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "full": {
+              "text": "組織間液",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "side": "right",
+            "y": 0.6,
+            "anchorRef": "組織間液",
+            "anchor": [
+              0.8373205741626795,
+              0.6379585326953748
+            ],
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        ],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "標準示例總水量",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 60,
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "%體重",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "plasma",
+              "term": "plasma",
+              "kind": "focus",
+              "label": {
+                "text": "血漿比例",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "血漿",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "interstitial",
+              "term": "interstitial",
+              "kind": "focus",
+              "label": {
+                "text": "組織間液比例",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "組織間液",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "plasma"
+            ],
+            "to": [
+              "interstitial"
+            ],
+            "description": {
+              "text": "血漿與組織間液換成體重比例分別為4%與16%。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      },
+      {
+        "id": "state-3",
+        "name": {
+          "text": "個別差異",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "banner": {
+          "text": "課本女性約55%、男性約65%，不以箭頭表示性別差異。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "mode": "focus",
+        "relation": "parallel",
+        "changes": [
+          {
+            "id": "female",
+            "kind": "focus",
+            "name": {
+              "text": "課本女性總水率",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "detail": {
+              "text": "點選名詞，閱讀本項說明。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "id": "female",
+                "term": "female",
+                "label": {
+                  "text": "課本女性總水率",
+                  "sources": [
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                    },
+                    {
+                      "uid": "body-fluid-compartments",
+                      "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "labels": [],
+        "indicators": [],
+        "intake": [
+          {
+            "name": {
+              "text": "標準示例總水量",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "amount": {
+              "value": 60,
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "unit": {
+              "text": "%體重",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "status": {
+              "text": "約",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            }
+          }
+        ],
+        "flowStages": [
+          [
+            {
+              "id": "female",
+              "term": "female",
+              "kind": "focus",
+              "label": {
+                "text": "課本女性總水率",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "女性55%",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            },
+            {
+              "id": "male",
+              "term": "male",
+              "kind": "focus",
+              "label": {
+                "text": "課本男性總水率",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "compactLabel": {
+                "text": "男性65%",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "direction": null
+            }
+          ]
+        ],
+        "edges": [
+          {
+            "relation": "parallel",
+            "from": [
+              "female"
+            ],
+            "to": [
+              "male"
+            ],
+            "description": {
+              "text": "課本女性約55%、男性約65%，不以箭頭表示性別差異。",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                },
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                }
+              ]
+            },
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        ],
+        "teacherNote": false
+      }
+    ]
+  },
+  "learning": {
+    "questions": {
+      "foundation": [
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q01",
+            "stem": "課本用「全身的水約占60%」作標準例子，這60%是在和什麼相比？",
+            "options": [
+              "全身體重",
+              "細胞裡的水",
+              "血漿的量",
+              "細胞之間的水"
+            ],
+            "answer": 0,
+            "hint": "先想想：說身體六成是水，是拿水和整個身體的什麼相比？",
+            "explain": "因為這個60%說的是水占體重的比例，所以選「全身體重」。選「細胞裡的水」的同學，把全身體重換成細胞內的水，百分比的意思就變了。",
+            "nodeId": "fluid-compartments-node-01",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q02",
+            "stem": "先把全身的水當成一整份，細胞內液和細胞外液各分到多少？",
+            "options": [
+              "細胞內一半，細胞外一半",
+              "細胞內三分之二，細胞外三分之一",
+              "細胞內三分之一，細胞外三分之二",
+              "細胞內五分之四，細胞外五分之一"
+            ],
+            "answer": 1,
+            "hint": "先想想：全身的水分三份，細胞裡拿兩份還是一份？",
+            "explain": "因為全身總水量約三分之二在細胞裡、三分之一在外面，所以選「細胞內三分之二，細胞外三分之一」。選「細胞內三分之一，細胞外三分之二」的同學，把細胞內與細胞外的份量交換了。",
+            "nodeId": "fluid-compartments-node-02",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q03",
+            "stem": "血漿占20%、細胞之間的組織間液占80%，這兩個比例是在分哪一整份水？",
+            "options": [
+              "全身總水量",
+              "細胞內液",
+              "細胞外液",
+              "全身體重"
+            ],
+            "answer": 2,
+            "hint": "先想想：血管裡的血漿和細胞之間的水，都在細胞外嗎？",
+            "explain": "因為血漿和組織間液都是細胞外液的一部分，所以選「細胞外液」。選「全身體重」的同學，把「占細胞外液」誤當成「占體重」。",
+            "nodeId": "fluid-compartments-node-03",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q04",
+            "stem": "同一個標準例子說血漿占體重4%、組織間液占體重16%，把兩項合起來是什麼？",
+            "options": [
+              "先加成20%，再多加一次外液20%",
+              "合起來就是細胞內液",
+              "兩項都改說成占血漿的比例",
+              "合起來是占體重20%的細胞外液"
+            ],
+            "answer": 3,
+            "hint": "先想想：小份加起來已是整份，還要把整份再加一次嗎？",
+            "explain": "因為血漿和組織間液已經組成細胞外液，所以4%加16%就是外液20%，選「合起來是占體重20%的細胞外液」。選「先加成20%，再多加一次外液20%」的同學，又加一次外液20%，把同一份水重複算了。",
+            "nodeId": "fluid-compartments-node-04",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q05",
+            "stem": "血漿在血管內，組織間液在細胞之間，兩邊的重要差別是什麼？",
+            "options": [
+              "血漿的蛋白質比較多",
+              "組織間液沒有小離子",
+              "組織間液的蛋白質比較多",
+              "兩邊的蛋白質差不多"
+            ],
+            "answer": 0,
+            "hint": "先想想：蛋白質比較容易留在血管裡，還是跑到細胞之間？",
+            "explain": "因為微血管壁讓蛋白質較多留在血漿，所以選「血漿的蛋白質比較多」。選「組織間液的蛋白質比較多」的同學，把蛋白質較多的一邊寫成了組織間液。",
+            "nodeId": "fluid-compartments-node-05",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37",
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-foundation-q06",
+            "stem": "課本說女性全身水量約占體重55%、男性約65%，使用這些比例時要注意什麼？",
+            "options": [
+              "脂肪多少不會影響身體含水比例",
+              "男女的條件會影響身體含水比例",
+              "每個人都用標準60%就好",
+              "55%和65%是拿水和細胞外液相比"
+            ],
+            "answer": 1,
+            "hint": "先想想：課本已給男女不同數字，還能用同一個60%嗎？",
+            "explain": "因為課本的男女含水比例不同，所以要把性別與脂肪差異算進去，選「男女的條件會影響身體含水比例」。選「每個人都用標準60%就好」的同學，把標準60%當成每個人的固定比例。",
+            "nodeId": "fluid-compartments-node-06",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "value": {
+            "id": "fluid-compartments-case-q01",
+            "stem": "知道一個人的體重，並採用「全身水約占體重60%」的例子，想分出細胞內外各有多少水，第一步要算什麼？",
+            "options": [
+              "把整個體重當成細胞裡的水",
+              "把血漿比例當成全身水比例",
+              "先用體重算出全身共有多少水",
+              "直接把體重當成血漿的量"
+            ],
+            "answer": 2,
+            "hint": "先想想：要把水分成內外兩份，先要知道哪個總量？",
+            "explain": "因為要先知道全身有多少水，才有一整份水能分配，所以先用體重乘60%，選「先用體重算出全身共有多少水」。選「把整個體重當成細胞裡的水」的同學，把整個體重都當成細胞內的水，少了先算總水量這一步。",
+            "nodeId": "fluid-compartments-node-01",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-case-q02",
+            "stem": "血漿雖然在血管裡，但以「在不在細胞裡」來分，它屬於哪一類？",
+            "options": [
+              "細胞內液",
+              "腎小管內液",
+              "紅血球裡的液體",
+              "細胞外液"
+            ],
+            "answer": 3,
+            "hint": "先想想：血管裡面，和細胞裡面，是同一個地方嗎？",
+            "explain": "因為血漿在血管內、卻在細胞外面，所以屬於細胞外液，選「細胞外液」。選「細胞內液」的同學，把「血管裡面」當成「細胞裡面」了。",
+            "nodeId": "fluid-compartments-node-02",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-case-q03",
+            "stem": "這個例子用全身水占體重60%、血漿占體重4%、組織間液占16%，另一份資料卻用不同數字，應怎麼整理？",
+            "options": [
+              "保留本例的比較基準和比例，另一例另外列",
+              "把4%和16%改說成占細胞外液的比例",
+              "把4%和16%改說成細胞內液的兩部分",
+              "把4%改說成占全身總水量的比例"
+            ],
+            "answer": 0,
+            "hint": "先想想：這些百分比原本都是拿哪一個整體來比較？",
+            "explain": "因為4%和16%都是本例占體重的比例，所以要和本例的60%一起使用，選「保留本例的比較基準和比例，另一例另外列」。選「把4%和16%改說成占細胞外液的比例」的同學，換了比較的整份水，數字就不再是同一個意思。",
+            "nodeId": "fluid-compartments-node-04",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-case-q04",
+            "stem": "兩位成年男女體重一樣，要估算身體有多少水，還要把什麼差異算進去？",
+            "options": [
+              "主要看年齡，男女差異可以省略",
+              "男女與脂肪比例的差異",
+              "男女都用60%，不再看其他條件",
+              "把女性的含水比例設得比男性高"
+            ],
+            "answer": 1,
+            "hint": "先想想：體重相同，就表示男女的含水比例也相同嗎？",
+            "explain": "因為含水比例會隨性別等條件改變，所以估算時要看男女與脂肪差異，選「男女與脂肪比例的差異」。選「主要看年齡，男女差異可以省略」的同學，雖想到年齡，卻把題目要比較的男女差異省略了。",
+            "nodeId": "fluid-compartments-node-06",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。"
+            }
+          ]
+        },
+        {
+          "value": {
+            "id": "fluid-compartments-case-q05",
+            "stem": "正常血漿和組織間液都有小離子，為什麼血漿通常有比較多蛋白質？",
+            "options": [
+              "微血管壁會主動把外面的蛋白質搬回血漿",
+              "微血管壁讓蛋白質自由通過，兩邊應一樣多",
+              "微血管壁不太讓蛋白質通過，較多留在血漿",
+              "微血管壁擋住小離子，卻讓蛋白質容易通過"
+            ],
+            "answer": 2,
+            "hint": "先想想：微血管壁比較容易擋住蛋白質，還是小離子？",
+            "explain": "因為微血管壁限制蛋白質通過，所以較多蛋白質保留在血漿，選「微血管壁不太讓蛋白質通過，較多留在血漿」。選「微血管壁擋住小離子，卻讓蛋白質容易通過」的同學，把蛋白質與小離子的通過情形交換了。",
+            "nodeId": "fluid-compartments-node-05",
+            "sources": [
+              "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37",
+              "electrolyte-osmolarity；physiology/CH09 p.32, physiology/CH09 p.31, physiology/CH09 p.33"
+            ]
+          },
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%"
+            },
+            {
+              "uid": "electrolyte-osmolarity",
+              "quote": "血漿與組織間液最大差別為蛋白質陰離子量，微血管壁不通透蛋白質使其留在血漿。"
+            }
+          ]
+        }
+      ],
+      "predict": {
+        "value": {
+          "question": "切換到「外液細分」，血漿20%的分母應選哪一個？",
+          "options": [
+            "細胞內液",
+            "血漿本身",
+            "細胞外液",
+            "體重"
+          ],
+          "answer": 2,
+          "feedback": "血漿與組織間液共同構成細胞外液，兩項分別佔外液20%與80%。",
+          "sources": [
+            "body-fluid-compartments；physiology/CH09 p.28, physiology/CH09 p.29, physiology/CH09 p.33, physiology/CH09 p.37"
+          ]
+        },
+        "sources": [
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "「血漿佔細胞外液 20%」不是佔體重 20%"
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "fluid-compartments-node-01",
+        "title": {
+          "text": "總水量與比例分母",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-01-data.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "fluid-compartments-node-02",
+        "title": {
+          "text": "細胞內液與細胞外液",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-02-data.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "sequence",
+          "instruction": {
+            "text": "依下列步驟與原句排列順序，再核對結果。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "text": "人體總水量為分配基準",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                }
+              ]
+            },
+            {
+              "text": "細胞內液佔總水量三分之二多數",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                }
+              ]
+            },
+            {
+              "text": "細胞外液佔總水量三分之一",
+              "sources": [
+                {
+                  "uid": "body-fluid-compartments",
+                  "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                }
+              ]
+            }
+          ],
+          "correctOrder": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "id": "fluid-compartments-node-03",
+        "title": {
+          "text": "血漿與組織間液",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-03-data.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「外液細分」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          "targetStateId": "state-2"
+        }
+      },
+      {
+        "id": "fluid-compartments-node-04",
+        "title": {
+          "text": "換算到體重比例",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-04-data.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "fluid-compartments-node-05",
+        "title": {
+          "text": "血漿與組織間液的差別",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-05.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "structure",
+          "instruction": {
+            "text": "對照圖中標示與下列原句，辨認構造及其分工。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "fluid-compartments-node-06",
+        "title": {
+          "text": "含水比例的個別差異",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "summary": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "concept": {
+          "text": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。\n依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "figure": {
+          "src": "../figures/fluid-compartments-node-06-data.svg",
+          "sources": [
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+            },
+            {
+              "uid": "body-fluid-compartments",
+              "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+            }
+          ]
+        },
+        "lookTask": {
+          "type": "state",
+          "instruction": {
+            "text": "切換到「個別差異」，對照原句與圖中標示。",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          "targetStateId": "state-3"
+        }
+      }
+    ],
+    "mindmap": {
+      "center": {
+        "text": "體液分布與細胞內外液",
+        "sources": [
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+          },
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+          },
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+          },
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+          },
+          {
+            "uid": "body-fluid-compartments",
+            "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+          }
+        ]
+      },
+      "branches": [
+        {
+          "title": {
+            "text": "概念與分工",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "標準示例的總水量約佔體重60%。細胞內液佔總水三分之二，細胞外液佔三分之一。",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "按標準示例，細胞內液佔體重40%，細胞外液佔20%。這兩個比例的分母都是體重。",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        },
+        {
+          "title": {
+            "text": "條件與整合",
+            "sources": [
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+              },
+              {
+                "uid": "body-fluid-compartments",
+                "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+              }
+            ]
+          },
+          "items": [
+            {
+              "text": {
+                "text": "課本女性總水比例約佔體重55%。實際比例隨年齡和性別改變，不能直接套用標準示例。",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "isBlank": false
+            },
+            {
+              "text": {
+                "text": "課本男性總水比例約佔體重65%。實際總水比例也會隨年齡及性別而異。",
+                "sources": [
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "體液分細胞內液與細胞外液；課本標準示例總水量約佔體重 60%，細胞內液佔總水量 2/3，細胞外液佔 1/3。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "依標準示例，細胞內液佔體重 40%，細胞外液佔 20%；細胞外液再分血漿 20% 與組織間液 80%，換成體重比例為 4% 與 16%。細胞外以 Na⁺、細胞內以 K⁺較多。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "實際總水比例隨年齡性別而異：課本女性約 55%、男性約 65%。50 kg 女性依 55% 與 2/3 計算，細胞內液約 18.33 L。"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "- 題目先辨比例分母是體重、總水量或細胞外液\n- 女性情境不可直接套標準體重 40% 而忽略採用假設"
+                  },
+                  {
+                    "uid": "body-fluid-compartments",
+                    "quote": "「血漿佔細胞外液 20%」不是佔體重 20%；通用的 5%/15% 分法與本課本 4%/16% 不同。"
+                  }
+                ]
+              },
+              "isBlank": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/electrolyte-balance.md",
+  "nodes": [
+    {
+      "figure": "electrolyte-dissociation",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "一個葡萄糖",
+            "一個 NaCl",
+            "一個 MgCl₂"
+          ],
+          "choices": [
+            "1 顆",
+            "2 顆",
+            "3 顆"
+          ],
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "osmosis-direction",
+      "steps": [
+        {
+          "type": "point",
+          "choices": [
+            "粒子多的一邊",
+            "粒子少的一邊"
+          ],
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "meq-valency",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "na-k-distribution",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "細胞外",
+            "細胞內"
+          ],
+          "choices": [
+            "Na⁺",
+            "K⁺"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "chloride-balance",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "magnesium-role",
+      "steps": [
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 0,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

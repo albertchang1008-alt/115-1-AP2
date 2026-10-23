@@ -44,15 +44,15 @@
 
 | 圖／狀態 | 1280 | 390 |
 |---|---|---|
-| overview-state-1 | [截圖](respiratory-screenshots/airway-v2/1280-overview-state-1.png) | [截圖](respiratory-screenshots/airway-v2/390-overview-state-1.png) |
-| overview-state-2 | [截圖](respiratory-screenshots/airway-v2/1280-overview-state-2.png) | [截圖](respiratory-screenshots/airway-v2/390-overview-state-2.png) |
-| overview-state-3 | [截圖](respiratory-screenshots/airway-v2/1280-overview-state-3.png) | [截圖](respiratory-screenshots/airway-v2/390-overview-state-3.png) |
-| node-01 | [截圖](respiratory-screenshots/airway-v2/1280-node-01.png) | [截圖](respiratory-screenshots/airway-v2/390-node-01.png) |
-| node-02 | [截圖](respiratory-screenshots/airway-v2/1280-node-02.png) | [截圖](respiratory-screenshots/airway-v2/390-node-02.png) |
-| node-03 | [截圖](respiratory-screenshots/airway-v2/1280-node-03.png) | [截圖](respiratory-screenshots/airway-v2/390-node-03.png) |
-| node-04 | [截圖](respiratory-screenshots/airway-v2/1280-node-04.png) | [截圖](respiratory-screenshots/airway-v2/390-node-04.png) |
-| node-05 | [截圖](respiratory-screenshots/airway-v2/1280-node-05.png) | [截圖](respiratory-screenshots/airway-v2/390-node-05.png) |
-| node-06 | [截圖](respiratory-screenshots/airway-v2/1280-node-06.png) | [截圖](respiratory-screenshots/airway-v2/390-node-06.png) |
+| overview-state-1 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-overview-state-1.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-overview-state-1.png) |
+| overview-state-2 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-overview-state-2.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-overview-state-2.png) |
+| overview-state-3 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-overview-state-3.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-overview-state-3.png) |
+| node-01 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-01.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-01.png) |
+| node-02 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-02.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-02.png) |
+| node-03 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-03.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-03.png) |
+| node-04 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-04.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-04.png) |
+| node-05 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-05.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-05.png) |
+| node-06 | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-06.png) | [截圖](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-06.png) |
 
 ## 待驗收
 
@@ -64,10 +64,10 @@ A-01～A-06 全部套用：杓狀軟骨 `(680,745)→(749,803)` 指藍色本體�
 
 授權 content：airway 預測選項改「會厭／聲帶／軟腭／甲狀軟骨」，answer 仍 0、題幹／feedback 保留；gas-exchange node-03 concept 與 points 各一處「入肺靜脈血」改「經肺動脈入肺的缺氧血」。還原這兩項後 SHA 與開工時完全一致。
 
-兩份 preview／shots 重跑通過（各20全頁截圖）；airway verify18狀態、節點稽核21／15、materials測試20／20通過。Airway HTML 1,124,868 bytes；最小手機13.28／桌機30.40px。更新 [node-02](respiratory-screenshots/airway-v2/390-node-02.png)、[node-03](respiratory-screenshots/airway-v2/390-node-03.png)、[node-04](respiratory-screenshots/airway-v2/390-node-04.png) 截圖，對應1280圖在同資料夾；node-06亦更新。範圍證據 [scope-integrity.json](respiratory-screenshots/airway-v2/scope-integrity.json) 另列同期外部作圖變更，未覆蓋那些檔案。
+兩份 preview／shots 重跑通過（各20全頁截圖）；airway verify18狀態、節點稽核21／15、materials測試20／20通過。Airway HTML 1,124,868 bytes；最小手機13.28／桌機30.40px。更新 [node-02](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-02.png)、[node-03](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-03.png)、[node-04](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-04.png) 截圖，對應1280圖在同資料夾；node-06亦更新。範圍證據 [scope-integrity.json](respiratory-screenshots/airway-v2/scope-integrity.json) 另列同期外部作圖變更，未覆蓋那些檔案。
 
 本次同批完成 lungs-pleura 標籤試做，詳 [RESPIRATORY_LABELS_V2_REPORT.md](RESPIRATORY_LABELS_V2_REPORT.md)。停在階段一，待Claude複看與教師看畫面；未build／Excel／登錄／commit／push／部署。[Codex]
 
 ## R-6 複修（2026-10-14）
 
-依 Claude 複驗，node-06 細支氣管錨點移至下葉細分支 SVG `(618,798)`（底圖原始像素 `(338,798)`）；引線直接連接，移除沿肺外緣垂直走的折線。標籤文字、位置與其他圖位保持不變。preview／shots、18狀態verify通過，HTML 1,124,832 bytes；最小390字級13.28px。更新 [1280](respiratory-screenshots/airway-v2/1280-node-06.png)／[390](respiratory-screenshots/airway-v2/390-node-06.png) 截圖。gas-exchange summary的R-7與其餘R項見 [呼吸標籤報告](RESPIRATORY_LABELS_V2_REPORT.md)。待Claude複驗，未build／登錄／Excel／commit。[Codex]
+依 Claude 複驗，node-06 細支氣管錨點移至下葉細分支 SVG `(618,798)`（底圖原始像素 `(338,798)`）；引線直接連接，移除沿肺外緣垂直走的折線。標籤文字、位置與其他圖位保持不變。preview／shots、18狀態verify通過，HTML 1,124,832 bytes；最小390字級13.28px。更新 [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/1280-node-06.png)／[390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-v2/390-node-06.png) 截圖。gas-exchange summary的R-7與其餘R項見 [呼吸標籤報告](RESPIRATORY_LABELS_V2_REPORT.md)。待Claude複驗，未build／登錄／Excel／commit。[Codex]

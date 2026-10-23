@@ -1,0 +1,140 @@
+{
+  "profile": "apply-script-v1",
+  "approvedScript": "../../docs/urinary-release/scripts/water-sodium-regulation.md",
+  "nodes": [
+    {
+      "figure": "water-balance",
+      "steps": [
+        {
+          "type": "multi",
+          "sourceOptions": "question",
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "water-balance",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "尿液",
+            "呼氣",
+            "蒸散與流汗",
+            "糞便"
+          ],
+          "choices": [
+            "腎",
+            "肺",
+            "皮膚",
+            "腸"
+          ],
+          "expected": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "thirst-adh",
+      "steps": [
+        {
+          "type": "multi",
+          "sourceOptions": "question",
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "jga",
+      "steps": [
+        {
+          "type": "explore",
+          "choices": [
+            "近腎絲球細胞"
+          ],
+          "reveals": [
+            "腎素"
+          ],
+          "blindHotspots": true
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "action",
+          "action": 1,
+          "useActionQuestion": true,
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "figure": "aldosterone-action",
+      "steps": [
+        {
+          "type": "matching",
+          "roles": [
+            "醛固酮",
+            "ADH"
+          ],
+          "choices": [
+            "讓腎多回收鈉，水跟著滲透回收",
+            "直接讓集尿管讓水通過"
+          ],
+          "expected": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "figure": "anp-action",
+      "steps": [
+        {
+          "type": "explore",
+          "action": 0,
+          "useActionQuestion": true,
+          "choices": [
+            "打開 ANP 開關，觀察腎臟的變化。"
+          ]
+        },
+        {
+          "type": "choice",
+          "sourceOptions": "question",
+          "answer": 0
+        },
+        {
+          "type": "matching",
+          "roles": [
+            "醛固酮",
+            "ADH"
+          ],
+          "choices": [
+            "鈉含量與體液容積",
+            "水與體液濃度"
+          ],
+          "expected": [
+            0,
+            1
+          ],
+          "action": 1,
+          "useActionQuestion": true,
+          "rowFeedback": [
+            "課本區分：醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。",
+            "課本區分：醛固酮調節鈉含量與體液容積，ADH 調節水與體液濃度。"
+          ]
+        }
+      ]
+    }
+  ]
+}

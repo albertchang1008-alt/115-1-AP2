@@ -8,7 +8,7 @@
 - Excel「題庫」新增 **229–239 列：細菌；240–250 列：免疫**，各 6 先備＋5 情境，共 22 題，合計 249 題。題庫既有 1–228 列、說明既有 1–34 列原始 XML 逐列相同，原有值、公式、樣式、欄寬、凍結窗格與驗證設定保留；其他 ZIP parts 逐位元相同。
 - 「說明」只追加 A35:B37：兩份來源與新的 249 題合計，原有 B23 的歷史合計 227 題保留。未指定單元代碼，沿用既有「單元＝次單元＝教材原標題」慣例；課程代碼留空供教師匯入時指定。Excel 選項僅循環換位，原文與正解不變；答案代碼與 Zuvio 序號同步映射，定稿 content.json 不改。解析及①～④欄使用核可 hint／node summary／explain，未新增醫學敘述或頁碼。
 - 儲存後重新匯入 Artifact Tool，兩張工作表原有值逐格相同、新增 22 列逐格一致、無公式錯誤，新增題目及引導欄與來源合計已渲染檢視。[逐列保存與22題對照證據](question-bank-verification.json)。
-- **`npm run check` exit 0：前端 134／134、Functions 26／26，全數通過、0 fail、0 skipped；版本檢查與前後端 build 成功（後端 34 個入口可載入，未連雲端）。** [完整 check 紀錄](full-check.txt)。
+- **`npm run check` exit 0：前端 134／134、Functions 26／26，全數通過、0 fail、0 skipped；版本檢查與前後端 build 成功（後端 34 個入口可載入，未連雲端）。** [完整 check 紀錄](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/micro-immuno-review/full-check.txt)。
 - 教師核可的唯一 kit 改動仍只有 hues 22／216；credits 僅核可形狀與 AI 署名。`protected-files.json` 是正式建置前的 preview 保護證據，Excel／catalog／README 已依本次授權更新，以本節及 question-bank-verification.json 為最新狀態。
 
 ### 星期一（2026-10-12）整合與上線建議——待教師決定，尚未執行

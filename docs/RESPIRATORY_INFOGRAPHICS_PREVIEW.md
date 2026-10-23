@@ -24,17 +24,17 @@
 
 ## 教師看畫面
 
-[七份預覽總覽](respiratory-preview.html)；每列都有獨立本機教材與手機／桌機圖。`materials-src/<slug>/shots/`另有每份完整頁面圖（本機ignored），`docs/respiratory-screenshots/`有清楚的局部圖。
+[七份預覽總覽](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-preview.html)；每列都有獨立本機教材與手機／桌機圖。`materials-src/<slug>/shots/`另有每份完整頁面圖（本機ignored），`docs/respiratory-screenshots/`有清楚的局部圖。
 
 | 教材 | slug | 手機實驗室 | 桌機節點 | 節點／題數 |
 |---|---|---|---|---|
-| 呼吸道的構造 | `airway-structure` | [390](respiratory-screenshots/airway-structure-390-lab-state-1.png) | [1280](respiratory-screenshots/airway-structure-1280-node-1.png) | 6／11 |
-| 肺與胸膜 | `lungs-pleura` | [390](respiratory-screenshots/lungs-pleura-390-lab-state-1.png) | [1280](respiratory-screenshots/lungs-pleura-1280-node-1.png) | 6／11 |
-| 肺通氣與呼吸力學 | `breathing-mechanics` | [390](respiratory-screenshots/breathing-mechanics-390-lab-state-1.png) | [1280](respiratory-screenshots/breathing-mechanics-1280-node-1.png) | 6／11 |
-| 肺容積與肺功能 | `lung-function` | [390](respiratory-screenshots/lung-function-390-lab-state-1.png) | [1280](respiratory-screenshots/lung-function-1280-node-1.png) | 6／11 |
-| 氣體交換 | `gas-exchange` | [390](respiratory-screenshots/gas-exchange-390-lab-state-1.png) | [1280](respiratory-screenshots/gas-exchange-1280-node-1.png) | 6／11 |
-| 氧與二氧化碳的運輸 | `o2-co2-transport` | [390](respiratory-screenshots/o2-co2-transport-390-lab-state-1.png) | [1280](respiratory-screenshots/o2-co2-transport-1280-node-1.png) | 6／11 |
-| 呼吸調節 | `respiratory-control` | [390](respiratory-screenshots/respiratory-control-390-lab-state-1.png) | [1280](respiratory-screenshots/respiratory-control-1280-node-1.png) | 6／11 |
+| 呼吸道的構造 | `airway-structure` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-structure-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/airway-structure-1280-node-1.png) | 6／11 |
+| 肺與胸膜 | `lungs-pleura` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/lungs-pleura-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/lungs-pleura-1280-node-1.png) | 6／11 |
+| 肺通氣與呼吸力學 | `breathing-mechanics` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/breathing-mechanics-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/breathing-mechanics-1280-node-1.png) | 6／11 |
+| 肺容積與肺功能 | `lung-function` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/lung-function-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/lung-function-1280-node-1.png) | 6／11 |
+| 氣體交換 | `gas-exchange` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/gas-exchange-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/gas-exchange-1280-node-1.png) | 6／11 |
+| 氧與二氧化碳的運輸 | `o2-co2-transport` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/o2-co2-transport-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/o2-co2-transport-1280-node-1.png) | 6／11 |
+| 呼吸調節 | `respiratory-control` | [390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/respiratory-control-390-lab-state-1.png) | [1280](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-screenshots/respiratory-control-1280-node-1.png) | 6／11 |
 
 ## 已核對與待教師裁定
 

@@ -1,0 +1,222 @@
+{
+  "slug": "urinary-route-micturition",
+  "reviewedCommit": "ffecea67",
+  "method": "Real UI click traversal plus image/source review. Automated setup uses compiled answers only to reach each node; not independent novice certification.",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜輸尿管怎麼送尿？\n💡提示\n尿從腎盂到膀胱，輸尿管靠什麼把尿往下送？\n蠕動\n只靠重力",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "蠕動",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "只靠重力",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice",
+        "choice"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜輸尿管的三個窄處\n💡提示\n輸尿管有三個比較窄的地方。請在圖上點出來。\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "multi"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜膀胱三角與逼尿肌\n💡提示\n膀胱三角由哪三個開口圍成？請在圖上點出來。\n\n點兩個輸尿管口，再點尿道內口。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        }
+      ],
+      "steps": [
+        "sequence",
+        "choice"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜男生和女生的尿道\n💡提示\n請把 3.8 cm 和 20 cm 分別放到女性尿道、男性尿道。\n女性尿道\n男性尿道\n已完成 0／2\n操作說明\n\n先點選一個項目，決定你要配對的內容。\n\n略過引導\n女性尿道\n選擇說明\n男性尿道\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "女性尿道",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "男性尿道",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching",
+        "sequence"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜什麼時候想尿尿？怎麼排出來？\n💡提示\n要排尿時，逼尿肌和內括約肌各會怎樣？\n膀胱尿量滑桿\n0mL\n\n拖動膀胱尿量滑桿。超過約 300 mL 時，畫面出現「想尿尿了」。\n\n下一步 →",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "text": "",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "下一步 →",
+          "role": null
+        }
+      ],
+      "steps": [
+        "slider",
+        "matching"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜正常的尿\n💡提示\n健康成人一天大約尿多少？尿裡大部分是什麼？\n約 5 L，水約 50%\n約 1–2 L，水約 95%",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "約 5 L，水約 50%",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "約 1–2 L，水約 95%",
+          "role": null
+        }
+      ],
+      "steps": [
+        "choice"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI"
+}

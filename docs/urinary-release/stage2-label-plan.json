@@ -1,0 +1,2741 @@
+[
+  {
+    "slug": "nephron-circulation",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "23:35 重畫：皮質腎元腎小體在皮質外層、短環；近髓質腎元腎小體靠皮髓交界、長環伴直血管；右上近腎絲球器放大框。可同時給節點 02 用。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "皮質腎元",
+        "sourceAnchor": [
+          240,
+          320
+        ]
+      },
+      {
+        "label": "短環",
+        "sourceAnchor": [
+          310,
+          660
+        ]
+      },
+      {
+        "label": "近髓質腎元",
+        "sourceAnchor": [
+          600,
+          440
+        ]
+      },
+      {
+        "label": "長環",
+        "sourceAnchor": [
+          600,
+          1140
+        ]
+      },
+      {
+        "label": "直血管",
+        "sourceAnchor": [
+          545,
+          1050
+        ]
+      },
+      {
+        "label": "緻密斑",
+        "sourceAnchor": [
+          1100,
+          210
+        ]
+      },
+      {
+        "label": "近腎絲球細胞",
+        "sourceAnchor": [
+          932,
+          130
+        ]
+      },
+      {
+        "label": "腎素",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "皮質腎元",
+        "短環"
+      ],
+      "state-2": [
+        "近髓質腎元",
+        "長環",
+        "直血管"
+      ],
+      "state-3": [
+        "緻密斑",
+        "近腎絲球細胞",
+        "腎素"
+      ]
+    },
+    "calloutTitle": "內分泌功能"
+  },
+  {
+    "slug": "nephron-circulation",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "腎小體、近曲、亨利氏環、遠曲、集尿管；入球／出球小動脈；管路與血路不相通。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎小體",
+        "sourceAnchor": [
+          445,
+          260
+        ]
+      },
+      {
+        "label": "腎小管",
+        "sourceAnchor": [
+          250,
+          570
+        ]
+      },
+      {
+        "label": "腎絲球",
+        "sourceAnchor": [
+          465,
+          250
+        ]
+      },
+      {
+        "label": "鮑氏囊",
+        "sourceAnchor": [
+          340,
+          295
+        ]
+      },
+      {
+        "label": "近曲小管",
+        "sourceAnchor": [
+          275,
+          470
+        ]
+      },
+      {
+        "label": "亨利氏環",
+        "sourceAnchor": [
+          600,
+          1260
+        ]
+      },
+      {
+        "label": "遠曲小管",
+        "sourceAnchor": [
+          755,
+          470
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          978,
+          980
+        ]
+      }
+    ],
+    "focus": [
+      "腎小體",
+      "腎小管"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "nephron-circulation",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "23:35 重畫：皮質腎元腎小體在皮質外層、短環；近髓質腎元腎小體靠皮髓交界、長環伴直血管；右上近腎絲球器放大框。可同時給節點 02 用。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "皮質",
+        "sourceAnchor": [
+          165,
+          220
+        ]
+      },
+      {
+        "label": "髓質",
+        "sourceAnchor": [
+          410,
+          850
+        ]
+      },
+      {
+        "label": "皮質腎元",
+        "sourceAnchor": [
+          240,
+          320
+        ]
+      },
+      {
+        "label": "近髓質腎元",
+        "sourceAnchor": [
+          600,
+          440
+        ]
+      },
+      {
+        "label": "短環",
+        "sourceAnchor": [
+          310,
+          660
+        ]
+      },
+      {
+        "label": "長環",
+        "sourceAnchor": [
+          600,
+          1140
+        ]
+      },
+      {
+        "label": "直血管",
+        "sourceAnchor": [
+          545,
+          1050
+        ]
+      }
+    ],
+    "focus": [
+      "皮質腎元",
+      "近髓質腎元"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "nephron-circulation",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近曲立方＋刷狀緣、薄段扁平、遠曲立方無刷狀緣，三格分明。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "近曲小管",
+        "sourceAnchor": [
+          540,
+          270
+        ]
+      },
+      {
+        "label": "刷狀緣",
+        "sourceAnchor": [
+          330,
+          200
+        ]
+      },
+      {
+        "label": "遠曲小管",
+        "sourceAnchor": [
+          545,
+          1130
+        ]
+      },
+      {
+        "label": "亨利氏環薄段",
+        "sourceAnchor": [
+          540,
+          710
+        ]
+      }
+    ],
+    "focus": [
+      "近曲小管",
+      "刷狀緣",
+      "亨利氏環薄段"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "nephron-circulation",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-04.png",
+    "review": {
+      "verdict": "pass",
+      "note": "腎動脈→葉間→弓狀（皮髓交界）→小葉間→入球→腎絲球→出球→管周微血管／直血管；靜脈伴行。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎動脈",
+        "sourceAnchor": [
+          140,
+          710
+        ]
+      },
+      {
+        "label": "葉間動脈",
+        "sourceAnchor": [
+          515,
+          780
+        ]
+      },
+      {
+        "label": "弓狀動脈",
+        "sourceAnchor": [
+          475,
+          440
+        ]
+      },
+      {
+        "label": "小葉間動脈",
+        "sourceAnchor": [
+          374,
+          210
+        ]
+      },
+      {
+        "label": "入球小動脈",
+        "sourceAnchor": [
+          450,
+          170
+        ]
+      },
+      {
+        "label": "腎絲球",
+        "sourceAnchor": [
+          450,
+          210
+        ]
+      },
+      {
+        "label": "出球小動脈",
+        "sourceAnchor": [
+          530,
+          270
+        ]
+      },
+      {
+        "label": "管周微血管",
+        "sourceAnchor": [
+          600,
+          300
+        ]
+      },
+      {
+        "label": "直血管",
+        "sourceAnchor": [
+          790,
+          920
+        ]
+      },
+      {
+        "label": "靜脈回流",
+        "sourceAnchor": [
+          210,
+          830
+        ]
+      }
+    ],
+    "focus": [
+      "入球小動脈",
+      "出球小動脈"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "nephron-circulation",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/nephron-circulation/incoming/IMG-nephron-circulation-05.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近腎絲球細胞（入球小動脈壁內的顆粒細胞）、緻密斑（遠曲小管高柱狀細胞）、Lacis 細胞位置正確。上格虛線框是放大框記號，可保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "入球小動脈",
+        "sourceAnchor": [
+          475,
+          600
+        ]
+      },
+      {
+        "label": "近腎絲球細胞",
+        "sourceAnchor": [
+          555,
+          790
+        ]
+      },
+      {
+        "label": "遠曲小管",
+        "sourceAnchor": [
+          1010,
+          750
+        ]
+      },
+      {
+        "label": "緻密斑",
+        "sourceAnchor": [
+          875,
+          1010
+        ]
+      },
+      {
+        "label": "Lacis細胞",
+        "sourceAnchor": [
+          357,
+          884
+        ]
+      },
+      {
+        "label": "腎素",
+        "sourceAnchor": [
+          520,
+          680
+        ]
+      }
+    ],
+    "focus": [
+      "近腎絲球細胞",
+      "緻密斑",
+      "Lacis細胞"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "filtration-clearance",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "入球（較粗）、出球（較細）、腎絲球、鮑氏囊腔、接近曲小管。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎絲球",
+        "sourceAnchor": [
+          535,
+          660
+        ]
+      },
+      {
+        "label": "鮑氏囊",
+        "sourceAnchor": [
+          940,
+          740
+        ]
+      },
+      {
+        "label": "濾液",
+        "sourceAnchor": [
+          755,
+          970
+        ]
+      },
+      {
+        "label": "菊糖",
+        "sourceAnchor": null
+      },
+      {
+        "label": "GFR",
+        "sourceAnchor": null
+      },
+      {
+        "label": "U尿濃度",
+        "sourceAnchor": null
+      },
+      {
+        "label": "V尿流量",
+        "sourceAnchor": null
+      },
+      {
+        "label": "P血漿濃度",
+        "sourceAnchor": null
+      },
+      {
+        "label": "mL/min",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "腎絲球",
+        "鮑氏囊",
+        "濾液"
+      ],
+      "state-2": [
+        "菊糖",
+        "GFR"
+      ],
+      "state-3": [
+        "U尿濃度",
+        "V尿流量",
+        "P血漿濃度",
+        "mL/min"
+      ]
+    }
+  },
+  {
+    "slug": "filtration-clearance",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "入球（較粗）、出球（較細）、腎絲球、鮑氏囊腔、接近曲小管。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎絲球",
+        "sourceAnchor": [
+          535,
+          660
+        ]
+      },
+      {
+        "label": "鮑氏囊",
+        "sourceAnchor": [
+          940,
+          740
+        ]
+      },
+      {
+        "label": "血液",
+        "sourceAnchor": [
+          240,
+          190
+        ]
+      },
+      {
+        "label": "濾液",
+        "sourceAnchor": [
+          755,
+          970
+        ]
+      }
+    ],
+    "focus": [
+      "腎絲球",
+      "鮑氏囊",
+      "濾液"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "filtration-clearance",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "有孔內皮、基底膜、足細胞與過濾裂隙，三層分明。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "微血管內皮",
+        "sourceAnchor": [
+          445,
+          500
+        ]
+      },
+      {
+        "label": "基底膜",
+        "sourceAnchor": [
+          575,
+          650
+        ]
+      },
+      {
+        "label": "足細胞",
+        "sourceAnchor": [
+          815,
+          440
+        ]
+      },
+      {
+        "label": "過濾裂隙",
+        "sourceAnchor": [
+          910,
+          780
+        ]
+      }
+    ],
+    "focus": [
+      "微血管內皮",
+      "基底膜",
+      "足細胞"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "filtration-clearance",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "白蛋白只在血漿側，小分子兩側都有。葡萄糖畫成五元環（實際為六元環），屬符號，可接受。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "血漿",
+        "sourceAnchor": [
+          365,
+          360
+        ]
+      },
+      {
+        "label": "濾液",
+        "sourceAnchor": [
+          1040,
+          600
+        ]
+      },
+      {
+        "label": "白蛋白",
+        "sourceAnchor": [
+          320,
+          570
+        ]
+      },
+      {
+        "label": "葡萄糖",
+        "sourceAnchor": [
+          1030,
+          990
+        ]
+      },
+      {
+        "label": "胺基酸",
+        "sourceAnchor": [
+          1000,
+          450
+        ]
+      }
+    ],
+    "focus": [
+      "血漿",
+      "濾液",
+      "白蛋白"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "filtration-clearance",
+    "slot": "node-06",
+    "source": "materials-src/figures/raster/filtration-clearance/incoming/IMG-filtration-clearance-04.png",
+    "review": {
+      "verdict": "pass",
+      "note": "菊糖只過濾；肌酸酐過濾＋少量分泌；PAH 過濾＋大量分泌，三格方向分開。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "菊糖",
+        "sourceAnchor": [
+          520,
+          255
+        ]
+      },
+      {
+        "label": "肌酸酐",
+        "sourceAnchor": [
+          530,
+          780
+        ]
+      },
+      {
+        "label": "PAH",
+        "sourceAnchor": [
+          540,
+          1260
+        ]
+      },
+      {
+        "label": "GFR",
+        "sourceAnchor": null
+      },
+      {
+        "label": "腎血漿流量",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "菊糖",
+      "肌酸酐",
+      "PAH"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "tubular-handling",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "腎元＋管周微血管＋集尿管出口；過濾／再吸收／分泌箭頭由程式疊加。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "Na⁺",
+        "sourceAnchor": [
+          520,
+          625
+        ]
+      },
+      {
+        "label": "水",
+        "sourceAnchor": [
+          510,
+          700
+        ]
+      },
+      {
+        "label": "再吸收",
+        "sourceAnchor": [
+          605,
+          710
+        ]
+      },
+      {
+        "label": "葡萄糖",
+        "sourceAnchor": [
+          530,
+          600
+        ]
+      },
+      {
+        "label": "分泌",
+        "sourceAnchor": [
+          850,
+          780
+        ]
+      },
+      {
+        "label": "K⁺",
+        "sourceAnchor": [
+          820,
+          755
+        ]
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "Na⁺",
+        "水"
+      ],
+      "state-2": [
+        "再吸收",
+        "葡萄糖"
+      ],
+      "state-3": [
+        "分泌",
+        "K⁺"
+      ]
+    }
+  },
+  {
+    "slug": "tubular-handling",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "腎元＋管周微血管＋集尿管出口；過濾／再吸收／分泌箭頭由程式疊加。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "過濾",
+        "sourceAnchor": [
+          450,
+          330
+        ]
+      },
+      {
+        "label": "再吸收",
+        "sourceAnchor": [
+          630,
+          720
+        ]
+      },
+      {
+        "label": "分泌",
+        "sourceAnchor": [
+          720,
+          800
+        ]
+      },
+      {
+        "label": "排泄",
+        "sourceAnchor": [
+          960,
+          1310
+        ]
+      },
+      {
+        "label": "血液",
+        "sourceAnchor": [
+          765,
+          830
+        ]
+      },
+      {
+        "label": "管液",
+        "sourceAnchor": [
+          570,
+          790
+        ]
+      }
+    ],
+    "focus": [
+      "再吸收",
+      "分泌"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "tubular-handling",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近曲小管刷狀緣，管腔內 Na⁺、葡萄糖、胺基酸、水與管周微血管；百分比由標籤層標。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "近曲小管",
+        "sourceAnchor": [
+          520,
+          600
+        ]
+      },
+      {
+        "label": "Na⁺",
+        "sourceAnchor": null
+      },
+      {
+        "label": "葡萄糖",
+        "sourceAnchor": null
+      },
+      {
+        "label": "胺基酸",
+        "sourceAnchor": null
+      },
+      {
+        "label": "水",
+        "sourceAnchor": null
+      },
+      {
+        "label": "再吸收",
+        "sourceAnchor": null
+      },
+      {
+        "label": "Na⁺約67%",
+        "sourceAnchor": null
+      },
+      {
+        "label": "水約75%",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "近曲小管",
+      "再吸收"
+    ],
+    "states": {},
+    "calloutTitle": "再吸收物質與比例"
+  },
+  {
+    "slug": "tubular-handling",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/tubular-handling/incoming/IMG-tubular-handling-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "粒子顏色本身看不出方向：標籤層要以箭頭明示 K⁺ 由血液進入管液、Na⁺ 由管液回血液，並在圖例指定顏色。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "遠曲小管",
+        "sourceAnchor": [
+          330,
+          270
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          330,
+          1030
+        ]
+      },
+      {
+        "label": "K⁺",
+        "sourceAnchor": [
+          650,
+          975
+        ]
+      },
+      {
+        "label": "Na⁺",
+        "sourceAnchor": [
+          965,
+          1160
+        ]
+      },
+      {
+        "label": "醛固酮",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "K⁺",
+      "醛固酮"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "皮髓分界、短環與長環、下降枝／上升枝、U 形直血管、集尿管穿過髓質到乳頭；左上腎臟小圖與放大框保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "ADH",
+        "sourceAnchor": null
+      },
+      {
+        "label": "水回收",
+        "sourceAnchor": [
+          900,
+          680
+        ]
+      },
+      {
+        "label": "尿濃度",
+        "sourceAnchor": null
+      },
+      {
+        "label": "尿量",
+        "sourceAnchor": null
+      },
+      {
+        "label": "滲透梯度",
+        "sourceAnchor": [
+          780,
+          1090
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          864,
+          850
+        ]
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "ADH",
+        "水回收",
+        "尿濃度"
+      ],
+      "state-2": [
+        "水回收",
+        "尿量"
+      ],
+      "state-3": [
+        "滲透梯度",
+        "集尿管"
+      ]
+    }
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "皮髓分界、短環與長環、下降枝／上升枝、U 形直血管、集尿管穿過髓質到乳頭；左上腎臟小圖與放大框保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "皮質",
+        "sourceAnchor": [
+          440,
+          130
+        ]
+      },
+      {
+        "label": "髓質",
+        "sourceAnchor": [
+          760,
+          950
+        ]
+      },
+      {
+        "label": "滲透梯度",
+        "sourceAnchor": [
+          780,
+          1090
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          864,
+          850
+        ]
+      }
+    ],
+    "focus": [
+      "滲透梯度",
+      "集尿管"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "皮髓分界、短環與長環、下降枝／上升枝、U 形直血管、集尿管穿過髓質到乳頭；左上腎臟小圖與放大框保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "下降枝",
+        "sourceAnchor": [
+          534,
+          765
+        ]
+      },
+      {
+        "label": "水",
+        "sourceAnchor": null
+      },
+      {
+        "label": "髓質間質",
+        "sourceAnchor": [
+          440,
+          850
+        ]
+      },
+      {
+        "label": "管液變濃",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "下降枝",
+      "水"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "皮髓分界、短環與長環、下降枝／上升枝、U 形直血管、集尿管穿過髓質到乳頭；左上腎臟小圖與放大框保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "上升枝",
+        "sourceAnchor": [
+          690,
+          770
+        ]
+      },
+      {
+        "label": "NaCl",
+        "sourceAnchor": null
+      },
+      {
+        "label": "不透水",
+        "sourceAnchor": null
+      },
+      {
+        "label": "管液變稀",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "上升枝",
+      "不透水",
+      "NaCl"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "皮髓分界、短環與長環、下降枝／上升枝、U 形直血管、集尿管穿過髓質到乳頭；左上腎臟小圖與放大框保留。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "直血管",
+        "sourceAnchor": [
+          741,
+          1040
+        ]
+      },
+      {
+        "label": "逆流交換",
+        "sourceAnchor": null
+      },
+      {
+        "label": "髓質梯度",
+        "sourceAnchor": [
+          780,
+          1090
+        ]
+      }
+    ],
+    "focus": [
+      "直血管",
+      "逆流交換"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "水通道在管腔面、V2 受器在基底側，兩者分開；ADH 在組織間液；無刷狀緣。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "ADH",
+        "sourceAnchor": [
+          815,
+          760
+        ]
+      },
+      {
+        "label": "V2受器",
+        "sourceAnchor": [
+          668,
+          823
+        ]
+      },
+      {
+        "label": "水通道",
+        "sourceAnchor": [
+          457,
+          628
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          615,
+          1000
+        ]
+      },
+      {
+        "label": "水",
+        "sourceAnchor": [
+          380,
+          1015
+        ]
+      }
+    ],
+    "focus": [
+      "ADH",
+      "水通道",
+      "集尿管"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urine-concentration",
+    "slot": "node-06",
+    "source": "materials-src/figures/raster/urine-concentration/incoming/IMG-urine-concentration-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "水通道在管腔面、V2 受器在基底側，兩者分開；ADH 在組織間液；無刷狀緣。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "ADH較多",
+        "sourceAnchor": null
+      },
+      {
+        "label": "ADH較少",
+        "sourceAnchor": null
+      },
+      {
+        "label": "水回收",
+        "sourceAnchor": [
+          540,
+          625
+        ]
+      },
+      {
+        "label": "尿量",
+        "sourceAnchor": null
+      },
+      {
+        "label": "尿濃度",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "水回收",
+      "尿量",
+      "尿濃度"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "總覽：腎→輸尿管→膀胱→尿道、外括約肌、骨盆神經；下方兩個放大框（膀胱頸括約肌、膀胱壁與神經）可保留。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎盂",
+        "sourceAnchor": [
+          438,
+          157
+        ]
+      },
+      {
+        "label": "輸尿管",
+        "sourceAnchor": [
+          430,
+          390
+        ]
+      },
+      {
+        "label": "膀胱",
+        "sourceAnchor": [
+          560,
+          495
+        ]
+      },
+      {
+        "label": "尿道",
+        "sourceAnchor": [
+          558,
+          685
+        ]
+      },
+      {
+        "label": "逼尿肌（迫尿肌）",
+        "sourceAnchor": [
+          660,
+          780
+        ]
+      },
+      {
+        "label": "外括約肌",
+        "sourceAnchor": [
+          555,
+          958
+        ]
+      },
+      {
+        "label": "骨盆副交感神經",
+        "sourceAnchor": [
+          418,
+          1160
+        ]
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "腎盂",
+        "輸尿管",
+        "膀胱",
+        "尿道"
+      ],
+      "state-2": [
+        "逼尿肌（迫尿肌）",
+        "外括約肌"
+      ],
+      "state-3": [
+        "逼尿肌（迫尿肌）",
+        "骨盆副交感神經",
+        "外括約肌"
+      ]
+    }
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "上格輸尿管全長與蠕動團塊（單向向下）；下格輸尿管斜行穿過膀胱壁，未畫解剖瓣膜。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎盂",
+        "sourceAnchor": [
+          438,
+          230
+        ]
+      },
+      {
+        "label": "輸尿管",
+        "sourceAnchor": [
+          478,
+          450
+        ]
+      },
+      {
+        "label": "蠕動",
+        "sourceAnchor": null
+      },
+      {
+        "label": "膀胱壁",
+        "sourceAnchor": [
+          480,
+          1020
+        ]
+      },
+      {
+        "label": "斜行穿入",
+        "sourceAnchor": [
+          765,
+          1135
+        ]
+      },
+      {
+        "label": "生理性瓣膜",
+        "sourceAnchor": null
+      },
+      {
+        "label": "膀胱",
+        "sourceAnchor": [
+          570,
+          660
+        ]
+      }
+    ],
+    "focus": [
+      "蠕動",
+      "生理性瓣膜"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "主圖＋三個放大框：腎盂輸尿管交接、跨越髂血管、進入膀胱壁，三處狹窄齊全。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "腎盂交接",
+        "sourceAnchor": [
+          342,
+          290
+        ]
+      },
+      {
+        "label": "髂外血管交叉",
+        "sourceAnchor": [
+          420,
+          840
+        ]
+      },
+      {
+        "label": "進入膀胱",
+        "sourceAnchor": [
+          425,
+          1050
+        ]
+      }
+    ],
+    "focus": [
+      "腎盂交接",
+      "髂外血管交叉",
+      "進入膀胱"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-04.png",
+    "review": {
+      "verdict": "pass",
+      "note": "兩個輸尿管口＋尿道內口構成膀胱三角；右下放大框為逼尿肌平滑肌層。上格膀胱頸旁的腺體（前列腺）不要標。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "輸尿管口",
+        "sourceAnchor": [
+          365,
+          380
+        ]
+      },
+      {
+        "label": "尿道內口",
+        "sourceAnchor": [
+          535,
+          630
+        ]
+      },
+      {
+        "label": "膀胱三角",
+        "sourceAnchor": [
+          540,
+          510
+        ]
+      },
+      {
+        "label": "逼尿肌（迫尿肌）",
+        "sourceAnchor": [
+          975,
+          1120
+        ]
+      }
+    ],
+    "focus": [
+      "膀胱三角",
+      "逼尿肌（迫尿肌）"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-05.png",
+    "review": {
+      "verdict": "pass",
+      "note": "23:35 上格（女性）以裁切圖修圖後由 Claude 與原下格接回；膀胱頸旁腺體已移除。舊版留在 _rejected。上下格間有白色間隔。",
+      "at": 1791992300,
+      "reviewed": "2026-10-14T23:38+08:00"
+    },
+    "labels": [
+      {
+        "label": "女性尿道",
+        "sourceAnchor": [
+          545,
+          490
+        ]
+      },
+      {
+        "label": "男性尿道",
+        "sourceAnchor": [
+          400,
+          1160
+        ]
+      },
+      {
+        "label": "前列腺部",
+        "sourceAnchor": [
+          596,
+          945
+        ]
+      },
+      {
+        "label": "膜部",
+        "sourceAnchor": [
+          600,
+          1050
+        ]
+      },
+      {
+        "label": "陰莖部",
+        "sourceAnchor": [
+          300,
+          1240
+        ]
+      },
+      {
+        "label": "內括約肌",
+        "sourceAnchor": [
+          540,
+          390
+        ]
+      },
+      {
+        "label": "外括約肌",
+        "sourceAnchor": [
+          590,
+          505
+        ]
+      }
+    ],
+    "focus": [
+      "內括約肌",
+      "外括約肌"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "urinary-route-micturition",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/urinary-route-micturition/incoming/IMG-urinary-route-micturition-06.png",
+    "review": {
+      "verdict": "pass",
+      "note": "上格儲尿（外括約肌收縮、尿道閉合）、下格排尿（括約肌放鬆、尿道打開）；神經由程式標示。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "膀胱牽張",
+        "sourceAnchor": [
+          745,
+          1000
+        ]
+      },
+      {
+        "label": "S2–S4",
+        "sourceAnchor": [
+          590,
+          110
+        ]
+      },
+      {
+        "label": "骨盆副交感神經",
+        "sourceAnchor": [
+          690,
+          1180
+        ]
+      },
+      {
+        "label": "交感神經",
+        "sourceAnchor": [
+          730,
+          170
+        ]
+      },
+      {
+        "label": "陰神經",
+        "sourceAnchor": [
+          685,
+          1250
+        ]
+      },
+      {
+        "label": "逼尿肌（迫尿肌）",
+        "sourceAnchor": [
+          770,
+          1070
+        ]
+      },
+      {
+        "label": "外括約肌",
+        "sourceAnchor": [
+          600,
+          1185
+        ]
+      }
+    ],
+    "focus": [
+      "骨盆副交感神經",
+      "逼尿肌（迫尿肌）",
+      "外括約肌"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "fluid-compartments",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/fluid-compartments/incoming/IMG-fluid-compartments-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "血漿內有大分子蛋白質，組織間液幾乎沒有；小離子兩側都有。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "血漿",
+        "sourceAnchor": [
+          440,
+          500
+        ]
+      },
+      {
+        "label": "組織間液",
+        "sourceAnchor": [
+          1050,
+          800
+        ]
+      },
+      {
+        "label": "微血管壁",
+        "sourceAnchor": [
+          870,
+          610
+        ]
+      },
+      {
+        "label": "血漿蛋白質",
+        "sourceAnchor": [
+          620,
+          450
+        ]
+      }
+    ],
+    "focus": [
+      "血漿蛋白質",
+      "微血管壁"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "攝取：飲水、食物、細胞代謝水；排出：呼氣、皮膚、糞便、尿液；中央人體有腦（下視丘）、心、肺、腎、膀胱。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "液體1500 mL",
+        "sourceAnchor": [
+          150,
+          200
+        ]
+      },
+      {
+        "label": "食物800 mL",
+        "sourceAnchor": [
+          150,
+          450
+        ]
+      },
+      {
+        "label": "代謝水200 mL",
+        "sourceAnchor": [
+          130,
+          650
+        ]
+      },
+      {
+        "label": "口渴",
+        "sourceAnchor": [
+          550,
+          180
+        ]
+      },
+      {
+        "label": "ADH",
+        "sourceAnchor": null
+      },
+      {
+        "label": "腎素",
+        "sourceAnchor": [
+          430,
+          870
+        ]
+      },
+      {
+        "label": "血管收縮素II",
+        "sourceAnchor": null
+      },
+      {
+        "label": "醛固酮",
+        "sourceAnchor": null
+      },
+      {
+        "label": "ANP",
+        "sourceAnchor": [
+          560,
+          650
+        ]
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "液體1500 mL",
+        "食物800 mL",
+        "代謝水200 mL"
+      ],
+      "state-2": [
+        "口渴",
+        "ADH",
+        "醛固酮"
+      ],
+      "state-3": [
+        "ANP"
+      ]
+    }
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "攝取：飲水、食物、細胞代謝水；排出：呼氣、皮膚、糞便、尿液；中央人體有腦（下視丘）、心、肺、腎、膀胱。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "液體1500 mL",
+        "sourceAnchor": [
+          150,
+          200
+        ]
+      },
+      {
+        "label": "食物800 mL",
+        "sourceAnchor": [
+          150,
+          450
+        ]
+      },
+      {
+        "label": "代謝水200 mL",
+        "sourceAnchor": [
+          130,
+          650
+        ]
+      },
+      {
+        "label": "每日2500 mL",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "液體1500 mL",
+      "食物800 mL",
+      "代謝水200 mL"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "攝取：飲水、食物、細胞代謝水；排出：呼氣、皮膚、糞便、尿液；中央人體有腦（下視丘）、心、肺、腎、膀胱。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "尿液",
+        "sourceAnchor": [
+          980,
+          1170
+        ]
+      },
+      {
+        "label": "呼氣水分",
+        "sourceAnchor": [
+          970,
+          410
+        ]
+      },
+      {
+        "label": "皮膚蒸散",
+        "sourceAnchor": [
+          972,
+          528
+        ]
+      },
+      {
+        "label": "流汗",
+        "sourceAnchor": [
+          1032,
+          665
+        ]
+      },
+      {
+        "label": "糞便",
+        "sourceAnchor": [
+          1060,
+          1000
+        ]
+      }
+    ],
+    "focus": [
+      "皮膚蒸散",
+      "流汗"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "刷狀緣已移除；水通道在管腔面、V2 受器在基底側。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "口渴",
+        "sourceAnchor": null
+      },
+      {
+        "label": "飲水",
+        "sourceAnchor": [
+          270,
+          200
+        ]
+      },
+      {
+        "label": "ADH",
+        "sourceAnchor": null
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          230,
+          930
+        ]
+      },
+      {
+        "label": "水回收",
+        "sourceAnchor": [
+          820,
+          1000
+        ]
+      }
+    ],
+    "focus": [
+      "口渴",
+      "ADH"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近腎絲球細胞放出腎素→血管收縮素原→血管收縮素I→肺微血管轉化酶→血管收縮素II→小動脈收縮與腎上腺皮質分泌醛固酮，分段上下排。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "近腎絲球細胞",
+        "sourceAnchor": [
+          490,
+          165
+        ]
+      },
+      {
+        "label": "腎素",
+        "sourceAnchor": [
+          360,
+          265
+        ]
+      },
+      {
+        "label": "血管收縮素原",
+        "sourceAnchor": [
+          320,
+          530
+        ]
+      },
+      {
+        "label": "血管收縮素I",
+        "sourceAnchor": [
+          750,
+          530
+        ]
+      },
+      {
+        "label": "轉化酶（肺臟）",
+        "sourceAnchor": [
+          790,
+          850
+        ]
+      },
+      {
+        "label": "血管收縮素II",
+        "sourceAnchor": [
+          920,
+          920
+        ]
+      },
+      {
+        "label": "醛固酮",
+        "sourceAnchor": [
+          1010,
+          1110
+        ]
+      }
+    ],
+    "focus": [
+      "腎素",
+      "血管收縮素II",
+      "醛固酮"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-04.png",
+    "review": {
+      "verdict": "pass",
+      "note": "刷狀緣已移除；醛固酮由組織間液擴散進入細胞，不再接表面受器；下格 ADH 與水通道正確。",
+      "at": 1791991300,
+      "reviewed": "2026-10-14T23:21+08:00"
+    },
+    "labels": [
+      {
+        "label": "醛固酮",
+        "sourceAnchor": [
+          730,
+          120
+        ]
+      },
+      {
+        "label": "Na⁺再吸收",
+        "sourceAnchor": [
+          900,
+          315
+        ]
+      },
+      {
+        "label": "K⁺分泌",
+        "sourceAnchor": [
+          340,
+          470
+        ]
+      },
+      {
+        "label": "ADH",
+        "sourceAnchor": [
+          730,
+          730
+        ]
+      },
+      {
+        "label": "水通透性",
+        "sourceAnchor": [
+          400,
+          940
+        ]
+      }
+    ],
+    "focus": [
+      "醛固酮",
+      "Na⁺再吸收",
+      "ADH",
+      "水通透性"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "water-sodium-regulation",
+    "slot": "node-06",
+    "source": "materials-src/figures/raster/water-sodium-regulation/incoming/IMG-water-sodium-regulation-05.png",
+    "review": {
+      "verdict": "pass",
+      "note": "心房顆粒釋出 ANP→腎臟排鈉排水；下方四個燒杯表示鈉量、水量、容積與濃度。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "ANP",
+        "sourceAnchor": [
+          475,
+          235
+        ]
+      },
+      {
+        "label": "排鈉",
+        "sourceAnchor": [
+          1070,
+          625
+        ]
+      },
+      {
+        "label": "排水",
+        "sourceAnchor": [
+          1030,
+          595
+        ]
+      },
+      {
+        "label": "鈉總量",
+        "sourceAnchor": [
+          340,
+          810
+        ]
+      },
+      {
+        "label": "水量",
+        "sourceAnchor": [
+          820,
+          810
+        ]
+      },
+      {
+        "label": "體液容積",
+        "sourceAnchor": [
+          340,
+          1170
+        ]
+      },
+      {
+        "label": "濃度",
+        "sourceAnchor": [
+          880,
+          1230
+        ]
+      }
+    ],
+    "focus": [
+      "ANP",
+      "鈉總量",
+      "濃度"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "左欄分子正確，但右側燒杯內粒子數不準（葡萄糖 6→5、NaCl 6→6＋7、MgCl₂ 6→5＋約17），1:2:3 會教錯。標籤層只用左欄分子圖示，燒杯與粒子改由程式畫出精確數量。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "葡萄糖",
+        "sourceAnchor": [
+          150,
+          150
+        ]
+      },
+      {
+        "label": "NaCl",
+        "sourceAnchor": [
+          150,
+          590
+        ]
+      },
+      {
+        "label": "MgCl₂",
+        "sourceAnchor": [
+          150,
+          1025
+        ]
+      },
+      {
+        "label": "解離粒子",
+        "sourceAnchor": [
+          790,
+          710
+        ]
+      },
+      {
+        "label": "滲透",
+        "sourceAnchor": null
+      },
+      {
+        "label": "價數",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "葡萄糖"
+      ],
+      "state-2": [
+        "NaCl",
+        "解離粒子"
+      ],
+      "state-3": [
+        "MgCl₂",
+        "價數"
+      ]
+    }
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "左欄分子正確，但右側燒杯內粒子數不準（葡萄糖 6→5、NaCl 6→6＋7、MgCl₂ 6→5＋約17），1:2:3 會教錯。標籤層只用左欄分子圖示，燒杯與粒子改由程式畫出精確數量。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "葡萄糖",
+        "sourceAnchor": [
+          150,
+          150
+        ]
+      },
+      {
+        "label": "NaCl",
+        "sourceAnchor": [
+          150,
+          590
+        ]
+      },
+      {
+        "label": "MgCl₂",
+        "sourceAnchor": [
+          150,
+          1025
+        ]
+      },
+      {
+        "label": "1粒子",
+        "sourceAnchor": [
+          850,
+          270
+        ]
+      },
+      {
+        "label": "2粒子",
+        "sourceAnchor": [
+          740,
+          710
+        ]
+      },
+      {
+        "label": "3粒子",
+        "sourceAnchor": [
+          735,
+          1150
+        ]
+      }
+    ],
+    "focus": [
+      "1粒子",
+      "2粒子",
+      "3粒子"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "node-02",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "半透膜兩側；粒子多的一側水位上升；左側粒子數前後一致。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "半透膜",
+        "sourceAnchor": [
+          560,
+          350
+        ]
+      },
+      {
+        "label": "水",
+        "sourceAnchor": [
+          430,
+          425
+        ]
+      },
+      {
+        "label": "粒子較少",
+        "sourceAnchor": [
+          209,
+          526
+        ]
+      },
+      {
+        "label": "粒子較多",
+        "sourceAnchor": [
+          775,
+          292
+        ]
+      }
+    ],
+    "focus": [
+      "水",
+      "粒子較多"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "上格 K⁺（橘）在細胞內、Na⁺（藍）在細胞外；下格 K⁺ 在管液、Na⁺ 回到組織間液，腎上腺分泌醛固酮。圖例照此配色。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "Na⁺",
+        "sourceAnchor": [
+          150,
+          120
+        ]
+      },
+      {
+        "label": "K⁺",
+        "sourceAnchor": [
+          570,
+          370
+        ]
+      },
+      {
+        "label": "細胞外液",
+        "sourceAnchor": [
+          150,
+          200
+        ]
+      },
+      {
+        "label": "細胞內液",
+        "sourceAnchor": [
+          750,
+          420
+        ]
+      },
+      {
+        "label": "醛固酮",
+        "sourceAnchor": [
+          715,
+          750
+        ]
+      }
+    ],
+    "focus": [
+      "Na⁺",
+      "K⁺"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-04.png",
+    "review": {
+      "verdict": "pass",
+      "note": "上格 Cl⁻ 在細胞外；中下兩格鈣回收到血液、磷留在管液排出。兩格內容相近，標籤層可只用中格。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "Cl⁻",
+        "sourceAnchor": [
+          130,
+          120
+        ]
+      },
+      {
+        "label": "Ca²⁺",
+        "sourceAnchor": [
+          965,
+          800
+        ]
+      },
+      {
+        "label": "磷酸根",
+        "sourceAnchor": [
+          210,
+          650
+        ]
+      },
+      {
+        "label": "副甲狀腺素",
+        "sourceAnchor": null
+      },
+      {
+        "label": "鈣再吸收",
+        "sourceAnchor": [
+          860,
+          750
+        ]
+      },
+      {
+        "label": "磷排泄",
+        "sourceAnchor": [
+          350,
+          740
+        ]
+      }
+    ],
+    "focus": [
+      "Cl⁻",
+      "鈣再吸收",
+      "磷排泄"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "electrolyte-balance",
+    "slot": "node-06",
+    "source": "materials-src/figures/raster/electrolyte-balance/incoming/IMG-electrolyte-balance-05.png",
+    "review": {
+      "verdict": "pass",
+      "note": "Mg²⁺ 主要在細胞內；酵素輔因子；神經肌肉接合處。",
+      "at": 1791987400,
+      "reviewed": "2026-10-14T22:16+08:00"
+    },
+    "labels": [
+      {
+        "label": "Mg²⁺",
+        "sourceAnchor": [
+          450,
+          200
+        ]
+      },
+      {
+        "label": "細胞內液",
+        "sourceAnchor": [
+          650,
+          250
+        ]
+      },
+      {
+        "label": "酵素活性",
+        "sourceAnchor": [
+          500,
+          600
+        ]
+      },
+      {
+        "label": "神經肌肉功能",
+        "sourceAnchor": [
+          550,
+          1100
+        ]
+      }
+    ],
+    "focus": [
+      "Mg²⁺"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "overview",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "雙肺、心、腎、主動脈內血液；四個放大框：血液碳酸系統、腎小管磷酸鹽、血漿蛋白、腎小管上皮。腎上腺有畫，不要標。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "碳酸系統",
+        "sourceAnchor": [
+          170,
+          1120
+        ]
+      },
+      {
+        "label": "磷酸鹽",
+        "sourceAnchor": [
+          565,
+          1120
+        ]
+      },
+      {
+        "label": "蛋白質",
+        "sourceAnchor": [
+          940,
+          1120
+        ]
+      },
+      {
+        "label": "CO₂",
+        "sourceAnchor": [
+          570,
+          445
+        ]
+      },
+      {
+        "label": "肺",
+        "sourceAnchor": [
+          400,
+          350
+        ]
+      },
+      {
+        "label": "H⁺",
+        "sourceAnchor": [
+          1010,
+          845
+        ]
+      },
+      {
+        "label": "HCO₃⁻",
+        "sourceAnchor": [
+          570,
+          680
+        ]
+      },
+      {
+        "label": "尿液排酸",
+        "sourceAnchor": [
+          550,
+          940
+        ]
+      }
+    ],
+    "focus": [],
+    "states": {
+      "state-1": [
+        "碳酸系統",
+        "磷酸鹽",
+        "蛋白質"
+      ],
+      "state-2": [
+        "CO₂",
+        "肺"
+      ],
+      "state-3": [
+        "H⁺",
+        "HCO₃⁻",
+        "尿液排酸"
+      ]
+    }
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "node-01",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "雙肺、心、腎、主動脈內血液；四個放大框：血液碳酸系統、腎小管磷酸鹽、血漿蛋白、腎小管上皮。腎上腺有畫，不要標。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "化學緩衝",
+        "sourceAnchor": [
+          170,
+          1120
+        ]
+      },
+      {
+        "label": "肺",
+        "sourceAnchor": [
+          400,
+          350
+        ]
+      },
+      {
+        "label": "腎",
+        "sourceAnchor": [
+          410,
+          640
+        ]
+      },
+      {
+        "label": "pH7.35–7.45",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "化學緩衝",
+      "肺",
+      "腎"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "node-03",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-02.png",
+    "review": {
+      "verdict": "pass",
+      "note": "四格：血漿碳酸系統、腎小管管液磷酸鹽、血漿蛋白質、紅血球內血紅素（Hb 在血球內，不在血漿）。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "碳酸系統",
+        "sourceAnchor": [
+          500,
+          200
+        ]
+      },
+      {
+        "label": "磷酸鹽",
+        "sourceAnchor": [
+          650,
+          700
+        ]
+      },
+      {
+        "label": "蛋白質",
+        "sourceAnchor": [
+          300,
+          1100
+        ]
+      },
+      {
+        "label": "血紅素",
+        "sourceAnchor": [
+          950,
+          1110
+        ]
+      }
+    ],
+    "focus": [
+      "碳酸系統",
+      "磷酸鹽",
+      "血紅素"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "node-04",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-01.png",
+    "review": {
+      "verdict": "pass",
+      "note": "雙肺、心、腎、主動脈內血液；四個放大框：血液碳酸系統、腎小管磷酸鹽、血漿蛋白、腎小管上皮。腎上腺有畫，不要標。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "CO₂",
+        "sourceAnchor": [
+          527,
+          480
+        ]
+      },
+      {
+        "label": "肺",
+        "sourceAnchor": [
+          400,
+          350
+        ]
+      },
+      {
+        "label": "呼出",
+        "sourceAnchor": null
+      },
+      {
+        "label": "H₂CO₃",
+        "sourceAnchor": null
+      },
+      {
+        "label": "pH",
+        "sourceAnchor": null
+      }
+    ],
+    "focus": [
+      "CO₂",
+      "肺"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "node-05",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近曲（刷狀緣）、遠曲、集尿管三格；H⁺ 在管液、HCO₃⁻ 在細胞與血液。節點 06 需要的 NH₃／NH₄⁺、磷酸鹽未畫，由標籤層以圖示疊在管腔側。圖例：紅點 H⁺、藍紅團 HCO₃⁻。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "H⁺",
+        "sourceAnchor": [
+          430,
+          200
+        ]
+      },
+      {
+        "label": "HCO₃⁻",
+        "sourceAnchor": [
+          940,
+          260
+        ]
+      },
+      {
+        "label": "血液",
+        "sourceAnchor": [
+          1070,
+          150
+        ]
+      },
+      {
+        "label": "管液",
+        "sourceAnchor": [
+          350,
+          600
+        ]
+      },
+      {
+        "label": "近曲小管",
+        "sourceAnchor": [
+          550,
+          200
+        ]
+      },
+      {
+        "label": "遠曲小管",
+        "sourceAnchor": [
+          590,
+          720
+        ]
+      },
+      {
+        "label": "集尿管",
+        "sourceAnchor": [
+          650,
+          1150
+        ]
+      }
+    ],
+    "focus": [
+      "H⁺",
+      "HCO₃⁻"
+    ],
+    "states": {}
+  },
+  {
+    "slug": "acid-base-homeostasis",
+    "slot": "node-06",
+    "source": "materials-src/figures/raster/acid-base-homeostasis/incoming/IMG-acid-base-homeostasis-03.png",
+    "review": {
+      "verdict": "pass",
+      "note": "近曲（刷狀緣）、遠曲、集尿管三格；H⁺ 在管液、HCO₃⁻ 在細胞與血液。節點 06 需要的 NH₃／NH₄⁺、磷酸鹽未畫，由標籤層以圖示疊在管腔側。圖例：紅點 H⁺、藍紅團 HCO₃⁻。",
+      "at": 1791993400,
+      "reviewed": "2026-10-14T23:56+08:00"
+    },
+    "labels": [
+      {
+        "label": "NH₃",
+        "sourceAnchor": [
+          200,
+          1000
+        ]
+      },
+      {
+        "label": "H⁺",
+        "sourceAnchor": [
+          430,
+          950
+        ]
+      },
+      {
+        "label": "NH₄⁺",
+        "sourceAnchor": [
+          500,
+          1100
+        ]
+      },
+      {
+        "label": "磷酸鹽",
+        "sourceAnchor": [
+          250,
+          1250
+        ]
+      },
+      {
+        "label": "尿液排酸",
+        "sourceAnchor": [
+          100,
+          1160
+        ]
+      }
+    ],
+    "focus": [
+      "NH₄⁺",
+      "磷酸鹽",
+      "尿液排酸"
+    ],
+    "states": {}
+  }
+]

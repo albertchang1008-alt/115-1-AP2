@@ -1,0 +1,90 @@
+{
+  "cases": [
+    {
+      "width": 1280,
+      "slot": "overview",
+      "particles": 36,
+      "pins": 0,
+      "overlaps": [],
+      "counts": [
+        {
+          "kind": "glucose",
+          "count": 6
+        },
+        {
+          "kind": "NaCl",
+          "count": 12
+        },
+        {
+          "kind": "MgCl2",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "slot": "node-01",
+      "particles": 36,
+      "pins": 0,
+      "overlaps": [],
+      "counts": [
+        {
+          "kind": "glucose",
+          "count": 6
+        },
+        {
+          "kind": "NaCl",
+          "count": 12
+        },
+        {
+          "kind": "MgCl2",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "slot": "overview",
+      "particles": 36,
+      "pins": 4,
+      "overlaps": [],
+      "counts": [
+        {
+          "kind": "glucose",
+          "count": 6
+        },
+        {
+          "kind": "NaCl",
+          "count": 12
+        },
+        {
+          "kind": "MgCl2",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "slot": "node-01",
+      "particles": 36,
+      "pins": 6,
+      "overlaps": [],
+      "counts": [
+        {
+          "kind": "glucose",
+          "count": 6
+        },
+        {
+          "kind": "NaCl",
+          "count": 12
+        },
+        {
+          "kind": "MgCl2",
+          "count": 18
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

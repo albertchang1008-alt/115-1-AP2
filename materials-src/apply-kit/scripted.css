@@ -1,0 +1,551 @@
+.scripted-course {
+  gap: 8px;
+}
+.scripted-course .student-main {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+.scripted-course .diagram-region {
+  position: relative;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scripted-course .response-region {
+  padding: 4px 4px 70px;
+  gap: 8px;
+}
+.scripted-course .student-footer {
+  min-height: 40px;
+}
+.scripted-figure {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding-bottom: 22px;
+}
+.scripted-svg {
+  min-height: 0;
+  border-radius: 12px;
+}
+.figure-caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.figure-controls:empty {
+  display: none;
+}
+.on-figure {
+  flex: none;
+  padding: 6px;
+  background: #eff6fa;
+  border-radius: 12px;
+}
+.figure-options {
+  gap: 6px;
+}
+.figure-options button {
+  padding: 6px;
+  min-height: 38px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.scripted-course .matching-row button {
+  font-size: 14px;
+  padding: 5px;
+  min-height: 36px;
+}
+.scripted-course .matching-feedback {
+  font-size: 14px;
+  line-height: 1.2;
+}
+.scripted-course .matching-row {
+  padding: 3px;
+  gap: 3px;
+}
+.scripted-course .matching-rows {
+  gap: 4px;
+}
+.scripted-course .matching-ui {
+  gap: 5px;
+}
+.scripted-course .script-feedback {
+  padding: 6px;
+  font-size: 15px;
+  line-height: 1.3;
+}
+.action-instruction,
+.script-extra {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.script-extra span + span {
+  display: block;
+}
+.slider-control {
+  display: grid;
+  gap: 8px;
+}
+.slider-control input {
+  width: 100%;
+  min-height: 34px;
+}
+.equation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+}
+.equation-controls button {
+  min-width: 40px;
+  padding: 6px;
+}
+.scripted-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.scripted-map > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.map-center {
+  position: absolute;
+  left: 35%;
+  top: 38%;
+  width: 30%;
+  padding: 5px;
+  border-radius: 10px;
+  background: #dceff4;
+  font-size: 14px;
+}
+.map-branch {
+  position: absolute;
+  width: 31%;
+  min-height: 28px;
+  border-radius: 10px;
+  background: #edf4f8;
+  font-size: 14px;
+  padding: 5px;
+}
+.map-branch.revealed {
+  background: #e0f2e8;
+  border: 1px solid #76aa91;
+}
+.scripted-course .quiz-region {
+  padding: 10px;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  .scripted-course {
+    padding: 8px;
+    gap: 6px;
+  }
+  .scripted-course .student-header {
+    gap: 6px;
+  }
+  .scripted-course h1 {
+    font-size: 18px;
+  }
+  .scripted-course h2 {
+    font-size: 18px;
+  }
+  .scripted-course .student-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(120px, 1fr) auto;
+    gap: 6px;
+  }
+  .scripted-course.matching-screen .student-main {
+    grid-template-rows: 100px minmax(0, 1fr);
+  }
+  .scripted-course .response-region {
+    padding: 0;
+    justify-content: start;
+    gap: 5px;
+  }
+  .scripted-course .student-dock {
+    width: 44px;
+    height: 44px;
+    bottom: 9px;
+    right: 9px;
+  }
+  .scripted-course .student-footer {
+    padding: 0 44px;
+    min-height: 40px;
+  }
+  .scripted-course .on-figure {
+    padding: 4px;
+  }
+  .scripted-course .figure-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .scripted-course .recognition {
+    font-size: 15px;
+    padding: 8px;
+  }
+  .scripted-course .diagram-region:has(.scripted-map) {
+    min-height: 190px;
+  }
+  .scripted-course .figure-caption {
+    font-size: 14px;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .scripted-course {
+    padding: 7px;
+    gap: 5px;
+  }
+  .scripted-course .student-main {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 6px;
+  }
+  .scripted-course .student-header {
+    gap: 4px;
+  }
+  .scripted-course h1,
+  .scripted-course h2 {
+    font-size: 16px;
+  }
+  .scripted-course .response-region {
+    padding: 0;
+    justify-content: start;
+    gap: 5px;
+  }
+  .scripted-course .recognition {
+    padding: 5px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .scripted-course .figure-options button {
+    font-size: 14px;
+    min-height: 30px;
+    padding: 3px;
+  }
+  .scripted-course .student-footer button {
+    padding: 5px 16px;
+  }
+  .scripted-course .student-footer {
+    min-height: 32px;
+  }
+  .scripted-course .figure-caption {
+    display: none;
+  }
+  .scripted-course .script-feedback {
+    font-size: 14px;
+    line-height: 1.2;
+    padding: 4px;
+  }
+  .scripted-course .matching-row button {
+    min-height: 28px;
+    padding: 3px;
+    font-size: 14px;
+  }
+  .scripted-course .matching-guide {
+    padding: 4px;
+    line-height: 1.2;
+  }
+  .scripted-course .matching-tools button {
+    padding: 3px;
+  }
+  .scripted-course .matching-menu button {
+    min-height: 28px;
+    font-size: 14px;
+  }
+  .scripted-course .matching-ui {
+    gap: 3px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.scripted-figure:has(.on-figure) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scripted-figure:has(.on-figure) > svg {
+  flex: 1;
+  min-height: 0;
+}
+.scripted-figure:has(.on-figure) .figure-caption {
+  display: none;
+}
+.scripted-figure .on-figure {
+  flex: none;
+}
+.figure-legend {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 4px;
+  font-size: 14px;
+}
+.figure-legend > span {
+  background: #fffffff0;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+.moving-particle {
+  animation: particle-appear 0.4s ease-out;
+}
+@keyframes particle-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 600px) {
+  .matching-screen .figure-caption {
+    display: none;
+  }
+}
+
+.scripted-figure > .scripted-svg {
+  position: relative;
+  inset: auto;
+  pointer-events: none;
+}
+
+.body-side-labels {
+  position: absolute;
+  top: 24px;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+/* While retry is required the row's explanation replaces its inactive answer field. */
+.scripted-course .matching-row.wrong > [data-match-open] {
+  display: none;
+}
+.scripted-course .matching-row.wrong > .matching-feedback {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .scripted-course .matching-rows {
+    gap: 2px;
+  }
+  .scripted-course .matching-row {
+    padding: 2px;
+    gap: 2px;
+  }
+  .scripted-course .matching-row button {
+    min-height: 24px;
+    padding: 2px;
+    font-size: 14px;
+    line-height: 1.15;
+  }
+  .scripted-course .matching-guide {
+    padding: 3px;
+    line-height: 1.15;
+  }
+  .scripted-course .matching-guide > div {
+    margin-top: 2px;
+  }
+  .scripted-course .matching-guide button {
+    min-height: 24px;
+    padding: 2px 5px;
+    line-height: 1.15;
+  }
+}
+
+.scripted-course .matching-row {
+  grid-template-columns: minmax(100px, 0.8fr) minmax(0, 1.2fr);
+}
+
+.diagram-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  max-width: 140px;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 5px 7px;
+  min-height: 30px;
+  background: #fffffff2;
+  border: 1px solid #5e93a8;
+}
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot[data-operation="0"]::after {
+  content: ' →';
+  font-weight: bold;
+  color: #2ba878;
+}
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot[data-operation="1"]::before {
+  content: '← ';
+  font-weight: bold;
+  color: #a44b58;
+}
+.scripted-figure:has(.diagram-hotspot) .figure-caption {
+  display: none;
+}
+
+.on-figure:has(.arrow-controls) {
+  display: contents;
+}
+.arrow-controls {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+}
+.figure-boundaries {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.figure-boundaries span {
+  background: #ffffffe6;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+/* Anonymous location controls reveal their labels only after the student's choice. */
+.scripted-course .blind-hotspot { min-width:44px; min-height:44px; width:44px; height:44px; padding:0; border:0; background:transparent; box-shadow:none; }
+.scripted-course .blind-hotspot.selected { width:auto; height:auto; max-width:130px; padding:4px; background:#fff; border:1px solid #2ba878; }
+.scripted-course .blind-hotspot:focus-visible { outline:2px solid #397b91; }
+.scripted-figure:has(.blind-hotspot) > .scripted-svg { pointer-events:auto; }
+.scripted-figure[data-figure="filter-particles"] .scripted-svg { width:100%; height:100%; }
+.filter-side-labels { position:absolute; left:14%; right:14%; top:6px; display:flex; justify-content:space-between; font-size:14px; }
+.chart-legend {position:absolute;left:12%;right:2%;top:2%;display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:14px;background:#ffffffdf;}
+.chart-legend i {display:inline-block;width:14px;border-top:3px solid;}
+.blue-line {color:#397b91}.orange-line {color:#c3937d}
+.chart-x {position:absolute;bottom:23px;left:0;right:0;text-align:center;font-size:14px;}
+.chart-y {position:absolute;left:4px;top:40%;font-size:14px;}
+.chart-tick {position:absolute;left:60%;bottom:19%;font-size:14px;}
+.scripted-figure[data-figure="glucose-slider"] .figure-caption {display:none;}
+
+@media (max-width:600px) and (min-height:600px) {
+ .scripted-course.matching-screen:has([data-figure="filter-particles"]) .student-main { grid-template-rows: 120px minmax(0,1fr); }
+ .scripted-course.matching-screen:has([data-figure="filter-particles"]) .diagram-region {padding:0;}
+ .scripted-course.matching-screen:has([data-figure="filter-particles"]) .scripted-figure {padding-bottom:0;}
+}
+
+.chart-x,.chart-y,.chart-tick {bottom:auto;right:auto;transform:translate(-50%,-50%);white-space:nowrap;}
+.chart-x,.chart-y,.chart-tick,.chart-legend {pointer-events:none;}
+
+@media (max-width:600px) {
+ .scripted-course:has([data-figure="filter-particles"]) .matching-row {padding:1px;gap:2px;}
+ .scripted-course:has([data-figure="filter-particles"]) .matching-row button {min-height:32px;padding:3px;}
+}
+
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot::before,
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot::after {color:#397b91;}
+/* Both directional choices stay neutral until the learner answers. */
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot[data-operation]::before,
+.scripted-figure[data-figure="osmosis-direction"] .diagram-hotspot[data-operation]::after {color:#397b91;}
+
+/* Region labels stay in a separate HTML rail, away from the image frame. */
+.renal-regions {position:absolute;left:3%;top:8%;bottom:18%;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;font-size:14px;line-height:1.2;color:#111;}
+.renal-regions span {background:#fffffff2;border-radius:4px;padding:3px 4px;}
+.scripted-figure[data-figure-kind="anatomy"] .figure-legend {position:static;flex:none;margin:4px 0;}
+.scripted-figure[data-figure-kind="anatomy"] {display:flex;flex-direction:column;}
+.scripted-figure[data-figure-kind="anatomy"] > .teacher-svg {flex:1;min-height:0;}
+.scripted-figure[data-figure-kind="anatomy"] .figure-caption {display:none;}
+
+.scripted-figure[data-figure-kind="anatomy"] .filter-side-labels {position:static;order:-1;flex:none;margin:0 14%;}
+
+.scripted-figure[data-figure-kind="anatomy"] .filter-side-labels {margin-bottom:6px;}
+
+.teacher-leaders {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;}
+.teacher-leaders path {fill:none;stroke:#46616f;stroke-width:1.2;}
+.teacher-leaders circle {fill:#46616f;stroke:white;stroke-width:1;}
+.scripted-figure[data-figure-kind="anatomy"] .diagram-hotspot {z-index:1;}
+
+.scripted-figure[data-figure-kind="anatomy"] .diagram-hotspot:not(.blind-hotspot) {width:max-content;min-width:60px;}
+.scripted-figure[data-figure-kind="anatomy"] .figure-legend {display:none;}
+@media (max-width:600px) and (min-height:600px) {
+ .scripted-course.matching-screen:has([data-figure-kind="anatomy"]) .student-main {grid-template-rows:clamp(120px,20vh,180px) minmax(0,1fr);}
+ .scripted-course.matching-screen:has([data-figure-kind="anatomy"]) .scripted-figure {padding-bottom:0;}
+}
+@media (max-width:600px) and (max-height:700px) {
+ .scripted-course.matching-screen:has([data-figure-kind="anatomy"]) .student-main {grid-template-rows:110px minmax(0,1fr);}
+}
+
+.comparison-side-labels {position:absolute;left:15%;right:15%;top:12px;display:flex;justify-content:space-between;font-size:14px;pointer-events:none;}
+.comparison-side-labels span {background:#fffffff2;padding:2px 5px;border-radius:4px;}
+
+.renal-regions {display:contents;}
+.renal-regions span {position:absolute;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+.renal-regions span {padding:3px 1px;}
+/* Spatial tasks keep the artwork wide and the label tray outside the image. */
+.spatial-course .student-main {display:flex;flex-direction:column;min-height:0;gap:4px;}
+.spatial-course .diagram-region {flex:1;min-height:100px;padding:2px;}
+.spatial-course .response-region {flex:none;padding:0;max-height:30vh;overflow:auto;}
+.spatial-course .response-region:empty {display:none;}
+.spatial-workspace {height:100%;width:100%;min-height:0;display:flex;flex-direction:column;gap:4px;}
+.spatial-toolbar {display:flex;align-items:start;gap:5px;flex:none;}
+.spatial-toolbar>button,.spatial-guide button {font-size:14px;min-height:28px;padding:3px 5px;flex:none;}
+.spatial-labels {display:flex;flex-wrap:wrap;gap:4px;flex:1;}
+.spatial-labels button {font-size:14px;min-height:36px;padding:5px 8px;line-height:1.2;}
+.spatial-labels .picked {outline:3px solid #397b91;background:#d7eef6;}
+.spatial-labels .placed {border-color:#8baaba;background:#e6f0f4;}
+.spatial-guide {font-size:14px;line-height:1.3;padding:4px;background:#fff4d7;display:flex;gap:4px;align-items:center;justify-content:space-between;flex:none;}
+.spatial-scroll {flex:1;min-height:70px;width:100%;overflow:auto;overscroll-behavior:contain;scroll-padding:32px;border:1px solid #cfdee6;border-radius:8px;position:relative;}
+.spatial-canvas {width:100%;min-width:var(--canvas-min,0);position:relative;background:white;}
+.spatial-canvas>.scripted-svg {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.spatial-target {position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid #507f94;border-radius:50%;background:#ffffffe6;font-size:14px;}
+.spatial-stamp {position:absolute;pointer-events:none;transform:translate(-50%,26px);font-size:14px;background:#fffffff2;color:#173f50;border:1px solid #76a2b4;border-radius:4px;max-width:150px;width:max-content;padding:2px 4px;line-height:1.2;}
+.spatial-caption {position:absolute;transform:translate(-50%,-50%);font-size:14px;background:#fff;padding:2px 4px;white-space:nowrap;}
+.spatial-directions {display:flex;gap:3px;flex-wrap:wrap;flex:none;}
+.spatial-directions button {font-size:14px;padding:3px 5px;min-height:30px;}
+.spatial-explanation {font-size:14px;line-height:1.25;flex:none;}
+@media(max-height:450px){
+ .spatial-course {padding:4px;gap:3px;}
+ .spatial-course .student-header h1,.spatial-course .student-header h2 {font-size:14px;line-height:1.25;}
+ .spatial-course .student-header {gap:2px;}
+ .spatial-course .diagram-region {min-height:70px;}
+ .spatial-course .student-footer {min-height:32px;}
+ .spatial-course .response-region {max-height:22vh;}
+}
+/* Keep the viewport fixed while dense source anchors scroll inside their own frame. */
+.spatial-course {grid-template-columns:minmax(0,1fr);min-width:0;width:100%;}
+.spatial-course .student-main,.spatial-course .diagram-region,.spatial-workspace,.spatial-toolbar,.spatial-labels {min-width:0;max-width:100%;}
+.spatial-course[data-phase="micro"] .response-region,
+.spatial-course[data-phase="passed"] .response-region,
+.spatial-course[data-phase="basics"] .response-region {max-height:none;overflow:visible;}
+.spatial-course[data-phase="micro"] .spatial-toolbar,
+.spatial-course[data-phase="passed"] .spatial-toolbar {display:none;}
+.spatial-leaders {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;fill:none;stroke:#507f94;stroke-width:1;}
+.spatial-stamp {z-index:2;}
+
+.answer-review-options {display:flex;flex-wrap:wrap;gap:5px;list-style:none;padding:4px 0;margin:0;font-size:14px;line-height:1.3;}
+.answer-review-options li {border:1px solid #c7dce5;background:#f0f7fa;border-radius:7px;padding:4px 7px;}
+.spatial-navigation {flex:none;font-size:14px;line-height:1.25;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:3px;}
+.spatial-navigation>div {display:flex;align-items:center;gap:3px;}
+.spatial-navigation button {min-width:36px;min-height:30px;padding:3px;font-size:14px;}
+.diagram-hotspot {min-width:44px;min-height:44px;}
+
+/* Keep assessment choices next to the stem instead of centering the main region. */
+.scripted-course[data-screen="assessment"] .quiz-region {
+  margin-block: 0;
+  align-self: start;
+}

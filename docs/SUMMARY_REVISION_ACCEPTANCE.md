@@ -45,6 +45,6 @@
 - `python3 scripts/stage1-audit.py` 通過：原 161 題／3864 格不變、新 66 題與 HTML／規格一致、總計 227、重複 ID 0。
 - `npm run check` 通過：115 前端測試、前端 build、18 Functions 測試與 build、version:check 1.6.3。
 - 可重跑 `node scripts/material-summary-revision-verify.mjs`：52 組視窗、26 表逐列文字、草稿註記、Excel／題目保留與配色檢查；結果 [SUMMARY_REVISION_VERIFY.json](SUMMARY_REVISION_VERIFY.json)。
-- 截圖：[血型 390](summary-revision-screenshots/blood-types-v1-390.png)、[微血管交換 390](summary-revision-screenshots/capillary-exchange-v1-390.png)、[主要血管 390](summary-revision-screenshots/major-vessels-v1-390.png)，同目錄另有 1280。
+- 截圖：[血型 390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/summary-revision-screenshots/blood-types-v1-390.png)、[微血管交換 390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/summary-revision-screenshots/capillary-exchange-v1-390.png)、[主要血管 390](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/summary-revision-screenshots/major-vessels-v1-390.png)，同目錄另有 1280。
 
 請 Claude 複驗兩項必修、手機表格與配色，確認後再交教師部署。

@@ -1,0 +1,287 @@
+{
+  "slug": "water-sodium-regulation",
+  "reviewedCommit": "ffecea67",
+  "method": "Real UI click traversal plus image/source review. Automated setup uses compiled answers only to reach each node; not independent novice certification.",
+  "nodes": [
+    {
+      "node": 1,
+      "visible": "第 1 關｜水從哪裡進來？\n💡提示\n請從六張卡中，選出水『進入』身體的三個來源。\n尿液\n代謝水\n流汗\n食物裡的水\n喝下的液體\n呼氣\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "尿液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "代謝水",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "流汗",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "食物裡的水",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "喝下的液體",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "呼氣",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "multi"
+      ]
+    },
+    {
+      "node": 2,
+      "visible": "第 2 關｜水從哪裡出去？\n💡提示\n請把四條排出途徑，放到圖上對應的器官：尿液→腎、呼氣→肺、蒸散與流汗→皮膚、糞便→腸。\n尿液\n呼氣\n蒸散與流汗\n糞便\n已完成 0／4\n操作說明\n\n先點選一個項目，決定你要配對的內容。\n\n略過引導\n尿液\n選擇說明\n呼氣\n選擇說明\n蒸散與流汗\n選擇說明\n糞便\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "尿液",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "呼氣",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "蒸散與流汗",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "糞便",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 3,
+      "visible": "第 3 關｜缺水時怎麼辦？\n💡提示\n身體缺水時，有兩個方法補救。請選出這兩個。\n口渴，多喝水\n多流汗\nADH，讓腎多保留水\n送出",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "口渴，多喝水",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "多流汗",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "ADH，讓腎多保留水",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "送出",
+          "role": null
+        }
+      ],
+      "steps": [
+        "multi"
+      ]
+    },
+    {
+      "node": 4,
+      "visible": "第 4 關｜血壓變低時的連鎖反應（RAAS）\n💡提示\n血壓下降時，腎臟會啟動一連串反應。第一步，是哪個細胞釋放什麼？請在圖上點出來。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "",
+          "role": null
+        }
+      ],
+      "steps": [
+        "explore",
+        "choice"
+      ]
+    },
+    {
+      "node": 5,
+      "visible": "第 5 關｜醛固酮和 ADH，保水的方法不同\n💡提示\n請把兩個激素配到它的做法。\n醛固酮\nADH\n已完成 0／2\n操作說明\n\n先點選一個項目，決定你要配對的內容。\n\n略過引導\n醛固酮\n選擇說明\nADH\n選擇說明\n檢查配對",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "操作說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "略過引導",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "醛固酮",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "ADH",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "選擇說明",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "檢查配對",
+          "role": null
+        }
+      ],
+      "steps": [
+        "matching"
+      ]
+    },
+    {
+      "node": 6,
+      "visible": "第 6 關｜太多時怎麼排掉？\n💡提示\n打開 ANP 開關，觀察腎臟的變化。\n打開 ANP 開關，觀察腎臟的變化。\n\n打開 ANP 開關，觀察腎臟的變化。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "text": "💡提示",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "text": "打開 ANP 開關，觀察腎臟的變化。",
+          "role": null
+        }
+      ],
+      "steps": [
+        "explore",
+        "choice",
+        "matching"
+      ]
+    }
+  ],
+  "traversal": "six nodes reached via UI"
+}

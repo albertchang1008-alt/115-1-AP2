@@ -1,0 +1,338 @@
+[
+  {
+    "id": "fluid-compartments-foundation-q01",
+    "before": "體重",
+    "after": "體重",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-foundation-q02",
+    "before": "細胞內液2/3、細胞外液1/3",
+    "after": "細胞內液2/3、細胞外液1/3",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-foundation-q03",
+    "before": "細胞外液",
+    "after": "細胞外液",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-foundation-q04",
+    "before": "合成佔體重20%的細胞外液",
+    "after": "合成佔體重20%的細胞外液",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-foundation-q05",
+    "before": "血漿含較多蛋白質",
+    "after": "血漿含較多蛋白質",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-foundation-q06",
+    "before": "性別條件會影響體重含水比例",
+    "after": "性別條件會影響體重含水比例",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-case-q01",
+    "before": "以體重求總水量",
+    "after": "以體重求總水量",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-case-q02",
+    "before": "細胞外液",
+    "after": "細胞外液",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-case-q03",
+    "before": "維持本示例一致的分母與比例",
+    "after": "維持本示例一致的分母與比例",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-case-q04",
+    "before": "性別與脂肪比例差異",
+    "after": "性別與脂肪比例差異",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-case-q05",
+    "before": "蛋白質較多保留在血漿",
+    "after": "蛋白質較多保留在血漿",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "fluid-compartments-predict",
+    "before": "細胞外液",
+    "after": "細胞外液",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q01",
+    "before": "液體、食物與代謝水",
+    "after": "液體、食物與代謝水",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q02",
+    "before": "仍可有無知覺蒸散",
+    "after": "仍可有無知覺蒸散",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q03",
+    "before": "口渴促飲水，ADH增水通透性",
+    "after": "口渴促飲水，ADH增水通透性",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q04",
+    "before": "血管收縮素II",
+    "after": "血管收縮素II",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q05",
+    "before": "醛固酮促鈉回收，ADH增水通透性",
+    "after": "醛固酮促鈉回收，ADH增水通透性",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-foundation-q06",
+    "before": "鈉量與水量",
+    "after": "鈉量與水量",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-case-q01",
+    "before": "2500 mL/日",
+    "after": "2500 mL/日",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-case-q02",
+    "before": "保留皮膚無知覺蒸散",
+    "after": "保留皮膚無知覺蒸散",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-case-q03",
+    "before": "醛固酮",
+    "after": "醛固酮",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-case-q04",
+    "before": "血管收縮素原→I→經轉化酶形成II",
+    "after": "血管收縮素原→I→經轉化酶形成II",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-case-q05",
+    "before": "不能，須把水量改變納入",
+    "after": "不能，須把水量改變納入",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "water-sodium-regulation-predict",
+    "before": "口渴增加攝取，ADH增加腎端保水",
+    "after": "口渴增加攝取，ADH增加腎端保水",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q01",
+    "before": "3粒子",
+    "after": "3粒子",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q02",
+    "before": "粒子較多側",
+    "after": "粒子較多側",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q03",
+    "before": "電荷當量涉及價數，粒子數須另計",
+    "after": "電荷當量涉及價數，粒子數須另計",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q04",
+    "before": "Na⁺主要外液、K⁺主要內液",
+    "after": "Na⁺主要外液、K⁺主要內液",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q05",
+    "before": "增加鈣再吸收與磷排泄",
+    "after": "增加鈣再吸收與磷排泄",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-foundation-q06",
+    "before": "參與酵素活性與神經肌肉功能",
+    "after": "參與酵素活性與神經肌肉功能",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-case-q01",
+    "before": "確認NaCl完全解離並計入兩種離子",
+    "after": "確認NaCl完全解離並計入兩種離子",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-case-q02",
+    "before": "混淆價數與全部解離產物的粒子數",
+    "after": "混淆價數與全部解離產物的粒子數",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-case-q03",
+    "before": "膜可通水且不通溶質",
+    "after": "膜可通水且不通溶質",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-case-q04",
+    "before": "分開細胞膜的內外與血／管液方向",
+    "after": "分開細胞膜的內外與血／管液方向",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-case-q05",
+    "before": "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+    "after": "Cl⁻是重要外液陰離子，PTH促回鈣排磷",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "electrolyte-balance-predict",
+    "before": "解離後粒子數增加",
+    "after": "解離後粒子數增加",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q01",
+    "before": "化學緩衝、肺與腎",
+    "after": "化學緩衝、肺與腎",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q02",
+    "before": "HCO₃⁻為分子、H₂CO₃為分母",
+    "after": "HCO₃⁻為分子、H₂CO₃為分母",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q03",
+    "before": "紅血球內",
+    "after": "紅血球內",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q04",
+    "before": "pH朝上升方向",
+    "after": "pH朝上升方向",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q05",
+    "before": "H⁺入管液，HCO₃⁻回到血液",
+    "after": "H⁺入管液，HCO₃⁻回到血液",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-foundation-q06",
+    "before": "NH₄⁺",
+    "after": "NH₄⁺",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-case-q01",
+    "before": "鹼在分子、酸在分母",
+    "after": "鹼在分子、酸在分母",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-case-q02",
+    "before": "不能，仍須區分緩衝與排出",
+    "after": "不能，仍須區分緩衝與排出",
+    "answer": 3,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-case-q03",
+    "before": "血液到肺，再隨呼氣排出",
+    "after": "血液到肺，再隨呼氣排出",
+    "answer": 0,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-case-q04",
+    "before": "血液",
+    "after": "血液",
+    "answer": 1,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-case-q05",
+    "before": "有助減少血中的酸負荷",
+    "after": "有助減少血中的酸負荷",
+    "answer": 2,
+    "unchanged": true
+  },
+  {
+    "id": "acid-base-homeostasis-predict",
+    "before": "CO₂排出增加，pH朝上升方向",
+    "after": "CO₂排出增加，pH朝上升方向",
+    "answer": 1,
+    "unchanged": true
+  }
+]

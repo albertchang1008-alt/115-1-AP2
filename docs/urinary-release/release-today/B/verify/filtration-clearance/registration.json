@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "slug": "filtration-clearance",
+  "path": "/Users/HHC/Documents/ChatGPT/課程平台1.0/.worktrees/urinary-release-2026-10-22/public/materials/filtration-clearance-v1/index.html",
+  "sha256": "d6cbf1223408e6e0388947092ec4c7538726c5b6b258ba9c0aa57a2bcd637618",
+  "audit": {
+    "slug": "filtration-clearance-v1",
+    "hasScript": true,
+    "hasComplete": true,
+    "nodeTotal": 6,
+    "nodeConfidence": "high",
+    "nodeNote": "material-ids metadata 6 個固定節點",
+    "questionTotal": 15,
+    "questionIds": [
+      "filtration-clearance-case-q01",
+      "filtration-clearance-case-q02",
+      "filtration-clearance-case-q03",
+      "filtration-clearance-case-q04",
+      "filtration-clearance-case-q05",
+      "filtration-clearance-foundation-q01",
+      "filtration-clearance-foundation-q02",
+      "filtration-clearance-foundation-q03",
+      "filtration-clearance-foundation-q04",
+      "filtration-clearance-foundation-q05",
+      "filtration-clearance-foundation-q06",
+      "filtration-clearance-node-01-micro",
+      "filtration-clearance-node-02-micro",
+      "filtration-clearance-node-03-micro",
+      "filtration-clearance-node-05-micro"
+    ]
+  },
+  "catalog": {
+    "label": "腎絲球過濾與清除率｜互動資訊圖表",
+    "tracking": "interactive",
+    "nodeTotal": 6,
+    "questionTotal": 15,
+    "note": "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本"
+  }
+}

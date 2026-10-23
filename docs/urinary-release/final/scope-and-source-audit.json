@@ -1,0 +1,101 @@
+{
+  "baselineProtectedFiles": 160,
+  "protectedFileChanges": [],
+  "paletteOnlyFourNewKeys": true,
+  "copiedFluidRasters": 14,
+  "originalAndCopiedHashesEqual": true,
+  "reviewedCards": 33,
+  "uniqueReviewedProgressRecords": 33,
+  "oldSourceCardsUnchanged": true,
+  "questionChecks": [
+    {
+      "slug": "kidney-anatomy",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 0
+    },
+    {
+      "slug": "nephron-circulation",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 1
+    },
+    {
+      "slug": "filtration-clearance",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 2
+    },
+    {
+      "slug": "tubular-handling",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 3
+    },
+    {
+      "slug": "urine-concentration",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 0
+    },
+    {
+      "slug": "urinary-route-micturition",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 1
+    },
+    {
+      "slug": "fluid-compartments",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 2
+    },
+    {
+      "slug": "water-sodium-regulation",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 3
+    },
+    {
+      "slug": "electrolyte-balance",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 0
+    },
+    {
+      "slug": "acid-base-homeostasis",
+      "nodes": 6,
+      "questions": 11,
+      "predictionPosition": 1
+    }
+  ],
+  "particleChecks": [
+    {
+      "file": "electrolyte-balance-overview.svg",
+      "layouts": 2,
+      "particlesPerLayout": [
+        6,
+        12,
+        18
+      ],
+      "speciesCountsCorrect": true,
+      "clippedOriginalRightBeakers": true
+    },
+    {
+      "file": "electrolyte-balance-node-01.svg",
+      "layouts": 2,
+      "particlesPerLayout": [
+        6,
+        12,
+        18
+      ],
+      "speciesCountsCorrect": true,
+      "clippedOriginalRightBeakers": true
+    }
+  ],
+  "totalQuestionCount": 110,
+  "predictionCount": 10,
+  "actualKitSourceCount": 34,
+  "forbiddenTrackedChanges": [],
+  "ok": true
+}

@@ -1,0 +1,352 @@
+{
+  "slug": "urinary-route-micturition",
+  "version": "v1",
+  "experience": "guided",
+  "title": "尿液通路與排尿控制",
+  "subtitle": "由輸尿管蠕動、膀胱與尿道，理解儲尿及排尿的肌肉神經協調。",
+  "label": "尿液通路與排尿控制｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "蠕動＋斜行穿壁",
+      "label": "輸尿管的運送與防逆流"
+    },
+    {
+      "value": "三開口",
+      "label": "界定膀胱三角"
+    },
+    {
+      "value": "三處",
+      "label": "輸尿管狹窄"
+    }
+  ],
+  "lab": {
+    "title": "情境實驗室",
+    "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+    "figure": "urinary-route-micturition-stage1-base-01.svg",
+    "states": [
+      {
+        "id": "state-1",
+        "label": "流經",
+        "explain": "腎盂至體外路徑。"
+      },
+      {
+        "id": "state-2",
+        "label": "儲尿",
+        "explain": "逼尿肌（迫尿肌）放鬆、出口控制。"
+      },
+      {
+        "id": "state-3",
+        "label": "排尿",
+        "explain": "逼尿肌（迫尿肌）收縮與出口放鬆。"
+      }
+    ],
+    "predict": {
+      "question": "從流經路徑改看「儲尿」狀態，何種壁肌與出口配合較符合？",
+      "options": [
+        "逼尿肌（迫尿肌）收縮且出口完全放鬆",
+        "逼尿肌（迫尿肌）放鬆，出口保持控制",
+        "輸尿管改為由膀胱向腎盂送尿",
+        "意識直接將壁肌當骨骼肌收縮"
+      ],
+      "answer": 1,
+      "feedback": "儲尿時壁肌放鬆並控制出口；排尿時壁肌收縮且出口放鬆，見節點 05。",
+      "sources": [
+        "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "urinary-route-micturition-node-01",
+      "tag": "01",
+      "title": "輸尿管的蠕動與防逆流",
+      "summary": "輸尿管連接腎盂與膀胱，靠平滑肌蠕動送尿",
+      "figure": "urinary-route-micturition-stage1-base-02.svg",
+      "concept": "輸尿管連接腎盂與膀胱，靠平滑肌蠕動送尿；斜行穿過膀胱壁的構造，有助在膀胱內壓作用下防止逆流。",
+      "points": [
+        "蠕動將尿液送往膀胱。",
+        "防逆流與斜行穿入膀胱壁有關。",
+        "生理性瓣膜作用不等於另有解剖瓣膜。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "觀察輸尿管進入膀胱的路徑，將沿途蠕動與末端受壓閉合分成兩個機轉，不把尿液運送歸給重力而已。"
+      },
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+      ],
+      "reference": "《解剖學》泌尿系統，第 10–11 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urinary-route-micturition-node-02",
+      "tag": "02",
+      "title": "輸尿管三處狹窄",
+      "summary": "輸尿管三處狹窄為與腎盂交接處、與髂外動脈及靜脈交叉處，以及進入膀胱處",
+      "figure": "urinary-route-micturition-stage1-base-03.svg",
+      "concept": "輸尿管三處狹窄為與腎盂交接處、與髂外動脈及靜脈交叉處，以及進入膀胱處。",
+      "points": [
+        "三個位置分別在腎盂端、血管交叉處與膀胱壁端。",
+        "由上而下依序：腎盂端、骨盆緣血管交叉處、膀胱壁端。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "對照三個放大框，從腎盂向膀胱逐一定位三處狹窄。"
+      },
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+      ],
+      "reference": "《解剖學》泌尿系統，第 10–11 頁；《生理學》腎臟與體液的恆定，第 3、13 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urinary-route-micturition-node-03",
+      "tag": "03",
+      "title": "膀胱三角與逼尿肌（迫尿肌）",
+      "summary": "膀胱三角由兩個輸尿管口與一個尿道內口界定",
+      "figure": "urinary-route-micturition-stage1-base-04.svg",
+      "concept": "膀胱三角由兩個輸尿管口與一個尿道內口界定；膀胱壁的逼尿肌（迫尿肌）是平滑肌。",
+      "points": [
+        "輸尿管口是尿液進入膀胱的位置。",
+        "尿道內口是離開膀胱的出口。",
+        "膀胱三角是區域，逼尿肌（迫尿肌）是肌肉。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "在膀胱內面圖先找兩個入口與一個出口，再看壁肌放大圖，避免把三角當成另外一條管道。"
+      },
+      "sources": [
+        "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+      ],
+      "reference": "《解剖學》泌尿系統，第 11–12 頁；《生理學》腎臟與體液的恆定，第 24–25 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urinary-route-micturition-node-04",
+      "tag": "04",
+      "title": "男女尿道與括約肌",
+      "summary": "尿道將尿液由膀胱排至體外",
+      "figure": "urinary-route-micturition-stage1-base-05.svg",
+      "concept": "尿道將尿液由膀胱排至體外；課本女性約 3.8 cm、男性約 20 cm。內括約肌為平滑肌，外括約肌為骨骼肌。",
+      "points": [
+        "男性尿道分前列腺部、膜部及陰莖部。",
+        "外括約肌可受意識控制。",
+        "女性尿道較短且只供排尿；男性尿道兼為生殖管道。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較男女通路時，先辨認膀胱出口，再看長度與括約肌的肌肉類型，勿將尿道與輸尿管互換。"
+      },
+      "sources": [
+        "urethra；anatomy/AB-05_15 p.14, anatomy/AB-05_15 p.15, anatomy/AB-05_15 p.12, physiology/CH09 p.25"
+      ],
+      "reference": "《解剖學》泌尿系統，第 12、14–15 頁；《生理學》腎臟與體液的恆定，第 25 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urinary-route-micturition-node-05",
+      "tag": "05",
+      "title": "儲尿與排尿反射",
+      "summary": "膀胱牽張訊息引發排尿反射",
+      "figure": "urinary-route-micturition-stage1-base-06.svg",
+      "concept": "膀胱牽張訊息引發排尿反射；排尿時骨盆副交感神經促逼尿肌（迫尿肌）收縮，並配合出口放鬆。",
+      "points": [
+        "儲尿時逼尿肌（迫尿肌）放鬆，出口保持控制。",
+        "陰神經控制外括約肌，參與隨意控制。",
+        "膀胱收縮與括約肌放鬆需要協調。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "比較儲尿與排尿時分開列出壁肌、出口及神經；意識可調節外括約肌，並非直接把壁肌當成骨骼肌控制。"
+      },
+      "sources": [
+        "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+      ],
+      "reference": "《解剖學》泌尿系統，第 11–12、14 頁；《生理學》腎臟與體液的恆定，第 24–25 頁。",
+      "caption": "無字底圖。"
+    },
+    {
+      "id": "urinary-route-micturition-node-06",
+      "tag": "06",
+      "title": "尿液特性與尿量",
+      "summary": "待教師核可卡片",
+      "figure": "urinary-route-micturition-stage1-placeholder.svg",
+      "concept": "待教師核可卡片",
+      "points": [
+        "本節暫留佔位。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "來源核可後再補入內容與題目。"
+      },
+      "sources": [],
+      "reference": "待教師核可卡片",
+      "pendingSources": [
+        "urine-physical-properties"
+      ],
+      "status": "placeholder",
+      "caption": "待教師核可卡片"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "urinary-route-micturition-foundation-q01",
+      "stem": "輸尿管送尿及防逆流的配對，何者正確？",
+      "options": [
+        "靠蠕動送尿，斜行穿入膀胱壁有助防逆流",
+        "只靠重力送尿，末端必有獨立解剖瓣膜",
+        "由膀胱形成尿液，再沿輸尿管送至腎盂",
+        "由尿道蠕動代替輸尿管送尿"
+      ],
+      "answer": 0,
+      "hint": "將運送機轉與末端穿壁構造分開。",
+      "explain": "輸尿管平滑肌蠕動送尿；斜行穿壁可產生生理性瓣膜作用，不等於另有解剖瓣膜。",
+      "nodeId": "urinary-route-micturition-node-01",
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q02",
+      "stem": "輸尿管三處狹窄中，位於中段的一處在哪裡？",
+      "options": [
+        "腎門與腎筋膜交界",
+        "與髂外動脈及靜脈交叉處",
+        "尿道外口",
+        "膀胱三角的尿道內口"
+      ],
+      "answer": 1,
+      "hint": "由腎盂向膀胱追蹤，找出血管交叉的位置。",
+      "explain": "輸尿管在與髂外動脈及靜脈交叉處形成中段狹窄；其餘兩處在腎盂交接與進入膀胱處。",
+      "nodeId": "urinary-route-micturition-node-02",
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q03",
+      "stem": "膀胱三角由哪三個開口界定？",
+      "options": [
+        "兩個尿道內口與一個輸尿管口",
+        "兩個腎乳頭與一個腎門",
+        "兩個輸尿管口與一個尿道內口",
+        "兩個腎盂與一個尿道外口"
+      ],
+      "answer": 2,
+      "hint": "先找兩個入口，再找一個出口。",
+      "explain": "兩輸尿管口是入口，尿道內口是出口，三者形成膀胱三角；壁肌則是平滑肌。",
+      "nodeId": "urinary-route-micturition-node-03",
+      "sources": [
+        "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q04",
+      "stem": "哪個尿道括約肌具有骨骼肌及隨意控制特性？",
+      "options": [
+        "內括約肌",
+        "逼尿肌（迫尿肌）",
+        "輸尿管壁平滑肌",
+        "外括約肌"
+      ],
+      "answer": 3,
+      "hint": "將肌肉類型與意識控制配對。",
+      "explain": "外括約肌為骨骼肌，可受隨意控制；內括約肌及逼尿肌（迫尿肌）為平滑肌。",
+      "nodeId": "urinary-route-micturition-node-04",
+      "sources": [
+        "urethra；anatomy/AB-05_15 p.14, anatomy/AB-05_15 p.15, anatomy/AB-05_15 p.12, physiology/CH09 p.25"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-foundation-q05",
+      "stem": "排尿反射時，哪種組合有利排出尿液？",
+      "options": [
+        "逼尿肌（迫尿肌）收縮、出口放鬆",
+        "逼尿肌（迫尿肌）放鬆、出口緊閉",
+        "逼尿肌（迫尿肌）與出口都保持緊閉",
+        "只有輸尿管停止蠕動"
+      ],
+      "answer": 0,
+      "hint": "同時考慮膀胱擠壓與出口阻力。",
+      "explain": "排尿需壁肌收縮與出口放鬆協調，骨盆副交感神經參與此反射。",
+      "nodeId": "urinary-route-micturition-node-05",
+      "sources": [
+        "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "urinary-route-micturition-case-q01",
+      "stem": "【通路觀察】輸尿管斜行穿入膀胱壁，膀胱內壓增加可使該段受壓閉合，應如何理解？",
+      "options": [
+        "證明末端必有獨立解剖瓣膜",
+        "有助防逆流的生理性瓣膜作用",
+        "代表尿液改由膀胱流回腎盂",
+        "代表輸尿管不需蠕動"
+      ],
+      "answer": 1,
+      "hint": "分辨功能上的瓣膜作用與獨立瓣膜構造。",
+      "explain": "斜行穿壁形成受壓防逆流機轉；不能憑其功能自行新增解剖瓣膜。",
+      "nodeId": "urinary-route-micturition-node-01",
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-case-q02",
+      "stem": "【路徑追蹤】一滴尿液隨尿流由腎盂往膀胱移動，依序會通過輸尿管的哪三處狹窄？",
+      "options": [
+        "進入膀胱壁處 → 跨越髂外動脈及靜脈處 → 腎盂與輸尿管交接處",
+        "跨越髂外動脈及靜脈處 → 腎盂與輸尿管交接處 → 進入膀胱壁處",
+        "腎盂與輸尿管交接處 → 跨越髂外動脈及靜脈處 → 進入膀胱壁處",
+        "腎盂與輸尿管交接處 → 尿道內口 → 進入膀胱壁處"
+      ],
+      "answer": 2,
+      "hint": "以流向定位起點、血管交叉處及終點。",
+      "explain": "尿液先由腎盂進入輸尿管，向下經髂外動脈及靜脈交叉處，最後穿入膀胱壁；尿道內口位於膀胱出口，並非輸尿管狹窄。",
+      "nodeId": "urinary-route-micturition-node-02",
+      "sources": [
+        "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-case-q03",
+      "stem": "【內面圖觀察】要在膀胱內面圈出三角，應連接何者？",
+      "options": [
+        "左右腎盂及尿道外口",
+        "左右腎門及輸尿管上端",
+        "左右外括約肌及腎乳頭",
+        "左右輸尿管口及尿道內口"
+      ],
+      "answer": 3,
+      "hint": "辨認尿液進入與離開膀胱的三個開口。",
+      "explain": "膀胱三角是兩輸尿管口與一尿道內口所界定的區域，並非另一條管道。",
+      "nodeId": "urinary-route-micturition-node-03",
+      "sources": [
+        "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+      ]
+    },
+    {
+      "id": "urinary-route-micturition-case-q04",
+      "stem": "【控制配對】想說明可用意識暫時控制排尿出口，應連到哪一組？",
+      "options": [
+        "陰神經與尿道外括約肌",
+        "骨盆副交感神經與腎被膜",
+        "腎素與膀胱三角",
+        "緻密斑與輸尿管壁"
+      ],
+      "answer": 0,
+      "hint": "找出體神經控制的骨骼肌。",
+      "explain": "陰神經控制外括約肌，參與隨意控制；逼尿肌（迫尿肌）是平滑肌，不能當成意識直接控制的骨骼肌。",
+      "nodeId": "urinary-route-micturition-node-05",
+      "sources": [
+        "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+      ]
+    }
+  ],
+  "credits": [
+    "《解剖學》泌尿系統，第 10–12、14–15 頁；《生理學》腎臟與體液的恆定，第 3、13、24–25 頁。",
+    "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+  ]
+}

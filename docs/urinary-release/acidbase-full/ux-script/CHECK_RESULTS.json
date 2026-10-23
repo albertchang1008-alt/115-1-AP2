@@ -1,0 +1,49 @@
+{
+  "baseline": "81243fa",
+  "scriptSha256": "a6f8ae051a98a0460f5ff6019a544d3146b50ecba4011414a7e880bf916c1a4d",
+  "layout": {
+    "cases": 576,
+    "pass": 576,
+    "fail": 0,
+    "skipped": 0
+  },
+  "standaloneCopyStates": 144,
+  "requiredScriptUnits": 93,
+  "quotedSourceClauses": 37,
+  "missingUnits": 0,
+  "extraOrChangedText": 0,
+  "screenshots": 144,
+  "tests": {
+    "pass": 33,
+    "fail": 0,
+    "skipped": 0
+  },
+  "npmCheck": {
+    "frontend": 162,
+    "backend": 61,
+    "fail": 0,
+    "skipped": 0
+  },
+  "contentCheck": {
+    "quoteOccurrences": 789,
+    "displayFields": 210,
+    "errors": 0,
+    "skipped": 0
+  },
+  "otherMaterialsByteParity": 18,
+  "browser": "Playwright Chromium; WebKit did not produce a valid run",
+  "fileSha256": {
+    "materials-src/apply-kit/student-script.mjs": "6a2672016c89fb04428668a908c1c8b33d3f7da49b4524c9f6a7a3de024d495f",
+    "materials-src/apply-kit/student.js": "6e2d73344bb6c325760c8a3318dd7c997ca179959489dc94ced379ef9ffbafbe",
+    "materials-src/apply-kit/student.css": "4013f1da935e3ed1939ad4c1e08639930bc2ad43b1cc4864aa4c2e15153c3dee",
+    "materials-src/apply-kit/full-model.mjs": "7e8f0ad94c84e7ef79e9ebeee8061c2132b6bd4d1302a25bb3c4b17260dcabcc",
+    "materials-src/apply-kit/full-render.mjs": "dfde4db0314a6d8f20ebe48e3509a4097357bdbcfa4741d5eff2563a05e319c3",
+    "materials-src/apply-kit/full-check.mjs": "416b9b1c2c0e9b0c1563a0efdadc4620ca3761b5fef3118663c76fd1bafda879",
+    "materials-src/apply-kit/render.mjs": "b08cb2f322f96ead628321e4e519d74dac6dc3768f3dd6f4cee36847019664c6",
+    "scripts/apply-layout-check.mjs": "ff0cee6a284c1b7ae1c416a43767801898c7fb26f0af1d7c9a9c29896df53cb3",
+    "scripts/acidbase-script-check.mjs": "9c2593ae9cea32d2f9f2767b70d0420007fcc536fda34d98f3a3a059e493ec82",
+    "scripts/lib/acidbase-script-browser.mjs": "ba84d9d17e56b9b86f6f6c45a9645f79b23a9b6c059b0166a05492f8173d1fa3",
+    "scripts/lib/acidbase-script-layout.mjs": "6fcefeaef80b5dc5f67235fa5c29de96b61ffd098926909d8e14f8fd7026989b",
+    "tests/acidbase-script.test.mjs": "658b9934a817514b8ca5b279094cd543125921b50d0e1fba952838c501014396"
+  }
+}

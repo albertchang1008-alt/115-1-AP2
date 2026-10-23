@@ -1,0 +1,15 @@
+{
+  "ok": false,
+  "kind": "material_anchor_misplacement",
+  "figure": "overview",
+  "state": "state-1",
+  "label": "後腹腔",
+  "sourceAnchor": [
+    170,
+    510
+  ],
+  "observed": "錨點位於前面觀底圖左下方的髂骨上緣／骨性區",
+  "expected": "腹膜後方的腎周區域，而非骨性構造",
+  "screenshot": "screenshots/1280-overview-state-1.png",
+  "decision": "遵教師教材不合格立即停止規則，不改底圖或錨點，不再重跑，不進C。"
+}

@@ -1,0 +1,273 @@
+{
+  "slug": "acid-base-homeostasis",
+  "builtAt": "2026-10-17T02:23:09.480Z",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "minSvgTextPx": 14.84235294117647,
+      "svgTextSizes": [
+        {
+          "text": "構造與功能圖例",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "1",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "碳酸系統",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "2",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "磷酸鹽",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "3",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "蛋白質",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "4",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "4",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "CO₂",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "5",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "5",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "肺",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "6",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "6",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "H⁺",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "7",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "7",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "HCO₃⁻",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "8",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "8",
+          "px": 14.84235294117647
+        },
+        {
+          "text": "尿液排酸",
+          "px": 14.84235294117647
+        }
+      ],
+      "nodes": [
+        {
+          "id": "acid-base-homeostasis-node-02",
+          "minPx": 13.944,
+          "texts": [
+            {
+              "text": "HCO₃⁻",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "鹼：放在分子",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "H₂CO₃",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "酸：放在分母",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "pH＝pKa＋log（鹼/酸）",
+              "px": 13.944,
+              "clipped": false
+            },
+            {
+              "text": "6.1＋log（26/1.3）≈7.4",
+              "px": 13.944,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "minSvgTextPx": 12.898864889705882,
+      "svgTextSizes": [
+        {
+          "text": "碳酸系統",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "磷酸鹽",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "蛋白質",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "CO₂",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "肺",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "H⁺",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "HCO₃⁻",
+          "px": 12.898864889705882
+        },
+        {
+          "text": "尿液排酸",
+          "px": 12.898864889705882
+        }
+      ],
+      "nodes": [
+        {
+          "id": "acid-base-homeostasis-node-02",
+          "minPx": 42.252,
+          "texts": [
+            {
+              "text": "HCO₃⁻",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "鹼：放在分子",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "H₂CO₃",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "酸：放在分母",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "pH＝pKa＋log（鹼/酸）",
+              "px": 42.252,
+              "clipped": false
+            },
+            {
+              "text": "6.1＋log（26/1.3）≈7.4",
+              "px": 42.252,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    "390-page.png",
+    "390-lab-state-1.png",
+    "390-lab-state-2.png",
+    "390-lab-state-3.png",
+    "390-node-acid-base-homeostasis-node-01.png",
+    "390-node-acid-base-homeostasis-node-02.png",
+    "390-node-acid-base-homeostasis-node-03.png",
+    "390-node-acid-base-homeostasis-node-04.png",
+    "390-node-acid-base-homeostasis-node-05.png",
+    "390-node-acid-base-homeostasis-node-06.png",
+    "1280-page.png",
+    "1280-lab-state-1.png",
+    "1280-lab-state-2.png",
+    "1280-lab-state-3.png",
+    "1280-node-acid-base-homeostasis-node-01.png",
+    "1280-node-acid-base-homeostasis-node-02.png",
+    "1280-node-acid-base-homeostasis-node-03.png",
+    "1280-node-acid-base-homeostasis-node-04.png",
+    "1280-node-acid-base-homeostasis-node-05.png",
+    "1280-node-acid-base-homeostasis-node-06.png"
+  ],
+  "errors": [],
+  "nodeIds": [
+    "acid-base-homeostasis-node-01",
+    "acid-base-homeostasis-node-02",
+    "acid-base-homeostasis-node-03",
+    "acid-base-homeostasis-node-04",
+    "acid-base-homeostasis-node-05",
+    "acid-base-homeostasis-node-06"
+  ],
+  "questionIds": [
+    "acid-base-homeostasis-foundation-q01",
+    "acid-base-homeostasis-foundation-q02",
+    "acid-base-homeostasis-foundation-q03",
+    "acid-base-homeostasis-foundation-q04",
+    "acid-base-homeostasis-foundation-q05",
+    "acid-base-homeostasis-foundation-q06",
+    "acid-base-homeostasis-case-q01",
+    "acid-base-homeostasis-case-q02",
+    "acid-base-homeostasis-case-q03",
+    "acid-base-homeostasis-case-q04",
+    "acid-base-homeostasis-case-q05"
+  ],
+  "ok": true
+}

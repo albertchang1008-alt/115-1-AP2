@@ -1,0 +1,2287 @@
+{
+  "kidney-anatomy": {
+    "slug": "kidney-anatomy",
+    "version": "v1",
+    "experience": "guided",
+    "title": "腎臟位置、構造與功能",
+    "subtitle": "從後腹腔位置與腎切面，連結尿液形成、收集通路及內分泌功能。",
+    "label": "腎臟位置、構造與功能｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "後腹腔",
+        "label": "腎臟的位置"
+      },
+      {
+        "value": "皮質／髓質",
+        "label": "切面的內外分區"
+      },
+      {
+        "value": "內分泌",
+        "label": "腎功能的另一面"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "kidney-anatomy-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "位置",
+          "explain": "器官位置與右低左高。"
+        },
+        {
+          "id": "state-2",
+          "label": "切面",
+          "explain": "皮質、髓質及收集區。"
+        },
+        {
+          "id": "state-3",
+          "label": "功能",
+          "explain": "製尿與內分泌三分工。"
+        }
+      ],
+      "predict": {
+        "question": "由「位置」切到「切面」閱讀主題，應改以哪項關係為主？",
+        "options": [
+          "外皮質、內髓質及尿液收集區",
+          "右腎必定比左腎高",
+          "膀胱製造紅血球生成素（腎紅血球生成因子）",
+          "輸尿管取代腎小體過濾"
+        ],
+        "answer": 0,
+        "feedback": "切面主題看皮質、髓質與收集區；位置主題看後腹腔及兩腎高低，可回讀節點 01–03。",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "kidney-anatomy-node-01",
+        "tag": "01",
+        "title": "腎臟的位置",
+        "summary": "腎臟位於後腹腔、脊柱兩側，右腎通常較左腎低",
+        "figure": "kidney-anatomy-stage1-base-02.svg",
+        "concept": "腎臟位於後腹腔、脊柱兩側，右腎通常較左腎低。",
+        "points": [
+          "腎在腹膜的後方，並非位於腹膜腔內。",
+          "前面觀圖片的左側對應身體右側。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "讀圖時先依身體左右定位，再比較兩腎高度，避免把畫面左右當成身體左右。"
+        },
+        "sources": [
+          "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2"
+        ],
+        "reference": "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "kidney-anatomy-node-02",
+        "tag": "02",
+        "title": "皮質、髓質與腎柱",
+        "summary": "腎切面外層是皮質，內層為髓質",
+        "figure": "kidney-anatomy-stage1-base-03.svg",
+        "concept": "腎切面外層是皮質，內層為髓質；皮質延伸至腎錐體之間的部分稱腎柱。",
+        "points": [
+          "腎錐體屬於髓質。",
+          "腎柱與外圍皮質相連。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在切面上找兩個腎錐體之間的組織，沿著它連回外圍皮質，就能辨識腎柱。"
+        },
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ],
+        "reference": "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "kidney-anatomy-node-03",
+        "tag": "03",
+        "title": "乳頭、腎盞與腎盂",
+        "summary": "集尿管開口於腎乳頭，尿液依序流入小腎盞、大腎盞與腎盂，再進入輸尿管",
+        "figure": "kidney-anatomy-stage1-base-03.svg",
+        "concept": "集尿管開口於腎乳頭，尿液依序流入小腎盞、大腎盞與腎盂，再進入輸尿管。",
+        "points": [
+          "腎乳頭是腎錐體的尖端。",
+          "小腎盞承接乳頭流出的尿液。",
+          "腎盂接續輸尿管。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "沿乳頭向外追蹤收集路徑，與皮質中形成濾液的腎小體分開標記。"
+        },
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ],
+        "reference": "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "kidney-anatomy-node-04",
+        "tag": "04",
+        "title": "腎門與保護層",
+        "summary": "腎門在腎臟內側凹入處",
+        "figure": "kidney-anatomy-stage1-base-04.svg",
+        "concept": "腎門在腎臟內側凹入處；腎外圍由內而外依次有腎被膜、脂肪囊與腎筋膜。",
+        "points": [
+          "腎門是內側的出入口區。",
+          "腎被膜緊貼腎表面，脂肪囊位於其外。",
+          "腎筋膜是更外層的支持構造。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較器官切面與包覆層：找出入口是在定位腎門，排列包覆層則要從腎表面向外追蹤。"
+        },
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+          "kidney-position；anatomy/AB-05_15 p.2–3"
+        ],
+        "reference": "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4；kidney-position；anatomy/AB-05_15 p.2–3",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "kidney-anatomy-node-05",
+        "tag": "05",
+        "title": "器官分工與尿液形成",
+        "summary": "泌尿系統中，腎臟形成尿液、輸尿管運送尿液、膀胱儲存尿液，尿道將尿液排出體外",
+        "figure": "kidney-anatomy-stage1-base-05.svg",
+        "concept": "泌尿系統中，腎臟形成尿液、輸尿管運送尿液、膀胱儲存尿液，尿道將尿液排出體外。",
+        "points": [
+          "尿液形成與尿液運送是不同功能。",
+          "膀胱是暫存場所，並非主要製尿場所。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "用「形成、運送、儲存、排出」四個動詞依序配對器官，檢查是否把輸尿管和尿道交換。"
+        },
+        "sources": [
+          "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+        ],
+        "reference": "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "kidney-anatomy-node-06",
+        "tag": "06",
+        "title": "腎臟的內分泌功能",
+        "summary": "腎臟除形成尿液，也具有腎素、紅血球生成素（腎紅血球生成因子）及活化維生素 D 的內分泌相關功能",
+        "figure": "kidney-anatomy-stage1-base-06.svg",
+        "concept": "腎臟除形成尿液，也具有腎素、紅血球生成素（腎紅血球生成因子）及活化維生素 D 的內分泌相關功能。",
+        "points": [
+          "腎素參與血壓與醛固酮的連鎖調節。",
+          "紅血球生成素（腎紅血球生成因子）促進造血。",
+          "活化維生素 D 參與鈣的調節。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "整理腎功能時分成製尿與內分泌兩欄；只記錄尿量，無法涵蓋造血與維生素 D 活化的角色。"
+        },
+        "sources": [
+          "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+        ],
+        "reference": "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35",
+        "caption": "無字底圖。"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "kidney-anatomy-foundation-q01",
+        "stem": "關於腎臟位置，哪一項正確？",
+        "options": [
+          "位於後腹腔，右腎通常較低",
+          "位於腹膜腔內，右腎通常較高",
+          "位於骨盆腔，左右等高",
+          "位於胸腔，左腎通常較低"
+        ],
+        "answer": 0,
+        "hint": "分別核對腹膜關係與身體左右。",
+        "explain": "腎臟在腹膜後方，右腎通常較左腎低；不要將畫面左右直接當成身體左右。",
+        "nodeId": "kidney-anatomy-node-01",
+        "sources": [
+          "kidney-position；anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.3, physiology/CH09 p.2"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-foundation-q02",
+        "stem": "腎柱是什麼構造？",
+        "options": [
+          "深入腎錐體之間的皮質",
+          "腎錐體的尖端",
+          "連接腎盂的輸尿管",
+          "腎臟外圍的脂肪囊"
+        ],
+        "answer": 0,
+        "hint": "由錐體之間向外圍皮質追蹤。",
+        "explain": "腎柱是延伸到錐體之間的皮質；錐體屬髓質，尖端則稱腎乳頭。",
+        "nodeId": "kidney-anatomy-node-02",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-foundation-q03",
+        "stem": "腎乳頭流出的尿液先由哪個構造承接？",
+        "options": [
+          "小腎盞",
+          "腎絲球",
+          "大腎盞",
+          "腎門"
+        ],
+        "answer": 0,
+        "hint": "找出直接包接乳頭的收集構造。",
+        "explain": "尿液由乳頭先進小腎盞，再匯入大腎盞與腎盂；腎絲球負責過濾。",
+        "nodeId": "kidney-anatomy-node-03",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-foundation-q04",
+        "stem": "腎外包覆層由內而外的順序為何？",
+        "options": [
+          "腎被膜、脂肪囊、腎筋膜",
+          "脂肪囊、腎筋膜、腎被膜",
+          "腎筋膜、腎被膜、脂肪囊",
+          "腎被膜、腎筋膜、脂肪囊"
+        ],
+        "answer": 0,
+        "hint": "從緊貼腎表面的層開始。",
+        "explain": "腎被膜貼近腎表面，向外才是脂肪囊與腎筋膜；腎門則是內側凹入的出入口區。",
+        "nodeId": "kidney-anatomy-node-04",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+          "kidney-position；anatomy/AB-05_15 p.2–3"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-foundation-q05",
+        "stem": "哪個配對符合泌尿系統器官分工？",
+        "options": [
+          "腎臟形成尿液，膀胱儲存尿液",
+          "輸尿管形成尿液，尿道儲存尿液",
+          "膀胱形成尿液，腎臟排尿到體外",
+          "尿道運送尿液到膀胱，輸尿管排尿到體外"
+        ],
+        "answer": 0,
+        "hint": "先分清形成、運送、儲存與排出。",
+        "explain": "腎形成尿液，輸尿管送至膀胱儲存，最後經尿道排至體外。",
+        "nodeId": "kidney-anatomy-node-05",
+        "sources": [
+          "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-foundation-q06",
+        "stem": "腎臟的紅血球生成素（腎紅血球生成因子）主要參與何種功能？",
+        "options": [
+          "促進紅血球生成",
+          "將尿液由膀胱運至腎盂",
+          "直接作為膀胱壁肌肉",
+          "使腎乳頭轉變為腎柱"
+        ],
+        "answer": 0,
+        "hint": "把內分泌訊號與尿液通路分開。",
+        "explain": "紅血球生成素（腎紅血球生成因子）參與造血；腎素及活化維生素 D 分別參與血壓連鎖調節與鈣調節。",
+        "nodeId": "kidney-anatomy-node-06",
+        "sources": [
+          "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "kidney-anatomy-case-q01",
+        "stem": "【切面觀察】兩個腎錐體之間的組織與外圍皮質相連，應辨認為何？",
+        "options": [
+          "腎柱",
+          "腎乳頭",
+          "腎盂",
+          "腎被膜"
+        ],
+        "answer": 0,
+        "hint": "抓住與皮質連續及位於錐體間兩個線索。",
+        "explain": "腎柱是深入錐體間的皮質；乳頭位於錐體尖端，腎盂則是收集區。",
+        "nodeId": "kidney-anatomy-node-02",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-case-q02",
+        "stem": "【路徑觀察】由集尿管出口沿尿液方向追蹤，經乳頭後的正確順序為何？",
+        "options": [
+          "小腎盞、大腎盞、腎盂",
+          "大腎盞、小腎盞、腎盂",
+          "腎盂、大腎盞、小腎盞",
+          "腎絲球、小腎盞、輸尿管"
+        ],
+        "answer": 0,
+        "hint": "從最先承接乳頭的構造往外追。",
+        "explain": "小腎盞先承接乳頭尿液，再匯入大腎盞與腎盂，之後接輸尿管。",
+        "nodeId": "kidney-anatomy-node-03",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-case-q03",
+        "stem": "【器官配對】尿液已離開腎盂，正被送往膀胱；排到體外時又經另一條管道。兩者依序為何？",
+        "options": [
+          "輸尿管、尿道",
+          "尿道、輸尿管",
+          "輸尿管、腎小管",
+          "腎小管、尿道"
+        ],
+        "answer": 0,
+        "hint": "分辨膀胱入口前與出口後的管道。",
+        "explain": "輸尿管負責腎至膀胱的運送，尿道負責膀胱至體外的排出。",
+        "nodeId": "kidney-anatomy-node-05",
+        "sources": [
+          "urinary-system-overview；physiology/CH09 p.9, physiology/CH09 p.10, anatomy/AB-05_15 p.2, anatomy/AB-05_15 p.9, anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.14"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-case-q04",
+        "stem": "【模型觀察】腎上腺位於腎臟附近。哪種判讀符合器官定位？",
+        "options": [
+          "鄰近腎臟，仍是另一個器官",
+          "是腎錐體的尖端",
+          "是深入髓質的腎柱",
+          "就是腎門內的腎盂"
+        ],
+        "answer": 0,
+        "hint": "鄰近位置是否等同器官組成？",
+        "explain": "腎上腺與腎臟相鄰，但不是腎葉、腎元或尿液收集區；不能因位置接近而混同。",
+        "nodeId": "kidney-anatomy-node-04",
+        "sources": [
+          "kidney-structure；anatomy/AB-05_15 p.3, anatomy/AB-05_15 p.4, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.3, physiology/CH09 p.4",
+          "kidney-position；anatomy/AB-05_15 p.2–3"
+        ]
+      },
+      {
+        "id": "kidney-anatomy-case-q05",
+        "stem": "【概念整理】只以尿量整理腎臟功能，會漏掉下列哪一組角色？",
+        "options": [
+          "造血訊號與維生素 D 活化",
+          "輸尿管運尿與尿道排尿",
+          "腎盞收集與腎盂匯流",
+          "膀胱暫存與括約肌控制"
+        ],
+        "answer": 0,
+        "hint": "找出腎臟本身的內分泌相關作用。",
+        "explain": "腎臟還參與紅血球生成素（腎紅血球生成因子）、腎素與維生素 D 活化，不能只用尿量涵蓋全部功能。",
+        "nodeId": "kidney-anatomy-node-06",
+        "sources": [
+          "kidney-endocrine；physiology/CH09 p.9, anatomy/AB-05_15 p.9, physiology/CH09 p.6, physiology/CH09 p.7, physiology/CH09 p.35"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  },
+  "nephron-circulation": {
+    "slug": "nephron-circulation",
+    "version": "v1",
+    "experience": "guided",
+    "title": "腎元、腎血流與近腎絲球器",
+    "subtitle": "先辨腎元與上皮，再追血流及近腎絲球器，最後區分三種流量。",
+    "label": "腎元、腎血流與近腎絲球器｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "腎小體＋腎小管",
+        "label": "腎元組成"
+      },
+      {
+        "value": "兩型都在皮質",
+        "label": "腎小體的位置"
+      },
+      {
+        "value": "GFR／RPF",
+        "label": "過濾分率 FF"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "nephron-circulation-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "短環",
+          "explain": "皮質型環較短。"
+        },
+        {
+          "id": "state-2",
+          "label": "長環",
+          "explain": "近髓質型環深入髓質。"
+        },
+        {
+          "id": "state-3",
+          "label": "訊號",
+          "explain": "近腎絲球器感測與腎素。"
+        }
+      ],
+      "predict": {
+        "question": "由「短環」切到「長環」閱讀主題，哪個比較正確？",
+        "options": [
+          "近髓質腎元的長環較深入髓質",
+          "近髓質腎元的腎小體改位於髓質深部",
+          "皮質腎元的環必定較長",
+          "兩型腎元的血液直接流入集尿管"
+        ],
+        "answer": 0,
+        "feedback": "兩型腎小體仍都在皮質；近髓質型較靠交界且環較長，見節點 02。",
+        "sources": [
+          "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "nephron-circulation-node-01",
+        "tag": "01",
+        "title": "腎元基本構造",
+        "summary": "腎元由腎小體與腎小管構成",
+        "figure": "nephron-circulation-stage1-base-02.svg",
+        "concept": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。",
+        "points": [
+          "腎絲球是腎小體內的微血管叢。",
+          "集尿管接收多個腎元的管液，另列為接續構造。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "沿管液走向找出鮑氏囊與近曲小管的接點，勿把入球小動脈當成管液入口。"
+        },
+        "sources": [
+          "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+        ],
+        "reference": "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "nephron-circulation-node-02",
+        "tag": "02",
+        "title": "皮質與近髓質腎元",
+        "summary": "皮質腎元與近髓質腎元的腎小體都在皮質",
+        "figure": "nephron-circulation-stage1-base-01.svg",
+        "concept": "皮質腎元與近髓質腎元的腎小體都在皮質；近髓質型較靠近皮髓交界，亨利氏環較長且深入髓質。",
+        "points": [
+          "皮質型的亨利氏環較短。",
+          "近髓質型的長環與直血管配合濃縮功能。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在同一皮髓交界線比較兩型：先找腎小體，再追環的長短，不能單憑「近髓質」名稱判斷腎小體在髓質。"
+        },
+        "sources": [
+          "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+        ],
+        "reference": "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "nephron-circulation-node-03",
+        "tag": "03",
+        "title": "腎小管各段上皮",
+        "summary": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮",
+        "figure": "nephron-circulation-stage1-base-03.svg",
+        "concept": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮。",
+        "points": [
+          "刷狀緣是辨認近曲小管的線索。",
+          "亨利氏環薄段與較厚管段的上皮不同。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "觀察三張顯微示意時，先比細胞高低，再看管腔面有無刷狀緣，將形態配回管段。"
+        },
+        "sources": [
+          "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+        ],
+        "reference": "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "nephron-circulation-node-04",
+        "tag": "04",
+        "title": "腎臟血流路徑",
+        "summary": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流",
+        "figure": "nephron-circulation-stage1-base-04.svg",
+        "concept": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。",
+        "points": [
+          "腎絲球的前後都接小動脈。",
+          "出球後還有參與小管交換的微血管。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在血流圖停在腎絲球出口時，下一站先找出球小動脈，再追蹤第二套微血管，不能直接跳至腎靜脈。"
+        },
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ],
+        "reference": "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "nephron-circulation-node-05",
+        "tag": "05",
+        "title": "近腎絲球器的位置與細胞",
+        "summary": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞",
+        "figure": "nephron-circulation-stage1-base-05.svg",
+        "concept": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。",
+        "points": [
+          "近腎絲球細胞分泌腎素。",
+          "緻密斑感受的是管液鈉變化。",
+          "感測管液與分泌腎素由不同細胞分工。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "把感測點分成小管側與血管側：在遠曲小管找緻密斑，在入球壁找分泌腎素的細胞。"
+        },
+        "sources": [
+          "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+        ],
+        "reference": "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "nephron-circulation-node-06",
+        "tag": "06",
+        "title": "血流、血漿流量與過濾分率",
+        "summary": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿",
+        "figure": "nephron-circulation-stage1-placeholder.svg",
+        "concept": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿；腎絲球過濾率 GFR 是每分鐘形成的濾液體積。",
+        "points": [
+          "過濾分率 FF＝GFR／RPF。",
+          "FF 的分母是血漿流量，而非全部血流量。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較兩個流量前先辨認液體所屬區間；算過濾分率時，讓濾液體積流率除以血漿體積流率。"
+        },
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ],
+        "reference": "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8",
+        "caption": "圖面佔位。"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "nephron-circulation-foundation-q01",
+        "stem": "腎元的基本組成為何？",
+        "options": [
+          "腎小體與腎小管",
+          "腎盂與輸尿管",
+          "膀胱與尿道",
+          "腎被膜與腎筋膜"
+        ],
+        "answer": 0,
+        "hint": "先找過濾單位，再找接續的管段。",
+        "explain": "腎小體與腎小管構成腎元；集尿管接收多個腎元的管液，另作接續構造。",
+        "nodeId": "nephron-circulation-node-01",
+        "sources": [
+          "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+        ]
+      },
+      {
+        "id": "nephron-circulation-foundation-q02",
+        "stem": "比較皮質與近髓質腎元，哪一項正確？",
+        "options": [
+          "兩型腎小體都位於皮質",
+          "近髓質型腎小體在髓質深部",
+          "兩型亨利氏環都只在皮質",
+          "皮質型亨利氏環較長且深入髓質"
+        ],
+        "answer": 0,
+        "hint": "將腎小體的位置與環的長短分開。",
+        "explain": "兩型腎小體均在皮質；近髓質型靠近交界且環較長，不能把近髓質等同髓質內。",
+        "nodeId": "nephron-circulation-node-02",
+        "sources": [
+          "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+        ]
+      },
+      {
+        "id": "nephron-circulation-foundation-q03",
+        "stem": "有明顯刷狀緣的立方上皮，最符合哪個管段？",
+        "options": [
+          "近曲小管",
+          "亨利氏環薄段",
+          "遠曲小管",
+          "鮑氏囊腔"
+        ],
+        "answer": 0,
+        "hint": "比較管腔面與細胞形狀。",
+        "explain": "近曲小管有刷狀緣，遠曲無明顯刷狀緣，亨利氏環薄段則為扁平上皮。",
+        "nodeId": "nephron-circulation-node-03",
+        "sources": [
+          "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+        ]
+      },
+      {
+        "id": "nephron-circulation-foundation-q04",
+        "stem": "腎絲球前後相接的血管依序為何？",
+        "options": [
+          "入球小動脈、出球小動脈",
+          "入球小靜脈、出球小靜脈",
+          "腎靜脈、入球小動脈",
+          "管周微血管、腎動脈"
+        ],
+        "answer": 0,
+        "hint": "先以進入或離開腎絲球命名。",
+        "explain": "血液由入球小動脈進腎絲球，再由出球小動脈離開，之後還有管周微血管或直血管。",
+        "nodeId": "nephron-circulation-node-04",
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "nephron-circulation-foundation-q05",
+        "stem": "近腎絲球器中，感受管液鈉變化的是何者？",
+        "options": [
+          "遠曲小管的緻密斑",
+          "入球壁的近腎絲球細胞",
+          "鮑氏囊壁層",
+          "腎盂上皮"
+        ],
+        "answer": 0,
+        "hint": "感測對象是管液，應先找小管側。",
+        "explain": "緻密斑位於遠曲小管並感受管液鈉；近腎絲球細胞位於入球小動脈壁，分泌腎素。",
+        "nodeId": "nephron-circulation-node-05",
+        "sources": [
+          "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "nephron-circulation-foundation-q06",
+        "stem": "過濾分率 FF 的算法為何？",
+        "options": [
+          "GFR／RPF",
+          "GFR／RBF",
+          "RBF／GFR",
+          "RPF／GFR"
+        ],
+        "answer": 0,
+        "hint": "分母要對應可被過濾的血漿流量。",
+        "explain": "FF 是 GFR 除以腎血漿流量 RPF，不能將包含血球的 RBF 直接代為分母。",
+        "nodeId": "nephron-circulation-node-06",
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "nephron-circulation-case-q01",
+        "stem": "【定位觀察】某腎元的長環深入髓質，腎小體靠近皮髓交界。腎小體仍應標在哪一區？",
+        "options": [
+          "皮質",
+          "髓質深部",
+          "腎盂",
+          "腎乳頭出口"
+        ],
+        "answer": 0,
+        "hint": "不要用環深入的區域取代腎小體位置。",
+        "explain": "近髓質腎元的腎小體在靠近交界的皮質，深入髓質的是長環。",
+        "nodeId": "nephron-circulation-node-02",
+        "sources": [
+          "nephron-types；physiology/CH09 p.4, anatomy/AB-05_15 p.6, anatomy/AB-05_15 p.8, physiology/CH09 p.20"
+        ]
+      },
+      {
+        "id": "nephron-circulation-case-q02",
+        "stem": "【血流追蹤】血液剛離開出球小動脈，下一段應接何者？",
+        "options": [
+          "管周微血管或直血管",
+          "鮑氏囊腔",
+          "輸尿管",
+          "直接進入腎靜脈"
+        ],
+        "answer": 0,
+        "hint": "離開腎絲球後還需要小管交換區。",
+        "explain": "出球小動脈接管周微血管或直血管；血流通路不應接入管液通路，也不是立刻進腎靜脈。",
+        "nodeId": "nephron-circulation-node-04",
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "nephron-circulation-case-q03",
+        "stem": "【切片觀察】一段位於髓質深處的細管，管壁為扁平上皮，最可能是哪段？",
+        "options": [
+          "亨利氏環薄段",
+          "近曲小管",
+          "遠曲小管",
+          "集尿管"
+        ],
+        "answer": 0,
+        "hint": "先比較細胞高低，再排除立方上皮管段。",
+        "explain": "亨利氏環薄段為扁平上皮；近曲與遠曲小管則為立方上皮，刷狀緣用於區分後兩者。",
+        "nodeId": "nephron-circulation-node-03",
+        "sources": [
+          "nephron-histology；physiology/CH09 p.6, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6, physiology/CH09 p.4, physiology/CH09 p.7"
+        ]
+      },
+      {
+        "id": "nephron-circulation-case-q04",
+        "stem": "【訊號配對】要在近腎絲球器標出腎素分泌來源，應選哪個位置？",
+        "options": [
+          "入球小動脈壁的近腎絲球細胞",
+          "遠曲小管緻密斑",
+          "腎盂內面",
+          "鮑氏囊壁層"
+        ],
+        "answer": 0,
+        "hint": "將感受管液的細胞與分泌腎素者分開。",
+        "explain": "分泌腎素的是入球小動脈壁近腎絲球細胞；緻密斑是管液鈉感測點。",
+        "nodeId": "nephron-circulation-node-05",
+        "sources": [
+          "juxtaglomerular-apparatus；physiology/CH09 p.6, physiology/CH09 p.7, anatomy/AB-05_15 p.6, physiology/CH09 p.4"
+        ]
+      },
+      {
+        "id": "nephron-circulation-case-q05",
+        "stem": "【流量判讀】同學以 GFR 除以全部腎血流量來算 FF，應修正哪個項目？",
+        "options": [
+          "分母改為腎血漿流量",
+          "分子改為腎血流量",
+          "把兩者都改成尿中物質濃度",
+          "將分子分母互換即可"
+        ],
+        "answer": 0,
+        "hint": "先確認過濾分率的血液區間。",
+        "explain": "FF 的分母為 RPF；RBF 包含血球，與定義中的血漿流量不同。",
+        "nodeId": "nephron-circulation-node-06",
+        "sources": [
+          "renal-blood-flow；physiology/CH09 p.8, physiology/CH09 p.13, physiology/CH09 p.27, anatomy/AB-05_15 p.8"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  },
+  "filtration-clearance": {
+    "slug": "filtration-clearance",
+    "version": "v1",
+    "experience": "guided",
+    "title": "腎絲球過濾與清除率",
+    "subtitle": "由過濾方向、膜與壓力，連結清除率的意義、單位及指標物質。",
+    "label": "腎絲球過濾與清除率｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "血液到囊腔",
+        "label": "過濾方向"
+      },
+      {
+        "value": "三層膜",
+        "label": "過濾屏障"
+      },
+      {
+        "value": "菊糖／肌酸酐／PAH",
+        "label": "處理方式與測量目標"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "filtration-clearance-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "過濾",
+          "explain": "血到囊的過濾方向。"
+        },
+        {
+          "id": "state-2",
+          "label": "排泄",
+          "explain": "菊糖只過濾，不再吸收不分泌。"
+        },
+        {
+          "id": "state-3",
+          "label": "計算",
+          "explain": "課本尿素示例：U＝18 mg/mL、V＝1 mL/min、P＝0.26 mg/mL，C 約 69 mL/min。"
+        }
+      ],
+      "predict": {
+        "question": "由過濾方向改看菊糖的排泄，應預測哪種小管處理？",
+        "options": [
+          "只過濾，不再吸收也不分泌",
+          "過濾後全部再吸收",
+          "只由小管分泌，不過濾",
+          "完全不經腎臟處理"
+        ],
+        "answer": 0,
+        "feedback": "菊糖只過濾，其清除率可對應 GFR；形成濾液與後續物質排泄仍是兩個觀察層次，見節點 06。",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "filtration-clearance-node-01",
+        "tag": "01",
+        "title": "過濾位置與方向",
+        "summary": "腎絲球過濾使水與可通過的溶質由腎絲球微血管跨過過濾膜，進入鮑氏囊腔形成濾液",
+        "figure": "filtration-clearance-stage1-base-01.svg",
+        "concept": "腎絲球過濾使水與可通過的溶質由腎絲球微血管跨過過濾膜，進入鮑氏囊腔形成濾液。",
+        "points": [
+          "過濾發生於腎小體。",
+          "鮑氏囊內的濾液之後仍會經小管處理。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "讀過濾示意時先指出血液側與囊腔側，沿跨膜方向說出起點與終點，勿把濾液直接稱為最終尿。"
+        },
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ],
+        "reference": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "filtration-clearance-node-02",
+        "tag": "02",
+        "title": "三層過濾膜",
+        "summary": "三層過濾膜依序包含微血管內皮、基底膜與鮑氏囊臟層的足細胞及其過濾裂隙",
+        "figure": "filtration-clearance-stage1-base-02.svg",
+        "concept": "三層過濾膜依序包含微血管內皮、基底膜與鮑氏囊臟層的足細胞及其過濾裂隙。",
+        "points": [
+          "足細胞屬於鮑氏囊臟層。",
+          "鮑氏囊壁層不是三層過濾膜的第三層。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在膜的放大圖由血液側向外逐層辨認，將包圍囊腔的壁層與貼近微血管的足細胞分開。"
+        },
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ],
+        "reference": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "filtration-clearance-node-03",
+        "tag": "03",
+        "title": "血漿與濾液成分",
+        "summary": "葡萄糖與胺基酸等小溶質可通過過濾膜，白蛋白則受限制",
+        "figure": "filtration-clearance-stage1-base-03.svg",
+        "concept": "葡萄糖與胺基酸等小溶質可通過過濾膜，白蛋白則受限制；比較血漿與濾液時，重要差別在蛋白質。",
+        "points": [
+          "血漿本來就不包含血球。",
+          "正常濾液中的白蛋白與血漿不同。",
+          "不能把所有大小的蛋白質都視為完全相同。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "題目若指定比較血漿與濾液，先排除「血球被移除」的誤解，再比較白蛋白與小溶質的通過情況。"
+        },
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ],
+        "reference": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "filtration-clearance-node-04",
+        "tag": "04",
+        "title": "促進與對抗過濾的壓力",
+        "summary": "腎絲球靜水壓促進過濾，鮑氏囊內靜水壓與血漿膠體滲透壓對抗過濾",
+        "figure": "filtration-clearance-stage1-placeholder.svg",
+        "concept": "腎絲球靜水壓促進過濾，鮑氏囊內靜水壓與血漿膠體滲透壓對抗過濾；課本計算例為 55＋0－15－30＝10 mmHg。",
+        "points": [
+          "55 mmHg 是此例的腎絲球靜水壓。",
+          "囊內靜水壓為 15 mmHg，血漿膠體滲透壓為 30 mmHg。",
+          "鮑氏囊膠體滲透壓在此例取 0。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "計算時先將促進與對抗壓力分組，再帶入同一計算例的數值，避免混用課本不同段落的數字。"
+        },
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+          "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+        ],
+        "reference": "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6；gfr-regulation；physiology/CH09 p.12（教師核定計算例）",
+        "caption": "圖面佔位。"
+      },
+      {
+        "id": "filtration-clearance-node-05",
+        "tag": "05",
+        "title": "清除率的量與單位",
+        "summary": "血漿清除率 C＝U×V／P",
+        "figure": "filtration-clearance-stage1-placeholder.svg",
+        "concept": "血漿清除率 C＝U×V／P；U 是尿中物質濃度、V 是每分鐘尿流量、P 是同一物質的血漿濃度。",
+        "points": [
+          "U 與 P 使用相容的濃度單位。",
+          "V 須換成 mL/min。",
+          "清除率表示相當的血漿體積流率。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "課本尿素示例 U＝18 mg/mL、V＝1 mL/min、P＝0.26 mg/mL，可得 C 約 69 mL/min；結果不是物質排出的 mg/min。"
+        },
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ],
+        "reference": "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15",
+        "caption": "圖面佔位。"
+      },
+      {
+        "id": "filtration-clearance-node-06",
+        "tag": "06",
+        "title": "菊糖、肌酸酐與PAH",
+        "summary": "菊糖可過濾而不再吸收、不分泌，清除率等於 GFR",
+        "figure": "filtration-clearance-stage1-base-04.svg",
+        "concept": "菊糖可過濾而不再吸收、不分泌，清除率等於 GFR；肌酸酐有少量分泌，可估 GFR；PAH 經過濾與分泌，可估腎血漿流量。",
+        "points": [
+          "菊糖與肌酸酐的分泌條件不同。",
+          "PAH 對應的是血漿流量。",
+          "血漿流量換算全部血流量還需血漿比例。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "配對指標時同時檢查「物質如何被處理」與「想估哪一種流量」，不能只看到清除率就全部當作 GFR。"
+        },
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ],
+        "reference": "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15",
+        "caption": "無字底圖。"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "filtration-clearance-foundation-q01",
+        "stem": "腎絲球過濾的主要方向為何？",
+        "options": [
+          "腎絲球微血管到鮑氏囊腔",
+          "鮑氏囊腔到入球小動脈",
+          "腎盂到腎皮質",
+          "膀胱到輸尿管"
+        ],
+        "answer": 0,
+        "hint": "先區分血液側與初始濾液側。",
+        "explain": "水與可通過溶質由腎絲球微血管跨過過濾膜進入鮑氏囊腔，之後再經小管處理。",
+        "nodeId": "filtration-clearance-node-01",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      },
+      {
+        "id": "filtration-clearance-foundation-q02",
+        "stem": "哪一組構成三層過濾膜？",
+        "options": [
+          "微血管內皮、基底膜、足細胞",
+          "微血管內皮、腎被膜、鮑氏囊壁層",
+          "近曲小管、遠曲小管、集尿管",
+          "入球小動脈、出球小動脈、腎靜脈"
+        ],
+        "answer": 0,
+        "hint": "找出貼近過濾介面的三層。",
+        "explain": "過濾膜包含微血管內皮、基底膜及臟層足細胞；鮑氏囊壁層不是第三層。",
+        "nodeId": "filtration-clearance-node-02",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      },
+      {
+        "id": "filtration-clearance-foundation-q03",
+        "stem": "比較正常血漿與腎絲球濾液，哪一項較能顯示兩者差別？",
+        "options": [
+          "白蛋白的含量",
+          "血漿中的血球數量",
+          "兩者是否都含水",
+          "兩者是否都含葡萄糖"
+        ],
+        "answer": 0,
+        "hint": "先想血漿原本是否含血球。",
+        "explain": "血漿本就不含血球；小溶質與水可過濾，白蛋白的通過受限，因此蛋白質是重要差別。",
+        "nodeId": "filtration-clearance-node-03",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      },
+      {
+        "id": "filtration-clearance-foundation-q04",
+        "stem": "哪種壓力促進腎絲球過濾？",
+        "options": [
+          "腎絲球微血管靜水壓",
+          "鮑氏囊內靜水壓",
+          "血漿膠體滲透壓",
+          "尿道外括約肌張力"
+        ],
+        "answer": 0,
+        "hint": "比較壓力朝向囊腔或阻止進入的作用。",
+        "explain": "腎絲球靜水壓促進過濾，囊內靜水壓與血漿膠體滲透壓則對抗；本課計算例為 55＋0－15－30＝10 mmHg。",
+        "nodeId": "filtration-clearance-node-04",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6",
+          "gfr-regulation；physiology/CH09 p.12（教師核定計算例）"
+        ]
+      },
+      {
+        "id": "filtration-clearance-foundation-q05",
+        "stem": "C＝U×V／P 計算出的清除率，表示哪種量？",
+        "options": [
+          "每分鐘相當被清除的血漿體積",
+          "每分鐘尿中排出的物質質量",
+          "每毫升尿中的物質濃度",
+          "每天由膀胱排出的總尿量"
+        ],
+        "answer": 0,
+        "hint": "先將濃度比與尿流量的單位相乘。",
+        "explain": "U 與 P 的濃度單位相消後，留下體積／時間；清除率不是 mg/min 的物質排泄量。",
+        "nodeId": "filtration-clearance-node-05",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      {
+        "id": "filtration-clearance-foundation-q06",
+        "stem": "哪種物質只過濾、不再吸收也不分泌，可用其清除率對應 GFR？",
+        "options": [
+          "菊糖",
+          "PAH",
+          "葡萄糖",
+          "尿素"
+        ],
+        "answer": 0,
+        "hint": "排除有回收或額外分泌的物質。",
+        "explain": "菊糖只過濾，清除率等於 GFR；PAH 有分泌，葡萄糖與尿素則有再吸收。",
+        "nodeId": "filtration-clearance-node-06",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "filtration-clearance-case-q01",
+        "stem": "【單位整理】收集一小時尿液後，要把尿量帶入以 mL/min 為單位的 V，應如何處理？",
+        "options": [
+          "一小時尿量除以 60",
+          "一小時尿量乘以 60",
+          "直接用一小時尿量",
+          "先除以血漿濃度即可"
+        ],
+        "answer": 0,
+        "hint": "流量的分母要先統一為分鐘。",
+        "explain": "一小時等於 60 分鐘，故先將收集量除以 60，再代入清除率公式。",
+        "nodeId": "filtration-clearance-node-05",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      {
+        "id": "filtration-clearance-case-q02",
+        "stem": "【結果判讀】計算得到清除率 69 mL/min，哪種說明符合其意義？",
+        "options": [
+          "每分鐘相當清除 69 mL 血漿中的該物質",
+          "每分鐘一定排出 69 mg 該物質",
+          "每分鐘一定形成 69 mL 最終尿",
+          "尿中每毫升含 69 mg 該物質"
+        ],
+        "answer": 0,
+        "hint": "辨別結果單位是體積流率或物質流率。",
+        "explain": "清除率的 mL/min 指相當血漿體積；物質排泄量需用尿濃度乘尿流量另算。",
+        "nodeId": "filtration-clearance-node-05",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      {
+        "id": "filtration-clearance-case-q03",
+        "stem": "【指標比較】菊糖與肌酸酐都可用來理解 GFR，哪項差異正確？",
+        "options": [
+          "肌酸酐另有少量分泌，菊糖不分泌",
+          "菊糖大量再吸收，肌酸酐全不過濾",
+          "兩者都只靠分泌進入尿液",
+          "兩者都完全不分泌"
+        ],
+        "answer": 0,
+        "hint": "核對過濾後的小管處理是否相同。",
+        "explain": "菊糖不再吸收也不分泌；肌酸酐有少量分泌，故兩者不能視為完全相同的處理條件。",
+        "nodeId": "filtration-clearance-node-06",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      {
+        "id": "filtration-clearance-case-q04",
+        "stem": "【流量配對】將 PAH 清除率直接標為全部腎血流量，問題在哪裡？",
+        "options": [
+          "它估的是腎血漿流量，換算血流還需血漿比例",
+          "PAH 只估膀胱容量",
+          "PAH 不能經過濾或分泌",
+          "血漿流量與血流量一定相等"
+        ],
+        "answer": 0,
+        "hint": "問清楚是否已包含血球部分。",
+        "explain": "PAH 可估 RPF；全部 RBF 還包含血球，兩者不能直接畫上等號。",
+        "nodeId": "filtration-clearance-node-06",
+        "sources": [
+          "renal-clearance；physiology/CH09 p.26, physiology/CH09 p.27, physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15"
+        ]
+      },
+      {
+        "id": "filtration-clearance-case-q05",
+        "stem": "【成分比較】測得鮑氏囊濾液的葡萄糖濃度與血漿相近，最合理的解釋為何？",
+        "options": [
+          "葡萄糖可自由通過過濾膜",
+          "葡萄糖在鮑氏囊內被分泌",
+          "濾液中的血球釋出葡萄糖",
+          "白蛋白攜帶葡萄糖通過"
+        ],
+        "answer": 0,
+        "hint": "判斷葡萄糖這類小溶質能否通過過濾膜。",
+        "explain": "葡萄糖是可通過過濾膜的小溶質，因此初始濾液濃度可與血漿相近；並非囊內分泌、血球釋出或靠白蛋白通過。",
+        "nodeId": "filtration-clearance-node-03",
+        "sources": [
+          "glomerular-filtration；physiology/CH09 p.11, physiology/CH09 p.4, physiology/CH09 p.12, anatomy/AB-05_15 p.5, anatomy/AB-05_15 p.6"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  },
+  "tubular-handling": {
+    "slug": "tubular-handling",
+    "version": "v1",
+    "experience": "guided",
+    "title": "腎小管再吸收、分泌與排泄",
+    "subtitle": "以血液與管液的移動方向，理解物質收支、回收上限及鉀的調節。",
+    "label": "腎小管再吸收、分泌與排泄｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "三種移動",
+        "label": "過濾、再吸收、分泌"
+      },
+      {
+        "value": "減回收、加分泌",
+        "label": "排泄收支"
+      },
+      {
+        "value": "濃度≠排泄量",
+        "label": "比較前先核對單位"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "tubular-handling-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "大量回收",
+          "explain": "Na⁺與水大部分在腎小管回收。"
+        },
+        {
+          "id": "state-2",
+          "label": "回收",
+          "explain": "葡萄糖正常大部分回收。"
+        },
+        {
+          "id": "state-3",
+          "label": "分泌",
+          "explain": "K調節性分泌方向。"
+        }
+      ],
+      "predict": {
+        "question": "切到葡萄糖「回收」主題，正常運輸功能完整且負荷未超能力時，物質移動方向為何？",
+        "options": [
+          "由管液回血液",
+          "由血液分泌入管液",
+          "由膀胱回到腎盂",
+          "由尿道直接回到腎絲球"
+        ],
+        "answer": 0,
+        "feedback": "再吸收將葡萄糖由管液送回血液，與鉀分泌入管液的方向不同，見節點 01、03、04。",
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "tubular-handling-node-01",
+        "tag": "01",
+        "title": "三種物質移動",
+        "summary": "過濾是物質由血液進入鮑氏囊",
+        "figure": "tubular-handling-stage1-base-01.svg",
+        "concept": "過濾是物質由血液進入鮑氏囊；再吸收是物質由管液回血；分泌是物質由血液進入小管管液。",
+        "points": [
+          "再吸收與分泌的移動方向相反。",
+          "排泄指物質最後隨尿液離開身體。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "看物質移動時先說出兩側區間，再配上動詞；管液中的物質回到血液，應稱再吸收。"
+        },
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ],
+        "reference": "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "tubular-handling-node-02",
+        "tag": "02",
+        "title": "排泄量的收支",
+        "summary": "以同一物質與相同時間範圍計算，排泄量＝過濾量－再吸收量＋分泌量",
+        "figure": "tubular-handling-stage1-placeholder.svg",
+        "concept": "以同一物質與相同時間範圍計算，排泄量＝過濾量－再吸收量＋分泌量。",
+        "points": [
+          "再吸收使留在管液中的物質量減少。",
+          "分泌使進入管液的物質量增加。",
+          "式中各項都應用物質量／時間表示。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "用收支式逐項標正負號，再檢查單位；不能把物質排泄量與 GFR 的 mL/min 直接相減。"
+        },
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ],
+        "reference": "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+        "caption": "圖面佔位。"
+      },
+      {
+        "id": "tubular-handling-node-03",
+        "tag": "03",
+        "title": "近曲小管的回收",
+        "summary": "近曲小管是大量再吸收的部位，透過 Na⁺共同運輸回收葡萄糖與胺基酸，水則隨滲透作用回收",
+        "figure": "tubular-handling-stage1-base-02.svg",
+        "concept": "近曲小管是大量再吸收的部位，透過 Na⁺共同運輸回收葡萄糖與胺基酸，水則隨滲透作用回收。",
+        "points": [
+          "本課採近曲 Na⁺再吸收約 67%。",
+          "水再吸收約 75%，不可與鈉合成同一百分比。",
+          "正常葡萄糖可被回收。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較鈉與水回收比例時，分別標出溶質與水的分母，再連到共同運輸與滲透兩種機轉。"
+        },
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ],
+        "reference": "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "tubular-handling-node-04",
+        "tag": "04",
+        "title": "葡萄糖的最大轉運量",
+        "summary": "葡萄糖再吸收具有最大轉運量",
+        "figure": "tubular-handling-stage1-placeholder.svg",
+        "concept": "葡萄糖再吸收具有最大轉運量；課本為 375 mg/min。過濾負荷與小管回收能力必須以相同物質量／時間比較。",
+        "points": [
+          "過濾負荷是每分鐘進入濾液的葡萄糖量。",
+          "最大轉運量是運輸能力的上限。",
+          "負荷超過回收能力時，無法全部回收。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較兩個量時先核對是否都為 mg/min；不可把血漿濃度直接當作每分鐘的運輸上限。"
+        },
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ],
+        "reference": "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17",
+        "caption": "圖面佔位。"
+      },
+      {
+        "id": "tubular-handling-node-05",
+        "tag": "05",
+        "title": "鉀的調節性分泌",
+        "summary": "遠曲小管與集尿管可分泌 K⁺",
+        "figure": "tubular-handling-stage1-base-03.svg",
+        "concept": "遠曲小管與集尿管可分泌 K⁺；醛固酮促進遠端 Na⁺再吸收，同時增加 K⁺分泌。",
+        "points": [
+          "鉀分泌的方向是由血液進入管液。",
+          "鈉再吸收的方向是由管液回血。",
+          "最終鉀排泄仍受後段調節影響。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在同一個小管區間分別追鈉與鉀的方向：不能因鈉被保留，就推論鉀也一起保留。"
+        },
+        "sources": [
+          "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+        ],
+        "reference": "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "tubular-handling-node-06",
+        "tag": "06",
+        "title": "濃度比與排泄量",
+        "summary": "U／P 是尿與血漿的濃度比，排泄量是 U×V，清除率則為 U×V／P",
+        "figure": "tubular-handling-stage1-placeholder.svg",
+        "concept": "U／P 是尿與血漿的濃度比，排泄量是 U×V，清除率則為 U×V／P；濃度、物質量流率與體積流率應分開比較。",
+        "points": [
+          "尿濃度相同時，尿流量仍可能不同。",
+          "水回收本身也能提高管液濃度。",
+          "不能只用尿濃度認定分泌增加。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較兩份尿樣時，先核對尿濃度與流量，再算同一物質每分鐘排出的量，最後才討論清除率。"
+        },
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ],
+        "reference": "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27；tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17",
+        "caption": "圖面佔位。"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "tubular-handling-foundation-q01",
+        "stem": "物質從小管管液移回血液，稱為何者？",
+        "options": [
+          "再吸收",
+          "分泌",
+          "腎絲球過濾",
+          "排泄到體外"
+        ],
+        "answer": 0,
+        "hint": "先說出起點是管液還是血液。",
+        "explain": "再吸收由管液回血，分泌由血進管液，過濾則是由腎絲球血液進鮑氏囊。",
+        "nodeId": "tubular-handling-node-01",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ]
+      },
+      {
+        "id": "tubular-handling-foundation-q02",
+        "stem": "同一物質的排泄量收支式為何？",
+        "options": [
+          "過濾量－再吸收量＋分泌量",
+          "過濾量＋再吸收量－分泌量",
+          "再吸收量－過濾量＋分泌量",
+          "過濾量＋再吸收量＋分泌量"
+        ],
+        "answer": 0,
+        "hint": "回收會減少最後留在管液的物質。",
+        "explain": "排泄＝過濾－再吸收＋分泌，式中各量都須以相同的物質量／時間表示。",
+        "nodeId": "tubular-handling-node-02",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ]
+      },
+      {
+        "id": "tubular-handling-foundation-q03",
+        "stem": "近曲小管回收葡萄糖與水的機轉配對，何者正確？",
+        "options": [
+          "葡萄糖隨 Na⁺共同運輸，水依滲透作用回收",
+          "葡萄糖只靠水通道，水只靠腎素分泌",
+          "葡萄糖由血分泌入管液，水完全不回收",
+          "葡萄糖與水均由膀胱形成"
+        ],
+        "answer": 0,
+        "hint": "把溶質運輸與水移動的方式分開。",
+        "explain": "近曲以 Na⁺共同運輸回收葡萄糖等溶質，水則依滲透回收；本課採 Na⁺約 67%、水約 75%。",
+        "nodeId": "tubular-handling-node-03",
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      },
+      {
+        "id": "tubular-handling-foundation-q04",
+        "stem": "葡萄糖最大轉運量代表何種意義？",
+        "options": [
+          "每分鐘可運輸的葡萄糖量上限",
+          "尿中葡萄糖濃度的固定值",
+          "腎血流量的上限",
+          "每天膀胱能儲存的尿量"
+        ],
+        "answer": 0,
+        "hint": "最大量的單位是物質量／時間。",
+        "explain": "課本葡萄糖最大轉運量為 375 mg/min，是回收能力的上限，並非濃度或尿量。",
+        "nodeId": "tubular-handling-node-04",
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      },
+      {
+        "id": "tubular-handling-foundation-q05",
+        "stem": "醛固酮對遠端 Na⁺與 K⁺處理的作用為何？",
+        "options": [
+          "增加 Na⁺再吸收及 K⁺分泌",
+          "增加 Na⁺分泌及 K⁺再吸收",
+          "兩者都只增加分泌",
+          "兩者都完全停止運輸"
+        ],
+        "answer": 0,
+        "hint": "不要將保鈉直接推成保鉀。",
+        "explain": "醛固酮促遠端鈉由管液回血、鉀由血進管液，方向相反。",
+        "nodeId": "tubular-handling-node-05",
+        "sources": [
+          "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+        ]
+      },
+      {
+        "id": "tubular-handling-foundation-q06",
+        "stem": "僅見尿中某物質濃度較高，能否直接判定其分泌增加？",
+        "options": [
+          "不能，水回收與尿流量也影響判讀",
+          "可以，濃度就是分泌速率",
+          "可以，濃度等同 GFR",
+          "不能，因尿中不含任何溶質"
+        ],
+        "answer": 0,
+        "hint": "比較濃度與物質量／時間是否同一種量。",
+        "explain": "水回收可提高尿濃度；排泄量還需乘尿流量，不能由濃度直接認定分泌增加。",
+        "nodeId": "tubular-handling-node-06",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "tubular-handling-case-q01",
+        "stem": "【方向判讀】某物質由管周血液移入小管管液，應標哪個動詞？",
+        "options": [
+          "分泌",
+          "再吸收",
+          "由膀胱排出",
+          "腎絲球過濾"
+        ],
+        "answer": 0,
+        "hint": "區分進入小管與進入鮑氏囊的位置。",
+        "explain": "由血進小管管液是分泌；腎絲球過濾的終點是鮑氏囊腔，再吸收則反向回血。",
+        "nodeId": "tubular-handling-node-01",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ]
+      },
+      {
+        "id": "tubular-handling-case-q02",
+        "stem": "【收支比較】其他量固定，再吸收量增加時，最終物質排泄量如何改變？",
+        "options": [
+          "減少",
+          "增加",
+          "必定不變",
+          "必定等於 GFR 的數值"
+        ],
+        "answer": 0,
+        "hint": "將再吸收在收支式中的正負號找出來。",
+        "explain": "排泄＝過濾－再吸收＋分泌；其他條件固定時，增加被減去的再吸收量使排泄減少。",
+        "nodeId": "tubular-handling-node-02",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27"
+        ]
+      },
+      {
+        "id": "tubular-handling-case-q03",
+        "stem": "【尿樣比較】兩份尿樣中同一物質的尿濃度相同，甲的每分鐘尿流量較大，何者正確？",
+        "options": [
+          "甲每分鐘排出的物質量較多",
+          "兩份排泄量必定相同",
+          "甲的物質排泄量一定較少",
+          "單憑此條件可知甲的分泌必定增加"
+        ],
+        "answer": 0,
+        "hint": "用相同的尿濃度乘上各自的流量。",
+        "explain": "排泄量為 U×V；U 相同而 V 較大時，物質排泄量較多，但仍不能單憑此條件認定分泌變化。",
+        "nodeId": "tubular-handling-node-06",
+        "sources": [
+          "renal-handling；physiology/CH09 p.10, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.17, physiology/CH09 p.27",
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      },
+      {
+        "id": "tubular-handling-case-q04",
+        "stem": "【能力比較】正常葡萄糖過濾負荷未超過小管回收能力且運輸功能完整時，預期為何？",
+        "options": [
+          "葡萄糖可被回收",
+          "葡萄糖必定完全靠分泌排出",
+          "葡萄糖只停在腎盂不進小管",
+          "最大轉運量會變成尿流量"
+        ],
+        "answer": 0,
+        "hint": "同時核對進入量與運輸上限。",
+        "explain": "正常葡萄糖可回收；過濾負荷與回收能力應使用同一物質量／時間比較。",
+        "nodeId": "tubular-handling-node-04",
+        "sources": [
+          "tubular-reabsorption；physiology/CH09 p.13, physiology/CH09 p.14, physiology/CH09 p.15, physiology/CH09 p.16, physiology/CH09 p.27, anatomy/AB-05_15 p.6, physiology/CH09 p.17"
+        ]
+      },
+      {
+        "id": "tubular-handling-case-q05",
+        "stem": "【方向配對】醛固酮作用增加時，遠端的鈉與鉀移動應如何配對？",
+        "options": [
+          "鈉由管液回血，鉀由血入管液",
+          "鈉由血入管液，鉀由管液回血",
+          "鈉與鉀都只由血入管液",
+          "鈉與鉀都只由管液回血"
+        ],
+        "answer": 0,
+        "hint": "分別替鈉與鉀寫出起點、終點。",
+        "explain": "醛固酮增加鈉再吸收與鉀分泌，不能將其解讀成同時保鈉保鉀。",
+        "nodeId": "tubular-handling-node-05",
+        "sources": [
+          "potassium-secretion；physiology/CH09 p.18, physiology/CH09 p.17, physiology/CH09 p.34, physiology/CH09 p.14"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  },
+  "urine-concentration": {
+    "slug": "urine-concentration",
+    "version": "v1",
+    "experience": "guided",
+    "title": "逆流機制與尿液濃縮",
+    "subtitle": "區分下降枝、上升枝及直血管，再用梯度與水通透性理解 ADH 的作用。",
+    "label": "逆流機制與尿液濃縮｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "梯度＋通水",
+        "label": "濃縮的兩個條件"
+      },
+      {
+        "value": "下降枝通水",
+        "label": "水可沿梯度移出"
+      },
+      {
+        "value": "尿量與濃度",
+        "label": "分開判讀變化"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "urine-concentration-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "少水",
+          "explain": "ADH保水與濃尿。"
+        },
+        {
+          "id": "state-2",
+          "label": "較多水",
+          "explain": "較少ADH、水回收降低的定性比較。"
+        },
+        {
+          "id": "state-3",
+          "label": "有梯度但不通水",
+          "explain": "只有梯度不代表水已回收。"
+        }
+      ],
+      "predict": {
+        "question": "其他條件相同，由較少水切到較多水、ADH 較少的比較狀態時，預測哪個方向？",
+        "options": [
+          "水回收減少，尿量增加且較稀",
+          "水回收增加，尿量減少且較濃",
+          "集尿管水通透性一定上升",
+          "只要有梯度，尿量與濃度必定不變"
+        ],
+        "answer": 0,
+        "feedback": "此定性比較中 ADH 較少，末端通水及水回收較少；尿量較多、較稀，見節點 05–06。",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "urine-concentration-node-01",
+        "tag": "01",
+        "title": "髓質梯度與濃縮條件",
+        "summary": "尿液濃縮需要髓質高滲透梯度，以及末端集尿管具有足夠水通透性",
+        "figure": "urine-concentration-stage1-base-01.svg",
+        "concept": "尿液濃縮需要髓質高滲透梯度，以及末端集尿管具有足夠水通透性；兩個條件要配合。",
+        "points": [
+          "髓質環境提供水外移的滲透梯度。",
+          "ADH 可調整集尿管對水的通透性。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "分析濃縮條件時分別檢查「周圍有無梯度」與「管壁能否通水」，不能只找到其中一項就判定會形成濃尿。"
+        },
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+        ],
+        "reference": "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urine-concentration-node-02",
+        "tag": "02",
+        "title": "亨利氏環下降枝",
+        "summary": "亨利氏環下降枝對水通透，對溶質通透較差",
+        "figure": "urine-concentration-stage1-base-01.svg",
+        "concept": "亨利氏環下降枝對水通透，對溶質通透較差；水沿周圍髓質的滲透梯度移出，使管液變濃。",
+        "points": [
+          "下降枝的重點是水向外移動。",
+          "水減少可使管內溶質濃度提高。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "沿下降枝往髓質追蹤時，分別描述水量變化與濃度變化，不把管液變濃解讀成一定有溶質分泌。"
+        },
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ],
+        "reference": "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urine-concentration-node-03",
+        "tag": "03",
+        "title": "亨利氏環上升枝",
+        "summary": "亨利氏環上升枝不透水，並回收 NaCl",
+        "figure": "urine-concentration-stage1-base-01.svg",
+        "concept": "亨利氏環上升枝不透水，並回收 NaCl；溶質移出而水未跟隨，管液逐漸變稀。",
+        "points": [
+          "上升枝與下降枝的水通透性不同。",
+          "鹽分移出有助建立髓質濃度差。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較環的兩邊時，用「水是否能離開」及「鹽是否回收」兩欄逐項核對，不能把兩邊畫成相同作用。"
+        },
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ],
+        "reference": "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urine-concentration-node-04",
+        "tag": "04",
+        "title": "直血管逆流交換",
+        "summary": "直血管透過緩慢的逆流交換，減少髓質溶質流失，協助保留亨利氏環建立的滲透梯度",
+        "figure": "urine-concentration-stage1-base-01.svg",
+        "concept": "直血管透過緩慢的逆流交換，減少髓質溶質流失，協助保留亨利氏環建立的滲透梯度。",
+        "points": [
+          "亨利氏環屬於管液通路。",
+          "直血管屬於血液通路。",
+          "逆流增強與逆流交換的角色不同。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在相鄰的 U 形構造中先辨管液與血液，再把建立梯度配給亨利氏環、保留梯度配給直血管。"
+        },
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ],
+        "reference": "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urine-concentration-node-05",
+        "tag": "05",
+        "title": "ADH與水通道",
+        "summary": "ADH 作用於 V2 受器，增加水通道數目與集尿管水通透性，使水可沿髓質梯度再吸收",
+        "figure": "urine-concentration-stage1-base-02.svg",
+        "concept": "ADH 作用於 V2 受器，增加水通道數目與集尿管水通透性，使水可沿髓質梯度再吸收。",
+        "points": [
+          "受器接收激素訊號，水通道提供水通過的路徑。",
+          "受器與水通道是不同構造。",
+          "水回收仍需要外側的滲透梯度。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "觀察集尿管細胞圖時，把激素訊號端與管腔面的水通道分開，避免將 ADH 當成直接流過水的孔道。"
+        },
+        "sources": [
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ],
+        "reference": "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urine-concentration-node-06",
+        "tag": "06",
+        "title": "濃尿與稀尿條件比較",
+        "summary": "在髓質梯度等其他條件相同時，ADH 較多使水回收增加、尿量較少且較濃",
+        "figure": "urine-concentration-stage1-base-02.svg",
+        "concept": "在髓質梯度等其他條件相同時，ADH 較多使水回收增加、尿量較少且較濃；ADH 較少則方向相反。",
+        "points": [
+          "尿量是排出的液體體積。",
+          "尿濃度描述單位體積中的溶質情況。",
+          "ADH 並非決定尿量的唯一因素。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較兩個模型時先固定其他條件，再分別說明水回收、尿量與濃度三個變化方向。"
+        },
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ],
+        "reference": "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16；adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21",
+        "caption": "無字底圖。"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "urine-concentration-foundation-q01",
+        "stem": "濃縮尿液需配合哪一組條件？",
+        "options": [
+          "髓質滲透梯度與可通水的集尿管",
+          "只有髓質梯度即可，管壁可完全不通水",
+          "只有膀胱收縮，無需小管水移動",
+          "只有輸尿管蠕動，無需髓質環境"
+        ],
+        "answer": 0,
+        "hint": "把外側環境與管壁通透性分開檢查。",
+        "explain": "髓質梯度提供水移動方向，集尿管須能通水；只有一項不足以同樣濃縮尿液。",
+        "nodeId": "urine-concentration-node-01",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+        ]
+      },
+      {
+        "id": "urine-concentration-foundation-q02",
+        "stem": "亨利氏環下降枝的主要特性為何？",
+        "options": [
+          "對水通透，水可沿梯度移出",
+          "完全不透水，只主動送鹽",
+          "把血液直接排入尿道",
+          "只負責儲存最終尿液"
+        ],
+        "answer": 0,
+        "hint": "比較環兩側的水通透性。",
+        "explain": "下降枝可通水，水外移使管液濃縮；不能將上升枝不透水的性質套在下降枝。",
+        "nodeId": "urine-concentration-node-02",
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "urine-concentration-foundation-q03",
+        "stem": "亨利氏環上升枝回收 NaCl 時，水的通透性為何？",
+        "options": [
+          "不透水",
+          "水與鹽必定等比例通過",
+          "只讓水通過而不回收鹽",
+          "由膀胱壓力決定是否透水"
+        ],
+        "answer": 0,
+        "hint": "鹽外移是否一定伴隨水外移？",
+        "explain": "上升枝回收鹽而不透水，管液可變稀，並參與建立髓質梯度。",
+        "nodeId": "urine-concentration-node-03",
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "urine-concentration-foundation-q04",
+        "stem": "直血管在逆流機制中的主要角色為何？",
+        "options": [
+          "逆流交換以減少髓質梯度流失",
+          "取代鮑氏囊形成管液",
+          "直接將尿液送至膀胱",
+          "製造輸尿管的蠕動"
+        ],
+        "answer": 0,
+        "hint": "分辨血液通路與小管通路。",
+        "explain": "直血管透過逆流交換保留梯度，亨利氏環則負責逆流增強，兩者角色不同。",
+        "nodeId": "urine-concentration-node-04",
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "urine-concentration-foundation-q05",
+        "stem": "ADH 增加集尿管水回收的直接機轉為何？",
+        "options": [
+          "經 V2 受器增加水通道與水通透性",
+          "使外尿道括約肌收縮",
+          "直接把水從腎盂推回血管",
+          "將亨利氏環上升枝變成主要通水段"
+        ],
+        "answer": 0,
+        "hint": "訊號受器與供水通過的構造應分開。",
+        "explain": "ADH 經 V2 受器增加水通道，使水沿既有梯度回收；並非靠尿道出口控制。",
+        "nodeId": "urine-concentration-node-05",
+        "sources": [
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ]
+      },
+      {
+        "id": "urine-concentration-foundation-q06",
+        "stem": "其他條件相同，ADH 較多時尿量與濃度的方向為何？",
+        "options": [
+          "尿量較少、尿較濃",
+          "尿量較多、尿較稀",
+          "尿量較少、尿較稀",
+          "尿量較多、尿較濃"
+        ],
+        "answer": 0,
+        "hint": "從水回收增加推到最終留下的水量。",
+        "explain": "水回收較多，留在尿中的水較少，因此尿量下降、濃度上升；此比較以其他條件相同為前提。",
+        "nodeId": "urine-concentration-node-06",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "urine-concentration-case-q01",
+        "stem": "【管段比較】某段回收 NaCl，水卻無法隨之通過，最符合哪個管段？",
+        "options": [
+          "亨利氏環上升枝",
+          "亨利氏環下降枝",
+          "尿道",
+          "膀胱"
+        ],
+        "answer": 0,
+        "hint": "用水通透性將環兩側區分。",
+        "explain": "上升枝不透水並回收鹽；下降枝則可通水，兩者共同參與濃縮環境。",
+        "nodeId": "urine-concentration-node-03",
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "urine-concentration-case-q02",
+        "stem": "【角色配對】同學將亨利氏環與直血管都寫成「逆流交換血管」，應如何修正？",
+        "options": [
+          "亨利氏環為小管逆流增強，直血管為血管逆流交換",
+          "兩者都是輸尿管的分支",
+          "直血管是小管，亨利氏環是動脈",
+          "兩者都直接構成過濾膜"
+        ],
+        "answer": 0,
+        "hint": "先判斷裡面流的是血液還是管液。",
+        "explain": "亨利氏環建立梯度，直血管的逆流交換協助保留梯度，構造與角色不能互換。",
+        "nodeId": "urine-concentration-node-04",
+        "sources": [
+          "countercurrent-mechanism；physiology/CH09 p.20, physiology/CH09 p.19, physiology/CH09 p.21, physiology/CH09 p.22, anatomy/AB-05_15 p.8"
+        ]
+      },
+      {
+        "id": "urine-concentration-case-q03",
+        "stem": "【訊號觀察】集尿管水通道增加，水通透性上升，哪項最直接符合此變化？",
+        "options": [
+          "ADH 經 V2 受器作用",
+          "外括約肌隨意收縮",
+          "輸尿管三處狹窄變化",
+          "腎門包覆層增厚"
+        ],
+        "answer": 0,
+        "hint": "選擇作用於集尿管通水能力的訊號。",
+        "explain": "ADH 直接調節集尿管水通透性；尿路出口與包覆構造不是此機轉的替代說明。",
+        "nodeId": "urine-concentration-node-05",
+        "sources": [
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ]
+      },
+      {
+        "id": "urine-concentration-case-q04",
+        "stem": "【條件推論】髓質已有高滲透梯度，但集尿管仍不易通水，能否只靠梯度得到同樣濃縮效果？",
+        "options": [
+          "不能，末端水通透性仍是必要條件",
+          "可以，梯度可取代任何管壁通透性",
+          "可以，只要膀胱儲尿時間相同",
+          "不能，因所有上升枝都必須透水"
+        ],
+        "answer": 0,
+        "hint": "把水移動方向與水能否穿過膜分開。",
+        "explain": "梯度存在不代表水已移動；集尿管需有足夠水通透性，才能利用梯度回收水。",
+        "nodeId": "urine-concentration-node-01",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16"
+        ]
+      },
+      {
+        "id": "urine-concentration-case-q05",
+        "stem": "【模型比較】其他條件相同，由 ADH 較多切到較少時，合理方向為何？",
+        "options": [
+          "水回收減少、尿量增加、尿較稀",
+          "水回收增加、尿量減少、尿較濃",
+          "水回收不變、尿量與濃度都必定不變",
+          "水回收減少、尿量減少、尿較濃"
+        ],
+        "answer": 0,
+        "hint": "沿 ADH、水通透性、水回收依序推論。",
+        "explain": "ADH 較少時末端通水減少，水回收較少，尿量較多且較稀；尿量與濃度是分開的量。",
+        "nodeId": "urine-concentration-node-06",
+        "sources": [
+          "urine-concentration；physiology/CH09 p.22, physiology/CH09 p.19, physiology/CH09 p.20, physiology/CH09 p.21, physiology/CH09 p.16",
+          "adh-water-reabsorption；physiology/CH09 p.22, physiology/CH09 p.16, physiology/CH09 p.19, physiology/CH09 p.30, physiology/CH09 p.37, physiology/CH09 p.21"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  },
+  "urinary-route-micturition": {
+    "slug": "urinary-route-micturition",
+    "version": "v1",
+    "experience": "guided",
+    "title": "尿液通路與排尿控制",
+    "subtitle": "由輸尿管蠕動、膀胱與尿道，理解儲尿及排尿的肌肉神經協調。",
+    "label": "尿液通路與排尿控制｜互動資訊圖表",
+    "stats": [
+      {
+        "value": "蠕動＋斜行穿壁",
+        "label": "輸尿管的運送與防逆流"
+      },
+      {
+        "value": "三開口",
+        "label": "界定膀胱三角"
+      },
+      {
+        "value": "三處",
+        "label": "輸尿管狹窄"
+      }
+    ],
+    "lab": {
+      "title": "情境實驗室",
+      "intro": "切換閱讀主題，對照課本概念；本階段共用無字底圖，圖上標籤與狀態圖層尚未製作。",
+      "figure": "urinary-route-micturition-stage1-base-01.svg",
+      "states": [
+        {
+          "id": "state-1",
+          "label": "流經",
+          "explain": "腎盂至體外路徑。"
+        },
+        {
+          "id": "state-2",
+          "label": "儲尿",
+          "explain": "逼尿肌（迫尿肌）放鬆、出口控制。"
+        },
+        {
+          "id": "state-3",
+          "label": "排尿",
+          "explain": "逼尿肌（迫尿肌）收縮與出口放鬆。"
+        }
+      ],
+      "predict": {
+        "question": "從流經路徑改看「儲尿」狀態，何種壁肌與出口配合較符合？",
+        "options": [
+          "逼尿肌（迫尿肌）放鬆，出口保持控制",
+          "逼尿肌（迫尿肌）收縮且出口完全放鬆",
+          "輸尿管改為由膀胱向腎盂送尿",
+          "意識直接將壁肌當骨骼肌收縮"
+        ],
+        "answer": 0,
+        "feedback": "儲尿時壁肌放鬆並控制出口；排尿時壁肌收縮且出口放鬆，見節點 05。",
+        "sources": [
+          "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "id": "urinary-route-micturition-node-01",
+        "tag": "01",
+        "title": "輸尿管的蠕動與防逆流",
+        "summary": "輸尿管連接腎盂與膀胱，靠平滑肌蠕動送尿",
+        "figure": "urinary-route-micturition-stage1-base-02.svg",
+        "concept": "輸尿管連接腎盂與膀胱，靠平滑肌蠕動送尿；斜行穿過膀胱壁的構造，有助在膀胱內壓作用下防止逆流。",
+        "points": [
+          "蠕動將尿液送往膀胱。",
+          "防逆流與斜行穿入膀胱壁有關。",
+          "生理性瓣膜作用不等於另有解剖瓣膜。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "觀察輸尿管進入膀胱的路徑，將沿途蠕動與末端受壓閉合分成兩個機轉，不把尿液運送歸給重力而已。"
+        },
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+        ],
+        "reference": "《解剖學》泌尿系統，第 10–11 頁。",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urinary-route-micturition-node-02",
+        "tag": "02",
+        "title": "輸尿管三處狹窄",
+        "summary": "輸尿管三處狹窄為與腎盂交接處、與髂外動脈及靜脈交叉處，以及進入膀胱處",
+        "figure": "urinary-route-micturition-stage1-base-03.svg",
+        "concept": "輸尿管三處狹窄為與腎盂交接處、與髂外動脈及靜脈交叉處，以及進入膀胱處。",
+        "points": [
+          "三個位置分別在腎盂端、血管交叉處與膀胱壁端。",
+          "由上而下依序：腎盂端、骨盆緣血管交叉處、膀胱壁端。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "對照三個放大框，從腎盂向膀胱逐一定位三處狹窄。"
+        },
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+        ],
+        "reference": "《解剖學》泌尿系統，第 10–11 頁；《生理學》腎臟與體液的恆定，第 3、13 頁。",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urinary-route-micturition-node-03",
+        "tag": "03",
+        "title": "膀胱三角與逼尿肌（迫尿肌）",
+        "summary": "膀胱三角由兩個輸尿管口與一個尿道內口界定",
+        "figure": "urinary-route-micturition-stage1-base-04.svg",
+        "concept": "膀胱三角由兩個輸尿管口與一個尿道內口界定；膀胱壁的逼尿肌（迫尿肌）是平滑肌。",
+        "points": [
+          "輸尿管口是尿液進入膀胱的位置。",
+          "尿道內口是離開膀胱的出口。",
+          "膀胱三角是區域，逼尿肌（迫尿肌）是肌肉。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "在膀胱內面圖先找兩個入口與一個出口，再看壁肌放大圖，避免把三角當成另外一條管道。"
+        },
+        "sources": [
+          "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+        ],
+        "reference": "《解剖學》泌尿系統，第 11–12 頁；《生理學》腎臟與體液的恆定，第 24–25 頁。",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urinary-route-micturition-node-04",
+        "tag": "04",
+        "title": "男女尿道與括約肌",
+        "summary": "尿道將尿液由膀胱排至體外",
+        "figure": "urinary-route-micturition-stage1-base-05.svg",
+        "concept": "尿道將尿液由膀胱排至體外；課本女性約 3.8 cm、男性約 20 cm。內括約肌為平滑肌，外括約肌為骨骼肌。",
+        "points": [
+          "男性尿道分前列腺部、膜部及陰莖部。",
+          "外括約肌可受意識控制。",
+          "女性尿道較短且只供排尿；男性尿道兼為生殖管道。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較男女通路時，先辨認膀胱出口，再看長度與括約肌的肌肉類型，勿將尿道與輸尿管互換。"
+        },
+        "sources": [
+          "urethra；anatomy/AB-05_15 p.14, anatomy/AB-05_15 p.15, anatomy/AB-05_15 p.12, physiology/CH09 p.25"
+        ],
+        "reference": "《解剖學》泌尿系統，第 12、14–15 頁；《生理學》腎臟與體液的恆定，第 25 頁。",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urinary-route-micturition-node-05",
+        "tag": "05",
+        "title": "儲尿與排尿反射",
+        "summary": "膀胱牽張訊息引發排尿反射",
+        "figure": "urinary-route-micturition-stage1-base-06.svg",
+        "concept": "膀胱牽張訊息引發排尿反射；排尿時骨盆副交感神經促逼尿肌（迫尿肌）收縮，並配合出口放鬆。",
+        "points": [
+          "儲尿時逼尿肌（迫尿肌）放鬆，出口保持控制。",
+          "陰神經控制外括約肌，參與隨意控制。",
+          "膀胱收縮與括約肌放鬆需要協調。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "比較儲尿與排尿時分開列出壁肌、出口及神經；意識可調節外括約肌，並非直接把壁肌當成骨骼肌控制。"
+        },
+        "sources": [
+          "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+        ],
+        "reference": "《生理學》腎臟與體液的恆定，第 24–25 頁；《解剖學》泌尿系統，第 11–12、14 頁。",
+        "caption": "無字底圖。"
+      },
+      {
+        "id": "urinary-route-micturition-node-06",
+        "tag": "06",
+        "title": "尿液特性與尿量",
+        "summary": "待教師核可卡片",
+        "figure": "urinary-route-micturition-stage1-placeholder.svg",
+        "concept": "待教師核可卡片",
+        "points": [
+          "本節暫留佔位。"
+        ],
+        "clinical": {
+          "title": "觀察與應用",
+          "text": "來源核可後再補入內容與題目。"
+        },
+        "sources": [],
+        "reference": "待教師核可卡片",
+        "pendingSources": [
+          "urine-physical-properties"
+        ],
+        "status": "placeholder",
+        "caption": "待教師核可卡片"
+      }
+    ],
+    "foundation": [
+      {
+        "id": "urinary-route-micturition-foundation-q01",
+        "stem": "輸尿管送尿及防逆流的配對，何者正確？",
+        "options": [
+          "靠蠕動送尿，斜行穿入膀胱壁有助防逆流",
+          "只靠重力送尿，末端必有獨立解剖瓣膜",
+          "由膀胱形成尿液，再沿輸尿管送至腎盂",
+          "由尿道蠕動代替輸尿管送尿"
+        ],
+        "answer": 0,
+        "hint": "將運送機轉與末端穿壁構造分開。",
+        "explain": "輸尿管平滑肌蠕動送尿；斜行穿壁可產生生理性瓣膜作用，不等於另有解剖瓣膜。",
+        "nodeId": "urinary-route-micturition-node-01",
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-foundation-q02",
+        "stem": "輸尿管三處狹窄中，位於中段的一處在哪裡？",
+        "options": [
+          "與髂外動脈及靜脈交叉處",
+          "腎門與腎筋膜交界",
+          "尿道外口",
+          "膀胱三角的尿道內口"
+        ],
+        "answer": 0,
+        "hint": "由腎盂向膀胱追蹤，找出血管交叉的位置。",
+        "explain": "輸尿管在與髂外動脈及靜脈交叉處形成中段狹窄；其餘兩處在腎盂交接與進入膀胱處。",
+        "nodeId": "urinary-route-micturition-node-02",
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-foundation-q03",
+        "stem": "膀胱三角由哪三個開口界定？",
+        "options": [
+          "兩個輸尿管口與一個尿道內口",
+          "兩個尿道內口與一個輸尿管口",
+          "兩個腎乳頭與一個腎門",
+          "兩個腎盂與一個尿道外口"
+        ],
+        "answer": 0,
+        "hint": "先找兩個入口，再找一個出口。",
+        "explain": "兩輸尿管口是入口，尿道內口是出口，三者形成膀胱三角；壁肌則是平滑肌。",
+        "nodeId": "urinary-route-micturition-node-03",
+        "sources": [
+          "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-foundation-q04",
+        "stem": "哪個尿道括約肌具有骨骼肌及隨意控制特性？",
+        "options": [
+          "外括約肌",
+          "內括約肌",
+          "逼尿肌（迫尿肌）",
+          "輸尿管壁平滑肌"
+        ],
+        "answer": 0,
+        "hint": "將肌肉類型與意識控制配對。",
+        "explain": "外括約肌為骨骼肌，可受隨意控制；內括約肌及逼尿肌（迫尿肌）為平滑肌。",
+        "nodeId": "urinary-route-micturition-node-04",
+        "sources": [
+          "urethra；anatomy/AB-05_15 p.14, anatomy/AB-05_15 p.15, anatomy/AB-05_15 p.12, physiology/CH09 p.25"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-foundation-q05",
+        "stem": "排尿反射時，哪種組合有利排出尿液？",
+        "options": [
+          "逼尿肌（迫尿肌）收縮、出口放鬆",
+          "逼尿肌（迫尿肌）放鬆、出口緊閉",
+          "逼尿肌（迫尿肌）與出口都保持緊閉",
+          "只有輸尿管停止蠕動"
+        ],
+        "answer": 0,
+        "hint": "同時考慮膀胱擠壓與出口阻力。",
+        "explain": "排尿需壁肌收縮與出口放鬆協調，骨盆副交感神經參與此反射。",
+        "nodeId": "urinary-route-micturition-node-05",
+        "sources": [
+          "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "urinary-route-micturition-case-q01",
+        "stem": "【通路觀察】輸尿管斜行穿入膀胱壁，膀胱內壓增加可使該段受壓閉合，應如何理解？",
+        "options": [
+          "有助防逆流的生理性瓣膜作用",
+          "證明末端必有獨立解剖瓣膜",
+          "代表尿液改由膀胱流回腎盂",
+          "代表輸尿管不需蠕動"
+        ],
+        "answer": 0,
+        "hint": "分辨功能上的瓣膜作用與獨立瓣膜構造。",
+        "explain": "斜行穿壁形成受壓防逆流機轉；不能憑其功能自行新增解剖瓣膜。",
+        "nodeId": "urinary-route-micturition-node-01",
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-case-q02",
+        "stem": "【路徑追蹤】一滴尿液隨尿流由腎盂往膀胱移動，依序會通過輸尿管的哪三處狹窄？",
+        "options": [
+          "腎盂與輸尿管交接處 → 跨越髂外動脈及靜脈處 → 進入膀胱壁處",
+          "進入膀胱壁處 → 跨越髂外動脈及靜脈處 → 腎盂與輸尿管交接處",
+          "跨越髂外動脈及靜脈處 → 腎盂與輸尿管交接處 → 進入膀胱壁處",
+          "腎盂與輸尿管交接處 → 尿道內口 → 進入膀胱壁處"
+        ],
+        "answer": 0,
+        "hint": "以流向定位起點、血管交叉處及終點。",
+        "explain": "尿液先由腎盂進入輸尿管，向下經髂外動脈及靜脈交叉處，最後穿入膀胱壁；尿道內口位於膀胱出口，並非輸尿管狹窄。",
+        "nodeId": "urinary-route-micturition-node-02",
+        "sources": [
+          "ureter-constrictions；anatomy/AB-05_15 p.10, anatomy/AB-05_15 p.11, physiology/CH09 p.3, physiology/CH09 p.13"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-case-q03",
+        "stem": "【內面圖觀察】要在膀胱內面圈出三角，應連接何者？",
+        "options": [
+          "左右輸尿管口及尿道內口",
+          "左右腎盂及尿道外口",
+          "左右腎門及輸尿管上端",
+          "左右外括約肌及腎乳頭"
+        ],
+        "answer": 0,
+        "hint": "辨認尿液進入與離開膀胱的三個開口。",
+        "explain": "膀胱三角是兩輸尿管口與一尿道內口所界定的區域，並非另一條管道。",
+        "nodeId": "urinary-route-micturition-node-03",
+        "sources": [
+          "urinary-bladder；anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, physiology/CH09 p.24, physiology/CH09 p.25"
+        ]
+      },
+      {
+        "id": "urinary-route-micturition-case-q04",
+        "stem": "【控制配對】想說明可用意識暫時控制排尿出口，應連到哪一組？",
+        "options": [
+          "陰神經與尿道外括約肌",
+          "骨盆副交感神經與腎被膜",
+          "腎素與膀胱三角",
+          "緻密斑與輸尿管壁"
+        ],
+        "answer": 0,
+        "hint": "找出體神經控制的骨骼肌。",
+        "explain": "陰神經控制外括約肌，參與隨意控制；逼尿肌（迫尿肌）是平滑肌，不能當成意識直接控制的骨骼肌。",
+        "nodeId": "urinary-route-micturition-node-05",
+        "sources": [
+          "micturition-reflex；physiology/CH09 p.24, physiology/CH09 p.25, anatomy/AB-05_15 p.11, anatomy/AB-05_15 p.12, anatomy/AB-05_15 p.14"
+        ]
+      }
+    ],
+    "credits": [
+      "生理學 CH09；解剖學 AB-05_15。逐節頁碼與卡片 uid 見各節來源。",
+      "本階段為內容審查預覽；底圖由 ChatGPT 製作，未加標籤或資料層。"
+    ]
+  }
+}

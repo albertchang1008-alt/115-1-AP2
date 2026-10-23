@@ -1,24 +1,14 @@
 # 給 AI agent 的指示
 
-這是「課程平台1.0」（115-1 AP2 課程平台）的程式碼庫。開始任何工作之前：
+這是「課程平台1.0」（115-1 AP2 課程平台）的程式碼庫；CLAUDE.md 與 AGENTS.md 規則相同。
 
-1. 先讀 `handoff.md`——目前版本、固定決策、進行中的分支與待辦都記在那裡，
-   不要只靠對話紀錄猜現況。
-2. 開始改動前，先用 `git branch --show-current` 確認目前在哪個分支；未經
-   使用者明確同意，不要 push、合併或部署到 `main`（正式環境，push 到 main
-   會自動觸發 GitHub Pages 上線）。
-3. **完成一段工作之後（不論是回答問題、改程式、寫文件），必須更新
-   `handoff.md`**：把新的決策、這次做了什麼變更、目前分支/commit 狀態、
-   下一步待辦寫進去，覆蓋掉過期內容。沒更新這份文件就結束工作＝沒有交接，
-   下一個接手的 agent（不限 Claude，任何 AI coding agent）會從過期資訊
-   開始工作。
-4. 版本異動歷史記在 `DEVELOPMENT_LOG.md`（新版本寫最上面），跟 `handoff.md`
-   分工不同：`DEVELOPMENT_LOG.md` 是流水帳，`handoff.md` 是「現在的狀態」。
-5. Commit message 結尾附上身分標註（例如 Claude 系列用
-   `Co-Authored-By: <model 名稱> <noreply@anthropic.com>`），方便回溯是哪個
-   agent、哪次做的改動。不要用 `--no-verify`、不要強制推送、不要略過測試。
-
-6. `handoff.md` 保持精簡（約 150 行內，只寫現況）；完成的項目移出並記入 `DEVELOPMENT_LOG.md`。
-   舊交接歷史在 `docs/archive/`，平常不用讀。
+1. 開工讀 handoff.md、docs/AI_WORKFLOW_PLAN.md、CODEX_QUEUE.md；現況只看佇列，不靠對話猜測。
+2. 改動前用 git branch --show-current 確認分支；未經教師明確同意，不 push、合併或部署 main（push main 自動上線）。
+3. 收工時：①用 `python3 scripts/devlog.py add "<標題>" "<內容>"` 寫本週 devlog；②只改寫 CODEX_QUEUE.md 自己工作的那一列（完成刪列，新工作加列），handoff.md 除非規則改變否則不動；③跑 `python3 scripts/check_handoff.py`，沒過不准收工。
+4. 開工不讀 DEVELOPMENT_LOG.md；需要查歷史時只用 `grep -rn 關鍵字 docs/devlog/`，讀命中的附近幾行。新紀錄每筆≤5行、每行≤220字；細節寫報告，索引不寫內容。
+5. Commit message 結尾附 agent 身分（Codex 用 [Codex]）；不用 --no-verify、不強制推送、不略過測試。
+6. handoff.md≤4000字、每行≤220字；CODEX_QUEUE.md每行≤300字且≤25件，由 scripts/check_handoff.py 檢查。固定決策全文在 docs/DECISIONS.md；舊交接在 docs/archive/，平常不讀。
+7. Codex 從上往下執行第一件「可做」；缺交辦檔先自寫。遇 Claude／教師停點標記後換下一件；每份報告開頭「給 Claude 的摘要」≤15行，列檔案、PASS／FAIL、偏離與最多5個抽查項目。
+8. 現況只寫 CODEX_QUEUE.md；週誌用 docs/devlog/<ISO年>-W<週>.md，日期採 Asia/Taipei。不改教師 reviewed，不自行發布／部署／勾班。
 
 以上規則對任何在這個 repo 工作的 AI agent 一律適用。

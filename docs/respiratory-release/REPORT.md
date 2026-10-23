@@ -16,7 +16,7 @@
 
 七份 `materials:build` 成功，登錄於 `shared/materials.ts` 與 `public/materials/README.md`。沿用已驗收的圖層，未以舊產生器重畫。所有 content.json、SVG、PNG、WebP、oxygen-curve.js 與其他教材相對開工快照均不變；呼吸道與肺／胸膜 HTML 因正式 build 更新，其餘五份 HTML 雜湊不變。[範圍比對](scope-integrity.json)
 
-七份共 126 狀態（每份 9 × 兩尺寸）verify 全過，包含底圖實際畫出檢查。通用 verify 補上呼吸道 manifest 的舊欄位相容及可見底圖 viewport 尺寸推導。[建置紀錄](build.log.txt)、[節點 21／來源 15 稽核](node-audit.log.txt)、[materials 20 測試](material-tests.log.txt)、[完整 check](check.log.txt)：前端 134／Functions 26，零 skip，兩端編譯與版本檢查通過。[總驗證](verification-summary.json)
+七份共 126 狀態（每份 9 × 兩尺寸）verify 全過，包含底圖實際畫出檢查。通用 verify 補上呼吸道 manifest 的舊欄位相容及可見底圖 viewport 尺寸推導。[建置紀錄](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/build.log.txt)、[節點 21／來源 15 稽核](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/node-audit.log.txt)、[materials 20 測試](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/material-tests.log.txt)、[完整 check](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/.worktrees/plain-language-110/docs/respiratory-release/check.log.txt)：前端 134／Functions 26，零 skip，兩端編譯與版本檢查通過。[總驗證](verification-summary.json)
 
 ## Excel
 
