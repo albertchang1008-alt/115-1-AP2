@@ -1,0 +1,59 @@
+{
+  "passCheck": true,
+  "version": "1.10.1",
+  "baseCommit": "6e264cf7",
+  "pureTests": 12,
+  "newPureTests": 4,
+  "frontendTests": 230,
+  "functionsTests": 61,
+  "screenshots": [
+    "classification-new-1280x800.png",
+    "classification-new-390x844.png",
+    "classifications-1280x800.png",
+    "classifications-390x844.png",
+    "preview-off-1280x800.png",
+    "preview-off-390x844.png",
+    "preview-on-1280x800.png",
+    "preview-on-390x844.png",
+    "progress-1280x800.png",
+    "progress-390x844.png",
+    "progress-missing-1280x800.png",
+    "progress-missing-390x844.png",
+    "read-error-1280x800.png",
+    "read-error-390x844.png",
+    "unit-list-1280x800.png",
+    "unit-list-390x844.png",
+    "unit-list-full-1280x800.png",
+    "unit-list-full-390x844.png",
+    "update-confirm-1280x800.png",
+    "update-confirm-390x844.png"
+  ],
+  "browser": [
+    {
+      "width": 1280,
+      "height": 800,
+      "courseId": "MCP-TEST",
+      "screenshots": 10,
+      "overflow": false,
+      "previewWrites": 0,
+      "updateCalls": 1,
+      "errors": [],
+      "externalNetworkRequests": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "courseId": "MCP-TEST",
+      "screenshots": 10,
+      "overflow": false,
+      "previewWrites": 0,
+      "updateCalls": 1,
+      "errors": [],
+      "externalNetworkRequests": []
+    }
+  ],
+  "evidenceDirectory": "/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/status-tags",
+  "retainUntil": "2026-10-30",
+  "productionAccess": false,
+  "backendCodeChanged": false
+}

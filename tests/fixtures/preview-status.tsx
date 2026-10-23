@@ -8,7 +8,9 @@ const published:Course={id:'MCP-TEST',title:'MCP-TEST 預覽與狀態驗收',ter
  classIds:['test-a','test-b','test-c'],classNames:{'test-a':'測試甲班','test-b':'測試乙班','test-c':'測試丙班'},
  units:[unit('current','心臟基礎','current'),unit('hidden','呼吸調節','hidden'),unit('modified','腎臟構造','current'),unit('unassigned','未勾選範例','current'),unit('archived','考完可回看','archived')],
  classUnits:{'test-a':['current'],'test-b':['current','hidden','modified','archived'],'test-c':[]}};
-published.chapters=Object.fromEntries(published.units.map(u=>[u.group!,chapter(u.title)]));published.chapterOrder=published.units.map(u=>u.group!);
+published.units.push(...[1,2,3,4].map(i=>({...unit('mixed-'+i,'混合分類 '+i,i===4?'hidden':'current'),group:'混合範例'})));
+published.classUnits!['test-b'].push(...[1,2,3,4].map(i=>'mixed-'+i));
+published.chapters=Object.fromEntries(published.units.map(u=>[u.group!,chapter(u.group!)]));published.chapterOrder=published.units.map(u=>u.group!);
 published.chapters['腎臟構造'].activities=[{id:'material',title:'原教材',url:'https://example.test/material',type:'link',phase:'before',description:''}];
 const draft=structuredClone(published);draft.units.push(unit('new','新教材單元','hidden'));draft.chapters!['新教材單元']=chapter('新教材單元');draft.chapterOrder!.push('新教材單元');draft.classUnits!['test-b'].push('new');
 draft.chapters!['腎臟構造'].activities[0].title='修訂教材';

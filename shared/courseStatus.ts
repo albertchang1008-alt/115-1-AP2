@@ -84,3 +84,14 @@ export function studentUpdateSummary(draft: Course, published?: Course) {
 }
 /** Teacher copy only; callable identifiers and persisted data are unchanged. */
 export function studentUpdateCopy(message: string) { return message.replaceAll('學生端（已發布版本）', '學生端').replaceAll('已發布版本', '學生端版本').replaceAll('發布', '更新到學生端'); }
+
+/** Chapter pills summarize classifications, counting only when visibility is mixed. */
+export function openingStatusTags(units: Unit[]) {
+  const order = ['current', 'hidden', 'archived'] as const;
+  const counts = order.map(visibility => ({ visibility, count: units.filter(u => unitVisibility(u) === visibility).length })).filter(r => r.count > 0);
+  return counts.map(r => ({ ...r, label: OPEN_STATUS[r.visibility] + (counts.length > 1 ? ` ${r.count}` : '') }));
+}
+export function attentionStatusTags(draft: Course, published: Course | undefined, units: Unit[]) {
+  const statuses = new Set(units.map(u => studentUpdateStatus(draft, published, u)));
+  return (['尚未更新到學生端', '有修改未更新'] as const).filter(s => statuses.has(s));
+}

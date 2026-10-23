@@ -1994,10 +1994,6 @@ body { padding-bottom: 60px; }
 .first-use-tips { border: 2px solid var(--blue); margin-bottom: 18px; }
 
 /* Teacher visibility and student-update status; compact cards on phones. */
-.course-status-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
-.course-status-table th, .course-status-table td { padding: 12px 8px; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
-.course-status-table th:first-child { width: 25%; }
-.course-status-table small, .status-unit-title, .progress-unit-info small { display: block; margin-top: 5px; }
 .visibility-hidden { background: #fef3c7; color: #78350f; }
 .visibility-current { background: #dcfce7; color: #14532d; }
 .visibility-archived { background: #e2e8f0; color: #334155; }
@@ -2011,14 +2007,6 @@ body { padding-bottom: 60px; }
 .progress-unit-info { min-width: 0; }
 .progress-published-status { margin: 6px 0; padding-left: 20px; font-size: 13px; color: var(--muted, #536a77); }
 @media (max-width: 600px) {
-  .course-status-table, .course-status-table tbody { display: block; }
-  .course-status-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .course-status-table tr { display: block; border: 1px solid var(--line); border-radius: 10px; margin: 12px 0; padding: 8px; }
-  .course-status-table td { display: grid; grid-template-columns: 100px minmax(0,1fr); gap: 6px; border: 0; padding: 8px 4px; }
-  .course-status-table td::before { content: attr(data-label); font-weight: 600; }
-  .course-status-table td > small { grid-column: 2; }
-  .course-status-table td:first-child { display: block; }
-  .course-status-table td:first-child::before { display: none; }
   .preview-open-toggle { width: 100%; }
   .update-student-dialog { max-width: calc(100% - 24px); padding: 20px; }
   .update-student-dialog .actions { bottom: -20px; }
@@ -2026,7 +2014,7 @@ body { padding-bottom: 60px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 /* Keep scrolled-to teacher controls below the fixed appearance preferences. */
 html:has(.prefs-bar) { scroll-padding-top: 80px; }
-.app button, .app select, .course-status { scroll-margin-top: 80px; }
+.app button, .app select { scroll-margin-top: 80px; }
 @media (max-width: 600px) {
   .app > main > .topbar { padding-top: 72px; height: auto; min-height: 145px; }
 }
@@ -2034,3 +2022,24 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .progress-row { flex-wrap: wrap; }
 .progress-row > select { min-width: 132px; flex: 0 0 auto; }
 .progress-unit-info { flex: 1 1 160px; }
+
+.unit-status-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; text-align: left; }
+.unit-status-tags .badge { white-space: normal; line-height: 1.45; font-size: 12px; font-weight: 600; }
+.unit-status-tags .update-attention { background: #fff1e6; color: #8a3500; border: 1px solid #e9bd91; }
+.unit-status-tags .status-loading { font-size: 12px; color: var(--muted); }
+.unitmenu > .sectionhead { flex-wrap: wrap; gap: 8px; }
+.classification-row > span:first-child { min-width: 0; flex: 1 1 180px; }
+
+.progress-unit-info small { display: block; margin-top: 5px; }
+/* Keep status pills semantic across appearance themes, and inside each list row. */
+:root .unit-status-tags .badge.visibility-hidden { background: #fef3c7; color: #78350f; }
+:root .unit-status-tags .badge.visibility-current { background: #dcfce7; color: #14532d; }
+:root .unit-status-tags .badge.visibility-archived { background: #e2e8f0; color: #334155; }
+:root .unit-status-tags .badge.update-attention { background: #fff1e6; color: #8a3500; }
+.editorgrid > .unitmenu { display: block; overflow: visible; min-width: 0; }
+.unitmenu .chapter-menu-entry > .unit-leaf { flex-direction: column; align-items: stretch; gap: 4px; width: 100%; white-space: normal; }
+.unitmenu .chapter-menu-entry > .unit-leaf > strong { display: block; overflow-wrap: anywhere; }
+.unitmenu .chapter-menu-entry > .unit-leaf .unit-status-tags { margin-top: 3px; }
+.unitmenu > .sectionhead { margin-bottom: 12px; }
+.unitmenu > .sectionhead h3 { flex-basis: 100%; }
+.unitmenu > .sectionhead button { font-size: 12px; padding: 8px; }

@@ -14,14 +14,32 @@ export async function verifyPreviewStatus({out}={}){
   page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/*',r=>{const url=new URL(r.request().url());if(url.hostname==='preview-status.test')return r.fulfill({contentType:'text/html',body:'<meta name="viewport" content="width=device-width,initial-scale=1"><div id="root"></div>'});network.push(url.origin);return r.abort();});
   await page.goto('http://preview-status.test/#courses');await page.addStyleTag({content:css});await page.addScriptTag({type:'module',content:bundle});
-  const table=page.getByRole('region',{name:'開放狀態總覽'});
-  await page.locator('[data-status-unit="new"]').waitFor();
+  const newChapter=page.locator('[data-status-chapter="新教材單元"]');
+  await newChapter.getByText('尚未更新到學生端',{exact:true}).waitFor();
+  assert.equal(await page.getByRole('region',{name:'開放狀態總覽'}).count(),0);
+  assert.equal(await page.locator('.course-status-table').count(),0);
+  assert.equal(await page.locator('.unitmenu').getByText('已更新到學生端',{exact:true}).count(),0);
+  assert.equal(await page.locator('.unitmenu').getByText(/測試[甲乙丙]班/).count(),0);
+  assert.match(await page.locator('[data-status-chapter="心臟基礎"]').innerText(),/目前學習/);
+  assert.match(await page.locator('[data-status-chapter="考完可回看"]').innerText(),/已考完/);
+  assert.match(await page.locator('[data-status-chapter="腎臟構造"]').innerText(),/有修改未更新/);
+  const mixed=page.locator('[data-status-chapter="混合範例"]');
+  assert.match(await mixed.innerText(),/目前學習 3/);assert.match(await mixed.innerText(),/尚未開放 1/);
   const shot=async name=>{assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' overflow');if(out)await page.screenshot({path:path.join(out,`${name}-${width}x${height}.png`),animations:'disabled'});};
-  assert.match(await page.locator('[data-status-unit="current"]').innerText(),/已更新到學生端/);
-  assert.match(await page.locator('[data-status-unit="modified"]').innerText(),/有修改未更新/);
-  assert.match(await page.locator('[data-status-unit="new"]').innerText(),/尚未更新到學生端/);
-  assert.match(await page.locator('[data-status-unit="unassigned"]').innerText(),/沒有勾選班級/);
-  await table.scrollIntoViewIfNeeded();await shot('overview');
+  const geometry=await page.locator('.unitmenu').evaluate(el=>({clipped:el.scrollWidth>el.clientWidth,tags:[...el.querySelectorAll('.unit-status-tags .badge')].map(b=>{const r=b.getBoundingClientRect(),p=b.closest('.unit-leaf').getBoundingClientRect();return r.left>=p.left&&r.right<=p.right;})}));assert.equal(geometry.clipped,false);assert(geometry.tags.every(Boolean));
+  const theme=await page.locator('html').getAttribute('data-theme');
+  for(const name of ['blossom','blossom-rose','blossom-violet']){await page.locator('html').evaluate((el,name)=>el.setAttribute('data-theme',name),name);const colors=await page.locator('.unitmenu').evaluate(el=>['current','hidden','archived'].map(v=>getComputedStyle(el.querySelector('.visibility-'+v)).backgroundColor));assert.equal(new Set(colors).size,3,'三種狀態顏色須不同');}
+  await page.locator('html').evaluate((el,theme)=>theme?el.setAttribute('data-theme',theme):el.removeAttribute('data-theme'),theme);
+  await page.locator('.unitmenu').scrollIntoViewIfNeeded();await shot('unit-list');
+  if(out)await page.locator('.unitmenu').screenshot({path:path.join(out,`unit-list-full-${width}x${height}.png`),animations:'disabled'});
+  await mixed.locator('button.unit-leaf').click();await page.locator('[data-status-unit="mixed-4"]').waitFor();
+  assert.equal(await page.locator('.classification-row .unit-status-tags').getByText('目前學習',{exact:true}).count(),3);
+  assert.equal(await page.locator('.classification-row .unit-status-tags').getByText('尚未開放',{exact:true}).count(),1);
+  assert.equal(await page.locator('.classification-row').getByText(/測試[甲乙丙]班|已更新到學生端/).count(),0);
+  await page.locator('.classification-row').first().scrollIntoViewIfNeeded();await shot('classifications');
+  await newChapter.locator('button.unit-leaf').click();await newChapter.locator('button.unit-leaf').click();await page.locator('[data-status-unit="new"]').waitFor();
+  assert.match(await page.locator('[data-status-unit="new"]').innerText(),/尚未開放[\s\S]*尚未更新到學生端/);
+  await page.locator('[data-status-unit="new"]').scrollIntoViewIfNeeded();await shot('classification-new');
   const writes=()=>page.evaluate(()=>(window.previewStatusTest.calls).filter(c=>['saveCourse','publishCourse','setUnitVisibility'].includes(c.name)));
   assert.equal((await writes()).length,0);
   await page.getByRole('button',{name:'更新到學生端',exact:true}).click();const dialog=page.getByRole('dialog');await dialog.waitFor();
@@ -41,15 +59,15 @@ export async function verifyPreviewStatus({out}={}){
   await page.getByText('這裡的變更會立即對學生生效，不需要更新到學生端',{exact:true}).waitFor();await page.getByLabel('新教材單元 整個單元移到').waitFor();
   await page.waitForFunction(()=>!document.querySelector('select[aria-label="新教材單元 整個單元移到"]').disabled);assert((await page.locator('.progress-row > select').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().width))).every(w=>w>=132));await shot('progress');
   await page.getByLabel('新教材單元 整個單元移到').selectOption('current');await page.getByText('學生端還沒有這個單元，請先到課程與教材更新到學生端',{exact:true}).first().waitFor();await page.locator('.progress-row').filter({hasText:'新教材單元'}).scrollIntoViewIfNeeded();await shot('progress-missing');
-  await navigate('課程與教材');await page.locator('[data-status-unit="new"]').waitFor();
+  await navigate('課程與教材');await newChapter.locator('button.unit-leaf').click();await page.locator('[data-status-unit="new"]').waitFor();
   assert.match(await page.locator('[data-status-unit="new"]').innerText(),/尚未更新到學生端/);
   // Failure cannot be mistaken for absence, nor bypass the confirmation.
-  await page.evaluate(()=>window.previewStatusTest.failPublished(true));await page.getByRole('button',{name:'重新讀取學生端',exact:true}).click();await page.getByRole('alert').waitFor();assert(await page.getByRole('button',{name:'更新到學生端',exact:true}).isDisabled());
+  await page.evaluate(()=>window.previewStatusTest.failPublished(true));await page.getByRole('button',{name:'重新讀取學生端',exact:true}).click();await page.locator('[data-status-unit="new"]').getByText('學生端狀態讀取失敗',{exact:true}).waitFor();await shot('read-error');const title=page.getByLabel('課程名稱');const original=await title.inputValue();await title.fill(original+'測試');assert.equal(await title.isDisabled(),false);await title.fill(original);assert(await page.getByRole('button',{name:'更新到學生端',exact:true}).isDisabled());
   await page.evaluate(()=>window.previewStatusTest.failPublished(false));await page.getByRole('button',{name:'重新讀取學生端',exact:true}).click();await page.locator('[data-status-unit="new"]').waitFor();
   await page.getByRole('button',{name:'更新到學生端',exact:true}).click();await dialog.waitFor();await dialog.getByRole('button',{name:'確定更新到學生端',exact:true}).click();await dialog.waitFor({state:'detached'});await page.getByRole('status').filter({hasText:'已更新到學生端'}).waitFor();
   const finalWrites=await writes();assert.equal(finalWrites.filter(c=>c.name==='publishCourse').length,1);assert.equal(finalWrites.filter(c=>c.name==='saveCourse').length,1);assert.equal(finalWrites.filter(c=>c.name==='setUnitVisibility').length,1);
   assert(finalWrites.every(c=>(c.data.courseId||c.data.course?.id)==='MCP-TEST'));assert.deepEqual(errors,[]);assert.deepEqual(network,[]);
-  reports.push({width,height,courseId:'MCP-TEST',screenshots:6,overflow:false,previewWrites:0,updateCalls:1,errors,externalNetworkRequests:network});await context.close();
+  reports.push({width,height,courseId:'MCP-TEST',screenshots:10,overflow:false,previewWrites:0,updateCalls:1,errors,externalNetworkRequests:network});await context.close();
  }}finally{await browser.close();}
  if(out)await fs.writeFile(path.join(out,'browser-verification.json'),JSON.stringify(reports,null,2)+'\n');return reports;
 }
