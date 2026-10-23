@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Question, materialUrl } from '../shared/model';
+import { explanationTokens } from '../shared/explanationText';
+export function ExplanationText({ value }: { value: string }) {
+  return <>{explanationTokens(value).map((part, i) => part.bold ? <strong key={i}>{part.text}</strong> : part.text)}</>;
+}
+export function ExplanationHeading({ emoji, text }: { emoji: string; text: string }) {
+  return <><span aria-hidden="true">{emoji}</span> {text}</>;
+}
 export function QuestionImage({ url }: { url?: string }) {
   const [expanded, setExpanded] = useState(false), [failed, setFailed] = useState(false);
   if (!url) return null;
@@ -13,14 +20,14 @@ export function Explanations({ q, audience = 'student', onResearch }: { q: Quest
   // 沒有值時退回 1.2.0 以前發布的舊題庫快照鍵名，讓學生回看歷史版本的解析不會消失。
   // 順序固定 ①～④，不能只改標籤文字。
   // ⑤追溯原子卡是教師備課用的溯源資訊，學生端不顯示；只在教師題目預覽（audience="teacher"）呈現。
-  const slots: [string, string | undefined][] = [
-    ['① 先想關鍵字', s?.keyword || s?.hint1],
-    ['② 提問鏈', s?.chain || s?.hint2],
-    ['③ 回頭選答案', s?.decide || s?.hint3],
-    ['④ 一句話記憶', s?.memory || s?.concept],
+  const slots: [string, string, string | undefined][] = [
+    ['🔑', '先想關鍵字', s?.keyword || s?.hint1],
+    ['🧭', '提問鏈', s?.chain || s?.hint2],
+    ['✅', '對答案', s?.decide || s?.hint3],
+    ['💡', '一句話記憶', s?.memory || s?.concept],
   ];
-  if (forTeacher) slots.push(['⑤ 追溯原子卡', s?.trace || s?.misconception]);
-  const items = slots.filter(([, value]) => value);
+  if (forTeacher) slots.push(['🔎', '追溯原子卡', s?.trace || s?.misconception]);
+  const items = slots.filter(([, , value]) => value);
   // 2026-09-15 起：引導式解析一律直接展開顯示，不用點擊——使用者明確要求「一次給到位」。
   // 傳統解析（2026-09-15 第二次調整）改回預設收合，要點 <summary> 才展開，避免跟引導式解析
   // 混在一起、也避免完整測驗作答中一眼看到完整正解說明。學生／教師唯一的差異只剩⑤追溯原子卡。
@@ -34,6 +41,6 @@ export function Explanations({ q, audience = 'student', onResearch }: { q: Quest
     const open = (e.currentTarget as HTMLDetailsElement).open;
     if (open) { traditionalOpenedAt.current = Date.now(); onResearch?.({ format: 'traditional', action: 'opened' }); }
     else if (traditionalOpenedAt.current) { onResearch?.({ format: 'traditional', action: 'closed', seconds: Math.min(600, Math.max(1, Math.round((Date.now() - traditionalOpenedAt.current) / 1000))) }); traditionalOpenedAt.current = 0; }
-  }}><summary>傳統解析</summary><p className="preserve-lines">{q.explanation}</p></details>;
-  return <div className="explanations">{items.length > 0 && <section><h3>引導式解析</h3>{items.map(([label, value]) => <div className="explanationstep" key={label}><h4>{label}</h4><p className="preserve-lines">{value}</p></div>)}</section>}{explanation}{q.lectureUrl && materialUrl(q.lectureUrl) && <a href={q.lectureUrl} target="_blank" rel="noreferrer">{q.lectureTitle || '查看講義'} ↗</a>}{q.remedialUrl && materialUrl(q.remedialUrl) && <a href={q.remedialUrl} target="_blank" rel="noreferrer">查看補強教材 ↗</a>}{!q.explanation && !items.length && <p>此題尚未提供解析。</p>}</div>;
+  }}><summary><ExplanationHeading emoji="📖" text="傳統解析" /></summary><p className="preserve-lines"><ExplanationText value={q.explanation} /></p></details>;
+  return <div className="explanations">{items.length > 0 && <section><h3>引導式解析</h3>{items.map(([emoji, label, value]) => <div className="explanationstep" key={label}><h4><ExplanationHeading emoji={emoji} text={label} /></h4><p className="preserve-lines"><ExplanationText value={value!} /></p></div>)}</section>}{explanation}{q.lectureUrl && materialUrl(q.lectureUrl) && <a href={q.lectureUrl} target="_blank" rel="noreferrer">{q.lectureTitle || '查看講義'} ↗</a>}{q.remedialUrl && materialUrl(q.remedialUrl) && <a href={q.remedialUrl} target="_blank" rel="noreferrer">查看補強教材 ↗</a>}{!q.explanation && !items.length && <p>此題尚未提供解析。</p>}</div>;
 }
