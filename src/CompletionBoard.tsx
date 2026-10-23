@@ -43,9 +43,9 @@ export async function loadCompletionClass(
       'getCompletion',
       { courseId, classId, after },
     );
-    if (!page.course) throw Error('完成度回應缺少已發布課程，請重新更新。');
+    if (!page.course) throw Error('完成度回應缺少學生端課程，請重新更新。');
     if (published && JSON.stringify(page.course) !== JSON.stringify(published))
-      throw Error('載入期間課程已重新發布，請重新更新。');
+      throw Error('載入期間課程已重新更新到學生端，請重新更新。');
     published = page.course;
     rows.push(
       ...page.rows.map((r) => ({ ...r, classId, progress: r.progress || emptyProgress() })),
@@ -356,7 +356,7 @@ export default function CompletionBoard({
         <div>
           <span className="eyebrow">LEARNING PROGRESS</span>
           <h1>完成度看板</h1>
-          <p>按更新讀取已發布課程與學生進度；包含尚未登入的名冊學生。</p>
+          <p>按更新讀取學生端課程與學生進度；包含尚未登入的名冊學生。</p>
         </div>
       </header>
       <section className="panel">
@@ -593,7 +593,7 @@ export default function CompletionBoard({
                       最高分 {p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
                       ｜作答 {p?.attempts || 0} 次
                     </p>
-                    {!u.bankVersion && <p className="muted">題庫未發布，不列入測驗完成條件。</p>}
+                    {!u.bankVersion && <p className="muted">題庫未更新到學生端，不列入測驗完成條件。</p>}
                     {!!p?.passedAt && <p>首次達標：{fullTime(p.passedAt)}</p>}
                   </section>
                 );

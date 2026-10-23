@@ -78,7 +78,7 @@ export function ReflectionResults({ course, api }: { course: Course; api: API })
         </div>
       </div>
       {!chapters.length ? (
-        <p>目前沒有反思活動。請在單元活動編輯器新增並發布。</p>
+        <p>目前沒有反思活動。請在單元活動編輯器新增並更新到學生端。</p>
       ) : (
         <>
           <div className="reflection-filters">

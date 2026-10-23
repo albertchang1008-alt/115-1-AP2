@@ -142,7 +142,7 @@ export async function verifyGuide(shots = false) {
       await page.getByRole('button',{name:'顯示設定',exact:true}).click();await shot('settings');
       await page.evaluate(()=>window.guideTest.render('teacher'));
       const preIds=page.getByLabel('前測來源題目 ID（逗號分隔，保存後同步題庫）');await preIds.fill('');await preIds.pressSequentially('q1,q2');assert.equal(await preIds.inputValue(),'q1,q2');
-      assert.equal(await page.getByText('課程功能（預設關閉；保存草稿即對學生生效，不需發布）',{exact:true}).count(),1);
+      assert.equal(await page.getByText('課程功能（預設關閉；保存草稿即對學生生效，不需要更新到學生端）',{exact:true}).count(),1);
       const postIds=page.getByLabel('後測來源題目 ID（逗號分隔）');
       const save=async(warning)=>{
         await page.getByRole('button',{name:'保存草稿',exact:true}).click();

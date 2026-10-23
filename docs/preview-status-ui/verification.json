@@ -1,0 +1,52 @@
+{
+  "pass": true,
+  "version": "1.10.0",
+  "baseCommit": "099df60d75e7c658333dece01d487b8b3e23a141",
+  "frontendTests": 226,
+  "functionsTests": 61,
+  "build": "PASS",
+  "unitTests": 8,
+  "statusMatrixCases": 27,
+  "browser": [
+    {
+      "width": 1280,
+      "height": 800,
+      "courseId": "MCP-TEST",
+      "screenshots": 6,
+      "overflow": false,
+      "previewWrites": 0,
+      "updateCalls": 1,
+      "errors": [],
+      "externalNetworkRequests": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "courseId": "MCP-TEST",
+      "screenshots": 6,
+      "overflow": false,
+      "previewWrites": 0,
+      "updateCalls": 1,
+      "errors": [],
+      "externalNetworkRequests": []
+    }
+  ],
+  "screenshots": [
+    "overview-1280x800.png",
+    "overview-390x844.png",
+    "preview-off-1280x800.png",
+    "preview-off-390x844.png",
+    "preview-on-1280x800.png",
+    "preview-on-390x844.png",
+    "progress-1280x800.png",
+    "progress-390x844.png",
+    "progress-missing-1280x800.png",
+    "progress-missing-390x844.png",
+    "update-confirm-1280x800.png",
+    "update-confirm-390x844.png"
+  ],
+  "evidenceDirectory": "/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/preview-status-ui-2026-10-23",
+  "rawEvidenceCommitted": false,
+  "productionCourseAccess": false,
+  "functionsCodeOrRulesChanged": false
+}

@@ -39,7 +39,7 @@ export function ClassManager({ course, change }: { course: Course; change: (c: C
     change({ ...course, classNames: { ...course.classNames, [cl]: next } });
   };
   const removeClass = (cl: string) => {
-    if (!confirm(`從草稿移除「${course.classNames?.[cl] || cl}」？發布前學生權限不變，既有名冊與紀錄會保留。`)) return;
+    if (!confirm(`從草稿移除「${course.classNames?.[cl] || cl}」？更新到學生端前學生權限不變，既有名冊與紀錄會保留。`)) return;
     const classUnits = { ...course.classUnits }, classNames = { ...course.classNames }, classOverrides = { ...course.classOverrides }, chapterOverrides = { ...course.chapterOverrides };
     delete classUnits[cl]; delete classNames[cl]; delete classOverrides[cl]; delete chapterOverrides[cl];
     change({ ...course, classIds: course.classIds.filter((c) => c !== cl), classUnits, classNames, classOverrides, chapterOverrides });

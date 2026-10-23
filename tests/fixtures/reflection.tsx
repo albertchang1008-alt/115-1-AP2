@@ -24,7 +24,7 @@ const api: API = {
       method: 'POST',
       body: JSON.stringify({
         data,
-        role: ['saveCourse', 'publishCourse', 'getReflections', 'getSnapshots'].includes(name)
+        role: ['saveCourse', 'publishCourse', 'getPublished', 'getReflections', 'getSnapshots'].includes(name)
           ? 'teacher'
           : 'student',
       }),

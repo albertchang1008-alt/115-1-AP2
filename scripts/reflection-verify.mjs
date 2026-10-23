@@ -113,8 +113,9 @@ export async function verifyReflection(screenshots = false) {
         assert.deepEqual(await editor.locator('code').allTextContents(), originalIds);
         assert.equal(await editor.locator('input[value="concept-change"]').count(), 0);
         await editor.getByLabel('第1題字數上限', { exact: true }).fill('30');
-        await page.getByRole('button', { name: '發布課程', exact: true }).click();
-        await page.waitForFunction(() => window.reflectionTest.notices.includes('課程已發布'));
+        await page.getByRole('button', { name: '更新到學生端', exact: true }).click();
+        await page.getByRole('dialog', { name: '確認更新到學生端', exact: true }).getByRole('button', { name: '確定更新到學生端', exact: true }).click();
+        await page.waitForFunction(() => window.reflectionTest.notices.includes('已更新到學生端'));
         const published = ctx.data.get('courses/reflection-test').published;
         assert.equal(published.chapters['心臟基礎'].activities[0].type, 'reflection');
         await shot('teacher-editor');
@@ -249,7 +250,8 @@ export async function verifyReflection(screenshots = false) {
           .getByRole('button', { name: '確認變更', exact: true })
           .click();
         assert.deepEqual(await editor.locator('code').allTextContents(), originalIds);
-        await page.getByRole('button', { name: '發布課程', exact: true }).click();
+        await page.getByRole('button', { name: '更新到學生端', exact: true }).click();
+        await page.getByRole('dialog', { name: '確認更新到學生端', exact: true }).getByRole('button', { name: '確定更新到學生端', exact: true }).click();
         await page.waitForFunction(() =>
           window.reflectionTest.course.chapters[
             '心臟基礎'

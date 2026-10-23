@@ -1,0 +1,1 @@
+export function verifyPreviewStatus(options?: {out?:string}):Promise<{width:number;height:number;courseId:string;screenshots:number;overflow:boolean;previewWrites:number;updateCalls:number;errors:string[];externalNetworkRequests:string[]}[]>;

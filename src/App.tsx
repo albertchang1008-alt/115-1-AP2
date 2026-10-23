@@ -1,3 +1,8 @@
+import CourseStatusOverview from './CourseStatusOverview';
+import UpdateStudentDialog from './UpdateStudentDialog';
+import { usePublishedCourse, readPublishedCourse } from './usePublishedCourse';
+import { studentPreviewCourse, studentUpdateCopy } from '../shared/courseStatus';
+import { previewClassPreference, rememberPreviewClass } from './previewPreferences';
 import { saveDraftWithRevision } from './courseRevision';
 import { ReflectionEditor } from './ReflectionEditor';
 import { ReflectionResults } from './ReflectionResults';
@@ -171,8 +176,8 @@ function Empty({ title, detail }: { title: string; detail: string }) {
     </div>
   );
 }
-export default function App() {
-  const [api, setApi] = useState<API>(cloud),
+export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
+  const [api, setApi] = useState<API>(initialApi),
     [profile, setProfile] = useState<Profile | null>(null),
     [courses, setCourses] = useState<Course[]>([]),
     [courseId, setCourseId] = useState(''),
@@ -196,12 +201,13 @@ export default function App() {
       draft: boolean;
     } | null>(null),
     [previewClass, setPreviewClass] = useState(''),
+    [previewShowHidden, setPreviewShowHidden] = useState(false),
     [width, setWidth] = useState('desktop'),
     [sim, setSim] = useState('none'),
     [previewKey, setPreviewKey] = useState(0);
   const course = courses.find((c) => c.id === courseId) || courses[0];
   function notify(s: string) {
-    setToast(s);
+    setToast(profile?.teacher ? studentUpdateCopy(s) : s);
   }
   function doSwitchAccount() {
     setError('');
@@ -275,7 +281,7 @@ export default function App() {
     const controller = new AbortController();
     const tool = {
       name: 'navigate_teacher_workspace',
-      description: '切換教師後台目前頁面；不發布或修改課程。',
+      description: '切換教師後台目前頁面；不更新或修改課程。',
       inputSchema: {
         type: 'object',
         properties: { page: { type: 'string', enum: tabs.map((t) => t[0]) } },
@@ -311,7 +317,8 @@ export default function App() {
       if (draft) chosen = await save(c);
       else if (api.preview) chosen = await api.call('getPublished', { courseId: c.id });
       else chosen = await api.call('getPublished', { courseId: c.id });
-      setPreviewClass(chosen.classIds[0]);
+      setPreviewClass(previewClassPreference(chosen, profile?.uid || 'teacher'));
+      setPreviewShowHidden(false);
       setPreview({
         api: await previewApi(api, chosen, draft),
         course: chosen,
@@ -397,19 +404,21 @@ export default function App() {
             <Eye size={17} />
             教師預覽，不計入紀錄
           </strong>
-          <span className="badge">{preview.draft ? '目前草稿' : '已發布版本'}</span>
+          <span className="badge">{preview.draft ? '目前草稿' : '學生端版本'}</span>
           <select
             aria-label="預覽班級"
             value={previewClass}
             onChange={(e) => {
               setPreviewClass(e.target.value);
+              rememberPreviewClass(preview.course, profile?.uid || 'teacher', e.target.value);
               setPreviewKey((k) => k + 1);
             }}
           >
             {preview.course.classIds.map((c) => (
-              <option key={c}>{c}</option>
+              <option key={c} value={c}>{preview.course.classNames?.[c] || c}</option>
             ))}
           </select>
+          <label className="preview-open-toggle"><input type="checkbox" checked={previewShowHidden} onChange={e => { setPreviewShowHidden(e.target.checked); setPreviewKey(k => k + 1); }} />把尚未開放的單元當作已開放</label>
           <select aria-label="模擬進度" value={sim} onChange={(e) => setSim(e.target.value)}>
             <option value="none">尚未開始</option>
             <option value="learning">學習中</option>
@@ -436,17 +445,19 @@ export default function App() {
               setPreview({ ...preview, api: await previewApi(api, preview.course, preview.draft) });
               setPreviewKey((k) => k + 1);
               setSim('none');
+              setPreviewShowHidden(false);
             }}
           >
             重設
           </button>
         </div>
+        {previewShowHidden && <div role="status" className="preview-simulation-warning">預覽模擬：尚未開放的單元也顯示，學生目前看不到</div>}
         <div className={'previewdevice ' + width}>
           <Student
             key={previewKey}
             api={preview.api}
-            course={forClass(preview.course, previewClass)}
-            classLabel={previewClass}
+            course={studentPreviewCourse(preview.course, previewClass, previewShowHidden)}
+            classLabel={preview.course.classNames?.[previewClass] || previewClass}
             uid="preview-user"
             preview
             initialUnit={preview.unit}
@@ -509,7 +520,7 @@ export default function App() {
             />
           </>
         ) : (
-          <Empty title="尚無已發布課程" detail="教師發布課程後，就會出現在這裡。" />
+          <Empty title="尚無已更新到學生端的課程" detail="教師更新到學生端後，就會出現在這裡。" />
         )}
         {toast && <div className="toast">{toast}</div>}
       </>
@@ -583,7 +594,7 @@ export default function App() {
           <div className="top-actions">
             <span className="statuschip">{api.preview ? '操作示例 · 無正式資料' : '已登入'}</span>
             {tab !== 'courses' && (
-              <button disabled={!course} onClick={() => course && openPreview(course)}>
+              <button disabled={!course} onClick={() => course && openPreview(course, false)}>
                 <Eye size={17} />
                 預覽前台
               </button>
@@ -982,6 +993,8 @@ export function CourseEditor(props: CourseEditorProps) {
   const [draft, setDraft] = useState<Course>(structuredClone(course || makeCourse()));
   const [selected, setSelected] = useState('');
   const [busy, setBusy] = useState(false);
+  const publishedState = usePublishedCourse(api, course || draft);
+  const [updateConfirmation, setUpdateConfirmation] = useState<{ draft: Course; published?: Course }>();
   const [mergeSource, setMergeSource] = useState('');
   const [reviewOpen, setReviewOpen] = useState(false);
   const [reviewName, setReviewName] = useState('');
@@ -1007,20 +1020,27 @@ export function CourseEditor(props: CourseEditorProps) {
   const changeChapter = (patch: Partial<Chapter>) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeChapterAndOverrides = (patch: Partial<Chapter>, chapterOverrides: Course['chapterOverrides']) => { const base = materialize(); setDraft({ ...base, chapterOverrides, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeActivity = (index: number, patch: Partial<Activity>) => changeChapter({ activities: chapter!.activities.map((a, i) => i === index ? { ...a, ...patch } : a) });
-  const act = async (publish = false) => {
+  const act = async (publish = false, reviewed?: Course) => {
     setBusy(true);
     try {
-      const ready = materialize();
+      const ready = reviewed || materialize();
       for (const chapter of Object.values(chaptersOf(ready))) for (const a of chapter.activities) if (a.type === 'reflection') validateReflectionConfig(a.reflection);
       const saved = await save(ready);
       setDraft(saved || ready);
       if (publish) {
         const result = await api.call<Course>('publishCourse', { courseId: ready.id });
-        setDraft(result); onPublished(result);
+        const updated = { ...result, revision: (saved || ready).revision };
+        setDraft(updated); onPublished(updated); setUpdateConfirmation(undefined);
       }
       const missingSources = ready.features?.assessments && (['pretest', 'posttest'] as const).some(kind => !(ready.assessmentSources?.[kind] || []).some(id => id.trim()));
-      notify((publish ? '課程已發布' : '草稿已保存') + (missingSources ? '；提醒：前測或後測來源題目尚未設定，請補齊來源後同步題庫。' : ''));
-    } catch (e) { notify((e as Error).message); } finally { setBusy(false); }
+      notify((publish ? '已更新到學生端' : '草稿已保存') + (missingSources ? '；提醒：前測或後測來源題目尚未設定，請補齊來源後同步題庫。' : ''));
+    } catch (e) { setUpdateConfirmation(undefined); notify((e as Error).message); } finally { setBusy(false); }
+  };
+  const prepareUpdate = async () => {
+    setBusy(true);
+    try { const published = await readPublishedCourse(api, draft.id); setUpdateConfirmation({ draft: structuredClone(materialize()), published }); }
+    catch (e) { notify(studentUpdateCopy((e as Error).message)); }
+    finally { setBusy(false); }
   };
   const move = (offset: number) => { const order = rows.map((item) => item.name), at = order.indexOf(name), to = at + offset; if (to < 0 || to >= order.length) return; [order[at], order[to]] = [order[to], order[at]]; setDraft({ ...materialize(), chapterOrder: order }); };
   const removeStale = () => { const stale = draft.staleUnits || []; if (!stale.length || !confirm(`確定移除以下舊題目分類？\n${stale.join('\n')}`)) return; const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => !stale.includes(id))])); setDraft({ ...draft, units: draft.units.filter((u) => !stale.includes(u.id)), classUnits, staleUnits: [] }); };
@@ -1031,13 +1051,15 @@ export function CourseEditor(props: CourseEditorProps) {
   const buildReview = async (input?: { name: string; sources: string[]; count: number }) => { const examName = input?.name || reviewName, sources = input?.sources || reviewSources, count = input?.count || reviewCount, previous = draft.units.find((u) => u.id === examName); if (previous?.review && !confirm('會產生新的考卷版本。學生已考到的最高分保留；舊版本的錯題不帶到新版本。')) return; setBusy(true); try { const r = await api.call<any>('buildReviewExam', { courseId: draft.id, expectedRevision:draft.revision ?? 0, name: examName, sourceUnitIds: sources, drawCount: count }); const review = { sourceUnitIds: sources, sourceVersions: r.sourceVersions, drawCount: count, allocation: r.allocation, builtAt: r.builtAt, history: [{ version: r.version, drawCount: count, allocation: r.allocation, builtAt: r.builtAt }, ...(previous?.review?.history || [])].slice(0, 10) }; const u: Unit = { id: examName, title: examName, group: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', bankVersion: r.version, questionCount: count, activities: [], visibility: 'hidden', review }; const base = materialize(); const exists = base.units.some((x) => x.id === examName); setDraft({ ...base, revision:r.revision ?? base.revision, units: exists ? base.units.map((x) => x.id === examName ? { ...x, bankVersion: r.version, questionCount: count, review } : x) : [...base.units, u], chapters: exists ? base.chapters : { ...base.chapters, [examName]: { title: examName, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }, chapterOrder: exists ? base.chapterOrder : [...(base.chapterOrder || []), examName] }); setSelected(examName); setReviewOpen(false); notify('複習考題目池已建立；請設定開放與適用班級後保存草稿。'); } catch (e) { notify((e as Error).message); } finally { setBusy(false); } };
   if (!course) return <section className="panel"><Empty title="建立第一門課程" detail="先新增自訂課程代碼，再同步 Google Sheet 建立單元。" /><button onClick={newCourse}>新增課程</button></section>;
   return <>
-    <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy} onClick={() => act(true)}>發布課程</button></div></header>
-    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><fieldset><legend>課程功能（預設關閉；保存草稿即對學生生效，不需發布）</legend>{(['assessments', 'teachingConsole', 'classroomInteraction'] as const).map((key, i) => <label className="check" key={key}><input type="checkbox" checked={draft.features?.[key] === true} onChange={e => setDraft({ ...draft, features: { ...draft.features, [key]: e.target.checked } })} />{['正式前後測', '授課控制台', '課堂互動'][i]}</label>)}</fieldset>
+    <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy || publishedState.loading || !!publishedState.error} onClick={() => void prepareUpdate()}>更新到學生端</button></div></header>
+    <CourseStatusOverview draft={materialize()} {...publishedState} />
+    {updateConfirmation && <UpdateStudentDialog {...updateConfirmation} busy={busy} cancel={() => setUpdateConfirmation(undefined)} confirm={() => void act(true, updateConfirmation.draft)} />}
+    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><fieldset><legend>課程功能（預設關閉；保存草稿即對學生生效，不需要更新到學生端）</legend>{(['assessments', 'teachingConsole', 'classroomInteraction'] as const).map((key, i) => <label className="check" key={key}><input type="checkbox" checked={draft.features?.[key] === true} onChange={e => setDraft({ ...draft, features: { ...draft.features, [key]: e.target.checked } })} />{['正式前後測', '授課控制台', '課堂互動'][i]}</label>)}</fieldset>
       {draft.features?.assessments && <div className="formgrid">{(['pretest', 'posttest'] as const).map(kind => <Field key={kind} label={kind === 'pretest' ? '前測來源題目 ID（逗號分隔，保存後同步題庫）' : '後測來源題目 ID（逗號分隔）'}><input value={(draft.assessmentSources?.[kind] || []).join(',')} onChange={e => setDraft({ ...draft, assessmentSources: { pretest: draft.assessmentSources?.pretest || [], posttest: draft.assessmentSources?.posttest || [], [kind]: e.target.value ? e.target.value.split(',').map(s => s.trim()) : [] } })} /></Field>)}</div>}
       <p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
     <ClassManager course={draft} change={setDraft} />
     {!!draft.staleUnits?.length && <div className="notice warning"><strong>Sheet 已無對應的舊題目分類</strong><p>{draft.staleUnits.join('、')}</p><button onClick={removeStale}>全部移除</button></div>}
-    {reviewOpen && <div className="modalshade"><section className="modal"><div className="sectionhead"><h2>新增複習考</h2><button onClick={() => setReviewOpen(false)}>關閉</button></div><Field label="名稱"><input value={reviewName} onChange={(e) => setReviewName(e.target.value)} placeholder="不可與既有單元同名" /></Field><p>來源分類（可跨單元；只選已發布的一般分類）</p>{draft.units.filter((u) => u.bankVersion && !isReviewUnit(u)).map((u) => <label className="check" key={u.id}><input type="checkbox" checked={reviewSources.includes(u.id)} onChange={(e) => { const next = e.target.checked ? [...reviewSources, u.id] : reviewSources.filter((id) => id !== u.id); setReviewSources(next); setReviewCount(Math.max(next.length, Math.min(40, next.reduce((sum, id) => sum + (draft.units.find((x) => x.id === id)?.questionCount || 0), 0)))); }} />{u.group ? `${u.group}／` : ''}{u.title}（{u.questionCount || 0} 題）</label>)}<Field label="每次作答題數 N"><input type="number" min={reviewSources.length || 1} max={reviewTotal || 1} value={reviewCount} onChange={(e) => setReviewCount(Number(e.target.value))} /></Field><p className="muted">題目池共 {reviewTotal} 題；分配：{Object.entries(reviewAllocation).map(([id, n]) => `${id} ${n} 題`).join('、') || '請先選擇來源'}。門檻 80 分需答對 {Math.ceil(reviewCount * .8)} 題。</p><button className="primary" disabled={busy || !reviewName || reviewCount < reviewSources.length || reviewCount > reviewTotal} onClick={() => void buildReview()}>建立</button></section></div>}
+    {reviewOpen && <div className="modalshade"><section className="modal"><div className="sectionhead"><h2>新增複習考</h2><button onClick={() => setReviewOpen(false)}>關閉</button></div><Field label="名稱"><input value={reviewName} onChange={(e) => setReviewName(e.target.value)} placeholder="不可與既有單元同名" /></Field><p>來源分類（可跨單元；只選題庫已更新的一般分類）</p>{draft.units.filter((u) => u.bankVersion && !isReviewUnit(u)).map((u) => <label className="check" key={u.id}><input type="checkbox" checked={reviewSources.includes(u.id)} onChange={(e) => { const next = e.target.checked ? [...reviewSources, u.id] : reviewSources.filter((id) => id !== u.id); setReviewSources(next); setReviewCount(Math.max(next.length, Math.min(40, next.reduce((sum, id) => sum + (draft.units.find((x) => x.id === id)?.questionCount || 0), 0)))); }} />{u.group ? `${u.group}／` : ''}{u.title}（{u.questionCount || 0} 題）</label>)}<Field label="每次作答題數 N"><input type="number" min={reviewSources.length || 1} max={reviewTotal || 1} value={reviewCount} onChange={(e) => setReviewCount(Number(e.target.value))} /></Field><p className="muted">題目池共 {reviewTotal} 題；分配：{Object.entries(reviewAllocation).map(([id, n]) => `${id} ${n} 題`).join('、') || '請先選擇來源'}。門檻 80 分需答對 {Math.ceil(reviewCount * .8)} 題。</p><button className="primary" disabled={busy || !reviewName || reviewCount < reviewSources.length || reviewCount > reviewTotal} onClick={() => void buildReview()}>建立</button></section></div>}
     {mergeSource && <ChapterMergeDialog course={draft} sourceName={mergeSource} api={api} notify={notify} onClose={() => setMergeSource('')} onMerged={next => { setDraft(next); setSelected(orderedChapters(next)[0]?.name || ''); onPublished(next); setMergeSource(''); }} />}
     <div className="editorgrid"><aside className="panel unitmenu"><div className="sectionhead"><h3>單元安排</h3><button onClick={() => { setReviewName(''); setReviewSources([]); setReviewCount(1); setReviewOpen(true); }}><Plus size={16} />新增複習考</button></div>{rows.map(({ name: key, chapter: item, units: children }) => <div key={key} className="chapter-menu-entry"><button className={'unit-leaf top' + (name === key ? ' selected' : '')} onClick={() => setSelected(key)}><strong>{item.title}{(!!children[0] && isReviewUnit(children[0])) && <span className="badge">作業・複習考</span>}</strong><span className="muted">{(!!children[0] && isReviewUnit(children[0])) ? `題目池 ${children[0].review!.sourceUnitIds.length} 分類、每次 ${children[0].review!.drawCount} 題` : `${children.length} 個分類、${children.reduce((n, u) => n + (u.questionCount || 0), 0)} 題`}</span></button>{!children.length && <button disabled={busy || isDirty || rows.length < 2} onClick={() => setMergeSource(key)}>合併到…</button>}{!children.length && isDirty && <p className="muted">請先保存草稿後再合併</p>}</div>)}</aside>
       {!chapter ? <Empty title="尚未有單元" detail="請先到題庫管理同步 Google Sheet。" /> : <section className="panel"><div className="sectionhead"><h2>單元設定</h2><button onClick={() => preview(materialize(), true, units[0]?.id)}>預覽單元</button></div>
@@ -1165,7 +1187,7 @@ export function Bank({
                     .map((bank: any) => `${bank.unitId || bank.sourceTab || '題庫'}：${bank.error}`).join('；');
                   notify(`題庫同步有未完成項目：${errors}`);
                 }
-                else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}${stale.length ? `；舊題目分類待清理：${stale.join('、')}` : ''}；請檢查後發布課程`);
+                else if (mine.length) notify(`題庫同步完成：${mine.map((bank: any) => `${bank.unitId} ${bank.count} 題`).join('、')}${stale.length ? `；舊題目分類待清理：${stale.join('、')}` : ''}；請檢查後更新到學生端`);
                 else {
                   const tabs = Array.isArray(r.availableTabs) ? r.availableTabs.map((title: unknown) => JSON.stringify(String(title))).join('、') : '';
                   notify(`找不到與課程代碼「${course.id}」同名的題庫分頁。平台實際讀到：${tabs || '（未提供分頁清單，請確認雲端 Functions 已更新）'}`);
@@ -1864,7 +1886,7 @@ function SettingsPage({
         <div>
           <span className="eyebrow">PLATFORM SETTINGS</span>
           <h1>平台設定</h1>
-          <p>連接狀態、報表更新方式與發布版本。</p>
+          <p>連接狀態、報表更新方式與學生端版本。</p>
         </div>
         <span className="badge green">v{VERSION}</span>
       </header>
