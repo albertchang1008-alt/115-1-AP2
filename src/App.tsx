@@ -15,7 +15,7 @@ import CompletionBoard from './CompletionBoard';
 import { carryMessage, CarryResult } from '../shared/wrongCarry';
 import ChapterMergeDialog from './ChapterMergeDialog';
 import { NewCourse, ClassManager } from './CourseSetup';
-import { QuestionImage, Explanations } from './QuestionContent';
+import { QuestionImage, Explanations, ExplanationText } from './QuestionContent';
 import Diagnostics from './Diagnostics';
 import ResearchEvidence from './ResearchEvidence';
 import ProgressBoard from './ProgressBoard';
@@ -2044,7 +2044,7 @@ function QuestionDetail({
                 <span>{item.options[o.id] || 0} 人</span>
               </div>
             ))}
-            <p className="feedback">{q.explanation}</p>
+            <p className="feedback preserve-lines"><ExplanationText value={q.explanation} /></p>
           </>
         ) : (
           <p>讀取題目中…</p>

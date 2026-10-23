@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { API } from './service';
 import { Course } from '../shared/model';
 import { ExamQuestion } from '../shared/assessment';
-import { QuestionImage } from './QuestionContent';
+import { QuestionImage, ExplanationText } from './QuestionContent';
 const errorText = (e: unknown) => (e as Error).message;
 const time = (at: number) => new Date(at).toLocaleString('zh-TW');
 export function StudentAssessments({ api, course }: { api: API; course: Course }) {
@@ -259,7 +259,7 @@ export function StudentAssessments({ api, course }: { api: API; course: Course }
                     你的選答：{q.options.find((o: any) => o.id === q.selected)?.text || '未作答'}
                   </p>
                   <p>正解：{q.options.find((o: any) => o.id === q.answer)?.text}</p>
-                  <p>{q.explanation}</p>
+                  <p className="preserve-lines"><ExplanationText value={q.explanation} /></p>
                 </article>
               ))}
               <button
@@ -522,7 +522,7 @@ export function TeacherAssessments({
                   {o.id === q.answer ? ' ✓' : ''}
                 </p>
               ))}
-              <p>{q.explanation}</p>
+              <p className="preserve-lines"><ExplanationText value={q.explanation} /></p>
             </div>
           ))}
           <button onClick={() => setPreview(null)}>關閉預覽</button>

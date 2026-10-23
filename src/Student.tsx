@@ -5,7 +5,7 @@ import { StudentAssessments } from './Assessments';
 import { MixedScopeCard, MixedPractice } from './MixedPractice';
 import { selectPracticeRows } from '../shared/practice';
 import { Flashcards, UnitWrongPractice } from './PracticeModes';
-import { QuestionImage, Explanations } from './QuestionContent';
+import { QuestionImage, Explanations, ExplanationText } from './QuestionContent';
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -900,7 +900,7 @@ function Socratic({ q }: { q: Question }) {
           {Object.entries(q.socratic)
             .filter(([, v]) => v)
             .map(([k, v]) => (
-              <p key={k}>{v}</p>
+              <p className="preserve-lines" key={k}><ExplanationText value={v!} /></p>
             ))}
         </details>
       )}
