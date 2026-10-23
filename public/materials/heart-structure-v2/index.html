@@ -220,7 +220,7 @@ header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);backgroun
     <section class="mission-lab" aria-labelledby="heart-lab-title">
         <h2 id="heart-lab-title">🫀 情境實驗室｜讓血液走對路</h2>
         <p>切換心室收縮與舒張，觀察瓣膜如何維持單向血流；再先預測下一個步驟。</p>
-        <div class="sim-steps visual-flow" aria-label="心臟血流與瓣膜機制" style="--flow-art:url('assets/heart-valve-flow-strip-v1.png')">
+        <div class="sim-steps visual-flow" aria-label="心臟血流與瓣膜機制" style="--flow-art:url('assets/heart-valve-flow-strip-v1.webp')">
             <div class="sim-step visual-flow-card" data-heart-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>心房充盈</strong><span>靜脈血回到心房</span></div><div class="sim-arrow">→</div>
             <div class="sim-step visual-flow-card" data-heart-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>房室瓣開啟</strong><span>血液流入心室</span></div><div class="sim-arrow">→</div>
             <div class="sim-step visual-flow-card" data-heart-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>心室收縮</strong><span>房室瓣關閉</span></div><div class="sim-arrow">→</div>
@@ -988,17 +988,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const explanation = document.getElementById('selected-explanation');
     const readingCue = document.getElementById('reading-cue');
     const visualMap = [
-        { src:'assets/heart-valve-flow-strip-v1.png', position:'0%' },
-        { src:'assets/heart-valve-flow-strip-v1.png', position:'0%' },
-        { src:'assets/heart-valve-flow-strip-v1.png', position:'33.333%' },
-        { src:'assets/heart-valve-flow-strip-v1.png', position:'66.667%' },
-        { src:'assets/coronary-overview-v2.png', position:null },
-        { src:'assets/cardiac-conduction-flow-strip-v1.png', position:'0%' }
+        { src:'assets/heart-valve-flow-strip-v1.webp', position:'0%' },
+        { src:'assets/heart-valve-flow-strip-v1.webp', position:'0%' },
+        { src:'assets/heart-valve-flow-strip-v1.webp', position:'33.333%' },
+        { src:'assets/heart-valve-flow-strip-v1.webp', position:'66.667%' },
+        { src:'assets/coronary-overview-v2.webp', position:null },
+        { src:'assets/cardiac-conduction-flow-strip-v1.webp', position:'0%' }
     ];
     let selectedIndex = 0;
 
     const renderVisual = (index, phase = null) => {
-        const visual = phase ? { src:'assets/heart-valve-flow-strip-v1.png', position: phase === 'pump' ? '100%' : '33.333%' } : visualMap[index];
+        const visual = phase ? { src:'assets/heart-valve-flow-strip-v1.webp', position: phase === 'pump' ? '100%' : '33.333%' } : visualMap[index];
         visualFocus.style.backgroundImage = `url('${visual.src}')`;
         visualFocus.style.backgroundSize = visual.position === null ? 'cover' : '400% 100%';
         visualFocus.style.backgroundPosition = visual.position === null ? 'center' : `${visual.position} center`;

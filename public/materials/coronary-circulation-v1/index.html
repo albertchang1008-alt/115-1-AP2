@@ -186,7 +186,7 @@ header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);backgroun
     <section class="mission-lab" aria-labelledby="coronary-lab-title">
         <h2 id="coronary-lab-title">🫀 情境實驗室｜抓住心肌灌流時刻</h2>
         <p>切換心跳時相，觀察心肌內的冠狀血管何時不易、何時最能獲得血流。</p>
-        <div class="sim-steps visual-flow" aria-label="冠狀循環灌流時相" style="--flow-art:url('assets/coronary-perfusion-flow-strip-v1.png')">
+        <div class="sim-steps visual-flow" aria-label="冠狀循環灌流時相" style="--flow-art:url('assets/coronary-perfusion-flow-strip-v1.webp')">
             <div class="sim-step visual-flow-card" data-coronary-step="0" style="--flow-position:0%;--flow-mobile-position:0%"><div class="visual-art"></div><strong>心室收縮</strong><span>心肌張力上升</span></div><div class="sim-arrow">→</div>
             <div class="sim-step visual-flow-card" data-coronary-step="1" style="--flow-position:33.333%;--flow-mobile-position:33.333%"><div class="visual-art"></div><strong>血管受壓</strong><span>冠狀灌流受限</span></div><div class="sim-arrow">→</div>
             <div class="sim-step visual-flow-card" data-coronary-step="2" style="--flow-position:66.667%;--flow-mobile-position:66.667%"><div class="visual-art"></div><strong>心室舒張</strong><span>心肌放鬆</span></div><div class="sim-arrow">→</div>
@@ -292,7 +292,7 @@ header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);backgroun
         <section class="coronary-focus-lab" aria-labelledby="coronary-focus-title">
             <h2 id="coronary-focus-title">🫀 冠狀循環圖像導覽</h2>
             <p>選擇上方主題，查看對應的冠狀血管、灌流時相或運動供血圖像。</p>
-            <div class="coronary-visual-crop" id="visual-focus"><img src="assets/coronary-overview-v2.png" alt="所選冠狀循環圖像"></div>
+            <div class="coronary-visual-crop" id="visual-focus"><img src="assets/coronary-overview-v2.webp" alt="所選冠狀循環圖像"></div>
             <p class="coronary-focus-caption" id="visual-focus-caption">已選：冠狀動脈開口</p>
             <section class="selected-explanation" id="selected-explanation" aria-live="polite"></section>
         </section>
@@ -830,7 +830,7 @@ header,.hero,.page>h1,.container>h1{border-top:4px solid var(--accent);backgroun
                 // Show card if hidden by filter
                 targetDetailCard.style.display = 'flex';
 
-                const visualSources = ['assets/coronary-overview-v2.png', 'assets/coronary-lca-branches-v2.png', 'assets/coronary-overview-v2.png', 'assets/coronary-overview-v2.png', 'assets/coronary-diastolic-perfusion-v2.png', 'assets/coronary-diastolic-perfusion-v2.png'];
+                const visualSources = ['assets/coronary-overview-v2.webp', 'assets/coronary-lca-branches-v2.webp', 'assets/coronary-overview-v2.webp', 'assets/coronary-overview-v2.webp', 'assets/coronary-diastolic-perfusion-v2.webp', 'assets/coronary-diastolic-perfusion-v2.webp'];
                 const visualLabels = ['冠狀動脈開口', '左冠狀動脈分支', '右冠狀動脈分支', '冠狀靜脈回流', '舒張期冠狀灌流', '運動時的心肌供血'];
                 const focus = document.getElementById('visual-focus');
                 const caption = document.getElementById('visual-focus-caption');

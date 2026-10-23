@@ -1,0 +1,43 @@
+{
+  "passCheck": true,
+  "baseCommit": "83e9d950fee0881586ffb9f477ce4c2bbc902e1f",
+  "versionUnchanged": "1.10.0",
+  "dryRunEligible": 0,
+  "deleted": 0,
+  "pruneTests": 4,
+  "materials": [
+    {
+      "material": "coronary-circulation-v1",
+      "path": "public/materials/coronary-circulation-v1/index.html",
+      "beforeHtmlBytes": 77364,
+      "afterHtmlBytes": 77372,
+      "beforeResourceBytes": 11352557,
+      "afterResourceBytes": 846224,
+      "nonImageHtmlSha256": "28422e41f4a7753f718256860cee2cfe26ae2bf90febc4c570f2dedfc5ab058e",
+      "onlyImageReferencesChanged": true
+    },
+    {
+      "material": "heart-structure-v2",
+      "path": "public/materials/heart-structure-v2/index.html",
+      "beforeHtmlBytes": 76059,
+      "afterHtmlBytes": 76067,
+      "beforeResourceBytes": 6170071,
+      "afterResourceBytes": 397027,
+      "nonImageHtmlSha256": "4b576a686034ebfbf605aaae219636666274706e798f2033d4f42f73f06f6899",
+      "onlyImageReferencesChanged": true
+    }
+  ],
+  "derivativeImages": 8,
+  "originalsPreserved": true,
+  "onlyImageReferencesChanged": true,
+  "browserFlows": 16,
+  "events": 384,
+  "invalidEvents": 0,
+  "frontendTests": 226,
+  "functionsTests": 61,
+  "screenshots": 56,
+  "retainUntil": "2026-10-30",
+  "evidenceDirectory": "/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-23/slim-old-materials",
+  "published": false,
+  "pushed": false
+}

@@ -1,0 +1,419 @@
+{
+  "baseCommit": "83e9d950fee0881586ffb9f477ce4c2bbc902e1f",
+  "recipe": {
+    "maxLongEdge": 1600,
+    "format": "WEBP",
+    "quality": 80,
+    "method": 6,
+    "lossless": false,
+    "exact": true,
+    "resample": "LANCZOS",
+    "upscale": false
+  },
+  "encoder": {
+    "pillow": "11.3.0",
+    "libwebp": "1.5.0"
+  },
+  "inventoryBefore": [
+    {
+      "material": "acid-base-homeostasis-v1",
+      "htmlBytes": 1459772,
+      "resourceBytes": 1459772
+    },
+    {
+      "material": "airway-structure-v1",
+      "htmlBytes": 1125352,
+      "resourceBytes": 1125352
+    },
+    {
+      "material": "blood-composition-v1",
+      "htmlBytes": 32771,
+      "resourceBytes": 32771
+    },
+    {
+      "material": "blood-gas-transport-v1",
+      "htmlBytes": 51847,
+      "resourceBytes": 51847
+    },
+    {
+      "material": "blood-gas-transport-v2",
+      "htmlBytes": 49962,
+      "resourceBytes": 49962
+    },
+    {
+      "material": "blood-post-v1",
+      "htmlBytes": 38578,
+      "resourceBytes": 38578
+    },
+    {
+      "material": "blood-pre-v1",
+      "htmlBytes": 21585,
+      "resourceBytes": 21585
+    },
+    {
+      "material": "blood-pressure-measurement-v1",
+      "htmlBytes": 64199,
+      "resourceBytes": 64199
+    },
+    {
+      "material": "blood-pressure-regulation-v1",
+      "htmlBytes": 58729,
+      "resourceBytes": 58729
+    },
+    {
+      "material": "blood-types-v1",
+      "htmlBytes": 72139,
+      "resourceBytes": 72139
+    },
+    {
+      "material": "blood-vessels-v1",
+      "htmlBytes": 45951,
+      "resourceBytes": 45951
+    },
+    {
+      "material": "breathing-mechanics-v1",
+      "htmlBytes": 999868,
+      "resourceBytes": 999868
+    },
+    {
+      "material": "capillary-exchange-v1",
+      "htmlBytes": 70418,
+      "resourceBytes": 70418
+    },
+    {
+      "material": "cardiac-conduction-v1",
+      "htmlBytes": 62918,
+      "resourceBytes": 62918
+    },
+    {
+      "material": "cardiac-conduction-v2",
+      "htmlBytes": 74373,
+      "resourceBytes": 2118921
+    },
+    {
+      "material": "cardiac-cycle-v1",
+      "htmlBytes": 65631,
+      "resourceBytes": 65631
+    },
+    {
+      "material": "cardiac-cycle-v2",
+      "htmlBytes": 74355,
+      "resourceBytes": 1970211
+    },
+    {
+      "material": "cardiac-electrical-v1",
+      "htmlBytes": 43642,
+      "resourceBytes": 2088190
+    },
+    {
+      "material": "cardiac-output-v1",
+      "htmlBytes": 74684,
+      "resourceBytes": 74684
+    },
+    {
+      "material": "circulation-routes-v1",
+      "htmlBytes": 50195,
+      "resourceBytes": 50195
+    },
+    {
+      "material": "coronary-circulation-v1",
+      "htmlBytes": 77364,
+      "resourceBytes": 11352557
+    },
+    {
+      "material": "course-orientation-v1",
+      "htmlBytes": 23874,
+      "resourceBytes": 2180946
+    },
+    {
+      "material": "ecg-basics-v1",
+      "htmlBytes": 131559,
+      "resourceBytes": 131559
+    },
+    {
+      "material": "electrolyte-balance-v1",
+      "htmlBytes": 1257933,
+      "resourceBytes": 1257933
+    },
+    {
+      "material": "filtration-clearance-v1",
+      "htmlBytes": 1419493,
+      "resourceBytes": 1419493
+    },
+    {
+      "material": "fluid-compartments-v1",
+      "htmlBytes": 456678,
+      "resourceBytes": 456678
+    },
+    {
+      "material": "gas-exchange-v1",
+      "htmlBytes": 1053056,
+      "resourceBytes": 1053056
+    },
+    {
+      "material": "heart-structure-v1",
+      "htmlBytes": 39208,
+      "resourceBytes": 39208
+    },
+    {
+      "material": "heart-structure-v2",
+      "htmlBytes": 76059,
+      "resourceBytes": 6170071
+    },
+    {
+      "material": "hemodynamics-v1",
+      "htmlBytes": 52305,
+      "resourceBytes": 52305
+    },
+    {
+      "material": "hemostasis-mechanisms-v1",
+      "htmlBytes": 68452,
+      "resourceBytes": 68452
+    },
+    {
+      "material": "hemostasis-mechanisms-v2",
+      "htmlBytes": 67518,
+      "resourceBytes": 67518
+    },
+    {
+      "material": "immuno-concepts-review-v1",
+      "htmlBytes": 722749,
+      "resourceBytes": 722749
+    },
+    {
+      "material": "kidney-anatomy-v1",
+      "htmlBytes": 1355606,
+      "resourceBytes": 1355606
+    },
+    {
+      "material": "lung-function-v1",
+      "htmlBytes": 268831,
+      "resourceBytes": 268831
+    },
+    {
+      "material": "lungs-pleura-v1",
+      "htmlBytes": 1214788,
+      "resourceBytes": 1214788
+    },
+    {
+      "material": "lymphatic-system-v1",
+      "htmlBytes": 55534,
+      "resourceBytes": 55534
+    },
+    {
+      "material": "lymphoid-organs-v1",
+      "htmlBytes": 65603,
+      "resourceBytes": 65603
+    },
+    {
+      "material": "major-vessels-v1",
+      "htmlBytes": 149356,
+      "resourceBytes": 149356
+    },
+    {
+      "material": "micro-bacteria-review-v1",
+      "htmlBytes": 601062,
+      "resourceBytes": 601062
+    },
+    {
+      "material": "nephron-circulation-v1",
+      "htmlBytes": 1184831,
+      "resourceBytes": 1184831
+    },
+    {
+      "material": "o2-co2-transport-v1",
+      "htmlBytes": 658139,
+      "resourceBytes": 658139
+    },
+    {
+      "material": "rbc-homeostasis-v1",
+      "htmlBytes": 93532,
+      "resourceBytes": 2060527
+    },
+    {
+      "material": "respiratory-control-v1",
+      "htmlBytes": 1214400,
+      "resourceBytes": 1214400
+    },
+    {
+      "material": "tubular-handling-v1",
+      "htmlBytes": 885464,
+      "resourceBytes": 885464
+    },
+    {
+      "material": "urinary-route-micturition-v2",
+      "htmlBytes": 1367538,
+      "resourceBytes": 1367538
+    },
+    {
+      "material": "urine-concentration-v1",
+      "htmlBytes": 1712487,
+      "resourceBytes": 1712487
+    },
+    {
+      "material": "water-sodium-regulation-v1",
+      "htmlBytes": 1557765,
+      "resourceBytes": 1557765
+    }
+  ],
+  "materials": [
+    {
+      "material": "coronary-circulation-v1",
+      "path": "public/materials/coronary-circulation-v1/index.html",
+      "beforeHtmlBytes": 77364,
+      "afterHtmlBytes": 77372,
+      "beforeResourceBytes": 11352557,
+      "afterResourceBytes": 846224,
+      "nonImageHtmlSha256": "28422e41f4a7753f718256860cee2cfe26ae2bf90febc4c570f2dedfc5ab058e",
+      "onlyImageReferencesChanged": true
+    },
+    {
+      "material": "heart-structure-v2",
+      "path": "public/materials/heart-structure-v2/index.html",
+      "beforeHtmlBytes": 76059,
+      "afterHtmlBytes": 76067,
+      "beforeResourceBytes": 6170071,
+      "afterResourceBytes": 397027,
+      "nonImageHtmlSha256": "4b576a686034ebfbf605aaae219636666274706e798f2033d4f42f73f06f6899",
+      "onlyImageReferencesChanged": true
+    }
+  ],
+  "images": [
+    {
+      "material": "coronary-circulation-v1",
+      "source": "html/assets/coronary-atherosclerosis-v2.png",
+      "sourceSha256": "6984431d7c294781bcb458acde54e5d69097eb1d41eb6f58f70676008bf14250",
+      "sourceBytes": 2331261,
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-atherosclerosis-v2.webp",
+      "sha256": "6b5c8bc3996f7203d44327a49afea3601b8352ec5774f9b449fb47133e993676",
+      "bytes": 145680,
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    {
+      "material": "coronary-circulation-v1",
+      "source": "html/assets/coronary-diastolic-perfusion-v2.png",
+      "sourceSha256": "f2bf757bdd28f89b8b8c9230f422ae14342aab83ad62cd90751cb47b6b27b43e",
+      "sourceBytes": 2272058,
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-diastolic-perfusion-v2.webp",
+      "sha256": "53ca46e530f901ad573d4052d585a0f8f94d04e635d20faa611dd88c915e6ebc",
+      "bytes": 154008,
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    {
+      "material": "coronary-circulation-v1",
+      "source": "html/assets/coronary-lca-branches-v2.png",
+      "sourceSha256": "39fff8f92a79eed9003d6c00ab037fd7b789725a21070ae10b42f657c36463c8",
+      "sourceBytes": 2434757,
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-lca-branches-v2.webp",
+      "sha256": "8a7e56ee41a86fcda1e0ec3ffe0796f8f829052cf5be5468a04f3ed0800ef8fe",
+      "bytes": 158250,
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    {
+      "material": "coronary-circulation-v1",
+      "source": "html/assets/coronary-overview-v2.png",
+      "sourceSha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9",
+      "sourceBytes": 2165104,
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-overview-v2.webp",
+      "sha256": "3bb140e96f839863c7a602f3769c460d7e9909a51024aa11d8210d821d1ed133",
+      "bytes": 130000,
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    {
+      "material": "coronary-circulation-v1",
+      "source": "html/assets/coronary-perfusion-flow-strip-v1.png",
+      "sourceSha256": "3e0294f5cf9852440c7fe0f75bd4c6db219b872e4a868670b2bb64c075d9db15",
+      "sourceBytes": 2072013,
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "path": "public/materials/coronary-circulation-v1/assets/coronary-perfusion-flow-strip-v1.webp",
+      "sha256": "9e8e9bfb403f14629fb43e7f7b3e12dbb6f13f8e6c5fbc9fcee936b25b9923eb",
+      "bytes": 180914,
+      "size": [
+        1600,
+        533
+      ]
+    },
+    {
+      "material": "heart-structure-v2",
+      "source": "html/assets/cardiac-conduction-flow-strip-v1.png",
+      "sourceSha256": "c520851e23677f2e9fa90e6dc970ba80284e1d473e80cb47d15b79439c865bc6",
+      "sourceBytes": 2044548,
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "path": "public/materials/heart-structure-v2/assets/cardiac-conduction-flow-strip-v1.webp",
+      "sha256": "f8992484184c1a3c150ba3b5cfb9fd2268d247fc8eeb6806f2188c0a9ea5ecee",
+      "bytes": 101854,
+      "size": [
+        1600,
+        533
+      ]
+    },
+    {
+      "material": "heart-structure-v2",
+      "source": "html/assets/coronary-overview-v2.png",
+      "sourceSha256": "a39cde039d1c932de24008a00433604e82c381d805c1d8b7aa342293642571e9",
+      "sourceBytes": 2165104,
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "path": "public/materials/heart-structure-v2/assets/coronary-overview-v2.webp",
+      "sha256": "3bb140e96f839863c7a602f3769c460d7e9909a51024aa11d8210d821d1ed133",
+      "bytes": 130000,
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    {
+      "material": "heart-structure-v2",
+      "source": "html/assets/heart-valve-flow-strip-v1.png",
+      "sourceSha256": "eec1a09759f7fe7e456db00a5cb159356b8b0a44a0275bfe105c97f40e6819d1",
+      "sourceBytes": 1884360,
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "path": "public/materials/heart-structure-v2/assets/heart-valve-flow-strip-v1.webp",
+      "sha256": "0751acd640dfe89d1c6b6e30eac578418c68ec7874b0b382de4bd03f78216a75",
+      "bytes": 89106,
+      "size": [
+        1600,
+        533
+      ]
+    }
+  ]
+}
