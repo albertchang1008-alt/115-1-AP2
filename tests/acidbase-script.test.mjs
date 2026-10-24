@@ -31,6 +31,8 @@ test('approved script compilation preserves exact source text and paired-questio
       Object.values(script.units).some((u) => u.text === q),
       'Unrepresented source clause ' + q,
     );
+  assert.ok(Object.values(script.units).every((u) => !u.text.includes('※')));
+  assert.ok(Object.values(script.units).some((u) => u.text === 'pKa 是公式裡固定的數字。pKa 不變時，如果鹼／酸的比值變大，pH 會怎樣？'));
   assert.equal(script.nodes.length, 6);
   assert.equal(script.trace.length, 3);
   assert.equal(Object.keys(script.units).filter((id) => !id.startsWith('diagram.')).length, 149);
