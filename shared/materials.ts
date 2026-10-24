@@ -97,6 +97,7 @@ export const ALL_MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'water-sodium-regulation-v1': { label: "水分收支與鈉水調節｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 15, note: "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本" },
   'electrolyte-balance-v1': { label: "電解質、滲透與離子平衡｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 15, note: "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本" },
   'acid-base-homeostasis-v1': { label: "酸鹼緩衝與肺腎調節｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 15, note: "診斷含5確認題（ID為n1-micro至n4-micro及n6-micro）＋10題配對池；每輪5組兩層考核；獨立題庫另採核可6＋5題" },
+  'blood-flow-routes-v1': { label: "血流路徑動畫｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。
