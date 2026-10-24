@@ -1,0 +1,742 @@
+{
+  "slug": "blood-flow-routes",
+  "version": "v1",
+  "experience": "guided",
+  "title": "血流路徑動畫",
+  "subtitle": "跟著一滴血走一圈：肺循環、體循環、胎兒循環與大腦循環。",
+  "label": "血流路徑動畫｜互動資訊圖表",
+  "stats": [
+    {
+      "value": "4 種模式",
+      "label": "沿路觀察含氧狀態"
+    },
+    {
+      "value": "6 項變化",
+      "label": "出生前後構造對照"
+    },
+    {
+      "value": "6＋5 題",
+      "label": "兩關隨堂診斷"
+    }
+  ],
+  "lab": {
+    "widget": "blood-flow",
+    "figure": "blood-flow-overview.svg",
+    "title": "跟著一滴血旅行",
+    "intro": "先逐步看路徑，再用播放觀察。四個模式都走到最後一步後，可回答預測題。",
+    "modes": [
+      {
+        "id": "pulmonary",
+        "label": "肺循環",
+        "steps": [
+          {
+            "title": "全身 → 右心房",
+            "text": "缺氧血經上、下腔靜脈回流（銜接段，淡灰）",
+            "source": "AB-05_11 p.11-32",
+            "paths": [
+              "p-svc",
+              "p-ivc"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血（銜接）"
+          },
+          {
+            "title": "右心房 → 右心室",
+            "text": "經三尖瓣",
+            "source": "AB-05_11 p.11-6",
+            "paths": [
+              "p-ra-rv"
+            ],
+            "valves": [
+              "tricuspid"
+            ],
+            "oxygen": "缺氧血"
+          },
+          {
+            "title": "右心室 → 肺動脈幹",
+            "text": "經肺動脈半月瓣；動脈裡是缺氧血",
+            "source": "AB-05_11 p.11-7；AB-05_11 p.11-19",
+            "paths": [
+              "p-trunk"
+            ],
+            "valves": [
+              "pulmonary"
+            ],
+            "oxygen": "缺氧血"
+          },
+          {
+            "title": "肺動脈幹 → 左、右肺動脈 → 肺臟",
+            "text": "肺動脈幹分成左、右肺動脈",
+            "source": "AB-05_11 p.11-19",
+            "paths": [
+              "p-rpa",
+              "p-rpa-lower",
+              "p-lpa",
+              "p-lpa-lower"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血",
+            "trace": "p-trace-artery"
+          },
+          {
+            "title": "肺泡周圍微血管",
+            "text": "釋出 CO₂、攜帶 O₂，顏色由藍轉紅",
+            "source": "AB-05_11 p.11-19",
+            "paths": [
+              "p-exchange-right",
+              "p-exchange-left"
+            ],
+            "valves": [],
+            "oxygen": "缺氧 → 充氧",
+            "trace": "p-exchange-right"
+          },
+          {
+            "title": "四條肺靜脈（左右各二）→ 左心房",
+            "text": "靜脈裡是充氧血",
+            "source": "AB-05_11 p.11-19",
+            "paths": [
+              "p-vein-r1",
+              "p-vein-r2",
+              "p-vein-l1",
+              "p-vein-l2"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          }
+        ]
+      },
+      {
+        "id": "systemic",
+        "label": "體循環",
+        "steps": [
+          {
+            "title": "左心房 → 左心室",
+            "text": "經二尖瓣（僧帽瓣）",
+            "source": "AB-05_11 p.11-6；AB-05_11 p.11-7",
+            "paths": [
+              "s-mitral"
+            ],
+            "valves": [
+              "mitral"
+            ],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "左心室 → 升主動脈",
+            "text": "經主動脈半月瓣；升主動脈根部分出左、右冠狀動脈",
+            "source": "AB-05_11 p.11-7；AB-05_11 p.11-21；AB-05_11 p.11-22",
+            "paths": [
+              "s-aorta",
+              "s-coronary-r",
+              "s-coronary-l"
+            ],
+            "valves": [
+              "aortic"
+            ],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "主動脈弓三分支 → 頭頸與上肢",
+            "text": "頭臂（分右頸總、右鎖骨下）、左頸總、左鎖骨下動脈",
+            "source": "AB-05_11 p.11-22",
+            "paths": [
+              "s-brachiocephalic",
+              "s-subclavian-r",
+              "s-carotid-l",
+              "s-subclavian-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "降主動脈 → 胸／腹主動脈 → 髂總動脈",
+            "text": "第4胸椎起；第4腰椎分左右髂總動脈 → 骨盆與下肢",
+            "source": "AB-05_11 p.11-21",
+            "paths": [
+              "s-descending",
+              "s-iliac-r"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "全身微血管",
+            "text": "送出 O₂ 與養分、帶走 CO₂，顏色由紅轉藍",
+            "source": "AB-05_11 p.11-21、p.11-20 圖11-13",
+            "paths": [
+              "s-capillary-head-r",
+              "s-capillary-head-l",
+              "s-capillary-arm-r",
+              "s-capillary-arm-l",
+              "s-capillary-leg-r",
+              "s-capillary-leg-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧 → 缺氧"
+          },
+          {
+            "title": "上腔靜脈 → 右心房",
+            "text": "收集頭頸、上肢（左右頭臂靜脈匯合）",
+            "source": "AB-05_11 p.11-32",
+            "paths": [
+              "s-bcv-r",
+              "s-bcv-l",
+              "s-arm-vein-r",
+              "s-arm-vein-l",
+              "s-svc"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血"
+          },
+          {
+            "title": "下腔靜脈 → 右心房",
+            "text": "收集下肢、腹部與骨盆",
+            "source": "AB-05_11 p.11-32",
+            "paths": [
+              "s-iliac-vein-r",
+              "s-iliac-vein-l",
+              "s-ivc"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血"
+          }
+        ]
+      },
+      {
+        "id": "fetal",
+        "label": "胎兒循環",
+        "steps": [
+          {
+            "title": "胎盤 → 臍靜脈",
+            "text": "一條臍靜脈帶充氧血進入胎兒（全圖最紅的一段）",
+            "source": "AB-05_11 p.11-39；AB-05_11 p.11-40",
+            "paths": [
+              "f-placenta-exchange",
+              "f-uv"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "臍靜脈 → 靜脈導管 → 下腔靜脈",
+            "text": "大部分血液繞過肝臟",
+            "source": "AB-05_11 p.11-39",
+            "paths": [
+              "f-dv"
+            ],
+            "valves": [],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "下腔靜脈 → 右心房",
+            "text": "與下半身回流血混合",
+            "source": "AB-05_11 p.11-39",
+            "paths": [
+              "f-ivc"
+            ],
+            "valves": [],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "右心房 → 卵圓孔 → 左心房",
+            "text": "約1/3（右心房血液）",
+            "source": "CH05 p.5-76",
+            "paths": [
+              "f-fo-flow",
+              "f-rv-flow"
+            ],
+            "valves": [],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "右心房 → 右心室 → 肺動脈幹",
+            "text": "約2/3（右心房血液）",
+            "source": "CH05 p.5-76",
+            "paths": [
+              "f-rv-flow-focus",
+              "f-fo-compare"
+            ],
+            "valves": [
+              "tricuspid",
+              "pulmonary"
+            ],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "肺動脈幹 → 動脈導管 → 降主動脈",
+            "text": "約90%；只有約10%到肺（肺動脈幹血液）",
+            "source": "CH05 p.5-76",
+            "paths": [
+              "f-duct-flow",
+              "f-pa-r",
+              "f-pa-l"
+            ],
+            "valves": [],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "左心房 → 左心室 → 主動脈 → 全身",
+            "text": "由左心房進入體循環",
+            "source": "AB-05_11 p.11-40；AB-05_11 p.11-6",
+            "paths": [
+              "f-body-head-r",
+              "f-body-head-l",
+              "f-body-lower-r",
+              "f-body-lower-l"
+            ],
+            "valves": [
+              "mitral",
+              "aortic"
+            ],
+            "oxygen": "混合血"
+          },
+          {
+            "title": "髂內動脈 → 兩條臍動脈 → 胎盤",
+            "text": "帶缺氧血回胎盤",
+            "source": "AB-05_11 p.11-39；AB-05_11 p.11-40",
+            "paths": [
+              "f-return-r",
+              "f-return-l"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血"
+          }
+        ]
+      },
+      {
+        "id": "cerebral",
+        "label": "大腦循環",
+        "steps": [
+          {
+            "title": "主動脈弓 → 頸總動脈 → 頸內動脈",
+            "text": "右側經頭臂動脈分出",
+            "source": "AB-05_11 p.11-22",
+            "paths": [
+              "c-ica-r",
+              "c-ica-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "鎖骨下動脈 → 椎動脈",
+            "text": "經頸椎橫突孔上行，經枕骨大孔進入顱腔",
+            "source": "AB-05_11 p.11-24",
+            "paths": [
+              "c-va-r",
+              "c-va-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "左、右椎動脈 → 一條基底動脈",
+            "text": "左右椎動脈合流",
+            "source": "AB-05_11 p.11-24",
+            "paths": [
+              "c-vertebral-join-r",
+              "c-vertebral-join-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "頸內動脈 → 前、中大腦動脈；基底動脈 → 後大腦動脈",
+            "text": "依來源分清前、中、後大腦動脈",
+            "source": "AB-05_11 p.11-25 表11-2、p.11-27 圖11-17",
+            "paths": [
+              "c-mca-r",
+              "c-mca-l",
+              "c-aca-flow-r",
+              "c-aca-flow-l",
+              "c-pca-flow-r",
+              "c-pca-flow-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "前、後交通動脈 → 大腦動脈環",
+            "text": "前交通連左右前大腦；後交通連頸內與後大腦；位於腦底、視交叉與腦下垂體周圍",
+            "source": "AB-05_11 p.11-24",
+            "paths": [
+              "c-acom",
+              "c-pcom-r",
+              "c-pcom-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "威利氏環",
+            "text": "平衡腦部血壓；腦血管受傷時提供替代供血途徑",
+            "source": "CH05 p.5-70；AB-05_11 p.11-24",
+            "paths": [
+              "c-aca-r",
+              "c-aca-l",
+              "c-acom",
+              "c-pcom-r",
+              "c-pcom-l",
+              "c-pca-r",
+              "c-pca-l"
+            ],
+            "valves": [],
+            "oxygen": "充氧血"
+          },
+          {
+            "title": "顱內靜脈竇 → 頸靜脈孔 → 頸內 → 頭臂 → 上腔靜脈 → 右心房",
+            "text": "沿頸內靜脈追蹤回流",
+            "source": "AB-05_11 p.11-32",
+            "paths": [
+              "c-vein-r",
+              "c-vein-l",
+              "c-subclavian-r",
+              "c-subclavian-l"
+            ],
+            "valves": [],
+            "oxygen": "缺氧血（回流）"
+          }
+        ]
+      }
+    ],
+    "postnatal": [
+      {
+        "title": "卵圓孔 → 卵圓窩",
+        "text": "出生後左心房壓力增高而閉合",
+        "source": "CH05 p.5-76",
+        "structure": "fo"
+      },
+      {
+        "title": "動脈導管 → 動脈韌帶",
+        "text": "動脈連接閉鎖",
+        "source": "CH05 p.5-76",
+        "structure": "da"
+      },
+      {
+        "title": "靜脈導管 → 靜脈韌帶",
+        "text": "臍靜脈與下腔靜脈連接閉鎖",
+        "source": "CH05 p.5-76",
+        "structure": "dv"
+      },
+      {
+        "title": "臍靜脈 → 肝圓韌帶",
+        "text": "一條臍靜脈閉鎖",
+        "source": "CH05 p.5-76",
+        "structure": "uv"
+      },
+      {
+        "title": "兩條臍動脈 → 內側臍韌帶",
+        "text": "兩條臍動脈閉鎖",
+        "source": "CH05 p.5-76",
+        "structure": "ua"
+      },
+      {
+        "title": "臍尿管 → 臍正中韌帶",
+        "text": "膀胱到肚臍的構造；不是血流路段",
+        "source": "CH05 p.5-76",
+        "structure": "urachus"
+      }
+    ],
+    "predict": {
+      "question": "四種模式看完後：血管名稱能直接代表血液含氧程度嗎？",
+      "options": [
+        "不能；肺與臍血管需依路徑判讀",
+        "能；所有動脈都帶充氧血",
+        "能；所有靜脈都帶缺氧血",
+        "不能；所有血管都只帶混合血"
+      ],
+      "answer": 0,
+      "feedback": "動脈與靜脈不能直接代表含氧程度：肺動脈帶缺氧血、肺靜脈帶充氧血，胎兒臍血管也要依路徑判讀。"
+    }
+  },
+  "nodes": [
+    {
+      "id": "blood-flow-routes-node-01",
+      "tag": "01",
+      "title": "肺循環",
+      "summary": "由右心室送到肺，再回左心房。",
+      "figure": "blood-flow-node-01.svg",
+      "concept": "肺循環起於右心室、終於左心房。缺氧血經肺動脈幹及左右肺動脈，進入肺泡周圍微血管；CO₂進肺泡、O₂進血液後，充氧血由四條肺靜脈（左右各二）回左心房。右心房到右心室經三尖瓣，右心室到肺動脈幹經肺動脈半月瓣。",
+      "points": [
+        "肺動脈帶缺氧血；肺靜脈帶充氧血。",
+        "肺泡周圍微血管是氣體交換段。",
+        "四條肺靜脈回流同一個左心房。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "圖中的上、下腔靜脈與右心房是前一段回流的銜接；不要把右心房誤認為肺循環起點。"
+      },
+      "sources": [
+        "AB-05_11 p.11-19、p.11-6～11-7"
+      ],
+      "reference": "AB-05_11 p.11-19、p.11-6～11-7"
+    },
+    {
+      "id": "blood-flow-routes-node-02",
+      "tag": "02",
+      "title": "體循環",
+      "summary": "由左心室出發，經全身回右心房。",
+      "figure": "blood-flow-node-02.svg",
+      "concept": "左心房經二尖瓣（僧帽瓣）進左心室，再經主動脈半月瓣入升主動脈。升主動脈基部分出左右冠狀動脈；弓分頭臂、左頸總、左鎖骨下動脈，頭臂再分右頸總與右鎖骨下。降主動脈自第4胸椎起，分胸、腹主動脈，到第4腰椎分左右髂總動脈供骨盆與下肢。體循環送氧與養分到組織，帶走CO₂；靜脈血經上、下腔靜脈及冠狀竇回右心房，左右頭臂靜脈合成上腔靜脈。",
+      "points": [
+        "弓三分支左右不對稱；左側沒有頭臂動脈。",
+        "冠狀動脈發自升主動脈根部。",
+        "上腔收頭頸與上肢；下腔收腹、骨盆與下肢。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "追上半身回流時，要找左右各一的頭臂靜脈；不要把動脈只有右側的頭臂分支規則套在靜脈。"
+      },
+      "sources": [
+        "AB-05_11 p.11-6～11-7、11-21～11-22、11-32"
+      ],
+      "reference": "AB-05_11 p.11-6～11-7、11-21～11-22、11-32"
+    },
+    {
+      "id": "blood-flow-routes-node-03",
+      "tag": "03",
+      "title": "胎兒循環・出生前",
+      "summary": "胎盤交換物質，特殊通道使血流分流。",
+      "figure": "blood-flow-node-03.svg",
+      "concept": "一條臍靜脈帶充氧血回胎兒，大部分經肝下方靜脈導管入下腔靜脈，與下半身回流血混合再入右心房。右房約1/3經卵圓孔入左房，約2/3入右室及肺動脈幹；後者約10%到肺、90%經動脈導管入降主動脈。髂內動脈的兩條臍動脈帶缺氧血回胎盤；只有臍靜脈含純粹充氧血。",
+      "points": [
+        "1/3與2/3的分母是右心房血液。",
+        "10%與90%的分母是肺動脈幹血液。",
+        "卵圓孔右→左；靜脈導管接下腔，動脈導管接主動脈。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "同一顆血滴經下腔靜脈入右心房後，可以由卵圓孔直接入左心房；不能把各段都畫成成人式純紅或純藍。"
+      },
+      "sources": [
+        "AB-05_11 p.11-39～11-40；CH05 p.5-76"
+      ],
+      "reference": "AB-05_11 p.11-39～11-40；CH05 p.5-76"
+    },
+    {
+      "id": "blood-flow-routes-node-04",
+      "tag": "04",
+      "title": "出生後的變化",
+      "summary": "六種特殊構造閉鎖，改成出生後的名稱。",
+      "figure": "blood-flow-node-04.svg",
+      "concept": "出生後左心房壓力增高，卵圓孔閉合成卵圓窩；動脈導管成動脈韌帶，靜脈導管成靜脈韌帶，臍靜脈成肝圓韌帶，兩條臍動脈成內側臍韌帶，臍尿管成臍正中韌帶。特殊連接閉鎖後，充氧與缺氧血分開，形成成人的肺循環及體循環。",
+      "points": [
+        "卵圓孔是因左心房壓力增高而閉合。",
+        "臍靜脈、臍動脈、臍尿管變成不同名稱的構造。",
+        "臍尿管連膀胱與肚臍，不是血管。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "逐步變灰表示構造閉鎖的對照；六步只是整理順序，不代表六者在出生後依此順序立即完成。"
+      },
+      "sources": [
+        "CH05 p.5-76"
+      ],
+      "reference": "CH05 p.5-76"
+    },
+    {
+      "id": "blood-flow-routes-node-05",
+      "tag": "05",
+      "title": "大腦的動脈供應",
+      "summary": "頸內與椎動脈是兩套供血入口。",
+      "figure": "blood-flow-node-05.svg",
+      "concept": "頸總動脈分出頸內動脈，前、中大腦動脈來自頸內動脈。鎖骨下動脈分出椎動脈，經頸椎橫突孔上行、枕骨大孔入顱；左右椎動脈合成基底動脈，後大腦動脈由基底動脈分出。腦部靜脈竇經頸靜脈孔接頸內靜脈，與鎖骨下合成頭臂靜脈，再經上腔靜脈回右心房。",
+      "points": [
+        "前、中大腦：頸內動脈系統。",
+        "後大腦：椎動脈→基底動脈系統。",
+        "頸靜脈孔是通過位置，不是一條血管。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "先追出主幹再認分支：椎動脈來自鎖骨下，不能接到頸總動脈；前、中大腦也不能接到基底動脈。"
+      },
+      "sources": [
+        "AB-05_11 p.11-22、11-24～11-25 表11-2、11-27 圖11-17、11-32"
+      ],
+      "reference": "AB-05_11 p.11-22、11-24～11-25 表11-2、11-27 圖11-17、11-32"
+    },
+    {
+      "id": "blood-flow-routes-node-06",
+      "tag": "06",
+      "title": "威利氏環",
+      "summary": "腦底動脈相連，提供替代供血途徑。",
+      "figure": "blood-flow-node-06.svg",
+      "concept": "前交通動脈連左右前大腦動脈；左右後交通動脈連頸內動脈與後大腦動脈。在腦底、視交叉與腦下垂體周圍形成大腦動脈環（威利氏環），可平衡腦部血壓，並在腦血管受傷時提供替代供血途徑。",
+      "points": [
+        "前交通只有一條，位於前方中線。",
+        "後交通左右各一，連到後大腦動脈。",
+        "威利氏環是動脈相連，與靜脈回流不同。"
+      ],
+      "clinical": {
+        "title": "觀察與應用",
+        "text": "看腦底仰視圖時，先找標示的前、後與中線；再用交通動脈兩端的連接辨認，避免把環當作靜脈竇。"
+      },
+      "sources": [
+        "AB-05_11 p.11-24、11-27 圖11-17；CH05 p.5-70"
+      ],
+      "reference": "AB-05_11 p.11-24、11-27 圖11-17；CH05 p.5-70"
+    }
+  ],
+  "foundation": [
+    {
+      "id": "blood-flow-routes-foundation-q01",
+      "nodeId": "blood-flow-routes-node-01",
+      "stem": "肺循環的起點與終點是？",
+      "options": [
+        "右心室 → 左心房",
+        "右心房 → 左心室",
+        "左心室 → 右心房",
+        "左心房 → 右心室"
+      ],
+      "answer": 0,
+      "hint": "先區分回流銜接段與真正送血去肺的腔室。",
+      "explain": "肺循環由右心室送血到肺，經肺靜脈回左心房；右心房是前一段回流的銜接。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q02",
+      "nodeId": "blood-flow-routes-node-02",
+      "stem": "直接由主動脈弓分出的三條動脈是？",
+      "options": [
+        "左右頭臂、左鎖骨下動脈",
+        "頭臂、左頸總、左鎖骨下動脈",
+        "左右冠狀、頭臂動脈",
+        "右頸總、右鎖骨下、左頸總動脈"
+      ],
+      "answer": 1,
+      "hint": "把弓的直接分支與頭臂動脈的下一級分支分開。",
+      "explain": "主動脈弓直接分出頭臂、左頸總與左鎖骨下；右頸總與右鎖骨下由頭臂動脈再分出。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q03",
+      "nodeId": "blood-flow-routes-node-03",
+      "stem": "胎兒肺動脈幹血液約90%經哪條通道進降主動脈？",
+      "options": [
+        "靜脈導管",
+        "卵圓孔",
+        "動脈導管",
+        "臍靜脈"
+      ],
+      "answer": 2,
+      "hint": "看通道兩端是兩條動脈、兩個心房，還是靜脈。",
+      "explain": "肺動脈幹約90%的血液經動脈導管入降主動脈；靜脈導管連到下腔靜脈。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q04",
+      "nodeId": "blood-flow-routes-node-04",
+      "stem": "出生後兩條臍動脈閉鎖，形成？",
+      "options": [
+        "臍正中韌帶",
+        "肝圓韌帶",
+        "動脈韌帶",
+        "內側臍韌帶"
+      ],
+      "answer": 3,
+      "hint": "先分清兩條血管與膀胱到肚臍的構造。",
+      "explain": "兩條臍動脈成內側臍韌帶；臍尿管才形成臍正中韌帶。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q05",
+      "nodeId": "blood-flow-routes-node-05",
+      "stem": "前、中大腦動脈直接來自哪個系統？",
+      "options": [
+        "頸內動脈",
+        "基底動脈",
+        "椎動脈",
+        "頸外動脈"
+      ],
+      "answer": 0,
+      "hint": "將前、中與後大腦動脈依其主幹分組。",
+      "explain": "前、中大腦動脈由頸內動脈分出；後大腦動脈由基底動脈分出。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q06",
+      "nodeId": "blood-flow-routes-node-06",
+      "stem": "前交通動脈連結哪兩處？",
+      "options": [
+        "頸內與後大腦動脈",
+        "左右前大腦動脈",
+        "左右椎動脈",
+        "左右頸內靜脈"
+      ],
+      "answer": 1,
+      "hint": "先在腦底仰視圖找到前方中線的短連接。",
+      "explain": "前交通動脈位於前方中線，連左右前大腦動脈；後交通才連頸內與後大腦動脈。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "blood-flow-routes-case-q01",
+      "nodeId": "blood-flow-routes-node-01",
+      "stem": "【模型觀察】一滴血在肺泡周圍微血管取得氧後，接下來經哪條路徑回心臟？",
+      "options": [
+        "肺動脈 → 右心房",
+        "上腔靜脈 → 左心房",
+        "肺靜脈 → 左心房",
+        "主動脈 → 左心室"
+      ],
+      "answer": 2,
+      "hint": "找到氣體交換後回流的血管，不以動靜脈名稱猜含氧程度。",
+      "explain": "肺泡交換後成充氧血，由左右各二條肺靜脈回左心房。"
+    },
+    {
+      "id": "blood-flow-routes-case-q02",
+      "nodeId": "blood-flow-routes-node-02",
+      "stem": "【模型觀察】圖中左頸總動脈要接回哪個直接來源？",
+      "options": [
+        "左頭臂動脈",
+        "左冠狀動脈",
+        "降主動脈",
+        "主動脈弓"
+      ],
+      "answer": 3,
+      "hint": "比較左右頭頸分支是否完全對稱。",
+      "explain": "左頸總動脈直接由主動脈弓分出；左側沒有頭臂動脈。"
+    },
+    {
+      "id": "blood-flow-routes-case-q03",
+      "nodeId": "blood-flow-routes-node-03",
+      "stem": "【模型觀察】胎兒一滴血由下腔靜脈入右心房，可經哪個開口直接到左心房？",
+      "options": [
+        "卵圓孔",
+        "動脈導管",
+        "靜脈導管",
+        "二尖瓣"
+      ],
+      "answer": 0,
+      "hint": "區分跨心房開口與跨血管的導管。",
+      "explain": "約1/3右心房血液經卵圓孔入左心房；這個比例的分母是右心房血液。"
+    },
+    {
+      "id": "blood-flow-routes-case-q04",
+      "nodeId": "blood-flow-routes-node-04",
+      "stem": "【模型觀察】出生後左心房壓力增高，使哪個構造閉合成卵圓窩？",
+      "options": [
+        "動脈導管",
+        "卵圓孔",
+        "臍尿管",
+        "靜脈導管"
+      ],
+      "answer": 1,
+      "hint": "追蹤兩個心房之間的開口與出生後名稱。",
+      "explain": "左心房壓力增高使卵圓孔閉合，形成卵圓窩。"
+    },
+    {
+      "id": "blood-flow-routes-case-q05",
+      "nodeId": "blood-flow-routes-node-06",
+      "stem": "【模型觀察】腦底圖上一條血管連頸內動脈與後大腦動脈，這條連接是？",
+      "options": [
+        "前交通動脈",
+        "頸內靜脈",
+        "後交通動脈",
+        "基底動脈"
+      ],
+      "answer": 2,
+      "hint": "辨認連接的兩端，不只看線位在圖的哪一側。",
+      "explain": "後交通動脈左右各一，連頸內與後大腦動脈；前交通連左右前大腦動脈。"
+    }
+  ],
+  "credits": [
+    "依 reviewed 主卡：pulmonary-circulation、systemic-circulation、fetal-circulation、cerebral-circulation。",
+    "解剖學 AB-05_11 p.11-6～11-7、11-19～11-25、11-27、11-32、11-39～11-40；生理學 CH05 p.5-70、5-75～5-76。"
+  ]
+}

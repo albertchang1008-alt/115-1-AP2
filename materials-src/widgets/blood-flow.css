@@ -1,0 +1,49 @@
+
+.blood-flow{
+  --page:#F4F2EE; --card:#FDFCFA; --ink:#1F2A33; --muted:#66727E; --line:#E3DED6;
+  --skin:#F3EEE8; --skin-edge:#E2D7CB;
+  --lung:#F6E3DE; --lung-edge:#DDB3AA; --heart:#F0CFC9; --heart-edge:#C98D85; --chamber:#9C6A63;
+  --liver:#EBD3C4; --liver-edge:#CDA58E; --brain:#F3E1DC; --brain-edge:#D6B2A9; --placenta:#EBC9CF; --bladder:#F1E2C9; --bladder-edge:#D3BB91;
+  --airway:#DCE4DF; --airway-in:#F1F4F2;
+  --deoxy:#2E5FA8; --oxy:#C9333F; --mixed:#7B4FA6; --closed:#8E979F;
+  --deoxy-soft:#D3DDEE; --oxy-soft:#F1D2D5; --mixed-soft:#E2D6EE; --closed-soft:#D9DDE0;
+  --btn:#2D5C55; --btn-ink:#FFFFFF; --chip:#E8ECEA; --particle:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  .blood-flow:not([data-theme="light"]){
+    --page:#14191E; --card:#1B2229; --ink:#E9EDF0; --muted:#9AA6B1; --line:#2C353E;
+    --skin:#222A31; --skin-edge:#333E48;
+    --lung:#3A2B2B; --lung-edge:#6E4B47; --heart:#4A3130; --heart-edge:#8E5E58; --chamber:#D2AEA8;
+    --liver:#3E2F27; --liver-edge:#6E5243; --brain:#3A2D2C; --brain-edge:#6B4F4A; --placenta:#4A2F36; --bladder:#3C3528; --bladder-edge:#6B5D42;
+    --airway:#33403B; --airway-in:#232C29;
+    --deoxy:#5B8BD6; --oxy:#E5606B; --mixed:#A57DD0; --closed:#8E979F;
+    --deoxy-soft:#2B3850; --oxy-soft:#4A2C31; --mixed-soft:#3A2F4A; --closed-soft:#3A4148;
+    --btn:#5FA39A; --btn-ink:#0F1513; --chip:#26303A; --particle:#F4F6F8;
+  }
+}
+.blood-flow[data-theme="dark"]{
+  --page:#14191E; --card:#1B2229; --ink:#E9EDF0; --muted:#9AA6B1; --line:#2C353E;
+  --skin:#222A31; --skin-edge:#333E48;
+  --lung:#3A2B2B; --lung-edge:#6E4B47; --heart:#4A3130; --heart-edge:#8E5E58; --chamber:#D2AEA8;
+  --liver:#3E2F27; --liver-edge:#6E5243; --brain:#3A2D2C; --brain-edge:#6B4F4A; --placenta:#4A2F36; --bladder:#3C3528; --bladder-edge:#6B5D42;
+  --airway:#33403B; --airway-in:#232C29;
+  --deoxy:#5B8BD6; --oxy:#E5606B; --mixed:#A57DD0; --closed:#8E979F;
+  --deoxy-soft:#2B3850; --oxy-soft:#4A2C31; --mixed-soft:#3A2F4A; --closed-soft:#3A4148;
+  --btn:#5FA39A; --btn-ink:#0F1513; --chip:#26303A; --particle:#F4F6F8;
+}
+
+svg[data-blood-v2]{--surface:var(--card)}.blood-flow svg text{paint-order:stroke;stroke:var(--surface);stroke-width:4;stroke-linejoin:round}.organ{font-size:16.5px;fill:var(--muted);font-weight:500}.orient{font-size:16.5px;fill:var(--muted)}.chamber{font-size:16.5px;fill:var(--chamber);font-weight:500}.chamber.on{fill:var(--ink);font-weight:700}.only-on:not(.on){opacity:0}.callout{font-size:17px;font-weight:700;fill:var(--ink);opacity:0}.callout.on{opacity:1}.callout.muted{fill:var(--muted);font-weight:500}.base,.live{fill:none;stroke-linecap:round;stroke-linejoin:round}.valve{stroke:var(--card);stroke-width:3;stroke-linecap:round;opacity:0}.valve.on{opacity:1}.post-only{opacity:0}.after .pre-only{opacity:0}.after .post-only{opacity:1}.blood-flow svg text{font-family:system-ui,sans-serif}
+body:has(.kit[data-slug="blood-flow-routes"]){background:#F4F2EE}
+.blood-flow{color:var(--ink);background:var(--card);display:grid;gap:8px;max-width:760px;margin:auto;padding:10px 12px;border:1px solid var(--line);border-radius:18px;font-family:system-ui,sans-serif}
+.blood-flow button,.blood-flow select{font:inherit;font-size:calc(14px * var(--font-scale,1));min-height:44px;border:0;border-radius:10px;padding:4px 10px;background:var(--chip);color:var(--ink);cursor:pointer;box-shadow:none}
+.blood-flow button:disabled{opacity:.45;cursor:default}.blood-flow button:focus-visible,.blood-flow select:focus-visible{outline:3px solid var(--btn);outline-offset:2px}
+.flow-tabs{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:14px}.flow-tabs button{flex:1;min-width:0;padding:4px}.flow-tabs button[aria-pressed="true"]{color:var(--ink);background:var(--card);font-weight:700;box-shadow:0 1px 2px #00000014}
+.flow-birth{display:flex;gap:6px}.flow-birth[hidden],.flow-prediction[hidden]{display:none!important}.flow-birth button[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink);font-weight:700}
+.flow-legend{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:calc(12px * var(--font-scale,1))}.flow-legend span{display:inline-flex;align-items:center;gap:6px}.flow-legend i{display:inline-block;width:18px;height:5px;border-radius:3px}.flow-legend .deoxy{background:var(--deoxy)}.flow-legend .oxy{background:var(--oxy)}.flow-legend .mixed{background:var(--mixed)}.flow-legend .closed{background:var(--closed)}
+.flow-layout{display:flex;flex-direction:column;gap:0;min-width:0}.flow-map{min-width:0;width:100%}.flow-map svg{display:block;width:100%;height:auto;max-height:58vh;margin:4px auto 0;overflow:hidden}
+.flow-map .callout,.flow-map .chamber,.flow-map .pre-only,.flow-map .post-only,.flow-map .valve{transition:opacity .3s,fill .3s}.flow-map .base{transition:stroke .4s}
+.flow-card{border-top:1px solid var(--line);padding-top:10px;margin-top:8px;min-width:0}.flow-card p{margin:0 0 4px}.flow-count{font-size:calc(12.5px * var(--font-scale,1));color:var(--muted)}.flow-card h3{font-size:calc(20px * var(--font-scale,1));line-height:1.4;margin:4px 0 6px;font-weight:700;color:var(--ink)}.flow-small{font-size:calc(15px * var(--font-scale,1));line-height:1.6}.flow-source{font-size:calc(12px * var(--font-scale,1));color:var(--muted)}.flow-oxygen{display:none}
+.flow-controls{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.flow-controls label{display:flex;gap:4px;align-items:center;font-size:calc(12px * var(--font-scale,1));color:var(--muted)}.flow-controls [data-flow-next],.flow-dots button[aria-current="step"]{background:var(--btn);color:var(--btn-ink);font-weight:700}.flow-dots{display:flex;flex-wrap:wrap;gap:6px}.flow-dots button{width:36px;min-height:36px;padding:0;border-radius:50%;font-size:calc(13px * var(--font-scale,1))}.flow-note,.flow-watched{margin:0;color:var(--muted);font-size:calc(12px * var(--font-scale,1));line-height:1.5}.flow-status{display:none}
+.kit[data-slug="blood-flow-routes"] .node-figure{max-height:none;max-width:600px;margin:auto}.kit[data-slug="blood-flow-routes"] .node-figure svg{width:100%;display:block}
+@media(max-width:560px){.kit[data-slug="blood-flow-routes"] .lab{padding:10px}.blood-flow{padding:8px 4px}.flow-tabs button{font-size:calc(14px * var(--font-scale,1))}.flow-card h3{font-size:calc(18px * var(--font-scale,1))}.flow-small{font-size:calc(14px * var(--font-scale,1))}.flow-controls button,.flow-controls select{padding:4px 8px}}
+@media(prefers-reduced-motion:reduce){.blood-flow :is(.base,.callout,.chamber,.pre-only,.post-only,.valve){transition:none}}
