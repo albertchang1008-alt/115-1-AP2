@@ -1,0 +1,116 @@
+{
+  "reviewedBy": "Codex（作者逐題自檢，待Claude驗收）",
+  "reviewedOn": "2026-10-25",
+  "items": [
+    {
+      "id": "blood-flow-routes-foundation-q01",
+      "keywords": [
+        "肺循環"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "肺循環由右心室送血到肺，經肺靜脈回左心房；右心房是前一段回流的銜接。",
+      "manualChecked": true,
+      "judgment": "把肺循環起點與終點連起來，保留肺循環這個題幹關鍵詞。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q02",
+      "keywords": [
+        "主動脈弓"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "主動脈弓直接分出頭臂、左頸總與左鎖骨下；右頸總與右鎖骨下由頭臂動脈再分出。",
+      "manualChecked": true,
+      "judgment": "口訣列出弓的三條直接分支，不把頭臂的下一級分支混入。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q03",
+      "keywords": [
+        "動脈導管"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "肺動脈幹約90%的血液經動脈導管入降主動脈；靜脈導管連到下腔靜脈。",
+      "manualChecked": true,
+      "judgment": "寫出動脈導管的名稱及兩端連接方向。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q04",
+      "keywords": [
+        "內側臍韌帶"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "兩條臍動脈成內側臍韌帶；臍尿管才形成臍正中韌帶。",
+      "manualChecked": true,
+      "judgment": "保留內側臍韌帶全名，並指明來源是成對的臍動脈。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q05",
+      "keywords": [
+        "頸內動脈"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "前、中大腦動脈由頸內動脈分出；後大腦動脈由基底動脈分出。",
+      "manualChecked": true,
+      "judgment": "保留頸內動脈名稱，連結前、中大腦動脈的來源。"
+    },
+    {
+      "id": "blood-flow-routes-foundation-q06",
+      "keywords": [
+        "前交通動脈"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "前交通動脈位於前方中線，連左右前大腦動脈；後交通才連頸內與後大腦動脈。",
+      "manualChecked": true,
+      "judgment": "以前交通動脈全名連接左右前大腦動脈。"
+    },
+    {
+      "id": "blood-flow-routes-case-q01",
+      "keywords": [
+        "肺靜脈"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "肺泡交換後成充氧血，由左右各二條肺靜脈回左心房。",
+      "manualChecked": true,
+      "judgment": "寫出肺靜脈全名、充氧血與回流心房。"
+    },
+    {
+      "id": "blood-flow-routes-case-q02",
+      "keywords": [
+        "左頸總動脈"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "左頸總動脈直接由主動脈弓分出；左側沒有頭臂動脈。",
+      "manualChecked": true,
+      "judgment": "以左頸總動脈全名提醒直接由主動脈弓分出。"
+    },
+    {
+      "id": "blood-flow-routes-case-q03",
+      "keywords": [
+        "卵圓孔"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "約1/3右心房血液經卵圓孔入左心房；這個比例的分母是右心房血液。",
+      "manualChecked": true,
+      "judgment": "以卵圓孔全名與右房到左房的方向對照。"
+    },
+    {
+      "id": "blood-flow-routes-case-q04",
+      "keywords": [
+        "卵圓孔"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "左心房壓力增高使卵圓孔閉合，形成卵圓窩。",
+      "manualChecked": true,
+      "judgment": "以卵圓孔閉合連結卵圓窩，沒有改成模糊代稱。"
+    },
+    {
+      "id": "blood-flow-routes-case-q05",
+      "keywords": [
+        "後交通動脈"
+      ],
+      "basisField": "old.解析",
+      "basisQuote": "後交通動脈左右各一，連頸內與後大腦動脈；前交通連左右前大腦動脈。",
+      "manualChecked": true,
+      "judgment": "寫出後交通動脈全名與相連動脈，避免與前交通混淆。"
+    }
+  ]
+}
