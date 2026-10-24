@@ -14,6 +14,7 @@
 來源為.worktrees/blood-flow-routes的BLOOD_FLOW_TRAIL_ARROWS_REPORT.md與_FIX_REPORT.md最後方案C。
 原工作樹保留，不rebase其未提交工作；新分支直接從origin/main建立。
 content.json、blood-flow.js／css、overview及node-01～06 SVG與最新來源一致，source-provenance.json附SHA256。
+教材整合提交：a2ebb20c [Codex]；未push或併入main，保留Claude驗收點。
 未帶入截圖、_old、node_modules、舊handoff或週誌。未移植會覆蓋正式呼吸／泌尿功能的舊共用檔。
 
 正式build新增public/materials/blood-flow-routes-v1/index.html，並登錄shared/materials.ts及public/materials/README.md。
@@ -63,3 +64,5 @@ materials:validate-nodes檢查既有21份學生教材、全部kit來源（包含
 依交辦在B3先停，不讀寫任何Sheet，不製作可能覆蓋新增資料的增列檔，不往後做平台preview。
 教師提供最新單一分頁下載檔後，才可只新增11列、逐格比對並依#35五欄標準檢查；之後平台登錄仍只preview、不apply。
 本輪B1–B2交Claude先驗收；#7停-等Claude，並明列B3等教師檔案的限制。
+
+格式附註：首次git diff --cached --check指出來源3張SVG各1行空白尾端有空格；為保留核可SVG逐位元一致，本次保留，非測試失敗。
