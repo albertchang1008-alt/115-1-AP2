@@ -518,7 +518,7 @@ export const buildReviewExam = onCall(options, async (req) => {
     delete unit.wrongCarry;
     delete unit.wrongCarryOrder;
     const chapters = { ...(latest.chapters || {}), ...(old ? {} : { [name]: { title: name, description: '', required: true, threshold: 80, opensAt: '', dueAt: '', activities: [] } }) };
-    tx.update(ref, { revision:courseRevision(fresh.data())+1, 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, 'draft.chapterOrder': old ? latest.chapterOrder : [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name], updatedAt: Date.now() });
+    tx.update(ref, { revision:courseRevision(fresh.data())+1, 'draft.units': old ? latest.units.map((u) => u.id === name ? unit : u) : [...latest.units, unit], 'draft.chapters': chapters, ...(!old ? { 'draft.chapterOrder': [...(latest.chapterOrder || Object.keys(chapters).filter((x) => x !== name)), name] } : latest.chapterOrder !== undefined ? { 'draft.chapterOrder': latest.chapterOrder } : {}), updatedAt: Date.now() });
     return courseRevision(fresh.data())+1;
   });
   return { ...result, revision, allocation, poolCount: pool.length, builtAt, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])) };

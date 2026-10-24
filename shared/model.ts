@@ -399,7 +399,8 @@ export function chaptersOf(course: Course): Record<string, Chapter> {
     if (!inferred[name]) inferred[name] = {
       title: name, description: unit.description || '', required: unit.required !== false,
       threshold: unit.threshold ?? 80, opensAt: unit.opensAt || '', dueAt: unit.dueAt || '',
-      activities: unit.activities || [], research: unit.research,
+      activities: unit.activities || [],
+      ...(unit.research !== undefined ? { research: unit.research } : {}),
     };
   }
   return { ...inferred, ...(course.chapters || {}) };
@@ -422,7 +423,15 @@ export function forClass(course: Course, classId: string): Course {
       const chapter = { ...chapters[chapterName(u)], ...course.chapterOverrides?.[classId]?.[chapterName(u)] };
       // 題目分類一律沿用所屬 Chapter 的必做狀態；班級覆寫也必須同步到 Unit，
       // 因為 1.5.x 的完成度、教師待完成名單與後端儲存仍會讀取 Unit.required。
-      return { ...u, required: chapter.required, threshold: chapter.threshold, opensAt: chapter.opensAt, dueAt: chapter.dueAt, research: chapter.research };
+      // 先移除分類舊設定，避免 Chapter 未設定時回退到舊值；Firestore 不接受 undefined。
+      const { threshold: _threshold, opensAt: _opensAt, dueAt: _dueAt, research: _research, ...rest } = u;
+      return {
+        ...rest, required: chapter.required,
+        ...(chapter.threshold !== undefined ? { threshold: chapter.threshold } : {}),
+        ...(chapter.opensAt !== undefined ? { opensAt: chapter.opensAt } : {}),
+        ...(chapter.dueAt !== undefined ? { dueAt: chapter.dueAt } : {}),
+        ...(chapter.research !== undefined ? { research: chapter.research } : {}),
+      } as Unit;
     }),
   };
 }
