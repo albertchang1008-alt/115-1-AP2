@@ -290,7 +290,8 @@ function mountApplyScripted(config) {
     const skip=document.getElementById('locate-skip');if(skip)skip.onclick=closeGuide;
     const check=document.getElementById('locate-check');if(check)check.onclick=()=> {
       if(!active())return;
-      let wrong=s.cards.map((_,r)=>r).filter(r=>spec.required.includes(r)?m.values[r]!==spec.expected[r]:m.values[r]!==null);
+      // Optional labels may be placed at their own correct spot; only misplaced optional labels or distractors (expected<0) count as wrong.
+      let wrong=s.cards.map((_,r)=>r).filter(r=>spec.required.includes(r)?m.values[r]!==spec.expected[r]:m.values[r]!==null&&m.values[r]>=0&&m.values[r]!==spec.expected[r]);
       if(spec.sequence){const prefix=spec.unorderedPrefix||0;const sequence=m.order.filter(r=>spec.required.includes(r));if(sequence.slice(prefix).some((r,i)=>r!==spec.sequence[prefix+i])||prefix&&new Set(sequence.slice(0,prefix)).size!==prefix)wrong=[...new Set([...wrong,...spec.required])];}
       if(spec.directions)wrong=[...new Set([...wrong,...spec.required.filter(r=>!m.directions[r])])];
       if(wrong.length){c.feedback=[...new Set(wrong.flatMap(r=>s.feedback[r]?.length?s.feedback[r]:failureCopy()))];c.errors=wrong;core.fail('step');save();render();}
