@@ -129,6 +129,21 @@ export async function verifyClassroomReveal(outDir = '') {
       await page.getByLabel('切換檢視角色').selectOption('teacher');
       await shot('teacher-before-reveal');
 
+      // F1 UI Regression: removing answerKeys hides 公佈答案 on unrevealed round; restoring brings it back
+      await teacherPane.getByText('設定答案與解析', { exact: true }).click();
+      const savedAkJson = await akTextarea.inputValue();
+      await akTextarea.fill('{}');
+      await teacherPane.getByRole('button', { name: '保存答案與解析', exact: true }).click();
+      assert.equal(
+        await teacherPane.getByRole('button', { name: '公佈答案', exact: true }).count(),
+        0,
+        '移除答案鍵後，未公佈輪次不可繼續顯示公佈答案按鈕',
+      );
+      await akTextarea.fill(savedAkJson);
+      await teacherPane.getByRole('button', { name: '保存答案與解析', exact: true }).click();
+      await teacherPane.getByText('設定答案與解析', { exact: true }).click();
+      await teacherPane.getByRole('button', { name: '公佈答案', exact: true }).waitFor();
+
       // Teacher clicks 公佈答案
       await teacherPane.getByRole('button', { name: '公佈答案', exact: true }).click();
       await teacherPane.getByRole('button', { name: '已公佈', exact: true }).waitFor();
@@ -137,6 +152,16 @@ export async function verifyClassroomReveal(outDir = '') {
         true,
       );
       await shot('teacher-after-reveal');
+
+      // F1 UI Regression on revealed round: removing answerKeys keeps 已公佈 button and snapshot intact
+      await teacherPane.getByRole('button', { name: '回投影片', exact: true }).click();
+      await teacherPane.getByText('設定答案與解析', { exact: true }).click();
+      await akTextarea.fill('{}');
+      await teacherPane.getByRole('button', { name: '保存答案與解析', exact: true }).click();
+      await teacherPane.getByRole('button', { name: '已公佈', exact: true }).waitFor();
+      await akTextarea.fill(savedAkJson);
+      await teacherPane.getByRole('button', { name: '保存答案與解析', exact: true }).click();
+      await teacherPane.getByText('設定答案與解析', { exact: true }).click();
 
       // Check Student Unanswered after reveal
       await page.getByLabel('切換檢視角色').selectOption('unanswered');
@@ -250,7 +275,76 @@ export async function verifyClassroomReveal(outDir = '') {
       await page.close();
     }
 
-    // 6. If outDir is specified, also verify & screenshot private rehearsal.html & merge-interactions.html
+    // 6. Direct stale hasAnswerKey UI regression test (stale round.hasAnswerKey:true with answerKeys:{})
+    {
+      const staleEntry = `
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { TeacherInteraction } from './src/ClassroomInteraction';
+        const def = {
+          slideId: 'slide37',
+          title: 'Synthetic',
+          fields: [{ id: 'f1', kind: 'choice', label: 'Synthetic field', options: ['A', 'B'] }]
+        };
+        const staleRound = {
+          ...def,
+          id: 'round37',
+          number: 1,
+          status: 'closed',
+          openedAt: 1000,
+          closedAt: 2000,
+          classIds: ['A'],
+          total: 0,
+          counts: {},
+          hasAnswerKey: true
+        };
+        const api = {
+          preview: false,
+          call: async (name) =>
+            name === 'getClassroomConfig'
+              ? { interactions: [def], answerKeys: {} }
+              : name === 'classroomInteractionReport'
+                ? { round: staleRound, activeRound: null, serverNow: Date.now() }
+                : { rows: [] }
+        };
+        createRoot(document.getElementById('root')).render(
+          <TeacherInteraction
+            api={api}
+            course={{ id: 'synthetic', classIds: ['A'], features: { classroomInteraction: true } }}
+            slideId="slide37"
+            black={false}
+            privateRecords
+          />
+        );
+      `;
+      const staleBundle = buildSync({
+        stdin: { contents: staleEntry, loader: 'tsx', resolveDir: process.cwd() },
+        bundle: true,
+        write: false,
+        format: 'iife',
+        platform: 'browser',
+        define: { 'import.meta.env': '{}', 'process.env.NODE_ENV': '"production"' },
+      }).outputFiles[0].text;
+      const stalePage = await browser.newPage({ viewport: { width: 1440, height: 600 } });
+      await stalePage.setContent('<div id="root"></div>');
+      await stalePage.addStyleTag({ content: css });
+      await stalePage.addScriptTag({ content: staleBundle });
+      await stalePage.getByRole('button', { name: '再投一輪', exact: true }).waitFor();
+      assert.equal(
+        await stalePage.getByRole('button', { name: '公佈答案', exact: true }).count(),
+        0,
+        '即使傳入過期 round.hasAnswerKey:true，當 getClassroomConfig.answerKeys 為空時不可顯示公佈答案按鈕',
+      );
+      if (outDir) {
+        await stalePage.screenshot({
+          path: `${outDir}/stale-answer-key-fixed-1440.png`,
+          fullPage: true,
+        });
+      }
+      await stalePage.close();
+    }
+
+    // 7. If outDir is specified, also verify & screenshot private rehearsal.html & merge-interactions.html
     if (outDir) {
       const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
       await page.goto(

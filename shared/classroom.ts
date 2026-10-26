@@ -150,10 +150,39 @@ export function validateAnswerKeys(interactions: Interaction[], input: unknown):
       };
     }
     if (Object.keys(slideOut).length > 0) {
+      if (def.fields.some((f) => !slideOut[f.id]))
+        throw Error(`題目 ${slideId} 缺少欄位答案`);
       out[slideId] = slideOut;
     }
   }
   return out;
+}
+
+export function extractValidSlideKey(
+  def: Pick<Interaction, 'slideId' | 'fields'> | null | undefined,
+  rawKeys: unknown,
+): SlideAnswerKeys | null {
+  if (!def || !rawKeys || typeof rawKeys !== 'object' || Array.isArray(rawKeys)) return null;
+  const obj = rawKeys as Record<string, unknown>;
+  const map =
+    !('slideId' in obj) &&
+    obj.answerKeys &&
+    typeof obj.answerKeys === 'object' &&
+    !Array.isArray(obj.answerKeys)
+      ? (obj.answerKeys as Record<string, unknown>)
+      : obj;
+  const slideVal = map[def.slideId];
+  if (!slideVal || typeof slideVal !== 'object' || Array.isArray(slideVal)) return null;
+  try {
+    const valid = validateAnswerKeys(
+      [{ slideId: def.slideId, title: def.slideId, fields: def.fields }],
+      { [def.slideId]: slideVal },
+    );
+    const key = valid[def.slideId];
+    return key && Object.keys(key).length === def.fields.length ? key : null;
+  } catch {
+    return null;
+  }
 }
 
 export function judgeResponses(

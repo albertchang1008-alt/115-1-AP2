@@ -15,6 +15,7 @@ import {
   studentResultsRound,
   tally,
   validateAnswerKeys,
+  extractValidSlideKey,
   validateInteractions,
   validateResponses,
 } from '../../shared/classroom';
@@ -135,27 +136,20 @@ function makeApi(role: 'teacher' | 'correct' | 'wrong' | 'unanswered') {
         };
       }
       if (name === 'classroomInteractionReport') {
-        const decorate = (r: PollRound | undefined) =>
-          r
-            ? {
-                ...structuredClone(r),
-                hasAnswerKey: Boolean(
-                  configAnswerKeys[r.slideId] && Object.keys(configAnswerKeys[r.slideId]).length,
-                ),
-              }
-            : null;
+        const decorate = (r: PollRound | undefined) => {
+          if (!r) return null;
+          const hasKey = Boolean(r.reveal || extractValidSlideKey(r, configAnswerKeys));
+          const { hasAnswerKey: _drop, ...clean } = r;
+          return {
+            ...structuredClone(clean),
+            ...(hasKey ? { hasAnswerKey: true } : {}),
+          };
+        };
         return {
           round: decorate(round),
           activeRound: decorate(active),
           serverNow: now(),
-          rounds: [...rounds]
-            .reverse()
-            .map((r) => ({
-              ...structuredClone(r),
-              hasAnswerKey: Boolean(
-                configAnswerKeys[r.slideId] && Object.keys(configAnswerKeys[r.slideId]).length,
-              ),
-            })),
+          rounds: [...rounds].reverse().map((r) => decorate(r)!),
         };
       }
       if (name === 'controlClassroomInteraction') {
@@ -175,7 +169,7 @@ function makeApi(role: 'teacher' | 'correct' | 'wrong' | 'unanswered') {
             eligibleCount: 3,
             total: 0,
             counts: {},
-            hasAnswerKey: Boolean(configAnswerKeys[d.slideId]),
+            ...(extractValidSlideKey(def, configAnswerKeys) ? { hasAnswerKey: true } : {}),
             ...(d.durationSeconds ? { deadlineAt: now() + d.durationSeconds * 1000 } : {}),
           };
           rounds.push(next);
@@ -187,7 +181,7 @@ function makeApi(role: 'teacher' | 'correct' | 'wrong' | 'unanswered') {
           round.closedAt = now();
         } else if (d.action === 'reveal') {
           if (round.status !== 'closed') throw Error('請先結束作答再公佈答案');
-          const key = configAnswerKeys[round.slideId];
+          const key = extractValidSlideKey(round, configAnswerKeys);
           if (!key) throw Error('此題尚未設定標準答案');
           if (!round.reveal) {
             round.reveal = {
@@ -196,10 +190,12 @@ function makeApi(role: 'teacher' | 'correct' | 'wrong' | 'unanswered') {
             };
           }
         }
+        const hasKey = Boolean(round.reveal || extractValidSlideKey(round, configAnswerKeys));
+        const { hasAnswerKey: _drop, ...clean } = round;
         return {
           round: {
-            ...structuredClone(round),
-            hasAnswerKey: Boolean(configAnswerKeys[round.slideId]),
+            ...structuredClone(clean),
+            ...(hasKey ? { hasAnswerKey: true } : {}),
           },
           serverNow: now(),
         };

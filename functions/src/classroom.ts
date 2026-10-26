@@ -10,6 +10,7 @@ import {
   StudentHistoryItem,
   validateInteractions,
   validateAnswerKeys,
+  extractValidSlideKey,
   validateResponses,
   judgeResponses,
   tally,
@@ -57,16 +58,14 @@ function extractSlideKey(
 ): SlideAnswerKeys | null {
   const map = extractAnswerKeysMap(data);
   if (!map || !map[def.slideId]) return null;
-  try {
-    const valid = validateAnswerKeys(
-      [{ slideId: def.slideId, title: def.slideId, fields: def.fields }],
-      { [def.slideId]: map[def.slideId] },
-    );
-    const slideKey = valid[def.slideId];
-    return slideKey && Object.keys(slideKey).length > 0 ? slideKey : null;
-  } catch {
-    return null;
-  }
+  return extractValidSlideKey(def, map);
+}
+
+function decorateRoundWithKey(r: PollRound | undefined, keyData: any): PollRound | null {
+  if (!r) return null;
+  const hasKey = Boolean(r.reveal || extractSlideKey(keyData, r));
+  const { hasAnswerKey: _drop, ...clean } = r;
+  return visibleRound(hasKey ? { ...clean, hasAnswerKey: true } : clean);
 }
 
 export function createClassroomHandlers(
@@ -155,6 +154,14 @@ export function createClassroomHandlers(
       }
       if (hasInteractions) {
         await writeConfigDoc(interactionsDoc(req.data.courseId), { interactions }, true);
+        if (!hasAnswerKeys) {
+          const existingKeySnap = await answerKeysDoc(req.data.courseId).get();
+          const existingKeyData = existingKeySnap.data();
+          if (existingKeyData !== undefined) {
+            const prunedKeys = safeFilterAnswerKeys(interactions, existingKeyData);
+            await writeConfigDoc(answerKeysDoc(req.data.courseId), { answerKeys: prunedKeys }, false);
+          }
+        }
       }
       if (hasAnswerKeys && answerKeys !== undefined) {
         await writeConfigDoc(answerKeysDoc(req.data.courseId), { answerKeys }, false);
@@ -203,7 +210,7 @@ export function createClassroomHandlers(
             throw new HttpsError('failed-precondition', '目前互動已變更，請重新確認');
           }
           const keySnap = await tx.get(answerKeysDoc(req.data.courseId));
-          const slideKey = extractSlideKey(keySnap.data(), def);
+          const keyData = keySnap.data();
           const openedAt = now();
           const number = (current?.numbers?.[def.slideId] || 0) + 1;
           const round: PollRound = {
@@ -215,16 +222,18 @@ export function createClassroomHandlers(
             openedAt,
             eligibleCount,
             ...(seconds ? { deadlineAt: openedAt + seconds * 1000 } : {}),
-            ...(slideKey ? { hasAnswerKey: true } : {}),
             total: 0,
             counts: {},
           };
-          if (previous)
+          if (previous) {
+            const { hasAnswerKey: _dropPrev, ...cleanPrev } = previous;
             tx.set(ref(req.data.courseId, previous.id), {
-              ...previous,
+              ...cleanPrev,
+              ...(previous.reveal ? { hasAnswerKey: true } : {}),
               status: 'closed',
               closedAt: openedAt,
             });
+          }
           tx.set(target, round);
           tx.set(state(req.data.courseId), {
             openRoundId: id,
@@ -232,7 +241,7 @@ export function createClassroomHandlers(
             numbers: { ...(current?.numbers || {}), [def.slideId]: number },
             latestBySlide: { ...(current?.latestBySlide || {}), [def.slideId]: id },
           });
-          return { round, serverNow: now() };
+          return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
         });
       }
       const target = ref(req.data.courseId, req.data.roundId);
@@ -240,8 +249,9 @@ export function createClassroomHandlers(
         const current = (await tx.get(state(req.data.courseId))).data();
         const round = (await tx.get(target)).data() as PollRound | undefined;
         const keySnap = await tx.get(answerKeysDoc(req.data.courseId));
+        const keyData = keySnap.data();
         if (!round) throw new HttpsError('not-found', '互動不存在');
-        const slideKey = extractSlideKey(keySnap.data(), round);
+        const slideKey = extractSlideKey(keyData, round);
         if (action === 'extend') {
           if (
             round.status !== 'open' ||
@@ -255,7 +265,7 @@ export function createClassroomHandlers(
           if (round.status !== 'closed')
             throw new HttpsError('failed-precondition', '請先結束作答再公佈答案');
           if (round.reveal) {
-            return { round: visibleRound(round), serverNow: now() };
+            return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
           }
           if (!slideKey)
             throw new HttpsError('failed-precondition', '此題尚未設定答案與解析');
@@ -265,18 +275,21 @@ export function createClassroomHandlers(
           };
           round.hasAnswerKey = true;
           tx.set(target, round);
-          return { round: visibleRound(round), serverNow: now() };
+          return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
+        }
+        if (!round.reveal && 'hasAnswerKey' in round) {
+          delete round.hasAnswerKey;
         }
         if (action === 'close') {
-          if (slideKey) round.hasAnswerKey = true;
-          if (round.status === 'closed') return { round: visibleRound(round), serverNow: now() };
+          if (round.status === 'closed')
+            return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
           round.status = 'closed';
           round.closedAt = now();
           if (current?.openRoundId === round.id)
             tx.set(state(req.data.courseId), { ...current, openRoundId: '' });
         }
         tx.set(target, round);
-        return { round: visibleRound(round), serverNow: now() };
+        return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
       });
     }),
     getClassroomInteraction: onCall(options, async (req) => {
@@ -313,7 +326,9 @@ export function createClassroomHandlers(
     studentClassroomHistory: onCall(options, async (req) => {
       const { p } = await authorize(req);
       if (p.teacher) throw new HttpsError('permission-denied', '此入口供學生使用');
-      const snap = await rounds(req.data.courseId).orderBy('openedAt', 'desc').limit(100).get();
+      const snap = await rounds(req.data.courseId)
+        .where('classIds', 'array-contains', p.classId)
+        .get();
       const revealedDocs = snap.docs.filter((d) => {
         const r = d.data() as PollRound;
         return r.classIds?.includes(p.classId) && r.status === 'closed' && Boolean(r.reveal);
@@ -342,7 +357,7 @@ export function createClassroomHandlers(
           };
         }),
       );
-      items.sort((a, b) => a.openedAt - b.openedAt);
+      items.sort((a, b) => a.openedAt - b.openedAt || a.id.localeCompare(b.id));
       return { rounds: items, serverNow: now() };
     }),
     submitClassroomInteraction: onCall(options, async (req) => {
@@ -387,11 +402,8 @@ export function createClassroomHandlers(
       ]);
       const current = currentSnap.data();
       const keyData = keySnap.data();
-      const decorate = (r: PollRound | undefined): PollRound | null => {
-        if (!r) return null;
-        const hasKey = Boolean(r.reveal || r.hasAnswerKey || extractSlideKey(keyData, r));
-        return visibleRound(hasKey ? { ...r, hasAnswerKey: true } : r);
-      };
+      const decorate = (r: PollRound | undefined): PollRound | null =>
+        decorateRoundWithKey(r, keyData);
       const active = current?.openRoundId
         ? ((await ref(req.data.courseId, current.openRoundId).get()).data() as PollRound)
         : undefined;
@@ -420,7 +432,7 @@ export function createClassroomHandlers(
         result.rounds = list.docs.map((d) => {
           const r = d.data() as PollRound;
           const { id, title, slideId, number, status, classIds, total, reveal } = r;
-          const hasKey = Boolean(reveal || r.hasAnswerKey || extractSlideKey(keyData, r));
+          const hasKey = Boolean(reveal || extractSlideKey(keyData, r));
           return {
             id,
             title,

@@ -12,7 +12,14 @@ function setup() {
   });
   const collection = (path, filter) => ({
     where: (field, op, value) =>
-      collection(path, (row) => (!filter || filter(row)) && row[field] === value),
+      collection(
+        path,
+        (row) =>
+          (!filter || filter(row)) &&
+          (op === 'array-contains'
+            ? Array.isArray(row?.[field]) && row[field].includes(value)
+            : row?.[field] === value),
+      ),
     doc: (id) => ref(path + '/' + id),
     orderBy: () => ({
       limit: () => ({
@@ -555,6 +562,130 @@ test('公佈答案（reveal）：公佈前不洩漏答案、open狀態拒絕reve
   // Cross-class isolation: Class B student sees 0 rounds from Class A
   const hClassB = await call('studentClassroomHistory', {}, { ...student(9), classId: 'B' });
   assert.deepEqual(hClassB.rounds, []);
+
+  // 7. F1 Regression: removing or invalidating answerKeys clears hasAnswerKey on unrevealed round while keeping revealed snapshots
+  setClock(420000);
+  const { round: r4 } = await call('controlClassroomInteraction', {
+    action: 'open',
+    slideId: 'c1-predict',
+    classIds: ['A'],
+  });
+  assert.equal(r4.hasAnswerKey, true);
+  setClock(430000);
+  const closedR4 = await call('controlClassroomInteraction', {
+    action: 'close',
+    roundId: r4.id,
+  });
+  assert.equal(closedR4.round.hasAnswerKey, true);
+
+  // Remove answerKeys -> unrevealed r4 must no longer report hasAnswerKey, while revealed r1 keeps its snapshot
+  await call('saveClassroomConfig', { answerKeys: {} });
+  const repAfterClear = await call('classroomInteractionReport', {
+    roundId: r4.id,
+    history: true,
+  });
+  assert.equal(repAfterClear.round.hasAnswerKey, undefined);
+  const r4InHist = repAfterClear.rounds.find((x) => x.id === r4.id);
+  assert.equal(r4InHist.hasAnswerKey, undefined);
+  const r1InHist = repAfterClear.rounds.find((x) => x.id === r1.id);
+  assert.equal(r1InHist.hasAnswerKey, true);
+  assert.equal(r1InHist.reveal.key[fid].answer, correctChoice);
+  await assert.rejects(
+    call('controlClassroomInteraction', { action: 'reveal', roundId: r4.id }),
+    /尚未設定答案/,
+  );
+
+  // Re-save valid answerKey -> unrevealed r4 gets hasAnswerKey: true back
+  await call('saveClassroomConfig', {
+    answerKeys: {
+      'c1-predict': { [fid]: { answer: correctChoice, explanation: '重新設定之合法解析' } },
+    },
+  });
+  const repAfterRestore = await call('classroomInteractionReport', { roundId: r4.id });
+  assert.equal(repAfterRestore.round.hasAnswerKey, true);
+
+  // Invalidate answerKey by modifying c1-predict options in interactions -> r4 loses hasAnswerKey
+  const mutatedInteractions = structuredClone(interactions);
+  const mutPredict = mutatedInteractions.find((d) => d.slideId === 'c1-predict');
+  mutPredict.fields[0].options = ['全新選項甲', '全新選項乙'];
+  await call('saveClassroomConfig', { interactions: mutatedInteractions });
+  const cfgAfterMutate = await call('getClassroomConfig', { includeAnswerKeys: true });
+  assert.deepEqual(cfgAfterMutate.answerKeys, {});
+  const repAfterMutate = await call('classroomInteractionReport', { roundId: r4.id });
+  assert.equal(repAfterMutate.round.hasAnswerKey, undefined);
+
+  // Restore original interactions + valid answerKey -> r4 can now be revealed, and r1 snapshot is still untouched
+  await call('saveClassroomConfig', {
+    interactions,
+    answerKeys: {
+      'c1-predict': { [fid]: { answer: correctChoice, explanation: '恢復後解析' } },
+    },
+  });
+  const repAfterRevalid = await call('classroomInteractionReport', { roundId: r4.id });
+  assert.equal(repAfterRevalid.round.hasAnswerKey, true);
+  setClock(440000);
+  const revealedR4 = await call('controlClassroomInteraction', {
+    action: 'reveal',
+    roundId: r4.id,
+  });
+  assert.equal(revealedR4.round.reveal.key[fid].explanation, '恢復後解析');
+  const repR1StillImmutable = await call('classroomInteractionReport', { roundId: r1.id });
+  assert.equal(repR1StillImmutable.round.reveal.key[fid].explanation, '此為單選題原始解析句子。');
+
+  // 8. F2 Regression: 100+ newer Class B rounds must not evict Class A history; Class A > 100 rounds all returned in order
+  for (let i = 0; i < 105; i++) {
+    const bId = `b-round-${i}`;
+    docs.set(`courses/${MI_CLASSROOM_COURSE}/classroomRounds/${bId}`, {
+      ...c1Predict,
+      id: bId,
+      number: i + 1,
+      classIds: ['B'],
+      status: 'closed',
+      openedAt: 500000 + i,
+      closedAt: 500000 + i,
+      total: 0,
+      counts: {},
+      hasAnswerKey: true,
+      reveal: {
+        revealedAt: 500000 + i,
+        key: { [fid]: { answer: correctChoice } },
+      },
+    });
+  }
+  const h1After105ClassB = await call('studentClassroomHistory', {}, student(1));
+  assert.deepEqual(
+    h1After105ClassB.rounds.map((r) => r.id),
+    [r1.id, r2.id, r4.id],
+    '其他班級新增超過 100 輪不得擠掉本班已公佈紀錄',
+  );
+
+  for (let i = 0; i < 105; i++) {
+    const aId = `a-extra-${String(i).padStart(3, '0')}`;
+    docs.set(`courses/${MI_CLASSROOM_COURSE}/classroomRounds/${aId}`, {
+      ...c1Predict,
+      id: aId,
+      number: i + 10,
+      classIds: ['A'],
+      status: 'closed',
+      openedAt: 700000 + i,
+      closedAt: 700000 + i,
+      total: 1,
+      counts: {},
+      hasAnswerKey: true,
+      reveal: {
+        revealedAt: 700000 + i,
+        key: { [fid]: { answer: correctChoice } },
+      },
+    });
+  }
+  const h1Over100Own = await call('studentClassroomHistory', {}, student(1));
+  assert.equal(h1Over100Own.rounds.length, 108, '本班超過 100 輪已公佈紀錄應完整回傳');
+  for (let i = 1; i < h1Over100Own.rounds.length; i++) {
+    assert(
+      h1Over100Own.rounds[i].openedAt >= h1Over100Own.rounds[i - 1].openedAt,
+      '紀錄必須維持時間升冪排序',
+    );
+  }
 
   // No writes outside classroom paths
   assert([...docs.keys()].every((p) => p.includes('/classroom') || p.startsWith('enrollments/')));

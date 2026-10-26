@@ -14,6 +14,7 @@ import {
   StudentHistoryItem,
   validateInteractions,
   validateAnswerKeys,
+  extractValidSlideKey,
   validateResponses,
   judgeResponses,
   interactionSeconds,
@@ -668,7 +669,8 @@ export function TeacherInteraction({
   privateRecords?: boolean;
 }) {
   const [interactions, setInteractions] = useState<import('../shared/classroom').Interaction[]>([]);
-  const [answerKeys, setAnswerKeys] = useState<AnswerKeys>({});
+  const [answerKeys, setAnswerKeys] = useState<AnswerKeys | null>(null);
+  const [state, setState] = useState<TeacherState>({ round: null, activeRound: null });
   useEffect(() => {
     let alive = true;
     if (featureEnabled(course, 'classroomInteraction') && !api.preview)
@@ -680,16 +682,15 @@ export function TeacherInteraction({
         .then((r) => {
           if (alive) {
             setInteractions(r.interactions);
-            if (r.answerKeys) setAnswerKeys(r.answerKeys);
+            setAnswerKeys(r.answerKeys !== undefined ? r.answerKeys : null);
           }
         })
         .catch(() => {});
     return () => {
       alive = false;
     };
-  }, [api, course.id]);
+  }, [api, course.id, slideId, state.round?.hasAnswerKey]);
   const def = interactions.find((d) => d.slideId === slideId);
-  const [state, setState] = useState<TeacherState>({ round: null, activeRound: null });
   const [history, setHistory] = useState<PollRound[]>([]),
     [selected, setSelected] = useState('');
   const [classes, setClasses] = useState<string[]>(course.classIds);
@@ -715,11 +716,16 @@ export function TeacherInteraction({
   const pageRound = round?.slideId === slideId ? round : null;
   const pageOpen = activeRound?.slideId === slideId;
   const expired = !!activeRound && interactionExpired(activeRound, now);
+  const configHasValidKey =
+    pageRound && answerKeys !== null
+      ? Boolean(extractValidSlideKey(pageRound, answerKeys))
+      : false;
   const pageHasAnswerKey = Boolean(
     pageRound &&
       (pageRound.reveal ||
-        pageRound.hasAnswerKey ||
-        (answerKeys[pageRound.slideId] && Object.keys(answerKeys[pageRound.slideId]).length > 0)),
+        (answerKeys !== null
+          ? configHasValidKey && Boolean(pageRound.hasAnswerKey)
+          : Boolean(pageRound.hasAnswerKey))),
   );
   useEffect(() => {
     const root = controls.current,

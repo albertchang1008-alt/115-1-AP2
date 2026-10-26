@@ -347,7 +347,139 @@ async function main() {
   });
   assert.deepEqual(histOtherClass.rounds, []);
 
-  // 9. Check teacher classroomInteractionRecords & invariants
+  // 9. F1 Regression on Emulator: remove/invalidate answerKey on unrevealed round3 vs already-revealed round1
+  const opened3 = await handlers.controlClassroomInteraction.run({
+    auth: teacherAuth,
+    data: { courseId, action: 'open', slideId: 'R-REV-04', classIds: ['A'], durationSeconds: 60 },
+  });
+  const round3Id = opened3.round.id;
+  await handlers.controlClassroomInteraction.run({
+    auth: teacherAuth,
+    data: { courseId, action: 'close', roundId: round3Id },
+  });
+  await handlers.saveClassroomConfig.run({
+    auth: teacherAuth,
+    data: { courseId, answerKeys: {} },
+  });
+  const repAfterClear = await handlers.classroomInteractionReport.run({
+    auth: teacherAuth,
+    data: { courseId, roundId: round3Id, history: true },
+  });
+  assert.equal(
+    repAfterClear.round.hasAnswerKey,
+    undefined,
+    '移除答案鍵後，未公佈輪次不可繼續回傳 hasAnswerKey: true',
+  );
+  const r1InHist = repAfterClear.rounds.find((x) => x.id === round1Id);
+  assert.equal(r1InHist.hasAnswerKey, true, '已公佈輪次仍保留 hasAnswerKey 與 reveal 快照');
+  assert.equal(r1InHist.reveal.key.f1.explanation, answerKeys['R-REV-04'].f1.explanation);
+  await assert.rejects(
+    handlers.controlClassroomInteraction.run({
+      auth: teacherAuth,
+      data: { courseId, action: 'reveal', roundId: round3Id },
+    }),
+    /尚未設定答案/,
+  );
+
+  // Restore valid answerKeys -> round3 regains hasAnswerKey: true
+  await handlers.saveClassroomConfig.run({
+    auth: teacherAuth,
+    data: { courseId, answerKeys },
+  });
+  const repAfterRestore = await handlers.classroomInteractionReport.run({
+    auth: teacherAuth,
+    data: { courseId, roundId: round3Id },
+  });
+  assert.equal(repAfterRestore.round.hasAnswerKey, true);
+
+  // Invalidate answerKey by changing R-REV-04 options in interactions -> round3 loses hasAnswerKey
+  const invalidatingInteractions = structuredClone(interactions);
+  invalidatingInteractions[0].fields[0].options = ['選項甲', '選項乙'];
+  await handlers.saveClassroomConfig.run({
+    auth: teacherAuth,
+    data: { courseId, interactions: invalidatingInteractions },
+  });
+  const repAfterInvalid = await handlers.classroomInteractionReport.run({
+    auth: teacherAuth,
+    data: { courseId, roundId: round3Id },
+  });
+  assert.equal(
+    repAfterInvalid.round.hasAnswerKey,
+    undefined,
+    '修改題目選項使舊答案鍵失效後，未公佈輪次不可繼續顯示 hasAnswerKey: true',
+  );
+
+  // Restore valid interactions & answerKeys, then reveal round3
+  await handlers.saveClassroomConfig.run({
+    auth: teacherAuth,
+    data: { courseId, interactions, answerKeys },
+  });
+  await handlers.controlClassroomInteraction.run({
+    auth: teacherAuth,
+    data: { courseId, action: 'reveal', roundId: round3Id },
+  });
+
+  // 10. F2 Regression on Emulator: 105 newer Class B rounds & >100 Class A rounds
+  const batchB = db.batch();
+  const baseTime = Date.now() + 100000;
+  for (let i = 0; i < 105; i++) {
+    const bId = `emu-class-b-${String(i).padStart(3, '0')}`;
+    batchB.set(db.doc(`courses/${courseId}/classroomRounds/${bId}`), {
+      ...opened1.round,
+      id: bId,
+      classIds: ['B'],
+      status: 'closed',
+      openedAt: baseTime + i,
+      closedAt: baseTime + i,
+      hasAnswerKey: true,
+      reveal: {
+        revealedAt: baseTime + i,
+        key: answerKeys['R-REV-04'],
+      },
+    });
+  }
+  await batchB.commit();
+
+  const histAfter105B = await handlers.studentClassroomHistory.run({
+    auth: studentCorrectAuth,
+    data: { courseId },
+  });
+  assert.equal(
+    histAfter105B.rounds.length,
+    3,
+    '別班新增 105 輪較新紀錄後，本班 3 輪已公佈紀錄不可消失',
+  );
+  assert.deepEqual(
+    histAfter105B.rounds.map((r) => r.id),
+    [round1Id, round2Id, round3Id],
+  );
+
+  const batchA = db.batch();
+  for (let i = 0; i < 105; i++) {
+    const aId = `emu-class-a-${String(i).padStart(3, '0')}`;
+    batchA.set(db.doc(`courses/${courseId}/classroomRounds/${aId}`), {
+      ...opened1.round,
+      id: aId,
+      classIds: ['A'],
+      status: 'closed',
+      openedAt: baseTime + 5000 + i,
+      closedAt: baseTime + 5000 + i,
+      hasAnswerKey: true,
+      reveal: {
+        revealedAt: baseTime + 5000 + i,
+        key: answerKeys['R-REV-04'],
+      },
+    });
+  }
+  await batchA.commit();
+
+  const histOver100A = await handlers.studentClassroomHistory.run({
+    auth: studentCorrectAuth,
+    data: { courseId },
+  });
+  assert.equal(histOver100A.rounds.length, 108, '本班超過 100 輪已公佈紀錄應完整取得');
+
+  // 11. Check teacher classroomInteractionRecords & invariants
   const records = await handlers.classroomInteractionRecords.run({
     auth: teacherAuth,
     data: { courseId, roundId: round1Id },
@@ -361,7 +493,7 @@ async function main() {
     verifiedAt: new Date().toISOString(),
     emulatorHost: process.env.FIRESTORE_EMULATOR_HOST,
     courseId,
-    roundsTested: [round1Id, round2Id],
+    roundsTested: [round1Id, round2Id, round3Id],
     checks: {
       saveAndLoadAnswerKeys: 'PASS',
       rejectRevealWhenOpen: 'PASS',
@@ -369,6 +501,8 @@ async function main() {
       noLeakWhenClosedBeforeReveal: 'PASS',
       revealIdempotent: 'PASS',
       revealSnapshotImmutableAfterConfigEdit: 'PASS',
+      f1UnrevealedKeyRemovedOrInvalidatedHidesReveal: 'PASS',
+      f2HistoryNotEvictedBy105OtherClassAndSupportsOver100OwnClass: 'PASS',
       studentFeedbackCorrectWrongUnanswered: 'PASS',
       orderStepByStepJudgement: 'PASS',
       studentClassroomHistoryChronologicalAndIsolated: 'PASS',

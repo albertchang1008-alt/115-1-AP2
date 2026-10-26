@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {
   validateResponses,
   validateAnswerKeys,
+  extractValidSlideKey,
   judgeResponses,
   tally,
   PollRound,
@@ -175,6 +176,32 @@ test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且
   const oPartial = judgeResponses(r07, r07Key, { f1: partialOrder });
   assert.equal(oPartial.allCorrect, false);
   assert.deepEqual(oPartial.fields.f1.stepCorrect, [true, false, false, true]);
+
+  // extractValidSlideKey checks removed, invalidated, or incomplete field keys
+  assert.deepEqual(extractValidSlideKey(r04, valid), r04Key);
+  assert.equal(extractValidSlideKey(r04, {}), null);
+  assert.equal(
+    extractValidSlideKey(r04, { 'R-REV-04': { f1: { answer: '不存在的選項' } } }),
+    null,
+  );
+  const multiFieldSlide = {
+    slideId: 'MULTI',
+    title: '多欄位',
+    fields: [
+      { id: 'f1', label: '欄位1', kind: 'choice' as const, options: ['A', 'B'] },
+      { id: 'f2', label: '欄位2', kind: 'choice' as const, options: ['X', 'Y'] },
+    ],
+  };
+  assert.equal(
+    extractValidSlideKey(multiFieldSlide, { MULTI: { f1: { answer: 'A' } } }),
+    null,
+  );
+  assert.deepEqual(
+    extractValidSlideKey(multiFieldSlide, {
+      MULTI: { f1: { answer: 'A' }, f2: { answer: 'Y' } },
+    }),
+    { f1: { answer: 'A' }, f2: { answer: 'Y' } },
+  );
 });
 
 test('UI 驗收：公佈答案前後教師按鈕、學生三態與排序逐步 ✓/✗、課堂互動紀錄、1440/390 無溢位', async () => {
