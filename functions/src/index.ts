@@ -1534,6 +1534,6 @@ export const { getAssessments, prepareAssessment, controlAssessment, startAssess
 
 export const { getTeachingDeck, getClassroomCourse } = createTeachingHandlers(db, access, options);
 
-export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);
+export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, studentClassroomHistory, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);
 
 export const { listManagedCourses, getCourseDraft, getCompletionSummary, patchCourseDraft } = createPlatformHandlers(db, identity, access, rosterQuery, validateDraft, checkRevision, options);

@@ -4,12 +4,16 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   validateResponses,
+  validateAnswerKeys,
+  judgeResponses,
   tally,
   PollRound,
   interactionSeconds,
   interactionExpired,
   interactionTimeLabel,
 } from '../shared/classroom';
+import fs from 'node:fs';
+import { verifyClassroomReveal } from '../scripts/classroom-reveal-verify.mjs';
 test('12頁全部選項式，拒絕自由文字與重複排序，沒有答案鍵', () => {
   assert.equal(interactions.length, 12);
   assert.equal(new Set(interactions.map((d) => d.slideId)).size, 12);
@@ -88,3 +92,94 @@ test('倒數顯示到零就停、舊資料顯示已開時間，格式與10秒界
   assert.equal(interactionExpired({}, 99999), false);
   assert.equal(interactionTimeLabel(61), '1:01');
 });
+
+test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且對齊複習課 8 題答案鍵', () => {
+  const reviewInteractions = JSON.parse(
+    fs.readFileSync('/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-all.interactions.json', 'utf8'),
+  );
+  const reviewAnswerKeys = JSON.parse(
+    fs.readFileSync('/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-all.answerKeys.json', 'utf8'),
+  );
+  const valid = validateAnswerKeys(reviewInteractions, reviewAnswerKeys);
+  assert.equal(Object.keys(valid).length, 8);
+  assert(!JSON.stringify(valid).includes('undefined'));
+
+  // Reject unknown slideId or fieldId
+  assert.throws(
+    () => validateAnswerKeys(reviewInteractions, { 'NO-SUCH-SLIDE': { f1: { answer: 'x' } } }),
+    /找不到互動題目/,
+  );
+  assert.throws(
+    () => validateAnswerKeys(reviewInteractions, { 'R-REV-04': { badField: { answer: 'x' } } }),
+    /找不到欄位/,
+  );
+  // Reject invalid choice answer
+  assert.throws(
+    () => validateAnswerKeys(reviewInteractions, { 'R-REV-04': { f1: { answer: '不存在的選項' } } }),
+    /正解必須是該題 options 之一/,
+  );
+  // Reject incomplete or duplicate order answer
+  const r07Opts = reviewInteractions.find((d: any) => d.slideId === 'R-REV-07').fields[0].options;
+  assert.throws(
+    () => validateAnswerKeys(reviewInteractions, { 'R-REV-07': { f1: { answer: r07Opts.slice(0, 3) } } }),
+    /完整排列/,
+  );
+  assert.throws(
+    () =>
+      validateAnswerKeys(reviewInteractions, {
+        'R-REV-07': { f1: { answer: [r07Opts[0], r07Opts[0], r07Opts[1], r07Opts[2]] } },
+      }),
+    /完整排列/,
+  );
+  // Reject explanation > 300 chars
+  assert.throws(
+    () =>
+      validateAnswerKeys(reviewInteractions, {
+        'R-REV-04': {
+          f1: {
+            answer: reviewInteractions[0].fields[0].options[1],
+            explanation: '字'.repeat(301),
+          },
+        },
+      }),
+    /不可超過 300 字/,
+  );
+
+  // judgeResponses for choice and order (correct, wrong, partial steps, unanswered)
+  const r04 = reviewInteractions.find((d: any) => d.slideId === 'R-REV-04');
+  const r04Key = valid['R-REV-04'];
+  const cRight = judgeResponses(r04, r04Key, { f1: r04Key.f1.answer });
+  assert.equal(cRight.answered, true);
+  assert.equal(cRight.allCorrect, true);
+  assert.equal(cRight.fields.f1.correct, true);
+
+  const cWrong = judgeResponses(r04, r04Key, { f1: r04.fields[0].options[0] });
+  assert.equal(cWrong.answered, true);
+  assert.equal(cWrong.allCorrect, false);
+  assert.equal(cWrong.fields.f1.correct, false);
+
+  const cNone = judgeResponses(r04, r04Key, null);
+  assert.equal(cNone.answered, false);
+  assert.equal(cNone.allCorrect, false);
+  assert.equal(cNone.fields.f1.correct, false);
+  assert.equal('actual' in cNone.fields.f1, false);
+
+  const r07 = reviewInteractions.find((d: any) => d.slideId === 'R-REV-07');
+  const r07Key = valid['R-REV-07'];
+  const expectedOrder = r07Key.f1.answer as string[];
+  const oRight = judgeResponses(r07, r07Key, { f1: expectedOrder });
+  assert.equal(oRight.allCorrect, true);
+  assert.deepEqual(oRight.fields.f1.stepCorrect, [true, true, true, true]);
+
+  const partialOrder = [expectedOrder[0], expectedOrder[2], expectedOrder[1], expectedOrder[3]];
+  const oPartial = judgeResponses(r07, r07Key, { f1: partialOrder });
+  assert.equal(oPartial.allCorrect, false);
+  assert.deepEqual(oPartial.fields.f1.stepCorrect, [true, false, false, true]);
+});
+
+test('UI 驗收：公佈答案前後教師按鈕、學生三態與排序逐步 ✓/✗、課堂互動紀錄、1440/390 無溢位', async () => {
+  const res = await verifyClassroomReveal();
+  assert.equal(res.length, 2);
+  assert.equal(res.every((r) => r.passed), true);
+});
+

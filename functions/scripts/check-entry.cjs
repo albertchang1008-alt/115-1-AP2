@@ -5,7 +5,7 @@ process.env.FIREBASE_CONFIG = JSON.stringify({
 const handlers = require('../lib/functions/src/index.js');
 const expected = [
   'listManagedCourses', 'getCourseDraft', 'getCompletionSummary', 'patchCourseDraft',
-  'getClassroomConfig', 'saveClassroomConfig', 'controlClassroomInteraction', 'getClassroomInteraction', 'submitClassroomInteraction', 'classroomInteractionReport', 'classroomInteractionRecords',
+  'getClassroomConfig', 'saveClassroomConfig', 'controlClassroomInteraction', 'getClassroomInteraction', 'studentClassroomHistory', 'submitClassroomInteraction', 'classroomInteractionReport', 'classroomInteractionRecords',
   'getTeachingDeck', 'getClassroomCourse',
   'getAssessments','prepareAssessment','controlAssessment','startAssessment','saveAssessment','previewAssessment','assessmentReport','expireAssessments',
   'bootstrap',

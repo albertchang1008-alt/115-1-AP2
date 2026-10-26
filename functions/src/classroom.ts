@@ -3,13 +3,72 @@ import { randomUUID } from 'node:crypto';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { Firestore } from 'firebase-admin/firestore';
 import {
+  AnswerKeys,
+  Interaction,
   PollRound,
+  SlideAnswerKeys,
+  StudentHistoryItem,
   validateInteractions,
+  validateAnswerKeys,
   validateResponses,
+  judgeResponses,
   tally,
   visibleRound,
+  studentPromptRound,
+  studentResultsRound,
   classroomDurations,
 } from '../../shared/classroom';
+
+function extractAnswerKeysMap(data: any): Record<string, any> | undefined {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return undefined;
+  const raw =
+    data.answerKeys && typeof data.answerKeys === 'object' && !Array.isArray(data.answerKeys)
+      ? data.answerKeys
+      : data;
+  const copy: Record<string, any> = {};
+  for (const [k, v] of Object.entries(raw)) {
+    if (k === 'updatedAt' || k === 'updatedBy') continue;
+    if (v && typeof v === 'object' && !Array.isArray(v)) copy[k] = v;
+  }
+  return copy;
+}
+
+function safeFilterAnswerKeys(interactions: Interaction[], data: any): AnswerKeys {
+  const map = extractAnswerKeysMap(data);
+  if (!map) return {};
+  const bySlide = new Map(interactions.map((d) => [d.slideId, d]));
+  const filtered: AnswerKeys = {};
+  for (const [slideId, slideVal] of Object.entries(map)) {
+    const def = bySlide.get(slideId);
+    if (!def || !slideVal || typeof slideVal !== 'object' || Array.isArray(slideVal)) continue;
+    try {
+      const valid = validateAnswerKeys([def], { [slideId]: slideVal });
+      if (valid[slideId]) filtered[slideId] = valid[slideId];
+    } catch {
+      // Ignore orphaned keys if interaction options were edited after keys were saved
+    }
+  }
+  return filtered;
+}
+
+function extractSlideKey(
+  data: any,
+  def: Pick<Interaction, 'slideId' | 'fields'>,
+): SlideAnswerKeys | null {
+  const map = extractAnswerKeysMap(data);
+  if (!map || !map[def.slideId]) return null;
+  try {
+    const valid = validateAnswerKeys(
+      [{ slideId: def.slideId, title: def.slideId, fields: def.fields }],
+      { [def.slideId]: map[def.slideId] },
+    );
+    const slideKey = valid[def.slideId];
+    return slideKey && Object.keys(slideKey).length > 0 ? slideKey : null;
+  } catch {
+    return null;
+  }
+}
+
 export function createClassroomHandlers(
   db: Firestore,
   access: (req: any, id: string, teacher?: boolean) => Promise<any>,
@@ -22,10 +81,24 @@ export function createClassroomHandlers(
   };
   const state = (courseId: string) => db.doc(`courses/${courseId}/classroomState/current`);
   const rounds = (courseId: string) => db.collection(`courses/${courseId}/classroomRounds`);
+  const interactionsDoc = (courseId: string) =>
+    db.doc(`courses/${courseId}/classroomConfig/interactions`);
+  const answerKeysDoc = (courseId: string) =>
+    db.doc(`courses/${courseId}/classroomConfig/answerKeys`);
   const ref = (courseId: string, id: unknown) => {
     if (typeof id !== 'string' || !/^[a-zA-Z0-9-]{1,80}$/.test(id))
       throw new HttpsError('invalid-argument', '互動場次無效');
     return rounds(courseId).doc(id);
+  };
+  const writeConfigDoc = async (docRef: any, value: Record<string, unknown>, merge = true) => {
+    if (typeof docRef.set === 'function') {
+      await docRef.set(value, merge ? { merge: true } : undefined);
+    } else {
+      await (db as any).runTransaction(async (tx: any) => {
+        const old = merge ? (await tx.get(docRef)).data() || {} : {};
+        tx.set(docRef, { ...old, ...value });
+      });
+    }
   };
   const rosterCount = async (courseId: string, c: any, classes: string[]) => {
     const roster =
@@ -38,26 +111,67 @@ export function createClassroomHandlers(
     }).length;
   };
   return {
-    getClassroomConfig: onCall(options, async req => {
+    getClassroomConfig: onCall(options, async (req) => {
       await authorize(req, true);
-      const config = (await db.doc(`courses/${req.data.courseId}/classroomConfig/interactions`).get()).data();
-      return { interactions: validateInteractions(config?.interactions || []) };
+      const [configSnap, keySnap] = await Promise.all([
+        interactionsDoc(req.data.courseId).get(),
+        answerKeysDoc(req.data.courseId).get(),
+      ]);
+      const config = configSnap.data();
+      const interactions = validateInteractions(config?.interactions || []);
+      const rawKeyData = keySnap.data();
+      if (rawKeyData !== undefined || req.data?.includeAnswerKeys) {
+        return {
+          interactions,
+          answerKeys: safeFilterAnswerKeys(interactions, rawKeyData),
+        };
+      }
+      return { interactions };
     }),
-    saveClassroomConfig: onCall(options, async req => {
+    saveClassroomConfig: onCall(options, async (req) => {
       await authorize(req, true);
-      let interactions;
-      try { interactions = validateInteractions(req.data.interactions); }
-      catch (e) { throw new HttpsError('invalid-argument', (e as Error).message); }
-      await db.doc(`courses/${req.data.courseId}/classroomConfig/interactions`).set({ interactions }, { merge: true });
-      return { ok: true };
+      const hasInteractions = req.data.interactions !== undefined;
+      const hasAnswerKeys = req.data.answerKeys !== undefined;
+      if (!hasInteractions && !hasAnswerKeys)
+        throw new HttpsError('invalid-argument', '請提供互動題目或答案設定');
+      let interactions: Interaction[];
+      try {
+        if (hasInteractions) {
+          interactions = validateInteractions(req.data.interactions);
+        } else {
+          const config = (await interactionsDoc(req.data.courseId).get()).data();
+          interactions = validateInteractions(config?.interactions || []);
+        }
+      } catch (e) {
+        throw new HttpsError('invalid-argument', (e as Error).message);
+      }
+      let answerKeys: AnswerKeys | undefined;
+      if (hasAnswerKeys) {
+        try {
+          answerKeys = validateAnswerKeys(interactions, req.data.answerKeys);
+        } catch (e) {
+          throw new HttpsError('invalid-argument', (e as Error).message);
+        }
+      }
+      if (hasInteractions) {
+        await writeConfigDoc(interactionsDoc(req.data.courseId), { interactions }, true);
+      }
+      if (hasAnswerKeys && answerKeys !== undefined) {
+        await writeConfigDoc(answerKeysDoc(req.data.courseId), { answerKeys }, false);
+      }
+      return {
+        ok: true,
+        interactions,
+        ...(answerKeys !== undefined ? { answerKeys } : {}),
+      };
     }),
     controlClassroomInteraction: onCall(options, async (req) => {
       const { c } = await authorize(req, true);
       const { action } = req.data;
-      if (!['open', 'close', 'extend'].includes(action))
+      if (!['open', 'close', 'extend', 'reveal'].includes(action))
         throw new HttpsError('invalid-argument', '操作無效');
       if (action === 'open') {
-        const config = (await db.doc(`courses/${req.data.courseId}/classroomConfig/interactions`).get()).data();
+        const config = (await interactionsDoc(req.data.courseId).get()).data();
         const definitions = validateInteractions(config?.interactions || []);
         const def = definitions.find((q) => q.slideId === req.data.slideId);
         const classes = req.data.classIds;
@@ -80,12 +194,16 @@ export function createClassroomHandlers(
           if (current?.openRoundId) {
             if (req.data.replaceRoundId !== current.openRoundId)
               throw new HttpsError('failed-precondition', '目前互動已變更，請重新確認');
-            previous = (await tx.get(ref(req.data.courseId, current.openRoundId))).data() as PollRound;
+            previous = (
+              await tx.get(ref(req.data.courseId, current.openRoundId))
+            ).data() as PollRound;
             if (!previous || previous.status !== 'open')
               throw new HttpsError('failed-precondition', '目前互動已變更，請重新確認');
           } else if (req.data.replaceRoundId) {
             throw new HttpsError('failed-precondition', '目前互動已變更，請重新確認');
           }
+          const keySnap = await tx.get(answerKeysDoc(req.data.courseId));
+          const slideKey = extractSlideKey(keySnap.data(), def);
           const openedAt = now();
           const number = (current?.numbers?.[def.slideId] || 0) + 1;
           const round: PollRound = {
@@ -97,11 +215,16 @@ export function createClassroomHandlers(
             openedAt,
             eligibleCount,
             ...(seconds ? { deadlineAt: openedAt + seconds * 1000 } : {}),
+            ...(slideKey ? { hasAnswerKey: true } : {}),
             total: 0,
             counts: {},
           };
           if (previous)
-            tx.set(ref(req.data.courseId, previous.id), { ...previous, status: 'closed', closedAt: openedAt });
+            tx.set(ref(req.data.courseId, previous.id), {
+              ...previous,
+              status: 'closed',
+              closedAt: openedAt,
+            });
           tx.set(target, round);
           tx.set(state(req.data.courseId), {
             openRoundId: id,
@@ -116,7 +239,9 @@ export function createClassroomHandlers(
       return db.runTransaction(async (tx) => {
         const current = (await tx.get(state(req.data.courseId))).data();
         const round = (await tx.get(target)).data() as PollRound | undefined;
+        const keySnap = await tx.get(answerKeysDoc(req.data.courseId));
         if (!round) throw new HttpsError('not-found', '互動不存在');
+        const slideKey = extractSlideKey(keySnap.data(), round);
         if (action === 'extend') {
           if (
             round.status !== 'open' ||
@@ -126,11 +251,29 @@ export function createClassroomHandlers(
             throw new HttpsError('failed-precondition', '只能延長目前開放中的倒數互動');
           round.deadlineAt = Math.max(round.deadlineAt, now()) + 30000;
         }
+        if (action === 'reveal') {
+          if (round.status !== 'closed')
+            throw new HttpsError('failed-precondition', '請先結束作答再公佈答案');
+          if (round.reveal) {
+            return { round: visibleRound(round), serverNow: now() };
+          }
+          if (!slideKey)
+            throw new HttpsError('failed-precondition', '此題尚未設定答案與解析');
+          round.reveal = {
+            revealedAt: now(),
+            key: structuredClone(slideKey),
+          };
+          round.hasAnswerKey = true;
+          tx.set(target, round);
+          return { round: visibleRound(round), serverNow: now() };
+        }
         if (action === 'close') {
-          if (round.status === 'closed') return { round, serverNow: now() };
+          if (slideKey) round.hasAnswerKey = true;
+          if (round.status === 'closed') return { round: visibleRound(round), serverNow: now() };
           round.status = 'closed';
           round.closedAt = now();
-          if (current?.openRoundId === round.id) tx.set(state(req.data.courseId), { ...current, openRoundId: '' });
+          if (current?.openRoundId === round.id)
+            tx.set(state(req.data.courseId), { ...current, openRoundId: '' });
         }
         tx.set(target, round);
         return { round: visibleRound(round), serverNow: now() };
@@ -145,14 +288,62 @@ export function createClassroomHandlers(
         round = (await target.get()).data() as PollRound;
       if (!round || !round.classIds.includes(p.classId)) return { round: null, serverNow: now() };
       const response = (await target.collection('responses').doc(p.uid).get()).data();
-      const { counts, total, ...prompt } = round;
+      const answers = response?.answers || null;
+      const submitted = !!response;
+      const prompt = studentPromptRound(round);
+      if (round.status === 'closed' && round.reveal) {
+        return {
+          round: prompt,
+          serverNow: now(),
+          submitted,
+          answers,
+          results: studentResultsRound(round),
+          reveal: structuredClone(round.reveal),
+          judgement: judgeResponses(round, round.reveal.key, answers),
+        };
+      }
       return {
         round: prompt,
         serverNow: now(),
-        submitted: !!response,
-        answers: response?.answers || null,
-        ...(round.status === 'closed' ? { results: visibleRound(round) } : {}),
+        submitted,
+        answers,
+        ...(round.status === 'closed' ? { results: studentResultsRound(round) } : {}),
       };
+    }),
+    studentClassroomHistory: onCall(options, async (req) => {
+      const { p } = await authorize(req);
+      if (p.teacher) throw new HttpsError('permission-denied', '此入口供學生使用');
+      const snap = await rounds(req.data.courseId).orderBy('openedAt', 'desc').limit(100).get();
+      const revealedDocs = snap.docs.filter((d) => {
+        const r = d.data() as PollRound;
+        return r.classIds?.includes(p.classId) && r.status === 'closed' && Boolean(r.reveal);
+      });
+      const items: StudentHistoryItem[] = await Promise.all(
+        revealedDocs.map(async (d) => {
+          const r = d.data() as PollRound;
+          const own = (
+            await ref(req.data.courseId, r.id).collection('responses').doc(p.uid).get()
+          ).data();
+          const answers = own?.answers || null;
+          const submitted = Boolean(own);
+          return {
+            id: r.id,
+            slideId: r.slideId,
+            number: r.number,
+            title: r.title,
+            fields: structuredClone(r.fields),
+            openedAt: r.openedAt,
+            ...(r.closedAt !== undefined ? { closedAt: r.closedAt } : {}),
+            revealedAt: r.reveal!.revealedAt,
+            reveal: structuredClone(r.reveal!),
+            submitted,
+            answers: answers ? structuredClone(answers) : null,
+            judgement: judgeResponses(r, r.reveal!.key, answers),
+          };
+        }),
+      );
+      items.sort((a, b) => a.openedAt - b.openedAt);
+      return { rounds: items, serverNow: now() };
     }),
     submitClassroomInteraction: onCall(options, async (req) => {
       const { p } = await authorize(req);
@@ -190,7 +381,17 @@ export function createClassroomHandlers(
     }),
     classroomInteractionReport: onCall(options, async (req) => {
       const { c } = await authorize(req, true);
-      const current = (await state(req.data.courseId).get()).data();
+      const [currentSnap, keySnap] = await Promise.all([
+        state(req.data.courseId).get(),
+        answerKeysDoc(req.data.courseId).get(),
+      ]);
+      const current = currentSnap.data();
+      const keyData = keySnap.data();
+      const decorate = (r: PollRound | undefined): PollRound | null => {
+        if (!r) return null;
+        const hasKey = Boolean(r.reveal || r.hasAnswerKey || extractSlideKey(keyData, r));
+        return visibleRound(hasKey ? { ...r, hasAnswerKey: true } : r);
+      };
       const active = current?.openRoundId
         ? ((await ref(req.data.courseId, current.openRoundId).get()).data() as PollRound)
         : undefined;
@@ -206,17 +407,31 @@ export function createClassroomHandlers(
           .map((d) => d.data() as PollRound)
           .sort((a, b) => b.openedAt - a.openedAt)[0]?.id;
       }
-      const selected = id ? ((await ref(req.data.courseId, id).get()).data() as PollRound) : undefined;
+      const selected = id
+        ? ((await ref(req.data.courseId, id).get()).data() as PollRound)
+        : undefined;
       const result: any = {
-        round: selected ? visibleRound(selected) : null,
-        activeRound: active?.status === 'open' ? visibleRound(active) : null,
+        round: decorate(selected),
+        activeRound: active?.status === 'open' ? decorate(active) : null,
         serverNow: now(),
       };
       if (req.data.history === true) {
         const list = await rounds(req.data.courseId).orderBy('openedAt', 'desc').limit(100).get();
         result.rounds = list.docs.map((d) => {
-          const { id, title, slideId, number, status, classIds, total } = d.data();
-          return { id, title, slideId, number, status, classIds, total };
+          const r = d.data() as PollRound;
+          const { id, title, slideId, number, status, classIds, total, reveal } = r;
+          const hasKey = Boolean(reveal || r.hasAnswerKey || extractSlideKey(keyData, r));
+          return {
+            id,
+            title,
+            slideId,
+            number,
+            status,
+            classIds,
+            total,
+            ...(hasKey ? { hasAnswerKey: true } : {}),
+            ...(reveal ? { reveal } : {}),
+          };
         });
       }
       return result;
