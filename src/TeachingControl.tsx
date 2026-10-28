@@ -21,7 +21,7 @@ interface Deck {
   slides: Slide[];
 }
 export function slideDocument(html: string) {
-  return `<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src 'none';"><style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#1E2933}p,h1,h2,h3{margin:0}section{width:1920px;height:1080px;position:relative;overflow:hidden}aside{display:none}</style><body>${html}</body></html>`;
+  return `<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data: https://albertchang1008-alt.github.io; font-src 'none';"><style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#1E2933}p,h1,h2,h3{margin:0}section{width:1920px;height:1080px;position:relative;overflow:hidden}aside{display:none}</style><body>${html}</body></html>`;
 }
 export default function TeachingControl({
   api,
