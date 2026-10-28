@@ -13,6 +13,7 @@ import {
   interactionExpired,
   interactionTimeLabel,
 } from '../shared/classroom';
+import type { Interaction } from '../shared/classroom';
 import fs from 'node:fs';
 import { verifyClassroomReveal } from '../scripts/classroom-reveal-verify.mjs';
 test('12頁全部選項式，拒絕自由文字與重複排序，沒有答案鍵', () => {
@@ -97,7 +98,7 @@ test('倒數顯示到零就停、舊資料顯示已開時間，格式與10秒界
 test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且對齊複習課 8 題答案鍵', () => {
   // CI 不可讀教師私有資料夾：以同結構合成 8 題（4 單元 × choice/order）驗證規則。
   const reviewIds = ['R-REV-04', 'R-REV-07', 'R-REV-10', 'R-REV-13', 'U-REV-04', 'U-REV-07', 'U-REV-10', 'U-REV-13'];
-  const reviewInteractions = reviewIds.map((slideId) =>
+  const reviewInteractions: Interaction[] = reviewIds.map((slideId): Interaction =>
     slideId.endsWith('07')
       ? { slideId, title: slideId, fields: [{ id: 'f1', label: '排序', kind: 'order', options: ['甲事件', '乙事件', '丙事件', '丁事件'] }] }
       : { slideId, title: slideId, fields: [{ id: 'f1', label: '單選', kind: 'choice', options: ['選項一', '選項二', '選項三'] }] },
@@ -134,7 +135,7 @@ test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且
     /正解必須是該題 options 之一/,
   );
   // Reject incomplete or duplicate order answer
-  const r07Opts = reviewInteractions.find((d: any) => d.slideId === 'R-REV-07').fields[0].options;
+  const r07Opts = reviewInteractions.find((d) => d.slideId === 'R-REV-07')!.fields[0].options;
   assert.throws(
     () => validateAnswerKeys(reviewInteractions, { 'R-REV-07': { f1: { answer: r07Opts.slice(0, 3) } } }),
     /完整排列/,
@@ -161,7 +162,7 @@ test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且
   );
 
   // judgeResponses for choice and order (correct, wrong, partial steps, unanswered)
-  const r04 = reviewInteractions.find((d: any) => d.slideId === 'R-REV-04');
+  const r04 = reviewInteractions.find((d) => d.slideId === 'R-REV-04')!;
   const r04Key = valid['R-REV-04'];
   const cRight = judgeResponses(r04, r04Key, { f1: r04Key.f1.answer });
   assert.equal(cRight.answered, true);
@@ -179,7 +180,7 @@ test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且
   assert.equal(cNone.fields.f1.correct, false);
   assert.equal('actual' in cNone.fields.f1, false);
 
-  const r07 = reviewInteractions.find((d: any) => d.slideId === 'R-REV-07');
+  const r07 = reviewInteractions.find((d) => d.slideId === 'R-REV-07')!;
   const r07Key = valid['R-REV-07'];
   const expectedOrder = r07Key.f1.answer as string[];
   const oRight = judgeResponses(r07, r07Key, { f1: expectedOrder });
