@@ -494,21 +494,37 @@ export function InteractionForm({
         <fieldset key={f.id} disabled={locked} className="interaction-field">
           <legend>{f.label}</legend>
           {f.kind === 'choice' ? (
-            <div className="interaction-options">
-              {f.options!.map((o, i) => (
-                <label key={o}>
-                  <input
-                    type="radio"
-                    name={formId + '-' + round.id + '-' + f.id}
-                    checked={values[f.id] === o}
-                    onChange={() => set(f.id, o)}
-                  />
-                  <span>
-                    {String.fromCharCode(65 + i)}　{o}
-                  </span>
-                </label>
-              ))}
-            </div>
+            (() => {
+              const isTrueFalse =
+                f.options?.length === 2 &&
+                f.options[0] === '○ 對' &&
+                f.options[1] === '✕ 錯';
+              return (
+                <div
+                  className={
+                    'interaction-options' + (isTrueFalse ? ' true-false-options' : '')
+                  }
+                >
+                  {f.options!.map((o, i) => (
+                    <label
+                      key={o}
+                      className={
+                        (isTrueFalse ? 'true-false-btn ' : '') +
+                        (values[f.id] === o ? 'selected' : '')
+                      }
+                    >
+                      <input
+                        type="radio"
+                        name={formId + '-' + round.id + '-' + f.id}
+                        checked={values[f.id] === o}
+                        onChange={() => set(f.id, o)}
+                      />
+                      <span>{isTrueFalse ? o : `${String.fromCharCode(65 + i)}　${o}`}</span>
+                    </label>
+                  ))}
+                </div>
+              );
+            })()
           ) : (
             <div>
               {f.options!.map((_, i) => (

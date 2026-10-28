@@ -11,13 +11,23 @@ import {
   studentPromptRound,
   studentResultsRound,
   tally,
+  validateAnswerKeys,
+  validateInteractions,
   validateResponses,
 } from '../../shared/classroom';
+import {
+  computeDeckReimportDiff,
+  mergeDeckClassroomConfig,
+  normalizeDeckId,
+  parseQuestionTableRows,
+  splitLegacyCombinedDeck,
+} from '../../shared/pptImport';
 
 const w = window as any;
 const deck = w.__INITIAL_TEACHING_DECK__ || { title: '合成簡報', slides: [] };
-const interactions: Interaction[] = w.__INITIAL_INTERACTIONS__ || [];
-const answerKeys: AnswerKeys = w.__INITIAL_ANSWER_KEYS__ || {};
+let interactions: Interaction[] = w.__INITIAL_INTERACTIONS__ || [];
+let answerKeys: AnswerKeys = w.__INITIAL_ANSWER_KEYS__ || {};
+const savedDecks = new Map<string, any>();
 
 const course = {
   id: '115-1-AP2',
@@ -51,7 +61,92 @@ const api = {
       null;
 
     if (name === 'getTeachingDeck') {
-      return structuredClone(deck);
+      const decksSummary = [...savedDecks.values()].map((item) => ({
+        id: item.deckId,
+        title: item.title,
+        slideCount: item.slides.length,
+        hasPdf: Boolean(item.pdfUrl),
+      }));
+      if (d.deckId && savedDecks.has(d.deckId)) {
+        const found = savedDecks.get(d.deckId);
+        return structuredClone({ ...found, decks: decksSummary });
+      }
+      return structuredClone({
+        ...deck,
+        ...(decksSummary.length ? { decks: decksSummary } : {}),
+      });
+    }
+    if (name === 'saveTeachingDeck') {
+      if (d.action === 'migrateLegacy28') {
+        const split = splitLegacyCombinedDeck(deck);
+        for (const item of [split.respiratoryDeck, split.urinaryDeck]) {
+          savedDecks.set(item.id, {
+            deckId: item.id,
+            title: item.title,
+            slides: item.slides,
+          });
+        }
+        return {
+          ok: true,
+          migratedDecks: [split.respiratoryDeck, split.urinaryDeck].map((x) => ({
+            id: x.id,
+            title: x.title,
+            slideCount: x.slides.length,
+          })),
+        };
+      }
+      const deckId = normalizeDeckId(d.deckId || d.title);
+      const parsed = parseQuestionTableRows(d.questionRows || [], d.slides.length, deckId);
+      if (!parsed.canImport) {
+        throw new Error(parsed.errors.join('；'));
+      }
+      const oldDeck = savedDecks.get(deckId);
+      const diff = computeDeckReimportDiff({
+        deckId,
+        existingDeck: oldDeck ? { slides: oldDeck.slides } : null,
+        newSlides: d.slides,
+        existingInteractions: interactions,
+        existingAnswerKeys: answerKeys,
+        newInteractions: parsed.interactions,
+        newAnswerKeys: parsed.answerKeys,
+      });
+      if (d.dryRun === true) {
+        return {
+          ok: true,
+          dryRun: true,
+          deckId,
+          title: d.title,
+          slideCount: d.slides.length,
+          questionCount: parsed.interactions.length,
+          diff,
+        };
+      }
+      const merged = mergeDeckClassroomConfig({
+        deckId,
+        previousDeckSlideIds: oldDeck ? oldDeck.slides.map((s: any) => s.id) : [],
+        existingInteractions: interactions,
+        existingAnswerKeys: answerKeys,
+        newDeckInteractions: validateInteractions(parsed.interactions),
+        newDeckAnswerKeys: validateAnswerKeys(parsed.interactions, parsed.answerKeys),
+      });
+      interactions = merged.interactions;
+      answerKeys = merged.answerKeys;
+      savedDecks.set(deckId, {
+        deckId,
+        title: d.title,
+        slides: d.slides,
+        pdfUrl: d.pdfDataUrl || undefined,
+      });
+      return {
+        ok: true,
+        deckId,
+        title: d.title,
+        slideCount: d.slides.length,
+        questionCount: parsed.interactions.length,
+        diff,
+        interactions,
+        answerKeys,
+      };
     }
     if (name === 'getClassroomConfig') {
       return {
@@ -147,7 +242,6 @@ const api = {
       const validated = validateResponses(round, d.answers);
       replies[round.id] = validated;
       rounds = rounds.map((r) => (r.id === round.id ? tally(r, validated) : r));
-      // Also simulate 15 classmates voting to produce realistic distribution bars
       const targetIdx = rounds.findIndex((r) => r.id === round.id);
       if (targetIdx !== -1 && rounds[targetIdx].total === 1) {
         let cur = rounds[targetIdx];

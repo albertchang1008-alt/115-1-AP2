@@ -11,6 +11,7 @@ import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shar
 import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
+import { getStorage } from 'firebase-admin/storage';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { defineSecret } from 'firebase-functions/params';
@@ -1532,7 +1533,7 @@ export const getLearningDiagnostics = onCall(options, async (req) => {
 
 export const { getAssessments, prepareAssessment, controlAssessment, startAssessment, saveAssessment, previewAssessment, assessmentReport, expireAssessments } = createAssessmentHandlers(db, access, options);
 
-export const { getTeachingDeck, getClassroomCourse } = createTeachingHandlers(db, access, options);
+export const { getTeachingDeck, saveTeachingDeck, getClassroomCourse } = createTeachingHandlers(db, access, options, getStorage());
 
 export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, studentClassroomHistory, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);
 

@@ -1,0 +1,19 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isCourseTeacher(courseId) {
+      return request.auth != null
+        && request.auth.token.teacher == true
+        && firestore.exists(/databases/(default)/documents/courses/$(courseId))
+        && request.auth.uid in firestore.get(/databases/(default)/documents/courses/$(courseId)).data.teacherIds;
+    }
+
+    match /courses/{courseId}/teachingDecks/{deckId}/{allPaths=**} {
+      allow read, write: if isCourseTeacher(courseId);
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

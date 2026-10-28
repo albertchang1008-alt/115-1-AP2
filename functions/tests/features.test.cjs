@@ -14,7 +14,7 @@ function fixture() {
 }
 test('未設定 features 的課程，所有新 callable 都拒絕且不讀寫功能資料', async () => {
   const { call, reads } = fixture();
-  for (const name of ['getAssessments','prepareAssessment','controlAssessment','startAssessment','saveAssessment','previewAssessment','assessmentReport','getTeachingDeck','getClassroomCourse','getClassroomConfig','saveClassroomConfig','controlClassroomInteraction','getClassroomInteraction','studentClassroomHistory','submitClassroomInteraction','classroomInteractionReport','classroomInteractionRecords']) await assert.rejects(call(name, 'AP2'), e => e.code === 'permission-denied', name);
+  for (const name of ['getAssessments','prepareAssessment','controlAssessment','startAssessment','saveAssessment','previewAssessment','assessmentReport','getTeachingDeck','saveTeachingDeck','getClassroomCourse','getClassroomConfig','saveClassroomConfig','controlClassroomInteraction','getClassroomInteraction','studentClassroomHistory','submitClassroomInteraction','classroomInteractionReport','classroomInteractionRecords']) await assert.rejects(call(name, 'AP2'), e => e.code === 'permission-denied', name);
   assert.deepEqual(reads, []);
 });
 test('features 按課程隔離，單一開關不啟用別的功能；缺簡報返回空 slides', async () => {
