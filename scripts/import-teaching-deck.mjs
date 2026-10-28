@@ -133,9 +133,116 @@ export function diffTeachingDeck(existing, next) {
   };
 }
 
-function isInsideRepo(targetPath) {
-  const rel = path.relative(ROOT, path.resolve(targetPath));
+function isPathUnderRoot(candidate, root) {
+  const rel = path.relative(root, candidate);
   return rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel));
+}
+
+export function resolveEffectivePath(targetPath, seen = new Set()) {
+  const abs = path.resolve(targetPath);
+  if (seen.has(abs)) {
+    throw new Error(`偵測到循環符號連結：${abs}`);
+  }
+  seen.add(abs);
+
+  const tail = [];
+  let curr = abs;
+  while (true) {
+    let stat = null;
+    try {
+      stat = fs.lstatSync(curr);
+    } catch {
+      stat = null;
+    }
+    if (stat) {
+      let realBase;
+      if (stat.isSymbolicLink()) {
+        if (fs.existsSync(curr)) {
+          realBase = fs.realpathSync(curr);
+        } else {
+          const linkTarget = path.resolve(path.dirname(curr), fs.readlinkSync(curr));
+          realBase = resolveEffectivePath(linkTarget, seen);
+        }
+      } else {
+        realBase = fs.realpathSync(curr);
+      }
+      return tail.length > 0 ? path.resolve(realBase, ...tail) : realBase;
+    }
+    const parent = path.dirname(curr);
+    if (parent === curr) {
+      return abs;
+    }
+    tail.unshift(path.basename(curr));
+    curr = parent;
+  }
+}
+
+export function resolveRepoRoots(baseRoot = ROOT) {
+  const worktreeRoot = path.resolve(baseRoot);
+  const candidates = [worktreeRoot];
+
+  const gitEntry = path.join(worktreeRoot, '.git');
+  try {
+    const stat = fs.lstatSync(gitEntry);
+    if (stat.isFile()) {
+      const content = fs.readFileSync(gitEntry, 'utf8');
+      const m = content.match(/^gitdir:\s*(.+)$/m);
+      if (m) {
+        const gitDir = path.resolve(worktreeRoot, m[1].trim());
+        if (
+          path.basename(path.dirname(gitDir)) === 'worktrees' &&
+          path.basename(path.dirname(path.dirname(gitDir))) === '.git'
+        ) {
+          candidates.push(path.resolve(gitDir, '..', '..', '..'));
+        }
+      }
+    }
+  } catch {
+    // Ignore if .git is not readable
+  }
+
+  if (path.basename(path.dirname(worktreeRoot)) === '.worktrees') {
+    candidates.push(path.resolve(worktreeRoot, '..', '..'));
+  }
+
+  const allRoots = new Set();
+  for (const c of candidates) {
+    allRoots.add(path.resolve(c));
+    try {
+      allRoots.add(fs.realpathSync(c));
+    } catch {
+      // Ignore if path does not exist
+    }
+  }
+
+  const mainRepoRoot = candidates[candidates.length - 1];
+  let realMainRepoRoot = mainRepoRoot;
+  try {
+    realMainRepoRoot = fs.realpathSync(mainRepoRoot);
+  } catch {
+    // Fallback to resolved path
+  }
+
+  return {
+    worktreeRoot,
+    mainRepoRoot,
+    realMainRepoRoot,
+    roots: [...allRoots],
+  };
+}
+
+export function getDefaultBackupDir(baseRoot = ROOT) {
+  const { mainRepoRoot } = resolveRepoRoots(baseRoot);
+  return path.resolve(mainRepoRoot, '..', '課程平台-私有', 'review-decks', 'backups');
+}
+
+export function isInsideRepo(targetPath, baseRoot = ROOT) {
+  const { roots } = resolveRepoRoots(baseRoot);
+  const literalPath = path.resolve(targetPath);
+  const effectivePath = resolveEffectivePath(targetPath);
+  return roots.some(
+    (root) => isPathUnderRoot(literalPath, root) || isPathUnderRoot(effectivePath, root),
+  );
 }
 
 async function main() {
@@ -215,16 +322,23 @@ async function main() {
     throw new Error(`課程不存在：courses/${courseId}，拒絕寫入`);
   }
 
-  const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Taipei' });
-  const defaultBackupDir = path.resolve(ROOT, '..', '課程平台-驗收證據', today, 'teaching-deck-backups');
-  const backupDir = path.resolve(getArg(args, '--backup-dir') || defaultBackupDir);
-  if (isInsideRepo(backupDir)) {
-    throw new Error(`備份路徑不可位於 repo 內：${backupDir}`);
+  const defaultBackupDir = getDefaultBackupDir();
+  const rawBackupDir = path.resolve(getArg(args, '--backup-dir') || defaultBackupDir);
+  if (isInsideRepo(rawBackupDir)) {
+    throw new Error(`備份路徑不可位於 repo 內：${rawBackupDir}`);
   }
-  fs.mkdirSync(backupDir, { recursive: true });
+  const effectiveBackupDir = resolveEffectivePath(rawBackupDir);
+  if (isInsideRepo(effectiveBackupDir)) {
+    throw new Error(`備份路徑不可位於 repo 內：${effectiveBackupDir}`);
+  }
+  fs.mkdirSync(effectiveBackupDir, { recursive: true });
+  const realBackupDir = fs.realpathSync(effectiveBackupDir);
+  if (isInsideRepo(realBackupDir)) {
+    throw new Error(`備份路徑不可位於 repo 內：${realBackupDir}`);
+  }
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const safeCourse = courseId.replace(/[^a-zA-Z0-9_-]/g, '_');
-  const backupFile = path.join(backupDir, `${safeCourse}-presentation-backup-${stamp}.json`);
+  const backupFile = path.join(realBackupDir, `${safeCourse}-presentation-backup-${stamp}.json`);
   fs.writeFileSync(
     backupFile,
     JSON.stringify(

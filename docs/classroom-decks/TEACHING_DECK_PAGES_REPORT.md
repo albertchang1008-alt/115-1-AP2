@@ -5,7 +5,7 @@
 - **分支與版本**：Worktree `.worktrees/teaching-deck-pages`（分支 `feature/teaching-deck-pages`，基於 `origin/main` `0e3579b7`），版本升至 `1.11.1`（`npm run version:check` 通過），未修改任何 `functions/src/` 後端程式。
 - **圖片轉移與新簡報檔**：從兩份私有複習簡報抽取 26 張不重複教材圖，轉為內容雜湊命名 WebP 存入 `public/materials/review-decks-assets/<sha256>.webp`（單檔 `30.8 KB`–`491.6 KB`，皆 ≤ 500 KB；不含答案頁與講者備註）。另產出 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-combined.deck.json`（28 頁、`109,179 bytes`、0 inline SVG、0 `data:` 圖），原私有檔完全未動。
 - **控制台 CSP 與互動開關收公佈**：`src/TeachingControl.tsx` 的 `slideDocument()` 僅放行 `img-src data: https://albertchang1008-alt.github.io;`，維持 `sandbox=""`、`default-src 'none'`、`style-src 'unsafe-inline'`、`font-src 'none'`；Playwright 實測允許 Pages 網域載入並阻擋 `https://evil.example.com`。控制台 28 頁全數載入並跑通互動題「開放作答 → 學生送出 → 結束作答 → 公佈答案（已公佈）」。
-- **匯入工具與真實 dry-run**：新增 `scripts/import-teaching-deck.mjs`（預設 `dry-run`，`--write` 先備份既有 `teacherAssets/presentation` 至倉庫外再寫入，不碰 `classroomConfig`）。已對正式 `ap2-7ed91` 跑 `dry-run`（未寫入），見第 5 節。
+- **匯入工具與 F1 修正**：`scripts/import-teaching-deck.mjs` 預設 `dry-run`（已對 `ap2-7ed91` 跑 `dry-run`，未寫入，不碰 `classroomConfig`）。針對 Codex F1 回報，新增 `resolveEffectivePath()`、`resolveRepoRoots()` 與 `getDefaultBackupDir()`：以 `lstatSync`／`realpathSync` 解析符號連結與未建立子路徑，同時防護當前 worktree 與外層主 checkout 根目錄，並將預設備份位置對齊為 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups`。
 - **驗證與證據**：Worktree 與無私有路徑乾淨 clone 皆通過 `npm ci && npm run check`（`0 skipped`）。1920 寬度截圖與 `verification.json` 存於 `/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-28/teaching-deck-pages/`（截圖保存至 2026-11-04）。
 
 ---
@@ -16,7 +16,7 @@
 
 - **目標目錄**：`public/materials/review-decks-assets/`
 - **圖片總數**：26 張不重複圖片（涵蓋呼吸 14 頁之 14 次引用、泌尿與體液 14 頁之 17 次引用，合計 31 次 `<img>` 引用）。
-- **命名與格式**：以 WebP 檔案內容之 SHA-256 命名（`<sha256>.webp`），寬度 `1600px`–`2000px`，單檔大小介於 `30,774 bytes`（30.1 KB）至 `491,614 bytes`（480.1 KB），全數 ≤ 500 KB，26 檔合計 `6,002,526 bytes`（5.72 MB）。
+- **命名與格式**：以 WebP 檔案內容之 SHA-256 命名（`<sha256>.webp`），寬度 `1600px`–`2000px`，單檔大小介於 `30,774 bytes`（30.1 KB）至 `491,614 bytes`（480.1 KB），全數 ≤ 500 KB，26 檔合計 `6,202,524 bytes`（5.92 MB）。
 - **不公開原則**：`public/materials/review-decks-assets/` 僅放置這 26 張無題幹／無解析之教材圖，不含任何投影片 HTML、答案頁文字或講者備註。
 
 | # | 原教材圖來源 (`data-source`) | WebP 檔名 (`<sha256>.webp`) | 尺寸 (px) | 大小 (bytes) | 引用投影片 (`slideId`) |
@@ -109,7 +109,8 @@
 - **安全防線**：
   - 預設 `dry-run`，不寫入 Firestore，僅讀取現有 `courses/<course>/teacherAssets/presentation` 並輸出新舊頁數、序列化位元組數、差異摘要與檢查結果。
   - 驗證 `slideId` 不重複、總序列化大小 `< 1,048,576 bytes`（1 MiB）、不含 `<svg>`、不含大型 `data:image/`，且所有外部圖片網址均以 `https://albertchang1008-alt.github.io/115-1-AP2/` 開頭。
-  - 加上 `--write` 時，會先將既有 `teacherAssets/presentation` 備份至倉庫外（預設 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups/`），再寫入 `courses/<course>/teacherAssets/presentation`，**完全不讀寫 `classroomConfig`**。
+  - 加上 `--write` 時，會先將既有 `teacherAssets/presentation` 備份至倉庫外（透過 `getDefaultBackupDir()` 以最外層主 checkout 為基準解析，預設為 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups`），再寫入 `courses/<course>/teacherAssets/presentation`，**完全不讀寫 `classroomConfig`**。
+  - **F1 符號連結與 Worktree 邊界防護**：`isInsideRepo()` 結合 `resolveRepoRoots()`（同時涵蓋當前 worktree 與主 checkout 根目錄及其 `realpath`）與 `resolveEffectivePath()`（逐層以 `lstatSync`/`realpathSync`/`readlinkSync` 解析符號連結與未建立子目錄），在 `mkdirSync` 前後雙重把關。外部符號連結若指向 clone 或主 checkout 內，立即拒絕且不呼叫 `set()`。
 - **對 `ap2-7ed91` (`115-1-AP2`) 執行真實 `dry-run` 輸出**：
 
 ```json

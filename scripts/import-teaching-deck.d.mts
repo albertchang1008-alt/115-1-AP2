@@ -24,3 +24,12 @@ export function diffTeachingDeck(existing: unknown, next: unknown): {
   changedSlideIds: string[];
   unchangedSlideIds: string[];
 };
+export function resolveEffectivePath(targetPath: string): string;
+export function resolveRepoRoots(baseRoot?: string): {
+  worktreeRoot: string;
+  mainRepoRoot: string;
+  realMainRepoRoot: string;
+  roots: string[];
+};
+export function getDefaultBackupDir(baseRoot?: string): string;
+export function isInsideRepo(targetPath: string, baseRoot?: string): boolean;

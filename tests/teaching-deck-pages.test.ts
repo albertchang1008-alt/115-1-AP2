@@ -9,6 +9,9 @@ import { slideDocument } from '../src/TeachingControl';
 import {
   validateTeachingDeckPayload,
   diffTeachingDeck,
+  getDefaultBackupDir,
+  isInsideRepo,
+  resolveRepoRoots,
 } from '../scripts/import-teaching-deck.mjs';
 import { verifyTeachingDeckPages } from '../scripts/teaching-deck-pages-verify.mjs';
 
@@ -194,7 +197,7 @@ test('import-teaching-deck CLI：預設 dry-run 不寫入，--write 先備份到
     assert.equal(dryOut.addedSlideIds.length, 27);
     assert.equal(fs.existsSync(writesPath), false, 'dry-run 不可執行任何 Firestore 寫入');
 
-    // 2. Reject repo-inside backup directory
+    // 2. Reject repo-inside backup directory (literal path)
     const badBackup = spawnSync(
       process.execPath,
       [
@@ -215,6 +218,80 @@ test('import-teaching-deck CLI：預設 dry-run 不寫入，--write 先備份到
     );
     assert.notEqual(badBackup.status, 0);
     assert.match(badBackup.stderr, /備份路徑不可位於 repo 內/);
+    assert.equal(fs.existsSync(writesPath), false, '拒絕備份路徑時不可執行任何 Firestore 寫入');
+
+    // 2b. Reject external symlink pointing inside repo (F1 regression test)
+    const outsideSymlink = path.join(tempDir, 'outside-link');
+    fs.symlinkSync(path.resolve('docs'), outsideSymlink, 'dir');
+    const badSymlinkBackup = spawnSync(
+      process.execPath,
+      [
+        '--require',
+        path.resolve('tests/fixtures/fake-ap2-firestore.cjs'),
+        'scripts/import-teaching-deck.mjs',
+        '--project',
+        'ap2-7ed91',
+        '--course',
+        '115-1-AP2',
+        '--deck',
+        deckPath,
+        '--write',
+        '--backup-dir',
+        outsideSymlink,
+      ],
+      { encoding: 'utf8', env: { ...process.env, FAKE_AP2_WRITES: writesPath } },
+    );
+    assert.notEqual(badSymlinkBackup.status, 0, '指向 repo 內的外部符號連結必須拒絕');
+    assert.match(badSymlinkBackup.stderr, /備份路徑不可位於 repo 內/);
+    assert.equal(fs.existsSync(writesPath), false, '符號連結被拒絕時不可呼叫 set');
+
+    // 2c. Reject external symlink with nested non-existent subdir inside repo
+    const badNestedViaSymlink = path.join(outsideSymlink, 'nested-probe-backups');
+    const badNestedRun = spawnSync(
+      process.execPath,
+      [
+        '--require',
+        path.resolve('tests/fixtures/fake-ap2-firestore.cjs'),
+        'scripts/import-teaching-deck.mjs',
+        '--project',
+        'ap2-7ed91',
+        '--course',
+        '115-1-AP2',
+        '--deck',
+        deckPath,
+        '--write',
+        '--backup-dir',
+        badNestedViaSymlink,
+      ],
+      { encoding: 'utf8', env: { ...process.env, FAKE_AP2_WRITES: writesPath } },
+    );
+    assert.notEqual(badNestedRun.status, 0, '經由外部符號連結指向 repo 內未建立子目錄也必須拒絕');
+    assert.equal(fs.existsSync(path.resolve('docs/nested-probe-backups')), false);
+    assert.equal(fs.existsSync(writesPath), false);
+
+    // 2d. Worktree vs parent main checkout boundary & default backup path alignment
+    const simParent = path.join(tempDir, 'sim-workspace');
+    const simMainRepo = path.join(simParent, '課程平台1.0');
+    const simWorktree = path.join(simMainRepo, '.worktrees', 'teaching-deck-pages');
+    const simGitWorktreeDir = path.join(simMainRepo, '.git', 'worktrees', 'teaching-deck-pages');
+    fs.mkdirSync(simWorktree, { recursive: true });
+    fs.mkdirSync(simGitWorktreeDir, { recursive: true });
+    fs.writeFileSync(path.join(simWorktree, '.git'), `gitdir: ${simGitWorktreeDir}\n`, 'utf8');
+
+    const repoInfo = resolveRepoRoots(simWorktree);
+    assert.equal(repoInfo.mainRepoRoot, simMainRepo);
+    const defaultBackup = getDefaultBackupDir(simWorktree);
+    assert.equal(
+      defaultBackup,
+      path.join(simParent, '課程平台-私有', 'review-decks', 'backups'),
+      '預設備份路徑必須與報告一致且位於主 checkout 外',
+    );
+    assert.equal(isInsideRepo(defaultBackup, simWorktree), false);
+    assert.equal(
+      isInsideRepo(path.join(simMainRepo, '.worktrees', '課程平台-驗收證據'), simWorktree),
+      true,
+      '位於主 checkout .worktrees 下的路徑仍屬 repo 內，必須視為 repo 內並拒絕',
+    );
 
     // 3. --write mode backs up existing presentation outside repo and writes only teacherAssets/presentation
     const writeRun = spawnSync(
