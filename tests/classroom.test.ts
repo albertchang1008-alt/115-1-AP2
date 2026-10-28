@@ -95,12 +95,26 @@ test('倒數顯示到零就停、舊資料顯示已開時間，格式與10秒界
 });
 
 test('validateAnswerKeys 驗證 choice/order 正解與 300 字解析限制，且對齊複習課 8 題答案鍵', () => {
-  const reviewInteractions = JSON.parse(
-    fs.readFileSync('/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-all.interactions.json', 'utf8'),
+  // CI 不可讀教師私有資料夾：以同結構合成 8 題（4 單元 × choice/order）驗證規則。
+  const reviewIds = ['R-REV-04', 'R-REV-07', 'R-REV-10', 'R-REV-13', 'U-REV-04', 'U-REV-07', 'U-REV-10', 'U-REV-13'];
+  const reviewInteractions = reviewIds.map((slideId) =>
+    slideId.endsWith('07')
+      ? { slideId, title: slideId, fields: [{ id: 'f1', label: '排序', kind: 'order', options: ['甲事件', '乙事件', '丙事件', '丁事件'] }] }
+      : { slideId, title: slideId, fields: [{ id: 'f1', label: '單選', kind: 'choice', options: ['選項一', '選項二', '選項三'] }] },
   );
-  const reviewAnswerKeys = JSON.parse(
-    fs.readFileSync('/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-all.answerKeys.json', 'utf8'),
+  const reviewAnswerKeys = Object.fromEntries(
+    reviewInteractions.map((d) => [
+      d.slideId,
+      { f1: { answer: d.fields[0].kind === 'order' ? [...d.fields[0].options].reverse() : d.fields[0].options[1], explanation: '合成解析' } },
+    ]),
   );
+  // 本機若設定 REVIEW_DECKS_DIR，另核對教師私有 8 題答案鍵（CI 不設定）。
+  const privateDir = process.env.REVIEW_DECKS_DIR;
+  if (privateDir) {
+    const realInteractions = JSON.parse(fs.readFileSync(`${privateDir}/review-all.interactions.json`, 'utf8'));
+    const realKeys = JSON.parse(fs.readFileSync(`${privateDir}/review-all.answerKeys.json`, 'utf8'));
+    assert.equal(Object.keys(validateAnswerKeys(realInteractions, realKeys)).length, 8);
+  }
   const valid = validateAnswerKeys(reviewInteractions, reviewAnswerKeys);
   assert.equal(Object.keys(valid).length, 8);
   assert(!JSON.stringify(valid).includes('undefined'));
