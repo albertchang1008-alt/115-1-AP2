@@ -134,47 +134,93 @@ export function diffTeachingDeck(existing, next) {
 }
 
 function isPathUnderRoot(candidate, root) {
-  const rel = path.relative(root, candidate);
-  return rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel));
+  const normRoot = path.resolve(root);
+  const normCandidate = path.resolve(candidate);
+  const rel = path.relative(normRoot, normCandidate);
+  return (
+    rel === '' ||
+    (rel !== '..' && !rel.startsWith(`..${path.sep}`) && !path.isAbsolute(rel))
+  );
 }
 
-export function resolveEffectivePath(targetPath, seen = new Set()) {
-  const abs = path.resolve(targetPath);
-  if (seen.has(abs)) {
-    throw new Error(`偵測到循環符號連結：${abs}`);
-  }
-  seen.add(abs);
+function splitPathSegments(p) {
+  return p.split(/[\\/]+/).filter(Boolean);
+}
 
-  const tail = [];
-  let curr = abs;
-  while (true) {
+function resolveEffectivePathWithTrace(targetPath) {
+  const abs = path.resolve(targetPath);
+  const parsed = path.parse(abs);
+  let current = parsed.root || path.sep;
+  try {
+    current = fs.realpathSync(current);
+  } catch {
+    // Keep root as-is
+  }
+  const queue = splitPathSegments(abs.slice(parsed.root.length));
+  const visited = [abs];
+  let symlinkHops = 0;
+
+  while (queue.length > 0) {
+    const seg = queue.shift();
+    if (!seg || seg === '.') continue;
+    if (seg === '..') {
+      current = path.dirname(current);
+      visited.push(current);
+      continue;
+    }
+
+    const nextPath = path.join(current, seg);
+    visited.push(nextPath);
+
     let stat = null;
     try {
-      stat = fs.lstatSync(curr);
+      stat = fs.lstatSync(nextPath);
     } catch {
       stat = null;
     }
-    if (stat) {
-      let realBase;
-      if (stat.isSymbolicLink()) {
-        if (fs.existsSync(curr)) {
-          realBase = fs.realpathSync(curr);
-        } else {
-          const linkTarget = path.resolve(path.dirname(curr), fs.readlinkSync(curr));
-          realBase = resolveEffectivePath(linkTarget, seen);
-        }
-      } else {
-        realBase = fs.realpathSync(curr);
+
+    if (!stat) {
+      current = nextPath;
+      continue;
+    }
+
+    if (stat.isSymbolicLink()) {
+      symlinkHops += 1;
+      if (symlinkHops > 40) {
+        throw new Error(`偵測到循環符號連結：${abs}`);
       }
-      return tail.length > 0 ? path.resolve(realBase, ...tail) : realBase;
+      const rawTarget = fs.readlinkSync(nextPath);
+      if (path.isAbsolute(rawTarget)) {
+        const targetParsed = path.parse(rawTarget);
+        current = targetParsed.root || path.sep;
+        try {
+          current = fs.realpathSync(current);
+        } catch {
+          // Keep root as-is
+        }
+        queue.unshift(...splitPathSegments(rawTarget.slice(targetParsed.root.length)));
+      } else {
+        queue.unshift(...splitPathSegments(rawTarget));
+      }
+      continue;
     }
-    const parent = path.dirname(curr);
-    if (parent === curr) {
-      return abs;
+
+    try {
+      current = fs.realpathSync(nextPath);
+    } catch {
+      current = nextPath;
     }
-    tail.unshift(path.basename(curr));
-    curr = parent;
+    visited.push(current);
   }
+
+  return {
+    effectivePath: current,
+    visited,
+  };
+}
+
+export function resolveEffectivePath(targetPath) {
+  return resolveEffectivePathWithTrace(targetPath).effectivePath;
 }
 
 export function resolveRepoRoots(baseRoot = ROOT) {

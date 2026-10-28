@@ -5,7 +5,7 @@
 - **分支與版本**：Worktree `.worktrees/teaching-deck-pages`（分支 `feature/teaching-deck-pages`，基於 `origin/main` `0e3579b7`），版本升至 `1.11.1`（`npm run version:check` 通過），未修改任何 `functions/src/` 後端程式。
 - **圖片轉移與新簡報檔**：從兩份私有複習簡報抽取 26 張不重複教材圖，轉為內容雜湊命名 WebP 存入 `public/materials/review-decks-assets/<sha256>.webp`（單檔 `30.8 KB`–`491.6 KB`，皆 ≤ 500 KB；不含答案頁與講者備註）。另產出 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/review-combined.deck.json`（28 頁、`109,179 bytes`、0 inline SVG、0 `data:` 圖），原私有檔完全未動。
 - **控制台 CSP 與互動開關收公佈**：`src/TeachingControl.tsx` 的 `slideDocument()` 僅放行 `img-src data: https://albertchang1008-alt.github.io;`，維持 `sandbox=""`、`default-src 'none'`、`style-src 'unsafe-inline'`、`font-src 'none'`；Playwright 實測允許 Pages 網域載入並阻擋 `https://evil.example.com`。控制台 28 頁全數載入並跑通互動題「開放作答 → 學生送出 → 結束作答 → 公佈答案（已公佈）」。
-- **匯入工具與 F1 修正**：`scripts/import-teaching-deck.mjs` 預設 `dry-run`（已對 `ap2-7ed91` 跑 `dry-run`，未寫入，不碰 `classroomConfig`）。針對 Codex F1 回報，新增 `resolveEffectivePath()`、`resolveRepoRoots()` 與 `getDefaultBackupDir()`：以 `lstatSync`／`realpathSync` 解析符號連結與未建立子路徑，同時防護當前 worktree 與外層主 checkout 根目錄，並將預設備份位置對齊為 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups`。
+- **匯入工具與 F1／F1b 修正**：`scripts/import-teaching-deck.mjs` 預設 `dry-run`（已對 `ap2-7ed91` 跑 `dry-run`，未寫入，不碰 `classroomConfig`）。針對 Codex F1 與 F1b 回報：`resolveRepoRoots()` 同時保護當前 worktree 與主 checkout（預設備份位置對齊為 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups`）；`resolveEffectivePath()` 由根逐段展開符號連結；`isPathUnderRoot()` 修正為 `rel === '' || (rel !== '..' && !rel.startsWith(\`..\${path.sep}\`) && !path.isAbsolute(rel))`，將倉庫內以 `..` 開頭的普通子目錄（直接路徑與外部連結）全數擋下。
 - **驗證與證據**：Worktree 與無私有路徑乾淨 clone 皆通過 `npm ci && npm run check`（`0 skipped`）。1920 寬度截圖與 `verification.json` 存於 `/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-28/teaching-deck-pages/`（截圖保存至 2026-11-04）。
 
 ---
@@ -110,7 +110,51 @@
   - 預設 `dry-run`，不寫入 Firestore，僅讀取現有 `courses/<course>/teacherAssets/presentation` 並輸出新舊頁數、序列化位元組數、差異摘要與檢查結果。
   - 驗證 `slideId` 不重複、總序列化大小 `< 1,048,576 bytes`（1 MiB）、不含 `<svg>`、不含大型 `data:image/`，且所有外部圖片網址均以 `https://albertchang1008-alt.github.io/115-1-AP2/` 開頭。
   - 加上 `--write` 時，會先將既有 `teacherAssets/presentation` 備份至倉庫外（透過 `getDefaultBackupDir()` 以最外層主 checkout 為基準解析，預設為 `/Users/HHC/Documents/ChatGPT/課程平台-私有/review-decks/backups`），再寫入 `courses/<course>/teacherAssets/presentation`，**完全不讀寫 `classroomConfig`**。
-  - **F1 符號連結與 Worktree 邊界防護**：`isInsideRepo()` 結合 `resolveRepoRoots()`（同時涵蓋當前 worktree 與主 checkout 根目錄及其 `realpath`）與 `resolveEffectivePath()`（逐層以 `lstatSync`/`realpathSync`/`readlinkSync` 解析符號連結與未建立子目錄），在 `mkdirSync` 前後雙重把關。外部符號連結若指向 clone 或主 checkout 內，立即拒絕且不呼叫 `set()`。
+  - **F1／F1b 符號連結、Worktree 邊界與 `..` 開頭子目錄防護**：
+    - `isInsideRepo()` 結合 `resolveRepoRoots()`（同時涵蓋當前 worktree 與主 checkout 根目錄及其 `realpath`）與 `resolveEffectivePath()`（由根目錄逐段以 `lstatSync`/`realpathSync`/`readlinkSync` 展開符號連結與未建立子目錄），在 `mkdirSync` 前後雙重把關。
+    - `isPathUnderRoot()` 將原先誤把 `..codex-verify-backups` 當成父目錄跳出的 `!rel.startsWith('..')` 修正為 `rel === '' || (rel !== '..' && !rel.startsWith(\`..\${path.sep}\`) && !path.isAbsolute(rel))`，確保倉庫內任何以 `..` 開頭的普通子目錄（無論直接指定或經由外部符號連結指向）皆被判定為倉庫內並拒絕，不建立備份且不呼叫 `set()`。
+
+### 5.1 F1b 兩種隔離重現驗證結果（無真實 Firebase 連線）
+
+於 `/tmp/codex-teaching-deck-f1-clean` 隔離 clone 預載 `tests/fixtures/fake-ap2-firestore.cjs`（阻擋網路並替換 Firebase）執行 Codex 的兩支探針與主 checkout 邊界檢查，重現後已清除暫存目錄：
+
+1. **直接路徑重現（`dot-prefix-probe.py`，`--write --backup-dir <clone>/..codex-verify-backups`）**：
+   ```json
+   {
+     "exitCode": 1,
+     "backupArgument": "/private/tmp/codex-teaching-deck-f1-clean/..codex-verify-backups",
+     "resolvedBackupArgument": "/private/tmp/codex-teaching-deck-f1-clean/..codex-verify-backups",
+     "insideClone": true,
+     "backupFiles": 0,
+     "fakeSetCount": 0,
+     "expected": "Nonzero exit; no backup inside repo and no set",
+     "noRealFirebaseUsed": true
+   }
+   ```
+   stderr：`備份路徑不可位於 repo 內：/private/tmp/codex-teaching-deck-f1-clean/..codex-verify-backups`
+
+2. **外部符號連結重現（`dot-link-probe.py`，外部 `external-link` 指向 `<clone>/..codex-link-backups`）**：
+   ```json
+   {
+     "exitCode": 1,
+     "outsideLink": "/private/var/folders/yj/vdv7pq_j6q1c696kx53s9nmc0000gp/T/codex-dot-link-a6oh_69t/external-link",
+     "linkTarget": "/private/tmp/codex-teaching-deck-f1-clean/..codex-link-backups",
+     "backupFiles": 0,
+     "insideClone": true,
+     "fakeSetCount": 0,
+     "noRealFirebaseUsed": true
+   }
+   ```
+   stderr：`備份路徑不可位於 repo 內：/private/var/folders/yj/vdv7pq_j6q1c696kx53s9nmc0000gp/T/codex-dot-link-a6oh_69t/external-link`
+
+3. **主 checkout 邊界純函式檢查（從 worktree 呼叫 `isInsideRepo('/Users/HHC/Documents/ChatGPT/課程平台1.0/..codex-backups', worktreeRoot)`）**：
+   ```json
+   {
+     "mainRootDotChild": true,
+     "worktreeDotChild": true,
+     "defaultBackupInside": false
+   }
+   ```
 - **對 `ap2-7ed91` (`115-1-AP2`) 執行真實 `dry-run` 輸出**：
 
 ```json

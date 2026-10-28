@@ -292,6 +292,73 @@ test('import-teaching-deck CLI：預設 dry-run 不寫入，--write 先備份到
       true,
       '位於主 checkout .worktrees 下的路徑仍屬 repo 內，必須視為 repo 內並拒絕',
     );
+    assert.equal(
+      isInsideRepo(path.join(simMainRepo, '..codex-backups'), simWorktree),
+      true,
+      '主 checkout 下以 .. 開頭的普通子目錄仍屬 repo 內，必須視為 repo 內並拒絕',
+    );
+    assert.equal(
+      isInsideRepo(path.join(simWorktree, '..codex-verify-backups'), simWorktree),
+      true,
+      'worktree 下以 .. 開頭的普通子目錄仍屬 repo 內，必須視為 repo 內並拒絕',
+    );
+    assert.equal(
+      isInsideRepo(path.join(simParent, '課程平台1.0-outside'), simWorktree),
+      false,
+      '主 checkout 同層但名稱前綴相同的外部目錄不應誤判為 repo 內',
+    );
+
+    // 2e. F1b regression: direct repo-inside ..-prefixed directory must be rejected
+    const dotPrefixedInside = path.resolve('..codex-verify-backups');
+    const badDotPrefixRun = spawnSync(
+      process.execPath,
+      [
+        '--require',
+        path.resolve('tests/fixtures/fake-ap2-firestore.cjs'),
+        'scripts/import-teaching-deck.mjs',
+        '--project',
+        'ap2-7ed91',
+        '--course',
+        '115-1-AP2',
+        '--deck',
+        deckPath,
+        '--write',
+        '--backup-dir',
+        dotPrefixedInside,
+      ],
+      { encoding: 'utf8', env: { ...process.env, FAKE_AP2_WRITES: writesPath } },
+    );
+    assert.notEqual(badDotPrefixRun.status, 0, '直接指定 repo 內 .. 開頭子目錄必須拒絕');
+    assert.match(badDotPrefixRun.stderr, /備份路徑不可位於 repo 內/);
+    assert.equal(fs.existsSync(dotPrefixedInside), false, '拒絕時不可建立 ..codex-verify-backups');
+    assert.equal(fs.existsSync(writesPath), false, '拒絕時不可呼叫 set');
+
+    // 2f. F1b regression: external symlink pointing to repo-inside ..-prefixed directory must be rejected
+    const dotLinkTargetInside = path.resolve('..codex-link-backups');
+    const outsideDotSymlink = path.join(tempDir, 'external-dot-link');
+    fs.symlinkSync(dotLinkTargetInside, outsideDotSymlink, 'dir');
+    const badDotLinkRun = spawnSync(
+      process.execPath,
+      [
+        '--require',
+        path.resolve('tests/fixtures/fake-ap2-firestore.cjs'),
+        'scripts/import-teaching-deck.mjs',
+        '--project',
+        'ap2-7ed91',
+        '--course',
+        '115-1-AP2',
+        '--deck',
+        deckPath,
+        '--write',
+        '--backup-dir',
+        outsideDotSymlink,
+      ],
+      { encoding: 'utf8', env: { ...process.env, FAKE_AP2_WRITES: writesPath } },
+    );
+    assert.notEqual(badDotLinkRun.status, 0, '指向 repo 內 .. 開頭子目錄的外部符號連結必須拒絕');
+    assert.match(badDotLinkRun.stderr, /備份路徑不可位於 repo 內/);
+    assert.equal(fs.existsSync(dotLinkTargetInside), false, '拒絕時不可建立 ..codex-link-backups');
+    assert.equal(fs.existsSync(writesPath), false, '拒絕時不可呼叫 set');
 
     // 3. --write mode backs up existing presentation outside repo and writes only teacherAssets/presentation
     const writeRun = spawnSync(
