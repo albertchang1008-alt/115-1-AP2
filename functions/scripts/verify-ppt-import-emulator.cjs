@@ -329,31 +329,58 @@ async function main() {
     `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF\n`;
   const largePdfBuf = Buffer.from(pdfRaw);
   assert(largePdfBuf.length >= 900624);
+  const largePdfDataUrl = 'data:application/pdf;base64,' + largePdfBuf.toString('base64');
+
+  // F1b: Also include 3 slides each with a 1,623,034-byte WebP (>2,164,071 bytes Base64 data URL)
+  const hugeWebpBuf = Buffer.concat([
+    Buffer.from('RIFF____WEBPVP8 '),
+    Buffer.alloc(1623034, 0x5a),
+  ]);
+  const hugeImgDataUrl = 'data:image/webp;base64,' + hugeWebpBuf.toString('base64');
+  assert(Buffer.byteLength(hugeImgDataUrl) >= 2164071);
 
   const largeImport = await handlers.saveTeachingDeck.run({
     auth: teacherAuth,
     data: {
       courseId,
       deckId: 'large-valid-pdf',
-      title: 'Synthetic Large Vector PDF',
-      pdfDataUrl: 'data:application/pdf;base64,' + largePdfBuf.toString('base64'),
-      slides: [
-        {
-          id: 'large-valid-pdf-P01',
-          pageNumber: 1,
-          title: 'Slide 1',
-          html: '<section>synthetic</section>',
-          notes: '',
-          answerPage: false,
-        },
-      ],
+      title: 'Synthetic Large Vector PDF + 1.62MB Images',
+      pdfDataUrl: largePdfDataUrl,
+      slides: Array.from({ length: 3 }, (_, idx) => ({
+        id: `large-valid-pdf-P0${idx + 1}`,
+        pageNumber: idx + 1,
+        title: `Slide ${idx + 1}`,
+        html: `<section><img src="${hugeImgDataUrl}"></section>`,
+        imageDataUrl: hugeImgDataUrl,
+        notes: '',
+        answerPage: false,
+      })),
       questionRows: [],
     },
   });
   assert.equal(largeImport.ok, true);
   const largeDeckSnap = await db.doc(`courses/${courseId}/teachingDecks/large-valid-pdf`).get();
   assert.equal(largeDeckSnap.exists, true);
-  assert.equal('pdfDataUrl' in (largeDeckSnap.data() || {}), false);
+  const largeDeckData = largeDeckSnap.data() || {};
+  assert.equal('pdfDataUrl' in largeDeckData, false);
+  assert.equal(
+    largeDeckData.slides.some((s) => Boolean(s.imageDataUrl)),
+    false,
+  );
+  assert.equal(
+    largeDeckData.slides.some((s) => String(s.html).includes('data:image/')),
+    false,
+  );
+
+  const loadedLarge = await handlers.getTeachingDeck.run({
+    auth: teacherAuth,
+    data: { courseId, deckId: 'large-valid-pdf' },
+  });
+  assert.equal(loadedLarge.pdfUrl, largePdfDataUrl);
+  assert.equal(loadedLarge.slides.length, 3);
+  for (let i = 0; i < 3; i++) {
+    assert.equal(loadedLarge.slides[i].imageUrl, hugeImgDataUrl);
+  }
 
   // 7. F2 regression: Cross-course pdfStoragePath / imageStoragePath rejected with permission-denied
   await assert.rejects(

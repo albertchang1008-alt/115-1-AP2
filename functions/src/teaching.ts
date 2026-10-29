@@ -233,11 +233,35 @@ export function createTeachingHandlers(
       const hydratedSlides = await Promise.all(
         rawSlides.map(async (s: any) => {
           let fallbackImg = s.imageDataUrl || s.imageUrl;
-          if (!fallbackImg && s.hasImageBlob && selectedDeckId && s.pageNumber) {
-            const blobSnap = await db
-              .doc(`courses/${courseId}/teachingDeckBlobs/${selectedDeckId}__slide__${s.pageNumber}`)
-              .get();
-            fallbackImg = blobSnap?.data?.()?.imageDataUrl;
+          if (
+            !fallbackImg &&
+            (Number(s.imageBlobChunks) > 0 || s.hasImageBlob) &&
+            selectedDeckId &&
+            s.pageNumber
+          ) {
+            const chunkCount = Number(s.imageBlobChunks) || 0;
+            if (chunkCount > 0) {
+              const chunkSnaps = await Promise.all(
+                Array.from({ length: chunkCount }, (_, idx) =>
+                  db
+                    .doc(
+                      `courses/${courseId}/teachingDeckBlobs/${selectedDeckId}__slide__${s.pageNumber}__${idx}`,
+                    )
+                    .get(),
+                ),
+              );
+              const joined = chunkSnaps
+                .map((snap) => String(snap?.data?.()?.chunk || ''))
+                .join('');
+              if (joined) fallbackImg = joined;
+            } else {
+              const blobSnap = await db
+                .doc(
+                  `courses/${courseId}/teachingDeckBlobs/${selectedDeckId}__slide__${s.pageNumber}`,
+                )
+                .get();
+              fallbackImg = blobSnap?.data?.()?.imageDataUrl;
+            }
           }
           const imageUrl = await resolveShortLivedUrl(
             storage,
@@ -251,6 +275,7 @@ export function createTeachingHandlers(
             String(s.html).includes('<section') &&
             !s.imageStoragePath &&
             !s.hasImageBlob &&
+            !(Number(s.imageBlobChunks) > 0) &&
             !s.imageDataUrl;
           const html = hasCustomHtml
             ? s.html
@@ -419,7 +444,11 @@ export function createTeachingHandlers(
       }
 
       const preparedSlides: Array<
-        TeachingDeckSlide & { imageDataUrl?: string; hasImageBlob?: boolean }
+        TeachingDeckSlide & {
+          imageDataUrl?: string;
+          hasImageBlob?: boolean;
+          imageBlobChunks?: number;
+        }
       > = await Promise.all(
         inputSlides.map(async (raw: any, idx: number) => {
           const pageNumber = Number(raw?.pageNumber) || idx + 1;
@@ -469,15 +498,28 @@ export function createTeachingHandlers(
           }
 
           let hasImageBlob = false;
+          let imageBlobChunks = 0;
           let inlineImageDataUrl: string | undefined;
           if (imageDataUrl && !imageSavedToStorage) {
             if (!isDryRun && Buffer.byteLength(imageDataUrl) > 25_000) {
-              await setDocCompat(
-                db.doc(`courses/${courseId}/teachingDeckBlobs/${deckId}__slide__${pageNumber}`),
-                { imageDataUrl, updatedAt: timestamp },
-                false,
+              const chunkSize = 400_000;
+              const imgChunks: string[] = [];
+              for (let i = 0; i < imageDataUrl.length; i += chunkSize) {
+                imgChunks.push(imageDataUrl.slice(i, i + chunkSize));
+              }
+              await Promise.all(
+                imgChunks.map((chunk, chunkIdx) =>
+                  setDocCompat(
+                    db.doc(
+                      `courses/${courseId}/teachingDeckBlobs/${deckId}__slide__${pageNumber}__${chunkIdx}`,
+                    ),
+                    { chunk, updatedAt: timestamp },
+                    false,
+                  ),
+                ),
               );
               hasImageBlob = true;
+              imageBlobChunks = imgChunks.length;
             } else if (!isDryRun) {
               inlineImageDataUrl = imageDataUrl;
             }
@@ -502,6 +544,7 @@ export function createTeachingHandlers(
             ...(imageStoragePath ? { imageStoragePath } : {}),
             ...(inlineImageDataUrl ? { imageDataUrl: inlineImageDataUrl } : {}),
             ...(hasImageBlob ? { hasImageBlob: true } : {}),
+            ...(imageBlobChunks > 0 ? { imageBlobChunks } : {}),
           };
         }),
       );

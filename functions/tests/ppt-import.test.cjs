@@ -497,6 +497,129 @@ test('F1 回歸：900 KB 以上有效 PDF 與多頁高畫質圖檔不將巨型 B
   assert(loaded.slides[0].html.includes(loaded.slides[0].imageUrl));
 });
 
+test('F1b 回歸：無 Storage 時 1.62 MB 以上單張高畫質 WebP（Base64 > 2.16 MB）與 900 KB PDF 自動分塊存入 teachingDeckBlobs 並完整讀回', async () => {
+  const { docs } = createFixture();
+  // Create handlers with NO storage (simulating pure Firestore Emulator or Storage outage)
+  const accessNoStorage = async (req, id, teacher) => {
+    if (!req.auth || id !== COURSE_ID || (teacher && !req.auth.teacher)) throw Error('permission');
+    return {
+      p: req.auth,
+      c: {
+        features: { teachingConsole: true, classroomInteraction: true },
+        classIds: ['A', 'B'],
+        rosterVersion: 2,
+      },
+    };
+  };
+  const assertLimits = (docPath, val) => {
+    const serialized = JSON.stringify(val);
+    assert(
+      Buffer.byteLength(serialized) <= 1048576,
+      `Doc ${docPath} > 1 MiB: ${Buffer.byteLength(serialized)}`,
+    );
+    for (const [k, v] of Object.entries(val || {})) {
+      if (typeof v === 'string') {
+        assert(
+          Buffer.byteLength(v) <= 1048487,
+          `Field ${docPath}.${k} > 1,048,487: ${Buffer.byteLength(v)}`,
+        );
+      }
+    }
+  };
+  const dbNoStorage = {
+    doc: (docPath) => ({
+      path: docPath,
+      get: async () => ({
+        id: docPath.split('/').pop(),
+        exists: docs.has(docPath),
+        data: () => (docs.has(docPath) ? structuredClone(docs.get(docPath)) : undefined),
+      }),
+      set: async (val, opts) => {
+        const nextVal =
+          opts && opts.merge && docs.has(docPath)
+            ? { ...structuredClone(docs.get(docPath)), ...structuredClone(val) }
+            : structuredClone(val);
+        assertLimits(docPath, nextVal);
+        docs.set(docPath, nextVal);
+      },
+    }),
+    collection: (colPath) => ({
+      get: async () => ({
+        docs: [...docs.keys()]
+          .filter((k) => k.startsWith(colPath + '/') && !k.slice(colPath.length + 1).includes('/'))
+          .map((k) => ({ id: k.split('/').pop(), data: () => structuredClone(docs.get(k)) })),
+      }),
+    }),
+  };
+  const teachingNoStorage = createTeachingHandlers(
+    dbNoStorage,
+    accessNoStorage,
+    { region: 'asia-east1' },
+    undefined,
+  );
+  const auth = { uid: 'teacher-1', teacher: true };
+
+  const pdfBuf = Buffer.from('%PDF-1.4\n' + ' '.repeat(900600) + '\n%%EOF\n');
+  const largePdfDataUrl = 'data:application/pdf;base64,' + pdfBuf.toString('base64');
+  // 1,623,034 bytes raw WebP => > 2,164,071 bytes Base64 data URL (exceeds 1 MiB single-field limit by >2x)
+  const hugeWebpBuf = Buffer.concat([
+    Buffer.from('RIFF____WEBPVP8 '),
+    Buffer.alloc(1623034, 0x5a),
+  ]);
+  const hugeImgDataUrl = 'data:image/webp;base64,' + hugeWebpBuf.toString('base64');
+  assert(Buffer.byteLength(hugeImgDataUrl) >= 2164071);
+
+  const saved = await teachingNoStorage.saveTeachingDeck.run({
+    auth,
+    data: {
+      courseId: COURSE_ID,
+      deckId: 'fallback-huge-images',
+      title: '純 Firestore 備援高畫質簡報',
+      pdfDataUrl: largePdfDataUrl,
+      slides: Array.from({ length: 3 }, (_, idx) => ({
+        id: `fallback-huge-images-P0${idx + 1}`,
+        pageNumber: idx + 1,
+        title: `高畫質第 ${idx + 1} 頁`,
+        html: `<section><img src="${hugeImgDataUrl}"></section>`,
+        imageDataUrl: hugeImgDataUrl,
+        notes: '',
+        answerPage: false,
+      })),
+      questionRows: [],
+    },
+  });
+  assert.equal(saved.ok, true);
+
+  const mainDoc = docs.get(`courses/${COURSE_ID}/teachingDecks/fallback-huge-images`);
+  assert(Buffer.byteLength(JSON.stringify(mainDoc)) < 10000);
+  assert.equal(mainDoc.slides[0].imageBlobChunks, 6);
+  assert.equal('imageDataUrl' in mainDoc.slides[0], false);
+
+  const loaded = await teachingNoStorage.getTeachingDeck.run({
+    auth,
+    data: { courseId: COURSE_ID, deckId: 'fallback-huge-images' },
+  });
+  assert.equal(loaded.pdfUrl, largePdfDataUrl);
+  assert.equal(loaded.slides.length, 3);
+  for (let i = 0; i < 3; i++) {
+    assert.equal(loaded.slides[i].imageUrl, hugeImgDataUrl);
+    assert(loaded.slides[i].html.includes(hugeImgDataUrl));
+  }
+  // Existing unchunked fallback records must still be readable after this upgrade.
+  const legacyImage = 'data:image/webp;base64,TEVHQUNZ';
+  docs.set(`courses/${COURSE_ID}/teachingDecks/legacy-image`, {
+    title: 'Legacy image',
+    slides: [{ id: 'legacy-P01', pageNumber: 1, title: 'Legacy', hasImageBlob: true }],
+  });
+  docs.set(`courses/${COURSE_ID}/teachingDeckBlobs/legacy-image__slide__1`, {
+    imageDataUrl: legacyImage,
+  });
+  const legacy = await teachingNoStorage.getTeachingDeck.run({
+    auth, data: { courseId: COURSE_ID, deckId: 'legacy-image' },
+  });
+  assert.equal(legacy.slides[0].imageUrl, legacyImage);
+});
+
 test('F2 回歸：saveTeachingDeck 拒絕跨課程／越權 Storage 路徑，且 getTeachingDeck 絕不替其他課程路徑簽章', async () => {
   const { call, docs } = createFixture();
   const signedPaths = [];

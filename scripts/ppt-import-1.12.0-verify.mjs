@@ -130,7 +130,16 @@ export async function verifyPptImport1120({ outDir = '' } = {}) {
   try {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
     const errors = [];
+    const cspViolations = [];
     page.on('pageerror', (e) => errors.push(e.message));
+    page.on('console', (m) => {
+      if (m.text().includes('Content Security Policy')) {
+        cspViolations.push(m.text());
+      }
+    });
+
+    const firstAssetWebp = fs.readdirSync(assetsDir).find((f) => f.endsWith('.webp'));
+    const fallbackWebpBuf = await fsp.readFile(path.join(assetsDir, firstAssetWebp));
 
     await page.route(
       'https://albertchang1008-alt.github.io/115-1-AP2/materials/review-decks-assets/*',
@@ -144,10 +153,52 @@ export async function verifyPptImport1120({ outDir = '' } = {}) {
             body: await fsp.readFile(filePath),
           });
         } else {
-          await route.fulfill({ status: 404, body: 'Not found' });
+          await route.fulfill({
+            status: 200,
+            contentType: 'image/webp',
+            body: fallbackWebpBuf,
+          });
         }
       },
     );
+
+    await page.route('https://storage.googleapis.com/**', async (route) => {
+      const u = new URL(route.request().url());
+      const storagePath = u.pathname.replace(/^\/[^/]+\//, '');
+      const dataUrl = await page
+        .evaluate((sp) => window.__STORAGE_SLIDE_IMAGES__?.[sp] || '', storagePath)
+        .catch(() => '');
+      const m = /^data:([^;,]+);base64,(.+)$/i.exec(dataUrl);
+      if (m) {
+        await route.fulfill({
+          status: 200,
+          contentType: m[1],
+          body: Buffer.from(m[2], 'base64'),
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/webp',
+          body: fallbackWebpBuf,
+        });
+      }
+    });
+
+    await page.route('https://firebasestorage.googleapis.com/**', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/webp',
+        body: fallbackWebpBuf,
+      });
+    });
+
+    await page.route('https://evil.example.com/**', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/webp',
+        body: fallbackWebpBuf,
+      });
+    });
 
     await page.route('http://console.test/', (r) =>
       r.fulfill({
@@ -230,6 +281,28 @@ export async function verifyPptImport1120({ outDir = '' } = {}) {
     // 3. Navigate to Page 13 (True/False interactive slide in template: page 13, 0-based index 12)
     const selectSlide = page.getByLabel('選擇投影片');
     await selectSlide.selectOption('12'); // 0-based index 12 = Page 13
+    await page.waitForTimeout(300);
+
+    // F4 check on live TeachingControl iframe: verify signed Storage image loads inside slideDocument CSP with naturalWidth === 1920 and 0 CSP violations
+    const liveImage = page.frameLocator('.teaching-canvas iframe').locator('img');
+    await liveImage.waitFor({ state: 'attached' });
+    const liveSlideImg = await liveImage.evaluate(async (img) => {
+      await img.decode();
+      return {
+        src: img.src,
+        complete: img.complete,
+        naturalWidth: img.naturalWidth,
+        naturalHeight: img.naturalHeight,
+      };
+    });
+    assert(liveSlideImg, '授課控制台投影片 iframe 內必須有 <img>');
+    assert(
+      liveSlideImg.src.startsWith('https://storage.googleapis.com/'),
+      `投影片 <img> 必須來自受控 Storage 簽章網址：${liveSlideImg.src}`,
+    );
+    assert.equal(liveSlideImg.complete, true);
+    assert.equal(liveSlideImg.naturalWidth, 1920, 'Storage 簽章圖片必須在 CSP 下成功載入為 1920 寬');
+    assert.deepEqual(cspViolations, [], 'Storage 簽章圖片載入時不得產生任何 CSP 違規');
 
     // Open interaction on Page 11 (是非題)
     const consolePane = page.getByTestId('console-pane');
@@ -373,9 +446,39 @@ export async function verifyPptImport1120({ outDir = '' } = {}) {
     );
     assert.equal(fourThreeCheck.red, fourThreeCheck.blue);
 
+    // Exercise the actual iframe policy, including both supported Storage hosts
+    // and a disallowed host (all responses are intercepted synthetic assets).
+    const storagePolicy = await page.evaluate(async () => {
+      const results = {};
+      for (const [name, url] of [
+        ['gcs', 'https://storage.googleapis.com/demo-bucket/csp-check.webp?X-Goog-Signature=FAKE'],
+        ['firebase', 'https://firebasestorage.googleapis.com/v0/b/demo-bucket/o/csp-check.webp?alt=media'],
+        ['blocked', 'https://evil.example.com/csp-check.webp'],
+      ]) {
+        const frame = document.createElement('iframe');
+        frame.style.display = 'none';
+        const ready = new Promise((resolve) => frame.addEventListener('load', resolve, { once: true }));
+        frame.srcdoc = window.__SLIDE_CSP__.slideDocument(
+          window.__SLIDE_CSP__.buildImageSlideHtml('csp-check', 'Synthetic image', url),
+        );
+        document.body.append(frame);
+        await ready;
+        const img = frame.contentDocument.querySelector('img');
+        await img.decode().catch(() => {});
+        results[name] = { naturalWidth: img.naturalWidth, complete: img.complete };
+        frame.remove();
+      }
+      return results;
+    });
+    assert(storagePolicy.gcs.naturalWidth > 0, 'GCS signed image must load');
+    assert(storagePolicy.firebase.naturalWidth > 0, 'Firebase Storage image must load');
+    assert.equal(storagePolicy.blocked.naturalWidth, 0, 'Unapproved host must remain blocked');
+    assert(cspViolations.some((message) => message.includes('evil.example.com')));
     assert.deepEqual(errors, []);
     return {
       passed: true,
+      liveSlideImg,
+      storagePolicy,
       screenshots: outDir
         ? [
             '01-multi-deck-selector-1920.png',

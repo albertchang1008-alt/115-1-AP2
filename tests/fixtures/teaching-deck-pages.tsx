@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import TeachingControl from '../../src/TeachingControl';
+import TeachingControl, { slideDocument } from '../../src/TeachingControl';
 import { StudentInteraction } from '../../src/ClassroomInteraction';
 import {
   AnswerKeys,
@@ -16,6 +16,8 @@ import {
   validateResponses,
 } from '../../shared/classroom';
 import {
+  buildDeckSlideId,
+  buildImageSlideHtml,
   computeDeckReimportDiff,
   mergeDeckClassroomConfig,
   normalizeDeckId,
@@ -34,6 +36,11 @@ w.__PDF_VECTOR_RENDERER__ = {
   renderPdfPagesTo1920Images,
   renderPdfPageVectorZoom,
 };
+w.__SLIDE_CSP__ = {
+  slideDocument,
+  buildImageSlideHtml,
+};
+w.__STORAGE_SLIDE_IMAGES__ = w.__STORAGE_SLIDE_IMAGES__ || {};
 const deck = w.__INITIAL_TEACHING_DECK__ || { title: '合成簡報', slides: [] };
 let interactions: Interaction[] = w.__INITIAL_INTERACTIONS__ || [];
 let answerKeys: AnswerKeys = w.__INITIAL_ANSWER_KEYS__ || {};
@@ -141,10 +148,35 @@ const api = {
       });
       interactions = merged.interactions;
       answerKeys = merged.answerKeys;
+      const hydratedSlides = d.slides.map((raw: any, idx: number) => {
+        const pageNumber = Number(raw?.pageNumber) || idx + 1;
+        const slideId = raw?.id || buildDeckSlideId(deckId, pageNumber);
+        const slideTitle = raw?.title || `第 ${pageNumber} 頁`;
+        const storagePath = `courses/${course.id}/teachingDecks/${deckId}/slides/page-${String(pageNumber).padStart(2, '0')}.webp`;
+        const signedStorageUrl = raw?.imageDataUrl
+          ? `https://storage.googleapis.com/demo-bucket/${storagePath}?X-Goog-Signature=FAKE`
+          : raw?.imageUrl;
+        if (raw?.imageDataUrl) {
+          w.__STORAGE_SLIDE_IMAGES__[storagePath] = raw.imageDataUrl;
+        }
+        return {
+          ...raw,
+          id: slideId,
+          pageNumber,
+          title: slideTitle,
+          ...(signedStorageUrl ? { imageUrl: signedStorageUrl } : {}),
+          html:
+            raw?.html && String(raw.html).includes('<section') && !String(raw.html).includes('data:image/')
+              ? raw.html
+              : signedStorageUrl
+                ? buildImageSlideHtml(slideId, slideTitle, signedStorageUrl)
+                : `<section><h1>${slideTitle}</h1></section>`,
+        };
+      });
       savedDecks.set(deckId, {
         deckId,
         title: d.title,
-        slides: d.slides,
+        slides: hydratedSlides,
         pdfUrl: d.pdfDataUrl || undefined,
       });
       return {

@@ -34,11 +34,11 @@ test('review-decks-assets 圖片為內容雜湊命名之 WebP、單張 ≤ 500 K
   }
 });
 
-test('slideDocument CSP 僅在 img-src 放行 data: 與 albertchang1008-alt.github.io，維持 default-src none', () => {
+test('slideDocument CSP 僅在 img-src 放行 data:、GitHub Pages 與受控 Firebase/GCS Storage，維持 default-src none', () => {
   const doc = slideDocument('<section><h1>測試</h1></section>');
   assert.match(
     doc,
-    /<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data: https:\/\/albertchang1008-alt\.github\.io; font-src 'none';">/,
+    /<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data: https:\/\/albertchang1008-alt\.github\.io https:\/\/storage\.googleapis\.com https:\/\/firebasestorage\.googleapis\.com; font-src 'none';">/,
   );
 });
 
