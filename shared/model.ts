@@ -179,6 +179,9 @@ export interface Attempt {
   full: boolean;
   clientAt: number;
   duration: number;
+  leaveCount?: number;
+  leaveSeconds?: number;
+  integrity?: 'left-screen';
   receivedAt?: number;
   uid?: string;
   classId?: string;
@@ -597,7 +600,7 @@ export function applyAttempt(p: Progress, a: Attempt, unitMeta?: Partial<Unit>):
       [a.unitId]: {
         ...old,
         // 1.6.0 起只有完整測驗計入最高分；舊的閃卡分數原樣保留。
-        best: a.mode === 'quiz' && a.full ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
+        best: a.mode === 'quiz' && a.full && a.integrity !== 'left-screen' ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
         attempts: (old?.attempts || 0) + 1,
         fullAttempts: (old?.fullAttempts || 0) + (a.mode === 'quiz' && a.full ? 1 : 0),
         wrong,

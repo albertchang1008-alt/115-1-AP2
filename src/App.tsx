@@ -1,3 +1,4 @@
+import { useStudentIntegrityStats, StudentIntegrityLine } from './AnswerIntegrityPanel';
 import UnitStatusTags from './UnitStatusTags';
 import UpdateStudentDialog from './UpdateStudentDialog';
 import { usePublishedCourse, readPublishedCourse } from './usePublishedCourse';
@@ -1388,7 +1389,7 @@ function RosterTable({
 export function CompletionPage({course,api,notify}: {course:Course;api:API;notify:(s:string)=>void}) {
   return <CompletionBoard course={course} api={api} notify={notify} renderStudentDetail={(visible,student,close)=><StudentDetail course={visible} api={api} student={student} close={close} notify={notify}/>}/>;
 }
-function StudentDetail({
+export function StudentDetail({
   course,
   api,
   student,
@@ -1403,6 +1404,7 @@ function StudentDetail({
 }) {
   const [rows, setRows] = useState<any[]>([]),
     [next, setNext] = useState<any>(null);
+  const integrity = useStudentIntegrityStats(api, course.id, student.classId, student.uid || '');
   async function load(more = false) {
     if (!student.uid) return;
     try {
@@ -1431,6 +1433,8 @@ function StudentDetail({
           </div>
           <button onClick={close}>關閉</button>
         </div>
+        {integrity.loading && <p role="status">正在讀取作答時間…</p>}
+        {integrity.error && <p role="alert">{integrity.error} <button onClick={integrity.retry}>重試作答時間</button></p>}
         {course.units.map((u) => (
           <div className="timeline" key={u.id}>
             <div>
@@ -1442,6 +1446,7 @@ function StudentDetail({
                   : student.progress.units[u.id].best}{' '}
                 · 練習 {student.progress.units[u.id]?.attempts || 0} 次
               </p>
+              <StudentIntegrityLine row={integrity.data?.units.find(x => x.unitId === u.id)?.rows[0]} />
             </div>
             <span className="badge">{complete(u, student.progress) ? isReviewUnit(u) && isOverdue(u, student.progress.units[u.id]) ? '逾期完成' : '已達標' : '待完成'}</span>
           </div>

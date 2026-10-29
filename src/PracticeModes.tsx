@@ -1,3 +1,4 @@
+import { useLeaveTracking, LeaveTrackingNotice } from './LeaveTracking';
 import { useEffect, useRef, useState } from 'react';
 import {
   Attempt,
@@ -34,10 +35,12 @@ export function WrongResult({
   );
 }
 export function Flashcards({
+  api, courseId,
   rows,
   onBack,
   onPractice,
 }: {
+  api?: API; courseId?: string;
   rows: PracticeRowData[];
   onBack: () => void;
   onPractice?: () => void;
@@ -50,6 +53,18 @@ export function Flashcards({
   const answerRef = useRef<HTMLDivElement>(null);
   const row = queue[0],
     q = row?.q;
+  const leaving = useLeaveTracking(!!q);
+  const started = useRef(Date.now()), session = useRef(crypto.randomUUID());
+  const saving = useRef<Promise<unknown> | null>(null);
+  const [saveError, setSaveError] = useState('');
+  function recordLeaves() {
+    if (saving.current) return saving.current;
+    const metrics = leaving.stop();
+    saving.current = !rows.length || !api || api.preview || !courseId ? Promise.resolve() : api.call('recordPracticeLeaves', { courseId, sessionId: session.current, mode: 'flashcard', unitIds: [...new Set(rows.map(r=>r.unit.id))], duration: Math.round((Date.now()-started.current)/1000), ...metrics }).catch(e=>{ saving.current=null; throw e; });
+    return saving.current;
+  }
+  async function exit(next = onBack) { try { await recordLeaves(); next(); } catch (e) { setSaveError('離開紀錄暫時無法保存，請重試。'+(e as Error).message); } }
+  useEffect(()=>{ if (!q) void recordLeaves().catch(e=>setSaveError((e as Error).message)); },[!!q]);
   useEffect(() => {
     if (flipped) answerRef.current?.focus();
   }, [flipped]);
@@ -69,11 +84,13 @@ export function Flashcards({
     return (
       <main className="quiz flashcards">
         <h1>閃卡已看完</h1>
+        {saveError && <p role="alert">{saveError}</p>}
         <p>
           看了 {seen} 張，其中 {again.size} 張標記再看一次
         </p>
         <button
           onClick={() => {
+            session.current=crypto.randomUUID(); started.current=Date.now(); saving.current=null; setSaveError('');
             setQueue(rows);
             setSeen(0);
             setAgain(new Set());
@@ -81,19 +98,21 @@ export function Flashcards({
         >
           再翻一輪
         </button>
-        <button onClick={onBack}>回到單元</button>
-        {again.size > 0 && onPractice && <button onClick={onPractice}>用抽題練習測一下</button>}
+        <button onClick={()=>void exit()}>回到單元</button>
+        {again.size > 0 && onPractice && <button onClick={()=>void exit(onPractice)}>用抽題練習測一下</button>}
       </main>
     );
   const letter = (id: string) => String.fromCharCode(65 + q.options.findIndex((o) => o.id === id));
   return (
     <main className="quiz flashcards">
       <div className="sectionhead">
-        <button onClick={onBack}>離開閃卡</button>
+        <button onClick={()=>void exit()}>離開閃卡</button>
         <strong>閃卡・還有 {queue.length} 張</strong>
       </div>
-      <p>翻卡看答案，不記錄</p>
+      <p>翻卡看答案，不計入成績；離開畫面只作記錄。</p>
       <p>先在心裡選好答案，再翻面</p>
+      {saveError && <p role="alert">{saveError}</p>}
+      <LeaveTrackingNotice notice={leaving.notice} dismiss={leaving.dismiss} applies={false} />
       <article
         className="panel flashcard"
         onClick={() => setFlipped(true)}
@@ -183,10 +202,12 @@ export function PracticeSession({
     ids = useRef(new Map<string, string>());
   const row = rows[i],
     key = row && `${row.unit.id}:${row.q.id}`;
+  const leaving = useLeaveTracking(rows.length > 0 && !result);
   async function submit() {
     if (busy) return;
     setBusy(true);
     setError('');
+    const leaveMetrics = leaving.stop();
     const grouped = new Map<string, PracticeRowData[]>();
     rows.forEach((r) => grouped.set(r.unit.id, [...(grouped.get(r.unit.id) || []), r]));
     const attempts: Attempt[] = [...grouped.values()].map((rs) => {
@@ -202,6 +223,7 @@ export function PracticeSession({
         score: 0,
         clientAt: start.current,
         duration: Math.round((Date.now() - start.current) / 1000),
+        ...leaveMetrics,
         answers: rs.map((r) => ({
           questionId: r.q.id,
           selected: selected[`${unit.id}:${r.q.id}`],
@@ -271,6 +293,7 @@ export function PracticeSession({
         </strong>
       </div>
       <p>練習・不計分</p>
+      <LeaveTrackingNotice notice={leaving.notice} dismiss={leaving.dismiss} applies={false} />
       {mode === 'review' && <p>答錯後隔天以上再答對，才會從錯題移除。</p>}
       <p>{row.unit.title}</p>
       <h2>{q.text}</h2>
@@ -382,7 +405,7 @@ export function UnitWrongPractice({
   }
   if (rows)
     return flash ? (
-      <Flashcards rows={rows} onBack={onBack} />
+      <Flashcards api={api} courseId={course.id} rows={rows} onBack={onBack} />
     ) : (
       <PracticeSession
         api={api}

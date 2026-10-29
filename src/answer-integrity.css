@@ -1,0 +1,159 @@
+.integrity-time-line {
+  background: #f1f7fc;
+  border: 1px solid #d9e8f4;
+  border-radius: 6px;
+  color: #456f89;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.integrity-time-line small {
+  display: block;
+  margin-top: 5px;
+  color: #90703e;
+}
+.integrity-overview .sectionhead h2 {
+  margin: 0;
+}
+.integrity-overview .sectionhead p {
+  margin: 5px 0;
+}
+.integrity-filter {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+.integrity-filter input {
+  width: auto;
+}
+.integrity-overview th button {
+  padding: 5px 7px;
+  border: 0;
+  background: transparent;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.integrity-info {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.integrity-subtext {
+  display: block;
+  color: var(--muted, #6f818c);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.integrity-flag-wrap {
+  position: relative;
+  display: inline-block;
+}
+.integrity-flag {
+  background: #fff8e8 !important;
+  border-color: #ead5a4 !important;
+  color: #8c681f !important;
+  font-size: 12px !important;
+  padding: 5px 9px !important;
+}
+.integrity-tooltip {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  padding: 12px;
+  width: 280px;
+  white-space: normal;
+  z-index: 15;
+  background: #213d4e;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 5px 16px #0002;
+  font-size: 12px;
+}
+.integrity-flag-wrap:hover .integrity-tooltip,
+.integrity-flag:focus + .integrity-tooltip {
+  display: block;
+}
+.integrity-excluded {
+  background: #fcf0e4;
+  color: #966b35;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.integrity-method {
+  font-size: 12px;
+  margin-top: 14px;
+}
+.notice.integrity-invalid {
+  border: 1px solid #e8cb9f;
+  background: #fff7e9;
+  text-align: left;
+}
+.integrity-invalid p {
+  line-height: 1.7;
+}
+.leave-tracking-shade {
+  z-index: 1200;
+}
+.leave-tracking-notice {
+  max-width: 540px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.leave-tracking-notice p {
+  font-size: 16px;
+  line-height: 1.9;
+  margin: 20px 0;
+}
+.leave-tracking-notice button {
+  min-width: 150px;
+}
+@media (max-width: 600px) {
+  .leave-tracking-notice {
+    width: 100%;
+    padding: 22px;
+  }
+  .integrity-overview .sectionhead {
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .integrity-overview th button {
+    font-size: 12px;
+  }
+  .integrity-time-line {
+    line-height: 1.8;
+  }
+}
+.usage-bars {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  overflow-x: auto;
+  padding: 12px 0;
+}
+.usage-bars > div {
+  min-width: 34px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+.usage-bars span {
+  display: block;
+  background: #24818e;
+  width: 75%;
+  border-radius: 4px 4px 0 0;
+}
+.usage-bars small {
+  font-size: 10px;
+  white-space: nowrap;
+}
+.usage-heat td,
+.usage-heat th {
+  padding: 7px;
+  text-align: center;
+  min-width: 62px;
+}

@@ -1,3 +1,5 @@
+import { ClassUsagePanel } from './ClassUsagePanel';
+import { AnswerIntegrityOverview } from './AnswerIntegrityPanel';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, RefreshCw } from 'lucide-react';
 import Papa from 'papaparse';
@@ -632,6 +634,8 @@ export default function CompletionBoard({
           )}
         </BoardDialog>
       )}
+      {cl && selected && <ClassUsagePanel key={`usage:${cl}:${selected.loadedAt}`} courseId={course.id} api={api} classId={cl} />}
+      {cl && selected && <AnswerIntegrityOverview key={`${cl}:${selected.loadedAt}`} course={visible} api={api} classId={cl} />}
       {student && selected && renderStudentDetail(visible, student, () => setStudent(null))}
     </div>
   );

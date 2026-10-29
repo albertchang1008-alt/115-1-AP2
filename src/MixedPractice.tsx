@@ -287,7 +287,7 @@ export function MixedPractice({
       </main>
     );
   return activeMode === 'flashcard' || todayFlash ? (
-    <Flashcards
+    <Flashcards api={api} courseId={course.id}
       rows={rows}
       onBack={onBack}
       onPractice={() => {

@@ -1,3 +1,6 @@
+import { createUsageHandler } from './usageStats';
+import { classifyAttemptIntegrity, validateLeaveMetrics } from '../../shared/answerIntegrity';
+import { createIntegrityHandlers } from './answerIntegrity';
 import { validateCourseDraft } from '../../shared/courseValidation';
 import { createPlatformHandlers } from './platformMcp';
 import { courseRevision, assertExpectedRevision, REVISION_CONFLICT } from '../../shared/courseDraft';
@@ -665,6 +668,8 @@ export const submitAttempt = onCall(options, async (req) => {
     a.full = a.mode !== 'review' && reviewAttemptIsFull(unit.review!.history, a.version, a.answers.map((r) => r.questionId), sources);
   } else a.full = a.full === true && a.mode !== 'review' && a.answers.length === bank.data()!.count;
   a.score = Math.round((a.answers.filter((x) => x.correct).length / a.answers.length) * 100);
+  try { const classified = classifyAttemptIntegrity(a, unit); delete a.integrity; if (classified.integrity) a.integrity = classified.integrity; }
+  catch (error) { fail((error as Error).message); }
   const ref = db.doc(`courses/${a.courseId}/attempts/${a.id}`),
     pr = db.doc(`courses/${a.courseId}/progress/${p.uid}`);
   return db.runTransaction(async (tx) => {
@@ -688,7 +693,7 @@ export const submitAttempt = onCall(options, async (req) => {
       receivedAt,
     }, unit);
     // 1.6.0 起閃卡是純練習：錯題與已看題數仍寫入，但只有完整測驗可達標。
-    if (a.mode === 'quiz' && a.full && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
+    if (a.mode === 'quiz' && a.full && a.integrity !== 'left-screen' && a.score >= unit.threshold && !next.units[a.unitId]?.passedAt)
       next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
     tx.create(ref, { ...saved, wrongSummary });
     tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
@@ -708,6 +713,8 @@ export const submitMixedAttempts = onCall(options, async (req) => {
   const visible = c.published && forClass(c.published, p.classId).units || [];
   const prepared = await Promise.all(attempts.map(async (input) => {
     id(input.id); code(input.unitId); id(input.version); size(input, 300000);
+    try { validateLeaveMetrics(input); } catch (error) { fail((error as Error).message); }
+    delete input.integrity;
     const unit = visible.find((u: any) => u.id === input.unitId);
     // 綜合練習只允許看板「目前」的單元；整批在寫入前驗完，拒絕時不留半套紀錄。
     if (!unit || unitVisibility(unit) !== 'current' || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放或已移至歷史區');
@@ -1538,3 +1545,7 @@ export const { getTeachingDeck, saveTeachingDeck, getClassroomCourse } = createT
 export const { getClassroomConfig, saveClassroomConfig, controlClassroomInteraction, getClassroomInteraction, studentClassroomHistory, submitClassroomInteraction, classroomInteractionReport, classroomInteractionRecords } = createClassroomHandlers(db, access, options);
 
 export const { listManagedCourses, getCourseDraft, getCompletionSummary, patchCourseDraft } = createPlatformHandlers(db, identity, access, rosterQuery, validateDraft, checkRevision, options);
+
+export const { getAnswerIntegrityStats, recordPracticeLeaves } = createIntegrityHandlers(db, access, rosterQuery, options);
+
+export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);

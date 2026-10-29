@@ -1,3 +1,5 @@
+import { ANSWER_INTEGRITY, integrityApplies, classifyAttemptIntegrity } from '../shared/answerIntegrity';
+import { useLeaveTracking, LeaveTrackingNotice } from './LeaveTracking';
 import { featureEnabled } from '../shared/features';
 import { researchBridge } from './ResearchBridge';
 import { ReflectionPage } from './ReflectionPage';
@@ -97,6 +99,7 @@ export default function Student({
     [questions, setQuestions] = useState<Question[]>([]),
     [mode, setMode] = useState<Mode>('quiz'),
     [taking, setTaking] = useState(false),
+    [quizRun, setQuizRun] = useState(0),
     [mixedIds, setMixedIds] = useState<string[] | null>(null),
     [full, setFull] = useState(true),
     [busy, setBusy] = useState(false),
@@ -303,6 +306,7 @@ export default function Student({
       setFull(isReviewUnit(target) || !practiceCount);
       qs = qs.map((q) => ({ ...q, options: shuffle(q.options) }));
       setQuestions(qs);
+      setQuizRun(n => n + 1);
       setMode(m);
       setTaking(true);
     } catch (e) {
@@ -318,10 +322,10 @@ export default function Student({
       if (!preview) dequeue(uid, a.id);
       setProgress(r.progress);
       setQueueCount(preview ? 0 : pending(uid).length);
-      if (r.attempt) { a.answers = r.attempt.answers; a.score = r.attempt.score; }
+      if (r.attempt) { a.answers = r.attempt.answers; a.score = r.attempt.score; delete a.integrity; if (r.attempt.integrity) a.integrity = r.attempt.integrity; }
       const summary = r.wrongSummary;
       const detail = summary && (summary.removed || summary.todayCorrect) ? `・移除錯題 ${summary.removed} 題・今天已答對 ${summary.todayCorrect} 題（明天以後再答對就會移除）` : '';
-      return (preview ? '預覽已完成，不會寫入正式紀錄' : '已保存，完成度已更新') + detail;
+      return (preview ? '預覽已完成，不會寫入正式紀錄' : a.integrity === 'left-screen' ? '已保存；本次不列入最高有效分數與達標' : '已保存，完成度已更新') + detail;
     } catch (e) {
       setQueueCount(preview ? 0 : pending(uid).length);
       throw e;
@@ -365,15 +369,15 @@ export default function Student({
     return <><StudentSettings /><ReflectionPage key={course.id + selectedChapterName + activity.id} course={course} chapterId={selectedChapterName} dueAt={chapter.dueAt} activity={activity} api={preview ? { ...api, preview: true } : api} uid={uid} onProgress={setProgress} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
   if (activity && unit && chapter)
     return <><StudentSettings /><ReadingPage course={course} unit={unit} chapterName={selectedChapterName} activity={activity} api={api} uid={uid} progress={progress} onSave={saveActivity} onBack={() => route(`/unit/${encodeURIComponent(unit.id)}?tab=${phaseTab(activity.phase)}`)} /></>;
-  if (taking && unit && mode === 'flashcard') return <><StudentSettings /><Flashcards rows={questions.map(q => ({q,unit}))} onBack={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`);}} onPractice={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=draw&n=10`);void start('quiz',10,unit);}} /></>;
+  if (taking && unit && mode === 'flashcard') return <><StudentSettings /><Flashcards api={api} courseId={course.id} rows={questions.map(q => ({q,unit}))} onBack={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}?tab=practice`);}} onPractice={() => {setTaking(false);route(`/unit/${encodeURIComponent(unit.id)}/quiz?mode=draw&n=10`);void start('quiz',10,unit);}} /></>;
   if (taking && unit)
-    return (<><StudentSettings /><Quiz
+    return (<><StudentSettings /><Quiz key={quizRun}
         questions={questions}
         full={full}
         mode={mode}
         course={course}
         unit={unit}
-        onSubmit={submit}
+        onSubmit={submit} onRetry={() => start(mode, full ? undefined : questions.length, unit)}
         researchEnabled={unit.research?.enabled !== false}
         onResearch={saveResearch}
         forceLeave={exitRequested}
@@ -479,6 +483,7 @@ export default function Student({
                   <p>
                     單元：{course.units.find((u) => u.id === a.unitId)?.title || a.unitId} ·{' '}
                     {a.full ? '完整作答' : '練習'} · {a.answers.length} 題
+                    {a.integrity === 'left-screen' && <span className="badge integrity-excluded">離開畫面超限・不列入成績</span>}
                   </p>
                   {a.answers.map((r) => (
                     <p key={r.questionId}>
@@ -628,7 +633,7 @@ function PracticeRow({ unit, threshold, progress, busy, start, route, menuOpen, 
     <div className="practice-row-score"><span>{best < 0 ? '還沒完整測驗' : `最高 ${best} / ${threshold}`}</span><small>{scoreHint}</small><i className="scorebar" style={{ '--score': `${Math.max(0, best)}%`, '--threshold': `${threshold}%` } as any} />{passed && <span className="badge green">已達標</span>}</div>
     <div className="practice-score-action"><small>計分</small><button className="practice-full primary" disabled={busy} onClick={() => go('quiz', '/quiz?mode=full')}>完整測驗</button></div>
     <button className="practice-menu-toggle" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>練習 {menuOpen ? <ChevronUp size={17} /> : <ChevronDown size={17} />}</button>
-    <div className={`practice-action-group ${menuOpen ? 'mobile-open' : ''}`}><small>練習・不計分</small><button className="practice-flash" title="翻卡看答案，不記錄" data-mobile-label={`（整份 ${unit.questionCount || '—'} 張）`} aria-label={`閃卡，整份 ${unit.questionCount || '—'} 張`} disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
+    <div className={`practice-action-group ${menuOpen ? 'mobile-open' : ''}`}><small>練習・不計分</small><button className="practice-flash" title="翻卡看答案，不計分" data-mobile-label={`（整份 ${unit.questionCount || '—'} 張）`} aria-label={`閃卡，整份 ${unit.questionCount || '—'} 張`} disabled={busy} onClick={() => go('flashcard', '/flashcard')}>閃卡</button>
     <div className="practice-draw" title="逐題作答、立即看解析" aria-label="抽題題數"><span>抽題</span>{[10, 20, 30].map((n) => <button key={n} disabled={busy} onClick={() => go('quiz', `/quiz?mode=draw&n=${n}`, n)}>{n} 題</button>)}</div>
     <button title="只做昨天以前的錯題，答對就移除" className={`practice-wrong ${wrong === 0 ? 'empty' : ''}`} disabled={busy} onClick={() => route(`/unit/${encodeURIComponent(unit.id)}/wrongcards`)}>錯題複習（{due} 題）</button>{today > 0 && <small>另有 {today} 題今天剛錯，明天起可重做</small>}</div>
   </div>;
@@ -644,13 +649,14 @@ function PracticeHint({ unit }: { unit?: Unit }) {
   const total = unit?.questionCount ? `全部 ${unit.questionCount} 題` : '全部題目';
   return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」並做完{total}。</p>;
 }
-function Quiz({
+export function Quiz({
   questions,
   full,
   mode,
   course,
   unit,
   onSubmit,
+  onRetry,
   researchEnabled,
   onResearch,
   onClose,
@@ -662,6 +668,7 @@ function Quiz({
   course: Course;
   unit: Unit;
   onSubmit: (a: Attempt) => Promise<string>;
+  onRetry: () => Promise<void>;
   researchEnabled: boolean;
   onResearch: (events: ExplanationResearchEvent[]) => Promise<void>;
   onClose: () => void;
@@ -681,6 +688,10 @@ function Quiz({
     attemptId = useRef(crypto.randomUUID()),
     submitted = useRef(false);
   const q = questions[i];
+  const leaving = useLeaveTracking(!result);
+  const currentQuestionId = useRef(q.id); currentQuestionId.current = q.id;
+  const accumulatedTimes = useRef<Record<string,number>>({});
+  function flushTime() { const now = Date.now(); accumulatedTimes.current[currentQuestionId.current] = (accumulatedTimes.current[currentQuestionId.current] || 0) + Math.max(0, now - qStart.current) / 1000; qStart.current = now; const next=Object.fromEntries(Object.entries(accumulatedTimes.current).map(([id,n])=>[id,Math.round(n)])); setTimes(next); return next; }
   // 抽題練習：quiz 模式但非完整作答（複習考一律 full，不會出現）。
   const practice = mode === 'quiz' && !full;
   useEffect(() => { if (forceLeave && !result) setLeave(true); }, [forceLeave, result]);
@@ -693,7 +704,8 @@ function Quiz({
   async function finish() {
     if (submitted.current) return;
     submitted.current = true;
-    const answers = grade(questions, latest.current.selections, latest.current.times);
+    const answers = grade(questions, latest.current.selections, flushTime());
+    const leaveMetrics = leaving.stop();
     const a: Attempt = {
       id: attemptId.current,
       courseId: course.id,
@@ -705,11 +717,14 @@ function Quiz({
       full,
       clientAt: start.current,
       duration: Math.round((Date.now() - start.current) / 1000),
+      ...leaveMetrics,
     };
+    Object.assign(a, classifyAttemptIntegrity(a, unit));
     setResult(a);
     setBusy(true);
     try {
       setStatus(await onSubmit(a));
+      setResult({ ...a });
     } catch (e) {
       setStatus('尚未保存，請稍後同步。' + (e as Error).message);
     } finally {
@@ -734,12 +749,13 @@ function Quiz({
   function choose(value: string) {
     if (result || locked[q.id]) return;
     setSelections((s) => ({ ...s, [q.id]: value }));
-    setTimes((t) => ({ ...t, [q.id]: Math.round((Date.now() - qStart.current) / 1000) }));
+    flushTime();
     // 2026-09-15（第二次調整）：quiz 模式（完整測驗／抽題練習）恢復成交卷後才揭曉正解與解析，
     // 作答中不鎖定、可以改答案——不然跟閃卡沒有差別。閃卡／複習模式維持選了就立刻鎖定並顯示。
     if (mode !== 'quiz' || !full) setLocked((l) => ({ ...l, [q.id]: true }));
   }
   function move(n: number) {
+    flushTime();
     setI(n);
     qStart.current = Date.now();
   }
@@ -758,6 +774,7 @@ function Quiz({
         </p>
         {isReviewUnit(unit) && <p className="muted">{Object.entries(questions.reduce((out, q, index) => { const source = q.source || '其他'; const row = out[source] || (out[source] = [0, 0]); row[1]++; if (result.answers[index].correct) row[0]++; return out; }, {} as Record<string, [number, number]>)).map(([source, [ok, total]]) => `${source} ${ok}/${total}`).join(' ・ ')}</p>}
         <p className="notice">{busy ? '正在保存…' : status}</p>
+        {result.integrity === 'left-screen' && <div className="notice integrity-invalid" role="note"><strong>本次不列入成績</strong><p>離開作答畫面 {result.leaveCount} 次（共 {result.leaveSeconds} 秒），已超過 {ANSWER_INTEGRITY.maxLeaves} 次或 {ANSWER_INTEGRITY.maxLeaveSeconds} 秒的上限。不更新最高有效分數與達標，仍可查看本次分數與解析；練習次數照計。</p><button disabled={busy} onClick={async()=>{setBusy(true);try{await onRetry();}finally{setBusy(false);}}}>再作答一次</button></div>}
         {practice && <PracticeHint unit={unit} />}
         <button className="primary" disabled={busy} onClick={onClose}>
           返回單元
@@ -859,6 +876,7 @@ function Quiz({
           </button>
         )}
       </div>
+      <LeaveTrackingNotice notice={leaving.notice} dismiss={leaving.dismiss} applies={integrityApplies({mode,full},unit)} />
       {leave && (
         <div className="modalshade">
           <section className="modal">

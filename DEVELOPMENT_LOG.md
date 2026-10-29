@@ -73,7 +73,7 @@ A沿用、腎臟標籤及35錨點crops通過，尿路C補第六節與兩題、�
 - 報告docs/urinary-release/STAGE1_CONTENT_REPORT.md與來源／圖位／SHA／驗證證據；原追蹤檔及來源卡SHA不變，catalog／manifest／Excel／共用kit與公開教材未改。未build／寫Excel或Sheet／push／部署／同步；一次feature本機commit，更新交接後停Claude審。
 
 # 2026-10-15：平台MCP第3階段完成停點A，交Claude審查 [Codex]
-目前版本：1.12.0
+目前版本：1.14.0
 
 - 沿用feature/platform-mcp獨立worktree；fetch確認origin/main4ed3778無新提交，前輪f0c1e7e為基底。只本機commit，不push／部署／merge main或正式資料寫入。
 - 新增listManagedCourses／getCourseDraft／getCompletionSummary純讀與patchCourseDraft；saveCourse／patch共用驗證，root revision0相容、交易比較與遞增、UUID requestId重送去重、auditLog同交易；稽核只存教師actor與schema／hash摘要，規則僅owner教師讀、client寫拒絕。

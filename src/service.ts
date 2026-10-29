@@ -1,3 +1,4 @@
+import { classifyAttemptIntegrity } from '../shared/answerIntegrity';
 import { courseRevision, assertExpectedRevision } from '../shared/courseDraft';
 import { initializeApp } from 'firebase/app';
 import {
@@ -306,6 +307,7 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
             if (!a) {
               const answers = input.answers.map(r => ({...r, correct: qs.find(q => q.id === r.questionId)?.answer === r.selected}));
               a = {...input, answers, score: answers.length ? Math.round(answers.filter(r => r.correct).length / answers.length * 100) : 0, receivedAt: Date.now(), uid: profile.uid, classId: profile.classId};
+              a = classifyAttemptIntegrity(a, unit || {});
               const summary = updateWrong(effectiveWrong(progress.units[input.unitId],unit,input.version), answers, a.receivedAt!).summary;
               (a as any).wrongSummary = summary;
               attempts.push(a); progress = applyAttempt(progress,a,unit);
