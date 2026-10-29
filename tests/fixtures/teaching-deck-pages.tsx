@@ -22,8 +22,18 @@ import {
   parseQuestionTableRows,
   splitLegacyCombinedDeck,
 } from '../../shared/pptImport';
+import {
+  loadPdfDocument,
+  renderPdfPagesTo1920Images,
+  renderPdfPageVectorZoom,
+} from '../../src/pdfVectorRenderer';
 
 const w = window as any;
+w.__PDF_VECTOR_RENDERER__ = {
+  loadPdfDocument,
+  renderPdfPagesTo1920Images,
+  renderPdfPageVectorZoom,
+};
 const deck = w.__INITIAL_TEACHING_DECK__ || { title: '合成簡報', slides: [] };
 let interactions: Interaction[] = w.__INITIAL_INTERACTIONS__ || [];
 let answerKeys: AnswerKeys = w.__INITIAL_ANSWER_KEYS__ || {};

@@ -81,7 +81,10 @@ export async function renderPdfPagesTo1920Images(
     onProgress?.(pageNum, numPages);
     const page = await pdfDoc.getPage(pageNum);
     const baseViewport = page.getViewport({ scale: 1 });
-    const scale = 1920 / Math.max(1, baseViewport.width);
+    const scale = Math.min(
+      1920 / Math.max(1, baseViewport.width),
+      1080 / Math.max(1, baseViewport.height),
+    );
     const scaledViewport = page.getViewport({ scale });
 
     const canvas = document.createElement('canvas');
@@ -93,10 +96,11 @@ export async function renderPdfPagesTo1920Images(
     ctx.fillStyle = '#1E2933';
     ctx.fillRect(0, 0, 1920, 1080);
 
-    // Center vertically if aspect ratio differs from 16:9
+    // Center both horizontally and vertically to preserve full page content for 4:3, 16:10, and 16:9 slides
+    const offsetX = Math.round((1920 - scaledViewport.width) / 2);
     const offsetY = Math.round((1080 - scaledViewport.height) / 2);
     ctx.save();
-    ctx.translate(0, offsetY);
+    ctx.translate(offsetX, offsetY);
     await page.render({
       canvasContext: ctx,
       viewport: scaledViewport,
@@ -147,6 +151,13 @@ export async function renderPdfPageVectorZoom(params: {
   const page = await pdfDoc.getPage(safePage);
   const baseViewport = page.getViewport({ scale: 1 });
 
+  const baseFitScale = Math.min(
+    1920 / Math.max(1, baseViewport.width),
+    1080 / Math.max(1, baseViewport.height),
+  );
+  const baseOffsetX = (1920 - baseViewport.width * baseFitScale) / 2;
+  const baseOffsetY = (1080 - baseViewport.height * baseFitScale) / 2;
+
   const clampedZoom = Math.max(1.5, Math.min(4.0, zoomScale));
   if (region && region.w > 0.02 && region.h > 0.02) {
     // Render the selected box region directly at full 1920x1080 high-DPI vector resolution
@@ -163,13 +174,13 @@ export async function renderPdfPageVectorZoom(params: {
     const scaleX = 1 / region.w;
     const scaleY = 1 / region.h;
     const boxZoom = Math.min(scaleX, scaleY);
-    const pdfScale = (1920 / Math.max(1, baseViewport.width)) * boxZoom;
+    const pdfScale = baseFitScale * boxZoom;
     const viewport = page.getViewport({ scale: pdfScale });
 
-    const centerX = (region.x + region.w / 2) * 1920 * boxZoom;
-    const centerY = (region.y + region.h / 2) * 1080 * boxZoom;
-    const offsetX = Math.round(outW / 2 - centerX);
-    const offsetY = Math.round(outH / 2 - centerY);
+    const boxCenterSlideX = (region.x + region.w / 2) * 1920;
+    const boxCenterSlideY = (region.y + region.h / 2) * 1080;
+    const offsetX = Math.round(outW / 2 - (boxCenterSlideX - baseOffsetX) * boxZoom);
+    const offsetY = Math.round(outH / 2 - (boxCenterSlideY - baseOffsetY) * boxZoom);
 
     ctx.save();
     ctx.translate(offsetX, offsetY);
@@ -189,12 +200,13 @@ export async function renderPdfPageVectorZoom(params: {
   ctx.fillStyle = '#1E2933';
   ctx.fillRect(0, 0, outW, outH);
 
-  const pdfScale = (1920 / Math.max(1, baseViewport.width)) * clampedZoom;
+  const pdfScale = baseFitScale * clampedZoom;
   const viewport = page.getViewport({ scale: pdfScale });
+  const offsetX = Math.round((outW - viewport.width) / 2);
   const offsetY = Math.round((outH - viewport.height) / 2);
 
   ctx.save();
-  ctx.translate(0, offsetY);
+  ctx.translate(offsetX, offsetY);
   await page.render({ canvasContext: ctx, viewport }).promise;
   ctx.restore();
 

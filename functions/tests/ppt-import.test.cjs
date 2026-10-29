@@ -61,15 +61,32 @@ function createFixture() {
     }),
   });
 
+  const assertFirestoreLimits = (docPath, val) => {
+    const serialized = JSON.stringify(val);
+    assert(
+      Buffer.byteLength(serialized) <= 1048576,
+      `Document ${docPath} exceeds 1 MiB limit: ${Buffer.byteLength(serialized)} bytes`,
+    );
+    for (const [k, v] of Object.entries(val || {})) {
+      if (typeof v === 'string') {
+        assert(
+          Buffer.byteLength(v) <= 1048487,
+          `Field ${docPath}.${k} exceeds 1,048,487 bytes: ${Buffer.byteLength(v)} bytes`,
+        );
+      }
+    }
+  };
+
   const ref = (docPath) => ({
     path: docPath,
     get: async () => snap(docPath),
     set: async (val, opts) => {
-      if (opts && opts.merge && docs.has(docPath)) {
-        docs.set(docPath, { ...structuredClone(docs.get(docPath)), ...structuredClone(val) });
-      } else {
-        docs.set(docPath, structuredClone(val));
-      }
+      const nextVal =
+        opts && opts.merge && docs.has(docPath)
+          ? { ...structuredClone(docs.get(docPath)), ...structuredClone(val) }
+          : structuredClone(val);
+      assertFirestoreLimits(docPath, nextVal);
+      docs.set(docPath, nextVal);
     },
     collection: (name) => collection(`${docPath}/${name}`),
   });
@@ -422,4 +439,129 @@ test('saveTeachingDeck 拒絕有錯誤的題目表，且 storage.rules 嚴格限
   const storageRules = fs.readFileSync(path.resolve(__dirname, '../../storage.rules'), 'utf8');
   assert.match(storageRules, /match \/courses\/\{courseId\}\/teachingDecks\/\{deckId\}\/\{allPaths=\*\*\}/);
   assert.match(storageRules, /allow read, write: if isCourseTeacher\(courseId\);/);
+});
+
+test('F1 回歸：900 KB 以上有效 PDF 與多頁高畫質圖檔不將巨型 Base64 寫入 teachingDecks 主文件（不觸發 Firestore 1 MiB 限制）', async () => {
+  const { call, docs, storageFiles } = createFixture();
+
+  // Construct a ~900 KB valid PDF (> 1.2 MB in Base64)
+  const stream =
+    'q\n0 0 720 540 re S\n' +
+    ' '.repeat(900000) +
+    '\nBT /F1 24 Tf 50 250 Td (Large Vector PDF) Tj ET\nQ';
+  const pdfBuf = Buffer.from(`%PDF-1.4\n${stream}\n%%EOF\n`);
+  assert(pdfBuf.length > 900000);
+  const largePdfDataUrl = 'data:application/pdf;base64,' + pdfBuf.toString('base64');
+  assert(Buffer.byteLength(largePdfDataUrl) > 1200000);
+
+  const slideImgDataUrl =
+    'data:image/webp;base64,' + Buffer.alloc(90000, 0x41).toString('base64');
+
+  const res = await call('saveTeachingDeck', {
+    deckId: 'large-valid-pdf',
+    title: '大型向量 PDF 簡報',
+    pdfDataUrl: largePdfDataUrl,
+    slides: Array.from({ length: 12 }, (_, idx) => ({
+      pageNumber: idx + 1,
+      title: `大型簡報第 ${idx + 1} 頁`,
+      notes: '',
+      answerPage: false,
+      imageDataUrl: slideImgDataUrl,
+      html: `<section><img src="${slideImgDataUrl}"></section>`,
+    })),
+    questionRows: [],
+  });
+
+  assert.equal(res.ok, true);
+  assert.equal(res.slideCount, 12);
+
+  const storedDeck = docs.get(`courses/${COURSE_ID}/teachingDecks/large-valid-pdf`);
+  assert(storedDeck, 'teachingDecks/large-valid-pdf 必須成功建立');
+  assert.equal('pdfDataUrl' in storedDeck, false, 'Storage 已存時不應把 pdfDataUrl 寫入 Firestore');
+  assert.equal(
+    storedDeck.pdfStoragePath,
+    `courses/${COURSE_ID}/teachingDecks/large-valid-pdf/source.pdf`,
+  );
+  assert(
+    storageFiles.has(`courses/${COURSE_ID}/teachingDecks/large-valid-pdf/source.pdf`),
+    'PDF 必須已存入 Storage',
+  );
+  for (const s of storedDeck.slides) {
+    assert.equal('imageDataUrl' in s, false, 'Storage 已存時不應把巨型 imageDataUrl 留存於 slide');
+    assert(!String(s.html).includes('data:image/'), 'slide.html 不應內嵌巨型 Base64');
+  }
+
+  const loaded = await call('getTeachingDeck', { deckId: 'large-valid-pdf' });
+  assert(loaded.pdfUrl.includes('courses/' + COURSE_ID + '/teachingDecks/large-valid-pdf/source.pdf'));
+  assert(loaded.slides[0].imageUrl.includes('signedExp='));
+  assert(loaded.slides[0].html.includes(loaded.slides[0].imageUrl));
+});
+
+test('F2 回歸：saveTeachingDeck 拒絕跨課程／越權 Storage 路徑，且 getTeachingDeck 絕不替其他課程路徑簽章', async () => {
+  const { call, docs } = createFixture();
+  const signedPaths = [];
+  const origDoc = docs;
+
+  // 1. saveTeachingDeck must reject foreign course pdfStoragePath
+  await assert.rejects(
+    call('saveTeachingDeck', {
+      deckId: 'cross-path',
+      title: '越權路徑測試',
+      pdfStoragePath: 'courses/other-course-b/teachingDecks/private/source.pdf',
+      slides: [{ pageNumber: 1, title: 'Slide 1', html: '<section>P1</section>' }],
+      questionRows: [],
+    }),
+    (err) => err.code === 'permission-denied',
+  );
+  assert.equal(origDoc.has(`courses/${COURSE_ID}/teachingDecks/cross-path`), false);
+
+  // 2. saveTeachingDeck must reject foreign course imageStoragePath or traversal '..'
+  await assert.rejects(
+    call('saveTeachingDeck', {
+      deckId: 'cross-img',
+      title: '越權圖片路徑測試',
+      slides: [
+        {
+          pageNumber: 1,
+          title: 'Slide 1',
+          imageStoragePath: 'courses/other-course-b/teachingDecks/private/slides/page-01.webp',
+        },
+      ],
+      questionRows: [],
+    }),
+    (err) => err.code === 'permission-denied',
+  );
+
+  await assert.rejects(
+    call('saveTeachingDeck', {
+      deckId: 'traversal-path',
+      title: '目錄穿越測試',
+      pdfStoragePath: `courses/${COURSE_ID}/teachingDecks/traversal-path/../../other/source.pdf`,
+      slides: [{ pageNumber: 1, title: 'Slide 1' }],
+      questionRows: [],
+    }),
+    (err) => err.code === 'permission-denied',
+  );
+
+  // 3. Even if a legacy document in Firestore had a foreign pdfStoragePath, getTeachingDeck must refuse to sign it
+  origDoc.set(`courses/${COURSE_ID}/teachingDecks/tampered-doc`, {
+    deckId: 'tampered-doc',
+    title: '遭竄改路徑簡報',
+    pdfStoragePath: 'courses/other-course-b/teachingDecks/private/source.pdf',
+    slides: [
+      {
+        id: 'tampered-doc-P01',
+        pageNumber: 1,
+        title: 'P1',
+        html: '<section>P1</section>',
+        imageStoragePath: 'courses/other-course-b/teachingDecks/private/slides/page-01.webp',
+      },
+    ],
+    updatedAt: Date.now(),
+  });
+
+  const loaded = await call('getTeachingDeck', { deckId: 'tampered-doc' });
+  assert.equal('pdfUrl' in loaded, false, '不應簽發非本課程之 pdfUrl');
+  assert.equal('imageUrl' in loaded.slides[0], false, '不應簽發非本課程之 imageUrl');
+  assert.equal(signedPaths.length, 0);
 });

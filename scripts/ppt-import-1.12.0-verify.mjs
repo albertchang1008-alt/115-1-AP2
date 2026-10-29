@@ -319,6 +319,60 @@ export async function verifyPptImport1120({ outDir = '' } = {}) {
     await page.keyboard.press('Escape');
     await overlay.waitFor({ state: 'detached' });
 
+    // 5. F3 Regression: 4:3 PDF (720x540) with top red band & bottom blue band preserves 100% of both bands without vertical cropping
+    const pdf43Stream =
+      'q\n1 1 1 rg 0 0 720 540 re f\n1 0 0 rg 0 500 720 40 re f\n0 0 1 rg 0 0 720 40 re f\nBT /F1 24 Tf 0 0 0 rg 100 270 Td (CENTER) Tj ET\nQ';
+    const pdf43Objs = [
+      '<< /Type /Catalog /Pages 2 0 R >>',
+      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 720 540] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+      `<< /Length ${Buffer.byteLength(pdf43Stream)} >>\nstream\n${pdf43Stream}\nendstream`,
+    ];
+    let pdf43Str = '%PDF-1.4\n';
+    const pdf43Offsets = [0];
+    for (let i = 0; i < pdf43Objs.length; i++) {
+      pdf43Offsets.push(Buffer.byteLength(pdf43Str));
+      pdf43Str += `${i + 1} 0 obj\n${pdf43Objs[i]}\nendobj\n`;
+    }
+    const pdf43Xref = Buffer.byteLength(pdf43Str);
+    const pdf43Buf = Buffer.from(
+      pdf43Str +
+        `xref\n0 6\n0000000000 65535 f \n` +
+        pdf43Offsets
+          .slice(1)
+          .map((n) => String(n).padStart(10, '0') + ' 00000 n \n')
+          .join('') +
+        `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${pdf43Xref}\n%%EOF\n`,
+    );
+    const fourThreeCheck = await page.evaluate(async (b64) => {
+      const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+      const pages = await window.__PDF_VECTOR_RENDERER__.renderPdfPagesTo1920Images(bytes);
+      const c = document.createElement('canvas');
+      c.width = 1920;
+      c.height = 1080;
+      const im = new Image();
+      im.src = pages[0].imageDataUrl;
+      await im.decode();
+      const ctx = c.getContext('2d');
+      ctx.drawImage(im, 0, 0);
+      const data = ctx.getImageData(0, 0, 1920, 1080).data;
+      let red = 0;
+      let blue = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i] > 220 && data[i + 1] < 30 && data[i + 2] < 30) red++;
+        if (data[i + 2] > 220 && data[i] < 30 && data[i + 1] < 30) blue++;
+      }
+      return { width: pages[0].width, height: pages[0].height, red, blue };
+    }, pdf43Buf.toString('base64'));
+    assert.equal(fourThreeCheck.width, 1920);
+    assert.equal(fourThreeCheck.height, 1080);
+    assert(
+      fourThreeCheck.red >= 110000 && fourThreeCheck.blue >= 110000,
+      `4:3 頂部紅帶與底部藍帶必須完整保留（red=${fourThreeCheck.red}, blue=${fourThreeCheck.blue}）`,
+    );
+    assert.equal(fourThreeCheck.red, fourThreeCheck.blue);
+
     assert.deepEqual(errors, []);
     return {
       passed: true,

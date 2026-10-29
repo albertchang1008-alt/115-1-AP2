@@ -16,6 +16,7 @@ import { featureEnabled } from '../../shared/features';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { forClass } from '../../shared/model';
 import { Firestore } from 'firebase-admin/firestore';
+import { createHash } from 'node:crypto';
 
 export interface StorageLike {
   bucket?: () => {
@@ -30,6 +31,46 @@ function parseDataUrlBuffer(dataUrl: string): { mime: string; buffer: Buffer } |
   const m = /^data:([^;,]+);base64,(.+)$/i.exec(String(dataUrl ?? '').trim());
   if (!m) return null;
   return { mime: m[1], buffer: Buffer.from(m[2], 'base64') };
+}
+
+export function isValidCourseDeckStoragePath(
+  courseId: string,
+  storagePath: string | undefined,
+  expectedDeckId?: string,
+): boolean {
+  if (typeof storagePath !== 'string' || !courseId) return false;
+  const trimmed = storagePath.trim();
+  if (!trimmed || trimmed !== storagePath) return false;
+  if (
+    trimmed.includes('\\') ||
+    trimmed.includes('//') ||
+    trimmed.includes('?') ||
+    trimmed.includes('#') ||
+    trimmed.includes('%')
+  ) {
+    return false;
+  }
+  const parts = trimmed.split('/');
+  if (parts.length < 5) return false;
+  if (parts.some((seg) => !seg || seg === '.' || seg === '..')) return false;
+  if (parts[0] !== 'courses' || parts[1] !== courseId || parts[2] !== 'teachingDecks') {
+    return false;
+  }
+  if (expectedDeckId && parts[3] !== expectedDeckId) {
+    return false;
+  }
+  return true;
+}
+
+function assertCourseDeckStoragePath(
+  courseId: string,
+  deckId: string,
+  storagePath: string,
+): string {
+  if (!isValidCourseDeckStoragePath(courseId, storagePath, deckId)) {
+    throw new HttpsError('permission-denied', 'Storage 路徑不屬於本課程簡報範圍');
+  }
+  return storagePath;
 }
 
 function sanitizeSlideHtml(
@@ -57,11 +98,17 @@ function hasLegacyCombined28(asset: any): boolean {
 
 async function resolveShortLivedUrl(
   storage: StorageLike | undefined,
+  courseId: string,
   storagePath: string | undefined,
   fallbackUrl: string | undefined,
   expiresAt: number,
 ): Promise<string | undefined> {
-  if (storagePath && storage && typeof storage.bucket === 'function') {
+  if (
+    storagePath &&
+    isValidCourseDeckStoragePath(courseId, storagePath) &&
+    storage &&
+    typeof storage.bucket === 'function'
+  ) {
     try {
       const [signedUrl] = await storage
         .bucket()
@@ -144,7 +191,9 @@ export function createTeachingHandlers(
           title: String(d.data.title || d.id),
           slideCount: d.data.slides.length,
           updatedAt: d.data.updatedAt || 0,
-          hasPdf: Boolean(d.data.pdfStoragePath || d.data.pdfDataUrl),
+          hasPdf: Boolean(
+            d.data.pdfStoragePath || d.data.pdfDataUrl || Number(d.data.pdfBlobChunks) > 0,
+          ),
         }));
 
       let selectedDeck: any = null;
@@ -183,17 +232,32 @@ export function createTeachingHandlers(
       const rawSlides = Array.isArray(selectedDeck?.slides) ? selectedDeck.slides : [];
       const hydratedSlides = await Promise.all(
         rawSlides.map(async (s: any) => {
+          let fallbackImg = s.imageDataUrl || s.imageUrl;
+          if (!fallbackImg && s.hasImageBlob && selectedDeckId && s.pageNumber) {
+            const blobSnap = await db
+              .doc(`courses/${courseId}/teachingDeckBlobs/${selectedDeckId}__slide__${s.pageNumber}`)
+              .get();
+            fallbackImg = blobSnap?.data?.()?.imageDataUrl;
+          }
           const imageUrl = await resolveShortLivedUrl(
             storage,
+            courseId,
             s.imageStoragePath,
-            s.imageDataUrl || s.imageUrl,
+            fallbackImg,
             expiresAt,
           );
-          const html =
-            s.html && String(s.html).includes('<section')
-              ? s.html
-              : imageUrl
-                ? buildImageSlideHtml(s.id, s.title || s.id, imageUrl)
+          const hasCustomHtml =
+            s.html &&
+            String(s.html).includes('<section') &&
+            !s.imageStoragePath &&
+            !s.hasImageBlob &&
+            !s.imageDataUrl;
+          const html = hasCustomHtml
+            ? s.html
+            : imageUrl
+              ? buildImageSlideHtml(s.id, s.title || s.id, imageUrl)
+              : s.html && String(s.html).includes('<section')
+                ? s.html
                 : `<section><h1>${s.title || s.id}</h1></section>`;
           return {
             id: s.id,
@@ -208,10 +272,22 @@ export function createTeachingHandlers(
       );
 
       const transformedSlides = classroomDeckSlides(hydratedSlides, config);
+      let fallbackPdf = selectedDeck?.pdfDataUrl || selectedDeck?.pdfUrl;
+      if (!fallbackPdf && Number(selectedDeck?.pdfBlobChunks) > 0 && selectedDeckId) {
+        const count = Number(selectedDeck.pdfBlobChunks);
+        const chunkSnaps = await Promise.all(
+          Array.from({ length: count }, (_, idx) =>
+            db.doc(`courses/${courseId}/teachingDeckBlobs/${selectedDeckId}__pdf__${idx}`).get(),
+          ),
+        );
+        const joined = chunkSnaps.map((snap) => String(snap?.data?.()?.chunk || '')).join('');
+        if (joined) fallbackPdf = joined;
+      }
       const pdfUrl = await resolveShortLivedUrl(
         storage,
+        courseId,
         selectedDeck?.pdfStoragePath,
-        selectedDeck?.pdfDataUrl || selectedDeck?.pdfUrl,
+        fallbackPdf,
         expiresAt,
       );
 
@@ -311,27 +387,40 @@ export function createTeachingHandlers(
       }
 
       const timestamp = now();
-      const pdfStoragePath =
-        req.data?.pdfDataUrl || req.data?.pdfStoragePath
-          ? String(
-              req.data.pdfStoragePath || `courses/${courseId}/teachingDecks/${deckId}/source.pdf`,
-            )
+      const isDryRun = req.data?.dryRun === true;
+      const rawPdfDataUrl =
+        typeof req.data?.pdfDataUrl === 'string' && req.data.pdfDataUrl.trim()
+          ? req.data.pdfDataUrl.trim()
           : undefined;
+      let pdfStoragePath: string | undefined;
+      if (typeof req.data?.pdfStoragePath === 'string' && req.data.pdfStoragePath.trim()) {
+        pdfStoragePath = assertCourseDeckStoragePath(
+          courseId,
+          deckId,
+          req.data.pdfStoragePath.trim(),
+        );
+      } else if (rawPdfDataUrl) {
+        pdfStoragePath = `courses/${courseId}/teachingDecks/${deckId}/source.pdf`;
+      }
 
-      if (req.data?.pdfDataUrl && storage && typeof storage.bucket === 'function' && pdfStoragePath) {
-        const parsedPdf = parseDataUrlBuffer(String(req.data.pdfDataUrl));
+      let pdfSavedToStorage = false;
+      if (!isDryRun && rawPdfDataUrl && storage && typeof storage.bucket === 'function' && pdfStoragePath) {
+        const parsedPdf = parseDataUrlBuffer(rawPdfDataUrl);
         if (parsedPdf) {
           try {
             await storage.bucket().file(pdfStoragePath).save(parsedPdf.buffer, {
               contentType: parsedPdf.mime || 'application/pdf',
             });
+            pdfSavedToStorage = true;
           } catch {
-            // Continue in emulator/test environments without GCS bucket
+            pdfSavedToStorage = false;
           }
         }
       }
 
-      const preparedSlides: Array<TeachingDeckSlide & { imageDataUrl?: string }> = await Promise.all(
+      const preparedSlides: Array<
+        TeachingDeckSlide & { imageDataUrl?: string; hasImageBlob?: boolean }
+      > = await Promise.all(
         inputSlides.map(async (raw: any, idx: number) => {
           const pageNumber = Number(raw?.pageNumber) || idx + 1;
           const slideId =
@@ -342,15 +431,25 @@ export function createTeachingHandlers(
             String(raw?.title ?? `第 ${pageNumber} 頁`).trim() || `第 ${pageNumber} 頁`;
           const notes = String(raw?.notes ?? '').trim();
           const answerPage = Boolean(raw?.answerPage);
-          const imageDataUrl = typeof raw?.imageDataUrl === 'string' ? raw.imageDataUrl : undefined;
+          const imageDataUrl =
+            typeof raw?.imageDataUrl === 'string' && raw.imageDataUrl.trim()
+              ? raw.imageDataUrl.trim()
+              : undefined;
+          const imageSha256 = imageDataUrl
+            ? createHash('sha256').update(imageDataUrl).digest('hex')
+            : typeof raw?.imageSha256 === 'string' && raw.imageSha256
+              ? raw.imageSha256
+              : undefined;
           const imageStoragePath =
-            typeof raw?.imageStoragePath === 'string' && raw.imageStoragePath
-              ? raw.imageStoragePath
+            typeof raw?.imageStoragePath === 'string' && raw.imageStoragePath.trim()
+              ? assertCourseDeckStoragePath(courseId, deckId, raw.imageStoragePath.trim())
               : imageDataUrl
                 ? `courses/${courseId}/teachingDecks/${deckId}/slides/page-${String(pageNumber).padStart(2, '0')}.webp`
                 : undefined;
 
+          let imageSavedToStorage = false;
           if (
+            !isDryRun &&
             imageDataUrl &&
             storage &&
             typeof storage.bucket === 'function' &&
@@ -362,13 +461,36 @@ export function createTeachingHandlers(
                 await storage.bucket().file(imageStoragePath).save(parsedImg.buffer, {
                   contentType: parsedImg.mime || 'image/webp',
                 });
+                imageSavedToStorage = true;
               } catch {
-                // Continue in local/emulator environments
+                imageSavedToStorage = false;
               }
             }
           }
 
-          const html = sanitizeSlideHtml(slideId, raw?.html, slideTitle, imageDataUrl);
+          let hasImageBlob = false;
+          let inlineImageDataUrl: string | undefined;
+          if (imageDataUrl && !imageSavedToStorage) {
+            if (!isDryRun && Buffer.byteLength(imageDataUrl) > 25_000) {
+              await setDocCompat(
+                db.doc(`courses/${courseId}/teachingDeckBlobs/${deckId}__slide__${pageNumber}`),
+                { imageDataUrl, updatedAt: timestamp },
+                false,
+              );
+              hasImageBlob = true;
+            } else if (!isDryRun) {
+              inlineImageDataUrl = imageDataUrl;
+            }
+          }
+
+          const rawHtml = typeof raw?.html === 'string' ? raw.html : '';
+          const shouldStripDataUrlHtml =
+            Boolean(imageDataUrl || imageStoragePath || hasImageBlob) &&
+            (!rawHtml || rawHtml.includes('data:image/'));
+          const html = shouldStripDataUrlHtml
+            ? buildImageSlideHtml(slideId, slideTitle, imageStoragePath || '')
+            : sanitizeSlideHtml(slideId, rawHtml, slideTitle, inlineImageDataUrl);
+
           return {
             id: slideId,
             pageNumber,
@@ -376,8 +498,10 @@ export function createTeachingHandlers(
             html,
             notes,
             answerPage,
+            ...(imageSha256 ? { imageSha256 } : {}),
             ...(imageStoragePath ? { imageStoragePath } : {}),
-            ...(imageDataUrl ? { imageDataUrl } : {}),
+            ...(inlineImageDataUrl ? { imageDataUrl: inlineImageDataUrl } : {}),
+            ...(hasImageBlob ? { hasImageBlob: true } : {}),
           };
         }),
       );
@@ -419,7 +543,7 @@ export function createTeachingHandlers(
         newAnswerKeys,
       });
 
-      if (req.data?.dryRun === true) {
+      if (isDryRun) {
         return {
           ok: true,
           dryRun: true,
@@ -441,14 +565,46 @@ export function createTeachingHandlers(
         newDeckAnswerKeys: newAnswerKeys,
       });
 
+      let inlinePdfDataUrl: string | undefined;
+      let pdfBlobChunks = 0;
+      if (rawPdfDataUrl && !pdfSavedToStorage) {
+        if (Buffer.byteLength(rawPdfDataUrl) <= 200_000) {
+          inlinePdfDataUrl = rawPdfDataUrl;
+        } else {
+          const chunkSize = 400_000;
+          const chunks: string[] = [];
+          for (let i = 0; i < rawPdfDataUrl.length; i += chunkSize) {
+            chunks.push(rawPdfDataUrl.slice(i, i + chunkSize));
+          }
+          await Promise.all(
+            chunks.map((chunk, idx) =>
+              setDocCompat(
+                db.doc(`courses/${courseId}/teachingDeckBlobs/${deckId}__pdf__${idx}`),
+                { chunk, updatedAt: timestamp },
+                false,
+              ),
+            ),
+          );
+          pdfBlobChunks = chunks.length;
+        }
+      }
+
+      const effectivePdfStoragePath =
+        pdfStoragePath ||
+        (oldDeckData?.pdfStoragePath &&
+        isValidCourseDeckStoragePath(courseId, oldDeckData.pdfStoragePath, deckId)
+          ? oldDeckData.pdfStoragePath
+          : undefined);
+
       const deckPayload: Record<string, unknown> = {
         deckId,
         title,
         slides: preparedSlides,
         updatedAt: timestamp,
         updatedBy: p.uid || 'teacher',
-        ...(pdfStoragePath ? { pdfStoragePath } : {}),
-        ...(typeof req.data?.pdfDataUrl === 'string' ? { pdfDataUrl: req.data.pdfDataUrl } : {}),
+        ...(effectivePdfStoragePath ? { pdfStoragePath: effectivePdfStoragePath } : {}),
+        ...(inlinePdfDataUrl ? { pdfDataUrl: inlinePdfDataUrl } : {}),
+        ...(pdfBlobChunks > 0 ? { pdfBlobChunks } : {}),
       };
 
       await setDocCompat(deckRef, deckPayload, false);

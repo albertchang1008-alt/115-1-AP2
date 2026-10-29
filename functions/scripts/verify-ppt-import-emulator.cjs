@@ -301,6 +301,89 @@ async function main() {
     '血腦障壁對 CO₂ 通透性極高，中樞化學受器主要感應腦脊髓液 H⁺ 濃度變化。',
   );
 
+  // 6. F1 regression: 900,624+ byte valid vector PDF (>1.2 MB Base64) succeeds in real Firestore Emulator without exceeding 1 MiB doc limit
+  const stream =
+    'q\n0 0 720 540 re S\n' +
+    ' '.repeat(900000) +
+    '\nBT /F1 24 Tf 50 250 Td (Synthetic Vector PDF) Tj ET\nQ';
+  const objs = [
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 720 540] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+    `<< /Length ${Buffer.byteLength(stream)} >>\nstream\n${stream}\nendstream`,
+  ];
+  let pdfRaw = '%PDF-1.4\n';
+  const offsets = [0];
+  for (let i = 0; i < objs.length; i++) {
+    offsets.push(Buffer.byteLength(pdfRaw));
+    pdfRaw += `${i + 1} 0 obj\n${objs[i]}\nendobj\n`;
+  }
+  const xrefPos = Buffer.byteLength(pdfRaw);
+  pdfRaw +=
+    `xref\n0 6\n0000000000 65535 f \n` +
+    offsets
+      .slice(1)
+      .map((n) => String(n).padStart(10, '0') + ' 00000 n \n')
+      .join('') +
+    `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF\n`;
+  const largePdfBuf = Buffer.from(pdfRaw);
+  assert(largePdfBuf.length >= 900624);
+
+  const largeImport = await handlers.saveTeachingDeck.run({
+    auth: teacherAuth,
+    data: {
+      courseId,
+      deckId: 'large-valid-pdf',
+      title: 'Synthetic Large Vector PDF',
+      pdfDataUrl: 'data:application/pdf;base64,' + largePdfBuf.toString('base64'),
+      slides: [
+        {
+          id: 'large-valid-pdf-P01',
+          pageNumber: 1,
+          title: 'Slide 1',
+          html: '<section>synthetic</section>',
+          notes: '',
+          answerPage: false,
+        },
+      ],
+      questionRows: [],
+    },
+  });
+  assert.equal(largeImport.ok, true);
+  const largeDeckSnap = await db.doc(`courses/${courseId}/teachingDecks/large-valid-pdf`).get();
+  assert.equal(largeDeckSnap.exists, true);
+  assert.equal('pdfDataUrl' in (largeDeckSnap.data() || {}), false);
+
+  // 7. F2 regression: Cross-course pdfStoragePath / imageStoragePath rejected with permission-denied
+  await assert.rejects(
+    handlers.saveTeachingDeck.run({
+      auth: teacherAuth,
+      data: {
+        courseId,
+        deckId: 'cross-path',
+        title: 'Cross Path Attempt',
+        pdfStoragePath: 'courses/codex-ppt-b/teachingDecks/private/source.pdf',
+        slides: [
+          {
+            id: 'cross-path-P01',
+            pageNumber: 1,
+            title: 'Slide',
+            html: '<section>synthetic</section>',
+            notes: '',
+            answerPage: false,
+          },
+        ],
+        questionRows: [],
+      },
+    }),
+    (err) => err.code === 'permission-denied',
+  );
+  assert.equal(
+    (await db.doc(`courses/${courseId}/teachingDecks/cross-path`).get()).exists,
+    false,
+  );
+
   console.log(
     JSON.stringify(
       {
@@ -311,6 +394,8 @@ async function main() {
         mergedQuestionCount: importRes.interactions.length,
         reimportDiff: reimportRes.diff,
         revealedSnapshotPreserved: true,
+        largePdfSaved: largeDeckSnap.exists,
+        crossCoursePathRejected: true,
       },
       null,
       2,

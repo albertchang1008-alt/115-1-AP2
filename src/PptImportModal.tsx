@@ -112,7 +112,6 @@ export default function PptImportModal({
         notes,
         answerPage,
         imageDataUrl: p.imageDataUrl,
-        html: buildImageSlideHtml(slideId, slideTitle, p.imageDataUrl),
       };
     });
 
@@ -143,7 +142,7 @@ export default function PptImportModal({
           title: st,
           notes: nextNotes[p.pageNumber] || '',
           answerPage: /答案|總結|解析/.test(st),
-          html: buildImageSlideHtml(slideId, st, p.imageDataUrl),
+          imageDataUrl: p.imageDataUrl,
         };
       });
       const res = await api.call('saveTeachingDeck', {
