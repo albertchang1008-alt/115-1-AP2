@@ -365,6 +365,18 @@ try {
     descending,
     [...numeric].sort((a, b) => b - a),
   );
+  // A timer callback must flush the current question, not its initial render closure.
+  await page.getByRole('button', {name:'開始完整測驗',exact:true}).click();
+  await page.getByRole('heading',{name:questions[0].text}).waitFor();
+  await page.clock.runFor(1000);
+  await page.getByRole('button',{name:'下一題',exact:true}).click();
+  await page.getByRole('heading',{name:questions[1].text}).waitFor();
+  await page.clock.fastForward(480000);
+  await page.getByText('已保存',{exact:true}).waitFor();
+  const timeoutAttempt=(await db.collection(`courses/${courseId}/attempts`).where('uid','==',student.uid).get()).docs.map(d=>d.data()).find(a=>!records.some(old=>old.id===a.id));
+  assert.equal(timeoutAttempt.answers[0].seconds,1);
+  assert.ok(timeoutAttempt.answers[1].seconds>=479);
+  assert.equal(timeoutAttempt.leaveCount,0);
   // Real client rules probe, not an Admin SDK permission simulation.
   const clientRequire = createRequire(new URL('../package.json', import.meta.url)),
     { initializeApp, deleteApp } = clientRequire('firebase/app'),
@@ -411,6 +423,7 @@ try {
     },
     flashcardRecordOnly: true,
     sortingAndFilter: true,
+    timeoutCurrentQuestionTiming:true,
     uiApiCalls: calls.length,
     statsReads: before.reads,
     errors,

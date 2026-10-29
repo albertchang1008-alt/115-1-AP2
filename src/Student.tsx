@@ -306,7 +306,6 @@ export default function Student({
       setFull(isReviewUnit(target) || !practiceCount);
       qs = qs.map((q) => ({ ...q, options: shuffle(q.options) }));
       setQuestions(qs);
-      setQuizRun(n => n + 1);
       setMode(m);
       setTaking(true);
     } catch (e) {
@@ -377,7 +376,7 @@ export default function Student({
         mode={mode}
         course={course}
         unit={unit}
-        onSubmit={submit} onRetry={() => start(mode, full ? undefined : questions.length, unit)}
+        onSubmit={submit} onRetry={async () => { await start(mode, full ? undefined : questions.length, unit); setQuizRun(n => n + 1); }}
         researchEnabled={unit.research?.enabled !== false}
         onResearch={saveResearch}
         forceLeave={exitRequested}
