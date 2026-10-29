@@ -1,3 +1,4 @@
+import { addTiming, type TimingStats } from './timingStats';
 export type Mode = 'quiz' | 'flashcard' | 'review';
 export type Phase = 'before' | 'during' | 'after';
 export type UnitVisibility = 'hidden' | 'current' | 'archived';
@@ -188,9 +189,10 @@ export interface Attempt {
   processed?: boolean;
 }
 export interface Progress {
+  activityUpdatedAt?: number;
   units: Record<
     string,
-    { best: number; attempts: number; updatedAt: number; passedAt?: number; fullAttempts?: number; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
+    { best: number; attempts: number; updatedAt: number; passedAt?: number; fullAttempts?: number; timing?: TimingStats; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
@@ -603,6 +605,7 @@ export function applyAttempt(p: Progress, a: Attempt, unitMeta?: Partial<Unit>):
         best: a.mode === 'quiz' && a.full && a.integrity !== 'left-screen' ? Math.max(old?.best ?? -1, a.score) : (old?.best ?? -1),
         attempts: (old?.attempts || 0) + 1,
         fullAttempts: (old?.fullAttempts || 0) + (a.mode === 'quiz' && a.full ? 1 : 0),
+        ...(addTiming(old?.timing, a, unitMeta, !old?.attempts) ? { timing: addTiming(old?.timing, a, unitMeta, !old?.attempts) } : {}),
         wrong,
         updatedAt: a.receivedAt || a.clientAt,
       },

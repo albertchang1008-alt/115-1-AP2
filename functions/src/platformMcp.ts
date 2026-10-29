@@ -1,3 +1,4 @@
+import { completionRef, completionStamp } from './statsAggregation';
 import { Firestore } from 'firebase-admin/firestore';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { createHash } from 'node:crypto';
@@ -29,6 +30,8 @@ export function createPlatformHandlers(
       const {c} = await access(req,req.data.courseId,true);
       const classId = req.data.classId;
       if (!c.published || typeof classId !== 'string' || !c.published.classIds.includes(classId)) throw new HttpsError('failed-precondition','班級不存在或課程未發布');
+      const cached=(await completionRef(db,req.data.courseId,classId).get()).data();
+      if(cached?.schema===1&&cached.stamp===completionStamp(c))return {...cached.summary,updatedAt:cached.updatedAt,source:'completionDaily',stale:Date.now()-cached.updatedAt>86400000};
       const roster = await rosterQuery(req.data.courseId,c).where('classId','==',classId).limit(5001).get();
       if (roster.size > 5000) throw new HttpsError('resource-exhausted','班級過大，未回傳不完整統計');
       const course = forClass(c.published,classId);

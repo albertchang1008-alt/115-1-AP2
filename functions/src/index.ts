@@ -1,4 +1,8 @@
-import { createUsageHandler } from './usageStats';
+import { statsRoster } from './statsRoster';
+import { drainReports } from './reportDrain';
+import { createAggregationHandlers, readPages } from './statsAggregation';
+import { withoutTiming } from '../../shared/timingStats';
+import { createUsageHandler, millis } from './usageStats';
 import { classifyAttemptIntegrity, validateLeaveMetrics } from '../../shared/answerIntegrity';
 import { createIntegrityHandlers } from './answerIntegrity';
 import { validateCourseDraft } from '../../shared/courseValidation';
@@ -109,6 +113,7 @@ function visibleProgress(progress: Progress, course: Course) {
   const activityVisible = (key: string) => key.startsWith('chapter:')
     ? [...chapterPrefixes].some((prefix) => key.startsWith(prefix))
     : ids.has(key.split('_')[0]);
+  progress = withoutTiming(progress);
   return { ...progress, units: Object.fromEntries(Object.entries(progress.units || {}).filter(([id]) => ids.has(id))), activities: Object.fromEntries(Object.entries(progress.activities || {}).filter(([key]) => activityVisible(key))), attempted: Object.fromEntries(Object.entries(progress.attempted || {}).filter(([id]) => ids.has(id))) } as Progress;
 }
 function validateDraft(course: Course) {
@@ -381,6 +386,7 @@ async function writeEnrollments(uid: string, courseId: string, rows: Roster[], m
         if (emailChange) moved++;
         if (oldKey && oldKeySnap?.data()?.email === row.email) tx.delete(oldKey);
       }
+      if (count || moved) tx.update(db.doc(`courses/${courseId}`), { rosterUpdatedAt: Date.now() });
       return { count, moved };
     });
     updated += result.count;
@@ -612,6 +618,7 @@ export const submitAttempt = onCall(options, async (req) => {
   size(a, 300000);
   const { p, c } = await access(req, a.courseId);
   if (p.teacher) fail('教師請使用不寫入紀錄的前台預覽');
+  a.classId=p.classId; a.uid=p.uid;
   const unit =
     c.published && forClass(c.published, p.classId).units.find((u: any) => u.id === a.unitId);
   if (!unit || parseCourseTime(unit.opensAt) > Date.now()) fail('單元尚未開放');
@@ -676,7 +683,7 @@ export const submitAttempt = onCall(options, async (req) => {
     const [old, progress] = await Promise.all([tx.get(ref), tx.get(pr)]);
     if (old.exists) {
       if (old.data()?.uid !== p.uid) throw new HttpsError('permission-denied', '作答 ID 衝突');
-      return { progress: normalizeProgress(progress.data() as Progress), attempt: old.data(), wrongSummary: old.data()?.wrongSummary, duplicate: true };
+      return { progress: p.teacher ? normalizeProgress(progress.data() as Progress) : withoutTiming(normalizeProgress(progress.data() as Progress)), attempt: old.data(), wrongSummary: old.data()?.wrongSummary, duplicate: true };
     }
     const saved = {
       ...a,
@@ -697,7 +704,7 @@ export const submitAttempt = onCall(options, async (req) => {
       next.units[a.unitId] = { ...next.units[a.unitId], passedAt: Date.now() };
     tx.create(ref, { ...saved, wrongSummary });
     tx.set(pr, { ...next, uid: p.uid, classId: p.classId });
-    return { progress: next, attempt: a, wrongSummary, duplicate: false };
+    return { progress: p.teacher ? next : withoutTiming(next), attempt: a, wrongSummary, duplicate: false };
   });
 });
 /** 綜合練習只寫一次 progress；每個次單元仍各留一筆不可變作答紀錄。 */
@@ -753,7 +760,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
       tx.create(db.doc(`courses/${courseId}/attempts/${a.id}`), { ...a, wrongSummary: summary, uid: p.uid, classId: p.classId, receivedAt: FieldValue.serverTimestamp(), processed: false });
     }
     tx.set(progressRef, { ...next, uid: p.uid, classId: p.classId });
-    return { progress: next, attempts: prepared, summaries };
+    return { progress: p.teacher ? next : withoutTiming(next), attempts: prepared, summaries };
   });
 });
 export const saveActivity = onCall(options, async (req) => {
@@ -781,6 +788,7 @@ export const saveActivity = onCall(options, async (req) => {
     {
       uid: p.uid,
       classId: p.classId,
+      activityUpdatedAt: Date.now(),
       activities: {
         [chapter ? chapterActivityKey(String(requestedChapter), id(activityId)) : `${code(unitId)}_${id(activityId)}`]: { position, completed, updatedAt: Date.now() },
       },
@@ -819,8 +827,8 @@ export const saveReflection = onCall(options, async (req) => {
     const row = reflectionOrFail(() => buildReflectionResponse({ ...roster, classId: roster.classId, uid: req.auth!.uid }, config, answers, old.exists ? old.data() as any : null, now));
     const progress = reflectionProgress(normalizeProgress(progressDoc.data() as Progress), request.key, now);
     tx.set(responseRef, row);
-    tx.set(progressRef, { ...progress, uid: req.auth!.uid, classId: roster.classId });
-    return { response: row, progress };
+    tx.set(progressRef, { ...progress, activityUpdatedAt: now, uid: req.auth!.uid, classId: roster.classId });
+    return { response: row, progress: withoutTiming(progress) };
   });
 });
 export const getMyReflection = onCall(options, async req => {
@@ -895,11 +903,15 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const classId = code(req.data.classId), unitId = code(req.data.unitId);
   if (!c.classIds.includes(classId)) fail('班級不屬於課程');
-  const snap = await db.collection(`courses/${req.data.courseId}/research`).where('classId', '==', classId).limit(500).get();
+  const researchDocs = await readPages(()=>db.collection(`courses/${req.data.courseId}/research`).where('classId','==',classId).where('unitId','==',unitId),5000);
+  const snap={docs:researchDocs};
   const rows: any[] = snap.docs.map((d) => ({ ...d.data(), id: d.id })).filter((r: any) => r.unitId === unitId);
-  const attempts = await db.collection(`courses/${req.data.courseId}/attempts`).where('classId', '==', classId).limit(2000).get();
-  const diagnostics = await db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', classId).limit(500).get();
+  const attempts={docs:await readPages(()=>db.collection(`courses/${req.data.courseId}/attempts`).where('classId','==',classId).where('unitId','==',unitId),50000)};
+
   const researchChapter = chapterName((c.published as Course).units.find((u) => u.id === unitId) || ({ id: unitId, title: unitId } as Unit));
+  const diagnosticUnit=await readPages(()=>db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId','==',classId).where('unitId','==',unitId),5000);
+  const diagnosticChapter=await readPages(()=>db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId','==',classId).where('chapterName','==',researchChapter),5000);
+  const diagnostics={docs:[...new Map([...diagnosticUnit,...diagnosticChapter].map(d=>[d.id,d])).values()]};
   const htmlByStudent = new Map<string, any[]>();
   diagnostics.docs.forEach((d) => { const x = d.data(); if (x.unitId === unitId || x.chapterName === researchChapter) (htmlByStudent.get(x.uid) || (htmlByStudent.set(x.uid, []), htmlByStudent.get(x.uid)!)).push(x); });
   const byStudent = new Map<string, any[]>();
@@ -907,7 +919,7 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
   return { rows: rows.map((r: any) => {
     let laterAttempts = 0, laterWrong = 0, recovered = 0;
     for (const [questionId, evidence] of Object.entries(r.summary?.questions || {}) as any) {
-      const after = (byStudent.get(r.uid) || []).flatMap((a) => (a.answers || []).filter((x: any) => x.questionId === questionId && a.receivedAt?.toMillis?.() > evidence.lastAt));
+      const after = (byStudent.get(r.uid) || []).flatMap((a) => (a.answers || []).filter((x: any) => x.questionId === questionId && millis(a.receivedAt) > evidence.lastAt));
       laterAttempts += after.length; laterWrong += after.filter((x: any) => !x.correct).length;
       if (after.some((x: any) => x.correct)) recovered++;
     }
@@ -1038,19 +1050,11 @@ export const setSchedule = onCall(options, async (req) => {
   return { ok: true };
 });
 export const dailyReports = onSchedule(
-  { ...options, schedule: '0 3 * * *', timeZone: 'Asia/Taipei' },
+  { ...options, timeoutSeconds:540, schedule: '0 3 * * *', timeZone: 'Asia/Taipei' },
   async () => {
-    const courses = await db
-      .collection('courses')
-      .where('dailyReports', '==', true)
-      .limit(100)
-      .get();
-    for (const c of courses.docs) {
-      for (let i = 0; i < 10; i++) {
-        const r = await aggregateBatch(c.id);
-        if (!r.hasMore) break;
-      }
-    }
+    const deadline=Date.now()+480000;
+    const courses=await readPages(()=>db.collection('courses').where('dailyReports','==',true),500);
+    for(const c of courses) await drainReports(db,c.id,aggregateBatch,deadline);
   },
 );
 export const getCompletion = onCall(options, async (req) => {
@@ -1063,16 +1067,8 @@ export const getCompletion = onCall(options, async (req) => {
     .startAfter(req.data.after || '')
     .limit(50)
     .get();
-  const emails = roster.docs.map((d) => d.data().email);
-  const profiles = [];
-  for (let i = 0; i < emails.length; i += 30) {
-    const s = await db
-      .collection('profiles')
-      .where('email', 'in', emails.slice(i, i + 30))
-      .get();
-    profiles.push(...s.docs);
-  }
-  const byEmail = new Map(profiles.map((d) => [d.data().email, d.id]));
+  const mapping=await statsRoster(db,rosterQuery,req.data.courseId,c,req.data.classId);
+  const byEmail=new Map<string,string>(Object.entries(mapping.emailToUid||{}));
   const rows = await Promise.all(
     roster.docs.map(async (d) => {
       const uid = byEmail.get(d.data().email);
@@ -1522,7 +1518,7 @@ export const saveLearningEvents = onCall(options, async (req) => {
     if (fresh.length) {
       tx.set(ref, { uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId, ...(chapter ? { chapterName: requestedChapter } : {}), activityId, materialVersion: version, nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1, summary, updatedAt: Date.now() });
       events.forEach((e, i) => { if (!stored[i].exists) tx.create(eventRefs[i], { ...e, receivedAt: Date.now() }); });
-      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
+      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activityUpdatedAt: Date.now(), activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
     }
     return { accepted: events.map((e) => e.id), summary };
   });
@@ -1549,3 +1545,5 @@ export const { listManagedCourses, getCourseDraft, getCompletionSummary, patchCo
 export const { getAnswerIntegrityStats, recordPracticeLeaves } = createIntegrityHandlers(db, access, rosterQuery, options);
 
 export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);
+
+export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);

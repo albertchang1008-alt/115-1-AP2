@@ -131,7 +131,7 @@ for (const a of [
 const usageNow = Date.now();
 await db
   .doc(`courses/${courseId}/diagnostics/usage-demo`)
-  .set({ uid: student.uid, classId: 'A', unitId: 'u' });
+  .set({ uid: student.uid, classId: 'A', unitId: 'u', updatedAt: usageNow });
 await db
   .doc(`courses/${courseId}/diagnostics/usage-demo/events/recent`)
   .set({ receivedAt: usageNow - 1000 });
@@ -146,6 +146,26 @@ await db
   .set({ receivedAt: usageNow });
 for (const auth of [studentAuth, null, { uid: 'foreign', token: { teacher: true } }])
   await assert.rejects(handlers.getClassUsageStats.run({ auth, data: { courseId, classId: 'A' } }));
+const plan = await handlers.rebuildStats.run({
+  auth: teacherAuth,
+  data: { courseId, classId: 'A' },
+});
+let cursor = 0;
+do {
+  const r = await handlers.rebuildStats.run({
+    auth: teacherAuth,
+    data: {
+      courseId,
+      classId: 'A',
+      dryRun: false,
+      confirm: true,
+      planHash: plan.planHash,
+      cursor,
+      limit: 5,
+    },
+  });
+  cursor = r.nextCursor;
+} while (cursor !== null);
 const usage = await handlers.getClassUsageStats.run({
   auth: teacherAuth,
   data: { courseId, classId: 'A' },
@@ -191,6 +211,8 @@ const allowed = new Set([
   'submitMixedAttempts',
   'getAnswerIntegrityStats',
   'getClassUsageStats',
+  'getCompletionDaily',
+  'rebuildStats',
   'recordPracticeLeaves',
   'getHistory',
 ]);
@@ -254,6 +276,17 @@ try {
   await page.getByRole('button', { name: '查看使用情況', exact: true }).click();
   await page.getByRole('heading', { name: '最近 10 分鐘有活動：1 人' }).waitFor();
   await page.screenshot({ path: path.join(out, '05-usage-1920.png'), fullPage: true });
+  await page.getByRole('button', { name: '完成度摘要', exact: true }).click();
+  await page.getByRole('button', { name: '查看班級摘要', exact: true }).click();
+  await page.getByText(/更新時間：/).waitFor();
+  await page.screenshot({ path: path.join(out, '06-completion-daily-1920.png') });
+  await page.getByRole('button', { name: '預覽補算統計', exact: true }).click();
+  await page.getByRole('heading', { name: '補算預覽：A 班' }).waitFor();
+  await page.screenshot({ path: path.join(out, '07-rebuild-preview-1920.png') });
+  await page.getByRole('button', { name: '取消補算', exact: true }).click();
+  await page.getByRole('button', { name: '預覽補算統計', exact: true }).click();
+  await page.getByRole('button', { name: '確認補算本班統計', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: '補算完成' }).waitFor();
   await page.getByRole('button', { name: '全班總覽', exact: true }).click();
   await page.getByRole('button', { name: '查看作答時間' }).click();
   await page.getByRole('checkbox', { name: '只看有標記' }).waitFor();
@@ -366,17 +399,21 @@ try {
     [...numeric].sort((a, b) => b - a),
   );
   // A timer callback must flush the current question, not its initial render closure.
-  await page.getByRole('button', {name:'開始完整測驗',exact:true}).click();
-  await page.getByRole('heading',{name:questions[0].text}).waitFor();
+  await page.getByRole('button', { name: '開始完整測驗', exact: true }).click();
+  await page.getByRole('heading', { name: questions[0].text }).waitFor();
   await page.clock.runFor(1000);
-  await page.getByRole('button',{name:'下一題',exact:true}).click();
-  await page.getByRole('heading',{name:questions[1].text}).waitFor();
+  await page.getByRole('button', { name: '下一題', exact: true }).click();
+  await page.getByRole('heading', { name: questions[1].text }).waitFor();
   await page.clock.fastForward(480000);
-  await page.getByText('已保存',{exact:true}).waitFor();
-  const timeoutAttempt=(await db.collection(`courses/${courseId}/attempts`).where('uid','==',student.uid).get()).docs.map(d=>d.data()).find(a=>!records.some(old=>old.id===a.id));
-  assert.equal(timeoutAttempt.answers[0].seconds,1);
-  assert.ok(timeoutAttempt.answers[1].seconds>=479);
-  assert.equal(timeoutAttempt.leaveCount,0);
+  await page.getByText('已保存', { exact: true }).waitFor();
+  const timeoutAttempt = (
+    await db.collection(`courses/${courseId}/attempts`).where('uid', '==', student.uid).get()
+  ).docs
+    .map((d) => d.data())
+    .find((a) => !records.some((old) => old.id === a.id));
+  assert.equal(timeoutAttempt.answers[0].seconds, 1);
+  assert.ok(timeoutAttempt.answers[1].seconds >= 479);
+  assert.equal(timeoutAttempt.leaveCount, 0);
   // Real client rules probe, not an Admin SDK permission simulation.
   const clientRequire = createRequire(new URL('../package.json', import.meta.url)),
     { initializeApp, deleteApp } = clientRequire('firebase/app'),
@@ -423,7 +460,7 @@ try {
     },
     flashcardRecordOnly: true,
     sortingAndFilter: true,
-    timeoutCurrentQuestionTiming:true,
+    timeoutCurrentQuestionTiming: true,
     uiApiCalls: calls.length,
     statsReads: before.reads,
     errors,

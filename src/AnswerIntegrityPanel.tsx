@@ -174,6 +174,7 @@ export function AnswerIntegrityOverview({
           ) : (
             stats && (
               <>
+                {(stats as any).missingTiming > 0 && <p className="notice">{(stats as any).missingTiming} 位學生的歷史時間尚待教師補算；未將部分累加當成完整統計。</p>}
                 <p>
                   全班每題時間中位數：<strong>{seconds(stats.medianSeconds)}</strong> · 納入{' '}
                   {stats.rows.filter((r) => r.attempts > 0).length} 位學生 · 有標記{' '}

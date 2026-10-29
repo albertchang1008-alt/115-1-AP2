@@ -7,7 +7,7 @@ function memoryDb() {
     transactions = [],
     writes = [];
   let failCommit = false;
-  const clone = (v) => (v === undefined ? v : structuredClone(v));
+  const clone = (v) => {if(v===undefined)return v;const walk=x=>{if(x&&typeof x.toMillis==='function')return x.toMillis();if(Array.isArray(x))return x.map(walk);if(x&&typeof x==='object')return Object.fromEntries(Object.entries(x).map(([k,v])=>[k,walk(v)]));return x;};return structuredClone(walk(v));};
   const snapshot = (path) => ({
     id: path.split('/').at(-1),
     exists: data.has(path),
@@ -36,7 +36,7 @@ function memoryDb() {
   }
   function collection(path) {
     let filters = [],
-      max = Infinity;
+      max = Infinity, after = null, order = null;
     const q = {
       where(f, op, v) {
         filters.push([f, op, v]);
@@ -46,12 +46,9 @@ function memoryDb() {
         max = v;
         return q;
       },
-      orderBy() {
-        return q;
-      },
-      startAfter() {
-        return q;
-      },
+      orderBy(field) { if(!order)order=field; return q; },
+      startAfter(value) { after=value; return q; },
+      count() { return {get:async()=>({data:()=>({count:[...data.keys()].filter(k=>k.startsWith(path+'/')&&k.slice(path.length+1).split('/').length===1&&filters.every(([f,op,v])=>op==='=='?data.get(k)[f]===v:false)).length})})}; },
       doc: (id = require('node:crypto').randomUUID()) => doc(path + '/' + id),
       get: async () => {
         const docs = [...data.keys()]
@@ -59,10 +56,9 @@ function memoryDb() {
             (key) =>
               key.startsWith(path + '/') &&
               key.slice(path.length + 1).split('/').length === 1 &&
-              filters.every(([f, op, v]) =>
-                op === 'array-contains' ? data.get(key)[f]?.includes(v) : op === 'in' ? v.includes(data.get(key)[f]) : data.get(key)[f] === v,
-              ),
+              filters.every(([f,op,v])=>{const a=data.get(key)[f];const scalar=x=>x&&typeof x==='object'&&('_seconds' in x||'seconds' in x)?(x._seconds??x.seconds)*1000+(x._nanoseconds??x.nanoseconds??0)/1e6:x;return op==='array-contains'?a?.includes(v):op==='in'?v.includes(a):op==='>='?scalar(a)>=scalar(v):op==='<'?scalar(a)<scalar(v):a===v;}) && (!after || (order==='__name__'?key.split('/').at(-1):data.get(key)[order])>after),
           )
+          .sort((a,b)=>order==='__name__'?a.split('/').at(-1).localeCompare(b.split('/').at(-1)):0)
           .slice(0, max)
           .map(snapshot);
         return { docs, size: docs.length };

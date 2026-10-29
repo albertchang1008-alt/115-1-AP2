@@ -66,6 +66,7 @@ export function ClassUsagePanel({
           ) : (
             data && (
               <>
+                {!!data.missingDays?.length && <p className="notice">{data.missingDays.length} 天尚未建立摘要，圖上的零值不是已驗證無活動；請教師補算。</p>}
                 <h3>每日使用人數</h3>
                 <div className="usage-bars" role="img" aria-label="近28天每日不重複使用人數">
                   {data.daily.map((d) => (
@@ -145,7 +146,7 @@ export function ClassUsagePanel({
                 <details>
                   <summary>計算方式與資料限制</summary>
                   <p>
-                    以作答、互動教材事件及活動進度最新時間計算。每日／每週按學生去重；熱度為紀錄筆數，同一活動可能同時產生事件及進度紀錄。活動進度只留最新時間，無法回推過去每次使用；沒有時間戳記的舊進度不推估。讀取{' '}
+                    歷史讀每日摘要，今天以 receivedAt 範圍查詢作答、互動教材事件及活動進度最新時間。每日／每週按學生去重；熱度為紀錄筆數，同一活動可能同時產生事件及進度紀錄。活動進度只留最新時間，無法回推過去每次使用；沒有時間戳記的舊進度不推估。讀取{' '}
                     {Object.values(data.reads || {}).reduce((a, b) => a + b, 0)}{' '}
                     筆文件（另含課程與權限查詢）；不快取、不寫回。
                   </p>

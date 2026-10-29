@@ -1,3 +1,4 @@
+import { CompletionDailyPanel } from './CompletionDailyPanel';
 import { ClassUsagePanel } from './ClassUsagePanel';
 import { AnswerIntegrityOverview } from './AnswerIntegrityPanel';
 import { ReactNode, useEffect, useRef, useState } from 'react';
@@ -362,7 +363,8 @@ export default function CompletionBoard({
         </div>
       </header>
       <section className="panel">
-        {!cl ? (
+        <CompletionDailyPanel api={api} course={published} />
+      {!cl ? (
           <>
             <div className="sectionhead">
               <h2>各班比較</h2>

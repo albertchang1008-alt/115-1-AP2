@@ -1,13 +1,9 @@
+import { statsRoster, progressRows } from './statsRoster';
+import { timingUnitStats } from '../../shared/timingStats';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import type { Firestore } from 'firebase-admin/firestore';
-import {
-  ANSWER_INTEGRITY,
-  computeIntegrityUnitStats,
-  isTestClass,
-  validateLeaveMetrics,
-  type IntegrityStudent,
-} from '../../shared/answerIntegrity';
-import { forClass, type Attempt, type Course } from '../../shared/model';
+import { ANSWER_INTEGRITY, isTestClass, validateLeaveMetrics } from '../../shared/answerIntegrity';
+import { forClass, type Course } from '../../shared/model';
 export function createIntegrityHandlers(
   db: Firestore,
   access: (req: any, id: string, teacher?: boolean) => Promise<any>,
@@ -35,82 +31,18 @@ export function createIntegrityHandlers(
       if (req.data?.unitId && !units.length)
         throw new HttpsError('invalid-argument', '單元不屬於此班或為複習考');
       if (!uid && !req.data?.unitId) throw new HttpsError('invalid-argument', '全班統計請指定單元');
-      const roster = await rosterQuery(courseId, c)
-        .where('classId', '==', classId)
-        .limit(ANSWER_INTEGRITY.maxRosterReads + 1)
-        .get();
-      if (roster.docs.length > ANSWER_INTEGRITY.maxRosterReads)
-        throw new HttpsError('resource-exhausted', '班級資料過大，請聯絡教師');
-      const members = roster.docs
-        .map((d: any) => d.data())
-        .filter((r: any) => r.enabled !== false && !r.test);
-      // Enrollment uid may be absent for legacy accounts. Resolve profiles in bounded groups.
-      const unresolved = members.filter((r: any) => r.email),
-        byEmail = new Map<string, string>();
-      let profileReads = 0;
-      for (let i = 0; i < unresolved.length; i += 30) {
-        const profiles = await db
-          .collection('profiles')
-          .where(
-            'email',
-            'in',
-            unresolved.slice(i, i + 30).map((r: any) => r.email),
-          )
-          .limit(ANSWER_INTEGRITY.maxRosterReads + 1 - profileReads)
-          .get();
-        profileReads += profiles.docs.length;
-        if (profileReads > ANSWER_INTEGRITY.maxRosterReads)
-          throw new HttpsError('resource-exhausted', '帳號資料過大，請聯絡教師');
-        for (const p of profiles.docs) byEmail.set(p.data().email, p.id);
-      }
-      const candidates: IntegrityStudent[] = members
-        .map((r: any) => ({
-          uid: byEmail.get(r.email) || r.uid || '',
-          name: String(r.name || r.studentId || '未命名'),
-          studentId: String(r.studentId || ''),
-          classId,
-        }))
-        .filter((s: IntegrityStudent) => s.uid && (!uid || s.uid === uid));
-      const students = [...new Map(candidates.map((s) => [s.uid, s])).values()];
+      const roster = await statsRoster(db, rosterQuery, courseId, c, classId);
+      const students = roster.students.filter((s) => !uid || s.uid === uid);
       if (uid && !students.length) throw new HttpsError('permission-denied', '學生不屬於此班');
-      let query: any = db
-        .collection(`courses/${courseId}/attempts`)
-        .where('classId', '==', classId);
-      query = uid ? query.where('uid', '==', uid) : query.where('unitId', '==', req.data.unitId);
-      const snap = await query.limit(ANSWER_INTEGRITY.maxAttemptReads + 1).get();
-      if (snap.docs.length > ANSWER_INTEGRITY.maxAttemptReads)
-        throw new HttpsError(
-          'resource-exhausted',
-          '作答紀錄超過單次統計上限，請聯絡教師；未回傳不完整統計',
-        );
-      const attempts = snap.docs.map((d: any) => ({ ...d.data(), id: d.id })) as Attempt[];
-      const computed = units.map((u) => computeIntegrityUnitStats(u, students, attempts, !uid));
-      // Preserve officially retained legacy scores; timing statistics never recalculate progress.
-      let progressReads = 0;
-      if (!uid)
-        for (let i = 0; i < students.length; i += 50) {
-          const group = students.slice(i, i + 50);
-          const ps = await Promise.all(
-            group.map((s) => db.doc(`courses/${courseId}/progress/${s.uid}`).get()),
-          );
-          progressReads += ps.length;
-          ps.forEach((p, index) => {
-            for (const u of computed) {
-              const best = p.data()?.units?.[u.unitId]?.best;
-              if (typeof best === 'number' && Number.isFinite(best)) {
-                const row = u.rows.find((r) => r.uid === group[index].uid);
-                if (row) row.best = best < 0 ? null : best;
-              }
-            }
-          });
-        }
+      const ps = await progressRows(db, courseId, students);
+      const computed = units.map((u) => timingUnitStats(u, students, ps, !uid));
       return {
         scope: uid ? 'student' : 'class',
         units: computed,
         reads: {
-          attempts: snap.docs.length,
-          roster: roster.docs.length + profileReads,
-          progress: progressReads,
+          attempts: 0,
+          roster: roster.reads,
+          progress: students.length,
         },
         generatedAt: Date.now(),
       };

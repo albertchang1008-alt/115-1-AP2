@@ -1,3 +1,4 @@
+import { CompletionDailyPanel } from '../../src/CompletionDailyPanel';
 import { ClassUsagePanel } from '../../src/ClassUsagePanel';
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -66,6 +67,7 @@ function Fixture() {
           ['profile', '個人檔案'],
           ['class', '全班總覽'],
           ['usage', '使用情況'],
+          ['summary', '完成度摘要'],
           ['quiz', '開始完整測驗'],
           ['flash', '開始閃卡'],
           ['wrong', '錯題練習'],
@@ -92,6 +94,7 @@ function Fixture() {
             notify={setStatus}
           />
         )}
+        {view === 'summary' && <CompletionDailyPanel api={teacher} course={fixture.course} />}
         {view === 'usage' && (
           <ClassUsagePanel api={teacher} courseId={fixture.course.id} classId="A" />
         )}

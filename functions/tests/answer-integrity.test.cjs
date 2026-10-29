@@ -233,16 +233,14 @@ test('閃卡metadata只記自己的session且不寫progress，學生不能讀教
   }
 });
 
-test('超出統計讀取上限時明確拒絕，不回傳部分資料當完整統計', async () => {
+test('時間彙總查詢不掃歷史attempts，超過10000筆仍只讀progress', async () => {
   const ctx = memoryDb();
   try {
     seed(ctx);
     for (let i = 0; i <= 10000; i++)
       ctx.data.set(`courses/${courseId}/attempts/cap-${i}`, { classId: 'A', unitId: 'u' });
-    await assert.rejects(
-      getAnswerIntegrityStats.run({ auth: teacher, data: { courseId, classId: 'A', unitId: 'u' } }),
-      (e) => e.code === 'resource-exhausted',
-    );
+    const stats=await getAnswerIntegrityStats.run({auth:teacher,data:{courseId,classId:'A',unitId:'u'}});
+    assert.equal(stats.reads.attempts,0);
     assert.equal(ctx.data.has(`courses/${courseId}/progress/teacher`), false);
   } finally {
     ctx.restore();
@@ -250,14 +248,14 @@ test('超出統計讀取上限時明確拒絕，不回傳部分資料當完整�
 });
 test('教師使用情況唯讀：學生／外課教師／test被拒，排除跨班與停用學生，舊進度無時間不推估',async()=>{
  const ctx=memoryDb();try {seed(ctx);const {getClassUsageStats}=require('../lib/functions/src/index.js'), now=Date.now();
- ctx.data.set(`courses/${courseId}/attempts/recent`,{uid:'student',classId:'A',unitId:'u',clientAt:now-1000});
+ ctx.data.set(`courses/${courseId}/attempts/recent`,{uid:'student',classId:'A',unitId:'u',receivedAt:require('firebase-admin/firestore').Timestamp.fromMillis(now-1000)});
  ctx.data.set(`courses/${courseId}/attempts/foreign`,{uid:'foreign',classId:'A',unitId:'u',clientAt:now});
- ctx.data.set(`courses/${courseId}/progress/student`,{activities:{u_act:{completed:true,updatedAt:now},u_old:{completed:true}}});
- ctx.data.set(`courses/${courseId}/diagnostics/d`,{uid:'student',classId:'A',unitId:'u'});
+ ctx.data.set(`courses/${courseId}/progress/student`,{uid:'student',classId:'A',activityUpdatedAt:now,activities:{u_act:{completed:true,updatedAt:now},u_old:{completed:true}}});
+ ctx.data.set(`courses/${courseId}/diagnostics/d`,{uid:'student',classId:'A',unitId:'u',updatedAt:now});
  ctx.data.set(`courses/${courseId}/diagnostics/d/events/e`,{receivedAt:now-2000});
  for(const a of [auth,null,{uid:'foreign',token:{teacher:true}}])await assert.rejects(getClassUsageStats.run({auth:a,data:{courseId,classId:'A'}}));
  await assert.rejects(getClassUsageStats.run({auth:teacher,data:{courseId,classId:'test'}}));
  const writes=ctx.writes.length, out=await getClassUsageStats.run({auth:teacher,data:{courseId,classId:'A'}});
- assert.equal(out.recent.length,1);assert.equal(out.daily.at(-1).users,1);assert.equal(out.daily.at(-1).records,3);assert.equal(out.reads.events,1);assert.equal(ctx.writes.length,writes);
+ assert.equal(out.recent.length,1);assert.equal(out.daily.at(-1).users,1);assert.equal(out.daily.at(-1).records,3);assert.equal(out.reads.events,1);assert.equal(ctx.writes.filter(w=>!w.ref.path.includes('/statsPrivate/')).length,writes);
  }finally{ctx.restore();}
 });
