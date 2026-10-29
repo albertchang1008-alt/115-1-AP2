@@ -207,7 +207,7 @@ export async function verifyTeachingDeckPages({
       const srcDoc = await iframeEl.getAttribute('srcdoc');
       assert(
         srcDoc.includes(
-          `content="default-src 'none'; style-src 'unsafe-inline'; img-src data: https://albertchang1008-alt.github.io; font-src 'none';"`,
+          `content="default-src 'none'; style-src 'unsafe-inline'; img-src data: https://albertchang1008-alt.github.io https://storage.googleapis.com https://firebasestorage.googleapis.com; font-src 'none';"`,
         ),
         'iframe srcDoc 必須包含精確的 CSP 設定',
       );
