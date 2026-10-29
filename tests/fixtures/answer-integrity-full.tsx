@@ -8,6 +8,7 @@ import { Flashcards, PracticeSession } from '../../src/PracticeModes';
 import type { API } from '../../src/service';
 import type { Attempt, Progress } from '../../shared/model';
 import '../../src/style.css';
+import '../../src/answer-integrity.css';
 const compactStyle = document.createElement('style');
 compactStyle.textContent =
   '@media(max-width:600px){.integrity-fixture-nav{display:none!important}}';
