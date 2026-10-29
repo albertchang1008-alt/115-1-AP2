@@ -50,7 +50,9 @@ TypeScript: exit 0
 UI＋Firestore Emulator：pass true，14 checks
 fakeAttempts: 11 / cohortStudents: 4 / medianSeconds: 29 / flagged: 1
 1920×1080 四圖；390×844 提示無水平溢出
-FULL_npm run check **251＋84，0 failed、0 skipped**
+npm run check: exit 0
+# tests 251 / pass 251 / fail 0 / skipped 0
+# tests 84 / pass 84 / fail 0 / skipped 0
 ```
 
 單元測試涵蓋 >3／>60 邊界、舊紀錄、其他模式、test／複習排除、首次達門檻與偏快條件並存、舊80分與無效100分的投影。這些是**樣張計算測試，並非正式後端規則已驗收**。
