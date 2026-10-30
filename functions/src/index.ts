@@ -9,7 +9,7 @@ import { validateCourseDraft } from '../../shared/courseValidation';
 import { createPlatformHandlers } from './platformMcp';
 import { courseRevision, assertExpectedRevision, REVISION_CONFLICT } from '../../shared/courseDraft';
 import { validateReflectionConfig, validateReflectionAnswers, reflectionActivity, buildReflectionResponse, reflectionProgress, summarizeReflections } from '../../shared/reflection';
-import { featureNames } from '../../shared/features';
+import { normalizeCourseFeatures, courseFeaturesFromRecord } from '../../shared/features';
 import { createClassroomHandlers } from './classroom';
 import { createTeachingHandlers } from './teaching';
 import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
@@ -183,7 +183,7 @@ export const bootstrap = onCall(options, async (req) => {
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
     const snap = await db.collection('courses').where('teacherIds', 'array-contains', p.uid).limit(100).get();
-    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, features: d.data().features || {}, id: d.id, revision:courseRevision(d.data()), archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
+    return { profile: p, courses: snap.docs.map((d) => ({ ...d.data().draft, features: courseFeaturesFromRecord(d.data()), id: d.id, revision:courseRevision(d.data()), archived: !!d.data().archived, publishedAt: d.data().published?.publishedAt || 0 })), testEmails: await testStudents(), version: VERSION };
   }
   const memberships = await db.collection('enrollments').where('email', '==', p.email).limit(100).get();
   const ids = new Set<string>(memberships.docs.filter((d) => d.data().enabled).map((d) => d.data().courseId));
@@ -200,7 +200,7 @@ export const bootstrap = onCall(options, async (req) => {
       // Empty/missing roster names fall back to the original Google token, not another course.
       const studentName = (typeof student.name === 'string' ? student.name.trim() : '')
         || (typeof p.name === 'string' ? p.name.trim() : '');
-      courses.push({ ...forClass(c.published, student.classId), features: c.features || {}, id: courseId, enrollmentClassId: student.classId, studentName });
+      courses.push({ ...forClass(c.published, student.classId), features: courseFeaturesFromRecord(c), id: courseId, enrollmentClassId: student.classId, studentName });
     } catch (e) {
       if (!(e instanceof HttpsError)) throw e;
     }
@@ -227,7 +227,7 @@ export const saveCourse = onCall(options, async (req) => {
       {
         draft: course,
         revision,
-        features: Object.fromEntries(featureNames.map(k => [k, course.features?.[k] === true])),
+        features: normalizeCourseFeatures(course.features),
         ...(course.assessmentSources ? { assessmentSources: course.assessmentSources } : {}),
         teacherIds: old.data()?.teacherIds || [p.uid],
         classIds: old.data()?.published?.classIds || [],

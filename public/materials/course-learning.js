@@ -1,6 +1,32 @@
 /* Include this script in an interactive HTML material. No student identity is exposed. */
 (() => {
   const sdkUrl = document.currentScript?.src;
+  const preserveFonts = () => {
+    const root = document.documentElement;
+    if (root.dataset.readability !== 'on') return;
+    const tools = [...document.querySelectorAll('[data-readability-zoom]')].map(
+      (e) => [e, e.style.display],
+    );
+    for (const [e] of tools) e.style.display = 'none';
+    root.removeAttribute('data-readability');
+    // Read every original size before writing variables: inheritance cannot feed back.
+    const rows = [...document.querySelectorAll('body,body *')]
+      .filter(
+        (e) =>
+          !(e instanceof SVGElement) &&
+          !e.closest('svg,dialog.course-readability-zoom'),
+      )
+      .map((e) => [e, getComputedStyle(e).fontSize]);
+    for (const [e, size] of rows)
+      e.style.setProperty('--readability-original-font', size);
+    root.dataset.readability = 'on';
+    for (const [e, display] of tools) e.style.display = display;
+    // Use the material's own responsive arrow-label layout, never custom coordinates.
+    if (window.StudentScriptUI) {
+      window.dispatchEvent(new Event('resize'));
+      displayObserver.takeRecords();
+    }
+  };
   const installZoom = () => {
     if (document.documentElement.dataset.readability !== 'on') return;
     for (const region of document.querySelectorAll(
@@ -41,6 +67,16 @@
           ) + 'px';
         copy.style.height = 'auto';
         copy.style.maxWidth = 'none';
+        copy.style.maxHeight = 'none';
+        copy.setAttribute('role', 'img');
+        for (const e of copy.querySelectorAll(
+          '[role=button],[role=radio],[tabindex],[data-arrow-label],[data-figure-control]',
+        )) {
+          e.removeAttribute('role');
+          e.removeAttribute('tabindex');
+          e.removeAttribute('data-arrow-label');
+          e.removeAttribute('data-figure-control');
+        }
         pane.append(copy);
         dialog.append(close, pane);
         document.body.append(dialog);
@@ -59,8 +95,14 @@
       host.append(button);
     }
   };
-  new MutationObserver(installZoom).observe(document.documentElement, {
+  const displayObserver = new MutationObserver((records) => {
+    installZoom();
+    if (records.some((r) => !(r.target instanceof SVGElement))) preserveFonts();
+  });
+  displayObserver.observe(document.documentElement, {
     childList: true,
+    attributes: true,
+    attributeFilter: ['class', 'hidden'],
     subtree: true,
   });
   const display = (d) => {
@@ -89,10 +131,15 @@
           ? 'learning-kit'
           : 'other';
     installZoom();
+    preserveFonts();
+
     if (!document.getElementById('course-readability-overlay') && sdkUrl) {
       const css = document.createElement('link');
       css.id = 'course-readability-overlay';
       css.rel = 'stylesheet';
+      css.onload = () => {
+        preserveFonts();
+      };
       css.href = new URL('readability-overlay.css', sdkUrl).href;
       document.head.append(css);
     }

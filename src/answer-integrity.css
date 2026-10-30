@@ -5,7 +5,7 @@
   color: #456f89;
   padding: 10px 14px;
   margin-top: 10px;
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale, 1));
 }
 .integrity-time-line small {
   display: block;
@@ -22,7 +22,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 14px;
+  font-size: calc(14px * var(--font-scale, 1));
 }
 .integrity-filter input {
   width: auto;
@@ -32,16 +32,16 @@
   border: 0;
   background: transparent;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale, 1));
 }
 .integrity-info {
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale, 1));
   line-height: 1.8;
 }
 .integrity-subtext {
   display: block;
   color: var(--muted, #6f818c);
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale, 1));
   margin-top: 4px;
 }
 .integrity-flag-wrap {
@@ -52,7 +52,7 @@
   background: #fff8e8 !important;
   border-color: #ead5a4 !important;
   color: #8c681f !important;
-  font-size: 12px !important;
+  font-size: calc(12px * var(--font-scale, 1)) !important;
   padding: 5px 9px !important;
 }
 .integrity-tooltip {
@@ -68,7 +68,7 @@
   color: white;
   border-radius: 6px;
   box-shadow: 0 5px 16px #0002;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale, 1));
 }
 .integrity-flag-wrap:hover .integrity-tooltip,
 .integrity-flag:focus + .integrity-tooltip {
@@ -78,10 +78,10 @@
   background: #fcf0e4;
   color: #966b35;
   margin-left: 5px;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale, 1));
 }
 .integrity-method {
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale, 1));
   margin-top: 14px;
 }
 .notice.integrity-invalid {
@@ -101,7 +101,7 @@
   overflow-wrap: anywhere;
 }
 .leave-tracking-notice p {
-  font-size: 16px;
+  font-size: calc(16px * var(--font-scale, 1));
   line-height: 1.9;
   margin: 20px 0;
 }
@@ -119,7 +119,7 @@
     flex-wrap: wrap;
   }
   .integrity-overview th button {
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale, 1));
   }
   .integrity-time-line {
     line-height: 1.8;
@@ -148,7 +148,7 @@
   border-radius: 4px 4px 0 0;
 }
 .usage-bars small {
-  font-size: 10px;
+  font-size: calc(10px * var(--font-scale, 1));
   white-space: nowrap;
 }
 .usage-heat td,

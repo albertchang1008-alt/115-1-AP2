@@ -165,7 +165,7 @@ test('教師總覽的單元、必做、活動與達標門檻讀取 Chapter', asy
 test('Chapter 互動教材把 chapterName 傳到 LearningBridge 與後端', async () => {
   const [player, bridge] = await Promise.all([readFile(new URL('../src/Player.tsx', import.meta.url), 'utf8'), readFile(new URL('../src/LearningBridge.ts', import.meta.url), 'utf8')]);
   assert.match(player, /chapterName\?: string/);
-  assert.match(player, /learningBridge\(api, \{ courseId, unitId, \.\.\.\(chapterName/);
+  assert.match(player, /learningBridge\(\s*api,\s*\{\s*courseId,\s*unitId,\s*\.\.\.\(chapterName/);
   assert.match(bridge, /chapterName\?: string/);
   assert.match(bridge, /chapterName \? `chapter:/);
 });

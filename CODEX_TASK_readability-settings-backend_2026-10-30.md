@@ -1,22 +1,17 @@
-# #42b：閱讀加大設定的後端保存（待教師另行安排）
+# 閱讀加大設定保存（原 #42b，已併 #42 全面版）
 
-教師10/30回覆：本輪先完成#42三份樣張，後端支援另列待辦。本檔不代表現在可以實作、部署或寫入正式資料。
+教師2026-10-30 15:19授權併入#42。本檔不再是獨立待辦；最新結果見docs/READABILITY_REPORT.md及CODEX_QUEUE.md的#42列。
 
-先讀根目錄handoff.md、CODEX_QUEUE.md、CODEX_TASK_readability_2026-10-30.md（13:15）、docs/READABILITY_REPORT.md。
-位置：.worktrees/readability（feature/readability）；不要切換根目錄分支。
+## 實作
 
-## 已證實的落差
+- functions/src/index.ts：saveCourse以既有教師權限、交易與revision保護，保存完整正規化features；bootstrap教師／學生分支回傳同一組設定。
+- shared/features.ts：readabilityOverlay缺省true；排除清單缺省空陣列，回傳時複製；根features優先，舊資料缺欄時讀既有草稿／發布設定作相容。
+- shared/courseValidation.ts：只接受布林與有界、去重、安全materialVersion陣列。既有三種功能保持獨立。
+- 不批次更動正式課程、不改published教材或班級選取。
 
-- functions/src/index.ts 的 saveCourse 只將 featureNames 三個既有布林值寫到根 features。
-- bootstrap／listCourses 以根features覆蓋draft／published的features；只在draft存新欄位無法對全班生效。
-- #42本機樣張已加入前端欄位、共用型別／輸入驗證；正式saveCourse與bootstrap實作尚未變更。
+## 驗證
 
-## 教師授權後的最小範圍
+functions/tests/readability-settings.test.cjs測輸入與正規化。
+scripts/readability-settings-verify.mjs拒絕非demo專案或非127.0.0.1 Emulator；以真實callable handler與Firestore Emulator測教師保存、教師／學生bootstrap、非教師／跨課程拒絕、缺省開、非法值及revision衝突。
 
-1. saveCourse以交易、既有revision保護與教師權限保存readabilityOverlay（缺省true）及readabilityOverlayExclusions（materialVersion字串陣列）。
-2. 保留既有三種features及所有其他課程內容；不得把新開關缺省當false。
-3. bootstrap／listCourses／必要的草稿與學生投影回傳相同設定，排除陣列不得遺失；依既有資料的缺省規則讀取，不自行批次改正式課程。
-4. 加Emulator測試：授權教師開／關／排除、學生可讀設定、非教師與跨課程拒絕、非法／過長／重複排除值、缺省開啟及revision衝突。
-5. 說明真正需要部署的callable清單與順序；不得再標成「只需前端」而省略保存能力。
-
-未經教師授權不push、不部署、不寫正式資料、不變更勾班或教材原檔。完成實作與自檢後停-等Claude，寫devlog、跑check_handoff.py，附下一棒交棒prompt。
+部署只列入saveCourse、bootstrap，先於前端；實際部署仍由教師核准後執行。本輪不push、不部署、不寫正式資料。

@@ -5,7 +5,15 @@ const root = path.resolve(import.meta.dirname, '../..');
 let bundle;
 export async function platformPage(
   browser,
-  { viewport, slug, scale = 1, overlay = true, tracking = 'interactive', exclusions = [] },
+  {
+    viewport,
+    slug,
+    scale = 1,
+    overlay = true,
+    tracking = 'interactive',
+    exclusions = [],
+    version: requestedVersion,
+  },
 ) {
   bundle ||= (
     await build({
@@ -38,6 +46,7 @@ export async function platformPage(
     },
     { scale },
   );
+  const blocked = [];
   await page.route('**/*', async (r) => {
     const u = new URL(r.request().url());
     if (u.hostname === '127.0.0.1')
@@ -64,10 +73,12 @@ export async function platformPage(
                 : undefined,
         });
     }
+    blocked.push(u.href);
     return r.abort();
   });
   let child;
-  const version = slug === 'urinary-route-micturition' ? slug + '-v2' : slug + '-v1';
+  const version =
+    requestedVersion || (slug === 'urinary-route-micturition' ? slug + '-v2' : slug + '-v1');
   const navigate = async () => {
     await page.goto(
       'http://127.0.0.1:4173/reading?' +
@@ -84,11 +95,7 @@ export async function platformPage(
     await child.waitForFunction(
       () => document.documentElement.style.getPropertyValue('--font-scale') !== '',
     );
-    if (
-      overlay &&
-      ['kidney-anatomy', 'airway-structure', 'cardiac-output'].includes(slug) &&
-      !exclusions.includes(version)
-    )
+    if (overlay && !exclusions.includes(version))
       await child.waitForFunction(
         () => !!document.getElementById('course-readability-overlay')?.sheet,
       );
@@ -109,6 +116,7 @@ export async function platformPage(
       get(_, key) {
         if (key === 'goto') return navigate;
         if (key === 'platformPage') return page;
+        if (key === 'platformBlocked') return blocked;
         if (key === 'platformFrame') return () => child;
         const target = parentMethods.has(key) ? page : child;
         const value = target?.[key];

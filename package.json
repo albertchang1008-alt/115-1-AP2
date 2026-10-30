@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "npm run version:check && tsc -b && vite build",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test --test-concurrency=2 tests/*.test.ts",
     "version:sync": "node scripts/version.mjs",
     "version:check": "node scripts/version.mjs --check",
     "materials:audit": "node --experimental-strip-types scripts/materials.mjs audit",

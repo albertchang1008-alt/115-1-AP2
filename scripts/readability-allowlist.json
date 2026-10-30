@@ -1,121 +1,1185 @@
 [
   {
-    "file": "src/style.css",
-    "selector": ".preview-open-toggle",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "html,\nbody",
+    "property": "font",
+    "value": "14px/1.3 -apple-system,\n    BlinkMacSystemFont,\n    'PingFang TC',\n    'Noto Sans TC',\n    sans-serif",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "button",
     "property": "font-size",
     "value": "14px",
-    "reason": "src/App.tsx：教師預覽切換，不出現在正式學生入口"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/style.css",
-    "selector": ".progress-published-status",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".top-bar",
     "property": "font-size",
-    "value": "13px",
-    "reason": "src/ProgressBoard.tsx：教師發布狀態表"
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/style.css",
-    "selector": ".unit-status-tags .badge",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "h2",
     "property": "font-size",
-    "value": "12px",
-    "reason": "src/UnitStatusTags.tsx：僅 App 教師單元編排引用"
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/style.css",
-    "selector": ".unit-status-tags .status-loading",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "p",
     "property": "font-size",
-    "value": "12px",
-    "reason": "src/UnitStatusTags.tsx：僅 App 教師單元編排引用"
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/style.css",
-    "selector": ".unitmenu > .sectionhead button",
-    "property": "font-size",
-    "value": "12px",
-    "reason": "src/App.tsx：教師單元編排功能列"
-  },
-  {
-    "file": "src/style.css",
-    "selector": ".tf-large-btn",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".diagram-overlay strong",
     "property": "font-size",
     "value": "16px",
-    "reason": "src/PptImportModal.tsx：教師匯入預覽答案編輯"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/style.css",
-    "selector": ".ppt-thumb-meta",
-    "property": "font-size",
-    "value": "13px",
-    "reason": "src/PptImportModal.tsx：教師匯入縮圖資料"
-  },
-  {
-    "file": "src/style.css",
-    "selector": ".ppt-thumb-q-tag",
-    "property": "font-size",
-    "value": "11px",
-    "reason": "src/PptImportModal.tsx：教師匯入題目頁標記"
-  },
-  {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-filter",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".diagram-field legend",
     "property": "font-size",
     "value": "14px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-overview th button",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".field-options button",
     "property": "font-size",
-    "value": "13px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-info",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".big-next",
     "property": "font-size",
-    "value": "13px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-subtext",
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".choice-big",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".term-pill",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".term-box h2",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".term-text",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".dock-header",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".dock-covered",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".map-node",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".map-count",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".map-sign",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#completion",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".unit-title",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".progress-indicator",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "h2",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".diagram-overlay strong",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".operation-guide",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "h2",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#action-guide",
+    "property": "font-size",
+    "value": "20px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#replay-demo",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".arrow-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#demo-ghost",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "body[data-step='task'] .panel-pane h2",
+    "property": "font-size",
+    "value": "22px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#action-guide",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "body[data-step='task'] .panel-pane h2",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "#action-guide",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".panel-pane h2,\n  body[data-step='task'] .panel-pane h2",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".slot-target .diagram-hit span,\n.slot-target .diagram-hit strong",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": ".term-box h2",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "body[data-view='learn'][data-step='task'] .panel-pane [data-choice],\n  body[data-view='learn'][data-step='task'] .panel-pane [data-field],\n  body[data-view='learn'][data-step='task'] .choice-big",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "body[data-view='learn'][data-step='task'] .feedback",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/full.css",
+    "selector": "body[data-view='learn'][data-step='task'] .panel-pane [data-choice],\n  body[data-view='learn'][data-step='task'] .panel-pane [data-field]",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": "html,body",
+    "property": "font",
+    "value": "14px/1.3 -apple-system,BlinkMacSystemFont,\"PingFang TC\",\"Noto Sans TC\",sans-serif",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".top-bar",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".btn-tab",
+    "property": "font",
+    "value": "700 14px/1.2 inherit",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".btn-tab",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".state-summary-banner",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".shape-marker",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-name",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-desc",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".solid-badge",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".intake-reference",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".unchanged-toggle-bar",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".unchanged-tag",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".teacher-note",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": "svg .p2p-lbl-text",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": "svg .p2p-badge-text",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".solid-badge",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".solid-badge",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".label-name",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".plot-label .solid-badge",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".plot-label .solid-badge",
     "property": "font-size",
     "value": "12px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-flag",
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".label-name",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".plot-label .solid-badge",
     "property": "font-size",
     "value": "12px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-tooltip",
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".term-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".term-text",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-name",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-card .solid-badge",
     "property": "font-size",
     "value": "12px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-method",
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-name",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".factor-card .solid-badge",
     "property": "font-size",
     "value": "12px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".integrity-overview th button",
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".intake-heading",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".intake-row",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-node",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".flow-badge.solid-badge",
     "property": "font-size",
     "value": "12px",
-    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   },
   {
-    "file": "src/answer-integrity.css",
-    "selector": ".usage-bars small",
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-link",
     "property": "font-size",
-    "value": "10px",
-    "reason": "src/ClassUsagePanel.tsx：教師限定使用統計"
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-node",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-link,.causal-flow .causal-link:first-of-type",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".flow-badge.solid-badge",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-link,.causal-flow .causal-link:first-of-type",
+    "property": "font-size",
+    "value": "20px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/lab.css",
+    "selector": ".causal-link[data-equal] .flow-link-glyph",
+    "property": "font-size",
+    "value": "20px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/learning.css",
+    "selector": "body",
+    "property": "font",
+    "value": "16px/1.6 -apple-system,BlinkMacSystemFont,\"PingFang TC\",\"Noto Sans TC\",sans-serif",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/learning.css",
+    "selector": "h1",
+    "property": "font-size",
+    "value": "22px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".figure-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".figure-options button",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .matching-row button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .matching-feedback",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .script-feedback",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".action-instruction,\n.script-extra",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".equation-controls",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".map-center",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".map-branch",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course h1",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course h2",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .recognition",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .figure-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course h1,\n  .scripted-course h2",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .recognition",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .figure-options button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .script-feedback",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .matching-row button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .matching-menu button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".figure-legend",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".body-side-labels",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".scripted-course .matching-row button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".diagram-hotspot",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".figure-boundaries",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".filter-side-labels",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".chart-legend",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".chart-x",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".chart-y",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".chart-tick",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".renal-regions",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".comparison-side-labels",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-toolbar>button,.spatial-guide button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-labels button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-guide",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-target",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-stamp",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-caption",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-directions button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-explanation",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-course .student-header h1,.spatial-course .student-header h2",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".answer-review-options",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-navigation",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/scripted.css",
+    "selector": ".spatial-navigation button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "html,\nbody",
+    "property": "font",
+    "value": "16px/1.4 -apple-system,\n    BlinkMacSystemFont,\n    'PingFang TC',\n    'Noto Sans TC',\n    sans-serif",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h1",
+    "property": "font-size",
+    "value": "21px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h2",
+    "property": "font-size",
+    "value": "22px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".heading-row button",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".recognition",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".hint-box",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-footer",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".work-slot",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".answer-options button",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".script-feedback",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".column-labels",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".reaction-labels",
+    "property": "font-size",
+    "value": "20px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".quiz-note",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".script-map-label",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".intro-region h2",
+    "property": "font-size",
+    "value": "26px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h1",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h2",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".heading-row button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".recognition",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".hint-box",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".work-slot",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".work-slot strong",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".card-tray button",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".answer-options button",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-footer",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-footer button",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".script-feedback",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".column-labels",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".reaction-labels",
+    "property": "font-size",
+    "value": "18px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".science-control button",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-main.micro-mode .work-slot",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-main.micro-mode .work-slot strong",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".intro-region h2",
+    "property": "font-size",
+    "value": "21px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".script-map-label",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h1",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": "h2",
+    "property": "font-size",
+    "value": "17px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".recognition,\n  .hint-box",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".student-footer",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".answer-options button",
+    "property": "font-size",
+    "value": "15px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".work-slot",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".work-slot strong",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".card-tray button",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".script-feedback",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".intro-region h2",
+    "property": "font-size",
+    "value": "19px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
+  },
+  {
+    "file": "materials-src/apply-kit/student.css",
+    "selector": ".matching-feedback",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "歷史教材內嵌來源：依13:15方案保留原HTML。正式閱讀由共用overlay的scaled max字級接管，17份真實iframe四組合及不縮小探針仍為必過門檻。"
   }
 ]

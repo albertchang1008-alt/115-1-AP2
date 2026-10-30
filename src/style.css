@@ -1048,7 +1048,7 @@ dd {
 .unit-tabs { display:flex; gap:6px; overflow-x:auto; margin:16px 0; border-bottom:1px solid var(--line); }
 .unit-tabs button { min-height:44px; white-space:nowrap; border:0; background:transparent; border-bottom:3px solid transparent; }
 .unit-tabs button.active { border-bottom-color:var(--accent); color:var(--accent); font-weight:700; }
-.unit-tabs small { display:block; font-size:.75rem; }
+.unit-tabs small { display:block; font-size:calc(12px * var(--font-scale, 1)); }
 .activitycards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
 .activitycard { text-align:left; min-height:130px; display:block; padding:16px; }
 .activitycard-tags { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
@@ -1997,7 +1997,7 @@ body { padding-bottom: 60px; }
 .visibility-hidden { background: #fef3c7; color: #78350f; }
 .visibility-current { background: #dcfce7; color: #14532d; }
 .visibility-archived { background: #e2e8f0; color: #334155; }
-.preview-open-toggle { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.preview-open-toggle { display: flex; align-items: center; gap: 6px; font-size: calc(14px * var(--font-scale, 1)); }
 .preview-open-toggle input { width: 18px; height: 18px; }
 .preview-simulation-warning { padding: 14px 20px; background: #fef3c7; color: #78350f; border: 2px solid #b45309; font-weight: 700; }
 .update-student-dialog { width: 640px; margin: auto; border: 0; }
@@ -2005,7 +2005,7 @@ body { padding-bottom: 60px; }
 .update-student-dialog ul { padding-left: 24px; overflow-wrap: anywhere; }
 .update-student-dialog .actions { position: sticky; bottom: -30px; padding: 14px 0; background: var(--surface, #fff); }
 .progress-unit-info { min-width: 0; }
-.progress-published-status { margin: 6px 0; padding-left: 20px; font-size: 13px; color: var(--muted, #536a77); }
+.progress-published-status { margin: 6px 0; padding-left: 20px; font-size: calc(13px * var(--font-scale, 1)); color: var(--muted, #536a77); }
 @media (max-width: 600px) {
   .preview-open-toggle { width: 100%; }
   .update-student-dialog { max-width: calc(100% - 24px); padding: 20px; }
@@ -2024,9 +2024,9 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .progress-unit-info { flex: 1 1 160px; }
 
 .unit-status-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; text-align: left; }
-.unit-status-tags .badge { white-space: normal; line-height: 1.45; font-size: 12px; font-weight: 600; }
+.unit-status-tags .badge { white-space: normal; line-height: 1.45; font-size: calc(12px * var(--font-scale, 1)); font-weight: 600; }
 .unit-status-tags .update-attention { background: #fff1e6; color: #8a3500; border: 1px solid #e9bd91; }
-.unit-status-tags .status-loading { font-size: 12px; color: var(--muted); }
+.unit-status-tags .status-loading { font-size: calc(12px * var(--font-scale, 1)); color: var(--muted); }
 .unitmenu > .sectionhead { flex-wrap: wrap; gap: 8px; }
 .classification-row > span:first-child { min-width: 0; flex: 1 1 180px; }
 
@@ -2042,7 +2042,7 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .unitmenu .chapter-menu-entry > .unit-leaf .unit-status-tags { margin-top: 3px; }
 .unitmenu > .sectionhead { margin-bottom: 12px; }
 .unitmenu > .sectionhead h3 { flex-basis: 100%; }
-.unitmenu > .sectionhead button { font-size: 12px; padding: 8px; }
+.unitmenu > .sectionhead button { font-size: calc(12px * var(--font-scale, 1)); padding: 8px; }
 
 /* Classroom reveal answer & student history (v1.11.0) */
 .reveal-feedback { margin: 14px 0; padding: 14px; border: 1px solid var(--line, #cbd5e1); border-radius: 12px; background: var(--surface, #fff); overflow-wrap: anywhere; }
@@ -2079,20 +2079,20 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .pointer-toolbar button { min-height: 38px; padding: 6px 12px; font-size: calc(14px * var(--font-scale, 1)); }
 .slide-pointer-overlay { position: absolute; inset: 0; z-index: 4; overflow: hidden; user-select: none; touch-action: none; cursor: crosshair; }
 .pointer-magnifier-lens { position: absolute; border-radius: 50%; border: 3px solid #38bdf8; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.85); overflow: hidden; background: #1e2933; pointer-events: none; }
-.pointer-lens-badge { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); color: #e0f2fe; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pointer-lens-badge { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); color: #e0f2fe; font-size: calc(11px * var(--font-scale, 1)); font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
 .pointer-spotlight-mask { position: absolute; inset: 0; pointer-events: none; }
 .pointer-laser-dot { position: absolute; width: 22px; height: 22px; margin-left: -11px; margin-top: -11px; border-radius: 50%; background: radial-gradient(circle, #ffffff 0%, #ff2a2a 40%, rgba(239, 68, 68, 0) 100%); box-shadow: 0 0 18px 6px rgba(239, 68, 68, 0.85); pointer-events: none; }
 .pointer-zoombox-selection { position: absolute; border: 2.5px dashed #38bdf8; background: rgba(56, 189, 248, 0.18); pointer-events: none; }
 .pointer-zoombox-Stage { position: absolute; inset: 0; background: #1e2933; display: flex; align-items: center; justify-content: center; }
 .pointer-zoombox-reset { position: absolute; top: 14px; right: 14px; z-index: 6; background: #0f172a; color: #fff; border: 1px solid #38bdf8; padding: 8px 14px; border-radius: 8px; cursor: pointer; }
-.pointer-status-pill { position: absolute; top: 12px; left: 12px; z-index: 5; background: rgba(15, 23, 42, 0.86); color: #f8fafc; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; pointer-events: none; }
+.pointer-status-pill { position: absolute; top: 12px; left: 12px; z-index: 5; background: rgba(15, 23, 42, 0.86); color: #f8fafc; padding: 6px 12px; border-radius: 999px; font-size: calc(13px * var(--font-scale, 1)); font-weight: 600; pointer-events: none; }
 
 /* True / False (是非題) two large buttons on student mobile & preview */
 .interaction-options.true-false-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .interaction-options.true-false-options label.true-false-btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; padding: 16px; font-size: calc(20px * var(--font-scale, 1)); font-weight: 800; border: 2px solid var(--line, #cbd5e1); border-radius: 14px; background: var(--surface, #fff); text-align: center; }
 .interaction-options.true-false-options label.true-false-btn.selected { border-color: var(--blue, #0284c7); background: var(--soft, #e0f2fe); }
 .true-false-preview-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 8px 0; }
-.tf-large-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 10px; border: 2px solid #cbd5e1; font-weight: 700; font-size: 16px; background: #f8fafc; color: #1e293b; }
+.tf-large-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 10px; border: 2px solid #cbd5e1; font-weight: 700; font-size: calc(16px * var(--font-scale, 1)); background: #f8fafc; color: #1e293b; }
 .tf-large-btn.is-answer { border-color: #16a34a; background: #dcfce7; color: #14532d; }
 
 /* PPT + XLSX Import Modal & Preview */
@@ -2120,9 +2120,18 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .ppt-thumb-card.has-question { border: 2px solid #0284c7; }
 .ppt-thumb-frame { width: 100%; aspect-ratio: 16 / 9; background: #1e2933; overflow: hidden; position: relative; }
 .ppt-thumb-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.ppt-thumb-meta { padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
-.ppt-thumb-q-tag { display: inline-block; align-self: flex-start; padding: 2px 8px; border-radius: 999px; background: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; }
+.ppt-thumb-meta { padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; font-size: calc(13px * var(--font-scale, 1)); }
+.ppt-thumb-q-tag { display: inline-block; align-self: flex-start; padding: 2px 8px; border-radius: 999px; background: #e0f2fe; color: #0369a1; font-size: calc(11px * var(--font-scale, 1)); font-weight: 700; }
 .ppt-thumb-note { color: var(--muted, #64748b); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .ppt-import-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line, #e2e8f0); }
 
 
+
+/* Reading shell uses the same student minimum as the embedded material. */
+.reading-page > header strong,
+.reading-page > header .fontsize-picker,
+.reading-page > header .fontsize-picker select,
+.reading-body > :not(.material) {font-size:calc(18px * var(--font-scale, 1));line-height:1.6;}
+.reading-page > header .fontsize-picker {padding:0;border:0;}
+.reading-page > header .fontsize-picker select {min-height:44px;line-height:1.2;padding:4px;}
+.reading-page > header button,.reading-body > button {min-height:44px;min-width:44px;}

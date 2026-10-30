@@ -6,6 +6,7 @@ import { platformPage } from './lib/readability-platform.mjs';
 import { checkApplyScript } from './lib/apply-script-check.mjs';
 import { checkScriptLayout } from './lib/acidbase-script-layout.mjs';
 import { readabilityMetrics } from './lib/readability-metrics.mjs';
+import { validateCapturedEvents } from './lib/release-tracking-proof.mjs';
 import { auditReadabilityCss } from './lib/readability-static.mjs';
 export const readabilitySlugs =
   'airway-structure lungs-pleura breathing-mechanics lung-function gas-exchange o2-co2-transport respiratory-control kidney-anatomy nephron-circulation filtration-clearance tubular-handling urine-concentration urinary-route-micturition fluid-compartments water-sodium-regulation electrolyte-balance acid-base-homeostasis'.split(
@@ -50,6 +51,71 @@ export async function checkReadability({
       const measureOne = async (p, meta) => {
         const measured = await p.evaluate(readabilityMetrics, { scale });
         material.screens.push({ ...meta, ...measured, requestedScale: scale });
+        if (meta.name === 'complete') {
+          await p.platformPage.waitForFunction(() => window.completedCalls === 1);
+          const messages = await p.platformPage.evaluate(() => window.platformMessages);
+          const events = [
+            ...new Map(
+              messages
+                .filter((m) => m.type === 'learning-events')
+                .flatMap((m) => m.events)
+                .map((e) => [e.id, e]),
+            ).values(),
+          ];
+          const ids = await p.evaluate(() =>
+            (
+              document.querySelector('meta[name="material-assessment-ids"]') ||
+              document.querySelector('meta[name="material-ids"]')
+            ).content.split(','),
+          );
+          validateCapturedEvents(events, new Set(ids));
+          fs.writeFileSync(
+            path.join(scaleOut, `events-${meta.width}x${meta.height}.json`),
+            JSON.stringify(
+              {
+                pass: true,
+                completedCalls: await p.platformPage.evaluate(() => window.completedCalls),
+                events,
+              },
+              null,
+              2,
+            ) + '\n',
+          );
+        }
+        if (
+          meta.width === 390 &&
+          [
+            'opening',
+            'N1-before',
+            'N1-passed',
+            'transition',
+            'foundation-0',
+            'foundation-5-correct',
+            'case-0',
+            'complete',
+          ].includes(meta.name)
+        ) {
+          const dir = path.join(out, 'shots');
+          fs.mkdirSync(dir, { recursive: true });
+          if (meta.name.startsWith('foundation') || meta.name === 'case-0')
+            await p
+              .locator(
+                `.stage[data-kind="${meta.name === 'case-0' ? 'case' : 'foundation'}"][data-index="${meta.name.match(/^foundation-(\d+)/)?.[1] || '0'}"]`,
+              )
+              .scrollIntoViewIfNeeded();
+          else
+            await p.evaluate(() => {
+              scrollTo(0, 0);
+              document.body.scrollTop = 0;
+            });
+          await p.platformPage.evaluate(
+            () => (document.querySelector('.reading-body').scrollTop = 0),
+          );
+          await p.screenshot({
+            path: path.join(dir, `${slug}-${scale}-${meta.name}.png`),
+            animations: 'disabled',
+          });
+        }
         if (observer) await observer(p, { slug, scale, ...meta, ...measured });
       };
       const capture = async (p, meta) => {

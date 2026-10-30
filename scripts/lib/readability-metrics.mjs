@@ -2,6 +2,7 @@
 export function readabilityMetrics({ scale = 1 } = {}) {
   const issues = [],
     texts = [],
+    textElements = [],
     controls = [],
     seen = new Set(),
     styles = new WeakMap(),
@@ -104,7 +105,7 @@ export function readabilityMetrics({ scale = 1 } = {}) {
       .trim();
     if (!direct || !visible(e)) continue;
     const s = style(e),
-      svg = e instanceof SVGElement && !!e.closest('svg'),
+      svg = !!e.closest('svg'),
       button = e.closest('button,a[href],label,select,[role="button"],[role="radio"]');
     let role = svg
       ? 'diagram'
@@ -121,12 +122,14 @@ export function readabilityMetrics({ scale = 1 } = {}) {
                 )
               ? 'secondary'
               : 'body';
-    const min = { diagram: 12, control: 17, question: 18, heading: 20, secondary: 14, body: 17 }[
+    const min = { diagram: 12, control: 18, question: 19, heading: 21, secondary: 14, body: 18 }[
       role
     ];
     let px = parseFloat(s.fontSize);
     if (svg) {
-      const m = e.getScreenCTM?.();
+      const m = (
+        e instanceof SVGElement ? e : e.closest('foreignObject,foreignobject') || e.closest('svg')
+      )?.getScreenCTM?.();
       if (m) px *= Math.hypot(m.a, m.b);
     }
     const row = {
@@ -134,10 +137,12 @@ export function readabilityMetrics({ scale = 1 } = {}) {
       text: direct.slice(0, 150),
       role,
       px,
+      cssPx: parseFloat(s.fontSize),
       lineHeight:
         s.lineHeight === 'normal' ? null : parseFloat(s.lineHeight) / parseFloat(s.fontSize),
     };
     texts.push(row);
+    textElements.push(e);
     if (
       px + 0.05 < min &&
       !(
@@ -159,7 +164,7 @@ export function readabilityMetrics({ scale = 1 } = {}) {
     }
     let bg = [255, 255, 255];
     for (const c of stack) bg = blend(c, bg);
-    let fg = color(svg ? s.fill : s.color);
+    let fg = color(e instanceof SVGElement ? s.fill : s.color);
     if (fg) {
       fg = [...fg];
       fg[3] *= opacity;
@@ -193,6 +198,8 @@ export function readabilityMetrics({ scale = 1 } = {}) {
       t = (e.textContent || e.getAttribute('aria-label') || e.tagName).trim();
     controls.push({ selector: path(e), height: b.height, text: t.slice(0, 100) });
     if (b.height < 43.9) add('target-height', e, b.height, 44, t);
+    if (e.scrollHeight > e.clientHeight + 2)
+      add('control-clipped-vertical', e, e.scrollHeight, e.clientHeight, t);
     if (e.scrollWidth > e.clientWidth + 2)
       add('control-clipped', e, e.scrollWidth, e.clientWidth, t);
   }
@@ -246,6 +253,35 @@ export function readabilityMetrics({ scale = 1 } = {}) {
       minimum: scale,
       text: 'course-font-scale',
     });
+  if (document.documentElement.dataset.readability === 'on') {
+    const addedTools = [...document.querySelectorAll('[data-readability-zoom]')].map((e) => [
+      e,
+      e.style.display,
+    ]);
+    for (const [e] of addedTools) e.style.display = 'none';
+    document.documentElement.removeAttribute('data-readability');
+    if (window.StudentScriptUI) dispatchEvent(new Event('resize'));
+    for (let i = 0; i < texts.length; i++) {
+      const e = textElements[i];
+      const original = parseFloat(getComputedStyle(e).fontSize);
+      let renderedOriginal = original;
+      if (e.closest('svg')) {
+        const matrix = (
+          e instanceof SVGElement ? e : e.closest('foreignObject,foreignobject') || e.closest('svg')
+        )?.getScreenCTM?.();
+        if (matrix) renderedOriginal *= Math.hypot(matrix.a, matrix.b);
+      }
+      texts[i].originalRenderedPx = renderedOriginal;
+      if (texts[i].px + 0.05 < renderedOriginal)
+        add('font-render-shrunk', e, texts[i].px, renderedOriginal, texts[i].text);
+      texts[i].originalPx = original;
+      if (texts[i].cssPx + 0.05 < original)
+        add('font-shrunk', e, texts[i].cssPx, original, texts[i].text);
+    }
+    document.documentElement.dataset.readability = 'on';
+    for (const [e, display] of addedTools) e.style.display = display;
+    if (window.StudentScriptUI) dispatchEvent(new Event('resize'));
+  }
   return {
     issues,
     rasterImages,

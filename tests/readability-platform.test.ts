@@ -7,7 +7,7 @@ import { displayPreferences } from '../shared/displayPrefs';
 import { validateCourseDraft } from '../shared/courseValidation';
 // @ts-ignore Browser-only verification adapter.
 import { platformPage } from '../scripts/lib/readability-platform.mjs';
-test('閱讀開關：預設開、全課關、排除優先與本輪三份範圍', () => {
+test('閱讀開關：預設開、全課關、排除優先與全部教材', () => {
   const overlay = postcss.parse(
     fs.readFileSync(
       new URL('../public/materials/readability-overlay.css', import.meta.url),
@@ -38,7 +38,7 @@ test('閱讀開關：預設開、全課關、排除優先與本輪三份範圍',
   );
   assert.equal(
     displayPreferences(undefined, { ...a, materialVersion: 'lung-function-v1' }, 1).overlay,
-    false,
+    true,
   );
   const c: any = {
     id: 'sample',
@@ -160,6 +160,22 @@ test('真實Player opaque iframe：字級即時送出、關閉還原、來源與
     });
     assert(order.first.includes('diagram-region'));
     assert(order.figureTop <= order.responseTop);
+    const beforeZoom = await p.evaluate(() => (window as any).StudentScriptUI.getState());
+    await p.locator('[data-readability-zoom]').first().click();
+    assert(
+      await p
+        .locator('.course-readability-zoom-pane > svg')
+        .evaluate(
+          (e: Element) =>
+            e.getBoundingClientRect().width >= 1200 && getComputedStyle(e).maxHeight === 'none',
+        ),
+    );
+    await p.getByRole('button', { name: '關閉放大圖像' }).click();
+    assert.deepEqual(
+      await p.evaluate(() => (window as any).StudentScriptUI.getState()),
+      beforeZoom,
+    );
+
     await p.close();
   } finally {
     await browser.close();

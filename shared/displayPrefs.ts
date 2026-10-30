@@ -5,12 +5,6 @@ export const fontScales: Record<string, number> = {
   large: 1.15,
   xlarge: 1.3,
 };
-// Teacher sample stop: expand only after the three samples are approved.
-export const readabilitySampleVersions = [
-  'kidney-anatomy-v1',
-  'airway-structure-v1',
-  'cardiac-output-v1',
-];
 export function displayPreferences(
   course: Pick<Course, 'features'> | undefined,
   activity: Pick<Activity, 'url' | 'materialVersion'>,
@@ -23,7 +17,6 @@ export function displayPreferences(
     fontScale,
     overlay:
       course?.features?.readabilityOverlay !== false &&
-      !course?.features?.readabilityOverlayExclusions?.includes(version) &&
-      readabilitySampleVersions.includes(version),
+      !course?.features?.readabilityOverlayExclusions?.includes(version),
   };
 }

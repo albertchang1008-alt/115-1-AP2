@@ -7,7 +7,7 @@ import { chromium } from 'playwright';
 import { readabilityMetrics } from '../scripts/lib/readability-metrics.mjs';
 import { auditReadabilityCss } from '../scripts/lib/readability-static.mjs';
 const css =
-  '<style>html{--font-scale:1}body{font:17px/1.6 sans-serif;color:#111;background:white}h1{font-size:20px}p{font-size:17px;line-height:1.6}button{font-size:17px;min-height:44px;color:#111;background:white;border:1px solid #111}</style>';
+  '<style>html{--font-scale:1}body{font:18px/1.6 sans-serif;color:#111;background:white}h1{font-size:21px}p{font-size:18px;line-height:1.6}button{font-size:18px;min-height:44px;color:#111;background:white;border:1px solid #111}</style>';
 test('閱讀量測：正確範例通過；實際小字、行高、對比、點擊高與裁字均檢出', async () => {
   const b = await chromium.launch({ channel: 'chrome' });
   try {
@@ -36,11 +36,11 @@ test('閱讀量測：字級未接平台設定即FAIL、真正calc後符合特大
       ),
     );
     await p.addStyleTag({
-      content: 'html{--font-scale:1.3}p{font-size:calc(17px * var(--font-scale))}',
+      content: 'html{--font-scale:1.3}p{font-size:calc(18px * var(--font-scale))}',
     });
     const good = await p.evaluate(readabilityMetrics, { scale: 1.3 });
     assert.deepEqual(good.issues, []);
-    assert.equal(good.texts[0].px, 22.1);
+    assert.equal(good.texts[0].px, 23.4);
     await p.setContent(
       css +
         '<div style="width:500px;height:60px" class="options"><button style="position:absolute;left:0;top:0">甲</button><button style="position:absolute;left:0;top:0">乙</button></div>',
@@ -109,5 +109,23 @@ test('CSS靜態門檻：固定font-size與font shorthand都報錯；白名單精
     );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+test('只放大：同元素低於原字級即FAIL，max保留原大標題時PASS', async () => {
+  const b = await chromium.launch({ channel: 'chrome' });
+  try {
+    const p = await b.newPage({ viewport: { width: 390, height: 844 } });
+    await p.setContent(
+      `<html data-readability="on"><style>html{--font-scale:1}body{background:white;color:#111}h1{font-size:32px}html[data-readability=on] h1{font-size:21px}</style><body><h1>保留大標題</h1></body></html>`,
+    );
+    let r = await p.evaluate(readabilityMetrics, {});
+    assert(r.issues.some((i) => i.type === 'font-shrunk' && i.minimum === 32));
+    await p.addStyleTag({
+      content: 'html[data-readability=on] h1{font-size:max(32px,calc(21px * var(--font-scale,1)))}',
+    });
+    r = await p.evaluate(readabilityMetrics, {});
+    assert.deepEqual(r.issues, []);
+  } finally {
+    await b.close();
   }
 });
