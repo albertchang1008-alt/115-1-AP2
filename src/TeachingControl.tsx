@@ -1,3 +1,4 @@
+import QuestionManagerPanel from './QuestionManagerPanel';
 import {
   TeacherInteraction,
   interactiveSlideHTML,
@@ -254,6 +255,7 @@ export default function TeachingControl({
             簡報播放
           </button>
         )}
+        {!api.preview && <button className={panel === 'questions' ? 'primary' : ''} onClick={() => setPanel('questions')}>題目管理</button>}
         <button className={panel === 'flow' ? 'primary' : ''} onClick={() => setPanel('flow')}>
           學生學習進度
         </button>
@@ -441,6 +443,7 @@ export default function TeachingControl({
           )}
         </section>
       )}
+      {panel === 'questions' && <section className="panel"><QuestionManagerPanel api={api} courseId={course.id} /></section>}
       {panel === 'flow' && (
         <>
           <p className="notice">
