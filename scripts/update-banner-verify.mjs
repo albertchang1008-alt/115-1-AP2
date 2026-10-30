@@ -7,7 +7,8 @@ import { build } from 'esbuild';
 import { chromium } from 'playwright';
 export async function verifyUpdateBanner(out) {
   const current = fs.readFileSync('VERSION', 'utf8').trim(),
-    next = current.replace(/\.(\d+)\.0$/, (m, n) => `.${Number(n) + 1}.0`);
+    next = current.replace(/\.(\d+)$/, (_m, patch) => `.${Number(patch) + 1}`);
+  assert.notEqual(next, current, 'next deployment must differ for patch releases too');
   async function bundle(version) {
     const output = (
       await build({
