@@ -24,7 +24,7 @@ function minimalPdf() {
     .join('')}trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n${at}\n%%EOF\n`;
   return Buffer.from(txt);
 }
-const out = process.env.QM_OUT || '/private/tmp/question-manager-ui';
+const out = process.env.QM_OUT || (process.env.RUNNER_TEMP || '/tmp') + '/question-manager-ui';
 fs.mkdirSync(out, { recursive: true });
 const files = buildSync({
   entryPoints: ['tests/fixtures/question-manager.tsx'],
