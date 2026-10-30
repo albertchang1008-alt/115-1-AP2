@@ -6,7 +6,7 @@ const handlers = require('../lib/functions/src/index.js');
 const expected = [
   'getAnswerIntegrityStats', 'recordPracticeLeaves', 'getClassUsageStats', 'getCompletionDaily', 'rebuildStats', 'dailyStats',
   'listManagedCourses', 'getCourseDraft', 'getCompletionSummary', 'patchCourseDraft',
-  'getClassroomConfig', 'saveClassroomConfig', 'controlClassroomInteraction', 'getClassroomInteraction', 'studentClassroomHistory', 'submitClassroomInteraction', 'classroomInteractionReport', 'classroomInteractionRecords',
+  'updateClassroomQuestions', 'getClassroomConfig', 'saveClassroomConfig', 'controlClassroomInteraction', 'getClassroomInteraction', 'studentClassroomHistory', 'submitClassroomInteraction', 'classroomInteractionReport', 'classroomInteractionRecords',
   'getTeachingDeck', 'saveTeachingDeck', 'getClassroomCourse',
   'getAssessments','prepareAssessment','controlAssessment','startAssessment','saveAssessment','previewAssessment','assessmentReport','expireAssessments',
   'bootstrap',

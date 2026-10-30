@@ -1,3 +1,4 @@
+import { useUpdateProtection } from './updateActivity';
 import { featureEnabled } from '../shared/features';
 import { visiblePoll } from './VisiblePoll';
 import { useEffect, useState, useRef, useId } from 'react';
@@ -289,6 +290,7 @@ export function StudentInteraction({ api, course }: { api: API; course: Course }
     [showHistory, setShowHistory] = useState(false),
     [historyRounds, setHistoryRounds] = useState<StudentHistoryItem[]>([]),
     [historyLoading, setHistoryLoading] = useState(false);
+  useUpdateProtection(state.round?.status === 'open' && !state.submitted);
   const now = useInteractionClock(state.serverNow);
   const expired = !!state.round && interactionExpired(state.round, now);
   const reveal = state.reveal || state.round?.reveal;

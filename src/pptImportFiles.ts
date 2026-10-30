@@ -1,3 +1,4 @@
+import { QUESTION_HEADERS, parseManagedMatrix } from '../shared/questionWorkbook';
 import {
   RawQuestionRow,
   QuestionSheetParseResult,
@@ -182,6 +183,7 @@ export async function parseXlsxQuestionSheet(
   slideTitles?: Record<number, string>,
 ): Promise<QuestionSheetParseResult> {
   const matrix = await readXlsxFirstSheetMatrix(buffer);
+  if (matrix[0]?.join('|') === QUESTION_HEADERS.join('|')) return parseManagedMatrix(matrix, pageCount, deckId);
   if (!matrix.length) {
     return parseQuestionTableRows([], pageCount, deckId, slideTitles);
   }
