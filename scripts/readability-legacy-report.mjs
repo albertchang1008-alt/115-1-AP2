@@ -1,3 +1,4 @@
+import os from 'node:os';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
@@ -5,7 +6,11 @@ import { platformPage } from './lib/readability-platform.mjs';
 import { readabilityMetrics } from './lib/readability-metrics.mjs';
 import { readabilitySlugs } from './readability-check.mjs';
 const i = process.argv.indexOf('--out'),
-  out = path.resolve(i >= 0 ? process.argv[i + 1] : '/tmp/readability-legacy');
+  out = path.resolve(
+    i >= 0
+      ? process.argv[i + 1]
+      : path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'readability-legacy'),
+  );
 fs.mkdirSync(out, { recursive: true });
 const onlyIndex = process.argv.indexOf('--version'),
   only = onlyIndex >= 0 ? process.argv[onlyIndex + 1] : null;

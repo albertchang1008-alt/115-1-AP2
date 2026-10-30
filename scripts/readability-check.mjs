@@ -1,3 +1,4 @@
+import os from 'node:os';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -15,7 +16,7 @@ export const readabilitySlugs =
 const root = path.resolve(import.meta.dirname, '..');
 const publishedVersion = (slug) => slug + (slug === 'urinary-route-micturition' ? '-v2' : '-v1');
 export async function checkReadability({
-  out = '/tmp/course-readability',
+  out = path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'course-readability'),
   slugs = readabilitySlugs,
   scales = [1, 1.3],
   sizes = [

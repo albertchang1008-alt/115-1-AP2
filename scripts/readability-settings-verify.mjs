@@ -1,3 +1,4 @@
+import os from 'node:os';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +11,10 @@ if (
 const require = createRequire(new URL('../functions/package.json', import.meta.url));
 const h = require('../functions/lib/functions/src/index.js');
 const db = require('firebase-admin/firestore').getFirestore();
-const out = process.argv[process.argv.indexOf('--out') + 1] || '/tmp/readability-settings';
+const outIndex = process.argv.indexOf('--out');
+const out =
+  (outIndex >= 0 ? process.argv[outIndex + 1] : null) ||
+  path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'readability-settings');
 fs.mkdirSync(out, { recursive: true });
 const teacher = {
     uid: 'readability-teacher',
@@ -39,16 +43,14 @@ const id = 'readability-demo',
       readabilityOverlayExclusions: ['kidney-anatomy-v1'],
     },
   };
-await db
-  .doc(`courses/${id}`)
-  .set({
-    teacherIds: [teacher.uid],
-    classIds: ['A'],
-    rosterVersion: 2,
-    draft: { ...course, features: {} },
-    published: { ...course, features: {} },
-    revision: 0,
-  });
+await db.doc(`courses/${id}`).set({
+  teacherIds: [teacher.uid],
+  classIds: ['A'],
+  rosterVersion: 2,
+  draft: { ...course, features: {} },
+  published: { ...course, features: {} },
+  revision: 0,
+});
 await db
   .doc(`enrollments/${id}__${student.token.email}`)
   .set({ courseId: id, email: student.token.email, classId: 'A', studentId: 'S00', enabled: true });

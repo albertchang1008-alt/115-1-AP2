@@ -1,9 +1,14 @@
+import os from 'node:os';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
 import { platformPage } from './lib/readability-platform.mjs';
 const i = process.argv.indexOf('--out'),
-  out = path.resolve(i >= 0 ? process.argv[i + 1] : '/tmp/readability-shots');
+  out = path.resolve(
+    i >= 0
+      ? process.argv[i + 1]
+      : path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'readability-shots'),
+  );
 fs.mkdirSync(out, { recursive: true });
 const results = [];
 const browser = await chromium.launch({ channel: 'chrome' });

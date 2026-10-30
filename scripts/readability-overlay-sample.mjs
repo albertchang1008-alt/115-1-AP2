@@ -1,10 +1,15 @@
+import os from 'node:os';
 import assert from 'node:assert/strict';
 import { validateCapturedEvents } from './lib/release-tracking-proof.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { checkReadability } from './readability-check.mjs';
 const outIndex = process.argv.indexOf('--out');
-const out = path.resolve(outIndex >= 0 ? process.argv[outIndex + 1] : '/tmp/readability-overlay');
+const out = path.resolve(
+  outIndex >= 0
+    ? process.argv[outIndex + 1]
+    : path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'readability-overlay'),
+);
 fs.mkdirSync(out, { recursive: true });
 const slugs = ['kidney-anatomy', 'airway-structure', 'cardiac-output'];
 const saved = new Set();

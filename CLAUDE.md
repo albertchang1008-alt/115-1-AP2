@@ -13,4 +13,6 @@
 9. 交棒：收工時給教師的最後回覆末尾，附一個標題「交給下一個 AI」的程式碼區塊，教師可整段貼給下一棒（Codex／Antigravity／Claude）。內容須獨立可讀：對象、佇列編號、要讀的檔（handoff、佇列、交辦、報告）、要做什麼、限制、完成後佇列怎麼改，並要求對方同樣附交棒 prompt；停在教師時改寫「給教師的待辦」。不得放期中考題文字或學生個資。
 10. 學生可見的文字一律符合 docs/READABILITY_STANDARD.md（手機390寬：內文≥18px、選項≥18px且點擊高≥44px、跟隨平台字級、特大不溢出、只放大不縮小）；交付須附390寬預設＋特大截圖與自動檢查結果，未達標不得交驗收。
 
+11. 測試與驗證腳本必須能在 GitHub Actions（Ubuntu、非 root）執行：不得寫死 /private/tmp、/Users 等 macOS 或個人路徑，暫存一律用 os.tmpdir()／RUNNER_TEMP；交付前註明已用 Linux 環境跑過 npm run check（10/30 1.15.0 曾因此建置失敗）。
+
 以上規則對任何在這個 repo 工作的 AI agent 一律適用。
