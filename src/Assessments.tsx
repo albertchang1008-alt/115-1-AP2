@@ -1,3 +1,4 @@
+import { useUpdateProtection } from './updateActivity';
 import { useEffect, useRef, useState } from 'react';
 import { API } from './service';
 import { Course } from '../shared/model';
@@ -12,6 +13,7 @@ export function StudentAssessments({ api, course }: { api: API; course: Course }
     [notice, setNotice] = useState(''),
     [busy, setBusy] = useState(false),
     [tick, setTick] = useState(Date.now());
+  useUpdateProtection(current?.session?.state === 'active' || busy);
   const offset = useRef(0),
     inflight = useRef(false),
     lastTimeout = useRef(0),

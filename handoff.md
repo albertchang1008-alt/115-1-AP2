@@ -1,5 +1,5 @@
 # 專案交接
-目前版本：1.14.0；本工作樹分支 codex/acidbase-full，自 apply-kit 凍結 a5773cc 建立。酸鹼樣張僅本機預覽，未發布。
+目前版本：1.15.0；本工作樹分支 codex/acidbase-full，自 apply-kit 凍結 a5773cc 建立。酸鹼樣張僅本機預覽，未發布。
 
 本工作樹同步2026-10-20現行規則；唯一現況與週誌維護於原根目錄 /Users/HHC/Documents/ChatGPT/課程平台1.0 的 CODEX_QUEUE.md 與 docs/devlog/，不以此工作樹舊佇列猜測。
 
