@@ -1,99 +1,50 @@
-# #42 閱讀加大應急方案一：三份平台iframe樣張
+# 暫停紀錄（教師2026-10-30 20:16）
+
+- #42停-等教師，改做#44；未push、部署、刪檔或寫正式資料。
+- 暫停前HEAD：027dad343310e9381380c05819c885285ffbd465；本紀錄隨WIP提交保存，WIP HEAD以根目錄CODEX_QUEUE.md位置欄為準。
+- 17份已完成全面overlay與四組合驗證；背景命令在暫停指令讀取前已自然結束exit0：17/17、4864狀態、閱讀／靜態／流程問題0。
+- 已過：整合origin/main 7bc637a1、升1.15.1；npm run check前端284／後端101、0 skipped；Emulator7組；49份雙字級截圖；20檔grep路徑／指令自查0命中；HTML與教材來源0變動。
+- 未跑：Linux實跑（教師指定待Claude用git bundle、雲端非root驗收）；未做正式環境驗證。尚未產生最終bundle與完整證據manifest，未交Claude；報告自動定稿在事件檔數量斷言失敗，需接續核對事件檔範圍後才可定稿。
+- 下次從本WIP接續：先讀根目錄佇列與教師新決定；補齊最終gate輸出／截圖至repo外證據、重新核對保護雜湊與報告、產生bundle及manifest，再依教師授權交Claude。不需重寫已完成內容；有新整合或改碼才重跑受影響驗證。
+- 最後完整輸出仍在/tmp/readability-full/integrated-check.log，gate原始資料在/tmp/course-readability；既有外部證據見下文。暫存目錄可能清除，已保存的外部證據保存至2026-11-06。
+
+---
+
+# #42 閱讀加大全面版與設定保存
 
 ## 給 Claude 的摘要
 
-- 本輪：13:15方案的三份樣張PASS，停-等教師；未擴全面，不能合併main。
-- 分支feature/readability，接31eb47fc；版號保持1.14.0；根目錄分支未切換。
-- 改動：Player／FontSizePicker、SDK course-learning.js、readability-overlay.css、features型別／驗證／設定UI、iframe檢查器。
-- 手機樣張：腎臟、呼吸道、心輸出量；390×844外框、opaque iframe、預設／特大386狀態，0問題、0流程錯誤。
-- 原版同情境：193狀態、11644次問題，無流程錯誤。
-- 測試：前端271／後端98 PASS、0 skipped；最後核心7項重跑全過；最終build／version:check PASS。
-- npm run check閱讀門檻仍FAIL：{'materials': 17, 'pass': 2, 'fail': 15, 'screens': 4864, 'issues': 128849, 'staticIssues': 175, 'errors': 0}；沒有放行或跳過17份門檻。
-- 保護：49份HTML SHA全不變、49份均有實際SDK script標籤；SDK學習佇列與事件程式原文不變。
-- 偏離／待辦：教師明確決定後端保存另列#42b；本機設定可驗證，正式全班保存尚不可交驗收。
-- 抽查1–3：下方三組截圖、sample/*-sandbox.json與*-events.json、preservation.json。
-- 證據：/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay；截圖保存至2026-11-06。
+- 以下為暫停前草稿，最終驗證數字以最上方暫停紀錄與原始log為準，尚未完成交驗定稿。
+- 以36de9666為內容保護基準；新版主線整合及版號依任務15:56追加處理。
+- 不改教材HTML、題目、答案、reviewed卡與闖關判定；不push、不部署、不寫正式資料。
+- 後端只需部署saveCourse、bootstrap；前端由教師核准後推送。
+- 其他舊教材僅初始畫面警告報告，不宣稱完整流程合格。
+- 證據資料夾：`/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-full/`；截圖保存至2026-11-06。
 
-## 真正的平台情境
+## 平台情境與字級保護
 
-檢查器現在以實際`src/Player.tsx`的HtmlMaterial與FontSizePicker建成隔離閱讀頁，iframe使用與正式平台相同的`sandbox="allow-scripts"`，不加allow-same-origin。原HTML由本機route原封不動回傳其HTTPS網址；SDK與overlay也以各自原網址載入本機內容，不用srcdoc、修改HTML、跨frame改DOM或在教材端讀localStorage。所有網路由本機route處理，不連正式API。
+實際Player的HtmlMaterial與FontSizePicker在本機隔離頁運作，沿用`sandbox="allow-scripts"`，不加allow-same-origin、不用srcdoc。教材不能讀平台localStorage；由Player透過protocolVersion=1的display-prefs送字級與overlay布林。SDK只接受parent、合法字級與布林，初次載入、ready、字級切換與設定變動均送出；晚到ready使用最新設定。非互動教材同樣接收顯示偏好。
 
-九個完整走訪（3份×目前／預設／特大）的sandbox證據均確認`self.origin="null"`、localStorage遭拒；字級由父頁實際Player送出。`display-prefs`固定protocolVersion=1，只含字級與overlay布林值，不帶學生身分。SDK只接受parent來源、指定版本、合法字級與布林值，重送不重複掛CSS；overlay:false清除標記、CSS與放大控制，字級變數仍保留。
+取消三份樣張限制，全部實際載入SDK的49份教材可套用。CSS限定data-readability=on，分apply-kit-script／learning-kit／other。缺省開啟，教師可關閉或指定materialVersion排除。關閉時清除CSS、標記及放大工具，既有學習context與事件流程保留。
 
-即時更新涵蓋FontSizePicker同頁事件及跨頁storage事件；非互動教材也會送display-prefs。晚到ready仍讀取最新課程開關／排除設定；互動init、session／activity／material檢核與ack保持原流程，非互動教材不額外啟動互動context。
+SDK在原樣式情境逐元素量出計算字級，透過自訂變數讓CSS取max(原字級,規範字級×scale)。內文與選項18、題幹19、標題21、行高1.6、點擊高44；不把原來較大的標題壓小。檢查器同時比較CSS字級與SVG實際螢幕字級，若小於原版同元素即FAIL。參考量測呼叫原教材自己的responsive resize，使原生箭頭標籤使用正確縮放比例；沒有硬改SVG標籤座標。
 
-## 三份樣張的量測
+不改DOM版面順序。短訊息垂直置中，圖面依自然高度伸展；空間標示題保留原生平移座標。低於圖字門檻的圖須有獨立可操作的放大入口；點陣圖不能以font-size推斷文字大小，無放大替代即FAIL。放大複本為唯讀圖像，關閉後原題狀態不變。
 
-外層390×844，沿用平台48px閱讀列，iframe內容高度796px。下列只列教材內容；既有平台其他學生畫面仍受原來的src靜態門檻約束。
+## 檢查涵蓋與保護
 
-| 教材 | 字級 | 狀態數 | 最小內文px | 最小選項px | 最小點擊高px | 結果／問題 |
-|---|---|---:|---:|---:|---:|---|
-| kidney-anatomy-v1 | 預設 | 90 | 17.00 | 17.00 | 44.00 | PASS／0 |
-| kidney-anatomy-v1 | 特大 | 90 | 22.10 | 22.10 | 44.00 | PASS／0 |
-| airway-structure-v1 | 預設 | 51 | 17.00 | 17.00 | 44.00 | PASS／0 |
-| airway-structure-v1 | 特大 | 51 | 22.10 | 22.10 | 44.00 | PASS／0 |
-| cardiac-output-v1 | 預設 | 52 | 17.00 | 17.00 | 44.00 | PASS／0 |
-| cardiac-output-v1 | 特大 | 52 | 22.10 | 22.10 | 44.00 | PASS／0 |
+17份以390×844、1280×800外框，各預設與特大四組合完整走訪；平台閱讀列48px，iframe高度分別796、752。涵蓋引導、六節點、錯答／正答、回饋、過關、轉場、考核與完成；按畫面量測字級、行高、對比、水平溢出、選項重疊、按鈕水平與垂直裁字。測試會檢查同一元素原版／overlay字級，不以單一全頁最小值代替角色門檻。圖字可低於內文18px，仍須符合圖字12px或放大替代規則。
 
-所有字級、行高、點擊高、對比、裁字、水平溢出與選項重疊探針均0問題。SVG原標籤的位置不動，低於圖字門檻時須有可操作的放大替代；點陣圖沒有放大入口即列FAIL，並未用OCR臆測字級。螢幕閱讀器用的clip-path:inset(50%)表頭不算可見文字，新增判定避免把原生1px隱藏表頭誤報為裁字。
+68份事件紀錄須各有completedCalls=1、有效questionId／nodeId、錯答與正答、六節點及reduceLearning結果。HTML與materials-src逐檔比對36de9666；SDK從let context起的學習佇列與事件程式原文不變。原HTML的重建與雜湊測試照常執行。
 
-### 390寬截圖比較
+靜態檢查保留169筆既有apply-kit來源宣告白名單：依13:15決定不改原HTML及其來源，改由SDK overlay接管字級。每筆列出檔案、selector、property、value與理由；動態17份四組合仍是必過門檻，未將動態閱讀失敗加入白名單。學生端src新增的固定字級已改為乘font-scale。
 
-每組均由真正Player截圖，保留原生教材文字。呼吸／心輸出量的「第一關過關」是先備六題最後一題答對；原生沒有獨立轉場卡，因此「轉場」截第二關第一題開啟的實際畫面，不另造教材內容。腎臟第一關保留圖與高低文字在回饋之前，圖面在既有220px捲動框內平移，不移動SVG座標。
+## 開關後端保存（原#42b）
 
-| 教材／畫面 | 目前 | 閱讀加大預設 | 閱讀加大特大 |
-|---|---|---|---|
-| 腎臟／第1關作答 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-before-first-question.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-default-first-question.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-xlarge-first-question.png) |
-| 腎臟／第1關過關 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-before-first-passed.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-default-first-passed.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-xlarge-first-passed.png) |
-| 腎臟／轉場 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-before-transition.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-default-transition.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/kidney-anatomy-xlarge-transition.png) |
-| 呼吸道／第1關作答 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-before-first-question.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-default-first-question.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-xlarge-first-question.png) |
-| 呼吸道／第1關過關 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-before-first-passed.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-default-first-passed.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-xlarge-first-passed.png) |
-| 呼吸道／轉場 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-before-transition.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-default-transition.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/airway-structure-xlarge-transition.png) |
-| 心輸出量／第1關作答 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-before-first-question.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-default-first-question.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-xlarge-first-question.png) |
-| 心輸出量／第1關過關 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-before-first-passed.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-default-first-passed.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-xlarge-first-passed.png) |
-| 心輸出量／轉場 | [目前](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-before-transition.png) | [預設](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-default-transition.png) | [特大](/Users/HHC/Documents/ChatGPT/課程平台-驗收證據/2026-10-30/readability-overlay/sample/cardiac-output-xlarge-transition.png) |
+saveCourse沿用既有教師權限、課程teacherIds、交易與expectedRevision；正規化並保存readabilityOverlay與排除清單，缺省true及空陣列。bootstrap的教師及學生分支回傳相同設定；既有三個features布林維持獨立。根層設定優先，缺欄時相容既有draft／published設定；不改published教材、不批次遷移課程，不更動班級勾選。
 
-其他開場、完整通關及放置圖面截圖也保存在sample目錄，共54張。
+驗證含非教師與跨課程拒絕、true／false＋排除清單往返、缺省開啟、非法型別／路徑／重複／過量項目拒絕、revision衝突不覆寫。真實Firestore Emulator使用demo-readability、127.0.0.1:8157及合成教師／學生，腳本對非demo專案與非本機Emulator會先拒絕。未連正式Firestore。
 
-## 樣式與範圍控制
+## 舊教材警告的範圍
 
-- 所有overlay規則都在html[data-readability="on"]之下，分apply-kit-script、learning-kit、other。沒有order、flex-direction、grid-row或grid-column重排；核心測試也驗證第一關圖面在文字區前方。手機必要時沿原DOM順序往下排，保留垂直捲動。
-- SVG標籤只調可讀的顏色／白描邊，不改x、y、dx、dy、transform等座標。心輸出量比較圖的非當前柱狀由.25透明改為.8，仍較淡但文字可讀，沒有改數值。
-- 另加獨立放大入口，放大圖內可捲動，關閉前後闖關狀態深度相同比對。放大不改原圖的DOM位置或操作處理器。
-- Player的readabilitySampleVersions目前只允許三份套overlay，其餘仍不套；課程缺省開啟，但全課關閉或排除清單優先。教師核可前不移除這個樣張保護。
-- 31eb47fc的三個opt-in檔已移除，舊readability-sample.mjs改指向新iframe樣張腳本；原先直接開HTML、讀教材localStorage的結果不再作平台驗收依據。
-- 正式教材HTML、文字、題目ID／答案、reviewed卡、闖關判定、節點／題數均不改；不重建教材、不改勾班、不寫Sheet或Firestore。
-
-## 學習事件與保存限制
-
-九次完整走訪的事件均通過既有validateCapturedEvents：六節點explore、實際答錯／答對、題目ID合法、completed恰好一次；reduceLearning亦驗證完成。Player onSave完成回報每次恰好一次。證據是實際SDK→postMessage→Player預覽bridge→ack，非偽造完成狀態或直接塞資料。timer與事件排序受正常操作時間影響，沒有宣稱時間值相同。
-
-preservation.json逐檔比較49份發布HTML與31eb47fc，changedHtml=0，並列每份SHA256及實際SDK script URL，未載SDK者0份。SDK原學習佇列／init／ack／事件方法與timer程式比對原文一致（只新增獨立display分支）。
-
-教師已回覆「本輪先完成樣張，後端支援另列待辦」。因此只做前端欄位與共用型別／輸入驗證，**沒有改functions/src/index.ts中的saveCourse或bootstrap實作**：現行正式saveCourse只保存三種既有布林功能，bootstrap又以根features覆蓋草稿，不能宣稱新開關／排除已可保存給全班。另列#42b與CODEX_TASK_readability-settings-backend_2026-10-30.md，待教師另行安排；部署條件日後需包含該後端支援。
-
-## 實際摘要輸出
-
-```text
-{"materials":17,"pass":2,"fail":15,"screens":4864,"issues":128849,"staticIssues":175,"errors":0}
-npm run check: exit 1（閱讀門檻）
-{"materials":3,"pass":3,"fail":0,"screens":386,"issues":0,"staticIssues":0,"errors":0}
-三份樣張: exit 0
-```
-
-## 驗證指令與限制
-
-```sh
-npm run check
-# 前端271、後端98、0 skipped；閱讀門檻FAIL，尚不能合併main
-node --experimental-strip-types scripts/readability-overlay-sample.mjs --out /tmp/readability-overlay-evidence3
-# after: 3 PASS，386狀態，0問題／0流程錯誤；九次完成事件各一次
-npx tsx --test tests/readability.test.ts tests/readability-platform.test.ts
-# 最終核心7/7、0 skipped（含晚到ready與原順序）
-npm run build
-# 最後修改後version:check 1.14.0、tsc及Vite PASS
-```
-
-完整輸出見npm-check.log、targeted-final.log、build-final.log、sample.log與gate/summary.json。17份門檻未過的項目仍會擋住npm run check；學生共用src與原kit的175處靜態宣告也未豁免。新版overlay本身已加入靜態檢查且沒有未縮放字級，另有全部選擇器作用範圍／不重排測試。其餘舊教材保留警告清單，本輪只抽一份心輸出量，不宣稱全數已好讀。
-
-本輪沒有push、部署、合併main或寫正式資料。待教師核可三份畫面後，再另行授權擴全面與後端保存支援；17份四種組合及學生端規範全PASS前不交上線驗收。
+其餘32份僅量390寬初始畫面，預設／特大共64組；不是完整作答流程驗收。所有外部字型、舊GA及其他非本機資源請求均由測試攔截，不會為驗收產生正式追蹤。依任務這些警告不擋17份期中教材，但仍列出具體問題，不能視為所有教材已達標。
