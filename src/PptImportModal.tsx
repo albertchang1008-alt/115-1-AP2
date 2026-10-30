@@ -1,3 +1,4 @@
+import { QUESTION_HEADERS } from '../shared/questionWorkbook';
 import { useState } from 'react';
 import { API } from './service';
 import {
@@ -9,10 +10,7 @@ import {
   QuestionSheetParseResult,
   RawQuestionRow,
 } from '../shared/pptImport';
-import {
-  parsePptxNotesAndTitles,
-  readXlsxFirstSheetMatrix,
-} from './pptImportFiles';
+import { parsePptxNotesAndTitles, readXlsxFirstSheetMatrix } from './pptImportFiles';
 import {
   arrayBufferToBase64DataUrl,
   RenderedPdfPage,
@@ -31,6 +29,7 @@ function extractRawRowsFromMatrix(matrix: string[][]): RawQuestionRow[] {
     const r = matrix[i] || [];
     rows.push({
       rowNumber: i + 1,
+      ...(matrix[0].join('|') === QUESTION_HEADERS.join('|') ? { managedCells: r } : {}),
       page: r[0] ?? '',
       kind: r[1] ?? '',
       stem: r[2] ?? '',
@@ -86,7 +85,8 @@ export default function PptImportModal({
 
   const slideTitlesMap: Record<number, string> = {};
   for (const p of renderedPages) {
-    slideTitlesMap[p.pageNumber] = pptxTitles[p.pageNumber] || p.extractedTitle || `第 ${p.pageNumber} 頁`;
+    slideTitlesMap[p.pageNumber] =
+      pptxTitles[p.pageNumber] || p.extractedTitle || `第 ${p.pageNumber} 頁`;
   }
 
   const parsedQuestions: QuestionSheetParseResult = parseQuestionTableRows(
@@ -101,8 +101,7 @@ export default function PptImportModal({
   const buildPreparedSlides = () =>
     renderedPages.map((p) => {
       const slideId = buildDeckSlideId(effectiveDeckId, p.pageNumber);
-      const slideTitle =
-        pptxTitles[p.pageNumber] || p.extractedTitle || `第 ${p.pageNumber} 頁`;
+      const slideTitle = pptxTitles[p.pageNumber] || p.extractedTitle || `第 ${p.pageNumber} 頁`;
       const notes = pptxNotes[p.pageNumber] || '';
       const answerPage = /答案|總結|解析/.test(slideTitle);
       return {
@@ -320,7 +319,11 @@ export default function PptImportModal({
               accept=".pdf,application/pdf"
               onChange={(e) => void handlePdfSelect(e.target.files?.[0] || null)}
             />
-            {pdfFileName && <small>已選擇：{pdfFileName}（{renderedPages.length} 頁）</small>}
+            {pdfFileName && (
+              <small>
+                已選擇：{pdfFileName}（{renderedPages.length} 頁）
+              </small>
+            )}
           </label>
           <label className="field">
             3. 題目表 Excel（.xlsx，支援「單選、排序、是非」）
@@ -331,7 +334,9 @@ export default function PptImportModal({
               onChange={(e) => void handleXlsxSelect(e.target.files?.[0] || null)}
             />
             {xlsxFileName && (
-              <small>已選擇：{xlsxFileName}（讀取 {parsedQuestions.items.length} 列題目）</small>
+              <small>
+                已選擇：{xlsxFileName}（讀取 {parsedQuestions.items.length} 列題目）
+              </small>
             )}
           </label>
           <label className="field">
@@ -392,9 +397,8 @@ export default function PptImportModal({
                 <p>
                   <strong>投影片變更：</strong>
                   新增 {reimportDiff.slides.added.length} 頁、變更{' '}
-                  {reimportDiff.slides.changed.length} 頁、刪除{' '}
-                  {reimportDiff.slides.removed.length} 頁、維持不變{' '}
-                  {reimportDiff.slides.unchanged.length} 頁
+                  {reimportDiff.slides.changed.length} 頁、刪除 {reimportDiff.slides.removed.length}{' '}
+                  頁、維持不變 {reimportDiff.slides.unchanged.length} 頁
                 </p>
                 <p>
                   <strong>互動題變更：</strong>
@@ -419,14 +423,8 @@ export default function PptImportModal({
 
             {/* Validation Errors (block import) */}
             {parsedQuestions.errors.length > 0 && (
-              <div
-                className="ppt-import-errors"
-                data-testid="ppt-import-errors"
-                role="alert"
-              >
-                <h4>
-                  ⚠️ 發現 {parsedQuestions.errors.length} 項題目表錯誤（修正前無法匯入）：
-                </h4>
+              <div className="ppt-import-errors" data-testid="ppt-import-errors" role="alert">
+                <h4>⚠️ 發現 {parsedQuestions.errors.length} 項題目表錯誤（修正前無法匯入）：</h4>
                 <ul>
                   {parsedQuestions.errors.map((err, i) => (
                     <li key={i}>{err}</li>
@@ -488,8 +486,7 @@ export default function PptImportModal({
                         <ul className="ppt-question-options">
                           {item.options.map((opt, idx) => {
                             const letter = ['A', 'B', 'C', 'D', 'E', 'F'][idx] || String(idx + 1);
-                            const isCorrectChoice =
-                              item.kind === 'choice' && item.answer === opt;
+                            const isCorrectChoice = item.kind === 'choice' && item.answer === opt;
                             return (
                               <li key={idx} className={isCorrectChoice ? 'is-answer' : ''}>
                                 <strong>{letter}.</strong> {opt}
@@ -534,10 +531,7 @@ export default function PptImportModal({
                     pptxTitles[p.pageNumber] || p.extractedTitle || `第 ${p.pageNumber} 頁`;
                   const note = pptxNotes[p.pageNumber];
                   return (
-                    <div
-                      key={p.pageNumber}
-                      className={`ppt-thumb-card ${q ? 'has-question' : ''}`}
-                    >
+                    <div key={p.pageNumber} className={`ppt-thumb-card ${q ? 'has-question' : ''}`}>
                       <div className="ppt-thumb-frame">
                         <img src={p.imageDataUrl} alt={`第 ${p.pageNumber} 頁縮圖`} />
                       </div>
@@ -545,11 +539,7 @@ export default function PptImportModal({
                         <strong>
                           P.{String(p.pageNumber).padStart(2, '0')} {slideTitle}
                         </strong>
-                        {q && (
-                          <span className="ppt-thumb-q-tag">
-                            互動題（{q.rawKind}）
-                          </span>
-                        )}
+                        {q && <span className="ppt-thumb-q-tag">互動題（{q.rawKind}）</span>}
                         {note && <small className="ppt-thumb-note">備註：{note}</small>}
                       </div>
                     </div>

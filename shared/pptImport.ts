@@ -1,3 +1,4 @@
+import { parseManagedMatrix, QUESTION_HEADERS } from './questionWorkbook';
 import {
   AnswerKeys,
   Interaction,
@@ -43,6 +44,7 @@ export type TeachingDeckDoc = {
 
 export type RawQuestionRow = {
   rowNumber: number;
+  managedCells?: string[];
   page?: unknown;
   kind?: unknown;
   stem?: unknown;
@@ -126,6 +128,22 @@ export function parseQuestionTableRows(
   deckId: string,
   slideTitles?: Record<number, string>,
 ): QuestionSheetParseResult {
+  if (rows.some((row) => row.managedCells)) {
+    if (rows.some((row) => !row.managedCells))
+      return {
+        items: [],
+        interactions: [],
+        answerKeys: {},
+        errors: ['不可混合一般與完整版題目列'],
+        warnings: [],
+        canImport: false,
+      };
+    return parseManagedMatrix(
+      [QUESTION_HEADERS, ...rows.map((row) => row.managedCells!)],
+      pageCount,
+      deckId,
+    );
+  }
   const items: ParsedQuestionItem[] = [];
   const allErrors: string[] = [];
   const allWarnings: string[] = [];
@@ -192,9 +210,7 @@ export function parseQuestionTableRows(
       );
     }
 
-    const nonEmptyOpts = rawOpts
-      .map((o) => String(o ?? '').trim())
-      .filter((s) => s.length > 0);
+    const nonEmptyOpts = rawOpts.map((o) => String(o ?? '').trim()).filter((s) => s.length > 0);
 
     let options: string[] = [];
     if (isTrueFalse) {
@@ -272,7 +288,10 @@ export function parseQuestionTableRows(
       );
     }
 
-    const slideId = Number.isInteger(page) && page >= 1 ? buildDeckSlideId(deckId, page) : `INVALID-ROW-${rowNum}`;
+    const slideId =
+      Number.isInteger(page) && page >= 1
+        ? buildDeckSlideId(deckId, page)
+        : `INVALID-ROW-${rowNum}`;
     const item: ParsedQuestionItem = {
       rowNumber: rowNum,
       page: Number.isInteger(page) ? page : 0,
@@ -356,7 +375,9 @@ export function mergeDeckClassroomConfig(params: {
   const removedSlideIds = [...ownedOldIds].filter((id) => !newBySlide.has(id));
 
   // Keep non-owned interactions in their original order, then append/update this deck's interactions
-  const keptInteractions = params.existingInteractions.filter((d) => !ownedOldIds.has(d.slideId) && !newBySlide.has(d.slideId));
+  const keptInteractions = params.existingInteractions.filter(
+    (d) => !ownedOldIds.has(d.slideId) && !newBySlide.has(d.slideId),
+  );
   const mergedInteractions = validateInteractions([
     ...keptInteractions,
     ...params.newDeckInteractions,
@@ -408,7 +429,9 @@ export function computeDeckReimportDiff(params: {
       prev.title !== s.title ||
       prev.notes !== s.notes ||
       prev.answerPage !== s.answerPage ||
-      (prev.imageSha256 && s.imageSha256 ? prev.imageSha256 !== s.imageSha256 : prev.html !== s.html)
+      (prev.imageSha256 && s.imageSha256
+        ? prev.imageSha256 !== s.imageSha256
+        : prev.html !== s.html)
     ) {
       slidesChanged.push(s.id);
     } else {
@@ -484,7 +507,9 @@ export function splitLegacyCombinedDeck(legacyAsset: {
     respiratoryDeck: {
       id: 'respiratory-review',
       title: '呼吸複習',
-      slides: respSlides.length ? structuredClone(respSlides) : structuredClone(slides.slice(0, 14)),
+      slides: respSlides.length
+        ? structuredClone(respSlides)
+        : structuredClone(slides.slice(0, 14)),
       updatedAt: now,
     },
     urinaryDeck: {

@@ -690,3 +690,22 @@ test('公佈答案（reveal）：公佈前不洩漏答案、open狀態拒絕reve
   // No writes outside classroom paths
   assert([...docs.keys()].every((p) => p.includes('/classroom') || p.startsWith('enrollments/')));
 });
+
+test('題目管理 callable 教師限定、只更新目標、並發舊快照拒絕、舊輪次不變', async () => {
+ const {call,docs}=setup();
+ const course=MI_CLASSROOM_COURSE;
+ const q={slideId:'demo-P01',title:'示範',fields:[{id:'f1',label:'起點',kind:'choice',options:['閱讀','討論']}]};
+ const keys={f1:{answer:'閱讀',explanation:'先閱讀。'}};
+ docs.set(`courses/${course}/classroomConfig/interactions`,{interactions:[q,...interactions]});
+ docs.set(`courses/${course}/classroomConfig/answerKeys`,{answerKeys:{[q.slideId]:keys}});
+ const roundPath=`courses/${course}/classroomRounds/old`;
+ const oldRound={slideId:q.slideId,reveal:{key:keys,revealedAt:1},status:'closed'};docs.set(roundPath,oldRound);
+ const args={slideId:q.slideId,expected:{interaction:q,keys},next:{interaction:{...q,title:'新標題'},keys}};
+ await assert.rejects(call('updateClassroomQuestions',args,{uid:'student'}),/permission/);
+ await assert.rejects(call('updateClassroomQuestions',args,null),/unauthenticated/);
+ const result=await Promise.allSettled([call('updateClassroomQuestions',args),call('updateClassroomQuestions',{...args,next:{...args.next,interaction:{...q,title:'其他分頁'}}})]);
+ assert.equal(result.filter(x=>x.status==='fulfilled').length,1);
+ assert.equal(result.filter(x=>x.status==='rejected'&&x.reason.code==='aborted').length,1);
+ assert.deepEqual(docs.get(`courses/${course}/classroomConfig/interactions`).interactions.slice(1),interactions);
+ assert.deepEqual(docs.get(roundPath),oldRound);
+});

@@ -1,3 +1,4 @@
+import { patchQuestion, questionSnapshot } from '../../shared/questionManager';
 import { featureAccess } from './features';
 import { randomUUID } from 'node:crypto';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
@@ -110,6 +111,26 @@ export function createClassroomHandlers(
     }).length;
   };
   return {
+    updateClassroomQuestions: onCall(options, async (req) => {
+      await authorize(req, true);
+      const { courseId, slideId, expected, next } = req.data;
+      return db.runTransaction(async tx => {
+        const [configSnap, keysSnap] = await Promise.all([
+          tx.get(interactionsDoc(courseId)), tx.get(answerKeysDoc(courseId)),
+        ]);
+        let patched;
+        try {
+          patched = patchQuestion(configSnap.data()?.interactions || [],
+            extractAnswerKeysMap(keysSnap.data()) || {}, slideId, expected, next);
+        } catch (e) {
+          const message = (e as Error).message;
+          throw new HttpsError(message.startsWith('CONFLICT') ? 'aborted' : 'invalid-argument', message);
+        }
+        tx.set(interactionsDoc(courseId), { interactions: patched.interactions }, { merge: true });
+        tx.set(answerKeysDoc(courseId), { ...keysSnap.data(), answerKeys: patched.answerKeys });
+        return { ok: true, snapshot: questionSnapshot(patched.interactions, patched.answerKeys, slideId) };
+      });
+    }),
     getClassroomConfig: onCall(options, async (req) => {
       await authorize(req, true);
       const [configSnap, keySnap] = await Promise.all([
@@ -119,10 +140,18 @@ export function createClassroomHandlers(
       const config = configSnap.data();
       const interactions = validateInteractions(config?.interactions || []);
       const rawKeyData = keySnap.data();
+      const requestedIds = req.data?.slideIds || [];
+      if (!Array.isArray(requestedIds) || requestedIds.length > 500 || requestedIds.some((id:any) => typeof id !== 'string' || !/^[a-zA-Z0-9_-]{1,80}$/.test(id))) throw new HttpsError('invalid-argument', '投影片 ID 清單無效');
+      const roundCounts = req.data?.includeQuestionManager
+        ? Object.fromEntries(await Promise.all([...new Set([...interactions.map(q => q.slideId), ...requestedIds])].map(async slideId => [slideId,
+          (await rounds(req.data.courseId).where('slideId', '==', slideId).count().get()).data().count])))
+        : undefined;
       if (rawKeyData !== undefined || req.data?.includeAnswerKeys) {
         return {
           interactions,
-          answerKeys: safeFilterAnswerKeys(interactions, rawKeyData),
+          answerKeys: req.data?.includeQuestionManager
+            ? extractAnswerKeysMap(rawKeyData) || {} : safeFilterAnswerKeys(interactions, rawKeyData),
+          ...(roundCounts ? { roundCounts } : {}),
         };
       }
       return { interactions };
