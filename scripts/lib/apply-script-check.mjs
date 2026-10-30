@@ -28,7 +28,7 @@ export const scriptSizes = [
 import {installReadOnlyTracking,verifyReadOnlyTracking} from './release-tracking-proof.mjs';
 export async function checkApplyScript(
   file,
-  { out, sizes = scriptSizes, shots = true, negative = true, html } = {},
+  { out, sizes = scriptSizes, shots = true, negative = true, html, onPage, onCapture, observeOnly = false } = {},
 ) {
   const baseDir = path.dirname(path.resolve(file)),
     data = JSON.parse(fs.readFileSync(file)),
@@ -50,9 +50,12 @@ export async function checkApplyScript(
       const p = await browser.newPage({ viewport: { width, height } });
       p.setDefaultTimeout(7000);
       p.on('pageerror', (e) => exceptions.push(e.message));
+      if(onPage)await onPage(p,{width,height});
       if(html)await installReadOnlyTracking(p);
       await p.goto(pathToFileURL(input).href);
       async function capture(name, description) {
+        if(onCapture)await onCapture(p,{name,width,height,description});
+        if(observeOnly)return;
         if ((await state(p)).retry) await p.locator('#strict-retry').waitFor();
         const m = await metrics(p),
           a = await auditApplyScript(p, S, q);

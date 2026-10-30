@@ -1,0 +1,241 @@
+/* #42 sample-only stylesheet; the approved renderer does not load it until teacher approval. */
+body.readability-preview {
+  font-size: calc(17px * var(--font-scale, 1));
+  line-height: 1.6;
+  overflow: auto;
+  color: #163a4c;
+  background: #eff4f7;
+}
+.readability-preview .student-screen *:where(:not(svg):not(svg *)) {
+  font-size: calc(17px * var(--font-scale, 1)) !important;
+  line-height: 1.6 !important;
+}
+.readability-preview .student-screen h1,
+.readability-preview .student-screen h1 *,
+.readability-preview .student-screen h2,
+.readability-preview .student-screen h2 *,
+.readability-preview .student-screen h3,
+.readability-preview .student-screen h3 * {
+  font-size: calc(20px * var(--font-scale, 1)) !important;
+}
+.readability-preview .student-header h2,
+.readability-preview .student-header h2 *,
+.readability-preview [data-screen='assessment'] .student-header h1,
+.readability-preview [data-screen='assessment'] .student-header h1 * {
+  font-size: calc(18px * var(--font-scale, 1)) !important;
+}
+.readability-preview .student-screen {
+  height: auto;
+  min-height: 100dvh;
+  max-width: 1440px;
+  padding: 14px;
+  gap: 16px;
+  overflow: visible;
+  grid-template-rows: auto 1fr auto;
+}
+.readability-preview .student-main {
+  min-height: 0;
+  overflow: visible;
+  gap: 18px;
+  align-items: start;
+}
+.readability-preview .student-header,
+.readability-preview .response-region {
+  min-width: 0;
+  max-height: none;
+  overflow: visible;
+}
+.readability-preview .response-region {
+  display: flex;
+  padding: 12px 4px;
+  gap: 14px;
+}
+.readability-preview button {
+  min-height: 44px !important;
+  height: auto !important;
+  max-width: 100%;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  padding: 10px !important;
+  opacity: 1 !important;
+  color: #163a4c !important;
+  background-color: #fff !important;
+}
+.readability-preview button.selected {
+  background-color: #e4f3f8 !important;
+}
+.readability-preview button:disabled {
+  color: #435b68 !important;
+  background-color: #e8eef1;
+}
+.readability-preview .heading-row {
+  flex-wrap: wrap;
+}
+.readability-preview .student-footer {
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  background: #eff4f7;
+  min-height: 64px;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+.readability-preview .student-dock {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+}
+.readability-preview .diagram-region {
+  min-height: 260px;
+  overflow: visible;
+}
+.readability-preview .scripted-figure {
+  height: 320px;
+  min-height: 300px;
+  flex: none;
+}
+.readability-preview .figure-controls {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.readability-preview .figure-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+.readability-preview .figure-options button {
+  flex: 1 1 140px;
+}
+.readability-preview .matching-row {
+  gap: 10px;
+  padding: 8px;
+}
+.readability-preview .matching-menu,
+.readability-preview .spatial-guide {
+  max-height: none;
+  overflow: visible;
+  position: static;
+}
+.readability-preview .matching-feedback,
+.readability-preview .script-feedback,
+.readability-preview .script-extra,
+.readability-preview .action-instruction {
+  color: #163a4c !important;
+}
+.readability-preview .intro-region {
+  width: 100%;
+  max-width: 780px;
+  min-height: calc(100dvh - 130px);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+.readability-preview .intro-region h1,
+.readability-preview .intro-region h1 *,
+.readability-preview .intro-region h2,
+.readability-preview .intro-region h2 * {
+  font-size: calc(24px * var(--font-scale, 1)) !important;
+  line-height: 1.7 !important;
+}
+.readability-preview [data-phase='passed'] .response-region {
+  display: flex;
+  min-height: 32dvh;
+  justify-content: center;
+}
+.readability-preview [data-phase='passed'] .script-feedback,
+.readability-preview [data-phase='passed'] .script-feedback * {
+  font-size: calc(22px * var(--font-scale, 1)) !important;
+}
+@media (max-width: 767px) {
+  .readability-preview .student-main {
+    display: flex;
+    flex-direction: column;
+  }
+  .readability-preview .student-main > * {
+    width: 100%;
+  }
+  .readability-preview .matching-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .readability-preview [data-phase='passed'] .student-main {
+    flex-direction: column-reverse;
+  }
+  .readability-preview .spatial-workspace {
+    min-height: 400px;
+  }
+  .readability-preview .spatial-labels {
+    overflow: visible;
+    flex-wrap: wrap;
+  }
+}
+
+.readability-preview .scripted-course .matching-row {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.readability-preview .scripted-course .matching-row > button {
+  width: 100%;
+  min-width: 0;
+}
+.readability-preview #start,
+.readability-preview #enter-assessment,
+.readability-preview #start-quiz,
+.readability-preview #next-node {
+  background-color: #175268 !important;
+  color: #fff !important;
+}
+.readability-preview #start *,
+.readability-preview #enter-assessment *,
+.readability-preview #start-quiz *,
+.readability-preview #next-node * {
+  color: #fff !important;
+}
+.readability-preview [data-readability-zoom] {
+  align-self: flex-end;
+  flex: none;
+  min-width: 44px;
+}
+.readability-preview .readability-zoom {
+  margin: auto;
+  width: 94vw;
+  max-width: 94vw;
+  height: 90dvh;
+  max-height: 90dvh;
+  padding: 12px;
+  border: 2px solid #317c99;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.readability-preview .readability-zoom::backdrop {
+  background: #0009;
+}
+.readability-preview .readability-zoom > button {
+  display: block;
+  margin-left: auto;
+  font-size: calc(20px * var(--font-scale, 1));
+}
+.readability-preview .readability-zoom-pane {
+  height: calc(100% - 55px);
+  overflow: auto;
+}
+.readability-preview .scripted-course .matching-row > * {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+  min-width: 0;
+  max-width: 100%;
+}
+.readability-preview .readability-zoom > button {
+  position: relative;
+  z-index: 2;
+}
+.readability-preview .readability-zoom-pane {
+  position: relative;
+}

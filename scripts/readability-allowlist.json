@@ -1,0 +1,121 @@
+[
+  {
+    "file": "src/style.css",
+    "selector": ".preview-open-toggle",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "src/App.tsx：教師預覽切換，不出現在正式學生入口"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".progress-published-status",
+    "property": "font-size",
+    "value": "13px",
+    "reason": "src/ProgressBoard.tsx：教師發布狀態表"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".unit-status-tags .badge",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/UnitStatusTags.tsx：僅 App 教師單元編排引用"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".unit-status-tags .status-loading",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/UnitStatusTags.tsx：僅 App 教師單元編排引用"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".unitmenu > .sectionhead button",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/App.tsx：教師單元編排功能列"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".tf-large-btn",
+    "property": "font-size",
+    "value": "16px",
+    "reason": "src/PptImportModal.tsx：教師匯入預覽答案編輯"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".ppt-thumb-meta",
+    "property": "font-size",
+    "value": "13px",
+    "reason": "src/PptImportModal.tsx：教師匯入縮圖資料"
+  },
+  {
+    "file": "src/style.css",
+    "selector": ".ppt-thumb-q-tag",
+    "property": "font-size",
+    "value": "11px",
+    "reason": "src/PptImportModal.tsx：教師匯入題目頁標記"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-filter",
+    "property": "font-size",
+    "value": "14px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-overview th button",
+    "property": "font-size",
+    "value": "13px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-info",
+    "property": "font-size",
+    "value": "13px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-subtext",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-flag",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-tooltip",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-method",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".integrity-overview th button",
+    "property": "font-size",
+    "value": "12px",
+    "reason": "src/AnswerIntegrityPanel.tsx：教師限定全班統計；不含學生共用的 integrity-excluded"
+  },
+  {
+    "file": "src/answer-integrity.css",
+    "selector": ".usage-bars small",
+    "property": "font-size",
+    "value": "10px",
+    "reason": "src/ClassUsagePanel.tsx：教師限定使用統計"
+  }
+]

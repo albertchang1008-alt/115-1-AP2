@@ -15,7 +15,7 @@ import {
 } from './acidbase-script-browser.mjs';
 
 import {installReadOnlyTracking,verifyReadOnlyTracking} from './release-tracking-proof.mjs';
-export async function checkScriptLayout(data, { file, out, html, sizes, shots = true } = {}) {
+export async function checkScriptLayout(data, { file, out, html, sizes, shots = true, onPage, onCapture, observeOnly = false } = {}) {
   const baseDir = path.dirname(path.resolve(file)),
     script = compileStudentScript(baseDir);
   fs.mkdirSync(path.join(out, 'shots'), { recursive: true });
@@ -43,9 +43,12 @@ export async function checkScriptLayout(data, { file, out, html, sizes, shots = 
         errors = [];
       p.setDefaultTimeout(8000);
       p.on('pageerror', (e) => errors.push(e.message));
+      if(onPage)await onPage(p,{width,height});
       if(html)await installReadOnlyTracking(p);
       await p.goto(pathToFileURL(input).href);
       async function capture(name, description) {
+        if(onCapture)await onCapture(p,{name,width,height,description});
+        if(observeOnly)return;
         if ((await p.evaluate(() => window.StudentScriptUI.getState())).course.retry)
           await p.locator('#strict-retry').waitFor();
         await p.evaluate(async () =>
