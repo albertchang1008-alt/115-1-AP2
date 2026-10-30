@@ -1,5 +1,102 @@
 /* Include this script in an interactive HTML material. No student identity is exposed. */
 (() => {
+  const sdkUrl = document.currentScript?.src;
+  const installZoom = () => {
+    if (document.documentElement.dataset.readability !== 'on') return;
+    for (const region of document.querySelectorAll(
+      '.diagram-region,.node-figure,.state-figure',
+    )) {
+      if (
+        region.closest('dialog') ||
+        region.querySelector('[data-readability-zoom]')
+      )
+        continue;
+      const graphic = region.matches('svg')
+        ? region
+        : region.querySelector('svg,img');
+      if (!graphic) continue;
+      // SVG roots cannot contain HTML controls: attach the independent button to their parent.
+      const host = region.matches('svg') ? region.parentElement : region;
+      if (host.querySelector(':scope > [data-readability-zoom]')) continue;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.readabilityZoom = 'true';
+      button.textContent = '🔍';
+      button.setAttribute('aria-label', '放大圖像');
+      button.onclick = () => {
+        const dialog = document.createElement('dialog');
+        dialog.className = 'course-readability-zoom';
+        const close = document.createElement('button');
+        close.textContent = '關閉';
+        close.setAttribute('aria-label', '關閉放大圖像');
+        const pane = document.createElement('div');
+        pane.className = 'course-readability-zoom-pane';
+        const copy = graphic.cloneNode(true);
+        copy.style.position = 'static';
+        copy.style.transform = 'none';
+        copy.style.width =
+          Math.max(
+            1200,
+            graphic.viewBox?.baseVal.width || graphic.naturalWidth || 1200,
+          ) + 'px';
+        copy.style.height = 'auto';
+        copy.style.maxWidth = 'none';
+        pane.append(copy);
+        dialog.append(close, pane);
+        document.body.append(dialog);
+        const leave = () => {
+          dialog.close();
+          dialog.remove();
+          button.focus();
+        };
+        close.onclick = leave;
+        dialog.addEventListener('cancel', (e) => {
+          e.preventDefault();
+          leave();
+        });
+        dialog.showModal();
+      };
+      host.append(button);
+    }
+  };
+  new MutationObserver(installZoom).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+  const display = (d) => {
+    if (
+      d.protocolVersion !== 1 ||
+      ![0.875, 1, 1.15, 1.3].includes(d.fontScale) ||
+      typeof d.overlay !== 'boolean'
+    )
+      return;
+    const root = document.documentElement;
+    root.style.setProperty('--font-scale', String(d.fontScale));
+    if (!d.overlay) {
+      root.removeAttribute('data-readability');
+      root.removeAttribute('data-readability-kit');
+      document.getElementById('course-readability-overlay')?.remove();
+      document
+        .querySelectorAll('[data-readability-zoom],.course-readability-zoom')
+        .forEach((e) => e.remove());
+      return;
+    }
+    root.dataset.readability = 'on';
+    root.dataset.readabilityKit =
+      document.querySelector('.scripted-course') || window.StudentScriptUI
+        ? 'apply-kit-script'
+        : document.querySelector('[data-node],.learning-app,.lab')
+          ? 'learning-kit'
+          : 'other';
+    installZoom();
+    if (!document.getElementById('course-readability-overlay') && sdkUrl) {
+      const css = document.createElement('link');
+      css.id = 'course-readability-overlay';
+      css.rel = 'stylesheet';
+      css.href = new URL('readability-overlay.css', sdkUrl).href;
+      document.head.append(css);
+    }
+  };
   let context = null, pending = [], lastAction = Date.now(), lastTick = Date.now();
   const flush = () => {
     if (!context || !pending.length || parent === window) return;
@@ -12,6 +109,7 @@
   window.addEventListener('message', (event) => {
     if (event.source !== parent || !event.data) return;
     const d = event.data;
+    if (d.type === 'display-prefs') { display(d); return; }
     if (d.type === 'init' && d.protocolVersion === 1 && d.activityId && d.sessionId) {
       context = { protocolVersion: 1, activityId: d.activityId, sessionId: d.sessionId, materialVersion: d.materialVersion };
       flush();

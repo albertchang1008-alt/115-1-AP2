@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
+import { platformPage } from './lib/readability-platform.mjs';
 import { checkApplyScript } from './lib/apply-script-check.mjs';
 import { checkScriptLayout } from './lib/acidbase-script-layout.mjs';
 import { readabilityMetrics } from './lib/readability-metrics.mjs';
@@ -15,7 +16,6 @@ const publishedVersion = (slug) => slug + (slug === 'urinary-route-micturition' 
 export async function checkReadability({
   out = '/tmp/course-readability',
   slugs = readabilitySlugs,
-  htmlBySlug = {},
   scales = [1, 1.3],
   sizes = [
     [390, 844],
@@ -23,6 +23,7 @@ export async function checkReadability({
   ],
   onCapture: observer,
   staticCheck = true,
+  overlay = true,
 } = {}) {
   fs.mkdirSync(out, { recursive: true });
   const report = {
@@ -39,39 +40,16 @@ export async function checkReadability({
   for (const slug of slugs) {
     const material = { slug, screens: [], errors: [] };
     report.materials.push(material);
-    const publicFile =
-      htmlBySlug[slug] ||
-      path.join(root, 'public/materials', publishedVersion(slug) + '/index.html');
+    const publicFile = path.join(root, 'public/materials', publishedVersion(slug) + '/index.html');
     for (const scale of scales) {
       const scaleOut = path.join(out, slug, String(scale));
       fs.mkdirSync(scaleOut, { recursive: true });
-      const onPage = async (p) => {
-        await p.addInitScript(
-          ({ scale }) => {
-            const originalScroll = Element.prototype.scrollIntoView;
-            Element.prototype.scrollIntoView = function (options) {
-              return originalScroll.call(this, {
-                ...(typeof options === 'object' ? options : {}),
-                behavior: 'instant',
-              });
-            };
-            localStorage.clear();
-            localStorage.setItem('course-font-scale', scale === 1 ? 'default' : 'xlarge');
-            window.CourseLearning = {
-              explore() {},
-              nodeTime() {},
-              answer() {},
-              hint() {},
-              complete() {},
-            };
-          },
-          { scale },
-        );
-        await p.route(/^https?:\/\//, (r) => r.abort());
-      };
+      const onPage = async () => {};
+      const createPage = (browser, { width, height }) =>
+        platformPage(browser, { viewport: { width, height }, slug, scale, overlay });
       const measureOne = async (p, meta) => {
         const measured = await p.evaluate(readabilityMetrics, { scale });
-        material.screens.push({ ...meta, scale, ...measured });
+        material.screens.push({ ...meta, ...measured, requestedScale: scale });
         if (observer) await observer(p, { slug, scale, ...meta, ...measured });
       };
       const capture = async (p, meta) => {
@@ -99,6 +77,7 @@ export async function checkReadability({
             onPage,
             onCapture: capture,
             observeOnly: true,
+            createPage,
           };
           const base = path.join(root, 'materials-src', slug);
           if (slug === 'acid-base-homeostasis')
@@ -107,7 +86,7 @@ export async function checkReadability({
               file: path.join(base, 'full.json'),
             });
           else await checkApplyScript(path.join(base, 'apply.json'), options);
-        } else await walkRespiratory(slug, publicFile, sizes, onPage, capture);
+        } else await walkRespiratory(slug, publicFile, sizes, onPage, capture, createPage);
       } catch (e) {
         material.errors.push(String(e.stack || e));
         report.errors.push({ slug, scale, error: String(e) });
@@ -154,22 +133,18 @@ export async function checkReadability({
   console.log(JSON.stringify(compact.summary));
   return compact;
 }
-async function walkRespiratory(slug, file, sizes, onPage, capture) {
+async function walkRespiratory(slug, file, sizes, onPage, capture, createPage) {
   const content = JSON.parse(
       fs.readFileSync(path.join(root, 'materials-src', slug, 'content.json')),
     ),
     browser = await chromium.launch({ channel: 'chrome' });
   try {
     for (const [width, height] of sizes) {
-      const p = await browser.newPage({ viewport: { width, height } });
+      const p = createPage
+        ? await createPage(browser, { width, height })
+        : await browser.newPage({ viewport: { width, height } });
       p.setDefaultTimeout(8000);
       await onPage(p);
-      await p.route('**/course-learning.js', (r) =>
-        r.fulfill({
-          contentType: 'application/javascript',
-          body: 'window.CourseLearning={explore(){},nodeTime(){},answer(){},hint(){},complete(){}};',
-        }),
-      );
       await p.goto(pathToFileURL(file).href);
       const snap = (name) => capture(p, { name, width, height });
       await snap('opening');

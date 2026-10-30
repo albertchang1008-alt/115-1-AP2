@@ -41,6 +41,8 @@ export function readabilityMetrics({ scale = 1 } = {}) {
         s.display !== 'none' &&
         s.visibility !== 'hidden' &&
         s.visibility !== 'collapse' &&
+        s.clipPath !== 'inset(50%)' &&
+        s.clip !== 'rect(0px, 0px, 0px, 0px)' &&
         Number(s.opacity) !== 0 &&
         (!e.parentElement || visibleAncestor(e.parentElement)) &&
         b.width > 0 &&
@@ -57,6 +59,8 @@ export function readabilityMetrics({ scale = 1 } = {}) {
         s.display !== 'none' &&
         s.visibility !== 'hidden' &&
         s.visibility !== 'collapse' &&
+        s.clipPath !== 'inset(50%)' &&
+        s.clip !== 'rect(0px, 0px, 0px, 0px)' &&
         Number(s.opacity) !== 0 &&
         (!e.parentElement || visibleAncestor(e.parentElement));
     ancestry.set(e, v);
@@ -134,7 +138,14 @@ export function readabilityMetrics({ scale = 1 } = {}) {
         s.lineHeight === 'normal' ? null : parseFloat(s.lineHeight) / parseFloat(s.fontSize),
     };
     texts.push(row);
-    if (px + 0.05 < min) add('font-size', e, px, min, direct);
+    if (
+      px + 0.05 < min &&
+      !(
+        role === 'diagram' &&
+        e.closest('.node,.lab,.diagram-region')?.querySelector('[data-readability-zoom]')
+      )
+    )
+      add('font-size', e, px, min, direct);
     if (role === 'body' && (row.lineHeight === null || row.lineHeight < 1.595))
       add('line-height', e, row.lineHeight, 1.6, direct);
     let stack = [],

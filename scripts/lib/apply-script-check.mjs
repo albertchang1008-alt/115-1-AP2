@@ -28,7 +28,7 @@ export const scriptSizes = [
 import {installReadOnlyTracking,verifyReadOnlyTracking} from './release-tracking-proof.mjs';
 export async function checkApplyScript(
   file,
-  { out, sizes = scriptSizes, shots = true, negative = true, html, onPage, onCapture, observeOnly = false } = {},
+  { out, sizes = scriptSizes, shots = true, negative = true, html, onPage, onCapture, observeOnly = false, createPage } = {},
 ) {
   const baseDir = path.dirname(path.resolve(file)),
     data = JSON.parse(fs.readFileSync(file)),
@@ -47,7 +47,7 @@ export async function checkApplyScript(
     exceptions = [];
   try {
     for (const [width, height] of sizes) {
-      const p = await browser.newPage({ viewport: { width, height } });
+      const p = createPage ? await createPage(browser,{width,height}) : await browser.newPage({ viewport: { width, height } });
       p.setDefaultTimeout(7000);
       p.on('pageerror', (e) => exceptions.push(e.message));
       if(onPage)await onPage(p,{width,height});
@@ -120,7 +120,7 @@ export async function checkApplyScript(
               '按重來後所有選取與該步狀態清空、選項重洗。',
             );
           }
-          await performScriptedStep(p, s);
+          await performScriptedStep(p, s, {onPlaced: onCapture && i === 0 ? () => capture('N1-located', '原圖與高度選項：放好標籤後、判分之前。') : undefined});
           await capture(`N${i + 1}-S${j + 1}-correct`, '本動作依實際操作答對，下一步才解鎖。');
           await p.locator('#next-step').click();
         }

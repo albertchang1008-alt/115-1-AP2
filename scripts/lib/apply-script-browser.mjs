@@ -6,7 +6,7 @@ export async function retryScripted(p) {
 export async function beginScripted(p) {
   if (await p.locator('#begin-action').count()) await p.locator('#begin-action').click();
 }
-export async function performScriptedStep(p, s, { wrong = false } = {}) {
+export async function performScriptedStep(p, s, { wrong = false, onPlaced } = {}) {
   await retryScripted(p);
   if(s.type==='locate') {
     if(await p.locator('#locate-skip').count())await p.locator('#locate-skip').click();
@@ -15,6 +15,7 @@ export async function performScriptedStep(p, s, { wrong = false } = {}) {
       if(wrong&&s.spatial.points.length===1)await p.locator('.spatial-canvas').click({position:{x:5,y:5}});
       else await p.locator(`[data-spatial-target="${wrong?(s.spatial.expected[row]+1)%s.spatial.points.length:s.spatial.expected[row]}"]`).click();
     }
+    if(onPlaced)await onPlaced();
     if(s.spatial.directions&&!wrong)for(const row of s.spatial.required)await p.locator(`[data-spatial-direction="${row}"]`).click();
     await p.locator('#locate-check').click();
   } else if (s.type === 'matching') {

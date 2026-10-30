@@ -15,7 +15,7 @@ import {
 } from './acidbase-script-browser.mjs';
 
 import {installReadOnlyTracking,verifyReadOnlyTracking} from './release-tracking-proof.mjs';
-export async function checkScriptLayout(data, { file, out, html, sizes, shots = true, onPage, onCapture, observeOnly = false } = {}) {
+export async function checkScriptLayout(data, { file, out, html, sizes, shots = true, onPage, onCapture, observeOnly = false, createPage } = {}) {
   const baseDir = path.dirname(path.resolve(file)),
     script = compileStudentScript(baseDir);
   fs.mkdirSync(path.join(out, 'shots'), { recursive: true });
@@ -39,7 +39,7 @@ export async function checkScriptLayout(data, { file, out, html, sizes, shots = 
       [1280, 800],
       [844, 390],
     ]) {
-      const p = await browser.newPage({ viewport: { width, height } }),
+      const p = createPage ? await createPage(browser,{width,height}) : await browser.newPage({ viewport: { width, height } }),
         errors = [];
       p.setDefaultTimeout(8000);
       p.on('pageerror', (e) => errors.push(e.message));

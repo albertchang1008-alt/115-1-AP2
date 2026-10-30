@@ -1,0 +1,281 @@
+/* Teacher sample overlay. No order, flex-direction, grid placement or SVG coordinates. */
+html[data-readability='on'][data-readability-kit='apply-kit-script'] body,
+html[data-readability='on'][data-readability-kit='learning-kit'] body,
+html[data-readability='on'][data-readability-kit='other'] body {
+  font-size: calc(17px * var(--font-scale, 1));
+  line-height: 1.6;
+  color: #163a4c;
+}
+html[data-readability='on']
+  :where(
+    p,
+    li,
+    span,
+    strong,
+    b,
+    em,
+    small,
+    label,
+    summary,
+    button,
+    a,
+    input,
+    select,
+    textarea,
+    div
+  ):not(svg *):not(:has(svg)) {
+  font-size: calc(17px * var(--font-scale, 1)) !important;
+  line-height: 1.6 !important;
+}
+html[data-readability='on'] :is(h1, h2, h3, h4, h5, h6),
+html[data-readability='on'] :is(h1, h2, h3, h4, h5, h6) *:not(svg *) {
+  font-size: calc(20px * var(--font-scale, 1)) !important;
+  line-height: 1.6 !important;
+}
+html[data-readability='on'] :is(.action-question, .task-title, .student-header h2, .stage > h3),
+html[data-readability='on'] :is(.action-question, .task-title, .student-header h2, .stage > h3) * {
+  font-size: calc(18px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on']
+  :is(button, a.button, input:not([type='hidden']), select, [role='button'], [role='radio']) {
+  min-height: 44px !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script']
+  :is(.student-screen, .student-main, .response-region, .student-header, .student-dock) {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  min-width: 0;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-screen {
+  min-height: 100dvh;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: #eff4f7;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .scripted-figure {
+  min-height: 300px;
+  height: 320px;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script']
+  :is(.matching-feedback, .script-feedback, .script-extra, .action-instruction) {
+  color: #163a4c !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] button {
+  color: #163a4c !important;
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] button.selected {
+  background-color: #e4f3f8 !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script']
+  :is(#start, #enter-assessment, #start-quiz, #next-node) {
+  background: #175268 !important;
+  color: white !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .intro-region {
+  min-height: calc(100dvh - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .intro-region :is(h1, h2) {
+  font-size: calc(24px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script']
+  [data-phase='passed']
+  .script-feedback {
+  font-size: calc(22px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'][data-readability-kit='learning-kit']
+  :is(.feedback, .node-dialog, .info-card, .stage) {
+  line-height: 1.6;
+  color: #163a4c;
+}
+html[data-readability='on'][data-readability-kit='learning-kit']
+  :is(.options button, .state-controls button, .factor-controls button) {
+  color: #163a4c;
+  background-color: #fff;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] .feedback.ok {
+  color: #164f3d;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] .feedback.warn {
+  color: #70411d;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] .complete {
+  min-height: 65dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+html[data-readability='on'][data-readability-kit='other'] :is(.feedback, .result, .completion) {
+  font-size: calc(20px * var(--font-scale, 1)) !important;
+  line-height: 1.6;
+}
+@media (max-width: 767px) {
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-main {
+    height: auto;
+  }
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .diagram-region {
+    min-height: 300px;
+  }
+  html[data-readability='on'][data-readability-kit='apply-kit-script']
+    :is(.matching-menu, .spatial-guide) {
+    max-height: none;
+  }
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] body {
+  overflow: auto;
+}
+@media (max-width: 767px) {
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .response-region {
+    padding: 8px 4px;
+  }
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .matching-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] .complete-banner:not([hidden]) {
+  min-height: 60dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(24px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'] [data-readability-zoom] {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: calc(17px * var(--font-scale, 1));
+  position: relative;
+  z-index: 2;
+}
+html[data-readability='on'] .course-readability-zoom {
+  width: 94vw;
+  max-width: 94vw;
+  height: 90dvh;
+  max-height: 90dvh;
+  background: #fff;
+  color: #163a4c;
+  overflow: hidden;
+  border: 2px solid #317c99;
+  padding: 12px;
+}
+html[data-readability='on'] .course-readability-zoom::backdrop {
+  background: #0009;
+}
+html[data-readability='on'] .course-readability-zoom > button {
+  position: relative;
+  z-index: 2;
+}
+html[data-readability='on'] .course-readability-zoom-pane {
+  position: relative;
+  height: calc(100% - 60px);
+  overflow: auto;
+}
+html[data-readability='on'] body *:where(:not(svg):not(svg *)) {
+  font-size: calc(17px * var(--font-scale, 1)) !important;
+  line-height: 1.6 !important;
+}
+html[data-readability='on'] :is(h1, h2, h3, h4, h5, h6),
+html[data-readability='on'] :is(h1, h2, h3, h4, h5, h6) *:not(svg *) {
+  font-size: calc(20px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'] :is(.action-question, .task-title, .student-header h2, .stage > h3),
+html[data-readability='on'] :is(.action-question, .task-title, .student-header h2, .stage > h3) * {
+  font-size: calc(18px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'][data-readability-kit='learning-kit']
+  :is(.hero, .lab, .node, .node-detail, .learning-summary, .quiz) {
+  background-image: none !important;
+  background-color: #fff;
+  color: #163a4c;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] button {
+  opacity: 1 !important;
+  background: #fff !important;
+  color: #163a4c !important;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] svg text {
+  fill: #163a4c !important;
+  stroke: #fff;
+  stroke-width: 2px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+html[data-readability='on'][data-readability-kit='learning-kit']
+  :is(table, caption, thead, tbody, tr, th, td) {
+  min-width: 0 !important;
+  max-width: 100%;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] table {
+  width: 100% !important;
+  table-layout: fixed;
+}
+html[data-readability='on'][data-readability-kit='learning-kit'] .learning-summary {
+  overflow: visible;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-screen {
+  grid-template-rows: auto 1fr auto;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .scripted-figure {
+  flex: none;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .matching-row {
+  display: block;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .matching-row > * {
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 767px) {
+  html[data-readability='on'][data-readability-kit='apply-kit-script'] .student-main {
+    display: block;
+  }
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .intro-region :is(h1, h2) {
+  font-size: calc(24px * var(--font-scale, 1)) !important;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script']
+  [data-phase='passed']
+  .script-feedback {
+  font-size: calc(22px * var(--font-scale, 1)) !important;
+}
+/* Keep inactive comparison bars subdued, while their labels remain readable. */
+html[data-readability='on'][data-readability-kit='learning-kit']
+  [data-state='base']
+  .volume:not(.base),
+html[data-readability='on'][data-readability-kit='learning-kit']
+  [data-state='preload']
+  .volume:not(.preload),
+html[data-readability='on'][data-readability-kit='learning-kit']
+  [data-state='contractility']
+  .volume:not(.contractility),
+html[data-readability='on'][data-readability-kit='learning-kit']
+  [data-state='afterload']
+  .volume:not(.afterload) {
+  opacity: 0.8 !important;
+}
+/* Pan the existing artwork inside its original frame; keep controls below it. */
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .spatial-scroll {
+  height: 220px;
+  max-height: 220px;
+  flex: none;
+}
+html[data-readability='on'][data-readability-kit='apply-kit-script'] .spatial-workspace {
+  height: auto;
+}

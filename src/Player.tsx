@@ -2,7 +2,8 @@ import { API } from './service';
 import { matchingGuideScope } from './matchingGuideScope';
 import { learningBridge } from './LearningBridge';
 import { useEffect, useRef, useState } from 'react';
-import { Activity, youtubeId, materialUrl } from '../shared/model';
+import { displayPreferences, fontScales } from '../shared/displayPrefs';
+import { Activity, Course, youtubeId, materialUrl } from '../shared/model';
 let ytReady: Promise<void> | null = null;
 function loadYoutube() {
   if ((window as any).YT?.Player) return Promise.resolve();
@@ -96,34 +97,126 @@ export function Youtube({
 export function HtmlMaterial({
   activity,
   onSave,
-  api, courseId, unitId, chapterName, uid,
+  api,
+  courseId,
+  unitId,
+  chapterName,
+  uid,
+  course,
 }: {
-  api: API; courseId: string; unitId: string; chapterName?: string; uid: string;
+  course?: Pick<Course, 'features'>;
+  api: API;
+  courseId: string;
+  unitId: string;
+  chapterName?: string;
+  uid: string;
   activity: Activity;
   onSave: (position: number, completed: boolean) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const session = useRef(crypto.randomUUID());
   const [status, setStatus] = useState('');
+  const preferences = useRef({ course, activity });
+  preferences.current = { course, activity };
   const interactive = activity.tracking === 'interactive';
-  const init = () => frame.current?.contentWindow?.postMessage({ type: 'init', guideScope: matchingGuideScope(uid), protocolVersion: 1, activityId: activity.id, materialVersion: activity.materialVersion || 'v1', sessionId: session.current }, '*');
+  const sendDisplay = () => {
+    let size = 'default';
+    try {
+      size = localStorage.getItem('course-font-scale') || size;
+    } catch {}
+    frame.current?.contentWindow?.postMessage(
+      displayPreferences(
+        preferences.current.course,
+        preferences.current.activity,
+        fontScales[size] || 1,
+      ),
+      '*',
+    );
+  };
+  useEffect(() => {
+    const storage = (e: StorageEvent) => {
+      if (e.key === null || e.key === 'course-font-scale') sendDisplay();
+    };
+    window.addEventListener('course-display-prefs', sendDisplay);
+    window.addEventListener('storage', storage);
+    sendDisplay();
+    return () => {
+      window.removeEventListener('course-display-prefs', sendDisplay);
+      window.removeEventListener('storage', storage);
+    };
+  }, [course?.features, activity.materialVersion, activity.url]);
+  const init = () => {
+    frame.current?.contentWindow?.postMessage(
+      interactive
+        ? {
+            type: 'init',
+            guideScope: matchingGuideScope(uid),
+            protocolVersion: 1,
+            activityId: activity.id,
+            materialVersion: activity.materialVersion || 'v1',
+            sessionId: session.current,
+          }
+        : { type: 'init', activityId: activity.id },
+      '*',
+    );
+    sendDisplay();
+  };
   useEffect(() => {
     if (!interactive) return;
-    const bridge = learningBridge(api, { courseId, unitId, ...(chapterName ? { chapterName } : {}), activityId: activity.id, materialVersion: activity.materialVersion || 'v1', uid }, setStatus, () => onSave(1, true));
+    const bridge = learningBridge(
+      api,
+      {
+        courseId,
+        unitId,
+        ...(chapterName ? { chapterName } : {}),
+        activityId: activity.id,
+        materialVersion: activity.materialVersion || 'v1',
+        uid,
+      },
+      setStatus,
+      () => onSave(1, true),
+    );
     const handler = async (event: MessageEvent) => {
       if (event.source !== frame.current?.contentWindow || !event.data) return;
       const d = event.data;
-      if (d.type === 'ready') { init(); return; }
-      if (d.protocolVersion !== 1 || d.sessionId !== session.current || d.activityId !== activity.id || d.materialVersion !== (activity.materialVersion || 'v1')) return;
+      if (d.type === 'ready') {
+        init();
+        return;
+      }
+      if (
+        d.protocolVersion !== 1 ||
+        d.sessionId !== session.current ||
+        d.activityId !== activity.id ||
+        d.materialVersion !== (activity.materialVersion || 'v1')
+      )
+        return;
       if (d.type !== 'learning-events') return;
       try {
         const accepted = await bridge.receive(d.events);
-        frame.current?.contentWindow?.postMessage({ type: 'learning-ack', sessionId: session.current, accepted }, '*');
-      } catch (e) { setStatus((e as Error).message); }
+        frame.current?.contentWindow?.postMessage(
+          { type: 'learning-ack', sessionId: session.current, accepted },
+          '*',
+        );
+      } catch (e) {
+        setStatus((e as Error).message);
+      }
     };
     window.addEventListener('message', handler);
-    return () => { bridge.close(); window.removeEventListener('message', handler); };
-  }, [api, courseId, unitId, chapterName, activity.id, activity.url, activity.materialVersion, interactive, uid]);
+    return () => {
+      bridge.close();
+      window.removeEventListener('message', handler);
+    };
+  }, [
+    api,
+    courseId,
+    unitId,
+    chapterName,
+    activity.id,
+    activity.url,
+    activity.materialVersion,
+    interactive,
+    uid,
+  ]);
   const url = materialUrl(activity.url);
   const error = url ? '' : '教師尚未提供有效的 HTTPS 教材網址';
   const save = useRef(onSave);
@@ -135,13 +228,13 @@ export function HtmlMaterial({
       if (
         event.source !== frame.current?.contentWindow ||
         !event.data ||
-        event.data.activityId !== activity.id
+        (event.data.type !== 'ready' && event.data.activityId !== activity.id)
       )
         return;
       const d = event.data;
       if (!['ready', 'progress', 'completed'].includes(d.type)) return;
       if (d.type === 'ready') {
-        frame.current?.contentWindow?.postMessage({ type: 'init', activityId: activity.id }, '*');
+        init();
         return;
       }
       if (d.type === 'progress' && Date.now() - last < 15000) return;
@@ -170,7 +263,11 @@ export function HtmlMaterial({
       ) : (
         <p>正在取得教材…</p>
       )}
-      {!interactive && <button disabled={!url} onClick={() => onSave(0, true)}>確認已閱讀</button>}
+      {!interactive && (
+        <button disabled={!url} onClick={() => onSave(0, true)}>
+          確認已閱讀
+        </button>
+      )}
       {interactive && <p>此活動會保存探索與作答歷程，供教師調整教學；通關成就與診斷分開記錄。</p>}
       {status && <p role="status">{status}</p>}
       <p className="muted">此紀錄表示參與教材，不影響單元達標分數。</p>

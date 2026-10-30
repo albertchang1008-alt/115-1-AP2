@@ -9,7 +9,11 @@ function cleanLabel(v: unknown) { if (String(v ?? '').trim().length > 30) fail('
 export function validateCourseDraft(course: Course) {
   if (!course || typeof course !== 'object') fail('課程格式無效');
   code(course.id);
-  if (course.features && (Object.keys(course.features).some(k => !featureNames.includes(k as any)) || Object.values(course.features).some(v => typeof v !== 'boolean'))) fail('功能開關設定無效');
+  if (course.features) for (const [key,value] of Object.entries(course.features)) {
+    if (key === 'readabilityOverlayExclusions') {
+      if (!Array.isArray(value) || value.length > 200 || new Set(value).size !== value.length || value.some(v => typeof v !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,119}$/.test(v))) fail('閱讀排除清單無效');
+    } else if ((!featureNames.includes(key as any) && key !== 'readabilityOverlay') || typeof value !== 'boolean') fail('功能開關設定無效');
+  }
   if (course.assessmentSources && ['pretest', 'posttest'].some(k => { const ids = (course.assessmentSources as any)[k]; return !Array.isArray(ids) || ids.length > 100 || ids.some((id: unknown) => typeof id !== 'string' || !safeId(id)) || new Set(ids).size !== ids.length; })) fail('前後測來源設定無效');
   if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
     fail('請填寫課程與學期，最多 50 班、50 單元');
