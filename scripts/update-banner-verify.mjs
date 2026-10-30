@@ -198,6 +198,25 @@ export async function verifyUpdateBanner(out) {
     await foreground(page);
     await page.getByRole('button', { name: '平台已更新，點這裡載入新版', exact: true }).waitFor();
     await shot(page, '03-normal-390');
+    for (const scale of [1, 1.3]) {
+      await page.evaluate(
+        (value) => document.documentElement.style.setProperty('--font-scale', String(value)),
+        scale,
+      );
+      const reading = await page
+        .getByRole('button', { name: '平台已更新，點這裡載入新版', exact: true })
+        .evaluate((button) => ({
+          font: parseFloat(getComputedStyle(button).fontSize),
+          height: button.getBoundingClientRect().height,
+          clipped: button.scrollHeight > button.clientHeight + 2,
+        }));
+      assert.ok(reading.font >= 18 * scale - 0.05);
+      assert.ok(reading.height >= 44);
+      assert.equal(reading.clipped, false);
+      await shot(page, scale === 1 ? '03-normal-390-default' : '03-normal-390-xl');
+    }
+    await page.evaluate(() => document.documentElement.style.setProperty('--font-scale', '1'));
+    checks.push('390新版提示18px、特大23.4px、點擊高44、無裁字與溢出');
     await page.evaluate(() => window.bannerFixture.setView('quiz'));
     await page.getByRole('heading', { name: /示範題：/ }).waitFor();
     await page.getByRole('radio').first().click();
