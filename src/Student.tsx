@@ -1,3 +1,4 @@
+import { useUpdateProtection } from './updateActivity';
 import { ANSWER_INTEGRITY, integrityApplies, classifyAttemptIntegrity } from '../shared/answerIntegrity';
 import { useLeaveTracking, LeaveTrackingNotice } from './LeaveTracking';
 import { featureEnabled } from '../shared/features';
@@ -687,6 +688,7 @@ export function Quiz({
     attemptId = useRef(crypto.randomUUID()),
     submitted = useRef(false);
   const q = questions[i];
+  useUpdateProtection(!result || busy);
   const leaving = useLeaveTracking(!result);
   const currentQuestionId = useRef(q.id); currentQuestionId.current = q.id;
   const accumulatedTimes = useRef<Record<string,number>>({});

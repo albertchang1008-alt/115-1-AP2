@@ -1,0 +1,74 @@
+.platform-update-banner {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: calc(4px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 4px
+    max(12px, env(safe-area-inset-left));
+  background: #e9f3fc;
+  border-bottom: 1px solid #8cb5d5;
+  color: #123d5c;
+  box-shadow: 0 2px 6px #0001;
+}
+.platform-update-banner button {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: none;
+}
+.platform-update-action {
+  text-align: left;
+  text-decoration: underline;
+  white-space: normal;
+  max-width: 100%;
+}
+.platform-update-action:disabled {
+  opacity: 1;
+  cursor: default;
+  text-decoration: none;
+  color: #65502a;
+}
+.platform-update-close {
+  width: 44px;
+  padding: 4px;
+  font-size: 24px !important;
+}
+.platform-update-banner button:focus-visible {
+  outline: 3px solid #165b8f;
+  outline-offset: -3px;
+}
+html[data-platform-update] #root {
+  padding-top: var(--platform-update-height);
+}
+html[data-platform-update] .sidebar,
+html[data-platform-update] .quiz,
+html[data-platform-update] .quiz-topbar,
+html[data-platform-update] .reading-page,
+html[data-platform-update] .assessment-overlay {
+  top: var(--platform-update-height);
+}
+html[data-platform-update] .previewbar {
+  top: var(--platform-update-height);
+}
+html[data-platform-update] .student-settings-button {
+  top: calc(var(--platform-update-height) + 8px + env(safe-area-inset-top));
+}
+html[data-platform-update] .prefs-bar {
+  top: calc(var(--platform-update-height) + 8px);
+}
+@media (max-width: 600px) {
+  .platform-update-banner {
+    gap: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .platform-update-action {
+    padding: 5px 8px;
+  }
+}

@@ -1,3 +1,4 @@
+import { useUpdateProtection } from './updateActivity';
 import { useLeaveTracking, LeaveTrackingNotice } from './LeaveTracking';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -53,6 +54,7 @@ export function Flashcards({
   const answerRef = useRef<HTMLDivElement>(null);
   const row = queue[0],
     q = row?.q;
+  useUpdateProtection(!!q);
   const leaving = useLeaveTracking(!!q);
   const started = useRef(Date.now()), session = useRef(crypto.randomUUID());
   const saving = useRef<Promise<unknown> | null>(null);
@@ -202,6 +204,7 @@ export function PracticeSession({
     ids = useRef(new Map<string, string>());
   const row = rows[i],
     key = row && `${row.unit.id}:${row.q.id}`;
+  useUpdateProtection(rows.length > 0 && (!result || busy));
   const leaving = useLeaveTracking(rows.length > 0 && !result);
   async function submit() {
     if (busy) return;
