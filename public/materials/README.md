@@ -77,3 +77,20 @@ Node.js 安裝路徑比較特殊、App 找不到——這時候請改用下面�
 | `electrolyte-balance-v1` | 電解質、滲透與離子平衡｜互動資訊圖表 | 6 個學習節點；15 題；診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本 |
 | `acid-base-homeostasis-v1` | 酸鹼緩衝與肺腎調節｜互動資訊圖表 | 6 個學習節點；15 題；診斷含5確認題（ID為n1-micro至n4-micro及n6-micro）＋10題配對池；每輪5組兩層考核；獨立題庫另採核可6＋5題 |
 | `blood-flow-routes-v1` | 血流路徑動畫｜互動資訊圖表 | 6 個學習節點；11 題；先備 6 題逐題解鎖；病例 5 題全對才通關 |
+| `nephron-circulation-ag1` | 腎元、腎血流與近腎絲球器｜互動資訊圖表 | 17 個學習節點；30 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `filtration-clearance-ag1` | 腎絲球過濾與清除率｜互動資訊圖表 | 11 個學習節點；29 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `tubular-handling-ag1` | 腎小管再吸收、分泌與排泄｜互動資訊圖表 | 13 個學習節點；30 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `urine-concentration-ag1` | 逆流機制與尿液濃縮｜互動資訊圖表 | 12 個學習節點；29 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `fluid-compartments-ag1` | 體液分布與細胞內外液｜互動資訊圖表 | 6 個學習節點；29 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `electrolyte-balance-ag1` | 電解質、滲透與離子平衡｜互動資訊圖表 | 11 個學習節點；30 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `water-sodium-regulation-ag1` | 水分收支與鈉水調節｜互動資訊圖表 | 14 個學習節點；29 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `acid-base-homeostasis-ag1` | 酸鹼緩衝與肺腎調節｜互動資訊圖表 | 10 個學習節點；31 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `airway-structure-ag1` | 呼吸道的構造｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `lungs-pleura-ag1` | 肺與胸膜｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `breathing-mechanics-ag1` | 肺通氣與呼吸力學｜互動資訊圖表 | 16 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `lung-function-ag1` | 肺容積與肺功能｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `gas-exchange-ag1` | 氣體交換｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `o2-co2-transport-ag1` | 氧與二氧化碳的運輸｜互動資訊圖表 | 18 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `respiratory-control-ag1` | 呼吸調節｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `kidney-anatomy-ag1` | 腎臟位置、構造與功能｜互動資訊圖表 | 20 個學習節點；30 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `urinary-route-micturition-ag1` | 尿液通路與排尿控制｜互動資訊圖表 | 17 個學習節點；32 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |

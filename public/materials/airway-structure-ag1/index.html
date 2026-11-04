@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>呼吸道的構造</title>
+  <style>
+    :root {
+      --font-scale: 1;
+      --btn-h: 44px;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --error: #b91c1c;
+      --error-bg: #fef2f2;
+      --error-border: #fca5a5;
+      --warning: #b45309;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --bg-card: #ffffff;
+      --bg-app: #f8fafc;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      min-width: 320px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 25px rgba(0,0,0,0.06);
+      overflow-x: hidden;
+    }
+    /* Typography strict scaling */
+    .title-lg {
+      font-size: calc(22px * var(--font-scale, 1));
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .title-stem {
+      font-size: calc(20px * var(--font-scale, 1));
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .text-body {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.6;
+      margin: 0;
+    }
+    .text-sm {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.5;
+    }
+    .text-xs {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.4;
+    }
+    .text-muted {
+      color: var(--text-muted);
+    }
+    /* Top Bar & Progress */
+    .header-bar {
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .header-label {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .header-step {
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    /* Timer */
+    .timer-wrap {
+      margin-top: 6px;
+    }
+    .timer-track {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .timer-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 100%;
+      transition: width 0.1s linear, background-color 0.3s ease;
+    }
+    .timer-fill.warn { background: var(--warning); }
+    .timer-fill.danger { background: var(--error); }
+    .timer-text {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-align: right;
+    }
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* Buttons */
+    button {
+      font-family: inherit;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .btn {
+      min-height: var(--btn-h);
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      user-select: none;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-primary:not(:disabled):hover {
+      background: var(--primary-dark);
+    }
+    .btn-block {
+      width: 100%;
+    }
+    /* State Buttons Tray */
+    .state-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-state {
+      flex: 1 1 calc(50% - 6px);
+      min-width: 110px;
+      min-height: 48px;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .btn-state.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+    }
+    .btn-state:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      border-color: var(--border-light);
+      background: #f8fafc;
+    }
+    .badge-seen {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .btn-state.seen .badge-seen {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    @keyframes readingFill {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    .reading-progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(2, 132, 199, 0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .reading-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+    }
+    .btn.selected {
+      background: var(--primary-light) !important;
+      border-color: var(--primary) !important;
+      color: var(--primary-dark) !important;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+      font-weight: 700;
+    }
+    /* Diagram Container - Anti Deformation */
+    .diagram-region {
+      position: relative;
+      width: 100%;
+      background: #f8fafc;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+    .diagram-viewport {
+      position: relative;
+      width: auto;
+      max-width: 100%;
+      max-height: 48vh;
+      aspect-ratio: var(--aspect-ratio, 16 / 9);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .diagram-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .diagram-viewport.zoomed {
+      transform-origin: var(--origin-x, 50%) var(--origin-y, 50%);
+      transform: scale(var(--scale, 2.2));
+    }
+    .overlay-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .btn-zoom-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      min-height: 44px;
+      padding: 8px 14px;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-main);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Caption & Callout */
+    .caption-box {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-main);
+      border-left: 4px solid var(--primary);
+      line-height: 1.5;
+    }
+    /* Legends & Samples */
+    .legends-container {
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .legend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .legend-title {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .legend-notice {
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--warning);
+      font-weight: 600;
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .legend-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      font-size: calc(18px * var(--font-scale, 1));
+    }
+    .legend-row.highlight {
+      background: #fef9c3;
+      border-color: #fde047;
+      font-weight: 700;
+    }
+    .legend-num {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 22px;
+      text-align: center;
+    }
+    .legend-name {
+      font-weight: 600;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    /* Marker Pin */
+    .png-marker-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: rgba(2, 132, 199, 0.72);
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(1px);
+      pointer-events: none;
+      z-index: 5;
+      line-height: 1;
+    }
+    .legend-sample-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .legend-sample-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .legend-sample-thumb.pending {
+      background: #f1f5f9;
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-muted);
+      padding: 2px;
+      text-align: center;
+      font-weight: 500;
+    }
+    /* Question Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-option {
+      width: 100%;
+      text-align: left;
+      justify-content: flex-start;
+      padding: 12px 14px;
+      white-space: normal;
+      word-break: break-word;
+      font-size: calc(18px * var(--font-scale, 1));
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+    .btn-option.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+    .btn-option.correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success);
+      font-weight: 700;
+    }
+    .btn-option.wrong {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+    /* Matching Rows */
+    .match-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .match-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .match-card.locked {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+    .match-stem {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .match-targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-target {
+      flex: 1 1 calc(50% - 6px);
+      min-height: 48px;
+      font-size: calc(18px * var(--font-scale, 1));
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .btn-target.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .match-card.locked .btn-target.active {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+    /* Order Items */
+    .order-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .order-picked-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      min-height: 60px;
+    }
+    .order-item-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+    }
+    /* Feedback Box */
+    .feedback-box {
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.5;
+    }
+    .feedback-box.correct {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success);
+    }
+    .feedback-box.wrong {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: var(--error);
+    }
+    .feedback-box.hint {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: var(--warning);
+    }
+    /* Modal Dialog */
+    dialog.modal-sheet {
+      border: none;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+      box-sizing: border-box;
+      background: #ffffff;
+      margin: auto;
+    }
+    dialog.modal-sheet::backdrop {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-samples-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 50vh;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    .sample-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+    }
+    .sample-img-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .sample-img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    /* Actions Bar */
+    .actions-bar {
+      margin-top: auto;
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .actions-row {
+      display: flex;
+      gap: 10px;
+    }
+    .actions-row > * {
+      flex: 1;
+    }
+  </style>
+  <script src="../course-learning.js"></script>
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <!-- Header -->
+    <header class="header-bar" id="app-header">
+      <div class="header-top">
+        <span class="header-label" id="hdr-stage">載入中</span>
+        <span class="header-step" id="hdr-step"></span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="hdr-progress"></div>
+      </div>
+      <div class="timer-wrap" id="timer-box" style="display: none;">
+        <div class="timer-track">
+          <div class="timer-fill" id="timer-fill"></div>
+        </div>
+        <div class="timer-text" id="timer-text">剩下 0 秒</div>
+      </div>
+    </header>
+
+    <!-- Main View Area -->
+    <main class="main-content" id="app-view">
+      <!-- Dynamic views will render here -->
+    </main>
+
+    <!-- Legend Sample Dialog -->
+    <dialog class="modal-sheet" id="legend-dialog">
+      <div class="modal-body">
+        <h3 class="title-stem" id="legend-dlg-title">放大圖例</h3>
+        <p class="text-sm text-muted" id="legend-dlg-hint">請查看全部圖例，再按「圖例看完了」。</p>
+        <div class="modal-samples-list" id="legend-dlg-list"></div>
+        <button class="btn btn-primary btn-block" type="button" id="btn-legend-confirm">圖例看完了</button>
+      </div>
+    </dialog>
+
+    <!-- Fail / Message Dialog -->
+    <dialog class="modal-sheet" id="msg-dialog">
+      <div class="modal-body">
+        <h3 class="title-stem" id="msg-dlg-title">提示</h3>
+        <p class="text-body" id="msg-dlg-content"></p>
+        <button class="btn btn-primary btn-block" type="button" id="btn-msg-confirm">確定</button>
+      </div>
+    </dialog>
+  </div>
+
+  <script>
+    // Embedded JSON data as single source of truth
+    const DATA = {"title": "呼吸道的構造", "levels": [{"id": "L0", "title": "情境實驗室", "summary": "切換三種情境，對照模型與課本概念。", "items": "切換三種情境，對照模型與課本概念。", "noFigure": true, "body": "切換三種情境，對照模型與課本概念。", "nodeId": "airway-structure-node-L0-text", "quizFirst": true, "questions": [{"id": "airway-structure-level-1-1", "template": "choice", "mode": "single", "prompt": "吞嚥時食物沒有誤入氣管，主要是哪個構造蓋住喉入口？", "options": [{"id": "o0", "text": "會厭"}, {"id": "o1", "text": "聲帶"}, {"id": "o2", "text": "軟腭"}, {"id": "o3", "text": "甲狀軟骨"}], "answer": "o0", "feedbackWrong": "吞嚥時喉上提，會厭蓋住喉入口，防止食物誤入氣管。", "feedbackCorrect": "吞嚥時喉上提，會厭蓋住喉入口，防止食物誤入氣管。", "quizImgState": null, "quizNoFigure": true}, {"id": "airway-structure-level-1-2", "template": "explain", "nodeId": "airway-structure-level-1-2", "body": "切換三種情境，對照模型與課本概念。", "states": [{"id": "state-1", "nodeId": "airway-structure-level-1-2-state-1", "btnText": "鼻咽", "caption": "鼻咽：耳咽管開口在此，軟腭是鼻咽與口咽的分界參考", "img": "figures/airway-structure-overview.svg", "ratio": "1600 / 1086", "legendMode": "pending", "focusSource": "pin", "focus": [0.3025, 0.1427, 0.7225, 0.9669]}, {"id": "state-2", "nodeId": "airway-structure-level-1-2-state-2", "btnText": "喉", "caption": "喉：甲狀軟骨形成喉結，杓狀軟骨與聲帶相連，吞嚥時會厭蓋住喉入口", "img": "figures/airway-structure-overview.svg", "ratio": "1600 / 1086", "legendMode": "pending", "focusSource": "pin", "focus": [0.3025, 0.1427, 0.7225, 0.9669]}, {"id": "state-3", "nodeId": "airway-structure-level-1-2-state-3", "btnText": "氣管", "caption": "氣管：C 形透明軟骨環缺口朝後方食道，內襯偽複層纖毛柱狀上皮", "img": "figures/airway-structure-overview.svg", "ratio": "1600 / 1086", "legendMode": "pending", "focusSource": "pin", "focus": [0.3025, 0.1427, 0.7225, 0.9669]}]}]}, {"id": "L1", "title": "咽的三段", "summary": "咽分鼻咽、口咽、喉咽；鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分；口咽與喉咽是空氣和食物的共同通路。", "items": "咽分鼻咽、口咽、喉咽；鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分；口咽與喉咽是空氣和食物的共同通路。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-01.svg", "ratio": "1600 / 1086", "caption": "咽分鼻咽、口咽、喉咽；鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分；口咽與喉咽是空氣和食物的共同通路。\n鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分\n口咽與喉咽是空氣和食物的共同通路", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.2188, 0.0599, 0.6562, 0.9116], "nodeId": "airway-structure-node-L1-view"}], "questions": [{"id": "airway-structure-level-2-2", "template": "choice", "mode": "single", "prompt": "鼻咽與口咽的分界參考構造？", "options": [{"id": "o0", "text": "軟腭"}, {"id": "o1", "text": "會厭"}, {"id": "o2", "text": "聲帶"}, {"id": "o3", "text": "環狀軟骨"}], "answer": "o0", "feedbackWrong": "軟腭是區分鼻咽與口咽的參考邊界。", "hint": "比較鼻腔後方與口腔後方的分界。", "feedbackCorrect": "咽分鼻咽、口咽、喉咽；鼻咽在鼻腔後方，以軟腭相關邊界與口咽區分；口咽與喉咽是空氣和食物的共同通路。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L2", "title": "耳咽管", "summary": "開口在鼻咽，連通中耳；使鼓膜兩側壓力較能平衡；不連到外耳道。", "items": "開口在鼻咽，連通中耳；使鼓膜兩側壓力較能平衡；不連到外耳道。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-02.svg", "ratio": "1600 / 1086", "caption": "開口在鼻咽，連通中耳；使鼓膜兩側壓力較能平衡；不連到外耳道。\n使鼓膜兩側壓力較能平衡\n不連到外耳道", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.29, 0.0783, 0.71, 0.6372], "nodeId": "airway-structure-node-L2-view"}], "questions": [{"id": "airway-structure-level-3-2", "template": "choice", "mode": "single", "prompt": "耳咽管連通哪兩處？", "options": [{"id": "o0", "text": "口咽與外耳道"}, {"id": "o1", "text": "鼻咽與中耳"}, {"id": "o2", "text": "喉咽與中耳"}, {"id": "o3", "text": "鼻腔與內耳"}], "answer": "o1", "feedbackWrong": "耳咽管開口在鼻咽，連通中耳；它不連到外耳道。", "hint": "從鼓膜兩側的壓力平衡思考通路。", "feedbackCorrect": "開口在鼻咽，連通中耳；使鼓膜兩側壓力較能平衡；不連到外耳道。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L3", "title": "喉軟骨", "summary": "喉位於喉咽下、氣管上；九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨；甲狀軟骨形成喉結。", "items": "喉位於喉咽下、氣管上；九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨；甲狀軟骨形成喉結。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-03.svg", "ratio": "1250 / 2280", "caption": "喉位於喉咽下、氣管上；九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨；甲狀軟骨形成喉結。\n九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨\n甲狀軟骨形成喉結", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.1248, 0.0, 0.6544, 0.8136], "nodeId": "airway-structure-node-L3-view"}], "questions": [{"id": "airway-structure-level-4-2", "template": "choice", "mode": "single", "prompt": "喉結由哪塊軟骨形成？", "options": [{"id": "o0", "text": "環狀軟骨"}, {"id": "o1", "text": "會厭軟骨"}, {"id": "o2", "text": "甲狀軟骨"}, {"id": "o3", "text": "杓狀軟骨"}], "answer": "o2", "feedbackWrong": "甲狀軟骨形成喉結；它屬於單一的喉軟骨。", "hint": "找出構成頸前突出輪廓的單一軟骨。", "feedbackCorrect": "喉位於喉咽下、氣管上；九塊軟骨＝單一的甲狀、會厭、環狀軟骨，加上成對的杓狀、小角、楔狀軟骨；甲狀軟骨形成喉結。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L4", "title": "聲帶與會厭", "summary": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲；吞嚥時喉上提、會厭蓋住喉入口，防止食物誤入氣管。", "items": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲；吞嚥時喉上提、會厭蓋住喉入口，防止食物誤入氣管。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-04.svg", "ratio": "1250 / 2270", "caption": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲；吞嚥時喉上提、會厭蓋住喉入口，防止食物誤入氣管。\n聲帶負責發音，與杓狀軟骨相連。\n吞嚥時喉上提，會厭保護喉入口。", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.192, 0.0396, 0.792, 0.9427], "nodeId": "airway-structure-node-L4-view"}], "questions": [{"id": "airway-structure-level-5-2", "template": "choice", "mode": "single", "prompt": "與聲帶相連、參與發聲的成對軟骨？", "options": [{"id": "o0", "text": "甲狀軟骨"}, {"id": "o1", "text": "會厭軟骨"}, {"id": "o2", "text": "環狀軟骨"}, {"id": "o3", "text": "杓狀軟骨"}], "answer": "o3", "feedbackWrong": "杓狀軟骨與聲帶相連並參與發聲；會厭主要保護吞嚥時的喉入口。", "hint": "區分發聲連接構造與吞嚥保護構造。", "feedbackCorrect": "聲帶是發音器官，杓狀軟骨與聲帶相連並參與發聲；吞嚥時喉上提、會厭蓋住喉入口，防止食物誤入氣管。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L5", "title": "氣管", "summary": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支；16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連；內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣。", "items": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支；16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連；內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-05.svg", "ratio": "1350 / 980", "caption": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支；16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連；內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣。\n16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連\n內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.2, 0.1939, 0.637, 0.8673], "nodeId": "airway-structure-node-L5-view"}], "questions": [{"id": "airway-structure-level-6-2", "template": "choice", "mode": "single", "prompt": "氣管內襯的上皮？", "options": [{"id": "o0", "text": "偽複層纖毛柱狀上皮"}, {"id": "o1", "text": "單層鱗狀上皮"}, {"id": "o2", "text": "複層鱗狀上皮"}, {"id": "o3", "text": "單層立方上皮"}], "answer": "o0", "feedbackWrong": "氣管內襯偽複層纖毛柱狀上皮；纖毛與杯狀細胞的黏液協同清潔空氣。", "hint": "想想黏液要靠什麼構造往外移動。", "feedbackCorrect": "位於食道前方，長約 12.5 cm、直徑約 2.5 cm，由喉下緣延伸至第 4–5 胸椎高度分支；16–20 塊 C 形透明軟骨環，缺口朝食道並由平滑肌相連；內襯偽複層纖毛柱狀上皮與杯狀細胞，黏液與纖毛協同清潔空氣。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L6", "title": "主支氣管與支氣管樹", "summary": "氣管分成左、右主支氣管；右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管；主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多。", "items": "氣管分成左、右主支氣管；右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管；主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/airway-structure-node-06.svg", "ratio": "2000 / 1160", "caption": "氣管分成左、右主支氣管；右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管；主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多。\n右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管\n主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "pin", "focus": [0.224, 0.1379, 0.645, 0.8345], "nodeId": "airway-structure-node-L6-view"}], "questions": [{"id": "airway-structure-level-7-2", "template": "choice", "mode": "single", "prompt": "右主支氣管與左主支氣管相比？", "options": [{"id": "o0", "text": "較長、較窄且較水平"}, {"id": "o1", "text": "較短、較寬且較垂直"}, {"id": "o2", "text": "較短、較窄且較水平"}, {"id": "o3", "text": "兩側完全相同"}], "answer": "o1", "feedbackWrong": "右主支氣管較短、較寬且較垂直，與中線的夾角較小。", "hint": "從管徑、長度與中線夾角比較兩側。", "feedbackCorrect": "氣管分成左、右主支氣管；右主支氣管比左側短、寬且較垂直（與中線夾角較小），因此異物較易塞住右主支氣管；主支氣管 → 次級支氣管（肺葉支氣管）→ 三級支氣管（肺節支氣管）→ 細支氣管 → 終末細支氣管，越往下軟骨越少，細支氣管已無軟骨但平滑肌較多。", "quizImgState": null, "quizNoFigure": true}]}], "slug": "airway-structure", "activityId": "resp-airway-structure-v1", "materialVersion": "airway-structure-v3", "ui": {"opening": "準備開始", "start": "開始", "ending": "重點整理", "endingDone": "完成旅程", "truefalse": "是非確認", "transition": "準備進入考核", "foundation": "第一階段：先備確認", "case": "第二階段：情境考核", "complete": "本單元通關！", "beginAssessment": "開始第一階段", "continue": "繼續", "correct": "答對了！", "map": "總圖", "mapTitle": "總圖 · 重點整理", "overview": "總覽", "teach": "教學", "passed": "過關", "reset": "重置", "zoom": "放大檢視圖片", "timeRemaining": "剩下 {n} 秒", "assessmentTimeout": "時間到，這題還不熟，請重新開始考核。", "restartAssessment": "重新開始考核", "retryFoundation": "基礎題重新開始", "imageLoading": "圖片載入中", "imageRetry": "圖片載入失敗，點此重試", "close": "關閉", "teachGuide": "先看圖例，認識圖上的編號，再按圖下方每個按鈕切換看圖。全部看過後，按〔看完了，開始作答〕。", "textGuide": "先讀完本關說明，再按〔看完了，開始作答〕。", "reviewGuide": "切換按鈕看圖，對照相同編號讀圖例；看完按〔返回作答〕。", "stateSeen": "已看", "stateUnseen": "未看", "stateProgress": "已看 {seen}／{total} 個狀態；請按標示「未看」的按鈕。", "statesDone": "所有狀態都看過了。讀完圖例後，可往下開始作答。", "returnTeach": "回去看說明", "returnQuiz": "返回作答", "returnProgress": "返回原進度", "startQuiz": "看完了，開始作答", "submit": "確認送出", "retry": "再試一次", "retryCase": "重新挑戰第二階段", "retryEnding": "從第 1 格重來", "hint": "看提示", "hintLabel": "提示：", "next": "下一題", "nextLevel": "下一關", "showMap": "查看重點整理總圖", "summaryLabel": "這關重點：", "unselected": "(未選)", "resetOrder": "重選順序", "expand": "▼ 展開", "collapse": "▲ 收起", "locked": "過關後打開", "more": "看更多", "less": "收起", "yes": "對", "no": "錯", "volumeMark": "約 300 mL", "volumeMin": "0", "volumeMax": "800 mL", "levelHeader": "第 {n}／{total} 關 · {title}", "questionHeader": "第 {n}／{total} 題", "levelTab": "第 {n} 關", "unseen": "還有 {n} 個沒看", "passTitle": "第 {n} 關完成", "orderBadge": "第 {n} 步", "revisit": "回第 {n} 關看", "mapNode": "第 {n} 關：{title}", "tick": "✓", "lock": "🔒", "arrow": "↓", "legendFrameTitle": "完整圖與圖例", "legendRead": "先看圖例", "legendReadDone": "放大圖例 · 已看", "legendHeading": "圖例", "legendDialogTitle": "放大圖例", "legendBack": "返回", "legendConfirm": "圖例看完了", "legendFirstHint": "請先看圖例，認識圖中每種符號。", "legendDialogHint": "請查看全部圖例，再按「圖例看完了」。", "legendNotReady": "圖例圖片尚未準備完成，請返回後重試。", "legendLoadFailed": "圖例圖片載入失敗，請返回後重試。", "legendUnavailable": "尚未取樣", "legendProgress": "已看 {seen}／{total} 個必看步驟", "legendRemaining": "還有 {n} 個必看步驟", "focusWhole": "看完整圖", "focusZoom": "放大這一區"}, "opening": {"prompt": "從鼻咽、喉到氣管與支氣管樹，認識空氣進入肺之前經過的通道與支撐構造。", "cards": [{"term": "3 段", "explain": "咽：鼻咽、口咽、喉咽"}, {"term": "9 塊", "explain": "喉軟骨"}, {"term": "C 形", "explain": "氣管透明軟骨環"}]}, "encouragement": {"correct": ["答對！這題你判斷得很穩 👍", "漂亮，觀念抓得很準 🎯", "沒錯，你已經把重點串起來了 🔗", "正確！這種判斷，以後在臨床很用得上 🩺", "對了！你的推理一步一步都站得住 🧠", "好眼力，陷阱選項沒騙到你 👀", "答對了，這題其實不簡單喔 ✨", "很好，保持這個節奏 🎵", "正確！看得出你有認真讀過 📖", "完全正確，給自己按個讚 👏", "沒錯！記住現在這個感覺 💡", "精準！下一題也交給你了 🚀", "答對！你的大腦今天狀態很好 ⚡", "正確，這個觀念你已經是自己的了 🌱"], "levelPass": ["又破一關！你正在一塊一塊拼出完整的地圖 🧩", "這一關的重點，已經收進你的口袋了 🎒", "學習就是這樣，一關一關慢慢變強 💪", "累了就休息一下，你的進度都幫你記著 ☕", "今天的專注，就是之後考試時的底氣 🔥", "每多懂一點，將來照顧病人就多一分把握 💙", "很穩！下一關會用到剛剛學的東西喔 🔜", "把剛學的名詞小聲唸一次，會記得更牢 🗣️", "你比剛開始的自己，又多懂了一些 📈", "難的地方你都撐過來了，給自己一點掌聲 👏", "這一關過得漂亮，繼續往前走吧 🌟", "記不住也沒關係，總圖隨時可以回來複習 🗺️"], "finish": "空氣走過的每一段路，你都認識了。深呼吸一下，你做得很好。 🌬️ 🎉"}, "teacherPending": [{"kind": "legend-unclassified", "figure": "airway-structure-overview.svg", "detail": "圖例未分類（required／none）", "where": ["L0.airway-structure-level-1-2.state-1", "L0.airway-structure-level-1-2.state-2", "L0.airway-structure-level-1-2.state-3"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-01.svg", "detail": "圖例未分類（required／none）", "where": ["L1.state.view"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-02.svg", "detail": "圖例未分類（required／none）", "where": ["L2.state.view"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-03.svg", "detail": "圖例未分類（required／none）", "where": ["L3.state.view"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-04.svg", "detail": "圖例未分類（required／none）", "where": ["L4.state.view"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-05.svg", "detail": "圖例未分類（required／none）", "where": ["L5.state.view"]}, {"kind": "legend-unclassified", "figure": "airway-structure-node-06.svg", "detail": "圖例未分類（required／none）", "where": ["L6.state.view"]}], "truefalse": [{"id": "airway-structure-tf-1", "statement": "耳咽管開口在鼻咽，連通中耳。", "answer": true, "feedback": "耳咽管連通鼻咽與中耳，幫助平衡鼓膜兩側壓力。", "template": "choice", "mode": "single", "prompt": "耳咽管開口在鼻咽，連通中耳。", "feedbackWrong": "耳咽管連通鼻咽與中耳，幫助平衡鼓膜兩側壓力。", "feedbackCorrect": "耳咽管連通鼻咽與中耳，幫助平衡鼓膜兩側壓力。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}, {"id": "airway-structure-tf-2", "statement": "口咽與喉咽是空氣和食物的共同通路。", "answer": true, "feedback": "口咽、喉咽空氣和食物都會經過。", "template": "choice", "mode": "single", "prompt": "口咽與喉咽是空氣和食物的共同通路。", "feedbackWrong": "口咽、喉咽空氣和食物都會經過。", "feedbackCorrect": "口咽、喉咽空氣和食物都會經過。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}, {"id": "airway-structure-tf-3", "statement": "喉的甲狀、會厭、環狀軟骨都是成對的。", "answer": false, "feedback": "這三塊是單一的；成對的是杓狀、小角、楔狀軟骨。", "template": "choice", "mode": "single", "prompt": "喉的甲狀、會厭、環狀軟骨都是成對的。", "feedbackWrong": "這三塊是單一的；成對的是杓狀、小角、楔狀軟骨。", "feedbackCorrect": "這三塊是單一的；成對的是杓狀、小角、楔狀軟骨。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}], "assessment": {"intro": "完成學習後，先回答先備題，再進入情境考核。", "foundation": [{"id": "airway-structure-foundation-q01", "mode": "single", "prompt": "鼻咽與口咽的分界參考構造？", "options": [{"id": "o0", "text": "軟腭"}, {"id": "o1", "text": "會厭"}, {"id": "o2", "text": "聲帶"}, {"id": "o3", "text": "環狀軟骨"}], "answer": "o0", "feedbackWrong": "軟腭是區分鼻咽與口咽的參考邊界。", "hint": "比較鼻腔後方與口腔後方的分界。", "src": ["src-1"], "revisitLevel": "L1", "timeLimit": 40, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-foundation-q02", "mode": "single", "prompt": "耳咽管連通哪兩處？", "options": [{"id": "o0", "text": "口咽與外耳道"}, {"id": "o1", "text": "鼻咽與中耳"}, {"id": "o2", "text": "喉咽與中耳"}, {"id": "o3", "text": "鼻腔與內耳"}], "answer": "o1", "feedbackWrong": "耳咽管開口在鼻咽，連通中耳；它不連到外耳道。", "hint": "從鼓膜兩側的壓力平衡思考通路。", "src": ["src-2"], "revisitLevel": "L2", "timeLimit": 40, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-foundation-q03", "mode": "single", "prompt": "喉結由哪塊軟骨形成？", "options": [{"id": "o0", "text": "環狀軟骨"}, {"id": "o1", "text": "會厭軟骨"}, {"id": "o2", "text": "甲狀軟骨"}, {"id": "o3", "text": "杓狀軟骨"}], "answer": "o2", "feedbackWrong": "甲狀軟骨形成喉結；它屬於單一的喉軟骨。", "hint": "找出構成頸前突出輪廓的單一軟骨。", "src": ["src-3", "src-4"], "revisitLevel": "L3", "timeLimit": 40, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-foundation-q04", "mode": "single", "prompt": "與聲帶相連、參與發聲的成對軟骨？", "options": [{"id": "o0", "text": "甲狀軟骨"}, {"id": "o1", "text": "會厭軟骨"}, {"id": "o2", "text": "環狀軟骨"}, {"id": "o3", "text": "杓狀軟骨"}], "answer": "o3", "feedbackWrong": "杓狀軟骨與聲帶相連並參與發聲；會厭主要保護吞嚥時的喉入口。", "hint": "區分發聲連接構造與吞嚥保護構造。", "src": ["src-3", "src-4"], "revisitLevel": "L4", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-foundation-q05", "mode": "single", "prompt": "氣管內襯的上皮？", "options": [{"id": "o0", "text": "偽複層纖毛柱狀上皮"}, {"id": "o1", "text": "單層鱗狀上皮"}, {"id": "o2", "text": "複層鱗狀上皮"}, {"id": "o3", "text": "單層立方上皮"}], "answer": "o0", "feedbackWrong": "氣管內襯偽複層纖毛柱狀上皮；纖毛與杯狀細胞的黏液協同清潔空氣。", "hint": "想想黏液要靠什麼構造往外移動。", "src": ["src-5"], "revisitLevel": "L5", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-foundation-q06", "mode": "single", "prompt": "右主支氣管與左主支氣管相比？", "options": [{"id": "o0", "text": "較長、較窄且較水平"}, {"id": "o1", "text": "較短、較寬且較垂直"}, {"id": "o2", "text": "較短、較窄且較水平"}, {"id": "o3", "text": "兩側完全相同"}], "answer": "o1", "feedbackWrong": "右主支氣管較短、較寬且較垂直，與中線的夾角較小。", "hint": "從管徑、長度與中線夾角比較兩側。", "src": ["src-6"], "revisitLevel": "L6", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}], "case": [{"id": "airway-structure-case-q01", "mode": "single", "prompt": "【生活情境】搭飛機下降時耳朵悶脹，吞口水後改善，是哪個構造平衡了中耳壓力？", "options": [{"id": "o0", "text": "氣管"}, {"id": "o1", "text": "會厭"}, {"id": "o2", "text": "耳咽管"}, {"id": "o3", "text": "鼻腔"}], "answer": "o2", "feedbackWrong": "耳咽管連通鼻咽與中耳，使鼓膜兩側壓力較能平衡。", "hint": "吞嚥後耳悶改善，先找連通中耳的通道。", "src": ["src-2"], "revisitLevel": "L2", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-case-q02", "mode": "single", "prompt": "【生理判讀】吞嚥時食物沒有誤入氣管，主要因為？", "options": [{"id": "o0", "text": "聲帶完全打開"}, {"id": "o1", "text": "氣管軟骨環關閉"}, {"id": "o2", "text": "耳咽管關閉"}, {"id": "o3", "text": "喉上提、會厭蓋住喉入口"}], "answer": "o3", "feedbackWrong": "吞嚥時喉上提，會厭蓋住喉入口，防止食物誤入氣管。", "hint": "觀察吞嚥時喉的位置與入口如何改變。", "src": ["src-3", "src-4"], "revisitLevel": "L4", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-case-q03", "mode": "single", "prompt": "【模型觀察】氣管 C 形軟骨環的缺口朝向？", "options": [{"id": "o0", "text": "後方的食道"}, {"id": "o1", "text": "前方的胸骨"}, {"id": "o2", "text": "左側的心臟"}, {"id": "o3", "text": "右側的肺"}], "answer": "o0", "feedbackWrong": "氣管在食道前方，C 形軟骨環的缺口朝向後方食道。", "hint": "先確認氣管與食道的前後位置。", "src": ["src-5"], "revisitLevel": "L5", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-case-q04", "mode": "single", "prompt": "【生活情境】小孩吃花生時嗆到，吸入的花生較容易卡在哪裡？", "options": [{"id": "o0", "text": "左主支氣管，因其較寬"}, {"id": "o1", "text": "右主支氣管，因其較短、寬且垂直"}, {"id": "o2", "text": "氣管上段，因其最窄"}, {"id": "o3", "text": "食道，因其在氣管後方"}], "answer": "o1", "feedbackWrong": "右主支氣管較短、寬且垂直，因此吸入的異物較容易卡住右側。", "hint": "沿吸入方向比較左右主支氣管的形狀。", "src": ["src-6"], "revisitLevel": "L6", "timeLimit": 60, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "airway-structure-case-q05", "mode": "single", "prompt": "【模型觀察】沿支氣管樹往下，軟骨與平滑肌的變化？", "options": [{"id": "o0", "text": "軟骨越來越多"}, {"id": "o1", "text": "兩者都不變"}, {"id": "o2", "text": "軟骨漸少、細支氣管已無軟骨且平滑肌較多"}, {"id": "o3", "text": "平滑肌消失只剩軟骨"}], "answer": "o2", "feedbackWrong": "越往下軟骨越少；細支氣管已無軟骨，但平滑肌較多。", "hint": "依主支氣管到終末細支氣管的順序比較管壁。", "src": ["src-6"], "revisitLevel": "L6", "timeLimit": 55, "template": "choice", "feedbackCorrect": "答對了！"}], "passMessage": "兩階段全部答對，本單元通關！", "failMessage": "請回看對應內容，再試一次。"}, "tracking": {"nodeIds": ["airway-structure-level-1-2-state-1", "airway-structure-level-1-2-state-2", "airway-structure-level-1-2-state-3", "airway-structure-node-L1-view", "airway-structure-node-L2-view", "airway-structure-node-L3-view", "airway-structure-node-L4-view", "airway-structure-node-L5-view", "airway-structure-node-L6-view"], "questionIds": {"levels": {"L0": ["airway-structure-level-1-1"], "L1": ["airway-structure-level-2-2"], "L2": ["airway-structure-level-3-2"], "L3": ["airway-structure-level-4-2"], "L4": ["airway-structure-level-5-2"], "L5": ["airway-structure-level-6-2"], "L6": ["airway-structure-level-7-2"]}, "ending": [], "truefalse": ["airway-structure-tf-1", "airway-structure-tf-2", "airway-structure-tf-3"], "foundation": ["airway-structure-foundation-q01", "airway-structure-foundation-q02", "airway-structure-foundation-q03", "airway-structure-foundation-q04", "airway-structure-foundation-q05", "airway-structure-foundation-q06"], "case": ["airway-structure-case-q01", "airway-structure-case-q02", "airway-structure-case-q03", "airway-structure-case-q04", "airway-structure-case-q05"]}, "nodeTotal": 9, "questionTotal": 21}};
+
+    // Global SDK Fallback if not inside iframe or standalone
+    if (!window.CourseLearning) {
+      console.error('[CourseLearning SDK Missing] course-learning.js not loaded. Event reporting disabled.');
+      window.CourseLearning = {
+        explore(id) { console.error('[CourseLearning SDK Missing] Event dropped: explore', id); },
+        answer(id, ok) { console.error('[CourseLearning SDK Missing] Event dropped: answer', id, ok); },
+        hint(id) { console.error('[CourseLearning SDK Missing] Event dropped: hint', id); },
+        nodeTime(id, s) { console.error('[CourseLearning SDK Missing] Event dropped: nodeTime', id, s); },
+        complete() { console.error('[CourseLearning SDK Missing] Event dropped: complete'); }
+      };
+    }
+
+    // State Machine & Controller
+    const App = {
+      data: DATA,
+      ui: DATA.ui,
+      state: {
+        phase: 'OPENING',
+        levelIdx: 0,
+        stateIdx: 0,
+        seenStates: new Set(),
+        seenLegends: new Set(),
+        explainSeenMap: {},
+        isLegendExpanded: false,
+        isZoomed: false,
+        // Quiz state
+        questionIdx: 0,
+        quizSubStateIdx: 0,
+        quizAnswerLocked: false,
+        matchAnswers: {},
+        matchLockedRows: new Set(),
+        multiSelections: new Set(),
+        orderPicks: [],
+        currentOptions: [],
+        feedback: null,
+        selectedOptId: null,
+        selectedTfVal: null,
+        selectedEndOptId: null,
+        selectedAssOptId: null,
+        activeReadingKey: null,
+        readingTimer: null,
+        readingDuration: 0,
+        legendTimer: null,
+        retryTimer: null,
+        // Ending state
+        endingStepIdx: 0,
+        // TrueFalse state
+        tfIdx: 0,
+        // Assessment state
+        assStage: 'foundation',
+        assIdx: 0,
+        assTimer: null,
+        assTimeLeft: 0,
+        assTimeTotal: 0,
+        // Time tracking
+        currentNodeId: null,
+        nodeEnterTime: Date.now()
+      },
+
+      init() {
+        this.render();
+      },
+
+      trackTime(newNodeId) {
+        const now = Date.now();
+        if (this.state.currentNodeId) {
+          const elapsed = Math.floor((now - this.state.nodeEnterTime) / 1000);
+          if (elapsed > 0) {
+            window.CourseLearning.nodeTime(this.state.currentNodeId, Math.min(60, elapsed));
+          }
+        }
+        this.state.currentNodeId = newNodeId;
+        this.state.nodeEnterTime = now;
+      },
+
+      setPhase(newPhase) {
+        this.state.phase = newPhase;
+        this.render();
+      },
+
+      render() {
+        const view = document.getElementById('app-view');
+        const hdrStage = document.getElementById('hdr-stage');
+        const hdrStep = document.getElementById('hdr-step');
+        const hdrProgress = document.getElementById('hdr-progress');
+        const timerBox = document.getElementById('timer-box');
+        timerBox.style.display = 'none';
+
+        switch (this.state.phase) {
+          case 'OPENING':
+            hdrStage.textContent = this.ui.opening;
+            hdrStep.textContent = '';
+            hdrProgress.style.width = '0%';
+            this.renderOpening(view);
+            break;
+
+          case 'TEACH':
+            const currentLevel = this.data.levels[this.state.levelIdx];
+            const lvlTotal = this.data.levels.length;
+            hdrStage.textContent = this.ui.levelTab.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = `${this.state.levelIdx + 1} / ${lvlTotal}`;
+            hdrProgress.style.width = `${((this.state.levelIdx) / (lvlTotal + 4)) * 100}%`;
+            this.renderTeach(view, currentLevel);
+            break;
+
+          case 'QUIZ':
+            const qLevel = this.data.levels[this.state.levelIdx];
+            const qTotal = qLevel.questions.length;
+            hdrStage.textContent = this.ui.levelTab.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = `${this.ui.questionHeader.replace('{n}', this.state.questionIdx + 1).replace('{total}', qTotal)}`;
+            hdrProgress.style.width = `${((this.state.levelIdx + (this.state.questionIdx / qTotal)) / (this.data.levels.length + 4)) * 100}%`;
+            this.renderQuiz(view, qLevel);
+            break;
+
+          case 'LEVEL_PASS':
+            hdrStage.textContent = this.ui.passTitle.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = '';
+            hdrProgress.style.width = `${((this.state.levelIdx + 1) / (this.data.levels.length + 4)) * 100}%`;
+            this.renderLevelPass(view);
+            break;
+
+          case 'ENDING':
+            hdrStage.textContent = this.ui.ending;
+            hdrStep.textContent = `${this.state.endingStepIdx + 1} / ${this.data.ending.steps.length}`;
+            hdrProgress.style.width = '75%';
+            this.renderEnding(view);
+            break;
+
+          case 'TRUEFALSE':
+            hdrStage.textContent = this.ui.truefalse;
+            hdrStep.textContent = `${this.state.tfIdx + 1} / ${this.data.truefalse.length}`;
+            hdrProgress.style.width = '85%';
+            this.renderTrueFalse(view);
+            break;
+
+          case 'ASSESSMENT':
+            timerBox.style.display = 'block';
+            const isCase = this.state.assStage === 'case';
+            const list = isCase ? this.data.assessment.case : this.data.assessment.foundation;
+            hdrStage.textContent = isCase ? this.ui.case : this.ui.foundation;
+            hdrStep.textContent = `${this.state.assIdx + 1} / ${list.length}`;
+            hdrProgress.style.width = isCase ? '95%' : '90%';
+            this.renderAssessment(view, list[this.state.assIdx]);
+            break;
+
+          case 'COMPLETE':
+            hdrStage.textContent = this.ui.complete;
+            hdrStep.textContent = '';
+            hdrProgress.style.width = '100%';
+            this.renderComplete(view);
+            break;
+        }
+      },
+
+      renderOpening(view) {
+        this.trackTime(null);
+        view.innerHTML = `
+          <div style="margin-top: 24px;">
+            <h1 class="title-lg" style="color: var(--primary);">${this.data.title}</h1>
+          </div>
+          <div class="caption-box" style="margin-top: 16px;">
+            <p class="text-body">${this.data.opening.prompt}</p>
+          </div>
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-start">${this.ui.start}</button>
+          </div>
+        `;
+        document.getElementById('btn-start').onclick = () => {
+          this.state.levelIdx = 0;
+          this.startLevel(0);
+        };
+      },
+
+      startLevel(idx) {
+        this.state.levelIdx = idx;
+        this.state.stateIdx = 0;
+        this.state.seenStates = new Set();
+        this.state.seenLegends = new Set();
+        const lvl = this.data.levels[idx];
+        if (lvl && lvl.states) {
+          lvl.states.forEach((s, sIdx) => {
+            if (this.isLegendSeen(idx, sIdx)) {
+              this.state.seenLegends.add(sIdx);
+            }
+          });
+        }
+        this.clearActiveReading();
+        this.state.isLegendExpanded = false;
+        this.state.isZoomed = false;
+        this.state.questionIdx = 0;
+        this.state.feedback = null;
+        this.state.selectedOptId = null;
+        this.setPhase('TEACH');
+      },
+
+      getLegendStorageKey(levelIdx, stateIdx) {
+        const lvl = this.data.levels[levelIdx];
+        const st = lvl && lvl.states && lvl.states[stateIdx];
+        return (st && st.legendKey) || `level_${lvl ? lvl.id : levelIdx}`;
+      },
+
+      isLegendSeen(levelIdx, stateIdx) {
+        const key = this.getLegendStorageKey(levelIdx, stateIdx);
+        if (this.state.globalSeenLegends && this.state.globalSeenLegends.has(key)) {
+          return true;
+        }
+        try {
+          const storeKey = `seenLegend_${this.data.activityId || 'ag'}_${key}`;
+          if (localStorage.getItem(storeKey) === '1') {
+            if (!this.state.globalSeenLegends) this.state.globalSeenLegends = new Set();
+            this.state.globalSeenLegends.add(key);
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      },
+
+      markLegendSeen(levelIdx, stateIdx) {
+        const key = this.getLegendStorageKey(levelIdx, stateIdx);
+        if (!this.state.globalSeenLegends) this.state.globalSeenLegends = new Set();
+        this.state.globalSeenLegends.add(key);
+        try {
+          const storeKey = `seenLegend_${this.data.activityId || 'ag'}_${key}`;
+          localStorage.setItem(storeKey, '1');
+        } catch (e) {}
+      },
+
+      calcDwellTime(text, minSec, maxSec) {
+        const chars = (text || '').replace(/\s+/g, '').length;
+        return Math.min(maxSec, Math.max(minSec, Math.ceil(chars / 10)));
+      },
+
+      clearActiveReading() {
+        if (this.state.readingTimer) {
+          clearTimeout(this.state.readingTimer);
+          this.state.readingTimer = null;
+        }
+        this.state.activeReadingKey = null;
+        this.state.readingDuration = 0;
+      },
+
+      startTeachReading(idx, text) {
+        this.clearActiveReading();
+        const sec = this.calcDwellTime(text, 2, 10);
+        const key = `teach_${this.state.levelIdx}_${idx}`;
+        this.state.activeReadingKey = key;
+        this.state.readingDuration = sec;
+        this.state.readingTimer = setTimeout(() => {
+          this.state.seenStates.add(idx);
+          this.clearActiveReading();
+          this.render();
+        }, sec * 1000);
+      },
+
+      startExplainReading(qId, subIdx, text) {
+        this.clearActiveReading();
+        const sec = this.calcDwellTime(text, 2, 10);
+        const key = `explain_${qId}_${subIdx}`;
+        this.state.activeReadingKey = key;
+        this.state.readingDuration = sec;
+        this.state.readingTimer = setTimeout(() => {
+          this.markExplainSeen(qId, subIdx);
+          this.clearActiveReading();
+          this.render();
+        }, sec * 1000);
+      },
+
+      startRetryCountdown(btnId, text) {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        const chars = (text || '').replace(/\s+/g, '').length;
+        let sec = Math.min(6, Math.max(2, Math.ceil(chars / 10)));
+        btn.disabled = true;
+        btn.textContent = `${this.ui.retry} (${sec})`;
+        if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+        this.state.retryTimer = setInterval(() => {
+          sec--;
+          const curBtn = document.getElementById(btnId);
+          if (!curBtn) {
+            clearInterval(this.state.retryTimer);
+            return;
+          }
+          if (sec > 0) {
+            curBtn.disabled = true;
+            curBtn.textContent = `${this.ui.retry} (${sec})`;
+          } else {
+            clearInterval(this.state.retryTimer);
+            curBtn.disabled = false;
+            curBtn.textContent = this.ui.retry;
+          }
+        }, 1000);
+      },
+
+      getExplainSeen(qId) {
+        if (!this.state.explainSeenMap) this.state.explainSeenMap = {};
+        if (!this.state.explainSeenMap[qId]) {
+          const s = new Set();
+          try {
+            const storeKey = `seenExplain_${this.data.activityId || 'ag'}_${qId}`;
+            const saved = localStorage.getItem(storeKey);
+            if (saved) {
+              JSON.parse(saved).forEach(x => s.add(Number(x)));
+            }
+          } catch (e) {}
+          this.state.explainSeenMap[qId] = s;
+        }
+        return this.state.explainSeenMap[qId];
+      },
+
+      markExplainSeen(qId, subIdx) {
+        const s = this.getExplainSeen(qId);
+        s.add(Number(subIdx));
+        try {
+          const storeKey = `seenExplain_${this.data.activityId || 'ag'}_${qId}`;
+          localStorage.setItem(storeKey, JSON.stringify(Array.from(s)));
+        } catch (e) {}
+      },
+
+      renderOverlaysSvg(overlays) {
+        if (!overlays || !overlays.viewBox || !Array.isArray(overlays.items)) return '';
+        const [vx, vy, vw, vh] = overlays.viewBox;
+        const shapesHtml = overlays.items.map(item => {
+          if (item.type === 'region' && Array.isArray(item.shapes)) {
+            return item.shapes.map(poly => {
+              const pts = poly.map(p => `${p[0]},${p[1]}`).join(' ');
+              return `<polygon points="${pts}" fill="rgba(2, 132, 199, 0.22)" stroke="#0284c7" stroke-width="4" stroke-dasharray="6,4" />`;
+            }).join('');
+          }
+          if (item.type === 'arrow' && Array.isArray(item.paths)) {
+            return item.paths.map(line => {
+              if (line.length >= 2) {
+                const p1 = line[0], p2 = line[1];
+                return `<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />`;
+              }
+              return '';
+            }).join('');
+          }
+          if (item.type === 'segment' && Array.isArray(item.paths)) {
+            return item.paths.map(seg => {
+              const pts = seg.map(p => `${p[0]},${p[1]}`).join(' ');
+              return `<polyline points="${pts}" fill="none" stroke="#0284c7" stroke-width="${item.width || 6}" stroke-linecap="round" stroke-linejoin="round" />`;
+            }).join('');
+          }
+          return '';
+        }).join('');
+
+        return `
+          <svg class="overlay-svg" viewBox="${vx} ${vy} ${vw} ${vh}" preserveAspectRatio="xMidYMid meet">
+            ${shapesHtml}
+          </svg>
+        `;
+      },
+
+      renderTeach(view, level) {
+        const states = level.states || [];
+        const currentState = states[this.state.stateIdx] || {};
+
+        // Start reading timer for current state if not yet seen
+        if (states.length > 0 && !this.state.seenStates.has(this.state.stateIdx)) {
+          const readingKey = `teach_${this.state.levelIdx}_${this.state.stateIdx}`;
+          if (this.state.activeReadingKey !== readingKey) {
+            this.startTeachReading(this.state.stateIdx, currentState.caption || '');
+          }
+        }
+        
+        // Track explore only if user has interacted with this state, or immediately if noFigure level
+        const trackingNodes = this.data.tracking?.nodeIds || [];
+        if (level.noFigure && level.nodeId && trackingNodes.includes(level.nodeId)) {
+          window.CourseLearning.explore(level.nodeId);
+          this.trackTime(level.nodeId);
+        } else if (currentState.nodeId && this.state.seenStates.has(this.state.stateIdx)) {
+          window.CourseLearning.explore(currentState.nodeId);
+          this.trackTime(currentState.nodeId);
+        }
+
+        const hasFocus = Array.isArray(currentState.focus) && currentState.focus.length === 4;
+        const [x1, y1, x2, y2] = hasFocus ? currentState.focus : [0, 0, 1, 1];
+        const originX = ((x1 + x2) / 2) * 100;
+        const originY = ((y1 + y2) / 2) * 100;
+        const scaleVal = Math.min(3, 1 / Math.max(x2 - x1, y2 - y1, 0.25));
+
+        const allStatesSeen = states.every((_, idx) => this.state.seenStates.has(idx));
+        const requiredLegendSeen = (currentState.legendMode !== 'required') || this.isLegendSeen(this.state.levelIdx, this.state.stateIdx);
+        const canStartQuiz = allStatesSeen && requiredLegendSeen;
+        const isLocked = (currentState.legendMode === 'required') && !requiredLegendSeen;
+
+        // Legends HTML (Handles both numbered and particle/sample legends)
+        let legendsHtml = '';
+        const legendsList = currentState.legends || [];
+        if (legendsList.length > 0) {
+          const isCollapsible = legendsList.length > 5;
+          const isExpanded = !isCollapsible || this.state.isLegendExpanded;
+
+          const rows = legendsList.map(lg => {
+            const isHighlight = currentState.highlightNums && (currentState.highlightNums.includes(lg.num) || currentState.highlightNums.includes(lg.name));
+            let sampleBox = '';
+            if (lg.sample) {
+              if (lg.sample.img) {
+                sampleBox = `<div class="legend-sample-thumb"><img src="${lg.sample.img}" alt="${lg.name}"></div>`;
+              } else {
+                sampleBox = `<div class="legend-sample-thumb pending"><span>${this.ui.legendUnavailable}</span></div>`;
+              }
+            }
+            return `
+              <div class="legend-row ${isHighlight ? 'highlight' : ''}">
+                ${lg.num ? `<span class="legend-num">${lg.num}</span>` : sampleBox}
+                <span class="legend-name" style="font-weight: 600;">${lg.name}</span>
+                ${lg.func ? `<span class="text-sm text-muted">(${lg.func})</span>` : ''}
+              </div>
+            `;
+          }).join('');
+
+          legendsHtml = `
+            <div class="legends-container">
+              <div class="legend-header">
+                <span class="legend-title">${this.ui.legendHeading}</span>
+                ${currentState.legendMode === 'required' ? `
+                  <button class="btn" type="button" id="btn-open-legend" style="min-height: 44px; padding: 6px 14px; font-size: calc(18px * var(--font-scale, 1));">
+                    ${requiredLegendSeen ? this.ui.legendReadDone : this.ui.legendRead}
+                  </button>
+                ` : ''}
+              </div>
+              ${isLocked ? `
+                <div class="legend-notice">${this.ui.legendFirstHint}</div>
+              ` : ''}
+              ${isCollapsible ? `
+                <button class="btn btn-block" type="button" id="btn-toggle-legend-expand" style="min-height: 44px; padding: 8px 14px; margin-top: 6px; font-size: calc(18px * var(--font-scale, 1)); border: 1px solid var(--border); background: #ffffff;">
+                  ${isExpanded ? '收起圖例 ▲' : '看圖例 ▼'}
+                </button>
+              ` : ''}
+              <div class="legend-list" style="${isExpanded ? '' : 'display: none;'}">${rows}</div>
+            </div>
+          `;
+        } else if (currentState.legendReason) {
+          legendsHtml = `
+            <div class="legends-container">
+              <div class="text-sm text-muted">${currentState.legendReason}</div>
+            </div>
+          `;
+        }
+
+        // State buttons: ALWAYS show even if length is 1 so user can identify & click state
+        const stateButtons = states.map((s, idx) => {
+          const isCurrent = idx === this.state.stateIdx;
+          const isSeen = this.state.seenStates.has(idx);
+          const isReading = this.state.activeReadingKey === `teach_${this.state.levelIdx}_${idx}`;
+          const isDisabled = isLocked && !isCurrent;
+          let badgeText = this.ui.stateUnseen;
+          if (isSeen) badgeText = this.ui.stateSeen;
+          else if (isReading) badgeText = '閱讀中…';
+          return `
+            <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-state-idx="${idx}" ${isDisabled ? 'disabled' : ''}>
+              <span>${s.btnText}</span>
+              <span class="badge-seen">${badgeText}</span>
+              ${isReading ? `
+                <div class="reading-progress-track">
+                  <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
+                </div>
+              ` : ''}
+            </button>
+          `;
+        }).join('');
+
+        const overlaysSvg = this.renderOverlaysSvg(currentState.overlays);
+        const markersHtml = (currentState.markers || []).map(m => `
+          <span class="png-marker-pin" style="left: ${m.x}%; top: ${m.y}%;">${m.num}</span>
+        `).join('');
+        const aspectVal = currentState.ratio || '16 / 9';
+
+        let noFigureHtml = '';
+        if (level.noFigure) {
+          const parts = [];
+          if (level.intro) {
+            const introStr = Array.isArray(level.intro) ? level.intro.join('\n') : String(level.intro);
+            if (introStr.trim()) parts.push(introStr.trim());
+          }
+          if (level.body) {
+            const bodyStr = Array.isArray(level.body) ? level.body.join('\n') : String(level.body);
+            if (bodyStr.trim() && !parts.includes(bodyStr.trim())) {
+              parts.push(bodyStr.trim());
+            }
+          }
+          if (level.items) {
+            const itemsStr = Array.isArray(level.items) ? level.items.join('\n') : String(level.items);
+            if (itemsStr.trim() && !parts.includes(itemsStr.trim())) {
+              parts.push(itemsStr.trim());
+            }
+          }
+          if (parts.length > 0) {
+            noFigureHtml = `
+              <div class="caption-box" style="margin-top: 16px;">
+                ${parts.map((p, idx) => `
+                  <p class="text-body" style="font-size: calc(18px * var(--font-scale, 1)); line-height: 1.6; white-space: pre-line; margin: 0; ${idx > 0 ? 'margin-top: 12px;' : ''}">${p}</p>
+                `).join('')}
+              </div>
+            `;
+          }
+        }
+
+        view.innerHTML = `
+          <div>
+            <h2 class="title-lg">${level.title}</h2>
+            <p class="text-sm text-muted" style="margin-top: 4px;">
+              ${level.noFigure ? this.ui.textGuide : (level.teachGuide || this.ui.teachGuide)}
+            </p>
+          </div>
+
+          ${noFigureHtml}
+
+          ${!level.noFigure && currentState.img ? `
+            <div class="diagram-region node-figure">
+              <div class="diagram-viewport ${this.state.isZoomed ? 'zoomed' : ''}" id="diagram-vp" style="--aspect-ratio: ${aspectVal}; --origin-x: ${originX}%; --origin-y: ${originY}%; --scale: ${scaleVal};">
+                <img src="${currentState.img}" alt="${currentState.btnText || ''}">
+                ${overlaysSvg}
+                ${markersHtml}
+              </div>
+              ${hasFocus ? `
+                <button class="btn-zoom-toggle" type="button" id="btn-toggle-zoom">
+                  ${this.state.isZoomed ? this.ui.focusWhole : this.ui.focusZoom}
+                </button>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          ${legendsHtml}
+
+          ${states.length > 0 ? `<div class="state-tray">${stateButtons}</div>` : ''}
+
+          ${currentState.caption ? `
+            <div class="caption-box">
+              <p class="text-body">${currentState.caption}</p>
+            </div>
+          ` : ''}
+
+          ${states.length > 0 ? `
+            <div class="text-sm text-muted" style="text-align: center;">
+              ${allStatesSeen ? this.ui.statesDone : this.ui.stateProgress.replace('{seen}', this.state.seenStates.size).replace('{total}', states.length)}
+            </div>
+          ` : ''}
+
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-start-quiz" ${canStartQuiz ? '' : 'disabled'}>
+              ${this.ui.startQuiz}
+            </button>
+          </div>
+        `;
+
+        // Bind events
+        view.querySelectorAll('[data-state-idx]').forEach(btn => {
+          btn.onclick = () => {
+            if (btn.disabled) return;
+            const idx = parseInt(btn.dataset.stateIdx, 10);
+            if (this.state.stateIdx !== idx) {
+              this.state.stateIdx = idx;
+              this.state.isZoomed = false;
+              this.clearActiveReading();
+              if (!this.state.seenStates.has(idx)) {
+                this.startTeachReading(idx, states[idx].caption || '');
+              }
+              this.render();
+            }
+          };
+        });
+
+        const zoomBtn = document.getElementById('btn-toggle-zoom');
+        if (zoomBtn) {
+          zoomBtn.onclick = () => {
+            this.state.isZoomed = !this.state.isZoomed;
+            this.render();
+          };
+        }
+
+        const toggleLegendBtn = document.getElementById('btn-toggle-legend-expand');
+        if (toggleLegendBtn) {
+          toggleLegendBtn.onclick = () => {
+            this.state.isLegendExpanded = !this.state.isLegendExpanded;
+            this.render();
+          };
+        }
+
+        const openLegendBtn = document.getElementById('btn-open-legend');
+        if (openLegendBtn) {
+          openLegendBtn.onclick = () => {
+            this.openLegendDialog(currentState.legends);
+          };
+        }
+
+        document.getElementById('btn-start-quiz').onclick = () => {
+          const trackingNodes = this.data.tracking?.nodeIds || [];
+          if (level.noFigure && level.nodeId && trackingNodes.includes(level.nodeId)) {
+            window.CourseLearning.explore(level.nodeId);
+            this.trackTime(null);
+          }
+          this.state.questionIdx = 0;
+          this.state.quizSubStateIdx = 0;
+          this.state.quizAnswerLocked = false;
+          this.state.matchAnswers = {};
+          this.state.matchLockedRows = new Set();
+          this.state.multiSelections = new Set();
+          this.state.orderPicks = [];
+          this.state.feedback = null;
+          this.state.selectedOptId = null;
+          this.setPhase('QUIZ');
+        };
+      },
+
+      openLegendDialog(legends) {
+        const dlg = document.getElementById('legend-dialog');
+        const list = document.getElementById('legend-dlg-list');
+        const confirmBtn = document.getElementById('btn-legend-confirm');
+
+        // Only display particle sample legends in this dialog; anatomical structures with num belong to diagram pins
+        const samplesOnly = (legends || []).filter(lg => lg.sample);
+        const targetList = samplesOnly.length > 0 ? samplesOnly : (legends || []);
+
+        list.innerHTML = targetList.map(lg => {
+          let thumb = '';
+          if (lg.sample && lg.sample.img) {
+            thumb = `<img src="${lg.sample.img}" alt="${lg.name}">`;
+          } else if (lg.sample && lg.sample.pending) {
+            thumb = `<span class="text-xs text-muted" style="text-align: center; padding: 4px;">${this.ui.legendUnavailable}</span>`;
+          } else if (lg.num) {
+            thumb = `<span class="legend-num" style="font-size: calc(20px * var(--font-scale, 1));">${lg.num}</span>`;
+          } else {
+            thumb = `<span class="text-xs text-muted">${this.ui.legendUnavailable}</span>`;
+          }
+
+          return `
+            <div class="sample-item">
+              <div class="sample-img-box">
+                ${thumb}
+              </div>
+              <div style="flex: 1;">
+                <div class="title-stem">${lg.name}</div>
+                ${lg.func ? `<div class="text-sm text-muted">${lg.func}</div>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const totalLegendText = targetList.map(lg => (lg.name || '') + (lg.func || '')).join('');
+        const chars = totalLegendText.replace(/\s+/g, '').length;
+        let sec = Math.min(10, Math.max(3, Math.ceil(chars / 10)));
+
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+
+        if (this.state.legendTimer) clearInterval(this.state.legendTimer);
+        this.state.legendTimer = setInterval(() => {
+          sec--;
+          if (sec > 0) {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+          } else {
+            clearInterval(this.state.legendTimer);
+            this.state.legendTimer = null;
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = this.ui.legendReadDone;
+          }
+        }, 1000);
+
+        confirmBtn.onclick = () => {
+          if (confirmBtn.disabled) return;
+          if (this.state.legendTimer) {
+            clearInterval(this.state.legendTimer);
+            this.state.legendTimer = null;
+          }
+          dlg.close();
+          this.markLegendSeen(this.state.levelIdx, this.state.stateIdx);
+          this.render();
+        };
+
+        dlg.showModal();
+      },
+
+      renderQuiz(view, level) {
+        const q = level.questions[this.state.questionIdx];
+        this.trackTime(null);
+
+        // Handle Explain Template
+        if (q.template === 'explain') {
+          const subStates = q.states || [];
+          const qId = q.id || `explain_${this.state.levelIdx}_${this.state.questionIdx}`;
+          const seenSet = this.getExplainSeen(qId);
+          const curSub = subStates[this.state.quizSubStateIdx] || {};
+
+          // Start reading timer for current subState if not seen
+          if (subStates.length > 0 && !seenSet.has(this.state.quizSubStateIdx)) {
+            const readingKey = `explain_${qId}_${this.state.quizSubStateIdx}`;
+            if (this.state.activeReadingKey !== readingKey) {
+              const textToRead = curSub.caption || (subStates.length === 1 ? (q.body || '') : '');
+              this.startExplainReading(qId, this.state.quizSubStateIdx, textToRead);
+            }
+          }
+          
+          if (curSub.nodeId && seenSet.has(this.state.quizSubStateIdx)) {
+            window.CourseLearning.explore(curSub.nodeId);
+            this.trackTime(curSub.nodeId);
+          }
+
+          const seenCount = subStates.filter((_, idx) => seenSet.has(idx)).length;
+          const allSubStatesSeen = subStates.length > 0 && seenCount === subStates.length;
+
+          const subBtns = subStates.map((s, idx) => {
+            const isCurrent = idx === this.state.quizSubStateIdx;
+            const isSeen = seenSet.has(idx);
+            const isReading = this.state.activeReadingKey === `explain_${qId}_${idx}`;
+            let badgeText = this.ui.stateUnseen;
+            if (isSeen) badgeText = this.ui.stateSeen;
+            else if (isReading) badgeText = '閱讀中…';
+            return `
+              <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-sub-idx="${idx}">
+                <span>${s.btnText}</span>
+                <span class="badge-seen">${badgeText}</span>
+                ${isReading ? `
+                  <div class="reading-progress-track">
+                    <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
+                  </div>
+                ` : ''}
+              </button>
+            `;
+          }).join('');
+
+          view.innerHTML = `
+            <div>
+              <p class="title-stem">${q.body || ''}</p>
+            </div>
+            ${curSub.img ? `
+              <div class="diagram-region node-figure">
+                <div class="diagram-viewport" style="--aspect-ratio: ${curSub.ratio || '16 / 9'};">
+                  <img src="${curSub.img}" alt="${curSub.btnText || ''}">
+                </div>
+              </div>
+            ` : ''}
+            <div class="state-tray">${subBtns}</div>
+            ${curSub.caption ? `
+              <div class="caption-box">
+                <p class="text-body" style="white-space: pre-line;">${curSub.caption}</p>
+              </div>
+            ` : ''}
+            ${subStates.length > 1 && !allSubStatesSeen ? `
+              <div class="text-sm text-muted" style="text-align: center; margin-top: 10px;">
+                ${this.ui.stateProgress.replace('{seen}', seenCount).replace('{total}', subStates.length)}
+              </div>
+            ` : ''}
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-next-q" ${allSubStatesSeen ? '' : 'disabled'}>${this.ui.next}</button>
+            </div>
+          `;
+
+          view.querySelectorAll('[data-sub-idx]').forEach(b => {
+            b.onclick = () => {
+              const subIdx = parseInt(b.dataset.subIdx, 10);
+              if (this.state.quizSubStateIdx !== subIdx) {
+                this.state.quizSubStateIdx = subIdx;
+                this.clearActiveReading();
+                if (!seenSet.has(subIdx)) {
+                  this.startExplainReading(qId, subIdx, subStates[subIdx].caption || '');
+                }
+                this.render();
+              }
+            };
+          });
+
+          const nextBtn = document.getElementById('btn-next-q');
+          if (nextBtn) {
+            nextBtn.onclick = () => {
+              if (!allSubStatesSeen) return;
+              this.advanceQuiz(level);
+            };
+          }
+          return;
+        }
+
+        // Normal Quiz
+        const hasFigure = !q.quizNoFigure && ((q.quizFigure && q.quizFigure.img) || q.quizImgState);
+        const figImg = q.quizFigure ? q.quizFigure.img : (q.quizImgState ? level.states.find(s => s.id === q.quizImgState)?.img : null);
+        const figRatio = q.quizFigure ? q.quizFigure.ratio : (q.quizImgState ? level.states.find(s => s.id === q.quizImgState)?.ratio : '16 / 9');
+
+        let contentHtml = '';
+        if (q.mode === 'order') {
+          // Order sequence selection
+          const items = q.items || [];
+          const pickedIds = this.state.orderPicks;
+          const availableItems = items.filter(it => !pickedIds.includes(it.id));
+
+          const pickedHtml = pickedIds.map((id, idx) => {
+            const it = items.find(x => x.id === id);
+            return `
+              <div class="order-item-badge">
+                <span style="color: var(--primary); font-weight: 700;">${this.ui.orderBadge.replace('{n}', idx + 1)}</span>
+                <span>${it ? (it.label || it.text) : ''}</span>
+              </div>
+            `;
+          }).join('');
+
+          const buttonsHtml = availableItems.map(it => `
+            <button class="btn btn-block" type="button" data-order-id="${it.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+              ${it.label || it.text}
+            </button>
+          `).join('');
+
+          contentHtml = `
+            <div class="order-group">
+              <div class="order-picked-list">
+                ${pickedHtml || `<span class="text-sm text-muted" style="text-align: center; padding: 10px;">${this.ui.unselected}</span>`}
+              </div>
+              <div class="options-list">${buttonsHtml}</div>
+              ${!this.state.quizAnswerLocked && pickedIds.length > 0 ? `
+                <div class="actions-row" style="margin-top: 14px;">
+                  <button class="btn" type="button" id="btn-reset-order">${this.ui.resetOrder}</button>
+                  ${pickedIds.length === items.length ? `
+                    <button class="btn btn-primary" type="button" id="btn-submit-order">${this.ui.submit}</button>
+                  ` : ''}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        } else if (q.template === 'match' || q.mode === 'rows') {
+          // Rows matching question
+          const rowsHtml = (q.items || []).map(it => {
+            const isLocked = this.state.matchLockedRows.has(it.id);
+            const selectedTarget = this.state.matchAnswers[it.id];
+            const targetBtns = (q.targets || []).map(tg => `
+              <button class="btn-target ${selectedTarget === tg.id ? 'active' : ''}" type="button" data-item-id="${it.id}" data-target-id="${tg.id}" ${isLocked ? 'disabled' : ''}>
+                ${tg.label}
+              </button>
+            `).join('');
+
+            return `
+              <div class="match-card ${isLocked ? 'locked' : ''}">
+                <div class="match-stem">${isLocked ? '✔ ' : ''}${it.text}</div>
+                <div class="match-targets">${targetBtns}</div>
+              </div>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="match-group">${rowsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-match" style="margin-top: 14px;">${this.ui.submit}</button>
+            ` : ''}
+          `;
+        } else if (q.mode === 'multi') {
+          // Multi choice
+          const needed = q.selectCount || 2;
+          const optionsHtml = (q.options || []).map(opt => {
+            const isSel = this.state.multiSelections.has(opt.id);
+            let stateCls = isSel ? 'selected' : '';
+            if (this.state.quizAnswerLocked) {
+              if (Array.isArray(q.answer) && q.answer.includes(opt.id)) stateCls = 'correct';
+              else if (isSel) stateCls = 'wrong';
+            }
+            return `
+              <button class="btn btn-option ${stateCls}" type="button" data-opt-id="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+                ${opt.text}
+              </button>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="options-list">${optionsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-multi" style="margin-top: 14px;" ${this.state.multiSelections.size === needed ? '' : 'disabled'}>
+                ${this.ui.submit}
+              </button>
+            ` : ''}
+          `;
+        } else {
+          // Single choice
+          if (!this.state.currentOptions || this.state.currentOptions.qid !== q.id) {
+            const shuffled = [...(q.options || [])].sort(() => Math.random() - 0.5);
+            this.state.currentOptions = shuffled;
+            this.state.currentOptions.qid = q.id;
+          }
+
+          const optionsHtml = this.state.currentOptions.map(opt => {
+            let stateCls = '';
+            if (this.state.quizAnswerLocked) {
+              if (opt.id === q.answer) stateCls = 'correct';
+              else if (opt.id === this.state.selectedOptId) stateCls = 'wrong';
+            } else if (this.state.selectedOptId === opt.id) {
+              stateCls = 'selected';
+            }
+            return `
+              <button class="btn btn-option ${stateCls}" type="button" data-opt-id="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+                ${opt.text}
+              </button>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="options-list">${optionsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-choice" style="margin-top: 14px;" ${this.state.selectedOptId ? '' : 'disabled'}>
+                ${this.ui.submit}
+              </button>
+            ` : ''}
+          `;
+        }
+
+        // Feedback box
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        const quizMarkers = (q.quizFigure && q.quizFigure.markers) || q.markers || [];
+        const quizMarkersHtml = quizMarkers.map(m => `
+          <span class="png-marker-pin" style="left: ${m.x}%; top: ${m.y}%;">${m.num}</span>
+        `).join('');
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${q.prompt || q.stem || ''}</h3>
+          </div>
+
+          ${hasFigure && figImg ? `
+            <div class="diagram-region node-figure">
+              <div class="diagram-viewport" style="--aspect-ratio: ${figRatio || '16 / 9'};">
+                <img src="${figImg}" alt="">
+                ${quizMarkersHtml}
+              </div>
+            </div>
+          ` : ''}
+
+          ${contentHtml}
+          ${feedbackHtml}
+
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-q">${this.ui.next}</button>
+              ` : `
+                <div class="actions-row">
+                  ${q.hint ? `<button class="btn" type="button" id="btn-hint">${this.ui.hint}</button>` : ''}
+                  <button class="btn btn-primary" type="button" id="btn-retry">${this.ui.retry}</button>
+                </div>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        // Bind match interactions
+        view.querySelectorAll('.btn-target').forEach(tb => {
+          tb.onclick = () => {
+            const itemId = tb.dataset.itemId;
+            const targetId = tb.dataset.targetId;
+            this.state.matchAnswers[itemId] = targetId;
+            this.render();
+          };
+        });
+
+        const submitMatchBtn = document.getElementById('btn-submit-match');
+        if (submitMatchBtn) {
+          submitMatchBtn.onclick = () => {
+            this.submitMatchAnswer(q, level);
+          };
+        }
+
+        // Bind multi interactions
+        view.querySelectorAll('[data-opt-id]').forEach(ob => {
+          ob.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            if (q.mode === 'multi') {
+              const optId = ob.dataset.optId;
+              if (this.state.multiSelections.has(optId)) {
+                this.state.multiSelections.delete(optId);
+              } else if (this.state.multiSelections.size < (q.selectCount || 2)) {
+                this.state.multiSelections.add(optId);
+              }
+              this.render();
+            } else {
+              this.state.selectedOptId = ob.dataset.optId;
+              this.render();
+            }
+          };
+        });
+
+        const submitChoiceBtn = document.getElementById('btn-submit-choice');
+        if (submitChoiceBtn) {
+          submitChoiceBtn.onclick = () => {
+            if (!this.state.selectedOptId || this.state.quizAnswerLocked) return;
+            this.submitChoiceAnswer(q, this.state.selectedOptId, level);
+          };
+        }
+
+        const submitMultiBtn = document.getElementById('btn-submit-multi');
+        if (submitMultiBtn) {
+          submitMultiBtn.onclick = () => {
+            this.submitMultiAnswer(q, level);
+          };
+        }
+
+        // Bind order interactions
+        view.querySelectorAll('[data-order-id]').forEach(btn => {
+          btn.onclick = () => {
+            this.state.orderPicks.push(btn.dataset.orderId);
+            this.render();
+          };
+        });
+
+        const resetOrderBtn = document.getElementById('btn-reset-order');
+        if (resetOrderBtn) {
+          resetOrderBtn.onclick = () => {
+            this.state.orderPicks = [];
+            this.render();
+          };
+        }
+
+        const submitOrderBtn = document.getElementById('btn-submit-order');
+        if (submitOrderBtn) {
+          submitOrderBtn.onclick = () => {
+            this.submitOrderAnswer(q, level);
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedOptId = null;
+            this.state.feedback = null;
+            this.state.multiSelections = new Set();
+            this.state.orderPicks = [];
+            this.render();
+          };
+        }
+
+        const hintBtn = document.getElementById('btn-hint');
+        if (hintBtn) {
+          hintBtn.onclick = () => {
+            window.CourseLearning.hint(q.id);
+            this.state.feedback = { type: 'hint', text: `${this.ui.hintLabel} ${q.hint}` };
+            this.render();
+          };
+        }
+
+        const nextQBtn = document.getElementById('btn-next-q');
+        if (nextQBtn) {
+          nextQBtn.onclick = () => {
+            this.advanceQuiz(level);
+          };
+        }
+      },
+
+      submitChoiceAnswer(q, selectedOptId, level) {
+        this.state.selectedOptId = selectedOptId;
+        this.state.quizAnswerLocked = true;
+        const isCorrect = selectedOptId === q.answer;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          let correctText = q.feedbackCorrect || this.ui.correct;
+          if (correctText === this.ui.correct && Array.isArray(this.data.encouragement.correct)) {
+            correctText = this.data.encouragement.correct[Math.floor(Math.random() * this.data.encouragement.correct.length)];
+          }
+          this.state.feedback = { type: 'correct', text: correctText };
+        } else {
+          const wrongText = (q.byOption && q.byOption[selectedOptId]) || q.feedbackWrong || this.ui.retry;
+          this.state.feedback = { type: 'wrong', text: wrongText };
+        }
+        this.render();
+      },
+
+      submitMultiAnswer(q, level) {
+        const userAnswers = Array.from(this.state.multiSelections).sort();
+        const expectedAnswers = Array.isArray(q.answer) ? [...q.answer].sort() : [];
+        const isCorrect = userAnswers.length === expectedAnswers.length && userAnswers.every((val, idx) => val === expectedAnswers[idx]);
+        
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: q.feedbackWrong || this.ui.retry };
+        }
+        this.render();
+      },
+
+      submitOrderAnswer(q, level) {
+        const expected = q.answer || [];
+        const actual = this.state.orderPicks;
+        const isCorrect = expected.length === actual.length && expected.every((val, idx) => val === actual[idx]);
+
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: q.feedbackWrong || this.ui.retry };
+        }
+        this.render();
+      },
+
+      submitMatchAnswer(q, level) {
+        let allCorrect = true;
+        let wrongFeedback = q.feedbackWrong;
+
+        (q.items || []).forEach(it => {
+          const expected = q.answer[it.id];
+          const actual = this.state.matchAnswers[it.id];
+          if (expected === actual) {
+            this.state.matchLockedRows.add(it.id);
+          } else {
+            allCorrect = false;
+            if (q.byItem && q.byItem[it.id]) wrongFeedback = q.byItem[it.id];
+          }
+        });
+
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, allCorrect);
+
+        if (allCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: wrongFeedback };
+        }
+        this.render();
+      },
+
+      advanceQuiz(level) {
+        this.state.questionIdx++;
+        this.state.quizAnswerLocked = false;
+        this.state.feedback = null;
+        this.state.quizSubStateIdx = 0;
+        this.state.matchAnswers = {};
+        this.state.matchLockedRows = new Set();
+        this.state.multiSelections = new Set();
+        this.state.orderPicks = [];
+        this.state.currentOptions = [];
+
+        if (this.state.questionIdx >= level.questions.length) {
+          this.setPhase('LEVEL_PASS');
+        } else {
+          this.render();
+        }
+      },
+
+      renderLevelPass(view) {
+        this.trackTime(null);
+        const level = this.data.levels[this.state.levelIdx];
+        const cheers = this.data.encouragement.levelPass || [];
+        const cheerText = cheers[Math.floor(Math.random() * cheers.length)] || '';
+
+        view.innerHTML = `
+          <div style="margin-top: 20px;">
+            <h2 class="title-lg" style="color: var(--success);">${this.ui.passTitle.replace('{n}', this.state.levelIdx + 1)}</h2>
+          </div>
+          <div class="caption-box" style="margin-top: 16px;">
+            <span style="font-weight: 700;">${this.ui.summaryLabel}</span>
+            <p class="text-body" style="margin-top: 4px;">${level.summary}</p>
+          </div>
+          <div class="feedback-box correct" style="margin-top: 14px;">
+            <p class="text-body">${cheerText}</p>
+          </div>
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-next-level">${this.ui.nextLevel}</button>
+          </div>
+        `;
+
+        document.getElementById('btn-next-level').onclick = () => {
+          if (this.state.levelIdx + 1 < this.data.levels.length) {
+            this.startLevel(this.state.levelIdx + 1);
+          } else {
+            // All levels finished, proceed to ending or truefalse
+            if (this.data.ending && this.data.ending.steps && this.data.ending.steps.length > 0) {
+              this.state.endingStepIdx = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.feedback = null;
+              this.setPhase('ENDING');
+            } else if (this.data.truefalse && this.data.truefalse.length > 0) {
+              this.state.tfIdx = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.feedback = null;
+              this.setPhase('TRUEFALSE');
+            } else {
+              this.startAssessment('foundation');
+            }
+          }
+        };
+      },
+
+      renderEnding(view) {
+        const steps = this.data.ending.steps || [];
+        const step = steps[this.state.endingStepIdx];
+
+        if (!step) {
+          // Complete ending
+          view.innerHTML = `
+            <div style="margin-top: 24px;">
+              <h2 class="title-lg">${this.ui.endingDone}</h2>
+            </div>
+            <div class="caption-box" style="margin-top: 16px;">
+              <p class="text-body">${this.data.ending.completeMessage || ''}</p>
+            </div>
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-to-tf">${this.ui.truefalse}</button>
+            </div>
+          `;
+          document.getElementById('btn-to-tf').onclick = () => {
+            this.state.tfIdx = 0;
+            this.state.quizAnswerLocked = false;
+            this.state.feedback = null;
+            this.setPhase('TRUEFALSE');
+          };
+          return;
+        }
+
+        const optionsHtml = (step.options || []).map(opt => {
+          let cls = '';
+          if (this.state.quizAnswerLocked) {
+            if (opt.id === step.answer) cls = 'correct';
+            else if (opt.id === this.state.selectedEndOptId) cls = 'wrong';
+          } else if (this.state.selectedEndOptId === opt.id) {
+            cls = 'selected';
+          }
+          return `
+            <button class="btn btn-option ${cls}" type="button" data-end-opt="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+              ${opt.text}
+            </button>
+          `;
+        }).join('');
+
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}" style="margin-top: 14px;">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${step.prompt}</h3>
+          </div>
+          <div class="options-list" style="margin-top: 14px;">${optionsHtml}</div>
+          ${!this.state.quizAnswerLocked ? `
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-ending" style="margin-top: 14px;" ${this.state.selectedEndOptId ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          ` : ''}
+          ${feedbackHtml}
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-ending">${this.ui.next}</button>
+              ` : `
+                <button class="btn btn-primary btn-block" type="button" id="btn-retry-ending">${this.ui.retry}</button>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        view.querySelectorAll('[data-end-opt]').forEach(b => {
+          b.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            this.state.selectedEndOptId = b.dataset.endOpt;
+            this.render();
+          };
+        });
+
+        const submitEndingBtn = document.getElementById('btn-submit-ending');
+        if (submitEndingBtn) {
+          submitEndingBtn.onclick = () => {
+            if (!this.state.selectedEndOptId || this.state.quizAnswerLocked) return;
+            const optId = this.state.selectedEndOptId;
+            this.state.quizAnswerLocked = true;
+            const ok = optId === step.answer;
+            window.CourseLearning.answer(step.id, ok);
+            this.state.feedback = {
+              type: ok ? 'correct' : 'wrong',
+              text: ok ? (step.feedbackCorrect || this.ui.correct) : (step.feedbackWrong || this.ui.retry)
+            };
+            this.render();
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry-ending', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry-ending');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedEndOptId = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+
+        const nextBtn = document.getElementById('btn-next-ending');
+        if (nextBtn) {
+          nextBtn.onclick = () => {
+            this.state.endingStepIdx++;
+            this.state.quizAnswerLocked = false;
+            this.state.selectedEndOptId = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+      },
+
+      renderTrueFalse(view) {
+        const tfList = this.data.truefalse || [];
+        const tf = tfList[this.state.tfIdx];
+
+        if (!tf) {
+          // Completed TrueFalse
+          view.innerHTML = `
+            <div style="margin-top: 24px;">
+              <h2 class="title-lg">${this.ui.transition}</h2>
+            </div>
+            <div class="caption-box" style="margin-top: 16px;">
+              <p class="text-body">${this.data.assessment.intro || ''}</p>
+            </div>
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-start-ass">${this.ui.beginAssessment}</button>
+            </div>
+          `;
+          document.getElementById('btn-start-ass').onclick = () => {
+            this.startAssessment('foundation');
+          };
+          return;
+        }
+
+        const isTrueSelected = this.state.selectedTfVal === true;
+        const isFalseSelected = this.state.selectedTfVal === false;
+
+        let trueCls = isTrueSelected ? 'selected' : '';
+        let falseCls = isFalseSelected ? 'selected' : '';
+
+        if (this.state.quizAnswerLocked) {
+          if (tf.answer === true) trueCls = 'correct';
+          else if (isTrueSelected) trueCls = 'wrong';
+
+          if (tf.answer === false) falseCls = 'correct';
+          else if (isFalseSelected) falseCls = 'wrong';
+        }
+
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}" style="margin-top: 14px;">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${tf.prompt}</h3>
+          </div>
+          <div class="actions-row" style="margin-top: 20px;">
+            <button class="btn btn-block ${trueCls}" type="button" data-tf-val="true" ${this.state.quizAnswerLocked ? 'disabled' : ''} style="min-height: 52px; font-size: calc(20px * var(--font-scale, 1));">
+              ${this.ui.yes}
+            </button>
+            <button class="btn btn-block ${falseCls}" type="button" data-tf-val="false" ${this.state.quizAnswerLocked ? 'disabled' : ''} style="min-height: 52px; font-size: calc(20px * var(--font-scale, 1));">
+              ${this.ui.no}
+            </button>
+          </div>
+          ${!this.state.quizAnswerLocked ? `
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-tf" style="margin-top: 16px;" ${this.state.selectedTfVal !== null && this.state.selectedTfVal !== undefined ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          ` : ''}
+          ${feedbackHtml}
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-tf">${this.ui.next}</button>
+              ` : `
+                <button class="btn btn-primary btn-block" type="button" id="btn-retry-tf">${this.ui.retry}</button>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        view.querySelectorAll('[data-tf-val]').forEach(b => {
+          b.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            this.state.selectedTfVal = (b.dataset.tfVal === 'true');
+            this.render();
+          };
+        });
+
+        const submitTfBtn = document.getElementById('btn-submit-tf');
+        if (submitTfBtn) {
+          submitTfBtn.onclick = () => {
+            if (this.state.selectedTfVal === null || this.state.selectedTfVal === undefined || this.state.quizAnswerLocked) return;
+            const val = this.state.selectedTfVal;
+            this.state.quizAnswerLocked = true;
+            const ok = val === tf.answer;
+            window.CourseLearning.answer(tf.id, ok);
+            this.state.feedback = {
+              type: ok ? 'correct' : 'wrong',
+              text: ok ? (tf.feedbackCorrect || this.ui.correct) : (tf.feedbackWrong || this.ui.retry)
+            };
+            this.render();
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry-tf', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry-tf');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedTfVal = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+
+        const nextBtn = document.getElementById('btn-next-tf');
+        if (nextBtn) {
+          nextBtn.onclick = () => {
+            this.state.tfIdx++;
+            this.state.quizAnswerLocked = false;
+            this.state.selectedTfVal = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+      },
+
+      startAssessment(stage) {
+        this.state.assStage = stage;
+        this.state.assIdx = 0;
+        this.state.selectedAssOptId = null;
+        this.state.quizAnswerLocked = false;
+        this.setPhase('ASSESSMENT');
+        this.startAssTimer();
+      },
+
+      startAssTimer() {
+        if (this.state.assTimer) clearInterval(this.state.assTimer);
+        const list = this.state.assStage === 'case' ? this.data.assessment.case : this.data.assessment.foundation;
+        const q = list[this.state.assIdx];
+        if (!q) return;
+
+        this.state.assTimeTotal = q.timeLimit || 60;
+        this.state.assTimeLeft = this.state.assTimeTotal;
+        this.updateTimerUI();
+
+        this.state.assTimer = setInterval(() => {
+          this.state.assTimeLeft--;
+          this.updateTimerUI();
+          if (this.state.assTimeLeft <= 0) {
+            clearInterval(this.state.assTimer);
+            if (this.state.selectedAssOptId) {
+              this.submitAssessmentChoice(q, this.state.selectedAssOptId);
+            } else {
+              this.handleAssTimeout(q);
+            }
+          }
+        }, 1000);
+      },
+
+      updateTimerUI() {
+        const fill = document.getElementById('timer-fill');
+        const txt = document.getElementById('timer-text');
+        if (!fill || !txt) return;
+
+        const pct = Math.max(0, (this.state.assTimeLeft / this.state.assTimeTotal) * 100);
+        fill.style.width = `${pct}%`;
+        txt.textContent = this.ui.timeRemaining.replace('{n}', Math.max(0, this.state.assTimeLeft));
+
+        fill.classList.remove('warn', 'danger');
+        if (pct < 25) fill.classList.add('danger');
+        else if (pct < 50) fill.classList.add('warn');
+      },
+
+      handleAssTimeout(q) {
+        window.CourseLearning.answer(q.id, false);
+        this.showMsgDialog(this.ui.assessmentTimeout, () => {
+          this.restartAssStage();
+        });
+      },
+
+      handleAssWrong(q) {
+        window.CourseLearning.answer(q.id, false);
+        const failMsg = this.data.assessment.failMessage || this.ui.retry;
+        this.showMsgDialog(failMsg, () => {
+          this.restartAssStage();
+        });
+      },
+
+      restartAssStage() {
+        this.state.assIdx = 0;
+        this.state.selectedAssOptId = null;
+        this.state.currentOptions = [];
+        this.render();
+        this.startAssTimer();
+      },
+
+      renderAssessment(view, q) {
+        if (!this.state.currentOptions || this.state.currentOptions.qid !== q.id) {
+          const shuffled = [...(q.options || [])].sort(() => Math.random() - 0.5);
+          this.state.currentOptions = shuffled;
+          this.state.currentOptions.qid = q.id;
+        }
+
+        const optionsHtml = this.state.currentOptions.map(opt => {
+          const isSelected = this.state.selectedAssOptId === opt.id;
+          return `
+            <button class="btn btn-option ${isSelected ? 'selected' : ''}" type="button" data-ass-opt="${opt.id}">
+              ${opt.text}
+            </button>
+          `;
+        }).join('');
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${q.prompt}</h3>
+          </div>
+          <div class="options-list" style="margin-top: 16px;">${optionsHtml}</div>
+          <div class="actions-bar" style="margin-top: 16px;">
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-ass" ${this.state.selectedAssOptId ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          </div>
+        `;
+
+        view.querySelectorAll('[data-ass-opt]').forEach(b => {
+          b.onclick = () => {
+            this.state.selectedAssOptId = b.dataset.assOpt;
+            this.render();
+          };
+        });
+
+        const submitAssBtn = document.getElementById('btn-submit-ass');
+        if (submitAssBtn) {
+          submitAssBtn.onclick = () => {
+            if (!this.state.selectedAssOptId) return;
+            this.submitAssessmentChoice(q, this.state.selectedAssOptId);
+          };
+        }
+      },
+
+      submitAssessmentChoice(q, optId) {
+        clearInterval(this.state.assTimer);
+        const ok = optId === q.answer;
+        if (ok) {
+          window.CourseLearning.answer(q.id, true);
+          this.advanceAssessment();
+        } else {
+          this.handleAssWrong(q);
+        }
+      },
+
+      advanceAssessment() {
+        const isCase = this.state.assStage === 'case';
+        const list = isCase ? this.data.assessment.case : this.data.assessment.foundation;
+        this.state.assIdx++;
+        this.state.selectedAssOptId = null;
+
+        if (this.state.assIdx >= list.length) {
+          if (!isCase) {
+            // Foundation passed!
+            this.showMsgDialog(this.data.assessment.passMessage, () => {
+              this.startAssessment('case');
+            });
+          } else {
+            // Case passed! Complete!
+            this.showMsgDialog(this.data.assessment.passMessage, () => {
+              this.setPhase('COMPLETE');
+            });
+          }
+        } else {
+          this.render();
+          this.startAssTimer();
+        }
+      },
+
+      renderComplete(view) {
+        this.trackTime(null);
+        window.CourseLearning.complete();
+
+        view.innerHTML = `
+          <div style="margin-top: 32px; text-align: center;">
+            <div style="font-size: calc(48px * var(--font-scale, 1));">🎉</div>
+            <h2 class="title-lg" style="color: var(--primary); margin-top: 12px;">${this.ui.complete}</h2>
+          </div>
+          <div class="caption-box" style="margin-top: 20px;">
+            <p class="text-body" style="font-size: calc(19px * var(--font-scale, 1)); text-align: center;">
+              ${this.data.encouragement.finish}
+            </p>
+          </div>
+        `;
+      },
+
+      showMsgDialog(msg, onConfirm) {
+        const dlg = document.getElementById('msg-dialog');
+        const content = document.getElementById('msg-dlg-content');
+        const confirmBtn = document.getElementById('btn-msg-confirm');
+        content.textContent = msg;
+        confirmBtn.onclick = () => {
+          dlg.close();
+          if (onConfirm) onConfirm();
+        };
+        dlg.showModal();
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          App.clearActiveReading();
+          App.render();
+        }
+      });
+      App.init();
+    });
+  </script>
+</body>
+</html>

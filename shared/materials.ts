@@ -98,6 +98,25 @@ export const ALL_MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'electrolyte-balance-v1': { label: "電解質、滲透與離子平衡｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 15, note: "診斷含節點確認題及先備6＋病例5；獨立題庫僅收兩階段11題；教師核可v3.2腳本" },
   'acid-base-homeostasis-v1': { label: "酸鹼緩衝與肺腎調節｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 15, note: "診斷含5確認題（ID為n1-micro至n4-micro及n6-micro）＋10題配對池；每輪5組兩層考核；獨立題庫另採核可6＋5題" },
   'blood-flow-routes-v1': { label: "血流路徑動畫｜互動資訊圖表", tracking: 'interactive', nodeTotal: 6, questionTotal: 11, note: "先備 6 題逐題解鎖；病例 5 題全對才通關" },
+  // Antigravity 17 單元（2026-11-04）；完成規則依各教材完整流程。
+  'nephron-circulation-ag1': { label: '腎元、腎血流與近腎絲球器｜互動資訊圖表', tracking: 'interactive', nodeTotal: 17, questionTotal: 30, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'filtration-clearance-ag1': { label: '腎絲球過濾與清除率｜互動資訊圖表', tracking: 'interactive', nodeTotal: 11, questionTotal: 29, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'tubular-handling-ag1': { label: '腎小管再吸收、分泌與排泄｜互動資訊圖表', tracking: 'interactive', nodeTotal: 13, questionTotal: 30, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'urine-concentration-ag1': { label: '逆流機制與尿液濃縮｜互動資訊圖表', tracking: 'interactive', nodeTotal: 12, questionTotal: 29, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'fluid-compartments-ag1': { label: '體液分布與細胞內外液｜互動資訊圖表', tracking: 'interactive', nodeTotal: 6, questionTotal: 29, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'electrolyte-balance-ag1': { label: '電解質、滲透與離子平衡｜互動資訊圖表', tracking: 'interactive', nodeTotal: 11, questionTotal: 30, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'water-sodium-regulation-ag1': { label: '水分收支與鈉水調節｜互動資訊圖表', tracking: 'interactive', nodeTotal: 14, questionTotal: 29, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'acid-base-homeostasis-ag1': { label: '酸鹼緩衝與肺腎調節｜互動資訊圖表', tracking: 'interactive', nodeTotal: 10, questionTotal: 31, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'airway-structure-ag1': { label: '呼吸道的構造｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'lungs-pleura-ag1': { label: '肺與胸膜｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'breathing-mechanics-ag1': { label: '肺通氣與呼吸力學｜互動資訊圖表', tracking: 'interactive', nodeTotal: 16, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'lung-function-ag1': { label: '肺容積與肺功能｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'gas-exchange-ag1': { label: '氣體交換｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'o2-co2-transport-ag1': { label: '氧與二氧化碳的運輸｜互動資訊圖表', tracking: 'interactive', nodeTotal: 18, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'respiratory-control-ag1': { label: '呼吸調節｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'kidney-anatomy-ag1': { label: '腎臟位置、構造與功能｜互動資訊圖表', tracking: 'interactive', nodeTotal: 20, questionTotal: 30, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  'urinary-route-micturition-ag1': { label: '尿液通路與排尿控制｜互動資訊圖表', tracking: 'interactive', nodeTotal: 17, questionTotal: 32, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+
 };
 
 // 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。

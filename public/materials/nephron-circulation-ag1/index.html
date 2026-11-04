@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>腎元、腎血流與近腎絲球器</title>
+  <style>
+    :root {
+      --font-scale: 1;
+      --btn-h: 44px;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --error: #b91c1c;
+      --error-bg: #fef2f2;
+      --error-border: #fca5a5;
+      --warning: #b45309;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --bg-card: #ffffff;
+      --bg-app: #f8fafc;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      min-width: 320px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 25px rgba(0,0,0,0.06);
+      overflow-x: hidden;
+    }
+    /* Typography strict scaling */
+    .title-lg {
+      font-size: calc(22px * var(--font-scale, 1));
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .title-stem {
+      font-size: calc(20px * var(--font-scale, 1));
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .text-body {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.6;
+      margin: 0;
+    }
+    .text-sm {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.5;
+    }
+    .text-xs {
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.4;
+    }
+    .text-muted {
+      color: var(--text-muted);
+    }
+    /* Top Bar & Progress */
+    .header-bar {
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .header-label {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .header-step {
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    /* Timer */
+    .timer-wrap {
+      margin-top: 6px;
+    }
+    .timer-track {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .timer-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 100%;
+      transition: width 0.1s linear, background-color 0.3s ease;
+    }
+    .timer-fill.warn { background: var(--warning); }
+    .timer-fill.danger { background: var(--error); }
+    .timer-text {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-align: right;
+    }
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* Buttons */
+    button {
+      font-family: inherit;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .btn {
+      min-height: var(--btn-h);
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      user-select: none;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-primary:not(:disabled):hover {
+      background: var(--primary-dark);
+    }
+    .btn-block {
+      width: 100%;
+    }
+    /* State Buttons Tray */
+    .state-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-state {
+      flex: 1 1 calc(50% - 6px);
+      min-width: 110px;
+      min-height: 48px;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .btn-state.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+    }
+    .btn-state:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      border-color: var(--border-light);
+      background: #f8fafc;
+    }
+    .badge-seen {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .btn-state.seen .badge-seen {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    @keyframes readingFill {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    .reading-progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(2, 132, 199, 0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .reading-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+    }
+    .btn.selected {
+      background: var(--primary-light) !important;
+      border-color: var(--primary) !important;
+      color: var(--primary-dark) !important;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+      font-weight: 700;
+    }
+    /* Diagram Container - Anti Deformation */
+    .diagram-region {
+      position: relative;
+      width: 100%;
+      background: #f8fafc;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+    .diagram-viewport {
+      position: relative;
+      width: auto;
+      max-width: 100%;
+      max-height: 48vh;
+      aspect-ratio: var(--aspect-ratio, 16 / 9);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .diagram-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .diagram-viewport.zoomed {
+      transform-origin: var(--origin-x, 50%) var(--origin-y, 50%);
+      transform: scale(var(--scale, 2.2));
+    }
+    .overlay-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .btn-zoom-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      min-height: 44px;
+      padding: 8px 14px;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-main);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Caption & Callout */
+    .caption-box {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-main);
+      border-left: 4px solid var(--primary);
+      line-height: 1.5;
+    }
+    /* Legends & Samples */
+    .legends-container {
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .legend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .legend-title {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .legend-notice {
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--warning);
+      font-weight: 600;
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .legend-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      font-size: calc(18px * var(--font-scale, 1));
+    }
+    .legend-row.highlight {
+      background: #fef9c3;
+      border-color: #fde047;
+      font-weight: 700;
+    }
+    .legend-num {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 22px;
+      text-align: center;
+    }
+    .legend-name {
+      font-weight: 600;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    /* Marker Pin */
+    .png-marker-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: rgba(2, 132, 199, 0.72);
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(1px);
+      pointer-events: none;
+      z-index: 5;
+      line-height: 1;
+    }
+    .legend-sample-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .legend-sample-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .legend-sample-thumb.pending {
+      background: #f1f5f9;
+      font-size: calc(18px * var(--font-scale, 1));
+      color: var(--text-muted);
+      padding: 2px;
+      text-align: center;
+      font-weight: 500;
+    }
+    /* Question Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-option {
+      width: 100%;
+      text-align: left;
+      justify-content: flex-start;
+      padding: 12px 14px;
+      white-space: normal;
+      word-break: break-word;
+      font-size: calc(18px * var(--font-scale, 1));
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+    .btn-option.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+    .btn-option.correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success);
+      font-weight: 700;
+    }
+    .btn-option.wrong {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+    /* Matching Rows */
+    .match-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .match-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .match-card.locked {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+    .match-stem {
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .match-targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-target {
+      flex: 1 1 calc(50% - 6px);
+      min-height: 48px;
+      font-size: calc(18px * var(--font-scale, 1));
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .btn-target.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .match-card.locked .btn-target.active {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+    /* Order Items */
+    .order-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .order-picked-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      min-height: 60px;
+    }
+    .order-item-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+    }
+    /* Feedback Box */
+    .feedback-box {
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.5;
+    }
+    .feedback-box.correct {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success);
+    }
+    .feedback-box.wrong {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: var(--error);
+    }
+    .feedback-box.hint {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: var(--warning);
+    }
+    /* Modal Dialog */
+    dialog.modal-sheet {
+      border: none;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+      box-sizing: border-box;
+      background: #ffffff;
+      margin: auto;
+    }
+    dialog.modal-sheet::backdrop {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-samples-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 50vh;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    .sample-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+    }
+    .sample-img-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .sample-img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    /* Actions Bar */
+    .actions-bar {
+      margin-top: auto;
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .actions-row {
+      display: flex;
+      gap: 10px;
+    }
+    .actions-row > * {
+      flex: 1;
+    }
+  </style>
+  <script src="../course-learning.js"></script>
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <!-- Header -->
+    <header class="header-bar" id="app-header">
+      <div class="header-top">
+        <span class="header-label" id="hdr-stage">載入中</span>
+        <span class="header-step" id="hdr-step"></span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="hdr-progress"></div>
+      </div>
+      <div class="timer-wrap" id="timer-box" style="display: none;">
+        <div class="timer-track">
+          <div class="timer-fill" id="timer-fill"></div>
+        </div>
+        <div class="timer-text" id="timer-text">剩下 0 秒</div>
+      </div>
+    </header>
+
+    <!-- Main View Area -->
+    <main class="main-content" id="app-view">
+      <!-- Dynamic views will render here -->
+    </main>
+
+    <!-- Legend Sample Dialog -->
+    <dialog class="modal-sheet" id="legend-dialog">
+      <div class="modal-body">
+        <h3 class="title-stem" id="legend-dlg-title">放大圖例</h3>
+        <p class="text-sm text-muted" id="legend-dlg-hint">請查看全部圖例，再按「圖例看完了」。</p>
+        <div class="modal-samples-list" id="legend-dlg-list"></div>
+        <button class="btn btn-primary btn-block" type="button" id="btn-legend-confirm">圖例看完了</button>
+      </div>
+    </dialog>
+
+    <!-- Fail / Message Dialog -->
+    <dialog class="modal-sheet" id="msg-dialog">
+      <div class="modal-body">
+        <h3 class="title-stem" id="msg-dlg-title">提示</h3>
+        <p class="text-body" id="msg-dlg-content"></p>
+        <button class="btn btn-primary btn-block" type="button" id="btn-msg-confirm">確定</button>
+      </div>
+    </dialog>
+  </div>
+
+  <script>
+    // Embedded JSON data as single source of truth
+    const DATA = {"title": "腎元、腎血流與近腎絲球器", "levels": [{"id": "L1", "title": "腎元由哪兩部分組成？", "summary": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。", "items": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。", "states": [{"id": "p1", "btnText": "腎小體", "img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "caption": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊。", "highlightNums": ["1", "2", "3", "4"], "legends": [{"num": "1", "name": "腎小體", "func": ""}, {"num": "2", "name": "腎小管", "func": ""}, {"num": "3", "name": "腎絲球", "func": ""}, {"num": "4", "name": "鮑氏囊", "func": ""}, {"num": "5", "name": "近曲小管", "func": ""}, {"num": "6", "name": "亨利氏環", "func": ""}, {"num": "7", "name": "遠曲小管", "func": ""}, {"num": "8", "name": "集尿管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3384], "items": [{"pin": 1, "name": "腎小體", "type": "region", "color": "blue", "shapes": [[[688.5451, 207.8894], [771.5894, 217.5176], [867.8726, 296.9505], [932.8637, 394.4363], [913.2861, 529.2314], [844.7646, 637.5489], [761.5599, 659.072], [653.8832, 659.0319], [535.1941, 606.4177], [459.331, 553.8034], [436.0826, 464.4415], [456.5428, 353.0951], [458.9298, 284.5742], [525.1245, 247.8666], [586.505, 212.3625]]]}, {"pin": 3, "name": "腎絲球", "type": "region", "color": "blue", "shapes": [[[661.0643, 259.1196], [775.4006, 281.9866], [819.9316, 339.756], [862.0555, 402.3394], [861.895, 490.197], [821.5162, 553.984], [712.6159, 582.8686], [624.5168, 576.7106], [565.7841, 526.5435], [563.2366, 453.1283], [565.5032, 356.465]]]}, {"pin": 4, "name": "鮑氏囊", "type": "arrow", "color": "blue", "paths": [[[285.6802, 224.3376], [530.7209, 273.923]]]}]}, "focusSource": "region", "focus": [0.138, 0.0314, 0.5787, 0.2248], "nodeId": "nephron-circulation-node-L1-p1"}, {"id": "p5", "btnText": "近曲小管", "img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "caption": "近曲小管為有刷狀緣的立方上皮；遠曲小管立方上皮但無明顯微絨毛。", "highlightNums": ["5", "7"], "legends": [{"num": "1", "name": "腎小體", "func": ""}, {"num": "2", "name": "腎小管", "func": ""}, {"num": "3", "name": "腎絲球", "func": ""}, {"num": "4", "name": "鮑氏囊", "func": ""}, {"num": "5", "name": "近曲小管", "func": ""}, {"num": "6", "name": "亨利氏環", "func": ""}, {"num": "7", "name": "遠曲小管", "func": ""}, {"num": "8", "name": "集尿管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3384], "items": [{"pin": 5, "name": "近曲小管", "type": "arrow", "color": "blue", "paths": [[[49.987, 905.4342], [357.2507, 675.3999]]]}, {"pin": 7, "name": "遠曲小管", "type": "arrow", "color": "blue", "paths": [[[1169.6, 180.6496], [1082.8248, 589.8892]]]}]}, "focusSource": "pin", "focus": [0.0, 0.0, 0.8494, 0.3296], "nodeId": "nephron-circulation-node-L1-p5"}, {"id": "p6", "btnText": "亨利氏環", "img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "caption": "亨利氏環薄段為扁平上皮", "highlightNums": ["6"], "legends": [{"num": "1", "name": "腎小體", "func": ""}, {"num": "2", "name": "腎小管", "func": ""}, {"num": "3", "name": "腎絲球", "func": ""}, {"num": "4", "name": "鮑氏囊", "func": ""}, {"num": "5", "name": "近曲小管", "func": ""}, {"num": "6", "name": "亨利氏環", "func": ""}, {"num": "7", "name": "遠曲小管", "func": ""}, {"num": "8", "name": "集尿管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3384], "items": [{"pin": 6, "name": "亨利氏環", "type": "region", "color": "blue", "shapes": [[[734.9015, 955.4408], [768.1994, 1220.7987], [774.3174, 1784.2304], [829.6802, 1981.609], [965.6802, 1980.1647], [975.0077, 1712.2193], [989.7711, 728.8767]]]}]}, "focusSource": "region", "focus": [0.4023, 0.1854, 0.6122, 0.6156], "nodeId": "nephron-circulation-node-L1-p6"}, {"id": "p8", "btnText": "集尿管", "img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "caption": "亨利氏環不同段並非全為同一上皮；集尿管接續多個腎元，不能與鮑氏囊混同。", "highlightNums": ["8"], "legends": [{"num": "1", "name": "腎小體", "func": ""}, {"num": "2", "name": "腎小管", "func": ""}, {"num": "3", "name": "腎絲球", "func": ""}, {"num": "4", "name": "鮑氏囊", "func": ""}, {"num": "5", "name": "近曲小管", "func": ""}, {"num": "6", "name": "亨利氏環", "func": ""}, {"num": "7", "name": "遠曲小管", "func": ""}, {"num": "8", "name": "集尿管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3384], "items": [{"pin": 8, "name": "集尿管", "type": "arrow", "color": "green", "paths": [[[1136.2018, 53.2361], [1501.9174, 307.8424]]]}]}, "focusSource": "pin", "focus": [0.5448, 0.0, 1.0, 0.5014], "nodeId": "nephron-circulation-node-L1-p8"}], "questions": [{"id": "nephron-circulation-level-1-2", "template": "match", "mode": "rows", "prompt": "請把『腎小體』和『腎小管』配對到下方。", "answer": {"i0": "t0", "i1": "t1"}, "items": [{"id": "i0", "text": "腎小體在腎元的哪一段？"}, {"id": "i1", "text": "腎小管在腎元的哪一段？"}], "targets": [{"id": "t0", "label": "圓球那一端"}, {"id": "t1", "label": "後面長長的管子"}, {"id": "distractor", "label": "管子旁的血管"}], "feedbackWrong": "腎元＝腎臟製造尿液的基本單位。 腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊。腎盂、腎盞是收集尿液的構造。", "byItem": {"i0": "腎元＝腎臟製造尿液的基本單位。 腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊。腎盂、腎盞是收集尿液的構造。", "i1": "腎元＝腎臟製造尿液的基本單位。 腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊。腎盂、腎盞是收集尿液的構造。"}, "hint": "腎小體是圓球那一端，腎小管是後面長長的管子。", "feedbackCorrect": "腎元由腎小體和腎小管組成。", "quizFigure": {"img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-1-3", "template": "choice", "mode": "single", "prompt": "腎小體裡有哪兩個構造？", "options": [{"id": "o0", "text": "腎絲球＋鮑氏囊"}, {"id": "o1", "text": "腎盂＋腎盞"}], "answer": "o0", "feedbackWrong": "腎盂、腎盞是收集尿的地方；腎小體由腎絲球和鮑氏囊組成。", "hint": "腎小體是圓球那一端，腎小管是後面長長的管子。", "feedbackCorrect": "腎元由腎小體和腎小管組成。", "quizFigure": {"img": "figures/nephron-circulation-node-01.svg", "ratio": "1700 / 3384", "legendMode": "pending"}, "quizImgState": null}]}, {"id": "L2", "title": "兩種腎元，哪裡不一樣？", "summary": "皮質腎元與近髓質腎元的腎小體都在皮質；近髓質型較靠近皮髓交界，亨利氏環較長且深入髓質。", "items": "皮質腎元與近髓質腎元的腎小體都在皮質；近髓質型較靠近皮髓交界，亨利氏環較長且深入髓質。", "states": [{"id": "p1", "btnText": "皮質", "img": "figures/nephron-circulation-node-02.svg", "ratio": "1700 / 3003", "caption": "兩型腎小體均位於皮質，差異是靠近交界程度及環的走向。", "highlightNums": ["1"], "legends": [{"num": "1", "name": "皮質", "func": ""}, {"num": "2", "name": "髓質", "func": ""}, {"num": "3", "name": "皮質腎元", "func": ""}, {"num": "4", "name": "近髓質腎元", "func": ""}, {"num": "5", "name": "短環", "func": ""}, {"num": "6", "name": "長環", "func": ""}, {"num": "7", "name": "直血管", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.0, 0.0225, 0.386, 0.2127], "nodeId": "nephron-circulation-node-L2-p1"}, {"id": "p3", "btnText": "皮質腎元", "img": "figures/nephron-circulation-node-02.svg", "ratio": "1700 / 3003", "caption": "皮質腎元佔大多數；近髓質腎元靠近皮質與髓質交界。", "highlightNums": ["3", "4"], "legends": [{"num": "1", "name": "皮質", "func": ""}, {"num": "2", "name": "髓質", "func": ""}, {"num": "3", "name": "皮質腎元", "func": ""}, {"num": "4", "name": "近髓質腎元", "func": ""}, {"num": "5", "name": "短環", "func": ""}, {"num": "6", "name": "長環", "func": ""}, {"num": "7", "name": "直血管", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.1003, 0.0981, 0.6773, 0.2883], "nodeId": "nephron-circulation-node-L2-p3"}, {"id": "p5", "btnText": "短環", "img": "figures/nephron-circulation-node-02.svg", "ratio": "1700 / 3003", "caption": "皮質腎元的環較短，近髓質腎元的環較長、深入髓質；兩型腎小體都在皮質。", "highlightNums": ["5", "6", "2"], "legends": [{"num": "1", "name": "皮質", "func": ""}, {"num": "2", "name": "髓質", "func": ""}, {"num": "3", "name": "皮質腎元", "func": ""}, {"num": "4", "name": "近髓質腎元", "func": ""}, {"num": "5", "name": "短環", "func": ""}, {"num": "6", "name": "長環", "func": ""}, {"num": "7", "name": "直血管", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.1588, 0.2686, 0.6773, 0.6093], "nodeId": "nephron-circulation-node-L2-p5"}, {"id": "p7", "btnText": "直血管", "img": "figures/nephron-circulation-node-02.svg", "ratio": "1700 / 3003", "caption": "理解近髓質腎元的長環與直血管，有助解釋濃縮尿液如何利用髓質梯度。", "highlightNums": ["7", "6"], "legends": [{"num": "1", "name": "皮質", "func": ""}, {"num": "2", "name": "髓質", "func": ""}, {"num": "3", "name": "皮質腎元", "func": ""}, {"num": "4", "name": "近髓質腎元", "func": ""}, {"num": "5", "name": "短環", "func": ""}, {"num": "6", "name": "長環", "func": ""}, {"num": "7", "name": "直血管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3003], "items": [{"pin": 7, "name": "直血管", "type": "arrow", "color": "green", "paths": [[[493.9865, 1355.6791], [779.0999, 1351.7808]]]}]}, "focusSource": "pin", "focus": [0.1671, 0.3802, 0.6773, 0.6093], "nodeId": "nephron-circulation-node-L2-p7"}], "questions": [{"id": "nephron-circulation-level-2-2", "template": "choice", "mode": "single", "prompt": "圖上有兩個腎元。哪一個的亨利氏環比較長、伸到髓質深處？", "options": [{"id": "o0", "text": "1"}, {"id": "o1", "text": "2"}], "answer": "o0", "feedbackWrong": "亨利氏環＝腎小管往下延伸、再折返的一段。 皮質腎元佔大多數；近髓質腎元靠近皮質與髓質交界。皮質腎元的環較短，近髓質腎元的環較長、深入髓質；兩型腎小體都在皮質。", "hint": "『近髓質』表示位置靠近皮質和髓質的交界。", "feedbackCorrect": "近髓質腎元的環長、深入髓質，配合直血管幫忙濃縮尿液。", "quizFigure": {"img": "figures/nephron-circulation-stage1-base-01.svg", "ratio": "1198 / 1313", "markers": [{"num": "1", "x": 50.0835, "y": 86.82410000000002}, {"num": "2", "x": 25.876500000000004, "y": 50.2666}], "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-2-3", "template": "choice", "mode": "single", "prompt": "圖上有兩個腎元。哪一個的亨利氏環比較長、伸到髓質深處？", "options": [{"id": "o0", "text": "近髓質腎元"}, {"id": "o1", "text": "皮質腎元"}], "answer": "o0", "feedbackWrong": "亨利氏環＝腎小管往下延伸、再折返的一段。 皮質腎元佔大多數；近髓質腎元靠近皮質與髓質交界。皮質腎元的環較短，近髓質腎元的環較長、深入髓質；兩型腎小體都在皮質。", "hint": "『近髓質』表示位置靠近皮質和髓質的交界。", "feedbackCorrect": "近髓質腎元的環長、深入髓質，配合直血管幫忙濃縮尿液。", "quizFigure": {"img": "figures/nephron-circulation-node-02.svg", "ratio": "1700 / 3003", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-2-4", "template": "choice", "mode": "single", "prompt": "下面哪一句是對的？", "options": [{"id": "o0", "text": "大多數腎元是皮質腎元"}, {"id": "o1", "text": "近髓質腎元整個都在髓質裡"}, {"id": "o2", "text": "兩種腎元的腎小體都在髓質"}], "answer": "o0", "feedbackWrong": "近髓質是指靠近交界，它的腎小體仍在皮質。\n兩種腎元的腎小體都在皮質。", "byOption": {"o1": "近髓質是指靠近交界，它的腎小體仍在皮質。", "o2": "兩種腎元的腎小體都在皮質。"}, "feedbackCorrect": "皮質腎元與近髓質腎元的腎小體都在皮質；近髓質型較靠近皮髓交界，亨利氏環較長且深入髓質。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L3", "title": "腎小管每一段的細胞長得不一樣", "summary": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮。", "items": "近曲小管為有刷狀緣的立方上皮，遠曲小管為無明顯刷狀緣的立方上皮，亨利氏環薄段為扁平上皮。", "states": [{"id": "p1", "btnText": "近曲小管", "img": "figures/nephron-circulation-node-03.svg", "ratio": "1700 / 2904", "caption": "近曲小管是有刷狀緣的立方上皮；遠曲小管也是立方上皮，但沒有明顯微絨毛。", "highlightNums": ["1", "3"], "legends": [{"num": "1", "name": "近曲小管", "func": ""}, {"num": "2", "name": "刷狀緣", "func": ""}, {"num": "3", "name": "遠曲小管", "func": ""}, {"num": "4", "name": "亨利氏環薄段", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 2904], "items": [{"pin": 1, "name": "近曲小管", "type": "arrow", "color": "blue", "paths": [[[1098.2574, 61.573], [967.0022, 182.4123]]]}]}, "focusSource": "pin", "focus": [0.3813, 0.0, 0.8478, 0.6626], "nodeId": "nephron-circulation-node-L3-p1"}, {"id": "p2", "btnText": "刷狀緣", "img": "figures/nephron-circulation-node-03.svg", "ratio": "1700 / 2904", "caption": "刷狀緣＝細胞表面密密麻麻的小突起（微絨毛）。", "highlightNums": ["2"], "legends": [{"num": "1", "name": "近曲小管", "func": ""}, {"num": "2", "name": "刷狀緣", "func": ""}, {"num": "3", "name": "遠曲小管", "func": ""}, {"num": "4", "name": "亨利氏環薄段", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.1309, 0.0384, 0.5509, 0.2351], "nodeId": "nephron-circulation-node-L3-p2"}, {"id": "p4", "btnText": "亨利氏環薄段", "img": "figures/nephron-circulation-node-03.svg", "ratio": "1700 / 2904", "caption": "亨利氏環薄段是扁平上皮。", "highlightNums": ["4"], "legends": [{"num": "1", "name": "近曲小管", "func": ""}, {"num": "2", "name": "刷狀緣", "func": ""}, {"num": "3", "name": "遠曲小管", "func": ""}, {"num": "4", "name": "亨利氏環薄段", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.3095, 0.2862, 0.7295, 0.4829], "nodeId": "nephron-circulation-node-L3-p4"}], "questions": [{"id": "nephron-circulation-level-3-2", "template": "choice", "mode": "single", "prompt": "哪一段小管的細胞有刷狀緣？", "options": [{"id": "o0", "text": "近曲小管"}, {"id": "o1", "text": "遠曲小管"}, {"id": "o2", "text": "亨利氏環薄段"}], "answer": "o0", "feedbackWrong": "遠曲小管是立方上皮，但沒有明顯的微絨毛。", "hint": "遠曲小管沒有明顯的微絨毛。", "feedbackCorrect": "近曲小管是有刷狀緣的立方上皮。", "quizFigure": {"img": "figures/nephron-circulation-node-03.svg", "ratio": "1700 / 2904", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-3-3", "template": "choice", "mode": "single", "prompt": "亨利氏環的薄段，細胞是什麼形狀？", "options": [{"id": "o0", "text": "扁平"}, {"id": "o1", "text": "立方"}], "answer": "o0", "feedbackWrong": "薄段是扁平上皮。", "hint": "遠曲小管沒有明顯的微絨毛。", "feedbackCorrect": "近曲小管是有刷狀緣的立方上皮。", "quizFigure": {"img": "figures/nephron-circulation-node-03.svg", "ratio": "1700 / 2904", "legendMode": "pending"}, "quizImgState": null}]}, {"id": "L4", "title": "血液進腎臟後怎麼走？", "summary": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。", "items": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。", "states": [{"id": "p1", "btnText": "腎動脈", "img": "figures/nephron-circulation-node-04.svg", "ratio": "1700 / 3624", "caption": "腎動脈→葉間→弓狀→小葉間動脈→入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。", "highlightNums": ["1", "2", "4"], "legends": [{"num": "1", "name": "腎動脈", "func": ""}, {"num": "2", "name": "葉間動脈", "func": ""}, {"num": "3", "name": "弓狀動脈", "func": ""}, {"num": "4", "name": "小葉間動脈", "func": ""}, {"num": "5", "name": "入球小動脈", "func": ""}, {"num": "6", "name": "腎絲球", "func": ""}, {"num": "7", "name": "出球小動脈", "func": ""}, {"num": "8", "name": "管周微血管", "func": ""}, {"num": "9", "name": "直血管", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3624], "items": [{"pin": 2, "name": "葉間動脈", "type": "segment", "color": "green", "paths": [[[415.1078, 774.9204], [431.713, 880.609], [409.3722, 1004.5138], [398.61, 1083.1357]]], "width": 20}, {"pin": 4, "name": "小葉間動脈", "type": "segment", "color": "blue", "paths": [[[576.6054, 360.2647], [586.895, 431.1534], [580.3432, 504.6198], [571.1491, 563.9085], [543.6314, 627.0639], [530.5277, 661.8638]]], "width": 40}]}, "focusSource": "pin", "focus": [0.0248, 0.047, 0.6355, 0.3846], "nodeId": "nephron-circulation-node-L4-p1"}, {"id": "p5", "btnText": "入球小動脈", "img": "figures/nephron-circulation-node-04.svg", "ratio": "1700 / 3624", "caption": "入球小動脈→腎絲球→出球小動脈→管周微血管或直血管，再入靜脈回流。", "highlightNums": ["5", "7", "8", "9"], "legends": [{"num": "1", "name": "腎動脈", "func": ""}, {"num": "2", "name": "葉間動脈", "func": ""}, {"num": "3", "name": "弓狀動脈", "func": ""}, {"num": "4", "name": "小葉間動脈", "func": ""}, {"num": "5", "name": "入球小動脈", "func": ""}, {"num": "6", "name": "腎絲球", "func": ""}, {"num": "7", "name": "出球小動脈", "func": ""}, {"num": "8", "name": "管周微血管", "func": ""}, {"num": "9", "name": "直血管", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.2246, 0.0325, 0.8806, 0.4431], "nodeId": "nephron-circulation-node-L4-p5"}, {"id": "p6", "btnText": "腎絲球", "img": "figures/nephron-circulation-node-04.svg", "ratio": "1700 / 3624", "caption": "腎絲球前後為小動脈，兩套微血管依序負責過濾與小管交換。", "highlightNums": ["6"], "legends": [{"num": "1", "name": "腎動脈", "func": ""}, {"num": "2", "name": "葉間動脈", "func": ""}, {"num": "3", "name": "弓狀動脈", "func": ""}, {"num": "4", "name": "小葉間動脈", "func": ""}, {"num": "5", "name": "入球小動脈", "func": ""}, {"num": "6", "name": "腎絲球", "func": ""}, {"num": "7", "name": "出球小動脈", "func": ""}, {"num": "8", "name": "管周微血管", "func": ""}, {"num": "9", "name": "直血管", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.1911, 0.0382, 0.6111, 0.1959], "nodeId": "nephron-circulation-node-L4-p6"}], "questions": [{"id": "nephron-circulation-level-4-1", "template": "match", "mode": "order", "prompt": "血液從大血管一路分支進到腎元。請依序點選它接下來經過的四段血管。", "answer": ["i0", "i1", "i2", "i3"], "items": [{"id": "i0", "text": "入球小動脈"}, {"id": "i1", "text": "腎絲球"}, {"id": "i2", "text": "出球小動脈"}, {"id": "i3", "text": "管周微血管"}], "feedbackWrong": "腎絲球前面是入球小動脈，後面是出球小動脈。", "hint": "『入』是進來，『出』是出去。", "feedbackCorrect": "兩套微血管依序工作：腎絲球負責過濾，管周微血管負責和小管交換。", "quizFigure": {"img": "figures/nephron-circulation-node-04.svg", "ratio": "1700 / 3624", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-4-2", "template": "choice", "mode": "single", "prompt": "腎絲球前後兩端是哪一種血管？", "options": [{"id": "o0", "text": "小動脈"}, {"id": "o1", "text": "靜脈"}, {"id": "o2", "text": "微血管"}], "answer": "o0", "feedbackWrong": "腎絲球的前後都是小動脈。", "byOption": {}, "feedbackCorrect": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。", "quizImgState": null, "quizNoFigure": true}]}, {"id": "L5", "title": "腎臟怎麼知道血壓變低？", "summary": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。", "items": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。", "states": [{"id": "p1", "btnText": "入球小動脈", "img": "figures/nephron-circulation-node-05.svg", "ratio": "1700 / 3144", "caption": "近腎絲球細胞在入球小動脈壁上，感受壓力並分泌腎素；緻密斑在遠曲小管，感受管液的鈉變化。", "highlightNums": ["1", "2", "3", "4"], "legends": [{"num": "1", "name": "入球小動脈", "func": ""}, {"num": "2", "name": "近腎絲球細胞", "func": ""}, {"num": "3", "name": "遠曲小管", "func": ""}, {"num": "4", "name": "緻密斑", "func": ""}, {"num": "5", "name": "Lacis細胞", "func": ""}, {"num": "6", "name": "腎素", "func": ""}], "legendMode": "pending", "overlays": {"viewBox": [0, 0, 1700, 3144], "items": [{"pin": 1, "name": "入球小動脈", "type": "arrow", "color": "blue", "paths": [[[889.4716, 817.2529], [728.0629, 906.7066]]]}]}, "focusSource": "pin", "focus": [0.3047, 0.1931, 1.0, 0.5542], "nodeId": "nephron-circulation-node-L5-p1"}, {"id": "p6", "btnText": "腎素", "img": "figures/nephron-circulation-node-05.svg", "ratio": "1700 / 3144", "caption": "血壓低或管液鈉低可促進腎素分泌。", "highlightNums": ["6"], "legends": [{"num": "1", "name": "入球小動脈", "func": ""}, {"num": "2", "name": "近腎絲球細胞", "func": ""}, {"num": "3", "name": "遠曲小管", "func": ""}, {"num": "4", "name": "緻密斑", "func": ""}, {"num": "5", "name": "Lacis細胞", "func": ""}, {"num": "6", "name": "腎素", "func": ""}], "legendMode": "pending", "focusSource": "pin", "focus": [0.2917, 0.2499, 0.7117, 0.4316], "nodeId": "nephron-circulation-node-L5-p6"}], "questions": [{"id": "nephron-circulation-level-5-2", "template": "match", "mode": "rows", "prompt": "腎臟有兩種「感測器」。請替每一列選出負責的細胞。", "answer": {"bp": "t-jg", "na": "t-md"}, "items": [{"id": "bp", "text": "哪一種細胞在入球小動脈壁上，感受血壓、分泌腎素？"}, {"id": "na", "text": "哪一種細胞在遠曲小管，感受管液裡的鈉？"}], "targets": [{"id": "t-jg", "label": "近腎絲球細胞"}, {"id": "t-md", "label": "緻密斑"}, {"id": "t-lacis", "label": "Lacis細胞"}], "feedbackWrong": "請看標紅那一列的說明，再改選那一列。", "byItem": {"bp": "近腎絲球細胞在入球小動脈壁上，感受壓力並分泌腎素。", "na": "緻密斑在遠曲小管，感受管液的鈉變化。"}, "hint": "一個在血管壁上，一個在小管上。", "feedbackCorrect": "血壓低或管液鈉低，都會促進腎素分泌。", "quizFigure": {"img": "figures/nephron-circulation-node-05.svg", "ratio": "1700 / 3144", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-5-3", "template": "choice", "mode": "single", "prompt": "血壓變低時，近腎絲球細胞會分泌什麼？", "options": [{"id": "o0", "text": "腎素"}, {"id": "o1", "text": "ADH"}], "answer": "o0", "feedbackWrong": "血壓低或管液鈉低時，會促進腎素分泌。", "hint": "一個在血管壁上，一個在小管上。", "feedbackCorrect": "近腎絲球細胞在入球小動脈壁上，感受壓力並分泌腎素；緻密斑在遠曲小管，感受管液的鈉變化。", "quizFigure": {"img": "figures/nephron-circulation-node-05.svg", "ratio": "1700 / 3144", "legendMode": "pending"}, "quizImgState": null}]}, {"id": "L6", "title": "腎血流和腎血漿流量", "summary": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿；腎絲球過濾率 GFR 是每分鐘形成的濾液體積。", "items": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿；腎絲球過濾率 GFR 是每分鐘形成的濾液體積。", "states": [{"id": "view", "btnText": "看圖", "img": "figures/nephron-circulation-node-06-data.svg", "ratio": "1000 / 1000", "caption": "血漿是血液裡的液體部分。 腎血流計整體血流，腎血漿流量只計其中的血漿部分。", "highlightAll": true, "legends": [], "legendMode": "pending", "focusSource": "none", "focusNone": "資料圖整張看（figure_slim.DATA_FIGURES）", "nodeId": "nephron-circulation-node-L6-view"}], "questions": [{"id": "nephron-circulation-level-6-2", "template": "choice", "mode": "single", "prompt": "一管血分成血球和血漿兩層。腎血漿流量只算哪一部分？", "options": [{"id": "o0", "text": "血漿"}, {"id": "o1", "text": "血球"}], "answer": "o0", "feedbackWrong": "血漿是血液裡的液體部分。 腎血流計整體血流，腎血漿流量只計其中的血漿部分。", "hint": "先辨認圖上兩層各代表什麼，再想這個流量要把整管都算進去，還是只算其中一部分；回看先認識。", "feedbackCorrect": "課本腎血流每分鐘約 1200 mL，約占心輸出量的四分之一；腎血漿流量只算其中的血漿部分。", "quizFigure": {"img": "figures/nephron-circulation-node-06-data.svg", "ratio": "1000 / 1000", "legendMode": "pending"}, "quizImgState": null}, {"id": "nephron-circulation-level-6-3", "template": "choice", "mode": "single", "prompt": "下面哪一句是對的？", "options": [{"id": "o0", "text": "腎血流約 1200 mL/min，約占心輸出量四分之一"}, {"id": "o1", "text": "腎血流就等於全部的心輸出量"}, {"id": "o2", "text": "腎血流和腎血漿流量是同一個數字"}], "answer": "o0", "feedbackWrong": "腎血流約占四分之一。\n血漿流量只算血漿那一部分。", "byOption": {"o1": "腎血流約占四分之一。", "o2": "血漿流量只算血漿那一部分。"}, "feedbackCorrect": "腎血流量 RBF 計入血球與血漿，腎血漿流量 RPF 只計血漿；腎絲球過濾率 GFR 是每分鐘形成的濾液體積。", "quizImgState": null, "quizNoFigure": true}]}], "slug": "nephron-circulation", "activityId": "uri-nephron-circulation-v1", "materialVersion": "nephron-circulation-v3", "ui": {"opening": "準備開始", "start": "開始", "ending": "重點整理", "endingDone": "完成旅程", "truefalse": "是非確認", "transition": "準備進入考核", "foundation": "第一階段：先備確認", "case": "第二階段：情境考核", "complete": "本單元通關！", "beginAssessment": "開始第一階段", "continue": "繼續", "correct": "答對了！", "map": "總圖", "mapTitle": "總圖 · 重點整理", "overview": "總覽", "teach": "教學", "passed": "過關", "reset": "重置", "zoom": "放大檢視圖片", "timeRemaining": "剩下 {n} 秒", "assessmentTimeout": "時間到，這題還不熟，請重新開始考核。", "restartAssessment": "重新開始考核", "retryFoundation": "基礎題重新開始", "imageLoading": "圖片載入中", "imageRetry": "圖片載入失敗，點此重試", "close": "關閉", "teachGuide": "先看圖例，認識圖上的編號，再按圖下方每個按鈕切換看圖。全部看過後，按〔看完了，開始作答〕。", "textGuide": "先讀完本關說明，再按〔看完了，開始作答〕。", "reviewGuide": "切換按鈕看圖，對照相同編號讀圖例；看完按〔返回作答〕。", "stateSeen": "已看", "stateUnseen": "未看", "stateProgress": "已看 {seen}／{total} 個狀態；請按標示「未看」的按鈕。", "statesDone": "所有狀態都看過了。讀完圖例後，可往下開始作答。", "returnTeach": "回去看說明", "returnQuiz": "返回作答", "returnProgress": "返回原進度", "startQuiz": "看完了，開始作答", "submit": "確認送出", "retry": "再試一次", "retryCase": "重新挑戰第二階段", "retryEnding": "從第 1 格重來", "hint": "看提示", "hintLabel": "提示：", "next": "下一題", "nextLevel": "下一關", "showMap": "查看重點整理總圖", "summaryLabel": "這關重點：", "unselected": "(未選)", "resetOrder": "重選順序", "expand": "▼ 展開", "collapse": "▲ 收起", "locked": "過關後打開", "more": "看更多", "less": "收起", "yes": "對", "no": "錯", "volumeMark": "約 300 mL", "volumeMin": "0", "volumeMax": "800 mL", "levelHeader": "第 {n}／{total} 關 · {title}", "questionHeader": "第 {n}／{total} 題", "levelTab": "第 {n} 關", "unseen": "還有 {n} 個沒看", "passTitle": "第 {n} 關完成", "orderBadge": "第 {n} 步", "revisit": "回第 {n} 關看", "mapNode": "第 {n} 關：{title}", "tick": "✓", "lock": "🔒", "arrow": "↓", "legendFrameTitle": "完整圖與圖例", "legendRead": "先看圖例", "legendReadDone": "放大圖例 · 已看", "legendHeading": "圖例", "legendDialogTitle": "放大圖例", "legendBack": "返回", "legendConfirm": "圖例看完了", "legendFirstHint": "請先看圖例，認識圖中每種符號。", "legendDialogHint": "請查看全部圖例，再按「圖例看完了」。", "legendNotReady": "圖例圖片尚未準備完成，請返回後重試。", "legendLoadFailed": "圖例圖片載入失敗，請返回後重試。", "legendUnavailable": "尚未取樣", "legendProgress": "已看 {seen}／{total} 個必看步驟", "legendRemaining": "還有 {n} 個必看步驟", "focusWhole": "看完整圖", "focusZoom": "放大這一區"}, "opening": {"prompt": "腎臟裡有很多製造尿液的小單位，叫做『腎元』。 血液怎麼流進腎臟？腎臟又怎麼知道血壓變低了？6 關之後你就知道。"}, "encouragement": {"correct": ["答對！這題你判斷得很穩 👍", "漂亮，觀念抓得很準 🎯", "沒錯，你已經把重點串起來了 🔗", "正確！這種判斷，以後在臨床很用得上 🩺", "對了！你的推理一步一步都站得住 🧠", "好眼力，陷阱選項沒騙到你 👀", "答對了，這題其實不簡單喔 ✨", "很好，保持這個節奏 🎵", "正確！看得出你有認真讀過 📖", "完全正確，給自己按個讚 👏", "沒錯！記住現在這個感覺 💡", "精準！下一題也交給你了 🚀", "答對！你的大腦今天狀態很好 ⚡", "正確，這個觀念你已經是自己的了 🌱"], "levelPass": ["又破一關！你正在一塊一塊拼出完整的地圖 🧩", "這一關的重點，已經收進你的口袋了 🎒", "學習就是這樣，一關一關慢慢變強 💪", "累了就休息一下，你的進度都幫你記著 ☕", "今天的專注，就是之後考試時的底氣 🔥", "每多懂一點，將來照顧病人就多一分把握 💙", "很穩！下一關會用到剛剛學的東西喔 🔜", "把剛學的名詞小聲唸一次，會記得更牢 🗣️", "你比剛開始的自己，又多懂了一些 📈", "難的地方你都撐過來了，給自己一點掌聲 👏", "這一關過得漂亮，繼續往前走吧 🌟", "記不住也沒關係，總圖隨時可以回來複習 🗺️"], "finish": "腎元雖小，每一段都有自己的任務；你今天把每一段都認識了，辛苦了！ 🔬 🎉"}, "teacherPending": [{"kind": "legend-unclassified", "figure": "nephron-circulation-node-01.svg", "detail": "圖例未分類（required／none）", "where": ["L1.state.p1", "L1.state.p5", "L1.state.p6", "L1.state.p8", "L1.nephron-circulation-level-1-2.quizFigure", "L1.nephron-circulation-level-1-3.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-node-02.svg", "detail": "圖例未分類（required／none）", "where": ["L2.state.p1", "L2.state.p3", "L2.state.p5", "L2.state.p7", "L2.nephron-circulation-level-2-3.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-stage1-base-01.svg", "detail": "圖例未分類（required／none）", "where": ["L2.nephron-circulation-level-2-2.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-node-03.svg", "detail": "圖例未分類（required／none）", "where": ["L3.state.p1", "L3.state.p2", "L3.state.p4", "L3.nephron-circulation-level-3-2.quizFigure", "L3.nephron-circulation-level-3-3.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-node-04.svg", "detail": "圖例未分類（required／none）", "where": ["L4.state.p1", "L4.state.p5", "L4.state.p6", "L4.nephron-circulation-level-4-1.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-node-05.svg", "detail": "圖例未分類（required／none）", "where": ["L5.state.p1", "L5.state.p6", "L5.nephron-circulation-level-5-2.quizFigure", "L5.nephron-circulation-level-5-3.quizFigure"]}, {"kind": "legend-unclassified", "figure": "nephron-circulation-node-06-data.svg", "detail": "圖例未分類（required／none）", "where": ["L6.state.view", "L6.nephron-circulation-level-6-2.quizFigure"]}], "ending": {"prompt": "結尾", "steps": [{"prompt": "腎元由什麼組成？", "options": [{"id": "o0", "text": "腎小體＋腎小管"}, {"id": "o1", "text": "腎盂＋輸尿管"}], "answer": "o0", "feedbackWrong": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。", "revisitLevel": "L1", "src": ["src-1", "src-2", "src-3", "src-4", "src-5", "src-6", "src-7", "src-8", "src-9", "src-10", "src-11", "src-12", "src-13", "src-14", "src-15", "src-16", "src-17", "src-18", "src-19", "src-20", "src-21", "src-22", "src-23", "src-24", "src-25", "src-26", "src-27", "src-28", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "id": "nephron-circulation-ending-1", "template": "choice", "mode": "single", "feedbackCorrect": "腎元由腎小體與腎小管構成；腎小體包括腎絲球與鮑氏囊，腎小管接續近曲小管、亨利氏環及遠曲小管。"}, {"prompt": "血液經過腎絲球的順序？", "options": [{"id": "o0", "text": "入球→腎絲球→出球"}, {"id": "o1", "text": "出球→腎絲球→入球"}], "answer": "o0", "feedbackWrong": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。", "revisitLevel": "L4", "src": ["src-1", "src-2", "src-3", "src-4", "src-5", "src-6", "src-7", "src-8", "src-9", "src-10", "src-11", "src-12", "src-13", "src-14", "src-15", "src-16", "src-17", "src-18", "src-19", "src-20", "src-21", "src-22", "src-23", "src-24", "src-25", "src-26", "src-27", "src-28", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "id": "nephron-circulation-ending-2", "template": "choice", "mode": "single", "feedbackCorrect": "腎動脈經葉間、弓狀及小葉間動脈，接入球小動脈、腎絲球、出球小動脈，再到管周微血管或直血管，之後靜脈回流。"}, {"prompt": "血壓變低時？", "options": [{"id": "o0", "text": "近腎絲球細胞分泌腎素"}, {"id": "o1", "text": "緻密斑分泌 ADH"}], "answer": "o0", "feedbackWrong": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。", "revisitLevel": "L5", "src": ["src-1", "src-2", "src-3", "src-4", "src-5", "src-6", "src-7", "src-8", "src-9", "src-10", "src-11", "src-12", "src-13", "src-14", "src-15", "src-16", "src-17", "src-18", "src-19", "src-20", "src-21", "src-22", "src-23", "src-24", "src-25", "src-26", "src-27", "src-28", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "id": "nephron-circulation-ending-3", "template": "choice", "mode": "single", "feedbackCorrect": "近腎絲球器包含入球小動脈壁的近腎絲球細胞、遠曲小管緻密斑，以及其間的 Lacis 細胞。"}], "completeMessage": "腎元由腎小體和腎小管組成；血液經入球小動脈、腎絲球、出球小動脈；近腎絲球器感受血壓與鈉，並分泌腎素。"}, "truefalse": [{"id": "nephron-circulation-tf-1", "statement": "腎元由腎小體和腎小管組成。", "answer": true, "feedback": "腎小體（腎絲球＋鮑氏囊）加上腎小管。", "template": "choice", "mode": "single", "prompt": "腎元由腎小體和腎小管組成。", "feedbackWrong": "腎小體（腎絲球＋鮑氏囊）加上腎小管。", "feedbackCorrect": "腎小體（腎絲球＋鮑氏囊）加上腎小管。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}, {"id": "nephron-circulation-tf-2", "statement": "近髓質腎元的腎小體位於髓質。", "answer": false, "feedback": "兩型腎元的腎小體都在皮質；近髓質腎元是環較長、深入髓質。", "template": "choice", "mode": "single", "prompt": "近髓質腎元的腎小體位於髓質。", "feedbackWrong": "兩型腎元的腎小體都在皮質；近髓質腎元是環較長、深入髓質。", "feedbackCorrect": "兩型腎元的腎小體都在皮質；近髓質腎元是環較長、深入髓質。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}, {"id": "nephron-circulation-tf-3", "statement": "緻密斑位於入球小動脈壁上，負責分泌腎素。", "answer": false, "feedback": "分泌腎素的是入球小動脈壁上的近腎絲球細胞；緻密斑在遠曲小管，感受管液鈉。", "template": "choice", "mode": "single", "prompt": "緻密斑位於入球小動脈壁上，負責分泌腎素。", "feedbackWrong": "分泌腎素的是入球小動脈壁上的近腎絲球細胞；緻密斑在遠曲小管，感受管液鈉。", "feedbackCorrect": "分泌腎素的是入球小動脈壁上的近腎絲球細胞；緻密斑在遠曲小管，感受管液鈉。", "options": [{"id": true, "text": "對"}, {"id": false, "text": "錯"}]}], "assessment": {"intro": "太棒了！你已經完成 6 關，弄懂了腎元和腎臟的血流。接下來是正式考題，會用課本上的用語，看起來比較難也沒關係，剛剛學過的概念都用得上。加油！", "foundation": [{"id": "nephron-circulation-foundation-q01", "mode": "single", "prompt": "腎元的基本組成為何？", "options": [{"id": "o0", "text": "腎小體與腎小管"}, {"id": "o1", "text": "腎盂與輸尿管"}, {"id": "o2", "text": "膀胱與尿道"}, {"id": "o3", "text": "腎被膜與腎筋膜"}], "answer": "o0", "feedbackWrong": "腎小體與腎小管構成腎元；集尿管接收多個腎元的管液，另作接續構造。", "hint": "先找過濾單位，再找接續的管段。", "src": ["src-16", "src-21", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "revisitLevel": "L1", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-foundation-q02", "mode": "single", "prompt": "比較皮質與近髓質腎元，哪一項正確？", "options": [{"id": "o0", "text": "近髓質型腎小體在髓質深部"}, {"id": "o1", "text": "兩型腎小體都位於皮質"}, {"id": "o2", "text": "兩型亨利氏環都只在皮質"}, {"id": "o3", "text": "皮質型亨利氏環較長且深入髓質"}], "answer": "o1", "feedbackWrong": "兩型腎小體均在皮質；近髓質型靠近交界且環較長，不能把近髓質等同髓質內。", "hint": "將腎小體的位置與環的長短分開。", "src": ["src-1", "src-2", "src-3", "src-4", "src-5", "src-19", "src-20"], "revisitLevel": "L2", "timeLimit": 60, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-foundation-q03", "mode": "single", "prompt": "有明顯刷狀緣的立方上皮，最符合哪個管段？", "options": [{"id": "o0", "text": "亨利氏環薄段"}, {"id": "o1", "text": "遠曲小管"}, {"id": "o2", "text": "近曲小管"}, {"id": "o3", "text": "鮑氏囊腔"}], "answer": "o2", "feedbackWrong": "近曲小管有刷狀緣，遠曲無明顯刷狀緣，亨利氏環薄段則為扁平上皮。", "hint": "比較管腔面與細胞形狀。", "src": ["src-16", "src-21", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "revisitLevel": "L3", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-foundation-q04", "mode": "single", "prompt": "腎絲球前後相接的血管依序為何？", "options": [{"id": "o0", "text": "入球小靜脈、出球小靜脈"}, {"id": "o1", "text": "腎靜脈、入球小動脈"}, {"id": "o2", "text": "管周微血管、腎動脈"}, {"id": "o3", "text": "入球小動脈、出球小動脈"}], "answer": "o3", "feedbackWrong": "血液由入球小動脈進腎絲球，再由出球小動脈離開，之後還有管周微血管或直血管。", "hint": "先以進入或離開腎絲球命名。", "src": ["src-6", "src-7", "src-8", "src-9", "src-10", "src-22", "src-23", "src-24", "src-26", "src-27"], "revisitLevel": "L4", "timeLimit": 55, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-foundation-q05", "mode": "single", "prompt": "近腎絲球器中，感受管液鈉變化的是何者？", "options": [{"id": "o0", "text": "遠曲小管的緻密斑"}, {"id": "o1", "text": "入球壁的近腎絲球細胞"}, {"id": "o2", "text": "鮑氏囊壁層"}, {"id": "o3", "text": "腎盂上皮"}], "answer": "o0", "feedbackWrong": "緻密斑位於遠曲小管並感受管液鈉；近腎絲球細胞位於入球小動脈壁，分泌腎素。", "hint": "感測對象是管液，應先找小管側。", "src": ["src-11", "src-12", "src-13", "src-14", "src-15", "src-25"], "revisitLevel": "L5", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-foundation-q06", "mode": "single", "prompt": "過濾分率 FF 的算法為何？", "options": [{"id": "o0", "text": "GFR／RBF"}, {"id": "o1", "text": "GFR／RPF"}, {"id": "o2", "text": "RBF／GFR"}, {"id": "o3", "text": "RPF／GFR"}], "answer": "o1", "feedbackWrong": "FF 是 GFR 除以腎血漿流量 RPF，不能將包含血球的 RBF 直接代為分母。", "hint": "分母要對應可被過濾的血漿流量。", "src": ["src-6", "src-7", "src-8", "src-9", "src-10", "src-22", "src-23", "src-24", "src-26", "src-27"], "revisitLevel": "L6", "timeLimit": 45, "template": "choice", "feedbackCorrect": "答對了！"}], "case": [{"id": "nephron-circulation-case-q01", "mode": "single", "prompt": "【定位觀察】某腎元的長環深入髓質，腎小體靠近皮髓交界。腎小體仍應標在哪一區？", "options": [{"id": "o0", "text": "髓質深部"}, {"id": "o1", "text": "腎盂"}, {"id": "o2", "text": "皮質"}, {"id": "o3", "text": "腎乳頭出口"}], "answer": "o2", "feedbackWrong": "近髓質腎元的腎小體在靠近交界的皮質，深入髓質的是長環。", "hint": "不要用環深入的區域取代腎小體位置。", "src": ["src-1", "src-2", "src-3", "src-4", "src-5", "src-19", "src-20"], "revisitLevel": "L2", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-case-q02", "mode": "single", "prompt": "【血流追蹤】血液剛離開出球小動脈，下一段應接何者？", "options": [{"id": "o0", "text": "鮑氏囊腔"}, {"id": "o1", "text": "輸尿管"}, {"id": "o2", "text": "直接進入腎靜脈"}, {"id": "o3", "text": "管周微血管或直血管"}], "answer": "o3", "feedbackWrong": "出球小動脈接管周微血管或直血管；血流通路不應接入管液通路，也不是立刻進腎靜脈。", "hint": "離開腎絲球後還需要小管交換區。", "src": ["src-6", "src-7", "src-8", "src-9", "src-10", "src-22", "src-23", "src-24", "src-26", "src-27"], "revisitLevel": "L4", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-case-q03", "mode": "single", "prompt": "【切片觀察】一段位於髓質深處的細管，管壁為扁平上皮，最可能是哪段？", "options": [{"id": "o0", "text": "亨利氏環薄段"}, {"id": "o1", "text": "近曲小管"}, {"id": "o2", "text": "遠曲小管"}, {"id": "o3", "text": "集尿管"}], "answer": "o0", "feedbackWrong": "亨利氏環薄段為扁平上皮；近曲與遠曲小管則為立方上皮，刷狀緣用於區分後兩者。", "hint": "先比較細胞高低，再排除立方上皮管段。", "src": ["src-16", "src-21", "src-29", "src-30", "src-31", "src-32", "src-33", "src-34"], "revisitLevel": "L3", "timeLimit": 50, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-case-q04", "mode": "single", "prompt": "【訊號配對】要在近腎絲球器標出腎素分泌來源，應選哪個位置？", "options": [{"id": "o0", "text": "遠曲小管緻密斑"}, {"id": "o1", "text": "入球小動脈壁的近腎絲球細胞"}, {"id": "o2", "text": "腎盂內面"}, {"id": "o3", "text": "鮑氏囊壁層"}], "answer": "o1", "feedbackWrong": "分泌腎素的是入球小動脈壁近腎絲球細胞；緻密斑是管液鈉感測點。", "hint": "將感受管液的細胞與分泌腎素者分開。", "src": ["src-11", "src-12", "src-13", "src-14", "src-15", "src-25"], "revisitLevel": "L5", "timeLimit": 55, "template": "choice", "feedbackCorrect": "答對了！"}, {"id": "nephron-circulation-case-q05", "mode": "single", "prompt": "【流量判讀】同學以 GFR 除以全部腎血流量來算 FF，應修正哪個項目？", "options": [{"id": "o0", "text": "分子改為腎血流量"}, {"id": "o1", "text": "把兩者都改成尿中物質濃度"}, {"id": "o2", "text": "分母改為腎血漿流量"}, {"id": "o3", "text": "將分子分母互換即可"}], "answer": "o2", "feedbackWrong": "FF 的分母為 RPF；RBF 包含血球，與定義中的血漿流量不同。", "hint": "先確認過濾分率的血液區間。", "src": ["src-6", "src-7", "src-8", "src-9", "src-10", "src-22", "src-23", "src-24", "src-26", "src-27"], "revisitLevel": "L6", "timeLimit": 60, "template": "choice", "feedbackCorrect": "答對了！"}], "passMessage": "恭喜過關！", "failMessage": "差一點！看看解析，再試一次，你可以的。"}, "tracking": {"nodeIds": ["nephron-circulation-node-L1-p1", "nephron-circulation-node-L1-p5", "nephron-circulation-node-L1-p6", "nephron-circulation-node-L1-p8", "nephron-circulation-node-L2-p1", "nephron-circulation-node-L2-p3", "nephron-circulation-node-L2-p5", "nephron-circulation-node-L2-p7", "nephron-circulation-node-L3-p1", "nephron-circulation-node-L3-p2", "nephron-circulation-node-L3-p4", "nephron-circulation-node-L4-p1", "nephron-circulation-node-L4-p5", "nephron-circulation-node-L4-p6", "nephron-circulation-node-L5-p1", "nephron-circulation-node-L5-p6", "nephron-circulation-node-L6-view"], "questionIds": {"levels": {"L1": ["nephron-circulation-level-1-2", "nephron-circulation-level-1-3"], "L2": ["nephron-circulation-level-2-2", "nephron-circulation-level-2-3", "nephron-circulation-level-2-4"], "L3": ["nephron-circulation-level-3-2", "nephron-circulation-level-3-3"], "L4": ["nephron-circulation-level-4-1", "nephron-circulation-level-4-2"], "L5": ["nephron-circulation-level-5-2", "nephron-circulation-level-5-3"], "L6": ["nephron-circulation-level-6-2", "nephron-circulation-level-6-3"]}, "ending": ["nephron-circulation-ending-1", "nephron-circulation-ending-2", "nephron-circulation-ending-3"], "truefalse": ["nephron-circulation-tf-1", "nephron-circulation-tf-2", "nephron-circulation-tf-3"], "foundation": ["nephron-circulation-foundation-q01", "nephron-circulation-foundation-q02", "nephron-circulation-foundation-q03", "nephron-circulation-foundation-q04", "nephron-circulation-foundation-q05", "nephron-circulation-foundation-q06"], "case": ["nephron-circulation-case-q01", "nephron-circulation-case-q02", "nephron-circulation-case-q03", "nephron-circulation-case-q04", "nephron-circulation-case-q05"]}, "nodeTotal": 17, "questionTotal": 30}};
+
+    // Global SDK Fallback if not inside iframe or standalone
+    if (!window.CourseLearning) {
+      console.error('[CourseLearning SDK Missing] course-learning.js not loaded. Event reporting disabled.');
+      window.CourseLearning = {
+        explore(id) { console.error('[CourseLearning SDK Missing] Event dropped: explore', id); },
+        answer(id, ok) { console.error('[CourseLearning SDK Missing] Event dropped: answer', id, ok); },
+        hint(id) { console.error('[CourseLearning SDK Missing] Event dropped: hint', id); },
+        nodeTime(id, s) { console.error('[CourseLearning SDK Missing] Event dropped: nodeTime', id, s); },
+        complete() { console.error('[CourseLearning SDK Missing] Event dropped: complete'); }
+      };
+    }
+
+    // State Machine & Controller
+    const App = {
+      data: DATA,
+      ui: DATA.ui,
+      state: {
+        phase: 'OPENING',
+        levelIdx: 0,
+        stateIdx: 0,
+        seenStates: new Set(),
+        seenLegends: new Set(),
+        explainSeenMap: {},
+        isLegendExpanded: false,
+        isZoomed: false,
+        // Quiz state
+        questionIdx: 0,
+        quizSubStateIdx: 0,
+        quizAnswerLocked: false,
+        matchAnswers: {},
+        matchLockedRows: new Set(),
+        multiSelections: new Set(),
+        orderPicks: [],
+        currentOptions: [],
+        feedback: null,
+        selectedOptId: null,
+        selectedTfVal: null,
+        selectedEndOptId: null,
+        selectedAssOptId: null,
+        activeReadingKey: null,
+        readingTimer: null,
+        readingDuration: 0,
+        legendTimer: null,
+        retryTimer: null,
+        // Ending state
+        endingStepIdx: 0,
+        // TrueFalse state
+        tfIdx: 0,
+        // Assessment state
+        assStage: 'foundation',
+        assIdx: 0,
+        assTimer: null,
+        assTimeLeft: 0,
+        assTimeTotal: 0,
+        // Time tracking
+        currentNodeId: null,
+        nodeEnterTime: Date.now()
+      },
+
+      init() {
+        this.render();
+      },
+
+      trackTime(newNodeId) {
+        const now = Date.now();
+        if (this.state.currentNodeId) {
+          const elapsed = Math.floor((now - this.state.nodeEnterTime) / 1000);
+          if (elapsed > 0) {
+            window.CourseLearning.nodeTime(this.state.currentNodeId, Math.min(60, elapsed));
+          }
+        }
+        this.state.currentNodeId = newNodeId;
+        this.state.nodeEnterTime = now;
+      },
+
+      setPhase(newPhase) {
+        this.state.phase = newPhase;
+        this.render();
+      },
+
+      render() {
+        const view = document.getElementById('app-view');
+        const hdrStage = document.getElementById('hdr-stage');
+        const hdrStep = document.getElementById('hdr-step');
+        const hdrProgress = document.getElementById('hdr-progress');
+        const timerBox = document.getElementById('timer-box');
+        timerBox.style.display = 'none';
+
+        switch (this.state.phase) {
+          case 'OPENING':
+            hdrStage.textContent = this.ui.opening;
+            hdrStep.textContent = '';
+            hdrProgress.style.width = '0%';
+            this.renderOpening(view);
+            break;
+
+          case 'TEACH':
+            const currentLevel = this.data.levels[this.state.levelIdx];
+            const lvlTotal = this.data.levels.length;
+            hdrStage.textContent = this.ui.levelTab.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = `${this.state.levelIdx + 1} / ${lvlTotal}`;
+            hdrProgress.style.width = `${((this.state.levelIdx) / (lvlTotal + 4)) * 100}%`;
+            this.renderTeach(view, currentLevel);
+            break;
+
+          case 'QUIZ':
+            const qLevel = this.data.levels[this.state.levelIdx];
+            const qTotal = qLevel.questions.length;
+            hdrStage.textContent = this.ui.levelTab.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = `${this.ui.questionHeader.replace('{n}', this.state.questionIdx + 1).replace('{total}', qTotal)}`;
+            hdrProgress.style.width = `${((this.state.levelIdx + (this.state.questionIdx / qTotal)) / (this.data.levels.length + 4)) * 100}%`;
+            this.renderQuiz(view, qLevel);
+            break;
+
+          case 'LEVEL_PASS':
+            hdrStage.textContent = this.ui.passTitle.replace('{n}', this.state.levelIdx + 1);
+            hdrStep.textContent = '';
+            hdrProgress.style.width = `${((this.state.levelIdx + 1) / (this.data.levels.length + 4)) * 100}%`;
+            this.renderLevelPass(view);
+            break;
+
+          case 'ENDING':
+            hdrStage.textContent = this.ui.ending;
+            hdrStep.textContent = `${this.state.endingStepIdx + 1} / ${this.data.ending.steps.length}`;
+            hdrProgress.style.width = '75%';
+            this.renderEnding(view);
+            break;
+
+          case 'TRUEFALSE':
+            hdrStage.textContent = this.ui.truefalse;
+            hdrStep.textContent = `${this.state.tfIdx + 1} / ${this.data.truefalse.length}`;
+            hdrProgress.style.width = '85%';
+            this.renderTrueFalse(view);
+            break;
+
+          case 'ASSESSMENT':
+            timerBox.style.display = 'block';
+            const isCase = this.state.assStage === 'case';
+            const list = isCase ? this.data.assessment.case : this.data.assessment.foundation;
+            hdrStage.textContent = isCase ? this.ui.case : this.ui.foundation;
+            hdrStep.textContent = `${this.state.assIdx + 1} / ${list.length}`;
+            hdrProgress.style.width = isCase ? '95%' : '90%';
+            this.renderAssessment(view, list[this.state.assIdx]);
+            break;
+
+          case 'COMPLETE':
+            hdrStage.textContent = this.ui.complete;
+            hdrStep.textContent = '';
+            hdrProgress.style.width = '100%';
+            this.renderComplete(view);
+            break;
+        }
+      },
+
+      renderOpening(view) {
+        this.trackTime(null);
+        view.innerHTML = `
+          <div style="margin-top: 24px;">
+            <h1 class="title-lg" style="color: var(--primary);">${this.data.title}</h1>
+          </div>
+          <div class="caption-box" style="margin-top: 16px;">
+            <p class="text-body">${this.data.opening.prompt}</p>
+          </div>
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-start">${this.ui.start}</button>
+          </div>
+        `;
+        document.getElementById('btn-start').onclick = () => {
+          this.state.levelIdx = 0;
+          this.startLevel(0);
+        };
+      },
+
+      startLevel(idx) {
+        this.state.levelIdx = idx;
+        this.state.stateIdx = 0;
+        this.state.seenStates = new Set();
+        this.state.seenLegends = new Set();
+        const lvl = this.data.levels[idx];
+        if (lvl && lvl.states) {
+          lvl.states.forEach((s, sIdx) => {
+            if (this.isLegendSeen(idx, sIdx)) {
+              this.state.seenLegends.add(sIdx);
+            }
+          });
+        }
+        this.clearActiveReading();
+        this.state.isLegendExpanded = false;
+        this.state.isZoomed = false;
+        this.state.questionIdx = 0;
+        this.state.feedback = null;
+        this.state.selectedOptId = null;
+        this.setPhase('TEACH');
+      },
+
+      getLegendStorageKey(levelIdx, stateIdx) {
+        const lvl = this.data.levels[levelIdx];
+        const st = lvl && lvl.states && lvl.states[stateIdx];
+        return (st && st.legendKey) || `level_${lvl ? lvl.id : levelIdx}`;
+      },
+
+      isLegendSeen(levelIdx, stateIdx) {
+        const key = this.getLegendStorageKey(levelIdx, stateIdx);
+        if (this.state.globalSeenLegends && this.state.globalSeenLegends.has(key)) {
+          return true;
+        }
+        try {
+          const storeKey = `seenLegend_${this.data.activityId || 'ag'}_${key}`;
+          if (localStorage.getItem(storeKey) === '1') {
+            if (!this.state.globalSeenLegends) this.state.globalSeenLegends = new Set();
+            this.state.globalSeenLegends.add(key);
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      },
+
+      markLegendSeen(levelIdx, stateIdx) {
+        const key = this.getLegendStorageKey(levelIdx, stateIdx);
+        if (!this.state.globalSeenLegends) this.state.globalSeenLegends = new Set();
+        this.state.globalSeenLegends.add(key);
+        try {
+          const storeKey = `seenLegend_${this.data.activityId || 'ag'}_${key}`;
+          localStorage.setItem(storeKey, '1');
+        } catch (e) {}
+      },
+
+      calcDwellTime(text, minSec, maxSec) {
+        const chars = (text || '').replace(/\s+/g, '').length;
+        return Math.min(maxSec, Math.max(minSec, Math.ceil(chars / 10)));
+      },
+
+      clearActiveReading() {
+        if (this.state.readingTimer) {
+          clearTimeout(this.state.readingTimer);
+          this.state.readingTimer = null;
+        }
+        this.state.activeReadingKey = null;
+        this.state.readingDuration = 0;
+      },
+
+      startTeachReading(idx, text) {
+        this.clearActiveReading();
+        const sec = this.calcDwellTime(text, 2, 10);
+        const key = `teach_${this.state.levelIdx}_${idx}`;
+        this.state.activeReadingKey = key;
+        this.state.readingDuration = sec;
+        this.state.readingTimer = setTimeout(() => {
+          this.state.seenStates.add(idx);
+          this.clearActiveReading();
+          this.render();
+        }, sec * 1000);
+      },
+
+      startExplainReading(qId, subIdx, text) {
+        this.clearActiveReading();
+        const sec = this.calcDwellTime(text, 2, 10);
+        const key = `explain_${qId}_${subIdx}`;
+        this.state.activeReadingKey = key;
+        this.state.readingDuration = sec;
+        this.state.readingTimer = setTimeout(() => {
+          this.markExplainSeen(qId, subIdx);
+          this.clearActiveReading();
+          this.render();
+        }, sec * 1000);
+      },
+
+      startRetryCountdown(btnId, text) {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        const chars = (text || '').replace(/\s+/g, '').length;
+        let sec = Math.min(6, Math.max(2, Math.ceil(chars / 10)));
+        btn.disabled = true;
+        btn.textContent = `${this.ui.retry} (${sec})`;
+        if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+        this.state.retryTimer = setInterval(() => {
+          sec--;
+          const curBtn = document.getElementById(btnId);
+          if (!curBtn) {
+            clearInterval(this.state.retryTimer);
+            return;
+          }
+          if (sec > 0) {
+            curBtn.disabled = true;
+            curBtn.textContent = `${this.ui.retry} (${sec})`;
+          } else {
+            clearInterval(this.state.retryTimer);
+            curBtn.disabled = false;
+            curBtn.textContent = this.ui.retry;
+          }
+        }, 1000);
+      },
+
+      getExplainSeen(qId) {
+        if (!this.state.explainSeenMap) this.state.explainSeenMap = {};
+        if (!this.state.explainSeenMap[qId]) {
+          const s = new Set();
+          try {
+            const storeKey = `seenExplain_${this.data.activityId || 'ag'}_${qId}`;
+            const saved = localStorage.getItem(storeKey);
+            if (saved) {
+              JSON.parse(saved).forEach(x => s.add(Number(x)));
+            }
+          } catch (e) {}
+          this.state.explainSeenMap[qId] = s;
+        }
+        return this.state.explainSeenMap[qId];
+      },
+
+      markExplainSeen(qId, subIdx) {
+        const s = this.getExplainSeen(qId);
+        s.add(Number(subIdx));
+        try {
+          const storeKey = `seenExplain_${this.data.activityId || 'ag'}_${qId}`;
+          localStorage.setItem(storeKey, JSON.stringify(Array.from(s)));
+        } catch (e) {}
+      },
+
+      renderOverlaysSvg(overlays) {
+        if (!overlays || !overlays.viewBox || !Array.isArray(overlays.items)) return '';
+        const [vx, vy, vw, vh] = overlays.viewBox;
+        const shapesHtml = overlays.items.map(item => {
+          if (item.type === 'region' && Array.isArray(item.shapes)) {
+            return item.shapes.map(poly => {
+              const pts = poly.map(p => `${p[0]},${p[1]}`).join(' ');
+              return `<polygon points="${pts}" fill="rgba(2, 132, 199, 0.22)" stroke="#0284c7" stroke-width="4" stroke-dasharray="6,4" />`;
+            }).join('');
+          }
+          if (item.type === 'arrow' && Array.isArray(item.paths)) {
+            return item.paths.map(line => {
+              if (line.length >= 2) {
+                const p1 = line[0], p2 = line[1];
+                return `<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />`;
+              }
+              return '';
+            }).join('');
+          }
+          if (item.type === 'segment' && Array.isArray(item.paths)) {
+            return item.paths.map(seg => {
+              const pts = seg.map(p => `${p[0]},${p[1]}`).join(' ');
+              return `<polyline points="${pts}" fill="none" stroke="#0284c7" stroke-width="${item.width || 6}" stroke-linecap="round" stroke-linejoin="round" />`;
+            }).join('');
+          }
+          return '';
+        }).join('');
+
+        return `
+          <svg class="overlay-svg" viewBox="${vx} ${vy} ${vw} ${vh}" preserveAspectRatio="xMidYMid meet">
+            ${shapesHtml}
+          </svg>
+        `;
+      },
+
+      renderTeach(view, level) {
+        const states = level.states || [];
+        const currentState = states[this.state.stateIdx] || {};
+
+        // Start reading timer for current state if not yet seen
+        if (states.length > 0 && !this.state.seenStates.has(this.state.stateIdx)) {
+          const readingKey = `teach_${this.state.levelIdx}_${this.state.stateIdx}`;
+          if (this.state.activeReadingKey !== readingKey) {
+            this.startTeachReading(this.state.stateIdx, currentState.caption || '');
+          }
+        }
+        
+        // Track explore only if user has interacted with this state, or immediately if noFigure level
+        const trackingNodes = this.data.tracking?.nodeIds || [];
+        if (level.noFigure && level.nodeId && trackingNodes.includes(level.nodeId)) {
+          window.CourseLearning.explore(level.nodeId);
+          this.trackTime(level.nodeId);
+        } else if (currentState.nodeId && this.state.seenStates.has(this.state.stateIdx)) {
+          window.CourseLearning.explore(currentState.nodeId);
+          this.trackTime(currentState.nodeId);
+        }
+
+        const hasFocus = Array.isArray(currentState.focus) && currentState.focus.length === 4;
+        const [x1, y1, x2, y2] = hasFocus ? currentState.focus : [0, 0, 1, 1];
+        const originX = ((x1 + x2) / 2) * 100;
+        const originY = ((y1 + y2) / 2) * 100;
+        const scaleVal = Math.min(3, 1 / Math.max(x2 - x1, y2 - y1, 0.25));
+
+        const allStatesSeen = states.every((_, idx) => this.state.seenStates.has(idx));
+        const requiredLegendSeen = (currentState.legendMode !== 'required') || this.isLegendSeen(this.state.levelIdx, this.state.stateIdx);
+        const canStartQuiz = allStatesSeen && requiredLegendSeen;
+        const isLocked = (currentState.legendMode === 'required') && !requiredLegendSeen;
+
+        // Legends HTML (Handles both numbered and particle/sample legends)
+        let legendsHtml = '';
+        const legendsList = currentState.legends || [];
+        if (legendsList.length > 0) {
+          const isCollapsible = legendsList.length > 5;
+          const isExpanded = !isCollapsible || this.state.isLegendExpanded;
+
+          const rows = legendsList.map(lg => {
+            const isHighlight = currentState.highlightNums && (currentState.highlightNums.includes(lg.num) || currentState.highlightNums.includes(lg.name));
+            let sampleBox = '';
+            if (lg.sample) {
+              if (lg.sample.img) {
+                sampleBox = `<div class="legend-sample-thumb"><img src="${lg.sample.img}" alt="${lg.name}"></div>`;
+              } else {
+                sampleBox = `<div class="legend-sample-thumb pending"><span>${this.ui.legendUnavailable}</span></div>`;
+              }
+            }
+            return `
+              <div class="legend-row ${isHighlight ? 'highlight' : ''}">
+                ${lg.num ? `<span class="legend-num">${lg.num}</span>` : sampleBox}
+                <span class="legend-name" style="font-weight: 600;">${lg.name}</span>
+                ${lg.func ? `<span class="text-sm text-muted">(${lg.func})</span>` : ''}
+              </div>
+            `;
+          }).join('');
+
+          legendsHtml = `
+            <div class="legends-container">
+              <div class="legend-header">
+                <span class="legend-title">${this.ui.legendHeading}</span>
+                ${currentState.legendMode === 'required' ? `
+                  <button class="btn" type="button" id="btn-open-legend" style="min-height: 44px; padding: 6px 14px; font-size: calc(18px * var(--font-scale, 1));">
+                    ${requiredLegendSeen ? this.ui.legendReadDone : this.ui.legendRead}
+                  </button>
+                ` : ''}
+              </div>
+              ${isLocked ? `
+                <div class="legend-notice">${this.ui.legendFirstHint}</div>
+              ` : ''}
+              ${isCollapsible ? `
+                <button class="btn btn-block" type="button" id="btn-toggle-legend-expand" style="min-height: 44px; padding: 8px 14px; margin-top: 6px; font-size: calc(18px * var(--font-scale, 1)); border: 1px solid var(--border); background: #ffffff;">
+                  ${isExpanded ? '收起圖例 ▲' : '看圖例 ▼'}
+                </button>
+              ` : ''}
+              <div class="legend-list" style="${isExpanded ? '' : 'display: none;'}">${rows}</div>
+            </div>
+          `;
+        } else if (currentState.legendReason) {
+          legendsHtml = `
+            <div class="legends-container">
+              <div class="text-sm text-muted">${currentState.legendReason}</div>
+            </div>
+          `;
+        }
+
+        // State buttons: ALWAYS show even if length is 1 so user can identify & click state
+        const stateButtons = states.map((s, idx) => {
+          const isCurrent = idx === this.state.stateIdx;
+          const isSeen = this.state.seenStates.has(idx);
+          const isReading = this.state.activeReadingKey === `teach_${this.state.levelIdx}_${idx}`;
+          const isDisabled = isLocked && !isCurrent;
+          let badgeText = this.ui.stateUnseen;
+          if (isSeen) badgeText = this.ui.stateSeen;
+          else if (isReading) badgeText = '閱讀中…';
+          return `
+            <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-state-idx="${idx}" ${isDisabled ? 'disabled' : ''}>
+              <span>${s.btnText}</span>
+              <span class="badge-seen">${badgeText}</span>
+              ${isReading ? `
+                <div class="reading-progress-track">
+                  <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
+                </div>
+              ` : ''}
+            </button>
+          `;
+        }).join('');
+
+        const overlaysSvg = this.renderOverlaysSvg(currentState.overlays);
+        const markersHtml = (currentState.markers || []).map(m => `
+          <span class="png-marker-pin" style="left: ${m.x}%; top: ${m.y}%;">${m.num}</span>
+        `).join('');
+        const aspectVal = currentState.ratio || '16 / 9';
+
+        let noFigureHtml = '';
+        if (level.noFigure) {
+          const parts = [];
+          if (level.intro) {
+            const introStr = Array.isArray(level.intro) ? level.intro.join('\n') : String(level.intro);
+            if (introStr.trim()) parts.push(introStr.trim());
+          }
+          if (level.body) {
+            const bodyStr = Array.isArray(level.body) ? level.body.join('\n') : String(level.body);
+            if (bodyStr.trim() && !parts.includes(bodyStr.trim())) {
+              parts.push(bodyStr.trim());
+            }
+          }
+          if (level.items) {
+            const itemsStr = Array.isArray(level.items) ? level.items.join('\n') : String(level.items);
+            if (itemsStr.trim() && !parts.includes(itemsStr.trim())) {
+              parts.push(itemsStr.trim());
+            }
+          }
+          if (parts.length > 0) {
+            noFigureHtml = `
+              <div class="caption-box" style="margin-top: 16px;">
+                ${parts.map((p, idx) => `
+                  <p class="text-body" style="font-size: calc(18px * var(--font-scale, 1)); line-height: 1.6; white-space: pre-line; margin: 0; ${idx > 0 ? 'margin-top: 12px;' : ''}">${p}</p>
+                `).join('')}
+              </div>
+            `;
+          }
+        }
+
+        view.innerHTML = `
+          <div>
+            <h2 class="title-lg">${level.title}</h2>
+            <p class="text-sm text-muted" style="margin-top: 4px;">
+              ${level.noFigure ? this.ui.textGuide : (level.teachGuide || this.ui.teachGuide)}
+            </p>
+          </div>
+
+          ${noFigureHtml}
+
+          ${!level.noFigure && currentState.img ? `
+            <div class="diagram-region node-figure">
+              <div class="diagram-viewport ${this.state.isZoomed ? 'zoomed' : ''}" id="diagram-vp" style="--aspect-ratio: ${aspectVal}; --origin-x: ${originX}%; --origin-y: ${originY}%; --scale: ${scaleVal};">
+                <img src="${currentState.img}" alt="${currentState.btnText || ''}">
+                ${overlaysSvg}
+                ${markersHtml}
+              </div>
+              ${hasFocus ? `
+                <button class="btn-zoom-toggle" type="button" id="btn-toggle-zoom">
+                  ${this.state.isZoomed ? this.ui.focusWhole : this.ui.focusZoom}
+                </button>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          ${legendsHtml}
+
+          ${states.length > 0 ? `<div class="state-tray">${stateButtons}</div>` : ''}
+
+          ${currentState.caption ? `
+            <div class="caption-box">
+              <p class="text-body">${currentState.caption}</p>
+            </div>
+          ` : ''}
+
+          ${states.length > 0 ? `
+            <div class="text-sm text-muted" style="text-align: center;">
+              ${allStatesSeen ? this.ui.statesDone : this.ui.stateProgress.replace('{seen}', this.state.seenStates.size).replace('{total}', states.length)}
+            </div>
+          ` : ''}
+
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-start-quiz" ${canStartQuiz ? '' : 'disabled'}>
+              ${this.ui.startQuiz}
+            </button>
+          </div>
+        `;
+
+        // Bind events
+        view.querySelectorAll('[data-state-idx]').forEach(btn => {
+          btn.onclick = () => {
+            if (btn.disabled) return;
+            const idx = parseInt(btn.dataset.stateIdx, 10);
+            if (this.state.stateIdx !== idx) {
+              this.state.stateIdx = idx;
+              this.state.isZoomed = false;
+              this.clearActiveReading();
+              if (!this.state.seenStates.has(idx)) {
+                this.startTeachReading(idx, states[idx].caption || '');
+              }
+              this.render();
+            }
+          };
+        });
+
+        const zoomBtn = document.getElementById('btn-toggle-zoom');
+        if (zoomBtn) {
+          zoomBtn.onclick = () => {
+            this.state.isZoomed = !this.state.isZoomed;
+            this.render();
+          };
+        }
+
+        const toggleLegendBtn = document.getElementById('btn-toggle-legend-expand');
+        if (toggleLegendBtn) {
+          toggleLegendBtn.onclick = () => {
+            this.state.isLegendExpanded = !this.state.isLegendExpanded;
+            this.render();
+          };
+        }
+
+        const openLegendBtn = document.getElementById('btn-open-legend');
+        if (openLegendBtn) {
+          openLegendBtn.onclick = () => {
+            this.openLegendDialog(currentState.legends);
+          };
+        }
+
+        document.getElementById('btn-start-quiz').onclick = () => {
+          const trackingNodes = this.data.tracking?.nodeIds || [];
+          if (level.noFigure && level.nodeId && trackingNodes.includes(level.nodeId)) {
+            window.CourseLearning.explore(level.nodeId);
+            this.trackTime(null);
+          }
+          this.state.questionIdx = 0;
+          this.state.quizSubStateIdx = 0;
+          this.state.quizAnswerLocked = false;
+          this.state.matchAnswers = {};
+          this.state.matchLockedRows = new Set();
+          this.state.multiSelections = new Set();
+          this.state.orderPicks = [];
+          this.state.feedback = null;
+          this.state.selectedOptId = null;
+          this.setPhase('QUIZ');
+        };
+      },
+
+      openLegendDialog(legends) {
+        const dlg = document.getElementById('legend-dialog');
+        const list = document.getElementById('legend-dlg-list');
+        const confirmBtn = document.getElementById('btn-legend-confirm');
+
+        // Only display particle sample legends in this dialog; anatomical structures with num belong to diagram pins
+        const samplesOnly = (legends || []).filter(lg => lg.sample);
+        const targetList = samplesOnly.length > 0 ? samplesOnly : (legends || []);
+
+        list.innerHTML = targetList.map(lg => {
+          let thumb = '';
+          if (lg.sample && lg.sample.img) {
+            thumb = `<img src="${lg.sample.img}" alt="${lg.name}">`;
+          } else if (lg.sample && lg.sample.pending) {
+            thumb = `<span class="text-xs text-muted" style="text-align: center; padding: 4px;">${this.ui.legendUnavailable}</span>`;
+          } else if (lg.num) {
+            thumb = `<span class="legend-num" style="font-size: calc(20px * var(--font-scale, 1));">${lg.num}</span>`;
+          } else {
+            thumb = `<span class="text-xs text-muted">${this.ui.legendUnavailable}</span>`;
+          }
+
+          return `
+            <div class="sample-item">
+              <div class="sample-img-box">
+                ${thumb}
+              </div>
+              <div style="flex: 1;">
+                <div class="title-stem">${lg.name}</div>
+                ${lg.func ? `<div class="text-sm text-muted">${lg.func}</div>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const totalLegendText = targetList.map(lg => (lg.name || '') + (lg.func || '')).join('');
+        const chars = totalLegendText.replace(/\s+/g, '').length;
+        let sec = Math.min(10, Math.max(3, Math.ceil(chars / 10)));
+
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+
+        if (this.state.legendTimer) clearInterval(this.state.legendTimer);
+        this.state.legendTimer = setInterval(() => {
+          sec--;
+          if (sec > 0) {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+          } else {
+            clearInterval(this.state.legendTimer);
+            this.state.legendTimer = null;
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = this.ui.legendReadDone;
+          }
+        }, 1000);
+
+        confirmBtn.onclick = () => {
+          if (confirmBtn.disabled) return;
+          if (this.state.legendTimer) {
+            clearInterval(this.state.legendTimer);
+            this.state.legendTimer = null;
+          }
+          dlg.close();
+          this.markLegendSeen(this.state.levelIdx, this.state.stateIdx);
+          this.render();
+        };
+
+        dlg.showModal();
+      },
+
+      renderQuiz(view, level) {
+        const q = level.questions[this.state.questionIdx];
+        this.trackTime(null);
+
+        // Handle Explain Template
+        if (q.template === 'explain') {
+          const subStates = q.states || [];
+          const qId = q.id || `explain_${this.state.levelIdx}_${this.state.questionIdx}`;
+          const seenSet = this.getExplainSeen(qId);
+          const curSub = subStates[this.state.quizSubStateIdx] || {};
+
+          // Start reading timer for current subState if not seen
+          if (subStates.length > 0 && !seenSet.has(this.state.quizSubStateIdx)) {
+            const readingKey = `explain_${qId}_${this.state.quizSubStateIdx}`;
+            if (this.state.activeReadingKey !== readingKey) {
+              const textToRead = curSub.caption || (subStates.length === 1 ? (q.body || '') : '');
+              this.startExplainReading(qId, this.state.quizSubStateIdx, textToRead);
+            }
+          }
+          
+          if (curSub.nodeId && seenSet.has(this.state.quizSubStateIdx)) {
+            window.CourseLearning.explore(curSub.nodeId);
+            this.trackTime(curSub.nodeId);
+          }
+
+          const seenCount = subStates.filter((_, idx) => seenSet.has(idx)).length;
+          const allSubStatesSeen = subStates.length > 0 && seenCount === subStates.length;
+
+          const subBtns = subStates.map((s, idx) => {
+            const isCurrent = idx === this.state.quizSubStateIdx;
+            const isSeen = seenSet.has(idx);
+            const isReading = this.state.activeReadingKey === `explain_${qId}_${idx}`;
+            let badgeText = this.ui.stateUnseen;
+            if (isSeen) badgeText = this.ui.stateSeen;
+            else if (isReading) badgeText = '閱讀中…';
+            return `
+              <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-sub-idx="${idx}">
+                <span>${s.btnText}</span>
+                <span class="badge-seen">${badgeText}</span>
+                ${isReading ? `
+                  <div class="reading-progress-track">
+                    <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
+                  </div>
+                ` : ''}
+              </button>
+            `;
+          }).join('');
+
+          view.innerHTML = `
+            <div>
+              <p class="title-stem">${q.body || ''}</p>
+            </div>
+            ${curSub.img ? `
+              <div class="diagram-region node-figure">
+                <div class="diagram-viewport" style="--aspect-ratio: ${curSub.ratio || '16 / 9'};">
+                  <img src="${curSub.img}" alt="${curSub.btnText || ''}">
+                </div>
+              </div>
+            ` : ''}
+            <div class="state-tray">${subBtns}</div>
+            ${curSub.caption ? `
+              <div class="caption-box">
+                <p class="text-body" style="white-space: pre-line;">${curSub.caption}</p>
+              </div>
+            ` : ''}
+            ${subStates.length > 1 && !allSubStatesSeen ? `
+              <div class="text-sm text-muted" style="text-align: center; margin-top: 10px;">
+                ${this.ui.stateProgress.replace('{seen}', seenCount).replace('{total}', subStates.length)}
+              </div>
+            ` : ''}
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-next-q" ${allSubStatesSeen ? '' : 'disabled'}>${this.ui.next}</button>
+            </div>
+          `;
+
+          view.querySelectorAll('[data-sub-idx]').forEach(b => {
+            b.onclick = () => {
+              const subIdx = parseInt(b.dataset.subIdx, 10);
+              if (this.state.quizSubStateIdx !== subIdx) {
+                this.state.quizSubStateIdx = subIdx;
+                this.clearActiveReading();
+                if (!seenSet.has(subIdx)) {
+                  this.startExplainReading(qId, subIdx, subStates[subIdx].caption || '');
+                }
+                this.render();
+              }
+            };
+          });
+
+          const nextBtn = document.getElementById('btn-next-q');
+          if (nextBtn) {
+            nextBtn.onclick = () => {
+              if (!allSubStatesSeen) return;
+              this.advanceQuiz(level);
+            };
+          }
+          return;
+        }
+
+        // Normal Quiz
+        const hasFigure = !q.quizNoFigure && ((q.quizFigure && q.quizFigure.img) || q.quizImgState);
+        const figImg = q.quizFigure ? q.quizFigure.img : (q.quizImgState ? level.states.find(s => s.id === q.quizImgState)?.img : null);
+        const figRatio = q.quizFigure ? q.quizFigure.ratio : (q.quizImgState ? level.states.find(s => s.id === q.quizImgState)?.ratio : '16 / 9');
+
+        let contentHtml = '';
+        if (q.mode === 'order') {
+          // Order sequence selection
+          const items = q.items || [];
+          const pickedIds = this.state.orderPicks;
+          const availableItems = items.filter(it => !pickedIds.includes(it.id));
+
+          const pickedHtml = pickedIds.map((id, idx) => {
+            const it = items.find(x => x.id === id);
+            return `
+              <div class="order-item-badge">
+                <span style="color: var(--primary); font-weight: 700;">${this.ui.orderBadge.replace('{n}', idx + 1)}</span>
+                <span>${it ? (it.label || it.text) : ''}</span>
+              </div>
+            `;
+          }).join('');
+
+          const buttonsHtml = availableItems.map(it => `
+            <button class="btn btn-block" type="button" data-order-id="${it.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+              ${it.label || it.text}
+            </button>
+          `).join('');
+
+          contentHtml = `
+            <div class="order-group">
+              <div class="order-picked-list">
+                ${pickedHtml || `<span class="text-sm text-muted" style="text-align: center; padding: 10px;">${this.ui.unselected}</span>`}
+              </div>
+              <div class="options-list">${buttonsHtml}</div>
+              ${!this.state.quizAnswerLocked && pickedIds.length > 0 ? `
+                <div class="actions-row" style="margin-top: 14px;">
+                  <button class="btn" type="button" id="btn-reset-order">${this.ui.resetOrder}</button>
+                  ${pickedIds.length === items.length ? `
+                    <button class="btn btn-primary" type="button" id="btn-submit-order">${this.ui.submit}</button>
+                  ` : ''}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        } else if (q.template === 'match' || q.mode === 'rows') {
+          // Rows matching question
+          const rowsHtml = (q.items || []).map(it => {
+            const isLocked = this.state.matchLockedRows.has(it.id);
+            const selectedTarget = this.state.matchAnswers[it.id];
+            const targetBtns = (q.targets || []).map(tg => `
+              <button class="btn-target ${selectedTarget === tg.id ? 'active' : ''}" type="button" data-item-id="${it.id}" data-target-id="${tg.id}" ${isLocked ? 'disabled' : ''}>
+                ${tg.label}
+              </button>
+            `).join('');
+
+            return `
+              <div class="match-card ${isLocked ? 'locked' : ''}">
+                <div class="match-stem">${isLocked ? '✔ ' : ''}${it.text}</div>
+                <div class="match-targets">${targetBtns}</div>
+              </div>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="match-group">${rowsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-match" style="margin-top: 14px;">${this.ui.submit}</button>
+            ` : ''}
+          `;
+        } else if (q.mode === 'multi') {
+          // Multi choice
+          const needed = q.selectCount || 2;
+          const optionsHtml = (q.options || []).map(opt => {
+            const isSel = this.state.multiSelections.has(opt.id);
+            let stateCls = isSel ? 'selected' : '';
+            if (this.state.quizAnswerLocked) {
+              if (Array.isArray(q.answer) && q.answer.includes(opt.id)) stateCls = 'correct';
+              else if (isSel) stateCls = 'wrong';
+            }
+            return `
+              <button class="btn btn-option ${stateCls}" type="button" data-opt-id="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+                ${opt.text}
+              </button>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="options-list">${optionsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-multi" style="margin-top: 14px;" ${this.state.multiSelections.size === needed ? '' : 'disabled'}>
+                ${this.ui.submit}
+              </button>
+            ` : ''}
+          `;
+        } else {
+          // Single choice
+          if (!this.state.currentOptions || this.state.currentOptions.qid !== q.id) {
+            const shuffled = [...(q.options || [])].sort(() => Math.random() - 0.5);
+            this.state.currentOptions = shuffled;
+            this.state.currentOptions.qid = q.id;
+          }
+
+          const optionsHtml = this.state.currentOptions.map(opt => {
+            let stateCls = '';
+            if (this.state.quizAnswerLocked) {
+              if (opt.id === q.answer) stateCls = 'correct';
+              else if (opt.id === this.state.selectedOptId) stateCls = 'wrong';
+            } else if (this.state.selectedOptId === opt.id) {
+              stateCls = 'selected';
+            }
+            return `
+              <button class="btn btn-option ${stateCls}" type="button" data-opt-id="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+                ${opt.text}
+              </button>
+            `;
+          }).join('');
+
+          contentHtml = `
+            <div class="options-list">${optionsHtml}</div>
+            ${!this.state.quizAnswerLocked ? `
+              <button class="btn btn-primary btn-block" type="button" id="btn-submit-choice" style="margin-top: 14px;" ${this.state.selectedOptId ? '' : 'disabled'}>
+                ${this.ui.submit}
+              </button>
+            ` : ''}
+          `;
+        }
+
+        // Feedback box
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        const quizMarkers = (q.quizFigure && q.quizFigure.markers) || q.markers || [];
+        const quizMarkersHtml = quizMarkers.map(m => `
+          <span class="png-marker-pin" style="left: ${m.x}%; top: ${m.y}%;">${m.num}</span>
+        `).join('');
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${q.prompt || q.stem || ''}</h3>
+          </div>
+
+          ${hasFigure && figImg ? `
+            <div class="diagram-region node-figure">
+              <div class="diagram-viewport" style="--aspect-ratio: ${figRatio || '16 / 9'};">
+                <img src="${figImg}" alt="">
+                ${quizMarkersHtml}
+              </div>
+            </div>
+          ` : ''}
+
+          ${contentHtml}
+          ${feedbackHtml}
+
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-q">${this.ui.next}</button>
+              ` : `
+                <div class="actions-row">
+                  ${q.hint ? `<button class="btn" type="button" id="btn-hint">${this.ui.hint}</button>` : ''}
+                  <button class="btn btn-primary" type="button" id="btn-retry">${this.ui.retry}</button>
+                </div>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        // Bind match interactions
+        view.querySelectorAll('.btn-target').forEach(tb => {
+          tb.onclick = () => {
+            const itemId = tb.dataset.itemId;
+            const targetId = tb.dataset.targetId;
+            this.state.matchAnswers[itemId] = targetId;
+            this.render();
+          };
+        });
+
+        const submitMatchBtn = document.getElementById('btn-submit-match');
+        if (submitMatchBtn) {
+          submitMatchBtn.onclick = () => {
+            this.submitMatchAnswer(q, level);
+          };
+        }
+
+        // Bind multi interactions
+        view.querySelectorAll('[data-opt-id]').forEach(ob => {
+          ob.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            if (q.mode === 'multi') {
+              const optId = ob.dataset.optId;
+              if (this.state.multiSelections.has(optId)) {
+                this.state.multiSelections.delete(optId);
+              } else if (this.state.multiSelections.size < (q.selectCount || 2)) {
+                this.state.multiSelections.add(optId);
+              }
+              this.render();
+            } else {
+              this.state.selectedOptId = ob.dataset.optId;
+              this.render();
+            }
+          };
+        });
+
+        const submitChoiceBtn = document.getElementById('btn-submit-choice');
+        if (submitChoiceBtn) {
+          submitChoiceBtn.onclick = () => {
+            if (!this.state.selectedOptId || this.state.quizAnswerLocked) return;
+            this.submitChoiceAnswer(q, this.state.selectedOptId, level);
+          };
+        }
+
+        const submitMultiBtn = document.getElementById('btn-submit-multi');
+        if (submitMultiBtn) {
+          submitMultiBtn.onclick = () => {
+            this.submitMultiAnswer(q, level);
+          };
+        }
+
+        // Bind order interactions
+        view.querySelectorAll('[data-order-id]').forEach(btn => {
+          btn.onclick = () => {
+            this.state.orderPicks.push(btn.dataset.orderId);
+            this.render();
+          };
+        });
+
+        const resetOrderBtn = document.getElementById('btn-reset-order');
+        if (resetOrderBtn) {
+          resetOrderBtn.onclick = () => {
+            this.state.orderPicks = [];
+            this.render();
+          };
+        }
+
+        const submitOrderBtn = document.getElementById('btn-submit-order');
+        if (submitOrderBtn) {
+          submitOrderBtn.onclick = () => {
+            this.submitOrderAnswer(q, level);
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedOptId = null;
+            this.state.feedback = null;
+            this.state.multiSelections = new Set();
+            this.state.orderPicks = [];
+            this.render();
+          };
+        }
+
+        const hintBtn = document.getElementById('btn-hint');
+        if (hintBtn) {
+          hintBtn.onclick = () => {
+            window.CourseLearning.hint(q.id);
+            this.state.feedback = { type: 'hint', text: `${this.ui.hintLabel} ${q.hint}` };
+            this.render();
+          };
+        }
+
+        const nextQBtn = document.getElementById('btn-next-q');
+        if (nextQBtn) {
+          nextQBtn.onclick = () => {
+            this.advanceQuiz(level);
+          };
+        }
+      },
+
+      submitChoiceAnswer(q, selectedOptId, level) {
+        this.state.selectedOptId = selectedOptId;
+        this.state.quizAnswerLocked = true;
+        const isCorrect = selectedOptId === q.answer;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          let correctText = q.feedbackCorrect || this.ui.correct;
+          if (correctText === this.ui.correct && Array.isArray(this.data.encouragement.correct)) {
+            correctText = this.data.encouragement.correct[Math.floor(Math.random() * this.data.encouragement.correct.length)];
+          }
+          this.state.feedback = { type: 'correct', text: correctText };
+        } else {
+          const wrongText = (q.byOption && q.byOption[selectedOptId]) || q.feedbackWrong || this.ui.retry;
+          this.state.feedback = { type: 'wrong', text: wrongText };
+        }
+        this.render();
+      },
+
+      submitMultiAnswer(q, level) {
+        const userAnswers = Array.from(this.state.multiSelections).sort();
+        const expectedAnswers = Array.isArray(q.answer) ? [...q.answer].sort() : [];
+        const isCorrect = userAnswers.length === expectedAnswers.length && userAnswers.every((val, idx) => val === expectedAnswers[idx]);
+        
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: q.feedbackWrong || this.ui.retry };
+        }
+        this.render();
+      },
+
+      submitOrderAnswer(q, level) {
+        const expected = q.answer || [];
+        const actual = this.state.orderPicks;
+        const isCorrect = expected.length === actual.length && expected.every((val, idx) => val === actual[idx]);
+
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, isCorrect);
+
+        if (isCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: q.feedbackWrong || this.ui.retry };
+        }
+        this.render();
+      },
+
+      submitMatchAnswer(q, level) {
+        let allCorrect = true;
+        let wrongFeedback = q.feedbackWrong;
+
+        (q.items || []).forEach(it => {
+          const expected = q.answer[it.id];
+          const actual = this.state.matchAnswers[it.id];
+          if (expected === actual) {
+            this.state.matchLockedRows.add(it.id);
+          } else {
+            allCorrect = false;
+            if (q.byItem && q.byItem[it.id]) wrongFeedback = q.byItem[it.id];
+          }
+        });
+
+        this.state.quizAnswerLocked = true;
+        window.CourseLearning.answer(q.id, allCorrect);
+
+        if (allCorrect) {
+          this.state.feedback = { type: 'correct', text: q.feedbackCorrect || this.ui.correct };
+        } else {
+          this.state.feedback = { type: 'wrong', text: wrongFeedback };
+        }
+        this.render();
+      },
+
+      advanceQuiz(level) {
+        this.state.questionIdx++;
+        this.state.quizAnswerLocked = false;
+        this.state.feedback = null;
+        this.state.quizSubStateIdx = 0;
+        this.state.matchAnswers = {};
+        this.state.matchLockedRows = new Set();
+        this.state.multiSelections = new Set();
+        this.state.orderPicks = [];
+        this.state.currentOptions = [];
+
+        if (this.state.questionIdx >= level.questions.length) {
+          this.setPhase('LEVEL_PASS');
+        } else {
+          this.render();
+        }
+      },
+
+      renderLevelPass(view) {
+        this.trackTime(null);
+        const level = this.data.levels[this.state.levelIdx];
+        const cheers = this.data.encouragement.levelPass || [];
+        const cheerText = cheers[Math.floor(Math.random() * cheers.length)] || '';
+
+        view.innerHTML = `
+          <div style="margin-top: 20px;">
+            <h2 class="title-lg" style="color: var(--success);">${this.ui.passTitle.replace('{n}', this.state.levelIdx + 1)}</h2>
+          </div>
+          <div class="caption-box" style="margin-top: 16px;">
+            <span style="font-weight: 700;">${this.ui.summaryLabel}</span>
+            <p class="text-body" style="margin-top: 4px;">${level.summary}</p>
+          </div>
+          <div class="feedback-box correct" style="margin-top: 14px;">
+            <p class="text-body">${cheerText}</p>
+          </div>
+          <div class="actions-bar">
+            <button class="btn btn-primary btn-block" type="button" id="btn-next-level">${this.ui.nextLevel}</button>
+          </div>
+        `;
+
+        document.getElementById('btn-next-level').onclick = () => {
+          if (this.state.levelIdx + 1 < this.data.levels.length) {
+            this.startLevel(this.state.levelIdx + 1);
+          } else {
+            // All levels finished, proceed to ending or truefalse
+            if (this.data.ending && this.data.ending.steps && this.data.ending.steps.length > 0) {
+              this.state.endingStepIdx = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.feedback = null;
+              this.setPhase('ENDING');
+            } else if (this.data.truefalse && this.data.truefalse.length > 0) {
+              this.state.tfIdx = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.feedback = null;
+              this.setPhase('TRUEFALSE');
+            } else {
+              this.startAssessment('foundation');
+            }
+          }
+        };
+      },
+
+      renderEnding(view) {
+        const steps = this.data.ending.steps || [];
+        const step = steps[this.state.endingStepIdx];
+
+        if (!step) {
+          // Complete ending
+          view.innerHTML = `
+            <div style="margin-top: 24px;">
+              <h2 class="title-lg">${this.ui.endingDone}</h2>
+            </div>
+            <div class="caption-box" style="margin-top: 16px;">
+              <p class="text-body">${this.data.ending.completeMessage || ''}</p>
+            </div>
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-to-tf">${this.ui.truefalse}</button>
+            </div>
+          `;
+          document.getElementById('btn-to-tf').onclick = () => {
+            this.state.tfIdx = 0;
+            this.state.quizAnswerLocked = false;
+            this.state.feedback = null;
+            this.setPhase('TRUEFALSE');
+          };
+          return;
+        }
+
+        const optionsHtml = (step.options || []).map(opt => {
+          let cls = '';
+          if (this.state.quizAnswerLocked) {
+            if (opt.id === step.answer) cls = 'correct';
+            else if (opt.id === this.state.selectedEndOptId) cls = 'wrong';
+          } else if (this.state.selectedEndOptId === opt.id) {
+            cls = 'selected';
+          }
+          return `
+            <button class="btn btn-option ${cls}" type="button" data-end-opt="${opt.id}" ${this.state.quizAnswerLocked ? 'disabled' : ''}>
+              ${opt.text}
+            </button>
+          `;
+        }).join('');
+
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}" style="margin-top: 14px;">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${step.prompt}</h3>
+          </div>
+          <div class="options-list" style="margin-top: 14px;">${optionsHtml}</div>
+          ${!this.state.quizAnswerLocked ? `
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-ending" style="margin-top: 14px;" ${this.state.selectedEndOptId ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          ` : ''}
+          ${feedbackHtml}
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-ending">${this.ui.next}</button>
+              ` : `
+                <button class="btn btn-primary btn-block" type="button" id="btn-retry-ending">${this.ui.retry}</button>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        view.querySelectorAll('[data-end-opt]').forEach(b => {
+          b.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            this.state.selectedEndOptId = b.dataset.endOpt;
+            this.render();
+          };
+        });
+
+        const submitEndingBtn = document.getElementById('btn-submit-ending');
+        if (submitEndingBtn) {
+          submitEndingBtn.onclick = () => {
+            if (!this.state.selectedEndOptId || this.state.quizAnswerLocked) return;
+            const optId = this.state.selectedEndOptId;
+            this.state.quizAnswerLocked = true;
+            const ok = optId === step.answer;
+            window.CourseLearning.answer(step.id, ok);
+            this.state.feedback = {
+              type: ok ? 'correct' : 'wrong',
+              text: ok ? (step.feedbackCorrect || this.ui.correct) : (step.feedbackWrong || this.ui.retry)
+            };
+            this.render();
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry-ending', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry-ending');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedEndOptId = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+
+        const nextBtn = document.getElementById('btn-next-ending');
+        if (nextBtn) {
+          nextBtn.onclick = () => {
+            this.state.endingStepIdx++;
+            this.state.quizAnswerLocked = false;
+            this.state.selectedEndOptId = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+      },
+
+      renderTrueFalse(view) {
+        const tfList = this.data.truefalse || [];
+        const tf = tfList[this.state.tfIdx];
+
+        if (!tf) {
+          // Completed TrueFalse
+          view.innerHTML = `
+            <div style="margin-top: 24px;">
+              <h2 class="title-lg">${this.ui.transition}</h2>
+            </div>
+            <div class="caption-box" style="margin-top: 16px;">
+              <p class="text-body">${this.data.assessment.intro || ''}</p>
+            </div>
+            <div class="actions-bar">
+              <button class="btn btn-primary btn-block" type="button" id="btn-start-ass">${this.ui.beginAssessment}</button>
+            </div>
+          `;
+          document.getElementById('btn-start-ass').onclick = () => {
+            this.startAssessment('foundation');
+          };
+          return;
+        }
+
+        const isTrueSelected = this.state.selectedTfVal === true;
+        const isFalseSelected = this.state.selectedTfVal === false;
+
+        let trueCls = isTrueSelected ? 'selected' : '';
+        let falseCls = isFalseSelected ? 'selected' : '';
+
+        if (this.state.quizAnswerLocked) {
+          if (tf.answer === true) trueCls = 'correct';
+          else if (isTrueSelected) trueCls = 'wrong';
+
+          if (tf.answer === false) falseCls = 'correct';
+          else if (isFalseSelected) falseCls = 'wrong';
+        }
+
+        let feedbackHtml = '';
+        if (this.state.feedback) {
+          feedbackHtml = `
+            <div class="feedback-box ${this.state.feedback.type}" style="margin-top: 14px;">
+              ${this.state.feedback.text}
+            </div>
+          `;
+        }
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${tf.prompt}</h3>
+          </div>
+          <div class="actions-row" style="margin-top: 20px;">
+            <button class="btn btn-block ${trueCls}" type="button" data-tf-val="true" ${this.state.quizAnswerLocked ? 'disabled' : ''} style="min-height: 52px; font-size: calc(20px * var(--font-scale, 1));">
+              ${this.ui.yes}
+            </button>
+            <button class="btn btn-block ${falseCls}" type="button" data-tf-val="false" ${this.state.quizAnswerLocked ? 'disabled' : ''} style="min-height: 52px; font-size: calc(20px * var(--font-scale, 1));">
+              ${this.ui.no}
+            </button>
+          </div>
+          ${!this.state.quizAnswerLocked ? `
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-tf" style="margin-top: 16px;" ${this.state.selectedTfVal !== null && this.state.selectedTfVal !== undefined ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          ` : ''}
+          ${feedbackHtml}
+          <div class="actions-bar">
+            ${this.state.quizAnswerLocked ? `
+              ${this.state.feedback && this.state.feedback.type === 'correct' ? `
+                <button class="btn btn-primary btn-block" type="button" id="btn-next-tf">${this.ui.next}</button>
+              ` : `
+                <button class="btn btn-primary btn-block" type="button" id="btn-retry-tf">${this.ui.retry}</button>
+              `}
+            ` : ''}
+          </div>
+        `;
+
+        view.querySelectorAll('[data-tf-val]').forEach(b => {
+          b.onclick = () => {
+            if (this.state.quizAnswerLocked) return;
+            this.state.selectedTfVal = (b.dataset.tfVal === 'true');
+            this.render();
+          };
+        });
+
+        const submitTfBtn = document.getElementById('btn-submit-tf');
+        if (submitTfBtn) {
+          submitTfBtn.onclick = () => {
+            if (this.state.selectedTfVal === null || this.state.selectedTfVal === undefined || this.state.quizAnswerLocked) return;
+            const val = this.state.selectedTfVal;
+            this.state.quizAnswerLocked = true;
+            const ok = val === tf.answer;
+            window.CourseLearning.answer(tf.id, ok);
+            this.state.feedback = {
+              type: ok ? 'correct' : 'wrong',
+              text: ok ? (tf.feedbackCorrect || this.ui.correct) : (tf.feedbackWrong || this.ui.retry)
+            };
+            this.render();
+          };
+        }
+
+        if (this.state.quizAnswerLocked && this.state.feedback && this.state.feedback.type === 'wrong') {
+          this.startRetryCountdown('btn-retry-tf', this.state.feedback.text);
+        }
+
+        const retryBtn = document.getElementById('btn-retry-tf');
+        if (retryBtn) {
+          retryBtn.onclick = () => {
+            if (retryBtn.disabled) return;
+            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+            this.state.quizAnswerLocked = false;
+            this.state.selectedTfVal = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+
+        const nextBtn = document.getElementById('btn-next-tf');
+        if (nextBtn) {
+          nextBtn.onclick = () => {
+            this.state.tfIdx++;
+            this.state.quizAnswerLocked = false;
+            this.state.selectedTfVal = null;
+            this.state.feedback = null;
+            this.render();
+          };
+        }
+      },
+
+      startAssessment(stage) {
+        this.state.assStage = stage;
+        this.state.assIdx = 0;
+        this.state.selectedAssOptId = null;
+        this.state.quizAnswerLocked = false;
+        this.setPhase('ASSESSMENT');
+        this.startAssTimer();
+      },
+
+      startAssTimer() {
+        if (this.state.assTimer) clearInterval(this.state.assTimer);
+        const list = this.state.assStage === 'case' ? this.data.assessment.case : this.data.assessment.foundation;
+        const q = list[this.state.assIdx];
+        if (!q) return;
+
+        this.state.assTimeTotal = q.timeLimit || 60;
+        this.state.assTimeLeft = this.state.assTimeTotal;
+        this.updateTimerUI();
+
+        this.state.assTimer = setInterval(() => {
+          this.state.assTimeLeft--;
+          this.updateTimerUI();
+          if (this.state.assTimeLeft <= 0) {
+            clearInterval(this.state.assTimer);
+            if (this.state.selectedAssOptId) {
+              this.submitAssessmentChoice(q, this.state.selectedAssOptId);
+            } else {
+              this.handleAssTimeout(q);
+            }
+          }
+        }, 1000);
+      },
+
+      updateTimerUI() {
+        const fill = document.getElementById('timer-fill');
+        const txt = document.getElementById('timer-text');
+        if (!fill || !txt) return;
+
+        const pct = Math.max(0, (this.state.assTimeLeft / this.state.assTimeTotal) * 100);
+        fill.style.width = `${pct}%`;
+        txt.textContent = this.ui.timeRemaining.replace('{n}', Math.max(0, this.state.assTimeLeft));
+
+        fill.classList.remove('warn', 'danger');
+        if (pct < 25) fill.classList.add('danger');
+        else if (pct < 50) fill.classList.add('warn');
+      },
+
+      handleAssTimeout(q) {
+        window.CourseLearning.answer(q.id, false);
+        this.showMsgDialog(this.ui.assessmentTimeout, () => {
+          this.restartAssStage();
+        });
+      },
+
+      handleAssWrong(q) {
+        window.CourseLearning.answer(q.id, false);
+        const failMsg = this.data.assessment.failMessage || this.ui.retry;
+        this.showMsgDialog(failMsg, () => {
+          this.restartAssStage();
+        });
+      },
+
+      restartAssStage() {
+        this.state.assIdx = 0;
+        this.state.selectedAssOptId = null;
+        this.state.currentOptions = [];
+        this.render();
+        this.startAssTimer();
+      },
+
+      renderAssessment(view, q) {
+        if (!this.state.currentOptions || this.state.currentOptions.qid !== q.id) {
+          const shuffled = [...(q.options || [])].sort(() => Math.random() - 0.5);
+          this.state.currentOptions = shuffled;
+          this.state.currentOptions.qid = q.id;
+        }
+
+        const optionsHtml = this.state.currentOptions.map(opt => {
+          const isSelected = this.state.selectedAssOptId === opt.id;
+          return `
+            <button class="btn btn-option ${isSelected ? 'selected' : ''}" type="button" data-ass-opt="${opt.id}">
+              ${opt.text}
+            </button>
+          `;
+        }).join('');
+
+        view.innerHTML = `
+          <div>
+            <h3 class="title-stem">${q.prompt}</h3>
+          </div>
+          <div class="options-list" style="margin-top: 16px;">${optionsHtml}</div>
+          <div class="actions-bar" style="margin-top: 16px;">
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit-ass" ${this.state.selectedAssOptId ? '' : 'disabled'}>
+              ${this.ui.submit}
+            </button>
+          </div>
+        `;
+
+        view.querySelectorAll('[data-ass-opt]').forEach(b => {
+          b.onclick = () => {
+            this.state.selectedAssOptId = b.dataset.assOpt;
+            this.render();
+          };
+        });
+
+        const submitAssBtn = document.getElementById('btn-submit-ass');
+        if (submitAssBtn) {
+          submitAssBtn.onclick = () => {
+            if (!this.state.selectedAssOptId) return;
+            this.submitAssessmentChoice(q, this.state.selectedAssOptId);
+          };
+        }
+      },
+
+      submitAssessmentChoice(q, optId) {
+        clearInterval(this.state.assTimer);
+        const ok = optId === q.answer;
+        if (ok) {
+          window.CourseLearning.answer(q.id, true);
+          this.advanceAssessment();
+        } else {
+          this.handleAssWrong(q);
+        }
+      },
+
+      advanceAssessment() {
+        const isCase = this.state.assStage === 'case';
+        const list = isCase ? this.data.assessment.case : this.data.assessment.foundation;
+        this.state.assIdx++;
+        this.state.selectedAssOptId = null;
+
+        if (this.state.assIdx >= list.length) {
+          if (!isCase) {
+            // Foundation passed!
+            this.showMsgDialog(this.data.assessment.passMessage, () => {
+              this.startAssessment('case');
+            });
+          } else {
+            // Case passed! Complete!
+            this.showMsgDialog(this.data.assessment.passMessage, () => {
+              this.setPhase('COMPLETE');
+            });
+          }
+        } else {
+          this.render();
+          this.startAssTimer();
+        }
+      },
+
+      renderComplete(view) {
+        this.trackTime(null);
+        window.CourseLearning.complete();
+
+        view.innerHTML = `
+          <div style="margin-top: 32px; text-align: center;">
+            <div style="font-size: calc(48px * var(--font-scale, 1));">🎉</div>
+            <h2 class="title-lg" style="color: var(--primary); margin-top: 12px;">${this.ui.complete}</h2>
+          </div>
+          <div class="caption-box" style="margin-top: 20px;">
+            <p class="text-body" style="font-size: calc(19px * var(--font-scale, 1)); text-align: center;">
+              ${this.data.encouragement.finish}
+            </p>
+          </div>
+        `;
+      },
+
+      showMsgDialog(msg, onConfirm) {
+        const dlg = document.getElementById('msg-dialog');
+        const content = document.getElementById('msg-dlg-content');
+        const confirmBtn = document.getElementById('btn-msg-confirm');
+        content.textContent = msg;
+        confirmBtn.onclick = () => {
+          dlg.close();
+          if (onConfirm) onConfirm();
+        };
+        dlg.showModal();
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          App.clearActiveReading();
+          App.render();
+        }
+      });
+      App.init();
+    });
+  </script>
+</body>
+</html>
