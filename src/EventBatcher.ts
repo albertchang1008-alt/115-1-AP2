@@ -15,6 +15,7 @@ export function eventBatcher<T extends { id: string }>(options: {
   key: string;
   valid: (event: T) => boolean;
   send: (events: T[]) => Promise<string[]>;
+  intervalMs?: number;
   pending?: () => void;
   saved?: (events: T[], remaining: number) => void;
   failed?: () => void;
@@ -119,11 +120,15 @@ export function eventBatcher<T extends { id: string }>(options: {
     })().finally(() => { flight = null; });
     return flight;
   }
+  let pageHiding = false;
   const onHidden = () => { if (document.visibilityState === 'hidden') void flush(); };
-  const timer = setInterval(() => { void flush(); }, 30000);
+  const timer = setInterval(() => { void flush(); }, options.intervalMs ?? 60000);
   const onOnline = () => { void flush(); };
+  const onPageHide = () => { pageHiding = true; void flush(); };
+  const onPageShow = () => { pageHiding = false; };
   window.addEventListener('online', onOnline);
-  window.addEventListener('pagehide', onOnline);
+  window.addEventListener('pagehide', onPageHide);
+  window.addEventListener('pageshow', onPageShow);
   document.addEventListener('visibilitychange', onHidden);
   if (queue.length) void flush();
   return {
@@ -137,7 +142,7 @@ export function eventBatcher<T extends { id: string }>(options: {
       const result = new Promise<string[]>((resolve) => waiters.push({ ids: events.map((e) => e.id), resolve }));
       settle(held);
       if (fresh.length && !held) options.pending?.();
-      if (urgent || queue.length >= 30 || !durable) void flush();
+      if (urgent || queue.length >= 30 || !durable || pageHiding || document.visibilityState === 'hidden') void flush();
       return result;
     },
     flush,
@@ -145,7 +150,8 @@ export function eventBatcher<T extends { id: string }>(options: {
       closed = true;
       clearInterval(timer);
       window.removeEventListener('online', onOnline);
-      window.removeEventListener('pagehide', onOnline);
+      window.removeEventListener('pagehide', onPageHide);
+      window.removeEventListener('pageshow', onPageShow);
       document.removeEventListener('visibilitychange', onHidden);
       // Best effort on navigation; failed events remain durable for a later visit.
       void flush();

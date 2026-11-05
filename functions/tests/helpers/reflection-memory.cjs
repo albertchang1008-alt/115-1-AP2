@@ -36,7 +36,7 @@ function memoryDb() {
   }
   function collection(path) {
     let filters = [],
-      max = Infinity, after = null, order = null;
+      max = Infinity, after = null, order = null, fields;
     const q = {
       where(f, op, v) {
         filters.push([f, op, v]);
@@ -47,6 +47,7 @@ function memoryDb() {
         return q;
       },
       orderBy(field) { if(!order)order=field; return q; },
+      select(...selected) { fields = selected; return q; },
       startAfter(value) { after=value; return q; },
       count() { return {get:async()=>({data:()=>({count:[...data.keys()].filter(k=>k.startsWith(path+'/')&&k.slice(path.length+1).split('/').length===1&&filters.every(([f,op,v])=>op==='=='?data.get(k)[f]===v:false)).length})})}; },
       doc: (id = require('node:crypto').randomUUID()) => doc(path + '/' + id),
@@ -56,11 +57,14 @@ function memoryDb() {
             (key) =>
               key.startsWith(path + '/') &&
               key.slice(path.length + 1).split('/').length === 1 &&
-              filters.every(([f,op,v])=>{const a=data.get(key)[f];const scalar=x=>x&&typeof x==='object'&&('_seconds' in x||'seconds' in x)?(x._seconds??x.seconds)*1000+(x._nanoseconds??x.nanoseconds??0)/1e6:x;return op==='array-contains'?a?.includes(v):op==='in'?v.includes(a):op==='>='?scalar(a)>=scalar(v):op==='<'?scalar(a)<scalar(v):a===v;}) && (!after || (order==='__name__'?key.split('/').at(-1):data.get(key)[order])>after),
+              filters.every(([f,op,v])=>{const a=String(f)==='__name__'?key.split('/').at(-1):data.get(key)[f];const scalar=x=>x&&typeof x==='object'&&('_seconds' in x||'seconds' in x)?(x._seconds??x.seconds)*1000+(x._nanoseconds??x.nanoseconds??0)/1e6:x;return op==='array-contains'?a?.includes(v):op==='array-contains-any'?v.some(x=>a?.includes(x)):op==='in'?v.includes(a):op==='>='?scalar(a)>=scalar(v):op==='<'?scalar(a)<scalar(v):a===v;}) && (!after || (order==='__name__'?key.split('/').at(-1):data.get(key)[order])>after),
           )
           .sort((a,b)=>order==='__name__'?a.split('/').at(-1).localeCompare(b.split('/').at(-1)):0)
           .slice(0, max)
-          .map(snapshot);
+          .map((key) => {
+            const result = snapshot(key);
+            return fields ? { ...result, data: () => clone(Object.fromEntries(fields.map(f => [f, data.get(key)[f]]))) } : result;
+          });
         return { docs, size: docs.length };
       },
     };

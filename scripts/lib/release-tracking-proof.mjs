@@ -4,10 +4,10 @@ import {validEvent,reduceLearning,emptyLearning} from '../../shared/learning.ts'
 // Capture the real SDK queue locally. No network writes or student records.
 export async function installReadOnlyTracking(page){
  const sdk=fs.readFileSync(new URL('../../public/materials/course-learning.js',import.meta.url),'utf8');
- const needle='pending.push({ id: crypto.randomUUID(), ...event }); flush();';
+ const needle='pending.push({ id: crypto.randomUUID(), ...event });';
  assert.equal(sdk.split(needle).length,2,'SDK capture point changed');
  const instrumented='window.releaseEvents=[];\n'+sdk.replace(needle,
-  'const captured={ id: crypto.randomUUID(), ...event }; window.releaseEvents.push(captured); pending.push(captured); flush();');
+  'const captured={ id: crypto.randomUUID(), ...event }; window.releaseEvents.push(captured); pending.push(captured);');
  await page.route('**/course-learning.js',route=>route.fulfill({contentType:'application/javascript',body:instrumented}));
 }
 export function validateCapturedEvents(events,questionIds){

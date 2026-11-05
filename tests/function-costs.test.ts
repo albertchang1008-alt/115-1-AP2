@@ -45,7 +45,7 @@ test('learning: burst becomes one request; no acknowledgement before server succ
   const replay = bridge.receive([{ id: 'a', type: 'explore', nodeId: 'node' }]);
   assert.equal(sent.length, 0);
   assert.equal(JSON.parse([...env.data.values()][0]).length, 2);
-  t.mock.timers.tick(29999); await tick();
+  t.mock.timers.tick(59999); await tick();
   assert.equal(sent.length, 0);
   t.mock.timers.tick(1); await tick();
   assert.equal(sent.length, 1);
@@ -88,6 +88,25 @@ test('queue: failed delivery is not acknowledged and reconnect retries original 
   fail = false; env.win.dispatchEvent(new Event('online')); await tick();
   assert.equal(calls, 2); assert.deepEqual(JSON.parse(env.data.get('events')!), []);
   assert.deepEqual(await batch.enqueue([{ id: 'retry' }]), ['retry']);
+});
+
+test('learning: time arriving after pagehide is sent immediately, then pageshow restores batching', async (t) => {
+  const env = environment(t);
+  const sent: string[][] = [];
+  const bridge = learningBridge(apiFor(async (_, data) => {
+    const ids = data.events.map((e: { id: string }) => e.id);
+    sent.push(ids);
+    return { accepted: ids };
+  }), context, () => {}, () => {});
+  env.cleanup.push(() => bridge.close());
+  env.win.dispatchEvent(new Event('pagehide'));
+  assert.deepEqual(await bridge.receive([{ id: 'late-time', type: 'time', seconds: 15 }]), ['late-time']);
+  assert.deepEqual(sent, [['late-time']]);
+  env.win.dispatchEvent(new Event('pageshow'));
+  const resumed = bridge.receive([{ id: 'resumed-time', type: 'time', seconds: 15 }]);
+  assert.equal(sent.length, 1);
+  t.mock.timers.tick(60000);
+  assert.deepEqual(await resumed, ['resumed-time']);
 });
 
 test('queue: partial acceptance only acknowledges confirmed IDs and retries the remainder', async (t) => {
@@ -296,7 +315,7 @@ for (const code of ['functions/unavailable', 'functions/deadline-exceeded', 'fun
     env.cleanup.push(() => batch.close());
     assert.deepEqual(await batch.enqueue([{ id: 'retry' }], true), []);
     await tick(); assert.equal(JSON.parse(env.data.get('transient')!).length, 1);
-    t.mock.timers.tick(30000); await tick();
+    t.mock.timers.tick(60000); await tick();
     assert.equal(calls, 2); assert.deepEqual(JSON.parse(env.data.get('transient')!), []); assert.equal(rejected, 0);
   });
 }
@@ -377,7 +396,7 @@ test('learning: expired login with unwritable storage never claims saved, keeps 
   assert.match(messages.at(-1)!, /請先不要關閉此頁/);
   assert.equal(completed, 0);
   failing = false;
-  t.mock.timers.tick(30000);
+  t.mock.timers.tick(60000);
   for (let i = 0; i < 12; i++) await tick();
   assert.equal(calls, 2); assert.equal(completed, 1);
   assert.equal(messages.at(-1), '學習紀錄已同步');

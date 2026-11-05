@@ -1,7 +1,7 @@
 # 專案交接
-目前版本：1.15.2；本工作樹分支 release/ag17-2026-11-04，自 origin/main 47766f4a 建立；僅作 Antigravity 17 單元上線準備，未push／部署。
+目前版本：1.15.3；本工作樹分支 codex/learning-events-cost，自正式 main c12d2e2a 建立；學習事件讀寫優化尚未部署。
 
-本工作樹僅處理 Antigravity 17 單元上線準備；依教師指示保留原根目錄 feature/respiratory-infographics 不動。本次週誌記於此工作樹 docs/devlog/，驗證報告與原始輸出存 repo 外驗收證據。
+本工作樹處理學習事件讀寫優化。佇列與週誌維護於原根目錄；驗證原始輸出放 repo 外驗收證據。
 
 ## 給接手的 AI agent
 1. 開工讀 CLAUDE.md、handoff.md、docs/AI_WORKFLOW_PLAN.md 與 CODEX_QUEUE.md；由上往下取第一件「可做」。

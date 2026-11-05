@@ -15,7 +15,9 @@ import { createTeachingHandlers } from './teaching';
 import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
 import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wrongCarry';
 import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
-import { emptyLearning, reduceLearning, LearningEvent } from '../../shared/learning';
+import { validEvent, type LearningEvent } from '../../shared/learning';
+import { saveLearningBatch } from './learningBatches';
+import { positiveCache } from './learningAccessCache';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getStorage } from 'firebase-admin/storage';
@@ -159,22 +161,35 @@ async function identity(req: any) {
 function enrollmentRef(courseId: string, email: string) {
   return db.doc(`enrollments/${code(courseId)}__${email}`);
 }
-async function access(req: any, courseId: string, teacherOnly = false) {
+const learningAccessCache = {
+  course: positiveCache<FirebaseFirestore.DocumentData>(60000, 32),
+  member: positiveCache<FirebaseFirestore.DocumentData>(300000, 2048),
+};
+async function access(req: any, courseId: string, teacherOnly = false, cache?: typeof learningAccessCache) {
   const p = await identity(req);
-  const doc = await db.doc(`courses/${code(courseId)}`).get();
-  if (!doc.exists) fail('課程不存在');
-  const c = doc.data()!;
+  const courseRef = db.doc(`courses/${code(courseId)}`);
+  const readCourse = async () => (await courseRef.get()).data();
+  const cached = p.teacher ? undefined : cache;
+  const c = cached ? await cached.course(courseRef.path, readCourse) : await readCourse();
+  if (!c) fail('課程不存在');
   if (p.teacher) {
     if (!c.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權管理此課程');
     c.classIds = [...new Set([...(c.draft?.classIds || []), ...(c.published?.classIds || [])])];
   } else {
     if (teacherOnly || c.archived || !c.published) throw new HttpsError('permission-denied', '課程未開放');
-    const member = c.rosterVersion === 2
-      ? await enrollmentRef(courseId, p.email).get()
-      : await db.doc(`roster/${p.email}`).get();
-    if (!member.exists || !member.data()?.enabled || !c.published.classIds.includes(member.data()?.classId))
+    const memberRef = c.rosterVersion === 2 ? enrollmentRef(courseId, p.email) : db.doc(`roster/${p.email}`);
+    const allowed = (member: FirebaseFirestore.DocumentData | undefined) =>
+      member?.enabled && c.published.classIds.includes(member.classId);
+    const readMember = async () => {
+      const member = (await memberRef.get()).data();
+      return allowed(member) ? member : undefined;
+    };
+    const member = cached
+      ? await cached.member(JSON.stringify([courseId, p.uid, memberRef.path]), readMember)
+      : await readMember();
+    if (!allowed(member))
       throw new HttpsError('permission-denied', '未列入此課程的啟用班級名冊');
-    Object.assign(p, member.data());
+    Object.assign(p, member);
   }
   return { p, c };
 }
@@ -1491,7 +1506,7 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
 });
 
 export const saveLearningEvents = onCall(options, async (req) => {
-  const { p, c } = await access(req, req.data.courseId);
+  const { p, c } = await access(req, req.data.courseId, false, learningAccessCache);
   if (p.teacher) fail('教師預覽不寫入正式診斷');
   const unitId = code(req.data.unitId), activityId = id(req.data.activityId);
   const studentCourse = forClass(c.published, p.classId);
@@ -1504,24 +1519,19 @@ export const saveLearningEvents = onCall(options, async (req) => {
   const version = id(req.data.materialVersion);
   if (version !== (activity.materialVersion || 'v1')) fail('教材版本已更新，請重新開啟教材');
   const events = req.data.events as LearningEvent[];
-  if (!Array.isArray(events) || !events.length || events.length > 30 || new Set(events.map((e) => e.id)).size !== events.length) fail('事件批次無效');
+  if (!Array.isArray(events) || !events.length || events.length > 30 || events.some((e) => !validEvent(e))) fail('事件批次無效');
   size(events, 20000);
   const owner = chapter ? `chapter-${encodeURIComponent(requestedChapter)}` : unitId;
   const ref = db.doc(`courses/${req.data.courseId}/diagnostics/${p.uid}_${owner}_${activityId}_${version}`);
-  const eventRefs = events.map((e) => ref.collection('events').doc(id(e.id)));
   const progressRef = db.doc(`courses/${req.data.courseId}/progress/${p.uid}`);
-  return db.runTransaction(async (tx) => {
-    const current = await tx.get(ref);
-    const stored = await Promise.all(eventRefs.map((r) => tx.get(r)));
-    const fresh = events.filter((_, i) => !stored[i].exists);
-    const summary = reduceLearning(current.data()?.summary || emptyLearning(), fresh);
-    if (fresh.length) {
-      tx.set(ref, { uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId, ...(chapter ? { chapterName: requestedChapter } : {}), activityId, materialVersion: version, nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1, summary, updatedAt: Date.now() });
-      events.forEach((e, i) => { if (!stored[i].exists) tx.create(eventRefs[i], { ...e, receivedAt: Date.now() }); });
-      if (fresh.some((e) => e.type === 'completed')) tx.set(progressRef, { uid: p.uid, classId: p.classId, activityUpdatedAt: Date.now(), activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } } }, { merge: true });
-    }
-    return { accepted: events.map((e) => e.id), summary };
-  });
+  return saveLearningBatch(db, ref, {
+    uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId,
+    ...(chapter ? { chapterName: requestedChapter } : {}), activityId, materialVersion: version,
+    nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1,
+  }, events, (tx, at) => tx.set(progressRef, {
+    uid: p.uid, classId: p.classId, activityUpdatedAt: at,
+    activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } },
+  }, { merge: true }));
 });
 export const getLearningDiagnostics = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -1531,7 +1541,10 @@ export const getLearningDiagnostics = onCall(options, async (req) => {
   const base = db.collection(`courses/${req.data.courseId}/diagnostics`).where('classId', '==', req.data.classId).orderBy('__name__');
   const after = String(req.data.after || '');
   const snap = await (after ? base.startAfter(after) : base).limit(50).get();
-  return { rows: snap.docs.map((d) => ({ ...d.data(), id: d.id })), next: snap.size === 50 ? snap.docs.at(-1)!.id : null };
+  return { rows: snap.docs.map((d) => {
+    const { recentEventIds: _recent, hasLegacyLearningEvents: _legacy, hasOlderLearningBatches: _older, ...row } = d.data();
+    return { ...row, id: d.id };
+  }), next: snap.size === 50 ? snap.docs.at(-1)!.id : null };
 });
 
 export const { getAssessments, prepareAssessment, controlAssessment, startAssessment, saveAssessment, previewAssessment, assessmentReport, expireAssessments } = createAssessmentHandlers(db, access, options);

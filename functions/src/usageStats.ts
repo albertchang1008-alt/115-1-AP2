@@ -30,7 +30,7 @@ export async function readUsageRange(
   end: number,
   legacyProgress = false,
 ) {
-  const reads: Record<string, number> = { attempts: 0, diagnostics: 0, events: 0, progress: 0 },
+  const reads: Record<string, number> = { attempts: 0, diagnostics: 0, events: 0, batches: 0, progress: 0 },
     records: UsageRecord[] = [],
     ids = new Set(students.map((s) => s.uid)),
     units = new Set(course.units.filter((u) => !u.review).map((u) => u.id));
@@ -72,21 +72,30 @@ export async function readUsageRange(
       course.units.find((u) => u.id === a.unitId)?.review
     )
       continue;
-    const es = await bounded(
-      db
-        .collection(`courses/${cid}/diagnostics/${d.id}/events`)
+    const range = (source: 'events' | 'batches') =>
+      d.ref.collection(source)
         .where('receivedAt', '>=', start)
-        .where('receivedAt', '<', end),
-      'events',
-      USAGE_LIMITS.events - reads.events,
-    );
-    for (const e of es)
-      records.push({
-        uid: a.uid,
-        unitId: a.unitId,
-        kind: 'learning',
-        at: millis(e.data().receivedAt),
-      });
+        .where('receivedAt', '<', end);
+    const remaining = () => USAGE_LIMITS.events - reads.events - reads.batches;
+    const seen = new Set<string>();
+    const record = (at: number) => records.push({ uid: a.uid, unitId: a.unitId, kind: 'learning', at });
+    // Legacy data keeps its original per-event granularity. If a document is
+    // present in both formats in this range, count its original receipt only.
+    if (a.hasLegacyLearningEvents !== false) {
+      for (const e of await bounded(range('events').select('receivedAt'), 'events', remaining())) {
+        seen.add(e.id);
+        record(millis(e.data().receivedAt));
+      }
+    }
+    for (const b of await bounded(range('batches').select('receivedAt', 'eventIds'), 'batches', remaining())) {
+      const { receivedAt, eventIds } = b.data();
+      let fresh = false;
+      for (const eventId of eventIds as string[]) {
+        if (!seen.has(eventId)) fresh = true;
+        seen.add(eventId);
+      }
+      if (fresh) record(millis(receivedAt));
+    }
   }
   let progress = db.collection(`courses/${cid}/progress`).where('classId', '==', cl);
   if (!legacyProgress) progress = progress.where('activityUpdatedAt', '>=', start);

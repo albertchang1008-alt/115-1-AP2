@@ -144,14 +144,23 @@
       document.head.append(css);
     }
   };
-  let context = null, pending = [], lastAction = Date.now(), lastTick = Date.now();
+  const maxPending = 2000;
+  let context = null, pending = [], lastAction = Date.now(), lastTick = Date.now(), activeSeconds = 0;
   const flush = () => {
     if (!context || !pending.length || parent === window) return;
     parent.postMessage({ ...context, type: 'learning-events', events: pending.slice(0, 30) }, '*');
   };
-  const add = (event) => {
-    if (pending.length >= 2000) return;
-    pending.push({ id: crypto.randomUUID(), ...event }); flush();
+  const add = (event, send = true) => {
+    if (pending.length >= maxPending) return;
+    pending.push({ id: crypto.randomUUID(), ...event });
+    if (send) flush();
+  };
+  const emitTime = (reserve = 0) => {
+    while (activeSeconds > 0 && pending.length < maxPending - reserve) {
+      const seconds = Math.min(60, activeSeconds);
+      add({ type: 'time', seconds }, false);
+      activeSeconds -= seconds;
+    }
   };
   window.addEventListener('message', (event) => {
     if (event.source !== parent || !event.data) return;
@@ -161,21 +170,31 @@
       context = { protocolVersion: 1, activityId: d.activityId, sessionId: d.sessionId, materialVersion: d.materialVersion };
       flush();
     }
-    if (d.type === 'learning-ack' && context && d.sessionId === context.sessionId && Array.isArray(d.accepted)) pending = pending.filter((e) => !d.accepted.includes(e.id));
+    if (d.type === 'learning-ack' && context && d.sessionId === context.sessionId && Array.isArray(d.accepted)) {
+      const before = pending.length;
+      pending = pending.filter((e) => !d.accepted.includes(e.id));
+      if (before > 30 && pending.length < before) flush();
+    }
   });
   ['pointerdown', 'keydown', 'touchstart'].forEach((type) => window.addEventListener(type, () => { lastAction = Date.now(); }, { passive: true }));
   setInterval(() => {
     const now = Date.now(), seconds = Math.min(15, Math.floor((now - lastTick) / 1000)); lastTick = now;
-    if (!document.hidden && now - lastAction < 60000 && seconds > 0) add({ type: 'time', seconds });
+    // Preserve the old sampling and inactivity cutoff. Only transport changes.
+    if (!document.hidden && now - lastAction < 60000 && seconds > 0) {
+      activeSeconds += seconds;
+      if (activeSeconds >= 60) emitTime();
+    }
     flush();
   }, 15000);
-  document.addEventListener('visibilitychange', flush);
+  const flushTime = () => { emitTime(); flush(); };
+  document.addEventListener('visibilitychange', () => document.hidden ? flushTime() : flush());
+  window.addEventListener('pagehide', flushTime);
   window.CourseLearning = {
     explore(nodeId) { add({ type: 'explore', nodeId }); },
     answer(questionId, correct) { add({ type: 'answer', questionId: String(questionId), correct: !!correct }); },
     hint(questionId) { add({ type: 'hint', questionId: String(questionId) }); },
     nodeTime(nodeId, seconds) { if (!Number.isFinite(seconds)) return; const whole = Math.min(60, Math.floor(seconds)); if (whole > 0) add({ type: 'node_time', nodeId: String(nodeId), seconds: whole }); },
-    complete() { add({ type: 'completed' }); },
+    complete() { emitTime(1); add({ type: 'completed' }); },
     // 給長條捲動版面的教材用：幫內容區塊加 data-node-id，呼叫一次這個方法即可自動用
     // IntersectionObserver 偵測捲動進度，不用每份教材各自重寫一次觀察器邏輯。
     // 節點第一次進入畫面時送一次 explore(nodeId)；離開畫面或分頁被隱藏時，把這段
