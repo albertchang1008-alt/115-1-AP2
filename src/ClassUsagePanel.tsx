@@ -2,14 +2,17 @@ import { useEffect, useState } from 'react';
 import type { API } from './service';
 import type { UsageStats } from '../shared/usageStats';
 import { isTestClass } from '../shared/answerIntegrity';
+import { maskStudentId, projectionName } from '../shared/completionBoard';
 export function ClassUsagePanel({
   api,
   courseId,
   classId,
+  maskNames = false,
 }: {
   api: API;
   courseId: string;
   classId: string;
+  maskNames?: boolean;
 }) {
   const [open, setOpen] = useState(false),
     [data, setData] = useState<UsageStats | null>(null),
@@ -135,7 +138,7 @@ export function ClassUsagePanel({
                   <ul>
                     {data.recent.map((s) => (
                       <li key={s.uid}>
-                        {s.name}（{s.studentId}）·{' '}
+                        {maskNames ? projectionName(s.name) : s.name}（{maskNames ? maskStudentId(s.studentId) : s.studentId}）·{' '}
                         {new Date(s.at).toLocaleTimeString('zh-TW', { timeZone: 'Asia/Taipei' })}
                       </li>
                     ))}

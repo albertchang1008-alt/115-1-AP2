@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { API } from './service';
 import type { Course } from '../shared/model';
+import { maskStudentId, projectionName } from '../shared/completionBoard';
 import {
   ANSWER_INTEGRITY,
   isTestClass,
@@ -61,10 +62,12 @@ export function AnswerIntegrityOverview({
   course,
   api,
   classId,
+  maskNames = false,
 }: {
   course: Course;
   api: API;
   classId: string;
+  maskNames?: boolean;
 }) {
   const units = course.units.filter((u) => !u.review),
     [unitId, setUnitId] = useState(units[0]?.id || ''),
@@ -203,8 +206,10 @@ export function AnswerIntegrityOverview({
                       {rows.map((r) => (
                         <tr key={r.uid}>
                           <td>
-                            {r.name}
-                            <small className="integrity-subtext">{r.studentId}</small>
+                            {maskNames ? projectionName(r.name) : r.name}
+                            <small className="integrity-subtext">
+                              {maskNames ? maskStudentId(r.studentId) : r.studentId}
+                            </small>
                           </td>
                           <td>
                             {r.best ?? '尚無'}

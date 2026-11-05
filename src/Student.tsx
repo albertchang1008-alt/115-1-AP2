@@ -523,8 +523,8 @@ export function defaultTab(unit: Pick<Unit | Chapter, 'activities'>, progress: P
 }
 function ActivityCard({ ownerKey, activity, progress, onOpen }: { ownerKey: string; activity: any; progress: Progress; onOpen: () => void }) {
   const done = !!progress.activities[`${ownerKey}_${activity.id}`]?.completed;
-  const label = activity.type === 'youtube' ? '選看' : activity.type === 'reflection' ? (isRequiredActivity(activity) ? '必做' : '選做') : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
-  const state = activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : done ? '已完成' : '未開始';
+  const label = activity.type === 'youtube' ? (isRequiredActivity(activity) ? '必做' : '選看') : activity.type === 'reflection' ? (isRequiredActivity(activity) ? '必做' : '選做') : isRequiredActivity(activity) ? '必做' : activity.type === 'quiz' ? '計入成績' : '活動';
+  const state = done ? '已完成' : activity.type === 'youtube' ? (progress.activities[`${ownerKey}_${activity.id}`]?.position ? '看過部分' : '未看') : '未開始';
   const contentTypes = {
     youtube: { label: 'YouTube 影片', Icon: YoutubeIcon },
     html: { label: '互動資訊圖表', Icon: ImageIcon },

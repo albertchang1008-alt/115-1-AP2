@@ -6,8 +6,6 @@ import { ArrowLeft, Download, RefreshCw } from 'lucide-react';
 import Papa from 'papaparse';
 import {
   Course,
-  chapterCompletion,
-  chapterName,
   completion,
   emptyProgress,
   forClass,
@@ -16,13 +14,24 @@ import {
 } from '../shared/model';
 import {
   CompletionStudent,
+  ChapterCellStatus,
   ChapterRate,
   allClassCompletionSummary,
+  boardStatuses,
   chapterCellLabel,
   chapterCellState,
+  chapterDetailItems,
+  chapterStateLabels,
   classCompletionSummary,
-  matrixChapters,
+  completionBoardCourse,
+  detailItemVisible,
+  filteredClassCompletionSummary,
+  maskStudentId,
   matrixCsv,
+  projectionName,
+  readBoardPreferences,
+  saveBoardPreferences,
+  statusMatrix,
 } from '../shared/completionBoard';
 import type { API } from './service';
 
@@ -177,6 +186,21 @@ export default function CompletionBoard({
   const [student, setStudent] = useState<CompletionStudent | null>(null),
     [cell, setCell] = useState<{ student: CompletionStudent; name: string } | null>(null);
   const [due, setDue] = useState<{ name: string; classId: string; date: string } | null>(null);
+  const [statuses, setStatuses] = useState<ChapterCellStatus[]>(
+      () => readBoardPreferences(() => window.localStorage).statuses,
+    ),
+    // 遮名預設開啟且不記憶：重新整理或下次開啟一律回到遮名。
+    [showNames, setShowNames] = useState(false);
+  const displayName = (name: string) => (showNames ? name : projectionName(name)),
+    displayId = (id: string) => (showNames ? id : maskStudentId(id));
+  function toggleStatus(status: ChapterCellStatus, on: boolean) {
+    const next = boardStatuses.filter((s) => (s === status ? on : statuses.includes(s)));
+    if (!next.length) return;
+    setStatuses(next);
+    saveBoardPreferences(() => window.localStorage, { statuses: next });
+  }
+  const allStatuses = boardStatuses.every((s) => statuses.includes(s)),
+    statusText = statuses.map((s) => chapterStateLabels[s]).join('、');
   const request = useRef(0),
     active = useRef(false);
   useEffect(() => {
@@ -192,6 +216,7 @@ export default function CompletionBoard({
     setDue(null);
     setSearch('');
     setOnlyOverdue(false);
+    setShowNames(false);
     return () => {
       request.current++;
       active.current = false;
@@ -236,32 +261,31 @@ export default function CompletionBoard({
     comparisonChapters = orderedChapters(published);
   const summaries = published.classIds
     .filter((id) => cache[id])
-    .map((id) => classCompletionSummary(cache[id].course, id, cache[id].rows, now));
+    .map((id) => filteredClassCompletionSummary(cache[id].course, id, cache[id].rows, statuses, now));
   const allLoaded = published.classIds.length > 0 && published.classIds.every((id) => !!cache[id]);
   const total = allClassCompletionSummary(summaries);
   const selected = cl ? cache[cl] : undefined,
     visible = forClass(selected?.course || published, cl || ''),
-    chapters = matrixChapters(visible);
+    boardCourse = completionBoardCourse(selected?.course || published, cl || '');
   const classSummary =
-    cl && selected ? classCompletionSummary(selected.course, cl, selected.rows, now) : undefined;
-  const overdueCount = (r: CompletionStudent) =>
-    chapters.filter(({ name }) => chapterCellState(visible, name, r.progress, now).overdue).length;
-  const filtered = (selected?.rows || [])
-    .filter(
-      (r) =>
-        `${r.name} ${r.studentId}`
-          .toLocaleLowerCase()
-          .includes(search.trim().toLocaleLowerCase()) &&
-        (!onlyOverdue || overdueCount(r) > 0),
-    )
-    .sort((a, b) => {
-      const byId = a.studentId.localeCompare(b.studentId, 'zh-TW', { numeric: true });
-      return sort === 'done'
-        ? completion(visible, a.progress).done - completion(visible, b.progress).done || byId
-        : sort === 'overdue'
-          ? overdueCount(b) - overdueCount(a) || byId
-          : byId;
-    });
+    cl && selected
+      ? filteredClassCompletionSummary(selected.course, cl, selected.rows, statuses, now)
+      : undefined;
+  const searched = (selected?.rows || []).filter((r) =>
+    `${r.name} ${r.studentId}`.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()),
+  );
+  const matrix = statusMatrix(boardCourse, searched, statuses, now, onlyOverdue),
+    chapters = matrix.chapters;
+  const fraction = (row: (typeof matrix.rows)[number]) =>
+    allStatuses ? completion(boardCourse, row.student.progress) : { done: row.done, total: row.total };
+  const filtered = [...matrix.rows].sort((a, b) => {
+    const byId = a.student.studentId.localeCompare(b.student.studentId, 'zh-TW', { numeric: true });
+    return sort === 'done'
+      ? fraction(a).done - fraction(b).done || byId
+      : sort === 'overdue'
+        ? b.overdue - a.overdue || byId
+        : byId;
+  });
   const columnDue = (name: string) => {
     const values = published.classIds
       .map(
@@ -271,8 +295,12 @@ export default function CompletionBoard({
       .filter((d): d is string => d !== undefined);
     return new Set(values).size > 1 ? '各班不同' : shortDue(values[0] || '');
   };
-  const comparisonCsv = () =>
-    [total, ...summaries].map((s) => ({
+  // CSV 不受狀態篩選影響，一律以完整名冊計算。
+  const comparisonCsv = () => {
+    const full = published.classIds
+      .filter((id) => cache[id])
+      .map((id) => classCompletionSummary(cache[id].course, id, cache[id].rows, now));
+    return [allClassCompletionSummary(full), ...full].map((s) => ({
       班級: s.classId === '全部班級' ? '全部班級' : published.classNames?.[s.classId] || s.classId,
       人數: s.count,
       全部完成: s.allDone,
@@ -286,6 +314,92 @@ export default function CompletionBoard({
         ]),
       ),
     }));
+  };
+  const boardFilters = (
+    <div className="toolbar completion-toolbar completion-status-filter">
+      <fieldset>
+        <legend>顯示狀態</legend>
+        {boardStatuses.map((status) => (
+          <label key={status} className="completion-filter">
+            <input
+              type="checkbox"
+              checked={statuses.includes(status)}
+              disabled={statuses.length === 1 && statuses.includes(status)}
+              onChange={(e) => toggleStatus(status, e.target.checked)}
+            />
+            {symbols[status]} {chapterStateLabels[status]}
+          </label>
+        ))}
+      </fieldset>
+      <label className="completion-filter">
+        <input type="checkbox" checked={showNames} onChange={(e) => setShowNames(e.target.checked)} />
+        顯示姓名
+      </label>
+    </div>
+  );
+  function cellDetail(student: CompletionStudent, name: string) {
+    const chapter = chapters.find((c) => c.name === name)?.chapter,
+      { categories, activities } = chapterDetailItems(boardCourse, name, student.progress),
+      shownCategories = categories.filter((x) => detailItemVisible(x.done, statuses)),
+      shownActivities = activities.filter((x) => detailItemVisible(x.done, statuses)),
+      passed = categories.filter((x) => x.done).length,
+      completed = activities.filter((x) => x.done).length,
+      allDone = categories.every((x) => x.done || !x.unit.bankVersion) && completed === activities.length;
+    const hiddenNote = (n: number, what: string) =>
+      n > 0 && <p className="muted">依篩選隱藏 {n} 項{what}。</p>;
+    return (
+      <>
+        <p>狀態：{chapterCellLabel(chapterCellState(boardCourse, name, student.progress, now))}</p>
+        <p>期限：{chapter?.dueAt ? fullTime(parseCourseTime(chapter.dueAt)) : '無期限'}</p>
+        {!allStatuses && allDone && !statuses.includes('done') && <p>本章已全部完成。</p>}
+        <h3>
+          題目分類（已達標 {passed}／{categories.length}）
+        </h3>
+        <div className="completion-category-list">
+          {shownCategories.map(({ unit: u, entry: p }) => (
+            <section key={u.id}>
+              <h4>{u.title}</h4>
+              <p>
+                最高分 {p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
+                ｜作答 {p?.attempts || 0} 次
+              </p>
+              {!u.bankVersion && <p className="muted">題庫未更新到學生端，不列入測驗完成條件。</p>}
+              {!!p?.passedAt && <p>首次達標：{fullTime(p.passedAt)}</p>}
+            </section>
+          ))}
+        </div>
+        {hiddenNote(categories.length - shownCategories.length, '題目分類')}
+        <h3>
+          必做活動（已完成 {completed}／{activities.length}）
+        </h3>
+        {!activities.length ? (
+          <p className="muted">本章沒有必做活動。</p>
+        ) : (
+          <div className="completion-category-list">
+            {shownActivities.map(({ activity, done, updatedAt, position }) => (
+              <section key={activity.id}>
+                <h4>
+                  {activity.title || activity.id}
+                  {activity.type === 'youtube' && <small className="muted">（YouTube）</small>}
+                </h4>
+                <p>
+                  {done ? '已完成' : '未完成'}
+                  {done && !!updatedAt && `｜紀錄時間：${fullTime(updatedAt)}`}
+                </p>
+                {!done && activity.type === 'html' && position > 0 && (
+                  <p className="muted">
+                    進度：節點 {position}
+                    {activity.nodeTotal ? `／${activity.nodeTotal}` : ''}
+                  </p>
+                )}
+              </section>
+            ))}
+          </div>
+        )}
+        {hiddenNote(activities.length - shownActivities.length, '必做活動')}
+      </>
+    );
+  }
   function enter(classId: string) {
     setCl(classId);
     setSearch('');
@@ -317,7 +431,13 @@ export default function CompletionBoard({
             </button>
           )}
         </th>
-        <td>{s?.count ?? '—'}</td>
+        <td>
+          {s == null
+            ? '—'
+            : allStatuses
+              ? s.count
+              : `${all ? summaries.reduce((n, x) => n + x.matched, 0) : (summaries.find((x) => x.classId === classId)?.matched ?? 0)}／${s.count}`}
+        </td>
         <td>{s?.allDone ?? '—'}</td>
         <td>{s?.overdue ?? '—'}</td>
         <td>
@@ -386,10 +506,12 @@ export default function CompletionBoard({
                 匯出各班比較 CSV
               </button>
             </div>
+            {boardFilters}
             <p className="muted">
               {allLoaded
                 ? '平均完成為每人已完成／應完成單元數；各班應完成數不同時，全部班級顯示人數加權的平均。'
                 : `已載入 ${summaries.length}／${published.classIds.length} 班；全部讀完才顯示加總。`}
+              {!allStatuses && ` 目前依狀態篩選（${statusText}）：人數欄為「符合篩選人數／全班人數」，各章比率為符合篩選的人數占全班比例；全部完成與平均完成仍以完整名冊計算。`}
             </p>
             <div className="tablewrap completion-tablewrap">
               <table aria-label="各班完成度比較">
@@ -441,7 +563,18 @@ export default function CompletionBoard({
               <button
                 disabled={busy || !selected}
                 onClick={() =>
-                  downloadCsv(`${cl}完成度.csv`, matrixCsv(selected!.course, cl, filtered, now))
+                  downloadCsv(
+                    `${cl}完成度.csv`,
+                    // CSV 不受狀態篩選影響：沿用搜尋與「只看有逾期」，全部章節、全部狀態。
+                    matrixCsv(
+                      selected!.course,
+                      cl,
+                      statusMatrix(boardCourse, searched, boardStatuses, now, onlyOverdue).rows.map(
+                        (row) => row.student,
+                      ),
+                      now,
+                    ),
+                  )
                 }
               >
                 <Download size={16} />
@@ -472,6 +605,7 @@ export default function CompletionBoard({
                 只看有逾期
               </label>
             </div>
+            {boardFilters}
             <p className="completion-legend">
               <span>● 完成</span>
               <span>◐ 進行中</span>
@@ -479,6 +613,7 @@ export default function CompletionBoard({
               <span>⊘ 未開放</span>
               <span className="completion-overdue-label">逾：逾期未完成</span>
               <span className="muted">● 逾：逾期完成</span>
+              {!allStatuses && <span>空白：依篩選隱藏</span>}
             </p>
             {!selected ? (
               <p>按「更新」載入此班全部學生。</p>
@@ -504,7 +639,10 @@ export default function CompletionBoard({
                     </thead>
                     <tbody>
                       <tr className="completion-total">
-                        <th className="completion-identity">全班完成率</th>
+                        <th className="completion-identity">
+                          全班完成率
+                          {!allStatuses && <small className="block">篩選：{statusText}</small>}
+                        </th>
                         {chapters.map(({ name }) => (
                           <td key={name} style={rateStyle(classSummary?.rates[name])}>
                             {rateText(classSummary?.rates[name])}
@@ -513,25 +651,27 @@ export default function CompletionBoard({
                         <td>—</td>
                         <td>—</td>
                       </tr>
-                      {filtered.map((r) => {
-                        const n = completion(visible, r.progress);
+                      {filtered.map((row) => {
+                        const r = row.student,
+                          n = fraction(row);
                         return (
                           <tr key={r.email || r.studentId}>
                             <th scope="row" className="completion-identity">
                               <span className="completion-board-name">
-                                {r.name}
+                                {displayName(r.name)}
                                 {!r.enabled && <small className="muted"> 停用</small>}
                               </span>
-                              <small className="block">{r.studentId}</small>
+                              <small className="block">{displayId(r.studentId)}</small>
                             </th>
                             {chapters.map(({ name, chapter }) => {
-                              const state = chapterCellState(visible, name, r.progress, now),
-                                label = chapterCellLabel(state);
+                              const state = row.cells.get(name);
+                              if (!state) return <td key={name} className="completion-hidden-cell" />;
+                              const label = chapterCellLabel(state);
                               return (
                                 <td key={name}>
                                   <button
                                     className={`completion-cell state-${state.state}${state.overdue ? ' is-overdue' : ''}${!chapter.required ? ' completion-optional' : ''}`}
-                                    aria-label={`${r.name} ${chapter.title || name}：${label}`}
+                                    aria-label={`${displayName(r.name)} ${chapter.title || name}：${label}`}
                                     title={label}
                                     onClick={() => setCell({ student: r, name })}
                                   >
@@ -558,7 +698,9 @@ export default function CompletionBoard({
                 </div>
                 <p className="muted">
                   更新時間：{fullTime(selected.loadedAt)}。顯示 {filtered.length}／
-                  {selected.rows.length} 人。全班完成率以完整名冊計算，不隨搜尋改變。
+                  {selected.rows.length} 人。
+                  {!allStatuses && `依狀態篩選（${statusText}）：顯示 ${filtered.length} 位學生、${chapters.length} 個章節。`}
+                  全班完成率以完整名冊計算，不隨搜尋改變。
                 </p>
                 {!filtered.length && (
                   <p>{selected.rows.length ? '沒有符合篩選條件的學生。' : '此班名冊沒有學生。'}</p>
@@ -571,44 +713,10 @@ export default function CompletionBoard({
       </section>
       {cell && (
         <BoardDialog
-          title={`${cell.student.name} · ${chapters.find((c) => c.name === cell.name)?.chapter.title || cell.name}`}
+          title={`${displayName(cell.student.name)} · ${chapters.find((c) => c.name === cell.name)?.chapter.title || cell.name}`}
           close={() => setCell(null)}
         >
-          <p>
-            狀態：
-            {chapterCellLabel(chapterCellState(visible, cell.name, cell.student.progress, now))}
-          </p>
-          <p>
-            期限：
-            {chapters.find((c) => c.name === cell.name)?.chapter.dueAt
-              ? fullTime(parseCourseTime(chapters.find((c) => c.name === cell.name)!.chapter.dueAt))
-              : '無期限'}
-          </p>
-          <h3>題目分類</h3>
-          <div className="completion-category-list">
-            {visible.units
-              .filter((u) => chapterName(u) === cell.name)
-              .map((u) => {
-                const p = cell.student.progress.units[u.id];
-                return (
-                  <section key={u.id}>
-                    <h4>{u.title}</h4>
-                    <p>
-                      最高分 {p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
-                      ｜作答 {p?.attempts || 0} 次
-                    </p>
-                    {!u.bankVersion && <p className="muted">題庫未更新到學生端，不列入測驗完成條件。</p>}
-                    {!!p?.passedAt && <p>首次達標：{fullTime(p.passedAt)}</p>}
-                  </section>
-                );
-              })}
-          </div>
-          <p>
-            必做活動：已完成{' '}
-            {chapterCompletion(visible, cell.name, cell.student.progress).completedActivities}／
-            {chapterCompletion(visible, cell.name, cell.student.progress).totalRequired -
-              visible.units.filter((u) => chapterName(u) === cell.name && !!u.bankVersion).length}
-          </p>
+          {cellDetail(cell.student, cell.name)}
         </BoardDialog>
       )}
       {due && (
@@ -636,8 +744,8 @@ export default function CompletionBoard({
           )}
         </BoardDialog>
       )}
-      {cl && selected && <ClassUsagePanel key={`usage:${cl}:${selected.loadedAt}`} courseId={course.id} api={api} classId={cl} />}
-      {cl && selected && <AnswerIntegrityOverview key={`${cl}:${selected.loadedAt}`} course={visible} api={api} classId={cl} />}
+      {cl && selected && <ClassUsagePanel key={`usage:${cl}:${selected.loadedAt}`} courseId={course.id} api={api} classId={cl} maskNames={!showNames} />}
+      {cl && selected && <AnswerIntegrityOverview key={`${cl}:${selected.loadedAt}`} course={visible} api={api} classId={cl} maskNames={!showNames} />}
       {student && selected && renderStudentDetail(visible, student, () => setStudent(null))}
     </div>
   );

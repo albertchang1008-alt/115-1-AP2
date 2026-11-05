@@ -473,19 +473,30 @@ export function unitCompletion(unit: Unit, p: Progress, formulaVersion = CURRENT
 export function complete(unit: Unit, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   return unitCompletion(unit, p, formulaVersion).done;
 }
+/** Keep the first-unit fallback for courses that still use legacy activity keys. */
+export function chapterRequiredActivityProgress(course: Course, name: string, p: Progress) {
+  const chapter = chaptersOf(course)[name];
+  if (!chapter) return [];
+  const legacyUnit = !course.chapters ? course.units.find((u) => chapterName(u) === name) : undefined;
+  return requiredActivities(chapter).map((activity) => {
+    const current = p.activities?.[chapterActivityKey(name, activity.id)];
+    const legacy = !course.chapters ? p.activities?.[`${legacyUnit?.id}_${activity.id}`] : undefined;
+    const record = current?.completed ? current : legacy?.completed ? legacy : current ?? legacy;
+    return { activity, completed: !!record?.completed, updatedAt: record?.updatedAt };
+  });
+}
 export function chapterCompletion(course: Course, name: string, p: Progress, formulaVersion = CURRENT_COMPLETION_FORMULA_VERSION) {
   p = { ...p, units: p.units || {}, activities: p.activities || {} };
   const chapter = chaptersOf(course)[name];
   const units = course.units.filter((u) => chapterName(u) === name);
   if (!chapter) return { eligible: false, done: false, scoreDone: false, activitiesDone: false, completedActivities: 0, totalRequired: 0 };
   if (formulaVersion < 3) return { ...unitCompletion(units[0] || ({ id: name, ...chapter, bankVersion: '' } as Unit), p, formulaVersion), units };
-  const required = requiredActivities(chapter);
+  const required = chapterRequiredActivityProgress(course, name, p);
   // v3：必做 Chapter 底下所有已發布題目分類都需達標；分類沒有個別選做狀態。
   const scoreUnits = units.filter((u) => !!u.bankVersion);
   const hasBank = scoreUnits.length > 0;
   const scoreDone = scoreUnits.every((u) => (p.units[u.id]?.best ?? -1) >= chapter.threshold);
-  // 尚未升級的舊課程沿用 unitId_activityId；新 Chapter 一律使用 chapter: 前綴避免撞鍵。
-  const completedActivities = required.filter((a) => p.activities[chapterActivityKey(name, a.id)]?.completed || (!course.chapters && p.activities[`${units[0]?.id}_${a.id}`]?.completed)).length;
+  const completedActivities = required.filter((row) => row.completed).length;
   const activitiesDone = completedActivities === required.length;
   return { eligible: chapter.required && (hasBank || required.length > 0), done: scoreDone && activitiesDone, scoreDone, activitiesDone, completedActivities, totalRequired: required.length + scoreUnits.length, units };
 }

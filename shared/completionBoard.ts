@@ -1,8 +1,10 @@
 import {
   Course,
   Progress,
+  chapterActivityKey,
   chapterCompletion,
   chapterName,
+  chapterRequiredActivityProgress,
   chaptersOf,
   completion,
   emptyProgress,
@@ -68,7 +70,7 @@ export function classCompletionSummary(
   rows: CompletionStudent[],
   now = Date.now(),
 ) {
-  const visible = forClass(course, classId),
+  const visible = completionBoardCourse(course, classId),
     chapters = orderedChapters(visible);
   const sums = rows.map((r) => completion(visible, r.progress || emptyProgress()));
   const rates: Record<string, ChapterRate> = {};
@@ -142,7 +144,7 @@ export function matrixCsv(
   rows: CompletionStudent[],
   now = Date.now(),
 ): Record<string, string | number>[] {
-  const visible = forClass(course, classId);
+  const visible = completionBoardCourse(course, classId);
   return rows.map((r) => ({
     姓名: r.name,
     學號: r.studentId,
@@ -156,4 +158,104 @@ export function matrixCsv(
       ]),
     ),
   }));
+}
+
+export const boardStatuses = ['done', 'inProgress', 'notStarted', 'notOpen'] as const;
+/** 只記狀態篩選；遮名不記憶，每次開啟一律遮名（教師 2026-11-05 11:35）。 */
+export type BoardPreferences = { statuses: ChapterCellStatus[] };
+export const boardPreferenceKey = 'course-completion-board-display';
+export const defaultBoardPreferences = (): BoardPreferences => ({ statuses: ['inProgress'] });
+export function readBoardPreferences(storage: () => Pick<Storage, 'getItem'>): BoardPreferences {
+  try {
+    const value = JSON.parse(storage().getItem(boardPreferenceKey) ?? 'null');
+    if (!Array.isArray(value?.statuses) || !value.statuses.length
+        || !value.statuses.every((status: ChapterCellStatus) => boardStatuses.includes(status))) {
+      return defaultBoardPreferences();
+    }
+    return { statuses: boardStatuses.filter((status) => value.statuses.includes(status)) };
+  } catch {
+    return defaultBoardPreferences();
+  }
+}
+export function saveBoardPreferences(storage: () => Pick<Storage, 'setItem'>, value: BoardPreferences) {
+  try {
+    storage().setItem(boardPreferenceKey, JSON.stringify({ statuses: value.statuses }));
+    return true;
+  } catch {
+    return false;
+  }
+}
+export const maskStudentId = (id: string) => {
+  const chars = Array.from(id.trim());
+  return chars.length <= 3 ? '＊＊＊' : '＊＊＊' + chars.slice(-3).join('');
+};
+/** 姓名中間字改 O：呂O、呂O岑、四字以上保留首尾；英文名同規則（空白也遮）。 */
+export function projectionName(name: string) {
+  const chars = Array.from(name.trim());
+  if (!chars.length) return '';
+  if (chars.length === 1) return 'O';
+  if (chars.length === 2) return chars[0] + 'O';
+  return chars[0] + 'O'.repeat(chars.length - 2) + chars.at(-1);
+}
+
+/** Preserve the legacy key lookup when forClass has inferred chapters. */
+export function completionBoardCourse(course: Course, classId: string) {
+  const visible = forClass(course, classId);
+  return course.chapters ? visible : { ...visible, chapters: undefined };
+}
+
+export function statusMatrix(course: Course, students: CompletionStudent[], statuses: readonly ChapterCellStatus[], now: number, onlyOverdue = false) {
+  const chapters = matrixChapters(course);
+  const all = boardStatuses.every((status) => statuses.includes(status));
+  const rows = students.map((student) => {
+    const cells = new Map(chapters.map(({ name }) => [name, chapterCellState(course, name, student.progress, now)]));
+    for (const [name, cell] of cells) if (!statuses.includes(cell.state)) cells.delete(name);
+    const required = [...cells.values()].filter((cell) => cell.eligible);
+    return {
+      student, cells,
+      done: required.filter((cell) => cell.state === 'done').length,
+      total: required.length,
+      overdue: [...cells.values()].filter((cell) => cell.overdue).length,
+    };
+  }).filter((row) => (all || row.cells.size > 0) && (!onlyOverdue || row.overdue > 0));
+  return { rows, chapters: all ? chapters : chapters.filter(({ name }) => rows.some((row) => row.cells.has(name))) };
+}
+
+/**
+ * 依狀態篩選的班級摘要。全部勾選時與 classCompletionSummary 完全相同。
+ * 篩選時：各章比率改為「符合篩選的格子數／全班人數」；matched 為至少一格符合的人數；
+ * overdue 只計符合篩選且逾期者；人數、全部完成、平均完成仍以完整名冊計算（加總權重不變）。
+ */
+export function filteredClassCompletionSummary(course: Course, classId: string, rows: CompletionStudent[], statuses: readonly ChapterCellStatus[], now: number) {
+  const full = classCompletionSummary(course, classId, rows, now);
+  if (boardStatuses.every((status) => statuses.includes(status))) return { ...full, matched: full.count };
+  const matrix = statusMatrix(completionBoardCourse(course, classId), rows, statuses, now);
+  const rates: Record<string, ChapterRate> = {};
+  for (const { name, chapter } of matrix.chapters) {
+    const done = matrix.rows.filter((row) => row.cells.has(name)).length;
+    rates[name] = { done, total: rows.length, percent: rows.length ? 100 * done / rows.length : null, required: chapter.required, dueAt: chapter.dueAt };
+  }
+  return { ...full, rates, matched: matrix.rows.length, overdue: matrix.rows.filter((row) => row.overdue > 0).length };
+}
+
+/** 學生章節明細的逐項資料；完成判定與 chapterCompletion 共用。 */
+export function chapterDetailItems(course: Course, name: string, p: Progress) {
+  const categories = course.units
+    .filter((u) => chapterName(u) === name)
+    .map((unit) => {
+      const entry = p.units?.[unit.id];
+      return { unit, entry, done: !!unit.bankVersion && (entry?.best ?? -1) >= unit.threshold };
+    });
+  const legacyUnit = !course.chapters ? course.units.find((u) => chapterName(u) === name) : undefined;
+  const activities = chapterRequiredActivityProgress(course, name, p).map((row) => {
+    const record =
+      p.activities?.[chapterActivityKey(name, row.activity.id)] ??
+      (legacyUnit ? p.activities?.[`${legacyUnit.id}_${row.activity.id}`] : undefined);
+    return { ...row, done: row.completed, position: record?.position || 0 };
+  });
+  return { categories, activities };
+}
+/** 明細項目是否顯示：已完成者需勾「完成」；未完成者勾任一非完成狀態即顯示。 */
+export function detailItemVisible(done: boolean, statuses: readonly ChapterCellStatus[]) {
+  return done ? statuses.includes('done') : statuses.some((status) => status !== 'done');
 }

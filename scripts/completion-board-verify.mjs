@@ -33,6 +33,7 @@ export async function verifyCompletionBoard(screenshots = false) {
         }),
       );
       await page.goto('http://completion.test/');
+      await page.evaluate(() => localStorage.clear());
       await page.addStyleTag({ content: css });
       await page.addScriptTag({ content: bundle });
       const shot = async (name) => {
@@ -45,6 +46,16 @@ export async function verifyCompletionBoard(screenshots = false) {
           await page.screenshot({ path: `${out}/${name}-${width}.png`, fullPage: true });
       };
       await page.getByRole('heading', { name: '各班比較', exact: true }).waitFor();
+      // 狀態篩選預設只勾進行中；全部勾選後下列既有數字必須與 1.15.3 相同。
+      const statusBoxes = ['● 完成', '◐ 進行中', '○ 未開始', '⊘ 未開放'];
+      assert.deepEqual(
+        await Promise.all(statusBoxes.map((n) => page.getByLabel(n, { exact: true }).isChecked())),
+        [false, true, false, false],
+        '預設只勾進行中',
+      );
+      assert(await page.getByLabel('◐ 進行中', { exact: true }).isDisabled(), '至少保留一個狀態');
+      for (const n of statusBoxes) await page.getByLabel(n, { exact: true }).check();
+      assert.equal(await page.getByLabel('顯示姓名', { exact: true }).isChecked(), false, '預設遮名');
       assert.equal(
         await page.evaluate(() => window.completionTest.calls.length),
         0,
@@ -88,6 +99,10 @@ export async function verifyCompletionBoard(screenshots = false) {
       await page.getByRole('button', { name: '護二甲', exact: true }).click();
       const matrix = page.getByRole('table', { name: '護二甲學生單元矩陣' });
       await matrix.waitFor();
+      const html = await page.evaluate(() => document.body.outerHTML);
+      assert.equal(/同學|陳盈宥/.test(html), false, '遮名時 DOM（含 title、aria-label）沒有完整姓名');
+      assert(html.includes('林OO2') && html.includes('＊＊＊002'), '姓名中間改O、學號留末3碼');
+      await page.getByLabel('顯示姓名', { exact: true }).check();
       assert.equal(
         await page.evaluate(() => window.completionTest.calls.length),
         2,
@@ -118,7 +133,8 @@ export async function verifyCompletionBoard(screenshots = false) {
       const dialog = page.getByRole('dialog');
       await dialog.waitFor();
       assert(await dialog.getByText('首次達標：', { exact: false }).first().isVisible());
-      assert(await dialog.getByText('必做活動：已完成 1／1', { exact: true }).isVisible());
+      assert(await dialog.getByRole('heading', { name: '必做活動（已完成 1／1）', exact: true }).isVisible());
+      assert(await dialog.getByText('已完成｜紀錄時間：', { exact: false }).first().isVisible());
       assert.equal(await dialog.getByRole('heading', { name: '血液成分', exact: true }).count(), 1);
       assert.equal(await dialog.getByRole('heading', { name: '紅血球', exact: true }).count(), 1);
       await shot('popover');
@@ -171,6 +187,25 @@ export async function verifyCompletionBoard(screenshots = false) {
         11,
         '失敗仍保留前次完整快取',
       );
+      // 只勾進行中：只剩進行中格子；明細只列未完成項目；取消顯示姓名立即遮回。
+      const inProgressMatrix = page.getByRole('table', { name: '護二乙學生單元矩陣' });
+      for (const n of ['● 完成', '○ 未開始', '⊘ 未開放'])
+        await page.getByLabel(n, { exact: true }).uncheck();
+      const states = await inProgressMatrix
+        .locator('.completion-cell')
+        .evaluateAll((bs) => bs.map((b) => b.className.match(/state-(\w+)/)[1]));
+      assert(states.length > 0 && states.every((x) => x === 'inProgress'), JSON.stringify(states));
+      assert(await page.getByText('依狀態篩選（進行中）', { exact: false }).first().isVisible());
+      await page.getByLabel('顯示姓名', { exact: true }).uncheck();
+      assert.equal(/同學|陳盈宥/.test(await page.evaluate(() => document.body.outerHTML)), false);
+      await shot('filtered');
+      await inProgressMatrix.locator('.completion-cell').first().click();
+      const filteredDialog = page.getByRole('dialog');
+      await filteredDialog.waitFor();
+      assert.equal(await filteredDialog.getByText('首次達標：', { exact: false }).count(), 0, '已達標分類隱藏');
+      await page.keyboard.press('Escape');
+      for (const n of ['● 完成', '○ 未開始', '⊘ 未開放'])
+        await page.getByLabel(n, { exact: true }).check();
       assert.deepEqual(errors, []);
       results.push({
         width,
