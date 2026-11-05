@@ -710,6 +710,9 @@
       };
     }
 
+    const READ_CHARS_PER_SEC = 15;
+    const READ_MAX_SEC = 6;
+
     // State Machine & Controller
     const App = {
       data: DATA,
@@ -720,6 +723,8 @@
         stateIdx: 0,
         seenStates: new Set(),
         seenLegends: new Set(),
+        globalSeenTeach: new Set(),
+        globalSeenLegends: new Set(),
         explainSeenMap: {},
         isLegendExpanded: false,
         isZoomed: false,
@@ -879,6 +884,9 @@
         const lvl = this.data.levels[idx];
         if (lvl && lvl.states) {
           lvl.states.forEach((s, sIdx) => {
+            if (this.isTeachSeen(idx, sIdx)) {
+              this.state.seenStates.add(sIdx);
+            }
             if (this.isLegendSeen(idx, sIdx)) {
               this.state.seenLegends.add(sIdx);
             }
@@ -893,10 +901,25 @@
         this.setPhase('TEACH');
       },
 
+      isTeachSeen(levelIdx, stateIdx) {
+        const key = `${levelIdx}_${stateIdx}`;
+        return !!(this.state.globalSeenTeach && this.state.globalSeenTeach.has(key));
+      },
+
+      markTeachSeen(levelIdx, stateIdx) {
+        const key = `${levelIdx}_${stateIdx}`;
+        if (!this.state.globalSeenTeach) this.state.globalSeenTeach = new Set();
+        this.state.globalSeenTeach.add(key);
+      },
+
       getLegendStorageKey(levelIdx, stateIdx) {
         const lvl = this.data.levels[levelIdx];
         const st = lvl && lvl.states && lvl.states[stateIdx];
-        return (st && st.legendKey) || `level_${lvl ? lvl.id : levelIdx}`;
+        if (st && st.legendKey) return String(st.legendKey);
+        if (st && Array.isArray(st.legends) && st.legends.length > 0) {
+          return 'legend_' + st.legends.map(lg => `${lg.num || ''}:${lg.name || ''}:${lg.func || ''}:${(lg.sample && (lg.sample.img || lg.sample.pending)) || ''}`).join('|');
+        }
+        return `level_${lvl ? lvl.id : levelIdx}`;
       },
 
       isLegendSeen(levelIdx, stateIdx) {
@@ -923,11 +946,19 @@
           const storeKey = `seenLegend_${this.data.activityId || 'ag'}_${key}`;
           localStorage.setItem(storeKey, '1');
         } catch (e) {}
+        const lvl = this.data.levels[this.state.levelIdx];
+        if (lvl && lvl.states && this.state.seenLegends) {
+          lvl.states.forEach((s, sIdx) => {
+            if (this.isLegendSeen(this.state.levelIdx, sIdx)) {
+              this.state.seenLegends.add(sIdx);
+            }
+          });
+        }
       },
 
-      calcDwellTime(text, minSec, maxSec) {
+      calcDwellTime(text, minSec, maxSec = READ_MAX_SEC) {
         const chars = (text || '').replace(/\s+/g, '').length;
-        return Math.min(maxSec, Math.max(minSec, Math.ceil(chars / 10)));
+        return Math.min(maxSec, Math.max(minSec, Math.ceil(chars / READ_CHARS_PER_SEC)));
       },
 
       clearActiveReading() {
@@ -941,12 +972,13 @@
 
       startTeachReading(idx, text) {
         this.clearActiveReading();
-        const sec = this.calcDwellTime(text, 2, 10);
+        const sec = this.calcDwellTime(text, 2, READ_MAX_SEC);
         const key = `teach_${this.state.levelIdx}_${idx}`;
         this.state.activeReadingKey = key;
         this.state.readingDuration = sec;
         this.state.readingTimer = setTimeout(() => {
           this.state.seenStates.add(idx);
+          this.markTeachSeen(this.state.levelIdx, idx);
           this.clearActiveReading();
           this.render();
         }, sec * 1000);
@@ -954,7 +986,7 @@
 
       startExplainReading(qId, subIdx, text) {
         this.clearActiveReading();
-        const sec = this.calcDwellTime(text, 2, 10);
+        const sec = this.calcDwellTime(text, 2, READ_MAX_SEC);
         const key = `explain_${qId}_${subIdx}`;
         this.state.activeReadingKey = key;
         this.state.readingDuration = sec;
@@ -968,8 +1000,7 @@
       startRetryCountdown(btnId, text) {
         const btn = document.getElementById(btnId);
         if (!btn) return;
-        const chars = (text || '').replace(/\s+/g, '').length;
-        let sec = Math.min(6, Math.max(2, Math.ceil(chars / 10)));
+        let sec = this.calcDwellTime(text, 2, READ_MAX_SEC);
         btn.disabled = true;
         btn.textContent = `${this.ui.retry} (${sec})`;
         if (this.state.retryTimer) clearInterval(this.state.retryTimer);
@@ -1056,6 +1087,9 @@
         const currentState = states[this.state.stateIdx] || {};
 
         // Start reading timer for current state if not yet seen
+        if (this.isTeachSeen(this.state.levelIdx, this.state.stateIdx)) {
+          this.state.seenStates.add(this.state.stateIdx);
+        }
         if (states.length > 0 && !this.state.seenStates.has(this.state.stateIdx)) {
           const readingKey = `teach_${this.state.levelIdx}_${this.state.stateIdx}`;
           if (this.state.activeReadingKey !== readingKey) {
@@ -1254,6 +1288,9 @@
               this.state.stateIdx = idx;
               this.state.isZoomed = false;
               this.clearActiveReading();
+              if (this.isTeachSeen(this.state.levelIdx, idx)) {
+                this.state.seenStates.add(idx);
+              }
               if (!this.state.seenStates.has(idx)) {
                 this.startTeachReading(idx, states[idx].caption || '');
               }
@@ -1338,26 +1375,36 @@
           `;
         }).join('');
 
-        const totalLegendText = targetList.map(lg => (lg.name || '') + (lg.func || '')).join('');
-        const chars = totalLegendText.replace(/\s+/g, '').length;
-        let sec = Math.min(10, Math.max(3, Math.ceil(chars / 10)));
+        if (this.state.legendTimer) {
+          clearInterval(this.state.legendTimer);
+          this.state.legendTimer = null;
+        }
 
-        confirmBtn.disabled = true;
-        confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+        const isAlreadySeen = this.isLegendSeen(this.state.levelIdx, this.state.stateIdx);
 
-        if (this.state.legendTimer) clearInterval(this.state.legendTimer);
-        this.state.legendTimer = setInterval(() => {
-          sec--;
-          if (sec > 0) {
-            confirmBtn.disabled = true;
-            confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
-          } else {
-            clearInterval(this.state.legendTimer);
-            this.state.legendTimer = null;
-            confirmBtn.disabled = false;
-            confirmBtn.textContent = this.ui.legendReadDone;
-          }
-        }, 1000);
+        if (isAlreadySeen) {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = this.ui.legendReadDone;
+        } else {
+          const totalLegendText = targetList.map(lg => (lg.name || '') + (lg.func || '')).join('');
+          let sec = this.calcDwellTime(totalLegendText, 3, READ_MAX_SEC);
+
+          confirmBtn.disabled = true;
+          confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+
+          this.state.legendTimer = setInterval(() => {
+            sec--;
+            if (sec > 0) {
+              confirmBtn.disabled = true;
+              confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
+            } else {
+              clearInterval(this.state.legendTimer);
+              this.state.legendTimer = null;
+              confirmBtn.disabled = false;
+              confirmBtn.textContent = this.ui.legendReadDone;
+            }
+          }, 1000);
+        }
 
         confirmBtn.onclick = () => {
           if (confirmBtn.disabled) return;
