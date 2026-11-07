@@ -134,7 +134,21 @@ export async function verifyCompletionBoard(screenshots = false) {
       await dialog.waitFor();
       assert(await dialog.getByText('首次達標：', { exact: false }).first().isVisible());
       assert(await dialog.getByRole('heading', { name: '必做活動（已完成 1／1）', exact: true }).isVisible());
-      assert(await dialog.getByText('已完成｜紀錄時間：', { exact: false }).first().isVisible());
+      assert(await dialog.getByText('首次完成：', { exact: false }).first().isVisible());
+      assert(await dialog.getByText('開啟 3 次（含推估）', { exact: false }).first().isVisible());
+      const before = await page.evaluate(() => window.completionTest.calls.length);
+      assert.equal(
+        await page.evaluate(() => window.completionTest.calls.filter((x) => /Attempts|Sessions/.test(x.name)).length),
+        0,
+        '展開前不讀細目',
+      );
+      await dialog.getByRole('button', { name: '展開互動教材細目', exact: true }).click();
+      await dialog.getByText('停在第 4 關', { exact: true }).waitFor();
+      assert.equal(await dialog.getByText('推估', { exact: true }).count(), 2);
+      await dialog.getByRole('button', { name: '展開血液成分細目', exact: true }).click();
+      await dialog.getByText('85 ✓ 達標', { exact: true }).waitFor();
+      assert.equal(await dialog.getByText('✓ 達標', { exact: false }).count(), 1, '只標第一次達標');
+      assert.equal(await page.evaluate(() => window.completionTest.calls.length), before + 2);
       assert.equal(await dialog.getByRole('heading', { name: '血液成分', exact: true }).count(), 1);
       assert.equal(await dialog.getByRole('heading', { name: '紅血球', exact: true }).count(), 1);
       await shot('popover');

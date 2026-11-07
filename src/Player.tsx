@@ -175,6 +175,7 @@ export function HtmlMaterial({
       },
       setStatus,
       () => onSave(1, true),
+      session.current,
     );
     const handler = async (event: MessageEvent) => {
       if (event.source !== frame.current?.contentWindow || !event.data) return;

@@ -248,14 +248,22 @@ export function chapterDetailItems(course: Course, name: string, p: Progress) {
     });
   const legacyUnit = !course.chapters ? course.units.find((u) => chapterName(u) === name) : undefined;
   const activities = chapterRequiredActivityProgress(course, name, p).map((row) => {
-    const record =
-      p.activities?.[chapterActivityKey(name, row.activity.id)] ??
-      (legacyUnit ? p.activities?.[`${legacyUnit.id}_${row.activity.id}`] : undefined);
-    return { ...row, done: row.completed, position: record?.position || 0 };
+    const key = chapterActivityKey(name, row.activity.id), legacyKey = legacyUnit ? `${legacyUnit.id}_${row.activity.id}` : '';
+    const record = p.activities?.[key] ?? (legacyKey ? p.activities?.[legacyKey] : undefined);
+    const history = p.activityHistory?.[key] ?? (legacyKey ? p.activityHistory?.[legacyKey] : undefined);
+    return { ...row, done: row.completed, position: record?.position || 0, history, legacyUnitId: legacyUnit?.id };
   });
   return { categories, activities };
 }
 /** 明細項目是否顯示：已完成者需勾「完成」；未完成者勾任一非完成狀態即顯示。 */
 export function detailItemVisible(done: boolean, statuses: readonly ChapterCellStatus[]) {
   return done ? statuses.includes('done') : statuses.some((status) => status !== 'done');
+}
+
+/** 互動教材是否屬於有紀錄的新版（17 份 Antigravity 教材，materialVersion 以 -ag1 結尾）。 */
+export const recordedMaterial = (materialVersion: string | undefined) => /-ag1$/.test(materialVersion || '');
+/** 題目分類細目：標出第一次達標的那一次（完整測驗、未離開畫面、分數達門檻）。 */
+export function markFirstPass<T extends { score: number; mode: string; full: boolean; leftScreen?: boolean }>(rows: T[], threshold: number) {
+  const i = rows.findIndex((r) => r.mode === 'quiz' && r.full && !r.leftScreen && r.score >= threshold);
+  return rows.map((r, j) => ({ ...r, firstPass: j === i }));
 }

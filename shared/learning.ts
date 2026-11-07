@@ -5,6 +5,8 @@ export interface LearningEvent {
   questionId?: string;
   correct?: boolean;
   seconds?: number;
+  /** 平台端附加的教材開啟 sessionId（1.15.6 起）；教材本身不送。 */
+  sid?: string;
 }
 export interface LearningSummary {
   nodes: string[];
@@ -16,7 +18,8 @@ export interface LearningSummary {
 }
 export const emptyLearning = (): LearningSummary => ({ nodes: [], answers: {}, hints: 0, activeSeconds: 0, nodeSeconds: {}, completed: false });
 export function validEvent(e: LearningEvent) {
-  return !!e && typeof e.id === 'string' && /^[\w-]{1,100}$/.test(e.id) && (
+  return !!e && typeof e.id === 'string' && /^[\w-]{1,100}$/.test(e.id) &&
+    (e.sid === undefined || (typeof e.sid === 'string' && /^[\w-]{1,100}$/.test(e.sid))) && (
     e.type === 'completed' ||
     (e.type === 'explore' && typeof e.nodeId === 'string' && /^[\w-]{1,100}$/.test(e.nodeId)) ||
     (e.type === 'answer' && typeof e.questionId === 'string' && /^[\w-]{1,100}$/.test(e.questionId) && typeof e.correct === 'boolean') ||

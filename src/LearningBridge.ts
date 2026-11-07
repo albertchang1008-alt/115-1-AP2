@@ -2,7 +2,7 @@ import type { API } from './service';
 import { LearningEvent, validEvent } from '../shared/learning';
 import { eventBatcher } from './EventBatcher';
 // One authenticated student's pending events; no identity is passed into the iframe.
-export function learningBridge(api: API, context: { courseId: string; unitId: string; chapterName?: string; activityId: string; materialVersion: string; uid: string }, changed: (message: string) => void, completed: () => void) {
+export function learningBridge(api: API, context: { courseId: string; unitId: string; chapterName?: string; activityId: string; materialVersion: string; uid: string }, changed: (message: string) => void, completed: () => void, sessionId?: string) {
   if (api.preview) return {
     async receive(events: LearningEvent[]) {
       if (!Array.isArray(events) || events.length > 30 || events.some((e) => !validEvent(e))) return [];
@@ -37,6 +37,8 @@ export function learningBridge(api: API, context: { courseId: string; unitId: st
   return {
     async receive(events: LearningEvent[]) {
       if (!Array.isArray(events) || events.length > 30 || events.some((e) => !validEvent(e))) return [];
+      // 每筆事件記下它屬於哪一次開啟；暫存到下次才送出的事件在佇列中仍保留原本的 sessionId。
+      if (sessionId) events = events.map((e) => ({ ...e, sid: sessionId }));
       return batch.enqueue(events, events.some((e) => e.type === 'completed'));
     },
     close: batch.close,

@@ -22,6 +22,8 @@ const activity = {
   url: '',
   description: '',
   tracking: 'interactive' as const,
+  materialVersion: 'kidney-anatomy-ag1',
+  nodeTotal: 20,
 };
 const chapters = {
   血液: chapter('血液', { dueAt: due, activities: [activity] }),
@@ -75,6 +77,7 @@ for (const [classId, count] of [
       score('blood1', 95, i === 1 ? fixtureNow : fixtureNow - 2 * day);
       score('blood2', 90, fixtureNow - 2 * day);
       p.activities['chapter:血液_read'] = { position: 1, completed: true, updatedAt: fixtureNow };
+      p.activityHistory = { 'chapter:血液_read': { opens: 3, completions: 2, firstCompletedAt: fixtureNow - day, lastAt: fixtureNow, estimated: true } };
     }
     if (i === 0) {
       score('heart', 90, fixtureNow - 2 * day);

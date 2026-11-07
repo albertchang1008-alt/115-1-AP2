@@ -195,6 +195,8 @@ export interface Progress {
     { best: number; attempts: number; updatedAt: number; passedAt?: number; fullAttempts?: number; timing?: TimingStats; wrong?: Record<string, Record<string, WrongEntry> | string[]> }
   >;
   activities: Record<string, { position: number; completed: boolean; updatedAt: number }>;
+  /** 互動教材的開啟／走完次數（1.15.6 起，後端寫入；不影響完成度）。 */
+  activityHistory?: Record<string, { opens: number; completions: number; firstCompletedAt?: number; lastAt?: number; estimated?: true }>;
   // 抽題練習「已考過優先」用：unitId -> questionId -> true。跨題庫版本保留、只增不減，不影響完成度。
   attempted?: Record<string, Record<string, true>>;
 }

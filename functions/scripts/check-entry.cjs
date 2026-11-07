@@ -43,6 +43,9 @@ const expected = [
   'setStudentNotice',
   'saveLearningEvents',
   'getLearningDiagnostics',
+  'getStudentUnitAttempts',
+  'getActivitySessions',
+  'backfillActivityHistory',
 ];
 for (const name of expected) {
   if (typeof handlers[name] !== 'function') throw new Error(`缺少後端入口：${name}`);

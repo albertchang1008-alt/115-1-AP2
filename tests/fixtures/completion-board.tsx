@@ -16,6 +16,18 @@ const api: API = {
     if (name === 'getCompletion')
       return { course: fixtureCourse, rows: fixtureRows[data.classId], next: null } as any;
     if (name === 'getHistory') return { rows: [], next: null } as any;
+    if (name === 'getStudentUnitAttempts')
+      return { rows: [
+        { clientAt: 1762345080000, score: 70, mode: 'quiz', full: true },
+        { clientAt: 1762345860000, score: 85, mode: 'quiz', full: true },
+        { clientAt: 1762434120000, score: 95, mode: 'flashcard', full: false },
+      ], total: 3, truncated: false } as any;
+    if (name === 'getActivitySessions')
+      return { found: true, sessions: [
+        { startedAt: 1762345000000, lastAt: 1762346000000, maxLevel: 4, estimated: true },
+        { startedAt: 1762348000000, lastAt: 1762349000000, completedAt: 1762349000000, estimated: true },
+        { startedAt: 1762430000000, lastAt: 1762431000000, completedAt: 1762431000000 },
+      ] } as any;
     throw Error('未預期的API ' + name);
   },
 };

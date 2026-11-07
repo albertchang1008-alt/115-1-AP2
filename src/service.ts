@@ -274,6 +274,10 @@ export function memoryApi(initial = sampleCourse(), bank: Question[] = sampleQue
           result = { done: true, rows: [], count: 0 }; break;
         case 'getLearningDiagnostics':
           result = { rows: [], next: null }; break;
+        case 'getStudentUnitAttempts':
+          result = { rows: [], total: 0, truncated: false }; break;
+        case 'getActivitySessions':
+          result = { found: false, recorded: false, sessions: [], history: null, backfilledAt: null }; break;
         case 'getPublished':
           result = published;
           break;

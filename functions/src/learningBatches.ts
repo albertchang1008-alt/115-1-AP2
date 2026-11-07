@@ -1,5 +1,6 @@
 import { FieldPath, type DocumentReference, type Firestore, type Transaction } from 'firebase-admin/firestore';
 import { emptyLearning, reduceLearning, type LearningEvent } from '../../shared/learning';
+import { applySessionEvents, combinedHistory, type ActivityHistoryEntry } from '../../shared/activityHistory';
 
 export const RECENT_LEARNING_EVENT_LIMIT = 600;
 
@@ -8,7 +9,8 @@ export async function saveLearningBatch(
   ref: DocumentReference,
   metadata: Record<string, unknown>,
   events: LearningEvent[],
-  onComplete: (tx: Transaction, at: number) => void,
+  /** 這批有新的一次開啟或收到完成時呼叫；completed 為真時才寫入原本的完成欄位。 */
+  onProgress: (tx: Transaction, at: number, info: { completed: boolean; newSession: boolean; history: ActivityHistoryEntry }) => void,
 ) {
   const batches = ref.collection('batches');
   const batch = batches.doc();
@@ -45,14 +47,18 @@ export async function saveLearningBatch(
       const typeCounts: Partial<Record<LearningEvent['type'], number>> = {};
       for (const { type } of fresh) typeCounts[type] = (typeCounts[type] || 0) + 1;
       const processed = [...recent, ...eventIds];
+      const { sessions, history, newSession, completed } = applySessionEvents(state, fresh, receivedAt);
       tx.set(ref, {
         ...metadata, summary, updatedAt: receivedAt,
+        ...(Object.keys(sessions).length ? { sessions } : {}),
+        history,
+        ...(state?.backfill ? { backfill: state.backfill } : {}),
         recentEventIds: processed.slice(-RECENT_LEARNING_EVENT_LIMIT),
         hasLegacyLearningEvents: legacy,
         hasOlderLearningBatches: olderBatches || processed.length > RECENT_LEARNING_EVENT_LIMIT,
       });
       tx.create(batch, { receivedAt, eventIds, typeCounts, events: fresh });
-      if (typeCounts.completed) onComplete(tx, receivedAt);
+      if (newSession || completed) onProgress(tx, receivedAt, { completed, newSession, history: combinedHistory(history, state?.backfill) });
     }
     return { accepted: events.map((e) => e.id), summary };
   });

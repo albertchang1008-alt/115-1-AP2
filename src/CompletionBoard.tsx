@@ -5,7 +5,9 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, RefreshCw } from 'lucide-react';
 import Papa from 'papaparse';
 import {
+  Activity,
   Course,
+  Unit,
   completion,
   emptyProgress,
   forClass,
@@ -26,8 +28,10 @@ import {
   completionBoardCourse,
   detailItemVisible,
   filteredClassCompletionSummary,
+  markFirstPass,
   maskStudentId,
   matrixCsv,
+  recordedMaterial,
   projectionName,
   readBoardPreferences,
   saveBoardPreferences,
@@ -97,6 +101,185 @@ function rateStyle(rate?: ChapterRate) {
   return rate?.percent == null || !rate.required
     ? undefined
     : { backgroundColor: `hsl(200 55% ${97 - rate.percent * 0.28}%)`, color: '#17384c' };
+}
+
+const weekday = '日一二三四五六',
+  pad = (n: number) => String(n).padStart(2, '0');
+/** 11/5（四）20:31（台北時間）。 */
+export function shortTime(time: number) {
+  const d = new Date(time + 8 * 3600 * 1000);
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}（${weekday[d.getUTCDay()]}）${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
+}
+const clock = (time: number) => shortTime(time).replace(/^.*）/, ''),
+  rowTime = (time: number) => shortTime(time).replace(/（.）/, ' ');
+function Summary({ parts }: { parts: (string | false | undefined | null)[] }) {
+  const shown = parts.filter(Boolean) as string[];
+  return shown.length ? (
+    <p className="history-summary">
+      {shown.map((x, i) => (
+        <span key={i}>
+          {i > 0 && <span className="history-sep">｜</span>}
+          {x}
+        </span>
+      ))}
+    </p>
+  ) : null;
+}
+/** 點「▼ 細目」才呼叫後端；同一次開啟明細只讀一次。 */
+function useDetail<T>(load: () => Promise<T>) {
+  const [open, setOpen] = useState(false),
+    [data, setData] = useState<T | null>(null),
+    [error, setError] = useState('');
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next && !data) {
+      setError('');
+      load().then(setData, (e) => setError((e as Error).message || '讀取失敗'));
+    }
+  };
+  return { open, data, error, toggle };
+}
+function DetailToggle({ open, toggle, label }: { open: boolean; toggle: () => void; label: string }) {
+  return (
+    <button type="button" className="history-toggle" aria-expanded={open} aria-label={`${open ? '收起' : '展開'}${label}細目`} onClick={toggle}>
+      {open ? '▲ 收起' : '▼ 細目'}
+    </button>
+  );
+}
+interface AttemptRow { clientAt: number; score: number; mode: string; full: boolean; leftScreen?: boolean }
+const attemptKind = (r: AttemptRow) =>
+  r.mode === 'quiz' ? (r.full ? (r.leftScreen ? '離開畫面' : '完整') : '部分') : r.mode === 'flashcard' ? '閃卡' : '複習';
+export function CategoryHistory({ api, courseId, uid, unit, entry }: {
+  api: API; courseId: string; uid?: string | null; unit: Unit;
+  entry?: { best: number; attempts: number; updatedAt: number; passedAt?: number };
+}) {
+  const passed = !!unit.bankVersion && (entry?.best ?? -1) >= unit.threshold;
+  const detail = useDetail(() =>
+    api.call<{ rows: AttemptRow[]; total: number; truncated: boolean }>('getStudentUnitAttempts', { courseId, uid, unitId: unit.id }),
+  );
+  const rows = detail.data ? markFirstPass(detail.data.rows, unit.threshold) : [];
+  const offset = detail.data ? detail.data.total - detail.data.rows.length : 0;
+  return (
+    <section>
+      <div className="history-head">
+        <h4>{unit.title}</h4>
+        {!!uid && !!entry?.attempts && <DetailToggle open={detail.open} toggle={detail.toggle} label={unit.title} />}
+      </div>
+      <p>
+        <span className={`history-pill ${passed ? 'is-done' : 'is-todo'}`}>{passed ? '已達標' : '未達標'}</span>
+      </p>
+      {entry?.attempts ? (
+        <Summary
+          parts={[
+            !!entry.passedAt && `首次達標：${shortTime(entry.passedAt)}`,
+            `作答 ${entry.attempts} 次`,
+            `最高 ${entry.best < 0 ? '—' : entry.best} 分${passed ? '' : `（門檻 ${unit.threshold}）`}`,
+            !!entry.updatedAt && `最近 ${shortTime(entry.updatedAt)}`,
+          ]}
+        />
+      ) : (
+        <p className="muted">尚未作答（門檻 {unit.threshold}）</p>
+      )}
+      {!unit.bankVersion && <p className="muted">題庫未更新到學生端，不列入測驗完成條件。</p>}
+      {detail.open && (
+        <div className="history-detail">
+          {detail.error ? <p className="muted">讀取失敗：{detail.error}</p> : !detail.data ? <p className="muted">讀取中…</p> : !rows.length ? <p className="muted">沒有作答紀錄。</p> : (
+            <table>
+              <thead><tr><th>次</th><th>時間</th><th>分數</th><th>方式</th></tr></thead>
+              <tbody>
+                {rows.map((r, i) => (
+                  <tr key={i}>
+                    <td>{offset + i + 1}</td>
+                    <td>{rowTime(r.clientAt)}</td>
+                    <td className={r.firstPass ? 'history-ok' : undefined}>{r.score}{r.firstPass && ' ✓ 達標'}</td>
+                    <td>{attemptKind(r)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          {detail.data?.truncated && <p className="muted">只列最近 {detail.data.rows.length} 次。</p>}
+        </div>
+      )}
+    </section>
+  );
+}
+interface SessionRow { startedAt: number; lastAt: number; completedAt?: number; maxLevel?: number; estimated?: true }
+export function ActivityHistory({ api, courseId, uid, chapterName, activity, done, updatedAt, position, history, legacyUnitId }: {
+  api: API; courseId: string; uid?: string | null; chapterName: string; activity: Activity; done: boolean; updatedAt?: number; position: number;
+  history?: { opens: number; completions: number; firstCompletedAt?: number; lastAt?: number; estimated?: true };
+  legacyUnitId?: string;
+}) {
+  const interactive = activity.type === 'html' && activity.tracking === 'interactive';
+  const recorded = interactive && recordedMaterial(activity.materialVersion);
+  const detail = useDetail(() =>
+    api.call<{ found: boolean; sessions: SessionRow[]; nodeTotal?: number }>('getActivitySessions', {
+      courseId, uid, chapterName, activityId: activity.id, ...(legacyUnitId ? { unitId: legacyUnitId } : {}),
+    }),
+  );
+  const pill = <span className={`history-pill ${done ? 'is-done' : 'is-todo'}`}>{done ? '已完成' : '未完成'}</span>;
+  const progressText = !done && activity.type === 'html' && position > 0 ? `節點 ${position}${activity.nodeTotal ? `／${activity.nodeTotal}` : ''}` : '';
+  return (
+    <section>
+      <div className="history-head">
+        <h4>
+          {activity.title || activity.id}
+          {activity.type === 'youtube' && <small className="muted">（YouTube）</small>}
+        </h4>
+        {recorded && !!uid && !!history?.opens && <DetailToggle open={detail.open} toggle={detail.toggle} label={activity.title || activity.id} />}
+      </div>
+      {!interactive ? (
+        <p>
+          {done ? '已完成' : '未完成'}
+          {done && !!updatedAt && `｜紀錄時間：${fullTime(updatedAt)}`}
+        </p>
+      ) : !recorded ? (
+        <>
+          <p>{pill}</p>
+          <p className="muted">次數與時間：上線前未記錄{progressText && `｜進度：${progressText}`}</p>
+        </>
+      ) : (
+        <>
+          <p>{pill}</p>
+          {history?.opens ? (
+            <Summary
+              parts={[
+                !!history.firstCompletedAt && `首次完成：${shortTime(history.firstCompletedAt)}`,
+                `開啟 ${history.opens} 次${history.estimated ? '（含推估）' : ''}`,
+                `走完 ${history.completions} 次`,
+                !!history.lastAt && `最近 ${shortTime(history.lastAt)}`,
+                progressText,
+              ]}
+            />
+          ) : (
+            <p className="muted">{done || position > 0 ? '次數尚未補登' : '尚未開啟'}{progressText && `｜進度：${progressText}`}</p>
+          )}
+        </>
+      )}
+      {detail.open && (
+        <div className="history-detail">
+          {detail.error ? <p className="muted">讀取失敗：{detail.error}</p> : !detail.data ? <p className="muted">讀取中…</p> : !detail.data.sessions.length ? <p className="muted">上線前未記錄。</p> : (
+            <table>
+              <thead><tr><th>次</th><th>開始</th><th>結果</th></tr></thead>
+              <tbody>
+                {detail.data.sessions.map((r, i) => (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{rowTime(r.startedAt)}{r.estimated && <small className="history-est">推估</small>}</td>
+                    <td className={r.completedAt ? 'history-ok' : undefined}>
+                      {r.completedAt ? `走完 ${clock(r.completedAt)}` : r.maxLevel ? `停在第 ${r.maxLevel} 關` : '已開始'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          {!!detail.data?.sessions.length && detail.data.sessions.length >= 50 && <p className="muted">只保留最近 50 次。</p>}
+        </div>
+      )}
+    </section>
+  );
 }
 
 function BoardDialog({
@@ -357,15 +540,7 @@ export default function CompletionBoard({
         </h3>
         <div className="completion-category-list">
           {shownCategories.map(({ unit: u, entry: p }) => (
-            <section key={u.id}>
-              <h4>{u.title}</h4>
-              <p>
-                最高分 {p?.best == null || p.best < 0 ? '尚無' : p.best}／門檻 {u.threshold}
-                ｜作答 {p?.attempts || 0} 次
-              </p>
-              {!u.bankVersion && <p className="muted">題庫未更新到學生端，不列入測驗完成條件。</p>}
-              {!!p?.passedAt && <p>首次達標：{fullTime(p.passedAt)}</p>}
-            </section>
+            <CategoryHistory key={u.id} api={api} courseId={course.id} uid={student.uid} unit={u} entry={p} />
           ))}
         </div>
         {hiddenNote(categories.length - shownCategories.length, '題目分類')}
@@ -376,23 +551,9 @@ export default function CompletionBoard({
           <p className="muted">本章沒有必做活動。</p>
         ) : (
           <div className="completion-category-list">
-            {shownActivities.map(({ activity, done, updatedAt, position }) => (
-              <section key={activity.id}>
-                <h4>
-                  {activity.title || activity.id}
-                  {activity.type === 'youtube' && <small className="muted">（YouTube）</small>}
-                </h4>
-                <p>
-                  {done ? '已完成' : '未完成'}
-                  {done && !!updatedAt && `｜紀錄時間：${fullTime(updatedAt)}`}
-                </p>
-                {!done && activity.type === 'html' && position > 0 && (
-                  <p className="muted">
-                    進度：節點 {position}
-                    {activity.nodeTotal ? `／${activity.nodeTotal}` : ''}
-                  </p>
-                )}
-              </section>
+            {shownActivities.map(({ activity, done, updatedAt, position, history, legacyUnitId }) => (
+              <ActivityHistory key={activity.id} api={api} courseId={course.id} uid={student.uid} chapterName={name}
+                activity={activity} done={done} updatedAt={updatedAt} position={position} history={history} legacyUnitId={legacyUnitId} />
             ))}
           </div>
         )}

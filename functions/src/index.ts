@@ -17,6 +17,7 @@ import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wron
 import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { validEvent, type LearningEvent } from '../../shared/learning';
 import { saveLearningBatch } from './learningBatches';
+import { createActivityHistoryHandlers } from './activityHistory';
 import { positiveCache } from './learningAccessCache';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
@@ -1528,10 +1529,14 @@ export const saveLearningEvents = onCall(options, async (req) => {
     uid: p.uid, email: p.email, name: p.name, studentId: p.studentId, classId: p.classId, unitId,
     ...(chapter ? { chapterName: requestedChapter } : {}), activityId, materialVersion: version,
     nodeTotal: activity.nodeTotal || 0, questionTotal: activity.questionTotal || 0, formulaVersion: 1,
-  }, events, (tx, at) => tx.set(progressRef, {
-    uid: p.uid, classId: p.classId, activityUpdatedAt: at,
-    activities: { [chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`]: { position: 1, completed: true } },
-  }, { merge: true }));
+  }, events, (tx, at, info) => {
+    const key = chapter ? chapterActivityKey(requestedChapter, activityId) : `${unitId}_${activityId}`;
+    tx.set(progressRef, {
+      uid: p.uid, classId: p.classId,
+      ...(info.completed ? { activityUpdatedAt: at, activities: { [key]: { position: 1, completed: true } } } : {}),
+      activityHistory: { [key]: info.history },
+    }, { merge: true });
+  });
 });
 export const getLearningDiagnostics = onCall(options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
@@ -1556,6 +1561,8 @@ export const { updateClassroomQuestions, getClassroomConfig, saveClassroomConfig
 export const { listManagedCourses, getCourseDraft, getCompletionSummary, patchCourseDraft } = createPlatformHandlers(db, identity, access, rosterQuery, validateDraft, checkRevision, options);
 
 export const { getAnswerIntegrityStats, recordPracticeLeaves } = createIntegrityHandlers(db, access, rosterQuery, options);
+
+export const { getStudentUnitAttempts, getActivitySessions, backfillActivityHistory } = createActivityHistoryHandlers(db, access, options);
 
 export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);
 
