@@ -138,3 +138,23 @@ test('明細依篩選顯示：已完成需勾完成；未完成勾任一非完�
   assert.equal(detailItemVisible(false, ['done']), false);
   assert.equal(detailItemVisible(false, ['notOpen']), true);
 });
+
+test('已考完的單元：預設隱藏、完成度只算看得到的單元，記憶偏好', async () => {
+  const { archivedChapterNames, withoutArchivedChapters } = await import('../shared/completionBoard');
+  const archived = { ...c, units: c.units.map((u) => (u.group === c.units[0].group ? { ...u, visibility: 'archived' as const } : u)) };
+  const name = archivedChapterNames(archived);
+  assert.deepEqual(name, [c.units[0].group]);
+  const hidden = withoutArchivedChapters(archived);
+  assert.equal(matrixChapters(completionBoardCourse(hidden, '護二甲')).some((x) => x.name === name[0]), false);
+  assert.equal(matrixChapters(completionBoardCourse(hidden, '護二甲')).length, matrixChapters(completionBoardCourse(c, '護二甲')).length - 1);
+  const full = statusMatrix(completionBoardCourse(archived, '護二甲'), rows['護二甲'], boardStatuses, now).rows[0];
+  const shown = statusMatrix(completionBoardCourse(hidden, '護二甲'), rows['護二甲'], boardStatuses, now).rows[0];
+  assert.ok(shown.total < full.total, '完成度分母只算看得到的單元');
+  assert.equal(withoutArchivedChapters(c), c, '沒有已考完單元時原樣傳回');
+  const store = new Map<string, string>();
+  const storage = () => ({ getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v) });
+  saveBoardPreferences(storage, { statuses: ['done'], showArchived: true });
+  assert.deepEqual(readBoardPreferences(storage), { statuses: ['done'], showArchived: true });
+  saveBoardPreferences(storage, { statuses: ['done'] });
+  assert.deepEqual(readBoardPreferences(storage), { statuses: ['done'] });
+});

@@ -10,6 +10,7 @@ import {
   emptyProgress,
   forClass,
   orderedChapters,
+  unitVisibility,
   parseCourseTime,
 } from './model';
 
@@ -162,7 +163,7 @@ export function matrixCsv(
 
 export const boardStatuses = ['done', 'inProgress', 'notStarted', 'notOpen'] as const;
 /** 只記狀態篩選；遮名不記憶，每次開啟一律遮名（教師 2026-11-05 11:35）。 */
-export type BoardPreferences = { statuses: ChapterCellStatus[] };
+export type BoardPreferences = { statuses: ChapterCellStatus[]; showArchived?: boolean };
 export const boardPreferenceKey = 'course-completion-board-display';
 export const defaultBoardPreferences = (): BoardPreferences => ({ statuses: ['inProgress'] });
 export function readBoardPreferences(storage: () => Pick<Storage, 'getItem'>): BoardPreferences {
@@ -172,14 +173,17 @@ export function readBoardPreferences(storage: () => Pick<Storage, 'getItem'>): B
         || !value.statuses.every((status: ChapterCellStatus) => boardStatuses.includes(status))) {
       return defaultBoardPreferences();
     }
-    return { statuses: boardStatuses.filter((status) => value.statuses.includes(status)) };
+    return {
+      statuses: boardStatuses.filter((status) => value.statuses.includes(status)),
+      ...(value.showArchived === true ? { showArchived: true } : {}),
+    };
   } catch {
     return defaultBoardPreferences();
   }
 }
 export function saveBoardPreferences(storage: () => Pick<Storage, 'setItem'>, value: BoardPreferences) {
   try {
-    storage().setItem(boardPreferenceKey, JSON.stringify({ statuses: value.statuses }));
+    storage().setItem(boardPreferenceKey, JSON.stringify({ statuses: value.statuses, ...(value.showArchived ? { showArchived: true } : {}) }));
     return true;
   } catch {
     return false;
@@ -266,4 +270,22 @@ export const recordedMaterial = (materialVersion: string | undefined) => /-ag1$/
 export function markFirstPass<T extends { score: number; mode: string; full: boolean; leftScreen?: boolean }>(rows: T[], threshold: number) {
   const i = rows.findIndex((r) => r.mode === 'quiz' && r.full && !r.leftScreen && r.score >= threshold);
   return rows.map((r, j) => ({ ...r, firstPass: j === i }));
+}
+
+/** 已考完的單元：底下的分類全部標為「已考完」（與學生首頁「已考完的單元」相同規則）。 */
+export function archivedChapterNames(course: Course) {
+  return orderedChapters(course)
+    .filter(({ units }) => units.length > 0 && units.every((u) => unitVisibility(u) === 'archived'))
+    .map(({ name }) => name);
+}
+/** 看板用：拿掉已考完的單元，完成度只算剩下的單元；不改任何資料。 */
+export function withoutArchivedChapters(course: Course): Course {
+  const names = new Set(archivedChapterNames(course));
+  if (!names.size) return course;
+  return {
+    ...course,
+    units: course.units.filter((u) => !names.has(chapterName(u))),
+    ...(course.chapters ? { chapters: Object.fromEntries(Object.entries(course.chapters).filter(([name]) => !names.has(name))) } : {}),
+    ...(course.chapterOrder ? { chapterOrder: course.chapterOrder.filter((name) => !names.has(name)) } : {}),
+  };
 }

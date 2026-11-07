@@ -33,9 +33,11 @@ import {
   matrixCsv,
   recordedMaterial,
   projectionName,
+  archivedChapterNames,
   readBoardPreferences,
   saveBoardPreferences,
   statusMatrix,
+  withoutArchivedChapters,
 } from '../shared/completionBoard';
 import type { API } from './service';
 
@@ -372,6 +374,8 @@ export default function CompletionBoard({
   const [statuses, setStatuses] = useState<ChapterCellStatus[]>(
       () => readBoardPreferences(() => window.localStorage).statuses,
     ),
+    // 已考完的單元預設隱藏；勾選後記在這台瀏覽器。
+    [showArchived, setShowArchived] = useState(() => !!readBoardPreferences(() => window.localStorage).showArchived),
     // 遮名預設開啟且不記憶：重新整理或下次開啟一律回到遮名。
     [showNames, setShowNames] = useState(false);
   const displayName = (name: string) => (showNames ? name : projectionName(name)),
@@ -380,8 +384,14 @@ export default function CompletionBoard({
     const next = boardStatuses.filter((s) => (s === status ? on : statuses.includes(s)));
     if (!next.length) return;
     setStatuses(next);
-    saveBoardPreferences(() => window.localStorage, { statuses: next });
+    saveBoardPreferences(() => window.localStorage, { statuses: next, showArchived });
   }
+  function toggleArchived(on: boolean) {
+    setShowArchived(on);
+    saveBoardPreferences(() => window.localStorage, { statuses, showArchived: on });
+  }
+  /** 畫面上的欄位與完成度只算看得到的單元；CSV 與學生個人紀錄仍用完整課程。 */
+  const shown = (c: Course) => (showArchived ? c : withoutArchivedChapters(c));
   const allStatuses = boardStatuses.every((s) => statuses.includes(s)),
     statusText = statuses.map((s) => chapterStateLabels[s]).join('、');
   const request = useRef(0),
@@ -441,18 +451,21 @@ export default function CompletionBoard({
     }
   }
   const now = Date.now(),
-    comparisonChapters = orderedChapters(published);
+    comparisonChaptersAll = orderedChapters(published),
+    comparisonChapters = orderedChapters(shown(published)),
+    archivedCount = archivedChapterNames(published).length;
   const summaries = published.classIds
     .filter((id) => cache[id])
-    .map((id) => filteredClassCompletionSummary(cache[id].course, id, cache[id].rows, statuses, now));
+    .map((id) => filteredClassCompletionSummary(shown(cache[id].course), id, cache[id].rows, statuses, now));
   const allLoaded = published.classIds.length > 0 && published.classIds.every((id) => !!cache[id]);
   const total = allClassCompletionSummary(summaries);
   const selected = cl ? cache[cl] : undefined,
     visible = forClass(selected?.course || published, cl || ''),
-    boardCourse = completionBoardCourse(selected?.course || published, cl || '');
+    boardCourseAll = completionBoardCourse(selected?.course || published, cl || ''),
+    boardCourse = completionBoardCourse(shown(selected?.course || published), cl || '');
   const classSummary =
     cl && selected
-      ? filteredClassCompletionSummary(selected.course, cl, selected.rows, statuses, now)
+      ? filteredClassCompletionSummary(shown(selected.course), cl, selected.rows, statuses, now)
       : undefined;
   const searched = (selected?.rows || []).filter((r) =>
     `${r.name} ${r.studentId}`.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()),
@@ -491,7 +504,7 @@ export default function CompletionBoard({
       平均完成:
         s.averageDone == null ? '—' : `${s.averageDone.toFixed(1)}/${s.requiredTotal?.toFixed(1)}`,
       ...Object.fromEntries(
-        comparisonChapters.map(({ name, chapter }) => [
+        comparisonChaptersAll.map(({ name, chapter }) => [
           chapter.title || name,
           s.rates[name] ? (s.rates[name].required ? '' : '選看 ') + rateText(s.rates[name]) : '—',
         ]),
@@ -518,6 +531,12 @@ export default function CompletionBoard({
         <input type="checkbox" checked={showNames} onChange={(e) => setShowNames(e.target.checked)} />
         顯示姓名
       </label>
+      {archivedCount > 0 && (
+        <label className="completion-filter">
+          <input type="checkbox" checked={showArchived} onChange={(e) => toggleArchived(e.target.checked)} />
+          顯示已考完的單元（{archivedCount}）
+        </label>
+      )}
     </div>
   );
   function cellDetail(student: CompletionStudent, name: string) {
@@ -730,7 +749,7 @@ export default function CompletionBoard({
                     matrixCsv(
                       selected!.course,
                       cl,
-                      statusMatrix(boardCourse, searched, boardStatuses, now, onlyOverdue).rows.map(
+                      statusMatrix(boardCourseAll, searched, boardStatuses, now, onlyOverdue).rows.map(
                         (row) => row.student,
                       ),
                       now,
