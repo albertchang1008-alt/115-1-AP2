@@ -6,6 +6,8 @@ import { combinedHistory, estimateSessions, mergeEstimatedSessions, BACKFILL_FRO
 
 const fail = (message: string): never => { throw new HttpsError('invalid-argument', message); };
 const token = (v: unknown, what: string) => typeof v === 'string' && /^[\w-]{1,128}$/.test(v) ? v : fail(`${what}格式錯誤`);
+// 分類與活動 id 可能含中文等字元（與 Firestore 文件路徑相同的限制：不得含「/」）。
+const key = (v: unknown, what: string) => typeof v === 'string' && v.length > 0 && v.length <= 200 && !v.includes('/') ? v : fail(`${what}格式錯誤`);
 const chapterText = (v: unknown) => typeof v === 'string' && v.length > 0 && v.length <= 200 && !v.includes('/') ? v : fail('單元名稱格式錯誤');
 const at = (v: any): number => typeof v === 'number' ? v : v && typeof v.toMillis === 'function' ? v.toMillis() : v && typeof v._seconds === 'number' ? v._seconds * 1000 : NaN;
 export const ATTEMPT_DETAIL_LIMIT = 50;
@@ -23,7 +25,7 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
   return {
     /** 一位學生在一個題目分類的逐次作答：只回時間、分數、模式、是否完整。 */
     getStudentUnitAttempts: onCall(options, async (req) => {
-      const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), unitId = token(req.data?.unitId, '分類');
+      const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), unitId = key(req.data?.unitId, '分類');
       await access(req, courseId, true);
       const snap = await db.collection(`courses/${courseId}/attempts`).where('uid', '==', uid).where('unitId', '==', unitId).limit(200).get();
       const rows = snap.docs.map((d) => {
@@ -35,7 +37,7 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
 
     /** 一位學生一份互動教材的逐次開啟：只讀 1（舊格式時最多 2）份 diagnostics。 */
     getActivitySessions: onCall(options, async (req) => {
-      const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), activityId = token(req.data?.activityId, '活動');
+      const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), activityId = key(req.data?.activityId, '活動');
       const name = chapterText(req.data?.chapterName);
       const { c } = await access(req, courseId, true);
       const published = c.published as Course | undefined;
@@ -43,7 +45,7 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
       if (!activity || activity.tracking !== 'interactive') fail('互動教材不存在');
       const version = activity!.materialVersion || 'v1';
       const ids = [`${uid}_chapter-${encodeURIComponent(name)}_${activityId}_${version}`];
-      if (typeof req.data?.unitId === 'string') ids.push(`${uid}_${token(req.data.unitId, '分類')}_${activityId}_${version}`);
+      if (typeof req.data?.unitId === 'string') ids.push(`${uid}_${key(req.data.unitId, '分類')}_${activityId}_${version}`);
       for (const docId of ids) {
         const snap = await db.doc(`courses/${courseId}/diagnostics/${docId}`).get();
         if (!snap.exists) continue;

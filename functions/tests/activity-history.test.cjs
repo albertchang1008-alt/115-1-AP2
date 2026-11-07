@@ -147,4 +147,8 @@ test('逐次作答：只回時間、分數、模式、是否完整，依時間�
   assert.deepEqual(Object.keys(r.rows[0]).sort(), ['clientAt', 'full', 'leftScreen', 'mode', 'score']);
   assert.ok(r.rows.every((x, i) => i === 0 || r.rows[i - 1].clientAt <= x.clientAt));
   await assert.rejects(handlers.getStudentUnitAttempts.run({ auth: student, data: { courseId: 'c', uid: 'u', unitId: 'unit' } }));
+  ctx.data.set('courses/c/attempts/zh', { uid: 'u', unitId: '泌尿 腎臟(一)', clientAt: 5, score: 88, mode: 'quiz', full: true });
+  const zh = await handlers.getStudentUnitAttempts.run({ auth: teacher, data: { courseId: 'c', uid: 'u', unitId: '泌尿 腎臟(一)' } });
+  assert.equal(zh.rows.length, 1, '分類 id 含中文、空白與括號也能查');
+  await assert.rejects(handlers.getStudentUnitAttempts.run({ auth: teacher, data: { courseId: 'c', uid: 'u', unitId: 'a/b' } }));
 });

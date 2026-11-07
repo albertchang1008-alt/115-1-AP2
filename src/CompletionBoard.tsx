@@ -908,6 +908,42 @@ export default function CompletionBoard({
       {cl && selected && <ClassUsagePanel key={`usage:${cl}:${selected.loadedAt}`} courseId={course.id} api={api} classId={cl} maskNames={!showNames} />}
       {cl && selected && <AnswerIntegrityOverview key={`${cl}:${selected.loadedAt}`} course={visible} api={api} classId={cl} maskNames={!showNames} />}
       {student && selected && renderStudentDetail(visible, student, () => setStudent(null))}
+      {!cl && <HistoryBackfill api={api} courseId={course.id} />}
     </div>
+  );
+}
+interface BackfillResult { dryRun: boolean; versions: string[]; diagnostics: number; students: number; skipped: number; reads: number; writes: number; estimatedSessions: number; estimatedCompletions: number }
+/** 一次性補登 17 份新教材 11/04 起的開啟紀錄：先試算，看過數字才能正式執行。 */
+function HistoryBackfill({ api, courseId }: { api: API; courseId: string }) {
+  const [result, setResult] = useState<BackfillResult | null>(null),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState('');
+  const run = async (dryRun: boolean) => {
+    setBusy(true);
+    setError('');
+    try {
+      setResult(await api.call<BackfillResult>('backfillActivityHistory', { courseId, dryRun }));
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <details className="panel history-backfill">
+      <summary>一次性補登：新互動資訊圖表 11/04 起的開啟紀錄</summary>
+      <p className="muted">只處理 17 份新版（-ag1）教材。當時沒有分次編號，相鄰紀錄間隔超過 30 分鐘視為另一次，看板會標「推估」；首次完成時間是確定值。已補登過的會略過。</p>
+      <p>
+        <button type="button" disabled={busy} onClick={() => run(true)}>試算（不寫入）</button>{' '}
+        <button type="button" disabled={busy || !result?.dryRun || !result.writes} onClick={() => run(false)}>正式補登</button>
+      </p>
+      {busy && <p className="muted">處理中，可能需要幾分鐘…</p>}
+      {error && <p className="muted">失敗：{error}</p>}
+      {result && (
+        <p>
+          {result.dryRun ? '試算' : '已補登'}：教材 {result.versions.length} 份、紀錄 {result.diagnostics} 份（略過 {result.skipped}）、學生 {result.students} 人；推估開啟 {result.estimatedSessions} 次、走完 {result.estimatedCompletions} 次；讀取約 {result.reads} 次、寫入 {result.writes} 次。
+        </p>
+      )}
+    </details>
   );
 }
