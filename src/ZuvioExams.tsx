@@ -4,7 +4,6 @@ import { fakeZuvioExport } from '../shared/zuvioSample';
 import { readXlsxFirstSheetMatrix } from './pptImportFiles';
 import { cloudZuvioApi, sampleZuvioApi, type ZuvioApi, type ExamSummary, type ImportPreview, type Sitting } from './zuvioApi';
 import { SAMPLE_POOL } from '../shared/zuvioSamplePool';
-import './zuvio-exams.css';
 
 type Tab = 'make' | 'exams' | 'report';
 const uuid = () => (crypto as any).randomUUID?.() || 'x' + Math.random().toString(16).slice(2);
