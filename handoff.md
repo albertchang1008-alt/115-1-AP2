@@ -1,5 +1,5 @@
 # 專案交接
-目前版本：1.15.7；本工作樹分支 codex/learning-events-cost，自正式 main c12d2e2a 建立；學習事件讀寫優化尚未部署。
+目前版本：1.15.8；本工作樹分支 codex/learning-events-cost，自正式 main c12d2e2a 建立；學習事件讀寫優化尚未部署。
 
 本工作樹處理學習事件讀寫優化。佇列與週誌維護於原根目錄；驗證原始輸出放 repo 外驗收證據。
 

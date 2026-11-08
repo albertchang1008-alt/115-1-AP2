@@ -228,11 +228,110 @@
       color: var(--primary-dark);
       box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
     }
-    .btn-state:disabled {
+    .btn-state:disabled,
+    .btn-state.gate-locked,
+    .btn.gate-locked {
+      opacity: 0.55;
+      cursor: not-allowed !important;
+      transform: none !important;
+    }
+    .btn-state:disabled,
+    .btn-state.gate-locked {
       opacity: 0.45;
-      cursor: not-allowed;
-      border-color: var(--border-light);
-      background: #f8fafc;
+      border-color: var(--border-light) !important;
+      background: #f8fafc !important;
+    }
+    .badge-lock {
+      font-size: calc(16px * var(--font-scale, 1));
+      color: var(--text-muted);
+      font-weight: 500;
+      display: block;
+      margin-top: 2px;
+    }
+    .gate-target-ring {
+      position: relative;
+      border: 3px solid #f59e0b !important;
+      background: #fffbeb !important;
+      color: #92400e !important;
+      font-weight: 800 !important;
+      animation: gateRing 1.4s ease-in-out infinite;
+    }
+    @keyframes gateRing {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55); }
+      50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    }
+    .gate-arrow {
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      animation: gateNudge 1s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .gate-arrow-down {
+      display: inline-block;
+      width: 24px;
+      height: 40px;
+      animation: gateNudgeDown 1s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes gateNudge {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
+    }
+    @keyframes gateNudgeDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    .gate-arrow.wiggle, .gate-arrow-down.wiggle {
+      animation: gateWiggle 0.4s ease-in-out 2 !important;
+    }
+    @keyframes gateWiggle {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(8px); }
+    }
+    .gate-notice {
+      margin-top: 10px;
+      border: 1px solid #fcd34d;
+      background: #fffbeb;
+      color: #92400e;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: calc(18px * var(--font-scale, 1));
+      line-height: 1.5;
+    }
+    .gate-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f2937;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: calc(18px * var(--font-scale, 1));
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      max-width: calc(100vw - 32px);
+      text-align: center;
+      white-space: pre-wrap;
+    }
+    .gate-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gate-target-ring {
+        animation: none !important;
+      }
+      .gate-arrow, .gate-arrow-down, .gate-arrow.wiggle, .gate-arrow-down.wiggle {
+        animation: none !important;
+      }
     }
     .badge-seen {
       font-size: calc(18px * var(--font-scale, 1));
@@ -712,6 +811,28 @@
 
     const READ_CHARS_PER_SEC = 15;
     const READ_MAX_SEC = 6;
+    const GATE_VERSION = '1.0.0';
+
+    function gate(config) {
+      const isLocked = typeof config.locked === 'function' ? config.locked() : !!config.locked;
+      return {
+        locked: isLocked,
+        unlocked: !isLocked,
+        hint: typeof config.hint === 'function' ? config.hint() : (config.hint || ''),
+        check(onPass) {
+          if (isLocked) {
+            if (typeof config.onLockedTap === 'function') {
+              config.onLockedTap();
+            }
+            return false;
+          }
+          if (typeof onPass === 'function') {
+            onPass();
+          }
+          return true;
+        }
+      };
+    }
 
     // State Machine & Controller
     const App = {
@@ -725,6 +846,10 @@
         seenLegends: new Set(),
         globalSeenTeach: new Set(),
         globalSeenLegends: new Set(),
+        guideTargetStateIdx: null,
+        guideTargetSubIdx: null,
+        legendDwellSec: 0,
+        retryDwellSec: 0,
         explainSeenMap: {},
         isLegendExpanded: false,
         isZoomed: false,
@@ -876,6 +1001,36 @@
         };
       },
 
+      showToast(msg) {
+        let t = document.getElementById('gate-toast');
+        if (!t) {
+          t = document.createElement('div');
+          t.id = 'gate-toast';
+          t.className = 'gate-toast';
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.classList.add('show');
+        if (this._toastTimer) clearTimeout(this._toastTimer);
+        this._toastTimer = setTimeout(() => {
+          t.classList.remove('show');
+        }, 2200);
+      },
+
+      triggerGateWiggle(target) {
+        const el = typeof target === 'string' ? document.getElementById(target) : target;
+        let arrow = el ? el.querySelector('.gate-arrow, .gate-arrow-down') : null;
+        if (!arrow && el && el.parentElement) {
+          arrow = el.parentElement.querySelector('.gate-arrow, .gate-arrow-down');
+        }
+        const targetArrow = arrow || document.querySelector('.gate-arrow, .gate-arrow-down');
+        if (targetArrow) {
+          targetArrow.classList.remove('wiggle');
+          void targetArrow.offsetWidth;
+          targetArrow.classList.add('wiggle');
+        }
+      },
+
       startLevel(idx) {
         this.state.levelIdx = idx;
         this.state.stateIdx = 0;
@@ -895,6 +1050,7 @@
         this.clearActiveReading();
         this.state.isLegendExpanded = false;
         this.state.isZoomed = false;
+        this.state.guideTargetStateIdx = null;
         this.state.questionIdx = 0;
         this.state.feedback = null;
         this.state.selectedOptId = null;
@@ -1001,22 +1157,28 @@
         const btn = document.getElementById(btnId);
         if (!btn) return;
         let sec = this.calcDwellTime(text, 2, READ_MAX_SEC);
-        btn.disabled = true;
+        this.state.retryDwellSec = sec;
+        btn.setAttribute('aria-disabled', 'true');
+        btn.classList.add('gate-locked');
         btn.textContent = `${this.ui.retry} (${sec})`;
         if (this.state.retryTimer) clearInterval(this.state.retryTimer);
         this.state.retryTimer = setInterval(() => {
           sec--;
+          this.state.retryDwellSec = sec;
           const curBtn = document.getElementById(btnId);
           if (!curBtn) {
             clearInterval(this.state.retryTimer);
             return;
           }
           if (sec > 0) {
-            curBtn.disabled = true;
+            curBtn.setAttribute('aria-disabled', 'true');
+            curBtn.classList.add('gate-locked');
             curBtn.textContent = `${this.ui.retry} (${sec})`;
           } else {
             clearInterval(this.state.retryTimer);
-            curBtn.disabled = false;
+            this.state.retryDwellSec = 0;
+            curBtn.removeAttribute('aria-disabled');
+            curBtn.classList.remove('gate-locked');
             curBtn.textContent = this.ui.retry;
           }
         }, 1000);
@@ -1118,6 +1280,37 @@
         const canStartQuiz = allStatesSeen && requiredLegendSeen;
         const isLocked = (currentState.legendMode === 'required') && !requiredLegendSeen;
 
+        // Gate 1: Required Legend Gate
+        const legendGate = gate({
+          locked: isLocked,
+          hint: `👉 先按黃框的「${this.ui.legendRead}」，認識圖中每種符號，才能切換下一張圖。`,
+          onLockedTap: () => {
+            this.showToast('要先看圖例喔！已幫你打開圖例 ↓');
+            this.openLegendDialog(currentState.legends);
+            this.triggerGateWiggle('btn-open-legend');
+          }
+        });
+
+        // Gate 2: All States Seen Gate
+        const remainingStates = states.length - this.state.seenStates.size;
+        const firstUnseenIdx = states.findIndex((_, idx) => !this.state.seenStates.has(idx));
+        const quizGate = gate({
+          locked: !allStatesSeen,
+          hint: `還有 ${remainingStates} 張圖沒看`,
+          onLockedTap: () => {
+            this.showToast(`還有 ${remainingStates} 張圖沒看`);
+            if (firstUnseenIdx >= 0) {
+              this.state.guideTargetStateIdx = firstUnseenIdx;
+              this.render();
+              const targetEl = document.querySelector(`[data-state-idx="${firstUnseenIdx}"]`);
+              if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                this.triggerGateWiggle(targetEl);
+              }
+            }
+          }
+        });
+
         // Legends HTML (Handles both numbered and particle/sample legends)
         let legendsHtml = '';
         const legendsList = currentState.legends || [];
@@ -1146,23 +1339,31 @@
 
           legendsHtml = `
             <div class="legends-container">
-              <div class="legend-header">
+              <div class="legend-header" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <span class="legend-title">${this.ui.legendHeading}</span>
                 ${currentState.legendMode === 'required' ? `
-                  <button class="btn" type="button" id="btn-open-legend" style="min-height: 44px; padding: 6px 14px; font-size: calc(18px * var(--font-scale, 1));">
-                    ${requiredLegendSeen ? this.ui.legendReadDone : this.ui.legendRead}
-                  </button>
+                  <div class="gate-legend-action-box" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end;">
+                    ${isLocked ? `
+                      <svg class="gate-arrow" viewBox="0 0 110 56" aria-hidden="true">
+                        <path d="M4 28h78" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+                        <path d="M70 8l32 20-32 20z" fill="#f59e0b"/>
+                      </svg>
+                    ` : ''}
+                    <button class="btn ${isLocked ? 'gate-target-ring' : ''}" type="button" id="btn-open-legend" style="min-height: 44px; padding: 6px 14px; font-size: calc(18px * var(--font-scale, 1));">
+                      ${requiredLegendSeen ? this.ui.legendReadDone : this.ui.legendRead}
+                    </button>
+                  </div>
                 ` : ''}
               </div>
               ${isLocked ? `
-                <div class="legend-notice">${this.ui.legendFirstHint}</div>
+                <div class="gate-notice">${legendGate.hint}</div>
               ` : ''}
-              ${isCollapsible ? `
+              ${isCollapsible && !isLocked ? `
                 <button class="btn btn-block" type="button" id="btn-toggle-legend-expand" style="min-height: 44px; padding: 8px 14px; margin-top: 6px; font-size: calc(18px * var(--font-scale, 1)); border: 1px solid var(--border); background: #ffffff;">
                   ${isExpanded ? '收起圖例 ▲' : '看圖例 ▼'}
                 </button>
               ` : ''}
-              <div class="legend-list" style="${isExpanded ? '' : 'display: none;'}">${rows}</div>
+              <div class="legend-list" style="${isExpanded && !isLocked ? '' : 'display: none;'}">${rows}</div>
             </div>
           `;
         } else if (currentState.legendReason) {
@@ -1178,12 +1379,26 @@
           const isCurrent = idx === this.state.stateIdx;
           const isSeen = this.state.seenStates.has(idx);
           const isReading = this.state.activeReadingKey === `teach_${this.state.levelIdx}_${idx}`;
-          const isDisabled = isLocked && !isCurrent;
-          let badgeText = this.ui.stateUnseen;
-          if (isSeen) badgeText = this.ui.stateSeen;
-          else if (isReading) badgeText = '閱讀中…';
-          return `
-            <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-state-idx="${idx}" ${isDisabled ? 'disabled' : ''}>
+          const isLockedState = isLocked && !isCurrent;
+          const isGuideTarget = this.state.guideTargetStateIdx === idx;
+
+          let btnClasses = ['btn-state'];
+          if (isCurrent) btnClasses.push('active');
+          if (isSeen) btnClasses.push('seen');
+          if (isLockedState) btnClasses.push('gate-locked');
+          if (isGuideTarget) btnClasses.push('gate-target-ring');
+
+          let innerHtml = '';
+          if (isLockedState) {
+            innerHtml = `
+              <span>🔒 ${s.btnText}</span>
+              <span class="badge-lock">看完圖例後開啟</span>
+            `;
+          } else {
+            let badgeText = this.ui.stateUnseen;
+            if (isSeen) badgeText = this.ui.stateSeen;
+            else if (isReading) badgeText = '閱讀中…';
+            innerHtml = `
               <span>${s.btnText}</span>
               <span class="badge-seen">${badgeText}</span>
               ${isReading ? `
@@ -1191,7 +1406,28 @@
                   <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
                 </div>
               ` : ''}
-            </button>
+            `;
+          }
+
+          let arrowHtml = '';
+          if (isGuideTarget) {
+            arrowHtml = `
+              <div class="gate-state-arrow-wrap" style="display: flex; justify-content: center; width: 100%; margin-bottom: 4px;">
+                <svg class="gate-arrow-down" viewBox="0 0 56 110" aria-hidden="true">
+                  <path d="M28 4v78" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+                  <path d="M8 70l20 32 20-32z" fill="#f59e0b"/>
+                </svg>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="btn-state-wrapper" style="flex: 1 1 calc(50% - 6px); min-width: 110px; display: flex; flex-direction: column; align-items: center;">
+              ${arrowHtml}
+              <button class="${btnClasses.join(' ')}" type="button" data-state-idx="${idx}" ${isLockedState ? 'aria-disabled="true"' : ''} style="width: 100%;">
+                ${innerHtml}
+              </button>
+            </div>
           `;
         }).join('');
 
@@ -1231,6 +1467,11 @@
           }
         }
 
+        const targetStateForNotice = (this.state.guideTargetStateIdx !== null && states[this.state.guideTargetStateIdx]) ? states[this.state.guideTargetStateIdx] : null;
+        const targetStateNoticeHtml = targetStateForNotice ? `
+          <div class="gate-notice" id="gate-target-notice">👉 先按黃框的「${targetStateForNotice.btnText}」，才能開始作答。</div>
+        ` : '';
+
         view.innerHTML = `
           <div>
             <h2 class="title-lg">${level.title}</h2>
@@ -1258,6 +1499,8 @@
 
           ${legendsHtml}
 
+          ${targetStateNoticeHtml}
+
           ${states.length > 0 ? `<div class="state-tray">${stateButtons}</div>` : ''}
 
           ${currentState.caption ? `
@@ -1273,7 +1516,7 @@
           ` : ''}
 
           <div class="actions-bar">
-            <button class="btn btn-primary btn-block" type="button" id="btn-start-quiz" ${canStartQuiz ? '' : 'disabled'}>
+            <button class="btn btn-primary btn-block ${canStartQuiz ? '' : 'gate-locked'}" type="button" id="btn-start-quiz" ${canStartQuiz ? '' : 'aria-disabled="true"'}>
               ${this.ui.startQuiz}
             </button>
           </div>
@@ -1282,8 +1525,14 @@
         // Bind events
         view.querySelectorAll('[data-state-idx]').forEach(btn => {
           btn.onclick = () => {
-            if (btn.disabled) return;
             const idx = parseInt(btn.dataset.stateIdx, 10);
+            if (isLocked && idx !== this.state.stateIdx) {
+              legendGate.check();
+              return;
+            }
+            if (this.state.guideTargetStateIdx === idx) {
+              this.state.guideTargetStateIdx = null;
+            }
             if (this.state.stateIdx !== idx) {
               this.state.stateIdx = idx;
               this.state.isZoomed = false;
@@ -1323,6 +1572,14 @@
         }
 
         document.getElementById('btn-start-quiz').onclick = () => {
+          if (isLocked) {
+            legendGate.check();
+            return;
+          }
+          if (!allStatesSeen) {
+            quizGate.check();
+            return;
+          }
           const trackingNodes = this.data.tracking?.nodeIds || [];
           if (level.noFigure && level.nodeId && trackingNodes.includes(level.nodeId)) {
             window.CourseLearning.explore(level.nodeId);
@@ -1383,38 +1640,54 @@
         const isAlreadySeen = this.isLegendSeen(this.state.levelIdx, this.state.stateIdx);
 
         if (isAlreadySeen) {
-          confirmBtn.disabled = false;
+          confirmBtn.removeAttribute('aria-disabled');
+          confirmBtn.classList.remove('gate-locked');
           confirmBtn.textContent = this.ui.legendReadDone;
+          this.state.legendDwellSec = 0;
         } else {
           const totalLegendText = targetList.map(lg => (lg.name || '') + (lg.func || '')).join('');
           let sec = this.calcDwellTime(totalLegendText, 3, READ_MAX_SEC);
+          this.state.legendDwellSec = sec;
 
-          confirmBtn.disabled = true;
+          confirmBtn.setAttribute('aria-disabled', 'true');
+          confirmBtn.classList.add('gate-locked');
           confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
 
           this.state.legendTimer = setInterval(() => {
             sec--;
+            this.state.legendDwellSec = sec;
             if (sec > 0) {
-              confirmBtn.disabled = true;
+              confirmBtn.setAttribute('aria-disabled', 'true');
+              confirmBtn.classList.add('gate-locked');
               confirmBtn.textContent = `${this.ui.legendReadDone} (${sec})`;
             } else {
               clearInterval(this.state.legendTimer);
               this.state.legendTimer = null;
-              confirmBtn.disabled = false;
+              this.state.legendDwellSec = 0;
+              confirmBtn.removeAttribute('aria-disabled');
+              confirmBtn.classList.remove('gate-locked');
               confirmBtn.textContent = this.ui.legendReadDone;
             }
           }, 1000);
         }
 
         confirmBtn.onclick = () => {
-          if (confirmBtn.disabled) return;
-          if (this.state.legendTimer) {
-            clearInterval(this.state.legendTimer);
-            this.state.legendTimer = null;
-          }
-          dlg.close();
-          this.markLegendSeen(this.state.levelIdx, this.state.stateIdx);
-          this.render();
+          const dwellGate = gate({
+            locked: this.state.legendDwellSec > 0 || confirmBtn.getAttribute('aria-disabled') === 'true',
+            hint: () => `再 ${this.state.legendDwellSec || 1} 秒就能按`,
+            onLockedTap: () => {
+              this.showToast(`再 ${this.state.legendDwellSec || 1} 秒就能按`);
+            }
+          });
+          dwellGate.check(() => {
+            if (this.state.legendTimer) {
+              clearInterval(this.state.legendTimer);
+              this.state.legendTimer = null;
+            }
+            dlg.close();
+            this.markLegendSeen(this.state.levelIdx, this.state.stateIdx);
+            this.render();
+          });
         };
 
         dlg.showModal();
@@ -1448,25 +1721,71 @@
           const seenCount = subStates.filter((_, idx) => seenSet.has(idx)).length;
           const allSubStatesSeen = subStates.length > 0 && seenCount === subStates.length;
 
+          const remainingSub = subStates.length - seenCount;
+          const firstUnseenSub = subStates.findIndex((_, idx) => !seenSet.has(idx));
+          const explainGate = gate({
+            locked: !allSubStatesSeen,
+            hint: `還有 ${remainingSub} 張圖沒看`,
+            onLockedTap: () => {
+              this.showToast(`還有 ${remainingSub} 張圖沒看`);
+              if (firstUnseenSub >= 0) {
+                this.state.guideTargetSubIdx = firstUnseenSub;
+                this.render();
+                const targetEl = document.querySelector(`[data-sub-idx="${firstUnseenSub}"]`);
+                if (targetEl) {
+                  targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                  this.triggerGateWiggle(targetEl);
+                }
+              }
+            }
+          });
+
           const subBtns = subStates.map((s, idx) => {
             const isCurrent = idx === this.state.quizSubStateIdx;
             const isSeen = seenSet.has(idx);
             const isReading = this.state.activeReadingKey === `explain_${qId}_${idx}`;
+            const isGuideTarget = this.state.guideTargetSubIdx === idx;
             let badgeText = this.ui.stateUnseen;
             if (isSeen) badgeText = this.ui.stateSeen;
             else if (isReading) badgeText = '閱讀中…';
+
+            let btnClasses = ['btn-state'];
+            if (isCurrent) btnClasses.push('active');
+            if (isSeen) btnClasses.push('seen');
+            if (isGuideTarget) btnClasses.push('gate-target-ring');
+
+            let arrowHtml = '';
+            if (isGuideTarget) {
+              arrowHtml = `
+                <div class="gate-state-arrow-wrap" style="display: flex; justify-content: center; width: 100%; margin-bottom: 4px;">
+                  <svg class="gate-arrow-down" viewBox="0 0 56 110" aria-hidden="true">
+                    <path d="M28 4v78" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+                    <path d="M8 70l20 32 20-32z" fill="#f59e0b"/>
+                  </svg>
+                </div>
+              `;
+            }
+
             return `
-              <button class="btn-state ${isCurrent ? 'active' : ''} ${isSeen ? 'seen' : ''}" type="button" data-sub-idx="${idx}">
-                <span>${s.btnText}</span>
-                <span class="badge-seen">${badgeText}</span>
-                ${isReading ? `
-                  <div class="reading-progress-track">
-                    <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
-                  </div>
-                ` : ''}
-              </button>
+              <div class="btn-state-wrapper" style="flex: 1 1 calc(50% - 6px); min-width: 110px; display: flex; flex-direction: column; align-items: center;">
+                ${arrowHtml}
+                <button class="${btnClasses.join(' ')}" type="button" data-sub-idx="${idx}" style="width: 100%;">
+                  <span>${s.btnText}</span>
+                  <span class="badge-seen">${badgeText}</span>
+                  ${isReading ? `
+                    <div class="reading-progress-track">
+                      <div class="reading-progress-fill" style="animation: readingFill ${this.state.readingDuration}s linear forwards;"></div>
+                    </div>
+                  ` : ''}
+                </button>
+              </div>
             `;
           }).join('');
+
+          const targetSubForNotice = (this.state.guideTargetSubIdx !== null && subStates[this.state.guideTargetSubIdx]) ? subStates[this.state.guideTargetSubIdx] : null;
+          const targetSubNoticeHtml = targetSubForNotice ? `
+            <div class="gate-notice" id="gate-target-sub-notice">👉 先按黃框的「${targetSubForNotice.btnText}」，才能前進下一題。</div>
+          ` : '';
 
           view.innerHTML = `
             <div>
@@ -1479,6 +1798,7 @@
                 </div>
               </div>
             ` : ''}
+            ${targetSubNoticeHtml}
             <div class="state-tray">${subBtns}</div>
             ${curSub.caption ? `
               <div class="caption-box">
@@ -1491,13 +1811,16 @@
               </div>
             ` : ''}
             <div class="actions-bar">
-              <button class="btn btn-primary btn-block" type="button" id="btn-next-q" ${allSubStatesSeen ? '' : 'disabled'}>${this.ui.next}</button>
+              <button class="btn btn-primary btn-block ${allSubStatesSeen ? '' : 'gate-locked'}" type="button" id="btn-next-q" ${allSubStatesSeen ? '' : 'aria-disabled="true"'}>${this.ui.next}</button>
             </div>
           `;
 
           view.querySelectorAll('[data-sub-idx]').forEach(b => {
             b.onclick = () => {
               const subIdx = parseInt(b.dataset.subIdx, 10);
+              if (this.state.guideTargetSubIdx === subIdx) {
+                this.state.guideTargetSubIdx = null;
+              }
               if (this.state.quizSubStateIdx !== subIdx) {
                 this.state.quizSubStateIdx = subIdx;
                 this.clearActiveReading();
@@ -1512,8 +1835,12 @@
           const nextBtn = document.getElementById('btn-next-q');
           if (nextBtn) {
             nextBtn.onclick = () => {
-              if (!allSubStatesSeen) return;
-              this.advanceQuiz(level);
+              explainGate.check(() => {
+                this.state.guideTargetSubIdx = null;
+                this.state.quizSubStateIdx = 0;
+                this.clearActiveReading();
+                this.advanceQuiz(level);
+              });
             };
           }
           return;
@@ -1773,14 +2100,23 @@
         const retryBtn = document.getElementById('btn-retry');
         if (retryBtn) {
           retryBtn.onclick = () => {
-            if (retryBtn.disabled) return;
-            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
-            this.state.quizAnswerLocked = false;
-            this.state.selectedOptId = null;
-            this.state.feedback = null;
-            this.state.multiSelections = new Set();
-            this.state.orderPicks = [];
-            this.render();
+            const retryGate = gate({
+              locked: retryBtn.getAttribute('aria-disabled') === 'true',
+              hint: () => `再 ${this.state.retryDwellSec || 1} 秒就能按`,
+              onLockedTap: () => {
+                this.showToast(`再 ${this.state.retryDwellSec || 1} 秒就能按`);
+              }
+            });
+            retryGate.check(() => {
+              if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+              this.state.retryDwellSec = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.selectedOptId = null;
+              this.state.feedback = null;
+              this.state.multiSelections = new Set();
+              this.state.orderPicks = [];
+              this.render();
+            });
           };
         }
 
@@ -2043,12 +2379,21 @@
         const retryBtn = document.getElementById('btn-retry-ending');
         if (retryBtn) {
           retryBtn.onclick = () => {
-            if (retryBtn.disabled) return;
-            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
-            this.state.quizAnswerLocked = false;
-            this.state.selectedEndOptId = null;
-            this.state.feedback = null;
-            this.render();
+            const retryGate = gate({
+              locked: retryBtn.getAttribute('aria-disabled') === 'true',
+              hint: () => `再 ${this.state.retryDwellSec || 1} 秒就能按`,
+              onLockedTap: () => {
+                this.showToast(`再 ${this.state.retryDwellSec || 1} 秒就能按`);
+              }
+            });
+            retryGate.check(() => {
+              if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+              this.state.retryDwellSec = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.selectedEndOptId = null;
+              this.state.feedback = null;
+              this.render();
+            });
           };
         }
 
@@ -2170,12 +2515,21 @@
         const retryBtn = document.getElementById('btn-retry-tf');
         if (retryBtn) {
           retryBtn.onclick = () => {
-            if (retryBtn.disabled) return;
-            if (this.state.retryTimer) clearInterval(this.state.retryTimer);
-            this.state.quizAnswerLocked = false;
-            this.state.selectedTfVal = null;
-            this.state.feedback = null;
-            this.render();
+            const retryGate = gate({
+              locked: retryBtn.getAttribute('aria-disabled') === 'true',
+              hint: () => `再 ${this.state.retryDwellSec || 1} 秒就能按`,
+              onLockedTap: () => {
+                this.showToast(`再 ${this.state.retryDwellSec || 1} 秒就能按`);
+              }
+            });
+            retryGate.check(() => {
+              if (this.state.retryTimer) clearInterval(this.state.retryTimer);
+              this.state.retryDwellSec = 0;
+              this.state.quizAnswerLocked = false;
+              this.state.selectedTfVal = null;
+              this.state.feedback = null;
+              this.render();
+            });
           };
         }
 
@@ -2371,6 +2725,7 @@
     };
 
     window.addEventListener('DOMContentLoaded', () => {
+      window.App = App;
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
           App.clearActiveReading();
