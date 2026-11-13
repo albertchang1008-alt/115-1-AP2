@@ -5,7 +5,6 @@ import {
   MOOD_SUBNOTE,
   type MoodCode,
 } from '../shared/zuvioExt';
-import './zuvio-ext-sample.css';
 
 export function MoodLineIcon({ code, color }: { code: MoodCode; color: string }) {
   const common = {
