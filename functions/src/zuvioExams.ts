@@ -4,7 +4,7 @@
  */
 import { Firestore } from 'firebase-admin/firestore';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
-import { createHash, randomUUID } from 'node:crypto';
+import { createHash, createHmac, randomUUID } from 'node:crypto';
 import { featureAccess } from './features';
 import { reservedQuestionIds } from './assessments';
 import { Question, Unit, chapterName, forClass, isReviewUnit, unitVisibility, safeId, safeCode } from '../../shared/model';
@@ -12,6 +12,11 @@ import {
   ZExamView, ZItem, ZParsed, ZBlock, ZResult, ZCounts, ZRosterInfo, LIMITS, CSV_FORMAT,
   eligibility, examCsv, matchExam, buildResults, examReport, compareSittings,
 } from '../../shared/zuvio';
+import {
+  MOOD_BY_CODE, MOOD_CODES, MOOD_QUESTION, MOOD_STUDENT_STATES, MOOD_SUBNOTE,
+  analyzeExam, buildCareList, classifyPreExamPractice, itemAnalysisCsv, researchCsv, summarizeMoodResults,
+  type MoodCode, type PreExamStatus,
+} from '../../shared/zuvioExt';
 
 function fail(m: string): never { throw new HttpsError('failed-precondition', m); }
 function bad(m: string): never { throw new HttpsError('invalid-argument', m); }
@@ -224,7 +229,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
 
   const zuvioCreateSitting = onCall(options, async (req) => {
     const { c, courseId } = await teacher(req);
-    obj(req.data, ['courseId', 'examId', 'label', 'date', 'classIds'], '場次');
+    obj(req.data, ['courseId', 'examId', 'label', 'date', 'classIds', 'startsAt'], '場次');
     const id = examIdOf(req.data.examId);
     const label = str(req.data.label, 60, '場次名稱').trim();
     if (!label || label.length > 40 || FORMULA.test(label)) bad('場次名稱需 1–40 字');
@@ -232,9 +237,12 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (!DATE.test(date)) bad('日期格式需為 YYYY-MM-DD');
     const classIds = req.data.classIds;
     if (!Array.isArray(classIds) || !classIds.length || classIds.length > 50 || classIds.some((x: any) => typeof x !== 'string' || !safeCode(x))) bad('至少選一個班級');
+    const rawStartsAt = req.data.startsAt;
+    if (rawStartsAt !== undefined && (typeof rawStartsAt !== 'number' || !Number.isFinite(rawStartsAt) || rawStartsAt <= 0)) bad('開考時間格式錯誤');
+    const startsAt = typeof rawStartsAt === 'number' ? Math.floor(rawStartsAt) : Date.now();
     const ref = examRef(courseId, id);
     const usageRef = db.doc(`courses/${courseId}/zuvioMeta/usage`);
-    const sitting = { id: randomUUID(), label, date, classIds: [...new Set(classIds as string[])] };
+    const sitting = { id: randomUUID(), label, date, startsAt, classIds: [...new Set(classIds as string[])] };
     await db.runTransaction(async (tx) => {
       const [s, u] = [await tx.get(ref), await tx.get(usageRef)];
       if (!s.exists) fail('找不到考卷');
@@ -250,6 +258,28 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       tx.set(usageRef, { q });
     });
     return sitting;
+  });
+
+  const zuvioUpdateSittingStart = onCall(options, async (req) => {
+    const { courseId } = await teacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingId', 'startsAt'], '請求');
+    const examId = examIdOf(req.data.examId);
+    const sittingId = examIdOf(req.data.sittingId);
+    const rawStartsAt = req.data.startsAt;
+    if (typeof rawStartsAt !== 'number' || !Number.isFinite(rawStartsAt) || rawStartsAt <= 0) bad('開考時間格式錯誤');
+    const startsAt = Math.floor(rawStartsAt);
+    const ref = examRef(courseId, examId);
+    await db.runTransaction(async (tx) => {
+      const s = await tx.get(ref);
+      if (!s.exists) fail('找不到考卷');
+      const e = s.data()!;
+      const idx = (e.sittings || []).findIndex((x: any) => x.id === sittingId);
+      if (idx < 0) fail('找不到場次');
+      const next = (e.sittings || []).map((x: any, i: number) => (i === idx ? { ...x, startsAt } : x));
+      tx.update(ref, { sittings: next });
+      tx.delete(ref.collection('prep').doc(sittingId));
+    });
+    return { ok: true, startsAt };
   });
 
   // ---------- 成績匯入 ----------
@@ -366,11 +396,335 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const s = await tx.get(ref);
       if (!s.exists) fail('找不到考卷');
       const e = s.data()!;
-      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, classIds: x.classIds, deletedRevision: (x.results?.revision || x.deletedRevision || 0) + 1 } : x)) });
+      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision: (x.results?.revision || x.deletedRevision || 0) + 1 } : x)) });
     });
     await cleanup(ref.collection('results'), sittingId, '');
     return { ok: true };
   });
+
+  // ---------- 考前情緒（zuvioMood） ----------
+  const guardedMood = featureAccess(access, 'zuvioMood');
+  const moodTeacher = async (req: any) => {
+    obj(req.data, Object.keys(req.data || {}), '請求');
+    const courseId = req.data.courseId;
+    if (typeof courseId !== 'string' || !safeCode(courseId)) bad('課程代碼格式錯誤');
+    const r = await guardedMood(req, courseId, true);
+    if (!r.p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
+    return { ...r, courseId: courseId as string };
+  };
+  const moodStateRef = (courseId: string) => db.doc(`courses/${courseId}/zuvioMoodState/current`);
+  const moodResponsesCol = (courseId: string, examId: string, sittingId: string) =>
+    examRef(courseId, examId).collection('moods').doc(sittingId).collection('responses');
+
+  async function classRosterDocs(courseId: string, c: any, classIds: string[]) {
+    if (c.rosterVersion !== 2) fail('此課程仍是舊版名冊，請先完成名冊遷移');
+    const chunks: string[][] = [];
+    for (let i = 0; i < classIds.length; i += 30) chunks.push(classIds.slice(i, i + 30));
+    const snaps = await Promise.all(
+      chunks.map((ids) =>
+        db.collection('enrollments').where('courseId', '==', courseId).where('classId', 'in', ids).get(),
+      ),
+    );
+    return snaps.flatMap((s) => s.docs.map((d) => d.data())).filter((x) => x.enabled === true);
+  }
+
+  const zuvioOpenMood = onCall(options, async (req) => {
+    const { c, courseId } = await moodTeacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingId', 'durationMinutes'], '請求');
+    const examId = examIdOf(req.data.examId);
+    const sittingId = examIdOf(req.data.sittingId);
+    const mins = req.data.durationMinutes === undefined ? 10 : req.data.durationMinutes;
+    if (typeof mins !== 'number' || !Number.isInteger(mins) || mins < 1 || mins > 120) bad('開放分鐘數需為 1–120 整數');
+    const snap = await examRef(courseId, examId).get();
+    if (!snap.exists) fail('找不到考卷');
+    const e = snap.data()!;
+    if (e.archived) fail('考卷已封存');
+    const sitting = (e.sittings || []).find((s: any) => s.id === sittingId);
+    if (!sitting) fail('找不到場次');
+    const roster = await classRosterDocs(courseId, c, sitting.classIds);
+    const now = Date.now();
+    const closesAt = now + mins * 60 * 1000;
+    const stateDoc = {
+      open: true,
+      examId,
+      sittingId,
+      sittingLabel: sitting.label,
+      classIds: sitting.classIds,
+      openedAt: now,
+      closesAt,
+      closedAt: null,
+      eligibleCount: roster.length,
+    };
+    const classroomStateRef = db.doc(`courses/${courseId}/classroomState/current`);
+    await db.runTransaction(async (tx) => {
+      const cs = await tx.get(classroomStateRef);
+      const curUntil = cs.data()?.pollingActiveUntil || 0;
+      tx.set(moodStateRef(courseId), stateDoc);
+      tx.set(classroomStateRef, { pollingActiveUntil: Math.max(curUntil, now + 3 * 60 * 60 * 1000) }, { merge: true });
+    });
+    return stateDoc;
+  });
+
+  const zuvioCloseMood = onCall(options, async (req) => {
+    const { courseId } = await moodTeacher(req);
+    obj(req.data, ['courseId', 'sittingId'], '請求');
+    const sittingId = req.data.sittingId === undefined ? undefined : examIdOf(req.data.sittingId);
+    const ref = moodStateRef(courseId);
+    let closed = false;
+    await db.runTransaction(async (tx) => {
+      const s = await tx.get(ref);
+      const d = s.data();
+      if (!s.exists || !d) return;
+      if (sittingId && d.sittingId !== sittingId) return;
+      if (d.open) {
+        tx.update(ref, { open: false, closedAt: Date.now() });
+        closed = true;
+      }
+    });
+    return { ok: true, closed };
+  });
+
+  const zuvioGetMoodLive = onCall(options, async (req) => {
+    const { courseId } = await moodTeacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingId'], '請求');
+    const stateSnap = await moodStateRef(courseId).get();
+    const st = stateSnap.exists ? stateSnap.data()! : null;
+    const examId = req.data.examId ? examIdOf(req.data.examId) : st?.examId;
+    const sittingId = req.data.sittingId ? examIdOf(req.data.sittingId) : st?.sittingId;
+    const counts = Object.fromEntries(MOOD_CODES.map((c) => [c, 0])) as Record<MoodCode, number>;
+    let totalResponded = 0;
+    if (examId && sittingId) {
+      const respSnap = await moodResponsesCol(courseId, examId, sittingId).get();
+      for (const d of respSnap.docs) {
+        const m = d.data()?.mood as MoodCode;
+        if (m && m in counts) {
+          counts[m]++;
+          totalResponded++;
+        }
+      }
+    }
+    const now = Date.now();
+    const open = !!st?.open && now <= (st.closesAt || 0);
+    return {
+      state: st ? { ...st, open } : null,
+      eligibleCount: st?.eligibleCount || 0,
+      totalResponded,
+      counts,
+    };
+  });
+
+  const zuvioDeleteMood = onCall(options, async (req) => {
+    const { courseId } = await moodTeacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingId'], '請求');
+    const examId = examIdOf(req.data.examId);
+    const sittingId = examIdOf(req.data.sittingId);
+    const col = moodResponsesCol(courseId, examId, sittingId);
+    const snap = await col.get();
+    for (let i = 0; i < snap.docs.length; i += 400) {
+      const b = db.batch();
+      snap.docs.slice(i, i + 400).forEach((d) => b.delete(d.ref));
+      await b.commit();
+    }
+    const stRef = moodStateRef(courseId);
+    await db.runTransaction(async (tx) => {
+      const s = await tx.get(stRef);
+      if (s.exists && s.data()?.sittingId === sittingId) tx.delete(stRef);
+    });
+    return { ok: true, deleted: snap.size };
+  });
+
+  const zuvioGetActiveMood = onCall(options, async (req) => {
+    obj(req.data, ['courseId'], '請求');
+    const courseId = req.data.courseId;
+    if (typeof courseId !== 'string' || !safeCode(courseId)) bad('課程代碼格式錯誤');
+    const { p } = await guardedMood(req, courseId);
+    const stSnap = await moodStateRef(courseId).get();
+    if (!stSnap.exists) return { active: false };
+    const st = stSnap.data()!;
+    const now = Date.now();
+    const withinWindow = st.open === true && now <= (st.closesAt || 0);
+    if (!withinWindow) return { active: false };
+    if (!p.teacher && !(st.classIds || []).includes(p.classId)) return { active: false };
+    const existing = p.teacher
+      ? null
+      : await moodResponsesCol(courseId, st.examId, st.sittingId).doc(p.uid).get();
+    const myMood = existing?.exists ? (existing.data()?.mood as MoodCode) : undefined;
+    return {
+      active: true,
+      examId: st.examId,
+      sittingId: st.sittingId,
+      sittingLabel: st.sittingLabel,
+      closesAt: st.closesAt,
+      submitted: !!myMood,
+      ...(myMood ? { myMood, feedback: MOOD_BY_CODE[myMood]?.feedback || '' } : {}),
+      question: MOOD_QUESTION,
+      subnote: MOOD_SUBNOTE,
+      options: MOOD_STUDENT_STATES,
+    };
+  });
+
+  const zuvioSubmitMood = onCall(options, async (req) => {
+    obj(req.data, ['courseId', 'sittingId', 'mood'], '請求');
+    const courseId = req.data.courseId;
+    if (typeof courseId !== 'string' || !safeCode(courseId)) bad('課程代碼格式錯誤');
+    const sittingId = examIdOf(req.data.sittingId);
+    const mood = req.data.mood as MoodCode;
+    if (!MOOD_CODES.includes(mood)) bad('情緒選項無效');
+    const { p } = await guardedMood(req, courseId);
+    if (p.teacher) fail('預覽不能寫入正式作答');
+    const stRef = moodStateRef(courseId);
+    const now = Date.now();
+    return db.runTransaction(async (tx) => {
+      const stSnap = await tx.get(stRef);
+      if (!stSnap.exists) fail('目前沒有開放中的課前情緒簽到');
+      const st = stSnap.data()!;
+      if (st.sittingId !== sittingId) fail('簽到場次已變更');
+      if (!(st.classIds || []).includes(p.classId)) throw new HttpsError('permission-denied', '班級不屬於本場次');
+      const closedAt = st.open ? st.closesAt : (st.closedAt ?? st.closesAt);
+      const deadline = Math.min(closedAt || 0, st.closesAt || 0) + 3000;
+      if (now > deadline) fail('簽到已結束');
+      const respRef = moodResponsesCol(courseId, st.examId, sittingId).doc(p.uid);
+      const prev = await tx.get(respRef);
+      if (prev.exists) {
+        const prevMood = prev.data()?.mood as MoodCode;
+        return {
+          ok: true,
+          alreadySubmitted: true,
+          mood: prevMood,
+          feedback: MOOD_BY_CODE[prevMood]?.feedback || '',
+        };
+      }
+      tx.create(respRef, {
+        uid: p.uid,
+        studentId: p.studentId || '',
+        classId: p.classId,
+        mood,
+        submittedAt: now,
+      });
+      return {
+        ok: true,
+        alreadySubmitted: false,
+        mood,
+        feedback: MOOD_BY_CODE[mood].feedback,
+      };
+    });
+  });
+
+  // ---------- 考前練習快取（依 startsAt） ----------
+  interface SittingPrepRecord {
+    uid: string;
+    studentId: string;
+    name: string;
+    classId: string;
+    status: PreExamStatus;
+    attemptCount: number;
+    passedUnitCount: number;
+    activityCount: number;
+  }
+
+  const tsMs = (v: any): number => {
+    if (typeof v === 'number' && Number.isFinite(v)) return v;
+    if (v && typeof v.toMillis === 'function') return v.toMillis();
+    if (v && typeof v.seconds === 'number') return v.seconds * 1000;
+    return Number.POSITIVE_INFINITY;
+  };
+
+  async function ensureSittingPrep(
+    courseId: string,
+    c: any,
+    ref: FirebaseFirestore.DocumentReference,
+    sitting: any,
+    unitIds: string[],
+  ): Promise<Record<string, SittingPrepRecord>> {
+    const startsAt = typeof sitting.startsAt === 'number' ? sitting.startsAt : Date.now();
+    const unitIdsKey = [...new Set(unitIds)].sort().join(',');
+    const prepRef = ref.collection('prep').doc(sitting.id);
+    const cached = await prepRef.get();
+    if (cached.exists) {
+      const d = cached.data()!;
+      if (d.startsAt === startsAt && d.unitIdsKey === unitIdsKey && d.students) {
+        return d.students as Record<string, SittingPrepRecord>;
+      }
+    }
+
+    const roster = await classRosterDocs(courseId, c, sitting.classIds);
+    const uniqueUnits = [...new Set(unitIds)];
+    const attemptsByUid = new Map<string, Array<{ unitId: string; at: number }>>();
+    for (const classId of sitting.classIds as string[]) {
+      for (const unitId of uniqueUnits) {
+        const snap = await db
+          .collection(`courses/${courseId}/attempts`)
+          .where('classId', '==', classId)
+          .where('unitId', '==', unitId)
+          .get();
+        for (const doc of snap.docs) {
+          const ad = doc.data();
+          if (!ad?.uid) continue;
+          const at = Math.min(tsMs(ad.receivedAt), tsMs(ad.clientAt));
+          const arr = attemptsByUid.get(ad.uid) || [];
+          arr.push({ unitId: ad.unitId, at });
+          attemptsByUid.set(ad.uid, arr);
+        }
+      }
+    }
+
+    const uids = [...new Set(roster.map((r) => r.uid).filter((u): u is string => typeof u === 'string' && !!u))];
+    const progressByUid = new Map<string, any>();
+    for (let i = 0; i < uids.length; i += 100) {
+      const refs = uids.slice(i, i + 100).map((uid) => db.doc(`courses/${courseId}/progress/${uid}`));
+      const snaps = refs.length ? await db.getAll(...refs) : [];
+      snaps.forEach((s, idx) => {
+        if (s.exists) progressByUid.set(uids[i + idx], s.data());
+      });
+    }
+
+    const students: Record<string, SittingPrepRecord> = {};
+    for (const r of roster) {
+      const uid = r.uid || `sid:${r.studentId}`;
+      const cls = classifyPreExamPractice({
+        startsAt,
+        unitIds: uniqueUnits,
+        attempts: r.uid ? attemptsByUid.get(r.uid) || [] : [],
+        progress: r.uid ? progressByUid.get(r.uid) || null : null,
+      });
+      students[r.studentId] = {
+        uid,
+        studentId: r.studentId,
+        name: r.name || '',
+        classId: r.classId,
+        ...cls,
+      };
+    }
+
+    await prepRef.set({ startsAt, unitIdsKey, computedAt: Date.now(), students });
+    return students;
+  }
+
+  async function sittingMoods(courseId: string, examId: string, sittingId: string) {
+    const snap = await moodResponsesCol(courseId, examId, sittingId).get();
+    const byUid = new Map<string, { uid: string; studentId: string; classId: string; mood: MoodCode }>();
+    const byStudentId = new Map<string, MoodCode>();
+    for (const d of snap.docs) {
+      const x = d.data();
+      if (MOOD_CODES.includes(x.mood)) {
+        byUid.set(d.id, { uid: d.id, studentId: x.studentId || '', classId: x.classId || '', mood: x.mood });
+        if (x.studentId) byStudentId.set(x.studentId, x.mood);
+      }
+    }
+    return { byUid, byStudentId };
+  }
+
+  async function courseResearchSalt(courseId: string): Promise<string> {
+    return db.runTransaction(async (tx) => {
+      const root = db.doc(`courses/${courseId}`);
+      const doc = await tx.get(root);
+      const stored = doc.data()?.reflectionSalt;
+      if (stored) return stored as string;
+      const next = randomUUID();
+      tx.set(root, { reflectionSalt: next }, { merge: true });
+      return next;
+    });
+  }
 
   // ---------- 報表 ----------
   async function sittingResults(ref: FirebaseFirestore.DocumentReference, s: any) {
@@ -380,12 +734,14 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   }
   const zuvioReport = onCall(options, async (req) => {
     const { c, courseId } = await teacher(req);
-    obj(req.data, ['courseId', 'examId', 'sittingIds', 'classId'], '請求');
+    obj(req.data, ['courseId', 'examId', 'sittingIds', 'classId', 'threshold'], '請求');
     const examId = examIdOf(req.data.examId);
     const ids = req.data.sittingIds;
     if (!Array.isArray(ids) || !ids.length || ids.length > 10) bad('請選 1–10 個場次');
     ids.forEach(examIdOf);
     if (req.data.classId !== undefined && (typeof req.data.classId !== 'string' || !safeCode(req.data.classId))) bad('班級格式錯誤');
+    const threshold = req.data.threshold === undefined ? 80 : req.data.threshold;
+    if (typeof threshold !== 'number' || !Number.isFinite(threshold) || threshold < 0 || threshold > 100) bad('門檻需為 0–100');
     const ref = examRef(courseId, examId);
     const snap = await ref.get();
     if (!snap.exists) fail('找不到考卷');
@@ -394,13 +750,187 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (sittings.some((s: any) => !s)) fail('找不到場次');
     if (req.data.classId && !sittings.some((s: any) => s.classIds.includes(req.data.classId))) bad('班級不在所選場次範圍');
     const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
+    const maskedView = maskView(view, masked);
     const maps = await Promise.all(sittings.map((s: any) => sittingResults(ref, s)));
     const all = maps.flatMap((m) => [...m.values()]).filter((r) => !req.data.classId || r.classId === req.data.classId);
     const titles = new Map((c.published?.units || []).map((u: Unit) => [u.id, u.title]));
-    const report = examReport(maskView(view, masked), all, (u) => (titles.get(u) as string) || u);
+    const report = examReport(maskedView, all, (u) => (titles.get(u) as string) || u);
     const compare = ids.length === 2 ? compareSittings(view, maps[0], maps[1]) : null;
-    return { report, compare };
+    const analysis = analyzeExam(maskedView, all);
+
+    const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const [prepList, moodList] = await Promise.all([
+      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
+      Promise.all(sittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
+    ]);
+
+    const preExamCounts: Record<PreExamStatus, number> = { passed: 0, practiced: 0, infographic_only: 0, none: 0 };
+    const moodPairs: Array<{ uid: string; mood?: MoodCode; score: number; answers: Record<string, string> }> = [];
+    sittings.forEach((_s: any, idx: number) => {
+      const resMap = maps[idx];
+      const prepMap = prepList[idx];
+      const { byStudentId } = moodList[idx];
+      for (const rec of Object.values(prepMap)) {
+        if (req.data.classId && rec.classId !== req.data.classId) continue;
+        preExamCounts[rec.status]++;
+      }
+      for (const [studentId, res] of resMap.entries()) {
+        if (req.data.classId && res.classId !== req.data.classId) continue;
+        moodPairs.push({
+          uid: studentId,
+          mood: byStudentId.get(studentId),
+          score: res.score,
+          answers: res.answers,
+        });
+      }
+    });
+
+    let prevMoods: Record<string, MoodCode> | undefined;
+    if (sittings.length === 2) {
+      prevMoods = Object.fromEntries(moodList[0].byStudentId.entries());
+    }
+    const moodSummary = summarizeMoodResults(maskedView, moodPairs, threshold, prevMoods);
+    return { report, compare, analysis, moodSummary, preExamCounts };
   });
 
-  return { zuvioPool, zuvioCreateExam, zuvioListExams, zuvioGetExam, zuvioArchiveExam, zuvioCreateSitting, zuvioImportResults, zuvioDeleteResults, zuvioReport };
+  const zuvioCareList = onCall(options, async (req) => {
+    const { c, courseId } = await teacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingId', 'classId', 'threshold'], '請求');
+    const examId = examIdOf(req.data.examId);
+    const sittingId = examIdOf(req.data.sittingId);
+    if (req.data.classId !== undefined && (typeof req.data.classId !== 'string' || !safeCode(req.data.classId))) bad('班級格式錯誤');
+    const threshold = req.data.threshold === undefined ? 80 : req.data.threshold;
+    if (typeof threshold !== 'number' || !Number.isFinite(threshold) || threshold < 0 || threshold > 100) bad('門檻需為 0–100');
+    const ref = examRef(courseId, examId);
+    const snap = await ref.get();
+    if (!snap.exists) fail('找不到考卷');
+    const e = snap.data()!;
+    const allSittings = [...(e.sittings || [])].sort(
+      (a: any, b: any) => (b.startsAt || 0) - (a.startsAt || 0) || b.date.localeCompare(a.date),
+    );
+    const targetIdx = allSittings.findIndex((s: any) => s.id === sittingId);
+    if (targetIdx < 0) fail('找不到場次');
+    const recentSittings = allSittings.slice(targetIdx, targetIdx + 3);
+    const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+
+    const [resMaps, prepMaps, moodMaps] = await Promise.all([
+      Promise.all(recentSittings.map((s: any) => sittingResults(ref, s))),
+      Promise.all(recentSittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
+      Promise.all(recentSittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
+    ]);
+
+    const curPrep = prepMaps[0];
+    const curRes = resMaps[0];
+    const curMood = moodMaps[0].byStudentId;
+    const inputs = Object.values(curPrep)
+      .filter((rec) => !req.data.classId || rec.classId === req.data.classId)
+      .map((rec) => ({
+        uid: rec.uid,
+        studentId: rec.studentId,
+        name: rec.name,
+        classId: rec.classId,
+        score: curRes.get(rec.studentId)?.score ?? null,
+        mood: curMood.get(rec.studentId) ?? null,
+        preExamStatus: rec.status,
+        recentHistory: recentSittings.slice(1).map((_s: any, i: number) => ({
+          score: resMaps[i + 1].get(rec.studentId)?.score ?? null,
+          mood: moodMaps[i + 1].byStudentId.get(rec.studentId) ?? null,
+          preExamStatus: prepMaps[i + 1][rec.studentId]?.status || 'none',
+        })),
+      }));
+
+    return { entries: buildCareList(inputs, threshold), threshold };
+  });
+
+  const zuvioExportCsv = onCall(options, async (req) => {
+    const { c, courseId } = await teacher(req);
+    obj(req.data, ['courseId', 'examId', 'sittingIds', 'classId', 'kind'], '請求');
+    const examId = examIdOf(req.data.examId);
+    const ids = req.data.sittingIds;
+    if (!Array.isArray(ids) || !ids.length || ids.length > 10) bad('請選 1–10 個場次');
+    ids.forEach(examIdOf);
+    if (req.data.classId !== undefined && (typeof req.data.classId !== 'string' || !safeCode(req.data.classId))) bad('班級格式錯誤');
+    const kind = req.data.kind;
+    if (!['itemAnalysis', 'researchAnon', 'researchNamed'].includes(kind)) bad('匯出類型無效');
+    const ref = examRef(courseId, examId);
+    const snap = await ref.get();
+    if (!snap.exists) fail('找不到考卷');
+    const e = snap.data()!;
+    const sittings = ids.map((id: string) => (e.sittings || []).find((s: any) => s.id === id));
+    if (sittings.some((s: any) => !s)) fail('找不到場次');
+    const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
+    const maskedView = maskView(view, masked);
+    const maps = await Promise.all(sittings.map((s: any) => sittingResults(ref, s)));
+    const all = maps.flatMap((m) => [...m.values()]).filter((r) => !req.data.classId || r.classId === req.data.classId);
+
+    if (kind === 'itemAnalysis') {
+      const analysis = analyzeExam(maskedView, all);
+      return {
+        filename: `${e.title}-試題分析.csv`,
+        csv: itemAnalysisCsv(e.title, analysis),
+      };
+    }
+
+    const deidentified = kind === 'researchAnon';
+    const salt = deidentified ? await courseResearchSalt(courseId) : '';
+    const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const [prepList, moodList] = await Promise.all([
+      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
+      Promise.all(sittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
+    ]);
+
+    const rows = sittings.flatMap((s: any, idx: number) => {
+      const resMap = maps[idx];
+      const prepMap = prepList[idx];
+      const moodMap = moodList[idx].byStudentId;
+      const allStudentIds = new Set([...Object.keys(prepMap), ...resMap.keys()]);
+      return [...allStudentIds]
+        .map((studentId) => {
+          const prep = prepMap[studentId];
+          const res = resMap.get(studentId);
+          const classId = res?.classId || prep?.classId || '';
+          if (req.data.classId && classId !== req.data.classId) return null;
+          return {
+            ...(deidentified
+              ? { researchId: createHmac('sha256', salt).update(JSON.stringify([courseId, studentId])).digest('hex') }
+              : { studentId, name: prep?.name || '' }),
+            classId,
+            sittingLabel: s.label,
+            startsAt: typeof s.startsAt === 'number' ? s.startsAt : null,
+            mood: moodMap.get(studentId) ?? null,
+            preExamStatus: prep?.status || 'none',
+            score: res?.score ?? null,
+            correct: res?.correct ?? null,
+            answers: res?.answers || {},
+          };
+        })
+        .filter((x): x is NonNullable<typeof x> => !!x);
+    });
+
+    return {
+      filename: deidentified ? `${e.title}-研究資料-去識別.csv` : `${e.title}-研究資料-含個資.csv`,
+      csv: researchCsv(maskedView, rows, deidentified),
+    };
+  });
+
+  return {
+    zuvioPool,
+    zuvioCreateExam,
+    zuvioListExams,
+    zuvioGetExam,
+    zuvioArchiveExam,
+    zuvioCreateSitting,
+    zuvioUpdateSittingStart,
+    zuvioImportResults,
+    zuvioDeleteResults,
+    zuvioReport,
+    zuvioOpenMood,
+    zuvioCloseMood,
+    zuvioGetMoodLive,
+    zuvioDeleteMood,
+    zuvioGetActiveMood,
+    zuvioSubmitMood,
+    zuvioCareList,
+    zuvioExportCsv,
+  };
 }

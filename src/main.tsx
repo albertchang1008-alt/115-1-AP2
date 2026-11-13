@@ -7,11 +7,20 @@ import App from './App';
 import './style.css';
 import './answer-integrity.css';
 import './zuvio-exams.css';
+import './zuvio-ext-sample.css';
+import ZuvioExtSample from './ZuvioExtSample';
 import { applySavedTheme } from './ThemePicker';
 applySavedTheme();
+const extSampleShot = new URLSearchParams(window.location.search).get('zuvio-ext-sample');
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <UpdateBanner />
-    <App />
+    {extSampleShot ? (
+      <ZuvioExtSample shot={extSampleShot} />
+    ) : (
+      <>
+        <UpdateBanner />
+        <App />
+      </>
+    )}
   </React.StrictMode>,
 );

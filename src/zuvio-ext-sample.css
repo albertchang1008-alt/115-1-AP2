@@ -1,0 +1,364 @@
+.zuvio-ext-stage {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--bg, #f4f7f9);
+  min-height: 100vh;
+}
+
+.zuvio-ext-banner {
+  background: #fff8e6;
+  border: 1px solid #f0d38c;
+  color: #7a4f01;
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin-bottom: 14px;
+  font-size: calc(14px * var(--font-scale, 1));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.zuvio-ext-panel {
+  background: #fff;
+  border: 1px solid #dfe5ec;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.zuvio-ext-panel h2 {
+  margin: 0 0 10px;
+  font-size: calc(21px * var(--font-scale, 1));
+}
+
+.zuvio-ext-panel h3 {
+  margin: 0 0 10px;
+  font-size: calc(19px * var(--font-scale, 1));
+}
+
+.zuvio-ext-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.zuvio-ext-phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.zuvio-ext-phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.zuvio-ext-phone-label {
+  font-size: calc(15px * var(--font-scale, 1));
+  font-weight: 600;
+  color: #334155;
+  background: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.zuvio-ext-phone-frame {
+  width: 390px;
+  min-height: 760px;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+/* 學生端情緒快篩全畫面卡片（嚴格依 READABILITY_STANDARD.md） */
+.mood-student-overlay {
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+  padding: 20px 16px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mood-student-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mood-student-badge {
+  align-self: flex-start;
+  background: #e0f2fe;
+  color: #0c4a6e;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: calc(15px * var(--font-scale, 1));
+  font-weight: 600;
+}
+
+.mood-student-question {
+  margin: 0;
+  font-size: calc(21px * var(--font-scale, 1));
+  line-height: 1.5;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.mood-student-note {
+  margin: 0;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+  color: #334155;
+}
+
+.mood-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mood-option-card {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 2px solid #cbd5e1;
+  border-left-width: 8px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.mood-option-card.selected {
+  background: #f0f9ff;
+  box-shadow: 0 0 0 2px #0284c7;
+}
+
+.mood-option-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mood-option-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.mood-submit-btn {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #0369a1;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: calc(19px * var(--font-scale, 1));
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.mood-submit-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.mood-feedback-box {
+  background: #ffffff;
+  border: 2px solid #bae6fd;
+  border-radius: 16px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.mood-feedback-chosen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 6px solid currentColor;
+}
+
+.mood-feedback-reply {
+  margin: 0;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.65;
+  color: #0f172a;
+}
+
+.mood-lock-hint {
+  margin: 0;
+  font-size: calc(15px * var(--font-scale, 1));
+  line-height: 1.5;
+  color: #475569;
+  text-align: center;
+}
+
+/* 教師即時投影 & 報表樣式 */
+.mood-live-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.mood-live-track {
+  flex: 1;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.mood-live-fill {
+  height: 100%;
+  background: #0284c7;
+  border-radius: 999px;
+}
+
+.mood-dist-row {
+  display: grid;
+  grid-template-columns: 28px 250px 1fr 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mood-dist-track {
+  height: 16px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.mood-dist-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.z-pill-warn {
+  display: inline-block;
+  background: #fff4e0;
+  color: #8a4b00;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: calc(13px * var(--font-scale, 1));
+  font-weight: 600;
+}
+
+.z-pill-err {
+  display: inline-block;
+  background: #fdecea;
+  color: #b42318;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: calc(13px * var(--font-scale, 1));
+  font-weight: 600;
+}
+
+.z-pill-ok {
+  display: inline-block;
+  background: #e6f4ea;
+  color: #0b6b3a;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: calc(13px * var(--font-scale, 1));
+  font-weight: 600;
+}
+
+.z-pill-info {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #075985;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: calc(13px * var(--font-scale, 1));
+  font-weight: 600;
+}
+
+.z-care-btn {
+  border: 1px dashed #94a3b8;
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: calc(14px * var(--font-scale, 1));
+  cursor: pointer;
+}
+
+
+.zext-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #f4f7f9;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.zext-overlay .zext-student-card {
+  width: 100%;
+  max-width: 480px;
+  margin: auto 0;
+}
+
+.zext-feedback-box {
+  background: #f8fafc;
+  border-left: 5px solid #3D9970;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.zext-feedback-text {
+  margin: 0;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+  color: #1e293b;
+}
+
+.zext-err {
+  color: #b91c1c;
+  font-size: calc(16px * var(--font-scale, 1));
+  margin: 8px 0 0;
+  font-weight: 600;
+}

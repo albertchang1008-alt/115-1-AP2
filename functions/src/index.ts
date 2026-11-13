@@ -244,7 +244,11 @@ export const saveCourse = onCall(options, async (req) => {
       {
         draft: course,
         revision,
-        features: { ...normalizeCourseFeatures(course.features), ...(course.features && 'zuvioExams' in course.features ? {} : { zuvioExams: old.data()?.features?.zuvioExams === true }) },
+        features: {
+          ...normalizeCourseFeatures(course.features),
+          ...(course.features && 'zuvioExams' in course.features ? {} : { zuvioExams: old.data()?.features?.zuvioExams === true }),
+          ...(course.features && 'zuvioMood' in course.features ? {} : { zuvioMood: old.data()?.features?.zuvioMood === true }),
+        },
         ...(course.assessmentSources ? { assessmentSources: course.assessmentSources } : {}),
         teacherIds: old.data()?.teacherIds || [p.uid],
         classIds: old.data()?.published?.classIds || [],
@@ -1570,4 +1574,23 @@ export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, op
 export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);
 
 // Zuvio 出題與成績回收（1.16.0，教師限定）
-export const { zuvioPool, zuvioCreateExam, zuvioListExams, zuvioGetExam, zuvioArchiveExam, zuvioCreateSitting, zuvioImportResults, zuvioDeleteResults, zuvioReport } = createZuvioHandlers(db, access, options);
+export const {
+  zuvioPool,
+  zuvioCreateExam,
+  zuvioListExams,
+  zuvioGetExam,
+  zuvioArchiveExam,
+  zuvioCreateSitting,
+  zuvioUpdateSittingStart,
+  zuvioImportResults,
+  zuvioDeleteResults,
+  zuvioReport,
+  zuvioOpenMood,
+  zuvioCloseMood,
+  zuvioGetMoodLive,
+  zuvioDeleteMood,
+  zuvioGetActiveMood,
+  zuvioSubmitMood,
+  zuvioCareList,
+  zuvioExportCsv,
+} = createZuvioHandlers(db, access, options);

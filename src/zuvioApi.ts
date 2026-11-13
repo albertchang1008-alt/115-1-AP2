@@ -2,21 +2,46 @@ import {
   ZPoolEntry, ZItem, ZExamView, ZParsed, ZResult, ZCounts, examCsv, matchExam, buildResults, examReport, compareSittings,
   eligibility, shuffle, optionOrderFor,
 } from '../shared/zuvio';
+import {
+  MOOD_CODES, analyzeExam, buildCareList, itemAnalysisCsv, researchCsv, summarizeMoodResults,
+  type CareListEntry, type ExamItemAnalysis, type MoodCode, type MoodReportSummary, type PreExamStatus,
+} from '../shared/zuvioExt';
 
-export interface Sitting { id: string; label: string; date: string; classIds: string[]; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
+export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
 export interface ExamSummary { id: string; title: string; createdAt: number; count: number; score: number; archived: boolean; sittings: Sitting[] }
 export interface ImportPreview { previewId: string; matched: number; counts: ZCounts; blocking: string[]; details: string[]; garbled: number; replaces: boolean }
+export interface FullZuvioReport {
+  report: ReturnType<typeof examReport>;
+  compare: ReturnType<typeof compareSittings> | null;
+  analysis: ExamItemAnalysis;
+  moodSummary: MoodReportSummary;
+  preExamCounts: Record<PreExamStatus, number>;
+}
+export interface MoodLiveState {
+  state: { open: boolean; examId: string; sittingId: string; sittingLabel?: string; classIds: string[]; closesAt: number } | null;
+  eligibleCount: number;
+  totalResponded: number;
+  counts: Record<MoodCode, number>;
+}
 export interface ZuvioApi {
   sample: boolean;
   pool(): Promise<{ entries: ZPoolEntry[]; excluded: Record<string, number>; usage: Record<string, { n: number; last: number }>; classes: string[]; unitClasses?: Record<string, string[]> }>;
   createExam(input: { examId: string; title: string; score: number; classIds: string[]; items: ZItem[] }): Promise<{ examId: string; csv: string }>;
   listExams(): Promise<ExamSummary[]>;
   getExam(examId: string): Promise<{ summary: ExamSummary; view: ZExamView; csv: string | null; classIds: string[]; masked?: number }>;
-  createSitting(examId: string, s: { label: string; date: string; classIds: string[] }): Promise<Sitting>;
+  createSitting(examId: string, s: { label: string; date: string; classIds: string[]; startsAt?: number }): Promise<Sitting>;
+  updateSittingStart(examId: string, sittingId: string, startsAt: number): Promise<{ ok: boolean; startsAt: number }>;
   previewImport(examId: string, sittingId: string, parsed: ZParsed): Promise<ImportPreview>;
   confirmImport(examId: string, sittingId: string, previewId: string): Promise<void>;
   deleteResults(examId: string, sittingId: string): Promise<void>;
   report(examId: string, sittingIds: string[], classId?: string): Promise<ReturnType<typeof examReport>>;
+  fullReport(examId: string, sittingIds: string[], classId?: string, threshold?: number): Promise<FullZuvioReport>;
+  careList(examId: string, sittingId: string, classId?: string, threshold?: number): Promise<{ entries: CareListEntry[]; threshold: number }>;
+  exportCsv(examId: string, sittingIds: string[], kind: 'itemAnalysis' | 'researchAnon' | 'researchNamed', classId?: string): Promise<{ filename: string; csv: string }>;
+  openMood(examId: string, sittingId: string, durationMinutes?: number): Promise<any>;
+  closeMood(sittingId?: string): Promise<{ ok: boolean }>;
+  getMoodLive(examId?: string, sittingId?: string): Promise<MoodLiveState>;
+  deleteMood(examId: string, sittingId: string): Promise<{ ok: boolean }>;
   compare(examId: string, a: string, b: string): Promise<ReturnType<typeof compareSittings>>;
   archive(examId: string, archived: boolean): Promise<void>;
 }
@@ -86,10 +111,16 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
     async getExam(id) { const e = get(id); return { summary: e.summary, view: e.view, csv: examCsv(e.view), classIds: e.classIds }; },
     async createSitting(id, s) {
       const e = get(id);
-      const sitting: Sitting = { id: uuid(), ...s };
+      const sitting: Sitting = { id: uuid(), startsAt: Date.now(), ...s };
       e.summary.sittings.push(sitting);
       e.view.items.forEach((it) => (usage[it.questionId] = { n: (usage[it.questionId]?.n || 0) + 1, last: Date.now() }));
       return sitting;
+    },
+    async updateSittingStart(id, sittingId, startsAt) {
+      const e = get(id);
+      const s = e.summary.sittings.find((x) => x.id === sittingId);
+      if (s) s.startsAt = startsAt;
+      return { ok: true, startsAt };
     },
     async previewImport(id, sittingId, parsed) {
       const e = get(id);
@@ -122,6 +153,83 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
       const all = sittingIds.flatMap((s) => [...(e.results.get(s)?.values() || [])]).filter((r) => !classId || r.classId === classId);
       return examReport(e.view, all, (u) => pool.find((p) => p.unitId === u)?.unitTitle || u);
     },
+    async fullReport(id, sittingIds, classId, threshold = 80) {
+      const e = get(id);
+      const all = sittingIds.flatMap((s) => [...(e.results.get(s)?.values() || [])]).filter((r) => !classId || r.classId === classId);
+      const report = examReport(e.view, all, (u) => pool.find((p) => p.unitId === u)?.unitTitle || u);
+      const compare = sittingIds.length === 2 ? compareSittings(e.view, e.results.get(sittingIds[0]) || new Map(), e.results.get(sittingIds[1]) || new Map()) : null;
+      const analysis = analyzeExam(e.view, all);
+      const pairs = sittingIds.flatMap((s) =>
+        [...(e.results.get(s)?.entries() || [])]
+          .filter(([, r]) => !classId || r.classId === classId)
+          .map(([sid, r], idx) => ({
+            uid: `${s}:${sid}`,
+            mood: MOOD_CODES[idx % MOOD_CODES.length],
+            score: r.score,
+            answers: r.answers,
+          })),
+      );
+      const moodSummary = summarizeMoodResults(e.view, pairs, threshold);
+      const preExamCounts: Record<PreExamStatus, number> = { passed: Math.round(all.length * 0.4), practiced: Math.round(all.length * 0.25), infographic_only: Math.round(all.length * 0.15), none: Math.max(0, all.length - Math.round(all.length * 0.4) - Math.round(all.length * 0.25) - Math.round(all.length * 0.15)) };
+      return { report, compare, analysis, moodSummary, preExamCounts };
+    },
+    async careList(id, sittingId, classId, threshold = 80) {
+      const e = get(id);
+      const entries = [...(e.results.get(sittingId)?.entries() || [])]
+        .filter(([, r]) => !classId || r.classId === classId)
+        .map(([sid, r], idx) => ({
+          uid: sid,
+          studentId: sid,
+          name: `示範生${sid.slice(-2)}`,
+          classId: r.classId,
+          score: r.score,
+          mood: MOOD_CODES[idx % MOOD_CODES.length],
+          preExamStatus: (['passed', 'practiced', 'infographic_only', 'none'] as PreExamStatus[])[idx % 4],
+        }));
+      return { entries: buildCareList(entries, threshold), threshold };
+    },
+    async exportCsv(id, sittingIds, kind, classId) {
+      const e = get(id);
+      const all = sittingIds.flatMap((s) => [...(e.results.get(s)?.values() || [])]).filter((r) => !classId || r.classId === classId);
+      if (kind === 'itemAnalysis') {
+        return { filename: `${e.summary.title}-試題分析.csv`, csv: itemAnalysisCsv(e.summary.title, analyzeExam(e.view, all)) };
+      }
+      const deidentified = kind === 'researchAnon';
+      const rows = sittingIds.flatMap((s) =>
+        [...(e.results.get(s)?.entries() || [])]
+          .filter(([, r]) => !classId || r.classId === classId)
+          .map(([sid, r], idx) => ({
+            researchId: `SAMPLE_${sid}`,
+            studentId: sid,
+            name: `示範生${sid.slice(-2)}`,
+            classId: r.classId,
+            sittingLabel: s,
+            startsAt: Date.now(),
+            mood: MOOD_CODES[idx % MOOD_CODES.length],
+            preExamStatus: 'practiced' as PreExamStatus,
+            score: r.score,
+            correct: r.correct,
+            answers: r.answers,
+          })),
+      );
+      return {
+        filename: deidentified ? `${e.summary.title}-研究資料-去識別.csv` : `${e.summary.title}-研究資料-含個資.csv`,
+        csv: researchCsv(e.view, rows, deidentified),
+      };
+    },
+    async openMood(examId, sittingId, durationMinutes = 10) {
+      return { open: true, examId, sittingId, classIds: ['甲班'], closesAt: Date.now() + durationMinutes * 60000, eligibleCount: 30 };
+    },
+    async closeMood() { return { ok: true }; },
+    async getMoodLive(examId, sittingId) {
+      return {
+        state: examId && sittingId ? { open: false, examId, sittingId, classIds: ['甲班'], closesAt: Date.now() } : null,
+        eligibleCount: 30,
+        totalResponded: 0,
+        counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 0, gray_fog: 0 },
+      };
+    },
+    async deleteMood() { return { ok: true }; },
     async compare(id, a, b) { const e = get(id); return compareSittings(e.view, e.results.get(a) || new Map(), e.results.get(b) || new Map()); },
     async archive(id, archived) { get(id).summary.archived = archived; },
   };
@@ -137,6 +245,7 @@ export function cloudZuvioApi(api: { call<T = any>(name: string, data?: any): Pr
     listExams: () => api.call('zuvioListExams', { courseId }),
     getExam: (examId) => api.call('zuvioGetExam', { courseId, examId }),
     createSitting: (examId, s) => api.call('zuvioCreateSitting', { courseId, examId, ...s }),
+    updateSittingStart: (examId, sittingId, startsAt) => api.call('zuvioUpdateSittingStart', { courseId, examId, sittingId, startsAt }),
     async previewImport(examId, sittingId, parsed) {
       const r = await api.call<ImportPreview>('zuvioImportResults', { courseId, examId, sittingId, parsed });
       if (r.previewId) parsedByPreview.set(r.previewId, parsed);
@@ -152,6 +261,18 @@ export function cloudZuvioApi(api: { call<T = any>(name: string, data?: any): Pr
     async report(examId, sittingIds, classId) {
       return (await api.call<any>('zuvioReport', { courseId, examId, sittingIds, ...(classId ? { classId } : {}) })).report;
     },
+    fullReport: (examId, sittingIds, classId, threshold = 80) =>
+      api.call('zuvioReport', { courseId, examId, sittingIds, ...(classId ? { classId } : {}), threshold }),
+    careList: (examId, sittingId, classId, threshold = 80) =>
+      api.call('zuvioCareList', { courseId, examId, sittingId, ...(classId ? { classId } : {}), threshold }),
+    exportCsv: (examId, sittingIds, kind, classId) =>
+      api.call('zuvioExportCsv', { courseId, examId, sittingIds, kind, ...(classId ? { classId } : {}) }),
+    openMood: (examId, sittingId, durationMinutes = 10) =>
+      api.call('zuvioOpenMood', { courseId, examId, sittingId, durationMinutes }),
+    closeMood: (sittingId) => api.call('zuvioCloseMood', { courseId, ...(sittingId ? { sittingId } : {}) }),
+    getMoodLive: (examId, sittingId) =>
+      api.call('zuvioGetMoodLive', { courseId, ...(examId ? { examId } : {}), ...(sittingId ? { sittingId } : {}) }),
+    deleteMood: (examId, sittingId) => api.call('zuvioDeleteMood', { courseId, examId, sittingId }),
     async compare(examId, a, b) {
       return (await api.call<any>('zuvioReport', { courseId, examId, sittingIds: [a, b] })).compare;
     },

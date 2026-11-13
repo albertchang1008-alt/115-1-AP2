@@ -1,5 +1,7 @@
 import { useUpdateProtection } from './updateActivity';
 import { featureEnabled } from '../shared/features';
+import { MOOD_STATES } from '../shared/zuvioExt';
+import { cloudZuvioApi, type ExamSummary, type MoodLiveState } from './zuvioApi';
 import { visiblePoll } from './VisiblePoll';
 import { useEffect, useState, useRef, useId } from 'react';
 import { API } from './service';
@@ -1079,6 +1081,208 @@ export function TeacherInteraction({
           <PollResults round={pageRound} expired={interactionExpired(pageRound, now)} />
         </div>
       )}
+      {!api.preview && (featureEnabled(course, 'zuvioExams') || featureEnabled(course, 'zuvioMood')) && (
+        <TeacherZuvioMoodPanel api={api} course={course} />
+      )}
+    </div>
+  );
+}
+
+function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
+  const [exams, setExams] = useState<ExamSummary[]>([]);
+  const [examId, setExamId] = useState('');
+  const [sittingId, setSittingId] = useState('');
+  const [newLabel, setNewLabel] = useState('');
+  const [newClasses, setNewClasses] = useState<string[]>(course.classIds);
+  const [mins, setMins] = useState(10);
+  const [live, setLive] = useState<MoodLiveState | null>(null);
+  const [msg, setMsg] = useState('');
+  const [busy, setBusy] = useState(false);
+
+  const zApi = cloudZuvioApi(api, course.id);
+  const moodOn = featureEnabled(course, 'zuvioMood');
+  const examsOn = featureEnabled(course, 'zuvioExams');
+
+  const refreshExams = async () => {
+    if (!examsOn) return;
+    try {
+      const list = await zApi.listExams();
+      setExams(list);
+      if (!examId && list[0]) {
+        setExamId(list[0].id);
+        setSittingId(list[0].sittings.at(-1)?.id || '');
+      }
+    } catch { /* ignore */ }
+  };
+
+  useEffect(() => {
+    void refreshExams();
+  }, [course.id, examsOn]);
+
+  useEffect(() => {
+    if (!moodOn) return;
+    let alive = true;
+    const poll = async () => {
+      try {
+        const res = await zApi.getMoodLive(examId || undefined, sittingId || undefined);
+        if (alive) setLive(res);
+      } catch { /* ignore */ }
+    };
+    void poll();
+    const t = setInterval(() => void poll(), live?.state?.open ? 2500 : 8000);
+    return () => { alive = false; clearInterval(t); };
+  }, [course.id, moodOn, examId, sittingId, live?.state?.open]);
+
+  const curExam = exams.find((e) => e.id === examId);
+
+  const createSitting = async () => {
+    if (!examId || !newLabel.trim() || !newClasses.length || busy) return;
+    setBusy(true);
+    setMsg('');
+    try {
+      const created = await zApi.createSitting(examId, {
+        label: newLabel.trim(),
+        date: new Date().toISOString().slice(0, 10),
+        classIds: newClasses,
+        startsAt: Date.now(),
+      });
+      setNewLabel('');
+      setSittingId(created.id);
+      await refreshExams();
+      setMsg(`已建立場次「${created.label}」（開考時間設為現在）`);
+    } catch (e: any) {
+      setMsg(e?.message || '建立場次失敗');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const openMood = async () => {
+    if (!examId || !sittingId || busy) return;
+    setBusy(true);
+    setMsg('');
+    try {
+      await zApi.openMood(examId, sittingId, mins);
+      const res = await zApi.getMoodLive(examId, sittingId);
+      setLive(res);
+      setMsg('已開放課前情緒簽到');
+    } catch (e: any) {
+      setMsg(e?.message || '開放失敗');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const closeMood = async () => {
+    if (busy) return;
+    setBusy(true);
+    setMsg('');
+    try {
+      await zApi.closeMood(sittingId || undefined);
+      const res = await zApi.getMoodLive(examId || undefined, sittingId || undefined);
+      setLive(res);
+      setMsg('已結束課前情緒簽到');
+    } catch (e: any) {
+      setMsg(e?.message || '結束失敗');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="interaction-card" style={{ marginTop: 12 }}>
+      <p className="eyebrow">Zuvio 場次與課前情緒簽到</p>
+      {examsOn && (
+        <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
+          <select
+            aria-label="選擇 Zuvio 考卷"
+            value={examId}
+            onChange={(e) => {
+              const id = e.target.value;
+              setExamId(id);
+              const ex = exams.find((x) => x.id === id);
+              setSittingId(ex?.sittings.at(-1)?.id || '');
+            }}
+          >
+            <option value="">選擇考卷…</option>
+            {exams.map((e) => (
+              <option key={e.id} value={e.id}>{e.title}</option>
+            ))}
+          </select>
+          <select
+            aria-label="選擇場次"
+            value={sittingId}
+            onChange={(e) => setSittingId(e.target.value)}
+          >
+            <option value="">選擇場次…</option>
+            {(curExam?.sittings || []).map((s) => (
+              <option key={s.id} value={s.id}>{s.label} ({s.classIds.join('、')})</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {examsOn && examId && (
+        <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginTop: 6 }}>
+          <input
+            placeholder="新場次名稱（如：甲班W9）"
+            value={newLabel}
+            onChange={(e) => setNewLabel(e.target.value)}
+          />
+          {course.classIds.map((c) => (
+            <label key={c} style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+              <input
+                type="checkbox"
+                checked={newClasses.includes(c)}
+                onChange={(e) =>
+                  setNewClasses((old) => (e.target.checked ? [...old, c] : old.filter((x) => x !== c)))
+                }
+              />
+              {course.classNames?.[c] || c}
+            </label>
+          ))}
+          <button type="button" onClick={() => void createSitting()} disabled={busy || !newLabel.trim() || !newClasses.length}>
+            立即建場次
+          </button>
+        </div>
+      )}
+      {moodOn && (
+        <div style={{ marginTop: 8 }}>
+          <div className="row" style={{ flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+            <label>
+              分鐘
+              <input
+                type="number"
+                min={1}
+                max={120}
+                value={mins}
+                onChange={(e) => setMins(Math.max(1, Math.min(120, Number(e.target.value) || 10)))}
+                style={{ width: 60, marginLeft: 4 }}
+              />
+            </label>
+            <button type="button" onClick={() => void openMood()} disabled={busy || !examId || !sittingId}>
+              開放情緒簽到
+            </button>
+            <button type="button" onClick={() => void closeMood()} disabled={busy || !live?.state?.open}>
+              結束簽到
+            </button>
+          </div>
+          {live && (
+            <div style={{ marginTop: 6 }}>
+              <p style={{ margin: '4px 0' }}>
+                狀態：{live.state?.open ? '開放中' : '已關閉'} · 已填 {live.totalResponded} / 應填 {live.eligibleCount}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {MOOD_STATES.map((m) => (
+                  <span key={m.code} style={{ color: m.color, fontWeight: 600 }}>
+                    {m.label.split('：')[0]}：{live.counts[m.code] || 0}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      {msg && <p style={{ margin: '6px 0 0' }}>{msg}</p>}
     </div>
   );
 }
