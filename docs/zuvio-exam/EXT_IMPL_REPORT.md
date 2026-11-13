@@ -40,3 +40,21 @@
 2. **後續查詢（`zuvioReport` / `zuvioCareList` / `zuvioExportCsv`）**：
    - 只要 `startsAt` 未變更，直接讀取 `prep/${sittingId}`：**1 read**（在 `functions/tests/zuvio-ext.test.cjs` 中已驗證命中快取後 `reads` 顯著下降）。
    - 若教師透過 `zuvioUpdateSittingStart` 修改開考時間，交易會同步刪除 `prep/${sittingId}` 並於下次報表重算。
+
+
+## 完整驗證結果（Antigravity 2026-11-13）
+
+- **驗證環境**：macOS（Node.js v22.23.2）於 `.worktrees/zuvio-exams`（分支 `feature/zuvio-exams`）。
+- **驗證指令**：`npm run check`（含 `npm test`、`npm run build`、`npm --prefix functions test`、`npm run readability:check`）。
+- **驗證結果**：**全部 PASS**
+  1. **前端測試（`npm test`）**：PASS（所有測試通過，含 `preview.test.ts` 41/41、`reflection-react.test.ts`、`completion-board-react.test.ts` 等）。
+  2. **前端建置（`npm run build`）**：PASS（Vite 建置成功，無型別或模組錯誤）。
+  3. **後端建置與測試（`npm --prefix functions test`）**：PASS（入口載入 67 個函式無誤；測試 122/122 PASS，0 fail，0 skipped）。
+  4. **手機可讀性檢查（`npm run readability:check`）**：PASS（17/17 教材通過，4864 screens，issues=0）。
+  5. **Zuvio 專項單檔測試**：
+     - `tests/zuvio-ext.test.ts`、`tests/zuvio.test.ts`、`tests/zuvio-e2e.test.ts`：17/17 PASS。
+     - `functions/tests/zuvio-ext.test.cjs`、`functions/tests/zuvio-exams.test.cjs`：10/10 PASS。
+- **微調修正**：
+  - 測試初期遭遇 esbuild 在 bundle `App.tsx` 時報錯（`Cannot import "src/zuvio-ext-sample.css" into a JavaScript file without an output path configured`）。
+  - 原因：`src/ZuvioMoodCard.tsx` 於元件內重複匯入 CSS，而 `src/main.tsx` 原已全域引入該樣式。
+  - 修正：移除 `src/ZuvioMoodCard.tsx` 之 `import './zuvio-ext-sample.css';`，已提交 commit `d26b4954`（結尾 `[Antigravity]`）。重測後全數通過。
