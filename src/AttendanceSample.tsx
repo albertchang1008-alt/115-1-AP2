@@ -342,7 +342,7 @@ function Emails({ data }: { data: AttendanceSampleData }) {
         <p>查看我的出缺席：<a href={link}>{link}</a></p>
         <p>{c.teacherName}</p>
       </Mail>
-      <Mail title="③ 導師彙整（每班導師每天一封，教師按下才寄）" from={from} to={`${cls.mentorName} <${cls.mentorEmail}>`} subject={`【${c.name}】${cls.name} ${s.date} 出缺席彙整`}>
+      <Mail title="③ 導師彙整（每班導師每天一封）" from={from} to={`${cls.mentorName} <${cls.mentorEmail}>`} subject={`【${c.name}】${cls.name} ${s.date} 出缺席彙整`}>
         <p>{cls.mentorName} 老師您好：</p>
         <p>以下是 {cls.name} {s.date}（{s.weekday}）在「{c.name}」的出缺席紀錄。</p>
         <h3>第 {s.period} 節</h3>
@@ -358,12 +358,22 @@ function Emails({ data }: { data: AttendanceSampleData }) {
           <p>第 4 節還沒有按〔確認並寄出〕，不會放進這封彙整。</p>
           <div><button>先去確認第 4 節</button><button className="primary">只寄已確認的節次</button></div>
         </div>
+        <h2>寄送時間由老師決定（系統不會自己寄）</h2>
+        <div className="att-confirm" role="group" aria-label="寄送時間">
+          <strong>待寄 8 封</strong>
+          <p>第 3 節未到通知 6 封、更正通知 1 封、示範甲班導師彙整 1 封。改狀態後要寄的信也會先排在這裡。</p>
+          <div className="att-send">
+            <label><input type="radio" name="when" /> 現在寄出</label>
+            <label><input type="radio" name="when" defaultChecked /> 設定時間 <input type="time" defaultValue="17:00" aria-label="寄送時間" /></label>
+            <button className="primary">排定今天 17:00 寄出</button>
+          </div>
+        </div>
         <h2>寄送紀錄</h2>
         <table><thead><tr><th>時間</th><th>收件人</th><th>種類</th><th>結果</th></tr></thead><tbody>
           <tr><td>12:10</td><td>{st.name}</td><td>未到通知</td><td>成功</td></tr>
           <tr><td>12:10</td><td>示範學生 17</td><td>未到通知</td><td className="att-fail">失敗 <button>重寄</button></td></tr>
           <tr><td>12:31</td><td>{st2.name}</td><td>更正通知</td><td>成功</td></tr>
-          <tr><td>16:05</td><td>{cls.mentorName}</td><td>導師彙整</td><td>成功</td></tr>
+          <tr><td>17:00</td><td>{cls.mentorName}</td><td>導師彙整</td><td>成功（排定）</td></tr>
         </tbody></table>
         <p className="muted">信件只寫點名資訊，不含成績、情緒、關心標記與同裝置提醒。同一封不重複寄。</p>
       </section>

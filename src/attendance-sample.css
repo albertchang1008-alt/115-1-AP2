@@ -140,3 +140,6 @@ p.att-error { color: #a3261c; font-weight: 700; }
 .att-confirm div { display: flex; gap: 8px; flex-wrap: wrap; }
 .att-fail { color: #a3261c; font-weight: 700; }
 .att-index { padding: 40px; font-size: calc(18px * var(--font-scale, 1)); }
+.att-send { align-items: center; }
+.att-send label { display: inline-flex; align-items: center; gap: 6px; }
+.att-send input[type="time"] { border: 1px solid #c9d5dd; border-radius: 8px; padding: 6px 8px; font-size: calc(15px * var(--font-scale, 1)); }
