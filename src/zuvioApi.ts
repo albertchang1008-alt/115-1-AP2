@@ -13,10 +13,12 @@ export interface ImportPreview { previewId: string; matched: number; counts: ZCo
 export interface FullZuvioReport {
   report: ReturnType<typeof examReport>;
   compare: ReturnType<typeof compareSittings> | null;
-  analysis: ExamItemAnalysis;
-  moodSummary: MoodReportSummary;
-  preExamCounts: Record<PreExamStatus, number>;
+  moodEnabled?: boolean;
+  analysis?: ExamItemAnalysis;
+  moodSummary?: MoodReportSummary;
+  preExamCounts?: Record<PreExamStatus, number>;
   preExamDetail?: PreExamDetailReport;
+  preExamIncomplete?: boolean;
 }
 export interface MoodLiveState {
   state: { open: boolean; examId: string; sittingId: string; sittingLabel?: string; classIds: string[]; closesAt: number } | null;
@@ -160,6 +162,8 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
       const report = examReport(e.view, all, (u) => pool.find((p) => p.unitId === u)?.unitTitle || u);
       const compare = sittingIds.length === 2 ? compareSittings(e.view, e.results.get(sittingIds[0]) || new Map(), e.results.get(sittingIds[1]) || new Map()) : null;
       const analysis = analyzeExam(e.view, all);
+      const itemCount = e.view.items.length;
+      const maxScore = itemCount * (e.view.score || 1);
       const pairs = sittingIds.flatMap((s) =>
         [...(e.results.get(s)?.entries() || [])]
           .filter(([, r]) => !classId || r.classId === classId)
@@ -167,15 +171,30 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
             uid: `${s}:${sid}`,
             mood: MOOD_CODES[idx % MOOD_CODES.length],
             score: r.score,
+            correct: r.correct,
+            percentage: calcScorePercentage(r.correct, itemCount, r.score, maxScore) ?? 0,
+            hasResult: true,
             answers: r.answers,
           })),
       );
       const moodSummary = summarizeMoodResults(e.view, pairs, threshold);
       const preExamCounts: Record<PreExamStatus, number> = { passed: Math.round(all.length * 0.4), practiced: Math.round(all.length * 0.25), infographic_only: Math.round(all.length * 0.15), none: Math.max(0, all.length - Math.round(all.length * 0.4) - Math.round(all.length * 0.25) - Math.round(all.length * 0.15)) };
-      return { report, compare, analysis, moodSummary, preExamCounts };
+      const preExamDetail = summarizePreExamReport(
+        e.view,
+        pairs.map((p, idx) => ({
+          answers: p.answers,
+          percentage: p.percentage,
+          hasResult: true,
+          coverage: idx % 2 === 0 ? 100 : 50,
+          itemStatuses: Object.fromEntries(e.view.items.map((it, qi) => [it.questionId, (idx + qi) % 3 === 0 ? 'practiced' : (idx + qi) % 3 === 1 ? 'practiced_wrong' : 'none'])),
+        })),
+      );
+      return { report, compare, moodEnabled: true, analysis, moodSummary, preExamCounts, preExamDetail, preExamIncomplete: false };
     },
     async careList(id, sittingId, classId, threshold = 80) {
       const e = get(id);
+      const itemCount = e.view.items.length;
+      const maxScore = itemCount * (e.view.score || 1);
       const entries = [...(e.results.get(sittingId)?.entries() || [])]
         .filter(([, r]) => !classId || r.classId === classId)
         .map(([sid, r], idx) => ({
@@ -184,8 +203,12 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
           name: `示範生${sid.slice(-2)}`,
           classId: r.classId,
           score: r.score,
+          percentage: calcScorePercentage(r.correct, itemCount, r.score, maxScore),
           mood: MOOD_CODES[idx % MOOD_CODES.length],
           preExamStatus: (['passed', 'practiced', 'infographic_only', 'none'] as PreExamStatus[])[idx % 4],
+          practicedItemCount: idx % 2 === 0 ? itemCount : 0,
+          coverage: idx % 2 === 0 ? 100 : 0,
+          hasWrongInExam: r.correct < itemCount,
         }));
       return { entries: buildCareList(entries, threshold), threshold };
     },

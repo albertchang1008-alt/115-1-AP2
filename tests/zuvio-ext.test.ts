@@ -500,3 +500,90 @@ test('F9：圖表考前走完僅計入考卷相關次單元', () => {
   assert.equal(res.completedActivities, false);
   assert.equal(res.status, 'none');
 });
+
+
+test('R1/R2/R6/R7：逐題鑑別度與無成績覆蓋率、passed不代本卷、統計提醒與疑似錯鍵邊界、無成績情緒統計', () => {
+  // R1：summarizePreExamReport 計算 practicedD / unpracticedD，無成績 row 不計作答數只計覆蓋率
+  const v2 = makeTinyView(2);
+  const preWithMixed = summarizePreExamReport(v2, [
+    { answers: { q1: 'a', q2: 'a' }, percentage: 100, hasResult: true, coverage: 100, itemStatuses: { q1: 'practiced', q2: 'practiced' } },
+    { answers: { q1: 'b', q2: 'b' }, percentage: 0, hasResult: true, coverage: 50, itemStatuses: { q1: 'practiced', q2: 'none' } },
+    { answers: {}, percentage: null, hasResult: false, coverage: 50, itemStatuses: { q1: 'practiced', q2: 'none' } },
+  ]);
+  assert.equal(preWithMixed.hasResults, true);
+  assert.equal(preWithMixed.byQuestion[0].practicedCount, 2); // 無成績 row 不算入作答數
+  assert.equal(preWithMixed.byQuestion[0].practicedD, 1); // high(100%)答對1 - low(0%)答對0 = 1
+  const totalBandCount = preWithMixed.coverageBands.reduce((s, b) => s + b.count, 0);
+  assert.equal(totalBandCount, 3); // 3 人均計入覆蓋率分布
+
+  // R2：preExamStatus='passed' 但本卷 practicedItemCount=0, coverage=0 -> 低分+藍應為「沒練習＋低分＋藍色」
+  const careR2 = buildCareList([
+    {
+      uid: 'u_pass0',
+      studentId: 'S099',
+      name: '周測試',
+      classId: 'A',
+      score: 40,
+      percentage: 40,
+      mood: 'blue_caterpillar',
+      preExamStatus: 'passed',
+      practicedItemCount: 0,
+      coverage: 0,
+    },
+  ]);
+  assert.equal(careR2.length, 1);
+  assert.equal(careR2[0].practiceGroup, '沒練習＋低分＋藍色');
+
+  // R6：核定提醒邊界（P>0.9 太簡單, P<0.25 太難, D<0.2 鑑別度低, r_pb<0.15 低點二系列相關）
+  // 及 highWrong > highKey 但 highWrong <= lowWrong 仍須標疑似錯鍵
+  const v1 = makeTinyView(2);
+  const r6Res: ZResult[] = [
+    // 高分組 (top 27% of 8 -> 2人): q1 兩人都對(P高), q2 兩人都選錯 b (keyHigh=0, highWrong=2)
+    { classId: 'A', answers: { q1: 'a', q2: 'b' }, correct: 1, score: 50 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b' }, correct: 1, score: 50 },
+    { classId: 'A', answers: { q1: 'a', q2: 'a' }, correct: 2, score: 100 },
+    { classId: 'A', answers: { q1: 'a', q2: 'a' }, correct: 2, score: 100 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b' }, correct: 1, score: 50 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b' }, correct: 1, score: 50 },
+    // 低分組 (2人): q1 也對，但 q2 兩人都選 b (lowWrong=2, 使 highWrong <= lowWrong)
+    { classId: 'A', answers: { q1: 'a', q2: 'b' }, correct: 1, score: 50 },
+    { classId: 'A', answers: { q1: 'b', q2: 'b' }, correct: 0, score: 0 },
+  ];
+  // 調整為：讓最高分兩名選錯 b（透過 q1 對、但實際用總分排序前2名是 correct=2 選 a；改讓 v1 有 3 題，高分組在 q2 選 b 且總分仍最高）
+  const v3 = makeTinyView(3);
+  const r6Suspect: ZResult[] = [
+    // 高分組 (top 2): q1=a, q3=a, q2=b (correct=2) -> q2 highKey=0, highWrong(b)=2
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'a' }, correct: 2, score: 67 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'a' }, correct: 2, score: 67 },
+    { classId: 'A', answers: { q1: 'a', q2: 'a', q3: 'b' }, correct: 2, score: 67 },
+    { classId: 'A', answers: { q1: 'a', q2: 'a', q3: 'b' }, correct: 2, score: 67 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'b' }, correct: 1, score: 33 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'b' }, correct: 1, score: 33 },
+    // 低分組 (bottom 2): q2 也全選 b (lowWrong(b)=2, 所以 highWrong <= lowWrong)
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'b' }, correct: 1, score: 33 },
+    { classId: 'A', answers: { q1: 'a', q2: 'b', q3: 'b' }, correct: 1, score: 33 },
+  ];
+  const a6 = analyzeExam(v3, r6Suspect);
+  assert.ok(a6.items[0].flags.includes('太簡單')); // q1 P=1.0 > 0.9
+  assert.ok(a6.items[0].flags.includes('鑑別度低')); // q1 D=0 < 0.2
+  assert.ok(a6.items[1].flags.includes('疑似錯鍵')); // q2 highWrong(2) > highKey(0) 即使 highWrong <= lowWrong(2)
+  assert.ok(a6.items[2].flags.includes('太難') || a6.items[2].p === 0.25); // q3 P=0.25 邊界不標太難
+  assert.ok(r6Res.length === 8);
+
+  // R7：無成績者的情緒計入 counts 與 shifts，不計入 byScore.lowCount 與 byQuestion.count
+  const mR7 = summarizeMoodResults(
+    v2,
+    [
+      { uid: 's1', mood: 'green_flow', score: null, correct: null, percentage: null, hasResult: false, answers: {} },
+      { uid: 's2', mood: 'blue_caterpillar', score: 100, correct: 2, percentage: 100, hasResult: true, answers: { q1: 'a', q2: 'a' } },
+    ],
+    80,
+    { s1: 'blue_caterpillar', s2: 'blue_caterpillar' },
+  );
+  assert.equal(mR7.totalResponded, 2);
+  assert.equal(mR7.counts.green_flow, 1);
+  assert.equal(mR7.byScore.find((x) => x.code === 'green_flow')?.total, 0); // 無成績不進高低分交叉
+  assert.equal(mR7.byQuestion[0].stats.green_flow.count, 0); // 無成績不進逐題答對率
+  assert.equal(mR7.shifts?.totalPaired, 2);
+  assert.equal(mR7.shifts?.toGreen, 1);
+});

@@ -26,13 +26,14 @@ function memoryDb() {
       collection: (n) => collection(p + '/' + n),
     };
   }
-  function collection(p, filters = [], order = null, lim = Infinity) {
+  function collection(p, filters = [], order = null, lim = Infinity, afterDoc = null) {
     return {
       path: p,
       doc: (id) => ref(p + '/' + id),
-      where: (f, op, v) => collection(p, [...filters, [f, op, v]], order, lim),
-      orderBy: (f, dir = 'asc') => collection(p, filters, [f, dir], lim),
-      limit: (n) => collection(p, filters, order, n),
+      where: (f, op, v) => collection(p, [...filters, [f, op, v]], order, lim, afterDoc),
+      orderBy: (f, dir = 'asc') => collection(p, filters, [f, dir], lim, afterDoc),
+      limit: (n) => collection(p, filters, order, n, afterDoc),
+      startAfter: (d) => collection(p, filters, order, lim, d),
       async get() {
         const toVal = (x) => {
           if (x && typeof x.toMillis === 'function') return x.toMillis();
@@ -55,7 +56,11 @@ function memoryDb() {
             return false;
           }),
         );
-        if (order) docs.sort((a, b) => (toVal(a.data()[order[0]]) > toVal(b.data()[order[0]]) ? 1 : -1) * (order[1] === 'desc' ? -1 : 1));
+        if (order) docs.sort((a, b) => (toVal(a.data()[order[0]]) > toVal(b.data()[order[0]]) ? 1 : -1) * (order[1] === 'desc' ? -1 : 1) || a.id.localeCompare(b.id));
+        if (afterDoc) {
+          const idx = docs.findIndex((d) => d.id === afterDoc.id);
+          if (idx >= 0) docs = docs.slice(idx + 1);
+        }
         docs = docs.slice(0, lim);
         ops.reads += Math.max(1, docs.length);
         return { docs, empty: !docs.length, size: docs.length };
@@ -106,7 +111,7 @@ const W8 = readFileSync(path.join(__dirname, '../../tests/fixtures/zuvio/W8-impo
   .map((l) => l.split(','))
   .filter((r) => r[0] === 'a');
 
-function setup({ moodEnabled = true } = {}) {
+function setup({ moodEnabled = true, handlerOptions = {} } = {}) {
   const db = memoryDb();
   const units = [
     { id: 'u1', title: '腎絲球', bankVersion: 'v1', chapterId: 'c1', visibility: 'current' },
@@ -150,7 +155,7 @@ function setup({ moodEnabled = true } = {}) {
     if (!st) throw new Error('unauth');
     return { p: { uid: st.uid, teacher: false, classId: st.classId, studentId: st.studentId }, c: db.data.get(`courses/${courseId}`) };
   };
-  const h = createZuvioHandlers(db, access, {});
+  const h = createZuvioHandlers(db, access, handlerOptions);
   const call = (fn, uid, data) => fn.run({ auth: { uid }, data });
   return { db, h, call, roster };
 }
@@ -419,4 +424,156 @@ test('F1/F2/F6/F7/F8 後端驗證：未來快取不凍結、只採信receivedAt�
   const u2Entry = care3.entries.find((e) => e.studentId === 'S02');
   assert.ok(u2Entry && u2Entry.tags.includes('持續疏離'));
   assert.ok(sOtherClass.id);
+});
+
+
+test('R2/R3/R5/R7 後端驗證：多班歷史不遮蔽、跨頁完整讀取與超量不定稿、旗標關閉保護、無成績情緒統計', async () => {
+  // R5：zuvioMood 關閉時，所有新增教師/學生 callable 拒絕，zuvioReport 保留 #61 舊聚合不回傳擴充欄位
+  const off = setup({ moodEnabled: false });
+  const offExamId = '66666666-6666-4666-8666-666666666666';
+  await off.call(off.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: offExamId,
+    title: '關旗標測試',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const offSit = await off.call(off.h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId: offExamId,
+    label: 'S1',
+    date: '2026-11-10',
+    classIds: ['A'],
+  });
+  await assert.rejects(() => off.call(off.h.zuvioUpdateSittingStart, 'T1', { courseId: 'C1', examId: offExamId, sittingId: offSit.id, startsAt: Date.now() }));
+  await assert.rejects(() => off.call(off.h.zuvioCareList, 'T1', { courseId: 'C1', examId: offExamId, sittingId: offSit.id }));
+  await assert.rejects(() => off.call(off.h.zuvioExportCsv, 'T1', { courseId: 'C1', examId: offExamId, sittingIds: [offSit.id], kind: 'researchAnon' }));
+  await assert.rejects(() => off.call(off.h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: offExamId, sittingId: offSit.id }));
+  const offRep = await off.call(off.h.zuvioReport, 'T1', { courseId: 'C1', examId: offExamId, sittingIds: [offSit.id] });
+  assert.equal(offRep.moodEnabled, false);
+  assert.equal(offRep.moodSummary, undefined);
+  assert.equal(offRep.preExamDetail, undefined);
+
+  // R3：分頁完整讀取超過單頁（例如 pageSize=3，寫入 7 筆，第 7 筆才包含本卷 q0）
+  const paged = setup({ moodEnabled: true, handlerOptions: { prepPageSize: 3, prepMaxAttempts: 20 } });
+  const pExamId = '77777777-7777-4777-8777-777777777777';
+  const tNow = Date.now() - 1000;
+  await paged.call(paged.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: pExamId,
+    title: '分頁測試',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const pSit = await paged.call(paged.h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId: pExamId,
+    label: 'P1',
+    date: '2026-11-11',
+    classIds: ['A'],
+    startsAt: tNow,
+  });
+  for (let i = 0; i < 6; i++) {
+    paged.db.data.set(`courses/C1/attempts/other_${i}`, {
+      uid: 'uid1',
+      classId: 'A',
+      unitId: 'u1',
+      receivedAt: tNow - (i + 1) * 100,
+      answers: [{ questionId: 'q_other', correct: true }],
+    });
+  }
+  paged.db.data.set('courses/C1/attempts/target_7', {
+    uid: 'uid1',
+    classId: 'A',
+    unitId: 'u1',
+    receivedAt: tNow - 5000,
+    answers: [{ questionId: 'q0', correct: true }],
+  });
+  const pRep = await paged.call(paged.h.zuvioReport, 'T1', { courseId: 'C1', examId: pExamId, sittingIds: [pSit.id] });
+  assert.equal(pRep.preExamIncomplete, false);
+  assert.equal(pRep.preExamCounts.practiced, 1);
+
+  // R3 超量上限：prepMaxAttempts=4，有 5 筆資料 -> 必須標記 preExamIncomplete=true 且 finalized=false
+  const capped = setup({ moodEnabled: true, handlerOptions: { prepPageSize: 2, prepMaxAttempts: 4 } });
+  const cExamId = '88888888-8888-4888-8888-888888888888';
+  await capped.call(capped.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: cExamId,
+    title: '超量測試',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const cSit = await capped.call(capped.h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId: cExamId,
+    label: 'C1',
+    date: '2026-11-11',
+    classIds: ['A'],
+    startsAt: tNow,
+  });
+  for (let i = 0; i < 5; i++) {
+    capped.db.data.set(`courses/C1/attempts/cap_${i}`, {
+      uid: 'uid1',
+      classId: 'A',
+      unitId: 'u1',
+      receivedAt: tNow - (i + 1) * 100,
+      answers: [{ questionId: 'q_other', correct: true }],
+    });
+  }
+  const cRep = await capped.call(capped.h.zuvioReport, 'T1', { courseId: 'C1', examId: cExamId, sittingIds: [cSit.id] });
+  assert.equal(cRep.preExamIncomplete, true);
+  assert.equal(capped.db.data.get(`courses/C1/zuvioExams/${cExamId}/prep/${cSit.id}`).finalized, false);
+
+  // R7：無成績場次有 2 人填情緒 -> zuvioReport 顯示 totalResponded=2，且兩場只有早場有成績時仍算配對轉變
+  const r7 = setup({ moodEnabled: true });
+  const r7ExamId = '99999999-9999-4999-8999-999999999999';
+  await r7.call(r7.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: r7ExamId,
+    title: '無成績情緒',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const r7s1 = await r7.call(r7.h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: r7ExamId, label: 'R7-1', date: '2026-11-10', classIds: ['A', 'B'], startsAt: tNow - 100000 });
+  const r7s2 = await r7.call(r7.h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: r7ExamId, label: 'R7-2', date: '2026-11-11', classIds: ['A', 'B'], startsAt: tNow });
+  await r7.call(r7.h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: r7ExamId, sittingId: r7s1.id });
+  await r7.call(r7.h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: r7s1.id, mood: 'blue_caterpillar' });
+  await r7.call(r7.h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: r7s1.id, mood: 'gray_fog' });
+  await r7.call(r7.h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: r7ExamId, sittingId: r7s2.id });
+  await r7.call(r7.h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: r7s2.id, mood: 'green_flow' });
+  await r7.call(r7.h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: r7s2.id, mood: 'gray_fog' });
+
+  const repNoRes = await r7.call(r7.h.zuvioReport, 'T1', { courseId: 'C1', examId: r7ExamId, sittingIds: [r7s2.id] });
+  assert.equal(repNoRes.moodSummary.totalResponded, 2);
+  assert.equal(repNoRes.moodSummary.counts.green_flow, 1);
+  assert.equal(repNoRes.moodSummary.byScore.find((x) => x.code === 'green_flow').total, 0);
+  const repShiftNoRes = await r7.call(r7.h.zuvioReport, 'T1', { courseId: 'C1', examId: r7ExamId, sittingIds: [r7s1.id, r7s2.id] });
+  assert.equal(repShiftNoRes.moodSummary.shifts.totalPaired, 2);
+  assert.equal(repShiftNoRes.moodSummary.shifts.toGreen, 1);
+
+  // R2：多班歷史遮蔽（目標 A、B 兩班；中間插 6 場僅 B 班；A 班較早 2 場皆 gray_fog，應仍抓到並標持續疏離）
+  const bExamId = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+  await r7.call(r7.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: bExamId,
+    title: 'B班干擾場',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  // A 班極早場 gray_fog (連同 r7s1、r7s2 湊成 A 班最近 3 場皆灰)
+  const aEarly = await r7.call(r7.h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: bExamId, label: 'A早場', date: '2026-11-01', classIds: ['A'], startsAt: tNow - 500000 });
+  await r7.call(r7.h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: bExamId, sittingId: aEarly.id });
+  await r7.call(r7.h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: aEarly.id, mood: 'gray_fog' });
+  // 中間插 6 場純 B 班場次
+  for (let i = 0; i < 6; i++) {
+    await r7.call(r7.h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: bExamId, label: `B${i}`, date: `2026-11-12`, classIds: ['B'], startsAt: tNow - 1000 - i * 100 });
+  }
+  const careMulti = await r7.call(r7.h.zuvioCareList, 'T1', { courseId: 'C1', examId: r7ExamId, sittingId: r7s2.id });
+  const s02 = careMulti.entries.find((e) => e.studentId === 'S02');
+  assert.ok(s02 && s02.tags.includes('持續疏離'), 'A 班歷史不應被 B 班 6 場遮蔽');
 });

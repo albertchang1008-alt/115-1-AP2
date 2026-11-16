@@ -253,13 +253,18 @@ export function analyzeExam(view: ZExamView, results: ZResult[]): ExamItemAnalys
       const high = highCounts.get(opt) || 0;
       const low = lowCounts.get(opt) || 0;
       const unused = !isKey && total === 0 && n > 0;
-      const keySuspect =
-        !isKey && total > 0 && ((high > keyHigh && high > low) || (rpb < 0 && high >= low));
+      const keySuspect = !isKey && total > 0 && high > keyHigh;
       const letter = optLabelMap.has(opt) ? String.fromCharCode(65 + idx) : opt;
       return { option: letter, isKey, total, high, low, unused, keySuspect };
     });
 
     const flags: string[] = [];
+    if (n > 0) {
+      if (p > 0.9) flags.push('太簡單');
+      if (p < 0.25) flags.push('太難');
+      if (k27 > 0 && d < 0.2) flags.push('鑑別度低');
+      if (k > 1 && n >= 2 && rpb < 0.15) flags.push('低點二系列相關');
+    }
     if (distractors.some((x) => x.unused)) flags.push('誘答未選');
     if (rpb < 0 || d < 0) flags.push('負鑑別／反向');
     if (distractors.some((x) => x.keySuspect)) flags.push('疑似錯鍵');
@@ -408,12 +413,14 @@ export interface PreExamQuestionStat {
   practicedCount: number;
   practicedCorrect: number;
   practicedAccuracy: number | null;
+  practicedD: number | null;
   practicedWrongCount: number;
   practicedWrongCorrect: number;
   practicedWrongAccuracy: number | null;
   unpracticedCount: number;
   unpracticedCorrect: number;
   unpracticedAccuracy: number | null;
+  unpracticedD: number | null;
 }
 
 export interface PreExamCoverageBand {
@@ -424,6 +431,7 @@ export interface PreExamCoverageBand {
 
 export interface PreExamDetailReport {
   avgCoverage: number;
+  hasResults: boolean;
   byQuestion: PreExamQuestionStat[];
   coverageBands: PreExamCoverageBand[];
 }
@@ -433,10 +441,22 @@ export function summarizePreExamReport(
   rows: Array<{
     answers: Record<string, string>;
     percentage: number | null;
+    hasResult?: boolean;
     coverage: number;
     itemStatuses: Record<string, ItemPreExamStatus>;
   }>,
 ): PreExamDetailReport {
+  const scoredRows = rows
+    .map((r, idx) => ({ r, idx }))
+    .filter(({ r }) => (r.hasResult ?? typeof r.percentage === 'number') && typeof r.percentage === 'number');
+  const hasResults = scoredRows.length > 0;
+  const sortedScored = [...scoredRows].sort(
+    (a, b) => (b.r.percentage as number) - (a.r.percentage as number) || a.idx - b.idx,
+  );
+  const k27 = sortedScored.length >= 2 ? Math.max(1, Math.round(sortedScored.length * 0.27)) : 0;
+  const highSet = new Set(sortedScored.slice(0, k27).map((x) => x.idx));
+  const lowSet = new Set(sortedScored.slice(Math.max(0, sortedScored.length - k27)).map((x) => x.idx));
+
   const byQuestion: PreExamQuestionStat[] = view.items.map((it, qIdx) => {
     let practicedCount = 0;
     let practicedCorrect = 0;
@@ -444,12 +464,35 @@ export function summarizePreExamReport(
     let practicedWrongCorrect = 0;
     let unpracticedCount = 0;
     let unpracticedCorrect = 0;
-    for (const r of rows) {
+
+    let pHighTotal = 0;
+    let pHighRight = 0;
+    let pLowTotal = 0;
+    let pLowRight = 0;
+    let uHighTotal = 0;
+    let uHighRight = 0;
+    let uLowTotal = 0;
+    let uLowRight = 0;
+
+    rows.forEach((r, idx) => {
+      const scored = (r.hasResult ?? typeof r.percentage === 'number') && typeof r.percentage === 'number';
+      if (!scored) return;
       const right = (r.answers[it.questionId] || '').trim() === it.answer;
       const st = r.itemStatuses?.[it.questionId] || 'none';
+      const isHigh = highSet.has(idx);
+      const isLow = lowSet.has(idx);
+
       if (st === 'practiced' || st === 'practiced_wrong') {
         practicedCount++;
         if (right) practicedCorrect++;
+        if (isHigh) {
+          pHighTotal++;
+          if (right) pHighRight++;
+        }
+        if (isLow) {
+          pLowTotal++;
+          if (right) pLowRight++;
+        }
         if (st === 'practiced_wrong') {
           practicedWrongCount++;
           if (right) practicedWrongCorrect++;
@@ -457,20 +500,36 @@ export function summarizePreExamReport(
       } else {
         unpracticedCount++;
         if (right) unpracticedCorrect++;
+        if (isHigh) {
+          uHighTotal++;
+          if (right) uHighRight++;
+        }
+        if (isLow) {
+          uLowTotal++;
+          if (right) uLowRight++;
+        }
       }
-    }
+    });
+
+    const practicedD =
+      k27 > 0 && pHighTotal > 0 && pLowTotal > 0 ? round4(pHighRight / pHighTotal - pLowRight / pLowTotal) : null;
+    const unpracticedD =
+      k27 > 0 && uHighTotal > 0 && uLowTotal > 0 ? round4(uHighRight / uHighTotal - uLowRight / uLowTotal) : null;
+
     return {
       qid: it.questionId,
       label: `Q${qIdx + 1}`,
       practicedCount,
       practicedCorrect,
       practicedAccuracy: practicedCount > 0 ? round4(practicedCorrect / practicedCount) : null,
+      practicedD,
       practicedWrongCount,
       practicedWrongCorrect,
       practicedWrongAccuracy: practicedWrongCount > 0 ? round4(practicedWrongCorrect / practicedWrongCount) : null,
       unpracticedCount,
       unpracticedCorrect,
       unpracticedAccuracy: unpracticedCount > 0 ? round4(unpracticedCorrect / unpracticedCount) : null,
+      unpracticedD,
     };
   });
 
@@ -489,7 +548,7 @@ export function summarizePreExamReport(
   });
 
   const avgCoverage = rows.length > 0 ? round2(rows.reduce((s, r) => s + r.coverage, 0) / rows.length) : 0;
-  return { avgCoverage, byQuestion, coverageBands };
+  return { avgCoverage, hasResults, byQuestion, coverageBands };
 }
 
 export function calcScorePercentage(
@@ -515,9 +574,10 @@ export interface MoodRecordLite {
 export interface MoodResultPair {
   uid: string;
   mood?: MoodCode;
-  score: number;
-  correct?: number;
-  percentage?: number;
+  score: number | null;
+  correct?: number | null;
+  percentage?: number | null;
+  hasResult?: boolean;
   answers: Record<string, string>;
 }
 
@@ -564,12 +624,15 @@ export function summarizeMoodResults(
     if (!p.mood || !(p.mood in counts)) continue;
     totalResponded++;
     counts[p.mood]++;
+    const hasRes =
+      (p.hasResult ?? true) && (typeof p.percentage === 'number' || typeof p.score === 'number');
+    if (!hasRes) continue;
     const pct =
       typeof p.percentage === 'number'
         ? p.percentage
         : typeof p.correct === 'number' && view.items.length > 0
           ? round2((p.correct / view.items.length) * 100)
-          : p.score;
+          : (p.score as number);
     if (pct >= threshold) highCounts[p.mood]++;
     else lowCounts[p.mood]++;
   }
@@ -596,6 +659,9 @@ export function summarizeMoodResults(
 
     for (const p of pairs) {
       if (!p.mood || !(p.mood in stats)) continue;
+      const hasRes =
+        (p.hasResult ?? true) && (typeof p.percentage === 'number' || typeof p.score === 'number');
+      if (!hasRes) continue;
       stats[p.mood].count++;
       if ((p.answers[it.questionId] || '').trim() === it.answer) stats[p.mood].correct++;
     }
@@ -697,11 +763,10 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
     const pct = typeof st.percentage === 'number' ? st.percentage : st.score;
     const highScore = pct !== null && pct >= threshold;
     const lowScore = pct !== null && pct < threshold;
-    const hasPracticed =
-      (st.practicedItemCount ?? 0) > 0 ||
-      (st.coverage ?? 0) > 0 ||
-      st.preExamStatus === 'passed' ||
-      st.preExamStatus === 'practiced';
+    const hasItemMetrics = st.practicedItemCount !== undefined || st.coverage !== undefined;
+    const hasPracticed = hasItemMetrics
+      ? (st.practicedItemCount ?? 0) > 0 || (st.coverage ?? 0) > 0
+      : st.preExamStatus === 'practiced';
 
     if (highScore && st.mood === 'yellow_rubberband') {
       tags.push('表現好但緊繃');

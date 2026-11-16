@@ -461,7 +461,8 @@
 
 .zext-err {
   color: #b91c1c;
-  font-size: calc(16px * var(--font-scale, 1));
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
   margin: 8px 0 0;
   font-weight: 600;
 }

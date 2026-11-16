@@ -22,12 +22,12 @@ function download(name: string, text: string) {
 const fileName = (t: string) => t.replace(/[\\/:*?"<>|]/g, '_') + '.csv';
 
 /** 後台分頁入口：預覽模式用示範資料，正式模式走教師限定 callable；api 物件只建一次 */
-export function ZuvioTab({ api, courseId, notify }: { api: { preview: boolean; call<T = any>(name: string, data?: any): Promise<T> }; courseId: string; notify: (m: string) => void }) {
+export function ZuvioTab({ api, courseId, notify, moodEnabled = true }: { api: { preview: boolean; call<T = any>(name: string, data?: any): Promise<T> }; courseId: string; notify: (m: string) => void; moodEnabled?: boolean }) {
   const z = useMemo(() => (api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, courseId)), [api, courseId]);
-  return <ZuvioExams api={z} notify={notify} />;
+  return <ZuvioExams api={z} notify={notify} moodEnabled={moodEnabled} />;
 }
 
-export default function ZuvioExams({ api, notify = () => {} }: { api: ZuvioApi; notify?: (m: string) => void }) {
+export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true }: { api: ZuvioApi; notify?: (m: string) => void; moodEnabled?: boolean }) {
   const [tab, setTab] = useState<Tab>('make');
   const [openExam, setOpenExam] = useState<string>('');
   return (
@@ -40,7 +40,7 @@ export default function ZuvioExams({ api, notify = () => {} }: { api: ZuvioApi; 
       </div>
       {tab === 'make' && <Make api={api} notify={notify} done={(id) => { setOpenExam(id); setTab('exams'); }} />}
       {tab === 'exams' && <Exams api={api} notify={notify} open={openExam} setOpen={setOpenExam} />}
-      {tab === 'report' && <Report api={api} initial={openExam} />}
+      {tab === 'report' && <Report api={api} initial={openExam} moodEnabled={moodEnabled} />}
     </div>
   );
 }
@@ -314,7 +314,7 @@ function ImportPanel({ api, notify, view, examId, sitting, close }: { api: Zuvio
 }
 
 // ---------------- 報表 ----------------
-function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
+export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; initial: string; moodEnabled?: boolean }) {
   const [list, setList] = useState<ExamSummary[]>([]);
   const [examId, setExamId] = useState(initial);
   const [sel, setSel] = useState<string[]>([]);
@@ -328,33 +328,44 @@ function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
   useEffect(() => {
     api.listExams().then((l) => {
       setList(l);
-      const first = initial || l.find((e) => e.sittings.some((s) => s.results))?.id || '';
+      const first = initial || l.find((e) => e.sittings.some((s) => s.results))?.id || l[0]?.id || '';
       setExamId(first);
     });
   }, [api]);
 
   const exam = list.find((e) => e.id === examId);
-  const withResults = exam?.sittings.filter((s) => s.results) || [];
-  useEffect(() => { setSel(withResults.map((s) => s.id).slice(0, 1)); setCls(''); setRevealed({}); }, [examId, list]);
+  const availableSittings = moodEnabled ? (exam?.sittings || []) : (exam?.sittings.filter((s) => s.results) || []);
+  const moodOn = moodEnabled && full?.moodEnabled !== false;
+
+  useEffect(() => {
+    const firstWithRes = availableSittings.find((s) => s.results);
+    const defaultSel = firstWithRes ? [firstWithRes.id] : availableSittings.slice(0, 1).map((s) => s.id);
+    setSel(defaultSel);
+    setCls('');
+    setRevealed({});
+  }, [examId, list, moodEnabled]);
+
   useEffect(() => {
     if (!examId || !sel.length) { setFull(undefined); setCare([]); return; }
     api.fullReport(examId, sel, cls || undefined, threshold).then(setFull);
-    if (sel.length === 1) {
-      api.careList(examId, sel[0], cls || undefined, threshold).then((r) => setCare(r.entries));
+    if (moodEnabled && sel.length === 1) {
+      api.careList(examId, sel[0], cls || undefined, threshold).then((r) => setCare(r.entries)).catch(() => setCare([]));
     } else {
       setCare([]);
     }
-  }, [examId, sel.join(), cls, threshold]);
+  }, [examId, sel.join(), cls, threshold, moodEnabled]);
 
-  const classes = [...new Set(withResults.filter((s) => sel.includes(s.id)).flatMap((s) => s.classIds))];
+  const classes = [...new Set(availableSittings.filter((s) => sel.includes(s.id)).flatMap((s) => s.classIds))];
   const rep = full?.report;
   const cmp = full?.compare;
-  const analysis = full?.analysis;
-  const mood = full?.moodSummary;
-  const preExam = full?.preExamCounts;
+  const analysis = moodOn ? full?.analysis : undefined;
+  const mood = moodOn ? full?.moodSummary : undefined;
+  const preExam = moodOn ? full?.preExamCounts : undefined;
+  const preDetail = moodOn ? full?.preExamDetail : undefined;
+  const hasResults = (rep?.students ?? 0) > 0;
 
   const doExport = async (kind: 'itemAnalysis' | 'researchAnon' | 'researchNamed') => {
-    if (!examId || !sel.length || exporting) return;
+    if (!examId || !sel.length || exporting || !moodOn) return;
     setExporting(kind);
     try {
       const res = await api.exportCsv(examId, sel, kind, cls || undefined);
@@ -370,55 +381,146 @@ function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
         <div className="z-row" style={{ flexWrap: 'wrap', gap: 8 }}>
           <label>考卷<select value={examId} onChange={(e) => setExamId(e.target.value)}>{list.map((e) => <option key={e.id} value={e.id}>{e.title}</option>)}</select></label>
           {classes.length > 1 && <label>班級<select value={cls} onChange={(e) => setCls(e.target.value)}><option value="">全部</option>{classes.map((c) => <option key={c}>{c}</option>)}</select></label>}
-          <label>高分門檻<input type="number" min={0} max={100} value={threshold} onChange={(e) => setThreshold(Math.max(0, Math.min(100, Number(e.target.value) || 0)))} style={{ width: 64 }} /></label>
+          {moodOn && (
+            <label>高分門檻 (%)<input type="number" min={0} max={100} value={threshold} onChange={(e) => setThreshold(Math.max(0, Math.min(100, Number(e.target.value) || 0)))} style={{ width: 64 }} /></label>
+          )}
           <span className="z-sp" />
-          <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('itemAnalysis')}>試題分析 CSV</button>
-          <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchAnon')}>研究 CSV（去識別）</button>
-          <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchNamed')}>研究 CSV（具名・含個資）</button>
+          {moodOn && (
+            <>
+              <button type="button" disabled={!sel.length || !!exporting || !hasResults} onClick={() => void doExport('itemAnalysis')}>試題分析 CSV</button>
+              <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchAnon')}>研究 CSV（去識別）</button>
+              <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchNamed')}>研究 CSV（具名・含個資）</button>
+            </>
+          )}
         </div>
-        <div className="z-row"><span>場次：</span>{withResults.map((s) => (
-          <label key={s.id} className="z-check"><input type="checkbox" checked={sel.includes(s.id)} onChange={(e) => setSel(e.target.checked ? [...sel, s.id] : sel.filter((x) => x !== s.id))} />{s.label}（{s.results!.matched} 人）</label>
+        <div className="z-row"><span>場次：</span>{availableSittings.map((s) => (
+          <label key={s.id} className="z-check">
+            <input type="checkbox" checked={sel.includes(s.id)} onChange={(e) => setSel(e.target.checked ? [...sel, s.id] : sel.filter((x) => x !== s.id))} />
+            {s.label}（{s.results ? `${s.results.matched} 人` : '尚無成績'}）
+          </label>
         ))}</div>
-        <p className="muted">勾一場＝單場；勾多場＝合併；剛好勾兩場時另外顯示兩場比較與情緒變化。</p>
+        <p className="muted">勾一場＝單場；勾多場＝合併；{moodOn ? '未匯入成績場次可先看考前練習覆蓋率與情緒分布；剛好勾兩場時顯示比較。' : '剛好勾兩場時顯示兩場比較。'}</p>
       </section>
 
-      {rep && analysis && (
+      {rep && (
         <>
-          <section className="z-card">
-            <h3>甲表：整卷統計與信度（{rep.students} {sel.length > 1 ? '人次' : '人'}）</h3>
-            {analysis.summary.lowSample && <p className="z-warn">作答人數少於 30 人，統計結果僅供參考。</p>}
-            {analysis.summary.kr20Low && <p className="z-warn">KR-20 低於 0.50，整卷內部一致性偏低，請留意乙表異常題。</p>}
-            <div className="z-metrics">
-              <div className="z-metric"><small>平均數</small><b>{analysis.summary.mean}</b><small>SD {analysis.summary.sd}</small></div>
-              <div className="z-metric"><small>最低／最高</small><b>{analysis.summary.min} / {analysis.summary.max}</b><small>{analysis.summary.itemCount} 題</small></div>
-              <div className="z-metric"><small>KR-20</small><b>{analysis.summary.kr20 ?? '—'}</b><small>SEM {analysis.summary.sem ?? '—'}</small></div>
-              {preExam && (
-                <div className="z-metric"><small>考前練習</small><b>達標 {preExam.passed} · 練過 {preExam.practiced}</b><small>僅看教材 {preExam.infographic_only} · 未練 {preExam.none}</small></div>
+          {!hasResults && moodOn && (
+            <section className="z-card">
+              <p className="muted">本場次尚未匯入 Zuvio 成績（以下顯示考前練習與課前情緒統計；匯入成績後將自動出現試題分析與交叉表）。</p>
+            </section>
+          )}
+
+          {full?.preExamIncomplete && moodOn && (
+            <section className="z-card">
+              <p className="z-warn">部分單元作答紀錄超過單次查詢上限，考前練習資料可能不完整（系統未永久定稿）。</p>
+            </section>
+          )}
+
+          {!moodOn && (
+            <section className="z-card">
+              <h3>場次摘要（{rep.students} {sel.length > 1 ? '人次' : '人'}）</h3>
+              <div className="z-metrics">
+                <div className="z-metric"><small>作答人數</small><b>{rep.students} {sel.length > 1 ? '人次' : '人'}</b></div>
+              </div>
+              <h4>次單元答對率</h4>
+              {rep.subunits.map((s) => <div key={s.unitId} className="z-bar"><span>{s.title}</span><i style={{ width: pct(s.rate) }} /><b>{pct(s.rate)}</b></div>)}
+              <h4>逐題答對率</h4>
+              <table className="z-table">
+                <thead><tr><th>題</th><th>題目</th><th>答對率</th>{cmp && <th>兩場比較</th>}</tr></thead>
+                <tbody>{rep.questions.map((q, i) => (
+                  <tr key={q.questionId}>
+                    <td>Q{i + 1}</td>
+                    <td className="z-qtext">{q.text}</td>
+                    <td>{pct(q.rate)}</td>
+                    {cmp && <td>{pct(cmp[i].rateA)} → {pct(cmp[i].rateB)}</td>}
+                  </tr>
+                ))}</tbody>
+              </table>
+            </section>
+          )}
+
+          {moodOn && hasResults && analysis && (
+            <section className="z-card">
+              <h3>甲表：整卷統計與信度（{rep.students} {sel.length > 1 ? '人次' : '人'}）</h3>
+              {analysis.summary.lowSample && <p className="z-warn">作答人數少於 30 人，統計結果僅供參考。</p>}
+              {analysis.summary.kr20Low && <p className="z-warn">KR-20 低於 0.50，整卷內部一致性偏低，請留意乙表異常題。</p>}
+              <div className="z-metrics">
+                <div className="z-metric"><small>平均數</small><b>{analysis.summary.mean}</b><small>SD {analysis.summary.sd}</small></div>
+                <div className="z-metric"><small>最低／最高</small><b>{analysis.summary.min} / {analysis.summary.max}</b><small>{analysis.summary.itemCount} 題</small></div>
+                <div className="z-metric"><small>KR-20</small><b>{analysis.summary.kr20 ?? '—'}</b><small>SEM {analysis.summary.sem ?? '—'}</small></div>
+                {preExam && (
+                  <div className="z-metric"><small>考前練習（平均覆蓋 {preDetail?.avgCoverage ?? 0}%）</small><b>達標 {preExam.passed} · 練過 {preExam.practiced}</b><small>僅看教材 {preExam.infographic_only} · 未練 {preExam.none}</small></div>
+                )}
+              </div>
+              <h4>分數分布</h4>
+              {analysis.summary.scoreBins.map((b) => (
+                <div key={b.label} className="z-bar"><span>{b.label}</span><i style={{ width: pct(analysis.summary.students ? b.count / analysis.summary.students : 0) }} /><b>{b.count} 人</b></div>
+              ))}
+              <h4>次單元答對率</h4>
+              {rep.subunits.map((s) => <div key={s.unitId} className="z-bar"><span>{s.title}</span><i style={{ width: pct(s.rate) }} /><b>{pct(s.rate)}</b></div>)}
+            </section>
+          )}
+
+          {moodOn && preDetail && (
+            <section className="z-card">
+              <h3>考前練習詳細統計（全班平均題目覆蓋率 {preDetail.avgCoverage}%）</h3>
+              {!hasResults && preExam && (
+                <div className="z-metrics" style={{ marginBottom: 12 }}>
+                  <div className="z-metric"><small>考前狀態</small><b>達標 {preExam.passed} · 練過 {preExam.practiced}</b><small>僅看教材 {preExam.infographic_only} · 未練 {preExam.none}</small></div>
+                </div>
               )}
-            </div>
-            <h4>分數分布</h4>
-            {analysis.summary.scoreBins.map((b) => (
-              <div key={b.label} className="z-bar"><span>{b.label}</span><i style={{ width: pct(analysis.summary.students ? b.count / analysis.summary.students : 0) }} /><b>{b.count} 人</b></div>
-            ))}
-            <h4>次單元答對率</h4>
-            {rep.subunits.map((s) => <div key={s.unitId} className="z-bar"><span>{s.title}</span><i style={{ width: pct(s.rate) }} /><b>{pct(s.rate)}</b></div>)}
-          </section>
+              <h4>考前覆蓋率 × 分數表現</h4>
+              <table className="z-table">
+                <thead><tr><th>考前覆蓋率</th><th>人數</th><th>平均分數 (%)</th></tr></thead>
+                <tbody>
+                  {preDetail.coverageBands.map((b) => (
+                    <tr key={b.label}>
+                      <td>{b.label}</td>
+                      <td>{b.count}</td>
+                      <td>{b.avgPercentage !== null ? `${b.avgPercentage}%` : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {hasResults && (
+                <>
+                  <h4 style={{ marginTop: 12 }}>逐題：練過 vs 沒練過答對率與鑑別度</h4>
+                  <table className="z-table">
+                    <thead><tr><th>題</th><th>練過（人數 / 答對率 / D）</th><th>練過且曾答錯（人數 / 答對率）</th><th>沒練過（人數 / 答對率 / D）</th></tr></thead>
+                    <tbody>
+                      {preDetail.byQuestion.map((q) => (
+                        <tr key={q.qid}>
+                          <td>{q.label}</td>
+                          <td>{q.practicedCount ? `${q.practicedCount} 人 / ${pct(q.practicedAccuracy || 0)} / ${q.practicedD !== null ? q.practicedD.toFixed(2) : '—'}` : '—'}</td>
+                          <td>{q.practicedWrongCount ? `${q.practicedWrongCount} 人 / ${pct(q.practicedWrongAccuracy || 0)}` : '—'}</td>
+                          <td>{q.unpracticedCount ? `${q.unpracticedCount} 人 / ${pct(q.unpracticedAccuracy || 0)} / ${q.unpracticedD !== null ? q.unpracticedD.toFixed(2) : '—'}` : '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              )}
+            </section>
+          )}
 
           {mood && mood.totalResponded > 0 && (
             <section className="z-card">
-              <h3>考前情緒分布與成績交叉（高分門檻 {mood.threshold} 分，填答 {mood.totalResponded} 人）</h3>
+              <h3>考前情緒分布與成績交叉（高分門檻 {mood.threshold}%，填答 {mood.totalResponded} 人）</h3>
               <table className="z-table">
-                <thead><tr><th>情緒狀態</th><th>總人數</th><th>≥ {mood.threshold} 分</th><th>&lt; {mood.threshold} 分</th><th>高分比例</th></tr></thead>
+                <thead><tr><th>情緒狀態</th><th>總人數</th><th>≥ {mood.threshold}%</th><th>&lt; {mood.threshold}%</th><th>高分比例</th></tr></thead>
                 <tbody>
-                  {mood.byScore.map((m) => (
-                    <tr key={m.code}>
-                      <td style={{ color: m.color, fontWeight: 600 }}>{m.label}</td>
-                      <td>{m.total}</td>
-                      <td>{m.highCount}</td>
-                      <td>{m.lowCount}</td>
-                      <td>{pct(m.passRate)}</td>
-                    </tr>
-                  ))}
+                  {mood.byScore.map((m) => {
+                    const matched = mood.counts[m.code] || 0;
+                    return (
+                      <tr key={m.code}>
+                        <td style={{ color: m.color, fontWeight: 600 }}>{m.label}</td>
+                        <td>{matched}</td>
+                        <td>{m.highCount}</td>
+                        <td>{m.lowCount}</td>
+                        <td>{m.total ? pct(m.passRate) : '—'}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
               {mood.shifts && (
@@ -429,38 +531,40 @@ function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
             </section>
           )}
 
-          <section className="z-card">
-            <h3>乙表：逐題難度、鑑別度、r_pb 與誘答分析</h3>
-            <table className="z-table">
-              <thead><tr><th>題</th><th>題目</th><th>難度 P</th><th>鑑別度 D</th><th>r_pb</th><th>誘答（高分/低分）</th><th>未答</th><th>異常</th>{cmp && <th>兩場比較</th>}</tr></thead>
-              <tbody>{analysis.items.map((it, i) => {
-                const q = rep.questions[i];
-                return (
-                  <tr key={it.qid}>
-                    <td>{it.label}</td>
-                    <td className="z-qtext">{q?.text || it.qid}</td>
-                    <td><b>{it.p.toFixed(2)}</b></td>
-                    <td>{it.d.toFixed(2)}</td>
-                    <td>{it.rpb.toFixed(2)}</td>
-                    <td>{it.distractors.map((d) => (
-                      <span key={d.option} className={'z-opt' + (d.isKey ? ' z-ans' : '')}>
-                        {d.option}:{d.total}({d.high}/{d.low})
-                      </span>
-                    ))}</td>
-                    <td>{it.blank}</td>
-                    <td>{it.flags.length ? <span className="z-warn">{it.flags.join('、')}</span> : '—'}</td>
-                    {cmp && <td>{pct(cmp[i].rateA)} → {pct(cmp[i].rateB)}<br /><small>錯→對 {cmp[i].wrongToRight}・對→錯 {cmp[i].rightToWrong}</small></td>}
-                  </tr>
-                );
-              })}</tbody>
-            </table>
-          </section>
+          {moodOn && hasResults && analysis && (
+            <section className="z-card">
+              <h3>乙表：逐題難度、鑑別度、r_pb 與誘答分析</h3>
+              <table className="z-table">
+                <thead><tr><th>題</th><th>題目</th><th>難度 P</th><th>鑑別度 D</th><th>r_pb</th><th>誘答（高分/低分）</th><th>未答</th><th>異常</th>{cmp && <th>兩場比較</th>}</tr></thead>
+                <tbody>{analysis.items.map((it, i) => {
+                  const q = rep.questions[i];
+                  return (
+                    <tr key={it.qid}>
+                      <td>{it.label}</td>
+                      <td className="z-qtext">{q?.text || it.qid}</td>
+                      <td><b>{it.p.toFixed(2)}</b></td>
+                      <td>{it.d.toFixed(2)}</td>
+                      <td>{it.rpb.toFixed(2)}</td>
+                      <td>{it.distractors.map((d) => (
+                        <span key={d.option} className={'z-opt' + (d.isKey ? ' z-ans' : '')}>
+                          {d.option}:{d.total}({d.high}/{d.low})
+                        </span>
+                      ))}</td>
+                      <td>{it.blank}</td>
+                      <td>{it.flags.length ? <span className="z-warn">{it.flags.join('、')}</span> : '—'}</td>
+                      {cmp && <td>{pct(cmp[i].rateA)} → {pct(cmp[i].rateB)}<br /><small>錯→對 {cmp[i].wrongToRight}・對→錯 {cmp[i].rightToWrong}</small></td>}
+                    </tr>
+                  );
+                })}</tbody>
+              </table>
+            </section>
+          )}
 
-          {mood && mood.totalResponded > 0 && (
+          {mood && mood.totalResponded > 0 && hasResults && (
             <section className="z-card">
               <h4>逐題答對率 × 情緒狀態</h4>
               <table className="z-table">
-                <thead><tr><th>題</th>{MOOD_STATES.map((m) => <th key={m.code} style={{ color: m.color }}>{m.label.split('：')[0]}</th>)}</tr></thead>
+                <thead><tr><th>題</th>{MOOD_STATES.map((m) => <th key={m.code} style={{ color: m.color }}>{m.label.split('（')[0]}</th>)}</tr></thead>
                 <tbody>
                   {mood.byQuestion.map((row) => (
                     <tr key={row.qid}>
@@ -476,12 +580,12 @@ function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
             </section>
           )}
 
-          {sel.length === 1 && (
+          {moodOn && sel.length === 1 && (
             <section className="z-card">
               <h3>關懷名單（僅教師可見 · {care.length} 人）</h3>
               {!care.length ? <p className="muted">本場次無符合條件的關懷對象。</p> : (
                 <table className="z-table">
-                  <thead><tr><th>姓名（點擊顯示）</th><th>班級</th><th>成績</th><th>情緒</th><th>考前練習</th><th>觸發原因</th></tr></thead>
+                  <thead><tr><th>姓名（點擊顯示）</th><th>班級</th><th>成績</th><th>情緒</th><th>考前狀態 / 覆蓋率</th><th>練習分類</th><th>觸發原因</th></tr></thead>
                   <tbody>
                     {care.map((c) => {
                       const show = !!revealed[c.uid];
@@ -493,9 +597,10 @@ function Report({ api, initial }: { api: ZuvioApi; initial: string }) {
                             </button>
                           </td>
                           <td>{c.classId}</td>
-                          <td>{c.score ?? '缺考'}</td>
-                          <td>{c.mood ? MOOD_STATES.find((m) => m.code === c.mood)?.label.split('：')[0] : '未填'}</td>
-                          <td>{c.preExamStatus}</td>
+                          <td>{c.score !== null ? `${c.score}${c.percentage !== null ? ` (${c.percentage}%)` : ''}` : '缺考'}</td>
+                          <td>{c.mood ? MOOD_STATES.find((m) => m.code === c.mood)?.label.split('（')[0] : '未填'}</td>
+                          <td>{c.preExamStatus}（{c.preExamCoverage}%）</td>
+                          <td>{c.practiceGroup || '—'}</td>
                           <td>{[...c.tags, ...c.streakNotes].join('、')}</td>
                         </tr>
                       );

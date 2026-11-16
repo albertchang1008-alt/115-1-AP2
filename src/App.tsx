@@ -697,7 +697,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
           ) : tab === 'analysis' ? (
             <Analysis key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'zuvio' && (api.preview || featureEnabled(course, 'zuvioExams')) ? (
-            <ZuvioExams key={course.id} api={api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, course.id)} notify={notify} />
+            <ZuvioExams key={course.id} api={api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, course.id)} notify={notify} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
           ) : tab === 'reports' ? (
             <ReportsPage key={course.id} course={course} api={api} notify={notify} />
           ) : (
