@@ -283,6 +283,11 @@ export default function TeachingControl({
             </div>
             {!api.preview && (
               <div className="teaching-deck-actions">
+                {featureEnabled(course, 'attendance') && (
+                  <button type="button" onClick={() => { location.hash = 'attendance'; }}>
+                    開始點名
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => setShowImport(true)}

@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import AttendanceSample from '../../src/AttendanceSample';
 import '../../src/style.css';
-import '../../src/attendance-sample.css';
+import '../../src/attendance.css';
 fetch('/sample-data')
   .then((r) => {
     if (!r.ok) throw Error('樣張資料讀取失敗');

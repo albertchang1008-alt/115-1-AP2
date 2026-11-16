@@ -11,6 +11,7 @@ import { courseRevision, assertExpectedRevision, REVISION_CONFLICT } from '../..
 import { validateReflectionConfig, validateReflectionAnswers, reflectionActivity, buildReflectionResponse, reflectionProgress, summarizeReflections } from '../../shared/reflection';
 import { normalizeCourseFeatures, courseFeaturesFromRecord } from '../../shared/features';
 import { createClassroomHandlers } from './classroom';
+import { createAttendanceHandlers } from './attendance';
 import { createTeachingHandlers } from './teaching';
 import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
 import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wrongCarry';
@@ -1567,3 +1568,4 @@ export const { getStudentUnitAttempts, getActivitySessions, backfillActivityHist
 export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);
 
 export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);
+export const { attendanceStart, attendanceControl, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceMailStatus, attendanceSendMail, attendanceMailTick } = createAttendanceHandlers(db, access, options);
