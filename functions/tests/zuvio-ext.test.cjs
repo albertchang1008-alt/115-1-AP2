@@ -34,18 +34,28 @@ function memoryDb() {
       orderBy: (f, dir = 'asc') => collection(p, filters, [f, dir], lim),
       limit: (n) => collection(p, filters, order, n),
       async get() {
+        const toVal = (x) => {
+          if (x && typeof x.toMillis === 'function') return x.toMillis();
+          if (x && typeof x.seconds === 'number') return x.seconds * 1000;
+          return x;
+        };
         let docs = [...data.keys()]
           .filter((k) => k.startsWith(p + '/') && k.split('/').length === p.split('/').length + 1)
           .map(snap);
         docs = docs.filter((d) =>
           filters.every(([f, op, v]) => {
-            const val = d.data()[f];
-            if (op === '==') return val === v;
-            if (op === 'in') return Array.isArray(v) && v.includes(val);
+            const val = toVal(d.data()[f]);
+            const cmp = toVal(v);
+            if (op === '==') return val === cmp;
+            if (op === '<') return val < cmp;
+            if (op === '<=') return val <= cmp;
+            if (op === '>') return val > cmp;
+            if (op === '>=') return val >= cmp;
+            if (op === 'in') return Array.isArray(v) && v.includes(d.data()[f]);
             return false;
           }),
         );
-        if (order) docs.sort((a, b) => (a.data()[order[0]] > b.data()[order[0]] ? 1 : -1) * (order[1] === 'desc' ? -1 : 1));
+        if (order) docs.sort((a, b) => (toVal(a.data()[order[0]]) > toVal(b.data()[order[0]]) ? 1 : -1) * (order[1] === 'desc' ? -1 : 1));
         docs = docs.slice(0, lim);
         ops.reads += Math.max(1, docs.length);
         return { docs, empty: !docs.length, size: docs.length };
@@ -254,10 +264,10 @@ test('考前練習切分、快取讀取數估算、關懷名單與三種 CSV 匯
   db.data.set('courses/C1/progress/uid1', { units: { u1: { best: 90, attempts: 1, updatedAt: startsAt - 500, passedAt: startsAt - 500 } } });
   // uid2: 沒有考前練習 -> none (且連續兩場皆灰)
 
-  // 寫入 s2 情緒與成績
+  // 寫入 s2 情緒與成績（用 green_flow 與 blue_caterpillar 驗證規畫 4.2 與三型）
   await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: s2.id, durationMinutes: 10 });
-  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: s2.id, mood: 'red_volcano' });
-  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: s2.id, mood: 'gray_fog' });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: s2.id, mood: 'green_flow' });
+  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: s2.id, mood: 'blue_caterpillar' });
 
   const examDoc = await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId });
   const view = examDoc.view;
@@ -280,7 +290,7 @@ test('考前練習切分、快取讀取數估算、關懷名單與三種 CSV 匯
   assert.ok(cachedReads < firstReads, `快取命中應降低 reads（first=${firstReads}, cached=${cachedReads}）`);
   assert.equal(rep1.preExamCounts.passed, 1);
   assert.equal(rep1.preExamCounts.none, 1);
-  assert.equal(rep1.moodSummary.counts.red_volcano, 1);
+  assert.equal(rep1.moodSummary.counts.green_flow, 1);
   assert.equal(rep2.analysis.summary.students, 2);
 
   // 修改開考時間後快取失效重算
@@ -289,11 +299,11 @@ test('考前練習切分、快取讀取數估算、關懷名單與三種 CSV 匯
   assert.equal(rep3.preExamCounts.passed, 0);
   assert.equal(rep3.preExamCounts.none, 2);
 
-  // 關懷名單（含遮罩姓名＋連續未練習）
+  // 關懷名單（含遮罩姓名＋規畫 4.2／三型規則）
   const care = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId, sittingId: s2.id, threshold: 80 });
   assert.equal(care.entries.length, 2);
-  assert.ok(care.entries.some((e) => e.maskedName === '王○明' && e.tags.includes('情緒：小火山')));
-  assert.ok(care.entries.some((e) => e.maskedName === '李○' && e.tags.includes('連續未練習')));
+  assert.ok(care.entries.some((e) => e.maskedName === '王○明' && e.tags.includes('自評與表現有落差')));
+  assert.ok(care.entries.some((e) => e.maskedName === '李○' && e.tags.includes('可能需要鷹架') && e.practiceGroup === '沒練習＋低分＋藍色'));
 
   // 三種 CSV 匯出
   const csvItem = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [s2.id], kind: 'itemAnalysis' });
@@ -301,7 +311,112 @@ test('考前練習切分、快取讀取數估算、關懷名單與三種 CSV 匯
   const csvAnon = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [s2.id], kind: 'researchAnon' });
   assert.ok(!csvAnon.csv.includes('王小明') && !csvAnon.csv.includes('S01'));
   assert.ok(csvAnon.csv.includes('研究代碼'));
+  assert.ok(csvAnon.csv.includes('Q1_考前練習'));
   const csvNamed = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [s2.id], kind: 'researchNamed' });
   assert.ok(csvNamed.filename.includes('含個資'));
   assert.ok(csvNamed.csv.includes('王小明') && csvNamed.csv.includes('S01'));
+});
+
+test('F1/F2/F6/F7/F8 後端驗證：未來快取不凍結、只採信receivedAt、兩場去重與跨卷應參與場次', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const futureStart = Date.now() + 3600 * 1000;
+  const examId = '33333333-3333-4333-8333-333333333333';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: '未來場次測試',
+    score: 50,
+    classIds: ['A'],
+    items: [
+      { questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] },
+      { questionId: 'q3', unitId: 'u2', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] },
+    ],
+  });
+  const sFut = await call(h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId,
+    label: '未來場',
+    date: '2026-11-20',
+    classIds: ['A'],
+    startsAt: futureStart,
+  });
+
+  // F6：開考前首查 none=2
+  const rBefore = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sFut.id] });
+  assert.equal(rBefore.preExamCounts.none, 2);
+
+  // F8：student uid2 送出一筆 receivedAt > futureStart 但 clientAt < futureStart 的作答 -> 不應算入
+  db.data.set('courses/C1/attempts/att_fake', {
+    uid: 'uid2',
+    classId: 'A',
+    unitId: 'u1',
+    receivedAt: futureStart + 5000,
+    clientAt: futureStart - 5000,
+    answers: [{ questionId: 'q0', correct: true }],
+  });
+  // F1/F6：student uid1 送出一筆真正 receivedAt < futureStart 的逐題作答 -> 應立即更新為 practiced=1
+  db.data.set('courses/C1/attempts/att_real', {
+    uid: 'uid1',
+    classId: 'A',
+    unitId: 'u1',
+    receivedAt: Date.now() - 1000,
+    clientAt: Date.now() - 1000,
+    answers: [{ questionId: 'q0', correct: false }],
+  });
+  const rAfter = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sFut.id] });
+  assert.equal(rAfter.preExamCounts.practiced, 1);
+  assert.equal(rAfter.preExamCounts.none, 1);
+
+  // F7：兩場情緒比較（故意將 sittingIds 反序傳入）只配對後場 1 次
+  const t1 = Date.now() - 200000;
+  const t2 = Date.now() - 100000;
+  const exam2Id = '44444444-4444-4444-8444-444444444444';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: exam2Id,
+    title: '兩場比較',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sa = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: exam2Id, label: '早場', date: '2026-11-10', classIds: ['A'], startsAt: t1 });
+  const sb = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: exam2Id, label: '晚場', date: '2026-11-11', classIds: ['A'], startsAt: t2 });
+  const sOtherClass = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: exam2Id, label: 'B班場', date: '2026-11-12', classIds: ['B'], startsAt: t2 + 10000 });
+
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: exam2Id, sittingId: sa.id, durationMinutes: 10 });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: sa.id, mood: 'blue_caterpillar' });
+  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: sa.id, mood: 'gray_fog' });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: exam2Id, sittingId: sb.id, durationMinutes: 10 });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: sb.id, mood: 'green_flow' });
+  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: sb.id, mood: 'gray_fog' });
+
+  const view2 = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId: exam2Id })).view;
+  for (const sId of [sa.id, sb.id]) {
+    const m2 = fakeZuvioExport(view2, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => 0);
+    const p2 = parseZuvioMatrix(m2);
+    const pr = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId: exam2Id, sittingId: sId, parsed: p2, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+    await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId: exam2Id, sittingId: sId, parsed: p2, confirm: true, previewId: pr.previewId });
+  }
+  const compRep = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId: exam2Id, sittingIds: [sb.id, sa.id] });
+  assert.equal(compRep.moodSummary.shifts.totalPaired, 2);
+  assert.equal(compRep.moodSummary.shifts.toGreen, 1);
+  assert.equal(compRep.moodSummary.shifts.unchanged, 1);
+
+  // F2：跨考卷最近 3 場皆灰（在第一張考卷再給 uid2 一場 gray_fog，且中間夾一個 B 班場次不應中斷 A 班連續）
+  const exam3Id = '55555555-5555-4555-8555-555555555555';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: exam3Id,
+    title: '第三場',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sc = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: exam3Id, label: '第三場', date: '2026-11-13', classIds: ['A'], startsAt: t2 + 20000 });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: exam3Id, sittingId: sc.id, durationMinutes: 10 });
+  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: sc.id, mood: 'gray_fog' });
+  const care3 = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId: exam3Id, sittingId: sc.id, threshold: 80 });
+  const u2Entry = care3.entries.find((e) => e.studentId === 'S02');
+  assert.ok(u2Entry && u2Entry.tags.includes('持續疏離'));
+  assert.ok(sOtherClass.id);
 });

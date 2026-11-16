@@ -1,8 +1,8 @@
 import type { Progress } from './model';
 import type { ZExamView, ZResult } from './zuvio';
 
-export const MOOD_QUESTION = '你現在的狀態比較像哪一個？';
-export const MOOD_SUBNOTE = '只會讓老師看到匿名人數分布；不會記名，也不影響成績';
+export const MOOD_QUESTION = '剛寫完這份測驗，你現在的內在狀態最像哪一種？';
+export const MOOD_SUBNOTE = '此題不計分，老師會看到你的選擇，用來調整教學';
 
 export const MOOD_CODES = [
   'red_volcano',
@@ -29,37 +29,37 @@ export const MOOD_STATES: readonly MoodStateMeta[] = [
   {
     code: 'red_volcano',
     color: '#D9534F',
-    label: '🌋 小火山要爆了：好煩、好想罵人、想逃跑',
-    teacherNote: '高激發負向；考前恐慌或抗拒',
-    feedback: '先把氣吐出來也沒關係。這份考卷不是在決定你這個人，現在只要先把會的幾題穩穩寫完就好。',
+    label: '像快噴發的火山（煩躁、不甘心、覺得題目很刁鑽）',
+    teacherNote: '挫敗感強，容易因情緒抗拒檢討錯題',
+    feedback: '這份測驗確實不容易！先深呼吸三口氣，等情緒降溫後，我們再一起拆解卡住的地方。',
   },
   {
     code: 'yellow_rubberband',
     color: '#E09F1F',
-    label: '⚡ 橡皮筋拉好緊：緊張、腦袋一直轉停不下來',
-    teacherNote: '焦慮緊繃；過度在意表現',
-    feedback: '緊張代表你在乎，但也讓腦袋太用力了。先看第一題就好，不確定的題目先跳過，等一下再回頭。',
+    label: '像拉滿的橡皮筋（心跳快、腦袋還在高速運轉、怕粗心）',
+    teacherNote: '高度焦慮或完美主義',
+    feedback: '你已經全力以赴了，現在可以先把橡皮筋放鬆，看看哪些觀念其實比你以為的更穩固。',
   },
   {
     code: 'blue_caterpillar',
     color: '#3B82C4',
-    label: '🌧️ 濕濕的毛毛蟲：好累、沒力氣、有點低落',
-    teacherNote: '低能量負向；疲憊、無力',
-    feedback: '今天辛苦了。累的時候不需要硬逼自己滿分，照你現在能做到的步調，一題一題慢慢走過就好。',
+    label: '像沒電的毛毛蟲（腦袋一片空白、無力、想直接放棄）',
+    teacherNote: '認知超載或準備不足',
+    feedback: '辛苦了，大腦剛剛消耗了很多能量。今天先不用一次看完所有錯題，挑一題最簡單的弄懂就好。',
   },
   {
     code: 'green_flow',
     color: '#3D9970',
-    label: '🌿 順順的微風：平靜、準備好了、可以專心',
-    teacherNote: '穩定專注；理想應考狀態',
-    feedback: '很好的節奏。把剛才腦袋裡的重點留住，穩穩讀題、不要急著搶快。',
+    label: '像順流的小船／跳跳糖（寫得很順、有掌握感、甚至有點興奮）',
+    teacherNote: '心流或準備充分',
+    feedback: '很棒的節奏！趁著記憶最清晰的時候，順手把幾道不確定的題目確認一下就大功告成了。',
   },
   {
     code: 'gray_fog',
     color: '#7A828C',
-    label: '🌫️ 腦袋起霧了：空空的、什麼都沒記起來、不知道要幹嘛',
-    teacherNote: '麻木解離或完全沒準備',
-    feedback: '起霧的時候先別責怪自己。進考題後先找關鍵字，能認出哪幾個概念就算賺到哪幾個。',
+    label: '像隔著一層霧／碎玻璃（說不上來、沒什麼感覺、只是想趕快交卷）',
+    teacherNote: '情緒隔離或科目疏離',
+    feedback: '有時候「沒感覺」也是大腦保護自己的一種方式。先休息一下，隨時準備好了再回來看解析。',
   },
 ] as const;
 
@@ -305,26 +305,68 @@ export function analyzeExam(view: ZExamView, results: ZResult[]): ExamItemAnalys
   };
 }
 
+export type ItemPreExamStatus = 'practiced' | 'practiced_wrong' | 'none';
+
 export interface PreExamAttemptLite {
   unitId: string;
   at: number;
+  answers?: Array<{ questionId: string; correct: boolean }>;
+}
+
+export interface PreExamClassification {
+  status: PreExamStatus;
+  attemptCount: number;
+  passedUnitCount: number;
+  activityCount: number;
+  itemStatuses: Record<string, ItemPreExamStatus>;
+  practicedItemCount: number;
+  practicedWrongItemCount: number;
+  coverage: number;
+  passedUnits: boolean;
+  completedActivities: boolean;
 }
 
 export function classifyPreExamPractice(input: {
   startsAt: number;
   unitIds: string[];
+  questionIds?: string[];
+  allowedActivityIds?: string[];
   attempts: PreExamAttemptLite[];
   progress?: Partial<Progress> | null;
-}): {
-  status: PreExamStatus;
-  attemptCount: number;
-  passedUnitCount: number;
-  activityCount: number;
-} {
+}): PreExamClassification {
   const unitSet = new Set(input.unitIds);
   const relevantAttempts = input.attempts.filter(
     (a) => unitSet.has(a.unitId) && Number.isFinite(a.at) && a.at < input.startsAt,
   );
+  const questionIds = input.questionIds || [];
+  const questionSet = new Set(questionIds);
+  const seenRight = new Set<string>();
+  const seenWrong = new Set<string>();
+  for (const att of relevantAttempts) {
+    for (const ans of att.answers || []) {
+      const qid = ans?.questionId;
+      if (!qid || (questionSet.size > 0 && !questionSet.has(qid))) continue;
+      if (ans.correct) seenRight.add(qid);
+      else seenWrong.add(qid);
+    }
+  }
+  const itemStatuses: Record<string, ItemPreExamStatus> = {};
+  let practicedItemCount = 0;
+  let practicedWrongItemCount = 0;
+  for (const qid of questionIds) {
+    if (seenWrong.has(qid)) {
+      itemStatuses[qid] = 'practiced_wrong';
+      practicedItemCount++;
+      practicedWrongItemCount++;
+    } else if (seenRight.has(qid)) {
+      itemStatuses[qid] = 'practiced';
+      practicedItemCount++;
+    } else {
+      itemStatuses[qid] = 'none';
+    }
+  }
+  const coverage = questionIds.length > 0 ? round2((practicedItemCount / questionIds.length) * 100) : 0;
+
   const units = input.progress?.units || {};
   let passedUnitCount = 0;
   for (const unitId of unitSet) {
@@ -332,15 +374,18 @@ export function classifyPreExamPractice(input: {
     if (typeof passedAt === 'number' && passedAt < input.startsAt) passedUnitCount++;
   }
   const activityHistory = input.progress?.activityHistory || {};
+  const allowedActSet = input.allowedActivityIds ? new Set(input.allowedActivityIds) : null;
   let activityCount = 0;
-  for (const h of Object.values(activityHistory)) {
+  for (const [actKey, h] of Object.entries(activityHistory)) {
+    if (allowedActSet && !allowedActSet.has(actKey)) continue;
     const first = h?.firstCompletedAt;
     if (typeof first === 'number' && first < input.startsAt) activityCount++;
   }
 
+  const hasPracticedExam = questionIds.length > 0 ? practicedItemCount > 0 : relevantAttempts.length > 0;
   let status: PreExamStatus = 'none';
   if (passedUnitCount > 0) status = 'passed';
-  else if (relevantAttempts.length > 0) status = 'practiced';
+  else if (hasPracticedExam) status = 'practiced';
   else if (activityCount > 0) status = 'infographic_only';
 
   return {
@@ -348,7 +393,118 @@ export function classifyPreExamPractice(input: {
     attemptCount: relevantAttempts.length,
     passedUnitCount,
     activityCount,
+    itemStatuses,
+    practicedItemCount,
+    practicedWrongItemCount,
+    coverage,
+    passedUnits: passedUnitCount > 0,
+    completedActivities: activityCount > 0,
   };
+}
+
+export interface PreExamQuestionStat {
+  qid: string;
+  label: string;
+  practicedCount: number;
+  practicedCorrect: number;
+  practicedAccuracy: number | null;
+  practicedWrongCount: number;
+  practicedWrongCorrect: number;
+  practicedWrongAccuracy: number | null;
+  unpracticedCount: number;
+  unpracticedCorrect: number;
+  unpracticedAccuracy: number | null;
+}
+
+export interface PreExamCoverageBand {
+  label: string;
+  count: number;
+  avgPercentage: number | null;
+}
+
+export interface PreExamDetailReport {
+  avgCoverage: number;
+  byQuestion: PreExamQuestionStat[];
+  coverageBands: PreExamCoverageBand[];
+}
+
+export function summarizePreExamReport(
+  view: ZExamView,
+  rows: Array<{
+    answers: Record<string, string>;
+    percentage: number | null;
+    coverage: number;
+    itemStatuses: Record<string, ItemPreExamStatus>;
+  }>,
+): PreExamDetailReport {
+  const byQuestion: PreExamQuestionStat[] = view.items.map((it, qIdx) => {
+    let practicedCount = 0;
+    let practicedCorrect = 0;
+    let practicedWrongCount = 0;
+    let practicedWrongCorrect = 0;
+    let unpracticedCount = 0;
+    let unpracticedCorrect = 0;
+    for (const r of rows) {
+      const right = (r.answers[it.questionId] || '').trim() === it.answer;
+      const st = r.itemStatuses?.[it.questionId] || 'none';
+      if (st === 'practiced' || st === 'practiced_wrong') {
+        practicedCount++;
+        if (right) practicedCorrect++;
+        if (st === 'practiced_wrong') {
+          practicedWrongCount++;
+          if (right) practicedWrongCorrect++;
+        }
+      } else {
+        unpracticedCount++;
+        if (right) unpracticedCorrect++;
+      }
+    }
+    return {
+      qid: it.questionId,
+      label: `Q${qIdx + 1}`,
+      practicedCount,
+      practicedCorrect,
+      practicedAccuracy: practicedCount > 0 ? round4(practicedCorrect / practicedCount) : null,
+      practicedWrongCount,
+      practicedWrongCorrect,
+      practicedWrongAccuracy: practicedWrongCount > 0 ? round4(practicedWrongCorrect / practicedWrongCount) : null,
+      unpracticedCount,
+      unpracticedCorrect,
+      unpracticedAccuracy: unpracticedCount > 0 ? round4(unpracticedCorrect / unpracticedCount) : null,
+    };
+  });
+
+  const bandDefs = [
+    { label: '0%', min: 0, max: 0 },
+    { label: '1-49%', min: 0.01, max: 49.99 },
+    { label: '50-99%', min: 50, max: 99.99 },
+    { label: '100%', min: 100, max: 100 },
+  ];
+  const coverageBands: PreExamCoverageBand[] = bandDefs.map((b) => {
+    const matched = rows.filter((r) => r.coverage >= b.min && r.coverage <= b.max);
+    const withPct = matched.filter((r) => typeof r.percentage === 'number');
+    const avgPercentage =
+      withPct.length > 0 ? round2(withPct.reduce((s, r) => s + (r.percentage as number), 0) / withPct.length) : null;
+    return { label: b.label, count: matched.length, avgPercentage };
+  });
+
+  const avgCoverage = rows.length > 0 ? round2(rows.reduce((s, r) => s + r.coverage, 0) / rows.length) : 0;
+  return { avgCoverage, byQuestion, coverageBands };
+}
+
+export function calcScorePercentage(
+  correct: number | null | undefined,
+  itemCount: number,
+  score?: number | null,
+  maxScore?: number | null,
+): number | null {
+  if (typeof score === 'number' && typeof maxScore === 'number' && maxScore > 0) {
+    return round2((score / maxScore) * 100);
+  }
+  if (typeof correct === 'number' && itemCount > 0) {
+    return round2((correct / itemCount) * 100);
+  }
+  return null;
 }
 
 export interface MoodRecordLite {
@@ -360,6 +516,8 @@ export interface MoodResultPair {
   uid: string;
   mood?: MoodCode;
   score: number;
+  correct?: number;
+  percentage?: number;
   answers: Record<string, string>;
 }
 
@@ -395,6 +553,7 @@ export function summarizeMoodResults(
   pairs: MoodResultPair[],
   threshold = 80,
   prevMoods?: Record<string, MoodCode>,
+  shiftLaterPairs?: MoodResultPair[],
 ): MoodReportSummary {
   const counts = Object.fromEntries(MOOD_CODES.map((c) => [c, 0])) as Record<MoodCode, number>;
   const highCounts = Object.fromEntries(MOOD_CODES.map((c) => [c, 0])) as Record<MoodCode, number>;
@@ -405,7 +564,13 @@ export function summarizeMoodResults(
     if (!p.mood || !(p.mood in counts)) continue;
     totalResponded++;
     counts[p.mood]++;
-    if (p.score >= threshold) highCounts[p.mood]++;
+    const pct =
+      typeof p.percentage === 'number'
+        ? p.percentage
+        : typeof p.correct === 'number' && view.items.length > 0
+          ? round2((p.correct / view.items.length) * 100)
+          : p.score;
+    if (pct >= threshold) highCounts[p.mood]++;
     else lowCounts[p.mood]++;
   }
 
@@ -447,10 +612,14 @@ export function summarizeMoodResults(
     let toFogOrRed = 0;
     let unchanged = 0;
     const transMap = new Map<string, number>();
+    const targetPairs = shiftLaterPairs ?? pairs;
+    const seen = new Set<string>();
 
-    for (const p of pairs) {
+    for (const p of targetPairs) {
+      if (seen.has(p.uid)) continue;
       const prev = prevMoods[p.uid];
       if (!prev || !p.mood) continue;
+      seen.add(p.uid);
       totalPaired++;
       if (prev === p.mood) unchanged++;
       if (prev !== 'green_flow' && p.mood === 'green_flow') toGreen++;
@@ -483,10 +652,15 @@ export interface CareStudentInput {
   name: string;
   classId: string;
   score: number | null;
+  percentage?: number | null;
   mood: MoodCode | null;
   preExamStatus: PreExamStatus;
+  practicedItemCount?: number;
+  coverage?: number;
+  hasWrongInExam?: boolean;
   recentHistory?: Array<{
     score: number | null;
+    percentage?: number | null;
     mood: MoodCode | null;
     preExamStatus: PreExamStatus;
   }>;
@@ -499,8 +673,11 @@ export interface CareListEntry {
   maskedName: string;
   classId: string;
   score: number | null;
+  percentage: number | null;
   mood: MoodCode | null;
   preExamStatus: PreExamStatus;
+  preExamCoverage: number;
+  practiceGroup: string | null;
   tags: string[];
   streakNotes: string[];
 }
@@ -517,48 +694,68 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
   for (const st of students) {
     const tags: string[] = [];
     const streakNotes: string[] = [];
-    const lowScore = st.score !== null && st.score < threshold;
+    const pct = typeof st.percentage === 'number' ? st.percentage : st.score;
+    const highScore = pct !== null && pct >= threshold;
+    const lowScore = pct !== null && pct < threshold;
+    const hasPracticed =
+      (st.practicedItemCount ?? 0) > 0 ||
+      (st.coverage ?? 0) > 0 ||
+      st.preExamStatus === 'passed' ||
+      st.preExamStatus === 'practiced';
 
-    if (st.mood === 'red_volcano') tags.push('情緒：小火山');
-    if (lowScore && (st.mood === 'blue_caterpillar' || st.mood === 'gray_fog')) {
-      tags.push('低分＋低能量／霧');
+    if (highScore && st.mood === 'yellow_rubberband') {
+      tags.push('表現好但緊繃');
     }
-    if (st.preExamStatus === 'passed' && lowScore) {
-      tags.push('已達標仍低分');
+    if (lowScore && st.mood === 'blue_caterpillar') {
+      tags.push('可能需要鷹架');
+    }
+    if (lowScore && st.mood === 'green_flow') {
+      tags.push('自評與表現有落差');
     }
 
     const combined = [
-      { score: st.score, mood: st.mood, preExamStatus: st.preExamStatus },
-      ...(st.recentHistory || []),
+      { score: st.score, percentage: pct, mood: st.mood, preExamStatus: st.preExamStatus },
+      ...(st.recentHistory || []).map((h) => ({
+        score: h.score,
+        percentage: typeof h.percentage === 'number' ? h.percentage : h.score,
+        mood: h.mood,
+        preExamStatus: h.preExamStatus,
+      })),
     ];
 
-    let consecutiveGrey = 0;
+    let consecutiveBlueLow = 0;
     for (const h of combined) {
-      if (h.preExamStatus === 'none') consecutiveGrey++;
-      else break;
+      if (h.percentage !== null && h.percentage < threshold && h.mood === 'blue_caterpillar') {
+        consecutiveBlueLow++;
+      } else {
+        break;
+      }
     }
-    if (st.preExamStatus === 'none' && consecutiveGrey >= 2) {
-      tags.push('連續未練習');
-    }
-    if (consecutiveGrey >= 3) {
-      streakNotes.push(`最近 ${consecutiveGrey} 場皆灰`);
+    if (consecutiveBlueLow >= 2) {
+      const idx = tags.indexOf('可能需要鷹架');
+      if (idx >= 0) tags[idx] = '可能需要鷹架（連續）';
+      else tags.push('可能需要鷹架（連續）');
+      streakNotes.push(`連續 ${consecutiveBlueLow} 場低分＋藍色`);
     }
 
-    let consecutiveLow = 0;
+    let consecutiveGray = 0;
     for (const h of combined) {
-      if (h.score !== null && h.score < threshold) consecutiveLow++;
+      if (h.mood === 'gray_fog') consecutiveGray++;
       else break;
     }
-    if (consecutiveLow >= 2) streakNotes.push(`連續 ${consecutiveLow} 場低於 ${threshold}`);
-
-    let consecutiveRedOrFog = 0;
-    for (const h of combined) {
-      if (h.mood === 'red_volcano' || h.mood === 'gray_fog') consecutiveRedOrFog++;
-      else break;
+    if (consecutiveGray >= 3) {
+      tags.push('持續疏離');
+      streakNotes.push(`最近 ${consecutiveGray} 場皆灰`);
     }
-    if (consecutiveRedOrFog >= 2) streakNotes.push(`連續 ${consecutiveRedOrFog} 場紅／霧`);
 
-    if (tags.length > 0 || streakNotes.length > 0) {
+    let practiceGroup: string | null = null;
+    if (lowScore && st.mood === 'blue_caterpillar') {
+      practiceGroup = hasPracticed ? '有練習＋低分＋藍色' : '沒練習＋低分＋藍色';
+    } else if (st.mood === 'green_flow' && hasPracticed && (st.hasWrongInExam || lowScore)) {
+      practiceGroup = '有練習＋答錯＋綠色';
+    }
+
+    if (tags.length > 0 || streakNotes.length > 0 || practiceGroup !== null) {
       entries.push({
         uid: st.uid,
         studentId: st.studentId,
@@ -566,14 +763,17 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
         maskedName: maskStudentName(st.name),
         classId: st.classId,
         score: st.score,
+        percentage: pct,
         mood: st.mood,
         preExamStatus: st.preExamStatus,
+        preExamCoverage: st.coverage ?? 0,
+        practiceGroup,
         tags,
         streakNotes,
       });
     }
   }
-  return entries.sort((a, b) => b.tags.length - a.tags.length || (a.score ?? 999) - (b.score ?? 999));
+  return entries.sort((a, b) => b.tags.length - a.tags.length || (a.percentage ?? 999) - (b.percentage ?? 999));
 }
 
 export function csvTextCell(value: unknown): string {
@@ -642,11 +842,22 @@ export interface ResearchCsvRow {
   sittingLabel: string;
   startsAt: number | null;
   mood: MoodCode | null;
+  moodSubmittedAt?: number | null;
   preExamStatus: PreExamStatus;
+  coverage?: number | null;
+  passedUnits?: boolean;
+  completedActivities?: boolean;
   score: number | null;
+  percentage?: number | null;
   correct: number | null;
   answers: Record<string, string>;
+  itemPreExam?: Record<string, ItemPreExamStatus>;
 }
+
+const fmtTaipeiTime = (ms: number | null | undefined) =>
+  typeof ms === 'number' && Number.isFinite(ms)
+    ? new Date(ms).toLocaleString('sv-SE', { timeZone: 'Asia/Taipei' })
+    : '';
 
 export function researchCsv(
   view: ZExamView,
@@ -659,21 +870,37 @@ export function researchCsv(
     '場次',
     '開考時間',
     '情緒狀態',
+    '情緒填答時間',
     '考前練習',
+    '考前練習覆蓋率(%)',
+    '次單元考前達標',
+    '圖表考前走完',
     '總分',
+    '分數百分比',
     '答對題數',
-    ...view.items.map((_, i) => `Q${i + 1}`),
+    ...view.items.flatMap((_, i) => [`Q${i + 1}_作答`, `Q${i + 1}_對錯`, `Q${i + 1}_考前練習`]),
   ];
   const data = rows.map((r) => [
     ...(deidentified ? [r.researchId || ''] : [r.studentId || '', r.name || '']),
     r.classId,
     r.sittingLabel,
-    r.startsAt ? new Date(r.startsAt).toLocaleString('sv-SE', { timeZone: 'Asia/Taipei' }) : '',
+    fmtTaipeiTime(r.startsAt),
     r.mood || '',
+    fmtTaipeiTime(r.moodSubmittedAt),
     r.preExamStatus,
+    r.coverage ?? null,
+    r.passedUnits === undefined ? '' : r.passedUnits ? '是' : '否',
+    r.completedActivities === undefined ? '' : r.completedActivities ? '是' : '否',
     r.score,
+    r.percentage ?? null,
     r.correct,
-    ...view.items.map((it) => r.answers[it.questionId] || ''),
+    ...view.items.flatMap((it) => {
+      const ans = (r.answers[it.questionId] || '').trim();
+      const hasRes = r.score !== null || ans !== '';
+      const isRight = !hasRes ? '' : ans === it.answer ? 1 : 0;
+      const itemSt = r.itemPreExam?.[it.questionId] || 'none';
+      return [ans, isRight, itemSt];
+    }),
   ]);
   return formatCsvLines(headers, data);
 }

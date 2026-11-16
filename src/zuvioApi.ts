@@ -3,8 +3,8 @@ import {
   eligibility, shuffle, optionOrderFor,
 } from '../shared/zuvio';
 import {
-  MOOD_CODES, analyzeExam, buildCareList, itemAnalysisCsv, researchCsv, summarizeMoodResults,
-  type CareListEntry, type ExamItemAnalysis, type MoodCode, type MoodReportSummary, type PreExamStatus,
+  MOOD_CODES, analyzeExam, buildCareList, calcScorePercentage, itemAnalysisCsv, researchCsv, summarizeMoodResults, summarizePreExamReport,
+  type CareListEntry, type ExamItemAnalysis, type MoodCode, type MoodReportSummary, type PreExamDetailReport, type PreExamStatus,
 } from '../shared/zuvioExt';
 
 export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
@@ -16,6 +16,7 @@ export interface FullZuvioReport {
   analysis: ExamItemAnalysis;
   moodSummary: MoodReportSummary;
   preExamCounts: Record<PreExamStatus, number>;
+  preExamDetail?: PreExamDetailReport;
 }
 export interface MoodLiveState {
   state: { open: boolean; examId: string; sittingId: string; sittingLabel?: string; classIds: string[]; closesAt: number } | null;

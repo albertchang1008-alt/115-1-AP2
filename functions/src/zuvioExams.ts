@@ -2,20 +2,21 @@
  * Zuvio 出題與成績回收（規格 docs/zuvio-exam/ZUVIO_EXAM_SPEC_1.16.0.md 第 9 節；9.10 考卷＋場次、9.11 出題介面）。
  * 全部教師限定；Firestore 規則維持預設全拒，只經這裡存取。
  */
-import { Firestore } from 'firebase-admin/firestore';
+import { Firestore, Timestamp } from 'firebase-admin/firestore';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { createHash, createHmac, randomUUID } from 'node:crypto';
 import { featureAccess } from './features';
 import { reservedQuestionIds } from './assessments';
-import { Question, Unit, chapterName, forClass, isReviewUnit, unitVisibility, safeId, safeCode } from '../../shared/model';
+import { Question, Unit, chapterActivityKey, chapterName, forClass, isReviewUnit, unitVisibility, safeId, safeCode } from '../../shared/model';
 import {
   ZExamView, ZItem, ZParsed, ZBlock, ZResult, ZCounts, ZRosterInfo, LIMITS, CSV_FORMAT,
   eligibility, examCsv, matchExam, buildResults, examReport, compareSittings,
 } from '../../shared/zuvio';
 import {
   MOOD_BY_CODE, MOOD_CODES, MOOD_QUESTION, MOOD_STUDENT_STATES, MOOD_SUBNOTE,
-  analyzeExam, buildCareList, classifyPreExamPractice, itemAnalysisCsv, researchCsv, summarizeMoodResults,
-  type MoodCode, type PreExamStatus,
+  analyzeExam, buildCareList, calcScorePercentage, classifyPreExamPractice,
+  itemAnalysisCsv, researchCsv, summarizeMoodResults, summarizePreExamReport,
+  type ItemPreExamStatus, type MoodCode, type PreExamStatus,
 } from '../../shared/zuvioExt';
 
 function fail(m: string): never { throw new HttpsError('failed-precondition', m); }
@@ -620,6 +621,12 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     attemptCount: number;
     passedUnitCount: number;
     activityCount: number;
+    itemStatuses: Record<string, ItemPreExamStatus>;
+    practicedItemCount: number;
+    practicedWrongItemCount: number;
+    coverage: number;
+    passedUnits: boolean;
+    completedActivities: boolean;
   }
 
   const tsMs = (v: any): number => {
@@ -629,40 +636,89 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     return Number.POSITIVE_INFINITY;
   };
 
+  function allowedActivityKeysForUnits(published: any, unitIds: string[]): string[] {
+    const unitSet = new Set(unitIds);
+    const keys = new Set<string>();
+    const units = (published?.units || []) as Unit[];
+    const chNames = new Set(units.filter((u) => unitSet.has(u.id)).map((u) => chapterName(u)));
+    const chapters = published?.chapters || {};
+    for (const ch of chNames) {
+      const acts = chapters[ch]?.activities || [];
+      for (const a of acts) {
+        if (!a?.id) continue;
+        keys.add(chapterActivityKey(ch, a.id));
+        keys.add(a.id);
+      }
+    }
+    for (const u of units) {
+      if (!unitSet.has(u.id)) continue;
+      for (const a of (u as any).activities || []) {
+        if (!a?.id) continue;
+        keys.add(`${u.id}_${a.id}`);
+        keys.add(chapterActivityKey(chapterName(u), a.id));
+        keys.add(a.id);
+      }
+    }
+    return [...keys];
+  }
+
   async function ensureSittingPrep(
     courseId: string,
     c: any,
     ref: FirebaseFirestore.DocumentReference,
     sitting: any,
     unitIds: string[],
+    questionIds: string[],
   ): Promise<Record<string, SittingPrepRecord>> {
     const startsAt = typeof sitting.startsAt === 'number' ? sitting.startsAt : Date.now();
     const unitIdsKey = [...new Set(unitIds)].sort().join(',');
+    const questionIdsKey = [...new Set(questionIds)].sort().join(',');
     const prepRef = ref.collection('prep').doc(sitting.id);
     const cached = await prepRef.get();
     if (cached.exists) {
       const d = cached.data()!;
-      if (d.startsAt === startsAt && d.unitIdsKey === unitIdsKey && d.students) {
+      if (
+        d.startsAt === startsAt &&
+        d.unitIdsKey === unitIdsKey &&
+        d.questionIdsKey === questionIdsKey &&
+        d.finalized === true &&
+        d.students
+      ) {
         return d.students as Record<string, SittingPrepRecord>;
       }
     }
 
     const roster = await classRosterDocs(courseId, c, sitting.classIds);
     const uniqueUnits = [...new Set(unitIds)];
-    const attemptsByUid = new Map<string, Array<{ unitId: string; at: number }>>();
+    const uniqueQuestions = [...new Set(questionIds)];
+    const allowedActivityIds = allowedActivityKeysForUnits(c.published, uniqueUnits);
+    const attemptsByUid = new Map<
+      string,
+      Array<{ unitId: string; at: number; answers: Array<{ questionId: string; correct: boolean }> }>
+    >();
+    const cutoffTs = Timestamp.fromMillis(startsAt);
     for (const classId of sitting.classIds as string[]) {
       for (const unitId of uniqueUnits) {
         const snap = await db
           .collection(`courses/${courseId}/attempts`)
           .where('classId', '==', classId)
           .where('unitId', '==', unitId)
+          .where('receivedAt', '<', cutoffTs)
+          .orderBy('receivedAt', 'desc')
+          .limit(5000)
           .get();
         for (const doc of snap.docs) {
           const ad = doc.data();
           if (!ad?.uid) continue;
-          const at = Math.min(tsMs(ad.receivedAt), tsMs(ad.clientAt));
+          const at = tsMs(ad.receivedAt);
+          if (!Number.isFinite(at) || at >= startsAt) continue;
+          const answers = Array.isArray(ad.answers)
+            ? ad.answers
+                .map((x: any) => ({ questionId: String(x?.questionId || ''), correct: Boolean(x?.correct) }))
+                .filter((x: { questionId: string }) => x.questionId)
+            : [];
           const arr = attemptsByUid.get(ad.uid) || [];
-          arr.push({ unitId: ad.unitId, at });
+          arr.push({ unitId: ad.unitId, at, answers });
           attemptsByUid.set(ad.uid, arr);
         }
       }
@@ -684,6 +740,8 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const cls = classifyPreExamPractice({
         startsAt,
         unitIds: uniqueUnits,
+        questionIds: uniqueQuestions,
+        allowedActivityIds,
         attempts: r.uid ? attemptsByUid.get(r.uid) || [] : [],
         progress: r.uid ? progressByUid.get(r.uid) || null : null,
       });
@@ -696,22 +754,35 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       };
     }
 
-    await prepRef.set({ startsAt, unitIdsKey, computedAt: Date.now(), students });
+    const finalized = Date.now() >= startsAt;
+    await prepRef.set({
+      startsAt,
+      unitIdsKey,
+      questionIdsKey,
+      finalized,
+      computedAt: Date.now(),
+      students,
+    });
     return students;
   }
 
   async function sittingMoods(courseId: string, examId: string, sittingId: string) {
     const snap = await moodResponsesCol(courseId, examId, sittingId).get();
-    const byUid = new Map<string, { uid: string; studentId: string; classId: string; mood: MoodCode }>();
+    const byUid = new Map<string, { uid: string; studentId: string; classId: string; mood: MoodCode; submittedAt: number | null }>();
     const byStudentId = new Map<string, MoodCode>();
+    const submittedAtByStudentId = new Map<string, number | null>();
     for (const d of snap.docs) {
       const x = d.data();
       if (MOOD_CODES.includes(x.mood)) {
-        byUid.set(d.id, { uid: d.id, studentId: x.studentId || '', classId: x.classId || '', mood: x.mood });
-        if (x.studentId) byStudentId.set(x.studentId, x.mood);
+        const subAt = typeof x.submittedAt === 'number' && Number.isFinite(x.submittedAt) ? x.submittedAt : null;
+        byUid.set(d.id, { uid: d.id, studentId: x.studentId || '', classId: x.classId || '', mood: x.mood, submittedAt: subAt });
+        if (x.studentId) {
+          byStudentId.set(x.studentId, x.mood);
+          submittedAtByStudentId.set(x.studentId, subAt);
+        }
       }
     }
-    return { byUid, byStudentId };
+    return { byUid, byStudentId, submittedAtByStudentId };
   }
 
   async function courseResearchSalt(courseId: string): Promise<string> {
@@ -746,9 +817,12 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const snap = await ref.get();
     if (!snap.exists) fail('找不到考卷');
     const e = snap.data()!;
-    const sittings = ids.map((id: string) => (e.sittings || []).find((s: any) => s.id === id));
-    if (sittings.some((s: any) => !s)) fail('找不到場次');
-    if (req.data.classId && !sittings.some((s: any) => s.classIds.includes(req.data.classId))) bad('班級不在所選場次範圍');
+    const rawSittings = ids.map((id: string) => (e.sittings || []).find((s: any) => s.id === id));
+    if (rawSittings.some((s: any) => !s)) fail('找不到場次');
+    if (req.data.classId && !rawSittings.some((s: any) => s.classIds.includes(req.data.classId))) bad('班級不在所選場次範圍');
+    const sittings = [...rawSittings].sort(
+      (a: any, b: any) => (a.startsAt || 0) - (b.startsAt || 0) || (a.date || '').localeCompare(b.date || ''),
+    );
     const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
     const maskedView = maskView(view, masked);
     const maps = await Promise.all(sittings.map((s: any) => sittingResults(ref, s)));
@@ -759,13 +833,19 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const analysis = analyzeExam(maskedView, all);
 
     const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const questionIds = (e.items || []).map((it: ZItem) => it.questionId) as string[];
     const [prepList, moodList] = await Promise.all([
-      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
+      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds, questionIds))),
       Promise.all(sittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
     ]);
 
+    const itemCount = maskedView.items.length;
+    const maxScore = itemCount * (maskedView.score || 1);
     const preExamCounts: Record<PreExamStatus, number> = { passed: 0, practiced: 0, infographic_only: 0, none: 0 };
-    const moodPairs: Array<{ uid: string; mood?: MoodCode; score: number; answers: Record<string, string> }> = [];
+    const moodPairs: Array<{ uid: string; mood?: MoodCode; score: number; correct: number; percentage: number; answers: Record<string, string> }> = [];
+    const preExamRows: Array<{ answers: Record<string, string>; percentage: number | null; coverage: number; itemStatuses: Record<string, ItemPreExamStatus> }> = [];
+    let laterPairs: Array<{ uid: string; mood?: MoodCode; score: number; correct: number; percentage: number; answers: Record<string, string> }> | undefined;
+
     sittings.forEach((_s: any, idx: number) => {
       const resMap = maps[idx];
       const prepMap = prepList[idx];
@@ -774,23 +854,49 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
         if (req.data.classId && rec.classId !== req.data.classId) continue;
         preExamCounts[rec.status]++;
       }
+      const curSittingMoodPairs: typeof moodPairs = [];
       for (const [studentId, res] of resMap.entries()) {
         if (req.data.classId && res.classId !== req.data.classId) continue;
-        moodPairs.push({
+        const pct = calcScorePercentage(res.correct, itemCount, res.score, maxScore) ?? 0;
+        const pair = {
           uid: studentId,
           mood: byStudentId.get(studentId),
           score: res.score,
+          correct: res.correct,
+          percentage: pct,
           answers: res.answers,
+        };
+        moodPairs.push(pair);
+        curSittingMoodPairs.push(pair);
+        const prep = prepMap[studentId];
+        preExamRows.push({
+          answers: res.answers,
+          percentage: pct,
+          coverage: prep?.coverage ?? 0,
+          itemStatuses: prep?.itemStatuses || {},
         });
+      }
+      if (sittings.length === 2 && idx === 1) {
+        laterPairs = curSittingMoodPairs;
       }
     });
 
     let prevMoods: Record<string, MoodCode> | undefined;
     if (sittings.length === 2) {
-      prevMoods = Object.fromEntries(moodList[0].byStudentId.entries());
+      prevMoods = {};
+      for (const [studentId, m] of moodList[0].byStudentId.entries()) {
+        if (req.data.classId) {
+          const rec = prepList[0][studentId];
+          const res = maps[0].get(studentId);
+          const cl = res?.classId || rec?.classId;
+          if (cl && cl !== req.data.classId) continue;
+        }
+        prevMoods[studentId] = m;
+      }
     }
-    const moodSummary = summarizeMoodResults(maskedView, moodPairs, threshold, prevMoods);
-    return { report, compare, analysis, moodSummary, preExamCounts };
+    const moodSummary = summarizeMoodResults(maskedView, moodPairs, threshold, prevMoods, laterPairs);
+    const preExamDetail = summarizePreExamReport(maskedView, preExamRows);
+    return { report, compare, analysis, moodSummary, preExamCounts, preExamDetail };
   });
 
   const zuvioCareList = onCall(options, async (req) => {
@@ -805,39 +911,92 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const snap = await ref.get();
     if (!snap.exists) fail('找不到考卷');
     const e = snap.data()!;
-    const allSittings = [...(e.sittings || [])].sort(
-      (a: any, b: any) => (b.startsAt || 0) - (a.startsAt || 0) || b.date.localeCompare(a.date),
-    );
-    const targetIdx = allSittings.findIndex((s: any) => s.id === sittingId);
-    if (targetIdx < 0) fail('找不到場次');
-    const recentSittings = allSittings.slice(targetIdx, targetIdx + 3);
-    const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const targetSitting = (e.sittings || []).find((s: any) => s.id === sittingId);
+    if (!targetSitting) fail('找不到場次');
 
-    const [resMaps, prepMaps, moodMaps] = await Promise.all([
-      Promise.all(recentSittings.map((s: any) => sittingResults(ref, s))),
-      Promise.all(recentSittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
-      Promise.all(recentSittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
+    const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const questionIds = (e.items || []).map((it: ZItem) => it.questionId) as string[];
+    const targetItemCount = (e.items || []).length;
+    const targetMaxScore = targetItemCount * (e.score || 1);
+
+    const [curRes, curPrep, curMoodObj, allExamsSnap] = await Promise.all([
+      sittingResults(ref, targetSitting),
+      ensureSittingPrep(courseId, c, ref, targetSitting, unitIds, questionIds),
+      sittingMoods(courseId, examId, sittingId),
+      db.collection(`courses/${courseId}/zuvioExams`).get(),
     ]);
 
-    const curPrep = prepMaps[0];
-    const curRes = resMaps[0];
-    const curMood = moodMaps[0].byStudentId;
+    const targetStart = typeof targetSitting.startsAt === 'number' ? targetSitting.startsAt : Date.now();
+    const candidateSittings: Array<{
+      examId: string;
+      examRef: FirebaseFirestore.DocumentReference;
+      exam: any;
+      sitting: any;
+      startsAt: number;
+    }> = [];
+    for (const d of allExamsSnap.docs) {
+      const ex = d.data();
+      if (ex?.archived) continue;
+      for (const s of ex.sittings || []) {
+        if (d.id === examId && s.id === sittingId) continue;
+        const stAt = typeof s.startsAt === 'number' ? s.startsAt : 0;
+        if (stAt > targetStart) continue;
+        if (stAt === targetStart && (s.date || '') > (targetSitting.date || '')) continue;
+        candidateSittings.push({ examId: d.id, examRef: d.ref, exam: ex, sitting: s, startsAt: stAt });
+      }
+    }
+    candidateSittings.sort(
+      (a, b) => b.startsAt - a.startsAt || (b.sitting.date || '').localeCompare(a.sitting.date || ''),
+    );
+
+    const neededHistory = candidateSittings.filter((cs) =>
+      (cs.sitting.classIds || []).some((cl: string) => (targetSitting.classIds || []).includes(cl)),
+    ).slice(0, 6);
+
+    const histData = await Promise.all(
+      neededHistory.map(async (cs) => {
+        const [resMap, moodObj] = await Promise.all([
+          sittingResults(cs.examRef, cs.sitting),
+          sittingMoods(courseId, cs.examId, cs.sitting.id),
+        ]);
+        const hItemCount = (cs.exam.items || []).length;
+        const hMaxScore = hItemCount * (cs.exam.score || 1);
+        return { cs, resMap, moodMap: moodObj.byStudentId, hItemCount, hMaxScore };
+      }),
+    );
+
     const inputs = Object.values(curPrep)
       .filter((rec) => !req.data.classId || rec.classId === req.data.classId)
-      .map((rec) => ({
-        uid: rec.uid,
-        studentId: rec.studentId,
-        name: rec.name,
-        classId: rec.classId,
-        score: curRes.get(rec.studentId)?.score ?? null,
-        mood: curMood.get(rec.studentId) ?? null,
-        preExamStatus: rec.status,
-        recentHistory: recentSittings.slice(1).map((_s: any, i: number) => ({
-          score: resMaps[i + 1].get(rec.studentId)?.score ?? null,
-          mood: moodMaps[i + 1].byStudentId.get(rec.studentId) ?? null,
-          preExamStatus: prepMaps[i + 1][rec.studentId]?.status || 'none',
-        })),
-      }));
+      .map((rec) => {
+        const res = curRes.get(rec.studentId);
+        const pct = res ? calcScorePercentage(res.correct, targetItemCount, res.score, targetMaxScore) : null;
+        const eligibleHist = histData
+          .filter((h) => (h.cs.sitting.classIds || []).includes(rec.classId))
+          .slice(0, 2);
+        return {
+          uid: rec.uid,
+          studentId: rec.studentId,
+          name: rec.name,
+          classId: rec.classId,
+          score: res?.score ?? null,
+          percentage: pct,
+          mood: curMoodObj.byStudentId.get(rec.studentId) ?? null,
+          preExamStatus: rec.status,
+          practicedItemCount: rec.practicedItemCount,
+          coverage: rec.coverage,
+          hasWrongInExam: res ? res.correct < targetItemCount : false,
+          recentHistory: eligibleHist.map((h) => {
+            const hRes = h.resMap.get(rec.studentId);
+            const hPct = hRes ? calcScorePercentage(hRes.correct, h.hItemCount, hRes.score, h.hMaxScore) : null;
+            return {
+              score: hRes?.score ?? null,
+              percentage: hPct,
+              mood: h.moodMap.get(rec.studentId) ?? null,
+              preExamStatus: 'none' as PreExamStatus,
+            };
+          }),
+        };
+      });
 
     return { entries: buildCareList(inputs, threshold), threshold };
   });
@@ -874,15 +1033,19 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const deidentified = kind === 'researchAnon';
     const salt = deidentified ? await courseResearchSalt(courseId) : '';
     const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
+    const questionIds = (e.items || []).map((it: ZItem) => it.questionId) as string[];
     const [prepList, moodList] = await Promise.all([
-      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds))),
+      Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds, questionIds))),
       Promise.all(sittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
     ]);
 
+    const itemCount = maskedView.items.length;
+    const maxScore = itemCount * (maskedView.score || 1);
     const rows = sittings.flatMap((s: any, idx: number) => {
       const resMap = maps[idx];
       const prepMap = prepList[idx];
       const moodMap = moodList[idx].byStudentId;
+      const subAtMap = moodList[idx].submittedAtByStudentId;
       const allStudentIds = new Set([...Object.keys(prepMap), ...resMap.keys()]);
       return [...allStudentIds]
         .map((studentId) => {
@@ -898,10 +1061,16 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
             sittingLabel: s.label,
             startsAt: typeof s.startsAt === 'number' ? s.startsAt : null,
             mood: moodMap.get(studentId) ?? null,
+            moodSubmittedAt: subAtMap.get(studentId) ?? null,
             preExamStatus: prep?.status || 'none',
+            coverage: prep?.coverage ?? 0,
+            passedUnits: prep?.passedUnits ?? false,
+            completedActivities: prep?.completedActivities ?? false,
             score: res?.score ?? null,
+            percentage: res ? calcScorePercentage(res.correct, itemCount, res.score, maxScore) : null,
             correct: res?.correct ?? null,
             answers: res?.answers || {},
+            itemPreExam: prep?.itemStatuses || {},
           };
         })
         .filter((x): x is NonNullable<typeof x> => !!x);

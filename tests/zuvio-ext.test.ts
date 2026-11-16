@@ -10,13 +10,18 @@ import {
   type ZResult,
 } from '../shared/zuvio';
 import {
+  MOOD_QUESTION,
+  MOOD_STATES,
+  MOOD_SUBNOTE,
   analyzeExam,
-  classifyPreExamPractice,
-  summarizeMoodResults,
   buildCareList,
-  maskStudentName,
+  calcScorePercentage,
+  classifyPreExamPractice,
   itemAnalysisCsv,
+  maskStudentName,
   researchCsv,
+  summarizeMoodResults,
+  summarizePreExamReport,
 } from '../shared/zuvioExt';
 
 function makeTinyView(nItems = 2): ZExamView {
@@ -211,9 +216,12 @@ test('summarizeMoodResults & buildCareList：門檻切換、跨場變化與 4 �
       studentId: 'S001',
       name: '王小明',
       classId: 'A',
-      score: 70,
-      mood: 'red_volcano',
+      score: 90,
+      percentage: 90,
+      mood: 'yellow_rubberband',
       preExamStatus: 'passed',
+      practicedItemCount: 2,
+      coverage: 100,
     },
     {
       uid: 'u2',
@@ -221,11 +229,13 @@ test('summarizeMoodResults & buildCareList：門檻切換、跨場變化與 4 �
       name: '李華',
       classId: 'A',
       score: 65,
-      mood: 'gray_fog',
+      percentage: 65,
+      mood: 'blue_caterpillar',
       preExamStatus: 'none',
+      practicedItemCount: 0,
+      coverage: 0,
       recentHistory: [
-        { score: 70, mood: 'gray_fog', preExamStatus: 'none' },
-        { score: 85, mood: 'green_flow', preExamStatus: 'none' },
+        { score: 70, percentage: 70, mood: 'blue_caterpillar', preExamStatus: 'none' },
       ],
     },
     {
@@ -233,22 +243,54 @@ test('summarizeMoodResults & buildCareList：門檻切換、跨場變化與 4 �
       studentId: 'S003',
       name: '陳大同',
       classId: 'A',
+      score: 60,
+      percentage: 60,
+      mood: 'green_flow',
+      preExamStatus: 'practiced',
+      practicedItemCount: 1,
+      coverage: 50,
+      hasWrongInExam: true,
+    },
+    {
+      uid: 'u4',
+      studentId: 'S004',
+      name: '林小美',
+      classId: 'A',
+      score: 88,
+      percentage: 88,
+      mood: 'gray_fog',
+      preExamStatus: 'passed',
+      recentHistory: [
+        { score: 90, percentage: 90, mood: 'gray_fog', preExamStatus: 'passed' },
+        { score: 75, percentage: 75, mood: 'gray_fog', preExamStatus: 'practiced' },
+      ],
+    },
+    {
+      uid: 'u5',
+      studentId: 'S005',
+      name: '張小強',
+      classId: 'A',
       score: 95,
+      percentage: 95,
       mood: 'green_flow',
       preExamStatus: 'passed',
     },
   ]);
 
-  assert.equal(care.length, 2);
+  assert.equal(care.length, 4);
   assert.equal(maskStudentName('王小明'), '王○明');
   assert.equal(maskStudentName('李華'), '李○');
   const c1 = care.find((c) => c.uid === 'u1')!;
   const c2 = care.find((c) => c.uid === 'u2')!;
-  assert.ok(c1.tags.includes('情緒：小火山'));
-  assert.ok(c1.tags.includes('已達標仍低分'));
-  assert.ok(c2.tags.includes('低分＋低能量／霧'));
-  assert.ok(c2.tags.includes('連續未練習'));
-  assert.ok(c2.streakNotes.some((n) => n.includes('最近 3 場皆灰')));
+  const c3 = care.find((c) => c.uid === 'u3')!;
+  const c4 = care.find((c) => c.uid === 'u4')!;
+  assert.ok(c1.tags.includes('表現好但緊繃'));
+  assert.ok(c2.tags.includes('可能需要鷹架（連續）'));
+  assert.equal(c2.practiceGroup, '沒練習＋低分＋藍色');
+  assert.ok(c3.tags.includes('自評與表現有落差'));
+  assert.equal(c3.practiceGroup, '有練習＋答錯＋綠色');
+  assert.ok(c4.tags.includes('持續疏離'));
+  assert.ok(c4.streakNotes.some((n) => n.includes('最近 3 場皆灰')));
 });
 
 test('CSV 匯出：文字欄加單引號防公式注入且去識別不含姓名與學號', () => {
@@ -304,4 +346,157 @@ test('CSV 匯出：文字欄加單引號防公式注入且去識別不含姓名�
   );
   assert.ok(namedCsv.includes('"\'B12345"'));
   assert.ok(namedCsv.includes('"\'王小明"'));
+});
+
+
+test('F1：逐題考前練習（練過／練過且答錯過／沒練過）、同單元別題不誤算、聚合報表與研究CSV欄位', () => {
+  // 同單元僅練過別題 q_other，未練考卷 q1/q2 -> status 應為 none，且 coverage=0
+  const onlyOther = classifyPreExamPractice({
+    startsAt: 1000,
+    unitIds: ['u1'],
+    questionIds: ['q1', 'q2'],
+    allowedActivityIds: [],
+    attempts: [{ unitId: 'u1', at: 500, answers: [{ questionId: 'q_other', correct: true }] }],
+    progress: {},
+  });
+  assert.equal(onlyOther.status, 'none');
+  assert.equal(onlyOther.coverage, 0);
+  assert.deepEqual(onlyOther.itemStatuses, { q1: 'none', q2: 'none' });
+
+  // q1 練過且答對，q2 練過且曾答錯，q3 沒練過
+  const mixed = classifyPreExamPractice({
+    startsAt: 1000,
+    unitIds: ['u1', 'u2'],
+    questionIds: ['q1', 'q2', 'q3'],
+    allowedActivityIds: ['chapter:C1_act1'],
+    attempts: [
+      {
+        unitId: 'u1',
+        at: 400,
+        answers: [
+          { questionId: 'q1', correct: true },
+          { questionId: 'q2', correct: false },
+        ],
+      },
+      { unitId: 'u2', at: 600, answers: [{ questionId: 'q2', correct: true }] },
+    ],
+    progress: {
+      units: { u1: { best: 80, attempts: 1, updatedAt: 400 } },
+      activityHistory: { 'chapter:C1_act1': { opens: 1, completions: 1, firstCompletedAt: 700 } },
+    },
+  });
+  assert.equal(mixed.status, 'practiced');
+  assert.equal(mixed.practicedItemCount, 2);
+  assert.equal(mixed.practicedWrongItemCount, 1);
+  assert.equal(mixed.coverage, 66.67);
+  assert.equal(mixed.passedUnits, false);
+  assert.equal(mixed.completedActivities, true);
+  assert.deepEqual(mixed.itemStatuses, { q1: 'practiced', q2: 'practiced_wrong', q3: 'none' });
+
+  // 聚合報表：練過 vs 沒練過答對率 + 覆蓋率區間
+  const view = makeTinyView(2);
+  const preDetail = summarizePreExamReport(view, [
+    { answers: { q1: 'a', q2: 'a' }, percentage: 100, coverage: 100, itemStatuses: { q1: 'practiced', q2: 'practiced' } },
+    { answers: { q1: 'a', q2: 'b' }, percentage: 50, coverage: 50, itemStatuses: { q1: 'practiced_wrong', q2: 'none' } },
+    { answers: { q1: 'b', q2: 'b' }, percentage: 0, coverage: 0, itemStatuses: { q1: 'none', q2: 'none' } },
+  ]);
+  assert.equal(preDetail.avgCoverage, 50);
+  assert.equal(preDetail.byQuestion[0].practicedCount, 2);
+  assert.equal(preDetail.byQuestion[0].practicedAccuracy, 1);
+  assert.equal(preDetail.byQuestion[0].unpracticedCount, 1);
+  assert.equal(preDetail.byQuestion[0].unpracticedAccuracy, 0);
+
+  // 研究 CSV 包含填答時間、百分比、覆蓋率、次單元達標、圖表走完、逐題對錯與逐題考前練習
+  const csv = researchCsv(
+    view,
+    [
+      {
+        researchId: 'R1',
+        classId: 'A',
+        sittingLabel: 'S1',
+        startsAt: 1700000000000,
+        mood: 'green_flow',
+        moodSubmittedAt: 1700000060000,
+        preExamStatus: 'practiced',
+        coverage: 50,
+        passedUnits: false,
+        completedActivities: true,
+        score: 5,
+        percentage: 50,
+        correct: 1,
+        answers: { q1: 'a', q2: 'b' },
+        itemPreExam: { q1: 'practiced', q2: 'practiced_wrong' },
+      },
+    ],
+    true,
+  );
+  const headerLine = csv.split('\r\n')[0];
+  assert.ok(headerLine.includes('情緒填答時間'));
+  assert.ok(headerLine.includes('分數百分比'));
+  assert.ok(headerLine.includes('考前練習覆蓋率(%)'));
+  assert.ok(headerLine.includes('次單元考前達標'));
+  assert.ok(headerLine.includes('圖表考前走完'));
+  assert.ok(headerLine.includes('Q1_作答'));
+  assert.ok(headerLine.includes('Q1_對錯'));
+  assert.ok(headerLine.includes('Q1_考前練習'));
+  assert.ok(csv.includes('"\'practiced_wrong"'));
+});
+
+test('F3：80%門檻以百分比比較（滿分10、100、136），非原始分數', () => {
+  // 滿分 10 分：答對 1 題 (10/10 = 100%) 應為高分，原 score=10 不應誤判為低於 80
+  const tiny10 = makeTinyView(1);
+  const res10 = summarizeMoodResults(
+    tiny10,
+    [{ uid: 'u1', mood: 'green_flow', score: 10, correct: 1, percentage: calcScorePercentage(1, 1, 10, 10) ?? 0, answers: { q1: 'a' } }],
+    80,
+  );
+  assert.equal(res10.byScore.find((x) => x.code === 'green_flow')?.highCount, 1);
+  assert.equal(res10.byScore.find((x) => x.code === 'green_flow')?.lowCount, 0);
+
+  // 滿分 136 分：score=80 (58.82%) 應為低分，不應因 >=80 誤判高分
+  assert.equal(calcScorePercentage(20, 34, 80, 136), 58.82);
+  const care136 = buildCareList([
+    { uid: 'u2', studentId: 'S2', name: '張生', classId: 'A', score: 80, percentage: 58.82, mood: 'green_flow', preExamStatus: 'none' },
+  ], 80);
+  assert.equal(care136.length, 1);
+  assert.ok(care136[0].tags.includes('自評與表現有落差'));
+});
+
+test('F4：學生告知不得宣稱不記名且五狀態文字須完全符合附錄原文', () => {
+  assert.equal(MOOD_QUESTION, '剛寫完這份測驗，你現在的內在狀態最像哪一種？');
+  assert.equal(MOOD_SUBNOTE, '此題不計分，老師會看到你的選擇，用來調整教學');
+  assert.ok(!MOOD_SUBNOTE.includes('不記名') && !MOOD_SUBNOTE.includes('匿名'));
+  assert.equal(MOOD_STATES[0].label, '像快噴發的火山（煩躁、不甘心、覺得題目很刁鑽）');
+  assert.equal(MOOD_STATES[1].feedback, '你已經全力以赴了，現在可以先把橡皮筋放鬆，看看哪些觀念其實比你以為的更穩固。');
+  assert.equal(MOOD_STATES[4].teacherNote, '情緒隔離或科目疏離');
+});
+
+test('F7：兩場情緒轉變只配對後場一次、去重學號不膨脹', () => {
+  const view = makeTinyView(1);
+  const allPairs = [
+    { uid: 'S1', mood: 'blue_caterpillar' as const, score: 50, correct: 0, percentage: 0, answers: { q1: 'b' } },
+    { uid: 'S1', mood: 'green_flow' as const, score: 100, correct: 1, percentage: 100, answers: { q1: 'a' } },
+  ];
+  const laterOnly = [allPairs[1]];
+  const res = summarizeMoodResults(view, allPairs, 80, { S1: 'blue_caterpillar' }, laterOnly);
+  assert.equal(res.shifts?.totalPaired, 1);
+  assert.equal(res.shifts?.unchanged, 0);
+  assert.equal(res.shifts?.toGreen, 1);
+});
+
+test('F9：圖表考前走完僅計入考卷相關次單元', () => {
+  const res = classifyPreExamPractice({
+    startsAt: 1000,
+    unitIds: ['u1'],
+    questionIds: ['q1'],
+    allowedActivityIds: ['chapter:C1_u1act'],
+    attempts: [],
+    progress: {
+      units: {},
+      activityHistory: { unrelated_act: { opens: 1, completions: 1, firstCompletedAt: 100 } },
+    },
+  });
+  assert.equal(res.activityCount, 0);
+  assert.equal(res.completedActivities, false);
+  assert.equal(res.status, 'none');
 });
