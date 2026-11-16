@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import qrcode from 'qrcode-generator';
 
-type Status = 'present' | 'absent' | 'cancelled' | 'pending';
-type Rec = { uid: string; status: Status; signedAt?: string; via?: 'qr' | 'code'; sameDevice?: string; locked?: boolean; edited?: boolean };
+type Status = 'present' | 'absent' | 'pending';
+type Rec = { uid: string; status: Status; signedAt?: string; via?: 'qr' | 'code'; sameDevice?: string; locked?: boolean; edited?: boolean; editedAt?: string };
 type Session = {
   id: string; date: string; weekday: string; period: number; start: string; className: string; mailed: boolean; backfilled?: boolean;
   durationSec: number; codeSec: number; qrSec: number; records: Rec[];
-  counts: { present: number; absent: number; cancelled: number };
+  counts: { present: number; absent: number };
   live?: { signed: number; total: number; remainSec: number; code: string; codeRemainSec: number; qrRemainSec: number; token: string };
 };
 type Student = { uid: string; seat: number; studentId: string; name: string; classId: string; email: string };
@@ -22,7 +22,7 @@ export type AttendanceSampleData = {
   me: string;
 };
 
-const statusText: Record<Status, string> = { present: '出席', absent: '曠課', cancelled: '曠課已取消', pending: '尚未簽到' };
+const statusText: Record<Status, string> = { present: '準時', absent: '未到', pending: '尚未簽到' };
 const md = (s: Session) => `${Number(s.date.slice(5, 7))}/${Number(s.date.slice(8))}（${s.weekday}）`;
 const hm = (t?: string) => (t ? t.slice(0, 5) : '');
 const clock = (sec: number) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
@@ -89,9 +89,9 @@ function ScanPage({ data, kind }: { data: AttendanceSampleData; kind: ScanKind }
         {kind === 'notclass' && <>
           <div className="att-mark att-mark-stop" aria-hidden="true">×</div>
           <h1>你不在這一節點名的班級</h1>
-          <p>沒有簽到。這一節點名的班級是「示範乙班」。</p>
-          <p>你登入的帳號：{who}，示範甲班。</p>
-          <p>如果班級有誤，請直接告訴老師。</p>
+          <p>沒有簽到。這一節點名的名單裡沒有你。</p>
+          <p>你登入的帳號：{who}。</p>
+          <p>如果有錯誤，請直接告訴老師。</p>
           <a className="att-btn" href="#/view/my">看我的出缺席</a>
         </>}
       </section>
@@ -146,15 +146,14 @@ function MyAttendance({ data }: { data: AttendanceSampleData }) {
       <a className="att-back" href="#/view/home-input">‹ 回首頁</a>
       <h1>我的出缺席</h1>
       <div className="att-stats">
-        <div><b>{n('present')}</b><span>出席</span></div>
-        <div><b>{n('absent')}</b><span>曠課</span></div>
-        <div><b>{n('cancelled')}</b><span>曠課已取消</span></div>
+        <div><b>{n('present')}</b><span>準時</span></div>
+        <div><b>{n('absent')}</b><span>未到</span></div>
       </div>
       <ul className="att-list">
         {rows.map(({ s, r }) => <li key={s.id}><span>{md(s)}第 {s.period} 節</span><StatusPill status={r.status} time={r.signedAt} /></li>)}
       </ul>
       <p>對紀錄有疑問，請直接洽老師。</p>
-      <p className="att-note" data-secondary>老師修改紀錄後，這裡會跟著更新。出席只做紀錄，不計入成績。</p>
+      <p className="att-note" data-secondary>老師修改紀錄後，這裡會跟著更新。點名只做紀錄，不計入成績。</p>
     </main>
   );
 }
@@ -218,7 +217,7 @@ function SessionList({ data, current }: { data: AttendanceSampleData; current: s
         {[...data.sessions].reverse().map((s) => <li key={s.id} className={s.id === current ? 'current' : ''}>
           <strong>{md(s)}第 {s.period} 節</strong><span>{s.className}{s.backfilled ? '・補建' : ''}</span>
           {s.live ? <em className="att-tag live">點名中 {s.live.signed}／{s.live.total}</em> : <>
-            <span>出席 {s.counts.present}　曠課 {s.counts.absent}　已取消 {s.counts.cancelled}</span>
+            <span>準時 {s.counts.present}　未到 {s.counts.absent}</span>
             <em className={`att-tag ${s.mailed ? 'sent' : 'todo'}`}>{s.mailed ? '通知已寄' : '尚未確認寄出'}</em>
           </>}
         </li>)}
@@ -230,17 +229,17 @@ function Roster({ data }: { data: AttendanceSampleData }) {
   const s = data.sessions[4];
   const name = (uid: string) => data.students.find((x) => x.uid === uid)!.name;
   // 樣張把需要注意的列排到前面，其餘照座號。
-  const weight = (r: Rec) => (r.sameDevice ? 0 : r.status === 'absent' ? 1 : r.status === 'cancelled' ? 2 : 3);
+  const weight = (r: Rec) => (r.sameDevice ? 0 : r.status === 'absent' ? 1 : r.edited ? 2 : 3);
   const rows = data.students.map((st) => ({ st, r: s.records.find((x) => x.uid === st.uid)! })).sort((a, b) => weight(a.r) - weight(b.r) || a.st.seat - b.st.seat).slice(0, 15);
   return (
     <section className="panel att-roster">
       <div className="att-row-head">
         <div><h2>{md(s)}第 {s.period} 節　{s.className}</h2>
-          <p className="att-chips"><span className="att-pill att-present">出席 {s.counts.present}</span><span className="att-pill att-absent">曠課 {s.counts.absent}</span><span className="att-pill att-cancelled">曠課已取消 {s.counts.cancelled}</span><span className="muted">應到 60・09:10 開始，1 分鐘後自動結束</span></p></div>
-        <div className="att-actions"><button>匯出本節 CSV</button><button className="primary">確認並寄出（曠課 {s.counts.absent} 人）</button></div>
+          <p className="att-chips"><span className="att-pill att-present">準時 {s.counts.present}</span><span className="att-pill att-absent">未到 {s.counts.absent}</span><span className="muted">應到 60・09:10 開始，1 分鐘後自動結束</span></p></div>
+        <div className="att-actions"><button>匯出本節 CSV</button><button className="primary">確認並寄出（未到 {s.counts.absent} 人）</button></div>
       </div>
       <div className="notice warning att-device">⚠ 同裝置提醒：示範學生 11、示範學生 12 用同一台手機簽到。只是提醒，請自行判斷；不會擋下簽到，也不會寫進通知信。</div>
-      <div className="att-bulk"><span>已選 2 人</span><button>取消曠課</button><button>改回曠課</button><span className="muted">排序：需要注意的在前（樣張只顯示前 15 列，共 60 列）</span></div>
+      <div className="att-bulk"><span>已選 2 人</span><button>改為準時</button><button>改為未到</button><span className="muted">排序：需要注意的在前（樣張只顯示前 15 列，共 60 列）</span></div>
       <div className="att-table-wrap">
         <table>
           <thead><tr><th></th><th>座號</th><th>學號</th><th>姓名</th><th>狀態（點一下就能改）</th><th>簽到時間</th><th>方式</th><th>提醒</th></tr></thead>
@@ -250,13 +249,13 @@ function Roster({ data }: { data: AttendanceSampleData }) {
               <td>{st.seat}</td><td>{st.studentId}</td><td>{st.name}</td>
               <td className="att-status-cell"><button className={`att-pill att-${r.status}`}>{statusText[r.status]} ▾</button>
                 {st.uid === 'demo-05' && <div className="att-pop" role="dialog" aria-label="修改狀態">
-                  <strong>示範學生 05：曠課 → 曠課已取消</strong>
+                  <strong>示範學生 05：未到 → 準時</strong>
                   <label>原因（可不填，只有老師看得到）<input defaultValue="手機故障，已當面確認在場" /></label>
-                  <div><button className="primary">取消曠課</button><button>不改</button></div>
+                  <div><button className="primary">改為準時</button><button>不改</button></div>
                 </div>}
               </td>
-              <td>{r.signedAt || '—'}</td><td>{r.via === 'qr' ? '掃 QR' : r.via === 'code' ? '數字碼' : '—'}</td>
-              <td>{r.sameDevice ? `⚠ 與 ${name(r.sameDevice)} 同裝置` : r.locked ? '🔒 數字碼錯 5 次，已鎖住' : r.edited ? '已修改' : ''}</td>
+              <td>{r.signedAt || '—'}</td><td>{r.via === 'qr' ? '掃 QR' : r.via === 'code' ? '數字碼' : r.edited ? '老師修改' : '—'}</td>
+              <td>{r.sameDevice ? `⚠ 與 ${name(r.sameDevice)} 同裝置` : r.locked ? '🔒 數字碼錯 5 次，已鎖住' : r.edited ? `已修改 ${r.editedAt}` : ''}</td>
             </tr>)}
           </tbody>
         </table>
@@ -272,24 +271,24 @@ function Summary({ data }: { data: AttendanceSampleData }) {
   const rows = data.students.map((st) => {
     const recs = done.map((s) => s.records.find((r) => r.uid === st.uid)!);
     const n = (x: Status) => recs.filter((r) => r.status === x).length;
-    return { st, recs, present: n('present'), absent: n('absent'), cancelled: n('cancelled') };
-  }).sort((a, b) => b.absent - a.absent || b.cancelled - a.cancelled || a.st.seat - b.st.seat);
-  const sym: Record<Status, string> = { present: '●', absent: '✕', cancelled: '○', pending: '' };
+    return { st, recs, present: n('present'), absent: n('absent') };
+  }).sort((a, b) => b.absent - a.absent || a.st.seat - b.st.seat);
+  const sym: Record<Status, string> = { present: '●', absent: '✕', pending: '' };
   const s0 = done[4], st0 = data.students[4], st1 = data.students[6];
   const line = (st: Student, status: string, time: string, edited: string) => `1,${data.course.term},${data.course.code},${data.course.name},${s0.className},${s0.date},${s0.period},${st.studentId},${st.name},${status},${time},${edited},2026-11-16 12:10`;
   return (
     <div className="att-admin-col">
       <section className="panel">
         <div className="att-row-head">
-          <div><h2>總表</h2><p className="att-chips"><label>班級 <select defaultValue="a"><option value="a">示範甲班</option></select></label><label>排序 <select defaultValue="x"><option value="x">曠課次數多的在前</option></select></label><span className="muted">● 出席　✕ 曠課　○ 曠課已取消</span></p></div>
+          <div><h2>總表</h2><p className="att-chips"><label>班級 <select defaultValue="a"><option value="a">示範甲班</option></select></label><label>排序 <select defaultValue="x"><option value="x">未到次數多的在前</option></select></label><span className="muted">● 準時　✕ 未到　外框＝老師修改過</span></p></div>
           <div className="att-actions"><button>總表 CSV</button><button>累加用明細檔</button></div>
         </div>
         <div className="att-table-wrap">
           <table className="att-matrix">
-            <thead><tr><th>座號</th><th>學號</th><th>姓名</th>{done.map((s) => <th key={s.id}>{md(s).replace(/（.）/, '')}<br />第{s.period}節</th>)}<th>出席</th><th>曠課</th><th>已取消</th></tr></thead>
+            <thead><tr><th>座號</th><th>學號</th><th>姓名</th>{done.map((s) => <th key={s.id}>{md(s).replace(/（.）/, '')}<br />第{s.period}節</th>)}<th>準時</th><th>未到</th></tr></thead>
             <tbody>{rows.slice(0, 12).map((x) => <tr key={x.st.uid}><td>{x.st.seat}</td><td>{x.st.studentId}</td><td>{x.st.name}</td>
-              {x.recs.map((r, i) => <td key={i} className={`att-sym att-sym-${r.status}`} title={statusText[r.status]}>{sym[r.status]}</td>)}
-              <td>{x.present}</td><td className={x.absent >= 2 ? 'att-many' : ''}>{x.absent}</td><td>{x.cancelled}</td></tr>)}</tbody>
+              {x.recs.map((r, i) => <td key={i} className={`att-sym att-sym-${r.status}${r.edited ? ' att-sym-edited' : ''}`} title={statusText[r.status]}>{sym[r.status]}</td>)}
+              <td>{x.present}</td><td className={x.absent >= 2 ? 'att-many' : ''}>{x.absent}</td></tr>)}</tbody>
           </table>
         </div>
         <p className="muted">樣張只顯示前 12 位，共 60 位。</p>
@@ -303,7 +302,7 @@ function Summary({ data }: { data: AttendanceSampleData }) {
       </section>
       <section className="panel">
         <h2>累加用明細檔（每學期欄位與順序完全相同，可直接往下貼）</h2>
-        <pre className="att-csv">{[detailHeader, line(st0, '曠課', '', '否'), line(st1, '出席', '09:10:12', '否'), line(data.students[8], '曠課已取消', '', '是')].join('\n')}</pre>
+        <pre className="att-csv">{[detailHeader, line(st0, '未到', '', '否'), line(st1, '準時', '09:10:12', '否'), line(data.students[8], '準時', '', '是')].join('\n')}</pre>
         <p className="muted">學號以文字輸出（保留開頭的 0）；同一節重複匯出內容相同；不含修改原因與同裝置提醒。</p>
       </section>
     </div>
@@ -330,16 +329,16 @@ function Emails({ data }: { data: AttendanceSampleData }) {
   const link = `${data.platformUrl}#/course/${c.code}/attendance`;
   return (
     <div className="att-mails">
-      <Mail title="① 曠課通知（寄給曠課的學生本人）" from={from} to={`${st.name} <${st.email}>`} subject={`【${c.name}】${md(s)}第 ${s.period} 節紀錄為曠課`}>
+      <Mail title="① 未到通知（寄給未到的學生本人）" from={from} to={`${st.name} <${st.email}>`} subject={`【${c.name}】${md(s)}第 ${s.period} 節紀錄為未到`}>
         <p>{st.name} 同學：</p>
-        <p>{c.name}　{s.date}（{s.weekday}）第 {s.period} 節，本節紀錄為<strong>曠課</strong>。</p>
+        <p>{c.name}　{s.date}（{s.weekday}）第 {s.period} 節，本節紀錄為<strong>未到</strong>。</p>
         <p>如果對紀錄有疑問，請直接洽老師。</p>
         <p>查看我的出缺席：<a href={link}>{link}</a></p>
         <p>{c.teacherName}</p>
       </Mail>
-      <Mail title="② 更正通知（已寄過曠課通知，之後改為曠課已取消）" from={from} to={`${st2.name} <${st2.email}>`} subject={`【${c.name}】${md(s)}第 ${s.period} 節的曠課已取消`}>
+      <Mail title="② 更正通知（已寄過未到通知，之後老師改為準時）" from={from} to={`${st2.name} <${st2.email}>`} subject={`【${c.name}】${md(s)}第 ${s.period} 節的紀錄已改為準時`}>
         <p>{st2.name} 同學：</p>
-        <p>{c.name}　{s.date}（{s.weekday}）第 {s.period} 節的曠課<strong>已取消</strong>。先前寄出的曠課通知請不用理會。</p>
+        <p>{c.name}　{s.date}（{s.weekday}）第 {s.period} 節的紀錄已改為<strong>準時</strong>。先前寄出的未到通知請不用理會。</p>
         <p>查看我的出缺席：<a href={link}>{link}</a></p>
         <p>{c.teacherName}</p>
       </Mail>
@@ -347,11 +346,9 @@ function Emails({ data }: { data: AttendanceSampleData }) {
         <p>{cls.mentorName} 老師您好：</p>
         <p>以下是 {cls.name} {s.date}（{s.weekday}）在「{c.name}」的出缺席紀錄。</p>
         <h3>第 {s.period} 節</h3>
-        <p>應到 60 人，出席 {s.counts.present} 人，曠課 {s.counts.absent} 人，曠課已取消 {s.counts.cancelled} 人。</p>
-        <p><strong>曠課名單</strong></p>
+        <p>應到 60 人，準時 {s.counts.present} 人，未到 {s.counts.absent} 人。</p>
+        <p><strong>未到名單</strong></p>
         <ul>{by('absent').map((x) => <li key={x.uid}>{x.name}（{x.studentId}）</li>)}</ul>
-        <p><strong>曠課已取消</strong></p>
-        <ul>{by('cancelled').map((x) => <li key={x.uid}>{x.name}（{x.studentId}）</li>)}</ul>
         <p>{c.teacherName}</p>
       </Mail>
       <section className="att-mail att-mail-side">
@@ -363,8 +360,8 @@ function Emails({ data }: { data: AttendanceSampleData }) {
         </div>
         <h2>寄送紀錄</h2>
         <table><thead><tr><th>時間</th><th>收件人</th><th>種類</th><th>結果</th></tr></thead><tbody>
-          <tr><td>12:10</td><td>{st.name}</td><td>曠課通知</td><td>成功</td></tr>
-          <tr><td>12:10</td><td>示範學生 17</td><td>曠課通知</td><td className="att-fail">失敗 <button>重寄</button></td></tr>
+          <tr><td>12:10</td><td>{st.name}</td><td>未到通知</td><td>成功</td></tr>
+          <tr><td>12:10</td><td>示範學生 17</td><td>未到通知</td><td className="att-fail">失敗 <button>重寄</button></td></tr>
           <tr><td>12:31</td><td>{st2.name}</td><td>更正通知</td><td>成功</td></tr>
           <tr><td>16:05</td><td>{cls.mentorName}</td><td>導師彙整</td><td>成功</td></tr>
         </tbody></table>
@@ -416,7 +413,7 @@ export default function AttendanceSample({ data }: { data: AttendanceSampleData 
   if (n === 5) return <Sheet n={5} title="我的出缺席（手機 390 寬）"><div className="att-phones"><Phone label="字級：預設">{view('my')}</Phone><Phone label="字級：特大" scale={1.3}>{view('my')}</Phone></div></Sheet>;
   if (n === 6) return <Sheet n={6} title="教師後台：節次列表與單節名冊（含同裝置提醒）"><div className="att-admin"><SessionList data={data} current={data.sessions[4].id} /><Roster data={data} /></div></Sheet>;
   if (n === 7) return <Sheet n={7} title="教師後台：總表、修改紀錄、累加用明細檔"><Summary data={data} /></Sheet>;
-  if (n === 8) return <Sheet n={8} title="Email：曠課通知、更正通知、導師彙整"><Emails data={data} /></Sheet>;
+  if (n === 8) return <Sheet n={8} title="Email：未到通知、更正通知、導師彙整"><Emails data={data} /></Sheet>;
   return (
     <nav className="att-index">
       <h1>課堂點名樣張（合成資料）</h1>

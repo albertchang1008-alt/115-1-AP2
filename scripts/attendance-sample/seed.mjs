@@ -44,7 +44,7 @@ function buildSample() {
     { id: '2026-11-16-p4', date: '2026-11-16', weekday: '一', period: 4, start: '10:10', mailed: false },
   ];
   // 幾位固定的示範情境，其餘隨機。
-  const habitual = new Set(['demo-17', 'demo-42']); // 常曠課
+  const habitual = new Set(['demo-17', 'demo-42']); // 常未到
   const sessions = sessionDefs.map((def, si) => {
     const records = students.map((s) => {
       const miss = habitual.has(s.uid) ? rand() < 0.7 : rand() < 0.05;
@@ -69,8 +69,8 @@ function buildSample() {
   set('demo-31', { status: 'absent' });
   set('demo-42', { status: 'absent' });
   set('demo-58', { status: 'absent' });
-  set('demo-09', { status: 'cancelled', edited: true });
-  set('demo-36', { status: 'cancelled', edited: true });
+  set('demo-09', { status: 'present', edited: true, editedAt: '11/16 09:20' });
+  set('demo-36', { status: 'present', edited: true, editedAt: '11/16 12:05' });
   set('demo-11', { status: 'present', signedAt: '09:10:22', via: 'qr', sameDevice: 'demo-12' });
   set('demo-12', { status: 'present', signedAt: '09:10:41', via: 'qr', sameDevice: 'demo-11' });
   set('demo-07', { status: 'present', signedAt: '09:10:12', via: 'qr' });
@@ -78,7 +78,7 @@ function buildSample() {
   for (const [i, patch] of [
     [0, { status: 'present', signedAt: '09:10:18', via: 'qr' }],
     [1, { status: 'absent' }],
-    [2, { status: 'cancelled', edited: true }],
+    [2, { status: 'present', edited: true, editedAt: '11/9 10:02' }],
     [3, { status: 'present', signedAt: '13:10:09', via: 'code' }],
   ]) {
     const r = sessions[i].records.find((x) => x.uid === 'demo-07');
@@ -97,14 +97,13 @@ function buildSample() {
     s.counts = {
       present: done.filter((r) => r.status === 'present').length,
       absent: done.filter((r) => r.status === 'absent').length,
-      cancelled: done.filter((r) => r.status === 'cancelled').length,
     };
   }
   const audit = [
-    { id: 'a4', at: '2026-11-16 12:05', sessionId: '2026-11-16-p3', uid: 'demo-36', from: 'absent', to: 'cancelled', reason: '手機沒電，下課後當面確認有到', by: '示範教師' },
-    { id: 'a3', at: '2026-11-16 09:20', sessionId: '2026-11-16-p3', uid: 'demo-09', from: 'absent', to: 'cancelled', reason: '相機掃不到，助教確認在場', by: '示範教師' },
-    { id: 'a2', at: '2026-11-11 15:02', sessionId: '2026-11-11-p5', uid: 'demo-28', from: 'cancelled', to: 'absent', reason: '點錯人，改回', by: '示範教師' },
-    { id: 'a1', at: '2026-11-11 15:01', sessionId: '2026-11-11-p5', uid: 'demo-28', from: 'absent', to: 'cancelled', reason: '', by: '示範教師' },
+    { id: 'a4', at: '2026-11-16 12:05', sessionId: '2026-11-16-p3', uid: 'demo-36', from: 'absent', to: 'present', reason: '手機沒電，下課後當面確認有到', by: '示範教師' },
+    { id: 'a3', at: '2026-11-16 09:20', sessionId: '2026-11-16-p3', uid: 'demo-09', from: 'absent', to: 'present', reason: '相機掃不到，助教確認在場', by: '示範教師' },
+    { id: 'a2', at: '2026-11-11 15:02', sessionId: '2026-11-11-p5', uid: 'demo-28', from: 'present', to: 'absent', reason: '點錯人，改回', by: '示範教師' },
+    { id: 'a1', at: '2026-11-11 15:01', sessionId: '2026-11-11-p5', uid: 'demo-28', from: 'absent', to: 'present', reason: '', by: '示範教師' },
   ];
   return {
     source: 'memory',
