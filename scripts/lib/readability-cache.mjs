@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { syncBuiltinESMExports } from 'node:module';
+import { execFileSync } from 'node:child_process';
 import { build } from 'esbuild';
 
 export const READABILITY_CACHE_FILE = 'scripts/readability-cache.json';
@@ -28,6 +29,54 @@ function walk(dir, out = []) {
     else if (entry.isFile()) out.push(file);
   }
   return out;
+}
+// 2026-11-17 Claude 審查修正 F1：在 git 程式庫內只算「git 追蹤的＋新增但未被忽略的」檔案。
+// 被 .gitignore 忽略的檔（例如 materials-src/<代號>/shots/ 截圖）不會部署、檢查也不讀，
+// 若算進指紋，教師主程式庫和乾淨的 worktree／GitHub 算出的指紋會不同，導致每次都重量。
+const gitTops = new Map();
+function gitTop(root) {
+  if (!gitTops.has(root)) {
+    let top = null;
+    try {
+      top = fs.realpathSync(
+        execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(),
+      );
+    } catch {
+      top = null;
+    }
+    gitTops.set(root, top);
+  }
+  return gitTops.get(root);
+}
+/** 資料夾內要算進指紋的檔案：git 程式庫內用 git ls-files（追蹤＋未忽略的新檔），否則列出全部。一律不含 .DS_Store。 */
+export function listMaterialFiles(root, dir) {
+  if (!fs.existsSync(dir)) return [];
+  let files = null;
+  const top = gitTop(root);
+  if (top && top === fs.realpathSync(root)) {
+    try {
+      const rel = path.relative(root, dir).split(path.sep).join('/');
+      files = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', rel], {
+        cwd: root,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+        maxBuffer: 256 * 1024 * 1024,
+      })
+        .split('\0')
+        .filter(Boolean)
+        .map((f) => path.join(root, f))
+        .filter((f) => {
+          try {
+            return fs.statSync(f).isFile();
+          } catch {
+            return false; // 已追蹤但本機已刪除
+          }
+        });
+    } catch {
+      files = null;
+    }
+  }
+  return (files || walk(dir)).filter((f) => path.basename(f) !== '.DS_Store');
 }
 /** 一組檔案的指紋：相對路徑＋內容，順序固定；路徑一律用 /，在不同作業系統算出來相同。 */
 function hashFiles(root, files) {
@@ -68,14 +117,15 @@ export async function readabilityFingerprints({
     format: 'iife',
   });
   const materialsDir = path.join(root, 'public/materials');
-  const sharedMaterialFiles = fs.existsSync(materialsDir)
-    ? fs.readdirSync(materialsDir, { withFileTypes: true }).filter((e) => e.isFile() && e.name !== '.DS_Store').map((e) => path.join(materialsDir, e.name))
-    : [];
+  const sharedMaterialFiles = listMaterialFiles(root, materialsDir).filter((f) => path.dirname(f) === materialsDir);
   const extra = ['src/style.css', 'package-lock.json'].map((f) => path.join(root, f)).filter((f) => fs.existsSync(f));
   const common = hashFiles(root, [...checker, ...platform, ...sharedMaterialFiles, ...extra]);
   const materials = {};
   for (const slug of slugs)
-    materials[slug] = hashFiles(root, [...walk(path.join(materialsDir, publishedVersion(slug))), ...walk(path.join(root, 'materials-src', slug))]);
+    materials[slug] = hashFiles(root, [
+      ...listMaterialFiles(root, path.join(materialsDir, publishedVersion(slug))),
+      ...listMaterialFiles(root, path.join(root, 'materials-src', slug)),
+    ]);
   return { common, materials, commonFiles: checker.length + platform.length + sharedMaterialFiles.length + extra.length };
 }
 /** 一個路徑目前的狀態：檔案＝內容指紋；資料夾＝檔名清單的指紋；不存在＝null。 */
@@ -148,6 +198,12 @@ export function readReadabilityCache(root) {
     return { common: '', materials: {} };
   }
 }
+/** 紀錄是在哪個環境量的（S1）：作業系統與 Chrome 版本。不同環境只提醒、不強制重量。 */
+export function environmentNote(saved, current) {
+  if (!saved || !current) return '';
+  if (saved.platform === current.platform && saved.chrome === current.chrome) return '';
+  return `READABILITY 提醒：通過紀錄是在 ${saved.platform}／Chrome ${saved.chrome} 量的，本機為 ${current.platform}／Chrome ${current.chrome}；仍沿用紀錄（字型與 Chrome 版本可能影響結果，每週完整檢查會補量）。`;
+}
 /** 哪些教材可以跳過：共用指紋與共用讀取都相同，而且教材的檔案指紋與它讀過的每個路徑都和上次通過時相同。 */
 export function planReadability(cache, fingerprints, slugs, root) {
   const sameCommon = !!cache.common && cache.common === fingerprints.common && readsMatch(root, cache.commonReads || {});
@@ -161,13 +217,14 @@ export function planReadability(cache, fingerprints, slugs, root) {
  * 只記錄這次實際檢查並通過的教材（checked：{ 代號: 檢查時讀到的路徑 }）；因未變更而跳過的沿用舊紀錄。
  * 共用指紋變了，舊紀錄全部作廢。
  */
-export function nextReadabilityCache(cache, fingerprints, checked, commonPaths, root) {
+export function nextReadabilityCache(cache, fingerprints, checked, commonPaths, root, environment) {
   const same = cache.common === fingerprints.common;
   const materials = { ...(same ? cache.materials : {}) };
   for (const [slug, paths] of Object.entries(checked))
     materials[slug] = { files: fingerprints.materials[slug], reads: statesOf(root, paths) };
   return {
     note: '閱讀規範檢查的通過紀錄：由 npm run readability:record 產生，請勿手改。內容與檢查方式都和紀錄相同的教材在 npm run check 會跳過；說明見 scripts/lib/readability-cache.mjs。',
+    ...(environment ? { environment } : cache.environment ? { environment: cache.environment } : {}),
     common: fingerprints.common,
     commonReads: { ...(same ? cache.commonReads || {} : {}), ...statesOf(root, commonPaths) },
     materials: Object.fromEntries(Object.entries(materials).sort(([a], [b]) => (a < b ? -1 : 1))),

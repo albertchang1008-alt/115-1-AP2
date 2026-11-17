@@ -81,3 +81,13 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run readability:all
 ```
+註：檢查程式用 `chromium.launch({ channel: 'chrome' })`，實際用的是 GitHub runner 預裝的 Google Chrome，版本由 GitHub 決定（與 `pages.yml` 相同的安裝寫法即可）；這也是紀錄檔要記環境（審查修正 S1）的原因。
+
+## 審查修正（2026-11-17，Claude Opus 依教師指示直接修改）
+審查報告：`docs/READABILITY_INCREMENTAL_CLAUDE_REVIEW_2026-11-17.md`。
+- **F1（必修）**：`listMaterialFiles()`：在 git 程式庫內，教材資料夾與 `public/materials/` 最上層共用檔只算 `git ls-files --cached --others --exclude-standard`（追蹤的＋新增但未忽略的），不在 git 內才列出全部；一律不算 `.DS_Store`。被忽略的 `materials-src/<代號>/shots/` 不再讓主程式庫每次重量 7 份呼吸教材。
+- **S1**：record 時在紀錄檔寫 `environment`（作業系統-架構、實際使用的 Chrome 版本）；cache 模式若有教材要跳過且環境不同，印一行提醒，仍沿用紀錄。
+- **S2**：新增測試，`checkReadability({ cache: true })` 不新增、不修改程式庫內任何檔。
+- 新增 `scripts/readability-check.d.mts`（測試以 TypeScript 匯入檢查程式，`tsc -b` 需要型別）。
+- 測試：新增 3 支（F1、環境提醒、S2）。雲端 Linux 以單檔跑 `tests/readability-cache.test.ts`：前 7 支 PASS、0 skipped；S2 需要完整程式庫，在雲端無法跑，交 Mac 驗證。`tsc` 型別檢查 PASS。
+- **紀錄檔尚未更新**：指紋算法改了，共用指紋必然改變，目前的 `scripts/readability-cache.json` 會全部失效（只會重量，不會放行）。由驗證者在 Mac 跑 `npm run readability:record` 重建，並一起 commit。

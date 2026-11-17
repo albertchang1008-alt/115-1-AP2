@@ -1,7 +1,9 @@
 export const READABILITY_CACHE_FILE: string;
 export type ReadabilityPathState = string | null;
+export type ReadabilityEnvironment = { platform: string; chrome: string };
 export type ReadabilityCache = {
   note?: string;
+  environment?: ReadabilityEnvironment;
   common: string;
   commonReads?: Record<string, ReadabilityPathState>;
   materials: Record<string, { files: string; reads: Record<string, ReadabilityPathState> }>;
@@ -32,5 +34,8 @@ export function nextReadabilityCache(
   checked: Record<string, string[]>,
   commonPaths: string[],
   root: string,
+  environment?: ReadabilityEnvironment,
 ): ReadabilityCache & { commonReads: Record<string, ReadabilityPathState> };
 export function writeReadabilityCache(root: string, data: ReadabilityCache): void;
+export function listMaterialFiles(root: string, dir: string): string[];
+export function environmentNote(saved: ReadabilityEnvironment | undefined, current: ReadabilityEnvironment | undefined): string;

@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import {
+  environmentNote,
+  listMaterialFiles,
   nextReadabilityCache,
   pathState,
   planReadability,
@@ -179,5 +182,68 @@ test('紀錄：只記這次檢查通過的教材；跳過的沿用舊紀錄；�
     assert.equal(readReadabilityCache(root).common, '');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+// 2026-11-17 Claude 審查修正 F1：被 git 忽略的檔不影響指紋；未追蹤但未忽略的新檔會影響。
+test('指紋：git 程式庫內不算被忽略的檔，未追蹤的新檔照算；.DS_Store 一律不算', async (t) => {
+  const { root, write } = makeRoot();
+  try {
+    try {
+      const env = { ...process.env };
+      delete env.GIT_DIR;
+      delete env.GIT_WORK_TREE;
+      const git = (...args: string[]) => execFileSync('git', args, { cwd: root, stdio: 'ignore', env });
+      git('init', '-q');
+      write('.gitignore', 'materials-src/*/shots/\n');
+      git('add', '-A');
+      git('-c', 'user.name=t', '-c', 'user.email=t@example.com', '-c', 'commit.gpgsign=false', 'commit', '-q', '-m', 'init');
+    } catch {
+      t.skip('此環境沒有 git');
+      return;
+    }
+    const first = await readabilityFingerprints(options(root));
+    write('materials-src/a/shots/01.png', 'ignored');
+    write('public/materials/a-v1/.DS_Store', 'finder');
+    assert.equal((await readabilityFingerprints(options(root))).materials.a, first.materials.a, '忽略的檔與 .DS_Store 不影響');
+    assert.ok(!listMaterialFiles(root, path.join(root, 'materials-src/a')).some((f) => f.includes('shots')));
+    write('public/materials/a-v1/new.svg', '<svg/>');
+    assert.notEqual((await readabilityFingerprints(options(root))).materials.a, first.materials.a, '未追蹤但未忽略的新檔要算');
+    assert.equal((await readabilityFingerprints(options(root))).materials.b, first.materials.b);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('環境提醒：作業系統或 Chrome 版本不同才提醒；缺資料不提醒', () => {
+  const mac = { platform: 'darwin-arm64', chrome: '131.0' };
+  assert.equal(environmentNote(mac, { ...mac }), '');
+  assert.match(environmentNote(mac, { platform: 'linux-x64', chrome: '131.0' }), /仍沿用紀錄/);
+  assert.match(environmentNote(mac, { ...mac, chrome: '132.0' }), /Chrome 132\.0/);
+  assert.equal(environmentNote(undefined, mac), '');
+  const next = nextReadabilityCache({ common: '', materials: {} }, { common: 'c', materials: {} }, {}, [], os.tmpdir(), mac);
+  assert.deepEqual(next.environment, mac);
+  assert.deepEqual(nextReadabilityCache(next, { common: 'c', materials: {} }, {}, [], os.tmpdir()).environment, mac, '沒給新環境時沿用');
+});
+
+// S2：npm run check 用的模式（cache）只讀紀錄、不寫專案內任何檔（deploy.sh 要求檢查後工作目錄乾淨）。
+test('檢查模式不寫專案內的檔：只讀通過紀錄', async () => {
+  const { checkReadability } = await import('../scripts/readability-check.mjs');
+  const repo = path.resolve(import.meta.dirname, '..');
+  const cacheFile = path.join(repo, 'scripts/readability-cache.json');
+  const snapshot = () => ({
+    cache: fs.existsSync(cacheFile) ? fs.readFileSync(cacheFile, 'utf8') : null,
+    cacheMtime: fs.existsSync(cacheFile) ? fs.statSync(cacheFile).mtimeMs : null,
+    rootEntries: fs.readdirSync(repo).sort(),
+    scriptEntries: fs.readdirSync(path.join(repo, 'scripts')).sort(),
+  });
+  const before = snapshot();
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'readability-nowrite-'));
+  try {
+    await checkReadability({ slugs: [], cache: true, out, overlay: false });
+    assert.deepEqual(snapshot(), before);
+    assert.ok(!fs.existsSync(path.join(repo, '.readability-cache-unused')));
+  } finally {
+    fs.rmSync(out, { recursive: true, force: true });
   }
 });

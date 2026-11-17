@@ -10,6 +10,7 @@ import { readabilityMetrics } from './lib/readability-metrics.mjs';
 import { validateCapturedEvents } from './lib/release-tracking-proof.mjs';
 import { auditReadabilityCss } from './lib/readability-static.mjs';
 import {
+  environmentNote,
   nextReadabilityCache,
   planReadability,
   traceReads,
@@ -22,6 +23,18 @@ export const readabilitySlugs =
     ' ',
   );
 const root = path.resolve(import.meta.dirname, '..');
+/** 這次檢查的環境（S1）：作業系統與實際使用的 Chrome（channel: 'chrome'）版本；取不到時記 unknown。 */
+async function currentEnvironment() {
+  let chrome = 'unknown';
+  try {
+    const browser = await chromium.launch({ channel: 'chrome' });
+    chrome = browser.version();
+    await browser.close();
+  } catch {
+    /* 沒有 Chrome 時不影響檢查本身 */
+  }
+  return { platform: `${process.platform}-${process.arch}`, chrome };
+}
 const publishedVersion = (slug) => slug + (slug === 'urinary-route-micturition' ? '-v2' : '-v1');
 export async function checkReadability({
   out = path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'course-readability'),
@@ -69,6 +82,10 @@ export async function checkReadability({
           ),
       )
     : null;
+  if (cache && plan.skip.length && saved.environment) {
+    const note = environmentNote(saved.environment, await currentEnvironment());
+    if (note) console.log(note);
+  }
   if (cache)
     console.log(
       'READABILITY 未變更跳過',
@@ -251,7 +268,10 @@ export async function checkReadability({
       const checked = Object.fromEntries(
         report.materials.filter((m) => m.pass && !m.skipped).map((m) => [m.slug, traced[m.slug] || []]),
       );
-      writeReadabilityCache(root, nextReadabilityCache(saved, fingerprints, checked, traced[''] || [], root));
+      writeReadabilityCache(
+        root,
+        nextReadabilityCache(saved, fingerprints, checked, traced[''] || [], root, await currentEnvironment()),
+      );
       console.log('READABILITY 已更新通過紀錄 scripts/readability-cache.json（請一併 commit）');
     } else console.log('READABILITY 有未通過項目，通過紀錄未更新');
   }
