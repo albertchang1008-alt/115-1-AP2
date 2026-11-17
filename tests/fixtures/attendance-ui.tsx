@@ -84,6 +84,7 @@ const mailStatus = {
   scheduledAt: 0,
   nextSendAt: 0,
   mailerReady: true,
+  lastAuto: { at: T + 28000000, sent: 5, failed: 1, error: '' },
   log: [
     {
       id: 'm1',

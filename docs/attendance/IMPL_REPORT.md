@@ -55,3 +55,44 @@
 
 ## 截圖
 `課程平台-驗收證據/2026-11-17/attendance/`（保存至 2026-11-24）：`ui-*.png` 22 張（學生 17 畫面 390 預設、教師 5 分頁 1440）與 `ui-result.json`。存證用，不逐張檢視；因為是新畫面，我看過其中 5 張（投影、節次與名冊、寄信、橫幅輸入錯誤、簽到頁輸入錯誤）。
+
+## 返修 M1（2026-11-17，Claude Fable；依 CLAUDE_KEY_REVIEW.md 第三節 M1、第五節第 5、6 項）
+
+**給 Claude 的摘要**
+- M1 已修：每封信帶認領時的 `mailId`；寄信程式對同一個 `mailId` 只寄一次；平台端 30 秒逾時；失敗還原時連序號一起還原，所以重送用的是**同一個** `mailId`。
+- 另加：Emulator 並行腳本 `scripts/attendance-emulator-race.mjs`；排程執行後記錄「上次自動寄送」並顯示在寄信分頁。
+- 實跑（雲端 Linux、非 root）：`functions/tests/attendance.test.cjs` 16/16 PASS（原 13＋新 3）；`tests/attendance.test.ts` 8/8；functions build PASS；`tsc -b` 我的檔案 0 錯；`attendance-ui-check.mjs` PASS；`grep /Users|/private/tmp` 0 筆。
+- **沒有實跑**：Emulator 並行腳本只用 `--memory`（記憶體模擬）確認腳本本身能跑完，**真正的 Emulator 並行驗證還沒做**，留給 Antigravity，列為必須 PASS。整套 `npm run check` 仍未跑。真的 Apps Script 沒有部署過。
+- 偏離或拿不準：見下方 3 點。
+
+**改檔**
+| 檔案 | 改了什麼 |
+|---|---|
+| `functions/src/attendance.ts` | `appsScriptMailer` 加 `AbortSignal.timeout(30000)`（57 行）並回傳 `duplicate`；`deliver` 把 `mailId` 送給寄信程式、去重的信在寄送紀錄標 `deduped`（約 384 行）；失敗還原與「放回待寄」都把 `notifySeq` 減回去（約 452、1184 行）；排程寫入 `lastAuto`（約 1213 行）；`attendanceMailStatus` 回傳 `lastAuto` |
+| `apps-script/AttendanceMailer.gs` | 驗證 `mailId`（必填、≤400 字、無控制字元）；`LockService` 一次處理一封；`CacheService.getScriptCache()` 以 `mailId` 的 SHA-256 為鍵查詢，寄過回 `{ok:true, duplicate:true}`；`MailApp.sendEmail` 成功後才 `cache.put(…, 21600)` |
+| `functions/tests/attendance.test.cjs` | 寄信端點改成**直接在 Node 裡執行 `AttendanceMailer.gs`**（Google 服務換成假的），所以去重測的是會部署的那份程式；新增 3 支測試 |
+| `scripts/attendance-emulator-race.mjs` | 新檔，見下 |
+| `src/AttendanceAdmin.tsx`、`tests/fixtures/attendance-ui.tsx`、`scripts/attendance-ui-check.mjs` | 寄信分頁顯示「上次自動寄送」 |
+| `docs/attendance/APPS_SCRIPT_SETUP.md` | 改版後必須重新部署成新版本；必須用學校帳號（個人 Gmail 每天約 100 位收件人） |
+
+**新增測試**
+1. 寄信程式：同一個 `mailId` 送兩次（含內容不同）只寄一封；不同 `mailId` 照寄；400 字的編號可去重；密鑰、收件人、主旨、內容、編號驗證；額度用完不記錄、之後可寄；鎖有釋放。
+2. 結果不明不重寄：寄信程式已寄出但平台沒收到回應 → 平台標失敗、還原 → 重送的 `mailId` 與第一次相同 → 學生只收到一封，寄送紀錄標 `deduped`。連續兩次遺失回應、更正通知、導師彙整各驗一次；真的沒送到（連線失敗）的信重送會寄出。
+3. 排程：未設定寄信程式時記錄錯誤；設定後記錄寄出與失敗數；回應不含密鑰。
+
+**Emulator 並行腳本（留給 Antigravity，必須 PASS）**
+```
+npm --prefix functions run build
+npx firebase emulators:exec --only firestore --project demo-attendance-race "node scripts/attendance-emulator-race.mjs"
+```
+- 預設 6 回合、每回合 30 位合成學生（掃 QR 與數字碼各半）同時簽到，並在 0–75 毫秒後呼叫 `attendanceControl`（action: end，等同審查文件寫的 attendanceEnd(force)）。
+- 檢查：①每位學生只有 1 筆紀錄 ②準時紀錄的 `signedAt` ≤ `closedAt`＋寬限 ③ `counts` 與實際紀錄一致，回覆簽到成功的人都是準時、回覆失敗的人都是未到。
+- 輸出 JSON：`pass`、`sawRaceWithinARound`（至少一回合同時有成功與被擋下，才算測到同時發生；為 false 時請加大 `--rounds` 重跑）、`warnings`（被拒原因不是「已結束」的簽到，例如交易競爭；不算失敗但請回報）。
+- 這支腳本直接呼叫已編譯的 handler，搭配真的 Firestore（Emulator）與假的身分檢查；沒有經過 Functions／Auth Emulator。目的只在驗證 Firestore 交易的鎖與重試。
+
+**拿不準的地方**
+1. 快取只保留 6 小時（CacheService 上限）。結果不明的信如果超過 6 小時才重送，寄信程式已經不記得，會再寄一次。一般是當下或當天排程重送，機率低；要更長就得改用 PropertiesService 並自己清理，這次沒做。
+2. 寄信程式「信已寄出、但在寫入快取前中斷」的極短空窗仍可能重寄；`sendEmail` 與 `cache.put` 之間沒有別的動作。
+3. 結果不明的未到通知如果其實寄出了，而老師在重送前把學生改成準時：平台認為沒通知過，所以不會寄更正通知。學生會留著一封未到通知，要看「我的出缺席」才知道已改。要補這個洞得把「結果不明」另記一種狀態，這次沒做，請裁定要不要。
+
+行號提醒：本節之前的「關鍵審查四處」行號是 0761747b 的；返修後 `functions/src/attendance.ts` 363 行以後的位置往後移了約 10–50 行。

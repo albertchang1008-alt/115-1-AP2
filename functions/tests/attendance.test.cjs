@@ -9,6 +9,72 @@ const {
 const A = require('../lib/shared/attendance.js');
 const { memoryDb } = require('./helpers/attendance-memory.cjs');
 
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+/** 在 Node 裡執行 Apps Script 寄信程式；PropertiesService、CacheService、LockService、MailApp 等換成假的。 */
+function loadMailerScript({ key, onSend, quota = 1500 }) {
+  const cache = new Map();
+  const state = { quota, locks: 0 };
+  const sandbox = {
+    PropertiesService: {
+      getScriptProperties: () => ({ getProperty: (k) => (k === 'MAIL_KEY' ? key : null) }),
+    },
+    CacheService: {
+      getScriptCache: () => ({
+        get: (k) => (cache.has(k) ? cache.get(k) : null),
+        put: (k, v, ttl) => {
+          assert(k.length <= 250, '快取的鍵不可超過 250 字');
+          assert.equal(ttl, 21600);
+          cache.set(k, v);
+        },
+      }),
+    },
+    LockService: {
+      getScriptLock: () => ({
+        waitLock: () => void state.locks++,
+        releaseLock: () => void state.locks--,
+      }),
+    },
+    MailApp: {
+      getRemainingDailyQuota: () => state.quota,
+      sendEmail: (to, subject, text, options) => {
+        state.quota--;
+        onSend({ to, subject, text, fromName: options.name || '' });
+      },
+    },
+    ContentService: {
+      MimeType: { JSON: 'json' },
+      createTextOutput: (text) => ({
+        text,
+        setMimeType() {
+          return this;
+        },
+      }),
+    },
+    Utilities: {
+      DigestAlgorithm: { SHA_256: 'sha256' },
+      Charset: { UTF_8: 'utf8' },
+      computeDigest: (alg, text) => [
+        ...require('node:crypto').createHash(alg).update(text, 'utf8').digest(),
+      ],
+      base64EncodeWebSafe: (bytes) => Buffer.from(bytes).toString('base64url'),
+    },
+    Session: { getActiveUser: () => ({ getEmail: () => 'teacher@example.edu' }) },
+  };
+  vm.createContext(sandbox);
+  vm.runInContext(
+    fs.readFileSync(path.join(__dirname, '../../apps-script/AttendanceMailer.gs'), 'utf8'),
+    sandbox,
+  );
+  return {
+    state,
+    cache,
+    post: (body) =>
+      JSON.parse(sandbox.doPost({ postData: { contents: JSON.stringify(body) } }).text),
+    get: () => sandbox.doGet().text,
+  };
+}
 const COURSE = '115-1-AP2';
 const T0 = Date.parse('2026-11-16T01:10:00Z'); // 台北 09:10
 function setup({ feature = true } = {}) {
@@ -60,18 +126,26 @@ function setup({ feature = true } = {}) {
     if (teacherOnly) throw Error('permission');
     return { p: req.auth, c: course };
   };
+  // 寄信端點：直接執行 apps-script/AttendanceMailer.gs（Google 服務換成假的），所以去重邏輯測的是真正會部署的那份程式。
   const sent = [];
+  const gas = loadMailerScript({ key: 'k'.repeat(32), onSend: (m) => sent.push(m) });
   let failNext = 0;
+  let loseReplyNext = 0;
+  const posted = [];
   const sendMail = async (endpoint, mail) => {
-    assert.deepEqual(endpoint, {
-      url: 'https://script.google.com/macros/s/FAKE/exec',
-      key: 'k'.repeat(32),
-    });
+    assert.equal(endpoint.url, 'https://script.google.com/macros/s/FAKE/exec');
     if (failNext > 0) {
       failNext--;
-      throw Error('模擬寄信失敗');
+      throw Error('模擬寄信失敗'); // 要求沒有送到寄信程式
     }
-    sent.push(mail);
+    posted.push(mail.mailId);
+    const reply = gas.post({ key: endpoint.key, ...mail });
+    if (loseReplyNext > 0) {
+      loseReplyNext--;
+      throw Error('寄信程式回應 200'); // 寄信程式已處理，但平台沒收到可解析的回應
+    }
+    if (reply.ok !== true) throw Error(reply.error);
+    return { duplicate: reply.duplicate === true };
   };
   let n = 0;
   const h = createAttendanceHandlers(
@@ -119,6 +193,9 @@ function setup({ feature = true } = {}) {
     tick: (ms) => (clock += ms),
     now: () => clock,
     failNext: (k) => (failNext = k),
+    loseReplyNext: (k) => (loseReplyNext = k),
+    posted,
+    gas,
   };
 }
 const live = (x) => x.call('attendanceLive');
@@ -917,4 +994,172 @@ test('匯出：兩個不同課程的累加用明細檔表頭逐字相同、可�
     /班級,學號,姓名,2026-11-16 第3節,準時,未到/,
   );
   await assert.rejects(x.call('attendanceExport', { kind: 'other' }));
+});
+
+test('M1 寄信程式（AttendanceMailer.gs）：同一個 mailId 只寄一次；密鑰、收件人、編號都要驗證', async () => {
+  const sent = [];
+  const gas = loadMailerScript({ key: 'k'.repeat(32), onSend: (m) => sent.push(m) });
+  const mail = {
+    key: 'k'.repeat(32),
+    mailId: '2026-11-16-p03-ab12cd34__s1@example.edu__1',
+    to: 's1@example.edu',
+    subject: '主旨',
+    text: '內容',
+    fromName: '示範教師',
+  };
+  assert.deepEqual(gas.post(mail), { ok: true, remaining: 1499 });
+  assert.deepEqual(gas.post(mail), { ok: true, duplicate: true }, '同一編號第二次不寄');
+  assert.deepEqual(gas.post({ ...mail, subject: '內容改了也一樣' }), { ok: true, duplicate: true });
+  assert.equal(sent.length, 1);
+  assert.deepEqual(
+    gas.post({ ...mail, mailId: mail.mailId.replace(/1$/, '2') }),
+    { ok: true, remaining: 1498 },
+    '不同編號照常寄',
+  );
+  assert.equal(sent.length, 2);
+  // 很長的編號（例如長信箱）也能去重
+  const long = { ...mail, mailId: 'x'.repeat(400) };
+  assert.equal(gas.post(long).ok, true);
+  assert.deepEqual(gas.post(long), { ok: true, duplicate: true });
+  // 驗證
+  for (const [bad, error] of [
+    [{ key: 'wrong' }, '密鑰不正確'],
+    [{ key: undefined }, '密鑰不正確'],
+    [{ mailId: undefined }, '信件編號無效'],
+    [{ mailId: '' }, '信件編號無效'],
+    [{ mailId: 'x'.repeat(401) }, '信件編號無效'],
+    [{ mailId: 'a\nb' }, '信件編號無效'],
+    [{ mailId: 'new-1', to: 'a@b.cc, c@d.ee' }, '收件人無效'],
+    [{ mailId: 'new-2', subject: '' }, '主旨無效'],
+    [{ mailId: 'new-3', text: '' }, '內容無效'],
+  ])
+    assert.deepEqual(gas.post({ ...mail, ...bad }), { ok: false, error }, JSON.stringify(bad));
+  assert.equal(sent.length, 3, '驗證沒過的都不寄');
+  // 寄信失敗（額度用完）不記錄，之後同一編號還能寄
+  gas.state.quota = 0;
+  const later = { ...mail, mailId: 'later-1' };
+  assert.deepEqual(gas.post(later), { ok: false, error: '今天的寄信額度已用完' });
+  gas.state.quota = 5;
+  assert.equal(gas.post(later).ok, true);
+  assert.equal(gas.state.locks, 0, '鎖都有釋放');
+  assert(!gas.get().includes('k'.repeat(8)));
+});
+
+test('M1 寄送結果不明時不重寄：已寄出但平台沒收到回應 → 還原 → 用同一個 mailId 重送 → 學生只收到一封', async () => {
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  await x.call(
+    'attendanceCheckIn',
+    { token: (await x.call('attendanceLive')).token },
+    x.student(1),
+  );
+  await x.call(
+    'attendanceCheckIn',
+    { token: (await x.call('attendanceLive')).token },
+    x.student(2),
+  );
+  await x.call(
+    'attendanceCheckIn',
+    { token: (await x.call('attendanceLive')).token },
+    x.student(3),
+  );
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  // s4、s5 未到。第一封：寄信程式已寄出，但回應遺失
+  x.loseReplyNext(1);
+  assert.deepEqual(await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 1,
+    failed: 1,
+    skipped: 0,
+  });
+  assert.deepEqual(
+    x.sent.map((m) => m.to),
+    ['s4@example.edu', 's5@example.edu'],
+    '其實兩封都寄出去了',
+  );
+  let st = await x.call('attendanceMailStatus');
+  assert.deepEqual(
+    st.student.map((m) => m.email),
+    ['s4@example.edu'],
+    '平台以為失敗，放回待寄',
+  );
+  const firstId = `${s.id}__s4@example.edu__1`;
+  assert.equal(st.log.find((m) => m.id === firstId).status, 'failed');
+  // 重送：同一個 mailId，寄信程式認得，不再寄
+  assert.deepEqual(await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 1,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.deepEqual(
+    x.posted.filter((id) => id.includes('s4@')),
+    [firstId, firstId],
+    '重送用的是同一個 mailId',
+  );
+  assert.equal(x.sent.filter((m) => m.to === 's4@example.edu').length, 1, '學生只收到一封未到通知');
+  st = await x.call('attendanceMailStatus');
+  assert.equal(st.student.length, 0);
+  assert.equal(st.log.find((m) => m.id === firstId).status, 'sent');
+  assert.equal(x.db.docs.get(`courses/${COURSE}/attendanceMail/${firstId}`).deduped, true);
+  // 連續兩次都遺失回應，也只會有一封
+  await x.call('attendanceSetStatus', {
+    sessionId: s.id,
+    emails: ['s4@example.edu'],
+    status: 'present',
+  });
+  x.loseReplyNext(2);
+  await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.equal(
+    x.sent.filter((m) => m.to === 's4@example.edu' && /已改為準時/.test(m.subject)).length,
+    1,
+    '更正通知也只有一封',
+  );
+  assert.deepEqual(
+    x.posted.filter((id) => id.includes('s4@')).slice(2),
+    Array(3).fill(`${s.id}__s4@example.edu__2`),
+  );
+  // 導師彙整：回應遺失後重送，也只寄一封
+  x.loseReplyNext(1);
+  assert.equal((await x.call('attendanceSendMail', { mode: 'now', kinds: ['mentor'] })).failed, 1);
+  assert.equal((await x.call('attendanceSendMail', { mode: 'now', kinds: ['mentor'] })).sent, 1);
+  assert.equal(x.sent.filter((m) => m.to === 'mentor-a@example.edu').length, 1);
+  // 每封信都帶 mailId，而且各不相同（同一封重送除外）
+  assert(x.posted.every((id) => typeof id === 'string' && id.length > 10));
+  // 真的沒送到寄信程式的失敗（連線失敗）：重送會寄出
+  await x.call('attendanceSetStatus', {
+    sessionId: s.id,
+    emails: ['s1@example.edu'],
+    status: 'absent',
+  });
+  x.failNext(1);
+  assert.equal((await x.call('attendanceSendMail', { mode: 'now' })).failed, 1);
+  assert.equal((await x.call('attendanceSendMail', { mode: 'now' })).sent, 1);
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+});
+
+test('排程執行後記錄「上次自動寄送」的結果，寄信分頁看得到', async () => {
+  const x = setup();
+  const s = await x.start();
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  assert.equal((await x.call('attendanceMailStatus')).lastAuto, null);
+  // 還沒設定寄信程式就到時間：記錄錯誤
+  await x.call('attendanceSendMail', { mode: 'schedule', at: x.now() + 60000 });
+  x.tick(61000);
+  await x.h.attendanceMailTick.run({});
+  let last = (await x.call('attendanceMailStatus')).lastAuto;
+  assert.equal(last.at, x.now());
+  assert.match(last.error, /尚未設定寄信程式/);
+  // 設定後再排一次：記錄寄出與失敗數
+  await x.mailer();
+  await x.call('attendanceSendMail', { mode: 'schedule', at: x.now() + 60000 });
+  x.tick(61000);
+  x.failNext(1);
+  await x.h.attendanceMailTick.run({});
+  last = (await x.call('attendanceMailStatus')).lastAuto;
+  assert.deepEqual(last, { at: x.now(), sent: 5, failed: 1, error: '' });
+  assert(!JSON.stringify(await x.call('attendanceMailStatus')).includes('kkkk'), '不含密鑰');
 });

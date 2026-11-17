@@ -70,6 +70,7 @@ type MailStatus = {
   scheduledAt: number;
   nextSendAt: number;
   mailerReady: boolean;
+  lastAuto?: { at: number; sent: number; failed: number; error: string } | null;
   log: {
     id: string;
     kind: string;
@@ -1089,6 +1090,14 @@ function MailView({ api, course, notify }: Props) {
             )}
             {st.dailyTime ? `　每日預設 ${st.dailyTime} 自動寄出已確認節次的待寄信。` : ''}
           </p>
+          {st.lastAuto && (
+            <p className={st.lastAuto.error || st.lastAuto.failed ? 'att-fail' : 'muted'}>
+              上次自動寄送：{taipeiDateTime(st.lastAuto.at)}，
+              {st.lastAuto.error
+                ? `沒有寄出（${st.lastAuto.error}）`
+                : `寄出 ${st.lastAuto.sent} 封${st.lastAuto.failed ? `、失敗 ${st.lastAuto.failed} 封（留在待寄）` : ''}`}
+            </p>
+          )}
         </div>
         <h2>寄送紀錄</h2>
         {!st.log.length ? (

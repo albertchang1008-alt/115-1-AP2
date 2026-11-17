@@ -64,7 +64,7 @@ const teacher = [
   ['admin-live', '4 7 2 9'],
   ['admin-sessions', '同裝置提醒'],
   ['admin-summary', '修改紀錄（學生看不到）'],
-  ['admin-mail', '寄送時間由老師決定'],
+  ['admin-mail', '上次自動寄送'],
 ];
 const failures = [];
 const errors = [];

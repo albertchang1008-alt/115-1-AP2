@@ -41,8 +41,8 @@ import {
 
 export type AttendanceMailer = (
   endpoint: { url: string; key: string },
-  mail: { to: string; subject: string; text: string; fromName: string },
-) => Promise<void>;
+  mail: { mailId: string; to: string; subject: string; text: string; fromName: string },
+) => Promise<{ duplicate?: boolean } | void>;
 type Deps = { now?: () => number; sendMail?: AttendanceMailer; random?: (n: number) => Buffer };
 type Member = { email: string; studentId: string; name: string; classId: string };
 
@@ -53,10 +53,13 @@ export const appsScriptMailer: AttendanceMailer = async (endpoint, mail) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ key: endpoint.key, ...mail }),
     redirect: 'follow',
+    // 逾時就當作結果不明：這封信會還原成待寄，下次用同一個 mailId 重送，由寄信程式去重。
+    signal: AbortSignal.timeout(30000),
   });
   const body: any = await res.json().catch(() => null);
   if (!res.ok || body?.ok !== true)
     throw new Error(String(body?.error || `寄信程式回應 ${res.status}`).slice(0, 200));
+  return { duplicate: body.duplicate === true };
 };
 
 const bad = (message: string): never => {
@@ -378,11 +381,21 @@ export function createAttendanceHandlers(
       onFail?: () => Promise<void>,
     ) => {
       try {
-        await sendMail(
+        // mailId 一併送給寄信程式：同一個 mailId 寄信程式只會寄一次（結果不明後重送也不會變成兩封）。
+        const result = await sendMail(
           { url: endpoint.url, key: endpoint.key },
-          { to, ...mail, fromName: ctx.teacherName },
+          { mailId, to, ...mail, fromName: ctx.teacherName },
         );
-        await mails(courseId).doc(mailId).set({ status: 'sent', sentAt: now() }, { merge: true });
+        await mails(courseId)
+          .doc(mailId)
+          .set(
+            {
+              status: 'sent',
+              sentAt: now(),
+              ...(result && result.duplicate ? { deduped: true } : {}),
+            },
+            { merge: true },
+          );
         out.sent++;
       } catch (e) {
         await mails(courseId)
@@ -436,12 +449,14 @@ export function createAttendanceHandlers(
             ? absentMail(ctx, item.session, claim.name)
             : correctionMail(ctx, item.session, claim.name);
         await deliver(claim.mailId, claim.email, mail, () =>
-          // 寄失敗：把通知狀態還原，這封信會回到待寄；如果期間又有新的認領就不動。
+          // 寄失敗或結果不明：把通知狀態與序號都還原，這封信會回到待寄，而且下次認領會得到同一個 mailId，
+          // 寄信程式因此能認出「這封其實寄過了」而不再寄。如果期間又有新的認領就不動。
           db.runTransaction(async (tx) => {
             const r = (await tx.get(ref)).data() as AttendanceRecord | undefined;
             if (!r || r.notifySeq !== claim.seq) return;
             const { lastNotified: _drop, ...rest } = r;
-            tx.set(ref, claim.previous ? { ...rest, lastNotified: claim.previous } : rest);
+            const back = { ...rest, notifySeq: claim.seq - 1 };
+            tx.set(ref, claim.previous ? { ...back, lastNotified: claim.previous } : back);
           }),
         );
       }
@@ -1111,6 +1126,14 @@ export function createAttendanceHandlers(
         scheduledAt: cfg.scheduledAt || 0,
         nextSendAt: nextSendAt(now(), cfg),
         mailerReady: !!(await mailerRef(courseId).get()).data()?.url,
+        lastAuto: cfg.lastAuto
+          ? {
+              at: Number(cfg.lastAuto.at) || 0,
+              sent: Number(cfg.lastAuto.sent) || 0,
+              failed: Number(cfg.lastAuto.failed) || 0,
+              error: String(cfg.lastAuto.error || ''),
+            }
+          : null,
         log,
       };
     }),
@@ -1158,7 +1181,8 @@ export function createAttendanceHandlers(
             const r = (await tx.get(rRef)).data() as AttendanceRecord | undefined;
             if (!r || `${m.sessionId}__${r.email}__${r.notifySeq}` !== m.id) return;
             const { lastNotified: _drop, ...rest } = r;
-            tx.set(rRef, m.kind === 'correction' ? { ...rest, lastNotified: 'absent' } : rest);
+            const back = { ...rest, notifySeq: Math.max(0, (r.notifySeq || 1) - 1) }; // 下次認領沿用同一個 mailId
+            tx.set(rRef, m.kind === 'correction' ? { ...back, lastNotified: 'absent' } : back);
           });
         }
       } else bad('寄送方式無效');
@@ -1181,14 +1205,24 @@ export function createAttendanceHandlers(
             // 先把一次性排定清掉並算好下一次，再寄；即使這一輪中途失敗也不會整批重跑。
             await configRef(doc.id).set({ scheduledAt: 0 }, { merge: true });
             await reschedule(doc.id);
-            if (featureEnabled(c, 'attendance') && !c.archived)
-              console.log(
-                'attendanceMailTick',
-                doc.id,
-                JSON.stringify(await runSend(doc.id, c, null, ['student', 'mentor'])),
+            if (featureEnabled(c, 'attendance') && !c.archived) {
+              const result = await runSend(doc.id, c, null, ['student', 'mentor']);
+              console.log('attendanceMailTick', doc.id, JSON.stringify(result));
+              // 讓寄信分頁看得到「上次自動寄送」的結果。
+              await configRef(doc.id).set(
+                { lastAuto: { at: now(), ...result, error: '' } },
+                { merge: true },
               );
+            }
           } catch (e) {
             console.error('attendanceMailTick', doc.id, String(e));
+            const error = String((e as Error)?.message || e).slice(0, 200);
+            await configRef(doc.id)
+              .set(
+                { lastAuto: { at: now(), sent: 0, failed: 0, skipped: 0, error } },
+                { merge: true },
+              )
+              .catch(() => undefined);
           }
         }
       },
