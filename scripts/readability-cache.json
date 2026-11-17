@@ -1,0 +1,172 @@
+{
+  "note": "閱讀規範檢查的通過紀錄：由 npm run readability:record 產生，請勿手改。內容與檢查方式都和紀錄相同的教材在 npm run check 會跳過；說明見 scripts/lib/readability-cache.mjs。",
+  "common": "1587aeeb28cebe1f59132710d02c05710c9d5146fc488361ccfa839229f386b1",
+  "commonReads": {},
+  "materials": {
+    "acid-base-homeostasis": {
+      "files": "68f55da3fade58d62f563a932391e22e2e03031f466ed25106c3fffd4aec959c",
+      "reads": {
+        "CODEX_TASK_acidbase-v3-review-fix_2026-10-21.md": "ccbb755dd1f8f501c9c8c10bb0fe3542bd217925224639ea26e83dedf2496aa0",
+        "docs/MATCHING_QUESTION_UI.md": "b655ea1bb82b1929f1477dcc12e9c0d6adbd33600d2b0b1d6c0d2981b1d577ce",
+        "docs/urinary-release/ACIDBASE_STUDENT_SCRIPT.md": "719c486a28543f448f9188418d8ad1c4796fb23725e6de7c3444aa5eacb2ca04",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "airway-structure": {
+      "files": "85eca40d3eb4777313e6a2c7c511029007a8841a1341ea955b8068068c04f9d0",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "breathing-mechanics": {
+      "files": "ed01bf966bb219c13273f7ca49c70d394526f83e93ccb06ad3d2f1e72738e839",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "electrolyte-balance": {
+      "files": "890c4d359c0bc435b1cbe50cd52a8b342c77549ab8969098706f96b139e06ca9",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/electrolyte-balance.md": "3c8c180914c58ccaeb715ac1c10bd4d41a72249192fe582fba43129dd8329227",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "filtration-clearance": {
+      "files": "6dc45e7132a50b364ee794d952d8e81050a38970e3d2492540141b43f70e9092",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/filtration-clearance.md": "606f163268e70d23dc06cbe5b6c722b6efe85c60909394e21c13bfaca884763e",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "fluid-compartments": {
+      "files": "da8b18b8b24fb97dc73b1bc7c935b57ee2868ce28fe2f9e1c3f40a6238fad948",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/fluid-compartments.md": "79846ead765ea7a07f3cac106e86a8490531e344296ce7426d1b602354f76886",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "gas-exchange": {
+      "files": "5b3da9fea9807ce4636d02f526a473d7c8d532a9c6b5107641f8e161f3335650",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "kidney-anatomy": {
+      "files": "7f1dfc2df3557e1cd9007af1cb1a081d8375737aacd124012623c56aeccbf839",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/kidney-anatomy.md": "825e0b45b608bd8758196ee579915866df1077819ea0803c21d10565067e0806",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "lung-function": {
+      "files": "458114f81ca33870f8a84f85ba24b5c3958491621570b8618b0c4ac4ab96f882",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "lungs-pleura": {
+      "files": "241f49e3075eb7dc07bc55e6718558a3ecaebe416db0daf22f75c87cf01e830f",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "nephron-circulation": {
+      "files": "7ef7a58b09429eb095831341a8bde660ab91d2e638c1953a782c8937692df56a",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/nephron-circulation.md": "6655bd6252cfafb73df66d7b3aeb1be2d1638164c6b1a4757f82dd8399fd5ab4",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "o2-co2-transport": {
+      "files": "23da227850291b98c1f25064b51da9d91f14dd29fa41bc88972d06bc798102e3",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "respiratory-control": {
+      "files": "398705f5a5a32aa2852b68405f9a047054a0a3c62ec2f17f170e5db614f7e850",
+      "reads": {
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "tubular-handling": {
+      "files": "452851a83609ab7bcbe11426ee805bf286b2d449f2e0aefc3d0d3d52b5d9badc",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/tubular-handling.md": "3be10265249655da0807892cbc1a7bb4c777afeb2a7a37ec7c688353f2e3263e",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "urinary-route-micturition": {
+      "files": "da849da91ef0dbac24b5f2ad0c06e6a0afdacedee83b1ee0411ca40470a39e2d",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/urinary-route-micturition.md": "c7324512a92e253177aab25d4b68a37d1d4efee976f233fc2357897086eee20c",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "urine-concentration": {
+      "files": "0a9644df613180827d730552d6dc08268353d33650b328cd5c5cd89d5398acdf",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/urine-concentration.md": "8e98833469f3f6a8d9417ed2d268807b471d428c4c396a2d737b63fece2e8750",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    },
+    "water-sodium-regulation": {
+      "files": "3e82d428bbc42986688f6ff9b65b36618937d17abbe2aaadf81a6843b68473e3",
+      "reads": {
+        "docs/urinary-release/scripts/_README.md": "ad3b286d7c928a338019052dcd080cd25947c9f3fb0fce9ed9cf40c46f01859f",
+        "docs/urinary-release/scripts/water-sodium-regulation.md": "d42556be52762180cb88c96a1a9d3af188644c1f95ded2b12f6ea2f5232e10ae",
+        "materials-src/apply-kit/teacher-figures.json": "5879cac05340161acc930137b8f50ad9e8f0fed6d715bc55a565ea1045bb1cdb",
+        "public/materials/course-learning.js": "1254c700976feb33e8d3b7865c82bb3c2c3aefb0a5e8a83b45dc88f94a974e28",
+        "public/materials/readability-overlay.css": "c17d29fbf3788a88fa22a75ec77599bacefbf11a27d35a19b47925a03c691fa8",
+        "src/style.css": "54c78d5c94f7f87b8212810572980e46ae8934396734c34714ed68791eb1626b"
+      }
+    }
+  }
+}

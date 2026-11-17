@@ -9,6 +9,14 @@ import { checkScriptLayout } from './lib/acidbase-script-layout.mjs';
 import { readabilityMetrics } from './lib/readability-metrics.mjs';
 import { validateCapturedEvents } from './lib/release-tracking-proof.mjs';
 import { auditReadabilityCss } from './lib/readability-static.mjs';
+import {
+  nextReadabilityCache,
+  planReadability,
+  traceReads,
+  readReadabilityCache,
+  readabilityFingerprints,
+  writeReadabilityCache,
+} from './lib/readability-cache.mjs';
 export const readabilitySlugs =
   'airway-structure lungs-pleura breathing-mechanics lung-function gas-exchange o2-co2-transport respiratory-control kidney-anatomy nephron-circulation filtration-clearance tubular-handling urine-concentration urinary-route-micturition fluid-compartments water-sodium-regulation electrolyte-balance acid-base-homeostasis'.split(
     ' ',
@@ -26,6 +34,10 @@ export async function checkReadability({
   onCapture: observer,
   staticCheck = true,
   overlay = true,
+  // cache：沿用 scripts/readability-cache.json，內容與檢查程式都沒變的教材跳過（只有命令列預設開啟）。
+  // record：全部通過後把這次的指紋寫回紀錄檔。
+  cache = false,
+  record = false,
 } = {}) {
   fs.mkdirSync(out, { recursive: true });
   const report = {
@@ -39,9 +51,42 @@ export async function checkReadability({
     errors: [],
     scope: slugs,
   };
+  const fingerprints =
+    cache || record ? await readabilityFingerprints({ root, slugs, publishedVersion }) : null;
+  const saved = fingerprints ? readReadabilityCache(root) : null;
+  const plan = cache ? planReadability(saved, fingerprints, slugs, root) : { skip: [], run: slugs };
+  // 記錄模式：記下每份教材在檢查過程中另外讀了哪些專案內的檔案（教材自己的資料夾已由檔案指紋涵蓋）。
+  const outRel = path.relative(root, path.resolve(out)).split(path.sep).join('/');
+  const tracer = record
+    ? traceReads(
+        root,
+        (rel) =>
+          (!outRel.startsWith('..') && (rel === outRel || rel.startsWith(outRel + '/'))) ||
+          slugs.some(
+            (slug) =>
+              rel.startsWith(`public/materials/${publishedVersion(slug)}/`) ||
+              rel.startsWith(`materials-src/${slug}/`),
+          ),
+      )
+    : null;
+  if (cache)
+    console.log(
+      'READABILITY 未變更跳過',
+      plan.skip.length,
+      '份；需要檢查',
+      plan.run.length,
+      '份',
+      plan.sameCommon ? '' : '（檢查程式、平台播放器或共用檔有變更，全部重新檢查）',
+    );
   for (const slug of slugs) {
+    if (plan.skip.includes(slug)) {
+      report.materials.push({ slug, screens: [], errors: [], skipped: true, issueCount: 0, minPx: null, pass: true });
+      console.log('READABILITY', slug, 'SKIP 未變更（內容與檢查程式都和上次通過時相同）');
+      continue;
+    }
     const material = { slug, screens: [], errors: [] };
     report.materials.push(material);
+    tracer?.scope(slug);
     const publicFile = path.join(root, 'public/materials', publishedVersion(slug) + '/index.html');
     for (const scale of scales) {
       const scaleOut = path.join(out, slug, String(scale));
@@ -164,6 +209,7 @@ export async function checkReadability({
       ...material.screens.flatMap((s) => (s.minPx === null ? [] : [s.minPx])),
     );
     material.pass = !material.issueCount && !material.errors.length;
+    tracer?.scope('');
     fs.writeFileSync(path.join(out, slug + '.json'), JSON.stringify(material, null, 2) + '\n');
     console.log(
       'READABILITY',
@@ -174,6 +220,7 @@ export async function checkReadability({
       material.minPx,
     );
   }
+  tracer?.scope('#after'); // 之後只是列出未納入檢查的教材，不算檢查的輸入
   const targeted = new Set(readabilitySlugs.map(publishedVersion));
   report.warningMaterials = fs
     .readdirSync(path.join(root, 'public/materials'))
@@ -185,6 +232,7 @@ export async function checkReadability({
     materials: report.materials.length,
     pass: report.materials.filter((m) => m.pass).length,
     fail: report.materials.filter((m) => !m.pass).length,
+    skipped: report.materials.filter((m) => m.skipped).length,
     screens: report.materials.reduce((n, m) => n + m.screens.length, 0),
     issues: report.materials.reduce((n, m) => n + m.issueCount, 0),
     staticIssues: report.static?.issues.length || 0,
@@ -196,6 +244,17 @@ export async function checkReadability({
     ...report,
     materials: report.materials.map(({ screens, ...m }) => ({ ...m, screens: screens.length })),
   };
+  const traced = tracer?.stop();
+  if (record && fingerprints) {
+    // 只有整體通過才寫入；沒通過的教材不會被記成通過。
+    if (report.pass) {
+      const checked = Object.fromEntries(
+        report.materials.filter((m) => m.pass && !m.skipped).map((m) => [m.slug, traced[m.slug] || []]),
+      );
+      writeReadabilityCache(root, nextReadabilityCache(saved, fingerprints, checked, traced[''] || [], root));
+      console.log('READABILITY 已更新通過紀錄 scripts/readability-cache.json（請一併 commit）');
+    } else console.log('READABILITY 有未通過項目，通過紀錄未更新');
+  }
   fs.writeFileSync(path.join(out, 'summary.json'), JSON.stringify(compact, null, 2) + '\n');
   console.log(JSON.stringify(compact.summary));
   return compact;
@@ -272,9 +331,13 @@ async function walkRespiratory(slug, file, sizes, onPage, capture, createPage) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2),
     value = (k) => (args.includes(k) ? args[args.indexOf(k) + 1] : undefined);
+  // 預設跳過未變更的教材；--all 或 READABILITY_ALL=1 全部重新檢查；--record 通過後更新紀錄檔。
+  const all = args.includes('--all') || process.env.READABILITY_ALL === '1';
   const result = await checkReadability({
     out: value('--out'),
     slugs: value('--slug') ? [value('--slug')] : undefined,
+    cache: !all,
+    record: args.includes('--record'),
   });
   if (!result.pass) process.exitCode = 1;
 }

@@ -1,0 +1,183 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {
+  nextReadabilityCache,
+  pathState,
+  planReadability,
+  traceReads,
+  readReadabilityCache,
+  readabilityFingerprints,
+  writeReadabilityCache,
+} from '../scripts/lib/readability-cache.mjs';
+
+// 合成的小專案：兩份教材、一支檢查程式（import 一個模組）、平台播放器（import 一個模組）。
+function makeRoot() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'readability-cache-'));
+  const write = (file: string, text: string) => {
+    fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), text);
+  };
+  write('scripts/readability-check.mjs', "import { helper } from './lib/helper.mjs';\nconsole.log(helper);\n");
+  write('scripts/lib/helper.mjs', 'export const helper = 1;\n');
+  write('scripts/lib/unused.mjs', 'export const unused = 1;\n');
+  write('src/Player.tsx', "import { scale } from './scale';\nexport const Player = () => scale;\n");
+  write('src/FontSizePicker.tsx', 'export default function FontSizePicker() { return null; }\n');
+  write('src/scale.ts', 'export const scale = 1;\n');
+  write('src/App.tsx', 'export const App = 1;\n');
+  write('src/style.css', 'p{font-size:calc(18px * var(--font-scale, 1))}\n');
+  write('package-lock.json', '{"lockfileVersion":3}\n');
+  write('public/materials/course-learning.js', '// sdk\n');
+  write('public/materials/a-v1/index.html', '<p>a</p>');
+  write('public/materials/a-v1/img/x.svg', '<svg/>');
+  write('public/materials/b-v1/index.html', '<p>b</p>');
+  write('materials-src/a/content.json', '{}');
+  write('materials-src/b/content.json', '{}');
+  return { root, write };
+}
+const options = (root: string) => ({ root, slugs: ['a', 'b'], publishedVersion: (slug: string) => slug + '-v1' });
+
+test('指紋：相同內容算出相同結果；只改一份教材只影響那一份', async () => {
+  const { root, write } = makeRoot();
+  try {
+    const first = await readabilityFingerprints(options(root));
+    assert.deepEqual(await readabilityFingerprints(options(root)), first, '重算結果相同');
+    assert.match(first.common, /^[0-9a-f]{64}$/);
+    write('public/materials/a-v1/img/x.svg', '<svg><g/></svg>');
+    const changedA = await readabilityFingerprints(options(root));
+    assert.equal(changedA.common, first.common);
+    assert.notEqual(changedA.materials.a, first.materials.a);
+    assert.equal(changedA.materials.b, first.materials.b);
+    write('materials-src/b/content.json', '{"x":1}');
+    assert.notEqual((await readabilityFingerprints(options(root))).materials.b, first.materials.b, '腳本資料改了也算變更');
+    write('public/materials/a-v1/new.png', 'x');
+    assert.notEqual((await readabilityFingerprints(options(root))).materials.a, changedA.materials.a, '新增檔案也算變更');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('共用指紋：檢查程式、它 import 的模組、播放器用到的檔、style.css、共用教材檔、套件鎖定檔改了都會變；沒用到的檔不影響', async () => {
+  const { root, write } = makeRoot();
+  try {
+    const base = await readabilityFingerprints(options(root));
+    const changes: [string, string, boolean][] = [
+      ['scripts/readability-check.mjs', "import { helper } from './lib/helper.mjs';\nconsole.log(helper, 2);\n", true],
+      ['scripts/lib/helper.mjs', 'export const helper = 2;\n', true],
+      ['src/scale.ts', 'export const scale = 1.3;\n', true],
+      ['src/Player.tsx', "import { scale } from './scale';\nexport const Player = () => scale + 1;\n", true],
+      ['src/style.css', 'p{font-size:calc(19px * var(--font-scale, 1))}\n', true],
+      ['public/materials/course-learning.js', '// sdk 2\n', true],
+      ['package-lock.json', '{"lockfileVersion":4}\n', true],
+      ['src/App.tsx', 'export const App = 2;\n', false],
+      ['scripts/lib/unused.mjs', 'export const unused = 2;\n', false],
+      ['scripts/readability-cache.json', '{}\n', false],
+      ['src/attendance.css', 'p{color:red}\n', false],
+    ];
+    let previous = base.common;
+    for (const [file, text, affects] of changes) {
+      write(file, text);
+      const now = (await readabilityFingerprints(options(root))).common;
+      assert.equal(now !== previous, affects, file);
+      previous = now;
+    }
+    assert.deepEqual((await readabilityFingerprints(options(root))).materials, base.materials, '共用檔變更不影響教材指紋');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('跳過規則：共用指紋、教材檔案指紋、檢查時讀過的每個路徑都相同才跳過', () => {
+  const { root, write } = makeRoot();
+  try {
+    write('docs/script-a.md', 'v1');
+    const fp = { common: 'c1', materials: { a: 'a1', b: 'b1' } };
+    const slugs = ['a', 'b'];
+    const entry = (files: string, reads: Record<string, string | null> = {}) => ({ files, reads });
+    const good = { common: 'c1', commonReads: {}, materials: { a: entry('a1', { 'docs/script-a.md': pathState(root, 'docs/script-a.md'), 'docs/missing.md': null }), b: entry('b1') } };
+    assert.deepEqual(planReadability(good, fp, slugs, root), { skip: ['a', 'b'], run: [], sameCommon: true });
+    assert.deepEqual(planReadability({ ...good, materials: { ...good.materials, a: entry('a0') } }, fp, slugs, root).run, ['a'], '教材檔案變了');
+    assert.deepEqual(planReadability({ ...good, materials: { b: entry('b1') } }, fp, slugs, root).run, ['a'], '沒有紀錄的教材要檢查');
+    assert.deepEqual(planReadability({ ...good, common: 'c0' }, fp, slugs, root), { skip: [], run: ['a', 'b'], sameCommon: false });
+    assert.deepEqual(planReadability({ common: '', materials: {} }, fp, slugs, root).run, ['a', 'b'], '沒有紀錄檔');
+    assert.deepEqual(planReadability({ common: '', materials: { a: entry('a1') } }, { common: '', materials: { a: 'a1' } }, ['a'], root).run, ['a'], '空白指紋不算相同');
+    assert.deepEqual(planReadability({ ...good, materials: { a: 'a1', b: entry('b1') } } as never, fp, slugs, root).run, ['a'], '舊格式的紀錄不採用');
+    // 檢查時讀過的檔案（不在教材資料夾裡）內容改了 → 只有那份教材要重新檢查
+    write('docs/script-a.md', 'v2');
+    assert.deepEqual(planReadability(good, fp, slugs, root), { skip: ['b'], run: ['a'], sameCommon: true });
+    write('docs/script-a.md', 'v1');
+    // 當時不存在的檔案後來出現 → 也要重新檢查
+    write('docs/missing.md', 'now here');
+    assert.deepEqual(planReadability(good, fp, slugs, root).run, ['a']);
+    fs.rmSync(path.join(root, 'docs/missing.md'));
+    assert.deepEqual(planReadability(good, fp, slugs, root).run, []);
+    // 共用的讀取（不屬於任何一份教材）變了 → 全部重新檢查
+    const withCommon = { ...good, commonReads: { 'docs/script-a.md': pathState(root, 'docs/script-a.md') } };
+    assert.deepEqual(planReadability(withCommon, fp, slugs, root).run, []);
+    write('docs/script-a.md', 'v3');
+    assert.deepEqual(planReadability(withCommon, fp, slugs, root), { skip: [], run: ['a', 'b'], sameCommon: false });
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('路徑狀態與讀取追蹤：記下檢查時讀了哪些專案內的檔案，依教材分開', () => {
+  const { root, write } = makeRoot();
+  try {
+    write('docs/x.md', 'x');
+    assert.match(pathState(root, 'docs/x.md') as string, /^[0-9a-f]{64}$/);
+    assert.match(pathState(root, 'docs') as string, /^dir:[0-9a-f]{64}$/);
+    assert.equal(pathState(root, 'docs/none.md'), null);
+    const before = pathState(root, 'docs');
+    write('docs/y.md', 'y');
+    assert.notEqual(pathState(root, 'docs'), before, '資料夾多了檔案算變更');
+    const tracer = traceReads(root, (rel) => rel.startsWith('public/materials/a-v1/'));
+    let traced: Record<string, string[]> = {};
+    try {
+      fs.readFileSync(path.join(root, 'src/style.css'));
+      tracer.scope('a');
+      fs.readFileSync(path.join(root, 'docs/x.md'), 'utf8');
+      fs.existsSync(path.join(root, 'docs/none.md'));
+      fs.readFileSync(path.join(root, 'public/materials/a-v1/index.html'));
+      fs.readFileSync(path.join(os.tmpdir(), path.basename(root), 'docs/y.md'));
+      tracer.scope('b');
+      fs.readdirSync(path.join(root, 'docs'));
+      fs.existsSync(path.join(root, 'node_modules/x/index.js'));
+      fs.existsSync(path.join(root, 'scripts/readability-cache.json'));
+      tracer.scope('');
+    } finally {
+      traced = tracer.stop();
+    }
+    assert.deepEqual(traced, { '': ['src/style.css'], a: ['docs/none.md', 'docs/x.md', 'docs/y.md'], b: ['docs'] });
+    fs.readFileSync(path.join(root, 'docs/x.md'));
+    assert.equal(fs.readFileSync(path.join(root, 'docs/x.md'), 'utf8'), 'x', '停止後 fs 恢復原狀');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('紀錄：只記這次檢查通過的教材；跳過的沿用舊紀錄；共用指紋變了舊紀錄作廢；讀寫往返；損毀當作沒有紀錄', () => {
+  const { root, write } = makeRoot();
+  try {
+    write('docs/x.md', 'x');
+    const fp = { common: 'c2', materials: { a: 'a2', b: 'b2' } };
+    const old = { common: 'c2', commonReads: { 'src/style.css': 'old' }, materials: { b: { files: 'b-old', reads: {} }, z: { files: 'z1', reads: {} } } };
+    const same = nextReadabilityCache(old, fp, { a: ['docs/x.md', 'docs/none.md'] }, ['src/style.css'], root);
+    assert.deepEqual(same.materials, { a: { files: 'a2', reads: { 'docs/x.md': pathState(root, 'docs/x.md'), 'docs/none.md': null } }, b: { files: 'b-old', reads: {} }, z: { files: 'z1', reads: {} } });
+    assert.equal(same.commonReads['src/style.css'], pathState(root, 'src/style.css'));
+    const reset = nextReadabilityCache({ ...old, common: 'c1' }, fp, { a: [] }, [], root);
+    assert.deepEqual([reset.common, reset.materials, reset.commonReads], ['c2', { a: { files: 'a2', reads: {} } }, {}], '共用指紋不同：沒重新通過的不保留');
+    assert.deepEqual(nextReadabilityCache({ common: 'c2', materials: {} }, fp, {}, [], root).materials, {}, '沒通過就不記');
+    assert.deepEqual(readReadabilityCache(root), { common: '', materials: {} });
+    writeReadabilityCache(root, same);
+    assert.deepEqual(readReadabilityCache(root), same);
+    fs.writeFileSync(path.join(root, 'scripts/readability-cache.json'), '{broken');
+    assert.deepEqual(readReadabilityCache(root), { common: '', materials: {} });
+    fs.writeFileSync(path.join(root, 'scripts/readability-cache.json'), '{"common":5,"materials":[]}');
+    assert.equal(readReadabilityCache(root).common, '');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
