@@ -1,6 +1,10 @@
 {
   "note": "閱讀規範檢查的通過紀錄：由 npm run readability:record 產生，請勿手改。內容與檢查方式都和紀錄相同的教材在 npm run check 會跳過；說明見 scripts/lib/readability-cache.mjs。",
-  "common": "1587aeeb28cebe1f59132710d02c05710c9d5146fc488361ccfa839229f386b1",
+  "environment": {
+    "platform": "darwin-arm64",
+    "chrome": "157.0.8103.79"
+  },
+  "common": "edb37be7ed43db53d4f648813e6944c5326c3449a0a1dd70e41086a4e3fd4f76",
   "commonReads": {},
   "materials": {
     "acid-base-homeostasis": {
