@@ -735,3 +735,67 @@ test('B2：超量不完整資料同時驗證 Report、CareList、researchAnon、
   const itemCsv = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id], kind: 'itemAnalysis' });
   assert.ok(itemCsv.csv.includes('難度P'));
 });
+
+
+test('C1：共享歷史與單班歷史混用按時間排序，全班／單班及目標班序 [A,B] 與 [B,A] 皆一致', async () => {
+  const { db, h, call } = setup({ moodEnabled: true });
+  const tBase = Date.now() - 1000000;
+  const hExamId = '40000000-0000-4000-8000-000000000000';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: hExamId,
+    title: 'C1歷史',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  // H1（最舊，A+B 共用）：B 填 gray_fog
+  const h1 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: hExamId, label: 'H1', date: '2026-11-01', classIds: ['A', 'B'], startsAt: tBase + 1000 });
+  // H2（次舊，A+B 共用）：B 填 gray_fog
+  const h2 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: hExamId, label: 'H2', date: '2026-11-02', classIds: ['A', 'B'], startsAt: tBase + 2000 });
+  // H3（最新，僅 B）：B 填 blue_caterpillar
+  const h3 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: hExamId, label: 'H3', date: '2026-11-03', classIds: ['B'], startsAt: tBase + 3000 });
+
+  for (const s of [h1, h2]) {
+    await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: hExamId, sittingId: s.id });
+    await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: s.id, mood: 'gray_fog' }); // A班 uid1 皆灰
+    await call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: s.id, mood: 'gray_fog' }); // B班 uid3 在 H1/H2 灰
+  }
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: hExamId, sittingId: h3.id });
+  await call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: h3.id, mood: 'blue_caterpillar' }); // B班 uid3 在最新 H3 為藍
+
+  const tExamId = '50000000-0000-4000-8000-000000000000';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: tExamId,
+    title: 'C1目標',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const tSitAB = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: tExamId, label: 'T-AB', date: '2026-11-10', classIds: ['A', 'B'], startsAt: tBase + 10000 });
+  const tSitBA = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: tExamId, label: 'T-BA', date: '2026-11-10', classIds: ['B', 'A'], startsAt: tBase + 10000 });
+
+  for (const tSit of [tSitAB, tSitBA]) {
+    await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: tExamId, sittingId: tSit.id });
+    await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: tSit.id, mood: 'gray_fog' });
+    await call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: tSit.id, mood: 'gray_fog' });
+  }
+
+  // 全班查詢 [A, B]
+  const allAB = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId: tExamId, sittingId: tSitAB.id });
+  // 全班查詢 [B, A]
+  const allBA = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId: tExamId, sittingId: tSitBA.id });
+  // 單班查詢 A、B
+  const onlyA = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId: tExamId, sittingId: tSitAB.id, classId: 'A' });
+  const onlyB = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId: tExamId, sittingId: tSitAB.id, classId: 'B' });
+
+  // A 班 uid1 最近 3 場 (T, H2, H1) 皆灰 -> 持續疏離；B 班 uid3 最近 3 場 (T灰, H3藍, H2灰) -> 不得誤標持續疏離
+  assert.equal(onlyA.entries.some((e) => e.studentId === 'S01' && e.tags.includes('持續疏離')), true);
+  assert.equal(onlyB.entries.some((e) => e.studentId === 'S03' && e.tags.includes('持續疏離')), false);
+  assert.equal(allAB.entries.some((e) => e.studentId === 'S03' && e.tags.includes('持續疏離')), false);
+  assert.equal(allBA.entries.some((e) => e.studentId === 'S03' && e.tags.includes('持續疏離')), false);
+  assert.deepEqual(allAB.entries, allBA.entries);
+  assert.deepEqual(allAB.entries.filter((e) => e.classId === 'A'), onlyA.entries);
+  assert.deepEqual(allAB.entries.filter((e) => e.classId === 'B'), onlyB.entries);
+});

@@ -1033,7 +1033,9 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
         if (picked >= 2) break;
       }
     }
-    const neededHistory = [...neededMap.values()];
+    const bySittingDesc = (a: (typeof candidateSittings)[number], b: (typeof candidateSittings)[number]) =>
+      b.startsAt - a.startsAt || (b.sitting.date || '').localeCompare(a.sitting.date || '');
+    const neededHistory = [...neededMap.values()].sort(bySittingDesc);
 
     const histData: Array<{
       cs: (typeof candidateSittings)[number];
@@ -1056,6 +1058,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       );
       histData.push(...batch);
     }
+    histData.sort((a, b) => bySittingDesc(a.cs, b.cs));
 
     const inputs = Object.values(curPrep)
       .filter((rec) => !req.data.classId || rec.classId === req.data.classId)
