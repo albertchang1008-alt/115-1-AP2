@@ -39,7 +39,7 @@ export interface ZuvioApi {
   deleteResults(examId: string, sittingId: string): Promise<void>;
   report(examId: string, sittingIds: string[], classId?: string): Promise<ReturnType<typeof examReport>>;
   fullReport(examId: string, sittingIds: string[], classId?: string, threshold?: number): Promise<FullZuvioReport>;
-  careList(examId: string, sittingId: string, classId?: string, threshold?: number): Promise<{ entries: CareListEntry[]; threshold: number }>;
+  careList(examId: string, sittingId: string, classId?: string, threshold?: number): Promise<{ entries: CareListEntry[]; threshold: number; preExamIncomplete?: boolean }>;
   exportCsv(examId: string, sittingIds: string[], kind: 'itemAnalysis' | 'researchAnon' | 'researchNamed', classId?: string): Promise<{ filename: string; csv: string }>;
   openMood(examId: string, sittingId: string, durationMinutes?: number): Promise<any>;
   closeMood(sittingId?: string): Promise<{ ok: boolean }>;

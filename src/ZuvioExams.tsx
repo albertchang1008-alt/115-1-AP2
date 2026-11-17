@@ -322,6 +322,7 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
   const [threshold, setThreshold] = useState(80);
   const [full, setFull] = useState<FullZuvioReport>();
   const [care, setCare] = useState<CareListEntry[]>([]);
+  const [careIncomplete, setCareIncomplete] = useState(false);
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [exporting, setExporting] = useState('');
 
@@ -346,12 +347,16 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
   }, [examId, list, moodEnabled]);
 
   useEffect(() => {
-    if (!examId || !sel.length) { setFull(undefined); setCare([]); return; }
+    if (!examId || !sel.length) { setFull(undefined); setCare([]); setCareIncomplete(false); return; }
     api.fullReport(examId, sel, cls || undefined, threshold).then(setFull);
     if (moodEnabled && sel.length === 1) {
-      api.careList(examId, sel[0], cls || undefined, threshold).then((r) => setCare(r.entries)).catch(() => setCare([]));
+      api.careList(examId, sel[0], cls || undefined, threshold).then((r) => {
+        setCare(r.entries);
+        setCareIncomplete(Boolean(r.preExamIncomplete));
+      }).catch(() => { setCare([]); setCareIncomplete(false); });
     } else {
       setCare([]);
+      setCareIncomplete(false);
     }
   }, [examId, sel.join(), cls, threshold, moodEnabled]);
 
@@ -388,8 +393,8 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
           {moodOn && (
             <>
               <button type="button" disabled={!sel.length || !!exporting || !hasResults} onClick={() => void doExport('itemAnalysis')}>試題分析 CSV</button>
-              <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchAnon')}>研究 CSV（去識別）</button>
-              <button type="button" disabled={!sel.length || !!exporting} onClick={() => void doExport('researchNamed')}>研究 CSV（具名・含個資）</button>
+              <button type="button" disabled={!sel.length || !!exporting || !!full?.preExamIncomplete} title={full?.preExamIncomplete ? '考前練習資料不完整，暫停匯出' : undefined} onClick={() => void doExport('researchAnon')}>研究 CSV（去識別）</button>
+              <button type="button" disabled={!sel.length || !!exporting || !!full?.preExamIncomplete} title={full?.preExamIncomplete ? '考前練習資料不完整，暫停匯出' : undefined} onClick={() => void doExport('researchNamed')}>研究 CSV（具名・含個資）</button>
             </>
           )}
         </div>
@@ -583,12 +588,18 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
           {moodOn && sel.length === 1 && (
             <section className="z-card">
               <h3>關懷名單（僅教師可見 · {care.length} 人）</h3>
+              {(careIncomplete || full?.preExamIncomplete) && (
+                <p className="z-warn">部分單元作答紀錄超過單次查詢上限，考前練習資料不完整，未讀到者暫不判為確定未練。</p>
+              )}
               {!care.length ? <p className="muted">本場次無符合條件的關懷對象。</p> : (
                 <table className="z-table">
                   <thead><tr><th>姓名（點擊顯示）</th><th>班級</th><th>成績</th><th>情緒</th><th>考前狀態 / 覆蓋率</th><th>練習分類</th><th>觸發原因</th></tr></thead>
                   <tbody>
                     {care.map((c) => {
                       const show = !!revealed[c.uid];
+                      const prepText = c.preExamIncomplete && c.preExamCoverage === 0 && c.preExamStatus === 'none'
+                        ? '資料不完整'
+                        : `${c.preExamStatus}（${c.preExamCoverage}%）`;
                       return (
                         <tr key={c.uid}>
                           <td>
@@ -599,7 +610,7 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
                           <td>{c.classId}</td>
                           <td>{c.score !== null ? `${c.score}${c.percentage !== null ? ` (${c.percentage}%)` : ''}` : '缺考'}</td>
                           <td>{c.mood ? MOOD_STATES.find((m) => m.code === c.mood)?.label.split('（')[0] : '未填'}</td>
-                          <td>{c.preExamStatus}（{c.preExamCoverage}%）</td>
+                          <td>{prepText}</td>
                           <td>{c.practiceGroup || '—'}</td>
                           <td>{[...c.tags, ...c.streakNotes].join('、')}</td>
                         </tr>

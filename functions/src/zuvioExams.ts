@@ -995,6 +995,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       db.collection(`courses/${courseId}/zuvioExams`).get(),
     ]);
     const curPrep = curPrepRes.students;
+    const preExamIncomplete = curPrepRes.incomplete;
 
     const targetStart = typeof targetSitting.startsAt === 'number' ? targetSitting.startsAt : Date.now();
     const candidateSittings: Array<{
@@ -1032,19 +1033,29 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
         if (picked >= 2) break;
       }
     }
-    const neededHistory = [...neededMap.values()].slice(0, 30);
+    const neededHistory = [...neededMap.values()];
 
-    const histData = await Promise.all(
-      neededHistory.map(async (cs) => {
-        const [resMap, moodObj] = await Promise.all([
-          sittingResults(cs.examRef, cs.sitting),
-          sittingMoods(courseId, cs.examId, cs.sitting.id),
-        ]);
-        const hItemCount = (cs.exam.items || []).length;
-        const hMaxScore = hItemCount * (cs.exam.score || 1);
-        return { cs, resMap, moodMap: moodObj.byStudentId, hItemCount, hMaxScore };
-      }),
-    );
+    const histData: Array<{
+      cs: (typeof candidateSittings)[number];
+      resMap: Map<string, ZResult>;
+      moodMap: Map<string, MoodCode>;
+      hItemCount: number;
+      hMaxScore: number;
+    }> = [];
+    for (let i = 0; i < neededHistory.length; i += 10) {
+      const batch = await Promise.all(
+        neededHistory.slice(i, i + 10).map(async (cs) => {
+          const [resMap, moodObj] = await Promise.all([
+            sittingResults(cs.examRef, cs.sitting),
+            sittingMoods(courseId, cs.examId, cs.sitting.id),
+          ]);
+          const hItemCount = (cs.exam.items || []).length;
+          const hMaxScore = hItemCount * (cs.exam.score || 1);
+          return { cs, resMap, moodMap: moodObj.byStudentId, hItemCount, hMaxScore };
+        }),
+      );
+      histData.push(...batch);
+    }
 
     const inputs = Object.values(curPrep)
       .filter((rec) => !req.data.classId || rec.classId === req.data.classId)
@@ -1066,6 +1077,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
           practicedItemCount: rec.practicedItemCount,
           coverage: rec.coverage,
           hasWrongInExam: res ? res.correct < targetItemCount : false,
+          preExamIncomplete,
           recentHistory: eligibleHist.map((h) => {
             const hRes = h.resMap.get(rec.studentId);
             const hPct = hRes ? calcScorePercentage(hRes.correct, h.hItemCount, hRes.score, h.hMaxScore) : null;
@@ -1079,7 +1091,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
         };
       });
 
-    return { entries: buildCareList(inputs, threshold), threshold };
+    return { entries: buildCareList(inputs, threshold), threshold, preExamIncomplete };
   });
 
   const zuvioExportCsv = onCall(options, async (req) => {
@@ -1119,6 +1131,9 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       Promise.all(sittings.map((s: any) => ensureSittingPrep(courseId, c, ref, s, unitIds, questionIds))),
       Promise.all(sittings.map((s: any) => sittingMoods(courseId, examId, s.id))),
     ]);
+    if (prepResList.some((r) => r.incomplete)) {
+      fail('部分單元作答紀錄超過單次查詢上限，考前練習資料不完整，暫停匯出研究 CSV');
+    }
     const prepList = prepResList.map((r) => r.students);
 
     const itemCount = maskedView.items.length;

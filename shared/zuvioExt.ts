@@ -724,6 +724,7 @@ export interface CareStudentInput {
   practicedItemCount?: number;
   coverage?: number;
   hasWrongInExam?: boolean;
+  preExamIncomplete?: boolean;
   recentHistory?: Array<{
     score: number | null;
     percentage?: number | null;
@@ -743,6 +744,7 @@ export interface CareListEntry {
   mood: MoodCode | null;
   preExamStatus: PreExamStatus;
   preExamCoverage: number;
+  preExamIncomplete?: boolean;
   practiceGroup: string | null;
   tags: string[];
   streakNotes: string[];
@@ -815,7 +817,8 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
 
     let practiceGroup: string | null = null;
     if (lowScore && st.mood === 'blue_caterpillar') {
-      practiceGroup = hasPracticed ? '有練習＋低分＋藍色' : '沒練習＋低分＋藍色';
+      if (hasPracticed) practiceGroup = '有練習＋低分＋藍色';
+      else practiceGroup = st.preExamIncomplete ? '練習資料不完整' : '沒練習＋低分＋藍色';
     } else if (st.mood === 'green_flow' && hasPracticed && (st.hasWrongInExam || lowScore)) {
       practiceGroup = '有練習＋答錯＋綠色';
     }
@@ -832,6 +835,7 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
         mood: st.mood,
         preExamStatus: st.preExamStatus,
         preExamCoverage: st.coverage ?? 0,
+        preExamIncomplete: Boolean(st.preExamIncomplete),
         practiceGroup,
         tags,
         streakNotes,

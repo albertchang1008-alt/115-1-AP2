@@ -166,12 +166,15 @@ test('R1/R2/R5：Report 元件實際渲染無成績場次、逐題練過比較�
               moodSummary: { counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 1, green_flow: 1, gray_fog: 0 }, totalResponded: 2, threshold: 80, byScore: [{ code: 'blue_caterpillar', label: '毛毛蟲', color: '#3B82C4', highCount: 0, lowCount: 1, total: 1, passRate: 0 }], byQuestion: [], shifts: null },
               preExamCounts: { passed: 0, practiced: 1, infographic_only: 0, none: 1 },
               preExamDetail: { avgCoverage: 50, hasResults: hasRes, byQuestion: [{ qid: 'q1', label: 'Q1', practicedCount: 1, practicedCorrect: 1, practicedAccuracy: 1, practicedD: 1, practicedWrongCount: 0, practicedWrongCorrect: 0, practicedWrongAccuracy: null, unpracticedCount: 1, unpracticedCorrect: 0, unpracticedAccuracy: 0, unpracticedD: 0 }], coverageBands: [{ label: '0%', count: 1, avgPercentage: hasRes ? 0 : null }, { label: '100%', count: 1, avgPercentage: hasRes ? 100 : null }] },
+              preExamIncomplete: mode === 'incomplete',
             };
           },
           async careList() {
+            const inc = mode === 'incomplete';
             return {
               threshold: 80,
-              entries: [{ uid: 'u1', studentId: 'S1', name: '王小明', maskedName: '王○明', classId: 'A', score: 40, percentage: 40, mood: 'blue_caterpillar', preExamStatus: 'none', preExamCoverage: 0, practiceGroup: '沒練習＋低分＋藍色', tags: ['可能需要鷹架'], streakNotes: [] }],
+              preExamIncomplete: inc,
+              entries: [{ uid: 'u1', studentId: 'S1', name: '王小明', maskedName: '王○明', classId: 'A', score: 40, percentage: 40, mood: 'blue_caterpillar', preExamStatus: 'none', preExamCoverage: 0, preExamIncomplete: inc, practiceGroup: inc ? '練習資料不完整' : '沒練習＋低分＋藍色', tags: ['可能需要鷹架'], streakNotes: [] }],
             };
           },
         };
@@ -191,7 +194,7 @@ test('R1/R2/R5：Report 元件實際渲染無成績場次、逐題練過比較�
 
   const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());
   try {
-    for (const mode of ['no-results', 'with-results', 'flag-off']) {
+    for (const mode of ['no-results', 'with-results', 'incomplete', 'flag-off']) {
       const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
       await page.setContent(`<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div></body></html>`);
       await page.evaluate((m) => { (window as any).__REPORT_MODE__ = m; }, mode);
@@ -210,6 +213,17 @@ test('R1/R2/R5：Report 元件實際渲染無成績場次、逐題練過比較�
         assert.ok(txt.includes('練習分類'));
         assert.ok(txt.includes('沒練習＋低分＋藍色'));
         assert.ok(txt.includes('none（0%）'));
+      } else if (mode === 'incomplete') {
+        assert.ok(txt.includes('考前練習資料不完整'));
+        assert.ok(txt.includes('資料不完整'));
+        assert.ok(txt.includes('練習資料不完整'));
+        assert.ok(!txt.includes('沒練習＋低分＋藍色'));
+        const btns = await page.evaluate(() =>
+          [...document.querySelectorAll('button')].map((b) => ({ text: b.textContent || '', disabled: (b as HTMLButtonElement).disabled })),
+        );
+        assert.equal(btns.find((b) => b.text.includes('試題分析 CSV'))?.disabled, false);
+        assert.equal(btns.find((b) => b.text.includes('研究 CSV（去識別）'))?.disabled, true);
+        assert.equal(btns.find((b) => b.text.includes('研究 CSV（具名'))?.disabled, true);
       } else if (mode === 'flag-off') {
         assert.ok(txt.includes('場次摘要'));
         assert.ok(!txt.includes('考前練習詳細統計'));

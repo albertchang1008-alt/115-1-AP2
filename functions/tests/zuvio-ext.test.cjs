@@ -577,3 +577,161 @@ test('R2/R3/R5/R7 後端驗證：多班歷史不遮蔽、跨頁完整讀取與�
   const s02 = careMulti.entries.find((e) => e.studentId === 'S02');
   assert.ok(s02 && s02.tags.includes('持續疏離'), 'A 班歷史不應被 B 班 6 場遮蔽');
 });
+
+
+test('B1：16班／32個不同歷史場次不截斷，全班與逐班查詢一致', async () => {
+  const { db, h, call } = setup({ moodEnabled: true });
+  const classIds = Array.from({ length: 16 }, (_, i) => `C${String(i + 1).padStart(2, '0')}`);
+  const course = db.data.get('courses/C1');
+  course.published.classIds = classIds;
+  db.data.set('courses/C1', course);
+
+  const students16 = classIds.map((cl, i) => ({
+    uid: `b1_uid_${i + 1}`,
+    studentId: `B1S${String(i + 1).padStart(2, '0')}`,
+    name: `學生${i + 1}`,
+    classId: cl,
+    enabled: true,
+  }));
+  for (const s of students16) {
+    db.data.set(`courses/C1/studentIds/${s.studentId}`, { email: `${s.studentId}@x` });
+    db.data.set(`enrollments/C1__${s.studentId}@x`, { courseId: 'C1', ...s });
+  }
+  const access16 = async (req, courseId, teacherOnly) => {
+    const uid = req.auth?.uid;
+    if (teacherOnly && uid !== 'T1') throw new Error('forbidden');
+    if (uid === 'T1') return { p: { uid: 'T1', teacher: true, classId: '' }, c: db.data.get(`courses/${courseId}`) };
+    const st = students16.find((r) => r.uid === uid);
+    if (!st) throw new Error('unauth');
+    return { p: { uid: st.uid, teacher: false, classId: st.classId, studentId: st.studentId }, c: db.data.get(`courses/${courseId}`) };
+  };
+  const h16 = createZuvioHandlers(db, access16, {});
+  const call16 = (fn, uid, data) => fn.run({ auth: { uid }, data });
+
+  const tBase = Date.now() - 1000000;
+  // 建立兩張歷史考卷，各有 16 個不同班級場次（共 32 個獨立歷史場次）
+  for (let histNo = 1; histNo <= 2; histNo++) {
+    const hExamId = `10000000-0000-4000-8000-00000000000${histNo}`;
+    await call16(h16.zuvioCreateExam, 'T1', {
+      courseId: 'C1',
+      examId: hExamId,
+      title: `歷史考卷${histNo}`,
+      score: 100,
+      classIds,
+      items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+    });
+    for (let i = 0; i < 16; i++) {
+      const s = await call16(h16.zuvioCreateSitting, 'T1', {
+        courseId: 'C1',
+        examId: hExamId,
+        label: `H${histNo}-${classIds[i]}`,
+        date: `2026-11-0${histNo}`,
+        classIds: [classIds[i]],
+        startsAt: tBase + histNo * 100000 + i * 100,
+      });
+      await call16(h16.zuvioOpenMood, 'T1', { courseId: 'C1', examId: hExamId, sittingId: s.id });
+      await call16(h16.zuvioSubmitMood, students16[i].uid, { courseId: 'C1', sittingId: s.id, mood: 'gray_fog' });
+    }
+  }
+
+  // 建立目標考卷與包含全部 16 班的場次
+  const targetExamId = '20000000-0000-4000-8000-000000000000';
+  await call16(h16.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: targetExamId,
+    title: '16班期末考',
+    score: 100,
+    classIds,
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const targetSit = await call16(h16.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId: targetExamId,
+    label: '全16班場次',
+    date: '2026-11-15',
+    classIds,
+    startsAt: Date.now() - 1000,
+  });
+  await call16(h16.zuvioOpenMood, 'T1', { courseId: 'C1', examId: targetExamId, sittingId: targetSit.id });
+  for (const st of students16) {
+    await call16(h16.zuvioSubmitMood, st.uid, { courseId: 'C1', sittingId: targetSit.id, mood: 'gray_fog' });
+  }
+
+  const allCare = await call16(h16.zuvioCareList, 'T1', { courseId: 'C1', examId: targetExamId, sittingId: targetSit.id });
+  assert.equal(allCare.entries.length, 16, '全班查詢應含全部 16 班，不應因 30 場截斷漏末班');
+  assert.ok(allCare.entries.every((e) => e.tags.includes('持續疏離')));
+
+  const lastCare = await call16(h16.zuvioCareList, 'T1', { courseId: 'C1', examId: targetExamId, sittingId: targetSit.id, classId: 'C16' });
+  assert.equal(lastCare.entries.length, 1);
+  assert.ok(lastCare.entries[0].tags.includes('持續疏離'));
+  assert.deepEqual(
+    allCare.entries.find((e) => e.classId === 'C16'),
+    lastCare.entries[0],
+  );
+  assert.ok(h);
+});
+
+test('B2：超量不完整資料同時驗證 Report、CareList、researchAnon、researchNamed 與 itemAnalysis', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true, handlerOptions: { prepPageSize: 2, prepMaxAttempts: 4 } });
+  const tNow = Date.now() - 1000;
+  const examId = '30000000-0000-4000-8000-000000000000';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'B2超量',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sit = await call(h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId,
+    label: 'B2場',
+    date: '2026-11-16',
+    classIds: ['A'],
+    startsAt: tNow,
+  });
+  for (let i = 0; i < 4; i++) {
+    db.data.set(`courses/C1/attempts/b2_other_${i}`, {
+      uid: 'uid1',
+      classId: 'A',
+      unitId: 'u1',
+      receivedAt: tNow - (i + 1) * 100,
+      answers: [{ questionId: 'q_other', correct: true }],
+    });
+  }
+  // 第 5 筆才包含本卷 q0（模擬超過上限）
+  db.data.set('courses/C1/attempts/b2_target_5', {
+    uid: 'uid1',
+    classId: 'A',
+    unitId: 'u1',
+    receivedAt: tNow - 5000,
+    answers: [{ questionId: 'q0', correct: true }],
+  });
+
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: sit.id, mood: 'blue_caterpillar' });
+
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const m = fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => 1); // 全部答錯 0%
+  const parsed = parseZuvioMatrix(m);
+  const prev = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: true, previewId: prev.previewId });
+
+  const rep = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id] });
+  assert.equal(rep.preExamIncomplete, true);
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/prep/${sit.id}`).finalized, false);
+
+  const care = await call(h.zuvioCareList, 'T1', { courseId: 'C1', examId, sittingId: sit.id, threshold: 80 });
+  assert.equal(care.preExamIncomplete, true);
+  const s01 = care.entries.find((e) => e.studentId === 'S01');
+  assert.ok(s01);
+  assert.equal(s01.preExamIncomplete, true);
+  assert.notEqual(s01.practiceGroup, '沒練習＋低分＋藍色');
+  assert.equal(s01.practiceGroup, '練習資料不完整');
+
+  await assert.rejects(() => call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id], kind: 'researchAnon' }));
+  await assert.rejects(() => call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id], kind: 'researchNamed' }));
+  const itemCsv = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id], kind: 'itemAnalysis' });
+  assert.ok(itemCsv.csv.includes('難度P'));
+});

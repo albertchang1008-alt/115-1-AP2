@@ -587,3 +587,26 @@ test('R1/R2/R6/R7：逐題鑑別度與無成績覆蓋率、passed不代本卷、
   assert.equal(mR7.shifts?.totalPaired, 2);
   assert.equal(mR7.shifts?.toGreen, 1);
 });
+
+
+test('B2：buildCareList 在 preExamIncomplete 且未讀到練習時不得判為「沒練習＋低分＋藍色」', () => {
+  const careInc = buildCareList([
+    {
+      uid: 'u_inc',
+      studentId: 'S888',
+      name: '林不完整',
+      classId: 'A',
+      score: 45,
+      percentage: 45,
+      mood: 'blue_caterpillar',
+      preExamStatus: 'none',
+      practicedItemCount: 0,
+      coverage: 0,
+      preExamIncomplete: true,
+    },
+  ]);
+  assert.equal(careInc.length, 1);
+  assert.equal(careInc[0].preExamIncomplete, true);
+  assert.equal(careInc[0].practiceGroup, '練習資料不完整');
+  assert.notEqual(careInc[0].practiceGroup, '沒練習＋低分＋藍色');
+});
