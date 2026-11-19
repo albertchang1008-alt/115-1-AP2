@@ -1,6 +1,38 @@
-# 課堂點名 #67 第二階段：實作報告（2026-11-17，Claude Fable）
+# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b）
 
-## 給驗證者的摘要
+## 給 Claude 的摘要
+- 本次完成 #67 **M1-b（Email 跨日重寄修正）**，依教師決定將 Apps Script 去重紀錄保留 **180 天**（取代原 30 天方案）。
+- 變更檔：`apps-script/AttendanceMailer.gs`、`docs/attendance/APPS_SCRIPT_SETUP.md`、`docs/attendance/IMPL_REPORT.md`、`functions/tests/attendance.test.cjs`（保留既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`）。
+- 實跑指令：`node --test functions/tests/attendance.test.cjs`（Node v22.23.2），結果 **18/18 PASS**（含新增 2 支 M1-b 測試，使用合成資料與 Node VM 假時鐘，未寄真信）。
+- 偏離：無（教師已核定 180 天；`CacheService` 已完全移除，單純改用 `PropertiesService`）。
+- 抽查項（最多 5 項）：
+  1. `apps-script/AttendanceMailer.gs`：鎖內執行過期清理（僅刪 `sent:` 且 `>= 180 天`）、查詢去重、寄信與寫入；`duplicate` 不刷新時間、失敗／額度耗盡不寫入。
+  2. `functions/tests/attendance.test.cjs`：Node VM 假 `PropertiesService` 與假時鐘，驗證立即、24 小時、180 天少 1 ms、滿 180 天清理、不延長期限、`MAIL_KEY`／其他屬性保留、失敗重試。
+  3. `docs/attendance/APPS_SCRIPT_SETUP.md`：更新為 180 天說明與兩項已知限制。
+  4. 本報告「返修 M1-b」之 Google Apps Script 180 天容量估算公式與日均承受量。
+  5. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
+
+---
+
+## 返修 M1-b（2026-11-19，Antigravity Hydrogen；依教師 180 天裁定與 M1 複核）
+- **實作**：`apps-script/AttendanceMailer.gs` 移除 6 小時 `CacheService`，改用 `PropertiesService.getScriptProperties()`，鍵為 `sent:<SHA-256 base64WebSafe 摘要>`、值為成功寄出的毫秒時間戳。於 `LockService` 鎖內依序執行：① 清理已滿 180 天（`now - ts >= 180 * 86400_000`）的 `sent:` 鍵（保留 `MAIL_KEY` 與其他設定）② 查詢同 `mailId` 存在則直接回 `{ok:true, duplicate:true}` 且不刷新時間戳 ③ 檢查額度與 `MailApp.sendEmail` ④ 成功後才寫入 `sentKey`。
+- **180 天容量估算**（依 Google 官方 Apps Script 配額 <https://developers.google.com/apps-script/guides/services/quotas>）：
+  - 官方上限：Properties total storage **500 KB**（512,000 bytes）per property store；Properties read/write 為 **500,000 次／日**（Google Workspace 帳號）。
+  - 實際鍵值大小：鍵 `sent:` (5 B) + `Utilities.base64EncodeWebSafe(SHA-256 32B)` (44 B) = **49 B**；值 `String(Date.now())` = **13 B**；原始鍵值共 **62 B／筆**。另計 `MAIL_KEY` 與系統保留約 1,000 B。
+  - 公式：$\text{最大筆數} = \lfloor (\text{總容量} - \text{固定保留}) / \text{單筆大小} \rfloor$，$\text{可承受日均寄送量} = \text{最大筆數} / 180$。
+  - 假設與結果：
+    - **保守估算（含序列化開銷，80 B／筆）**：$\lfloor (512,000 - 1,000) / 80 \rfloor = 6,387$ 筆 → 180 天可承受平均約 **35.4 封／日**（每日含假日）。
+    - **原始鍵值（62 B／筆）**：$\lfloor (512,000 - 1,000) / 62 \rfloor = 8,241$ 筆 → 約 **45.7 封／日**。
+    - 讀寫次數：每封信 1 次 `getProperties()` + 1 次 `setProperty()`（外加過期清理），遠低於 Workspace 500,000 次／日上限。
+  - 結論：點名寄信為上課日個位數至十數封，容量充裕，無須縮短期限或更換儲存方案。
+- **已知限制（保留 Claude 已接受之兩項）**：
+  1. `MailApp.sendEmail` 成功寄出後、寫入 `PropertiesService` 前的極短空窗若發生中斷，仍可能重寄。
+  2. 寄送結果不明（其實已寄出）且教師在重試前就把學生改回準時時，平台可能不會寄出更正信；學生可在「我的出缺席」看到最新狀態，教師可在寄送紀錄看到該筆 `failed`。
+
+---
+
+## 原 2026-11-17 實作報告（Claude Fable）
+### 給驗證者的摘要（原版）
 - 範圍：規畫 v3＋第 0 節 23:10／23:16 教師決定（狀態只有「準時／未到」可互改留時間紀錄；寄信由老師現在寄、每次設定時間、每日預設時間）。後端、Apps Script、學生端與教師端畫面、測試一次交齊。
 - 分支 `feature/attendance`（worktree `.worktrees/attendance`），未 push、未合併、未部署、未寄真信、未寫正式資料。版本號未改（交辦第 0 節）。
 - 新檔：`shared/attendance.ts`、`functions/src/attendance.ts`、`src/Attendance.tsx`、`src/AttendanceAdmin.tsx`、`src/attendance.css`（由樣張 CSS 改名擴充）、`apps-script/AttendanceMailer.gs`、`docs/attendance/APPS_SCRIPT_SETUP.md`、`functions/tests/attendance.test.cjs`＋`helpers/attendance-memory.cjs`、`tests/attendance.test.ts`、`tests/fixtures/attendance-ui.tsx`、`scripts/attendance-ui-check.mjs`、`scripts/attendance-sample/readability.mjs`。

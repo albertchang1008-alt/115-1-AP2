@@ -12,22 +12,29 @@ const { memoryDb } = require('./helpers/attendance-memory.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-/** 在 Node 裡執行 Apps Script 寄信程式；PropertiesService、CacheService、LockService、MailApp 等換成假的。 */
-function loadMailerScript({ key, onSend, quota = 1500 }) {
-  const cache = new Map();
-  const state = { quota, locks: 0 };
-  const sandbox = {
-    PropertiesService: {
-      getScriptProperties: () => ({ getProperty: (k) => (k === 'MAIL_KEY' ? key : null) }),
+/** 在 Node 裡執行 Apps Script 寄信程式；PropertiesService、LockService、MailApp、Date 等換成假的。 */
+function loadMailerScript({ key, onSend, quota = 1500, now = () => Date.now(), initialProps = {} }) {
+  const props = new Map(Object.entries(initialProps));
+  if (key !== undefined) props.set('MAIL_KEY', key);
+  const state = { quota, locks: 0, failSend: false };
+  const FakeDate = Object.assign(
+    function (...args) {
+      return args.length ? new Date(...args) : new Date(now());
     },
-    CacheService: {
-      getScriptCache: () => ({
-        get: (k) => (cache.has(k) ? cache.get(k) : null),
-        put: (k, v, ttl) => {
-          assert(k.length <= 250, '快取的鍵不可超過 250 字');
-          assert.equal(ttl, 21600);
-          cache.set(k, v);
+    { now: () => now(), parse: Date.parse, UTC: Date.UTC },
+  );
+  const sandbox = {
+    Date: FakeDate,
+    PropertiesService: {
+      getScriptProperties: () => ({
+        getProperty: (k) => (props.has(k) ? props.get(k) : null),
+        setProperty: (k, v) => {
+          props.set(k, String(v));
         },
+        deleteProperty: (k) => {
+          props.delete(k);
+        },
+        getProperties: () => Object.fromEntries(props.entries()),
       }),
     },
     LockService: {
@@ -39,6 +46,7 @@ function loadMailerScript({ key, onSend, quota = 1500 }) {
     MailApp: {
       getRemainingDailyQuota: () => state.quota,
       sendEmail: (to, subject, text, options) => {
+        if (state.failSend) throw new Error('模擬 MailApp 寄信失敗');
         state.quota--;
         onSend({ to, subject, text, fromName: options.name || '' });
       },
@@ -69,7 +77,7 @@ function loadMailerScript({ key, onSend, quota = 1500 }) {
   );
   return {
     state,
-    cache,
+    props,
     post: (body) =>
       JSON.parse(sandbox.doPost({ postData: { contents: JSON.stringify(body) } }).text),
     get: () => sandbox.doGet().text,
@@ -128,7 +136,11 @@ function setup({ feature = true } = {}) {
   };
   // 寄信端點：直接執行 apps-script/AttendanceMailer.gs（Google 服務換成假的），所以去重邏輯測的是真正會部署的那份程式。
   const sent = [];
-  const gas = loadMailerScript({ key: 'k'.repeat(32), onSend: (m) => sent.push(m) });
+  const gas = loadMailerScript({
+    key: 'k'.repeat(32),
+    onSend: (m) => sent.push(m),
+    now: () => clock,
+  });
   let failNext = 0;
   let loseReplyNext = 0;
   const posted = [];
@@ -1162,4 +1174,104 @@ test('排程執行後記錄「上次自動寄送」的結果，寄信分頁看�
   last = (await x.call('attendanceMailStatus')).lastAuto;
   assert.deepEqual(last, { at: x.now(), sent: 5, failed: 1, error: '' });
   assert(!JSON.stringify(await x.call('attendanceMailStatus')).includes('kkkk'), '不含密鑰');
+});
+
+test('M1-b 180 天 PropertiesService 去重與清理：立即、24 小時、接近 180 天皆去重；不延長期限；滿 180 天才清理並保留密鑰與其他設定；失敗不記錄', async () => {
+  const DAY = 24 * 60 * 60 * 1000;
+  let nowMs = T0;
+  const sent = [];
+  const gas = loadMailerScript({
+    key: 'k'.repeat(32),
+    onSend: (m) => sent.push(m),
+    now: () => nowMs,
+    initialProps: { OTHER_SETTING: 'keep-me' },
+  });
+  const base = {
+    key: 'k'.repeat(32),
+    to: 's1@example.edu',
+    subject: '未到通知',
+    text: '內容',
+    fromName: '示範教師',
+  };
+
+  // 第一次寄送失敗（MailApp 拋錯）不寫入紀錄，之後同一 mailId 仍可重試成功
+  gas.state.failSend = true;
+  const failRes = gas.post({ ...base, mailId: 'mail-fail-1' });
+  assert.equal(failRes.ok, false);
+  assert.equal(sent.length, 0);
+  assert.equal(
+    [...gas.props.keys()].filter((k) => k.startsWith('sent:')).length,
+    0,
+    '寄送失敗不記為已寄',
+  );
+  gas.state.failSend = false;
+  assert.equal(gas.post({ ...base, mailId: 'mail-fail-1' }).ok, true);
+  assert.equal(sent.length, 1);
+
+  // 立即重試、隔 24 小時、第 100 天重試（不延長期限）、接近 180 天（180 天少 1 ms）皆去重
+  const idA = 'mail-180d-a';
+  assert.equal(gas.post({ ...base, mailId: idA }).ok, true);
+  assert.equal(sent.length, 2);
+  const sentKeyA = [...gas.props.keys()].find(
+    (k) => k.startsWith('sent:') && gas.props.get(k) === String(nowMs),
+  );
+  assert(sentKeyA, '寫入 sent:<digest> 且值為成功寄出時間');
+
+  // 立即重試
+  assert.deepEqual(gas.post({ ...base, mailId: idA }), { ok: true, duplicate: true });
+  // 隔 24 小時重試
+  nowMs = T0 + 1 * DAY;
+  assert.deepEqual(gas.post({ ...base, mailId: idA }), { ok: true, duplicate: true });
+  // 第 100 天重試：不刷新保存期限
+  nowMs = T0 + 100 * DAY;
+  assert.deepEqual(gas.post({ ...base, mailId: idA }), { ok: true, duplicate: true });
+  assert.equal(gas.props.get(sentKeyA), String(T0), '重試不得延長保存期限');
+
+  // 接近 180 天（差 1 ms 滿 180 天）：仍去重、尚未清理
+  nowMs = T0 + 180 * DAY - 1;
+  assert.deepEqual(gas.post({ ...base, mailId: idA }), { ok: true, duplicate: true });
+  assert(gas.props.has(sentKeyA), '未滿 180 天不得清理');
+  assert.equal(sent.length, 2);
+
+  // 第 150 天另寄一封 B，確認滿 180 天清理時只刪過期的 A，保留未過期的 B 與 MAIL_KEY / OTHER_SETTING
+  nowMs = T0 + 150 * DAY;
+  assert.equal(gas.post({ ...base, mailId: 'mail-180d-b' }).ok, true);
+  assert.equal(sent.length, 3);
+
+  // 推進至剛好滿 180 天（T0 + 180 天）：觸發清理，A 被清理並可再寄，B 與設定皆保留
+  nowMs = T0 + 180 * DAY;
+  assert.equal(gas.post({ ...base, mailId: idA }).ok, true, '滿 180 天已清理，可視為新寄送');
+  assert.equal(sent.length, 4);
+  assert.equal(gas.props.get('MAIL_KEY'), 'k'.repeat(32), '保留 MAIL_KEY');
+  assert.equal(gas.props.get('OTHER_SETTING'), 'keep-me', '保留其他指令碼屬性');
+  assert(
+    [...gas.props.values()].includes(String(T0 + 150 * DAY)),
+    '未滿 180 天的 B 仍保留',
+  );
+  assert.equal(gas.state.locks, 0);
+});
+
+test('M1-b 跨日排程重試：回應遺失後隔 24 小時再送同一 mailId，仍只寄一封', async () => {
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  // s1 回應遺失（Apps Script 已寄出，但平台當作失敗並放回待寄）
+  x.loseReplyNext(1);
+  const first = await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.deepEqual(first, { sent: 4, failed: 1, skipped: 0 });
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // 假時鐘推進 24 小時（超過原本 6 小時 CacheService 上限），重試同一 mailId
+  x.tick(24 * 60 * 60 * 1000);
+  const retry = await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.deepEqual(retry, { sent: 1, failed: 0, skipped: 0 });
+  assert.equal(
+    x.sent.filter((m) => m.to === 's1@example.edu').length,
+    1,
+    '隔 24 小時重試仍只寄一封',
+  );
+  const mailId = `${s.id}__s1@example.edu__1`;
+  assert.equal(x.db.docs.get(`courses/${COURSE}/attendanceMail/${mailId}`).deduped, true);
 });

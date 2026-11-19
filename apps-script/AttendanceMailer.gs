@@ -2,14 +2,18 @@
  * 課堂點名寄信程式（佇列 #67）。
  * 建立方式見 docs/attendance/APPS_SCRIPT_SETUP.md。
  * 這支程式只做一件事：收到平台後端（帶正確密鑰）的要求時，用「部署這支程式的老師本人」的學校信箱寄出一封純文字信。
- * 它不讀也不寫任何 Google 試算表、文件或雲端硬碟檔案；只用指令碼快取記住最近 6 小時寄過的信件編號，避免重複寄。
+ * 它不讀也不寫任何 Google 試算表、文件或雲端硬碟檔案；只用指令碼屬性（PropertiesService）記住最近 180 天寄過的信件編號，避免重複寄。
  *
  * 密鑰放在「專案設定 → 指令碼屬性」的 MAIL_KEY，不寫在程式裡。
  */
+var SENT_PREFIX_ = 'sent:';
+var RETENTION_MS_ = 180 * 24 * 60 * 60 * 1000;
+
 function doPost(e) {
   try {
     var body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    var expected = PropertiesService.getScriptProperties().getProperty('MAIL_KEY');
+    var props = PropertiesService.getScriptProperties();
+    var expected = props.getProperty('MAIL_KEY');
     if (!expected || expected.length < 24) return reply_({ ok: false, error: '尚未設定 MAIL_KEY' });
     if (!sameText_(String(body.key || ''), expected)) return reply_({ ok: false, error: '密鑰不正確' });
     var to = String(body.to || '').trim();
@@ -22,18 +26,28 @@ function doPost(e) {
     // 所以平台在「不確定上次有沒有寄出去」時重送，學生也不會收到兩封。
     var mailId = String(body.mailId || '');
     if (!mailId || mailId.length > 400 || /[\u0000-\u001f\u007f]/.test(mailId)) return reply_({ ok: false, error: '信件編號無效' });
-    var cache = CacheService.getScriptCache();
-    var cacheKey = 'sent:' + digest_(mailId);
+    var sentKey = SENT_PREFIX_ + digest_(mailId);
     var lock = LockService.getScriptLock();
     lock.waitLock(20000); // 一次只處理一封，避免同一個編號同時進來兩次
     try {
-      if (cache.get(cacheKey)) return reply_({ ok: true, duplicate: true });
+      var now = Date.now();
+      var all = props.getProperties();
+      for (var k in all) {
+        if (!Object.prototype.hasOwnProperty.call(all, k)) continue;
+        if (k.indexOf(SENT_PREFIX_) !== 0) continue;
+        var ts = Number(all[k]);
+        if (!isFinite(ts) || now - ts >= RETENTION_MS_) {
+          props.deleteProperty(k);
+          delete all[k];
+        }
+      }
+      if (Object.prototype.hasOwnProperty.call(all, sentKey)) return reply_({ ok: true, duplicate: true });
       if (MailApp.getRemainingDailyQuota() < 1) return reply_({ ok: false, error: '今天的寄信額度已用完' });
       var options = {};
       var fromName = String(body.fromName || '').trim().slice(0, 40);
       if (fromName) options.name = fromName;
       MailApp.sendEmail(to, subject, text, options);
-      cache.put(cacheKey, '1', 21600); // 寄出成功才記錄，保留 6 小時（CacheService 上限）
+      props.setProperty(sentKey, String(Date.now())); // 寄出成功才記錄成功時間，保留 180 天
     } finally {
       lock.releaseLock();
     }
@@ -54,7 +68,7 @@ function testSendToMyself() {
   MailApp.sendEmail(me, '課堂點名寄信程式測試', '看到這封信，表示寄信程式可以正常寄信。\n今天還可以寄 ' + MailApp.getRemainingDailyQuota() + ' 位收件人。');
 }
 
-/** 把信件編號換成固定長度的字串，當作快取的鍵（快取的鍵有長度上限）。 */
+/** 把信件編號換成固定長度的字串，當作指令碼屬性的鍵。 */
 function digest_(text) {
   var bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, text, Utilities.Charset.UTF_8);
   return Utilities.base64EncodeWebSafe(bytes);
