@@ -46,6 +46,13 @@ function doPost(e) {
       }
       var existing = Object.prototype.hasOwnProperty.call(all, sentKey) ? String(all[sentKey]) : '';
       if (existing && existing.indexOf('pending:') !== 0) return reply_({ ok: true, duplicate: true });
+      if (existing && existing.indexOf('pending:') === 0 && body.forceResend !== true) {
+        return reply_({
+          ok: false,
+          uncertain: true,
+          error: '前次寄送結果不明（尚有待確認紀錄），請教師確認未寄後再單封重送',
+        });
+      }
       if (MailApp.getRemainingDailyQuota() < 1) return reply_({ ok: false, error: '今天的寄信額度已用完' });
       // 先在 PropertiesService 預留去重紀錄，確認空間與寫入配額足夠再寄信，避免寄出後寫入失敗造成重寄
       props.setProperty(sentKey, 'pending:' + now);
@@ -68,7 +75,11 @@ function doPost(e) {
     } finally {
       lock.releaseLock();
     }
-    return reply_({ ok: true, remaining: MailApp.getRemainingDailyQuota() });
+    var remaining = null;
+    try {
+      remaining = MailApp.getRemainingDailyQuota();
+    } catch (quotaErr) {}
+    return reply_(remaining === null ? { ok: true } : { ok: true, remaining: remaining });
   } catch (err) {
     return reply_({ ok: false, error: String(err && err.message ? err.message : err).slice(0, 200) });
   }

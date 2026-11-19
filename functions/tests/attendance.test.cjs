@@ -26,7 +26,9 @@ function loadMailerScript({
   const state = {
     quota,
     locks: 0,
+    sentCount: 0,
     failSend: false,
+    failQuotaAfterSend: false,
     failPropWrite: false,
     failPropDelete: false,
     propWriteRemaining: Infinity,
@@ -76,10 +78,16 @@ function loadMailerScript({
       }),
     },
     MailApp: {
-      getRemainingDailyQuota: () => state.quota,
+      getRemainingDailyQuota: () => {
+        if (state.failQuotaAfterSend && state.sentCount > 0) {
+          throw new Error('模擬寄後額度查詢失敗');
+        }
+        return state.quota;
+      },
       sendEmail: (to, subject, text, options) => {
         if (state.failSend) throw new Error('模擬 MailApp 寄信失敗');
         state.quota--;
+        state.sentCount++;
         onSend({ to, subject, text, fromName: options.name || '' });
       },
     },
@@ -188,7 +196,11 @@ function setup({ feature = true } = {}) {
       loseReplyNext--;
       throw Error('寄信程式回應 200'); // 寄信程式已處理，但平台沒收到可解析的回應
     }
-    if (reply.ok !== true) throw Error(reply.error);
+    if (reply.ok !== true) {
+      const err = Error(reply.error);
+      if (reply.uncertain === true) err.uncertain = true;
+      throw err;
+    }
     return { duplicate: reply.duplicate === true };
   };
   let n = 0;
@@ -1416,9 +1428,15 @@ test('M1-b 暫存占位：寄信失敗或寄出前中斷後，同一 mailId 仍�
     'sent:' + crypto.createHash('sha256').update(interruptedId, 'utf8').digest('base64url');
   gas.props.set(interruptedKey, `pending:${T0}`);
 
-  // 重試時不得把 pending 誤判為已寄，應寄出一封並更新為正式時間戳
-  assert.equal(gas.post({ ...base, mailId: interruptedId }).ok, true);
-  assert.equal(sent.length, 2, '寄出前中斷後重試應實際寄出');
+  // 選項 B：未經教師授權不得自動重寄，應回傳 uncertain:true
+  const autoRetry = gas.post({ ...base, mailId: interruptedId });
+  assert.equal(autoRetry.ok, false);
+  assert.equal(autoRetry.uncertain, true);
+  assert.equal(sent.length, 1, '未經教師確認不得自動重寄');
+
+  // 教師確認未寄後以 forceResend:true 單封重送，應寄出一封並更新為正式時間戳
+  assert.equal(gas.post({ ...base, mailId: interruptedId, forceResend: true }).ok, true);
+  assert.equal(sent.length, 2, '教師授權單封重送後應實際寄出');
   assert.equal(gas.props.get(interruptedKey), String(T0), '成功寄出後更新為正式時間戳');
   assert.deepEqual(gas.post({ ...base, mailId: interruptedId }), {
     ok: true,
@@ -1480,4 +1498,148 @@ test('M1-b 預留消耗最後一次屬性寫入後寄出成功，平台不重寄
   assert.deepEqual(gas.post(base), { ok: true, duplicate: true });
   assert.equal(sent.length, 1, '清理其他過期鍵失敗時，有效已寄紀錄仍應去重且不得寄出');
   assert.equal(gas.state.locks, 0);
+});
+
+test('M1-b 選項 B：寄後額度查詢失敗仍回成功；雙重故障進入結果不明，排程與整批手動寄送都不會重寄', async () => {
+  // 情境 A：寄後正式寫入失敗 + 寄後額度查詢也拋錯 → 仍回 ok:true，平台不重寄
+  const x1 = setup();
+  await x1.mailer();
+  const s1 = await x1.start();
+  for (let i = 2; i <= 5; i++) {
+    await x1.call(
+      'attendanceCheckIn',
+      { token: (await x1.call('attendanceLive')).token },
+      x1.student(i),
+    );
+  }
+  await x1.call('attendanceControl', { action: 'end' });
+  await x1.call('attendanceConfirm', { sessionId: s1.id, confirmed: true });
+
+  x1.gas.state.propWriteRemaining = 1;
+  x1.gas.state.failQuotaAfterSend = true;
+  assert.deepEqual(await x1.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 1,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x1.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+  x1.tick(24 * 60 * 60 * 1000);
+  x1.gas.state.propWriteRemaining = Infinity;
+  x1.gas.state.failQuotaAfterSend = false;
+  assert.deepEqual(await x1.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 0,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x1.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // 情境 B：預留用完最後一次寫入（寄後覆寫失敗）且成功回應遺失 → 隔日重試觸發 Apps Script 回傳 uncertain → 平台標記 uncertain 並停止自動重寄
+  const x2 = setup();
+  await x2.mailer();
+  const s2 = await x2.start();
+  for (let i = 2; i <= 5; i++) {
+    await x2.call(
+      'attendanceCheckIn',
+      { token: (await x2.call('attendanceLive')).token },
+      x2.student(i),
+    );
+  }
+  await x2.call('attendanceControl', { action: 'end' });
+  await x2.call('attendanceConfirm', { sessionId: s2.id, confirmed: true });
+
+  x2.gas.state.propWriteRemaining = 1;
+  x2.loseReplyNext(1);
+  assert.deepEqual(await x2.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 0,
+    failed: 1,
+    skipped: 0,
+  });
+  assert.equal(x2.sent.filter((m) => m.to === 's1@example.edu').length, 1, '首次已實際寄出 1 封');
+
+  // 隔日恢復寫入後，排程觸發時 Apps Script 見 pending: 回報 uncertain，平台轉為 status: 'uncertain' 且不再寄出
+  x2.tick(24 * 60 * 60 * 1000);
+  x2.gas.state.propWriteRemaining = Infinity;
+  await x2.call('attendanceSendMail', { mode: 'schedule', at: x2.now() + 1000 });
+  x2.tick(2000);
+  await x2.h.attendanceMailTick.run({});
+
+  const mailId = `${s2.id}__s1@example.edu__1`;
+  let st = await x2.call('attendanceMailStatus');
+  assert.equal(st.log.find((m) => m.id === mailId).status, 'uncertain');
+  assert.equal(st.student.length, 0, '進入 uncertain 後不回待寄清單');
+  assert.equal(x2.sent.filter((m) => m.to === 's1@example.edu').length, 1, '排程不得重寄');
+
+  // 教師再按整批手動寄送也不會重寄
+  assert.deepEqual(await x2.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 0,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x2.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // 教師確認已寄（confirmSent）後狀態轉為 sent，之後仍不會重寄
+  await x2.call('attendanceSendMail', { mode: 'confirmSent', mailId });
+  st = await x2.call('attendanceMailStatus');
+  assert.equal(st.log.find((m) => m.id === mailId).status, 'sent');
+  assert.deepEqual(await x2.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 0,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x2.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+});
+
+test('M1-b 選項 B：寄出前中斷進入結果不明後，教師確認未寄才可單封重送；導師彙整亦暫停自動重寄', async () => {
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  for (let i = 2; i <= 5; i++) {
+    await x.call(
+      'attendanceCheckIn',
+      { token: (await x.call('attendanceLive')).token },
+      x.student(i),
+    );
+  }
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+
+  // 預先模擬學生信與導師彙整在 Apps Script 端殘留「寄出前中斷」的 pending:<ts>
+  const crypto = require('node:crypto');
+  const studentMailId = `${s.id}__s1@example.edu__1`;
+  const digestMailId = `digest__${A.taipeiDate(x.now())}__A`;
+  for (const id of [studentMailId, digestMailId]) {
+    const k = 'sent:' + crypto.createHash('sha256').update(id, 'utf8').digest('base64url');
+    x.gas.props.set(k, `pending:${x.now()}`);
+  }
+
+  // 整批手動寄送與排程均進入 uncertain，實際寄出 0 封
+  assert.deepEqual(await x.call('attendanceSendMail', { mode: 'now' }), {
+    sent: 0,
+    failed: 2,
+    skipped: 0,
+  });
+  assert.equal(x.sent.length, 0);
+
+  await x.call('attendanceSendMail', { mode: 'schedule', at: x.now() + 1000 });
+  x.tick(2000);
+  await x.h.attendanceMailTick.run({});
+  assert.equal(x.sent.length, 0, '排程不得重寄 uncertain 的學生信或導師彙整');
+
+  // 整批手動寄送也不得重寄
+  assert.deepEqual(await x.call('attendanceSendMail', { mode: 'now' }), {
+    sent: 0,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x.sent.length, 0);
+
+  // 教師確認未寄後單封重送學生信與導師彙整，各成功寄出 1 封並標為 sent
+  await x.call('attendanceSendMail', { mode: 'resendOne', mailId: studentMailId });
+  await x.call('attendanceSendMail', { mode: 'resendOne', mailId: digestMailId });
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+  assert.equal(x.sent.filter((m) => m.to === 'mentor-a@example.edu').length, 1);
+
+  const st = await x.call('attendanceMailStatus');
+  assert.equal(st.log.find((m) => m.id === studentMailId).status, 'sent');
+  assert.equal(st.log.find((m) => m.id === digestMailId).status, 'sent');
 });

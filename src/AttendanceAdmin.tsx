@@ -1039,7 +1039,12 @@ function MailView({ api, course, notify }: Props) {
     correction: '更正通知',
     digest: '導師彙整',
   };
-  const statusLabel: Record<string, string> = { sent: '成功', failed: '失敗', sending: '寄送中' };
+  const statusLabel: Record<string, string> = {
+    sent: '成功',
+    failed: '失敗',
+    sending: '寄送中',
+    uncertain: '結果不明',
+  };
   return (
     <div className="att-mails">
       <section className="att-mail">
@@ -1138,6 +1143,42 @@ function MailView({ api, course, notify }: Props) {
                       >
                         放回待寄
                       </button>
+                    )}
+                    {m.status === 'uncertain' && (
+                      <>
+                        <button
+                          onClick={async () => {
+                            try {
+                              await api.call('attendanceSendMail', {
+                                courseId: course.id,
+                                mode: 'confirmSent',
+                                mailId: m.id,
+                              });
+                              await load();
+                            } catch (e) {
+                              notify((e as Error).message);
+                            }
+                          }}
+                        >
+                          確認已寄
+                        </button>
+                        <button
+                          onClick={async () => {
+                            try {
+                              await api.call('attendanceSendMail', {
+                                courseId: course.id,
+                                mode: 'resendOne',
+                                mailId: m.id,
+                              });
+                              await load();
+                            } catch (e) {
+                              notify((e as Error).message);
+                            }
+                          }}
+                        >
+                          確認未寄，單封重送
+                        </button>
+                      </>
                     )}
                   </td>
                 </tr>
