@@ -1669,8 +1669,8 @@ test('M1-b 選項 B 交易認領互斥：並行 resendOne 只寄一次（含寄�
   await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
   assert.equal(x.sent.length, 0);
 
-  // 即使寄後正式覆寫失敗，並行兩次 resendOne 仍只有一次認領成功、MailApp 只呼叫 1 次
-  x.gas.state.failPropWrite = true;
+  // 即使寄後正式覆寫失敗（只剩 1 次寫入供預留使用），並行兩次 resendOne 仍只有一次認領成功、MailApp 只呼叫 1 次
+  x.gas.state.propWriteRemaining = 1;
   const raceResend = await Promise.allSettled([
     x.call('attendanceSendMail', { mode: 'resendOne', mailId: id1 }),
     x.call('attendanceSendMail', { mode: 'resendOne', mailId: id1 }),
@@ -1680,7 +1680,7 @@ test('M1-b 選項 B 交易認領互斥：並行 resendOne 只寄一次（含寄�
   assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
 
   // confirmSent 與 resendOne 並行競爭 id2：兩者互斥，只有一個成功
-  x.gas.state.failPropWrite = false;
+  x.gas.state.propWriteRemaining = Infinity;
   const raceMutex = await Promise.allSettled([
     x.call('attendanceSendMail', { mode: 'confirmSent', mailId: id2 }),
     x.call('attendanceSendMail', { mode: 'resendOne', mailId: id2 }),
