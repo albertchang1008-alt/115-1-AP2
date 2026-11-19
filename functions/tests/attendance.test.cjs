@@ -13,10 +13,22 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 /** 在 Node 裡執行 Apps Script 寄信程式；PropertiesService、LockService、MailApp、Date 等換成假的。 */
-function loadMailerScript({ key, onSend, quota = 1500, now = () => Date.now(), initialProps = {} }) {
+function loadMailerScript({
+  key,
+  onSend,
+  quota = 1500,
+  now = () => Date.now(),
+  initialProps = {},
+  maxStorageBytes = Infinity,
+}) {
   const props = new Map(Object.entries(initialProps));
   if (key !== undefined) props.set('MAIL_KEY', key);
-  const state = { quota, locks: 0, failSend: false };
+  const state = { quota, locks: 0, failSend: false, failPropWrite: false };
+  const propsBytes = () => {
+    let total = 0;
+    for (const [k, v] of props.entries()) total += k.length + v.length;
+    return total;
+  };
   const FakeDate = Object.assign(
     function (...args) {
       return args.length ? new Date(...args) : new Date(now());
@@ -29,7 +41,14 @@ function loadMailerScript({ key, onSend, quota = 1500, now = () => Date.now(), i
       getScriptProperties: () => ({
         getProperty: (k) => (props.has(k) ? props.get(k) : null),
         setProperty: (k, v) => {
-          props.set(k, String(v));
+          if (state.failPropWrite) throw new Error('Service invoked too many times for one day: properties');
+          const strV = String(v);
+          const prev = props.has(k) ? k.length + props.get(k).length : 0;
+          const nextTotal = propsBytes() - prev + k.length + strV.length;
+          if (nextTotal > maxStorageBytes) {
+            throw new Error('You have exceeded the property storage limit.');
+          }
+          props.set(k, strV);
         },
         deleteProperty: (k) => {
           props.delete(k);
@@ -1274,4 +1293,124 @@ test('M1-b 跨日排程重試：回應遺失後隔 24 小時再送同一 mailId�
   );
   const mailId = `${s.id}__s1@example.edu__1`;
   assert.equal(x.db.docs.get(`courses/${COURSE}/attendanceMail/${mailId}`).deduped, true);
+});
+
+test('M1-b 容量與寫入配額耗盡回歸：無法預留去重紀錄時拒絕寄信（MailApp 呼叫 0 次），已寄信仍正常去重，有效紀錄保留 180 天', async () => {
+  const DAY = 24 * 60 * 60 * 1000;
+  let nowMs = T0;
+  const sent = [];
+  const gas = loadMailerScript({
+    key: 'k'.repeat(32),
+    onSend: (m) => sent.push(m),
+    now: () => nowMs,
+    maxStorageBytes: 512000,
+  });
+  const base = {
+    key: 'k'.repeat(32),
+    to: 's1@example.edu',
+    subject: '未到通知',
+    text: '內容',
+    fromName: '示範教師',
+  };
+
+  // 先寄出一封有效的信（180 天內）
+  assert.equal(gas.post({ ...base, mailId: 'existing-valid-mail' }).ok, true);
+  assert.equal(sent.length, 1);
+
+  // 用未到期的 sent: 鍵填滿屬性空間至接近 512,000 B，使新鍵寫入超限
+  let idx = 0;
+  let totalBytes = 0;
+  for (const [k, v] of gas.props.entries()) totalBytes += k.length + v.length;
+  while (totalBytes + 70 <= 511993) {
+    const k = `sent:filler-${String(idx++).padStart(36, '0')}`;
+    const v = String(nowMs);
+    gas.props.set(k, v);
+    totalBytes += k.length + v.length;
+  }
+  const fillerCountBefore = idx;
+
+  // 新信無法預留去重紀錄：連送兩次均回 ok:false，MailApp 呼叫 0 次
+  const r1 = gas.post({ ...base, mailId: 'new-over-quota-1' });
+  const r2 = gas.post({ ...base, mailId: 'new-over-quota-1' });
+  assert.equal(r1.ok, false);
+  assert.equal(r2.ok, false);
+  assert.equal(sent.length, 1, '容量已滿時不得呼叫 MailApp.sendEmail');
+
+  // 既有已寄信仍正常去重，且有效 180 天紀錄全部保留
+  assert.deepEqual(gas.post({ ...base, mailId: 'existing-valid-mail' }), {
+    ok: true,
+    duplicate: true,
+  });
+  assert.equal(sent.length, 1);
+  assert.equal(
+    [...gas.props.keys()].filter((k) => k.startsWith('sent:filler-')).length,
+    fillerCountBefore,
+    '不得提早刪除未滿 180 天的有效紀錄',
+  );
+
+  // 模擬 Properties 寫入配額耗盡：既有已寄信仍去重，新信回 ok:false 且 MailApp 呼叫 0 次
+  gas.state.failPropWrite = true;
+  assert.deepEqual(gas.post({ ...base, mailId: 'existing-valid-mail' }), {
+    ok: true,
+    duplicate: true,
+  });
+  assert.equal(gas.post({ ...base, mailId: 'new-write-quota-1' }).ok, false);
+  assert.equal(sent.length, 1, '寫入配額耗盡時不得呼叫 MailApp.sendEmail');
+
+  // 釋出過期空間（推進 180 天後清理舊鍵）且恢復配額，新信即可正常預留並寄出
+  gas.state.failPropWrite = false;
+  nowMs = T0 + 180 * DAY;
+  assert.equal(gas.post({ ...base, mailId: 'new-after-cleanup-1' }).ok, true);
+  assert.equal(sent.length, 2);
+  assert.equal(gas.state.locks, 0);
+});
+
+test('M1-b 暫存占位：寄信失敗或寄出前中斷後，同一 mailId 仍能重試並完成正式紀錄', async () => {
+  const sent = [];
+  const gas = loadMailerScript({
+    key: 'k'.repeat(32),
+    onSend: (m) => sent.push(m),
+    now: () => T0,
+  });
+  const base = {
+    key: 'k'.repeat(32),
+    to: 's1@example.edu',
+    subject: '未到通知',
+    text: '內容',
+    fromName: '示範教師',
+  };
+
+  // 情境 A：預留成功但 MailApp.sendEmail 拋錯 → 清除占位 → 重試可成功寄出
+  gas.state.failSend = true;
+  assert.equal(gas.post({ ...base, mailId: 'retry-after-send-err' }).ok, false);
+  assert.equal(
+    [...gas.props.keys()].filter((k) => k.startsWith('sent:')).length,
+    0,
+    '寄信失敗應清除 pending 占位',
+  );
+  gas.state.failSend = false;
+  assert.equal(gas.post({ ...base, mailId: 'retry-after-send-err' }).ok, true);
+  assert.equal(sent.length, 1);
+  assert.deepEqual(gas.post({ ...base, mailId: 'retry-after-send-err' }), {
+    ok: true,
+    duplicate: true,
+  });
+
+  // 情境 B：預留 pending:<ts> 後、MailApp.sendEmail 尚未執行即中斷（屬性內殘留 pending:<ts>）
+  const crypto = require('node:crypto');
+  const interruptedId = 'interrupted-before-send';
+  const interruptedKey =
+    'sent:' + crypto.createHash('sha256').update(interruptedId, 'utf8').digest('base64url');
+  gas.props.set(interruptedKey, `pending:${T0}`);
+
+  // 重試時不得把 pending 誤判為已寄，應寄出一封並更新為正式時間戳
+  assert.equal(gas.post({ ...base, mailId: interruptedId }).ok, true);
+  assert.equal(sent.length, 2, '寄出前中斷後重試應實際寄出');
+  assert.equal(gas.props.get(interruptedKey), String(T0), '成功寄出後更新為正式時間戳');
+  assert.deepEqual(gas.post({ ...base, mailId: interruptedId }), {
+    ok: true,
+    duplicate: true,
+  });
+  assert.equal(sent.length, 2);
+  assert.equal(gas.state.locks, 0);
 });

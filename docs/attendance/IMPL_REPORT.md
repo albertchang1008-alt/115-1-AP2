@@ -1,29 +1,28 @@
-# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b）
+# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 退修）
 
 ## 給 Claude 的摘要
-- 本次完成 #67 **M1-b（Email 跨日重寄修正）**，依教師決定將 Apps Script 去重紀錄保留 **180 天**（取代原 30 天方案）。
-- 變更檔：`apps-script/AttendanceMailer.gs`、`docs/attendance/APPS_SCRIPT_SETUP.md`、`docs/attendance/IMPL_REPORT.md`、`functions/tests/attendance.test.cjs`（保留既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`）。
-- 實跑指令：`node --test functions/tests/attendance.test.cjs`（Node v22.23.2），結果 **18/18 PASS**（含新增 2 支 M1-b 測試，使用合成資料與 Node VM 假時鐘，未寄真信）。
-- 偏離：無（教師已核定 180 天；`CacheService` 已完全移除，單純改用 `PropertiesService`）。
+- 本次完成 #67 **M1-b 退修**（依 `M1B_CODEX_VERIFY_2026-11-19.md`）：修正屬性空間或寫入配額耗盡時「先寄後寫失敗導致重寄」問題，保留 **180 天**去重期限。
+- 變更檔：`apps-script/AttendanceMailer.gs`、`functions/tests/attendance.test.cjs`、`docs/attendance/IMPL_REPORT.md`（保留既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`）。
+- 實跑指令：`node --test functions/tests/attendance.test.cjs`（Node v22.23.2），結果 **20/20 PASS**（含新增容量／寫入配額耗盡、寄信失敗清占位、寄出前中斷重試共 2 支回歸測試，合成資料＋假時鐘，未寄真信）。
+- 偏離：無（`CacheService` 已移除，改於 `MailApp.sendEmail` 前以 `pending:<ts>` 預留去重鍵）。
 - 抽查項（最多 5 項）：
-  1. `apps-script/AttendanceMailer.gs`：鎖內執行過期清理（僅刪 `sent:` 且 `>= 180 天`）、查詢去重、寄信與寫入；`duplicate` 不刷新時間、失敗／額度耗盡不寫入。
-  2. `functions/tests/attendance.test.cjs`：Node VM 假 `PropertiesService` 與假時鐘，驗證立即、24 小時、180 天少 1 ms、滿 180 天清理、不延長期限、`MAIL_KEY`／其他屬性保留、失敗重試。
-  3. `docs/attendance/APPS_SCRIPT_SETUP.md`：更新為 180 天說明與兩項已知限制。
-  4. 本報告「返修 M1-b」之 Google Apps Script 180 天容量估算公式與日均承受量。
+  1. `apps-script/AttendanceMailer.gs`：鎖內清理過期鍵 → 查重（忽略 `pending:`）→ `props.setProperty(sentKey, 'pending:' + now)` 預留失敗即中止（`MailApp` 呼叫 0 次）→ `MailApp` 失敗清占位 → 成功後覆寫正式時間戳。
+  2. `functions/tests/attendance.test.cjs`：512,000 B 滿載與寫入配額耗盡時，新信拒寄（`MailApp` 0 次）、已寄信正常去重、180 天有效紀錄全保留。
+  3. `functions/tests/attendance.test.cjs`：寄信拋錯清除 `pending:`、寄出前中斷殘留 `pending:` 時同一 `mailId` 仍可重試並正式入帳。
+  4. 本報告「返修 M1-b」補齊每次 `getProperty('MAIL_KEY')` 與預留／正式寫入的讀寫次數估算。
   5. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
 
 ---
 
-## 返修 M1-b（2026-11-19，Antigravity Hydrogen；依教師 180 天裁定與 M1 複核）
-- **實作**：`apps-script/AttendanceMailer.gs` 移除 6 小時 `CacheService`，改用 `PropertiesService.getScriptProperties()`，鍵為 `sent:<SHA-256 base64WebSafe 摘要>`、值為成功寄出的毫秒時間戳。於 `LockService` 鎖內依序執行：① 清理已滿 180 天（`now - ts >= 180 * 86400_000`）的 `sent:` 鍵（保留 `MAIL_KEY` 與其他設定）② 查詢同 `mailId` 存在則直接回 `{ok:true, duplicate:true}` 且不刷新時間戳 ③ 檢查額度與 `MailApp.sendEmail` ④ 成功後才寫入 `sentKey`。
+## 返修 M1-b（2026-11-19，Antigravity Hydrogen；含 Codex 退修）
+- **實作**：`apps-script/AttendanceMailer.gs` 改用 `PropertiesService.getScriptProperties()` 保存 180 天去重紀錄。於 `LockService` 鎖內依序執行：① 清理已滿 180 天（`now - ts >= 180 * 86400_000`）的 `sent:` 鍵（保留 `MAIL_KEY` 與其他設定）② 查詢同 `mailId` 且非 `pending:` 則直接回 `{ok:true, duplicate:true}` 且不刷新時間戳 ③ 檢查每日寄信額度 ④ 先寫入 `pending:<now>` 預留紀錄（若空間滿或寫入配額耗盡直接拋錯回傳可重試失敗，`MailApp.sendEmail` 呼叫 **0 次**）⑤ 呼叫 `MailApp.sendEmail`（若失敗則刪除 `pending:` 占位後回報失敗）⑥ 成功後覆寫為正式毫秒時間戳 `String(Date.now())`。
 - **180 天容量估算**（依 Google 官方 Apps Script 配額 <https://developers.google.com/apps-script/guides/services/quotas>）：
   - 官方上限：Properties total storage **500 KB**（512,000 bytes）per property store；Properties read/write 為 **500,000 次／日**（Google Workspace 帳號）。
-  - 實際鍵值大小：鍵 `sent:` (5 B) + `Utilities.base64EncodeWebSafe(SHA-256 32B)` (44 B) = **49 B**；值 `String(Date.now())` = **13 B**；原始鍵值共 **62 B／筆**。另計 `MAIL_KEY` 與系統保留約 1,000 B。
-  - 公式：$\text{最大筆數} = \lfloor (\text{總容量} - \text{固定保留}) / \text{單筆大小} \rfloor$，$\text{可承受日均寄送量} = \text{最大筆數} / 180$。
-  - 假設與結果：
+  - 實際鍵值大小：鍵 `sent:` (5 B) + `Utilities.base64EncodeWebSafe(SHA-256 32B)` (44 B) = **49 B**；正式值 `String(Date.now())` = **13 B**（原始 **62 B／筆**）；暫存 `pending:<ms>` 為 **21 B**，正式寫入後覆寫為較短的 13 B，不額外增加存儲上限風險。另計 `MAIL_KEY` 與系統保留約 1,000 B。
+  - 公式：$\text{最大筆數} = \lfloor (\text{總容量} - \text{固定保留}) / \text{單筆大小} \rfloor$，$\text{可承受日均寄送量} = \text{最大筆數} / 180$
     - **保守估算（含序列化開銷，80 B／筆）**：$\lfloor (512,000 - 1,000) / 80 \rfloor = 6,387$ 筆 → 180 天可承受平均約 **35.4 封／日**（每日含假日）。
     - **原始鍵值（62 B／筆）**：$\lfloor (512,000 - 1,000) / 62 \rfloor = 8,241$ 筆 → 約 **45.7 封／日**。
-    - 讀寫次數：每封信 1 次 `getProperties()` + 1 次 `setProperty()`（外加過期清理），遠低於 Workspace 500,000 次／日上限。
+    - 讀寫次數：每封新信固定 `getProperty('MAIL_KEY')` (1 讀) + `getProperties()` (1 讀) + `setProperty` 預留與正式寫入 (2 寫)，外加過期鍵刪除，遠低於 Workspace 500,000 次／日上限。
   - 結論：點名寄信為上課日個位數至十數封，容量充裕，無須縮短期限或更換儲存方案。
 - **已知限制（保留 Claude 已接受之兩項）**：
   1. `MailApp.sendEmail` 成功寄出後、寫入 `PropertiesService` 前的極短空窗若發生中斷，仍可能重寄。

@@ -35,19 +35,30 @@ function doPost(e) {
       for (var k in all) {
         if (!Object.prototype.hasOwnProperty.call(all, k)) continue;
         if (k.indexOf(SENT_PREFIX_) !== 0) continue;
-        var ts = Number(all[k]);
+        var raw = String(all[k]);
+        var ts = Number(raw.indexOf('pending:') === 0 ? raw.slice(8) : raw);
         if (!isFinite(ts) || now - ts >= RETENTION_MS_) {
           props.deleteProperty(k);
           delete all[k];
         }
       }
-      if (Object.prototype.hasOwnProperty.call(all, sentKey)) return reply_({ ok: true, duplicate: true });
+      var existing = Object.prototype.hasOwnProperty.call(all, sentKey) ? String(all[sentKey]) : '';
+      if (existing && existing.indexOf('pending:') !== 0) return reply_({ ok: true, duplicate: true });
       if (MailApp.getRemainingDailyQuota() < 1) return reply_({ ok: false, error: '今天的寄信額度已用完' });
+      // 先在 PropertiesService 預留去重紀錄，確認空間與寫入配額足夠再寄信，避免寄出後寫入失敗造成重寄
+      props.setProperty(sentKey, 'pending:' + now);
       var options = {};
       var fromName = String(body.fromName || '').trim().slice(0, 40);
       if (fromName) options.name = fromName;
-      MailApp.sendEmail(to, subject, text, options);
-      props.setProperty(sentKey, String(Date.now())); // 寄出成功才記錄成功時間，保留 180 天
+      try {
+        MailApp.sendEmail(to, subject, text, options);
+      } catch (sendErr) {
+        try {
+          props.deleteProperty(sentKey);
+        } catch (delErr) {}
+        throw sendErr;
+      }
+      props.setProperty(sentKey, String(Date.now())); // 寄出成功才寫入正式完成時間，保留 180 天
     } finally {
       lock.releaseLock();
     }
