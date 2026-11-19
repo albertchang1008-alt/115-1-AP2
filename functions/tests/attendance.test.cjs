@@ -1643,3 +1643,107 @@ test('M1-b 選項 B：寄出前中斷進入結果不明後，教師確認未寄�
   assert.equal(st.log.find((m) => m.id === studentMailId).status, 'sent');
   assert.equal(st.log.find((m) => m.id === digestMailId).status, 'sent');
 });
+
+test('M1-b 選項 B 交易認領互斥：並行 resendOne 只寄一次（含寄後寫入失敗），confirmSent 與 resendOne 互斥', async () => {
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  for (let i = 3; i <= 5; i++) {
+    await x.call(
+      'attendanceCheckIn',
+      { token: (await x.call('attendanceLive')).token },
+      x.student(i),
+    );
+  }
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+
+  // s1 與 s2 皆因預先殘留 pending: 進入 uncertain
+  const crypto = require('node:crypto');
+  const id1 = `${s.id}__s1@example.edu__1`;
+  const id2 = `${s.id}__s2@example.edu__1`;
+  for (const id of [id1, id2]) {
+    const k = 'sent:' + crypto.createHash('sha256').update(id, 'utf8').digest('base64url');
+    x.gas.props.set(k, `pending:${x.now()}`);
+  }
+  await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.equal(x.sent.length, 0);
+
+  // 即使寄後正式覆寫失敗，並行兩次 resendOne 仍只有一次認領成功、MailApp 只呼叫 1 次
+  x.gas.state.failPropWrite = true;
+  const raceResend = await Promise.allSettled([
+    x.call('attendanceSendMail', { mode: 'resendOne', mailId: id1 }),
+    x.call('attendanceSendMail', { mode: 'resendOne', mailId: id1 }),
+  ]);
+  assert.equal(raceResend.filter((r) => r.status === 'fulfilled').length, 1);
+  assert.equal(raceResend.filter((r) => r.status === 'rejected').length, 1);
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // confirmSent 與 resendOne 並行競爭 id2：兩者互斥，只有一個成功
+  x.gas.state.failPropWrite = false;
+  const raceMutex = await Promise.allSettled([
+    x.call('attendanceSendMail', { mode: 'confirmSent', mailId: id2 }),
+    x.call('attendanceSendMail', { mode: 'resendOne', mailId: id2 }),
+  ]);
+  assert.equal(raceMutex.filter((r) => r.status === 'fulfilled').length, 1);
+  assert.equal(raceMutex.filter((r) => r.status === 'rejected').length, 1);
+  assert.ok(x.sent.filter((m) => m.to === 's2@example.edu').length <= 1);
+  const st = await x.call('attendanceMailStatus');
+  assert.equal(st.log.find((m) => m.id === id1).status, 'sent');
+  assert.equal(st.log.find((m) => m.id === id2).status, 'sent');
+});
+
+test('M1-b 選項 B 單封重送核對現況與序號：學生改準時或已寄更正後，舊未到通知不可重送', async () => {
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  for (let i = 3; i <= 5; i++) {
+    await x.call(
+      'attendanceCheckIn',
+      { token: (await x.call('attendanceLive')).token },
+      x.student(i),
+    );
+  }
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+
+  const crypto = require('node:crypto');
+  const id1 = `${s.id}__s1@example.edu__1`;
+  const id2 = `${s.id}__s2@example.edu__1`;
+  for (const id of [id1, id2]) {
+    const k = 'sent:' + crypto.createHash('sha256').update(id, 'utf8').digest('base64url');
+    x.gas.props.set(k, `pending:${x.now()}`);
+  }
+  await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.equal(x.sent.length, 0);
+
+  // s1 改準時後寄出更正信（序號 2）；s2 改準時但尚未寄更正信
+  await x.call('attendanceSetStatus', {
+    sessionId: s.id,
+    emails: ['s1@example.edu'],
+    status: 'present',
+  });
+  assert.deepEqual(await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] }), {
+    sent: 1,
+    failed: 0,
+    skipped: 0,
+  });
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu' && /已改為準時/.test(m.subject)).length, 1);
+
+  await x.call('attendanceSetStatus', {
+    sessionId: s.id,
+    emails: ['s2@example.edu'],
+    status: 'present',
+  });
+
+  // 兩筆過時的未到通知（序號 1）皆不可再重送
+  await assert.rejects(
+    x.call('attendanceSendMail', { mode: 'resendOne', mailId: id1 }),
+    /已過時/,
+  );
+  await assert.rejects(
+    x.call('attendanceSendMail', { mode: 'resendOne', mailId: id2 }),
+    /已過時/,
+  );
+  assert.equal(x.sent.filter((m) => /未到通知/.test(m.subject)).length, 0);
+});

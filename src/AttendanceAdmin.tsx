@@ -999,6 +999,7 @@ function MailView({ api, course, notify }: Props) {
   } | null>(null);
   const [mailerUrl, setMailerUrl] = useState('');
   const [mailerKey, setMailerKey] = useState('');
+  const [busyMailId, setBusyMailId] = useState('');
   const load = async () => {
     try {
       setSt(await api.call<MailStatus>('attendanceMailStatus', { courseId: course.id }));
@@ -1128,7 +1129,9 @@ function MailView({ api, course, notify }: Props) {
                     {m.error ? `：${m.error}` : ''}
                     {m.status === 'sending' && Date.now() - m.createdAt > 600000 && (
                       <button
+                        disabled={busyMailId === m.id}
                         onClick={async () => {
+                          setBusyMailId(m.id);
                           try {
                             await api.call('attendanceSendMail', {
                               courseId: course.id,
@@ -1138,6 +1141,8 @@ function MailView({ api, course, notify }: Props) {
                             await load();
                           } catch (e) {
                             notify((e as Error).message);
+                          } finally {
+                            setBusyMailId('');
                           }
                         }}
                       >
@@ -1147,7 +1152,9 @@ function MailView({ api, course, notify }: Props) {
                     {m.status === 'uncertain' && (
                       <>
                         <button
+                          disabled={busyMailId === m.id}
                           onClick={async () => {
+                            setBusyMailId(m.id);
                             try {
                               await api.call('attendanceSendMail', {
                                 courseId: course.id,
@@ -1157,13 +1164,17 @@ function MailView({ api, course, notify }: Props) {
                               await load();
                             } catch (e) {
                               notify((e as Error).message);
+                            } finally {
+                              setBusyMailId('');
                             }
                           }}
                         >
                           確認已寄
                         </button>
                         <button
+                          disabled={busyMailId === m.id}
                           onClick={async () => {
+                            setBusyMailId(m.id);
                             try {
                               await api.call('attendanceSendMail', {
                                 courseId: course.id,
@@ -1173,6 +1184,8 @@ function MailView({ api, course, notify }: Props) {
                               await load();
                             } catch (e) {
                               notify((e as Error).message);
+                            } finally {
+                              setBusyMailId('');
                             }
                           }}
                         >

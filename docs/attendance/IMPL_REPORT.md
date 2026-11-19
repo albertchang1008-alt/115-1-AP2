@@ -1,16 +1,15 @@
-# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 選項 B 實作）
+# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 選項 B 退修）
 
 ## 給 Claude 的摘要
-- 教師已裁定採用 **選項 B（新增「結果不明」狀態並暫停自動重寄）**，完成 #67 M1-b 全案實作，保留 **180 天**去重與既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`。
-- 變更檔：`apps-script/AttendanceMailer.gs`、`functions/src/attendance.ts`、`src/AttendanceAdmin.tsx`、`functions/tests/attendance.test.cjs`、`docs/attendance/IMPL_REPORT.md`。
-- 實跑指令：`npm --prefix functions run build` PASS（67 函式）、`node --test functions/tests/attendance.test.cjs`（Node v22.23.2）**23/23 PASS**（合成資料＋假時鐘，未寄真信）。
+- 完成 #67 **M1-b 選項 B 退修**（依 `M1B_CODEX_VERIFY_2026-11-19.md` 0525a497 選項 B 複驗），保留 **180 天**去重與既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`。
+- 變更檔：`functions/src/attendance.ts`、`src/AttendanceAdmin.tsx`、`functions/tests/attendance.test.cjs`、`docs/attendance/IMPL_REPORT.md`。
+- 實跑指令：`npm --prefix functions run build` PASS（67 函式）、`node --test functions/tests/attendance.test.cjs`（Node v22.23.2）**25/25 PASS**（合成資料＋假時鐘，未寄真信）。
 - 偏離：無（依教師裁定選 B）。
 - 抽查項（最多 5 項）：
-  1. `apps-script/AttendanceMailer.gs:49–83`：殘留 `pending:` 且非 `forceResend` 時回 `{ok:false, uncertain:true}`；寄後 `getRemainingDailyQuota()` 與覆寫正式時間戳皆採 `try/catch`，不把已寄出信件轉成失敗。
-  2. `functions/src/attendance.ts:50–67, 360–428, 1205–1280`：`appsScriptMailer` 傳遞 `uncertain`；`deliver` 標記 `status:'uncertain'` 且不還原 `notifySeq`；`pendingMail`/`runSend` 擋住排程與整批寄送；新增 `confirmSent`／`resendOne`。
-  3. `src/AttendanceAdmin.tsx:1042–1048, 1130–1170`：寄送紀錄顯示「結果不明」，提供「確認已寄」與「確認未寄，單封重送」按鈕。
-  4. `functions/tests/attendance.test.cjs:1503–1641`：涵蓋寄後額度查詢失敗、雙重故障進入 `uncertain`、排程／整批寄送不重寄、`confirmSent`、`resendOne` 與導師彙整受控。
-  5. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
+  1. `functions/src/attendance.ts:1215–1335`：`confirmSent` 與 `resendOne` 皆在 `db.runTransaction` 認領 `status === 'uncertain'`，以 `resendSeq` 確保完成／失敗只套用於該次認領；`resendOne` 認領前核對學生現況與 `notifySeq`，過時通知拒絕重送。
+  2. `src/AttendanceAdmin.tsx:1002, 1131–1182`：新增 `busyMailId` 鎖定按鈕，避免連續點擊重送或確認。
+  3. `functions/tests/attendance.test.cjs:1647–1745`：驗證並行 `resendOne`（含寄後寫入失敗）只寄 1 次、`confirmSent` 與 `resendOne` 互斥，以及改準時／寄更正後舊未到通知不可重送。
+  4. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
 
 ---
 

@@ -1215,26 +1215,56 @@ export function createAttendanceHandlers(
       } else if (d.mode === 'confirmSent') {
         if (typeof d.mailId !== 'string' || d.mailId.length > 400) bad('信件無效');
         const ref = mails(courseId).doc(d.mailId as string);
-        const m = (await ref.get()).data();
-        if (!m || m.status !== 'uncertain')
-          throw new HttpsError('failed-precondition', '這封信不需要處理');
-        await ref.set(
-          { status: 'sent', sentAt: now(), error: '', confirmedBy: p?.uid || '' },
-          { merge: true },
-        );
+        await db.runTransaction(async (tx) => {
+          const m = (await tx.get(ref)).data();
+          if (!m || m.status !== 'uncertain')
+            throw new HttpsError('failed-precondition', '這封信不需要處理');
+          tx.set(
+            ref,
+            { status: 'sent', sentAt: now(), error: '', confirmedBy: p?.uid || '' },
+            { merge: true },
+          );
+        });
         return { ok: true };
       } else if (d.mode === 'resendOne') {
         if (typeof d.mailId !== 'string' || d.mailId.length > 400) bad('信件無效');
-        const ref = mails(courseId).doc(d.mailId as string);
-        const m = (await ref.get()).data();
-        if (!m || m.status !== 'uncertain')
-          throw new HttpsError('failed-precondition', '這封信不需要處理');
         const endpoint = (await mailerRef(courseId).get()).data();
         if (!endpoint?.url || !endpoint?.key)
           throw new HttpsError(
             'failed-precondition',
             '尚未設定寄信程式（請先到點名頁的寄信設定貼上網址與密鑰）',
           );
+        const ref = mails(courseId).doc(d.mailId as string);
+        const claim = await db.runTransaction(async (tx) => {
+          const m = (await tx.get(ref)).data();
+          if (!m || m.status !== 'uncertain')
+            throw new HttpsError('failed-precondition', '這封信不需要處理');
+          let sessionDoc: AttendanceSession | undefined;
+          if (m.kind !== 'digest') {
+            const [rSnap, sSnap] = await Promise.all([
+              tx.get(records(courseId, m.sessionId).doc(m.to)),
+              tx.get(sessionRef(courseId, m.sessionId)),
+            ]);
+            const r = rSnap.data() as AttendanceRecord | undefined;
+            sessionDoc = sSnap.data() as AttendanceSession | undefined;
+            if (!r || !sessionDoc)
+              throw new HttpsError('failed-precondition', '找不到對應的點名紀錄或節次');
+            const expectedStatus = m.kind === 'correction' ? 'present' : 'absent';
+            if (r.status !== expectedStatus || `${m.sessionId}__${r.email}__${r.notifySeq}` !== m.id)
+              throw new HttpsError(
+                'failed-precondition',
+                '學生點名狀態已變更，這封舊通知已過時，不可重送',
+              );
+          }
+          const resendSeq = Number(m.resendSeq || 0) + 1;
+          tx.set(
+            ref,
+            { status: 'sending', resendSeq, sendingAt: now(), error: '' },
+            { merge: true },
+          );
+          return { m, resendSeq, sessionDoc };
+        });
+        const { m, resendSeq, sessionDoc } = claim;
         const { ctx } = await mailContext(courseId, c, p);
         let mail: { subject: string; text: string };
         if (m.kind === 'digest') {
@@ -1252,40 +1282,46 @@ export function createAttendanceHandlers(
           );
           mail = mentorDigestMail(ctx, m.classId, m.name || '', m.date, digestSessions);
         } else {
-          const s = (await sessionRef(courseId, m.sessionId).get()).data() as
-            | AttendanceSession
-            | undefined;
-          if (!s) throw new HttpsError('failed-precondition', '找不到對應的點名節次');
           mail =
             m.kind === 'correction'
-              ? correctionMail(ctx, s, m.name || m.to)
-              : absentMail(ctx, s, m.name || m.to);
+              ? correctionMail(ctx, sessionDoc!, m.name || m.to)
+              : absentMail(ctx, sessionDoc!, m.name || m.to);
         }
         try {
           const result = await sendMail(
             { url: endpoint.url, key: endpoint.key },
             { mailId: m.id, to: m.to, ...mail, fromName: ctx.teacherName, forceResend: true },
           );
-          await ref.set(
-            {
-              status: 'sent',
-              sentAt: now(),
-              error: '',
-              resentBy: p?.uid || '',
-              ...(result && result.duplicate ? { deduped: true } : {}),
-            },
-            { merge: true },
-          );
+          await db.runTransaction(async (tx) => {
+            const cur = (await tx.get(ref)).data();
+            if (!cur || cur.status !== 'sending' || Number(cur.resendSeq || 0) !== resendSeq) return;
+            tx.set(
+              ref,
+              {
+                status: 'sent',
+                sentAt: now(),
+                error: '',
+                resentBy: p?.uid || '',
+                ...(result && result.duplicate ? { deduped: true } : {}),
+              },
+              { merge: true },
+            );
+          });
           return { ok: true, deduped: !!(result && result.duplicate) };
         } catch (e) {
-          await ref.set(
-            {
-              status: 'uncertain',
-              failedAt: now(),
-              error: String((e as Error).message || e).slice(0, 200),
-            },
-            { merge: true },
-          );
+          await db.runTransaction(async (tx) => {
+            const cur = (await tx.get(ref)).data();
+            if (!cur || cur.status !== 'sending' || Number(cur.resendSeq || 0) !== resendSeq) return;
+            tx.set(
+              ref,
+              {
+                status: 'uncertain',
+                failedAt: now(),
+                error: String((e as Error).message || e).slice(0, 200),
+              },
+              { merge: true },
+            );
+          });
           throw e;
         }
       } else bad('寄送方式無效');
