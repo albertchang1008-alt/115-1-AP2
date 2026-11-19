@@ -1568,4 +1568,4 @@ export const { getStudentUnitAttempts, getActivitySessions, backfillActivityHist
 export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);
 
 export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);
-export const { attendanceStart, attendanceControl, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceMailStatus, attendanceSendMail, attendanceMailTick } = createAttendanceHandlers(db, access, options);
+export const { attendanceStart, attendanceControl, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);

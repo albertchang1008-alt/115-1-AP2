@@ -1,4 +1,4 @@
-// 課堂點名（#67）教師端：開始點名與投影、節次與單節名冊、總表、修改紀錄、寄信。
+// 課堂點名（#67）教師端：開始點名與投影、節次與單節名冊、總表、修改紀錄、通知（半自動，系統不寄信）。
 // 版面沿用教師 2026-11-16 核可的樣張（src/AttendanceSample.tsx）。
 import { useEffect, useMemo, useRef, useState } from 'react';
 import qrcode from 'qrcode-generator';
@@ -8,6 +8,7 @@ import {
   attendUrl,
   attendanceLimits,
   attendanceStatusLabel,
+  gmailComposeUrl,
   sessionLabel,
   taipeiDate,
   taipeiDateTime,
@@ -55,32 +56,49 @@ type RosterRow = {
   sameDevice: string[];
   pendingMail: 'absent' | 'correction' | null;
 };
-type MailStatus = {
-  student: {
-    sessionId: string;
-    date: string;
-    period: number;
-    email: string;
-    name: string;
-    kind: 'absent' | 'correction';
-  }[];
-  digest: { classId: string; mentorName: string; mentorEmail: string; periods: number[] }[];
+type Draft = {
+  draftId: string;
+  kind: 'absent' | 'correction' | 'digest';
+  to: string;
+  name: string;
+  subject: string;
+  text: string;
+  date: string;
+  period: number;
+  classId?: string;
+  sessionId?: string;
+  periods?: number[];
+  ready?: boolean;
+  supplement?: boolean;
+  unconfirmed?: number[];
+  expect: unknown;
+};
+type Drafts = {
+  date: string;
+  student: Draft[];
+  digest: Draft[];
+  noMentor: string[];
   unconfirmedToday: Session[];
-  dailyTime: string;
-  scheduledAt: number;
-  nextSendAt: number;
-  mailerReady: boolean;
-  lastAuto?: { at: number; sent: number; failed: number; error: string } | null;
+  gmailAccount: string;
   log: {
     id: string;
+    key: string;
     kind: string;
     to: string;
     name: string;
-    status: string;
-    createdAt: number;
-    sentAt: number;
-    error: string;
+    date: string;
+    period?: number;
+    periods?: number[];
+    status: 'marked' | 'undone';
+    markedAt: number;
+    byName: string;
+    canUndo: boolean;
   }[];
+};
+type NotifyConfig = {
+  mentors: Record<string, { name: string; email: string }>;
+  teacherName: string;
+  gmailAccount: string;
 };
 type Props = { api: API; course: Course; notify: (s: string) => void };
 const clock = (ms: number) => {
@@ -350,90 +368,20 @@ function LiveView({
   );
 }
 
-/* ───────── 寄出／排定（寄信時間由老師決定） ───────── */
-function SendControls({
+/* ───────── 節次列表＋單節名冊 ───────── */
+function SessionsView({
   api,
   course,
   notify,
-  status,
-  sessionId,
-  onDone,
-}: Props & { status: MailStatus; sessionId?: string; onDone: () => void }) {
-  const [mode, setMode] = useState<'now' | 'schedule'>('now');
-  const [time, setTime] = useState(status.dailyTime || '17:00');
-  const [busy, setBusy] = useState(false);
-  const run = async () => {
-    setBusy(true);
-    try {
-      if (mode === 'now') {
-        const r = await api.call<{ sent: number; failed: number }>('attendanceSendMail', {
-          courseId: course.id,
-          mode: 'now',
-          ...(sessionId ? { sessionId, kinds: ['student'] } : {}),
-        });
-        notify(`已寄出 ${r.sent} 封${r.failed ? `，${r.failed} 封失敗（留在待寄，可再寄）` : ''}`);
-      } else {
-        const [h, m] = time.split(':').map(Number);
-        let at = Date.parse(taipeiDate(Date.now()) + 'T00:00:00+08:00') + (h * 60 + m) * 60000;
-        if (at <= Date.now()) at += 86400000;
-        await api.call('attendanceSendMail', { courseId: course.id, mode: 'schedule', at });
-        notify(`已排定 ${taipeiDateTime(at)} 寄出全部待寄的信`);
-      }
-      onDone();
-    } catch (e) {
-      notify((e as Error).message);
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <div className="att-send">
-      <label>
-        <input
-          type="radio"
-          name={'when' + (sessionId || '')}
-          checked={mode === 'now'}
-          onChange={() => setMode('now')}
-        />{' '}
-        現在寄出{sessionId ? '（這一節）' : ''}
-      </label>
-      <label>
-        <input
-          type="radio"
-          name={'when' + (sessionId || '')}
-          checked={mode === 'schedule'}
-          onChange={() => setMode('schedule')}
-        />{' '}
-        設定時間{' '}
-        <input
-          type="time"
-          value={time}
-          aria-label="寄送時間"
-          onChange={(e) => {
-            setTime(e.target.value);
-            setMode('schedule');
-          }}
-        />
-      </label>
-      <button className="primary" disabled={busy || !status.mailerReady} onClick={() => void run()}>
-        {mode === 'now' ? '寄出' : `排定 ${time} 寄出全部待寄`}
-      </button>
-      {!status.mailerReady && (
-        <span className="att-fail">尚未設定寄信程式（到〔寄信〕分頁設定）</span>
-      )}
-    </div>
-  );
-}
-
-/* ───────── 節次列表＋單節名冊 ───────── */
-function SessionsView({ api, course, notify }: Props) {
+  onGoNotify,
+  onChanged,
+}: Props & { onGoNotify: () => void; onChanged: () => void }) {
   const [sessions, setSessions] = useState<Session[] | null>(null);
   const [sid, setSid] = useState('');
   const [roster, setRoster] = useState<{ session: Session; rows: RosterRow[] } | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<RosterRow | null>(null);
   const [reason, setReason] = useState('');
-  const [mail, setMail] = useState<MailStatus | null>(null);
   const [backfill, setBackfill] = useState<{
     date: string;
     period: number;
@@ -457,7 +405,6 @@ function SessionsView({ api, course, notify }: Props) {
     if (!id) return setRoster(null);
     try {
       setRoster(await api.call('attendanceRoster', { courseId: course.id, sessionId: id }));
-      setMail(await api.call<MailStatus>('attendanceMailStatus', { courseId: course.id }));
     } catch (e) {
       notify((e as Error).message);
     }
@@ -485,6 +432,7 @@ function SessionsView({ api, course, notify }: Props) {
       setPicked(new Set());
       await loadSessions();
       await loadRoster(sid);
+      onChanged();
     } catch (e) {
       notify((e as Error).message);
     }
@@ -494,6 +442,7 @@ function SessionsView({ api, course, notify }: Props) {
       await api.call('attendanceConfirm', { courseId: course.id, sessionId: sid, confirmed });
       await loadSessions();
       await loadRoster(sid);
+      onChanged();
     } catch (e) {
       notify((e as Error).message);
     }
@@ -667,24 +616,19 @@ function SessionsView({ api, course, notify }: Props) {
             </div>
           </div>
           {s.confirmedAt ? (
-            <div className="att-confirm">
-              <strong>這一節已確認：待寄 {pending} 封</strong>
-              <p>
-                只寄給「未到」的學生；寄過未到通知後改成準時的，會寄更正通知。什麼時候寄由你決定。
-              </p>
-              {mail && (
-                <SendControls
-                  api={api}
-                  course={course}
-                  notify={notify}
-                  status={mail}
-                  sessionId={sid}
-                  onDone={() => void loadRoster(sid)}
-                />
-              )}
-            </div>
+            pending ? (
+              <div className="att-notice-bar">
+                <strong>這一節已確認：{pending} 位待通知</strong>
+                <span>系統不會自己寄信；到〔通知〕複製信件內容或開啟 Gmail 寄出。</span>
+                <button className="primary" onClick={onGoNotify}>
+                  前往通知
+                </button>
+              </div>
+            ) : (
+              <p className="muted">這一節已確認，沒有待通知的學生。</p>
+            )
           ) : (
-            <p className="muted">確認後，這一節的未到通知才會列入待寄；確認前可以先修改狀態。</p>
+            <p className="muted">確認後，這一節的未到通知才會出現在〔通知〕；確認前可以先修改狀態。</p>
           )}
           {!!flagged.length && (
             <div className="notice warning att-device">
@@ -797,9 +741,9 @@ function SessionsView({ api, course, notify }: Props) {
                         r.locked ? '🔒 數字碼錯 5 次，已鎖住' : '',
                         r.edited ? `已修改 ${taipeiDateTime(r.editedAt).slice(5)}` : '',
                         r.pendingMail === 'absent'
-                          ? '待寄未到通知'
+                          ? '待通知（未到）'
                           : r.pendingMail === 'correction'
-                            ? '待寄更正通知'
+                            ? '待通知（更正）'
                             : '',
                       ]
                         .filter(Boolean)
@@ -988,22 +932,104 @@ function SummaryView({ api, course, notify }: Props) {
   );
 }
 
-/* ───────── 寄信 ───────── */
-function MailView({ api, course, notify }: Props) {
-  const [st, setSt] = useState<MailStatus | null>(null);
-  const [cfg, setCfg] = useState<{
-    mentors: Record<string, { name: string; email: string }>;
-    dailyTime: string;
-    teacherName: string;
-    mailerReady: boolean;
-  } | null>(null);
-  const [mailerUrl, setMailerUrl] = useState('');
-  const [mailerKey, setMailerKey] = useState('');
-  const [busyMailId, setBusyMailId] = useState('');
+/* ───────── 通知（半自動：系統不寄信；產生信件內容，老師自己貼到 Gmail 寄出後標記已通知） ───────── */
+async function copyText(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // iOS／部分內建瀏覽器不給 clipboard API：退回選取隱藏文字框再複製
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try {
+    ok = document.execCommand('copy');
+  } catch {
+    ok = false;
+  }
+  ta.remove();
+  return ok;
+}
+function CopyButton({ label, text }: { label: string; text: string }) {
+  const [done, setDone] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        if (await copyText(text)) {
+          setDone(true);
+          setTimeout(() => setDone(false), 2000);
+        }
+      }}
+    >
+      {done ? '已複製' : `複製${label}`}
+    </button>
+  );
+}
+const kindLabel: Record<string, string> = {
+  absent: '未到通知',
+  correction: '更正通知',
+  digest: '導師彙整',
+};
+function DraftCard({
+  draft,
+  title,
+  gmailAccount,
+  open,
+  busy,
+  onMark,
+}: {
+  draft: Draft;
+  title: string;
+  gmailAccount: string;
+  open: boolean;
+  busy: boolean;
+  onMark: () => void;
+}) {
+  return (
+    <details className="att-draft" open={open}>
+      <summary>
+        {title}
+        <span className="att-draft-kind">{kindLabel[draft.kind] || draft.kind}</span>
+      </summary>
+      <p className="att-draft-field">收件人</p>
+      <pre>{draft.to}</pre>
+      <p className="att-draft-field">主旨</p>
+      <pre>{draft.subject}</pre>
+      <p className="att-draft-field">內文</p>
+      <pre>{draft.text}</pre>
+      <div className="att-draft-actions">
+        <CopyButton label="收件人" text={draft.to} />
+        <CopyButton label="主旨" text={draft.subject} />
+        <CopyButton label="內文" text={draft.text} />
+      </div>
+      <div className="att-draft-actions">
+        <a href={gmailComposeUrl(gmailAccount, draft)} target="_blank" rel="noopener noreferrer">
+          開啟 Gmail
+        </a>
+        <button className="primary" disabled={busy} onClick={onMark}>
+          已寄，標記已通知
+        </button>
+      </div>
+    </details>
+  );
+}
+function NotifyView({ api, course, notify, onCount }: Props & { onCount: (n: number) => void }) {
+  const [st, setSt] = useState<Drafts | null>(null);
+  const [cfg, setCfg] = useState<NotifyConfig | null>(null);
+  const [busy, setBusy] = useState(false);
   const load = async () => {
     try {
-      setSt(await api.call<MailStatus>('attendanceMailStatus', { courseId: course.id }));
-      setCfg(await api.call('attendanceMailConfig', { courseId: course.id }));
+      const d = await api.call<Drafts>('attendanceNotifyDrafts', { courseId: course.id });
+      setSt(d);
+      onCount(d.student.length + d.digest.filter((g) => g.ready).length);
+      setCfg(await api.call<NotifyConfig>('attendanceMailConfig', { courseId: course.id }));
     } catch (e) {
       notify((e as Error).message);
     }
@@ -1012,6 +1038,36 @@ function MailView({ api, course, notify }: Props) {
     void load();
   }, [course.id]);
   if (!st || !cfg) return <p className="muted">讀取中…</p>;
+  const mark = async (list: Draft[]) => {
+    setBusy(true);
+    try {
+      const r = await api.call<{ marked: number; already: number; stale: number }>(
+        'attendanceMarkNotified',
+        { courseId: course.id, items: list.map((m) => ({ draftId: m.draftId, expect: m.expect })) },
+      );
+      notify(
+        `已標記 ${r.marked + r.already} 封` +
+          (r.stale ? `；${r.stale} 封的點名狀態已變，請看更新後的內容` : ''),
+      );
+      await load();
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  const undo = async (logId: string) => {
+    setBusy(true);
+    try {
+      await api.call('attendanceUndoNotified', { courseId: course.id, logId });
+      notify('已撤銷，這封回到待通知');
+      await load();
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
   const save = async () => {
     const base = location.origin + location.pathname;
     try {
@@ -1019,179 +1075,134 @@ function MailView({ api, course, notify }: Props) {
         courseId: course.id,
         set: {
           mentors: cfg.mentors,
-          dailyTime: cfg.dailyTime,
           teacherName: cfg.teacherName,
+          gmailAccount: cfg.gmailAccount,
           ...(/^https:\/\//.test(base) ? { platformUrl: base } : {}),
-          ...(mailerUrl || mailerKey
-            ? { mailerUrl: mailerUrl.trim(), mailerKey: mailerKey.trim() }
-            : {}),
         },
       });
-      setMailerUrl('');
-      setMailerKey('');
-      notify('寄信設定已儲存');
+      notify('通知設定已儲存');
       await load();
     } catch (e) {
       notify((e as Error).message);
     }
   };
-  const kindLabel: Record<string, string> = {
-    absent: '未到通知',
-    correction: '更正通知',
-    digest: '導師彙整',
-  };
-  const statusLabel: Record<string, string> = {
-    sent: '成功',
-    failed: '失敗',
-    sending: '寄送中',
-    uncertain: '結果不明',
+  const groups = new Map<string, Draft[]>();
+  for (const m of st.student) {
+    const key = `${m.date}（${m.period}）`;
+    groups.set(key, [...(groups.get(key) || []), m]);
+  }
+  const className = (id: string) => course.classNames?.[id] || id;
+  let first = true;
+  const openOnce = () => {
+    const o = first;
+    first = false;
+    return o;
   };
   return (
     <div className="att-mails">
       <section className="att-mail">
-        <h2>寄送時間由老師決定（系統不會自己寄）</h2>
+        <h2>待通知（系統不會自己寄信）</h2>
+        <p className="muted">
+          按〔開啟 Gmail〕會開一封新信，收件人、主旨、內文已帶入，檢查後按寄出；也可以分別複製再貼上。寄出後回來按〔已寄，標記已通知〕。
+        </p>
         {!!st.unconfirmedToday.length && (
           <div className="notice warning">
             今天還有 {st.unconfirmedToday.length} 節尚未確認（
             {st.unconfirmedToday.map((s) => `第 ${s.period} 節`).join('、')}
-            ），不會放進通知與導師彙整。請先到〔節次與名冊〕確認。
+            ），確認後才會出現在這裡。請先到〔節次與名冊〕確認。
           </div>
         )}
-        <div className="att-confirm">
-          <strong>待寄 {st.student.length + st.digest.length} 封</strong>
-          <p>
-            未到通知 {st.student.filter((m) => m.kind === 'absent').length} 封、更正通知{' '}
-            {st.student.filter((m) => m.kind === 'correction').length} 封、導師彙整{' '}
-            {st.digest.length} 封（
-            {st.digest
-              .map(
-                (d) =>
-                  `${course.classNames?.[d.classId] || d.classId}→${d.mentorName || d.mentorEmail}`,
-              )
-              .join('、') || '今天沒有，或尚未填導師信箱'}
-            ）。改狀態後要寄的信也會先排在這裡。
-          </p>
-          <SendControls
-            api={api}
-            course={course}
-            notify={notify}
-            status={st}
-            onDone={() => void load()}
-          />
-          <p className="muted">
-            {st.scheduledAt ? (
-              <>
-                已排定 {taipeiDateTime(st.scheduledAt)} 寄出。
-                <button
-                  onClick={async () => {
-                    await api.call('attendanceSendMail', { courseId: course.id, mode: 'cancel' });
-                    await load();
-                  }}
-                >
-                  取消排定
-                </button>
-              </>
+        <h3>學生（{st.student.length} 封）</h3>
+        {!st.student.length && <p className="muted">目前沒有待通知的學生。</p>}
+        {[...groups.entries()].map(([key, list]) => (
+          <div key={key} className="att-draft-group">
+            <div className="att-row-head">
+              <strong>
+                {sessionLabel(list[0])}：{list.length} 封
+              </strong>
+              <button disabled={busy} onClick={() => void mark(list)}>
+                這一節全部標記已通知
+              </button>
+            </div>
+            {list.map((m) => (
+              <DraftCard
+                key={m.draftId}
+                draft={m}
+                title={`${m.name}（${className(m.classId || '')}）`}
+                gmailAccount={st.gmailAccount}
+                open={openOnce()}
+                busy={busy}
+                onMark={() => void mark([m])}
+              />
+            ))}
+          </div>
+        ))}
+        <h3>導師彙整（{st.digest.length} 封）</h3>
+        {!st.digest.length && <p className="muted">今天沒有待寄的導師彙整。</p>}
+        {st.digest.map((g) => (
+          <div key={g.draftId}>
+            {g.ready ? (
+              <div className="att-notice-bar">
+                {className(g.classId || '')}今天的節次都已確認，彙整可以寄了
+                {g.supplement ? '（補充先前寄出後新確認的節次）' : ''}。
+              </div>
             ) : (
-              '目前沒有排定的寄送。'
+              <p className="muted">
+                {className(g.classId || '')}今天還有第 {(g.unconfirmed || []).join('、')}{' '}
+                節未確認。可以先寄；之後確認的節次會另外出一封補充彙整。
+              </p>
             )}
-            {st.dailyTime ? `　每日預設 ${st.dailyTime} 自動寄出已確認節次的待寄信。` : ''}
+            <DraftCard
+              draft={g}
+              title={`${className(g.classId || '')} → ${g.name || g.to}`}
+              gmailAccount={st.gmailAccount}
+              open={!!g.ready && openOnce()}
+              busy={busy}
+              onMark={() => void mark([g])}
+            />
+          </div>
+        ))}
+        {!!st.noMentor.length && (
+          <p className="att-fail">
+            {st.noMentor.map(className).join('、')} 還沒填導師信箱，無法產生彙整（到右邊〔通知設定〕填寫）。
           </p>
-          {st.lastAuto && (
-            <p className={st.lastAuto.error || st.lastAuto.failed ? 'att-fail' : 'muted'}>
-              上次自動寄送：{taipeiDateTime(st.lastAuto.at)}，
-              {st.lastAuto.error
-                ? `沒有寄出（${st.lastAuto.error}）`
-                : `寄出 ${st.lastAuto.sent} 封${st.lastAuto.failed ? `、失敗 ${st.lastAuto.failed} 封（留在待寄）` : ''}`}
-            </p>
-          )}
-        </div>
-        <h2>寄送紀錄</h2>
+        )}
+        <p className="muted">
+          信件只寫點名資訊，不含成績、情緒、關心標記、同裝置提醒與修改原因。內文不會存進系統，通知紀錄只記收件人與時間。
+        </p>
+      </section>
+      <section className="att-mail">
+        <h2>通知紀錄</h2>
         {!st.log.length ? (
-          <p className="muted">還沒有寄過信。</p>
+          <p className="muted">還沒有標記過。</p>
         ) : (
           <table>
             <thead>
               <tr>
-                <th>時間</th>
+                <th>標記時間</th>
                 <th>收件人</th>
                 <th>種類</th>
-                <th>結果</th>
+                <th>節次</th>
+                <th>狀態</th>
               </tr>
             </thead>
             <tbody>
-              {st.log.map((m) => (
-                <tr key={m.id}>
-                  <td>{taipeiDateTime(m.sentAt || m.createdAt).slice(5)}</td>
-                  <td>{m.name || m.to}</td>
-                  <td>{kindLabel[m.kind] || m.kind}</td>
-                  <td className={m.status === 'sent' ? '' : 'att-fail'}>
-                    {statusLabel[m.status] || m.status}
-                    {m.error ? `：${m.error}` : ''}
-                    {m.status === 'sending' && Date.now() - m.createdAt > 600000 && (
-                      <button
-                        disabled={busyMailId === m.id}
-                        onClick={async () => {
-                          setBusyMailId(m.id);
-                          try {
-                            await api.call('attendanceSendMail', {
-                              courseId: course.id,
-                              mode: 'requeue',
-                              mailId: m.id,
-                            });
-                            await load();
-                          } catch (e) {
-                            notify((e as Error).message);
-                          } finally {
-                            setBusyMailId('');
-                          }
-                        }}
-                      >
-                        放回待寄
+              {st.log.map((l) => (
+                <tr key={l.key}>
+                  <td>{taipeiDateTime(l.markedAt).slice(5)}</td>
+                  <td>{l.name || l.to}</td>
+                  <td>{kindLabel[l.kind] || l.kind}</td>
+                  <td>
+                    {l.kind === 'digest'
+                      ? `${l.date.slice(5)} 第 ${(l.periods || []).join('、')} 節`
+                      : `${l.date.slice(5)} 第 ${l.period} 節`}
+                  </td>
+                  <td>
+                    {l.status === 'undone' ? '已撤銷' : `已通知（${l.byName}）`}
+                    {l.canUndo && (
+                      <button disabled={busy} onClick={() => void undo(l.id)}>
+                        撤銷
                       </button>
-                    )}
-                    {m.status === 'uncertain' && (
-                      <>
-                        <button
-                          disabled={busyMailId === m.id}
-                          onClick={async () => {
-                            setBusyMailId(m.id);
-                            try {
-                              await api.call('attendanceSendMail', {
-                                courseId: course.id,
-                                mode: 'confirmSent',
-                                mailId: m.id,
-                              });
-                              await load();
-                            } catch (e) {
-                              notify((e as Error).message);
-                            } finally {
-                              setBusyMailId('');
-                            }
-                          }}
-                        >
-                          確認已寄
-                        </button>
-                        <button
-                          disabled={busyMailId === m.id}
-                          onClick={async () => {
-                            setBusyMailId(m.id);
-                            try {
-                              await api.call('attendanceSendMail', {
-                                courseId: course.id,
-                                mode: 'resendOne',
-                                mailId: m.id,
-                              });
-                              await load();
-                            } catch (e) {
-                              notify((e as Error).message);
-                            } finally {
-                              setBusyMailId('');
-                            }
-                          }}
-                        >
-                          確認未寄，單封重送
-                        </button>
-                      </>
                     )}
                   </td>
                 </tr>
@@ -1199,12 +1210,8 @@ function MailView({ api, course, notify }: Props) {
             </tbody>
           </table>
         )}
-        <p className="muted">
-          信件只寫點名資訊，不含成績、情緒、關心標記與同裝置提醒。同一封不重複寄；失敗的信會留在待寄。
-        </p>
-      </section>
-      <section className="att-mail">
-        <h2>寄信設定</h2>
+        <p className="muted">按錯可在 24 小時內撤銷；撤銷後這封回到待通知，紀錄保留為「已撤銷」。</p>
+        <h2>通知設定</h2>
         <div className="att-settings">
           <label>
             信件署名
@@ -1215,16 +1222,17 @@ function MailView({ api, course, notify }: Props) {
             />
           </label>
           <label>
-            每日預設寄送時間（留空＝不自動寄）
+            開啟 Gmail 用的帳號（留空＝目前登入平台的帳號）
             <input
-              type="time"
-              value={cfg.dailyTime}
-              onChange={(e) => setCfg({ ...cfg, dailyTime: e.target.value })}
+              type="email"
+              value={cfg.gmailAccount}
+              placeholder={st.gmailAccount}
+              onChange={(e) => setCfg({ ...cfg, gmailAccount: e.target.value })}
             />
           </label>
           {course.classIds.map((id) => (
             <fieldset key={id}>
-              <legend>{course.classNames?.[id] || id} 導師</legend>
+              <legend>{className(id)} 導師</legend>
               <label>
                 姓名
                 <input
@@ -1259,30 +1267,6 @@ function MailView({ api, course, notify }: Props) {
               </label>
             </fieldset>
           ))}
-          <fieldset>
-            <legend>寄信程式：{cfg.mailerReady ? '已設定' : '尚未設定'}</legend>
-            <p className="muted">
-              照 docs/attendance/APPS_SCRIPT_SETUP.md
-              建立後貼上。密鑰存進去之後不會再顯示；要更換時兩欄一起重填。
-            </p>
-            <label>
-              寄信程式網址
-              <input
-                value={mailerUrl}
-                placeholder="https://script.google.com/macros/s/…/exec"
-                onChange={(e) => setMailerUrl(e.target.value)}
-              />
-            </label>
-            <label>
-              密鑰
-              <input
-                type="password"
-                value={mailerKey}
-                autoComplete="off"
-                onChange={(e) => setMailerKey(e.target.value)}
-              />
-            </label>
-          </fieldset>
           <button className="primary" onClick={() => void save()}>
             儲存
           </button>
@@ -1293,12 +1277,24 @@ function MailView({ api, course, notify }: Props) {
 }
 
 export default function AttendanceAdmin(props: Props) {
-  const [view, setView] = useState<'live' | 'sessions' | 'summary' | 'mail'>('live');
+  const [view, setView] = useState<'live' | 'sessions' | 'summary' | 'notify'>('live');
+  const [pending, setPending] = useState(0);
+  const refreshCount = async () => {
+    try {
+      const d = await props.api.call<Drafts>('attendanceNotifyDrafts', { courseId: props.course.id });
+      setPending(d.student.length + d.digest.filter((g) => g.ready).length);
+    } catch {
+      // 數字只是提示；讀不到時不打擾老師
+    }
+  };
+  useEffect(() => {
+    if (view !== 'notify') void refreshCount();
+  }, [props.course.id, view]);
   const tabs = [
     ['live', '點名'],
     ['sessions', '節次與名冊'],
     ['summary', '總表與修改紀錄'],
-    ['mail', '寄信'],
+    ['notify', '通知'],
   ] as const;
   return (
     <div className="att-sheet att-page">
@@ -1312,6 +1308,11 @@ export default function AttendanceAdmin(props: Props) {
             onClick={() => setView(id)}
           >
             {label}
+            {id === 'notify' && pending > 0 && (
+              <span className="att-badge" aria-label={`待通知 ${pending} 封`}>
+                {pending}
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -1325,11 +1326,15 @@ export default function AttendanceAdmin(props: Props) {
           }}
         />
       ) : view === 'sessions' ? (
-        <SessionsView {...props} />
+        <SessionsView
+          {...props}
+          onGoNotify={() => setView('notify')}
+          onChanged={() => void refreshCount()}
+        />
       ) : view === 'summary' ? (
         <SummaryView {...props} />
       ) : (
-        <MailView {...props} />
+        <NotifyView {...props} onCount={setPending} />
       )}
     </div>
   );

@@ -1,12 +1,10 @@
-// 課堂點名（#67）：掃 QR／數字碼簽到、後台修改、學生查看、Email 通知。
+// 課堂點名（#67）：掃 QR／數字碼簽到、後台修改、學生查看、半自動通知（系統不寄信，產生信件內容給老師自己寄）。
 // 規畫：docs/attendance/ATTENDANCE_PLAN_2026-11-16.md（v3＋第 0 節 23:10、23:16 教師決定）。
 // 所有資料只經由這裡的 callable 讀寫；Firestore rules 對這些路徑全拒。
 import { createHmac, createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
-import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { Firestore } from 'firebase-admin/firestore';
 import { featureAccess } from './features';
-import { featureEnabled } from '../../shared/features';
 import {
   ATTENDANCE_MAX_WRONG,
   AttendanceRecord,
@@ -21,7 +19,6 @@ import {
   correctionMail,
   countStatuses,
   mentorDigestMail,
-  nextSendAt,
   onlyKeys,
   pendingStudentMail,
   sameDeviceGroups,
@@ -32,45 +29,14 @@ import {
   taipeiDate,
   termOf,
   validAttendanceDate,
-  validDailyTime,
   validDeviceId,
   validEmailKey,
   validateClassIds,
   validateStartInput,
 } from '../../shared/attendance';
 
-export type AttendanceMailer = (
-  endpoint: { url: string; key: string },
-  mail: {
-    mailId: string;
-    to: string;
-    subject: string;
-    text: string;
-    fromName: string;
-    forceResend?: boolean;
-  },
-) => Promise<{ duplicate?: boolean } | void>;
-type Deps = { now?: () => number; sendMail?: AttendanceMailer; random?: (n: number) => Buffer };
+type Deps = { now?: () => number; random?: (n: number) => Buffer };
 type Member = { email: string; studentId: string; name: string; classId: string };
-
-/** 預設寄信方式：呼叫教師自己學校帳號裡的 Apps Script 網頁程式（apps-script/AttendanceMailer.gs）。 */
-export const appsScriptMailer: AttendanceMailer = async (endpoint, mail) => {
-  const res = await fetch(endpoint.url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ key: endpoint.key, ...mail }),
-    redirect: 'follow',
-    // 逾時就當作結果不明：這封信會還原成待寄，下次用同一個 mailId 重送，由寄信程式去重。
-    signal: AbortSignal.timeout(30000),
-  });
-  const body: any = await res.json().catch(() => null);
-  if (!res.ok || body?.ok !== true) {
-    const err: any = new Error(String(body?.error || `寄信程式回應 ${res.status}`).slice(0, 200));
-    if (body?.uncertain === true) err.uncertain = true;
-    throw err;
-  }
-  return { duplicate: body.duplicate === true };
-};
 
 const bad = (message: string): never => {
   throw new HttpsError('invalid-argument', message);
@@ -157,7 +123,6 @@ export function createAttendanceHandlers(
   deps: Deps = {},
 ) {
   const now = deps.now || Date.now;
-  const sendMail = deps.sendMail || appsScriptMailer;
   const random = deps.random || randomBytes;
   const access = featureAccess(rawAccess, 'attendance');
   const teacher = async (req: any) => access(req, req.data?.courseId, true);
@@ -174,7 +139,6 @@ export function createAttendanceHandlers(
   const trials = (c: string, sid: string) => db.collection(`courses/${c}/attendance/${sid}/trial`);
   const stateRef = (c: string) => db.doc(`courses/${c}/attendanceState/current`);
   const secretRef = (c: string, sid: string) => db.doc(`courses/${c}/attendanceSecrets/${sid}`);
-  const mailerRef = (c: string) => db.doc(`courses/${c}/attendanceSecrets/mailer`);
   const configRef = (c: string) => db.doc(`courses/${c}/attendanceConfig/mail`);
   const audit = (c: string) => db.collection(`courses/${c}/attendanceAudit`);
   const mails = (c: string) => db.collection(`courses/${c}/attendanceMail`);
@@ -324,203 +288,201 @@ export function createAttendanceHandlers(
       },
     };
   };
-  const pendingMail = async (courseId: string, c: any, date: string) => {
+  /* ───────── 半自動通知（教師 2026-11-19 12:42）：系統不寄信，只產生信件內容，老師自己貼到 Gmail 寄出後標記「已通知」 ───────── */
+  const DAY_MS = 86400000;
+  const digestDocId = (date: string, classId: string) =>
+    `digest__${date}__${encodeURIComponent(classId)}`;
+  /** 待通知清單：只看已確認的節次；學生信沿用 pendingStudentMail（紀錄與上次通知不一致時才需通知）。 */
+  const notifyState = async (courseId: string, c: any, p: any, date: string) => {
     const list = (await rollSessions(courseId, c)).filter((s) => s.status === 'closed');
     const confirmed = list.filter((s) => s.confirmedAt);
-    const student: {
-      session: AttendanceSession;
-      record: AttendanceRecord;
-      kind: 'absent' | 'correction';
-    }[] = [];
+    const { cfg, ctx } = await mailContext(courseId, c, p);
+    const student: Record<string, unknown>[] = [];
     const bySession = new Map<string, AttendanceRecord[]>();
     for (const s of confirmed) {
-      const rs = await allRecords(courseId, s.id);
+      const rs = (await allRecords(courseId, s.id)).sort(
+        (a, b) => a.classId.localeCompare(b.classId) || a.studentId.localeCompare(b.studentId),
+      );
       bySession.set(s.id, rs);
-      for (const record of rs) {
-        const kind = pendingStudentMail(record);
-        if (kind) student.push({ session: s, record, kind });
+      for (const r of rs) {
+        const kind = pendingStudentMail(r);
+        if (!kind) continue;
+        const mail = kind === 'absent' ? absentMail(ctx, s, r.name) : correctionMail(ctx, s, r.name);
+        student.push({
+          draftId: `${s.id}__${r.email}`,
+          kind,
+          sessionId: s.id,
+          date: s.date,
+          period: s.period,
+          classId: r.classId,
+          to: r.email,
+          name: r.name,
+          subject: mail.subject,
+          text: mail.text,
+          expect: { status: r.status, notifySeq: r.notifySeq || 0 },
+        });
       }
     }
-    const cfg = (await configRef(courseId).get()).data() || {};
     const mentors: Record<string, { name?: string; email?: string }> = cfg.mentors || {};
-    const digest: {
-      classId: string;
-      mentor: { name: string; email: string };
-      sessions: { session: AttendanceSession; records: AttendanceRecord[] }[];
-    }[] = [];
-    const today = confirmed.filter((s) => s.date === date);
+    const digest: Record<string, unknown>[] = [];
+    const noMentor: string[] = [];
+    const today = list.filter((s) => s.date === date);
     for (const classId of [...new Set(today.flatMap((s) => s.classIds))].sort()) {
+      const mine = today.filter((s) => s.classIds.includes(classId));
+      const covered: number[] =
+        (await mails(courseId).doc(digestDocId(date, classId)).get()).data()?.periods || [];
+      const fresh = mine
+        .filter((s) => s.confirmedAt && !covered.includes(s.period))
+        .sort((a, b) => a.period - b.period);
+      if (!fresh.length) continue;
       const m = mentors[classId];
-      if (!m?.email) continue;
-      const done = (
-        await mails(courseId)
-          .doc(`digest__${date}__${encodeURIComponent(classId)}`)
-          .get()
-      ).data();
-      if (done && (done.status === 'sent' || done.status === 'sending' || done.status === 'uncertain'))
+      if (!m?.email) {
+        noMentor.push(classId);
         continue;
-      digest.push({
+      }
+      const mail = mentorDigestMail(
+        ctx,
         classId,
-        mentor: { name: String(m.name || ''), email: m.email },
-        sessions: today
-          .filter((s) => s.classIds.includes(classId))
-          .map((s) => ({ session: s, records: bySession.get(s.id)! })),
+        String(m.name || ''),
+        date,
+        fresh.map((s) => ({ session: s, records: bySession.get(s.id) || [] })),
+      );
+      const supplement = covered.length > 0;
+      digest.push({
+        draftId: digestDocId(date, classId),
+        kind: 'digest',
+        classId,
+        date,
+        to: m.email,
+        name: String(m.name || ''),
+        subject: supplement ? `${mail.subject}（補充）` : mail.subject,
+        text: mail.text,
+        periods: fresh.map((s) => s.period),
+        supplement,
+        // 該班今天的節次都確認了才提示；還有未確認的節次時老師仍可先產生。
+        unconfirmed: mine.filter((s) => !s.confirmedAt).map((s) => s.period).sort((a, b) => a - b),
+        ready: mine.every((s) => s.confirmedAt),
+        expect: { periods: fresh.map((s) => s.period) },
       });
     }
     return {
+      cfg,
       student,
       digest,
+      noMentor,
       unconfirmedToday: list.filter((s) => s.date === date && !s.confirmedAt).map(publicSession),
     };
   };
-  /** 寄出目前待寄的信。每封信先在交易裡「認領」（同時更新紀錄的通知狀態並建立寄送紀錄），再呼叫寄信程式，所以同一封不會寄兩次。 */
-  const runSend = async (courseId: string, c: any, p: any, kinds: string[], only?: string) => {
-    const endpoint = (await mailerRef(courseId).get()).data();
-    if (!endpoint?.url || !endpoint?.key)
-      throw new HttpsError(
-        'failed-precondition',
-        '尚未設定寄信程式（請先到點名頁的寄信設定貼上網址與密鑰）',
-      );
-    const date = taipeiDate(now());
-    const { ctx } = await mailContext(courseId, c, p);
-    const pending = await pendingMail(courseId, c, date);
-    const out = { sent: 0, failed: 0, skipped: 0 };
-    const deliver = async (
-      mailId: string,
-      to: string,
-      mail: { subject: string; text: string },
-      onFail?: () => Promise<void>,
-    ) => {
-      try {
-        // mailId 一併送給寄信程式：同一個 mailId 寄信程式只會寄一次（結果不明後重送也不會變成兩封）。
-        const result = await sendMail(
-          { url: endpoint.url, key: endpoint.key },
-          { mailId, to, ...mail, fromName: ctx.teacherName },
-        );
-        await mails(courseId)
-          .doc(mailId)
-          .set(
-            {
-              status: 'sent',
-              sentAt: now(),
-              ...(result && result.duplicate ? { deduped: true } : {}),
-            },
-            { merge: true },
-          );
-        out.sent++;
-      } catch (e) {
-        if ((e as any)?.uncertain === true) {
-          // Apps Script 端存在未確認的占位：暫停自動重寄（不還原 notifySeq / 維持 uncertain 狀態），待教師確認後處理。
-          await mails(courseId)
-            .doc(mailId)
-            .set(
-              {
-                status: 'uncertain',
-                uncertainAt: now(),
-                error: String((e as Error).message || e).slice(0, 200),
-              },
-              { merge: true },
-            );
-          out.failed++;
-          return;
-        }
-        await mails(courseId)
-          .doc(mailId)
-          .set(
-            {
-              status: 'failed',
-              failedAt: now(),
-              error: String((e as Error).message || e).slice(0, 200),
-            },
-            { merge: true },
-          );
-        if (onFail) await onFail();
-        out.failed++;
-      }
-    };
-    if (kinds.includes('student'))
-      for (const item of pending.student.slice(0, 300)) {
-        if (only && only !== item.session.id) continue;
-        const ref = records(courseId, item.session.id).doc(item.record.email);
-        const claim = await db.runTransaction(async (tx) => {
-          const [rSnap, sSnap] = [
-            await tx.get(ref),
-            await tx.get(sessionRef(courseId, item.session.id)),
-          ];
-          const r = rSnap.data() as AttendanceRecord | undefined;
-          const s = sSnap.data() as AttendanceSession | undefined;
-          const kind = r && s?.confirmedAt ? pendingStudentMail(r) : null;
-          if (!r || !kind) return null;
-          const seq = (r.notifySeq || 0) + 1;
-          const mailId = `${item.session.id}__${r.email}__${seq}`;
-          tx.set(ref, { ...r, lastNotified: r.status, notifySeq: seq });
-          tx.set(mails(courseId).doc(mailId), {
-            id: mailId,
-            kind,
-            to: r.email,
-            name: r.name,
-            sessionId: item.session.id,
-            status: 'sending',
-            createdAt: now(),
-            by: p?.uid || 'schedule',
-          });
-          return { mailId, kind, seq, previous: r.lastNotified, name: r.name, email: r.email };
-        });
-        if (!claim) {
-          out.skipped++;
-          continue;
-        }
-        const mail =
-          claim.kind === 'absent'
-            ? absentMail(ctx, item.session, claim.name)
-            : correctionMail(ctx, item.session, claim.name);
-        await deliver(claim.mailId, claim.email, mail, () =>
-          // 寄失敗或結果不明：把通知狀態與序號都還原，這封信會回到待寄，而且下次認領會得到同一個 mailId，
-          // 寄信程式因此能認出「這封其實寄過了」而不再寄。如果期間又有新的認領就不動。
-          db.runTransaction(async (tx) => {
-            const r = (await tx.get(ref)).data() as AttendanceRecord | undefined;
-            if (!r || r.notifySeq !== claim.seq) return;
-            const { lastNotified: _drop, ...rest } = r;
-            const back = { ...rest, notifySeq: claim.seq - 1 };
-            tx.set(ref, claim.previous ? { ...back, lastNotified: claim.previous } : back);
-          }),
-        );
-      }
-    if (kinds.includes('mentor') && !only)
-      for (const d of pending.digest) {
-        const mailId = `digest__${date}__${encodeURIComponent(d.classId)}`;
-        const claimed = await db.runTransaction(async (tx) => {
-          const old = (await tx.get(mails(courseId).doc(mailId))).data();
-          if (old && (old.status === 'sent' || old.status === 'sending' || old.status === 'uncertain'))
-            return false;
-          tx.set(mails(courseId).doc(mailId), {
-            id: mailId,
-            kind: 'digest',
-            to: d.mentor.email,
-            name: d.mentor.name,
-            classId: d.classId,
-            date,
-            status: 'sending',
-            createdAt: now(),
-            by: p?.uid || 'schedule',
-          });
-          return true;
-        });
-        if (!claimed) {
-          out.skipped++;
-          continue;
-        }
-        await deliver(
-          mailId,
-          d.mentor.email,
-          mentorDigestMail(ctx, d.classId, d.mentor.name, date, d.sessions),
-        );
-      }
-    return out;
+  const markStudent = async (courseId: string, p: any, draftId: string, expect: any) => {
+    const cut = draftId.indexOf('__');
+    const sid = cut > 0 ? draftId.slice(0, cut) : '';
+    const email = cut > 0 ? draftId.slice(cut + 2) : '';
+    if (!validEmailKey(email)) bad('通知編號無效');
+    if (
+      !expect ||
+      typeof expect !== 'object' ||
+      (expect.status !== 'present' && expect.status !== 'absent') ||
+      !Number.isInteger(expect.notifySeq) ||
+      expect.notifySeq < 0
+    )
+      bad('通知內容無效');
+    const sRef = sessionRef(courseId, sid);
+    const rRef = records(courseId, sid).doc(email);
+    return db.runTransaction(async (tx) => {
+      const [rSnap, sSnap] = [await tx.get(rRef), await tx.get(sRef)];
+      const r = rSnap.data() as AttendanceRecord | undefined;
+      const s = sSnap.data() as AttendanceSession | undefined;
+      if (!r || !s || s.kind !== 'roll' || !s.confirmedAt) return 'stale' as const;
+      const n = r.notifySeq || 0;
+      // 同一封重按（或兩個分頁同時按）：已經標過，回原結果，不再加序號。
+      if (n === expect.notifySeq + 1 && r.status === expect.status && r.lastNotified === r.status)
+        return 'already' as const;
+      const kind = pendingStudentMail(r);
+      if (!kind || r.status !== expect.status || n !== expect.notifySeq) return 'stale' as const;
+      const seq = n + 1;
+      const t = now();
+      const logId = `${draftId}__${seq}`;
+      tx.set(rRef, { ...r, lastNotified: r.status, notifySeq: seq });
+      tx.set(mails(courseId).doc(logId), {
+        id: logId,
+        kind,
+        to: r.email,
+        name: r.name,
+        sessionId: sid,
+        date: s.date,
+        period: s.period,
+        classId: r.classId,
+        seq,
+        prevLastNotified: r.lastNotified || null,
+        status: 'marked',
+        markedAt: t,
+        updatedAt: t,
+        by: p.uid,
+        byName: String(p.name || p.email || ''),
+      });
+      return 'marked' as const;
+    });
   };
-  const reschedule = async (courseId: string) => {
-    const cfg = (await configRef(courseId).get()).data() || {};
-    await db.doc(`courses/${courseId}`).update({ attendanceNextSendAt: nextSendAt(now(), cfg) });
+  const markDigest = async (courseId: string, c: any, p: any, draftId: string, expect: any) => {
+    const m = draftId.match(/^digest__(\d{4}-\d{2}-\d{2})__([^/]{1,200})$/);
+    let classId = '';
+    try {
+      classId = m ? decodeURIComponent(m[2]) : '';
+    } catch {
+      classId = '';
+    }
+    if (
+      !m ||
+      !validAttendanceDate(m[1]) ||
+      !(c.classIds || []).includes(classId) ||
+      digestDocId(m[1], classId) !== draftId
+    )
+      bad('通知編號無效');
+    const date = m![1];
+    if (
+      !expect ||
+      typeof expect !== 'object' ||
+      !Array.isArray(expect.periods) ||
+      !expect.periods.length ||
+      expect.periods.length > 20 ||
+      expect.periods.some((x: unknown) => !Number.isInteger(x) || (x as number) < 1 || (x as number) > 20)
+    )
+      bad('通知內容無效');
+    const want = [...new Set(expect.periods as number[])].sort((a, b) => a - b);
+    const ok = new Set(
+      (await sessions(courseId).where('date', '==', date).get()).docs
+        .map((x) => x.data() as AttendanceSession)
+        .filter((s) => s.kind === 'roll' && s.status === 'closed' && s.confirmedAt && s.classIds.includes(classId))
+        .map((s) => s.period),
+    );
+    if (want.some((x) => !ok.has(x))) return 'stale' as const;
+    const mentor = ((await configRef(courseId).get()).data()?.mentors || {})[classId];
+    if (!mentor?.email) return 'stale' as const;
+    const ref = mails(courseId).doc(draftId);
+    return db.runTransaction(async (tx) => {
+      const old = (await tx.get(ref)).data();
+      const covered: number[] = old?.periods || [];
+      const fresh = want.filter((x) => !covered.includes(x));
+      if (!fresh.length) return 'already' as const;
+      const t = now();
+      tx.set(ref, {
+        id: draftId,
+        kind: 'digest',
+        to: mentor.email,
+        name: String(mentor.name || ''),
+        classId,
+        date,
+        periods: [...covered, ...fresh].sort((a, b) => a - b),
+        marks: [
+          ...(old?.marks || []),
+          { periods: fresh, at: t, by: p.uid, byName: String(p.name || p.email || '') },
+        ],
+        status: 'marked',
+        markedAt: t,
+        updatedAt: t,
+      });
+      return 'marked' as const;
+    });
   };
 
   return {
@@ -1009,8 +971,8 @@ export function createAttendanceHandlers(
         : { filename: `點名總表_${courseId}.csv`, csv: attendanceSummaryCsv(data) };
     }),
 
-    /* ═════════ Email ═════════ */
-    /** 寄信設定：導師姓名與信箱、每日預設寄送時間、寄信程式網址與密鑰。密鑰只寫不讀，不回傳前端。 */
+    /* ═════════ 通知（半自動） ═════════ */
+    /** 通知設定：導師姓名與信箱、信件署名、開啟 Gmail 用的帳號。系統不寄信，沒有寄信程式或密鑰。 */
     attendanceMailConfig: onCall(options, async (req) => {
       const { p, c } = await teacher(req);
       const d = input(req.data, ['set']);
@@ -1018,14 +980,7 @@ export function createAttendanceHandlers(
       if (d.set !== undefined) {
         let set: Record<string, unknown>;
         try {
-          set = onlyKeys(d.set, [
-            'mentors',
-            'dailyTime',
-            'platformUrl',
-            'teacherName',
-            'mailerUrl',
-            'mailerKey',
-          ]);
+          set = onlyKeys(d.set, ['mentors', 'platformUrl', 'teacherName', 'gmailAccount']);
         } catch (e) {
           return bad((e as Error).message);
         }
@@ -1045,11 +1000,6 @@ export function createAttendanceHandlers(
           }
           patch.mentors = mentors;
         }
-        if (set.dailyTime !== undefined) {
-          if (set.dailyTime !== '' && !validDailyTime(set.dailyTime))
-            bad('每日寄送時間格式為 HH:MM');
-          patch.dailyTime = set.dailyTime;
-        }
         if (set.platformUrl !== undefined) {
           if (
             typeof set.platformUrl !== 'string' ||
@@ -1063,32 +1013,22 @@ export function createAttendanceHandlers(
           if (typeof set.teacherName !== 'string' || set.teacherName.length > 40) bad('署名無效');
           patch.teacherName = (set.teacherName as string).trim();
         }
-        if (set.mailerUrl !== undefined || set.mailerKey !== undefined) {
-          if (
-            typeof set.mailerUrl !== 'string' ||
-            !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(set.mailerUrl)
-          )
-            bad('寄信程式網址須為 https://script.google.com/macros/s/…/exec');
-          if (typeof set.mailerKey !== 'string' || !/^[A-Za-z0-9_-]{24,200}$/.test(set.mailerKey))
-            bad('密鑰需為 24 個字以上的英數字');
-          await mailerRef(courseId).set({
-            url: set.mailerUrl,
-            key: set.mailerKey,
-            updatedAt: now(),
-            updatedBy: p.uid,
-          });
+        if (set.gmailAccount !== undefined) {
+          const g = String(set.gmailAccount || '')
+            .trim()
+            .toLowerCase();
+          if (typeof set.gmailAccount !== 'string' || (g && !validEmailKey(g)))
+            bad('Gmail 帳號無效');
+          patch.gmailAccount = g;
         }
         await configRef(courseId).set(patch, { merge: true });
-        await reschedule(courseId);
       }
       const cfg = (await configRef(courseId).get()).data() || {};
       return {
         mentors: cfg.mentors || {},
-        dailyTime: cfg.dailyTime || '',
-        scheduledAt: cfg.scheduledAt || 0,
         platformUrl: cfg.platformUrl || '',
         teacherName: cfg.teacherName || '',
-        mailerReady: !!(await mailerRef(courseId).get()).data()?.url,
+        gmailAccount: cfg.gmailAccount || '',
       };
     }),
     /** 該節〔確認〕：確認後這一節的未到通知才會列入待寄。 */
@@ -1111,260 +1051,136 @@ export function createAttendanceHandlers(
         ),
       };
     }),
-    /** 待寄清單、今天尚未確認的節次、排程與最近的寄送紀錄。 */
-    attendanceMailStatus: onCall(options, async (req) => {
-      const { c } = await teacher(req);
-      input(req.data, []);
+    /** 待通知的信件內容（收件人、主旨、內文）與通知紀錄。內文當場產生，不寫進資料庫。 */
+    attendanceNotifyDrafts: onCall(options, async (req) => {
+      const { p, c } = await teacher(req);
+      const d = input(req.data, ['date']);
       const courseId = req.data.courseId;
-      const pending = await pendingMail(courseId, c, taipeiDate(now()));
-      const cfg = (await configRef(courseId).get()).data() || {};
-      const log = (await mails(courseId).orderBy('createdAt', 'desc').limit(100).get()).docs
-        .map((x) => x.data())
-        .map((m: any) => ({
-          id: m.id,
-          kind: m.kind,
-          to: m.to,
-          name: m.name || '',
-          sessionId: m.sessionId || '',
-          classId: m.classId || '',
-          date: m.date || '',
-          status: m.status,
-          createdAt: m.createdAt,
-          sentAt: m.sentAt || 0,
-          error: m.error || '',
-        }));
+      if (d.date !== undefined && !validAttendanceDate(d.date)) bad('日期無效');
+      const date = (d.date as string | undefined) || taipeiDate(now());
+      const st = await notifyState(courseId, c, p, date);
+      const t = now();
+      const log: Record<string, unknown>[] = [];
+      for (const m of (await mails(courseId).orderBy('updatedAt', 'desc').limit(100).get()).docs.map(
+        (x) => x.data() as any,
+      )) {
+        if (m.kind === 'digest') {
+          const marks: any[] = m.marks || [];
+          const last = marks.map((k, i) => (k.undoneAt ? -1 : i)).reduce((a, b) => Math.max(a, b), -1);
+          // 新的在前（同一時間標記時也維持順序）
+          [...marks.entries()].reverse().forEach(([i, k]) =>
+            log.push({
+              id: m.id,
+              key: `${m.id}#${i}`,
+              kind: 'digest',
+              to: m.to,
+              name: m.name || '',
+              classId: m.classId,
+              date: m.date,
+              periods: k.periods,
+              status: k.undoneAt ? 'undone' : 'marked',
+              markedAt: k.at,
+              byName: k.byName || '',
+              canUndo: i === last && !k.undoneAt && t - k.at <= DAY_MS,
+            }),
+          );
+        } else
+          log.push({
+            id: m.id,
+            key: m.id,
+            kind: m.kind,
+            to: m.to,
+            name: m.name || '',
+            sessionId: m.sessionId,
+            date: m.date,
+            period: m.period,
+            status: m.status,
+            markedAt: m.markedAt,
+            byName: m.byName || '',
+            canUndo: m.status === 'marked' && t - m.markedAt <= DAY_MS,
+          });
+      }
+      log.sort((a: any, b: any) => b.markedAt - a.markedAt);
       return {
-        student: pending.student.map((x) => ({
-          sessionId: x.session.id,
-          date: x.session.date,
-          period: x.session.period,
-          email: x.record.email,
-          name: x.record.name,
-          kind: x.kind,
-        })),
-        digest: pending.digest.map((x) => ({
-          classId: x.classId,
-          mentorName: x.mentor.name,
-          mentorEmail: x.mentor.email,
-          periods: x.sessions.map((y) => y.session.period),
-        })),
-        unconfirmedToday: pending.unconfirmedToday,
-        dailyTime: cfg.dailyTime || '',
-        scheduledAt: cfg.scheduledAt || 0,
-        nextSendAt: nextSendAt(now(), cfg),
-        mailerReady: !!(await mailerRef(courseId).get()).data()?.url,
-        lastAuto: cfg.lastAuto
-          ? {
-              at: Number(cfg.lastAuto.at) || 0,
-              sent: Number(cfg.lastAuto.sent) || 0,
-              failed: Number(cfg.lastAuto.failed) || 0,
-              error: String(cfg.lastAuto.error || ''),
-            }
-          : null,
+        date,
+        student: st.student,
+        digest: st.digest,
+        noMentor: st.noMentor,
+        unconfirmedToday: st.unconfirmedToday,
+        gmailAccount: st.cfg.gmailAccount || String(p?.email || ''),
         log,
       };
     }),
-    /** 寄信時間由老師決定：現在寄出、設定一次性的時間、取消排定；另可把中斷的信放回待寄。 */
-    attendanceSendMail: onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
+    /** 老師自己寄出後標記「已通知」：每封都核對學生現況（expect），狀態已變就不標；同一封重按只算一次。 */
+    attendanceMarkNotified: onCall(options, async (req) => {
       const { p, c } = await teacher(req);
-      const d = input(req.data, ['mode', 'at', 'kinds', 'sessionId', 'mailId']);
+      const d = input(req.data, ['items']);
       const courseId = req.data.courseId;
-      const kinds = d.kinds === undefined ? ['student', 'mentor'] : d.kinds;
-      if (
-        !Array.isArray(kinds) ||
-        !kinds.length ||
-        kinds.some((k) => k !== 'student' && k !== 'mentor')
-      )
-        bad('信件種類無效');
-      if (d.mode === 'now') {
-        if (d.sessionId !== undefined) sessionRef(courseId, d.sessionId);
-        return runSend(courseId, c, p, kinds as string[], d.sessionId as string | undefined);
-      }
-      if (d.mode === 'schedule') {
-        if (
-          typeof d.at !== 'number' ||
-          !Number.isFinite(d.at) ||
-          d.at <= now() ||
-          d.at > now() + 7 * 86400000
-        )
-          bad('排定時間需在現在之後、7 天以內');
-        await configRef(courseId).set({ scheduledAt: Math.floor(d.at as number) }, { merge: true });
-      } else if (d.mode === 'cancel') {
-        await configRef(courseId).set({ scheduledAt: 0 }, { merge: true });
-      } else if (d.mode === 'requeue') {
-        // 寄送中斷（停在 sending 超過 10 分鐘）：標成失敗並還原通知狀態，讓它回到待寄；不會自動重寄。
-        if (typeof d.mailId !== 'string' || d.mailId.length > 400) bad('信件無效');
-        const ref = mails(courseId).doc(d.mailId as string);
-        const m = (await ref.get()).data();
-        if (!m || m.status !== 'sending' || now() - m.createdAt < 600000)
-          throw new HttpsError('failed-precondition', '這封信不需要處理');
-        await ref.set(
-          { status: 'failed', failedAt: now(), error: '寄送中斷，已放回待寄' },
-          { merge: true },
-        );
-        if (m.kind !== 'digest') {
-          const rRef = records(courseId, m.sessionId).doc(m.to);
-          await db.runTransaction(async (tx) => {
-            const r = (await tx.get(rRef)).data() as AttendanceRecord | undefined;
-            if (!r || `${m.sessionId}__${r.email}__${r.notifySeq}` !== m.id) return;
-            const { lastNotified: _drop, ...rest } = r;
-            const back = { ...rest, notifySeq: Math.max(0, (r.notifySeq || 1) - 1) }; // 下次認領沿用同一個 mailId
-            tx.set(rRef, m.kind === 'correction' ? { ...back, lastNotified: 'absent' } : back);
-          });
+      if (!Array.isArray(d.items) || !d.items.length || d.items.length > 100) bad('通知清單無效');
+      const out = { marked: 0, already: 0, stale: 0 };
+      for (const raw of d.items as unknown[]) {
+        let item: Record<string, any>;
+        try {
+          item = onlyKeys(raw, ['draftId', 'expect']);
+        } catch (e) {
+          return bad((e as Error).message);
         }
-      } else if (d.mode === 'confirmSent') {
-        if (typeof d.mailId !== 'string' || d.mailId.length > 400) bad('信件無效');
-        const ref = mails(courseId).doc(d.mailId as string);
+        if (typeof item.draftId !== 'string' || !item.draftId || item.draftId.length > 400)
+          bad('通知編號無效');
+        const r = item.draftId.startsWith('digest__')
+          ? await markDigest(courseId, c, p, item.draftId, item.expect)
+          : await markStudent(courseId, p, item.draftId, item.expect);
+        out[r]++;
+      }
+      return out;
+    }),
+    /** 撤銷「已通知」（按錯時用）：只限 24 小時內；學生信只能撤銷該生最新的一筆，導師彙整撤銷最近一次標記。 */
+    attendanceUndoNotified: onCall(options, async (req) => {
+      const { p } = await teacher(req);
+      const d = input(req.data, ['logId']);
+      const courseId = req.data.courseId;
+      if (typeof d.logId !== 'string' || !/^[^/]{1,400}$/.test(d.logId)) bad('紀錄編號無效');
+      const ref = mails(courseId).doc(d.logId as string);
+      const head = (await ref.get()).data() as any;
+      if (!head) throw new HttpsError('not-found', '找不到這筆通知紀錄');
+      if (head.kind === 'digest') {
         await db.runTransaction(async (tx) => {
-          const m = (await tx.get(ref)).data();
-          if (!m || m.status !== 'uncertain')
-            throw new HttpsError('failed-precondition', '這封信不需要處理');
-          tx.set(
-            ref,
-            { status: 'sent', sentAt: now(), error: '', confirmedBy: p?.uid || '' },
-            { merge: true },
-          );
+          const m = (await tx.get(ref)).data() as any;
+          const marks: any[] = (m?.marks || []).map((k: any) => ({ ...k }));
+          const i = marks.map((k, j) => (k.undoneAt ? -1 : j)).reduce((a, b) => Math.max(a, b), -1);
+          if (i < 0) throw new HttpsError('failed-precondition', '這筆不能撤銷');
+          const t = now();
+          if (t - marks[i].at > DAY_MS)
+            throw new HttpsError('failed-precondition', '超過 24 小時，不能撤銷');
+          marks[i] = { ...marks[i], undoneAt: t, undoneBy: p.uid };
+          const periods = (m.periods as number[]).filter((x) => !marks[i].periods.includes(x));
+          tx.set(ref, {
+            ...m,
+            marks,
+            periods,
+            status: periods.length ? 'marked' : 'undone',
+            updatedAt: t,
+          });
         });
         return { ok: true };
-      } else if (d.mode === 'resendOne') {
-        if (typeof d.mailId !== 'string' || d.mailId.length > 400) bad('信件無效');
-        const endpoint = (await mailerRef(courseId).get()).data();
-        if (!endpoint?.url || !endpoint?.key)
-          throw new HttpsError(
-            'failed-precondition',
-            '尚未設定寄信程式（請先到點名頁的寄信設定貼上網址與密鑰）',
-          );
-        const ref = mails(courseId).doc(d.mailId as string);
-        const claim = await db.runTransaction(async (tx) => {
-          const m = (await tx.get(ref)).data();
-          if (!m || m.status !== 'uncertain')
-            throw new HttpsError('failed-precondition', '這封信不需要處理');
-          let sessionDoc: AttendanceSession | undefined;
-          if (m.kind !== 'digest') {
-            const [rSnap, sSnap] = await Promise.all([
-              tx.get(records(courseId, m.sessionId).doc(m.to)),
-              tx.get(sessionRef(courseId, m.sessionId)),
-            ]);
-            const r = rSnap.data() as AttendanceRecord | undefined;
-            sessionDoc = sSnap.data() as AttendanceSession | undefined;
-            if (!r || !sessionDoc)
-              throw new HttpsError('failed-precondition', '找不到對應的點名紀錄或節次');
-            const expectedStatus = m.kind === 'correction' ? 'present' : 'absent';
-            if (r.status !== expectedStatus || `${m.sessionId}__${r.email}__${r.notifySeq}` !== m.id)
-              throw new HttpsError(
-                'failed-precondition',
-                '學生點名狀態已變更，這封舊通知已過時，不可重送',
-              );
-          }
-          const resendSeq = Number(m.resendSeq || 0) + 1;
-          tx.set(
-            ref,
-            { status: 'sending', resendSeq, sendingAt: now(), error: '' },
-            { merge: true },
-          );
-          return { m, resendSeq, sessionDoc };
-        });
-        const { m, resendSeq, sessionDoc } = claim;
-        const { ctx } = await mailContext(courseId, c, p);
-        let mail: { subject: string; text: string };
-        if (m.kind === 'digest') {
-          const confirmed = (await sessions(courseId).where('date', '==', m.date).get()).docs
-            .map((x) => x.data() as AttendanceSession)
-            .filter((s) => s.confirmedAt && s.classIds.includes(m.classId))
-            .sort((a, b) => a.period - b.period);
-          const digestSessions = await Promise.all(
-            confirmed.map(async (s) => ({
-              session: s,
-              records: (await records(courseId, s.id).get()).docs
-                .map((r) => r.data() as AttendanceRecord)
-                .filter((r) => r.classId === m.classId),
-            })),
-          );
-          mail = mentorDigestMail(ctx, m.classId, m.name || '', m.date, digestSessions);
-        } else {
-          mail =
-            m.kind === 'correction'
-              ? correctionMail(ctx, sessionDoc!, m.name || m.to)
-              : absentMail(ctx, sessionDoc!, m.name || m.to);
-        }
-        try {
-          const result = await sendMail(
-            { url: endpoint.url, key: endpoint.key },
-            { mailId: m.id, to: m.to, ...mail, fromName: ctx.teacherName, forceResend: true },
-          );
-          await db.runTransaction(async (tx) => {
-            const cur = (await tx.get(ref)).data();
-            if (!cur || cur.status !== 'sending' || Number(cur.resendSeq || 0) !== resendSeq) return;
-            tx.set(
-              ref,
-              {
-                status: 'sent',
-                sentAt: now(),
-                error: '',
-                resentBy: p?.uid || '',
-                ...(result && result.duplicate ? { deduped: true } : {}),
-              },
-              { merge: true },
-            );
-          });
-          return { ok: true, deduped: !!(result && result.duplicate) };
-        } catch (e) {
-          await db.runTransaction(async (tx) => {
-            const cur = (await tx.get(ref)).data();
-            if (!cur || cur.status !== 'sending' || Number(cur.resendSeq || 0) !== resendSeq) return;
-            tx.set(
-              ref,
-              {
-                status: 'uncertain',
-                failedAt: now(),
-                error: String((e as Error).message || e).slice(0, 200),
-              },
-              { merge: true },
-            );
-          });
-          throw e;
-        }
-      } else bad('寄送方式無效');
-      await reschedule(courseId);
-      const cfg = (await configRef(courseId).get()).data() || {};
-      return { scheduledAt: cfg.scheduledAt || 0, nextSendAt: nextSendAt(now(), cfg) };
+      }
+      const rRef = records(courseId, sessionRef(courseId, head.sessionId).id).doc(head.to);
+      await db.runTransaction(async (tx) => {
+        const [mSnap, rSnap] = [await tx.get(ref), await tx.get(rRef)];
+        const m = mSnap.data() as any;
+        const r = rSnap.data() as AttendanceRecord | undefined;
+        if (!m || m.status !== 'marked') throw new HttpsError('failed-precondition', '這筆不能撤銷');
+        const t = now();
+        if (t - m.markedAt > DAY_MS)
+          throw new HttpsError('failed-precondition', '超過 24 小時，不能撤銷');
+        if (!r || r.notifySeq !== m.seq)
+          throw new HttpsError('failed-precondition', '之後已有新的通知紀錄，不能撤銷這一筆');
+        // 序號不倒退：撤銷後重新標記會得到新的序號與新的紀錄，舊紀錄保留為「已撤銷」。
+        const { lastNotified: _drop, ...rest } = r;
+        tx.set(rRef, m.prevLastNotified ? { ...rest, lastNotified: m.prevLastNotified } : rest);
+        tx.set(ref, { ...m, status: 'undone', undoneAt: t, undoneBy: p.uid, updatedAt: t });
+      });
+      return { ok: true };
     }),
-    /** 每 5 分鐘檢查：老師排定的時間（一次性或每日預設）到了就寄出待寄的信。沒有設定時間的課程不會被寄。 */
-    attendanceMailTick: onSchedule(
-      { ...options, timeoutSeconds: 540, schedule: 'every 5 minutes', timeZone: 'Asia/Taipei' },
-      async () => {
-        const due = await db
-          .collection('courses')
-          .where('attendanceNextSendAt', '>', 0)
-          .where('attendanceNextSendAt', '<=', now())
-          .get();
-        for (const doc of due.docs) {
-          const c: any = doc.data();
-          try {
-            // 先把一次性排定清掉並算好下一次，再寄；即使這一輪中途失敗也不會整批重跑。
-            await configRef(doc.id).set({ scheduledAt: 0 }, { merge: true });
-            await reschedule(doc.id);
-            if (featureEnabled(c, 'attendance') && !c.archived) {
-              const result = await runSend(doc.id, c, null, ['student', 'mentor']);
-              console.log('attendanceMailTick', doc.id, JSON.stringify(result));
-              // 讓寄信分頁看得到「上次自動寄送」的結果。
-              await configRef(doc.id).set(
-                { lastAuto: { at: now(), ...result, error: '' } },
-                { merge: true },
-              );
-            }
-          } catch (e) {
-            console.error('attendanceMailTick', doc.id, String(e));
-            const error = String((e as Error)?.message || e).slice(0, 200);
-            await configRef(doc.id)
-              .set(
-                { lastAuto: { at: now(), sent: 0, failed: 0, skipped: 0, error } },
-                { merge: true },
-              )
-              .catch(() => undefined);
-          }
-        }
-      },
-    ),
   };
 }

@@ -97,7 +97,7 @@ test('App 內建瀏覽器偵測', () => {
     '',
   );
 });
-test('時間區段、寬限、台北時間與每日寄送時間', () => {
+test('時間區段、寬限、台北時間', () => {
   const t0 = Date.parse('2026-11-16T01:10:00Z');
   assert.equal(A.taipeiDate(t0), '2026-11-16');
   assert.equal(A.taipeiDate(Date.parse('2026-11-16T16:30:00Z')), '2026-11-17', '台北已跨日');
@@ -107,18 +107,9 @@ test('時間區段、寬限、台北時間與每日寄送時間', () => {
   assert.equal(A.sessionAcceptsCheckIn({ status: 'open', endsAt: t0 }, t0 + 5000), true);
   assert.equal(A.sessionAcceptsCheckIn({ status: 'open', endsAt: t0 }, t0 + 5001), false);
   assert.equal(A.sessionAcceptsCheckIn({ status: 'closed', endsAt: t0 + 60000 }, t0), false);
-  assert.equal(A.taipeiDateTime(A.nextDailySend(t0, '17:00')), '2026-11-16 17:00');
-  assert.equal(
-    A.taipeiDateTime(A.nextDailySend(t0, '09:10')),
-    '2026-11-17 09:10',
-    '剛好同一分鐘算明天',
-  );
-  assert.equal(A.nextSendAt(t0, {}), 0);
-  assert.equal(A.nextSendAt(t0, { scheduledAt: t0 + 1000, dailyTime: '17:00' }), t0 + 1000);
-  assert.equal(A.validDailyTime('24:00'), false);
   assert.equal(A.validAttendanceDate('2026-02-30'), false);
 });
-test('待寄判斷：只在紀錄與上次通知不一致時寄', () => {
+test('待通知判斷：只在紀錄與上次通知不一致時需要通知', () => {
   assert.equal(A.pendingStudentMail({ status: 'absent' }), 'absent');
   assert.equal(A.pendingStudentMail({ status: 'absent', lastNotified: 'absent' }), null);
   assert.equal(A.pendingStudentMail({ status: 'present', lastNotified: 'absent' }), 'correction');
@@ -178,4 +169,16 @@ test('輸入白名單與 CSV 跳脫', () => {
   assert.equal(A.csvText('0990001'), '"=""0990001"""');
   assert.equal(A.validEmailKey('a/b@example.edu'), false);
   assert.equal(A.validEmailKey('A@example.edu'), false);
+});
+test('開啟 Gmail 網址：收件人、主旨、內文完整編碼；有指定帳號才帶 authuser', () => {
+  const mail = { to: 's1@example.edu', subject: '【課】第 3 節 & 未到', text: '甲 同學：\n\n第二行 #?=' };
+  const u = new URL(A.gmailComposeUrl('teacher@example.edu', mail));
+  assert.equal(u.origin + u.pathname, 'https://mail.google.com/mail/');
+  assert.equal(u.searchParams.get('view'), 'cm');
+  assert.equal(u.searchParams.get('authuser'), 'teacher@example.edu');
+  assert.equal(u.searchParams.get('to'), mail.to);
+  assert.equal(u.searchParams.get('su'), mail.subject);
+  assert.equal(u.searchParams.get('body'), mail.text);
+  assert(!new URL(A.gmailComposeUrl('', mail)).searchParams.has('authuser'));
+  assert(!('nextSendAt' in A) && !('validDailyTime' in A), '排程寄信已移除');
 });

@@ -1,4 +1,23 @@
-# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 選項 B 退修）
+# 課堂點名 #67：實作報告（2026-11-19 更新：半自動通知）
+
+## 半自動通知（2026-11-19 晚，Claude Opus 實作；教師 19:34 同意由 Claude 直接做）
+### 給審查者的摘要
+- 依據：DECISIONS「2026-11-19 12:42 點名通知改半自動」與 `CODEX_TASK_attendance-semiauto_2026-11-19.md`（教師 3 題照推薦：一人一封、有〔開啟 Gmail〕、導師彙整全部節次確認後才提示）。
+- 移除代寄信：刪 `apps-script/AttendanceMailer.gs`、`docs/attendance/APPS_SCRIPT_SETUP.md`；後端刪寄信本體、`attendanceSendMail`、`attendanceMailTick`（排程）、寄信程式網址／密鑰、每日時間、上次自動寄送；shared 刪 `validDailyTime`／`nextDailySend`／`nextSendAt`；測試刪 M1／M1-b 等 13 支寄信測試。從未部署，雲端不需刪函式。
+- 新增 callable：`attendanceNotifyDrafts`（信件內容當場產生、不存內文）、`attendanceMarkNotified`（expect 核對、重按回 already、狀態變了回 stale）、`attendanceUndoNotified`（24 小時內、學生信只撤銷最新一筆、序號不倒退）。函式總數仍 18（全站 67）。
+- 後台：〔寄信〕改〔通知〕＋待通知徽章；信件卡三個複製鈕（clipboard 失敗退回 execCommand）、〔開啟 Gmail〕（`gmailComposeUrl`，authuser 預設教師登入帳號）、〔已寄，標記已通知〕、每節批次標記；名冊確認後出現「N 位待通知→前往通知」。
+- 實跑：Mac 工作區 `npm --prefix functions run build` PASS（67 函式）、`node --test functions/tests/attendance.test.cjs` 13/13 PASS；雲端 Linux 非 root（同檔 SHA 一致）：`tests/attendance.test.ts` 9/9、`tsc -b` 點名檔 0 錯、`attendance-ui-check.mjs` 學生 34＋教師 5 畫面 PASS、頁面錯誤 0。
+- 未跑：整套 `npm run check`、Emulator（交 Gemini 3.8）。移除 grep 0 筆（index.ts 的 onSchedule 屬既有 dailyReports）；個人路徑 grep 0 筆。
+- 偏離：①授課控制台〔開始點名〕旁未加待通知數字（只在點名頁分頁徽章）；②導師彙整補充版以主旨加「（補充）」區分；③設定新增 `gmailAccount`。
+- 抽查：`functions/src/attendance.ts` 的 `markStudent`／`markDigest`／`attendanceUndoNotified`；`src/AttendanceAdmin.tsx` 的 `NotifyView`；測試第 8–10 支。
+- 自己寫的程式不自己審：審查交 Codex。
+
+### 已知限制
+- 「已通知」是老師自己按的，系統無法知道 Gmail 是否真的寄出；按錯可 24 小時內撤銷。
+- 信件內文每次即時產生，學生姓名、名冊或設定改了，內容會跟著變；已寄出的信以 Gmail 寄件備份為準。
+
+---
+
 
 ## 給 Claude 的摘要
 - 完成 #67 **M1-b 選項 B 退修**（依 `M1B_CODEX_VERIFY_2026-11-19.md` 0525a497 選項 B 複驗），保留 **180 天**去重與既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`。

@@ -170,3 +170,16 @@ p.att-error { color: #a3261c; font-weight: 700; }
 .att-proj-fit:fullscreen .att-proj { border-radius: 0; }
 .student-interaction-host .att-banner p.att-error { color: #a3261c; }
 .student-interaction-host .att-banner p.att-note { color: #52636e; font-size: calc(16px * var(--font-scale, 1)); }
+/* 通知（半自動，教師 2026-11-19）：信件內容卡、複製與開啟 Gmail、待通知徽章 */
+.att-mail h3 { margin: 14px 0 6px; font-size: calc(16px * var(--font-scale, 1)); }
+.att-draft-group { margin: 8px 0 14px; }
+.att-draft { border: 1px solid #d9e2e8; border-radius: 10px; padding: 8px 12px 12px; margin: 8px 0; background: #fff; }
+.att-draft summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; gap: 8px; font-size: calc(15px * var(--font-scale, 1)); }
+.att-draft-kind { font-weight: 400; font-size: calc(13px * var(--font-scale, 1)); color: #7a4a00; background: #fff4e0; border-radius: 6px; padding: 2px 8px; }
+.att-draft-field { margin: 8px 0 0; font-size: calc(13px * var(--font-scale, 1)); color: #5b6d78; }
+.att-draft pre { white-space: pre-wrap; word-break: break-word; font-family: inherit; font-size: calc(15px * var(--font-scale, 1)); background: #f5f8fa; border-radius: 8px; padding: 8px 10px; margin: 4px 0 0; }
+.att-draft-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.att-draft-actions button, .att-draft-actions a { min-height: 44px; }
+.att-draft-actions a { display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid #2375c6; border-radius: 8px; color: #2375c6; text-decoration: none; font-weight: 700; }
+.att-notice-bar { background: #fff4e0; border: 1px solid #f0c27a; color: #5a3700; border-radius: 10px; padding: 10px 12px; margin: 0 0 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: calc(15px * var(--font-scale, 1)); }
+.att-badge { display: inline-block; min-width: 1.6em; padding: 0 6px; margin-left: 6px; border-radius: 999px; background: #c0392b; color: #fff; font-size: calc(13px * var(--font-scale, 1)); text-align: center; }

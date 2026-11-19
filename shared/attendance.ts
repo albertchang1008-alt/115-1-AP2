@@ -376,7 +376,7 @@ export function attendanceSummaryCsv(
   return '﻿' + lines.join('\r\n') + '\r\n';
 }
 
-/* ───────── Email 內容（只寫點名資訊；不含成績、情緒、關心標記、同裝置提醒、修改原因） ───────── */
+/* ───────── 通知信內容（只寫點名資訊；不含成績、情緒、關心標記、同裝置提醒、修改原因） ───────── */
 export type AttendanceMailContext = { courseName: string; teacherName: string; link: string };
 export type AttendanceMail = { subject: string; text: string };
 const dateLine = (s: Pick<AttendanceSession, 'date' | 'period'>) =>
@@ -454,23 +454,20 @@ export function mentorDigestMail(
   };
 }
 
-/* ───────── 寄送時間（教師 2026-11-16 23:16：現在寄出、每次設定時間、每日預設時間都要） ───────── */
-export function validDailyTime(v: unknown): v is string {
-  return typeof v === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(v);
-}
-/** 下一次每日預設寄送時間（Asia/Taipei）。 */
-export function nextDailySend(now: number, hhmm: string) {
-  const [h, m] = hhmm.split(':').map(Number);
-  const dayStart = Date.parse(taipeiDate(now) + 'T00:00:00Z') - TAIPEI_OFFSET;
-  const today = dayStart + (h * 60 + m) * 60000;
-  return today > now ? today : today + 86400000;
-}
-export function nextSendAt(now: number, cfg: { scheduledAt?: number; dailyTime?: string }) {
-  const times = [
-    cfg.scheduledAt && cfg.scheduledAt > 0 ? cfg.scheduledAt : 0,
-    cfg.dailyTime && validDailyTime(cfg.dailyTime) ? nextDailySend(now, cfg.dailyTime) : 0,
-  ].filter(Boolean);
-  return times.length ? Math.min(...times) : 0;
+/* ───────── 半自動通知（教師 2026-11-19 12:42）：開啟 Gmail 新信，收件人／主旨／內文已帶入，老師檢查後自己按寄出 ───────── */
+export function gmailComposeUrl(
+  account: string,
+  mail: { to: string; subject: string; text: string },
+) {
+  const q = [
+    'view=cm',
+    'fs=1',
+    ...(account ? [`authuser=${encodeURIComponent(account)}`] : []),
+    `to=${encodeURIComponent(mail.to)}`,
+    `su=${encodeURIComponent(mail.subject)}`,
+    `body=${encodeURIComponent(mail.text)}`,
+  ];
+  return `https://mail.google.com/mail/?${q.join('&')}`;
 }
 
 /* ───────── 給其他功能的接點（#65 關心名單、研究 CSV、Zuvio 缺考標示；本件只提供讀取，不接線） ───────── */

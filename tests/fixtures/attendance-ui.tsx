@@ -60,51 +60,69 @@ const rows = Array.from({ length: 8 }, (_, i) => ({
   sameDevice: i === 4 ? ['示範學生 06'] : i === 5 ? ['示範學生 05'] : [],
   pendingMail: i < 3 ? 'absent' : null,
 }));
-const mailStatus = {
-  student: rows
-    .slice(0, 3)
-    .map((r) => ({
-      sessionId: 'x',
-      date: '2026-11-16',
-      period: 3,
-      email: r.email,
-      name: r.name,
-      kind: 'absent',
-    })),
+const draftText = (name: string) =>
+  `${name} 同學：\n\n示範課程　2026-11-16（一）第 3 節，本節紀錄為未到。\n\n如果對紀錄有疑問，請直接洽老師。\n\n示範教師`;
+const notifyDrafts = {
+  date: '2026-11-16',
+  student: rows.slice(0, 3).map((r) => ({
+    draftId: `x__${r.email}`,
+    kind: 'absent',
+    sessionId: 'x',
+    date: '2026-11-16',
+    period: 3,
+    classId: 'demo-a',
+    to: r.email,
+    name: r.name,
+    subject: '【示範課程】11/16（一）第 3 節紀錄為未到',
+    text: draftText(r.name),
+    expect: { status: 'absent', notifySeq: 0 },
+  })),
   digest: [
     {
+      draftId: 'digest__2026-11-16__demo-a',
+      kind: 'digest',
       classId: 'demo-a',
-      mentorName: '示範導師甲',
-      mentorEmail: 'mentor-a@example.edu',
+      date: '2026-11-16',
+      to: 'mentor-a@example.edu',
+      name: '示範導師甲',
+      subject: '【示範課程】demo-a 2026-11-16 出缺席彙整',
+      text: '示範導師甲 老師您好：\n\n第 3 節\n應到 48 人，準時 45 人，未到 3 人。\n\n示範教師',
       periods: [3],
+      supplement: false,
+      unconfirmed: [4],
+      ready: false,
+      expect: { periods: [3] },
     },
   ],
+  noMentor: ['demo-b'],
   unconfirmedToday: [session({ period: 4, confirmedAt: 0 })],
-  dailyTime: '17:00',
-  scheduledAt: 0,
-  nextSendAt: 0,
-  mailerReady: true,
-  lastAuto: { at: T + 28000000, sent: 5, failed: 1, error: '' },
+  gmailAccount: 'teacher@example.edu',
   log: [
     {
       id: 'm1',
+      key: 'm1',
       kind: 'absent',
       to: 's0990001@example.edu',
       name: '示範學生 01',
-      status: 'sent',
-      createdAt: T,
-      sentAt: T,
-      error: '',
+      date: '2026-11-16',
+      period: 2,
+      status: 'marked',
+      markedAt: T,
+      byName: '示範教師',
+      canUndo: true,
     },
     {
       id: 'm2',
+      key: 'm2',
       kind: 'absent',
       to: 's0990002@example.edu',
       name: '示範學生 02',
-      status: 'failed',
-      createdAt: T,
-      sentAt: 0,
-      error: '模擬失敗',
+      date: '2026-11-16',
+      period: 2,
+      status: 'undone',
+      markedAt: T - 60000,
+      byName: '示範教師',
+      canUndo: false,
     },
   ],
 };
@@ -170,15 +188,13 @@ const api: any = {
         open: null,
       };
     if (name === 'attendanceRoster') return { session: session(), rows };
-    if (name === 'attendanceMailStatus') return mailStatus;
+    if (name === 'attendanceNotifyDrafts') return notifyDrafts;
     if (name === 'attendanceMailConfig')
       return {
         mentors: { 'demo-a': { name: '示範導師甲', email: 'mentor-a@example.edu' } },
-        dailyTime: '17:00',
-        scheduledAt: 0,
         platformUrl: '',
         teacherName: '示範教師',
-        mailerReady: true,
+        gmailAccount: '',
       };
     if (name === 'attendanceSummary')
       return {
@@ -214,10 +230,10 @@ const api: any = {
 };
 function AdminAt({ view }: { view: string }) {
   React.useEffect(() => {
-    const label = { sessions: '節次與名冊', summary: '總表與修改紀錄', mail: '寄信' }[view];
+    const label = { sessions: '節次與名冊', summary: '總表與修改紀錄', notify: '通知' }[view];
     if (label)
       [...document.querySelectorAll<HTMLButtonElement>('.att-tabs button')]
-        .find((b) => b.textContent === label)
+        .find((b) => (b.textContent || '').startsWith(label))
         ?.click();
   }, []);
   return (
