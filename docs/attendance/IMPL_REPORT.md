@@ -1,21 +1,25 @@
-# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 退修）
+# 課堂點名 #67 第二階段：實作報告（2026-11-19 更新 M1-b 退修複驗）
 
 ## 給 Claude 的摘要
-- 本次完成 #67 **M1-b 退修**（依 `M1B_CODEX_VERIFY_2026-11-19.md`）：修正屬性空間或寫入配額耗盡時「先寄後寫失敗導致重寄」問題，保留 **180 天**去重期限。
+- 本次完成 #67 **M1-b 退修（依 `M1B_CODEX_VERIFY_2026-11-19.md` 71136e64 退修複驗）**，保留 **180 天**去重與寄出前中斷重試，未改動平台通知狀態與儲存範圍。
 - 變更檔：`apps-script/AttendanceMailer.gs`、`functions/tests/attendance.test.cjs`、`docs/attendance/IMPL_REPORT.md`（保留既有未提交之 `docs/attendance/CLAUDE_KEY_REVIEW.md`）。
-- 實跑指令：`node --test functions/tests/attendance.test.cjs`（Node v22.23.2），結果 **20/20 PASS**（含新增容量／寫入配額耗盡、寄信失敗清占位、寄出前中斷重試共 2 支回歸測試，合成資料＋假時鐘，未寄真信）。
-- 偏離：無（`CacheService` 已移除，改於 `MailApp.sendEmail` 前以 `pending:<ts>` 預留去重鍵）。
+- 實跑指令：`node --test functions/tests/attendance.test.cjs`（Node v22.23.2），結果 **21/21 PASS**（新增預留耗盡最後一次寫入＋跨日不重寄、清理失敗仍去重回歸測試，合成資料＋假時鐘，未寄真信）。
+- 偏離：無（雙重故障邊界之取捨提案列於「返修 M1-b」，待教師裁定是否需改平台狀態）。
 - 抽查項（最多 5 項）：
-  1. `apps-script/AttendanceMailer.gs`：鎖內清理過期鍵 → 查重（忽略 `pending:`）→ `props.setProperty(sentKey, 'pending:' + now)` 預留失敗即中止（`MailApp` 呼叫 0 次）→ `MailApp` 失敗清占位 → 成功後覆寫正式時間戳。
-  2. `functions/tests/attendance.test.cjs`：512,000 B 滿載與寫入配額耗盡時，新信拒寄（`MailApp` 0 次）、已寄信正常去重、180 天有效紀錄全保留。
-  3. `functions/tests/attendance.test.cjs`：寄信拋錯清除 `pending:`、寄出前中斷殘留 `pending:` 時同一 `mailId` 仍可重試並正式入帳。
-  4. 本報告「返修 M1-b」補齊每次 `getProperty('MAIL_KEY')` 與預留／正式寫入的讀寫次數估算。
-  5. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
+  1. `apps-script/AttendanceMailer.gs:40–66`：清理其他過期鍵 `deleteProperty` 採 `try/catch` 保護不擋有效去重；`MailApp.sendEmail` 成功後覆寫正式時間戳亦採 `try/catch`，避免第二次寫入配額失敗回報 `ok:false` 導致重寄。
+  2. `functions/tests/attendance.test.cjs:1428–1477`：驗證預留耗盡最後一次寫入後寄出成功、隔 24 小時不重寄，以及清理其他過期鍵拋錯時有效紀錄仍回 `duplicate:true`。
+  3. 本報告「返修 M1-b」之寄送事實無法確認時的處理方式與教師裁定選項。
+  4. `git status` 確認 `docs/attendance/CLAUDE_KEY_REVIEW.md` 未提交審查紀錄完整保留。
 
 ---
 
-## 返修 M1-b（2026-11-19，Antigravity Hydrogen；含 Codex 退修）
-- **實作**：`apps-script/AttendanceMailer.gs` 改用 `PropertiesService.getScriptProperties()` 保存 180 天去重紀錄。於 `LockService` 鎖內依序執行：① 清理已滿 180 天（`now - ts >= 180 * 86400_000`）的 `sent:` 鍵（保留 `MAIL_KEY` 與其他設定）② 查詢同 `mailId` 且非 `pending:` 則直接回 `{ok:true, duplicate:true}` 且不刷新時間戳 ③ 檢查每日寄信額度 ④ 先寫入 `pending:<now>` 預留紀錄（若空間滿或寫入配額耗盡直接拋錯回傳可重試失敗，`MailApp.sendEmail` 呼叫 **0 次**）⑤ 呼叫 `MailApp.sendEmail`（若失敗則刪除 `pending:` 占位後回報失敗）⑥ 成功後覆寫為正式毫秒時間戳 `String(Date.now())`。
+## 返修 M1-b（2026-11-19，Antigravity Hydrogen；含 71136e64 退修）
+- **實作**：`apps-script/AttendanceMailer.gs` 改用 `PropertiesService.getScriptProperties()` 保存 180 天去重紀錄。於 `LockService` 鎖內依序執行：① 清理已滿 180 天（`now - ts >= 180 * 86400_000`）的 `sent:` 鍵（保留 `MAIL_KEY` 與其他設定，個別 `deleteProperty` 以 `try/catch` 保護，避免其他過期鍵刪除配額失敗時阻擋有效紀錄查重）② 查詢同 `mailId` 且非 `pending:` 則直接回 `{ok:true, duplicate:true}` 且不刷新時間戳 ③ 檢查每日寄信額度 ④ 先寫入 `pending:<now>` 預留紀錄（若空間滿或寫入配額耗盡直接拋錯回傳可重試失敗，`MailApp.sendEmail` 呼叫 **0 次**）⑤ 呼叫 `MailApp.sendEmail`（若失敗則刪除 `pending:` 占位後回報失敗）⑥ 成功後以 `try/catch` 覆寫為正式毫秒時間戳 `String(Date.now())`；即使第二次寫入因配額耗盡失敗，因信件已實際寄出，仍回傳 `{ok:true}` 使平台標記 `sent` 而不重寄。
+- **寄送事實無法確認時之處理方式與影響（待教師裁定是否調整）**：
+  - 目前保留 `pending:` 可重試，已可涵蓋「寄出前中斷重試」與「單純第二次寫入配額耗盡（回傳 `ok:true` 不重寄）」。唯一殘餘雙重故障邊界為「第二次寫入失敗 **且** HTTP 回應同時遺失」，此時 `PropertiesService` 僅存 `pending:`，單靠 Apps Script 無法區分『寄後寫入失敗』與『寄前中斷』。
+  - 若需徹底消除該雙重故障邊界，提供兩方案交教師裁定（本次未擅自修改）：
+    - **選項 A（不改平台）**：改為單次寫入（寄前直接寫正式時間戳，僅在 `MailApp` 拋錯時刪除），可完全消除第二次寫入失敗風險，但「寄前寫入後、呼叫 `MailApp` 前極短空窗中斷」會變成少寄而非自動重試。
+    - **選項 B（改平台通知狀態）**：Apps Script 遇到殘留 `pending:` 時改回傳 `{ok:false, uncertain:true}` 不自動重寄，平台端新增「結果不明」狀態由教師人工確認後決定是否重寄。
 - **180 天容量估算**（依 Google 官方 Apps Script 配額 <https://developers.google.com/apps-script/guides/services/quotas>）：
   - 官方上限：Properties total storage **500 KB**（512,000 bytes）per property store；Properties read/write 為 **500,000 次／日**（Google Workspace 帳號）。
   - 實際鍵值大小：鍵 `sent:` (5 B) + `Utilities.base64EncodeWebSafe(SHA-256 32B)` (44 B) = **49 B**；正式值 `String(Date.now())` = **13 B**（原始 **62 B／筆**）；暫存 `pending:<ms>` 為 **21 B**，正式寫入後覆寫為較短的 13 B，不額外增加存儲上限風險。另計 `MAIL_KEY` 與系統保留約 1,000 B。

@@ -23,7 +23,14 @@ function loadMailerScript({
 }) {
   const props = new Map(Object.entries(initialProps));
   if (key !== undefined) props.set('MAIL_KEY', key);
-  const state = { quota, locks: 0, failSend: false, failPropWrite: false };
+  const state = {
+    quota,
+    locks: 0,
+    failSend: false,
+    failPropWrite: false,
+    failPropDelete: false,
+    propWriteRemaining: Infinity,
+  };
   const propsBytes = () => {
     let total = 0;
     for (const [k, v] of props.entries()) total += k.length + v.length;
@@ -41,16 +48,22 @@ function loadMailerScript({
       getScriptProperties: () => ({
         getProperty: (k) => (props.has(k) ? props.get(k) : null),
         setProperty: (k, v) => {
-          if (state.failPropWrite) throw new Error('Service invoked too many times for one day: properties');
+          if (state.failPropWrite || state.propWriteRemaining <= 0) {
+            throw new Error('Service invoked too many times for one day: properties');
+          }
           const strV = String(v);
           const prev = props.has(k) ? k.length + props.get(k).length : 0;
           const nextTotal = propsBytes() - prev + k.length + strV.length;
           if (nextTotal > maxStorageBytes) {
             throw new Error('You have exceeded the property storage limit.');
           }
+          if (Number.isFinite(state.propWriteRemaining)) state.propWriteRemaining--;
           props.set(k, strV);
         },
         deleteProperty: (k) => {
+          if (state.failPropDelete) {
+            throw new Error('Service invoked too many times for one day: properties');
+          }
           props.delete(k);
         },
         getProperties: () => Object.fromEntries(props.entries()),
@@ -1412,5 +1425,59 @@ test('M1-b 暫存占位：寄信失敗或寄出前中斷後，同一 mailId 仍�
     duplicate: true,
   });
   assert.equal(sent.length, 2);
+  assert.equal(gas.state.locks, 0);
+});
+
+test('M1-b 預留消耗最後一次屬性寫入後寄出成功，平台不重寄；清理其他過期鍵失敗時有效紀錄仍正常去重', async () => {
+  // 情境 1：平台只剩 1 位未到學生，Apps Script 只剩 1 次屬性寫入額度（預留 pending: 用完最後 1 次）
+  const x = setup();
+  await x.mailer();
+  const s = await x.start();
+  for (let i = 2; i <= 5; i++) {
+    await x.call(
+      'attendanceCheckIn',
+      { token: (await x.call('attendanceLive')).token },
+      x.student(i),
+    );
+  }
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+
+  x.gas.state.propWriteRemaining = 1;
+  const first = await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.deepEqual(first, { sent: 1, failed: 0, skipped: 0 });
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // 推進 24 小時並恢復寫入額度，再執行寄信時同一 mailId 不得重寄
+  x.tick(24 * 60 * 60 * 1000);
+  x.gas.state.propWriteRemaining = Infinity;
+  const nextDay = await x.call('attendanceSendMail', { mode: 'now', kinds: ['student'] });
+  assert.deepEqual(nextDay, { sent: 0, failed: 0, skipped: 0 });
+  assert.equal(x.sent.filter((m) => m.to === 's1@example.edu').length, 1);
+
+  // 情境 2：清理其他過期鍵（>=180 天）的 deleteProperty 拋錯時，有效已寄紀錄仍正常去重
+  const sent = [];
+  const DAY = 24 * 60 * 60 * 1000;
+  let nowMs = T0;
+  const gas = loadMailerScript({
+    key: 'k'.repeat(32),
+    onSend: (m) => sent.push(m),
+    now: () => nowMs,
+    initialProps: { 'sent:expired-old-key': String(T0 - 181 * DAY) },
+  });
+  const base = {
+    key: 'k'.repeat(32),
+    mailId: 'valid-mail-while-cleanup-fails',
+    to: 's1@example.edu',
+    subject: '未到通知',
+    text: '內容',
+    fromName: '示範教師',
+  };
+  assert.equal(gas.post(base).ok, true);
+  assert.equal(sent.length, 1);
+  gas.state.failPropDelete = true;
+  gas.props.set('sent:expired-old-key-2', String(T0 - 181 * DAY));
+  assert.deepEqual(gas.post(base), { ok: true, duplicate: true });
+  assert.equal(sent.length, 1, '清理其他過期鍵失敗時，有效已寄紀錄仍應去重且不得寄出');
   assert.equal(gas.state.locks, 0);
 });

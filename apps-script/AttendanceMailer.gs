@@ -38,8 +38,10 @@ function doPost(e) {
         var raw = String(all[k]);
         var ts = Number(raw.indexOf('pending:') === 0 ? raw.slice(8) : raw);
         if (!isFinite(ts) || now - ts >= RETENTION_MS_) {
-          props.deleteProperty(k);
           delete all[k];
+          try {
+            props.deleteProperty(k);
+          } catch (cleanupErr) {}
         }
       }
       var existing = Object.prototype.hasOwnProperty.call(all, sentKey) ? String(all[sentKey]) : '';
@@ -58,7 +60,11 @@ function doPost(e) {
         } catch (delErr) {}
         throw sendErr;
       }
-      props.setProperty(sentKey, String(Date.now())); // 寄出成功才寫入正式完成時間，保留 180 天
+      try {
+        props.setProperty(sentKey, String(Date.now())); // 寄出成功才寫入正式完成時間，保留 180 天
+      } catch (finalizeErr) {
+        // 寄信已成功且 pending: 已寫入；即使第二次寫入配額耗盡，仍回報成功避免平台誤認失敗而重寄
+      }
     } finally {
       lock.releaseLock();
     }
