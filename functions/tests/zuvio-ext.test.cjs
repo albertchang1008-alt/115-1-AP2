@@ -1297,3 +1297,110 @@ test('D1 定序防護：預檢後刪除與同版並行確認無殘留；清理�
   const finalRows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit2.id);
   assert.equal(finalRows.length, 2, '清理恢復後只留最新一代有效明細');
 });
+
+test('D1 R5 邊界：整場 300 人上限、提交成功回應逾時不誤刪、寫入中斷無殘留、刪除後無重匯可完成清理', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000013';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1 R5 邊界測試',
+    score: 100,
+    classIds: ['A'],
+    items: [
+      { questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] },
+      { questionId: 'q1', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] },
+    ],
+  });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const sit = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: '場1', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+
+  // 1. 整場 300 人上限（跨題合計 301 人，單題 <= 300）必須被拒
+  const overParsed = {
+    title: view.title,
+    blocks: [
+      {
+        n: 1, stem: view.items[0].text, score: '100', correctNo: 1,
+        options: view.items[0].options.map((o, i) => ({ no: i + 1, text: o.text })),
+        responses: Array.from({ length: 200 }, (_, i) => ({ studentId: `S${String(i).padStart(3, '0')}`, answerText: view.items[0].options[0].text, row: i + 2 })),
+      },
+      {
+        n: 2, stem: view.items[1].text, score: '100', correctNo: 1,
+        options: view.items[1].options.map((o, i) => ({ no: i + 1, text: o.text })),
+        responses: Array.from({ length: 101 }, (_, i) => ({ studentId: `S${String(200 + i).padStart(3, '0')}`, answerText: view.items[1].options[0].text, row: i + 2 })),
+      },
+    ],
+    summaryIds: [],
+    problems: [],
+  };
+  await assert.rejects(
+    () => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: overParsed, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' }),
+    /超過上限/,
+  );
+
+  // 準備正常 2 人資料
+  const ansIdx = Math.max(0, view.items[0].options.findIndex((o) => o.id === view.items[0].answer));
+  const parsedOk = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => ansIdx));
+
+  // 2. 寫入中斷（交易內 set 失敗）：無任何部分明細殘留，預覽仍在
+  const prevAbort = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedOk, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  const origRunTx = db.runTransaction.bind(db);
+  db.runTransaction = async (fn) => origRunTx(async (tx) => {
+    const origSet = tx.set.bind(tx);
+    tx.set = () => { throw new Error('ABORTED_WRITE'); };
+    try { return await fn(tx); } finally { tx.set = origSet; }
+  });
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedOk, confirm: true, previewId: prevAbort.previewId }), /ABORTED_WRITE/);
+  db.runTransaction = origRunTx;
+  assert.equal([...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit.id).length, 0);
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/previews/${prevAbort.previewId}`), undefined);
+
+  // 3. 提交已落地但回應逾時（DEADLINE_EXCEEDED）：有效明細、場次 metadata、摘要、預覽消耗皆保持一致（絕不誤刪）
+  db.runTransaction = async (fn) => {
+    await origRunTx(fn);
+    throw new Error('DEADLINE_EXCEEDED');
+  };
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedOk, confirm: true, previewId: prevAbort.previewId }), /DEADLINE_EXCEEDED/);
+  db.runTransaction = origRunTx;
+  const committedSitting = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings.find((s) => s.id === sit.id);
+  assert.equal(Boolean(committedSitting?.results?.gen), true, '提交已落地時 metadata 必須存在');
+  const committedRows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.gen === committedSitting.results.gen);
+  assert.equal(committedRows.length, 2, '提交成功但逾時不得誤刪已提交明細');
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined, '摘要必須存在');
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/previews/${prevAbort.previewId}`), undefined, '預覽必須已消耗');
+
+  // 4. 刪除後清理失敗（標記 pendingCleanup: true），不重匯直接再呼叫 deleteResults 完成清理
+  const origDoc = db.doc.bind(db);
+  db.doc = (p) => {
+    const d = origDoc(p);
+    if (p === `courses/C1/zuvioExams/${examId}`) {
+      const origSubCol = d.collection.bind(d);
+      d.collection = (sub) => {
+        const col = origSubCol(sub);
+        if (sub === 'results') {
+          const origWhere = col.where.bind(col);
+          col.where = (...args) => {
+            const q = origWhere(...args);
+            q.get = async () => { throw new Error('cleanup transient error'); };
+            return q;
+          };
+        }
+        return col;
+      };
+    }
+    return d;
+  };
+  const del1 = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  assert.equal(del1.ok, true);
+  db.doc = origDoc;
+  const afterFailDel = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings.find((s) => s.id === sit.id);
+  assert.equal(afterFailDel.results, undefined);
+  assert.equal(afterFailDel.pendingCleanup, true, '清理失敗必須保留 pendingCleanup 供追蹤與重試');
+
+  // 無重匯，直接重試 deleteResults 完成清理
+  const del2 = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  assert.equal(del2.ok, true);
+  const afterRetry = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings.find((s) => s.id === sit.id);
+  assert.equal(afterRetry.pendingCleanup, undefined, '清理完成後須清除 pendingCleanup');
+  assert.equal([...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit.id).length, 0, '無重匯亦須清完該場舊代明細');
+});

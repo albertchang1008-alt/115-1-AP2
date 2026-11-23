@@ -1101,7 +1101,13 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
   const selectionSeqRef = useRef(0);
   const liveOrderRef = useRef(0);
   const appliedLiveOrderRef = useRef(0);
+  const hasInteractedRef = useRef(false);
+  const prevCourseRef = useRef(course.id);
   const selectionRef = useRef({ seq: 0, courseId: course.id, examId, sittingId });
+  if (prevCourseRef.current !== course.id) {
+    prevCourseRef.current = course.id;
+    hasInteractedRef.current = false;
+  }
   if (selectionRef.current.courseId !== course.id || selectionRef.current.examId !== examId || selectionRef.current.sittingId !== sittingId) {
     selectionSeqRef.current += 1;
     selectionRef.current = { seq: selectionSeqRef.current, courseId: course.id, examId, sittingId };
@@ -1135,11 +1141,12 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
   const refreshExams = async () => {
     if (!examsOn) return;
     const reqCourseId = course.id;
+    const reqSeq = selectionRef.current.seq;
     try {
       const list = await zApi.listExams();
       if (selectionRef.current.courseId !== reqCourseId) return;
       setExams(list);
-      if (!selectionRef.current.examId && list[0]) {
+      if (!hasInteractedRef.current && sameSelection(reqSeq, reqCourseId, '', '') && list[0]) {
         const nextExamId = list[0].id;
         const nextSit = list[0].sittings.at(-1)?.id || '';
         selectionSeqRef.current += 1;
@@ -1183,8 +1190,10 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
 
   const createSitting = async () => {
     if (!examId || !newLabel.trim() || !newClasses.length || busy) return;
+    const reqSeq = selectionRef.current.seq;
     const reqCourseId = course.id;
     const reqExamId = examId;
+    const reqSittingId = sittingId;
     setBusy(true);
     setMsg('');
     try {
@@ -1196,7 +1205,7 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
       });
       if (selectionRef.current.courseId !== reqCourseId) return;
       await refreshExams();
-      if (selectionRef.current.courseId === reqCourseId && selectionRef.current.examId === reqExamId) {
+      if (sameSelection(reqSeq, reqCourseId, reqExamId, reqSittingId)) {
         selectionSeqRef.current += 1;
         selectionRef.current = { seq: selectionSeqRef.current, courseId: reqCourseId, examId: reqExamId, sittingId: created.id };
         setNewLabel('');
@@ -1205,7 +1214,7 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
         setMsg(`已建立場次「${created.label}」（開考時間設為現在）`);
       }
     } catch (e: any) {
-      if (selectionRef.current.courseId === reqCourseId && selectionRef.current.examId === reqExamId) {
+      if (sameSelection(reqSeq, reqCourseId, reqExamId, reqSittingId)) {
         setMsg(e?.message || '建立場次失敗');
       }
     } finally {
@@ -1274,6 +1283,7 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
             aria-label="選擇 Zuvio 考卷"
             value={examId}
             onChange={(e) => {
+              hasInteractedRef.current = true;
               const id = e.target.value;
               const ex = exams.find((x) => x.id === id);
               const nextSit = ex?.sittings.at(-1)?.id || '';
@@ -1293,6 +1303,7 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
             aria-label="選擇場次"
             value={sittingId}
             onChange={(e) => {
+              hasInteractedRef.current = true;
               const nextSit = e.target.value;
               selectionSeqRef.current += 1;
               selectionRef.current = { seq: selectionSeqRef.current, courseId: course.id, examId, sittingId: nextSit };

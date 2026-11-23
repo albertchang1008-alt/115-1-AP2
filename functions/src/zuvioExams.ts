@@ -342,6 +342,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const { view } = await buildView(courseId, e, new Set());
     const match = matchExam(view, parsed);
     const ids = [...new Set(parsed.blocks.flatMap((b) => b.responses.map((r) => r.studentId)))];
+    if (ids.length > LIMITS.students) bad('整場作答人數超過上限');
     const roster = await rosterLookup(courseId, ids, c);
     const built = buildResults(view, parsed, match, (s) => roster.get(s) || null, sitting.classIds);
     const rosterSha = sha(JSON.stringify([...roster].sort(([a], [b]) => a.localeCompare(b))));
@@ -389,60 +390,73 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const nextRevision = curBaseRev + 1;
     const gen = randomUUID();
     const resultsCol = ref.collection('results');
-    // 先寫新一代（以 revision 與獨立 gen 區分），再於交易中切換有效版本與分析摘要；交易若失敗須回收此 gen 明細。
     const entries = [...built.results];
-    for (let i = 0; i < entries.length; i += 400) {
-      const batch = db.batch();
-      for (const [s, r] of entries.slice(i, i + 400))
-        batch.set(resultsCol.doc(`${gen}_${s}`), { sittingId, gen, revision: nextRevision, studentId: s, classId: r.classId, answers: r.answers, correct: r.correct, score: r.score });
-      await batch.commit();
-    }
-    try {
-      await db.runTransaction(async (tx) => {
-        const [pv, es] = [await tx.get(prevRef), await tx.get(ref)];
-        const v = pv.data();
-        const exData = es.data()!;
-        const cur = (exData.sittings || []).find((s: any) => s.id === sittingId);
-        const curRev = Math.max(cur?.results?.revision || 0, cur?.deletedRevision || 0);
-        if (!v || v.teacherUid !== p.uid || v.sittingId !== sittingId || v.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
-        if (v.payloadSha !== payloadSha || v.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
-        if (!cur || curRev !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
-        const now = Date.now();
-        const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
-        tx.update(ref, { sittings: exData.sittings.map((s: any) => (s.id === sittingId ? { ...s, results } : s)) });
-        if (analysisPayload) {
-          tx.set(ref.collection('analysis').doc(sittingId), {
-            revision: nextRevision,
-            gen,
-            analysisVersion: ANALYSIS_CACHE_VERSION,
-            maskedKey: analysisPayload.maskedKey,
-            analysis: analysisPayload.analysis,
-            computedAt: now,
-          });
-        }
-        tx.delete(prevRef);
-      });
-    } catch (err) {
-      // 交易未提交：僅回收此次未生效的 gen 明細，不影響有效或其他待提交代次。
-      try {
-        for (let i = 0; i < entries.length; i += 400) {
-          const rollback = db.batch();
-          for (const [s] of entries.slice(i, i + 400)) rollback.delete(resultsCol.doc(`${gen}_${s}`));
-          await rollback.commit();
-        }
-      } catch (rollbackErr) {
-        console.warn('zuvioImportResults rollback failed:', rollbackErr);
+    const needsCleanup = curBaseRev > 0 || !!sitting.pendingCleanup;
+    // 整場 <= 300 人，全部寫入與場次 metadata、摘要、預覽消耗放進同一交易原子提交（<= 303 ops <= 500）。
+    await db.runTransaction(async (tx) => {
+      const [pv, es] = [await tx.get(prevRef), await tx.get(ref)];
+      const v = pv.data();
+      const exData = es.data()!;
+      const cur = (exData.sittings || []).find((s: any) => s.id === sittingId);
+      const curRev = Math.max(cur?.results?.revision || 0, cur?.deletedRevision || 0);
+      if (!v || v.teacherUid !== p.uid || v.sittingId !== sittingId || v.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
+      if (v.payloadSha !== payloadSha || v.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
+      if (!cur || curRev !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
+      const now = Date.now();
+      const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
+      for (const [s, r] of entries) {
+        tx.set(resultsCol.doc(`${gen}_${s}`), { sittingId, gen, revision: nextRevision, studentId: s, classId: r.classId, answers: r.answers, correct: r.correct, score: r.score });
       }
-      throw err;
-    }
-    try {
-      await cleanup(resultsCol, sittingId, nextRevision);
-    } catch (cleanupErr) {
-      // 交易已提交，舊代次留待下次匯入／刪除時清理，不得將已生效的匯入誤報失敗。
-      console.warn('zuvioImportResults cleanup deferred:', cleanupErr);
+      tx.update(ref, {
+        sittings: exData.sittings.map((s: any) => {
+          if (s.id !== sittingId) return s;
+          const nextSitting: any = { ...s, results };
+          if (needsCleanup || s.pendingCleanup) nextSitting.pendingCleanup = true;
+          else delete nextSitting.pendingCleanup;
+          return nextSitting;
+        }),
+      });
+      if (analysisPayload) {
+        tx.set(ref.collection('analysis').doc(sittingId), {
+          revision: nextRevision,
+          gen,
+          analysisVersion: ANALYSIS_CACHE_VERSION,
+          maskedKey: analysisPayload.maskedKey,
+          analysis: analysisPayload.analysis,
+          computedAt: now,
+        });
+      }
+      tx.delete(prevRef);
+    });
+    if (needsCleanup) {
+      try {
+        await cleanup(resultsCol, sittingId, nextRevision);
+        await clearPendingCleanup(ref, sittingId, nextRevision);
+      } catch (cleanupErr) {
+        // 交易已提交，保留 pendingCleanup: true 以利後續追蹤與重試，不得誤報失敗。
+        console.warn('zuvioImportResults cleanup deferred:', cleanupErr);
+      }
     }
     return { ok: true, matched: built.results.size };
   });
+  async function clearPendingCleanup(ref: FirebaseFirestore.DocumentReference, sittingId: string, expectedRev: number) {
+    await db.runTransaction(async (tx) => {
+      const s = await tx.get(ref);
+      if (!s.exists) return;
+      const e = s.data()!;
+      const cur = (e.sittings || []).find((x: any) => x.id === sittingId);
+      if (!cur) return;
+      const curRev = Math.max(cur.results?.revision || 0, cur.deletedRevision || 0);
+      if (curRev !== expectedRev || !cur.pendingCleanup) return;
+      tx.update(ref, {
+        sittings: (e.sittings || []).map((x: any) => {
+          if (x.id !== sittingId) return x;
+          const { pendingCleanup: _drop, ...rest } = x;
+          return rest;
+        }),
+      });
+    });
+  }
   async function cleanup(col: FirebaseFirestore.CollectionReference, sittingId: string, beforeRevision: number) {
     const snap = await col.where('sittingId', '==', sittingId).get();
     // 僅清理已被此代次取代的舊代明細（revision < beforeRevision），不得誤刪後來或待提交的較新代次。
@@ -469,13 +483,14 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const e = s.data()!;
       const target = (e.sittings || []).find((x: any) => x.id === sittingId);
       deletedRevision = Math.max(target?.results?.revision || 0, target?.deletedRevision || 0) + 1;
-      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision } : x)) });
+      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision, pendingCleanup: true } : x)) });
       tx.delete(ref.collection('analysis').doc(sittingId));
     });
     try {
       await cleanup(ref.collection('results'), sittingId, deletedRevision);
+      await clearPendingCleanup(ref, sittingId, deletedRevision);
     } catch (cleanupErr) {
-      // 刪除交易已提交，舊代次留待下次匯入／刪除時清理，不得將已生效的刪除誤報失敗。
+      // 刪除交易已提交，保留 pendingCleanup: true，教師可於考卷頁直接重試清理，不得誤報失敗。
       console.warn('zuvioDeleteResults cleanup deferred:', cleanupErr);
     }
     return { ok: true };

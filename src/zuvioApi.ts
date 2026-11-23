@@ -7,7 +7,7 @@ import {
   type CareListEntry, type ExamItemAnalysis, type MoodCode, type MoodReportSummary, type PreExamDetailReport, type PreExamStatus,
 } from '../shared/zuvioExt';
 
-export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
+export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; pendingCleanup?: boolean; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
 export interface ExamSummary { id: string; title: string; createdAt: number; count: number; score: number; archived: boolean; sittings: Sitting[] }
 export interface ImportPreview { previewId: string; matched: number; counts: ZCounts; blocking: string[]; details: string[]; garbled: number; replaces: boolean }
 export interface FullZuvioReport {

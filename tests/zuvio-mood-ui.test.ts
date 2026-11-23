@@ -522,3 +522,109 @@ test('V3 定序回歸：A → B → A 往返切場不被舊查詢覆寫；A 建�
     await browser.close();
   }
 });
+
+test('V3 R5 定序：建場未回時同卷換場、切卷往返與手動清空選擇皆保留最新選擇', async () => {
+  const bundle = buildSync({
+    stdin: {
+      contents: `
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { TeacherZuvioMoodPanel } from './src/ClassroomInteraction';
+        const exams = [
+          {
+            id: 'e1',
+            title: '考卷A',
+            sittings: [
+              { id: 's1a', label: 'A1場', classIds: ['A'], date: '2026-11-23' },
+              { id: 's1b', label: 'A2場', classIds: ['A'], date: '2026-11-23' },
+            ],
+          },
+          { id: 'e2', title: '考卷B', sittings: [{ id: 's2', label: 'B場', classIds: ['B'], date: '2026-11-23' }] },
+        ];
+        let createCount = 0;
+        const api = {
+          call: async (name, data) => {
+            if (name === 'zuvioListExams') return exams.map((e) => ({ ...e, sittings: [...e.sittings] }));
+            if (name === 'zuvioCreateSitting') {
+              createCount += 1;
+              const idx = createCount;
+              return await new Promise((resolve) => {
+                window['__finishCreate' + idx] = () => {
+                  const created = { id: 's_new_' + idx, label: data.label, classIds: data.classIds, date: data.date };
+                  exams[0].sittings.push(created);
+                  resolve(created);
+                };
+              });
+            }
+            if (name === 'zuvioGetMoodLive') {
+              if (data.sittingId === 's1a') {
+                return { state: { open: true, examId: 'e1', sittingId: 's1a', sittingLabel: 'A1場', classIds: ['A'], closesAt: Date.now() + 60000, eligibleCount: 5 }, eligibleCount: 5, totalResponded: 4, counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 4, gray_fog: 0 } };
+              }
+              if (data.sittingId === 's1b') {
+                return { state: { open: true, examId: 'e1', sittingId: 's1b', sittingLabel: 'A2場', classIds: ['A'], closesAt: Date.now() + 60000, eligibleCount: 2 }, eligibleCount: 2, totalResponded: 1, counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 1, gray_fog: 0 } };
+              }
+              return { state: { open: true, examId: 'e2', sittingId: 's2', sittingLabel: 'B場', classIds: ['B'], closesAt: Date.now() + 60000, eligibleCount: 4 }, eligibleCount: 4, totalResponded: 3, counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 3, gray_fog: 0 } };
+            }
+            return {};
+          },
+        };
+        const course = { id: 'C1', classIds: ['A', 'B'], classNames: { A: '甲班', B: '乙班' }, features: { zuvioExams: true, zuvioMood: true } };
+        createRoot(document.getElementById('root')).render(React.createElement(TeacherZuvioMoodPanel, { api, course }));
+      `,
+      resolveDir: process.cwd(),
+      loader: 'tsx',
+    },
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+    define: { 'process.env.NODE_ENV': '"production"' },
+  }).outputFiles[0].text;
+
+  const html = '<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div></body></html>';
+  const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.addScriptTag({ content: bundle });
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+
+    // 1. 同卷換場（s1b -> s1a）：在 A2 建場未回時切換到 A1，放行建場後須維持 A1 與 4/5 統計且清單已含新場次
+    await page.fill('input[placeholder*="新場次名稱"]', '同卷新場1');
+    await page.click('button:has-text("立即建場次")');
+    await page.waitForFunction(() => Boolean((window as any).__finishCreate1));
+    await page.selectOption('select[aria-label="選擇場次"]', 's1a');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 4 / 應填 5'));
+    await page.evaluate(() => (window as any).__finishCreate1());
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('select[aria-label="選擇場次"]').inputValue(), 's1a');
+    assert.equal((await page.textContent('body'))?.includes('已填 4 / 應填 5'), true);
+    assert.equal(await page.locator('select[aria-label="選擇場次"] option[value="s_new_1"]').count(), 1);
+
+    // 2. 切卷往返（e1/s1a -> e2 -> e1/s1b）：建場未回時切卷再切回 A 選 s1b，放行建場後維持 s1b
+    await page.fill('input[placeholder*="新場次名稱"]', '往返新場2');
+    await page.click('button:has-text("立即建場次")');
+    await page.waitForFunction(() => Boolean((window as any).__finishCreate2));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e2');
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e1');
+    await page.selectOption('select[aria-label="選擇場次"]', 's1b');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+    await page.evaluate(() => (window as any).__finishCreate2());
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('select[aria-label="選擇 Zuvio 考卷"]').inputValue(), 'e1');
+    assert.equal(await page.locator('select[aria-label="選擇場次"]').inputValue(), 's1b');
+
+    // 3. 手動清空選擇：建場未回時手動將考卷清空為 ""，放行建場與刷新清單後不得跳回 e1
+    await page.fill('input[placeholder*="新場次名稱"]', '清空新場3');
+    await page.click('button:has-text("立即建場次")');
+    await page.waitForFunction(() => Boolean((window as any).__finishCreate3));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', '');
+    await page.evaluate(() => (window as any).__finishCreate3());
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('select[aria-label="選擇 Zuvio 考卷"]').inputValue(), '');
+    assert.equal(await page.locator('select[aria-label="選擇場次"]').inputValue(), '');
+    await page.close();
+  } finally {
+    await browser.close();
+  }
+});
