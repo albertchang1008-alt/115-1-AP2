@@ -230,10 +230,14 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const id = examIdOf(req.data.examId);
     if (typeof req.data.archived !== 'boolean') bad('archived 需為布林');
     const ref = examRef(courseId, id);
+    const stRef = moodStateRef(courseId);
     await db.runTransaction(async (tx) => {
-      const s = await tx.get(ref);
+      const [s, stSnap] = [await tx.get(ref), await tx.get(stRef)];
       if (!s.exists) fail('找不到考卷');
       tx.update(ref, { archived: req.data.archived });
+      if (req.data.archived === true && stSnap.exists && stSnap.data()?.examId === id && stSnap.data()?.open) {
+        tx.update(stRef, { open: false, closedAt: Date.now() });
+      }
     });
     return { ok: true };
   });
@@ -351,7 +355,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (req.data.confirm !== undefined && typeof req.data.confirm !== 'boolean') bad('confirm 需為布林');
     const parsed = sanitizeParsed(req.data.parsed);
     const payloadSha = sha(JSON.stringify(parsed));
-    const { sitting, built, match, rosterSha } = await computeImport(courseId, c, examId, sittingId, parsed);
+    const { e, sitting, built, match, rosterSha } = await computeImport(courseId, c, examId, sittingId, parsed);
     const ref = examRef(courseId, examId);
     if (req.data.confirm !== true) {
       const previewId = randomUUID();
@@ -386,6 +390,20 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       tx.delete(prevRef);
     });
     await cleanup(resultsCol, sittingId, gen);
+    // D1：匯入時計算單場試題分析摘要並快取於場次分析文件，避免每次開報表／CSV 重算。
+    const maskedSet = await protectedIds(courseId, c);
+    const { view: rawView, masked } = await buildView(courseId, e, maskedSet);
+    const maskedView = maskView(rawView, masked);
+    const maskedKey = sha([...masked].sort().join(','));
+    const analysis = analyzeExam(maskedView, [...built.results.values()]);
+    await ref.collection('analysis').doc(sittingId).set({
+      revision: nextRevision,
+      gen,
+      analysisVersion: ANALYSIS_CACHE_VERSION,
+      maskedKey,
+      analysis,
+      computedAt: Date.now(),
+    });
     return { ok: true, matched: built.results.size };
   });
   async function cleanup(col: FirebaseFirestore.CollectionReference, sittingId: string, keepGen: string) {
@@ -408,12 +426,15 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       if (!s.exists) fail('找不到考卷');
       const e = s.data()!;
       tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision: (x.results?.revision || x.deletedRevision || 0) + 1 } : x)) });
+      tx.delete(ref.collection('analysis').doc(sittingId));
     });
     await cleanup(ref.collection('results'), sittingId, '');
     return { ok: true };
   });
 
   // ---------- 考前情緒（zuvioMood） ----------
+  const PREP_CACHE_VERSION = 2;
+  const ANALYSIS_CACHE_VERSION = 1;
   const moodStateRef = (courseId: string) => db.doc(`courses/${courseId}/zuvioMoodState/current`);
   const moodResponsesCol = (courseId: string, examId: string, sittingId: string) =>
     examRef(courseId, examId).collection('moods').doc(sittingId).collection('responses');
@@ -487,13 +508,16 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   });
 
   const zuvioGetMoodLive = onCall(options, async (req) => {
-    const { courseId } = await moodTeacher(req);
+    const { c, courseId } = await moodTeacher(req);
     obj(req.data, ['courseId', 'examId', 'sittingId'], '請求');
     const stateSnap = await moodStateRef(courseId).get();
     const st = stateSnap.exists ? stateSnap.data()! : null;
-    const examId = req.data.examId ? examIdOf(req.data.examId) : st?.examId;
-    const sittingId = req.data.sittingId ? examIdOf(req.data.sittingId) : st?.sittingId;
-    const counts = Object.fromEntries(MOOD_CODES.map((c) => [c, 0])) as Record<MoodCode, number>;
+    const hasExamReq = req.data.examId !== undefined && req.data.examId !== '';
+    const hasSittingReq = req.data.sittingId !== undefined && req.data.sittingId !== '';
+    if (hasExamReq !== hasSittingReq) bad('請同時指定考卷與場次');
+    const examId = hasExamReq ? examIdOf(req.data.examId) : st?.examId;
+    const sittingId = hasSittingReq ? examIdOf(req.data.sittingId) : st?.sittingId;
+    const counts = Object.fromEntries(MOOD_CODES.map((code) => [code, 0])) as Record<MoodCode, number>;
     let totalResponded = 0;
     if (examId && sittingId) {
       const respSnap = await moodResponsesCol(courseId, examId, sittingId).get();
@@ -506,10 +530,39 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       }
     }
     const now = Date.now();
-    const open = !!st?.open && now <= (st.closesAt || 0);
+    if (!examId || !sittingId) {
+      return { state: null, eligibleCount: 0, totalResponded, counts };
+    }
+    const isCurrent = !!st && st.examId === examId && st.sittingId === sittingId;
+    const examSnap = await examRef(courseId, examId).get();
+    if (!examSnap.exists) fail('找不到考卷');
+    const ex = examSnap.data()!;
+    const sitting = (ex.sittings || []).find((s: any) => s.id === sittingId);
+    if (!sitting && !isCurrent) fail('找不到場次');
+    if (isCurrent) {
+      const open = !ex.archived && !!st.open && now <= (st.closesAt || 0);
+      return {
+        state: { ...st, open },
+        eligibleCount: st.eligibleCount || 0,
+        totalResponded,
+        counts,
+      };
+    }
+    const roster = await classRosterDocs(courseId, c, sitting?.classIds || []);
+    const eligibleCount = roster.length;
     return {
-      state: st ? { ...st, open } : null,
-      eligibleCount: st?.eligibleCount || 0,
+      state: {
+        open: false,
+        examId,
+        sittingId,
+        sittingLabel: sitting?.label || '',
+        classIds: sitting?.classIds || [],
+        openedAt: null,
+        closesAt: null,
+        closedAt: null,
+        eligibleCount,
+      },
+      eligibleCount,
       totalResponded,
       counts,
     };
@@ -546,6 +599,8 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const now = Date.now();
     const withinWindow = st.open === true && now <= (st.closesAt || 0);
     if (!withinWindow) return { active: false };
+    const exSnap = await examRef(courseId, st.examId).get();
+    if (!exSnap.exists || exSnap.data()?.archived === true) return { active: false };
     if (!p.teacher && !(st.classIds || []).includes(p.classId)) return { active: false };
     const existing = p.teacher
       ? null
@@ -581,6 +636,8 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       if (!stSnap.exists) fail('目前沒有開放中的課前情緒簽到');
       const st = stSnap.data()!;
       if (st.sittingId !== sittingId) fail('簽到場次已變更');
+      const exSnap = await tx.get(examRef(courseId, st.examId));
+      if (!exSnap.exists || exSnap.data()?.archived === true) fail('考卷已封存，簽到已結束');
       if (!(st.classIds || []).includes(p.classId)) throw new HttpsError('permission-denied', '班級不屬於本場次');
       const closedAt = st.open ? st.closesAt : (st.closedAt ?? st.closesAt);
       const deadline = Math.min(closedAt || 0, st.closesAt || 0) + 3000;
@@ -679,6 +736,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (cached.exists) {
       const d = cached.data()!;
       if (
+        d.prepVersion === PREP_CACHE_VERSION &&
         d.startsAt === startsAt &&
         d.unitIdsKey === unitIdsKey &&
         d.questionIdsKey === questionIdsKey &&
@@ -753,7 +811,34 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       }
     }
 
-    const uids = [...new Set(roster.map((r) => r.uid).filter((u): u is string => typeof u === 'string' && !!u))];
+    // V1：正式名冊（enrollments）不保證帶 uid；比照 statsRoster 以 email 反查 profiles 取得真實 UID。
+    const missingEmails = [
+      ...new Set(
+        roster
+          .filter((r) => !r.uid && typeof r.email === 'string' && r.email.trim())
+          .map((r) => String(r.email).trim()),
+      ),
+    ];
+    const byEmail = new Map<string, string>();
+    for (let i = 0; i < missingEmails.length; i += 30) {
+      const ps = await db.collection('profiles').where('email', 'in', missingEmails.slice(i, i + 30)).get();
+      for (const pDoc of ps.docs) {
+        const pe = pDoc.data()?.email;
+        if (typeof pe === 'string' && pe) {
+          byEmail.set(pe, pDoc.id);
+          byEmail.set(pe.trim().toLowerCase(), pDoc.id);
+        }
+      }
+    }
+    const resolvedUids = roster.map((r) => {
+      if (typeof r.uid === 'string' && r.uid) return r.uid;
+      if (typeof r.email === 'string' && r.email.trim()) {
+        const em = r.email.trim();
+        return byEmail.get(em) || byEmail.get(em.toLowerCase()) || '';
+      }
+      return '';
+    });
+    const uids = [...new Set(resolvedUids.filter(Boolean))];
     const progressByUid = new Map<string, any>();
     for (let i = 0; i < uids.length; i += 100) {
       const refs = uids.slice(i, i + 100).map((uid) => db.doc(`courses/${courseId}/progress/${uid}`));
@@ -764,15 +849,16 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     }
 
     const students: Record<string, SittingPrepRecord> = {};
-    for (const r of roster) {
-      const uid = r.uid || `sid:${r.studentId}`;
+    roster.forEach((r, idx) => {
+      const realUid = resolvedUids[idx];
+      const uid = realUid || `sid:${r.studentId}`;
       const cls = classifyPreExamPractice({
         startsAt,
         unitIds: uniqueUnits,
         questionIds: uniqueQuestions,
         allowedActivityIds,
-        attempts: r.uid ? attemptsByUid.get(r.uid) || [] : [],
-        progress: r.uid ? progressByUid.get(r.uid) || null : null,
+        attempts: realUid ? attemptsByUid.get(realUid) || [] : [],
+        progress: realUid ? progressByUid.get(realUid) || null : null,
       });
       students[r.studentId] = {
         uid,
@@ -781,10 +867,11 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
         classId: r.classId,
         ...cls,
       };
-    }
+    });
 
     const finalized = !incomplete && Date.now() >= startsAt;
     await prepRef.set({
+      prepVersion: PREP_CACHE_VERSION,
       startsAt,
       unitIdsKey,
       questionIdsKey,
@@ -794,6 +881,45 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       students,
     });
     return { students, incomplete };
+  }
+
+  async function ensureSittingAnalysis(
+    ref: FirebaseFirestore.DocumentReference,
+    sitting: any,
+    maskedView: ZExamView,
+    maskedKey: string,
+    resultsForSitting: ZResult[],
+  ) {
+    const rev = sitting.results?.revision || 0;
+    const gen = sitting.results?.gen || '';
+    const analysisRef = ref.collection('analysis').doc(sitting.id);
+    if (gen) {
+      const cached = await analysisRef.get();
+      if (cached.exists) {
+        const d = cached.data()!;
+        if (
+          d.analysisVersion === ANALYSIS_CACHE_VERSION &&
+          d.revision === rev &&
+          d.gen === gen &&
+          d.maskedKey === maskedKey &&
+          d.analysis
+        ) {
+          return d.analysis;
+        }
+      }
+    }
+    const analysis = analyzeExam(maskedView, resultsForSitting);
+    if (gen) {
+      await analysisRef.set({
+        revision: rev,
+        gen,
+        analysisVersion: ANALYSIS_CACHE_VERSION,
+        maskedKey,
+        analysis,
+        computedAt: Date.now(),
+      });
+    }
+    return analysis;
   }
 
   async function sittingMoods(courseId: string, examId: string, sittingId: string) {
@@ -855,8 +981,10 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const sittings = [...rawSittings].sort(
       (a: any, b: any) => (a.startsAt || 0) - (b.startsAt || 0) || (a.date || '').localeCompare(b.date || ''),
     );
-    const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
+    const maskedSet = await protectedIds(courseId, c);
+    const { view, masked } = await buildView(courseId, e, maskedSet);
     const maskedView = maskView(view, masked);
+    const maskedKey = sha([...masked].sort().join(','));
     const maps = await Promise.all(sittings.map((s: any) => sittingResults(ref, s)));
     const all = maps.flatMap((m) => [...m.values()]).filter((r) => !req.data.classId || r.classId === req.data.classId);
     const titles = new Map((c.published?.units || []).map((u: Unit) => [u.id, u.title]));
@@ -867,7 +995,10 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       return { report, compare, moodEnabled: false };
     }
 
-    const analysis = analyzeExam(maskedView, all);
+    const analysis =
+      sittings.length === 1 && !req.data.classId
+        ? await ensureSittingAnalysis(ref, sittings[0], maskedView, maskedKey, all)
+        : analyzeExam(maskedView, all);
     const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
     const questionIds = (e.items || []).map((it: ZItem) => it.questionId) as string[];
     const [prepResList, moodList] = await Promise.all([
@@ -1115,11 +1246,15 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (sittings.some((s: any) => !s)) fail('找不到場次');
     const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
     const maskedView = maskView(view, masked);
+    const maskedKey = sha([...masked].sort().join(','));
     const maps = await Promise.all(sittings.map((s: any) => sittingResults(ref, s)));
     const all = maps.flatMap((m) => [...m.values()]).filter((r) => !req.data.classId || r.classId === req.data.classId);
 
     if (kind === 'itemAnalysis') {
-      const analysis = analyzeExam(maskedView, all);
+      const analysis =
+        sittings.length === 1 && !req.data.classId
+          ? await ensureSittingAnalysis(ref, sittings[0], maskedView, maskedKey, all)
+          : analyzeExam(maskedView, all);
       return {
         filename: `${e.title}-試題分析.csv`,
         csv: itemAnalysisCsv(e.title, analysis),

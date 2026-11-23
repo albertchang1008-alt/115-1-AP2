@@ -799,3 +799,215 @@ test('C1：共享歷史與單班歷史混用按時間排序，全班／單班及
   assert.deepEqual(allAB.entries.filter((e) => e.classId === 'A'), onlyA.entries);
   assert.deepEqual(allAB.entries.filter((e) => e.classId === 'B'), onlyB.entries);
 });
+
+test('V1：正式名冊無 enrollment.uid 時依 email 解析 profiles UID，且舊版錯誤定稿快取會失效重算（無登入 profile 仍為 none）', async () => {
+  const { db, h, call } = setup({ moodEnabled: true });
+  // 移除 S01 的 enrollment.uid（模擬正式匯入名冊），補上 email 與 profiles/uid1；S02 移除 uid 且無登入 profile
+  const enS01 = db.data.get('enrollments/C1__S01@x');
+  delete enS01.uid;
+  enS01.email = 'S01@x';
+  db.data.set('enrollments/C1__S01@x', enS01);
+  db.data.set('profiles/uid1', { email: 'S01@x' });
+
+  const enS02 = db.data.get('enrollments/C1__S02@x');
+  delete enS02.uid;
+  enS02.email = 'S02@x';
+  db.data.set('enrollments/C1__S02@x', enS02);
+
+  const tStart = Date.now() - 1000;
+  const examId = '60000000-0000-4000-8000-000000000001';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'V1正式名冊',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sit = await call(h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId,
+    label: 'A班',
+    date: '2026-11-23',
+    classIds: ['A'],
+    startsAt: tStart,
+  });
+
+  // S01 (uid1) 在開考前完成 q0 與 u1
+  db.data.set('courses/C1/attempts/v1_a1', {
+    uid: 'uid1',
+    classId: 'A',
+    unitId: 'u1',
+    receivedAt: tStart - 5000,
+    answers: [{ questionId: 'q0', correct: true }],
+  });
+  db.data.set('courses/C1/progress/uid1', { units: { u1: { passedAt: tStart - 3000 } } });
+
+  // 模擬修正前寫入的錯誤定稿快取（無 prepVersion，且 S01 誤記為 none）
+  db.data.set(`courses/C1/zuvioExams/${examId}/prep/${sit.id}`, {
+    startsAt: tStart,
+    unitIdsKey: 'u1',
+    questionIdsKey: 'q0',
+    finalized: true,
+    incomplete: false,
+    computedAt: tStart + 500,
+    students: {
+      S01: { uid: 'sid:S01', studentId: 'S01', name: '王小明', classId: 'A', status: 'none', practicedItemCount: 0, coverage: 0, itemStatuses: { q0: 'unpracticed' } },
+      S02: { uid: 'sid:S02', studentId: 'S02', name: '陳小華', classId: 'A', status: 'none', practicedItemCount: 0, coverage: 0, itemStatuses: { q0: 'unpracticed' } },
+    },
+  });
+
+  const rep = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id] });
+  assert.equal(rep.preExamCounts.passed, 1, '舊版錯誤定稿快取應失效重算，S01 應依 email 映射 uid1 算為 passed');
+  assert.equal(rep.preExamCounts.none, 1, '無登入 profile 的 S02 維持 none');
+  const cached = db.data.get(`courses/C1/zuvioExams/${examId}/prep/${sit.id}`);
+  assert.equal(cached.prepVersion, 2);
+  assert.equal(cached.students.S01.status, 'passed');
+  assert.equal(cached.students.S01.coverage, 100);
+  assert.equal(cached.students.S02.status, 'none');
+});
+
+test('V2：先開快篩再封存考卷，學生即時查詢與送出皆被阻擋，保留歷史情緒且不影響其他未封存考卷', async () => {
+  const { db, h, call } = setup({ moodEnabled: true });
+  const examA = '60000000-0000-4000-8000-000000000002';
+  const examB = '60000000-0000-4000-8000-000000000003';
+  for (const [eid, title, cls] of [
+    [examA, '考卷A', ['A']],
+    [examB, '考卷B', ['B']],
+  ]) {
+    await call(h.zuvioCreateExam, 'T1', {
+      courseId: 'C1',
+      examId: eid,
+      title,
+      score: 100,
+      classIds: cls,
+      items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+    });
+  }
+  const sitA = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: examA, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() });
+  const sitB = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: examB, label: 'B場', date: '2026-11-23', classIds: ['B'], startsAt: Date.now() });
+
+  // 開啟 B 場並先讓 uid3 提交一筆歷史情緒，再封存 examA（不應影響開放中的 B 場）
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: examB, sittingId: sitB.id });
+  await call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: sitB.id, mood: 'green_flow' });
+  await call(h.zuvioArchiveExam, 'T1', { courseId: 'C1', examId: examA, archived: true });
+  const activeB = await call(h.zuvioGetActiveMood, 'uid3', { courseId: 'C1' });
+  assert.equal(activeB.active, true, '封存別份考卷不可誤關目前開放中的 B 場');
+
+  // 再封存 B 場：current 應關閉，學生查詢 active=false、uid3 送出被拒（封存擋下），且歷史情緒保留
+  await call(h.zuvioArchiveExam, 'T1', { courseId: 'C1', examId: examB, archived: true });
+  const afterArchive = await call(h.zuvioGetActiveMood, 'uid3', { courseId: 'C1' });
+  assert.equal(afterArchive.active, false);
+  await assert.rejects(() => call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: sitB.id, mood: 'red_volcano' }), /封存/);
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examB}/moods/${sitB.id}/responses/uid3`).mood, 'green_flow');
+
+  // 即使人為殘留舊 open=true 指標（模擬競態），學生端仍因 exam.archived=true 拒絕讀寫
+  db.data.set('courses/C1/zuvioMoodState/current', {
+    open: true,
+    examId: examB,
+    sittingId: sitB.id,
+    sittingLabel: 'B場',
+    classIds: ['B'],
+    closesAt: Date.now() + 60000,
+    eligibleCount: 1,
+  });
+  assert.equal((await call(h.zuvioGetActiveMood, 'uid3', { courseId: 'C1' })).active, false);
+  await assert.rejects(() => call(h.zuvioSubmitMood, 'uid3', { courseId: 'C1', sittingId: sitB.id, mood: 'red_volcano' }), /封存/);
+});
+
+test('V3：zuvioGetMoodLive 回傳 state、eligibleCount 與 counts 必屬同一 examId＋sittingId', async () => {
+  const { h, call } = setup({ moodEnabled: true });
+  const examA = '60000000-0000-4000-8000-000000000004';
+  const examB = '60000000-0000-4000-8000-000000000005';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: examA,
+    title: '考卷A',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: examB,
+    title: '考卷B',
+    score: 100,
+    classIds: ['B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sitA = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: examA, label: 'A場(2人)', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 2000 });
+  const sitB = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: examB, label: 'B場(2人)', date: '2026-11-23', classIds: ['B'], startsAt: Date.now() - 1000 });
+
+  // A場 2 人已填後關閉，接著開啟 B 場（0 人填）
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: examA, sittingId: sitA.id });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: sitA.id, mood: 'green_flow' });
+  await call(h.zuvioSubmitMood, 'uid2', { courseId: 'C1', sittingId: sitA.id, mood: 'yellow_rubberband' });
+  await call(h.zuvioCloseMood, 'T1', { courseId: 'C1', sittingId: sitA.id });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId: examB, sittingId: sitB.id });
+
+  // 回查 A 場：必須得到 A 場的 state (open=false, examId=examA, sittingId=sitA.id)、eligibleCount=2、totalResponded=2
+  const liveA = await call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1', examId: examA, sittingId: sitA.id });
+  assert.equal(liveA.state.examId, examA);
+  assert.equal(liveA.state.sittingId, sitA.id);
+  assert.equal(liveA.state.open, false);
+  assert.equal(liveA.eligibleCount, 2);
+  assert.equal(liveA.totalResponded, 2);
+  assert.equal(liveA.counts.green_flow, 1);
+  assert.equal(liveA.counts.yellow_rubberband, 1);
+
+  // 省略場次參數：應回傳目前開啟中的 B 場
+  const liveCur = await call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1' });
+  assert.equal(liveCur.state.examId, examB);
+  assert.equal(liveCur.state.sittingId, sitB.id);
+  assert.equal(liveCur.state.open, true);
+  assert.equal(liveCur.totalResponded, 0);
+});
+
+test('D1：匯入成績時計算並快取單場試題分析摘要，report／itemAnalysis CSV 命中快取、刪除後失效；多場合併仍彙總', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000006';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1快取卷',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sitA = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 2000 });
+  const sitB = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'B場', date: '2026-11-23', classIds: ['B'], startsAt: Date.now() - 1000 });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const ansIdx = Math.max(0, view.items[0].options.findIndex((o) => o.id === view.items[0].answer));
+  const wrongIdx = (ansIdx + 1) % view.items[0].options.length;
+
+  for (const [sit, subRoster, pick] of [
+    [sitA, roster.slice(0, 2), () => ansIdx],   // A 場 2 人全對
+    [sitB, roster.slice(2, 3), () => wrongIdx], // B 場 1 人全錯
+  ]) {
+    const parsed = parseZuvioMatrix(fakeZuvioExport(view, subRoster.map((r) => ({ studentId: r.studentId, name: r.name })), pick));
+    const prev = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+    await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: true, previewId: prev.previewId });
+  }
+
+  const cachedA = db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sitA.id}`);
+  assert.ok(cachedA?.analysis, '匯入時即應寫入單場試題分析摘要');
+  assert.equal(cachedA.revision, 1);
+  assert.equal(cachedA.analysis.summary.students, 2);
+
+  // 驗證單場 report 與 itemAnalysis CSV 讀取該快取
+  const repA = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sitA.id] });
+  assert.equal(repA.analysis.summary.students, 2);
+  assert.equal(repA.analysis.items[0].p, 1);
+  const csvA = await call(h.zuvioExportCsv, 'T1', { courseId: 'C1', examId, sittingIds: [sitA.id], kind: 'itemAnalysis' });
+  assert.ok(csvA.csv.includes('難度P'));
+  assert.ok(csvA.csv.includes('1.000') || csvA.csv.includes(',1,'));
+
+  // 多場合併仍動態彙總（2 對 + 1 錯 = 3 人，P = 0.6667）
+  const repMerged = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sitA.id, sitB.id] });
+  assert.equal(repMerged.analysis.summary.students, 3);
+  assert.equal(repMerged.analysis.items[0].p, 0.6667);
+
+  // 刪除 A 場成績時一併清除 analysis 快取
+  await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sitA.id });
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sitA.id}`), undefined);
+});

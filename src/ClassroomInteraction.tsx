@@ -1262,7 +1262,11 @@ function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
             <button type="button" onClick={() => void openMood()} disabled={busy || !examId || !sittingId}>
               開放情緒簽到
             </button>
-            <button type="button" onClick={() => void closeMood()} disabled={busy || !live?.state?.open}>
+            <button
+              type="button"
+              onClick={() => void closeMood()}
+              disabled={busy || !live?.state?.open || (!!sittingId && live?.state?.sittingId !== sittingId)}
+            >
               結束簽到
             </button>
           </div>
