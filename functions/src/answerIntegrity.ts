@@ -4,6 +4,7 @@ import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import type { Firestore } from 'firebase-admin/firestore';
 import { ANSWER_INTEGRITY, isTestClass, validateLeaveMetrics } from '../../shared/answerIntegrity';
 import { forClass, type Course } from '../../shared/model';
+import { MAX_COURSE_UNITS } from '../../shared/courseValidation';
 export function createIntegrityHandlers(
   db: Firestore,
   access: (req: any, id: string, teacher?: boolean) => Promise<any>,
@@ -59,7 +60,7 @@ export function createIntegrityHandlers(
         r.mode !== 'flashcard' ||
         !Array.isArray(r.unitIds) ||
         !r.unitIds.length ||
-        r.unitIds.length > 50 ||
+        r.unitIds.length > MAX_COURSE_UNITS ||
         new Set(r.unitIds).size !== r.unitIds.length ||
         typeof r.duration !== 'number' ||
         !Number.isFinite(r.duration) ||
