@@ -9,6 +9,7 @@ import './answer-integrity.css';
 import './zuvio-exams.css';
 import './zuvio-ext-sample.css';
 import ZuvioExtSample from './ZuvioExtSample';
+import './attendance.css';
 import { applySavedTheme } from './ThemePicker';
 applySavedTheme();
 const extSampleShot = new URLSearchParams(window.location.search).get('zuvio-ext-sample');

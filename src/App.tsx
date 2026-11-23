@@ -10,6 +10,9 @@ import { ReflectionResults } from './ReflectionResults';
 import { reflectionTemplate, validateReflectionConfig } from '../shared/reflection';
 import { ClassroomConfigEditor, StudentInteraction } from './ClassroomInteraction';
 import { featureEnabled } from '../shared/features';
+import { AttendPage, AttendanceBanner, MyAttendancePage, isMyAttendanceHash } from './Attendance';
+import AttendanceAdmin from './AttendanceAdmin';
+import { parseAttendHash } from '../shared/attendance';
 import TeachingControl from './TeachingControl';
 import { TeacherAssessments } from './Assessments';
 import CompletionBoard from './CompletionBoard';
@@ -106,6 +109,7 @@ const tabs = [
   ['teaching', '授課控制台', Presentation],
   ['assessments', '正式測驗', ListChecks],
   ['classroom', '課堂互動', ListChecks],
+  ['attendance', '點名', Users],
   ['overview', '教學總覽', LayoutDashboard],
   ['courses', '課程與教材', BookOpen],
   ['bank', '題庫管理', Layers],
@@ -339,6 +343,9 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
       notify((e as Error).message);
     }
   }
+  // 課堂點名：掃 QR 打開 #/attend?c=…&t=… 時，登入前後都顯示簽到頁（登入後自動送出）。
+  if (!api.preview && parseAttendHash(location.hash))
+    return <AttendPage api={api} profile={profile} courses={courses} loading={loading} error={error} onLogin={() => { setError(''); login().catch((e) => setError(e.message)); }} />;
   if (!profile)
     return (
       <div className="login">
@@ -481,6 +488,8 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
         )}
       </div>
     );
+  const myAttendanceCourse = !profile.teacher && !api.preview ? courses.find((c) => isMyAttendanceHash(location.hash, c.id) && featureEnabled(c, 'attendance')) : undefined;
+  if (myAttendanceCourse) return <MyAttendancePage api={api} course={myAttendanceCourse} />;
   if (!profile.teacher)
     return (
       <>
@@ -520,6 +529,11 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
                 <StudentInteraction key={course.id} api={api} course={course} />
               </div>
             )}
+            {featureEnabled(course, 'attendance') && (
+              <div className="student-interaction-host">
+                <AttendanceBanner key={course.id} api={api} course={course} />
+              </div>
+            )}
             <Student
               key={course.id}
               api={api}
@@ -548,7 +562,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
         </div>
         <div className="workspace-label">TEACHING WORKSPACE</div>
         <nav>
-          {tabs.filter(([id]) => id !== 'settings').filter(([id]) => (id !== 'assessments' || featureEnabled(course, 'assessments')) && (id !== 'teaching' || featureEnabled(course, 'teachingConsole')) && (id !== 'classroom' || featureEnabled(course, 'classroomInteraction')) && (id !== 'zuvio' || api.preview || featureEnabled(course, 'zuvioExams'))).map(([id, label, Icon]) => (
+          {tabs.filter(([id]) => id !== 'settings').filter(([id]) => (id !== 'assessments' || featureEnabled(course, 'assessments')) && (id !== 'teaching' || featureEnabled(course, 'teachingConsole')) && (id !== 'classroom' || featureEnabled(course, 'classroomInteraction')) && (id !== 'attendance' || featureEnabled(course, 'attendance')) && (id !== 'zuvio' || api.preview || featureEnabled(course, 'zuvioExams'))).map(([id, label, Icon]) => (
             <button className={tab === id ? 'active' : ''} key={id} onClick={() => nav(id)}>
               <Icon size={19} />
               {label}
@@ -678,6 +692,8 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
             <TeachingControl key={course.id} api={api} course={course} notify={notify} changed={async () => { const data = await api.call('bootstrap'); setCourses(data.courses); }} progress={<CompletionPage course={course} api={api} notify={notify} />} />
           ) : tab === 'assessments' && featureEnabled(course, 'assessments') ? (
             <TeacherAssessments key={course.id} api={api} course={course} notify={notify} />
+          ) : tab === 'attendance' && featureEnabled(course, 'attendance') ? (
+            <AttendanceAdmin key={course.id} api={api} course={course} notify={notify} />
           ) : tab === 'classroom' && featureEnabled(course, 'classroomInteraction') ? (
             <ClassroomConfigEditor key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'bank' ? (

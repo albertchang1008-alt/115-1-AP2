@@ -6,6 +6,7 @@ export function auditReadabilityCss(root, allowlist = []) {
       'src/style.css',
       'src/answer-integrity.css',
       ...(fs.existsSync(path.join(root, 'src/update-banner.css')) ? ['src/update-banner.css'] : []),
+      ...(fs.existsSync(path.join(root, 'src/attendance.css')) ? ['src/attendance.css'] : []),
       ...(fs.existsSync(path.join(root, 'public/materials/readability-overlay.css'))
         ? ['public/materials/readability-overlay.css']
         : []),

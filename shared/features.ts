@@ -4,10 +4,11 @@ export type CourseFeatures = {
   classroomInteraction: boolean;
   zuvioExams: boolean;
   zuvioMood: boolean;
+  attendance?: boolean;
   readabilityOverlay?: boolean;
   readabilityOverlayExclusions?: string[];
 };
-export const featureNames = ['assessments', 'teachingConsole', 'classroomInteraction', 'zuvioExams', 'zuvioMood'] as const;
+export const featureNames = ['assessments', 'teachingConsole', 'classroomInteraction', 'zuvioExams', 'zuvioMood', 'attendance'] as const;
 export type Feature = (typeof featureNames)[number];
 export function featureEnabled(
   course: { features?: Partial<CourseFeatures> } | undefined,

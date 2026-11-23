@@ -24,3 +24,8 @@
 
 ## 修訂
 - 2026-10-30 15:19 教師決定內文提高為 18px（題幹 19、選項 18、標題 21 隨之上調）；閱讀加大樣式只能放大、不得縮小原有字級。
+
+## 未變更就跳過（2026-11-17，待教師核可後生效）
+- `npm run check` 裡的閱讀規範檢查會跳過「內容與檢查方式都和上次通過時相同」的教材；判斷依據是 `scripts/readability-cache.json` 的指紋，不是人工標記。機制說明在 `scripts/lib/readability-cache.mjs` 開頭。
+- **改了教材、播放器（`src/Player`）、`src/style.css` 或檢查程式之後**：跑 `npm run readability:record`（只重量有變的，通過才更新紀錄），把 `scripts/readability-cache.json` 一起 commit。沒做這一步不會放行不合格的教材，只是部署時會重新量、比較慢。
+- `npm run readability:all`：不看紀錄，全部重新量。建議另設每週自動跑一次的流程（內容見 `docs/DEPLOY_SPEED_REPORT_2026-11-17.md` 附錄，尚未建立）。

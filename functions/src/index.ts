@@ -11,6 +11,7 @@ import { courseRevision, assertExpectedRevision, REVISION_CONFLICT } from '../..
 import { validateReflectionConfig, validateReflectionAnswers, reflectionActivity, buildReflectionResponse, reflectionProgress, summarizeReflections } from '../../shared/reflection';
 import { normalizeCourseFeatures, courseFeaturesFromRecord } from '../../shared/features';
 import { createClassroomHandlers } from './classroom';
+import { createAttendanceHandlers } from './attendance';
 import { createTeachingHandlers } from './teaching';
 import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
 import { createZuvioHandlers } from './zuvioExams';
@@ -1594,3 +1595,4 @@ export const {
   zuvioCareList,
   zuvioExportCsv,
 } = createZuvioHandlers(db, access, options);
+export const { attendanceStart, attendanceControl, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);

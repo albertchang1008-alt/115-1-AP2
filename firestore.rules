@@ -8,6 +8,13 @@ service cloud.firestore {
     }
     // Reflections contain named student responses; access only through authorized callables.
     match /courses/{courseId}/reflections/{activityKey}/responses/{uid} { allow read, write: if false; }
+    // 課堂點名（#67）：出缺席紀錄、修改紀錄、寄送紀錄、動態碼秘密值與寄信密鑰，一律只經由已授權的 callable 讀寫。
+    match /courses/{courseId}/attendance/{document=**} { allow read, write: if false; }
+    match /courses/{courseId}/attendanceState/{document=**} { allow read, write: if false; }
+    match /courses/{courseId}/attendanceSecrets/{document=**} { allow read, write: if false; }
+    match /courses/{courseId}/attendanceAudit/{document=**} { allow read, write: if false; }
+    match /courses/{courseId}/attendanceMail/{document=**} { allow read, write: if false; }
+    match /courses/{courseId}/attendanceConfig/{document=**} { allow read, write: if false; }
     match /{document=**} { allow read, write: if false; }
   }
 }

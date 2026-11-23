@@ -1,6 +1,6 @@
 {
   "name": "course-platform",
-  "version": "1.15.8",
+  "version": "1.15.9",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,13 +18,16 @@
     "check": "npm test && npm run build && npm --prefix functions test && npm run readability:check",
     "materials:validate-nodes": "node --experimental-strip-types scripts/material-node-audit.mjs",
     "pretest": "npm --prefix functions run build",
-    "readability:check": "node --experimental-strip-types scripts/readability-check.mjs"
+    "readability:check": "node --experimental-strip-types scripts/readability-check.mjs",
+    "readability:record": "node --experimental-strip-types scripts/readability-check.mjs --record",
+    "readability:all": "node --experimental-strip-types scripts/readability-check.mjs --all"
   },
   "dependencies": {
     "firebase": "^11.0.0",
     "lucide-react": "^0.468.0",
     "papaparse": "^5.4.1",
     "pdfjs-dist": "^4.10.38",
+    "qrcode-generator": "^2.0.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

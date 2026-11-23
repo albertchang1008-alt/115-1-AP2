@@ -6,6 +6,8 @@ function code(v: unknown) { if (typeof v !== 'string' || !safeCode(v)) fail('識
 function id(v: unknown) { if (typeof v !== 'string' || !safeId(v)) fail('識別碼格式錯誤'); return v as string; }
 function visibility(v: unknown) { if (!['hidden','current','archived'].includes(String(v))) fail('區域設定無效'); }
 function cleanLabel(v: unknown) { if (String(v ?? '').trim().length > 30) fail('標籤過長'); }
+export const MAX_COURSE_UNITS = 120;
+export const MAX_COURSE_CLASSES = 50;
 export function validateCourseDraft(course: Course) {
   if (!course || typeof course !== 'object') fail('課程格式無效');
   code(course.id);
@@ -15,8 +17,10 @@ export function validateCourseDraft(course: Course) {
     } else if ((!featureNames.includes(key as any) && key !== 'readabilityOverlay') || typeof value !== 'boolean') fail('功能開關設定無效');
   }
   if (course.assessmentSources && ['pretest', 'posttest'].some(k => { const ids = (course.assessmentSources as any)[k]; return !Array.isArray(ids) || ids.length > 100 || ids.some((id: unknown) => typeof id !== 'string' || !safeId(id)) || new Set(ids).size !== ids.length; })) fail('前後測來源設定無效');
-  if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units) || course.units.length > 50 || course.classIds.length > 50)
-    fail('請填寫課程與學期，最多 50 班、50 單元');
+  if (!course.title?.trim() || !course.term || !Array.isArray(course.classIds) || !Array.isArray(course.units)) fail('請填寫課程與學期');
+  // 2026-11-23：一學期約 70 個題目分類（含已考完與複習考），原上限 50 擋住消化系統發布。
+  if (course.units.length > MAX_COURSE_UNITS) fail(`題目分類最多 ${MAX_COURSE_UNITS} 個（目前 ${course.units.length} 個）`);
+  if (course.classIds.length > MAX_COURSE_CLASSES) fail(`班級最多 ${MAX_COURSE_CLASSES} 個`);
   if (new Set(course.classIds).size !== course.classIds.length) fail('班級代碼重複');
   course.classIds.forEach((cl) => code(cl));
   for (const [cl, units] of Object.entries(course.classUnits || {}))
