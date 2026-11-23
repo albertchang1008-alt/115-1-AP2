@@ -21,7 +21,7 @@ const bundle = buildSync({
   format: 'iife',
   platform: 'browser',
   jsx: 'automatic',
-  define: { 'process.env.NODE_ENV': '"development"' },
+  define: { 'process.env.NODE_ENV': '"development"', 'import.meta.env': '{}' },
 }).outputFiles;
 const server = http.createServer((req, res) => {
   const name = (req.url || '/').split('?')[0];
@@ -197,6 +197,50 @@ try {
       }
       functionalChecks.push(screen);
     } catch (e) { failures.push(`${screen}: ${e.message.split('\n')[0]}`); }
+    await context.close();
+  }
+  // 實際 CourseEditor → 保存草稿 → 側欄點名：授課控制台關閉仍可獨立開／關點名。
+  {
+    const { page, context } = await open('feature-toggle', '#courses', 1, 1440, 900);
+    try {
+      const attendance = page.getByRole('checkbox', { name: '點名', exact: true });
+      await attendance.waitFor();
+      assert.equal(await attendance.isChecked(), false);
+      assert.equal(await page.locator('nav').getByRole('button', { name: '點名', exact: true }).count(), 0);
+      await attendance.check();
+      assert.equal(await page.locator('nav').getByRole('button', { name: '點名', exact: true }).count(), 0, '未保存不開放');
+      await page.getByRole('button', { name: '保存草稿', exact: true }).click();
+      const nav = page.locator('nav').getByRole('button', { name: '點名', exact: true });
+      await nav.waitFor();
+      const saved = await page.evaluate(async () => (await window.attendanceToggleTest.read()).courses[0]);
+      assert.deepEqual(saved.features, { assessments: false, teachingConsole: false, classroomInteraction: true, attendance: true });
+      assert.equal(await page.locator('nav').getByRole('button', { name: '授課控制台', exact: true }).count(), 0);
+      // 手機字級兩態，只存課程功能區域各一張，並量測文字與頁面不出框。
+      for (const [label, scale] of [['default', 1], ['xlarge', 1.3]]) {
+        await page.setViewportSize({ width: 390, height: 844 });
+        await page.evaluate(scale => document.documentElement.style.setProperty('--font-scale', String(scale)), scale);
+        const fieldset = attendance.locator('xpath=ancestor::fieldset');
+        assert(await fieldset.evaluate(el => el.getBoundingClientRect().right <= innerWidth + 1), '功能區不出框');
+        if (out) await fieldset.screenshot({ path: path.join(out, `ui-feature-toggle-390-${label}.png`) });
+      }
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await nav.click();
+      await page.getByRole('heading', { name: '開始點名', exact: true }).waitFor();
+      await page.getByRole('button', { name: '試簽（不算點名）', exact: true }).waitFor();
+      await page.locator('nav').getByRole('button', { name: '課程與教材', exact: true }).click();
+      await attendance.waitFor();
+      assert.equal(await attendance.isChecked(), true, '重開編輯仍為啟用');
+      await attendance.uncheck();
+      await page.getByRole('button', { name: '保存草稿', exact: true }).click();
+      await nav.waitFor({ state: 'detached' });
+      const state = await page.evaluate(async () => ({ data: await window.attendanceToggleTest.read(), calls: window.attendanceToggleTest.calls }));
+      assert.equal(state.data.courses[0].features.attendance, false);
+      assert.equal(state.data.courses[0].features.classroomInteraction, true, '保留原本功能');
+      assert.equal(state.calls.filter(c => c.name === 'saveCourse').length, 2);
+      assert.equal(state.calls.filter(c => c.name === 'publishCourse').length, 0, '不需更新到學生端');
+      assert.equal(state.calls.filter(c => c.name === 'attendanceStart').length, 0, '檢查入口不建立正式節次');
+      functionalChecks.push('feature-toggle: save on/off, independent navigation, no publish');
+    } catch (e) { failures.push(`feature-toggle: ${e.message.split('\n')[0]}`); }
     await context.close();
   }
 } finally {
