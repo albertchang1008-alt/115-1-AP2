@@ -36,7 +36,7 @@ export interface ZuvioApi {
   updateSittingStart(examId: string, sittingId: string, startsAt: number): Promise<{ ok: boolean; startsAt: number }>;
   previewImport(examId: string, sittingId: string, parsed: ZParsed): Promise<ImportPreview>;
   confirmImport(examId: string, sittingId: string, previewId: string): Promise<void>;
-  deleteResults(examId: string, sittingId: string): Promise<void>;
+  deleteResults(examId: string, sittingId: string, cleanupOnly?: boolean): Promise<void>;
   report(examId: string, sittingIds: string[], classId?: string): Promise<ReturnType<typeof examReport>>;
   fullReport(examId: string, sittingIds: string[], classId?: string, threshold?: number): Promise<FullZuvioReport>;
   careList(examId: string, sittingId: string, classId?: string, threshold?: number): Promise<{ entries: CareListEntry[]; threshold: number; preExamIncomplete?: boolean }>;
@@ -144,11 +144,16 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
       s.results = { importedAt: Date.now(), revision: (s.results?.revision || 0) + 1, matched: p.matched, counts: p.counts };
       previews.delete(previewId);
     },
-    async deleteResults(id, sittingId) {
+    async deleteResults(id, sittingId, cleanupOnly) {
       const e = get(id);
-      e.results.delete(sittingId);
       const s = e.summary.sittings.find((x) => x.id === sittingId)!;
+      if (cleanupOnly) {
+        delete s.pendingCleanup;
+        return;
+      }
+      e.results.delete(sittingId);
       delete s.results;
+      delete s.pendingCleanup;
       for (const [k, p] of previews) if (p.sittingId === sittingId) previews.delete(k);
     },
     async report(id, sittingIds, classId) {
@@ -281,7 +286,8 @@ export function cloudZuvioApi(api: { call<T = any>(name: string, data?: any): Pr
       await api.call('zuvioImportResults', { courseId, examId, sittingId, parsed, confirm: true, previewId });
       parsedByPreview.delete(previewId);
     },
-    deleteResults: (examId, sittingId) => api.call('zuvioDeleteResults', { courseId, examId, sittingId }),
+    deleteResults: (examId, sittingId, cleanupOnly) =>
+      api.call('zuvioDeleteResults', { courseId, examId, sittingId, ...(cleanupOnly ? { cleanupOnly: true } : {}) }),
     async report(examId, sittingIds, classId) {
       return (await api.call<any>('zuvioReport', { courseId, examId, sittingIds, ...(classId ? { classId } : {}) })).report;
     },

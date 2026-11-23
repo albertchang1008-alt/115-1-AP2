@@ -1397,10 +1397,112 @@ test('D1 R5 邊界：整場 300 人上限、提交成功回應逾時不誤刪、
   assert.equal(afterFailDel.results, undefined);
   assert.equal(afterFailDel.pendingCleanup, true, '清理失敗必須保留 pendingCleanup 供追蹤與重試');
 
-  // 無重匯，直接重試 deleteResults 完成清理
-  const del2 = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  // 無重匯，直接重試 deleteResults (cleanupOnly: true) 完成清理
+  const del2 = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, cleanupOnly: true });
   assert.equal(del2.ok, true);
   const afterRetry = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings.find((s) => s.id === sit.id);
   assert.equal(afterRetry.pendingCleanup, undefined, '清理完成後須清除 pendingCleanup');
   assert.equal([...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit.id).length, 0, '無重匯亦須清完該場舊代明細');
+});
+
+test('D1 R6 隔離清理定序：刪除後無重匯、舊分頁重試晚於新匯入、重匯後清理失敗再重試', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000014';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1 R6 隔離清理測試',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const ansIdx = Math.max(0, view.items[0].options.findIndex((o) => o.id === view.items[0].answer));
+  const wrongIdx = (ansIdx + 1) % view.items[0].options.length;
+  const parsedCorrect = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => ansIdx));
+  const parsedWrong = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => wrongIdx));
+  const sit = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: '場1', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+
+  const injectCleanupFail = () => {
+    const origDoc = db.doc.bind(db);
+    db.doc = (p) => {
+      const d = origDoc(p);
+      if (p === `courses/C1/zuvioExams/${examId}`) {
+        const origSub = d.collection.bind(d);
+        d.collection = (sub) => {
+          const col = origSub(sub);
+          if (sub === 'results') {
+            const origWhere = col.where.bind(col);
+            col.where = (...args) => {
+              const q = origWhere(...args);
+              q.get = async () => { throw new Error('cleanup transient error'); };
+              return q;
+            };
+          }
+          return col;
+        };
+      }
+      return d;
+    };
+    return () => { db.doc = origDoc; };
+  };
+
+  // 1. 刪除後無重匯：匯入 rev 1 -> 刪除時 cleanup 失敗 -> 無重匯以 cleanupOnly 重試完成清理且 deletedRevision 不多加
+  const p1 = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: true, previewId: p1.previewId });
+  let restore = injectCleanupFail();
+  await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  restore();
+  const revBeforeRetry = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0].deletedRevision;
+  const retry1 = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, cleanupOnly: true });
+  assert.equal(retry1.ok, true);
+  assert.equal(retry1.cleaned, true);
+  const sitAfter1 = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0];
+  assert.equal(sitAfter1.deletedRevision, revBeforeRetry, 'cleanupOnly 不得遞增 deletedRevision');
+  assert.equal(sitAfter1.pendingCleanup, undefined);
+  assert.equal([...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit.id).length, 0);
+
+  // 2. 舊分頁 A 的清理重試晚於分頁 B 的新匯入：B 新匯入、摘要、明細與待用預覽必須完整保留
+  const p2 = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: true, previewId: p2.previewId });
+  // A 刪除時清理失敗（取得待清理狀態）
+  restore = injectCleanupFail();
+  await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  restore();
+  // B 重新匯入並完成清理，且另建一筆新預覽 prevPending
+  const pB = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: true, previewId: pB.previewId });
+  const prevPending = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  const genB = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0].results.gen;
+  // A 的舊分頁按下「清理殘留成績」（cleanupOnly: true）
+  const staleRetry = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, cleanupOnly: true });
+  assert.equal(staleRetry.ok, true);
+  assert.equal(staleRetry.cleaned, false);
+  const sitB = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0];
+  assert.equal(sitB.results.gen, genB, '舊分頁重試不得刪除 B 的有效 results');
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined, '不得刪除 B 的分析摘要');
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/previews/${prevPending.previewId}`), undefined, '不得刪除待用預覽');
+  assert.equal([...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.gen === genB).length, 2, 'B 的有效明細必須完整保留');
+
+  // 3. 重匯後清理失敗再重試（場次已有有效成績時）：只清舊代明細，保留當前有效成績、摘要與預覽
+  const pC = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  restore = injectCleanupFail();
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: true, previewId: pC.previewId });
+  restore();
+  const sitFailClean = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0];
+  assert.equal(sitFailClean.pendingCleanup, true);
+  const genC = sitFailClean.results.gen;
+  const prevKeep = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  // 恢復正常後重試清理殘留成績
+  const cleanRetry = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, cleanupOnly: true });
+  assert.equal(cleanRetry.ok, true);
+  assert.equal(cleanRetry.cleaned, true);
+  const sitAfterC = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0];
+  assert.equal(sitAfterC.pendingCleanup, undefined);
+  assert.equal(sitAfterC.results.gen, genC);
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined);
+  assert.notEqual(db.data.get(`courses/C1/zuvioExams/${examId}/previews/${prevKeep.previewId}`), undefined);
+  const remainRows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit.id);
+  assert.equal(remainRows.length, 2, '只應保留當前有效代 genC 的 2 筆明細');
+  assert.equal(remainRows.every(([, v]) => v.gen === genC), true);
 });

@@ -251,7 +251,7 @@ function ExamDetail({ api, notify, examId, back }: { api: ZuvioApi; notify: (m: 
               <td>{s.results ? `已匯入 ${s.results.matched} 人` : <span className="muted">尚未匯入</span>}</td>
               <td><button onClick={() => setImporting(s.id)}>{s.results ? '重新匯入' : '匯入成績'}</button>
                 {s.results && <button onClick={async () => { if (confirm('刪除這一場的成績？')) { await api.deleteResults(examId, s.id); reload(); } }}>刪除成績</button>}
-                {!s.results && s.pendingCleanup && <button onClick={async () => { await api.deleteResults(examId, s.id); reload(); }}>清理殘留成績</button>}
+                {s.pendingCleanup && <button onClick={async () => { await api.deleteResults(examId, s.id, true); reload(); }}>清理殘留成績</button>}
                 <button onClick={async () => { if (confirm('清除這一場的情緒簽到紀錄？')) { await api.deleteMood(examId, s.id); notify('已清除情緒紀錄'); } }}>刪情緒</button></td></tr>
           ))}</tbody></table>
         <div className="z-row z-new">

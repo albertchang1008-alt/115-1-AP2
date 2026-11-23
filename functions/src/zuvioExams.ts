@@ -472,10 +472,22 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   }
   const zuvioDeleteResults = onCall(options, async (req) => {
     const { courseId } = await teacher(req);
-    obj(req.data, ['courseId', 'examId', 'sittingId'], '請求');
+    obj(req.data, ['courseId', 'examId', 'sittingId', 'cleanupOnly'], '請求');
     const examId = examIdOf(req.data.examId);
     const sittingId = examIdOf(req.data.sittingId);
+    if (req.data.cleanupOnly !== undefined && typeof req.data.cleanupOnly !== 'boolean') bad('cleanupOnly 需為布林');
     const ref = examRef(courseId, examId);
+    if (req.data.cleanupOnly === true) {
+      const snap = await ref.get();
+      if (!snap.exists) fail('找不到考卷');
+      const target = (snap.data()!.sittings || []).find((x: any) => x.id === sittingId);
+      if (!target) fail('找不到場次');
+      if (!target.pendingCleanup) return { ok: true, cleaned: false };
+      const targetRev = Math.max(target.results?.revision || 0, target.deletedRevision || 0);
+      await cleanup(ref.collection('results'), sittingId, targetRev);
+      await clearPendingCleanup(ref, sittingId, targetRev);
+      return { ok: true, cleaned: true };
+    }
     let deletedRevision = 0;
     await db.runTransaction(async (tx) => {
       const s = await tx.get(ref);
