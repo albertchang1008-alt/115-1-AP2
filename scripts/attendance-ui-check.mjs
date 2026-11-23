@@ -2,6 +2,7 @@
 // 在 390×844、字級預設與特大下量測閱讀規範；教師端各分頁做冒煙檢查。不連後端、不寄信。
 // 用法：node scripts/attendance-ui-check.mjs [--out <資料夾>]（有 --out 才存截圖）
 import fs from 'node:fs';
+import assert from 'node:assert/strict';
 import path from 'node:path';
 import http from 'node:http';
 import { buildSync } from 'esbuild';
@@ -69,6 +70,7 @@ const teacher = [
 const failures = [];
 const errors = [];
 const checked = [];
+const functionalChecks = [];
 const browser = await chromium.launch({ channel: 'chrome' });
 try {
   const open = async (screen, hash, scale, width, height, userAgent) => {
@@ -77,6 +79,7 @@ try {
       ...(userAgent ? { userAgent } : {}),
     });
     const page = await context.newPage();
+    page.setDefaultTimeout(5000);
     page.on('pageerror', (e) => errors.push(`${screen}: ${e.message}`));
     await page.route('**/*', (r) =>
       r.request().url().startsWith(base) ? r.continue() : r.abort(),
@@ -103,8 +106,8 @@ try {
         await page.getByText(text, { exact: false }).first().waitFor({ timeout: 5000 });
         for (const f of await page.evaluate(measureReadability, scale))
           failures.push(`${screen}@${label}: ${f}`);
-        if (out && scale === 1)
-          await page.screenshot({ path: path.join(out, `ui-${screen}-390.png`), fullPage: true });
+        if (out && screen === 'my')
+          await page.screenshot({ path: path.join(out, `ui-${screen}-390-${label}.png`), fullPage: true });
       } catch (e) {
         failures.push(`${screen}@${label}: ${String(e.message).split('\n')[0]}`);
       }
@@ -115,12 +118,85 @@ try {
     const { page, context } = await open(screen, '', 1, 1440, 900);
     try {
       await page.getByText(text, { exact: false }).first().waitFor({ timeout: 5000 });
-      if (out)
-        await page.screenshot({ path: path.join(out, `ui-${screen}-1440.png`), fullPage: true });
+
     } catch (e) {
       failures.push(`${screen}: ${String(e.message).split('\n')[0]}`);
     }
     checked.push(screen);
+    await context.close();
+  }
+  // 真瀏覽器操作：三個複製鍵（含拒絕／缺少 Clipboard API 的退路）、編碼與 44px。
+  for (const mode of ['clipboard', 'reject', 'missing']) {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    await context.addInitScript((mode) => {
+      window.copied = [];
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: mode === 'missing' ? undefined : {
+        writeText: async text => {
+          if (mode === 'reject') throw new Error('合成剪貼簿拒絕');
+          window.copied.push(['clipboard', text]);
+        },
+      } });
+      document.execCommand = command => {
+        if (command !== 'copy') return false;
+        window.copied.push(['fallback', document.querySelector('textarea[readonly]').value]);
+        return true;
+      };
+    }, mode);
+    const page = await context.newPage();
+    page.setDefaultTimeout(5000);
+    page.on('pageerror', e => errors.push(`copy-${mode}: ${e.message}`));
+    await page.route('**/*', r => r.request().url().startsWith(base) ? r.continue() : r.abort());
+    try {
+      await page.goto(`${base}?screen=admin-notify`);
+      const card = page.locator('.att-draft').first();
+      await card.getByRole('button', { name: '複製收件人', exact: true }).waitFor();
+      for (const label of ['收件人', '主旨', '內文']) {
+        await card.getByRole('button', { name: `複製${label}`, exact: true }).click();
+      }
+      assert.equal(await card.getByRole('button', { name: '已複製', exact: true }).count(), 3);
+      const draft = await page.evaluate(() => window.attendanceFixture.drafts.student[0]);
+      assert.deepEqual(await page.evaluate(() => window.copied), [draft.to, draft.subject, draft.text].map(text => [mode === 'clipboard' ? 'clipboard' : 'fallback', text]));
+      assert.equal(await page.locator('textarea[readonly]').count(), 0, '退路用完移除文字框');
+      const url = new URL(await card.getByRole('link', { name: '開啟 Gmail' }).getAttribute('href'));
+      assert.equal(url.origin + url.pathname, 'https://mail.google.com/mail/');
+      for (const [param, field] of [['to', 'to'], ['su', 'subject'], ['body', 'text']]) assert.equal(url.searchParams.get(param), draft[field]);
+      assert.equal(url.searchParams.get('authuser'), 'teacher@example.edu');
+      const heights = await card.locator('.att-draft-actions button, .att-draft-actions a').evaluateAll(nodes => nodes.map(n => n.getBoundingClientRect().height));
+      assert.equal(heights.length, 5);
+      assert(heights.every(h => h >= 44), '複製、Gmail、標記按鈕均至少 44px');
+      await page.waitForTimeout(2100);
+      assert.equal(await card.getByRole('button', { name: '已複製', exact: true }).count(), 0, '兩秒後復原');
+      functionalChecks.push(`copy-${mode}, gmail, 44px`);
+    } catch (e) { failures.push(`copy-${mode}: ${e.message.split('\n')[0]}`); }
+    await context.close();
+  }
+  for (const screen of ['control-enabled', 'control-disabled', 'control-preview']) {
+    const { page, context } = await open(screen, '', 1, 1440, 900);
+    try {
+      if (screen === 'control-enabled') {
+        const button = page.getByRole('button', { name: /開始點名/ });
+        await button.getByLabel('待通知 3 封').waitFor();
+        if (out) await page.screenshot({ path: path.join(out, 'ui-control-pending-1440.png'), fullPage: true });
+        await page.evaluate(() => {
+          window.attendanceFixture.drafts.digest[0].ready = true;
+          window.dispatchEvent(new Event('focus'));
+        });
+        await button.getByLabel('待通知 4 封').waitFor();
+        await page.evaluate(() => {
+          window.attendanceFixture.drafts.student = [];
+          window.attendanceFixture.drafts.digest = [];
+          window.dispatchEvent(new Event('focus'));
+        });
+        await button.locator('.att-badge').waitFor({ state: 'detached' });
+        await button.click();
+        assert.equal(await page.evaluate(() => location.hash), '#attendance');
+      } else {
+        await page.getByRole('heading', { name: '授課控制台' }).waitFor();
+        assert.equal(await page.getByRole('button', { name: /開始點名/ }).count(), 0);
+        assert.deepEqual(await page.evaluate(() => window.attendanceFixture.calls), [], '旗標關或預覽不讀點名資料');
+      }
+      functionalChecks.push(screen);
+    } catch (e) { failures.push(`${screen}: ${e.message.split('\n')[0]}`); }
     await context.close();
   }
 } finally {
@@ -132,6 +208,7 @@ const result = {
   studentScreens: student.length * 2,
   teacherScreens: teacher.length,
   checked: checked.length,
+  functionalChecks,
   failures,
   pageErrors: errors,
 };

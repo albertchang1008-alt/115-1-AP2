@@ -1,5 +1,67 @@
 # 課堂點名 #67：實作報告（2026-11-19 更新：半自動通知）
 
+## Codex 審查與修正（11/23）
+### 給 Claude 的摘要
+- 未驗：整套 `npm run check`、真 Firestore Emulator、Ubuntu 非 root、教師手機實點，依交辦留給 3.8／Claude／教師；記憶體 race 不當成真並行 PASS。
+- 限制：本次 10 個程式／測試檔個人路徑 grep **0 筆**；全範圍 grep **11 筆既有命中**，與 50c5ead9 相同，未修改其他工作的腳本。
+- 審查修正四項：點名中的節次阻擋導師提示；學生舊紀錄不顯示撤銷；導師撤銷綁單次標記以擋舊分頁／雙按；導師標記在交易內重讀確認狀態。
+- 檔案：`functions/src/attendance.ts`、`functions/tests/attendance.test.cjs`；`shared/attendance.ts`、`src/{TeachingControl,AttendancePendingBadge,AttendanceAdmin}.tsx`。
+- 檔案：`tests/attendance.test.ts`、`tests/fixtures/attendance-ui.tsx`、`scripts/{attendance-ui-check,attendance-emulator-race}.mjs`；本報告。
+- 新增後端回歸 4 支，每項各一支；套回原版 50c5ead9 四支均 FAIL，修正後後端 **17/17 PASS**；前端點名 **10/10 PASS**，皆 0 skipped。
+- 自跑：functions build（67 函式）、前端 build（版本仍 1.15.8）、UI 39 畫面＋6 組互動回歸 **PASS**；記憶體 race 6×30 **pass:true**。
+- 原第 8–10 支確有驗內容與資料寫入、expect、並行標記、防越權、撤銷、補充只含新節次，並非只驗回傳形狀；不足之處由上述 4 支補強。
+- 未改：主旨「（補充）」、gmailAccount 及既有信件範本，依本次交辦明確接受；旗標仍預設關、無部署／寄信／正式資料寫入。
+- 偏離：全範圍 grep 既有 11 筆不能報 0；其餘無。舊測試報告先原樣 commit `3b54ab74 [Antigravity]`。
+- 抽查（最多 5 項）：①markDigest 交易重讀；②UndoNotified 的 digest logId；③學生 canUndo；④控制台數字與三種複製操作；⑤race present／absent 逐欄比對。
+
+### 審查發現與修正對照
+| 問題 | 修正與回歸證據 |
+|---|---|
+| 導師提示先過濾為 closed，漏掉同班正在點名且尚未確認的節次 | 保留當天全部正式節次判斷 ready／unconfirmed，只有 closed＋confirmed 的內容進草稿。新測試驗 open 阻擋提示、確認後恢復、trial 不影響。 |
+| 學生歷史通知都回 canUndo:true，後端卻只允許最新序號 | 讀目前該節該生的 notifySeq 決定 canUndo。新測試驗舊筆不顯示且後端拒絕、拒絕無寫入、24 小時整仍可撤銷、序號不倒退。 |
+| 導師歷次標記回相同 logId，撤銷總是作用於當下最新一筆，舊頁或重送可能撤到別筆 | 回應 log.id 改為文件 ID 加 `#標記索引`；交易內要求索引等於最新未撤銷標記。新測試驗舊頁拒絕、兩次並行撤銷僅一次成功、原先節次仍保留，另驗並行標記只記一次。 |
+| 導師標記在交易外查節次與設定，可使用與取消確認並行時的舊快照 | 交易內重讀每一個目標節次與導師設定，再判定可標記。新測試在查詢後／交易前取消確認，要求 stale=1 且不建立通知文件。 |
+| 控制台開始點名旁缺待通知數字 | 新元件 AttendancePendingBadge 使用與通知分頁相同的 pendingNotificationCount；回到頁面焦點／可見時重讀，卸載與較舊回應不能覆蓋新狀態。旗標關／preview 不請求。 |
+| race 以 JSON 字串比較 counts，鍵順序不同誤判 | 只改兩處比對條件為 present／absent 各自嚴格比較，未放寬其餘檢查。 |
+
+### 實跑與自修紀錄
+環境：macOS、Node v22.23.2。第一次 functions build／後端測試由宿主 Node v26.13.1 執行且 PASS，最終 functions build／後端測試改用指定 Node 22 重跑，前端 build／測試／UI 亦用 Node 22。
+
+| 指令／檢查 | 結果 |
+|---|---|
+| `npm --prefix functions run build` | PASS，67 函式，未連雲端 |
+| `node --test functions/tests/attendance.test.cjs` | 17 tests、17 PASS、0 FAIL、0 skipped |
+| `npx tsx --test tests/attendance.test.ts` | 10 tests、10 PASS、0 FAIL、0 skipped |
+| `npm run build` | PASS，version:check 1.15.8、tsc、vite；既有 bundle >900kB 提醒仍在 |
+| `node scripts/attendance-ui-check.mjs --out <os.tmpdir()/attendance-review-2026-11-23>` | pass:true；學生 34（390×844 預設／特大）＋教師 5＝39 畫面；6 組互動 PASS；failures／pageErrors 均空 |
+| `node scripts/attendance-emulator-race.mjs --memory` | pass:true、sawRaceWithinARound:true、6×30、failures／warnings 均空；只是腳本自檢 |
+| 鍵順序回歸（僅暫存 preload，將記憶體 counts 回傳改為 absent,present） | 6 回合 pass:true，與逐欄比對無關的檢查保留；暫存已清除 |
+| 原版注入對照（只在暫存中 transpile 50c5ead9 attendance.ts，未覆寫原始檔或編譯檔） | 4 支新增後端測試 0 PASS／4 FAIL；暫存已清除 |
+| `node --import tsx --test tests/teaching-deck-pages.test.ts` | 5 tests、5 PASS、0 FAIL、0 skipped（含 Chrome 28 頁授課流程） |
+| `git diff --check` | PASS |
+
+- UI 自修：第一次控制台關旗標案例等待了會被合成簡報標題替換的 heading，因此 timeout；改等待固定「授課控制台」heading，所有案例已重跑 PASS。沒有放寬功能斷言。
+- 沙箱自修：tsx CLI 的 IPC 與 Chrome 啟動被沙箱限制；以已核准的本機測試執行方式重跑通過。無需連正式資料或外部郵件。
+- 三個複製鍵逐一點選並比對原內容，分別驗證 Clipboard 正常、writeText 拒絕、Clipboard API 缺少三條路徑；退路 textarea 用完移除，兩秒後按鈕文字復原。
+- Gmail 只讀 href，不開外部頁面；比對收件人、主旨、含換行內文與帳號。另由前端第 9 支測試驗中文、換行、&、#、?、= 的 URL 往返。
+- 每張展開卡的複製三鍵、Gmail、標記合計五個操作高度皆 ≥44px。
+- 控制台真實元件驗初始 3、導師 ready 後回焦變 4、待通知清空隱藏、點開始點名導向；旗標關與 preview 不顯示入口、不讀點名 API。
+- 本次未改學生畫面文字／CSS；390 預設與特大自動可讀性全通過。按規則僅查看本次受影響的控制台徽章截圖一張，數字與「開始點名」並列無重疊；學生截圖只存證，教師手機實點仍待進行。
+
+### 路徑／移除代寄信自查
+- `grep -nE '/Users/|/private/tmp'` 對本次 10 個程式／測試檔：0 筆；新增行自查同為 0 筆，腳本使用系統暫存輸出參數，不寫死個人路徑。
+- `grep -rnE '/Users/|/private/tmp' functions/src src shared scripts tests`：11 筆；`git grep` 同範圍對 50c5ead9 也是 11 筆，皆為未修改的其他工作檔（含 prune-evidence、clean-release、classroom-reveal、micro-immuno、fluid／urinary 與 apply-final-ui）。此範圍不能聲稱 0。
+- 代寄信關鍵字自查：產品程式 0 筆；測試中仍保留確認舊端點不存在／舊設定被拒的負例斷言，不刪測試湊 0。
+
+### 證據與下一棒
+- 截圖保存至 **2026-11-30**；repo 外系統暫存目錄 `attendance-review-2026-11-23/`：`ui-result.json`、`ui-my-390-default.png`、`ui-my-390-xlarge.png`、`ui-control-pending-1440.png`。未將截圖／原始輸出加入 repo。
+- 根目錄協調檔與此 worktree 為不同工作樹；只改根目錄佇列 #67 並以根目錄 scripts/devlog.py 記週誌，保留其他未提交工作。
+- 交 Gemini 3.8 Flash 依 `ANTIGRAVITY_TASK_attendance-semiauto-test_ag38_2026-11-19.md` 重跑 A–D，以目前 feature/attendance HEAD 為準；正式 race 必須 pass:true 且 sawRaceWithinARound:true。
+- Emulator 撤銷一律傳 NotifyDrafts 回傳的 log.id；導師現在含 `#索引`，不可自行重組為文件 ID。
+- 第二輪報告寫 worktree `docs/attendance/SEMIAUTO_TEST_RUN_2.md`，保留舊報告。全套／Emulator／Linux 尚未由本次審查宣稱通過。
+
+---
+
 ## 半自動通知（2026-11-19 晚，Claude Opus 實作；教師 19:34 同意由 Claude 直接做）
 ### 給審查者的摘要
 - 依據：DECISIONS「2026-11-19 12:42 點名通知改半自動」與 `CODEX_TASK_attendance-semiauto_2026-11-19.md`（教師 3 題照推薦：一人一封、有〔開啟 Gmail〕、導師彙整全部節次確認後才提示）。

@@ -182,3 +182,11 @@ test('開啟 Gmail 網址：收件人、主旨、內文完整編碼；有指定�
   assert(!new URL(A.gmailComposeUrl('', mail)).searchParams.has('authuser'));
   assert(!('nextSendAt' in A) && !('validDailyTime' in A), '排程寄信已移除');
 });
+
+
+test('待通知數：控制台與通知分頁共用學生信＋ready 導師信，尚未確認不計', () => {
+  assert.equal(A.pendingNotificationCount({ student: [], digest: [] }), 0);
+  assert.equal(A.pendingNotificationCount({ student: [{}, {}, {}], digest: [
+    { ready: false }, { ready: true }, { ready: true }, {},
+  ] }), 5);
+});

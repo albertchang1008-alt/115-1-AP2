@@ -9,6 +9,7 @@ import {
   attendanceLimits,
   attendanceStatusLabel,
   gmailComposeUrl,
+  pendingNotificationCount,
   sessionLabel,
   taipeiDate,
   taipeiDateTime,
@@ -1028,7 +1029,7 @@ function NotifyView({ api, course, notify, onCount }: Props & { onCount: (n: num
     try {
       const d = await api.call<Drafts>('attendanceNotifyDrafts', { courseId: course.id });
       setSt(d);
-      onCount(d.student.length + d.digest.filter((g) => g.ready).length);
+      onCount(pendingNotificationCount(d));
       setCfg(await api.call<NotifyConfig>('attendanceMailConfig', { courseId: course.id }));
     } catch (e) {
       notify((e as Error).message);
@@ -1282,7 +1283,7 @@ export default function AttendanceAdmin(props: Props) {
   const refreshCount = async () => {
     try {
       const d = await props.api.call<Drafts>('attendanceNotifyDrafts', { courseId: props.course.id });
-      setPending(d.student.length + d.digest.filter((g) => g.ready).length);
+      setPending(pendingNotificationCount(d));
     } catch {
       // 數字只是提示；讀不到時不打擾老師
     }

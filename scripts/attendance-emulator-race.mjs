@@ -106,8 +106,8 @@ for (let round = 1; round <= rounds; round++) {
   // 3. counts 一致；回覆與紀錄一致
   const actual = { present: present.length, absent: raw.length - present.length };
   if (s.status !== 'closed' || s.settled !== true) fail('節次沒有完成結算');
-  if (JSON.stringify(s.counts) !== JSON.stringify(actual)) fail(`counts ${JSON.stringify(s.counts)} 與實際 ${JSON.stringify(actual)} 不一致`);
-  if (JSON.stringify(roster.session.counts) !== JSON.stringify(actual)) fail('名冊回傳的 counts 與實際不一致');
+  if (s.counts?.present !== actual.present || s.counts?.absent !== actual.absent) fail(`counts ${JSON.stringify(s.counts)} 與實際 ${JSON.stringify(actual)} 不一致`);
+  if (roster.session.counts?.present !== actual.present || roster.session.counts?.absent !== actual.absent) fail('名冊回傳的 counts 與實際不一致');
   for (let i = 1; i <= students; i++) {
     const r = raw.find((x) => x.email === member(i).email);
     const ok = replies[i - 1] === 'ok';

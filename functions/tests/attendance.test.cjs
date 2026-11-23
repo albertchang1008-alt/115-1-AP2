@@ -934,3 +934,93 @@ test('匯出：兩個不同課程的累加用明細檔表頭逐字相同、可�
   );
   await assert.rejects(x.call('attendanceExport', { kind: 'other' }));
 });
+
+
+// Codex 11/23 審查回歸：每個缺陷各自驗證實際狀態與拒絕後無寫入。
+async function confirmedPeriod(x, period) {
+  const session = await x.start({ period });
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: session.id, confirmed: true });
+  return session;
+}
+const markDraft = (x, draft) => x.call('attendanceMarkNotified', {
+  items: [{ draftId: draft.draftId, expect: draft.expect }],
+});
+
+test('審查：仍在點名中的節次阻擋導師提示，試簽不影響', async () => {
+  const x = setup();
+  await x.notifyCfg();
+  await confirmedPeriod(x, 3);
+  const open = await x.start({ period: 4 });
+  let d = await x.call('attendanceNotifyDrafts');
+  assert.deepEqual(d.digest.map(g => [g.ready, g.periods, g.unconfirmed]), [[false, [3], [4]]]);
+  assert.deepEqual(d.unconfirmedToday.map(s => s.id), [open.id]);
+  assert(!d.digest[0].text.includes('第 4 節'));
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: open.id, confirmed: true });
+  await x.start({ trial: true, period: 5 });
+  d = await x.call('attendanceNotifyDrafts');
+  assert.deepEqual(d.digest.map(g => [g.ready, g.periods]), [[true, [3, 4]]]);
+});
+
+test('審查：學生舊通知不顯示撤銷，最新通知在 24 小時邊界仍可撤銷且序號不退', async () => {
+  const x = setup();
+  const session = await confirmedPeriod(x, 3);
+  const draft = async () => (await x.call('attendanceNotifyDrafts')).student.find(m => m.to === 's1@example.edu');
+  await markDraft(x, await draft());
+  await x.call('attendanceSetStatus', { sessionId: session.id, emails: ['s1@example.edu'], status: 'present' });
+  x.tick(1);
+  await markDraft(x, await draft());
+  let logs = (await x.call('attendanceNotifyDrafts')).log.filter(l => l.to === 's1@example.edu');
+  assert.deepEqual(logs.map(l => [l.kind, l.canUndo]), [['correction', true], ['absent', false]]);
+  const before = structuredClone([...x.db.docs]);
+  await assert.rejects(x.call('attendanceUndoNotified', { logId: logs[1].id }), /之後已有新的通知紀錄/);
+  assert.deepEqual([...x.db.docs], before);
+  x.tick(86400000);
+  assert.equal((await x.call('attendanceNotifyDrafts')).log.find(l => l.id === logs[0].id).canUndo, true);
+  await x.call('attendanceUndoNotified', { logId: logs[0].id });
+  const r = x.db.docs.get(`courses/${COURSE}/attendance/${session.id}/records/s1@example.edu`);
+  assert.deepEqual([r.notifySeq, r.lastNotified], [2, 'absent']);
+});
+
+test('審查：導師撤銷綁定單次標記；舊分頁與並行雙按不可撤銷另一筆', async () => {
+  const x = setup();
+  await x.notifyCfg();
+  await confirmedPeriod(x, 3);
+  await markDraft(x, (await x.call('attendanceNotifyDrafts')).digest[0]);
+  const first = (await x.call('attendanceNotifyDrafts')).log.find(l => l.kind === 'digest');
+  await confirmedPeriod(x, 4);
+  const sup = (await x.call('attendanceNotifyDrafts')).digest[0];
+  const both = await Promise.all([markDraft(x, sup), markDraft(x, sup)]);
+  assert.equal(both.reduce((n, r) => n + r.marked, 0), 1);
+  assert.equal(both.reduce((n, r) => n + r.already, 0), 1);
+  const latest = (await x.call('attendanceNotifyDrafts')).log.find(l => l.kind === 'digest' && l.canUndo);
+  assert.notEqual(latest.id, first.id);
+  const before = structuredClone([...x.db.docs]);
+  await assert.rejects(x.call('attendanceUndoNotified', { logId: first.id }), /不是最新/);
+  assert.deepEqual([...x.db.docs], before);
+  const undo = await Promise.allSettled([1, 2].map(() => x.call('attendanceUndoNotified', { logId: latest.id })));
+  assert.equal(undo.filter(r => r.status === 'fulfilled').length, 1);
+  assert.equal(undo.filter(r => r.status === 'rejected').length, 1);
+  const record = x.db.docs.get(`courses/${COURSE}/attendanceMail/${sup.draftId}`);
+  assert.deepEqual(record.periods, [3]);
+  assert.equal(record.marks.length, 2);
+  assert(!record.marks[0].undoneAt && record.marks[1].undoneAt);
+  assert.deepEqual((await x.call('attendanceNotifyDrafts')).digest[0].periods, [4]);
+});
+
+test('審查：導師標記交易內重讀節次，並行取消確認回 stale 且不寫通知', async () => {
+  const x = setup();
+  await x.notifyCfg();
+  const session = await confirmedPeriod(x, 3);
+  const draft = (await x.call('attendanceNotifyDrafts')).digest[0];
+  const transaction = x.db.runTransaction;
+  x.db.runTransaction = async fn => {
+    const path = `courses/${COURSE}/attendance/${session.id}`;
+    const r = x.db.docs.get(path);
+    delete r.confirmedAt;
+    return transaction(fn);
+  };
+  assert.deepEqual(await markDraft(x, draft), { marked: 0, already: 0, stale: 1 });
+  assert(![...x.db.docs.keys()].some(k => k.includes('/attendanceMail/')));
+});

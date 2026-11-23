@@ -2,6 +2,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { AttendPage, AttendanceBanner, MyAttendancePage } from '../../src/Attendance';
+import TeachingControl from '../../src/TeachingControl';
 import AttendanceAdmin from '../../src/AttendanceAdmin';
 import '../../src/style.css';
 import '../../src/attendance.css';
@@ -126,9 +127,14 @@ const notifyDrafts = {
     },
   ],
 };
+const attendanceCalls: string[] = [];
+Object.assign(window, { attendanceFixture: { drafts: notifyDrafts, calls: attendanceCalls } });
+if (screen === 'control-disabled') course.features.attendance = false;
 const api: any = {
-  preview: false,
+  preview: screen === 'control-preview',
   async call(name: string, data: any) {
+    if (name.startsWith('attendance')) attendanceCalls.push(name);
+    if (name === 'getTeachingDeck') return { title: '示範簡報', slides: [{ id: 'demo', title: '示範', html: '<section>示範簡報</section>', notes: '', answerPage: false }] };
     if (name === 'attendanceCheckIn') {
       if (data.code) {
         if (screen === 'attend-wrong' || screen === 'banner-wrong')
@@ -267,5 +273,6 @@ else if (screen.startsWith('banner-'))
     </div>,
   );
 else if (screen === 'my') root.render(<MyAttendancePage api={api} course={course} />);
+else if (screen.startsWith('control-')) root.render(<TeachingControl api={api} course={course} notify={() => {}} changed={async () => {}} progress={null} />);
 else if (screen.startsWith('admin-')) root.render(<AdminAt view={screen.slice(6)} />);
 else root.render(<p>未知的畫面</p>);

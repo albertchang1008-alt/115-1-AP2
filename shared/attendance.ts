@@ -502,3 +502,11 @@ export function absentEmailsAt(
     .filter((x) => x.session.date === date && x.session.period === period)
     .flatMap((x) => x.records.filter((r) => r.status === 'absent').map((r) => r.email));
 }
+
+/** 通知分頁與授課控制台共用：學生信＋全部節次確認後可提示的導師信。 */
+export function pendingNotificationCount(drafts: {
+  student: unknown[];
+  digest: { ready?: boolean }[];
+}) {
+  return drafts.student.length + drafts.digest.filter((g) => g.ready).length;
+}

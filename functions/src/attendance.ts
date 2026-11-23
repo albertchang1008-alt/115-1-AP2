@@ -294,8 +294,8 @@ export function createAttendanceHandlers(
     `digest__${date}__${encodeURIComponent(classId)}`;
   /** 待通知清單：只看已確認的節次；學生信沿用 pendingStudentMail（紀錄與上次通知不一致時才需通知）。 */
   const notifyState = async (courseId: string, c: any, p: any, date: string) => {
-    const list = (await rollSessions(courseId, c)).filter((s) => s.status === 'closed');
-    const confirmed = list.filter((s) => s.confirmedAt);
+    const list = await rollSessions(courseId, c);
+    const confirmed = list.filter((s) => s.status === 'closed' && s.confirmedAt);
     const { cfg, ctx } = await mailContext(courseId, c, p);
     const student: Record<string, unknown>[] = [];
     const bySession = new Map<string, AttendanceRecord[]>();
@@ -449,18 +449,23 @@ export function createAttendanceHandlers(
     )
       bad('通知內容無效');
     const want = [...new Set(expect.periods as number[])].sort((a, b) => a - b);
-    const ok = new Set(
-      (await sessions(courseId).where('date', '==', date).get()).docs
-        .map((x) => x.data() as AttendanceSession)
-        .filter((s) => s.kind === 'roll' && s.status === 'closed' && s.confirmedAt && s.classIds.includes(classId))
-        .map((s) => s.period),
-    );
-    if (want.some((x) => !ok.has(x))) return 'stale' as const;
-    const mentor = ((await configRef(courseId).get()).data()?.mentors || {})[classId];
-    if (!mentor?.email) return 'stale' as const;
+    const eligible = (await sessions(courseId).where('date', '==', date).get()).docs
+      .map((x) => x.data() as AttendanceSession)
+      .filter((s) => s.kind === 'roll' && s.status === 'closed' && s.confirmedAt && s.classIds.includes(classId));
+    if (want.some((x) => !eligible.some((s) => s.period === x))) return 'stale' as const;
     const ref = mails(courseId).doc(draftId);
     return db.runTransaction(async (tx) => {
       const old = (await tx.get(ref)).data();
+      const mentor = ((await tx.get(configRef(courseId))).data()?.mentors || {})[classId];
+      if (!mentor?.email) return 'stale' as const;
+      // 確認狀態在同一交易內重讀；與取消確認並行時不可使用交易外的舊快照。
+      for (const period of want) {
+        const s = eligible.find((s) => s.period === period)!;
+        const cur = (await tx.get(sessionRef(courseId, s.id))).data() as AttendanceSession | undefined;
+        if (!cur || cur.kind !== 'roll' || cur.status !== 'closed' || !cur.confirmedAt ||
+            cur.date !== date || cur.period !== period || !cur.classIds.includes(classId))
+          return 'stale' as const;
+      }
       const covered: number[] = old?.periods || [];
       const fresh = want.filter((x) => !covered.includes(x));
       if (!fresh.length) return 'already' as const;
@@ -1070,7 +1075,7 @@ export function createAttendanceHandlers(
           // 新的在前（同一時間標記時也維持順序）
           [...marks.entries()].reverse().forEach(([i, k]) =>
             log.push({
-              id: m.id,
+              id: `${m.id}#${i}`,
               key: `${m.id}#${i}`,
               kind: 'digest',
               to: m.to,
@@ -1084,7 +1089,8 @@ export function createAttendanceHandlers(
               canUndo: i === last && !k.undoneAt && t - k.at <= DAY_MS,
             }),
           );
-        } else
+        } else {
+          const r = (await records(courseId, m.sessionId).doc(m.to).get()).data();
           log.push({
             id: m.id,
             key: m.id,
@@ -1097,8 +1103,9 @@ export function createAttendanceHandlers(
             status: m.status,
             markedAt: m.markedAt,
             byName: m.byName || '',
-            canUndo: m.status === 'marked' && t - m.markedAt <= DAY_MS,
+            canUndo: m.status === 'marked' && r?.notifySeq === m.seq && t - m.markedAt <= DAY_MS,
           });
+        }
       }
       log.sort((a: any, b: any) => b.markedAt - a.markedAt);
       return {
@@ -1140,7 +1147,12 @@ export function createAttendanceHandlers(
       const d = input(req.data, ['logId']);
       const courseId = req.data.courseId;
       if (typeof d.logId !== 'string' || !/^[^/]{1,400}$/.test(d.logId)) bad('紀錄編號無效');
-      const ref = mails(courseId).doc(d.logId as string);
+      // 導師每次標記共用一份文件；撤銷必須指向畫面上那一次，避免舊分頁或雙按撤銷別筆。
+      const digestLog = (d.logId as string).startsWith('digest__')
+        ? (d.logId as string).match(/^(.*)#(\d+)$/)
+        : null;
+      if ((d.logId as string).startsWith('digest__') && !digestLog) bad('紀錄編號無效');
+      const ref = mails(courseId).doc(digestLog ? digestLog[1] : d.logId as string);
       const head = (await ref.get()).data() as any;
       if (!head) throw new HttpsError('not-found', '找不到這筆通知紀錄');
       if (head.kind === 'digest') {
@@ -1148,7 +1160,8 @@ export function createAttendanceHandlers(
           const m = (await tx.get(ref)).data() as any;
           const marks: any[] = (m?.marks || []).map((k: any) => ({ ...k }));
           const i = marks.map((k, j) => (k.undoneAt ? -1 : j)).reduce((a, b) => Math.max(a, b), -1);
-          if (i < 0) throw new HttpsError('failed-precondition', '這筆不能撤銷');
+          if (i < 0 || !digestLog || Number(digestLog[2]) !== i)
+            throw new HttpsError('failed-precondition', '這筆不是最新的通知紀錄或已撤銷，請重新整理');
           const t = now();
           if (t - marks[i].at > DAY_MS)
             throw new HttpsError('failed-precondition', '超過 24 小時，不能撤銷');

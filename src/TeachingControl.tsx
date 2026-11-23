@@ -1,3 +1,4 @@
+import AttendancePendingBadge from './AttendancePendingBadge';
 import QuestionManagerPanel from './QuestionManagerPanel';
 import {
   TeacherInteraction,
@@ -286,6 +287,7 @@ export default function TeachingControl({
                 {featureEnabled(course, 'attendance') && (
                   <button type="button" onClick={() => { location.hash = 'attendance'; }}>
                     開始點名
+                    <AttendancePendingBadge api={api} course={course} />
                   </button>
                 )}
                 <button
