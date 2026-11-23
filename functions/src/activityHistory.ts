@@ -12,12 +12,12 @@ const chapterText = (v: unknown) => typeof v === 'string' && v.length > 0 && v.l
 const at = (v: any): number => typeof v === 'number' ? v : v && typeof v.toMillis === 'function' ? v.toMillis() : v && typeof v._seconds === 'number' ? v._seconds * 1000 : NaN;
 export const ATTEMPT_DETAIL_LIMIT = 50;
 
-/** 只回 17 份新教材（materialVersion 以 -ag1 結尾）。 */
+/** 只回 Antigravity 互動教材，materialVersion 以 -agN 結尾。 */
 export function backfillVersions(course: Course | undefined) {
   if (!course) return [];
   const versions = new Set<string>();
-  for (const chapter of Object.values(chaptersOf(course))) for (const a of chapter.activities || []) if (a.tracking === 'interactive' && /-ag1$/.test(a.materialVersion || '')) versions.add(a.materialVersion!);
-  for (const unit of course.units || []) for (const a of unit.activities || []) if (a.tracking === 'interactive' && /-ag1$/.test(a.materialVersion || '')) versions.add(a.materialVersion!);
+  for (const chapter of Object.values(chaptersOf(course))) for (const a of chapter.activities || []) if (a.tracking === 'interactive' && /-ag\d+$/.test(a.materialVersion || '')) versions.add(a.materialVersion!);
+  for (const unit of course.units || []) for (const a of unit.activities || []) if (a.tracking === 'interactive' && /-ag\d+$/.test(a.materialVersion || '')) versions.add(a.materialVersion!);
   return [...versions].sort();
 }
 
@@ -59,12 +59,12 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
       return { found: false, materialVersion: version, recorded: false, sessions: [], history: null, backfilledAt: null };
     }),
 
-    /** 一次性補登：17 份新教材 11/04 起、沒有 sessionId 的舊事件，以 30 分鐘間隔切成推估的「次」。 */
+    /** 一次性補登：Antigravity 互動教材 11/04 起、沒有 sessionId 的舊事件，以 30 分鐘間隔切成推估的「次」。 */
     backfillActivityHistory: onCall({ ...options, timeoutSeconds: 540, memory: '1GiB' }, async (req) => {
       const courseId = token(req.data?.courseId, '課程'), dryRun = req.data?.dryRun !== false, force = req.data?.force === true;
       const { c } = await access(req, courseId, true);
       const versions = backfillVersions(c.published);
-      if (!versions.length) fail('課程沒有 -ag1 互動教材');
+      if (!versions.length) fail('課程沒有 -agN 互動教材');
       const diags = await db.collection(`courses/${courseId}/diagnostics`).where('materialVersion', 'in', versions).get();
       const stats = { versions: versions.length, diagnostics: diags.size, students: new Set<string>(), skipped: 0, reads: diags.size, writes: 0, estimatedSessions: 0, estimatedCompletions: 0 };
       const now = Date.now();
