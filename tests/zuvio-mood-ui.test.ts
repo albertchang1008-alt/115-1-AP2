@@ -236,3 +236,80 @@ test('R1/R2/R5：Report 元件實際渲染無成績場次、逐題練過比較�
     await browser.close();
   }
 });
+
+test('V3 UI：TeacherZuvioMoodPanel 切到無場次考卷或清空場次時清除舊 live 且停用結束鈕，closed=false 不誤報已結束', async () => {
+  const bundle = buildSync({
+    stdin: {
+      contents: `
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { TeacherZuvioMoodPanel } from './src/ClassroomInteraction';
+        window.__calls = [];
+        const exams = [
+          { id: 'e1', title: '考卷一', sittings: [{ id: 's1', label: 'A場', classIds: ['A'], date: '2026-11-23' }] },
+          { id: 'e2', title: '無場次考卷', sittings: [] },
+        ];
+        const api = {
+          call: async (name, data) => {
+            window.__calls.push({ name, data });
+            if (name === 'zuvioListExams') return exams;
+            if (name === 'zuvioGetMoodLive') {
+              if (data.examId && !data.sittingId) throw new Error('請同時指定考卷與場次');
+              return {
+                state: { open: true, examId: 'e1', sittingId: 's1', sittingLabel: 'A場', classIds: ['A'], closesAt: Date.now() + 60000, eligibleCount: 2 },
+                eligibleCount: 2,
+                totalResponded: 1,
+                counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 1, gray_fog: 0 },
+              };
+            }
+            if (name === 'zuvioCloseMood') return { ok: true, closed: false };
+            return {};
+          },
+        };
+        const course = { id: 'C1', classIds: ['A'], classNames: { A: '甲班' }, features: { zuvioExams: true, zuvioMood: true } };
+        createRoot(document.getElementById('root')).render(React.createElement(TeacherZuvioMoodPanel, { api, course }));
+      `,
+      resolveDir: process.cwd(),
+      loader: 'tsx',
+    },
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+    define: { 'process.env.NODE_ENV': '"production"' },
+  }).outputFiles[0].text;
+
+  const html = '<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div></body></html>';
+  const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.addScriptTag({ content: bundle });
+    await page.waitForSelector('select[aria-label="選擇 Zuvio 考卷"]');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+
+    // 1. 切到無場次考卷 e2 -> 不得送出單參數 getMoodLive，舊 live 清除、結束鈕停用
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e2');
+    await page.waitForFunction(() => !(document.body.textContent || '').includes('已填 1 / 應填 2'));
+    assert.equal(await page.locator('button:has-text("結束簽到")').isDisabled(), true);
+
+    // 2. 切回 e1 再清空場次 -> 舊 live 清除、結束鈕停用
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e1');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+    await page.selectOption('select[aria-label="選擇場次"]', '');
+    await page.waitForFunction(() => !(document.body.textContent || '').includes('已填 1 / 應填 2'));
+    assert.equal(await page.locator('button:has-text("結束簽到")').isDisabled(), true);
+
+    // 3. 選回 s1 並按結束（模擬後端 closed=false）-> 不可誤報已結束，且無任何單參數 getMoodLive 呼叫
+    await page.selectOption('select[aria-label="選擇場次"]', 's1');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+    await page.click('button:has-text("結束簽到")');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('未關閉其他場次'));
+    const calls = await page.evaluate(() => (window as any).__calls);
+    const badLive = calls.filter((c: any) => c.name === 'zuvioGetMoodLive' && Boolean(c.data?.examId) !== Boolean(c.data?.sittingId));
+    assert.equal(badLive.length, 0);
+    await page.close();
+  } finally {
+    await browser.close();
+  }
+});

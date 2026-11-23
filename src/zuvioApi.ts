@@ -42,7 +42,7 @@ export interface ZuvioApi {
   careList(examId: string, sittingId: string, classId?: string, threshold?: number): Promise<{ entries: CareListEntry[]; threshold: number; preExamIncomplete?: boolean }>;
   exportCsv(examId: string, sittingIds: string[], kind: 'itemAnalysis' | 'researchAnon' | 'researchNamed', classId?: string): Promise<{ filename: string; csv: string }>;
   openMood(examId: string, sittingId: string, durationMinutes?: number): Promise<any>;
-  closeMood(sittingId?: string): Promise<{ ok: boolean }>;
+  closeMood(sittingId?: string): Promise<{ ok: boolean; closed?: boolean }>;
   getMoodLive(examId?: string, sittingId?: string): Promise<MoodLiveState>;
   deleteMood(examId: string, sittingId: string): Promise<{ ok: boolean }>;
   compare(examId: string, a: string, b: string): Promise<ReturnType<typeof compareSittings>>;

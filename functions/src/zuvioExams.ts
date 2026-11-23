@@ -365,11 +365,17 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     }
     const previewId = examIdOf(req.data.previewId);
     if (built.blocking.length) fail('資料仍有問題，不能匯入');
+    // D1：先完成保護題查詢與試題分析計算，再寫入成績與同交易提交分析摘要，避免分析失敗卻已提交成績。
+    const maskedSet = await protectedIds(courseId, c);
+    const { view: rawView, masked } = await buildView(courseId, e, maskedSet);
+    const maskedView = maskView(rawView, masked);
+    const maskedKey = sha([...masked].sort().join(','));
+    const analysis = analyzeExam(maskedView, [...built.results.values()]);
     const prevRef = ref.collection('previews').doc(previewId);
     const nextRevision = Math.max(sitting.results?.revision || 0, sitting.deletedRevision || 0) + 1;
     const gen = previewId;
     const resultsCol = ref.collection('results');
-    // 先寫新一代（以 revision 區分），再於交易中切換有效版本；舊代之後清掉。
+    // 先寫新一代（以 revision 區分），再於交易中切換有效版本與分析摘要；舊代之後清掉。
     const entries = [...built.results];
     for (let i = 0; i < entries.length; i += 400) {
       const batch = db.batch();
@@ -380,30 +386,25 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     await db.runTransaction(async (tx) => {
       const [pv, es] = [await tx.get(prevRef), await tx.get(ref)];
       const v = pv.data();
-      const e = es.data()!;
-      const cur = (e.sittings || []).find((s: any) => s.id === sittingId);
+      const exData = es.data()!;
+      const cur = (exData.sittings || []).find((s: any) => s.id === sittingId);
       if (!v || v.teacherUid !== p.uid || v.sittingId !== sittingId || v.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
       if (v.payloadSha !== payloadSha || v.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
-      if (!cur || (cur.results?.revision || 0) !== v.revision || e.archived) fail('成績已被其他操作變更，請重新預覽');
-      const results = { importedAt: Date.now(), revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
-      tx.update(ref, { sittings: e.sittings.map((s: any) => (s.id === sittingId ? { ...s, results } : s)) });
+      if (!cur || (cur.results?.revision || 0) !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
+      const now = Date.now();
+      const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
+      tx.update(ref, { sittings: exData.sittings.map((s: any) => (s.id === sittingId ? { ...s, results } : s)) });
+      tx.set(ref.collection('analysis').doc(sittingId), {
+        revision: nextRevision,
+        gen,
+        analysisVersion: ANALYSIS_CACHE_VERSION,
+        maskedKey,
+        analysis,
+        computedAt: now,
+      });
       tx.delete(prevRef);
     });
     await cleanup(resultsCol, sittingId, gen);
-    // D1：匯入時計算單場試題分析摘要並快取於場次分析文件，避免每次開報表／CSV 重算。
-    const maskedSet = await protectedIds(courseId, c);
-    const { view: rawView, masked } = await buildView(courseId, e, maskedSet);
-    const maskedView = maskView(rawView, masked);
-    const maskedKey = sha([...masked].sort().join(','));
-    const analysis = analyzeExam(maskedView, [...built.results.values()]);
-    await ref.collection('analysis').doc(sittingId).set({
-      revision: nextRevision,
-      gen,
-      analysisVersion: ANALYSIS_CACHE_VERSION,
-      maskedKey,
-      analysis,
-      computedAt: Date.now(),
-    });
     return { ok: true, matched: built.results.size };
   });
   async function cleanup(col: FirebaseFirestore.CollectionReference, sittingId: string, keepGen: string) {
@@ -458,29 +459,36 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const sittingId = examIdOf(req.data.sittingId);
     const mins = req.data.durationMinutes === undefined ? 10 : req.data.durationMinutes;
     if (typeof mins !== 'number' || !Number.isInteger(mins) || mins < 1 || mins > 120) bad('開放分鐘數需為 1–120 整數');
-    const snap = await examRef(courseId, examId).get();
+    const exRef = examRef(courseId, examId);
+    const snap = await exRef.get();
     if (!snap.exists) fail('找不到考卷');
-    const e = snap.data()!;
-    if (e.archived) fail('考卷已封存');
-    const sitting = (e.sittings || []).find((s: any) => s.id === sittingId);
-    if (!sitting) fail('找不到場次');
-    const roster = await classRosterDocs(courseId, c, sitting.classIds);
-    const now = Date.now();
-    const closesAt = now + mins * 60 * 1000;
-    const stateDoc = {
-      open: true,
-      examId,
-      sittingId,
-      sittingLabel: sitting.label,
-      classIds: sitting.classIds,
-      openedAt: now,
-      closesAt,
-      closedAt: null,
-      eligibleCount: roster.length,
-    };
+    const ePre = snap.data()!;
+    if (ePre.archived) fail('考卷已封存');
+    const sittingPre = (ePre.sittings || []).find((s: any) => s.id === sittingId);
+    if (!sittingPre) fail('找不到場次');
+    const roster = await classRosterDocs(courseId, c, sittingPre.classIds);
     const classroomStateRef = db.doc(`courses/${courseId}/classroomState/current`);
+    let stateDoc: any;
     await db.runTransaction(async (tx) => {
-      const cs = await tx.get(classroomStateRef);
+      const [exSnap, cs] = [await tx.get(exRef), await tx.get(classroomStateRef)];
+      if (!exSnap.exists) fail('找不到考卷');
+      const e = exSnap.data()!;
+      if (e.archived) fail('考卷已封存');
+      const sitting = (e.sittings || []).find((s: any) => s.id === sittingId);
+      if (!sitting) fail('找不到場次');
+      const now = Date.now();
+      const closesAt = now + mins * 60 * 1000;
+      stateDoc = {
+        open: true,
+        examId,
+        sittingId,
+        sittingLabel: sitting.label,
+        classIds: sitting.classIds,
+        openedAt: now,
+        closesAt,
+        closedAt: null,
+        eligibleCount: roster.length,
+      };
       const curUntil = cs.data()?.pollingActiveUntil || 0;
       tx.set(moodStateRef(courseId), stateDoc);
       tx.set(classroomStateRef, { pollingActiveUntil: Math.max(curUntil, now + 3 * 60 * 60 * 1000) }, { merge: true });
@@ -910,13 +918,19 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     }
     const analysis = analyzeExam(maskedView, resultsForSitting);
     if (gen) {
-      await analysisRef.set({
-        revision: rev,
-        gen,
-        analysisVersion: ANALYSIS_CACHE_VERSION,
-        maskedKey,
-        analysis,
-        computedAt: Date.now(),
+      await db.runTransaction(async (tx) => {
+        const exSnap = await tx.get(ref);
+        if (!exSnap.exists) return;
+        const curSitting = (exSnap.data()?.sittings || []).find((s: any) => s.id === sitting.id);
+        if (!curSitting?.results || curSitting.results.revision !== rev || curSitting.results.gen !== gen) return;
+        tx.set(analysisRef, {
+          revision: rev,
+          gen,
+          analysisVersion: ANALYSIS_CACHE_VERSION,
+          maskedKey,
+          analysis,
+          computedAt: Date.now(),
+        });
       });
     }
     return analysis;

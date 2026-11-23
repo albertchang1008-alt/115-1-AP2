@@ -1088,7 +1088,7 @@ export function TeacherInteraction({
   );
 }
 
-function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
+export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
   const [exams, setExams] = useState<ExamSummary[]>([]);
   const [examId, setExamId] = useState('');
   const [sittingId, setSittingId] = useState('');
@@ -1121,12 +1121,18 @@ function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
 
   useEffect(() => {
     if (!moodOn) return;
+    if (examId && !sittingId) {
+      setLive(null);
+      return;
+    }
     let alive = true;
     const poll = async () => {
       try {
         const res = await zApi.getMoodLive(examId || undefined, sittingId || undefined);
         if (alive) setLive(res);
-      } catch { /* ignore */ }
+      } catch {
+        if (alive) setLive(null);
+      }
     };
     void poll();
     const t = setInterval(() => void poll(), live?.state?.open ? 2500 : 8000);
@@ -1174,14 +1180,16 @@ function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Course }) {
   };
 
   const closeMood = async () => {
-    if (busy) return;
+    const targetSittingId = sittingId || live?.state?.sittingId || '';
+    if (busy || !targetSittingId || !live?.state?.open) return;
+    if (sittingId && live?.state?.sittingId !== sittingId) return;
     setBusy(true);
     setMsg('');
     try {
-      await zApi.closeMood(sittingId || undefined);
-      const res = await zApi.getMoodLive(examId || undefined, sittingId || undefined);
+      const closedRes = await zApi.closeMood(targetSittingId);
+      const res = examId && !sittingId ? null : await zApi.getMoodLive(examId || undefined, sittingId || undefined);
       setLive(res);
-      setMsg('已結束課前情緒簽到');
+      setMsg(closedRes.closed !== false ? '已結束課前情緒簽到' : '目前開放場次已變更或已結束，未關閉其他場次');
     } catch (e: any) {
       setMsg(e?.message || '結束失敗');
     } finally {

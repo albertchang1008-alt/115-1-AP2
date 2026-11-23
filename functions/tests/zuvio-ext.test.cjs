@@ -1011,3 +1011,137 @@ test('D1：匯入成績時計算並快取單場試題分析摘要，report／ite
   await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sitA.id });
   assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sitA.id}`), undefined);
 });
+
+test('V2 競態與解除封存：開啟與封存交錯時交易保證一致，解除封存後不恢復舊卡片', async () => {
+  const { db, h, call } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000007';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'V2競態',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sit = await call(h.zuvioCreateSitting, 'T1', {
+    courseId: 'C1',
+    examId,
+    label: 'A場',
+    date: '2026-11-23',
+    classIds: ['A'],
+    startsAt: Date.now(),
+  });
+
+  // 1. 模擬開啟進入交易前被封存搶先：封存完成後，開啟交易必須失敗且不寫入 open=true
+  const origRunTx = db.runTransaction.bind(db);
+  let archivedDuringOpen = false;
+  db.runTransaction = async (fn) => {
+    if (!archivedDuringOpen) {
+      archivedDuringOpen = true;
+      await origRunTx(async (tx) => {
+        tx.update(db.doc(`courses/C1/zuvioExams/${examId}`), { archived: true });
+      });
+    }
+    return origRunTx(fn);
+  };
+  await assert.rejects(() => call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: sit.id }), /封存/);
+  db.runTransaction = origRunTx;
+  assert.equal(db.data.get('courses/C1/zuvioMoodState/current'), undefined);
+
+  // 2. 先解除封存、成功開啟，再封存、再解除封存：解除封存後不可恢復舊卡片
+  await call(h.zuvioArchiveExam, 'T1', { courseId: 'C1', examId, archived: false });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: sit.id });
+  assert.equal((await call(h.zuvioGetActiveMood, 'uid1', { courseId: 'C1' })).active, true);
+  await call(h.zuvioArchiveExam, 'T1', { courseId: 'C1', examId, archived: true });
+  assert.equal((await call(h.zuvioGetActiveMood, 'uid1', { courseId: 'C1' })).active, false);
+  await call(h.zuvioArchiveExam, 'T1', { courseId: 'C1', examId, archived: false });
+  assert.equal((await call(h.zuvioGetActiveMood, 'uid1', { courseId: 'C1' })).active, false, '解除封存後不可恢復舊卡片');
+});
+
+test('V3 後端：單參數請求回 invalid-argument、同卷跨場與省略參數狀態一致', async () => {
+  const { h, call } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000008';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'V3同卷跨場',
+    score: 100,
+    classIds: ['A', 'B'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sitA = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 2000 });
+  const sitB = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'B場', date: '2026-11-23', classIds: ['B'], startsAt: Date.now() - 1000 });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: sitA.id });
+  await call(h.zuvioSubmitMood, 'uid1', { courseId: 'C1', sittingId: sitA.id, mood: 'green_flow' });
+  await call(h.zuvioCloseMood, 'T1', { courseId: 'C1', sittingId: sitA.id });
+  await call(h.zuvioOpenMood, 'T1', { courseId: 'C1', examId, sittingId: sitB.id });
+
+  await assert.rejects(() => call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1', examId }), /同時指定/);
+  await assert.rejects(() => call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1', sittingId: sitA.id }), /同時指定/);
+
+  const liveA = await call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1', examId, sittingId: sitA.id });
+  assert.equal(liveA.state.sittingId, sitA.id);
+  assert.equal(liveA.state.open, false);
+  assert.equal(liveA.eligibleCount, 2);
+  assert.equal(liveA.totalResponded, 1);
+
+  const liveOmitted = await call(h.zuvioGetMoodLive, 'T1', { courseId: 'C1' });
+  assert.equal(liveOmitted.state.sittingId, sitB.id);
+  assert.equal(liveOmitted.state.open, true);
+  assert.equal(liveOmitted.eligibleCount, 1);
+  assert.equal(liveOmitted.totalResponded, 0);
+});
+
+test('D1 原子性與延遲回填防護：保護名單超限失敗不提交成績也不耗預覽；刪除或新代後不重建覆蓋', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000009';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1原子性',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sit = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const parsed = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => 0));
+  const prev = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+
+  // 1. 製造保護名單超限（51 筆測驗文件），confirm=true 必須失敗且不提交成績、不消耗預覽
+  for (let i = 0; i < 51; i++) db.data.set(`courses/C1/assessments/a_${i}`, { id: `a_${i}` });
+  await assert.rejects(
+    () => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: true, previewId: prev.previewId }),
+    /測驗/,
+  );
+  const exAfterFail = db.data.get(`courses/C1/zuvioExams/${examId}`);
+  assert.equal(exAfterFail.sittings[0].results, undefined, '失敗時不得提交成績');
+  assert.ok(db.data.get(`courses/C1/zuvioExams/${examId}/previews/${prev.previewId}`), '失敗時不得消耗預覽');
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined);
+
+  // 清掉多餘測驗文件後正常匯入成功，成績與摘要同交易存在
+  for (let i = 0; i < 51; i++) db.data.delete(`courses/C1/assessments/a_${i}`);
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed, confirm: true, previewId: prev.previewId });
+  assert.ok(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`)?.analysis);
+
+  // 2. 模擬延遲懶回填（先刪 analysis 觸發 report 回填，但在回填寫入交易前刪除成績）：回填不得重建 analysis
+  db.data.delete(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`);
+  const origRunTx = db.runTransaction.bind(db);
+  let deletedDuringBackfill = false;
+  db.runTransaction = async (fn) => {
+    if (!deletedDuringBackfill) {
+      deletedDuringBackfill = true;
+      await origRunTx(async (tx) => {
+        const ref = db.doc(`courses/C1/zuvioExams/${examId}`);
+        const ex = (await tx.get(ref)).data();
+        tx.update(ref, {
+          sittings: ex.sittings.map((s) => (s.id === sit.id ? { id: s.id, label: s.label, date: s.date, startsAt: s.startsAt, classIds: s.classIds, deletedRevision: 2 } : s)),
+        });
+      });
+    }
+    return origRunTx(fn);
+  };
+  await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id] });
+  db.runTransaction = origRunTx;
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined, '刪除後延遲回填不得重建摘要');
+});
