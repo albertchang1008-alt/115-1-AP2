@@ -359,23 +359,37 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const ref = examRef(courseId, examId);
     if (req.data.confirm !== true) {
       const previewId = randomUUID();
+      const baseRevision = Math.max(sitting.results?.revision || 0, sitting.deletedRevision || 0);
       if (!built.blocking.length)
-        await ref.collection('previews').doc(previewId).set({ teacherUid: p.uid, sittingId, payloadSha, rosterSha, revision: sitting.results?.revision || 0, expiresAt: Date.now() + PREVIEW_MS });
+        await ref.collection('previews').doc(previewId).set({ teacherUid: p.uid, sittingId, payloadSha, rosterSha, revision: baseRevision, expiresAt: Date.now() + PREVIEW_MS });
       return { previewId: built.blocking.length ? '' : previewId, matched: built.results.size, counts: built.counts, blocking: built.blocking, details: built.details, garbled: match.garbled, replaces: !!sitting.results };
     }
     const previewId = examIdOf(req.data.previewId);
     if (built.blocking.length) fail('資料仍有問題，不能匯入');
-    // D1：先完成保護題查詢與試題分析計算，再寫入成績與同交易提交分析摘要，避免分析失敗卻已提交成績。
-    const maskedSet = await protectedIds(courseId, c);
-    const { view: rawView, masked } = await buildView(courseId, e, maskedSet);
-    const maskedView = maskView(rawView, masked);
-    const maskedKey = sha([...masked].sort().join(','));
-    const analysis = analyzeExam(maskedView, [...built.results.values()]);
     const prevRef = ref.collection('previews').doc(previewId);
-    const nextRevision = Math.max(sitting.results?.revision || 0, sitting.deletedRevision || 0) + 1;
-    const gen = previewId;
+    // 先驗證預覽有效與代次一致，且每次確認產生獨立的 gen，避免重送失敗預覽覆寫有效明細。
+    const preCheck = await prevRef.get();
+    const pvPre = preCheck.data();
+    const curBaseRev = Math.max(sitting.results?.revision || 0, sitting.deletedRevision || 0);
+    if (!pvPre || pvPre.teacherUid !== p.uid || pvPre.sittingId !== sittingId || pvPre.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
+    if (pvPre.payloadSha !== payloadSha || pvPre.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
+    if (curBaseRev !== pvPre.revision || e.archived) fail('成績已被其他操作變更，請重新預覽');
+
+    // D1：僅在開啟情緒／試題分析功能時計算單場分析摘要（保留 #61 既有匯入不受保護名單上限阻斷）。
+    let analysisPayload: { maskedKey: string; analysis: ReturnType<typeof analyzeExam> } | null = null;
+    if (c.features?.zuvioMood) {
+      const maskedSet = await protectedIds(courseId, c);
+      const { view: rawView, masked } = await buildView(courseId, e, maskedSet);
+      const maskedView = maskView(rawView, masked);
+      const maskedKey = sha([...masked].sort().join(','));
+      const analysis = analyzeExam(maskedView, [...built.results.values()]);
+      analysisPayload = { maskedKey, analysis };
+    }
+
+    const nextRevision = curBaseRev + 1;
+    const gen = randomUUID();
     const resultsCol = ref.collection('results');
-    // 先寫新一代（以 revision 區分），再於交易中切換有效版本與分析摘要；舊代之後清掉。
+    // 先寫新一代（以 revision 與獨立 gen 區分），再於交易中切換有效版本與分析摘要；舊代之後清掉。
     const entries = [...built.results];
     for (let i = 0; i < entries.length; i += 400) {
       const batch = db.batch();
@@ -388,28 +402,35 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const v = pv.data();
       const exData = es.data()!;
       const cur = (exData.sittings || []).find((s: any) => s.id === sittingId);
+      const curRev = Math.max(cur?.results?.revision || 0, cur?.deletedRevision || 0);
       if (!v || v.teacherUid !== p.uid || v.sittingId !== sittingId || v.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
       if (v.payloadSha !== payloadSha || v.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
-      if (!cur || (cur.results?.revision || 0) !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
+      if (!cur || curRev !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
       const now = Date.now();
       const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
       tx.update(ref, { sittings: exData.sittings.map((s: any) => (s.id === sittingId ? { ...s, results } : s)) });
-      tx.set(ref.collection('analysis').doc(sittingId), {
-        revision: nextRevision,
-        gen,
-        analysisVersion: ANALYSIS_CACHE_VERSION,
-        maskedKey,
-        analysis,
-        computedAt: now,
-      });
+      if (analysisPayload) {
+        tx.set(ref.collection('analysis').doc(sittingId), {
+          revision: nextRevision,
+          gen,
+          analysisVersion: ANALYSIS_CACHE_VERSION,
+          maskedKey: analysisPayload.maskedKey,
+          analysis: analysisPayload.analysis,
+          computedAt: now,
+        });
+      }
       tx.delete(prevRef);
     });
-    await cleanup(resultsCol, sittingId, gen);
+    await cleanup(resultsCol, sittingId, nextRevision);
     return { ok: true, matched: built.results.size };
   });
-  async function cleanup(col: FirebaseFirestore.CollectionReference, sittingId: string, keepGen: string) {
+  async function cleanup(col: FirebaseFirestore.CollectionReference, sittingId: string, beforeRevision: number) {
     const snap = await col.where('sittingId', '==', sittingId).get();
-    const stale = snap.docs.filter((d) => d.data().gen !== keepGen);
+    // 僅清理已被此代次取代的舊代明細（revision < beforeRevision），不得誤刪後來或待提交的較新代次。
+    const stale = snap.docs.filter((d) => {
+      const rev = d.data().revision;
+      return typeof rev === 'number' && rev < beforeRevision;
+    });
     for (let i = 0; i < stale.length; i += 400) {
       const b = db.batch();
       stale.slice(i, i + 400).forEach((d) => b.delete(d.ref));
@@ -422,14 +443,17 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const examId = examIdOf(req.data.examId);
     const sittingId = examIdOf(req.data.sittingId);
     const ref = examRef(courseId, examId);
+    let deletedRevision = 0;
     await db.runTransaction(async (tx) => {
       const s = await tx.get(ref);
       if (!s.exists) fail('找不到考卷');
       const e = s.data()!;
-      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision: (x.results?.revision || x.deletedRevision || 0) + 1 } : x)) });
+      const target = (e.sittings || []).find((x: any) => x.id === sittingId);
+      deletedRevision = Math.max(target?.results?.revision || 0, target?.deletedRevision || 0) + 1;
+      tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision } : x)) });
       tx.delete(ref.collection('analysis').doc(sittingId));
     });
-    await cleanup(ref.collection('results'), sittingId, '');
+    await cleanup(ref.collection('results'), sittingId, deletedRevision);
     return { ok: true };
   });
 

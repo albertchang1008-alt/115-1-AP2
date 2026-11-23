@@ -313,3 +313,90 @@ test('V3 UI：TeacherZuvioMoodPanel 切到無場次考卷或清空場次時清�
     await browser.close();
   }
 });
+
+test('V3 UI 延遲與切場：A 切 B 時延遲 B 不先顯示 A 舊統計；結束／開啟未回時切場，放行舊回應不覆蓋目前畫面', async () => {
+  const bundle = buildSync({
+    stdin: {
+      contents: `
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { TeacherZuvioMoodPanel } from './src/ClassroomInteraction';
+        const exams = [
+          { id: 'e1', title: '考卷A', sittings: [{ id: 's1', label: 'A場', classIds: ['A'], date: '2026-11-23' }] },
+          { id: 'e2', title: '考卷B', sittings: [{ id: 's2', label: 'B場', classIds: ['B'], date: '2026-11-23' }] },
+          { id: 'e3', title: '無場次', sittings: [] },
+        ];
+        const api = {
+          call: async (name, data) => {
+            if (name === 'zuvioListExams') return exams;
+            if (name === 'zuvioCloseMood') {
+              return await new Promise((resolve) => { window.__finishClose = () => resolve({ ok: true, closed: true }); });
+            }
+            if (name === 'zuvioOpenMood') {
+              return await new Promise((resolve) => { window.__finishOpen = () => resolve({ open: true }); });
+            }
+            if (name === 'zuvioGetMoodLive') {
+              if (data.examId === 'e2') {
+                return await new Promise((resolve) => {
+                  window.__finishB = () => resolve({
+                    state: { open: true, examId: 'e2', sittingId: 's2', sittingLabel: 'B場', classIds: ['B'], closesAt: Date.now() + 60000, eligibleCount: 4 },
+                    eligibleCount: 4, totalResponded: 3,
+                    counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 3, gray_fog: 0 },
+                  });
+                });
+              }
+              return {
+                state: { open: true, examId: 'e1', sittingId: 's1', sittingLabel: 'A場', classIds: ['A'], closesAt: Date.now() + 60000, eligibleCount: 2 },
+                eligibleCount: 2, totalResponded: 1,
+                counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 1, gray_fog: 0 },
+              };
+            }
+            return {};
+          },
+        };
+        const course = { id: 'C1', classIds: ['A', 'B'], classNames: { A: '甲班', B: '乙班' }, features: { zuvioExams: true, zuvioMood: true } };
+        createRoot(document.getElementById('root')).render(React.createElement(TeacherZuvioMoodPanel, { api, course }));
+      `,
+      resolveDir: process.cwd(),
+      loader: 'tsx',
+    },
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+    define: { 'process.env.NODE_ENV': '"production"' },
+  }).outputFiles[0].text;
+
+  const html = '<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div></body></html>';
+  const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.addScriptTag({ content: bundle });
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+
+    // 1. A 按結束（延遲未回）-> 切到 B（延遲未回）-> B 畫面不得顯示 A 的 1/2 -> 放行 B 顯示 3/4 -> 放行 A 的結束回應不得覆寫成 1/2
+    await page.click('button:has-text("結束簽到")');
+    await page.waitForFunction(() => Boolean((window as any).__finishClose));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e2');
+    assert.equal((await page.textContent('body'))?.includes('已填 1 / 應填 2'), false, '切到 B 時不得顯示 A 舊統計');
+    await page.evaluate(() => (window as any).__finishB());
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 3 / 應填 4'));
+    await page.evaluate(() => (window as any).__finishClose());
+    await page.waitForTimeout(100);
+    assert.equal((await page.textContent('body'))?.includes('已填 3 / 應填 4'), true, '舊結束回應不得覆寫 B 統計');
+    assert.equal((await page.textContent('body'))?.includes('已填 1 / 應填 2'), false);
+
+    // 2. 在 B 按開放（延遲未回）-> 切到無場次 e3 -> 放行舊開啟回應後統計仍隱藏且結束鈕仍停用
+    await page.click('button:has-text("開放情緒簽到")');
+    await page.waitForFunction(() => Boolean((window as any).__finishOpen));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e3');
+    await page.evaluate(() => (window as any).__finishOpen());
+    await page.waitForTimeout(100);
+    assert.equal((await page.textContent('body'))?.includes('已填'), false);
+    assert.equal(await page.locator('button:has-text("結束簽到")').isDisabled(), true);
+    await page.close();
+  } finally {
+    await browser.close();
+  }
+});

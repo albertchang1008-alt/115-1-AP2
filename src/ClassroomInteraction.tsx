@@ -1098,6 +1098,19 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
   const [live, setLive] = useState<MoodLiveState | null>(null);
   const [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false);
+  const selectionRef = useRef({ courseId: course.id, examId, sittingId });
+  selectionRef.current = { courseId: course.id, examId, sittingId };
+
+  const sameSelection = (cId: string, eId: string, sId: string) =>
+    selectionRef.current.courseId === cId && selectionRef.current.examId === eId && selectionRef.current.sittingId === sId;
+
+  const liveMatchesSelection = (res: MoodLiveState | null) => {
+    if (!res) return false;
+    if (examId && !sittingId) return false;
+    if (examId && sittingId) return res.state?.examId === examId && res.state?.sittingId === sittingId;
+    return true;
+  };
+  const visibleLive = liveMatchesSelection(live) ? live : null;
 
   const zApi = cloudZuvioApi(api, course.id);
   const moodOn = featureEnabled(course, 'zuvioMood');
@@ -1125,19 +1138,22 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
       setLive(null);
       return;
     }
+    const reqCourseId = course.id;
+    const reqExamId = examId;
+    const reqSittingId = sittingId;
     let alive = true;
     const poll = async () => {
       try {
-        const res = await zApi.getMoodLive(examId || undefined, sittingId || undefined);
-        if (alive) setLive(res);
+        const res = await zApi.getMoodLive(reqExamId || undefined, reqSittingId || undefined);
+        if (alive && sameSelection(reqCourseId, reqExamId, reqSittingId)) setLive(res);
       } catch {
-        if (alive) setLive(null);
+        if (alive && sameSelection(reqCourseId, reqExamId, reqSittingId)) setLive(null);
       }
     };
     void poll();
-    const t = setInterval(() => void poll(), live?.state?.open ? 2500 : 8000);
+    const t = setInterval(() => void poll(), visibleLive?.state?.open ? 2500 : 8000);
     return () => { alive = false; clearInterval(t); };
-  }, [course.id, moodOn, examId, sittingId, live?.state?.open]);
+  }, [course.id, moodOn, examId, sittingId, visibleLive?.state?.open]);
 
   const curExam = exams.find((e) => e.id === examId);
 
@@ -1165,33 +1181,47 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
 
   const openMood = async () => {
     if (!examId || !sittingId || busy) return;
+    const reqCourseId = course.id;
+    const reqExamId = examId;
+    const reqSittingId = sittingId;
     setBusy(true);
     setMsg('');
     try {
-      await zApi.openMood(examId, sittingId, mins);
-      const res = await zApi.getMoodLive(examId, sittingId);
-      setLive(res);
-      setMsg('已開放課前情緒簽到');
+      await zApi.openMood(reqExamId, reqSittingId, mins);
+      const res = await zApi.getMoodLive(reqExamId, reqSittingId);
+      if (sameSelection(reqCourseId, reqExamId, reqSittingId)) {
+        setLive(res);
+        setMsg('已開放課前情緒簽到');
+      }
     } catch (e: any) {
-      setMsg(e?.message || '開放失敗');
+      if (sameSelection(reqCourseId, reqExamId, reqSittingId)) {
+        setMsg(e?.message || '開放失敗');
+      }
     } finally {
       setBusy(false);
     }
   };
 
   const closeMood = async () => {
-    const targetSittingId = sittingId || live?.state?.sittingId || '';
-    if (busy || !targetSittingId || !live?.state?.open) return;
-    if (sittingId && live?.state?.sittingId !== sittingId) return;
+    const targetSittingId = sittingId || visibleLive?.state?.sittingId || '';
+    if (busy || !targetSittingId || !visibleLive?.state?.open) return;
+    if (sittingId && visibleLive?.state?.sittingId !== sittingId) return;
+    const reqCourseId = course.id;
+    const reqExamId = examId;
+    const reqSittingId = sittingId;
     setBusy(true);
     setMsg('');
     try {
       const closedRes = await zApi.closeMood(targetSittingId);
-      const res = examId && !sittingId ? null : await zApi.getMoodLive(examId || undefined, sittingId || undefined);
-      setLive(res);
-      setMsg(closedRes.closed !== false ? '已結束課前情緒簽到' : '目前開放場次已變更或已結束，未關閉其他場次');
+      const res = reqExamId && !reqSittingId ? null : await zApi.getMoodLive(reqExamId || undefined, reqSittingId || undefined);
+      if (sameSelection(reqCourseId, reqExamId, reqSittingId)) {
+        setLive(res);
+        setMsg(closedRes.closed !== false ? '已結束課前情緒簽到' : '目前開放場次已變更或已結束，未關閉其他場次');
+      }
     } catch (e: any) {
-      setMsg(e?.message || '結束失敗');
+      if (sameSelection(reqCourseId, reqExamId, reqSittingId)) {
+        setMsg(e?.message || '結束失敗');
+      }
     } finally {
       setBusy(false);
     }
@@ -1207,9 +1237,12 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
             value={examId}
             onChange={(e) => {
               const id = e.target.value;
-              setExamId(id);
               const ex = exams.find((x) => x.id === id);
-              setSittingId(ex?.sittings.at(-1)?.id || '');
+              const nextSit = ex?.sittings.at(-1)?.id || '';
+              selectionRef.current = { courseId: course.id, examId: id, sittingId: nextSit };
+              setLive(null);
+              setExamId(id);
+              setSittingId(nextSit);
             }}
           >
             <option value="">選擇考卷…</option>
@@ -1220,7 +1253,12 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
           <select
             aria-label="選擇場次"
             value={sittingId}
-            onChange={(e) => setSittingId(e.target.value)}
+            onChange={(e) => {
+              const nextSit = e.target.value;
+              selectionRef.current = { courseId: course.id, examId, sittingId: nextSit };
+              setLive(null);
+              setSittingId(nextSit);
+            }}
           >
             <option value="">選擇場次…</option>
             {(curExam?.sittings || []).map((s) => (
@@ -1273,20 +1311,20 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
             <button
               type="button"
               onClick={() => void closeMood()}
-              disabled={busy || !live?.state?.open || (!!sittingId && live?.state?.sittingId !== sittingId)}
+              disabled={busy || !visibleLive?.state?.open || (!!sittingId && visibleLive?.state?.sittingId !== sittingId)}
             >
               結束簽到
             </button>
           </div>
-          {live && (
+          {visibleLive && (
             <div style={{ marginTop: 6 }}>
               <p style={{ margin: '4px 0' }}>
-                狀態：{live.state?.open ? '開放中' : '已關閉'} · 已填 {live.totalResponded} / 應填 {live.eligibleCount}
+                狀態：{visibleLive.state?.open ? '開放中' : '已關閉'} · 已填 {visibleLive.totalResponded} / 應填 {visibleLive.eligibleCount}
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                 {MOOD_STATES.map((m) => (
                   <span key={m.code} style={{ color: m.color, fontWeight: 600 }}>
-                    {m.label.split('：')[0]}：{live.counts[m.code] || 0}
+                    {m.label.split('：')[0]}：{visibleLive.counts[m.code] || 0}
                   </span>
                 ))}
               </div>

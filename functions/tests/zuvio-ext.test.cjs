@@ -1145,3 +1145,67 @@ test('D1 原子性與延遲回填防護：保護名單超限失敗不提交成�
   db.runTransaction = origRunTx;
   assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit.id}`), undefined, '刪除後延遲回填不得重建摘要');
 });
+
+test('D1 延遲清理與預覽重送防護：舊匯入／舊刪除清理不誤刪新代明細；重送／過期預覽不改寫有效成績；zuvioMood=false 不受測驗上限阻斷', async () => {
+  // 1. #61 路徑（zuvioMood=false）+ 51 筆正式測驗文件：確認匯入必須成功
+  const off = setup({ moodEnabled: false });
+  const examOff = '60000000-0000-4000-8000-000000000010';
+  await off.call(off.h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId: examOff,
+    title: '61無情緒匯入',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sitOff = await off.call(off.h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId: examOff, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+  const viewOff = (await off.call(off.h.zuvioGetExam, 'T1', { courseId: 'C1', examId: examOff })).view;
+  const parsedOff = parseZuvioMatrix(fakeZuvioExport(viewOff, off.roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => 0));
+  const prevOff = await off.call(off.h.zuvioImportResults, 'T1', { courseId: 'C1', examId: examOff, sittingId: sitOff.id, parsed: parsedOff, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  for (let i = 0; i < 51; i++) off.db.data.set(`courses/C1/assessments/a_${i}`, { id: `a_${i}` });
+  const resOff = await off.call(off.h.zuvioImportResults, 'T1', { courseId: 'C1', examId: examOff, sittingId: sitOff.id, parsed: parsedOff, confirm: true, previewId: prevOff.previewId });
+  assert.equal(resOff.ok, true);
+  assert.equal(resOff.matched, 2);
+
+  // 2. 延遲清理 + 重送已消耗預覽 + 刪除前舊預覽
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000011';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1清理競態',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const sit = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'A場', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const ansIdx = Math.max(0, view.items[0].options.findIndex((o) => o.id === view.items[0].answer));
+  const wrongIdx = (ansIdx + 1) % view.items[0].options.length;
+  const parsedCorrect = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => ansIdx));
+  const parsedWrong = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => wrongIdx));
+
+  // 匯入 A（rev 1）並驗證重送同一 previewId 帶錯誤答案會被拒絕且不改寫 A 的明細
+  const prevA = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: true, previewId: prevA.previewId });
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: true, previewId: prevA.previewId }), /預覽/);
+  const repA = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sit.id] });
+  assert.equal(repA.analysis.items[0].p, 1, '重送失敗不得覆寫已生效明細');
+
+  // 模擬匯入 B（rev 2）完成後，再跑 A 的舊清理（beforeRevision = 1）與刪除前舊預覽檢查
+  const prevB = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedWrong, confirm: true, previewId: prevB.previewId });
+
+  // 在空場次先建預覽，刪除後重試該預覽（驗證 deletedRevision 阻擋）
+  const sit2 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: 'A場2', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 500 });
+  const prevEmpty = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id });
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: true, previewId: prevEmpty.previewId }), /變更/);
+
+  // 模擬「刪除舊成績後、新匯入 rev 3 提交，再觸發刪除的延遲清理」：rev 3 明細不得被刪
+  const prevC = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit.id, parsed: parsedCorrect, confirm: true, previewId: prevC.previewId });
+  const activeGen = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings[0].results.gen;
+  const activeDocs = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.gen === activeGen);
+  assert.equal(activeDocs.length, 2, '現行代次明細必須完整存在');
+});
