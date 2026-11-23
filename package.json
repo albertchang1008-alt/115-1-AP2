@@ -18,7 +18,9 @@
     "check": "npm test && npm run build && npm --prefix functions test && npm run readability:check",
     "materials:validate-nodes": "node --experimental-strip-types scripts/material-node-audit.mjs",
     "pretest": "npm --prefix functions run build",
-    "readability:check": "node --experimental-strip-types scripts/readability-check.mjs"
+    "readability:check": "node --experimental-strip-types scripts/readability-check.mjs",
+    "readability:record": "node --experimental-strip-types scripts/readability-check.mjs --record",
+    "readability:all": "node --experimental-strip-types scripts/readability-check.mjs --all"
   },
   "dependencies": {
     "firebase": "^11.0.0",
