@@ -1209,3 +1209,91 @@ test('D1 延遲清理與預覽重送防護：舊匯入／舊刪除清理不誤�
   const activeDocs = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.gen === activeGen);
   assert.equal(activeDocs.length, 2, '現行代次明細必須完整存在');
 });
+
+test('D1 定序防護：預檢後刪除與同版並行確認無殘留；清理失敗仍回傳已提交成功並可恢復', async () => {
+  const { db, h, call, roster } = setup({ moodEnabled: true });
+  const examId = '60000000-0000-4000-8000-000000000012';
+  await call(h.zuvioCreateExam, 'T1', {
+    courseId: 'C1',
+    examId,
+    title: 'D1交易邊界測試',
+    score: 100,
+    classIds: ['A'],
+    items: [{ questionId: 'q0', unitId: 'u1', version: 'v1', optionOrder: ['a', 'b', 'c', 'd'] }],
+  });
+  const view = (await call(h.zuvioGetExam, 'T1', { courseId: 'C1', examId })).view;
+  const ansIdx = Math.max(0, view.items[0].options.findIndex((o) => o.id === view.items[0].answer));
+  const wrongIdx = (ansIdx + 1) % view.items[0].options.length;
+  const parsedCorrect = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => ansIdx));
+  const parsedWrong = parseZuvioMatrix(fakeZuvioExport(view, roster.slice(0, 2).map((r) => ({ studentId: r.studentId, name: r.name })), () => wrongIdx));
+
+  // 1. 預檢後、寫入明細後、進交易前觸發刪除 -> 交易失敗且必須回收未提交明細（0 殘留）
+  const sit1 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: '場1', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+  const prev1 = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit1.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  const origRunTx = db.runTransaction.bind(db);
+  let deletedDuringImport = false;
+  db.runTransaction = async (fn) => {
+    if (!deletedDuringImport) {
+      deletedDuringImport = true;
+      db.runTransaction = origRunTx;
+      await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit1.id });
+    }
+    return origRunTx(fn);
+  };
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit1.id, parsed: parsedCorrect, confirm: true, previewId: prev1.previewId }), /變更/);
+  db.runTransaction = origRunTx;
+  const sit1Rows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit1.id);
+  assert.equal(sit1Rows.length, 0, '被拒匯入不得殘留任何成績明細');
+  assert.equal(db.data.get(`courses/C1/zuvioExams/${examId}/analysis/${sit1.id}`), undefined);
+
+  // 2. 同版雙確認並行：兩個預覽同取 rev 0 -> 第一筆先提交後，第二筆失敗且無殘留 gen
+  const sit2 = await call(h.zuvioCreateSitting, 'T1', { courseId: 'C1', examId, label: '場2', date: '2026-11-23', classIds: ['A'], startsAt: Date.now() - 1000 });
+  const pA = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  const pB = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedWrong, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  let injectedB = false;
+  db.runTransaction = async (fn) => {
+    if (!injectedB) {
+      injectedB = true;
+      db.runTransaction = origRunTx;
+      // 模擬 B 寫入並先提交，讓 A 進交易時撞上 revision 不符而被拒絕並回收 genA
+      await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedWrong, confirm: true, previewId: pB.previewId });
+    }
+    return origRunTx(fn);
+  };
+  await assert.rejects(() => call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: true, previewId: pA.previewId }), /變更/);
+  db.runTransaction = origRunTx;
+  const sit2Exam = db.data.get(`courses/C1/zuvioExams/${examId}`).sittings.find((s) => s.id === sit2.id);
+  const sit2Rows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit2.id);
+  assert.equal(sit2Rows.length, 2, '只應保留先提交的 B 兩筆明細，無 A 殘留');
+  assert.equal(sit2Rows.every(([, v]) => v.gen === sit2Exam.results.gen && v.correct === 0), true, '所有留存明細必須屬於有效 genB 且為 B 的答案');
+  const rep2 = await call(h.zuvioReport, 'T1', { courseId: 'C1', examId, sittingIds: [sit2.id] });
+  assert.equal(rep2.analysis.items[0].p, 0, '報表指標必須與有效明細一致');
+
+  // 3. 清理失敗：交易已提交但 cleanup 查詢拋錯，callable 必須反映已提交成功且下次可恢復清理
+  const pC = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  const origCollection = db.collection.bind(db);
+  db.collection = (path) => {
+    const col = origCollection(path);
+    if (path === `courses/C1/zuvioExams/${examId}/results`) {
+      const origWhere = col.where.bind(col);
+      col.where = (...args) => {
+        const q = origWhere(...args);
+        q.get = async () => { throw new Error('simulated cleanup failure'); };
+        return q;
+      };
+    }
+    return col;
+  };
+  const resC = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: true, previewId: pC.previewId });
+  assert.equal(resC.ok, true, 'cleanup 失敗時匯入已提交仍須回 ok:true');
+  assert.equal(resC.matched, 2);
+  const delRes = await call(h.zuvioDeleteResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id });
+  assert.equal(delRes.ok, true, 'cleanup 失敗時刪除已提交仍須回 ok:true');
+  db.collection = origCollection;
+
+  // 恢復正常後，再匯入一次可將先前未清理的舊代明細一併清理乾淨
+  const pD = await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: false, previewId: '00000000-0000-4000-8000-000000000000' });
+  await call(h.zuvioImportResults, 'T1', { courseId: 'C1', examId, sittingId: sit2.id, parsed: parsedCorrect, confirm: true, previewId: pD.previewId });
+  const finalRows = [...db.data.entries()].filter(([k, v]) => k.startsWith(`courses/C1/zuvioExams/${examId}/results/`) && v.sittingId === sit2.id);
+  assert.equal(finalRows.length, 2, '清理恢復後只留最新一代有效明細');
+});

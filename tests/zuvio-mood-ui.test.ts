@@ -400,3 +400,125 @@ test('V3 UI 延遲與切場：A 切 B 時延遲 B 不先顯示 A 舊統計；結
     await browser.close();
   }
 });
+
+test('V3 定序回歸：A → B → A 往返切場不被舊查詢覆寫；A 建場未回切 B 不混配場次', async () => {
+  const bundle = buildSync({
+    stdin: {
+      contents: `
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { TeacherZuvioMoodPanel } from './src/ClassroomInteraction';
+        const exams = [
+          { id: 'e1', title: '考卷A', sittings: [{ id: 's1', label: 'A場', classIds: ['A'], date: '2026-11-23' }] },
+          { id: 'e2', title: '考卷B', sittings: [{ id: 's2', label: 'B場', classIds: ['B'], date: '2026-11-23' }] },
+        ];
+        let closedA = false;
+        let staleBlockedOnce = false;
+        window.__openedCalls = [];
+        const api = {
+          call: async (name, data) => {
+            if (name === 'zuvioListExams') return exams;
+            if (name === 'zuvioCloseMood') {
+              closedA = true;
+              return { ok: true, closed: true };
+            }
+            if (name === 'zuvioOpenMood') {
+              window.__openedCalls.push(data);
+              return { open: true };
+            }
+            if (name === 'zuvioCreateSitting') {
+              return await new Promise((resolve) => {
+                window.__finishCreate = () => {
+                  const created = { id: 's_created_in_A', label: data.label, classIds: data.classIds, date: data.date };
+                  exams[0].sittings.push(created);
+                  resolve(created);
+                };
+              });
+            }
+            if (name === 'zuvioGetMoodLive') {
+              if (data.examId === 'e2') {
+                return {
+                  state: { open: true, examId: 'e2', sittingId: 's2', sittingLabel: 'B場', classIds: ['B'], closesAt: Date.now() + 60000, eligibleCount: 4 },
+                  eligibleCount: 4, totalResponded: 3,
+                  counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 3, gray_fog: 0 },
+                };
+              }
+              if (closedA && !staleBlockedOnce) {
+                staleBlockedOnce = true;
+                // 第一次結束後的查詢延遲返回舊統計 1/2
+                return await new Promise((resolve) => {
+                  window.__finishStaleA = () => resolve({
+                    state: { open: false, examId: 'e1', sittingId: 's1', sittingLabel: 'A場', classIds: ['A'], closesAt: Date.now(), eligibleCount: 2 },
+                    eligibleCount: 2, totalResponded: 1,
+                    counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 1, gray_fog: 0 },
+                  });
+                });
+              }
+              if (closedA && staleBlockedOnce) {
+                // 切回 A 後的新輪詢返回較新統計 2/2
+                return {
+                  state: { open: false, examId: 'e1', sittingId: 's1', sittingLabel: 'A場', classIds: ['A'], closesAt: Date.now(), eligibleCount: 2 },
+                  eligibleCount: 2, totalResponded: 2,
+                  counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 2, gray_fog: 0 },
+                };
+              }
+              return {
+                state: { open: true, examId: 'e1', sittingId: 's1', sittingLabel: 'A場', classIds: ['A'], closesAt: Date.now() + 60000, eligibleCount: 2 },
+                eligibleCount: 2, totalResponded: 1,
+                counts: { red_volcano: 0, yellow_rubberband: 0, blue_caterpillar: 0, green_flow: 1, gray_fog: 0 },
+              };
+            }
+            return {};
+          },
+        };
+        const course = { id: 'C1', classIds: ['A', 'B'], classNames: { A: '甲班', B: '乙班' }, features: { zuvioExams: true, zuvioMood: true } };
+        createRoot(document.getElementById('root')).render(React.createElement(TeacherZuvioMoodPanel, { api, course }));
+      `,
+      resolveDir: process.cwd(),
+      loader: 'tsx',
+    },
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+    define: { 'process.env.NODE_ENV': '"production"' },
+  }).outputFiles[0].text;
+
+  const html = '<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div></body></html>';
+  const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.addScriptTag({ content: bundle });
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 1 / 應填 2'));
+
+    // 1. A -> B -> A 往返切場：第一次結束後的舊 A 查詢延遲，切 B 再切回 A 取得 2/2 后再放行舊 A（1/2）
+    await page.click('button:has-text("結束簽到")');
+    await page.waitForFunction(() => Boolean((window as any).__finishStaleA));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e2');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 3 / 應填 4'));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e1');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 2 / 應填 2'));
+    await page.evaluate(() => (window as any).__finishStaleA());
+    await page.waitForTimeout(100);
+    assert.equal((await page.textContent('body'))?.includes('已填 2 / 應填 2'), true, 'A -> B -> A 後舊 A 統計不得覆寫較新 2/2');
+
+    // 2. 在 A 建場未回時切到 B，放行建場後不得將 A 的新場次寫入 B 的選擇
+    await page.fill('input[placeholder*="新場次名稱"]', '延遲新場');
+    await page.click('button:has-text("立即建場次")');
+    await page.waitForFunction(() => Boolean((window as any).__finishCreate));
+    await page.selectOption('select[aria-label="選擇 Zuvio 考卷"]', 'e2');
+    await page.waitForFunction(() => (document.body.textContent || '').includes('已填 3 / 應填 4'));
+    await page.evaluate(() => (window as any).__finishCreate());
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('select[aria-label="選擇 Zuvio 考卷"]').inputValue(), 'e2');
+    assert.equal(await page.locator('select[aria-label="選擇場次"]').inputValue(), 's2');
+    await page.click('button:has-text("開放情緒簽到")');
+    await page.waitForFunction(() => ((window as any).__openedCalls || []).length === 1);
+    const opened = await page.evaluate(() => (window as any).__openedCalls[0]);
+    assert.deepEqual({ examId: opened.examId, sittingId: opened.sittingId }, { examId: 'e2', sittingId: 's2' });
+    await page.close();
+  } finally {
+    await browser.close();
+  }
+});
