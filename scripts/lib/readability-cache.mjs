@@ -1,10 +1,16 @@
-// 閱讀規範檢查的「未變更就跳過」機制（2026-11-17；教師要求縮短部署時間）。
+// 閱讀規範檢查的「未變更就跳過」機制（2026-11-17；2026-11-23 縮小共用指紋範圍）。
 //
-// 原理：一份教材的檢查結果只取決於三樣東西——
+// 原理：一份教材的檢查結果只取決於四樣東西——
 //   1. 這份教材上線的檔案（public/materials/<版本>/）與它的腳本資料（materials-src/<代號>/）
 //   2. 檢查程式本身與它用到的模組（由 esbuild 實際解析 import 得出，不是人工列表）
+//      ※ 靜態 CSS 檢查（readability-static.mjs 與 allowlist）每次 npm run check 都會完整執行、不吃快取，
+//        因此不列入教材走查的共用指紋；只改靜態檢查規則或 allowlist 不會讓 17 份教材重量。
 //   3. 包住教材的平台播放器（src/Player、src/FontSizePicker 用到的檔案）、src/style.css、
-//      public/materials 最上層的共用檔（course-learning.js、readability-overlay 等）、package-lock.json
+//      public/materials 最上層的共用檔（course-learning.js、readability-overlay 等），
+//      以及 package-lock.json 中「實際影響量測的套件」（播放器用到的 node_modules 套件、
+//      檢查程式的外部套件及其遞移相依）的 name@version＋integrity。
+//      ※ package-lock.json 的根套件版本號（version）或無關套件的新增／升級不影響共用指紋；
+//        但 lock 缺檔、JSON 損毀或找不到對應套件時，共用指紋回傳空字串，強制全部重量。
 //   4. 檢查過程中另外讀到的專案內檔案（例如 docs/ 裡的腳本稿）：不靠人工列表，
 //      而是在實際檢查時記下 Node 讀了哪些檔、查了哪些路徑存不存在（traceReads）。
 // 把 2＋3 算成一個「共用指紋」，每份教材的 1 算成一個「教材指紋」，4 逐檔記錄內容指紋。
@@ -14,7 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { syncBuiltinESMExports } from 'node:module';
+import { isBuiltin, syncBuiltinESMExports } from 'node:module';
 import { execFileSync } from 'node:child_process';
 import { build } from 'esbuild';
 
@@ -86,8 +92,58 @@ function hashFiles(root, files) {
     .map(([rel, file]) => `${rel}\0${sha(fs.readFileSync(file))}`);
   return sha(rows.join('\n'));
 }
-/** 用 esbuild 解析實際的 import，回傳用到的專案內檔案（不含 node_modules）。 */
-async function importClosure(root, options) {
+function realpathSafe(p) {
+  try {
+    return fs.realpathSync(p);
+  } catch {
+    return path.resolve(p);
+  }
+}
+function excludeModulesPlugin(root, relPaths) {
+  const realRoot = realpathSafe(root);
+  const targets = new Set([
+    ...relPaths.map((p) => path.resolve(root, p)),
+    ...relPaths.map((p) => path.resolve(realRoot, p)),
+  ]);
+  return {
+    name: 'exclude-static-modules',
+    setup(buildApi) {
+      buildApi.onResolve({ filter: /.*/ }, (args) => {
+        if (!args.path.startsWith('.') && !path.isAbsolute(args.path)) return null;
+        const resolved = path.resolve(args.resolveDir || root, args.path);
+        for (const candidate of [resolved, `${resolved}.mjs`, `${resolved}.js`, `${resolved}.ts`]) {
+          if (targets.has(candidate) || targets.has(realpathSafe(candidate))) {
+            return { path: candidate, namespace: 'excluded-static' };
+          }
+        }
+        return null;
+      });
+      buildApi.onLoad({ filter: /.*/, namespace: 'excluded-static' }, () => ({
+        contents: 'export function auditReadabilityCss() { return null; }\nexport default {};\n',
+        loader: 'js',
+      }));
+    },
+  };
+}
+function lockKeyFromInput(inputPath) {
+  const normalized = inputPath.split(path.sep).join('/');
+  const firstIdx = normalized.indexOf('node_modules/');
+  if (firstIdx === -1) return null;
+  const lastIdx = normalized.lastIndexOf('node_modules/');
+  const prefix = normalized.slice(firstIdx, lastIdx + 'node_modules/'.length);
+  const parts = normalized.slice(lastIdx + 'node_modules/'.length).split('/');
+  if (!parts[0]) return null;
+  const pkg = parts[0].startsWith('@') ? (parts[1] ? `${parts[0]}/${parts[1]}` : null) : parts[0];
+  return pkg ? prefix + pkg : null;
+}
+function barePackageName(specifier) {
+  if (!specifier || specifier.startsWith('.') || path.isAbsolute(specifier) || isBuiltin(specifier)) return null;
+  const parts = specifier.split('/');
+  if (specifier.startsWith('@')) return parts.length >= 2 ? `${parts[0]}/${parts[1]}` : null;
+  return parts[0];
+}
+/** 用 esbuild 解析實際的 import，回傳專案內檔案、用到的 node_modules 鍵值、以及外部 bare import 套件名。 */
+async function analyzeClosure(root, options) {
   const result = await build({
     bundle: true,
     write: false,
@@ -98,10 +154,102 @@ async function importClosure(root, options) {
     loader: { '.css': 'empty', '.json': 'json' },
     ...options,
   });
-  return Object.keys(result.metafile.inputs)
-    .filter((f) => !f.includes('node_modules') && !f.startsWith('<'))
-    .map((f) => path.resolve(root, f))
-    .filter((f) => fs.existsSync(f));
+  const inputs = result.metafile.inputs;
+  const files = [];
+  const nodeModuleKeys = new Set();
+  const externalPackages = new Set();
+  for (const [key, info] of Object.entries(inputs)) {
+    if (key.startsWith('<') || key.startsWith('excluded-static:')) continue;
+    if (key.includes('node_modules')) {
+      const lockKey = lockKeyFromInput(key);
+      if (lockKey) nodeModuleKeys.add(lockKey);
+      continue;
+    }
+    const resolved = path.resolve(root, key);
+    if (fs.existsSync(resolved)) files.push(resolved);
+    for (const imp of info.imports || []) {
+      if (imp.external) {
+        const pkg = barePackageName(imp.path);
+        if (pkg) externalPackages.add(pkg);
+      }
+    }
+  }
+  for (const out of Object.values(result.metafile.outputs || {})) {
+    for (const imp of out.imports || []) {
+      if (imp.external) {
+        const pkg = barePackageName(imp.path);
+        if (pkg) externalPackages.add(pkg);
+      }
+    }
+  }
+  return { files, nodeModuleKeys: [...nodeModuleKeys], externalPackages: [...externalPackages] };
+}
+function pkgNameFromLockKey(lockKey) {
+  const idx = lockKey.lastIndexOf('node_modules/');
+  return idx === -1 ? lockKey : lockKey.slice(idx + 'node_modules/'.length);
+}
+function resolveLockPackage(packages, parentKey, depName) {
+  if (parentKey) {
+    const nested = `${parentKey}/node_modules/${depName}`;
+    if (Object.hasOwn(packages, nested)) return nested;
+    let cursor = parentKey;
+    while (cursor.includes('node_modules/')) {
+      const idx = cursor.lastIndexOf('node_modules/');
+      const prefix = cursor.slice(0, idx + 'node_modules/'.length);
+      const candidate = prefix + depName;
+      if (Object.hasOwn(packages, candidate)) return candidate;
+      cursor = cursor.slice(0, idx).replace(/\/$/, '');
+    }
+  }
+  const top = `node_modules/${depName}`;
+  return Object.hasOwn(packages, top) ? top : null;
+}
+/**
+ * 只雜湊「實際影響量測的套件」（name@version＋integrity），忽略根套件 version 與無關套件。
+ * lock 缺檔、JSON 損毀或找不到對應項時回傳 null（視為變更、強制全部重量）。
+ */
+function lockFingerprint(root, { nodeModuleKeys, externalPackages }) {
+  let lock;
+  try {
+    lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  } catch {
+    return null;
+  }
+  if (!lock || typeof lock !== 'object' || !lock.packages || typeof lock.packages !== 'object') return null;
+  const packages = lock.packages;
+  const queue = [];
+  for (const key of nodeModuleKeys) {
+    const resolved = Object.hasOwn(packages, key) ? key : resolveLockPackage(packages, '', pkgNameFromLockKey(key));
+    if (!resolved) return null;
+    queue.push(resolved);
+  }
+  for (const pkg of externalPackages) {
+    const resolved = resolveLockPackage(packages, '', pkg);
+    if (!resolved) return null;
+    queue.push(resolved);
+  }
+  const visited = new Set();
+  while (queue.length > 0) {
+    const key = queue.shift();
+    if (visited.has(key)) continue;
+    visited.add(key);
+    const entry = packages[key];
+    if (!entry || typeof entry !== 'object' || typeof entry.version !== 'string') return null;
+    for (const dep of Object.keys(entry.dependencies || {})) {
+      const depKey = resolveLockPackage(packages, key, dep);
+      if (!depKey) return null;
+      if (!visited.has(depKey)) queue.push(depKey);
+    }
+    for (const dep of Object.keys(entry.optionalDependencies || {})) {
+      const depKey = resolveLockPackage(packages, key, dep);
+      if (depKey && !visited.has(depKey)) queue.push(depKey);
+    }
+  }
+  const rows = [...visited].sort().map((key) => {
+    const entry = packages[key];
+    return `${key}\0${pkgNameFromLockKey(key)}@${entry.version}\0${entry.integrity || ''}`;
+  });
+  return sha(rows.join('\n'));
 }
 export async function readabilityFingerprints({
   root,
@@ -109,24 +257,40 @@ export async function readabilityFingerprints({
   publishedVersion,
   checkerEntry = 'scripts/readability-check.mjs',
   platformEntries = ['./src/Player', './src/FontSizePicker'],
+  staticModules = ['scripts/lib/readability-static.mjs'],
 }) {
-  const checker = await importClosure(root, { entryPoints: [checkerEntry], platform: 'node', format: 'esm', packages: 'external' });
-  const platform = await importClosure(root, {
+  const checker = await analyzeClosure(root, {
+    entryPoints: [checkerEntry],
+    platform: 'node',
+    format: 'esm',
+    packages: 'external',
+    plugins: staticModules.length ? [excludeModulesPlugin(root, staticModules)] : [],
+  });
+  const platform = await analyzeClosure(root, {
     stdin: { contents: platformEntries.map((p) => `import ${JSON.stringify(p)};`).join(''), resolveDir: root, loader: 'tsx' },
     platform: 'browser',
     format: 'iife',
   });
   const materialsDir = path.join(root, 'public/materials');
   const sharedMaterialFiles = listMaterialFiles(root, materialsDir).filter((f) => path.dirname(f) === materialsDir);
-  const extra = ['src/style.css', 'package-lock.json'].map((f) => path.join(root, f)).filter((f) => fs.existsSync(f));
-  const common = hashFiles(root, [...checker, ...platform, ...sharedMaterialFiles, ...extra]);
+  const extra = ['src/style.css'].map((f) => path.join(root, f)).filter((f) => fs.existsSync(f));
+  const lockHash = lockFingerprint(root, {
+    nodeModuleKeys: platform.nodeModuleKeys,
+    externalPackages: checker.externalPackages,
+  });
+  const filesHash = hashFiles(root, [...checker.files, ...platform.files, ...sharedMaterialFiles, ...extra]);
+  const common = lockHash === null ? '' : sha(`${filesHash}\nlock:${lockHash}`);
   const materials = {};
   for (const slug of slugs)
     materials[slug] = hashFiles(root, [
       ...listMaterialFiles(root, path.join(materialsDir, publishedVersion(slug))),
       ...listMaterialFiles(root, path.join(root, 'materials-src', slug)),
     ]);
-  return { common, materials, commonFiles: checker.length + platform.length + sharedMaterialFiles.length + extra.length };
+  return {
+    common,
+    materials,
+    commonFiles: checker.files.length + platform.files.length + sharedMaterialFiles.length + extra.length,
+  };
 }
 /** 一個路徑目前的狀態：檔案＝內容指紋；資料夾＝檔名清單的指紋；不存在＝null。 */
 export function pathState(root, rel) {

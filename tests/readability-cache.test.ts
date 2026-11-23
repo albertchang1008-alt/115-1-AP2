@@ -15,23 +15,64 @@ import {
   readabilityFingerprints,
   writeReadabilityCache,
 } from '../scripts/lib/readability-cache.mjs';
+import { auditReadabilityCss } from '../scripts/lib/readability-static.mjs';
 
-// 合成的小專案：兩份教材、一支檢查程式（import 一個模組）、平台播放器（import 一個模組）。
+// 合成的小專案：兩份教材、一支檢查程式（含 metrics、static 與外部套件）、平台播放器（含 node_modules 套件）。
 function makeRoot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'readability-cache-'));
   const write = (file: string, text: string) => {
     fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
     fs.writeFileSync(path.join(root, file), text);
   };
-  write('scripts/readability-check.mjs', "import { helper } from './lib/helper.mjs';\nconsole.log(helper);\n");
+  write(
+    'scripts/readability-check.mjs',
+    [
+      "import { helper } from './lib/helper.mjs';",
+      "import { readabilityMetrics } from './lib/readability-metrics.mjs';",
+      "import { auditReadabilityCss } from './lib/readability-static.mjs';",
+      "import checkerPkg from 'fake-checker';",
+      'console.log(helper, readabilityMetrics, auditReadabilityCss, checkerPkg);',
+    ].join('\n') + '\n',
+  );
   write('scripts/lib/helper.mjs', 'export const helper = 1;\n');
+  write('scripts/lib/readability-metrics.mjs', 'export const readabilityMetrics = () => ({ minPx: 18 });\n');
+  write(
+    'scripts/lib/readability-static.mjs',
+    "import { staticOnly } from './static-only.mjs';\nexport const auditReadabilityCss = () => staticOnly;\n",
+  );
+  write('scripts/lib/static-only.mjs', 'export const staticOnly = 1;\n');
   write('scripts/lib/unused.mjs', 'export const unused = 1;\n');
-  write('src/Player.tsx', "import { scale } from './scale';\nexport const Player = () => scale;\n");
+  write('scripts/readability-allowlist.json', '[]\n');
+  write('node_modules/fake-ui/package.json', '{"name":"fake-ui","version":"1.0.0","main":"index.js"}\n');
+  write('node_modules/fake-ui/index.js', 'export const ui = 1;\n');
+  write('src/Player.tsx', "import { scale } from './scale';\nimport { ui } from 'fake-ui';\nexport const Player = () => scale + ui;\n");
   write('src/FontSizePicker.tsx', 'export default function FontSizePicker() { return null; }\n');
   write('src/scale.ts', 'export const scale = 1;\n');
   write('src/App.tsx', 'export const App = 1;\n');
   write('src/style.css', 'p{font-size:calc(18px * var(--font-scale, 1))}\n');
-  write('package-lock.json', '{"lockfileVersion":3}\n');
+  write('src/answer-integrity.css', 'p{color:inherit}\n');
+  write('materials-src/apply-kit/base.css', 'p{color:inherit}\n');
+  write(
+    'package-lock.json',
+    JSON.stringify(
+      {
+        lockfileVersion: 3,
+        packages: {
+          '': { version: '1.0.0' },
+          'node_modules/fake-ui': { version: '1.0.0', integrity: 'sha512-fakeui1' },
+          'node_modules/fake-checker': {
+            version: '2.0.0',
+            integrity: 'sha512-fakechecker1',
+            dependencies: { 'fake-dep': '1.0.0' },
+          },
+          'node_modules/fake-dep': { version: '1.0.0', integrity: 'sha512-fakedep1' },
+          'node_modules/unused-pkg': { version: '1.0.0', integrity: 'sha512-unused1' },
+        },
+      },
+      null,
+      2,
+    ) + '\n',
+  );
   write('public/materials/course-learning.js', '// sdk\n');
   write('public/materials/a-v1/index.html', '<p>a</p>');
   write('public/materials/a-v1/img/x.svg', '<svg/>');
@@ -62,22 +103,29 @@ test('指紋：相同內容算出相同結果；只改一份教材只影響那�
   }
 });
 
-test('共用指紋：檢查程式、它 import 的模組、播放器用到的檔、style.css、共用教材檔、套件鎖定檔改了都會變；沒用到的檔不影響', async () => {
+test('共用指紋：檢查程式、它 import 的模組、metrics、播放器用到的檔、style.css、共用教材檔改了都會變；沒用到的檔與靜態檢查模組不影響', async () => {
   const { root, write } = makeRoot();
   try {
     const base = await readabilityFingerprints(options(root));
     const changes: [string, string, boolean][] = [
-      ['scripts/readability-check.mjs', "import { helper } from './lib/helper.mjs';\nconsole.log(helper, 2);\n", true],
+      [
+        'scripts/readability-check.mjs',
+        "import { helper } from './lib/helper.mjs';\nimport { readabilityMetrics } from './lib/readability-metrics.mjs';\nimport { auditReadabilityCss } from './lib/readability-static.mjs';\nimport checkerPkg from 'fake-checker';\nconsole.log(helper, readabilityMetrics, auditReadabilityCss, checkerPkg, 2);\n",
+        true,
+      ],
       ['scripts/lib/helper.mjs', 'export const helper = 2;\n', true],
+      ['scripts/lib/readability-metrics.mjs', 'export const readabilityMetrics = () => ({ minPx: 19 });\n', true],
       ['src/scale.ts', 'export const scale = 1.3;\n', true],
-      ['src/Player.tsx', "import { scale } from './scale';\nexport const Player = () => scale + 1;\n", true],
+      ['src/Player.tsx', "import { scale } from './scale';\nimport { ui } from 'fake-ui';\nexport const Player = () => scale + ui + 1;\n", true],
       ['src/style.css', 'p{font-size:calc(19px * var(--font-scale, 1))}\n', true],
       ['public/materials/course-learning.js', '// sdk 2\n', true],
-      ['package-lock.json', '{"lockfileVersion":4}\n', true],
       ['src/App.tsx', 'export const App = 2;\n', false],
       ['scripts/lib/unused.mjs', 'export const unused = 2;\n', false],
       ['scripts/readability-cache.json', '{}\n', false],
       ['src/attendance.css', 'p{color:red}\n', false],
+      ['scripts/lib/readability-static.mjs', "import { staticOnly } from './static-only.mjs';\nexport const auditReadabilityCss = () => staticOnly + 1;\n", false],
+      ['scripts/lib/static-only.mjs', 'export const staticOnly = 2;\n', false],
+      ['scripts/readability-allowlist.json', '[{"file":"src/style.css"}]\n', false],
     ];
     let previous = base.common;
     for (const [file, text, affects] of changes) {
@@ -87,6 +135,84 @@ test('共用指紋：檢查程式、它 import 的模組、播放器用到的檔
       previous = now;
     }
     assert.deepEqual((await readabilityFingerprints(options(root))).materials, base.materials, '共用檔變更不影響教材指紋');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('共用指紋 package-lock 正規化：根版本與無關套件不影響；播放器／檢查程式相依與遞移相依變更或 lock 異常則全部重量', async () => {
+  const { root, write } = makeRoot();
+  try {
+    const readLock = () => JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+    const writeLock = (data: unknown) => write('package-lock.json', JSON.stringify(data, null, 2) + '\n');
+    const base = await readabilityFingerprints(options(root));
+    const saved = {
+      common: base.common,
+      commonReads: {},
+      materials: { a: { files: base.materials.a, reads: {} }, b: { files: base.materials.b, reads: {} } },
+    };
+
+    // 1. 只改根版本號 → 共用指紋不變，教材全部跳過
+    const lock1 = readLock();
+    lock1.packages[''].version = '9.9.9';
+    writeLock(lock1);
+    const fpRootBump = await readabilityFingerprints(options(root));
+    assert.equal(fpRootBump.common, base.common, '只改根版本號不影響共用指紋');
+    assert.deepEqual(planReadability(saved, fpRootBump, ['a', 'b'], root), { skip: ['a', 'b'], run: [], sameCommon: true });
+
+    // 2. 新增無關套件 → 共用指紋不變
+    const lock2 = readLock();
+    lock2.packages['node_modules/qrcode-generator'] = { version: '2.0.4', integrity: 'sha512-qr1' };
+    writeLock(lock2);
+    assert.equal((await readabilityFingerprints(options(root))).common, base.common, '新增無關套件不影響共用指紋');
+
+    // 3. 改播放器實際用到的套件版本／integrity → 變（全部重量）
+    const lock3 = readLock();
+    lock3.packages['node_modules/fake-ui'].integrity = 'sha512-fakeui2';
+    writeLock(lock3);
+    const fpUi = await readabilityFingerprints(options(root));
+    assert.notEqual(fpUi.common, base.common, '改播放器套件 integrity 會變');
+    assert.deepEqual(planReadability(saved, fpUi, ['a', 'b'], root), { skip: [], run: ['a', 'b'], sameCommon: false });
+
+    // 4. 改檢查程式外部套件的遞移相依 → 變
+    writeLock(lock2); // 還原
+    const lock4 = readLock();
+    lock4.packages['node_modules/fake-dep'].version = '1.0.1';
+    writeLock(lock4);
+    const fpTransitive = await readabilityFingerprints(options(root));
+    assert.notEqual(fpTransitive.common, base.common, '改檢查程式遞移相依會變');
+    assert.deepEqual(planReadability(saved, fpTransitive, ['a', 'b'], root).run, ['a', 'b']);
+
+    // 5. lock JSON 損毀 → 變（且不丟例外中斷，強制全部重量）
+    write('package-lock.json', '{broken json');
+    const fpBroken = await readabilityFingerprints(options(root));
+    assert.equal(fpBroken.common, '');
+    assert.notEqual(fpBroken.common, base.common);
+    assert.deepEqual(planReadability(saved, fpBroken, ['a', 'b'], root), { skip: [], run: ['a', 'b'], sameCommon: false });
+
+    // 6. lock 缺檔 → 變（且不丟例外中斷，強制全部重量）
+    fs.rmSync(path.join(root, 'package-lock.json'));
+    const fpMissing = await readabilityFingerprints(options(root));
+    assert.equal(fpMissing.common, '');
+    assert.deepEqual(planReadability(saved, fpMissing, ['a', 'b'], root), { skip: [], run: ['a', 'b'], sameCommon: false });
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('靜態檢查與教材走查分離：改 readability-static 或 allowlist 不改共用指紋，但靜態檢查仍能抓到合成 CSS 違規', async () => {
+  const { root, write } = makeRoot();
+  try {
+    const base = await readabilityFingerprints(options(root));
+    write('scripts/lib/readability-static.mjs', 'export const auditReadabilityCss = () => ({ pass: true });\n');
+    write('scripts/readability-allowlist.json', '[{"file":"src/style.css","selector":"p","property":"font-size","value":"12px","reason":"x"}]\n');
+    assert.equal((await readabilityFingerprints(options(root))).common, base.common, '不影響教材共用指紋');
+
+    write('src/attendance.css', '.bad { font-size: 12px; }\n');
+    const staticResult = auditReadabilityCss(root, []);
+    assert.equal(staticResult.pass, false);
+    assert.equal(staticResult.issues.length, 1);
+    assert.equal(staticResult.issues[0].file, 'src/attendance.css');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
