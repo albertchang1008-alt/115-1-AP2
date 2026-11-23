@@ -9,6 +9,8 @@ const { saveLearningBatch } = require('../lib/functions/src/learningBatches.js')
 const { emptyLearning, reduceLearning } = require('../lib/shared/learning.js');
 const { SESSION_LIMIT, estimateSessions, BACKFILL_FROM, applySessionEvents } = require('../lib/shared/activityHistory.js');
 
+const { backfillVersions } = require('../lib/functions/src/activityHistory.js');
+
 const diag = 'courses/c/diagnostics/d';
 const ev = (id, type, extra = {}) => ({ id, type, ...extra });
 function sender(t) {
@@ -151,4 +153,36 @@ test('逐次作答：只回時間、分數、模式、是否完整，依時間�
   const zh = await handlers.getStudentUnitAttempts.run({ auth: teacher, data: { courseId: 'c', uid: 'u', unitId: '泌尿 腎臟(一)' } });
   assert.equal(zh.rows.length, 1, '分類 id 含中文、空白與括號也能查');
   await assert.rejects(handlers.getStudentUnitAttempts.run({ auth: teacher, data: { courseId: 'c', uid: 'u', unitId: 'a/b' } }));
+});
+
+test('補登版本：章節與舊分類皆收 ag1／ag2，多位數、去重與排序；排除 v1、無連字號及非互動教材', () => {
+  const activity = (materialVersion, tracking = 'interactive') => ({ materialVersion, tracking });
+  const versions = ['kidney-anatomy-ag1', 'stomach-ag2', 'stomach-ag12', 'stomach-v1', 'stomachag2', 'ag2', 'stomach-ag', 'stomach-ag2-extra', undefined];
+  for (const placement of ['chapter', 'unit']) {
+    const activities = [...versions.map(v => activity(v)), activity('stomach-ag2'), activity('oral-cavity-ag2', 'manual')];
+    const course = { units: [{ id: 'u', title: '分類', group: '消化系統', activities: placement === 'unit' ? activities : [] }],
+      ...(placement === 'chapter' ? { chapters: { 消化系統: { activities } } } : {}) };
+    assert.deepEqual(backfillVersions(course), ['kidney-anatomy-ag1', 'stomach-ag12', 'stomach-ag2'], placement);
+  }
+  assert.deepEqual(backfillVersions(undefined), []);
+});
+
+test('補登 callable：僅 ag2 仍可補登；只有 v1／無連字號 ag2 時顯示 agN 錯誤', async (t) => {
+  const ctx = memoryDb();
+  t.after(ctx.restore);
+  seedCourse(ctx);
+  const course = ctx.data.get('courses/c').published;
+  course.chapters.泌尿.activities[0].materialVersion = 'stomach-ag2';
+  const docPath = 'courses/c/diagnostics/u_ag2';
+  const at = BACKFILL_FROM + 3600000;
+  ctx.data.set(docPath, { uid: 'u', materialVersion: 'stomach-ag2', activityId: 'new', chapterName: '泌尿' });
+  ctx.data.set(docPath + '/events/e', { type: 'completed', receivedAt: at });
+  const dry = await handlers.backfillActivityHistory.run({ auth: teacher, data: { courseId: 'c' } });
+  assert.deepEqual([dry.versions, dry.diagnostics, dry.estimatedCompletions], [['stomach-ag2'], 1, 1]);
+  assert.equal(ctx.data.get(docPath).backfill, undefined);
+  for (const version of ['stomach-v1', 'stomachag2', 'ag2']) {
+    course.chapters.泌尿.activities[0].materialVersion = version;
+    await assert.rejects(handlers.backfillActivityHistory.run({ auth: teacher, data: { courseId: 'c' } }),
+      { code: 'invalid-argument', message: '課程沒有 -agN 互動教材' });
+  }
 });

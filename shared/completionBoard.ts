@@ -264,8 +264,8 @@ export function detailItemVisible(done: boolean, statuses: readonly ChapterCellS
   return done ? statuses.includes('done') : statuses.some((status) => status !== 'done');
 }
 
-/** 互動教材是否屬於有紀錄的新版（17 份 Antigravity 教材，materialVersion 以 -ag1 結尾）。 */
-export const recordedMaterial = (materialVersion: string | undefined) => /-ag1$/.test(materialVersion || '');
+/** 互動教材是否屬於有紀錄的新版（Antigravity 互動教材，materialVersion 以 -agN 結尾）。 */
+export const recordedMaterial = (materialVersion: string | undefined) => /-ag\d+$/.test(materialVersion || '');
 /** 題目分類細目：標出第一次達標的那一次（完整測驗、未離開畫面、分數達門檻）。 */
 export function markFirstPass<T extends { score: number; mode: string; full: boolean; leftScreen?: boolean }>(rows: T[], threshold: number) {
   const i = rows.findIndex((r) => r.mode === 'quiz' && r.full && !r.leftScreen && r.score >= threshold);

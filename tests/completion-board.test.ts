@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  recordedMaterial,
   chapterCellState,
   classCompletionSummary,
   allClassCompletionSummary,
@@ -217,4 +218,13 @@ test('選看及不可計分單元不標逾期，也不影響逾期人數與CSV',
   for (const u of Object.values(unscored.units)) u.bankVersion = '';
   for (const ch of Object.values(unscored.chapters!)) ch.activities = [];
   assert.equal(chapterCellState(unscored, '血液', emptyProgress(), now).overdue, false);
+});
+
+test('有紀錄的 Antigravity 教材：ag1、ag2、多位數 agN 計入；v1、缺連字號與非結尾不計', () => {
+  for (const version of ['kidney-anatomy-ag1', 'gi-wall-overview-ag2', 'stomach-ag12']) {
+    assert.equal(recordedMaterial(version), true, version);
+  }
+  for (const version of ['stomach-v1', 'stomachag2', 'ag2', 'stomach-ag', 'stomach-ag2-extra', '', undefined]) {
+    assert.equal(recordedMaterial(version), false, String(version));
+  }
 });
