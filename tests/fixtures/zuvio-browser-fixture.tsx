@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
+import Papa from 'papaparse';
 import ZuvioExams from '../../src/ZuvioExams';
 import { ZuvioMoodOverlay, type ActiveMoodPrompt } from '../../src/ZuvioMoodCard';
 import { sampleZuvioApi, type ZuvioApi, type Sitting } from '../../src/zuvioApi';
 import { SAMPLE_POOL } from '../../shared/zuvioSamplePool';
-import type { MoodCode } from '../../shared/zuvioExt';
+import { MOOD_BY_CODE, type MoodCode } from '../../shared/zuvioExt';
 import '../../src/style.css';
 import '../../src/zuvio-exams.css';
 import '../../src/zuvio-ext-sample.css';
@@ -16,11 +17,21 @@ document.documentElement.style.setProperty('--font-scale', fontScale);
 
 function WrappedZuvioExams() {
   const [toast, setToast] = useState('');
-  const [cleanupsCount, setCleanupsCount] = useState(0);
 
   // Wrapped API that tracks cleanupOnly and simulates pendingCleanup
   const api = useMemo<ZuvioApi>(() => {
     const base = sampleZuvioApi(SAMPLE_POOL);
+    // Expose the synthetic raw scores independently of the item analysis summary.
+    (window as any).__zuvioFixtureScores = async (examId: string, sittingId: string) => {
+      const { csv } = await base.exportCsv(examId, [sittingId], 'researchAnon');
+      const parsed = Papa.parse<Record<string, string>>(csv, {
+        header: true,
+        skipEmptyLines: true,
+        transformHeader: (header) => header.replace(/^'/, ''),
+      });
+      if (parsed.errors.length || !parsed.meta.fields?.includes('總分')) throw new Error('無法讀取示範成績總分');
+      return parsed.data.map((row) => row['總分']);
+    };
     return {
       ...base,
       async deleteResults(id, sittingId, cleanupOnly) {
@@ -43,14 +54,13 @@ function WrappedZuvioExams() {
 
   return (
     <div style={{ padding: 16 }}>
-      {toast && <div id="test-toast" className="toast" style={{ pointerEvents: 'none', position: 'fixed', top: 10, right: 10, background: '#1a5fb4', color: '#fff', padding: '8px 16px', borderRadius: 8, zIndex: 9999 }}>{toast}</div>}
+      {toast && <div id="test-toast" className="toast">{toast}</div>}
       <ZuvioExams api={api} notify={(m) => setToast(m)} moodEnabled={true} />
     </div>
   );
 }
 
 function StudentMoodFixture() {
-  const [submitted, setSubmitted] = useState(false);
   const prompt: ActiveMoodPrompt = {
     active: true,
     examId: 'demo-exam',
@@ -65,10 +75,9 @@ function StudentMoodFixture() {
         prompt={prompt}
         onSubmit={async (sittingId, mood: MoodCode) => {
           (window as any).__submittedMood = mood;
-          setSubmitted(true);
           return {
             mood,
-            feedback: '很棒的節奏！帶著平穩清晰的思緒，專注在當下的每道題目上。',
+            feedback: MOOD_BY_CODE[mood].feedback,
           };
         }}
         onDismissAfterSubmit={() => {
