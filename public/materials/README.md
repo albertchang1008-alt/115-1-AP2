@@ -94,3 +94,7 @@ Node.js 安裝路徑比較特殊、App 找不到——這時候請改用下面�
 | `respiratory-control-ag1` | 呼吸調節｜互動資訊圖表 | 9 個學習節點；21 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
 | `kidney-anatomy-ag1` | 腎臟位置、構造與功能｜互動資訊圖表 | 20 個學習節點；30 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
 | `urinary-route-micturition-ag1` | 尿液通路與排尿控制｜互動資訊圖表 | 17 個學習節點；32 題；Antigravity 版；全部關卡、統整、是非與考核完成才送出完成 |
+| `gi-wall-overview-ag2` | 消化系統總覽與消化管壁 | 24 個學習節點；39 題 |
+| `oral-cavity-ag2` | 口腔、唾液腺與牙齒 | 21 個學習節點；36 題 |
+| `swallowing-esophagus-ag2` | 咽、吞嚥與食道 | 20 個學習節點；34 題 |
+| `stomach-ag2` | 胃：構造、胃液分泌與排空 | 32 個學習節點；37 題 |

@@ -2,6 +2,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { AttendPage, AttendanceBanner, MyAttendancePage } from '../../src/Attendance';
+import App from '../../src/App';
+import { memoryApi } from '../../src/service';
 import TeachingControl from '../../src/TeachingControl';
 import AttendanceAdmin from '../../src/AttendanceAdmin';
 import '../../src/style.css';
@@ -255,7 +257,21 @@ function AdminAt({ view }: { view: string }) {
   );
 }
 const root = createRoot(document.getElementById('root')!);
-if (screen.startsWith('attend-'))
+if (screen === 'feature-toggle') {
+  const initial = { ...course, description: '合成測試', sheetsUrl: '', units: [], chapters: {},
+    features: { assessments: false, teachingConsole: false, classroomInteraction: true, attendance: false },
+  };
+  const memory = memoryApi(initial, []);
+  const calls: { name: string; data: any }[] = [];
+  const featureApi: any = { preview: true, async call(name: string, data = {}) {
+    calls.push({ name, data: structuredClone(data) });
+    if (name.startsWith('attendance')) return api.call(name, data);
+    return memory.call(name, data);
+  } };
+  Object.assign(window, { attendanceToggleTest: { calls, read: () => memory.call('bootstrap') } });
+  root.render(<App initialApi={featureApi} />);
+}
+else if (screen.startsWith('attend-'))
   root.render(
     <AttendPage
       api={api}

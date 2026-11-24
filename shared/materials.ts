@@ -116,12 +116,26 @@ export const ALL_MATERIAL_CATALOG: Record<string, MaterialCatalogEntry> = {
   'respiratory-control-ag1': { label: '呼吸調節｜互動資訊圖表', tracking: 'interactive', nodeTotal: 9, questionTotal: 21, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
   'kidney-anatomy-ag1': { label: '腎臟位置、構造與功能｜互動資訊圖表', tracking: 'interactive', nodeTotal: 20, questionTotal: 30, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
   'urinary-route-micturition-ag1': { label: '尿液通路與排尿控制｜互動資訊圖表', tracking: 'interactive', nodeTotal: 17, questionTotal: 32, note: 'Antigravity 版；全部關卡、統整、是非與考核完成才送出完成' },
+  // D1–D4 ag2：教師 2026-11-23 指定分母，教材由 ap2-materials 發布。
+  'gi-wall-overview-ag2': { label: '消化系統總覽與消化管壁', tracking: 'interactive', nodeTotal: 24, questionTotal: 39 },
+  'oral-cavity-ag2': { label: '口腔、唾液腺與牙齒', tracking: 'interactive', nodeTotal: 21, questionTotal: 36 },
+  'swallowing-esophagus-ag2': { label: '咽、吞嚥與食道', tracking: 'interactive', nodeTotal: 20, questionTotal: 34 },
+  'stomach-ag2': { label: '胃：構造、胃液分泌與排空', tracking: 'interactive', nodeTotal: 32, questionTotal: 37 },
 
 };
 
-// 正式教材都發布在 GitHub Pages 的 materials/<版本>/index.html；教師選教材版本時自動帶入。
+// 教師選教材版本時自動帶入網址；D1–D4 ag2 位於獨立 ap2-materials 站，其餘沿用本站網址。
 export const MATERIAL_CATALOG = siteId() === 'mi' ? Object.fromEntries(Object.entries(ALL_MATERIAL_CATALOG).filter(([slug]) => miMaterialSlugs.includes(slug))) : ALL_MATERIAL_CATALOG;
 export const MATERIALS_BASE_URL = SITE.materials;
+const AP2_MATERIAL_SLUGS: Record<string, string> = {
+  'gi-wall-overview-ag2': 'gi-wall-overview',
+  'oral-cavity-ag2': 'oral-cavity',
+  'swallowing-esophagus-ag2': 'swallowing-esophagus',
+  'stomach-ag2': 'stomach',
+};
 export function materialPageUrl(slug: string) {
+  if (Object.hasOwn(AP2_MATERIAL_SLUGS, slug)) {
+    return `https://albertchang1008-alt.github.io/ap2-materials/${AP2_MATERIAL_SLUGS[slug]}/index.html`;
+  }
   return `${MATERIALS_BASE_URL}${slug}/index.html`;
 }
