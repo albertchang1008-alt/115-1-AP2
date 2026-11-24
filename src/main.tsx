@@ -7,6 +7,7 @@ import App from './App';
 import './style.css';
 import './answer-integrity.css';
 import './zuvio-exams.css';
+import './platform-quiz.css';
 import './zuvio-ext-sample.css';
 import ZuvioExtSample from './ZuvioExtSample';
 import './attendance.css';

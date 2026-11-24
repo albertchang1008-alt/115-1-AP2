@@ -1,3 +1,4 @@
+import type { QuizAnswerMode, QuizState, platformScoreDistribution } from '../shared/platformQuiz';
 import {
   ZPoolEntry, ZItem, ZExamView, ZParsed, ZResult, ZCounts, examCsv, matchExam, buildResults, examReport, compareSittings,
   eligibility, shuffle, optionOrderFor,
@@ -7,8 +8,8 @@ import {
   type CareListEntry, type ExamItemAnalysis, type MoodCode, type MoodReportSummary, type PreExamDetailReport, type PreExamStatus,
 } from '../shared/zuvioExt';
 
-export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; pendingCleanup?: boolean; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts } }
-export interface ExamSummary { id: string; title: string; createdAt: number; count: number; score: number; archived: boolean; sittings: Sitting[] }
+export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; pendingCleanup?: boolean; platformState?: QuizState; round?: number; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts; average?: number | null } }
+export interface ExamSummary { id: string; title: string; createdAt: number; count: number; score: number; archived: boolean; answerMode?: QuizAnswerMode; sittings: Sitting[] }
 export interface ImportPreview { previewId: string; matched: number; counts: ZCounts; blocking: string[]; details: string[]; garbled: number; replaces: boolean }
 export interface FullZuvioReport {
   report: ReturnType<typeof examReport>;
@@ -19,6 +20,7 @@ export interface FullZuvioReport {
   preExamCounts?: Record<PreExamStatus, number>;
   preExamDetail?: PreExamDetailReport;
   preExamIncomplete?: boolean;
+  platformStats?: ReturnType<typeof platformScoreDistribution>;
 }
 export interface MoodLiveState {
   state: { open: boolean; examId: string; sittingId: string; sittingLabel?: string; classIds: string[]; closesAt: number } | null;
@@ -29,10 +31,10 @@ export interface MoodLiveState {
 export interface ZuvioApi {
   sample: boolean;
   pool(): Promise<{ entries: ZPoolEntry[]; excluded: Record<string, number>; usage: Record<string, { n: number; last: number }>; classes: string[]; unitClasses?: Record<string, string[]> }>;
-  createExam(input: { examId: string; title: string; score: number; classIds: string[]; items: ZItem[] }): Promise<{ examId: string; csv: string }>;
+  createExam(input: { examId: string; title: string; score: number; classIds: string[]; items: ZItem[]; answerMode?: QuizAnswerMode }): Promise<{ examId: string; csv: string | null }>;
   listExams(): Promise<ExamSummary[]>;
   getExam(examId: string): Promise<{ summary: ExamSummary; view: ZExamView; csv: string | null; classIds: string[]; masked?: number }>;
-  createSitting(examId: string, s: { label: string; date: string; classIds: string[]; startsAt?: number }): Promise<Sitting>;
+  createSitting(examId: string, s: { label: string; date: string; classIds: string[]; startsAt?: number; durationSeconds?: number }): Promise<Sitting>;
   updateSittingStart(examId: string, sittingId: string, startsAt: number): Promise<{ ok: boolean; startsAt: number }>;
   previewImport(examId: string, sittingId: string, parsed: ZParsed): Promise<ImportPreview>;
   confirmImport(examId: string, sittingId: string, previewId: string): Promise<void>;

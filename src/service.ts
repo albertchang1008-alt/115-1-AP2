@@ -9,6 +9,7 @@ import {
   onAuthStateChanged,
   connectAuthEmulator,
 } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
 import { mergeChapterCourse, mergedChapterProgress, mergeActivityList, chapterMergeDraftFingerprint, chapterMergePublishedBlocker } from '../shared/chapterMerge';
 import {
@@ -38,10 +39,12 @@ const app = configured
     })
   : null;
 export const auth = app ? getAuth(app) : null;
+export const firestore = app ? getFirestore(app) : null;
 const functions = app ? getFunctions(app, env.VITE_FUNCTIONS_REGION || 'asia-east1') : null;
 if (env.VITE_USE_EMULATORS === 'true' && auth && functions) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099');
   connectFunctionsEmulator(functions, '127.0.0.1', 5001);
+  if (firestore) connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
 }
 export function watchAuth(fn: () => void) {
   return auth ? onAuthStateChanged(auth, fn) : () => {};

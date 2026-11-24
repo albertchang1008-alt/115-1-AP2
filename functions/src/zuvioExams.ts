@@ -6,6 +6,8 @@ import { Firestore, Timestamp } from 'firebase-admin/firestore';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { createHash, createHmac, randomUUID } from 'node:crypto';
 import { featureAccess } from './features';
+import { createPlatformQuizHandlers, preparedQuiz, assertQuizClassSeparation } from './platformQuiz';
+import { platformScoreDistribution } from '../../shared/platformQuiz';
 import { reservedQuestionIds } from './assessments';
 import { Question, Unit, chapterActivityKey, chapterName, forClass, isReviewUnit, unitVisibility, safeId, safeCode } from '../../shared/model';
 import {
@@ -100,21 +102,23 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   const publishedUnits = (c: any): Unit[] => (c.published?.units || []).filter((u: Unit) => !!u.bankVersion && !isReviewUnit(u) && unitVisibility(u) !== 'hidden' && !(c.assessmentSourceUnits || []).includes(u.id));
   const visibleTo = (c: any, unitId: string, classIds: string[]) => classIds.every((cl) => forClass(c.published, cl).units.some((u) => u.id === unitId));
 
-  async function buildView(courseId: string, e: any, guard: Set<string>): Promise<{ view: ZExamView; masked: string[] }> {
+  async function buildView(courseId: string, e: any, guard: Set<string>): Promise<{ view: ZExamView; masked: string[]; explanations: Record<string, string> }> {
     const keys = [...new Set(e.items.map((it: ZItem) => it.unitId + '|' + it.version))] as string[];
     const banks = new Map<string, Bank>();
     for (const k of keys) { const [u, v] = k.split('|'); banks.set(k, await loadBank(courseId, u, v)); }
     const masked: string[] = [];
+    const explanations: Record<string, string> = {};
     const items = e.items.map((it: ZItem) => {
       const b = banks.get(it.unitId + '|' + it.version)!;
       const q = b.questions.get(it.questionId);
       if (!q) fail(`舊版題庫缺題：${it.questionId}`);
       if (guard.has(it.questionId)) masked.push(it.questionId);
+      explanations[it.questionId] = q!.explanation || '';
       return { ...it, text: q!.text, options: q!.options.map((o) => ({ id: o.id, text: o.text })), answer: b.answers.get(it.questionId)! };
     });
-    return { view: { title: e.title, score: e.score, items }, masked };
+    return { view: { title: e.title, score: e.score, items }, masked, explanations };
   }
-  const summary = (id: string, e: any) => ({ id, title: e.title, createdAt: e.createdAt, count: e.items.length, score: e.score, archived: !!e.archived, sittings: e.sittings || [] });
+  const summary = (id: string, e: any) => ({ id, title: e.title, createdAt: e.createdAt, count: e.items.length, score: e.score, archived: !!e.archived, answerMode: e.answerMode || 'zuvio', sittings: e.sittings || [] });
   const maskView = (v: ZExamView, masked: string[]) => ({
     ...v,
     items: v.items.map((it) => (masked.includes(it.questionId) ? { ...it, text: '（此題已列為正式測驗保留題，不顯示）', options: it.options.map((o) => ({ ...o, text: '—' })) } : it)),
@@ -144,7 +148,9 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
 
   const zuvioCreateExam = onCall(options, async (req) => {
     const { p, c, courseId } = await teacher(req);
-    obj(req.data, ['courseId', 'examId', 'title', 'score', 'classIds', 'items'], '考卷');
+    obj(req.data, ['courseId', 'examId', 'title', 'score', 'classIds', 'items', 'answerMode'], '考卷');
+    const answerMode = req.data.answerMode ?? 'zuvio';
+    if (answerMode !== 'zuvio' && answerMode !== 'platform') bad('作答方式無效');
     const examId = examIdOf(req.data.examId);
     const title = str(req.data.title, 80, '考卷名稱').trim();
     if (!title || title.length > 60 || FORMULA.test(title)) bad('考卷名稱需 1–60 字，且不能以 = + - @ 開頭');
@@ -155,6 +161,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const classIds = req.data.classIds;
     if (!Array.isArray(classIds) || !classIds.length || classIds.length > 50) bad('至少選一個班級');
     for (const cl of classIds) if (typeof cl !== 'string' || !safeCode(cl) || !published.includes(cl)) bad('班級不屬於本課程的發布班級');
+    if (answerMode === 'platform') assertQuizClassSeparation(classIds);
     const raw = req.data.items;
     if (!Array.isArray(raw) || !raw.length || raw.length > LIMITS.blocks) bad(`題數需為 1–${LIMITS.blocks}`);
     const units = new Map(publishedUnits(c).map((u) => [u.id, u]));
@@ -183,15 +190,21 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       if (!Array.isArray(order) || order.length !== ids.length || new Set(order).size !== ids.length || order.some((x: any) => !ids.includes(x))) bad('選項順序不合法');
       items.push({ questionId, unitId, version, optionOrder: [...order] });
     }
-    const base = { title, score, classIds: [...classIds], items, csvFormat: CSV_FORMAT, createdAt: Date.now(), createdBy: p.uid, archived: false, sittings: [] as any[] };
+    const base = { title, score, answerMode, classIds: [...classIds], items, csvFormat: CSV_FORMAT, createdAt: Date.now(), createdBy: p.uid, archived: false, sittings: [] as any[] };
     const { view } = await buildView(courseId, base, new Set());
-    const csv = examCsv(view);
-    const exam = { ...base, csvSha256: sha(csv) };
+    const csv = answerMode === 'zuvio' ? examCsv(view) : null;
+    const contentSha256 = sha(JSON.stringify({ title, score, items, classIds: [...new Set(classIds)].sort(), answerMode }));
+    const exam = { ...base, contentSha256, ...(csv !== null ? { csvSha256: sha(csv) } : {}) };
+
     const ref = examRef(courseId, examId);
     await db.runTransaction(async (tx) => {
       const old = await tx.get(ref);
       if (old.exists) {
-        if (old.data()!.csvSha256 === sha(csv) && old.data()!.createdBy === p.uid) return; // 冪等重送
+        const previous = old.data()!;
+        const same = previous.contentSha256
+          ? previous.contentSha256 === contentSha256
+          : csv !== null && previous.csvSha256 === sha(csv);
+        if (same && (previous.answerMode || 'zuvio') === answerMode && previous.createdBy === p.uid) return;
         fail('考卷識別碼已被使用');
       }
       tx.create(ref, exam);
@@ -217,7 +230,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const e = snap.data()!;
     const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
     let csv: string | null = null;
-    if (!masked.length) {
+    if (e.answerMode !== 'platform' && !masked.length) {
       csv = examCsv(view);
       if (sha(csv) !== e.csvSha256) fail('重建的 CSV 與建立時不同，已停止下載，請聯絡開發者');
     }
@@ -234,6 +247,11 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     await db.runTransaction(async (tx) => {
       const [s, stSnap] = [await tx.get(ref), await tx.get(stRef)];
       if (!s.exists) fail('找不到考卷');
+      if (req.data.archived && s.data()?.answerMode === 'platform') {
+        const controls: FirebaseFirestore.DocumentReference[] = (s.data()?.sittings || []).map((row: any) => db.doc('courses/' + courseId + '/platformQuizzes/' + row.id));
+        if (controls.length && (await tx.getAll(...controls)).some((doc) =>
+          ['announced', 'open', 'closing'].includes(doc.data()?.state))) fail('請先完成目前的小考再封存考卷');
+      }
       tx.update(ref, { archived: req.data.archived });
       if (req.data.archived === true && stSnap.exists && stSnap.data()?.examId === id && stSnap.data()?.open) {
         tx.update(stRef, { open: false, closedAt: Date.now() });
@@ -244,7 +262,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
 
   const zuvioCreateSitting = onCall(options, async (req) => {
     const { c, courseId } = await teacher(req);
-    obj(req.data, ['courseId', 'examId', 'label', 'date', 'classIds', 'startsAt'], '場次');
+    obj(req.data, ['courseId', 'examId', 'label', 'date', 'classIds', 'startsAt', 'durationSeconds'], '場次');
     const id = examIdOf(req.data.examId);
     const label = str(req.data.label, 60, '場次名稱').trim();
     if (!label || label.length > 40 || FORMULA.test(label)) bad('場次名稱需 1–40 字');
@@ -258,6 +276,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const ref = examRef(courseId, id);
     const usageRef = db.doc(`courses/${courseId}/zuvioMeta/usage`);
     const sitting = { id: randomUUID(), label, date, startsAt, classIds: [...new Set(classIds as string[])] };
+    let platform = false;
     await db.runTransaction(async (tx) => {
       const [s, u] = [await tx.get(ref), await tx.get(usageRef)];
       if (!s.exists) fail('找不到考卷');
@@ -266,13 +285,20 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const published: string[] = c.published?.classIds || [];
       if (sitting.classIds.some((x) => !e.classIds.includes(x) || !published.includes(x))) fail('場次班級需屬於這份考卷的班級且仍在發布名單');
       if ((e.sittings || []).length >= 30) fail('場次數已達上限 30');
+      platform = e.answerMode === 'platform';
+      if (platform) {
+        if (sitting.classIds.length !== 1) bad('平台小考每一場次只可選一個班級');
+        if (c.rosterVersion !== 2) fail('請先完成名冊遷移');
+        const control = preparedQuiz(courseId, id, e.title, e.items.length, label, sitting.classIds[0], req.data.durationSeconds);
+        tx.create(db.doc('courses/' + courseId + '/platformQuizzes/' + sitting.id), control);
+      }
       const q = { ...(u.data()?.q || {}) };
       for (const it of e.items) q[it.questionId] = { n: (q[it.questionId]?.n || 0) + 1, last: Date.now() };
       if (Object.keys(q).length > USAGE_CAP) fail('出題紀錄過多，請聯絡開發者清理');
-      tx.update(ref, { sittings: [...(e.sittings || []), sitting] });
+      tx.update(ref, { sittings: [...(e.sittings || []), platform ? { ...sitting, platformState: 'prepared' } : sitting] });
       tx.set(usageRef, { q });
     });
-    return sitting;
+    return platform ? { ...sitting, platformState: 'prepared' } : sitting;
   });
 
   const zuvioUpdateSittingStart = onCall(options, async (req) => {
@@ -288,6 +314,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const s = await tx.get(ref);
       if (!s.exists) fail('找不到考卷');
       const e = s.data()!;
+      if (e.answerMode === 'platform') fail('平台作答以實際開放時刻為準');
       const idx = (e.sittings || []).findIndex((x: any) => x.id === sittingId);
       if (idx < 0) fail('找不到場次');
       const next = (e.sittings || []).map((x: any, i: number) => (i === idx ? { ...x, startsAt } : x));
@@ -295,6 +322,17 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       tx.delete(ref.collection('prep').doc(sittingId));
     });
     return { ok: true, startsAt };
+  });
+
+  const zuvioClassDirectory = onCall(options, async (req) => {
+    const { c, courseId } = await teacher(req);
+    obj(req.data, ['courseId'], '班級');
+    const classIds: string[] = c.published?.classIds || [];
+    if (c.rosterVersion !== 2) return classIds.map((classId) => ({ classId, name: c.published?.classNames?.[classId] || classId, count: null }));
+    const roster = await classRosterDocs(courseId, c, classIds);
+    const counts = new Map<string, number>();
+    for (const row of roster) counts.set(row.classId, (counts.get(row.classId) || 0) + 1);
+    return classIds.map((classId) => ({ classId, name: c.published?.classNames?.[classId] || classId, count: counts.get(classId) || 0 }));
   });
 
   // ---------- 成績匯入 ----------
@@ -337,6 +375,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (!snap.exists) fail('找不到考卷');
     const e = snap.data()!;
     if (e.archived) fail('考卷已封存');
+    if (e.answerMode === 'platform') fail('平台作答考卷不能匯入 Zuvio 成績');
     const sitting = (e.sittings || []).find((s: any) => s.id === sittingId);
     if (!sitting) fail('找不到場次');
     const { view } = await buildView(courseId, e, new Set());
@@ -401,9 +440,10 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const curRev = Math.max(cur?.results?.revision || 0, cur?.deletedRevision || 0);
       if (!v || v.teacherUid !== p.uid || v.sittingId !== sittingId || v.expiresAt < Date.now()) fail('預覽已失效，請重新選檔');
       if (v.payloadSha !== payloadSha || v.rosterSha !== rosterSha) fail('檔案或名冊已變更，請重新預覽');
-      if (!cur || curRev !== v.revision || exData.archived) fail('成績已被其他操作變更，請重新預覽');
+      if (!cur || curRev !== v.revision || exData.archived || exData.answerMode === 'platform') fail('成績已被其他操作變更，請重新預覽');
       const now = Date.now();
-      const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts };
+      const results = { importedAt: now, revision: nextRevision, gen, matched: built.results.size, counts: built.counts as ZCounts,
+        average: entries.length ? entries.reduce((sum, [, row]) => sum + row.score, 0) / entries.length : null };
       for (const [s, r] of entries) {
         tx.set(resultsCol.doc(`${gen}_${s}`), { sittingId, gen, revision: nextRevision, studentId: s, classId: r.classId, answers: r.answers, correct: r.correct, score: r.score });
       }
@@ -480,6 +520,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     if (req.data.cleanupOnly === true) {
       const snap = await ref.get();
       if (!snap.exists) fail('找不到考卷');
+      if (snap.data()?.answerMode === 'platform') fail('平台成績由場次結算管理');
       const target = (snap.data()!.sittings || []).find((x: any) => x.id === sittingId);
       if (!target) fail('找不到場次');
       if (!target.pendingCleanup) return { ok: true, cleaned: false };
@@ -493,6 +534,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const s = await tx.get(ref);
       if (!s.exists) fail('找不到考卷');
       const e = s.data()!;
+      if (e.answerMode === 'platform') fail('平台成績由場次結算管理');
       const target = (e.sittings || []).find((x: any) => x.id === sittingId);
       deletedRevision = Math.max(target?.results?.revision || 0, target?.deletedRevision || 0) + 1;
       tx.update(ref, { sittings: (e.sittings || []).map((x: any) => (x.id === sittingId ? { id: x.id, label: x.label, date: x.date, ...(x.startsAt ? { startsAt: x.startsAt } : {}), classIds: x.classIds, deletedRevision, pendingCleanup: true } : x)) });
@@ -510,7 +552,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
 
   // ---------- 考前情緒（zuvioMood） ----------
   const PREP_CACHE_VERSION = 2;
-  const ANALYSIS_CACHE_VERSION = 1;
+  const ANALYSIS_CACHE_VERSION = 2;
   const moodStateRef = (courseId: string) => db.doc(`courses/${courseId}/zuvioMoodState/current`);
   const moodResponsesCol = (courseId: string, examId: string, sittingId: string) =>
     examRef(courseId, examId).collection('moods').doc(sittingId).collection('responses');
@@ -548,6 +590,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
       const [exSnap, cs] = [await tx.get(exRef), await tx.get(classroomStateRef)];
       if (!exSnap.exists) fail('找不到考卷');
       const e = exSnap.data()!;
+      if (e.answerMode === 'platform') fail('平台小考會在交卷後自動邀請情緒簽到');
       if (e.archived) fail('考卷已封存');
       const sitting = (e.sittings || []).find((s: any) => s.id === sittingId);
       if (!sitting) fail('找不到場次');
@@ -811,6 +854,8 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     unitIds: string[],
     questionIds: string[],
   ): Promise<{ students: Record<string, SittingPrepRecord>; incomplete: boolean }> {
+    if (sitting.platformState === 'prepared' || sitting.platformState === 'announced')
+      return { students: {}, incomplete: false };
     const startsAt = typeof sitting.startsAt === 'number' ? sitting.startsAt : Date.now();
     const unitIdsKey = [...new Set(unitIds)].sort().join(',');
     const questionIdsKey = [...new Set(questionIds)].sort().join(',');
@@ -1047,8 +1092,20 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   // ---------- 報表 ----------
   async function sittingResults(ref: FirebaseFirestore.DocumentReference, s: any) {
     if (!s?.results) return new Map<string, ZResult>();
-    const snap = await ref.collection('results').where('sittingId', '==', s.id).where('gen', '==', s.results.gen).get();
-    return new Map(snap.docs.map((d) => { const x = d.data(); return [x.studentId, { classId: x.classId, answers: x.answers, correct: x.correct, score: x.score }]; }));
+    const query = ref.collection('results').where('sittingId', '==', s.id).where('gen', '==', s.results.gen);
+    const snap = await query.get();
+    if (s.platformState) {
+      const current = (await ref.get()).data()?.sittings?.find((row: any) => row.id === s.id);
+      if (current?.results?.gen !== s.results.gen) fail('成績已更新，請重新整理報表');
+    }
+    return new Map(snap.docs.map((d) => {
+      const x = d.data();
+      return [x.studentId, {
+        classId: x.classId, answers: x.answers, correct: x.correct, score: x.score,
+        ...(x.makeup ? { makeup: x.makeup } : {}), ...(x.blankStart ? { blankStart: true } : {}),
+        ...(x.extendedSeconds ? { extendedSeconds: x.extendedSeconds } : {}),
+      } satisfies ZResult];
+    }));
   }
   const zuvioReport = onCall(options, async (req) => {
     const { c, courseId } = await teacher(req);
@@ -1078,16 +1135,20 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const all = maps.flatMap((m) => [...m.values()]).filter((r) => !req.data.classId || r.classId === req.data.classId);
     const titles = new Map((c.published?.units || []).map((u: Unit) => [u.id, u.title]));
     const report = examReport(maskedView, all, (u) => (titles.get(u) as string) || u);
-    const compare = ids.length === 2 ? compareSittings(view, maps[0], maps[1]) : null;
-
-    if (!c.features?.zuvioMood) {
-      return { report, compare, moodEnabled: false };
-    }
+    const platform = e.answerMode === 'platform';
+    if (platform && (sittings.some((s: any) => s.classIds.length !== 1 || s.classIds[0] !== sittings[0].classIds[0]) ||
+      (req.data.classId && req.data.classId !== sittings[0].classIds[0]))) bad('請選同一班級的場次');
+    const reportMaps = req.data.classId ? maps.map((map) => new Map([...map].filter(([, row]) => row.classId === req.data.classId))) : maps;
+    const compare = ids.length === 2 ? compareSittings(view, reportMaps[0], reportMaps[1]) : null;
+    const platformStats = platform ? platformScoreDistribution(all.map((row) => row.score), view.items.length * view.score) : undefined;
+    if (!c.features?.zuvioMood && !platform) return { report, compare, moodEnabled: false };
 
     const analysis =
       sittings.length === 1 && !req.data.classId
         ? await ensureSittingAnalysis(ref, sittings[0], maskedView, maskedKey, all)
         : analyzeExam(maskedView, all);
+    if (!c.features?.zuvioMood)
+      return { report, compare, moodEnabled: false, analysis, ...(platformStats ? { platformStats } : {}) };
     const unitIds = [...new Set((e.items || []).map((it: ZItem) => it.unitId))] as string[];
     const questionIds = (e.items || []).map((it: ZItem) => it.questionId) as string[];
     const [prepResList, moodList] = await Promise.all([
@@ -1185,7 +1246,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     }
     const moodSummary = summarizeMoodResults(maskedView, moodPairs, threshold, prevMoods, laterPairs);
     const preExamDetail = summarizePreExamReport(maskedView, preExamRows);
-    return { report, compare, moodEnabled: true, analysis, moodSummary, preExamCounts, preExamDetail, preExamIncomplete };
+    return { report, compare, moodEnabled: true, analysis, moodSummary, preExamCounts, preExamDetail, preExamIncomplete, ...(platformStats ? { platformStats } : {}) };
   });
 
   const zuvioCareList = onCall(options, async (req) => {
@@ -1301,6 +1362,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
           coverage: rec.coverage,
           hasWrongInExam: res ? res.correct < targetItemCount : false,
           preExamIncomplete,
+          ...(res?.makeup ? { makeup: res.makeup } : {}),
           recentHistory: eligibleHist.map((h) => {
             const hRes = h.resMap.get(rec.studentId);
             const hPct = hRes ? calcScorePercentage(hRes.correct, h.hItemCount, hRes.score, h.hMaxScore) : null;
@@ -1318,7 +1380,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   });
 
   const zuvioExportCsv = onCall(options, async (req) => {
-    const { c, courseId } = await moodTeacher(req);
+    const { c, courseId } = await teacher(req);
     obj(req.data, ['courseId', 'examId', 'sittingIds', 'classId', 'kind'], '請求');
     const examId = examIdOf(req.data.examId);
     const ids = req.data.sittingIds;
@@ -1333,6 +1395,11 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
     const e = snap.data()!;
     const sittings = ids.map((id: string) => (e.sittings || []).find((s: any) => s.id === id));
     if (sittings.some((s: any) => !s)) fail('找不到場次');
+    const platform = e.answerMode === 'platform';
+    if (!c.features?.zuvioMood && (!platform || kind !== 'itemAnalysis'))
+      throw new HttpsError('permission-denied', '此課程尚未開放此功能');
+    if (platform && (sittings.some((s: any) => s.classIds.length !== 1 || s.classIds[0] !== sittings[0].classIds[0]) ||
+      (req.data.classId && req.data.classId !== sittings[0].classIds[0]))) bad('請選同一班級的場次');
     const { view, masked } = await buildView(courseId, e, await protectedIds(courseId, c));
     const maskedView = maskView(view, masked);
     const maskedKey = sha([...masked].sort().join(','));
@@ -1395,6 +1462,7 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
             correct: res?.correct ?? null,
             answers: res?.answers || {},
             itemPreExam: prep?.itemStatuses || {},
+            ...(res?.makeup ? { makeup: res.makeup } : {}),
           };
         })
         .filter((x): x is NonNullable<typeof x> => !!x);
@@ -1407,9 +1475,27 @@ export function createZuvioHandlers(db: Firestore, access: (req: any, id: string
   });
 
   return {
+    ...createPlatformQuizHandlers(db, access, options, {
+      async paper(courseId, exam, course) {
+        const { view, explanations, masked } = await buildView(courseId, exam, await protectedIds(courseId, course));
+        if (masked.length) fail('考卷含已列為正式測驗保留的題目，請改用其他考卷');
+        return { ...view, explanations };
+      },
+      async roster(courseId, c, classes) {
+        return (await classRosterDocs(courseId, c, classes)).map(({ studentId, name, classId }) =>
+          ({ studentId, name, classId }));
+      },
+      prep: ensureSittingPrep,
+      analysis: (paper, results, revision, gen, now) => ({
+        revision, gen, analysisVersion: ANALYSIS_CACHE_VERSION, maskedKey: sha(''),
+        analysis: analyzeExam(paper, results), computedAt: now,
+      }),
+      cleanup: (ref, sittingId, revision) => cleanup(ref.collection('results'), sittingId, revision),
+    }),
     zuvioPool,
     zuvioCreateExam,
     zuvioListExams,
+    zuvioClassDirectory,
     zuvioGetExam,
     zuvioArchiveExam,
     zuvioCreateSitting,

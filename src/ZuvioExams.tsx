@@ -4,9 +4,12 @@ import { fakeZuvioExport } from '../shared/zuvioSample';
 import { readXlsxFirstSheetMatrix } from './pptImportFiles';
 import { cloudZuvioApi, sampleZuvioApi, type ZuvioApi, type ExamSummary, type ImportPreview, type Sitting, type FullZuvioReport } from './zuvioApi';
 import { MOOD_STATES, type CareListEntry } from '../shared/zuvioExt';
+import { PlatformQuizTeacher, QuizClassDirectory, type ListedQuiz, type QuizClass } from './PlatformQuizTeacher';
+import type { QuizAnswerMode } from '../shared/platformQuiz';
+import type { API } from './service';
 import { SAMPLE_POOL } from '../shared/zuvioSamplePool';
 
-type Tab = 'make' | 'exams' | 'report';
+type Tab = 'classes' | 'make' | 'exams' | 'report';
 const uuid = () => (crypto as any).randomUUID?.() || 'x' + Math.random().toString(16).slice(2);
 const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 const pct = (x: number) => Math.round(x * 100) + '%';
@@ -24,21 +27,55 @@ const fileName = (t: string) => t.replace(/[\\/:*?"<>|]/g, '_') + '.csv';
 /** 後台分頁入口：預覽模式用示範資料，正式模式走教師限定 callable；api 物件只建一次 */
 export function ZuvioTab({ api, courseId, notify, moodEnabled = true }: { api: { preview: boolean; call<T = any>(name: string, data?: any): Promise<T> }; courseId: string; notify: (m: string) => void; moodEnabled?: boolean }) {
   const z = useMemo(() => (api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, courseId)), [api, courseId]);
-  return <ZuvioExams api={z} notify={notify} moodEnabled={moodEnabled} />;
+  return <ZuvioExams api={z} notify={notify} moodEnabled={moodEnabled} platform={!api.preview ? { api, courseId } : undefined} />;
 }
 
-export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true }: { api: ZuvioApi; notify?: (m: string) => void; moodEnabled?: boolean }) {
-  const [tab, setTab] = useState<Tab>('make');
+export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true, platform }: {
+  api: ZuvioApi; notify?: (m: string) => void; moodEnabled?: boolean; platform?: { api: API; courseId: string };
+}) {
+  const [tab, setTab] = useState<Tab>(platform ? 'classes' : 'make');
   const [openExam, setOpenExam] = useState<string>('');
+  const [classes, setClasses] = useState<QuizClass[]>([]);
+  const [exams, setExams] = useState<ExamSummary[]>([]);
+  const [classId, setClassId] = useState('');
+  const [row, setRow] = useState<ListedQuiz>();
+  const [loadError, setLoadError] = useState('');
+  const className = classes.find((item) => item.classId === classId)?.name || classId;
+  const reloadDirectory = () => {
+    if (!platform) return;
+    Promise.all([api.listExams(), platform.api.call<QuizClass[]>('zuvioClassDirectory', { courseId: platform.courseId })])
+      .then(([list, roster]) => { setExams(list); setClasses(roster); setLoadError(''); })
+      .catch((error) => setLoadError(error.message));
+  };
+  useEffect(() => { if (tab === 'classes') reloadDirectory(); }, [tab, api, platform?.api, platform?.courseId]);
+  const showTab = (next: Tab) => { setRow(undefined); setTab(next); };
+  const tabs: [Tab, string][] = platform
+    ? [['classes', '班級小考'], ['make', '出題'], ['exams', '考卷設定']]
+    : [['make', '出題'], ['exams', '考卷與場次'], ['report', '報表']];
   return (
     <div className="zuvio">
       <div className="sectionhead"><h2>Zuvio 出題</h2>{api.sample && <span className="z-badge">樣張：示範題目與合成學生</span>}</div>
       <div className="z-tabs" role="tablist">
-        {([['make', '出題'], ['exams', '考卷與場次'], ['report', '報表']] as const).map(([k, l]) => (
-          <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? 'active' : ''} onClick={() => setTab(k)}>{l}</button>
+        {tabs.map(([k, l]) => (
+          <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? 'active' : ''} onClick={() => showTab(k)}>{l}</button>
         ))}
       </div>
-      {tab === 'make' && <Make api={api} notify={notify} done={(id) => { setOpenExam(id); setTab('exams'); }} />}
+      {tab === 'classes' && platform && !row && <>
+        {loadError && <p className="z-warn" role="alert">{loadError} <button type="button" onClick={reloadDirectory}>重新整理</button></p>}
+        <QuizClassDirectory classes={classes} exams={exams} selected={classId}
+          select={setClassId} open={setRow} back={() => setClassId('')} />
+      </>}
+      {tab === 'classes' && platform && row && (row.exam.answerMode === 'platform'
+        ? <PlatformQuizTeacher key={row.sitting.id} api={platform.api} courseId={platform.courseId}
+          className={className} row={row} back={() => setRow(undefined)} reload={reloadDirectory}
+          report={() => <Report api={api} initial={row.exam.id} classScope={classId} sittingScope={row.sitting.id} moodEnabled={moodEnabled} />} />
+        : <>
+          <ExamDetail api={api} notify={notify} examId={row.exam.id} classScope={classId} sittingScope={row.sitting.id}
+            className={className} back={() => { setRow(undefined); reloadDirectory(); }} onChanged={reloadDirectory} />
+          <Report key={row.sitting.id + ':' + (exams.find((exam) => exam.id === row.exam.id)?.sittings.find((sitting) => sitting.id === row.sitting.id)?.results?.revision || 0)}
+            api={api} initial={row.exam.id} classScope={classId} sittingScope={row.sitting.id} moodEnabled={moodEnabled} />
+        </>)}
+      {tab === 'make' && <Make api={api} notify={notify} platform={!!platform} done={(id) => { setOpenExam(id); setTab('exams'); }} />}
       {tab === 'exams' && <Exams api={api} notify={notify} open={openExam} setOpen={setOpenExam} />}
       {tab === 'report' && <Report api={api} initial={openExam} moodEnabled={moodEnabled} />}
     </div>
@@ -47,7 +84,8 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true 
 
 // ---------------- 出題 ----------------
 type Mode = 'proportional' | 'equal' | 'custom';
-function Make({ api, notify, done }: { api: ZuvioApi; notify: (m: string) => void; done: (id: string) => void }) {
+function Make({ api, notify, done, platform }: { api: ZuvioApi; notify: (m: string) => void; done: (id: string) => void; platform: boolean }) {
+  const [answerMode, setAnswerMode] = useState<QuizAnswerMode>('zuvio');
   const [data, setData] = useState<Awaited<ReturnType<ZuvioApi['pool']>>>();
   const [checked, setChecked] = useState<string[]>([]);
   const [total, setTotal] = useState(20);
@@ -106,9 +144,9 @@ function Make({ api, notify, done }: { api: ZuvioApi; notify: (m: string) => voi
     setBusy(true);
     try {
       const items: ZItem[] = picked.map((p) => ({ questionId: p.e.question.id, unitId: p.e.unitId, version: p.e.version, optionOrder: p.order }));
-      const r = await api.createExam({ examId: uuid(), title: title.trim(), score: scorePer, classIds, items });
-      download(fileName(title.trim()), r.csv);
-      notify('已建立考卷並下載 CSV');
+      const r = await api.createExam({ examId: uuid(), title: title.trim(), score: scorePer, classIds, items, answerMode });
+      if (r.csv) download(fileName(title.trim()), r.csv);
+      notify(r.csv ? '已建立考卷並下載 CSV' : '已建立平台小考考卷');
       done(r.examId);
     } catch (e: any) { notify(e.message); } finally { setBusy(false); }
   }
@@ -155,6 +193,9 @@ function Make({ api, notify, done }: { api: ZuvioApi; notify: (m: string) => voi
       <section className="z-card">
         <h3>3. 配分與考卷設定</h3>
         <div className="z-row">
+          {platform && <label>作答方式<select value={answerMode} onChange={(event) => setAnswerMode(event.target.value as QuizAnswerMode)}>
+            <option value="zuvio">Zuvio 匯入</option><option value="platform">平台作答</option>
+          </select></label>}
           <label>考卷名稱<input value={title} maxLength={60} onChange={(e) => setTitle(e.target.value)} /></label>
           <label>每題配分（整數）<input type="number" min={1} max={100} step={1} value={scorePer} onChange={(e) => setScorePer(Math.max(1, Math.min(100, Math.round(Number(e.target.value) || 1))))} /></label>
           <span className="z-total">總分：{qCount} 題 × {scorePer} 分 ＝ <b>{totalScore}</b> 分</span>
@@ -171,7 +212,7 @@ function Make({ api, notify, done }: { api: ZuvioApi; notify: (m: string) => voi
       {picked.length > 0 && (
         <section className="z-card">
           <div className="z-row"><h3 style={{ margin: 0 }}>4. 預覽（{picked.length} 題，每題 {scorePer} 分，總分 {totalScore} 分）</h3><span className="z-sp" />
-            <button onClick={draw}>全部重抽</button><button className="primary" disabled={busy} onClick={create}>建立考卷並下載 CSV</button></div>
+            <button onClick={draw}>全部重抽</button><button className="primary" disabled={busy} onClick={create}>{answerMode === 'platform' ? '建立考卷' : '建立考卷並下載 CSV'}</button></div>
           {short.length > 0 && <p className="z-warn">題數不足：{short.join('、')}</p>}
           <ol className="z-qs">
             {picked.map(({ e, order }, i) => (
@@ -209,16 +250,27 @@ function Exams({ api, notify, open, setOpen }: { api: ZuvioApi; notify: (m: stri
   );
 }
 
-function ExamDetail({ api, notify, examId, back }: { api: ZuvioApi; notify: (m: string) => void; examId: string; back: () => void }) {
+function ExamDetail({ api, notify, examId, back, classScope, sittingScope, className, onChanged }: {
+  api: ZuvioApi; notify: (m: string) => void; examId: string; back: () => void;
+  classScope?: string; sittingScope?: string; className?: string; onChanged?: () => void;
+}) {
   const [d, setD] = useState<Awaited<ReturnType<ZuvioApi['getExam']>>>();
   const [newS, setNewS] = useState({ label: '', date: today(), classIds: [] as string[] });
   const [importing, setImporting] = useState<string>('');
+  const [durationSeconds, setDurationSeconds] = useState<number>();
   const reload = () => api.getExam(examId).then(setD);
   useEffect(() => { reload(); }, [examId]);
   if (!d) return <p className="muted">讀取中…</p>;
+  const platform = d.summary.answerMode === 'platform';
+  const sittings = d.summary.sittings.filter((row) => !sittingScope || row.id === sittingScope);
   async function addSitting() {
     if (!newS.label.trim() || !newS.classIds.length) return notify('請填場次名稱並選班級');
-    await api.createSitting(examId, { ...newS, label: newS.label.trim() });
+    try {
+      await api.createSitting(examId, { ...newS, label: newS.label.trim(), ...(platform && durationSeconds !== undefined ? { durationSeconds } : {}) });
+    } catch (error) {
+      notify((error as Error).message);
+      return;
+    }
     setNewS({ label: '', date: today(), classIds: [] });
     reload();
   }
@@ -233,18 +285,18 @@ function ExamDetail({ api, notify, examId, back }: { api: ZuvioApi; notify: (m: 
   }
   return (
     <>
-      <div className="z-row"><button onClick={back}>← 考卷列表</button><span className="z-sp" />{d.csv ? <button onClick={() => download(fileName(d.summary.title), d.csv!)}>重新下載 CSV</button> : <span className="z-warn">有 {d.masked} 題已列為正式測驗保留題，不能重新下載</span>}</div>
+      <div className="z-row"><button onClick={back}>{className ? '← ' + className + '的小考' : '← 考卷列表'}</button><span className="z-sp" />{d.csv ? <button onClick={() => download(fileName(d.summary.title), d.csv!)}>重新下載 CSV</button> : !platform && <span className="z-warn">有 {d.masked} 題已列為正式測驗保留題，不能重新下載</span>}</div>
       <section className="z-card">
         <h3>{d.summary.title}</h3>
-        <p className="muted">{d.view.items.length} 題・每題 {d.view.score} 分・可使用班級：{d.classIds.join('、')}・重新下載的檔案與建立時完全相同</p>
+        <p className="muted">{d.view.items.length} 題・每題 {d.view.score} 分・可使用班級：{d.classIds.join('、')}{platform ? '・平台作答' : '・重新下載的檔案與建立時完全相同'}</p>
         <h4>場次</h4>
         <table className="z-table"><thead><tr><th>場次</th><th>日期</th><th>開考時間</th><th>班級</th><th>成績</th><th /></tr></thead>
-          <tbody>{d.summary.sittings.map((s) => (
+          <tbody>{sittings.map((s) => (
             <tr key={s.id}><td>{s.label}</td><td>{s.date}</td>
               <td>
-                {s.startsAt ? new Date(s.startsAt).toLocaleString('zh-TW', { hour12: false }) : '未設定'}
+                {s.startsAt && !['prepared', 'announced'].includes(s.platformState || '') ? new Date(s.startsAt).toLocaleString('zh-TW', { hour12: false }) : '未開放'}
                 {' '}
-                <button type="button" onClick={async () => {
+                {!platform && <button type="button" onClick={async () => {
                   const cur = new Date(s.startsAt || Date.now());
                   const pad = (n: number) => String(n).padStart(2, '0');
                   const def = `${cur.getFullYear()}-${pad(cur.getMonth() + 1)}-${pad(cur.getDate())}T${pad(cur.getHours())}:${pad(cur.getMinutes())}`;
@@ -254,26 +306,28 @@ function ExamDetail({ api, notify, examId, back }: { api: ZuvioApi; notify: (m: 
                   if (!Number.isFinite(ms)) return notify('時間格式無效');
                   await api.updateSittingStart(examId, s.id, ms);
                   reload();
-                }}>改時間</button>
+                }}>改時間</button>}
               </td>
-              <td>{s.classIds.join('、')}</td>
-              <td>{s.results ? `已匯入 ${s.results.matched} 人` : <span className="muted">尚未匯入</span>}</td>
-              <td><button onClick={() => setImporting(s.id)}>{s.results ? '重新匯入' : '匯入成績'}</button>
-                {s.results && <button onClick={async () => { if (confirm('刪除這一場的成績？')) { await api.deleteResults(examId, s.id); reload(); } }}>刪除成績</button>}
+              <td>{classScope || s.classIds.join('、')}</td>
+              <td>{s.results ? (platform ? '已批改 ' : '已匯入 ') + s.results.matched + ' 人' : <span className="muted">{platform ? '尚無成績' : '尚未匯入'}</span>}</td>
+              <td>{platform ? '從班級小考管理' : <><button onClick={() => setImporting(s.id)}>{s.results ? '重新匯入' : '匯入成績'}</button>
+                {s.results && <button onClick={async () => { if (confirm('刪除這一場的成績？')) { await api.deleteResults(examId, s.id); reload(); onChanged?.(); } }}>刪除成績</button>}
                 {s.pendingCleanup && <button onClick={() => void cleanupResults(s.id)}>清理殘留成績</button>}
-                <button onClick={async () => { if (confirm('清除這一場的情緒簽到紀錄？')) { await api.deleteMood(examId, s.id); notify('已清除情緒紀錄'); } }}>刪情緒</button></td></tr>
+                <button onClick={async () => { if (confirm('清除這一場的情緒簽到紀錄？')) { await api.deleteMood(examId, s.id); notify('已清除情緒紀錄'); } }}>刪情緒</button></>}</td></tr>
           ))}</tbody></table>
-        <div className="z-row z-new">
+        {!sittingScope && <div className="z-row z-new">
           <label>新增場次<input placeholder="例：乙班 第1次" value={newS.label} onChange={(e) => setNewS({ ...newS, label: e.target.value })} /></label>
           <label>日期<input type="date" value={newS.date} onChange={(e) => setNewS({ ...newS, date: e.target.value })} /></label>
-          {d.classIds.map((c) => <label key={c} className="z-check"><input type="checkbox" checked={newS.classIds.includes(c)} onChange={(e) => setNewS({ ...newS, classIds: e.target.checked ? [...newS.classIds, c] : newS.classIds.filter((x) => x !== c) })} />{c}</label>)}
+          {d.classIds.map((c) => <label key={c} className="z-check"><input type={platform ? 'radio' : 'checkbox'} name={platform ? 'platform-class' : undefined} checked={newS.classIds.includes(c)} onChange={(e) => setNewS({ ...newS, classIds: platform ? [c] : e.target.checked ? [...newS.classIds, c] : newS.classIds.filter((x) => x !== c) })} />{c}</label>)}
+          {platform && <label>限時（秒）<input type="number" min="1" max="14400" value={durationSeconds ?? d.view.items.length * 30}
+            onChange={(event) => setDurationSeconds(Number(event.target.value))} /></label>}
           <button onClick={addSitting}>新增</button>
-        </div>
-        <p className="muted">再考一次時，請在 Zuvio 複製一份新考卷或重新匯入同一個 CSV，不要重新開放舊考卷，以免匯出檔只剩最後一次作答。</p>
+        </div>}
+        {!platform && <p className="muted">再考一次時，請在 Zuvio 複製一份新考卷或重新匯入同一個 CSV，不要重新開放舊考卷，以免匯出檔只剩最後一次作答。</p>}
       </section>
-      {importing && <ImportPanel api={api} notify={notify} view={d.view} examId={examId} sitting={d.summary.sittings.find((s) => s.id === importing)!} close={() => { setImporting(''); reload(); }} />}
+      {importing && <ImportPanel api={api} notify={notify} view={d.view} examId={examId} sitting={d.summary.sittings.find((s) => s.id === importing)!} close={() => { setImporting(''); reload(); onChanged?.(); }} />}
       <section className="z-card">
-        <h4>題目（依 Zuvio 顯示順序）</h4>
+        <h4>{platform ? '題目（報表順序）' : '題目（依 Zuvio 顯示順序）'}</h4>
         <ol className="z-qs">{d.view.items.map((it) => (
           <li key={it.questionId}><div className="z-qmeta"><span className="z-tag">{it.questionId}</span></div><p>{it.text}</p>
             <ol className="z-opts">{it.optionOrder.map((id) => <li key={id} className={id === it.answer ? 'z-ans' : ''}>{it.options.find((o) => o.id === id)!.text}</li>)}</ol></li>
@@ -324,17 +378,20 @@ function ImportPanel({ api, notify, view, examId, sitting, close }: { api: Zuvio
 }
 
 // ---------------- 報表 ----------------
-export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; initial: string; moodEnabled?: boolean }) {
+export function Report({ api, initial, moodEnabled = true, classScope, sittingScope }: {
+  api: ZuvioApi; initial: string; moodEnabled?: boolean; classScope?: string; sittingScope?: string;
+}) {
   const [list, setList] = useState<ExamSummary[]>([]);
   const [examId, setExamId] = useState(initial);
   const [sel, setSel] = useState<string[]>([]);
-  const [cls, setCls] = useState('');
+  const [cls, setCls] = useState(classScope || '');
   const [threshold, setThreshold] = useState(80);
   const [full, setFull] = useState<FullZuvioReport>();
   const [care, setCare] = useState<CareListEntry[]>([]);
   const [careIncomplete, setCareIncomplete] = useState(false);
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [exporting, setExporting] = useState('');
+  const [reportError, setReportError] = useState('');
 
   useEffect(() => {
     api.listExams().then((l) => {
@@ -345,46 +402,56 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
   }, [api]);
 
   const exam = list.find((e) => e.id === examId);
-  const availableSittings = moodEnabled ? (exam?.sittings || []) : (exam?.sittings.filter((s) => s.results) || []);
+  const platform = exam?.answerMode === 'platform';
+  const availableSittings = (exam?.sittings || []).filter((s) =>
+    (moodEnabled || s.results) && (!classScope || s.classIds.includes(classScope)));
   const moodOn = moodEnabled && full?.moodEnabled !== false;
+  const analysisOn = moodOn || platform;
 
   useEffect(() => {
     const firstWithRes = availableSittings.find((s) => s.results);
     const defaultSel = firstWithRes ? [firstWithRes.id] : availableSittings.slice(0, 1).map((s) => s.id);
-    setSel(defaultSel);
-    setCls('');
+    setSel(sittingScope ? [sittingScope] : defaultSel);
+    setCls(classScope || '');
     setRevealed({});
-  }, [examId, list, moodEnabled]);
+  }, [examId, list, moodEnabled, classScope, sittingScope]);
 
   useEffect(() => {
     if (!examId || !sel.length) { setFull(undefined); setCare([]); setCareIncomplete(false); return; }
-    api.fullReport(examId, sel, cls || undefined, threshold).then(setFull);
+    let alive = true;
+    setReportError('');
+    api.fullReport(examId, sel, cls || undefined, threshold).then((result) => { if (alive) setFull(result); })
+      .catch((error) => { if (alive) { setFull(undefined); setReportError(error.message); } });
     if (moodEnabled && sel.length === 1) {
       api.careList(examId, sel[0], cls || undefined, threshold).then((r) => {
+        if (!alive) return;
         setCare(r.entries);
         setCareIncomplete(Boolean(r.preExamIncomplete));
-      }).catch(() => { setCare([]); setCareIncomplete(false); });
+      }).catch(() => { if (alive) { setCare([]); setCareIncomplete(false); } });
     } else {
       setCare([]);
       setCareIncomplete(false);
     }
-  }, [examId, sel.join(), cls, threshold, moodEnabled]);
+    return () => { alive = false; };
+  }, [api, examId, sel.join(), cls, threshold, moodEnabled]);
 
   const classes = [...new Set(availableSittings.filter((s) => sel.includes(s.id)).flatMap((s) => s.classIds))];
   const rep = full?.report;
   const cmp = full?.compare;
-  const analysis = moodOn ? full?.analysis : undefined;
+  const analysis = analysisOn ? full?.analysis : undefined;
   const mood = moodOn ? full?.moodSummary : undefined;
   const preExam = moodOn ? full?.preExamCounts : undefined;
   const preDetail = moodOn ? full?.preExamDetail : undefined;
   const hasResults = (rep?.students ?? 0) > 0;
 
   const doExport = async (kind: 'itemAnalysis' | 'researchAnon' | 'researchNamed') => {
-    if (!examId || !sel.length || exporting || !moodOn) return;
+    if (!examId || !sel.length || exporting || (!moodOn && !(platform && kind === 'itemAnalysis'))) return;
     setExporting(kind);
     try {
       const res = await api.exportCsv(examId, sel, kind, cls || undefined);
       download(res.filename, res.csv);
+    } catch (error) {
+      setReportError((error as Error).message);
     } finally {
       setExporting('');
     }
@@ -394,27 +461,28 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
     <>
       <section className="z-card">
         <div className="z-row" style={{ flexWrap: 'wrap', gap: 8 }}>
-          <label>考卷<select value={examId} onChange={(e) => setExamId(e.target.value)}>{list.map((e) => <option key={e.id} value={e.id}>{e.title}</option>)}</select></label>
-          {classes.length > 1 && <label>班級<select value={cls} onChange={(e) => setCls(e.target.value)}><option value="">全部</option>{classes.map((c) => <option key={c}>{c}</option>)}</select></label>}
+          {!classScope && <label>考卷<select value={examId} onChange={(e) => setExamId(e.target.value)}>{list.map((e) => <option key={e.id} value={e.id}>{e.title}</option>)}</select></label>}
+          {!classScope && classes.length > 1 && <label>班級<select value={cls} onChange={(e) => setCls(e.target.value)}><option value="">全部</option>{classes.map((c) => <option key={c}>{c}</option>)}</select></label>}
           {moodOn && (
             <label>高分門檻 (%)<input type="number" min={0} max={100} value={threshold} onChange={(e) => setThreshold(Math.max(0, Math.min(100, Number(e.target.value) || 0)))} style={{ width: 64 }} /></label>
           )}
           <span className="z-sp" />
+          {analysisOn && <button type="button" disabled={!sel.length || !!exporting || !hasResults} onClick={() => void doExport('itemAnalysis')}>試題分析 CSV</button>}
           {moodOn && (
             <>
-              <button type="button" disabled={!sel.length || !!exporting || !hasResults} onClick={() => void doExport('itemAnalysis')}>試題分析 CSV</button>
               <button type="button" disabled={!sel.length || !!exporting || !!full?.preExamIncomplete} title={full?.preExamIncomplete ? '考前練習資料不完整，暫停匯出' : undefined} onClick={() => void doExport('researchAnon')}>研究 CSV（去識別）</button>
               <button type="button" disabled={!sel.length || !!exporting || !!full?.preExamIncomplete} title={full?.preExamIncomplete ? '考前練習資料不完整，暫停匯出' : undefined} onClick={() => void doExport('researchNamed')}>研究 CSV（具名・含個資）</button>
             </>
           )}
         </div>
+        {reportError && <p className="z-warn" role="alert">{reportError}</p>}
         <div className="z-row"><span>場次：</span>{availableSittings.map((s) => (
           <label key={s.id} className="z-check">
-            <input type="checkbox" checked={sel.includes(s.id)} onChange={(e) => setSel(e.target.checked ? [...sel, s.id] : sel.filter((x) => x !== s.id))} />
+            <input type="checkbox" checked={sel.includes(s.id)} disabled={!!sittingScope && s.id === sittingScope} onChange={(e) => setSel(e.target.checked ? [...sel.slice(0, classScope ? 1 : sel.length), s.id] : sel.filter((x) => x !== s.id))} />
             {s.label}（{s.results ? `${s.results.matched} 人` : '尚無成績'}）
           </label>
         ))}</div>
-        <p className="muted">勾一場＝單場；勾多場＝合併；{moodOn ? '未匯入成績場次可先看考前練習覆蓋率與情緒分布；剛好勾兩場時顯示比較。' : '剛好勾兩場時顯示兩場比較。'}</p>
+        <p className="muted">{classScope ? '可勾選同班另一場比較。' : '勾一場＝單場；勾多場＝合併。'}{moodOn ? '未匯入成績場次可先看考前練習覆蓋率與情緒分布；剛好勾兩場時顯示比較。' : '剛好勾兩場時顯示兩場比較。'}</p>
       </section>
 
       {rep && (
@@ -431,7 +499,24 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
             </section>
           )}
 
-          {!moodOn && (
+          {platform && full?.platformStats && (
+            <section className="z-card pq-teacher">
+              <h3>成績分布</h3>
+              <div className="z-metrics">
+                <div className="z-metric">平均 <b>{full.platformStats.mean ?? '—'}</b></div>
+                <div className="z-metric">中位數 <b>{full.platformStats.median ?? '—'}</b></div>
+                <div className="z-metric">最高 <b>{full.platformStats.max ?? '—'}</b></div>
+                <div className="z-metric">最低 <b>{full.platformStats.min ?? '—'}</b></div>
+              </div>
+              <div className="pq-distribution" aria-label="百分比成績分布">
+                {full.platformStats.bins.map((bin) => <div key={bin.label}>
+                  <b>{bin.count}</b><i style={{ height: Math.max(2, bin.count / Math.max(1, ...full.platformStats!.bins.map((value) => value.count)) * 105) }} />
+                  <span>{bin.label}</span>
+                </div>)}
+              </div>
+            </section>
+          )}
+          {!moodOn && !platform && (
             <section className="z-card">
               <h3>場次摘要（{rep.students} {sel.length > 1 ? '人次' : '人'}）</h3>
               <div className="z-metrics">
@@ -454,7 +539,7 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
             </section>
           )}
 
-          {moodOn && hasResults && analysis && (
+          {analysisOn && hasResults && analysis && (
             <section className="z-card">
               <h3>甲表：整卷統計與信度（{rep.students} {sel.length > 1 ? '人次' : '人'}）</h3>
               {analysis.summary.lowSample && <p className="z-warn">作答人數少於 30 人，統計結果僅供參考。</p>}
@@ -467,10 +552,10 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
                   <div className="z-metric"><small>考前練習（平均覆蓋 {preDetail?.avgCoverage ?? 0}%）</small><b>達標 {preExam.passed} · 練過 {preExam.practiced}</b><small>僅看教材 {preExam.infographic_only} · 未練 {preExam.none}</small></div>
                 )}
               </div>
-              <h4>分數分布</h4>
+              {!platform && <><h4>分數分布</h4>
               {analysis.summary.scoreBins.map((b) => (
                 <div key={b.label} className="z-bar"><span>{b.label}</span><i style={{ width: pct(analysis.summary.students ? b.count / analysis.summary.students : 0) }} /><b>{b.count} 人</b></div>
-              ))}
+              ))}</>}
               <h4>次單元答對率</h4>
               {rep.subunits.map((s) => <div key={s.unitId} className="z-bar"><span>{s.title}</span><i style={{ width: pct(s.rate) }} /><b>{pct(s.rate)}</b></div>)}
             </section>
@@ -546,7 +631,7 @@ export function Report({ api, initial, moodEnabled = true }: { api: ZuvioApi; in
             </section>
           )}
 
-          {moodOn && hasResults && analysis && (
+          {analysisOn && hasResults && analysis && (
             <section className="z-card">
               <h3>乙表：逐題難度、鑑別度、r_pb 與誘答分析</h3>
               <table className="z-table">

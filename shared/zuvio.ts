@@ -180,7 +180,7 @@ export function matchExam(view: ZExamView, p: ZParsed): ZMatch {
 }
 
 export interface ZRosterInfo { classId: string; enabled: boolean; numericOnlyMatch?: boolean }
-export interface ZResult { classId: string; answers: Record<string, string>; correct: number; score: number }
+export interface ZResult { classId: string; answers: Record<string, string>; correct: number; score: number; makeup?: number; blankStart?: boolean; extendedSeconds?: number }
 export type ZCounts = { notInRoster: number; disabled: number; wrongClass: number; needTextId: number; duplicate: number };
 /** 由比對結果還原每位學生作答；回傳的錯誤列表只留遮碼學號與列號（不入資料庫） */
 export function buildResults(

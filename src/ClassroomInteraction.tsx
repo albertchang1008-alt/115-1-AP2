@@ -1143,7 +1143,7 @@ export function TeacherZuvioMoodPanel({ api, course }: { api: API; course: Cours
     const reqCourseId = course.id;
     const reqSeq = selectionRef.current.seq;
     try {
-      const list = await zApi.listExams();
+      const list = (await zApi.listExams()).filter((exam) => exam.answerMode !== 'platform');
       if (selectionRef.current.courseId !== reqCourseId) return;
       setExams(list);
       if (!hasInteractedRef.current && sameSelection(reqSeq, reqCourseId, '', '') && list[0]) {

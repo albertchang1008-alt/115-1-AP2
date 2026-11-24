@@ -5,6 +5,7 @@ export function createLeaveTracker(
   win: Window,
   onReturn: (m: LeaveMetrics) => void,
   now: () => number = () => performance.now(),
+  onLeave?: (episode: number) => void,
 ) {
   let hidden = doc.hidden,
     blurred = false,
@@ -24,6 +25,7 @@ export function createLeaveTracker(
       if (started === null) {
         started = now();
         count++;
+        onLeave?.(count);
       }
     } else if (started !== null) {
       totalMs += Math.max(0, now() - started);

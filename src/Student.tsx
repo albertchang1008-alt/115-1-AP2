@@ -69,6 +69,7 @@ import {
 import { API, cachedBank, enqueue, dequeue, pending, sampleProgress } from './service';
 import { Youtube, HtmlMaterial } from './Player';
 import { parseStudentRoute } from './studentRoute';
+import { QuizEntry } from './PlatformQuizStudent';
 import ThemePicker from './ThemePicker';
 import FontSizePicker from './FontSizePicker';
 type Props = {
@@ -385,6 +386,8 @@ export default function Student({
       /></>);
   return (
     <><StudentSettings /><div className="student">
+      {!preview && !unit && !activityId && course.enrollmentClassId && featureEnabled(course, 'zuvioExams') &&
+        <QuizEntry api={api} courseId={course.id} classId={course.enrollmentClassId} />}
       {!unit && <><div className="prefs-bar student-guide-prefs"><ThemePicker /><FontSizePicker /><a className="button" href="./guide/index.html" target="_blank" rel="noopener">？使用說明</a></div>{!preview && <FirstUseTips courseId={course.id} uid={uid} />}</>}
       <div className="student-top">
         <span className="eyebrow">LEARNING SPACE</span>

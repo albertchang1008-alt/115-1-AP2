@@ -13,14 +13,14 @@ import { featureEnabled } from '../shared/features';
 import { AttendPage, AttendanceBanner, MyAttendancePage, isMyAttendanceHash } from './Attendance';
 import AttendanceAdmin from './AttendanceAdmin';
 import { parseAttendHash } from '../shared/attendance';
+import { parseQuizHash } from '../shared/platformQuiz';
+import { QuizLinkPage } from './PlatformQuizStudent';
 import TeachingControl from './TeachingControl';
 import { TeacherAssessments } from './Assessments';
 import CompletionBoard from './CompletionBoard';
-import ZuvioExams from './ZuvioExams';
+import { ZuvioTab } from './ZuvioExams';
 import { ZuvioMoodOverlay, type ActiveMoodPrompt } from './ZuvioMoodCard';
 import type { MoodCode } from '../shared/zuvioExt';
-import { cloudZuvioApi, sampleZuvioApi } from './zuvioApi';
-import { SAMPLE_POOL } from '../shared/zuvioSamplePool';
 import { carryMessage, CarryResult } from '../shared/wrongCarry';
 import ChapterMergeDialog from './ChapterMergeDialog';
 import { NewCourse, ClassManager } from './CourseSetup';
@@ -257,7 +257,10 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
       setProfile(data.profile);
       setCourses(data.courses);
       setTestEmails(Array.isArray(data.testEmails) ? data.testEmails : []);
-      setCourseId((old) => old || data.courses[0]?.id || '');
+      setCourseId((old) => {
+        const link = parseQuizHash(location.hash);
+        return (link && data.courses.some((course: Course) => course.id === link.courseId) ? link.courseId : old) || data.courses[0]?.id || '';
+      });
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -346,6 +349,12 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
   // 課堂點名：掃 QR 打開 #/attend?c=…&t=… 時，登入前後都顯示簽到頁（登入後自動送出）。
   if (!api.preview && parseAttendHash(location.hash))
     return <AttendPage api={api} profile={profile} courses={courses} loading={loading} error={error} onLogin={() => { setError(''); login().catch((e) => setError(e.message)); }} />;
+  const quizRoute = !api.preview ? parseQuizHash(location.hash) : null;
+  if (quizRoute && !profile?.teacher) {
+    const target = courses.find((c) => c.id === quizRoute.courseId);
+    return <QuizLinkPage api={api} {...quizRoute} classId={featureEnabled(target, 'zuvioExams') ? target?.enrollmentClassId : undefined}
+      signedIn={!!profile} loading={loading} error={error} login={() => { setError(''); login().catch((e) => setError(e.message)); }} />;
+  }
   if (!profile)
     return (
       <div className="login">
@@ -713,7 +722,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
           ) : tab === 'analysis' ? (
             <Analysis key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'zuvio' && (api.preview || featureEnabled(course, 'zuvioExams')) ? (
-            <ZuvioExams key={course.id} api={api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, course.id)} notify={notify} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
+            <ZuvioTab key={course.id} api={api} courseId={course.id} notify={notify} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
           ) : tab === 'reports' ? (
             <ReportsPage key={course.id} course={course} api={api} notify={notify} />
           ) : (

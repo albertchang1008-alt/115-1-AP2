@@ -725,6 +725,7 @@ export interface CareStudentInput {
   coverage?: number;
   hasWrongInExam?: boolean;
   preExamIncomplete?: boolean;
+  makeup?: number;
   recentHistory?: Array<{
     score: number | null;
     percentage?: number | null;
@@ -745,6 +746,7 @@ export interface CareListEntry {
   preExamStatus: PreExamStatus;
   preExamCoverage: number;
   preExamIncomplete?: boolean;
+  makeup?: number;
   practiceGroup: string | null;
   tags: string[];
   streakNotes: string[];
@@ -836,6 +838,7 @@ export function buildCareList(students: CareStudentInput[], threshold = 80): Car
         preExamStatus: st.preExamStatus,
         preExamCoverage: st.coverage ?? 0,
         preExamIncomplete: Boolean(st.preExamIncomplete),
+        ...(st.makeup ? { makeup: st.makeup } : {}),
         practiceGroup,
         tags,
         streakNotes,
@@ -921,6 +924,7 @@ export interface ResearchCsvRow {
   correct: number | null;
   answers: Record<string, string>;
   itemPreExam?: Record<string, ItemPreExamStatus>;
+  makeup?: number;
 }
 
 const fmtTaipeiTime = (ms: number | null | undefined) =>
@@ -948,6 +952,7 @@ export function researchCsv(
     '分數百分比',
     '答對題數',
     ...view.items.flatMap((_, i) => [`Q${i + 1}_作答`, `Q${i + 1}_對錯`, `Q${i + 1}_考前練習`]),
+    '補考',
   ];
   const data = rows.map((r) => [
     ...(deidentified ? [r.researchId || ''] : [r.studentId || '', r.name || '']),
@@ -970,6 +975,7 @@ export function researchCsv(
       const itemSt = r.itemPreExam?.[it.questionId] || 'none';
       return [ans, isRight, itemSt];
     }),
+    r.makeup || '',
   ]);
   return formatCsvLines(headers, data);
 }
