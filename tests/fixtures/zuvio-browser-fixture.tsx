@@ -63,7 +63,6 @@ function WrappedZuvioExams() {
 function StudentMoodFixture() {
   const prompt: ActiveMoodPrompt = {
     active: true,
-    examId: 'demo-exam',
     sittingId: 's1',
     sittingLabel: '甲班 第1次',
     closesAt: Date.now() + 600000,
