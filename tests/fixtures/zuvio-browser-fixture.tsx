@@ -48,6 +48,7 @@ function WrappedZuvioExams() {
         if (!cleanupOnly && s) {
           s.pendingCleanup = true;
         }
+        setToast('');
       },
     };
   }, []);

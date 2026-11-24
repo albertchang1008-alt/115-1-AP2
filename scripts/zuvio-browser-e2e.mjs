@@ -58,7 +58,11 @@ const port = server.address().port;
 const baseUrl = `http://127.0.0.1:${port}/`;
 console.log(`[Zuvio E2E] Test server listening on ${baseUrl}`);
 
-const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch()).catch((error) => {
+const chromePath = process.env.CHROME_PATH;
+const browser = await (chromePath
+  ? chromium.launch({ executablePath: chromePath })
+  : chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch())
+).catch((error) => {
   server.close();
   throw error;
 });
@@ -205,14 +209,17 @@ try {
   // Step 5: 刪除成績 (Delete Results)
   console.log('[Zuvio E2E] Step 5: 刪除成績...');
   const sittingRow = page.getByRole('row').filter({ hasText: '甲班 第1次' });
+  const toast = page.locator('#test-toast');
   const deleteBtn = sittingRow.getByRole('button', { name: '刪除成績', exact: true });
   const cleanupBtn = sittingRow.getByRole('button', { name: '清理殘留成績', exact: true, includeHidden: true });
+  await toast.filter({ hasText: '成績已匯入' }).waitFor({ state: 'visible' });
   assert.equal(await cleanupBtn.count(), 0, '刪除前應無待清理按鈕');
   await assertUnobscured(deleteBtn);
   const beforeCleanup = await capture(page, '06-before-cleanup.png', '刪除前，場次仍有成績並可執行刪除');
   await deleteBtn.click(); // dialog is auto-accepted
 
   await sittingRow.getByRole('cell', { name: '尚未匯入', exact: true }).waitFor();
+  assert.equal(await toast.count(), 0, '刪除成績後應移除上一個匯入提示');
   results.deleteResults = true;
 
   // Step 6: 清理殘留成績 (Cleanup Residual Results)
@@ -223,6 +230,7 @@ try {
   await cleanupBtn.click();
 
   await cleanupBtn.waitFor({ state: 'detached' });
+  assert.equal(await toast.count(), 0, '清理後應維持提示框已移除');
   const remainingImportBtn = sittingRow.getByRole('button', { name: '匯入成績', exact: true });
   await assertUnobscured(remainingImportBtn);
   const afterCleanup = await capture(page, '08-after-cleanup.png', '清理完成，清理按鈕已移除，匯入按鈕未被遮擋');

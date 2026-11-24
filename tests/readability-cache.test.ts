@@ -140,6 +140,31 @@ test('共用指紋：檢查程式、它 import 的模組、metrics、播放器�
   }
 });
 
+test('共用教材指紋：根目錄說明文件不影響，CSS 與 JS 各自影響', async () => {
+  const { root, write } = makeRoot();
+  try {
+    write('public/materials/README.md', '# 說明\n');
+    write('public/materials/notes.txt', '說明\n');
+    write('public/materials/readability-overlay.css', 'p{color:inherit}\n');
+    const base = await readabilityFingerprints(options(root));
+
+    write('public/materials/README.md', '# 更新說明\n');
+    assert.deepEqual(await readabilityFingerprints(options(root)), base);
+    write('public/materials/notes.txt', '更新說明\n');
+    assert.deepEqual(await readabilityFingerprints(options(root)), base);
+
+    write('public/materials/readability-overlay.css', 'p{font-size:18px}\n');
+    const cssChanged = await readabilityFingerprints(options(root));
+    assert.notEqual(cssChanged.common, base.common);
+    write('public/materials/course-learning.js', '// sdk updated\n');
+    const jsChanged = await readabilityFingerprints(options(root));
+    assert.notEqual(jsChanged.common, cssChanged.common);
+    assert.deepEqual(jsChanged.materials, base.materials);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('共用指紋 package-lock 正規化：根版本與無關套件不影響；播放器／檢查程式相依與遞移相依變更或 lock 異常則全部重量', async () => {
   const { root, write } = makeRoot();
   try {

@@ -272,7 +272,10 @@ export async function readabilityFingerprints({
     format: 'iife',
   });
   const materialsDir = path.join(root, 'public/materials');
-  const sharedMaterialFiles = listMaterialFiles(root, materialsDir).filter((f) => path.dirname(f) === materialsDir);
+  // 根目錄的 Markdown 與純文字說明供維護者閱讀，播放器不會載入；編輯說明時可沿用量測結果。
+  const sharedMaterialFiles = listMaterialFiles(root, materialsDir).filter(
+    (file) => path.dirname(file) === materialsDir && !/\.(?:md|markdown|txt)$/i.test(file),
+  );
   const extra = ['src/style.css'].map((f) => path.join(root, f)).filter((f) => fs.existsSync(f));
   const lockHash = lockFingerprint(root, {
     nodeModuleKeys: platform.nodeModuleKeys,
