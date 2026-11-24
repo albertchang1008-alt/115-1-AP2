@@ -1159,7 +1159,7 @@ dd {
   font-size: calc(65px * var(--font-scale, 1));
 }
 .quizresult h1 small {
-  font-size: calc(20px * var(--font-scale, 1));
+  font-size: calc(21px * var(--font-scale, 1));
 }
 .reviewanswers {
   text-align: left;
@@ -1531,21 +1531,106 @@ dd {
 :root { --surface: #fff; --page: #f3f6f8; --ink: #213846; --soft: #edf5fa; }
 :root[data-theme='forest'] { --blue: #17654e; --nav: #13382e; --accent: #d4b259; --soft: #e7f3ed; }
 :root[data-theme='violet'] { --blue: #7041b4; --nav: #2c2043; --accent: #e0b556; --soft: #f1ebfa; }
-/* 測驗結果：答對／答錯分色卡與逐選項標示（所有色系共用） */
-.result-counts { display:flex; justify-content:center; gap:32px; font-size:calc(18px * var(--font-scale, 1)); }
-.result-counts b { font-size:calc(26px * var(--font-scale, 1)); margin:0 4px; }
-.count-ok { color:#16a34a; } .count-bad { color:#dc2626; }
-.reviewanswer:is(.is-ok,.is-bad) { padding:18px 20px; border-radius:18px; margin-bottom:14px; }
-.reviewanswer.is-ok { background:#f0fdf4; border:1px solid #bbf7d0; }
-.reviewanswer.is-bad { background:#fef2f2; border:1px solid #fecaca; }
-.review-verdict { display:block; padding-bottom:10px; margin-bottom:12px; border-bottom:1px solid currentColor; font-size:calc(18px * var(--font-scale, 1)); }
-.reviewanswer.is-ok .review-verdict { color:#16a34a; border-color:#bbf7d0; }
-.reviewanswer.is-bad .review-verdict { color:#dc2626; border-color:#fecaca; }
-.review-no { color:#94a3b8; font-weight:600; }
-.review-options { list-style:none; padding:0; margin:10px 0 14px; display:grid; gap:8px; }
-.review-options li.right { color:#16a34a; font-weight:700; }
-.review-options li.picked { color:#dc2626; font-weight:700; }
-.review-options small { margin-left:6px; font-weight:700; }
+/* 作答結果與交卷確認 */
+:root {
+  --review-ok: #166534;
+  --review-bad: #a32121;
+  --review-ok-surface: #f0fdf4;
+  --review-bad-surface: #fef2f2;
+  --review-skip-surface: #f1f4f7;
+  --review-action: #125d8b;
+  --review-action-ink: #fff;
+}
+:root[data-theme='night'] {
+  --review-ok: #b5efc8;
+  --review-bad: #ffc1c1;
+  --review-ok-surface: #1c382d;
+  --review-bad-surface: #422b32;
+  --review-skip-surface: #2a3745;
+  --review-action: #85bcff;
+  --review-action-ink: #101923;
+}
+.result-counts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.result-counts span { white-space: nowrap; }
+.result-counts b { font-variant-numeric: tabular-nums; }
+.count-ok, .reviewanswer.is-ok .review-verdict, .review-options li.right { color: var(--review-ok); }
+.count-bad, .reviewanswer.is-bad .review-verdict, .review-options li.picked { color: var(--review-bad); }
+.reviewanswer:is(.is-ok, .is-bad, .is-skip) {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.reviewanswer.is-ok { background: var(--review-ok-surface); }
+.reviewanswer.is-bad { background: var(--review-bad-surface); }
+.reviewanswer.is-skip { background: var(--review-skip-surface); }
+.review-verdict { display: block; margin-bottom: 4px; }
+.reviewanswer > .your-answer { margin-bottom: 12px; }
+.reviewanswer > h3, .reviewanswer .explanations h3 { font-size: calc(21px * var(--font-scale, 1)); }
+.review-no { font-weight: 600; }
+.review-options { list-style: none; padding: 0; margin: 10px 0 14px; display: grid; gap: 8px; }
+.review-options li:is(.right, .picked) { font-weight: 700; }
+.review-options li > strong { margin-inline-start: 4px; }
+.quizresult > p, .review-verdict, .review-options,
+.reviewanswer .explanations :is(p, summary, a), .practice-result > :is(p, ul),
+.your-answer, .quiz .feedback p, .flashcard-answer p, .explanations .lecture-guide {
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+}
+.quizresult > p, .practice-result > p, .reviewanswer .explanations :is(p, a),
+.your-answer, .quiz .feedback p, .flashcard-answer p, .explanations .lecture-guide {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.explanations .lecture-guide { margin-bottom: 0; }
+.explanations .lecture-guide > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  padding-block: 6px;
+  vertical-align: middle;
+  color: var(--review-action);
+}
+.quizresult > .eyebrow {
+  font-size: calc(14px * var(--font-scale, 1));
+  color: var(--ink);
+}
+.quizresult > h1 { color: var(--ink); }
+:is(.reviewanswer, .quiz) .explanations :is(details, .explanationstep) {
+  background: var(--soft);
+  color: var(--ink);
+}
+.reviewanswer .explanations :is(summary, a) { min-height: 44px; padding-block: 8px; }
+.reviewanswer .explanations h4 { font-size: calc(21px * var(--font-scale, 1)); }
+.quiz-submit-dialog { max-width: calc(100% - 24px); margin: auto; border: 0; }
+.quiz-submit-dialog::backdrop { background: #112b3a88; backdrop-filter: blur(3px); }
+.quiz-submit-dialog h2 {
+  font-size: calc(21px * var(--font-scale, 1));
+  line-height: 1.6;
+}
+.quiz-submit-dialog button, .quizresult > button, .practice-result > button, .quiz .options button {
+  min-height: 44px;
+  font-size: calc(18px * var(--font-scale, 1));
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.quiz .options button:disabled { opacity: 1; }
+.quizresult > button.primary,
+.quiz-submit-dialog .actions > button.primary {
+  background: var(--review-action);
+  border-color: var(--review-action);
+  color: var(--review-action-ink);
+}
+:is(.quiz-submit-dialog, .quizresult) button.primary:hover { box-shadow: inset 0 0 0 2px currentColor; }
 /* 晴空粉三方案：共用明亮留白的元件語言，僅替換主色與強調色。 */
 :root[data-theme='blossom'] { --blue: #0ea5e9; --nav: #0369a1; --accent: #db2777; --soft: #fdf2f8; --page: #f8fafc; --line: #fce7f3; --ink: #1e293b; --muted: #64748b; }
 /* 晴空粉三方案補強：舊教師／學生元件有早期海軍藍寫死值，僅在此色系覆寫。 */
@@ -1645,7 +1730,7 @@ dd {
 :root[data-theme='blossom-rose'] { --blue: #db2777; --nav: #fff7fb; --accent: #0ea5e9; --soft: #fdf2f8; --page: #fff7fb; --line: #fce7f3; --ink: #1e293b; --muted: #64748b; }
 /* 晴空粉 C｜粉霧紫光：紫色操作主色、桃紅提示、淡天藍作資訊底色。 */
 :root[data-theme='blossom-violet'] { --blue: #7e22ce; --nav: #faf7ff; --accent: #db2777; --soft: #f3e8ff; --page: #faf7ff; --line: #e9d5ff; --ink: #1e293b; --muted: #64748b; }
-:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.pageheading h1, .student h1, .learning-summary h2, .quizresult h1) { color: var(--blue); font-weight: 800; }
+:root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.pageheading h1, .student h1, .learning-summary h2) { color: var(--blue); font-weight: 800; }
 :root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(h2, h3, .options button, button) { font-weight: 700; }
 :root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal, .reviewanswer) { border-radius: 22px; box-shadow: none; border-color: var(--line); }
 :root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.student .panel h2, .unitcard h3, .practice-row-title strong, .quiz .eyebrow, .learning-summary .eyebrow) { color: var(--accent); }
@@ -1682,7 +1767,7 @@ dd {
 :root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) :is(.darkpanel, .previewbar, .toast) { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
 :root:is([data-theme='blossom-rose'], [data-theme='blossom-violet']) .darkpanel button { background: var(--soft); border-color: var(--line); color: var(--blue); }
 /* A 的專屬高亮規則保留舊版晴空粉的天藍／桃紅層級。 */
-:root[data-theme='blossom'] :is(.pageheading h1, .student h1, .learning-summary h2, .quizresult h1) { color: #0284c7; font-weight: 800; }
+:root[data-theme='blossom'] :is(.pageheading h1, .student h1, .learning-summary h2) { color: #0284c7; font-weight: 800; }
 :root[data-theme='blossom'] :is(h2, h3, .options button, button) { font-weight: 700; }
 :root[data-theme='blossom'] :is(.panel, .unitcard, .activitycard, .practice-row, .class-card, .modal, .reviewanswer) { border-radius: 22px; box-shadow: none; border-color: #fce7f3; }
 :root[data-theme='blossom'] :is(.student .panel h2, .unitcard h3, .practice-row-title strong, .quiz .eyebrow, .learning-summary .eyebrow) { color: #db2777; }

@@ -13,7 +13,7 @@ export function QuestionImage({ url }: { url?: string }) {
   if (!materialUrl(url) || failed) return <p className="error">題目圖片無法載入，請聯絡教師。</p>;
   return <><button className="image-button" onClick={() => setExpanded(true)} aria-label="放大題目圖片"><img className="questionimage" src={url} alt="題目附圖，點擊放大" onError={() => setFailed(true)} /></button>{expanded && <div className="modalshade" role="dialog" aria-modal="true" aria-label="題目圖片" onClick={() => setExpanded(false)}><div className="image-modal"><button autoFocus onClick={() => setExpanded(false)} onKeyDown={(e) => { if (e.key === 'Escape') setExpanded(false); }}>關閉圖片</button><img src={url} alt="放大的題目附圖" /></div></div>}</>;
 }
-export function Explanations({ q, audience = 'student', onResearch }: { q: Question; audience?: 'student' | 'teacher'; onResearch?: (v: { format: 'guided' | 'traditional'; action: 'exposed' | 'opened' | 'closed'; seconds?: number }) => void }) {
+export function Explanations({ q, audience = 'student', outcome, onResearch }: { q: Question; audience?: 'student' | 'teacher'; outcome?: 'correct' | 'wrong'; onResearch?: (v: { format: 'guided' | 'traditional'; action: 'exposed' | 'opened' | 'closed'; seconds?: number }) => void }) {
   const s = q.socratic;
   const forTeacher = audience === 'teacher';
   // 新欄位（引導式解析總表五段，原稱「蘇格拉底式解析」，2026-09-15 改名，欄位鍵名不變）優先；
@@ -42,5 +42,13 @@ export function Explanations({ q, audience = 'student', onResearch }: { q: Quest
     if (open) { traditionalOpenedAt.current = Date.now(); onResearch?.({ format: 'traditional', action: 'opened' }); }
     else if (traditionalOpenedAt.current) { onResearch?.({ format: 'traditional', action: 'closed', seconds: Math.min(600, Math.max(1, Math.round((Date.now() - traditionalOpenedAt.current) / 1000))) }); traditionalOpenedAt.current = 0; }
   }}><summary><ExplanationHeading emoji="📖" text="傳統解析" /></summary><p className="preserve-lines"><ExplanationText value={q.explanation} /></p></details>;
-  return <div className="explanations">{items.length > 0 && <section><h3>引導式解析</h3>{items.map(([emoji, label, value]) => <div className="explanationstep" key={label}><h4><ExplanationHeading emoji={emoji} text={label} /></h4><p className="preserve-lines"><ExplanationText value={value!} /></p></div>)}</section>}{explanation}{q.lectureUrl && materialUrl(q.lectureUrl) && <a href={q.lectureUrl} target="_blank" rel="noreferrer">{q.lectureTitle || '查看講義'} ↗</a>}{q.remedialUrl && materialUrl(q.remedialUrl) && <a href={q.remedialUrl} target="_blank" rel="noreferrer">查看補強教材 ↗</a>}{!q.explanation && !items.length && <p>此題尚未提供解析。</p>}</div>;
+  const lectureLink = q.lectureUrl && materialUrl(q.lectureUrl) && (
+    <a href={q.lectureUrl} target="_blank" rel="noreferrer">{q.lectureTitle || '查看講義'} ↗</a>
+  );
+  const lectureGuide = outcome === 'correct'
+    ? '想再鞏固，可以回資訊圖表複習 👉'
+    : '這個觀念在資訊圖表裡有圖解，點進去再看一次 👉';
+  return <div className="explanations">{items.length > 0 && <section><h3>引導式解析</h3>{items.map(([emoji, label, value]) => <div className="explanationstep" key={label}><h4><ExplanationHeading emoji={emoji} text={label} /></h4><p className="preserve-lines"><ExplanationText value={value!} /></p></div>)}</section>}{explanation}{lectureLink && (outcome && !forTeacher
+    ? <p className="lecture-guide">{lectureGuide} {lectureLink}</p>
+    : lectureLink)}{q.remedialUrl && materialUrl(q.remedialUrl) && <a href={q.remedialUrl} target="_blank" rel="noreferrer">查看補強教材 ↗</a>}{!q.explanation && !items.length && <p>此題尚未提供解析。</p>}</div>;
 }
