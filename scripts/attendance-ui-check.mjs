@@ -71,7 +71,7 @@ const failures = [];
 const errors = [];
 const checked = [];
 const functionalChecks = [];
-const browser = await chromium.launch({ channel: 'chrome' });
+const browser = await chromium.launch();
 try {
   const open = async (screen, hash, scale, width, height, userAgent) => {
     const context = await browser.newContext({
@@ -124,6 +124,35 @@ try {
     }
     checked.push(screen);
     await context.close();
+  }
+  {
+    const { page, context } = await open('admin-live', '', 1, 1440, 900);
+    try {
+      const projection = page.getByRole('region', { name: '投影畫面' });
+      await projection.waitFor();
+      const snapshot = async () => ({
+        countdown: await projection.locator('.att-proj-time').textContent(),
+        token: await page.evaluate(() => window.attendanceFixture.live.token),
+        qr: await projection.getByRole('img', { name: '簽到 QR' }).innerHTML(),
+        signed: await projection.locator('.att-proj-box').filter({ hasText: '已簽到' }).locator('b').textContent(),
+      });
+      const before = await snapshot();
+      await page.waitForTimeout(20_000);
+      const after = await snapshot();
+      const toSeconds = (time) => {
+        const [minutes, seconds] = time.split(':').map(Number);
+        return 60 * minutes + seconds;
+      };
+      assert(toSeconds(after.countdown) < toSeconds(before.countdown), '投影倒數應減少');
+      assert.notEqual(after.token, before.token, 'mock 回傳新 QR token');
+      assert.notEqual(after.qr, before.qr, '投影 QR 應隨 token 更新');
+      assert(Number(after.signed.split('／')[0]) > Number(before.signed.split('／')[0]), '已簽到應增加');
+      functionalChecks.push(`admin-live 20s: ${before.countdown} → ${after.countdown}, QR changed, ${before.signed} → ${after.signed}`);
+    } catch (e) {
+      failures.push(`admin-live 20s: ${e.message.split('\n')[0]}`);
+    } finally {
+      await context.close();
+    }
   }
   // 真瀏覽器操作：三個複製鍵（含拒絕／缺少 Clipboard API 的退路）、編碼與 44px。
   for (const mode of ['clipboard', 'reject', 'missing']) {

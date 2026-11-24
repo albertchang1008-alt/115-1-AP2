@@ -3,6 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { AttendPage, AttendanceBanner, MyAttendancePage } from '../../src/Attendance';
 import App from '../../src/App';
+import { ATTENDANCE_GRACE_MS, stepIndex, stepRemainingMs } from '../../shared/attendance';
 import { memoryApi } from '../../src/service';
 import TeachingControl from '../../src/TeachingControl';
 import AttendanceAdmin from '../../src/AttendanceAdmin';
@@ -39,6 +40,7 @@ const session = (over = {}) => ({
   period: 3,
   classIds: ['demo-a'],
   status: 'closed',
+  startedAt: T - 12000,
   endsAt: T + 48000,
   expected: 60,
   counts: { present: 54, absent: 6 },
@@ -130,7 +132,31 @@ const notifyDrafts = {
   ],
 };
 const attendanceCalls: string[] = [];
-Object.assign(window, { attendanceFixture: { drafts: notifyDrafts, calls: attendanceCalls } });
+const openedAt = Date.now();
+const liveSession = session({
+  status: 'open',
+  period: 4,
+  startedAt: openedAt - 6000,
+  endsAt: openedAt + 42000,
+  codeSec: 18,
+});
+const liveMock = {
+  requests: [] as number[],
+  token: '',
+  rejectNext: false,
+  delayMs: 0,
+  active: 0,
+  maxActive: 0,
+};
+let endedByTeacher = false;
+Object.assign(window, {
+  attendanceFixture: {
+    drafts: notifyDrafts,
+    calls: attendanceCalls,
+    live: liveMock,
+    unmount: () => root.unmount(),
+  },
+});
 if (screen === 'control-disabled') course.features.attendance = false;
 const api: any = {
   preview: screen === 'control-preview',
@@ -177,19 +203,40 @@ const api: any = {
           { date: '2026-11-04', period: 5, status: 'absent', signedAt: 0 },
         ],
       };
-    if (name === 'attendanceLive')
-      return screen === 'admin-live'
-        ? {
-            session: session({ status: 'open', period: 4, endsAt: Date.now() + 42000 }),
-            now: Date.now(),
-            remainingMs: 42000,
-            signed: 45,
-            code: '4729',
-            codeRemainingMs: 42000,
-            token: '2026-11-16-p04-aaaa.3.AAAAAAAAAAAAAAAAAAAAAA',
-            qrRemainingMs: 9000,
-          }
-        : { session: null };
+    if (name === 'attendanceControl' && screen === 'admin-live') {
+      if (data.action === 'end') endedByTeacher = true;
+      if (data.action === 'extend') liveSession.endsAt = Math.max(liveSession.endsAt, Date.now()) + 60000;
+      return { session: liveSession };
+    }
+    if (name === 'attendanceLive') {
+      if (screen !== 'admin-live') return { session: null };
+      liveMock.requests.push(Date.now() - openedAt);
+      liveMock.active++;
+      liveMock.maxActive = Math.max(liveMock.active, liveMock.maxActive);
+      try {
+        if (liveMock.delayMs) await new Promise((resolve) => setTimeout(resolve, liveMock.delayMs));
+        if (liveMock.rejectNext) {
+          liveMock.rejectNext = false;
+          throw new Error('合成連線失敗');
+        }
+        const now = Date.now();
+        const { startedAt, endsAt, qrSec, codeSec } = liveSession;
+        if (endedByTeacher || now > endsAt + ATTENDANCE_GRACE_MS) return { session: null };
+        liveMock.token = `${liveSession.id}.${stepIndex(now, startedAt, qrSec)}.AAAAAAAAAAAAAAAAAAAAAA`;
+        return {
+          session: liveSession,
+          now,
+          remainingMs: Math.max(0, endsAt - now),
+          signed: 45 + Math.floor((now - openedAt) / 5000),
+          code: String(4729 + stepIndex(now, startedAt, codeSec)),
+          codeRemainingMs: stepRemainingMs(now, startedAt, codeSec),
+          token: liveMock.token,
+          qrRemainingMs: stepRemainingMs(now, startedAt, qrSec),
+        };
+      } finally {
+        liveMock.active--;
+      }
+    }
     if (name === 'attendanceSessions')
       return {
         sessions: [session({ id: '2026-11-16-p04-aaaa', period: 4, confirmedAt: 0 }), session()],
@@ -256,6 +303,45 @@ function AdminAt({ view }: { view: string }) {
     </div>
   );
 }
+function installProjectionProbe() {
+  let hidden = false;
+  Object.defineProperty(document, 'hidden', { get: () => hidden });
+  const timers = new Map<number, string>();
+  const browserWindow: Window = window;
+  const { setInterval, clearInterval, setTimeout, clearTimeout } = browserWindow;
+  browserWindow.setInterval = (callback, delay, ...args) => {
+    const id = setInterval(callback, delay, ...args);
+    if (Number(delay) >= 1000) timers.set(id, 'interval');
+    return id;
+  };
+  browserWindow.setTimeout = (callback, delay, ...args) => {
+    if (typeof callback !== 'function') return setTimeout(callback, delay, ...args);
+    const id = setTimeout(() => {
+      timers.delete(id);
+      callback(...args);
+    }, delay);
+    if (Number(delay) >= 1000) timers.set(id, 'timeout');
+    return id;
+  };
+  browserWindow.clearInterval = (id) => {
+    if (id !== undefined) timers.delete(id);
+    clearInterval(id);
+  };
+  browserWindow.clearTimeout = (id) => {
+    if (id !== undefined) timers.delete(id);
+    clearTimeout(id);
+  };
+  window.projectionTest = {
+    timers,
+    setHidden(value) {
+      hidden = value;
+      document.dispatchEvent(new Event('visibilitychange'));
+    },
+  };
+}
+
+if (q.has('projection-probe')) installProjectionProbe();
+
 const root = createRoot(document.getElementById('root')!);
 if (screen === 'feature-toggle') {
   const initial = { ...course, description: '合成測試', sheetsUrl: '', units: [], chapters: {},
