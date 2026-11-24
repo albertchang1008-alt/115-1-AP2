@@ -1,10 +1,11 @@
 // 課堂點名（#67）教師端：開始點名與投影、節次與單節名冊、總表、修改紀錄、通知（半自動，系統不寄信）。
 // 版面沿用教師 2026-11-16 核可的樣張（src/AttendanceSample.tsx）。
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 import qrcode from 'qrcode-generator';
 import type { API } from './service';
 import type { Course } from '../shared/model';
 import {
+  ATTENDANCE_GRACE_MS,
   attendUrl,
   attendanceLimits,
   attendanceStatusLabel,
@@ -33,16 +34,19 @@ type Session = {
   codeSec: number;
   qrSec: number;
 };
-type Live = {
-  session: Session | null;
-  now?: number;
-  remainingMs?: number;
-  signed?: number;
-  code?: string;
-  codeRemainingMs?: number;
-  token?: string;
-  qrRemainingMs?: number;
-};
+type Live =
+  | { session: null }
+  | {
+      session: Session;
+      now: number;
+      remainingMs: number;
+      signed: number;
+      code: string;
+      codeRemainingMs: number;
+      token: string;
+      qrRemainingMs: number;
+    };
+type LiveSnapshot = Live & { receivedAt: number };
 type RosterRow = {
   email: string;
   studentId: string;
@@ -136,15 +140,22 @@ function StatusPill({ status }: { status: AttendanceStatus }) {
 }
 
 /* ───────── 開始點名＋投影 ───────── */
+const LIVE_POLL_MS = 5000;
+type LiveAction = () => Promise<unknown>;
+
 function LiveView({
   api,
   course,
   notify,
   onEnded,
-}: Props & { onEnded: (kind: 'roll' | 'trial') => void }) {
-  const [live, setLive] = useState<Live | null>(null);
-  const [offset, setOffset] = useState(0);
-  const [, setTick] = useState(0);
+  inFlight,
+}: Props & {
+  onEnded: (kind: 'roll' | 'trial') => void;
+  inFlight: MutableRefObject<Promise<void> | undefined>;
+}) {
+  const [live, setLive] = useState<LiveSnapshot | null>(null);
+  const [now, setNow] = useState(() => performance.now());
+  const [reconnecting, setReconnecting] = useState(false);
   const [busy, setBusy] = useState(false);
   const [classIds, setClassIds] = useState<string[]>(course.classIds.slice(0, 1));
   const [period, setPeriod] = useState(1);
@@ -152,21 +163,111 @@ function LiveView({
   const [codeSec, setCodeSec] = useState<number>(attendanceLimits.codeSec.default);
   const [qrSec, setQrSec] = useState<number>(attendanceLimits.qrSec.default);
   const stage = useRef<HTMLDivElement>(null);
-  const wasOpen = useRef<'' | 'roll' | 'trial'>('');
-  const load = async () => {
-    try {
-      const r = await api.call<Live>('attendanceLive', { courseId: course.id });
-      if (r.now) setOffset(r.now - Date.now());
-      if (wasOpen.current && !r.session) onEnded(wasOpen.current);
-      wasOpen.current = r.session?.kind || '';
-      setLive(r);
-    } catch (e) {
-      if (!live) notify((e as Error).message);
-    }
-  };
+  const updateLive = useRef<(action?: LiveAction) => Promise<void>>();
+  const callbacks = useRef({ onEnded, notify });
   useEffect(() => {
-    void load();
-  }, [course.id]);
+    callbacks.current = { onEnded, notify };
+  }, [onEnded, notify]);
+  useEffect(() => {
+    let disposed = false;
+    let previous: LiveSnapshot | undefined;
+    let refreshTimer: ReturnType<typeof setTimeout> | undefined;
+    let tickTimer: ReturnType<typeof setInterval> | undefined;
+    const stopTick = () => {
+      clearInterval(tickTimer);
+      tickTimer = undefined;
+    };
+    const startTick = () => {
+      if (tickTimer === undefined)
+        tickTimer = setInterval(() => setNow(performance.now()), 1000);
+    };
+    const schedule = (delay: number) => {
+      clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(() => void refresh(), Math.ceil(delay));
+    };
+    const scheduleNext = () => {
+      let delay = LIVE_POLL_MS;
+      if (previous?.session) {
+        const elapsed = performance.now() - previous.receivedAt;
+        // 歸零時查一次；若仍在後端的簽到寬限內，等寬限結束再確認。
+        const endCheck =
+          previous.remainingMs ||
+          previous.session.endsAt + ATTENDANCE_GRACE_MS + 1 - previous.now;
+        for (const deadline of [previous.qrRemainingMs, previous.codeRemainingMs, endCheck]) {
+          if (deadline > elapsed) delay = Math.min(delay, deadline - elapsed);
+        }
+      }
+      schedule(delay);
+    };
+    const read = async () => {
+      let response: Live;
+      try {
+        response = await api.call<Live>('attendanceLive', { courseId: course.id });
+      } catch {
+        if (!disposed && !document.hidden) {
+          setReconnecting(true);
+          scheduleNext();
+        }
+        return;
+      }
+      if (disposed || document.hidden) return;
+      const receivedAt = performance.now();
+      const endedKind = previous?.session?.kind;
+      previous = { ...response, receivedAt };
+      setLive(previous);
+      setNow(receivedAt);
+      setReconnecting(false);
+      if (response.session) {
+        startTick();
+        scheduleNext();
+      } else {
+        stopTick();
+        if (endedKind) callbacks.current.onEnded(endedKind);
+      }
+    };
+    const refresh = async (action?: LiveAction) => {
+      // 手動操作與回前景的查詢需要新回應，先等已發出的請求完成。
+      while (inFlight.current) await inFlight.current;
+      if (disposed || (!action && document.hidden)) return;
+      clearTimeout(refreshTimer);
+      const request = (async () => {
+        if (action) {
+          try {
+            await action();
+          } catch (error) {
+            if (!disposed) callbacks.current.notify((error as Error).message);
+          }
+        }
+        if (!disposed && !document.hidden) await read();
+      })();
+      inFlight.current = request;
+      try {
+        await request;
+      } finally {
+        inFlight.current = undefined;
+      }
+    };
+    updateLive.current = refresh;
+    const onVisibility = () => {
+      if (document.hidden) {
+        clearTimeout(refreshTimer);
+        stopTick();
+      } else {
+        setNow(performance.now());
+        if (previous?.session) startTick();
+        void refresh();
+      }
+    };
+    if (!document.hidden) schedule(0);
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      disposed = true;
+      updateLive.current = undefined;
+      clearTimeout(refreshTimer);
+      stopTick();
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, [api, course.id, inFlight]);
   const open = !!live?.session;
   // 投影畫面以 1840×1035 設計，整塊依可用空間等比例縮放（小視窗與全螢幕都不會溢出）。
   useEffect(() => {
@@ -193,13 +294,10 @@ function LiveView({
       document.removeEventListener('fullscreenchange', fit);
     };
   }, [open]);
-  const act = async (fn: () => Promise<unknown>) => {
+  const act = async (fn: LiveAction) => {
     setBusy(true);
     try {
-      await fn();
-      await load();
-    } catch (e) {
-      notify((e as Error).message);
+      await updateLive.current?.(fn);
     } finally {
       setBusy(false);
     }
@@ -216,12 +314,13 @@ function LiveView({
         ...(trial ? { trial: true } : {}),
       }),
     );
-  if (!live) return <p className="muted">讀取中…</p>;
-  const s = live.session;
-  if (!s)
+  const connectionStatus = reconnecting && <span role="status">連線中…</span>;
+  if (!live) return <p className="muted">{connectionStatus || '讀取中…'}</p>;
+  if (!live.session)
     return (
       <section className="panel att-start">
         <h2>開始點名</h2>
+        {connectionStatus}
         <div className="att-start-grid">
           <fieldset className="att-classes">
             <legend>班級（可多選一起點）</legend>
@@ -299,12 +398,10 @@ function LiveView({
         </div>
       </section>
     );
-  const elapsed = Date.now() + offset - (live.now || 0);
-  const remain = (live.remainingMs || 0) - elapsed;
-  const step = (left: number | undefined, sec: number) => {
-    const ms = (left || 0) - elapsed;
-    return ms > 0 ? ms : sec * 1000 + (ms % (sec * 1000));
-  };
+  const s = live.session;
+  const elapsed = now - live.receivedAt;
+  const remain = live.remainingMs - elapsed;
+  const step = (left: number) => Math.max(0, Math.ceil((left - elapsed) / 1000));
   return (
     <div className="att-proj-fit" ref={stage}>
       <section className="att-proj" aria-label="投影畫面">
@@ -314,6 +411,7 @@ function LiveView({
           </strong>
           <span>
             {sessionLabel(s)}・{classLabel(course, s.classIds)}
+            {reconnecting && <>・{connectionStatus}</>}
           </span>
         </div>
         <div className="att-proj-main">
@@ -322,7 +420,7 @@ function LiveView({
             <p>
               用<b>手機相機</b>掃描（不要用 LINE、IG 掃）
             </p>
-            <small>QR {Math.ceil(step(live.qrRemainingMs, s.qrSec) / 1000)} 秒後更換</small>
+            <small>QR {step(live.qrRemainingMs)} 秒後更換</small>
           </div>
           <div className="att-proj-side">
             <div className="att-proj-box">
@@ -338,8 +436,8 @@ function LiveView({
             </div>
             <div className="att-proj-box att-proj-code">
               <span>掃不到？在平台首頁輸入數字碼</span>
-              <b>{(live.code || '').split('').join(' ')}</b>
-              <small>{Math.ceil(step(live.codeRemainingMs, s.codeSec) / 1000)} 秒後更換</small>
+              <b>{live.code.split('').join(' ')}</b>
+              <small>{step(live.codeRemainingMs)} 秒後更換</small>
             </div>
           </div>
         </div>
@@ -1280,6 +1378,7 @@ function NotifyView({ api, course, notify, onCount }: Props & { onCount: (n: num
 export default function AttendanceAdmin(props: Props) {
   const [view, setView] = useState<'live' | 'sessions' | 'summary' | 'notify'>('live');
   const [pending, setPending] = useState(0);
+  const liveRequest = useRef<Promise<void>>();
   const refreshCount = async () => {
     try {
       const d = await props.api.call<Drafts>('attendanceNotifyDrafts', { courseId: props.course.id });
@@ -1320,6 +1419,7 @@ export default function AttendanceAdmin(props: Props) {
       {view === 'live' ? (
         <LiveView
           {...props}
+          inFlight={liveRequest}
           onEnded={(kind) => {
             if (kind === 'trial') return props.notify('試簽已結束（不算點名）');
             props.notify('點名已結束，未簽到的記為未到');

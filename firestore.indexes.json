@@ -69,6 +69,24 @@
       ]
     },
     {
+      "collectionGroup": "attempts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "unitId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "receivedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "statStates",
       "queryScope": "COLLECTION",
       "fields": [
@@ -273,6 +291,16 @@
     {
       "collectionGroup": "diagnostics",
       "fieldPath": "summary",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "results",
+      "fieldPath": "answers",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "zuvioMeta",
+      "fieldPath": "q",
       "indexes": []
     }
   ]

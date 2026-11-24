@@ -16,6 +16,11 @@ import { parseAttendHash } from '../shared/attendance';
 import TeachingControl from './TeachingControl';
 import { TeacherAssessments } from './Assessments';
 import CompletionBoard from './CompletionBoard';
+import ZuvioExams from './ZuvioExams';
+import { ZuvioMoodOverlay, type ActiveMoodPrompt } from './ZuvioMoodCard';
+import type { MoodCode } from '../shared/zuvioExt';
+import { cloudZuvioApi, sampleZuvioApi } from './zuvioApi';
+import { SAMPLE_POOL } from '../shared/zuvioSamplePool';
 import { carryMessage, CarryResult } from '../shared/wrongCarry';
 import ChapterMergeDialog from './ChapterMergeDialog';
 import { NewCourse, ClassManager } from './CourseSetup';
@@ -112,6 +117,7 @@ const tabs = [
   ['completion', '完成度看板', CheckCircle2],
   ['progress', '學習進度', LayoutDashboard],
   ['analysis', '題目分析', ChartNoAxesCombined],
+  ['zuvio', 'Zuvio 出題', FileChartColumn],
   ['reports', '報表與結算', FileChartColumn],
   ['settings', '平台設定', Settings],
   ['diagnostics', '教材診斷', ChartNoAxesCombined],
@@ -222,7 +228,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
       .finally(() => setLoading(false));
   }
   useEffect(() => {
-    if (api.preview || !profile || profile.teacher || !(featureEnabled(courses.find(c => c.id === courseId), 'teachingConsole') || featureEnabled(courses.find(c => c.id === courseId), 'classroomInteraction'))) return;
+    if (api.preview || !profile || profile.teacher || !(featureEnabled(courses.find(c => c.id === courseId), 'teachingConsole') || featureEnabled(courses.find(c => c.id === courseId), 'classroomInteraction') || featureEnabled(courses.find(c => c.id === courseId), 'zuvioMood'))) return;
     let alive = true, pending = false;
     const refresh = async () => {
       if (pending) return;
@@ -515,6 +521,9 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
         </div>
         {course ? (
           <>
+            {!api.preview && featureEnabled(course, 'zuvioMood') && (
+              <StudentMoodGate key={`mood-${course.id}`} api={api} courseId={course.id} />
+            )}
             {featureEnabled(course, 'classroomInteraction') && (
               <div className="student-interaction-host">
                 <StudentInteraction key={course.id} api={api} course={course} />
@@ -553,7 +562,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
         </div>
         <div className="workspace-label">TEACHING WORKSPACE</div>
         <nav>
-          {tabs.filter(([id]) => id !== 'settings').filter(([id]) => (id !== 'assessments' || featureEnabled(course, 'assessments')) && (id !== 'teaching' || featureEnabled(course, 'teachingConsole')) && (id !== 'classroom' || featureEnabled(course, 'classroomInteraction')) && (id !== 'attendance' || featureEnabled(course, 'attendance'))).map(([id, label, Icon]) => (
+          {tabs.filter(([id]) => id !== 'settings').filter(([id]) => (id !== 'assessments' || featureEnabled(course, 'assessments')) && (id !== 'teaching' || featureEnabled(course, 'teachingConsole')) && (id !== 'classroom' || featureEnabled(course, 'classroomInteraction')) && (id !== 'attendance' || featureEnabled(course, 'attendance')) && (id !== 'zuvio' || api.preview || featureEnabled(course, 'zuvioExams'))).map(([id, label, Icon]) => (
             <button className={tab === id ? 'active' : ''} key={id} onClick={() => nav(id)}>
               <Icon size={19} />
               {label}
@@ -703,6 +712,8 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
             <ProgressBoard key={course.id} course={course} api={api} notify={notify} changed={async () => { const data = await api.call('bootstrap'); setCourses(data.courses); }} />
           ) : tab === 'analysis' ? (
             <Analysis key={course.id} course={course} api={api} notify={notify} />
+          ) : tab === 'zuvio' && (api.preview || featureEnabled(course, 'zuvioExams')) ? (
+            <ZuvioExams key={course.id} api={api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, course.id)} notify={notify} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
           ) : tab === 'reports' ? (
             <ReportsPage key={course.id} course={course} api={api} notify={notify} />
           ) : (
@@ -1097,7 +1108,7 @@ export function CourseEditor(props: CourseEditorProps) {
   return <>
     <header className="pageheading"><div><span className="eyebrow">COURSE STUDIO</span><h1>課程與教材</h1><p>{isDirty ? '尚未保存' : '草稿已保存'} · 單元設定</p></div><div className="actions"><button onClick={newCourse}><Plus size={16} />新增課程</button><button disabled={busy} onClick={() => act()}>保存草稿</button><button className="primary" disabled={busy || publishedState.loading || !!publishedState.error} onClick={() => void prepareUpdate()}>更新到學生端</button></div></header>
     {updateConfirmation && <UpdateStudentDialog {...updateConfirmation} busy={busy} cancel={() => setUpdateConfirmation(undefined)} confirm={() => void act(true, updateConfirmation.draft)} />}
-    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><fieldset><legend>課程功能（預設關閉；保存草稿即對學生生效，不需要更新到學生端）</legend>{(['assessments', 'teachingConsole', 'classroomInteraction', 'attendance'] as const).map((key, i) => <label className="check" key={key}><input type="checkbox" checked={draft.features?.[key] === true} onChange={e => setDraft({ ...draft, features: { ...draft.features, [key]: e.target.checked } })} />{['正式前後測', '授課控制台', '課堂互動', '點名'][i]}</label>)}</fieldset>
+    <section className="panel"><div className="formgrid"><Field label="課程名稱"><input value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></Field><Field label="學期"><input value={draft.term} onChange={(e) => setDraft({ ...draft, term: e.target.value })} /></Field><Field label="課程說明"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field></div><fieldset><legend>課程功能（預設關閉；保存草稿即對學生生效，不需要更新到學生端）</legend>{(['assessments', 'teachingConsole', 'classroomInteraction', 'attendance', 'zuvioExams', 'zuvioMood'] as const).map((key, i) => <label className="check" key={key}><input type="checkbox" checked={draft.features?.[key] === true} onChange={e => setDraft({ ...draft, features: { ...draft.features, [key]: e.target.checked } })} />{['正式前後測', '授課控制台', '課堂互動', '點名', 'Zuvio 出題', '課前情緒簽到'][i]}</label>)}</fieldset>
       <fieldset><legend>教材閱讀加大（預設開啟）</legend><label className="check"><input type="checkbox" checked={draft.features?.readabilityOverlay !== false} onChange={e => setDraft({ ...draft, features: { ...draft.features, readabilityOverlay: e.target.checked } })} />閱讀加大</label><Field label="排除教材版本（每行一個 materialVersion）"><textarea key={draft.id} defaultValue={(draft.features?.readabilityOverlayExclusions || []).join('\n')} onBlur={e => setDraft({ ...draft, features: { ...draft.features, readabilityOverlayExclusions: [...new Set(e.target.value.split(/[,\n]/).map(s => s.trim()).filter(Boolean))] } })} /></Field></fieldset>
       {draft.features?.assessments && <div className="formgrid">{(['pretest', 'posttest'] as const).map(kind => <Field key={kind} label={kind === 'pretest' ? '前測來源題目 ID（逗號分隔，保存後同步題庫）' : '後測來源題目 ID（逗號分隔）'}><input value={(draft.assessmentSources?.[kind] || []).join(',')} onChange={e => setDraft({ ...draft, assessmentSources: { pretest: draft.assessmentSources?.pretest || [], posttest: draft.assessmentSources?.posttest || [], [kind]: e.target.value ? e.target.value.split(',').map(s => s.trim()) : [] } })} /></Field>)}</div>}
       <p className="muted">課程代碼：{draft.id}</p><div className="actions"><button onClick={() => preview(materialize(), true)}>保存並預覽草稿</button><button onClick={copyCourse}>複製課程</button><button onClick={archiveCourse}>封存課程</button><button disabled={deleting} onClick={deleteCourse}>刪除課程</button></div></section>
@@ -2130,5 +2141,53 @@ function QuestionDetail({
         {next && <button onClick={() => load(true)}>載入更多</button>}
       </section>
     </div>
+  );
+}
+
+
+function StudentMoodGate({ api, courseId }: { api: { call<T = any>(name: string, data?: any): Promise<T> }; courseId: string }) {
+  const [prompt, setPrompt] = useState<ActiveMoodPrompt | null>(null);
+  const [dismissedIds, setDismissedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    let alive = true;
+    const load = async () => {
+      try {
+        const res = await api.call<ActiveMoodPrompt>('zuvioGetActiveMood', { courseId });
+        if (alive) setPrompt(res?.active ? res : null);
+      } catch {
+        /* Keep student view usable if offline or feature disabled */
+      }
+    };
+    void load();
+    const timer = setInterval(() => void load(), 5000);
+    const onFocus = () => void load();
+    window.addEventListener('focus', onFocus);
+    return () => {
+      alive = false;
+      clearInterval(timer);
+      window.removeEventListener('focus', onFocus);
+    };
+  }, [api, courseId]);
+
+  if (!prompt?.active || !prompt.sittingId || dismissedIds.includes(prompt.sittingId)) return null;
+
+  return (
+    <ZuvioMoodOverlay
+      key={prompt.sittingId}
+      prompt={prompt}
+      onSubmit={async (sittingId, mood: MoodCode) => {
+        const r = await api.call<{ mood: MoodCode; feedback: string }>('zuvioSubmitMood', {
+          courseId,
+          sittingId,
+          mood,
+        });
+        return r;
+      }}
+      onDismissAfterSubmit={() => {
+        const sid = prompt.sittingId!;
+        setDismissedIds((old) => (old.includes(sid) ? old : [...old, sid]));
+      }}
+    />
   );
 }

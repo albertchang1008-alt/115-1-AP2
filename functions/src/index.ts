@@ -14,6 +14,7 @@ import { createClassroomHandlers } from './classroom';
 import { createAttendanceHandlers } from './attendance';
 import { createTeachingHandlers } from './teaching';
 import { createAssessmentHandlers, assertPracticeBank, storeAssessmentSources } from './assessments';
+import { createZuvioHandlers } from './zuvioExams';
 import { appendWrongCarry, wrongCarryDrop, CarryResult } from '../../shared/wrongCarry';
 import { parseRosterSheet, parseBankSheet, looksLikeBankSheet } from '../../shared/sheets';
 import { validEvent, type LearningEvent } from '../../shared/learning';
@@ -244,7 +245,11 @@ export const saveCourse = onCall(options, async (req) => {
       {
         draft: course,
         revision,
-        features: normalizeCourseFeatures(course.features),
+        features: {
+          ...normalizeCourseFeatures(course.features),
+          ...(course.features && 'zuvioExams' in course.features ? {} : { zuvioExams: old.data()?.features?.zuvioExams === true }),
+          ...(course.features && 'zuvioMood' in course.features ? {} : { zuvioMood: old.data()?.features?.zuvioMood === true }),
+        },
         ...(course.assessmentSources ? { assessmentSources: course.assessmentSources } : {}),
         teacherIds: old.data()?.teacherIds || [p.uid],
         classIds: old.data()?.published?.classIds || [],
@@ -1568,4 +1573,26 @@ export const { getStudentUnitAttempts, getActivitySessions, backfillActivityHist
 export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, options);
 
 export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);
+
+// Zuvio 出題與成績回收（1.16.0，教師限定）
+export const {
+  zuvioPool,
+  zuvioCreateExam,
+  zuvioListExams,
+  zuvioGetExam,
+  zuvioArchiveExam,
+  zuvioCreateSitting,
+  zuvioUpdateSittingStart,
+  zuvioImportResults,
+  zuvioDeleteResults,
+  zuvioReport,
+  zuvioOpenMood,
+  zuvioCloseMood,
+  zuvioGetMoodLive,
+  zuvioDeleteMood,
+  zuvioGetActiveMood,
+  zuvioSubmitMood,
+  zuvioCareList,
+  zuvioExportCsv,
+} = createZuvioHandlers(db, access, options);
 export const { attendanceStart, attendanceControl, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);

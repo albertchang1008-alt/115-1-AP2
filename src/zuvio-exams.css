@@ -1,0 +1,51 @@
+.zuvio { max-width: 1100px; }
+.zuvio .z-badge { background: #fff4e0; color: #8a4b00; border-radius: 999px; padding: 2px 12px; font-size: 14px; margin-left: 12px; }
+.zuvio .z-tabs { display: flex; gap: 8px; margin: 12px 0; }
+.zuvio .z-tabs button { padding: 8px 18px; border-radius: 8px; border: 1px solid #cfd5dd; background: #fff; cursor: pointer; font: inherit; }
+.zuvio .z-tabs button.active { background: #e8f0fb; border-color: #1a5fb4; color: #0d3f7a; font-weight: 600; }
+.zuvio .z-card { background: #fff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; }
+.zuvio .z-card h3 { margin: 0 0 8px; font-size: 18px; }
+.zuvio .z-card h4 { margin: 14px 0 6px; font-size: 16px; }
+.zuvio .z-row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 8px 0; }
+.zuvio .z-row label { display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: #4b5563; }
+.zuvio .z-row label.z-check { flex-direction: row; align-items: center; gap: 6px; color: inherit; font-size: 15px; }
+.zuvio input, .zuvio select { font: inherit; padding: 6px 8px; border: 1px solid #cfd5dd; border-radius: 8px; min-height: 38px; }
+.zuvio input[type="number"] { width: 72px; }
+.zuvio button { font: inherit; padding: 6px 14px; border: 1px solid #cfd5dd; border-radius: 8px; background: #fff; cursor: pointer; min-height: 38px; }
+.zuvio button.primary { background: #1a5fb4; color: #fff; border-color: #1a5fb4; }
+.zuvio button:disabled { opacity: .5; cursor: default; }
+.zuvio .z-sp { flex: 1; }
+.zuvio .z-group { border: 1px solid #e1e5ea; border-radius: 10px; margin: 8px 0; overflow: hidden; }
+.zuvio .z-grouphead, .zuvio .z-unit { display: flex; align-items: center; gap: 10px; padding: 6px 12px; }
+.zuvio .z-grouphead { background: #f7f8fa; }
+.zuvio .z-grouphead label { flex-direction: row; display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.zuvio .z-unit { border-top: 1px solid #eef0f3; padding-left: 28px; }
+.zuvio .z-qs > li { border-top: 1px solid #eef0f3; padding: 10px 0; }
+.zuvio .z-qs > li:first-child { border-top: 0; }
+.zuvio .z-qs p { margin: 4px 0; }
+.zuvio .z-qmeta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.zuvio .z-tag { background: #f1f3f5; color: #4b5563; border-radius: 999px; padding: 0 10px; font-size: 13px; }
+.zuvio .z-opts li { margin: 2px 0; }
+.zuvio .z-ans { color: #0b6b3a; font-weight: 600; }
+.zuvio .z-warn { background: #fff4e0; color: #8a4b00; border-radius: 8px; padding: 8px 12px; }
+.zuvio .z-err { background: #fdecea; color: #b42318; border-radius: 8px; padding: 8px 12px; }
+.zuvio .z-ok { background: #e6f4ea; color: #0b6b3a; border-radius: 8px; padding: 8px 12px; }
+.zuvio .z-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.zuvio .z-table th, .zuvio .z-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eef0f3; vertical-align: top; }
+.zuvio .z-table th { color: #4b5563; background: #f7f8fa; }
+.zuvio .z-qtext { max-width: 420px; }
+.zuvio .z-opt { display: inline-block; margin-right: 8px; }
+.zuvio .z-metrics { display: flex; gap: 12px; flex-wrap: wrap; }
+.zuvio .z-metric { background: #f7f8fa; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; min-width: 150px; }
+.zuvio .z-metric b { font-size: 24px; }
+.zuvio .z-bar { display: grid; grid-template-columns: 200px 1fr 60px; gap: 10px; align-items: center; margin: 4px 0; }
+.zuvio .z-bar i { display: block; height: 12px; background: #1a5fb4; border-radius: 6px; }
+.zuvio .z-new { border-top: 1px dashed #e1e5ea; padding-top: 10px; }
+.zuvio .muted { color: #5b6470; font-size: 14px; }
+.zuvio label.z-grouphead, .zuvio label.z-unit { cursor: pointer; }
+.zuvio .z-group input[type="checkbox"], .zuvio .z-check input { width: 18px; height: 18px; min-height: 0; }
+.zuvio .z-alloc td, .zuvio .z-alloc th { white-space: nowrap; }
+.zuvio .z-pbar { display: inline-block; width: 120px; height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden; vertical-align: middle; margin-right: 8px; }
+.zuvio .z-pbar i { display: block; height: 100%; background: #1a5fb4; }
+.zuvio .z-sum td { font-weight: 600; background: #fafbfc; }
+.zuvio .z-total { font-size: 16px; padding-top: 18px; }
