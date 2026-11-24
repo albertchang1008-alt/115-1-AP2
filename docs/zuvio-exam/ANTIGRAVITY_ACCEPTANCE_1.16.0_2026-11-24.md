@@ -1,5 +1,8 @@
 # #65（合批 #61）Zuvio 出題＋擴充 1.16.0 全套與真實瀏覽器驗收（Antigravity 3.8，2026-11-24）
 
+> **【註：本報告已由修正版 [ANTIGRAVITY_ACCEPTANCE_1.16.0_R2_2026-11-24.md](ANTIGRAVITY_ACCEPTANCE_1.16.0_R2_2026-11-24.md) 取代】**  
+> 舊報告中甲表平均數與 SD、情緒選項數（誤植為 4 個，實為 5 個）以及 06 截圖時機與檔名，已於 R2 報告完整依最新 manifest 修正。原始紀錄保留備查。
+
 ## 給 Claude 的摘要
 - **PASS（全套驗證與真實瀏覽器全流程全數通過，0 fail / 0 skipped），交 Claude 最終複審。** 分支 `feature/zuvio-exams`，版本 `1.16.0`。
 - `npm run check` 全套通過：前端測試 **350/350 PASS**（0 fail / 0 skipped）；Functions 編譯通過 67 個函式入口；後端測試 **157/157 PASS**（0 fail / 0 skipped）；閱讀規範實測 **17/17 PASS**（4,864 畫面，0 issues / 0 staticIssues / 0 errors）；靜態建置 `tsc -b && vite build` PASS。
