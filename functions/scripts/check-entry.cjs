@@ -46,6 +46,8 @@ const expected = [
   'getStudentUnitAttempts',
   'getActivitySessions',
   'backfillActivityHistory',
+  'zuvioClassDirectory', 'quizGet', 'quizRecentMood', 'quizStart', 'quizSave',
+  'quizMood', 'quizLeave', 'quizTeacherGet', 'quizControl', 'quizExpireDue',
 ];
 for (const name of expected) {
   if (typeof handlers[name] !== 'function') throw new Error(`缺少後端入口：${name}`);

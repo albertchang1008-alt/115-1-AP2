@@ -128,14 +128,24 @@ export function QuizStudentCard({
   </section>;
 }
 
-export function QuizEntry({ api, courseId, classId, sittingId, live = quizLive }: {
-  api: API; courseId: string; classId: string; sittingId?: string; live?: QuizLive;
+export function QuizEntry({ api, courseId, classId, sittingId, moodEnabled = false, live = quizLive }: {
+  api: API; courseId: string; classId: string; sittingId?: string; moodEnabled?: boolean; live?: QuizLive;
 }) {
   const [signal, setSignal] = useState<QuizSignal | null>(null);
   const [hidden, setHidden] = useState(document.hidden);
+  const [pendingMood, setPendingMood] = useState<string>();
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
   const terminal = useRef(false);
+  const clearPendingMood = useCallback(() => setPendingMood(undefined), []);
+  useEffect(() => {
+    if (sittingId || !moodEnabled) return;
+    let active = true;
+    void api.call<{ sittingId: string | null }>('quizRecentMood', { courseId }).then((row) => {
+      if (active && row.sittingId) setPendingMood(row.sittingId);
+    }).catch(() => {}); // The live signal still covers the current sitting when this lookup fails.
+    return () => { active = false; };
+  }, [api, courseId, sittingId, moodEnabled]);
   useEffect(() => {
     const visibility = () => {
       setHidden(document.hidden);
@@ -173,16 +183,17 @@ export function QuizEntry({ api, courseId, classId, sittingId, live = quizLive }
     }).catch((e) => setError(errorText(e)));
     setRetry((n) => n + 1);
   }, [live, courseId, classId]);
-  const activeId = sittingId || signal?.sittingId;
+  const activeId = sittingId || pendingMood || signal?.sittingId;
   if (!activeId) return error ? <section className="pq-student" data-ui>
     <h1>小考</h1><p role="alert">{error}</p><button type="button" onClick={recheck}>重新檢查</button>
   </section> : null;
   return <QuizRun key={activeId} api={api} courseId={courseId} sittingId={activeId}
-    deep={!!sittingId} signal={signal?.sittingId === activeId ? signal : null} retry={retry} recheck={recheck} />;
+    deep={!!sittingId} signal={signal?.sittingId === activeId ? signal : null} retry={retry} recheck={recheck}
+    closePending={pendingMood === activeId ? clearPendingMood : undefined} />;
 }
 
-function QuizRun({ api, courseId, sittingId, deep, signal, retry, recheck }: {
-  api: API; courseId: string; sittingId: string; deep: boolean; signal: QuizSignal | null; retry: number; recheck: () => void;
+function QuizRun({ api, courseId, sittingId, deep, signal, retry, recheck, closePending }: {
+  api: API; courseId: string; sittingId: string; deep: boolean; signal: QuizSignal | null; retry: number; recheck: () => void; closePending?: () => void;
 }) {
   const transport = useMemo(() => quizStudent(api, courseId, sittingId), [api, courseId, sittingId]);
   const [view, setView] = useState<QuizStudentView>();
@@ -214,13 +225,17 @@ function QuizRun({ api, courseId, sittingId, deep, signal, retry, recheck }: {
     try {
       const next = await transport.get();
       if (request === reading.current) {
+        if (closePending && !next.moodRequired) closePending();
         ingest(next);
         setError('');
       }
     } catch (e) {
-      if (request === reading.current) setError(errorText(e));
+      if (request === reading.current) {
+        if (closePending) closePending();
+        else setError(errorText(e));
+      }
     }
-  }, [transport, ingest]);
+  }, [transport, ingest, closePending]);
   useEffect(() => {
     void refresh();
     return () => { reading.current++; };
@@ -341,7 +356,7 @@ function QuizRun({ api, courseId, sittingId, deep, signal, retry, recheck }: {
       })
       : screen === 'answering' ? () => setConfirming(true)
       : screen === 'confirm' ? () => void mutate('submit')
-      : screen === 'feedback' ? () => { setFeedback(''); void refresh(); }
+      : screen === 'feedback' ? () => { setFeedback(''); if (closePending) closePending(); else void refresh(); }
       : deep && ['released', 'submitted'].includes(screen) ? home : undefined}
     secondary={screen === 'confirm' ? () => setConfirming(false) : recheck}
     mood={(value) => {

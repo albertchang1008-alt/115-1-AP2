@@ -207,6 +207,27 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return sessionView(ref, quiz, session, paper?.data() as Paper | undefined, !!mood?.exists, c.features?.zuvioMood === true, p.studentId);
   });
 
+  const quizRecentMood = onCall(options, async (req) => {
+    const courseId = req.data?.courseId;
+    if (typeof courseId !== 'string' || !safeCode(courseId)) reject('課程代碼格式錯誤', 'invalid-argument');
+    const { p, c } = await authenticate(req, courseId);
+    if (p.teacher || !c.features?.zuvioMood || !studentKey(p.studentId)) return { sittingId: null };
+    const cutoff = Date.now() - MOOD_WINDOW;
+    const candidates = await db.collection('courses').doc(courseId).collection('platformQuizzes')
+      .where('classId', '==', p.classId).where('releasedAt', '>', cutoff).orderBy('releasedAt', 'desc').get();
+    if (!candidates.size) return { sittingId: null };
+    const sessions = await db.getAll(...candidates.docs.map((row) => sessionFor(row.ref, p.studentId)));
+    for (const [index, snap] of sessions.entries()) {
+      const session = snap.data() as Session | undefined;
+      if (!session || session.uid !== p.uid || session.state !== 'expired' || !session.moodRequired) continue;
+      const candidate = candidates.docs[index];
+      const quiz = readQuiz(candidate.data());
+      if (session.round > quiz.releasedRound || (quiz.releasedAtByRound[session.round] || 0) <= cutoff) continue;
+      if (!(await moodFor(quiz, candidate.id, p.uid).get()).exists) return { sittingId: candidate.id };
+    }
+    return { sittingId: null };
+  });
+
   const quizStart = onCall(options, async (req) => {
     const { ref, courseId, sittingId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId);
@@ -575,7 +596,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return { ok: true };
   });
 
-  return { quizGet, quizStart, quizSave, quizMood, quizLeave, quizTeacherGet, quizControl, quizExpireDue };
+  return { quizGet, quizRecentMood, quizStart, quizSave, quizMood, quizLeave, quizTeacherGet, quizControl, quizExpireDue };
 }
 
 export function assertQuizClassSeparation(classIds: string[]) {

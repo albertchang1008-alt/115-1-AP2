@@ -266,9 +266,13 @@ try {
   const auto = await call('quizGet', student(1), { sittingId: repeat.id });
   assert.equal(auto.moodRequired, true);
   assert.equal(auto.result, undefined);
+  assert.equal((await call('quizRecentMood', student(1))).sittingId, repeat.id);
   const round0 = await examRef(examId).get();
   await assert.rejects(action(repeat.id, current.quiz, 'makeup', { studentIds: [studentId(0)] }), /未開始/);
   await action(repeat.id, current.quiz, 'makeup', { studentIds: [studentId(2)] });
+  assert.equal((await call('quizRecentMood', student(1))).sittingId, repeat.id);
+  await call('quizMood', student(1), { sittingId: repeat.id, mood: 'green_flow' });
+  assert.equal((await call('quizRecentMood', student(1))).sittingId, null);
   await assert.rejects(call('quizStart', student(3), { sittingId: repeat.id, round: 1 }));
   await assert.rejects(call('quizSave', student(0), { sittingId: repeat.id, round: 0, seq: 2, answers, submit: true }), /輪次/);
   const makeup = await call('quizStart', student(2), { sittingId: repeat.id, round: 1 });

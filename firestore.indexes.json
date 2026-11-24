@@ -1,6 +1,14 @@
 {
   "indexes": [
     {
+      "collectionGroup": "platformQuizzes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "classId", "order": "ASCENDING" },
+        { "fieldPath": "releasedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "roster",
       "queryScope": "COLLECTION",
       "fields": [
