@@ -1031,9 +1031,25 @@ export function CourseEditor(props: CourseEditorProps) {
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
   }, [isDirty]);
-  const rows = orderedChapters(draft), row = rows.find((item) => item.name === selected) || rows[0];
-  const name = row?.name || '', chapter = row?.chapter, units = row?.units || [];
-  const materialize = (source = draft) => source.chapters ? source : { ...source, chapters: chaptersOf(source), chapterOrder: orderedChapters(source).map((item) => item.name) };
+  const rows = orderedChapters(draft);
+  const row = rows.find((item) => item.name === selected) || rows[0];
+  const name = row?.name || '', units = row?.units || [];
+  const categories = units.filter((u) => !isReviewUnit(u));
+  const firstCategory = categories[0], lastCategory = categories.at(-1);
+  // 舊章節由第一個分類推導設定。原分類仍在時，排序沿用變更前的章節設定。
+  const inferredBeforeReorder = rows.filter(({ name, units }) => {
+    if (!course || draft.chapters?.[name] || !units.length) return false;
+    const previousFirst = course.units.find((u) => chapterName(u) === name);
+    return previousFirst && units[0].id !== previousFirst.id && units.some((u) => u.id === previousFirst.id);
+  });
+  const previousChapters = inferredBeforeReorder.length && course ? chaptersOf(course) : {};
+  const retainedChapters = Object.fromEntries(inferredBeforeReorder.map(({ name }) => [name, previousChapters[name]]));
+  const chapter = Object.hasOwn(retainedChapters, name) ? retainedChapters[name] : row?.chapter;
+  const materialize = () => draft.chapters && !inferredBeforeReorder.length ? draft : {
+    ...draft,
+    chapters: { ...(draft.chapters || chaptersOf(draft)), ...retainedChapters },
+    ...(!draft.chapters ? { chapterOrder: rows.map((item) => item.name) } : {}),
+  };
   const changeChapter = (patch: Partial<Chapter>) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeChapterAndOverrides = (patch: Partial<Chapter>, chapterOverrides: Course['chapterOverrides']) => { const base = materialize(); setDraft({ ...base, chapterOverrides, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], ...patch } } }); };
   const changeActivity = (index: number, patch: Partial<Activity>) => changeChapter({ activities: chapter!.activities.map((a, i) => i === index ? { ...a, ...patch } : a) });
@@ -1060,6 +1076,17 @@ export function CourseEditor(props: CourseEditorProps) {
     finally { setBusy(false); }
   };
   const move = (offset: number) => { const order = rows.map((item) => item.name), at = order.indexOf(name), to = at + offset; if (to < 0 || to >= order.length) return; [order[at], order[to]] = [order[to], order[at]]; setDraft({ ...materialize(), chapterOrder: order }); };
+  const moveCategory = (unitId: string, offset: -1 | 1) => {
+    setDraft((current) => {
+      const positions = current.units.flatMap((u, index) => chapterName(u) === name && !isReviewUnit(u) ? [index] : []);
+      const index = positions.findIndex((position) => current.units[position].id === unitId);
+      const from = positions[index], to = positions[index + offset];
+      if (from === undefined || to === undefined) return current;
+      const units = [...current.units];
+      [units[from], units[to]] = [units[to], units[from]];
+      return { ...current, units };
+    });
+  };
   const removeStale = () => { const stale = draft.staleUnits || []; if (!stale.length || !confirm(`確定移除以下舊題目分類？\n${stale.join('\n')}`)) return; const classUnits = Object.fromEntries(Object.entries(draft.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => !stale.includes(id))])); setDraft({ ...draft, units: draft.units.filter((u) => !stale.includes(u.id)), classUnits, staleUnits: [] }); };
   const moveLegacyActivity = (unitId: string, activity: Activity) => { const base = materialize(); setDraft({ ...base, chapters: { ...base.chapters, [name]: { ...chaptersOf(base)[name], activities: [...chaptersOf(base)[name].activities, activity] } }, units: base.units.map((u) => u.id === unitId ? { ...u, activities: u.activities.filter((a) => a.id !== activity.id) } : u) }); };
   const reviewPool = draft.units.filter((u) => reviewSources.includes(u.id));
@@ -1102,7 +1129,19 @@ export function CourseEditor(props: CourseEditorProps) {
         </section>)}
         {chapter.activities.length > 0 && <div className="actions"><button onClick={() => setAddingActivity(true)}><Plus size={16} />新增活動</button></div>}
         {addingActivity && <NewActivityDialog onCancel={() => setAddingActivity(false)} onCreate={(activity) => { changeChapter({ activities: insertActivity(chapter.activities, activity) }); setJustAdded(activity.id); setAddingActivity(false); }} />}
-        <hr /><h2>{(!!units[0] && isReviewUnit(units[0])) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{(!!units[0] && isReviewUnit(units[0])) ? (() => { const review = units[0].review!, changed = review.sourceUnitIds.filter((id) => draft.units.find((u) => u.id === id)?.bankVersion !== review.sourceVersions[id]); const sourceCounts = review.sourceUnitIds.map((id) => `${id} ${draft.units.find((u) => u.id === id)?.questionCount || 0} 題`); return <><p className="muted">題目池共 {sourceCounts.reduce((n, row) => n + Number(row.match(/(\d+) 題$/)?.[1] || 0), 0)} 題（{sourceCounts.join('、')}）；每次抽 {review.drawCount} 題，組卷於 {new Date(review.builtAt).toLocaleString()}。</p><p>{Object.entries(review.allocation).map(([id, n]) => `${id} 每次 ${n} 題`).join('、')}</p>{changed.length > 0 && <div className="notice warning"><strong>來源題庫已更新（{changed.join('、')}），題目池仍是組卷當時內容</strong><button onClick={() => void buildReview({ name: units[0].id, sources: review.sourceUnitIds, count: review.drawCount })}>依目前題庫重新組卷</button></div>}<div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(review.sourceUnitIds); setReviewCount(review.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { const removed = await api.call<any>('deleteReviewExam', { courseId: draft.id, expectedRevision:draft.revision ?? 0, name: units[0].id }); setDraft((d) => ({ ...d, revision:removed.revision ?? d.revision, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id), classUnits: Object.fromEntries(Object.entries(d.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== units[0].id)])) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></>; })() : <><p className="muted">分類僅供題庫與作答進度使用，不在此編輯設定。</p>{units.map((u) => <div className="progress-row classification-row" key={u.id} data-status-unit={u.id}><span><strong>{u.title}</strong> · {u.questionCount || 0} 題<UnitStatusTags draft={materialize()} units={[u]} {...publishedState} /></span><span className="badge">{u.bankVersion || '未連接題庫'}</span></div>)}</>}
+        <hr /><h2>{(!!units[0] && isReviewUnit(units[0])) ? '複習考題目池' : '題目分類（來自 Sheet 次單元）'}</h2>{(!!units[0] && isReviewUnit(units[0])) ? (() => { const review = units[0].review!, changed = review.sourceUnitIds.filter((id) => draft.units.find((u) => u.id === id)?.bankVersion !== review.sourceVersions[id]); const sourceCounts = review.sourceUnitIds.map((id) => `${id} ${draft.units.find((u) => u.id === id)?.questionCount || 0} 題`); return <><p className="muted">題目池共 {sourceCounts.reduce((n, row) => n + Number(row.match(/(\d+) 題$/)?.[1] || 0), 0)} 題（{sourceCounts.join('、')}）；每次抽 {review.drawCount} 題，組卷於 {new Date(review.builtAt).toLocaleString()}。</p><p>{Object.entries(review.allocation).map(([id, n]) => `${id} 每次 ${n} 題`).join('、')}</p>{changed.length > 0 && <div className="notice warning"><strong>來源題庫已更新（{changed.join('、')}），題目池仍是組卷當時內容</strong><button onClick={() => void buildReview({ name: units[0].id, sources: review.sourceUnitIds, count: review.drawCount })}>依目前題庫重新組卷</button></div>}<div className="actions"><button onClick={() => { setReviewName(units[0].id); setReviewSources(review.sourceUnitIds); setReviewCount(review.drawCount); setReviewOpen(true); }}>修改來源與題數</button><button onClick={async () => { if (!confirm('確定刪除複習考？學生既有紀錄會保留。')) return; try { const removed = await api.call<any>('deleteReviewExam', { courseId: draft.id, expectedRevision:draft.revision ?? 0, name: units[0].id }); setDraft((d) => ({ ...d, revision:removed.revision ?? d.revision, units: d.units.filter((u) => u.id !== units[0].id), chapters: Object.fromEntries(Object.entries(d.chapters || {}).filter(([key]) => key !== units[0].id)), chapterOrder: (d.chapterOrder || []).filter((key) => key !== units[0].id), classUnits: Object.fromEntries(Object.entries(d.classUnits || {}).map(([cl, ids]) => [cl, ids.filter((id) => id !== units[0].id)])) })); setSelected(''); notify('已刪除複習考'); } catch (e) { notify((e as Error).message); } }}>刪除複習考</button></div></>; })() : <>
+          <p className="muted">使用上移、下移調整本單元的題目分類順序。更新到學生端後生效。</p>
+          <div className="classification-list">
+            {units.map((u) => <div className="progress-row classification-row" key={u.id} data-status-unit={u.id}>
+              <span><strong>{u.title}</strong> · {u.questionCount || 0} 題<UnitStatusTags draft={materialize()} units={[u]} {...publishedState} /></span>
+              <span className="badge">{u.bankVersion || '未連接題庫'}</span>
+              {!isReviewUnit(u) && <div className="actions">
+                <button type="button" aria-label={`上移 ${u.title}`} disabled={busy || u === firstCategory} onClick={() => moveCategory(u.id, -1)}>上移</button>
+                <button type="button" aria-label={`下移 ${u.title}`} disabled={busy || u === lastCategory} onClick={() => moveCategory(u.id, 1)}>下移</button>
+              </div>}
+            </div>)}
+          </div>
+        </>}
       </section>}
     </div>
   </>;

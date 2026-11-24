@@ -2046,6 +2046,7 @@ html:has(.prefs-bar) { scroll-padding-top: 80px; }
 .unit-status-tags .status-loading { font-size: calc(12px * var(--font-scale, 1)); color: var(--muted); }
 .unitmenu > .sectionhead { flex-wrap: wrap; gap: 8px; }
 .classification-row > span:first-child { min-width: 0; flex: 1 1 180px; }
+.classification-row > .actions > button { min-height: 44px; }
 
 .progress-unit-info small { display: block; margin-top: 5px; }
 /* Keep status pills semantic across appearance themes, and inside each list row. */

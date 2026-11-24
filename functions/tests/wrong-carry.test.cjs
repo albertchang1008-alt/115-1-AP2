@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 process.env.FIREBASE_CONFIG = JSON.stringify({ projectId: 'demo-course-platform' });
 const handlers = require('../lib/functions/src/index.js');
 const { effectiveWrong, updateWrong, forClass } = require('../lib/shared/model.js');
+const { backfillVersions } = require('../lib/functions/src/activityHistory.js');
 const fixture = require('../../tests/fixtures/wrong-carry.json');
 const { getFirestore } = require('firebase-admin/firestore');
 const teacher = { uid: 'teacher', token: { teacher: true } };
@@ -247,6 +248,60 @@ test('④ 複習考重建不帶入 wrongCarry，不寫 progress', async () => {
     assert.equal(exam.wrongCarryOrder, undefined);
     assert(ctx.writes.every((p) => !p.includes('/progress/')));
     assert(bank.version);
+  } finally {
+    ctx.restore();
+  }
+});
+
+test('保存、發布及重同步題庫保留教師調整的分類順序，新分類加到末尾', async () => {
+  const ctx = memory();
+  try {
+    const sheetRow = (id, unit, group = '消化系統', question = '範例') =>
+      ['ap2', id, group, unit, question, '甲', '乙', 'A'];
+    const mouth = sheetRow('mouth', '口腔');
+    const heart = sheetRow('heart', '心臟', '循環系統');
+    const overview = sheetRow('overview', '總覽');
+    const runSync = async (...data) => {
+      const results = await handlers.syncBankTabFromSheet([headers, ...data], 'ap2', 'teacher', 'ap2');
+      assert.equal(results.length, data.length);
+      for (const result of results) assert.equal(result.error, undefined);
+      return results;
+    };
+    await runSync(mouth, heart, overview);
+    const draftRecord = ctx.data.get('courses/ap2');
+    const [u1, u2, u3] = draftRecord.draft.units.map(u => ({ ...u, visibility: 'current' }));
+    const exam = {
+      id: '複習考', title: '複習考', group: '複習考', description: '', required: true, threshold: 80,
+      opensAt: '', dueAt: '', activities: [], visibility: 'hidden',
+      review: { sourceUnitIds: [u1.id], sourceVersions: { [u1.id]: u1.bankVersion }, drawCount: 1, allocation: { [u1.id]: 1 }, history: [] },
+    };
+    const before = { ...draftRecord.draft, title: '測試課程', term: '115-1', units: [u1, u2, u3, exam] };
+    before.chapters.消化系統.activities = [{
+      id: 'demo', title: '測試教材', description: '', type: 'html', phase: 'before',
+      url: 'https://example.com/', tracking: 'interactive', materialVersion: 'demo-ag1',
+    }];
+    const draft = { ...before, units: [u3, u2, u1, exam] };
+    const expected = ['總覽', '心臟', '口腔', '複習考'];
+    const unitIds = (course) => course.units.map(unit => unit.id);
+    await handlers.saveCourse.run({ auth: teacher, data: { course: draft, expectedRevision: draftRecord.revision } });
+    assert.deepEqual(ctx.data.get('courses/ap2').draft, draft);
+    const published = await handlers.publishCourse.run({ auth: teacher, data: { courseId: 'ap2' } });
+    assert.deepEqual(unitIds(published), expected);
+    assert.deepEqual(unitIds(forClass(published, 'A')), expected.slice(0, 3));
+    assert.deepEqual(backfillVersions(before), ['demo-ag1']);
+    assert.deepEqual(backfillVersions(published), backfillVersions(before));
+
+    const [created, changed] = await runSync(sheetRow('new', '新分類'), sheetRow('mouth', '口腔', '消化系統', '已更新'), heart, overview);
+    assert.equal(created.created, true);
+    assert.equal(changed.created, false);
+    assert.notEqual(changed.version, u1.bankVersion);
+    const current = ctx.data.get('courses/ap2');
+    assert.deepEqual(unitIds(current.draft), [...expected, '新分類']);
+    assert.deepEqual(current.draft.units[3], exam);
+    assert.deepEqual(unitIds(current.published), expected);
+    assert.deepEqual(current.draft.staleUnits, []);
+    const republished = await handlers.publishCourse.run({ auth: teacher, data: { courseId: 'ap2' } });
+    assert.deepEqual(unitIds(republished), [...expected, '新分類']);
   } finally {
     ctx.restore();
   }

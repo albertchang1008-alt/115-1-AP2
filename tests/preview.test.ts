@@ -48,7 +48,7 @@ test('教師偏好列不作為 app grid 的子節點', async () => {
   assert.match(source, /<div className="app">\s*<aside/);
   assert.match(css, /\.prefs-bar \{ position: fixed/);
 });
-test('教師課程編輯器以 Chapter 編輯並提供題目分類唯讀與舊資料清理', async () => {
+test('教師課程編輯器以 Chapter 編輯並提供題目分類排序與舊資料清理', async () => {
   const source = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
   const editor = source.slice(source.indexOf('function CourseEditor('), source.indexOf('function Bank('));
   assert.match(editor, /orderedChapters\(draft\)/, '左側只依 Chapter 排列');

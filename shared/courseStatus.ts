@@ -1,4 +1,4 @@
-import { Course, Unit, chapterName, chaptersOf, orderedChapters, forClass, unitVisibility } from './model';
+import { Course, Unit, chapterName, chaptersOf, orderedChapters, forClass, isReviewUnit, unitVisibility } from './model';
 
 export const OPEN_STATUS = { hidden: '尚未開放', current: '目前學習', archived: '已考完' } as const;
 export type StudentUpdateStatus = '已更新到學生端' | '有修改未更新' | '尚未更新到學生端';
@@ -26,10 +26,14 @@ export function studentPreviewCourse(course: Course, classId: string, showHidden
 function unitContent(course: Course, unit: Unit) {
   const { visibility, archiveLabel, archivedAt, visibilityUpdatedAt, ...content } = unit;
   const name = chapterName(unit);
+  const chapters = orderedChapters(course);
+  const chapterPosition = chapters.findIndex(r => r.name === name);
   return {
     content, chapter: chaptersOf(course)[name],
     course: { title: course.title, description: course.description, term: course.term },
-    chapterPosition: orderedChapters(course).findIndex(r => r.name === name),
+    chapterPosition,
+    categoryPosition: isReviewUnit(unit) ? undefined : chapters[chapterPosition]?.units
+      .filter(u => !isReviewUnit(u)).findIndex(u => u.id === unit.id),
     classes: course.classIds.map(id => ({ id, name: course.classNames?.[id] || id,
       selected: selectedClasses(course, unit.id).includes(id),
       override: course.chapterOverrides?.[id]?.[name] || {}, legacyOverride: course.classOverrides?.[id]?.[unit.id] || {} })),
