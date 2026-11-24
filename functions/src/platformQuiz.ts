@@ -342,9 +342,11 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     const exam = examFor(quiz);
     const [paperDoc, all] = await Promise.all([paperFor(ref).get(), ref.collection('sessions').get()]);
     const paper = readPaper(paperDoc.data());
-    const finished = all.docs.map((doc) => {
+    // A duplicate worker can resume after a newer round has opened. Its batch can only touch its own round.
+    const eligible = all.docs.filter((doc) => doc.data().round <= quiz.round);
+    const finished = eligible.map((doc) => {
       const session = doc.data() as Session;
-      if (session.state !== 'active') return { doc, session, changed: false };
+      if (session.state !== 'active' || session.round !== quiz.round) return { doc, session, changed: false };
       return {
         doc, changed: true,
         session: {
