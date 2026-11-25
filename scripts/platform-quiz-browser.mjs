@@ -31,7 +31,7 @@ const browser = await (process.env.CHROME_PATH
 ).catch((error) => { server.close(); throw error; });
 
 const student = ['waiting', 'ready', 'answering', 'confirm', 'submitted', 'mood', 'feedback', 'released'];
-const teacher = ['classes', 'class-quizzes', 'prepare', 'monitor', 'results'];
+const teacher = ['classes', 'class-quizzes', 'prepare', 'monitor', 'crowd', 'results'];
 const problems = [];
 const screens = [];
 const lifecycle = [];
@@ -91,6 +91,12 @@ try {
             if (el.scrollWidth - el.clientWidth > 2 && getComputedStyle(el).overflowX === 'visible') failed.push('文字溢出 ' + el.tagName);
           }
           if (document.documentElement.scrollWidth - innerWidth > 1) failed.push('頁面橫向溢出');
+          // 即時監看 v3（#73）：名字至少 18px，按鈕點擊高度至少 44px
+          for (const el of root.querySelectorAll('.pq-live button, .pq-live-chips li, .pq-live-away li, .pq-live-repeat li')) {
+            if (!visible(el)) continue;
+            if (el.matches('button') && !el.matches('.pq-live-quiet') && el.getBoundingClientRect().height < 44) failed.push('監看按鈕高度 ' + el.textContent);
+            if (el.matches('.pq-live-chips li, .pq-live-chips button, .pq-live-away li, .pq-live-repeat li') && parseFloat(getComputedStyle(el).fontSize) + .1 < 18) failed.push('監看名字字級 ' + el.textContent);
+          }
           const optionBoxes = [...root.querySelectorAll('.pq-options button')].map((el) => el.getBoundingClientRect());
           if (optionBoxes.some((rect, i) => i > 0 && rect.top < optionBoxes[i - 1].bottom)) failed.push('選項重疊');
           return { screen, scale, width: innerWidth, failed };
@@ -101,9 +107,30 @@ try {
           await page.screenshot({ path: path.join(out, 'student-390-' + scale + '.png'), animations: 'disabled' });
         if (viewport.width === 390 && scale === 'default' && screen === 'monitor')
           await page.screenshot({ path: path.join(out, 'teacher-monitor-390.png'), animations: 'disabled' });
+        if (scale === 'default' && screen === 'crowd')
+          await page.screenshot({ path: path.join(out, 'teacher-crowd-' + viewport.width + '.png'), animations: 'disabled', fullPage: true });
       }
     }
     await page.close();
+  }
+  {
+    // 教室投影寬度（#73）：54 人的監看頁在 1920×1080 一頁看完
+    const wide = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+    wide.on('pageerror', (error) => problems.push({ type: 'JS', message: error.message }));
+    await goto(wide, 'crowd', 'default');
+    await wide.addStyleTag({ content: '.pq-fixture-shell{width:min(100% - 32px,1840px)}' });
+    const fits = await wide.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1);
+    screens.push({ screen: 'crowd', scale: 'default', width: 1920, failed: fits ? [] : ['1920×1080 需要捲動'] });
+    if (!fits) problems.push({ screen: 'crowd', width: 1920, failed: ['1920×1080 需要捲動'] });
+    await wide.screenshot({ path: path.join(out, 'teacher-crowd-1920.png'), animations: 'disabled' });
+    await wide.getByRole('button', { name: '放大 QR' }).click();
+    await wide.getByRole('dialog', { name: '掃描進入小考' }).waitFor();
+    await wide.screenshot({ path: path.join(out, 'teacher-qr-1920.png'), animations: 'disabled' });
+    await wide.keyboard.press('Escape');
+    assert.equal(await wide.getByRole('dialog').count(), 0);
+    await goto(wide, 'results', 'default');
+    await wide.getByRole('heading', { name: /切出畫面紀錄/ }).waitFor();
+    await wide.close();
   }
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await goto(page, 'ready', 'default');
@@ -151,7 +178,7 @@ try {
   assert.equal(resumed.active, 2);
   await goto(page, 'monitor', 'default');
   page.once('dialog', (dialog) => void dialog.accept());
-  await page.getByRole('button', { name: '結束', exact: true }).click();
+  await page.getByRole('button', { name: '結束測驗', exact: true }).click();
   await page.getByRole('heading', { name: '班級成績' }).waitFor();
   await zero('同頁結束');
   await goto(page, 'monitor', 'default');

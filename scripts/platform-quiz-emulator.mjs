@@ -174,6 +174,8 @@ try {
   await assertSucceeds(getDoc(doc(teacherDb, monitorPath)));
   await assertFails(getDocs(query(collection(studentDb, eventPath), limit(80))));
   await assertSucceeds(getDocs(query(collection(teacherDb, eventPath), limit(80))));
+  await assertSucceeds(getDocs(query(collection(teacherDb, eventPath), limit(500))));
+  await assertFails(getDocs(query(collection(teacherDb, eventPath), limit(501))));
   await assertFails(setDoc(doc(studentDb, signalPath), { state: 'open' }));
   await assert.rejects(call('quizGet', student(0, foreign), { sittingId: id }), /未開放/);
   await assert.rejects(call('quizStart', student(0), { sittingId: id, round: 0 }));
@@ -230,6 +232,9 @@ try {
   const complete = await getTeacher(id);
   assert.equal(complete.quiz.state, 'released');
   assert.equal(complete.scores.length, 54);
+  // #73：結束並公布後，教師仍讀得到本場全部切出紀錄（學生讀不到的規則測試見上方）
+  assert.equal(complete.events.length, 324);
+  assert.ok(complete.events.every((row, i, all) => i === 0 || all[i - 1].at <= row.at));
   assert.equal(complete.scores.find((row) => row.studentId === studentId(0)).extendedSeconds, 120);
   assert.ok(complete.scores.every((row) => row.score === 80));
   assert.equal((await call('quizGet', student(0), { sittingId: id })).result, undefined);

@@ -43,7 +43,7 @@ service cloud.firestore {
     }
     match /courses/{courseId}/platformQuizzes/{sittingId}/events/{eventId} {
       allow get: if quizTeacher(courseId);
-      allow list: if request.query.limit <= 80 && quizTeacher(courseId);
+      allow list: if request.query.limit <= 500 && quizTeacher(courseId);
       allow write: if false;
     }
     match /{document=**} { allow read, write: if false; }

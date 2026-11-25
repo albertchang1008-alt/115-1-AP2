@@ -122,3 +122,53 @@ export function platformScoreDistribution(scores: number[], maxScore: number) {
     bins,
   };
 }
+
+export interface QuizLeaveSummary {
+  count: number;
+  seconds: number;
+  /** 最近一次離開還沒回來時，離開的時刻。 */
+  awaySince?: number;
+  episodes: { at: number; seconds?: number }[];
+}
+
+/** 依學生彙整切出畫面紀錄（#73）。round 未給時彙整所有輪次。 */
+export function summarizeQuizLeaves(
+  events: (QuizLeaveEvent & { visit?: string })[], round?: number,
+): Record<string, QuizLeaveSummary> {
+  const inRound = events.filter((event) => round === undefined || event.round === round);
+  const key = (event: QuizLeaveEvent & { visit?: string }) =>
+    [event.studentId, event.round, event.visit ?? '', event.episode].join('/');
+  const back = new Map<string, number>();
+  for (const event of inRound) if (event.kind === 'return') back.set(key(event), event.seconds ?? 0);
+  const out: Record<string, QuizLeaveSummary> = {};
+  for (const event of inRound.filter((row) => row.kind === 'leave').sort((a, b) => a.at - b.at)) {
+    const row = out[event.studentId] ??= { count: 0, seconds: 0, episodes: [] };
+    row.count++;
+    const seconds = back.get(key(event));
+    if (seconds === undefined) {
+      row.awaySince = event.at;
+      row.episodes.push({ at: event.at });
+    } else {
+      row.seconds += seconds;
+      delete row.awaySince;
+      row.episodes.push({ at: event.at, seconds });
+    }
+  }
+  return out;
+}
+
+/** 切出紀錄 CSV（教師端下載）：姓名、次數、總秒數、各次時間。 */
+export function quizLeaveCsv(
+  rows: { name: string; summary: QuizLeaveSummary }[], time: (at: number) => string,
+) {
+  const cell = (value: string | number) => {
+    const text = String(value);
+    return /[",\n]/.test(text) ? '"' + text.replaceAll('"', '""') + '"' : text;
+  };
+  const lines = [['姓名', '離開次數', '離開總秒數', '各次（時間／秒數）'].join(',')];
+  for (const { name, summary } of rows) lines.push([
+    cell(name), summary.count, summary.seconds,
+    cell(summary.episodes.map((row) => time(row.at) + '／' + (row.seconds ?? '未回')).join('；')),
+  ].join(','));
+  return '﻿' + lines.join('\n') + '\n';
+}

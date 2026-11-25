@@ -6,6 +6,8 @@ import {
 } from '../shared/platformQuiz';
 import type { MoodCode } from '../shared/zuvioExt';
 
+/** 即時監看讀取的切出事件上限（#73，原 80 筆在人多時會漏掉較早的離開）。需與 firestore.rules 一致。 */
+export const LIVE_EVENT_LIMIT = 500;
 export type LiveLeaveEvent = QuizLeaveEvent & { id: string; visit: string };
 type Listener<T> = (next: (value: T) => void, fail: (error: Error) => void) => () => void;
 
@@ -36,7 +38,7 @@ export const quizLive: QuizLive = {
   events: (courseId, sittingId) => (next, fail) => {
     if (!firestore) throw Error('尚未設定小考連線');
     const events = collection(firestore, 'courses', courseId, 'platformQuizzes', sittingId, 'events');
-    return onSnapshot(query(events, orderBy('at', 'desc'), limit(80)),
+    return onSnapshot(query(events, orderBy('at', 'desc'), limit(LIVE_EVENT_LIMIT)),
       (snap) => next(snap.docs.map((row) => ({ ...row.data(), id: row.id } as LiveLeaveEvent))), fail);
   },
 };
@@ -45,6 +47,8 @@ export interface QuizTeacherView {
   quiz: QuizControl;
   monitor: QuizMonitor;
   scores?: { studentId: string; score: number; makeup: number; extendedSeconds: number; blankStart: boolean }[];
+  /** 結束後（closing／released）才有：本場全部切出事件。 */
+  events?: LiveLeaveEvent[];
 }
 export const quizStudent = (api: API, courseId: string, sittingId: string) => {
   function call<T>(name: string, data = {}) {

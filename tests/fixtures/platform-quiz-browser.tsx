@@ -30,10 +30,26 @@ const view: QuizStudentView = {
     ...q, selected: 'b', answer: 'a', explanation: '這段解析僅用於確認手機版閱讀尺寸。',
   })) },
 };
-const students: QuizMonitor['students'] = {
+const crowd = params.get('screen') === 'crowd';
+// crowd：54 位合成學生（3 未進入、18 作答中、33 已交卷），用來檢查人多時的監看版面（#73）
+const students: QuizMonitor['students'] = crowd ? Object.fromEntries(Array.from({ length: 54 }, (_, i) => {
+  const id = 'c' + String(i + 1).padStart(2, '0');
+  const name = '合成' + '甲乙丙丁戊己庚辛壬癸'[i % 10] + String(i + 1).padStart(2, '0');
+  return [id, i < 3 ? { name } : i < 21 ? { name, startedRound: 0 } : { name, startedRound: 0, submittedRound: 0 }];
+})) : {
   pending: { name: '合成甲生' }, active: { name: '合成乙生', startedRound: 0, extendedSeconds: 120 },
   done: { name: '合成丙生', startedRound: 0, submittedRound: 0 },
 };
+type FixtureEvent = import('../../src/platformQuizApi').LiveLeaveEvent;
+const leave = (studentId: string, episode: number, at: number, seconds?: number): FixtureEvent[] => [
+  { id: studentId + episode + 'l', studentId, visit: 'test', round: 0, episode, kind: 'leave', at },
+  ...(seconds === undefined ? [] : [{ id: studentId + episode + 'r', studentId, visit: 'test', round: 0, episode, kind: 'return' as const, at: at + seconds * 1000, seconds }]),
+];
+const fixtureEvents: FixtureEvent[] = crowd
+  ? [...leave('c04', 1, now - 23000), ...leave('c05', 1, now - 90000, 9), ...leave('c05', 2, now - 60000, 7),
+    ...leave('c25', 1, now - 200000, 20), ...leave('c25', 2, now - 150000, 12), ...leave('c25', 3, now - 100000, 9),
+    ...leave('c06', 1, now - 50000, 4)]
+  : leave('active', 1, now);
 const quiz: QuizControl = {
   courseId, examId: 'exam', classId, title: view.title, label: view.label, itemCount: view.count,
   state: 'open', round: 0, ctl: 0, baseSeconds: 60, extendSeconds: 0, openedAt: now, deadline: now + 60000,
@@ -76,9 +92,7 @@ const live: QuizLive = {
     stats.onMonitor = next;
     return subscription(serverMonitor(), next);
   },
-  events: () => (next) => subscription([{
-    id: 'event', studentId: 'active', visit: 'test', round: 0, episode: 1, kind: 'leave', at: now,
-  }], next),
+  events: () => (next) => subscription(fixtureEvents, next),
   signal: () => () => () => {},
   recheck: async () => null,
 };
@@ -93,6 +107,7 @@ const api: API = {
     }
     return { quiz: { ...quiz, state: serverState }, monitor: serverMonitor(),
       scores: [{ studentId: 'done', score: 4, makeup: 1, blankStart: false, extendedSeconds: 120 }],
+      ...(serverState === 'released' ? { events: fixtureEvents } : {}),
     } as T;
   },
 };
@@ -121,7 +136,7 @@ function Fixture() {
   const [screen, setScreen] = useState(params.get('screen') || 'waiting');
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [className, setClass] = useState(screen === 'class-quizzes' ? classId : '');
-  const teacher = ['classes', 'class-quizzes', 'prepare', 'monitor', 'results', 'away'].includes(screen);
+  const teacher = ['classes', 'class-quizzes', 'prepare', 'monitor', 'crowd', 'results', 'away'].includes(screen);
   if (!teacher) return <main className="pq-link-page">
     <QuizStudentCard screen={screen as QuizStudentScreen} view={screen === 'submitted' ? { ...view, session: { state: 'submitted', seq: 1, answers } } : view} seconds={420} answers={answers}
       choose={(id, option) => setAnswers({ ...answers, [id]: option })}

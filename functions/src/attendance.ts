@@ -31,6 +31,9 @@ import {
   validAttendanceDate,
   validDeviceId,
   validEmailKey,
+  validReopenMinutes,
+  canReopenSession,
+  ATTENDANCE_REOPEN_MAX_MIN,
   validateClassIds,
   validateStartInput,
 } from '../../shared/attendance';
@@ -182,6 +185,7 @@ export function createAttendanceHandlers(
     counts: s.counts || { present: 0, absent: 0 },
     backfilled: s.backfilled === true,
     confirmedAt: s.confirmedAt || 0,
+    reopenCount: s.reopenCount || 0,
   });
 
   /** 未簽到的人補成「未到」。只在節次已關閉後執行，而且只寫還沒有紀錄的人，不會蓋掉已簽到的紀錄。 */
@@ -583,6 +587,58 @@ export function createAttendanceHandlers(
       const s = (await sessionRef(courseId, sid).get()).data() as AttendanceSession;
       return { session: publicSession(s) };
     }),
+    /** 再開放（教師 2026-11-25，#73）：今天已結束的節次以原節次、原班級重開；已簽到保留，未到可補簽。
+     *  已確認的節次也可再開放，會撤銷確認並寫入修改紀錄；再結束後需重新確認。 */
+    attendanceReopen: onCall(options, async (req) => {
+      const { p, c } = await teacher(req);
+      const d = input(req.data, ['sessionId', 'minutes']);
+      const courseId = req.data.courseId;
+      if (!validReopenMinutes(d.minutes)) bad(`再開放時間需為 1–${ATTENDANCE_REOPEN_MAX_MIN} 分鐘`);
+      if (await current(courseId, c))
+        throw new HttpsError('failed-precondition', '已有進行中的點名，請先結束');
+      const s0 = await closedSession(courseId, c, d.sessionId);
+      const t = now();
+      if (!canReopenSession(s0, taipeiDate(t)))
+        throw new HttpsError('failed-precondition', '只能再開放今天已結束的點名節次');
+      const secret = random(32).toString('base64url');
+      const session = await db.runTransaction(async (tx) => {
+        const [st, snap] = [await tx.get(stateRef(courseId)), await tx.get(sessionRef(courseId, s0.id))];
+        if (st.data()?.openSessionId)
+          throw new HttpsError('failed-precondition', '已有進行中的點名，請先結束');
+        const cur = snap.data() as AttendanceSession | undefined;
+        if (!canReopenSession(cur, taipeiDate(t)))
+          throw new HttpsError('failed-precondition', '只能再開放今天已結束的點名節次');
+        const durationSec = (d.minutes as number) * 60;
+        const next: AttendanceSession = {
+          ...cur!,
+          status: 'open',
+          startedAt: t,
+          endsAt: t + durationSec * 1000,
+          durationSec,
+          settled: false,
+          reopenCount: (cur!.reopenCount || 0) + 1,
+          reopenedAt: t,
+        };
+        delete next.closedAt;
+        delete next.confirmedAt;
+        tx.set(sessionRef(courseId, cur!.id), next);
+        tx.set(secretRef(courseId, cur!.id), { secret, createdAt: t });
+        tx.set(stateRef(courseId), { openSessionId: cur!.id });
+        tx.set(audit(courseId).doc(`${t}-${random(6).toString('hex')}`), {
+          at: t,
+          action: 'reopen',
+          sessionId: cur!.id,
+          date: cur!.date,
+          period: cur!.period,
+          minutes: d.minutes,
+          ...(cur!.confirmedAt ? { unconfirmed: cur!.confirmedAt } : {}),
+          by: p.uid,
+          byName: String(p.name || p.email || ''),
+        });
+        return next;
+      });
+      return { session: publicSession(session) };
+    }),
     /** 投影畫面每隔幾秒讀一次：目前的數字碼、QR 憑證、倒數與已簽到人數。 */
     attendanceLive: onCall(options, async (req) => {
       const { c } = await teacher(req);
@@ -702,6 +758,7 @@ export function createAttendanceHandlers(
           signedAt: t,
           via,
           ...(d.deviceId ? { deviceId: d.deviceId as string } : {}),
+          ...(cur?.reopenedAt ? { reopened: true } : {}),
         };
         tx.set(ref, record);
         return { result: 'ok', signedAt: t, ...label };
@@ -798,6 +855,7 @@ export function createAttendanceHandlers(
             via: r.via || 'auto',
             edited: r.edited === true,
             editedAt: r.editedAt || 0,
+            reopened: r.reopened === true,
             locked: locked.has(r.email),
             sameDevice: (same[r.email] || []).map((e) => nameOf.get(e) || e),
             pendingMail: s.confirmedAt ? pendingStudentMail(r) : null,

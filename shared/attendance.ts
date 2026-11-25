@@ -35,6 +35,9 @@ export type AttendanceSession = {
   backfilled?: boolean;
   confirmedAt?: number;
   trialCount?: number;
+  /** 教師再開放的次數與最後一次時間（2026-11-25，#73）；舊資料沒有。 */
+  reopenCount?: number;
+  reopenedAt?: number;
 };
 export type AttendanceRecord = {
   email: string;
@@ -50,6 +53,8 @@ export type AttendanceRecord = {
   editedAt?: number;
   lastNotified?: AttendanceStatus;
   notifySeq?: number;
+  /** 在教師再開放後才簽到（#73）。 */
+  reopened?: boolean;
 };
 
 const TAIPEI_OFFSET = 8 * 3600 * 1000;
@@ -509,4 +514,17 @@ export function pendingNotificationCount(drafts: {
   digest: { ready?: boolean }[];
 }) {
   return drafts.student.length + drafts.digest.filter((g) => g.ready).length;
+}
+
+/** 再開放分鐘數：1–30 的整數。 */
+export const ATTENDANCE_REOPEN_MAX_MIN = 30;
+export function validReopenMinutes(v: unknown): v is number {
+  return Number.isInteger(v) && (v as number) >= 1 && (v as number) <= ATTENDANCE_REOPEN_MAX_MIN;
+}
+/** 只有今天、已結束的正式點名節次可以再開放（已確認者會撤銷確認）。 */
+export function canReopenSession(
+  s: Pick<AttendanceSession, 'kind' | 'status' | 'date'> | undefined,
+  today: string,
+) {
+  return !!s && s.kind === 'roll' && s.status === 'closed' && s.date === today;
 }

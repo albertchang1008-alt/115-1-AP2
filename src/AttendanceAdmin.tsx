@@ -33,6 +33,7 @@ type Session = {
   durationSec: number;
   codeSec: number;
   qrSec: number;
+  reopenCount?: number;
 };
 type Live =
   | { session: null }
@@ -57,6 +58,7 @@ type RosterRow = {
   via: string;
   edited: boolean;
   editedAt: number;
+  reopened?: boolean;
   locked: boolean;
   sameDevice: string[];
   pendingMail: 'absent' | 'correction' | null;
@@ -474,13 +476,16 @@ function SessionsView({
   notify,
   onGoNotify,
   onChanged,
-}: Props & { onGoNotify: () => void; onChanged: () => void }) {
+  onReopened,
+}: Props & { onGoNotify: () => void; onChanged: () => void; onReopened: () => void }) {
   const [sessions, setSessions] = useState<Session[] | null>(null);
   const [sid, setSid] = useState('');
   const [roster, setRoster] = useState<{ session: Session; rows: RosterRow[] } | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<RosterRow | null>(null);
   const [reason, setReason] = useState('');
+  const [reopenMin, setReopenMin] = useState(3);
+  const [reopening, setReopening] = useState(false);
   const [backfill, setBackfill] = useState<{
     date: string;
     period: number;
@@ -546,7 +551,27 @@ function SessionsView({
       notify((e as Error).message);
     }
   };
+  const reopen = async () => {
+    const cur = roster?.session;
+    if (!cur || reopening) return;
+    const note = cur.confirmedAt
+      ? '這一節已確認。再開放會撤銷確認（留下修改紀錄），結束後需要重新確認。\n'
+      : '';
+    if (!window.confirm(`${note}再開放 ${reopenMin} 分鐘？已簽到的保留，未到的可以補簽。`)) return;
+    setReopening(true);
+    try {
+      await api.call('attendanceReopen', { courseId: course.id, sessionId: cur.id, minutes: reopenMin });
+      notify(`已再開放 ${reopenMin} 分鐘`);
+      onChanged();
+      onReopened();
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setReopening(false);
+    }
+  };
   const s = roster?.session;
+  const reopenable = !!s && s.kind === 'roll' && s.status === 'closed' && s.date === taipeiDate(Date.now());
   const flagged = roster?.rows.filter((r) => r.sameDevice.length) || [];
   const pending = roster?.rows.filter((r) => r.pendingMail).length || 0;
   return (
@@ -705,6 +730,28 @@ function SessionsView({
               >
                 匯出本節 CSV
               </button>
+              {reopenable && (
+                <span className="att-reopen">
+                  <label>
+                    再開放{' '}
+                    <input
+                      type="number"
+                      min={1}
+                      max={30}
+                      value={reopenMin}
+                      aria-label="再開放分鐘數"
+                      onChange={(e) => setReopenMin(Number(e.target.value))}
+                    />{' '}
+                    分鐘
+                  </label>
+                  <button
+                    disabled={reopening || !Number.isInteger(reopenMin) || reopenMin < 1 || reopenMin > 30}
+                    onClick={() => void reopen()}
+                  >
+                    再開放
+                  </button>
+                </span>
+              )}
               {s.confirmedAt ? (
                 <button onClick={() => void confirm(false)}>取消確認</button>
               ) : (
@@ -838,6 +885,7 @@ function SessionsView({
                       {[
                         r.sameDevice.length ? `⚠ 與 ${r.sameDevice.join('、')} 同裝置` : '',
                         r.locked ? '🔒 數字碼錯 5 次，已鎖住' : '',
+                        r.reopened ? '再開放補簽' : '',
                         r.edited ? `已修改 ${taipeiDateTime(r.editedAt).slice(5)}` : '',
                         r.pendingMail === 'absent'
                           ? '待通知（未到）'
@@ -885,6 +933,9 @@ function SummaryView({ api, course, notify }: Props) {
       to: AttendanceStatus;
       reason: string;
       byName: string;
+      action?: 'reopen';
+      minutes?: number;
+      unconfirmed?: number;
     }[]
   >([]);
   useEffect(() => {
@@ -1009,20 +1060,34 @@ function SummaryView({ api, course, notify }: Props) {
               </tr>
             </thead>
             <tbody>
-              {audit.map((a, i) => (
-                <tr key={i}>
-                  <td>{taipeiDateTime(a.at)}</td>
-                  <td>{sessionLabel(a)}</td>
-                  <td>
-                    {a.name}（{a.studentId}）
-                  </td>
-                  <td>
-                    <StatusPill status={a.from} /> → <StatusPill status={a.to} />
-                  </td>
-                  <td>{a.reason || '（未填）'}</td>
-                  <td>{a.byName}</td>
-                </tr>
-              ))}
+              {audit.map((a, i) =>
+                a.action === 'reopen' ? (
+                  <tr key={i}>
+                    <td>{taipeiDateTime(a.at)}</td>
+                    <td>{sessionLabel(a)}</td>
+                    <td>（整節）</td>
+                    <td>
+                      再開放 {a.minutes} 分鐘
+                      {a.unconfirmed ? `・撤銷 ${taipeiDateTime(a.unconfirmed).slice(5)} 的確認` : ''}
+                    </td>
+                    <td>—</td>
+                    <td>{a.byName}</td>
+                  </tr>
+                ) : (
+                  <tr key={i}>
+                    <td>{taipeiDateTime(a.at)}</td>
+                    <td>{sessionLabel(a)}</td>
+                    <td>
+                      {a.name}（{a.studentId}）
+                    </td>
+                    <td>
+                      <StatusPill status={a.from} /> → <StatusPill status={a.to} />
+                    </td>
+                    <td>{a.reason || '（未填）'}</td>
+                    <td>{a.byName}</td>
+                  </tr>
+                ),
+              )}
             </tbody>
           </table>
         )}
@@ -1431,6 +1496,7 @@ export default function AttendanceAdmin(props: Props) {
           {...props}
           onGoNotify={() => setView('notify')}
           onChanged={() => void refreshCount()}
+          onReopened={() => setView('live')}
         />
       ) : view === 'summary' ? (
         <SummaryView {...props} />

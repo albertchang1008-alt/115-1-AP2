@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import qrcode from 'qrcode-generator';
-import { quizHash, type QuizMonitor, type QuizState } from '../shared/platformQuiz';
+import { quizHash, quizLeaveCsv, summarizeQuizLeaves, type QuizLeaveSummary, type QuizMonitor, type QuizState } from '../shared/platformQuiz';
 import { maskStudentName } from '../shared/zuvioExt';
 import { quizLive, type LiveLeaveEvent, type QuizLive, type QuizTeacherView } from './platformQuizApi';
 import { quizDuration } from './PlatformQuizStudent';
@@ -57,6 +57,11 @@ export function QuizClassDirectory({ classes, exams, selected, select, open, bac
   </section>;
 }
 
+function SmallQr({ courseId, sittingId }: { courseId: string; sittingId: string }) {
+  const { data } = useQrData(courseId, sittingId, 4);
+  return <img className="pq-live-qr-img" src={data} alt="進入小考 QR code" />;
+}
+
 function QuizQr({ courseId, sittingId }: { courseId: string; sittingId: string }) {
   const [large, setLarge] = useState(false);
   const url = location.origin + location.pathname + quizHash(courseId, sittingId);
@@ -73,6 +78,66 @@ function QuizQr({ courseId, sittingId }: { courseId: string; sittingId: string }
     </button>
     <p><a href={url}>進入小考</a></p>
   </div>;
+}
+
+function useQrData(courseId: string, sittingId: string, scale: number) {
+  const url = location.origin + location.pathname + quizHash(courseId, sittingId);
+  const data = useMemo(() => {
+    const qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    return qr.createDataURL(scale, scale * 3);
+  }, [url, scale]);
+  return { url, data };
+}
+
+/** 投影用全螢幕 QR（#73）：大 QR＋倒數；按鈕或 Esc 關閉。 */
+function QrOverlay({ courseId, sittingId, remaining, close }: {
+  courseId: string; sittingId: string; remaining: string; close: () => void;
+}) {
+  const { url, data } = useQrData(courseId, sittingId, 10);
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => { if (event.key === 'Escape') close(); };
+    document.addEventListener('keydown', key);
+    return () => document.removeEventListener('keydown', key);
+  }, [close]);
+  return <div className="pq-qr-overlay" role="dialog" aria-modal="true" aria-label="掃描進入小考">
+    <img src={data} alt="進入小考 QR code" />
+    <div>
+      <p className="pq-qr-overlay-time">剩餘 <strong>{remaining}</strong></p>
+      <p>手機掃描 → 用學校帳號登入 → 直接打開本場小考</p>
+      <p><a href={url}>進入小考</a></p>
+      <button type="button" onClick={close} autoFocus>關閉（Esc）</button>
+    </div>
+  </div>;
+}
+
+function LeaveReport({ events, name, round }: {
+  events: { studentId: string; round: number; episode: number; kind: 'leave' | 'return'; at: number; seconds?: number; visit?: string }[];
+  name: (id: string) => string; round?: number;
+}) {
+  const summary = summarizeQuizLeaves(events, round);
+  const rows = Object.entries(summary).sort((a, b) => b[1].count - a[1].count || b[1].seconds - a[1].seconds);
+  const total = rows.reduce((sum, [, row]) => sum + row.count, 0);
+  const download = () => {
+    const csv = quizLeaveCsv(rows.map(([id, row]) => ({ name: name(id), summary: row })), time);
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    link.download = '切出畫面紀錄.csv';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 0);
+  };
+  return <section className="z-card pq-leave-report" data-quiz-leaves>
+    <h3>切出畫面紀錄（{rows.length} 人・{total} 次）</h3>
+    {!rows.length ? <p>這一場沒有切出畫面的紀錄。</p> : <>
+      <table className="z-table"><thead><tr><th>姓名</th><th>次數</th><th>總秒數</th><th>各次</th></tr></thead>
+        <tbody>{rows.map(([id, row]) => <tr key={id}>
+          <td>{name(id)}</td><td>{row.count}</td><td>{row.seconds}</td>
+          <td>{row.episodes.map((episode) => time(episode.at) + '（' + (episode.seconds === undefined ? '未記到返回' : episode.seconds + ' 秒') + '）').join('、')}</td>
+        </tr>)}</tbody></table>
+      <button type="button" onClick={download}>下載 CSV</button>
+    </>}
+  </section>;
 }
 
 // Only a visible, active monitor can own these subscriptions. A terminal snapshot disposes both.
@@ -126,10 +191,7 @@ function useQuizMonitor(live: QuizLive, courseId: string, sittingId: string, ena
   return { monitor, events, error, reconnect: () => setRetry((n) => n + 1) };
 }
 
-const groups = [
-  { id: 'pending', label: '未進入' }, { id: 'active', label: '作答中' }, { id: 'done', label: '已完成' },
-] as const;
-type Group = typeof groups[number]['id'];
+type Group = 'pending' | 'active' | 'done';
 function groupFor(student: QuizMonitor['students'][string]): Group {
   if (student.submittedRound !== undefined) return 'done';
   if (student.startedRound !== undefined) return 'active';
@@ -145,10 +207,12 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
   const [busy, setBusy] = useState(false);
   const [failure, setFailure] = useState('');
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(2);
+  const [custom, setCustom] = useState(2);
+  // 延長面板：null＝關閉；''＝全場；學號＝個別延長該生（#73）
+  const [extendFor, setExtendFor] = useState<string | null>(null);
   const [masked, setMasked] = useState(false);
-  const [eventFilter, setEventFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [showDone, setShowDone] = useState(false);
+  const [bigQr, setBigQr] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [monitorVisible, setMonitorVisible] = useState(true);
   const [now, setNow] = useState(Date.now);
@@ -179,6 +243,7 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
     try {
       await api.call('quizControl', { courseId, sittingId, action, ctl: monitor.ctl, round: monitor.round, ...values });
       setSelected([]);
+      setExtendFor(null);
       await read();
       reload();
     } catch (e) {
@@ -196,18 +261,20 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
     const name = monitor.students[id]?.name || '名冊外';
     return masked ? maskStudentName(name).replaceAll('○', 'O') : name;
   };
-  const received = new Map<string, number>();
-  const eventKey = (event: LiveLeaveEvent) => [event.studentId, event.round, event.visit, event.episode].join('/');
-  for (const event of stream.events) if (event.kind === 'return' && event.seconds !== undefined) received.set(eventKey(event), event.seconds);
-  const leaves = stream.events.filter((event) => event.kind === 'leave' && (!eventFilter || event.studentId === eventFilter));
   const scoreById = new Map(data.scores?.map((row) => [row.studentId, row]) || []);
   const pending = students.filter(([, person]) => groupFor(person) === 'pending');
-  const allowed = !busy && Number.isInteger(minutes) && minutes >= 1 && minutes <= 60;
+  const customOk = Number.isInteger(custom) && custom >= 1 && custom <= 60;
+  const extend = (add: number) => {
+    if (busy || extendFor === null) return;
+    void control(extendFor ? 'extendStudent' : 'extend', { seconds: add * 60, ...(extendFor ? { studentId: extendFor } : {}) });
+  };
+  const leaveSummary: Record<string, QuizLeaveSummary> = state === 'open' ? summarizeQuizLeaves(stream.events, monitor.round) : {};
+  const remainingSeconds = Math.max(0, Math.ceil((monitor.deadline - now) / 1000));
   const pre = state === 'prepared' || state === 'announced';
   return <div className="pq-teacher" data-ui data-quiz-teacher={pre ? 'prepare' : state === 'released' ? 'results' : 'monitor'}>
     <div className="pq-teacher-actions">
       <button type="button" onClick={back}>← {className}的小考</button>
-      <h3>{row.exam.title}・{row.sitting.label}</h3>
+      {state !== 'open' && <h3>{row.exam.title}・{row.sitting.label}</h3>}
     </div>
     {(failure || stream.error) && <p className="pq-error" role="alert">{failure || stream.error}</p>}
     {pre && <section className="z-card">
@@ -225,54 +292,113 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
       <QuizQr courseId={courseId} sittingId={sittingId} />
       <details><summary>應考名冊（{students.length} 人）</summary><p>{students.map(([id]) => displayName(id)).join('、')}</p></details>
     </section>}
-    {state === 'open' && <section className="z-card">
-      <div className="pq-teacher-actions">
-        <h3>即時監看</h3>
-        <strong>全班截止 {time(monitor.deadline)}・{quizDuration(Math.max(0, Math.ceil((monitor.deadline - now) / 1000)))}</strong>
-        <button type="button" onClick={() => setMonitorVisible((visible) => !visible)}>{monitorVisible ? '關閉監看' : '開啟監看'}</button>
-        <button type="button" onClick={() => { void read(); stream.reconnect(); }}>重新整理監看</button>
-      </div>
-      <p>{monitor.round ? '補考第 ' + monitor.round + ' 輪' : '正式場次'}{monitor.finalDeadline > monitor.deadline ? '・個別延長最晚 ' + time(monitor.finalDeadline) : ''}</p>
-      {monitor.prep === 'pending' && <p role="status">正在建立考前練習快照。</p>}
-      {monitor.prep === 'incomplete' && <p role="status">考前練習快照未完整。</p>}
-      <div className="pq-teacher-actions">
-        <label>延長（分鐘） <input type="number" min="1" max="60" value={minutes} onChange={(event) => setMinutes(Number(event.target.value))} /></label>
-        <button type="button" disabled={!allowed} onClick={() => void control('extend', { seconds: minutes * 60 })}>全場延長</button>
-        <button type="button" disabled={busy} onClick={() => { if (window.confirm('結束這一輪並批改最後存檔的答案？')) void control('end'); }}>結束</button>
-      </div>
-      <QuizQr courseId={courseId} sittingId={sittingId} />
-      {monitorVisible && <>
-        <div className="pq-teacher-actions">
-          <label><input type="checkbox" checked={masked} onChange={(event) => setMasked(event.target.checked)} /> 遮名</label>
-          <label>名冊狀態 <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
-            <option value="">全部</option>{groups.map((group) => <option key={group.id} value={group.id}>{group.label}</option>)}
-          </select></label>
+    {state === 'open' && (() => {
+      const byGroup = (group: Group) => students.filter(([, person]) => groupFor(person) === group);
+      const pendingRows = byGroup('pending');
+      const activeRows = byGroup('active');
+      const doneRows = byGroup('done');
+      const away = (id: string) => leaveSummary[id]?.awaySince !== undefined && groupFor(monitor.students[id]) === 'active';
+      const awayRows = activeRows.filter(([id]) => away(id));
+      const repeatRows = students.filter(([id]) => (leaveSummary[id]?.count || 0) >= 2 && !away(id))
+        .sort((a, b) => leaveSummary[b[0]].count - leaveSummary[a[0]].count);
+      const leaveTotal = Object.values(leaveSummary).reduce((sum, row) => sum + row.count, 0);
+      const total = students.length || 1;
+      const sortedActive = [...awayRows, ...activeRows.filter(([id]) => !away(id))];
+      const remaining = quizDuration(remainingSeconds);
+      const attention = pendingRows.length + awayRows.length + repeatRows.length;
+      return <section className="pq-live" data-quiz-live>
+        <div className="pq-live-head">
+          <h3>{row.exam.title}・{row.sitting.label}</h3>
+          <span className="pq-live-pill">{monitor.round ? '補考第 ' + monitor.round + ' 輪' : '開放中'}</span>
+          <span className="pq-live-spacer" />
+          <label className="pq-live-mask"><input type="checkbox" checked={masked} onChange={(event) => setMasked(event.target.checked)} /> 遮名</label>
+          <button type="button" aria-expanded={extendFor === ''} onClick={() => setExtendFor(extendFor === '' ? null : '')}>延長…</button>
+          <button type="button" className="pq-live-end" disabled={busy}
+            onClick={() => { if (window.confirm('結束這一輪並批改最後存檔的答案？')) void control('end'); }}>結束測驗</button>
+          <button type="button" className="pq-live-quiet" onClick={() => setMonitorVisible((visible) => !visible)}>{monitorVisible ? '關閉監看' : '開啟監看'}</button>
+          <button type="button" className="pq-live-quiet" onClick={() => { void read(); stream.reconnect(); }}>重新整理</button>
         </div>
-        <div className="pq-status-grid">{groups.filter((group) => !statusFilter || group.id === statusFilter).map((group) => {
-          const names = students.filter(([, person]) => groupFor(person) === group.id);
-          return <div key={group.id} className="pq-status-column" data-status={group.id}>
-            <h3>{group.label}・{names.length} 人</h3>
-            {!names.length && <p>—</p>}
-            <ul>{names.map(([id, person]) => <li key={id}>
-              {group.id === 'active' ? <>
-                <button type="button" disabled={!allowed} onClick={() => void control('extendStudent', { studentId: id, seconds: minutes * 60 })}
-                  aria-label={'個別延長 ' + displayName(id)}>{displayName(id)}</button>
-                {'・' + quizDuration(Math.max(0, Math.ceil((monitor.deadline + (person.extendedSeconds || 0) * 1000 - now) / 1000)))}
-              </> : displayName(id)}
-              {(person.startedRound ?? person.submittedRound ?? 0) > 0 && '・補考'}
-              {!!person.extendedSeconds && '・個別延長 ' + person.extendedSeconds / 60 + ' 分鐘'}
+        {extendFor !== null && <div className="pq-live-extend" role="group" aria-label="延長時間">
+          <strong>{extendFor ? '個別延長：' + displayName(extendFor) : '延長全場'}</strong>
+          <button type="button" disabled={busy} onClick={() => extend(1)}>＋1 分</button>
+          <button type="button" disabled={busy} onClick={() => extend(3)}>＋3 分</button>
+          <label>自訂 <input type="number" min="1" max="60" value={custom} onChange={(event) => setCustom(Number(event.target.value))} /> 分</label>
+          <button type="button" disabled={busy || !customOk} onClick={() => extend(custom)}>套用</button>
+          <button type="button" className="pq-live-quiet" onClick={() => setExtendFor(null)}>取消</button>
+        </div>}
+        <div className="pq-live-progress">
+          <div className="pq-live-clock">
+            <span>剩餘・{time(monitor.deadline)} 截止</span>
+            <strong aria-label="全班剩餘時間">{remaining}</strong>
+            {monitor.finalDeadline > monitor.deadline && <span>個別延長最晚 {time(monitor.finalDeadline)}</span>}
+          </div>
+          <div className="pq-live-bar-wrap">
+            <div className="pq-live-bar" role="img" aria-label={'已交卷 ' + doneRows.length + '、作答中 ' + activeRows.length + '、未進入 ' + pendingRows.length + '，共 ' + students.length + ' 人'}>
+              <span data-status="done" style={{ width: doneRows.length / total * 100 + '%' }} />
+              <span data-status="active" style={{ width: activeRows.length / total * 100 + '%' }} />
+              <span data-status="pending" style={{ width: pendingRows.length / total * 100 + '%' }} />
+            </div>
+            <div className="pq-live-counts">
+              <span data-status="done"><strong>{doneRows.length}</strong> 已交卷</span>
+              <span data-status="active"><strong>{activeRows.length}</strong> 作答中</span>
+              <span data-status="pending"><strong>{pendingRows.length}</strong> 未進入</span>
+              <span className="pq-live-total">共 {students.length} 人</span>
+            </div>
+          </div>
+          <div className="pq-live-qr">
+            <SmallQr courseId={courseId} sittingId={sittingId} />
+            <button type="button" onClick={() => setBigQr(true)}>放大 QR</button>
+          </div>
+        </div>
+        {monitor.prep === 'pending' && <p role="status">正在建立考前練習快照。</p>}
+        {monitor.prep === 'incomplete' && <p role="status">考前練習快照未完整。</p>}
+        {monitorVisible ? <div className="pq-live-main">
+          <section className="pq-live-attention" aria-label="需要注意">
+            <h4>需要注意</h4>
+            {!attention && <p>目前沒有需要處理的人。</p>}
+            {!!pendingRows.length && <div>
+              <span className="pq-live-label">還沒進入（{pendingRows.length}）</span>
+              <ul className="pq-live-chips">{pendingRows.map(([id]) => <li key={id} className="pq-chip-pending">{displayName(id)}</li>)}</ul>
+            </div>}
+            {!!awayRows.length && <div>
+              <span className="pq-live-label">現在離開畫面（{awayRows.length}）</span>
+              <ul className="pq-live-away">{awayRows.map(([id]) => <li key={id}>
+                <span>{displayName(id)}</span>
+                <span>已離開 {quizDuration(Math.max(0, Math.floor((now - (leaveSummary[id].awaySince || now)) / 1000)))}</span>
+              </li>)}</ul>
+            </div>}
+            {!!repeatRows.length && <div>
+              <span className="pq-live-label">離開 2 次以上（{repeatRows.length}）</span>
+              <ul className="pq-live-repeat">{repeatRows.map(([id]) => <li key={id}>
+                <span>{displayName(id)}</span><span>{leaveSummary[id].count} 次・{leaveSummary[id].seconds} 秒</span>
+              </li>)}</ul>
+            </div>}
+            <p className="pq-live-foot">全部切出紀錄：{Object.keys(leaveSummary).length} 人・{leaveTotal} 次（結束後在成績頁保留）</p>
+          </section>
+          <section className="pq-live-active" aria-label="作答中">
+            <div className="pq-live-active-head"><h4>作答中 {activeRows.length}</h4><span>點名字可個別延長</span></div>
+            {!activeRows.length && <p>目前沒有作答中的學生。</p>}
+            <ul className="pq-live-chips">{sortedActive.map(([id, person]) => <li key={id}>
+              <button type="button" className={away(id) ? 'pq-chip-away' : 'pq-chip-active'} disabled={busy}
+                aria-label={'個別延長 ' + displayName(id) + (away(id) ? '（離開中）' : '')}
+                onClick={() => setExtendFor(id)}>
+                {displayName(id)}
+                {away(id) ? <em> 離開中</em> : leaveSummary[id] ? <em> 離{leaveSummary[id].count}</em> : null}
+                {(person.startedRound ?? 0) > 0 && <small> 補考</small>}
+                {!!person.extendedSeconds && <small> ＋{person.extendedSeconds / 60} 分</small>}
+              </button>
             </li>)}</ul>
-          </div>;
-        })}</div>
-        <h3>切出畫面</h3>
-        <label>篩選學生 <select value={eventFilter} onChange={(event) => setEventFilter(event.target.value)}>
-          <option value="">全部</option>{students.map(([id]) => <option key={id} value={id}>{displayName(id)}</option>)}
-        </select></label>
-        {leaves.length ? <ul>{leaves.map((event) => <li key={event.id}>
-          {time(event.at)}・{displayName(event.studentId)}・第 {event.episode} 次・{received.has(eventKey(event)) ? received.get(eventKey(event)) + ' 秒' : '尚未記到返回'}
-        </li>)}</ul> : <p>目前沒有切出紀錄。</p>}
-      </>}
-    </section>}
+            <div className="pq-live-done">
+              <strong>已交卷 {doneRows.length}</strong>
+              <span>名單收合，交卷者不需處理</span>
+              <button type="button" aria-expanded={showDone} onClick={() => setShowDone(!showDone)}>{showDone ? '收合名單' : '展開名單'}</button>
+            </div>
+            {showDone && <p className="pq-live-done-list">{doneRows.map(([id]) => displayName(id)).join('、') || '—'}</p>}
+          </section>
+        </div> : <p>監看已關閉，不會接收即時更新。</p>}
+        {bigQr && <QrOverlay courseId={courseId} sittingId={sittingId} remaining={remaining} close={() => setBigQr(false)} />}
+      </section>;
+    })()}
     {state === 'closing' && <section className="z-card">
       <h3>正在批改</h3><p>成績會在結算後公布。</p><button type="button" onClick={() => void read()}>重新檢查</button>
     </section>}
@@ -294,6 +420,7 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
           <button type="button" disabled={!selected.length || busy} onClick={() => void control('makeup', { studentIds: selected })}>開放補考</button>
         </fieldset>}
       </section>
+      <LeaveReport events={data.events || []} name={displayName} />
     </>}
   </div>;
 }

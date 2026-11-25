@@ -127,3 +127,96 @@
   padding: 18px;
   background: #15293cb0;
 }
+
+/* ───── 即時監看 v3（#73，教師 2026-11-25 核可）：例外導向，只把要處理的人放大 ───── */
+.pq-live { display: grid; gap: 14px; color: #1e293b; font-size: calc(16px * var(--font-scale, 1)); }
+.pq-live h3, .pq-live h4 { margin: 0; }
+.pq-live-head { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.pq-live-head h3 { font-size: calc(22px * var(--font-scale, 1)); font-weight: 800; }
+.pq-live-pill { font-weight: 700; color: #0c4a6e; background: #e0f2fe; padding: 4px 12px; border-radius: 999px; }
+.pq-live-spacer { flex: 1; }
+.pq-live-mask { display: inline-flex; align-items: center; gap: 6px; }
+.pq-live button { min-height: 44px; }
+.pq-live .pq-live-end { background: #be185d; border-color: #be185d; color: #fff; font-weight: 700; }
+.pq-live .pq-live-quiet { background: transparent; border-color: transparent; color: #475569; text-decoration: underline; }
+.pq-live-extend {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  padding: 10px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 12px;
+}
+.pq-live-extend input { width: 4.5em; }
+.pq-live-progress {
+  display: grid; grid-template-columns: minmax(180px, auto) minmax(0, 1fr) auto; gap: 24px; align-items: center;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px 22px;
+}
+.pq-live-clock { display: grid; gap: 2px; color: #475569; }
+.pq-live-clock strong {
+  font-size: calc(60px * var(--font-scale, 1)); line-height: 1; color: #0f172a; font-variant-numeric: tabular-nums;
+}
+.pq-live-bar-wrap { display: grid; gap: 10px; min-width: 0; }
+.pq-live-bar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; background: #e2e8f0; }
+.pq-live-bar span[data-status="done"] { background: #166534; }
+.pq-live-bar span[data-status="active"] { background: #60a5fa; }
+.pq-live-bar span[data-status="pending"] { background: #cbd5e1; }
+.pq-live-counts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 28px; font-size: calc(18px * var(--font-scale, 1)); color: #475569; }
+.pq-live-counts strong { font-size: calc(36px * var(--font-scale, 1)); }
+.pq-live-counts [data-status="done"] strong { color: #166534; }
+.pq-live-counts [data-status="active"] strong { color: #1d4ed8; }
+.pq-live-counts [data-status="pending"] strong { color: #334155; }
+.pq-live-total { margin-inline-start: auto; }
+.pq-live-qr { display: flex; align-items: center; gap: 10px; }
+.pq-live-qr-img { width: 110px; height: 110px; image-rendering: pixelated; background: #fff; }
+.pq-live-main { display: grid; grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.pq-live-attention {
+  display: grid; gap: 14px; padding: 16px 18px; background: #fff7fb; border: 2px solid #f9a8d4; border-radius: 16px;
+}
+.pq-live-attention h4 { font-size: calc(20px * var(--font-scale, 1)); color: #9d174d; }
+.pq-live-attention p { margin: 0; }
+.pq-live-label { display: block; margin-bottom: 6px; color: #475569; }
+.pq-live-chips, .pq-live-away, .pq-live-repeat { list-style: none; margin: 0; padding: 0; }
+.pq-live-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.pq-live-chips li { font-size: calc(18px * var(--font-scale, 1)); font-weight: 600; }
+.pq-chip-pending {
+  display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px;
+  border: 2px dashed #64748b; border-radius: 999px; background: #fff;
+}
+.pq-live-away { display: grid; gap: 6px; }
+.pq-live-away li {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px;
+  background: #be185d; color: #fff; border-radius: 12px; font-size: calc(18px * var(--font-scale, 1)); font-weight: 700;
+}
+.pq-live-repeat { display: grid; gap: 4px; }
+.pq-live-repeat li { display: flex; justify-content: space-between; gap: 10px; font-size: calc(18px * var(--font-scale, 1)); }
+.pq-live-repeat li span:last-child { color: #9d174d; }
+.pq-live-foot { color: #475569; }
+.pq-live-active { display: grid; gap: 12px; padding: 16px 18px; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; }
+.pq-live-active-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; }
+.pq-live-active-head h4 { font-size: calc(20px * var(--font-scale, 1)); color: #1d4ed8; }
+.pq-live-active-head span { color: #475569; }
+.pq-live .pq-chip-active, .pq-live .pq-chip-away {
+  min-height: 44px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: calc(18px * var(--font-scale, 1)); font-weight: 600;
+}
+.pq-live .pq-chip-active { border: 1px solid #bfdbfe; background: #eff6ff; color: #1e3a8a; }
+.pq-live .pq-chip-away { border: 2px solid #be185d; background: #fdf2f8; color: #9d174d; font-weight: 700; }
+.pq-live .pq-chip-active em, .pq-live .pq-chip-away em { font-style: normal; font-size: 0.85em; color: #9d174d; font-weight: 700; }
+.pq-live-done {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; color: #475569;
+}
+.pq-live-done strong { color: #166534; font-size: calc(18px * var(--font-scale, 1)); }
+.pq-live-done button { margin-inline-start: auto; }
+.pq-live-done-list { margin: 0; font-size: calc(18px * var(--font-scale, 1)); }
+.pq-qr-overlay {
+  position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px;
+  padding: 24px; background: #fff; color: #0f172a; font-size: calc(22px * var(--font-scale, 1));
+}
+.pq-qr-overlay img { width: min(80vh, 70vw); height: auto; image-rendering: pixelated; }
+.pq-qr-overlay p { margin: 0 0 14px; color: #0f172a; }
+.pq-qr-overlay-time strong { display: block; font-size: calc(72px * var(--font-scale, 1)); font-variant-numeric: tabular-nums; }
+.pq-leave-report td:last-child { min-width: 14em; }
+@media (max-width: 1023px) {
+  .pq-live-progress { grid-template-columns: 1fr; gap: 14px; }
+  .pq-live-main { grid-template-columns: 1fr; }
+  .pq-live-clock strong { font-size: calc(48px * var(--font-scale, 1)); }
+  .pq-live-total { margin-inline-start: 0; }
+  .pq-qr-overlay { flex-direction: column; gap: 16px; }
+  .pq-qr-overlay img { width: min(86vw, 70vh); }
+}

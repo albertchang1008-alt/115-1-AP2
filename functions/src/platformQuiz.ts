@@ -472,7 +472,10 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
           const { studentId, score, makeup, extendedSeconds, blankStart } = grade(paper, session);
           return { studentId, score, makeup: makeup || 0, extendedSeconds: extendedSeconds || 0, blankStart: !!blankStart };
         }) : [];
-      return { quiz, monitor, scores };
+      // 切出畫面紀錄（#73）：考試中由教師端即時監聽；結束後改由這裡一次讀回，讓紀錄在批改與公布後仍可查。
+      const events = quiz.state === 'open' ? undefined : (await ref.collection('events').orderBy('at').limit(LEAVE_EVENT_LIMIT).get())
+        .docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      return { quiz, monitor, scores, ...(events ? { events } : {}) };
     }
     const roster = await hooks.roster(courseId, c, [quiz.classId]);
     return { quiz, monitor: {
@@ -598,6 +601,9 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
 
   return { quizGet, quizRecentMood, quizStart, quizSave, quizMood, quizLeave, quizTeacherGet, quizControl, quizExpireDue };
 }
+
+/** 一場（含補考）最多讀回的切出事件數；54 人 × 每人上限 120 次離開 × 2 筆仍有餘裕的下限。 */
+const LEAVE_EVENT_LIMIT = 6000;
 
 export function assertQuizClassSeparation(classIds: string[]) {
   if (classIds.some(isTestClass) && classIds.some((id) => !isTestClass(id)))

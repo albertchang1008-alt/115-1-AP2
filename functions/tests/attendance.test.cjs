@@ -467,6 +467,7 @@ test('4 改狀態：單筆／多筆、準時與未到互改、修改紀錄完整
     'attendanceConfirm',
     'attendanceStart',
     'attendanceControl',
+    'attendanceReopen',
     'attendanceBackfill',
   ])
     await assert.rejects(x.call(name, { sessionId: s.id }, x.student(1)), name);
@@ -825,7 +826,7 @@ test('7 旗標關閉時全部 callable 拒絕，且不讀寫點名資料', async
     await assert.rejects(x.call(name, { token: 'a.1.b', code: '1234' }, x.student(1)), name);
   }
   assert.deepEqual([...x.db.docs.keys()].sort(), before);
-  assert.equal(Object.keys(x.h).length, 18);
+  assert.equal(Object.keys(x.h).length, 19);
 });
 
 test('試簽：不算點名、不留出缺席紀錄、可讓全班先登入', async () => {
@@ -1023,4 +1024,62 @@ test('審查：導師標記交易內重讀節次，並行取消確認回 stale �
   };
   assert.deepEqual(await markDraft(x, draft), { marked: 0, already: 0, stale: 1 });
   assert(![...x.db.docs.keys()].some(k => k.includes('/attendanceMail/')));
+});
+
+test('再開放（#73）：今天已結束的節次一鍵重開；已簽到保留、未到可補簽並標示；已確認者撤銷確認並留紀錄；限制條件', async () => {
+  const x = setup();
+  const s = await x.start();
+  assert.equal(
+    (await x.call('attendanceCheckIn', { token: (await live(x)).token }, x.student(1))).result,
+    'ok',
+  );
+  await assert.rejects(x.call('attendanceReopen', { sessionId: s.id, minutes: 3 }), /已有進行中/);
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  const confirmedAt = (await x.call('attendanceRoster', { sessionId: s.id })).session.confirmedAt;
+  assert.ok(confirmedAt > 0);
+  for (const minutes of [0, 31, 2.5, '3', undefined])
+    await assert.rejects(x.call('attendanceReopen', { sessionId: s.id, minutes }), /1–30 分鐘/);
+  await assert.rejects(x.call('attendanceReopen', { sessionId: s.id, minutes: 3 }, x.student(2)));
+  x.tick(60000);
+  const r = await x.call('attendanceReopen', { sessionId: s.id, minutes: 3 });
+  assert.equal(r.session.id, s.id);
+  assert.equal(r.session.status, 'open');
+  assert.equal(r.session.confirmedAt, 0);
+  assert.equal(r.session.reopenCount, 1);
+  assert.equal(r.session.endsAt, x.now() + 180000);
+  // 投影立即回到簽到狀態
+  const l = await live(x);
+  assert.equal(l.session.id, s.id);
+  assert.equal(l.session.status, 'open');
+  // 已簽到保留（重複回原結果）；原本未到者可補簽並標示
+  assert.equal(
+    (await x.call('attendanceCheckIn', { token: l.token }, x.student(1))).result,
+    'duplicate',
+  );
+  assert.equal((await x.call('attendanceCheckIn', { token: l.token }, x.student(2))).result, 'ok');
+  // 同時只能一場
+  await assert.rejects(x.start({ period: 4 }), /已有進行中/);
+  await x.call('attendanceControl', { action: 'end' });
+  const roster = await x.call('attendanceRoster', { sessionId: s.id });
+  assert.deepEqual(roster.session.counts, { present: 2, absent: 3 });
+  assert.equal(roster.session.confirmedAt, 0);
+  const rec = (e) => x.db.docs.get(`courses/${COURSE}/attendance/${s.id}/records/${e}`);
+  assert.equal(rec('s2@example.edu').reopened, true);
+  assert.equal(rec('s1@example.edu').reopened, undefined);
+  // 修改紀錄：誰、何時、撤銷的原確認時間
+  const audit = (await x.call('attendanceAuditLog')).rows.find((row) => row.action === 'reopen');
+  assert.equal(audit.sessionId, s.id);
+  assert.equal(audit.minutes, 3);
+  assert.equal(audit.unconfirmed, confirmedAt);
+  assert.equal(audit.byName, '示範教師');
+  // 再確認可正常進行
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  // 試簽、補建（非今天）與不存在的節次不可再開放
+  const back = await x.call('attendanceBackfill', { classIds: ['B'], period: 5, date: '2026-11-11' });
+  await assert.rejects(x.call('attendanceReopen', { sessionId: back.session.id, minutes: 3 }), /今天/);
+  const trial = await x.start({ trial: true, period: 6 });
+  await x.call('attendanceControl', { action: 'end' });
+  await assert.rejects(x.call('attendanceReopen', { sessionId: trial.id, minutes: 3 }));
+  await assert.rejects(x.call('attendanceReopen', { sessionId: 'nope', minutes: 3 }));
 });
