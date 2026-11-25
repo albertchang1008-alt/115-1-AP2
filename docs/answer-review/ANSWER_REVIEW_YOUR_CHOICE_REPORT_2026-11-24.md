@@ -1,10 +1,11 @@
 # 給 Claude 的摘要
 - #71 完成九點。結果顯示選項原文、三態及分開計數。可略答的測驗手動交卷前確認，逾時交卷另註。資訊圖表引導依作答結果顯示。
 - 程式檔 `src/AnswerReview.tsx`、`src/Student.tsx`、`src/PracticeModes.tsx`、`src/QuestionContent.tsx`、`src/style.css`。測試檔 `tests/answer-review.test.ts`、`tests/fixtures/answer-review.tsx`、`tests/preview.test.ts`。
-- 全套檢查 PASS。前端 365/365、後端 157/157、零失敗與零跳過，Vite 與 version:check PASS。全量教材 17/17、4,864 畫面、0 問題、0 skipped。學生結果／確認視窗 28/28 PASS，交接檢查 PASS。
-- 基線 `origin/main@781bed78`（1.16.0）。#69 的 1.16.1 尚未合併，先保留基線版號驗證。跟進含 #69 的主線後擬排 1.16.2，再交 #70（1.17.0）。
-- 偏離／待驗：本機使用合成題目與 Chromium，Ubuntu 非 root 待 Claude 重播，最終人眼確認待教師手機實點。截圖依教師規則存證。平台既有字型 CSS 的遠端請求在測試中攔截。前端設計 lint 的兩處 emoji 提示對應交辦指定的狀態符號。
-- 抽查① `AnswerReview.tsx`：選項洗牌後依 ID 回顯、三態標記。② `Student.tsx`：鍵盤取消、回第一題未答、計時到仍只交一次。③ `PracticeModes.tsx`：綜合練習跨分類重複題 ID 依分類配對、閃卡未選可翻面。④ `QuestionContent.tsx`：有無講義、教師預覽、補強教材。⑤ 以 bundle 重播下列 npm 與可讀性檢查。
+- 11/25 已重基準至含 #69／#70 的 `origin/main@48a112d0`，三筆原提交的 patch 均一致，衝突 0。提交 `fa7787ec` 同步 1.17.1。
+- 1.17.1 的 Mac `npm run check` PASS。前端 370/370、後端 158/158，0 skipped。Vite 與版號檢查通過。全量教材 17/17、4,864 畫面、0 問題。
+- Ubuntu 非 root 全套 13 步驟 PASS、1 步驟 KNOWN K1，退出 1。前端 368/370，兩筆 FAIL 為同一 K1 的子測試及父測試。補跑建置與後端 158/158，閱讀規範 17/17，0 skipped。
+- #70 小考已有作答與正解文字，仍可補逐題三態及三數。只做結果頁盤點。最終人眼確認待教師手機實點。
+- 請抽查 `AnswerReview.tsx` 的 ID 回顯與三態、`Student.tsx` 的交卷確認、`PracticeModes.tsx` 的跨分類 ID、`QuestionContent.tsx` 的講義引導，以及 Ubuntu summary 的 K1 歸類。
 
 ## 實作與盤點
 
@@ -14,7 +15,36 @@
 - `MixedPractice.tsx` 是路由與選題入口，結果和逐題回饋由 `PracticeSession` 或 `Flashcards` 顯示。綜合練習與隔日錯題複習的結果保留分分類答對數，另按原作答順序附每題選項與解析，採伺服器回傳的答案資料。既有 `Assessments.tsx` 前／後測公布頁已依 ID 顯示選項原文及未作答，公布資料未帶講義連結。
 - 各結果卡及即時回饋將已知對錯交給 `Explanations`。有有效講義連結時，答對用鞏固句，答錯與未作答用圖解句。教師端、結果未知、無有效講義連結與補強教材沿用原顯示。
 
-## 驗證
+## 11/25 重基準後驗證
+
+證據目錄為 `課程平台-驗收證據/2026-11-25/answer-review-your-choice/`。以 lockfile 安裝前後端依賴，Node 22.23.2 與系統 Chrome 執行 `READABILITY_ALL=1 npm run check`，原始輸出 `mac-check-r1.log`，完成檔 `mac-check-r1.done` 為 0。
+
+| 項目 | Mac 1.17.1 |
+|---|---|
+| 前端 | 370/370 PASS，0 fail、0 skipped |
+| 後端 | 158/158 PASS，0 fail、0 skipped |
+| Vite 與版號 | PASS，版本一致 1.17.1 |
+| 全量閱讀規範 | 17/17、4,864 畫面、0 issues、0 staticIssues、0 errors、0 skipped，見 `mac-readability-summary.json` |
+
+重基準分支 `git diff --check` PASS。三份測試檔自查無 macOS 或個人絕對路徑。
+
+### Ubuntu 非 root
+
+Colima Ubuntu 24.04.5 x86_64、UID 1001，以系統 Chrome 重播 `fa7787ec`。容器還原 tree 和原提交均為 `a47e861db200d88fe5c3e368831c729ea4fd0321`。第一輪於 11:46:53 結束。證據在 `課程平台-驗收證據/2026-11-25/ubuntu-replay-fa7787ec-1106/`，入口為 `summary.txt`。外層完成檔 `answer-review-your-choice/ubuntu-full-r1.done` 記錄退出 1。
+
+| 步驟 | 結果 |
+|---|---|
+| 00–05 環境、還原、tree、依賴、系統 Chrome | 6/6 PASS |
+| 06 `READABILITY_ALL=1 npm run check` | KNOWN K1。前端 368/370、0 skipped，另兩筆為同一酸鹼 `-v1` 子測試與其父測試。三個 390 N02-micro 狀態各 `clip=2`，與 `48a112d0` 基線相符 |
+| 06b 補跑建置及後端 | PASS，Vite 建置完成、後端 158/158、0 skipped |
+| 07 獨立閱讀規範 | PASS，17/17、4,864 畫面、0 issues、0 staticIssues、0 errors、0 skipped |
+| 08–12 版號、Zuvio、平台小考模擬器及瀏覽器、工作樹 | 5/5 PASS，版本一致 1.17.1 |
+
+#72 的修正已在其分支通過 Ubuntu 全套，#71 仍以指定的 `48a112d0` 為基準。K1 依交辦標為 KNOWN，Ubuntu 無新增失敗。衝突解決 0/2 輪，Mac `npm run check` 首次通過，Ubuntu 使用 1/2 輪。
+
+本次 bundle 為 `課程平台-驗收證據/2026-11-25/answer-review-your-choice/answer-review-1.17.1.bundle`。以 `48a112d0` 為前置提交，包含本機 `fix/answer-review-your-choice` 與本報告。原版合成測試截圖與保存日期見下節。
+
+## 11/24 原版驗證
 
 | 項目 | 結果與證據 |
 |---|---|
@@ -35,7 +65,7 @@
 3. 夜間原有解析底色覆蓋了主題底色，對比量到 1.02:1。修正學生作答回饋與結果解析的主題底色後，專項矩陣 28/28 PASS。
 4. 全量檢查發現四處既有測試仍比對舊文案、元件位置與 CSS 排序。更新 `tests/preview.test.ts` 的斷言，保留原操作，獨立重跑 41/41 PASS。
 
-## 截圖與重播
+## 11/24 原版截圖與 bundle
 
 證據資料夾 `課程平台-驗收證據/2026-11-24/answer-review-your-choice/`。**截圖保存至 2026-12-01**。
 
@@ -49,7 +79,8 @@
 
 在含 `781bed789c44bd93a8f5066fd36937294515d93e` 的 repo 驗證 `git bundle verify <bundle>`，將 `refs/heads/fix/answer-review-your-choice` 取至驗收分支。依共用工作樹的 `docs/UBUNTU_REPLAY.md` 使用 Ubuntu 非 root、Node 22、Chrome。依 CI 安裝前後端依賴與 Chromium 後，執行 `READABILITY_ALL=1 npm run check` 及 `npm run version:check`。如需再產專項截圖，以 `ANSWER_REVIEW_EVIDENCE` 指定證據目錄，執行 `npx tsx --test tests/answer-review.test.ts`。
 
-## 版本與 #70 銜接
+## 11/25 版號與 #70 小考結果盤點
 
-- `fix/answer-review-your-choice` 從 `origin/main@781bed78` 開工。#69 的 1.16.1 在 `codex/unit-category-order@56eaba58`（版號合併 commit 為 `1b6ce43a`）。先等 #69 進主線，再讓 #71 跟進，設定當時下一個可用 patch（預計 **1.16.2**），跑 `npm run version:sync`、`npm run version:check` 與完整檢查後複驗。兩件都改到 `src/style.css` 與 `tests/preview.test.ts` 的不同段落，本機三方比對無衝突標記，整合時仍要核對學生結果與教師分類排序。
-- #70 預定 **1.17.0**，尚未實作。#71 改既有 `Student.Quiz` 和練習頁，沒有修改 #70 規格或現有 `Assessments.tsx`。#70 從含 #71 的主線開工。公布結果後可直接用 `YourAnswerLine` 傳 `options`／`selected`，若有相容題目與伺服器判定則可用 `AnswerReviewCard`。有講義連結時用 `Explanations.outcome`。#70 的伺服器權威計時、發布時機及得分由其本身流程管理。
+- `git rebase 48a112d0` 一次完成，0 衝突，`git range-diff` 顯示原本三筆提交均等價。以 `npm run version:sync` 同步 13 個版號檔，`npm run version:check` 確認 1.17.1。Functions 內的差異限套件版號。
+- #70 的 `PlatformQuizStudent.tsx:113–125` 已用選項 ID 回查學生作答文字，空答案顯示「未作答」，另列正解與解析。若要與 #71 完全一致，仍需在結果頁補逐題三態、所選與正解的選項標記，以及答對／答錯／未作答三數。
+- `QuizStudentView.result.questions` 已帶 `selected`、`answer`、`options`，可在呈現層比對 ID 計算三態，並採用 `YourAnswerLine`。既有小考結果資料沒有資訊圖表連結欄位；可呈現原本的解析。發布、計時與得分沿用 #70 流程。本次盤點只記入報告。
