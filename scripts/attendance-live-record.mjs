@@ -47,7 +47,11 @@ const base = `http://127.0.0.1:${server.address().port}/`;
 
 const tempVideoDir = fs.mkdtempSync(path.join(os.tmpdir(), 'att-vid-'));
 
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}).catch((error) => {
+  server.close();
+  fs.rmdirSync(tempVideoDir);
+  throw error;
+});
 const log = [];
 
 try {
