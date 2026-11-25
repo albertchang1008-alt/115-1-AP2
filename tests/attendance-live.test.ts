@@ -46,6 +46,7 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
       const errors: string[] = [];
       page.on('pageerror', (error) => errors.push(error.message));
       page.setDefaultTimeout(3000);
+      page.setDefaultNavigationTimeout(15_000); // Wall-clock startup in Ubuntu. Projection timings use the fake clock.
       await page.clock.install({ time });
       await page.clock.pauseAt(new Date(time.getTime() + 1000));
       await page.route(base + '/**', (route) => {
