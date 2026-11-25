@@ -67,6 +67,7 @@ try {
   );
 
   await page.goto(`${base}?screen=admin-live`);
+  await page.getByRole('button', { name: '回到投影' }).click();
   const projection = page.getByRole('region', { name: '投影畫面' });
   await projection.waitFor();
 

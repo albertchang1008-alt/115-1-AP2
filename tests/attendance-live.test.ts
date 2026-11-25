@@ -59,8 +59,8 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
         });
       });
       await page.goto(base + '/?screen=admin-live&projection-probe');
-      await page.getByRole('tab', { name: '點名', exact: true }).waitFor();
-      // Tab markup and LiveView's initial effect can finish in different React tasks.
+      await page.getByRole('button', { name: '回到投影' }).click();
+      // Navigation and LiveView's initial effect can finish in different React tasks.
       await page.clock.runFor(1);
       await page.getByRole('region', { name: '投影畫面' }).waitFor();
       await check(page);
@@ -108,7 +108,7 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
       assert.equal(await countdown(page), '0:00');
       assert.equal(await page.title(), '');
       await page.clock.runFor(1);
-      await page.getByRole('tab', { name: '節次與名冊', selected: true }).waitFor();
+      await page.getByRole('heading', { name: '本筆修改紀錄' }).waitFor();
       assert.equal(await page.title(), '點名已結束，未簽到的記為未到');
       assert.equal((await mock(page)).requests.at(-1), 47001);
     }));
@@ -162,7 +162,7 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
       await page.getByRole('button', { name: '延長 1 分鐘' }).click();
       assert.equal(await countdown(page), '1:42');
       await page.getByRole('button', { name: '提前結束' }).click();
-      await page.getByRole('tab', { name: '節次與名冊', selected: true }).waitFor();
+      await page.getByRole('heading', { name: '本筆修改紀錄' }).waitFor();
       assert.equal(await page.title(), '點名已結束，未簽到的記為未到');
       assert.equal((await mock(page)).requests.length, 3);
     }));

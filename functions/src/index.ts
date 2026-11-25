@@ -1597,4 +1597,4 @@ export const {
   zuvioExportCsv,
   quizGet, quizRecentMood, quizStart, quizSave, quizMood, quizLeave, quizTeacherGet, quizControl, quizExpireDue,
 } = createZuvioHandlers(db, access, options);
-export const { attendanceStart, attendanceControl, attendanceReopen, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);
+export const { attendanceClassCards, attendanceDeleteSession, attendanceRestoreSession, attendancePurgeDeleted, attendanceStart, attendanceControl, attendanceReopen, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);

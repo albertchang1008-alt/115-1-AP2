@@ -64,7 +64,7 @@ const failures = [];
 const warnings = []; // 不影響三項檢查，但值得看：例如交易競爭造成的拒絕
 const summary = [];
 for (let round = 1; round <= rounds; round++) {
-  const { session } = await call('attendanceStart', { classIds: ['R'], period: round, durationSec: 30 });
+  const { session } = await call('attendanceStart', { classIds: ['R'], durationSec: 30 });
   const live = await call('attendanceLive', {});
   // 每一回合在不同的時間點按結束：第 1 回合幾乎同時，之後逐回合延後一點
   const endDelay = (round - 1) * 15;

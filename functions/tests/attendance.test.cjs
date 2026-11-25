@@ -11,13 +11,13 @@ const { memoryDb } = require('./helpers/attendance-memory.cjs');
 
 const COURSE = '115-1-AP2';
 const T0 = Date.parse('2026-11-16T01:10:00Z'); // 台北 09:10
-function setup({ feature = true } = {}) {
+function setup({ feature = true, classIds = ['A', 'B'] } = {}) {
   const db = memoryDb();
   let clock = T0;
   const course = {
     features: { attendance: feature },
     rosterVersion: 2,
-    published: { title: '解剖生理學（二）', classIds: ['A', 'B'] },
+    published: { title: '解剖生理學（二）', classIds },
     teacherIds: ['owner'],
   };
   db.docs.set(`courses/${COURSE}`, structuredClone(course));
@@ -55,7 +55,7 @@ function setup({ feature = true } = {}) {
     if (id !== COURSE) throw Error('permission');
     if (req.auth.teacher) {
       if (req.auth.uid !== 'owner') throw Error('permission');
-      return { p: req.auth, c: { ...course, classIds: ['A', 'B'] } };
+      return { p: req.auth, c: { ...course, classIds } };
     }
     if (teacherOnly) throw Error('permission');
     return { p: req.auth, c: course };
@@ -72,7 +72,7 @@ function setup({ feature = true } = {}) {
     h[name].run({ data: { courseId: COURSE, ...data }, auth });
   const secret = (sid) => db.docs.get(`courses/${COURSE}/attendanceSecrets/${sid}`).secret;
   const start = async (extra = {}) =>
-    (await call('attendanceStart', { classIds: ['A'], period: 3, ...extra })).session;
+    (await call('attendanceStart', { classIds: ['A'], ...extra })).session;
   const reason = async (promise) => {
     try {
       await promise;
@@ -234,7 +234,7 @@ test('2 簽到：非本班、非開啟中、已結束（含寬限）、教師身
   );
   assert.deepEqual(
     { result: first.result, signedAt: first.signedAt, date: first.date, period: first.period },
-    { result: 'ok', signedAt: T0, date: '2026-11-16', period: 3 },
+    { result: 'ok', signedAt: T0, date: '2026-11-16', period: 1 },
   );
   x.tick(3000);
   const again = await x.call('attendanceCheckIn', { code: l.code }, x.student(1));
@@ -299,10 +299,10 @@ test('2 結束與簽到同時發生：結束之後送達的簽到不會寫入，
   assert.deepEqual(roster.session.counts, { present: present.length, absent: 5 - present.length });
 });
 
-test('3 延長、提前結束、同時只能一場、重新點名沿用原節次、補建節次', async () => {
+test('3 延長、提前結束、同時只能一場、再次新增獨立紀錄、補建日時', async () => {
   const x = setup();
   const s = await x.start();
-  await assert.rejects(x.start({ period: 4 }), /已有進行中/);
+  await assert.rejects(x.start(), /已有進行中/);
   x.tick(50000);
   const ext = await x.call('attendanceControl', { action: 'extend' });
   assert.equal(ext.session.endsAt, T0 + 120000);
@@ -316,48 +316,50 @@ test('3 延長、提前結束、同時只能一場、重新點名沿用原節次
   assert.deepEqual(ended.session.counts, { present: 1, absent: 4 });
   await assert.rejects(x.call('attendanceControl', { action: 'extend' }), /沒有進行中/);
   await assert.rejects(x.call('attendanceControl', { action: 'nope' }));
-  // 同一節重新點名：同一個節次編號，已簽到保留，未到的人可以再簽
+  // 同一堂課再點一次：新紀錄有獨立的簽到名冊。
   const again = await x.start();
-  assert.equal(again.id, s.id);
+  assert.notEqual(again.id, s.id);
+  assert.equal(again.period, s.period + 1);
   assert.equal(
     (await x.call('attendanceCheckIn', { token: (await live(x)).token }, x.student(2))).result,
     'ok',
   );
   await x.call('attendanceControl', { action: 'end' });
-  assert.deepEqual((await x.call('attendanceRoster', { sessionId: s.id })).session.counts, {
-    present: 2,
-    absent: 3,
-  });
-  // 同一節、班級有重疊但不同組合：拒絕
-  await assert.rejects(x.start({ classIds: ['A', 'B'] }), /已經有包含同一班/);
+  for (const record of [s, again]) {
+    assert.deepEqual((await x.call('attendanceRoster', { sessionId: record.id })).session.counts, {
+      present: 1, absent: 4,
+    });
+  }
+  // 新場不限於原班，但每一筆只能選一班。
+  await assert.rejects(x.start({ classIds: ['A', 'B'] }), /只能選擇一個班級/);
   // 補建
   const back = await x.call('attendanceBackfill', {
     classIds: ['B'],
-    period: 5,
+    time: '10:11',
     date: '2026-11-11',
   });
   assert.equal(back.session.backfilled, true);
   assert.deepEqual(back.session.counts, { present: 0, absent: 2 });
   await assert.rejects(
-    x.call('attendanceBackfill', { classIds: ['B'], period: 5, date: '2026-11-11' }),
+    x.call('attendanceBackfill', { classIds: ['B'], time: '10:11', date: '2026-11-11' }),
     /已經有點名紀錄/,
   );
   await assert.rejects(
-    x.call('attendanceBackfill', { classIds: ['B'], period: 5, date: '2026-12-30' }),
+    x.call('attendanceBackfill', { classIds: ['B'], time: '10:11', date: '2026-12-30' }),
     /未來/,
   );
   await assert.rejects(
-    x.call('attendanceBackfill', { classIds: ['C'], period: 5, date: '2026-11-11' }),
+    x.call('attendanceBackfill', { classIds: ['C'], time: '10:11', date: '2026-11-11' }),
     /班級不屬於課程/,
   );
   // 參數範圍
   for (const badInput of [
     { period: 0 },
-    { period: 3, codeSec: 10 },
-    { period: 3, qrSec: 61 },
-    { period: 3, durationSec: 5 },
-    { period: 3, classIds: [] },
-    { period: 3, date: '2026-13-01' },
+    { codeSec: 10 },
+    { qrSec: 61 },
+    { durationSec: 5 },
+    { classIds: [] },
+    { date: '2026-13-01' },
   ])
     await assert.rejects(x.call('attendanceStart', { classIds: ['A'], ...badInput }));
 });
@@ -441,13 +443,13 @@ test('4 改狀態：單筆／多筆、準時與未到互改、修改紀錄完整
   const mine = await x.call('attendanceMine', {}, x.student(2));
   assert.deepEqual(
     mine.rows,
-    [{ date: '2026-11-16', period: 3, status: 'present', signedAt: 0 }],
+    [{ id: s.id, startedAt: T0, date: '2026-11-16', period: 1, status: 'present', signedAt: 0, reopened: false, edited: true }],
     '老師改成準時的沒有簽到時間',
   );
   assert.deepEqual((await x.call('attendanceMine', {}, x.student(1))).rows, [
-    { date: '2026-11-16', period: 3, status: 'absent', signedAt: 0 },
+    { id: s.id, startedAt: T0, date: '2026-11-16', period: 1, status: 'absent', signedAt: 0, reopened: false, edited: true },
   ]);
-  assert(!JSON.stringify(mine).match(/reason|手機|by|edited|device|示範教師/));
+  assert(!JSON.stringify(mine).match(/reason|手機|by|device|示範教師/));
   assert.deepEqual(
     (await x.call('attendanceMine', {}, x.student(6, 'B'))).rows,
     [],
@@ -469,6 +471,9 @@ test('4 改狀態：單筆／多筆、準時與未到互改、修改紀錄完整
     'attendanceControl',
     'attendanceReopen',
     'attendanceBackfill',
+    'attendanceClassCards',
+    'attendanceDeleteSession',
+    'attendanceRestoreSession',
   ])
     await assert.rejects(x.call(name, { sessionId: s.id }, x.student(1)), name);
   await assert.rejects(
@@ -572,19 +577,19 @@ test('6 半自動通知：只列已確認節次；產生收件人／主旨／內
   assert.deepEqual(m3.expect, { status: 'absent', notifySeq: 0 });
   assert.match(m3.subject, /^【解剖生理學（二）】.*紀錄為未到$/);
   assert.match(m3.text, /示範學生3 同學：/);
-  assert.match(m3.text, /本節紀錄為未到/);
+  assert.match(m3.text, /本次紀錄為未到/);
   assert.match(m3.text, /https:\/\/platform\.example\.edu\/#\/course\/115-1-AP2\/attendance/);
   assert.match(m3.text, /示範教師$/);
   assert.deepEqual(
     d.digest.map((g) => [g.classId, g.to, g.periods, g.ready, g.supplement]),
-    [['A', 'mentor-a@example.edu', [3], true, false]],
+    [['A', 'mentor-a@example.edu', [1], true, false]],
   );
   assert.match(d.digest[0].text, /應到 5 人，準時 2 人，未到 3 人。/);
   assert.match(d.digest[0].text, /示範學生3（099003）/);
   // 系統不寄信；信件內文不寫進資料庫
   assert(!('attendanceSendMail' in x.h) && !('attendanceMailTick' in x.h));
   const stored = () => JSON.stringify([...x.db.docs.values()]);
-  assert(!stored().includes('本節紀錄為未到') && !stored().includes('老師您好'));
+  assert(!stored().includes('本次紀錄為未到') && !stored().includes('老師您好'));
   // 標記：同一封重按只算一次
   assert.deepEqual(await x.call('attendanceMarkNotified', { items: [pick(m3)] }), {
     marked: 1,
@@ -605,7 +610,7 @@ test('6 半自動通知：只列已確認節次；產生收件人／主旨／內
     d.log.map((l) => [l.to, l.kind, l.status, l.byName, l.canUndo]),
     [['s3@example.edu', 'absent', 'marked', '示範教師', true]],
   );
-  assert(!stored().includes('本節紀錄為未到'), '紀錄不存內文');
+  assert(!stored().includes('本次紀錄為未到'), '紀錄不存內文');
   // 批次標記（含導師彙整）
   assert.deepEqual(
     await x.call('attendanceMarkNotified', { items: [...d.student, ...d.digest].map(pick) }),
@@ -759,52 +764,53 @@ test('6 已通知標記：狀態核對、輸入驗證、並行只算一次、撤
 test('6 導師彙整：該班當天節次都確認才提示；補充彙整只含新節次；撤銷最近一次；沒填導師信箱會列出', async () => {
   const x = setup();
   await x.notifyCfg();
-  const s3 = await x.start({ period: 3 });
+  const s3 = await x.start();
   await x.call('attendanceControl', { action: 'end' });
-  const s4 = await x.start({ period: 4 });
+  x.tick(60000);
+  const s4 = await x.start();
   await x.call('attendanceControl', { action: 'end' });
-  await x.call('attendanceBackfill', { classIds: ['A'], period: 1, date: '2026-11-15' });
+  await x.call('attendanceBackfill', { classIds: ['A'], time: '09:23', date: '2026-11-15' });
   await x.call('attendanceConfirm', { sessionId: s3.id, confirmed: true });
   const mark = (g, expect = g.expect) =>
     x.call('attendanceMarkNotified', { items: [{ draftId: g.draftId, expect }] });
   let d = await x.call('attendanceNotifyDrafts');
   assert.deepEqual(
     d.digest.map((g) => [g.periods, g.ready, g.unconfirmed]),
-    [[[3], false, [4]]],
-    '還有第 4 節未確認：不提示，但可先產生',
+    [[[1], false, ['2026-11-16 09:11']]],
+    '還有一筆未確認：不提示，但可先產生',
   );
   assert.deepEqual(
     d.unconfirmedToday.map((s) => s.period),
-    [4],
+    [2],
   );
-  assert(!/第 4 節|第 1 節/.test(d.digest[0].text), '未確認與非當天的節次不放進彙整');
+  assert(!/2026-11-16 09:11|2026-11-15/.test(d.digest[0].text), '未確認與非當天的節次不放進彙整');
   assert.equal((await mark(d.digest[0])).marked, 1);
   assert.equal((await x.call('attendanceNotifyDrafts')).digest.length, 0);
   await x.call('attendanceConfirm', { sessionId: s4.id, confirmed: true });
   d = await x.call('attendanceNotifyDrafts');
   const sup = d.digest[0];
-  assert.deepEqual([sup.periods, sup.ready, sup.supplement], [[4], true, true]);
+  assert.deepEqual([sup.periods, sup.ready, sup.supplement], [[2], true, true]);
   assert.match(sup.subject, /（補充）$/);
-  assert(/第 4 節/.test(sup.text) && !/第 3 節/.test(sup.text), '補充只含新節次');
+  assert(/2026-11-16 09:11/.test(sup.text) && !/2026-11-16 09:10/.test(sup.text), '補充只含新節次');
   assert.equal((await mark(sup, { periods: [5] })).stale, 1, '沒有這一節');
-  assert.equal((await mark(sup, { periods: [3] })).already, 1);
+  assert.equal((await mark(sup, { periods: [1] })).already, 1);
   assert.equal((await mark(sup)).marked, 1);
   assert.equal((await x.call('attendanceNotifyDrafts')).digest.length, 0);
   const log = (await x.call('attendanceNotifyDrafts')).log.filter((l) => l.kind === 'digest');
   assert.deepEqual(
     log.map((l) => [l.periods, l.canUndo]),
     [
-      [[4], true],
-      [[3], false],
+      [[2], true],
+      [[1], false],
     ],
     '只有最近一次可撤銷',
   );
   await x.call('attendanceUndoNotified', { logId: log[0].id });
   d = await x.call('attendanceNotifyDrafts');
-  assert.deepEqual(d.digest[0].periods, [4]);
+  assert.deepEqual(d.digest[0].periods, [2]);
   assert.equal(d.digest[0].supplement, true);
   // 沒有導師信箱的班
-  const s5 = await x.start({ classIds: ['B'], period: 5 });
+  const s5 = await x.start({ classIds: ['B'] });
   await x.call('attendanceControl', { action: 'end' });
   await x.call('attendanceConfirm', { sessionId: s5.id, confirmed: true });
   d = await x.call('attendanceNotifyDrafts');
@@ -821,12 +827,13 @@ test('6 導師彙整：該班當天節次都確認才提示；補充彙整只含
 test('7 旗標關閉時全部 callable 拒絕，且不讀寫點名資料', async () => {
   const x = setup({ feature: false });
   const before = [...x.db.docs.keys()].sort();
-  for (const name of Object.keys(x.h)) {
+  const callables = Object.keys(x.h).filter(name => name !== 'attendancePurgeDeleted');
+  for (const name of callables) {
     await assert.rejects(x.call(name, { sessionId: 'x', classIds: ['A'], period: 3 }), name);
     await assert.rejects(x.call(name, { token: 'a.1.b', code: '1234' }, x.student(1)), name);
   }
   assert.deepEqual([...x.db.docs.keys()].sort(), before);
-  assert.equal(Object.keys(x.h).length, 19);
+  assert.equal(callables.length, 22);
 });
 
 test('試簽：不算點名、不留出缺席紀錄、可讓全班先登入', async () => {
@@ -864,11 +871,11 @@ test('匯出：兩個不同課程的累加用明細檔表頭逐字相同、可�
   assert.equal(linesA.length, 6);
   assert.equal(
     linesA[1],
-    '1,115-1,115-1-AP2,解剖生理學（二）,A,2026-11-16,3,"=""099001""",示範學生1,準時,09:10:00,否,2026-11-16 09:10',
+    '1,115-1,115-1-AP2,解剖生理學（二）,A,2026-11-16,1,"=""099001""",示範學生1,準時,09:10:00,否,2026-11-16 09:10',
   );
   assert.equal(
     linesA[2],
-    '1,115-1,115-1-AP2,解剖生理學（二）,A,2026-11-16,3,"=""099002""",示範學生2,準時,,是,2026-11-16 09:10',
+    '1,115-1,115-1-AP2,解剖生理學（二）,A,2026-11-16,1,"=""099002""",示範學生2,準時,,是,2026-11-16 09:10',
   );
   assert.match(linesA[3], /,未到,,否,/);
   assert(!a.includes('不放進明細檔') && !a.includes('device'));
@@ -917,7 +924,7 @@ test('匯出：兩個不同課程的累加用明細檔表頭逐字相同、可�
   assert.equal(data.length, 1);
   assert.equal(A.recentAbsentCount(data, 's3@example.edu'), 1);
   assert.equal(A.recentAbsentCount(data, 's1@example.edu'), 0);
-  assert.deepEqual(A.absentEmailsAt(data, '2026-11-16', 3).sort(), [
+  assert.deepEqual(A.absentEmailsAt(data, '2026-11-16', 1).sort(), [
     's3@example.edu',
     's4@example.edu',
     's5@example.edu',
@@ -927,19 +934,19 @@ test('匯出：兩個不同課程的累加用明細檔表頭逐字相同、可�
   assert.equal((await x.call('attendanceExport', { kind: 'detail' })).csv.split('\r\n').length, 7);
   assert.match(
     (await x.call('attendanceExport', { kind: 'session', sessionId: s.id })).csv,
-    /日期,節次,班級,學號,姓名,狀態,簽到時間,方式,是否修改過/,
+    /點名時間,班級,學號,姓名,狀態,簽到時間,方式,是否修改過,補點時間/,
   );
   assert.match(
     (await x.call('attendanceExport', { kind: 'summary' })).csv,
-    /班級,學號,姓名,2026-11-16 第3節,準時,未到/,
+    /班級,學號,姓名,2026-11-16 09:10,準時,未到/,
   );
   await assert.rejects(x.call('attendanceExport', { kind: 'other' }));
 });
 
 
 // Codex 11/23 審查回歸：每個缺陷各自驗證實際狀態與拒絕後無寫入。
-async function confirmedPeriod(x, period) {
-  const session = await x.start({ period });
+async function confirmedPeriod(x) {
+  const session = await x.start();
   await x.call('attendanceControl', { action: 'end' });
   await x.call('attendanceConfirm', { sessionId: session.id, confirmed: true });
   return session;
@@ -951,22 +958,23 @@ const markDraft = (x, draft) => x.call('attendanceMarkNotified', {
 test('審查：仍在點名中的節次阻擋導師提示，試簽不影響', async () => {
   const x = setup();
   await x.notifyCfg();
-  await confirmedPeriod(x, 3);
-  const open = await x.start({ period: 4 });
+  await confirmedPeriod(x);
+  x.tick(60000);
+  const open = await x.start();
   let d = await x.call('attendanceNotifyDrafts');
-  assert.deepEqual(d.digest.map(g => [g.ready, g.periods, g.unconfirmed]), [[false, [3], [4]]]);
+  assert.deepEqual(d.digest.map(g => [g.ready, g.periods, g.unconfirmed]), [[false, [1], ['2026-11-16 09:11']]]);
   assert.deepEqual(d.unconfirmedToday.map(s => s.id), [open.id]);
-  assert(!d.digest[0].text.includes('第 4 節'));
+  assert(!d.digest[0].text.includes('2026-11-16 09:11'));
   await x.call('attendanceControl', { action: 'end' });
   await x.call('attendanceConfirm', { sessionId: open.id, confirmed: true });
-  await x.start({ trial: true, period: 5 });
+  await x.start({ trial: true });
   d = await x.call('attendanceNotifyDrafts');
-  assert.deepEqual(d.digest.map(g => [g.ready, g.periods]), [[true, [3, 4]]]);
+  assert.deepEqual(d.digest.map(g => [g.ready, g.periods]), [[true, [1, 2]]]);
 });
 
 test('審查：學生舊通知不顯示撤銷，最新通知在 24 小時邊界仍可撤銷且序號不退', async () => {
   const x = setup();
-  const session = await confirmedPeriod(x, 3);
+  const session = await confirmedPeriod(x);
   const draft = async () => (await x.call('attendanceNotifyDrafts')).student.find(m => m.to === 's1@example.edu');
   await markDraft(x, await draft());
   await x.call('attendanceSetStatus', { sessionId: session.id, emails: ['s1@example.edu'], status: 'present' });
@@ -987,10 +995,10 @@ test('審查：學生舊通知不顯示撤銷，最新通知在 24 小時邊界�
 test('審查：導師撤銷綁定單次標記；舊分頁與並行雙按不可撤銷另一筆', async () => {
   const x = setup();
   await x.notifyCfg();
-  await confirmedPeriod(x, 3);
+  await confirmedPeriod(x);
   await markDraft(x, (await x.call('attendanceNotifyDrafts')).digest[0]);
   const first = (await x.call('attendanceNotifyDrafts')).log.find(l => l.kind === 'digest');
-  await confirmedPeriod(x, 4);
+  await confirmedPeriod(x);
   const sup = (await x.call('attendanceNotifyDrafts')).digest[0];
   const both = await Promise.all([markDraft(x, sup), markDraft(x, sup)]);
   assert.equal(both.reduce((n, r) => n + r.marked, 0), 1);
@@ -1004,16 +1012,16 @@ test('審查：導師撤銷綁定單次標記；舊分頁與並行雙按不可�
   assert.equal(undo.filter(r => r.status === 'fulfilled').length, 1);
   assert.equal(undo.filter(r => r.status === 'rejected').length, 1);
   const record = x.db.docs.get(`courses/${COURSE}/attendanceMail/${sup.draftId}`);
-  assert.deepEqual(record.periods, [3]);
+  assert.deepEqual(record.periods, [1]);
   assert.equal(record.marks.length, 2);
   assert(!record.marks[0].undoneAt && record.marks[1].undoneAt);
-  assert.deepEqual((await x.call('attendanceNotifyDrafts')).digest[0].periods, [4]);
+  assert.deepEqual((await x.call('attendanceNotifyDrafts')).digest[0].periods, [2]);
 });
 
 test('審查：導師標記交易內重讀節次，並行取消確認回 stale 且不寫通知', async () => {
   const x = setup();
   await x.notifyCfg();
-  const session = await confirmedPeriod(x, 3);
+  const session = await confirmedPeriod(x);
   const draft = (await x.call('attendanceNotifyDrafts')).digest[0];
   const transaction = x.db.runTransaction;
   x.db.runTransaction = async fn => {
@@ -1047,6 +1055,7 @@ test('再開放（#73）：今天已結束的節次一鍵重開；已簽到保�
   assert.equal(r.session.status, 'open');
   assert.equal(r.session.confirmedAt, 0);
   assert.equal(r.session.reopenCount, 1);
+  assert.equal(r.session.startedAt, T0);
   assert.equal(r.session.endsAt, x.now() + 180000);
   // 投影立即回到簽到狀態
   const l = await live(x);
@@ -1057,9 +1066,12 @@ test('再開放（#73）：今天已結束的節次一鍵重開；已簽到保�
     (await x.call('attendanceCheckIn', { token: l.token }, x.student(1))).result,
     'duplicate',
   );
-  assert.equal((await x.call('attendanceCheckIn', { token: l.token }, x.student(2))).result, 'ok');
+  const makeup = await x.call('attendanceCheckIn', { token: l.token }, x.student(2));
+  assert.equal(makeup.result, 'ok');
+  assert.equal(makeup.reopened, true);
+  assert.equal(makeup.startedAt, T0);
   // 同時只能一場
-  await assert.rejects(x.start({ period: 4 }), /已有進行中/);
+  await assert.rejects(x.start(), /已有進行中/);
   await x.call('attendanceControl', { action: 'end' });
   const roster = await x.call('attendanceRoster', { sessionId: s.id });
   assert.deepEqual(roster.session.counts, { present: 2, absent: 3 });
@@ -1067,6 +1079,7 @@ test('再開放（#73）：今天已結束的節次一鍵重開；已簽到保�
   const rec = (e) => x.db.docs.get(`courses/${COURSE}/attendance/${s.id}/records/${e}`);
   assert.equal(rec('s2@example.edu').reopened, true);
   assert.equal(rec('s1@example.edu').reopened, undefined);
+  assert.match((await x.call('attendanceExport', { kind: 'session', sessionId: s.id })).csv, /2026-11-16 09:10,.*準時,09:11:00,掃 QR,否,2026-11-16 09:11/);
   // 修改紀錄：誰、何時、撤銷的原確認時間
   const audit = (await x.call('attendanceAuditLog')).rows.find((row) => row.action === 'reopen');
   assert.equal(audit.sessionId, s.id);
@@ -1076,10 +1089,125 @@ test('再開放（#73）：今天已結束的節次一鍵重開；已簽到保�
   // 再確認可正常進行
   await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
   // 試簽、補建（非今天）與不存在的節次不可再開放
-  const back = await x.call('attendanceBackfill', { classIds: ['B'], period: 5, date: '2026-11-11' });
+  const back = await x.call('attendanceBackfill', { classIds: ['B'], time: '10:11', date: '2026-11-11' });
   await assert.rejects(x.call('attendanceReopen', { sessionId: back.session.id, minutes: 3 }), /今天/);
-  const trial = await x.start({ trial: true, period: 6 });
+  const trial = await x.start({ trial: true });
   await x.call('attendanceControl', { action: 'end' });
   await assert.rejects(x.call('attendanceReopen', { sessionId: trial.id, minutes: 3 }));
   await assert.rejects(x.call('attendanceReopen', { sessionId: 'nope', minutes: 3 }));
+});
+
+test('#74 舊合班、同一時刻連開、補建並行、跨日及跨班分配互不撞號', async () => {
+  const x = setup({ classIds: ['test', 'A', 'B'] });
+  const legacy = { id: '2026-11-16-p05-aaaa', kind: 'roll', status: 'closed', settled: true,
+    date: '2026-11-16', period: 5, classIds: ['A', 'B'], startedAt: T0 - 60000,
+    counts: { present: 0, absent: 1 } };
+  x.db.docs.set(`courses/${COURSE}/attendance/${legacy.id}`, legacy);
+  const member = x.student(1);
+  x.db.docs.set(`courses/${COURSE}/attendance/${legacy.id}/records/${member.email}`, { ...member, status: 'absent' });
+
+  const first = await x.start();
+  await x.call('attendanceControl', { action: 'end' });
+  const second = await x.start();
+  assert.equal(first.startedAt, second.startedAt, '同一毫秒仍為不同點名');
+  assert.deepEqual([first.period, second.period], [6, 7]);
+  assert.notEqual(first.id, second.id);
+  assert.match(first.id, /^2026-11-16-t091000000-/);
+  await x.call('attendanceControl', { action: 'end' });
+
+  const [back, other] = await Promise.all([
+    x.call('attendanceBackfill', { classIds: ['A'], date: '2026-11-16', time: '08:10' }),
+    x.call('attendanceBackfill', { classIds: ['A'], date: '2026-11-16', time: '08:11' }),
+  ]);
+  assert.deepEqual([back.session.period, other.session.period].sort(), [8, 9]);
+  assert.equal(back.session.startedAt, T0 - 3600000);
+  const classB = await x.start({ classIds: ['B'] });
+  assert.equal(classB.period, 6);
+  await x.call('attendanceControl', { action: 'end' });
+
+  const before = structuredClone([...x.db.docs]);
+  const cards = await x.call('attendanceClassCards');
+  assert.deepEqual([...x.db.docs], before, '班級卡片唯讀');
+  assert.deepEqual(cards.classes.map(c => c.classId), ['A', 'B', 'test']);
+  assert.equal(cards.classes[0].todayCount, 5);
+  assert.equal(cards.classes[1].todayCount, 2);
+  const own = await x.call('attendanceMine', {}, member);
+  assert.deepEqual(own.counts, { total: 5, present: 0, absent: 5 });
+  assert.deepEqual(own.rows.map(r => r.id), [second.id, first.id, legacy.id, other.session.id, back.session.id]);
+  assert.equal(own.rows.find(r => r.id === legacy.id).startedAt, T0 - 60000);
+  assert.equal((await x.call('attendanceSummary', { classId: 'test' })).rows.length, 0);
+  const tester = x.student(10, 'test');
+  x.db.docs.set(`enrollments/${COURSE}__${tester.email}`, { ...tester, courseId: COURSE, enabled: true });
+  const trialClass = await x.start({ classIds: ['test'] });
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceConfirm', { sessionId: trialClass.id, confirmed: true });
+  assert.deepEqual((await x.call('attendanceMine', {}, tester)).counts, { total: 1, present: 0, absent: 1 });
+  assert.equal((await x.call('attendanceSummary', { classId: 'test' })).rows[0].absent, 1);
+  assert(!(await x.call('attendanceSummary')).rows.some(r => r.classId === 'test'));
+  assert(!(await x.call('attendanceExport', { kind: 'detail' })).csv.includes(tester.studentId));
+  assert.equal((await x.call('attendanceNotifyDrafts')).student.length, 0);
+  assert.equal((await x.call('attendanceNotifyDrafts', { classId: 'test' })).student.length, 1);
+  x.tick(86400000);
+  assert.equal((await x.start()).period, 1);
+});
+
+test('#74 刪除排除總表、個人資料、匯出與待通知；可復原且逾 30 天拒絕', async () => {
+  const x = setup();
+  const s = await x.start();
+  await assert.rejects(x.call('attendanceDeleteSession', { sessionId: s.id }), /還在進行中/);
+  await x.call('attendanceControl', { action: 'end' });
+  await x.notifyCfg();
+  await x.call('attendanceConfirm', { sessionId: s.id, confirmed: true });
+  const input = { classId: 'A' };
+  const drafts = await x.call('attendanceNotifyDrafts', input);
+  assert.match(drafts.student[0].subject, /11\/16（一）09:10/);
+  assert.match(drafts.digest[0].text, /2026-11-16 09:10/);
+  await markDraft(x, drafts.digest[0]);
+  assert.equal((await x.call('attendanceSessions', input)).sessions[0].notified, true);
+  const gone = await x.call('attendanceDeleteSession', { sessionId: s.id, reason: '合成刪除原因' });
+  assert.equal(gone.session.deletedAt, T0);
+  const listing = await x.call('attendanceSessions', input);
+  assert.deepEqual(listing.sessions, []);
+  assert.deepEqual(listing.deleted.map(r => r.id), [s.id]);
+  assert.deepEqual((await x.call('attendanceMine', {}, x.student(1))).counts, { total: 0, present: 0, absent: 0 });
+  assert.equal((await x.call('attendanceSummary', input)).sessions.length, 0);
+  assert((await x.call('attendanceSummary', input)).rows.every(r => !r.present && !r.absent));
+  assert.equal((await x.call('attendanceClassCards')).classes[0].pending, 0);
+  assert.equal((await x.call('attendanceNotifyDrafts', input)).student.length, 0);
+  assert.equal((await markDraft(x, drafts.student[0])).stale, 1);
+  assert.equal((await x.call('attendanceExport', { kind: 'detail', ...input })).csv.trim().split('\r\n').length, 1);
+  await assert.rejects(x.call('attendanceExport', { kind: 'session', sessionId: s.id }), /找不到/);
+  await assert.rejects(x.call('attendanceReopen', { sessionId: s.id, minutes: 1 }), /找不到/);
+  await assert.rejects(x.call('attendanceMine', { email: x.student(2).email }, x.student(1)), /不支援/);
+  x.tick(1);
+  await x.call('attendanceRestoreSession', { sessionId: s.id });
+  assert.equal((await x.call('attendanceMine', {}, x.student(1))).counts.absent, 1);
+  assert.equal((await x.call('attendanceNotifyDrafts', input)).student.length, 5);
+  const audit = (await x.call('attendanceAuditLog', { sessionId: s.id })).rows;
+  assert(audit.some(r => r.action === 'delete' && r.reason === '合成刪除原因'));
+  assert(audit.some(r => r.action === 'restore'));
+  await x.call('attendanceDeleteSession', { sessionId: s.id });
+  x.tick(A.ATTENDANCE_RESTORE_MS);
+  await assert.rejects(x.call('attendanceRestoreSession', { sessionId: s.id }), /超過 30 天/);
+  assert.deepEqual((await x.call('attendanceSessions', input)).deleted, []);
+});
+
+test('#74 逾期清理：保留 30 天，清除該筆子集合及憑證，保留稽核', async () => {
+  const x = setup();
+  const s = await x.start();
+  await x.call('attendanceControl', { action: 'end' });
+  await x.call('attendanceDeleteSession', { sessionId: s.id });
+  const parent = `courses/${COURSE}/attendance/${s.id}`;
+  const next = await x.start();
+  await x.call('attendanceControl', { action: 'end' });
+  x.tick(A.ATTENDANCE_RESTORE_MS - 1);
+  await x.h.attendancePurgeDeleted.run({});
+  assert(x.db.docs.has(parent));
+  assert(x.secret(s.id));
+  x.tick(1);
+  await x.h.attendancePurgeDeleted.run({});
+  assert(![...x.db.docs.keys()].some(key => key === parent || key.startsWith(parent + '/')));
+  assert(!x.db.docs.has(`courses/${COURSE}/attendanceSecrets/${s.id}`));
+  assert(x.db.docs.has(`courses/${COURSE}/attendance/${next.id}`));
+  assert((await x.call('attendanceAuditLog', { sessionId: s.id })).rows.some(r => r.action === 'delete'));
 });

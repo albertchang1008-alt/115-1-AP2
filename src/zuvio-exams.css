@@ -49,3 +49,13 @@
 .zuvio .z-pbar i { display: block; height: 100%; background: #1a5fb4; }
 .zuvio .z-sum td { font-weight: 600; background: #fafbfc; }
 .zuvio .z-total { font-size: 16px; padding-top: 18px; }
+
+.zuvio .z-range-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 10px; }
+.zuvio .z-range-actions button, .zuvio button.z-group-toggle { min-height: 44px; }
+.zuvio .z-grouphead { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 8px; }
+.zuvio .z-grouphead label { min-height: 44px; cursor: pointer; }
+.zuvio .z-grouphead input { flex: none; }
+.zuvio .z-grouphead .z-group-toggle { grid-column: 4; grid-row: 1; min-width: 44px; padding: 4px; }
+@media (max-width: 480px) {
+  .zuvio .z-group-picked { grid-column: 1 / 4; }
+}

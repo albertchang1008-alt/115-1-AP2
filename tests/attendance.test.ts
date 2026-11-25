@@ -103,6 +103,7 @@ test('時間區段、寬限、台北時間', () => {
   assert.equal(A.taipeiDate(Date.parse('2026-11-16T16:30:00Z')), '2026-11-17', '台北已跨日');
   assert.equal(A.taipeiTime(t0, true), '09:10:00');
   assert.equal(A.sessionLabel({ date: '2026-11-16', period: 3 }), '11/16（一）第 3 節');
+  assert.equal(A.sessionLabel({ date: '2026-11-16', period: 3, startedAt: t0 }), '11/16（一）09:10');
   assert.equal(A.stepRemainingMs(t0 + 16000, t0, 15), 14000);
   assert.equal(A.sessionAcceptsCheckIn({ status: 'open', endsAt: t0 }, t0 + 5000), true);
   assert.equal(A.sessionAcceptsCheckIn({ status: 'open', endsAt: t0 }, t0 + 5001), false);
@@ -123,10 +124,10 @@ test('信件內容：只有點名資訊', () => {
     teacherName: '示範教師',
     link: 'https://example.edu/#/course/c/attendance',
   };
-  const s = { date: '2026-11-16', period: 3 };
+  const s = { date: '2026-11-16', period: 3, startedAt: Date.parse('2026-11-16T01:10:00Z') };
   const absent = A.absentMail(ctx, s, '示範學生 05');
-  assert.equal(absent.subject, '【解剖生理學（二）】11/16（一）第 3 節紀錄為未到');
-  assert.match(absent.text, /本節紀錄為未到。/);
+  assert.equal(absent.subject, '【解剖生理學（二）】11/16（一）09:10紀錄為未到');
+  assert.match(absent.text, /本次紀錄為未到。/);
   assert.match(
     A.correctionMail(ctx, s, '示範學生 05').text,
     /紀錄已改為準時。先前寄出的未到通知請不用理會。/,
@@ -150,15 +151,14 @@ test('輸入白名單與 CSV 跳脫', () => {
   assert.throws(() => A.onlyKeys({ a: 1, b: 2 }, ['a']), /不支援的欄位：b/);
   assert.throws(() => A.onlyKeys(null, []));
   assert.throws(
-    () => A.validateStartInput({ classIds: ['X'], period: 1 }, ['A'], '2026-11-16'),
+    () => A.validateStartInput({ classIds: ['X'] }, ['A']),
     /班級不屬於課程/,
   );
+  assert.throws(() => A.validateStartInput({ classIds: ['B', 'A'] }, ['A', 'B']), /只能選擇一個班級/);
   assert.deepEqual(
-    A.validateStartInput({ classIds: ['B', 'A', 'A'], period: 3 }, ['A', 'B'], '2026-11-16'),
+    A.validateStartInput({ classIds: ['A'] }, ['A', 'B']),
     {
-      classIds: ['A', 'B'],
-      period: 3,
-      date: '2026-11-16',
+      classIds: ['A'],
       durationSec: 60,
       codeSec: 60,
       qrSec: 15,

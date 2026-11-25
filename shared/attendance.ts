@@ -9,6 +9,7 @@ export const attendanceStatusLabel: Record<AttendanceStatus, string> = {
 export const ATTENDANCE_FORMAT_VERSION = 1;
 export const ATTENDANCE_GRACE_MS = 5000; // 網路延遲寬限
 export const ATTENDANCE_MAX_WRONG = 5;
+export const ATTENDANCE_RESTORE_MS = 30 * 86400000;
 export const attendanceLimits = {
   durationSec: { min: 30, max: 1800, default: 60 },
   codeSec: { min: 15, max: 300, default: 60 },
@@ -38,6 +39,9 @@ export type AttendanceSession = {
   /** 教師再開放的次數與最後一次時間（2026-11-25，#73）；舊資料沒有。 */
   reopenCount?: number;
   reopenedAt?: number;
+  deletedAt?: number;
+  deletedBy?: string;
+  deletedReason?: string;
 };
 export type AttendanceRecord = {
   email: string;
@@ -78,9 +82,18 @@ export function validAttendanceDate(v: unknown): v is string {
 export function weekdayLabel(date: string) {
   return '日一二三四五六'[new Date(date + 'T00:00:00Z').getUTCDay()];
 }
-/** 11/16（一）第 3 節 */
-export function sessionLabel(s: Pick<AttendanceSession, 'date' | 'period'>) {
-  return `${Number(s.date.slice(5, 7))}/${Number(s.date.slice(8))}（${weekdayLabel(s.date)}）第 ${s.period} 節`;
+type SessionTime = Pick<AttendanceSession, 'date' | 'period'> & { startedAt?: number };
+export function sessionDateTime(s: SessionTime) {
+  return s.startedAt ? `${s.date} ${taipeiTime(s.startedAt)}` : `${s.date} 第 ${s.period} 節`;
+}
+export function sessionLabel(s: SessionTime) {
+  const date = `${Number(s.date.slice(5, 7))}/${Number(s.date.slice(8))}（${weekdayLabel(s.date)}）`;
+  return s.startedAt ? `${date}${taipeiTime(s.startedAt)}` : `${date}第 ${s.period} 節`;
+}
+export function compareAttendanceSessions(a: SessionTime, b: SessionTime) {
+  return (
+    a.date.localeCompare(b.date) || (a.startedAt || 0) - (b.startedAt || 0) || a.period - b.period
+  );
 }
 
 /** 動態碼與 QR 憑證的時間區段：第幾組。 */
@@ -119,32 +132,17 @@ export function onlyKeys(data: unknown, allowed: readonly string[]) {
     if (!allowed.includes(k)) throw new Error(`不支援的欄位：${k.slice(0, 40)}`);
   return data as Record<string, unknown>;
 }
-export function validateClassIds(v: unknown, courseClassIds: string[]) {
-  if (!Array.isArray(v) || !v.length || v.length > 20) throw new Error('請選擇班級');
-  const ids = [...new Set(v)];
-  if (ids.some((id) => typeof id !== 'string' || !courseClassIds.includes(id)))
-    throw new Error('班級不屬於課程');
-  return (ids as string[]).sort();
+export function validateAttendanceClass(v: unknown, courseClassIds: string[]) {
+  if (!Array.isArray(v) || v.length !== 1) throw new Error('一次只能選擇一個班級');
+  if (typeof v[0] !== 'string' || !courseClassIds.includes(v[0])) throw new Error('班級不屬於課程');
+  return [v[0]] as [string];
 }
-export function validateStartInput(data: unknown, courseClassIds: string[], today: string) {
-  const d = onlyKeys(data, [
-    'courseId',
-    'classIds',
-    'period',
-    'date',
-    'durationSec',
-    'codeSec',
-    'qrSec',
-    'trial',
-  ]);
-  const date = d.date === undefined ? today : d.date;
-  if (!validAttendanceDate(date)) throw new Error('日期無效');
+export function validateStartInput(data: unknown, courseClassIds: string[]) {
+  const d = onlyKeys(data, ['courseId', 'classIds', 'durationSec', 'codeSec', 'qrSec', 'trial']);
   if (d.trial !== undefined && typeof d.trial !== 'boolean') throw new Error('試簽設定無效');
   return {
-    classIds: validateClassIds(d.classIds, courseClassIds),
-    period: intIn(d.period, attendanceLimits.period, '節次'),
-    date,
-    durationSec: intIn(d.durationSec, attendanceLimits.durationSec, '點名時間'),
+    classIds: validateAttendanceClass(d.classIds, courseClassIds),
+    durationSec: intIn(d.durationSec, attendanceLimits.durationSec, '開放秒數'),
     codeSec: intIn(d.codeSec, attendanceLimits.codeSec, '數字碼秒數'),
     qrSec: intIn(d.qrSec, attendanceLimits.qrSec, 'QR 秒數'),
     trial: d.trial === true,
@@ -285,13 +283,12 @@ export function attendanceDetailCsv(
   return '﻿' + lines.join('\r\n') + '\r\n';
 }
 export function attendanceSessionCsv(session: AttendanceSession, records: AttendanceRecord[]) {
-  const lines = ['日期,節次,班級,學號,姓名,狀態,簽到時間,方式,是否修改過'];
+  const lines = ['點名時間,班級,學號,姓名,狀態,簽到時間,方式,是否修改過,補點時間'];
   const via = { qr: '掃 QR', code: '數字碼', teacher: '老師修改', auto: '' };
   for (const r of [...records].sort(byStudent))
     lines.push(
       [
-        session.date,
-        session.period,
+        sessionDateTime(session),
         csvCell(r.classId),
         csvText(r.studentId),
         csvCell(r.name),
@@ -301,6 +298,7 @@ export function attendanceSessionCsv(session: AttendanceSession, records: Attend
           : '',
         via[r.via || 'auto'],
         r.edited ? '是' : '否',
+        r.status === 'present' && r.reopened && r.signedAt ? taipeiDateTime(r.signedAt) : '',
       ].join(','),
     );
   return '﻿' + lines.join('\r\n') + '\r\n';
@@ -317,14 +315,10 @@ export type AttendanceSummaryRow = {
 export function attendanceSummary(
   sessions: { session: AttendanceSession; records: AttendanceRecord[] }[],
 ) {
-  const sorted = [...sessions].sort(
-    (a, b) =>
-      a.session.date.localeCompare(b.session.date) ||
-      a.session.period - b.session.period ||
-      a.session.id.localeCompare(b.session.id),
-  );
+  const sorted = [...sessions].sort((a, b) => compareAttendanceSessions(b.session, a.session));
   const rows = new Map<string, AttendanceSummaryRow>();
-  sorted.forEach(({ records }, i) => {
+  // 由舊到新更新姓名與班級，矩陣仍以新紀錄在左。
+  [...sorted].reverse().forEach(({ records }, i) => {
     for (const r of records) {
       const row = rows.get(r.email) || {
         email: r.email,
@@ -335,7 +329,7 @@ export function attendanceSummary(
         present: 0,
         absent: 0,
       };
-      row.cells[i] = r;
+      row.cells[sorted.length - 1 - i] = r;
       row[r.status]++;
       Object.assign(row, { studentId: r.studentId, name: r.name, classId: r.classId });
       rows.set(r.email, row);
@@ -360,7 +354,7 @@ export function attendanceSummaryCsv(
       '班級',
       '學號',
       '姓名',
-      ...s.sessions.map((x) => csvCell(`${x.date} 第${x.period}節`)),
+      ...s.sessions.map((x) => csvCell(sessionDateTime(x))),
       '準時',
       '未到',
     ].join(','),
@@ -384,11 +378,10 @@ export function attendanceSummaryCsv(
 /* ───────── 通知信內容（只寫點名資訊；不含成績、情緒、關心標記、同裝置提醒、修改原因） ───────── */
 export type AttendanceMailContext = { courseName: string; teacherName: string; link: string };
 export type AttendanceMail = { subject: string; text: string };
-const dateLine = (s: Pick<AttendanceSession, 'date' | 'period'>) =>
-  `${s.date}（${weekdayLabel(s.date)}）第 ${s.period} 節`;
+
 export function absentMail(
   ctx: AttendanceMailContext,
-  s: Pick<AttendanceSession, 'date' | 'period'>,
+  s: SessionTime,
   studentName: string,
 ): AttendanceMail {
   return {
@@ -396,7 +389,7 @@ export function absentMail(
     text: [
       `${studentName} 同學：`,
       '',
-      `${ctx.courseName}　${dateLine(s)}，本節紀錄為未到。`,
+      `${ctx.courseName}　${sessionDateTime(s)}，本次紀錄為未到。`,
       '',
       '如果對紀錄有疑問，請直接洽老師。',
       ...(ctx.link ? ['', `查看我的出缺席：${ctx.link}`] : []),
@@ -407,7 +400,7 @@ export function absentMail(
 }
 export function correctionMail(
   ctx: AttendanceMailContext,
-  s: Pick<AttendanceSession, 'date' | 'period'>,
+  s: SessionTime,
   studentName: string,
 ): AttendanceMail {
   return {
@@ -415,7 +408,7 @@ export function correctionMail(
     text: [
       `${studentName} 同學：`,
       '',
-      `${ctx.courseName}　${dateLine(s)}的紀錄已改為準時。先前寄出的未到通知請不用理會。`,
+      `${ctx.courseName}　${sessionDateTime(s)} 的紀錄已改為準時。先前寄出的未到通知請不用理會。`,
       ...(ctx.link ? ['', `查看我的出缺席：${ctx.link}`] : []),
       '',
       ctx.teacherName,
@@ -428,7 +421,7 @@ export function mentorDigestMail(
   mentorName: string,
   date: string,
   sessions: {
-    session: Pick<AttendanceSession, 'date' | 'period'>;
+    session: SessionTime;
     records: Pick<AttendanceRecord, 'status' | 'name' | 'studentId' | 'classId'>[];
   }[],
 ): AttendanceMail {
@@ -437,8 +430,8 @@ export function mentorDigestMail(
     '',
     `以下是 ${className} ${date}（${weekdayLabel(date)}）在「${ctx.courseName}」的出缺席紀錄。`,
   ];
-  for (const { session, records } of [...sessions].sort(
-    (a, b) => a.session.period - b.session.period,
+  for (const { session, records } of [...sessions].sort((a, b) =>
+    compareAttendanceSessions(a.session, b.session),
   )) {
     const mine = records.filter((r) => r.classId === className);
     const absent = mine
@@ -446,7 +439,7 @@ export function mentorDigestMail(
       .sort((a, b) => a.studentId.localeCompare(b.studentId));
     lines.push(
       '',
-      `第 ${session.period} 節`,
+      sessionDateTime(session),
       `應到 ${mine.length} 人，準時 ${mine.length - absent.length} 人，未到 ${absent.length} 人。`,
     );
     if (absent.length)
@@ -497,7 +490,7 @@ export function recentAbsentCount(
 /** 某一天某一節未到的學生信箱（Zuvio 場次標「缺考」用）。 */
 export function absentEmailsAt(
   sessions: {
-    session: Pick<AttendanceSession, 'date' | 'period'>;
+    session: SessionTime;
     records: Pick<AttendanceRecord, 'email' | 'status'>[];
   }[],
   date: string,
@@ -523,8 +516,8 @@ export function validReopenMinutes(v: unknown): v is number {
 }
 /** 只有今天、已結束的正式點名節次可以再開放（已確認者會撤銷確認）。 */
 export function canReopenSession(
-  s: Pick<AttendanceSession, 'kind' | 'status' | 'date'> | undefined,
+  s: Pick<AttendanceSession, 'kind' | 'status' | 'date' | 'deletedAt'> | undefined,
   today: string,
 ) {
-  return !!s && s.kind === 'roll' && s.status === 'closed' && s.date === today;
+  return !!s && s.kind === 'roll' && s.status === 'closed' && !s.deletedAt && s.date === today;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { AttendPage, AttendanceBanner, MyAttendancePage } from '../../src/Attendance';
 import App from '../../src/App';
-import { ATTENDANCE_GRACE_MS, stepIndex, stepRemainingMs } from '../../shared/attendance';
+import { ATTENDANCE_GRACE_MS, stepIndex, stepRemainingMs, taipeiDate } from '../../shared/attendance';
 import { memoryApi } from '../../src/service';
 import TeachingControl from '../../src/TeachingControl';
 import AttendanceAdmin from '../../src/AttendanceAdmin';
@@ -18,7 +18,7 @@ const course: any = {
   id: '115-1-AP2',
   title: '解剖生理學（二）',
   term: '115-1',
-  classIds: ['demo-a', 'demo-b'],
+  classIds: ['demo-a', 'demo-b', 'test'],
   classNames: { 'demo-a': '示範甲班', 'demo-b': '示範乙班' },
   features: { attendance: true },
 };
@@ -43,7 +43,7 @@ const session = (over = {}) => ({
   startedAt: T - 12000,
   endsAt: T + 48000,
   expected: 60,
-  counts: { present: 54, absent: 6 },
+  counts: { present: 5, absent: 3 },
   backfilled: false,
   confirmedAt: T,
   durationSec: 60,
@@ -64,6 +64,7 @@ const rows = Array.from({ length: 8 }, (_, i) => ({
   locked: i === 2,
   sameDevice: i === 4 ? ['示範學生 06'] : i === 5 ? ['示範學生 05'] : [],
   pendingMail: i < 3 ? 'absent' : null,
+  reopened: i === 4,
 }));
 const draftText = (name: string) =>
   `${name} 同學：\n\n示範課程　2026-11-16（一）第 3 節，本節紀錄為未到。\n\n如果對紀錄有疑問，請直接洽老師。\n\n示範教師`;
@@ -135,6 +136,8 @@ const attendanceCalls: string[] = [];
 const openedAt = Date.now();
 const liveSession = session({
   status: 'open',
+  id: '2026-11-16-t102000-aaaa-2',
+  date: taipeiDate(openedAt),
   period: 4,
   startedAt: openedAt - 6000,
   endsAt: openedAt + 42000,
@@ -149,10 +152,18 @@ const liveMock = {
   maxActive: 0,
 };
 let endedByTeacher = false;
+let liveActive = screen === 'admin-live';
+const stored = [
+  session({ id: '2026-11-16-t101500-aaaa-2', startedAt: T + 3900000, period: 4, confirmedAt: 0 }),
+  session({ notified: true, reopenCount: 1 }),
+];
+const deleted: ReturnType<typeof session>[] = [];
+const requests: { name: string; data: unknown }[] = [];
 Object.assign(window, {
   attendanceFixture: {
     drafts: notifyDrafts,
     calls: attendanceCalls,
+    requests,
     live: liveMock,
     unmount: () => root.unmount(),
   },
@@ -161,7 +172,7 @@ if (screen === 'control-disabled') course.features.attendance = false;
 const api: any = {
   preview: screen === 'control-preview',
   async call(name: string, data: any) {
-    if (name.startsWith('attendance')) attendanceCalls.push(name);
+    if (name.startsWith('attendance')) { attendanceCalls.push(name); requests.push({ name, data: structuredClone(data) }); }
     if (name === 'getTeachingDeck') return { title: '示範簡報', slides: [{ id: 'demo', title: '示範', html: '<section>示範簡報</section>', notes: '', answerPage: false }] };
     if (name === 'attendanceCheckIn') {
       if (data.code) {
@@ -170,6 +181,7 @@ const api: any = {
         return { result: 'ok', signedAt: T, date: '2026-11-16', period: 3 };
       }
       const kind = screen.replace('attend-', '');
+      if (kind === 'makeup') return { result: 'ok', signedAt: T + 1920000, startedAt: T, reopened: true, date: '2026-11-16', period: 3 };
       if (kind === 'ok' || kind === 'duplicate' || kind === 'trial')
         return { result: kind, signedAt: T, date: '2026-11-16', period: 3 };
       const messages: Record<string, string> = {
@@ -197,19 +209,46 @@ const api: any = {
           };
     if (name === 'attendanceMine')
       return {
+        counts: { total: 3, present: 2, absent: 1 },
         rows: [
-          { date: '2026-11-16', period: 3, status: 'present', signedAt: T },
-          { date: '2026-11-11', period: 5, status: 'present', signedAt: 0 },
-          { date: '2026-11-04', period: 5, status: 'absent', signedAt: 0 },
+          { id: 'mine2', date: '2026-11-16', period: 4, startedAt: T + 600000, status: 'present', signedAt: T + 1920000, reopened: true },
+          { id: 'mine1', date: '2026-11-16', period: 3, startedAt: T, status: 'present', signedAt: T, edited: true },
+          { id: 'mine0', date: '2026-11-04', period: 5, status: 'absent', signedAt: 0 },
         ],
       };
-    if (name === 'attendanceControl' && screen === 'admin-live') {
+    if (name === 'attendanceClassCards') {
+      return {
+        classes: course.classIds.map((classId: string) => ({
+          classId, members: classId === 'demo-a' ? rows.length : 0, test: classId === 'test',
+          pendingConfirm: classId === 'demo-a' ? stored.filter(s => !s.confirmedAt).length : 0,
+          pending: classId === 'demo-a' ? 3 : 0, todayCount: 0, live: liveActive && classId === 'demo-a',
+          rate: classId === 'demo-a' ? 5 / 8 : null,
+        })),
+        now: Date.now(), expired: false, open: liveActive && !endedByTeacher && Date.now() <= liveSession.endsAt + ATTENDANCE_GRACE_MS ? liveSession : null,
+      };
+    }
+    if (name === 'attendanceStart') {
+      liveActive = true;
+      endedByTeacher = false;
+      liveSession.kind = data.trial ? 'trial' : 'roll';
+      liveSession.startedAt = Date.now();
+      liveSession.endsAt = liveSession.startedAt + data.durationSec * 1000;
+      return { session: liveSession };
+    }
+    if (name === 'attendanceReopen') {
+      liveActive = true;
+      endedByTeacher = false;
+      liveSession.id = data.sessionId;
+      liveSession.endsAt = Date.now() + data.minutes * 60000;
+      return { session: liveSession };
+    }
+    if (name === 'attendanceControl' && liveActive) {
       if (data.action === 'end') endedByTeacher = true;
       if (data.action === 'extend') liveSession.endsAt = Math.max(liveSession.endsAt, Date.now()) + 60000;
       return { session: liveSession };
     }
     if (name === 'attendanceLive') {
-      if (screen !== 'admin-live') return { session: null };
+      if (!liveActive) return { session: null };
       liveMock.requests.push(Date.now() - openedAt);
       liveMock.active++;
       liveMock.maxActive = Math.max(liveMock.active, liveMock.maxActive);
@@ -239,10 +278,38 @@ const api: any = {
     }
     if (name === 'attendanceSessions')
       return {
-        sessions: [session({ id: '2026-11-16-p04-aaaa', period: 4, confirmedAt: 0 }), session()],
-        open: null,
+        sessions: data.classId !== 'demo-a' ? [] : [...stored],
+        deleted: data.classId !== 'demo-a' ? [] : [...deleted],
+        open: liveActive && !endedByTeacher ? liveSession : null,
       };
-    if (name === 'attendanceRoster') return { session: session(), rows };
+    if (name === 'attendanceDeleteSession') {
+      const index = stored.findIndex(s => s.id === data.sessionId);
+      const item = stored.splice(index, 1)[0];
+      deleted.push({ ...item, ...{ deletedAt: Date.now(), deletedReason: data.reason } });
+      return { session: item };
+    }
+    if (name === 'attendanceRestoreSession') {
+      const index = deleted.findIndex(s => s.id === data.sessionId);
+      const item = deleted.splice(index, 1)[0];
+      stored.push(item);
+      return { session: item };
+    }
+    if (name === 'attendanceRoster') {
+      const selected = stored.find(s => s.id === data.sessionId);
+      return { session: selected || { ...liveSession, status: 'closed', confirmedAt: 0 }, rows };
+    }
+    if (name === 'attendanceSetStatus') {
+      const affected = rows.filter(r => data.emails.includes(r.email));
+      for (const r of affected) { r.status = data.status; r.edited = true; }
+      return { changed: affected.length };
+    }
+    if (name === 'attendanceConfirm') {
+      const item = stored.find(s => s.id === data.sessionId);
+      if (item) item.confirmedAt = data.confirmed ? T : 0;
+      return { session: item };
+    }
+    if (name === 'attendanceExport')
+      return { filename: '點名合成.csv', csv: '班級,姓名\r\n示範甲班,示範學生 01\r\n' };
     if (name === 'attendanceNotifyDrafts') return notifyDrafts;
     if (name === 'attendanceMailConfig')
       return {
@@ -253,14 +320,14 @@ const api: any = {
       };
     if (name === 'attendanceSummary')
       return {
-        sessions: [session(), session({ id: 'b', date: '2026-11-11', period: 5 })],
+        sessions: stored,
         rows: rows.map((r) => ({
           ...r,
           present: r.status === 'present' ? 2 : 0,
           absent: r.status === 'absent' ? 2 : 0,
           cells: [
-            { status: r.status, edited: r.edited },
-            { status: r.status, edited: false },
+            { status: r.status, edited: r.edited, makeupAt: 0 },
+            { status: r.status, edited: false, makeupAt: r.reopened ? r.signedAt : 0 },
           ],
         })),
       };
@@ -283,16 +350,9 @@ const api: any = {
     throw new Error('未模擬：' + name);
   },
 };
-function AdminAt({ view }: { view: string }) {
-  React.useEffect(() => {
-    const label = { sessions: '節次與名冊', summary: '總表與修改紀錄', notify: '通知' }[view];
-    if (label)
-      [...document.querySelectorAll<HTMLButtonElement>('.att-tabs button')]
-        .find((b) => (b.textContent || '').startsWith(label))
-        ?.click();
-  }, []);
+function AdminAt() {
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ padding: 12 }}>
       <AttendanceAdmin
         api={api}
         course={course}
@@ -376,5 +436,5 @@ else if (screen.startsWith('banner-'))
   );
 else if (screen === 'my') root.render(<MyAttendancePage api={api} course={course} />);
 else if (screen.startsWith('control-')) root.render(<TeachingControl api={api} course={course} notify={() => {}} changed={async () => {}} progress={null} />);
-else if (screen.startsWith('admin-')) root.render(<AdminAt view={screen.slice(6)} />);
+else if (screen.startsWith('admin-')) root.render(<AdminAt />);
 else root.render(<p>未知的畫面</p>);

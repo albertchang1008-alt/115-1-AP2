@@ -68,6 +68,7 @@ const browser = await (chromePath
 });
 const results = {
   makeExam: false,
+  collapsedScope: false,
   examDetail: false,
   importResults: false,
   reimportResults: false,
@@ -113,12 +114,54 @@ try {
   await page.goto(baseUrl, { waitUntil: 'load' });
   await page.waitForSelector('.zuvio');
 
-  // Select two unit checkboxes
   const unitCheckboxes = page.locator('.z-unit input[type="checkbox"]');
-  const count = await unitCheckboxes.count();
-  assert.ok(count >= 2, '次單元核取方塊需 >= 2');
+  const expandAll = page.getByRole('button', { name: '全部展開' });
+  const collapseAll = page.getByRole('button', { name: '全部收起' });
+  await page.locator('.z-grouphead').first().waitFor();
+  await page.getByRole('heading', { name: '試務中心', exact: true }).waitFor();
+  assert.equal(await unitCheckboxes.count(), 0, '次單元預設收起');
+  const desktop = { width: 1280, height: 800 };
+  await page.setViewportSize(desktop);
+  await capture(page, '01-scope-1280.png', '1280 寬，預設收起', false);
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.locator('.z-group-toggle').first().evaluate(el => el.getBoundingClientRect().height >= 44));
+  await capture(page, '01-scope-390.png', '390 寬，預設收起', false);
+  await page.setViewportSize(desktop);
+  await expandAll.click();
+  const groups = page.locator('.z-group');
+  const unitCounts = await groups.evaluateAll(nodes => nodes.map(n => n.querySelectorAll('.z-unit').length));
+  const groupIndex = unitCounts.findIndex(n => n > 1);
+  assert(groupIndex >= 0, '至少有一個含多個次單元的大單元');
+  const group = groups.nth(groupIndex);
+  const groupCheckbox = group.locator('.z-grouphead input[type="checkbox"]');
+  const toggle = group.locator('.z-group-toggle');
+  const inside = group.locator('.z-unit input[type="checkbox"]');
+  assert.equal(await page.locator('.z-group-toggle[aria-expanded="false"]').count(), 0);
+  await inside.first().check();
+  assert.equal(await groupCheckbox.evaluate(el => el.indeterminate), true, '部分選取半選');
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
+  assert.equal(await inside.count(), 0);
+  assert.equal(await groupCheckbox.evaluate(el => el.indeterminate), true, '收起保留半選');
+  assert.match(await group.locator('.z-group-picked').textContent(), /已選 1／/);
+  await groupCheckbox.click();
+  assert.equal(await groupCheckbox.isChecked(), true);
+  await toggle.click();
+  assert.equal(await inside.evaluateAll(nodes => nodes.every(n => n.checked)), true, '半選點擊後全選');
+  await groupCheckbox.click();
+  assert.equal(await inside.evaluateAll(nodes => nodes.some(n => n.checked)), false, '全選再次點擊後清空');
+  await collapseAll.click();
+  assert.equal(await unitCheckboxes.count(), 0);
+  await page.getByRole('tab', { name: '考卷與場次', exact: true }).click();
+  await page.getByRole('tab', { name: '出題', exact: true }).click();
+  await expandAll.waitFor();
+  assert.equal(await unitCheckboxes.count(), 0, '重回出題全數收起');
+  await expandAll.click();
+  assert.ok(await unitCheckboxes.count() >= 2, '次單元核取方塊需 >= 2');
   await unitCheckboxes.nth(0).check();
   await unitCheckboxes.nth(1).check();
+  results.collapsedScope = true;
 
   // Set total questions to 10
   const totalInput = page.locator('label:has-text("總題數") input[type="number"]');
@@ -381,13 +424,13 @@ try {
 }
 
 // Write manifest.json
-assert.equal(results.screenshots.length, 12, '必須存下 12 張驗收截圖');
+assert.equal(results.screenshots.length, 14, '必須存下 14 張驗收截圖');
 const evidenceDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date());
 const expiresAt = new Date(Date.parse(evidenceDate) + 7 * 86400000).toISOString().slice(0, 10);
 const manifest = {
   date: evidenceDate,
   expiresAt,
-  target: '#65 Zuvio 出題＋擴充上線準備 1.16.0 真實瀏覽器驗證',
+  target: '試務中心出題與成績回收真實瀏覽器驗證',
   commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
   worktreeDirty: Boolean(execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim()),
   results,

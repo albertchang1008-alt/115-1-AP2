@@ -54,7 +54,7 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
     : [['make', '出題'], ['exams', '考卷與場次'], ['report', '報表']];
   return (
     <div className="zuvio">
-      <div className="sectionhead"><h2>Zuvio 出題</h2>{api.sample && <span className="z-badge">樣張：示範題目與合成學生</span>}</div>
+      <div className="sectionhead"><h2>試務中心</h2>{api.sample && <span className="z-badge">樣張：示範題目與合成學生</span>}</div>
       <div className="z-tabs" role="tablist">
         {tabs.map(([k, l]) => (
           <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? 'active' : ''} onClick={() => showTab(k)}>{l}</button>
@@ -88,6 +88,7 @@ function Make({ api, notify, done, platform }: { api: ZuvioApi; notify: (m: stri
   const [answerMode, setAnswerMode] = useState<QuizAnswerMode>('zuvio');
   const [data, setData] = useState<Awaited<ReturnType<ZuvioApi['pool']>>>();
   const [checked, setChecked] = useState<string[]>([]);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [total, setTotal] = useState(20);
   const [mode, setMode] = useState<Mode>('proportional');
   const [custom, setCustom] = useState<Record<string, number>>({});
@@ -156,14 +157,39 @@ function Make({ api, notify, done, platform }: { api: ZuvioApi; notify: (m: stri
       <section className="z-card">
         <h3>1. 勾選出題範圍（次單元）</h3>
         {excludedText && <p className="muted">已自動排除：{excludedText}。</p>}
+        <div className="z-range-actions">
+          <button type="button" onClick={() => setExpanded(new Set(tree.keys()))}>全部展開</button>
+          <button type="button" onClick={() => setExpanded(new Set())}>全部收起</button>
+        </div>
         {[...tree].map(([g, us]) => {
-          const ids = [...us.keys()];
-          const all = ids.every((x) => checked.includes(x));
+          const units = [...us];
+          const ids = units.map(([id]) => id);
+          const selected = units.filter(([id]) => checked.includes(id));
+          const all = selected.length === units.length;
+          const open = expanded.has(g);
           return (
             <div className="z-group" key={g}>
-              <label className="z-grouphead"><input type="checkbox" checked={all} ref={(el) => { if (el) el.indeterminate = !all && ids.some((x) => checked.includes(x)); }} onChange={(e) => toggle(ids, e.target.checked)} />
-                <b>{g}</b><span className="muted">{[...us.values()].reduce((a, b) => a + b.n, 0)} 題</span></label>
-              {[...us].map(([u, info]) => (
+              <div className="z-grouphead">
+                <label>
+                  <input type="checkbox" aria-label={g} checked={all}
+                    ref={(el) => { if (el) el.indeterminate = !all && selected.length > 0; }}
+                    onChange={(e) => toggle(ids, e.target.checked)} />
+                  <b>{g}</b>
+                </label>
+                <span className="muted">{units.reduce((n, [, info]) => n + info.n, 0)} 題</span>
+                {selected.length > 0 && <span className="muted z-group-picked">
+                  已選 {selected.length}／{units.length} 個次單元・{selected.reduce((n, [, info]) => n + info.n, 0)} 題
+                </span>}
+                <button type="button" className="z-group-toggle" aria-expanded={open}
+                  aria-label={`${open ? '收起' : '展開'} ${g}`}
+                  onClick={() => setExpanded((old) => {
+                    const next = new Set(old);
+                    if (next.has(g)) next.delete(g);
+                    else next.add(g);
+                    return next;
+                  })}>{open ? '▾' : '▸'}</button>
+              </div>
+              {open && units.map(([u, info]) => (
                 <label className="z-unit" key={u}><input type="checkbox" checked={checked.includes(u)} onChange={(e) => toggle([u], e.target.checked)} /><span>{info.title}</span><span className="muted">{info.n} 題</span></label>
               ))}
             </div>

@@ -4,9 +4,12 @@
 import { createHmac, createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { Firestore } from 'firebase-admin/firestore';
+import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { featureAccess } from './features';
+import { isTestClass } from '../../shared/answerIntegrity';
 import {
   ATTENDANCE_MAX_WRONG,
+  ATTENDANCE_RESTORE_MS,
   AttendanceRecord,
   AttendanceSession,
   AttendanceStatus,
@@ -18,6 +21,7 @@ import {
   attendanceSummaryCsv,
   correctionMail,
   countStatuses,
+  compareAttendanceSessions,
   mentorDigestMail,
   onlyKeys,
   pendingStudentMail,
@@ -27,6 +31,9 @@ import {
   stepIndex,
   stepRemainingMs,
   taipeiDate,
+  taipeiDateTime,
+  taipeiTime,
+  sessionDateTime,
   termOf,
   validAttendanceDate,
   validDeviceId,
@@ -34,7 +41,7 @@ import {
   validReopenMinutes,
   canReopenSession,
   ATTENDANCE_REOPEN_MAX_MIN,
-  validateClassIds,
+  validateAttendanceClass,
   validateStartInput,
 } from '../../shared/attendance';
 
@@ -95,7 +102,7 @@ function codeMatches(
   now: number,
 ) {
   let ok = false;
-  for (const step of acceptedSteps(now, s.startedAt, s.codeSec)) {
+  for (const step of acceptedSteps(now, s.reopenedAt || s.startedAt, s.codeSec)) {
     const expected = Buffer.from(attendanceCode(secret, courseId, s.id, step));
     const given = Buffer.from(code);
     if (given.length === expected.length && timingSafeEqual(given, expected)) ok = true;
@@ -107,7 +114,7 @@ function codeMatches(
 export async function readClosedAttendance(db: Firestore, courseId: string) {
   const list = (await db.collection(`courses/${courseId}/attendance`).get()).docs
     .map((d) => d.data() as AttendanceSession)
-    .filter((s) => s.kind === 'roll' && s.status === 'closed');
+    .filter((s) => s.kind === 'roll' && s.status === 'closed' && !s.deletedAt);
   const out: { session: AttendanceSession; records: AttendanceRecord[] }[] = [];
   for (const s of list)
     out.push({
@@ -168,6 +175,13 @@ export function createAttendanceHandlers(
   };
   const allRecords = async (courseId: string, sid: string) =>
     (await records(courseId, sid).get()).docs.map((d) => d.data() as AttendanceRecord);
+  // Old backfills used the entry time. #73 overwrote startedAt on reopen.
+  // Where the original start cannot be recovered, keep the historical period label.
+  const startTime = (s: AttendanceSession) =>
+    s.id.includes('-p') && (s.backfilled || (s.reopenedAt && s.startedAt === s.reopenedAt))
+      ? 0
+      : s.startedAt || 0;
+  const dated = (s: AttendanceSession) => ({ ...s, startedAt: startTime(s) });
   const publicSession = (s: AttendanceSession) => ({
     id: s.id,
     kind: s.kind,
@@ -175,7 +189,7 @@ export function createAttendanceHandlers(
     period: s.period,
     classIds: s.classIds,
     status: s.status,
-    startedAt: s.startedAt,
+    startedAt: startTime(s),
     endsAt: s.endsAt,
     ...(s.closedAt ? { closedAt: s.closedAt } : {}),
     durationSec: s.durationSec,
@@ -186,17 +200,28 @@ export function createAttendanceHandlers(
     backfilled: s.backfilled === true,
     confirmedAt: s.confirmedAt || 0,
     reopenCount: s.reopenCount || 0,
+    deletedAt: s.deletedAt || 0,
+    deletedReason: s.deletedReason || '',
   });
 
   /** 未簽到的人補成「未到」。只在節次已關閉後執行，而且只寫還沒有紀錄的人，不會蓋掉已簽到的紀錄。 */
   const materialize = async (courseId: string, c: any, s: AttendanceSession) => {
     if (s.kind !== 'roll') return;
+    const ref = sessionRef(courseId, s.id);
+    const sameClosure = (cur: AttendanceSession | undefined) =>
+      cur?.status === 'closed' &&
+      !cur.deletedAt &&
+      !cur.settled &&
+      cur.closedAt === s.closedAt &&
+      cur.reopenedAt === s.reopenedAt;
     const members = await roster(courseId, c, s.classIds);
     const have = new Set((await allRecords(courseId, s.id)).map((r) => r.email));
     const missing = members.filter((m) => !have.has(m.email));
     for (let i = 0; i < missing.length; i += 100) {
       const chunk = missing.slice(i, i + 100);
       await db.runTransaction(async (tx) => {
+        const cur = (await tx.get(ref)).data() as AttendanceSession | undefined;
+        if (!sameClosure(cur)) return;
         const snaps: any[] = [];
         for (const m of chunk) snaps.push(await tx.get(records(courseId, s.id).doc(m.email)));
         chunk.forEach((m, k) => {
@@ -205,11 +230,17 @@ export function createAttendanceHandlers(
         });
       });
     }
-    const all = await allRecords(courseId, s.id);
-    await sessionRef(courseId, s.id).set(
-      { settled: true, expected: all.length, counts: countStatuses(all) },
-      { merge: true },
-    );
+    await db.runTransaction(async (tx) => {
+      const cur = (await tx.get(ref)).data() as AttendanceSession | undefined;
+      if (!sameClosure(cur)) return;
+      const snap = await tx.get(records(courseId, s.id));
+      const all = snap.docs.map((d) => d.data() as AttendanceRecord);
+      tx.set(
+        ref,
+        { settled: true, expected: all.length, counts: countStatuses(all) },
+        { merge: true },
+      );
+    });
   };
   /** 結束點名。force=false 時只在時間（含寬限）已過才結束。回傳是否由這次呼叫關閉。 */
   const settle = async (courseId: string, c: any, sid: string, force: boolean) => {
@@ -234,7 +265,8 @@ export function createAttendanceHandlers(
     });
     const s =
       closed || ((await sessionRef(courseId, sid).get()).data() as AttendanceSession | undefined);
-    if (s && s.status === 'closed' && s.settled !== true) await materialize(courseId, c, s);
+    if (s && s.status === 'closed' && !s.deletedAt && s.settled !== true)
+      await materialize(courseId, c, s);
     return !!closed;
   };
   /** 讀取目前開啟中的節次；過期的順便結束。 */
@@ -252,27 +284,67 @@ export function createAttendanceHandlers(
   const closedSession = async (courseId: string, c: any, id: unknown) => {
     const ref = sessionRef(courseId, id);
     let s = (await ref.get()).data() as AttendanceSession | undefined;
-    if (!s || s.kind !== 'roll') throw new HttpsError('not-found', '找不到這一節');
+    if (!s || s.kind !== 'roll' || s.deletedAt) throw new HttpsError('not-found', '找不到這筆點名');
     if (s.status === 'open' && sessionExpired(s, now())) await settle(courseId, c, s.id, false);
     else if (s.status === 'closed' && s.settled !== true) await materialize(courseId, c, s);
     s = (await ref.get()).data() as AttendanceSession;
+    if (s.deletedAt) throw new HttpsError('not-found', '找不到這筆點名');
     if (s.status !== 'closed')
       throw new HttpsError('failed-precondition', '點名還在進行中，請先結束');
     return s;
   };
-  const rollSessions = async (courseId: string, c: any) => {
-    await current(courseId, c);
-    const list = (await sessions(courseId).get()).docs
+  const readRolls = async (courseId: string) =>
+    (await sessions(courseId).get()).docs
       .map((d) => d.data() as AttendanceSession)
-      .filter((s) => s.kind === 'roll');
-    for (const s of list)
-      if (s.status === 'closed' && s.settled !== true) await materialize(courseId, c, s);
-    return list.sort(
-      (a, b) => b.date.localeCompare(a.date) || b.period - a.period || a.id.localeCompare(b.id),
+      .filter((s) => s.kind === 'roll')
+      .sort((a, b) => compareAttendanceSessions(dated(b), dated(a)) || a.id.localeCompare(b.id));
+  const rollSessions = async (courseId: string, c: any, keepDeleted = false) => {
+    await current(courseId, c);
+    const list = (await readRolls(courseId)).filter((s) => keepDeleted || !s.deletedAt);
+    return Promise.all(
+      list.map(async (s) => {
+        if (s.deletedAt || s.status !== 'closed' || s.settled === true) return s;
+        await materialize(courseId, c, s);
+        return (await sessionRef(courseId, s.id).get()).data() as AttendanceSession;
+      }),
     );
   };
-  const sessionId = (date: string, period: number, classIds: string[]) =>
-    `${date}-p${String(period).padStart(2, '0')}-${createHash('sha256').update(classIds.join('|')).digest('hex').slice(0, 8)}`;
+  const classScope = (value: unknown, c: any) => {
+    if (value === undefined) return undefined;
+    if (typeof value !== 'string' || !(c.classIds || []).includes(value))
+      return bad('班級不屬於課程');
+    return value;
+  };
+  const inScope = (s: AttendanceSession, classId?: string) =>
+    !classId || s.classIds.includes(classId);
+  const scopedRecords = (rows: AttendanceRecord[], classId?: string) =>
+    rows.filter((r) => (classId ? r.classId === classId : !isTestClass(r.classId)));
+  const classKey = (classId: string) =>
+    createHash('sha256').update(classId).digest('hex').slice(0, 16);
+  // Both start and backfill allocate inside the same transaction. Keep the high-water mark
+  // after purging so a historical backfill cannot reuse a number already sent to a mentor.
+  const nextPeriod = async (
+    tx: FirebaseFirestore.Transaction,
+    courseId: string,
+    date: string,
+    classId: string,
+  ) => {
+    const counter = db.doc(`courses/${courseId}/attendanceState/${date}-${classKey(classId)}`);
+    const [last, same] = await Promise.all([
+      tx.get(counter),
+      tx.get(sessions(courseId).where('date', '==', date)),
+    ]);
+    const day = same.docs
+      .map((d) => d.data() as AttendanceSession)
+      .filter((s) => s.kind === 'roll' && s.classIds.includes(classId));
+    const period =
+      day.reduce((n, s) => Math.max(n, s.period), Number(last.data()?.period) || 0) + 1;
+    return { counter, day, period };
+  };
+  const newSessionId = (date: string, t: number, classId: string, period: number) =>
+    `${date}-t${taipeiTime(t, true).replaceAll(':', '')}${String(t % 1000).padStart(3, '0')}-${classKey(classId)}-${period}`;
+  const activeRoll = (s: AttendanceSession | undefined): s is AttendanceSession =>
+    !!s && s.kind === 'roll' && s.status === 'closed' && !s.deletedAt;
   const courseInfo = (courseId: string, c: any) => ({
     term: String(c.published?.term || c.draft?.term || c.term || termOf(courseId)),
     code: courseId,
@@ -297,27 +369,32 @@ export function createAttendanceHandlers(
   const digestDocId = (date: string, classId: string) =>
     `digest__${date}__${encodeURIComponent(classId)}`;
   /** 待通知清單：只看已確認的節次；學生信沿用 pendingStudentMail（紀錄與上次通知不一致時才需通知）。 */
-  const notifyState = async (courseId: string, c: any, p: any, date: string) => {
-    const list = await rollSessions(courseId, c);
+  const notifyState = async (courseId: string, c: any, p: any, date: string, classId?: string) => {
+    const all = await rollSessions(courseId, c, true);
+    const list = all.filter((s) => !s.deletedAt && inScope(s, classId));
     const confirmed = list.filter((s) => s.status === 'closed' && s.confirmedAt);
     const { cfg, ctx } = await mailContext(courseId, c, p);
     const student: Record<string, unknown>[] = [];
     const bySession = new Map<string, AttendanceRecord[]>();
     for (const s of confirmed) {
-      const rs = (await allRecords(courseId, s.id)).sort(
+      const rs = scopedRecords(await allRecords(courseId, s.id), classId).sort(
         (a, b) => a.classId.localeCompare(b.classId) || a.studentId.localeCompare(b.studentId),
       );
       bySession.set(s.id, rs);
       for (const r of rs) {
         const kind = pendingStudentMail(r);
         if (!kind) continue;
-        const mail = kind === 'absent' ? absentMail(ctx, s, r.name) : correctionMail(ctx, s, r.name);
+        const mail =
+          kind === 'absent'
+            ? absentMail(ctx, dated(s), r.name)
+            : correctionMail(ctx, dated(s), r.name);
         student.push({
           draftId: `${s.id}__${r.email}`,
           kind,
           sessionId: s.id,
           date: s.date,
           period: s.period,
+          startedAt: startTime(s),
           classId: r.classId,
           to: r.email,
           name: r.name,
@@ -331,7 +408,10 @@ export function createAttendanceHandlers(
     const digest: Record<string, unknown>[] = [];
     const noMentor: string[] = [];
     const today = list.filter((s) => s.date === date);
-    for (const classId of [...new Set(today.flatMap((s) => s.classIds))].sort()) {
+    const groups = [...new Set(today.flatMap((s) => s.classIds))]
+      .filter((id) => (classId ? id === classId : !isTestClass(id)))
+      .sort();
+    for (const classId of groups) {
       const mine = today.filter((s) => s.classIds.includes(classId));
       const covered: number[] =
         (await mails(courseId).doc(digestDocId(date, classId)).get()).data()?.periods || [];
@@ -349,7 +429,7 @@ export function createAttendanceHandlers(
         classId,
         String(m.name || ''),
         date,
-        fresh.map((s) => ({ session: s, records: bySession.get(s.id) || [] })),
+        fresh.map((s) => ({ session: dated(s), records: bySession.get(s.id) || [] })),
       );
       const supplement = covered.length > 0;
       digest.push({
@@ -364,17 +444,20 @@ export function createAttendanceHandlers(
         periods: fresh.map((s) => s.period),
         supplement,
         // 該班今天的節次都確認了才提示；還有未確認的節次時老師仍可先產生。
-        unconfirmed: mine.filter((s) => !s.confirmedAt).map((s) => s.period).sort((a, b) => a - b),
+        unconfirmed: mine.filter((s) => !s.confirmedAt).map((s) => sessionDateTime(dated(s))),
         ready: mine.every((s) => s.confirmedAt),
         expect: { periods: fresh.map((s) => s.period) },
       });
     }
     return {
+      labels: new Map(all.map((s) => [s.id, dated(s)])),
       cfg,
       student,
       digest,
       noMentor,
-      unconfirmedToday: list.filter((s) => s.date === date && !s.confirmedAt).map(publicSession),
+      unconfirmedToday: today
+        .filter((s) => !s.confirmedAt && (classId || s.classIds.some((id) => !isTestClass(id))))
+        .map(publicSession),
     };
   };
   const markStudent = async (courseId: string, p: any, draftId: string, expect: any) => {
@@ -396,7 +479,7 @@ export function createAttendanceHandlers(
       const [rSnap, sSnap] = [await tx.get(rRef), await tx.get(sRef)];
       const r = rSnap.data() as AttendanceRecord | undefined;
       const s = sSnap.data() as AttendanceSession | undefined;
-      if (!r || !s || s.kind !== 'roll' || !s.confirmedAt) return 'stale' as const;
+      if (!r || !activeRoll(s) || !s.confirmedAt) return 'stale' as const;
       const n = r.notifySeq || 0;
       // 同一封重按（或兩個分頁同時按）：已經標過，回原結果，不再加序號。
       if (n === expect.notifySeq + 1 && r.status === expect.status && r.lastNotified === r.status)
@@ -448,14 +531,13 @@ export function createAttendanceHandlers(
       typeof expect !== 'object' ||
       !Array.isArray(expect.periods) ||
       !expect.periods.length ||
-      expect.periods.length > 20 ||
-      expect.periods.some((x: unknown) => !Number.isInteger(x) || (x as number) < 1 || (x as number) > 20)
+      expect.periods.some((x: unknown) => !Number.isSafeInteger(x) || (x as number) < 1)
     )
       bad('通知內容無效');
     const want = [...new Set(expect.periods as number[])].sort((a, b) => a - b);
     const eligible = (await sessions(courseId).where('date', '==', date).get()).docs
       .map((x) => x.data() as AttendanceSession)
-      .filter((s) => s.kind === 'roll' && s.status === 'closed' && s.confirmedAt && s.classIds.includes(classId));
+      .filter((s) => activeRoll(s) && s.confirmedAt && s.classIds.includes(classId));
     if (want.some((x) => !eligible.some((s) => s.period === x))) return 'stale' as const;
     const ref = mails(courseId).doc(draftId);
     return db.runTransaction(async (tx) => {
@@ -465,9 +547,15 @@ export function createAttendanceHandlers(
       // 確認狀態在同一交易內重讀；與取消確認並行時不可使用交易外的舊快照。
       for (const period of want) {
         const s = eligible.find((s) => s.period === period)!;
-        const cur = (await tx.get(sessionRef(courseId, s.id))).data() as AttendanceSession | undefined;
-        if (!cur || cur.kind !== 'roll' || cur.status !== 'closed' || !cur.confirmedAt ||
-            cur.date !== date || cur.period !== period || !cur.classIds.includes(classId))
+        const cur = (await tx.get(sessionRef(courseId, s.id))).data() as
+          AttendanceSession | undefined;
+        if (
+          !activeRoll(cur) ||
+          !cur.confirmedAt ||
+          cur.date !== date ||
+          cur.period !== period ||
+          !cur.classIds.includes(classId)
+        )
           return 'stale' as const;
       }
       const covered: number[] = old?.periods || [];
@@ -495,60 +583,63 @@ export function createAttendanceHandlers(
   };
 
   return {
+    attendancePurgeDeleted: onSchedule(
+      { ...options, schedule: 'every day 03:30', timeZone: 'Asia/Taipei' },
+      async () => {
+        const expired = await db
+          .collectionGroup('attendance')
+          .where('deletedAt', '<=', now() - ATTENDANCE_RESTORE_MS)
+          .limit(100)
+          .get();
+        for (const doc of expired.docs) {
+          const match = /^courses\/([^/]+)\/attendance\/([^/]+)$/.exec(doc.ref.path);
+          const s = doc.data() as AttendanceSession;
+          if (
+            !match ||
+            s.kind !== 'roll' ||
+            s.status !== 'closed' ||
+            !s.deletedAt ||
+            s.id !== match[2]
+          )
+            continue;
+          // Restoration is already forbidden at this age. Remove the secret before the
+          // parent so a failed run can still discover the tombstone and retry.
+          await secretRef(match[1], match[2]).delete();
+          const nested = await doc.ref.listCollections();
+          for (const collection of nested) await db.recursiveDelete(collection);
+          await doc.ref.delete();
+        }
+      },
+    ),
     /* ═════════ 教師：開始／控制／投影 ═════════ */
     attendanceStart: onCall(options, async (req) => {
       const { p, c } = await teacher(req);
       const courseId = req.data.courseId;
       let v: ReturnType<typeof validateStartInput>;
       try {
-        v = validateStartInput(req.data, c.classIds || [], taipeiDate(now()));
+        v = validateStartInput(req.data, c.classIds || []);
       } catch (e) {
         return bad((e as Error).message);
       }
       if (await current(courseId, c))
         throw new HttpsError('failed-precondition', '已有進行中的點名，請先結束');
-      const t = now();
-      const id = v.trial ? `trial-${t}` : sessionId(v.date, v.period, v.classIds);
-      if (!v.trial) {
-        const same = (await sessions(courseId).where('date', '==', v.date).get()).docs.map(
-          (d) => d.data() as AttendanceSession,
-        );
-        if (
-          same.some(
-            (s) =>
-              s.kind === 'roll' &&
-              s.period === v.period &&
-              s.id !== id &&
-              s.classIds.some((x) => v.classIds.includes(x)),
-          )
-        )
-          throw new HttpsError(
-            'failed-precondition',
-            '這一節已經有包含同一班的點名紀錄，請到後台直接修改',
-          );
-      }
       const expected = v.trial ? 0 : (await roster(courseId, c, v.classIds)).length;
       const secret = random(32).toString('base64url');
       const session = await db.runTransaction(async (tx) => {
-        const [st, oldSnap] = [
-          await tx.get(stateRef(courseId)),
-          await tx.get(sessionRef(courseId, id)),
-        ];
-        if (st.data()?.openSessionId)
+        if ((await tx.get(stateRef(courseId))).data()?.openSessionId)
           throw new HttpsError('failed-precondition', '已有進行中的點名，請先結束');
-        const old = oldSnap.data() as AttendanceSession | undefined;
-        if (old?.confirmedAt)
-          throw new HttpsError(
-            'failed-precondition',
-            '這一節已經確認，不能重新點名；請到後台直接修改',
-          );
-        // 同一節重新開始：沿用原節次，已簽到的保留，未到的可以再簽。
+        const t = now();
+        const date = taipeiDate(t);
+        const allocation = v.trial ? null : await nextPeriod(tx, courseId, date, v.classIds[0]);
+        const period = allocation?.period || 0;
+        const id = v.trial
+          ? `trial-${t}-${random(6).toString('hex')}`
+          : newSessionId(date, t, v.classIds[0], period);
         const s: AttendanceSession = {
-          ...(old || {}),
           id,
           kind: v.trial ? 'trial' : 'roll',
-          date: v.date,
-          period: v.period,
+          date,
+          period,
           classIds: v.classIds,
           status: 'open',
           startedAt: t,
@@ -559,7 +650,7 @@ export function createAttendanceHandlers(
           expected,
           settled: false,
         };
-        delete (s as any).closedAt;
+        if (allocation) tx.set(allocation.counter, { period });
         tx.set(sessionRef(courseId, id), { ...s, createdBy: p.uid });
         tx.set(secretRef(courseId, id), { secret, createdAt: t });
         tx.set(stateRef(courseId), { openSessionId: id });
@@ -602,7 +693,10 @@ export function createAttendanceHandlers(
         throw new HttpsError('failed-precondition', '只能再開放今天已結束的點名節次');
       const secret = random(32).toString('base64url');
       const session = await db.runTransaction(async (tx) => {
-        const [st, snap] = [await tx.get(stateRef(courseId)), await tx.get(sessionRef(courseId, s0.id))];
+        const [st, snap] = [
+          await tx.get(stateRef(courseId)),
+          await tx.get(sessionRef(courseId, s0.id)),
+        ];
         if (st.data()?.openSessionId)
           throw new HttpsError('failed-precondition', '已有進行中的點名，請先結束');
         const cur = snap.data() as AttendanceSession | undefined;
@@ -612,7 +706,7 @@ export function createAttendanceHandlers(
         const next: AttendanceSession = {
           ...cur!,
           status: 'open',
-          startedAt: t,
+          startedAt: startTime(cur!),
           endsAt: t + durationSec * 1000,
           durationSec,
           settled: false,
@@ -657,10 +751,20 @@ export function createAttendanceHandlers(
         now: t,
         remainingMs: Math.max(0, s.endsAt - t),
         signed,
-        code: attendanceCode(secret, courseId, s.id, stepIndex(t, s.startedAt, s.codeSec)),
-        codeRemainingMs: stepRemainingMs(t, s.startedAt, s.codeSec),
-        token: attendanceToken(secret, courseId, s.id, stepIndex(t, s.startedAt, s.qrSec)),
-        qrRemainingMs: stepRemainingMs(t, s.startedAt, s.qrSec),
+        code: attendanceCode(
+          secret,
+          courseId,
+          s.id,
+          stepIndex(t, s.reopenedAt || s.startedAt, s.codeSec),
+        ),
+        codeRemainingMs: stepRemainingMs(t, s.reopenedAt || s.startedAt, s.codeSec),
+        token: attendanceToken(
+          secret,
+          courseId,
+          s.id,
+          stepIndex(t, s.reopenedAt || s.startedAt, s.qrSec),
+        ),
+        qrRemainingMs: stepRemainingMs(t, s.reopenedAt || s.startedAt, s.qrSec),
       };
     }),
 
@@ -680,16 +784,18 @@ export function createAttendanceHandlers(
       let sid: string;
       let via: 'qr' | 'code';
       let fresh = true;
+      let qrSecret: string | undefined;
       if (hasToken) {
         const tok = parseAttendanceToken(d.token);
         if (!tok) return refuse('expired', 'QR 已過期，請再掃一次');
         const secret = (await secretRef(courseId, tok.sessionId).get()).data()?.secret;
-        if (!secret || !tokenMatches(secret, courseId, tok))
+        if (typeof secret !== 'string' || !tokenMatches(secret, courseId, tok))
           return refuse('expired', 'QR 已過期，請再掃一次');
+        qrSecret = secret;
         const s0 = (await sessionRef(courseId, tok.sessionId).get()).data() as
           AttendanceSession | undefined;
         if (!s0) return refuse('expired', 'QR 已過期，請再掃一次');
-        fresh = acceptedSteps(t, s0.startedAt, s0.qrSec).includes(tok.step);
+        fresh = acceptedSteps(t, s0.reopenedAt || s0.startedAt, s0.qrSec).includes(tok.step);
         sid = tok.sessionId;
         via = 'qr';
       } else {
@@ -699,15 +805,20 @@ export function createAttendanceHandlers(
         via = 'code';
       }
       const s = (await sessionRef(courseId, sid).get()).data() as AttendanceSession | undefined;
-      if (!s) return refuse('closed', '目前沒有進行中的點名');
+      if (!s || s.deletedAt) return refuse('closed', '目前沒有進行中的點名');
       if (!s.classIds.includes(p.classId))
         return refuse('not-in-class', '這一節點名的名單裡沒有你');
-      const label = { date: s.date, period: s.period };
+      const label = { date: s.date, period: s.period, startedAt: startTime(s) };
       if (s.kind === 'roll') {
         const mine = (await records(courseId, sid).doc(email).get()).data() as
           AttendanceRecord | undefined;
         if (mine?.status === 'present')
-          return { result: 'duplicate', signedAt: mine.signedAt || 0, ...label };
+          return {
+            result: 'duplicate',
+            signedAt: mine.signedAt || 0,
+            reopened: mine.reopened === true,
+            ...label,
+          };
       }
       if (!sessionAcceptsCheckIn(s, t)) return refuse('closed', '點名已經結束');
       if (via === 'qr' && !fresh) return refuse('expired', 'QR 已過期，請再掃一次');
@@ -736,17 +847,26 @@ export function createAttendanceHandlers(
       return db.runTransaction(async (tx) => {
         const cur = (await tx.get(sessionRef(courseId, sid))).data() as
           AttendanceSession | undefined;
+        if (qrSecret && (await tx.get(secretRef(courseId, sid))).data()?.secret !== qrSecret)
+          return refuse('expired', 'QR 已過期，請再掃一次');
         if (s.kind === 'trial') {
           const mine = await tx.get(trials(courseId, sid).doc(email));
           if (!sessionAcceptsCheckIn(cur, now())) return refuse('closed', '點名已經結束');
           if (!mine.exists) tx.set(trials(courseId, sid).doc(email), { email, at: t });
           return { result: 'trial', signedAt: t, ...label };
         }
+        if (cur?.reopenedAt !== s.reopenedAt)
+          return refuse('expired', '點名已再開放，請使用新的簽到碼');
         const ref = records(courseId, sid).doc(email);
         const old = (await tx.get(ref)).data() as AttendanceRecord | undefined;
         if (!sessionAcceptsCheckIn(cur, now())) return refuse('closed', '點名已經結束');
         if (old?.status === 'present')
-          return { result: 'duplicate', signedAt: old.signedAt || 0, ...label };
+          return {
+            result: 'duplicate',
+            signedAt: old.signedAt || 0,
+            reopened: old.reopened === true,
+            ...label,
+          };
         const record: AttendanceRecord = {
           ...(old || {}),
           email,
@@ -761,7 +881,7 @@ export function createAttendanceHandlers(
           ...(cur?.reopenedAt ? { reopened: true } : {}),
         };
         tx.set(ref, record);
-        return { result: 'ok', signedAt: t, ...label };
+        return { result: 'ok', signedAt: t, reopened: record.reopened === true, ...label };
       });
     }),
     /** 學生首頁橫幅：我的班級現在有沒有在點名。 */
@@ -780,9 +900,17 @@ export function createAttendanceHandlers(
           : undefined;
       const wrongCount = (await attempts(courseId, s.id).doc(email).get()).data()?.wrongCount || 0;
       return {
-        session: { id: s.id, kind: s.kind, date: s.date, period: s.period, endsAt: s.endsAt },
+        session: {
+          id: s.id,
+          kind: s.kind,
+          date: s.date,
+          period: s.period,
+          startedAt: startTime(s),
+          endsAt: s.endsAt,
+        },
         now: now(),
         signedAt: mine?.status === 'present' ? mine.signedAt || 0 : 0,
+        reopened: mine?.status === 'present' && mine.reopened === true,
         locked: wrongCount >= ATTENDANCE_MAX_WRONG,
       };
     }),
@@ -792,37 +920,154 @@ export function createAttendanceHandlers(
       input(req.data, []);
       const courseId = req.data.courseId;
       const email = String(p.email || '').toLowerCase();
-      if (p.teacher || !validEmailKey(email)) return { rows: [] };
-      const list = (await sessions(courseId).get()).docs
-        .map((d) => d.data() as AttendanceSession)
-        .filter(
-          (s) => s.kind === 'roll' && s.status === 'closed' && s.classIds.includes(p.classId),
-        );
       const rows = [];
-      for (const s of list) {
-        const r = (await records(courseId, s.id).doc(email).get()).data() as
-          AttendanceRecord | undefined;
-        if (r)
+      if (!p.teacher && validEmailKey(email)) {
+        const list = (await readRolls(courseId)).filter(
+          (s) => activeRoll(s) && s.classIds.includes(p.classId),
+        );
+        for (const s of list) {
+          const r = (await records(courseId, s.id).doc(email).get()).data() as
+            AttendanceRecord | undefined;
+          if (!r || r.classId !== p.classId) continue;
           rows.push({
+            id: s.id,
             date: s.date,
             period: s.period,
+            startedAt: startTime(s),
             status: r.status,
-            signedAt: r.status === 'present' && r.via !== 'teacher' ? r.signedAt || 0 : 0,
+            signedAt: r.status === 'present' ? r.signedAt || 0 : 0,
+            reopened: r.status === 'present' && r.reopened === true && !!r.signedAt,
+            edited: r.edited === true,
           });
+        }
       }
-      rows.sort((a, b) => b.date.localeCompare(a.date) || b.period - a.period);
-      return { rows };
+      return { rows, counts: { ...countStatuses(rows), total: rows.length } };
     }),
 
     /* ═════════ 教師後台 ═════════ */
-    attendanceSessions: onCall(options, async (req) => {
+    attendanceClassCards: onCall(options, async (req) => {
       const { c } = await teacher(req);
       input(req.data, []);
       const courseId = req.data.courseId;
-      const open = await current(courseId, c);
+      const t = now();
+      const today = taipeiDate(t);
+      const sid = (await stateRef(courseId).get()).data()?.openSessionId;
+      const open = sid
+        ? ((await sessionRef(courseId, sid).get()).data() as AttendanceSession | undefined)
+        : undefined;
+      const live = open && sessionAcceptsCheckIn(open, t) ? open : null;
+      const members = await roster(courseId, c, c.classIds || []);
+      const list = (await readRolls(courseId)).filter((s) => !s.deletedAt && s.status === 'closed');
+      const cards = await Promise.all(
+        ((c.classIds as string[]) || []).map(async (classId) => {
+          const mine = list.filter((s) => s.classIds.includes(classId));
+          let pending = 0,
+            present = 0,
+            absent = 0;
+          for (const s of mine) {
+            const needRows = !!s.confirmedAt || s.classIds.length > 1;
+            const rows = needRows ? scopedRecords(await allRecords(courseId, s.id), classId) : [];
+            const counts = needRows ? countStatuses(rows) : s.counts;
+            present += counts?.present || 0;
+            absent += counts?.absent || 0;
+            if (s.confirmedAt) pending += rows.filter((r) => pendingStudentMail(r)).length;
+          }
+          const todayRows = mine.filter((s) => s.date === today);
+          const cfg = todayRows.some((s) => s.confirmedAt)
+            ? (await configRef(courseId).get()).data()
+            : null;
+          if (cfg?.mentors?.[classId]?.email) {
+            const covered: number[] =
+              (await mails(courseId).doc(digestDocId(today, classId)).get()).data()?.periods || [];
+            if (
+              !live ||
+              live.kind !== 'roll' ||
+              live.date !== today ||
+              !live.classIds.includes(classId)
+            ) {
+              if (
+                todayRows.every((s) => s.confirmedAt) &&
+                todayRows.some((s) => !covered.includes(s.period))
+              )
+                pending++;
+            }
+          }
+          return {
+            classId,
+            test: isTestClass(classId),
+            members: members.filter((m) => m.classId === classId).length,
+            todayCount: todayRows.length,
+            live: !!live && live.kind === 'roll' && live.classIds.includes(classId),
+            pendingConfirm: mine.filter((s) => !s.confirmedAt).length,
+            pending,
+            rate: present + absent ? present / (present + absent) : null,
+          };
+        }),
+      );
       return {
-        sessions: (await rollSessions(courseId, c)).map(publicSession),
-        open: open ? publicSession(open) : null,
+        classes: cards.sort((a, b) => Number(a.test) - Number(b.test)),
+        open: live ? publicSession(live) : null,
+        expired: !!open && sessionExpired(open, t),
+        now: t,
+      };
+    }),
+    attendanceSessions: onCall(options, async (req) => {
+      const { c } = await teacher(req);
+      const d = input(req.data, ['classId']);
+      const courseId = req.data.courseId;
+      const classId = classScope(d.classId, c);
+      const open = await current(courseId, c);
+      const t = now();
+      const list = (await rollSessions(courseId, c, !!classId)).filter((s) => inScope(s, classId));
+      const digestCache = new Map<string, Promise<number[]>>();
+      const covered = (s: AttendanceSession, id: string) => {
+        const key = digestDocId(s.date, id);
+        if (!digestCache.has(key))
+          digestCache.set(
+            key,
+            mails(courseId)
+              .doc(key)
+              .get()
+              .then((snap) => snap.data()?.periods || []),
+          );
+        return digestCache.get(key)!;
+      };
+      const row = async (s: AttendanceSession) => {
+        if (s.status !== 'closed') return { ...publicSession(s), notified: false };
+        const oldCombined = !!classId && s.classIds.length > 1;
+        const all = oldCombined ? await allRecords(courseId, s.id) : undefined;
+        const mine = all ? scopedRecords(all, classId) : undefined;
+        const sentToStudent = all
+          ? all.some((r) => !!r.lastNotified)
+          : !(
+              await records(courseId, s.id)
+                .where('lastNotified', 'in', ['present', 'absent'])
+                .limit(1)
+                .get()
+            ).empty;
+        return {
+          ...publicSession(s),
+          ...(mine
+            ? {
+                counts: countStatuses(mine),
+                expected: mine.length,
+                deleteCounts: s.counts || countStatuses(all!),
+              }
+            : {}),
+          notified:
+            sentToStudent ||
+            (await Promise.all(s.classIds.map((id) => covered(s, id)))).some((periods) =>
+              periods.includes(s.period),
+            ),
+        };
+      };
+      return {
+        sessions: await Promise.all(list.filter((s) => !s.deletedAt).map(row)),
+        deleted: list
+          .filter((s) => s.deletedAt && t - s.deletedAt < ATTENDANCE_RESTORE_MS)
+          .sort((a, b) => b.deletedAt! - a.deletedAt!)
+          .map(publicSession),
+        open: open && inScope(open, classId) ? publicSession(open) : null,
       };
     }),
     attendanceRoster: onCall(options, async (req) => {
@@ -831,6 +1076,14 @@ export function createAttendanceHandlers(
       const courseId = req.data.courseId;
       const s = await closedSession(courseId, c, d.sessionId);
       const rows = await allRecords(courseId, s.id);
+      const digestSent = (
+        await Promise.all(
+          s.classIds.map(
+            async (id) =>
+              (await mails(courseId).doc(digestDocId(s.date, id)).get()).data()?.periods || [],
+          ),
+        )
+      ).some((periods: number[]) => periods.includes(s.period));
       const locked = new Set(
         (await attempts(courseId, s.id).get()).docs
           .map((x) => x.data())
@@ -840,7 +1093,10 @@ export function createAttendanceHandlers(
       const same = sameDeviceGroups(rows);
       const nameOf = new Map(rows.map((r) => [r.email, r.name]));
       return {
-        session: publicSession(s),
+        session: {
+          ...publicSession(s),
+          notified: digestSent || rows.some((r) => !!r.lastNotified),
+        },
         rows: rows
           .sort(
             (a, b) => a.classId.localeCompare(b.classId) || a.studentId.localeCompare(b.studentId),
@@ -888,7 +1144,9 @@ export function createAttendanceHandlers(
           const [rSnap, sSnap] = [await tx.get(ref), await tx.get(sessionRef(courseId, s.id))];
           const r = rSnap.data() as AttendanceRecord | undefined;
           const cur = sSnap.data() as AttendanceSession;
-          if (!r || r.status === status || cur.status !== 'closed') return false;
+          if (!activeRoll(cur))
+            throw new HttpsError('failed-precondition', '點名狀態已變，請重新整理');
+          if (!r || r.status === status) return false;
           const t = now();
           const counts = { ...(cur.counts || { present: 0, absent: 0 }) };
           counts[r.status] = Math.max(0, counts[r.status] - 1);
@@ -915,80 +1173,143 @@ export function createAttendanceHandlers(
       }
       return { changed };
     }),
-    /** 補建漏開的節次：全班預設未到，再逐一改。 */
+    /** 補建漏開的點名：全班預設未到，再逐一改。 */
     attendanceBackfill: onCall(options, async (req) => {
       const { p, c } = await teacher(req);
-      const d = input(req.data, ['classIds', 'period', 'date']);
+      const d = input(req.data, ['classIds', 'date', 'time']);
       const courseId = req.data.courseId;
-      let v: ReturnType<typeof validateStartInput>;
+      let classIds: [string];
       try {
-        if (!validAttendanceDate(d.date)) throw new Error('日期無效');
-        v = validateStartInput(
-          { classIds: d.classIds, period: d.period, date: d.date },
-          c.classIds || [],
-          taipeiDate(now()),
-        );
+        classIds = validateAttendanceClass(d.classIds, c.classIds || []);
       } catch (e) {
         return bad((e as Error).message);
       }
-      if (v.date > taipeiDate(now())) bad('不能補建未來的節次');
-      const id = sessionId(v.date, v.period, v.classIds);
-      const same = (await sessions(courseId).where('date', '==', v.date).get()).docs.map(
-        (x) => x.data() as AttendanceSession,
-      );
+      const date = d.date;
+      const time = d.time;
       if (
-        same.some(
-          (s) =>
-            s.kind === 'roll' &&
-            s.period === v.period &&
-            s.classIds.some((x) => v.classIds.includes(x)),
-        )
+        !validAttendanceDate(date) ||
+        typeof time !== 'string' ||
+        !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)
       )
-        throw new HttpsError('already-exists', '這一節已經有點名紀錄');
-      const t = now();
-      const s: AttendanceSession = {
-        id,
-        kind: 'roll',
-        date: v.date,
-        period: v.period,
-        classIds: v.classIds,
-        status: 'closed',
-        startedAt: t,
-        endsAt: t,
-        closedAt: t,
-        durationSec: 0,
-        codeSec: 60,
-        qrSec: 15,
-        backfilled: true,
-        settled: false,
-      };
-      await db.runTransaction(async (tx) => {
-        if ((await tx.get(sessionRef(courseId, id))).exists)
-          throw new HttpsError('already-exists', '這一節已經有點名紀錄');
-        tx.set(sessionRef(courseId, id), { ...s, createdBy: p.uid });
+        return bad('請輸入有效的日期與時間');
+      const startedAt = Date.parse(`${date}T${time}:00+08:00`);
+      if (startedAt > now()) bad('不能補建未來的點名');
+      const s = await db.runTransaction(async (tx) => {
+        const { counter, day, period } = await nextPeriod(tx, courseId, date, classIds[0]);
+        if (day.some((s) => startTime(s) && taipeiTime(s.startedAt) === time))
+          throw new HttpsError('already-exists', '這個時間已經有點名紀錄');
+        const id = newSessionId(date, startedAt, classIds[0], period);
+        const session: AttendanceSession = {
+          id,
+          kind: 'roll',
+          date,
+          period,
+          classIds,
+          status: 'closed',
+          startedAt,
+          endsAt: startedAt,
+          closedAt: startedAt,
+          durationSec: 0,
+          codeSec: 60,
+          qrSec: 15,
+          backfilled: true,
+          settled: false,
+        };
+        tx.set(counter, { period });
+        tx.set(sessionRef(courseId, id), { ...session, createdBy: p.uid });
+        return session;
       });
       await materialize(courseId, c, s);
       return {
-        session: publicSession((await sessionRef(courseId, id).get()).data() as AttendanceSession),
+        session: publicSession(
+          (await sessionRef(courseId, s.id).get()).data() as AttendanceSession,
+        ),
       };
+    }),
+    attendanceDeleteSession: onCall(options, async (req) => {
+      const { p, c } = await teacher(req);
+      const d = input(req.data, ['sessionId', 'reason']);
+      const courseId = req.data.courseId;
+      if (d.reason !== undefined && (typeof d.reason !== 'string' || d.reason.length > 200))
+        bad('原因最多 200 字');
+      const reason = String(d.reason || '').trim();
+      await current(courseId, c);
+      const ref = sessionRef(courseId, d.sessionId);
+      return db.runTransaction(async (tx) => {
+        const s = (await tx.get(ref)).data() as AttendanceSession | undefined;
+        if (!s || s.kind !== 'roll') throw new HttpsError('not-found', '找不到這筆點名');
+        if (s.status !== 'closed')
+          throw new HttpsError('failed-precondition', '點名還在進行中，請先結束');
+        if (s.deletedAt) return { session: publicSession(s) };
+        const t = now();
+        const next = { ...s, deletedAt: t, deletedBy: p.uid, deletedReason: reason };
+        tx.set(ref, next);
+        tx.set(audit(courseId).doc(`${t}-${random(6).toString('hex')}`), {
+          at: t,
+          action: 'delete',
+          sessionId: s.id,
+          date: s.date,
+          period: s.period,
+          reason,
+          by: p.uid,
+          byName: String(p.name || p.email || ''),
+        });
+        return { session: publicSession(next) };
+      });
+    }),
+    attendanceRestoreSession: onCall(options, async (req) => {
+      const { p } = await teacher(req);
+      const d = input(req.data, ['sessionId']);
+      const courseId = req.data.courseId;
+      const ref = sessionRef(courseId, d.sessionId);
+      return db.runTransaction(async (tx) => {
+        const s = (await tx.get(ref)).data() as AttendanceSession | undefined;
+        if (!s || s.kind !== 'roll') throw new HttpsError('not-found', '找不到這筆點名');
+        const t = now();
+        if (!s.deletedAt) return { session: publicSession(s) };
+        if (t - s.deletedAt >= ATTENDANCE_RESTORE_MS)
+          throw new HttpsError('failed-precondition', '已超過 30 天，無法復原');
+        const { deletedAt, deletedBy, deletedReason, ...rest } = s;
+        tx.set(ref, rest);
+        tx.set(audit(courseId).doc(`${t}-${random(6).toString('hex')}`), {
+          at: t,
+          action: 'restore',
+          sessionId: s.id,
+          date: s.date,
+          period: s.period,
+          by: p.uid,
+          byName: String(p.name || p.email || ''),
+        });
+        return { session: publicSession(rest) };
+      });
     }),
     attendanceSummary: onCall(options, async (req) => {
       const { c } = await teacher(req);
       const d = input(req.data, ['classId']);
       const courseId = req.data.courseId;
-      if (d.classId !== undefined && !(c.classIds || []).includes(d.classId)) bad('班級不屬於課程');
+      const classId = classScope(d.classId, c);
       const list = (await rollSessions(courseId, c)).filter(
-        (s) => s.status === 'closed' && (!d.classId || s.classIds.includes(d.classId as string)),
+        (s) => s.status === 'closed' && inScope(s, classId),
       );
       const data = [];
       for (const s of list)
         data.push({
-          session: s,
-          records: (await allRecords(courseId, s.id)).filter(
-            (r) => !d.classId || r.classId === d.classId,
-          ),
+          session: dated(s),
+          records: scopedRecords(await allRecords(courseId, s.id), classId),
         });
-      const out = attendanceSummary(data);
+      const out = attendanceSummary(
+        data.filter(({ session }) => classId || session.classIds.some((id) => !isTestClass(id))),
+      );
+      if (classId) {
+        const seen = new Set(out.rows.map((r) => r.email));
+        for (const m of await roster(courseId, c, [classId])) {
+          if (!seen.has(m.email))
+            out.rows.push({ ...m, present: 0, absent: 0, cells: out.sessions.map(() => null) });
+        }
+        out.rows.sort(
+          (a, b) => a.studentId.localeCompare(b.studentId) || a.email.localeCompare(b.email),
+        );
+      }
       return {
         sessions: out.sessions.map(publicSession),
         rows: out.rows.map((r) => ({
@@ -998,37 +1319,67 @@ export function createAttendanceHandlers(
           classId: r.classId,
           present: r.present,
           absent: r.absent,
-          cells: r.cells.map((x) => (x ? { status: x.status, edited: x.edited === true } : null)),
+          cells: r.cells.map((x) =>
+            x
+              ? {
+                  status: x.status,
+                  edited: x.edited === true,
+                  makeupAt: x.status === 'present' && x.reopened ? x.signedAt || 0 : 0,
+                }
+              : null,
+          ),
         })),
       };
     }),
     attendanceAuditLog: onCall(options, async (req) => {
       await teacher(req);
-      input(req.data, []);
-      const rows = (await audit(req.data.courseId).orderBy('at', 'desc').limit(300).get()).docs.map(
-        (x) => x.data(),
-      );
+      const d = input(req.data, ['sessionId']);
+      const courseId = req.data.courseId;
+      const query =
+        d.sessionId === undefined
+          ? audit(courseId).orderBy('at', 'desc').limit(300)
+          : audit(courseId).where('sessionId', '==', sessionRef(courseId, d.sessionId).id);
+      const rows = (await query.get()).docs
+        .map((x) => x.data())
+        .sort((a, b) => b.at - a.at)
+        .slice(0, 300);
       return { rows };
     }),
     /** 匯出 CSV。課程封存後仍可匯出（教師權限不看封存）。 */
     attendanceExport: onCall(options, async (req) => {
       const { c } = await teacher(req);
-      const d = input(req.data, ['kind', 'sessionId']);
+      const d = input(req.data, ['kind', 'sessionId', 'classId']);
       const courseId = req.data.courseId;
+      const classId = classScope(d.classId, c);
       if (d.kind === 'session') {
         const s = await closedSession(courseId, c, d.sessionId);
+        if (!inScope(s, classId)) throw new HttpsError('not-found', '找不到這筆點名');
         return {
-          filename: `點名_${courseId}_${s.date}_第${s.period}節.csv`,
-          csv: attendanceSessionCsv(s, await allRecords(courseId, s.id)),
+          filename: `點名_${courseId}_${sessionDateTime(dated(s)).replace(':', '-')}.csv`,
+          csv: attendanceSessionCsv(
+            dated(s),
+            classId
+              ? scopedRecords(await allRecords(courseId, s.id), classId)
+              : await allRecords(courseId, s.id),
+          ),
         };
       }
       if (d.kind !== 'detail' && d.kind !== 'summary') bad('匯出種類無效');
-      const list = (await rollSessions(courseId, c)).filter((s) => s.status === 'closed');
+      const list = (await rollSessions(courseId, c)).filter(
+        (s) =>
+          s.status === 'closed' &&
+          inScope(s, classId) &&
+          (classId || s.classIds.some((id) => !isTestClass(id))),
+      );
       const data = [];
-      for (const s of list) data.push({ session: s, records: await allRecords(courseId, s.id) });
+      for (const s of list)
+        data.push({
+          session: dated(s),
+          records: scopedRecords(await allRecords(courseId, s.id), classId),
+        });
       return d.kind === 'detail'
         ? {
-            filename: `點名明細_${courseId}.csv`,
+            filename: `點名明細_${courseId}${classId ? `_${classId}` : ''}.csv`,
             csv: attendanceDetailCsv(courseInfo(courseId, c), data, now()),
           }
         : { filename: `點名總表_${courseId}.csv`, csv: attendanceSummaryCsv(data) };
@@ -1096,17 +1447,30 @@ export function createAttendanceHandlers(
     }),
     /** 該節〔確認〕：確認後這一節的未到通知才會列入待寄。 */
     attendanceConfirm: onCall(options, async (req) => {
-      const { c } = await teacher(req);
+      const { p, c } = await teacher(req);
       const d = input(req.data, ['sessionId', 'confirmed']);
       const courseId = req.data.courseId;
       if (typeof d.confirmed !== 'boolean') bad('確認設定無效');
       const s = await closedSession(courseId, c, d.sessionId);
       await db.runTransaction(async (tx) => {
         const cur = (await tx.get(sessionRef(courseId, s.id))).data() as AttendanceSession;
+        if (!activeRoll(cur))
+          throw new HttpsError('failed-precondition', '點名狀態已變，請重新整理');
+        if (!!cur.confirmedAt === d.confirmed) return;
+        const t = now();
         const next = { ...cur };
-        if (d.confirmed) next.confirmedAt = cur.confirmedAt || now();
+        if (d.confirmed) next.confirmedAt = t;
         else delete next.confirmedAt;
         tx.set(sessionRef(courseId, s.id), next);
+        tx.set(audit(courseId).doc(`${t}-${random(6).toString('hex')}`), {
+          at: t,
+          action: d.confirmed ? 'confirm' : 'unconfirm',
+          sessionId: s.id,
+          date: s.date,
+          period: s.period,
+          by: p.uid,
+          byName: String(p.name || p.email || ''),
+        });
       });
       return {
         session: publicSession(
@@ -1117,19 +1481,22 @@ export function createAttendanceHandlers(
     /** 待通知的信件內容（收件人、主旨、內文）與通知紀錄。內文當場產生，不寫進資料庫。 */
     attendanceNotifyDrafts: onCall(options, async (req) => {
       const { p, c } = await teacher(req);
-      const d = input(req.data, ['date']);
+      const d = input(req.data, ['date', 'classId']);
       const courseId = req.data.courseId;
+      const classId = classScope(d.classId, c);
       if (d.date !== undefined && !validAttendanceDate(d.date)) bad('日期無效');
       const date = (d.date as string | undefined) || taipeiDate(now());
-      const st = await notifyState(courseId, c, p, date);
+      const st = await notifyState(courseId, c, p, date, classId);
       const t = now();
       const log: Record<string, unknown>[] = [];
-      for (const m of (await mails(courseId).orderBy('updatedAt', 'desc').limit(100).get()).docs.map(
-        (x) => x.data() as any,
-      )) {
+      const history = (await mails(courseId).orderBy('updatedAt', 'desc').limit(100).get()).docs;
+      for (const m of history.map((x) => x.data() as any)) {
         if (m.kind === 'digest') {
+          if (classId ? m.classId !== classId : isTestClass(m.classId)) continue;
           const marks: any[] = m.marks || [];
-          const last = marks.map((k, i) => (k.undoneAt ? -1 : i)).reduce((a, b) => Math.max(a, b), -1);
+          const last = marks
+            .map((k, i) => (k.undoneAt ? -1 : i))
+            .reduce((a, b) => Math.max(a, b), -1);
           // 新的在前（同一時間標記時也維持順序）
           [...marks.entries()].reverse().forEach(([i, k]) =>
             log.push({
@@ -1141,6 +1508,12 @@ export function createAttendanceHandlers(
               classId: m.classId,
               date: m.date,
               periods: k.periods,
+              labels: k.periods.map((period: number) => {
+                const s = [...st.labels.values()].find(
+                  (s) => s.date === m.date && s.period === period && s.classIds.includes(m.classId),
+                );
+                return sessionDateTime(s || { date: m.date, period });
+              }),
               status: k.undoneAt ? 'undone' : 'marked',
               markedAt: k.at,
               byName: k.byName || '',
@@ -1149,6 +1522,10 @@ export function createAttendanceHandlers(
           );
         } else {
           const r = (await records(courseId, m.sessionId).doc(m.to).get()).data();
+          const label = st.labels.get(m.sessionId);
+          const recipientClass =
+            m.classId || r?.classId || (label?.classIds.length === 1 ? label.classIds[0] : '');
+          if (classId ? recipientClass !== classId : isTestClass(recipientClass)) continue;
           log.push({
             id: m.id,
             key: m.id,
@@ -1158,10 +1535,18 @@ export function createAttendanceHandlers(
             sessionId: m.sessionId,
             date: m.date,
             period: m.period,
+            labels: [
+              sessionDateTime(label || { date: m.date, period: m.period, startedAt: m.startedAt }),
+            ],
             status: m.status,
             markedAt: m.markedAt,
             byName: m.byName || '',
-            canUndo: m.status === 'marked' && r?.notifySeq === m.seq && t - m.markedAt <= DAY_MS,
+            canUndo:
+              !!label &&
+              !label.deletedAt &&
+              m.status === 'marked' &&
+              r?.notifySeq === m.seq &&
+              t - m.markedAt <= DAY_MS,
           });
         }
       }
@@ -1210,7 +1595,7 @@ export function createAttendanceHandlers(
         ? (d.logId as string).match(/^(.*)#(\d+)$/)
         : null;
       if ((d.logId as string).startsWith('digest__') && !digestLog) bad('紀錄編號無效');
-      const ref = mails(courseId).doc(digestLog ? digestLog[1] : d.logId as string);
+      const ref = mails(courseId).doc(digestLog ? digestLog[1] : (d.logId as string));
       const head = (await ref.get()).data() as any;
       if (!head) throw new HttpsError('not-found', '找不到這筆通知紀錄');
       if (head.kind === 'digest') {
@@ -1219,7 +1604,10 @@ export function createAttendanceHandlers(
           const marks: any[] = (m?.marks || []).map((k: any) => ({ ...k }));
           const i = marks.map((k, j) => (k.undoneAt ? -1 : j)).reduce((a, b) => Math.max(a, b), -1);
           if (i < 0 || !digestLog || Number(digestLog[2]) !== i)
-            throw new HttpsError('failed-precondition', '這筆不是最新的通知紀錄或已撤銷，請重新整理');
+            throw new HttpsError(
+              'failed-precondition',
+              '這筆不是最新的通知紀錄或已撤銷，請重新整理',
+            );
           const t = now();
           if (t - marks[i].at > DAY_MS)
             throw new HttpsError('failed-precondition', '超過 24 小時，不能撤銷');
@@ -1237,10 +1625,15 @@ export function createAttendanceHandlers(
       }
       const rRef = records(courseId, sessionRef(courseId, head.sessionId).id).doc(head.to);
       await db.runTransaction(async (tx) => {
-        const [mSnap, rSnap] = [await tx.get(ref), await tx.get(rRef)];
+        const [mSnap, rSnap, sSnap] = [
+          await tx.get(ref),
+          await tx.get(rRef),
+          await tx.get(sessionRef(courseId, head.sessionId)),
+        ];
         const m = mSnap.data() as any;
         const r = rSnap.data() as AttendanceRecord | undefined;
-        if (!m || m.status !== 'marked') throw new HttpsError('failed-precondition', '這筆不能撤銷');
+        if (!m || m.status !== 'marked' || sSnap.data()?.deletedAt)
+          throw new HttpsError('failed-precondition', '這筆不能撤銷');
         const t = now();
         if (t - m.markedAt > DAY_MS)
           throw new HttpsError('failed-precondition', '超過 24 小時，不能撤銷');

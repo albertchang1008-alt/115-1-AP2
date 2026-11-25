@@ -286,6 +286,13 @@
     { "collectionGroup": "private", "fieldPath": "items", "indexes": [] },
     { "collectionGroup": "private", "fieldPath": "explanations", "indexes": [] },
     { "collectionGroup": "sessions", "fieldPath": "order", "indexes": [] },
+    {
+      "collectionGroup": "attendance",
+      "fieldPath": "deletedAt",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION_GROUP" }
+      ]
+    },
     { "collectionGroup": "sessions", "fieldPath": "answers", "indexes": [] },
     {
       "collectionGroup": "attempts",

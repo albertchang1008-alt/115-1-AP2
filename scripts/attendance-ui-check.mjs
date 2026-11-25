@@ -43,6 +43,7 @@ const TOKEN = '#/attend?c=115-1-AP2&t=2026-11-16-p03-aaaa.3.AAAAAAAAAAAAAAAAAAAA
 // [畫面, 網址 hash, 畫面上必須出現的文字, 開啟後的操作]
 const student = [
   ['attend-ok', TOKEN, '已簽到 09:10'],
+  ['attend-makeup', TOKEN, '已補點（09:42）'],
   ['attend-duplicate', TOKEN, '你已經簽到過了'],
   ['attend-trial', TOKEN, '試簽成功'],
   ['attend-expired', TOKEN, 'QR 已過期'],
@@ -61,17 +62,23 @@ const student = [
   ['my', '', '對紀錄有疑問，請直接洽老師。'],
 ];
 const teacher = [
-  ['admin-start', '開始點名'],
-  ['admin-live', '4 7 2 9'],
-  ['admin-sessions', '同裝置提醒'],
-  ['admin-summary', '修改紀錄（學生看不到）'],
-  ['admin-notify', '已寄，標記已通知'],
+  ['classes', '點名班級'],
+  ['records', '已點紀錄'],
+  ['detail', '同裝置提醒'],
+  ['summary', '學生總表'],
+  ['notify', '本筆全部標記已通知'],
 ];
+const openClass = (page) => page.getByRole('button', { name: /^示範甲班/ }).first().click();
+const openSummary = (page) => page.getByRole('button', { name: /^學生總表/ }).click();
+const openNotify = (page) => page.getByRole('button', { name: /^通知（/ }).click();
 const failures = [];
 const errors = [];
 const checked = [];
 const functionalChecks = [];
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}).catch((error) => {
+  server.close();
+  throw error;
+});
 try {
   const open = async (screen, hash, scale, width, height, userAgent) => {
     const context = await browser.newContext({
@@ -106,6 +113,13 @@ try {
         await page.getByText(text, { exact: false }).first().waitFor({ timeout: 5000 });
         for (const f of await page.evaluate(measureReadability, scale))
           failures.push(`${screen}@${label}: ${f}`);
+        if (screen === 'my') {
+          assert.deepEqual(await page.locator('.att-mine-stats b').allTextContents(), ['3', '2', '1']);
+          assert.equal(await page.getByText('11/16（一）09:20', { exact: true }).count(), 1);
+          assert.equal(await page.getByText('11/16（一）09:10', { exact: true }).count(), 1);
+          await page.getByText('準時（補點 11/16 09:42）').waitFor();
+          await page.getByText('老師已更正', { exact: true }).waitFor();
+        }
         if (out && screen === 'my')
           await page.screenshot({ path: path.join(out, `ui-${screen}-390-${label}.png`), fullPage: true });
       } catch (e) {
@@ -114,20 +128,83 @@ try {
       checked.push(`${screen}@${label}`);
       await context.close();
     }
-  for (const [screen, text] of teacher) {
-    const { page, context } = await open(screen, '', 1, 1440, 900);
+  for (const width of [390, 1280]) for (const [screen, text] of teacher) {
+    const { page, context } = await open('admin-flow', '', 1, width, width === 390 ? 844 : 800);
     try {
-      await page.getByText(text, { exact: false }).first().waitFor({ timeout: 5000 });
-
+      if (screen !== 'classes') await openClass(page);
+      if (screen === 'detail') await page.locator('button.att-record-link').filter({ hasText: '2026-11-16 09:10' }).click();
+      if (screen === 'summary') await openSummary(page);
+      if (screen === 'notify') await openNotify(page);
+      await page.getByText(text, { exact: false }).first().waitFor();
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '頁面不水平溢出');
+      if (out) await page.screenshot({ path: path.join(out, `ui-teacher-${screen}-${width}.png`), fullPage: false });
     } catch (e) {
-      failures.push(`${screen}: ${String(e.message).split('\n')[0]}`);
+      failures.push(`${screen}@${width}: ${String(e.message).split('\n')[0]}`);
     }
-    checked.push(screen);
+    checked.push(`${screen}@${width}`);
+    await context.close();
+  }
+
+  {
+    const { page, context } = await open('admin-flow', '', 1, 1280, 800);
+    try {
+      assert.match(await page.locator('.att-class-card').last().textContent(), /測試班/);
+      await openClass(page);
+      await page.getByRole('button', { name: '新增點名', exact: true }).click();
+      assert.equal(await page.getByLabel('開放幾分鐘').inputValue(), '1');
+      assert.equal(await page.getByLabel('數字碼更換（秒）').isVisible(), false);
+      await page.getByText('進階', { exact: true }).click();
+      assert.equal(await page.getByLabel('數字碼更換（秒）').inputValue(), '60');
+      assert.equal(await page.getByLabel('QR 更換（秒）').inputValue(), '15');
+      await page.getByLabel('開放幾分鐘').fill('2');
+      await page.getByRole('button', { name: '開始點名', exact: true }).click();
+      await page.getByRole('region', { name: '投影畫面' }).waitFor();
+      const start = await page.evaluate(() => window.attendanceFixture.requests.find(r => r.name === 'attendanceStart').data);
+      assert.deepEqual(start, { courseId: '115-1-AP2', classIds: ['demo-a'], durationSec: 120, codeSec: 60, qrSec: 15, trial: false });
+      await page.getByRole('button', { name: '提前結束' }).click();
+      await page.getByRole('heading', { name: '本筆修改紀錄' }).waitFor();
+      await page.getByRole('checkbox', { name: '選取 示範學生 01' }).check();
+      await page.getByLabel('批次修改原因（選填）').fill('合成批次更正');
+      await page.getByRole('button', { name: '改為準時', exact: true }).click();
+      await page.waitForFunction(() => window.attendanceFixture.requests.some(r => r.name === 'attendanceSetStatus'));
+      const edit = await page.evaluate(() => window.attendanceFixture.requests.find(r => r.name === 'attendanceSetStatus').data);
+      assert.deepEqual([edit.reason, edit.status], ['合成批次更正', 'present']);
+      await page.getByRole('button', { name: '← 班級紀錄' }).click();
+      await page.getByRole('button', { name: '新增點名', exact: true }).click();
+      assert.equal(await page.getByLabel('開放幾分鐘').inputValue(), '2');
+      await page.getByRole('button', { name: '取消', exact: true }).click();
+      await openSummary(page);
+      await page.getByText('補 09:10', { exact: true }).waitFor();
+      const downloadPending = page.waitForEvent('download');
+      await page.getByRole('button', { name: '匯出 Excel' }).click();
+      const workbook = await downloadPending;
+      const bytes = fs.readFileSync(await workbook.path());
+      assert.match(workbook.suggestedFilename(), /\.xlsx$/);
+      assert.equal(bytes.subarray(0, 4).toString('hex'), '504b0304');
+      for (const label of ['學生統計', '每次點名', '補點時間', '2026-11-16 10:15', '0990001']) assert(bytes.includes(label), label);
+      await page.getByRole('button', { name: '2026-11-16 09:10', exact: true }).click();
+      await page.getByRole('heading', { name: '本筆修改紀錄' }).waitFor();
+      await page.getByRole('button', { name: '刪除這筆點名', exact: true }).click();
+      const confirm = page.getByRole('dialog');
+      await confirm.getByText('已寄出的學生或導師通知無法撤回。').waitFor();
+      await confirm.getByRole('button', { name: '取消', exact: true }).click();
+      await page.getByRole('button', { name: '← 班級紀錄' }).click();
+      await page.getByRole('button', { name: '2026-11-16 09:10 的操作' }).click();
+      await page.getByRole('button', { name: '刪除這筆點名', exact: true }).click();
+      await confirm.getByLabel('刪除原因（選填）').fill('合成刪除原因');
+      await confirm.getByRole('button', { name: '確定刪除' }).click();
+      await page.getByText('已刪除（1）').click();
+      await page.getByRole('button', { name: '復原' }).click();
+      await page.getByText('已刪除（0）').waitFor();
+      await page.getByRole('button', { name: /^2026-11-16 09:10/ }).first().waitFor();
+      functionalChecks.push('class-first: start, default duration, end→detail, bulk reason, XLSX, matrix navigation, delete, restore');
+    } catch (e) { failures.push(`class-first: ${e.message.split('\n')[0]}`); }
     await context.close();
   }
   {
     const { page, context } = await open('admin-live', '', 1, 1440, 900);
     try {
+      await page.getByRole('button', { name: '回到投影' }).click();
       const projection = page.getByRole('region', { name: '投影畫面' });
       await projection.waitFor();
       const snapshot = async () => ({
@@ -176,7 +253,9 @@ try {
     page.on('pageerror', e => errors.push(`copy-${mode}: ${e.message}`));
     await page.route('**/*', r => r.request().url().startsWith(base) ? r.continue() : r.abort());
     try {
-      await page.goto(`${base}?screen=admin-notify`);
+      await page.goto(`${base}?screen=admin-flow`);
+      await openClass(page);
+      await openNotify(page);
       const card = page.locator('.att-draft').first();
       await card.getByRole('button', { name: '複製收件人', exact: true }).waitFor();
       for (const label of ['收件人', '主旨', '內文']) {
@@ -254,7 +333,8 @@ try {
       }
       await page.setViewportSize({ width: 1440, height: 900 });
       await nav.click();
-      await page.getByRole('heading', { name: '開始點名', exact: true }).waitFor();
+      await page.getByRole('heading', { name: '點名班級', exact: true }).waitFor();
+      await openClass(page);
       await page.getByRole('button', { name: '試簽（不算點名）', exact: true }).waitFor();
       await page.locator('nav').getByRole('button', { name: '課程與教材', exact: true }).click();
       await attendance.waitFor();
@@ -279,7 +359,7 @@ try {
 const result = {
   pass: !failures.length && !errors.length,
   studentScreens: student.length * 2,
-  teacherScreens: teacher.length,
+  teacherScreens: teacher.length * 2,
   checked: checked.length,
   functionalChecks,
   failures,

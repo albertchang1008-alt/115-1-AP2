@@ -22,15 +22,20 @@ function memoryDb() {
     },
     delete: async () => void docs.delete(path),
     collection: (name) => collection(path + '/' + name),
+    listCollections: async () => [...new Set([...docs.keys()]
+      .filter((k) => k.startsWith(path + '/'))
+      .map((k) => k.slice(path.length + 1).split('/')[0]))].map((name) => collection(path + '/' + name)),
   });
   const ops = {
     '==': (a, b) => a === b,
+    in: (a, b) => b.includes(a),
     '>': (a, b) => a > b,
     '<=': (a, b) => a <= b,
     '>=': (a, b) => a >= b,
     '<': (a, b) => a < b,
   };
-  const collection = (path, filters = [], order = null, max = Infinity) => ({
+  const collection = (path, filters = [], order = null, max = Infinity, group = false) => ({
+    collectionPath: path,
     doc: (id) => ref(path + '/' + id),
     where: (field, op, value) =>
       collection(
@@ -38,15 +43,16 @@ function memoryDb() {
         [...filters, (row) => row?.[field] !== undefined && ops[op](row[field], value)],
         order,
         max,
+        group,
       ),
-    orderBy: (field, dir = 'asc') => collection(path, filters, [field, dir], max),
-    limit: (n) => collection(path, filters, order, n),
+    orderBy: (field, dir = 'asc') => collection(path, filters, [field, dir], max, group),
+    limit: (n) => collection(path, filters, order, n, group),
     get: async () => {
       let rows = [...docs.keys()]
         .filter(
           (k) =>
-            k.startsWith(path + '/') &&
-            !k.slice(path.length + 1).includes('/') &&
+            (group ? k.split('/').at(-2) === path : k.startsWith(path + '/') &&
+              !k.slice(path.length + 1).includes('/')) &&
             filters.every((f) => f(docs.get(k))),
         )
         .map(snap);
@@ -63,6 +69,10 @@ function memoryDb() {
     docs,
     doc: ref,
     collection: (path) => collection(path),
+    collectionGroup: (name) => collection(name, [], null, Infinity, true),
+    recursiveDelete: async (r) => {
+      for (const key of docs.keys()) if (key.startsWith(r.collectionPath + '/')) docs.delete(key);
+    },
     runTransaction: async (fn) => {
       let release;
       const prior = queue;
@@ -73,7 +83,7 @@ function memoryDb() {
         const out = await fn({
           get: async (r) => {
             assert.equal(writes.length, 0, '交易必須先讀後寫');
-            return snap(r.path);
+            return r.path ? snap(r.path) : r.get();
           },
           set: (r, v, opts) => writes.push(() => write(r.path, v, opts)),
           update: (r, v) => writes.push(() => write(r.path, v, { merge: true })),

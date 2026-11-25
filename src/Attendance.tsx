@@ -11,12 +11,15 @@ import {
   parseAttendHash,
   sessionLabel,
   taipeiTime,
+  taipeiDate,
   type AttendanceStatus,
 } from '../shared/attendance';
 
 type CheckIn = {
   result: 'ok' | 'duplicate' | 'trial';
   signedAt: number;
+  reopened?: boolean;
+  startedAt?: number;
   date: string;
   period: number;
 };
@@ -283,7 +286,11 @@ export function AttendPage({
           <div className="att-mark att-mark-ok" aria-hidden="true">
             ✓
           </div>
-          <h1>已簽到 {taipeiTime(r.signedAt)}</h1>
+          <h1>
+            {r.reopened
+              ? `已補點（${taipeiTime(r.signedAt)}）`
+              : `已簽到 ${taipeiTime(r.signedAt)}`}
+          </h1>
           <p className="att-where">{where}</p>
           <p>{who}</p>
           <a className="att-btn primary" href={myUrl(courseId)}>
@@ -410,10 +417,12 @@ type Current = {
     kind: 'roll' | 'trial';
     date: string;
     period: number;
+    startedAt?: number;
     endsAt: number;
   } | null;
   now?: number;
   signedAt?: number;
+  reopened?: boolean;
   locked?: boolean;
 };
 
@@ -479,7 +488,7 @@ export function AttendanceBanner({ api, course }: { api: API; course: Course }) 
         </a>
       </div>
     );
-  const label = `第 ${s.period} 節`;
+  const label = sessionLabel(s);
   return (
     <section
       className={`att-banner att-banner-${signedAt ? 'done' : locked ? 'locked' : fail ? 'wrong' : 'input'}`}
@@ -490,7 +499,9 @@ export function AttendanceBanner({ api, course }: { api: API; course: Course }) 
           <h2>
             {done?.result === 'trial' || s.kind === 'trial'
               ? '試簽成功（不算點名）'
-              : `已簽到 ${taipeiTime(signedAt)}`}
+              : done?.reopened || cur.reopened
+                ? `已補點（${taipeiTime(signedAt)}）`
+                : `已簽到 ${taipeiTime(signedAt)}`}
           </h2>
           <p>{sessionLabel(s)}</p>
           <a className="att-btn" href={myUrl(course.id)}>
@@ -547,18 +558,40 @@ export function AttendanceBanner({ api, course }: { api: API; course: Course }) 
   );
 }
 
-type MineRow = { date: string; period: number; status: AttendanceStatus; signedAt: number };
+function makeupLabel(signedAt: number) {
+  const [, month, day] = taipeiDate(signedAt).split('-');
+  return `補點 ${Number(month)}/${Number(day)} ${taipeiTime(signedAt)}`;
+}
+
+type MineRow = {
+  id: string;
+  date: string;
+  period: number;
+  startedAt: number;
+  status: AttendanceStatus;
+  signedAt: number;
+  reopened: boolean;
+  edited: boolean;
+};
+type Mine = { rows: MineRow[]; counts: { total: number; present: number; absent: number } };
 /** 我的出缺席：只看得到自己的。 */
 export function MyAttendancePage({ api, course }: { api: API; course: Course }) {
-  const [rows, setRows] = useState<MineRow[] | null>(null);
+  const [mine, setMine] = useState<Mine | null>(null);
   const [error, setError] = useState('');
   useEffect(() => {
+    let alive = true;
     api
-      .call<{ rows: MineRow[] }>('attendanceMine', { courseId: course.id })
-      .then((r) => setRows(r.rows))
-      .catch((e) => setError((e as Error).message));
-  }, [course.id]);
-  const n = (st: AttendanceStatus) => (rows || []).filter((r) => r.status === st).length;
+      .call<Mine>('attendanceMine', { courseId: course.id })
+      .then((result) => {
+        if (alive) setMine(result);
+      })
+      .catch((e: Error) => {
+        if (alive) setError(e.message);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [api, course.id]);
   return (
     <main className="att-my">
       <header className="att-brand" data-secondary>
@@ -573,29 +606,38 @@ export function MyAttendancePage({ api, course }: { api: API; course: Course }) 
         <p className="att-error" role="alert">
           {error}
         </p>
-      ) : !rows ? (
+      ) : !mine ? (
         <p>讀取中…</p>
       ) : (
         <>
-          <div className="att-stats">
+          <div className="att-stats att-mine-stats">
             <div>
-              <b>{n('present')}</b>
+              <b>{mine.counts.total}</b>
+              <span>全部</span>
+            </div>
+            <div>
+              <b>{mine.counts.present}</b>
               <span>準時</span>
             </div>
             <div>
-              <b>{n('absent')}</b>
+              <b>{mine.counts.absent}</b>
               <span>未到</span>
             </div>
           </div>
-          {rows.length ? (
-            <ul className="att-list">
-              {rows.map((r) => (
-                <li key={r.date + r.period}>
-                  <span>{sessionLabel(r)}</span>
+          {mine.rows.length ? (
+            <ul className="att-list att-mine-list">
+              {mine.rows.map((r) => (
+                <li key={r.id}>
+                  <strong>{sessionLabel(r)}</strong>
                   <span className={`att-pill att-${r.status}`}>
                     {attendanceStatusLabel[r.status]}
-                    {r.signedAt ? ` ${taipeiTime(r.signedAt)}` : ''}
+                    {r.signedAt
+                      ? r.reopened
+                        ? `（${makeupLabel(r.signedAt)}）`
+                        : `（簽到 ${taipeiTime(r.signedAt)}）`
+                      : ''}
                   </span>
+                  {r.edited && <span className="att-corrected">老師已更正</span>}
                 </li>
               ))}
             </ul>
@@ -603,9 +645,6 @@ export function MyAttendancePage({ api, course }: { api: API; course: Course }) 
             <p>目前還沒有點名紀錄。</p>
           )}
           <p>對紀錄有疑問，請直接洽老師。</p>
-          <p className="att-note" data-secondary>
-            老師修改紀錄後，這裡會跟著更新。點名只做紀錄，不計入成績。
-          </p>
         </>
       )}
     </main>
