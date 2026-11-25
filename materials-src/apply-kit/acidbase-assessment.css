@@ -3,3 +3,10 @@
   margin-block: 0;
   align-self: start;
 }
+
+@media (max-width: 767px) {
+  .student-screen[data-screen="node"][data-node="1"][data-action="micro"]
+    .work-slot:is([data-slot="0"], [data-slot="1"]) > span[data-copy] {
+    line-height: 1.4;
+  }
+}
