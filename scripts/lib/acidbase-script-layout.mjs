@@ -24,7 +24,7 @@ export async function checkScriptLayout(data, { file, out, html, sizes, shots = 
     input,
     html ? fs.readFileSync(html) : renderApply(data, { baseDir, view: 'course' }),
   );
-  const browser = await chromium.launch(),
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : undefined),
     results = [],
     seen = new Set(),
     textErrors = [];

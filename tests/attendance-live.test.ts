@@ -38,7 +38,7 @@ const setHidden = (page: Page, value: boolean) =>
   page.evaluate((hidden) => window.projectionTest.setHidden(hidden), value);
 
 test('點名投影以假時鐘驗證即時更新', async (t) => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : undefined);
   t.after(() => browser.close());
   const withProjection = async (check: (page: Page) => Promise<void>) => {
     const page = await browser.newPage();

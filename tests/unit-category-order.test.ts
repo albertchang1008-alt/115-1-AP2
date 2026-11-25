@@ -51,7 +51,7 @@ async function assertMoveButtonsFit(list: Locator) {
 }
 
 test('後台分類排序、首尾、欄位、發布與學生端及完成度明細', async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : undefined);
   try {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     const errors: string[] = [];
@@ -136,7 +136,7 @@ test('後台分類排序、首尾、欄位、發布與學生端及完成度明�
 });
 
 test('未顯式設定 chapters 的舊課程調整首項時保留原章節設定', async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : undefined);
   try {
     const page = await browser.newPage();
     await openEditor(page, true);

@@ -13,7 +13,7 @@
 位置：`~/Documents/ChatGPT/課程平台-私有/ubuntu-replay/`
 - `Dockerfile`：映像 `ap2-replay:node22`＝Ubuntu 24.04 amd64、NodeSource Node 22、google-chrome-stable、Noto CJK 字型、JRE 21、Firebase CLI 15.36.0、使用者 `runner`（UID 1001）。第一次 build 約 3 分鐘，之後用快取。
 - `ubuntu-replay.sh`：在 Mac 執行。`git archive` 打包指定 commit（不碰工作樹）→ build 映像 → 跑容器 → `docker cp` 取回證據。
-- `in-container.sh`：容器內以 runner 依序跑 00-env、01-extract、02-tree（核對 tree 與 commit 相同）、03 `npm ci`（前後端）、04/05 Playwright chromium（同 Actions）、06 `READABILITY_ALL=1 npm run check`、07 `readability:check`（快取命中）、08 `version:check`、09 Zuvio e2e（`CHROME_PATH=/usr/bin/google-chrome`）、10 平台小考 Firestore 模擬器（僅 demo 專案）、11 平台小考瀏覽器驗收、12 工作樹乾淨。10／11 只在提交含其腳本時執行。任一步失敗結束碼 1；tree 不符即停止。
+- `in-container.sh`：容器內以 runner 依序跑 00-env、01-extract、02-tree（核對 tree 與 commit 相同）、03 `npm ci`（前後端）、04 Playwright 系統相依、05 驗證映像內的 Google Chrome（CHROME_PATH）、06 `READABILITY_ALL=1 npm run check`、07 `readability:check`（快取命中）、08 `version:check`、09 Zuvio e2e（`CHROME_PATH=/usr/bin/google-chrome`）、10 平台小考 Firestore 模擬器（僅 demo 專案）、11 平台小考瀏覽器驗收、12 工作樹乾淨。10／11 只在提交含其腳本時執行。任一步失敗結束碼 1；tree 不符即停止。
 
 ## 使用
 ```sh
