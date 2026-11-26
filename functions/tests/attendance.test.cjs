@@ -1151,7 +1151,7 @@ test('#74 舊合班、同一時刻連開、補建並行、跨日及跨班分配�
   assert.equal((await x.start()).period, 1);
 });
 
-test('#74 刪除排除總表、個人資料、匯出與待通知；可復原且逾 30 天拒絕', async () => {
+test('#74 刪除排除總表、個人資料、匯出與待通知；可復原且逾 180 天拒絕', async () => {
   const x = setup();
   const s = await x.start();
   await assert.rejects(x.call('attendanceDeleteSession', { sessionId: s.id }), /還在進行中/);
@@ -1188,11 +1188,11 @@ test('#74 刪除排除總表、個人資料、匯出與待通知；可復原且�
   assert(audit.some(r => r.action === 'restore'));
   await x.call('attendanceDeleteSession', { sessionId: s.id });
   x.tick(A.ATTENDANCE_RESTORE_MS);
-  await assert.rejects(x.call('attendanceRestoreSession', { sessionId: s.id }), /超過 30 天/);
+  await assert.rejects(x.call('attendanceRestoreSession', { sessionId: s.id }), /超過 180 天/);
   assert.deepEqual((await x.call('attendanceSessions', input)).deleted, []);
 });
 
-test('#74 逾期清理：保留 30 天，清除該筆子集合及憑證，保留稽核', async () => {
+test('#74 逾期清理：保留 180 天，清除該筆子集合及憑證，保留稽核', async () => {
   const x = setup();
   const s = await x.start();
   await x.call('attendanceControl', { action: 'end' });
