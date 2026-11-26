@@ -1268,7 +1268,7 @@ export function createAttendanceHandlers(
         const t = now();
         if (!s.deletedAt) return { session: publicSession(s) };
         if (t - s.deletedAt >= ATTENDANCE_RESTORE_MS)
-          throw new HttpsError('failed-precondition', '已超過 30 天，無法復原');
+          throw new HttpsError('failed-precondition', '已超過 180 天，無法復原');
         const { deletedAt, deletedBy, deletedReason, ...rest } = s;
         tx.set(ref, rest);
         tx.set(audit(courseId).doc(`${t}-${random(6).toString('hex')}`), {

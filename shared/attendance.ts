@@ -9,7 +9,7 @@ export const attendanceStatusLabel: Record<AttendanceStatus, string> = {
 export const ATTENDANCE_FORMAT_VERSION = 1;
 export const ATTENDANCE_GRACE_MS = 5000; // 網路延遲寬限
 export const ATTENDANCE_MAX_WRONG = 5;
-export const ATTENDANCE_RESTORE_MS = 30 * 86400000;
+export const ATTENDANCE_RESTORE_MS = 180 * 86400000; // 教師 2026-11-26：保留 180 天
 export const attendanceLimits = {
   durationSec: { min: 30, max: 1800, default: 60 },
   codeSec: { min: 15, max: 300, default: 60 },

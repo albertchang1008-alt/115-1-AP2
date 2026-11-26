@@ -1514,7 +1514,7 @@ function DeleteDialog({
         <p>
           準時 {counts.present} 人，未到 {counts.absent} 人。
         </p>
-        <p>刪除後會從學生總表、學生的出缺席紀錄與匯出移除。30 天內可以復原。</p>
+        <p>刪除後會從學生總表、學生的出缺席紀錄與匯出移除。180 天內可以復原，之後自動永久刪除。</p>
         {session.classIds.length > 1 && <p>這是舊的合班紀錄，刪除會套用到上方所有班級。</p>}
         {session.notified && <p className="att-danger">已寄出的學生或導師通知無法撤回。</p>}
         <label>
