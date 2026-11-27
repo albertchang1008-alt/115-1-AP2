@@ -1,0 +1,285 @@
+# 課程平台部署（取代 scripts/deploy.sh）
+# 用法：Actions → Deploy platform → Run workflow
+#   「Use workflow from」保持 main，填要部署的分支，視需要勾規則／索引。
+# 流程：預檢 → npm ci／check → 等教師核可（production）→ 部署後端
+#       → 發布 Pages → 合併該分支的 PR 到 main。
+# 前提：該分支已有指向 main 的 open PR，且 PR 最新提交就是要部署的版本。
+# 後端部署期間舊前端仍在線，變更必須向下相容（同 deploy.sh）。
+name: Deploy platform
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 要部署的分支（例：feature/xxx），不可為 main
+        required: true
+        type: string
+      deploy_rules:
+        description: 同時部署 firestore.rules
+        type: boolean
+        default: false
+      deploy_indexes:
+        description: 同時部署 firestore.indexes.json（會等索引建好才部署 Functions）
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-platform
+  cancel-in-progress: false
+
+env:
+  PROJECT: ap2-7ed91
+  FIREBASE_TOOLS: firebase-tools@15.34.1
+
+jobs:
+  verify:
+    name: 1 預檢與檢查
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      sha: ${{ steps.pre.outputs.sha }}
+      pr: ${{ steps.pre.outputs.pr }}
+    steps:
+      - name: 只能從 main 執行
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::error::請在「Use workflow from」選 main 再執行（目前：$REF）。"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+
+      - name: 預檢（分支、PR、是否包含 main）
+        id: pre
+        env:
+          BRANCH: ${{ inputs.branch }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$*"; exit 1; }
+          [[ "$BRANCH" =~ ^[A-Za-z0-9._/-]+$ ]] || fail "分支名稱含不允許的字元：$BRANCH"
+          [ "$BRANCH" != main ] || fail "不可部署 main 本身，請填功能分支。"
+          SHA=$(git rev-parse HEAD)
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          git merge-base --is-ancestor origin/main "$SHA" \
+            || fail "分支 $BRANCH 尚未包含最新 main，請先整合後再部署。"
+          PRS=$(gh pr list --head "$BRANCH" --base main --state open --json number,headRefOid)
+          COUNT=$(jq length <<<"$PRS")
+          [ "$COUNT" = 1 ] || fail "分支 $BRANCH 需要剛好 1 個指向 main 的 open PR（目前 $COUNT 個）。"
+          PR=$(jq -r '.[0].number' <<<"$PRS")
+          HEAD=$(jq -r '.[0].headRefOid' <<<"$PRS")
+          [ "$HEAD" = "$SHA" ] || fail "PR #$PR 的最新提交（$HEAD）與分支（$SHA）不同，請重新整理後再執行。"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "pr=$PR" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 部署候選"
+            echo "- 分支：\`$BRANCH\`"
+            echo "- 版本：\`$SHA\`"
+            echo "- PR：#$PR"
+            echo "- 規則：${{ inputs.deploy_rules }}；索引：${{ inputs.deploy_indexes }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 安裝與完整檢查（npm ci、functions ci、npm run check）
+        env:
+          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
+          VITE_FUNCTIONS_REGION: asia-east1
+        run: |
+          set -euo pipefail
+          npm ci
+          npm --prefix functions ci
+          npm run check
+
+      - name: 確認檢查期間版本沒變
+        env:
+          SHA: ${{ steps.pre.outputs.sha }}
+        run: |
+          [ "$(git rev-parse HEAD)" = "$SHA" ] && [ -z "$(git status --porcelain)" ] \
+            || { echo "::error::檢查期間工作目錄有變動，停止。"; exit 1; }
+
+      - name: 保存前端成品（之後發布 Pages 用）
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  backend:
+    name: 2 核可後部署後端
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: production
+    outputs:
+      started: ${{ steps.mark.outputs.started }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.verify.outputs.sha }}
+          fetch-depth: 0
+
+      - name: 部署前再確認 main 沒被別人更新
+        env:
+          SHA: ${{ needs.verify.outputs.sha }}
+        run: |
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          git merge-base --is-ancestor origin/main "$SHA" \
+            || { echo "::error::遠端 main 已變動，請整合後重新執行。後端尚未更新。"; exit 1; }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 安裝 Functions 依賴
+        run: npm --prefix functions ci
+
+      - name: 寫入暫存金鑰
+        env:
+          SA_KEY: ${{ secrets.FIREBASE_SA_AP2 }}
+        run: |
+          set -euo pipefail
+          [ -n "$SA_KEY" ] || { echo "::error::找不到 FIREBASE_SA_AP2。"; exit 1; }
+          umask 077
+          printf '%s' "$SA_KEY" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: 標記後端開始更新
+        id: mark
+        run: echo "started=1" >> "$GITHUB_OUTPUT"
+
+      - name: 部署規則／索引（有勾才做）
+        if: inputs.deploy_rules || inputs.deploy_indexes
+        env:
+          RULES: ${{ inputs.deploy_rules }}
+          INDEXES: ${{ inputs.deploy_indexes }}
+        run: |
+          set -euo pipefail
+          ONLY=""
+          [ "$RULES" = true ] && ONLY="firestore:rules"
+          [ "$INDEXES" = true ] && ONLY="${ONLY:+$ONLY,}firestore:indexes"
+          npx --yes "$FIREBASE_TOOLS" deploy --only "$ONLY" --project "$PROJECT" --non-interactive
+
+      - name: 等索引建好（有勾索引才做，最多 30 分鐘）
+        if: inputs.deploy_indexes
+        run: |
+          set -euo pipefail
+          gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS" --quiet
+          for i in $(seq 1 60); do
+            BUILDING=$(gcloud firestore indexes composite list --project "$PROJECT" \
+              --format='value(state)' | grep -cv '^READY$' || true)
+            [ "$BUILDING" = 0 ] && { echo "索引全部 READY。"; exit 0; }
+            echo "仍有 $BUILDING 個索引建置中，30 秒後再查（第 $i 次）"
+            sleep 30
+          done
+          echo "::error::索引 30 分鐘內未全部建好；Functions 尚未部署。"
+          exit 1
+
+      - name: 部署 Functions
+        run: npx --yes "$FIREBASE_TOOLS" deploy --only functions --project "$PROJECT" --non-interactive
+
+      - name: 刪除暫存金鑰
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
+
+  pages:
+    name: 3 發布前端（Pages）
+    needs: [verify, backend]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  merge:
+    name: 4 合併 PR 更新 main
+    needs: [verify, backend, pages]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 合併並確認 main 內容與部署版本相同
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ needs.verify.outputs.sha }}
+          PR: ${{ needs.verify.outputs.pr }}
+        run: |
+          set -euo pipefail
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          git merge-base --is-ancestor origin/main "$SHA" \
+            || { echo "::error::遠端 main 在部署期間被更新，未合併。"; exit 1; }
+          gh pr merge "$PR" --merge --match-head-commit "$SHA" \
+            --subject "Deploy $SHA via deploy-platform (#$PR)"
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          MAIN_TREE=$(git rev-parse 'origin/main^{tree}')
+          DEPLOY_TREE=$(git rev-parse "$SHA^{tree}")
+          [ "$MAIN_TREE" = "$DEPLOY_TREE" ] \
+            || { echo "::error::合併後 main 內容與部署版本不同，請人工檢查。"; exit 1; }
+          echo "main 已更新，內容與部署版本 $SHA 相同。" >> "$GITHUB_STEP_SUMMARY"
+
+  report:
+    name: 結果摘要
+    if: always()
+    needs: [verify, backend, pages, merge]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 寫出停在哪一步、後端是否已更新
+        env:
+          V: ${{ needs.verify.result }}
+          B: ${{ needs.backend.result }}
+          STARTED: ${{ needs.backend.outputs.started }}
+          P: ${{ needs.pages.result }}
+          M: ${{ needs.merge.result }}
+          SHA: ${{ needs.verify.outputs.sha }}
+        run: |
+          {
+            echo "### 部署結果（版本 ${SHA:-未知}）"
+            if [ "$M" = success ]; then
+              echo "✅ 全部完成：後端、Pages、main 都已是這個版本。"
+            elif [ "$V" != success ]; then
+              echo "⛔ 停在：1 預檢與檢查。後端未更新，前端與 main 未變。"
+            elif [ "$B" != success ]; then
+              if [ "$STARTED" = 1 ]; then
+                echo "⚠️ 停在：2 部署後端。後端可能已全部或部分更新；Pages 與 main 未變。請查 Firebase 主控台，勿視為已回復。"
+              else
+                echo "⛔ 停在：2 部署後端之前（未核可、被拒或準備失敗）。後端未更新，前端與 main 未變。"
+              fi
+            elif [ "$P" != success ]; then
+              echo "⚠️ 停在：3 發布 Pages。後端已更新；前端仍是舊版，main 未變。可重跑失敗的工作。"
+            else
+              echo "⚠️ 停在：4 合併 PR。後端與 Pages 已是新版，但 main 尚未更新。請手動合併 PR，並確認 main 未被他人改動。"
+            fi
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+          [ "$M" = success ]
