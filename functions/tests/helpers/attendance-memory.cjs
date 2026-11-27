@@ -29,6 +29,7 @@ function memoryDb() {
   const ops = {
     '==': (a, b) => a === b,
     in: (a, b) => b.includes(a),
+    'array-contains': (a, b) => Array.isArray(a) && a.includes(b),
     '>': (a, b) => a > b,
     '<=': (a, b) => a <= b,
     '>=': (a, b) => a >= b,
@@ -47,6 +48,10 @@ function memoryDb() {
       ),
     orderBy: (field, dir = 'asc') => collection(path, filters, [field, dir], max, group),
     limit: (n) => collection(path, filters, order, n, group),
+    count: () => ({ get: async () => {
+      const result = await collection(path, filters, order, max, group).get();
+      return { data: () => ({ count: result.size }) };
+    } }),
     get: async () => {
       let rows = [...docs.keys()]
         .filter(

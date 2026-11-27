@@ -90,12 +90,12 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
       await page.clock.runFor(3999);
       assert.equal(await qr(page), firstQr);
       await page.clock.runFor(1);
-      assert.deepEqual((await mock(page)).requests, [0, 5000, 9000]);
-      assert.notEqual((await mock(page)).token, firstToken);
+      assert.deepEqual((await mock(page)).requests, [0, 5000], '換 QR 不等後端');
+      assert.equal((await mock(page)).token, firstToken);
       assert.notEqual(await qr(page), firstQr);
       assert.equal(await code(page), '4 7 2 9');
       await page.clock.runFor(3000);
-      assert.deepEqual((await mock(page)).requests, [0, 5000, 9000, 12000]);
+      assert.deepEqual((await mock(page)).requests, [0, 5000, 10000], '換數字碼不等後端');
       assert.equal(await code(page), '4 7 3 0');
     }));
 
@@ -152,9 +152,11 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
       assert.equal(await code(page), '4 7 2 9');
       assert.equal(await signed(page), '45／60');
       await page.clock.runFor(4000);
-      assert.deepEqual((await mock(page)).requests, [0, 5000, 9000]);
+      assert.deepEqual((await mock(page)).requests, [0, 5000]);
+      assert.notEqual(await qr(page), firstQr, '連線失敗仍使用已預取的 QR');
+      await page.clock.runFor(1000);
+      assert.deepEqual((await mock(page)).requests, [0, 5000, 10000]);
       assert.equal(await page.getByRole('status').count(), 0);
-      assert.notEqual(await qr(page), firstQr);
     }));
 
   await t.test('手動延長與提前結束會立即更新投影', () =>
@@ -169,7 +171,7 @@ test('點名投影以假時鐘驗證即時更新', async (t) => {
 
   await t.test('卸載立即清除計時器，後續時間及切回前景均無請求', () =>
     withProjection(async (page) => {
-      assert.deepEqual(await timers(page), ['interval', 'timeout']);
+      assert.deepEqual(await timers(page), ['timeout', 'timeout']);
       await page.evaluate(() => window.attendanceFixture.unmount());
       assert.deepEqual(await timers(page), []);
       await setHidden(page, true);

@@ -1,6 +1,7 @@
 import { featureAccess } from './features';
 import { Firestore } from 'firebase-admin/firestore';
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { randomInt, randomUUID } from 'node:crypto';
 import { Question, safeId, validateQuestions } from '../../shared/model';
@@ -129,7 +130,7 @@ export function createAssessmentHandlers(
   });
   const audit = (tx: any, ref: any, uid: string, action: string, at: number, details: any = {}) =>
     tx.set(ref.collection('audit').doc(randomUUID()), { uid, action, at, ...details });
-  const getAssessments = onCall(options, async (req) => {
+  const getAssessments = onCall('getAssessments', options, async (req) => {
     const { p } = await access(req, req.data.courseId);
     const docs = await root(req.data.courseId).get();
     const now = Date.now();
@@ -153,7 +154,7 @@ export function createAssessmentHandlers(
     }
     return { assessments: rows };
   });
-  const prepareAssessment = onCall(options, async (req) => {
+  const prepareAssessment = onCall('prepareAssessment', options, async (req) => {
     const { p, c } = await access(req, req.data.courseId, true);
     const { kind, classIds } = req.data;
     if (
@@ -221,7 +222,7 @@ export function createAssessmentHandlers(
     });
     return { id: examId };
   });
-  const controlAssessment = onCall(options, async (req) => {
+  const controlAssessment = onCall('controlAssessment', options, async (req) => {
     const { p } = await access(req, req.data.courseId, true);
     const ref = locate(req),
       action = req.data.action,
@@ -291,7 +292,7 @@ export function createAssessmentHandlers(
       return { ok: true };
     });
   });
-  const startAssessment = onCall(options, async (req) => {
+  const startAssessment = onCall('startAssessment', options, async (req) => {
     const { p } = await access(req, req.data.courseId);
     if (p.teacher) fail('教師請使用試卷預覽，不建立正式作答');
     const ref = locate(req),
@@ -330,7 +331,7 @@ export function createAssessmentHandlers(
       return dto(e, s, at);
     });
   });
-  const saveAssessment = onCall(options, async (req) => {
+  const saveAssessment = onCall('saveAssessment', options, async (req) => {
     const { p } = await access(req, req.data.courseId);
     if (p.teacher) fail('預覽不能寫入成績');
     const ref = locate(req),
@@ -362,13 +363,13 @@ export function createAssessmentHandlers(
       return dto(e, s, at);
     });
   });
-  const previewAssessment = onCall(options, async (req) => {
+  const previewAssessment = onCall('previewAssessment', options, async (req) => {
     await access(req, req.data.courseId, true);
     const e = (await locate(req).get()).data();
     if (!e) fail('測驗不存在');
     return { questions: e.questions, title: e.title };
   });
-  const assessmentReport = onCall(options, async (req) => {
+  const assessmentReport = onCall('assessmentReport', options, async (req) => {
     await access(req, req.data.courseId, true);
     const exams = await root(req.data.courseId).get();
     const sessions = [];

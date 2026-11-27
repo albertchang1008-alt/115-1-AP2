@@ -1,7 +1,8 @@
 import { patchQuestion, questionSnapshot } from '../../shared/questionManager';
 import { featureAccess } from './features';
 import { randomUUID } from 'node:crypto';
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { Firestore } from 'firebase-admin/firestore';
 import {
   AnswerKeys,
@@ -111,7 +112,7 @@ export function createClassroomHandlers(
     }).length;
   };
   return {
-    updateClassroomQuestions: onCall(options, async (req) => {
+    updateClassroomQuestions: onCall('updateClassroomQuestions', options, async (req) => {
       await authorize(req, true);
       const { courseId, slideId, expected, next } = req.data;
       return db.runTransaction(async tx => {
@@ -131,7 +132,7 @@ export function createClassroomHandlers(
         return { ok: true, snapshot: questionSnapshot(patched.interactions, patched.answerKeys, slideId) };
       });
     }),
-    getClassroomConfig: onCall(options, async (req) => {
+    getClassroomConfig: onCall('getClassroomConfig', options, async (req) => {
       await authorize(req, true);
       const [configSnap, keySnap] = await Promise.all([
         interactionsDoc(req.data.courseId).get(),
@@ -156,7 +157,7 @@ export function createClassroomHandlers(
       }
       return { interactions };
     }),
-    saveClassroomConfig: onCall(options, async (req) => {
+    saveClassroomConfig: onCall('saveClassroomConfig', options, async (req) => {
       await authorize(req, true);
       const hasInteractions = req.data.interactions !== undefined;
       const hasAnswerKeys = req.data.answerKeys !== undefined;
@@ -201,7 +202,7 @@ export function createClassroomHandlers(
         ...(answerKeys !== undefined ? { answerKeys } : {}),
       };
     }),
-    controlClassroomInteraction: onCall(options, async (req) => {
+    controlClassroomInteraction: onCall('controlClassroomInteraction', options, async (req) => {
       const { c } = await authorize(req, true);
       const { action } = req.data;
       if (!['open', 'close', 'extend', 'reveal'].includes(action))
@@ -321,7 +322,7 @@ export function createClassroomHandlers(
         return { round: decorateRoundWithKey(round, keyData)!, serverNow: now() };
       });
     }),
-    getClassroomInteraction: onCall(options, async (req) => {
+    getClassroomInteraction: onCall('getClassroomInteraction', options, async (req) => {
       const { p } = await authorize(req);
       if (p.teacher) throw new HttpsError('permission-denied', '此入口供學生使用');
       const current = (await state(req.data.courseId).get()).data();
@@ -352,7 +353,7 @@ export function createClassroomHandlers(
         ...(round.status === 'closed' ? { results: studentResultsRound(round) } : {}),
       };
     }),
-    studentClassroomHistory: onCall(options, async (req) => {
+    studentClassroomHistory: onCall('studentClassroomHistory', options, async (req) => {
       const { p } = await authorize(req);
       if (p.teacher) throw new HttpsError('permission-denied', '此入口供學生使用');
       const snap = await rounds(req.data.courseId)
@@ -389,7 +390,7 @@ export function createClassroomHandlers(
       items.sort((a, b) => a.openedAt - b.openedAt || a.id.localeCompare(b.id));
       return { rounds: items, serverNow: now() };
     }),
-    submitClassroomInteraction: onCall(options, async (req) => {
+    submitClassroomInteraction: onCall('submitClassroomInteraction', options, async (req) => {
       const { p } = await authorize(req);
       if (p.teacher) throw new HttpsError('permission-denied', '教師不建立學生作答');
       const target = ref(req.data.courseId, req.data.roundId),
@@ -423,7 +424,7 @@ export function createClassroomHandlers(
         return { submitted: true, answers };
       });
     }),
-    classroomInteractionReport: onCall(options, async (req) => {
+    classroomInteractionReport: onCall('classroomInteractionReport', options, async (req) => {
       const { c } = await authorize(req, true);
       const [currentSnap, keySnap] = await Promise.all([
         state(req.data.courseId).get(),
@@ -477,7 +478,7 @@ export function createClassroomHandlers(
       }
       return result;
     }),
-    classroomInteractionRecords: onCall(options, async (req) => {
+    classroomInteractionRecords: onCall('classroomInteractionRecords', options, async (req) => {
       await authorize(req, true);
       const target = ref(req.data.courseId, req.data.roundId);
       const list = await target.collection('responses').get();

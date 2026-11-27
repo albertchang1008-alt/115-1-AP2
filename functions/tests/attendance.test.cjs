@@ -1128,9 +1128,13 @@ test('#74 舊合班、同一時刻連開、補建並行、跨日及跨班分配�
   const before = structuredClone([...x.db.docs]);
   const cards = await x.call('attendanceClassCards');
   assert.deepEqual([...x.db.docs], before, '班級卡片唯讀');
-  assert.deepEqual(cards.classes.map(c => c.classId), ['A', 'B', 'test']);
-  assert.equal(cards.classes[0].todayCount, 5);
-  assert.equal(cards.classes[1].todayCount, 2);
+  assert.deepEqual(cards.classes, [
+    { classId: 'A', name: 'A', test: false },
+    { classId: 'B', name: 'B', test: false },
+    { classId: 'test', name: 'test', test: true },
+  ]);
+  assert.equal((await x.call('attendanceSessions', { classId: 'A' })).stats.todayCount, 5);
+  assert.equal((await x.call('attendanceSessions', { classId: 'B' })).stats.todayCount, 2);
   const own = await x.call('attendanceMine', {}, member);
   assert.deepEqual(own.counts, { total: 5, present: 0, absent: 5 });
   assert.deepEqual(own.rows.map(r => r.id), [second.id, first.id, legacy.id, other.session.id, back.session.id]);
@@ -1172,7 +1176,7 @@ test('#74 刪除排除總表、個人資料、匯出與待通知；可復原且�
   assert.deepEqual((await x.call('attendanceMine', {}, x.student(1))).counts, { total: 0, present: 0, absent: 0 });
   assert.equal((await x.call('attendanceSummary', input)).sessions.length, 0);
   assert((await x.call('attendanceSummary', input)).rows.every(r => !r.present && !r.absent));
-  assert.equal((await x.call('attendanceClassCards')).classes[0].pending, 0);
+  assert.equal((await x.call('attendanceSessions', input)).stats.pending, 0);
   assert.equal((await x.call('attendanceNotifyDrafts', input)).student.length, 0);
   assert.equal((await markDraft(x, drafts.student[0])).stale, 1);
   assert.equal((await x.call('attendanceExport', { kind: 'detail', ...input })).csv.trim().split('\r\n').length, 1);

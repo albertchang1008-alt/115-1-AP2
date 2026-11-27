@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { FieldPath, type DocumentReference, type Firestore, type Transaction } from 'firebase-admin/firestore';
-import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall, measure, studentBurstOptions } from './callable';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { logger } from 'firebase-functions';
 import { isTestClass } from '../../shared/answerIntegrity';
@@ -107,6 +108,8 @@ export function preparedQuiz(courseId: string, examId: string, title: string, co
 }
 
 export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, options: any, hooks: Hooks) {
+  const transaction: Firestore['runTransaction'] = (update, options) =>
+    measure('transactionMs', () => db.runTransaction(update, options));
   const authenticate = featureAccess(access, 'zuvioExams');
   const refFor = (courseId: string, sittingId: string) => db.doc('courses/' + courseId + '/platformQuizzes/' + sittingId);
   const examFor = (quiz: QuizControl) => db.doc('courses/' + quiz.courseId + '/zuvioExams/' + quiz.examId);
@@ -194,7 +197,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return out;
   }
 
-  const quizGet = onCall(options, async (req) => {
+  const quizGet = onCall('quizGet', { ...options, ...studentBurstOptions }, async (req) => {
     const { ref, courseId, sittingId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId);
     const quiz = readQuiz((await ref.get()).data());
@@ -207,7 +210,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return sessionView(ref, quiz, session, paper?.data() as Paper | undefined, !!mood?.exists, c.features?.zuvioMood === true, p.studentId);
   });
 
-  const quizRecentMood = onCall(options, async (req) => {
+  const quizRecentMood = onCall('quizRecentMood', options, async (req) => {
     const courseId = req.data?.courseId;
     if (typeof courseId !== 'string' || !safeCode(courseId)) reject('課程代碼格式錯誤', 'invalid-argument');
     const { p, c } = await authenticate(req, courseId);
@@ -228,7 +231,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return { sittingId: null };
   });
 
-  const quizStart = onCall(options, async (req) => {
+  const quizStart = onCall('quizStart', { ...options, ...studentBurstOptions }, async (req) => {
     const { ref, courseId, sittingId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId);
     if (!studentKey(p.studentId)) reject('名冊身分有誤', 'permission-denied');
@@ -237,7 +240,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     const paper = readPaper((await paperFor(ref).get()).data());
     const order = frozenOrder(paper);
     const roster = (await rosterFor(ref).get()).data()?.ids as string[] | undefined;
-    const { quiz, session } = await db.runTransaction(async (tx) => {
+    const { quiz, session } = await transaction(async (tx) => {
       const [control, stored] = await tx.getAll(ref, sr);
       const quiz = readQuiz(control.data());
       const current = stored.data() as Session | undefined;
@@ -258,7 +261,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return sessionView(ref, quiz, session, paper, mood, c.features?.zuvioMood === true, p.studentId);
   });
 
-  const quizSave = onCall(options, async (req) => {
+  const quizSave = onCall('quizSave', { ...options, ...studentBurstOptions }, async (req) => {
     const { ref, courseId, sittingId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId);
     if (!studentKey(p.studentId)) reject('名冊身分有誤', 'permission-denied');
@@ -267,7 +270,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     const submit = req.data.submit === true;
     const automatic = req.data.automatic === true && submit;
     const sr = sessionFor(ref, p.studentId);
-    const { quiz, session } = await db.runTransaction(async (tx) => {
+    const { quiz, session } = await transaction(async (tx) => {
       const [control, stored] = await tx.getAll(ref, sr);
       const quiz = readQuiz(control.data());
       const session = stored.data() as Session | undefined;
@@ -306,13 +309,13 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return { ...view, savedSeq: session.seq };
   });
 
-  const quizMood = onCall(options, async (req) => {
+  const quizMood = onCall('quizMood', options, async (req) => {
     const { ref, courseId, sittingId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId);
     if (!c.features?.zuvioMood || !studentKey(p.studentId)) reject('此課程未開放情緒簽到', 'permission-denied');
     const mood = req.data.mood as MoodCode;
     if (!MOOD_CODES.includes(mood)) reject('請選擇情緒狀態', 'invalid-argument');
-    const selected = await db.runTransaction(async (tx) => {
+    const selected = await transaction(async (tx) => {
       const [control, stored] = await tx.getAll(ref, sessionFor(ref, p.studentId));
       const quiz = readQuiz(control.data());
       const session = stored.data() as Session | undefined;
@@ -329,7 +332,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     return { mood: selected, feedback: MOOD_BY_CODE[selected].feedback };
   });
 
-  const quizLeave = onCall(options, async (req) => {
+  const quizLeave = onCall('quizLeave', { ...options, ...studentBurstOptions }, async (req) => {
     const { ref, courseId } = identifiers(req.data);
     const { p } = await authenticate(req, courseId);
     if (!studentKey(p.studentId)) reject('名冊身分有誤', 'permission-denied');
@@ -385,7 +388,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     const rows = finished.map(({ session }) => grade(paper, session));
     const gen = randomUUID();
     const now = Date.now();
-    const priorRevision = await db.runTransaction(async (tx) => {
+    const priorRevision = await transaction(async (tx) => {
       const [currentDoc, examDoc] = await tx.getAll(ref, exam);
       const current = readQuiz(currentDoc.data());
       if (current.state !== 'closing' || current.round !== quiz.round || current.ctl !== quiz.ctl) return null;
@@ -427,7 +430,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
   }
 
   async function closeDue(ref: DocumentReference, version: number) {
-    const quiz = await db.runTransaction(async (tx) => {
+    const quiz = await transaction(async (tx) => {
       const quiz = readQuiz((await tx.get(ref)).data());
       if (quiz.state === 'closing') return quiz;
       if (quiz.state !== 'open' || quiz.ctl !== version || quiz.finalDeadline > Date.now()) return null;
@@ -445,7 +448,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     if (outcomes.some((outcome) => outcome.status === 'rejected')) throw Error('部分小考尚未結算，下一輪會重試');
   });
 
-  const quizTeacherGet = onCall(options, async (req) => {
+  const quizTeacherGet = onCall('quizTeacherGet', options, async (req) => {
     const { courseId, ref } = identifiers(req.data);
     const { c } = await authenticate(req, courseId, true);
     const quiz = readQuiz((await ref.get()).data());
@@ -484,7 +487,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     } satisfies QuizMonitor };
   });
 
-  const quizControl = onCall(options, async (req) => {
+  const quizControl = onCall('quizControl', options, async (req) => {
     const { ref, courseId } = identifiers(req.data);
     const { p, c } = await authenticate(req, courseId, true);
     const action = req.data.action;
@@ -495,7 +498,7 @@ export function createPlatformQuizHandlers(db: Firestore, access: CallAccess, op
     if (!c.published?.classIds?.includes(before.classId)) reject('班級已不在發布名冊');
     const openingPaper = action === 'announce' && before.state === 'prepared'
       ? await preparePaper(ref, before, c) : null;
-    const next = await db.runTransaction(async (tx) => {
+    const next = await transaction(async (tx) => {
       const [stored, examDoc, courseDoc] = await tx.getAll(ref, examFor(before), db.collection('courses').doc(courseId));
       const current = readQuiz(stored.data());
       const exam = examDoc.data();

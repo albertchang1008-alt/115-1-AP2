@@ -3,6 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { AttendPage, AttendanceBanner, MyAttendancePage } from '../../src/Attendance';
 import App from '../../src/App';
+import { isTestClass } from '../../shared/answerIntegrity';
 import { ATTENDANCE_GRACE_MS, stepIndex, stepRemainingMs, taipeiDate } from '../../shared/attendance';
 import { memoryApi } from '../../src/service';
 import TeachingControl from '../../src/TeachingControl';
@@ -169,10 +170,24 @@ Object.assign(window, {
   },
 });
 if (screen === 'control-disabled') course.features.attendance = false;
+function liveResponse(now: number) {
+  const { startedAt, endsAt, qrSec, codeSec } = liveSession;
+  const qrStep = stepIndex(now, startedAt, qrSec);
+  const codeStep = stepIndex(now, startedAt, codeSec);
+  const token = (step: number) => `${liveSession.id}.${step}.AAAAAAAAAAAAAAAAAAAAAA`;
+  liveMock.token = token(qrStep);
+  return {
+    session: liveSession, now, remainingMs: Math.max(0, endsAt - now),
+    signed: 45 + Math.floor((now - openedAt) / 5000),
+    code: String(4729 + codeStep), nextCode: String(4730 + codeStep), nextCodeAt: now + stepRemainingMs(now, startedAt, codeSec),
+    token: liveMock.token, nextToken: token(qrStep + 1), nextTokenAt: now + stepRemainingMs(now, startedAt, qrSec),
+  };
+}
 const api: any = {
   preview: screen === 'control-preview',
   async call(name: string, data: any) {
     if (name.startsWith('attendance')) { attendanceCalls.push(name); requests.push({ name, data: structuredClone(data) }); }
+    if (data?.warm === true) return { ok: true };
     if (name === 'getTeachingDeck') return { title: '示範簡報', slides: [{ id: 'demo', title: '示範', html: '<section>示範簡報</section>', notes: '', answerPage: false }] };
     if (name === 'attendanceCheckIn') {
       if (data.code) {
@@ -219,21 +234,20 @@ const api: any = {
     if (name === 'attendanceClassCards') {
       return {
         classes: course.classIds.map((classId: string) => ({
-          classId, members: classId === 'demo-a' ? rows.length : 0, test: classId === 'test',
-          pendingConfirm: classId === 'demo-a' ? stored.filter(s => !s.confirmedAt).length : 0,
-          pending: classId === 'demo-a' ? 3 : 0, todayCount: 0, live: liveActive && classId === 'demo-a',
-          rate: classId === 'demo-a' ? 5 / 8 : null,
+          classId, name: course.classNames?.[classId] || classId, test: isTestClass(classId),
         })),
-        now: Date.now(), expired: false, open: liveActive && !endedByTeacher && Date.now() <= liveSession.endsAt + ATTENDANCE_GRACE_MS ? liveSession : null,
+        now: Date.now(), active: liveActive && !endedByTeacher && Date.now() <= liveSession.endsAt + ATTENDANCE_GRACE_MS
+          ? { kind: liveSession.kind, classIds: liveSession.classIds, endsAt: liveSession.endsAt } : null,
       };
     }
     if (name === 'attendanceStart') {
+      if (screen === 'admin-flow') await new Promise((resolve) => setTimeout(resolve, 400));
       liveActive = true;
       endedByTeacher = false;
       liveSession.kind = data.trial ? 'trial' : 'roll';
       liveSession.startedAt = Date.now();
       liveSession.endsAt = liveSession.startedAt + data.durationSec * 1000;
-      return { session: liveSession };
+      return { session: liveSession, live: { ...liveResponse(Date.now()), signed: 0 } };
     }
     if (name === 'attendanceReopen') {
       liveActive = true;
@@ -259,19 +273,8 @@ const api: any = {
           throw new Error('合成連線失敗');
         }
         const now = Date.now();
-        const { startedAt, endsAt, qrSec, codeSec } = liveSession;
-        if (endedByTeacher || now > endsAt + ATTENDANCE_GRACE_MS) return { session: null };
-        liveMock.token = `${liveSession.id}.${stepIndex(now, startedAt, qrSec)}.AAAAAAAAAAAAAAAAAAAAAA`;
-        return {
-          session: liveSession,
-          now,
-          remainingMs: Math.max(0, endsAt - now),
-          signed: 45 + Math.floor((now - openedAt) / 5000),
-          code: String(4729 + stepIndex(now, startedAt, codeSec)),
-          codeRemainingMs: stepRemainingMs(now, startedAt, codeSec),
-          token: liveMock.token,
-          qrRemainingMs: stepRemainingMs(now, startedAt, qrSec),
-        };
+        if (endedByTeacher || now > liveSession.endsAt + ATTENDANCE_GRACE_MS) return { session: null };
+        return liveResponse(now);
       } finally {
         liveMock.active--;
       }
@@ -279,6 +282,7 @@ const api: any = {
     if (name === 'attendanceSessions')
       return {
         sessions: data.classId !== 'demo-a' ? [] : [...stored],
+        stats: { members: rows.length, pending: 3, todayCount: 0, pendingConfirm: 1, rate: 5 / 8 },
         deleted: data.classId !== 'demo-a' ? [] : [...deleted],
         open: liveActive && !endedByTeacher ? liveSession : null,
       };

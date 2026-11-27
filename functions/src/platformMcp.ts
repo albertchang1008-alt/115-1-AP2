@@ -1,6 +1,7 @@
 import { completionRef, completionStamp } from './statsAggregation';
 import { Firestore } from 'firebase-admin/firestore';
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { createHash } from 'node:crypto';
 import { applyDraftOps, operationSummary, courseRevision, projectCourse, type DraftOp } from '../../shared/courseDraft';
 import { Course, forClass, completion, orderedChapters, chapterCompletion } from '../../shared/model';
@@ -11,7 +12,7 @@ export function createPlatformHandlers(
   checkRevision:(current:number,expected:unknown,optional?:boolean)=>void, options:any,
 ) {
   return {
-    listManagedCourses:onCall(options,async req => {
+    listManagedCourses:onCall('listManagedCourses', options,async req => {
       const p = await identity(req);
       if (!p.teacher) throw new HttpsError('permission-denied','需要教師權限');
       const list = await db.collection('courses').where('teacherIds','array-contains',p.uid).limit(501).get();
@@ -21,12 +22,12 @@ export function createPlatformHandlers(
         return {courseId:d.id,title:c.draft?.title || c.published?.title || '',term:c.draft?.term || c.published?.term || '',hasDraft:!!c.draft,hasPublished:!!c.published,revision:courseRevision(c)};
       })};
     }),
-    getCourseDraft:onCall(options,async req => {
+    getCourseDraft:onCall('getCourseDraft', options,async req => {
       const {c} = await access(req,req.data.courseId,true);
       if (!c.draft) throw new HttpsError('not-found','草稿不存在');
       return {course:projectCourse({...c.draft,features:c.features || c.draft.features || {}}),revision:courseRevision(c)};
     }),
-    getCompletionSummary:onCall(options,async req => {
+    getCompletionSummary:onCall('getCompletionSummary', options,async req => {
       const {c} = await access(req,req.data.courseId,true);
       const classId = req.data.classId;
       if (!c.published || typeof classId !== 'string' || !c.published.classIds.includes(classId)) throw new HttpsError('failed-precondition','班級不存在或課程未發布');
@@ -56,7 +57,7 @@ export function createPlatformHandlers(
       }
       return {students:roster.size,enabledStudents:enabled.length,completedStudents,completedRequiredChapters,requiredChapterOpportunities,chapters};
     }),
-    patchCourseDraft:onCall(options,async req => {
+    patchCourseDraft:onCall('patchCourseDraft', options,async req => {
       const p = await identity(req);
       if (!p.teacher) throw new HttpsError('permission-denied','需要教師權限');
       const {courseId,expectedRevision,ops,requestId} = req.data || {};

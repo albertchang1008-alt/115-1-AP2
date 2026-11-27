@@ -38,6 +38,9 @@ const lifecycle = [];
 async function goto(page, screen, scale) {
   await page.goto(host + '/?screen=' + screen + '&scale=' + scale);
   await page.locator(student.includes(screen) ? '[data-quiz-screen]' : '[data-quiz-teacher]').waitFor();
+  if (screen === 'classes') {
+    assert.deepEqual(await page.locator('.pq-class-grid button').allTextContents(), ['合成甲班', 'test（測試班）']);
+  }
 }
 
 try {

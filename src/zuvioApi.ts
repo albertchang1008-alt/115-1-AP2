@@ -10,6 +10,10 @@ import {
 
 export interface Sitting { id: string; label: string; date: string; startsAt?: number; classIds: string[]; pendingCleanup?: boolean; platformState?: QuizState; round?: number; results?: { importedAt: number; revision: number; matched: number; counts: ZCounts; average?: number | null } }
 export interface ExamSummary { id: string; title: string; createdAt: number; count: number; score: number; archived: boolean; answerMode?: QuizAnswerMode; sittings: Sitting[] }
+export type ClassSitting = Pick<Sitting, 'id' | 'label' | 'date' | 'startsAt' | 'classIds' | 'platformState'> & {
+  results?: Pick<NonNullable<Sitting['results']>, 'matched' | 'revision' | 'average'>;
+};
+export type ClassExamSummary = Pick<ExamSummary, 'id' | 'title' | 'createdAt' | 'answerMode'> & { sittings: ClassSitting[] };
 export interface ImportPreview { previewId: string; matched: number; counts: ZCounts; blocking: string[]; details: string[]; garbled: number; replaces: boolean }
 export interface FullZuvioReport {
   report: ReturnType<typeof examReport>;
@@ -33,6 +37,7 @@ export interface ZuvioApi {
   pool(): Promise<{ entries: ZPoolEntry[]; excluded: Record<string, number>; usage: Record<string, { n: number; last: number }>; classes: string[]; unitClasses?: Record<string, string[]> }>;
   createExam(input: { examId: string; title: string; score: number; classIds: string[]; items: ZItem[]; answerMode?: QuizAnswerMode }): Promise<{ examId: string; csv: string | null }>;
   listExams(): Promise<ExamSummary[]>;
+  listClassExams(classId: string): Promise<ClassExamSummary[]>;
   getExam(examId: string): Promise<{ summary: ExamSummary; view: ZExamView; csv: string | null; classIds: string[]; masked?: number }>;
   createSitting(examId: string, s: { label: string; date: string; classIds: string[]; startsAt?: number; durationSeconds?: number }): Promise<Sitting>;
   updateSittingStart(examId: string, sittingId: string, startsAt: number): Promise<{ ok: boolean; startsAt: number }>;
@@ -113,6 +118,11 @@ export function sampleZuvioApi(pool: ZPoolEntry[]): ZuvioApi {
       return { examId, csv: examCsv(view) };
     },
     async listExams() { return [...exams.values()].map((e) => e.summary).sort((a, b) => b.createdAt - a.createdAt); },
+    async listClassExams(classId) {
+      return [...exams.values()].filter((e) => e.classIds.includes(classId) && !e.summary.archived)
+        .map(({ summary }) => ({ ...summary, sittings: summary.sittings.filter((s) => s.classIds.includes(classId)) }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+    },
     async getExam(id) { const e = get(id); return { summary: e.summary, view: e.view, csv: examCsv(e.view), classIds: e.classIds }; },
     async createSitting(id, s) {
       const e = get(id);
@@ -274,6 +284,7 @@ export function cloudZuvioApi(api: { call<T = any>(name: string, data?: any): Pr
     pool: () => api.call('zuvioPool', { courseId }),
     createExam: (input) => api.call('zuvioCreateExam', { courseId, ...input }),
     listExams: () => api.call('zuvioListExams', { courseId }),
+    listClassExams: (classId) => api.call('zuvioListExams', { courseId, classId }),
     getExam: (examId) => api.call('zuvioGetExam', { courseId, examId }),
     createSitting: (examId, s) => api.call('zuvioCreateSitting', { courseId, examId, ...s }),
     updateSittingStart: (examId, sittingId, startsAt) => api.call('zuvioUpdateSittingStart', { courseId, examId, sittingId, startsAt }),

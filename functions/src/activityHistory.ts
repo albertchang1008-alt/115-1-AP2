@@ -1,5 +1,6 @@
 // 完成度看板「細目」與一次性補登（2026-11-07）。都只限教師呼叫，不回傳任何作答內容。
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import type { Firestore } from 'firebase-admin/firestore';
 import { chaptersOf, chapterActivityKey, type Course } from '../../shared/model';
 import { combinedHistory, estimateSessions, mergeEstimatedSessions, BACKFILL_FROM, type ActivityBackfill, type ActivitySession } from '../../shared/activityHistory';
@@ -24,7 +25,7 @@ export function backfillVersions(course: Course | undefined) {
 export function createActivityHistoryHandlers(db: Firestore, access: (req: any, id: string, teacher?: boolean) => Promise<any>, options: any) {
   return {
     /** 一位學生在一個題目分類的逐次作答：只回時間、分數、模式、是否完整。 */
-    getStudentUnitAttempts: onCall(options, async (req) => {
+    getStudentUnitAttempts: onCall('getStudentUnitAttempts', options, async (req) => {
       const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), unitId = key(req.data?.unitId, '分類');
       await access(req, courseId, true);
       const snap = await db.collection(`courses/${courseId}/attempts`).where('uid', '==', uid).where('unitId', '==', unitId).limit(200).get();
@@ -36,7 +37,7 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
     }),
 
     /** 一位學生一份互動教材的逐次開啟：只讀 1（舊格式時最多 2）份 diagnostics。 */
-    getActivitySessions: onCall(options, async (req) => {
+    getActivitySessions: onCall('getActivitySessions', options, async (req) => {
       const courseId = token(req.data?.courseId, '課程'), uid = token(req.data?.uid, '學生'), activityId = key(req.data?.activityId, '活動');
       const name = chapterText(req.data?.chapterName);
       const { c } = await access(req, courseId, true);
@@ -60,7 +61,7 @@ export function createActivityHistoryHandlers(db: Firestore, access: (req: any, 
     }),
 
     /** 一次性補登：Antigravity 互動教材 11/04 起、沒有 sessionId 的舊事件，以 30 分鐘間隔切成推估的「次」。 */
-    backfillActivityHistory: onCall({ ...options, timeoutSeconds: 540, memory: '1GiB' }, async (req) => {
+    backfillActivityHistory: onCall('backfillActivityHistory', { ...options, timeoutSeconds: 540, memory: '1GiB' }, async (req) => {
       const courseId = token(req.data?.courseId, '課程'), dryRun = req.data?.dryRun !== false, force = req.data?.force === true;
       const { c } = await access(req, courseId, true);
       const versions = backfillVersions(c.published);

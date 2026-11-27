@@ -436,27 +436,44 @@ export function AttendanceBanner({ api, course }: { api: API; course: Course }) 
   const [busy, setBusy] = useState(false);
   const [fail, setFail] = useState<Failure | null>(null);
   const [done, setDone] = useState<CheckIn | null>(null);
-  const refresh = async () => {
-    try {
-      const r = await api.call<Current>('attendanceCurrent', { courseId: course.id });
-      setCur(r);
-      if (r.now) setOffset(r.now - Date.now());
-    } catch {
-      /* 暫時離線時維持原畫面 */
-    }
-  };
   useEffect(() => {
     if (!enabled) return;
-    void refresh();
-    // 沿用課堂互動的輪詢間隔（15 秒），不另外加快；回到這個分頁時也查一次。
-    const timer = setInterval(() => void refresh(), 15000);
-    const focus = () => void refresh();
-    window.addEventListener('focus', focus);
-    return () => {
-      clearInterval(timer);
-      window.removeEventListener('focus', focus);
+    let version = 0;
+    let pending = false;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const refresh = async () => {
+      if (document.hidden || pending) return;
+      const requestVersion = version;
+      pending = true;
+      try {
+        const r = await api.call<Current>('attendanceCurrent', { courseId: course.id });
+        if (requestVersion !== version) return;
+        setCur(r);
+        if (r.now) setOffset(r.now - Date.now());
+      } catch {
+        /* 暫時離線時維持原畫面 */
+      } finally {
+        if (requestVersion === version) pending = false;
+      }
     };
-  }, [enabled, course.id]);
+    const stop = () => {
+      clearInterval(timer);
+      version++;
+      pending = false;
+    };
+    const visible = () => {
+      stop();
+      if (document.hidden) return;
+      void refresh();
+      timer = setInterval(() => void refresh(), 15000);
+    };
+    visible();
+    document.addEventListener('visibilitychange', visible);
+    return () => {
+      stop();
+      document.removeEventListener('visibilitychange', visible);
+    };
+  }, [api, enabled, course.id]);
   const s = cur.session;
   useEffect(() => {
     if (!s) return;

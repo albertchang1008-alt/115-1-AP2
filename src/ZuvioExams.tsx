@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { allocate, drawItems, optionOrderFor, parseZuvioMatrix, type ZPoolEntry, type ZExamView, type ZItem } from '../shared/zuvio';
 import { fakeZuvioExport } from '../shared/zuvioSample';
 import { readXlsxFirstSheetMatrix } from './pptImportFiles';
-import { cloudZuvioApi, sampleZuvioApi, type ZuvioApi, type ExamSummary, type ImportPreview, type Sitting, type FullZuvioReport } from './zuvioApi';
+import { cloudZuvioApi, sampleZuvioApi, type ZuvioApi, type ExamSummary, type ClassExamSummary, type ImportPreview, type Sitting, type FullZuvioReport } from './zuvioApi';
 import { MOOD_STATES, type CareListEntry } from '../shared/zuvioExt';
 import { PlatformQuizTeacher, QuizClassDirectory, type ListedQuiz, type QuizClass } from './PlatformQuizTeacher';
 import type { QuizAnswerMode } from '../shared/platformQuiz';
 import type { API } from './service';
+import { warmCallables } from './warmCallables';
 import { SAMPLE_POOL } from '../shared/zuvioSamplePool';
 
 type Tab = 'classes' | 'make' | 'exams' | 'report';
@@ -35,19 +36,41 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
 }) {
   const [tab, setTab] = useState<Tab>(platform ? 'classes' : 'make');
   const [openExam, setOpenExam] = useState<string>('');
-  const [classes, setClasses] = useState<QuizClass[]>([]);
-  const [exams, setExams] = useState<ExamSummary[]>([]);
+  const [classes, setClasses] = useState<QuizClass[]>();
+  const [exams, setExams] = useState<{ classId: string; list: ClassExamSummary[] }>();
   const [classId, setClassId] = useState('');
   const [row, setRow] = useState<ListedQuiz>();
   const [loadError, setLoadError] = useState('');
-  const className = classes.find((item) => item.classId === classId)?.name || classId;
-  const reloadDirectory = () => {
-    if (!platform) return;
-    Promise.all([api.listExams(), platform.api.call<QuizClass[]>('zuvioClassDirectory', { courseId: platform.courseId })])
-      .then(([list, roster]) => { setExams(list); setClasses(roster); setLoadError(''); })
-      .catch((error) => setLoadError(error.message));
+  const [revision, setRevision] = useState(0);
+  const className = classes?.find((item) => item.classId === classId)?.name || classId;
+  const list = exams?.classId === classId ? exams.list : undefined;
+  const reloadDirectory = () => setRevision((value) => value + 1);
+  const platformApi = platform?.api;
+  const courseId = platform?.courseId;
+  useEffect(() => {
+    if (tab !== 'classes' || !platformApi || !courseId || classId) return;
+    let alive = true;
+    setLoadError('');
+    platformApi.call<QuizClass[]>('zuvioClassDirectory', { courseId })
+      .then((result) => { if (alive) setClasses(result); })
+      .catch((error) => { if (alive) setLoadError(error.message); });
+    return () => { alive = false; };
+  }, [tab, platformApi, courseId, classId, revision]);
+  useEffect(() => {
+    if (tab !== 'classes' || !platformApi || !classId) return;
+    let alive = true;
+    setLoadError('');
+    api.listClassExams(classId)
+      .then((result) => { if (alive) setExams({ classId, list: result }); })
+      .catch((error) => { if (alive) setLoadError(error.message); });
+    warmCallables(platformApi, 'quiz-class', ['quizTeacherGet', 'quizControl', 'quizGet', 'quizStart', 'quizSave']);
+    return () => { alive = false; };
+  }, [tab, api, platformApi, classId, revision]);
+  const selectClass = (id: string) => {
+    setExams(undefined);
+    setLoadError('');
+    setClassId(id);
   };
-  useEffect(() => { if (tab === 'classes') reloadDirectory(); }, [tab, api, platform?.api, platform?.courseId]);
   const showTab = (next: Tab) => { setRow(undefined); setTab(next); };
   const tabs: [Tab, string][] = platform
     ? [['classes', '班級小考'], ['make', '出題'], ['exams', '考卷設定']]
@@ -62,8 +85,9 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
       </div>
       {tab === 'classes' && platform && !row && <>
         {loadError && <p className="z-warn" role="alert">{loadError} <button type="button" onClick={reloadDirectory}>重新整理</button></p>}
-        <QuizClassDirectory classes={classes} exams={exams} selected={classId}
-          select={setClassId} open={setRow} back={() => setClassId('')} />
+        {!loadError && (classId ? !list : !classes) && <p role="status">{classId ? '讀取小考…' : '讀取班級…'}</p>}
+        <QuizClassDirectory classes={classes} exams={list} selected={classId}
+          select={selectClass} open={setRow} back={() => selectClass('')} />
       </>}
       {tab === 'classes' && platform && row && (row.exam.answerMode === 'platform'
         ? <PlatformQuizTeacher key={row.sitting.id} api={platform.api} courseId={platform.courseId}
@@ -72,7 +96,7 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
         : <>
           <ExamDetail api={api} notify={notify} examId={row.exam.id} classScope={classId} sittingScope={row.sitting.id}
             className={className} back={() => { setRow(undefined); reloadDirectory(); }} onChanged={reloadDirectory} />
-          <Report key={row.sitting.id + ':' + (exams.find((exam) => exam.id === row.exam.id)?.sittings.find((sitting) => sitting.id === row.sitting.id)?.results?.revision || 0)}
+          <Report key={row.sitting.id + ':' + (list?.find((exam) => exam.id === row.exam.id)?.sittings.find((sitting) => sitting.id === row.sitting.id)?.results?.revision || 0)}
             api={api} initial={row.exam.id} classScope={classId} sittingScope={row.sitting.id} moodEnabled={moodEnabled} />
         </>)}
       {tab === 'make' && <Make api={api} notify={notify} platform={!!platform} done={(id) => { setOpenExam(id); setTab('exams'); }} />}
@@ -407,7 +431,7 @@ function ImportPanel({ api, notify, view, examId, sitting, close }: { api: Zuvio
 export function Report({ api, initial, moodEnabled = true, classScope, sittingScope }: {
   api: ZuvioApi; initial: string; moodEnabled?: boolean; classScope?: string; sittingScope?: string;
 }) {
-  const [list, setList] = useState<ExamSummary[]>([]);
+  const [list, setList] = useState<ClassExamSummary[]>([]);
   const [examId, setExamId] = useState(initial);
   const [sel, setSel] = useState<string[]>([]);
   const [cls, setCls] = useState(classScope || '');
@@ -420,12 +444,16 @@ export function Report({ api, initial, moodEnabled = true, classScope, sittingSc
   const [reportError, setReportError] = useState('');
 
   useEffect(() => {
-    api.listExams().then((l) => {
+    let alive = true;
+    const request = classScope ? api.listClassExams(classScope) : api.listExams();
+    request.then((l) => {
+      if (!alive) return;
       setList(l);
       const first = initial || l.find((e) => e.sittings.some((s) => s.results))?.id || l[0]?.id || '';
       setExamId(first);
-    });
-  }, [api]);
+    }).catch((error) => { if (alive) setReportError(error.message); });
+    return () => { alive = false; };
+  }, [api, initial, classScope]);
 
   const exam = list.find((e) => e.id === examId);
   const platform = exam?.answerMode === 'platform';

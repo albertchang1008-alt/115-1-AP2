@@ -158,8 +158,13 @@ try {
       assert.equal(await page.getByLabel('QR 更換（秒）').inputValue(), '15');
       await page.getByLabel('開放幾分鐘').fill('2');
       await page.getByRole('button', { name: '開始點名', exact: true }).click();
-      await page.getByRole('region', { name: '投影畫面' }).waitFor();
-      const start = await page.evaluate(() => window.attendanceFixture.requests.find(r => r.name === 'attendanceStart').data);
+      await page.getByRole('status').filter({ hasText: '點名建立中…' }).waitFor();
+      await page.getByRole('img', { name: '簽到 QR' }).waitFor();
+      const { start, extraLiveReads } = await page.evaluate(() => ({
+        start: window.attendanceFixture.requests.find(r => r.name === 'attendanceStart' && !r.data.warm).data,
+        extraLiveReads: window.attendanceFixture.requests.filter(r => r.name === 'attendanceLive' && !r.data.warm).length,
+      }));
+      assert.equal(extraLiveReads, 0, '第一組碼由開始點名回應直接顯示');
       assert.deepEqual(start, { courseId: '115-1-AP2', classIds: ['demo-a'], durationSec: 120, codeSec: 60, qrSec: 15, trial: false });
       await page.getByRole('button', { name: '提前結束' }).click();
       await page.getByRole('heading', { name: '本筆修改紀錄' }).waitFor();

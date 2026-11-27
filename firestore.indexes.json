@@ -1,6 +1,14 @@
 {
   "indexes": [
     {
+      "collectionGroup": "zuvioExams",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "classIds", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "platformQuizzes",
       "queryScope": "COLLECTION",
       "fields": [

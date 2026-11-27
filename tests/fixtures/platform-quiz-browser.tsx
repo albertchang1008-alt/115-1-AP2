@@ -60,7 +60,7 @@ const baseMonitor: QuizMonitor = {
   makeupIds: [], prep: 'complete', students,
 };
 const listed = {
-  exam: { id: 'exam', title: view.title, createdAt: now, count: 2, score: 4, archived: false,
+  exam: { id: 'exam', title: view.title, createdAt: now,
     answerMode: 'platform' as const, sittings: [] as import('../../src/zuvioApi').Sitting[] },
   sitting: { id: sittingId, label: '第一場', date: '2026-11-25', classIds: [classId], platformState: 'released' as const },
 };
@@ -113,6 +113,7 @@ const api: API = {
 };
 const reportApi = {
   listExams: async () => [listed.exam],
+  listClassExams: async () => [listed.exam],
   fullReport: async () => ({
     report: { students: 1, questions: [], subunits: [], classes: [] }, compare: null, moodEnabled: false,
     platformStats: platformScoreDistribution([4], 8),
@@ -147,7 +148,10 @@ function Fixture() {
   return <main className="zuvio pq-fixture-shell">
     <button type="button" onClick={() => setScreen('away')}>切換到別的課程</button>
     {screen === 'away' ? <p>已離開小考</p> : screen === 'classes' || screen === 'class-quizzes'
-      ? <QuizClassDirectory classes={[{ classId, name: '合成甲班', count: 3 }]} exams={[listed.exam]} selected={className}
+      ? <QuizClassDirectory classes={[
+        { classId, name: '合成甲班', test: false },
+        { classId: 'test', name: 'test', test: true },
+      ]} exams={[listed.exam]} selected={className}
         select={setClass} back={() => setClass('')} open={() => setScreen('results')} />
       : <PlatformQuizTeacher api={api} live={live} courseId={courseId} className="合成甲班"
         row={listed} reload={() => {}} back={() => { setClass(classId); setScreen('class-quizzes'); }}

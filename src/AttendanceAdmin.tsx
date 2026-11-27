@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 import qrcode from 'qrcode-generator';
 import type { API } from './service';
+import { warmCallables } from './warmCallables';
 import type { Course } from '../shared/model';
 import { exportWorkbook } from './xlsxWorkbook';
 import {
@@ -42,19 +43,21 @@ type Session = {
   deletedReason?: string;
   notified?: boolean;
 };
-type Live =
-  | { session: null }
-  | {
-      session: Session;
-      now: number;
-      remainingMs: number;
-      signed: number;
-      code: string;
-      codeRemainingMs: number;
-      token: string;
-      qrRemainingMs: number;
-    };
-type LiveSnapshot = Live & { receivedAt: number };
+type LiveData = {
+  session: Session;
+  now: number;
+  remainingMs: number;
+  signed: number;
+  code: string;
+  token: string;
+  nextCode: string;
+  nextCodeAt: number;
+  nextToken: string;
+  nextTokenAt: number;
+};
+type Live = { session: null } | LiveData;
+type LiveSnapshot = LiveData & { receivedAt: number };
+type Projection = { session?: Session; live?: LiveSnapshot };
 type RosterRow = {
   email: string;
   studentId: string;
@@ -164,12 +167,12 @@ function LiveView({
   onBack,
   inFlight,
 }: Props & {
-  onEnded: (session: Session) => void;
-  initial: Session;
+  onEnded: (session?: Session) => void;
+  initial: Projection;
   onBack: () => void;
   inFlight: MutableRefObject<Promise<void> | undefined>;
 }) {
-  const [live, setLive] = useState<LiveSnapshot | null>(null);
+  const [live, setLive] = useState<LiveSnapshot | null>(initial.live || null);
   const [now, setNow] = useState(() => performance.now());
   const [reconnecting, setReconnecting] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -181,15 +184,22 @@ function LiveView({
   }, [onEnded, notify]);
   useEffect(() => {
     let disposed = false;
-    let previous: LiveSnapshot | undefined;
+    let previous = initial.live;
     let refreshTimer: ReturnType<typeof setTimeout> | undefined;
-    let tickTimer: ReturnType<typeof setInterval> | undefined;
-    const stopTick = () => {
-      clearInterval(tickTimer);
-      tickTimer = undefined;
-    };
-    const startTick = () => {
-      if (tickTimer === undefined) tickTimer = setInterval(() => setNow(performance.now()), 1000);
+    let tickTimer: ReturnType<typeof setTimeout> | undefined;
+    const stopTick = () => clearTimeout(tickTimer);
+    const tick = () => {
+      stopTick();
+      if (!previous || document.hidden) return;
+      const time = performance.now();
+      setNow(time);
+      const serverNow = previous.now + time - previous.receivedAt;
+      const deadlines = [
+        previous.nextCodeAt, previous.nextTokenAt,
+        previous.nextCodeAt + previous.session.codeSec * 1000,
+        previous.nextTokenAt + previous.session.qrSec * 1000,
+      ].filter((at) => at > serverNow);
+      tickTimer = setTimeout(tick, Math.ceil(Math.min(1000, ...deadlines.map((at) => at - serverNow))));
     };
     const schedule = (delay: number) => {
       clearTimeout(refreshTimer);
@@ -202,9 +212,7 @@ function LiveView({
         // 歸零時查一次；若仍在後端的簽到寬限內，等寬限結束再確認。
         const endCheck =
           previous.remainingMs || previous.session.endsAt + ATTENDANCE_GRACE_MS + 1 - previous.now;
-        for (const deadline of [previous.qrRemainingMs, previous.codeRemainingMs, endCheck]) {
-          if (deadline > elapsed) delay = Math.min(delay, deadline - elapsed);
-        }
+        if (endCheck > elapsed) delay = Math.min(delay, endCheck - elapsed);
       }
       schedule(delay);
     };
@@ -221,13 +229,13 @@ function LiveView({
       }
       if (disposed || document.hidden) return;
       const receivedAt = performance.now();
-      const ended = previous?.session || initial;
-      previous = { ...response, receivedAt };
-      setLive(previous);
+      const ended = previous?.session || initial.session;
+      previous = response.session ? { ...response, receivedAt } : undefined;
+      setLive(previous || null);
       setNow(receivedAt);
       setReconnecting(false);
       if (response.session) {
-        startTick();
+        tick();
         scheduleNext();
       } else {
         stopTick();
@@ -262,12 +270,16 @@ function LiveView({
         clearTimeout(refreshTimer);
         stopTick();
       } else {
-        setNow(performance.now());
-        if (previous?.session) startTick();
+        tick();
         void refresh();
       }
     };
-    if (!document.hidden) schedule(0);
+    if (!document.hidden) {
+      if (previous) {
+        tick();
+        scheduleNext();
+      } else schedule(0);
+    }
     document.addEventListener('visibilitychange', onVisibility);
     return () => {
       disposed = true;
@@ -316,7 +328,14 @@ function LiveView({
   const s = live.session;
   const elapsed = now - live.receivedAt;
   const remain = live.remainingMs - elapsed;
-  const step = (left: number) => Math.max(0, Math.ceil((left - elapsed) / 1000));
+  const serverNow = live.now + elapsed;
+  const display = (current: string, next: string, switchAt: number, seconds: number) => {
+    const changed = serverNow >= switchAt;
+    const until = changed ? switchAt + seconds * 1000 : switchAt;
+    return { value: serverNow < until ? (changed ? next : current) : '', left: Math.ceil((until - serverNow) / 1000) };
+  };
+  const code = display(live.code, live.nextCode, live.nextCodeAt, s.codeSec);
+  const qr = display(live.token, live.nextToken, live.nextTokenAt, s.qrSec);
   return (
     <div>
       <button type="button" onClick={onBack}>
@@ -335,11 +354,13 @@ function LiveView({
           </div>
           <div className="att-proj-main">
             <div className="att-proj-qr">
-              <Qr text={attendUrl(location.origin + location.pathname, course.id, live.token)} />
+              {qr.value
+                ? <Qr text={attendUrl(location.origin + location.pathname, course.id, qr.value)} />
+                : <p>正在更新 QR…</p>}
               <p>
                 用<b>手機相機</b>掃描（不要用 LINE、IG 掃）
               </p>
-              <small>QR {step(live.qrRemainingMs)} 秒後更換</small>
+              <small>{qr.value && `QR ${qr.left} 秒後更換`}</small>
             </div>
             <div className="att-proj-side">
               <div className="att-proj-box">
@@ -355,8 +376,8 @@ function LiveView({
               </div>
               <div className="att-proj-box att-proj-code">
                 <span>掃不到？在平台首頁輸入數字碼</span>
-                <b>{live.code.split('').join(' ')}</b>
-                <small>{step(live.codeRemainingMs)} 秒後更換</small>
+                <b>{code.value ? code.value.split('').join(' ') : '—'}</b>
+                <small>{code.value && `${code.left} 秒後更換`}</small>
               </div>
             </div>
           </div>
@@ -1350,18 +1371,15 @@ function NotifyView({
   );
 }
 
-type ClassCard = {
-  classId: string;
-  test: boolean;
-  members: number;
-  live: boolean;
-  todayCount: number;
-  pendingConfirm: number;
-  pending: number;
-  rate: number | null;
+type ClassCard = { classId: string; name: string; test: boolean };
+type ActiveRoll = { kind: Session['kind'] | null; classIds: string[]; endsAt: number | null };
+type ClassCards = { classes: ClassCard[]; active: ActiveRoll | null; now: number };
+type ClassRecords = {
+  sessions: Session[];
+  deleted: Session[];
+  open: Session | null;
+  stats?: { members: number; pending: number; todayCount: number; pendingConfirm: number; rate: number | null };
 };
-type ClassCards = { classes: ClassCard[]; open: Session | null; expired: boolean; now: number };
-type ClassRecords = { sessions: Session[]; deleted: Session[]; open: Session | null };
 const durationKey = 'attendance-last-open-minutes';
 function lastDuration() {
   try {
@@ -1539,7 +1557,7 @@ function ClassRecordsView({
   api,
   course,
   notify,
-  card,
+  classId,
   onOpen,
   onDetail,
   onSummary,
@@ -1547,15 +1565,14 @@ function ClassRecordsView({
   onChanged,
   active,
 }: Props & {
-  card: ClassCard;
-  onOpen: (session: Session) => void;
+  classId: string;
+  onOpen: (session: Session, live?: LiveData) => void;
   onDetail: (sid: string) => void;
   onSummary: () => void;
   onNotify: () => void;
   onChanged: () => void;
-  active: Session | null;
+  active: ActiveRoll | null;
 }) {
-  const { classId } = card;
   const [data, setData] = useState<ClassRecords | null>(null);
   const [revision, setRevision] = useState(0);
   const [error, setError] = useState('');
@@ -1566,6 +1583,7 @@ function ClassRecordsView({
   const [restoring, setRestoring] = useState('');
   const [menu, setMenu] = useState('');
   const [backfillBusy, setBackfillBusy] = useState(false);
+  const [creating, setCreating] = useState(false);
   useEffect(() => {
     let alive = true;
     api
@@ -1589,20 +1607,25 @@ function ClassRecordsView({
   };
   const mutate = (method: string, payload: Record<string, unknown>) =>
     api.call<{ session: Session }>(method, { courseId: course.id, ...payload });
+  const stats = data?.stats;
   return (
-    <div className="att-admin-col">
+    <>
+    {creating && <section className="att-proj" aria-label="投影畫面">
+      <div className="att-proj-top"><strong role="status">點名建立中…</strong></div>
+    </section>}
+    <div className="att-admin-col" style={creating ? { display: 'none' } : undefined}>
       <div className="att-actions">
         <button
           className="primary"
           type="button"
-          disabled={!!active}
+          disabled={!!active || !!data?.open}
           onClick={() => setForm(form === 'roll' ? undefined : 'roll')}
         >
           新增點名
         </button>
         <button
           type="button"
-          disabled={!!active}
+          disabled={!!active || !!data?.open}
           onClick={() => setForm(form === 'trial' ? undefined : 'trial')}
         >
           試簽（不算點名）
@@ -1614,15 +1637,17 @@ function ClassRecordsView({
           trial={form === 'trial'}
           onCancel={() => setForm(undefined)}
           onSubmit={async (values) => {
+            setCreating(true);
             try {
-              const { session } = await mutate('attendanceStart', {
-                ...values,
-                classIds: [classId],
+              const { session, live } = await api.call<{ session: Session; live: LiveData }>('attendanceStart', {
+                courseId: course.id, ...values, classIds: [classId],
               });
-              onOpen(session);
+              onOpen(session, live);
             } catch (e) {
               notify((e as Error).message);
               throw e;
+            } finally {
+              setCreating(false);
             }
           }}
         />
@@ -1630,13 +1655,12 @@ function ClassRecordsView({
       <div className="att-class-tools">
         <button type="button" className="att-summary-link" onClick={onSummary}>
           <strong>學生總表</strong>
-          <span>
-            {card.members} 人・本學期出席率{' '}
-            {card.rate === null ? '—' : `${Math.round(card.rate * 100)}%`}
-          </span>
+          {stats && <span>
+            {stats.members} 人・本學期出席率 {stats.rate === null ? '—' : `${Math.round(stats.rate * 100)}%`}
+          </span>}
         </button>
         <button type="button" onClick={onNotify}>
-          通知（{card.pending}）
+          通知{stats && `（${stats.pending}）`}
         </button>
       </div>
       <section className="panel">
@@ -1704,6 +1728,7 @@ function ClassRecordsView({
             </button>
           </p>
         )}
+        {stats && <p>今天已點 {stats.todayCount} 次・待確認 {stats.pendingConfirm} 筆</p>}
         {!data ? (
           <p role="status">讀取點名紀錄…</p>
         ) : !data.sessions.length ? (
@@ -1812,6 +1837,7 @@ function ClassRecordsView({
         />
       )}
     </div>
+    </>
   );
 }
 
@@ -1822,7 +1848,7 @@ export default function AttendanceAdmin(props: Props) {
   const [sid, setSid] = useState('');
   const [data, setData] = useState<ClassCards | null>(null);
   const [revision, setRevision] = useState(0);
-  const [projecting, setProjecting] = useState<Session>();
+  const [projecting, setProjecting] = useState<Projection>();
   const [deleting, setDeleting] = useState<Session>();
   const [error, setError] = useState('');
   const liveRequest = useRef<Promise<void>>();
@@ -1833,11 +1859,7 @@ export default function AttendanceAdmin(props: Props) {
     const load = async () => {
       try {
         const input = { courseId: course.id };
-        let r = await api.call<ClassCards>('attendanceClassCards', input);
-        if (r.expired && alive) {
-          await api.call('attendanceLive', input);
-          r = await api.call<ClassCards>('attendanceClassCards', input);
-        }
+        const r = await api.call<ClassCards>('attendanceClassCards', input);
         if (alive) {
           setData(r);
           setError('');
@@ -1865,30 +1887,34 @@ export default function AttendanceAdmin(props: Props) {
     setSid(id);
     setView('detail');
   };
-  const open = (session: Session) => {
+  const open = (session: Session, live?: LiveData) => {
     if (!classId || !session.classIds.includes(classId)) setClassId(session.classIds[0]);
-    setProjecting(session);
+    setProjecting({ session, live: live && { ...live, receivedAt: performance.now() } });
   };
-  const ended = (session: Session) => {
+  const ended = (session?: Session) => {
     setProjecting(undefined);
     refresh();
-    if (session.kind === 'roll') {
+    if (session?.kind === 'roll') {
+      if (!session.classIds.includes(classId)) setClassId(session.classIds[0]);
       detail(session.id);
       notify('點名已結束，未簽到的記為未到');
     } else {
       setView('records');
-      notify('試簽已結束（不算點名）');
+      if (session) notify('試簽已結束（不算點名）');
     }
   };
-  const active = data?.open || null;
+  const active = data?.active || null;
   useEffect(() => {
-    if (!active || projecting) return;
+    if (!active?.endsAt || projecting) return;
     const timer = setTimeout(
       refresh,
       Math.max(0, active.endsAt + ATTENDANCE_GRACE_MS + 250 - (data?.now || Date.now())),
     );
     return () => clearTimeout(timer);
   }, [active, projecting, data?.now]);
+  useEffect(() => {
+    if (card && !api.preview) warmCallables(api, 'attendance-class', ['attendanceStart', 'attendanceLive', 'attendanceCheckIn']);
+  }, [api, card?.classId]);
   return (
     <div className="att-sheet att-page att-class-first">
       {projecting ? (
@@ -1908,10 +1934,10 @@ export default function AttendanceAdmin(props: Props) {
           {active && (
             <div className="att-live-banner">
               <strong>
-                {active.kind === 'trial' ? '試簽中' : '點名中'}・
-                {classLabel(course, active.classIds)}
+                {active.kind === 'trial' ? '試簽中' : '點名中'}
+                {!!active.classIds.length && `・${classLabel(course, active.classIds)}`}
               </strong>
-              <button type="button" onClick={() => open(active)}>
+              <button type="button" onClick={() => setProjecting({})}>
                 回到投影
               </button>
             </div>
@@ -1939,20 +1965,7 @@ export default function AttendanceAdmin(props: Props) {
                     setView('records');
                   }}
                 >
-                  <strong>
-                    {classLabel(course, [c.classId])}
-                    {c.test ? '（測試班）' : ''}
-                  </strong>
-                  <span>{c.members} 人</span>
-                  <span>
-                    {c.live ? '點名中' : c.todayCount ? `今天已點 ${c.todayCount} 次` : '今天未點'}
-                  </span>
-                  <span className={c.pendingConfirm ? 'att-pending-text' : 'muted'}>
-                    待確認 {c.pendingConfirm} 筆
-                  </span>
-                  <span className={c.pending ? 'att-pending-text' : 'muted'}>
-                    待通知 {c.pending} 封
-                  </span>
+                  <strong>{c.name || c.classId}{c.test ? '（測試班）' : ''}</strong>
                   <span aria-hidden="true" className="att-class-chevron">
                     ›
                   </span>
@@ -1977,7 +1990,7 @@ export default function AttendanceAdmin(props: Props) {
                 <ClassRecordsView
                   key={classId}
                   {...props}
-                  card={card}
+                  classId={classId}
                   active={active}
                   onOpen={open}
                   onDetail={detail}

@@ -1,4 +1,5 @@
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { Timestamp, type Firestore } from 'firebase-admin/firestore';
 import { forClass, type Course } from '../../shared/model';
 import { isTestClass, type IntegrityStudent } from '../../shared/answerIntegrity';
@@ -144,7 +145,7 @@ export function createUsageHandler(
   rosterQuery: (id: string, c: any) => any,
   options: any,
 ) {
-  return onCall(options, async (req) => {
+  return onCall('getClassUsageStats', options, async (req) => {
     const cid = String(req.data?.courseId || ''),
       { c } = await access(req, cid, true),
       cl = req.data?.classId;

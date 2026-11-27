@@ -1,4 +1,5 @@
-import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import type { Firestore } from 'firebase-admin/firestore';
 import {
@@ -129,7 +130,7 @@ export function createAggregationHandlers(
       throw new HttpsError('invalid-argument', '請選擇課程內非test班級');
     return { cid, c, cl };
   }
-  const getCompletionDaily = onCall(options, async (req) => {
+  const getCompletionDaily = onCall('getCompletionDaily', options, async (req) => {
     const { cid, c, cl } = await validate(req),
       old = (await completionRef(db, cid, cl).get()).data();
     if (req.data.refresh === true) return buildCompletion(db, cid, c, cl, rosterQuery, true);
@@ -139,7 +140,7 @@ export function createAggregationHandlers(
       stale: !!old && Date.now() - old.updatedAt > 86400000,
     };
   });
-  const rebuildStats = onCall({ ...options, timeoutSeconds: 540 }, async (req) => {
+  const rebuildStats = onCall('rebuildStats', { ...options, timeoutSeconds: 540 }, async (req) => {
     const { cid, c, cl } = await validate(req),
       dryRun = req.data.dryRun !== false,
       roster = await statsRoster(db, rosterQuery, cid, c, cl, true, false),

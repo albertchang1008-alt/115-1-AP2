@@ -1,6 +1,7 @@
 import { statsRoster, progressRows } from './statsRoster';
 import { timingUnitStats } from '../../shared/timingStats';
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import type { Firestore } from 'firebase-admin/firestore';
 import { ANSWER_INTEGRITY, isTestClass, validateLeaveMetrics } from '../../shared/answerIntegrity';
 import { forClass, type Course } from '../../shared/model';
@@ -12,7 +13,7 @@ export function createIntegrityHandlers(
   options: any,
 ) {
   return {
-    getAnswerIntegrityStats: onCall(options, async (req) => {
+    getAnswerIntegrityStats: onCall('getAnswerIntegrityStats', options, async (req) => {
       const courseId = String(req.data?.courseId || '');
       const { c } = await access(req, courseId, true);
       const classId = req.data?.classId;
@@ -48,7 +49,7 @@ export function createIntegrityHandlers(
         generatedAt: Date.now(),
       };
     }),
-    recordPracticeLeaves: onCall(options, async (req) => {
+    recordPracticeLeaves: onCall('recordPracticeLeaves', options, async (req) => {
       const courseId = String(req.data?.courseId || '');
       const { p, c } = await access(req, courseId);
       if (p.teacher) throw new HttpsError('permission-denied', '教師預覽不寫入練習紀錄');

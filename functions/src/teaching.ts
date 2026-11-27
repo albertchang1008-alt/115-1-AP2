@@ -13,7 +13,8 @@ import {
 import { validateAnswerKeys, validateInteractions, Interaction, AnswerKeys } from '../../shared/classroom';
 import { featureAccess } from './features';
 import { featureEnabled } from '../../shared/features';
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { HttpsError } from 'firebase-functions/v2/https';
+import { onCall } from './callable';
 import { forClass } from '../../shared/model';
 import { Firestore } from 'firebase-admin/firestore';
 import { createHash } from 'node:crypto';
@@ -143,7 +144,7 @@ export function createTeachingHandlers(
   const teachingAccess = featureAccess(access, 'teachingConsole');
 
   return {
-    getTeachingDeck: onCall(options, async (req) => {
+    getTeachingDeck: onCall('getTeachingDeck', options, async (req) => {
       const { c } = await teachingAccess(req, req.data.courseId, true);
       const courseId = String(req.data.courseId ?? '');
       const requestedDeckId = typeof req.data?.deckId === 'string' ? req.data.deckId.trim() : '';
@@ -330,7 +331,7 @@ export function createTeachingHandlers(
       return response;
     }),
 
-    saveTeachingDeck: onCall(options, async (req) => {
+    saveTeachingDeck: onCall('saveTeachingDeck', options, async (req) => {
       const { p } = await teachingAccess(req, req.data.courseId, true);
       const courseId = String(req.data.courseId ?? '').trim();
       if (!courseId) throw new HttpsError('invalid-argument', '請指定課程代碼');
@@ -682,7 +683,7 @@ export function createTeachingHandlers(
       };
     }),
 
-    getClassroomCourse: onCall(options, async (req) => {
+    getClassroomCourse: onCall('getClassroomCourse', options, async (req) => {
       const { p, c } = await access(req, req.data.courseId);
       if (!featureEnabled(c, 'teachingConsole') && !featureEnabled(c, 'classroomInteraction'))
         throw new HttpsError('permission-denied', '此課程尚未開放此功能');

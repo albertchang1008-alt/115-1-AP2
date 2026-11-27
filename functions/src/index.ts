@@ -24,7 +24,8 @@ import { positiveCache } from './learningAccessCache';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getStorage } from 'firebase-admin/storage';
-import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
+import { onRequest, HttpsError } from 'firebase-functions/v2/https';
+import { onCall, measure } from './callable';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { defineSecret } from 'firebase-functions/params';
 import { createHash, createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
@@ -168,25 +169,28 @@ const learningAccessCache = {
   course: positiveCache<FirebaseFirestore.DocumentData>(60000, 32),
   member: positiveCache<FirebaseFirestore.DocumentData>(300000, 2048),
 };
-async function access(req: any, courseId: string, teacherOnly = false, cache?: typeof learningAccessCache) {
+async function access(
+  req: any, courseId: string, teacherOnly = false, cache?: typeof learningAccessCache, cacheTeacher = false,
+) {
   const p = await identity(req);
   const courseRef = db.doc(`courses/${code(courseId)}`);
-  const readCourse = async () => (await courseRef.get()).data();
-  const cached = p.teacher ? undefined : cache;
+  const readCourse = () => measure('courseMs', async () => (await courseRef.get()).data());
+  const cached = p.teacher && !cacheTeacher ? undefined : cache;
   const c = cached ? await cached.course(courseRef.path, readCourse) : await readCourse();
   if (!c) fail('課程不存在');
   if (p.teacher) {
     if (!c.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權管理此課程');
-    c.classIds = [...new Set([...(c.draft?.classIds || []), ...(c.published?.classIds || [])])];
+    const classIds = [...new Set([...(c.draft?.classIds || []), ...(c.published?.classIds || [])])];
+    return { p, c: { ...c, classIds } };
   } else {
     if (teacherOnly || c.archived || !c.published) throw new HttpsError('permission-denied', '課程未開放');
     const memberRef = c.rosterVersion === 2 ? enrollmentRef(courseId, p.email) : db.doc(`roster/${p.email}`);
     const allowed = (member: FirebaseFirestore.DocumentData | undefined) =>
       member?.enabled && c.published.classIds.includes(member.classId);
-    const readMember = async () => {
+    const readMember = () => measure('rosterMs', async () => {
       const member = (await memberRef.get()).data();
       return allowed(member) ? member : undefined;
-    };
+    });
     const member = cached
       ? await cached.member(JSON.stringify([courseId, p.uid, memberRef.path]), readMember)
       : await readMember();
@@ -196,7 +200,7 @@ async function access(req: any, courseId: string, teacherOnly = false, cache?: t
   }
   return { p, c };
 }
-export const bootstrap = onCall(options, async (req) => {
+export const bootstrap = onCall('bootstrap', options, async (req) => {
   const p = await identity(req);
   await db.doc(`profiles/${p.uid}`).set(p);
   if (p.teacher) {
@@ -225,7 +229,7 @@ export const bootstrap = onCall(options, async (req) => {
   }
   return { profile: p, courses, version: VERSION };
 });
-export const saveCourse = onCall(options, async (req) => {
+export const saveCourse = onCall('saveCourse', options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const { revision: _clientRevision, ...inputCourse } = req.data.course || {};
@@ -263,7 +267,7 @@ export const saveCourse = onCall(options, async (req) => {
   });
   return { ok: true, revision };
 });
-export const publishCourse = onCall(options, async (req) => {
+export const publishCourse = onCall('publishCourse', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const course = c.draft as Course;
   if (!course.classIds.length || !course.units.length) fail('發布前請建立班級與單元');
@@ -292,7 +296,7 @@ export const publishCourse = onCall(options, async (req) => {
 });
 
 // Preview and commit both read the current course and every progress document in one transaction.
-export const mergeChapter = onCall(options, async (req) => {
+export const mergeChapter = onCall('mergeChapter', options, async (req) => {
   const { p } = await access(req, req.data.courseId, true);
   const sourceName = code(req.data.sourceName), targetName = code(req.data.targetName);
   const ref = db.doc(`courses/${code(req.data.courseId)}`);
@@ -342,25 +346,25 @@ async function updateVisibility(req: any, unitIds: string[], next: UnitVisibilit
     return { units: ids, visibility: next, archiveLabel };
   });
 }
-export const setUnitVisibility = onCall(options, async (req) => updateVisibility(req, req.data.unitIds || [], visibility(req.data.visibility), cleanLabel(req.data.archiveLabel), 'move'));
-export const endCurrentExam = onCall(options, async (req) => {
+export const setUnitVisibility = onCall('setUnitVisibility', options, async (req) => updateVisibility(req, req.data.unitIds || [], visibility(req.data.visibility), cleanLabel(req.data.archiveLabel), 'move'));
+export const endCurrentExam = onCall('endCurrentExam', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const current = ((c.draft as Course).units || []).filter((u) => unitVisibility(u) === 'current').map((u) => u.id);
   if (!current.length) fail('目前沒有可結束的單元');
   return updateVisibility(req, current, 'archived', cleanLabel(req.data.archiveLabel), 'endExam');
 });
-export const renameArchiveLabel = onCall(options, async (req) => {
+export const renameArchiveLabel = onCall('renameArchiveLabel', options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const from = cleanLabel(req.data.from), to = cleanLabel(req.data.to);
   if (!from || !to) fail('請填寫歷史標籤');
   const ref = db.doc(`courses/${code(req.data.courseId)}`);
   return db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); const change = (course: Course | undefined) => !course ? course : ({ ...course, units: course.units.map((u) => u.visibility === 'archived' && u.archiveLabel === from ? { ...u, archiveLabel: to, visibilityUpdatedAt: Date.now() } : u) }); tx.update(ref, { revision:courseRevision(data)+1, draft: change(data.draft), ...(data.published ? { published: change(data.published) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'renameLabel', from, to }); return { ok: true }; });
 });
-export const setStudentNotice = onCall(options, async (req) => {
+export const setStudentNotice = onCall('setStudentNotice', options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const text = cleanLabel(req.data.text, 60), ref = db.doc(`courses/${code(req.data.courseId)}`);
   await db.runTransaction(async (tx) => { const snap = await tx.get(ref), data = snap.data(); if (!data?.teacherIds?.includes(p.uid)) throw new HttpsError('permission-denied', '未獲授權'); tx.update(ref, { revision:courseRevision(data)+1, draft: withNotice(data.draft, text), ...(data.published ? { published: withNotice(data.published, text) } : {}) }); tx.create(ref.collection('visibilityLog').doc(), { at: FieldValue.serverTimestamp(), actorUid: p.uid, action: 'notice', notice: text }); });
   return { text };
 });
-export const deleteCourse = onCall(options, async (req) => {
+export const deleteCourse = onCall('deleteCourse', options, async (req) => {
   await access(req, req.data.courseId, true);
   await db.doc(`courses/${code(req.data.courseId)}`).delete();
   return { ok: true };
@@ -416,13 +420,13 @@ async function writeEnrollments(uid: string, courseId: string, rows: Roster[], m
   }
   return { count: rows.length, updated, emailChanged, changed: updated > 0 };
 }
-export const importRoster = onCall(options, async (req) => {
+export const importRoster = onCall('importRoster', options, async (req) => {
   const { p } = await access(req, req.data.courseId, true);
   const rows = req.data.rows as Roster[];
   if (!Array.isArray(rows) || !rows.length || rows.length > 200) fail('每次匯入 1–200 人');
   return writeEnrollments(p.uid, req.data.courseId, rows.map((r) => ({ ...r, courseId: req.data.courseId })));
 });
-export const migrateRoster = onCall(options, async (req) => {
+export const migrateRoster = onCall('migrateRoster', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId, true);
   if (c.rosterVersion === 2) return { done: true, count: 0, rows: [] };
   const rows: Roster[] = [];
@@ -439,7 +443,7 @@ export const migrateRoster = onCall(options, async (req) => {
   }
   return { done: req.data.apply === true, count: rows.length, rows: rows.slice(0, 20) };
 });
-export const archiveCourse = onCall(options, async (req) => {
+export const archiveCourse = onCall('archiveCourse', options, async (req) => {
   await access(req, req.data.courseId, true);
   await db.doc(`courses/${req.data.courseId}`).update({ archived: req.data.archived === true });
   return { ok: true };
@@ -447,7 +451,7 @@ export const archiveCourse = onCall(options, async (req) => {
 function rosterQuery(courseId: string, c: any) {
   return c.rosterVersion === 2 ? db.collection('enrollments').where('courseId', '==', courseId) : db.collection('roster');
 }
-export const getRoster = onCall(options, async (req) => {
+export const getRoster = onCall('getRoster', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const classId = code(req.data.classId);
   if (!c.classIds.includes(classId)) fail('班級不屬於課程');
@@ -462,7 +466,7 @@ export const getRoster = onCall(options, async (req) => {
     next: snap.size === 50 ? snap.docs.at(-1)!.data().studentId : null,
   };
 });
-export const getPublished = onCall(options, async (req) => {
+export const getPublished = onCall('getPublished', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.published) fail('尚未發布課程');
   return c.published;
@@ -503,7 +507,7 @@ async function publishBank(courseId: string, unitId: string, questions: Question
   return { version, count: sorted.length };
 }
 /** 教師把多個已發布題目分類凍結成獨立的複習考題目池。 */
-export const buildReviewExam = onCall(options, async (req) => {
+export const buildReviewExam = onCall('buildReviewExam', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId, true);
   checkRevision(courseRevision(c),req.data.expectedRevision,true);
   const name = code(req.data.name);
@@ -555,7 +559,7 @@ export const buildReviewExam = onCall(options, async (req) => {
   });
   return { ...result, revision, allocation, poolCount: pool.length, builtAt, sourceVersions: Object.fromEntries(sources.map((s) => [s.id, s.bankVersion])) };
 });
-export const deleteReviewExam = onCall(options, async (req) => {
+export const deleteReviewExam = onCall('deleteReviewExam', options, async (req) => {
   const { p } = await access(req, req.data.courseId, true); const name = code(req.data.name);
   const revision = await db.runTransaction(async (tx) => { const ref = db.doc(`courses/${req.data.courseId}`), snap = await tx.get(ref), data = snap.data(), draft = data?.draft as Course;
     if (!data?.teacherIds?.includes(p.uid)) fail('未獲授權');
@@ -565,7 +569,7 @@ export const deleteReviewExam = onCall(options, async (req) => {
     return courseRevision(data)+1;
   }); return { ok: true, revision };
 });
-export const publishQuestions = onCall(options, async (req) => {
+export const publishQuestions = onCall('publishQuestions', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.draft?.units?.some((u: Unit) => u.id === req.data.unitId)) fail('請先建立並保存單元');
   return publishBank(req.data.courseId, req.data.unitId, req.data.questions);
@@ -596,7 +600,7 @@ export const sheetsPublish = onRequest({ ...options, secrets: [syncSecret] }, as
     res.status(400).json({ error: (e as Error).message });
   }
 });
-export const getBank = onCall(options, async (req) => {
+export const getBank = onCall('getBank', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   const source = p.teacher ? (req.data.draft ? c.draft : c.published) : forClass(c.published, p.classId);
   if (
@@ -618,7 +622,7 @@ export const getBank = onCall(options, async (req) => {
   if (!p.teacher) assertPracticeBank(c, req.data.unitId, questions.map((q: Question) => q.id));
   return { questions };
 });
-export const getProgress = onCall(options, async (req) => {
+export const getProgress = onCall('getProgress', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   const uid = req.data.uid || p.uid;
   if (uid !== p.uid && !p.teacher) throw new HttpsError('permission-denied', '無法讀取他人進度');
@@ -630,7 +634,7 @@ export const getProgress = onCall(options, async (req) => {
 });
 // 舊題庫發布時尚無私有答案表；同一個版本只記錄一次 fallback，避免監控雜訊。
 const gradingFallbackWarned = new Set<string>();
-export const submitAttempt = onCall(options, async (req) => {
+export const submitAttempt = onCall('submitAttempt', options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const a = req.data?.attempt as Attempt;
   if (!a || typeof a !== 'object' || Array.isArray(a)) fail('作答格式錯誤');
@@ -730,7 +734,7 @@ export const submitAttempt = onCall(options, async (req) => {
   });
 });
 /** 綜合練習只寫一次 progress；每個次單元仍各留一筆不可變作答紀錄。 */
-export const submitMixedAttempts = onCall(options, async (req) => {
+export const submitMixedAttempts = onCall('submitMixedAttempts', options, async (req) => {
   if (!req.auth) throw new HttpsError('unauthenticated', '請先登入');
   const attempts = req.data?.attempts as Attempt[];
   if (!Array.isArray(attempts) || !attempts.length || attempts.length > 50) fail('綜合練習格式錯誤');
@@ -785,7 +789,7 @@ export const submitMixedAttempts = onCall(options, async (req) => {
     return { progress: p.teacher ? next : withoutTiming(next), attempts: prepared, summaries };
   });
 });
-export const saveActivity = onCall(options, async (req) => {
+export const saveActivity = onCall('saveActivity', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   if (p.teacher) fail('預覽不能寫入正式進度');
   const { unitId, chapterName: requestedChapter, activityId, position, completed } = req.data;
@@ -828,7 +832,7 @@ function reflectionRequest(data: any) {
 function reflectionOrFail<T>(action: () => T): T {
   try { return action(); } catch (e) { return fail((e as Error).message); }
 }
-export const saveReflection = onCall(options, async (req) => {
+export const saveReflection = onCall('saveReflection', options, async (req) => {
   const request = reflectionRequest(req.data);
   const { p } = await access(req, request.courseId);
   if (p.teacher) fail('教師預覽不能寫入正式反思或進度');
@@ -853,7 +857,7 @@ export const saveReflection = onCall(options, async (req) => {
     return { response: row, progress: withoutTiming(progress) };
   });
 });
-export const getMyReflection = onCall(options, async req => {
+export const getMyReflection = onCall('getMyReflection', options, async req => {
   const r = reflectionRequest(req.data), { p, c } = await access(req, r.courseId);
   if (p.teacher) fail('教師預覽不讀取學生反思');
   reflectionOrFail(() => reflectionActivity(c.published, p.classId, r.chapterId, r.activityId));
@@ -864,7 +868,7 @@ export const getMyReflection = onCall(options, async req => {
 export function reflectionResearchId(courseId: string, studentId: string, salt: string) {
   return createHmac('sha256', salt).update(JSON.stringify([courseId, studentId])).digest('hex');
 }
-export const getReflections = onCall(options, async req => {
+export const getReflections = onCall('getReflections', options, async req => {
   const r = reflectionRequest(req.data), { c } = await access(req, r.courseId, true);
   const chapter = c.published && chaptersOf(c.published)[r.chapterId];
   const activity = chapter?.activities.find((a: import('../../shared/model').Activity) => a.id === r.activityId && a.type === 'reflection');
@@ -884,7 +888,7 @@ export const getReflections = onCall(options, async req => {
   return summarizeReflections(activity!, rows, roster);
 });
 // 題庫解析研究資料：僅在授權課程保存粗粒度曝光／展開／停留；不影響成績與完成度。
-export const saveExplanationResearchEvents = onCall(options, async (req) => {
+export const saveExplanationResearchEvents = onCall('saveExplanationResearchEvents', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   if (p.teacher) fail('教師預覽不寫入研究資料');
   const unitId = code(req.data.unitId), version = id(req.data.version);
@@ -921,7 +925,7 @@ export const saveExplanationResearchEvents = onCall(options, async (req) => {
     return { accepted: events.map((e: any) => e.id), summary };
   });
 });
-export const getExplanationResearchEvidence = onCall(options, async (req) => {
+export const getExplanationResearchEvidence = onCall('getExplanationResearchEvidence', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   const classId = code(req.data.classId), unitId = code(req.data.unitId);
   if (!c.classIds.includes(classId)) fail('班級不屬於課程');
@@ -950,7 +954,7 @@ export const getExplanationResearchEvidence = onCall(options, async (req) => {
     return { ...r, html, followUp: { laterAttempts, laterWrong, recurrenceRate: laterAttempts ? Math.round(laterWrong / laterAttempts * 100) : null, recovered } };
   }) };
 });
-export const getHistory = onCall(options, async (req) => {
+export const getHistory = onCall('getHistory', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId);
   let q = db
     .collection(`courses/${req.data.courseId}/attempts`)
@@ -1046,11 +1050,11 @@ async function aggregateBatch(courseId: string) {
     return result;
   });
 }
-export const updateReports = onCall(options, async (req) => {
+export const updateReports = onCall('updateReports', options, async (req) => {
   await access(req, req.data.courseId, true);
   return aggregateBatch(req.data.courseId);
 });
-export const getReports = onCall(options, async (req) => {
+export const getReports = onCall('getReports', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不存在');
   let q = db
@@ -1066,7 +1070,7 @@ export const getReports = onCall(options, async (req) => {
     job: job.data() || null,
   };
 });
-export const setSchedule = onCall(options, async (req) => {
+export const setSchedule = onCall('setSchedule', options, async (req) => {
   await access(req, req.data.courseId, true);
   await db.doc(`courses/${req.data.courseId}`).update({ dailyReports: req.data.enabled === true });
   return { ok: true };
@@ -1079,7 +1083,7 @@ export const dailyReports = onSchedule(
     for(const c of courses) await drainReports(db,c.id,aggregateBatch,deadline);
   },
 );
-export const getCompletion = onCall(options, async (req) => {
+export const getCompletion = onCall('getCompletion', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.published) fail('請先發布課程再查看完成度');
   if (!c.published.classIds.includes(req.data.classId)) fail('班級不存在');
@@ -1106,7 +1110,7 @@ export const getCompletion = onCall(options, async (req) => {
   );
   return { course: c.published, rows, next: roster.size === 50 ? roster.docs.at(-1)!.data().studentId : null };
 });
-export const createSnapshot = onCall(options, async (req) => {
+export const createSnapshot = onCall('createSnapshot', options, async (req) => {
   const { c, p } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不存在');
   if (!c.published) fail('請先發布課程再結算');
@@ -1154,7 +1158,7 @@ export const createSnapshot = onCall(options, async (req) => {
   });
   return { done: roster.size < 30, snapshotId: sid };
 });
-export const getSnapshots = onCall(options, async (req) => {
+export const getSnapshots = onCall('getSnapshots', options, async (req) => {
   await access(req, req.data.courseId, true);
   if (req.data.snapshotId) {
     const root = db.doc(`courses/${req.data.courseId}/snapshots/${id(req.data.snapshotId)}`);
@@ -1176,7 +1180,7 @@ export const getSnapshots = onCall(options, async (req) => {
     .get();
   return { rows: rows.docs.map((d) => ({ id: d.id, ...d.data() })) };
 });
-export const questionStudents = onCall(options, async (req) => {
+export const questionStudents = onCall('questionStudents', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不存在');
   let q = db
@@ -1405,7 +1409,7 @@ export async function syncBankTabFromSheet(rows: unknown[][], tabTitle: string, 
   }
   return results;
 }
-export const saveSheetConfig = onCall(options, async (req) => {
+export const saveSheetConfig = onCall('saveSheetConfig', options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const raw = String(req.data?.sheetId || '').trim();
@@ -1414,13 +1418,13 @@ export const saveSheetConfig = onCall(options, async (req) => {
   await db.doc('sync/config').set({ sheetId, updatedBy: p.uid, updatedAt: Date.now() }, { merge: true });
   return { ok: true, sheetId };
 });
-export const getSyncStatus = onCall(options, async (req) => {
+export const getSyncStatus = onCall('getSyncStatus', options, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const [config, status] = await Promise.all([db.doc('sync/config').get(), db.doc('sync/status').get()]);
   return { sheetId: config.data()?.sheetId || '', status: status.data() || null };
 });
-export const syncRoster = onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
+export const syncRoster = onCall('syncRoster', { ...options, timeoutSeconds: 300 }, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const sheetId = (await db.doc('sync/config').get()).data()?.sheetId;
@@ -1435,7 +1439,7 @@ export const syncRoster = onCall({ ...options, timeoutSeconds: 300 }, async (req
   await db.doc('sync/status').set({ lastRosterSyncedAt: lastSyncedAt, lastRosterResult: roster }, { merge: true });
   return { roster, hasErrors: !!roster.error, lastSyncedAt };
 });
-export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req) => {
+export const syncSheet = onCall('syncSheet', { ...options, timeoutSeconds: 300 }, async (req) => {
   const p = await identity(req);
   if (!p.teacher) throw new HttpsError('permission-denied', '需要教師權限');
   const configSnap = await db.doc('sync/config').get();
@@ -1512,7 +1516,7 @@ export const syncSheet = onCall({ ...options, timeoutSeconds: 300 }, async (req)
   }
 });
 
-export const saveLearningEvents = onCall(options, async (req) => {
+export const saveLearningEvents = onCall('saveLearningEvents', options, async (req) => {
   const { p, c } = await access(req, req.data.courseId, false, learningAccessCache);
   if (p.teacher) fail('教師預覽不寫入正式診斷');
   const unitId = code(req.data.unitId), activityId = id(req.data.activityId);
@@ -1544,7 +1548,7 @@ export const saveLearningEvents = onCall(options, async (req) => {
     }, { merge: true });
   });
 });
-export const getLearningDiagnostics = onCall(options, async (req) => {
+export const getLearningDiagnostics = onCall('getLearningDiagnostics', options, async (req) => {
   const { c } = await access(req, req.data.courseId, true);
   if (!c.classIds.includes(req.data.classId)) fail('班級不屬於課程');
   // orderBy('__name__') 的 startAfter 必須是合法文件 ID；空字串會被 Firestore 拒絕
@@ -1574,6 +1578,9 @@ export const getClassUsageStats = createUsageHandler(db, access, rosterQuery, op
 
 export const { getCompletionDaily, rebuildStats, dailyStats } = createAggregationHandlers(db, access, rosterQuery, options);
 
+const classroomAccess = (req: any, courseId: string, teacherOnly = false) =>
+  access(req, courseId, teacherOnly, learningAccessCache, true);
+
 // Zuvio 出題與成績回收（1.16.0，教師限定）
 export const {
   zuvioPool,
@@ -1596,5 +1603,5 @@ export const {
   zuvioCareList,
   zuvioExportCsv,
   quizGet, quizRecentMood, quizStart, quizSave, quizMood, quizLeave, quizTeacherGet, quizControl, quizExpireDue,
-} = createZuvioHandlers(db, access, options);
-export const { attendanceClassCards, attendanceDeleteSession, attendanceRestoreSession, attendancePurgeDeleted, attendanceStart, attendanceControl, attendanceReopen, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, access, options);
+} = createZuvioHandlers(db, classroomAccess, options);
+export const { attendanceClassCards, attendanceDeleteSession, attendanceRestoreSession, attendancePurgeDeleted, attendanceStart, attendanceControl, attendanceReopen, attendanceLive, attendanceCheckIn, attendanceCurrent, attendanceMine, attendanceSessions, attendanceRoster, attendanceSetStatus, attendanceBackfill, attendanceSummary, attendanceAuditLog, attendanceExport, attendanceMailConfig, attendanceConfirm, attendanceNotifyDrafts, attendanceMarkNotified, attendanceUndoNotified } = createAttendanceHandlers(db, classroomAccess, options);

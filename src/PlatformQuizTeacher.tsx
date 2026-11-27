@@ -5,10 +5,10 @@ import { maskStudentName } from '../shared/zuvioExt';
 import { quizLive, type LiveLeaveEvent, type QuizLive, type QuizTeacherView } from './platformQuizApi';
 import { quizDuration } from './PlatformQuizStudent';
 import type { API } from './service';
-import type { ExamSummary, Sitting } from './zuvioApi';
+import type { ClassExamSummary, ClassSitting } from './zuvioApi';
 
-export type QuizClass = { classId: string; name: string; count: number | null };
-export type ListedQuiz = { exam: ExamSummary; sitting: Sitting };
+export type QuizClass = { classId: string; name: string; test: boolean };
+export type ListedQuiz = { exam: ClassExamSummary; sitting: ClassSitting };
 type TeacherAction = 'duration' | 'announce' | 'open' | 'extend' | 'extendStudent' | 'end' | 'makeup';
 const statusLabels: Record<QuizState, string> = {
   prepared: '待公告', announced: '等待開放', open: '作答中', closing: '批改中', released: '成績已公布',
@@ -20,38 +20,33 @@ const rowState = (row: ListedQuiz) => row.exam.answerMode === 'platform'
   : row.sitting.results ? '已有成績' : '待匯入';
 
 export function QuizClassDirectory({ classes, exams, selected, select, open, back }: {
-  classes: QuizClass[]; exams: ExamSummary[]; selected: string;
+  classes?: QuizClass[]; exams?: ClassExamSummary[]; selected: string;
   select: (id: string) => void; open: (row: ListedQuiz) => void; back: () => void;
 }) {
-  const byClass = (id: string) => exams.flatMap((exam) =>
-    exam.sittings.filter((sitting) => sitting.classIds.includes(id)).map((sitting) => ({ exam, sitting })))
-    .sort((a, b) => b.sitting.date.localeCompare(a.sitting.date) || (b.sitting.startsAt || 0) - (a.sitting.startsAt || 0));
-  const activeClass = classes.find((row) => row.classId === selected);
+  const activeClass = classes?.find((row) => row.classId === selected);
   if (!activeClass) return <section className="z-card pq-teacher" data-quiz-teacher="classes" data-ui>
     <h3>選擇班級</h3>
-    {!classes.length && <p>目前沒有已發布的班級。</p>}
-    <div className="pq-class-grid">{classes.map((row) => {
-      const quizzes = byClass(row.classId);
-      const recent = quizzes[0];
-      return <button key={row.classId} type="button" onClick={() => select(row.classId)}>
-        <strong>{row.name}</strong>
-        <span>{row.count ?? '—'} 人・{quizzes.length} 場小考</span>
-        {recent && <span>最近一場 {recent.exam.title}・平均 {recent.sitting.classIds.length === 1 ? showScore(recent.sitting.results?.average) : '—'}</span>}
-      </button>;
-    })}</div>
+    {classes?.length === 0 && <p>目前沒有已發布的班級。</p>}
+    <div className="pq-class-grid">{classes?.map((row) =>
+      <button key={row.classId} type="button" onClick={() => select(row.classId)}>
+        <strong>{row.name || row.classId}{row.test ? '（測試班）' : ''}</strong>
+      </button>
+    )}</div>
   </section>;
-  const rows = byClass(activeClass.classId);
+  const rows = (exams || []).flatMap((exam) =>
+    exam.sittings.filter((sitting) => sitting.classIds.includes(selected)).map((sitting) => ({ exam, sitting })))
+    .sort((a, b) => b.sitting.date.localeCompare(a.sitting.date) || (b.sitting.startsAt || 0) - (a.sitting.startsAt || 0));
   return <section className="z-card pq-teacher" data-quiz-teacher="class-quizzes" data-ui>
     <button type="button" onClick={back}>← 班級列表</button>
     <h3>{activeClass.name}的小考</h3>
-    {!rows.length && <p>這個班級還沒有小考。</p>}
+    {exams && !rows.length && <p>這個班級還沒有小考。</p>}
     <ul className="pq-quiz-list">{rows.map((row) => {
       const { exam, sitting } = row;
       const single = sitting.classIds.length === 1;
       return <li key={sitting.id}><button type="button" onClick={() => open(row)}>
         <strong>{exam.title}・{sitting.label}</strong>
         <span>{sitting.date}・{exam.answerMode === 'platform' ? '平台作答' : 'Zuvio 匯入'}・{rowState(row)}</span>
-        <span>完成／應考 {single ? (sitting.results?.matched ?? 0) : '—'}／{activeClass.count ?? '—'}・平均 {single ? showScore(sitting.results?.average) : '—'}</span>
+        {single && sitting.results && <span>完成 {sitting.results.matched} 人・平均 {showScore(sitting.results.average)}</span>}
       </button></li>;
     })}</ul>
   </section>;
@@ -279,7 +274,7 @@ export function PlatformQuizTeacher({ api, live = quizLive, courseId, className,
     {(failure || stream.error) && <p className="pq-error" role="alert">{failure || stream.error}</p>}
     {pre && <section className="z-card">
       <h3>開考前</h3>
-      <p>{statusLabels[state]}・{row.exam.count} 題・應考 {students.length} 人</p>
+      <p>{statusLabels[state]}・{data.quiz.itemCount} 題・應考 {students.length} 人</p>
       <div className="pq-teacher-actions">
         <label>作答限時（秒） <input type="number" min="1" max="14400" value={seconds}
           onChange={(event) => setSeconds(Number(event.target.value))} /></label>
