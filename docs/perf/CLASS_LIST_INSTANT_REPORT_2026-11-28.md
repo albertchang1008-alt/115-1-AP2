@@ -25,7 +25,7 @@ Mac 使用 Node 22.23.2。開工時本機 `origin/main` 指向 1.17.3，因此�
 
 | 指令或檢查 | 結果 |
 |---|---|
-| `npm test` | 環境阻擋。Functions 預先建置成功。TAP 已輸出 139 個通過、11 個 Chrome 啟動錯誤，本機結束卡住的程序，未有全套 TAP 總結。加時限重試也停於 Chrome 啟動，輸出 21 個通過、3 個啟動錯誤。 |
+| `npm test` | 環境阻擋。Functions 預先建置成功。TAP 已輸出 139 個通過、11 個 Chrome 啟動錯誤，本機已中止首輪，未有全套 TAP 總結。加時限重試輸出 21 個通過、3 個啟動錯誤後卡住。送出中斷後重試程序仍在，沙盒也拒絕終止該程序。 |
 | `node_modules/.bin/tsx --test tests/attendance.test.ts tests/platform-quiz.test.ts tests/teacher-class-directories.test.ts tests/zuvio.test.ts` | PASS，28/28。含五格標籤、各邊界、59.5→60、0、100、滿分 0、合計人數、快取隔離／欄位白名單、同值保留、寫入受阻與失敗後重讀。 |
 | `npm --prefix functions test` | PASS，162/162，0 skipped。 |
 | `npm run build`、`npm run version:check` | PASS。TypeScript 與 Vite 成功，版本為 1.17.5。Vite 有大型 chunk 提示。工作樹內 `handoff.md` 只同步版本行。 |
@@ -53,6 +53,6 @@ npm run version:check
 CHROME_PATH="$(command -v google-chrome)" node scripts/class-list-instant-browser.mjs
 ```
 
-本機證據目錄為 `/var/folders/yj/vdv7pq_j6q1c696kx53s9nmc0000gp/T/ap2-class-list-instant.nomZSI`。內有 `npm-test.log`、`suite-force-exit.log`、`functions-direct.log`、`related.log`、`build-final.log`、`browser.log`、`baseline-chrome.log`。同目錄的 `class-list-instant.bundle` 以 `ca40f51c` 為先決提交，包含 1.17.4 基準與 1.17.5。這輪未產生截圖。若同日補跑，截圖保存至 2026-12-05。
+本機證據目錄為 `/var/folders/yj/vdv7pq_j6q1c696kx53s9nmc0000gp/T/ap2-class-list-instant.nomZSI`。內有 `npm-test.log`、`suite-force-exit.log`、`functions-direct.log`、`related.log`、`build-final.log`、`browser.log`、`baseline-chrome.log`。同目錄的 `class-list-instant.bundle` 包含 1.17.4 基準與 1.17.5。以含有 `ca40f51c` 及其祖先 `48a112d0` 的 repo 執行 `git bundle verify`。這輪未產生截圖。若同日補跑，截圖保存至 2026-12-05。
 
 `prune-evidence.py` dry-run 列出 2026-11-20 到期證據 71.149 MB。依夜間鐵則保留工作樹外證據。
