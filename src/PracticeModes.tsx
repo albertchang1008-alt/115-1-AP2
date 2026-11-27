@@ -2,6 +2,7 @@ import { useUpdateProtection } from './updateActivity';
 import { useLeaveTracking, LeaveTrackingNotice } from './LeaveTracking';
 import { useEffect, useRef, useState } from 'react';
 import {
+  Answer,
   Attempt,
   Course,
   Unit,
@@ -16,6 +17,7 @@ import {
 } from '../shared/model';
 import { API, cachedBank } from './service';
 import { Explanations, QuestionImage } from './QuestionContent';
+import { AnswerReviewCard, YourAnswerLine } from './AnswerReview';
 export interface PracticeRowData {
   q: Question;
   unit: Unit;
@@ -104,7 +106,6 @@ export function Flashcards({
         {again.size > 0 && onPractice && <button onClick={()=>void exit(onPractice)}>用抽題練習測一下</button>}
       </main>
     );
-  const letter = (id: string) => String.fromCharCode(65 + q.options.findIndex((o) => o.id === id));
   return (
     <main className="quiz flashcards">
       <div className="sectionhead">
@@ -142,21 +143,17 @@ export function Flashcards({
                 setSelected(o.id);
               }}
             >
-              {letter(o.id)}. {o.text}
+              {o.text}
               {flipped && o.id === q.answer && ' ✓ 正解'}
             </button>
           ))}
         </div>
         {flipped && (
           <div ref={answerRef} tabIndex={-1} className="flashcard-answer">
-            <p>
-              {selected
-                ? selected === q.answer
-                  ? `你選的是 ${letter(selected)}，正確`
-                  : `你選的是 ${letter(selected)}，正解是 ${letter(q.answer)}`
-                : `正解是 ${letter(q.answer)}`}
-            </p>
-            <Explanations q={q} />
+            {selected && <p>{selected === q.answer ? '答對' : '答錯'}</p>}
+            <YourAnswerLine options={q.options} selected={selected} />
+            <p>正確答案：{q.options.find((option) => option.id === q.answer)?.text}</p>
+            <Explanations q={q} outcome={selected === q.answer ? 'correct' : 'wrong'} />
           </div>
         )}
       </article>
@@ -260,9 +257,12 @@ export function PracticeSession({
       setBusy(false);
     }
   }
-  if (result)
+  if (result) {
+    const answers = new Map<string, Answer>(result.attempts.flatMap((attempt) =>
+      attempt.answers.map((answer) => [`${attempt.unitId}:${answer.questionId}`, answer] as const),
+    ));
     return (
-      <main className="quiz">
+      <main className="quiz practice-result">
         <h1>{mode === 'review' ? '錯題複習結果' : '抽題練習結果'}</h1>
         <p>練習不計入最高分與完成度</p>
         <WrongResult summary={result.summary} review={mode === 'review'} />
@@ -275,8 +275,16 @@ export function PracticeSession({
           ))}
         </ul>
         <button onClick={onBack}>返回單元</button>
+        <div className="reviewanswers">
+          {rows.map(({ q, unit }, i) => {
+            const key = `${unit.id}:${q.id}`;
+            const answer = answers.get(key);
+            return answer && <AnswerReviewCard key={key} question={q} number={i + 1} answer={answer} />;
+          })}
+        </div>
       </main>
     );
+  }
   if (!row)
     return (
       <main className="quiz">
@@ -317,9 +325,10 @@ export function PracticeSession({
         ))}
       </div>
       {locked && (
-        <div>
+        <div className="feedback">
           <p>{selected[key] === q.answer ? '答對' : '答錯'}（交卷後由伺服器重批）</p>
-          <Explanations q={q} />
+          <YourAnswerLine options={q.options} selected={selected[key]} />
+          <Explanations q={q} outcome={selected[key] === q.answer ? 'correct' : 'wrong'} />
         </div>
       )}
       {error && <p role="alert">{error}</p>}
