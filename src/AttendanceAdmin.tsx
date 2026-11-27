@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'rea
 import qrcode from 'qrcode-generator';
 import type { API } from './service';
 import { warmCallables } from './warmCallables';
+import { attendanceClassDirectory, type AttendanceClassCards } from './teacherClassDirectories';
 import type { Course } from '../shared/model';
 import { exportWorkbook } from './xlsxWorkbook';
 import {
@@ -1371,9 +1372,7 @@ function NotifyView({
   );
 }
 
-type ClassCard = { classId: string; name: string; test: boolean };
-type ActiveRoll = { kind: Session['kind'] | null; classIds: string[]; endsAt: number | null };
-type ClassCards = { classes: ClassCard[]; active: ActiveRoll | null; now: number };
+type ActiveRoll = NonNullable<AttendanceClassCards['active']>;
 type ClassRecords = {
   sessions: Session[];
   deleted: Session[];
@@ -1841,27 +1840,31 @@ function ClassRecordsView({
   );
 }
 
-export default function AttendanceAdmin(props: Props) {
+export default function AttendanceAdmin({ classDirectory, ...props }: Props & {
+  classDirectory?: ReturnType<typeof attendanceClassDirectory>;
+}) {
   const { api, course, notify } = props;
+  const directory = useMemo(() => classDirectory ?? attendanceClassDirectory(api, course.id), [classDirectory, api, course.id]);
   const [classId, setClassId] = useState('');
   const [view, setView] = useState<'records' | 'detail' | 'summary' | 'notify'>('records');
   const [sid, setSid] = useState('');
-  const [data, setData] = useState<ClassCards | null>(null);
+  const [classes, setClasses] = useState(directory.snapshot);
+  const [activeState, setActiveState] = useState<Pick<AttendanceClassCards, 'active' | 'now'>>();
   const [revision, setRevision] = useState(0);
   const [projecting, setProjecting] = useState<Projection>();
   const [deleting, setDeleting] = useState<Session>();
   const [error, setError] = useState('');
   const liveRequest = useRef<Promise<void>>();
   const refresh = () => setRevision((value) => value + 1);
-  const card = data?.classes.find((c) => c.classId === classId);
+  const card = classes?.find((c) => c.classId === classId);
   useEffect(() => {
     let alive = true;
-    const load = async () => {
+    const load = async (afterPending = false) => {
       try {
-        const input = { courseId: course.id };
-        const r = await api.call<ClassCards>('attendanceClassCards', input);
+        const r = await directory.refresh({ afterPending });
         if (alive) {
-          setData(r);
+          setClasses(r.classes);
+          setActiveState({ active: r.active, now: r.now });
           setError('');
         }
       } catch (e) {
@@ -1872,13 +1875,13 @@ export default function AttendanceAdmin(props: Props) {
     const visible = () => {
       if (!document.hidden) void load();
     };
-    void load();
+    void load(revision > 0);
     document.addEventListener('visibilitychange', visible);
     return () => {
       alive = false;
       document.removeEventListener('visibilitychange', visible);
     };
-  }, [api, course.id, revision]);
+  }, [directory, revision]);
   const back = () => {
     setView('records');
     setClassId('');
@@ -1903,15 +1906,15 @@ export default function AttendanceAdmin(props: Props) {
       if (session) notify('試簽已結束（不算點名）');
     }
   };
-  const active = data?.active || null;
+  const active = activeState?.active || null;
   useEffect(() => {
     if (!active?.endsAt || projecting) return;
     const timer = setTimeout(
       refresh,
-      Math.max(0, active.endsAt + ATTENDANCE_GRACE_MS + 250 - (data?.now || Date.now())),
+      Math.max(0, active.endsAt + ATTENDANCE_GRACE_MS + 250 - (activeState?.now || Date.now())),
     );
     return () => clearTimeout(timer);
-  }, [active, projecting, data?.now]);
+  }, [active, projecting, activeState?.now]);
   useEffect(() => {
     if (card && !api.preview) warmCallables(api, 'attendance-class', ['attendanceStart', 'attendanceLive', 'attendanceCheckIn']);
   }, [api, card?.classId]);
@@ -1953,9 +1956,9 @@ export default function AttendanceAdmin(props: Props) {
           {!classId || !card ? (
             <>
               <h2>點名班級</h2>
-              {!data && !error && <p role="status">讀取班級…</p>}
-              {data && !data.classes.length && <p className="muted">這門課程還沒有班級。</p>}
-              {data?.classes.map((c) => (
+              {!classes && !error && <p role="status">載入中…</p>}
+              {classes?.length === 0 && <p className="muted">這門課程還沒有班級。</p>}
+              {classes?.map((c) => (
                 <button
                   type="button"
                   key={c.classId}

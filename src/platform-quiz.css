@@ -102,19 +102,32 @@
 .pq-qr { background: white; padding: 10px; width: max-content; max-width: 100%; }
 .pq-qr img { display: block; width: min(130px, 100%); height: auto; image-rendering: pixelated; }
 .pq-qr.pq-qr-large img { width: min(74vw, 380px); }
+.zuvio .pq-score-report { container-type: inline-size; }
+.zuvio .pq-score-report h3 { font-size: calc(21px * max(1, var(--font-scale, 1))); }
+.zuvio .pq-score-report .z-metric { font-size: calc(18px * max(1, var(--font-scale, 1))); line-height: 1.6; }
+.zuvio .pq-score-report .z-metric b { font-size: calc(24px * max(1, var(--font-scale, 1))); }
 .pq-distribution {
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
   align-items: end;
-  gap: 4px;
+  gap: 2px;
   min-width: 0;
+  margin-top: 12px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
 }
-.pq-distribution div { display: grid; align-items: end; grid-template-rows: auto auto auto; text-align: center; }
-.pq-distribution i { background: #2774ac; min-height: 2px; margin: 0 2px; }
-.pq-distribution span { font-size: calc(12px * var(--font-scale, 1)); overflow-wrap: normal; }
+.pq-distribution > div { display: grid; text-align: center; }
+.pq-distribution b { font-size: calc(18px * max(1, var(--font-scale, 1))); }
+.pq-distribution i { background: #2774ac; width: min(100% - 4px, 42px); justify-self: center; }
+.pq-distribution > div > span { font-size: calc(12px * max(1, var(--font-scale, 1))); white-space: nowrap; }
+.pq-score-range { white-space: nowrap; }
+.pq-distribution-note { font-size: calc(14px * max(1, var(--font-scale, 1))); line-height: 1.6; }
 .pq-teacher fieldset { min-width: 0; }
+@container (max-width: 314px) {
+  .pq-score-unit { display: block; }
+}
 @media (max-width: 600px) {
-  .pq-distribution { grid-template-columns: repeat(5, minmax(0, 1fr)); row-gap: 16px; }
+  .zuvio .pq-score-report { padding-inline: 12px; }
   .pq-teacher-actions { align-items: stretch; }
   .pq-teacher .z-table { display: block; max-width: 100%; overflow-x: auto; }
 }

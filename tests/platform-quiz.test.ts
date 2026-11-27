@@ -11,11 +11,19 @@ test('platform quiz deep link only carries valid scope and sitting identifiers',
   assert.equal(parseQuizHash('#/course/%zz/quiz/' + sittingId), null);
 });
 
-test('platform distribution uses true percentages at the boundaries and keeps empty cohorts distinguishable', () => {
-  const result = platformScoreDistribution([0, 9.99, 10, 10.01, 89.99, 90, 100], 100);
-  assert.deepEqual(result.bins.map(({ count }) => count), [2, 2, 0, 0, 0, 0, 0, 0, 1, 2]);
-  assert.equal(result.median, 10.01);
-  assert.equal(platformScoreDistribution([80], 80).bins[9].count, 1);
+test('platform distribution rounds to whole points before counting the five score intervals', () => {
+  const scores = [0, 59.49, 59.5, 69.49, 69.5, 79.49, 79.5, 89.49, 89.5, 100];
+  const result = platformScoreDistribution(scores, 100);
+  assert.deepEqual(result.bins.map(({ label }) => label), [
+    '0–59 分', '60–69 分', '70–79 分', '80–89 分', '90–100 分',
+  ]);
+  assert.deepEqual(result.bins.map(({ count }) => count), [2, 2, 2, 2, 2]);
+  assert.equal(result.bins.reduce((total, bin) => total + bin.count, 0), scores.length);
+  assert.equal(platformScoreDistribution([119], 200).bins[1].count, 1);
+  assert.equal(platformScoreDistribution([80], 80).bins[4].count, 1);
+  assert.deepEqual(platformScoreDistribution([0, 10], 0).bins.map(({ count }) => count), [2, 0, 0, 0, 0]);
+  assert.equal(result.min, 0);
+  assert.equal(result.max, 100);
   assert.equal(platformScoreDistribution([5, 15], 20).median, 10);
   assert.equal(platformScoreDistribution([], 80).mean, null);
 });
