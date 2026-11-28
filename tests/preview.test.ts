@@ -22,7 +22,8 @@ test('次單元預設開啟第一個尚有必做活動的標籤，否則第一�
 });
 test('完整測驗延後鎖定，抽題與錯題在送出選項後才揭示回饋', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
-  assert.match(source, /mode !== 'quiz' \|\| !full/);
+  assert.match(source, /allowIncomplete = mode === 'quiz' && full/);
+  assert.match(source, /if \(!allowIncomplete\) setLocked/);
   assert.match(source, /locked\[q\.id\] &&/);
   assert.match(source, /正確答案：/);
 });
@@ -384,12 +385,15 @@ test('單元學習活動可上移下移，並提供三種晴空粉色系', async
   assert.match(css, /data-theme='blossom'\] \{ --blue: #0ea5e9/);
 });
 
-test('測驗結果以答對／答錯分色卡逐選項標示正確答案與本次選擇', async () => {
+test('測驗結果使用共用卡呈現答對、答錯、未作答', async () => {
   const source = await readFile(new URL('../src/Student.tsx', import.meta.url), 'utf8');
-  assert.match(source, /'is-ok' : 'is-bad'/);
-  assert.match(source, /（正確答案）/);
-  assert.match(source, /（本次選擇）/);
-  assert.match(source, /count-bad/);
+  const cards = await readFile(new URL('../src/AnswerReview.tsx', import.meta.url), 'utf8');
+  assert.match(source, /<AnswerReviewCard/);
+  assert.match(source, /className="count-bad"/);
+  assert.match(source, /未作答：<b>\{skipped\}<\/b>/);
+  assert.match(cards, /（正確答案・你的選擇）/);
+  assert.match(cards, /（你的選擇）/);
+  assert.match(cards, /⚪ 未作答/);
 });
 
 test('晴空粉 A 是預設色系，並在開頁時就套用已選色系', async () => {
@@ -401,7 +405,8 @@ test('晴空粉 A 是預設色系，並在開頁時就套用已選色系', async
 
 test('三種晴空粉側欄與學生頂部列不用深色底，並為勾選控制項指定主色', async () => {
   const css = await readFile(new URL('../src/style.css', import.meta.url), 'utf8');
-  const blossom = css.slice(css.indexOf('晴空粉三方案補強：'), css.indexOf(":root[data-theme='night']"));
+  const start = css.indexOf('晴空粉三方案補強：');
+  const blossom = css.slice(start, css.indexOf(":root[data-theme='night']", start));
   assert.match(blossom, /\.sidebar \{\s*background: #fff;/);
   assert.match(blossom, /\.student-nav \{\s*background: #fff;/);
   assert.doesNotMatch(blossom, /\.sidebar[\s\S]{0,120}background: #17394d/);
@@ -438,13 +443,13 @@ test('1.7.0 實際 React 閃卡與錯題操作：翻面、自評、待複習題�
     await page.route('http://localhost/',r=>r.fulfill({contentType:'text/html',body:'<div id="root"></div>'}));
     await page.goto('http://localhost/');await page.addStyleTag({content:await readFile('src/style.css','utf8')});await page.addScriptTag({content:bundle});
     const mount=async(kind:string)=>{await page.evaluate(kind=>(window as any).practiceTest.mount(kind),kind);};
-    await mount('flash');await page.getByRole('button',{name:'B. 另一選項',exact:true}).click();
+    await mount('flash');await page.getByRole('button',{name:'另一選項',exact:true}).click();
     assert.equal(await page.getByRole('button',{name:'翻面',exact:true}).count(),1,'先選不應翻面');
-    await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByText('你選的是 B，正解是 A',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByText('你的答案：另一選項',{exact:true}).waitFor();await page.getByText('正確答案：正確選項',{exact:true}).waitFor();
     assert.equal(await page.locator('.flashcard-answer').evaluate(e=>e===document.activeElement),true);
     assert.equal(await page.getByText('學生不應看到的教師內容',{exact:true}).count(),0);
     await page.getByRole('button',{name:'再看一次',exact:true}).click();await page.getByText('練習題 q1',{exact:true}).waitFor();
-    await page.locator('.flashcard').focus();await page.keyboard.press('Space');await page.getByText('正解是 A',{exact:true}).waitFor();
+    await page.locator('.flashcard').focus();await page.keyboard.press('Space');await page.getByText('你的答案：未作答',{exact:true}).waitFor();await page.getByText('正確答案：正確選項',{exact:true}).waitFor();
     await page.getByRole('button',{name:'我會',exact:true}).click();await page.getByText('練習題 q0',{exact:true}).waitFor();
     await page.getByRole('button',{name:'翻面',exact:true}).click();await page.getByRole('button',{name:'我會',exact:true}).click();
     await page.getByText('看了 3 張，其中 1 張標記再看一次',{exact:true}).waitFor();

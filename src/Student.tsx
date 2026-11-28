@@ -9,7 +9,8 @@ import { MixedScopeCard, MixedPractice } from './MixedPractice';
 import { selectPracticeRows } from '../shared/practice';
 import { Flashcards, UnitWrongPractice } from './PracticeModes';
 import { QuestionImage, Explanations, ExplanationText } from './QuestionContent';
-import { useEffect, useRef, useState } from 'react';
+import { AnswerReviewCard, YourAnswerLine } from './AnswerReview';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -652,6 +653,29 @@ function PracticeHint({ unit }: { unit?: Unit }) {
   const total = unit?.questionCount ? `全部 ${unit.questionCount} 題` : '全部題目';
   return <p className="notice practice-hint"><strong>這是練習，不計入最高分與達標。</strong>要取得成績，請回到單元的「練習」分頁，按「完整測驗」並做完{total}。</p>;
 }
+function QuizSubmitDialog({ count, onBack, onConfirm, onCancel }: {
+  count: number;
+  onBack: () => void;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useLayoutEffect(() => {
+    const dialog = ref.current!;
+    dialog.showModal();
+    return () => dialog.close();
+  }, []);
+  return (
+    <dialog ref={ref} className="modal quiz-submit-dialog" aria-labelledby="quiz-submit-title" onCancel={(e) => { e.preventDefault(); onCancel(); }}>
+      <h2 id="quiz-submit-title">還有 {count} 題未作答，確定交卷？</h2>
+      <div className="actions">
+        <button autoFocus onClick={onBack}>回到第一題未作答</button>
+        <button className="primary" onClick={onConfirm}>確定交卷</button>
+      </div>
+    </dialog>
+  );
+}
+
 export function Quiz({
   questions,
   full,
@@ -685,7 +709,10 @@ export function Quiz({
     [status, setStatus] = useState(''),
     [busy, setBusy] = useState(false),
     [remaining, setRemaining] = useState(questions.length * 60),
-    [leave, setLeave] = useState(false);
+    [leave, setLeave] = useState(false),
+    [confirmSubmit, setConfirmSubmit] = useState(false),
+    [timedOut, setTimedOut] = useState(false);
+  const firstOption = useRef<HTMLButtonElement>(null);
   const start = useRef(Date.now()),
     qStart = useRef(Date.now()),
     attemptId = useRef(crypto.randomUUID()),
@@ -697,17 +724,24 @@ export function Quiz({
   const accumulatedTimes = useRef<Record<string,number>>({});
   function flushTime() { const now = Date.now(); accumulatedTimes.current[currentQuestionId.current] = (accumulatedTimes.current[currentQuestionId.current] || 0) + Math.max(0, now - qStart.current) / 1000; qStart.current = now; const next=Object.fromEntries(Object.entries(accumulatedTimes.current).map(([id,n])=>[id,Math.round(n)])); setTimes(next); return next; }
   // 抽題練習：quiz 模式但非完整作答（複習考一律 full，不會出現）。
+  const allowIncomplete = mode === 'quiz' && full;
   const practice = mode === 'quiz' && !full;
-  useEffect(() => { if (forceLeave && !result) setLeave(true); }, [forceLeave, result]);
+  useEffect(() => {
+    if (forceLeave && !result) {
+      setConfirmSubmit(false);
+      setLeave(true);
+    }
+  }, [forceLeave, result]);
   function research(questionId: string, value: Omit<ExplanationResearchEvent, 'id' | 'questionId' | 'attemptId' | 'clientAt'>) {
     if (!researchEnabled) return;
     void onResearch([{ ...value, id: crypto.randomUUID(), questionId, attemptId: attemptId.current, clientAt: Date.now() }]);
   }
   const latest = useRef({ selections, times });
   latest.current = { selections, times };
-  async function finish() {
+  async function finish(trigger: 'manual' | 'timeout') {
     if (submitted.current) return;
     submitted.current = true;
+    setTimedOut(trigger === 'timeout');
     const answers = grade(questions, latest.current.selections, flushTime());
     const leaveMetrics = leaving.stop();
     const a: Attempt = {
@@ -745,7 +779,7 @@ export function Quiz({
       setRemaining(left);
       if (left === 0) {
         clearInterval(timer);
-        void finish();
+        void finish('timeout');
       }
     }, 1000);
     return () => clearInterval(timer);
@@ -756,26 +790,44 @@ export function Quiz({
     flushTime();
     // 2026-09-15（第二次調整）：quiz 模式（完整測驗／抽題練習）恢復成交卷後才揭曉正解與解析，
     // 作答中不鎖定、可以改答案——不然跟閃卡沒有差別。閃卡／複習模式維持選了就立刻鎖定並顯示。
-    if (mode !== 'quiz' || !full) setLocked((l) => ({ ...l, [q.id]: true }));
+    if (!allowIncomplete) setLocked((l) => ({ ...l, [q.id]: true }));
   }
   function move(n: number) {
     flushTime();
     setI(n);
     qStart.current = Date.now();
   }
-  if (result)
+  const unanswered = questions.filter((question) => !selections[question.id]);
+  function requestSubmit() {
+    if (allowIncomplete && unanswered.length) setConfirmSubmit(true);
+    else void finish('manual');
+  }
+  function returnToUnanswered() {
+    const index = questions.indexOf(unanswered[0]);
+    setConfirmSubmit(false);
+    if (index >= 0) {
+      move(index);
+      requestAnimationFrame(() => firstOption.current?.focus());
+    }
+  }
+  if (result) {
+    const skipped = result.answers.filter((answer) => !answer.selected).length;
+    const correct = result.answers.filter((answer) => answer.selected && answer.correct).length;
+    const wrong = result.answers.length - correct - skipped;
     return (
       <section className="panel quizresult">
         <CheckCircle2 size={48} />
-        <span className="eyebrow">{modes[mode]}完成</span>
+        <small className="eyebrow">{modes[mode]}完成</small>
         <h1>
           {result.score}
           <small> 分</small>
         </h1>
         <p className="result-counts">
-          <span>答對：<b className="count-ok">{result.answers.filter((a) => a.correct).length}</b> 題</span>
-          <span>答錯：<b className="count-bad">{questions.length - result.answers.filter((a) => a.correct).length}</b> 題</span>
+          <span>答對：<b className="count-ok">{correct}</b> 題</span>
+          <span>答錯：<b className="count-bad">{wrong}</b> 題</span>
+          <span>未作答：<b>{skipped}</b> 題</span>
         </p>
+        {timedOut && <p className="notice quiz-timeout">時間到，已自動交卷{skipped > 0 && `，未作答 ${skipped} 題`}</p>}
         {isReviewUnit(unit) && <p className="muted">{Object.entries(questions.reduce((out, q, index) => { const source = q.source || '其他'; const row = out[source] || (out[source] = [0, 0]); row[1]++; if (result.answers[index].correct) row[0]++; return out; }, {} as Record<string, [number, number]>)).map(([source, [ok, total]]) => `${source} ${ok}/${total}`).join(' ・ ')}</p>}
         <p className="notice">{busy ? '正在保存…' : status}</p>
         {result.integrity === 'left-screen' && <div className="notice integrity-invalid" role="note"><strong>本次不列入成績</strong><p>離開作答畫面 {result.leaveCount} 次（共 {result.leaveSeconds} 秒），已超過 {ANSWER_INTEGRITY.maxLeaves} 次或 {ANSWER_INTEGRITY.maxLeaveSeconds} 秒的上限。不更新最高有效分數與達標，仍可查看本次分數與解析；練習次數照計。</p><button disabled={busy} onClick={async()=>{setBusy(true);try{await onRetry();}finally{setBusy(false);}}}>再作答一次</button></div>}
@@ -785,22 +837,12 @@ export function Quiz({
         </button>
         <div className="reviewanswers">
           {questions.map((q, j) => (
-            // 2026-09-15 起：不用 <details> 收合，交卷後每一題的正解與解析直接顯示，不用點。
-            <div className={'reviewanswer ' + (result.answers[j].correct ? 'is-ok' : 'is-bad')} key={q.id}>
-              <strong className="review-verdict">{result.answers[j].correct ? '✅ 答對' : '❌ 答錯'}</strong>
-              <h3><span className="review-no">Q{j + 1}.</span> {q.text}</h3>
-              <ul className="review-options">
-                {q.options.map((o) => {
-                  const picked = result.answers[j].selected === o.id, right = o.id === q.answer;
-                  return <li key={o.id} className={right ? 'right' : picked ? 'picked' : ''}>{right ? '✓' : picked ? '✗' : '•'} {o.text}{right && <small>（正確答案）</small>}{picked && !right && <small>（本次選擇）</small>}</li>;
-                })}
-              </ul>
-              <QuestionImage key={q.image} url={q.image} /><Explanations q={q} onResearch={(v) => research(q.id, v)} />
-            </div>
+            <AnswerReviewCard key={q.id} question={q} number={j + 1} answer={result.answers[j]} onResearch={(v) => research(q.id, v)} />
           ))}
         </div>
       </section>
     );
+  }
   return (
     <section className="quiz">
       <div className="sectionhead quiz-topbar">
@@ -831,6 +873,7 @@ export function Quiz({
         {q.options.map((o, j) => (
           <button
             key={o.id}
+            ref={j === 0 ? firstOption : undefined}
             role="radio"
             aria-checked={selections[q.id] === o.id}
             className={
@@ -853,8 +896,9 @@ export function Quiz({
       {locked[q.id] && (
         <div className="feedback">
           <h3>{selections[q.id] === q.answer ? '答對了' : '再理解一次'}</h3>
+          <YourAnswerLine options={q.options} selected={selections[q.id]} />
           <p>正確答案：{q.options.find((o) => o.id === q.answer)?.text}</p>
-          <Explanations q={q} />
+          <Explanations q={q} outcome={selections[q.id] === q.answer ? 'correct' : 'wrong'} />
         </div>
       )}
       <div className="sectionhead quiz-bottom">
@@ -865,7 +909,7 @@ export function Quiz({
         {i < questions.length - 1 ? (
           <button
             className="primary"
-            disabled={(mode !== 'quiz' || !full) && !locked[q.id]}
+            disabled={!allowIncomplete && !locked[q.id]}
             onClick={() => move(i + 1)}
           >
             下一題
@@ -873,14 +917,18 @@ export function Quiz({
         ) : (
           <button
             className="primary"
-            disabled={(mode !== 'quiz' || !full) && Object.keys(locked).length < questions.length}
-            onClick={finish}
+            disabled={!allowIncomplete && Object.keys(locked).length < questions.length}
+            onClick={requestSubmit}
           >
             完成並提交
           </button>
         )}
       </div>
       <LeaveTrackingNotice notice={leaving.notice} dismiss={leaving.dismiss} applies={integrityApplies({mode,full},unit)} />
+      {confirmSubmit && (
+        <QuizSubmitDialog count={unanswered.length} onBack={returnToUnanswered}
+          onCancel={() => setConfirmSubmit(false)} onConfirm={() => void finish('manual')} />
+      )}
       {leave && (
         <div className="modalshade">
           <section className="modal">

@@ -19,6 +19,7 @@ import TeachingControl from './TeachingControl';
 import { TeacherAssessments } from './Assessments';
 import CompletionBoard from './CompletionBoard';
 import { ZuvioTab } from './ZuvioExams';
+import { attendanceClassDirectory, onTeacherIdle, quizClassDirectory } from './teacherClassDirectories';
 import { ZuvioMoodOverlay, type ActiveMoodPrompt } from './ZuvioMoodCard';
 import type { MoodCode } from '../shared/zuvioExt';
 import { carryMessage, CarryResult } from '../shared/wrongCarry';
@@ -28,7 +29,7 @@ import { QuestionImage, Explanations, ExplanationText } from './QuestionContent'
 import Diagnostics from './Diagnostics';
 import ResearchEvidence from './ResearchEvidence';
 import ProgressBoard from './ProgressBoard';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ChapterUnitPicker, { useChapterUnitSelection } from './ChapterUnitPicker';
 import {
   ListChecks,
@@ -217,6 +218,24 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
     [sim, setSim] = useState('none'),
     [previewKey, setPreviewKey] = useState(0);
   const course = courses.find((c) => c.id === courseId) || courses[0];
+  const teacherUid = profile?.teacher ? profile.uid : undefined;
+  const currentCourseId = course?.id;
+  const classDirectories = useMemo(() => {
+    if (!teacherUid || !currentCourseId || api.preview) return;
+    return {
+      attendance: attendanceClassDirectory(api, currentCourseId, teacherUid),
+      quiz: quizClassDirectory(api, currentCourseId, teacherUid),
+    };
+  }, [api, teacherUid, currentCourseId]);
+  const attendanceEnabled = featureEnabled(course, 'attendance');
+  const quizzesEnabled = featureEnabled(course, 'zuvioExams');
+  useEffect(() => {
+    if (!classDirectories || (!attendanceEnabled && !quizzesEnabled)) return;
+    return onTeacherIdle(() => {
+      if (attendanceEnabled) void classDirectories.attendance.refresh().catch(() => {});
+      if (quizzesEnabled) void classDirectories.quiz.refresh().catch(() => {});
+    });
+  }, [classDirectories, attendanceEnabled, quizzesEnabled]);
   function notify(s: string) {
     setToast(profile?.teacher ? studentUpdateCopy(s) : s);
   }
@@ -268,7 +287,7 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
     }
   }
   useEffect(() => {
-    if (api.preview) {
+    if (api !== cloud) {
       void boot(api);
       return;
     }
@@ -702,7 +721,8 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
           ) : tab === 'assessments' && featureEnabled(course, 'assessments') ? (
             <TeacherAssessments key={course.id} api={api} course={course} notify={notify} />
           ) : tab === 'attendance' && featureEnabled(course, 'attendance') ? (
-            <AttendanceAdmin key={course.id} api={api} course={course} notify={notify} />
+            <AttendanceAdmin key={JSON.stringify([teacherUid, course.id])} api={api} course={course} notify={notify}
+              classDirectory={classDirectories?.attendance} />
           ) : tab === 'classroom' && featureEnabled(course, 'classroomInteraction') ? (
             <ClassroomConfigEditor key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'bank' ? (
@@ -722,7 +742,8 @@ export default function App({ initialApi = cloud }: { initialApi?: API } = {}) {
           ) : tab === 'analysis' ? (
             <Analysis key={course.id} course={course} api={api} notify={notify} />
           ) : tab === 'zuvio' && (api.preview || featureEnabled(course, 'zuvioExams')) ? (
-            <ZuvioTab key={course.id} api={api} courseId={course.id} notify={notify} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
+            <ZuvioTab key={JSON.stringify([teacherUid, course.id])} api={api} courseId={course.id} notify={notify}
+              classDirectory={classDirectories?.quiz} moodEnabled={api.preview || featureEnabled(course, 'zuvioMood')} />
           ) : tab === 'reports' ? (
             <ReportsPage key={course.id} course={course} api={api} notify={notify} />
           ) : (

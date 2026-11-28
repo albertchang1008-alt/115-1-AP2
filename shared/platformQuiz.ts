@@ -104,12 +104,11 @@ export function parseQuizHash(hash: string): { courseId: string; sittingId: stri
 export function platformScoreDistribution(scores: number[], maxScore: number) {
   const sorted = [...scores].sort((a, b) => a - b);
   const count = sorted.length;
-  const bins = Array.from({ length: 10 }, (_, i) => ({
-    label: i === 9 ? '90–100%' : (i * 10) + '–' + (i * 10 + 9) + '%',
-    count: 0,
-  }));
+  const bins = ['0–59 分', '60–69 分', '70–79 分', '80–89 分', '90–100 分']
+    .map((label) => ({ label, count: 0 }));
   for (const score of sorted) {
-    const bin = maxScore > 0 ? Math.max(0, Math.min(9, Math.floor((score * 10) / maxScore))) : 0;
+    const points = maxScore > 0 ? Math.round((score * 100) / maxScore) : 0;
+    const bin = points >= 60 ? Math.min(4, Math.floor(points / 10) - 5) : 0;
     bins[bin].count++;
   }
   return {

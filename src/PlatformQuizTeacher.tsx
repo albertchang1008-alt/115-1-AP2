@@ -6,8 +6,8 @@ import { quizLive, type LiveLeaveEvent, type QuizLive, type QuizTeacherView } fr
 import { quizDuration } from './PlatformQuizStudent';
 import type { API } from './service';
 import type { ClassExamSummary, ClassSitting } from './zuvioApi';
+import type { ClassDirectoryEntry } from './teacherClassDirectories';
 
-export type QuizClass = { classId: string; name: string; test: boolean };
 export type ListedQuiz = { exam: ClassExamSummary; sitting: ClassSitting };
 type TeacherAction = 'duration' | 'announce' | 'open' | 'extend' | 'extendStudent' | 'end' | 'makeup';
 const statusLabels: Record<QuizState, string> = {
@@ -20,7 +20,7 @@ const rowState = (row: ListedQuiz) => row.exam.answerMode === 'platform'
   : row.sitting.results ? '已有成績' : '待匯入';
 
 export function QuizClassDirectory({ classes, exams, selected, select, open, back }: {
-  classes?: QuizClass[]; exams?: ClassExamSummary[]; selected: string;
+  classes?: ClassDirectoryEntry[]; exams?: ClassExamSummary[]; selected: string;
   select: (id: string) => void; open: (row: ListedQuiz) => void; back: () => void;
 }) {
   const activeClass = classes?.find((row) => row.classId === selected);

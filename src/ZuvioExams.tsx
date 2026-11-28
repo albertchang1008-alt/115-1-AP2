@@ -4,7 +4,8 @@ import { fakeZuvioExport } from '../shared/zuvioSample';
 import { readXlsxFirstSheetMatrix } from './pptImportFiles';
 import { cloudZuvioApi, sampleZuvioApi, type ZuvioApi, type ExamSummary, type ClassExamSummary, type ImportPreview, type Sitting, type FullZuvioReport } from './zuvioApi';
 import { MOOD_STATES, type CareListEntry } from '../shared/zuvioExt';
-import { PlatformQuizTeacher, QuizClassDirectory, type ListedQuiz, type QuizClass } from './PlatformQuizTeacher';
+import { PlatformQuizTeacher, QuizClassDirectory, type ListedQuiz } from './PlatformQuizTeacher';
+import { quizClassDirectory } from './teacherClassDirectories';
 import type { QuizAnswerMode } from '../shared/platformQuiz';
 import type { API } from './service';
 import { warmCallables } from './warmCallables';
@@ -26,17 +27,23 @@ function download(name: string, text: string) {
 const fileName = (t: string) => t.replace(/[\\/:*?"<>|]/g, '_') + '.csv';
 
 /** 後台分頁入口：預覽模式用示範資料，正式模式走教師限定 callable；api 物件只建一次 */
-export function ZuvioTab({ api, courseId, notify, moodEnabled = true }: { api: { preview: boolean; call<T = any>(name: string, data?: any): Promise<T> }; courseId: string; notify: (m: string) => void; moodEnabled?: boolean }) {
+export function ZuvioTab({ api, courseId, notify, moodEnabled = true, classDirectory }: {
+  api: API; courseId: string; notify: (m: string) => void; moodEnabled?: boolean;
+  classDirectory?: ReturnType<typeof quizClassDirectory>;
+}) {
   const z = useMemo(() => (api.preview ? sampleZuvioApi(SAMPLE_POOL) : cloudZuvioApi(api, courseId)), [api, courseId]);
-  return <ZuvioExams api={z} notify={notify} moodEnabled={moodEnabled} platform={!api.preview ? { api, courseId } : undefined} />;
+  const directory = useMemo(() => classDirectory ?? quizClassDirectory(api, courseId), [api, courseId, classDirectory]);
+  return <ZuvioExams api={z} notify={notify} moodEnabled={moodEnabled} platform={!api.preview ? { api, courseId, directory } : undefined} />;
 }
 
 export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true, platform }: {
-  api: ZuvioApi; notify?: (m: string) => void; moodEnabled?: boolean; platform?: { api: API; courseId: string };
+  api: ZuvioApi; notify?: (m: string) => void; moodEnabled?: boolean;
+  platform?: { api: API; courseId: string; directory: ReturnType<typeof quizClassDirectory> };
 }) {
+  const directory = platform?.directory;
   const [tab, setTab] = useState<Tab>(platform ? 'classes' : 'make');
   const [openExam, setOpenExam] = useState<string>('');
-  const [classes, setClasses] = useState<QuizClass[]>();
+  const [classes, setClasses] = useState(() => directory?.snapshot());
   const [exams, setExams] = useState<{ classId: string; list: ClassExamSummary[] }>();
   const [classId, setClassId] = useState('');
   const [row, setRow] = useState<ListedQuiz>();
@@ -46,16 +53,16 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
   const list = exams?.classId === classId ? exams.list : undefined;
   const reloadDirectory = () => setRevision((value) => value + 1);
   const platformApi = platform?.api;
-  const courseId = platform?.courseId;
   useEffect(() => {
-    if (tab !== 'classes' || !platformApi || !courseId || classId) return;
+    if (tab !== 'classes' || !directory || classId) return;
     let alive = true;
     setLoadError('');
-    platformApi.call<QuizClass[]>('zuvioClassDirectory', { courseId })
-      .then((result) => { if (alive) setClasses(result); })
+    setClasses(directory.snapshot());
+    directory.refresh()
+      .then((result) => { if (alive) setClasses(result.classes); })
       .catch((error) => { if (alive) setLoadError(error.message); });
     return () => { alive = false; };
-  }, [tab, platformApi, courseId, classId, revision]);
+  }, [tab, directory, classId, revision]);
   useEffect(() => {
     if (tab !== 'classes' || !platformApi || !classId) return;
     let alive = true;
@@ -85,7 +92,7 @@ export default function ZuvioExams({ api, notify = () => {}, moodEnabled = true,
       </div>
       {tab === 'classes' && platform && !row && <>
         {loadError && <p className="z-warn" role="alert">{loadError} <button type="button" onClick={reloadDirectory}>重新整理</button></p>}
-        {!loadError && (classId ? !list : !classes) && <p role="status">{classId ? '讀取小考…' : '讀取班級…'}</p>}
+        {!loadError && (classId ? !list : !classes) && <p role="status">{classId ? '讀取小考…' : '載入中…'}</p>}
         <QuizClassDirectory classes={classes} exams={list} selected={classId}
           select={selectClass} open={setRow} back={() => selectClass('')} />
       </>}
@@ -492,6 +499,8 @@ export function Report({ api, initial, moodEnabled = true, classScope, sittingSc
   const classes = [...new Set(availableSittings.filter((s) => sel.includes(s.id)).flatMap((s) => s.classIds))];
   const rep = full?.report;
   const cmp = full?.compare;
+  const platformStats = full?.platformStats;
+  const largestBin = Math.max(1, ...(platformStats?.bins.map((bin) => bin.count) ?? []));
   const analysis = analysisOn ? full?.analysis : undefined;
   const mood = moodOn ? full?.moodSummary : undefined;
   const preExam = moodOn ? full?.preExamCounts : undefined;
@@ -553,21 +562,26 @@ export function Report({ api, initial, moodEnabled = true, classScope, sittingSc
             </section>
           )}
 
-          {platform && full?.platformStats && (
-            <section className="z-card pq-teacher">
+          {platform && platformStats && (
+            <section className="z-card pq-teacher pq-score-report">
               <h3>成績分布</h3>
               <div className="z-metrics">
-                <div className="z-metric">平均 <b>{full.platformStats.mean ?? '—'}</b></div>
-                <div className="z-metric">中位數 <b>{full.platformStats.median ?? '—'}</b></div>
-                <div className="z-metric">最高 <b>{full.platformStats.max ?? '—'}</b></div>
-                <div className="z-metric">最低 <b>{full.platformStats.min ?? '—'}</b></div>
+                <div className="z-metric">平均 <b>{platformStats.mean ?? '—'}</b></div>
+                <div className="z-metric">中位數 <b>{platformStats.median ?? '—'}</b></div>
+                <div className="z-metric">最高 <b>{platformStats.max ?? '—'}</b></div>
+                <div className="z-metric">最低 <b>{platformStats.min ?? '—'}</b></div>
               </div>
-              <div className="pq-distribution" aria-label="百分比成績分布">
-                {full.platformStats.bins.map((bin) => <div key={bin.label}>
-                  <b>{bin.count}</b><i style={{ height: Math.max(2, bin.count / Math.max(1, ...full.platformStats!.bins.map((value) => value.count)) * 105) }} />
-                  <span>{bin.label}</span>
-                </div>)}
+              <div className="pq-distribution" role="group" aria-label="分數區間成績分布">
+                {platformStats.bins.map((bin) => {
+                  const [range, unit] = bin.label.split(' ');
+                  return <div key={bin.label} role="group" aria-label={`${bin.label}，${bin.count} 人`}>
+                    <b aria-hidden="true">{bin.count}</b>
+                    <i aria-hidden="true" style={{ height: (bin.count / largestBin) * 105 }} />
+                    <span aria-hidden="true"><span className="pq-score-range">{range}</span>{' '}<span className="pq-score-unit">{unit}</span></span>
+                  </div>;
+                })}
               </div>
+              {platformStats.maxScore !== 100 && <p className="pq-distribution-note">已換算為百分制</p>}
             </section>
           )}
           {!moodOn && !platform && (
